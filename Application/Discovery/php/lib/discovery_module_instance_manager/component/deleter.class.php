@@ -1,0 +1,73 @@
+<?php
+namespace application\discovery;
+
+use common\libraries\Request;
+use common\libraries\Translation;
+use common\libraries\Utilities;
+
+class DiscoveryModuleInstanceManagerDeleterComponent extends DiscoveryModuleInstanceManager
+{
+
+    function run()
+    {
+        if (! $this->get_user()->is_platform_admin())
+        {
+            $this->not_allowed();
+        }
+
+        $ids = Request :: get(DiscoveryModuleInstanceManager :: PARAM_INSTANCE);
+        $failures = 0;
+
+        if (! empty($ids))
+        {
+            if (! is_array($ids))
+            {
+                $ids = array($ids);
+            }
+
+            foreach ($ids as $id)
+            {
+                $discovery_module_instance = $this->retrieve_discovery_module_instance($id);
+
+                if (! $discovery_module_instance->delete())
+                {
+                    $failures ++;
+                }
+            }
+
+            if ($failures)
+            {
+                if (count($ids) == 1)
+                {
+                    $message = 'ObjectNotDeleted';
+                    $parameter = array('OBJECT' => Translation :: get('DiscoveryModuleInstance'));
+                }
+                else
+                {
+                    $message = 'ObjectsNotDeleted';
+                    $parameter = array('OBJECTS' => Translation :: get('VideosConferencing'));
+                }
+            }
+            else
+            {
+                if (count($ids) == 1)
+                {
+                    $message = 'ObjectDeleted';
+                    $parameter = array('OBJECT' => Translation :: get('DiscoveryModuleInstance'));
+                }
+                else
+                {
+                    $message = 'ObjectsDeleted';
+                    $parameter = array('OBJECTS' => Translation :: get('VideosConferencing'));
+                }
+            }
+
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+        }
+        else
+        {
+            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('DiscoveryModuleInstance')), Utilities :: COMMON_LIBRARIES)));
+        }
+    }
+}
+?>

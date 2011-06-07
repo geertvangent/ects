@@ -7,7 +7,6 @@ namespace application\discovery;
  */
 
 use application\discovery\module\profile\implementation\bamaflex\SettingsConnector;
-
 use application\discovery\module\profile\DataManager;
 
 class DiscoveryManagerBrowserComponent extends DiscoveryManager

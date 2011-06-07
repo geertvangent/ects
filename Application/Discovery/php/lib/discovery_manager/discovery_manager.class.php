@@ -11,6 +11,7 @@ class DiscoveryManager extends WebApplication
     const APPLICATION_NAME = 'discovery';
 
     const ACTION_BROWSE = 'browser';
+    const ACTION_MODULE = 'module';
 
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
 

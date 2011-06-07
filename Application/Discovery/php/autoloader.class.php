@@ -13,13 +13,15 @@ class Autoloader
 
     static function load($classname)
     {
-        $list = array('discovery_data_manager' => 'discovery_data_manager',
+        $list = array(
+                'discovery_data_manager' => 'discovery_data_manager',
                 'discovery_data_manager_interface' => 'discovery_data_manager_interface',
                 'discovery_manager' => 'discovery_manager/discovery_manager',
                 'discovery_module_instance' => 'discovery_module_instance',
                 'discovery_module_instance_setting' => 'discovery_module_instance_setting',
                 'data_source_instance' => 'data_source_instance',
-                'data_source_instance_setting' => 'data_source_instance_setting');
+                'data_source_instance_setting' => 'data_source_instance_setting',
+                'discovery_module_instance_manager' => 'discovery_module_instance_manager/discovery_module_instance_manager');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);
 
