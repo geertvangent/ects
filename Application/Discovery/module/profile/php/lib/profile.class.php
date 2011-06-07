@@ -113,9 +113,9 @@ class Profile extends DiscoveryItem
     /**
      * @param IdentificationCode $code
      */
-    function add_code(IdentificationCode $code)
+    function add_identification_code(IdentificationCode $code)
     {
-        $codes &= $this->get_code();
+        $codes &= $this->get_identification_code();
         $codes[] = $code;
     }
 
