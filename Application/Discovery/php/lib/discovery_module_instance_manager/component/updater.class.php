@@ -21,7 +21,7 @@ class DiscoveryModuleInstanceManagerUpdaterComponent extends DiscoveryModuleInst
 
         if(isset($instance_id))
         {
-            $discovery_module_instance = $this->retrieve_discovery_module_instance($instance_id);
+            $discovery_module_instance = DiscoveryDataManager::get_instance()->retrieve_discovery_module_instance($instance_id);
             $form = new DiscoveryModuleInstanceForm(DiscoveryModuleInstanceForm :: TYPE_EDIT, $discovery_module_instance, $this->get_url(array(DiscoveryModuleInstanceManager :: PARAM_INSTANCE => $instance_id)));
 
             if ($form->validate())
