@@ -17,7 +17,6 @@ class DiscoveryModuleInstance extends DataClass
     const PROPERTY_TITLE = 'title';
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_TYPE = 'type';
-
     const PROPERTY_ENABLED = 'enabled';
 
     function set_title($title)
@@ -67,7 +66,8 @@ class DiscoveryModuleInstance extends DataClass
 
     static function get_default_property_names()
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_TITLE, self :: PROPERTY_DESCRIPTION, self :: PROPERTY_TYPE, self :: PROPERTY_ENABLED));
+        return parent :: get_default_property_names(array(self :: PROPERTY_TITLE, self :: PROPERTY_DESCRIPTION,
+                self :: PROPERTY_TYPE, self :: PROPERTY_ENABLED));
     }
 
     static function get_table_name()
@@ -108,7 +108,7 @@ class DiscoveryModuleInstance extends DataClass
         else
         {
             $condition = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
-            $settings = $this->get_data_manager()->retrieve_discovery_module_settings($condition);
+            $settings = $this->get_data_manager()->retrieve_discovery_module_instance_settings($condition);
 
             while ($setting = $settings->next_result())
             {
@@ -145,10 +145,26 @@ class DiscoveryModuleInstance extends DataClass
     public function has_settings()
     {
         $condition = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
-
-        $settings = DiscoveryDataManager :: get_instance()->count_discovery_module_settings($condition);
+        $settings = DiscoveryDataManager :: get_instance()->count_discovery_module_instance_settings($condition);
 
         return $settings > 0;
+    }
+
+    /**
+     * @return multitype:string
+     */
+    public function get_settings()
+    {
+        return DiscoveryModuleInstanceSetting :: get_all($this->get_id());
+    }
+
+    /**
+     * @param string $variable
+     * @return string
+     */
+    public function get_setting($variable)
+    {
+        return DiscoveryModuleInstanceSetting :: get($variable, $this->get_id());
     }
 
     /**

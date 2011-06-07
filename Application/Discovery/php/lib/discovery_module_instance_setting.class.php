@@ -162,6 +162,7 @@ class DiscoveryModuleInstanceSetting extends DataClass
 
     /**
      * @param int $module_instance_id
+     * @return multitype:string
      */
     static function get_all($module_instance_id)
     {
@@ -179,7 +180,7 @@ class DiscoveryModuleInstanceSetting extends DataClass
     static function load($module_instance_id)
     {
         $condition = new EqualityCondition(self :: PROPERTY_MODULE_INSTANCE_ID, $module_instance_id);
-        $settings = DiscoveryDataManager :: get_instance()->retrieve_external_settings($condition);
+        $settings = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance_settings($condition);
 
         while ($setting = $settings->next_result())
         {

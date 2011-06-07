@@ -5,6 +5,8 @@ namespace application\discovery;
  * @author Hans De Bisschop
  * @package application.discovery
  */
+use application\discovery\module\profile\DataManager;
+
 class DiscoveryManagerBrowserComponent extends DiscoveryManager
 {
 
@@ -12,7 +14,10 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
     {
         $this->display_header();
 
-        var_dump(DiscoveryDataManager::get_instance()->retrieve_discovery_module_instance(1));
+        $module_instance = DiscoveryDataManager::get_instance()->retrieve_discovery_module_instance(2);
+        $data_manager = DataManager::get_instance($module_instance);
+
+        var_dump($data_manager->retrieve_profile());
 
         $this->display_footer();
     }

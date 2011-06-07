@@ -42,12 +42,34 @@ interface DiscoveryDataManagerInterface
 
     function retrieve_discovery_module_instance_settings($condition = null, $order_by = array(), $offset = 0, $max_objects = -1);
 
-    function retrieve_discovery_module_instance_setting_from_variable_name($variable, $external_id);
+    function retrieve_discovery_module_instance_setting_from_variable_name($variable, $discovery_module_instance_id);
 
     function update_discovery_module_instance($discovery_module_instance);
 
     function delete_discovery_module_instance($discovery_module_instance);
 
     function retrieve_active_discovery_module_instances($types = array());
+
+    function retrieve_data_source_instance($data_source_instance_id);
+
+    function retrieve_data_source_instances($condition = null, $offset = null, $max_objects = null, $order_by = null);
+
+    function count_data_source_instances($condition = null);
+
+    function create_data_source_instance_setting(DataSourceInstanceSetting $data_source_instance_setting);
+
+    function update_data_source_instance_setting(DataSourceInstanceSetting $data_source_instance_setting);
+
+    function delete_data_source_instance_setting(DataSourceInstanceSetting $data_source_instance_setting);
+
+    function retrieve_data_source_instance_setting($id);
+
+    function retrieve_data_source_instance_settings($condition = null, $order_by = array(), $offset = 0, $max_objects = -1);
+
+    function retrieve_data_source_instance_setting_from_variable_name($variable, $data_source_instance_id);
+
+    function update_data_source_instance($data_source_instance);
+
+    function delete_data_source_instance($data_source_instance);
 }
 ?>
