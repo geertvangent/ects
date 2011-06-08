@@ -28,6 +28,28 @@ class Email extends DataClass
     /**
      * @return string
      */
+    function get_type_string()
+    {
+        switch ($this->get_type())
+        {
+            case self :: TYPE_PRIVATE :
+                return 'Private';
+                break;
+            case self :: TYPE_OFFICIAL :
+                return 'Official';
+                break;
+            case self :: TYPE_OFFICIAL_DISCONTINUED :
+                return 'OfficialDiscontinued';
+                break;
+            case self :: TYPE_DISCONTINUED :
+                return 'Discontinued';
+                break;
+        }
+    }
+
+    /**
+     * @return string
+     */
     function get_address()
     {
         return $this->get_default_property(self :: PROPERTY_ADDRESS);

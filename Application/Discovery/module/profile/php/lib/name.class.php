@@ -32,6 +32,26 @@ class Name extends DataClass
     /**
      * @return string
      */
+    function get_first_names()
+    {
+        $names = array();
+
+        if ($this->get_first_name())
+        {
+            $names[] = $this->get_first_name();
+        }
+
+        if ($this->get_other_first_names())
+        {
+            $names[] = $this->get_other_first_names();
+        }
+
+        return implode(' ', $names);
+    }
+
+    /**
+     * @return string
+     */
     function get_last_name()
     {
         return $this->get_default_property(self :: PROPERTY_LAST_NAME);

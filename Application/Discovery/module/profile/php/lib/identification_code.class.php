@@ -26,6 +26,22 @@ class IdentificationCode extends DataClass
     /**
      * @return string
      */
+    function get_type_string()
+    {
+        switch($this->get_type())
+        {
+            case self :: TYPE_NATIONAL :
+                return 'NationalId';
+                break;
+            case self :: TYPE_COMPANY :
+                return 'CompanyId';
+                break;
+        }
+    }
+
+    /**
+     * @return string
+     */
     function get_code()
     {
         return $this->get_default_property(self :: PROPERTY_CODE);

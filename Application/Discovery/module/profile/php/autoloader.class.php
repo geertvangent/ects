@@ -14,7 +14,7 @@ class Autoloader
     {
         $list = array('data_manager' => 'data_manager', 'data_manager_interface' => 'data_manager_interface',
                 'communication' => 'communication', 'email' => 'email', 'identification_code' => 'identification_code',
-                'name' => 'name', 'profile' => 'profile', 'photo' => 'photo');
+                'name' => 'name', 'profile' => 'profile', 'photo' => 'photo', 'module' => 'module');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);
 

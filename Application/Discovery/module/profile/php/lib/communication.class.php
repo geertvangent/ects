@@ -34,11 +34,61 @@ class Communication extends DataClass
     }
 
     /**
+     * @return string
+     */
+    function get_type_string()
+    {
+        switch ($this->get_type())
+        {
+            case self :: TYPE_DOMICILE :
+                return 'Domicile';
+                break;
+            case self :: TYPE_MOBILE :
+                return 'Mobile';
+                break;
+            case self :: TYPE_ALTERNATIVE :
+                return 'Alternative';
+                break;
+            case self :: TYPE_OFFICE :
+                return 'Office';
+                break;
+            case self :: TYPE_EMERGENCY :
+                return 'Emergency';
+                break;
+        }
+    }
+
+    /**
      * @return int
      */
     function get_device()
     {
         return $this->get_default_property(self :: PROPERTY_DEVICE);
+    }
+
+    /**
+     * @return string
+     */
+    function get_device_string()
+    {
+        switch ($this->get_device())
+        {
+            case self :: DEVICE_TELEPHONE :
+                return 'Telephone';
+                break;
+            case self :: DEVICE_FAX :
+                return 'Fax';
+                break;
+            case self :: DEVICE_MOBILE :
+                return 'Mobile';
+                break;
+            case self :: DEVICE_PAGER :
+                return 'Pager';
+                break;
+            case self :: DEVICE_RADIO_TELEPHONE :
+                return 'RadioTelephone';
+                break;
+        }
     }
 
     /**

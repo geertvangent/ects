@@ -42,7 +42,7 @@ class Module
 
     function render()
     {
-        return 'Molto bene!';
+        return '';
     }
 
     /**

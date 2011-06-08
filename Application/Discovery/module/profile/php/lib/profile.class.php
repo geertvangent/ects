@@ -2,7 +2,6 @@
 namespace application\discovery\module\profile;
 
 use application\discovery\DiscoveryDataManager;
-
 use application\discovery\DiscoveryItem;
 
 class Profile extends DiscoveryItem
@@ -17,7 +16,7 @@ class Profile extends DiscoveryItem
     const PROPERTY_PHOTO = 'photo';
 
     /**
-     * @return string
+     * @return Name
      */
     function get_name()
     {
@@ -65,9 +64,9 @@ class Profile extends DiscoveryItem
     }
 
     /**
-     * @param string $name
+     * @param Name $name
      */
-    function set_name($name)
+    function set_name(Name $name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
@@ -163,6 +162,14 @@ class Profile extends DiscoveryItem
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
+    }
+
+    /**
+     * @return boolean
+     */
+    function has_photo()
+    {
+        return $this->get_photo() instanceof Photo && $this->get_photo()->get_mime_type() && $this->get_photo()->get_data();
     }
 }
 ?>
