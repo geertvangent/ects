@@ -12,13 +12,9 @@ class Autoloader
 
     static function load($classname)
     {
-        $list = array(
-                'data_manager' => 'data_manager',
-                'communication' => 'communication',
-                'email' => 'email',
-                'identification_code' => 'identification_code',
-                'name' => 'name',
-                'profile' => 'profile');
+        $list = array('data_manager' => 'data_manager', 'data_manager_interface' => 'data_manager_interface',
+                'communication' => 'communication', 'email' => 'email', 'identification_code' => 'identification_code',
+                'name' => 'name', 'profile' => 'profile', 'photo' => 'photo');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);
 

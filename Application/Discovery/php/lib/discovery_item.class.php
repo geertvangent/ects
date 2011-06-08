@@ -38,5 +38,13 @@ class DiscoveryItem extends DataClass
 
         return parent :: get_default_property_names($extended_property_names);
     }
+
+    /**
+     * @return DiscoveryDataManagerInterface
+     */
+    function get_data_manager()
+    {
+        return DiscoveryDataManager :: get_instance();
+    }
 }
 ?>

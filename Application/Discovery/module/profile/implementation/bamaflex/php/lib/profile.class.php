@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use application\discovery\module\profile\Profile;
+use application\discovery\DiscoveryDataManager;
 
-class Profile extends Profile
+class Profile extends \application\discovery\module\profile\Profile
 {
     const CLASS_NAME = __CLASS__;
 
@@ -81,6 +81,14 @@ class Profile extends Profile
         $extended_property_names[] = self :: PROPERTY_ADDRESS;
 
         return parent :: get_default_property_names($extended_property_names);
+    }
+
+    /**
+     * @return DiscoveryDataManagerInterface
+     */
+    function get_data_manager()
+    {
+        return DiscoveryDataManager :: get_instance();
     }
 }
 ?>

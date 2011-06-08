@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile;
 
+use application\discovery\DiscoveryDataManager;
+
 use common\libraries\DataClass;
 
 class Name extends DataClass
@@ -69,6 +71,14 @@ class Name extends DataClass
         $extended_property_names[] = self :: PROPERTY_LAST_NAME;
 
         return parent :: get_default_property_names($extended_property_names);
+    }
+
+    /**
+     * @return DiscoveryDataManagerInterface
+     */
+    function get_data_manager()
+    {
+        return DiscoveryDataManager :: get_instance();
     }
 }
 ?>

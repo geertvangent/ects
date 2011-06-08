@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use application\discovery\DiscoveryDataManager;
+
 use common\libraries\DataClass;
 
 class Birth extends DataClass
@@ -69,6 +71,14 @@ class Birth extends DataClass
         $extended_property_names[] = self :: PROPERTY_COUNTRY;
 
         return parent :: get_default_property_names($extended_property_names);
+    }
+
+    /**
+     * @return DiscoveryDataManagerInterface
+     */
+    function get_data_manager()
+    {
+        return DiscoveryDataManager :: get_instance();
     }
 }
 ?>

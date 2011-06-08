@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\bamaflex;
+namespace application\discovery\module\profile\implementation\chamilo;
 
 use common\libraries\Utilities;
 
@@ -12,8 +12,7 @@ class Autoloader
 
     static function load($classname)
     {
-        $list = array('address' => 'address', 'birth' => 'birth', 'profile' => 'profile', 'module' => 'module',
-                'settings_connector' => '../settings/settings_connector');
+        $list = array('profile' => 'profile', 'module' => 'module', 'settings_connector' => '../settings/settings_connector');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);
 

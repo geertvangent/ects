@@ -7,6 +7,11 @@ namespace application\discovery\module\profile;
  */
 interface DataManagerInterface
 {
+
+    /**
+     * @param int $id
+     * @return \application\discovery\module\profile\Profile|boolean
+     */
     function retrieve_profile($id);
 }
 ?>

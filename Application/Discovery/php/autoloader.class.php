@@ -13,13 +13,13 @@ class Autoloader
 
     static function load($classname)
     {
-        $list = array(
-                'discovery_data_manager' => 'discovery_data_manager',
-                'discovery_data_manager_interface' => 'discovery_data_manager_interface',
+        $list = array('discovery_data_manager' => 'discovery_data_manager',
+                'discovery_data_manager_interface' => 'discovery_data_manager_interface', 'data_source' => 'data_source',
                 'discovery_manager' => 'discovery_manager/discovery_manager',
-                'discovery_module_instance' => 'discovery_module_instance',
+                'user_browser_table' => 'discovery_manager/component/user_browser/user_browser_table',
+                'module' => 'module', 'discovery_module_instance' => 'discovery_module_instance',
                 'discovery_module_instance_setting' => 'discovery_module_instance_setting',
-                'data_source_instance' => 'data_source_instance',
+                'discovery_item' => 'discovery_item', 'data_source_instance' => 'data_source_instance',
                 'data_source_instance_setting' => 'data_source_instance_setting',
                 'discovery_module_instance_manager' => 'discovery_module_instance_manager/discovery_module_instance_manager');
 

@@ -1,30 +1,71 @@
 <?php
 namespace application\discovery;
 
+use user\User;
+
+use common\libraries\OrCondition;
+use common\libraries\PatternMatchCondition;
+use common\libraries\ActionBarSearchForm;
+use common\libraries\Theme;
+use common\libraries\Utilities;
+use common\libraries\Translation;
+use common\libraries\ToolbarItem;
+use common\libraries\ActionBarRenderer;
+
+use application\discovery\module\profile\implementation\bamaflex\SettingsConnector;
+use application\discovery\module\profile\DataManager;
+
 /**
  * @author Hans De Bisschop
  * @package application.discovery
  */
 
-use application\discovery\module\profile\implementation\bamaflex\SettingsConnector;
-use application\discovery\module\profile\DataManager;
-
 class DiscoveryManagerBrowserComponent extends DiscoveryManager
 {
+    /**
+     * @var ActionBarRenderer
+     */
+    private $action_bar;
 
     function run()
     {
+        $this->action_bar = $this->get_action_bar();
+
+        $parameters = $this->get_parameters(true);
+        $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
+
+        $table = new UserBrowserTable($this, $parameters, $this->get_condition());
+
         $this->display_header();
-
-        $module_instance = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance(1);
-        var_dump($module_instance);
-
-        //        $data_manager = DataManager :: get_instance($module_instance);
-        //        var_dump($data_manager->retrieve_profile());
-
-        var_dump(SettingsConnector :: get_data_sources());
-
+        echo $this->action_bar->as_html() . '<br />';
+        echo $table->as_html();
         $this->display_footer();
+    }
+
+    function get_condition()
+    {
+        $query = $this->action_bar->get_query();
+
+        if (isset($query) && $query != '')
+        {
+            $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_FIRSTNAME, '*' . $query . '*');
+            $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_LASTNAME, '*' . $query . '*');
+            $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_USERNAME, '*' . $query . '*');
+            return new OrCondition($or_conditions);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    function get_action_bar()
+    {
+        $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
+        $action_bar->set_search_url($this->get_url());
+
+        $action_bar->add_common_action(new ToolbarItem(Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_browser.png', $this->get_url(), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+        return $action_bar;
     }
 }
 ?>

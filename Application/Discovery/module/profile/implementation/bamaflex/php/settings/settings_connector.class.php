@@ -1,6 +1,7 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use common\libraries\Translation;
 use common\libraries\ObjectTableOrder;
 use common\libraries\EqualityCondition;
 

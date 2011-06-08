@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use application\discovery\DiscoveryDataManager;
+
 use common\libraries\DataClass;
 
 class Address extends DataClass
@@ -14,7 +16,9 @@ class Address extends DataClass
     const PROPERTY_BOX = 'box';
     const PROPERTY_ROOM = 'room';
     const PROPERTY_CITY = 'city';
-    const PROPERTY_BOROUGH = 'borough';
+    const PROPERTY_CITY_ZIP_CODE = 'city_zip_code';
+    const PROPERTY_SUBCITY = 'subcity';
+    const PROPERTY_SUBCITY_ZIP_CODE = 'subcity_zip_code';
     const PROPERTY_REGION = 'region';
 
     const TYPE_DOMICILE = 1;
@@ -22,6 +26,7 @@ class Address extends DataClass
     const TYPE_ALTERNATIVE = 3;
     const TYPE_CORRESPONDENCE = 4;
     const TYPE_EXPENSES = 5;
+    const TYPE_RESIDENCE = 6;
 
     /**
      * @return int
@@ -82,9 +87,25 @@ class Address extends DataClass
     /**
      * @return string
      */
-    function get_borough()
+    function get_city_zip_code()
     {
-        return $this->get_default_property(self :: PROPERTY_BOROUGH);
+        return $this->get_default_property(self :: PROPERTY_CITY_ZIP_CODE);
+    }
+
+    /**
+     * @return string
+     */
+    function get_subcity()
+    {
+        return $this->get_default_property(self :: PROPERTY_SUBCITY);
+    }
+
+    /**
+     * @return string
+     */
+    function get_subcity_zip_code()
+    {
+        return $this->get_default_property(self :: PROPERTY_SUBCITY_ZIP_CODE);
     }
 
     /**
@@ -152,11 +173,27 @@ class Address extends DataClass
     }
 
     /**
-     * @param string $borough
+     * @param string $city_zip_code
      */
-    function set_borough($borough)
+    function set_city_zip_code($city_zip_code)
     {
-        $this->set_default_property(self :: PROPERTY_BOROUGH, $borough);
+        $this->set_default_property(self :: PROPERTY_CITY_ZIP_CODE, $city_zip_code);
+    }
+
+    /**
+     * @param string $subcity
+     */
+    function set_subcity($subcity)
+    {
+        $this->set_default_property(self :: PROPERTY_SUBCITY, $subcity);
+    }
+
+    /**
+     * @param string $subcity_zip_code
+     */
+    function set_subcity_zip_code($subcity_zip_code)
+    {
+        $this->set_default_property(self :: PROPERTY_SUBCITY_ZIP_CODE, $subcity_zip_code);
     }
 
     /**
@@ -179,10 +216,20 @@ class Address extends DataClass
         $extended_property_names[] = self :: PROPERTY_BOX;
         $extended_property_names[] = self :: PROPERTY_ROOM;
         $extended_property_names[] = self :: PROPERTY_CITY;
-        $extended_property_names[] = self :: PROPERTY_BOROUGH;
+        $extended_property_names[] = self :: PROPERTY_CITY_ZIP_CODE;
+        $extended_property_names[] = self :: PROPERTY_SUBCITY;
+        $extended_property_names[] = self :: PROPERTY_SUBCITY_ZIP_CODE;
         $extended_property_names[] = self :: PROPERTY_REGION;
 
         return parent :: get_default_property_names($extended_property_names);
+    }
+
+    /**
+     * @return DiscoveryDataManagerInterface
+     */
+    function get_data_manager()
+    {
+        return DiscoveryDataManager :: get_instance();
     }
 }
 ?>

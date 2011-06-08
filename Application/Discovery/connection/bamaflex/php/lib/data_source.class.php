@@ -3,10 +3,9 @@ namespace application\discovery\connection\bamaflex;
 
 use application\discovery\DiscoveryModuleInstance;
 
-class DataSource
+class DataSource extends \application\discovery\DataSource
 {
     private $connection;
-    private $module_instance;
 
     /**
      * Constructor
@@ -14,7 +13,7 @@ class DataSource
      */
     function __construct(DiscoveryModuleInstance $discovery_module_instance)
     {
-        $this->module_instance = $discovery_module_instance;
+        parent :: __construct($discovery_module_instance);
         $this->initialize();
     }
 
@@ -23,11 +22,14 @@ class DataSource
      */
     function initialize()
     {
-        $data_source = $this->module_instance->get_setting('data_source');
+        $data_source = $this->get_module_instance()->get_setting('data_source');
         $this->connection = Connection :: get_instance($data_source)->get_connection();
         $this->connection->setOption('debug_handler', array(get_class($this), 'debug'));
         $this->connection->setOption('portability', MDB2_PORTABILITY_NONE);
         $this->connection->setCharset('utf8');
+
+        // Necessary to retrieve complete photos and other large datasets from the database
+        $this->connection->prepare('SET TEXTSIZE 2000000')->execute();
     }
 
     /**
@@ -46,6 +48,15 @@ class DataSource
     function set_connection($connection)
     {
         $this->connection = $connection;
+    }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    function convert_to_utf8($string)
+    {
+        return iconv('cp1252', 'UTF-8', $string);
     }
 }
 ?>

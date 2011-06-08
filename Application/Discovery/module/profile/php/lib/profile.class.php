@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile;
 
+use application\discovery\DiscoveryDataManager;
+
 use application\discovery\DiscoveryItem;
 
 class Profile extends DiscoveryItem
@@ -12,7 +14,7 @@ class Profile extends DiscoveryItem
     const PROPERTY_EMAIL = 'email';
     const PROPERTY_COMMUNICATION = 'communication';
     const PROPERTY_LANGUAGE = 'language';
-    const PROPERTY_PICTURE = 'picture';
+    const PROPERTY_PHOTO = 'photo';
 
     /**
      * @return string
@@ -55,11 +57,11 @@ class Profile extends DiscoveryItem
     }
 
     /**
-     * @return string
+     * @return Photo
      */
-    function get_picture()
+    function get_photo()
     {
-        return $this->get_default_property(self :: PROPERTY_PICTURE);
+        return $this->get_default_property(self :: PROPERTY_PHOTO);
     }
 
     /**
@@ -103,11 +105,11 @@ class Profile extends DiscoveryItem
     }
 
     /**
-     * @param string $picture
+     * @param Photo $photo
      */
-    function set_picture($picture)
+    function set_photo(Photo $photo)
     {
-        $this->set_default_property(self :: PROPERTY_PICTURE, $picture);
+        $this->set_default_property(self :: PROPERTY_PHOTO, $photo);
     }
 
     /**
@@ -115,8 +117,9 @@ class Profile extends DiscoveryItem
      */
     function add_identification_code(IdentificationCode $code)
     {
-        $codes &= $this->get_identification_code();
+        $codes = $this->get_identification_code();
         $codes[] = $code;
+        $this->set_identification_code($codes);
     }
 
     /**
@@ -124,8 +127,9 @@ class Profile extends DiscoveryItem
      */
     function add_communication(Communication $communication)
     {
-        $communications &= $this->get_communication();
+        $communications = $this->get_communication();
         $communications[] = $communication;
+        $this->set_communication($communications);
     }
 
     /**
@@ -133,8 +137,9 @@ class Profile extends DiscoveryItem
      */
     function add_email(Email $email)
     {
-        $emails &= $this->get_email();
+        $emails = $this->get_email();
         $emails[] = $email;
+        $this->set_email($emails);
     }
 
     /**
@@ -147,9 +152,17 @@ class Profile extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_EMAIL;
         $extended_property_names[] = self :: PROPERTY_COMMUNICATION;
         $extended_property_names[] = self :: PROPERTY_LANGUAGE;
-        $extended_property_names[] = self :: PROPERTY_PICTURE;
+        $extended_property_names[] = self :: PROPERTY_PHOTO;
 
         return parent :: get_default_property_names($extended_property_names);
+    }
+
+    /**
+     * @return DiscoveryDataManagerInterface
+     */
+    function get_data_manager()
+    {
+        return DiscoveryDataManager :: get_instance();
     }
 }
 ?>

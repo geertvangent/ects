@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile;
 
+use application\discovery\DiscoveryDataManager;
+
 use common\libraries\DataClass;
 
 class Email extends DataClass
@@ -12,7 +14,8 @@ class Email extends DataClass
 
     const TYPE_PRIVATE = 1;
     const TYPE_OFFICIAL = 2;
-    const TYPE_DISCONTINUED = 3;
+    const TYPE_OFFICIAL_DISCONTINUED = 3;
+    const TYPE_DISCONTINUED = 4;
 
     /**
      * @return int
@@ -55,6 +58,14 @@ class Email extends DataClass
         $extended_property_names[] = self :: PROPERTY_ADDRESS;
 
         return parent :: get_default_property_names($extended_property_names);
+    }
+
+    /**
+     * @return DiscoveryDataManagerInterface
+     */
+    function get_data_manager()
+    {
+        return DiscoveryDataManager :: get_instance();
     }
 }
 ?>
