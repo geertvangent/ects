@@ -27,7 +27,7 @@ class DiscoveryModuleInstanceManagerActivatorComponent extends DiscoveryModuleIn
 
             foreach ($ids as $id)
             {
-                $discovery_module_instance = $this->retrieve_discovery_module_instance($id);
+                $discovery_module_instance = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance($id);
                 $discovery_module_instance->activate();
 
                 if (! $discovery_module_instance->update())
@@ -63,11 +63,13 @@ class DiscoveryModuleInstanceManagerActivatorComponent extends DiscoveryModuleIn
                 }
             }
 
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
+                    DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('ExternalRepository')), Utilities :: COMMON_LIBRARIES)));
+            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array(
+                    'OBJECT' => Translation :: get('ExternalRepository')), Utilities :: COMMON_LIBRARIES)));
         }
     }
 }

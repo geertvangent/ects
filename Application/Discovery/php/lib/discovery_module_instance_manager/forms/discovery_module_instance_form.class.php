@@ -65,11 +65,11 @@ class DiscoveryModuleInstanceForm extends FormValidator
 
     function build_general_form()
     {
-        $this->addElement('static', null, Translation :: get('DiscoveryModuleInstanceType', null, DiscoveryModuleInstanceManager :: get_namespace()), Translation :: get('TypeName', null, DiscoveryModuleInstanceManager :: get_namespace($this->discovery_module_instance->get_instance_type(), $this->discovery_module_instance->get_type())));
         $this->addElement('hidden', DiscoveryModuleInstance :: PROPERTY_TYPE, $this->discovery_module_instance->get_type());
-        $this->addElement('text', DiscoveryModuleInstance :: PROPERTY_TITLE, Translation :: get('Title', null, DiscoveryModuleInstanceManager :: get_namespace()), array("size" => "50"));
+        $this->addElement('text', DiscoveryModuleInstance :: PROPERTY_TITLE, Translation :: get('Title', null, $this->discovery_module_instance->get_type()), array(
+                "size" => "50"));
         $this->addRule(DiscoveryModuleInstance :: PROPERTY_TITLE, Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
-        $this->add_html_editor(DiscoveryModuleInstance :: PROPERTY_DESCRIPTION, Translation :: get('Description', null, DiscoveryModuleInstanceManager :: get_namespace()), true);
+        $this->add_html_editor(DiscoveryModuleInstance :: PROPERTY_DESCRIPTION, Translation :: get('Description', null, $this->discovery_module_instance->get_type()), true);
         $this->addElement('checkbox', DiscoveryModuleInstance :: PROPERTY_ENABLED, Translation :: get('Enabled', null, Utilities :: COMMON_LIBRARIES));
     }
 
@@ -78,11 +78,9 @@ class DiscoveryModuleInstanceForm extends FormValidator
         $discovery_module_instance = $this->discovery_module_instance;
         $configuration = $this->configuration;
 
-        $namespace = DiscoveryModuleInstanceManager :: get_namespace($discovery_module_instance->get_instance_type(), $discovery_module_instance->get_type());
-        $manager_class = DiscoveryModuleInstanceManager :: get_manager_class($discovery_module_instance->get_instance_type());
-        $path = Path :: namespace_to_path($namespace);
+        $path = Path :: namespace_to_path($discovery_module_instance->get_type());
 
-        require_once Path :: get(SYS_PATH) . $path . '/php/settings/settings_' . $discovery_module_instance->get_type() . '_connector.class.php';
+        require_once Path :: get(SYS_PATH) . $path . '/php/settings/settings_connector.class.php';
 
         $categories = count($configuration['settings']);
 
@@ -92,7 +90,7 @@ class DiscoveryModuleInstanceForm extends FormValidator
 
             foreach ($settings as $name => $setting)
             {
-                $label = Translation :: get(Utilities :: underscores_to_camelcase($name), null, DiscoveryModuleInstanceManager :: get_namespace($this->discovery_module_instance->get_instance_type(), $this->discovery_module_instance->get_type()));
+                $label = Translation :: get(Utilities :: underscores_to_camelcase($name), null, $this->discovery_module_instance->get_type());
                 $name = self :: SETTINGS_PREFIX . '[' . $name . ']';
                 if (! $has_settings && $categories > 1)
                 {
@@ -140,7 +138,7 @@ class DiscoveryModuleInstanceForm extends FormValidator
                     if ($options_type == 'dynamic')
                     {
                         $options_source = $setting['options']['source'];
-                        $class = 'ExternalRepositorySettings' . Utilities :: underscores_to_camelcase($discovery_module_instance->get_type()) . 'Connector';
+                        $class = $discovery_module_instance->get_type() . '\\SettingsConnector';
                         $options = call_user_func(array($class, $options_source));
                     }
                     else
@@ -184,8 +182,10 @@ class DiscoveryModuleInstanceForm extends FormValidator
 
         $this->addElement('hidden', DiscoveryModuleInstance :: PROPERTY_ID);
 
-        $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES), array('class' => 'positive update'));
-        $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array('class' => 'normal empty'));
+        $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES), array(
+                'class' => 'positive update'));
+        $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
+                'class' => 'normal empty'));
 
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
@@ -194,8 +194,10 @@ class DiscoveryModuleInstanceForm extends FormValidator
     {
         $this->build_basic_form();
 
-        $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), array('class' => 'positive'));
-        $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array('class' => 'normal empty'));
+        $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), array(
+                'class' => 'positive'));
+        $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
+                'class' => 'normal empty'));
 
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
@@ -208,8 +210,6 @@ class DiscoveryModuleInstanceForm extends FormValidator
         $discovery_module_instance->set_title($values[DiscoveryModuleInstance :: PROPERTY_TITLE]);
         $discovery_module_instance->set_description($values[DiscoveryModuleInstance :: PROPERTY_DESCRIPTION]);
         $discovery_module_instance->set_type($values[DiscoveryModuleInstance :: PROPERTY_TYPE]);
-        $discovery_module_instance->set_creation_date(time());
-        $discovery_module_instance->set_modification_date(time());
 
         if (isset($values[DiscoveryModuleInstance :: PROPERTY_ENABLED]))
         {
@@ -231,7 +231,7 @@ class DiscoveryModuleInstanceForm extends FormValidator
 
             foreach ($settings as $name => $value)
             {
-                $setting = RepositoryDataManager :: get_instance()->retrieve_external_setting_from_variable_name($name, $discovery_module_instance->get_id());
+                $setting = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance_setting_from_variable_name($name, $discovery_module_instance->get_id());
                 $setting->set_value($value);
 
                 if (! $setting->update())
@@ -281,7 +281,7 @@ class DiscoveryModuleInstanceForm extends FormValidator
 
             foreach ($settings as $name => $value)
             {
-                $setting = RepositoryDataManager :: get_instance()->retrieve_external_setting_from_variable_name($name, $discovery_module_instance->get_id());
+                $setting = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance_setting_from_variable_name($name, $discovery_module_instance->get_id());
                 $setting->set_value($value);
 
                 if (! $setting->update())
@@ -311,7 +311,6 @@ class DiscoveryModuleInstanceForm extends FormValidator
         $defaults[DiscoveryModuleInstance :: PROPERTY_ID] = $discovery_module_instance->get_id();
         $defaults[DiscoveryModuleInstance :: PROPERTY_TITLE] = $discovery_module_instance->get_title();
         $defaults[DiscoveryModuleInstance :: PROPERTY_TYPE] = $discovery_module_instance->get_type();
-        $defaults[DiscoveryModuleInstance :: PROPERTY_INSTANCE_TYPE] = $discovery_module_instance->get_instance_type();
         $defaults[DiscoveryModuleInstance :: PROPERTY_DESCRIPTION] = $discovery_module_instance->get_description();
         $defaults[DiscoveryModuleInstance :: PROPERTY_ENABLED] = $discovery_module_instance->get_enabled();
 
@@ -321,8 +320,8 @@ class DiscoveryModuleInstanceForm extends FormValidator
         {
             foreach ($settings as $name => $setting)
             {
-                $setting = RepositoryDataManager :: get_instance()->retrieve_external_setting_from_variable_name($name, $discovery_module_instance->get_id());
-                if ($setting instanceof ExternalSetting)
+                $setting = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance_setting_from_variable_name($name, $discovery_module_instance->get_id());
+                if ($setting instanceof DiscoveryModuleInstanceSetting)
                 {
                     $defaults[self :: SETTINGS_PREFIX][$name] = $setting->get_value();
                 }
@@ -349,10 +348,9 @@ class DiscoveryModuleInstanceForm extends FormValidator
     function parse_settings()
     {
         $discovery_module_instance = $this->discovery_module_instance;
-        $namespace = DiscoveryModuleInstanceManager :: get_namespace($discovery_module_instance->get_instance_type(), $discovery_module_instance->get_type());
-        $path = Path :: namespace_to_path($namespace);
+        $path = Path :: namespace_to_path($discovery_module_instance->get_type());
 
-        $file = Path :: get(SYS_PATH) . $path . '/php/settings/settings_' . $discovery_module_instance->get_type() . '.xml';
+        $file = Path :: get(SYS_PATH) . $path . '/php/settings/settings.xml';
         $result = array();
 
         if (file_exists($file))
@@ -373,7 +371,7 @@ class DiscoveryModuleInstanceForm extends FormValidator
 
                 // Get settings in category
                 $properties = $category->getElementsByTagname('setting');
-                $attributes = array('field', 'default', 'locked', 'user_setting');
+                $attributes = array('field', 'default', 'locked');
 
                 foreach ($properties as $index => $property)
                 {

@@ -120,32 +120,6 @@ class DiscoveryModuleInstanceManager extends SubManager
         return AdminDataManager :: get_instance()->retrieve_registrations(new AndCondition($conditions));
     }
 
-    static function get_namespace($instance_type = null, $type = null)
-    {
-        if (is_null($instance_type) && is_null($type))
-        {
-            return __NAMESPACE__;
-        }
-        elseif (! is_null($instance_type) && is_null($type))
-        {
-            return 'common\extensions\\' . $instance_type;
-        }
-        elseif (! is_null($instance_type) && ! is_null($type))
-        {
-            return 'common\extensions\\' . $instance_type . '\implementation\\' . $type;
-        }
-    }
-
-    static function get_manager_class($type)
-    {
-        return self :: get_namespace($type) . '\\' . Utilities :: underscores_to_camelcase($type);
-    }
-
-    static function get_manager_connector_class($type)
-    {
-        return self :: get_manager_class($type) . 'Connector';
-    }
-
     static function exists($instance_type, $type)
     {
         $manager_class = self :: get_manager_class($instance_type);

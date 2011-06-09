@@ -27,7 +27,7 @@ class DiscoveryModuleInstanceManagerDeactivatorComponent extends DiscoveryModule
 
             foreach ($ids as $id)
             {
-                $discovery_module_instance = $this->retrieve_discovery_module_instance($id);
+                $discovery_module_instance = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance($id);
                 $discovery_module_instance->deactivate();
 
                 if (! $discovery_module_instance->update())
@@ -63,7 +63,8 @@ class DiscoveryModuleInstanceManagerDeactivatorComponent extends DiscoveryModule
                 }
             }
 
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
+                    DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
         }
         else
         {
