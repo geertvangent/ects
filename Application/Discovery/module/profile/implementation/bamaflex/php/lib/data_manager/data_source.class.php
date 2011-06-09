@@ -52,6 +52,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $company_id->set_code($this->convert_to_utf8($object->company_id));
 
             $profile = new Profile();
+            $profile->set_title($name->get_full_name());
             $profile->set_name($name);
             $profile->add_identification_code($national_id);
             $profile->add_identification_code($company_id);

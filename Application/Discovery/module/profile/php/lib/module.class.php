@@ -2,9 +2,7 @@
 namespace application\discovery\module\profile;
 
 use common\libraries\Theme;
-
 use common\libraries\SortableTableFromArray;
-
 use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;

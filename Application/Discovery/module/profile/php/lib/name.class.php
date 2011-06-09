@@ -100,5 +100,13 @@ class Name extends DataClass
     {
         return DiscoveryDataManager :: get_instance();
     }
+
+    /**
+     * @return string
+     */
+    function get_full_name()
+    {
+        return $this->get_first_name() . ' ' . $this->get_last_name();
+    }
 }
 ?>
