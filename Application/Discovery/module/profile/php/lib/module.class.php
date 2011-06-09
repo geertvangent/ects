@@ -80,14 +80,25 @@ class Module extends \application\discovery\Module
             $html[] = '</div>';
 
             $html[] = '<div class="description">';
-            if ($this->profile->has_photo())
-            {
-                $html[] = '<div style="float: right;"><img src="' . $this->profile->get_photo()->get_source() . '" style="max-width: 150px; border: 1px solid grey;"/></div>';
-            }
 
+            $html[] = '<table style="width: 100%">';
+            $html[] = '<tr>';
+
+            $html[] = '<td style="padding-right: 10px;">';
             $table = new PropertiesTable($this->get_general_properties());
             //$table->setAttribute('style', 'margin-top: 1em; margin-bottom: 0; margin-right: 300px;');
             $html[] = $table->toHtml();
+            $html[] = '</td>';
+
+            if ($this->profile->has_photo())
+            {
+                $html[] = '<td style="text-align: right; vertical-align: top; width: 150px;">';
+                $html[] = '<img src="' . $this->profile->get_photo()->get_source() . '" style="width: 150px; border: 1px solid grey;"/>';
+                $html[] = '</td>';
+            }
+
+            $html[] = '</tr>';
+            $html[] = '</table>';
 
             $html[] = '</div>';
             $html[] = '</div>';
