@@ -33,6 +33,41 @@ class Module extends \application\discovery\Module
         return $this->profile;
     }
 
+    /**
+     * @return multitype:string
+     */
+    function get_general_properties()
+    {
+        $properties = array();
+        $properties[Translation :: get('FirstName')] = $this->profile->get_name()->get_first_names();
+        $properties[Translation :: get('LastName')] = $this->profile->get_name()->get_last_name();
+        $properties[Translation :: get('Language')] = $this->profile->get_language();
+
+        foreach ($this->profile->get_identification_code() as $identification_code)
+        {
+            $properties[Translation :: get($identification_code->get_type_string())] = $identification_code->get_code();
+        }
+
+        if (count($this->profile->get_communication()) == 1)
+        {
+            $communication = $this->profile->get_communication();
+            $communication = $communication[0];
+            $properties[Translation :: get('CommunicationNumber')] = $communication->get_number() . ' (' . $communication->get_device_string() . ')';
+        }
+
+        if (count($this->profile->get_email()) == 1)
+        {
+            $email = $this->profile->get_email();
+            $email = $email[0];
+            $properties[Translation :: get('Email')] = $email->get_address() . ' (' . $email->get_type_string() . ')';
+        }
+
+        return $properties;
+    }
+
+    /* (non-PHPdoc)
+     * @see application\discovery.Module::render()
+     */
     function render()
     {
         $html = array();
@@ -50,32 +85,8 @@ class Module extends \application\discovery\Module
                 $html[] = '<div style="float: right;"><img src="' . $this->profile->get_photo()->get_source() . '" style="max-width: 150px; border: 1px solid grey;"/></div>';
             }
 
-            $properties = array();
-            $properties[Translation :: get('FirstName')] = $this->profile->get_name()->get_first_names();
-            $properties[Translation :: get('LastName')] = $this->profile->get_name()->get_last_name();
-            $properties[Translation :: get('Language')] = $this->profile->get_language();
-
-            foreach ($this->profile->get_identification_code() as $identification_code)
-            {
-                $properties[Translation :: get($identification_code->get_type_string())] = $identification_code->get_code();
-            }
-
-            if (count($this->profile->get_communication()) == 1)
-            {
-                $communication = $this->profile->get_communication();
-                $communication = $communication[0];
-                $properties[Translation :: get('CommunicationNumber')] = $communication->get_number() . ' (' . $communication->get_device_string() . ')';
-            }
-
-            if (count($this->profile->get_email()) == 1)
-            {
-                $email = $this->profile->get_email();
-                $email = $email[0];
-                $properties[Translation :: get('Email')] = $email->get_address() . ' (' . $email->get_type_string() . ')';
-            }
-
-            $table = new PropertiesTable($properties);
-            $table->setAttribute('style', 'margin-top: 1em; margin-bottom: 0; margin-right: 300px;');
+            $table = new PropertiesTable($this->get_general_properties());
+            //$table->setAttribute('style', 'margin-top: 1em; margin-bottom: 0; margin-right: 300px;');
             $html[] = $table->toHtml();
 
             $html[] = '</div>';

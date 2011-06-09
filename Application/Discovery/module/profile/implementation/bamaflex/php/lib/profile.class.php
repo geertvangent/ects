@@ -23,6 +23,22 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     * @return string
+     */
+    function get_gender_string()
+    {
+        switch ($this->get_gender())
+        {
+            case self :: GENDER_MALE :
+                return 'Male';
+                break;
+            case self :: GENDER_FEMALE :
+                return 'Female';
+                break;
+        }
+    }
+
+    /**
      * @return Birth
      */
     function get_birth()

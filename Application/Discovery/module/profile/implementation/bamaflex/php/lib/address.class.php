@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use common\libraries\Translation;
+
 use application\discovery\DiscoveryDataManager;
 
 use common\libraries\DataClass;
@@ -34,6 +36,34 @@ class Address extends DataClass
     function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
+    }
+
+    /**
+     * @return string
+     */
+    function get_type_string()
+    {
+        switch ($this->get_type())
+        {
+            case self :: TYPE_DOMICILE :
+                return 'Domicile';
+                break;
+            case self :: TYPE_OFFICE :
+                return 'Office';
+                break;
+            case self :: TYPE_ALTERNATIVE :
+                return 'Alternative';
+                break;
+            case self :: TYPE_CORRESPONDENCE :
+                return 'Correspondence';
+                break;
+            case self :: TYPE_EXPENSES :
+                return 'Expenses';
+                break;
+            case self :: TYPE_RESIDENCE :
+                return 'Residence';
+                break;
+        }
     }
 
     /**
@@ -106,6 +136,53 @@ class Address extends DataClass
     function get_subcity_zip_code()
     {
         return $this->get_default_property(self :: PROPERTY_SUBCITY_ZIP_CODE);
+    }
+
+    function get_unified_city()
+    {
+        if (! $this->get_city() && $this->get_subcity())
+        {
+            return $this->get_subcity();
+        }
+        elseif ($this->get_city() && ! $this->get_subcity())
+        {
+            return $this->get_city();
+        }
+        elseif ($this->get_city() && $this->get_subcity())
+        {
+            if ($this->get_city() != $this->get_subcity())
+            {
+                return $this->get_subcity() . ' (' . $this->get_city() . ')';
+            }
+            else
+            {
+                return $this->get_city();
+            }
+        }
+        else
+        {
+            return 'Gotham City';
+        }
+    }
+
+    function get_unified_city_zip_code()
+    {
+        if (! $this->get_city_zip_code() && $this->get_subcity_zip_code())
+        {
+            return $this->get_subcity_zip_code();
+        }
+        elseif ($this->get_city_zip_code() && ! $this->get_subcity_zip_code())
+        {
+            return $this->get_city_zip_code();
+        }
+        elseif ($this->get_city_zip_code() && $this->get_subcity_zip_code())
+        {
+            return $this->get_city_zip_code();
+        }
+        else
+        {
+            return '10001';
+        }
     }
 
     /**
@@ -230,6 +307,50 @@ class Address extends DataClass
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
+    }
+
+    function __toString()
+    {
+        $address = array();
+
+        // Street, street number, box and room
+        if ($this->get_street())
+        {
+            $street = array();
+            $street[] = $this->get_street();
+
+            if ($this->get_number())
+            {
+                $street[] = $this->get_number();
+            }
+
+            if ($this->get_box())
+            {
+                $street[] = Translation :: get('Box') . ' ' . $this->get_box();
+            }
+
+            if ($this->get_room())
+            {
+                $street[] = Translation :: get('Room') . ' ' . $this->get_room();
+            }
+
+            $address[] = implode(' ', $street);
+        }
+
+        // City and zip code
+        $address[] = $this->get_unified_city_zip_code() . ' ' . $this->get_unified_city();
+
+        if ($this->get_region())
+        {
+            $address[] = $this->get_region();
+        }
+
+        if ($this->get_country())
+        {
+            $address[] = $this->get_country();
+        }
+
+        return implode('<br />', $address);
     }
 }
 ?>

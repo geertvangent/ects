@@ -40,6 +40,9 @@ class Module
         return new $class($application, $module_instance);
     }
 
+    /**
+     * @return string
+     */
     function render()
     {
         return '';

@@ -1,6 +1,12 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use common\libraries\Utilities;
+
+use common\libraries\Translation;
+
+use common\libraries\DatetimeUtilities;
+
 use application\discovery\DiscoveryDataManager;
 
 use common\libraries\DataClass;
@@ -19,6 +25,16 @@ class Birth extends DataClass
     function get_date()
     {
         return $this->get_default_property(self :: PROPERTY_DATE);
+    }
+
+    function get_formatted_date($format = null)
+    {
+        if (! $format)
+        {
+            $format = Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES);
+        }
+
+        return DatetimeUtilities :: format_locale_date($format, $this->get_date());
     }
 
     /**
@@ -62,6 +78,40 @@ class Birth extends DataClass
     }
 
     /**
+     * @return boolean
+     */
+    function has_date()
+    {
+        return ($this->get_date() && $this->get_date() != 0 ? true : false);
+    }
+
+    /**
+     * @return boolean
+     */
+    function has_location()
+    {
+        return ($this->get_place() || $this->get_country() ? true : false);
+    }
+
+    /**
+     * @return string
+     */
+    function get_location()
+    {
+        if ($this->get_place())
+        {
+            $location[] = $this->get_place();
+        }
+
+        if ($this->get_country())
+        {
+            $location[] = '(' . $this->get_country() . ')';
+        }
+
+        return implode(' ', $location);
+    }
+
+    /**
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -79,6 +129,22 @@ class Birth extends DataClass
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        $birth_date = array();
+        $birth_date[] = $this->get_formatted_date();
+
+        if ($this->has_location())
+        {
+            $birth_date[] = $this->get_location();
+        }
+
+        return implode(' ', $birth_date);
     }
 }
 ?>
