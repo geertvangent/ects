@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile;
 
+use common\libraries\Theme;
+
 use common\libraries\SortableTableFromArray;
 
 use common\libraries\Translation;
@@ -74,7 +76,7 @@ class Module extends \application\discovery\Module
 
         if ($this->profile instanceof Profile)
         {
-            $html[] = '<div class="content_object">';
+            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/general.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('General');
             $html[] = '</div>';
@@ -116,7 +118,7 @@ class Module extends \application\discovery\Module
                     $data[] = $row;
                 }
 
-                $html[] = '<div class="content_object">';
+                $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/communication_number.png);">';
                 $html[] = '<div class="title">';
                 $html[] = Translation :: get('CommunicationNumbers');
                 $html[] = '</div>';
@@ -145,7 +147,7 @@ class Module extends \application\discovery\Module
                     $data[] = $row;
                 }
 
-                $html[] = '<div class="content_object">';
+                $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/email_address.png);">';
                 $html[] = '<div class="title">';
                 $html[] = Translation :: get('EmailAddresses');
                 $html[] = '</div>';

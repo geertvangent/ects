@@ -12,7 +12,7 @@ class Autoloader
 
     static function load($classname)
     {
-        $list = array('address' => 'address', 'birth' => 'birth', 'profile' => 'profile', 'module' => 'module',
+        $list = array('address' => 'address', 'nationality' => 'nationality', 'birth' => 'birth', 'profile' => 'profile', 'module' => 'module',
                 'settings_connector' => '../settings/settings_connector');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);

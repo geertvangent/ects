@@ -21,7 +21,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     function retrieve_profile($id)
     {
-        $user = UserDataManager::get_instance()->retrieve_user($id);
+        $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
 
         $query = 'SELECT * FROM [dbo].[v_discovery_profile_basic] WHERE id = ' . $official_code;
@@ -63,6 +63,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $profile->set_gender($this->convert_to_utf8($object->gender));
             $profile->set_birth($birth);
             $profile->set_address($this->retrieve_addresses($official_code));
+            $profile->set_nationality($this->retrieve_nationalities($official_code));
 
             return $profile;
         }
@@ -189,5 +190,33 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             return false;
         }
     }
+
+    /**
+     * @param int $id
+     * @return multitype:\application\discovery\module\profile\implementation\bamaflex\Nationalities
+     */
+    private function retrieve_nationalities($id)
+    {
+        $query = 'SELECT * FROM [dbo].[v_discovery_profile_nationality] WHERE id = ' . $id;
+
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+
+        $nationalities = array();
+
+        if (! $results instanceof MDB2_Error)
+        {
+            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            {
+                $nationality = new Nationality();
+                $nationality->set_type($result->type);
+                $nationality->set_nationality($this->convert_to_utf8($result->nationality));
+                $nationalities[] = $nationality;
+            }
+        }
+
+        return $nationalities;
+    }
+
 }
 ?>

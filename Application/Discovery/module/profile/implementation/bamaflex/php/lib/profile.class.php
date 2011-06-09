@@ -9,6 +9,7 @@ class Profile extends \application\discovery\module\profile\Profile
 
     const PROPERTY_GENDER = 'gender';
     const PROPERTY_BIRTH = 'birth';
+    const PROPERTY_NATIONALITY = 'nationality';
     const PROPERTY_ADDRESS = 'address';
 
     const GENDER_MALE = 1;
@@ -35,6 +36,8 @@ class Profile extends \application\discovery\module\profile\Profile
             case self :: GENDER_FEMALE :
                 return 'Female';
                 break;
+            default :
+                return 'Unknown';
         }
     }
 
@@ -44,6 +47,29 @@ class Profile extends \application\discovery\module\profile\Profile
     function get_birth()
     {
         return $this->get_default_property(self :: PROPERTY_BIRTH);
+    }
+
+    /**
+     * @return multitype:Nationality
+     */
+    function get_nationality()
+    {
+        return $this->get_default_property(self :: PROPERTY_NATIONALITY);
+    }
+
+    /**
+     * @return string
+     */
+    function get_nationality_string()
+    {
+        $nationalities = array();
+
+        foreach($this->get_nationality() as $nationality)
+        {
+            $nationalities[] = $nationality->get_nationality();
+        }
+
+        return implode(', ', $nationalities);
     }
 
     /**
@@ -71,6 +97,14 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     * @param multitype:Nationality $nationality
+     */
+    function set_nationality($nationality)
+    {
+        $this->set_default_property(self :: PROPERTY_NATIONALITY, $nationality);
+    }
+
+    /**
      * @param multitype:Address $address
      */
     function set_address($address)
@@ -79,12 +113,23 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     * @param Nationality $nationality
+     */
+    function add_nationality(Nationality $nationality)
+    {
+        $nationalities = $this->get_nationality();
+        $nationalities[] = $nationality;
+        $this->set_nationality($nationalities);
+    }
+
+    /**
      * @param Address $address
      */
     function add_address(Address $address)
     {
-        $addresses &= $this->get_address();
+        $addresses = $this->get_address();
         $addresses[] = $address;
+        $this->set_address($addresses);
     }
 
     /**
@@ -94,6 +139,7 @@ class Profile extends \application\discovery\module\profile\Profile
     {
         $extended_property_names[] = self :: PROPERTY_GENDER;
         $extended_property_names[] = self :: PROPERTY_BIRTH;
+        $extended_property_names[] = self :: PROPERTY_NATIONALITY;
         $extended_property_names[] = self :: PROPERTY_ADDRESS;
 
         return parent :: get_default_property_names($extended_property_names);

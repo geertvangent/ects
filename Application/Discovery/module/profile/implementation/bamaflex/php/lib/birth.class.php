@@ -136,15 +136,16 @@ class Birth extends DataClass
      */
     function __toString()
     {
-        $birth_date = array();
-        $birth_date[] = $this->get_formatted_date();
+        $birth_date = $this->get_formatted_date();
 
         if ($this->has_location())
         {
-            $birth_date[] = $this->get_location();
+            return Translation :: get('BornIn', array('DATE' => $birth_date, 'PLACE' => $this->get_location()));
         }
-
-        return implode(' ', $birth_date);
+        else
+        {
+            return $birth_date;
+        }
     }
 }
 ?>

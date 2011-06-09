@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use common\libraries\Theme;
+
 use common\libraries\SortableTableFromArray;
 
 use common\libraries\Utilities;
@@ -21,14 +23,10 @@ class Module extends \application\discovery\module\profile\Module
 
         if ($this->get_profile()->get_birth()->has_date())
         {
-            $properties[Translation :: get('BirthDate')] = $this->get_profile()->get_birth()->get_formatted_date();
-
-            if ($this->get_profile()->get_birth()->has_location())
-            {
-                $properties[Translation :: get('BirthPlace')] = $this->get_profile()->get_birth()->get_location();
-            }
+            $properties[Translation :: get('BirthDate')] = $this->get_profile()->get_birth();
         }
 
+        $properties[Translation :: get('Nationality')] = $this->get_profile()->get_nationality_string();
         $properties[Translation :: get('Gender')] = $this->get_profile()->get_gender_string();
 
         if (count($this->get_profile()->get_address()) == 1)
@@ -69,7 +67,7 @@ class Module extends \application\discovery\module\profile\Module
                 $data[] = $row;
             }
 
-            $html[] = '<div class="content_object">';
+            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/address.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('Addresses');
             $html[] = '</div>';
