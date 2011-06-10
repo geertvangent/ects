@@ -79,7 +79,11 @@ class Module extends \application\discovery\Module
         {
             $row = array();
             $row[] = $enrollment->get_year();
+            $row[] = $enrollment->get_faculty();
             $row[] = $enrollment->get_training();
+            $row[] = $enrollment->get_unified_option();
+            $row[] = $enrollment->get_unified_trajectory();
+            $row[] = $enrollment->get_contract_type_string();
             $data[] = $row;
         }
 
@@ -92,7 +96,11 @@ class Module extends \application\discovery\Module
 
         $table = new SortableTableFromArray($data);
         $table->set_header(0, Translation :: get('Year'));
-        $table->set_header(1, Translation :: get('Training'));
+        $table->set_header(1, Translation :: get('Faculty'));
+        $table->set_header(2, Translation :: get('Training'));
+        $table->set_header(3, Translation :: get('Option'));
+        $table->set_header(4, Translation :: get('Trajectory'));
+        $table->set_header(5, Translation :: get('Contract'));
         $html[] = $table->toHTML();
 
         $html[] = '</div>';

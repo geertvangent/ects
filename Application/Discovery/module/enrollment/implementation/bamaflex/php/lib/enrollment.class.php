@@ -7,129 +7,196 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
 {
     const CLASS_NAME = __CLASS__;
 
-    const PROPERTY_GENDER = 'gender';
-    const PROPERTY_BIRTH = 'birth';
-    const PROPERTY_NATIONALITY = 'nationality';
-    const PROPERTY_ADDRESS = 'address';
+    const PROPERTY_FACULTY = 'faculty';
+    const PROPERTY_CONTRACT_TYPE = 'contract_type';
+    const PROPERTY_TRAJECTORY_TYPE = 'trajectory_type';
+    const PROPERTY_TRAJECTORY = 'trajectory';
+    const PROPERTY_OPTION_CHOICE = 'option_choice';
+    const PROPERTY_GRADUATION_OPTION = 'graduation_option';
 
-    const GENDER_MALE = 1;
-    const GENDER_FEMALE = 2;
+    const CONTRACT_TYPE_DEGREE = 1;
+    const CONTRACT_TYPE_CREDIT = 2;
+    const CONTRACT_TYPE_EXAM_DEGREE = 3;
+    const CONTRACT_TYPE_EXAM_CREDIT = 4;
+
+    const TRAJECTORY_TYPE_TEMPLATE = 1;
+    const TRAJECTORY_TYPE_PERSONAL = 2;
+    const TRAJECTORY_TYPE_INDIVIDUAL = 3;
+    const TRAJECTORY_TYPE_UNKNOWN = 4;
+
+    /**
+     * @return string
+     */
+    function get_faculty()
+    {
+        return $this->get_default_property(self :: PROPERTY_FACULTY);
+    }
 
     /**
      * @return int
      */
-    function get_gender()
+    function get_contract_type()
     {
-        return $this->get_default_property(self :: PROPERTY_GENDER);
+        return $this->get_default_property(self :: PROPERTY_CONTRACT_TYPE);
     }
 
     /**
      * @return string
      */
-    function get_gender_string()
+    function get_contract_type_string()
     {
-        switch ($this->get_gender())
+        switch ($this->get_contract_type())
         {
-            case self :: GENDER_MALE :
-                return 'Male';
+            case self :: CONTRACT_TYPE_DEGREE :
+                return 'Degree';
                 break;
-            case self :: GENDER_FEMALE :
-                return 'Female';
+            case self :: CONTRACT_TYPE_CREDIT :
+                return 'Credit';
                 break;
-            default :
+            case self :: CONTRACT_TYPE_EXAM_DEGREE :
+                return 'ExamDegree';
+                break;
+            case self :: CONTRACT_TYPE_EXAM_CREDIT :
+                return 'ExamCredit';
+                break;
+        }
+    }
+
+    /**
+     * @return int
+     */
+    function get_trajectory_type()
+    {
+        return $this->get_default_property(self :: PROPERTY_TRAJECTORY_TYPE);
+    }
+
+    /**
+     * @return string
+     */
+    function get_trajectory_type_string()
+    {
+        switch ($this->get_contract_type())
+        {
+            case self :: TRAJECTORY_TYPE_TEMPLATE :
+                return 'Template';
+                break;
+            case self :: TRAJECTORY_TYPE_PERSONAL :
+                return 'Personal';
+                break;
+            case self :: TRAJECTORY_TYPE_INDIVIDUAL :
+                return 'Individual';
+                break;
+            case self :: TRAJECTORY_TYPE_UNKNOWN :
                 return 'Unknown';
+                break;
         }
-    }
-
-    /**
-     * @return Birth
-     */
-    function get_birth()
-    {
-        return $this->get_default_property(self :: PROPERTY_BIRTH);
-    }
-
-    /**
-     * @return multitype:Nationality
-     */
-    function get_nationality()
-    {
-        return $this->get_default_property(self :: PROPERTY_NATIONALITY);
     }
 
     /**
      * @return string
      */
-    function get_nationality_string()
+    function get_trajectory()
     {
-        $nationalities = array();
+        return $this->get_default_property(self :: PROPERTY_TRAJECTORY);
+    }
 
-        foreach($this->get_nationality() as $nationality)
+    /**
+     * @return string
+     */
+    function get_unified_trajectory()
+    {
+        if ($this->get_trajectory_type() == self :: TRAJECTORY_TYPE_TEMPLATE)
         {
-            $nationalities[] = $nationality->get_nationality();
+            return $this->get_trajectory();
+        }
+        else
+        {
+            return $this->get_trajectory_type_string();
+        }
+    }
+
+    /**
+     * @return string
+     */
+    function get_option_choice()
+    {
+        return $this->get_default_property(self :: PROPERTY_OPTION_CHOICE);
+    }
+
+    /**
+     * @return string
+     */
+    function get_graduation_option()
+    {
+        return $this->get_default_property(self :: PROPERTY_GRADUATION_OPTION);
+    }
+
+    /**
+     * @return string
+     */
+    function get_unified_option()
+    {
+        $options = array();
+
+        if ($this->get_option_choice())
+        {
+            $options[] = $this->get_option_choice();
         }
 
-        return implode(', ', $nationalities);
+        if ($this->get_graduation_option())
+        {
+            $options[] = $this->get_graduation_option();
+        }
+
+        return implode(' - ', $options);
     }
 
     /**
-     * @return multitype:Address
+     * @param string $faculty
      */
-    function get_address()
+    function set_faculty($faculty)
     {
-        return $this->get_default_property(self :: PROPERTY_ADDRESS);
+        $this->set_default_property(self :: PROPERTY_FACULTY, $faculty);
     }
 
     /**
-     * @param int $gender
+     * @param int $contract_type
      */
-    function set_gender($gender)
+    function set_contract_type($contract_type)
     {
-        $this->set_default_property(self :: PROPERTY_GENDER, $gender);
+        $this->set_default_property(self :: PROPERTY_CONTRACT_TYPE, $contract_type);
     }
 
     /**
-     * @param Birth $birth
+     * @param int $trajectory_type
      */
-    function set_birth(Birth $birth)
+    function set_trajectory_type($trajectory_type)
     {
-        $this->set_default_property(self :: PROPERTY_BIRTH, $birth);
+        $this->set_default_property(self :: PROPERTY_TRAJECTORY_TYPE, $trajectory_type);
     }
 
     /**
-     * @param multitype:Nationality $nationality
+     * @param string $trajectory
      */
-    function set_nationality($nationality)
+    function set_trajectory($trajectory)
     {
-        $this->set_default_property(self :: PROPERTY_NATIONALITY, $nationality);
+        $this->set_default_property(self :: PROPERTY_TRAJECTORY, $trajectory);
     }
 
     /**
-     * @param multitype:Address $address
+     * @param string $option_choice
      */
-    function set_address($address)
+    function set_option_choice($option_choice)
     {
-        $this->set_default_property(self :: PROPERTY_ADDRESS, $address);
+        $this->set_default_property(self :: PROPERTY_OPTION_CHOICE, $option_choice);
     }
 
     /**
-     * @param Nationality $nationality
+     * @param string $graduation_option
      */
-    function add_nationality(Nationality $nationality)
+    function set_graduation_option($graduation_option)
     {
-        $nationalities = $this->get_nationality();
-        $nationalities[] = $nationality;
-        $this->set_nationality($nationalities);
-    }
-
-    /**
-     * @param Address $address
-     */
-    function add_address(Address $address)
-    {
-        $addresses = $this->get_address();
-        $addresses[] = $address;
-        $this->set_address($addresses);
+        $this->set_default_property(self :: PROPERTY_GRADUATION_OPTION, $graduation_option);
     }
 
     /**
@@ -137,10 +204,12 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      */
     static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_GENDER;
-        $extended_property_names[] = self :: PROPERTY_BIRTH;
-        $extended_property_names[] = self :: PROPERTY_NATIONALITY;
-        $extended_property_names[] = self :: PROPERTY_ADDRESS;
+        $extended_property_names[] = self :: PROPERTY_FACULTY;
+        $extended_property_names[] = self :: PROPERTY_CONTRACT_TYPE;
+        $extended_property_names[] = self :: PROPERTY_TRAJECTORY_TYPE;
+        $extended_property_names[] = self :: PROPERTY_TRAJECTORY;
+        $extended_property_names[] = self :: PROPERTY_OPTION_CHOICE;
+        $extended_property_names[] = self :: PROPERTY_GRADUATION_OPTION;
 
         return parent :: get_default_property_names($extended_property_names);
     }
