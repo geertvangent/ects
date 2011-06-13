@@ -141,6 +141,7 @@ class DataSource implements DataManagerInterface
     function retrieve_photo(User $user)
     {
         $photo_path = $user->get_full_picture_path();
+
         $photo_extension = pathinfo($photo_path, PATHINFO_EXTENSION);
         $photo_data = file_get_contents($photo_path);
 
