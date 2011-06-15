@@ -58,12 +58,11 @@ class Module extends \application\discovery\module\enrollment\Module
     function get_enrollment_course_table_headers()
     {
         $headers = array();
-        $headers[] = Translation :: get('Year');
-        $headers[] = Translation :: get('TrajectoryPart');
-        $headers[] = Translation :: get('Credits');
-        $headers[] = Translation :: get('Course');
-        //$headers[] = Translation :: get('Weight');
-
+        $headers[] = array(Translation :: get('Year'), 'class="code"');
+        $headers[] = array(Translation :: get('TrajectoryPart'), 'class="action"');
+        $headers[] = array(Translation :: get('Credits'), 'class="action"');
+        $headers[] = array(Translation :: get('Course'));
+        //$headers[] = array(Translation :: get('Weight'));
 
         return $headers;
     }

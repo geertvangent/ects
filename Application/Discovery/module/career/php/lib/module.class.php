@@ -59,8 +59,8 @@ class Module extends \application\discovery\Module
     function get_table_headers()
     {
         $headers = array();
-        $headers[] = Translation :: get('Year');
-        $headers[] = Translation :: get('Course');
+        $headers[] = array(Translation :: get('Year'), 'class="code"');
+        $headers[] = array(Translation :: get('Course'));
         return $headers;
     }
 
@@ -70,24 +70,31 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-//        $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/career.png);">';
-//        $html[] = '<div class="title">';
-//        $html[] = Translation :: get('Careers');
-//        $html[] = '</div>';
-//
-//        $html[] = '<div class="description">';
+        //        $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/career.png);">';
+        //        $html[] = '<div class="title">';
+        //        $html[] = Translation :: get('Careers');
+        //        $html[] = '</div>';
+        //
+        //        $html[] = '<div class="description">';
+
 
         $table = new SortableTable($this->get_table_data());
 
-        foreach ($this->get_table_headers() as $header_id => $header_name)
+        foreach ($this->get_table_headers() as $header_id => $header)
         {
-            $table->set_header($header_id, $header_name, false);
+            $table->set_header($header_id, $header[0], false);
+
+            if ($header[1])
+            {
+                $table->getHeader()->setColAttributes($header_id, $header[1]);
+            }
         }
 
         $html[] = $table->toHTML();
 
-//        $html[] = '</div>';
-//        $html[] = '</div>';
+        //        $html[] = '</div>';
+        //        $html[] = '</div>';
+
 
         return implode("\n", $html);
     }
