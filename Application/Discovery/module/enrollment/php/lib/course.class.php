@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\career;
+namespace application\discovery\module\enrollment;
 
 use application\discovery\DiscoveryDataManager;
 

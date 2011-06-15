@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\career;
 
+use application\discovery\SortableTable;
+
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Translation;
@@ -21,7 +23,7 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, DiscoveryModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->courses = DataManager :: get_instance($module_instance)->retrieve_root_courses($application->get_user_id());
+        $this->courses = DataManager :: get_instance($module_instance)->retrieve_courses($application->get_user_id());
 
     }
 
@@ -40,11 +42,11 @@ class Module extends \application\discovery\Module
     {
         $data = array();
 
-        foreach ($this->courses as $career)
+        foreach ($this->courses as $course)
         {
             $row = array();
-            $row[] = $career->get_year();
-            $row[] = $career->get_name();
+            $row[] = $course->get_year();
+            $row[] = $course->get_name();
             $data[] = $row;
         }
 
@@ -68,24 +70,24 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-        $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/career.png);">';
-        $html[] = '<div class="title">';
-        $html[] = Translation :: get('Careers');
-        $html[] = '</div>';
+//        $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/career.png);">';
+//        $html[] = '<div class="title">';
+//        $html[] = Translation :: get('Careers');
+//        $html[] = '</div>';
+//
+//        $html[] = '<div class="description">';
 
-        $html[] = '<div class="description">';
-
-        $table = new SortableTableFromArray($this->get_table_data());
+        $table = new SortableTable($this->get_table_data());
 
         foreach ($this->get_table_headers() as $header_id => $header_name)
         {
-            $table->set_header($header_id, $header_name);
+            $table->set_header($header_id, $header_name, false);
         }
 
         $html[] = $table->toHTML();
 
-        $html[] = '</div>';
-        $html[] = '</div>';
+//        $html[] = '</div>';
+//        $html[] = '</div>';
 
         return implode("\n", $html);
     }

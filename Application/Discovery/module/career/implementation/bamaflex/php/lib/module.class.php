@@ -21,15 +21,33 @@ class Module extends \application\discovery\module\career\Module
     {
         $data = array();
 
-        foreach ($this->get_courses() as $career)
+        foreach ($this->get_courses() as $course)
         {
             $row = array();
-            $row[] = $career->get_year();
-            $row[] = $career->get_trajectory_part();
-            $row[] = $career->get_credits();
-            $row[] = $career->get_name();
-            //$row[] = $career->get_weight();
+            $row[] = $course->get_year();
+            $row[] = $course->get_trajectory_part();
+            $row[] = $course->get_credits();
+            $row[] = $course->get_name();
+            //$row[] = $course->get_weight();
+
+
             $data[] = $row;
+
+            if ($course->has_children())
+            {
+                foreach ($course->get_children() as $child)
+                {
+                    $row = array();
+                    $row[] = $child->get_year();
+                    $row[] = $child->get_trajectory_part();
+                    $row[] = $child->get_credits();
+                    $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
+                    //$row[] = $child->get_weight();
+
+
+                    $data[] = $row;
+                }
+            }
         }
 
         return $data;
@@ -46,6 +64,7 @@ class Module extends \application\discovery\module\career\Module
         $headers[] = Translation :: get('Credits');
         $headers[] = Translation :: get('Course');
         //$headers[] = Translation :: get('Weight');
+
 
         return $headers;
     }

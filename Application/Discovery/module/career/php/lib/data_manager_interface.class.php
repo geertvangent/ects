@@ -9,9 +9,9 @@ interface DataManagerInterface
 {
 
     /**
-     * @param int $id
-     * @return multitype:\application\discovery\module\career\Career
+     * @param $id
+     * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Course
      */
-    function retrieve_root_courses($id);
+    function retrieve_courses($id);
 }
 ?>

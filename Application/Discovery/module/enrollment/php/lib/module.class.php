@@ -1,13 +1,21 @@
 <?php
 namespace application\discovery\module\enrollment;
 
+use common\libraries\Path;
+
+use common\libraries\WebApplication;
+
+use common\libraries\ResourceManager;
+
+use common\libraries\ToolbarItem;
+
 use common\libraries\Theme;
-use common\libraries\SortableTableFromArray;
 use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
 
+use application\discovery\SortableTable;
 use application\discovery\DiscoveryModuleInstance;
 use application\discovery\module\profile\DataManager;
 
@@ -33,38 +41,45 @@ class Module extends \application\discovery\Module
         return $this->enrollments;
     }
 
-    //    /**
-    //     * @return multitype:string
-    //     */
-    //    function get_general_properties()
-    //    {
-    //        $properties = array();
-    //        $properties[Translation :: get('FirstName')] = $this->profile->get_name()->get_first_names();
-    //        $properties[Translation :: get('LastName')] = $this->profile->get_name()->get_last_name();
-    //        $properties[Translation :: get('Language')] = $this->profile->get_language();
-    //
-    //        foreach ($this->profile->get_identification_code() as $identification_code)
-    //        {
-    //            $properties[Translation :: get($identification_code->get_type_string())] = $identification_code->get_code();
-    //        }
-    //
-    //        if (count($this->profile->get_communication()) == 1)
-    //        {
-    //            $communication = $this->profile->get_communication();
-    //            $communication = $communication[0];
-    //            $properties[Translation :: get('CommunicationNumber')] = $communication->get_number() . ' (' . $communication->get_device_string() . ')';
-    //        }
-    //
-    //        if (count($this->profile->get_email()) == 1)
-    //        {
-    //            $email = $this->profile->get_email();
-    //            $email = $email[0];
-    //            $properties[Translation :: get('Email')] = $email->get_address() . ' (' . $email->get_type_string() . ')';
-    //        }
-    //
-    //        return $properties;
-    //    }
+    /**
+     * @param multitype:Course $courses
+     */
+    function process_enrollment_course_data($courses)
+    {
+        $data = array();
 
+        foreach ($courses as $course)
+        {
+            $row = array();
+            $row[] = $course->get_year();
+            $row[] = $course->get_name();
+            $data[] = $row;
+
+            if ($course->has_children())
+            {
+                foreach ($course->get_children() as $child)
+                {
+                    $row = array();
+                    $row[] = $child->get_year();
+                    $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
+                    $data[] = $row;
+                }
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * @return multitype:string
+     */
+    function get_enrollment_course_table_headers()
+    {
+        $headers = array();
+        $headers[] = Translation :: get('Year');
+        $headers[] = Translation :: get('Course');
+        return $headers;
+    }
 
     /* (non-PHPdoc)
      * @see application\discovery.Module::render()
@@ -75,7 +90,7 @@ class Module extends \application\discovery\Module
 
         $data = array();
 
-        foreach ($this->enrollments as $enrollment)
+        foreach ($this->enrollments as $key => $enrollment)
         {
             $row = array();
             $row[] = $enrollment->get_year();
@@ -84,27 +99,50 @@ class Module extends \application\discovery\Module
             $row[] = $enrollment->get_unified_option();
             $row[] = $enrollment->get_unified_trajectory();
             $row[] = $enrollment->get_contract_type_string();
+
+            $class = 'enrollment" style="" id="enrollment_' . $key;
+            $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
+            $row[] = $details_action->as_html();
             $data[] = $row;
         }
 
-        $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/enrollment.png);">';
-        $html[] = '<div class="title">';
-        $html[] = Translation :: get('Enrollments');
-        $html[] = '</div>';
-
-        $html[] = '<div class="description">';
-
-        $table = new SortableTableFromArray($data);
-        $table->set_header(0, Translation :: get('Year'));
-        $table->set_header(1, Translation :: get('Faculty'));
-        $table->set_header(2, Translation :: get('Training'));
-        $table->set_header(3, Translation :: get('Option'));
-        $table->set_header(4, Translation :: get('Trajectory'));
-        $table->set_header(5, Translation :: get('Contract'));
+        $table = new SortableTable($data);
+        $table->set_header(0, Translation :: get('Year'), false);
+        $table->set_header(1, Translation :: get('Faculty'), false);
+        $table->set_header(2, Translation :: get('Training'), false);
+        $table->set_header(3, Translation :: get('Option'), false);
+        $table->set_header(4, Translation :: get('Trajectory'), false);
+        $table->set_header(5, Translation :: get('Contract'), false);
+        $table->set_header(6, '', false);
         $html[] = $table->toHTML();
 
-        $html[] = '</div>';
-        $html[] = '</div>';
+        foreach ($this->enrollments as $key => $enrollment)
+        {
+            $courses = DataManager :: get_instance($this->get_module_instance())->retrieve_courses($enrollment, $this->get_application()->get_user_id());
+
+            $html[] = '<div class="enrollment_courses" id="enrollment_' . $key . '_courses" style="display: none;">';
+            $html[] = '<h4>';
+            $html[] = $enrollment;
+            $html[] = '</h4>';
+
+            $table = new SortableTable($this->process_enrollment_course_data($courses));
+
+            foreach ($this->get_enrollment_course_table_headers() as $header_id => $header_name)
+            {
+                $table->set_header($header_id, $header_name, false);
+            }
+
+            $header = $table->getHeader()->setColAttributes(0, 'class="code"');
+            $header = $table->getHeader()->setColAttributes(1, 'class="action"');
+            $header = $table->getHeader()->setColAttributes(2, 'class="action"');
+
+            $html[] = $table->toHTML();
+
+            $html[] = '</div>';
+        }
+
+        $path = Path :: namespace_to_full_path(__NAMESPACE__, true) . 'resources/javascript/enrollment.js';
+        $html[] = ResourceManager :: get_instance()->get_resource_html($path);
 
         return implode("\n", $html);
     }

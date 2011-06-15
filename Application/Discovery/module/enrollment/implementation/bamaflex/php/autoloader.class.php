@@ -13,7 +13,7 @@ class Autoloader
     static function load($classname)
     {
         $list = array('enrollment' => 'enrollment', 'module' => 'module',
-                'settings_connector' => '../settings/settings_connector');
+                'settings_connector' => '../settings/settings_connector', 'course' => 'course');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);
 

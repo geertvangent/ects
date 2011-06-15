@@ -221,5 +221,22 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     {
         return DiscoveryDataManager :: get_instance();
     }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        $string = array();
+        $string[] = $this->get_year();
+        $string[] = $this->get_training();
+
+        if ($this->get_unified_option())
+        {
+            $string[] = $this->get_unified_option();
+        }
+
+        return implode(' | ', $string);
+    }
 }
 ?>

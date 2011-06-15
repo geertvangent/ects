@@ -20,7 +20,7 @@ class Autoloader
                 'module' => 'module', 'discovery_module_instance' => 'discovery_module_instance',
                 'discovery_module_instance_setting' => 'discovery_module_instance_setting',
                 'discovery_item' => 'discovery_item', 'data_source_instance' => 'data_source_instance',
-                'data_source_instance_setting' => 'data_source_instance_setting',
+                'data_source_instance_setting' => 'data_source_instance_setting', 'sortable_table' => 'sortable_table',
                 'discovery_module_instance_manager' => 'discovery_module_instance_manager/discovery_module_instance_manager');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);

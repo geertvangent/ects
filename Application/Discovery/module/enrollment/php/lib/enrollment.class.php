@@ -61,5 +61,16 @@ class Enrollment extends DiscoveryItem
     {
         return DiscoveryDataManager :: get_instance();
     }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        $string = array();
+        $string[] = $this->get_year();
+        $string[] = $this->get_training();
+        return implode(' | ', $string);
+    }
 }
 ?>

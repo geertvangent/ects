@@ -13,5 +13,11 @@ interface DataManagerInterface
      * @return multitype:\application\discovery\module\enrollment\Enrollment
      */
     function retrieve_enrollments($id);
+
+    /**
+     * @param Enrollment $enrollment
+     * @return multitype:\application\discovery\module\enrollment\Course
+     */
+    function retrieve_courses(Enrollment $enrollment, $id);
 }
 ?>
