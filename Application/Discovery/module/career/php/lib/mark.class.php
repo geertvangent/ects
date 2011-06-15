@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\career;
 
+use application\discovery\DiscoveryDataManager;
+
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
@@ -59,6 +61,7 @@ class Mark extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_MOMENT, $moment);
     }
+
     /**
      * Returns the result of this Mark.
      * @return string The result.
@@ -76,6 +79,7 @@ class Mark extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_RESULT, $result);
     }
+
     /**
      * Returns the status of this Mark.
      * @return string The status.

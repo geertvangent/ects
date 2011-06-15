@@ -12,6 +12,6 @@ interface DataManagerInterface
      * @param int $id
      * @return multitype:\application\discovery\module\career\Career
      */
-    function retrieve_careers($id);
+    function retrieve_root_courses($id);
 }
 ?>

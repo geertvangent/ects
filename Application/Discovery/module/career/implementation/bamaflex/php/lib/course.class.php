@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
+use application\discovery\DiscoveryDataManager;
+
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
@@ -8,7 +10,7 @@ use common\libraries\DataClass;
  * application.discovery.module.career.implementation.bamaflex.discovery
  * @author Hans De Bisschop
  */
-class Course extends DataClass
+class Course extends \application\discovery\module\career\Course
 {
     const CLASS_NAME = __CLASS__;
 
@@ -59,6 +61,7 @@ class Course extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_TRAJECTORY_PART, $trajectory_part);
     }
+
     /**
      * Returns the credits of this Course.
      * @return int The credits.
@@ -76,6 +79,7 @@ class Course extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_CREDITS, $credits);
     }
+
     /**
      * Returns the weight of this Course.
      * @return int The weight.

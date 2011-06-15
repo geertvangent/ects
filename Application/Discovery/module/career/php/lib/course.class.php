@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\career;
 
+use application\discovery\DiscoveryDataManager;
+
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
@@ -18,6 +20,7 @@ class Course extends DataClass
     const PROPERTY_YEAR = 'year';
     const PROPERTY_NAME = 'name';
     const PROPERTY_MARKS = 'marks';
+    const PROPERTY_CHILDREN = 'children';
 
     /**
      * Get the default properties
@@ -29,6 +32,7 @@ class Course extends DataClass
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_MARKS;
+        $extended_property_names[] = self :: PROPERTY_CHILDREN;
 
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -59,6 +63,7 @@ class Course extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
+
     /**
      * Returns the name of this Course.
      * @return string The name.
@@ -76,6 +81,7 @@ class Course extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
+
     /**
      * Returns the marks of this Course.
      * @return multitype:Mark The marks.
@@ -92,6 +98,34 @@ class Course extends DataClass
     function set_marks($marks)
     {
         $this->set_default_property(self :: PROPERTY_MARKS, $marks);
+    }
+
+    /**
+     * Returns the children of this Course.
+     * @return multitype:Course The children.
+     */
+    function get_children()
+    {
+        return $this->get_default_property(self :: PROPERTY_CHILDREN);
+    }
+
+    /**
+     * Sets the children of this Course.
+     * @param multitype:Course $children
+     */
+    function set_children($children)
+    {
+        $this->set_default_property(self :: PROPERTY_CHILDREN, $children);
+    }
+
+    /**
+     * @param Course $course
+     */
+    function add_child(Course $course)
+    {
+        $courses = $this->get_children();
+        $courses[] = $course;
+        $this->set_children($courses);
     }
 
     /**
