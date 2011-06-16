@@ -91,6 +91,40 @@ class Course extends DataClass
         return $this->get_default_property(self :: PROPERTY_MARKS);
     }
 
+    function get_mark_by_moment_id($moment_id)
+    {
+//        if ($this->has_children())
+//        {
+//            $total_credits = 0;
+//            $total_results = 0;
+//
+//            foreach ($this->get_children() as $child)
+//            {
+//                foreach ($child->get_marks() as $mark)
+//                {
+//                    if ($mark->get_moment() == $moment_id && !is_null($mark->get_result()))
+//                    {
+//                        $total_credits += $child->get_credits();
+//                        $total_results += ($mark->get_result() * $child->get_credits());
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            return Mark :: factory($moment_id, ($total_results / $total_credits), 'McDuck');
+//        }
+
+        foreach ($this->get_marks() as $mark)
+        {
+            if ($mark->get_moment() == $moment_id)
+            {
+                return $mark;
+            }
+        }
+
+        return Mark :: factory($moment_id);
+    }
+
     /**
      * Sets the marks of this Course.
      * @param multitype:Mark $marks
@@ -126,6 +160,16 @@ class Course extends DataClass
         $courses = $this->get_children();
         $courses[] = $course;
         $this->set_children($courses);
+    }
+
+    /**
+     * @param Mark $mark
+     */
+    function add_mark(Mark $mark)
+    {
+        $marks = $this->get_marks();
+        $marks[] = $mark;
+        $this->set_marks($marks);
     }
 
     /**

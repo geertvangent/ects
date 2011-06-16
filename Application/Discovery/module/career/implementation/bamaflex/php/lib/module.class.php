@@ -30,6 +30,10 @@ class Module extends \application\discovery\module\career\Module
             $row[] = $course->get_name();
             //$row[] = $course->get_weight();
 
+            foreach ($this->get_mark_moments() as $mark_moment)
+            {
+                $row[] = $course->get_mark_by_moment_id($mark_moment->get_id())->get_result();
+            }
 
             $data[] = $row;
 
@@ -44,6 +48,10 @@ class Module extends \application\discovery\module\career\Module
                     $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
                     //$row[] = $child->get_weight();
 
+                    foreach ($this->get_mark_moments() as $mark_moment)
+                    {
+                        $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_result();
+                    }
 
                     $data[] = $row;
                 }
@@ -65,6 +73,12 @@ class Module extends \application\discovery\module\career\Module
         $headers[] = array(Translation :: get('Course'));
         //$headers[] = array(Translation :: get('Weight'));
 
+
+        foreach ($this->get_mark_moments() as $mark_moment)
+        {
+            $headers[] = array($mark_moment->get_name());
+        }
+
         return $headers;
     }
 
@@ -75,6 +89,7 @@ class Module extends \application\discovery\module\career\Module
     {
         $html = array();
         $html[] = parent :: render();
+
         //
         //        if (count($this->get_career()->get_address()) > 1)
         //        {

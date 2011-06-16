@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\career;
 
-use application\discovery\SortableTable;
-
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Translation;
@@ -10,6 +8,7 @@ use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
 
+use application\discovery\SortableTable;
 use application\discovery\DiscoveryModuleInstance;
 use application\discovery\module\profile\DataManager;
 
@@ -20,10 +19,16 @@ class Module extends \application\discovery\Module
      */
     private $courses;
 
+    /**
+     * @var multitype:\application\discovery\module\career\MarkMoment
+     */
+    private $mark_moments;
+
     function __construct(Application $application, DiscoveryModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
         $this->courses = DataManager :: get_instance($module_instance)->retrieve_courses($application->get_user_id());
+        $this->mark_moments = DataManager :: get_instance($module_instance)->retrieve_mark_moments($application->get_user_id());
 
     }
 
@@ -33,6 +38,14 @@ class Module extends \application\discovery\Module
     function get_courses()
     {
         return $this->courses;
+    }
+
+    /**
+     * @return multitype:\application\discovery\module\career\MarkMoment
+     */
+    function get_mark_moments()
+    {
+        return $this->mark_moments;
     }
 
     /**
@@ -61,6 +74,12 @@ class Module extends \application\discovery\Module
         $headers = array();
         $headers[] = array(Translation :: get('Year'), 'class="code"');
         $headers[] = array(Translation :: get('Course'));
+
+        foreach ($this->get_mark_moments() as $mark_moment)
+        {
+            $headers[] = array($mark_moment->get_name());
+        }
+
         return $headers;
     }
 

@@ -105,4 +105,13 @@ class Mark extends DataClass
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
+
+    static function factory($moment_id = 0, $result = '-', $status = '-')
+    {
+        $mark = new self();
+        $mark->set_moment($moment_id);
+        $mark->set_result($result);
+        $mark->set_status($status);
+        return $mark;
+    }
 }

@@ -13,7 +13,7 @@ class Autoloader
     static function load($classname)
     {
         $list = array('data_manager' => 'data_manager', 'data_manager_interface' => 'data_manager_interface',
-                'course' => 'course', 'module' => 'module');
+                'course' => 'course', 'module' => 'module', 'mark' => 'mark', 'mark_moment' => 'mark_moment');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);
 

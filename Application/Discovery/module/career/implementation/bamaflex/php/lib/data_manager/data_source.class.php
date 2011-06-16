@@ -1,6 +1,10 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
+use application\discovery\module\career\Mark;
+
+use application\discovery\module\career\MarkMoment;
+
 use user\UserDataManager;
 
 use application\discovery\module\career\Photo;
@@ -14,6 +18,7 @@ use MDB2_Error;
 
 class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
 {
+    private $mark_moments;
 
     /**
      * @param int $id
@@ -30,6 +35,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
+
+        $this->mark_moments = $this->retrieve_mark_moments($id);
 
         $courses = array();
 
@@ -73,7 +80,76 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_credits($result->credits);
         $course->set_weight($result->weight);
 
+        foreach($this->mark_moments as $moment)
+        {
+            $course->add_mark($this->retrieve_mark($result->id, $moment->get_id()));
+        }
+
         return $course;
+    }
+
+    /**
+     * @param string $user_id
+     * @return multitype:\application\discovery\module\career\MarkMoment
+     */
+    function retrieve_mark_moments($user_id)
+    {
+        $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+        $official_code = $user->get_official_code();
+
+        $query = 'SELECT DISTINCT [moment_id], [moment_name], [moment_order] FROM [dbo].[v_discovery_mark_basic] ';
+        $query .= 'WHERE [person_id] = ' . $official_code . ' ';
+        $query .= 'ORDER BY [moment_order]';
+
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+
+        $mark_moments = array();
+
+        if (! $results instanceof MDB2_Error)
+        {
+            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            {
+                $mark_moment = new MarkMoment();
+                $mark_moment->set_id($result->moment_id);
+                $mark_moment->set_name($result->moment_name);
+
+                $mark_moments[$result->moment_id] = $mark_moment;
+            }
+        }
+
+        return $mark_moments;
+    }
+
+    /**
+     * @param string $user_id
+     * @return multitype:\application\discovery\module\career\Mark
+     */
+    function retrieve_mark($course_id, $moment_id)
+    {
+        $query = 'SELECT [result], [status_code], [moment_id] FROM [dbo].[v_discovery_mark_basic] ';
+        $query .= 'WHERE [enrollment_programme_id] = ' . $course_id . ' AND [moment_id] = ' . $moment_id . ' ';
+
+        $statement = $this->get_connection()->prepare($query);
+        $result = $statement->execute();
+
+        $mark_moments = array();
+
+        if (! $result instanceof MDB2_Error)
+        {
+            $result = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+
+            $mark = new Mark();
+            $mark->set_moment($result->moment_id);
+            $mark->set_result($result->result);
+            $mark->set_status($result->status_code);
+
+            return $mark;
+        }
+        else
+        {
+            return Mark :: factory($moment_id);
+        }
     }
 }
 ?>
