@@ -62,7 +62,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $official_code = $user->get_official_code();
 
         $query = 'SELECT * FROM [dbo].[v_discovery_career_basic] ';
-        $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . 41783 . ' AND enrollment_id = ' . $enrollment->get_id() . ' ';
+        $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' AND enrollment_id = ' . $enrollment->get_id() . ' ';
         $query .= 'ORDER BY year, trajectory_part, name';
 
         $statement = $this->get_connection()->prepare($query);
