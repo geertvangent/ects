@@ -7,6 +7,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
 {
     const CLASS_NAME = __CLASS__;
 
+    const PROPERTY_SOURCE = 'source';
     const PROPERTY_FACULTY = 'faculty';
     const PROPERTY_CONTRACT_TYPE = 'contract_type';
     const PROPERTY_TRAJECTORY_TYPE = 'trajectory_type';
@@ -23,6 +24,14 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const TRAJECTORY_TYPE_PERSONAL = 2;
     const TRAJECTORY_TYPE_INDIVIDUAL = 3;
     const TRAJECTORY_TYPE_UNKNOWN = 4;
+
+    /**
+     * @return int
+     */
+    function get_source()
+    {
+        return $this->get_default_property(self :: PROPERTY_SOURCE);
+    }
 
     /**
      * @return string
@@ -152,6 +161,14 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     * @param int $source
+     */
+    function set_source($source)
+    {
+        $this->set_default_property(self :: PROPERTY_SOURCE, $source);
+    }
+
+    /**
      * @param string $faculty
      */
     function set_faculty($faculty)
@@ -204,6 +221,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      */
     static function get_default_property_names($extended_property_names = array())
     {
+        $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_FACULTY;
         $extended_property_names[] = self :: PROPERTY_CONTRACT_TYPE;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_TYPE;

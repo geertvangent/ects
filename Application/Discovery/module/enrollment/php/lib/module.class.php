@@ -2,13 +2,9 @@
 namespace application\discovery\module\enrollment;
 
 use common\libraries\Path;
-
 use common\libraries\WebApplication;
-
 use common\libraries\ResourceManager;
-
 use common\libraries\ToolbarItem;
-
 use common\libraries\Theme;
 use common\libraries\Translation;
 use common\libraries\PropertiesTable;
@@ -94,11 +90,7 @@ class Module extends \application\discovery\Module
         {
             $row = array();
             $row[] = $enrollment->get_year();
-            $row[] = $enrollment->get_faculty();
             $row[] = $enrollment->get_training();
-            $row[] = $enrollment->get_unified_option();
-            $row[] = $enrollment->get_unified_trajectory();
-            $row[] = $enrollment->get_contract_type_string();
 
             $class = 'enrollment" style="" id="enrollment_' . $key;
             $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
@@ -108,11 +100,7 @@ class Module extends \application\discovery\Module
 
         $table = new SortableTable($data);
         $table->set_header(0, Translation :: get('Year'), false);
-        $table->set_header(1, Translation :: get('Faculty'), false);
         $table->set_header(2, Translation :: get('Training'), false);
-        $table->set_header(3, Translation :: get('Option'), false);
-        $table->set_header(4, Translation :: get('Trajectory'), false);
-        $table->set_header(5, Translation :: get('Contract'), false);
         $table->set_header(6, '', false);
         $html[] = $table->toHTML();
 

@@ -25,7 +25,7 @@ class Module extends \application\discovery\module\career\Module
         {
             $row = array();
             $row[] = $course->get_year();
-            $row[] = $course->get_trajectory_part();
+            //$row[] = $course->get_trajectory_part();
             $row[] = $course->get_credits();
             $row[] = $course->get_name();
             //$row[] = $course->get_weight();
@@ -33,6 +33,7 @@ class Module extends \application\discovery\module\career\Module
             foreach ($this->get_mark_moments() as $mark_moment)
             {
                 $row[] = $course->get_mark_by_moment_id($mark_moment->get_id())->get_result();
+                $row[] = $course->get_mark_by_moment_id($mark_moment->get_id())->get_status();
             }
 
             $data[] = $row;
@@ -43,7 +44,7 @@ class Module extends \application\discovery\module\career\Module
                 {
                     $row = array();
                     $row[] = $child->get_year();
-                    $row[] = $child->get_trajectory_part();
+                    //$row[] = $child->get_trajectory_part();
                     $row[] = $child->get_credits();
                     $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
                     //$row[] = $child->get_weight();
@@ -51,6 +52,7 @@ class Module extends \application\discovery\module\career\Module
                     foreach ($this->get_mark_moments() as $mark_moment)
                     {
                         $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_result();
+                        $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_status();
                     }
 
                     $data[] = $row;
@@ -68,7 +70,7 @@ class Module extends \application\discovery\module\career\Module
     {
         $headers = array();
         $headers[] = array(Translation :: get('Year'), 'class="code"');
-        $headers[] = array(Translation :: get('TrajectoryPart'), 'class="action"');
+        //$headers[] = array(Translation :: get('TrajectoryPart'), 'class="action"');
         $headers[] = array(Translation :: get('Credits'), 'class="action"');
         $headers[] = array(Translation :: get('Course'));
         //$headers[] = array(Translation :: get('Weight'));
@@ -77,6 +79,7 @@ class Module extends \application\discovery\module\career\Module
         foreach ($this->get_mark_moments() as $mark_moment)
         {
             $headers[] = array($mark_moment->get_name());
+            $headers[] = array();
         }
 
         return $headers;

@@ -24,7 +24,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT * FROM [dbo].[v_discovery_enrollment_basic] WHERE person_id = ' . $official_code . ' --ORDER BY year DESC';
+        $query = 'SELECT * FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year, id';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
@@ -36,6 +36,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
             {
                 $enrollment = new Enrollment();
+                $enrollment->set_source($result->source);
                 $enrollment->set_id($result->id);
                 $enrollment->set_year($this->convert_to_utf8($result->year));
                 $enrollment->set_training($this->convert_to_utf8($result->training));
@@ -61,8 +62,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT * FROM [dbo].[v_discovery_career_basic] ';
-        $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' AND enrollment_id = ' . $enrollment->get_id() . ' ';
+        $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
+        $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' AND enrollment_id = ' . $enrollment->get_id() . ' AND source = "' . $enrollment->get_source() . '" ';
         $query .= 'ORDER BY year, trajectory_part, name';
 
         $statement = $this->get_connection()->prepare($query);
@@ -78,7 +79,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
                 //Check whether the course has children, if so: add them.
                 $query = 'SELECT * FROM [dbo].[v_discovery_career_basic] ';
-                $query .= 'WHERE programme_parent_id = ' . $result->programme_id . ' AND person_id = ' . $result->person_id . ' AND enrollment_id = ' . $enrollment->get_id() . ' ';
+                $query .= 'WHERE programme_parent_id = ' . $result->programme_id . ' AND person_id = ' . $result->person_id . ' AND enrollment_id = ' . $enrollment->get_id() . ' AND source = "' . $enrollment->get_source() . '" ';
                 $query .= 'ORDER BY year, trajectory_part, name';
 
                 $statement = $this->get_connection()->prepare($query);
