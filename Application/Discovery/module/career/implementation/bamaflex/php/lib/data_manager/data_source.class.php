@@ -46,7 +46,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
                 //Check whether the course has children, if so: add them.
                 $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
-                $query .= 'WHERE programme_parent_id = ' . $result->programme_id . ' AND person_id = ' . $result->person_id . ' ';
+                $query .= 'WHERE programme_parent_id = ' . $result->programme_id . ' AND person_id = ' . $result->person_id . ' AND enrollment_id = "'. $result->enrollment_id .'" ';
                 $query .= 'ORDER BY year, trajectory_part, name';
 
                 $statement = $this->get_connection()->prepare($query);
@@ -71,7 +71,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function result_to_course($result)
     {
         $course = new Course();
-        $course->set_id($result->source);
+        $course->set_source($result->source);
         $course->set_id($result->id);
         $course->set_year($this->convert_to_utf8($result->year));
         $course->set_name($this->convert_to_utf8($result->name));
@@ -79,12 +79,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_credits($result->credits);
         $course->set_weight($result->weight);
 
-        if ($result->source == 1)
+        foreach ($this->mark_moments as $moment)
         {
-            foreach ($this->mark_moments as $moment)
-            {
-                $course->add_mark($this->retrieve_mark($result->id, $moment->get_id()));
-            }
+            $course->add_mark($this->retrieve_mark($result->source, $result->id, $moment->get_id()));
         }
 
         return $course;
@@ -99,7 +96,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_basic] ';
+        $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_advanced] ';
         $query .= 'WHERE [person_id] = ' . $official_code . ' ';
         $query .= 'ORDER BY [try_order]';
 
@@ -127,10 +124,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param string $user_id
      * @return multitype:\application\discovery\module\career\Mark
      */
-    function retrieve_mark($course_id, $moment_id)
+    function retrieve_mark($source, $course_id, $moment_id)
     {
-        $query = 'SELECT [result], [status_code], [try_id] FROM [dbo].[v_discovery_mark_basic] ';
-        $query .= 'WHERE [enrollment_programme_id] = ' . $course_id . ' AND [try_id] = ' . $moment_id . ' ';
+        $query = 'SELECT [result], [status_code], [try_id] FROM [dbo].[v_discovery_mark_advanced] ';
+        $query .= 'WHERE [source] = '. $source .' AND [enrollment_programme_id] = \'' . $course_id . '\' AND [try_id] = ' . $moment_id . ' ';
 
         $statement = $this->get_connection()->prepare($query);
         $result = $statement->execute();

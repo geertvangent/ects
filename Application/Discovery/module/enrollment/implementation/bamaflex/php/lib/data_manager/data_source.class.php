@@ -78,8 +78,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 $course = $this->result_to_course($result);
 
                 //Check whether the course has children, if so: add them.
-                $query = 'SELECT * FROM [dbo].[v_discovery_career_basic] ';
-                $query .= 'WHERE programme_parent_id = ' . $result->programme_id . ' AND person_id = ' . $result->person_id . ' AND enrollment_id = ' . $enrollment->get_id() . ' AND source = "' . $enrollment->get_source() . '" ';
+                $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
+                $query .= 'WHERE programme_parent_id = ' . $result->programme_id . ' AND person_id = ' . $result->person_id . ' AND enrollment_id = ' . $result->enrollment_id . ' AND source = "' . $enrollment->get_source() . '" ';
                 $query .= 'ORDER BY year, trajectory_part, name';
 
                 $statement = $this->get_connection()->prepare($query);

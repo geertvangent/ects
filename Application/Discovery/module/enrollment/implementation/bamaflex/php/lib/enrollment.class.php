@@ -84,7 +84,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      */
     function get_trajectory_type_string()
     {
-        switch ($this->get_contract_type())
+        switch ($this->get_trajectory_type())
         {
             case self :: TRAJECTORY_TYPE_TEMPLATE :
                 return 'Template';

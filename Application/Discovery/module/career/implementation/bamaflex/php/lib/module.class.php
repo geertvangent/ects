@@ -32,8 +32,9 @@ class Module extends \application\discovery\module\career\Module
 
             foreach ($this->get_mark_moments() as $mark_moment)
             {
-                $row[] = $course->get_mark_by_moment_id($mark_moment->get_id())->get_result();
-                $row[] = $course->get_mark_by_moment_id($mark_moment->get_id())->get_status();
+                $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
+                $row[] = $mark->get_visual_result();
+                $row[] = $mark->get_status();
             }
 
             $data[] = $row;

@@ -80,6 +80,12 @@ class Mark extends DataClass
         $this->set_default_property(self :: PROPERTY_RESULT, $result);
     }
 
+    function get_visual_result()
+    {
+//        return $this->get_result();
+        return (is_numeric($this->get_result()) ? (float) $this->get_result() : $this->get_result());
+    }
+
     /**
      * Returns the status of this Mark.
      * @return string The status.
