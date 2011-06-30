@@ -17,10 +17,10 @@ class Course extends \application\discovery\module\career\Course
     /**
      * Course properties
      */
-    const PROPERTY_SOURCE = 'source';
     const PROPERTY_TRAJECTORY_PART = 'trajectory_part';
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_WEIGHT = 'weight';
+    const PROPERTY_ENROLLMENT_ID = 'enrollment_id';
 
     /**
      * Get the default properties
@@ -29,10 +29,10 @@ class Course extends \application\discovery\module\career\Course
      */
     static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_PART;
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_WEIGHT;
+        $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
 
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -44,22 +44,6 @@ class Course extends \application\discovery\module\career\Course
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
-    }
-
-    /**
-     * @return int
-     */
-    function get_source()
-    {
-        return $this->get_default_property(self :: PROPERTY_SOURCE);
-    }
-
-    /**
-     * @param int $source
-     */
-    function set_source($source)
-    {
-        $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
 
     /**
@@ -114,6 +98,24 @@ class Course extends \application\discovery\module\career\Course
     function set_weight($weight)
     {
         $this->set_default_property(self :: PROPERTY_WEIGHT, $weight);
+    }
+
+    /**
+     * Returns the enrollment id of this Course.
+     * @return int The enrollment id.
+     */
+    function get_enrollment_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_ENROLLMENT_ID);
+    }
+
+    /**
+     * Sets the enrollment id of this Course.
+     * @param int $enrollment_id
+     */
+    function set_enrollment_id($enrollment_id)
+    {
+        $this->set_default_property(self :: PROPERTY_ENROLLMENT_ID, $enrollment_id);
     }
 
     /**

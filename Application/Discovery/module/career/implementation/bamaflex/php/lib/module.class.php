@@ -1,6 +1,14 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
+use application\discovery\SortableTable;
+
+use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
+
+use common\libraries\DynamicTabsRenderer;
+
+use common\libraries\DynamicContentTab;
+
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Utilities;
@@ -15,46 +23,45 @@ class Module extends \application\discovery\module\career\Module
     /**
      * @return multitype:multitype:string
      */
-    function get_table_data()
+    function get_table_data($enrollment)
     {
         $data = array();
 
         foreach ($this->get_courses() as $course)
         {
-            $row = array();
-            $row[] = $course->get_year();
-            //$row[] = $course->get_trajectory_part();
-            $row[] = $course->get_credits();
-            $row[] = $course->get_name();
-            //$row[] = $course->get_weight();
-
-            foreach ($this->get_mark_moments() as $mark_moment)
+            if ($course->get_enrollment_id() == $enrollment->get_id())
             {
-                $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
-                $row[] = $mark->get_visual_result();
-                $row[] = $mark->get_status();
-            }
+                $row = array();
+                $row[] = $course->get_year();
+                $row[] = $course->get_credits();
+                $row[] = $course->get_name();
 
-            $data[] = $row;
-
-            if ($course->has_children())
-            {
-                foreach ($course->get_children() as $child)
+                foreach ($this->get_mark_moments() as $mark_moment)
                 {
-                    $row = array();
-                    $row[] = $child->get_year();
-                    //$row[] = $child->get_trajectory_part();
-                    $row[] = $child->get_credits();
-                    $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
-                    //$row[] = $child->get_weight();
+                    $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
+                    $row[] = $mark->get_visual_result();
+                    $row[] = $mark->get_status();
+                }
 
-                    foreach ($this->get_mark_moments() as $mark_moment)
+                $data[] = $row;
+
+                if ($course->has_children())
+                {
+                    foreach ($course->get_children() as $child)
                     {
-                        $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_result();
-                        $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_status();
-                    }
+                        $row = array();
+                        $row[] = $child->get_year();
+                        $row[] = $child->get_credits();
+                        $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
 
-                    $data[] = $row;
+                        foreach ($this->get_mark_moments() as $mark_moment)
+                        {
+                            $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_result();
+                            $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_status();
+                        }
+
+                        $data[] = $row;
+                    }
                 }
             }
         }
@@ -69,11 +76,8 @@ class Module extends \application\discovery\module\career\Module
     {
         $headers = array();
         $headers[] = array(Translation :: get('Year'), 'class="code"');
-        //$headers[] = array(Translation :: get('TrajectoryPart'), 'class="action"');
         $headers[] = array(Translation :: get('Credits'), 'class="action"');
         $headers[] = array(Translation :: get('Course'));
-        //$headers[] = array(Translation :: get('Weight'));
-
 
         foreach ($this->get_mark_moments() as $mark_moment)
         {
@@ -84,56 +88,73 @@ class Module extends \application\discovery\module\career\Module
         return $headers;
     }
 
+    function get_enrollments($contract_type)
+    {
+        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments($this->get_application()->get_user_id());
+
+        $contract_type_enrollments = array();
+
+        foreach ($enrollments as $enrollment)
+        {
+            if ($enrollment->get_contract_type() == $contract_type)
+            {
+                $contract_type_enrollments[] = $enrollment;
+            }
+        }
+
+        return $contract_type_enrollments;
+    }
+
+    function get_enrollment_courses($contract_type)
+    {
+        $enrollments = $this->get_enrollments($contract_type);
+
+        $html = array();
+
+        foreach ($enrollments as $enrollment)
+        {
+            $html[] = '<h4>' . $enrollment . '</h4>';
+
+            $table = new SortableTable($this->get_table_data($enrollment));
+
+            foreach ($this->get_table_headers() as $header_id => $header)
+            {
+                $table->set_header($header_id, $header[0], false);
+
+                if ($header[1])
+                {
+                    $table->getHeader()->setColAttributes($header_id, $header[1]);
+                }
+            }
+
+            $html[] = $table->toHTML();
+
+        }
+
+        return implode("\n", $html);
+    }
+
     /* (non-PHPdoc)
      * @see application\discovery\module\career.Module::render()
      */
     function render()
     {
         $html = array();
-        $html[] = parent :: render();
 
-        //
-        //        if (count($this->get_career()->get_address()) > 1)
-        //        {
-        //            $data = array();
-        //
-        //            foreach ($this->get_career()->get_address() as $address)
-        //            {
-        //                $row = array();
-        //                $row[] = Translation :: get($address->get_type_string());
-        //                $row[] = $address->get_street();
-        //                $row[] = $address->get_number();
-        //                $row[] = $address->get_box();
-        //                $row[] = $address->get_room();
-        //                $row[] = $address->get_unified_city();
-        //                $row[] = $address->get_unified_city_zip_code();
-        //                $row[] = $address->get_region();
-        //                $row[] = $address->get_country();
-        //                $data[] = $row;
-        //            }
-        //
-        //            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/address.png);">';
-        //            $html[] = '<div class="title">';
-        //            $html[] = Translation :: get('Addresses');
-        //            $html[] = '</div>';
-        //
-        //            $html[] = '<div class="description">';
-        //
-        //            $table = new SortableTableFromArray($data);
-        //            $table->set_header(0, Translation :: get('Type'));
-        //            $table->set_header(1, Translation :: get('Street'));
-        //            $table->set_header(2, Translation :: get('Number'));
-        //            $table->set_header(3, Translation :: get('Box'));
-        //            $table->set_header(4, Translation :: get('Room'));
-        //            $table->set_header(5, Translation :: get('City'));
-        //            $table->set_header(6, Translation :: get('ZipCode'));
-        //            $table->set_header(7, Translation :: get('Region'));
-        //            $table->set_header(8, Translation :: get('Country'));
-        //            $html[] = $table->toHTML();
-        //
-        //            $html[] = '</div>';
-        //            $html[] = '</div>';
-        //        }
+        $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types($this->get_application()->get_user_id());
+
+        $tabs = new DynamicTabsRenderer('enrollment_list');
+        //$tabs->add_tab(new DynamicContentTab(Enrollment :: CONTRACT_TYPE_ALL, Translation :: get('AllContracts'), Theme :: get_image_path() . 'contract_type/0.png', Enrollment :: CONTRACT_TYPE_ALL));
+
+
+        foreach ($contract_types as $contract_type)
+        {
+            $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: get_contract_type_string_static($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollment_courses($contract_type)));
+        }
+
+        $html[] = $tabs->render();
+
+        //        $html[] = parent :: render();
 
 
         return implode("\n", $html);

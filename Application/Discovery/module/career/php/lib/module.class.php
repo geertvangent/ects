@@ -39,9 +39,6 @@ class Module extends \application\discovery\Module
     {
         $this->courses = $this->get_data_manager()->retrieve_courses($this->get_application()->get_user_id());
         $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_application()->get_user_id());
-
-//        $marks = $this->get_data_manager()->retrieve_marks($this->get_application()->get_user_id());
-//        dump($marks);
     }
 
     /**
@@ -101,13 +98,6 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-        //        $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/career.png);">';
-        //        $html[] = '<div class="title">';
-        //        $html[] = Translation :: get('Careers');
-        //        $html[] = '</div>';
-        //
-        //        $html[] = '<div class="description">';
-
 
         $table = new SortableTable($this->get_table_data());
 
@@ -122,10 +112,6 @@ class Module extends \application\discovery\Module
         }
 
         $html[] = $table->toHTML();
-
-        //        $html[] = '</div>';
-        //        $html[] = '</div>';
-
 
         return implode("\n", $html);
     }

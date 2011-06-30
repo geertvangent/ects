@@ -37,46 +37,6 @@ class Module extends \application\discovery\Module
         return $this->enrollments;
     }
 
-    /**
-     * @param multitype:Course $courses
-     */
-    function process_enrollment_course_data($courses)
-    {
-        $data = array();
-
-        foreach ($courses as $course)
-        {
-            $row = array();
-            $row[] = $course->get_year();
-            $row[] = $course->get_name();
-            $data[] = $row;
-
-            if ($course->has_children())
-            {
-                foreach ($course->get_children() as $child)
-                {
-                    $row = array();
-                    $row[] = $child->get_year();
-                    $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
-                    $data[] = $row;
-                }
-            }
-        }
-
-        return $data;
-    }
-
-    /**
-     * @return multitype:string
-     */
-    function get_enrollment_course_table_headers()
-    {
-        $headers = array();
-        $headers[] = array(Translation :: get('Year'));
-        $headers[] = array(Translation :: get('Course'));
-        return $headers;
-    }
-
     /* (non-PHPdoc)
      * @see application\discovery.Module::render()
      */
@@ -98,40 +58,9 @@ class Module extends \application\discovery\Module
             $data[] = $row;
         }
 
-        $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Year'), false);
-        $table->set_header(2, Translation :: get('Training'), false);
-        $table->set_header(6, '', false);
-        $html[] = $table->toHTML();
+        //        $path = Path :: namespace_to_full_path(__NAMESPACE__, true) . 'resources/javascript/enrollment.js';
+        //        $html[] = ResourceManager :: get_instance()->get_resource_html($path);
 
-        foreach ($this->enrollments as $key => $enrollment)
-        {
-            $courses = DataManager :: get_instance($this->get_module_instance())->retrieve_courses($enrollment, $this->get_application()->get_user_id());
-
-            $html[] = '<div class="enrollment_courses" id="enrollment_' . $key . '_courses" style="display: none;">';
-            $html[] = '<h4>';
-            $html[] = $enrollment;
-            $html[] = '</h4>';
-
-            $table = new SortableTable($this->process_enrollment_course_data($courses));
-
-            foreach ($this->get_enrollment_course_table_headers() as $header_id => $header)
-            {
-                $table->set_header($header_id, $header[0], false);
-
-                if($header[1])
-                {
-                    $table->getHeader()->setColAttributes($header_id, $header[1]);
-                }
-            }
-
-            $html[] = $table->toHTML();
-
-            $html[] = '</div>';
-        }
-
-        $path = Path :: namespace_to_full_path(__NAMESPACE__, true) . 'resources/javascript/enrollment.js';
-        $html[] = ResourceManager :: get_instance()->get_resource_html($path);
 
         return implode("\n", $html);
     }
