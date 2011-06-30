@@ -10,15 +10,18 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_FACULTY = 'faculty';
     const PROPERTY_CONTRACT_TYPE = 'contract_type';
+    const PROPERTY_CONTRACT_ID = 'contract_id';
     const PROPERTY_TRAJECTORY_TYPE = 'trajectory_type';
     const PROPERTY_TRAJECTORY = 'trajectory';
     const PROPERTY_OPTION_CHOICE = 'option_choice';
     const PROPERTY_GRADUATION_OPTION = 'graduation_option';
 
+    const CONTRACT_TYPE_ALL = 0;
     const CONTRACT_TYPE_DEGREE = 1;
     const CONTRACT_TYPE_CREDIT = 2;
     const CONTRACT_TYPE_EXAM_DEGREE = 3;
     const CONTRACT_TYPE_EXAM_CREDIT = 4;
+    const CONTRACT_TYPE_OLD_DEGREE = 5;
 
     const TRAJECTORY_TYPE_TEMPLATE = 1;
     const TRAJECTORY_TYPE_PERSONAL = 2;
@@ -68,7 +71,43 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
             case self :: CONTRACT_TYPE_EXAM_CREDIT :
                 return 'ExamCredit';
                 break;
+            case self :: CONTRACT_TYPE_OLD_DEGREE :
+                return 'OldDegree';
+                break;
         }
+    }
+
+    /**
+     * @return string
+     */
+    static function get_contract_type_string_static($contract_type)
+    {
+        switch ($contract_type)
+        {
+            case self :: CONTRACT_TYPE_DEGREE :
+                return 'Degree';
+                break;
+            case self :: CONTRACT_TYPE_CREDIT :
+                return 'Credit';
+                break;
+            case self :: CONTRACT_TYPE_EXAM_DEGREE :
+                return 'ExamDegree';
+                break;
+            case self :: CONTRACT_TYPE_EXAM_CREDIT :
+                return 'ExamCredit';
+                break;
+            case self :: CONTRACT_TYPE_OLD_DEGREE :
+                return 'OldDegree';
+                break;
+        }
+    }
+
+    /**
+     * @return int
+     */
+    function get_contract_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_CONTRACT_ID);
     }
 
     /**
@@ -185,6 +224,14 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     * @param int $contract_id
+     */
+    function set_contract_id($contract_id)
+    {
+        $this->set_default_property(self :: PROPERTY_CONTRACT_ID, $contract_id);
+    }
+
+    /**
      * @param int $trajectory_type
      */
     function set_trajectory_type($trajectory_type)
@@ -224,6 +271,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_FACULTY;
         $extended_property_names[] = self :: PROPERTY_CONTRACT_TYPE;
+        $extended_property_names[] = self :: PROPERTY_CONTRACT_ID;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_TYPE;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY;
         $extended_property_names[] = self :: PROPERTY_OPTION_CHOICE;

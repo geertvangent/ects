@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
+use common\libraries\ArrayResultSet;
+
 use user\UserDataManager;
 
 use application\discovery\module\career\Mark;
@@ -16,59 +18,80 @@ use MDB2_Error;
 
 class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
 {
-    private $mark_moments;
+    private $mark_moments = array();
+    private $mark = array();
+    private $courses = array();
+    private $child_courses = array();
 
     /**
-     * @param int $id
+     * @param int $user_id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Course
      */
-    function retrieve_courses($id)
+    function retrieve_courses($user_id)
     {
-        $user = UserDataManager :: get_instance()->retrieve_user($id);
-        $official_code = $user->get_official_code();
-
-        $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
-        $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' ';
-        $query .= 'ORDER BY year, trajectory_part, name';
-
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
-
-        $this->mark_moments = $this->retrieve_mark_moments($id);
-
-        $courses = array();
-
-        if (! $results instanceof MDB2_Error)
+        if (! isset($this->courses[$user_id]))
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            $official_code = $user->get_official_code();
+
+            $child_courses = $this->retrieve_child_courses($user_id);
+
+            $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
+            $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' ';
+            $query .= 'ORDER BY year, trajectory_part, name';
+
+            $statement = $this->get_connection()->prepare($query);
+            $results = $statement->execute();
+
+            if (! $results instanceof MDB2_Error)
             {
-                $course = $this->result_to_course($result);
-
-                //Check whether the course has children, if so: add them.
-                $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
-                $query .= 'WHERE programme_parent_id = ' . $result->programme_id . ' AND person_id = ' . $result->person_id . ' AND enrollment_id = "'. $result->enrollment_id .'" ';
-                $query .= 'ORDER BY year, trajectory_part, name';
-
-                $statement = $this->get_connection()->prepare($query);
-                $child_results = $statement->execute();
-
-                if (! $child_results instanceof MDB2_Error)
+                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
-                    while ($child_result = $child_results->fetchRow(MDB2_FETCHMODE_OBJECT))
-                    {
-                        $child_course = $this->result_to_course($child_result);
-                        $course->add_child($child_course);
-                    }
-                }
+                    $course = $this->result_to_course($user_id, $result);
 
-                $courses[] = $course;
+                    if ($result->programme_id && isset($child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
+                    {
+                        foreach ($child_courses[$result->source][$result->enrollment_id][$result->programme_id] as $child_course)
+                        {
+                            $course->add_child($child_course);
+                        }
+                    }
+
+                    $this->courses[$user_id][] = $course;
+                }
             }
         }
 
-        return $courses;
+        return $this->courses[$user_id];
     }
 
-    function result_to_course($result)
+    private function retrieve_child_courses($user_id)
+    {
+        if (! isset($this->child_courses[$user_id]))
+        {
+            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            $official_code = $user->get_official_code();
+
+            $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
+            $query .= 'WHERE programme_parent_id IS NOT NULL AND person_id = ' . $official_code . ' ';
+            $query .= 'ORDER BY year, trajectory_part, name';
+
+            $statement = $this->get_connection()->prepare($query);
+            $results = $statement->execute();
+
+            if (! $results instanceof MDB2_Error)
+            {
+                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                {
+                    $this->child_courses[$user_id][$result->source][$result->enrollment_id][$result->programme_parent_id][] = $this->result_to_course($user_id, $result);
+                }
+            }
+        }
+
+        return $this->child_courses[$user_id];
+    }
+
+    function result_to_course($user_id, $result)
     {
         $course = new Course();
         $course->set_source($result->source);
@@ -79,9 +102,21 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_credits($result->credits);
         $course->set_weight($result->weight);
 
-        foreach ($this->mark_moments as $moment)
+        $marks = $this->retrieve_marks($user_id);
+
+        foreach ($this->retrieve_mark_moments($user_id) as $moment)
         {
-            $course->add_mark($this->retrieve_mark($result->source, $result->id, $moment->get_id()));
+            if (isset($marks[$result->source][$result->id][$moment->get_id()]))
+            {
+                $mark = $marks[$result->source][$result->id][$moment->get_id()];
+                $course->add_mark($mark);
+            }
+            else
+            {
+                $mark = Mark :: factory($moment->get_id());
+            }
+
+            $course->add_mark($mark);
         }
 
         return $course;
@@ -93,62 +128,65 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     function retrieve_mark_moments($user_id)
     {
-        $user = UserDataManager :: get_instance()->retrieve_user($user_id);
-        $official_code = $user->get_official_code();
-
-        $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_advanced] ';
-        $query .= 'WHERE [person_id] = ' . $official_code . ' ';
-        $query .= 'ORDER BY [try_order]';
-
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
-
-        $mark_moments = array();
-
-        if (! $results instanceof MDB2_Error)
+        if (! isset($this->mark_moments[$user_id]))
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
-            {
-                $mark_moment = new MarkMoment();
-                $mark_moment->set_id($result->try_id);
-                $mark_moment->set_name($result->try_name);
+            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            $official_code = $user->get_official_code();
 
-                $mark_moments[$result->try_id] = $mark_moment;
+            $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_advanced] ';
+            $query .= 'WHERE [person_id] = ' . $official_code . ' ';
+            $query .= 'ORDER BY [try_order]';
+
+            $statement = $this->get_connection()->prepare($query);
+            $results = $statement->execute();
+
+            if (! $results instanceof MDB2_Error)
+            {
+                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                {
+                    $mark_moment = new MarkMoment();
+                    $mark_moment->set_id($result->try_id);
+                    $mark_moment->set_name($result->try_name);
+
+                    $this->mark_moments[$user_id][$result->try_id] = $mark_moment;
+                }
             }
         }
 
-        return $mark_moments;
+        return $this->mark_moments[$user_id];
     }
 
     /**
-     * @param string $user_id
-     * @return multitype:\application\discovery\module\career\Mark
+     * @return multitype:multitype:multitype:stdClass
      */
-    function retrieve_mark($source, $course_id, $moment_id)
+    function retrieve_marks($user_id)
     {
-        $query = 'SELECT [result], [status_code], [try_id] FROM [dbo].[v_discovery_mark_advanced] ';
-        $query .= 'WHERE [source] = '. $source .' AND [enrollment_programme_id] = \'' . $course_id . '\' AND [try_id] = ' . $moment_id . ' ';
-
-        $statement = $this->get_connection()->prepare($query);
-        $result = $statement->execute();
-
-        $mark_moments = array();
-
-        if (! $result instanceof MDB2_Error)
+        if (! isset($this->marks[$user_id]))
         {
-            $result = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            $official_code = $user->get_official_code();
 
-            $mark = new Mark();
-            $mark->set_moment($result->try_id);
-            $mark->set_result($result->result);
-            $mark->set_status($result->status_code);
+            $query = 'SELECT [source], [enrollment_programme_id], [result], [status_code], [try_id] FROM [dbo].[v_discovery_mark_advanced] ';
+            $query .= 'WHERE [person_id] = "' . $official_code . '"';
 
-            return $mark;
+            $statement = $this->get_connection()->prepare($query);
+            $result = $statement->execute();
+
+            if (! $result instanceof MDB2_Error)
+            {
+                while ($mark_result = $result->fetchRow(MDB2_FETCHMODE_OBJECT))
+                {
+                    $mark = new Mark();
+                    $mark->set_moment($mark_result->try_id);
+                    $mark->set_result($mark_result->result);
+                    $mark->set_status($mark_result->status_code);
+
+                    $this->marks[$user_id][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
+                }
+            }
         }
-        else
-        {
-            return Mark :: factory($moment_id);
-        }
+
+        return $this->marks[$user_id];
     }
 }
 ?>

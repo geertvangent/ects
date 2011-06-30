@@ -27,9 +27,21 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, DiscoveryModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->courses = DataManager :: get_instance($module_instance)->retrieve_courses($application->get_user_id());
-        $this->mark_moments = DataManager :: get_instance($module_instance)->retrieve_mark_moments($application->get_user_id());
+        $this->retrieve_data();
+    }
 
+    function get_data_manager()
+    {
+        return DataManager :: get_instance($this->get_module_instance());
+    }
+
+    function retrieve_data()
+    {
+        $this->courses = $this->get_data_manager()->retrieve_courses($this->get_application()->get_user_id());
+        $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_application()->get_user_id());
+
+//        $marks = $this->get_data_manager()->retrieve_marks($this->get_application()->get_user_id());
+//        dump($marks);
     }
 
     /**

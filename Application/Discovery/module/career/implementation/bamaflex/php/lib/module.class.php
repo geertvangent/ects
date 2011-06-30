@@ -2,9 +2,7 @@
 namespace application\discovery\module\career\implementation\bamaflex;
 
 use common\libraries\Theme;
-
 use common\libraries\SortableTableFromArray;
-
 use common\libraries\Utilities;
 use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
