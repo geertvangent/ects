@@ -82,6 +82,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $enrollment->set_training($this->convert_to_utf8($result->training));
                     $enrollment->set_faculty($this->convert_to_utf8($result->faculty));
                     $enrollment->set_contract_type($result->contract_type);
+                    $enrollment->set_contract_id($result->contract_id);
                     $enrollment->set_trajectory_type($result->trajectory_type);
                     $enrollment->set_trajectory($this->convert_to_utf8($result->trajectory));
                     $enrollment->set_option_choice($this->convert_to_utf8($result->option_choice));

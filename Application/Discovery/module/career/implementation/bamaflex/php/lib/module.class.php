@@ -105,30 +105,102 @@ class Module extends \application\discovery\module\career\Module
         return $contract_type_enrollments;
     }
 
-    function get_enrollment_courses($contract_type)
+    function get_contracts($contract_type)
     {
-        $enrollments = $this->get_enrollments($contract_type);
+        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments($this->get_application()->get_user_id());
 
-        $html = array();
+        $contract_enrollments = array();
 
         foreach ($enrollments as $enrollment)
         {
-            $html[] = '<h4>' . $enrollment . '</h4>';
-
-            $table = new SortableTable($this->get_table_data($enrollment));
-
-            foreach ($this->get_table_headers() as $header_id => $header)
+            if ($enrollment->get_contract_type() == $contract_type)
             {
-                $table->set_header($header_id, $header[0], false);
+                $contract_enrollments[$enrollment->get_contract_id()][] = $enrollment;
+            }
+        }
 
-                if ($header[1])
+        return $contract_enrollments;
+    }
+
+    function get_enrollment_courses($contract_type)
+    {
+        $html = array();
+
+        $contracts = $this->get_contracts($contract_type);
+
+        if (count($contracts) > 1)
+        {
+            $tabs = new DynamicTabsRenderer('contract_' . $contract_type . '_list');
+
+            foreach ($contracts as $contract)
+            {
+                $last_enrollment = $contract[0];
+                $contract_html = array();
+
+                foreach ($contract as $enrollment)
                 {
-                    $table->getHeader()->setColAttributes($header_id, $header[1]);
+                    if (count($contract) > 1)
+                    {
+                        $contract_html[] = '<table class="data_table" id="tablename"><thead><tr><th>';
+                        $contract_html[] = $enrollment;
+                        $contract_html[] = '</th></tr></thead></table>';
+                        $contract_html[] = '<br />';
+                    }
+
+                    $table = new SortableTable($this->get_table_data($enrollment));
+
+                    foreach ($this->get_table_headers() as $header_id => $header)
+                    {
+                        $table->set_header($header_id, $header[0], false);
+
+                        if ($header[1])
+                        {
+                            $table->getHeader()->setColAttributes($header_id, $header[1]);
+                        }
+                    }
+
+                    $contract_html[] = $table->toHTML();
+                    $contract_html[] = '<br />';
+
                 }
+
+                $tab_name = array();
+                $tab_name[] = $last_enrollment->get_training();
+                if ($last_enrollment->get_unified_option())
+                {
+                    $tab_name[] = $last_enrollment->get_unified_option();
+                }
+                $tab_name = implode(' | ', $tab_name);
+
+                $tabs->add_tab(new DynamicContentTab('contract_' . $last_enrollment->get_contract_id() . '', $tab_name, Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', implode("\n", $contract_html)));
             }
 
-            $html[] = $table->toHTML();
+            $html[] = $tabs->render();
 
+        }
+        else
+        {
+            $enrollments = $this->get_enrollments($contract_type);
+
+            foreach ($enrollments as $enrollment)
+            {
+                $html[] = '<h4>' . $enrollment . '</h4>';
+
+                $table = new SortableTable($this->get_table_data($enrollment));
+
+                foreach ($this->get_table_headers() as $header_id => $header)
+                {
+                    $table->set_header($header_id, $header[0], false);
+
+                    if ($header[1])
+                    {
+                        $table->getHeader()->setColAttributes($header_id, $header[1]);
+                    }
+                }
+
+                $html[] = $table->toHTML();
+
+            }
         }
 
         return implode("\n", $html);
