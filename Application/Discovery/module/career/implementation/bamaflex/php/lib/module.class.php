@@ -2,23 +2,49 @@
 namespace application\discovery\module\career\implementation\bamaflex;
 
 use application\discovery\SortableTable;
-
+use application\discovery\module\career\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 
 use common\libraries\DynamicTabsRenderer;
-
 use common\libraries\DynamicContentTab;
-
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Utilities;
 use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
 
-use application\discovery\module\career\DataManager;
-
 class Module extends \application\discovery\module\career\Module
 {
+    /**
+     * @var boolean
+     */
+    private $show_course_type_legend = false;
+
+    /**
+     * @return string
+     */
+    function get_course_type_legend()
+    {
+        $data = array();
+
+        foreach(Course :: get_types() as $type)
+        {
+            $name = Translation :: get(Course :: type_string($type));
+
+            $row = array();
+            $row[] = '<img src="' . Theme :: get_image_path() . 'course_type/' . $type . '.png" alt="'. $name .'" title="'. $name .'" >';
+            $row[] = Translation :: get(Course :: type_string($type));
+            $data[] = $row;
+        }
+
+        $legend = new SortableTable($data);
+
+        $legend->set_header(0, '', false);
+        $legend->set_header(1, Translation :: get('CourseType'), false);
+        $legend->getHeader()->setColAttributes(0, 'class="action"');
+
+        return $legend->toHTML();
+    }
 
     /**
      * @return multitype:multitype:string
@@ -34,6 +60,7 @@ class Module extends \application\discovery\module\career\Module
                 $row = array();
                 $row[] = $course->get_year();
                 $row[] = $course->get_credits();
+                $row[] = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="'. $course->get_type_string() .'" title="'. $course->get_type_string() .'" >';
                 $row[] = $course->get_name();
 
                 foreach ($this->get_mark_moments() as $mark_moment)
@@ -52,6 +79,7 @@ class Module extends \application\discovery\module\career\Module
                         $row = array();
                         $row[] = $child->get_year();
                         $row[] = $child->get_credits();
+                        $row[] = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" >';
                         $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
 
                         foreach ($this->get_mark_moments() as $mark_moment)
@@ -77,6 +105,7 @@ class Module extends \application\discovery\module\career\Module
         $headers = array();
         $headers[] = array(Translation :: get('Year'), 'class="code"');
         $headers[] = array(Translation :: get('Credits'), 'class="action"');
+        $headers[] = array('', 'class="action"');
         $headers[] = array(Translation :: get('Course'));
 
         foreach ($this->get_mark_moments() as $mark_moment)
@@ -216,18 +245,15 @@ class Module extends \application\discovery\module\career\Module
         $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types($this->get_application()->get_user_id());
 
         $tabs = new DynamicTabsRenderer('enrollment_list');
-        //$tabs->add_tab(new DynamicContentTab(Enrollment :: CONTRACT_TYPE_ALL, Translation :: get('AllContracts'), Theme :: get_image_path() . 'contract_type/0.png', Enrollment :: CONTRACT_TYPE_ALL));
-
 
         foreach ($contract_types as $contract_type)
         {
-            $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: get_contract_type_string_static($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollment_courses($contract_type)));
+            $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: contract_type_string($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollment_courses($contract_type)));
         }
 
         $html[] = $tabs->render();
 
-        //        $html[] = parent :: render();
-
+        $html[] = $this->get_course_type_legend();
 
         return implode("\n", $html);
     }

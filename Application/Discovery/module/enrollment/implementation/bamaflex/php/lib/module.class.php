@@ -55,9 +55,11 @@ class Module extends \application\discovery\module\enrollment\Module
                 $row[] = Translation :: get($enrollment->get_contract_type_string());
             }
 
-            $class = 'enrollment" style="" id="enrollment_' . $key;
-            $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
-            $row[] = $details_action->as_html();
+            $row[] = '<img src="' . Theme :: get_image_path() . 'result_type/' . $enrollment->get_result() . '.png" alt="'. $enrollment->get_result_string() .'" title="'. $enrollment->get_result_string() .'" >';
+
+//            $class = 'enrollment" style="" id="enrollment_' . $key;
+//            $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
+//            $row[] = $details_action->as_html();
             $data[] = $row;
         }
 
@@ -94,7 +96,7 @@ class Module extends \application\discovery\module\enrollment\Module
 
         foreach ($contract_types as $contract_type)
         {
-            $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: get_contract_type_string_static($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollments_table($contract_type)->toHTML()));
+            $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: contract_type_string($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollments_table($contract_type)->toHTML()));
         }
 
         $html[] = $tabs->render();

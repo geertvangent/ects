@@ -21,6 +21,17 @@ class Course extends \application\discovery\module\career\Course
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_WEIGHT = 'weight';
     const PROPERTY_ENROLLMENT_ID = 'enrollment_id';
+    const PROPERTY_TYPE = 'type';
+
+    const TYPE_NORMAL = 1;
+    // NL: AVO
+    const TYPE_PREVIOUS = 2;
+    // NL: EGO
+    const TYPE_EXTERNAL = 3;
+    // NL: Credithistoriek
+    const TYPE_CREDIT_HISTORY = 4;
+    // NL: Vrijstelling
+    const TYPE_EXEMPTION = 5;
 
     /**
      * Get the default properties
@@ -33,6 +44,7 @@ class Course extends \application\discovery\module\career\Course
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_WEIGHT;
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
+        $extended_property_names[] = self :: PROPERTY_TYPE;
 
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -116,6 +128,73 @@ class Course extends \application\discovery\module\career\Course
     function set_enrollment_id($enrollment_id)
     {
         $this->set_default_property(self :: PROPERTY_ENROLLMENT_ID, $enrollment_id);
+    }
+
+    /**
+     * Returns the type of this Course.
+     * @return int The type.
+     */
+    function get_type()
+    {
+        return $this->get_default_property(self :: PROPERTY_TYPE);
+    }
+
+    /**
+     * Sets the type of this Course.
+     * @param int $type
+     */
+    function set_type($type)
+    {
+        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+    }
+
+    /**
+     * @return string
+     */
+    function get_type_string()
+    {
+        return self :: type_string($this->get_type());
+    }
+
+    /**
+     * @return string
+     */
+    static function type_string($type)
+    {
+        switch ($type)
+        {
+            case self :: TYPE_NORMAL :
+                return 'Normal';
+                break;
+            case self :: TYPE_PREVIOUS :
+                return 'Previous';
+                break;
+            case self :: TYPE_EXTERNAL :
+                return 'External';
+                break;
+            case self :: TYPE_CREDIT_HISTORY :
+                return 'CreditHistory';
+                break;
+            case self :: TYPE_EXEMPTION :
+                return 'Exemption';
+                break;
+        }
+    }
+
+    /**
+     * @return multitype:string
+     */
+    static function get_types()
+    {
+        return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS, self :: TYPE_EXTERNAL, self :: TYPE_CREDIT_HISTORY);
+    }
+
+    /**
+     * @return boolean
+     */
+    function is_special_type()
+    {
+        return ($this->get_type() != self :: TYPE_NORMAL);
     }
 
     /**

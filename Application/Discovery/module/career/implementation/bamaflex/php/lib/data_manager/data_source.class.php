@@ -167,6 +167,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $course = new Course();
         $course->set_id($result->id);
+        $course->set_type($result->type);
         $course->set_enrollment_id($result->enrollment_id);
         $course->set_year($this->convert_to_utf8($result->year));
         $course->set_name($this->convert_to_utf8($result->name));
