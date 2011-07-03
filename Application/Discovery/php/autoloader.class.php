@@ -13,14 +13,20 @@ class Autoloader
 
     static function load($classname)
     {
-        $list = array('discovery_data_manager' => 'discovery_data_manager',
-                'discovery_data_manager_interface' => 'discovery_data_manager_interface', 'data_source' => 'data_source',
+        $list = array(
+                'discovery_data_manager' => 'discovery_data_manager',
+                'discovery_data_manager_interface' => 'discovery_data_manager_interface',
+                'data_source' => 'data_source',
                 'discovery_manager' => 'discovery_manager/discovery_manager',
                 'user_browser_table' => 'discovery_manager/component/user_browser/user_browser_table',
-                'module' => 'module', 'discovery_module_instance' => 'discovery_module_instance',
+                'module' => 'module',
+                'discovery_module_instance' => 'discovery_module_instance',
                 'discovery_module_instance_setting' => 'discovery_module_instance_setting',
-                'discovery_item' => 'discovery_item', 'data_source_instance' => 'data_source_instance',
-                'data_source_instance_setting' => 'data_source_instance_setting', 'sortable_table' => 'sortable_table',
+                'discovery_item' => 'discovery_item',
+                'data_source_instance' => 'data_source_instance',
+                'data_source_instance_setting' => 'data_source_instance_setting',
+                'sortable_table' => 'sortable_table',
+                'legend_table' => 'legend_table',
                 'discovery_module_instance_manager' => 'discovery_module_instance_manager/discovery_module_instance_manager');
 
         $lower_case = Utilities :: camelcase_to_underscores($classname);

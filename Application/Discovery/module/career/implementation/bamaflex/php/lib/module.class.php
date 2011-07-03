@@ -1,6 +1,7 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
+use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\career\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
@@ -15,36 +16,6 @@ use common\libraries\Translation;
 
 class Module extends \application\discovery\module\career\Module
 {
-    /**
-     * @var boolean
-     */
-    private $show_course_type_legend = false;
-
-    /**
-     * @return string
-     */
-    function get_course_type_legend()
-    {
-        $data = array();
-
-        foreach(Course :: get_types() as $type)
-        {
-            $name = Translation :: get(Course :: type_string($type));
-
-            $row = array();
-            $row[] = '<img src="' . Theme :: get_image_path() . 'course_type/' . $type . '.png" alt="'. $name .'" title="'. $name .'" >';
-            $row[] = Translation :: get(Course :: type_string($type));
-            $data[] = $row;
-        }
-
-        $legend = new SortableTable($data);
-
-        $legend->set_header(0, '', false);
-        $legend->set_header(1, Translation :: get('CourseType'), false);
-        $legend->getHeader()->setColAttributes(0, 'class="action"');
-
-        return $legend->toHTML();
-    }
 
     /**
      * @return multitype:multitype:string
@@ -60,7 +31,18 @@ class Module extends \application\discovery\module\career\Module
                 $row = array();
                 $row[] = $course->get_year();
                 $row[] = $course->get_credits();
-                $row[] = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="'. $course->get_type_string() .'" title="'. $course->get_type_string() .'" >';
+
+                if ($course->is_special_type())
+                {
+                    $course_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' . Translation :: get($course->get_type_string()) . '" />';
+                    $row[] = $course_type_image;
+                    LegendTable :: get_instance()->add_symbol($course_type_image, Translation :: get($course->get_type_string()));
+                }
+                else
+                {
+                    $row[] = ' ';
+                }
+
                 $row[] = $course->get_name();
 
                 foreach ($this->get_mark_moments() as $mark_moment)
@@ -79,8 +61,19 @@ class Module extends \application\discovery\module\career\Module
                         $row = array();
                         $row[] = $child->get_year();
                         $row[] = $child->get_credits();
-                        $row[] = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" >';
-                        $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;">' . $child->get_name() . '</span>';
+
+                        if ($child->is_special_type())
+                        {
+                            $child_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $child->get_type() . '.png" alt="' . Translation :: get($child->get_type_string()) . '" title="' . Translation :: get($child->get_type_string()) . '" />';
+                            $row[] = $child_type_image;
+                            LegendTable :: get_instance()->add_symbol($child_type_image, Translation :: get($child->get_type_string()));
+                        }
+                        else
+                        {
+                            $row[] = ' ';
+                        }
+
+                        $row[] = '<span class="course_child">' . $child->get_name() . '</span>';
 
                         foreach ($this->get_mark_moments() as $mark_moment)
                         {
@@ -168,13 +161,40 @@ class Module extends \application\discovery\module\career\Module
 
                 foreach ($contract as $enrollment)
                 {
-                    if (count($contract) > 1)
-                    {
-                        $contract_html[] = '<table class="data_table" id="tablename"><thead><tr><th>';
-                        $contract_html[] = $enrollment;
-                        $contract_html[] = '</th></tr></thead></table>';
-                        $contract_html[] = '<br />';
-                    }
+                    //                    if (count($contract) > 1)
+                    //                    {
+                    //                        $contract_html[] = '<table class="grey_data_table" id="tablename"><thead><tr><th>';
+                    //
+                    //                        $enrollment_name = array();
+                    //                        $enrollment_name[] = $enrollment->get_year();
+                    //
+                    //                        if ($enrollment->get_unified_option())
+                    //                        {
+                    //                            $enrollment_name[] = $enrollment->get_unified_option();
+                    //                        }
+                    //
+                    //                        if ($enrollment->get_unified_trajectory())
+                    //                        {
+                    //                            $enrollment_name[] = $enrollment->get_unified_trajectory();
+                    //                        }
+                    //
+                    //                        if ($enrollment->is_special_result())
+                    //                        {
+                    //                            $tab_image_path = Theme :: get_image_path(Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' . $enrollment->get_result() . '.png';
+                    //                            $tab_image = '<img src="' . $tab_image_path . '" alt="' . $enrollment->get_result_string() . '" title="' . $enrollment->get_result_string() . '" />';
+                    //                            $enrollment_name[] = $tab_image;
+                    //                            LegendTable :: get_instance()->add_symbol($tab_image, $enrollment->get_result_string());
+                    //                        }
+                    //                        else
+                    //                        {
+                    //                            $tab_image = null;
+                    //                        }
+                    //
+                    //                        $contract_html[] = implode(' | ', $enrollment_name);
+                    //                        $contract_html[] = '</th></tr></thead></table>';
+                    //                        $contract_html[] = '<br />';
+                    //                    }
+
 
                     $table = new SortableTable($this->get_table_data($enrollment));
 
@@ -194,6 +214,18 @@ class Module extends \application\discovery\module\career\Module
                 }
 
                 $tab_name = array();
+
+                if ($last_enrollment->is_special_result())
+                {
+                    $tab_image_path = Theme :: get_image_path(Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' . $last_enrollment->get_result() . '.png';
+                    $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get($last_enrollment->get_result_string()) . '" title="' . Translation :: get($last_enrollment->get_result_string()) . '" />';
+                    LegendTable :: get_instance()->add_symbol($tab_image, Translation :: get($last_enrollment->get_result_string()));
+                }
+                else
+                {
+                    $tab_image = null;
+                }
+
                 $tab_name[] = $last_enrollment->get_training();
                 if ($last_enrollment->get_unified_option())
                 {
@@ -201,7 +233,7 @@ class Module extends \application\discovery\module\career\Module
                 }
                 $tab_name = implode(' | ', $tab_name);
 
-                $tabs->add_tab(new DynamicContentTab('contract_' . $last_enrollment->get_contract_id() . '', $tab_name, Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', implode("\n", $contract_html)));
+                $tabs->add_tab(new DynamicContentTab('contract_' . $last_enrollment->get_contract_id() . '', $tab_name, $tab_image_path, implode("\n", $contract_html)));
             }
 
             $html[] = $tabs->render();
@@ -213,22 +245,59 @@ class Module extends \application\discovery\module\career\Module
 
             foreach ($enrollments as $enrollment)
             {
-                $html[] = '<h4>' . $enrollment . '</h4>';
-
-                $table = new SortableTable($this->get_table_data($enrollment));
-
-                foreach ($this->get_table_headers() as $header_id => $header)
+                $table_data = $this->get_table_data($enrollment);
+                if (count($table_data) > 0)
                 {
-                    $table->set_header($header_id, $header[0], false);
+                    $html[] = '<table class="data_table" id="tablename"><thead><tr><th class="action">';
 
-                    if ($header[1])
+                    if ($enrollment->is_special_result())
                     {
-                        $table->getHeader()->setColAttributes($header_id, $header[1]);
+                        $tab_image_path = Theme :: get_image_path(Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' . $enrollment->get_result() . '.png';
+                        $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get($enrollment->get_result_string()) . '" title="' . Translation :: get($enrollment->get_result_string()) . '" />';
+                        $html[] = $tab_image;
+                        LegendTable :: get_instance()->add_symbol($tab_image, Translation :: get($enrollment->get_result_string()));
                     }
+                    else
+                    {
+                        $tab_image = null;
+                    }
+
+                    $html[] = '</th><th>';
+
+                    $enrollment_name = array();
+
+                    $enrollment_name[] = $enrollment->get_year();
+                    $enrollment_name[] = $enrollment->get_training();
+
+                    if ($enrollment->get_unified_option())
+                    {
+                        $enrollment_name[] = $enrollment->get_unified_option();
+                    }
+
+                    if ($enrollment->get_unified_trajectory())
+                    {
+                        $enrollment_name[] = $enrollment->get_unified_trajectory();
+                    }
+
+                    $html[] = implode(' | ', $enrollment_name);
+                    $html[] = '</th></tr></thead></table>';
+                    $html[] = '<br />';
+
+                    $table = new SortableTable($this->get_table_data($enrollment));
+
+                    foreach ($this->get_table_headers() as $header_id => $header)
+                    {
+                        $table->set_header($header_id, $header[0], false);
+
+                        if ($header[1])
+                        {
+                            $table->getHeader()->setColAttributes($header_id, $header[1]);
+                        }
+                    }
+
+                    $html[] = $table->toHTML();
+                    $html[] = '<br />';
                 }
-
-                $html[] = $table->toHTML();
-
             }
         }
 
@@ -252,8 +321,6 @@ class Module extends \application\discovery\module\career\Module
         }
 
         $html[] = $tabs->render();
-
-        $html[] = $this->get_course_type_legend();
 
         return implode("\n", $html);
     }

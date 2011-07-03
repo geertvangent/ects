@@ -28,7 +28,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const TRAJECTORY_TYPE_INDIVIDUAL = 3;
     const TRAJECTORY_TYPE_UNKNOWN = 4;
 
-    const RESULT_TOLERATED = 5;
+    const RESULT_TOLERATED = 6;
 
     /**
      * @return int

@@ -12,10 +12,11 @@ class Enrollment extends DiscoveryItem
     const PROPERTY_TRAINING = 'training';
     const PROPERTY_RESULT = 'result';
 
-    const RESULT_PASSED = 1;
-    const RESULT_FAILED = 2;
-    const RESULT_NOT_RELEVANT = 3;
-    const RESULT_NO_DATA = 4;
+    const RESULT_GRADUATED = 1;
+    const RESULT_PASSED = 2;
+    const RESULT_FAILED = 3;
+    const RESULT_NOT_RELEVANT = 4;
+    const RESULT_NO_DATA = 5;
 
     /**
      * @return string
@@ -56,6 +57,9 @@ class Enrollment extends DiscoveryItem
     {
         switch ($result)
         {
+            case self :: RESULT_GRADUATED :
+                return 'Graduated';
+                break;
             case self :: RESULT_PASSED :
                 return 'Passed';
                 break;
@@ -63,7 +67,7 @@ class Enrollment extends DiscoveryItem
                 return 'Failed';
                 break;
             case self :: RESULT_NOT_RELEVANT :
-                return 'Irrelevant';
+                return 'NotRelevant';
                 break;
             case self :: RESULT_NO_DATA :
                 return 'NoDataAvailable';
@@ -77,6 +81,14 @@ class Enrollment extends DiscoveryItem
     static function get_results()
     {
         return array(self :: RESULT_PASSED, self :: RESULT_FAILED, self :: RESULT_NOT_RELEVANT, self :: RESULT_NO_DATA);
+    }
+
+    /**
+     * @return boolean
+     */
+    function is_special_result()
+    {
+        return ($this->get_result() != self :: RESULT_NOT_RELEVANT);
     }
 
     /**

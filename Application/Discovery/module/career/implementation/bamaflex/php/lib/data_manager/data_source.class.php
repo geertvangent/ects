@@ -87,6 +87,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $enrollment->set_trajectory($this->convert_to_utf8($result->trajectory));
                     $enrollment->set_option_choice($this->convert_to_utf8($result->option_choice));
                     $enrollment->set_graduation_option($this->convert_to_utf8($result->graduation_option));
+                    $enrollment->set_result($result->result);
                     $this->enrollments[$id][] = $enrollment;
                 }
             }
@@ -110,7 +111,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
             $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
             $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' ';
-            $query .= 'ORDER BY year, trajectory_part, name';
+            $query .= 'ORDER BY year DESC, name';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
