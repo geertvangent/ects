@@ -5,9 +5,6 @@ use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicVisualTab;
 use common\libraries\DynamicVisualTabsRenderer;
-
-use application\discovery\SortableTable;
-
 use common\libraries\ResourceManager;
 use common\libraries\Path;
 use common\libraries\ToolbarItem;
@@ -17,6 +14,8 @@ use common\libraries\Utilities;
 use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
 
+use application\discovery\LegendTable;
+use application\discovery\SortableTable;
 use application\discovery\module\enrollment\DataManager;
 
 class Module extends \application\discovery\module\enrollment\Module
@@ -50,14 +49,26 @@ class Module extends \application\discovery\module\enrollment\Module
             $row[] = $enrollment->get_training();
             $row[] = $enrollment->get_unified_option();
             $row[] = $enrollment->get_unified_trajectory();
+
             if ($contract_type == Enrollment :: CONTRACT_TYPE_ALL)
             {
                 $row[] = Translation :: get($enrollment->get_contract_type_string());
             }
 
-            $class = 'enrollment" style="" id="enrollment_' . $key;
-            $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
-            $row[] = $details_action->as_html();
+            if ($enrollment->is_special_result())
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'result_type/' . $enrollment->get_result() . '.png" alt="' . Translation :: get($enrollment->get_result_string()) . '" title="' . Translation :: get($enrollment->get_result_string()) . '" />';
+                $row[] = $image;
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get($enrollment->get_result_string()));
+            }
+            else
+            {
+                $row[] =  ' ';
+            }
+
+            //            $class = 'enrollment" style="" id="enrollment_' . $key;
+            //            $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
+            //            $row[] = $details_action->as_html();
             $data[] = $row;
         }
 
@@ -94,13 +105,14 @@ class Module extends \application\discovery\module\enrollment\Module
 
         foreach ($contract_types as $contract_type)
         {
-            $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: get_contract_type_string_static($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollments_table($contract_type)->toHTML()));
+            $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: contract_type_string($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollments_table($contract_type)->toHTML()));
         }
 
         $html[] = $tabs->render();
 
-//        $path = Path :: namespace_to_full_path('application\discovery\module\enrollment', true) . 'resources/javascript/enrollment.js';
-//        $html[] = ResourceManager :: get_instance()->get_resource_html($path);
+        //        $path = Path :: namespace_to_full_path('application\discovery\module\enrollment', true) . 'resources/javascript/enrollment.js';
+        //        $html[] = ResourceManager :: get_instance()->get_resource_html($path);
+
 
         return implode("\n", $html);
     }

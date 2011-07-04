@@ -1,11 +1,6 @@
 <?php
 namespace application\discovery;
 
-/**
- * @author Hans De Bisschop
- * @package application.discovery
- */
-
 use common\libraries\Theme;
 use common\libraries\DynamicVisualTab;
 use common\libraries\DynamicVisualTabsRenderer;
@@ -15,8 +10,16 @@ use common\libraries\Request;
 use application\discovery\module\profile\Profile;
 use application\discovery\module\profile\implementation\bamaflex\SettingsConnector;
 
+/**
+ * @author Hans De Bisschop
+ * @package application.discovery
+ */
 class DiscoveryManagerViewerComponent extends DiscoveryManager
 {
+    /**
+     * @var int
+     */
+    private $user_id;
 
     function run()
     {
@@ -41,12 +44,17 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
             while ($module_instance = $module_instances->next_result())
             {
                 $selected = ($module_id == $module_instance->get_id() ? true : false);
-                $link = $this->get_url(array(DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(),
+                $link = $this->get_url(array(
+                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(),
                         DiscoveryManager :: PARAM_USER_ID => $this->user_id));
                 $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), $module_instance->get_title(), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
             }
 
             echo $tabs->render();
+
+            echo '<div id="legend">';
+            echo LegendTable::get_instance()->as_html();
+            echo '</div>';
 
             $this->display_footer();
         }

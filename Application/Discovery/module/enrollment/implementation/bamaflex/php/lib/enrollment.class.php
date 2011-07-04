@@ -28,6 +28,8 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const TRAJECTORY_TYPE_INDIVIDUAL = 3;
     const TRAJECTORY_TYPE_UNKNOWN = 4;
 
+    const RESULT_TOLERATED = 6;
+
     /**
      * @return int
      */
@@ -57,30 +59,13 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      */
     function get_contract_type_string()
     {
-        switch ($this->get_contract_type())
-        {
-            case self :: CONTRACT_TYPE_DEGREE :
-                return 'Degree';
-                break;
-            case self :: CONTRACT_TYPE_CREDIT :
-                return 'Credit';
-                break;
-            case self :: CONTRACT_TYPE_EXAM_DEGREE :
-                return 'ExamDegree';
-                break;
-            case self :: CONTRACT_TYPE_EXAM_CREDIT :
-                return 'ExamCredit';
-                break;
-            case self :: CONTRACT_TYPE_OLD_DEGREE :
-                return 'OldDegree';
-                break;
-        }
+        return self :: contract_type_string($this->get_contract_type());
     }
 
     /**
      * @return string
      */
-    static function get_contract_type_string_static($contract_type)
+    static function contract_type_string($contract_type)
     {
         switch ($contract_type)
         {
@@ -261,6 +246,40 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     function set_graduation_option($graduation_option)
     {
         $this->set_default_property(self :: PROPERTY_GRADUATION_OPTION, $graduation_option);
+    }
+
+    /**
+     * @return string
+     */
+    function get_result_string()
+    {
+        return self :: result_string($this->get_result());
+    }
+
+    /**
+     * @return string
+     */
+    static function result_string($result)
+    {
+        switch ($result)
+        {
+            case self :: RESULT_TOLERATED :
+                return 'Tolerated';
+                break;
+            default :
+                return parent :: result_string($result);
+                break;
+        }
+    }
+
+    /**
+     * @return multitype:string
+     */
+    static function get_results()
+    {
+        $results = parent :: get_results();
+        $results[] = self :: RESULT_TOLERATED;
+        return $results;
     }
 
     /**
