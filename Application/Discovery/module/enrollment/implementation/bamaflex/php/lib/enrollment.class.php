@@ -15,6 +15,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const PROPERTY_TRAJECTORY = 'trajectory';
     const PROPERTY_OPTION_CHOICE = 'option_choice';
     const PROPERTY_GRADUATION_OPTION = 'graduation_option';
+    const PROPERTY_DISTINCTION = 'distinction';
 
     const CONTRACT_TYPE_ALL = 0;
     const CONTRACT_TYPE_DEGREE = 1;
@@ -29,6 +30,12 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const TRAJECTORY_TYPE_UNKNOWN = 4;
 
     const RESULT_TOLERATED = 6;
+
+    const DISTINCTION_NONE = 1;
+    const DISTINCTION_SUFFICIENT = 2;
+    const DISTINCTION_GOOD = 3;
+    const DISTINCTION_VERY_GOOD = 4;
+    const DISTINCTION_EXCELLENT = 5;
 
     /**
      * @return int
@@ -185,6 +192,48 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     * @return int
+     */
+    function get_distinction()
+    {
+        return $this->get_default_property(self :: PROPERTY_DISTINCTION);
+    }
+
+    /**
+     * @return string
+     */
+    function get_distinction_string()
+    {
+        return self :: distinction_string($this->get_distinction());
+    }
+
+    /**
+     * @return string
+     */
+    static function distinction_string($distinction)
+    {
+
+        switch ($distinction)
+        {
+            case self :: DISTINCTION_NONE :
+                return 'None';
+                break;
+            case self :: DISTINCTION_SUFFICIENT :
+                return 'Sufficient';
+                break;
+            case self :: DISTINCTION_GOOD :
+                return 'Good';
+                break;
+            case self :: DISTINCTION_VERY_GOOD :
+                return 'VeryGood';
+                break;
+            case self :: DISTINCTION_EXCELLENT :
+                return 'Excellent';
+                break;
+        }
+    }
+
+    /**
      * @param int $source
      */
     function set_source($source)
@@ -249,6 +298,14 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     * @param int $distinction
+     */
+    function set_distinction($distinction)
+    {
+        $this->set_default_property(self :: PROPERTY_DISTINCTION, $distinction);
+    }
+
+    /**
      * @return string
      */
     function get_result_string()
@@ -295,6 +352,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY;
         $extended_property_names[] = self :: PROPERTY_OPTION_CHOICE;
         $extended_property_names[] = self :: PROPERTY_GRADUATION_OPTION;
+        $extended_property_names[] = self :: PROPERTY_DISTINCTION;
 
         return parent :: get_default_property_names($extended_property_names);
     }

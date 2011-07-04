@@ -111,7 +111,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
             $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
             $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' ';
-            $query .= 'ORDER BY year DESC, name';
+            $query .= 'ORDER BY year, name';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
