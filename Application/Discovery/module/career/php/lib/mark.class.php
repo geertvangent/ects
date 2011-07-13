@@ -82,7 +82,6 @@ class Mark extends DataClass
 
     function get_visual_result()
     {
-        //        return $this->get_result();
         return (is_numeric($this->get_result()) ? (float) $this->get_result() : $this->get_result());
     }
 

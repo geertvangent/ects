@@ -122,7 +122,7 @@ class Course extends DataClass
             }
         }
 
-        return Mark :: factory($moment_id);
+        return self :: factory($moment_id);
     }
 
     /**
