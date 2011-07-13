@@ -36,7 +36,7 @@ class Module extends \application\discovery\module\career\Module
                 {
                     $course_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' . Translation :: get($course->get_type_string()) . '" />';
                     $row[] = $course_type_image;
-                    LegendTable :: get_instance()->add_symbol($course_type_image, Translation :: get($course->get_type_string()));
+                    LegendTable :: get_instance()->add_symbol($course_type_image, Translation :: get($course->get_type_string()), Translation :: get('CourseType'));
                 }
                 else
                 {
@@ -49,7 +49,17 @@ class Module extends \application\discovery\module\career\Module
                 {
                     $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
                     $row[] = $mark->get_visual_result();
-                    $row[] = $mark->get_status();
+
+                    if ($mark->get_status())
+                    {
+                    $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) . '" title="' . Translation :: get($mark->get_status_string()) . '" />';
+                    $row[] = $mark_status_image;
+                    LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string()), Translation :: get('MarkStatus'));
+                    }
+                    else
+                    {
+                        $row[] = null;
+                    }
                 }
 
                 $data[] = $row;
@@ -66,7 +76,7 @@ class Module extends \application\discovery\module\career\Module
                         {
                             $child_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $child->get_type() . '.png" alt="' . Translation :: get($child->get_type_string()) . '" title="' . Translation :: get($child->get_type_string()) . '" />';
                             $row[] = $child_type_image;
-                            LegendTable :: get_instance()->add_symbol($child_type_image, Translation :: get($child->get_type_string()));
+                            LegendTable :: get_instance()->add_symbol($child_type_image, Translation :: get($child->get_type_string()), Translation :: get('CourseType'));
                         }
                         else
                         {
@@ -77,8 +87,10 @@ class Module extends \application\discovery\module\career\Module
 
                         foreach ($this->get_mark_moments() as $mark_moment)
                         {
-                            $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_result();
-                            $row[] = $child->get_mark_by_moment_id($mark_moment->get_id())->get_status();
+                            $mark = $child->get_mark_by_moment_id($mark_moment->get_id());
+
+                            $row[] = $mark->get_result();
+                            $row[] = null;
                         }
 
                         $data[] = $row;
@@ -219,7 +231,7 @@ class Module extends \application\discovery\module\career\Module
                 {
                     $tab_image_path = Theme :: get_image_path(Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' . $last_enrollment->get_result() . '.png';
                     $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get($last_enrollment->get_result_string()) . '" title="' . Translation :: get($last_enrollment->get_result_string()) . '" />';
-                    LegendTable :: get_instance()->add_symbol($tab_image, Translation :: get($last_enrollment->get_result_string()));
+                    LegendTable :: get_instance()->add_symbol($tab_image, Translation :: get($last_enrollment->get_result_string()), Translation :: get('ResultType'));
                 }
                 else
                 {
@@ -255,7 +267,7 @@ class Module extends \application\discovery\module\career\Module
                         $tab_image_path = Theme :: get_image_path(Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' . $enrollment->get_result() . '.png';
                         $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get($enrollment->get_result_string()) . '" title="' . Translation :: get($enrollment->get_result_string()) . '" />';
                         $html[] = $tab_image;
-                        LegendTable :: get_instance()->add_symbol($tab_image, Translation :: get($enrollment->get_result_string()));
+                        LegendTable :: get_instance()->add_symbol($tab_image, Translation :: get($enrollment->get_result_string()), Translation :: get('ResultType'));
                     }
                     else
                     {

@@ -59,7 +59,7 @@ class Module extends \application\discovery\module\enrollment\Module
             {
                 $image = '<img src="' . Theme :: get_image_path() . 'result_type/' . $enrollment->get_result() . '.png" alt="' . Translation :: get($enrollment->get_result_string()) . '" title="' . Translation :: get($enrollment->get_result_string()) . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, Translation :: get($enrollment->get_result_string()));
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get($enrollment->get_result_string()), Translation :: get('ResultType'));
             }
             else
             {

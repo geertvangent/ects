@@ -82,7 +82,7 @@ class Mark extends DataClass
 
     function get_visual_result()
     {
-//        return $this->get_result();
+        //        return $this->get_result();
         return (is_numeric($this->get_result()) ? (float) $this->get_result() : $this->get_result());
     }
 
@@ -105,6 +105,27 @@ class Mark extends DataClass
     }
 
     /**
+     * @return string
+     */
+    function get_status_string()
+    {
+        return self :: status_string($this->get_status());
+    }
+
+    /**
+     * @return string
+     */
+    static function status_string($status)
+    {
+        switch ($status)
+        {
+            default :
+                return '';
+                break;
+        }
+    }
+
+    /**
      * @return string The table name of the data class
      */
     static function get_table_name()
@@ -112,7 +133,7 @@ class Mark extends DataClass
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
-    static function factory($moment_id = 0, $result = '-', $status = '-')
+    static function factory($moment_id = 0, $result = null, $status = null)
     {
         $mark = new self();
         $mark->set_moment($moment_id);

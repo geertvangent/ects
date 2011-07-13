@@ -15,9 +15,28 @@ class LegendTable extends SortableTable
         parent :: __construct($table_data, $default_column, $default_items_per_page, $tablename, $default_direction);
 
         $this->set_header(0, '', false);
-        $this->set_header(1, Translation :: get('Legend'), false);
+        $this->set_header(1, Translation :: get('Type'), false);
+        $this->set_header(2, Translation :: get('Legend'), false);
         $this->getHeader()->setColAttributes(0, 'class="action"');
+    }
 
+    /**
+     * Get table data to show on current page
+     * @see SortableTable#get_table_data
+     */
+    function get_table_data()
+    {
+        $table_data = array();
+
+        foreach ($this->get_data() as $category)
+        {
+            foreach ($category as $key => $row)
+            {
+                $table_data[$key] = $row;
+            }
+        }
+
+        return $table_data;
     }
 
     /**
@@ -37,14 +56,14 @@ class LegendTable extends SortableTable
      * @param string $symbol
      * @param string $description
      */
-    function add_symbol($symbol, $description)
+    function add_symbol($symbol, $description = null, $category = null)
     {
         $key = md5($symbol);
 
         $data = $this->get_data();
-        if (! key_exists($key, $data))
+        if (! key_exists($category, $data) || ! key_exists($key, $data[$category]))
         {
-            $data[$key] = array($symbol, $description);
+            $data[$category][$key] = array($symbol, $category, $description);
             $this->set_data($data);
         }
     }

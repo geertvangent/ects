@@ -3,7 +3,7 @@
 	    .ready(
 		    function() {
 			var legend = $('div#legend');
-			var button = $('<li class="first"><a id="show_legend" href="#" title="Show legend"><img src="http://localhost//c2/common/libraries/resources/images/aqua/action_details.png" alt="Show legend" title="Show legend" class="labeled"/><span>Show legend</span></a></li>');
+			var button = $('<li class="first"><a id="show_legend" href="#" title="Show legend"><img src="http://localhost//chamilo/application/discovery/resources/images/aqua/action_legend.png" alt="Show legend" title="Show legend" class="labeled"/><span>Show legend</span></a></li>');
 
 			legend.hide();
 

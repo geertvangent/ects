@@ -2,12 +2,9 @@
 namespace application\discovery\module\career\implementation\bamaflex;
 
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-
 use common\libraries\ArrayResultSet;
-
 use user\UserDataManager;
 
-use application\discovery\module\career\Mark;
 use application\discovery\module\career\MarkMoment;
 use application\discovery\module\career\Photo;
 use application\discovery\module\career\Communication;
@@ -240,7 +237,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT [source], [enrollment_programme_id], [result], [status_code], [try_id] FROM [dbo].[v_discovery_mark_advanced] ';
+            $query = 'SELECT [source], [enrollment_programme_id], [result], [status], [try_id] FROM [dbo].[v_discovery_mark_advanced] ';
             $query .= 'WHERE [person_id] = "' . $official_code . '"';
 
             $statement = $this->get_connection()->prepare($query);
@@ -253,7 +250,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $mark = new Mark();
                     $mark->set_moment($mark_result->try_id);
                     $mark->set_result($mark_result->result);
-                    $mark->set_status($mark_result->status_code);
+                    $mark->set_status($mark_result->status);
 
                     $this->marks[$user_id][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
                 }
