@@ -78,6 +78,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $enrollment->set_option_choice($this->convert_to_utf8($result->option_choice));
                     $enrollment->set_graduation_option($this->convert_to_utf8($result->graduation_option));
                     $enrollment->set_result($result->result);
+                    $enrollment->set_distinction($result->distinction);
                     $this->enrollments[$id][] = $enrollment;
                 }
             }
