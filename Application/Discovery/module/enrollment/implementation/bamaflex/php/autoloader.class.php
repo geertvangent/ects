@@ -1,32 +1,31 @@
 <?php
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
-use common\libraries\Utilities;
-
-/**
- * @author Hans De Bisschop
- * @package application.discovery
- */
 class Autoloader
 {
 
+    private static $map = array(
+         'Autoloader' => '/autoloader.class.php',
+         'Enrollment' => '/lib/enrollment.class.php',
+         'Module' => '/lib/module.class.php',
+         'DataSource' => '/lib/data_manager/data_source.class.php',
+         'SettingsConnector' => '/settings/settings_connector.class.php',
+    );
+
     static function load($classname)
     {
-        $list = array('enrollment' => 'enrollment', 'module' => 'module',
-                'settings_connector' => '../settings/settings_connector');
-
-        $lower_case = Utilities :: camelcase_to_underscores($classname);
-
-        if (key_exists($lower_case, $list))
+        if (isset(self::$map[$classname]))
         {
-            $url = $list[$lower_case];
-            require_once dirname(__FILE__) . '/lib/' . $url . '.class.php';
+            require_once __DIR__ . self::$map[$classname];
             return true;
         }
 
         return false;
-    }
+   }
+
+   static function synch($update){
+        return \common\libraries\AutoloaderUtilities::synch(__DIR__, __DIR__, $update);
+   }
 
 }
-
 ?>
