@@ -12,10 +12,17 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     const PROPERTY_TRAJECTORY_PART = 'trajectory_part';
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_WEIGHT = 'weight';
+    const PROPERTY_TIMEFRAME_ID = 'timeframe_id';
 
     const SOURCE_MANAGER = 1;
     const SOURCE_TEACHER = 2;
-
+    
+    const TIMEFRAME_ACADEMIC_YEAR = '1';
+    const TIMEFRAME_FIRST_TERM = '2';
+    const TIMEFRAME_SECOND_TERM = '3';
+    const TIMEFRAME_BOTH_TERMS = '4';
+    const TIMEFRAME_UNKNOWN = '5';
+    
     /**
      * @return int
      */
@@ -31,6 +38,15 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY);
     }
+    
+    /**
+     * @return integer
+     */
+    function get_timeframe_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_TIMEFRAME_ID);
+    }
+    
 
     /**
      * Returns the trajectory_part of this TeachingAssignment.
@@ -101,6 +117,14 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     {
         $this->set_default_property(self :: PROPERTY_FACULTY, $faculty);
     }
+    
+    /**
+     * @param string $timeframe_id
+     */
+    function set_timeframe_id($timeframe_id)
+    {
+        $this->set_default_property(self :: PROPERTY_TIMEFRAME_ID, $timeframe_id);
+    }
 
     /**
      * @param multitype:string $extended_property_names
@@ -112,8 +136,42 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_PART;
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_WEIGHT;
+        $extended_property_names[] = self :: PROPERTY_TIMEFRAME_ID;
         
         return parent :: get_default_property_names($extended_property_names);
+    }
+    
+/**
+     * @return string
+     */
+    function get_timeframe()
+    {
+        return self :: timeframe($this->get_timeframe_id());
+    }
+
+    /**
+     * @return string
+     */
+    static function timeframe($timeframe_id)
+    {
+        switch ($timeframe_id)
+        {
+            case self :: TIMEFRAME_ACADEMIC_YEAR :
+                return 'AcademicYear';
+                break;
+            case self :: TIMEFRAME_FIRST_TERM :
+                return 'FirstTerm';
+                break;
+            case self :: TIMEFRAME_SECOND_TERM :
+                return 'SecondTerm';
+                break;
+            case self :: TIMEFRAME_BOTH_TERMS :
+                return 'BothTerms';
+                break;
+            case self :: TIMEFRAME_UNKNOWN :
+                return 'Unknown';
+                break;
+        }
     }
 
     /**

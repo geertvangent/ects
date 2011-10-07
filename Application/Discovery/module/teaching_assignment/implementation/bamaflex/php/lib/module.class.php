@@ -67,22 +67,39 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         foreach ($teaching_assignments as $key => $teaching_assignment)
         {
             $row = array();
-            $row[] = $teaching_assignment->get_year();
+            if (! $year)
+            {
+                $row[] = $teaching_assignment->get_year();
+            }
             $row[] = $teaching_assignment->get_faculty();
             $row[] = $teaching_assignment->get_training();
             $row[] = $teaching_assignment->get_name();
             $row[] = $teaching_assignment->get_credits();
+            $image = '<img src="' . Theme :: get_image_path() . 'timeframe/' . $teaching_assignment->get_timeframe_id() . '.png" alt="' . Translation :: get($teaching_assignment->get_timeframe()) . '" title="' . Translation :: get($teaching_assignment->get_timeframe()) . '"/>';
+            $row[] = $image;
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get($teaching_assignment->get_timeframe()), Translation :: get('Timeframe'));
             
             $data[] = $row;
         }
         
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Year'), false, 'class="code"');
-        $table->set_header(1, Translation :: get('Faculty'), false);
-        $table->set_header(2, Translation :: get('Training'), false);
-        $table->set_header(3, Translation :: get('Name'), false);
-        $table->set_header(4, Translation :: get('Credits'), false, 'class="action"');
-        
+        if (! $year)
+        {
+            $table->set_header(0, Translation :: get('Year'), false, 'class="code"');
+            $table->set_header(1, Translation :: get('Faculty'), false);
+            $table->set_header(2, Translation :: get('Training'), false);
+            $table->set_header(3, Translation :: get('Name'), false);
+            $table->set_header(4, Translation :: get('Credits'), false, 'class="action"');
+            $table->set_header(5, '<img src="' . Theme :: get_image_path() . 'timeframe.png"/>', false);
+        }
+        else
+        {
+            $table->set_header(0, Translation :: get('Faculty'), false);
+            $table->set_header(1, Translation :: get('Training'), false);
+            $table->set_header(2, Translation :: get('Name'), false);
+            $table->set_header(3, Translation :: get('Credits'), false, 'class="action"');
+            $table->set_header(4, '<img src="' . Theme :: get_image_path() . 'timeframe.png"/>', false);
+        }
         return $table;
     }
 
@@ -101,11 +118,11 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         
         if ($this->has_teaching_assignments(0, TeachingAssignment :: SOURCE_TEACHER))
         {
-            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_TEACHER, Translation :: get('Teacher'), null, $this->get_teaching_assignments_table(0, TeachingAssignment :: SOURCE_TEACHER)->toHTML()));
+            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: SOURCE_TEACHER)->toHTML()));
         }
         if ($this->has_teaching_assignments(0, TeachingAssignment :: SOURCE_MANAGER))
         {
-            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_MANAGER, Translation :: get('Manager'), null, $this->get_teaching_assignments_table(0, TeachingAssignment :: SOURCE_MANAGER)->toHTML()));
+            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: SOURCE_MANAGER)->toHTML()));
         }
         
         $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $source_tabs->render()));
@@ -116,12 +133,12 @@ class Module extends \application\discovery\module\teaching_assignment\Module
             
             if ($this->has_teaching_assignments($year, TeachingAssignment :: SOURCE_TEACHER))
             {
-                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_TEACHER, Translation :: get('Teacher'), null, $this->get_teaching_assignments_table($year, TeachingAssignment :: SOURCE_TEACHER)->toHTML()));
+                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: SOURCE_TEACHER)->toHTML()));
             }
-
+            
             if ($this->has_teaching_assignments($year, TeachingAssignment :: SOURCE_MANAGER))
             {
-                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_MANAGER, Translation :: get('Manager'), null, $this->get_teaching_assignments_table($year, TeachingAssignment :: SOURCE_MANAGER)->toHTML()));
+                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: SOURCE_MANAGER)->toHTML()));
             }
             $tabs->add_tab(new DynamicContentTab($year, $year, null, $source_tabs->render()));
         }

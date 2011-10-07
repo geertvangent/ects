@@ -42,6 +42,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $teaching_assignment->set_trajectory_part($result->trajectory_part);
                     $teaching_assignment->set_credits($result->credits);
                     $teaching_assignment->set_weight($result->weight);
+                    $teaching_assignment->set_timeframe_id($result->timeframe_id);
                     $this->teaching_assignments[$person_id][] = $teaching_assignment;
                 }
             }
