@@ -14,7 +14,7 @@ use common\libraries\Utilities;
 use admin\Registration;
 use admin\AdminDataManager;
 
-class DiscoveryModuleInstanceManager extends SubManager
+class ModuleInstanceManager extends SubManager
 {
     const PARAM_INSTANCE_ACTION = 'action';
     const PARAM_INSTANCE = 'instance';
@@ -54,17 +54,17 @@ class DiscoveryModuleInstanceManager extends SubManager
 
     function get_application_component_path()
     {
-        return WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) . 'discovery_module_instance_manager/component/';
+        return WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) . 'module_instance_manager/component/';
     }
 
-    function count_discovery_module_instances($condition = null)
+    function count_module_instances($condition = null)
     {
-        return $this->get_parent()->count_discovery_module_instances($condition);
+        return $this->get_parent()->count_module_instances($condition);
     }
 
-    function retrieve_discovery_module_instances($condition = null, $offset = null, $count = null, $order_property = null)
+    function retrieve_module_instances($condition = null, $offset = null, $count = null, $order_property = null)
     {
-        return $this->get_parent()->retrieve_discovery_module_instances($condition, $offset, $count, $order_property);
+        return $this->get_parent()->retrieve_module_instances($condition, $offset, $count, $order_property);
     }
 
     static function launch($application)
@@ -72,9 +72,9 @@ class DiscoveryModuleInstanceManager extends SubManager
         parent :: launch(__CLASS__, $application);
     }
 
-    function retrieve_discovery_module_instance($discovery_module_instance_id)
+    function retrieve_module_instance($module_instance_id)
     {
-        return $this->get_parent()->retrieve_discovery_module_instance($discovery_module_instance_id);
+        return $this->get_parent()->retrieve_module_instance($module_instance_id);
     }
 
     /**

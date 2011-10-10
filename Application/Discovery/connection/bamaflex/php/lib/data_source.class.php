@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\connection\bamaflex;
 
-use application\discovery\DiscoveryModuleInstance;
+use application\discovery\ModuleInstance;
 
 class DataSource extends \application\discovery\DataSource
 {
@@ -9,11 +9,11 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      * Constructor
-     * @param DiscoveryModuleInstance $discovery_module_instance
+     * @param ModuleInstance $module_instance
      */
-    function __construct(DiscoveryModuleInstance $discovery_module_instance)
+    function __construct(ModuleInstance $module_instance)
     {
-        parent :: __construct($discovery_module_instance);
+        parent :: __construct($module_instance);
         $this->initialize();
     }
 

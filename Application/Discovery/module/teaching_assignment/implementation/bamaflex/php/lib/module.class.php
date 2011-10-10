@@ -73,7 +73,20 @@ class Module extends \application\discovery\module\teaching_assignment\Module
             }
             $row[] = $teaching_assignment->get_faculty();
             $row[] = $teaching_assignment->get_training();
-            $row[] = $teaching_assignment->get_name();
+            $data_source = $this->get_module_instance()->get_setting('data_source');
+            $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
+                    'data_source' => $data_source));
+ 
+            if ($course_result_module_instance)
+            {
+            	$parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($teaching_assignment->get_programme_id(), 1);
+            	$url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                $row[] = '<a href="' . $url  . '">' . $teaching_assignment->get_name() . '</a>';
+            }
+            else
+            {
+                $row[] = $teaching_assignment->get_name();
+            }
             $row[] = $teaching_assignment->get_credits();
             $image = '<img src="' . Theme :: get_image_path() . 'timeframe/' . $teaching_assignment->get_timeframe_id() . '.png" alt="' . Translation :: get($teaching_assignment->get_timeframe()) . '" title="' . Translation :: get($teaching_assignment->get_timeframe()) . '"/>';
             $row[] = $image;

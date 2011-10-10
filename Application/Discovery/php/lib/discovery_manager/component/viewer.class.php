@@ -26,8 +26,8 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
         $this->user_id = Request :: get(DiscoveryManager :: PARAM_USER_ID);
         $module_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
 
-        if ($this->user_id)
-        {
+//        if ($this->user_id)
+//        {
             $this->display_header();
 
             if (! $module_id)
@@ -35,11 +35,11 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
                 $module_id = 1;
             }
 
-            $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance($module_id);
+            $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($module_id);
             $current_module = Module :: factory($this, $current_module_instance);
 
             $tabs = new DynamicVisualTabsRenderer('discovery', $current_module->render());
-            $module_instances = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instances();
+            $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances();
 
             while ($module_instance = $module_instances->next_result())
             {
@@ -57,11 +57,11 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
             echo '</div>';
 
             $this->display_footer();
-        }
-        else
-        {
-            Redirect :: get_url(array(DiscoveryManager :: ACTION_BROWSE));
-        }
+//        }
+//        else
+//        {
+//            Redirect :: get_url(array(DiscoveryManager :: ACTION_BROWSE));
+//        }
     }
 
     function get_user_id()

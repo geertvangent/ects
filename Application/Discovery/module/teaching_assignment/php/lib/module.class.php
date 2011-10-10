@@ -12,7 +12,7 @@ use common\libraries\Display;
 use common\libraries\Application;
 
 use application\discovery\SortableTable;
-use application\discovery\DiscoveryModuleInstance;
+use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
 
 class Module extends \application\discovery\Module
@@ -22,7 +22,7 @@ class Module extends \application\discovery\Module
      */
     private $teaching_assignments;
 
-    function __construct(Application $application, DiscoveryModuleInstance $module_instance)
+    function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
         $this->teaching_assignments = DataManager :: get_instance($module_instance)->retrieve_teaching_assignments($application->get_user_id());

@@ -13,9 +13,9 @@ use common\libraries\PatternMatchCondition;
 use common\libraries\Utilities;
 use rights\RightsManager;
 
-require_once WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) . 'discovery_module_instance_manager/component/discovery_module_instance_browser/discovery_module_instance_browser_table.class.php';
+require_once WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) . 'module_instance_manager/component/module_instance_browser/module_instance_browser_table.class.php';
 
-class DiscoveryModuleInstanceManagerBrowserComponent extends DiscoveryModuleInstanceManager
+class ModuleInstanceManagerBrowserComponent extends ModuleInstanceManager
 {
 
     private $action_bar;
@@ -30,7 +30,7 @@ class DiscoveryModuleInstanceManagerBrowserComponent extends DiscoveryModuleInst
         $this->action_bar = $this->get_action_bar();
         $parameters = $this->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $table = new DiscoveryModuleInstanceBrowserTable($this, $parameters, $this->get_condition());
+        $table = new ModuleInstanceBrowserTable($this, $parameters, $this->get_condition());
 
         $this->display_header();
         echo $this->action_bar->as_html();
@@ -45,8 +45,8 @@ class DiscoveryModuleInstanceManagerBrowserComponent extends DiscoveryModuleInst
         if (isset($query) && $query != '')
         {
             $conditions = array();
-            $conditions[] = new PatternMatchCondition(DiscoveryModuleInstance :: PROPERTY_TITLE, '*' . $query . '*');
-            $conditions[] = new PatternMatchCondition(DiscoveryModuleInstance :: PROPERTY_DESCRIPTION, '*' . $query . '*');
+            $conditions[] = new PatternMatchCondition(ModuleInstance :: PROPERTY_TITLE, '*' . $query . '*');
+            $conditions[] = new PatternMatchCondition(ModuleInstance :: PROPERTY_DESCRIPTION, '*' . $query . '*');
             $condition = new AndCondition($conditions);
         }
         else
@@ -61,9 +61,9 @@ class DiscoveryModuleInstanceManagerBrowserComponent extends DiscoveryModuleInst
     {
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->set_search_url($this->get_url());
-        $action_bar->add_common_action(new ToolbarItem(Translation :: get('AddDiscoveryModuleInstance'), Theme :: get_common_image_path() . 'action_create.png', $this->get_url(array(DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_CREATE_INSTANCE)), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+        $action_bar->add_common_action(new ToolbarItem(Translation :: get('AddModuleInstance'), Theme :: get_common_image_path() . 'action_create.png', $this->get_url(array(ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_CREATE_INSTANCE)), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         $action_bar->add_common_action(new ToolbarItem(Translation :: get('ShowAll', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_browser.png', $this->get_url(), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
-        $action_bar->add_common_action(new ToolbarItem(Translation :: get('ManageRights', null, RightsManager :: APPLICATION_NAME), Theme :: get_common_image_path() . 'action_rights.png', $this->get_url(array(DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_MANAGE_INSTANCE_RIGHTS)), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+        $action_bar->add_common_action(new ToolbarItem(Translation :: get('ManageRights', null, RightsManager :: APPLICATION_NAME), Theme :: get_common_image_path() . 'action_rights.png', $this->get_url(array(ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MANAGE_INSTANCE_RIGHTS)), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
     }
 }

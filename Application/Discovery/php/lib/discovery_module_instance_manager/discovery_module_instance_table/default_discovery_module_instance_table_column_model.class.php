@@ -7,7 +7,7 @@ use common\libraries\ObjectTableColumn;
 
 require_once Path :: get_library_path() . 'html/table/object_table/object_table_column_model.class.php';
 
-class DefaultDiscoveryModuleInstanceTableColumnModel extends ObjectTableColumnModel
+class DefaultModuleInstanceTableColumnModel extends ObjectTableColumnModel
 {
 
     /**
@@ -25,9 +25,9 @@ class DefaultDiscoveryModuleInstanceTableColumnModel extends ObjectTableColumnMo
     private static function get_default_columns()
     {
         $columns = array();
-        $columns[] = new ObjectTableColumn(DiscoveryModuleInstance :: PROPERTY_TYPE);
-        $columns[] = new ObjectTableColumn(DiscoveryModuleInstance :: PROPERTY_TITLE);
-        $columns[] = new ObjectTableColumn(DiscoveryModuleInstance :: PROPERTY_DESCRIPTION);
+        $columns[] = new ObjectTableColumn(ModuleInstance :: PROPERTY_TYPE);
+        $columns[] = new ObjectTableColumn(ModuleInstance :: PROPERTY_TITLE);
+        $columns[] = new ObjectTableColumn(ModuleInstance :: PROPERTY_DESCRIPTION);
         return $columns;
     }
 }

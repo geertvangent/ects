@@ -27,18 +27,18 @@ class DataManager
     }
 
     /**
-     * @param DiscoveryModuleInstance $discovery_module_instance
+     * @param ModuleInstance $module_instance
      * @return DataManagerInterface
      */
-    static function get_instance($discovery_module_instance)
+    static function get_instance($module_instance)
     {
-        if (! isset(self :: $instance) || ! isset(self :: $instance[$discovery_module_instance->get_id()]))
+        if (! isset(self :: $instance) || ! isset(self :: $instance[$module_instance->get_id()]))
         {
-            require_once Path :: namespace_to_full_path($discovery_module_instance->get_type()) . 'php/lib/data_manager/data_source.class.php';
-            $class = $discovery_module_instance->get_type() . '\\DataSource';
-            self :: $instance[$discovery_module_instance->get_id()] = new $class($discovery_module_instance);
+            require_once Path :: namespace_to_full_path($module_instance->get_type()) . 'php/lib/data_manager/data_source.class.php';
+            $class = $module_instance->get_type() . '\\DataSource';
+            self :: $instance[$module_instance->get_id()] = new $class($module_instance);
         }
-        return self :: $instance[$discovery_module_instance->get_id()];
+        return self :: $instance[$module_instance->get_id()];
     }
 }
 ?>

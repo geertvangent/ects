@@ -6,7 +6,7 @@ class DiscoveryManagerModuleComponent extends DiscoveryManager
 
     function run()
     {
-        DiscoveryModuleInstanceManager :: launch($this);
+        ModuleInstanceManager :: launch($this);
     }
 }
 ?>

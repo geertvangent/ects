@@ -15,7 +15,7 @@ use DOMDocument;
  * @author Hans De Bisschop
  */
 
-class DiscoveryModuleInstanceSetting extends DataClass
+class ModuleInstanceSetting extends DataClass
 {
     const CLASS_NAME = __CLASS__;
     const TABLE_NAME = 'module_instance_setting';
@@ -104,12 +104,12 @@ class DiscoveryModuleInstanceSetting extends DataClass
     }
 
     /**
-     * @param DiscoveryModuleInstance $discovery_module_instance
+     * @param ModuleInstance $module_instance
      * @return boolean
      */
-    static function initialize(DiscoveryModuleInstance $discovery_module_instance)
+    static function initialize(ModuleInstance $module_instance)
     {
-        $settings_file = Path :: namespace_to_full_path($discovery_module_instance->get_type()) . Utilities :: get_package_name_from_namespace($discovery_module_instance->get_type()) . '.xml';
+        $settings_file = Path :: namespace_to_full_path($module_instance->get_type()) . Utilities :: get_package_name_from_namespace($module_instance->get_type()) . '.xml';
 
         $doc = new DOMDocument();
 
@@ -119,8 +119,8 @@ class DiscoveryModuleInstanceSetting extends DataClass
 
         foreach ($settings as $index => $setting)
         {
-            $external_setting = new DiscoveryModuleInstanceSetting();
-            $external_setting->set_module_instance_id($discovery_module_instance->get_id());
+            $external_setting = new ModuleInstanceSetting();
+            $external_setting->set_module_instance_id($module_instance->get_id());
             $external_setting->set_variable($setting->getAttribute('name'));
             $external_setting->set_value($setting->getAttribute('default'));
 
@@ -180,7 +180,7 @@ class DiscoveryModuleInstanceSetting extends DataClass
     static function load($module_instance_id)
     {
         $condition = new EqualityCondition(self :: PROPERTY_MODULE_INSTANCE_ID, $module_instance_id);
-        $settings = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance_settings($condition);
+        $settings = DiscoveryDataManager :: get_instance()->retrieve_module_instance_settings($condition);
 
         while ($setting = $settings->next_result())
         {

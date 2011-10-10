@@ -9,6 +9,7 @@ class Autoloader
          'CourseResult' => '/lib/course_result.class.php',
          'Mark' => '/lib/mark.class.php',
          'Module' => '/lib/module.class.php',
+         'Parameters' => '/lib/parameters.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php',
     );

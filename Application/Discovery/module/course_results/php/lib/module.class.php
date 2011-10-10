@@ -11,7 +11,7 @@ use common\libraries\Display;
 use common\libraries\Application;
 
 use application\discovery\SortableTable;
-use application\discovery\DiscoveryModuleInstance;
+use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
 
 class Module extends \application\discovery\Module
@@ -27,7 +27,7 @@ class Module extends \application\discovery\Module
      */
     private $mark_moments;
 
-    function __construct(Application $application, DiscoveryModuleInstance $module_instance)
+    function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
         $this->retrieve_data();
@@ -40,8 +40,13 @@ class Module extends \application\discovery\Module
 
     function retrieve_data()
     {
-        $this->course_results = $this->get_data_manager()->retrieve_course_results(Request:: get(self :: PARAM_PROGRAMME_ID));
-        $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments(Request :: get(self :: PARAM_PROGRAMME_ID));
+        $this->course_results = $this->get_data_manager()->retrieve_course_results($this->get_course_results_parameters());
+        $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_course_results_parameters());
+    }
+    
+    function get_course_results_parameters()
+    {
+    	return new Parameters(Request :: get(self :: PARAM_PROGRAMME_ID));
     }
 
     /**

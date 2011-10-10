@@ -55,78 +55,78 @@ class Mdb2DiscoveryDataManager extends Mdb2Database implements DiscoveryDataMana
         return false;
     }
 
-    function retrieve_discovery_module_instance($discovery_module_instance_id)
+    function retrieve_module_instance($module_instance_id)
     {
-        $condition = new EqualityCondition(DiscoveryModuleInstance :: PROPERTY_ID, $discovery_module_instance_id);
-        return $this->retrieve_object(DiscoveryModuleInstance :: get_table_name(), $condition, array(), DiscoveryModuleInstance :: CLASS_NAME);
+        $condition = new EqualityCondition(ModuleInstance :: PROPERTY_ID, $module_instance_id);
+        return $this->retrieve_object(ModuleInstance :: get_table_name(), $condition, array(), ModuleInstance :: CLASS_NAME);
     }
 
-    function retrieve_discovery_module_instances($condition = null, $offset = null, $max_objects = null, $order_by = null)
+    function retrieve_module_instances($condition = null, $offset = null, $max_objects = null, $order_by = null)
     {
-        return $this->retrieve_objects(DiscoveryModuleInstance :: get_table_name(), $condition, $offset, $max_objects, $order_by, DiscoveryModuleInstance :: CLASS_NAME);
+        return $this->retrieve_objects(ModuleInstance :: get_table_name(), $condition, $offset, $max_objects, $order_by, ModuleInstance :: CLASS_NAME);
     }
 
-    function count_discovery_module_instances($condition = null)
+    function count_module_instances($condition = null)
     {
-        return $this->count_objects(DiscoveryModuleInstance :: get_table_name(), $condition);
+        return $this->count_objects(ModuleInstance :: get_table_name(), $condition);
     }
 
-    function create_discovery_module_instance_setting(DiscoveryModuleInstanceSetting $discovery_module_instance_setting)
+    function create_module_instance_setting(ModuleInstanceSetting $module_instance_setting)
     {
-        return $this->create($discovery_module_instance_setting);
+        return $this->create($module_instance_setting);
     }
 
-    function update_discovery_module_instance_setting(DiscoveryModuleInstanceSetting $discovery_module_instance_setting)
+    function update_module_instance_setting(ModuleInstanceSetting $module_instance_setting)
     {
-        $condition = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_ID, $discovery_module_instance_setting->get_id());
-        return $this->update($discovery_module_instance_setting, $condition);
+        $condition = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_ID, $module_instance_setting->get_id());
+        return $this->update($module_instance_setting, $condition);
     }
 
-    function delete_discovery_module_instance_setting(DiscoveryModuleInstanceSetting $discovery_module_instance_setting)
+    function delete_module_instance_setting(ModuleInstanceSetting $module_instance_setting)
     {
-        $condition = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_ID, $discovery_module_instance_setting->get_id());
-        return $this->delete($discovery_module_instance_setting->get_table_name(), $condition);
+        $condition = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_ID, $module_instance_setting->get_id());
+        return $this->delete($module_instance_setting->get_table_name(), $condition);
     }
 
     /**
      * @param int $id
      */
-    function retrieve_discovery_module_instance_setting($id)
+    function retrieve_module_instance_setting($id)
     {
-        $condition = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_ID, $id);
-        return $this->retrieve_object(DiscoveryModuleInstanceSetting :: get_table_name(), $condition, array(), DiscoveryModuleInstanceSetting :: CLASS_NAME);
+        $condition = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_ID, $id);
+        return $this->retrieve_object(ModuleInstanceSetting :: get_table_name(), $condition, array(), ModuleInstanceSetting :: CLASS_NAME);
     }
 
-    function retrieve_discovery_module_instance_settings($condition = null, $order_by = array(), $offset = 0, $max_objects = -1)
+    function retrieve_module_instance_settings($condition = null, $order_by = array(), $offset = 0, $max_objects = -1)
     {
-        return $this->retrieve_objects(DiscoveryModuleInstanceSetting :: get_table_name(), $condition, $offset, $max_objects, $order_by, DiscoveryModuleInstanceSetting :: CLASS_NAME);
+        return $this->retrieve_objects(ModuleInstanceSetting :: get_table_name(), $condition, $offset, $max_objects, $order_by, ModuleInstanceSetting :: CLASS_NAME);
     }
 
-    function retrieve_discovery_module_instance_setting_from_variable_name($variable, $discovery_module_instance_id)
+    function retrieve_module_instance_setting_from_variable_name($variable, $module_instance_id)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $discovery_module_instance_id);
-        $conditions[] = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_VARIABLE, $variable);
+        $conditions[] = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $module_instance_id);
+        $conditions[] = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_VARIABLE, $variable);
         $condition = new AndCondition($conditions);
-        return $this->retrieve_object(DiscoveryModuleInstanceSetting :: get_table_name(), $condition, array(), DiscoveryModuleInstanceSetting :: CLASS_NAME);
+        return $this->retrieve_object(ModuleInstanceSetting :: get_table_name(), $condition, array(), ModuleInstanceSetting :: CLASS_NAME);
     }
 
-    function update_discovery_module_instance($discovery_module_instance)
+    function update_module_instance($module_instance)
     {
-        $condition = new EqualityCondition(DiscoveryModuleInstance :: PROPERTY_ID, $discovery_module_instance->get_id());
-        return $this->update($discovery_module_instance, $condition);
+        $condition = new EqualityCondition(ModuleInstance :: PROPERTY_ID, $module_instance->get_id());
+        return $this->update($module_instance, $condition);
     }
 
-    function delete_discovery_module_instance($discovery_module_instance)
+    function delete_module_instance($module_instance)
     {
-        $condition = new EqualityCondition(DiscoveryModuleInstance :: PROPERTY_ID, $discovery_module_instance->get_id());
-        return $this->delete(DiscoveryModuleInstance :: get_table_name(), $condition);
+        $condition = new EqualityCondition(ModuleInstance :: PROPERTY_ID, $module_instance->get_id());
+        return $this->delete(ModuleInstance :: get_table_name(), $condition);
     }
 
-    function retrieve_active_discovery_module_instances($types = array())
+    function retrieve_active_module_instances($types = array())
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition(DiscoveryModuleInstance :: PROPERTY_ENABLED, 1);
+        $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_ENABLED, 1);
 
         if (! is_array($types))
         {
@@ -135,17 +135,17 @@ class Mdb2DiscoveryDataManager extends Mdb2Database implements DiscoveryDataMana
 
         if (count($types) > 0)
         {
-            $conditions[] = new InCondition(DiscoveryModuleInstance :: PROPERTY_TYPE, $types);
+            $conditions[] = new InCondition(ModuleInstance :: PROPERTY_TYPE, $types);
         }
 
         $condition = new AndCondition($conditions);
 
-        return $this->retrieve_discovery_module_instances($condition);
+        return $this->retrieve_module_instances($condition);
     }
 
-    function count_discovery_module_instance_settings($conditions = null)
+    function count_module_instance_settings($conditions = null)
     {
-        return $this->count_objects(DiscoveryModuleInstance :: get_table_name(), $conditions);
+        return $this->count_objects(ModuleInstance :: get_table_name(), $conditions);
     }
 
 

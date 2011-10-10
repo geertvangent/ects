@@ -26,29 +26,29 @@ interface DiscoveryDataManagerInterface
 
     function update_content_object_publication_id($publication_attr);
 
-    function retrieve_discovery_module_instance($discovery_module_instance_id);
+    function retrieve_module_instance($module_instance_id);
 
-    function retrieve_discovery_module_instances($condition = null, $offset = null, $max_objects = null, $order_by = null);
+    function retrieve_module_instances($condition = null, $offset = null, $max_objects = null, $order_by = null);
 
-    function count_discovery_module_instances($condition = null);
+    function count_module_instances($condition = null);
 
-    function create_discovery_module_instance_setting(DiscoveryModuleInstanceSetting $discovery_module_instance_setting);
+    function create_module_instance_setting(ModuleInstanceSetting $module_instance_setting);
 
-    function update_discovery_module_instance_setting(DiscoveryModuleInstanceSetting $discovery_module_instance_setting);
+    function update_module_instance_setting(ModuleInstanceSetting $module_instance_setting);
 
-    function delete_discovery_module_instance_setting(DiscoveryModuleInstanceSetting $discovery_module_instance_setting);
+    function delete_module_instance_setting(ModuleInstanceSetting $module_instance_setting);
 
-    function retrieve_discovery_module_instance_setting($id);
+    function retrieve_module_instance_setting($id);
 
-    function retrieve_discovery_module_instance_settings($condition = null, $order_by = array(), $offset = 0, $max_objects = -1);
+    function retrieve_module_instance_settings($condition = null, $order_by = array(), $offset = 0, $max_objects = -1);
 
-    function retrieve_discovery_module_instance_setting_from_variable_name($variable, $discovery_module_instance_id);
+    function retrieve_module_instance_setting_from_variable_name($variable, $module_instance_id);
 
-    function update_discovery_module_instance($discovery_module_instance);
+    function update_module_instance($module_instance);
 
-    function delete_discovery_module_instance($discovery_module_instance);
+    function delete_module_instance($module_instance);
 
-    function retrieve_active_discovery_module_instances($types = array());
+    function retrieve_active_module_instances($types = array());
 
     function retrieve_data_source_instance($data_source_instance_id);
 

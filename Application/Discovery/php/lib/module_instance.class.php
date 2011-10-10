@@ -9,7 +9,7 @@ use common\libraries\AndCondition;
 /**
  * @package application.discovery
  */
-class DiscoveryModuleInstance extends DataClass
+class ModuleInstance extends DataClass
 {
     const CLASS_NAME = __CLASS__;
     const TABLE_NAME = 'module_instance';
@@ -83,7 +83,7 @@ class DiscoveryModuleInstance extends DataClass
         }
         else
         {
-            if (! DiscoveryModuleInstanceSetting :: initialize($this))
+            if (! ModuleInstanceSetting :: initialize($this))
             {
                 return false;
             }
@@ -107,8 +107,8 @@ class DiscoveryModuleInstance extends DataClass
         }
         else
         {
-            $condition = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
-            $settings = $this->get_data_manager()->retrieve_discovery_module_instance_settings($condition);
+            $condition = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
+            $settings = $this->get_data_manager()->retrieve_module_instance_settings($condition);
 
             while ($setting = $settings->next_result())
             {
@@ -144,8 +144,8 @@ class DiscoveryModuleInstance extends DataClass
 
     public function has_settings()
     {
-        $condition = new EqualityCondition(DiscoveryModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
-        $settings = DiscoveryDataManager :: get_instance()->count_discovery_module_instance_settings($condition);
+        $condition = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
+        $settings = DiscoveryDataManager :: get_instance()->count_module_instance_settings($condition);
 
         return $settings > 0;
     }
@@ -155,7 +155,7 @@ class DiscoveryModuleInstance extends DataClass
      */
     public function get_settings()
     {
-        return DiscoveryModuleInstanceSetting :: get_all($this->get_id());
+        return ModuleInstanceSetting :: get_all($this->get_id());
     }
 
     /**
@@ -164,7 +164,7 @@ class DiscoveryModuleInstance extends DataClass
      */
     public function get_setting($variable)
     {
-        return DiscoveryModuleInstanceSetting :: get($variable, $this->get_id());
+        return ModuleInstanceSetting :: get($variable, $this->get_id());
     }
 
     /**
@@ -173,6 +173,18 @@ class DiscoveryModuleInstance extends DataClass
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
+    }
+    
+    function has_matching_settings($settings)
+    {
+    	foreach($settings as $key => $setting)
+    	{
+    		if (! $this->get_setting($key) == $setting)
+    		{
+    			return false;
+    		}
+    	}
+    	return true;
     }
 
 }

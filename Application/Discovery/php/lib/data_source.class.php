@@ -7,9 +7,9 @@ class DataSource
 
     /**
      * Constructor
-     * @param DiscoveryModuleInstance $discovery_module_instance
+     * @param ModuleInstance $module_instance
      */
-    function __construct(DiscoveryModuleInstance $module_instance)
+    function __construct(ModuleInstance $module_instance)
     {
         $this->module_instance = $module_instance;
     }
@@ -19,7 +19,7 @@ class DataSource
         return $this->module_instance;
     }
 
-    function set_module_instance(DiscoveryModuleInstance $module_instance)
+    function set_module_instance(ModuleInstance $module_instance)
     {
         $this->module_instance = $module_instance;
     }

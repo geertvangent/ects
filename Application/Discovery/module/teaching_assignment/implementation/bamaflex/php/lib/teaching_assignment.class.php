@@ -13,7 +13,8 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_WEIGHT = 'weight';
     const PROPERTY_TIMEFRAME_ID = 'timeframe_id';
-
+    const PROPERTY_PROGRAMME_ID = 'programme_id';
+    
     const SOURCE_MANAGER = 1;
     const SOURCE_TEACHER = 2;
     
@@ -22,7 +23,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     const TIMEFRAME_SECOND_TERM = '3';
     const TIMEFRAME_BOTH_TERMS = '4';
     const TIMEFRAME_UNKNOWN = '5';
-    
+
     /**
      * @return int
      */
@@ -38,7 +39,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY);
     }
-    
+
     /**
      * @return integer
      */
@@ -46,7 +47,6 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     {
         return $this->get_default_property(self :: PROPERTY_TIMEFRAME_ID);
     }
-    
 
     /**
      * Returns the trajectory_part of this TeachingAssignment.
@@ -73,6 +73,15 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     function get_credits()
     {
         return $this->get_default_property(self :: PROPERTY_CREDITS);
+    }
+
+    /**
+     * Returns the programme_id of this TeachingAssignment.
+     * @return int programme_id.
+     */
+    function get_programme_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PROGRAMME_ID);
     }
 
     /**
@@ -117,13 +126,21 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     {
         $this->set_default_property(self :: PROPERTY_FACULTY, $faculty);
     }
-    
+
     /**
      * @param string $timeframe_id
      */
     function set_timeframe_id($timeframe_id)
     {
         $this->set_default_property(self :: PROPERTY_TIMEFRAME_ID, $timeframe_id);
+    }
+
+    /**
+     * @param string $programme_id
+     */
+    function set_programme_id($programme_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PROGRAMME_ID, $programme_id);
     }
 
     /**
@@ -137,11 +154,12 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_WEIGHT;
         $extended_property_names[] = self :: PROPERTY_TIMEFRAME_ID;
+        $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         
         return parent :: get_default_property_names($extended_property_names);
     }
-    
-/**
+
+    /**
      * @return string
      */
     function get_timeframe()

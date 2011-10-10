@@ -5,7 +5,7 @@ use common\libraries\Request;
 use common\libraries\Translation;
 use common\libraries\Utilities;
 
-class DiscoveryModuleInstanceManagerDeleterComponent extends DiscoveryModuleInstanceManager
+class ModuleInstanceManagerDeleterComponent extends ModuleInstanceManager
 {
 
     function run()
@@ -15,7 +15,7 @@ class DiscoveryModuleInstanceManagerDeleterComponent extends DiscoveryModuleInst
             $this->not_allowed();
         }
 
-        $ids = Request :: get(DiscoveryModuleInstanceManager :: PARAM_INSTANCE);
+        $ids = Request :: get(ModuleInstanceManager :: PARAM_INSTANCE);
         $failures = 0;
 
         if (! empty($ids))
@@ -27,9 +27,9 @@ class DiscoveryModuleInstanceManagerDeleterComponent extends DiscoveryModuleInst
 
             foreach ($ids as $id)
             {
-                $discovery_module_instance = $this->retrieve_discovery_module_instance($id);
+                $module_instance = $this->retrieve_module_instance($id);
 
-                if (! $discovery_module_instance->delete())
+                if (! $module_instance->delete())
                 {
                     $failures ++;
                 }
@@ -40,7 +40,7 @@ class DiscoveryModuleInstanceManagerDeleterComponent extends DiscoveryModuleInst
                 if (count($ids) == 1)
                 {
                     $message = 'ObjectNotDeleted';
-                    $parameter = array('OBJECT' => Translation :: get('DiscoveryModuleInstance'));
+                    $parameter = array('OBJECT' => Translation :: get('ModuleInstance'));
                 }
                 else
                 {
@@ -53,7 +53,7 @@ class DiscoveryModuleInstanceManagerDeleterComponent extends DiscoveryModuleInst
                 if (count($ids) == 1)
                 {
                     $message = 'ObjectDeleted';
-                    $parameter = array('OBJECT' => Translation :: get('DiscoveryModuleInstance'));
+                    $parameter = array('OBJECT' => Translation :: get('ModuleInstance'));
                 }
                 else
                 {
@@ -62,11 +62,11 @@ class DiscoveryModuleInstanceManagerDeleterComponent extends DiscoveryModuleInst
                 }
             }
 
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('DiscoveryModuleInstance')), Utilities :: COMMON_LIBRARIES)));
+            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES)));
         }
     }
 }

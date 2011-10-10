@@ -12,6 +12,7 @@ class Autoloader
          'Mark' => '/lib/mark.class.php',
          'MarkMoment' => '/lib/mark_moment.class.php',
          'Module' => '/lib/module.class.php',
+         'Parameters' => '/lib/parameters.class.php',
     );
 
     static function load($classname)

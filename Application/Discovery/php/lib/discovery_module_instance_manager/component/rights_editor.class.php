@@ -12,7 +12,7 @@ use common\extensions\rights_editor_manager\RightsEditorManager;
  * Repository manager component to edit the rights for the learning objects in
  * the repository.
  */
-class DiscoveryModuleInstanceManagerRightsEditorComponent extends DiscoveryModuleInstanceManager
+class ModuleInstanceManagerRightsEditorComponent extends ModuleInstanceManager
 {
 
     /**
@@ -27,7 +27,7 @@ class DiscoveryModuleInstanceManagerRightsEditorComponent extends DiscoveryModul
 
         if (! $identifiers)
         {
-            $locations[] = RepositoryRights :: get_instance()->get_discovery_module_instances_subtree_root();
+            $locations[] = RepositoryRights :: get_instance()->get_module_instances_subtree_root();
         }
 
         if ($identifiers && ! is_array($identifiers))
@@ -37,7 +37,7 @@ class DiscoveryModuleInstanceManagerRightsEditorComponent extends DiscoveryModul
 
         foreach ($identifiers as $identifier)
         {
-            $locations[] = RepositoryRights :: get_instance()->get_location_by_identifier_from_discovery_module_instances_subtree($identifier);
+            $locations[] = RepositoryRights :: get_instance()->get_location_by_identifier_from_module_instances_subtree($identifier);
         }
 
         $manager = new RightsEditorManager($this, $locations);
@@ -47,7 +47,7 @@ class DiscoveryModuleInstanceManagerRightsEditorComponent extends DiscoveryModul
 
     function get_available_rights()
     {
-        return RepositoryRights :: get_instance()->get_available_rights_for_discovery_module_instances_substree();
+        return RepositoryRights :: get_instance()->get_available_rights_for_module_instances_substree();
     }
 
 }

@@ -21,33 +21,33 @@ use common\extension\video_conferencing_manager\VideoConferencingManager;
 
 use DOMDocument;
 
-require_once dirname(__FILE__) . '/../forms/discovery_module_instance_form.class.php';
+require_once dirname(__FILE__) . '/../forms/module_instance_form.class.php';
 
-class DiscoveryModuleInstanceManagerCreatorComponent extends DiscoveryModuleInstanceManager
+class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
 {
 
     function run()
     {
         $trail = BreadcrumbTrail :: get_instance();
-        $trail->add_help('discovery_module_instance general');
+        $trail->add_help('module_instance general');
 
         if (! $this->get_user()->is_platform_admin())
         {
             $this->not_allowed();
         }
 
-        $instance_type = Request :: get(DiscoveryModuleInstanceManager :: PARAM_EXTERNAL_TYPE);
-        $type = Request :: get(DiscoveryModuleInstanceManager :: PARAM_DISCOVERY_MODULE_INSTANCE_TYPE);
-        if ($instance_type && $type && DiscoveryModuleInstanceManager :: exists($instance_type, $type))
+        $instance_type = Request :: get(ModuleInstanceManager :: PARAM_EXTERNAL_TYPE);
+        $type = Request :: get(ModuleInstanceManager :: PARAM_DISCOVERY_MODULE_INSTANCE_TYPE);
+        if ($instance_type && $type && ModuleInstanceManager :: exists($instance_type, $type))
         {
-            $discovery_module_instance = new DiscoveryModuleInstance();
-            $discovery_module_instance->set_type($type);
-            $discovery_module_instance->set_instance_type($instance_type);
-            $form = new DiscoveryModuleInstanceForm(DiscoveryModuleInstanceForm :: TYPE_CREATE, $discovery_module_instance, $this->get_url(array(DiscoveryModuleInstanceManager :: PARAM_EXTERNAL_TYPE => $instance_type, DiscoveryModuleInstanceManager :: PARAM_DISCOVERY_MODULE_INSTANCE_TYPE => $type)));
+            $module_instance = new ModuleInstance();
+            $module_instance->set_type($type);
+            $module_instance->set_instance_type($instance_type);
+            $form = new ModuleInstanceForm(ModuleInstanceForm :: TYPE_CREATE, $module_instance, $this->get_url(array(ModuleInstanceManager :: PARAM_EXTERNAL_TYPE => $instance_type, ModuleInstanceManager :: PARAM_DISCOVERY_MODULE_INSTANCE_TYPE => $type)));
             if ($form->validate())
             {
-                $success = $form->create_discovery_module_instance();
-                $this->redirect(Translation :: get($success ? 'ObjectAdded' : 'ObjectNotAdded', array('OBJECT' => Translation :: get('DiscoveryModuleInstance')), Utilities :: COMMON_LIBRARIES), ($success ? false : true), array(DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+                $success = $form->create_module_instance();
+                $this->redirect(Translation :: get($success ? 'ObjectAdded' : 'ObjectNotAdded', array('OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES), ($success ? false : true), array(ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
             }
             else
             {
@@ -58,12 +58,12 @@ class DiscoveryModuleInstanceManagerCreatorComponent extends DiscoveryModuleInst
         }
         else
         {
-            $instance_types = $this->get_discovery_module_instance_types();
+            $instance_types = $this->get_module_instance_types();
 
             if (count($instance_types['sections']) == 0)
             {
                 $this->display_header();
-                $this->display_warning_message(Translation :: get('NoDiscoveryModuleInstancesAvailable'));
+                $this->display_warning_message(Translation :: get('NoModuleInstancesAvailable'));
                 $this->display_footer();
                 exit();
             }
@@ -77,9 +77,9 @@ class DiscoveryModuleInstanceManagerCreatorComponent extends DiscoveryModuleInst
 
                 foreach ($instance_types['types'][$category] as $type => $registration)
                 {
-                    $manager_class = DiscoveryModuleInstanceManager :: get_manager_class($registration->get_type());
+                    $manager_class = ModuleInstanceManager :: get_manager_class($registration->get_type());
 
-                    $types_html[] = '<a href="' . $this->get_url(array(DiscoveryModuleInstanceManager :: PARAM_EXTERNAL_TYPE => $registration->get_type(), DiscoveryModuleInstanceManager :: PARAM_DISCOVERY_MODULE_INSTANCE_TYPE => $type)) . '"><div class="create_block" style="background-image: url(' . Theme :: get_image_path($manager_class :: get_namespace($type)) . 'logo/48.png);">';
+                    $types_html[] = '<a href="' . $this->get_url(array(ModuleInstanceManager :: PARAM_EXTERNAL_TYPE => $registration->get_type(), ModuleInstanceManager :: PARAM_DISCOVERY_MODULE_INSTANCE_TYPE => $type)) . '"><div class="create_block" style="background-image: url(' . Theme :: get_image_path($manager_class :: get_namespace($type)) . 'logo/48.png);">';
                     $types_html[] = Translation :: get('TypeName', null, $manager_class :: get_namespace($registration->get_name()));
                     $types_html[] = '</div></a>';
                 }
@@ -93,9 +93,9 @@ class DiscoveryModuleInstanceManagerCreatorComponent extends DiscoveryModuleInst
         }
     }
 
-    function get_discovery_module_instance_types()
+    function get_module_instance_types()
     {
-        $active_managers = DiscoveryModuleInstanceManager :: get_registered_types();
+        $active_managers = ModuleInstanceManager :: get_registered_types();
 
         $types = array();
         $sections = array();
@@ -109,10 +109,10 @@ class DiscoveryModuleInstanceManagerCreatorComponent extends DiscoveryModuleInst
             $multiple = isset($package_info['package']['extra']['multiple']) ? $package_info['package']['extra']['multiple'] : false;
 
             $conditions = array();
-            $conditions[] = new EqualityCondition(DiscoveryModuleInstance :: PROPERTY_TYPE, $active_manager->get_name());
-            $conditions[] = new EqualityCondition(DiscoveryModuleInstance :: PROPERTY_INSTANCE_TYPE, $active_manager->get_type());
+            $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_TYPE, $active_manager->get_name());
+            $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_INSTANCE_TYPE, $active_manager->get_type());
             $condition = new AndCondition($conditions);
-            $count = $this->count_discovery_module_instances($condition);
+            $count = $this->count_module_instances($condition);
             if (! $multiple && $count > 0)
             {
                 continue;

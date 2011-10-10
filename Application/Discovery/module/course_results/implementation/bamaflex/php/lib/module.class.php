@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
+use common\libraries\Request;
+
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\course_results\DataManager;
@@ -16,6 +18,7 @@ use common\libraries\Translation;
 
 class Module extends \application\discovery\module\course_results\Module
 {
+	const PARAM_SOURCE = 'source';
 
     /**
      * @return multitype:multitype:string
@@ -61,6 +64,12 @@ class Module extends \application\discovery\module\course_results\Module
         
         return $data;
     }
+    
+    function get_course_results_parameters()
+    {
+    	return new Parameters(Request:: get(self :: PARAM_PROGRAMME_ID), Request :: get(self :: PARAM_SOURCE));
+    }
+    
 
     /**
      * @return multitype:string

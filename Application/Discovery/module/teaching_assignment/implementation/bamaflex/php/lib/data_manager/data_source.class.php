@@ -35,6 +35,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $teaching_assignment = new TeachingAssignment();
                     $teaching_assignment->set_source($result->source);
                     $teaching_assignment->set_id($result->id);
+                    $teaching_assignment->set_programme_id($result->programme_id);
                     $teaching_assignment->set_name($this->convert_to_utf8($result->name));
                     $teaching_assignment->set_year($this->convert_to_utf8($result->year));
                     $teaching_assignment->set_training($this->convert_to_utf8($result->training));

@@ -9,15 +9,15 @@ interface DataManagerInterface
 {
 
     /**
-     * @param $id
+     * @param Parameters $course_results_parameters
      * @return multitype:\application\discovery\module\course_results\CourseResults
      */
-    function retrieve_course_results($programme_id);
+    function retrieve_course_results($course_results_parameters);
 
     /**
-     * @param string $user_id
+     * @param Parameters $course_results_parameters
      * @return multitype:\application\discovery\module\course_results\MarkMoment
      */
-    function retrieve_mark_moments($user_id);
+    function retrieve_mark_moments($course_results_parameters);
 }
 ?>

@@ -31,7 +31,7 @@ class CourseResult extends DataClass
         $extended_property_names[] = self :: PROPERTY_MARKS;
         $extended_property_names[] = self :: PROPERTY_PERSON_FIRST_NAME;
         $extended_property_names[] = self :: PROPERTY_PERSON_LAST_NAME;
-        
+          
         return parent :: get_default_property_names($extended_property_names);
     }
 

@@ -5,7 +5,7 @@ use common\libraries\Request;
 use common\libraries\Translation;
 use common\libraries\Utilities;
 
-class DiscoveryModuleInstanceManagerDeactivatorComponent extends DiscoveryModuleInstanceManager
+class ModuleInstanceManagerDeactivatorComponent extends ModuleInstanceManager
 {
 
     function run()
@@ -15,7 +15,7 @@ class DiscoveryModuleInstanceManagerDeactivatorComponent extends DiscoveryModule
             $this->not_allowed();
         }
 
-        $ids = Request :: get(DiscoveryModuleInstanceManager :: PARAM_INSTANCE);
+        $ids = Request :: get(ModuleInstanceManager :: PARAM_INSTANCE);
         $failures = 0;
 
         if (! empty($ids))
@@ -27,10 +27,10 @@ class DiscoveryModuleInstanceManagerDeactivatorComponent extends DiscoveryModule
 
             foreach ($ids as $id)
             {
-                $discovery_module_instance = DiscoveryDataManager :: get_instance()->retrieve_discovery_module_instance($id);
-                $discovery_module_instance->deactivate();
+                $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($id);
+                $module_instance->deactivate();
 
-                if (! $discovery_module_instance->update())
+                if (! $module_instance->update())
                 {
                     $failures ++;
                 }
@@ -41,7 +41,7 @@ class DiscoveryModuleInstanceManagerDeactivatorComponent extends DiscoveryModule
                 if (count($ids) == 1)
                 {
                     $message = 'ObjectNotDeactivated';
-                    $parameter = array('OBJECT' => Translation :: get('DiscoveryModuleInstance'));
+                    $parameter = array('OBJECT' => Translation :: get('ModuleInstance'));
                 }
                 else
                 {
@@ -54,7 +54,7 @@ class DiscoveryModuleInstanceManagerDeactivatorComponent extends DiscoveryModule
                 if (count($ids) == 1)
                 {
                     $message = 'ObjectDeactivated';
-                    $parameter = array('OBJECT' => Translation :: get('DiscoveryModuleInstance'));
+                    $parameter = array('OBJECT' => Translation :: get('ModuleInstance'));
                 }
                 else
                 {
@@ -64,11 +64,11 @@ class DiscoveryModuleInstanceManagerDeactivatorComponent extends DiscoveryModule
             }
 
             $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
-                    DiscoveryModuleInstanceManager :: PARAM_INSTANCE_ACTION => DiscoveryModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+                    ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoDiscoveryModuleInstanceSelected')));
+            $this->display_error_page(htmlentities(Translation :: get('NoModuleInstanceSelected')));
         }
     }
 }
