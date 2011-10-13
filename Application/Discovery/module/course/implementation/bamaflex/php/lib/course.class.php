@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
+use common\libraries\Utilities;
+
 use application\discovery\DiscoveryItem;
 use application\discovery\DiscoveryDataManager;
 
@@ -11,7 +13,7 @@ use application\discovery\DiscoveryDataManager;
 class Course extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Course properties
      */
@@ -39,17 +41,17 @@ class Course extends DiscoveryItem
     const PROPERTY_JURY = 'jury';
     const PROPERTY_REPLEACABLE = 'repleacable';
     const PROPERTY_TRAINING_UNIT = 'training_unit';
-    
+
     const TIMEFRAME_ACADEMIC_YEAR = '1';
     const TIMEFRAME_FIRST_TERM = '2';
     const TIMEFRAME_SECOND_TERM = '3';
     const TIMEFRAME_BOTH_TERMS = '4';
     const TIMEFRAME_UNKNOWN = '5';
-    
+
     const PROGRAMME_TYPE_SIMPLE = 1;
     const PROGRAMME_TYPE_COMPLEX = 2;
     const PROGRAMME_TYPE_PART = 4;
-    
+
     private $second_chance;
     private $following_impossible;
     private $costs;
@@ -60,7 +62,7 @@ class Course extends DiscoveryItem
     private $languages;
     private $timeframe_parts;
     private $teachers;
-    
+
     private $materials_by_type;
 
     /**
@@ -94,7 +96,7 @@ class Course extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_JURY;
         $extended_property_names[] = self :: PROPERTY_REPLEACABLE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_UNIT;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -517,12 +519,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_materials();
         }
-        
+
         if (! isset($this->materials_by_type[$type]))
         {
             $this->materials_by_type[Material :: TYPE_OPTIONAL] = array();
             $this->materials_by_type[Material :: TYPE_REQUIRED] = array();
-            
+
             foreach ($this->get_materials() as $material)
             {
                 $this->materials_by_type[$material->get_type()][] = $material;

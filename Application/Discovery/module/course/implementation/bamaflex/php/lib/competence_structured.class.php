@@ -6,7 +6,7 @@ use application\discovery\DiscoveryDataManager;
 class CompetenceStructured extends Competence
 {
     const CLASS_NAME = __CLASS__;
-    
+
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_CODE = 'code';
     const PROPERTY_SUMMARY = 'summary';
@@ -27,7 +27,7 @@ class CompetenceStructured extends Competence
         return $this->get_default_property(self :: PROPERTY_CODE);
     }
 
-    function code($code)
+    function set_code($code)
     {
         $this->set_default_property(self :: PROPERTY_CODE, $code);
     }
@@ -42,7 +42,7 @@ class CompetenceStructured extends Competence
         $this->set_default_property(self :: PROPERTY_SUMMARY, $summary);
     }
 
-    function level()
+    function get_level()
     {
         return $this->get_default_property(self :: PROPERTY_LEVEL);
     }
@@ -61,8 +61,8 @@ class CompetenceStructured extends Competence
         $extended_property_names[] = self :: PROPERTY_CODE;
         $extended_property_names[] = self :: PROPERTY_SUMMARY;
         $extended_property_names[] = self :: PROPERTY_LEVEL;
-       
-        
+
+
         return parent :: get_default_property_names($extended_property_names);
     }
 

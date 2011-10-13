@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\Session;
+
 use common\libraries\Theme;
 use common\libraries\DynamicVisualTab;
 use common\libraries\DynamicVisualTabsRenderer;
@@ -26,42 +28,47 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
         $this->user_id = Request :: get(DiscoveryManager :: PARAM_USER_ID);
         $module_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
 
-//        if ($this->user_id)
-//        {
-            $this->display_header();
+        if (! $this->user_id)
+        {
+            $this->user_id = Session :: get_user_id();
+        }
 
-            if (! $module_id)
-            {
-                $module_id = 1;
-            }
+        //        if ($this->user_id)
+        //        {
+        $this->display_header();
 
-            $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($module_id);
-            $current_module = Module :: factory($this, $current_module_instance);
+        if (! $module_id)
+        {
+            $module_id = 1;
+        }
 
-            $tabs = new DynamicVisualTabsRenderer('discovery', $current_module->render());
-            $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances();
+        $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($module_id);
+        $current_module = Module :: factory($this, $current_module_instance);
 
-            while ($module_instance = $module_instances->next_result())
-            {
-                $selected = ($module_id == $module_instance->get_id() ? true : false);
-                $link = $this->get_url(array(
-                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(),
-                        DiscoveryManager :: PARAM_USER_ID => $this->user_id));
-                $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), $module_instance->get_title(), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
-            }
+        $tabs = new DynamicVisualTabsRenderer('discovery', $current_module->render());
+        $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances();
 
-            echo $tabs->render();
+        while ($module_instance = $module_instances->next_result())
+        {
+            $selected = ($module_id == $module_instance->get_id() ? true : false);
+            $link = $this->get_url(array(DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(),
+                    DiscoveryManager :: PARAM_USER_ID => $this->user_id));
+            $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), $module_instance->get_title(), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
+        }
 
-            echo '<div id="legend">';
-            echo LegendTable::get_instance()->as_html();
-            echo '</div>';
+        echo $tabs->render();
 
-            $this->display_footer();
-//        }
-//        else
-//        {
-//            Redirect :: get_url(array(DiscoveryManager :: ACTION_BROWSE));
-//        }
+        echo '<div id="legend">';
+        echo LegendTable :: get_instance()->as_html();
+        echo '</div>';
+
+        $this->display_footer();
+
+     //        }
+    //        else
+    //        {
+    //            Redirect :: get_url(array(DiscoveryManager :: ACTION_BROWSE));
+    //        }
     }
 
     function get_user_id()

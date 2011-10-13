@@ -51,6 +51,7 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
             $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_FIRSTNAME, '*' . $query . '*');
             $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_LASTNAME, '*' . $query . '*');
             $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_USERNAME, '*' . $query . '*');
+            $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_OFFICIAL_CODE, '*' . $query . '*');
             return new OrCondition($or_conditions);
         }
         else
