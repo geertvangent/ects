@@ -60,6 +60,8 @@ class Course extends DiscoveryItem
     private $languages;
     private $timeframe_parts;
     private $teachers;
+    
+    private $materials_by_type;
 
     /**
      * Get the default properties
@@ -509,6 +511,26 @@ class Course extends DiscoveryItem
         $this->materials = $materials;
     }
 
+    function get_materials_by_type($type = null)
+    {
+        if (is_null($type))
+        {
+            return $this->get_materials();
+        }
+        
+        if (! isset($this->materials_by_type[$type]))
+        {
+            $this->materials_by_type[Material :: TYPE_OPTIONAL] = array();
+            $this->materials_by_type[Material :: TYPE_REQUIRED] = array();
+            
+            foreach ($this->get_materials() as $material)
+            {
+                $this->materials_by_type[$material->get_type()][] = $material;
+            }
+        }
+        return $this->materials_by_type[$type];
+    }
+
     /**
      * @return the $competences
      */
@@ -574,18 +596,18 @@ class Course extends DiscoveryItem
     {
         return $this->teachers;
     }
-    
+
     function get_teachers_string()
     {
-    	$teachers = array();
-    	foreach($this->get_teachers() as $teacher)
-    	{
-    		if ($teacher->is_coordinator())
-    		{
-    			$teachers[] = $teacher;
-    		}
-    	}
-    	return implode(', ', $teachers);
+        $teachers = array();
+        foreach ($this->get_teachers() as $teacher)
+        {
+            if ($teacher->is_coordinator())
+            {
+                $teachers[] = $teacher;
+            }
+        }
+        return implode(', ', $teachers);
     }
 
     /**

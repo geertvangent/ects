@@ -88,6 +88,52 @@ class Module extends \application\discovery\module\course\Module
             $properties[Translation :: get($cost->get_type_string())] = $cost->get_price();
         }
         
+        $images = array();
+        $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/degree.png" alt="' . Translation :: get('DegreePossible') . '" title="' . Translation :: get('DegreePossible') . '"/>';
+        LegendTable :: get_instance()->add_symbol($image, Translation :: get('DegreePossible'), Translation :: get('FollowingPossible'));
+        $images[] = $image;
+        
+        if ($course->get_following_impossible()->get_credit())
+        {
+            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit_impossible.png" alt="' . Translation :: get('CreditImpossible') . '" title="' . Translation :: get('CreditImpossible') . '"/>';
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get('CreditImpossible'), Translation :: get('FollowingPossible'));
+            $images[] = $image;
+        }
+        else
+        {
+            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit.png" alt="' . Translation :: get('CreditPossible') . '" title="' . Translation :: get('CreditPossible') . '"/>';
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get('CreditPossible'), Translation :: get('FollowingPossible'));
+            $images[] = $image;
+        }
+        
+        if ($course->get_following_impossible()->get_exam_degree())
+        {
+            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree_impossible.png" alt="' . Translation :: get('ExamDegreeImpossible') . '" title="' . Translation :: get('ExamDegreeImpossible') . '"/>';
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamDegreeImpossible'), Translation :: get('FollowingPossible'));
+            $images[] = $image;
+        }
+        else
+        {
+            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree.png" alt="' . Translation :: get('ExamDegreePossible') . '" title="' . Translation :: get('ExamDegreePossible') . '"/>';
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamDegreePossible'), Translation :: get('FollowingPossible'));
+            $images[] = $image;
+        }
+        
+        if ($course->get_following_impossible()->get_exam_credit())
+        {
+            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit_impossible.png" alt="' . Translation :: get('ExamCreditImpossible') . '" title="' . Translation :: get('ExamCreditImpossible') . '"/>';
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamCreditImpossible'), Translation :: get('FollowingPossible'));
+            $images[] = $image;
+        }
+        else
+        {
+            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit.png" alt="' . Translation :: get('ExamCreditPossible') . '" title="' . Translation :: get('ExamCreditPossible') . '"/>';
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamCreditPossible'), Translation :: get('FollowingPossible'));
+            $images[] = $image;
+        }
+        
+        $properties[Translation :: get('FollowingPossible')] = implode(' ', $images);
+        
         $table = new PropertiesTable($properties);
         
         $html[] = $table->toHtml();
@@ -96,7 +142,92 @@ class Module extends \application\discovery\module\course\Module
 
     function get_materials()
     {
+        $html = array();
         $course = $this->get_course();
+        
+        $html[] = $this->get_materials_by_type(Material :: TYPE_REQUIRED);
+        if (count($course->get_materials_by_type(Material :: TYPE_REQUIRED)) > 0 && count($course->get_materials_by_type(Material :: TYPE_OPTIONAL)) > 0)
+        {
+            $html[] = '<br/>';
+        }
+        $html[] = $this->get_materials_by_type(Material :: TYPE_OPTIONAL);
+        return implode("\n", $html);
+    }
+
+    function get_materials_by_type($type)
+    {
+        $course = $this->get_course();
+        
+        $html = array();
+        $table_data = array();
+        
+        if (count($course->get_materials_by_type($type)) > 0)
+        {
+            $var = ($type == Material :: TYPE_REQUIRED ? 'Required' : 'Optional');
+            $html[] = '<h3>' . Translation :: get($var) . '</h3>';
+        }
+        foreach ($course->get_materials_by_type($type) as $material)
+        {
+            if ($material instanceof MaterialDescription)
+            {
+                $html[] = '<div class="content_object" style="padding: 10px 10px 10px 10px;">';
+                $html[] = '<div class="description">';
+                $html[] = $material->get_description();
+                $html[] = '</div>';
+                $html[] = '</div>';
+            }
+            else
+            {
+                $table_row = array();
+                $table_row[] = $material->get_group();
+                $table_row[] = $material->get_title();
+                $table_row[] = $material->get_edition();
+                $table_row[] = $material->get_author();
+                $table_row[] = $material->get_editor();
+                $table_row[] = $material->get_isbn();
+                $table_row[] = $material->get_medium();
+                if ($material->get_price())
+                {
+                    $table_row[] = $material->get_price();
+                }
+                else
+                {
+                    $table_row[] = '';
+                }
+                if ($material->get_for_sale())
+                {
+                    $image = '<img src="' . Theme :: get_image_path() . 'material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' . Translation :: get('IsForSale') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsForSale'), Translation :: get('ForSale'));
+                    $table_row[] = $image;
+                }
+                else
+                {
+                    $image = '<img src="' . Theme :: get_image_path() . 'material/not_for_sale.png" alt="' . Translation :: get('IsNotForSale') . '" title="' . Translation :: get('IsNotForSale') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsNotForSale'), Translation :: get('ForSale'));
+                    $table_row[] = $image;
+                }
+                
+                $table_row[] = $material->get_description();
+                $table_data[] = $table_row;
+            }
+        }
+        if (count($table_data) > 0)
+        {
+            $table = new SortableTable($table_data);
+            $table->set_header(0, Translation :: get('Group'), false);
+            $table->set_header(1, Translation :: get('Title'), false);
+            $table->set_header(2, Translation :: get('Edition'), false);
+            $table->set_header(3, Translation :: get('Author'), false);
+            $table->set_header(4, Translation :: get('Editor'), false);
+            $table->set_header(5, Translation :: get('Isbn'), false);
+            $table->set_header(6, Translation :: get('Medium'), false);
+            $table->set_header(7, Translation :: get('Price'), false);
+            $table->set_header(8, '', false);
+            $table->set_header(9, Translation :: get('Remarks'), false);
+            $html[] = $table->as_html();
+        }
+        
+        return implode("\n", $html);
     }
 
     function get_activities()
