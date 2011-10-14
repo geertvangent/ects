@@ -14,6 +14,9 @@ class Teacher extends DiscoveryItem
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_PERSON_ID = 'person_id';
     const PROPERTY_COORDINATOR = 'coordinator';
+    
+    const TYPE_TEACHER = 0;
+    const TYPE_COORDINATOR = 1;
 
     function get_source()
     {

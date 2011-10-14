@@ -9,6 +9,7 @@ class Autoloader
          'Activity' => '/lib/activity.class.php',
          'ActivityDescription' => '/lib/activity_description.class.php',
          'ActivityStructured' => '/lib/activity_structured.class.php',
+         'ActivityTotal' => '/lib/activity_total.class.php',
          'Competence' => '/lib/competence.class.php',
          'CompetenceDescription' => '/lib/competence_description.class.php',
          'CompetenceStructured' => '/lib/competence_structured.class.php',

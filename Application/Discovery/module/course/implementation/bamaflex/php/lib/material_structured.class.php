@@ -141,6 +141,11 @@ class MaterialStructured extends Material
         $this->set_default_property(self :: PROPERTY_PRICE, $price);
     }
 
+    function get_price_string()
+    {
+        return $this->get_price() . ' &euro;';
+    }
+
     function get_for_sale()
     {
         return $this->get_default_property(self :: PROPERTY_FOR_SALE);

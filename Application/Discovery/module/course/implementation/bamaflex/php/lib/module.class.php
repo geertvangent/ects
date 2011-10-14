@@ -48,11 +48,26 @@ class Module extends \application\discovery\module\course\Module
         
         $tabs = new DynamicTabsRenderer('course');
         $tabs->add_tab(new DynamicContentTab(self :: TAB_GENERAL, Translation :: get('General'), Theme :: get_image_path() . 'tabs/' . self :: TAB_GENERAL . '.png', $this->get_general()));
-        $tabs->add_tab(new DynamicContentTab(self :: TAB_MATERIALS, Translation :: get('Materials'), Theme :: get_image_path() . 'tabs/' . self :: TAB_MATERIALS . '.png', $this->get_materials()));
-        $tabs->add_tab(new DynamicContentTab(self :: TAB_ACTIVITIES, Translation :: get('Activities'), Theme :: get_image_path() . 'tabs/' . self :: TAB_ACTIVITIES . '.png', $this->get_activities()));
-        $tabs->add_tab(new DynamicContentTab(self :: TAB_COMPETENCES, Translation :: get('Competences'), Theme :: get_image_path() . 'tabs/' . self :: TAB_COMPETENCES . '.png', $this->get_competences()));
-        $tabs->add_tab(new DynamicContentTab(self :: TAB_CONTENT, Translation :: get('Content'), Theme :: get_image_path() . 'tabs/' . self :: TAB_CONTENT . '.png', $this->get_content()));
-        $tabs->add_tab(new DynamicContentTab(self :: TAB_EVALUATIONS, Translation :: get('Evaluations'), Theme :: get_image_path() . 'tabs/' . self :: TAB_EVALUATIONS . '.png', $this->get_evaluations()));
+        if (count($course->get_materials()) > 0)
+        {
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_MATERIALS, Translation :: get('Materials'), Theme :: get_image_path() . 'tabs/' . self :: TAB_MATERIALS . '.png', $this->get_materials()));
+        }
+        if (count($course->get_activities()) > 0)
+        {
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_ACTIVITIES, Translation :: get('Activities'), Theme :: get_image_path() . 'tabs/' . self :: TAB_ACTIVITIES . '.png', $this->get_activities()));
+        }
+        if (count($course->get_competences()) > 0)
+        {
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_COMPETENCES, Translation :: get('Competences'), Theme :: get_image_path() . 'tabs/' . self :: TAB_COMPETENCES . '.png', $this->get_competences()));
+        }
+        if ($course->has_content())
+        {
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_CONTENT, Translation :: get('Content'), Theme :: get_image_path() . 'tabs/' . self :: TAB_CONTENT . '.png', $this->get_content()));
+        }
+        if (count($course->get_evaluations()) > 0)
+        {
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_EVALUATIONS, Translation :: get('Evaluations'), Theme :: get_image_path() . 'tabs/' . self :: TAB_EVALUATIONS . '.png', $this->get_evaluations()));
+        }
         
         $html[] = $tabs->render();
         return implode("\n", $html);
@@ -81,11 +96,20 @@ class Module extends \application\discovery\module\course\Module
         $properties[Translation :: get('Kind')] = $course->get_kind();
         
         $properties[Translation :: get('Languages')] = $course->get_languages_string();
-        $properties[Translation :: get('Teachers')] = $course->get_teachers_string();
+        
+        if ($course->has_coordinators())
+        {
+            $properties[Translation :: get('Coordinators')] = $course->get_coordinators_string();
+        }
+        
+        if ($course->has_teachers())
+        {
+            $properties[Translation :: get('Teachers')] = $course->get_teachers_string();
+        }
         
         foreach ($course->get_costs() as $cost)
         {
-            $properties[Translation :: get($cost->get_type_string())] = $cost->get_price();
+            $properties[Translation :: get($cost->get_type_string())] = $cost->get_price_string();
         }
         
         $images = array();
@@ -186,14 +210,16 @@ class Module extends \application\discovery\module\course\Module
                 $table_row[] = $material->get_editor();
                 $table_row[] = $material->get_isbn();
                 $table_row[] = $material->get_medium();
+                $table_row[] = $material->get_description();
                 if ($material->get_price())
                 {
-                    $table_row[] = $material->get_price();
+                    $table_row[] = $material->get_price_string();
                 }
                 else
                 {
                     $table_row[] = '';
                 }
+                
                 if ($material->get_for_sale())
                 {
                     $image = '<img src="' . Theme :: get_image_path() . 'material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' . Translation :: get('IsForSale') . '"/>';
@@ -207,11 +233,13 @@ class Module extends \application\discovery\module\course\Module
                     $table_row[] = $image;
                 }
                 
-                $table_row[] = $material->get_description();
                 $table_data[] = $table_row;
             }
         }
-        if (count($table_data) > 0)
+        
+        $cost = $course->get_costs_by_type(Cost :: TYPE_MATERIAL);
+        
+        if (count($table_data) > 0 || ($cost && $type == Material :: TYPE_REQUIRED && $cost->get_price()))
         {
             $table = new SortableTable($table_data);
             $table->set_header(0, Translation :: get('Group'), false);
@@ -221,10 +249,11 @@ class Module extends \application\discovery\module\course\Module
             $table->set_header(4, Translation :: get('Editor'), false);
             $table->set_header(5, Translation :: get('Isbn'), false);
             $table->set_header(6, Translation :: get('Medium'), false);
-            $table->set_header(7, Translation :: get('Price'), false);
-            $table->set_header(8, '', false);
-            $table->set_header(9, Translation :: get('Remarks'), false);
-            $html[] = $table->as_html();
+            $table->set_header(7, Translation :: get('Remarks'), false);
+            $table->set_header(8, Translation :: get('Price'), false);
+            $table->set_header(9, '', false);
+            
+            $html[] = $table->as_html($cost->get_price_string(), 8);
         }
         
         return implode("\n", $html);
@@ -233,11 +262,120 @@ class Module extends \application\discovery\module\course\Module
     function get_activities()
     {
         $course = $this->get_course();
+        
+        $html = array();
+        $table_data = array();
+        
+        foreach ($course->get_activities() as $activity)
+        {
+            if ($activity instanceof ActivityDescription)
+            {
+                $html[] = '<div class="content_object" style="padding: 10px 10px 10px 10px;">';
+                $html[] = '<div class="description">';
+                $html[] = $activity->get_description();
+                $html[] = '</div>';
+                $html[] = '</div>';
+            }
+            elseif ($activity instanceof ActivityStructured)
+            {
+                
+                $table_row = array();
+                $table_row[] = $activity->get_group();
+                $table_row[] = $activity->get_name();
+                $table_row[] = Translation :: get('ActivityTime', array('TIME' => $activity->get_time()));
+                //                $table_row[] = $activity->get_remarks();
+                //                $table_row[] = $activity->get_description();
+                
+
+                $table_data[] = $table_row;
+            }
+        }
+        $total = $course->get_activities_by_type(ActivityTotal :: CLASS_NAME);
+        
+        if (count($table_data) > 0 || $total)
+        {
+            $table = new SortableTable($table_data);
+            $table->set_header(0, Translation :: get('Group'), false);
+            $table->set_header(1, Translation :: get('Name'), false);
+            $table->set_header(2, Translation :: get('Time'), false);
+            //            $table->set_header(3, Translation :: get('Remarks'), false);
+            //            $table->set_header(4, Translation :: get('Description'), false);
+            
+
+            $total = $course->get_activities_by_type(ActivityTotal :: CLASS_NAME);
+            if ($total)
+            {
+                $html[] = $table->as_html(Translation :: get('ActivityTime', array('TIME' => $total->get_time())), 2);
+            }
+            else
+            {
+                $html[] = $table->as_html();
+            }
+        }
+        
+        return implode("\n", $html);
     }
 
     function get_competences()
     {
         $course = $this->get_course();
+        $tabs = new DynamicTabsRenderer('competences');
+        if (count($course->get_competences_by_type(Competence :: TYPE_BEGIN)) > 0)
+        {
+            $tabs->add_tab(new DynamicContentTab(Competence :: TYPE_BEGIN, Translation :: get('BeginCompetence'), Theme :: get_image_path() . 'competence/tabs/' . Competence :: TYPE_BEGIN . '.png', $this->get_competences_by_type(Competence :: TYPE_BEGIN)));
+        }
+        if (count($course->get_competences_by_type(Competence :: TYPE_END)) > 0)
+        {
+            $tabs->add_tab(new DynamicContentTab(Competence :: TYPE_END, Translation :: get('EndCompetence'), Theme :: get_image_path() . 'competence/tabs/' . Competence :: TYPE_END . '.png', $this->get_competences_by_type(Competence :: TYPE_END)));
+        }
+        return $tabs->render();
+    }
+
+    function get_competences_by_type($type)
+    {
+        $course = $this->get_course();
+        
+        $html = array();
+        $table_data = array();
+        
+        if (count($course->get_competences_by_type($type)) > 0)
+        {
+            $var = ($type == Competence :: TYPE_BEGIN ? 'BeginCompetence' : 'EndCompetence');
+            $html[] = '<h3>' . Translation :: get($var) . '</h3>';
+        }
+        foreach ($course->get_competences_by_type($type) as $competence)
+        {
+            if ($competence instanceof CompetenceDescription)
+            {
+                $html[] = '<div class="content_object" style="padding: 10px 10px 10px 10px;">';
+                $html[] = '<div class="description">';
+                $html[] = $competence->get_description();
+                $html[] = '</div>';
+                $html[] = '</div>';
+            }
+            else
+            {
+                $table_row = array();
+                $table_row[] = $competence->get_code();
+                //                $table_row[] = $competence->get_summary();
+                $table_row[] = $competence->get_description();
+                $table_row[] = $competence->get_level();
+                
+                $table_data[] = $table_row;
+            }
+        }
+        
+        if (count($table_data) > 0)
+        {
+            $table = new SortableTable($table_data);
+            $table->set_header(0, Translation :: get('Code'), false);
+            //            $table->set_header(1, Translation :: get('Summary'), false);
+            $table->set_header(1, Translation :: get('Description'), false);
+            $table->set_header(2, Translation :: get('Level'), false);
+            $html[] = $table->as_html();
+        }
+        
+        return implode("\n", $html);
     }
 
     function get_content()
@@ -296,6 +434,59 @@ class Module extends \application\discovery\module\course\Module
     function get_evaluations()
     {
         $course = $this->get_course();
+        
+        $html = array();
+        $table_data = array();
+        
+        foreach ($course->get_evaluations() as $evaluation)
+        {
+            if ($evaluation instanceof EvaluationDescription)
+            {
+                $html[] = '<div class="content_object" style="padding: 10px 10px 10px 10px;">';
+                $html[] = '<div class="description">';
+                $html[] = $evaluation->get_description();
+                $html[] = '</div>';
+                $html[] = '</div>';
+            }
+            else
+            {
+                $table_row = array();
+                $table_row[] = $evaluation->get_try();
+                $table_row[] = $evaluation->get_moment();
+                $table_row[] = $evaluation->get_type();
+                $table_row[] = $evaluation->get_percentage();
+                $table_row[] = $evaluation->get_description();
+                
+                if ($evaluation->get_permanent())
+                {
+                    $image = '<img src="' . Theme :: get_image_path() . 'evaluation/permanent.png" alt="' . Translation :: get('IsPermanent') . '" title="' . Translation :: get('IsPermanent') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsPermanent'), Translation :: get('Permanent'));
+                    $table_row[] = $image;
+                }
+                else
+                {
+                    $image = '<img src="' . Theme :: get_image_path() . 'evaluation/not_permanent.png" alt="' . Translation :: get('IsNotPermanent') . '" title="' . Translation :: get('IsNotPermanent') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsNotPermanent'), Translation :: get('Permanent'));
+                    $table_row[] = $image;
+                }
+                
+                $table_data[] = $table_row;
+            }
+        }
+        
+        if (count($table_data) > 0)
+        {
+            $table = new SortableTable($table_data);
+            $table->set_header(0, Translation :: get('Try'), false);
+            $table->set_header(1, Translation :: get('Moment'), false);
+            $table->set_header(2, Translation :: get('Type'), false);
+            $table->set_header(3, Translation :: get('Percentage'), false);
+            $table->set_header(4, Translation :: get('Remarks'), false);
+            $table->set_header(5, Translation :: get('Permanent'), false);
+            $html[] = $table->as_html();
+        }
+        
+        return implode("\n", $html);
     }
 }
 ?>

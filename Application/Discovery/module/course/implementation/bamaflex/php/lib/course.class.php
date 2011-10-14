@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
+use common\libraries\StringUtilities;
+
 use common\libraries\Utilities;
 
 use application\discovery\DiscoveryItem;
@@ -13,7 +15,7 @@ use application\discovery\DiscoveryDataManager;
 class Course extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Course properties
      */
@@ -41,17 +43,17 @@ class Course extends DiscoveryItem
     const PROPERTY_JURY = 'jury';
     const PROPERTY_REPLEACABLE = 'repleacable';
     const PROPERTY_TRAINING_UNIT = 'training_unit';
-
+    
     const TIMEFRAME_ACADEMIC_YEAR = '1';
     const TIMEFRAME_FIRST_TERM = '2';
     const TIMEFRAME_SECOND_TERM = '3';
     const TIMEFRAME_BOTH_TERMS = '4';
     const TIMEFRAME_UNKNOWN = '5';
-
+    
     const PROGRAMME_TYPE_SIMPLE = 1;
     const PROGRAMME_TYPE_COMPLEX = 2;
     const PROGRAMME_TYPE_PART = 4;
-
+    
     private $second_chance;
     private $following_impossible;
     private $costs;
@@ -62,8 +64,11 @@ class Course extends DiscoveryItem
     private $languages;
     private $timeframe_parts;
     private $teachers;
-
+    
     private $materials_by_type;
+    private $teachers_by_type;
+    private $costs_by_type;
+    private $activities_by_type;
 
     /**
      * Get the default properties
@@ -96,7 +101,7 @@ class Course extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_JURY;
         $extended_property_names[] = self :: PROPERTY_REPLEACABLE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_UNIT;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -359,6 +364,31 @@ class Course extends DiscoveryItem
         $this->set_default_property(self :: PROPERTY_CONTENTS, $contents);
     }
 
+    function has_content()
+    {
+        if (! StringUtilities :: is_null_or_empty($this->get_goals(), true))
+        {
+            return true;
+        }
+        
+        if (! StringUtilities :: is_null_or_empty($this->get_contents(), true))
+        {
+            return true;
+        }
+        
+        if (! StringUtilities :: is_null_or_empty($this->get_coaching(), true))
+        {
+            return true;
+        }
+        
+        if (! StringUtilities :: is_null_or_empty($this->get_succession(), true))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
     function get_coaching()
     {
         return $this->get_default_property(self :: PROPERTY_COACHING);
@@ -465,6 +495,26 @@ class Course extends DiscoveryItem
         $this->costs = $costs;
     }
 
+    function get_costs_by_type($type = null)
+    {
+        if (is_null($type))
+        {
+            return $this->get_costs();
+        }
+        
+        if (! isset($this->costs_by_type[$type]))
+        {
+            $this->costs_by_type[Cost :: TYPE_MATERIAL] = false;
+            $this->costs_by_type[Cost :: TYPE_ADDITIONAL] = false;
+            
+            foreach ($this->get_costs() as $cost)
+            {
+                $this->costs_by_type[$cost->get_type()] = $cost;
+            }
+        }
+        return $this->costs_by_type[$type];
+    }
+
     /**
      * @return the $evaluations
      */
@@ -497,6 +547,34 @@ class Course extends DiscoveryItem
         $this->activities = $activities;
     }
 
+    function get_activities_by_type($type = null)
+    {
+        if (is_null($type))
+        {
+            return $this->get_activities();
+        }
+        
+        if (! isset($this->activities_by_type[$type]))
+        {
+            $this->activities_by_type[ActivityDescription :: CLASS_NAME] = array();
+            $this->activities_by_type[ActivityStructured :: CLASS_NAME] = array();
+            $this->activities_by_type[ActivityTotal :: CLASS_NAME] = false;
+            
+            foreach ($this->get_activities() as $activity)
+            {
+                if ($activity instanceof ActivityTotal)
+                {
+                    $this->activities_by_type[$activity :: CLASS_NAME] = $activity;
+                }
+                else
+                {
+                    $this->activities_by_type[$activity :: CLASS_NAME][] = $activity;
+                }
+            }
+        }
+        return $this->activities_by_type[$type];
+    }
+
     /**
      * @return the $materials
      */
@@ -519,12 +597,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_materials();
         }
-
+        
         if (! isset($this->materials_by_type[$type]))
         {
             $this->materials_by_type[Material :: TYPE_OPTIONAL] = array();
             $this->materials_by_type[Material :: TYPE_REQUIRED] = array();
-
+            
             foreach ($this->get_materials() as $material)
             {
                 $this->materials_by_type[$material->get_type()][] = $material;
@@ -547,6 +625,26 @@ class Course extends DiscoveryItem
     public function set_competences($competences)
     {
         $this->competences = $competences;
+    }
+
+    function get_competences_by_type($type = null)
+    {
+        if (is_null($type))
+        {
+            return $this->get_competences();
+        }
+        
+        if (! isset($this->competences_by_type[$type]))
+        {
+            $this->competences_by_type[Competence :: TYPE_BEGIN] = array();
+            $this->competences_by_type[Competence :: TYPE_END] = array();
+            
+            foreach ($this->get_competences() as $competence)
+            {
+                $this->competences_by_type[$competence->get_type()][] = $competence;
+            }
+        }
+        return $this->competences_by_type[$type];
     }
 
     /**
@@ -599,12 +697,56 @@ class Course extends DiscoveryItem
         return $this->teachers;
     }
 
+    function get_teachers_by_type($type)
+    {
+        
+        if (is_null($type))
+        {
+            return $this->get_teachers();
+        }
+        
+        if (! isset($this->teachers_by_type[$type]))
+        {
+            $this->teachers_by_type[Teacher :: TYPE_TEACHER] = array();
+            $this->teachers_by_type[Teacher :: TYPE_COORDINATOR] = array();
+            
+            foreach ($this->get_teachers() as $teacher)
+            {
+                $this->teachers_by_type[$teacher->is_coordinator()][] = $teacher;
+            }
+        }
+        return $this->teachers_by_type[$type];
+    }
+
+    function has_coordinators()
+    {
+        return count($this->get_teachers_by_type(Teacher :: TYPE_COORDINATOR)) > 0;
+    }
+
+    function has_teachers()
+    {
+        return count($this->get_teachers_by_type(Teacher :: TYPE_TEACHER)) > 0;
+    }
+
+    function get_coordinators_string()
+    {
+        $coordinators = array();
+        foreach ($this->get_teachers() as $coordinator)
+        {
+            if ($coordinator->is_coordinator())
+            {
+                $coordinators[] = $coordinator;
+            }
+        }
+        return implode(', ', $coordinators);
+    }
+
     function get_teachers_string()
     {
         $teachers = array();
         foreach ($this->get_teachers() as $teacher)
         {
-            if ($teacher->is_coordinator())
+            if (! $teacher->is_coordinator())
             {
                 $teachers[] = $teacher;
             }

@@ -23,17 +23,7 @@ class Cost extends DiscoveryItem
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
-
-    function get_price()
-    {
-        return $this->get_default_property(self :: PROPERTY_PRICE);
-    }
-
-    function set_price($price)
-    {
-        $this->set_default_property(self :: PROPERTY_PRICE, $price);
-    }
-
+    
     function get_type_string()
     {
         return self :: type_string($this->get_type());
@@ -52,6 +42,22 @@ class Cost extends DiscoveryItem
         
         }
     }
+
+    function get_price()
+    {
+        return $this->get_default_property(self :: PROPERTY_PRICE);
+    }
+
+    function set_price($price)
+    {
+        $this->set_default_property(self :: PROPERTY_PRICE, $price);
+    }
+
+    function get_price_string()
+    {
+    	return $this->get_price() . ' &euro;';
+    }
+
 
     /**
      * @param multitype:string $extended_property_names

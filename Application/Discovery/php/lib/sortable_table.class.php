@@ -6,6 +6,7 @@ use common\libraries\Utilities;
 use common\libraries\Translation;
 
 use common\libraries\SortableTableFromArray;
+use HTML_Table;
 
 class SortableTable extends SortableTableFromArray
 {
@@ -19,16 +20,60 @@ class SortableTable extends SortableTableFromArray
         return $this->get_data();
     }
 
-    function as_html($empty_table = false)
+    function as_html($total_value, $total_column)
     {
-        if ($this->get_total_number_of_items() == 0)
+        
+//        $cols = $this->getHeader()->getColCount();
+//        $this->setCellAttributes(0, 0, 'style="font-style:italic;text-align:center;" colspan="' . $cols . '"');
+//        $this->setCellContents(0, 0, Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES));
+//        
+        return $this->get_table_html($total_value, $total_column);
+    }
+
+    /**
+     * Get the HTML-code with the data-table.
+     */
+    function get_table_html($total_value, $total_column)
+    {
+        // Make sure the header isn't dragable or droppable
+        //$this->setRowAttributes(0, array('class' => 'nodrag nodrop'), true);
+        
+
+        // Now process the rest of the table
+        $pager = $this->get_pager();
+        $offset = $pager->getOffsetByPageId();
+        $from = $offset[0] - 1;
+        $table_data = $this->get_table_data($from);
+        
+        foreach ($table_data as $index => & $row)
         {
-            $cols = $this->getHeader()->getColCount();
-            $this->setCellAttributes(0, 0, 'style="font-style:italic;text-align:center;" colspan="' . $cols . '"');
-            $this->setCellContents(0, 0, Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES));
+            $row_id = $row[0];
+            $row = $this->filter_data($row);
+            $current_row = $this->addRow($row);
+            $this->setRowAttributes($current_row, array('id' => 'row_' . $row_id), true);
         }
         
-        return $this->get_table_html();
+        $this->altRowAttributes(0, array('class' => 'row_even'), array('class' => 'row_odd'), true);
+        
+        foreach ($this->th_attributes as $column => & $attributes)
+        {
+            $this->setCellAttributes(0, $column, $attributes);
+        }
+        foreach ($this->td_attributes as $column => & $attributes)
+        {
+            $this->setColAttributes($column, $attributes);
+        }
+        
+        if ($total_value && $total_column)
+        {
+            $data_row = array();
+            $data_row[$total_column] = $total_value;
+            $data_row[0] = Translation :: get('Total');
+            $this->addRow($data_row);
+            $this->setCellAttributes(($this->get_total_number_of_items()), 0, 'colspan="' . ($total_column) . '" style="font-weight:bold; text-transform:uppercase; text-align:right;"');
+            $this->setCellAttributes(($this->get_total_number_of_items()), $total_column, 'colspan="' . ($this->getColCount() - $total_column) . '" style="font-weight:bold; text-transform:uppercase;"');
+        }
+        return HTML_Table :: toHTML();
     }
 }
 ?>
