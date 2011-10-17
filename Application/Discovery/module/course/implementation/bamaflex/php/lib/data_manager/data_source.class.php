@@ -70,6 +70,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_timeframe_id($object->timeframe_id);
         $course->set_result_scale_id($object->result_scale_id);
         $course->set_deliberation($object->deliberation);
+        $course->set_score_calculation($object->score_calculation);
         $course->set_level($this->convert_to_utf8($object->level));
         $course->set_kind($this->convert_to_utf8($object->kind));
         $course->set_goals($this->convert_to_utf8($object->goals));
@@ -189,7 +190,37 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $course->add_teacher($teacher);
         }
         
+        if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
+        {
+            $course->set_children($this->retrieve_children($course_parameters));
+        }
         return $course;
+    }
+
+    function retrieve_children($course_parameters)
+    {
+        $programme_id = $course_parameters->get_programme_id();
+        $source = $course_parameters->get_source();
+        $children = array();
+        
+        $query = 'SELECT * FROM [dbo].[v_discovery_course_basic] ';
+        $query .= 'WHERE parent_id = "' . $programme_id . '" AND source = ' . $source . ' ';
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        if (! $results instanceof MDB2_Error)
+        {
+            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            {
+                if (! isset($this->course[$result->id][$source]))
+                {
+                    $course_parameters->set_programme_id($result->id);
+                    $this->course[$result->id][$source] = $this->result_to_course($course_parameters, $result);
+                }
+                $children[] = $this->course[$result->id][$source];
+            }
+        }
+        
+        return $children;
     }
 
     /**
@@ -327,7 +358,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_competence] ';
             $query .= 'WHERE programme_id = "' . $programme_id . '"';
-           
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
             

@@ -43,6 +43,7 @@ class Course extends DiscoveryItem
     const PROPERTY_JURY = 'jury';
     const PROPERTY_REPLEACABLE = 'repleacable';
     const PROPERTY_TRAINING_UNIT = 'training_unit';
+    const PROPERTY_SCORE_CALCULATION = 'score_calculation';
     
     const TIMEFRAME_ACADEMIC_YEAR = '1';
     const TIMEFRAME_FIRST_TERM = '2';
@@ -54,6 +55,13 @@ class Course extends DiscoveryItem
     const PROGRAMME_TYPE_COMPLEX = 2;
     const PROGRAMME_TYPE_PART = 4;
     
+    const RESULT_SCALE_NUMBER = 1;
+    const RESULT_SCALE_PASS_FAIL = 2;
+    const RESULT_SCALE_ADVICE = 3;
+    
+    const SCORE_CALCULATION_NUMBER = 1;
+    const SCORE_CALCULATION_DIFFERENCE = 7;
+    
     private $second_chance;
     private $following_impossible;
     private $costs;
@@ -64,6 +72,7 @@ class Course extends DiscoveryItem
     private $languages;
     private $timeframe_parts;
     private $teachers;
+    private $children;
     
     private $materials_by_type;
     private $teachers_by_type;
@@ -101,6 +110,7 @@ class Course extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_JURY;
         $extended_property_names[] = self :: PROPERTY_REPLEACABLE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_UNIT;
+        $extended_property_names[] = self :: PROPERTY_SCORE_CALCULATION;
         
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -314,6 +324,33 @@ class Course extends DiscoveryItem
         $this->set_default_property(self :: PROPERTY_RESULT_SCALE_ID, $result_scale_id);
     }
 
+    /**
+     * @return string
+     */
+    function get_result_scale_string()
+    {
+        return self :: result_scale_string($this->get_result_scale_id());
+    }
+
+    /**
+     * @return string
+     */
+    static function result_scale_string($result_scale_id)
+    {
+        switch ($result_scale_id)
+        {
+            case self :: RESULT_SCALE_ADVICE :
+                return 'ResultScaleAdvice';
+                break;
+            case self :: RESULT_SCALE_PASS_FAIL :
+                return 'ResultScalePassFail';
+                break;
+            case self :: RESULT_SCALE_NUMBER :
+                return 'ResultScaleNumber';
+                break;
+        }
+    }
+
     function get_deliberation()
     {
         return $this->get_default_property(self :: PROPERTY_DELIBERATION);
@@ -364,8 +401,19 @@ class Course extends DiscoveryItem
         $this->set_default_property(self :: PROPERTY_CONTENTS, $contents);
     }
 
-    function has_content()
+    function has_content($include_children = true)
     {
+        if ($include_children && $this->get_programme_type() == self :: PROGRAMME_TYPE_COMPLEX)
+        {
+            foreach ($this->get_children() as $child)
+            {
+                if ($child->has_content())
+                {
+                    return true;
+                }
+            }
+        }
+        
         if (! StringUtilities :: is_null_or_empty($this->get_goals(), true))
         {
             return true;
@@ -531,6 +579,27 @@ class Course extends DiscoveryItem
         $this->evaluations = $evaluations;
     }
 
+    function has_evaluations($include_children = true)
+    {
+        if ($include_children && $this->get_programme_type() == self :: PROGRAMME_TYPE_COMPLEX)
+        {
+            foreach ($this->get_children() as $child)
+            {
+                if ($child->has_evaluations())
+                {
+                    return true;
+                }
+            }
+        }
+        
+        if (count($this->get_evaluations()) > 0)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
     /**
      * @return the $activities
      */
@@ -545,6 +614,27 @@ class Course extends DiscoveryItem
     public function set_activities($activities)
     {
         $this->activities = $activities;
+    }
+
+    function has_activities($include_children = true)
+    {
+        if ($include_children && $this->get_programme_type() == self :: PROGRAMME_TYPE_COMPLEX)
+        {
+            foreach ($this->get_children() as $child)
+            {
+                if ($child->has_activities())
+                {
+                    return true;
+                }
+            }
+        }
+        
+        if (count($this->get_activities()) > 0)
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     function get_activities_by_type($type = null)
@@ -611,6 +701,27 @@ class Course extends DiscoveryItem
         return $this->materials_by_type[$type];
     }
 
+    function has_materials($type, $include_children = true)
+    {
+        if ($include_children && $this->get_programme_type() == self :: PROGRAMME_TYPE_COMPLEX)
+        {
+            foreach ($this->get_children() as $child)
+            {
+                if ($child->has_materials($type))
+                {
+                    return true;
+                }
+            }
+        }
+        
+        if (count($this->get_materials_by_type($type)) > 0)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
     /**
      * @return the $competences
      */
@@ -645,6 +756,27 @@ class Course extends DiscoveryItem
             }
         }
         return $this->competences_by_type[$type];
+    }
+
+    function has_competences($type, $include_children = true)
+    {
+        if ($include_children && $this->get_programme_type() == self :: PROGRAMME_TYPE_COMPLEX)
+        {
+            foreach ($this->get_children() as $child)
+            {
+                if ($child->has_competences($type))
+                {
+                    return true;
+                }
+            }
+        }
+        
+        if (count($this->get_competences_by_type($type)) > 0)
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     /**
@@ -754,6 +886,38 @@ class Course extends DiscoveryItem
         return implode(', ', $teachers);
     }
 
+    function get_score_calculation()
+    {
+        return $this->get_default_property(self :: PROPERTY_SCORE_CALCULATION);
+    }
+
+    function set_score_calculation($score_calculation)
+    {
+        $this->set_default_property(self :: PROPERTY_SCORE_CALCULATION, $score_calculation);
+    }
+
+    function get_score_calculation_string()
+    {
+        return self :: score_calculation_string($this->get_score_calculation());
+    }
+
+    /**
+     * @return string
+     */
+    static function score_calculation_string($score_calculation)
+    {
+        switch ($score_calculation)
+        {
+            case self :: SCORE_CALCULATION_NUMBER :
+                return 'ScoreCalculationNumber';
+                break;
+            case self :: SCORE_CALCULATION_DIFFERENCE :
+                
+                return 'ScoreCalculationDifference';
+                break;
+        }
+    }
+
     /**
      * @param field_type $teachers
      */
@@ -800,6 +964,27 @@ class Course extends DiscoveryItem
     public function add_cost($cost)
     {
         $this->costs[] = $cost;
+    }
+
+    public function set_children($children)
+    {
+        $this->children = $children;
+    }
+
+    function get_children()
+    {
+        //        if ($this->get_programme_type() == self :: PROGRAMME_TYPE_COMPLEX)
+        //        {
+        //            if (! isset($this->children))
+        //            {
+        //            	
+        //            }
+        //        }
+        //        else
+        //        {
+        //            $this->children = array();
+        //        }
+        return $this->children;
     }
 
 }
