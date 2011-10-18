@@ -273,6 +273,7 @@ class Module extends \application\discovery\module\student_materials\Module
     function get_enrollment_materials_by_type($enrollment_id, $type)
     {
         $table_data = array();
+        $total_price = 0;
 
         $courses = DataManager :: get_instance($this->get_module_instance())->retrieve_courses($enrollment_id);
 
@@ -329,6 +330,8 @@ class Module extends \application\discovery\module\student_materials\Module
                     $table_row[] = $image;
                 }
 
+                $total_price += $material->get_price();
+
                 $table_data[] = $table_row;
             }
         }
@@ -348,7 +351,12 @@ class Module extends \application\discovery\module\student_materials\Module
             $table->set_header(9, Translation :: get('Price'), false);
             $table->set_header(10, '', false);
 
-            $html[] = $table->as_html();
+            if($total_price)
+            {
+                $total_price .= ' &euro;';
+            }
+
+            $html[] = $table->as_html($total_price, 9);
         }
 
         return implode("\n", $html);
