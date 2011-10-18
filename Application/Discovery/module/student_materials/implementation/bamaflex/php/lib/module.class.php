@@ -334,6 +334,68 @@ class Module extends \application\discovery\module\student_materials\Module
 
                 $table_data[] = $table_row;
             }
+
+            if ($course->has_children())
+            {
+                foreach ($course->get_children() as $child)
+                {
+                    $materials = DataManager :: get_instance($this->get_module_instance())->retrieve_materials($child->get_programme_id(), $type);
+
+                    foreach ($materials as $material)
+                    {
+                        $table_row = array();
+
+                        $data_source = $this->get_module_instance()->get_setting('data_source');
+                        $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
+                                'data_source' => $data_source));
+
+                        if ($course_module_instance)
+                        {
+                            $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), 1);
+                            $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
+                            $table_row[] = '<span class="course_child"><a href="' . $url . '">' . $course->get_name() . '</a></span>';
+                        }
+                        else
+                        {
+                            $table_row[] = '<span class="course_child">' . $course->get_name() . '</span>';
+                        }
+
+                        $table_row[] = $material->get_group();
+                        $table_row[] = $material->get_title();
+                        $table_row[] = $material->get_edition();
+                        $table_row[] = $material->get_author();
+                        $table_row[] = $material->get_editor();
+                        $table_row[] = $material->get_isbn();
+                        $table_row[] = $material->get_medium();
+                        $table_row[] = $material->get_description();
+                        if ($material->get_price())
+                        {
+                            $table_row[] = $material->get_price_string();
+                        }
+                        else
+                        {
+                            $table_row[] = '';
+                        }
+
+                        if ($material->get_for_sale())
+                        {
+                            $image = '<img src="' . Theme :: get_image_path() . 'material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' . Translation :: get('IsForSale') . '"/>';
+                            LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsForSale'), Translation :: get('ForSale'));
+                            $table_row[] = $image;
+                        }
+                        else
+                        {
+                            $image = '<img src="' . Theme :: get_image_path() . 'material/not_for_sale.png" alt="' . Translation :: get('IsNotForSale') . '" title="' . Translation :: get('IsNotForSale') . '"/>';
+                            LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsNotForSale'), Translation :: get('ForSale'));
+                            $table_row[] = $image;
+                        }
+
+                        $total_price += $material->get_price();
+
+                        $table_data[] = $table_row;
+                    }
+                }
+            }
         }
 
         if (count($table_data) > 0)
@@ -351,7 +413,7 @@ class Module extends \application\discovery\module\student_materials\Module
             $table->set_header(9, Translation :: get('Price'), false);
             $table->set_header(10, '', false);
 
-            if($total_price)
+            if ($total_price)
             {
                 $total_price .= ' &euro;';
             }
