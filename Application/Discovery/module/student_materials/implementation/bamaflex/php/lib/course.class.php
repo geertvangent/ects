@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\career\implementation\bamaflex;
+namespace application\discovery\module\student_materials\implementation\bamaflex;
 
 use application\discovery\DiscoveryDataManager;
 

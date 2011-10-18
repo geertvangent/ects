@@ -31,6 +31,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
 
     const RESULT_TOLERATED = 6;
     const RESULT_GRADUALLY_TOLERATED = 7;
+    const RESULT_STRUCK = 8;
 
     const DISTINCTION_NONE = 1;
     const DISTINCTION_SUFFICIENT = 2;
@@ -326,6 +327,9 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
                 break;
             case self :: RESULT_GRADUALLY_TOLERATED :
                 return 'GraduallyTolerated';
+                break;
+            case self :: RESULT_STRUCK :
+                return 'Struck';
                 break;
             default :
                 return parent :: result_string($result);
