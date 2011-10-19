@@ -84,6 +84,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $second_chance = new SecondChance();
         $second_chance->set_exam($object->second_exam_chance);
         $second_chance->set_enrollment($object->second_enrollment);
+        $second_chance->set_exam_parts($object->second_exam_parts);
         $course->set_second_chance($second_chance);
         
         $following_impossible = new FollowingImpossible();

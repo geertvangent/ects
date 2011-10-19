@@ -10,6 +10,11 @@ class SecondChance extends DiscoveryItem
     
     const PROPERTY_EXAM = 'exam';
     const PROPERTY_ENROLLMENT = 'enrollment';
+    const PROPERTY_EXAM_PARTS = 'exam_parts';
+    
+    const EXAM_PARTS_ALL = 5;
+    const EXAM_PARTS_FAILED = 6;
+    const EXAM_PARTS_SPECIFIC = 10;
 
     function get_exam()
     {
@@ -31,6 +36,40 @@ class SecondChance extends DiscoveryItem
         $this->set_default_property(self :: PROPERTY_ENROLLMENT, $enrollment);
     }
 
+    function get_exam_parts()
+    {
+        return $this->get_default_property(self :: PROPERTY_EXAM_PARTS);
+    }
+
+    function set_exam_parts($exam_parts)
+    {
+        $this->set_default_property(self :: PROPERTY_EXAM_PARTS, $exam_parts);
+    }
+
+    function get_exam_parts_string()
+    {
+        return self :: exam_parts_string($this->get_exam_parts());
+    }
+
+    /**
+     * @return string
+     */
+    static function exam_parts_string($exam_parts)
+    {
+        switch ($exam_parts)
+        {
+            case self :: EXAM_PARTS_ALL :
+                return 'ExamPartsAll';
+                break;
+            case self :: EXAM_PARTS_FAILED :
+                return 'ExamPartsFailed';
+                break;
+            case self :: EXAM_PARTS_SPECIFIC :
+                return 'ExamPartsSpecific';
+                break;
+        }
+    }
+
     /**
      * @param multitype:string $extended_property_names
      */
@@ -38,6 +77,7 @@ class SecondChance extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_EXAM;
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT;
+        $extended_property_names[] = self :: PROPERTY_EXAM_PARTS;
         
         return parent :: get_default_property_names($extended_property_names);
     }

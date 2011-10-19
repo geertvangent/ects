@@ -48,15 +48,15 @@ class Module extends \application\discovery\module\course\Module
         
         $tabs = new DynamicTabsRenderer('course');
         $tabs->add_tab(new DynamicContentTab(self :: TAB_GENERAL, Translation :: get('General'), Theme :: get_image_path() . 'tabs/' . self :: TAB_GENERAL . '.png', $this->get_general()));
-        if (count($course->get_materials()) > 0)
+        if ($course->has_materials())
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_MATERIALS, Translation :: get('Materials'), Theme :: get_image_path() . 'tabs/' . self :: TAB_MATERIALS . '.png', $this->get_materials()));
         }
-        if (count($course->get_activities()) > 0)
+        if ($course->has_activities())
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_ACTIVITIES, Translation :: get('Activities'), Theme :: get_image_path() . 'tabs/' . self :: TAB_ACTIVITIES . '.png', $this->get_activities()));
         }
-        if (count($course->get_competences()) > 0)
+        if ($course->has_competences())
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_COMPETENCES, Translation :: get('Competences'), Theme :: get_image_path() . 'tabs/' . self :: TAB_COMPETENCES . '.png', $this->get_competences()));
         }
@@ -182,16 +182,19 @@ class Module extends \application\discovery\module\course\Module
 
     function get_materials()
     {
-        $html = array();
         $course = $this->get_course();
-        
-        $html[] = $this->get_materials_by_type(Material :: TYPE_REQUIRED);
-        if (count($course->get_materials_by_type(Material :: TYPE_REQUIRED)) > 0 && count($course->get_materials_by_type(Material :: TYPE_OPTIONAL)) > 0)
+        $tabs = new DynamicTabsRenderer('course_materials');
+
+        if ($course->has_materials(Material :: TYPE_REQUIRED))
         {
-            $html[] = '<br/>';
+            $tabs->add_tab(new DynamicContentTab(Material :: TYPE_REQUIRED, Translation :: get('Required'), null, $this->get_materials_by_type(Material :: TYPE_REQUIRED)));
         }
-        $html[] = $this->get_materials_by_type(Material :: TYPE_OPTIONAL);
-        return implode("\n", $html);
+        if ($course->has_materials(Material :: TYPE_OPTIONAL))
+        {
+            $tabs->add_tab(new DynamicContentTab(Material :: TYPE_OPTIONAL, Translation :: get('Optional'), null, $this->get_materials_by_type(Material :: TYPE_OPTIONAL)));
+        }
+        
+        return $tabs->render();
     }
 
     function get_materials_by_type($type)
@@ -228,11 +231,11 @@ class Module extends \application\discovery\module\course\Module
         $html = array();
         $table_data = array();
         
-        if (count($course->get_materials_by_type($type)) > 0)
-        {
-            $var = ($type == Material :: TYPE_REQUIRED ? 'Required' : 'Optional');
-            $html[] = '<h3>' . Translation :: get($var) . '</h3>';
-        }
+//        if (count($course->get_materials_by_type($type)) > 0)
+//        {
+//            $var = ($type == Material :: TYPE_REQUIRED ? 'Required' : 'Optional');
+//            $html[] = '<h3>' . Translation :: get($var) . '</h3>';
+//        }
         foreach ($course->get_materials_by_type($type) as $material)
         {
             if ($material instanceof MaterialDescription)
@@ -601,7 +604,6 @@ class Module extends \application\discovery\module\course\Module
             {
                 $exam_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_allowed.png" alt="' . Translation :: get('SecondChanceExamAllowed') . '" title="' . Translation :: get('SecondChanceExamAllowed') . '"/>';
                 LegendTable :: get_instance()->add_symbol($exam_image, Translation :: get('SecondChanceExamAllowed'), Translation :: get('SecondChanceExam'));
-            
             }
             else
             {
@@ -613,7 +615,6 @@ class Module extends \application\discovery\module\course\Module
             {
                 $enrollment_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/enrollment_allowed.png" alt="' . Translation :: get('SecondChanceEnrollmentAllowed') . '" title="' . Translation :: get('SecondChanceEnrollmentAllowed') . '"/>';
                 LegendTable :: get_instance()->add_symbol($enrollment_image, Translation :: get('SecondChanceEnrollmentAllowed'), Translation :: get('SecondChanceEnrollment'));
-            
             }
             else
             {
@@ -637,6 +638,12 @@ class Module extends \application\discovery\module\course\Module
                         'RESULT_SCALE' => Translation :: get($child->get_result_scale_string())));
             }
             $properties[Translation :: get('Quotation')] = implode('<br/>', $quotation_parts);
+            
+            $exam_parts_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_parts/' . $course->get_second_chance()->get_exam_parts() . '.png" alt="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '" title="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '"/>';
+            LegendTable :: get_instance()->add_symbol($exam_parts_image, Translation :: get($course->get_second_chance()->get_exam_parts_string()), Translation :: get('SecondChanceExamParts'));
+            
+            $properties[Translation :: get('SecondChance')] = $exam_parts_image;
+        
         }
         
         $table = new PropertiesTable($properties);
