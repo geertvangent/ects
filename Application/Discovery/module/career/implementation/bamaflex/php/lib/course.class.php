@@ -23,6 +23,7 @@ class Course extends \application\discovery\module\career\Course
     const PROPERTY_ENROLLMENT_ID = 'enrollment_id';
     const PROPERTY_TYPE = 'type';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
+    const PROPERTY_PARENT_PROGRAMME_ID = 'parent_programme_id';
     
     const TYPE_NORMAL = 1;
     // NL: AVO
@@ -49,6 +50,7 @@ class Course extends \application\discovery\module\career\Course
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
+        $extended_property_names[] = self :: PROPERTY_PARENT_PROGRAMME_ID;
         
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -221,6 +223,24 @@ class Course extends \application\discovery\module\career\Course
     function set_programme_id($programme_id)
     {
         $this->set_default_property(self :: PROPERTY_PROGRAMME_ID, $programme_id);
+    }
+
+    /**
+     * Returns the parent_programme_id of this Course.
+     * @return int The parent_programme_id.
+     */
+    function get_parent_programme_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PARENT_PROGRAMME_ID);
+    }
+
+    /**
+     * Sets the parent_programme_id of this Course.
+     * @param int $parent_programme_id
+     */
+    function set_parent_programme_id($parent_programme_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PARENT_PROGRAMME_ID, $parent_programme_id);
     }
 
     /**

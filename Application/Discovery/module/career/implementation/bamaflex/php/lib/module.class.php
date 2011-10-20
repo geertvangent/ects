@@ -31,7 +31,7 @@ class Module extends \application\discovery\module\career\Module
                 $row = array();
                 $row[] = $course->get_year();
                 $row[] = $course->get_credits();
-                
+        
                 if ($course->is_special_type())
                 {
                     $course_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' . Translation :: get($course->get_type_string()) . '" />';
