@@ -49,7 +49,7 @@ class Module extends \application\discovery\module\career\Module
                 
                 if ($course_module_instance)
                 {
-                    $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), 1);
+                    $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
                     $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                     $row[] = '<a href="' . $url . '">' . $course->get_name() . '</a>';
                 }
@@ -106,7 +106,7 @@ class Module extends \application\discovery\module\career\Module
                         
                         if ($course_module_instance)
                         {
-                            $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), 1);
+                            $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
                             $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                             $row[] = '<span class="course_child"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
                         }

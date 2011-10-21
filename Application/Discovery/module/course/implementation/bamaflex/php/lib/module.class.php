@@ -101,17 +101,28 @@ class Module extends \application\discovery\module\course\Module
         
         if ($course->get_programme_type() != Course :: PROGRAMME_TYPE_COMPLEX)
         {
-            $image = '<img src="' . Theme :: get_image_path() . 'general/timeframe/' . $course->get_timeframe_visual_id() . '.png" alt="' . Translation :: get($course->get_timeframe()) . '" title="' . Translation :: get($course->get_timeframe()) . '"/>';
-            $properties[Translation :: get('Timeframe')] = $image;
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get($course->get_timeframe()), Translation :: get('Timeframe'));
-            
-            $properties[Translation :: get('TimeframeParts')] = $course->get_timeframe_parts_string();
+            if (! is_null($course->get_timeframe_visual_id()))
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'general/timeframe/' . $course->get_timeframe_visual_id() . '.png" alt="' . Translation :: get($course->get_timeframe()) . '" title="' . Translation :: get($course->get_timeframe()) . '"/>';
+                $properties[Translation :: get('Timeframe')] = $image;
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get($course->get_timeframe()), Translation :: get('Timeframe'));
+                
+                $properties[Translation :: get('TimeframeParts')] = $course->get_timeframe_parts_string();
+            }
         }
         
-        $properties[Translation :: get('Level')] = $course->get_level();
-        $properties[Translation :: get('Kind')] = $course->get_kind();
-        
-        $properties[Translation :: get('Languages')] = $course->get_languages_string();
+        if ($course->get_level())
+        {
+            $properties[Translation :: get('Level')] = $course->get_level();
+        }
+        if ($course->get_kind())
+        {
+            $properties[Translation :: get('Kind')] = $course->get_kind();
+        }
+        if ($course->has_languages())
+        {
+            $properties[Translation :: get('Languages')] = $course->get_languages_string();
+        }
         
         if ($course->has_coordinators())
         {
@@ -132,44 +143,52 @@ class Module extends \application\discovery\module\course\Module
         $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/degree.png" alt="' . Translation :: get('DegreePossible') . '" title="' . Translation :: get('DegreePossible') . '"/>';
         LegendTable :: get_instance()->add_symbol($image, Translation :: get('DegreePossible'), Translation :: get('FollowingPossible'));
         $images[] = $image;
-        
-        if ($course->get_following_impossible()->get_credit())
+        if (! is_null($course->get_following_impossible()->get_credit()))
         {
-            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit_impossible.png" alt="' . Translation :: get('CreditImpossible') . '" title="' . Translation :: get('CreditImpossible') . '"/>';
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get('CreditImpossible'), Translation :: get('FollowingPossible'));
-            $images[] = $image;
-        }
-        else
-        {
-            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit.png" alt="' . Translation :: get('CreditPossible') . '" title="' . Translation :: get('CreditPossible') . '"/>';
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get('CreditPossible'), Translation :: get('FollowingPossible'));
-            $images[] = $image;
-        }
-        
-        if ($course->get_following_impossible()->get_exam_degree())
-        {
-            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree_impossible.png" alt="' . Translation :: get('ExamDegreeImpossible') . '" title="' . Translation :: get('ExamDegreeImpossible') . '"/>';
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamDegreeImpossible'), Translation :: get('FollowingPossible'));
-            $images[] = $image;
-        }
-        else
-        {
-            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree.png" alt="' . Translation :: get('ExamDegreePossible') . '" title="' . Translation :: get('ExamDegreePossible') . '"/>';
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamDegreePossible'), Translation :: get('FollowingPossible'));
-            $images[] = $image;
+            if ($course->get_following_impossible()->get_credit())
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit_impossible.png" alt="' . Translation :: get('CreditImpossible') . '" title="' . Translation :: get('CreditImpossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('CreditImpossible'), Translation :: get('FollowingPossible'));
+                $images[] = $image;
+            }
+            else
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit.png" alt="' . Translation :: get('CreditPossible') . '" title="' . Translation :: get('CreditPossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('CreditPossible'), Translation :: get('FollowingPossible'));
+                $images[] = $image;
+            }
         }
         
-        if ($course->get_following_impossible()->get_exam_credit())
+        if (! is_null($course->get_following_impossible()->get_exam_degree()))
         {
-            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit_impossible.png" alt="' . Translation :: get('ExamCreditImpossible') . '" title="' . Translation :: get('ExamCreditImpossible') . '"/>';
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamCreditImpossible'), Translation :: get('FollowingPossible'));
-            $images[] = $image;
+            if ($course->get_following_impossible()->get_exam_degree())
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree_impossible.png" alt="' . Translation :: get('ExamDegreeImpossible') . '" title="' . Translation :: get('ExamDegreeImpossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamDegreeImpossible'), Translation :: get('FollowingPossible'));
+                $images[] = $image;
+            }
+            else
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree.png" alt="' . Translation :: get('ExamDegreePossible') . '" title="' . Translation :: get('ExamDegreePossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamDegreePossible'), Translation :: get('FollowingPossible'));
+                $images[] = $image;
+            }
         }
-        else
+        
+        if (! is_null($course->get_following_impossible()->get_exam_credit()))
         {
-            $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit.png" alt="' . Translation :: get('ExamCreditPossible') . '" title="' . Translation :: get('ExamCreditPossible') . '"/>';
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamCreditPossible'), Translation :: get('FollowingPossible'));
-            $images[] = $image;
+            if ($course->get_following_impossible()->get_exam_credit())
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit_impossible.png" alt="' . Translation :: get('ExamCreditImpossible') . '" title="' . Translation :: get('ExamCreditImpossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamCreditImpossible'), Translation :: get('FollowingPossible'));
+                $images[] = $image;
+            }
+            else
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit.png" alt="' . Translation :: get('ExamCreditPossible') . '" title="' . Translation :: get('ExamCreditPossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamCreditPossible'), Translation :: get('FollowingPossible'));
+                $images[] = $image;
+            }
         }
         
         $properties[Translation :: get('FollowingPossible')] = implode(' ', $images);
@@ -184,7 +203,7 @@ class Module extends \application\discovery\module\course\Module
     {
         $course = $this->get_course();
         $tabs = new DynamicTabsRenderer('course_materials');
-
+        
         if ($course->has_materials(Material :: TYPE_REQUIRED))
         {
             $tabs->add_tab(new DynamicContentTab(Material :: TYPE_REQUIRED, Translation :: get('Required'), null, $this->get_materials_by_type(Material :: TYPE_REQUIRED)));
@@ -231,11 +250,11 @@ class Module extends \application\discovery\module\course\Module
         $html = array();
         $table_data = array();
         
-//        if (count($course->get_materials_by_type($type)) > 0)
-//        {
-//            $var = ($type == Material :: TYPE_REQUIRED ? 'Required' : 'Optional');
-//            $html[] = '<h3>' . Translation :: get($var) . '</h3>';
-//        }
+        //        if (count($course->get_materials_by_type($type)) > 0)
+        //        {
+        //            $var = ($type == Material :: TYPE_REQUIRED ? 'Required' : 'Optional');
+        //            $html[] = '<h3>' . Translation :: get($var) . '</h3>';
+        //        }
         foreach ($course->get_materials_by_type($type) as $material)
         {
             if ($material instanceof MaterialDescription)
@@ -566,10 +585,9 @@ class Module extends \application\discovery\module\course\Module
         if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
         {
             $tabs = new DynamicTabsRenderer('course_evaluations');
-            //            if ($course->has_evaluations(false))
-            //            {
+            
             $tabs->add_tab(new DynamicContentTab($course->get_id(), Translation :: get('General'), null, $this->get_course_evaluations($course)));
-            //            }
+            
             foreach ($course->get_children() as $child)
             {
                 $tabs->add_tab(new DynamicContentTab($child->get_id(), $child->get_name(), null, $this->get_course_evaluations($child)));
@@ -592,7 +610,7 @@ class Module extends \application\discovery\module\course\Module
         $properties = array();
         $properties[Translation :: get('Credits')] = $course->get_credits();
         $properties[Translation :: get('Weight')] = $course->get_weight();
-        if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_SIMPLE || $course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
+        if (($course->get_programme_type() == Course :: PROGRAMME_TYPE_SIMPLE || $course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX) && ! is_null($course->get_deliberation()))
         {
             $properties[Translation :: get('Deliberation')] = Translation :: get('DeliberationInfo', array(
                     'DELIBERATION' => $course->get_deliberation()));
@@ -600,6 +618,7 @@ class Module extends \application\discovery\module\course\Module
         if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_SIMPLE || $course->get_programme_type() == Course :: PROGRAMME_TYPE_PART)
         {
             $properties[Translation :: get('Quotation')] = Translation :: get($course->get_result_scale_string());
+            $second_chance = array();
             if ($course->get_second_chance()->get_exam())
             {
                 $exam_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_allowed.png" alt="' . Translation :: get('SecondChanceExamAllowed') . '" title="' . Translation :: get('SecondChanceExamAllowed') . '"/>';
@@ -610,22 +629,31 @@ class Module extends \application\discovery\module\course\Module
                 $exam_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_not_allowed.png" alt="' . Translation :: get('SecondChanceExamNotAllowed') . '" title="' . Translation :: get('SecondChanceExamNotAllowed') . '"/>';
                 LegendTable :: get_instance()->add_symbol($exam_image, Translation :: get('SecondChanceExamNotAllowed'), Translation :: get('SecondChanceExam'));
             }
+            $second_chance[] = $exam_image;
             
-            if ($course->get_second_chance()->get_enrollment())
+            if (! is_null($course->get_second_chance()->get_enrollment()))
             {
-                $enrollment_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/enrollment_allowed.png" alt="' . Translation :: get('SecondChanceEnrollmentAllowed') . '" title="' . Translation :: get('SecondChanceEnrollmentAllowed') . '"/>';
-                LegendTable :: get_instance()->add_symbol($enrollment_image, Translation :: get('SecondChanceEnrollmentAllowed'), Translation :: get('SecondChanceEnrollment'));
+                if ($course->get_second_chance()->get_enrollment())
+                {
+                    $enrollment_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/enrollment_allowed.png" alt="' . Translation :: get('SecondChanceEnrollmentAllowed') . '" title="' . Translation :: get('SecondChanceEnrollmentAllowed') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($enrollment_image, Translation :: get('SecondChanceEnrollmentAllowed'), Translation :: get('SecondChanceEnrollment'));
+                }
+                else
+                {
+                    $enrollment_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/enrollment_not_allowed.png" alt="' . Translation :: get('SecondChanceEnrollmentNotAllowed') . '" title="' . Translation :: get('SecondChanceEnrollmentNotAllowed') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($enrollment_image, Translation :: get('SecondChanceEnrollmentNotAllowed'), Translation :: get('SecondChanceEnrollment'));
+                }
+                $second_chance[] = $enrollment_image;
             }
-            else
-            {
-                $enrollment_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/enrollment_not_allowed.png" alt="' . Translation :: get('SecondChanceEnrollmentNotAllowed') . '" title="' . Translation :: get('SecondChanceEnrollmentNotAllowed') . '"/>';
-                LegendTable :: get_instance()->add_symbol($enrollment_image, Translation :: get('SecondChanceEnrollmentNotAllowed'), Translation :: get('SecondChanceEnrollment'));
-            }
-            $properties[Translation :: get('SecondChance')] = $exam_image . ' ' . $enrollment_image;
+            
+            $properties[Translation :: get('SecondChance')] = implode(' ', $second_chance);
         }
         elseif ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
         {
-            $properties[Translation :: get('ScoreCalculation')] = Translation :: get($course->get_score_calculation_string());
+            if (! is_null($course->get_score_calculation()))
+            {
+                $properties[Translation :: get('ScoreCalculation')] = Translation :: get($course->get_score_calculation_string());
+            }
             $quotation_parts = array();
             
             foreach ($course->get_children() as $child)
@@ -639,10 +667,13 @@ class Module extends \application\discovery\module\course\Module
             }
             $properties[Translation :: get('Quotation')] = implode('<br/>', $quotation_parts);
             
-            $exam_parts_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_parts/' . $course->get_second_chance()->get_exam_parts() . '.png" alt="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '" title="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '"/>';
-            LegendTable :: get_instance()->add_symbol($exam_parts_image, Translation :: get($course->get_second_chance()->get_exam_parts_string()), Translation :: get('SecondChanceExamParts'));
-            
-            $properties[Translation :: get('SecondChance')] = $exam_parts_image;
+            if (! is_null($course->get_second_chance()->get_exam_parts()))
+            {
+                $exam_parts_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_parts/' . $course->get_second_chance()->get_exam_parts() . '.png" alt="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '" title="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '"/>';
+                LegendTable :: get_instance()->add_symbol($exam_parts_image, Translation :: get($course->get_second_chance()->get_exam_parts_string()), Translation :: get('SecondChanceExamParts'));
+                
+                $properties[Translation :: get('SecondChance')] = $exam_parts_image;
+            }
         
         }
         

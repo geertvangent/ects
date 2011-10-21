@@ -34,7 +34,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         
         if (! isset($this->course[$programme_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_course_basic] ';
+            $query = 'SELECT * FROM [dbo].[v_discovery_course_advanced] ';
             $query .= 'WHERE id = "' . $programme_id . '" AND source = ' . $source . ' ';
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -93,10 +93,13 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $following_impossible->set_exam_degree($object->impossible_exam_degree);
         $course->set_following_impossible($following_impossible);
         
-        $cost = new Cost();
-        $cost->set_type(Cost :: TYPE_MATERIAL);
-        $cost->set_price($object->total_material_price);
-        $course->add_cost($cost);
+        if (! StringUtilities :: is_null_or_empty($object->total_material_price, true))
+        {
+            $cost = new Cost();
+            $cost->set_type(Cost :: TYPE_MATERIAL);
+            $cost->set_price($object->total_material_price);
+            $course->add_cost($cost);
+        }
         
         if (! StringUtilities :: is_null_or_empty($object->additional_costs, true))
         {
@@ -204,7 +207,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $source = $course_parameters->get_source();
         $children = array();
         
-        $query = 'SELECT * FROM [dbo].[v_discovery_course_basic] ';
+        $query = 'SELECT * FROM [dbo].[v_discovery_course_advanced] ';
         $query .= 'WHERE parent_id = "' . $programme_id . '" AND source = ' . $source . ' ';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
@@ -231,11 +234,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_evaluations($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
+        $source = $course_parameters->get_source();
         
         if (! isset($this->evaluations[$programme_id]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_evaluation] ';
-            $query .= 'WHERE programme_id = "' . $programme_id . '"';
+            $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -271,11 +275,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_activities($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
+        $source = $course_parameters->get_source();
         
         if (! isset($this->activities[$programme_id]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_activity] ';
-            $query .= 'WHERE programme_id = "' . $programme_id . '"';
+            $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -309,11 +314,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_materials($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
+        $source = $course_parameters->get_source();
         
         if (! isset($this->materials[$programme_id]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_material] ';
-            $query .= 'WHERE programme_id = "' . $programme_id . '"';
+            $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -354,11 +360,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_competences($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
+        $source = $course_parameters->get_source();
         
         if (! isset($this->competences[$programme_id]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_competence] ';
-            $query .= 'WHERE programme_id = "' . $programme_id . '"';
+            $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -391,11 +398,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_languages($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
+        $source = $course_parameters->get_source();
         
         if (! isset($this->languages[$programme_id]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_language] ';
-            $query .= 'WHERE programme_id = "' . $programme_id . '"';
+            $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -425,11 +433,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_timeframe_parts($course)
     {
         $timeframe_id = $course->get_timeframe_id();
+        $source = $course->get_source();
         
         if (! isset($this->timeframe_parts[$timeframe_id]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_timeframe_part] ';
-            $query .= 'WHERE timeframe_id = "' . $timeframe_id . '"';
+            $query .= 'WHERE timeframe_id = "' . $timeframe_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -459,11 +468,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_teachers($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
+        $source = $course_parameters->get_source();
         
         if (! isset($this->course[$programme_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_teaching_assignment_teacher] ';
-            $query .= 'WHERE programme_id = "' . $programme_id . '"';
+            $query = 'SELECT * FROM [dbo].[v_discovery_teaching_assignment_teacher_advanced] ';
+            $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();

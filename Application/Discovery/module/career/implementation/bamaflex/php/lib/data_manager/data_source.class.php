@@ -174,6 +174,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_trajectory_part($result->trajectory_part);
         $course->set_credits($result->credits);
         $course->set_weight($result->weight);
+        $course->set_source($result->source);
 
         $marks = $this->retrieve_marks($user_id);
 

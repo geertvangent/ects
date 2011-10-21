@@ -800,6 +800,11 @@ class Course extends DiscoveryItem
         $this->languages = $languages;
     }
 
+    public function has_languages()
+    {
+    	return count($this->get_languages()) > 0;
+    }
+    
     /**
      * @return the $timeframe_parts
      */

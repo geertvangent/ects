@@ -17,6 +17,7 @@ class Course extends \application\discovery\module\career\Course
     /**
      * Course properties
      */
+    const PROPERTY_SOURCE = 'source';
     const PROPERTY_TRAJECTORY_PART = 'trajectory_part';
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_WEIGHT = 'weight';
@@ -51,6 +52,7 @@ class Course extends \application\discovery\module\career\Course
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_PARENT_PROGRAMME_ID;
+        $extended_property_names[] = self :: PROPERTY_SOURCE;
         
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -64,6 +66,25 @@ class Course extends \application\discovery\module\career\Course
         return DiscoveryDataManager :: get_instance();
     }
 
+    /**
+     * Returns the source of this Course.
+     * @return int The source.
+     */
+    function get_source()
+    {
+        return $this->get_default_property(self :: PROPERTY_SOURCE);
+    }
+
+    /**
+     * Sets the source of this Course.
+     * @param int $source
+     */
+    function set_source($source)
+    {
+        $this->set_default_property(self :: PROPERTY_SOURCE, $source);
+    }
+    
+    
     /**
      * Returns the trajectory_part of this Course.
      * @return string The trajectory_part.
