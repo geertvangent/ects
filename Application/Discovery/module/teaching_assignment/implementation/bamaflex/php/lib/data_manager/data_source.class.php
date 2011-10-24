@@ -18,7 +18,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     function retrieve_teaching_assignments($person_id)
     {
-        if (! isset($this->$teaching_assignments[$person_id]))
+        if (! isset($this->teaching_assignments[$person_id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($person_id);
             $official_code = $user->get_official_code();
