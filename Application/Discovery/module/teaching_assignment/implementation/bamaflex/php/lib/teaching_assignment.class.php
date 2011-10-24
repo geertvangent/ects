@@ -14,9 +14,10 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     const PROPERTY_WEIGHT = 'weight';
     const PROPERTY_TIMEFRAME_ID = 'timeframe_id';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
+    const PROPERTY_TYPE = 'type';
     
-    const SOURCE_MANAGER = 1;
-    const SOURCE_TEACHER = 2;
+    const TYPE_MANAGER = 1;
+    const TYPE_TEACHER = 2;
     
     const TIMEFRAME_ACADEMIC_YEAR = '1';
     const TIMEFRAME_FIRST_TERM = '2';
@@ -30,6 +31,11 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
+    }
+
+    function get_type()
+    {
+        return $this->get_default_property(self :: PROPERTY_TYPE);
     }
 
     /**
@@ -117,6 +123,11 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
+    }
+
+    function set_type($type)
+    {
+        $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
 
     /**

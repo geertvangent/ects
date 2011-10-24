@@ -22,16 +22,16 @@ class Module extends \application\discovery\module\teaching_assignment\Module
 {
     private $cache_teaching_assignments = array();
 
-    function get_teaching_assignments_data($year = 0, $source = TeachingAssignment::SOURCE_TEACHER)
+    function get_teaching_assignments_data($year = 0, $type = TeachingAssignment::TYPE_TEACHER)
     {
-        if (! isset($this->cache_teaching_assignments[$year][$source]))
+        if (! isset($this->cache_teaching_assignments[$year][$type]))
         {
             if ($year == 0)
             {
                 $teaching_assignments = array();
                 foreach ($this->get_teaching_assignments() as $teaching_assignment)
                 {
-                    if ($teaching_assignment->get_source() == $source)
+                    if ($teaching_assignment->get_type() == $type)
                     {
                         $teaching_assignments[] = $teaching_assignment;
                     }
@@ -42,25 +42,25 @@ class Module extends \application\discovery\module\teaching_assignment\Module
                 $teaching_assignments = array();
                 foreach ($this->get_teaching_assignments() as $teaching_assignment)
                 {
-                    if ($teaching_assignment->get_year() == $year && $teaching_assignment->get_source() == $source)
+                    if ($teaching_assignment->get_year() == $year && $teaching_assignment->get_type() == $type)
                     {
                         $teaching_assignments[] = $teaching_assignment;
                     }
                 }
             }
-            $this->cache_teaching_assignments[$year][$source] = $teaching_assignments;
+            $this->cache_teaching_assignments[$year][$type] = $teaching_assignments;
         }
-        return $this->cache_teaching_assignments[$year][$source];
+        return $this->cache_teaching_assignments[$year][$type];
     }
 
-    function has_teaching_assignments($year, $source)
+    function has_teaching_assignments($year, $type)
     {
-        return count($this->get_teaching_assignments_data($year, $source)) > 0;
+        return count($this->get_teaching_assignments_data($year, $type)) > 0;
     }
 
-    function get_teaching_assignments_table($year = 0, $source = TeachingAssignment::SOURCE_TEACHER)
+    function get_teaching_assignments_table($year = 0, $type = TeachingAssignment::TYPE_TEACHER)
     {
-        $teaching_assignments = $this->get_teaching_assignments_data($year, $source);
+        $teaching_assignments = $this->get_teaching_assignments_data($year, $type);
         
         $data = array();
         
@@ -129,13 +129,13 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         
         $source_tabs = new DynamicTabsRenderer('teaching_assignment_year_list');
         
-        if ($this->has_teaching_assignments(0, TeachingAssignment :: SOURCE_TEACHER))
+        if ($this->has_teaching_assignments(0, TeachingAssignment :: TYPE_TEACHER))
         {
-            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: SOURCE_TEACHER)->toHTML()));
+            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: TYPE_TEACHER)->toHTML()));
         }
-        if ($this->has_teaching_assignments(0, TeachingAssignment :: SOURCE_MANAGER))
+        if ($this->has_teaching_assignments(0, TeachingAssignment :: TYPE_MANAGER))
         {
-            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: SOURCE_MANAGER)->toHTML()));
+            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: TYPE_MANAGER)->toHTML()));
         }
         
         $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $source_tabs->render()));
@@ -144,14 +144,14 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         {
             $source_tabs = new DynamicTabsRenderer('teaching_assignment_year_' . $year . '_list');
             
-            if ($this->has_teaching_assignments($year, TeachingAssignment :: SOURCE_TEACHER))
+            if ($this->has_teaching_assignments($year, TeachingAssignment :: TYPE_TEACHER))
             {
-                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: SOURCE_TEACHER)->toHTML()));
+                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: TYPE_TEACHER)->toHTML()));
             }
             
-            if ($this->has_teaching_assignments($year, TeachingAssignment :: SOURCE_MANAGER))
+            if ($this->has_teaching_assignments($year, TeachingAssignment :: TYPE_MANAGER))
             {
-                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: SOURCE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: SOURCE_MANAGER)->toHTML()));
+                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: TYPE_MANAGER)->toHTML()));
             }
             $tabs->add_tab(new DynamicContentTab($year, $year, null, $source_tabs->render()));
         }
