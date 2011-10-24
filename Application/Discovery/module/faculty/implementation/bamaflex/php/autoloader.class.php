@@ -6,8 +6,8 @@ class Autoloader
 
     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
+         'Faculty' => '/lib/faculty.class.php',
          'Module' => '/lib/module.class.php',
-         'TeachingAssignment' => '/lib/faculty.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php',
     );

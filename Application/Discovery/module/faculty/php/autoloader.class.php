@@ -8,8 +8,8 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'DataManagerInterface' => '/lib/data_manager_interface.class.php',
+         'Faculty' => '/lib/faculty.class.php',
          'Module' => '/lib/module.class.php',
-         'TeachingAssignment' => '/lib/faculty.class.php',
     );
 
     static function load($classname)

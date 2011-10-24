@@ -9,8 +9,8 @@ use MDB2_Error;
 
 class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
 {
-    private $teaching_assignments = array();
-    private $years = array();
+    private $teaching_assignments;
+    private $years;
 
     /**
      * @param int $id
@@ -22,12 +22,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         {
             $user = UserDataManager :: get_instance()->retrieve_user($person_id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT * FROM [dbo].[v_discovery_teaching_assignment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC, faculty, training, name';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -49,10 +49,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-        
+
         return $this->teaching_assignments[$person_id];
     }
-    
+
     function retrieve_years($person_id)
     {
     	if (! isset($this->years[$person_id]))
