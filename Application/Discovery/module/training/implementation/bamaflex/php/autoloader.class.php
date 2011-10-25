@@ -1,14 +1,13 @@
 <?php
-namespace application\discovery\module\faculty\implementation\bamaflex;
+namespace application\discovery\module\training\implementation\bamaflex;
 
 class Autoloader
 {
 
     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'Dean' => '/lib/dean.class.php',
-         'Faculty' => '/lib/faculty.class.php',
          'Module' => '/lib/module.class.php',
+         'Training' => '/lib/training.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php',
     );

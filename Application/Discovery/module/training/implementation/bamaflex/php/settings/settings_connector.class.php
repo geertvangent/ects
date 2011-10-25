@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\faculty\implementation\bamaflex;
+namespace application\discovery\module\training\implementation\bamaflex;
 
 use common\libraries\Translation;
 use common\libraries\ObjectTableOrder;

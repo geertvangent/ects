@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\faculty;
+namespace application\discovery\module\training;
 
 /**
  * @package application.discovery
@@ -10,8 +10,8 @@ interface DataManagerInterface
 
     /**
      * @param int $id
-     * @return multitype:\application\discovery\module\faculty\Faculty
+     * @return multitype:\application\discovery\module\training\Training
      */
-    function retrieve_faculties();
+    function retrieve_trainings();
 }
 ?>

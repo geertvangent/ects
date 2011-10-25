@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\faculty;
+namespace application\discovery\module\training;
 
 class Autoloader
 {
@@ -8,8 +8,8 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'DataManagerInterface' => '/lib/data_manager_interface.class.php',
-         'Faculty' => '/lib/faculty.class.php',
          'Module' => '/lib/module.class.php',
+         'Training' => '/lib/training.class.php',
     );
 
     static function load($classname)

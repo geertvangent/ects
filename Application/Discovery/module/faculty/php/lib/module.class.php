@@ -127,7 +127,7 @@ class Module extends \application\discovery\Module
 
         $tabs = new DynamicTabsRenderer('faculty_list');
 
-        $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $this->get_faculties_table(0)->toHTML()));
+//        $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $this->get_faculties_table(0)->toHTML()));
 
         foreach ($years as $year)
         {

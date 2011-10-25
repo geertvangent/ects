@@ -1,41 +1,38 @@
 <?php
-namespace application\discovery\module\faculty\implementation\bamaflex;
+namespace application\discovery\module\training\implementation\bamaflex;
+
+use common\libraries\Theme;
+
+use application\discovery\LegendTable;
 
 use application\discovery\SortableTable;
 
 use common\libraries\Translation;
 
-class Module extends \application\discovery\module\faculty\Module
+class Module extends \application\discovery\module\training\Module
 {
 
-    function get_faculties_table($year = 0)
+    function get_trainings_table($year = 0)
     {
-        $faculties = $this->get_faculties_data($year);
+        $trainings = $this->get_trainings_data($year);
         
         $data = array();
         
-        foreach ($faculties as $key => $faculty)
+        foreach ($trainings as $key => $training)
         {
             $row = array();
             if (! $year)
             {
-                $row[] = $faculty->get_year();
+                $row[] = $training->get_year();
             }
-            //            $data_source = $this->get_module_instance()->get_setting('data_source');
-            //            $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
-            //                    'data_source' => $data_source));
-            //
-            //            if ($course_result_module_instance)
-            //            {
-            //                $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($faculty->get_programme_id(), 1);
-            //                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-            //                $row[] = '<a href="' . $url . '">' . $faculty->get_name() . '</a>';
-            //            }
-            //            else
-            //            {
-            $row[] = $faculty->get_name();
-            $row[] = $faculty->get_deans_string();
-            //            }
+            $row[] = $training->get_name();
+            $row[] = $training->get_domain();
+            $row[] = $training->get_credits();
+            
+            $bama_type_image = '<img src="' . Theme :: get_image_path() . 'bama_type/' . $training->get_bama_type() . '.png" alt="' . Translation :: get($training->get_bama_type_string()) . '" title="' . Translation :: get($training->get_bama_type_string()) . '" />';
+            $row[] = $bama_type_image;
+            LegendTable:: get_instance()->add_symbol($bama_type_image, Translation :: get($training->get_bama_type_string()), Translation :: get('BamaType'));
+                        
             $data[] = $row;
         }
         
@@ -44,12 +41,16 @@ class Module extends \application\discovery\module\faculty\Module
         {
             $table->set_header(0, Translation :: get('Year'), false, 'class="code"');
             $table->set_header(1, Translation :: get('Name'), false);
-            $table->set_header(2, Translation :: get('Dean'), false);
+            $table->set_header(2, Translation :: get('Domain'), false);
+            $table->set_header(3, Translation :: get('Credits'), false);
+            $table->set_header(4, Translation :: get(''), false);
         }
         else
         {
             $table->set_header(0, Translation :: get('Name'), false);
-            $table->set_header(1, Translation :: get('Dean'), false);
+            $table->set_header(1, Translation :: get('Domain'), false);
+            $table->set_header(2, Translation :: get('Credits'), false);
+            $table->set_header(3, Translation :: get(''), false);
         }
         return $table;
     }

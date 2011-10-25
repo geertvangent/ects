@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\faculty;
+namespace application\discovery\module\training;
 
 use common\libraries\WebApplication;
 use common\libraries\Utilities;
