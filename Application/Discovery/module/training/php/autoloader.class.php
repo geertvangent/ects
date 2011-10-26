@@ -9,6 +9,7 @@ class Autoloader
          'DataManager' => '/lib/data_manager.class.php',
          'DataManagerInterface' => '/lib/data_manager_interface.class.php',
          'Module' => '/lib/module.class.php',
+         'Parameters' => '/lib/parameters.class.php',
          'Training' => '/lib/training.class.php',
     );
 

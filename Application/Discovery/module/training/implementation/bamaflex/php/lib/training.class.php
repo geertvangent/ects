@@ -15,6 +15,7 @@ class Training extends \application\discovery\module\training\Training
     const PROPERTY_TYPE_ID = 'type_id';
     const PROPERTY_TYPE = 'type';
     const PROPERTY_BAMA_TYPE = 'bama_type';
+    const PROPERTY_FACULTY_ID = 'faculty_id';
     
     const BAMA_TYPE_OTHER = 0;
     const BAMA_TYPE_BACHELOR = 1;
@@ -138,6 +139,16 @@ class Training extends \application\discovery\module\training\Training
         }
     }
 
+    function get_faculty_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_FACULTY_ID);
+    }
+
+    function set_faculty_id($faculty_id)
+    {
+        $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
+    }
+
     //    function get_deans()
     //    {
     //        return $this->deans;
@@ -181,6 +192,7 @@ class Training extends \application\discovery\module\training\Training
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_TYPE_ID;
         $extended_property_names[] = self :: PROPERTY_BAMA_TYPE;
+        $extended_property_names[] = self :: PROPERTY_FACULTY_ID;
         
         return parent :: get_default_property_names($extended_property_names);
     }

@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training;
 
+use common\libraries\Request;
+
 use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\Path;
@@ -28,8 +30,12 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->trainings = DataManager :: get_instance($module_instance)->retrieve_trainings();
-    
+        $this->trainings = DataManager :: get_instance($module_instance)->retrieve_trainings($this->get_training_parameters());
+        }
+
+    function get_training_parameters()
+    {
+        return new Parameters(Request :: get(self :: PARAM_FACULTY_ID));
     }
 
     /**
@@ -82,7 +88,7 @@ class Module extends \application\discovery\Module
         foreach ($trainings as $key => $training)
         {
             $row = array();
-            if (! $year)
+            if (! $year && ! $this->has_parameters())
             {
                 $row[] = $training->get_year();
             }
@@ -93,7 +99,8 @@ class Module extends \application\discovery\Module
         }
         
         $table = new SortableTable($data);
-        if (! $year)
+        
+        if (! $year && ! $this->has_parameters())
         {
             $table->set_header(0, Translation :: get('Year'), false, 'class="code"');
             $table->set_header(1, Translation :: get('Name'), false);
@@ -109,6 +116,17 @@ class Module extends \application\discovery\Module
         return $table;
     }
 
+    function has_parameters()
+    {
+        return false;
+    }
+
+  
+    function get_context()
+    {
+    	return '';
+    }
+
     /* (non-PHPdoc)
      * @see application\discovery\module\training\Module::render()
      */
@@ -116,19 +134,23 @@ class Module extends \application\discovery\Module
     {
         $html = array();
         
-        $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
-        
-        $tabs = new DynamicTabsRenderer('training_list');
-        
-//        $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $this->get_trainings_table(0)->toHTML()));
-        
-        foreach ($years as $year)
+        if ($this->has_parameters())
         {
-            $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_trainings_table($year)->toHTML()));
+            $html[] = $this->get_context();
+            $html[] = $this->get_trainings_table()->toHTML();
         }
+        else
+        {
+            $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
+            
+            $tabs = new DynamicTabsRenderer('training_list');
+            foreach ($years as $year)
+            {
+                $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_trainings_table($year)->toHTML()));
+            }
+            $html[] = $tabs->render();
         
-        $html[] = $tabs->render();
-        
+        }
         return implode("\n", $html);
     }
 
