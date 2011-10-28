@@ -24,6 +24,10 @@ class Module extends \application\discovery\module\career\Module
     {
         $data = array();
         
+        $data_source = $this->get_module_instance()->get_setting('data_source');
+        $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
         foreach ($this->get_courses() as $course)
         {
             if ($course->get_enrollment_id() == $enrollment->get_id())
@@ -31,7 +35,7 @@ class Module extends \application\discovery\module\career\Module
                 $row = array();
                 $row[] = $course->get_year();
                 $row[] = $course->get_credits();
-        
+                
                 if ($course->is_special_type())
                 {
                     $course_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' . Translation :: get($course->get_type_string()) . '" />';
@@ -42,10 +46,6 @@ class Module extends \application\discovery\module\career\Module
                 {
                     $row[] = ' ';
                 }
-                
-                $data_source = $this->get_module_instance()->get_setting('data_source');
-                $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
-                        'data_source' => $data_source));
                 
                 if ($course_module_instance)
                 {

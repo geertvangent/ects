@@ -680,7 +680,10 @@ class Module extends \application\discovery\module\course\Module
         $table = new PropertiesTable($properties);
         
         $html[] = $table->toHtml();
-        
+        if ($course->has_evaluations())
+        {
+            $html[] = '<br/>';
+        }
         foreach ($course->get_evaluations() as $evaluation)
         {
             if ($evaluation instanceof EvaluationDescription)

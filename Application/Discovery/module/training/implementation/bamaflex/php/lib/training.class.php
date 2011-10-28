@@ -16,12 +16,21 @@ class Training extends \application\discovery\module\training\Training
     const PROPERTY_TYPE = 'type';
     const PROPERTY_BAMA_TYPE = 'bama_type';
     const PROPERTY_FACULTY_ID = 'faculty_id';
+    const PROPERTY_START_DATE = 'start_date';
+    const PROPERTY_END_DATE = 'end_date';
     
     const BAMA_TYPE_OTHER = 0;
     const BAMA_TYPE_BACHELOR = 1;
     const BAMA_TYPE_MASTER = 2;
     const BAMA_TYPE_CONTINUED = 3;
     const BAMA_TYPE_OLD = 4;
+    
+    private $majors;
+    private $languages;
+    private $packages;
+    private $choices;
+    private $choice_options;
+    private $trajectories;
 
     /**
      * @return int
@@ -117,7 +126,9 @@ class Training extends \application\discovery\module\training\Training
     /**
      * @return string
      */
-    static function bama_type_string($bama_type)
+    static 
+
+    function bama_type_string($bama_type)
     {
         switch ($bama_type)
         {
@@ -149,41 +160,179 @@ class Training extends \application\discovery\module\training\Training
         $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
     }
 
-    //    function get_deans()
-    //    {
-    //        return $this->deans;
-    //    }
-    //
-    //    function set_deans($deans)
-    //    {
-    //        $this->deans = $deans;
-    //    }
-    //
-    //    function has_deans()
-    //    {
-    //        return count($this->deans) > 0;
-    //    }
-    //
-    //    function add_dean($dean)
-    //    {
-    //        $this->deans[] = $dean;
-    //    }
-    //
-    //    function get_deans_string()
-    //    {
-    //        $deans = array();
-    //        foreach ($this->get_deans() as $dean)
-    //        {
-    //            $deans[] = $dean->get_person();
-    //        }
-    //        return implode(', ', $deans);
-    //    }
-    
+    function get_start_date()
+    {
+        return $this->get_default_property(self :: PROPERTY_START_DATE);
+    }
+
+    function set_start_date($start_date)
+    {
+        $this->set_default_property(self :: PROPERTY_START_DATE, $start_date);
+    }
+
+    function get_end_date()
+    {
+        return $this->get_default_property(self :: PROPERTY_END_DATE);
+    }
+
+    function set_end_date($end_date)
+    {
+        $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
+    }
+
+    function get_majors()
+    {
+        return $this->majors;
+    }
+
+    function set_majors($majors)
+    {
+        $this->majors = $majors;
+    }
+
+    function has_majors()
+    {
+        return count($this->majors) > 0;
+    }
+
+    function add_major($major)
+    {
+        $this->majors[] = $major;
+    }
+
+    function get_languages()
+    {
+        return $this->languages;
+    }
+
+    function get_languages_string()
+    {
+        $languages = array();
+        foreach ($this->get_languages() as $language)
+        {
+            $languages[] = $language->get_name();
+        }
+        return implode(',', $languages);
+    }
+
+    function set_languages($languages)
+    {
+        $this->languages = $languages;
+    }
+
+    function has_languages()
+    {
+        return count($this->languages) > 0;
+    }
+
+    function add_language($language)
+    {
+        $this->languages[] = $language;
+    }
+
+    function get_packages()
+    {
+        return $this->packages;
+    }
+
+    function set_packages($packages)
+    {
+        $this->packages = $packages;
+    }
+
+    function has_packages()
+    {
+        return count($this->packages) > 0;
+    }
+
+    function add_package($package)
+    {
+        $this->packages[] = $package;
+    }
+
+    function get_choices()
+    {
+        return $this->choices;
+    }
+
+    function set_choices($choices)
+    {
+        $this->choices = $choices;
+    }
+
+    function has_choices()
+    {
+        return count($this->choices) > 0;
+    }
+
+    function add_choice($choice)
+    {
+        $this->choices[] = $choice;
+    }
+
+    function get_choice_options()
+    {
+        return $this->choice_options;
+    }
+
+    function set_choice_options($choice_options)
+    {
+        $this->choice_options = $choice_options;
+    }
+
+    function has_choice_options()
+    {
+        return count($this->choice_options) > 0;
+    }
+
+    function add_choice_option($choice_option)
+    {
+        $this->choice_options[] = $choice_option;
+    }
+
+    function get_trajectories()
+    {
+        return $this->trajectories;
+    }
+
+    function set_trajectories($trajectories)
+    {
+        $this->trajectories = $trajectories;
+    }
+
+    function has_trajectories()
+    {
+        return count($this->trajectories) > 0;
+    }
+
+    function add_trajectory($trajectory)
+    {
+        $this->trajectories[] = $trajectory;
+    }
+
+    function has_options()
+    {
+        return $this->has_choice_options() || $this->has_choices() || $this->has_majors() || $this->has_packages();
+    }
+
+    function has_major_choices()
+    {
+        foreach ($this->get_majors() as $major)
+        {
+            if ($major->has_choices())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    static 
+
+    function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_CREDITS;
@@ -193,6 +342,8 @@ class Training extends \application\discovery\module\training\Training
         $extended_property_names[] = self :: PROPERTY_TYPE_ID;
         $extended_property_names[] = self :: PROPERTY_BAMA_TYPE;
         $extended_property_names[] = self :: PROPERTY_FACULTY_ID;
+        $extended_property_names[] = self :: PROPERTY_START_DATE;
+        $extended_property_names[] = self :: PROPERTY_END_DATE;
         
         return parent :: get_default_property_names($extended_property_names);
     }

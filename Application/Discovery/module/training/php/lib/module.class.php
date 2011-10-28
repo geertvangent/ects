@@ -35,7 +35,7 @@ class Module extends \application\discovery\Module
 
     function get_training_parameters()
     {
-        return new Parameters(Request :: get(self :: PARAM_FACULTY_ID));
+        return new Parameters();
     }
 
     /**

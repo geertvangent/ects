@@ -53,11 +53,13 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $training->set_credits($result->credits);
                     $training->set_domain_id($result->domain_id);
                     $training->set_domain($this->convert_to_utf8($result->domain));
-                    $training->set_goals($this->convert_to_utf8($result->goals));
+                    $training->set_goals(nl2br($this->convert_to_utf8($result->goals)));
                     $training->set_type_id($result->type_id);
                     $training->set_type($this->convert_to_utf8($result->type));
                     $training->set_bama_type($result->bama_type);
                     $training->set_faculty_id($result->faculty_id);
+                    $training->set_start_date($result->start_date);
+                    $training->set_end_date($result->end_date);
                     
                     $this->trainings[] = $training;
                 }

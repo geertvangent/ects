@@ -51,6 +51,10 @@ class Module extends \application\discovery\module\training\Module
         
         $data = array();
         
+        $data_source = $this->get_module_instance()->get_setting('data_source');
+        $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
         foreach ($trainings as $key => $training)
         {
             $row = array();
@@ -58,7 +62,18 @@ class Module extends \application\discovery\module\training\Module
             {
                 $row[] = $training->get_year();
             }
-            $row[] = $training->get_name();
+            
+            if ($training_info_module_instance)
+            {
+                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($training->get_id(), $training->get_source());
+                $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
+                $row[] = '<a href="' . $url . '">' . $training->get_name() . '</a>';
+            }
+            else
+            {
+                $row[] = $training->get_name();
+            }
+            
             $row[] = $training->get_domain();
             $row[] = $training->get_credits();
             
