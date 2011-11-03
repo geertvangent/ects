@@ -19,9 +19,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param int $id
      * @return \application\discovery\module\profile\implementation\bamaflex\Profile|boolean
      */
-    function retrieve_profile($id)
+    function retrieve_profile($parameters)
     {
-        $user = UserDataManager :: get_instance()->retrieve_user($id);
+        $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();
 
         $query = 'SELECT * FROM [dbo].[v_discovery_profile_basic] WHERE id = ' . $official_code;

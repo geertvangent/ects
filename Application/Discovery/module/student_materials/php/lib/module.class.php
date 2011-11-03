@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\student_materials;
 
+use common\libraries\Request;
+
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Translation;
@@ -18,6 +20,8 @@ class Module extends \application\discovery\Module
      * @var multitype:\application\discovery\module\career\Course
      */
     private $courses;
+    
+    const PARAM_USER_ID = 'user_id';
 
     function __construct(Application $application, ModuleInstance $module_instance)
     {
@@ -32,7 +36,21 @@ class Module extends \application\discovery\Module
 
     function retrieve_data()
     {
-//        $this->courses = $this->get_data_manager()->retrieve_courses($this->get_application()->get_user_id());
+        //        $this->courses = $this->get_data_manager()->retrieve_courses($this->get_application()->get_user_id());
+    }
+
+    function get_student_materials_parameters()
+    {
+        $param_user = Request:: get(self :: PARAM_USER_ID);
+        
+        if ($param_user)
+        {
+            return new Parameters($param_user);
+        }
+        else
+        {
+            return new Parameters($this->get_application()->get_user_id());
+        }
     }
 
     /**
@@ -49,7 +67,7 @@ class Module extends \application\discovery\Module
     function get_table_data()
     {
         $data = array();
-
+        
         foreach ($this->courses as $course)
         {
             $row = array();
@@ -57,7 +75,7 @@ class Module extends \application\discovery\Module
             $row[] = $course->get_name();
             $data[] = $row;
         }
-
+        
         return $data;
     }
 
@@ -69,12 +87,12 @@ class Module extends \application\discovery\Module
         $headers = array();
         $headers[] = array(Translation :: get('Year'), 'class="code"');
         $headers[] = array(Translation :: get('Course'));
-
+        
         foreach ($this->get_mark_moments() as $mark_moment)
         {
             $headers[] = array($mark_moment->get_name());
         }
-
+        
         return $headers;
     }
 
@@ -84,21 +102,21 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-
+        
         $table = new SortableTable($this->get_table_data());
-
+        
         foreach ($this->get_table_headers() as $header_id => $header)
         {
             $table->set_header($header_id, $header[0], false);
-
+            
             if ($header[1])
             {
                 $table->getHeader()->setColAttributes($header_id, $header[1]);
             }
         }
-
+        
         $html[] = $table->toHTML();
-
+        
         return implode("\n", $html);
     }
 }

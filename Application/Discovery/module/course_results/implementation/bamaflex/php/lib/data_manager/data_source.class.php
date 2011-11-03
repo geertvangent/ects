@@ -52,6 +52,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course_result->set_type($result->type);
         $course_result->set_person_last_name($this->convert_to_utf8($result->person_last_name));
         $course_result->set_person_first_name($this->convert_to_utf8($result->person_first_name));
+        $course_result->set_person_id($result->person_id);
         $course_result->set_trajectory_type($result->trajectory_type);
         
         $marks = $this->retrieve_marks($course_results_parameters->get_programme_id(), $course_results_parameters->get_source());

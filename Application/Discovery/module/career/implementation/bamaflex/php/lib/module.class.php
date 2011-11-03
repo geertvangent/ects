@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
+use common\libraries\Display;
+
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\career\DataManager;
@@ -348,18 +350,23 @@ class Module extends \application\discovery\module\career\Module
     function render()
     {
         $html = array();
-        
-        $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types($this->get_application()->get_user_id());
-        
-        $tabs = new DynamicTabsRenderer('enrollment_list');
-        
-        foreach ($contract_types as $contract_type)
+        if (count($this->get_courses()) > 0)
         {
-            $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: contract_type_string($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollment_courses($contract_type)));
+            $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types($this->get_career_parameters());
+            
+            $tabs = new DynamicTabsRenderer('enrollment_list');
+            
+            foreach ($contract_types as $contract_type)
+            {
+                $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: contract_type_string($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollment_courses($contract_type)));
+            }
+            
+            $html[] = $tabs->render();
         }
-        
-        $html[] = $tabs->render();
-        
+        else
+        {
+        	$html[] = Display::normal_message(Translation :: get('NoData'), true);
+        }
         return implode("\n", $html);
     }
 }

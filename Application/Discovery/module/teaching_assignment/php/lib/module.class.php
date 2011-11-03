@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\teaching_assignment;
 
+use common\libraries\Request;
+
 use common\libraries\Path;
 use common\libraries\WebApplication;
 use common\libraries\ResourceManager;
@@ -17,6 +19,7 @@ use application\discovery\module\profile\DataManager;
 
 class Module extends \application\discovery\Module
 {
+    const PARAM_USER_ID = 'user_id';
     /**
      * @var multitype:\application\discovery\module\teaching_assignment\TeachingAssignment
      */
@@ -25,8 +28,22 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->teaching_assignments = DataManager :: get_instance($module_instance)->retrieve_teaching_assignments($application->get_user_id());
+        $this->teaching_assignments = DataManager :: get_instance($module_instance)->retrieve_teaching_assignments($this->get_teaching_assignment_parameters());
     
+    }
+
+    function get_teaching_assignment_parameters()
+    {
+        $param_user = Request :: get(self :: PARAM_USER_ID);
+        
+        if ($param_user)
+        {
+            return new Parameters($param_user);
+        }
+        else
+        {
+            return new Parameters($this->get_application()->get_user_id());
+        }
     }
 
     /**
@@ -42,7 +59,7 @@ class Module extends \application\discovery\Module
      */
     function render()
     {
-        $html = array();     
+        $html = array();
         $data = array();
         
         foreach ($this->teaching_assignments as $key => $teaching_assignment)
@@ -51,7 +68,6 @@ class Module extends \application\discovery\Module
             $row[] = $teaching_assignment->get_year();
             $row[] = $teaching_assignment->get_training();
             $row[] = $teaching_assignment->get_name();
-            
             
             $class = 'teaching_assignment" style="" id="teaching_assignment_' . $key;
             $details_action = new ToolbarItem(Translation :: get('ShowTeachingAssignments'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);

@@ -28,8 +28,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param int $id
      * @return multitype:int
      */
-    function retrieve_contract_types($id)
+    function retrieve_contract_types($parameters)
     {
+    	$id = $parameters->get_user_id();
         if (! isset($this->contract_types[$id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
@@ -97,14 +98,15 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param int $user_id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Course
      */
-    function retrieve_courses($user_id)
+    function retrieve_courses($parameters)
     {
+    	$user_id = $parameters->get_user_id();
         if (! isset($this->courses[$user_id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
-            $child_courses = $this->retrieve_child_courses($user_id);
+            $child_courses = $this->retrieve_child_courses($parameters);
 
             $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
             $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' ';
@@ -117,7 +119,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
-                    $course = $this->result_to_course($user_id, $result);
+                    $course = $this->result_to_course($parameters, $result);
 
                     if ($result->programme_id && isset($child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
                     {
@@ -135,8 +137,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         return $this->courses[$user_id];
     }
 
-    private function retrieve_child_courses($user_id)
+    private function retrieve_child_courses($parameters)
     {
+    	$user_id = $parameters->get_user_id();
         if (! isset($this->child_courses[$user_id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
@@ -153,7 +156,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
-                    $this->child_courses[$user_id][$result->source][$result->enrollment_id][$result->programme_parent_id][] = $this->result_to_course($user_id, $result);
+                    $this->child_courses[$user_id][$result->source][$result->enrollment_id][$result->programme_parent_id][] = $this->result_to_course($parameters, $result);
                 }
             }
         }
@@ -161,9 +164,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         return $this->child_courses[$user_id];
     }
 
-    function result_to_course($user_id, $result)
+    function result_to_course($parameters, $result)
     {
-        $course = new Course();
+    	$course = new Course();
         $course->set_id($result->id);
         $course->set_programme_id($result->programme_id);
         $course->set_parent_programme_id($result->parent_programme_id);
@@ -176,9 +179,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_weight($result->weight);
         $course->set_source($result->source);
 
-        $marks = $this->retrieve_marks($user_id);
+        $marks = $this->retrieve_marks($parameters->get_user_id());
 
-        foreach ($this->retrieve_mark_moments($user_id) as $moment)
+        foreach ($this->retrieve_mark_moments($parameters) as $moment)
         {
             if (isset($marks[$result->source][$result->id][$moment->get_id()]))
             {
@@ -200,8 +203,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param string $user_id
      * @return multitype:\application\discovery\module\career\MarkMoment
      */
-    function retrieve_mark_moments($user_id)
+    function retrieve_mark_moments($parameters)
     {
+    	$user_id = $parameters->get_user_id();
         if (! isset($this->mark_moments[$user_id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);

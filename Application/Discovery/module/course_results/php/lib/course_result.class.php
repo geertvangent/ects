@@ -20,6 +20,7 @@ class CourseResult extends DataClass
     const PROPERTY_MARKS = 'marks';
     const PROPERTY_PERSON_FIRST_NAME = 'person_first_name';
     const PROPERTY_PERSON_LAST_NAME = 'person_last_name';
+    const PROPERTY_PERSON_ID = 'person_id';
 
     /**
      * Get the default properties
@@ -31,7 +32,8 @@ class CourseResult extends DataClass
         $extended_property_names[] = self :: PROPERTY_MARKS;
         $extended_property_names[] = self :: PROPERTY_PERSON_FIRST_NAME;
         $extended_property_names[] = self :: PROPERTY_PERSON_LAST_NAME;
-          
+        $extended_property_names[] = self :: PROPERTY_PERSON_ID;
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -69,6 +71,11 @@ class CourseResult extends DataClass
     function get_person_last_name()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_LAST_NAME);
+    }
+
+    function get_person_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
 
     function get_mark_by_moment_id($moment_id)
@@ -109,6 +116,11 @@ class CourseResult extends DataClass
     function set_person_first_name($person_first_name)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_FIRST_NAME, $person_first_name);
+    }
+
+    function set_person_id($person_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
 
     /**

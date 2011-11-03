@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\enrollment;
 
+use common\libraries\Request;
+
 use common\libraries\Path;
 use common\libraries\WebApplication;
 use common\libraries\ResourceManager;
@@ -21,12 +23,27 @@ class Module extends \application\discovery\Module
      * @var multitype:\application\discovery\module\enrollment\Enrollment
      */
     private $enrollments;
+    
+    const PARAM_USER_ID = 'user_id';
 
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->enrollments = DataManager :: get_instance($module_instance)->retrieve_enrollments($application->get_user_id());
+        $this->enrollments = DataManager :: get_instance($module_instance)->retrieve_enrollments($this->get_enrollment_parameters());
+    }
 
+    function get_enrollment_parameters()
+    {
+        $param_user = Request :: get(self :: PARAM_USER_ID);
+        
+        if ($param_user)
+        {
+            return new Parameters($param_user);
+        }
+        else
+        {
+            return new Parameters($this->get_application()->get_user_id());
+        }
     }
 
     /**
@@ -43,24 +60,24 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-
+        
         $data = array();
-
+        
         foreach ($this->enrollments as $key => $enrollment)
         {
             $row = array();
             $row[] = $enrollment->get_year();
             $row[] = $enrollment->get_training();
-
+            
             $class = 'enrollment" style="" id="enrollment_' . $key;
             $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
             $row[] = $details_action->as_html();
             $data[] = $row;
         }
-
+        
         //        $path = Path :: namespace_to_full_path(__NAMESPACE__, true) . 'resources/javascript/enrollment.js';
         //        $html[] = ResourceManager :: get_instance()->get_resource_html($path);
-
+        
 
         return implode("\n", $html);
     }

@@ -32,9 +32,9 @@ class DataSource implements DataManagerInterface
      * @param int $id
      * @return \application\discovery\module\profile\implementation\chamilo\Profile|boolean
      */
-    function retrieve_profile($id)
+    function retrieve_profile($parameters)
     {
-        $user = UserDataManager :: get_instance()->retrieve_user($id);
+    	$user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
 
         if ($user instanceof User)
         {

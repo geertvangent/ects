@@ -9,6 +9,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_FACULTY = 'faculty';
+    const PROPERTY_FACULTY_ID = 'faculty_id';
     const PROPERTY_TRAJECTORY_PART = 'trajectory_part';
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_WEIGHT = 'weight';
@@ -44,6 +45,14 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     function get_faculty()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY);
+    }
+
+    /**
+     * @return integer
+     */
+    function get_faculty_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_FACULTY_ID);
     }
 
     /**
@@ -139,6 +148,14 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     * @param integer $faculty_id
+     */
+    function set_faculty_id($faculty_id)
+    {
+        $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
+    }
+
+    /**
      * @param string $timeframe_id
      */
     function set_timeframe_id($timeframe_id)
@@ -161,6 +178,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_FACULTY;
+        $extended_property_names[] = self :: PROPERTY_FACULTY_ID;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_PART;
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_WEIGHT;

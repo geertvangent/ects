@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
+use user\UserDataManager;
+
 use common\libraries\PropertiesTable;
 
 use common\libraries\StringUtilities;
@@ -73,12 +75,44 @@ class Module extends \application\discovery\module\course\Module
 
     function get_general()
     {
+        $data_source = $this->get_module_instance()->get_setting('data_source');
+        
+        $training_module_instance = \application\discovery\Module :: exists('application\discovery\module\training\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $teaching_assignment_module_instance = \application\discovery\Module :: exists('application\discovery\module\teaching_assignment\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
         $course = $this->get_course();
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $course->get_year();
-        $properties[Translation :: get('Training')] = $course->get_training();
-        $properties[Translation :: get('Faculty')] = $course->get_faculty();
+        
+        if ($training_info_module_instance)
+        {
+            $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($course->get_training_id(), $course->get_source());
+            $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
+            $properties[Translation :: get('Training')] = '<a href="' . $url . '">' . $course->get_training() . '</a>';
+        }
+        else
+        {
+            $properties[Translation :: get('Training')] = $course->get_training();
+        }
+        
+        if ($training_module_instance)
+        {
+            $parameters = new \application\discovery\module\training\implementation\bamaflex\Parameters($course->get_faculty_id(), $course->get_source());
+            $url = $this->get_instance_url($training_module_instance->get_id(), $parameters);
+            $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $course->get_faculty() . '</a>';
+        }
+        else
+        {
+            $properties[Translation :: get('Faculty')] = $course->get_faculty();
+        }
+        
         $properties[Translation :: get('Credits')] = $course->get_credits();
         $properties[Translation :: get('Weight')] = $course->get_weight();
         $properties[Translation :: get('TrajectoryPart')] = $course->get_trajectory_part();
@@ -126,12 +160,64 @@ class Module extends \application\discovery\module\course\Module
         
         if ($course->has_coordinators())
         {
-            $properties[Translation :: get('Coordinators')] = $course->get_coordinators_string();
+            if ($teaching_assignment_module_instance)
+            {
+                $coordinators = array();
+                foreach ($course->get_teachers() as $coordinator)
+                {
+                    
+                    if ($coordinator->is_coordinator())
+                    {
+                        $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($coordinator->get_person_id());
+                        if ($user)
+                        {
+                            $parameters = new \application\discovery\module\teaching_assignment\Parameters($user->get_id());
+                            $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
+                            
+                            $coordinators[] = '<a href="' . $url . '">' . $coordinator . '</a>';
+                        }
+                        else
+                        {
+                            $coordinators[] = $coordinator;
+                        }
+                    }
+                }
+                $properties[Translation :: get('Coordinators')] = implode(', ', $coordinators);
+            }
+            else
+            {
+                $properties[Translation :: get('Coordinators')] = $course->get_coordinators_string();
+            }
         }
         
         if ($course->has_teachers())
         {
-            $properties[Translation :: get('Teachers')] = $course->get_teachers_string();
+            if ($teaching_assignment_module_instance)
+            {
+                $teachers = array();
+                foreach ($course->get_teachers() as $teacher)
+                {
+                    if (! $teacher->is_coordinator())
+                    {
+                        $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($teacher->get_person_id());
+                        if ($user)
+                        {
+                            $parameters = new \application\discovery\module\teaching_assignment\Parameters($user->get_id());
+                            $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
+                            
+                            $teachers[] = '<a href="' . $url . '">' . $teacher . '</a>';
+                        }
+                        else
+                        {$teachers[] =  $teacher;
+                        }
+                    }
+                }
+                $properties[Translation :: get('Teachers')] = implode(', ', $teachers);
+            }
+            else
+            {
+                $properties[Translation :: get('Teachers')] = $course->get_teachers_string();
+            }
         }
         
         foreach ($course->get_costs() as $cost)

@@ -16,18 +16,21 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param int $id
      * @return multitype:\application\discovery\module\teaching_assignment\implementation\bamaflex\TeachingAssignment
      */
-    function retrieve_teaching_assignments($person_id)
+    function retrieve_teaching_assignments($parameters)
     {
+        $user_id = $parameters->get_user_id();
+        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        
         if (! isset($this->teaching_assignments[$person_id]))
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($person_id);
-            $official_code = $user->get_official_code();
+            //                     $official_code = $user->get_official_code();
+            
 
-            $query = 'SELECT * FROM [dbo].[v_discovery_teaching_assignment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC, faculty, training, name';
-
+            $query = 'SELECT * FROM [dbo].[v_discovery_teaching_assignment_advanced] WHERE person_id = ' . $person_id . ' ORDER BY year DESC, faculty, training, name';
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -41,6 +44,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $teaching_assignment->set_year($this->convert_to_utf8($result->year));
                     $teaching_assignment->set_training($this->convert_to_utf8($result->training));
                     $teaching_assignment->set_faculty($this->convert_to_utf8($result->faculty));
+                    $teaching_assignment->set_training_id($result->training_id);
+                    $teaching_assignment->set_faculty_id($result->faculty_id);
                     $teaching_assignment->set_trajectory_part($result->trajectory_part);
                     $teaching_assignment->set_credits($result->credits);
                     $teaching_assignment->set_weight($result->weight);
@@ -49,22 +54,24 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-
+        
         return $this->teaching_assignments[$person_id];
     }
 
-    function retrieve_years($person_id)
+    function retrieve_years($parameters)
     {
-    	if (! isset($this->years[$person_id]))
+        $user_id = $parameters->get_user_id();
+        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        if (! isset($this->years[$person_id]))
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($person_id);
-            $official_code = $user->get_official_code();
+            //            $official_code = $user->get_official_code();
+            
 
-            $query = 'SELECT DISTINCT [year] FROM [dbo].[v_discovery_teaching_assignment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC';
-
+            $query = 'SELECT DISTINCT [year] FROM [dbo].[v_discovery_teaching_assignment_advanced] WHERE person_id = ' . $person_id . ' ORDER BY year DESC';
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -73,7 +80,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-
+        
         return $this->years[$person_id];
     }
 }

@@ -7,11 +7,12 @@ use application\discovery\DiscoveryItem;
 class Enrollment extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_YEAR = 'year';
     const PROPERTY_TRAINING = 'training';
+    const PROPERTY_TRAINING_ID = 'training_id';
     const PROPERTY_RESULT = 'result';
-
+    
     const RESULT_GRADUATED = 1;
     const RESULT_PASSED = 2;
     const RESULT_FAILED = 3;
@@ -32,6 +33,11 @@ class Enrollment extends DiscoveryItem
     function get_training()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING);
+    }
+
+    function get_training_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
     }
 
     /**
@@ -107,6 +113,11 @@ class Enrollment extends DiscoveryItem
         $this->set_default_property(self :: PROPERTY_TRAINING, $training);
     }
 
+    function set_training_id($training_id)
+    {
+        $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
+    }
+
     /**
      * @param string $result
      */
@@ -122,8 +133,9 @@ class Enrollment extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_TRAINING;
+        $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_RESULT;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

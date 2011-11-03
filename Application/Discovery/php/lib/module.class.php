@@ -83,16 +83,16 @@ class Module
         }
         return false;
     }
-    
+
     function get_instance_url($instance_id, $instance_parameters)
     {
-    	$parameters = array();
-    	$parameters[DiscoveryManager::PARAM_MODULE_ID] = $instance_id;
-    	foreach ($instance_parameters->get_parameters() as $key => $value)
-    	{
-    		$parameters[$key] = $value;
-    	}
-    	return $this->get_application()->get_url($parameters);    	
+        $parameters = array();
+        $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $instance_id;
+        foreach ($instance_parameters->get_parameters() as $key => $value)
+        {
+            $parameters[$key] = $value;
+        }
+        return $this->get_application()->get_url($parameters);
     }
 }
 ?>

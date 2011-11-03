@@ -10,6 +10,7 @@ class Autoloader
          'DataManagerInterface' => '/lib/data_manager_interface.class.php',
          'Enrollment' => '/lib/enrollment.class.php',
          'Module' => '/lib/module.class.php',
+         'Parameters' => '/lib/parameters.class.php',
     );
 
     static function load($classname)

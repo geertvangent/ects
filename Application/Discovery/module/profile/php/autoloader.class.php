@@ -13,6 +13,7 @@ class Autoloader
          'IdentificationCode' => '/lib/identification_code.class.php',
          'Module' => '/lib/module.class.php',
          'Name' => '/lib/name.class.php',
+         'Parameters' => '/lib/parameters.class.php',
          'Photo' => '/lib/photo.class.php',
          'Profile' => '/lib/profile.class.php',
     );

@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
 
+use common\libraries\Display;
+
 use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicVisualTab;
@@ -63,6 +65,18 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         $teaching_assignments = $this->get_teaching_assignments_data($year, $type);
         
         $data = array();
+        $data_source = $this->get_module_instance()->get_setting('data_source');
+        $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $training_module_instance = \application\discovery\Module :: exists('application\discovery\module\training\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
+                'data_source' => $data_source));
         
         foreach ($teaching_assignments as $key => $teaching_assignment)
         {
@@ -71,17 +85,34 @@ class Module extends \application\discovery\module\teaching_assignment\Module
             {
                 $row[] = $teaching_assignment->get_year();
             }
-            $row[] = $teaching_assignment->get_faculty();
-            $row[] = $teaching_assignment->get_training();
-            $data_source = $this->get_module_instance()->get_setting('data_source');
-            $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
-                    'data_source' => $data_source));
- 
-            if ($course_result_module_instance)
+            
+            if ($training_module_instance)
             {
-            	$parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($teaching_assignment->get_programme_id(), 1);
-            	$url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-                $row[] = '<a href="' . $url  . '">' . $teaching_assignment->get_name() . '</a>';
+                $parameters = new \application\discovery\module\training\implementation\bamaflex\Parameters($teaching_assignment->get_faculty_id(), $teaching_assignment->get_source());
+                $url = $this->get_instance_url($training_module_instance->get_id(), $parameters);
+                $row[] = '<a href="' . $url . '">' . $teaching_assignment->get_faculty() . '</a>';
+            }
+            else
+            {
+                $row[] = $teaching_assignment->get_faculty();
+            }
+            
+            if ($training_info_module_instance)
+            {
+                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($teaching_assignment->get_training_id(), $teaching_assignment->get_source());
+                $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
+                $row[] = '<a href="' . $url . '">' . $teaching_assignment->get_training() . '</a>';
+            }
+            else
+            {
+                $row[] = $teaching_assignment->get_training();
+            }
+            
+            if ($course_module_instance)
+            {
+                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($teaching_assignment->get_programme_id(), $teaching_assignment->get_source());
+                $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
+                $row[] = '<a href="' . $url . '">' . $teaching_assignment->get_name() . '</a>';
             }
             else
             {
@@ -91,6 +122,13 @@ class Module extends \application\discovery\module\teaching_assignment\Module
             $image = '<img src="' . Theme :: get_image_path() . 'timeframe/' . $teaching_assignment->get_timeframe_id() . '.png" alt="' . Translation :: get($teaching_assignment->get_timeframe()) . '" title="' . Translation :: get($teaching_assignment->get_timeframe()) . '"/>';
             $row[] = $image;
             LegendTable :: get_instance()->add_symbol($image, Translation :: get($teaching_assignment->get_timeframe()), Translation :: get('Timeframe'));
+            
+            if ($course_result_module_instance)
+            {
+                $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($teaching_assignment->get_programme_id(), $teaching_assignment->get_source());
+                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                $row[] = Theme :: get_common_image('action_details', 'png', Translation :: get('CourseResults'), $url, ToolbarItem :: DISPLAY_ICON);
+            }
             
             $data[] = $row;
         }
@@ -103,7 +141,9 @@ class Module extends \application\discovery\module\teaching_assignment\Module
             $table->set_header(2, Translation :: get('Training'), false);
             $table->set_header(3, Translation :: get('Name'), false);
             $table->set_header(4, Translation :: get('Credits'), false, 'class="action"');
+            
             $table->set_header(5, '<img src="' . Theme :: get_image_path() . 'timeframe.png"/>', false);
+            $table->set_header(6, '', false);
         }
         else
         {
@@ -112,6 +152,7 @@ class Module extends \application\discovery\module\teaching_assignment\Module
             $table->set_header(2, Translation :: get('Name'), false);
             $table->set_header(3, Translation :: get('Credits'), false, 'class="action"');
             $table->set_header(4, '<img src="' . Theme :: get_image_path() . 'timeframe.png"/>', false);
+            $table->set_header(5, '', false);
         }
         return $table;
     }
@@ -122,42 +163,48 @@ class Module extends \application\discovery\module\teaching_assignment\Module
     function render()
     {
         $html = array();
-        
-        $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
-        
-        $tabs = new DynamicTabsRenderer('teaching_assignment_list');
-        
-        $source_tabs = new DynamicTabsRenderer('teaching_assignment_year_list');
-        
-        if ($this->has_teaching_assignments(0, TeachingAssignment :: TYPE_TEACHER))
+        if (count($this->get_teaching_assignments()) > 0)
         {
-            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: TYPE_TEACHER)->toHTML()));
-        }
-        if ($this->has_teaching_assignments(0, TeachingAssignment :: TYPE_MANAGER))
-        {
-            $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: TYPE_MANAGER)->toHTML()));
-        }
-        
-        $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $source_tabs->render()));
-        
-        foreach ($years as $year)
-        {
-            $source_tabs = new DynamicTabsRenderer('teaching_assignment_year_' . $year . '_list');
+            $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_teaching_assignment_parameters());
             
-            if ($this->has_teaching_assignments($year, TeachingAssignment :: TYPE_TEACHER))
+            $tabs = new DynamicTabsRenderer('teaching_assignment_list');
+            
+            $source_tabs = new DynamicTabsRenderer('teaching_assignment_year_list');
+            
+            if ($this->has_teaching_assignments(0, TeachingAssignment :: TYPE_TEACHER))
             {
-                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: TYPE_TEACHER)->toHTML()));
+                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: TYPE_TEACHER)->toHTML()));
+            }
+            if ($this->has_teaching_assignments(0, TeachingAssignment :: TYPE_MANAGER))
+            {
+                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table(0, TeachingAssignment :: TYPE_MANAGER)->toHTML()));
             }
             
-            if ($this->has_teaching_assignments($year, TeachingAssignment :: TYPE_MANAGER))
+            $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $source_tabs->render()));
+            
+            foreach ($years as $year)
             {
-                $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: TYPE_MANAGER)->toHTML()));
+                $source_tabs = new DynamicTabsRenderer('teaching_assignment_year_' . $year . '_list');
+                
+                if ($this->has_teaching_assignments($year, TeachingAssignment :: TYPE_TEACHER))
+                {
+                    $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_TEACHER, Translation :: get('Teacher'), Theme :: get_image_path() . 'teacher.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: TYPE_TEACHER)->toHTML()));
+                }
+                
+                if ($this->has_teaching_assignments($year, TeachingAssignment :: TYPE_MANAGER))
+                {
+                    $source_tabs->add_tab(new DynamicContentTab(TeachingAssignment :: TYPE_MANAGER, Translation :: get('Manager'), Theme :: get_image_path() . 'manager.png', $this->get_teaching_assignments_table($year, TeachingAssignment :: TYPE_MANAGER)->toHTML()));
+                }
+                $tabs->add_tab(new DynamicContentTab($year, $year, null, $source_tabs->render()));
             }
-            $tabs->add_tab(new DynamicContentTab($year, $year, null, $source_tabs->render()));
+            
+            $html[] = $tabs->render();
+        
         }
-        
-        $html[] = $tabs->render();
-        
+        else
+        {
+            $html[] = Display :: normal_message(Translation :: get('NoData'), true);
+        }
         return implode("\n", $html);
     }
 }

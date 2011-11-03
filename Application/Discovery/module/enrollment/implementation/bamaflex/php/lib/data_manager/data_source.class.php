@@ -21,11 +21,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param unknown_type $id
      * @return multitype:int
      */
-    function retrieve_contract_types($id)
+    function retrieve_contract_types($parameters)
     {
-        if (! isset($this->contract_types[$id]))
+    	$user_id = $parameters->get_user_id();
+        if (! isset($this->contract_types[$user_id]))
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($id);
+            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
             $query = 'SELECT DISTINCT [contract_type] FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY contract_type';
@@ -37,20 +38,21 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
-                    $this->contract_types[$id][] = $result->contract_type;
+                    $this->contract_types[$user_id][] = $result->contract_type;
                 }
             }
         }
 
-        return $this->contract_types[$id];
+        return $this->contract_types[$user_id];
     }
 
     /**
      * @param int $id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Enrollment
      */
-    function retrieve_enrollments($id)
+    function retrieve_enrollments($parameters)
     {
+    	$id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
@@ -70,7 +72,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $enrollment->set_id($result->id);
                     $enrollment->set_year($this->convert_to_utf8($result->year));
                     $enrollment->set_training($this->convert_to_utf8($result->training));
+                    $enrollment->set_training_id($result->training_id);
                     $enrollment->set_faculty($this->convert_to_utf8($result->faculty));
+                    $enrollment->set_faculty_id($result->faculty_id);
                     $enrollment->set_contract_type($result->contract_type);
                     $enrollment->set_contract_id($result->contract_id);
                     $enrollment->set_trajectory_type($result->trajectory_type);

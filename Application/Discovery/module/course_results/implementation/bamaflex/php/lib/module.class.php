@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
+use user\UserDataManager;
+
 use common\libraries\Request;
 
 use application\discovery\LegendTable;
@@ -18,7 +20,7 @@ use common\libraries\Translation;
 
 class Module extends \application\discovery\module\course_results\Module
 {
-	const PARAM_SOURCE = 'source';
+    const PARAM_SOURCE = 'source';
 
     /**
      * @return multitype:multitype:string
@@ -26,12 +28,33 @@ class Module extends \application\discovery\module\course_results\Module
     function get_table_data()
     {
         $data = array();
+        $data_source = $this->get_module_instance()->get_setting('data_source');
+        $profile_module_instance = \application\discovery\Module :: exists('application\discovery\module\profile\implementation\bamaflex', array(
+                'data_source' => $data_source));
         
         foreach ($this->get_course_results() as $course_result)
         {
             $row = array();
-            $row[] = $course_result->get_person_last_name();
-            $row[] = $course_result->get_person_first_name();
+            
+            if ($profile_module_instance)
+            {
+                $user = UserDataManager:: get_instance()->retrieve_user_by_official_code($course_result->get_person_id());
+                if ($user)
+                {
+                    $parameters = new \application\discovery\module\profile\Parameters($user->get_id());
+                    $url = $this->get_instance_url($profile_module_instance->get_id(), $parameters);
+                    $row[] = '<a href="' . $url . '">' . $course_result->get_person_last_name() . ' ' . $course_result->get_person_first_name() . '</a>';
+                }
+                else
+                {
+                    $row[] = $course_result->get_person_last_name() . ' ' . $course_result->get_person_first_name();
+                }
+            }
+            else
+            {
+                $row[] = $course_result->get_person_last_name() . ' ' . $course_result->get_person_first_name();
+            }
+            
             $row[] = $course_result->get_trajectory_type_string();
             
             foreach ($this->get_mark_moments() as $mark_moment)
@@ -64,12 +87,11 @@ class Module extends \application\discovery\module\course_results\Module
         
         return $data;
     }
-    
+
     function get_course_results_parameters()
     {
-    	return new Parameters(Request:: get(self :: PARAM_PROGRAMME_ID), Request :: get(self :: PARAM_SOURCE));
+        return new Parameters(Request :: get(self :: PARAM_PROGRAMME_ID), Request :: get(self :: PARAM_SOURCE));
     }
-    
 
     /**
      * @return multitype:string
@@ -77,8 +99,7 @@ class Module extends \application\discovery\module\course_results\Module
     function get_table_headers()
     {
         $headers = array();
-        $headers[] = array(Translation :: get('PersonLastName'));
-        $headers[] = array(Translation :: get('PersonFirstName'));
+        $headers[] = array(Translation :: get('PersonName'));
         $headers[] = array(Translation :: get('TrajectoryType'));
         
         foreach ($this->get_mark_moments() as $mark_moment)
@@ -96,7 +117,7 @@ class Module extends \application\discovery\module\course_results\Module
         
         $table_data = $this->get_table_data();
         if (count($table_data) > 0)
-        {           
+        {
             $table = new SortableTable($this->get_table_data());
             
             foreach ($this->get_table_headers() as $header_id => $header)
