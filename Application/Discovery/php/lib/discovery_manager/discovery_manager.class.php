@@ -16,8 +16,9 @@ class DiscoveryManager extends WebApplication
 
     const PARAM_USER_ID = 'user_id';
     const PARAM_MODULE_ID = 'module_id';
+    const PARAM_CONTENT_TYPE = 'content_type';
 
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self :: ACTION_VIEW;
 
     /**
      * Constructor

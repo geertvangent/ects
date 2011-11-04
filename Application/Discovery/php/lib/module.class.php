@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\NotCondition;
+
 use common\libraries\EqualityCondition;
 use common\libraries\AndCondition;
 
@@ -11,7 +13,7 @@ use common\libraries\Application;
  *
  */
 class Module
-{
+{	
     /**
      * @var Application
      */
@@ -31,6 +33,8 @@ class Module
         $this->application = $application;
         $this->module_instance = $module_instance;
     }
+    
+    
 
     /**
      * @param Application $application
@@ -70,7 +74,7 @@ class Module
     static function exists($type, $settings)
     {
         $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_TYPE, $type);
-        $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_ENABLED, 1);
+        $conditions[] = new NotCondition(new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, ModuleInstance::TYPE_DISABLED));
         $condition = new AndCondition($conditions);
         
         $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition);

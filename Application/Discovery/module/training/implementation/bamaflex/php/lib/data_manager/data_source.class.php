@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
+use application\discovery\DiscoveryItem;
+
 use application\discovery\module\faculty\implementation\bamaflex\Dean;
 
 use application\discovery\module\faculty\implementation\bamaflex\Faculty;
@@ -60,7 +62,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $training->set_faculty_id($result->faculty_id);
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-                    
+                                 
                     $this->trainings[] = $training;
                 }
             }

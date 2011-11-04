@@ -61,6 +61,11 @@ class Mdb2DiscoveryDataManager extends Mdb2Database implements DiscoveryDataMana
         return $this->retrieve_object(ModuleInstance :: get_table_name(), $condition, array(), ModuleInstance :: CLASS_NAME);
     }
 
+    function retrieve_module_instance_by_condition($condition, $order_by)
+    {
+        return $this->retrieve_object(ModuleInstance :: get_table_name(), $condition, $order_by, ModuleInstance :: CLASS_NAME);
+    }
+
     function retrieve_module_instances($condition = null, $offset = null, $max_objects = null, $order_by = null)
     {
         return $this->retrieve_objects(ModuleInstance :: get_table_name(), $condition, $offset, $max_objects, $order_by, ModuleInstance :: CLASS_NAME);
@@ -127,19 +132,19 @@ class Mdb2DiscoveryDataManager extends Mdb2Database implements DiscoveryDataMana
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_ENABLED, 1);
-
+        
         if (! is_array($types))
         {
             $types = array($types);
         }
-
+        
         if (count($types) > 0)
         {
             $conditions[] = new InCondition(ModuleInstance :: PROPERTY_TYPE, $types);
         }
-
+        
         $condition = new AndCondition($conditions);
-
+        
         return $this->retrieve_module_instances($condition);
     }
 
@@ -147,28 +152,6 @@ class Mdb2DiscoveryDataManager extends Mdb2Database implements DiscoveryDataMana
     {
         return $this->count_objects(ModuleInstance :: get_table_name(), $conditions);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     function retrieve_data_source_instance($data_source_instance_id)
     {

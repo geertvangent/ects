@@ -35,7 +35,25 @@ class Module extends \application\discovery\module\course\Module
 
     function get_course_parameters()
     {
-        return new Parameters(Request :: get(self :: PARAM_PROGRAMME_ID), Request :: get(self :: PARAM_SOURCE));
+        return self :: get_module_parameters();
+    }
+
+    static function get_module_parameters()
+    {
+        $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
+        $source = Request :: get(self :: PARAM_SOURCE);
+        $parameter = new Parameters();
+        
+        if ($programme)
+        {
+            $parameter->set_programme_id($programme);
+        }
+        if ($source)
+        {
+            $parameter->set_source($source);
+        }
+        return $parameter;
+    
     }
 
     /* (non-PHPdoc)
@@ -208,7 +226,8 @@ class Module extends \application\discovery\module\course\Module
                             $teachers[] = '<a href="' . $url . '">' . $teacher . '</a>';
                         }
                         else
-                        {$teachers[] =  $teacher;
+                        {
+                            $teachers[] = $teacher;
                         }
                     }
                 }

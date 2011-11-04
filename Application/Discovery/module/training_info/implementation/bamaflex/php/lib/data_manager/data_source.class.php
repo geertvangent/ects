@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
+use application\discovery\DiscoveryItem;
+
 use application\discovery\module\training\implementation\bamaflex\Training;
 
 use user\UserDataManager;

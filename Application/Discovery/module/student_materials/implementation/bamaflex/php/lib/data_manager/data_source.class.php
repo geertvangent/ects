@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
+use application\discovery\DiscoveryItem;
+
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use common\libraries\ArrayResultSet;
 use user\UserDataManager;
@@ -81,6 +83,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $enrollment->set_option_choice($this->convert_to_utf8($result->option_choice));
                     $enrollment->set_graduation_option($this->convert_to_utf8($result->graduation_option));
                     $enrollment->set_result($result->result);
+                                 
                     $this->enrollments[$id][] = $enrollment;
                 }
             }

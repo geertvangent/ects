@@ -37,7 +37,20 @@ class Module extends \application\discovery\Module
 
     function get_training_parameters()
     {
-        return new Parameters(Request :: get(self :: PARAM_TRAINING_ID));
+        return self :: get_module_parameters();
+    }
+
+    static function get_module_parameters()
+    {
+        $training = Request :: get(self :: PARAM_TRAINING_ID);
+        
+        $parameter = new Parameters();
+        if ($training)
+        {
+            $parameter->set_training_id($training);
+        }
+        return $parameter;
+    
     }
 
     /**
@@ -53,26 +66,27 @@ class Module extends \application\discovery\Module
      */
     function render()
     {
-//        $html = array();
+        //        $html = array();
         dump($this->get_training());
-//        if ($this->has_parameters())
-//        {
-//           
-//            $html[] = $this->get_training_infos_table()->toHTML();
-//        }
-//        else
-//        {
-//            $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
-//            
-//            $tabs = new DynamicTabsRenderer('training_info_list');
-//            foreach ($years as $year)
-//            {
-//                $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_training_infos_table($year)->toHTML()));
-//            }
-//            $html[] = $tabs->render();
-//        
-//        }
-//        return implode("\n", $html);
+    
+     //        if ($this->has_parameters())
+    //        {
+    //           
+    //            $html[] = $this->get_training_infos_table()->toHTML();
+    //        }
+    //        else
+    //        {
+    //            $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
+    //            
+    //            $tabs = new DynamicTabsRenderer('training_info_list');
+    //            foreach ($years as $year)
+    //            {
+    //                $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_training_infos_table($year)->toHTML()));
+    //            }
+    //            $html[] = $tabs->render();
+    //        
+    //        }
+    //        return implode("\n", $html);
     }
 
 }

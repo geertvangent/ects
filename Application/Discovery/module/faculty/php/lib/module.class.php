@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\faculty;
 
+use application\discovery\Parameters;
+
 use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\Path;
@@ -29,7 +31,12 @@ class Module extends \application\discovery\Module
     {
         parent :: __construct($application, $module_instance);
         $this->faculties = DataManager :: get_instance($module_instance)->retrieve_faculties();
+    
+    }
 
+    static function get_module_parameters()
+    {
+        return new Parameters();
     }
 
     /**
@@ -76,9 +83,9 @@ class Module extends \application\discovery\Module
     function get_faculties_table($year = 0)
     {
         $faculties = $this->get_faculties_data($year);
-
+        
         $data = array();
-
+        
         foreach ($faculties as $key => $faculty)
         {
             $row = array();
@@ -86,23 +93,23 @@ class Module extends \application\discovery\Module
             {
                 $row[] = $faculty->get_year();
             }
-//            $data_source = $this->get_module_instance()->get_setting('data_source');
-//            $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
-//                    'data_source' => $data_source));
-//
-//            if ($course_result_module_instance)
-//            {
-//                $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($faculty->get_programme_id(), 1);
-//                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-//                $row[] = '<a href="' . $url . '">' . $faculty->get_name() . '</a>';
-//            }
-//            else
-//            {
-                $row[] = $faculty->get_name();
-//            }
+            //            $data_source = $this->get_module_instance()->get_setting('data_source');
+            //            $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
+            //                    'data_source' => $data_source));
+            //
+            //            if ($course_result_module_instance)
+            //            {
+            //                $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($faculty->get_programme_id(), 1);
+            //                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+            //                $row[] = '<a href="' . $url . '">' . $faculty->get_name() . '</a>';
+            //            }
+            //            else
+            //            {
+            $row[] = $faculty->get_name();
+            //            }
             $data[] = $row;
         }
-
+        
         $table = new SortableTable($data);
         if (! $year)
         {
@@ -122,20 +129,21 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-
+        
         $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
-
+        
         $tabs = new DynamicTabsRenderer('faculty_list');
-
-//        $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $this->get_faculties_table(0)->toHTML()));
+        
+        //        $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $this->get_faculties_table(0)->toHTML()));
+        
 
         foreach ($years as $year)
         {
             $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_faculties_table($year)->toHTML()));
         }
-
+        
         $html[] = $tabs->render();
-
+        
         return implode("\n", $html);
     }
 

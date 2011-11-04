@@ -30,7 +30,7 @@ class Module extends \application\discovery\module\training\Module
 
     function get_training_parameters()
     {
-        return new Parameters(Request :: get(self :: PARAM_FACULTY_ID), Request :: get(self :: PARAM_SOURCE));
+        return self :: get_module_parameters();
     }
 
     function has_parameters()
@@ -43,6 +43,24 @@ class Module extends \application\discovery\module\training\Module
         {
             return false;
         }
+    }
+
+    static function get_module_parameters()
+    {
+        $faculty = Request :: get(self ::PARAM_FACULTY_ID);
+        $source = Request :: get(self:: PARAM_SOURCE);
+        
+        $parameter = new Parameters();
+        if ($faculty)
+        {
+            $parameter->set_faculty_id($faculty);
+        }
+        if ($source)
+        {
+        	$parameter->set_source($source);
+        }
+        return $parameter;
+    
     }
 
     function get_trainings_table($year = 0)

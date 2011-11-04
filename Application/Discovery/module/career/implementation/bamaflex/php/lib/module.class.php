@@ -156,7 +156,7 @@ class Module extends \application\discovery\module\career\Module
 
     function get_enrollments($contract_type)
     {
-        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments($this->get_application()->get_user_id());
+        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments($this->get_career_parameters());
         
         $contract_type_enrollments = array();
         
@@ -173,7 +173,7 @@ class Module extends \application\discovery\module\career\Module
 
     function get_contracts($contract_type)
     {
-        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments($this->get_application()->get_user_id());
+        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments($this->get_career_parameters());
         
         $contract_enrollments = array();
         

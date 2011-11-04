@@ -10,8 +10,9 @@ use common\libraries\DataClass;
 class DiscoveryItem extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_TITLE = 'title';
+    
 
     /**
      * @param string $title
@@ -29,13 +30,14 @@ class DiscoveryItem extends DataClass
         return $this->get_default_property(self :: PROPERTY_TITLE);
     }
 
+  
     /**
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_TITLE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

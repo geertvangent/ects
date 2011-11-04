@@ -57,8 +57,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param int $id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Enrollment
      */
-    function retrieve_enrollments($id)
+    function retrieve_enrollments($parameters)
     {
+    	$id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
@@ -86,6 +87,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $enrollment->set_option_choice($this->convert_to_utf8($result->option_choice));
                     $enrollment->set_graduation_option($this->convert_to_utf8($result->graduation_option));
                     $enrollment->set_result($result->result);
+
                     $this->enrollments[$id][] = $enrollment;
                 }
             }

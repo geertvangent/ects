@@ -35,6 +35,11 @@ class Module extends \application\discovery\Module
 
     function get_training_parameters()
     {
+        return self :: get_module_parameters();
+    }
+    
+    static function get_module_parameters()
+    {
         return new Parameters();
     }
 

@@ -43,19 +43,26 @@ class Module extends \application\discovery\Module
         $this->courses = $this->get_data_manager()->retrieve_courses($this->get_career_parameters());
         $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_career_parameters());
     }
-
+   
     function get_career_parameters()
     {
+        $parameter = self :: get_module_parameters();
+        if (! $parameter->get_user_id())
+        {
+            $parameter->set_user_id($this->get_application()->get_user_id());
+        }
+        return $parameter;
+    }
+
+    static function get_module_parameters()
+    {
         $param_user = Request :: get(self :: PARAM_USER_ID);
-        
+        $parameter = new Parameters();
         if ($param_user)
         {
-            return new Parameters($param_user);
+            $parameter->set_user_id($param_user);
         }
-        else
-        {
-            return new Parameters($this->get_application()->get_user_id());
-        }
+        return $parameter;
     }
 
     /**
