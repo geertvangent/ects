@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
-use application\discovery\module\training_info\implementation\bamaflex\Parameters;
-
 use application\discovery\module\training\DataManager;
 
 use application\discovery\DiscoveryDataManager;
@@ -214,7 +212,7 @@ class Training extends \application\discovery\module\training\Training
         {
             do
             {
-                $parameters = new Parameters($training->get_previous_id(), $training->get_source());
+                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($training->get_previous_id(), $training->get_source());
                 
                 $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
                 $trainings[] = $training;
@@ -232,7 +230,7 @@ class Training extends \application\discovery\module\training\Training
         {
             do
             {
-                $parameters = new Parameters($training->get_next_id(), $training->get_source());
+                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($training->get_next_id(), $training->get_source());
                 
                 $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
                 $trainings[] = $training;

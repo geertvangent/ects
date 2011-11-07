@@ -8,6 +8,9 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'Connection' => '/lib/connection.class.php',
          'DataSource' => '/lib/data_source.class.php',
+         'DiscoveryDataManager' => '/lib/discovery_data_manager.class.php',
+         'History' => '/lib/history.class.php',
+         'Mdb2DiscoveryDataManager' => '/lib/data_manager/mdb2.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php',
     );
 

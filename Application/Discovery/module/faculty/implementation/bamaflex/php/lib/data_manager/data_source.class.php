@@ -38,7 +38,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $faculty->set_year($this->convert_to_utf8($result->year));
                     $faculty->set_deans($this->retrieve_deans($faculty->get_source(), $faculty->get_id()));
                     $faculty->set_previous_id($result->previous_id);
-                    $faculty->set_next_id($this->retrieve_faculty_next_id($faculty));
+                    $next = $this->retrieve_faculty_next_id($faculty);
+                    $faculty->set_next_id($next->id);
+                    $faculty->set_previous_source($result->previous_source);
+                    $faculty->set_next_source($next->source);
                     
                     $this->faculties[] = $faculty;
                 }
@@ -73,7 +76,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $faculty->set_year($this->convert_to_utf8($result->year));
                     $faculty->set_deans($this->retrieve_deans($faculty->get_source(), $faculty->get_id()));
                     $faculty->set_previous_id($result->previous_id);
-                    $faculty->set_next_id($this->retrieve_faculty_next_id($faculty));
+                    $next = $this->retrieve_faculty_next_id($faculty);
+                    $faculty->set_next_id($next->id);
+                    $faculty->set_previous_source($result->previous_source);
+                    $faculty->set_next_source($next->source);
                     
                     $this->faculty[$faculty_id][$source] = $faculty;
                 }
@@ -88,14 +94,13 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
     function retrieve_faculty_next_id($faculty)
     {
-        $query = 'SELECT id FROM [dbo].[v_discovery_faculty_advanced] WHERE previous_id = "' . $faculty->get_id() . '" AND source = "' . $faculty->get_source() . '"';
+        $query = 'SELECT id, source FROM [dbo].[v_discovery_faculty_advanced] WHERE previous_id = "' . $faculty->get_id() . '" AND source = "' . $faculty->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
         
         if (! $results instanceof MDB2_Error)
         {
-            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-            return $result->id;
+            return $results->fetchRow(MDB2_FETCHMODE_OBJECT);
         }
         else
         {

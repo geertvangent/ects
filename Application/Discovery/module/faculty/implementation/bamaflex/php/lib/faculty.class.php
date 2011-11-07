@@ -12,6 +12,8 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_PREVIOUS_ID = 'previous_id';
     const PROPERTY_NEXT_ID = 'next_id';
+    const PROPERTY_PREVIOUS_SOURCE = 'previous_source';
+    const PROPERTY_NEXT_SOURCE = 'next_source';
     
     private $deans;
 
@@ -41,7 +43,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
             {
                 $parameters = new Parameters();
                 $parameters->set_faculty_id($faculty->get_previous_id());
-                $parameters->set_source($faculty->get_source());
+                $parameters->set_source($faculty->get_previous_source());
                 $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
                 $faculties[] = $faculty;
             }
@@ -60,7 +62,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
             {
                 $parameters = new Parameters();
                 $parameters->set_faculty_id($faculty->get_next_id());
-                $parameters->set_source($faculty->get_source());
+                $parameters->set_source($faculty->get_next_source());
                 
                 $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
                 $faculties[] = $faculty;
@@ -103,6 +105,26 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         $this->set_default_property(self :: PROPERTY_NEXT_ID, $next_id);
     }
 
+    function get_previous_source()
+    {
+        return $this->get_default_property(self :: PROPERTY_PREVIOUS_SOURCE);
+    }
+
+    function set_previous_source($previous_source)
+    {
+        $this->set_default_property(self :: PROPERTY_PREVIOUS_SOURCE, $previous_source);
+    }
+
+    function get_next_source()
+    {
+        return $this->get_default_property(self :: PROPERTY_NEXT_SOURCE);
+    }
+
+    function set_next_source($next_source)
+    {
+        $this->set_default_property(self :: PROPERTY_NEXT_SOURCE, $next_source);
+    }
+
     function get_deans()
     {
         return $this->deans;
@@ -141,6 +163,8 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_ID;
         $extended_property_names[] = self :: PROPERTY_NEXT_ID;
+        $extended_property_names[] = self :: PROPERTY_PREVIOUS_SOURCE;
+        $extended_property_names[] = self :: PROPERTY_NEXT_SOURCE;
         
         return parent :: get_default_property_names($extended_property_names);
     }

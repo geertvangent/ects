@@ -1,6 +1,16 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
+use common\libraries\AndCondition;
+
+use common\libraries\EqualityCondition;
+
+use common\libraries\Utilities;
+
+use application\discovery\connection\bamaflex\History;
+
+use application\discovery\connection\bamaflex\DiscoveryDataManager;
+
 use application\discovery\DiscoveryItem;
 
 use application\discovery\module\faculty\implementation\bamaflex\Dean;
@@ -72,7 +82,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         
         return $this->trainings;
     }
-    
+
     function retrieve_training_next_id($training)
     {
         $query = 'SELECT id FROM [dbo].[v_discovery_training_advanced] WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
@@ -134,8 +144,46 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $faculty->set_name($this->convert_to_utf8($result->name));
                     $faculty->set_year($this->convert_to_utf8($result->year));
                     $faculty->set_deans($this->retrieve_deans($faculty->get_source(), $faculty->get_id()));
-                    $faculty->set_previous_id($result->previous_id);
-                    $faculty->set_next_id($this->retrieve_faculty_next_id($faculty));
+                    
+                    $conditions = array();
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $faculty->get_id());
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $faculty->get_source());
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, Utilities :: get_namespace_from_object($faculty));
+                    $condition = new AndCondition($conditions);
+                    
+                    $history = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    if ($history instanceof History)
+                    {
+                        $faculty->set_previous_id($history->get_previous_id());
+                        $faculty->set_previous_source($history->get_previous_source());
+                    
+                    }
+                    else
+                    {
+                        $faculty->set_previous_id($result->previous_id);
+                        $faculty->set_previous_source($result->previous_source);
+                    }
+                    
+                    $conditions = array();
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $faculty->get_id());
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $faculty->get_source());
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, Utilities :: get_namespace_from_object($faculty));
+                    $condition = new AndCondition($conditions);
+                    
+                    $history = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    if ($history instanceof History)
+                    {
+                        $faculty->set_next_id($history->get_history_id());
+                        $faculty->set_next_source($history->get_history_source());
+                    
+                    }
+                    else
+                    {
+                        $next = $this->retrieve_faculty_next_id($faculty);
+                        $faculty->set_next_id($next->id);
+                        $faculty->set_next_source($next->source);
+                    }
+                    
                     $this->faculties[$faculty_id][$source] = $faculty;
                 }
             }
@@ -145,18 +193,17 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         {
             return false;
         }
-    }      
+    }
 
     function retrieve_faculty_next_id($faculty)
     {
-        $query = 'SELECT id FROM [dbo].[v_discovery_faculty_advanced] WHERE previous_id = "' . $faculty->get_id() . '" AND source = "' . $faculty->get_source() . '"';
+        $query = 'SELECT id, source FROM [dbo].[v_discovery_faculty_advanced] WHERE previous_id = "' . $faculty->get_id() . '" AND source = "' . $faculty->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
         
         if (! $results instanceof MDB2_Error)
         {
-            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-            return $result->id;
+            return $results->fetchRow(MDB2_FETCHMODE_OBJECT);
         }
         else
         {
