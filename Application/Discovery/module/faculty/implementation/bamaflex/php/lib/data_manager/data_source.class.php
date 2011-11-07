@@ -10,6 +10,7 @@ use MDB2_Error;
 class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
 {
     private $faculties;
+    private $faculty;
     private $deans;
     private $years;
 
@@ -36,6 +37,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $faculty->set_name($this->convert_to_utf8($result->name));
                     $faculty->set_year($this->convert_to_utf8($result->year));
                     $faculty->set_deans($this->retrieve_deans($faculty->get_source(), $faculty->get_id()));
+                    $faculty->set_previous_id($result->previous_id);
+                    $faculty->set_next_id($this->retrieve_faculty_next_id($faculty));
                     
                     $this->faculties[] = $faculty;
                 }
@@ -43,6 +46,61 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         }
         
         return $this->faculties;
+    }
+
+    function retrieve_faculty($faculty_parameters)
+    {
+        $faculty_id = $faculty_parameters->get_parameter(Faculty :: PROPERTY_ID);
+        $source = $faculty_parameters->get_parameter(Faculty :: PROPERTY_SOURCE);
+        
+        if ($faculty_id && $source)
+        {
+            if (! isset($this->faculty[$faculty_id][$source]))
+            {
+                $query = 'SELECT * FROM [dbo].[v_discovery_faculty_advanced] WHERE id = "' . $faculty_id . '" AND source = "' . $source . '"';
+                
+                $statement = $this->get_connection()->prepare($query);
+                $results = $statement->execute();
+                
+                if (! $results instanceof MDB2_Error)
+                {
+                    $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+                    
+                    $faculty = new Faculty();
+                    $faculty->set_source($result->source);
+                    $faculty->set_id($result->id);
+                    $faculty->set_name($this->convert_to_utf8($result->name));
+                    $faculty->set_year($this->convert_to_utf8($result->year));
+                    $faculty->set_deans($this->retrieve_deans($faculty->get_source(), $faculty->get_id()));
+                    $faculty->set_previous_id($result->previous_id);
+                    $faculty->set_next_id($this->retrieve_faculty_next_id($faculty));
+                    
+                    $this->faculty[$faculty_id][$source] = $faculty;
+                }
+            }
+            return $this->faculty[$faculty_id][$source];
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function retrieve_faculty_next_id($faculty)
+    {
+        $query = 'SELECT id FROM [dbo].[v_discovery_faculty_advanced] WHERE previous_id = "' . $faculty->get_id() . '" AND source = "' . $faculty->get_source() . '"';
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        
+        if (! $results instanceof MDB2_Error)
+        {
+            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $result->id;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     function retrieve_years()

@@ -17,7 +17,6 @@ use common\libraries\Application;
 
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
-use application\discovery\module\profile\DataManager;
 
 class Module extends \application\discovery\Module
 {

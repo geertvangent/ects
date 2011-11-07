@@ -80,6 +80,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_jury($object->jury);
         $course->set_repleacable($object->repleacable);
         $course->set_training_unit($this->convert_to_utf8($object->training_unit));
+        $course->set_previous_id($object->previous_id);
+        $course->set_previous_parent_id($object->previous_parent_id);
+        $course->set_next_id($this->retrieve_course_next_id($course));
         
         $second_chance = new SecondChance();
         $second_chance->set_exam($object->second_exam_chance);
@@ -199,6 +202,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $course->set_children($this->retrieve_children($course_parameters));
         }
         return $course;
+    }
+
+    function retrieve_course_next_id($course)
+    {
+        $query = 'SELECT id FROM [dbo].[v_discovery_course_advanced] WHERE previous_id = "' . $course->get_id() . '" AND source = "' . $course->get_source() . '"';
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        
+        if (! $results instanceof MDB2_Error)
+        {
+            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $result->id;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     function retrieve_children($course_parameters)

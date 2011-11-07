@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
+use common\libraries\ToolbarItem;
+
 use common\libraries\StringUtilities;
 
 use common\libraries\DynamicTabsRenderer;
@@ -42,7 +44,31 @@ class Module extends \application\discovery\module\training_info\Module
         $html = array();
         $training = $this->get_training();
         
-        $html[] = '<h3>' . $training->get_name() . '</h3>';
+        $html[] = '<h3>';
+        if ($training->get_previous_id())
+        {
+            $parameters = new Parameters($training->get_previous_id(), $training->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $html[] = Theme :: get_common_image('action_prev', 'png', Translation :: get('Previous'), $link, ToolbarItem :: DISPLAY_ICON);
+        }
+        else
+        {
+            $html[] = Theme :: get_common_image('action_prev_na', 'png', Translation :: get('PreviousNA'), null, ToolbarItem :: DISPLAY_ICON);
+        
+        }
+        $html[] = $training->get_name();
+        if ($training->get_next_id())
+        {
+            $parameters = new Parameters($training->get_next_id(), $training->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $html[] = Theme :: get_common_image('action_next', 'png', Translation :: get('Next'), $link, ToolbarItem :: DISPLAY_ICON);
+        }
+        else
+        {
+            $html[] = Theme :: get_common_image('action_next_na', 'png', Translation :: get('NextNA'), null, ToolbarItem :: DISPLAY_ICON);
+        
+        }
+        $html[] = '</h3>';
         
         $tabs = new DynamicTabsRenderer('training');
         
@@ -67,6 +93,18 @@ class Module extends \application\discovery\module\training_info\Module
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $training->get_year();
+        
+        $history = array();
+        $tainings = $training->get_all($this->get_module_instance());
+        
+        foreach ($tainings as $training_history)
+        {            
+            $parameters = new Parameters($training_history->get_id(), $training_history->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $history[] = '<a href="' . $link . '">' . $training_history->get_year() . '</a>';
+        }
+        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
+        
         $properties[Translation :: get('BamaType')] = $training->get_bama_type_string();
         $properties[Translation :: get('Type')] = $training->get_type();
         $properties[Translation :: get('Domain')] = $training->get_domain();

@@ -9,6 +9,7 @@ class Autoloader
          'Dean' => '/lib/dean.class.php',
          'Faculty' => '/lib/faculty.class.php',
          'Module' => '/lib/module.class.php',
+         'Parameters' => '/lib/parameters.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php',
     );

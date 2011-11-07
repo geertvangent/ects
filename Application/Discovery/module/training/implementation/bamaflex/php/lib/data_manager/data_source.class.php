@@ -62,13 +62,32 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $training->set_faculty_id($result->faculty_id);
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-                                 
+                    $training->set_previous_id($result->previous_id);
+                    $training->set_next_id($this->retrieve_training_next_id($training));
+                    
                     $this->trainings[] = $training;
                 }
             }
         }
         
         return $this->trainings;
+    }
+    
+    function retrieve_training_next_id($training)
+    {
+        $query = 'SELECT id FROM [dbo].[v_discovery_training_advanced] WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        
+        if (! $results instanceof MDB2_Error)
+        {
+            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $result->id;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     function retrieve_years()
@@ -92,10 +111,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         return $this->years;
     }
 
-    function retrieve_faculty($training_parameters)
+    function retrieve_faculty($faculty_parameters)
     {
-        $faculty_id = $training_parameters->get_faculty_id();
-        $source = $training_parameters->get_source();
+        $faculty_id = $faculty_parameters->get_faculty_id();
+        $source = $faculty_parameters->get_source();
         if ($faculty_id && $source)
         {
             if (! isset($this->faculties[$faculty_id][$source]))
@@ -115,11 +134,29 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $faculty->set_name($this->convert_to_utf8($result->name));
                     $faculty->set_year($this->convert_to_utf8($result->year));
                     $faculty->set_deans($this->retrieve_deans($faculty->get_source(), $faculty->get_id()));
-                    
+                    $faculty->set_previous_id($result->previous_id);
+                    $faculty->set_next_id($this->retrieve_faculty_next_id($faculty));
                     $this->faculties[$faculty_id][$source] = $faculty;
                 }
             }
             return $this->faculties[$faculty_id][$source];
+        }
+        else
+        {
+            return false;
+        }
+    }      
+
+    function retrieve_faculty_next_id($faculty)
+    {
+        $query = 'SELECT id FROM [dbo].[v_discovery_faculty_advanced] WHERE previous_id = "' . $faculty->get_id() . '" AND source = "' . $faculty->get_source() . '"';
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        
+        if (! $results instanceof MDB2_Error)
+        {
+            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $result->id;
         }
         else
         {

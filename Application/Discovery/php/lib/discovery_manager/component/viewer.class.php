@@ -1,6 +1,12 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\Translation;
+
+use common\libraries\ToolbarItem;
+
+use common\libraries\BreadcrumbTrail;
+
 use common\libraries\ObjectTableOrder;
 
 use common\libraries\EqualityCondition;
@@ -26,9 +32,8 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
     function run()
     {
         $module_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
-        $module_content_type = Request :: get(DiscoveryManager::PARAM_CONTENT_TYPE);
+        $module_content_type = Request :: get(DiscoveryManager :: PARAM_CONTENT_TYPE);
         
-        $this->display_header();
         $order_by = array(new ObjectTableOrder(ModuleInstance :: PROPERTY_DISPLAY_ORDER));
         
         if (! $module_id)
@@ -44,6 +49,33 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
         else
         {
             $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($module_id);
+            $module_content_type = $current_module_instance->get_content_type();
+        }
+        
+        switch ($module_content_type)
+        {
+            case ModuleInstance :: TYPE_USER :
+                $module_parameters = array();
+                $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+                $link = $this->get_url($module_parameters);
+                BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('Information'), Theme :: get_image_path() . 'action_information.png', $link));
+                break;
+            case ModuleInstance :: TYPE_INFORMATION :
+                $module_parameters = array();
+                $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+                $link = $this->get_url($module_parameters);
+                BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
+                break;
+            case ModuleInstance :: TYPE_DETAILS :
+                $module_parameters = array();
+                $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+                $link = $this->get_url($module_parameters);
+                BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
+                $module_parameters = array();
+                $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+                $link = $this->get_url($module_parameters);
+                BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('Information'), Theme :: get_image_path() . 'action_information.png', $link));
+                break;
         }
         
         $current_module = Module :: factory($this, $current_module_instance);
@@ -73,7 +105,7 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
             $link = $this->get_url($module_parameters);
             $tabs->add_tab(new DynamicVisualTab($current_module_instance->get_id(), $current_module_instance->get_title(), Theme :: get_image_path($current_module_instance->get_type()) . 'logo/22.png', $link, true));
         }
-        
+        $this->display_header();
         echo $tabs->render();
         
         echo '<div id="legend">';

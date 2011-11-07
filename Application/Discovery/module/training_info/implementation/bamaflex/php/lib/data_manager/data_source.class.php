@@ -68,6 +68,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $training->set_choices($this->retrieve_choices($training_parameters));
                     $training->set_choice_options($this->retrieve_choice_options($training_parameters));
                     $training->set_trajectories($this->retrieve_trajectories($training_parameters));
+                    $training->set_previous_id($result->previous_id);
+                    $training->set_next_id($this->retrieve_training_next_id($training));
                     
                     $this->trainings[$training_id][$source] = $training;
                 }
@@ -75,6 +77,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         }
         
         return $this->trainings[$training_id][$source];
+    }
+
+    function retrieve_training_next_id($training)
+    {
+        $query = 'SELECT id FROM [dbo].[v_discovery_training_advanced] WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        
+        if (! $results instanceof MDB2_Error)
+        {
+            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $result->id;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     function retrieve_majors($training_parameters)

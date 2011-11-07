@@ -1,6 +1,10 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
+use application\discovery\module\training_info\implementation\bamaflex\Parameters;
+
+use application\discovery\module\training\DataManager;
+
 use application\discovery\DiscoveryDataManager;
 
 class Training extends \application\discovery\module\training\Training
@@ -18,6 +22,8 @@ class Training extends \application\discovery\module\training\Training
     const PROPERTY_FACULTY_ID = 'faculty_id';
     const PROPERTY_START_DATE = 'start_date';
     const PROPERTY_END_DATE = 'end_date';
+    const PROPERTY_PREVIOUS_ID = 'previous_id';
+    const PROPERTY_NEXT_ID = 'next_id';
     
     const BAMA_TYPE_OTHER = 0;
     const BAMA_TYPE_BACHELOR = 1;
@@ -178,6 +184,74 @@ class Training extends \application\discovery\module\training\Training
     function set_end_date($end_date)
     {
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
+    }
+
+    function get_previous_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PREVIOUS_ID);
+    }
+
+    function set_previous_id($previous_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PREVIOUS_ID, $previous_id);
+    }
+
+    function get_next_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_NEXT_ID);
+    }
+
+    function set_next_id($next_id)
+    {
+        $this->set_default_property(self :: PROPERTY_NEXT_ID, $next_id);
+    }
+
+    function get_previous($module_instance, $recursive = true)
+    {
+        $trainings = array();
+        $training = $this;
+        if ($this->get_previous_id())
+        {
+            do
+            {
+                $parameters = new Parameters($training->get_previous_id(), $training->get_source());
+                
+                $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
+                $trainings[] = $training;
+            }
+            while ($training instanceof Training && $training->get_previous_id() && $recursive);
+        }
+        return $trainings;
+    }
+
+    function get_next($module_instance, $recursive = true)
+    {
+        $trainings = array();
+        $training = $this;
+        if ($this->get_next_id())
+        {
+            do
+            {
+                $parameters = new Parameters($training->get_next_id(), $training->get_source());
+                
+                $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
+                $trainings[] = $training;
+            }
+            while ($training instanceof Training && $training->get_next_id() && $recursive);
+        }
+        return $trainings;
+    }
+
+    function get_all($module_instance)
+    {
+        $trainings = $this->get_next($module_instance);
+        array_unshift($trainings, $this);
+        
+        foreach ($this->get_previous($module_instance) as $training)
+        {
+            array_unshift($trainings, $training);
+        }
+        return $trainings;
     }
 
     function get_majors()
@@ -344,6 +418,7 @@ class Training extends \application\discovery\module\training\Training
         $extended_property_names[] = self :: PROPERTY_FACULTY_ID;
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
+        $extended_property_names[] = self :: PROPERTY_PREVIOUS_ID;
         
         return parent :: get_default_property_names($extended_property_names);
     }

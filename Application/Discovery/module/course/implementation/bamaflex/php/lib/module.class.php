@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
+use common\libraries\ToolbarItem;
+
 use user\UserDataManager;
 
 use common\libraries\PropertiesTable;
@@ -63,8 +65,32 @@ class Module extends \application\discovery\module\course\Module
     {
         $html = array();
         $course = $this->get_course();
+       
+        $html[] = '<h3>';
+        if ($course->get_previous_id())
+        {
+            $parameters = new Parameters($course->get_previous_id(), $course->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $html[] = Theme :: get_common_image('action_prev', 'png', Translation :: get('Previous'), $link, ToolbarItem :: DISPLAY_ICON);
+        }
+        else
+        {
+            $html[] = Theme :: get_common_image('action_prev_na', 'png', Translation :: get('PreviousNA'), null, ToolbarItem :: DISPLAY_ICON);
         
-        $html[] = '<h3>' . $course->get_name() . '</h3>';
+        }
+        $html[] = $course->get_name();
+        if ($course->get_next_id())
+        {
+            $parameters = new Parameters($course->get_next_id(), $course->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $html[] = Theme :: get_common_image('action_next', 'png', Translation :: get('Next'), $link, ToolbarItem :: DISPLAY_ICON);
+        }
+        else
+        {
+            $html[] = Theme :: get_common_image('action_next_na', 'png', Translation :: get('NextNA'), null, ToolbarItem :: DISPLAY_ICON);
+        
+        }
+        $html[] = '</h3>';
         
         $tabs = new DynamicTabsRenderer('course');
         $tabs->add_tab(new DynamicContentTab(self :: TAB_GENERAL, Translation :: get('General'), Theme :: get_image_path() . 'tabs/' . self :: TAB_GENERAL . '.png', $this->get_general()));
@@ -108,6 +134,18 @@ class Module extends \application\discovery\module\course\Module
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $course->get_year();
+        
+        $history = array();
+        $courses = $course->get_all($this->get_module_instance());
+        
+        foreach ($courses as $course_history)
+        {            
+            $parameters = new Parameters($course_history->get_id(), $course_history->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $history[] = '<a href="' . $link . '">' . $course_history->get_year() . '</a>';
+        }
+        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
+        
         
         if ($training_info_module_instance)
         {

@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
+use common\libraries\ToolbarItem;
+
 use application\discovery\module\training\DataManager;
 
 use common\libraries\PropertiesTable;
@@ -25,7 +27,7 @@ class Module extends \application\discovery\module\training\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($this->get_training_parameters());
+        $this->faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($this->get_faculty_parameters());
     }
 
     function get_training_parameters()
@@ -47,8 +49,8 @@ class Module extends \application\discovery\module\training\Module
 
     static function get_module_parameters()
     {
-        $faculty = Request :: get(self ::PARAM_FACULTY_ID);
-        $source = Request :: get(self:: PARAM_SOURCE);
+        $faculty = Request :: get(self :: PARAM_FACULTY_ID);
+        $source = Request :: get(self :: PARAM_SOURCE);
         
         $parameter = new Parameters();
         if ($faculty)
@@ -57,7 +59,25 @@ class Module extends \application\discovery\module\training\Module
         }
         if ($source)
         {
-        	$parameter->set_source($source);
+            $parameter->set_source($source);
+        }
+        return $parameter;
+    
+    }
+
+    static function get_faculty_parameters()
+    {
+        $faculty = Request :: get(self :: PARAM_FACULTY_ID);
+        $source = Request :: get(self :: PARAM_SOURCE);
+        
+        $parameter = new \application\discovery\module\faculty\implementation\bamaflex\Parameters();
+        if ($faculty)
+        {
+            $parameter->set_faculty_id($faculty);
+        }
+        if ($source)
+        {
+            $parameter->set_source($source);
         }
         return $parameter;
     
@@ -126,13 +146,50 @@ class Module extends \application\discovery\module\training\Module
         $properties = array();
         $properties[Translation :: get('Year')] = $this->faculty->get_year();
         $properties[Translation :: get('Deans')] = $this->faculty->get_deans_string();
+        
+        $history = array();
+        $faculties = $this->faculty->get_all($this->get_module_instance());
+        foreach ($faculties as $faculty)
+        {
+        	$parameters = new Parameters($faculty->get_id(), $faculty->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+        	$history[] = '<a href="' .  $link. '">' . $faculty->get_year() . '</a>';
+        }
+        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
+        
         return new PropertiesTable($properties);
     }
 
     function get_context()
     {
         $html = array();
-        $html[] = '<h3>' . $this->faculty->get_name() . '</h3>';
+        
+        $html[] = '<h3>';
+        if ($this->faculty->get_previous_id())
+        {
+            $parameters = new Parameters($this->faculty->get_previous_id(), $this->faculty->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $html[] = Theme :: get_common_image('action_prev', 'png', Translation :: get('Previous'), $link, ToolbarItem :: DISPLAY_ICON);
+        }
+        else
+        {
+            $html[] = Theme :: get_common_image('action_prev_na', 'png', Translation :: get('PreviousNA'), null, ToolbarItem :: DISPLAY_ICON);
+        
+        }
+        $html[] = $this->faculty->get_name();
+        
+        if ($this->faculty->get_next_id())
+        {
+            $parameters = new Parameters($this->faculty->get_next_id(), $this->faculty->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $html[] = Theme :: get_common_image('action_next', 'png', Translation :: get('Next'), $link, ToolbarItem :: DISPLAY_ICON);
+        }
+        else
+        {
+            $html[] = Theme :: get_common_image('action_next_na', 'png', Translation :: get('NextNA'), null, ToolbarItem :: DISPLAY_ICON);
+        
+        }
+        $html[] = '</h3>';
         $html[] = $this->get_faculty_properties_table()->toHtml();
         $html[] = '<br/>';
         

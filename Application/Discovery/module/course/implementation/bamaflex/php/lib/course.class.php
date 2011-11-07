@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
+use application\discovery\module\course\DataManager;
+
 use common\libraries\StringUtilities;
 
 use common\libraries\Utilities;
@@ -44,6 +46,9 @@ class Course extends DiscoveryItem
     const PROPERTY_REPLEACABLE = 'repleacable';
     const PROPERTY_TRAINING_UNIT = 'training_unit';
     const PROPERTY_SCORE_CALCULATION = 'score_calculation';
+    const PROPERTY_PREVIOUS_ID = 'previous_id';
+    const PROPERTY_PREVIOUS_PARENT_ID = 'previous_parent_id';
+    const PROPERTY_NEXT_ID = 'next_id';
     
     const TIMEFRAME_ACADEMIC_YEAR = '1';
     const TIMEFRAME_FIRST_TERM = '2';
@@ -111,6 +116,9 @@ class Course extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_REPLEACABLE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_UNIT;
         $extended_property_names[] = self :: PROPERTY_SCORE_CALCULATION;
+        $extended_property_names[] = self :: PROPERTY_PREVIOUS_ID;
+        $extended_property_names[] = self :: PROPERTY_PREVIOUS_PARENT_ID;
+        $extended_property_names[] = self :: PROPERTY_NEXT_ID;
         
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -322,6 +330,84 @@ class Course extends DiscoveryItem
     function set_result_scale_id($result_scale_id)
     {
         $this->set_default_property(self :: PROPERTY_RESULT_SCALE_ID, $result_scale_id);
+    }
+
+    function get_previous_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PREVIOUS_ID);
+    }
+
+    function set_previous_id($previous_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PREVIOUS_ID, $previous_id);
+    }
+
+    function get_previous_parent_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PREVIOUS_PARENT_ID);
+    }
+
+    function set_previous_parent_id($previous_parent_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PREVIOUS_PARENT_ID, $previous_parent_id);
+    }
+
+    function get_next_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_NEXT_ID);
+    }
+
+    function set_next_id($next_id)
+    {
+        $this->set_default_property(self :: PROPERTY_NEXT_ID, $next_id);
+    }
+
+    function get_previous($module_instance, $recursive = true)
+    {
+        $courses = array();
+        $course = $this;
+        if ($this->get_previous_id())
+        {
+            do
+            {
+                $parameters = new Parameters($course->get_previous_id(), $course->get_source());
+                
+                $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
+                $courses[] = $course;
+            }
+            while ($course instanceof Course && $course->get_previous_id() && $recursive);
+        }
+        return $courses;
+    }
+
+    function get_next($module_instance, $recursive = true)
+    {
+        $courses = array();
+        $course = $this;
+        if ($this->get_next_id())
+        {
+            do
+            {
+                $parameters = new Parameters($course->get_next_id(), $course->get_source());
+                
+                $course = DataManager:: get_instance($module_instance)->retrieve_course($parameters);
+                $courses[] = $course;
+            }
+            while ($course instanceof Course && $course->get_next_id() && $recursive);
+        }
+        return $courses;
+    }
+
+    function get_all($module_instance)
+    {
+        $courses = $this->get_next($module_instance);
+        array_unshift($courses, $this);
+        
+        foreach ($this->get_previous($module_instance) as $course)
+        {
+            array_unshift($courses, $course);
+        }
+        return $courses;
     }
 
     /**
@@ -802,9 +888,9 @@ class Course extends DiscoveryItem
 
     public function has_languages()
     {
-    	return count($this->get_languages()) > 0;
+        return count($this->get_languages()) > 0;
     }
-    
+
     /**
      * @return the $timeframe_parts
      */
