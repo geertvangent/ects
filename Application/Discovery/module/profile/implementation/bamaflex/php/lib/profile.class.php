@@ -6,16 +6,53 @@ use application\discovery\DiscoveryDataManager;
 class Profile extends \application\discovery\module\profile\Profile
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_GENDER = 'gender';
     const PROPERTY_BIRTH = 'birth';
     const PROPERTY_NATIONALITY = 'nationality';
     const PROPERTY_ADDRESS = 'address';
-
+    const PROPERTY_FIRST_UNIVERSITY_COLLEGE = 'first_university_college';
+    const PROPERTY_FIRST_UNIVERSITY = 'university';
+    
+    private $previous_college;
+    private $previous_university;
+    
     const GENDER_MALE = 1;
     const GENDER_FEMALE = 2;
 
     /**
+     * @return the $previous_college
+     */
+    public function get_previous_college()
+    {
+        return $this->previous_college;
+    }
+
+	/**
+     * @param field_type $previous_college
+     */
+    public function set_previous_college($previous_college)
+    {
+        $this->previous_college = $previous_college;
+    }
+
+	/**
+     * @return the $previous_university
+     */
+    public function get_previous_university()
+    {
+        return $this->previous_university;
+    }
+
+	/**
+     * @param field_type $previous_university
+     */
+    public function set_previous_university($previous_university)
+    {
+        $this->previous_university = $previous_university;
+    }
+
+	/**
      * @return int
      */
     function get_gender()
@@ -63,12 +100,12 @@ class Profile extends \application\discovery\module\profile\Profile
     function get_nationality_string()
     {
         $nationalities = array();
-
-        foreach($this->get_nationality() as $nationality)
+        
+        foreach ($this->get_nationality() as $nationality)
         {
             $nationalities[] = $nationality->get_nationality();
         }
-
+        
         return implode(', ', $nationalities);
     }
 
@@ -132,6 +169,26 @@ class Profile extends \application\discovery\module\profile\Profile
         $this->set_address($addresses);
     }
 
+    function set_first_university_college($first_university_college)
+    {
+        $this->set_default_property(self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE, $first_university_college);
+    }
+
+    function get_first_university_college()
+    {
+        return $this->get_default_property(self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE);
+    }
+
+    function set_first_university($first_university)
+    {
+        $this->set_default_property(self :: PROPERTY_FIRST_UNIVERSITY, $first_university);
+    }
+
+    function get_first_university()
+    {
+        return $this->get_default_property(self :: PROPERTY_FIRST_UNIVERSITY);
+    }
+
     /**
      * @param multitype:string $extended_property_names
      */
@@ -141,7 +198,9 @@ class Profile extends \application\discovery\module\profile\Profile
         $extended_property_names[] = self :: PROPERTY_BIRTH;
         $extended_property_names[] = self :: PROPERTY_NATIONALITY;
         $extended_property_names[] = self :: PROPERTY_ADDRESS;
-
+        $extended_property_names[] = self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE;
+        $extended_property_names[] = self :: PROPERTY_FIRST_UNIVERSITY;
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

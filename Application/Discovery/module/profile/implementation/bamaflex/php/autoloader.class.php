@@ -10,6 +10,8 @@ class Autoloader
          'Birth' => '/lib/birth.class.php',
          'Module' => '/lib/module.class.php',
          'Nationality' => '/lib/nationality.class.php',
+         'PreviousCollege' => '/lib/previous_college.class.php',
+         'PreviousUniversity' => '/lib/previous_university.class.php',
          'Profile' => '/lib/profile.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php',

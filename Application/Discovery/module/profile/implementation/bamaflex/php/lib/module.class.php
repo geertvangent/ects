@@ -1,6 +1,10 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use common\libraries\PropertiesTable;
+
+use common\libraries\StringUtilities;
+
 use common\libraries\Display;
 
 use common\libraries\Path;
@@ -45,7 +49,107 @@ class Module extends \application\discovery\module\profile\Module
             $properties[Translation :: get('Address')] = $address;
         }
         
+        if ($this->get_profile()->get_first_university_college())
+        {
+            $properties[Translation :: get('FirstUniversityCollege')] = $this->get_profile()->get_first_university_college();
+        }
+        
+        if ($this->get_profile()->get_first_university())
+        {
+            $properties[Translation :: get('FirstUniversity')] = $this->get_profile()->get_first_university();
+        }
+        
         return $properties;
+    }
+
+    function get_previous()
+    {
+        $html = array();
+        $previous_college = $this->get_profile()->get_previous_college();
+        if ($previous_college)
+        {
+            $properties = array();
+            $properties[Translation :: get('Date')] = $previous_college->get_date();
+            $properties[Translation :: get('Degree')] = '(' . $previous_college->get_degree_type() . ') ' . $previous_college->get_degree_name();
+            
+            $school = array();
+            $school[] = $previous_college->get_school_name();
+            if ($previous_college->get_school_city())
+            {
+                $school[] = $previous_college->get_school_city();
+            }
+            if ($previous_college->get_country_name())
+            {
+                $school[] = $previous_college->get_country_name();
+            }
+            $properties[Translation :: get('School')] = implode('<br>', $school);
+            if ($previous_college->get_training_name())
+            {
+                $properties[Translation :: get('TrainingName')] = $previous_college->get_training_name();
+            }
+            
+            if (! StringUtilities :: is_null_or_empty($previous_college->get_info(), true))
+            {
+                $properties[Translation :: get('Info')] = $previous_college->get_info();
+            }
+            
+            $table = new PropertiesTable($properties);
+            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/previous_college.png);">';
+            $html[] = '<div class="title">';
+            $html[] = Translation :: get('PreviousCollege');
+            $html[] = '</div>';
+            
+            $html[] = '<div class="description">';
+            
+            $html[] = $table->toHtml();
+            $html[] = '</div>';
+            $html[] = '</div>';
+        }
+        
+        $previous_university = $this->get_profile()->get_previous_university();
+        
+        if ($previous_university)
+        {
+            $properties = array();
+            $properties[Translation :: get('Date')] = $previous_university->get_date();
+            $properties[Translation :: get('Type')] = $previous_university->get_type_string();
+            
+            $school = array();
+            $school[] = $previous_university->get_school_name();
+            if ($previous_university->get_school_city())
+            {
+                $school[] = $previous_university->get_school_city();
+            }
+            if ($previous_university->get_country_name())
+            {
+                $school[] = $previous_university->get_country_name();
+            }
+            $properties[Translation :: get('School')] = implode('<br>', $school);
+            
+            if ($previous_university->get_training_name())
+            {
+                $properties[Translation :: get('TrainingName')] = $previous_university->get_training_name();
+            }
+            
+            if (! StringUtilities :: is_null_or_empty($previous_university->get_info(), true))
+            {
+                $properties[Translation :: get('Info')] = $previous_university->get_info();
+            }
+            
+            $table = new PropertiesTable($properties);
+            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/previous_university.png);">';
+            $html[] = '<div class="title">';
+            $html[] = Translation :: get('PreviousUniversity');
+            $html[] = '</div>';
+            
+            $html[] = '<div class="description">';
+            
+            $html[] = $table->toHtml();
+            $html[] = '</div>';
+            $html[] = '</div>';
+        }
+        
+        return implode("\n", $html);
     }
 
     /* (non-PHPdoc)
@@ -100,6 +204,8 @@ class Module extends \application\discovery\module\profile\Module
                 $html[] = '</div>';
             }
             
+            $html[] = $this->get_previous();
+            
             $data_source = $this->get_module_instance()->get_setting('data_source');
             $enrollment_module_instance = \application\discovery\Module :: exists('application\discovery\module\enrollment\implementation\bamaflex', array(
                     'data_source' => $data_source));
@@ -139,7 +245,7 @@ class Module extends \application\discovery\module\profile\Module
         }
         else
         {
-        	return Display::normal_message(Translation :: get('NoData'), true);
+            return Display :: normal_message(Translation :: get('NoData'), true);
         }
     }
 }
