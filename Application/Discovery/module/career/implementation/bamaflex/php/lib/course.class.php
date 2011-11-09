@@ -13,7 +13,7 @@ use common\libraries\DataClass;
 class Course extends \application\discovery\module\career\Course
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Course properties
      */
@@ -25,7 +25,7 @@ class Course extends \application\discovery\module\career\Course
     const PROPERTY_TYPE = 'type';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_PARENT_PROGRAMME_ID = 'parent_programme_id';
-    
+
     const TYPE_NORMAL = 1;
     // NL: AVO
     const TYPE_PREVIOUS = 2;
@@ -53,7 +53,7 @@ class Course extends \application\discovery\module\career\Course
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_PARENT_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_SOURCE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -83,8 +83,8 @@ class Course extends \application\discovery\module\career\Course
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
-    
-    
+
+
     /**
      * Returns the trajectory_part of this Course.
      * @return string The trajectory_part.
@@ -216,7 +216,7 @@ class Course extends \application\discovery\module\career\Course
      */
     static function get_types()
     {
-        return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS, self :: TYPE_EXTERNAL, self :: TYPE_CREDIT_HISTORY, 
+        return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS, self :: TYPE_EXTERNAL, self :: TYPE_CREDIT_HISTORY,
                 self :: TYPE_STRUCK, self :: TYPE_EXCHANGE);
     }
 
@@ -270,5 +270,19 @@ class Course extends \application\discovery\module\career\Course
     static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
+    }
+
+    function get_mark_by_moment_id($moment_id)
+    {
+
+        foreach ($this->get_marks() as $mark)
+        {
+            if ($mark->get_moment() == $moment_id)
+            {
+                return $mark;
+            }
+        }
+
+        return Mark :: factory($moment_id);
     }
 }

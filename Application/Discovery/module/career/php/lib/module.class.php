@@ -20,7 +20,7 @@ class Module extends \application\discovery\Module
      * @var multitype:\application\discovery\module\career\Course
      */
     private $courses;
-    
+
     /**
      * @var multitype:\application\discovery\module\career\MarkMoment
      */
@@ -42,7 +42,7 @@ class Module extends \application\discovery\Module
         $this->courses = $this->get_data_manager()->retrieve_courses($this->get_career_parameters());
         $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_career_parameters());
     }
-   
+
     function get_career_parameters()
     {
         $parameter = self :: get_module_parameters();
@@ -86,7 +86,7 @@ class Module extends \application\discovery\Module
     function get_table_data()
     {
         $data = array();
-        
+
         foreach ($this->courses as $course)
         {
             $row = array();
@@ -94,7 +94,7 @@ class Module extends \application\discovery\Module
             $row[] = $course->get_name();
             $data[] = $row;
         }
-        
+
         return $data;
     }
 
@@ -106,12 +106,12 @@ class Module extends \application\discovery\Module
         $headers = array();
         $headers[] = array(Translation :: get('Year'), 'class="code"');
         $headers[] = array(Translation :: get('Course'));
-        
+
         foreach ($this->get_mark_moments() as $mark_moment)
         {
             $headers[] = array($mark_moment->get_name());
         }
-        
+
         return $headers;
     }
 
@@ -121,21 +121,21 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-        
+
         $table = new SortableTable($this->get_table_data());
-        
+
         foreach ($this->get_table_headers() as $header_id => $header)
         {
             $table->set_header($header_id, $header[0], false);
-            
+
             if ($header[1])
             {
                 $table->getHeader()->setColAttributes($header_id, $header[1]);
             }
         }
-        
+
         $html[] = $table->toHTML();
-        
+
         return implode("\n", $html);
     }
 }
