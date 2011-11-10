@@ -162,6 +162,15 @@ class Module extends \application\discovery\module\teaching_assignment\Module
      */
     function render()
     {
+        $entities = array();
+        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
+        
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_teaching_assignment_parameters()))
+        {
+            Display :: not_allowed();
+        }
+        
         $html = array();
         if (count($this->get_teaching_assignments()) > 0)
         {

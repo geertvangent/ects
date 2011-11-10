@@ -126,6 +126,15 @@ class Module extends \application\discovery\module\enrollment\Module
      */
     function render()
     {
+        $entities = array();
+        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
+        
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_enrollment_parameters()))
+        {
+            Display :: not_allowed();
+        }
+        
         $html = array();
         if (count($this->get_enrollments()) > 0)
         {
@@ -143,7 +152,7 @@ class Module extends \application\discovery\module\enrollment\Module
         }
         else
         {
-            $html[] = Display:: normal_message(Translation :: get('NoData'), true);
+            $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
         return implode("\n", $html);
     }

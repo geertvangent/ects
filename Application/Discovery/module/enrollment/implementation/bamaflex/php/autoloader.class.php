@@ -6,9 +6,14 @@ class Autoloader
 
     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
+         'BamaflexAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
+         'BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php',
          'Enrollment' => '/lib/enrollment.class.php',
          'Module' => '/lib/module.class.php',
+         'Rights' => '/lib/rights.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
+         'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
+         'RightsUserEntity' => '/lib/rights_entity/user.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php',
     );
 

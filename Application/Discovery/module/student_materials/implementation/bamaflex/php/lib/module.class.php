@@ -483,7 +483,14 @@ class Module extends \application\discovery\module\student_materials\Module
      */
     function render()
     {
+        $entities = array();
+        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_student_materials_parameters()))
+        {
+            Display :: not_allowed();
+        }
         $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_student_materials_parameters());
         if (count($years) > 0)
         {
