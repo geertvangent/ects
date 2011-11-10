@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training;
 
+use application\discovery\Parameters;
+
 use common\libraries\Request;
 
 use common\libraries\DynamicContentTab;
@@ -17,7 +19,6 @@ use common\libraries\Application;
 
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
-use application\discovery\module\profile\DataManager;
 
 class Module extends \application\discovery\Module
 {
@@ -30,14 +31,13 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->trainings = DataManager :: get_instance($module_instance)->retrieve_trainings($this->get_training_parameters());
-        }
+    }
 
     function get_training_parameters()
     {
         return self :: get_module_parameters();
     }
-    
+
     static function get_module_parameters()
     {
         return new Parameters();
@@ -48,6 +48,10 @@ class Module extends \application\discovery\Module
      */
     function get_trainings()
     {
+        if (! isset($this->trainings))
+        {
+            $this->trainings = DataManager :: get_instance($this->get_module_instance())->retrieve_trainings($this->get_training_parameters());
+        }
         return $this->trainings;
     }
 
@@ -126,10 +130,9 @@ class Module extends \application\discovery\Module
         return false;
     }
 
-  
     function get_context()
     {
-    	return '';
+        return '';
     }
 
     /* (non-PHPdoc)

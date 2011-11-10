@@ -29,7 +29,6 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->faculties = DataManager :: get_instance($module_instance)->retrieve_faculties();
     
     }
 
@@ -43,6 +42,10 @@ class Module extends \application\discovery\Module
      */
     function get_faculties()
     {
+        if (! isset($this->faculties))
+        {
+            $this->faculties = DataManager :: get_instance($this->get_module_instance())->retrieve_faculties();
+        }
         return $this->faculties;
     }
 

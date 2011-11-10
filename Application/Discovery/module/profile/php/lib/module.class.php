@@ -25,18 +25,16 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->profile = DataManager :: get_instance($module_instance)->retrieve_profile($this->get_profile_parameters());
-    
     }
 
     function get_profile_parameters()
     {
-        $parameter = self :: get_module_parameters();        
+        $parameter = self :: get_module_parameters();
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
         }
-        return $parameter; 
+        return $parameter;
     }
 
     static function get_module_parameters()
@@ -55,6 +53,11 @@ class Module extends \application\discovery\Module
      */
     function get_profile()
     {
+        if (! isset($this->profile))
+        {
+            $this->profile = DataManager :: get_instance($this->get_module_instance())->retrieve_profile($this->get_profile_parameters());
+        }
+        
         return $this->profile;
     }
 

@@ -26,17 +26,11 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->retrieve_data();
     }
 
     function get_data_manager()
     {
         return DataManager :: get_instance($this->get_module_instance());
-    }
-
-    function retrieve_data()
-    {
-        //        $this->courses = $this->get_data_manager()->retrieve_courses($this->get_application()->get_user_id());
     }
 
     function get_student_materials_parameters()

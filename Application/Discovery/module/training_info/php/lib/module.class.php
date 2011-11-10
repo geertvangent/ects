@@ -32,7 +32,6 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->training = DataManager :: get_instance($module_instance)->retrieve_training($this->get_training_parameters());
     }
 
     function get_training_parameters()
@@ -58,6 +57,10 @@ class Module extends \application\discovery\Module
      */
     function get_training()
     {
+        if (! isset($this->training))
+        {
+            $this->training = DataManager :: get_instance($this->get_module_instance())->retrieve_training($this->get_training_parameters());
+        }
         return $this->training;
     }
 

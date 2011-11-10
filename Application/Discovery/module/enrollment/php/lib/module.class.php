@@ -28,7 +28,6 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-        $this->enrollments = DataManager :: get_instance($module_instance)->retrieve_enrollments($this->get_enrollment_parameters());
     }
 
     function get_enrollment_parameters()
@@ -57,6 +56,10 @@ class Module extends \application\discovery\Module
      */
     function get_enrollments()
     {
+        if (! isset($this->enrollments))
+        {
+            $this->enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments($this->get_enrollment_parameters());
+        }
         return $this->enrollments;
     }
 
