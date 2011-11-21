@@ -225,5 +225,10 @@ class Mdb2DiscoveryDataManager extends Mdb2Database implements DiscoveryDataMana
     {
         return $this->count_objects(DataSourceInstance :: get_table_name(), $conditions);
     }
+
+    function count_rights_group_entity_rights($conditions = null)
+    {
+        return $this->count_objects(RightsGroupEntityRight:: get_table_name(), $conditions);
+    }
 }
 ?>

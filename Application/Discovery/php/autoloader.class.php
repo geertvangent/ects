@@ -18,6 +18,7 @@ class Autoloader
          'ModuleInstance' => '/lib/module_instance.class.php',
          'ModuleInstanceSetting' => '/lib/module_instance_setting.class.php',
          'Parameters' => '/lib/parameters.class.php',
+         'RightsGroupEntityRight' => '/lib/rights_group_entity_right.class.php',
          'SortableTable' => '/lib/sortable_table.class.php',
          'Mdb2DiscoveryDataManager' => '/lib/data_manager/mdb2.class.php',
          'DiscoveryManager' => '/lib/discovery_manager/discovery_manager.class.php',

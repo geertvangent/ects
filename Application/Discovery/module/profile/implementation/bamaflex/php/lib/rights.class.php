@@ -1,10 +1,17 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use common\libraries\AndCondition;
+use common\libraries\EqualityCondition;
+use common\libraries\InCondition;
+use common\libraries\OrCondition;
+use common\libraries\Translation;
 use common\libraries\Session;
 
+use application\discovery\DiscoveryDataManager;
+use application\discovery\RightsGroupEntityRight;
+use user\UserDataManager;
 use rights\RightsUtil;
-use common\libraries\Translation;
 
 use Exception;
 
@@ -40,7 +47,42 @@ class Rights extends RightsUtil
             }
             else
             {
-                return parent :: is_allowed($right, 'discovery_' . $module_instance_id, null, $entities, $parameters->get_user_id(), self :: TYPE_PROFILE, 0, self :: TREE_TYPE_ROOT);
+                $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+                $current_user = UserDataManager :: get_instance()->retrieve_user(Session :: get_user_id());
+                
+                $user_group_ids = $user->get_groups(true);
+                $current_user_group_ids = $current_user->get_groups(true);
+                
+                $conditions = array();
+                $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_instance_id);
+                $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, $right);
+                $conditions[] = new InCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, $user_group_ids);
+                
+                $entities_conditions = array();
+                
+                $user_entity_conditions = array();
+                $user_entity_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_ID, Session :: get_user_id());
+                $user_entity_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, RightsUserEntity :: ENTITY_TYPE);
+                $entities_conditions[] = new AndCondition($user_entity_conditions);
+                
+                $group_entity_conditions = array();
+                $group_entity_conditions[] = new InCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_ID, $current_user_group_ids);
+                $group_entity_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, RightsPlatformGroupEntity :: ENTITY_TYPE);
+                $entities_conditions[] = new AndCondition($group_entity_conditions);
+                
+                $conditions[] = new OrCondition($entities_conditions);
+                $condition = new AndCondition($conditions);
+                
+                $count = DiscoveryDataManager :: get_instance()->count_rights_group_entity_rights($condition);
+                
+                if ($count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return parent :: is_allowed($right, 'discovery_' . $module_instance_id, null, $entities, $parameters->get_user_id(), self :: TYPE_PROFILE, 0, self :: TREE_TYPE_ROOT);
+                }
             }
         }
         catch (Exception $exception)

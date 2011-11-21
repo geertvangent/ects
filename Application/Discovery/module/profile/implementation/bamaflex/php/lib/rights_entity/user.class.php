@@ -106,7 +106,7 @@ class RightsUserEntity extends UserEntity
      */
     function get_element_finder_type()
     {
-        return new AdvancedElementFinderElementType('users', Translation :: get('Users'), __NAMESPACE__, 'publication_users_feed', array(
+        return new AdvancedElementFinderElementType('users', Translation :: get('Users'), __NAMESPACE__, 'users_feed', array(
                 'publication_id' => $this->publication_id));
     }
 }

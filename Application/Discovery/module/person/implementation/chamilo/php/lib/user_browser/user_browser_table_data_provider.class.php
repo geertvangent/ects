@@ -1,5 +1,19 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
+use common\libraries\EqualityCondition;
+
+use common\libraries\OrCondition;
+
+use user\User;
+
+use group\GroupDataManager;
+
+use common\libraries\AndCondition;
+
+use group\GroupRelUser;
+
+use common\libraries\InCondition;
+
 use application\discovery\module\person\DataManager;
 
 use user\UserDataManager;
@@ -40,7 +54,34 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
     function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
-        return DataManager:: get_instance($this->get_browser()->get_module_instance())->retrieve_persons($this->get_condition(), $offset, $count, $order_property);
+        
+        if ($this->get_browser()->get_application()->get_user()->is_platform_admin())
+        {
+            return UserDataManager :: get_instance()->retrieve_users($this->get_condition(), $offset, $count, $order_property);
+        }
+        else
+        {
+            $conditions = array();
+            if ($this->get_condition())
+            {
+                $conditions[] = $this->get_condition();
+            }
+            
+            $group_data_manager = GroupDataManager :: get_instance();
+            $group_rel_users = $group_data_manager->retrieve_user_groups($this->get_browser()->get_application()->get_user()->get_id());
+            $user_conditions = array();
+            
+            while ($group_rel_user = $group_rel_users->next_result())
+            {
+                $users = $group_data_manager->retrieve_group($group_rel_user->get_group_id())->get_users(true, true);
+                $user_conditions[] = new InCondition(User :: PROPERTY_ID, $users);
+            }
+            $user_conditions[] = new EqualityCondition(User :: PROPERTY_ID, 0);
+            $conditions[] = new OrCondition($user_conditions);
+            $condition = new AndCondition($conditions);
+            
+            return UserDataManager :: get_instance()->retrieve_users($condition, $offset, $count, $order_property);
+        }
     }
 
     /**
@@ -49,7 +90,33 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
      */
     function get_object_count()
     {
-        return DataManager:: get_instance($this->get_browser()->get_module_instance())->count_persons($this->get_condition());
-    	    }
+        if ($this->get_browser()->get_application()->get_user()->is_platform_admin())
+        {
+            return UserDataManager :: get_instance()->count_users($this->get_condition());
+        }
+        else
+        {
+            $conditions = array();
+            if ($this->get_condition())
+            {
+                $conditions[] = $this->get_condition();
+            }
+            
+            $group_data_manager = GroupDataManager :: get_instance();
+            $group_rel_users = $group_data_manager->retrieve_user_groups($this->get_browser()->get_application()->get_user()->get_id());
+            $user_conditions = array();
+            
+            while ($group_rel_user = $group_rel_users->next_result())
+            {
+                $users = $group_data_manager->retrieve_group($group_rel_user->get_group_id())->get_users(true, true);
+                $user_conditions[] = new InCondition(User :: PROPERTY_ID, $users);
+            }
+            $user_conditions[] = new EqualityCondition(User :: PROPERTY_ID, 0);
+            $conditions[] = new OrCondition($user_conditions);
+            $condition = new AndCondition($conditions);
+            
+            return UserDataManager :: get_instance()->count_users($condition);
+        }
+    }
 }
 ?>
