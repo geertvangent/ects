@@ -247,6 +247,8 @@ class Module extends \application\discovery\module\profile\Module
                 $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
                 $toolbar->add_item(new ToolbarItem($teaching_assignment_module_instance->get_title(), Theme :: get_image_path('application\discovery\module\teaching_assignment\implementation\bamaflex') . 'logo/16.png', $url));
             }
+            $url = $this->get_rights_url($this->get_module_instance()->get_id(), $this->get_profile_parameters());
+            $toolbar->add_item(new ToolbarItem(Translation :: get('Rights'), Theme :: get_common_image_path() . 'action_rights.png', $url));
             
             $html[] = $toolbar->as_html();
             

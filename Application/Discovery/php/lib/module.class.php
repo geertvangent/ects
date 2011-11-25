@@ -13,7 +13,7 @@ use common\libraries\Application;
  *
  */
 class Module
-{	
+{
     /**
      * @var Application
      */
@@ -33,8 +33,6 @@ class Module
         $this->application = $application;
         $this->module_instance = $module_instance;
     }
-    
-    
 
     /**
      * @param Application $application
@@ -74,7 +72,7 @@ class Module
     static function exists($type, $settings)
     {
         $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_TYPE, $type);
-        $conditions[] = new NotCondition(new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, ModuleInstance::TYPE_DISABLED));
+        $conditions[] = new NotCondition(new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, ModuleInstance :: TYPE_DISABLED));
         $condition = new AndCondition($conditions);
         
         $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition);
@@ -92,6 +90,18 @@ class Module
     {
         $parameters = array();
         $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $instance_id;
+        foreach ($instance_parameters->get_parameters() as $key => $value)
+        {
+            $parameters[$key] = $value;
+        }
+        return $this->get_application()->get_url($parameters);
+    }
+
+    function get_rights_url($instance_id, $instance_parameters)
+    {
+        $parameters = array();
+        $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $instance_id;
+        $parameters[DiscoveryManager:: PARAM_ACTION] = DiscoveryManager :: ACTION_RIGHTS;
         foreach ($instance_parameters->get_parameters() as $key => $value)
         {
             $parameters[$key] = $value;

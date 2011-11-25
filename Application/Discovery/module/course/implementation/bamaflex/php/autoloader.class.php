@@ -27,7 +27,7 @@ class Autoloader
          'MaterialStructured' => '/lib/material_structured.class.php',
          'Module' => '/lib/module.class.php',
          'Parameters' => '/lib/parameters.class.php',
-         'application\discovery\module\profile\implementation\bamaflex\Rights' => '/lib/rights.class.php',
+         'Rights' => '/lib/rights.class.php',
          'SecondChance' => '/lib/second_chance.class.php',
          'Teacher' => '/lib/teacher.class.php',
          'TimeframePart' => '/lib/timeframe_part.class.php',

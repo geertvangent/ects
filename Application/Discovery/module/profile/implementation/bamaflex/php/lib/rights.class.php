@@ -37,6 +37,20 @@ class Rights extends RightsUtil
         return array(Translation :: get('ViewRight') => self :: VIEW_RIGHT);
     }
 
+    function get_current_location($module_instance_id)
+    {
+        $parameters = Module :: get_module_parameters();
+        $location = $this->get_module_location_by_identifier($module_instance_id, $parameters);
+        if ($location)
+        {
+            return $location;
+        }
+        else
+        {
+        	return $this->create_module_location($module_instance_id, $parameters, $this->get_root_id('discovery_' . $module_instance_id), true);
+        }
+    }
+
     function module_is_allowed($right, $entities, $module_instance_id, $parameters)
     {
         try
@@ -101,9 +115,9 @@ class Rights extends RightsUtil
         return parent :: get_location_id_by_identifier('discovery_' . $module_instance_id, self :: TYPE_PROFILE, $parameters->get_user_id(), 0, self :: TREE_TYPE_ROOT);
     }
 
-    function create_module_location($module_instance_id, $parameters, $parent)
+    function create_module_location($module_instance_id, $parameters, $parent, $return_location)
     {
-        return parent :: create_location('discovery_' . $module_instance_id, self :: TYPE_PROFILE, $parameters->get_user_id(), 1, $parent, 0, 0, self :: TREE_TYPE_ROOT);
+        return parent :: create_location('discovery_' . $module_instance_id, self :: TYPE_PROFILE, $parameters->get_user_id(), 1, $parent, 0, 0, self :: TREE_TYPE_ROOT, $return_location);
     }
 
     function get_module_rights_location_entity_right($module_instance_id, $entity_id, $entity_type, $location_id)
