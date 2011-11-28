@@ -17,7 +17,7 @@ class RightsEditorManagerManagerComponent extends RightsEditorManager
     function run()
     {
         $this->action_bar = $this->get_action_bar();
-        $form = new ManageForm($this->get_url(), $this->get_available_rights());
+        $form = new ManageForm($this->get_parent()->get_module_instance_id(), $this->get_url(), $this->get_available_rights());
         
         if ($form->validate())
         {

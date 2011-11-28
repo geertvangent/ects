@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use application\discovery\ModuleInstance;
+
 use common\libraries\PropertiesTable;
 
 use common\libraries\StringUtilities;
@@ -163,9 +165,9 @@ class Module extends \application\discovery\module\profile\Module
         
         if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_profile_parameters()))
         {
-            Display::not_allowed();
+            Display :: not_allowed();
         }
-
+        
         if ($this->get_profile())
         {
             $html = array();

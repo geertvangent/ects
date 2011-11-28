@@ -15,7 +15,7 @@ class ModuleInstanceManagerActivatorComponent extends ModuleInstanceManager
             $this->not_allowed();
         }
 
-        $ids = Request :: get(ModuleInstanceManager :: PARAM_INSTANCE);
+        $ids = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
         $failures = 0;
 
         if (! empty($ids))
@@ -64,7 +64,7 @@ class ModuleInstanceManagerActivatorComponent extends ModuleInstanceManager
             }
 
             $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
-                    ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+                    ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES, self :: PARAM_CONTENT_TYPE => $module_instance->get_content_type()));
         }
         else
         {

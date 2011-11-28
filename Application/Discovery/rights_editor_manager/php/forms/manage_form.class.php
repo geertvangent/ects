@@ -63,12 +63,14 @@ class ManageForm extends FormValidator
      * @var Array<Int>
      */
     private $available_rights;
+    private $module_id;
 
-    function __construct($action, $available_rights)
+    function __construct($module_id, $action, $available_rights)
     {
         parent :: __construct('manager', 'post', $action);
         
         $this->available_rights = $available_rights;
+        $this->module_id = $module_id;
         
         $this->build_form();
     }
@@ -219,7 +221,7 @@ class ManageForm extends FormValidator
                         $right->set_entity_id(0);
                         $right->set_entity_type(0);
                         $right->set_group_id($group_id);
-                        $right->set_module_id(1);
+                        $right->set_module_id($this->module_id);
                         $right->set_right_id($right_id);
                         $succes &= $right->create();
                     }
@@ -232,7 +234,7 @@ class ManageForm extends FormValidator
                         $right->set_entity_id(Session :: get_user_id());
                         $right->set_entity_type(1);
                         $right->set_group_id($group_id);
-                        $right->set_module_id(1);
+                        $right->set_module_id($this->module_id);
                         $right->set_right_id($right_id);
                         $succes &= $right->create();
                     }
@@ -248,7 +250,7 @@ class ManageForm extends FormValidator
                                 $right->set_entity_id($target_id);
                                 $right->set_entity_type($entity_type);
                                 $right->set_group_id($group_id);
-                                $right->set_module_id(1);
+                                $right->set_module_id($this->module_id);
                                 $right->set_right_id($right_id);
                                 $succes &= $right->create();
                             }
@@ -262,13 +264,14 @@ class ManageForm extends FormValidator
     function handle_user_rights($user_ids, $right_id)
     {
         $values = $this->exportValues();
-        $module_id = 1;
+        $module_id = $this->module_id;
         $module = DiscoveryDataManager :: get_instance()->retrieve_module_instance($module_id);
         $namespace = '\\' . $module->get_type();
         $rights = $namespace . '\Rights';
         $rights = $rights :: get_instance();
         $module = $namespace . '\Module';
         $this->context = 'discovery_' . $module_id;
+        
         foreach ($user_ids as $user_id)
         {
             $parameters = $module :: get_module_parameters();

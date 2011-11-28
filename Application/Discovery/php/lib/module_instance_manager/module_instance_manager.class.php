@@ -17,9 +17,8 @@ use admin\AdminDataManager;
 class ModuleInstanceManager extends SubManager
 {
     const PARAM_INSTANCE_ACTION = 'action';
-    const PARAM_INSTANCE = 'instance';
-    const PARAM_EXTERNAL_TYPE = 'instance_type';
-    const PARAM_DISCOVERY_MODULE_INSTANCE_TYPE = 'type';
+    const PARAM_TYPE = 'type';
+    const PARAM_CONTENT_TYPE = 'content_type';
 
     const ACTION_BROWSE_INSTANCES = 'browser';
     const ACTION_ACTIVATE_INSTANCE = 'activator';
@@ -57,24 +56,9 @@ class ModuleInstanceManager extends SubManager
         return WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) . 'module_instance_manager/component/';
     }
 
-    function count_module_instances($condition = null)
-    {
-        return $this->get_parent()->count_module_instances($condition);
-    }
-
-    function retrieve_module_instances($condition = null, $offset = null, $count = null, $order_property = null)
-    {
-        return $this->get_parent()->retrieve_module_instances($condition, $offset, $count, $order_property);
-    }
-
     static function launch($application)
     {
         parent :: launch(__CLASS__, $application);
-    }
-
-    function retrieve_module_instance($module_instance_id)
-    {
-        return $this->get_parent()->retrieve_module_instance($module_instance_id);
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\faculty;
 
+use common\libraries\Filesystem;
+
 use application\discovery\Parameters;
 
 use common\libraries\DynamicContentTab;
@@ -147,6 +149,24 @@ class Module extends \application\discovery\Module
         $html[] = $tabs->render();
         
         return implode("\n", $html);
+    }
+
+    function get_type()
+    {
+        return ModuleInstance :: TYPE_INFORMATION;
+    }
+
+    static function get_available_implementations()
+    {
+        $types = array();
+        
+        $modules = Filesystem:: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        foreach ($modules as $module)
+        {
+            $namespace = __NAMESPACE__ . '\implementation\\' . $module;
+            $types[] = $namespace;
+        }
+        return $types;
     }
 
 }

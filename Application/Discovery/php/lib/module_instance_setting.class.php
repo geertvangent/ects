@@ -109,8 +109,7 @@ class ModuleInstanceSetting extends DataClass
      */
     static function initialize(ModuleInstance $module_instance)
     {
-        $settings_file = Path :: namespace_to_full_path($module_instance->get_type()) . Utilities :: get_package_name_from_namespace($module_instance->get_type()) . '.xml';
-
+        $settings_file = Path :: namespace_to_full_path($module_instance->get_type()) . 'php/settings/settings.xml';
         $doc = new DOMDocument();
 
         $doc->load($settings_file);

@@ -1,6 +1,10 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\Path;
+
+use common\libraries\Filesystem;
+
 use common\libraries\NotCondition;
 
 use common\libraries\EqualityCondition;
@@ -101,12 +105,38 @@ class Module
     {
         $parameters = array();
         $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $instance_id;
-        $parameters[DiscoveryManager:: PARAM_ACTION] = DiscoveryManager :: ACTION_RIGHTS;
+        $parameters[DiscoveryManager :: PARAM_ACTION] = DiscoveryManager :: ACTION_RIGHTS;
         foreach ($instance_parameters->get_parameters() as $key => $value)
         {
             $parameters[$key] = $value;
         }
         return $this->get_application()->get_url($parameters);
+    }
+
+    static function get_available_implementations()
+    {
+        return array();
+    }
+
+    static function get_available_types()
+    {
+        $types = array();
+        
+        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', Filesystem :: LIST_DIRECTORIES, false);
+        foreach ($modules as $module)
+        {
+            $namespace = '\\' . __NAMESPACE__ . '\module\\' . $module . '\Module';
+            if (class_exists($namespace, true))
+            {
+                $types = array_merge($types, $namespace :: get_available_implementations());
+            }
+        }
+        return $types;
+    }
+
+    function get_type()
+    {
+        return ModuleInstance :: TYPE_DISABLED;
     }
 }
 ?>

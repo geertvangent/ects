@@ -164,12 +164,12 @@ class ModuleInstance extends DataClass
 
     public function activate()
     {
-        $this->set_enabled(true);
+        $this->set_content_type($this->get_module_type());
     }
 
     public function deactivate()
     {
-        $this->set_enabled(false);
+        $this->set_content_type(self :: TYPE_DISABLED);
     }
 
     public function has_settings()
@@ -215,6 +215,19 @@ class ModuleInstance extends DataClass
             }
         }
         return true;
+    }
+    
+    function get_module_type()
+    {
+    	if ($this->get_type())
+    	{
+    		$namespace = '\\' . $this->get_type() . '\Module';
+    		return $namespace :: get_type();
+    	}
+    	else
+    	{
+    		return self :: TYPE_DISABLED;
+    	}
     }
 
 }

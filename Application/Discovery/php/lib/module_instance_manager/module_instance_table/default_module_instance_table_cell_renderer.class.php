@@ -22,9 +22,9 @@ class DefaultModuleInstanceTableCellRenderer extends ObjectTableCellRenderer
         {
             case ModuleInstance :: PROPERTY_ID :
                 return $module_instance->get_id();
-//            case ModuleInstance :: PROPERTY_TYPE :
-//                $name = htmlentities(Translation :: get('TypeName', null, ModuleInstanceManager :: get_namespace($module_instance->get_instance_type(), $module_instance->get_type())));
-//                return '<img src="' . Theme :: get_image_path(ModuleInstanceManager :: get_namespace($module_instance->get_instance_type(), $module_instance->get_type())) . '/logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
+            case ModuleInstance :: PROPERTY_TYPE :
+                $name = htmlentities(Translation :: get('TypeName', null, $module_instance->get_type()));
+                return '<img src="' . Theme :: get_image_path($module_instance->get_type()) . '/logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
             case ModuleInstance :: PROPERTY_TITLE :
                 return Utilities :: truncate_string($module_instance->get_title(), 50);
             case ModuleInstance :: PROPERTY_DESCRIPTION :

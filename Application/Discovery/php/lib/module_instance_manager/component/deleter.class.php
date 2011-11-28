@@ -15,7 +15,7 @@ class ModuleInstanceManagerDeleterComponent extends ModuleInstanceManager
             $this->not_allowed();
         }
 
-        $ids = Request :: get(ModuleInstanceManager :: PARAM_INSTANCE);
+        $ids = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
         $failures = 0;
 
         if (! empty($ids))
@@ -27,7 +27,7 @@ class ModuleInstanceManagerDeleterComponent extends ModuleInstanceManager
 
             foreach ($ids as $id)
             {
-                $module_instance = $this->retrieve_module_instance($id);
+                $module_instance = DiscoveryDataManager::get_instance()->retrieve_module_instance($id);
 
                 if (! $module_instance->delete())
                 {

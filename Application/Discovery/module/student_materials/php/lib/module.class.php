@@ -1,6 +1,10 @@
 <?php
 namespace application\discovery\module\student_materials;
 
+use common\libraries\Path;
+
+use common\libraries\Filesystem;
+
 use common\libraries\Request;
 
 use common\libraries\Theme;
@@ -119,6 +123,24 @@ class Module extends \application\discovery\Module
         $html[] = $table->toHTML();
         
         return implode("\n", $html);
+    }
+
+    function get_type()
+    {
+        return ModuleInstance :: TYPE_USER;
+    }
+
+    static function get_available_implementations()
+    {
+        $types = array();
+        
+        $modules = Filesystem:: get_directory_content(Path:: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        foreach ($modules as $module)
+        {
+            $namespace = __NAMESPACE__ . '\implementation\\' . $module;
+            $types[] = $namespace;
+        }
+        return $types;
     }
 }
 ?>
