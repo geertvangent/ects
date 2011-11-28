@@ -119,6 +119,11 @@ class Rights extends RightsUtil
     {
         return parent :: create_location('discovery_' . $module_instance_id, self :: TYPE_PROFILE, $parameters->get_user_id(), 1, $parent, 0, 0, self :: TREE_TYPE_ROOT, $return_location);
     }
+    
+    function get_module_root($module_instance_id)
+    {
+    	return parent :: get_root('discovery_' . $module_instance_id);
+    }
 
     function get_module_rights_location_entity_right($module_instance_id, $entity_id, $entity_type, $location_id)
     {

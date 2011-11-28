@@ -1,6 +1,12 @@
 <?php
 namespace application\discovery\rights_editor_manager;
 
+use rights\Right;
+
+use application\discovery\DiscoveryDataManager;
+
+use application\discovery\PlatformGroupEntity;
+
 use application\discovery\UserEntity;
 
 use common\libraries\Theme;
@@ -16,7 +22,6 @@ use common\libraries\Session;
 use common\libraries\AdvancedElementFinderElementTypes;
 use common\libraries\AdvancedElementFinderElements;
 use application\discovery\RightsGroupEntityRight;
-use rights\PlatformGroupEntity;
 
 use rights\RightsDataManager;
 use rights\RightsLocation;
@@ -139,7 +144,7 @@ class ManageForm extends FormValidator
         
         // Add the advanced element finder for groups uses
         $types = new AdvancedElementFinderElementTypes();
-        $platform_group_entity = new PlatformGroupEntity();
+        $platform_group_entity = new PlatformGroupEntity($publication_id);
         $types->add_element_type($platform_group_entity->get_element_finder_type());
         
         $this->addElement('category', Translation :: get('ModuleInfoAbout'));
@@ -178,64 +183,153 @@ class ManageForm extends FormValidator
         $values = $this->exportValues();
         $succes = true;
         
-        $option = $values[self :: PROPERTY_RIGHT_OPTION];
-        $action = $values[self :: PROPERTY_ACTION];
         foreach ($values[self :: PROPERTY_RIGHT] as $right_id)
         {
             foreach ($values[self :: PROPERTY_GROUP_USE] as $group_type => $group_ids)
             {
-                foreach ($group_ids as $group_id)
+                if ($group_type == PlatformGroupEntity :: ENTITY_TYPE)
                 {
-                    switch ($option)
-                    {
-                        case self :: RIGHT_OPTION_ALL :
-                            if ($action == self :: ACTION_GRANT)
-                            {
-                                $right = new RightsGroupEntityRight();
-                                $right->set_entity_id(0);
-                                $right->set_entity_type(0);
-                                $right->set_group_id($group_id);
-                                $right->set_module_id(1);
-                                $right->set_right_id($right_id);
-                                $succes &= $right->create();
-                            }
-                            
-                            break;
-                        case self :: RIGHT_OPTION_ME :
-                            if ($action == self :: ACTION_GRANT)
-                            {
-                                $right = new RightsGroupEntityRight();
-                                $right->set_entity_id(Session :: get_user_id());
-                                $right->set_entity_type(1);
-                                $right->set_group_id($group_id);
-                                $right->set_module_id(1);
-                                $right->set_right_id($right_id);
-                                $succes &= $right->create();
-                            }
-                            break;
-                        case self :: RIGHT_OPTION_SELECT :
-                            foreach ($values[self :: PROPERTY_TARGETS] as $entity_type => $target_ids)
-                            {
-                                foreach ($target_ids as $target_id)
-                                {
-                                    if ($action == self :: ACTION_GRANT)
-                                    {
-                                        $right = new RightsGroupEntityRight();
-                                        $right->set_entity_id($target_id);
-                                        $right->set_entity_type($entity_type);
-                                        $right->set_group_id($group_id);
-                                        $right->set_module_id(1);
-                                        $right->set_right_id($right_id);
-                                        $succes &= $right->create();
-                                    }
-                                }
-                            }
-                    }
+                    $succes &= $this->handle_group_rights($group_ids, $right_id);
+                }
+                elseif ($group_type == UserEntity :: ENTITY_TYPE)
+                {
+                    $succes &= $this->handle_user_rights($group_ids);
                 }
             }
         }
         
         return $succes;
+    }
+
+    function handle_group_rights($group_ids, $right_id)
+    {
+        $values = $this->exportValues();
+        $option = $values[self :: PROPERTY_RIGHT_OPTION];
+        $action = $values[self :: PROPERTY_ACTION];
+        $succes = true;
+        
+        foreach ($group_ids as $group_id)
+        {
+            switch ($option)
+            {
+                case self :: RIGHT_OPTION_ALL :
+                    if ($action == self :: ACTION_GRANT)
+                    {
+                        $right = new RightsGroupEntityRight();
+                        $right->set_entity_id(0);
+                        $right->set_entity_type(0);
+                        $right->set_group_id($group_id);
+                        $right->set_module_id(1);
+                        $right->set_right_id($right_id);
+                        $succes &= $right->create();
+                    }
+                    
+                    break;
+                case self :: RIGHT_OPTION_ME :
+                    if ($action == self :: ACTION_GRANT)
+                    {
+                        $right = new RightsGroupEntityRight();
+                        $right->set_entity_id(Session :: get_user_id());
+                        $right->set_entity_type(1);
+                        $right->set_group_id($group_id);
+                        $right->set_module_id(1);
+                        $right->set_right_id($right_id);
+                        $succes &= $right->create();
+                    }
+                    break;
+                case self :: RIGHT_OPTION_SELECT :
+                    foreach ($values[self :: PROPERTY_TARGETS] as $entity_type => $target_ids)
+                    {
+                        foreach ($target_ids as $target_id)
+                        {
+                            if ($action == self :: ACTION_GRANT)
+                            {
+                                $right = new RightsGroupEntityRight();
+                                $right->set_entity_id($target_id);
+                                $right->set_entity_type($entity_type);
+                                $right->set_group_id($group_id);
+                                $right->set_module_id(1);
+                                $right->set_right_id($right_id);
+                                $succes &= $right->create();
+                            }
+                        }
+                    }
+            }
+        }
+        return $succes;
+    }
+
+    function handle_user_rights($user_ids, $right_id)
+    {
+        $values = $this->exportValues();
+        $module_id = 1;
+        $module = DiscoveryDataManager :: get_instance()->retrieve_module_instance($module_id);
+        $namespace = '\\' . $module->get_type();
+        $rights = $namespace . '\Rights';
+        $rights = $rights :: get_instance();
+        $module = $namespace . '\Module';
+        $this->context = 'discovery_' . $module_id;
+        foreach ($user_ids as $user_id)
+        {
+            $parameters = $module :: get_module_parameters();
+            $parameters->set_user_id($user_id);
+            $location_id = $rights->get_module_location_id_by_identifier($module_id, $parameters);
+            if (! $location_id)
+            {
+                $root = $rights->get_module_root($module_id);
+                $location_id = $rights->create_module_location($module_id, $parameters, $root->get_id(), true)->get_id();
+            }
+            
+            $succes = true;
+            $option = $values[self :: PROPERTY_RIGHT_OPTION];
+            $action = $values[self :: PROPERTY_ACTION];
+            
+            foreach ($values[self :: PROPERTY_RIGHT] as $right_id)
+            {
+                switch ($option)
+                {
+                    case self :: RIGHT_OPTION_ALL :
+                        if ($action == self :: ACTION_GRANT)
+                        {
+                            $succes &= $rights->set_location_entity_right($this->context, $right_id, 0, 0, $location_id);
+                        }
+                        else
+                        {
+                            $succes &= $rights->unset_location_entity_right($this->context, $right_id, 0, 0, $location_id);
+                        }
+                        break;
+                    case self :: RIGHT_OPTION_ME :
+                        if ($action == self :: ACTION_GRANT)
+                        {
+                            $succes &= $rights->set_location_entity_right($this->context, $right_id, Session :: get_user_id(), 1, $location_id);
+                        }
+                        else
+                        {
+                            $succes &= $rights->unset_location_entity_right($this->context, $right_id, Session :: get_user_id(), 1, $location_id);
+                        }
+                        break;
+                    case self :: RIGHT_OPTION_SELECT :
+                        foreach ($values[self :: PROPERTY_TARGETS] as $entity_type => $target_ids)
+                        {
+                            foreach ($target_ids as $target_id)
+                            {
+                                if ($action == self :: ACTION_GRANT)
+                                {
+                                    $succes &= $rights->set_location_entity_right($this->context, $right_id, $target_id, $entity_type, $location_id);
+                                }
+                                
+                                else
+                                
+                                {
+                                    $succes &= $rights->unset_location_entity_right($this->context, $right_id, $target_id, $entity_type, $location_id);
+                                }
+                            }
+                        }
+                }
+            }
+        }
+        return $succes;
+    
     }
 
 }

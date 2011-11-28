@@ -8,7 +8,7 @@ use common\libraries\Utilities;
 /**
  * Table to display the entities for the rights editor
  */
-class GroupRightBrowserTable extends ObjectTable
+class UserRightBrowserTable extends ObjectTable
 {
 
     /**
@@ -19,11 +19,10 @@ class GroupRightBrowserTable extends ObjectTable
     {
         $selected_entity = $browser->get_selected_entity();
         
-        $renderer = new GroupRightBrowserTableCellRenderer($browser);
+        $renderer = new UserRightBrowserTableCellRenderer($browser);
         
-        $model = new GroupRightBrowserTableColumnModel($browser);
-        
-        $data_provider = new GroupRightBrowserTableDataProvider($browser, $condition);
+        $model = new UserRightBrowserTableColumnModel($browser);        
+        $data_provider = new UserRightBrowserTableDataProvider($browser, $condition);
         
         parent :: __construct($data_provider, Utilities :: get_classname_from_namespace(__CLASS__, true), $model, $renderer);
         

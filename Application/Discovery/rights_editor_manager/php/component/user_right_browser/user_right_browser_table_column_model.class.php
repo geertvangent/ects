@@ -1,13 +1,11 @@
 <?php
 namespace application\discovery\rights_editor_manager;
 
-use common\libraries\Application;
-
 use user\UserManager;
 
 use user\User;
 
-use group\Group;
+use common\libraries\Application;
 
 use common\libraries\ObjectTableColumnModel;
 use common\libraries\Utilities;
@@ -21,7 +19,7 @@ use common\libraries\ObjectTableColumn;
 /**
  * Table column model for the location entity browser
  */
-class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
+class UserRightBrowserTableColumnModel extends ObjectTableColumnModel
 {
     /**
      * The table right columns
@@ -46,25 +44,12 @@ class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
         $this->add_rights_columns();
     }
 
-    function get_default_column()
-    {
-        $user_namespace = Application:: determine_namespace(UserManager :: APPLICATION_NAME);
-        
-        $columns = array();
-        $columns[] = new ObjectTableColumn(Group :: PROPERTY_NAME, true);
-        $columns[] = new ObjectTableColumn(Group :: PROPERTY_DESCRIPTION, true);
-        $columns[] = new ObjectTableColumn(Group :: PROPERTY_CODE, true);
-        return $columns;
-    }
-
     /**
      * Determines wheter a column is a rights column
      * @param ObjectTableColumn $column
      * @return boolean
      */
-    static 
-
-    function is_rights_column($column)
+    static function is_rights_column($column)
     {
         return in_array($column, self :: $rights_columns);
     }
@@ -83,6 +68,19 @@ class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
             
             self :: $rights_columns[] = $column;
         }
+    }
+
+    function get_default_column()
+    {
+        $user_namespace = Application:: determine_namespace(UserManager:: APPLICATION_NAME);
+        
+        $columns = array();
+        $columns[] = new ObjectTableColumn(User :: PROPERTY_OFFICIAL_CODE, true, null, true, $user_namespace);
+        $columns[] = new ObjectTableColumn(User :: PROPERTY_USERNAME, true, null, true, $user_namespace);
+        $columns[] = new ObjectTableColumn(User :: PROPERTY_FIRSTNAME, true, null, true, $user_namespace);
+        $columns[] = new ObjectTableColumn(User :: PROPERTY_LASTNAME, true, null, true, $user_namespace);
+        
+        return $columns;
     }
 }
 ?>

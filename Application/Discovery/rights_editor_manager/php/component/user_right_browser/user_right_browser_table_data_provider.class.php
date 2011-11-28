@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\rights_editor_manager;
 
-use group\GroupDataManager;
+use user\UserDataManager;
 
 use common\libraries\ObjectTableDataProvider;
 
@@ -13,7 +13,7 @@ use common\libraries\ObjectTableDataProvider;
 /**
  * Data provider for the entity browser table. Retrieves data with use of the selected entity
  */
-class GroupRightBrowserTableDataProvider extends ObjectTableDataProvider
+class UserRightBrowserTableDataProvider extends ObjectTableDataProvider
 {
 
     /**
@@ -30,12 +30,12 @@ class GroupRightBrowserTableDataProvider extends ObjectTableDataProvider
     {
         $order_property = $this->get_order_property($order_property);
         
-        return GroupDataManager:: get_instance()->retrieve_groups($this->get_condition(), $offset, $count, $order_property);
+        return UserDataManager:: get_instance()->retrieve_users($this->get_condition(), $offset, $count, $order_property);
     }
 
     function get_object_count()
     {
-        return GroupDataManager :: get_instance()->count_groups($this->get_condition());
+        return UserDataManager :: get_instance()->count_users($this->get_condition());
     }
 }
 ?>

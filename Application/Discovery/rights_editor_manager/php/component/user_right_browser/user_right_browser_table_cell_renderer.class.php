@@ -1,11 +1,15 @@
 <?php
 namespace application\discovery\rights_editor_manager;
 
+use application\discovery\UserEntity;
+
+use rights\LocationUserBrowserTableColumnModel;
+
 use application\discovery\DiscoveryDataManager;
 
-use application\discovery\PlatformGroupEntity;
+use application\discovery\PlatformUserEntity;
 
-use rights\LocationPlatformGroupBrowserTableColumnModel;
+use rights\LocationPlatformUserBrowserTableColumnModel;
 
 use common\libraries\AndCondition;
 
@@ -28,7 +32,7 @@ use rights\RightsUtil;
 /**
  * Cell renderer for the entity browser table of the rights manager
  */
-class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
+class UserRightBrowserTableCellRenderer extends ObjectTableCellRenderer
 {
     /**
      * The browser component
@@ -47,7 +51,7 @@ class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
     // Inherited
     function render_cell($column, $entity_item)
     {
-        if (GroupRightBrowserTableColumnModel :: is_rights_column($column))
+        if (UserRightBrowserTableColumnModel :: is_rights_column($column))
         {
             return $this->get_rights_column_value($column, $entity_item);
         }
@@ -80,7 +84,7 @@ class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
         $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, $group_id);
         $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_id);
         $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_ID, $entity_item->get_id());
-        $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, PlatformGroupEntity :: ENTITY_TYPE);
+        $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, UserEntity :: ENTITY_TYPE);
         
         $condition = new AndCondition($conditions);
         

@@ -40,5 +40,10 @@ class DiscoveryManagerGroupRightsComponent extends DiscoveryManager implements D
         $parameters[] = self :: PARAM_MODULE_ID;
         return $parameters;
     }
+
+    function get_module_instance_id()
+    {
+        return $this->module_instance_id;
+    }
 }
 ?>
