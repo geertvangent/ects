@@ -13,9 +13,10 @@ use common\libraries\DataClass;
 class Mark extends \application\discovery\module\career\Mark
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_SUB_STATUS = 'sub_status';
-
+    const PROPERTY_PUBLISH_STATUS = 'publish_status';
+    
     const STATUS_EXEMPTION = 1;
     const STATUS_CREDIT = 2;
     const STATUS_DELIBERATED = 3;
@@ -34,7 +35,8 @@ class Mark extends \application\discovery\module\career\Mark
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SUB_STATUS;
-
+        $extended_property_names[] = self :: PROPERTY_PUBLISH_STATUS;
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -56,6 +58,16 @@ class Mark extends \application\discovery\module\career\Mark
         $this->set_default_property(self :: PROPERTY_SUB_STATUS, $sub_status);
     }
 
+    function get_publish_status()
+    {
+        return $this->get_default_property(self :: PROPERTY_PUBLISH_STATUS);
+    }
+
+    function set_publish_status($publish_status)
+    {
+        $this->set_default_property(self :: PROPERTY_PUBLISH_STATUS, $publish_status);
+    }
+
     /**
      * @return string
      */
@@ -70,7 +82,7 @@ class Mark extends \application\discovery\module\career\Mark
     static function status_string($status)
     {
         $prefix = 'MarkStatus';
-
+        
         switch ($status)
         {
             case self :: STATUS_EXEMPTION :

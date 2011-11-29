@@ -261,6 +261,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $mark->set_result($mark_result->result);
                     $mark->set_status($mark_result->status);
                     $mark->set_sub_status($mark_result->sub_status);
+                    $mark->set_publish_status($mark_result->publish_status);
 
                     $this->marks[$user_id][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
                 }

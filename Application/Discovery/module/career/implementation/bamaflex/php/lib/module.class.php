@@ -63,24 +63,31 @@ class Module extends \application\discovery\module\career\Module
                 foreach ($this->get_mark_moments() as $mark_moment)
                 {
                     $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
-                    
-                    if ($mark->get_result())
+                    if ($mark->get_publish_status() == 1 || $course->get_year() != '2011-12')
                     {
-                        $row[] = $mark->get_visual_result();
+                        if ($mark->get_result())
+                        {
+                            $row[] = $mark->get_visual_result();
+                        }
+                        else
+                        {
+                            $row[] = $mark->get_sub_status();
+                        }
+                        
+                        if ($mark->get_status())
+                        {
+                            $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) . '" title="' . Translation :: get($mark->get_status_string()) . '" />';
+                            $row[] = $mark_status_image;
+                            LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string()), Translation :: get('MarkStatus'));
+                        }
+                        else
+                        {
+                            $row[] = null;
+                        }
                     }
                     else
                     {
-                        $row[] = $mark->get_sub_status();
-                    }
-                    
-                    if ($mark->get_status())
-                    {
-                        $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) . '" title="' . Translation :: get($mark->get_status_string()) . '" />';
-                        $row[] = $mark_status_image;
-                        LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string()), Translation :: get('MarkStatus'));
-                    }
-                    else
-                    {
+                        $row[] = null;
                         $row[] = null;
                     }
                 }

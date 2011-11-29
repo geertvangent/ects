@@ -50,13 +50,16 @@ class Module extends \application\discovery\module\person\Module
 
     function get_group_viewing_url($group)
     {
-    
+        return $this->get_application()->get_url(array(
+                DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                GroupManager :: PARAM_GROUP_ID => $group->get_id()));
     }
 
     function get_menu_html()
     {
-        $url = $this->get_application()->get_url(array(GroupManager :: PARAM_GROUP_ID => '%s', 
-                DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id()));
+        $url = $this->get_application()->get_url(array(
+                DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                GroupManager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new GroupMenu($this->get_group(), urldecode($url));
         //$group_menu = new TreeMenu('GroupTreeMenu', new GroupTreeMenuDataProvider($this->get_url(), $this->get_group()));
         $html = array();
@@ -107,6 +110,7 @@ class Module extends \application\discovery\module\person\Module
         
         $parameters = $this->get_application()->get_parameters();
         $parameters[GroupManager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[DiscoveryManager:: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         
         $query = $this->action_bar->get_query();
         if (isset($query) && $query != '')
@@ -125,15 +129,21 @@ class Module extends \application\discovery\module\person\Module
             }
             if ($count_users == 0 && $count_groups == 0)
             {
-                $html[] = Display::warning_message(Translation :: get('NoSearchResults', null, Utilities::COMMON_LIBRARIES), true);
+                $html[] = Display :: warning_message(Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES), true);
             }
         }
         else
         {
             $table = new GroupRelUserBrowserTable($this, $parameters, $this->get_users_condition());
             $tabs->add_tab(new DynamicContentTab(self :: TAB_USERS, Translation :: get('Users', null, 'user'), Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
-            $table = new GroupBrowserTable($this, $parameters, $this->get_subgroups_condition());
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_SUBGROUPS, Translation :: get('Subgroups'), Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
+            
+            $count_groups = GroupDataManager :: get_instance()->count_groups($this->get_subgroups_condition());
+            if ($count_groups > 0)
+            {
+                $table = new GroupBrowserTable($this, $parameters, $this->get_subgroups_condition());
+                $tabs->add_tab(new DynamicContentTab(self :: TAB_SUBGROUPS, Translation :: get('Subgroups'), Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
+            }
+            
             $tabs->add_tab(new DynamicContentTab(self :: TAB_DETAILS, Translation :: get('Details'), Theme :: get_image_path('help') . 'logo/' . Theme :: ICON_MINI . '.png', $this->get_group_info()));
         
         }
@@ -175,6 +185,7 @@ class Module extends \application\discovery\module\person\Module
             $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_FIRSTNAME, '*' . $query . '*');
             $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_LASTNAME, '*' . $query . '*');
             $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_USERNAME, '*' . $query . '*');
+            $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_OFFICIAL_CODE, '*' . $query . '*');
             return new OrCondition($or_conditions);
         }
         else
