@@ -27,7 +27,6 @@ class Autoloader
          'Mdb2DiscoveryDataManager' => '/lib/data_manager/mdb2.class.php',
          'DiscoveryManager' => '/lib/discovery_manager/discovery_manager.class.php',
          'DiscoveryManagerBrowserComponent' => '/lib/discovery_manager/component/browser.class.php',
-         'DiscoveryManagerGroupRightsComponent' => '/lib/discovery_manager/component/group_rights.class.php',
          'DiscoveryManagerModuleComponent' => '/lib/discovery_manager/component/module.class.php',
          'DiscoveryManagerRightsComponent' => '/lib/discovery_manager/component/rights.class.php',
          'DiscoveryManagerViewerComponent' => '/lib/discovery_manager/component/viewer.class.php',

@@ -1,15 +1,10 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
-use application\discovery\module\person\Person;
+use group\DefaultGroupRelUserTableColumnModel;
 
-use user\User;
-use user\DefaultUserTableColumnModel;
-
-use common\libraries\ObjectTableColumn;
 use common\libraries\StaticTableColumn;
-use common\libraries\Path;
 
-class UserBrowserTableColumnModel extends DefaultUserTableColumnModel
+class GroupRelUserBrowserTableColumnModel extends DefaultGroupRelUserTableColumnModel
 {
     /**
      * The tables modification column
@@ -22,7 +17,6 @@ class UserBrowserTableColumnModel extends DefaultUserTableColumnModel
     function __construct()
     {
         parent :: __construct();
-        $this->add_column(new ObjectTableColumn(Person:: PROPERTY_EMAIL));
         $this->set_default_order_column(1);
         $this->add_column(self :: get_modification_column());
     }
