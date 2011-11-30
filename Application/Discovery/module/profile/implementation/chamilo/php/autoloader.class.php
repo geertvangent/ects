@@ -8,7 +8,10 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'Module' => '/lib/module.class.php',
          'Profile' => '/lib/profile.class.php',
+         'Rights' => '/lib/rights.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
+         'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
+         'RightsUserEntity' => '/lib/rights_entity/user.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php',
     );
 

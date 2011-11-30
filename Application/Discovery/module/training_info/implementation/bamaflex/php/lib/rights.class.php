@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\bamaflex;
+namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use common\libraries\Session;
 

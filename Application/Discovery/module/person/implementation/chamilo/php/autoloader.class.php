@@ -7,6 +7,7 @@ class Autoloader
     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'Module' => '/lib/module.class.php',
+         'Rights' => '/lib/rights.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'GroupBrowserTable' => '/lib/group_browser/group_browser_table.class.php',
          'GroupBrowserTableCellRenderer' => '/lib/group_browser/group_browser_table_cell_renderer.class.php',
@@ -16,6 +17,8 @@ class Autoloader
          'GroupRelUserBrowserTableCellRenderer' => '/lib/group_rel_user_browser/group_rel_user_browser_table_cell_renderer.class.php',
          'GroupRelUserBrowserTableColumnModel' => '/lib/group_rel_user_browser/group_rel_user_browser_table_column_model.class.php',
          'GroupRelUserBrowserTableDataProvider' => '/lib/group_rel_user_browser/group_rel_user_browser_table_data_provider.class.php',
+         'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
+         'RightsUserEntity' => '/lib/rights_entity/user.class.php',
          'UserBrowserTable' => '/lib/user_browser/user_browser_table.class.php',
          'UserBrowserTableCellRenderer' => '/lib/user_browser/user_browser_table_cell_renderer.class.php',
          'UserBrowserTableColumnModel' => '/lib/user_browser/user_browser_table_column_model.class.php',

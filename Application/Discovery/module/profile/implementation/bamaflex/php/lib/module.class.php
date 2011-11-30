@@ -217,42 +217,15 @@ class Module extends \application\discovery\module\profile\Module
             
             $html[] = $this->get_previous();
             
-            $data_source = $this->get_module_instance()->get_setting('data_source');
-            $enrollment_module_instance = \application\discovery\Module :: exists('application\discovery\module\enrollment\implementation\bamaflex', array(
-                    'data_source' => $data_source));
-            
-            $career_module_instance = \application\discovery\Module :: exists('application\discovery\module\career\implementation\bamaflex', array(
-                    'data_source' => $data_source));
-            
-            $teaching_assignment_module_instance = \application\discovery\Module :: exists('application\discovery\module\teaching_assignment\implementation\bamaflex', array(
-                    'data_source' => $data_source));
-            
-            $toolbar = new Toolbar();
-            
-            if ($enrollment_module_instance)
+            if ($this->get_application()->get_user()->is_platform_admin())
             {
-                $parameters = new \application\discovery\module\enrollment\Parameters($this->get_profile_parameters()->get_user_id());
-                $url = $this->get_instance_url($enrollment_module_instance->get_id(), $parameters);
-                $toolbar->add_item(new ToolbarItem($enrollment_module_instance->get_title(), Theme :: get_image_path('application\discovery\module\enrollment\implementation\bamaflex') . 'logo/16.png', $url));
+                $toolbar = new Toolbar();
+                
+                $url = $this->get_rights_url($this->get_module_instance()->get_id(), $this->get_profile_parameters());
+                $toolbar->add_item(new ToolbarItem(Translation :: get('Rights'), Theme :: get_common_image_path() . 'action_rights.png', $url));
+                
+                $html[] = $toolbar->as_html();
             }
-            
-            if ($career_module_instance)
-            {
-                $parameters = new \application\discovery\module\career\Parameters($this->get_profile_parameters()->get_user_id());
-                $url = $this->get_instance_url($career_module_instance->get_id(), $parameters);
-                $toolbar->add_item(new ToolbarItem($career_module_instance->get_title(), Theme :: get_image_path('application\discovery\module\career\implementation\bamaflex') . 'logo/16.png', $url));
-            }
-            
-            if ($teaching_assignment_module_instance)
-            {
-                $parameters = new \application\discovery\module\teaching_assignment\Parameters($this->get_profile_parameters()->get_user_id());
-                $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
-                $toolbar->add_item(new ToolbarItem($teaching_assignment_module_instance->get_title(), Theme :: get_image_path('application\discovery\module\teaching_assignment\implementation\bamaflex') . 'logo/16.png', $url));
-            }
-            $url = $this->get_rights_url($this->get_module_instance()->get_id(), $this->get_profile_parameters());
-            $toolbar->add_item(new ToolbarItem(Translation :: get('Rights'), Theme :: get_common_image_path() . 'action_rights.png', $url));
-            
-            $html[] = $toolbar->as_html();
             
             return implode("\n", $html);
         }

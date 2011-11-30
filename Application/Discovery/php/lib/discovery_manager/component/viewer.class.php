@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\Display;
+
 use common\libraries\Translation;
 
 use common\libraries\ToolbarItem;
@@ -35,6 +37,11 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
         $module_content_type = Request :: get(DiscoveryManager :: PARAM_CONTENT_TYPE);
         
         $order_by = array(new ObjectTableOrder(ModuleInstance :: PROPERTY_DISPLAY_ORDER));
+        if ($this->get_user()->is_platform_admin())
+        {
+            $link = $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_MODULE));
+            BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('Modules'), Theme :: get_common_image_path() . 'action_config.png', $link));
+        }
         
         if (! $module_id)
         {
@@ -44,6 +51,12 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
             }
             $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_content_type);
             $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance_by_condition($condition, $order_by);
+            if (! $current_module_instance)
+            {
+                $this->display_header();
+                echo Display::warning_message(Translation :: get('NoModuleInstance'), true);
+                $this->display_footer();
+            }
             $module_id = $current_module_instance->get_id();
         }
         else
@@ -89,12 +102,35 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
             
             while ($module_instance = $module_instances->next_result())
             {
+                $rights = $module_instance->get_type() . '\Rights';
                 $module = $module_instance->get_type() . '\Module';
-                $module_parameters = $module :: get_module_parameters()->get_parameters();
-                $module_parameters[DiscoveryManager :: PARAM_MODULE_ID] = $module_instance->get_id();
-                $selected = ($module_id == $module_instance->get_id() ? true : false);
-                $link = $this->get_url($module_parameters);
-                $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), $module_instance->get_title(), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
+                
+                $module_parameters = $module :: get_module_parameters();
+                
+                if ($module_content_type == ModuleInstance :: TYPE_USER)
+                {
+                    if (! $module_parameters->get_user_id())
+                    {
+                        $module_parameters->set_user_id($this->get_user_id());
+                    }
+                    if ($rights :: get_instance()->is_visible($module_instance->get_id(), $module_parameters))
+                    {
+                        $module_parameters_array = $module_parameters->get_parameters();
+                        $module_parameters_array[DiscoveryManager :: PARAM_MODULE_ID] = $module_instance->get_id();
+                        $selected = ($module_id == $module_instance->get_id() ? true : false);
+                        $link = $this->get_url($module_parameters_array);
+                        $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), $module_instance->get_title(), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
+                    }
+                }
+                else
+                {
+                    $module_parameters_array = $module_parameters->get_parameters();
+                    $module_parameters_array[DiscoveryManager :: PARAM_MODULE_ID] = $module_instance->get_id();
+                    $selected = ($module_id == $module_instance->get_id() ? true : false);
+                    $link = $this->get_url($module_parameters_array);
+                    $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), $module_instance->get_title(), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
+                
+                }
             }
         }
         else

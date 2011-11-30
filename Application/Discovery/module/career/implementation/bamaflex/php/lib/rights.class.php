@@ -10,7 +10,8 @@ use Exception;
 
 class Rights extends RightsUtil
 {
-    const VIEW_RIGHT = '1';
+    const VIEW_RIGHT = 1;
+    const RESULT_RIGHT = 2;
     
     const TYPE_CAREER = 1;
     
@@ -27,26 +28,55 @@ class Rights extends RightsUtil
 
     static function get_available_rights()
     {
-        return array(Translation :: get('ViewRight') => self :: VIEW_RIGHT);
+        return array(Translation :: get('ViewRight') => self :: VIEW_RIGHT, 
+                Translation :: get('ResultRight') => self :: RESULT_RIGHT);
     }
 
     function module_is_allowed($right, $entities, $module_instance_id, $parameters)
     {
         try
         {
-            if ($parameters->get_user_id() == Session :: get_user_id())
-            {
-                return true;
-            }
-            else
-            {
-                return parent :: is_allowed($right, 'discovery_' . $module_instance_id, null, $entities, $parameters->get_user_id(), self :: TYPE_CAREER, 0, self :: TREE_TYPE_ROOT);
-            }
+            return parent :: is_allowed($right, 'discovery_' . $module_instance_id, null, $entities, $parameters->get_user_id(), self :: TYPE_CAREER, 0, self :: TREE_TYPE_ROOT);
         }
         catch (Exception $exception)
         {
             return false;
         }
+    }
+
+    function get_current_location($module_instance_id)
+    {
+        $parameters = Module :: get_module_parameters();
+        $location = $this->get_module_location_by_identifier($module_instance_id, $parameters);
+        if ($location)
+        {
+            return $location;
+        }
+        else
+        {
+            return $this->create_module_location($module_instance_id, $parameters, $this->get_root_id('discovery_' . $module_instance_id), true);
+        }
+    }
+
+    function user_module_is_allowed($right, $entities, $module_instance_id, $parameters)
+    {
+        if ($parameters->get_user_id() == Session :: get_user_id())
+        {
+            return true;
+        }
+        else
+        {
+            return $this->module_is_allowed($right, $entities, $module_instance_id, $parameters);
+        }
+    }
+
+    function is_visible($module_instance_id, $parameters)
+    {
+        $entities = array();
+        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
+        
+        return $this->user_module_is_allowed(self :: VIEW_RIGHT, $entities, $module_instance_id, $parameters);
     }
 
     function get_module_location_by_identifier($module_instance_id, $parameters)

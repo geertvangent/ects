@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
+use user\UserDataManager;
+
 use common\libraries\Display;
 
 use application\discovery\LegendTable;
@@ -18,6 +20,7 @@ use common\libraries\Translation;
 
 class Module extends \application\discovery\module\career\Module
 {
+    private $result_right;
 
     /**
      * @return multitype:multitype:string
@@ -25,6 +28,7 @@ class Module extends \application\discovery\module\career\Module
     function get_table_data($enrollment)
     {
         $data = array();
+        $training = $enrollment->get_training_object();
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
@@ -63,7 +67,8 @@ class Module extends \application\discovery\module\career\Module
                 foreach ($this->get_mark_moments() as $mark_moment)
                 {
                     $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
-                    if ($mark->get_publish_status() == 1 || $course->get_year() != '2011-12')
+                    
+                    if ($mark->get_publish_status() == 1 || ! $training->is_current() || $this->result_right)
                     {
                         if ($mark->get_result())
                         {
@@ -126,10 +131,18 @@ class Module extends \application\discovery\module\career\Module
                         
                         foreach ($this->get_mark_moments() as $mark_moment)
                         {
-                            $mark = $child->get_mark_by_moment_id($mark_moment->get_id());
                             
-                            $row[] = $mark->get_result();
-                            $row[] = null;
+                            $mark = $child->get_mark_by_moment_id($mark_moment->get_id());
+                            if ($mark->get_publish_status() == 1 || ! $training->is_current() || $this->result_right)
+                            {
+                                $row[] = $mark->get_result();
+                                $row[] = null;
+                            }
+                            else
+                            {
+                                $row[] = null;
+                                $row[] = null;
+                            }
                         }
                         
                         $data[] = $row;
@@ -212,41 +225,6 @@ class Module extends \application\discovery\module\career\Module
                 
                 foreach ($contract as $enrollment)
                 {
-                    //                    if (count($contract) > 1)
-                    //                    {
-                    //                        $contract_html[] = '<table class="grey_data_table" id="tablename"><thead><tr><th>';
-                    //
-                    //                        $enrollment_name = array();
-                    //                        $enrollment_name[] = $enrollment->get_year();
-                    //
-                    //                        if ($enrollment->get_unified_option())
-                    //                        {
-                    //                            $enrollment_name[] = $enrollment->get_unified_option();
-                    //                        }
-                    //
-                    //                        if ($enrollment->get_unified_trajectory())
-                    //                        {
-                    //                            $enrollment_name[] = $enrollment->get_unified_trajectory();
-                    //                        }
-                    //
-                    //                        if ($enrollment->is_special_result())
-                    //                        {
-                    //                            $tab_image_path = Theme :: get_image_path(Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' . $enrollment->get_result() . '.png';
-                    //                            $tab_image = '<img src="' . $tab_image_path . '" alt="' . $enrollment->get_result_string() . '" title="' . $enrollment->get_result_string() . '" />';
-                    //                            $enrollment_name[] = $tab_image;
-                    //                            LegendTable :: get_instance()->add_symbol($tab_image, $enrollment->get_result_string());
-                    //                        }
-                    //                        else
-                    //                        {
-                    //                            $tab_image = null;
-                    //                        }
-                    //
-                    //                        $contract_html[] = implode(' | ', $enrollment_name);
-                    //                        $contract_html[] = '</th></tr></thead></table>';
-                    //                        $contract_html[] = '<br />';
-                    //                    }
-                    
-
                     $table = new SortableTable($this->get_table_data($enrollment));
                     
                     foreach ($this->get_table_headers() as $header_id => $header)
@@ -360,12 +338,21 @@ class Module extends \application\discovery\module\career\Module
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_career_parameters()))
+        if (! Rights :: get_instance()->user_module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_career_parameters()))
         {
             Display :: not_allowed();
         }
         
+        $this->result_right = Rights :: get_instance()->module_is_allowed(Rights :: RESULT_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_career_parameters());
+        
         $html = array();
+        
+        
+        if ($this->get_career_parameters()->get_user_id() != $this->get_application()->get_user_id())
+        {
+        	$user = UserDataManager::get_instance()->retrieve_user($this->get_career_parameters()->get_user_id());
+        	$html[] = '<h3>' . $user->get_fullname() .  '</h3>';
+        }
         
         if (count($this->get_courses()) > 0)
         {

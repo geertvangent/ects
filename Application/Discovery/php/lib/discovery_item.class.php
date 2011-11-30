@@ -13,6 +13,17 @@ class DiscoveryItem extends DataClass
     
     const PROPERTY_TITLE = 'title';
     
+    private $instance;
+
+    function get_instance()
+    {
+    	return $this->instance;
+    }
+    
+    function set_instance($instance)
+    {
+    	$this->instance = $instance;
+    }
 
     /**
      * @param string $title
@@ -30,7 +41,6 @@ class DiscoveryItem extends DataClass
         return $this->get_default_property(self :: PROPERTY_TITLE);
     }
 
-  
     /**
      * @param multitype:string $extended_property_names
      */

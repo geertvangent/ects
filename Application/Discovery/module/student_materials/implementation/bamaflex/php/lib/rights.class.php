@@ -30,6 +30,27 @@ class Rights extends RightsUtil
         return array(Translation :: get('ViewRight') => self :: VIEW_RIGHT);
     }
 
+    function user_module_is_allowed($right, $entities, $module_instance_id, $parameters)
+    {
+        if ($parameters->get_user_id() == Session :: get_user_id())
+        {
+            return true;
+        }
+        else
+        {
+            return $this->module_is_allowed($right, $entities, $module_instance_id, $parameters);
+        }
+    }
+
+    function is_visible($module_instance_id, $parameters)
+    {
+        $entities = array();
+        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
+        
+        return $this->user_module_is_allowed(self :: VIEW_RIGHT, $entities, $module_instance_id, $parameters);
+    }
+
     function module_is_allowed($right, $entities, $module_instance_id, $parameters)
     {
         try

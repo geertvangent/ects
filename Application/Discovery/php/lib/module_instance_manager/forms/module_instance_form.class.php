@@ -269,7 +269,6 @@ class ModuleInstanceForm extends FormValidator
         
         if (! $module_instance->create())
         {
-            
             return false;
         }
         else
@@ -307,10 +306,34 @@ class ModuleInstanceForm extends FormValidator
     {
         $module_instance = $this->module_instance;
         $defaults[ModuleInstance :: PROPERTY_ID] = $module_instance->get_id();
-        $defaults[ModuleInstance :: PROPERTY_TITLE] = $module_instance->get_title();
+        if (! $module_instance->get_title())
+        {
+            $defaults[ModuleInstance :: PROPERTY_TITLE] = Translation :: get('TypeName', null, $this->module_instance->get_type());
+        }
+        else
+        {
+            $defaults[ModuleInstance :: PROPERTY_TITLE] = $module_instance->get_title();
+        }
+        
         $defaults[ModuleInstance :: PROPERTY_TYPE] = $module_instance->get_type();
-        $defaults[ModuleInstance :: PROPERTY_DESCRIPTION] = $module_instance->get_description();
-        $defaults[self :: PROPERTY_ENABLED] = (int) $module_instance->is_enabled();
+        
+        if (! $module_instance->get_description())
+        {
+            $defaults[ModuleInstance :: PROPERTY_DESCRIPTION] = Translation :: get('TypeDescription', null, $this->module_instance->get_type());
+        }
+        else
+        {
+            $defaults[ModuleInstance :: PROPERTY_DESCRIPTION] = $module_instance->get_description();
+        }
+        
+        if ($module_instance->get_title())
+        {
+            $defaults[self :: PROPERTY_ENABLED] = (int) $module_instance->is_enabled();
+        }
+        else
+        {
+            $defaults[self :: PROPERTY_ENABLED] = 1;
+        }
         
         $configuration = $this->configuration;
         

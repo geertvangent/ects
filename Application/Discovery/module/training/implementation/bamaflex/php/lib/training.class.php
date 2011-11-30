@@ -428,5 +428,21 @@ class Training extends \application\discovery\module\training\Training
     {
         return DiscoveryDataManager :: get_instance();
     }
+
+    function is_current()
+    {
+        $current_date = time();
+        $start_date = strtotime($this->get_start_date());
+        $end_date = strtotime($this->get_end_date());
+        
+        if ($current_date >= $start_date && $current_date <= $end_date)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 ?>

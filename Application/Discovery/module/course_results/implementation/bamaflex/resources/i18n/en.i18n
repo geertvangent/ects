@@ -1,4 +1,4 @@
-TypeName = "BaMaFlex"
+TypeName = "Course results"
 BornIn = "{DATE} in {PLACE}"
 Degree = "Diploma"
 Credit = "Studiepunten"

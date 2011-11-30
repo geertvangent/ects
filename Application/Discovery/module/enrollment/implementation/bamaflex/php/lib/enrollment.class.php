@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
+use application\discovery\module\career\DataManager;
+
 use application\discovery\DiscoveryDataManager;
 
 class Enrollment extends \application\discovery\module\enrollment\Enrollment
@@ -400,6 +402,11 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         }
         
         return implode(' | ', $string);
+    }
+
+    function get_training_object()
+    {
+        return DataManager:: get_instance($this->get_instance())->retrieve_training($this->get_source(), $this->get_training_id());
     }
 }
 ?>

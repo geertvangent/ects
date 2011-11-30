@@ -18,7 +18,7 @@ class Autoloader
          'Package' => '/lib/package.class.php',
          'PackageCourse' => '/lib/package_course.class.php',
          'Parameters' => '/lib/parameters.class.php',
-         'application\discovery\module\profile\implementation\bamaflex\Rights' => '/lib/rights.class.php',
+         'Rights' => '/lib/rights.class.php',
          'SubTrajectory' => '/lib/sub_trajectory.class.php',
          'SubTrajectoryCourse' => '/lib/sub_trajectory_course.class.php',
          'Trajectory' => '/lib/trajectory.class.php',

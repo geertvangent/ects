@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\bamaflex;
+namespace application\discovery\module\person\implementation\chamilo;
 
 use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
@@ -49,27 +49,6 @@ class Rights extends RightsUtil
         {
             return $this->create_module_location($module_instance_id, $parameters, $this->get_root_id('discovery_' . $module_instance_id), true);
         }
-    }
-
-    function user_module_is_allowed($right, $entities, $module_instance_id, $parameters)
-    {
-        if ($parameters->get_user_id() == Session :: get_user_id())
-        {
-            return true;
-        }
-        else
-        {
-            return $this->module_is_allowed($right, $entities, $module_instance_id, $parameters);
-        }
-    }
-
-    function is_visible($module_instance_id, $parameters)
-    {
-        $entities = array();
-        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
-        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
-        
-        return $this->user_module_is_allowed(self :: VIEW_RIGHT, $entities, $module_instance_id, $parameters);
     }
 
     function module_is_allowed($right, $entities, $module_instance_id, $parameters)
@@ -123,6 +102,27 @@ class Rights extends RightsUtil
         catch (Exception $exception)
         {
             return false;
+        }
+    }
+
+    function is_visible($module_instance_id, $parameters)
+    {
+        $entities = array();
+        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
+        
+        return $this->user_module_is_allowed(self :: VIEW_RIGHT, $entities, $module_instance_id, $parameters);
+    }
+
+    function user_module_is_allowed($right, $entities, $module_instance_id, $parameters)
+    {
+        if ($parameters->get_user_id() == Session :: get_user_id())
+        {
+            return true;
+        }
+        else
+        {
+            return $this->module_is_allowed($right, $entities, $module_instance_id, $parameters);
         }
     }
 

@@ -118,15 +118,7 @@ class ModuleInstance extends DataClass
                 return false;
             }
         }
-        
-        //        $succes = RepositoryRights :: get_instance()->create_location_in_external_instances_subtree($this->get_title(), $this->get_id(), RepositoryRights :: get_instance()->get_external_instances_subtree_root_id());
-        //        if (! $succes)
-        //        {
-        //            return false;
-        //        }
-        
-
-        return true;
+        return DiscoveryDataManager :: create_module_rights_storage_units($this);
     }
 
     public function delete()
@@ -216,18 +208,18 @@ class ModuleInstance extends DataClass
         }
         return true;
     }
-    
+
     function get_module_type()
     {
-    	if ($this->get_type())
-    	{
-    		$namespace = '\\' . $this->get_type() . '\Module';
-    		return $namespace :: get_type();
-    	}
-    	else
-    	{
-    		return self :: TYPE_DISABLED;
-    	}
+        if ($this->get_type())
+        {
+            $namespace = '\\' . $this->get_type() . '\Module';
+            return $namespace :: get_type();
+        }
+        else
+        {
+            return self :: TYPE_DISABLED;
+        }
     }
 
 }
