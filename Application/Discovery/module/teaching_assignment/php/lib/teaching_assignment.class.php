@@ -7,7 +7,7 @@ use application\discovery\DiscoveryItem;
 class TeachingAssignment extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_YEAR = 'year';
     const PROPERTY_TRAINING = 'training';
     const PROPERTY_TRAINING_ID = 'training_id';
@@ -28,8 +28,8 @@ class TeachingAssignment extends DiscoveryItem
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING);
     }
-    
- /**
+
+    /**
      * @return integer
      */
     function get_training_id()
@@ -60,8 +60,8 @@ class TeachingAssignment extends DiscoveryItem
     {
         $this->set_default_property(self :: PROPERTY_TRAINING, $training);
     }
-    
-/**
+
+    /**
      * @param string $training_id
      */
     function set_training_id($training_id)
@@ -86,7 +86,7 @@ class TeachingAssignment extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TRAINING;
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_NAME;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

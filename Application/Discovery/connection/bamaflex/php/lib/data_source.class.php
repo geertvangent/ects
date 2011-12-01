@@ -27,7 +27,7 @@ class DataSource extends \application\discovery\DataSource
         $this->connection->setOption('debug_handler', array(get_class($this), 'debug'));
         $this->connection->setOption('portability', MDB2_PORTABILITY_NONE);
         $this->connection->setCharset('utf8');
-
+        
         // Necessary to retrieve complete photos and other large datasets from the database
         $this->connection->prepare('SET TEXTSIZE 2000000')->execute();
     }

@@ -23,13 +23,13 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $programme_id = $course_results_parameters->get_programme_id();
         $source = $course_results_parameters->get_source();
-
+        
         if (! isset($this->course_results[$programme_id][$source]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_results_advanced] ';
             $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = ' . $source . ' ';
             $query .= 'ORDER BY person_last_name, person_first_name';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
             

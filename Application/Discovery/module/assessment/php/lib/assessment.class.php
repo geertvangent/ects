@@ -11,7 +11,7 @@ use common\libraries\DataClass;
 class Assessment extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Assessment properties
      */
@@ -29,7 +29,7 @@ class Assessment extends DataClass
         $extended_property_names[] = self :: PROPERTY_DATE;
         $extended_property_names[] = self :: PROPERTY_PUBLISHER;
         $extended_property_names[] = self :: PROPERTY_RESULT;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -59,6 +59,7 @@ class Assessment extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_DATE, $date);
     }
+
     /**
      * Returns the publisher of this Assessment.
      * @return string The publisher.
@@ -76,6 +77,7 @@ class Assessment extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_PUBLISHER, $publisher);
     }
+
     /**
      * Returns the result of this Assessment.
      * @return string The result.

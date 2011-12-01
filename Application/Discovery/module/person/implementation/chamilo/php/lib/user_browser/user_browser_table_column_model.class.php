@@ -22,7 +22,7 @@ class UserBrowserTableColumnModel extends DefaultUserTableColumnModel
     function __construct()
     {
         parent :: __construct();
-        $this->add_column(new ObjectTableColumn(Person:: PROPERTY_EMAIL));
+        $this->add_column(new ObjectTableColumn(Person :: PROPERTY_EMAIL));
         $this->set_default_order_column(1);
         $this->add_column(self :: get_modification_column());
     }

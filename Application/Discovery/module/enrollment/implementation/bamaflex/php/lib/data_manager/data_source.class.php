@@ -23,17 +23,17 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     function retrieve_contract_types($parameters)
     {
-    	$user_id = $parameters->get_user_id();
+        $user_id = $parameters->get_user_id();
         if (! isset($this->contract_types[$user_id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT DISTINCT [contract_type] FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY contract_type';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -42,7 +42,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-
+        
         return $this->contract_types[$user_id];
     }
 
@@ -52,17 +52,17 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     function retrieve_enrollments($parameters)
     {
-    	$id = $parameters->get_user_id();
+        $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT * FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC, id';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -87,7 +87,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 }

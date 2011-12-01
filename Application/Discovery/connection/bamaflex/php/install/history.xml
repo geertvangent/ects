@@ -3,14 +3,10 @@
 	<properties>
 		<property name="id" type="integer" unsigned="1" notnull="1"
 			autoincrement="true" />
-		<property name="history_id" type="integer" unsigned="1"
-			notnull="1" />
-		<property name="history_source" type="integer" unsigned="1"
-			notnull="1" />
-		<property name="previous_id" type="integer" unsigned="1"
-			notnull="1" />
-		<property name="previous_source" type="integer" unsigned="1"
-			notnull="1" />
+		<property name="history_id" type="integer" unsigned="1" notnull="1" />
+		<property name="history_source" type="integer" unsigned="1" notnull="1" />
+		<property name="previous_id" type="integer" unsigned="1" notnull="1" />
+		<property name="previous_source" type="integer" unsigned="1" notnull="1" />
 		<property name="type" type="text" length="255" fixed="true" />
 	</properties>
 </object>

@@ -13,7 +13,7 @@ use common\libraries\DataClass;
 class Mark extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Mark properties
      */
@@ -31,7 +31,7 @@ class Mark extends DataClass
         $extended_property_names[] = self :: PROPERTY_MOMENT;
         $extended_property_names[] = self :: PROPERTY_RESULT;
         $extended_property_names[] = self :: PROPERTY_STATUS;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

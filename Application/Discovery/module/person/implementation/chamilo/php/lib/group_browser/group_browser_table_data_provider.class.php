@@ -37,7 +37,7 @@ class GroupBrowserTableDataProvider extends ObjectTableDataProvider
     function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
-        return GroupDataManager::get_instance()->retrieve_groups($this->get_condition(), $offset, $count, $order_property);
+        return GroupDataManager :: get_instance()->retrieve_groups($this->get_condition(), $offset, $count, $order_property);
     }
 
     /**
@@ -46,7 +46,7 @@ class GroupBrowserTableDataProvider extends ObjectTableDataProvider
      */
     function get_object_count()
     {
-        return GroupDataManager::get_instance()->count_groups($this->get_condition());
+        return GroupDataManager :: get_instance()->count_groups($this->get_condition());
     }
 }
 ?>

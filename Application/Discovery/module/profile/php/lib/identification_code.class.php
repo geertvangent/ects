@@ -8,10 +8,10 @@ use common\libraries\DataClass;
 class IdentificationCode extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_CODE = 'code';
-
+    
     const TYPE_NATIONAL = 1;
     const TYPE_COMPANY = 2;
 
@@ -28,7 +28,7 @@ class IdentificationCode extends DataClass
      */
     function get_type_string()
     {
-        switch($this->get_type())
+        switch ($this->get_type())
         {
             case self :: TYPE_NATIONAL :
                 return 'NationalId';
@@ -70,7 +70,7 @@ class IdentificationCode extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_CODE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

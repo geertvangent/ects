@@ -10,10 +10,10 @@ use common\libraries\DataClass;
 class Nationality extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_NATIONALITY = 'nationality';
-
+    
     const TYPE_PRIMARY = 1;
     const TYPE_SECONDARY = 2;
 
@@ -72,7 +72,7 @@ class Nationality extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_NATIONALITY;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

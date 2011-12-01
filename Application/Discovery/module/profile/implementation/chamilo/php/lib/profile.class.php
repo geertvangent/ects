@@ -6,7 +6,7 @@ use application\discovery\DiscoveryDataManager;
 class Profile extends \application\discovery\module\profile\Profile
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_USERNAME = 'username';
     const PROPERTY_TIMEZONE = 'timezone';
 
@@ -49,7 +49,7 @@ class Profile extends \application\discovery\module\profile\Profile
     {
         $extended_property_names[] = self :: PROPERTY_USERNAME;
         $extended_property_names[] = self :: PROPERTY_TIMEZONE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

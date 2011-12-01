@@ -13,7 +13,7 @@ use common\libraries\DataClass;
 class Course extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Course properties
      */
@@ -33,7 +33,7 @@ class Course extends DataClass
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_MARKS;
         $extended_property_names[] = self :: PROPERTY_CHILDREN;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -93,26 +93,27 @@ class Course extends DataClass
 
     function get_mark_by_moment_id($moment_id)
     {
-//        if ($this->has_children())
-//        {
-//            $total_credits = 0;
-//            $total_results = 0;
-//
-//            foreach ($this->get_children() as $child)
-//            {
-//                foreach ($child->get_marks() as $mark)
-//                {
-//                    if ($mark->get_moment() == $moment_id && !is_null($mark->get_result()))
-//                    {
-//                        $total_credits += $child->get_credits();
-//                        $total_results += ($mark->get_result() * $child->get_credits());
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            return Mark :: factory($moment_id, ($total_results / $total_credits), 'McDuck');
-//        }
+        //        if ($this->has_children())
+        //        {
+        //            $total_credits = 0;
+        //            $total_results = 0;
+        //
+        //            foreach ($this->get_children() as $child)
+        //            {
+        //                foreach ($child->get_marks() as $mark)
+        //                {
+        //                    if ($mark->get_moment() == $moment_id && !is_null($mark->get_result()))
+        //                    {
+        //                        $total_credits += $child->get_credits();
+        //                        $total_results += ($mark->get_result() * $child->get_credits());
+        //                        break;
+        //                    }
+        //                }
+        //            }
+        //
+        //            return Mark :: factory($moment_id, ($total_results / $total_credits), 'McDuck');
+        //        }
+        
 
         foreach ($this->get_marks() as $mark)
         {
@@ -121,7 +122,7 @@ class Course extends DataClass
                 return $mark;
             }
         }
-
+        
         return Mark :: factory($moment_id, '', '');
     }
 

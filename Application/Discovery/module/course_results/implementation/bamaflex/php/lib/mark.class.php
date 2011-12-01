@@ -13,9 +13,9 @@ use common\libraries\DataClass;
 class Mark extends \application\discovery\module\course_results\Mark
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_SUB_STATUS = 'sub_status';
-
+    
     const STATUS_EXEMPTION = 1;
     const STATUS_CREDIT = 2;
     const STATUS_DELIBERATED = 3;
@@ -34,7 +34,7 @@ class Mark extends \application\discovery\module\course_results\Mark
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SUB_STATUS;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -70,7 +70,7 @@ class Mark extends \application\discovery\module\course_results\Mark
     static function status_string($status)
     {
         $prefix = 'MarkStatus';
-
+        
         switch ($status)
         {
             case self :: STATUS_EXEMPTION :

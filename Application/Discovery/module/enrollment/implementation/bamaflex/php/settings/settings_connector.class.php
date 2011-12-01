@@ -16,9 +16,9 @@ class SettingsConnector
         $condition = new EqualityCondition(DataSourceInstance :: PROPERTY_TYPE, 'application\discovery\connection\bamaflex');
         $instances = DiscoveryDataManager :: get_instance()->retrieve_data_source_instances($condition, null, null, array(
                 new ObjectTableOrder(DataSourceInstance :: PROPERTY_NAME)));
-
+        
         $data_sources = array();
-
+        
         if ($instances->size() == 0)
         {
             $data_sources[0] = Translation :: get('AddConnectionInstanceFirst');
@@ -30,7 +30,7 @@ class SettingsConnector
                 $data_sources[$instance->get_id()] = $instance->get_name();
             }
         }
-
+        
         return $data_sources;
     }
 }

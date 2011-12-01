@@ -9,7 +9,7 @@ class Activity extends DiscoveryItem
     const CLASS_NAME = __CLASS__;
     
     const PROPERTY_DESCRIPTION = 'description';
-    
+
     function get_description()
     {
         return $this->get_default_property(self :: PROPERTY_DESCRIPTION);

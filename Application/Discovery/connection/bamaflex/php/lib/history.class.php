@@ -11,7 +11,7 @@ use common\libraries\DataClass;
 class History extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * History properties
      */
@@ -33,7 +33,7 @@ class History extends DataClass
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_ID;
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_SOURCE;
         $extended_property_names[] = self :: PROPERTY_TYPE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -63,6 +63,7 @@ class History extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_HISTORY_ID, $history_id);
     }
+
     /**
      * Returns the history_source of this History.
      * @return int The history_source.
@@ -80,6 +81,7 @@ class History extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_HISTORY_SOURCE, $history_source);
     }
+
     /**
      * Returns the previous_id of this History.
      * @return int The previous_id.
@@ -97,6 +99,7 @@ class History extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_PREVIOUS_ID, $previous_id);
     }
+
     /**
      * Returns the previous_source of this History.
      * @return int The previous_source.
@@ -114,6 +117,7 @@ class History extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_PREVIOUS_SOURCE, $previous_source);
     }
+
     /**
      * Returns the type of this History.
      * @return string The type.

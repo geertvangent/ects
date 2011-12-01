@@ -70,7 +70,7 @@ class TimeframePart extends DiscoveryItem
      */
     function __toString()
     {
-        return DatetimeUtilities::format_locale_date('%b %d, %Y', strtotime($this->get_date()));
+        return DatetimeUtilities :: format_locale_date('%b %d, %Y', strtotime($this->get_date()));
     }
 }
 ?>

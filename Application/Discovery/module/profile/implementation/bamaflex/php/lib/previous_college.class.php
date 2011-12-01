@@ -13,7 +13,7 @@ use common\libraries\DataClass;
 class PreviousCollege extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * PreviousCollege properties
      */
@@ -49,7 +49,7 @@ class PreviousCollege extends DataClass
         $extended_property_names[] = self :: PROPERTY_COUNTRY_ID;
         $extended_property_names[] = self :: PROPERTY_COUNTRY_NAME;
         $extended_property_names[] = self :: PROPERTY_INFO;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -59,7 +59,7 @@ class PreviousCollege extends DataClass
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager:: get_instance();
+        return DiscoveryDataManager :: get_instance();
     }
 
     /**
@@ -79,6 +79,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_DATE, $date);
     }
+
     /**
      * Returns the degree_id of this PreviousCollege.
      * @return int The degree_id.
@@ -96,6 +97,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_DEGREE_ID, $degree_id);
     }
+
     /**
      * Returns the degree_type of this PreviousCollege.
      * @return int The degree_type.
@@ -113,6 +115,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_DEGREE_TYPE, $degree_type);
     }
+
     /**
      * Returns the degree_name of this PreviousCollege.
      * @return string The degree_name.
@@ -130,6 +133,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_DEGREE_NAME, $degree_name);
     }
+
     /**
      * Returns the school_id of this PreviousCollege.
      * @return int The school_id.
@@ -147,6 +151,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_SCHOOL_ID, $school_id);
     }
+
     /**
      * Returns the school_name of this PreviousCollege.
      * @return string The school_name.
@@ -164,6 +169,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_SCHOOL_NAME, $school_name);
     }
+
     /**
      * Returns the school_city of this PreviousCollege.
      * @return string The school_city.
@@ -181,6 +187,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_SCHOOL_CITY, $school_city);
     }
+
     /**
      * Returns the training_id of this PreviousCollege.
      * @return int The training_id.
@@ -198,6 +205,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
     }
+
     /**
      * Returns the training_name of this PreviousCollege.
      * @return string The training_name.
@@ -215,6 +223,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_TRAINING_NAME, $training_name);
     }
+
     /**
      * Returns the country_id of this PreviousCollege.
      * @return int The country_id.
@@ -232,6 +241,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_COUNTRY_ID, $country_id);
     }
+
     /**
      * Returns the country_name of this PreviousCollege.
      * @return string The country_name.
@@ -249,6 +259,7 @@ class PreviousCollege extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_COUNTRY_NAME, $country_name);
     }
+
     /**
      * Returns the info of this PreviousCollege.
      * @return string The info.

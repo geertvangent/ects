@@ -390,7 +390,7 @@ class Course extends DiscoveryItem
             {
                 $parameters = new Parameters($course->get_next_id(), $course->get_source());
                 
-                $course = DataManager:: get_instance($module_instance)->retrieve_course($parameters);
+                $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
                 $courses[] = $course;
             }
             while ($course instanceof Course && $course->get_next_id() && $recursive);

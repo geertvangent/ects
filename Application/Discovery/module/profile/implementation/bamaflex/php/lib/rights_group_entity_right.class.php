@@ -10,7 +10,7 @@ class RightsGroupEntityRight extends DataClass
     private $context;
     
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_ENTITY_ID = 'entity_id';
     const PROPERTY_ENTITY_TYPE = 'entity_type';
     const PROPERTY_GROUP_ID = 'group_id';
@@ -18,9 +18,8 @@ class RightsGroupEntityRight extends DataClass
 
     static function get_default_property_names()
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_RIGHT_ID,
-            self :: PROPERTY_ENTITY_ID, self :: PROPERTY_ENTITY_TYPE,
-            self :: PROPERTY_GROUP_ID));
+        return parent :: get_default_property_names(array(self :: PROPERTY_RIGHT_ID, self :: PROPERTY_ENTITY_ID, 
+                self :: PROPERTY_ENTITY_TYPE, self :: PROPERTY_GROUP_ID));
     }
 
     function get_context()
@@ -77,7 +76,7 @@ class RightsGroupEntityRight extends DataClass
     {
         return Rights :: get_instance();
     }
-    
+
     static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);

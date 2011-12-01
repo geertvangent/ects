@@ -110,9 +110,15 @@ class PreviousUniversity extends DataClass
     {
         switch ($type)
         {
-            case self :: TYPE_HIGHER_EDUCATION : return 'HigherEducation'; break;
-            case self :: TYPE_UNIVERSITY : return 'University'; break;
-            case self :: TYPE_SPECIAL : return 'Special'; break;
+            case self :: TYPE_HIGHER_EDUCATION :
+                return 'HigherEducation';
+                break;
+            case self :: TYPE_UNIVERSITY :
+                return 'University';
+                break;
+            case self :: TYPE_SPECIAL :
+                return 'Special';
+                break;
         
         }
     }

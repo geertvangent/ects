@@ -7,7 +7,7 @@ use application\discovery\DiscoveryItem;
 class Profile extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_NAME = 'name';
     const PROPERTY_IDENTIFICATION_CODE = 'identification_code';
     const PROPERTY_EMAIL = 'email';
@@ -152,7 +152,7 @@ class Profile extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_COMMUNICATION;
         $extended_property_names[] = self :: PROPERTY_LANGUAGE;
         $extended_property_names[] = self :: PROPERTY_PHOTO;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

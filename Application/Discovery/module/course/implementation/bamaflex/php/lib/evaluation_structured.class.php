@@ -75,7 +75,7 @@ class EvaluationStructured extends Evaluation
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
-    
+
     function get_permanent()
     {
         return $this->get_default_property(self :: PROPERTY_PERMANENT);
@@ -85,7 +85,7 @@ class EvaluationStructured extends Evaluation
     {
         $this->set_default_property(self :: PROPERTY_PERMANENT, $permanent);
     }
-    
+
     function get_percentage()
     {
         return $this->get_default_property(self :: PROPERTY_PERCENTAGE);
@@ -95,7 +95,6 @@ class EvaluationStructured extends Evaluation
     {
         $this->set_default_property(self :: PROPERTY_PERCENTAGE, $percentage);
     }
-    
 
     /**
      * @param multitype:string $extended_property_names

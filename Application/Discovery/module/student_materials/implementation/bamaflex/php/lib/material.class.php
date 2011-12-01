@@ -7,10 +7,10 @@ use application\discovery\DiscoveryItem;
 class Material extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_TYPE = 'type';
-
+    
     const TYPE_REQUIRED = 1;
     const TYPE_OPTIONAL = 0;
 
@@ -41,7 +41,7 @@ class Material extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
         $extended_property_names[] = self :: PROPERTY_TYPE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

@@ -11,7 +11,7 @@ use common\libraries\DataClass;
 class Assessment extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Assessment properties
      */
@@ -27,7 +27,7 @@ class Assessment extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_CLUSTER;
         $extended_property_names[] = self :: PROPERTY_SCALE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -57,6 +57,7 @@ class Assessment extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_CLUSTER, $cluster);
     }
+
     /**
      * Returns the scale of this Assessment.
      * @return string The scale.

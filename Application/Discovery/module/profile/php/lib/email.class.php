@@ -8,10 +8,10 @@ use common\libraries\DataClass;
 class Email extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_ADDRESS = 'address';
-
+    
     const TYPE_PRIVATE = 1;
     const TYPE_OFFICIAL = 2;
     const TYPE_OFFICIAL_DISCONTINUED = 3;
@@ -78,7 +78,7 @@ class Email extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_ADDRESS;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

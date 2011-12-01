@@ -18,7 +18,7 @@ use group\Group;
 use group\GroupDataManager;
 
 class BamaflexAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
-{   
+{
     const PARAM_MODULE_INSTANCE_ID = 'module_instance_id';
     const PARAM_PARAMETERS = 'parameters';
 
@@ -75,7 +75,7 @@ class BamaflexAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
             return;
         }
         
-        $condition = new EqualityCondition(GroupRelUser:: PROPERTY_GROUP_ID, $filter_id);
+        $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $filter_id);
         $relations = GroupDataManager :: get_instance()->retrieve_group_rel_users($condition);
         
         $user_ids = array();

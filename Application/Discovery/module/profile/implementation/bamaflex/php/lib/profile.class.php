@@ -28,7 +28,7 @@ class Profile extends \application\discovery\module\profile\Profile
         return $this->previous_college;
     }
 
-	/**
+    /**
      * @param field_type $previous_college
      */
     public function set_previous_college($previous_college)
@@ -36,7 +36,7 @@ class Profile extends \application\discovery\module\profile\Profile
         $this->previous_college = $previous_college;
     }
 
-	/**
+    /**
      * @return the $previous_university
      */
     public function get_previous_university()
@@ -44,7 +44,7 @@ class Profile extends \application\discovery\module\profile\Profile
         return $this->previous_university;
     }
 
-	/**
+    /**
      * @param field_type $previous_university
      */
     public function set_previous_university($previous_university)
@@ -52,7 +52,7 @@ class Profile extends \application\discovery\module\profile\Profile
         $this->previous_university = $previous_university;
     }
 
-	/**
+    /**
      * @return int
      */
     function get_gender()

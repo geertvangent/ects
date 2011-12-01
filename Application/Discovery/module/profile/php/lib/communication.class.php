@@ -8,17 +8,17 @@ use common\libraries\DataClass;
 class Communication extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_DEVICE = 'device';
     const PROPERTY_NUMBER = 'number';
-
+    
     const TYPE_DOMICILE = 1;
     const TYPE_MOBILE = 2;
     const TYPE_ALTERNATIVE = 3;
     const TYPE_OFFICE = 4;
     const TYPE_EMERGENCY = 5;
-
+    
     const DEVICE_TELEPHONE = 1;
     const DEVICE_FAX = 2;
     const DEVICE_MOBILE = 3;
@@ -131,7 +131,7 @@ class Communication extends DataClass
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_DEVICE;
         $extended_property_names[] = self :: PROPERTY_NUMBER;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

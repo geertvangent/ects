@@ -8,7 +8,7 @@ use common\libraries\DataClass;
 class Photo extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_MIME_TYPE = 'mime_type';
     const PROPERTY_DATA = 'data';
 
@@ -51,7 +51,7 @@ class Photo extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_MIME_TYPE;
         $extended_property_names[] = self :: PROPERTY_DATA;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -73,7 +73,7 @@ class Photo extends DataClass
         $source[] = 'base64';
         $source[] = ',';
         $source[] = $this->get_data();
-
+        
         return implode('', $source);
     }
 }

@@ -13,7 +13,7 @@ use common\libraries\DataClass;
 class Course extends \application\discovery\module\career\Course
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Course properties
      */
@@ -23,7 +23,7 @@ class Course extends \application\discovery\module\career\Course
     const PROPERTY_ENROLLMENT_ID = 'enrollment_id';
     const PROPERTY_TYPE = 'type';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
-
+    
     const TYPE_NORMAL = 1;
     // NL: AVO
     const TYPE_PREVIOUS = 2;
@@ -47,7 +47,7 @@ class Course extends \application\discovery\module\career\Course
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

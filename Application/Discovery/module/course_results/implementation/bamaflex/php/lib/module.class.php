@@ -38,7 +38,7 @@ class Module extends \application\discovery\module\course_results\Module
             
             if ($profile_module_instance)
             {
-                $user = UserDataManager:: get_instance()->retrieve_user_by_official_code($course_result->get_person_id());
+                $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($course_result->get_person_id());
                 if ($user)
                 {
                     $parameters = new \application\discovery\module\profile\Parameters($user->get_id());
@@ -92,7 +92,7 @@ class Module extends \application\discovery\module\course_results\Module
     {
         return self :: get_module_parameters();
     }
-    
+
     static function get_module_parameters()
     {
         $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
@@ -110,7 +110,6 @@ class Module extends \application\discovery\module\course_results\Module
         return $parameter;
     
     }
-    
 
     /**
      * @return multitype:string

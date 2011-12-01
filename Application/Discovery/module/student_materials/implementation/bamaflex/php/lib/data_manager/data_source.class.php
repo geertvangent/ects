@@ -25,17 +25,17 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     function retrieve_years($parameters)
     {
-    	$id = $parameters->get_user_id();
+        $id = $parameters->get_user_id();
         if (! isset($this->years[$id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT DISTINCT [year] FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -44,7 +44,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-
+        
         return $this->years[$id];
     }
 
@@ -54,18 +54,18 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     function retrieve_enrollments($parameters)
     {
-    	$id = $parameters->get_user_id();
-    
+        $id = $parameters->get_user_id();
+        
         if (! isset($this->enrollments[$id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT * FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC, id';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -83,12 +83,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $enrollment->set_option_choice($this->convert_to_utf8($result->option_choice));
                     $enrollment->set_graduation_option($this->convert_to_utf8($result->graduation_option));
                     $enrollment->set_result($result->result);
-                                 
+                    
                     $this->enrollments[$id][] = $enrollment;
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 
@@ -101,20 +101,20 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         if (! isset($this->courses[$enrollment_id]))
         {
             $child_courses = $this->retrieve_child_courses($enrollment_id);
-
+            
             $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
             $query .= 'WHERE programme_parent_id IS NULL AND enrollment_id = ' . $enrollment_id . ' ';
             $query .= 'ORDER BY year, name';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
                     $course = $this->result_to_course($result);
-
+                    
                     if ($result->programme_id && isset($child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
                     {
                         foreach ($child_courses[$result->source][$result->enrollment_id][$result->programme_id] as $child_course)
@@ -122,12 +122,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                             $course->add_child($child_course);
                         }
                     }
-
+                    
                     $this->courses[$enrollment_id][] = $course;
                 }
             }
         }
-
+        
         return $this->courses[$enrollment_id];
     }
 
@@ -138,10 +138,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
             $query .= 'WHERE programme_parent_id IS NOT NULL AND enrollment_id = ' . $enrollment_id . ' ';
             $query .= 'ORDER BY year, trajectory_part, name';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -150,7 +150,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-
+        
         return $this->child_courses[$enrollment_id];
     }
 
@@ -166,7 +166,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_trajectory_part($result->trajectory_part);
         $course->set_credits($result->credits);
         $course->set_weight($result->weight);
-
+        
         return $course;
     }
 
@@ -176,15 +176,15 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     function retrieve_materials($programme_id)
     {
-
+        
         if (! isset($this->materials[$programme_id]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_material] ';
             $query .= 'WHERE programme_id = "' . $programme_id . '"';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -205,12 +205,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $material->set_for_sale($result->for_sale);
                     $material->set_type($result->required);
                     $material->set_description($this->convert_to_utf8($result->remarks));
-
+                    
                     $this->materials[$programme_id][] = $material;
                 }
             }
         }
-
+        
         return $this->materials[$programme_id];
     }
 }

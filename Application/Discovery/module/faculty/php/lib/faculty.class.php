@@ -7,7 +7,7 @@ use application\discovery\DiscoveryItem;
 class Faculty extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_YEAR = 'year';
     const PROPERTY_NAME = 'name';
 
@@ -50,7 +50,7 @@ class Faculty extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_NAME;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

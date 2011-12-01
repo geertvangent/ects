@@ -40,7 +40,7 @@ class Dean extends DiscoveryItem
     {
         $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
     }
-    
+
     function get_function_id()
     {
         return $this->get_default_property(self :: PROPERTY_FUNCTION_ID);
@@ -50,7 +50,7 @@ class Dean extends DiscoveryItem
     {
         $this->set_default_property(self :: PROPERTY_FUNCTION_ID, $function_id);
     }
-    
+
     function get_person()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON);
@@ -60,7 +60,7 @@ class Dean extends DiscoveryItem
     {
         $this->set_default_property(self :: PROPERTY_PERSON, $person);
     }
-    
+
     function get_function()
     {
         return $this->get_default_property(self :: PROPERTY_FUNCTION);
@@ -81,7 +81,7 @@ class Dean extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_FUNCTION_ID;
         $extended_property_names[] = self :: PROPERTY_PERSON;
         $extended_property_names[] = self :: PROPERTY_FUNCTION;
-                
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

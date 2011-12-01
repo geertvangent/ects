@@ -110,7 +110,7 @@ class Module extends \application\discovery\module\person\Module
         
         $parameters = $this->get_application()->get_parameters();
         $parameters[GroupManager :: PARAM_GROUP_ID] = $this->get_group();
-        $parameters[DiscoveryManager:: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         
         $query = $this->action_bar->get_query();
         if (isset($query) && $query != '')
