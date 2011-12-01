@@ -146,7 +146,7 @@ class Module
      * @param user\User $user
      * @return \common\libraries\ToolbarItem|NULL
      */
-    function get_module_link($type, $user)
+    function get_module_link($type, $user_id)
     {
         $module_instance = \application\discovery\Module :: exists($type);
 
@@ -154,7 +154,7 @@ class Module
         {
             $class_parameters = $type . '\Parameters';
             $parameters = new $class_parameters();
-            $parameters->set_user_id($user->get_id());
+            $parameters->set_user_id($user_id);
 
             $class_rights = $type . '\Rights';
             $class_user_entity = $type . '\RightsUserEntity';
