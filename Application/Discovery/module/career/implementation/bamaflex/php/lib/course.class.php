@@ -31,12 +31,14 @@ class Course extends \application\discovery\module\career\Course
     const TYPE_PREVIOUS = 2;
     // NL: EGO
     const TYPE_EXTERNAL = 3;
-    // NL: Credithistoriek
+    // NL: Credithistoriek - Actief
     const TYPE_CREDIT_HISTORY = 4;
     // NL: Uitgeschreven
     const TYPE_STRUCK = 5;
     // NL : Uitwisseling
     const TYPE_EXCHANGE = 6;
+    // NL: Credithistoriek - Inactief
+    const TYPE_CREDIT_HISTORY_INACTIVE = 7;
 
     /**
      * Get the default properties
@@ -83,7 +85,6 @@ class Course extends \application\discovery\module\career\Course
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
-
 
     /**
      * Returns the trajectory_part of this Course.
@@ -202,6 +203,9 @@ class Course extends \application\discovery\module\career\Course
             case self :: TYPE_CREDIT_HISTORY :
                 return 'CreditHistory';
                 break;
+            case self :: TYPE_CREDIT_HISTORY_INACTIVE :
+                return 'CreditHistoryInactive';
+                break;
             case self :: TYPE_STRUCK :
                 return 'Struck';
                 break;
@@ -217,7 +221,7 @@ class Course extends \application\discovery\module\career\Course
     static function get_types()
     {
         return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS, self :: TYPE_EXTERNAL, self :: TYPE_CREDIT_HISTORY,
-                self :: TYPE_STRUCK, self :: TYPE_EXCHANGE);
+                self :: TYPE_STRUCK, self :: TYPE_EXCHANGE, self :: TYPE_CREDIT_HISTORY_INACTIVE);
     }
 
     /**
