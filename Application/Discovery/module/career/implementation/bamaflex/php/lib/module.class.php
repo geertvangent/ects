@@ -114,8 +114,8 @@ class Module extends \application\discovery\module\career\Module
                     foreach ($course->get_children() as $child)
                     {
                         $row = array();
-                        $row[] = $child->get_year();
-                        $row[] = $child->get_credits();
+                        $row[] = '<span class="course_child_text">' . $child->get_year() . '</span>';
+                        $row[] = '<span class="course_child_text">' . $child->get_credits() . '</span>';
 
                         if ($child->is_special_type())
                         {
@@ -132,11 +132,11 @@ class Module extends \application\discovery\module\career\Module
                         {
                             $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
                             $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
-                            $row[] = '<span class="course_child"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
+                            $row[] = '<span class="course_child_link"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
                         }
                         else
                         {
-                            $row[] = '<span class="course_child">' . $child->get_name() . '</span>';
+                            $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                         }
 
                         foreach ($this->get_mark_moments() as $mark_moment)
