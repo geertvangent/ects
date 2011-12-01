@@ -19,7 +19,7 @@ class ModuleInstanceManager extends SubManager
     const PARAM_INSTANCE_ACTION = 'action';
     const PARAM_TYPE = 'type';
     const PARAM_CONTENT_TYPE = 'content_type';
-
+    
     const ACTION_BROWSE_INSTANCES = 'browser';
     const ACTION_ACTIVATE_INSTANCE = 'activator';
     const ACTION_DEACTIVATE_INSTANCE = 'deactivator';
@@ -27,13 +27,13 @@ class ModuleInstanceManager extends SubManager
     const ACTION_DELETE_INSTANCE = 'deleter';
     const ACTION_CREATE_INSTANCE = 'creator';
     const ACTION_MANAGE_INSTANCE_RIGHTS = 'rights_editor';
-
+    
     const DEFAULT_ACTION = self :: ACTION_BROWSE_INSTANCES;
 
     function __construct($repository_manager)
     {
         parent :: __construct($repository_manager);
-
+        
         $instance_action = Request :: get(self :: PARAM_INSTANCE_ACTION);
         if ($instance_action)
         {
@@ -96,11 +96,11 @@ class ModuleInstanceManager extends SubManager
         $instance_conditions = array();
         $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE, Registration :: TYPE_EXTERNAL_REPOSITORY_MANAGER);
         $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE, Registration :: TYPE_VIDEO_CONFERENCING_MANAGER);
-
+        
         $conditions = array();
         $conditions[] = new OrCondition($instance_conditions);
         $conditions[] = new EqualityCondition(Registration :: PROPERTY_STATUS, $status);
-
+        
         return AdminDataManager :: get_instance()->retrieve_registrations(new AndCondition($conditions));
     }
 

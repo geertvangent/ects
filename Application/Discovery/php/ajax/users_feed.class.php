@@ -89,9 +89,9 @@ class DiscoveryAjaxUsersFeed extends AjaxManager
             $conditions[] = new OrCondition($name_conditions);
         }
         
-//        $targets_entities = PhrasesRights :: get_instance()->get_phrases_targets_entities($this->get_parameter(self :: PARAM_PUBLICATION));
-//        
-//        $conditions[] = new InCondition(User :: PROPERTY_ID, $targets_entities[PublicationUserEntity :: ENTITY_TYPE]);
+        //        $targets_entities = PhrasesRights :: get_instance()->get_phrases_targets_entities($this->get_parameter(self :: PARAM_PUBLICATION));
+        //        
+        //        $conditions[] = new InCondition(User :: PROPERTY_ID, $targets_entities[PublicationUserEntity :: ENTITY_TYPE]);
         $condition = new AndCondition($conditions);
         return $udm->retrieve_users($condition, null, null, new ObjectTableOrder(User :: PROPERTY_FIRSTNAME));
     }

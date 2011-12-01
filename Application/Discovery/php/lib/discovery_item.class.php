@@ -17,12 +17,12 @@ class DiscoveryItem extends DataClass
 
     function get_instance()
     {
-    	return $this->instance;
+        return $this->instance;
     }
-    
+
     function set_instance($instance)
     {
-    	$this->instance = $instance;
+        $this->instance = $instance;
     }
 
     /**

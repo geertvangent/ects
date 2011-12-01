@@ -24,7 +24,8 @@ class RightsEditorManagerManagerComponent extends RightsEditorManager
             $succes = $form->handle_rights();
             
             $message = Translation :: get($succes ? 'RightsChanged' : 'RightsNotChanged');
-            $this->redirect($message, ! $succes, array(RightsEditorManager::PARAM_ACTION => RightsEditorManager::ACTION_EDIT_ADVANCED_RIGHTS));
+            $this->redirect($message, ! $succes, array(
+                    RightsEditorManager :: PARAM_ACTION => RightsEditorManager :: ACTION_EDIT_ADVANCED_RIGHTS));
         }
         
         $this->display_header();

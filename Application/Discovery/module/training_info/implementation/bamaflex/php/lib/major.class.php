@@ -15,7 +15,7 @@ class Major extends DiscoveryItem
     
     private $choices;
     private $choice_options;
-    
+
     /**
      * @return int
      */
@@ -68,7 +68,7 @@ class Major extends DiscoveryItem
     {
         return DiscoveryDataManager :: get_instance();
     }
-    
+
     function get_choices()
     {
         return $this->choices;

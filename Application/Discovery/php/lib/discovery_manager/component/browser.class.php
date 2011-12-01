@@ -30,12 +30,12 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
     function run()
     {
         $this->action_bar = $this->get_action_bar();
-
+        
         $parameters = $this->get_parameters(true);
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-
+        
         $table = new UserBrowserTable($this, $parameters, $this->get_condition());
-
+        
         $this->display_header();
         echo $this->action_bar->as_html() . '<br />';
         echo $table->as_html();
@@ -45,7 +45,7 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
     function get_condition()
     {
         $query = $this->action_bar->get_query();
-
+        
         if (isset($query) && $query != '')
         {
             $or_conditions[] = new PatternMatchCondition(User :: PROPERTY_FIRSTNAME, '*' . $query . '*');
@@ -64,7 +64,7 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
     {
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->set_search_url($this->get_url());
-
+        
         $action_bar->add_common_action(new ToolbarItem(Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_browser.png', $this->get_url(), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
     }

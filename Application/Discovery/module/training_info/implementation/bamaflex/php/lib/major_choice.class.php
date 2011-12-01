@@ -12,7 +12,7 @@ class MajorChoice extends DiscoveryItem
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_MAJOR_ID = 'major_id';
     const PROPERTY_NAME = 'name';
-    
+
     /**
      * @return int
      */

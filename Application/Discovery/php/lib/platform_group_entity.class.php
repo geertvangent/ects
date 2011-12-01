@@ -155,7 +155,7 @@ class PlatformGroupEntity extends \rights\PlatformGroupEntity
         return new AdvancedElementFinderElementType('platform_groups', Translation :: get('PlatformGroups'), __NAMESPACE__, 'platform_groups_feed', array(
                 'publication_id' => $this->publication_id));
     }
-    
+
     function retrieve_entity_items($condition = null, $offset = null, $count = null, $order_property = null)
     {
         return GroupDataManager :: get_instance()->retrieve_groups($condition, $offset, $count, $order_property);

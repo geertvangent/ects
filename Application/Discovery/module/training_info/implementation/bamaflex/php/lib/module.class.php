@@ -29,7 +29,7 @@ class Module extends \application\discovery\module\training_info\Module
     const TAB_GENERAL = 1;
     const TAB_OPTIONS = 2;
     const TAB_TRAJECTORIES = 3;
-
+    
     const TAB_OPTION_CHOICES = 1;
     const TAB_OPTION_MAJORS = 2;
     const TAB_OPTION_PACKAGES = 3;
@@ -43,7 +43,7 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $html = array();
         $training = $this->get_training();
-
+        
         $html[] = '<h3>';
         if ($training->get_previous_id())
         {
@@ -54,7 +54,7 @@ class Module extends \application\discovery\module\training_info\Module
         else
         {
             $html[] = Theme :: get_common_image('action_prev_na', 'png', Translation :: get('PreviousNA'), null, ToolbarItem :: DISPLAY_ICON);
-
+        
         }
         $html[] = $training->get_name();
         if ($training->get_next_id())
@@ -66,14 +66,14 @@ class Module extends \application\discovery\module\training_info\Module
         else
         {
             $html[] = Theme :: get_common_image('action_next_na', 'png', Translation :: get('NextNA'), null, ToolbarItem :: DISPLAY_ICON);
-
+        
         }
         $html[] = '</h3>';
-
+        
         $tabs = new DynamicTabsRenderer('training');
-
+        
         $tabs->add_tab(new DynamicContentTab(self :: TAB_GENERAL, Translation :: get('General'), Theme :: get_image_path() . 'tabs/' . self :: TAB_GENERAL . '.png', $this->get_general()));
-
+        
         if ($training->has_options())
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTIONS, Translation :: get('Options'), Theme :: get_image_path() . 'tabs/' . self :: TAB_OPTIONS . '.png', $this->get_options()));
@@ -82,7 +82,7 @@ class Module extends \application\discovery\module\training_info\Module
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_TRAJECTORIES, Translation :: get('Trajectories'), Theme :: get_image_path() . 'tabs/' . self :: TAB_TRAJECTORIES . '.png', $this->get_trajectories()));
         }
-
+        
         $html[] = $tabs->render();
         return implode("\n", $html);
     }
@@ -93,10 +93,10 @@ class Module extends \application\discovery\module\training_info\Module
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $training->get_year();
-
+        
         $history = array();
         $tainings = $training->get_all($this->get_module_instance());
-
+        
         foreach ($tainings as $training_history)
         {
             $parameters = new Parameters($training_history->get_id(), $training_history->get_source());
@@ -104,18 +104,18 @@ class Module extends \application\discovery\module\training_info\Module
             $history[] = '<a href="' . $link . '">' . $training_history->get_year() . '</a>';
         }
         $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
-
+        
         $properties[Translation :: get('BamaType')] = $training->get_bama_type_string();
         $properties[Translation :: get('Type')] = $training->get_type();
         $properties[Translation :: get('Domain')] = $training->get_domain();
         $properties[Translation :: get('Credits')] = $training->get_credits();
-
+        
         $properties[Translation :: get('StartDate')] = $training->get_start_date();
         $properties[Translation :: get('EndDate')] = $training->get_end_date();
         $properties[Translation :: get('Languages')] = $training->get_languages_string();
-
+        
         $table = new PropertiesTable($properties);
-
+        
         $html[] = $table->toHtml();
         if (! StringUtilities :: is_null_or_empty($training->get_goals(), true))
         {
@@ -136,22 +136,22 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('options');
-
+        
         if ($training->has_choices())
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTION_CHOICES, Translation :: get('Choices'), null, $this->get_choices()));
         }
-
+        
         if ($training->has_majors())
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTION_MAJORS, Translation :: get('Majors'), null, $this->get_majors()));
         }
-
+        
         if ($training->has_packages())
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTION_PACKAGES, Translation :: get('Packages'), null, $this->get_packages()));
         }
-
+        
         return $tabs->render();
     }
 
@@ -165,7 +165,7 @@ class Module extends \application\discovery\module\training_info\Module
         {
             $row = array();
             $row[] = $choice->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -174,13 +174,13 @@ class Module extends \application\discovery\module\training_info\Module
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         $data = array();
         foreach ($training->get_choice_options() as $choice_option)
         {
             $row = array();
             $row[] = $choice_option->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -189,43 +189,43 @@ class Module extends \application\discovery\module\training_info\Module
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         return implode("\n", $html);
     }
 
     function get_majors()
     {
         $training = $this->get_training();
-
+        
         $html = array();
         $data = array();
         foreach ($training->get_majors() as $major)
         {
             $row = array();
             $row[] = $major->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
         $table->set_header(0, Translation :: get('Major'), false);
         $html[] = $table->as_html();
-
+        
         if ($training->has_major_choices())
         {
             $tabs = new DynamicTabsRenderer('majors');
-
+            
             foreach ($training->get_majors() as $major)
             {
                 if ($major->has_choices())
                 {
                     $tabs->add_tab(new DynamicContentTab($major->get_id(), $major->get_name(), null, $this->get_major_choices($major)));
-
+                
                 }
             }
-
+            
             $html[] = '<br/>' . $tabs->render();
         }
         return implode("\n", $html);
@@ -235,13 +235,13 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $html = array();
         $data = array();
-
+        
         $html[] = '<div>';
         foreach ($major->get_choices() as $choice)
         {
             $row = array();
             $row[] = $choice->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -250,13 +250,13 @@ class Module extends \application\discovery\module\training_info\Module
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         $data = array();
         foreach ($major->get_choice_options() as $choice_option)
         {
             $row = array();
             $row[] = $choice_option->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -265,10 +265,10 @@ class Module extends \application\discovery\module\training_info\Module
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         return implode("\n", $html);
     }
 
@@ -276,12 +276,12 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('packages');
-
+        
         foreach ($training->get_packages() as $package)
         {
             $tabs->add_tab(new DynamicContentTab($package->get_id(), $package->get_name(), null, $this->get_package_courses($package)));
         }
-
+        
         return $tabs->render();
     }
 
@@ -291,12 +291,12 @@ class Module extends \application\discovery\module\training_info\Module
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
                 'data_source' => $data_source));
-
+        
         foreach ($package->get_courses() as $course)
         {
             $row = array();
             $row[] = $course->get_credits();
-
+            
             if ($course_module_instance)
             {
                 $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
@@ -307,7 +307,7 @@ class Module extends \application\discovery\module\training_info\Module
             {
                 $row[] = $course->get_name();
             }
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -321,24 +321,24 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('trajectories');
-
+        
         foreach ($training->get_trajectories() as $trajectory)
         {
             $tabs->add_tab(new DynamicContentTab($trajectory->get_id(), $trajectory->get_name(), null, $this->get_sub_trajectories($trajectory)));
         }
-
+        
         return $tabs->render();
     }
 
     function get_sub_trajectories($trajectory)
     {
         $tabs = new DynamicTabsRenderer('sub_trajectories_' . $trajectory->get_id());
-
+        
         foreach ($trajectory->get_trajectories() as $trajectory)
         {
             $tabs->add_tab(new DynamicContentTab($trajectory->get_id(), $trajectory->get_name(), null, $this->get_sub_trajectory_courses($trajectory)));
         }
-
+        
         return $tabs->render();
     }
 
@@ -348,12 +348,12 @@ class Module extends \application\discovery\module\training_info\Module
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
                 'data_source' => $data_source));
-
+        
         foreach ($trajectory->get_courses() as $course)
         {
             $row = array();
             $row[] = $course->get_credits();
-
+            
             if ($course_module_instance)
             {
                 $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
@@ -364,16 +364,16 @@ class Module extends \application\discovery\module\training_info\Module
             {
                 $row[] = $course->get_name();
             }
-
+            
             $data[] = $row;
-
+            
             if ($course->has_children())
             {
                 foreach ($course->get_children() as $child)
                 {
                     $row = array();
                     $row[] = '<span class="course_child_text">' . $child->get_credits() . '</span>';
-
+                    
                     if ($course_module_instance)
                     {
                         $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
@@ -384,10 +384,10 @@ class Module extends \application\discovery\module\training_info\Module
                     {
                         $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                     }
-
+                    
                     $data[] = $row;
                 }
-
+            
             }
         }
         $table = new SortableTable($data);

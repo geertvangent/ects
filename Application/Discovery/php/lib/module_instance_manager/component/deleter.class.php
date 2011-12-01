@@ -14,27 +14,27 @@ class ModuleInstanceManagerDeleterComponent extends ModuleInstanceManager
         {
             $this->not_allowed();
         }
-
+        
         $ids = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
         $failures = 0;
-
+        
         if (! empty($ids))
         {
             if (! is_array($ids))
             {
                 $ids = array($ids);
             }
-
+            
             foreach ($ids as $id)
             {
-                $module_instance = DiscoveryDataManager::get_instance()->retrieve_module_instance($id);
-
+                $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($id);
+                
                 if (! $module_instance->delete())
                 {
                     $failures ++;
                 }
             }
-
+            
             if ($failures)
             {
                 if (count($ids) == 1)
@@ -61,12 +61,14 @@ class ModuleInstanceManagerDeleterComponent extends ModuleInstanceManager
                     $parameter = array('OBJECTS' => Translation :: get('VideosConferencing'));
                 }
             }
-
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+            
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
+                    ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES)));
+            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array(
+                    'OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES)));
         }
     }
 }

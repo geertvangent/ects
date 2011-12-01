@@ -151,9 +151,9 @@ class Module extends \application\discovery\module\training\Module
         $faculties = $this->faculty->get_all($this->get_module_instance());
         foreach ($faculties as $faculty)
         {
-        	$parameters = new Parameters($faculty->get_id(), $faculty->get_source());
+            $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
             $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-        	$history[] = '<a href="' .  $link. '">' . $faculty->get_year() . '</a>';
+            $history[] = '<a href="' . $link . '">' . $faculty->get_year() . '</a>';
         }
         $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
         

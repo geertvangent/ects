@@ -30,7 +30,7 @@ class GroupRightBrowserTableDataProvider extends ObjectTableDataProvider
     {
         $order_property = $this->get_order_property($order_property);
         
-        return GroupDataManager:: get_instance()->retrieve_groups($this->get_condition(), $offset, $count, $order_property);
+        return GroupDataManager :: get_instance()->retrieve_groups($this->get_condition(), $offset, $count, $order_property);
     }
 
     function get_object_count()

@@ -33,7 +33,7 @@ class UserBrowserTable extends ObjectTable
         $data_provider = new UserBrowserTableDataProvider($browser, $condition);
         parent :: __construct($data_provider, Utilities :: get_classname_from_namespace(__CLASS__, true), $model, $renderer);
         $this->set_additional_parameters($parameters);
-
+        
         $this->set_default_row_count(20);
     }
 }

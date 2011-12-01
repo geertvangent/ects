@@ -3,7 +3,8 @@ namespace application\discovery\module\training_info;
 
 class Parameters extends \application\discovery\Parameters
 {
- function __construct($training_id)
+
+    function __construct($training_id)
     {
         $this->set_training_id($training_id);
     }

@@ -7,14 +7,14 @@ use application\discovery\DiscoveryDataManager;
 class SubTrajectoryCourse extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_NAME = 'name';
     const PROPERTY_TRAJECTORY_PART = 'trajectory_part';
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_SUB_TRAJECTORY_ID = 'sub_trajectory_id';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
-
+    
     private $children;
 
     /**
@@ -111,7 +111,7 @@ class SubTrajectoryCourse extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_PART;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

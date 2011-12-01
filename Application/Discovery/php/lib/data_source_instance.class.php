@@ -12,7 +12,7 @@ use common\libraries\AndCondition;
 class DataSourceInstance extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_NAME = 'name';
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_TYPE = 'type';
@@ -49,7 +49,7 @@ class DataSourceInstance extends DataClass
 
     static function get_default_property_names()
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_NAME, self :: PROPERTY_DESCRIPTION,
+        return parent :: get_default_property_names(array(self :: PROPERTY_NAME, self :: PROPERTY_DESCRIPTION, 
                 self :: PROPERTY_TYPE));
     }
 
@@ -74,13 +74,13 @@ class DataSourceInstance extends DataClass
                 return false;
             }
         }
-
+        
         //        $succes = RepositoryRights :: get_instance()->create_location_in_external_instances_subtree($this->get_title(), $this->get_id(), RepositoryRights :: get_instance()->get_external_instances_subtree_root_id());
         //        if (! $succes)
         //        {
         //            return false;
         //        }
-
+        
 
         return true;
     }
@@ -95,7 +95,7 @@ class DataSourceInstance extends DataClass
         {
             $condition = new EqualityCondition(DataSourceInstanceSetting :: PROPERTY_DATA_SOURCE_INSTANCE_ID, $this->get_id());
             $settings = $this->get_data_manager()->retrieve_data_source_instance_settings($condition);
-
+            
             while ($setting = $settings->next_result())
             {
                 if (! $setting->delete())
@@ -104,7 +104,7 @@ class DataSourceInstance extends DataClass
                 }
             }
         }
-
+        
         //        $location = RepositoryRights :: get_instance()->get_location_by_identifier_from_external_instances_subtree($this->get_id());
         //        if ($location)
         //        {
@@ -113,7 +113,7 @@ class DataSourceInstance extends DataClass
         //                return false;
         //            }
         //        }
-
+        
 
         return true;
     }
@@ -132,7 +132,7 @@ class DataSourceInstance extends DataClass
     {
         $condition = new EqualityCondition(DataSourceInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
         $settings = DiscoveryDataManager :: get_instance()->count_data_source_instance_settings($condition);
-
+        
         return $settings > 0;
     }
 

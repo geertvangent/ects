@@ -1,15 +1,14 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\Theme;
+use common\libraries\Translation;
+use common\libraries\ToolbarItem;
 use common\libraries\Path;
-
 use common\libraries\Filesystem;
-
 use common\libraries\NotCondition;
-
 use common\libraries\EqualityCondition;
 use common\libraries\AndCondition;
-
 use common\libraries\Application;
 
 /**
@@ -22,7 +21,7 @@ class Module
      * @var Application
      */
     private $application;
-    
+
     /**
      * @var ModuleInstance
      */
@@ -78,7 +77,7 @@ class Module
         $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_TYPE, $type);
         $conditions[] = new NotCondition(new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, ModuleInstance :: TYPE_DISABLED));
         $condition = new AndCondition($conditions);
-        
+
         $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition);
         while ($module_instance = $module_instances->next_result())
         {
@@ -121,7 +120,7 @@ class Module
     static function get_available_types()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
@@ -137,6 +136,46 @@ class Module
     function get_type()
     {
         return ModuleInstance :: TYPE_DISABLED;
+    }
+
+    /**
+     * Far from ideal and not really generic (because of the user)
+     * ... but it'll have to do for now
+     *
+     * @param string $type
+     * @param user\User $user
+     * @return \common\libraries\ToolbarItem|NULL
+     */
+    function get_module_link($type, $user)
+    {
+        $module_instance = \application\discovery\Module :: exists($type);
+
+        if ($module_instance)
+        {
+            $class_parameters = $type . '\Parameters';
+            $parameters = new $class_parameters();
+            $parameters->set_user_id($user->get_id());
+
+            $class_rights = $type . '\Rights';
+            $class_user_entity = $type . '\RightsUserEntity';
+            $class_group_entity = $type . '\RightsPlatformGroupEntity';
+
+            $entities = array();
+            $entities[$class_user_entity :: ENTITY_TYPE] = $class_user_entity :: get_instance();
+            $entities[$class_group_entity :: ENTITY_TYPE] = $class_group_entity :: get_instance();
+
+            if (! $class_rights :: get_instance()->module_is_allowed($class_rights :: VIEW_RIGHT, $entities, $module_instance->get_id(), $parameters))
+            {
+                return new ToolbarItem(Translation :: get('TypeName', null, $type), Theme :: get_image_path($type) . 'logo/16_na.png', null, ToolbarItem :: DISPLAY_ICON);
+            }
+            else
+            {
+                $url = $this->get_instance_url($module_instance->get_id(), $parameters);
+                return new ToolbarItem(Translation :: get('TypeName', null, $type), Theme :: get_image_path($type) . 'logo/16.png', $url, ToolbarItem :: DISPLAY_ICON);
+            }
+        }
+
+        return null;
     }
 }
 ?>

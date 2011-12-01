@@ -12,7 +12,7 @@ class Choice extends DiscoveryItem
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_TRAINING_ID = 'training_id';
     const PROPERTY_NAME = 'name';
-    
+
     /**
      * @return int
      */

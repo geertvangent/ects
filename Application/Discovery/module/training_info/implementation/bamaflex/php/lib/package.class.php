@@ -14,7 +14,7 @@ class Package extends DiscoveryItem
     const PROPERTY_NAME = 'name';
     
     private $courses;
-    
+
     /**
      * @return int
      */
@@ -67,7 +67,7 @@ class Package extends DiscoveryItem
     {
         return DiscoveryDataManager :: get_instance();
     }
-    
+
     function get_courses()
     {
         return $this->courses;

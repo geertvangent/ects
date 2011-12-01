@@ -54,7 +54,7 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
             if (! $current_module_instance)
             {
                 $this->display_header();
-                echo Display::warning_message(Translation :: get('NoModuleInstance'), true);
+                echo Display :: warning_message(Translation :: get('NoModuleInstance'), true);
                 $this->display_footer();
             }
             $module_id = $current_module_instance->get_id();

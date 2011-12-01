@@ -48,7 +48,7 @@ class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
 
     function get_default_column()
     {
-        $user_namespace = Application:: determine_namespace(UserManager :: APPLICATION_NAME);
+        $user_namespace = Application :: determine_namespace(UserManager :: APPLICATION_NAME);
         
         $columns = array();
         $columns[] = new ObjectTableColumn(Group :: PROPERTY_NAME, true);

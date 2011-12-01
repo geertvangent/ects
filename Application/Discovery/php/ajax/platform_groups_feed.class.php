@@ -49,8 +49,8 @@ class DiscoveryAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
             $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT, 0);
         }
         
-//        $targets_entities = PhrasesRights :: get_instance()->get_phrases_targets_entities($this->get_parameter(self :: PARAM_PUBLICATION));
-//        $conditions[] = new InCondition(Group :: PROPERTY_ID, $targets_entities[PublicationPlatformGroupEntity :: ENTITY_TYPE]);
+        //        $targets_entities = PhrasesRights :: get_instance()->get_phrases_targets_entities($this->get_parameter(self :: PARAM_PUBLICATION));
+        //        $conditions[] = new InCondition(Group :: PROPERTY_ID, $targets_entities[PublicationPlatformGroupEntity :: ENTITY_TYPE]);
         $condition = new AndCondition($conditions);
         
         return GroupDataManager :: get_instance()->retrieve_groups($condition, null, null, array(

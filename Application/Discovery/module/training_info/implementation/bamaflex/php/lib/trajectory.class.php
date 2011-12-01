@@ -14,6 +14,7 @@ class Trajectory extends DiscoveryItem
     const PROPERTY_NAME = 'name';
     
     private $trajectories;
+
     /**
      * @return int
      */
@@ -66,7 +67,7 @@ class Trajectory extends DiscoveryItem
     {
         return DiscoveryDataManager :: get_instance();
     }
-    
+
     function get_trajectories()
     {
         return $this->trajectories;

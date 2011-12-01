@@ -30,7 +30,7 @@ class UserRightBrowserTableDataProvider extends ObjectTableDataProvider
     {
         $order_property = $this->get_order_property($order_property);
         
-        return UserDataManager:: get_instance()->retrieve_users($this->get_condition(), $offset, $count, $order_property);
+        return UserDataManager :: get_instance()->retrieve_users($this->get_condition(), $offset, $count, $order_property);
     }
 
     function get_object_count()

@@ -21,7 +21,7 @@ class UserRightBrowserTable extends ObjectTable
         
         $renderer = new UserRightBrowserTableCellRenderer($browser);
         
-        $model = new UserRightBrowserTableColumnModel($browser);        
+        $model = new UserRightBrowserTableColumnModel($browser);
         $data_provider = new UserRightBrowserTableDataProvider($browser, $condition);
         
         parent :: __construct($data_provider, Utilities :: get_classname_from_namespace(__CLASS__, true), $model, $renderer);
