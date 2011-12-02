@@ -27,6 +27,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     private $sub_trajectory_courses_children;
     private $major_choices;
     private $major_choice_options;
+    private $package_courses_children;
 
     /**
      * @param int $id
@@ -168,7 +169,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         
         if (! isset($this->packages[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_package_basic] ';
+            $query = 'SELECT * FROM [dbo].[v_discovery_training_package_advanced] ';
             $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
@@ -197,8 +198,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         if (! isset($this->package_courses[$id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_info_package_course_basic] ';
-            $query .= 'WHERE package_id = "' . $id . '" AND source = "' . $source . '"';
+            $query = 'SELECT * FROM [dbo].[v_discovery_training_info_package_course_advanced] ';
+            $query .= 'WHERE parent_programme_id IS NULL AND package_id = "' . $id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -215,6 +216,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $trajectory->set_trajectory_part($result->trajectory_part);
                     $trajectory->set_credits($result->credits);
                     $trajectory->set_programme_id($result->programme_id);
+                    $trajectory->set_children($this->retrieve_package_courses_children($id, $source, $trajectory->get_programme_id()));
                     
                     $this->package_courses[$id][$source][] = $trajectory;
                 }
@@ -408,6 +410,37 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         }
         
         return $this->sub_trajectory_courses_children[$id][$source][$parent_programme_id];
+    }
+
+    function retrieve_package_courses_children($id, $source, $parent_programme_id)
+    {
+        if (! isset($this->package_courses_children[$id][$source][$parent_programme_id]))
+        {
+            $query = 'SELECT * FROM [dbo].[v_discovery_training_info_package_course_advanced] ';
+            $query .= 'WHERE parent_programme_id = "' . $parent_programme_id . '" AND package_id = "' . $id . '" AND source = "' . $source . '"';
+            
+            $statement = $this->get_connection()->prepare($query);
+            $results = $statement->execute();
+            
+            if (! $results instanceof MDB2_Error)
+            {
+                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                {
+                    $package_course = new PackageCourse();
+                    $package_course->set_id($result->id);
+                    $package_course->set_package_id($result->package_id);
+                    $package_course->set_name($this->convert_to_utf8($result->name));
+                    $package_course->set_source($result->source);
+                    $package_course->set_trajectory_part($result->trajectory_part);
+                    $package_course->set_credits($result->credits);
+                    $package_course->set_programme_id($result->programme_id);
+                    
+                    $this->package_courses_children[$id][$source][$parent_programme_id][] = $package_course;
+                }
+            }
+        }
+        
+        return $this->package_courses_children[$id][$source][$parent_programme_id];
     }
 
     function retrieve_major_choices($id, $source)

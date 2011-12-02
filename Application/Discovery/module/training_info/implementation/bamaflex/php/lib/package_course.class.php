@@ -15,6 +15,8 @@ class PackageCourse extends DiscoveryItem
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_PACKAGE_ID = 'package_id';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
+    
+    private $children;
 
     /**
      * @return int
@@ -80,6 +82,26 @@ class PackageCourse extends DiscoveryItem
     function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
+    }
+
+    function get_children()
+    {
+        return $this->children;
+    }
+
+    function set_children($children)
+    {
+        $this->children = $children;
+    }
+
+    function add_child($child)
+    {
+        $this->children[] = $child;
+    }
+
+    function has_children()
+    {
+        return count($this->children) > 0;
     }
 
     static function get_default_property_names($extended_property_names = array())

@@ -803,7 +803,7 @@ class Module extends \application\discovery\module\course\Module
             
             foreach ($course->get_children() as $child)
             {
-                $parameters = new Parameters($child->get_id(), 1);
+                $parameters = new Parameters($child->get_id(), $child->get_source());
                 $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
                 $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
                 
