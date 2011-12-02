@@ -61,13 +61,13 @@ class UserBrowserTableCellRenderer extends DefaultUserTableCellRenderer
     {
         $toolbar = new Toolbar();
 
-        $profile_link = $this->browser->get_module_link('application\discovery\module\profile\implementation\bamaflex', $user);
+        $profile_link = $this->browser->get_module_link('application\discovery\module\profile\implementation\bamaflex', $user->get_id());
         if($profile_link)
         {
             $toolbar->add_item($profile_link);
         }
 
-        $career_link = $this->browser->get_module_link('application\discovery\module\career\implementation\bamaflex', $user);
+        $career_link = $this->browser->get_module_link('application\discovery\module\career\implementation\bamaflex', $user->get_id());
         if($career_link)
         {
             $toolbar->add_item($career_link);
