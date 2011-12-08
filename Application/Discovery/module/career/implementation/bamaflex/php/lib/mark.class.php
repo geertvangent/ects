@@ -13,10 +13,11 @@ use common\libraries\DataClass;
 class Mark extends \application\discovery\module\career\Mark
 {
     const CLASS_NAME = __CLASS__;
-    
+
     const PROPERTY_SUB_STATUS = 'sub_status';
     const PROPERTY_PUBLISH_STATUS = 'publish_status';
-    
+    const PROPERTY_ABANDONED = 'abandoned';
+
     const STATUS_EXEMPTION = 1;
     const STATUS_CREDIT = 2;
     const STATUS_DELIBERATED = 3;
@@ -27,6 +28,9 @@ class Mark extends \application\discovery\module\career\Mark
     const STATUS_NO_CREDIT = 8;
     const STATUS_DETERMINED = 9;
 
+    const ABANDONED_NO = 1;
+    const ABANDONED_YES = 2;
+
     /**
      * Get the default properties
      * @param multitype:string $extended_property_names
@@ -36,7 +40,8 @@ class Mark extends \application\discovery\module\career\Mark
     {
         $extended_property_names[] = self :: PROPERTY_SUB_STATUS;
         $extended_property_names[] = self :: PROPERTY_PUBLISH_STATUS;
-        
+        $extended_property_names[] = self :: PROPERTY_ABANDONED;
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -82,7 +87,7 @@ class Mark extends \application\discovery\module\career\Mark
     static function status_string($status)
     {
         $prefix = 'MarkStatus';
-        
+
         switch ($status)
         {
             case self :: STATUS_EXEMPTION :
@@ -116,6 +121,21 @@ class Mark extends \application\discovery\module\career\Mark
                 return parent :: status_string($status);
                 break;
         }
+    }
+
+    function get_abandoned()
+    {
+        return $this->get_default_property(self :: PROPERTY_ABANDONED);
+    }
+
+    function set_abandoned($abandoned)
+    {
+        $this->set_default_property(self :: PROPERTY_ABANDONED, $abandoned);
+    }
+
+    function is_abandoned()
+    {
+        return $this->get_abandoned() == self :: ABANDONED_YES;
     }
 
     static function factory($moment_id = 0, $result = null, $status = null, $sub_status = null)

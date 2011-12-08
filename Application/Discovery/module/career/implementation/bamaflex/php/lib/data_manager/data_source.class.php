@@ -322,7 +322,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT [source], [enrollment_programme_id], [result], [status], [sub_status], [try_id], [publish_status] FROM [dbo].[v_discovery_mark_advanced] ';
+            $query = 'SELECT [source], [enrollment_programme_id], [result], [status], [sub_status], [try_id], [publish_status], [abandoned] FROM [dbo].[v_discovery_mark_advanced] ';
             $query .= 'WHERE [person_id] = "' . $official_code . '"';
 
             $statement = $this->get_connection()->prepare($query);
@@ -338,6 +338,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $mark->set_status($mark_result->status);
                     $mark->set_sub_status($mark_result->sub_status);
                     $mark->set_publish_status($mark_result->publish_status);
+                    $mark->set_abandoned($mark_result->abandoned);
 
                     $this->marks[$user_id][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
                 }

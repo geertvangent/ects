@@ -1,3 +1,6 @@
 TypeName = "Person"
 Username = ""
 Timezone = ""
+Details = ""
+Code = ""
+Email = ""
