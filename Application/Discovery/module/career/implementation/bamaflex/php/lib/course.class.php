@@ -45,6 +45,8 @@ class Course extends \application\discovery\module\career\Course
     const TYPE_PREVIOUS_REFUSED = 9;
     // NL : EGO verzaakt
     const TYPE_EXTERNAL_REFUSED = 10;
+    // NL : Vrijstelling
+    const TYPE_EXEMPTION = 11;
 
     /**
      * Get the default properties
@@ -220,6 +222,15 @@ class Course extends \application\discovery\module\career\Course
                 break;
             case self :: TYPE_REFUSED :
                 return 'Refused';
+                break;
+            case self :: TYPE_PREVIOUS_REFUSED :
+                return 'PreviousRefused';
+                break;
+            case self :: TYPE_EXTERNAL_REFUSED :
+                return 'ExternalRefused';
+                break;
+            case self :: TYPE_EXEMPTION :
+                return 'Exemption';
                 break;
         }
     }

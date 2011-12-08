@@ -35,14 +35,13 @@ foreach ($xml_files as $xml_file)
 
         if (file_exists(dirname(__FILE__) . '/xml_schemas/php/' . Path :: namespace_to_path($content_object->getAttribute('namespace')) . '/php/lib/' . $content_object->getAttribute('name') . '.class.php'))
         {
+            Filesystem :: remove(dirname(__FILE__) . '/xml_schemas/php/' . Path :: namespace_to_path($content_object->getAttribute('namespace')) . '/php/lib/' . $content_object->getAttribute('name') . '.class.php');
             log_message('Object type already exists');
         }
-        else
-        {
-            //dump($xml_definition);
-            log_message('Generating data class');
-            $data_class_generator->generate_data_class($dom_xpath);
-        }
+
+        //dump($xml_definition);
+        log_message('Generating data class');
+        $data_class_generator->generate_data_class($dom_xpath);
 
         echo '<hr />';
     }

@@ -115,14 +115,28 @@ class DataClassGenerator
                             'PROPERTY_NAME' => $property_name, 'PROPERTY_TYPE' => $property_type));
 
                     $property_constants = $dom_xpath->query('/object/properties/property[@name="' . $property_name . '"]/option');
-                    if ($property_constants->length > 0);
+                    if ($property_constants->length > 0)
                     {
+                        $this->template->assign_block_vars("PROPERTY_CONSTS", array(
+                                'NAME' => strtoupper($property_name)));
                         foreach ($property_constants as $property_constant)
                         {
-                            $this->template->assign_block_vars("PROPERTY_CONSTS", array('NAME' => strtoupper($property_name)));
-                            $this->template->assign_block_vars("PROPERTY_CONSTS.OPTION", array('OPTION' => strtoupper($property_constant->nodeValue),
+                            $this->template->assign_block_vars("PROPERTY_CONSTS.OPTION", array(
+                                    'OPTION' => strtoupper($property_constant->nodeValue),
                                     'VALUE' => $property_constant->getAttribute('id')));
                         }
+
+                        $type_name = str_replace('_id', '', $property_name);
+
+                        $this->template->assign_block_vars("TYPES", array(
+                                'NAME' => strtoupper($type_name), 'FUNCTION' => $type_name));
+                        foreach ($property_constants as $property_constant)
+                        {
+                            $this->template->assign_block_vars("TYPES.OPTIONS", array(
+                                    'OPTION' => strtoupper($property_constant->nodeValue),
+                            		'TRANSLATION' => Utilities::underscores_to_camelcase($type_name) . $property_constant->nodeValue));
+                        }
+
                     }
                 }
 

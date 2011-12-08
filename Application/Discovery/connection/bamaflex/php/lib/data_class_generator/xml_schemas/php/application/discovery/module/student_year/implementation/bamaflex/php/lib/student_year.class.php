@@ -37,16 +37,18 @@ class StudentYear extends DiscoveryItem
      */
     const PROPERTY_REDUCED_REGISTRATION_FEE_ID = 'reduced_registration_fee_id';
 
-    const NO = 1;
-    const YES = 2;
-    const ALMOST = 3;
-    const PENDING = 4;
-    const REFUSED = 5;
-    const NO = 1;
-    const YES = 2;
-    const ALMOST = 3;
-    const PENDING = 4;
-    const REFUSED = 5;
+    const SCHOLARSHIP_ID_NO = 1;
+    const SCHOLARSHIP_ID_YES = 2;
+    const SCHOLARSHIP_ID_ALMOST = 3;
+    const SCHOLARSHIP_ID_PENDING = 4;
+    const SCHOLARSHIP_ID_REFUSED = 5;
+
+    const REDUCED_REGISTRATION_FEE_ID_NO = 1;
+    const REDUCED_REGISTRATION_FEE_ID_YES = 2;
+    const REDUCED_REGISTRATION_FEE_ID_ALMOST = 3;
+    const REDUCED_REGISTRATION_FEE_ID_PENDING = 4;
+    const REDUCED_REGISTRATION_FEE_ID_REFUSED = 5;
+
 
     /**
      * Get the default properties
@@ -182,6 +184,104 @@ class StudentYear extends DiscoveryItem
         $this->set_default_property(self :: PROPERTY_REDUCED_REGISTRATION_FEE_ID, $reduced_registration_fee_id);
     }
 
+	/**
+     * @return string
+     */
+    function get_scholarship_string()
+    {
+        return self :: scholarship_string($this->get_scholarship());
+    }
+
+    /**
+     * @return string
+     */
+    static function scholarship_string($scholarship)
+    {
+        switch ($scholarship)
+        {
+            case self :: SCHOLARSHIP_NO :
+                return 'ScholarshipNo';
+                break;
+            case self :: SCHOLARSHIP_YES :
+                return 'ScholarshipYes';
+                break;
+            case self :: SCHOLARSHIP_ALMOST :
+                return 'ScholarshipAlmost';
+                break;
+            case self :: SCHOLARSHIP_PENDING :
+                return 'ScholarshipPending';
+                break;
+            case self :: SCHOLARSHIP_REFUSED :
+                return 'ScholarshipRefused';
+                break;
+        }
+    }
+
+    /**
+     * @param boolean $types_only
+     * @return multitype:integer|multitype:string
+     */
+    static function get_scholarship_types($types_only = false)
+    {
+    	$types = array();
+
+        $types[self :: SCHOLARSHIP_NO] = self :: scholarship_string(self :: SCHOLARSHIP_NO);
+        $types[self :: SCHOLARSHIP_YES] = self :: scholarship_string(self :: SCHOLARSHIP_YES);
+        $types[self :: SCHOLARSHIP_ALMOST] = self :: scholarship_string(self :: SCHOLARSHIP_ALMOST);
+        $types[self :: SCHOLARSHIP_PENDING] = self :: scholarship_string(self :: SCHOLARSHIP_PENDING);
+        $types[self :: SCHOLARSHIP_REFUSED] = self :: scholarship_string(self :: SCHOLARSHIP_REFUSED);
+
+    	return ($types_only ? array_keys($types) : $types);
+    }
+	/**
+     * @return string
+     */
+    function get_reduced_registration_fee_string()
+    {
+        return self :: reduced_registration_fee_string($this->get_reduced_registration_fee());
+    }
+
+    /**
+     * @return string
+     */
+    static function reduced_registration_fee_string($reduced_registration_fee)
+    {
+        switch ($reduced_registration_fee)
+        {
+            case self :: REDUCED_REGISTRATION_FEE_NO :
+                return 'ReducedRegistrationFeeNo';
+                break;
+            case self :: REDUCED_REGISTRATION_FEE_YES :
+                return 'ReducedRegistrationFeeYes';
+                break;
+            case self :: REDUCED_REGISTRATION_FEE_ALMOST :
+                return 'ReducedRegistrationFeeAlmost';
+                break;
+            case self :: REDUCED_REGISTRATION_FEE_PENDING :
+                return 'ReducedRegistrationFeePending';
+                break;
+            case self :: REDUCED_REGISTRATION_FEE_REFUSED :
+                return 'ReducedRegistrationFeeRefused';
+                break;
+        }
+    }
+
+    /**
+     * @param boolean $types_only
+     * @return multitype:integer|multitype:string
+     */
+    static function get_reduced_registration_fee_types($types_only = false)
+    {
+    	$types = array();
+
+        $types[self :: REDUCED_REGISTRATION_FEE_NO] = self :: reduced_registration_fee_string(self :: REDUCED_REGISTRATION_FEE_NO);
+        $types[self :: REDUCED_REGISTRATION_FEE_YES] = self :: reduced_registration_fee_string(self :: REDUCED_REGISTRATION_FEE_YES);
+        $types[self :: REDUCED_REGISTRATION_FEE_ALMOST] = self :: reduced_registration_fee_string(self :: REDUCED_REGISTRATION_FEE_ALMOST);
+        $types[self :: REDUCED_REGISTRATION_FEE_PENDING] = self :: reduced_registration_fee_string(self :: REDUCED_REGISTRATION_FEE_PENDING);
+        $types[self :: REDUCED_REGISTRATION_FEE_REFUSED] = self :: reduced_registration_fee_string(self :: REDUCED_REGISTRATION_FEE_REFUSED);
+
+    	return ($types_only ? array_keys($types) : $types);
+    }
 
     /**
      * @return string The table name of the data class

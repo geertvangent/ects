@@ -23,6 +23,7 @@ class {OBJECT_CLASS} extends DiscoveryItem
     <!-- BEGIN OPTION -->
     const {PROPERTY_CONSTS.NAME}_{PROPERTY_CONSTS.OPTION.OPTION} = {PROPERTY_CONSTS.OPTION.VALUE};
     <!-- END OPTION -->
+    
     <!-- END PROPERTY_CONSTS -->
 
     /**
@@ -68,6 +69,45 @@ class {OBJECT_CLASS} extends DiscoveryItem
     }
     
     <!-- END PROPERTY -->
+    <!-- BEGIN TYPES -->
+	/**
+     * @return string
+     */
+    function get_{TYPES.FUNCTION}_string()
+    {
+        return self :: {TYPES.FUNCTION}_string($this->get_{TYPES.FUNCTION}());
+    }
+
+    /**
+     * @return string
+     */
+    static function {TYPES.FUNCTION}_string(${TYPES.FUNCTION})
+    {
+        switch (${TYPES.FUNCTION})
+        {
+        	<!-- BEGIN OPTIONS -->
+            case self :: {TYPES.NAME}_{TYPES.OPTIONS.OPTION} :
+                return '{TYPES.OPTIONS.TRANSLATION}';
+                break;
+            <!-- END OPTIONS -->
+        }
+    }
+    
+    /**
+     * @param boolean $types_only
+     * @return multitype:integer|multitype:string
+     */
+    static function get_{TYPES.FUNCTION}_types($types_only = false)
+    {
+    	$types = array();
+    	
+        <!-- BEGIN OPTIONS -->
+        $types[self :: {TYPES.NAME}_{TYPES.OPTIONS.OPTION}] = self :: {TYPES.FUNCTION}_string(self :: {TYPES.NAME}_{TYPES.OPTIONS.OPTION});
+        <!-- END OPTIONS -->
+        
+    	return ($types_only ? array_keys($types) : $types);
+    }
+    <!-- END TYPES -->
 
     /**
      * @return string The table name of the data class
