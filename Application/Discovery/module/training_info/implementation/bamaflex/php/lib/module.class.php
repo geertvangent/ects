@@ -114,6 +114,17 @@ class Module extends \application\discovery\module\training_info\Module
         $properties[Translation :: get('EndDate')] = $training->get_end_date();
         $properties[Translation :: get('Languages')] = $training->get_languages_string();
 
+        $groups = array();
+        foreach ($training->get_groups() as $group)
+        {
+            $groups[] = $group->get_group() . ' <em>('. $group->get_group_id() .')</em>';
+        }
+
+        if (count($groups) > 0)
+        {
+            $properties[Translation :: get('Groups')] = implode('<br />', $groups);
+        }
+
         $table = new PropertiesTable($properties);
 
         $html[] = $table->toHtml();
@@ -309,14 +320,14 @@ class Module extends \application\discovery\module\training_info\Module
             }
 
             $data[] = $row;
-            
+
             if ($course->has_children())
             {
                 foreach ($course->get_children() as $child)
                 {
                     $row = array();
                     $row[] = '<span class="course_child_text">' . $child->get_credits() . '</span>';
-                    
+
                     if ($course_module_instance)
                     {
                         $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
@@ -327,10 +338,10 @@ class Module extends \application\discovery\module\training_info\Module
                     {
                         $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                     }
-                    
+
                     $data[] = $row;
                 }
-            
+
             }
         }
         $table = new SortableTable($data);

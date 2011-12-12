@@ -1,6 +1,9 @@
 <?php
 namespace {NAMESPACE};
 
+use application\discovery\DiscoveryDataManager;
+use application\discovery\DiscoveryItem;
+
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
