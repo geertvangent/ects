@@ -1,6 +1,9 @@
 <?php
 namespace application\discovery\module\employment\implementation\bamaflex;
 
+use application\discovery\DiscoveryDataManager;
+use application\discovery\DiscoveryItem;
+
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
