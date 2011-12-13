@@ -10,6 +10,7 @@ class Autoloader
          'BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php',
          'Enrollment' => '/lib/enrollment.class.php',
          'Module' => '/lib/module.class.php',
+         'Parameters' => '/lib/parameters.class.php',
          'Rights' => '/lib/rights.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',

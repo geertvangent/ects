@@ -13,11 +13,11 @@ use common\libraries\DataClass;
 class Mark extends \application\discovery\module\career\Mark
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_SUB_STATUS = 'sub_status';
     const PROPERTY_PUBLISH_STATUS = 'publish_status';
     const PROPERTY_ABANDONED = 'abandoned';
-
+    
     const STATUS_EXEMPTION = 1;
     const STATUS_CREDIT = 2;
     const STATUS_DELIBERATED = 3;
@@ -27,7 +27,7 @@ class Mark extends \application\discovery\module\career\Mark
     const STATUS_POSTPONED = 7;
     const STATUS_NO_CREDIT = 8;
     const STATUS_DETERMINED = 9;
-
+    
     const ABANDONED_NO = 1;
     const ABANDONED_YES = 2;
 
@@ -41,7 +41,7 @@ class Mark extends \application\discovery\module\career\Mark
         $extended_property_names[] = self :: PROPERTY_SUB_STATUS;
         $extended_property_names[] = self :: PROPERTY_PUBLISH_STATUS;
         $extended_property_names[] = self :: PROPERTY_ABANDONED;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -87,7 +87,7 @@ class Mark extends \application\discovery\module\career\Mark
     static function status_string($status)
     {
         $prefix = 'MarkStatus';
-
+        
         switch ($status)
         {
             case self :: STATUS_EXEMPTION :
@@ -120,6 +120,19 @@ class Mark extends \application\discovery\module\career\Mark
             default :
                 return parent :: status_string($status);
                 break;
+        }
+    }
+
+    function is_credit()
+    {
+        if (in_array($this->get_status(), array(self :: STATUS_EXEMPTION, self :: STATUS_CREDIT, 
+                self :: STATUS_DELIBERATED, self :: STATUS_TOLERATED)) && ! $this->is_abandoned())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
