@@ -20,6 +20,7 @@ use MDB2_Error;
 class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
 {
     private $contract_types = array();
+    private $contract_ids = array();
     private $enrollments = array();
     private $mark_moments = array();
     private $mark = array();
@@ -56,6 +57,32 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         return $this->contract_types[$id];
     }
 
+    
+function retrieve_contract_ids($parameters)
+    {
+        $id = $parameters->get_user_id();
+        if (! isset($this->contract_ids[$id]))
+        {
+            $user = UserDataManager :: get_instance()->retrieve_user($id);
+            $official_code = $user->get_official_code();
+
+            $query = 'SELECT DISTINCT [contract_id] FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC';
+
+            $statement = $this->get_connection()->prepare($query);
+            $results = $statement->execute();
+
+            if (! $results instanceof MDB2_Error)
+            {
+                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                {
+                    $this->contract_ids[$id][] = $result->contract_id;
+                }
+            }
+        }
+
+        return $this->contract_ids[$id];
+    }
+    
     function retrieve_training($source, $training_id)
     {
         if (! isset($this->trainings[$source][$training_id]))

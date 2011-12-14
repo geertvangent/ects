@@ -69,6 +69,12 @@ class Course extends \application\discovery\module\career\Course
         return parent :: get_default_property_names($extended_property_names);
     }
 
+    static function get_types_for_total_credits()
+    {
+        return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS, self :: TYPE_EXTERNAL, self :: TYPE_CREDIT_HISTORY, 
+                self :: TYPE_EXCHANGE, self :: TYPE_EXEMPTION, self :: TYPE_PARTIAL_EXEMPTION);
+    }
+
     /**
      * Get the data class data manager
      * @return DiscoveryDataManagerInterface
