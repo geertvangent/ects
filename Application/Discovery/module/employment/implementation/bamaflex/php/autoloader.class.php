@@ -9,6 +9,7 @@ class Autoloader
          'BamaflexAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
          'BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php',
          'Employment' => '/lib/employment.class.php',
+         'EmploymentPart' => '/lib/employment_part.class.php',
          'Module' => '/lib/module.class.php',
          'Parameters' => '/lib/parameters.class.php',
          'Rights' => '/lib/rights.class.php',

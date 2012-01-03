@@ -13,7 +13,12 @@ span.course_child_text {
 	color: #99948d;
 }
 
-div#legend {
+span.employment_part {
+	font-style: italic;
+	color: #99948d;
+}
+
+div #legend {
 	margin-top: 10px;
 	width: 400px;
 }
@@ -38,7 +43,8 @@ div#legend {
 	text-transform: uppercase;
 	text-align: left;
 	padding: 6px 10px 6px 10px;
-	background: #e3e3e3 url(../../images/aqua/background_grey_table_header.png) repeat-x;
+	background: #e3e3e3
+		url(../../images/aqua/background_grey_table_header.png) repeat-x;
 	overflow: hidden;
 	vertical-align: middle;
 }

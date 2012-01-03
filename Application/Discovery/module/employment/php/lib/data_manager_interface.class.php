@@ -10,8 +10,8 @@ interface DataManagerInterface
 
     /**
      * @param int $id
-     * @return \application\discovery\module\profile\Profile|boolean
+     * @return \application\discovery\module\employments\Employment|boolean
      */
-    function retrieve_profile($id);
+    function retrieve_employments($id);
 }
 ?>

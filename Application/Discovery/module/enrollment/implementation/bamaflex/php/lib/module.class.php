@@ -96,6 +96,17 @@ class Module extends \application\discovery\module\enrollment\Module
                 $row[] = ' ';
             }
             
+            if ($enrollment->get_generation_student() == 1)
+            {
+                $image = '<img src="' . Theme :: get_image_path() . 'generation_student/' . $enrollment->get_generation_student() . '.png" alt="' . Translation :: get('GenerationStudent') . '" title="' . Translation :: get('GenerationStudent') . '" />';
+                $row[] = $image;
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('GenerationStudent'), Translation :: get('Enrollment'));
+            }
+            else
+            {
+                $row[] = ' ';
+            }
+            
             //            $class = 'enrollment" style="" id="enrollment_' . $key;
             //            $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
             //            $row[] = $details_action->as_html();
@@ -112,11 +123,14 @@ class Module extends \application\discovery\module\enrollment\Module
         {
             $table->set_header(5, Translation :: get('Contract'), false);
             $table->set_header(6, '', false);
+            $table->set_header(7, '', false);
         }
         else
         {
             $table->set_header(5, '', false);
+            $table->set_header(6, '', false);
         }
+        
         
         return $table;
     }
