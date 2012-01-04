@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use application\discovery\SortableTable;
+
 use application\discovery\ModuleInstance;
 
 use common\libraries\PropertiesTable;
@@ -49,6 +51,13 @@ class Module extends \application\discovery\module\profile\Module
             $address = $address[0];
             
             $properties[Translation :: get('Address')] = $address;
+        }
+        
+        if (count($this->get_profile()->get_learning_credit()) == 1)
+        {
+            $learning_credit = array_pop($this->get_profile()->get_learning_credit());
+                       
+            $properties[Translation :: get('LearningCredit')] = $learning_credit->get_html() . ' (' . $learning_credit->get_date() . ')';
         }
         
         if ($this->get_profile()->get_first_university_college())
@@ -209,6 +218,35 @@ class Module extends \application\discovery\module\profile\Module
                 $table->set_header(6, Translation :: get('ZipCode'));
                 $table->set_header(7, Translation :: get('Region'));
                 $table->set_header(8, Translation :: get('Country'));
+                $html[] = $table->toHTML();
+                
+                $html[] = '</div>';
+                $html[] = '</div>';
+            }
+            
+            $count_learning_credit = count($this->get_profile()->get_learning_credit());
+            if ($count_learning_credit > 1)
+            {
+                $data = array();
+                
+                foreach ($this->get_profile()->get_learning_credit() as $learning_credit)
+                {
+                    $row = array();
+                    $row[] = $learning_credit->get_date();
+                    $row[] = $learning_credit->get_html();
+                    $data[] = $row;
+                }
+                
+                $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/learning_credit.png);">';
+                $html[] = '<div class="title">';
+                $html[] = Translation :: get('LearningCredits');
+                $html[] = '</div>';
+                
+                $html[] = '<div class="description">';
+                
+                $table = new SortableTable($data);
+                $table->set_header(0, Translation :: get('Date'), false);
+                $table->set_header(1, Translation :: get('LearningCredit'), false);
                 $html[] = $table->toHTML();
                 
                 $html[] = '</div>';

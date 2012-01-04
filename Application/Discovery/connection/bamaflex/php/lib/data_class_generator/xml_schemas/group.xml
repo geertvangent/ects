@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<object name="group" table="v_discovery_training_group_advanced"
-	namespace="application\discovery\module\training\implementation\bamaflex"
-	author="Hans De Bisschop">
-</object>

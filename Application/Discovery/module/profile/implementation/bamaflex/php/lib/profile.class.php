@@ -13,6 +13,7 @@ class Profile extends \application\discovery\module\profile\Profile
     const PROPERTY_ADDRESS = 'address';
     const PROPERTY_FIRST_UNIVERSITY_COLLEGE = 'first_university_college';
     const PROPERTY_FIRST_UNIVERSITY = 'university';
+    const PROPERTY_LEARNING_CREDIT = 'learning_credit';
     
     private $previous_college;
     private $previous_university;
@@ -189,6 +190,17 @@ class Profile extends \application\discovery\module\profile\Profile
         return $this->get_default_property(self :: PROPERTY_FIRST_UNIVERSITY);
     }
 
+    function get_learning_credit()
+    {
+    	return $this->get_default_property(self :: PROPERTY_LEARNING_CREDIT);
+    }
+    
+    function set_learning_credit($learning_credit)
+    {
+        $this->set_default_property(self :: PROPERTY_LEARNING_CREDIT, $learning_credit);
+    }
+    
+    
     /**
      * @param multitype:string $extended_property_names
      */

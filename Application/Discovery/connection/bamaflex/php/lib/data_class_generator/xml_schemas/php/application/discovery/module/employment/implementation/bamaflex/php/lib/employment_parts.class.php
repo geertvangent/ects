@@ -55,6 +55,14 @@ class EmploymentParts extends DiscoveryItem
      * @var string
      */
     const PROPERTY_TRAINING = 'training';
+    /**
+     * @var string
+     */
+    const PROPERTY_DEPARTMENT = 'department';
+    /**
+     * @var integer
+     */
+    const PROPERTY_DEPARTMENT_ID = 'department_id';
 
 
     /**
@@ -74,6 +82,8 @@ class EmploymentParts extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_FACULTY;
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_TRAINING;
+        $extended_property_names[] = self :: PROPERTY_DEPARTMENT;
+        $extended_property_names[] = self :: PROPERTY_DEPARTMENT_ID;
 
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -265,6 +275,42 @@ class EmploymentParts extends DiscoveryItem
     function set_training($training)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING, $training);
+    }
+
+    /**
+     * Returns the department of this EmploymentParts.
+     * @return string The department.
+     */
+    function get_department()
+    {
+        return $this->get_default_property(self :: PROPERTY_DEPARTMENT);
+    }
+
+    /**
+     * Sets the department of this EmploymentParts.
+     * @param string $department
+     */
+    function set_department($department)
+    {
+        $this->set_default_property(self :: PROPERTY_DEPARTMENT, $department);
+    }
+
+    /**
+     * Returns the department_id of this EmploymentParts.
+     * @return integer The department_id.
+     */
+    function get_department_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_DEPARTMENT_ID);
+    }
+
+    /**
+     * Sets the department_id of this EmploymentParts.
+     * @param integer $department_id
+     */
+    function set_department_id($department_id)
+    {
+        $this->set_default_property(self :: PROPERTY_DEPARTMENT_ID, $department_id);
     }
 
 

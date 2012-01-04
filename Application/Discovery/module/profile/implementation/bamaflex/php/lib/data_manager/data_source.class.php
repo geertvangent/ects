@@ -71,6 +71,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $profile->set_nationality($this->retrieve_nationalities($official_code));
             $profile->set_previous_college($this->retrieve_previous_college($official_code));
             $profile->set_previous_university($this->retrieve_previous_university($official_code));
+            $profile->set_learning_credit($this->retrieve_learning_credits($official_code));
             
             return $profile;
         }
@@ -105,6 +106,34 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         }
         
         return $emails;
+    }
+
+    /**
+     * @param int $id
+     * @return multitype:\application\discovery\module\profile\LearningCredit
+     */
+    private function retrieve_learning_credits($id)
+    {
+        $query = 'SELECT * FROM [dbo].[v_discovery_profile_learning_credit] WHERE person_id = "' . $id . '" ORDER BY date DESC';
+        
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        
+        $credits = array();
+        
+        if (! $results instanceof MDB2_Error)
+        {
+            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            {
+                $credit = new LearningCredit();
+                $credit->set_id($result->id);
+                $credit->set_person_id($result->person_id);
+                $credit->set_date($result->date);
+                $credit->set_learning_credit($result->learning_credit);
+                $credits[] = $credit;
+            }
+        }
+        return $credits;
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\bamaflex;
+namespace application\discovery\module\exemption\implementation\bamaflex;
 
 class Autoloader
 {
@@ -8,17 +8,9 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'BamaflexAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
          'BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php',
-         'Address' => '/lib/address.class.php',
-         'Birth' => '/lib/birth.class.php',
-         'LearningCredit' => '/lib/learning_credit.class.php',
+         'Exemption' => '/lib/exemption.class.php',
          'Module' => '/lib/module.class.php',
-         'Nationality' => '/lib/nationality.class.php',
-         'Parameters' => '/lib/parameters.class.php',
-         'PreviousCollege' => '/lib/previous_college.class.php',
-         'PreviousUniversity' => '/lib/previous_university.class.php',
-         'Profile' => '/lib/profile.class.php',
          'Rights' => '/lib/rights.class.php',
-         'RightsGroupEntityRight' => '/lib/rights_group_entity_right.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
          'RightsUserEntity' => '/lib/rights_entity/user.class.php',
