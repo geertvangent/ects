@@ -26,6 +26,10 @@ class Exemption extends DiscoveryItem
     /**
      * @var integer
      */
+    const PROPERTY_PERSON_ID = 'person_id';
+    /**
+     * @var integer
+     */
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     /**
      * @var string
@@ -98,6 +102,7 @@ class Exemption extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
+        $extended_property_names[] = self :: PROPERTY_PERSON_ID;
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_NAME;
         $extended_property_names[] = self :: PROPERTY_TYPE_ID;
@@ -160,6 +165,24 @@ class Exemption extends DiscoveryItem
     function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
+    }
+
+    /**
+     * Returns the person_id of this Exemption.
+     * @return integer The person_id.
+     */
+    function get_person_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PERSON_ID);
+    }
+
+    /**
+     * Sets the person_id of this Exemption.
+     * @param integer $person_id
+     */
+    function set_person_id($person_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
 
     /**

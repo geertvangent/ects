@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\exemption;
+namespace application\discovery\module\advice;
 
 use common\libraries\Filesystem;
 
@@ -23,9 +23,9 @@ class Module extends \application\discovery\Module
 {
     const PARAM_USER_ID = 'user_id';
     /**
-     * @var multitype:\application\discovery\module\exemption\Exemption
+     * @var multitype:\application\discovery\module\advice\Advice
      */
-    private $exemptions;
+    private $advices;
 
     function __construct(Application $application, ModuleInstance $module_instance)
     {
@@ -33,7 +33,7 @@ class Module extends \application\discovery\Module
     
     }
 
-    function get_exemption_parameters()
+    function get_advice_parameters()
     {
         $parameter = self :: get_module_parameters();
         if (! $parameter->get_user_id())
@@ -55,15 +55,15 @@ class Module extends \application\discovery\Module
     }
 
     /**
-     * @return multitype:\application\discovery\module\exemption\TeachingAssignment
+     * @return multitype:\application\discovery\module\advice\TeachingAssignment
      */
-    function get_exemptions()
+    function get_advices()
     {
-        if (! isset($this->exemptions))
+        if (! isset($this->advices))
         {
-            $this->exemptions = DataManager :: get_instance($this->get_module_instance())->retrieve_exemptions($this->get_exemption_parameters());
+            $this->advices = DataManager :: get_instance($this->get_module_instance())->retrieve_advices($this->get_advice_parameters());
         }
-        return $this->exemptions;
+        return $this->advices;
     }
 
     /* (non-PHPdoc)
