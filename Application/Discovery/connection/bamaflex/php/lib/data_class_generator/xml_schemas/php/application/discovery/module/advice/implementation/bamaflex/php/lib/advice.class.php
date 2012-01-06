@@ -28,10 +28,6 @@ class Advice extends DiscoveryItem
      */
     const PROPERTY_PERSON_ID = 'person_id';
     /**
-     * @var integer
-     */
-    const PROPERTY_RESULT = 'result';
-    /**
      * @var string
      */
     const PROPERTY_MOTIVATION = 'motivation';
@@ -91,7 +87,6 @@ class Advice extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
-        $extended_property_names[] = self :: PROPERTY_RESULT;
         $extended_property_names[] = self :: PROPERTY_MOTIVATION;
         $extended_property_names[] = self :: PROPERTY_OMBUDSMAN;
         $extended_property_names[] = self :: PROPERTY_VOTE;
@@ -169,24 +164,6 @@ class Advice extends DiscoveryItem
     function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
-    }
-
-    /**
-     * Returns the result of this Advice.
-     * @return integer The result.
-     */
-    function get_result()
-    {
-        return $this->get_default_property(self :: PROPERTY_RESULT);
-    }
-
-    /**
-     * Sets the result of this Advice.
-     * @param integer $result
-     */
-    function set_result($result)
-    {
-        $this->set_default_property(self :: PROPERTY_RESULT, $result);
     }
 
     /**

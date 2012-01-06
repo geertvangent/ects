@@ -93,6 +93,9 @@ class Module extends \application\discovery\module\training\Module
         $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
                 'data_source' => $data_source));
         
+        $group_module_instance = \application\discovery\Module :: exists('application\discovery\module\group\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
         foreach ($trainings as $key => $training)
         {
             $row = array();
@@ -119,6 +122,20 @@ class Module extends \application\discovery\module\training\Module
             $row[] = $bama_type_image;
             LegendTable :: get_instance()->add_symbol($bama_type_image, Translation :: get($training->get_bama_type_string()), Translation :: get('BamaType'));
             
+             if ($group_module_instance)
+            {
+                $parameters = new \application\discovery\module\group\implementation\bamaflex\Parameters($training->get_id(), $training->get_source());
+                $url = $this->get_instance_url($group_module_instance->get_id(), $parameters);
+                $toolbar_item = new ToolbarItem(Translation :: get('Groups'), Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') . 'logo/16.png', $url, ToolbarItem::DISPLAY_ICON);
+                
+                $row[] = $toolbar_item->as_html();
+            }
+            else
+            {
+                $row[] = ' ';
+            }
+            
+            
             $data[] = $row;
         }
         
@@ -130,6 +147,7 @@ class Module extends \application\discovery\module\training\Module
             $table->set_header(2, Translation :: get('Domain'), false);
             $table->set_header(3, Translation :: get('Credits'), false);
             $table->set_header(4, Translation :: get(''), false);
+            $table->set_header(5, Translation :: get(''), false);
         }
         else
         {
@@ -137,6 +155,7 @@ class Module extends \application\discovery\module\training\Module
             $table->set_header(1, Translation :: get('Domain'), false);
             $table->set_header(2, Translation :: get('Credits'), false);
             $table->set_header(3, Translation :: get(''), false);
+            $table->set_header(4, Translation :: get(''), false);
         }
         return $table;
     }
