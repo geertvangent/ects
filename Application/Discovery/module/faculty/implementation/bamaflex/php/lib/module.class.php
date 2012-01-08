@@ -50,7 +50,7 @@ class Module extends \application\discovery\module\faculty\Module
             $table->set_header(2, Translation :: get('Dean'), false);
             if ($training_module_instance)
             {
-                $table->set_header(3, Translation :: get(''), false);
+                $table->set_header(3, '', false);
             }
         }
         else
@@ -59,7 +59,7 @@ class Module extends \application\discovery\module\faculty\Module
             $table->set_header(1, Translation :: get('Dean'), false);
             if ($training_module_instance)
             {
-                $table->set_header(2, Translation :: get(''), false);
+                $table->set_header(2, '', false);
             }
         }
         return $table;

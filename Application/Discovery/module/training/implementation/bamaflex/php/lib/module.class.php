@@ -21,7 +21,7 @@ class Module extends \application\discovery\module\training\Module
 {
     const PARAM_FACULTY_ID = 'faculty_id';
     const PARAM_SOURCE = 'source';
-    
+
     private $faculty;
 
     function __construct(Application $application, ModuleInstance $module_instance)
@@ -51,7 +51,7 @@ class Module extends \application\discovery\module\training\Module
     {
         $faculty = Request :: get(self :: PARAM_FACULTY_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
-        
+
         $parameter = new Parameters();
         if ($faculty)
         {
@@ -62,14 +62,14 @@ class Module extends \application\discovery\module\training\Module
             $parameter->set_source($source);
         }
         return $parameter;
-    
+
     }
 
     static function get_faculty_parameters()
     {
         $faculty = Request :: get(self :: PARAM_FACULTY_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
-        
+
         $parameter = new \application\discovery\module\faculty\implementation\bamaflex\Parameters();
         if ($faculty)
         {
@@ -80,22 +80,22 @@ class Module extends \application\discovery\module\training\Module
             $parameter->set_source($source);
         }
         return $parameter;
-    
+
     }
 
     function get_trainings_table($year = 0)
     {
         $trainings = $this->get_trainings_data($year);
-        
+
         $data = array();
-        
+
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
                 'data_source' => $data_source));
-        
+
         $group_module_instance = \application\discovery\Module :: exists('application\discovery\module\group\implementation\bamaflex', array(
                 'data_source' => $data_source));
-        
+
         foreach ($trainings as $key => $training)
         {
             $row = array();
@@ -103,7 +103,7 @@ class Module extends \application\discovery\module\training\Module
             {
                 $row[] = $training->get_year();
             }
-            
+
             if ($training_info_module_instance)
             {
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($training->get_id(), $training->get_source());
@@ -114,31 +114,31 @@ class Module extends \application\discovery\module\training\Module
             {
                 $row[] = $training->get_name();
             }
-            
+
             $row[] = $training->get_domain();
             $row[] = $training->get_credits();
-            
+
             $bama_type_image = '<img src="' . Theme :: get_image_path() . 'bama_type/' . $training->get_bama_type() . '.png" alt="' . Translation :: get($training->get_bama_type_string()) . '" title="' . Translation :: get($training->get_bama_type_string()) . '" />';
             $row[] = $bama_type_image;
             LegendTable :: get_instance()->add_symbol($bama_type_image, Translation :: get($training->get_bama_type_string()), Translation :: get('BamaType'));
-            
+
              if ($group_module_instance)
             {
                 $parameters = new \application\discovery\module\group\implementation\bamaflex\Parameters($training->get_id(), $training->get_source());
                 $url = $this->get_instance_url($group_module_instance->get_id(), $parameters);
                 $toolbar_item = new ToolbarItem(Translation :: get('Groups'), Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') . 'logo/16.png', $url, ToolbarItem::DISPLAY_ICON);
-                
+
                 $row[] = $toolbar_item->as_html();
             }
             else
             {
                 $row[] = ' ';
             }
-            
-            
+
+
             $data[] = $row;
         }
-        
+
         $table = new SortableTable($data);
         if (! $year && ! $this->has_parameters())
         {
@@ -146,16 +146,16 @@ class Module extends \application\discovery\module\training\Module
             $table->set_header(1, Translation :: get('Name'), false);
             $table->set_header(2, Translation :: get('Domain'), false);
             $table->set_header(3, Translation :: get('Credits'), false);
-            $table->set_header(4, Translation :: get(''), false);
-            $table->set_header(5, Translation :: get(''), false);
+            $table->set_header(4, '', false);
+            $table->set_header(5, '', false);
         }
         else
         {
             $table->set_header(0, Translation :: get('Name'), false);
             $table->set_header(1, Translation :: get('Domain'), false);
             $table->set_header(2, Translation :: get('Credits'), false);
-            $table->set_header(3, Translation :: get(''), false);
-            $table->set_header(4, Translation :: get(''), false);
+            $table->set_header(3, '', false);
+            $table->set_header(4, '', false);
         }
         return $table;
     }
@@ -165,7 +165,7 @@ class Module extends \application\discovery\module\training\Module
         $properties = array();
         $properties[Translation :: get('Year')] = $this->faculty->get_year();
         $properties[Translation :: get('Deans')] = $this->faculty->get_deans_string();
-        
+
         $history = array();
         $faculties = $this->faculty->get_all($this->get_module_instance());
         foreach ($faculties as $faculty)
@@ -175,14 +175,14 @@ class Module extends \application\discovery\module\training\Module
             $history[] = '<a href="' . $link . '">' . $faculty->get_year() . '</a>';
         }
         $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
-        
+
         return new PropertiesTable($properties);
     }
 
     function get_context()
     {
         $html = array();
-        
+
         $html[] = '<h3>';
         if ($this->faculty->get_previous_id())
         {
@@ -193,10 +193,10 @@ class Module extends \application\discovery\module\training\Module
         else
         {
             $html[] = Theme :: get_common_image('action_prev_na', 'png', Translation :: get('PreviousNA'), null, ToolbarItem :: DISPLAY_ICON);
-        
+
         }
         $html[] = $this->faculty->get_name();
-        
+
         if ($this->faculty->get_next_id())
         {
             $parameters = new Parameters($this->faculty->get_next_id(), $this->faculty->get_source());
@@ -206,12 +206,12 @@ class Module extends \application\discovery\module\training\Module
         else
         {
             $html[] = Theme :: get_common_image('action_next_na', 'png', Translation :: get('NextNA'), null, ToolbarItem :: DISPLAY_ICON);
-        
+
         }
         $html[] = '</h3>';
         $html[] = $this->get_faculty_properties_table()->toHtml();
         $html[] = '<br/>';
-        
+
         return implode("\n", $html);
     }
 }

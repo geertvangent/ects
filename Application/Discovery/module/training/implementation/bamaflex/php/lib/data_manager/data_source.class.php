@@ -73,7 +73,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
                     $training->set_previous_id($result->previous_id);
-                    $training->set_next_id($this->retrieve_training_next_id($training));
+//                     $training->set_next_id($this->retrieve_training_next_id($training));
 
                     $this->trainings[] = $training;
                 }
