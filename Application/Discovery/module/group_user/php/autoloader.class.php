@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\exemption;
+namespace application\discovery\module\group_user;
 
 class Autoloader
 {

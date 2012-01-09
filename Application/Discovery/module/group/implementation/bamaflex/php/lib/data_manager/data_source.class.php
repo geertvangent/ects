@@ -17,10 +17,11 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_groups($parameters)
     {
         $training_id = $parameters->get_training_id();
+        $source = $parameters->get_source();
         
         if (! isset($this->groups[$training_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_group_basic] WHERE training_id = "' . $training_id . '" ORDER BY description';
+            $query = 'SELECT * FROM [dbo].[v_discovery_group_advanced] WHERE training_id = "' . $training_id . '" AND source = "' . $source . '" ORDER BY description';
   
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -31,6 +32,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 { 
                     $group = new Group();
                     $group->set_id($result->id);
+                    $group->set_source($result->source);
                     $group->set_training_id($result->training_id);
                     $group->set_year($result->year);
                     $group->set_code($this->convert_to_utf8($result->code));

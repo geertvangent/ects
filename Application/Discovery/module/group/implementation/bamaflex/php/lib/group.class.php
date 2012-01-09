@@ -14,7 +14,7 @@ use common\libraries\DataClass;
 class Group extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * @var integer
      */
@@ -39,11 +39,13 @@ class Group extends DiscoveryItem
      * @var integer
      */
     const PROPERTY_TYPE_ID = 'type_id';
-
+    
+    const PROPERTY_SOURCE = 'source';
+    
     const TYPE_TRAINING = 1;
     const TYPE_CLASS = 2;
     const TYPE_CUSTOM = 3;
-
+    const TYPE_CLASS_COURSE = 4;
 
     /**
      * Get the default properties
@@ -58,7 +60,8 @@ class Group extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_TYPE_ID;
-
+        $extended_property_names[] = self :: PROPERTY_SOURCE;
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -179,7 +182,17 @@ class Group extends DiscoveryItem
         $this->set_default_property(self :: PROPERTY_TYPE_ID, $type_id);
     }
 
-	/**
+    function get_source()
+    {
+        return $this->get_default_property(self :: PROPERTY_SOURCE);
+    }
+
+    function set_source($source)
+    {
+        $this->set_default_property(self :: PROPERTY_SOURCE, $source);
+    }
+
+    /**
      * @return string
      */
     function get_type_string()
@@ -203,6 +216,9 @@ class Group extends DiscoveryItem
             case self :: TYPE_CUSTOM :
                 return 'TypeCustom';
                 break;
+            case self :: TYPE_CLASS_COURSE :
+                return 'TypeClassCourse';
+                break;
         }
     }
 
@@ -212,13 +228,14 @@ class Group extends DiscoveryItem
      */
     static function get_type_types($types_only = false)
     {
-    	$types = array();
-
+        $types = array();
+        
         $types[self :: TYPE_TRAINING] = self :: type_string(self :: TYPE_TRAINING);
         $types[self :: TYPE_CLASS] = self :: type_string(self :: TYPE_CLASS);
         $types[self :: TYPE_CUSTOM] = self :: type_string(self :: TYPE_CUSTOM);
-
-    	return ($types_only ? array_keys($types) : $types);
+        $types[self :: TYPE_CLASS_COURSE] = self :: type_string(self :: TYPE_CLASS_COURSE);
+        
+        return ($types_only ? array_keys($types) : $types);
     }
 
     /**

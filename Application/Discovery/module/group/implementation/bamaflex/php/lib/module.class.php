@@ -71,17 +71,30 @@ class Module extends \application\discovery\module\group\Module
         
         $data = array();
         
+        $data_source = $this->get_module_instance()->get_setting('data_source');
+        $group_user_module_instance = \application\discovery\Module :: exists('application\discovery\module\group_user\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
         foreach ($groups as $key => $group)
         {
             $row = array();
             $row[] = $group->get_code();
             $row[] = $group->get_description();
-//            $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_MOTIVATION . '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '" title="' . Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '"/>';
-//            $row[] = $image;
-//            LegendTable :: get_instance()->add_symbol($image, Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)), Translation :: get('Type'));
-         
+            
+            if ($group_user_module_instance)
+            {
+                $parameters = new \application\discovery\module\group_user\implementation\bamaflex\Parameters($group->get_type_id(), $group->get_source(), $group->get_type());
+                $url = $this->get_instance_url($group_user_module_instance->get_id(), $parameters);
+                $toolbar_item = new ToolbarItem(Translation :: get('Users'), Theme :: get_image_path('application\discovery\module\group_user\implementation\bamaflex') . 'logo/16.png', $url, ToolbarItem :: DISPLAY_ICON);
+                
+                $row[] = $toolbar_item->as_html();
+            }
+            else
+            {
+                $row[] = ' ';
+            }
+            
             $data[] = $row;
-        
         }
         
         $table = new SortableTable($data);
@@ -90,7 +103,9 @@ class Module extends \application\discovery\module\group\Module
         $table->getHeader()->setColAttributes(0, 'class="code"');
         
         $table->set_header(1, Translation :: get('Description'), false);
-
+        
+        $table->set_header(2, ' ', false);
+        
         return $table;
     }
 
@@ -99,15 +114,15 @@ class Module extends \application\discovery\module\group\Module
      */
     function render()
     {
-//        $entities = array();
-//        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
-//        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
-//        
-//        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_group_parameters()))
-//        {
-//            Display :: not_allowed();
-//        }
-//        
+        //        $entities = array();
+        //        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        //        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
+        //        
+        //        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_group_parameters()))
+        //        {
+        //            Display :: not_allowed();
+        //        }
+        //        
         $html = array();
         
         if ($this->has_groups())
@@ -121,6 +136,10 @@ class Module extends \application\discovery\module\group\Module
             if ($this->has_groups(Group :: TYPE_CUSTOM))
             {
                 $tabs->add_tab(new DynamicContentTab(Group :: TYPE_CUSTOM, Translation :: get(Group :: type_string(Group :: TYPE_CUSTOM)), Theme :: get_image_path() . 'type/' . Group :: TYPE_CUSTOM . '.png', $this->get_groups_table(Group :: TYPE_CUSTOM)->as_html()));
+            }
+            if ($this->has_groups(Group :: TYPE_TRAINING))
+            {
+                $tabs->add_tab(new DynamicContentTab(Group :: TYPE_TRAINING, Translation :: get(Group :: type_string(Group :: TYPE_TRAINING)), Theme :: get_image_path() . 'type/' . Group :: TYPE_TRAINING . '.png', $this->get_groups_table(Group :: TYPE_TRAINING)->as_html()));
             }
             
             $html[] = $tabs->render();

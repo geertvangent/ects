@@ -16,6 +16,10 @@ class Group extends DiscoveryItem
     const CLASS_NAME = __CLASS__;
 
     /**
+     * @var string
+     */
+    const PROPERTY_SOURCE = 'source';
+    /**
      * @var integer
      */
     const PROPERTY_TRAINING_ID = 'training_id';
@@ -52,6 +56,7 @@ class Group extends DiscoveryItem
      */
     static function get_default_property_names($extended_property_names = array())
     {
+        $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_CODE;
@@ -69,6 +74,24 @@ class Group extends DiscoveryItem
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
+    }
+
+    /**
+     * Returns the source of this Group.
+     * @return string The source.
+     */
+    function get_source()
+    {
+        return $this->get_default_property(self :: PROPERTY_SOURCE);
+    }
+
+    /**
+     * Sets the source of this Group.
+     * @param string $source
+     */
+    function set_source($source)
+    {
+        $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
 
     /**
