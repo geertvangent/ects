@@ -66,7 +66,32 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         
         return $this->advices[$person_id];
     }
-    
+
+    function count_advices($parameters)
+    {
+        $user_id = $parameters->get_user_id();
+        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        
+        $query = 'SELECT count(id) AS advices_count FROM [dbo].[v_discovery_advice_basic] 
+            			WHERE person_id = "' . $person_id . '" 
+            				AND (motivation IS NOT NULL OR 
+		            			ombudsman IS NOT NULL OR
+		            			vote IS NOT NULL OR
+		            			measures IS NOT NULL OR
+		            			advice IS NOT NULL)';
+        
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        
+        if (! $results instanceof MDB2_Error)
+        {
+            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $result->advices_count;
+        }
+        
+        return 0;
+    }
+
     /**
      * @param int $id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Enrollment
@@ -78,12 +103,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT * FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC, id';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -109,7 +134,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 }

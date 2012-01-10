@@ -454,18 +454,8 @@ class Module extends \application\discovery\module\career\Module
             $html[] = '<h3>' . $user->get_fullname() . '</h3>';
         }
         
-        if (count($this->get_courses()) > 0)
+        if ($this->has_data())
         {
-            //            $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types($this->get_career_parameters());
-            //            
-            //            $tabs = new DynamicTabsRenderer('enrollment_list');
-            //            
-            //            foreach ($contract_types as $contract_type)
-            //            {
-            //                $tabs->add_tab(new DynamicContentTab($contract_type, Translation :: get(Enrollment :: contract_type_string($contract_type)), Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', $this->get_enrollment_courses($contract_type)));
-            //            }
-            //            
-            //            $html[] = $tabs->render();
             $html[] = $this->get_enrollment_courses();
         }
         else

@@ -66,6 +66,12 @@ class Module extends \application\discovery\Module
         return $this->teaching_assignments;
     }
 
+    function has_data($parameters = null)
+    {
+        $parameters = $parameters ? $parameters : $this->get_teaching_assignment_parameters();
+        return $this->get_data_manager()->count_teaching_assignments($parameters);
+    }
+
     /* (non-PHPdoc)
      * @see application\discovery.Module::render()
      */

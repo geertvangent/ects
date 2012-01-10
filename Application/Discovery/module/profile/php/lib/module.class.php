@@ -56,9 +56,10 @@ class Module extends \application\discovery\Module
      * @return \application\discovery\module\profile\Profile
      */
     function get_profile()
-    {
+    {	
         if (! isset($this->profile))
         {
+        
             $this->profile = DataManager :: get_instance($this->get_module_instance())->retrieve_profile($this->get_profile_parameters());
         }
         
@@ -71,25 +72,25 @@ class Module extends \application\discovery\Module
     function get_general_properties()
     {
         $properties = array();
-        $properties[Translation :: get('FirstName')] = $this->profile->get_name()->get_first_names();
-        $properties[Translation :: get('LastName')] = $this->profile->get_name()->get_last_name();
-        $properties[Translation :: get('Language')] = $this->profile->get_language();
+        $properties[Translation :: get('FirstName')] = $this->get_profile()->get_name()->get_first_names();
+        $properties[Translation :: get('LastName')] = $this->get_profile()->get_name()->get_last_name();
+        $properties[Translation :: get('Language')] = $this->get_profile()->get_language();
         
-        foreach ($this->profile->get_identification_code() as $identification_code)
+        foreach ($this->get_profile()->get_identification_code() as $identification_code)
         {
             $properties[Translation :: get($identification_code->get_type_string())] = $identification_code->get_code();
         }
         
-        if (count($this->profile->get_communication()) == 1)
+        if (count($this->get_profile()->get_communication()) == 1)
         {
-            $communication = $this->profile->get_communication();
+            $communication = $this->get_profile()->get_communication();
             $communication = $communication[0];
             $properties[Translation :: get('CommunicationNumber')] = $communication->get_number() . ' (' . $communication->get_device_string() . ')';
         }
         
-        if (count($this->profile->get_email()) == 1)
+        if (count($this->get_profile()->get_email()) == 1)
         {
-            $email = $this->profile->get_email();
+            $email = $this->get_profile()->get_email();
             $email = $email[0];
             $properties[Translation :: get('Email')] = $email->get_address() . ' (' . $email->get_type_string() . ')';
         }
@@ -103,8 +104,8 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-        
-        if ($this->profile instanceof Profile)
+
+        if ($this->get_profile() instanceof Profile)
         {
             $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/general.png);">';
             $html[] = '<div class="title">';
@@ -122,10 +123,10 @@ class Module extends \application\discovery\Module
             $html[] = $table->toHtml();
             $html[] = '</td>';
             
-            if ($this->profile->has_photo())
+            if ($this->get_profile()->has_photo())
             {
                 $html[] = '<td style="text-align: right; vertical-align: top; width: 150px;">';
-                $html[] = '<img src="' . $this->profile->get_photo()->get_source() . '" style="width: 150px; border: 1px solid grey;"/>';
+                $html[] = '<img src="' . $this->get_profile()->get_photo()->get_source() . '" style="width: 150px; border: 1px solid grey;"/>';
                 $html[] = '</td>';
             }
             
@@ -135,11 +136,11 @@ class Module extends \application\discovery\Module
             $html[] = '</div>';
             $html[] = '</div>';
             
-            if (count($this->profile->get_communication()) > 1)
+            if (count($this->get_profile()->get_communication()) > 1)
             {
                 $data = array();
                 
-                foreach ($this->profile->get_communication() as $communication)
+                foreach ($this->get_profile()->get_communication() as $communication)
                 {
                     $row = array();
                     $row[] = Translation :: get($communication->get_type_string());
@@ -165,11 +166,11 @@ class Module extends \application\discovery\Module
                 $html[] = '</div>';
             }
             
-            if (count($this->profile->get_email()) > 1)
+            if (count($this->get_profile()->get_email()) > 1)
             {
                 $data = array();
                 
-                foreach ($this->profile->get_email() as $email)
+                foreach ($this->get_profile()->get_email() as $email)
                 {
                     $row = array();
                     $row[] = Translation :: get($email->get_type_string());

@@ -9,6 +9,7 @@ class Autoloader
          'DiscoveryAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
          'DiscoveryAjaxUsersFeed' => '/ajax/users_feed.class.php',
          'DiscoveryInstaller' => '/install/discovery_installer.class.php',
+         'DataManager' => '/lib/data_manager.class.php',
          'DataSource' => '/lib/data_source.class.php',
          'DataSourceInstance' => '/lib/data_source_instance.class.php',
          'DataSourceInstanceSetting' => '/lib/data_source_instance_setting.class.php',

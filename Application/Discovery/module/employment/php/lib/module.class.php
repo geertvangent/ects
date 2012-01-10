@@ -65,6 +65,12 @@ class Module extends \application\discovery\Module
         return $this->employments;
     }
 
+    function has_data($parameters = null)
+    {
+        $parameters = $parameters ? $parameters : $this->get_employment_parameters();
+        return $this->get_data_manager()->count_employments($parameters);
+    }
+
     /* (non-PHPdoc)
      * @see application\discovery.Module::render()
      */

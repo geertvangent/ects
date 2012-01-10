@@ -66,6 +66,12 @@ class Module extends \application\discovery\Module
         return $this->advices;
     }
 
+    function has_data($parameters = null)
+    {
+        $parameters = $parameters ? $parameters : $this->get_advice_parameters();
+        return $this->get_data_manager()->count_advices($parameters);
+    }
+
     /* (non-PHPdoc)
      * @see application\discovery.Module::render()
      */

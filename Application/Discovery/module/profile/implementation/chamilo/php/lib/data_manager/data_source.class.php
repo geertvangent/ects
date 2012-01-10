@@ -35,7 +35,6 @@ class DataSource implements DataManagerInterface
     function retrieve_profile($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-        
         if ($user instanceof User)
         {
             $name = new Name();
@@ -50,7 +49,6 @@ class DataSource implements DataManagerInterface
             $profile->set_title($user->get_fullname());
             $profile->set_name($name);
             $profile->add_identification_code($company_id);
-            
             $email = new Email();
             $email->set_address($user->get_email());
             $email->set_type(Email :: TYPE_OFFICIAL);
@@ -67,7 +65,7 @@ class DataSource implements DataManagerInterface
             
             $profile->set_username($user->get_username());
             $profile->set_timezone($this->get_timezone($id));
-            
+           
             return $profile;
         }
         else

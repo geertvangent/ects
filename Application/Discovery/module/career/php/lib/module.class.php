@@ -35,11 +35,6 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    function get_data_manager()
-    {
-        return DataManager :: get_instance($this->get_module_instance());
-    }
-
     function get_career_parameters()
     {
         $parameter = self :: get_module_parameters();
@@ -71,6 +66,12 @@ class Module extends \application\discovery\Module
             $this->courses = $this->get_data_manager()->retrieve_courses($this->get_career_parameters());
         }
         return $this->courses;
+    }
+
+    function has_data($parameters = null)
+    {
+        $parameters = $parameters ? $parameters : $this->get_career_parameters();
+        return $this->get_data_manager()->count_courses($parameters);
     }
 
     /**

@@ -102,10 +102,11 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
             
             while ($module_instance = $module_instances->next_result())
             {
-                $rights = $module_instance->get_type() . '\Rights';
-                $module = $module_instance->get_type() . '\Module';
                 
-                $module_parameters = $module :: get_module_parameters();
+                $rights = $module_instance->get_type() . '\Rights';
+                $module_class = $module_instance->get_type() . '\Module';
+                
+                $module_parameters = $module_class :: get_module_parameters();
                 
                 if ($module_content_type == ModuleInstance :: TYPE_USER)
                 {
@@ -113,13 +114,19 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
                     {
                         $module_parameters->set_user_id($this->get_user_id());
                     }
-                    if ($rights :: get_instance()->is_visible($module_instance->get_id(), $module_parameters))
+                    
+                    $module = Module :: factory($this, $module_instance);
+                    
+                    if ($module->has_data($module_parameters))
                     {
-                        $module_parameters_array = $module_parameters->get_parameters();
-                        $module_parameters_array[DiscoveryManager :: PARAM_MODULE_ID] = $module_instance->get_id();
-                        $selected = ($module_id == $module_instance->get_id() ? true : false);
-                        $link = $this->get_url($module_parameters_array);
-                        $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), $module_instance->get_title(), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
+                        if ($rights :: get_instance()->is_visible($module_instance->get_id(), $module_parameters))
+                        {
+                            $module_parameters_array = $module_parameters->get_parameters();
+                            $module_parameters_array[DiscoveryManager :: PARAM_MODULE_ID] = $module_instance->get_id();
+                            $selected = ($module_id == $module_instance->get_id() ? true : false);
+                            $link = $this->get_url($module_parameters_array);
+                            $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), $module_instance->get_title(), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
+                        }
                     }
                 }
                 else

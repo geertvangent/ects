@@ -62,6 +62,25 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         return $this->exemptions[$person_id];
     }
 
+    function count_exemptions($parameters)
+    {
+        $user_id = $parameters->get_user_id();
+        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        
+        $query = 'SELECT count(id) AS exemptions_count FROM [dbo].[v_discovery_exemption_basic] WHERE person_id = "' . $person_id . '"';
+        
+        $statement = $this->get_connection()->prepare($query);
+        $results = $statement->execute();
+        
+        if (! $results instanceof MDB2_Error)
+        {
+            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $result->exemptions_count;
+        }
+        
+        return 0;
+    }
+
     function retrieve_years($parameters)
     {
         $user_id = $parameters->get_user_id();

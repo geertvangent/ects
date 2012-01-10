@@ -39,12 +39,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT DISTINCT [contract_type] FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY contract_type';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -53,24 +53,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-
+        
         return $this->contract_types[$id];
     }
 
-    
-function retrieve_contract_ids($parameters)
+    function retrieve_contract_ids($parameters)
     {
         $id = $parameters->get_user_id();
         if (! isset($this->contract_ids[$id]))
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT DISTINCT [contract_id] FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -79,10 +78,10 @@ function retrieve_contract_ids($parameters)
                 }
             }
         }
-
+        
         return $this->contract_ids[$id];
     }
-    
+
     function retrieve_training($source, $training_id)
     {
         if (! isset($this->trainings[$source][$training_id]))
@@ -90,7 +89,7 @@ function retrieve_contract_ids($parameters)
             $query = 'SELECT * FROM [dbo].[v_discovery_training_advanced] WHERE id = ' . $training_id . ' AND source = ' . $source;
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -116,7 +115,7 @@ function retrieve_contract_ids($parameters)
                 }
             }
         }
-
+        
         return $this->trainings[$source][$training_id];
     }
 
@@ -125,7 +124,7 @@ function retrieve_contract_ids($parameters)
         $query = 'SELECT id FROM [dbo].[v_discovery_training_advanced] WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-
+        
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
@@ -148,12 +147,12 @@ function retrieve_contract_ids($parameters)
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT * FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC, id';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -173,12 +172,12 @@ function retrieve_contract_ids($parameters)
                     $enrollment->set_option_choice($this->convert_to_utf8($result->option_choice));
                     $enrollment->set_graduation_option($this->convert_to_utf8($result->graduation_option));
                     $enrollment->set_result($result->result);
-
+                    
                     $this->enrollments[$id][] = $enrollment;
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 
@@ -193,22 +192,22 @@ function retrieve_contract_ids($parameters)
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-
+            
             $child_courses = $this->retrieve_child_courses($parameters);
-
+            
             $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
             $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' ';
             $query .= 'ORDER BY year, name';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
                     $course = $this->result_to_course($parameters, $result);
-
+                    
                     if ($result->programme_id && isset($child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
                     {
                         foreach ($child_courses[$result->source][$result->enrollment_id][$result->programme_id] as $child_course)
@@ -216,13 +215,33 @@ function retrieve_contract_ids($parameters)
                             $course->add_child($child_course);
                         }
                     }
-
+                    
                     $this->courses[$user_id][] = $course;
                 }
             }
         }
-
+        
         return $this->courses[$user_id];
+    }
+
+    function count_courses($parameters)
+    {
+        $user_id = $parameters->get_user_id();
+        $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+        $official_code = $user->get_official_code();
+                
+        $query = 'SELECT count(id) AS courses_count FROM [dbo].[v_discovery_career_advanced] ';
+        $query .= 'WHERE programme_parent_id IS NULL AND person_id = "' . $official_code . '"';
+        
+        $statement = $this->get_connection()->prepare($query);
+        $result = $statement->execute();
+        
+        if (! $result instanceof MDB2_Error)
+        {
+            $result = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $result->courses_count;
+        }
+        return 0;
     }
 
     private function retrieve_child_courses($parameters)
@@ -232,14 +251,14 @@ function retrieve_contract_ids($parameters)
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
             $query .= 'WHERE programme_parent_id IS NOT NULL AND person_id = ' . $official_code . ' ';
             $query .= 'ORDER BY year, trajectory_part, name';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -248,7 +267,7 @@ function retrieve_contract_ids($parameters)
                 }
             }
         }
-
+        
         return $this->child_courses[$user_id];
     }
 
@@ -266,9 +285,9 @@ function retrieve_contract_ids($parameters)
         $course->set_credits($result->credits);
         $course->set_weight($result->weight);
         $course->set_source($result->source);
-
+        
         $marks = $this->retrieve_marks($parameters->get_user_id());
-
+        
         foreach ($this->retrieve_mark_moments($parameters) as $moment)
         {
             if (isset($marks[$result->source][$result->id][$moment->get_id()]))
@@ -280,10 +299,10 @@ function retrieve_contract_ids($parameters)
             {
                 $mark = Mark :: factory($moment->get_id());
             }
-
+            
             $course->add_mark($mark);
         }
-
+        
         return $course;
     }
 
@@ -294,48 +313,54 @@ function retrieve_contract_ids($parameters)
     function retrieve_mark_moments($parameters)
     {
         $moments = array();
-
+        
         $mark_moment = new MarkMoment();
         $mark_moment->set_id(1);
         $mark_moment->set_name('Eerste examenkans');
         $moments[1] = $mark_moment;
-
+        
         $mark_moment = new MarkMoment();
         $mark_moment->set_id(2);
         $mark_moment->set_name('Tweede examenkans');
         $moments[2] = $mark_moment;
-
+        
         return $moments;
+    
+     //         $user_id = $parameters->get_user_id();
+    //         if (! isset($this->mark_moments[$user_id]))
+    //         {
+    //             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+    //             $official_code = $user->get_official_code();
+    
 
-//         $user_id = $parameters->get_user_id();
-//         if (! isset($this->mark_moments[$user_id]))
-//         {
-//             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
-//             $official_code = $user->get_official_code();
+    //             $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_advanced] ';
+    //             $query .= 'WHERE [person_id] = ' . $official_code . ' ';
+    //             $query .= 'ORDER BY [try_order]';
+    
 
-//             $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_advanced] ';
-//             $query .= 'WHERE [person_id] = ' . $official_code . ' ';
-//             $query .= 'ORDER BY [try_order]';
+    //             $statement = $this->get_connection()->prepare($query);
+    //             $results = $statement->execute();
+    
 
-//             $statement = $this->get_connection()->prepare($query);
-//             $results = $statement->execute();
+    //             if (! $results instanceof MDB2_Error)
+    //             {
+    //                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+    //                 {
+    //                     $mark_moment = new MarkMoment();
+    //                     $mark_moment->set_id($result->try_id);
+    //                     $mark_moment->set_name($result->try_name);
+    
 
-//             if (! $results instanceof MDB2_Error)
-//             {
-//                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
-//                 {
-//                     $mark_moment = new MarkMoment();
-//                     $mark_moment->set_id($result->try_id);
-//                     $mark_moment->set_name($result->try_name);
+    //                     dump($mark_moment);
+    
 
-//                     dump($mark_moment);
+    //                     $this->mark_moments[$user_id][$result->try_id] = $mark_moment;
+    //                 }
+    //             }
+    //         }
+    
 
-//                     $this->mark_moments[$user_id][$result->try_id] = $mark_moment;
-//                 }
-//             }
-//         }
-
-//         return $this->mark_moments[$user_id];
+    //         return $this->mark_moments[$user_id];
     }
 
     /**
@@ -347,13 +372,13 @@ function retrieve_contract_ids($parameters)
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT [source], [enrollment_programme_id], [result], [status], [sub_status], [try_id], [publish_status], [abandoned] FROM [dbo].[v_discovery_mark_advanced] ';
             $query .= 'WHERE [person_id] = "' . $official_code . '"';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $result = $statement->execute();
-
+            
             if (! $result instanceof MDB2_Error)
             {
                 while ($mark_result = $result->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -365,12 +390,12 @@ function retrieve_contract_ids($parameters)
                     $mark->set_sub_status($mark_result->sub_status);
                     $mark->set_publish_status($mark_result->publish_status);
                     $mark->set_abandoned($mark_result->abandoned);
-
+                    
                     $this->marks[$user_id][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
                 }
             }
         }
-
+        
         return $this->marks[$user_id];
     }
 }
