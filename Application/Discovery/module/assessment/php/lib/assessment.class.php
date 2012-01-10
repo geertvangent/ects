@@ -1,4 +1,4 @@
-<?php
+// <?php
 namespace application\discovery\module\assessment;
 
 use common\libraries\Utilities;
@@ -11,7 +11,7 @@ use common\libraries\DataClass;
 class Assessment extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Assessment properties
      */
@@ -29,17 +29,8 @@ class Assessment extends DataClass
         $extended_property_names[] = self :: PROPERTY_DATE;
         $extended_property_names[] = self :: PROPERTY_PUBLISHER;
         $extended_property_names[] = self :: PROPERTY_RESULT;
-        
-        return parent :: get_default_property_names($extended_property_names);
-    }
 
-    /**
-     * Get the data class data manager
-     * @return DiscoveryDataManagerInterface
-     */
-    function get_data_manager()
-    {
-        return DiscoveryDataManager :: get_instance();
+        return parent :: get_default_property_names($extended_property_names);
     }
 
     /**

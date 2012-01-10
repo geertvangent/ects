@@ -11,7 +11,7 @@ use common\libraries\DataClass;
 class Assessment extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Assessment properties
      */
@@ -27,17 +27,8 @@ class Assessment extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_CLUSTER;
         $extended_property_names[] = self :: PROPERTY_SCALE;
-        
-        return parent :: get_default_property_names($extended_property_names);
-    }
 
-    /**
-     * Get the data class data manager
-     * @return DiscoveryDataManagerInterface
-     */
-    function get_data_manager()
-    {
-        return DiscoveryDataManager :: get_instance();
+        return parent :: get_default_property_names($extended_property_names);
     }
 
     /**

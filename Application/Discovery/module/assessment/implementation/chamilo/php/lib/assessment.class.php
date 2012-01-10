@@ -27,15 +27,6 @@ class Assessment extends DataClass
     }
 
     /**
-     * Get the data class data manager
-     * @return DiscoveryDataManagerInterface
-     */
-    function get_data_manager()
-    {
-        return DiscoveryDataManager :: get_instance();
-    }
-
-    /**
      * @return string The table name of the data class
      */
     static function get_table_name()

@@ -4,6 +4,8 @@ namespace application\discovery\connection\bamaflex;
 use common\libraries\Path;
 use common\libraries\Utilities;
 
+use \MDB2_Error;
+
 /**
  * Dataclass generator used to generate dataclasses with given properties
  * @author Sven Vanpoucke

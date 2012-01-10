@@ -15,7 +15,7 @@ class Assessment extends DataClass
     /**
      * Assessment properties
      */
-    
+
     /**
      * Get the default properties
      * @param multitype:string $extended_property_names
@@ -23,17 +23,8 @@ class Assessment extends DataClass
      */
     static function get_default_property_names($extended_property_names = array())
     {
-        
-        return parent :: get_default_property_names($extended_property_names);
-    }
 
-    /**
-     * Get the data class data manager
-     * @return DiscoveryDataManagerInterface
-     */
-    function get_data_manager()
-    {
-        return DiscoveryDataManager :: get_instance();
+        return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
