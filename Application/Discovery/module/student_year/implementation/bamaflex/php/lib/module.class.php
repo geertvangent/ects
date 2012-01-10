@@ -26,36 +26,36 @@ class Module extends \application\discovery\module\student_year\Module
     function get_student_years_table()
     {
         $student_years = $this->get_student_years();
-        
+
         $data = array();
-        
+
         $data_source = $this->get_module_instance()->get_setting('data_source');
         //        $training_module_instance = \application\discovery\Module :: exists('application\discovery\module\training\implementation\bamaflex', array(
         //                'data_source' => $data_source));
-        //        
+        //
         //        $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
         //                'data_source' => $data_source));
-        //        
+        //
         foreach ($student_years as $key => $student_year)
         {
             $row = array();
             $row[] = $student_year->get_year();
-            $row[] = $student_year->get_scholarship_string();
-            $row[] = $student_year->get_reduced_registration_fee_string();
-            
-            $enrollment_link = $this->get_module_link('application\discovery\module\enrollment\implementation\bamaflex', $student_year->get_person_id());
-            if ($enrollment_link)
-            {
-                $row[] = $enrollment_link->as_html();
-            }
+            $row[] = Translation :: get($student_year->get_scholarship_string());
+            $row[] = Translation :: get($student_year->get_reduced_registration_fee_string());
+
+//             $enrollment_link = $this->get_module_link('application\discovery\module\enrollment\implementation\bamaflex', $student_year->get_person_id());
+//             if ($enrollment_link)
+//             {
+//                 $row[] = $enrollment_link->as_html();
+//             }
             $data[] = $row;
         }
-        
+
         $table = new SortableTable($data);
         $table->set_header(0, Translation :: get('Year'), false);
         $table->set_header(1, Translation :: get('Scholarship'), false);
         $table->set_header(2, Translation :: get('ReducedRegistrationFee'), false);
-        $table->set_header(3, Translation :: get('Enrollment'), false);
+//         $table->set_header(3, Translation :: get('Enrollment'), false);
         return $table;
     }
 
@@ -67,19 +67,19 @@ class Module extends \application\discovery\module\student_year\Module
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
-        
+
         if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_student_year_parameters()))
         {
             Display :: not_allowed();
         }
-        
+
         $html = array();
         if (count($this->get_student_years()) > 0)
         {
             $html[] = $this->get_student_years_table()->toHTML();
         }
         else
-        
+
         {
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }

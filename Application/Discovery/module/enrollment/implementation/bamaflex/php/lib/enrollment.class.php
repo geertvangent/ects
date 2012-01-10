@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
+use common\libraries\Translation;
+
 use application\discovery\module\career\DataManager;
 
 use application\discovery\DiscoveryDataManager;
@@ -8,7 +10,7 @@ use application\discovery\DiscoveryDataManager;
 class Enrollment extends \application\discovery\module\enrollment\Enrollment
 {
     const CLASS_NAME = __CLASS__;
-    
+
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_FACULTY = 'faculty';
     const PROPERTY_FACULTY_ID = 'faculty_id';
@@ -21,29 +23,29 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const PROPERTY_DISTINCTION = 'distinction';
     const PROPERTY_EXCHANGE_TYPE = 'exchange_type';
     const PROPERTY_GENERATION_STUDENT = 'generation_student';
-    
+
     const CONTRACT_TYPE_ALL = 0;
     const CONTRACT_TYPE_DEGREE = 1;
     const CONTRACT_TYPE_CREDIT = 2;
     const CONTRACT_TYPE_EXAM_DEGREE = 3;
     const CONTRACT_TYPE_EXAM_CREDIT = 4;
     const CONTRACT_TYPE_OLD_DEGREE = 5;
-    
+
     const TRAJECTORY_TYPE_TEMPLATE = 1;
     const TRAJECTORY_TYPE_PERSONAL = 2;
     const TRAJECTORY_TYPE_INDIVIDUAL = 3;
     const TRAJECTORY_TYPE_UNKNOWN = 4;
-    
+
     const RESULT_TOLERATED = 6;
     const RESULT_GRADUALLY_TOLERATED = 7;
     const RESULT_STRUCK = 8;
-    
+
     const DISTINCTION_NONE = 1;
     const DISTINCTION_SUFFICIENT = 2;
     const DISTINCTION_GOOD = 3;
     const DISTINCTION_VERY_GOOD = 4;
     const DISTINCTION_EXCELLENT = 5;
-    
+
     const EXCHANGE_TYPE_NONE = 1;
     const EXCHANGE_TYPE_INCOMING = 2;
     const EXCHANGE_TYPE_OUTGOING = 3;
@@ -167,7 +169,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         }
         else
         {
-            return $this->get_trajectory_type_string();
+            return Translation :: get($this->get_trajectory_type_string());
         }
     }
 
@@ -193,17 +195,17 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     function get_unified_option()
     {
         $options = array();
-        
+
         if ($this->get_option_choice())
         {
             $options[] = $this->get_option_choice();
         }
-        
+
         if ($this->get_graduation_option())
         {
             $options[] = $this->get_graduation_option();
         }
-        
+
         return implode(' - ', $options);
     }
 
@@ -228,7 +230,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      */
     static function distinction_string($distinction)
     {
-        
+
         switch ($distinction)
         {
             case self :: DISTINCTION_NONE :
@@ -270,7 +272,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      */
     static function exchange_type_string($exchange_type)
     {
-        
+
         switch ($exchange_type)
         {
             case self :: EXCHANGE_TYPE_NONE :
@@ -427,7 +429,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         $extended_property_names[] = self :: PROPERTY_OPTION_CHOICE;
         $extended_property_names[] = self :: PROPERTY_GRADUATION_OPTION;
         $extended_property_names[] = self :: PROPERTY_DISTINCTION;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -447,12 +449,12 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         $string = array();
         $string[] = $this->get_year();
         $string[] = $this->get_training();
-        
+
         if ($this->get_unified_option())
         {
             $string[] = $this->get_unified_option();
         }
-        
+
         return implode(' | ', $string);
     }
 
