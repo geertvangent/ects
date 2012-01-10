@@ -28,6 +28,7 @@ class DefaultModuleInstanceTableColumnModel extends ObjectTableColumnModel
         $columns[] = new ObjectTableColumn(ModuleInstance :: PROPERTY_TYPE);
         $columns[] = new ObjectTableColumn(ModuleInstance :: PROPERTY_TITLE);
         $columns[] = new ObjectTableColumn(ModuleInstance :: PROPERTY_DESCRIPTION);
+        $columns[] = new ObjectTableColumn(ModuleInstance :: PROPERTY_DISPLAY_ORDER);
         return $columns;
     }
 }

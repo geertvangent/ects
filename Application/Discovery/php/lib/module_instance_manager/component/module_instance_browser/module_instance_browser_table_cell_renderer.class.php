@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\EqualityCondition;
+
 use common\libraries\Translation;
 use common\libraries\Utilities;
 use common\libraries\ToolbarItem;
@@ -52,6 +54,36 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
     {
         $toolbar = new Toolbar();
         
+        $allowed = $this->check_move_allowed($module_instance);
+        
+        if ($this->is_display_order_column())
+        {
+            if ($allowed["moveup"])
+            {
+                $toolbar->add_item(new ToolbarItem(Translation :: get('MoveUp', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_up.png', $this->browser->get_url(array(
+                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MOVE_INSTANCE, 
+                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(), 
+                        DiscoveryManager :: PARAM_DIRECTION => DiscoveryManager :: PARAM_DIRECTION_UP)), ToolbarItem :: DISPLAY_ICON));
+            }
+            else
+            {
+                $toolbar->add_item(new ToolbarItem(Translation :: get('MoveUpNotAvailable', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_up_na.png', null, ToolbarItem :: DISPLAY_ICON));
+            
+            }
+            
+            if ($allowed["movedown"])
+            {
+                $toolbar->add_item(new ToolbarItem(Translation :: get('MoveDown', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_down.png', $this->browser->get_url(array(
+                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MOVE_INSTANCE, 
+                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(), 
+                        DiscoveryManager :: PARAM_DIRECTION => DiscoveryManager :: PARAM_DIRECTION_DOWN)), ToolbarItem :: DISPLAY_ICON));
+            }
+            else
+            {
+                $toolbar->add_item(new ToolbarItem(Translation :: get('MoveDownNotAvailable', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_down_na.png', null, ToolbarItem :: DISPLAY_ICON));
+            }
+        }
+        
         if ($module_instance->is_enabled())
         {
             $toolbar->add_item(new ToolbarItem(Translation :: get('Deactivate', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_deactivate.png', $this->browser->get_url(array(
@@ -75,6 +107,35 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
                 ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MANAGE_INSTANCE_RIGHTS, 
                 DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), ToolbarItem :: DISPLAY_ICON));
         return $toolbar->as_html();
+    }
+
+    protected function check_move_allowed($module_instance)
+    {
+        $moveup_allowed = true;
+        $movedown_allowed = true;
+        
+        $count = DiscoveryDataManager :: get_instance()->count_module_instances(new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
+        if ($count == 1)
+        {
+            $moveup_allowed = false;
+            $movedown_allowed = false;
+        }
+        else
+        {
+            if ($module_instance->get_display_order() == 1)
+            {
+                $moveup_allowed = false;
+            }
+            else
+            {
+                if ($module_instance->get_display_order() == $count)
+                {
+                    $movedown_allowed = false;
+                }
+            }
+        }
+        
+        return array('moveup' => $moveup_allowed, 'movedown' => $movedown_allowed);
     }
 }
 ?>

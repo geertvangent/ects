@@ -29,6 +29,8 @@ class DefaultModuleInstanceTableCellRenderer extends ObjectTableCellRenderer
                 return Utilities :: truncate_string($module_instance->get_title(), 50);
             case ModuleInstance :: PROPERTY_DESCRIPTION :
                 return Utilities :: truncate_string($module_instance->get_description(), 50);
+            case ModuleInstance :: PROPERTY_DISPLAY_ORDER :
+                return $module_instance->get_display_order();
             default :
                 return '&nbsp;';
         }

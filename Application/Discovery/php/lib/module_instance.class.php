@@ -97,7 +97,7 @@ class ModuleInstance extends DataClass
     static function get_default_property_names()
     {
         return parent :: get_default_property_names(array(self :: PROPERTY_TITLE, self :: PROPERTY_DESCRIPTION, 
-                self :: PROPERTY_TYPE, self :: PROPERTY_CONTENT_TYPE));
+                self :: PROPERTY_TYPE, self :: PROPERTY_CONTENT_TYPE, self :: PROPERTY_DISPLAY_ORDER));
     }
 
     static function get_table_name()

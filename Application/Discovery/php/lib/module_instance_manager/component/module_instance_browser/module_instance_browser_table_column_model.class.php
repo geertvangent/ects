@@ -29,6 +29,12 @@ class ModuleInstanceBrowserTableColumnModel extends DefaultModuleInstanceTableCo
         $this->set_default_order_column(1);
         $this->add_column(self :: get_modification_column());
     }
+    
+    function get_display_order_column_property()
+    {
+        return ModuleInstance::PROPERTY_DISPLAY_ORDER;
+    }
+    
 
     /**
      * Gets the modification column

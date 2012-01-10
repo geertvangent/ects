@@ -18,6 +18,10 @@ class DiscoveryManager extends WebApplication
     const PARAM_USER_ID = 'user_id';
     const PARAM_MODULE_ID = 'module_id';
     const PARAM_CONTENT_TYPE = 'content_type';
+    const PARAM_DIRECTION = 'direction';
+    
+    const PARAM_DIRECTION_UP = 'up';
+    const PARAM_DIRECTION_DOWN = 'down';
     
     const DEFAULT_ACTION = self :: ACTION_VIEW;
 
