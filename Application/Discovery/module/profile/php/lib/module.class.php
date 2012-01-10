@@ -56,15 +56,17 @@ class Module extends \application\discovery\Module
      * @return \application\discovery\module\profile\Profile
      */
     function get_profile()
-    {	
+    {
         if (! isset($this->profile))
         {
-        
+            
             $this->profile = DataManager :: get_instance($this->get_module_instance())->retrieve_profile($this->get_profile_parameters());
         }
         
         return $this->profile;
     }
+
+
 
     /**
      * @return multitype:string
@@ -104,7 +106,7 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-
+        
         if ($this->get_profile() instanceof Profile)
         {
             $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'types/general.png);">';

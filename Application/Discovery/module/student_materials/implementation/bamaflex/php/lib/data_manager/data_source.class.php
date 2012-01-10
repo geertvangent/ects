@@ -1,6 +1,7 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
+use application\discovery\module\career\implementation\bamaflex\Course;
 use application\discovery\DiscoveryItem;
 
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
@@ -158,6 +159,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $course = new Course();
         $course->set_id($result->id);
+        $course->set_source($result->source);
         $course->set_programme_id($result->programme_id);
         $course->set_type($result->type);
         $course->set_enrollment_id($result->enrollment_id);
@@ -174,13 +176,13 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\MaterialStructured
      */
-    function retrieve_materials($programme_id)
+    function retrieve_materials($programme_id, $type)
     {
         
-        if (! isset($this->materials[$programme_id]))
+        if (! isset($this->materials[$programme_id][$type]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_material] ';
-            $query .= 'WHERE programme_id = "' . $programme_id . '"';
+            $query .= 'WHERE programme_id = "' . $programme_id . '" AND required = "' . $type . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -206,12 +208,81 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $material->set_type($result->required);
                     $material->set_description($this->convert_to_utf8($result->remarks));
                     
-                    $this->materials[$programme_id][] = $material;
+                    $this->materials[$programme_id][$type][] = $material;
                 }
             }
         }
         
-        return $this->materials[$programme_id];
+        return $this->materials[$programme_id][$type];
+    }
+
+    function count_materials($parameters = null, $year = null, $enrollment_id = null, $type = null)
+    {
+        $id = $parameters->get_user_id();
+        
+        $user = UserDataManager :: get_instance()->retrieve_user($id);
+        $official_code = $user->get_official_code();
+        if (! $enrollment_id)
+        {
+            $query = 'SELECT DISTINCT id FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = "' . $official_code . '"';
+            if ($year)
+            {
+                $query .= ' AND year = "' . $year . '"';
+            }
+            $statement = $this->get_connection()->prepare($query);
+            $results = $statement->execute();
+            $enrollments_ids = array();
+            if (! $results instanceof MDB2_Error)
+            {
+                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                {
+                    $enrollments_ids[] = $result->id;
+                }
+            }
+        }
+        else
+        {
+            $enrollments_ids = array($enrollment_id);
+        }
+        
+        if (count($enrollments_ids) > 0)
+        {
+            $query = 'SELECT DISTINCT programme_id FROM [dbo].[v_discovery_career_advanced] ';
+            $query .= 'WHERE enrollment_id IN ("' . implode('","', $enrollments_ids) . '")';
+            
+            $statement = $this->get_connection()->prepare($query);
+            $results = $statement->execute();
+            $course_ids = array();
+            if (! $results instanceof MDB2_Error)
+            {
+                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                {
+                    $course_ids[] = $result->programme_id;
+                }
+            }
+            
+            if (count($course_ids) > 0)
+            {
+                $query = 'SELECT count(id) AS materials_count FROM [dbo].[v_discovery_course_material] ';
+                $query .= 'WHERE programme_id IN("' . implode('","', $course_ids) . '")';
+                if (! is_null($type))
+                {
+                	$query .= ' AND required = "' . $type . '"';
+                }
+                $statement = $this->get_connection()->prepare($query);
+                $results = $statement->execute();
+                
+                if (! $results instanceof MDB2_Error)
+                {
+                    $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+                    return $result->materials_count;
+                }
+            }
+        }
+        else
+        {
+            return 0;
+        }
     }
 }
 ?>

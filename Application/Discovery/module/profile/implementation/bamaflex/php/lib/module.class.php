@@ -56,7 +56,7 @@ class Module extends \application\discovery\module\profile\Module
         if (count($this->get_profile()->get_learning_credit()) == 1)
         {
             $learning_credit = array_pop($this->get_profile()->get_learning_credit());
-                       
+            
             $properties[Translation :: get('LearningCredit')] = $learning_credit->get_html() . ' (' . $learning_credit->get_date() . ')';
         }
         
@@ -271,6 +271,12 @@ class Module extends \application\discovery\module\profile\Module
         {
             return Display :: normal_message(Translation :: get('NoData'), true);
         }
+    }
+
+    function has_data($parameters = null)
+    {
+        $parameters = $parameters ? $parameters : $this->get_profile_parameters();
+        return DataManager :: get_instance($this->get_module_instance())->has_profile($parameters);
     }
 }
 ?>

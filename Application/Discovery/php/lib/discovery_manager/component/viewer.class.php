@@ -1,6 +1,16 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\DelegateComponent;
+
+use common\libraries\Breadcrumb;
+
+use user\UserDetails;
+
+use user\UserManager;
+
+use user\UserDataManager;
+
 use common\libraries\Display;
 
 use common\libraries\Translation;
@@ -28,7 +38,7 @@ use application\discovery\module\profile\implementation\bamaflex\SettingsConnect
  * @author Hans De Bisschop
  * @package application.discovery
  */
-class DiscoveryManagerViewerComponent extends DiscoveryManager
+class DiscoveryManagerViewerComponent extends DiscoveryManager implements DelegateComponent
 {
 
     function run()
@@ -147,6 +157,18 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager
             $module_parameters[DiscoveryManager :: PARAM_MODULE_ID] = $current_module_instance->get_id();
             $link = $this->get_url($module_parameters);
             $tabs->add_tab(new DynamicVisualTab($current_module_instance->get_id(), $current_module_instance->get_title(), Theme :: get_image_path($current_module_instance->get_type()) . 'logo/22.png', $link, true));
+        }
+        
+        if ($current_module_instance->get_content_type() == ModuleInstance :: TYPE_USER)
+        {
+            $user_id = $module_parameters->get_user_id();
+            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $user->get_fullname()));
+        
+     //            $details = array();
+        //            $details[] = $user->get_fullname();
+        //            $details[] = $user->get_email();
+        //            echo implode("\n", $details);
         }
         $this->display_header();
         echo $tabs->render();

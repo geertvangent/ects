@@ -448,11 +448,6 @@ class Module extends \application\discovery\module\career\Module
         
         $html = array();
         
-        if ($this->get_career_parameters()->get_user_id() != $this->get_application()->get_user_id())
-        {
-            $user = UserDataManager :: get_instance()->retrieve_user($this->get_career_parameters()->get_user_id());
-            $html[] = '<h3>' . $user->get_fullname() . '</h3>';
-        }
         
         if ($this->has_data())
         {

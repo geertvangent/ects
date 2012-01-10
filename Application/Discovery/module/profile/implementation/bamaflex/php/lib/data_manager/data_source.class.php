@@ -80,6 +80,25 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             return false;
         }
     }
+    
+    function has_profile($parameters)
+    {
+    	$user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        
+        $official_code = $user->get_official_code();
+        
+        $query = 'SELECT count(id) AS profile_count FROM [dbo].[v_discovery_profile_basic] WHERE id = "' . $official_code . '"';
+        
+        $statement = $this->get_connection()->prepare($query);
+        $result = $statement->execute();
+        
+        if (! $result instanceof MDB2_Error)
+        {
+            $object = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $object->profile_count;
+        }
+        return 0;
+    }
 
     /**
      * @param int $id

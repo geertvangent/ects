@@ -47,6 +47,12 @@ class Module extends \application\discovery\Module
         return $parameter;
     }
 
+    function has_data($parameters = null)
+    {
+        $parameters = $parameters ? $parameters : $this->get_student_materials_parameters();
+        return $this->get_data_manager()->count_materials($parameters);
+    }
+
     static function get_module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
