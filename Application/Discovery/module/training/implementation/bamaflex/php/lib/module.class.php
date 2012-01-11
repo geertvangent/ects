@@ -197,21 +197,20 @@ class Module extends \application\discovery\module\training\Module
 
                 $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                $html = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_year() . '</a>';
 
                 if (! $faculty->has_previous_references(true))
                 {
-                    $next_history = array($year, $html);
+                    $next_history = array($year, '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
                 }
                 elseif (! $faculty->has_next_references(true))
                 {
-                    $previous_history = array($year, $html);
+                    $previous_history = array($year, '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
                 }
                 else
                 {
                     $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
                     $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                    $history[] = $html;
+                    $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_year() . '</a>';
                 }
             }
             $i ++;
