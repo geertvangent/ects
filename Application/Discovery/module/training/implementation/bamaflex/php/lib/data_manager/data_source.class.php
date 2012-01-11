@@ -167,10 +167,13 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     }
                     else
                     {
-                        $reference = new HistoryReference();
-                        $reference->set_id($result->previous_id);
-                        $reference->set_source($result->previous_source);
-                        $faculty->add_previous_reference($reference);
+                        if ($result->previous_id)
+                        {
+                            $reference = new HistoryReference();
+                            $reference->set_id($result->previous_id);
+                            $reference->set_source($result->previous_source);
+                            $faculty->add_previous_reference($reference);
+                        }
                     }
 
                     $conditions = array();
@@ -194,10 +197,13 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     {
                         $next = $this->retrieve_faculty_next_id($faculty);
 
-                        $reference = new HistoryReference();
-                        $reference->set_id($next->id);
-                        $reference->set_source($next->source);
-                        $faculty->add_next_reference($reference);
+                        if ($next)
+                        {
+                            $reference = new HistoryReference();
+                            $reference->set_id($next->id);
+                            $reference->set_source($next->source);
+                            $faculty->add_next_reference($reference);
+                        }
                     }
 
                     $this->faculties[$faculty_id][$source] = $faculty;
