@@ -204,7 +204,7 @@ class Module extends \application\discovery\module\training\Module
 
         $html[] = '<h3>';
 
-        if ($this->faculty->has_previous_reference(true))
+        if ($this->faculty->has_previous_references(true))
         {
             $references = $this->faculty->get_previous_references();
             $parameters = new Parameters($references[0]->get_id(), $references[0]->get_source());
@@ -218,7 +218,7 @@ class Module extends \application\discovery\module\training\Module
 
         $html[] = $this->faculty->get_name();
 
-        if ($this->faculty->has_next_reference(true))
+        if ($this->faculty->has_next_references(true))
         {
             $references = $this->faculty->get_next_references();
             $parameters = new Parameters($references[0]->get_id(), $references[0]->get_source());
