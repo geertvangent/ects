@@ -170,8 +170,24 @@ class Module extends \application\discovery\module\training\Module
 
         foreach ($faculties as $year => $year_faculties)
         {
-            foreach ($year_faculties as $faculty)
+            if (count($year_faculties) > 1)
             {
+                $multi_history = array();
+                $multi_history[] = $year . ': ';
+
+                foreach ($year_faculties as $faculty)
+                {
+                    $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
+                    $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                    $multi_history[] = '<a href="' . $link . '">' . $faculty->get_name() . '</a>';
+                }
+
+                $history[] = implode(' ', $multi_history);
+            }
+            else
+            {
+                $faculty = $year_faculties[0];
+
                 $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
                 $history[] = '<a href="' . $link . '">' . $faculty->get_year() . '</a>';
