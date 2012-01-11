@@ -6,6 +6,7 @@ use common\libraries\DataClass;
 
 /**
  * application.discovery.module.assessment.implementation.chamilo.discovery
+ *
  * @author Hans De Bisschop
  */
 class Assessment extends DataClass
@@ -18,7 +19,8 @@ class Assessment extends DataClass
 
     /**
      * Get the default properties
-     * @param multitype:string $extended_property_names
+     *
+     * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
     static function get_default_property_names($extended_property_names = array())
@@ -27,6 +29,7 @@ class Assessment extends DataClass
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()
