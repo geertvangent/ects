@@ -70,7 +70,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
                         $faculties[$faculty->get_year()][] = $faculty;
                     }
 
-                    if($this->has_previous_references(true) && $recursive)
+                    if($faculty->has_next_references(true) && $this->has_previous_references(true) && $recursive)
                     {
                         $faculties = array_merge_recursive($faculties, $faculty->get_previous($module_instance));
                     }
@@ -107,7 +107,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
                         $faculties[$faculty->get_year()][] = $faculty;
                     }
 
-                    if($this->has_next_references(true) && $recursive)
+                    if($faculty->has_previous_references(true) && $this->has_next_references(true) && $recursive)
                     {
                         $faculties = array_merge_recursive($faculties, $faculty->get_next($module_instance));
                     }
