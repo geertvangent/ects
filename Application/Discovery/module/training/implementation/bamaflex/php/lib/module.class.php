@@ -198,7 +198,7 @@ class Module extends \application\discovery\module\training\Module
 
                 $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                $history[] = $faculty->get_year() . ': <a href="' . $link . '">' . $faculty->get_name() . '</a>';
+                $history[] = '<a href="' . $link . '">' .$faculty->get_year() . '</a>';
             }
             $i++;
         }
@@ -208,7 +208,7 @@ class Module extends \application\discovery\module\training\Module
             $properties[$previous_history[0]] = $previous_history[1];
         }
 
-        $properties[Translation :: get('History')] = implode(/*'&nbsp;&nbsp;|&nbsp;&nbsp;'*/'<br />', $history);
+        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
 
         if ($next_history)
         {
