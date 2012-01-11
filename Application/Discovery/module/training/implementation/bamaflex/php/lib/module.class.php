@@ -168,6 +168,7 @@ class Module extends \application\discovery\module\training\Module
         $history = array();
         $faculties = $this->faculty->get_all($this->get_module_instance());
 
+        $i = 1;
         foreach ($faculties as $year => $year_faculties)
         {
             if (count($year_faculties) > 1)
@@ -182,7 +183,14 @@ class Module extends \application\discovery\module\training\Module
                     $multi_history[] = '<a href="' . $link . '">' . $faculty->get_name() . '</a>';
                 }
 
-                $history[] = implode(' ', $multi_history);
+                if ($i == 1)
+                {
+                    $previous_history = array($year, implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $multi_history));
+                }
+                else
+                {
+                    $next_history = array($year, implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $multi_history));
+                }
             }
             else
             {
@@ -192,8 +200,20 @@ class Module extends \application\discovery\module\training\Module
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
                 $history[] = $faculty->get_year() . ': <a href="' . $link . '">' . $faculty->get_name() . '</a>';
             }
+            $i++;
         }
+
+        if($previous_history)
+        {
+            $properties[$previous_history[0]] = $previous_history[1];
+        }
+
         $properties[Translation :: get('History')] = implode(/*'&nbsp;&nbsp;|&nbsp;&nbsp;'*/'<br />', $history);
+
+        if ($next_history)
+        {
+            $properties[$next_history[0]] = $next_history[1];
+        }
 
         return new PropertiesTable($properties);
     }
