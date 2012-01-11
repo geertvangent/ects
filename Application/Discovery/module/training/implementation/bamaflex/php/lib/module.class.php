@@ -168,6 +168,7 @@ class Module extends \application\discovery\module\training\Module
 
         $history = array();
         $faculties = $this->faculty->get_all($this->get_module_instance());
+        dump($faculties);
         foreach ($faculties as $faculty)
         {
             $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
