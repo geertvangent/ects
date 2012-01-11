@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
+use application\discovery\connection\bamaflex\HistoryReference;
+
 use common\libraries\AndCondition;
 
 use common\libraries\EqualityCondition;
@@ -155,17 +157,20 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $histories = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
                     if ($histories->size() > 0)
                     {
-                        if ($histories->size() == 1)
+                        while ($history = $histories->next_result())
                         {
-                            $history = $histories->next_result();
-                            $faculty->set_previous_id($history->get_previous_id());
-                            $faculty->set_previous_source($history->get_previous_source());
+                            $reference = new HistoryReference();
+                            $reference->set_id($history->get_previous_id());
+                            $reference->set_source($history->get_previous_source());
+                            $faculty->add_previous_reference($reference);
                         }
                     }
                     else
                     {
-                        $faculty->set_previous_id($result->previous_id);
-                        $faculty->set_previous_source($result->previous_source);
+                        $reference = new HistoryReference();
+                        $reference->set_id($result->previous_id);
+                        $reference->set_source($result->previous_source);
+                        $faculty->add_previous_reference($reference);
                     }
 
                     $conditions = array();
@@ -177,19 +182,22 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $histories = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
                     if ($histories->size() > 0)
                     {
-                        if ($histories->size() == 1)
+                        while ($history = $histories->next_result())
                         {
-                            $history = $histories->next_result();
-                            $faculty->set_next_id($history->get_history_id());
-                            $faculty->set_next_source($history->get_history_source());
+                            $reference = new HistoryReference();
+                            $reference->set_id($history->get_history_id());
+                            $reference->set_source($history->get_history_source());
+                            $faculty->add_next_reference($reference);
                         }
-
                     }
                     else
                     {
                         $next = $this->retrieve_faculty_next_id($faculty);
-                        $faculty->set_next_id($next->id);
-                        $faculty->set_next_source($next->source);
+
+                        $reference = new HistoryReference();
+                        $reference->set_id($next->id);
+                        $reference->set_source($next->source);
+                        $faculty->add_next_reference($reference);
                     }
 
                     $this->faculties[$faculty_id][$source] = $faculty;
