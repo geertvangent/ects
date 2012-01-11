@@ -56,23 +56,22 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         $faculty = $this;
         if ($this->has_previous_references())
         {
-            // do
-            // {
-            foreach ($this->get_previous_references() as $previous_reference)
+            do
             {
-                $parameters = new Parameters();
-                $parameters->set_faculty_id($previous_reference->get_id());
-                $parameters->set_source($previous_reference->get_source());
-
-                $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
-                if ($faculty instanceof Faculty)
+                foreach ($this->get_previous_references() as $previous_reference)
                 {
-                    $faculties[$faculty->get_year()][] = $faculty;
+                    $parameters = new Parameters();
+                    $parameters->set_faculty_id($previous_reference->get_id());
+                    $parameters->set_source($previous_reference->get_source());
+
+                    $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
+                    if ($faculty instanceof Faculty)
+                    {
+                        $faculties[$faculty->get_year()][] = $faculty;
+                    }
                 }
             }
-            // }
-            // while ($faculty instanceof Faculty &&
-            // $faculty->has_previous_references(true) && $recursive);
+            while ($faculty instanceof Faculty && $faculty->has_previous_references(true) && $recursive);
         }
         return $faculties;
     }
@@ -89,23 +88,22 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         $faculty = $this;
         if ($this->has_next_references())
         {
-            // do
-            // {
-            foreach ($this->get_next_references() as $next_reference)
+            do
             {
-                $parameters = new Parameters();
-                $parameters->set_faculty_id($next_reference->get_id());
-                $parameters->set_source($next_reference->get_source());
-
-                $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
-                if ($faculty instanceof Faculty)
+                foreach ($this->get_next_references() as $next_reference)
                 {
-                    $faculties[$faculty->get_year()][] = $faculty;
+                    $parameters = new Parameters();
+                    $parameters->set_faculty_id($next_reference->get_id());
+                    $parameters->set_source($next_reference->get_source());
+
+                    $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
+                    if ($faculty instanceof Faculty)
+                    {
+                        $faculties[$faculty->get_year()][] = $faculty;
+                    }
                 }
             }
-            // }
-            // while ($faculty instanceof Faculty &&
-            // $faculty->has_next_references(true) && $recursive);
+            while ($faculty->has_next_references(true) && $faculty instanceof Faculty && $recursive);
         }
         return $faculties;
     }
@@ -119,7 +117,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     {
         $faculties = $this->get_next($module_instance);
 
-        if (!is_array($faculties[$this->get_year()]))
+        if (! is_array($faculties[$this->get_year()]))
         {
             $faculties[$this->get_year()] = array();
         }
@@ -129,7 +127,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         {
             foreach ($previous_faculties as $previous_faculty)
             {
-                if (!is_array($faculties[$previous_faculty->get_year()]))
+                if (! is_array($faculties[$previous_faculty->get_year()]))
                 {
                     $faculties[$previous_faculty->get_year()] = array();
                 }
