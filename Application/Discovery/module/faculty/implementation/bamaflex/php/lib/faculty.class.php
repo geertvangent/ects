@@ -118,11 +118,23 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     function get_all($module_instance)
     {
         $faculties = $this->get_next($module_instance);
+
+        if (!is_array($faculties[$this->get_year()]))
+        {
+            $faculties[$this->get_year()] = array();
+        }
         array_unshift($faculties[$this->get_year()], $this);
 
-        foreach ($this->get_previous($module_instance) as $faculty)
+        foreach ($this->get_previous($module_instance) as $year => $previous_faculties)
         {
-            array_unshift($faculties[$faculty->get_year()], $faculty);
+            foreach ($previous_faculties as $previous_faculty)
+            {
+                if (!is_array($faculties[$previous_faculty->get_year()]))
+                {
+                    $faculties[$previous_faculty->get_year()] = array();
+                }
+                array_unshift($faculties[$previous_faculty->get_year()], $previous_faculty);
+            }
         }
 
         return $faculties;
