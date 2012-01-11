@@ -174,7 +174,6 @@ class Module extends \application\discovery\module\training\Module
             if (count($year_faculties) > 1)
             {
                 $multi_history = array();
-                $multi_history[] = $year . ': ';
 
                 foreach ($year_faculties as $faculty)
                 {
@@ -198,21 +197,21 @@ class Module extends \application\discovery\module\training\Module
 
                 $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                $history[] = '<a href="' . $link . '">' .$faculty->get_year() . '</a>';
+                $history[] = '<a href="' . $link . '">' . $faculty->get_year() . '</a>';
             }
-            $i++;
+            $i ++;
         }
 
-        if($previous_history)
+        if ($previous_history)
         {
-            $properties[$previous_history[0]] = $previous_history[1];
+            $properties[Translation :: get('HistoryWas', array('YEAR' => $previous_history[0]), 'application\discovery')] = $previous_history[1];
         }
 
         $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
 
         if ($next_history)
         {
-            $properties[$next_history[0]] = $next_history[1];
+            $properties[Translation :: get('HistoryBecomes', array('YEAR' => $next_history[0]), 'application\discovery')] = $next_history[1];
         }
 
         return new PropertiesTable($properties);
