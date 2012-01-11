@@ -1,4 +1,4 @@
-TypeName = "Person"
+TypeName = "Users"
 Username = "Username"
 Timezone = "Timezone"
 Details = "Details"

@@ -21,6 +21,7 @@ class Mdb2DiscoveryDataManager extends \application\discovery\Mdb2DiscoveryDataM
 
     function retrieve_history_by_conditions($condition)
     {
+        return $this->retrieve_objects(History :: get_table_name(), $condition, null, null, array(), History :: CLASS_NAME);
         return $this->retrieve_object(History :: get_table_name(), $condition, array(), History :: CLASS_NAME);
     }
 }

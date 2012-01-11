@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\EqualityCondition;
+
 use common\libraries\Filesystem;
 use common\libraries\FormValidator;
 use common\libraries\Translation;
@@ -18,14 +20,14 @@ use DOMDocument;
 
 class ModuleInstanceForm extends FormValidator
 {
-    
+
     const TYPE_CREATE = 1;
     const TYPE_EDIT = 2;
-    
+
     const PROPERTY_ENABLED = 'enabled';
-    
+
     const SETTINGS_PREFIX = 'settings';
-    
+
     private $module_instance;
     private $configuration;
     private $form_type;
@@ -33,7 +35,7 @@ class ModuleInstanceForm extends FormValidator
     function __construct($form_type, $module_instance, $action)
     {
         parent :: __construct('module_instance', 'post', $action);
-        
+
         $this->module_instance = $module_instance;
         $this->configuration = $this->parse_settings();
         $this->form_type = $form_type;
@@ -45,7 +47,7 @@ class ModuleInstanceForm extends FormValidator
         {
             $this->build_creation_form();
         }
-        
+
         $this->setDefaults();
     }
 
@@ -53,15 +55,15 @@ class ModuleInstanceForm extends FormValidator
     {
         $module_instance = $this->module_instance;
         $configuration = $this->configuration;
-        
+
         $tabs_generator = new DynamicFormTabsRenderer($this->getAttribute('name'), $this);
         $tabs_generator->add_tab(new DynamicFormTab('general', 'General', Theme :: get_common_image_path() . 'place_tab_view.png', 'build_general_form'));
-        
+
         if (count($configuration['settings']) > 0)
         {
             $tabs_generator->add_tab(new DynamicFormTab('settings', 'Settings', Theme :: get_common_image_path() . 'place_tab_settings.png', 'build_settings_form'));
         }
-        
+
         $tabs_generator->render();
     }
 
@@ -79,17 +81,17 @@ class ModuleInstanceForm extends FormValidator
     {
         $module_instance = $this->module_instance;
         $configuration = $this->configuration;
-        
+
         $path = Path :: namespace_to_path($module_instance->get_type());
-        
+
         require_once Path :: get(SYS_PATH) . $path . '/php/settings/settings_connector.class.php';
-        
+
         $categories = count($configuration['settings']);
-        
+
         foreach ($configuration['settings'] as $category_name => $settings)
         {
             $has_settings = false;
-            
+
             foreach ($settings as $name => $setting)
             {
                 $label = Translation :: get(Utilities :: underscores_to_camelcase($name), null, $this->module_instance->get_type());
@@ -99,7 +101,7 @@ class ModuleInstanceForm extends FormValidator
                     $this->addElement('category', Translation :: get(Utilities :: underscores_to_camelcase($category_name), null, ModuleInstanceManager :: get_namespace($this->module_instance->get_instance_type(), $this->module_instance->get_type())));
                     $has_settings = true;
                 }
-                
+
                 if ($setting['locked'] == 'true')
                 {
                     $this->addElement('static', $name, $label);
@@ -107,7 +109,7 @@ class ModuleInstanceForm extends FormValidator
                 elseif ($setting['field'] == 'text')
                 {
                     $this->add_textfield($name, $label, ($setting['required'] == 'true'));
-                    
+
                     $validations = $setting['validations'];
                     if ($validations)
                     {
@@ -119,12 +121,12 @@ class ModuleInstanceForm extends FormValidator
                                 {
                                     $validation['format'] = NULL;
                                 }
-                                
+
                                 $this->addRule($name, Translation :: get($validation['message'], null, ModuleInstanceManager :: get_namespace($this->module_instance->get_instance_type(), $this->module_instance->get_type())), $validation['rule'], $validation['format']);
                             }
                         }
                     }
-                
+
                 }
                 elseif ($setting['field'] == 'html_editor')
                 {
@@ -147,7 +149,7 @@ class ModuleInstanceForm extends FormValidator
                     {
                         $options = $setting['options']['values'];
                     }
-                    
+
                     if ($setting['field'] == 'radio' || $setting['field'] == 'checkbox')
                     {
                         $group = array();
@@ -170,7 +172,7 @@ class ModuleInstanceForm extends FormValidator
                     }
                 }
             }
-            
+
             if ($has_settings && $categories > 1)
             {
                 $this->addElement('category');
@@ -181,26 +183,26 @@ class ModuleInstanceForm extends FormValidator
     function build_editing_form()
     {
         $this->build_basic_form();
-        
+
         $this->addElement('hidden', ModuleInstance :: PROPERTY_ID);
-        
+
         $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES), array(
                 'class' => 'positive update'));
         $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
                 'class' => 'normal empty'));
-        
+
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
 
     function build_creation_form()
     {
         $this->build_basic_form();
-        
+
         $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), array(
                 'class' => 'positive'));
         $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
                 'class' => 'normal empty'));
-        
+
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
 
@@ -208,10 +210,10 @@ class ModuleInstanceForm extends FormValidator
     {
         $module_instance = $this->module_instance;
         $values = $this->exportValues();
-        
+
         $module_instance->set_title($values[ModuleInstance :: PROPERTY_TITLE]);
         $module_instance->set_description($values[ModuleInstance :: PROPERTY_DESCRIPTION]);
-        
+
         if (isset($values[self :: PROPERTY_ENABLED]))
         {
             $module_instance->set_content_type($module_instance->get_module_type());
@@ -220,7 +222,7 @@ class ModuleInstanceForm extends FormValidator
         {
             $module_instance->set_content_type(ModuleInstance :: TYPE_DISABLED);
         }
-        
+
         if (! $module_instance->update())
         {
             return false;
@@ -229,24 +231,24 @@ class ModuleInstanceForm extends FormValidator
         {
             $settings = $values['settings'];
             $failures = 0;
-            
+
             foreach ($settings as $name => $value)
             {
                 $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name($name, $module_instance->get_id());
                 $setting->set_value($value);
-                
+
                 if (! $setting->update())
                 {
                     $failures ++;
                 }
             }
-            
+
             if ($failures > 0)
             {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -254,10 +256,10 @@ class ModuleInstanceForm extends FormValidator
     {
         $module_instance = $this->module_instance;
         $values = $this->exportValues();
-        
+
         $module_instance->set_title($values[ModuleInstance :: PROPERTY_TITLE]);
         $module_instance->set_description($values[ModuleInstance :: PROPERTY_DESCRIPTION]);
-        
+
         if (isset($values[self :: PROPERTY_ENABLED]))
         {
             $module_instance->set_content_type($module_instance->get_module_type());
@@ -266,7 +268,12 @@ class ModuleInstanceForm extends FormValidator
         {
             $module_instance->set_content_type(ModuleInstance :: TYPE_DISABLED);
         }
-        
+
+        $display_order = DiscoveryDataManager :: get_instance()->count_module_instances(new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
+        $display_order++;
+
+        $module_instance->set_display_order($display_order);
+
         if (! $module_instance->create())
         {
             return false;
@@ -275,24 +282,24 @@ class ModuleInstanceForm extends FormValidator
         {
             $settings = $values['settings'];
             $failures = 0;
-            
+
             foreach ($settings as $name => $value)
             {
                 $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name($name, $module_instance->get_id());
                 $setting->set_value($value);
-                
+
                 if (! $setting->update())
                 {
                     $failures ++;
                 }
             }
-            
+
             if ($failures > 0)
             {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -314,9 +321,9 @@ class ModuleInstanceForm extends FormValidator
         {
             $defaults[ModuleInstance :: PROPERTY_TITLE] = $module_instance->get_title();
         }
-        
+
         $defaults[ModuleInstance :: PROPERTY_TYPE] = $module_instance->get_type();
-        
+
         if (! $module_instance->get_description())
         {
             $defaults[ModuleInstance :: PROPERTY_DESCRIPTION] = Translation :: get('TypeDescription', null, $this->module_instance->get_type());
@@ -325,7 +332,7 @@ class ModuleInstanceForm extends FormValidator
         {
             $defaults[ModuleInstance :: PROPERTY_DESCRIPTION] = $module_instance->get_description();
         }
-        
+
         if ($module_instance->get_title())
         {
             $defaults[self :: PROPERTY_ENABLED] = (int) $module_instance->is_enabled();
@@ -334,9 +341,9 @@ class ModuleInstanceForm extends FormValidator
         {
             $defaults[self :: PROPERTY_ENABLED] = 1;
         }
-        
+
         $configuration = $this->configuration;
-        
+
         foreach ($configuration['settings'] as $category_name => $settings)
         {
             foreach ($settings as $name => $setting)
@@ -348,7 +355,7 @@ class ModuleInstanceForm extends FormValidator
                 }
             }
         }
-        
+
         parent :: setDefaults($defaults);
     }
 
@@ -356,7 +363,7 @@ class ModuleInstanceForm extends FormValidator
     {
         $path = Path :: get_common_extensions_path() . 'module_instance_manager/implementation/';
         $folders = Filesystem :: get_directory_content($path, Filesystem :: LIST_DIRECTORIES, false);
-        
+
         $types = array();
         foreach ($folders as $folder)
         {
@@ -370,34 +377,34 @@ class ModuleInstanceForm extends FormValidator
     {
         $module_instance = $this->module_instance;
         $path = Path :: namespace_to_path($module_instance->get_type());
-        
+
         $file = Path :: get(SYS_PATH) . $path . '/php/settings/settings.xml';
         $result = array();
-        
+
         if (file_exists($file))
         {
             $doc = new DOMDocument();
             $doc->load($file);
             $object = $doc->getElementsByTagname('application')->item(0);
             $name = $object->getAttribute('name');
-            
+
             // Get categories
             $categories = $doc->getElementsByTagname('category');
             $settings = array();
-            
+
             foreach ($categories as $index => $category)
             {
                 $category_name = $category->getAttribute('name');
                 $category_properties = array();
-                
+
                 // Get settings in category
                 $properties = $category->getElementsByTagname('setting');
                 $attributes = array('field', 'default', 'locked');
-                
+
                 foreach ($properties as $index => $property)
                 {
                     $property_info = array();
-                    
+
                     foreach ($attributes as $index => $attribute)
                     {
                         if ($property->hasAttribute($attribute))
@@ -405,15 +412,15 @@ class ModuleInstanceForm extends FormValidator
                             $property_info[$attribute] = $property->getAttribute($attribute);
                         }
                     }
-                    
+
                     if ($property->hasChildNodes())
                     {
                         $property_options = $property->getElementsByTagname('options')->item(0);
-                        
+
                         if ($property_options)
                         {
                             $property_options_attributes = array('type', 'source');
-                            
+
                             foreach ($property_options_attributes as $index => $options_attribute)
                             {
                                 if ($property_options->hasAttribute($options_attribute))
@@ -421,7 +428,7 @@ class ModuleInstanceForm extends FormValidator
                                     $property_info['options'][$options_attribute] = $property_options->getAttribute($options_attribute);
                                 }
                             }
-                            
+
                             if ($property_options->getAttribute('type') == 'static' && $property_options->hasChildNodes())
                             {
                                 $options = $property_options->getElementsByTagname('option');
@@ -433,9 +440,9 @@ class ModuleInstanceForm extends FormValidator
                                 $property_info['options']['values'] = $options_info;
                             }
                         }
-                        
+
                         $property_validations = $property->getElementsByTagname('validations')->item(0);
-                        
+
                         if ($property_validations)
                         {
                             if ($property_validations->hasChildNodes())
@@ -444,8 +451,8 @@ class ModuleInstanceForm extends FormValidator
                                 $validation_info = array();
                                 foreach ($validations as $validation)
                                 {
-                                    $validation_info[] = array('rule' => $validation->getAttribute('rule'), 
-                                            'message' => $validation->getAttribute('message'), 
+                                    $validation_info[] = array('rule' => $validation->getAttribute('rule'),
+                                            'message' => $validation->getAttribute('message'),
                                             'format' => $validation->getAttribute('format'));
                                 }
                                 $property_info['validations'] = $validation_info;
@@ -454,14 +461,14 @@ class ModuleInstanceForm extends FormValidator
                     }
                     $category_properties[$property->getAttribute('name')] = $property_info;
                 }
-                
+
                 $settings[$category_name] = $category_properties;
             }
-            
+
             $result['name'] = $name;
             $result['settings'] = $settings;
         }
-        
+
         return $result;
     }
 

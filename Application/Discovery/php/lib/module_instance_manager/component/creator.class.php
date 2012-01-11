@@ -34,12 +34,12 @@ class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
     {
         $trail = BreadcrumbTrail :: get_instance();
         $trail->add_help('module_instance general');
-        
+
         if (! $this->get_user()->is_platform_admin())
         {
             $this->not_allowed();
         }
-        
+
         $type = Request :: get(ModuleInstanceManager :: PARAM_TYPE);
         if ($type)
         {
@@ -72,9 +72,9 @@ class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
                 $row[] = '<img src="' . Theme :: get_image_path($available_type) . '/logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
                 $row[] = $name;
                 $row[] = htmlentities(Translation :: get('TypeDescription', null, $available_type));
-                $row[] = Theme :: get_common_image('action_add', 'png', Translation :: get('AddModule'), $this->get_url(array(
+                $row[] = Theme :: get_common_image('action_add', 'png', Translation :: get('AddModuleInstance'), $this->get_url(array(
                         self :: PARAM_TYPE => $available_type)), ToolbarItem :: DISPLAY_ICON);
-                
+
                 $table_data[] = $row;
             }
             $table = new SortableTableFromArray($table_data);
@@ -82,7 +82,7 @@ class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
             $table->set_header(1, 'Type');
             $table->set_header(2, 'Description');
             $table->set_header(3, '');
-            
+
             $this->display_header();
             echo $table->as_html();
             $this->display_footer();
@@ -92,18 +92,18 @@ class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
     function get_module_instance_types()
     {
         $active_managers = ModuleInstanceManager :: get_registered_types();
-        
+
         $types = array();
         $sections = array();
-        
+
         while ($active_manager = $active_managers->next_result())
         {
             $package_info = PackageInfo :: factory($active_manager->get_type(), $active_manager->get_name());
             $package_info = $package_info->get_package_info();
-            
+
             $section = isset($package_info['package']['category']) ? $package_info['package']['category'] : 'various';
             $multiple = isset($package_info['package']['extra']['multiple']) ? $package_info['package']['extra']['multiple'] : false;
-            
+
             $conditions = array();
             $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_TYPE, $active_manager->get_name());
             $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_INSTANCE_TYPE, $active_manager->get_type());
@@ -113,22 +113,22 @@ class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
             {
                 continue;
             }
-            
+
             if (! in_array($section, array_keys($sections)))
             {
                 $manager_class = 'common\extensions\\' . $active_manager->get_type() . '\\' . Utilities :: underscores_to_camelcase($active_manager->get_type());
                 $sections[$section] = Translation :: get('Category' . Utilities :: underscores_to_camelcase($section), null, $manager_class :: get_namespace());
             }
-            
+
             if (! isset($types[$section]))
             {
                 $types[$section] = array();
             }
-            
+
             $types[$section][$active_manager->get_name()] = $active_manager;
             asort($types[$section]);
         }
-        
+
         asort($sections);
         return array('sections' => $sections, 'types' => $types);
     }

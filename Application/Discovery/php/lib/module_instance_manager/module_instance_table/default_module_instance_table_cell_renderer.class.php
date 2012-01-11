@@ -26,9 +26,9 @@ class DefaultModuleInstanceTableCellRenderer extends ObjectTableCellRenderer
                 $name = htmlentities(Translation :: get('TypeName', null, $module_instance->get_type()));
                 return '<img src="' . Theme :: get_image_path($module_instance->get_type()) . '/logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
             case ModuleInstance :: PROPERTY_TITLE :
-                return Utilities :: truncate_string($module_instance->get_title(), 50);
+                return Translation :: get('TypeName', null, $module_instance->get_type());
             case ModuleInstance :: PROPERTY_DESCRIPTION :
-                return Utilities :: truncate_string($module_instance->get_description(), 50);
+                return Utilities :: truncate_string(Translation :: get('TypeDescription', null, $module_instance->get_type()), 50);
             case ModuleInstance :: PROPERTY_DISPLAY_ORDER :
                 return $module_instance->get_display_order();
             default :

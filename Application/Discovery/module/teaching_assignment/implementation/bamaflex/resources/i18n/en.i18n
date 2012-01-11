@@ -1,5 +1,5 @@
 TypeName = "Teaching assignment"
-NoData = "Geen gegevens beschikbaar"
+NoData = "There is currently no data available"
 Teacher = "Teacher"
 AcademicYear = "Year"
 Timeframe = "Timeframe"

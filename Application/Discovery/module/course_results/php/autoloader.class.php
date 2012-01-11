@@ -9,8 +9,6 @@ class Autoloader
          'CourseResult' => '/lib/course_result.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'DataManagerInterface' => '/lib/data_manager_interface.class.php',
-         'Mark' => '/lib/mark.class.php',
-         'MarkMoment' => '/lib/mark_moment.class.php',
          'Module' => '/lib/module.class.php',
          'Parameters' => '/lib/parameters.class.php',
     );

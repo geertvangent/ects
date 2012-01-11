@@ -4,7 +4,8 @@ namespace application\discovery\module\course_results\implementation\bamaflex;
 use common\libraries\ArrayResultSet;
 use user\UserDataManager;
 
-use application\discovery\module\course_results\MarkMoment;
+use application\discovery\module\career\MarkMoment;
+use application\discovery\module\career\implementation\bamaflex\Mark;
 use application\discovery\module\course_results\DataManagerInterface;
 
 use MDB2_Error;
@@ -23,16 +24,16 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $programme_id = $course_results_parameters->get_programme_id();
         $source = $course_results_parameters->get_source();
-        
+
         if (! isset($this->course_results[$programme_id][$source]))
         {
             $query = 'SELECT * FROM [dbo].[v_discovery_course_results_advanced] ';
             $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = ' . $source . ' ';
             $query .= 'ORDER BY person_last_name, person_first_name';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -41,7 +42,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-        
+
         return $this->course_results[$programme_id][$source];
     }
 
@@ -54,9 +55,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course_result->set_person_first_name($this->convert_to_utf8($result->person_first_name));
         $course_result->set_person_id($result->person_id);
         $course_result->set_trajectory_type($result->trajectory_type);
-        
+
         $marks = $this->retrieve_marks($course_results_parameters->get_programme_id(), $course_results_parameters->get_source());
-        
+
         foreach ($this->retrieve_mark_moments($course_results_parameters) as $moment)
         {
             if (isset($marks[$result->source][$result->id][$moment->get_id()]))
@@ -68,10 +69,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             {
                 $mark = Mark :: factory($moment->get_id());
             }
-            
+
             $course_result->add_mark($mark);
         }
-        
+
         return $course_result;
     }
 
@@ -83,16 +84,16 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $programme_id = $course_results_parameters->get_programme_id();
         $source = $course_results_parameters->get_source();
-        
+
         if (! isset($this->mark_moments[$programme_id][$source]))
         {
             $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_advanced] ';
             $query .= 'WHERE [programme_id] = "' . $programme_id . '" AND source = ' . $source . ' ';
             $query .= 'ORDER BY [try_order]';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -100,12 +101,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $mark_moment = new MarkMoment();
                     $mark_moment->set_id($result->try_id);
                     $mark_moment->set_name($result->try_name);
-                    
+
                     $this->mark_moments[$programme_id][$source][$result->try_id] = $mark_moment;
                 }
             }
         }
-        
+
         return $this->mark_moments[$programme_id][$source];
     }
 
@@ -118,10 +119,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         {
             $query = 'SELECT [source], [enrollment_programme_id], [result], [status], [sub_status], [try_id] FROM [dbo].[v_discovery_mark_advanced] ';
             $query .= 'WHERE [programme_id] = "' . $programme_id . '"' . ' AND source = ' . $source . ' ';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $result = $statement->execute();
-            
+
             if (! $result instanceof MDB2_Error)
             {
                 while ($mark_result = $result->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -131,12 +132,14 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $mark->set_result($mark_result->result);
                     $mark->set_status($mark_result->status);
                     $mark->set_sub_status($mark_result->sub_status);
-                    
+                    $mark->set_publish_status($mark_result->publish_status);
+                    $mark->set_abandoned($mark_result->abandoned);
+
                     $this->marks[$programme_id][$source][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
                 }
             }
         }
-        
+
         return $this->marks[$programme_id][$source];
     }
 }

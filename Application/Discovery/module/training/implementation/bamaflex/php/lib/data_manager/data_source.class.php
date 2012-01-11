@@ -32,7 +32,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     private $deans;
 
     /**
-     * @param int $id
+     *
+     * @param $id int
      * @return multitype:\application\discovery\module\training\implementation\bamaflex\TeachingAssignment
      */
     function retrieve_trainings($training_parameters)
@@ -73,7 +74,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
                     $training->set_previous_id($result->previous_id);
-//                     $training->set_next_id($this->retrieve_training_next_id($training));
+                    // $training->set_next_id($this->retrieve_training_next_id($training));
 
                     $this->trainings[] = $training;
                 }
@@ -151,12 +152,15 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, Utilities :: get_namespace_from_object($faculty));
                     $condition = new AndCondition($conditions);
 
-                    $history = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
-                    if ($history instanceof History)
+                    $histories = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    if ($histories->size() > 0)
                     {
-                        $faculty->set_previous_id($history->get_previous_id());
-                        $faculty->set_previous_source($history->get_previous_source());
-
+                        if ($histories->size() == 1)
+                        {
+                            $history = $histories->next_result();
+                            $faculty->set_previous_id($history->get_previous_id());
+                            $faculty->set_previous_source($history->get_previous_source());
+                        }
                     }
                     else
                     {
@@ -170,11 +174,15 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, Utilities :: get_namespace_from_object($faculty));
                     $condition = new AndCondition($conditions);
 
-                    $history = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
-                    if ($history instanceof History)
+                    $histories = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    if ($histories->size() > 0)
                     {
-                        $faculty->set_next_id($history->get_history_id());
-                        $faculty->set_next_source($history->get_history_source());
+                        if ($histories->size() == 1)
+                        {
+                            $history = $histories->next_result();
+                            $faculty->set_next_id($history->get_history_id());
+                            $faculty->set_next_source($history->get_history_source());
+                        }
 
                     }
                     else
