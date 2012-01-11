@@ -200,7 +200,7 @@ class Module extends \application\discovery\module\training\Module
 
                 $label = $faculty->get_year();
 
-                if (! $faculty->has_previous_references(false))
+                if (! $faculty->has_previous_references(true))
                 {
                     $label .= ' (' . $faculty->get_name() . ')';
 
