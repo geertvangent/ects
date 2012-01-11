@@ -197,7 +197,16 @@ class Module extends \application\discovery\module\training\Module
 
                 $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                $history[] = '<a href="' . $link . '">' . $faculty->get_year() . '</a>';
+
+                $label = $faculty->get_year();
+
+                if (! $faculty->has_previous_references(false))
+                {
+                    $label .= ' (' . $faculty->get_name() . ')';
+
+                }
+
+                $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $label . '</a>';
             }
             $i ++;
         }
