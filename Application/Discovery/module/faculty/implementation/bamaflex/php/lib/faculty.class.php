@@ -56,8 +56,8 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         $faculty = $this;
         if ($this->has_previous_references())
         {
-            do
-            {
+//             do
+//             {
                 foreach ($this->get_previous_references() as $previous_reference)
                 {
                     $parameters = new Parameters();
@@ -67,8 +67,8 @@ class Faculty extends \application\discovery\module\faculty\Faculty
                     $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
                     $faculties[$faculty->get_year()][] = $faculty;
                 }
-            }
-            while ($faculty instanceof Faculty && $faculty->has_previous_references(true) && $recursive);
+//             }
+//             while ($faculty instanceof Faculty && $faculty->has_previous_references(true) && $recursive);
         }
         return $faculties;
     }
@@ -85,8 +85,8 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         $faculty = $this;
         if ($this->has_next_references())
         {
-            do
-            {
+//             do
+//             {
                 foreach ($this->get_next_references() as $next_reference)
                 {
                     $parameters = new Parameters();
@@ -96,8 +96,8 @@ class Faculty extends \application\discovery\module\faculty\Faculty
                     $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
                     $faculties[$faculty->get_year()][] = $faculty;
                 }
-            }
-            while ($faculty instanceof Faculty && $faculty->has_next_references(true) && $recursive);
+//             }
+//             while ($faculty instanceof Faculty && $faculty->has_next_references(true) && $recursive);
         }
         return $faculties;
     }
