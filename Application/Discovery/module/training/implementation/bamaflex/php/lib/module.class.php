@@ -190,10 +190,10 @@ class Module extends \application\discovery\module\training\Module
 
                 $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                $history[] = '<a href="' . $link . '">' . $faculty->get_year() . '</a>';
+                $history[] = $faculty->get_year() . ': <a href="' . $link . '">' . $faculty->get_name() . '</a>';
             }
         }
-        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
+        $properties[Translation :: get('History')] = implode(/*'&nbsp;&nbsp;|&nbsp;&nbsp;'*/'<br />', $history);
 
         return new PropertiesTable($properties);
     }
@@ -203,40 +203,33 @@ class Module extends \application\discovery\module\training\Module
         $html = array();
 
         $html[] = '<h3>';
-        // if ($this->faculty->get_previous_id())
-        // {
-        // $parameters = new Parameters($this->faculty->get_previous_id(),
-        // $this->faculty->get_source());
-        // $link =
-        // $this->get_instance_url($this->get_module_instance()->get_id(),
-        // $parameters);
-        // $html[] = Theme :: get_common_image('action_prev', 'png', Translation
-        // :: get('Previous'), $link, ToolbarItem :: DISPLAY_ICON);
-        // }
-        // else
-        // {
-        // $html[] = Theme :: get_common_image('action_prev_na', 'png',
-        // Translation :: get('PreviousNA'), null, ToolbarItem :: DISPLAY_ICON);
 
-        // }
+        if ($this->faculty->has_previous_reference(true))
+        {
+            $references = $this->faculty->get_previous_references();
+            $parameters = new Parameters($references[0]->get_id(), $references[0]->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $html[] = Theme :: get_common_image('action_prev', 'png', Translation :: get('Previous'), $link, ToolbarItem :: DISPLAY_ICON);
+        }
+        else
+        {
+            $html[] = Theme :: get_common_image('action_prev_na', 'png', Translation :: get('PreviousNA'), null, ToolbarItem :: DISPLAY_ICON);
+        }
+
         $html[] = $this->faculty->get_name();
 
-        // if ($this->faculty->get_next_id())
-        // {
-        // $parameters = new Parameters($this->faculty->get_next_id(),
-        // $this->faculty->get_source());
-        // $link =
-        // $this->get_instance_url($this->get_module_instance()->get_id(),
-        // $parameters);
-        // $html[] = Theme :: get_common_image('action_next', 'png', Translation
-        // :: get('Next'), $link, ToolbarItem :: DISPLAY_ICON);
-        // }
-        // else
-        // {
-        // $html[] = Theme :: get_common_image('action_next_na', 'png',
-        // Translation :: get('NextNA'), null, ToolbarItem :: DISPLAY_ICON);
+        if ($this->faculty->has_next_reference(true))
+        {
+            $references = $this->faculty->get_next_references();
+            $parameters = new Parameters($references[0]->get_id(), $references[0]->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $html[] = Theme :: get_common_image('action_next', 'png', Translation :: get('Next'), $link, ToolbarItem :: DISPLAY_ICON);
+        }
+        else
+        {
+            $html[] = Theme :: get_common_image('action_next_na', 'png', Translation :: get('NextNA'), null, ToolbarItem :: DISPLAY_ICON);
+        }
 
-        // }
         $html[] = '</h3>';
         $html[] = $this->get_faculty_properties_table()->toHtml();
         $html[] = '<br/>';
