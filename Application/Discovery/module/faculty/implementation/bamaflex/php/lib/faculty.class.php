@@ -58,7 +58,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         {
             do
             {
-                foreach ($this->get_previous_references() as $previous_reference)
+                foreach ($faculty->get_previous_references() as $previous_reference)
                 {
                     $parameters = new Parameters();
                     $parameters->set_faculty_id($previous_reference->get_id());
@@ -90,7 +90,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         {
             do
             {
-                foreach ($this->get_next_references() as $next_reference)
+                foreach ($faculty->get_next_references() as $next_reference)
                 {
                     $parameters = new Parameters();
                     $parameters->set_faculty_id($next_reference->get_id());
