@@ -53,12 +53,12 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     function get_previous($module_instance, $recursive = true)
     {
         $faculties = array();
-        $faculty = $this;
+//         $faculty = $this;
         if ($this->has_previous_references())
         {
-            do
-            {
-                foreach ($faculty->get_previous_references() as $previous_reference)
+//             do
+//             {
+                foreach ($this->get_previous_references() as $previous_reference)
                 {
                     $parameters = new Parameters();
                     $parameters->set_faculty_id($previous_reference->get_id());
@@ -69,9 +69,14 @@ class Faculty extends \application\discovery\module\faculty\Faculty
                     {
                         $faculties[$faculty->get_year()][] = $faculty;
                     }
+
+                    if($this->has_previous_references(true) && $recursive)
+                    {
+                        $faculties = array_merge_recursive($faculties, $faculty->get_previous($module_instance));
+                    }
                 }
-            }
-            while ($faculty instanceof Faculty && $faculty->has_previous_references(true) && $recursive);
+//             }
+//             while ($faculty instanceof Faculty && $faculty->has_previous_references(true) && $recursive);
         }
         return $faculties;
     }
@@ -85,12 +90,12 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     function get_next($module_instance, $recursive = true)
     {
         $faculties = array();
-        $faculty = $this;
+//         $faculty = $this;
         if ($this->has_next_references())
         {
-            do
-            {
-                foreach ($faculty->get_next_references() as $next_reference)
+//             do
+//             {
+                foreach ($this->get_next_references() as $next_reference)
                 {
                     $parameters = new Parameters();
                     $parameters->set_faculty_id($next_reference->get_id());
@@ -101,9 +106,14 @@ class Faculty extends \application\discovery\module\faculty\Faculty
                     {
                         $faculties[$faculty->get_year()][] = $faculty;
                     }
+
+                    if($this->has_next_references(true) && $recursive)
+                    {
+                        $faculties = array_merge_recursive($faculties, $faculty->get_next($module_instance));
+                    }
                 }
-            }
-            while ($faculty->has_next_references(true) && $faculty instanceof Faculty && $recursive);
+//             }
+//             while ($faculty->has_next_references(true) && $faculty instanceof Faculty && $recursive);
         }
         return $faculties;
     }
