@@ -200,11 +200,33 @@ class Module extends \application\discovery\module\training\Module
 
                 if (! $faculty->has_previous_references(true))
                 {
-                    $next_history = array($year, '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                    if ($i == 1)
+                    {
+                        $next_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                    }
+                    else
+                    {
+                        $previous_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                    }
                 }
                 elseif (! $faculty->has_next_references(true))
                 {
-                    $previous_history = array($year, '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                    if ($i == 1)
+                    {
+                        $previous_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                    }
+                    else
+                    {
+                        $next_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                    }
                 }
                 else
                 {
