@@ -1,4 +1,17 @@
 (function($) {
+    
+    /* attempt to find a text selection */
+    function getSelected() {
+    	if(window.getSelection) { return window.getSelection(); }
+    	else if(document.getSelection) { return document.getSelection(); }
+    	else {
+    		var selection = document.selection && document.selection.createRange();
+    		if(selection.text) { return selection.text; }
+    		return false;
+    	}
+    	return false;
+    }
+    
     $(document)
 	    .ready(
 		    function() {
@@ -17,6 +30,20 @@
 				$('span', this).html('Hide legend');
 			    }
 			});
+			
+		    	$('#main').mouseup(function() {
+		    		var selection = getSelected();
+		    		if(selection && (selection = new String(selection).replace(/^\s+|\s+$/g,''))) {
+		    		    alert(selection);
+// $.ajax({
+// type: 'post',
+// url: 'ajax-selection-copy.php',
+// data: 'selection=' + encodeURI(selection)
+// });
+		    		}
+		    	});
+			
 		    });
+
 
 })(jQuery);

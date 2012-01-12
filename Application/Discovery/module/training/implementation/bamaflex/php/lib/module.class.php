@@ -168,6 +168,14 @@ class Module extends \application\discovery\module\training\Module
         $history = array();
         $faculties = $this->faculty->get_all($this->get_module_instance());
 
+//         foreach ($faculties as $year => $year_faculties)
+//         {
+//             foreach ($year_faculties as $faculty)
+//             {
+//                 dump($year . ' => ' . $faculty->get_name());
+//             }
+//         }
+
         $i = 1;
         foreach ($faculties as $year => $year_faculties)
         {
@@ -198,34 +206,42 @@ class Module extends \application\discovery\module\training\Module
                 $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
 
-                if (! $faculty->has_previous_references(true))
+                if ($faculty->has_previous_references() && ! $faculty->has_previous_references(true))
                 {
                     if ($i == 1)
                     {
-                        $next_history = array(
-                                $year,
+                        $previous_history = array($year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                    }
+                    elseif ($i == count($faculties))
+                    {
+                        $next_history = array($year,
                                 '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
                     }
                     else
                     {
-                        $previous_history = array(
-                                $year,
-                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                        $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
+                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                        $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_year() . '</a>';
                     }
                 }
-                elseif (! $faculty->has_next_references(true))
+                elseif ($faculty->has_next_references() && ! $faculty->has_next_references(true))
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array(
-                                $year,
+                        $previous_history = array($year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                    }
+                    elseif ($i == count($faculties))
+                    {
+                        $next_history = array($year,
                                 '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
                     }
                     else
                     {
-                        $next_history = array(
-                                $year,
-                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() . '</a>');
+                        $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
+                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                        $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_year() . '</a>';
                     }
                 }
                 else
@@ -238,12 +254,12 @@ class Module extends \application\discovery\module\training\Module
             $i ++;
         }
 
+        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
+
         if ($previous_history)
         {
             $properties[Translation :: get('HistoryWas', array('YEAR' => $previous_history[0]), 'application\discovery')] = $previous_history[1];
         }
-
-        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
 
         if ($next_history)
         {
