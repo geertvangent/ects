@@ -20,14 +20,14 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_employments($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-        
+
         $official_code = $user->get_official_code();
-        
+
         $query = 'SELECT * FROM [dbo].[v_discovery_employment] WHERE person_id = "' . $official_code . '" ORDER BY start_date DESC';
-        
+
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -38,8 +38,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 $employment->set_year($result->year);
                 $employment->set_assignment($result->assignment);
                 $employment->set_hours($result->hours);
-                $employment->set_start_date($result->start_date);
-                $employment->set_end_date($result->end_date);
+                $employment->set_start_date(strtotime($result->start_date));
+                $employment->set_end_date(strtotime($result->end_date));
                 $employment->set_state_id($result->state_id);
                 $employment->set_state($result->state);
                 $employment->set_state_code($result->state_code);
@@ -59,10 +59,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 $employment->set_pay_scale_maximum_wage($result->scale_maximum_wage);
                 $employment->set_active($result->active);
                 $employment->set_cycles($result->cycles);
-                
+
                 $this->employments[$official_code][] = $employment;
             }
-            
+
             return $this->employments[$official_code];
         }
         else
@@ -74,18 +74,18 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function count_employments($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-        
+
         $official_code = $user->get_official_code();
-        
+
         $query = 'SELECT count(id) AS employments_count FROM [dbo].[v_discovery_employment] WHERE person_id = "' . $official_code . '"';
-        
+
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-            
+
             return $result->employments_count;
         }
         else
@@ -97,10 +97,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     function retrieve_employment_parts($employment_id)
     {
         $query = 'SELECT * FROM [dbo].[v_discovery_employment_parts] WHERE assignment_id = "' . $employment_id . '" ORDER BY start_date';
-        
+
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -108,8 +108,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 $employment_part = new EmploymentPart();
                 $employment_part->set_assignment_id($result->assignment_id);
                 $employment_part->set_hours($result->hours);
-                $employment_part->set_start_date($result->start_date);
-                $employment_part->set_end_date($result->end_date);
+                $employment_part->set_start_date(strtotime($result->start_date));
+                $employment_part->set_end_date(strtotime($result->end_date));
                 $employment_part->set_assignment_volume($result->assignment_volume);
                 $employment_part->set_volume($result->volume);
                 $employment_part->set_faculty_id($result->faculty_id);
@@ -118,10 +118,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 $employment_part->set_training($result->training);
                 $employment_part->set_department($result->department);
                 $employment_part->set_department_id($result->department_id);
-                
+
                 $this->employment_parts[$employment_id][] = $employment_part;
             }
-            
+
             return $this->employment_parts[$employment_id];
         }
         else

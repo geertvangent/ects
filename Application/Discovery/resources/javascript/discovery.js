@@ -34,7 +34,7 @@
 		    	$('#main').mouseup(function() {
 		    		var selection = getSelected();
 		    		if(selection && (selection = new String(selection).replace(/^\s+|\s+$/g,''))) {
-		    		    alert(selection);
+		    		    //alert(selection);
 // $.ajax({
 // type: 'post',
 // url: 'ajax-selection-copy.php',

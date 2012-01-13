@@ -2,25 +2,15 @@
 namespace application\discovery\module\profile\implementation\bamaflex;
 
 use application\discovery\SortableTable;
-
 use application\discovery\ModuleInstance;
 
 use common\libraries\PropertiesTable;
-
 use common\libraries\StringUtilities;
-
 use common\libraries\Display;
-
 use common\libraries\Path;
-
 use common\libraries\ToolbarItem;
-
 use common\libraries\Toolbar;
-
 use common\libraries\Theme;
-
-use common\libraries\SortableTableFromArray;
-
 use common\libraries\Utilities;
 use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
@@ -208,16 +198,16 @@ class Module extends \application\discovery\module\profile\Module
 
                 $html[] = '<div class="description">';
 
-                $table = new SortableTableFromArray($data);
-                $table->set_header(0, Translation :: get('Type'));
-                $table->set_header(1, Translation :: get('Street'));
-                $table->set_header(2, Translation :: get('Number'));
-                $table->set_header(3, Translation :: get('Box'));
-                $table->set_header(4, Translation :: get('Room'));
-                $table->set_header(5, Translation :: get('City'));
-                $table->set_header(6, Translation :: get('ZipCode'));
-                $table->set_header(7, Translation :: get('Region'));
-                $table->set_header(8, Translation :: get('Country'));
+                $table = new SortableTable($data);
+                $table->set_header(0, Translation :: get('Type'), false);
+                $table->set_header(1, Translation :: get('Street'), false);
+                $table->set_header(2, Translation :: get('Number'), false);
+                $table->set_header(3, Translation :: get('Box'), false);
+                $table->set_header(4, Translation :: get('Room'), false);
+                $table->set_header(5, Translation :: get('City'), false);
+                $table->set_header(6, Translation :: get('ZipCode'), false);
+                $table->set_header(7, Translation :: get('Region'), false);
+                $table->set_header(8, Translation :: get('Country'), false);
                 $html[] = $table->toHTML();
 
                 $html[] = '</div>';
