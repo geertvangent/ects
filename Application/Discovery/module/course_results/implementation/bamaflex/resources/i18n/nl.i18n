@@ -1,0 +1,4 @@
+TypeName = "Resultaten"
+TypeDescription = "Resultaten voor een specifiek opleidingsonderdeel"
+PersonName = "Persoon"
+TrajectoryType = "Traject"

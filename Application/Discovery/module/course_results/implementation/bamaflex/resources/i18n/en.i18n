@@ -1,0 +1,4 @@
+TypeName = "Grades"
+TypeDescription = "Grades for a specific course"
+PersonName = "Person"
+TrajectoryType = "Trajectory"
