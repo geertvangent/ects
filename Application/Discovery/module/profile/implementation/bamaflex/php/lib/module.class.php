@@ -33,7 +33,7 @@ class Module extends \application\discovery\module\profile\Module
         }
 
         $properties[Translation :: get('Nationality')] = $this->get_profile()->get_nationality_string();
-        $properties[Translation :: get('Gender')] = $this->get_profile()->get_gender_string();
+        $properties[Translation :: get('Gender')] = Translation :: get($this->get_profile()->get_gender_string());
 
         if (count($this->get_profile()->get_address()) == 1)
         {

@@ -316,12 +316,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
         $mark_moment = new MarkMoment();
         $mark_moment->set_id(1);
-        $mark_moment->set_name('Eerste examenkans');
+        $mark_moment->set_name('1<sup>ste</sup> kans');
         $moments[1] = $mark_moment;
 
         $mark_moment = new MarkMoment();
         $mark_moment->set_id(2);
-        $mark_moment->set_name('Tweede examenkans');
+        $mark_moment->set_name('2<sup>de</sup> kans');
         $moments[2] = $mark_moment;
 
         return $moments;
