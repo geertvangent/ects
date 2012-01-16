@@ -60,7 +60,7 @@ class Module extends \application\discovery\module\student_materials\Module
                 $table_row[] = $material->get_editor();
                 $table_row[] = $material->get_isbn();
                 $table_row[] = $material->get_medium();
-                $table_row[] = $material->get_description();
+//                $table_row[] = $material->get_description();
                 if ($material->get_price())
                 {
                     $table_row[] = $material->get_price_string();
@@ -120,7 +120,7 @@ class Module extends \application\discovery\module\student_materials\Module
                         $table_row[] = $material->get_editor();
                         $table_row[] = $material->get_isbn();
                         $table_row[] = $material->get_medium();
-                        $table_row[] = $material->get_description();
+//                        $table_row[] = $material->get_description();
                         if ($material->get_price())
                         {
                             $table_row[] = $material->get_price_string();
@@ -162,9 +162,9 @@ class Module extends \application\discovery\module\student_materials\Module
             $table->set_header(5, Translation :: get('Editor'), false);
             $table->set_header(6, Translation :: get('Isbn'), false);
             $table->set_header(7, Translation :: get('Medium'), false);
-            $table->set_header(8, Translation :: get('Remarks'), false);
-            $table->set_header(9, Translation :: get('Price'), false);
-            $table->set_header(10, '', false);
+//            $table->set_header(8, Translation :: get('Remarks'), false);
+            $table->set_header(8, Translation :: get('Price'), false);
+            $table->set_header(9, '', false);
 
             if ($total_price)
             {
