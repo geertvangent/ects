@@ -1,0 +1,8 @@
+TypeName = "Groups"
+TypeClass = "Class"
+Code = "Code"
+Description = "Description"
+TypeCustom = "Custom"
+TypeDescription = "Overview of user groups for a specific training"
+Users = "Users"
+TypeTraining = "Training"
