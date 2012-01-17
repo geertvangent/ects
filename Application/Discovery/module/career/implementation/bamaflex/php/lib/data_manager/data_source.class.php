@@ -216,7 +216,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                         }
                     }
 
-                    $this->courses[$user_id][] = $course;
+                    $this->courses[$user_id][$course->get_enrollment_id()][] = $course;
                 }
             }
         }

@@ -24,6 +24,7 @@ class Module extends \application\discovery\module\career\Module
     private $credits = array();
 
     /**
+     *
      * @return multitype:multitype:string
      */
     function get_table_data($enrollment)
@@ -35,172 +36,171 @@ class Module extends \application\discovery\module\career\Module
         $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
                 'data_source' => $data_source));
 
-        foreach ($this->get_courses() as $course)
+        $course = $this->get_courses();
+
+        foreach ($course[$enrollment->get_id()] as $course)
         {
-            if ($course->get_enrollment_id() == $enrollment->get_id())
+            $row = array();
+            $row[] = $course->get_year();
+            $row[] = $course->get_credits();
+
+            if ($course->is_special_type())
             {
-                $row = array();
-                $row[] = $course->get_year();
-                $row[] = $course->get_credits();
-
-                if ($course->is_special_type())
+                if (! $course->has_children() || $course->get_parent_programme_id())
                 {
-                    if (! $course->has_children() || $course->get_parent_programme_id())
+                    $this->credits[$enrollment->get_contract_id()][$course->get_year()][$course->get_type()] += $course->get_credits();
+                }
+                $course_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' . Translation :: get($course->get_type_string()) . '" />';
+                $row[] = $course_type_image;
+                LegendTable :: get_instance()->add_symbol($course_type_image, Translation :: get($course->get_type_string()), Translation :: get('CourseType'));
+            }
+            else
+            {
+                $row[] = ' ';
+            }
+
+            if ($course_module_instance)
+            {
+                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
+                $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
+                $row[] = '<a href="' . $url . '">' . $course->get_name() . '</a>';
+            }
+            else
+            {
+                $row[] = $course->get_name();
+            }
+
+            $added = false;
+
+            foreach ($this->get_mark_moments() as $mark_moment)
+            {
+                $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
+                if ((! $course->has_children() || $course->get_parent_programme_id()) && ($mark->is_credit() || $enrollment->get_result() == Enrollment :: RESULT_NO_DATA) && (! $course->is_special_type()) && ! $added)
+                {
+                    $added = true;
+                    $this->credits[$enrollment->get_contract_id()][$course->get_year()][$course->get_type()] += $course->get_credits();
+                }
+
+                if ($mark->get_publish_status() == 1 || ! $training->is_current() || $this->result_right)
+                {
+                    if ($mark->get_result())
                     {
-                        $this->credits[$enrollment->get_contract_id()][$course->get_year()][$course->get_type()] += $course->get_credits();
-                    }
-                    $course_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' . Translation :: get($course->get_type_string()) . '" />';
-                    $row[] = $course_type_image;
-                    LegendTable :: get_instance()->add_symbol($course_type_image, Translation :: get($course->get_type_string()), Translation :: get('CourseType'));
-                }
-                else
-                {
-                    $row[] = ' ';
-                }
-
-                if ($course_module_instance)
-                {
-                    $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
-                    $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
-                    $row[] = '<a href="' . $url . '">' . $course->get_name() . '</a>';
-                }
-                else
-                {
-                    $row[] = $course->get_name();
-                }
-
-                $added = false;
-
-                foreach ($this->get_mark_moments() as $mark_moment)
-                {
-                    $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
-                    if ((! $course->has_children() || $course->get_parent_programme_id()) && ($mark->is_credit() || $enrollment->get_result() == Enrollment :: RESULT_NO_DATA) && (! $course->is_special_type()) && ! $added)
-                    {
-                        $added = true;
-                        $this->credits[$enrollment->get_contract_id()][$course->get_year()][$course->get_type()] += $course->get_credits();
-                    }
-
-                    if ($mark->get_publish_status() == 1 || ! $training->is_current() || $this->result_right)
-                    {
-                        if ($mark->get_result())
-                        {
-                            $row[] = $mark->get_visual_result();
-                        }
-                        else
-                        {
-                            $row[] = $mark->get_sub_status();
-                        }
-
-                        if ($mark->get_status())
-                        {
-                            if ($mark->is_abandoned())
-                            {
-                                $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '_na.png" alt="' . Translation :: get($mark->get_status_string() . 'Abandoned') . '" title="' . Translation :: get($mark->get_status_string() . 'Abandoned') . '" />';
-                                LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string() . 'Abandoned'), Translation :: get('MarkStatus'));
-                            }
-                            else
-                            {
-                                $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) . '" title="' . Translation :: get($mark->get_status_string()) . '" />';
-                                LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string()), Translation :: get('MarkStatus'));
-                            }
-                            $row[] = $mark_status_image;
-                        }
-                        else
-                        {
-                            $row[] = null;
-                        }
+                        $row[] = $mark->get_visual_result();
                     }
                     else
                     {
-                        if ($mark->get_result())
+                        $row[] = $mark->get_sub_status();
+                    }
+
+                    if ($mark->get_status())
+                    {
+                        if ($mark->is_abandoned())
                         {
-                            $result_na_image = '<img src="' . Theme :: get_image_path() . 'mark_result_na.png" alt="' . Translation :: get('ResultNotYetAvailable') . '" title="' . Translation :: get('ResultNotYetAvailable') . '" />';
-                            $row[] = $result_na_image;
-                            LegendTable :: get_instance()->add_symbol($result_na_image, Translation :: get('ResultNotYetAvailable'), Translation :: get('MarkResult'));
+                            $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '_na.png" alt="' . Translation :: get($mark->get_status_string() . 'Abandoned') . '" title="' . Translation :: get($mark->get_status_string() . 'Abandoned') . '" />';
+                            LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string() . 'Abandoned'), Translation :: get('MarkStatus'));
                         }
                         else
                         {
-                            $row[] = null;
+                            $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) . '" title="' . Translation :: get($mark->get_status_string()) . '" />';
+                            LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string()), Translation :: get('MarkStatus'));
                         }
+                        $row[] = $mark_status_image;
+                    }
+                    else
+                    {
                         $row[] = null;
-
                     }
                 }
-
-                $data[] = $row;
-
-                if ($course->has_children())
+                else
                 {
-                    foreach ($course->get_children() as $child)
+                    if ($mark->get_result())
                     {
-                        $row = array();
-                        $row[] = '<span class="course_child_text">' . $child->get_year() . '</span>';
-                        $row[] = '<span class="course_child_text">' . $child->get_credits() . '</span>';
+                        $result_na_image = '<img src="' . Theme :: get_image_path() . 'mark_result_na.png" alt="' . Translation :: get('ResultNotYetAvailable') . '" title="' . Translation :: get('ResultNotYetAvailable') . '" />';
+                        $row[] = $result_na_image;
+                        LegendTable :: get_instance()->add_symbol($result_na_image, Translation :: get('ResultNotYetAvailable'), Translation :: get('MarkResult'));
+                    }
+                    else
+                    {
+                        $row[] = null;
+                    }
+                    $row[] = null;
 
-                        if ($child->is_special_type())
-                        {
-                            $this->credits[$enrollment->get_contract_id()][$child->get_year()][$child->get_type()] += $child->get_credits();
+                }
+            }
 
-                            $child_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $child->get_type() . '.png" alt="' . Translation :: get($child->get_type_string()) . '" title="' . Translation :: get($child->get_type_string()) . '" />';
-                            $row[] = $child_type_image;
-                            LegendTable :: get_instance()->add_symbol($child_type_image, Translation :: get($child->get_type_string()), Translation :: get('CourseType'));
-                        }
-                        else
-                        {
-                            $row[] = ' ';
-                        }
+            $data[] = $row;
 
-                        if ($course_module_instance)
-                        {
-                            $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
-                            $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
-                            $row[] = '<span class="course_child_link"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
-                        }
-                        else
-                        {
-                            $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
-                        }
+            if ($course->has_children())
+            {
+                foreach ($course->get_children() as $child)
+                {
+                    $row = array();
+                    $row[] = '<span class="course_child_text">' . $child->get_year() . '</span>';
+                    $row[] = '<span class="course_child_text">' . $child->get_credits() . '</span>';
 
-                        $added = false;
-                        foreach ($this->get_mark_moments() as $mark_moment)
+                    if ($child->is_special_type())
+                    {
+                        $this->credits[$enrollment->get_contract_id()][$child->get_year()][$child->get_type()] += $child->get_credits();
+
+                        $child_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $child->get_type() . '.png" alt="' . Translation :: get($child->get_type_string()) . '" title="' . Translation :: get($child->get_type_string()) . '" />';
+                        $row[] = $child_type_image;
+                        LegendTable :: get_instance()->add_symbol($child_type_image, Translation :: get($child->get_type_string()), Translation :: get('CourseType'));
+                    }
+                    else
+                    {
+                        $row[] = ' ';
+                    }
+
+                    if ($course_module_instance)
+                    {
+                        $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
+                        $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
+                        $row[] = '<span class="course_child_link"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
+                    }
+                    else
+                    {
+                        $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
+                    }
+
+                    $added = false;
+                    foreach ($this->get_mark_moments() as $mark_moment)
+                    {
+                        $mark = $child->get_mark_by_moment_id($mark_moment->get_id());
+                        if (! $child->is_special_type() && ($mark->is_credit() || $enrollment->get_result() == Enrollment :: RESULT_NO_DATA) && ! $added)
                         {
-                            $mark = $child->get_mark_by_moment_id($mark_moment->get_id());
-                            if (! $child->is_special_type() && ($mark->is_credit() || $enrollment->get_result() == Enrollment :: RESULT_NO_DATA) && ! $added)
+                            $added = true;
+                            if ($course->is_special_type())
                             {
-                                $added = true;
-                                if ($course->is_special_type())
-                                {
-                                    $this->credits[$enrollment->get_contract_id()][$child->get_year()][$course->get_type()] += $child->get_credits();
-                                }
-                                else
-                                {
-                                    $this->credits[$enrollment->get_contract_id()][$child->get_year()][$child->get_type()] += $child->get_credits();
-                                }
-                            }
-
-                            if ($mark->get_publish_status() == 1 || ! $training->is_current() || $this->result_right)
-                            {
-                                $row[] = $mark->get_result();
-                                $row[] = null;
+                                $this->credits[$enrollment->get_contract_id()][$child->get_year()][$course->get_type()] += $child->get_credits();
                             }
                             else
                             {
-                                if ($mark->get_result())
-                                {
-                                    $result_na_image = '<img src="' . Theme :: get_image_path() . 'mark_result_na.png" alt="' . Translation :: get('ResultNotYetAvailable') . '" title="' . Translation :: get('ResultNotYetAvailable') . '" />';
-                                    $row[] = $result_na_image;
-                                    LegendTable :: get_instance()->add_symbol($result_na_image, Translation :: get('ResultNotYetAvailable'), Translation :: get('MarkResult'));
-                                }
-                                else
-                                {
-                                    $row[] = null;
-                                }
-                                $row[] = null;
+                                $this->credits[$enrollment->get_contract_id()][$child->get_year()][$child->get_type()] += $child->get_credits();
                             }
                         }
 
-                        $data[] = $row;
+                        if ($mark->get_publish_status() == 1 || ! $training->is_current() || $this->result_right)
+                        {
+                            $row[] = $mark->get_result();
+                            $row[] = null;
+                        }
+                        else
+                        {
+                            if ($mark->get_result())
+                            {
+                                $result_na_image = '<img src="' . Theme :: get_image_path() . 'mark_result_na.png" alt="' . Translation :: get('ResultNotYetAvailable') . '" title="' . Translation :: get('ResultNotYetAvailable') . '" />';
+                                $row[] = $result_na_image;
+                                LegendTable :: get_instance()->add_symbol($result_na_image, Translation :: get('ResultNotYetAvailable'), Translation :: get('MarkResult'));
+                            }
+                            else
+                            {
+                                $row[] = null;
+                            }
+                            $row[] = null;
+                        }
                     }
+
+                    $data[] = $row;
                 }
             }
         }
@@ -209,6 +209,7 @@ class Module extends \application\discovery\module\career\Module
     }
 
     /**
+     *
      * @return multitype:string
      */
     function get_table_headers()
@@ -236,11 +237,11 @@ class Module extends \application\discovery\module\career\Module
 
         foreach ($enrollments as $enrollment)
         {
-            //            if ($enrollment->get_contract_type() == $contract_type)
-            //            {
+            // if ($enrollment->get_contract_type() == $contract_type)
+            // {
             $contract_type_enrollments[] = $enrollment;
 
-     //            }
+            // }
         }
 
         return $contract_type_enrollments;
@@ -430,8 +431,8 @@ class Module extends \application\discovery\module\career\Module
         return implode("\n", $html);
     }
 
-    /* (non-PHPdoc)
-     * @see application\discovery\module\career.Module::render()
+    /*
+     * (non-PHPdoc) @see application\discovery\module\career.Module::render()
      */
     function render()
     {
@@ -447,7 +448,6 @@ class Module extends \application\discovery\module\career\Module
         $this->result_right = Rights :: get_instance()->module_is_allowed(Rights :: RESULT_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_career_parameters());
 
         $html = array();
-
 
         if ($this->has_data())
         {
