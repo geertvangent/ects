@@ -1,0 +1,7 @@
+TypeName = "Gebruikers"
+Username = "Gebruikersnaam"
+Details = "Informatie"
+Code = "Code"
+Email = "Email"
+Subgroups = "Subgroepen"
+TypeDescription = "Zoeken naar gebruikers"
