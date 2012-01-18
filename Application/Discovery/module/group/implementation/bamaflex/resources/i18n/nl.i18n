@@ -1,0 +1,8 @@
+TypeName = "Groepen"
+TypeDescription = "Overzicht van alle gebruikersgroepen voor een specifieke opleiding"
+TypeClass = "Klasgroepen"
+Code = "Code"
+Description = "Omschrijving"
+TypeCustom = "Manuele groepen"
+Users = "Gebruikers"
+TypeTraining = "Opleidingsgroepen"
