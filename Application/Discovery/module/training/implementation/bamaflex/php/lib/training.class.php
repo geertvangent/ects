@@ -8,7 +8,7 @@ use application\discovery\DiscoveryDataManager;
 class Training extends \application\discovery\module\training\Training
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_DOMAIN_ID = 'domain_id';
@@ -18,17 +18,18 @@ class Training extends \application\discovery\module\training\Training
     const PROPERTY_TYPE = 'type';
     const PROPERTY_BAMA_TYPE = 'bama_type';
     const PROPERTY_FACULTY_ID = 'faculty_id';
+    const PROPERTY_FACULTY = 'faculty';
     const PROPERTY_START_DATE = 'start_date';
     const PROPERTY_END_DATE = 'end_date';
     const PROPERTY_PREVIOUS_ID = 'previous_id';
     const PROPERTY_NEXT_ID = 'next_id';
-
+    
     const BAMA_TYPE_OTHER = 0;
     const BAMA_TYPE_BACHELOR = 1;
     const BAMA_TYPE_MASTER = 2;
     const BAMA_TYPE_CONTINUED = 3;
     const BAMA_TYPE_OLD = 4;
-
+    
     private $majors;
     private $languages;
     private $packages;
@@ -131,7 +132,7 @@ class Training extends \application\discovery\module\training\Training
     /**
      * @return string
      */
-    static
+    static 
 
     function bama_type_string($bama_type)
     {
@@ -163,6 +164,16 @@ class Training extends \application\discovery\module\training\Training
     function set_faculty_id($faculty_id)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
+    }
+
+    function get_faculty()
+    {
+        return $this->get_default_property(self :: PROPERTY_FACULTY);
+    }
+
+    function set_faculty($faculty)
+    {
+        $this->set_default_property(self :: PROPERTY_FACULTY, $faculty);
     }
 
     function get_start_date()
@@ -214,7 +225,7 @@ class Training extends \application\discovery\module\training\Training
             do
             {
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($training->get_previous_id(), $training->get_source());
-
+                
                 $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
                 $trainings[] = $training;
             }
@@ -232,7 +243,7 @@ class Training extends \application\discovery\module\training\Training
             do
             {
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($training->get_next_id(), $training->get_source());
-
+                
                 $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
                 $trainings[] = $training;
             }
@@ -245,7 +256,7 @@ class Training extends \application\discovery\module\training\Training
     {
         $trainings = $this->get_next($module_instance);
         array_unshift($trainings, $this);
-
+        
         foreach ($this->get_previous($module_instance) as $training)
         {
             array_unshift($trainings, $training);
@@ -423,7 +434,7 @@ class Training extends \application\discovery\module\training\Training
     /**
      * @param multitype:string $extended_property_names
      */
-    static
+    static 
 
     function get_default_property_names($extended_property_names = array())
     {
@@ -437,10 +448,11 @@ class Training extends \application\discovery\module\training\Training
         $extended_property_names[] = self :: PROPERTY_GROUP_ID;
         $extended_property_names[] = self :: PROPERTY_BAMA_TYPE;
         $extended_property_names[] = self :: PROPERTY_FACULTY_ID;
+        $extended_property_names[] = self :: PROPERTY_FACULTY;
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_ID;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -457,7 +469,7 @@ class Training extends \application\discovery\module\training\Training
         $current_date = time();
         $start_date = strtotime($this->get_start_date());
         $end_date = strtotime($this->get_end_date());
-
+        
         if ($current_date >= $start_date && $current_date <= $end_date)
         {
             return true;
