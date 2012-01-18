@@ -1,6 +1,12 @@
 <?php
 namespace application\discovery\module\group_user\implementation\bamaflex;
 
+use common\libraries\PropertiesTable;
+
+use common\libraries\BreadcrumbTrail;
+
+use common\libraries\Breadcrumb;
+
 use application\discovery\module\group\implementation\bamaflex\Group;
 
 use user\User;
@@ -178,7 +184,7 @@ class Module extends \application\discovery\module\group_user\Module
     function render()
     {
         $html = array();
-        
+        $html[] = $this->get_group_properties_table();
         if (count($this->get_group_user()) > 0)
         {
             $html[] = $this->get_group_user_table();
@@ -188,6 +194,40 @@ class Module extends \application\discovery\module\group_user\Module
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
         return implode("\n", $html);
+    }
+
+    function get_group_properties_table()
+    {
+        $group = DataManager :: get_instance($this->get_module_instance())->retrieve_group($this->get_group_parameters());
+
+        $html = array();
+        $properties = array();
+        $properties[Translation :: get('Year')] = $group->get_year();
+        $properties[Translation :: get('Code')] = $group->get_code();
+        
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $group->get_description()));
+        $table = new PropertiesTable($properties);
+        
+        $html[] = $table->toHtml();
+        return implode("\n", $html);
+    }
+
+    static function get_group_parameters()
+    {
+        $group_class_id = Request :: get(self :: PARAM_GROUP_CLASS_ID);
+        $source = Request :: get(self :: PARAM_SOURCE);
+        $type = Request :: get(self :: PARAM_TYPE);
+        
+        $parameter = new \application\discovery\module\group_user\implementation\bamaflex\Parameters();
+        $parameter->set_group_class_id($group_class_id);
+        $parameter->set_type($type);
+        
+        if ($source)
+        {
+            $parameter->set_source($source);
+        }
+        
+        return $parameter;
     }
 }
 ?>
