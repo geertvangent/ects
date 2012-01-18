@@ -1,6 +1,12 @@
 <?php
 namespace application\discovery\module\group\implementation\bamaflex;
 
+use common\libraries\PropertiesTable;
+
+use common\libraries\BreadcrumbTrail;
+
+use common\libraries\Breadcrumb;
+
 use common\libraries\Request;
 
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
@@ -141,6 +147,7 @@ class Module extends \application\discovery\module\group\Module
             {
                 $tabs->add_tab(new DynamicContentTab(Group :: TYPE_TRAINING, Translation :: get(Group :: type_string(Group :: TYPE_TRAINING)), Theme :: get_image_path() . 'type/' . Group :: TYPE_TRAINING . '.png', $this->get_groups_table(Group :: TYPE_TRAINING)->as_html()));
             }
+            $html[] = $this->get_training_properties_table() . '</br>';
             
             $html[] = $tabs->render();
         }
@@ -148,6 +155,67 @@ class Module extends \application\discovery\module\group\Module
         {
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
+        return implode("\n", $html);
+    }
+
+    static function get_training_parameters()
+    {
+        $training_id = Request :: get(self :: PARAM_TRAINING_ID);
+        $source = Request :: get(self :: PARAM_SOURCE);
+        
+        $parameter = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
+        $parameter->set_training_id($training_id);
+        
+        if ($source)
+        {
+            $parameter->set_source($source);
+        }
+        
+        return $parameter;
+    }
+
+    function get_training_properties_table()
+    {
+        $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training($this->get_training_parameters());
+        
+        $data_source = $this->get_module_instance()->get_setting('data_source');
+        
+        $training_module_instance = \application\discovery\Module :: exists('application\discovery\module\training\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $html = array();
+        $properties = array();
+        $properties[Translation :: get('Year')] = $training->get_year();
+        
+        $history = array();
+        $trainings = $training->get_all($this->get_module_instance());
+        
+        foreach ($trainings as $training_history)
+        {
+            $parameters = new Parameters($training_history->get_id(), $training_history->get_source());
+            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+            $history[] = '<a href="' . $link . '">' . $training_history->get_year() . '</a>';
+        }
+        $properties[Translation :: get('History')] = implode('  |  ', $history);
+        
+        if ($training_module_instance)
+        {
+            $parameters = new \application\discovery\module\training\implementation\bamaflex\Parameters($training->get_faculty_id(), $training->get_source());
+            $url = $this->get_instance_url($training_module_instance->get_id(), $parameters);
+            $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $training->get_faculty() . '</a>';
+            BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $training->get_faculty()));
+        }
+        else
+        {
+            $properties[Translation :: get('Faculty')] = $training->get_faculty();
+            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
+        }
+        
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
+        
+        $table = new PropertiesTable($properties);
+        
+        $html[] = $table->toHtml();
         return implode("\n", $html);
     }
 }
