@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object name="group" table="v_discovery_group_basic"
+	namespace="application\discovery\module\group\implementation\bamaflex"
+	author="Magali Gillard">
+	<properties>
+		<property name="type">
+			<option id="1">Training</option>
+			<option id="2">Class</option>
+			<option id="3">Custom</option>
+		</property>
+	</properties>
+</object>
