@@ -1078,4 +1078,9 @@ class Course extends DiscoveryItem
         return $this->children;
     }
 
+    function has_children()
+    {
+        return count($this->get_children()) > 0;
+    }
+
 }

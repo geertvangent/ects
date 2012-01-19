@@ -37,6 +37,7 @@ class Training extends \application\discovery\module\training\Training
     private $choice_options;
     private $trajectories;
     private $groups;
+    private $courses;
 
     /**
      * @return int
@@ -332,6 +333,26 @@ class Training extends \application\discovery\module\training\Training
     function add_package($package)
     {
         $this->packages[] = $package;
+    }
+
+    function get_courses()
+    {
+        return $this->courses;
+    }
+
+    function set_courses($courses)
+    {
+        $this->courses = $courses;
+    }
+
+    function has_courses()
+    {
+        return count($this->courses) > 0;
+    }
+
+    function add_course($course)
+    {
+        $this->courses[] = $course;
     }
 
     function get_choices()
