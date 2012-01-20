@@ -1,6 +1,10 @@
 <?php
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
+use common\libraries\BreadcrumbTrail;
+
+use common\libraries\Breadcrumb;
+
 use common\libraries\ToolbarItem;
 
 use common\libraries\StringUtilities;
@@ -26,7 +30,7 @@ use common\libraries\Translation;
 class Module extends \application\discovery\module\training_info\Module
 {
     const PARAM_SOURCE = 'source';
-    const TAB_GENERAL = 1;
+    const TAB_GOALS = 1;
     const TAB_OPTIONS = 2;
     const TAB_TRAJECTORIES = 3;
     const TAB_COURSES = 4;
@@ -40,64 +44,9 @@ class Module extends \application\discovery\module\training_info\Module
         return new Parameters(Request :: get(self :: PARAM_TRAINING_ID), Request :: get(self :: PARAM_SOURCE));
     }
 
-    function render()
-    {
-        $html = array();
-        $training = $this->get_training();
-        
-        $html[] = '<h3>';
-        if ($training->get_previous_id())
-        {
-            $parameters = new Parameters($training->get_previous_id(), $training->get_source());
-            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-            $html[] = Theme :: get_common_image('action_prev', 'png', Translation :: get('Previous'), $link, ToolbarItem :: DISPLAY_ICON);
-        }
-        else
-        {
-            $html[] = Theme :: get_common_image('action_prev_na', 'png', Translation :: get('PreviousNA'), null, ToolbarItem :: DISPLAY_ICON);
-        
-        }
-        $html[] = $training->get_name();
-        if ($training->get_next_id())
-        {
-            $parameters = new Parameters($training->get_next_id(), $training->get_source());
-            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-            $html[] = Theme :: get_common_image('action_next', 'png', Translation :: get('Next'), $link, ToolbarItem :: DISPLAY_ICON);
-        }
-        else
-        {
-            $html[] = Theme :: get_common_image('action_next_na', 'png', Translation :: get('NextNA'), null, ToolbarItem :: DISPLAY_ICON);
-        
-        }
-        $html[] = '</h3>';
-        
-        $tabs = new DynamicTabsRenderer('training');
-        
-        $tabs->add_tab(new DynamicContentTab(self :: TAB_GENERAL, Translation :: get('General'), Theme :: get_image_path() . 'tabs/' . self :: TAB_GENERAL . '.png', $this->get_general()));
-        
-        if ($training->has_options())
-        {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTIONS, Translation :: get('Options'), Theme :: get_image_path() . 'tabs/' . self :: TAB_OPTIONS . '.png', $this->get_options()));
-        }
-        
-        if ($training->has_trajectories())
-        {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_TRAJECTORIES, Translation :: get('Trajectories'), Theme :: get_image_path() . 'tabs/' . self :: TAB_TRAJECTORIES . '.png', $this->get_trajectories()));
-        }
-        
-        if ($training->has_courses())
-        {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_COURSES, Translation :: get('Courses'), Theme :: get_image_path() . 'tabs/' . self :: TAB_COURSES . '.png', $this->get_courses()));
-        }
-        
-        $html[] = $tabs->render();
-        return implode("\n", $html);
-    }
-
     function get_general()
     {
         $training = $this->get_training();
-        $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $training->get_year();
         
@@ -110,7 +59,7 @@ class Module extends \application\discovery\module\training_info\Module
             $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
             $history[] = '<a href="' . $link . '">' . $training_history->get_year() . '</a>';
         }
-        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
+        $properties[Translation :: get('History')] = implode('  |  ', $history);
         
         $properties[Translation :: get('BamaType')] = $training->get_bama_type_string();
         $properties[Translation :: get('Type')] = $training->get_type();
@@ -134,19 +83,41 @@ class Module extends \application\discovery\module\training_info\Module
         
         $table = new PropertiesTable($properties);
         
-        $html[] = $table->toHtml();
+        return $table->toHtml();
+    }
+
+    function render()
+    {
+        $html = array();
+        $training = $this->get_training();
+        
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
+        
+        $html[] = $this->get_general();
+        $html[] = '</br>';
+        
+        $tabs = new DynamicTabsRenderer('training');
+        
         if (! StringUtilities :: is_null_or_empty($training->get_goals(), true))
         {
-            $html[] = '<br/>';
-            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'general/goals.png);">';
-            $html[] = '<div class="title">';
-            $html[] = Translation :: get('Goals');
-            $html[] = '</div>';
-            $html[] = '<div class="description">';
-            $html[] = $training->get_goals();
-            $html[] = '</div>';
-            $html[] = '</div>';
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_GOALS, Translation :: get('Goals'), Theme :: get_image_path() . 'tabs/' . self :: TAB_GOALS . '.png', $training->get_goals()));
         }
+        if ($training->has_options())
+        {
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTIONS, Translation :: get('Options'), Theme :: get_image_path() . 'tabs/' . self :: TAB_OPTIONS . '.png', $this->get_options()));
+        }
+        
+        if ($training->has_trajectories())
+        {
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_TRAJECTORIES, Translation :: get('Trajectories'), Theme :: get_image_path() . 'tabs/' . self :: TAB_TRAJECTORIES . '.png', $this->get_trajectories()));
+        }
+        
+        if ($training->has_courses())
+        {
+            $tabs->add_tab(new DynamicContentTab(self :: TAB_COURSES, Translation :: get('Courses'), Theme :: get_image_path() . 'tabs/' . self :: TAB_COURSES . '.png', $this->get_courses()));
+        }
+        
+        $html[] = $tabs->render();
         return implode("\n", $html);
     }
 

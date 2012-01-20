@@ -33,14 +33,14 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
     {
         $module_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
         $module_content_type = Request :: get(DiscoveryManager :: PARAM_CONTENT_TYPE);
-
+        
         $order_by = array(new ObjectTableOrder(ModuleInstance :: PROPERTY_DISPLAY_ORDER));
         if ($this->get_user()->is_platform_admin())
         {
             $link = $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_MODULE));
             BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('Modules'), Theme :: get_common_image_path() . 'action_config.png', $link));
         }
-
+        
         if (! $module_id)
         {
             if (! $module_content_type)
@@ -62,7 +62,7 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
             $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($module_id);
             $module_content_type = $current_module_instance->get_content_type();
         }
-
+        
         switch ($module_content_type)
         {
             case ModuleInstance :: TYPE_USER :
@@ -88,33 +88,32 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                 BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('Information'), Theme :: get_image_path() . 'action_information.png', $link));
                 break;
         }
-
+        
         $current_module = Module :: factory($this, $current_module_instance);
-
-        $tabs = new DynamicVisualTabsRenderer('discovery', $current_module->render());
-
+        
         if ($current_module_instance->get_content_type() != ModuleInstance :: TYPE_DETAILS)
         {
+            $tabs = new DynamicVisualTabsRenderer('discovery', $current_module->render());
             $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $current_module_instance->get_content_type());
             $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition, null, null, $order_by);
-
+            
             while ($module_instance = $module_instances->next_result())
             {
-
+                
                 $rights = $module_instance->get_type() . '\Rights';
                 $module_class = $module_instance->get_type() . '\Module';
-
+                
                 $module_parameters = $module_class :: get_module_parameters();
-
+                
                 if ($module_content_type == ModuleInstance :: TYPE_USER)
                 {
                     if (! $module_parameters->get_user_id())
                     {
                         $module_parameters->set_user_id($this->get_user_id());
                     }
-
+                    
                     $module = Module :: factory($this, $module_instance);
-
+                    
                     if ($module->has_data($module_parameters))
                     {
                         if ($rights :: get_instance()->is_visible($module_instance->get_id(), $module_parameters))
@@ -134,37 +133,34 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                     $selected = ($module_id == $module_instance->get_id() ? true : false);
                     $link = $this->get_url($module_parameters_array);
                     $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), Translation :: get('TypeName', null, $module_instance->get_type()), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
-
+                
                 }
             }
         }
-        else
-        {
-            $module = $current_module_instance->get_type() . '\Module';
-            $module_parameters = $module :: get_module_parameters()->get_parameters();
-            $module_parameters[DiscoveryManager :: PARAM_MODULE_ID] = $current_module_instance->get_id();
-            $link = $this->get_url($module_parameters);
-            $tabs->add_tab(new DynamicVisualTab($current_module_instance->get_id(), Translation :: get('TypeName', null, $current_module_instance->get_type()), Theme :: get_image_path($current_module_instance->get_type()) . 'logo/22.png', $link, true));
-        }
-
+        
         if ($current_module_instance->get_content_type() == ModuleInstance :: TYPE_USER)
         {
             $user_id = $module_parameters->get_user_id();
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $user->get_fullname()));
-
-     //            $details = array();
-        //            $details[] = $user->get_fullname();
-        //            $details[] = $user->get_email();
-        //            echo implode("\n", $details);
+        
+        }
+        
+        if ($current_module_instance->get_content_type() != ModuleInstance :: TYPE_DETAILS)
+        {
+            $content = $tabs->render();
+        }
+        else
+        {
+        	BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, Translation :: get('TypeName', null, $current_module_instance->get_type())));
+            $content = $current_module->render();
         }
         $this->display_header();
-        echo $tabs->render();
-
+        echo $content;
         echo '<div id="legend">';
         echo LegendTable :: get_instance()->as_html();
         echo '</div>';
-
+        
         $this->display_footer();
     }
 }
