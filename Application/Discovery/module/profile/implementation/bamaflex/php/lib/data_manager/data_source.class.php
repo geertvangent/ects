@@ -13,7 +13,7 @@ use application\discovery\module\profile\DataManagerInterface;
 use MDB2_Error;
 use stdClass;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
 
     /**
@@ -26,7 +26,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_basic] WHERE id = ' . $official_code;
+        $query = 'SELECT * FROM v_discovery_profile_basic WHERE id = "' . $official_code . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $result = $statement->execute();
@@ -87,7 +87,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT count(id) AS profile_count FROM [dbo].[v_discovery_profile_basic] WHERE id = "' . $official_code . '"';
+        $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic WHERE id = "' . $official_code . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $result = $statement->execute();
@@ -106,7 +106,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     private function retrieve_emails($id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_email] WHERE id = ' . $id;
+        $query = 'SELECT * FROM v_discovery_profile_email WHERE id = "' . $id . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
@@ -133,7 +133,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     private function retrieve_learning_credits($id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_learning_credit] WHERE person_id = "' . $id . '" ORDER BY date DESC';
+        $query = 'SELECT * FROM v_discovery_profile_learning_credit WHERE person_id = "' . $id . '" ORDER BY date DESC';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
@@ -161,7 +161,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     private function retrieve_communications($id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_communication] WHERE id = ' . $id;
+        $query = 'SELECT * FROM v_discovery_profile_communication WHERE id = "' . $id . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
@@ -189,7 +189,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     private function retrieve_addresses($id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_address] WHERE id = ' . $id;
+        $query = 'SELECT * FROM v_discovery_profile_address WHERE id  = "' . $id . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
@@ -225,7 +225,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     private function retrieve_photo($id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_photo] WHERE id = ' . $id;
+        $query = 'SELECT * FROM v_discovery_profile_photo WHERE id = "' . $id . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $result = $statement->execute();
@@ -248,7 +248,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
     private function retrieve_previous_college($id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_previous_college] WHERE id = ' . $id;
+        $query = 'SELECT * FROM v_discovery_profile_previous_college WHERE id = "' . $id . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $result = $statement->execute();
@@ -280,7 +280,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
     private function retrieve_previous_university($id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_previous_university] WHERE id = ' . $id;
+        $query = 'SELECT * FROM v_discovery_profile_previous_university WHERE id = "' . $id . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $result = $statement->execute();
@@ -316,7 +316,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
      */
     private function retrieve_nationalities($id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_profile_nationality] WHERE id = ' . $id;
+        $query = 'SELECT * FROM v_discovery_profile_nationality WHERE id = "' . $id . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();

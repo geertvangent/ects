@@ -6,7 +6,7 @@ use application\discovery\module\group\DataManagerInterface;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use MDB2_Error;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $groups;
 
@@ -21,7 +21,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         
         if (! isset($this->groups[$training_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_group_advanced] WHERE training_id = "' . $training_id . '" AND source = "' . $source . '" ORDER BY description';
+            $query = 'SELECT * FROM v_discovery_group_advanced WHERE training_id = "' . $training_id . '" AND source = "' . $source . '" ORDER BY description';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -55,7 +55,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         
         if (! isset($this->trainings[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_advanced] WHERE id = "' . $training_id . '" AND source = "' . $source . '"';
+            $query = 'SELECT * FROM v_discovery_training_advanced WHERE id = "' . $training_id . '" AND source = "' . $source . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -94,7 +94,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
     function retrieve_training_next_id($training)
     {
-        $query = 'SELECT id FROM [dbo].[v_discovery_training_advanced] WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
+        $query = 'SELECT id FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
         

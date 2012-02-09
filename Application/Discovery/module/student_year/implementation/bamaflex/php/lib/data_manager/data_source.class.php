@@ -7,7 +7,7 @@ use user\UserDataManager;
 
 use MDB2_Error;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $student_years = array();
 
@@ -23,7 +23,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT * FROM [dbo].[v_discovery_year_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC, id';
+            $query = 'SELECT * FROM v_discovery_year_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC, id';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -55,7 +55,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT count(id) AS student_years_count FROM [dbo].[v_discovery_year_advanced] WHERE person_id = "' . $official_code . '"';
+        $query = 'SELECT count(id) AS student_years_count FROM v_discovery_year_advanced WHERE person_id = "' . $official_code . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();

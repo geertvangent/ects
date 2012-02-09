@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\connection\bamaflex;
+namespace application\discovery\data_source\bamaflex;
 
 use common\libraries\Utilities;
 use common\libraries\DataClass;

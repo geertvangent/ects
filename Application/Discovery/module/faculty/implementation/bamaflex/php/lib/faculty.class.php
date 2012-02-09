@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\faculty\implementation\bamaflex;
 
-use application\discovery\connection\bamaflex\HistoryReference;
+use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\faculty\DataManager;
 use application\discovery\DiscoveryDataManager;
 

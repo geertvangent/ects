@@ -7,7 +7,7 @@ use application\discovery\module\teaching_assignment\DataManagerInterface;
 
 use MDB2_Error;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $teaching_assignments;
     private $years;
@@ -20,17 +20,17 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+
         if (! isset($this->teaching_assignments[$person_id]))
         {
             //                     $official_code = $user->get_official_code();
-            
 
-            $query = 'SELECT * FROM [dbo].[v_discovery_teaching_assignment_advanced] WHERE person_id = ' . $person_id . ' ORDER BY year DESC, faculty, training, name';
-            
+
+            $query = 'SELECT * FROM v_discovery_teaching_assignment_advanced WHERE person_id = "' . $person_id . '" ORDER BY year DESC, faculty, training, name';
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -54,7 +54,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-        
+
         return $this->teaching_assignments[$person_id];
     }
 
@@ -62,12 +62,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
-        $query = 'SELECT count(id) AS teaching_assignments_count FROM [dbo].[v_discovery_teaching_assignment_advanced] WHERE person_id = "' . $person_id . '"';
-        
+
+        $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced WHERE person_id = "' . $person_id . '"';
+
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
@@ -83,13 +83,13 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         if (! isset($this->years[$person_id]))
         {
             //            $official_code = $user->get_official_code();
-            
 
-            $query = 'SELECT DISTINCT [year] FROM [dbo].[v_discovery_teaching_assignment_advanced] WHERE person_id = ' . $person_id . ' ORDER BY year DESC';
-            
+
+            $query = 'SELECT DISTINCT year FROM v_discovery_teaching_assignment_advanced WHERE person_id = "' . $person_id . '" ORDER BY year DESC';
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -98,7 +98,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-        
+
         return $this->years[$person_id];
     }
 }

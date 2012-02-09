@@ -17,7 +17,7 @@ use application\discovery\module\career\DataManagerInterface;
 
 use MDB2_Error;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $contract_types = array();
     private $contract_ids = array();
@@ -40,7 +40,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT DISTINCT [contract_type] FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY contract_type';
+            $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY contract_type';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -65,7 +65,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT DISTINCT [contract_id] FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC';
+            $query = 'SELECT DISTINCT contract_id FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -86,7 +86,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         if (! isset($this->trainings[$source][$training_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_advanced] WHERE id = ' . $training_id . ' AND source = ' . $source;
+            $query = 'SELECT * FROM v_discovery_training_advanced WHERE id = ' . $training_id . ' AND source = ' . $source;
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
 
@@ -121,7 +121,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
     function retrieve_training_next_id($training)
     {
-        $query = 'SELECT id FROM [dbo].[v_discovery_training_advanced] WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
+        $query = 'SELECT id FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
 
@@ -148,7 +148,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT * FROM [dbo].[v_discovery_enrollment_advanced] WHERE person_id = ' . $official_code . ' ORDER BY year DESC, id';
+            $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC, id';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -195,8 +195,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
             $child_courses = $this->retrieve_child_courses($parameters);
 
-            $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
-            $query .= 'WHERE programme_parent_id IS NULL AND person_id = ' . $official_code . ' ';
+            $query = 'SELECT * FROM v_discovery_career_advanced ';
+            $query .= 'WHERE programme_parent_id IS NULL AND person_id = "' . $official_code . '" ';
             $query .= 'ORDER BY year, name';
 
             $statement = $this->get_connection()->prepare($query);
@@ -230,7 +230,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT count(id) AS courses_count FROM [dbo].[v_discovery_career_advanced] ';
+        $query = 'SELECT count(id) AS courses_count FROM v_discovery_career_advanced ';
         $query .= 'WHERE person_id = "' . $official_code . '"';
 
         $statement = $this->get_connection()->prepare($query);
@@ -252,8 +252,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT * FROM [dbo].[v_discovery_career_advanced] ';
-            $query .= 'WHERE programme_parent_id IS NOT NULL AND person_id = ' . $official_code . ' ';
+            $query = 'SELECT * FROM v_discovery_career_advanced ';
+            $query .= 'WHERE programme_parent_id IS NOT NULL AND person_id = "' . $official_code . '" ';
             $query .= 'ORDER BY year, trajectory_part, name';
 
             $statement = $this->get_connection()->prepare($query);
@@ -333,9 +333,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     //             $official_code = $user->get_official_code();
 
 
-    //             $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_advanced] ';
-    //             $query .= 'WHERE [person_id] = ' . $official_code . ' ';
-    //             $query .= 'ORDER BY [try_order]';
+    //             $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ';
+    //             $query .= 'WHERE person_id = "' . $official_code . '" ';
+    //             $query .= 'ORDER BY try_order';
 
 
     //             $statement = $this->get_connection()->prepare($query);
@@ -373,8 +373,8 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT [source], [enrollment_programme_id], [result], [status], [sub_status], [try_id], [publish_status], [abandoned] FROM [dbo].[v_discovery_mark_advanced] ';
-            $query .= 'WHERE [person_id] = "' . $official_code . '"';
+            $query = 'SELECT * FROM v_discovery_mark_advanced ';
+            $query .= 'WHERE person_id = "' . $official_code . '"';
 
             $statement = $this->get_connection()->prepare($query);
             $result = $statement->execute();

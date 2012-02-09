@@ -8,7 +8,7 @@ use user\UserDataManager;
 use MDB2_Error;
 use stdClass;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $employments = array();
     private $employment_parts = array();
@@ -23,7 +23,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT * FROM [dbo].[v_discovery_employment] WHERE person_id = "' . $official_code . '" ORDER BY start_date DESC';
+        $query = 'SELECT * FROM v_discovery_employment WHERE person_id = "' . $official_code . '" ORDER BY start_date DESC';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
@@ -63,7 +63,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 $employment->set_interruption_id($result->interruption_id);
                 $employment->set_interruption_category($result->interruption_category);
                 $employment->set_interruption_category_id($result->interruption_category_id);
-                
+
 
                 $this->employments[$official_code][] = $employment;
             }
@@ -82,7 +82,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT count(id) AS employments_count FROM [dbo].[v_discovery_employment] WHERE person_id = "' . $official_code . '"';
+        $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment WHERE person_id = "' . $official_code . '"';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
@@ -101,7 +101,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
     function retrieve_employment_parts($employment_id)
     {
-        $query = 'SELECT * FROM [dbo].[v_discovery_employment_parts] WHERE assignment_id = "' . $employment_id . '" ORDER BY start_date';
+        $query = 'SELECT * FROM v_discovery_employment_parts WHERE assignment_id = "' . $employment_id . '" ORDER BY start_date';
 
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();

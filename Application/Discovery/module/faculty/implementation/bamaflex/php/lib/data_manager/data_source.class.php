@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\faculty\implementation\bamaflex;
 
-use application\discovery\connection\bamaflex\HistoryReference;
+use application\discovery\data_source\bamaflex\HistoryReference;
 
 use user\UserDataManager;
 
@@ -9,7 +9,7 @@ use application\discovery\module\faculty\DataManagerInterface;
 
 use MDB2_Error;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $faculties;
     private $faculty;
@@ -25,7 +25,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         if (! isset($this->faculties))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_faculty_advanced] ORDER BY year DESC, name';
+            $query = 'SELECT * FROM v_discovery_faculty_advanced ORDER BY year DESC, name';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -70,7 +70,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         {
             if (! isset($this->faculty[$faculty_id][$source]))
             {
-                $query = 'SELECT * FROM [dbo].[v_discovery_faculty_advanced] WHERE id = "' . $faculty_id . '" AND source = "' . $source . '"';
+                $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE id = "' . $faculty_id . '" AND source = "' . $source . '"';
 
                 $statement = $this->get_connection()->prepare($query);
                 $results = $statement->execute();
@@ -111,7 +111,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
 
     function retrieve_faculty_next_id($faculty)
     {
-        $query = 'SELECT id, source FROM [dbo].[v_discovery_faculty_advanced] WHERE previous_id = "' . $faculty->get_id() . '" AND source = "' . $faculty->get_source() . '"';
+        $query = 'SELECT id, source FROM v_discovery_faculty_advanced WHERE previous_id = "' . $faculty->get_id() . '" AND source = "' . $faculty->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
 
@@ -130,7 +130,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         if (! isset($this->years))
         {
 
-            $query = 'SELECT DISTINCT [year] FROM [dbo].[v_discovery_faculty_advanced] ORDER BY year DESC';
+            $query = 'SELECT DISTINCT year FROM v_discovery_faculty_advanced ORDER BY year DESC';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -151,7 +151,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         if (! isset($this->deans[$source][$faculty_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_faculty_dean_advanced] WHERE source ="' . $source . '" AND faculty_id = "' . $faculty_id . '" ORDER BY person';
+            $query = 'SELECT * FROM v_discovery_faculty_dean_advanced WHERE source ="' . $source . '" AND faculty_id = "' . $faculty_id . '" ORDER BY person';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();

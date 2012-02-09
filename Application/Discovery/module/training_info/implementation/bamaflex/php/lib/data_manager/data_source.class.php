@@ -11,10 +11,10 @@ use user\UserDataManager;
 
 use MDB2_Error;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $trainings;
-    
+
     private $majors;
     private $languages;
     private $packages;
@@ -40,14 +40,14 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->trainings[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_advanced] WHERE id = "' . $training_id . '" AND source = "' . $source . '"';
-            
+            $query = 'SELECT * FROM v_discovery_training_advanced WHERE id = "' . $training_id . '" AND source = "' . $source . '"';
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -77,21 +77,21 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $training->set_previous_id($result->previous_id);
                     $training->set_next_id($this->retrieve_training_next_id($training));
                     $training->set_courses($this->retrieve_courses($training_parameters));
-                    
+
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-        
+
         return $this->trainings[$training_id][$source];
     }
 
     function retrieve_training_next_id($training)
     {
-        $query = 'SELECT id FROM [dbo].[v_discovery_training_advanced] WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
+        $query = 'SELECT id FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
@@ -107,15 +107,15 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->majors[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_major_basic] ';
+            $query = 'SELECT * FROM v_discovery_training_major_basic ';
             $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -127,12 +127,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $major->set_source($result->source);
                     $major->set_choices($this->retrieve_major_choices($major->get_id(), $major->get_source()));
                     $major->set_choice_options($this->retrieve_major_choice_options($major->get_id(), $major->get_source()));
-                    
+
                     $this->majors[$training_id][$source][] = $major;
                 }
             }
         }
-        
+
         return $this->majors[$training_id][$source];
     }
 
@@ -140,15 +140,15 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->languages[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_language_basic] ';
+            $query = 'SELECT * FROM v_discovery_training_language_basic ';
             $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -158,12 +158,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $language->set_training_id($result->training_id);
                     $language->set_name($this->convert_to_utf8($result->name));
                     $language->set_source($result->source);
-                    
+
                     $this->languages[$training_id][$source][] = $language;
                 }
             }
         }
-        
+
         return $this->languages[$training_id][$source];
     }
 
@@ -171,15 +171,15 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->packages[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_package_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_package_advanced ';
             $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -190,12 +190,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $package->set_name($this->convert_to_utf8($result->name));
                     $package->set_source($result->source);
                     $package->set_courses($this->retrieve_package_courses($package->get_id(), $package->get_source()));
-                    
+
                     $this->packages[$training_id][$source][] = $package;
                 }
             }
         }
-        
+
         return $this->packages[$training_id][$source];
     }
 
@@ -203,15 +203,15 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $id = $parameters->get_training_id();
         $source = $parameters->get_source();
-        
+
         if (! isset($this->courses[$id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_course_advanced] ';
+            $query = 'SELECT * FROM v_discovery_course_advanced ';
             $query .= 'WHERE parent_id IS NULL AND training_id = "' . $id . '" AND source = "' . $source . '" ORDER BY name';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -223,12 +223,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $course->set_source($result->source);
                     $course->set_credits($result->credits);
                     $course->set_children($this->retrieve_courses_children($id, $source, $course->get_id()));
-                    
+
                     $this->courses[$id][$source][] = $course;
                 }
             }
         }
-        
+
         return $this->courses[$id][$source];
     }
 
@@ -236,12 +236,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         if (! isset($this->package_courses[$id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_info_package_course_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced ';
             $query .= 'WHERE parent_programme_id IS NULL AND package_id = "' . $id . '" AND source = "' . $source . '"';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -255,29 +255,25 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $trajectory->set_credits($result->credits);
                     $trajectory->set_programme_id($result->programme_id);
                     $trajectory->set_children($this->retrieve_package_courses_children($id, $source, $trajectory->get_programme_id()));
-                    
+
                     $this->package_courses[$id][$source][] = $trajectory;
                 }
             }
         }
-        
-        return $this->package_courses[$id][$source];
+  return $this->package_courses[$id][$source];
     }
 
     function retrieve_choices($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
-        if (! isset($this->choices[$training_id][$source]))
+  if (! isset($this->choices[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_choice_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_choice_advanced ';
             $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -286,29 +282,25 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $choice->set_training_id($result->training_id);
                     $choice->set_name($this->convert_to_utf8($result->name));
                     $choice->set_source($result->source);
-                    
+
                     $this->choices[$training_id][$source][] = $choice;
                 }
             }
         }
-        
-        return $this->choices[$training_id][$source];
+  return $this->choices[$training_id][$source];
     }
 
     function retrieve_choice_options($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
-        if (! isset($this->choice_options[$training_id][$source]))
+  if (! isset($this->choice_options[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_choice_option_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_choice_option_advanced ';
             $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -317,29 +309,25 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $choice_option->set_training_id($result->training_id);
                     $choice_option->set_name($this->convert_to_utf8($result->name));
                     $choice_option->set_source($result->source);
-                    
+
                     $this->choice_options[$training_id][$source][] = $choice_option;
                 }
             }
         }
-        
-        return $this->choice_options[$training_id][$source];
+  return $this->choice_options[$training_id][$source];
     }
 
     function retrieve_trajectories($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
-        if (! isset($this->trajectories[$training_id][$source]))
+  if (! isset($this->trajectories[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_trajectory_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_trajectory_advanced ';
             $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -349,29 +337,25 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $trajectory->set_name($this->convert_to_utf8($result->name));
                     $trajectory->set_source($result->source);
                     $trajectory->set_trajectories($this->retrieve_sub_trajectories($trajectory->get_id(), $trajectory->get_source()));
-                    
+
                     $this->trajectories[$training_id][$source][] = $trajectory;
                 }
             }
         }
-        
-        return $this->trajectories[$training_id][$source];
+  return $this->trajectories[$training_id][$source];
     }
 
     function retrieve_groups($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
-        if (! isset($this->groups[$training_id][$source]))
+  if (! isset($this->groups[$training_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_group_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_group_advanced ';
             $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -380,26 +364,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $group->set_group_id($result->group_id);
                     $group->set_group($this->convert_to_utf8($result->group));
                     $group->set_source($result->source);
-                    
+
                     $this->groups[$training_id][$source][] = $group;
                 }
             }
         }
-        
-        return $this->groups[$training_id][$source];
+  return $this->groups[$training_id][$source];
     }
 
     function retrieve_sub_trajectories($id, $source)
     {
         if (! isset($this->sub_trajectories[$id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_sub_trajectory_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced ';
             $query .= 'WHERE trajectory_id = "' . $id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -409,26 +390,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $trajectory->set_name($this->convert_to_utf8($result->name));
                     $trajectory->set_source($result->source);
                     $trajectory->set_courses($this->retrieve_sub_trajectory_courses($trajectory->get_id(), $trajectory->get_source()));
-                    
+
                     $this->sub_trajectories[$id][$source][] = $trajectory;
                 }
             }
         }
-        
-        return $this->sub_trajectories[$id][$source];
+  return $this->sub_trajectories[$id][$source];
     }
 
     function retrieve_sub_trajectory_courses($id, $source)
     {
         if (! isset($this->sub_trajectory_courses[$id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_info_sub_trajectory_course_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced ';
             $query .= 'WHERE parent_programme_id IS NULL AND sub_trajectory_id = "' . $id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -441,26 +419,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $trajectory->set_credits($result->credits);
                     $trajectory->set_programme_id($result->programme_id);
                     $trajectory->set_children($this->retrieve_sub_trajectory_courses_children($id, $source, $trajectory->get_programme_id()));
-                    
+
                     $this->sub_trajectory_courses[$id][$source][] = $trajectory;
                 }
             }
         }
-        
-        return $this->sub_trajectory_courses[$id][$source];
+  return $this->sub_trajectory_courses[$id][$source];
     }
 
     function retrieve_sub_trajectory_courses_children($id, $source, $parent_programme_id)
     {
         if (! isset($this->sub_trajectory_courses_children[$id][$source][$parent_programme_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_info_sub_trajectory_course_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced ';
             $query .= 'WHERE parent_programme_id = "' . $parent_programme_id . '" AND sub_trajectory_id = "' . $id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -472,26 +447,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $trajectory->set_trajectory_part($result->trajectory_part);
                     $trajectory->set_credits($result->credits);
                     $trajectory->set_programme_id($result->programme_id);
-                    
+
                     $this->sub_trajectory_courses_children[$id][$source][$parent_programme_id][] = $trajectory;
                 }
             }
         }
-        
-        return $this->sub_trajectory_courses_children[$id][$source][$parent_programme_id];
+  return $this->sub_trajectory_courses_children[$id][$source][$parent_programme_id];
     }
 
     function retrieve_package_courses_children($id, $source, $parent_programme_id)
     {
         if (! isset($this->package_courses_children[$id][$source][$parent_programme_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_info_package_course_advanced] ';
+            $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced ';
             $query .= 'WHERE parent_programme_id = "' . $parent_programme_id . '" AND package_id = "' . $id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -503,26 +475,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $package_course->set_trajectory_part($result->trajectory_part);
                     $package_course->set_credits($result->credits);
                     $package_course->set_programme_id($result->programme_id);
-                    
+
                     $this->package_courses_children[$id][$source][$parent_programme_id][] = $package_course;
                 }
             }
         }
-        
-        return $this->package_courses_children[$id][$source][$parent_programme_id];
+  return $this->package_courses_children[$id][$source][$parent_programme_id];
     }
 
     function retrieve_courses_children($id, $source, $parent_programme_id)
     {
         if (! isset($this->courses_children[$id][$source][$parent_programme_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_course_advanced] ';
+            $query = 'SELECT * FROM v_discovery_course_advanced ';
             $query .= 'WHERE parent_id = "' . $parent_programme_id . '" AND training_id = "' . $id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -532,26 +501,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $package_course->set_name($this->convert_to_utf8($result->name));
                     $package_course->set_source($result->source);
                     $package_course->set_credits($result->credits);
-                    
+
                     $this->courses_children[$id][$source][$parent_programme_id][] = $package_course;
                 }
             }
         }
-        
-        return $this->courses_children[$id][$source][$parent_programme_id];
+  return $this->courses_children[$id][$source][$parent_programme_id];
     }
 
     function retrieve_major_choices($id, $source)
     {
         if (! isset($this->major_choices[$id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_major_choice_basic] ';
+            $query = 'SELECT * FROM v_discovery_training_major_choice_basic ';
             $query .= 'WHERE major_id = "' . $id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -560,26 +526,23 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $major_choice->set_major_id($result->major_id);
                     $major_choice->set_name($this->convert_to_utf8($result->name));
                     $major_choice->set_source($result->source);
-                    
+
                     $this->major_choices[$id][$source][] = $major_choice;
                 }
             }
         }
-        
-        return $this->major_choices[$id][$source];
+  return $this->major_choices[$id][$source];
     }
 
     function retrieve_major_choice_options($id, $source)
     {
         if (! isset($this->major_choice_options[$id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_training_major_choice_option_basic] ';
+            $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic ';
             $query .= 'WHERE major_id = "' . $id . '" AND source = "' . $source . '"';
-            
-            $statement = $this->get_connection()->prepare($query);
+  $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
-            if (! $results instanceof MDB2_Error)
+  if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
@@ -588,13 +551,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $major_choice_option->set_major_id($result->major_id);
                     $major_choice_option->set_name($this->convert_to_utf8($result->name));
                     $major_choice_option->set_source($result->source);
-                    
+
                     $this->major_choice_options[$id][$source][] = $major_choice_option;
                 }
             }
         }
-        
-        return $this->major_choice_options[$id][$source];
+  return $this->major_choice_options[$id][$source];
     }
 
 }

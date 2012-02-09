@@ -7,7 +7,7 @@ use application\discovery\module\exemption\DataManagerInterface;
 
 use MDB2_Error;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $exemptions;
     private $years;
@@ -20,17 +20,17 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+
         if (! isset($this->exemptions[$person_id]))
         {
             //                     $official_code = $user->get_official_code();
-            
 
-            $query = 'SELECT * FROM [dbo].[v_discovery_exemption_basic] WHERE person_id = ' . $person_id . ' ORDER BY year DESC, programme_name';
-            
+
+            $query = 'SELECT * FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id . '" ORDER BY year DESC, programme_name';
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -58,7 +58,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-        
+
         return $this->exemptions[$person_id];
     }
 
@@ -66,18 +66,18 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
-        $query = 'SELECT count(id) AS exemptions_count FROM [dbo].[v_discovery_exemption_basic] WHERE person_id = "' . $person_id . '"';
-        
+
+        $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id . '"';
+
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
             return $result->exemptions_count;
         }
-        
+
         return 0;
     }
 
@@ -87,11 +87,11 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         if (! isset($this->years[$person_id]))
         {
-            $query = 'SELECT DISTINCT [year] FROM [dbo].[v_discovery_exemption_basic] WHERE person_id = ' . $person_id . ' ORDER BY year DESC';
-            
+            $query = 'SELECT DISTINCT year FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id . '" ORDER BY year DESC';
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -100,7 +100,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-        
+
         return $this->years[$person_id];
     }
 }

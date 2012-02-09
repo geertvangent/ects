@@ -13,7 +13,7 @@ use application\discovery\module\course_results\DataManagerInterface;
 use MDB2_Error;
 use stdClass;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $mark_moments = array();
     private $mark = array();
@@ -28,16 +28,16 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $programme_id = $course_results_parameters->get_programme_id();
         $source = $course_results_parameters->get_source();
-        
+
         if (! isset($this->course_results[$programme_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_course_results_advanced] ';
+            $query = 'SELECT * FROM v_discovery_course_results_advanced ';
             $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = ' . $source . ' ';
             $query .= 'ORDER BY person_last_name, person_first_name';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -46,7 +46,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                 }
             }
         }
-        
+
         return $this->course_results[$programme_id][$source];
     }
 
@@ -54,26 +54,26 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-        
+
         if (! isset($this->course[$programme_id][$source]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_course_advanced] ';
+            $query = 'SELECT * FROM v_discovery_course_advanced ';
             $query .= 'WHERE id = "' . $programme_id . '" AND source = ' . $source . ' ';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 $object = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-                
+
                 if ($object instanceof stdClass)
                 {
                     $this->course[$programme_id][$source] = $this->result_to_course($object);
                 }
             }
         }
-        
+
         return $this->course[$programme_id][$source];
     }
 
@@ -109,16 +109,16 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course->set_previous_id($object->previous_id);
         $course->set_previous_parent_id($object->previous_parent_id);
         $course->set_next_id($this->retrieve_course_next_id($course));
-        
+
         return $course;
     }
 
     function retrieve_course_next_id($course)
     {
-        $query = 'SELECT id FROM [dbo].[v_discovery_course_advanced] WHERE previous_id = "' . $course->get_id() . '" AND source = "' . $course->get_source() . '"';
+        $query = 'SELECT id FROM v_discovery_course_advanced WHERE previous_id = "' . $course->get_id() . '" AND source = "' . $course->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
@@ -139,9 +139,9 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         $course_result->set_person_first_name($this->convert_to_utf8($result->person_first_name));
         $course_result->set_person_id($result->person_id);
         $course_result->set_trajectory_type($result->trajectory_type);
-        
+
         $marks = $this->retrieve_marks($course_results_parameters->get_programme_id(), $course_results_parameters->get_source());
-        
+
         foreach ($this->retrieve_mark_moments($course_results_parameters) as $moment)
         {
             if (isset($marks[$result->source][$result->id][$moment->get_id()]))
@@ -153,10 +153,10 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
             {
                 $mark = Mark :: factory($moment->get_id());
             }
-            
+
             $course_result->add_mark($mark);
         }
-        
+
         return $course_result;
     }
 
@@ -168,16 +168,16 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         $programme_id = $course_results_parameters->get_programme_id();
         $source = $course_results_parameters->get_source();
-        
+
         if (! isset($this->mark_moments[$programme_id][$source]))
         {
-            $query = 'SELECT DISTINCT [try_id], [try_name], [try_order] FROM [dbo].[v_discovery_mark_advanced] ';
-            $query .= 'WHERE [programme_id] = "' . $programme_id . '" AND source = ' . $source . ' ';
-            $query .= 'ORDER BY [try_order]';
-            
+            $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ';
+            $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = ' . $source . ' ';
+            $query .= 'ORDER BY try_order';
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -185,12 +185,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $mark_moment = new MarkMoment();
                     $mark_moment->set_id($result->try_id);
                     $mark_moment->set_name($result->try_name);
-                    
+
                     $this->mark_moments[$programme_id][$source][$result->try_id] = $mark_moment;
                 }
             }
         }
-        
+
         return $this->mark_moments[$programme_id][$source];
     }
 
@@ -201,12 +201,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
     {
         if (! isset($this->marks[$programme_id][$source]))
         {
-            $query = 'SELECT [source], [enrollment_programme_id], [result], [status], [sub_status], [try_id] FROM [dbo].[v_discovery_mark_advanced] ';
-            $query .= 'WHERE [programme_id] = "' . $programme_id . '"' . ' AND source = ' . $source . ' ';
-            
+            $query = 'SELECT * FROM v_discovery_mark_advanced ';
+            $query .= 'WHERE programme_id = "' . $programme_id . '"' . ' AND source = ' . $source . ' ';
+
             $statement = $this->get_connection()->prepare($query);
             $result = $statement->execute();
-            
+
             if (! $result instanceof MDB2_Error)
             {
                 while ($mark_result = $result->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -218,12 +218,12 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
                     $mark->set_sub_status($mark_result->sub_status);
                     $mark->set_publish_status($mark_result->publish_status);
                     $mark->set_abandoned($mark_result->abandoned);
-                    
+
                     $this->marks[$programme_id][$source][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
                 }
             }
         }
-        
+
         return $this->marks[$programme_id][$source];
     }
 }

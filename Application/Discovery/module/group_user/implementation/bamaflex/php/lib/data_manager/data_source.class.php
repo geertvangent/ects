@@ -11,7 +11,7 @@ use application\discovery\module\group_user\DataManagerInterface;
 
 use MDB2_Error;
 
-class DataSource extends \application\discovery\connection\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
     private $group_user = array();
     private $group;
@@ -28,7 +28,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         
         if (! isset($this->group_user[$group_class_id][$source][$type]))
         {
-            $query = 'SELECT DISTINCT * FROM [dbo].[v_discovery_group_user_advanced] ';
+            $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced ';
             $query .= 'WHERE group_class_id = "' . $group_class_id . '" AND source = "' . $source . '" AND type = "' . $type . '" ';
             $query .= 'ORDER BY last_name, first_name';
             
@@ -65,7 +65,7 @@ class DataSource extends \application\discovery\connection\bamaflex\DataSource i
         
         if (! isset($this->group[$source][$type][$group_class_id]))
         {
-            $query = 'SELECT * FROM [dbo].[v_discovery_group_advanced] WHERE type_id = "' . $group_class_id . '" AND source = "' . $source . '" AND type = "' . $type . '"';
+            $query = 'SELECT * FROM v_discovery_group_advanced WHERE type_id = "' . $group_class_id . '" AND source = "' . $source . '" AND type = "' . $type . '"';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
