@@ -13,6 +13,7 @@ class Photo extends DataClass
     const PROPERTY_DATA = 'data';
 
     /**
+     *
      * @return int
      */
     function get_mime_type()
@@ -21,6 +22,7 @@ class Photo extends DataClass
     }
 
     /**
+     *
      * @return string A base 64 encoded representation of the photo
      */
     function get_data()
@@ -29,7 +31,8 @@ class Photo extends DataClass
     }
 
     /**
-     * @param int $mime_type
+     *
+     * @param $mime_type int           
      */
     function set_mime_type($mime_type)
     {
@@ -37,7 +40,9 @@ class Photo extends DataClass
     }
 
     /**
-     * @param string $data A base 64 encoded representation of the photo
+     *
+     * @param $data string
+     *            A base 64 encoded representation of the photo
      */
     function set_data($data)
     {
@@ -45,7 +50,8 @@ class Photo extends DataClass
     }
 
     /**
-     * @param multitype:string $extended_property_names
+     *
+     * @param $extended_property_names multitype:string           
      */
     static function get_default_property_names($extended_property_names = array())
     {
@@ -56,6 +62,7 @@ class Photo extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -75,6 +82,18 @@ class Photo extends DataClass
         $source[] = $this->get_data();
         
         return implode('', $source);
+    }
+
+    function has_data()
+    {
+        if ($this->get_data())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 ?>

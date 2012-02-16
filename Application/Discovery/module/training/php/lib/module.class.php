@@ -1,6 +1,12 @@
 <?php
 namespace application\discovery\module\training;
 
+use common\libraries\Breadcrumb;
+
+use common\libraries\BreadcrumbTrail;
+
+use common\libraries\Utilities;
+
 use common\libraries\Filesystem;
 
 use application\discovery\Parameters;
@@ -25,6 +31,7 @@ use application\discovery\ModuleInstance;
 class Module extends \application\discovery\Module
 {
     /**
+     *
      * @var multitype:\application\discovery\module\training\Faculty
      */
     private $trainings;
@@ -46,6 +53,7 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\training\Faculty
      */
     function get_trainings()
@@ -93,9 +101,9 @@ class Module extends \application\discovery\Module
     function get_trainings_table($year = 0)
     {
         $trainings = $this->get_trainings_data($year);
-
+        
         $data = array();
-
+        
         foreach ($trainings as $key => $training)
         {
             $row = array();
@@ -108,9 +116,9 @@ class Module extends \application\discovery\Module
             $row[] = $training->get_end_date();
             $data[] = $row;
         }
-
+        
         $table = new SortableTable($data);
-
+        
         if (! $year && ! $this->has_parameters())
         {
             $table->set_header(0, Translation :: get('Year'), false, 'class="code"');
@@ -136,30 +144,33 @@ class Module extends \application\discovery\Module
     {
         return '';
     }
-
-    /* (non-PHPdoc)
-     * @see application\discovery\module\training\Module::render()
+    
+    /*
+     * (non-PHPdoc) @see application\discovery\module\training\Module::render()
      */
     function render()
     {
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('TypeName', null, Utilities :: get_namespace_from_object($this))));
+        
         $html = array();
-
+        
         if ($this->has_parameters())
         {
             $html[] = $this->get_context();
             $html[] = $this->get_trainings_table()->toHTML();
+        
         }
         else
         {
             $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
-
+            
             $tabs = new DynamicTabsRenderer('training_list');
             foreach ($years as $year)
             {
                 $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_trainings_table($year)->toHTML()));
             }
             $html[] = $tabs->render();
-
+        
         }
         return implode("\n", $html);
     }
@@ -172,7 +183,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {

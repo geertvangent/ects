@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
+use application\discovery\module\profile\Photo;
+
 use common\libraries\BreadcrumbTrail;
 
 use common\libraries\Breadcrumb;
@@ -81,6 +83,39 @@ class Module extends \application\discovery\module\training_info\Module
             $properties[Translation :: get('Groups')] = implode('<br />', $groups);
         }
         
+        $data_source = $this->get_module_instance()->get_setting('data_source');
+        $photo_module_instance = \application\discovery\Module :: exists('application\discovery\module\photo\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        if ($photo_module_instance)
+        {
+            $buttons = array();
+            // students
+            $parameters = new \application\discovery\module\photo\Parameters();
+            $parameters->set_training_id($training->get_id());
+            $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_STUDENT);
+            
+            $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
+            $image = Theme :: get_image('type\2', 'png', Translation :: get('Students', null, 'application\discovery\module\photo'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
+            $buttons[] = $image;
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get('Students', null, 'application\discovery\module\photo
+                    '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+            
+            // teachers
+            $parameters = new \application\discovery\module\photo\Parameters();
+            $parameters->set_training_id($training->get_id());
+            $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_TEACHER);
+            
+            $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
+            $image = Theme :: get_image('type\1', 'png', Translation :: get('Teachers', null, 'application\discovery\module\photo
+                    '), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
+            $buttons[] = $image;
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get('Teachers', null, 'application\discovery\module\photo
+                    '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+            
+            $properties[Translation :: get('Photos')] = implode("\n", $buttons);
+        }
+        
         $table = new PropertiesTable($properties);
         
         return $table->toHtml();
@@ -91,6 +126,7 @@ class Module extends \application\discovery\module\training_info\Module
         $html = array();
         $training = $this->get_training();
         
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));    
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
         
         $html[] = $this->get_general();
@@ -415,6 +451,8 @@ class Module extends \application\discovery\module\training_info\Module
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
                 'data_source' => $data_source));
+        $photo_module_instance = \application\discovery\Module :: exists('application\discovery\module\photo\implementation\bamaflex', array(
+                'data_source' => $data_source));
         
         foreach ($this->get_training()->get_courses() as $course)
         {
@@ -430,6 +468,21 @@ class Module extends \application\discovery\module\training_info\Module
             else
             {
                 $row[] = $course->get_name();
+            }
+            
+            if ($photo_module_instance)
+            {
+                $buttons = array();
+                
+                if ($photo_module_instance)
+                {
+                    $parameters = new \application\discovery\module\photo\Parameters();
+                    $parameters->set_programme_id($course->get_id());
+                    
+                    $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
+                    $buttons[] = Theme :: get_image('logo\16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                }
+                $row[] = implode("\n", $buttons);
             }
             
             $data[] = $row;
@@ -452,6 +505,21 @@ class Module extends \application\discovery\module\training_info\Module
                         $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                     }
                     
+                    if ($photo_module_instance)
+                    {
+                        $buttons = array();
+                        
+                        if ($photo_module_instance)
+                        {
+                            $parameters = new \application\discovery\module\photo\Parameters();
+                            $parameters->set_programme_id($child->get_id());
+                            
+                            $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
+                            $buttons[] = Theme :: get_image('logo\16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                        }
+                        $row[] = implode("\n", $buttons);
+                    }
+                    
                     $data[] = $row;
                 }
             
@@ -461,6 +529,7 @@ class Module extends \application\discovery\module\training_info\Module
         $table->set_header(0, Translation :: get('Credits'), false);
         $table->getHeader()->setColAttributes(0, 'class="action"');
         $table->set_header(1, Translation :: get('Course'), false);
+        $table->set_header(2, '', false);
         return $table->as_html();
     }
 }

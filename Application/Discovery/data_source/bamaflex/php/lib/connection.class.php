@@ -13,6 +13,7 @@ class Connection extends Mdb2Connection
      * Instance of this class for the singleton pattern.
      */
     private static $instance;
+    private $data_source_instance;
 
     /**
      * The MDB2 Connection object.
@@ -61,6 +62,11 @@ class Connection extends Mdb2Connection
     function set_option($option, $value)
     {
         $this->connection->setOption($option, $value);
+    }
+    
+    function get_data_source_instance()
+    {
+    	return $this->data_source_instance;
     }
 }
 ?>

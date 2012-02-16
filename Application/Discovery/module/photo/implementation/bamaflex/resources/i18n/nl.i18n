@@ -1,0 +1,5 @@
+TypeName = "Departementen"
+TypeDescription = "Overzicht van departementen per jaar"
+Trainings = "Opleidingen"
+Name = "Naam"
+Deans = "Departementshoofd(en)"
