@@ -68,6 +68,9 @@ class Module extends \application\discovery\module\course\Module
         $html = array();
         $course = $this->get_course();
         
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_year()));
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_faculty()));
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_training()));
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_name()));
         
         if (! $course instanceof Course)

@@ -53,16 +53,26 @@ class Module extends \application\discovery\Module
         return new InCondition(User :: PROPERTY_ID, $this->get_users());
     }
 
+    function get_context()
+    {
+        return '';
+    }
+
     function render()
     {
-        if (count($this->get_users()) > 0)
-        {
-            $parameters = $this->get_application()->get_parameters();
-            $parameters = array_merge($parameters, $this->get_photo_parameters()->get_parameters());
-            $parameters[DiscoveryManager :: PARAM_MODULE_ID] = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
-            $table = new GalleryBrowserTable($this, $parameters, $this->get_condition());
-            return $table->as_html();
-        }
+        $html = array();
+        
+        $html[] = $this->get_context();
+        
+        // if (count($this->get_users()) > 0)
+        // {
+        $parameters = $this->get_application()->get_parameters();
+        $parameters = array_merge($parameters, $this->get_photo_parameters()->get_parameters());
+        $parameters[DiscoveryManager :: PARAM_MODULE_ID] = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
+        $table = new GalleryBrowserTable($this, $parameters, $this->get_condition());
+        $html[] = $table->as_html();
+        // }
+        return implode("\n", $html);
     }
 
     function get_type()

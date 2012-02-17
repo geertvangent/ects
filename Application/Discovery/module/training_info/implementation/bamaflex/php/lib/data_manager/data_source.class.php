@@ -65,6 +65,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $training->set_type($this->convert_to_utf8($result->type));
                     $training->set_bama_type($result->bama_type);
                     $training->set_faculty_id($result->faculty_id);
+                    $training->set_faculty($this->convert_to_utf8($result->faculty));
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
                     $training->set_majors($this->retrieve_majors($training_parameters));
