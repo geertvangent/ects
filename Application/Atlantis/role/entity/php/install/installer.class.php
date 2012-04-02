@@ -3,7 +3,7 @@ namespace application\atlantis\role\entity;
 
 /**
  * Atlantis application
- * 
+ *
  * @package application.atlantis
  */
 class Installer extends \common\libraries\Installer
@@ -24,16 +24,6 @@ class Installer extends \common\libraries\Installer
         {
             return false;
         }
-        return true;
-    }
-
-    function get_path()
-    {
-        return dirname(__FILE__);
-    }
-
-    function register_application()
-    {
         return true;
     }
 }

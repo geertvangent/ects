@@ -8,8 +8,10 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'Installer' => '/install/installer.class.php',
          'DataManager' => '/lib/data_manager.class.php',
-         'DoctrineDataManager' => '/lib/data_manager/mdb2.class.php',
+         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
          'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
+         'Manager' => '/lib/manager/manager.class.php',
+         'RoleComponent' => '/lib/manager/component/role.class.php',
     );
 
     static function load($classname)

@@ -26,15 +26,5 @@ class Installer extends \common\libraries\Installer
         }
         return true;
     }
-
-    function get_path()
-    {
-        return dirname(__FILE__);
-    }
-
-    function register_application()
-    {
-        return true;
-    }
 }
 ?>
