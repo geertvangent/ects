@@ -13,7 +13,7 @@ class Manager extends WebApplication
     const ACTION_APPLICATION = 'application';
     const ACTION_RIGHT = 'right';
     
-    const DEFAULT_ACTION = self :: ACTION_ROLE;
+    const DEFAULT_ACTION = self :: ACTION_RIGHT;
 
    
     /**

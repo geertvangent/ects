@@ -1,14 +1,11 @@
 <?php
 namespace application\atlantis\role\entity;
 
-/**
- * $Id: elude_manager.class.php
- *
- * @package application.elude
- */
-class Manager extends WebApplication
+use common\libraries\SubManager;
+
+class Manager extends SubManager
 {
-    const APPLICATION_NAME = 'atlantis';
+    const PARAM_ACTION = 'action';
     
     const ACTION_BROWSE = 'browser';
     const ACTION_VIEW = 'viewer';
@@ -18,7 +15,11 @@ class Manager extends WebApplication
     
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
 
-   
+    static function get_action_parameter()
+    {
+        return self :: PARAM_ACTION;
+    }
+
     /**
      * Helper function for the Application class,
      * pending access to class constants via variables in PHP 5.3

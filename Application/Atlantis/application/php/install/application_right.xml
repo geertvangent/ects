@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<object name="application_right">
-	<properties>
-		<property name="id" type="integer" unsigned="1" notnull="1"
-			autoincrement="true" />
-		<property name="application_id" type="integer" />
-		<property name="right_id" type="integer" />
-	</properties>
-</object>

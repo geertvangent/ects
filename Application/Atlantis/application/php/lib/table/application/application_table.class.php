@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role;
+namespace application\atlantis\application;
 
 use common\libraries\NewObjectTableFormActionsSupport;
 use common\libraries\NewObjectTable;
@@ -9,9 +9,9 @@ use common\libraries\ObjectTableFormAction;
 use common\libraries\ObjectTableFormActions;
 use common\libraries\PlatformSetting;
 
-class RoleTable extends NewObjectTable implements NewObjectTableFormActionsSupport
+class ApplicationTable extends NewObjectTable implements NewObjectTableFormActionsSupport
 {
-    const TABLE_IDENTIFIER = Manager :: PARAM_ROLE_ID;
+    const TABLE_IDENTIFIER = Manager :: PARAM_APPLICATION_ID;
     const DEFAULT_ROW_COUNT = 20;
 
     function get_implemented_form_actions()
