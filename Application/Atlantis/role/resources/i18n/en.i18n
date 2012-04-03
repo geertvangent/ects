@@ -1,2 +1,5 @@
-TypeName = "Atlantis"
-
+TypeName = "Role"
+BrowseRoles = "Browse roles"
+BrowseRolesDescription = "Browse and search the list of available roles"
+CreateRole = "Create a new role"
+CreateRoleDescription = "Add a new role to the list of available roles"

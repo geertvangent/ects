@@ -6,16 +6,16 @@ use common\libraries\WebApplication;
 class Manager extends WebApplication
 {
     const APPLICATION_NAME = 'atlantis';
-    
+
     const ACTION_ROLE = 'role';
     const ACTION_ENTITLEMENT = 'entitlement';
     const ACTION_ENTITY = 'entity';
     const ACTION_APPLICATION = 'application';
-    const ACTION_RIGHT = 'right';
-    
-    const DEFAULT_ACTION = self :: ACTION_RIGHT;
+    const ACTION_HOME = 'home';
 
-   
+    const DEFAULT_ACTION = self :: ACTION_HOME;
+
+
     /**
      * Helper function for the Application class,
      * pending access to class constants via variables in PHP 5.3
