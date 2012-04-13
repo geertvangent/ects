@@ -208,7 +208,15 @@ class Module extends \application\discovery\module\employment\Module
                     
                     $row[] = '<span class="employment_part">' . $part->get_volume() . '%' . '</span>';
                     $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $part->get_start_date()) . '</span>';
-                    $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $part->get_end_date()) . '</span>';
+                    
+                    if ($part->get_end_date())
+                    {
+                        $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $part->get_end_date()) . '</span>';
+                    }
+                    else
+                    {
+                        $row[] = '';
+                    }
                     $data[] = $row;
                 }
             }

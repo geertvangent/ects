@@ -9,7 +9,6 @@ class Autoloader
          'application\discovery\module\profile\implementation\bamaflex\BamaflexAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
          'application\discovery\module\profile\implementation\bamaflex\BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php',
          'CourseResult' => '/lib/course_result.class.php',
-         'Mark' => '/lib/mark.class.php',
          'Module' => '/lib/module.class.php',
          'Parameters' => '/lib/parameters.class.php',
          'Rights' => '/lib/rights.class.php',

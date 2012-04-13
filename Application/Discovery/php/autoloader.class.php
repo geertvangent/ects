@@ -41,6 +41,7 @@ class Autoloader
          'ModuleInstanceManagerCreatorComponent' => '/lib/module_instance_manager/component/creator.class.php',
          'ModuleInstanceManagerDeactivatorComponent' => '/lib/module_instance_manager/component/deactivator.class.php',
          'ModuleInstanceManagerDeleterComponent' => '/lib/module_instance_manager/component/deleter.class.php',
+         'ModuleInstanceManagerMoverComponent' => '/lib/module_instance_manager/component/mover.class.php',
          'ModuleInstanceManagerRightsEditorComponent' => '/lib/module_instance_manager/component/rights_editor.class.php',
          'ModuleInstanceManagerUpdaterComponent' => '/lib/module_instance_manager/component/updater.class.php',
          'ModuleInstanceBrowserTable' => '/lib/module_instance_manager/component/module_instance_browser/module_instance_browser_table.class.php',

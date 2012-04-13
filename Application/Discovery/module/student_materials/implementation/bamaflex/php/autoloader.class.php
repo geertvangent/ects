@@ -8,7 +8,6 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'BamaflexAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
          'BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php',
-         'Course' => '/lib/course.class.php',
          'Material' => '/lib/material.class.php',
          'MaterialDescription' => '/lib/material_description.class.php',
          'MaterialStructured' => '/lib/material_structured.class.php',

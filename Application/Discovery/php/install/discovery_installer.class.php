@@ -24,7 +24,7 @@ class DiscoveryInstaller extends Installer
 
     function get_path()
     {
-        return dirname(__FILE__);
+        return parent :: get_path();
     }
 }
 ?>
