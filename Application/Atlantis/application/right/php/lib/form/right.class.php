@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\application\right;
 
+use application\atlantis\role\entitlement\Entitlement;
+
 use common\libraries\FormValidator;
 use common\libraries\Utilities;
 use common\libraries\Translation;
@@ -53,6 +55,7 @@ class RightForm extends FormValidator
         $right = $this->right;
         $defaults[Right :: PROPERTY_NAME] = $right->get_name();
         $defaults[Right :: PROPERTY_DESCRIPTION] = $right->get_description();
+        $defaults[Entitlement :: PROPERTY_RIGHT_ID] = $right->get_id();
         parent :: setDefaults($defaults);
     }
 }

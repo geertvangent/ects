@@ -15,7 +15,7 @@ class Entitlement extends DataClass
     /**
      * Entitlement properties
      */
-    const PROPERTY_APPLICATION_RIGHT_ID = 'application_right_id';
+    const PROPERTY_RIGHT_ID = 'right_id';
     const PROPERTY_ROLE_ID = 'role_id';
 
     /**
@@ -25,7 +25,7 @@ class Entitlement extends DataClass
      */
     static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_APPLICATION_RIGHT_ID;
+        $extended_property_names[] = self :: PROPERTY_RIGHT_ID;
         $extended_property_names[] = self :: PROPERTY_ROLE_ID;
 
         return parent :: get_default_property_names($extended_property_names);
@@ -44,18 +44,18 @@ class Entitlement extends DataClass
      * Returns the application_right_id of this Entitlement.
      * @return integer The application_right_id.
      */
-    function get_application_right_id()
+    function get_right_id()
     {
-        return $this->get_default_property(self :: PROPERTY_APPLICATION_RIGHT_ID);
+        return $this->get_default_property(self :: PROPERTY_RIGHT_ID);
     }
 
     /**
      * Sets the application_right_id of this Entitlement.
      * @param integer $application_right_id
      */
-    function set_application_right_id($application_right_id)
+    function set_right_id($application_right_id)
     {
-        $this->set_default_property(self :: PROPERTY_APPLICATION_RIGHT_ID, $application_right_id);
+        $this->set_default_property(self :: PROPERTY_RIGHT_ID, $application_right_id);
     }
     /**
      * Returns the role_id of this Entitlement.

@@ -41,6 +41,9 @@ class HomeComponent extends Manager implements DelegateComponent
         $actions[] = new DynamicAction(Translation :: get('CreateApplication', null, $namespace), Translation :: get('CreateApplicationDescription', null, $namespace), Theme :: get_image_path($namespace) . 'admin/create.png', $this->get_url(array(
                 self :: PARAM_ACTION => self :: ACTION_APPLICATION,
                 \application\atlantis\application\Manager :: PARAM_ACTION => \application\atlantis\application\Manager :: ACTION_CREATE)));
+        $actions[] = new DynamicAction(Translation :: get('ListApplications', null, $namespace), Translation :: get('ListApplicationsRights', null, $namespace), Theme :: get_image_path($namespace) . 'admin/list.png', $this->get_url(array(
+                self :: PARAM_ACTION => self :: ACTION_APPLICATION,
+                \application\atlantis\application\Manager :: PARAM_ACTION => \application\atlantis\application\Manager :: ACTION_LIST)));
         $tabs->add_tab(new DynamicActionsTab('application', Translation :: get('TypeName', null, $namespace), Theme :: get_image_path($namespace) . 'logo/22.png', $actions));
 
         $this->display_header();

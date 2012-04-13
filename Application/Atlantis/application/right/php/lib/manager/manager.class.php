@@ -19,10 +19,12 @@ class Manager extends SubManager
     const ACTION_EDIT = 'editor';
     const ACTION_RIGHTS = 'rights';
     const ACTION_CREATE = 'creator';
+    const ACTION_ADD_ROLE = 'add_role';
     
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     
     const PARAM_RIGHT_ID = 'right_id';
+    const PARAM_APPLICATION_ID = 'application_id';
 
     static function get_action_parameter()
     {
@@ -58,7 +60,7 @@ class Manager extends SubManager
      * - YourApplicationManager :: DEFAULT_ACTION in all other application
      * classes
      */
-    function get_default_action()
+    static function get_default_action()
     {
         return self :: DEFAULT_ACTION;
     }

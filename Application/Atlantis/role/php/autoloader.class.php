@@ -17,6 +17,7 @@ class Autoloader
          'CreatorComponent' => '/lib/manager/component/creator.class.php',
          'DeleterComponent' => '/lib/manager/component/deleter.class.php',
          'EditorComponent' => '/lib/manager/component/editor.class.php',
+         'EntitlementComponent' => '/lib/manager/component/entitlement.class.php',
          'RightsComponent' => '/lib/manager/component/rights.class.php',
          'ViewerComponent' => '/lib/manager/component/viewer.class.php',
          'RoleTable' => '/lib/table/role/role_table.class.php',
