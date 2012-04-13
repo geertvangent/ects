@@ -3,6 +3,7 @@
 	<package>
 		<name>Discovery</name>
 		<code>discovery</code>
+		<context>application\discovery</context>
 		<section>application</section>
 		<category>research</category>
 		<authors>
