@@ -26,7 +26,7 @@ class RoleForm extends FormValidator
         $this->addElement('static', null, Translation :: get('Application'), $this->application);
         $this->addElement('static', null, Translation :: get('Right'), $this->right);
         
-        $this->
+        
         $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), array(
                 'class' => 'positive'));
         

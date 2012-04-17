@@ -4,7 +4,12 @@ namespace application\atlantis\application;
 class Autoloader
 {
 
-    private static $map = array(
+    /**
+     * The array mapping class names to paths
+     *
+     * @var multitype:string
+     */
+     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'Installer' => '/install/installer.class.php',
          'DataManager' => '/lib/data_manager.class.php',
@@ -24,23 +29,36 @@ class Autoloader
          'ApplicationTable' => '/lib/table/application/application_table.class.php',
          'ApplicationTableCellRenderer' => '/lib/table/application/application_table_cell_renderer.class.php',
          'ApplicationTableColumnModel' => '/lib/table/application/application_table_column_model.class.php',
-         'ApplicationTableDataProvider' => '/lib/table/application/application_table_data_provider.class.php',
+         'ApplicationTableDataProvider' => '/lib/table/application/application_table_data_provider.class.php'
     );
 
+    /**
+     * Try to load the class
+     *
+     * @param $classname string
+     * @return boolean
+     */
     static function load($classname)
     {
-        if (isset(self::$map[$classname]))
+        if (isset(self :: $map[$classname]))
         {
-            require_once __DIR__ . self::$map[$classname];
+            require_once __DIR__ . self :: $map[$classname];
             return true;
         }
 
         return false;
-   }
+    }
 
-   static function synch($update){
-        return \common\libraries\AutoloaderUtilities::synch(__DIR__, __DIR__, $update);
-   }
+    /**
+     * Synchronize the autoloader
+     *
+     * @param $update boolean
+     * @return multitype:string
+     */
+    static function synch($update)
+    {
+        return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
+    }
 
 }
 ?>

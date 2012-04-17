@@ -14,6 +14,7 @@ class Manager extends SubManager
     const ACTION_RIGHTS = 'rights';
     const ACTION_CREATE = 'creator';
     const ACTION_ENTITLEMENT = 'entitlement';
+    const ACTION_ENTITY = 'entity';
         
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     

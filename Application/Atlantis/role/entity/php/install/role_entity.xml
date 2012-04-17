@@ -7,5 +7,6 @@
 		<property name="entity_id" type="integer" />
 		<property name="context_type" type="integer" lenght="1" />
 		<property name="context_id" type="integer" />
+		<property name="role_id" type="integer" />
 	</properties>
 </object>

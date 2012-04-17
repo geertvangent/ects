@@ -26,6 +26,7 @@ class Installer extends \common\libraries\Installer
         $installers[] = new \application\atlantis\role\entitlement\Installer($this->get_form_values());
         $installers[] = new \application\atlantis\role\entity\Installer($this->get_form_values());
         $installers[] = new \application\atlantis\role\Installer($this->get_form_values());
+        $installers[] = new \application\atlantis\context\Installer($this->get_form_values());
 
         return $installers;
     }

@@ -33,9 +33,7 @@ class RightTableCellRenderer extends NewObjectTableCellRenderer implements
                 Manager :: PARAM_ACTION => Manager :: ACTION_EDIT, Manager :: PARAM_RIGHT_ID => $right->get_id())), ToolbarItem :: DISPLAY_ICON));
         $toolbar->add_item(new ToolbarItem(Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_delete.png', $this->get_component()->get_url(array(
                 Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, Manager :: PARAM_RIGHT_ID => $right->get_id())), ToolbarItem :: DISPLAY_ICON));
-        $toolbar->add_item(new ToolbarItem(Translation :: get('AddRole'), Theme :: get_common_image_path() . 'action_add_role.png', $this->get_component()->get_url(array(
-                Manager :: PARAM_ACTION => Manager :: ACTION_ADD_ROLE, Manager :: PARAM_RIGHT_ID => $right->get_id())), ToolbarItem :: DISPLAY_ICON));
-        
+     
         return $toolbar->as_html();
     }
 }

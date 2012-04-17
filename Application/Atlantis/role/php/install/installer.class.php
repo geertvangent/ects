@@ -20,6 +20,21 @@ class Installer extends \common\libraries\Installer
 
     function install_extra()
     {
+        $role = new Role();
+        $role->set_name('Docent');
+        $role->set_description('docent');
+        $role->create();
+        
+        $role = new Role();
+        $role->set_name('Diensthoofd');
+        $role->set_description('diensthoofd');
+        $role->create();
+        
+        $role = new Role();
+        $role->set_name('Opleidingshoofd');
+        $role->set_description('opleidinghoofd');
+        $role->create();
+        
         if (! $this->create_root())
         {
             return false;
