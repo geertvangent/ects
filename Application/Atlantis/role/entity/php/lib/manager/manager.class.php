@@ -8,12 +8,14 @@ class Manager extends SubManager
     const PARAM_ACTION = 'role_entity_action';
     
     const ACTION_BROWSE = 'browser';
-    const ACTION_VIEW = 'viewer';
     const ACTION_DELETE = 'deleter';
-    const ACTION_EDIT = 'editor';
     const ACTION_CREATE = 'creator';
     
     const DEFAULT_ACTION = self :: ACTION_CREATE;
+    
+    const PARAM_ROLE_ENTITY_ID = 'role_entity_id';
+    const PARAM_ENTITY_TYPE = 'entity_type';
+    const PARAM_ENTITY_ID = 'entity_id';
 
     static function get_action_parameter()
     {
