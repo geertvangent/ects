@@ -7,7 +7,8 @@ use common\libraries\NewObjectTableColumnModel;
 
 use common\libraries\ObjectTableColumn;
 
-class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport
+class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements 
+        NewObjectTableColumnModelActionsColumnSupport
 {
 
     /**
@@ -15,10 +16,19 @@ class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements Ne
      */
     public function initialize_columns()
     {
-        $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_ENTITY_TYPE));
-        $this->add_column(new ObjectTableColumn('entity_name'));
-        $this->add_column(new ObjectTableColumn(\application\atlantis\role\Role :: PROPERTY_NAME));
-        $this->add_column(new ObjectTableColumn(\application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME));
+        if (! $this->get_component()->has_entity())
+        {
+            $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_ENTITY_TYPE));
+            $this->add_column(new ObjectTableColumn('entity_name'));
+        }
+        if (! $this->get_component()->has_role_id())
+        {
+            $this->add_column(new ObjectTableColumn(\application\atlantis\role\Role :: PROPERTY_NAME, false));
+        }
+        if (! $this->get_component()->has_context_id())
+        {
+            $this->add_column(new ObjectTableColumn(\application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME, false));
+        }
     }
 }
 ?>

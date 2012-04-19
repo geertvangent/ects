@@ -46,10 +46,10 @@ class HomeComponent extends Manager implements DelegateComponent
         // RoleEntity tab
         $namespace = \application\atlantis\role\entity\Manager :: context();
         $actions = array();
-        $actions[] = new DynamicAction(Translation :: get('CreateEntity', null, $namespace), Translation :: get('CreateEntity', null, $namespace), Theme :: get_image_path($namespace) . 'admin/create.png', $this->get_url(array(
+        $actions[] = new DynamicAction(Translation :: get('CreateRoleEntity', null, $namespace), Translation :: get('CreateRoleEntityDescription', null, $namespace), Theme :: get_image_path($namespace) . 'admin/create.png', $this->get_url(array(
                 self :: PARAM_ACTION => self :: ACTION_ROLE, 
                 \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY)));
-        $actions[] = new DynamicAction(Translation :: get('BrowseRoleEntity', null, $namespace), Translation :: get('BrowseRoleEntity', null, $namespace), Theme :: get_image_path($namespace) . 'admin/browse.png', $this->get_url(array(
+        $actions[] = new DynamicAction(Translation :: get('BrowseRoleEntities', null, $namespace), Translation :: get('BrowseRoleEntitiesDescription', null, $namespace), Theme :: get_image_path($namespace) . 'admin/browse.png', $this->get_url(array(
                 self :: PARAM_ACTION => self :: ACTION_ROLE, 
                 \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY, 
                 \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE)));

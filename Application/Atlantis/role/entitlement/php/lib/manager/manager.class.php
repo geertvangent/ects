@@ -16,6 +16,7 @@ class Manager extends SubManager
     const ACTION_RIGHTS = 'rights';
     const ACTION_LIST = 'lister';
     
+    const PARAM_ENTITLEMENT_ID = 'entitlement_id';
     const DEFAULT_ACTION = self :: ACTION_LIST;
 
     static function get_action_parameter()

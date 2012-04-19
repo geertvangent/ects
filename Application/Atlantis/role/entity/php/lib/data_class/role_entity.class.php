@@ -151,17 +151,23 @@ class RoleEntity extends DataClass
     {
         if (! isset($this->entity))
         {
-            switch ($this->get_entity_type())
-            {
-                case 1 :
-                    $this->entity = \user\DataManager :: retrieve(\user\User :: class_name(), (int) $this->get_entity_id());
-                    break;
-                case 2 :
-                    $this->entity = GroupDataManager :: get_instance()->retrieve_group($this->get_entity_id());
-                    break;
-            }
+            $this->entity = self :: entity($this->get_entity_type(), $this->get_entity_id());
         }
         return $this->entity;
+    }
+
+    static function entity($entity_type, $entity_id)
+    {
+        switch ($entity_type)
+        {
+            case 1 :
+                return \user\DataManager :: retrieve(\user\User :: class_name(), (int) $entity_id);
+                break;
+            case 2 :
+                return GroupDataManager :: get_instance()->retrieve_group($entity_id);
+                break;
+        }
+    
     }
 
     function get_entity_name()
@@ -173,6 +179,19 @@ class RoleEntity extends DataClass
                 break;
             case 2 :
                 return $this->get_entity()->get_name();
+                break;
+        }
+    }
+
+    static function entity_name($entity_type, $entity_id)
+    {
+        switch ($entity_type)
+        {
+            case 1 :
+                return self :: entity($entity_type, $entity_id)->get_fullname();
+                break;
+            case 2 :
+                return self :: entity($entity_type, $entity_id)->get_name();
                 break;
         }
     }

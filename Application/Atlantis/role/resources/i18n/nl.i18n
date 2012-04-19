@@ -1,0 +1,5 @@
+TypeName = "Role entity"
+BrowseRoleEntity = "Browse role entities"
+BrowseRoleEntitiesDescription = "Browse and search the list of available role entities"
+CreateRoleEntity = "Create a new role entity"
+CreateRoleEntityDescription = "Add a new role entity to the list of available role entities"

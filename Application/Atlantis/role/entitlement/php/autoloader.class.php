@@ -18,7 +18,13 @@ class Autoloader
          'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'EntitlementForm' => '/lib/form/entitlement.class.php',
          'Manager' => '/lib/manager/manager.class.php',
-         'ListerComponent' => '/lib/manager/component/lister.class.php'
+         'BrowserComponent' => '/lib/manager/component/browser.class.php',
+         'DeleterComponent' => '/lib/manager/component/deleter.class.php',
+         'ListerComponent' => '/lib/manager/component/lister.class.php',
+         'EntitlementTable' => '/lib/table/entitlement/table.class.php',
+         'EntitlementTableCellRenderer' => '/lib/table/entitlement/table_cell_renderer.class.php',
+         'EntitlementTableColumnModel' => '/lib/table/entitlement/table_column_model.class.php',
+         'EntitlementTableDataProvider' => '/lib/table/entitlement/table_data_provider.class.php'
     );
 
     /**

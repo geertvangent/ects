@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\application;
 
+use common\libraries\DelegateComponent;
+
 use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
 use common\libraries\Theme;
@@ -10,7 +12,7 @@ use common\libraries\ToolbarItem;
 use common\libraries\ActionBarRenderer;
 use common\libraries\NewObjectTableSupport;
 
-class BrowserComponent extends Manager implements NewObjectTableSupport
+class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {
     
     private $action_bar;
@@ -38,7 +40,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         $this->display_header();
         
         $this->action_bar = $this->get_action_bar();
-        echo($this->action_bar->as_html());
+        echo ($this->action_bar->as_html());
         $table = new ApplicationTable($this);
         echo ($table->as_html());
         $this->display_footer();
