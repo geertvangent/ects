@@ -16,9 +16,18 @@ class EntitlementTableColumnModel extends NewObjectTableColumnModel implements
      */
     public function initialize_columns()
     {
-        $this->add_column(new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\role')));
-        $this->add_column(new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\application')));
-        $this->add_column(new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\application\right')));
+        if (! $this->get_component()->has_role_id())
+        {
+            $this->add_column(new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\role')));
+        }
+        if (! $this->get_component()->has_application_id())
+        {
+            $this->add_column(new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\application')));
+        }
+        if (! $this->get_component()->has_right_id())
+        {
+            $this->add_column(new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\application\right')));
+        }
     }
 }
 ?>

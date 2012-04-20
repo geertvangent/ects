@@ -1,2 +1,4 @@
 TypeName = "Atlantis"
+ApplicationComponent = "Applications"
+RoleComponent = "Roles"
 

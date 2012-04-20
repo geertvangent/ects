@@ -44,6 +44,11 @@ class RoleTableCellRenderer extends NewObjectTableCellRenderer implements NewObj
                 \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY, 
                 \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE, 
                 Manager :: PARAM_ROLE_ID => $role->get_id())), ToolbarItem :: DISPLAY_ICON));
+        $toolbar->add_item(new ToolbarItem(Translation :: get('TypeName', null, '\application\atlantis\role\entitlement'), Theme :: get_image_path('\application\atlantis\role\entitlement') . 'logo/16.png', $this->get_component()->get_url(array(
+                \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE,
+                \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITLEMENT,
+                \application\atlantis\role\entitlement\Manager :: PARAM_ACTION => \application\atlantis\role\entitlement\Manager :: ACTION_BROWSE,
+                Manager :: PARAM_ROLE_ID => $role->get_id())), ToolbarItem :: DISPLAY_ICON));
         
         return $toolbar->as_html();
     }

@@ -1,10 +1,12 @@
 <?php
 namespace application\atlantis\application\right;
 
+use common\libraries\Breadcrumb;
+use common\libraries\BreadcrumbTrail;
+use common\libraries\Request;
+use common\libraries\DelegateComponent;
 use common\libraries\AndCondition;
-
 use common\libraries\EqualityCondition;
-
 use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
 use common\libraries\Theme;
@@ -14,7 +16,7 @@ use common\libraries\ToolbarItem;
 use common\libraries\ActionBarRenderer;
 use common\libraries\NewObjectTableSupport;
 
-class BrowserComponent extends Manager implements NewObjectTableSupport
+class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {
     
     private $action_bar;
@@ -38,6 +40,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
 
     function run()
     {
+        $this->add_breadcrumb();
         $this->display_header();
         $this->action_bar = $this->get_action_bar();
         echo ($this->action_bar->as_html());
@@ -58,5 +61,14 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         }
         return $this->action_bar;
     }
+
+    function add_breadcrumb()
+    {
+        $application_id = Request :: get(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID);
+        $application = \application\atlantis\application\DataManager :: retrieve(\application\atlantis\application\Application :: class_name(), (int) $application_id);
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
+    
+    }
+
 }
 ?>

@@ -1,2 +1,4 @@
 TypeName = "Right"
-
+EditorComponent = "Editor"
+RightName = "Name"
+RightDescription = Description

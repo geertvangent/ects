@@ -3,7 +3,6 @@ namespace application\atlantis\application;
 
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\NewObjectTableDataProvider;
-use common\libraries\ObjectTableDataProvider;
 
 class ApplicationTableDataProvider extends NewObjectTableDataProvider
 {

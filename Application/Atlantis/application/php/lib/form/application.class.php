@@ -20,10 +20,12 @@ class ApplicationForm extends FormValidator
 
     function build()
     {
-        $this->addElement('text', Application :: PROPERTY_NAME, Translation :: get('ApplicationName'), array("size" => "50"));
+        $this->addElement('text', Application :: PROPERTY_NAME, Translation :: get('ApplicationName'), array(
+                "size" => "50"));
         $this->addRule(Application :: PROPERTY_NAME, Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
         $this->add_html_editor(Application :: PROPERTY_DESCRIPTION, Translation :: get('ApplicationDescription'), true);
-        $this->addElement('text', Application :: PROPERTY_URL, Translation :: get('ApplicationUrl'), array("size" => "100"));
+        $this->addElement('text', Application :: PROPERTY_URL, Translation :: get('ApplicationUrl'), array(
+                "size" => "100"));
         
         if ($this->application->get_id())
         {

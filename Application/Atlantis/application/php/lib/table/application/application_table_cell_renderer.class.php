@@ -39,6 +39,11 @@ class ApplicationTableCellRenderer extends NewObjectTableCellRenderer implements
         $toolbar->add_item(new ToolbarItem(Translation :: get('ManageRight', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_rights.png', $this->get_component()->get_url(array(
                 Manager :: PARAM_ACTION => Manager :: ACTION_MANAGE_RIGHT, 
                 Manager :: PARAM_APPLICATION_ID => $application->get_id())), ToolbarItem :: DISPLAY_ICON));
+        $toolbar->add_item(new ToolbarItem(Translation :: get('TypeName', null, '\application\atlantis\role\entitlement'), Theme :: get_image_path('\application\atlantis\role\entitlement') . 'logo/16.png', $this->get_component()->get_url(array(
+                \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE,
+                \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITLEMENT,
+                \application\atlantis\role\entitlement\Manager :: PARAM_ACTION => \application\atlantis\role\entitlement\Manager :: ACTION_BROWSE,
+                Manager :: PARAM_APPLICATION_ID => $application->get_id())), ToolbarItem :: DISPLAY_ICON));
         
         return $toolbar->as_html();
     }

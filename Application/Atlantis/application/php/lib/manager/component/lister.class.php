@@ -1,32 +1,14 @@
 <?php
 namespace application\atlantis\application;
 
-use common\libraries\Request;
-
-use common\libraries\DynamicVisualTabsRenderer;
-
-use application\atlantis\role\Role;
-
-use common\libraries\SimpleTable;
-
 use common\libraries\PropertiesTable;
-
-use application\atlantis\application\right\RightTable;
-
+use common\libraries\Request;
+use common\libraries\DynamicVisualTabsRenderer;
 use common\libraries\DataClassRetrievesParameters;
-
 use common\libraries\EqualityCondition;
-
-use application\atlantis\application\right\Right;
-
-use application\atlantis\application\right\DataManager;
-
 use common\libraries\Translation;
-
 use common\libraries\DynamicContentTab;
-
 use common\libraries\Utilities;
-use common\libraries\DynamicTabsRenderer;
 use common\libraries\NewObjectTableSupport;
 
 class ListerComponent extends Manager implements NewObjectTableSupport
@@ -52,8 +34,8 @@ class ListerComponent extends Manager implements NewObjectTableSupport
 
     function get_rights($application_id)
     {
-        $parameters = new DataClassRetrievesParameters(new EqualityCondition(Right :: PROPERTY_APPLICATION_ID, $application_id));
-        $rights = DataManager :: retrieves(Right :: class_name(), $parameters);
+        $parameters = new DataClassRetrievesParameters(new EqualityCondition(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID, $application_id));
+        $rights = DataManager :: retrieves(\application\atlantis\application\right\Right :: class_name(), $parameters);
         $properties = $this->get_display_rights($rights);
         $table = new PropertiesTable($properties);
         

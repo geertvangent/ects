@@ -7,7 +7,6 @@ use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\ObjectTableFormAction;
 use common\libraries\ObjectTableFormActions;
-use common\libraries\PlatformSetting;
 
 class ApplicationTable extends NewObjectTable implements NewObjectTableFormActionsSupport
 {

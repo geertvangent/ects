@@ -1,6 +1,12 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
+use common\libraries\DelegateComponent;
+
+use common\libraries\Breadcrumb;
+
+use common\libraries\BreadcrumbTrail;
+
 use common\libraries\DynamicVisualTab;
 use common\libraries\Request;
 use common\libraries\DynamicVisualTabsRenderer;
@@ -9,7 +15,7 @@ use common\libraries\EqualityCondition;
 use common\libraries\Translation;
 use common\libraries\Utilities;
 
-class ListerComponent extends Manager
+class ListerComponent extends Manager implements DelegateComponent
 {
     private $application_id;
     private $role_id;
@@ -128,7 +134,7 @@ class ListerComponent extends Manager
                 
                 $tabs->add_tab(new DynamicVisualTab($application->get_id, Translation :: get($application->get_name()), '', $link, $selected));
             }
-            
+            $this->add_breadcrumb();
             $this->display_header();
             echo $tabs->render();
             $this->display_footer();
@@ -143,6 +149,13 @@ class ListerComponent extends Manager
     function get_role_id()
     {
         return $this->role_id;
+    }
+
+    function add_breadcrumb()
+    {
+        $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(), (int) $this->role_id);
+        
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
     }
 }
 ?>
