@@ -1,5 +1,3 @@
 TypeName = "Context"
-BrowseApplications = "Browse applications"
-BrowseApplicationsDescription = "Browse and search the list of available applications"
-CreateApplication = "Create a new application"
-CreateApplicationDescription = "Add a new application to the list of available applications"
+BrowseContexts = "Browse contexts"
+BrowseContextsDescription = "Browse and search the list of contexts"

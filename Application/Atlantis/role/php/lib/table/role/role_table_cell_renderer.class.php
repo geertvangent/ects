@@ -35,7 +35,7 @@ class RoleTableCellRenderer extends NewObjectTableCellRenderer implements NewObj
                 Manager :: PARAM_ACTION => Manager :: ACTION_EDIT, Manager :: PARAM_ROLE_ID => $role->get_id())), ToolbarItem :: DISPLAY_ICON));
         $toolbar->add_item(new ToolbarItem(Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_delete.png', $this->get_component()->get_url(array(
                 Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, Manager :: PARAM_ROLE_ID => $role->get_id())), ToolbarItem :: DISPLAY_ICON));
-        $toolbar->add_item(new ToolbarItem(Translation :: get('List'), Theme :: get_image_path(__NAMESPACE__ . '\entitlement') . 'logo/16.png', $this->get_component()->get_url(array(
+        $toolbar->add_item(new ToolbarItem(Translation :: get('List'), Theme :: get_image_path() . 'list.png', $this->get_component()->get_url(array(
                 Application :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE, 
                 \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITLEMENT, 
                 Manager :: PARAM_ROLE_ID => $role->get_id())), ToolbarItem :: DISPLAY_ICON));

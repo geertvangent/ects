@@ -56,10 +56,7 @@ class Installer extends \common\libraries\Installer
         $right->set_application_id(2);
         $right->create();
         
-        if (! $this->create_root())
-        {
-            return false;
-        }
+  
         return true;
     }
 

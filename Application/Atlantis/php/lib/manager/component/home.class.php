@@ -56,6 +56,16 @@ class HomeComponent extends Manager implements DelegateComponent
         
         $tabs->add_tab(new DynamicActionsTab('role_entity', Translation :: get('TypeName', null, $namespace), Theme :: get_image_path($namespace) . 'logo/22.png', $actions));
         
+        // Entity type
+        $namespace = \application\atlantis\role\entity\Manager :: context();
+        $actions = array();
+        $actions[] = new DynamicAction(Translation :: get('BrowseUsersGroups', null, $namespace), Translation :: get('BrowseUsersGroupsDescription', null, $namespace), Theme :: get_image_path($namespace) . 'admin/browse.png', $this->get_url(array(
+                self :: PARAM_ACTION => self :: ACTION_ROLE, 
+                \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY, 
+                \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE)));
+        
+        $tabs->add_tab(new DynamicActionsTab('user_group', Translation :: get('UsersGroups'), Theme :: get_image_path() . 'usersgroups.png', $actions));
+        
         $this->display_header();
         echo $tabs->render();
         $this->display_footer();

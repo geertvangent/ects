@@ -34,11 +34,7 @@ class Installer extends \common\libraries\Installer
         $role->set_name('Opleidingshoofd');
         $role->set_description('opleidinghoofd');
         $role->create();
-        
-        if (! $this->create_root())
-        {
-            return false;
-        }
+
         return true;
     }
 }

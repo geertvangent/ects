@@ -34,10 +34,6 @@ class Installer extends \common\libraries\Installer
         $application->set_description('personal calendar');
         $application->create();
         
-        if (! $this->create_root())
-        {
-            return false;
-        }
         return true;
     }
 }

@@ -7,6 +7,7 @@ class Manager extends WebApplication
 {
     const APPLICATION_NAME = 'atlantis';
 
+    const ACTION_CONTEXT = 'context';
     const ACTION_ROLE = 'role';
     const ACTION_ENTITLEMENT = 'entitlement';
     const ACTION_ENTITY = 'entity';

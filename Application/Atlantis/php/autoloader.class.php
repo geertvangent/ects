@@ -17,6 +17,7 @@ class Autoloader
          'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
          'ApplicationComponent' => '/lib/manager/component/application.class.php',
+         'ContextComponent' => '/lib/manager/component/context.class.php',
          'HomeComponent' => '/lib/manager/component/home.class.php',
          'RightComponent' => '/lib/manager/component/right.class.php',
          'RoleComponent' => '/lib/manager/component/role.class.php'

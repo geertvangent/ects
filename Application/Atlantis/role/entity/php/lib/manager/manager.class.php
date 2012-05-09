@@ -10,6 +10,7 @@ class Manager extends SubManager
     const ACTION_BROWSE = 'browser';
     const ACTION_DELETE = 'deleter';
     const ACTION_CREATE = 'creator';
+    const ACTION_ENTITY_TYPE = 'entity_type';
     
     const DEFAULT_ACTION = self :: ACTION_CREATE;
     

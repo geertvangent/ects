@@ -1,8 +1,11 @@
 <?php
 namespace application\atlantis\context;
 
+use common\libraries\EqualityCondition;
+
 use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
+use common\libraries\Request;
 use common\libraries\Theme;
 use common\libraries\Utilities;
 use common\libraries\Translation;
@@ -12,7 +15,6 @@ use common\libraries\NewObjectTableSupport;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport
 {
-    
     private $action_bar;
 
     public function get_object_table_condition($object_table_class_name)
@@ -22,30 +24,32 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
-            $search_conditions[] = new PatternMatchCondition(Application :: PROPERTY_NAME, '*' . $query . '*');
-            $search_conditions[] = new PatternMatchCondition(Application :: PROPERTY_DESCRIPTION, '*' . $query . '*');
-            $search_conditions[] = new PatternMatchCondition(Application :: PROPERTY_URL, '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(\application\atlantis\role\entity\RoleEntity :: PROPERTY_ID, '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(\application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME, '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(\application\atlantis\role\Role :: PROPERTY_NAME, '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
         else
         {
             return null;
         }
+    
     }
 
     function run()
     {
         $this->display_header();
         
-        $this->action_bar = $this->get_action_bar();
-        echo($this->action_bar->as_html());
-        $table = new ApplicationTable($this);
+        // $this->action_bar = $this->get_action_bar();
+        // echo ($this->action_bar->as_html());
+        $table = new ContextTable($this);
         echo ($table->as_html());
         $this->display_footer();
     }
 
     function get_action_bar()
     {
+        
         if (! isset($this->action_bar))
         {
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);

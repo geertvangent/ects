@@ -25,7 +25,6 @@ class Autoloader
          'ListerComponent' => '/lib/manager/component/lister.class.php',
          'RightsComponent' => '/lib/manager/component/rights.class.php',
          'RightsManagerComponent' => '/lib/manager/component/rights_manager.class.php',
-         'ViewerComponent' => '/lib/manager/component/viewer.class.php',
          'ApplicationTable' => '/lib/table/application/application_table.class.php',
          'ApplicationTableCellRenderer' => '/lib/table/application/application_table_cell_renderer.class.php',
          'ApplicationTableColumnModel' => '/lib/table/application/application_table_column_model.class.php',

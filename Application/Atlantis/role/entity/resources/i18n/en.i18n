@@ -7,5 +7,10 @@ UserGroup = "Choose user(s) and/of group(s)"
 Roles = "Choose role(s)"
 Contexts = "Choose context(s)"
 SelectFilter = "Select filter"
-
+BrowseUsersGroups = "Browse users and groups" 
+BrowseUsersGroupsDescription = "Browse and search the list of users and groups"
+EntityType = "Entity type"
+EntityName = "Entity name"
+Name = "Role name"
+ContextName = "Context"
 

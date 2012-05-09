@@ -1,4 +1,8 @@
-TypeName = "Atlantis"
+TypeName = "Rechten toekennen"
 
 Grant = "Toekennen"
 Deny = "Weigeren"
+Discovery = ""
+Atlantis = ""
+PersonalCalendar = ""
+Entitlement = ""

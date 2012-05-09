@@ -40,7 +40,9 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             return new AndCondition($conditions);
         }
         else
+        {
             return null;
+        }
     }
 
     function has_role_id()

@@ -18,13 +18,5 @@ class Installer extends \common\libraries\Installer
         parent :: __construct($values, DataManager :: get_instance());
     }
 
-    function install_extra()
-    {
-        if (! $this->create_root())
-        {
-            return false;
-        }
-        return true;
-    }
 }
 ?>

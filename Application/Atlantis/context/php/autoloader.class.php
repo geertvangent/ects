@@ -19,14 +19,11 @@ class Autoloader
          'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
          'BrowserComponent' => '/lib/manager/component/browser.class.php',
-         'CreatorComponent' => '/lib/manager/component/creator.class.php',
          'DeleterComponent' => '/lib/manager/component/deleter.class.php',
-         'EditorComponent' => '/lib/manager/component/editor.class.php',
-         'ViewerComponent' => '/lib/manager/component/viewer.class.php',
-         'application\atlantis\application\ApplicationTable' => '/lib/table/application/application_table.class.php',
-         'application\atlantis\application\ApplicationTableCellRenderer' => '/lib/table/application/application_table_cell_renderer.class.php',
-         'application\atlantis\application\ApplicationTableColumnModel' => '/lib/table/application/application_table_column_model.class.php',
-         'application\atlantis\application\ApplicationTableDataProvider' => '/lib/table/application/application_table_data_provider.class.php'
+         'ContextTable' => '/lib/table/context/table.class.php',
+         'ApplicationTableCellRenderer' => '/lib/table/context/table_cell_renderer.class.php',
+         'ContextTableColumnModel' => '/lib/table/context/table_column_model.class.php',
+         'ContextTableDataProvider' => '/lib/table/context/table_data_provider.class.php'
     );
 
     /**
