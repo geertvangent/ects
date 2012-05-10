@@ -132,7 +132,7 @@ class ListerComponent extends Manager implements DelegateComponent
                     $selected = false;
                 }
                 
-                $tabs->add_tab(new DynamicVisualTab($application->get_id, Translation :: get($application->get_name()), '', $link, $selected));
+                $tabs->add_tab(new DynamicVisualTab($application->get_id, $application->get_name(), '', $link, $selected));
             }
             $this->add_breadcrumb();
             $this->display_header();
