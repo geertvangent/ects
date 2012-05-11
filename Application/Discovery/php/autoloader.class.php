@@ -4,7 +4,12 @@ namespace application\discovery;
 class Autoloader
 {
 
-    private static $map = array(
+    /**
+     * The array mapping class names to paths
+     *
+     * @var multitype:string
+     */
+     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'DiscoveryAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
          'DiscoveryAjaxUsersFeed' => '/ajax/users_feed.class.php',
@@ -51,22 +56,36 @@ class Autoloader
          'ModuleInstanceForm' => '/lib/module_instance_manager/forms/module_instance_form.class.php',
          'DefaultModuleInstanceTableCellRenderer' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_cell_renderer.class.php',
          'DefaultModuleInstanceTableColumnModel' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_column_model.class.php',
+         'SettingsDiscoveryConnector' => '/settings/settings_discovery_connector.class.php'
     );
 
+    /**
+     * Try to load the class
+     *
+     * @param $classname string
+     * @return boolean
+     */
     static function load($classname)
     {
-        if (isset(self::$map[$classname]))
+        if (isset(self :: $map[$classname]))
         {
-            require_once __DIR__ . self::$map[$classname];
+            require_once __DIR__ . self :: $map[$classname];
             return true;
         }
 
         return false;
-   }
+    }
 
-   static function synch($update){
-        return \common\libraries\AutoloaderUtilities::synch(__DIR__, __DIR__, $update);
-   }
+    /**
+     * Synchronize the autoloader
+     *
+     * @param $update boolean
+     * @return multitype:string
+     */
+    static function synch($update)
+    {
+        return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
+    }
 
 }
 ?>

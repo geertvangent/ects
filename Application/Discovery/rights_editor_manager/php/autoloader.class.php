@@ -4,7 +4,12 @@ namespace application\discovery\rights_editor_manager;
 class Autoloader
 {
 
-    private static $map = array(
+    /**
+     * The array mapping class names to paths
+     *
+     * @var multitype:string
+     */
+     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'RightsEditorManager' => '/rights_editor_manager.class.php',
          'WeblcmsAjaxEntityRightLocation' => '/ajax/entity_right_location.class.php',
@@ -17,23 +22,36 @@ class Autoloader
          'UserRightBrowserTable' => '/component/user_right_browser/user_right_browser_table.class.php',
          'UserRightBrowserTableColumnModel' => '/component/user_right_browser/user_right_browser_table_column_model.class.php',
          'UserRightBrowserTableDataProvider' => '/component/user_right_browser/user_right_browser_table_data_provider.class.php',
-         'ManageForm' => '/forms/manage_form.class.php',
+         'ManageForm' => '/forms/manage_form.class.php'
     );
 
+    /**
+     * Try to load the class
+     *
+     * @param $classname string
+     * @return boolean
+     */
     static function load($classname)
     {
-        if (isset(self::$map[$classname]))
+        if (isset(self :: $map[$classname]))
         {
-            require_once __DIR__ . self::$map[$classname];
+            require_once __DIR__ . self :: $map[$classname];
             return true;
         }
 
         return false;
-   }
+    }
 
-   static function synch($update){
-        return \common\libraries\AutoloaderUtilities::synch(__DIR__, __DIR__, $update);
-   }
+    /**
+     * Synchronize the autoloader
+     *
+     * @param $update boolean
+     * @return multitype:string
+     */
+    static function synch($update)
+    {
+        return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
+    }
 
 }
 ?>

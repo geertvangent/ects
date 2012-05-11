@@ -4,7 +4,12 @@ namespace application\discovery\module\profile;
 class Autoloader
 {
 
-    private static $map = array(
+    /**
+     * The array mapping class names to paths
+     *
+     * @var multitype:string
+     */
+     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'Communication' => '/lib/communication.class.php',
          'DataManager' => '/lib/data_manager.class.php',
@@ -15,23 +20,36 @@ class Autoloader
          'Name' => '/lib/name.class.php',
          'Parameters' => '/lib/parameters.class.php',
          'Photo' => '/lib/photo.class.php',
-         'Profile' => '/lib/profile.class.php',
+         'Profile' => '/lib/profile.class.php'
     );
 
+    /**
+     * Try to load the class
+     *
+     * @param $classname string
+     * @return boolean
+     */
     static function load($classname)
     {
-        if (isset(self::$map[$classname]))
+        if (isset(self :: $map[$classname]))
         {
-            require_once __DIR__ . self::$map[$classname];
+            require_once __DIR__ . self :: $map[$classname];
             return true;
         }
 
         return false;
-   }
+    }
 
-   static function synch($update){
-        return \common\libraries\AutoloaderUtilities::synch(__DIR__, __DIR__, $update);
-   }
+    /**
+     * Synchronize the autoloader
+     *
+     * @param $update boolean
+     * @return multitype:string
+     */
+    static function synch($update)
+    {
+        return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
+    }
 
 }
 ?>

@@ -4,7 +4,12 @@ namespace application\discovery\data_source\bamaflex;
 class Autoloader
 {
 
-    private static $map = array(
+    /**
+     * The array mapping class names to paths
+     *
+     * @var multitype:string
+     */
+     private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'Connection' => '/lib/connection.class.php',
          'DataSource' => '/lib/data_source.class.php',
@@ -23,23 +28,36 @@ class Autoloader
          'application\discovery\module\student_year\implementation\bamaflex\StudentYear' => '/lib/data_class_generator/xml_schemas/php/application/discovery/module/student_year/implementation/bamaflex/php/lib/student_year.class.php',
          'application\discovery\module\training\implementation\bamaflex\Group' => '/lib/data_class_generator/xml_schemas/php/application/discovery/module/training/implementation/bamaflex/php/lib/group.class.php',
          'Mdb2DiscoveryDataManager' => '/lib/data_manager/mdb2.class.php',
-         'SettingsConnector' => '/settings/settings_connector.class.php',
+         'SettingsConnector' => '/settings/settings_connector.class.php'
     );
 
+    /**
+     * Try to load the class
+     *
+     * @param $classname string
+     * @return boolean
+     */
     static function load($classname)
     {
-        if (isset(self::$map[$classname]))
+        if (isset(self :: $map[$classname]))
         {
-            require_once __DIR__ . self::$map[$classname];
+            require_once __DIR__ . self :: $map[$classname];
             return true;
         }
 
         return false;
-   }
+    }
 
-   static function synch($update){
-        return \common\libraries\AutoloaderUtilities::synch(__DIR__, __DIR__, $update);
-   }
+    /**
+     * Synchronize the autoloader
+     *
+     * @param $update boolean
+     * @return multitype:string
+     */
+    static function synch($update)
+    {
+        return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
+    }
 
 }
 ?>

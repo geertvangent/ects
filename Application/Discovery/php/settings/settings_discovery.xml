@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application name="discovery">
+	<settings>
+
+		<category name="visual">
+
+			<setting name="theme" field="select" default="aqua">
+				<options type="dynamic" source="get_themes" />
+			</setting>
+
+		</category>
+	</settings>
+</application>
