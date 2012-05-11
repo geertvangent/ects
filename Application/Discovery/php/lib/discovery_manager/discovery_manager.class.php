@@ -1,8 +1,13 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\PlatformSetting;
+
+use common\libraries\Theme;
+
 use common\libraries\WebApplication;
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */
@@ -27,11 +32,14 @@ class DiscoveryManager extends WebApplication
 
     /**
      * Constructor
-     * @param User $user The current user
+     * 
+     * @param $user User
+     *            The current user
      */
     function __construct($user = null)
     {
         parent :: __construct($user);
+        Theme :: set_theme(PlatformSetting :: get('theme', __NAMESPACE__));
     }
 
     function get_application_name()
@@ -42,12 +50,14 @@ class DiscoveryManager extends WebApplication
     /**
      * Helper function for the Application class,
      * pending access to class constants via variables in PHP 5.3
-     * e.g. $name = $class :: DEFAULT_ACTION
+     * e.g.
+     * $name = $class :: DEFAULT_ACTION
      *
      * DO NOT USE IN THIS APPLICATION'S CONTEXT
      * Instead use:
      * - self :: DEFAULT_ACTION in the context of this class
-     * - YourApplicationManager :: DEFAULT_ACTION in all other application classes
+     * - YourApplicationManager :: DEFAULT_ACTION in all other application
+     * classes
      */
     function get_default_action()
     {

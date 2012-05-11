@@ -55,7 +55,8 @@ class Autoloader
          'ModuleInstanceBrowserTableDataProvider' => '/lib/module_instance_manager/component/module_instance_browser/module_instance_browser_table_data_provider.class.php',
          'ModuleInstanceForm' => '/lib/module_instance_manager/forms/module_instance_form.class.php',
          'DefaultModuleInstanceTableCellRenderer' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_cell_renderer.class.php',
-         'DefaultModuleInstanceTableColumnModel' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_column_model.class.php'
+         'DefaultModuleInstanceTableColumnModel' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_column_model.class.php',
+         'SettingsDiscoveryConnector' => '/settings/settings_discovery_connector.class.php'
     );
 
     /**

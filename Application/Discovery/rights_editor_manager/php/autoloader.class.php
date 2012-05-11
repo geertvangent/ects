@@ -20,7 +20,6 @@ class Autoloader
          'GroupRightBrowserTableColumnModel' => '/component/group_right_browser/group_right_browser_table_column_model.class.php',
          'GroupRightBrowserTableDataProvider' => '/component/group_right_browser/group_right_browser_table_data_provider.class.php',
          'UserRightBrowserTable' => '/component/user_right_browser/user_right_browser_table.class.php',
-         'UserRightBrowserTableCellRenderer' => '/component/user_right_browser/user_right_browser_table_cell_renderer.class.php',
          'UserRightBrowserTableColumnModel' => '/component/user_right_browser/user_right_browser_table_column_model.class.php',
          'UserRightBrowserTableDataProvider' => '/component/user_right_browser/user_right_browser_table_data_provider.class.php',
          'ManageForm' => '/forms/manage_form.class.php'
