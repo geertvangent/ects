@@ -80,6 +80,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $course->set_jury($object->jury);
         $course->set_repleacable($object->repleacable);
         $course->set_training_unit($this->convert_to_utf8($object->training_unit));
+        $course->set_approved($object->approved);
         $course->set_previous_id($object->previous_id);
         $course->set_previous_parent_id($object->previous_parent_id);
         $course->set_next_id($this->retrieve_course_next_id($course));

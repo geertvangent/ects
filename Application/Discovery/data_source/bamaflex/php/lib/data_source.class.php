@@ -10,7 +10,7 @@ class DataSource extends \application\discovery\DataSource
     /**
      * Constructor
      *
-     * @param $module_instance ModuleInstance           
+     * @param $module_instance ModuleInstance
      */
     function __construct(ModuleInstance $module_instance)
     {
@@ -50,7 +50,7 @@ class DataSource extends \application\discovery\DataSource
     /**
      * Sets the connection
      *
-     * @param $connection Connection           
+     * @param $connection Connection
      */
     function set_connection($connection)
     {
@@ -59,7 +59,7 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      *
-     * @param $string string           
+     * @param $string string
      * @return string
      */
     function convert_to_utf8($string)

@@ -12,6 +12,11 @@
 				<email>hans.de.bisschop@ehb.be</email>
 				<company>Erasmushogeschool Brussel</company>
 			</author>
+			<author>
+				<name>Magali Gillard</name>
+				<email>magali.gillard@ehb.be</email>
+				<company>Erasmushogeschool Brussel</company>
+			</author>
 		</authors>
 		<version>1.0.0</version>
 		<cycle>
