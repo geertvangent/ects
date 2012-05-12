@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application name="bamaflex">
+<package context="bamaflex">
 	<settings>
 		<category name="basic">
 			<setting name="host" field="text" default="">
@@ -26,4 +26,4 @@
 			</setting>
 		</category>
 	</settings>
-</application>
+</package>

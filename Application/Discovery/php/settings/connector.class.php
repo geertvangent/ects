@@ -3,7 +3,7 @@ namespace application\discovery;
 
 use common\libraries\Theme;
 
-class SettingsDiscoveryConnector
+class SettingsConnector
 {
 
     function get_themes()
