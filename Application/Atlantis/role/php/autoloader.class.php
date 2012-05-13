@@ -12,7 +12,6 @@ class Autoloader
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'RoleAjaxRolesFeed' => '/ajax/roles_feed.class.php',
-         'Installer' => '/install/installer.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'Role' => '/lib/data_class/role.class.php',
          'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
@@ -30,7 +29,8 @@ class Autoloader
          'RoleTable' => '/lib/table/role/role_table.class.php',
          'RoleTableCellRenderer' => '/lib/table/role/role_table_cell_renderer.class.php',
          'RoleTableColumnModel' => '/lib/table/role/role_table_column_model.class.php',
-         'RoleTableDataProvider' => '/lib/table/role/role_table_data_provider.class.php'
+         'RoleTableDataProvider' => '/lib/table/role/role_table_data_provider.class.php',
+         'Installer' => '/package/install/installer.class.php'
     );
 
     /**

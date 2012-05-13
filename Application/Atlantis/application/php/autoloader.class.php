@@ -11,7 +11,6 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'Installer' => '/install/installer.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'Application' => '/lib/data_class/application.class.php',
          'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
@@ -28,7 +27,8 @@ class Autoloader
          'ApplicationTable' => '/lib/table/application/application_table.class.php',
          'ApplicationTableCellRenderer' => '/lib/table/application/application_table_cell_renderer.class.php',
          'ApplicationTableColumnModel' => '/lib/table/application/application_table_column_model.class.php',
-         'ApplicationTableDataProvider' => '/lib/table/application/application_table_data_provider.class.php'
+         'ApplicationTableDataProvider' => '/lib/table/application/application_table_data_provider.class.php',
+         'Installer' => '/package/install/installer.class.php'
     );
 
     /**

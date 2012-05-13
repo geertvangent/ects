@@ -11,7 +11,6 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'Installer' => '/install/installer.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'Entitlement' => '/lib/data_class/entitlement.class.php',
          'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
@@ -24,7 +23,8 @@ class Autoloader
          'EntitlementTable' => '/lib/table/entitlement/table.class.php',
          'EntitlementTableCellRenderer' => '/lib/table/entitlement/table_cell_renderer.class.php',
          'EntitlementTableColumnModel' => '/lib/table/entitlement/table_column_model.class.php',
-         'EntitlementTableDataProvider' => '/lib/table/entitlement/table_data_provider.class.php'
+         'EntitlementTableDataProvider' => '/lib/table/entitlement/table_data_provider.class.php',
+         'Installer' => '/package/install/installer.class.php'
     );
 
     /**
