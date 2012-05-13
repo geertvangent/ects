@@ -55,6 +55,7 @@ class Autoloader
          'ModuleInstanceForm' => '/lib/module_instance_manager/forms/module_instance_form.class.php',
          'DefaultModuleInstanceTableCellRenderer' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_cell_renderer.class.php',
          'DefaultModuleInstanceTableColumnModel' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_column_model.class.php',
+         'Activator' => '/package/activate/activator.class.php',
          'DiscoveryInstaller' => '/package/install/discovery_installer.class.php',
          'SettingsConnector' => '/settings/connector.class.php'
     );
