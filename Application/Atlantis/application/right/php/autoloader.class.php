@@ -29,6 +29,7 @@ class Autoloader
          'RightTableCellRenderer' => '/lib/table/right/right_table_cell_renderer.class.php',
          'RightTableColumnModel' => '/lib/table/right/right_table_column_model.class.php',
          'RightTableDataProvider' => '/lib/table/right/right_table_data_provider.class.php',
+         'Activator' => '/package/activate/activator.class.php',
          'Installer' => '/package/install/installer.class.php'
     );
 

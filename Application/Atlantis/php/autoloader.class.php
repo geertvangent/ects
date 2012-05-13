@@ -20,6 +20,7 @@ class Autoloader
          'HomeComponent' => '/lib/manager/component/home.class.php',
          'RightComponent' => '/lib/manager/component/right.class.php',
          'RoleComponent' => '/lib/manager/component/role.class.php',
+         'Activator' => '/package/activate/activator.class.php',
          'Installer' => '/package/install/installer.class.php'
     );
 

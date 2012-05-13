@@ -23,6 +23,7 @@ class Autoloader
          'ApplicationTableCellRenderer' => '/lib/table/context/table_cell_renderer.class.php',
          'ContextTableColumnModel' => '/lib/table/context/table_column_model.class.php',
          'ContextTableDataProvider' => '/lib/table/context/table_data_provider.class.php',
+         'Activator' => '/package/activate/activator.class.php',
          'Installer' => '/package/install/installer.class.php'
     );
 
