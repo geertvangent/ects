@@ -13,7 +13,6 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'DiscoveryAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
          'DiscoveryAjaxUsersFeed' => '/ajax/users_feed.class.php',
-         'DiscoveryInstaller' => '/install/discovery_installer.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'DataSource' => '/lib/data_source.class.php',
          'DataSourceInstance' => '/lib/data_source_instance.class.php',
@@ -56,6 +55,7 @@ class Autoloader
          'ModuleInstanceForm' => '/lib/module_instance_manager/forms/module_instance_form.class.php',
          'DefaultModuleInstanceTableCellRenderer' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_cell_renderer.class.php',
          'DefaultModuleInstanceTableColumnModel' => '/lib/module_instance_manager/module_instance_table/default_module_instance_table_column_model.class.php',
+         'DiscoveryInstaller' => '/package/install/discovery_installer.class.php',
          'SettingsConnector' => '/settings/connector.class.php'
     );
 
