@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\context;
+namespace application\atlantis\user_group;
 
 use common\libraries\Request;
 use common\libraries\Utilities;
@@ -12,18 +12,18 @@ class DeleterComponent extends Manager
     {
         $ids = Request :: get(self :: PARAM_APPLICATION_ID);
         $failures = 0;
-        
+
         if (! empty($ids))
         {
             if (! is_array($ids))
             {
                 $ids = array($ids);
             }
-            
+
             foreach ($ids as $id)
             {
                 $application = DataManager :: retrieve(Application :: class_name(), (int) $id);
-                
+
                 if (! $this->get_user()->is_platform_admin())
                 {
                     $failures ++;
@@ -36,7 +36,7 @@ class DeleterComponent extends Manager
                     }
                 }
             }
-            
+
             if ($failures)
             {
                 if (count($ids) == 1)
@@ -68,7 +68,7 @@ class DeleterComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('Applications'));
                 }
             }
-            
+
             $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
                     Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
         }

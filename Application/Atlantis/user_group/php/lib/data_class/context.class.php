@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\context;
+namespace application\atlantis\user_group;
 
 use common\libraries\Utilities;
 use common\libraries\DataClass;

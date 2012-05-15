@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\context;
+namespace application\atlantis\user_group;
 
 /**
  * Atlantis application
@@ -14,7 +14,7 @@ class Installer extends \common\libraries\Installer
      */
     function __construct($values)
     {
-        
+
         parent :: __construct($values, DataManager :: get_instance());
     }
 }

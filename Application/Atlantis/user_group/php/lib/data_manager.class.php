@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\context;
+namespace application\atlantis\user_group;
 
 class DataManager extends \common\libraries\DataManager
 {
