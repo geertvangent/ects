@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\Translation;
+
 use admin\AdminDataManager;
 
 use core\lynx\PackageList;
@@ -62,7 +64,9 @@ class DiscoveryManager extends WebApplication
 
     static function get_installable_application_packages($include_installed = false)
     {
-        $package_list = new PackageList(self :: context() . '\module');
+        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__));
+
+        $module_list = new PackageList(self :: context() . '\module', Translation :: get('Modules', null, __NAMESPACE__));
 
         foreach (Module :: get_packages_from_filesystem() as $module_type)
         {
@@ -79,17 +83,19 @@ class DiscoveryManager extends WebApplication
 
                 if (count($module_implementations) > 0)
                 {
-                    $module_list = new PackageList($module_type);
+                    $module_implementations_list = new PackageList($module_type, Translation :: get('TypeName', null, $module_type));
 
                     foreach ($module_implementations as $module_implementation)
                     {
-                        $module_list->add_package($module_implementation);
+                        $module_implementations_list->add_package($module_implementation);
                     }
 
-                    $package_list->add_child($module_list);
+                    $module_list->add_child($module_implementations_list);
                 }
             }
         }
+
+        $package_list->add_child($module_list);
 
         return $package_list;
     }
