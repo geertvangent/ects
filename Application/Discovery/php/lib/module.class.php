@@ -141,6 +141,20 @@ class Module
         return $types;
     }
 
+    function get_packages_from_filesystem()
+    {
+        $types = array();
+
+        $directories = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', Filesystem :: LIST_DIRECTORIES, false);
+
+        foreach ($directories as $directory)
+        {
+            $types[] = __NAMESPACE__ . '\module\\' . $directory;
+        }
+
+        return $types;
+    }
+
     function get_type()
     {
         return ModuleInstance :: TYPE_DISABLED;
