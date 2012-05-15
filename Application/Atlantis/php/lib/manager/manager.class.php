@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis;
 
+use common\libraries\Translation;
+
 use admin\AdminDataManager;
 
 use core\lynx\PackageList;
@@ -42,7 +44,7 @@ class Manager extends WebApplication
 
     static function get_installable_application_packages($include_installed = false)
     {
-        $package_list = new PackageList(self :: context());
+        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__));
 
         if (! AdminDataManager :: get_registration(\application\atlantis\application\Manager :: context()) || $include_installed)
         {
@@ -64,7 +66,7 @@ class Manager extends WebApplication
             $package_list->add_package(\application\atlantis\user_group\Manager :: context());
         }
 
-        $application_list = new PackageList(\application\atlantis\application\Manager :: context());
+        $application_list = new PackageList(\application\atlantis\application\Manager :: context(), Translation :: get('TypeName', null, \application\atlantis\application\Manager :: context()));
 
         if (! AdminDataManager :: get_registration(\application\atlantis\application\right\Manager :: context()) || $include_installed)
         {
@@ -73,7 +75,7 @@ class Manager extends WebApplication
 
         $package_list->add_child($application_list);
 
-        $role_list = new PackageList(\application\atlantis\role\Manager :: context());
+        $role_list = new PackageList(\application\atlantis\role\Manager :: context(), Translation :: get('TypeName', null, \application\atlantis\role\Manager :: context()));
 
         if (! AdminDataManager :: get_registration(\application\atlantis\role\entitlement\Manager :: context()) || $include_installed)
         {
