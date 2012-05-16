@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role;
 
-class Deactivator extends \common\libraries\Deactivator
+class Deactivator extends \common\libraries\package\Deactivator
 {
 
 }

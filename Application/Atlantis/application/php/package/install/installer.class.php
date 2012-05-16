@@ -6,7 +6,7 @@ namespace application\atlantis\application;
  *
  * @package application.atlantis
  */
-class Installer extends \common\libraries\Installer
+class Installer extends \common\libraries\package\Installer
 {
 
     /**

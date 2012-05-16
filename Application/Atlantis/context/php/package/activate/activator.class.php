@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\context;
 
-class Activator extends \common\libraries\Activator
+class Activator extends \common\libraries\package\Activator
 {
 
 }
