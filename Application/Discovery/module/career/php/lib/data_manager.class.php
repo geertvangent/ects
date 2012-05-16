@@ -8,6 +8,7 @@ use common\libraries\Path;
 use application\discovery\DiscoveryManager;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */
@@ -27,14 +28,14 @@ class DataManager
     }
 
     /**
-     * @param ModuleInstance $module_instance
+     *
+     * @param $module_instance ModuleInstance
      * @return DataManagerInterface
      */
     static function get_instance($module_instance)
     {
         if (! isset(self :: $instance) || ! isset(self :: $instance[$module_instance->get_id()]))
         {
-            require_once Path :: namespace_to_full_path($module_instance->get_type()) . 'php/lib/data_manager/data_source.class.php';
             $class = $module_instance->get_type() . '\\DataSource';
             self :: $instance[$module_instance->get_id()] = new $class($module_instance);
         }

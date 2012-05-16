@@ -15,6 +15,7 @@ use common\libraries\DynamicFormTab;
 use DOMDocument;
 /**
  * $Id: external_repository_form.class.php 227 2009-11-13 14:45:05Z kariboe $
+ *
  * @package home.lib.forms
  */
 
@@ -57,11 +58,15 @@ class ModuleInstanceForm extends FormValidator
         $configuration = $this->configuration;
 
         $tabs_generator = new DynamicFormTabsRenderer($this->getAttribute('name'), $this);
-        $tabs_generator->add_tab(new DynamicFormTab('general', 'General', Theme :: get_common_image_path() . 'place_tab_view.png', 'build_general_form'));
+        $tabs_generator->add_tab(
+                new DynamicFormTab('general', 'General', Theme :: get_common_image_path() . 'place_tab_view.png',
+                        'build_general_form'));
 
         if (count($configuration['settings']) > 0)
         {
-            $tabs_generator->add_tab(new DynamicFormTab('settings', 'Settings', Theme :: get_common_image_path() . 'place_tab_settings.png', 'build_settings_form'));
+            $tabs_generator->add_tab(
+                    new DynamicFormTab('settings', 'Settings',
+                            Theme :: get_common_image_path() . 'place_tab_settings.png', 'build_settings_form'));
         }
 
         $tabs_generator->render();
@@ -70,11 +75,15 @@ class ModuleInstanceForm extends FormValidator
     function build_general_form()
     {
         $this->addElement('hidden', ModuleInstance :: PROPERTY_TYPE, $this->module_instance->get_type());
-        $this->addElement('text', ModuleInstance :: PROPERTY_TITLE, Translation :: get('Title', null, $this->module_instance->get_type()), array(
-                "size" => "50"));
-        $this->addRule(ModuleInstance :: PROPERTY_TITLE, Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
-        $this->add_html_editor(ModuleInstance :: PROPERTY_DESCRIPTION, Translation :: get('Description', null, $this->module_instance->get_type()), true);
-        $this->addElement('checkbox', self :: PROPERTY_ENABLED, Translation :: get('Enabled', null, Utilities :: COMMON_LIBRARIES));
+        $this->addElement('text', ModuleInstance :: PROPERTY_TITLE,
+                Translation :: get('Title', null, $this->module_instance->get_type()),
+                array("size" => "50"));
+        $this->addRule(ModuleInstance :: PROPERTY_TITLE,
+                Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
+        $this->add_html_editor(ModuleInstance :: PROPERTY_DESCRIPTION,
+                Translation :: get('Description', null, $this->module_instance->get_type()), true);
+        $this->addElement('checkbox', self :: PROPERTY_ENABLED,
+                Translation :: get('Enabled', null, Utilities :: COMMON_LIBRARIES));
     }
 
     function build_settings_form()
@@ -84,8 +93,6 @@ class ModuleInstanceForm extends FormValidator
 
         $path = Path :: namespace_to_path($module_instance->get_type());
 
-        require_once Path :: get(SYS_PATH) . $path . '/php/settings/settings_connector.class.php';
-
         $categories = count($configuration['settings']);
 
         foreach ($configuration['settings'] as $category_name => $settings)
@@ -94,11 +101,15 @@ class ModuleInstanceForm extends FormValidator
 
             foreach ($settings as $name => $setting)
             {
-                $label = Translation :: get(Utilities :: underscores_to_camelcase($name), null, $this->module_instance->get_type());
+                $label = Translation :: get(Utilities :: underscores_to_camelcase($name), null,
+                        $this->module_instance->get_type());
                 $name = self :: SETTINGS_PREFIX . '[' . $name . ']';
                 if (! $has_settings && $categories > 1)
                 {
-                    $this->addElement('category', Translation :: get(Utilities :: underscores_to_camelcase($category_name), null, ModuleInstanceManager :: get_namespace($this->module_instance->get_instance_type(), $this->module_instance->get_type())));
+                    $this->addElement('category',
+                            Translation :: get(Utilities :: underscores_to_camelcase($category_name), null,
+                                    ModuleInstanceManager :: get_namespace($this->module_instance->get_instance_type(),
+                                            $this->module_instance->get_type())));
                     $has_settings = true;
                 }
 
@@ -122,7 +133,12 @@ class ModuleInstanceForm extends FormValidator
                                     $validation['format'] = NULL;
                                 }
 
-                                $this->addRule($name, Translation :: get($validation['message'], null, ModuleInstanceManager :: get_namespace($this->module_instance->get_instance_type(), $this->module_instance->get_type())), $validation['rule'], $validation['format']);
+                                $this->addRule($name,
+                                        Translation :: get($validation['message'], null,
+                                                ModuleInstanceManager :: get_namespace(
+                                                        $this->module_instance->get_instance_type(),
+                                                        $this->module_instance->get_type())), $validation['rule'],
+                                        $validation['format']);
                             }
                         }
                     }
@@ -161,7 +177,11 @@ class ModuleInstanceForm extends FormValidator
                             }
                             else
                             {
-                                $group[] = & $this->createElement($setting['field'], $name, null, Translation :: get(Utilities :: underscores_to_camelcase($option_name), null, ModuleInstanceManager :: get_namespace($this->module_instance->get_instance_type(), $this->module_instance->get_type())), $option_value);
+                                $group[] = & $this->createElement($setting['field'], $name, null,
+                                        Translation :: get(Utilities :: underscores_to_camelcase($option_name), null,
+                                                ModuleInstanceManager :: get_namespace(
+                                                        $this->module_instance->get_instance_type(),
+                                                        $this->module_instance->get_type())), $option_value);
                             }
                         }
                         $this->addGroup($group, $name, $label, '<br/>', false);
@@ -186,10 +206,12 @@ class ModuleInstanceForm extends FormValidator
 
         $this->addElement('hidden', ModuleInstance :: PROPERTY_ID);
 
-        $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES), array(
-                'class' => 'positive update'));
-        $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
-                'class' => 'normal empty'));
+        $buttons[] = $this->createElement('style_submit_button', 'submit',
+                Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES),
+                array('class' => 'positive update'));
+        $buttons[] = $this->createElement('style_reset_button', 'reset',
+                Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
+                array('class' => 'normal empty'));
 
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
@@ -198,10 +220,12 @@ class ModuleInstanceForm extends FormValidator
     {
         $this->build_basic_form();
 
-        $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), array(
-                'class' => 'positive'));
-        $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
-                'class' => 'normal empty'));
+        $buttons[] = $this->createElement('style_submit_button', 'submit',
+                Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
+                array('class' => 'positive'));
+        $buttons[] = $this->createElement('style_reset_button', 'reset',
+                Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
+                array('class' => 'normal empty'));
 
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
@@ -234,7 +258,8 @@ class ModuleInstanceForm extends FormValidator
 
             foreach ($settings as $name => $value)
             {
-                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name($name, $module_instance->get_id());
+                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
+                        $name, $module_instance->get_id());
                 $setting->set_value($value);
 
                 if (! $setting->update())
@@ -269,8 +294,9 @@ class ModuleInstanceForm extends FormValidator
             $module_instance->set_content_type(ModuleInstance :: TYPE_DISABLED);
         }
 
-        $display_order = DiscoveryDataManager :: get_instance()->count_module_instances(new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
-        $display_order++;
+        $display_order = DiscoveryDataManager :: get_instance()->count_module_instances(
+                new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
+        $display_order ++;
 
         $module_instance->set_display_order($display_order);
 
@@ -285,7 +311,8 @@ class ModuleInstanceForm extends FormValidator
 
             foreach ($settings as $name => $value)
             {
-                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name($name, $module_instance->get_id());
+                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
+                        $name, $module_instance->get_id());
                 $setting->set_value($value);
 
                 if (! $setting->update())
@@ -304,10 +331,10 @@ class ModuleInstanceForm extends FormValidator
     }
 
     /**
-     * Sets default values. Traditionally, you will want to extend this method
-     * so it sets default for your learning object type's additional
-     * properties.
-     * @param array $defaults Default values for this form's parameters.
+     * Sets default values. Traditionally, you will want to extend this method so it sets default for your learning
+     * object type's additional properties.
+     *
+     * @param $defaults array Default values for this form's parameters.
      */
     function setDefaults($defaults = array ())
     {
@@ -315,7 +342,8 @@ class ModuleInstanceForm extends FormValidator
         $defaults[ModuleInstance :: PROPERTY_ID] = $module_instance->get_id();
         if (! $module_instance->get_title())
         {
-            $defaults[ModuleInstance :: PROPERTY_TITLE] = Translation :: get('TypeName', null, $this->module_instance->get_type());
+            $defaults[ModuleInstance :: PROPERTY_TITLE] = Translation :: get('TypeName', null,
+                    $this->module_instance->get_type());
         }
         else
         {
@@ -326,7 +354,8 @@ class ModuleInstanceForm extends FormValidator
 
         if (! $module_instance->get_description())
         {
-            $defaults[ModuleInstance :: PROPERTY_DESCRIPTION] = Translation :: get('TypeDescription', null, $this->module_instance->get_type());
+            $defaults[ModuleInstance :: PROPERTY_DESCRIPTION] = Translation :: get('TypeDescription', null,
+                    $this->module_instance->get_type());
         }
         else
         {
@@ -348,7 +377,8 @@ class ModuleInstanceForm extends FormValidator
         {
             foreach ($settings as $name => $setting)
             {
-                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name($name, $module_instance->get_id());
+                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
+                        $name, $module_instance->get_id());
                 if ($setting instanceof ModuleInstanceSetting)
                 {
                     $defaults[self :: SETTINGS_PREFIX][$name] = $setting->get_value();
@@ -425,7 +455,8 @@ class ModuleInstanceForm extends FormValidator
                             {
                                 if ($property_options->hasAttribute($options_attribute))
                                 {
-                                    $property_info['options'][$options_attribute] = $property_options->getAttribute($options_attribute);
+                                    $property_info['options'][$options_attribute] = $property_options->getAttribute(
+                                            $options_attribute);
                                 }
                             }
 

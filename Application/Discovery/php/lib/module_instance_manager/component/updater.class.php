@@ -5,8 +5,6 @@ use common\libraries\Request;
 use common\libraries\Translation;
 use common\libraries\Utilities;
 
-require_once dirname(__FILE__) . '/../forms/module_instance_form.class.php';
-
 class ModuleInstanceManagerUpdaterComponent extends ModuleInstanceManager
 {
 
@@ -16,21 +14,24 @@ class ModuleInstanceManagerUpdaterComponent extends ModuleInstanceManager
         {
             $this->not_allowed();
         }
-        
+
         $instance_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
-        
+
         if (isset($instance_id))
         {
             $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($instance_id);
-            $form = new ModuleInstanceForm(ModuleInstanceForm :: TYPE_EDIT, $module_instance, $this->get_url(array(
-                    DiscoveryManager :: PARAM_MODULE_ID => $instance_id)));
-            
+            $form = new ModuleInstanceForm(ModuleInstanceForm :: TYPE_EDIT, $module_instance,
+                    $this->get_url(array(DiscoveryManager :: PARAM_MODULE_ID => $instance_id)));
+
             if ($form->validate())
             {
                 $success = $form->update_module_instance();
-                $this->redirect(Translation :: get($success ? 'ObjectUpdated' : 'ObjectNotUpdated', array(
-                        'OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES), ($success ? false : true), array(
-                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+                $this->redirect(
+                        Translation :: get($success ? 'ObjectUpdated' : 'ObjectNotUpdated',
+                                array('OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES),
+                        ($success ? false : true),
+                        array(
+                                ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
             }
             else
             {
@@ -42,8 +43,9 @@ class ModuleInstanceManagerUpdaterComponent extends ModuleInstanceManager
         else
         {
             $this->display_header();
-            $this->display_error_message(Translation :: get('NoObjectSelected', array(
-                    'OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES));
+            $this->display_error_message(
+                    Translation :: get('NoObjectSelected',
+                            array('OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES));
             $this->display_footer();
         }
     }

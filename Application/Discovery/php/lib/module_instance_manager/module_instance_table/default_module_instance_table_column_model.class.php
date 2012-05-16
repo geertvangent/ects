@@ -5,8 +5,6 @@ use common\libraries\Path;
 use common\libraries\ObjectTableColumnModel;
 use common\libraries\ObjectTableColumn;
 
-require_once Path :: get_library_path() . 'html/table/object_table/object_table_column_model.class.php';
-
 class DefaultModuleInstanceTableColumnModel extends ObjectTableColumnModel
 {
 
@@ -20,6 +18,7 @@ class DefaultModuleInstanceTableColumnModel extends ObjectTableColumnModel
 
     /**
      * Gets the default columns for this model
+     *
      * @return ContentObjectTableColumn[]
      */
     private static function get_default_columns()

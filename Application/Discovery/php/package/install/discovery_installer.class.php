@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Installer;
+use common\libraries\package\Installer;
 
 /**
  * @author Hans De Bisschop

@@ -10,9 +10,6 @@ use DOMXPath;
 
 ini_set('include_path', realpath(dirname(__FILE__) . '/../../../../../../../common/libraries/plugin/pear'));
 require_once dirname(__FILE__) . '/../../../../../../../common/global.inc.php';
-//include (dirname(__FILE__) . '/my_template.class.php');
-//include (dirname(__FILE__) . '/data_class_generator/data_class_generator.class.php');
-
 
 $data_class_generator = new DataClassGenerator();
 
@@ -33,13 +30,18 @@ foreach ($xml_files as $xml_file)
 
         $content_object = $dom_xpath->query('/object')->item(0);
 
-        if (file_exists(dirname(__FILE__) . '/xml_schemas/php/' . Path :: namespace_to_path($content_object->getAttribute('namespace')) . '/php/lib/' . $content_object->getAttribute('name') . '.class.php'))
+        if (file_exists(
+                dirname(__FILE__) . '/xml_schemas/php/' . Path :: namespace_to_path(
+                        $content_object->getAttribute('namespace')) . '/php/lib/' . $content_object->getAttribute('name') . '.class.php'))
         {
-            Filesystem :: remove(dirname(__FILE__) . '/xml_schemas/php/' . Path :: namespace_to_path($content_object->getAttribute('namespace')) . '/php/lib/' . $content_object->getAttribute('name') . '.class.php');
+            Filesystem :: remove(
+                    dirname(__FILE__) . '/xml_schemas/php/' . Path :: namespace_to_path(
+                            $content_object->getAttribute('namespace')) . '/php/lib/' . $content_object->getAttribute(
+                            'name') . '.class.php');
             log_message('Object type already exists');
         }
 
-        //dump($xml_definition);
+        // dump($xml_definition);
         log_message('Generating data class');
         $data_class_generator->generate_data_class($dom_xpath);
 
@@ -52,8 +54,8 @@ exit();
 /**
  * Create folders for the application
  *
- * @param String $location - The location of the application
- * @param String $name - The name of the application
+ * @param $location String - The location of the application
+ * @param $name String - The name of the application
  */
 function create_folder($name)
 {
@@ -64,7 +66,7 @@ function create_folder($name)
 /**
  * Move a file from the root to the install folder
  *
- * @param String $file - Path of the file
+ * @param $file String - Path of the file
  * @return String $new_file - New path of the file
  */
 function move_file($name)
@@ -78,7 +80,7 @@ function move_file($name)
 /**
  * Retrieves the properties from a data xml file
  *
- * @param String $file - The xml file
+ * @param $file String - The xml file
  * @return Array of String - The properties
  */
 function retrieve_properties_from_xml_file($file)
@@ -130,7 +132,8 @@ function retrieve_properties_from_xml_file($file)
 
 /**
  * Log a message to the screen
- * @param String $message - The message
+ *
+ * @param $message String - The message
  */
 function log_message($message)
 {
