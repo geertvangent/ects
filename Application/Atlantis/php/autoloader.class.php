@@ -21,6 +21,7 @@ class Autoloader
          'RightComponent' => '/lib/manager/component/right.class.php',
          'RoleComponent' => '/lib/manager/component/role.class.php',
          'Activator' => '/package/activate/activator.class.php',
+         'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'
     );
 

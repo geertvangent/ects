@@ -25,6 +25,7 @@ class Autoloader
          'RoleEntityTableColumnModel' => '/lib/table/role_entity/table_column_model.class.php',
          'RoleEntityTableDataProvider' => '/lib/table/role_entity/table_data_provider.class.php',
          'Activator' => '/package/activate/activator.class.php',
+         'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'
     );
 

@@ -25,6 +25,7 @@ class Autoloader
          'EntitlementTableColumnModel' => '/lib/table/entitlement/table_column_model.class.php',
          'EntitlementTableDataProvider' => '/lib/table/entitlement/table_data_provider.class.php',
          'Activator' => '/package/activate/activator.class.php',
+         'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'
     );
 

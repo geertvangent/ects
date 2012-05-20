@@ -31,6 +31,7 @@ class Autoloader
          'RoleTableColumnModel' => '/lib/table/role/role_table_column_model.class.php',
          'RoleTableDataProvider' => '/lib/table/role/role_table_data_provider.class.php',
          'Activator' => '/package/activate/activator.class.php',
+         'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'
     );
 
