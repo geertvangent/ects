@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\CommonDataManager;
+
 use common\libraries\Translation;
 
 use admin\AdminDataManager;
@@ -64,13 +66,13 @@ class DiscoveryManager extends WebApplication
 
     static function get_installable_application_packages($include_installed = false)
     {
-        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__));
+        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__), Theme :: get_image_path() . 'logo/16.png');
 
         $module_list = new PackageList(self :: context() . '\module', Translation :: get('Modules', null, __NAMESPACE__));
 
         foreach (Module :: get_packages_from_filesystem() as $module_type)
         {
-            if (! AdminDataManager :: get_registration($module_type) || $include_installed)
+            if (! CommonDataManager :: get_registration($module_type) || $include_installed)
             {
                 $package_list->add_package($module_type);
             }
@@ -83,7 +85,7 @@ class DiscoveryManager extends WebApplication
 
                 if (count($module_implementations) > 0)
                 {
-                    $module_implementations_list = new PackageList($module_type, Translation :: get('TypeName', null, $module_type));
+                    $module_implementations_list = new PackageList($module_type, Translation :: get('TypeName', null, $module_type), Theme :: get_image_path($module_type) . 'logo/16.png');
 
                     foreach ($module_implementations as $module_implementation)
                     {
