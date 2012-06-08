@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object name="entitlement">
+	<properties>
+		<property name="id" type="integer" unsigned="1" notnull="1"
+			autoincrement="true" />
+		<property name="right_id" type="integer" />
+		<property name="role_id" type="integer" />
+	</properties>
+</object>

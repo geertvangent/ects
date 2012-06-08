@@ -1,0 +1,8 @@
+TypeName = "Rechten"
+EditorComponent = "Pas recht aan"
+RightName = "Recht"
+RightDescription = "Omschrijving"
+Name = "Naam"
+Description = "Omschrijving"
+CreatorComponent = "Maak recht aan"
+Application = "Toepassing"
