@@ -9,3 +9,5 @@ ApplicationDescription = "Description"
 ApplicationUrl = "Url"
 RightsManagerComponent = "Rights manager"
 CreatorComponent = "Create"
+
+PackageTypeNameApplication = ""

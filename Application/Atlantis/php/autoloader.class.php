@@ -11,7 +11,6 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'Installer' => '/install/installer.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
          'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
@@ -21,7 +20,9 @@ class Autoloader
          'HomeComponent' => '/lib/manager/component/home.class.php',
          'RightComponent' => '/lib/manager/component/right.class.php',
          'RoleComponent' => '/lib/manager/component/role.class.php',
-         'SettingsAtlantisConnector' => '/settings/settings_atlantis_connector.class.php'
+         'Activator' => '/package/activate/activator.class.php',
+         'Deactivator' => '/package/deactivate/deactivator.class.php',
+         'Installer' => '/package/install/installer.class.php'
     );
 
     /**

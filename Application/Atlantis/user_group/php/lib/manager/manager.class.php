@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\context;
+namespace application\atlantis\user_group;
 
 use common\libraries\SubManager;
 
@@ -12,7 +12,7 @@ class Manager extends SubManager
     const ACTION_EDIT = 'editor';
     const ACTION_CREATE = 'creator';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-    
+
     const PARAM_CONTEXT_ID = 'context_id';
 
     static function get_action_parameter()

@@ -11,3 +11,5 @@ EntitlementComponent = "Entitlements"
 CreatorComponent = "Creator"
 RoleEntity = "Role entity"
 List = "List of entitlements"
+
+PackageTypeNameRole = ""

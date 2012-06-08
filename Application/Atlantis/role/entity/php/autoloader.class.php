@@ -11,7 +11,6 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'Installer' => '/install/installer.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'RoleEntity' => '/lib/data_class/role_entity.class.php',
          'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
@@ -24,7 +23,10 @@ class Autoloader
          'RoleEntityTable' => '/lib/table/role_entity/table.class.php',
          'RoleEntityTableCellRenderer' => '/lib/table/role_entity/table_cell_renderer.class.php',
          'RoleEntityTableColumnModel' => '/lib/table/role_entity/table_column_model.class.php',
-         'RoleEntityTableDataProvider' => '/lib/table/role_entity/table_data_provider.class.php'
+         'RoleEntityTableDataProvider' => '/lib/table/role_entity/table_data_provider.class.php',
+         'Activator' => '/package/activate/activator.class.php',
+         'Deactivator' => '/package/deactivate/deactivator.class.php',
+         'Installer' => '/package/install/installer.class.php'
     );
 
     /**

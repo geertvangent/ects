@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application;
+namespace application\atlantis\user_group;
 
 use common\libraries\NewObjectTableFormActionsSupport;
 use common\libraries\NewObjectTable;
@@ -17,9 +17,9 @@ class ApplicationTable extends NewObjectTable implements NewObjectTableFormActio
     function get_implemented_form_actions()
     {
         $actions = new ObjectTableFormActions(__NAMESPACE__, Manager :: PARAM_ACTION);
-        
+
         $actions->add_form_action(new ObjectTableFormAction(Manager :: ACTION_DELETE, Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
-        
+
         return $actions;
     }
 }

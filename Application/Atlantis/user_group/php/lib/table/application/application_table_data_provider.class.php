@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application;
+namespace application\atlantis\user_group;
 
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\NewObjectTableDataProvider;
