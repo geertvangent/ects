@@ -1,12 +1,14 @@
 <?php
 namespace application\atlantis;
 
+use common\libraries\WebApplicationInstaller;
+
 /**
  * Atlantis application
  *
  * @package application.atlantis
  */
-class Installer extends \common\libraries\package\Installer
+class Installer extends WebApplicationInstaller
 {
 
     /**
@@ -30,6 +32,5 @@ class Installer extends \common\libraries\package\Installer
 
         return $installers;
     }
-
 }
 ?>
