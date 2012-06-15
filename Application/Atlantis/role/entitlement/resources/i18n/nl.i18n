@@ -1,0 +1,6 @@
+TypeName = "Rechten toekennen"
+
+Grant = "Toekennen"
+Deny = "Weigeren"
+
+Entitlements = ""
