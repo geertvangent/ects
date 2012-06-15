@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object name="context" namespace="application\atlantis\context">
+	<properties>
+		<property name="id" type="integer" unsigned="1" notnull="1"
+			autoincrement="true" />
+		<property name="parent_id" type="integer" />
+		<property name="parent_type" type="integer" />
+		<property name="context_id" type="integer" />
+		<property name="context_name" type="text" length="250" />
+		<property name="context_type" type="integer" />
+	</properties>
+</object>
