@@ -9,7 +9,10 @@ class BamaflexResultSet extends ArrayResultSet
     function __construct($handle)
     {
         $records = array();
-        
+        if ($handle instanceof \MDB2_Error)
+        {
+            var_dump($handle);
+        }
         while ($record = $handle->fetchRow(MDB2_FETCHMODE_ASSOC))
         {
             $records[] = $this->process_record($record);

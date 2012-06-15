@@ -28,13 +28,13 @@ class AcademicYearGroupSynchronization extends GroupSynchronization
 
     function get_children()
     {
-        $query = 'EXEC [dbo].[sp_structure_departments] @academiejaar = N\'' . $this->get_academic_year() . '\'';
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_faculty_basic] WHERE year = \'' . $this->get_academic_year() . '\'';
         $departments = $this->get_result($query);
         
         $children = array();
-        while ($department = $departments->next_result(false))
+        while ($department = $departments->next_result())
         {
-            if ($department['departement_id'] == 59)
+            if ($department['id'] == 59)
             {
                 $children[] = GroupSynchronization :: factory('department', $this, $department);
             }

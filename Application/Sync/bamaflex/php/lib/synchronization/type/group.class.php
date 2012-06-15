@@ -16,30 +16,33 @@ use common\libraries\Filesystem;
 use common\libraries\Utilities;
 use common\libraries\AndCondition;
 
-require dirname(__FILE__) . '/../synchronization.class.php';
-
 /**
+ *
  * @package ehb.sync;
  */
 
 class GroupSynchronization extends Synchronization
 {
     /**
+     *
      * @var Synchronization
      */
     private $synchronization;
     
     /**
+     *
      * @var array
      */
     private $parameters;
     
     /**
+     *
      * @var Group
      */
     private $parent_group;
     
     /**
+     *
      * @var Group
      */
     private $current_group;
@@ -67,10 +70,12 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
-     * Enter description here ...
-     * @param string $type
-     * @param GroupSynchronization $synchronization
-     * @param array $parameters
+     * Enter description here .
+     * ..
+     * 
+     * @param $type string           
+     * @param $synchronization GroupSynchronization           
+     * @param $parameters array           
      * @return GroupSynchronization
      */
     static function factory($type, GroupSynchronization $synchronization, $parameters = array())
@@ -90,6 +95,7 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
+     *
      * @return boolean
      */
     function exists()
@@ -98,6 +104,7 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
+     *
      * @return Group
      */
     function get_current_group()
@@ -106,7 +113,8 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
-     * @param Group $group
+     *
+     * @param $group Group           
      */
     function set_current_group(Group $group)
     {
@@ -114,6 +122,7 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
+     *
      * @return Synchronization
      */
     function get_synchronization()
@@ -122,6 +131,7 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
+     *
      * @return Group
      */
     function get_parent_group()
@@ -130,6 +140,7 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
+     *
      * @return array
      */
     function get_parameters()
@@ -138,7 +149,8 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
-     * @param string $key
+     *
+     * @param $key string           
      * @return string
      */
     function get_parameter($key)
@@ -147,6 +159,7 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
+     *
      * @return Group
      */
     function synchronize()
@@ -197,6 +210,7 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
+     *
      * @return array
      */
     function get_children()
@@ -226,11 +240,11 @@ class GroupSynchronization extends Synchronization
             }
             if (count($result_codes) > 0)
             {
-                $results = UserDataManager :: get_instance()->retrieve_user_ids_by_official_codes($result_codes);
-                while ($result = $results->next_result(false))
+                $results = \user\DataManager :: retrieve_users_by_official_codes($result_codes);
+                while ($result = $results->next_result())
                 {
-                    $user_ids[] = $result[User :: PROPERTY_ID];
-                    self :: $official_code_cache[$result[User :: PROPERTY_OFFICIAL_CODE]] = $result[User :: PROPERTY_ID];
+                    $user_ids[] = $result->get_id();
+                    self :: $official_code_cache[$result->get_official_code()] = $result->get_id();
                 }
             }
         }

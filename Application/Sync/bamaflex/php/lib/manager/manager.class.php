@@ -6,13 +6,22 @@ use common\libraries\SubManager;
 class Manager extends SubManager
 {
     const ACTION_BROWSE = 'browser';
-    const ACTION_USERS = 'users';
     const ACTION_ALL_USERS = 'all_users';
+    const ACTION_NEW_USERS = 'new_users';
+    const ACTION_UPDATE_USERS = 'update_users';
+    
     const ACTION_GROUPS = 'groups';
     
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     
     const PARAM_ACTION = 'bamaflex_action';
+
+    function __construct($parent)
+    {
+        ini_set("memory_limit", "-1");
+        ini_set("max_execution_time", "18000");
+        parent :: __construct($parent);
+    }
 
     static function get_action_parameter()
     {

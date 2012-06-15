@@ -26,7 +26,8 @@ class StudentTrainingChoicesOptionsGroupSynchronization extends GroupSynchroniza
 
     function get_children()
     {
-        $query = 'EXEC [dbo].[sp_structure_training_choice_options] @p_opleiding = ' . $this->get_choices()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_choice_basic] WHERE training_id = ' . $this->get_choices()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
+        
         $options = $this->get_result($query);
 
         $children = array();

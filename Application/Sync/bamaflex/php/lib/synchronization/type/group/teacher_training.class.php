@@ -2,19 +2,16 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
 
-use common\libraries\Utilities;
-
-require_once dirname(__FILE__) . '/training.class.php';
-require_once dirname(__FILE__) . '/user_type_teacher.class.php';
-
 class TeacherTrainingGroupSynchronization extends TrainingGroupSynchronization
 {
-
-    /* (non-PHPdoc)
-     * @see application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
+    
+    /*
+     * (non-PHPdoc) @see
+     * application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
      */
     function get_group_type()
     {
@@ -23,9 +20,9 @@ class TeacherTrainingGroupSynchronization extends TrainingGroupSynchronization
 
     function get_children()
     {
-        $query = 'EXEC [dbo].[sp_structure_courses_parents] @academiejaar = N\'' . $this->get_academic_year() . '\', @departement_id = ' . $this->get_department_id() . ', @opleiding_id = ' . $this->get_parameter(self :: RESULT_PROPERTY_TRAINING_ID);
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE training_id = ' . $this->get_parameter(self :: RESULT_PROPERTY_TRAINING_ID) . ' AND parent_id IS NULL AND exchange = 0';
         $courses = $this->get_result($query);
-
+        
         $children = array();
         while ($course = $courses->next_result(false))
         {

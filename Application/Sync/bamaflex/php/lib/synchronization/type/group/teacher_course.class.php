@@ -6,10 +6,6 @@ namespace application\ehb_sync\bamaflex;
  * @package ehb.sync;
  */
 
-use common\libraries\Utilities;
-
-require_once dirname(__FILE__) . '/course.class.php';
-
 class TeacherCourseGroupSynchronization extends CourseGroupSynchronization
 {
     CONST IDENTIFIER = 'COU_OP';
@@ -32,7 +28,7 @@ class TeacherCourseGroupSynchronization extends CourseGroupSynchronization
     function get_user_official_codes()
     {
         $user_mails = array();
-        if ($this->get_parameter(self :: RESULT_PROPERTY_HAS_CHILDREN) == 0)
+        if ($this->get_parameter(self :: RESULT_PROPERTY_TYPE) != 2)
         {
             $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user]  WHERE programme_id = "' . $this->get_parameter(self :: RESULT_PROPERTY_COURSE_ID) . '" AND type = 2';
             $users = $this->get_result($query);

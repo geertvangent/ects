@@ -15,9 +15,9 @@ class DepartmentGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'DEP';
 
-    const RESULT_PROPERTY_ACADEMIC_YEAR = 'schooljaar';
-    const RESULT_PROPERTY_DEPARTMENT = 'departement';
-    const RESULT_PROPERTY_DEPARTMENT_ID = 'departement_id';
+    const RESULT_PROPERTY_ACADEMIC_YEAR = 'year';
+    const RESULT_PROPERTY_DEPARTMENT = 'name';
+    const RESULT_PROPERTY_DEPARTMENT_ID = 'id';
 
     function get_code()
     {

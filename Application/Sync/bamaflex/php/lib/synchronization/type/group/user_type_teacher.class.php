@@ -2,6 +2,7 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
 
@@ -32,9 +33,10 @@ class UserTypeTeacherGroupSynchronization extends GroupSynchronization
 
     function get_children()
     {
-        $query = 'EXEC [dbo].[sp_structure_trainings] @academiejaar = N\'' . $this->get_academic_year() . '\', @departement_id = ' . $this->get_synchronization()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);
-        $trainings = $this->get_result($query);
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_basic] WHERE faculty_id = ' . $this->get_synchronization()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);
 
+        $trainings = $this->get_result($query);
+        
         $children = array();
         while ($training = $trainings->next_result(false))
         {

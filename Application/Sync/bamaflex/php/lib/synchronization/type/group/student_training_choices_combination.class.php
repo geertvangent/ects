@@ -10,8 +10,8 @@ class StudentTrainingChoicesCombinationGroupSynchronization extends GroupSynchro
 {
     CONST IDENTIFIER = 'CO';
     
-    const RESULT_PROPERTY_CHOICE_COMBINATION = 'keuzerichtingnl';
-    const RESULT_PROPERTY_CHOICE_COMBINATION_ID = 'p_oplkeuzerichting';
+    const RESULT_PROPERTY_CHOICE_COMBINATION = 'name';
+    const RESULT_PROPERTY_CHOICE_COMBINATION_ID = 'id';
 
     function get_combination()
     {

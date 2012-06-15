@@ -13,7 +13,7 @@ class Manager extends WebApplication
     const ACTION_BROWSE = 'browser';
     const ACTION_BAMAFLEX = 'bamaflex';
     
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self :: ACTION_BAMAFLEX;
 
     /**
      * Constructor

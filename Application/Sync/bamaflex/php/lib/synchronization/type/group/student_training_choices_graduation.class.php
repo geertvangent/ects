@@ -10,8 +10,8 @@ class StudentTrainingChoicesGraduationGroupSynchronization extends GroupSynchron
 {
     CONST IDENTIFIER = 'GR';
     
-    const RESULT_PROPERTY_CHOICE_GRADUATION = 'diplafstudrichtafdruknl';
-    const RESULT_PROPERTY_CHOICE_GRADUATION_ID = 'p_oplafstudricht';
+    const RESULT_PROPERTY_CHOICE_GRADUATION = 'name';
+    const RESULT_PROPERTY_CHOICE_GRADUATION_ID = 'id';
 
     function get_graduation()
     {

@@ -27,13 +27,14 @@ class AcademicYearExtraIntakeGroupSynchronization extends GroupSynchronization
 
     function get_user_official_codes()
     {
-        $query = 'EXEC [dbo].[sp_sync_students_intake] @academiejaar = N\'' . $this->get_academic_year() . '\'';
+        $query = 'SELECT DISTINCT id FROM [dbo].[v_discovery_profile_basic]  WHERE company_id LIKE CAST(LEFT(' . $this->get_academic_year() . ', 4) as VARCHAR)';
+        
         $users = $this->get_result($query);
 
         $user_mails = array();
         while ($user = $users->next_result(false))
         {
-            $user_mails[] = $user['p_persoon'];
+            $user_mails[] = $user['id'];
         }
         return $user_mails;
     }

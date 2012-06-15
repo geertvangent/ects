@@ -2,6 +2,7 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
 
@@ -26,9 +27,9 @@ class StudentTrainingCoursesGroupSynchronization extends GroupSynchronization
 
     function get_children()
     {
-        $query = 'EXEC [dbo].[sp_structure_courses_parents] @academiejaar = N\'' . $this->get_academic_year() . '\', @departement_id = ' . $this->get_training()->get_department_id() . ', @opleiding_id = ' . $this->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE training_id = ' . $this->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID)  . ' AND parent_id IS NULL AND exchange = 0';
         $courses = $this->get_result($query);
-
+        
         $children = array();
         while ($course = $courses->next_result(false))
         {

@@ -10,8 +10,8 @@ class StudentTrainingTrajectoriesTemplateSubGroupSynchronization extends GroupSy
 {
     CONST IDENTIFIER = 'SU';
     
-    const RESULT_PROPERTY_TRAJECTORY = 'deeltraject';
-    const RESULT_PROPERTY_TRAJECTORY_ID = 'deeltraject_id';
+    const RESULT_PROPERTY_TRAJECTORY = 'name';
+    const RESULT_PROPERTY_TRAJECTORY_ID = 'id';
 
     function get_main_template()
     {
@@ -32,7 +32,7 @@ class StudentTrainingTrajectoriesTemplateSubGroupSynchronization extends GroupSy
     {
         $user_mails = array();
         
-        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user]  WHERE training_id = "' . $training . '" AND trajectory_type = 1 AND type = 1 AND result != 8 AND trajectory_id = "' . $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID) . '"';
+        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user]  WHERE trajectory_type = 1 AND type = 1 AND result != 8 AND trajectory_id = "' . $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID) . '"';
         $users = $this->get_result($query);
         
         while ($user = $users->next_result(false))

@@ -2,19 +2,16 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
 
-use common\libraries\Utilities;
-
-require_once dirname(__FILE__) . '/training.class.php';
-require_once dirname(__FILE__) . '/user_type_student.class.php';
-
 class StudentTrainingGroupSynchronization extends TrainingGroupSynchronization
 {
-
-    /* (non-PHPdoc)
-     * @see application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
+    
+    /*
+     * (non-PHPdoc) @see
+     * application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
      */
     function get_group_type()
     {

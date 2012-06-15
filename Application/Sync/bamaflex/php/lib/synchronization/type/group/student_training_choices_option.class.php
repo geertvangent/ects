@@ -9,8 +9,8 @@ class StudentTrainingChoicesOptionGroupSynchronization extends GroupSynchronizat
 {
     CONST IDENTIFIER = 'OP';
 
-    const RESULT_PROPERTY_CHOICE_OPTION = 'keuzeoptieafdruknl';
-    const RESULT_PROPERTY_CHOICE_OPTION_ID = 'p_oplkeuzeoptie';
+    const RESULT_PROPERTY_CHOICE_OPTION = 'name';
+    const RESULT_PROPERTY_CHOICE_OPTION_ID = 'id';
 
     function get_option()
     {

@@ -1,6 +1,8 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
+use common\libraries\PlatformSetting;
+
 use common\libraries\Mdb2ResultSet;
 use common\libraries\Utilities;
 
@@ -31,7 +33,7 @@ abstract class Synchronization
      */
     function get_academic_year()
     {
-        return $this->get_data_manager()->get_academic_year();
+        return PlatformSetting::get('academic_year', __NAMESPACE__);
     }
 
     /**

@@ -8,6 +8,7 @@ use common\libraries\Filesystem;
 use common\libraries\Utilities;
 
 /**
+ *
  * @package ehb.sync;
  */
 
@@ -41,55 +42,12 @@ class UserSynchronization extends Synchronization
 
     static function factory($type)
     {
-        $file = dirname(__FILE__) . '/user/' . $type . '.class.php';
         $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'UserSynchronization';
-        if (file_exists($file))
+        if (class_exists($class))
         {
-            require_once $file;
             return new $class();
         }
     }
-
-    //     function process_data($person)
-    //     {
-    //         $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
-    
-
-    //         $user_exists = $user instanceof User;
-    
-
-    //         $utf_last_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_LAST_NAME]);
-    //         $utf_first_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_FIRST_NAME]);
-    
-
-    //         if (! $user_exists)
-    //         {
-    //             $user = new User();
-    //             $user->set_lastname($utf_last_name);
-    //             $user->set_firstname($utf_first_name);
-    //             $user->set_active(1);
-    //             $user->set_status(1);
-    //             $user->set_username($person[self :: RESULT_PROPERTY_PERSON_ID]);
-    //             $user->set_email($person[self :: RESULT_PROPERTY_PERSON_ID] . '@void.ehb.be');
-    //             $user->set_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
-    //             $user->set_auth_source('cas');
-    //             $user->set_password('PLACEHOLDER');
-    //             $user->set_expiration_date(0);
-    //             $user->set_activation_date(0);
-    //             $user->set_version_quota(20);
-    //             $user->set_database_quota(300);
-    //             $user->set_disk_quota(209715200);
-    //             $user->set_platformadmin(0);
-    
-
-    //             if ($user->create())
-    //             {
-    //                 echo 'Added: ' . $utf_first_name . ' ' . $utf_last_name . "\n";
-    //             }
-    //         }
-    //         flush();
-    //     }  
-    
 
     function get_type()
     {

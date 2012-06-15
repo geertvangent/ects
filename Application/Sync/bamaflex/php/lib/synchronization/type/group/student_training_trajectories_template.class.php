@@ -2,6 +2,7 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
 
@@ -26,9 +27,10 @@ class StudentTrainingTrajectoriesTemplateGroupSynchronization extends GroupSynch
 
     function get_children()
     {
-        $query = 'EXEC [dbo].[sp_structure_trajectories] @academiejaar = N\'' . $this->get_academic_year() . '\', @departement_id = ' . $this->get_trajectory()->get_training()->get_user_type()->get_department()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID) . ', @opleiding_id = ' . $this->get_trajectory()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_trajectory_basic] WHERE training_id = ' . $this->get_trajectory()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
+        
         $trajectories = $this->get_result($query);
-
+        
         $children = array();
         while ($trajectory = $trajectories->next_result(false))
         {

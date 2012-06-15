@@ -11,8 +11,8 @@ abstract class TrainingGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'TRA';
 
-    const RESULT_PROPERTY_TRAINING = 'opleiding';
-    const RESULT_PROPERTY_TRAINING_ID = 'opleiding_id';
+    const RESULT_PROPERTY_TRAINING = 'name';
+    const RESULT_PROPERTY_TRAINING_ID = 'id';
 
     /**
      * @return string
