@@ -1,14 +1,14 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\package\Installer;
+use common\libraries\WebApplicationInstaller;
 
 /**
+ *
  * @author Hans De Bisschop
  * @package application.discovery
  */
-
-class DiscoveryInstaller extends Installer
+class DiscoveryInstaller extends WebApplicationInstaller
 {
 
     /**
@@ -18,6 +18,5 @@ class DiscoveryInstaller extends Installer
     {
         parent :: __construct($values, DiscoveryDataManager :: get_instance());
     }
-
 }
 ?>
