@@ -26,6 +26,8 @@ class ApplicationForm extends FormValidator
         $this->add_html_editor(Application :: PROPERTY_DESCRIPTION, Translation :: get('ApplicationDescription'), true);
         $this->addElement('text', Application :: PROPERTY_URL, Translation :: get('ApplicationUrl'), array(
                 "size" => "100"));
+        $this->addElement('text', Application :: PROPERTY_CODE, Translation :: get('ApplicationCode'), array(
+                "size" => "50"));
         
         if ($this->application->get_id())
         {
@@ -55,6 +57,8 @@ class ApplicationForm extends FormValidator
         $defaults[Application :: PROPERTY_NAME] = $application->get_name();
         $defaults[Application :: PROPERTY_DESCRIPTION] = $application->get_description();
         $defaults[Application :: PROPERTY_URL] = $application->get_url();
+        $defaults[Application :: PROPERTY_CODE] = $application->get_code();
+        
         parent :: setDefaults($defaults);
     }
 }

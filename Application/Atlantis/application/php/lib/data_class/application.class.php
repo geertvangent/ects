@@ -18,6 +18,7 @@ class Application extends DataClass
     const PROPERTY_NAME = 'name';
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_URL = 'url';
+    const PROPERTY_CODE = 'code';
 
     /**
      * Get the default properties
@@ -29,6 +30,7 @@ class Application extends DataClass
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
         $extended_property_names[] = self :: PROPERTY_URL;
+        $extended_property_names[] = self :: PROPERTY_CODE;
 
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -92,6 +94,16 @@ class Application extends DataClass
     function set_url($url)
     {
         $this->set_default_property(self :: PROPERTY_URL, $url);
+    }
+    
+    function get_code()
+    {
+        return $this->get_default_property(self :: PROPERTY_CODE);
+    }
+    
+    function set_code($code)
+    {
+        $this->set_default_property(self :: PROPERTY_CODE, $code);
     }
 
     /**

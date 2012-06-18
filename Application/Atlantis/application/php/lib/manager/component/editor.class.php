@@ -31,6 +31,7 @@ class EditorComponent extends Manager
                 $application->set_name($values[Application :: PROPERTY_NAME]);
                 $application->set_description($values[Application :: PROPERTY_DESCRIPTION]);
                 $application->set_url($values[Application :: PROPERTY_URL]);
+                $application->set_code($values[Application :: PROPERTY_CODE]);
                 
                 $success = $application->update();
                 

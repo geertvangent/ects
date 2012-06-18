@@ -1,4 +1,4 @@
-TypeName = "Context"
+TypeName = "User group"
 BrowseApplications = "Browse applications"
 BrowseApplicationsDescription = "Browse and search the list of available applications"
 CreateApplication = "Create a new application"

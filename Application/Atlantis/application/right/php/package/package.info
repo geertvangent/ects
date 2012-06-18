@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <packages>
 	<package>
-		<name>Atlantis</name>
-		<code>atlantis</code>
-		<context>application\atlantis</context>
+		<name>Right</name>
+		<code>right</code>
+		<context>application\atlantis\application\right</context>
 		<section>application</section>
 		<category>research</category>
 		<authors></authors>
@@ -25,14 +25,11 @@
 			dialogues Timaeus and Critias, written about 360 BC.
 		</description>
 		<homepage></homepage>
-		<dependencies>
-			<server>
-				<dependency>
-					<id>php</id>
-					<version operator="4">5.3.0</version>
-					<relation>1</relation>
-				</dependency>
-			</server>
-		</dependencies>
+		<pre-depends>
+			<dependency type="registration">
+				<id>application\atlantis\application</id>
+				<version operator="4">3.0.0</version>
+			</dependency>
+		</pre-depends>
 	</package>
 </packages>

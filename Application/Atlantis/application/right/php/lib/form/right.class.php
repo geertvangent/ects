@@ -27,6 +27,8 @@ class RightForm extends FormValidator
         $this->addElement('text', Right :: PROPERTY_NAME, Translation :: get('RightName'), array("size" => "50"));
         $this->addRule(Right :: PROPERTY_NAME, Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
         $this->add_html_editor(Right :: PROPERTY_DESCRIPTION, Translation :: get('RightDescription'), true);
+        $this->addElement('text', Right :: PROPERTY_CODE, Translation :: get('RightCode'), array(
+                "size" => "50"));
         
         if ($this->right->get_id())
         {
@@ -56,6 +58,8 @@ class RightForm extends FormValidator
         $defaults[Right :: PROPERTY_NAME] = $right->get_name();
         $defaults[Right :: PROPERTY_DESCRIPTION] = $right->get_description();
         $defaults[Entitlement :: PROPERTY_RIGHT_ID] = $right->get_id();
+        $defaults[Right::PROPERTY_CODE] = $right->get_code();
+        
         parent :: setDefaults($defaults);
     }
 }

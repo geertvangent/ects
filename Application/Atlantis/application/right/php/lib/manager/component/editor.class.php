@@ -31,6 +31,7 @@ class EditorComponent extends Manager
                 
                 $right->set_name($values[Right :: PROPERTY_NAME]);
                 $right->set_description($values[Right :: PROPERTY_DESCRIPTION]);
+                $right->set_code($values[Right :: PROPERTY_CODE]);
                 
                 $success = $right->update();
                 

@@ -6,5 +6,7 @@
 		<property name="name" type="text" length="250" />
 		<property name="description" type="text" />
 		<property name="url" type="text" length="250" />
+		<property name="code" type="text" length="250" />
+
 	</properties>
 </object>
