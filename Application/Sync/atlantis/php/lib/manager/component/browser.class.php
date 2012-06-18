@@ -1,11 +1,11 @@
 <?php
-namespace application\ehb_sync;
-
-use common\libraries\Utilities;
+namespace application\ehb_sync\atlantis;
 
 use common\libraries\Theme;
 
 use common\libraries\Translation;
+
+use common\libraries\Utilities;
 
 use common\libraries\DelegateComponent;
 
@@ -18,7 +18,8 @@ class BrowserComponent extends Manager implements DelegateComponent
     function run()
     {
         $this->display_header();
-        $types = array(self :: ACTION_BAMAFLEX, self :: ACTION_ATLANTIS);
+        
+        $types = array(self :: ACTION_DISCOVERY);
         
         $html = array();
         foreach ($types as $type)
@@ -31,6 +32,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</a>';
         }
         echo implode("\n", $html);
+        
         $this->display_footer();
     }
 

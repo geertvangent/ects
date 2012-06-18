@@ -12,8 +12,9 @@ class Manager extends WebApplication
     const APPLICATION_NAME = 'ehb_sync';
     const ACTION_BROWSE = 'browser';
     const ACTION_BAMAFLEX = 'bamaflex';
+    const ACTION_ATLANTIS = 'atlantis';
     
-    const DEFAULT_ACTION = self :: ACTION_BAMAFLEX;
+    const DEFAULT_ACTION = self :: ACTION_BROWSE;
 
     /**
      * Constructor

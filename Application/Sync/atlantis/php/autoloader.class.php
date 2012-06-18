@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync;
+namespace application\ehb_sync\atlantis;
 
 class Autoloader
 {
@@ -16,9 +16,8 @@ class Autoloader
          'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
          'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
-         'AtlantisComponent' => '/lib/manager/component/atlantis.class.php',
-         'BamaflexComponent' => '/lib/manager/component/bamaflex.class.php',
          'BrowserComponent' => '/lib/manager/component/browser.class.php',
+         'DiscoveryComponent' => '/lib/manager/component/discovery.class.php',
          'Activator' => '/package/activate/activator.class.php',
          'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'
