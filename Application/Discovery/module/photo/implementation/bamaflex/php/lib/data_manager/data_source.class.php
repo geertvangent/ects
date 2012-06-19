@@ -2,7 +2,6 @@
 namespace application\discovery\module\photo\implementation\bamaflex;
 
 use common\libraries\ImageManipulation;
-
 use common\libraries\Theme;
 use common\libraries\Filesystem;
 use common\libraries\Text;
@@ -33,11 +32,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             {
                 $object = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
 
-                Filesystem :: write_to_file($path, $object->photo);
+                if (! empty($object->photo))
+                {
+                    Filesystem :: write_to_file($path, $object->photo);
 
-                $image_manipulation = ImageManipulation::factory($path);
-                $image_manipulation->scale(600, 600, ImageManipulation::SCALE_INSIDE);
-                $image_manipulation->write_to_file($path);
+                    $image_manipulation = ImageManipulation :: factory($path);
+                    $image_manipulation->scale(600, 600, ImageManipulation :: SCALE_INSIDE);
+                    $image_manipulation->write_to_file($path);
+                }
+                else
+                {
+                    Filesystem :: copy_file(Theme :: get_common_image_system_path() . 'unknown.jpg', $path);
+                }
 
                 // $photo = new Photo();
                 // $photo->set_mime_type('image/jpeg');
