@@ -51,7 +51,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             }
         }
 
-        return Path :: get_path(WEB_FILE_PATH) . 'cache/' . $relative_path;
+        return Path :: get(WEB_FILE_PATH) . 'cache/' . $relative_path;
     }
 
     function retrieve_faculty($faculty_id)
