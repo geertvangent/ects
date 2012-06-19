@@ -34,10 +34,10 @@ class AcademicYearGroupSynchronization extends GroupSynchronization
         $children = array();
         while ($department = $departments->next_result())
         {
-            if ($department['id'] != 59)
-            {
+//             if ($department['id'] != 59)
+//             {
                 $children[] = GroupSynchronization :: factory('department', $this, $department);
-            }
+//             }
         }
         
         $children[] = GroupSynchronization :: factory('academic_year_extra', $this);
