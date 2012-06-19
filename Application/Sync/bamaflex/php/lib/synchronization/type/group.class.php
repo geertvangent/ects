@@ -71,8 +71,11 @@ class GroupSynchronization extends Synchronization
 
     /**
      * Enter description here .
+     *
+     *
+     *
      * ..
-     * 
+     *
      * @param $type string           
      * @param $synchronization GroupSynchronization           
      * @param $parameters array           
@@ -177,6 +180,16 @@ class GroupSynchronization extends Synchronization
             
             self :: log('added', $this->current_group->get_name());
             flush();
+        }
+        else
+        {
+            $name = $this->convert_to_utf8($this->get_name());
+            if ($this->current_group->get_name() != $name)
+            {
+                $this->current_group->set_name($name);
+                $this->current_group->set_description($name);
+                $this->current_group->update();
+            }
         }
         
         return $this->current_group;
