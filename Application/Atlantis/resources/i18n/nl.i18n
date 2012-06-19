@@ -1,0 +1,4 @@
+TypeName = "Atlantis"
+UsersGroups = "Gebruikers/groepen"
+ApplicationComponent = "Toepassing"
+RoleComponent = "Functie"
