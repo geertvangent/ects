@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
+use common\libraries\Display;
+
 use common\libraries\Breadcrumb;
 
 use common\libraries\BreadcrumbTrail;
@@ -169,13 +171,21 @@ class Module extends \application\discovery\module\course_results\Module
         
         return implode("\n", $html);
     }
-
+    
     /*
      * (non-PHPdoc) @see
      * application\discovery\module\course_results.Module::render()
      */
     function render()
     {
+        $entities = array();
+        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
+        
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_course_results_parameters()))
+        {
+            Display :: not_allowed();
+        }
         $html = array();
         $html[] = $this->get_course_properties_table() . '</br>';
         $html[] = $this->get_course_results_table();
@@ -210,7 +220,7 @@ class Module extends \application\discovery\module\course_results\Module
         
         $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
                 'data_source' => $data_source));
-         
+        
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $course->get_year();

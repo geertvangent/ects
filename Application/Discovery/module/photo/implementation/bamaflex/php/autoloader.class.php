@@ -20,8 +20,8 @@ class Autoloader
          'GalleryBrowserTableCellRenderer' => '/lib/gallery_browser/gallery_browser_table_cell_renderer.class.php',
          'GalleryBrowserTableDataProvider' => '/lib/gallery_browser/gallery_browser_table_data_provider.class.php',
          'GalleryBrowserTablePropertyModel' => '/lib/gallery_browser/gallery_browser_table_property_model.class.php',
-         'application\discovery\module\profile\implementation\bamaflex\RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
-         'application\discovery\module\profile\implementation\bamaflex\RightsUserEntity' => '/lib/rights_entity/user.class.php',
+         'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
+         'RightsUserEntity' => '/lib/rights_entity/user.class.php',
          'DefaultGalleryTableCellRenderer' => '/lib/tables/photo_gallery_table/default_gallery_table_cell_renderer.class.php',
          'DefaultGalleryTablePropertyModel' => '/lib/tables/photo_gallery_table/default_gallery_table_property_model.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php'

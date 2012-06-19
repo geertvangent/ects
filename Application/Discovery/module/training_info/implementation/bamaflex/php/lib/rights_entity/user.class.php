@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\bamaflex;
+namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use common\libraries\InCondition;
 use common\libraries\NotCondition;
@@ -22,12 +22,14 @@ class RightsUserEntity extends UserEntity
 {
     /**
      * Limits the users by id
+     * 
      * @var Array<int>
      */
     private $limited_users;
     
     /**
      * Excludes the users by id
+     * 
      * @var Array<int>
      */
     private $excluded_users;
@@ -67,7 +69,7 @@ class RightsUserEntity extends UserEntity
     /**
      * Builds the condition with the limited and excluded users
      *
-     * @param Condition $condition
+     * @param $condition Condition           
      * @return Condition
      */
     public function get_condition(Condition $condition)
@@ -102,7 +104,8 @@ class RightsUserEntity extends UserEntity
     }
 
     /**
-     * Retrieves the type for the advanced element finder for the simple rights editor
+     * Retrieves the type for the advanced element finder for the simple rights
+     * editor
      */
     function get_element_finder_type()
     {

@@ -29,8 +29,8 @@ class Autoloader
          'SubTrajectoryCourse' => '/lib/sub_trajectory_course.class.php',
          'Trajectory' => '/lib/trajectory.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
-         'application\discovery\module\profile\implementation\bamaflex\RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
-         'application\discovery\module\profile\implementation\bamaflex\RightsUserEntity' => '/lib/rights_entity/user.class.php',
+         'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
+         'RightsUserEntity' => '/lib/rights_entity/user.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php'
     );
 

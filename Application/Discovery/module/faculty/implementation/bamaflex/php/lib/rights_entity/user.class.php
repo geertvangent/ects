@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\bamaflex;
+namespace application\discovery\module\faculty\implementation\bamaflex;
 
 use common\libraries\InCondition;
 use common\libraries\NotCondition;
