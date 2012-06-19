@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `chamilo` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `chamilo`;
+CREATE DATABASE  IF NOT EXISTS `desiderius` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `desiderius`;
 -- MySQL dump 10.13  Distrib 5.5.9, for Win32 (x86)
 --
 -- Host: localhost    Database: chamilo
