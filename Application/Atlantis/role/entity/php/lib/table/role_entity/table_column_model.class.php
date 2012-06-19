@@ -18,8 +18,8 @@ class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
     {
         if (! $this->get_component()->has_entity())
         {
-            $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_ENTITY_TYPE));
-            $this->add_column(new ObjectTableColumn('entity_name'));
+            $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_ENTITY_TYPE, false));
+            $this->add_column(new ObjectTableColumn('entity_name', false));
         }
         if (! $this->get_component()->has_role_id())
         {

@@ -14,6 +14,11 @@ class CreatorComponent extends Manager
 
     function run()
     {
+        if (! $this->get_user()->is_platform_admin())
+        {
+            $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
+        }
+        
         $form = new EntityForm($this, $this->get_url());
         
         if ($form->validate())

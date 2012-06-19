@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
+use common\libraries\InCondition;
+
 use common\libraries\AndCondition;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
@@ -32,8 +34,14 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         }
         if ($this->application_id)
         {
-            $right = \application\atlantis\application\right\DataManager :: retrieve(\application\atlantis\application\right\Right :: class_name(), (int) $this->application_id);
-            return new EqualityCondition(Entitlement :: PROPERTY_ROLE_ID, $right->get_id());
+            $condition = new EqualityCondition(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID, $this->application_id);
+            $rights = \application\atlantis\application\right\DataManager :: retrieves(\application\atlantis\application\right\Right :: class_name(), $condition);
+            $right_ids = array();
+            while ($right = $rights->next_result())
+            {
+                $right_ids[] = $right->get_id();
+            }
+            return new InCondition(Entitlement :: PROPERTY_RIGHT_ID, $right_ids);
         }
     }
 
