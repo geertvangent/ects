@@ -4,7 +4,7 @@
 
 		<category name="visual">
 
-			<setting name="theme" field="select" default="aqua">
+			<setting name="theme" field="select" default="eagle">
 				<options type="dynamic" source="get_themes" />
 			</setting>
 
