@@ -143,7 +143,6 @@ class CreateUserSynchronization extends UserSynchronization
         $user->set_password('PLACEHOLDER');
         $user->set_expiration_date(0);
         $user->set_activation_date(0);
-        $user->set_version_quota(20);
         $user->set_database_quota(300);
         $user->set_disk_quota(209715200);
         $user->set_platformadmin(0);
