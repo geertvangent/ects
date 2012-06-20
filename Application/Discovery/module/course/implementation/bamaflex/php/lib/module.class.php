@@ -29,7 +29,7 @@ use common\libraries\Translation;
 class Module extends \application\discovery\module\course\Module
 {
     const PARAM_SOURCE = 'source';
-    
+
     const TAB_GENERAL = 1;
     const TAB_MATERIALS = 2;
     const TAB_ACTIVITIES = 3;
@@ -47,7 +47,7 @@ class Module extends \application\discovery\module\course\Module
         $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
         $parameter = new Parameters();
-        
+
         if ($programme)
         {
             $parameter->set_programme_id($programme);
@@ -57,9 +57,9 @@ class Module extends \application\discovery\module\course\Module
             $parameter->set_source($source);
         }
         return $parameter;
-    
+
     }
-    
+
     /*
      * (non-PHPdoc) @see application\discovery\module\course.Module::render()
      */
@@ -67,17 +67,17 @@ class Module extends \application\discovery\module\course\Module
     {
         $html = array();
         $course = $this->get_course();
-        
+
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_year()));
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_faculty()));
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_training()));
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_name()));
-        
+
         if (! $course instanceof Course)
         {
             return Display :: error_message(Translation :: get('NoSuchCourse'), true);
         }
-        
+
         $tabs = new DynamicTabsRenderer('course');
         $tabs->add_tab(new DynamicContentTab(self :: TAB_GENERAL, Translation :: get('General'), Theme :: get_image_path() . 'tabs/' . self :: TAB_GENERAL . '.png', $this->get_general()));
         if ($course->has_materials())
@@ -96,9 +96,9 @@ class Module extends \application\discovery\module\course\Module
         {
             $tabs->add_tab(new DynamicContentTab(self :: TAB_CONTENT, Translation :: get('Content'), Theme :: get_image_path() . 'tabs/' . self :: TAB_CONTENT . '.png', $this->get_content()));
         }
-        
+
         $tabs->add_tab(new DynamicContentTab(self :: TAB_EVALUATIONS, Translation :: get('Evaluations'), Theme :: get_image_path() . 'tabs/' . self :: TAB_EVALUATIONS . '.png', $this->get_evaluations()));
-        
+
         $html[] = $tabs->render();
         return implode("\n", $html);
     }
@@ -106,24 +106,24 @@ class Module extends \application\discovery\module\course\Module
     function get_general()
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        
+
         $training_module_instance = \application\discovery\Module :: exists('application\discovery\module\training\implementation\bamaflex', array(
                 'data_source' => $data_source));
-        
+
         $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
                 'data_source' => $data_source));
-        
+
         $teaching_assignment_module_instance = \application\discovery\Module :: exists('application\discovery\module\teaching_assignment\implementation\bamaflex', array(
                 'data_source' => $data_source));
-        
+
         $course = $this->get_course();
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $course->get_year();
-        
+
         $history = array();
         $courses = $course->get_all($this->get_module_instance());
-        
+
         foreach ($courses as $course_history)
         {
             $parameters = new Parameters($course_history->get_id(), $course_history->get_source());
@@ -131,7 +131,7 @@ class Module extends \application\discovery\module\course\Module
             $history[] = '<a href="' . $link . '">' . $course_history->get_year() . '</a>';
         }
         $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
-        
+
         if ($training_info_module_instance)
         {
             $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($course->get_training_id(), $course->get_source());
@@ -142,7 +142,7 @@ class Module extends \application\discovery\module\course\Module
         {
             $properties[Translation :: get('Training')] = $course->get_training();
         }
-        
+
         if ($training_module_instance)
         {
             $parameters = new \application\discovery\module\training\implementation\bamaflex\Parameters($course->get_faculty_id(), $course->get_source());
@@ -153,27 +153,27 @@ class Module extends \application\discovery\module\course\Module
         {
             $properties[Translation :: get('Faculty')] = $course->get_faculty();
         }
-        
+
         $properties[Translation :: get('Credits')] = $course->get_credits();
         $properties[Translation :: get('Weight')] = $course->get_weight();
         $properties[Translation :: get('TrajectoryPart')] = $course->get_trajectory_part();
         $properties[Translation :: get('ProgrammeType')] = Translation :: get($course->get_programme_type_string());
-        
+
         if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
         {
             $programme_parts = array();
-            
+
             foreach ($course->get_children() as $child)
             {
                 $parameters = new Parameters($child->get_id(), $child->get_source());
                 $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
                 $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
-                $programme_parts[] = Translation :: get('CreditAmount', array('COURSE' => $link, 
+                $programme_parts[] = Translation :: get('CreditAmount', array('COURSE' => $link,
                         'CREDITS' => $child->get_credits()));
             }
             $properties[Translation :: get('ProgrammeParts')] = implode('<br/>', $programme_parts);
         }
-        
+
         if ($course->get_programme_type() != Course :: PROGRAMME_TYPE_COMPLEX)
         {
             if (! is_null($course->get_timeframe_visual_id()))
@@ -181,11 +181,11 @@ class Module extends \application\discovery\module\course\Module
                 $image = '<img src="' . Theme :: get_image_path() . 'general/timeframe/' . $course->get_timeframe_visual_id() . '.png" alt="' . Translation :: get($course->get_timeframe()) . '" title="' . Translation :: get($course->get_timeframe()) . '"/>';
                 $properties[Translation :: get('Timeframe')] = $image;
                 LegendTable :: get_instance()->add_symbol($image, Translation :: get($course->get_timeframe()), Translation :: get('Timeframe'));
-                
+
                 $properties[Translation :: get('TimeframeParts')] = $course->get_timeframe_parts_string();
             }
         }
-        
+
         if ($course->get_level())
         {
             $properties[Translation :: get('Level')] = $course->get_level();
@@ -198,7 +198,7 @@ class Module extends \application\discovery\module\course\Module
         {
             $properties[Translation :: get('Languages')] = $course->get_languages_string();
         }
-        
+
         if ($course->has_coordinators())
         {
             if ($teaching_assignment_module_instance)
@@ -206,7 +206,7 @@ class Module extends \application\discovery\module\course\Module
                 $coordinators = array();
                 foreach ($course->get_teachers() as $coordinator)
                 {
-                    
+
                     if ($coordinator->is_coordinator())
                     {
                         $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($coordinator->get_person_id());
@@ -214,7 +214,7 @@ class Module extends \application\discovery\module\course\Module
                         {
                             $parameters = new \application\discovery\module\teaching_assignment\Parameters($user->get_id());
                             $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
-                            
+
                             $coordinators[] = '<a href="' . $url . '">' . $coordinator . '</a>';
                         }
                         else
@@ -230,7 +230,7 @@ class Module extends \application\discovery\module\course\Module
                 $properties[Translation :: get('Coordinators')] = $course->get_coordinators_string();
             }
         }
-        
+
         if ($course->has_teachers())
         {
             if ($teaching_assignment_module_instance)
@@ -245,7 +245,7 @@ class Module extends \application\discovery\module\course\Module
                         {
                             $parameters = new \application\discovery\module\teaching_assignment\Parameters($user->get_id());
                             $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
-                            
+
                             $teachers[] = '<a href="' . $url . '">' . $teacher . '</a>';
                         }
                         else
@@ -261,12 +261,12 @@ class Module extends \application\discovery\module\course\Module
                 $properties[Translation :: get('Teachers')] = $course->get_teachers_string();
             }
         }
-        
+
         foreach ($course->get_costs() as $cost)
         {
             $properties[Translation :: get($cost->get_type_string())] = $cost->get_price_string();
         }
-        
+
         $images = array();
         $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/degree.png" alt="' . Translation :: get('DegreePossible') . '" title="' . Translation :: get('DegreePossible') . '"/>';
         LegendTable :: get_instance()->add_symbol($image, Translation :: get('DegreePossible'), Translation :: get('FollowingPossible'));
@@ -286,7 +286,7 @@ class Module extends \application\discovery\module\course\Module
                 $images[] = $image;
             }
         }
-        
+
         if (! is_null($course->get_following_impossible()->get_exam_degree()))
         {
             if ($course->get_following_impossible()->get_exam_degree())
@@ -302,7 +302,7 @@ class Module extends \application\discovery\module\course\Module
                 $images[] = $image;
             }
         }
-        
+
         if (! is_null($course->get_following_impossible()->get_exam_credit()))
         {
             if ($course->get_following_impossible()->get_exam_credit())
@@ -318,13 +318,13 @@ class Module extends \application\discovery\module\course\Module
                 $images[] = $image;
             }
         }
-        
+
         $properties[Translation :: get('FollowingPossible')] = implode(' ', $images);
-        
+
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $photo_module_instance = \application\discovery\Module :: exists('application\discovery\module\photo\implementation\bamaflex', array(
                 'data_source' => $data_source));
-        
+
         if ($photo_module_instance)
         {
             $buttons = array();
@@ -332,31 +332,31 @@ class Module extends \application\discovery\module\course\Module
             $parameters = new \application\discovery\module\photo\Parameters();
             $parameters->set_programme_id($course->get_id());
             $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_STUDENT);
-            
+
             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
-            $image = Theme :: get_image('type\2', 'png', Translation :: get('Students', null, 'application\discovery\module\photo'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
+            $image = Theme :: get_image('type/2', 'png', Translation :: get('Students', null, 'application\discovery\module\photo'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
             $buttons[] = $image;
             LegendTable :: get_instance()->add_symbol($image, Translation :: get('Students', null, 'application\discovery\module\photo
                     '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
-            
+
             // teachers
             $parameters = new \application\discovery\module\photo\Parameters();
             $parameters->set_programme_id($course->get_id());
             $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_TEACHER);
-            
+
             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
-            
-            $image = Theme :: get_image('type\1', 'png', Translation :: get('Teachers', null, 'application\discovery\module\photo
+
+            $image = Theme :: get_image('type/1', 'png', Translation :: get('Teachers', null, 'application\discovery\module\photo
                     '), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
             $buttons[] = $image;
             LegendTable :: get_instance()->add_symbol($image, Translation :: get('Teachers', null, 'application\discovery\module\photo
                     '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
-            
+
             $properties[Translation :: get('Photos')] = implode("\n", $buttons);
         }
-        
+
         $table = new PropertiesTable($properties);
-        
+
         $html[] = $table->toHtml();
         return implode("\n", $html);
     }
@@ -365,7 +365,7 @@ class Module extends \application\discovery\module\course\Module
     {
         $course = $this->get_course();
         $tabs = new DynamicTabsRenderer('course_materials');
-        
+
         if ($course->has_materials(Material :: TYPE_REQUIRED))
         {
             $tabs->add_tab(new DynamicContentTab(Material :: TYPE_REQUIRED, Translation :: get('Required'), null, $this->get_materials_by_type(Material :: TYPE_REQUIRED)));
@@ -374,14 +374,14 @@ class Module extends \application\discovery\module\course\Module
         {
             $tabs->add_tab(new DynamicContentTab(Material :: TYPE_OPTIONAL, Translation :: get('Optional'), null, $this->get_materials_by_type(Material :: TYPE_OPTIONAL)));
         }
-        
+
         return $tabs->render();
     }
 
     function get_materials_by_type($type)
     {
         $course = $this->get_course();
-        
+
         $html = array();
         if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
         {
@@ -396,7 +396,7 @@ class Module extends \application\discovery\module\course\Module
                 {
                     $tabs->add_tab(new DynamicContentTab($child->get_id(), $child->get_name(), null, $this->get_course_materials_by_type($child, $type)));
                 }
-            
+
             }
             $html[] = $tabs->render();
         }
@@ -411,7 +411,7 @@ class Module extends \application\discovery\module\course\Module
     {
         $html = array();
         $table_data = array();
-        
+
         // if (count($course->get_materials_by_type($type)) > 0)
         // {
         // $var = ($type == Material :: TYPE_REQUIRED ? 'Required' :
@@ -447,7 +447,7 @@ class Module extends \application\discovery\module\course\Module
                 {
                     $table_row[] = '';
                 }
-                
+
                 if ($material->get_for_sale())
                 {
                     $image = '<img src="' . Theme :: get_image_path() . 'material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' . Translation :: get('IsForSale') . '"/>';
@@ -460,13 +460,13 @@ class Module extends \application\discovery\module\course\Module
                     LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsNotForSale'), Translation :: get('ForSale'));
                     $table_row[] = $image;
                 }
-                
+
                 $table_data[] = $table_row;
             }
         }
-        
+
         $cost = $course->get_costs_by_type(Cost :: TYPE_MATERIAL);
-        
+
         if (count($table_data) > 0 || ($cost && $type == Material :: TYPE_REQUIRED && $cost->get_price()))
         {
             $table = new SortableTable($table_data);
@@ -480,19 +480,19 @@ class Module extends \application\discovery\module\course\Module
             $table->set_header(7, Translation :: get('Remarks'), false);
             $table->set_header(8, Translation :: get('Price'), false);
             $table->set_header(9, '', false);
-            
+
             $html[] = $table->as_html($cost->get_price_string(), 8);
         }
-        
+
         return implode("\n", $html);
     }
 
     function get_activities()
     {
         $course = $this->get_course();
-        
+
         $html = array();
-        
+
         if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
         {
             $tabs = new DynamicTabsRenderer('course_activities');
@@ -506,7 +506,7 @@ class Module extends \application\discovery\module\course\Module
                 {
                     $tabs->add_tab(new DynamicContentTab($child->get_id(), $child->get_name(), null, $this->get_course_activities($child)));
                 }
-            
+
             }
             $html[] = $tabs->render();
         }
@@ -514,7 +514,7 @@ class Module extends \application\discovery\module\course\Module
         {
             $html[] = $this->get_course_activities($course);
         }
-        
+
         return implode("\n", $html);
     }
 
@@ -522,7 +522,7 @@ class Module extends \application\discovery\module\course\Module
     {
         $html = array();
         $table_data = array();
-        
+
         foreach ($course->get_activities() as $activity)
         {
             if ($activity instanceof ActivityDescription)
@@ -535,19 +535,19 @@ class Module extends \application\discovery\module\course\Module
             }
             elseif ($activity instanceof ActivityStructured)
             {
-                
+
                 $table_row = array();
                 $table_row[] = $activity->get_group();
                 $table_row[] = $activity->get_name();
                 $table_row[] = Translation :: get('ActivityTime', array('TIME' => $activity->get_time()));
                 // $table_row[] = $activity->get_remarks();
                 // $table_row[] = $activity->get_description();
-                
+
                 $table_data[] = $table_row;
             }
         }
         $total = $course->get_activities_by_type(ActivityTotal :: CLASS_NAME);
-        
+
         if (count($table_data) > 0 || $total)
         {
             $table = new SortableTable($table_data);
@@ -556,7 +556,7 @@ class Module extends \application\discovery\module\course\Module
             $table->set_header(2, Translation :: get('Time'), false);
             // $table->set_header(3, Translation :: get('Remarks'), false);
             // $table->set_header(4, Translation :: get('Description'), false);
-            
+
             $total = $course->get_activities_by_type(ActivityTotal :: CLASS_NAME);
             if ($total)
             {
@@ -567,7 +567,7 @@ class Module extends \application\discovery\module\course\Module
                 $html[] = $table->as_html();
             }
         }
-        
+
         return implode("\n", $html);
     }
 
@@ -590,7 +590,7 @@ class Module extends \application\discovery\module\course\Module
     {
         $course = $this->get_course();
         $html = array();
-        
+
         if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
         {
             $tabs = new DynamicTabsRenderer('course_competences_' . $type);
@@ -604,7 +604,7 @@ class Module extends \application\discovery\module\course\Module
                 {
                     $tabs->add_tab(new DynamicContentTab($child->get_id(), $child->get_name(), null, $this->get_course_competences_by_type($child, $type)));
                 }
-            
+
             }
             $html[] = $tabs->render();
         }
@@ -612,15 +612,15 @@ class Module extends \application\discovery\module\course\Module
         {
             $html[] = $this->get_course_competences_by_type($course, $type);
         }
-        
+
         return implode("\n", $html);
-    
+
     }
 
     function get_course_competences_by_type($course, $type)
     {
         $table_data = array();
-        
+
         foreach ($course->get_competences_by_type($type) as $competence)
         {
             if ($competence instanceof CompetenceDescription)
@@ -638,11 +638,11 @@ class Module extends \application\discovery\module\course\Module
                 // $table_row[] = $competence->get_summary();
                 $table_row[] = $competence->get_description();
                 $table_row[] = $competence->get_level();
-                
+
                 $table_data[] = $table_row;
             }
         }
-        
+
         if (count($table_data) > 0)
         {
             $table = new SortableTable($table_data);
@@ -652,7 +652,7 @@ class Module extends \application\discovery\module\course\Module
             $table->set_header(2, Translation :: get('Level'), false);
             $html[] = $table->as_html();
         }
-        
+
         return implode("\n", $html);
     }
 
@@ -660,7 +660,7 @@ class Module extends \application\discovery\module\course\Module
     {
         $html = array();
         $course = $this->get_course();
-        
+
         if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
         {
             $tabs = new DynamicTabsRenderer('course_contents');
@@ -674,7 +674,7 @@ class Module extends \application\discovery\module\course\Module
                 {
                     $tabs->add_tab(new DynamicContentTab($child->get_id(), $child->get_name(), null, $this->get_course_contents($child)));
                 }
-            
+
             }
             $html[] = $tabs->render();
         }
@@ -682,14 +682,14 @@ class Module extends \application\discovery\module\course\Module
         {
             $html[] = $this->get_course_contents($course);
         }
-        
+
         return implode("\n", $html);
     }
 
     function get_course_contents($course)
     {
         $html = array();
-        
+
         if (! StringUtilities :: is_null_or_empty($course->get_goals(), true))
         {
             $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'content/goals.png);">';
@@ -701,7 +701,7 @@ class Module extends \application\discovery\module\course\Module
             $html[] = '</div>';
             $html[] = '</div>';
         }
-        
+
         if (! StringUtilities :: is_null_or_empty($course->get_contents(), true))
         {
             $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(__NAMESPACE__) . 'content/contents.png);">';
@@ -742,13 +742,13 @@ class Module extends \application\discovery\module\course\Module
     {
         $html = array();
         $course = $this->get_course();
-        
+
         if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
         {
             $tabs = new DynamicTabsRenderer('course_evaluations');
-            
+
             $tabs->add_tab(new DynamicContentTab($course->get_id(), Translation :: get('General'), null, $this->get_course_evaluations($course)));
-            
+
             foreach ($course->get_children() as $child)
             {
                 $tabs->add_tab(new DynamicContentTab($child->get_id(), $child->get_name(), null, $this->get_course_evaluations($child)));
@@ -759,7 +759,7 @@ class Module extends \application\discovery\module\course\Module
         {
             $html[] = $this->get_course_evaluations($course);
         }
-        
+
         return implode("\n", $html);
     }
 
@@ -767,7 +767,7 @@ class Module extends \application\discovery\module\course\Module
     {
         $html = array();
         $table_data = array();
-        
+
         $properties = array();
         $properties[Translation :: get('Credits')] = $course->get_credits();
         $properties[Translation :: get('Weight')] = $course->get_weight();
@@ -791,7 +791,7 @@ class Module extends \application\discovery\module\course\Module
                 LegendTable :: get_instance()->add_symbol($exam_image, Translation :: get('SecondChanceExamNotAllowed'), Translation :: get('SecondChanceExam'));
             }
             $second_chance[] = $exam_image;
-            
+
             if (! is_null($course->get_second_chance()->get_enrollment()))
             {
                 if ($course->get_second_chance()->get_enrollment())
@@ -806,7 +806,7 @@ class Module extends \application\discovery\module\course\Module
                 }
                 $second_chance[] = $enrollment_image;
             }
-            
+
             $properties[Translation :: get('SecondChance')] = implode(' ', $second_chance);
         }
         elseif ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
@@ -816,30 +816,30 @@ class Module extends \application\discovery\module\course\Module
                 $properties[Translation :: get('ScoreCalculation')] = Translation :: get($course->get_score_calculation_string());
             }
             $quotation_parts = array();
-            
+
             foreach ($course->get_children() as $child)
             {
                 $parameters = new Parameters($child->get_id(), $child->get_source());
                 $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
                 $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
-                
-                $quotation_parts[] = Translation :: get('QuotationParts', array('COURSE' => $link, 
+
+                $quotation_parts[] = Translation :: get('QuotationParts', array('COURSE' => $link,
                         'RESULT_SCALE' => Translation :: get($child->get_result_scale_string())));
             }
             $properties[Translation :: get('Quotation')] = implode('<br/>', $quotation_parts);
-            
+
             if (! is_null($course->get_second_chance()->get_exam_parts()))
             {
                 $exam_parts_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_parts/' . $course->get_second_chance()->get_exam_parts() . '.png" alt="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '" title="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '"/>';
                 LegendTable :: get_instance()->add_symbol($exam_parts_image, Translation :: get($course->get_second_chance()->get_exam_parts_string()), Translation :: get('SecondChance'));
-                
+
                 $properties[Translation :: get('SecondChance')] = $exam_parts_image;
             }
-        
+
         }
-        
+
         $table = new PropertiesTable($properties);
-        
+
         $html[] = $table->toHtml();
         if ($course->has_evaluations())
         {
@@ -863,7 +863,7 @@ class Module extends \application\discovery\module\course\Module
                 $table_row[] = $evaluation->get_type();
                 $table_row[] = $evaluation->get_percentage();
                 $table_row[] = $evaluation->get_description();
-                
+
                 if ($evaluation->get_permanent())
                 {
                     $image = '<img src="' . Theme :: get_image_path() . 'evaluation/permanent.png" alt="' . Translation :: get('IsPermanent') . '" title="' . Translation :: get('IsPermanent') . '"/>';
@@ -876,11 +876,11 @@ class Module extends \application\discovery\module\course\Module
                     LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsNotPermanent'), Translation :: get('Permanent'));
                     $table_row[] = $image;
                 }
-                
+
                 $table_data[] = $table_row;
             }
         }
-        
+
         if (count($table_data) > 0)
         {
             $table = new SortableTable($table_data);
@@ -892,7 +892,7 @@ class Module extends \application\discovery\module\course\Module
             $table->set_header(5, Translation :: get('Permanent'), false);
             $html[] = $table->as_html();
         }
-        
+
         return implode("\n", $html);
     }
 }

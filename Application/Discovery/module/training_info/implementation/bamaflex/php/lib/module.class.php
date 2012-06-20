@@ -2,31 +2,18 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\module\profile\Photo;
-
 use common\libraries\BreadcrumbTrail;
-
 use common\libraries\Breadcrumb;
-
 use common\libraries\ToolbarItem;
-
 use common\libraries\StringUtilities;
-
 use common\libraries\DynamicTabsRenderer;
-
 use common\libraries\DynamicContentTab;
-
 use application\discovery\module\training_info\DataManager;
-
 use common\libraries\PropertiesTable;
-
 use common\libraries\Request;
-
 use common\libraries\Theme;
-
 use application\discovery\LegendTable;
-
 use application\discovery\SortableTable;
-
 use common\libraries\Translation;
 
 class Module extends \application\discovery\module\training_info\Module
@@ -36,7 +23,6 @@ class Module extends \application\discovery\module\training_info\Module
     const TAB_OPTIONS = 2;
     const TAB_TRAJECTORIES = 3;
     const TAB_COURSES = 4;
-
     const TAB_OPTION_CHOICES = 1;
     const TAB_OPTION_MAJORS = 2;
     const TAB_OPTION_PACKAGES = 3;
@@ -84,8 +70,8 @@ class Module extends \application\discovery\module\training_info\Module
         }
 
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $photo_module_instance = \application\discovery\Module :: exists('application\discovery\module\photo\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $photo_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\photo\implementation\bamaflex', array('data_source' => $data_source));
 
         if ($photo_module_instance)
         {
@@ -96,9 +82,12 @@ class Module extends \application\discovery\module\training_info\Module
             $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_STUDENT);
 
             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
-            $image = Theme :: get_image('type\2', 'png', Translation :: get('Students', null, 'application\discovery\module\photo'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
+            $image = Theme :: get_image('type/2', 'png',
+                    Translation :: get('Students', null, 'application\discovery\module\photo'), $url,
+                    ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
             $buttons[] = $image;
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get('Students', null, 'application\discovery\module\photo
+            LegendTable :: get_instance()->add_symbol($image,
+                    Translation :: get('Students', null, 'application\discovery\module\photo
                     '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
 
             // teachers
@@ -107,10 +96,12 @@ class Module extends \application\discovery\module\training_info\Module
             $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_TEACHER);
 
             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
-            $image = Theme :: get_image('type\1', 'png', Translation :: get('Teachers', null, 'application\discovery\module\photo
+            $image = Theme :: get_image('type/1', 'png',
+                    Translation :: get('Teachers', null, 'application\discovery\module\photo
                     '), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
             $buttons[] = $image;
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get('Teachers', null, 'application\discovery\module\photo
+            LegendTable :: get_instance()->add_symbol($image,
+                    Translation :: get('Teachers', null, 'application\discovery\module\photo
                     '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
 
             $properties[Translation :: get('Photos')] = implode("\n", $buttons);
@@ -137,21 +128,30 @@ class Module extends \application\discovery\module\training_info\Module
 
         if (! StringUtilities :: is_null_or_empty($training->get_goals(), true))
         {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_GOALS, Translation :: get('Goals'), Theme :: get_image_path() . 'tabs/' . self :: TAB_GOALS . '.png', $training->get_goals()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_GOALS, Translation :: get('Goals'),
+                            Theme :: get_image_path() . 'tabs/' . self :: TAB_GOALS . '.png', $training->get_goals()));
         }
         if ($training->has_options())
         {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTIONS, Translation :: get('Options'), Theme :: get_image_path() . 'tabs/' . self :: TAB_OPTIONS . '.png', $this->get_options()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_OPTIONS, Translation :: get('Options'),
+                            Theme :: get_image_path() . 'tabs/' . self :: TAB_OPTIONS . '.png', $this->get_options()));
         }
 
         if ($training->has_trajectories())
         {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_TRAJECTORIES, Translation :: get('Trajectories'), Theme :: get_image_path() . 'tabs/' . self :: TAB_TRAJECTORIES . '.png', $this->get_trajectories()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_TRAJECTORIES, Translation :: get('Trajectories'),
+                            Theme :: get_image_path() . 'tabs/' . self :: TAB_TRAJECTORIES . '.png',
+                            $this->get_trajectories()));
         }
 
         if ($training->has_courses())
         {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_COURSES, Translation :: get('Courses'), Theme :: get_image_path() . 'tabs/' . self :: TAB_COURSES . '.png', $this->get_courses()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_COURSES, Translation :: get('Courses'),
+                            Theme :: get_image_path() . 'tabs/' . self :: TAB_COURSES . '.png', $this->get_courses()));
         }
 
         $html[] = $tabs->render();
@@ -165,17 +165,23 @@ class Module extends \application\discovery\module\training_info\Module
 
         if ($training->has_choices())
         {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTION_CHOICES, Translation :: get('Choices'), null, $this->get_choices()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_OPTION_CHOICES, Translation :: get('Choices'), null,
+                            $this->get_choices()));
         }
 
         if ($training->has_majors())
         {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTION_MAJORS, Translation :: get('Majors'), null, $this->get_majors()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_OPTION_MAJORS, Translation :: get('Majors'), null,
+                            $this->get_majors()));
         }
 
         if ($training->has_packages())
         {
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_OPTION_PACKAGES, Translation :: get('Packages'), null, $this->get_packages()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_OPTION_PACKAGES, Translation :: get('Packages'), null,
+                            $this->get_packages()));
         }
 
         return $tabs->render();
@@ -247,8 +253,9 @@ class Module extends \application\discovery\module\training_info\Module
             {
                 if ($major->has_choices())
                 {
-                    $tabs->add_tab(new DynamicContentTab($major->get_id(), $major->get_name(), null, $this->get_major_choices($major)));
-
+                    $tabs->add_tab(
+                            new DynamicContentTab($major->get_id(), $major->get_name(), null,
+                                    $this->get_major_choices($major)));
                 }
             }
 
@@ -305,7 +312,9 @@ class Module extends \application\discovery\module\training_info\Module
 
         foreach ($training->get_packages() as $package)
         {
-            $tabs->add_tab(new DynamicContentTab($package->get_id(), $package->get_name(), null, $this->get_package_courses($package)));
+            $tabs->add_tab(
+                    new DynamicContentTab($package->get_id(), $package->get_name(), null,
+                            $this->get_package_courses($package)));
         }
 
         return $tabs->render();
@@ -315,8 +324,8 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $course_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\course\implementation\bamaflex', array('data_source' => $data_source));
 
         foreach ($package->get_courses() as $course)
         {
@@ -325,7 +334,8 @@ class Module extends \application\discovery\module\training_info\Module
 
             if ($course_module_instance)
             {
-                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
+                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                        $course->get_programme_id(), $course->get_source());
                 $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $course->get_name() . '</a>';
             }
@@ -345,7 +355,8 @@ class Module extends \application\discovery\module\training_info\Module
 
                     if ($course_module_instance)
                     {
-                        $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
+                        $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                                $child->get_programme_id(), $child->get_source());
                         $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                         $row[] = '<span class="course_child_link"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
                     }
@@ -356,7 +367,6 @@ class Module extends \application\discovery\module\training_info\Module
 
                     $data[] = $row;
                 }
-
             }
         }
         $table = new SortableTable($data);
@@ -373,7 +383,9 @@ class Module extends \application\discovery\module\training_info\Module
 
         foreach ($training->get_trajectories() as $trajectory)
         {
-            $tabs->add_tab(new DynamicContentTab($trajectory->get_id(), $trajectory->get_name(), null, $this->get_sub_trajectories($trajectory)));
+            $tabs->add_tab(
+                    new DynamicContentTab($trajectory->get_id(), $trajectory->get_name(), null,
+                            $this->get_sub_trajectories($trajectory)));
         }
 
         return $tabs->render();
@@ -385,7 +397,9 @@ class Module extends \application\discovery\module\training_info\Module
 
         foreach ($trajectory->get_trajectories() as $trajectory)
         {
-            $tabs->add_tab(new DynamicContentTab($trajectory->get_id(), $trajectory->get_name(), null, $this->get_sub_trajectory_courses($trajectory)));
+            $tabs->add_tab(
+                    new DynamicContentTab($trajectory->get_id(), $trajectory->get_name(), null,
+                            $this->get_sub_trajectory_courses($trajectory)));
         }
 
         return $tabs->render();
@@ -395,8 +409,8 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $course_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\course\implementation\bamaflex', array('data_source' => $data_source));
 
         foreach ($trajectory->get_courses() as $course)
         {
@@ -405,7 +419,8 @@ class Module extends \application\discovery\module\training_info\Module
 
             if ($course_module_instance)
             {
-                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
+                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                        $course->get_programme_id(), $course->get_source());
                 $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $course->get_name() . '</a>';
             }
@@ -425,7 +440,8 @@ class Module extends \application\discovery\module\training_info\Module
 
                     if ($course_module_instance)
                     {
-                        $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
+                        $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                                $child->get_programme_id(), $child->get_source());
                         $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                         $row[] = '<span class="course_child_link"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
                     }
@@ -436,7 +452,6 @@ class Module extends \application\discovery\module\training_info\Module
 
                     $data[] = $row;
                 }
-
             }
         }
         $table = new SortableTable($data);
@@ -450,10 +465,10 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
-                'data_source' => $data_source));
-        $photo_module_instance = \application\discovery\Module :: exists('application\discovery\module\photo\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $course_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\course\implementation\bamaflex', array('data_source' => $data_source));
+        $photo_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\photo\implementation\bamaflex', array('data_source' => $data_source));
 
         foreach ($this->get_training()->get_courses() as $course)
         {
@@ -462,7 +477,8 @@ class Module extends \application\discovery\module\training_info\Module
 
             if ($course_module_instance)
             {
-                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($course->get_id(), $course->get_source());
+                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                        $course->get_id(), $course->get_source());
                 $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $course->get_name() . '</a>';
             }
@@ -481,7 +497,11 @@ class Module extends \application\discovery\module\training_info\Module
                     $parameters->set_programme_id($course->get_id());
 
                     $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
-                    $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                    $buttons[] = Theme :: get_image('logo/16', 'png',
+                            Translation :: get('TypeName', null,
+                                    'application\discovery\module\photo\implementation\bamaflex'), $url,
+                            ToolbarItem :: DISPLAY_ICON, false,
+                            'application\discovery\module\photo\implementation\bamaflex');
                 }
                 $row[] = implode("\n", $buttons);
             }
@@ -497,7 +517,8 @@ class Module extends \application\discovery\module\training_info\Module
 
                     if ($course_module_instance)
                     {
-                        $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($child->get_id(), $child->get_source());
+                        $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                                $child->get_id(), $child->get_source());
                         $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                         $row[] = '<span class="course_child_link"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
                     }
@@ -516,14 +537,17 @@ class Module extends \application\discovery\module\training_info\Module
                             $parameters->set_programme_id($child->get_id());
 
                             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
-                            $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                            $buttons[] = Theme :: get_image('logo/16', 'png',
+                                    Translation :: get('TypeName', null,
+                                            'application\discovery\module\photo\implementation\bamaflex'), $url,
+                                    ToolbarItem :: DISPLAY_ICON, false,
+                                    'application\discovery\module\photo\implementation\bamaflex');
                         }
                         $row[] = implode("\n", $buttons);
                     }
 
                     $data[] = $row;
                 }
-
             }
         }
         $table = new SortableTable($data);
