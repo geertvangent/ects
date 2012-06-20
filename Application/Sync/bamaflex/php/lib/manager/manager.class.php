@@ -9,8 +9,9 @@ class Manager extends SubManager
     const ACTION_ALL_USERS = 'all_users';
     const ACTION_NEW_USERS = 'new_users';
     const ACTION_UPDATE_USERS = 'update_users';
-    
+    const ACTION_COURSE_CATEGORIES = 'course_categories';
     const ACTION_GROUPS = 'groups';
+    const ACTION_COURSES = 'courses';
     
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     

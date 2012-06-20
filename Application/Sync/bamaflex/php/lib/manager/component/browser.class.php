@@ -20,7 +20,7 @@ class BrowserComponent extends Manager implements DelegateComponent
         $this->display_header();
         
         $types = array(self :: ACTION_ALL_USERS, self :: ACTION_GROUPS, self :: ACTION_NEW_USERS, 
-                self :: ACTION_UPDATE_USERS);
+                self :: ACTION_UPDATE_USERS, self :: ACTION_COURSE_CATEGORIES, self :: ACTION_COURSES);
         
         $html = array();
         foreach ($types as $type)
