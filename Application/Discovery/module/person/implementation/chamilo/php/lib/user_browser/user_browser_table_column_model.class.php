@@ -1,43 +1,22 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
+
 use application\discovery\module\person\Person;
-
-use user\User;
-use user\DefaultUserTableColumnModel;
-
 use common\libraries\ObjectTableColumn;
-use common\libraries\StaticTableColumn;
-use common\libraries\Path;
+use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
+use common\libraries\NewObjectTableColumnModel;
 
-class UserBrowserTableColumnModel extends DefaultUserTableColumnModel
+class UserBrowserTableColumnModel extends NewObjectTableColumnModel implements
+        NewObjectTableColumnModelActionsColumnSupport
 {
-    /**
-     * The tables modification column
-     */
-    private static $modification_column;
 
-    /**
-     * Constructor
-     */
-    function __construct()
+    public function initialize_columns()
     {
-        parent :: __construct();
+        $user_alias = \user\DataManager :: get_instance()->get_alias(\user\User :: get_table_name());
+        $this->add_column(new ObjectTableColumn(\user\User :: PROPERTY_OFFICIAL_CODE, true, $user_alias, true));
+        $this->add_column(new ObjectTableColumn(\user\User :: PROPERTY_LASTNAME, true, $user_alias, true));
+        $this->add_column(new ObjectTableColumn(\user\User :: PROPERTY_FIRSTNAME, true, $user_alias, true));
         $this->add_column(new ObjectTableColumn(Person :: PROPERTY_EMAIL));
-        $this->set_default_order_column(1);
-        $this->add_column(self :: get_modification_column());
-    }
-
-    /**
-     * Gets the modification column
-     * @return ContentObjectTableColumn
-     */
-    static function get_modification_column()
-    {
-        if (! isset(self :: $modification_column))
-        {
-            self :: $modification_column = new StaticTableColumn('');
-        }
-        return self :: $modification_column;
     }
 }
 ?>
