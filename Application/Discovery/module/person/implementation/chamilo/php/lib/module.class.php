@@ -61,7 +61,7 @@ class Module extends \application\discovery\module\person\Module implements NewO
         // $group_menu = new TreeMenu('GroupTreeMenu', new GroupTreeMenuDataProvider($this->get_url(),
         // $this->get_group()));
         $html = array();
-        $html[] = '<div style="float: left; width: 18%; overflow: auto; height: 500px;">';
+        $html[] = '<div style="float: left; width: 25%; overflow: auto; height: 500px;">';
         $html[] = $group_menu->render_as_tree();
         $html[] = '</div>';
 
@@ -98,7 +98,7 @@ class Module extends \application\discovery\module\person\Module implements NewO
     function get_user_html()
     {
         $html = array();
-        $html[] = '<div style="float: right; width: 80%;">';
+        $html[] = '<div style="float: right; width: 73%;">';
 
         $renderer_name = Utilities :: get_classname_from_object($this, true);
         $tabs = new DynamicTabsRenderer($renderer_name);
