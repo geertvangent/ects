@@ -1,6 +1,8 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
+use application\weblcms\course\CourseGroupRelation;
+
 use common\libraries\EqualityCondition;
 use application\weblcms\course\CourseDataManager;
 use application\weblcms\CourseManagementRights;
@@ -44,10 +46,9 @@ class CourseSynchronization extends Synchronization
      */
     function synchronize($course)
     {
-        $condition = new EqualityCondition(Course :: PROPERTY_VISUAL_CODE, $course['id']);
-        $course_exists = CourseDataManager :: get_instance()->count_courses($condition);
+        $current_course = WeblcmsDataManager :: get_instance()->retrieve_course_by_visual_code($course['id']);
         
-        if ($course_exists == 0)
+        if (! $current_course instanceof Course)
         {
             $new_course = new Course();
             $new_course->set_visual_code($course['id']);
@@ -75,6 +76,16 @@ class CourseSynchronization extends Synchronization
                 $new_course->create_course_settings_from_values($setting_values);
                 
                 CourseManagementRights :: get_instance()->create_rights_from_values($new_course, array());
+                
+                $teacher_code = 'COU_OP_' . $course['id'];
+                $student_code = 'COU_STU_' . $course['id'];
+                
+                $group_id = \group\DataManager :: retrieve_group_by_code($teacher_code)->get_id();
+                WeblcmsDataManager :: get_instance()->subscribe_group_to_course($new_course, $group_id, CourseGroupRelation :: STATUS_TEACHER);
+                
+                $group_id = \group\DataManager :: retrieve_group_by_code($student_code)->get_id();
+                WeblcmsDataManager :: get_instance()->subscribe_group_to_course($new_course, $group_id, CourseGroupRelation :: STATUS_STUDENT);
+                
                 self :: log('added', $new_course->get_title());
             }
             else
@@ -82,6 +93,31 @@ class CourseSynchronization extends Synchronization
                 self :: log('failed', $new_course->get_title());
             }
             flush();
+        }
+        else
+        {
+            $teacher_code = 'COU_OP_' . $course['id'];
+            $student_code = 'COU_STU_' . $course['id'];
+            
+            $group = \group\DataManager :: retrieve_group_by_code($teacher_code);
+            if ($group instanceof \group\Group)
+            {
+                if (! WeblcmsDataManager :: get_instance()->is_group_subscribed($current_course->get_id(), $group->get_id()))
+                {
+                    WeblcmsDataManager :: get_instance()->subscribe_group_to_course($current_course, $group->get_id(), CourseGroupRelation :: STATUS_TEACHER);
+                    self :: log('added teacher group', $current_course->get_title());
+                }
+            }
+            
+            $group = \group\DataManager :: retrieve_group_by_code($student_code);
+            if ($group instanceof \group\Group)
+            {
+                if (! WeblcmsDataManager :: get_instance()->is_group_subscribed($current_course->get_id(), $group->get_id()))
+                {
+                    WeblcmsDataManager :: get_instance()->subscribe_group_to_course($current_course, $group->get_id(), CourseGroupRelation :: STATUS_STUDENT);
+                    self :: log('added student group', $current_course->get_title());
+                }
+            }
         }
     }
 }
