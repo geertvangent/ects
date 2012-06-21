@@ -33,15 +33,5 @@ class TrainingCourseCategorySynchronization extends CourseCategorySynchronizatio
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_TRAINING);
     }
-
-    /**
-     *
-     * @return int
-     */
-    function get_department_id()
-    {
-        return $this->get_user_type()->get_department()->get_parameter(DepartmentCourseCategorySynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);
-    }
-
 }
 ?>
