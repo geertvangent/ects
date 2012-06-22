@@ -1,6 +1,8 @@
 <?php
 namespace application\ehb_sync;
 
+use common\libraries\NotAllowedException;
+
 use common\libraries\Utilities;
 
 use common\libraries\Theme;
@@ -17,6 +19,12 @@ class BrowserComponent extends Manager implements DelegateComponent
      */
     function run()
     {
+        
+        if (! $this->get_user()->is_platform_admin())
+        {
+            throw new NotAllowedException();
+        }
+            
         $this->display_header();
         $types = array(self :: ACTION_BAMAFLEX, self :: ACTION_ATLANTIS);
         
