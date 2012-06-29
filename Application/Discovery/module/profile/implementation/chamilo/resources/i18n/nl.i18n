@@ -1,0 +1,4 @@
+TypeName = "Basisprofiel"
+Username = "Gebruikersnaam"
+Timezone = "Tijdszone"
+TypeDescription = "Basisprofiel van een gebruiker"
