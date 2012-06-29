@@ -1,49 +1,24 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
-use common\libraries\EqualityCondition;
 
-use common\libraries\OrCondition;
+use common\libraries\DataClassRetrievesParameters;
+use common\libraries\NewObjectTableDataProvider;
 
-use user\User;
-
-use group\GroupDataManager;
-
-use common\libraries\AndCondition;
-
-use group\GroupRelUser;
-
-use common\libraries\InCondition;
-
-use application\discovery\module\person\DataManager;
-
-use user\UserDataManager;
-
-use common\libraries\ObjectTableDataProvider;
 /**
  * $Id: user_browser_table_data_provider.class.php 211 2009-11-13 13:28:39Z vanpouckesven $
+ *
  * @package user.lib.user_manager.component.user_browser
  */
 /**
- * Data provider for a user browser table.
- *
- * This class implements some functions to allow user browser tables to
- * retrieve information about the users to display.
+ * Data provider for a user browser table. This class implements some functions to allow user browser tables to retrieve
+ * information about the users to display.
  */
-class UserBrowserTableDataProvider extends ObjectTableDataProvider
+class UserBrowserTableDataProvider extends NewObjectTableDataProvider
 {
 
     /**
-     * Constructor
-     * @param UserManagerComponent $browser
-     * @param Condition $condition
-     */
-    function __construct($browser, $condition)
-    {
-        parent :: __construct($browser, $condition);
-    }
-
-    /**
      * Gets the users
+     *
      * @param String $user
      * @param String $category
      * @param int $offset
@@ -54,17 +29,19 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
     function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
-        
-        return UserDataManager :: get_instance()->retrieve_users($this->get_condition(), $offset, $count, $order_property);
+
+        $parameters = new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property);
+        return \user\DataManager :: retrieves(\user\User :: class_name(), $parameters);
     }
 
     /**
      * Gets the number of users in the table
+     *
      * @return int
      */
     function get_object_count()
     {
-        return UserDataManager :: get_instance()->count_users($this->get_condition());
+        return \user\DataManager :: count(\user\User :: class_name(), $this->get_condition());
     }
 }
 ?>

@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery;
 
-use admin\PackageInfo;
-
 use common\libraries\ToolbarItem;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Request;
@@ -16,7 +14,6 @@ use common\libraries\Theme;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicContentTab;
 use common\libraries\Filesystem;
-
 use DOMDocument;
 
 class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
@@ -37,14 +34,17 @@ class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
         {
             $module_instance = new ModuleInstance();
             $module_instance->set_type($type);
-            $form = new ModuleInstanceForm(ModuleInstanceForm :: TYPE_CREATE, $module_instance, $this->get_url(array(
-                    ModuleInstanceManager :: PARAM_TYPE => $type)));
+            $form = new ModuleInstanceForm(ModuleInstanceForm :: TYPE_CREATE, $module_instance,
+                    $this->get_url(array(ModuleInstanceManager :: PARAM_TYPE => $type)));
             if ($form->validate())
             {
                 $success = $form->create_module_instance();
-                $this->redirect(Translation :: get($success ? 'ObjectAdded' : 'ObjectNotAdded', array(
-                        'OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES), ($success ? false : true), array(
-                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+                $this->redirect(
+                        Translation :: get($success ? 'ObjectAdded' : 'ObjectNotAdded',
+                                array('OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES),
+                        ($success ? false : true),
+                        array(
+                                ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
             }
             else
             {
@@ -61,11 +61,12 @@ class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
             {
                 $name = htmlentities(Translation :: get('TypeName', null, $available_type));
                 $row = array();
-                $row[] = '<img src="' . Theme :: get_image_path($available_type) . '/logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
+                $row[] = '<img src="' . Theme :: get_image_path($available_type) . '/logo/22.png" alt="' . $name .
+                         '" title="' . $name . '"/>';
                 $row[] = $name;
                 $row[] = htmlentities(Translation :: get('TypeDescription', null, $available_type));
-                $row[] = Theme :: get_common_image('action_add', 'png', Translation :: get('AddModuleInstance'), $this->get_url(array(
-                        self :: PARAM_TYPE => $available_type)), ToolbarItem :: DISPLAY_ICON);
+                $row[] = Theme :: get_common_image('action_add', 'png', Translation :: get('AddModuleInstance'),
+                        $this->get_url(array(self :: PARAM_TYPE => $available_type)), ToolbarItem :: DISPLAY_ICON);
 
                 $table_data[] = $row;
             }
