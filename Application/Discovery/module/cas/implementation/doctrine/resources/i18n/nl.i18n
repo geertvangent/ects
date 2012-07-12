@@ -1,0 +1,15 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\cas\implementation\doctrine
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Cas"
+Login = "Login"
+TgtCreated = "Ticket granting ticket created"
+TgtDestroyed = "Ticket granting ticket destroyed"
+ApplicationLogIn = "Applicatie"
+ApplicationUse = "Service ticket validated"
+LogInFailed = "Login mislukt"
+TgtNotCreated = "Ticket granting ticket not created"
+ApplicationLogInFailed = "Applicatie mislukt"
+ApplicationUseFailed = "Service ticket validation failed"
