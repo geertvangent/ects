@@ -14,7 +14,7 @@ class Module extends \application\discovery\module\cas\Module
 {
     private $action_statistics;
 
-    function get_action_statistics($action_id)
+    function get_action_statistics($action)
     {
         if (! isset($this->action_statistics))
         {
@@ -32,12 +32,12 @@ class Module extends \application\discovery\module\cas\Module
                 }
             }
         }
-        return $this->action_statistics[$action_id];
+        return $this->action_statistics[$action->get_id()];
     }
 
-    function get_statistics_table($action_id)
+    function get_statistics_table($action)
     {
-        $action_statistics = $this->get_action_statistics($action_id);
+        $action_statistics = $this->get_action_statistics($action);
         
         if (count($action_statistics) == 1 && count($action_statistics[0]) > 0)
         {
@@ -55,7 +55,7 @@ class Module extends \application\discovery\module\cas\Module
         }
         else
         {
-            $tabs = new DynamicTabsRenderer('statistics_list_' . $action_id);
+            $tabs = new DynamicTabsRenderer('statistics_list_' . $action->get_id());
             foreach ($action_statistics as $application_id => $application_statistics)
             {
                 $data = array();
@@ -66,10 +66,20 @@ class Module extends \application\discovery\module\cas\Module
                     $row[] = $application_statistic->get_date();
                     $data[] = $row;
                 }
+                $applications = $this->get_applications();
+                
+                $sub_tabs = new DynamicTabsRenderer('statistics_list_' . $action->get_id() . '_' . $application_id);
+                
+                $html = array();
+                $graph = new GraphRenderer($this, $this->get_cas_parameters()->get_user_id(), $applications[$application_id], $action);
+                $sub_tabs->add_tab(new DynamicContentTab(1, Translation :: get('Chart'), Theme :: get_image_path(__NAMESPACE__) . 'sub_tabs/1.png', $graph->chart()));
+                $sub_tabs->add_tab(new DynamicContentTab(2, Translation :: get('Table'), Theme :: get_image_path(__NAMESPACE__) . 'sub_tabs/2.png', $graph->table()));
+                
                 $table = new SortableTable($data);
                 $table->set_header(0, Translation :: get('Date'), false);
-                $applications = $this->get_applications();
-                $tabs->add_tab(new DynamicContentTab($application_id, $applications[$application_id]->get_title(), Theme :: get_image_path() . 'application/' . $application_id . '.png', $table->toHTML()));
+                $sub_tabs->add_tab(new DynamicContentTab(3, Translation :: get('DatesTable'), Theme :: get_image_path(__NAMESPACE__) . 'sub_tabs/3.png', $table->toHTML()));
+                
+                $tabs->add_tab(new DynamicContentTab($application_id, $applications[$application_id]->get_title(), Theme :: get_image_path() . 'application/' . $application_id . '.png', $sub_tabs->render()));
             
             }
             return $tabs->render();
@@ -99,8 +109,7 @@ class Module extends \application\discovery\module\cas\Module
             
             foreach ($actions as $action)
             {
-                $tabs->add_tab(new DynamicContentTab($action->get_id(), Translation :: get($action->get_name()), Theme :: get_image_path() . 'action/' . $action->get_id() . '.png', $this->get_statistics_table($action->get_id())));
-            
+                $tabs->add_tab(new DynamicContentTab($action->get_id(), Translation :: get($action->get_name()), Theme :: get_image_path() . 'action/' . $action->get_id() . '.png', $this->get_statistics_table($action)));
             }
             
             $html[] = $tabs->render();

@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
+use common\libraries\DoctrineConditionTranslator;
+
 use application\discovery\module\cas\DataManagerInterface;
 
 use user\UserDataManager;
@@ -44,7 +46,6 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
 
     function retrieve_applications()
     {
-        
         if (! isset($this->applications))
         {
             $query = 'SELECT * FROM application';
@@ -115,6 +116,62 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         }
         
         return 0;
+    }
+
+    function count_cas_graph_statistics($condition)
+    {
+        $query = 'SELECT count(id) AS statistics_count FROM statistics';
+        $translator = new DoctrineConditionTranslator($this);
+        $query .= $translator->render_query($condition);
+      
+        $statement = $this->get_connection()->query($query);
+        
+        if (! $statement instanceof \PDOException)
+        {
+            $record = $statement->fetch(\PDO :: FETCH_NUM);
+            return (int) $record[0];
+        }
+        
+        return 0;
+    }
+
+    function retrieve_first_date($user_id, $action, $application)
+    {
+        $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+        $official_code = $user->get_official_code();
+        
+        $query = 'SELECT date FROM statistics WHERE person_id = "' . $official_code . '" AND action_id = "' . $action->get_id() . '" AND application_id = "' . $application->get_id() . '" ORDER BY date';
+        $statement = $this->get_connection()->query($query);
+        
+        if (! $statement instanceof \PDOException)
+        {
+            $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            return $result->date;
+        }
+    }
+    
+    //helper for DoctrineConditionTranslator
+    function get_alias($table_name)
+    {
+        return $table_name;
+    }
+
+    function escape_column_name($name, $table_alias = null)
+    {
+        $quoted_name = $this->get_connection()->quoteIdentifier($name);
+        if (! is_null($table_alias))
+        {
+            return $this->get_connection()->quoteIdentifier($table_alias) . '.' . $quoted_name;
+        }
+        else
+        {
+            return $quoted_name;
+        }
+    }
+
+    function quote($value, $type = null, $quote = true, $escape_wildcards = false)
+    {
+        return $this->get_connection()->quote($value, $type, $quote, $escape_wildcards);
     }
 }
 ?>

@@ -16,6 +16,7 @@ class Autoloader
          'Action' => '/lib/action.class.php',
          'Application' => '/lib/application.class.php',
          'Cas' => '/lib/cas.class.php',
+         'GraphRenderer' => '/lib/graph_renderer.class.php',
          'Module' => '/lib/module.class.php',
          'Parameters' => '/lib/parameters.class.php',
          'Rights' => '/lib/rights.class.php',
