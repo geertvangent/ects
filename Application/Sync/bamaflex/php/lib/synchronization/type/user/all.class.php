@@ -25,7 +25,7 @@ class AllUserSynchronization extends UserSynchronization
 
     function get_data()
     {
-        $query = 'SELECT TOP 100 * FROM [INFORDATSYNC].[dbo].[v_sync_user]';
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_sync_user]';
         
         return $this->get_result($query);
     }
