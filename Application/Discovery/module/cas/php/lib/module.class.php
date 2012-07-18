@@ -53,7 +53,17 @@ class Module extends \application\discovery\Module
     {
         if (! isset($this->cas_statistics))
         {
-            $this->cas_statistics = DataManager :: get_instance($this->get_module_instance())->retrieve_cas_statistics($this->get_cas_parameters());
+            $path = Path :: get_cache_path(__NAMESPACE__) . 'cas_statistics/' . md5(serialize($this->get_cas_parameters()));
+            
+            if (! file_exists($path))
+            {
+                $this->cas_statistics = DataManager :: get_instance($this->get_module_instance())->retrieve_cas_statistics($this->get_cas_parameters());
+                Filesystem :: write_to_file($path, serialize($this->cas_statistics));
+            }
+            else
+            {
+                $this->cas_statistics = unserialize(file_get_contents($path));
+            }
         }
         return $this->cas_statistics;
     }

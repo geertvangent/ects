@@ -33,8 +33,20 @@ class GraphRenderer
         $this->action = $action;
         $this->module = $module;
         
-        $this->graph_data[] = $this->get_data();
-        $this->graph_data[] = $this->get_config();
+        $path = Path :: get_cache_path(__NAMESPACE__) . 'graph_data/' . md5(serialize(array($user_id, $application, 
+                $action)));
+        
+        if (! file_exists($path))
+        {
+            $this->graph_data[] = $this->get_data();
+            $this->graph_data[] = $this->get_config();
+            Filesystem :: write_to_file($path, serialize($this->graph_data));
+        }
+        else
+        {
+            $this->graph_data = unserialize(file_get_contents($path));
+        }
+    
     }
 
     function table()
@@ -43,7 +55,7 @@ class GraphRenderer
         $table_data = array();
         
         // Set the table data
-        foreach ($this->months as $key => $month)
+        foreach ($this->get_months() as $key => $month)
         {
             $row = array();
             $row[] = date('Y-m', $month);
@@ -51,7 +63,6 @@ class GraphRenderer
             
             $table_data[] = $row;
         }
-        
         $table = new SortableTable($table_data);
         
         $table->set_header(0, Translation :: get('Month'), false);
@@ -63,8 +74,8 @@ class GraphRenderer
     function chart()
     {
         $image_id = md5(serialize($this->graph_data));
-        $image_path = Path :: get_cache_path(__NAMESPACE__);
-        $image_file = 'chart_' . $image_id . '.png';
+        $image_path = Path :: get_cache_path(__NAMESPACE__) . 'chart/';
+        $image_file = $image_id . '.png';
         
         $alt_title = Translation :: get('CasStatistics') . ' - ' . $this->graph_data[1]['Title'];
         
@@ -101,7 +112,7 @@ class GraphRenderer
             $graph->Render($image_path . $image_file);
         }
         
-        $web_path = Path :: get_cache_path(__NAMESPACE__, true) . $image_file;
+        $web_path = Path :: get_cache_path(__NAMESPACE__, true) . 'chart/' . $image_file;
         
         return '<img src="' . $web_path . '" border="0" alt="' . $alt_title . '" title="' . $alt_title . '" />';
     }
@@ -122,26 +133,44 @@ class GraphRenderer
         return $config;
     }
 
+    function get_months()
+    {
+        if (! isset($this->months))
+        {
+            $path = Path :: get_cache_path(__NAMESPACE__) . 'months/' . md5(serialize(array($this->user_id, 
+                    $this->action, $this->application)));
+            
+            if (! file_exists($path))
+            {
+                $first_date = DataManager :: get_instance($this->module->get_module_instance())->retrieve_first_date($this->user_id, $this->action, $this->application);
+                $first_date = strtotime($first_date);
+                
+                $this->months = array();
+                $this->months[] = $first_date;
+                
+                $today = time();
+                $next_month = strtotime("+1 month", $first_date);
+                
+                while ($next_month < $today)
+                {
+                    $this->months[] = $next_month;
+                    $next_month = strtotime("+1 month", $next_month);
+                }
+                Filesystem :: write_to_file($path, serialize($this->months));
+            }
+            else
+            {
+                $this->months = unserialize(file_get_contents($path));
+            }
+        }
+        return $this->months;
+    }
+
     function get_data()
     {
         $data = array();
         
-        $first_date = DataManager :: get_instance($this->module->get_module_instance())->retrieve_first_date($this->user_id, $this->action, $this->application);
-        $first_date = strtotime($first_date);
-        
-        $this->months = array();
-        $this->months[] = $first_date;
-        
-        $today = time();
-        $next_month = strtotime("+1 month", $first_date);
-        
-        while ($next_month < $today)
-        {
-            $this->months[] = $next_month;
-            $next_month = strtotime("+1 month", $next_month);
-        }
-        
-        foreach ($this->months as $key => $month)
+        foreach ($this->get_months() as $key => $month)
         {
             $data[$key] = array('Name' => date('Y-m', $month));
         }
@@ -150,7 +179,7 @@ class GraphRenderer
         
         $official_code = $user->get_official_code();
         
-        foreach ($this->months as $key => $month)
+        foreach ($this->get_months() as $key => $month)
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(Cas :: PROPERTY_PERSON_ID, $official_code);

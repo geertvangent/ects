@@ -1,13 +1,17 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
+use application\discovery\SortableTable;
+
+use common\libraries\Filesystem;
+use common\libraries\Path;
 use common\libraries\Theme;
 use common\libraries\Display;
 use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\Translation;
 
-use application\discovery\SortableTable;
+// use application\discovery\SortableTable;
 use application\discovery\module\cas\DataManager;
 
 class Module extends \application\discovery\module\cas\Module
@@ -18,19 +22,30 @@ class Module extends \application\discovery\module\cas\Module
     {
         if (! isset($this->action_statistics))
         {
-            $this->action_statistics = array();
+            $path = Path :: get_cache_path(__NAMESPACE__) . 'cas_action_statistics/' . md5(serialize($this->get_cas_parameters()));
             
-            foreach ($this->get_cas_statistics() as $cas_statistic)
+            if (! file_exists($path))
             {
-                if ($cas_statistic->get_application_id())
+                $this->action_statistics = array();
+                
+                foreach ($this->get_cas_statistics() as $cas_statistic)
                 {
-                    $this->action_statistics[$cas_statistic->get_action_id()][$cas_statistic->get_application_id()][] = $cas_statistic;
+                    if ($cas_statistic->get_application_id())
+                    {
+                        $this->action_statistics[$cas_statistic->get_action_id()][$cas_statistic->get_application_id()][] = $cas_statistic;
+                    }
+                    else
+                    {
+                        $this->action_statistics[$cas_statistic->get_action_id()][0][] = $cas_statistic;
+                    }
                 }
-                else
-                {
-                    $this->action_statistics[$cas_statistic->get_action_id()][0][] = $cas_statistic;
-                }
+                Filesystem :: write_to_file($path, serialize($this->action_statistics));
             }
+            else
+            {
+                $this->action_statistics = unserialize(file_get_contents($path));
+            }
+        
         }
         return $this->action_statistics[$action->get_id()];
     }
@@ -41,13 +56,26 @@ class Module extends \application\discovery\module\cas\Module
         
         if (count($action_statistics) == 1 && count($action_statistics[0]) > 0)
         {
-            $data = array();
-            foreach ($action_statistics[0] as $key => $action_statistic)
+            $path = Path :: get_cache_path(__NAMESPACE__) . 'data/' . md5(serialize(array(
+                    $this->get_cas_parameters()->get_user_id(), 0, $action->get_id())));
+            
+            if (! file_exists($path))
             {
-                $row = array();
-                $row[] = $action_statistic->get_date();
-                $data[] = $row;
+                $data = array();
+                
+                foreach ($action_statistics[0] as $key => $action_statistic)
+                {
+                    $row = array();
+                    $row[] = $action_statistic->get_date();
+                    $data[] = $row;
+                }
+                Filesystem :: write_to_file($path, serialize($data));
             }
+            else
+            {
+                $data = unserialize(file_get_contents($path));
+            }
+            
             $table = new SortableTable($data);
             $table->set_header(0, Translation :: get('Date'), false);
             
@@ -58,14 +86,26 @@ class Module extends \application\discovery\module\cas\Module
             $tabs = new DynamicTabsRenderer('statistics_list_' . $action->get_id());
             foreach ($action_statistics as $application_id => $application_statistics)
             {
-                $data = array();
+                $path = Path :: get_cache_path(__NAMESPACE__) . 'data/' . md5(serialize(array(
+                        $this->get_cas_parameters()->get_user_id(), $application_id, $action->get_id())));
                 
-                foreach ($application_statistics as $key => $application_statistic)
+                if (! file_exists($path))
                 {
-                    $row = array();
-                    $row[] = $application_statistic->get_date();
-                    $data[] = $row;
+                    $data = array();
+                    
+                    foreach ($application_statistics as $key => $application_statistic)
+                    {
+                        $row = array();
+                        $row[] = $application_statistic->get_date();
+                        $data[] = $row;
+                    }
+                    Filesystem :: write_to_file($path, serialize($data));
                 }
+                else
+                {
+                    $data = unserialize(file_get_contents($path));
+                }
+                
                 $applications = $this->get_applications();
                 
                 $sub_tabs = new DynamicTabsRenderer('statistics_list_' . $action->get_id() . '_' . $application_id);
@@ -80,7 +120,6 @@ class Module extends \application\discovery\module\cas\Module
                 $sub_tabs->add_tab(new DynamicContentTab(3, Translation :: get('DatesTable'), Theme :: get_image_path(__NAMESPACE__) . 'sub_tabs/3.png', $table->toHTML()));
                 
                 $tabs->add_tab(new DynamicContentTab($application_id, $applications[$application_id]->get_title(), Theme :: get_image_path() . 'application/' . $application_id . '.png', $sub_tabs->render()));
-            
             }
             return $tabs->render();
         }
