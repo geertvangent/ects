@@ -74,6 +74,7 @@ class AllUserSynchronization extends UserSynchronization
                 $user->set_status(5);
                 $user->set_email($person[self :: RESULT_PROPERTY_PERSON_ID] . '@archive.ehb.be');
                 $user->set_username($person[self :: RESULT_PROPERTY_PERSON_ID]);
+                $user->set_disk_quota(0);
                 break;
             case 1 :
                 $user->set_active(1);
