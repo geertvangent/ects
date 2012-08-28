@@ -109,7 +109,7 @@ class TicketForm extends FormValidator
         }
 
         $this->addElement('select', self :: PROPERTY_TRAINING, Translation :: get('Training'), $training_options);
-        $this->addElement('text', self :: PROPERTY_URL, Translation :: get('Url'), array("size" => "50"));
+        $this->addElement('text', self :: PROPERTY_URL, Translation :: get('Url'), array("size" => "100"));
 //         $this->addElement('text', self :: PROPERTY_CC, Translation :: get('Cc'), array("size" => "50"));
         $this->addElement('category');
 
@@ -136,6 +136,7 @@ class TicketForm extends FormValidator
     {
         $defaults[self :: PROPERTY_REQUESTOR] = $this->component->get_user()->get_email();
         $defaults[self :: PROPERTY_SYSTEM] = $_SERVER['HTTP_USER_AGENT'];
+        $defaults[self :: PROPERTY_URL] = $_SERVER['HTTP_REFERER'];
 
         $groups = $this->component->get_user()->get_groups();
 
