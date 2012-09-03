@@ -240,7 +240,6 @@ class GroupSynchronization extends Synchronization
     {
         $official_codes = $this->get_user_official_codes();
         $user_ids = array();
-        
         if (count($official_codes) > 0)
         {
             foreach ($official_codes as $code)
@@ -249,8 +248,12 @@ class GroupSynchronization extends Synchronization
                 {
                     $result_codes[] = $code;
                 }
-                $user_ids[] = self :: $official_code_cache[$code];
+                else
+                {
+                    $user_ids[] = self :: $official_code_cache[$code];
+                }
             }
+            
             if (count($result_codes) > 0)
             {
                 $results = \user\DataManager :: retrieve_users_by_official_codes($result_codes);
