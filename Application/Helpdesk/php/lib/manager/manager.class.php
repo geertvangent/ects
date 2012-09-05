@@ -1,10 +1,6 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use common\libraries\Theme;
-use common\libraries\Translation;
-use core\lynx\PackageList;
-use common\libraries\CommonDataManager;
 use common\libraries\WebApplication;
 
 class Manager extends WebApplication
@@ -41,17 +37,6 @@ class Manager extends WebApplication
     function get_default_action()
     {
         return self :: DEFAULT_ACTION;
-    }
-
-    static function get_installable_application_packages($include_installed = false)
-    {
-        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__),
-                Theme :: get_image_path() . 'logo/16.png');
-        if (! CommonDataManager :: get_registration(\application\ehb_sync\bamaflex\Manager :: context()) || $include_installed)
-        {
-            $package_list->add_package(\application\ehb_sync\bamaflex\Manager :: context());
-        }
-        return $package_list;
     }
 }
 ?>
