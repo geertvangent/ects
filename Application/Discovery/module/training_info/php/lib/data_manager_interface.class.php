@@ -8,10 +8,6 @@ namespace application\discovery\module\training_info;
 interface DataManagerInterface
 {
 
-    /**
-     * @param int $id
-     * @return multitype:\application\discovery\module\training_info\TrainingInfo
-     */
     function retrieve_training($training_parameters);
 }
 ?>

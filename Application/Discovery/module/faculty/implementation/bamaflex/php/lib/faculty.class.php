@@ -8,18 +8,18 @@ use application\discovery\DiscoveryDataManager;
 class Faculty extends \application\discovery\module\faculty\Faculty
 {
     const CLASS_NAME = __CLASS__;
-
+    
     const PROPERTY_SOURCE = 'source';
-
+    
     const REFERENCE_PREVIOUS = 1;
     const REFERENCE_NEXT = 2;
-
+    
     /**
      *
      * @var multitype:string
      */
     private $deans;
-
+    
     /**
      *
      * @var multitype:HistoryReference
@@ -53,30 +53,25 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     function get_previous($module_instance, $recursive = true)
     {
         $faculties = array();
-//         $faculty = $this;
         if ($this->has_previous_references())
         {
-//             do
-//             {
-                foreach ($this->get_previous_references() as $previous_reference)
+            foreach ($this->get_previous_references() as $previous_reference)
+            {
+                $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters();
+                $parameters->set_faculty_id($previous_reference->get_id());
+                $parameters->set_source($previous_reference->get_source());
+                
+                $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
+                if ($faculty instanceof Faculty)
                 {
-                    $parameters = new Parameters();
-                    $parameters->set_faculty_id($previous_reference->get_id());
-                    $parameters->set_source($previous_reference->get_source());
-
-                    $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
-                    if ($faculty instanceof Faculty)
-                    {
-                        $faculties[$faculty->get_year()][] = $faculty;
-                    }
-
-                    if($faculty->has_next_references(true) && $this->has_previous_references(true) && $recursive)
-                    {
-                        $faculties = array_merge_recursive($faculties, $faculty->get_previous($module_instance));
-                    }
+                    $faculties[$faculty->get_year()][] = $faculty;
                 }
-//             }
-//             while ($faculty instanceof Faculty && $faculty->has_previous_references(true) && $recursive);
+                
+                if ($faculty->has_next_references(true) && $this->has_previous_references(true) && $recursive)
+                {
+                    $faculties = array_merge_recursive($faculties, $faculty->get_previous($module_instance));
+                }
+            }
         }
         return $faculties;
     }
@@ -90,30 +85,25 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     function get_next($module_instance, $recursive = true)
     {
         $faculties = array();
-//         $faculty = $this;
         if ($this->has_next_references())
         {
-//             do
-//             {
-                foreach ($this->get_next_references() as $next_reference)
+            foreach ($this->get_next_references() as $next_reference)
+            {
+                $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters();
+                $parameters->set_faculty_id($next_reference->get_id());
+                $parameters->set_source($next_reference->get_source());
+                
+                $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
+                if ($faculty instanceof Faculty)
                 {
-                    $parameters = new Parameters();
-                    $parameters->set_faculty_id($next_reference->get_id());
-                    $parameters->set_source($next_reference->get_source());
-
-                    $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
-                    if ($faculty instanceof Faculty)
-                    {
-                        $faculties[$faculty->get_year()][] = $faculty;
-                    }
-
-                    if($faculty->has_previous_references(true) && $this->has_next_references(true) && $recursive)
-                    {
-                        $faculties = array_merge_recursive($faculties, $faculty->get_next($module_instance));
-                    }
+                    $faculties[$faculty->get_year()][] = $faculty;
                 }
-//             }
-//             while ($faculty->has_next_references(true) && $faculty instanceof Faculty && $recursive);
+                
+                if ($faculty->has_previous_references(true) && $this->has_next_references(true) && $recursive)
+                {
+                    $faculties = array_merge_recursive($faculties, $faculty->get_next($module_instance));
+                }
+            }
         }
         return $faculties;
     }
@@ -128,9 +118,9 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         $faculties = $this->get_next($module_instance);
         $faculties[$this->get_year()][] = $this;
         $faculties = array_merge_recursive($faculties, $this->get_previous($module_instance));
-
+        
         ksort($faculties);
-
+        
         return $faculties;
     }
 
@@ -307,7 +297,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 

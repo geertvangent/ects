@@ -21,11 +21,11 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param $id int           
      * @return multitype:\application\discovery\module\faculty\implementation\bamaflex\TeachingAssignment
      */
-    function retrieve_faculties()
+    function retrieve_faculties($year)
     {
-        if (! isset($this->faculties))
+        if (! isset($this->faculties[$year]))
         {
-            $query = 'SELECT * FROM v_discovery_faculty_advanced ORDER BY year DESC, name';
+            $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE year = "' . $year . '" ORDER BY year DESC, name';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -53,12 +53,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $reference->set_source($next->source);
                     $faculty->add_next_reference($reference);
                     
-                    $this->faculties[] = $faculty;
+                    $this->faculties[$year][] = $faculty;
                 }
             }
         }
         
-        return $this->faculties;
+        return $this->faculties[$year];
     }
 
     function retrieve_faculty($faculty_parameters)
@@ -154,7 +154,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_faculty_dean_advanced WHERE source ="' . $source . '" AND faculty_id = "' . $faculty_id . '" ORDER BY person';
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))

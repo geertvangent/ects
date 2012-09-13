@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery;
 
+use common\libraries\NotAllowedException;
+
 use common\libraries\CommonDataManager;
 
 use common\libraries\Translation;
@@ -45,6 +47,10 @@ class DiscoveryManager extends WebApplication
     function __construct($user = null)
     {
         parent :: __construct($user);
+        if (! $user->is_platform_admin())
+        {
+            throw new NotAllowedException();
+        }
         Theme :: set_theme(PlatformSetting :: get('theme', __NAMESPACE__));
     }
 

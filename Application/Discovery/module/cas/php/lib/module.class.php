@@ -53,7 +53,7 @@ class Module extends \application\discovery\Module
     {
         if (! isset($this->cas_statistics))
         {
-            $path = Path :: get_cache_path(__NAMESPACE__) . 'cas_statistics/' . md5(serialize($this->get_cas_parameters()));
+            $path = Path :: get(SYS_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/cas_statistics/' . md5(serialize($this->get_cas_parameters()));
             
             if (! file_exists($path))
             {

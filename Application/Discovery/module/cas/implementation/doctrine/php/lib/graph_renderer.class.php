@@ -33,7 +33,7 @@ class GraphRenderer
         $this->action = $action;
         $this->module = $module;
         
-        $path = Path :: get_cache_path(__NAMESPACE__) . 'graph_data/' . md5(serialize(array($user_id, $application, 
+        $path =Path :: get(SYS_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/graph_data/' . md5(serialize(array($user_id, $application, 
                 $action)));
         
         if (! file_exists($path))
@@ -74,7 +74,7 @@ class GraphRenderer
     function chart()
     {
         $image_id = md5(serialize($this->graph_data));
-        $image_path = Path :: get_cache_path(__NAMESPACE__) . 'chart/';
+        $image_path = Path :: get(SYS_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/chart/';
         $image_file = $image_id . '.png';
         
         $alt_title = Translation :: get('CasStatistics') . ' - ' . $this->graph_data[1]['Title'];
@@ -112,7 +112,7 @@ class GraphRenderer
             $graph->Render($image_path . $image_file);
         }
         
-        $web_path = Path :: get_cache_path(__NAMESPACE__, true) . 'chart/' . $image_file;
+        $web_path = Path :: get(WEB_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/chart/' . $image_file;
         
         return '<img src="' . $web_path . '" border="0" alt="' . $alt_title . '" title="' . $alt_title . '" />';
     }
@@ -137,7 +137,7 @@ class GraphRenderer
     {
         if (! isset($this->months))
         {
-            $path = Path :: get_cache_path(__NAMESPACE__) . 'months/' . md5(serialize(array($this->user_id, 
+            $path = Path :: get(SYS_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/months/' . md5(serialize(array($this->user_id, 
                     $this->action, $this->application)));
             
             if (! file_exists($path))

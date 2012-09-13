@@ -14,6 +14,7 @@ class SubTrajectoryCourse extends DiscoveryItem
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_SUB_TRAJECTORY_ID = 'sub_trajectory_id';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
+    const PROPERTY_PARENT_PROGRAMME_ID = 'parent_programme_id';
     
     private $children;
 
@@ -103,6 +104,16 @@ class SubTrajectoryCourse extends DiscoveryItem
         return count($this->children) > 0;
     }
 
+    function get_parent_programme_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PARENT_PROGRAMME_ID);
+    }
+
+    function set_parent_programme_id($parent_programme_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PARENT_PROGRAMME_ID, $parent_programme_id);
+    }
+
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
@@ -111,6 +122,7 @@ class SubTrajectoryCourse extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_PART;
+        $extended_property_names[] = self :: PROPERTY_PARENT_PROGRAMME_ID;
         
         return parent :: get_default_property_names($extended_property_names);
     }

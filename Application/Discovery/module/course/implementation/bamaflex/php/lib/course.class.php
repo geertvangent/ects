@@ -20,6 +20,7 @@ class Course extends DiscoveryItem
     /**
      * Course properties
      */
+    const PROPERTY_PARENT_ID = 'parent_id';
     const PROPERTY_YEAR = 'year';
     const PROPERTY_FACULTY_ID = 'faculty_id';
     const PROPERTY_FACULTY = 'faculty';
@@ -92,6 +93,7 @@ class Course extends DiscoveryItem
      */
     static function get_default_property_names($extended_property_names = array())
     {
+        $extended_property_names[] = self :: PROPERTY_PARENT_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_FACULTY_ID;
         $extended_property_names[] = self :: PROPERTY_FACULTY;
@@ -132,6 +134,16 @@ class Course extends DiscoveryItem
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
+    }
+    
+    function get_parent_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_PARENT_ID);
+    }
+    
+    function set_parent_id($parent_id)
+    {
+        $this->set_default_property(self :: PROPERTY_PARENT_ID, $parent_id);
     }
 
     function get_year()
@@ -1082,6 +1094,11 @@ class Course extends DiscoveryItem
     public function set_children($children)
     {
         $this->children = $children;
+    }
+    
+    function add_child($child)
+    {
+        $this->children[] = $child;
     }
 
     function get_children()

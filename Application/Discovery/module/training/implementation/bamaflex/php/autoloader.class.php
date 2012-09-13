@@ -14,7 +14,6 @@ class Autoloader
          'application\discovery\module\profile\implementation\bamaflex\BamaflexAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php',
          'application\discovery\module\profile\implementation\bamaflex\BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php',
          'Module' => '/lib/module.class.php',
-         'Parameters' => '/lib/parameters.class.php',
          'Rights' => '/lib/rights.class.php',
          'Training' => '/lib/training.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',

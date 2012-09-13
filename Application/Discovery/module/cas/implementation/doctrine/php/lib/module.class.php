@@ -22,7 +22,7 @@ class Module extends \application\discovery\module\cas\Module
     {
         if (! isset($this->action_statistics))
         {
-            $path = Path :: get_cache_path(__NAMESPACE__) . 'cas_action_statistics/' . md5(serialize($this->get_cas_parameters()));
+            $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/cas_action_statistics/' . md5(serialize($this->get_cas_parameters()));
             
             if (! file_exists($path))
             {
@@ -56,7 +56,7 @@ class Module extends \application\discovery\module\cas\Module
         
         if (count($action_statistics) == 1 && count($action_statistics[0]) > 0)
         {
-            $path = Path :: get_cache_path(__NAMESPACE__) . 'data/' . md5(serialize(array(
+            $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/data/' . md5(serialize(array(
                     $this->get_cas_parameters()->get_user_id(), 0, $action->get_id())));
             
             if (! file_exists($path))
@@ -86,7 +86,7 @@ class Module extends \application\discovery\module\cas\Module
             $tabs = new DynamicTabsRenderer('statistics_list_' . $action->get_id());
             foreach ($action_statistics as $application_id => $application_statistics)
             {
-                $path = Path :: get_cache_path(__NAMESPACE__) . 'data/' . md5(serialize(array(
+                $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/data/' . md5(serialize(array(
                         $this->get_cas_parameters()->get_user_id(), $application_id, $action->get_id())));
                 
                 if (! file_exists($path))

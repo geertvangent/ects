@@ -65,33 +65,15 @@ class Module extends \application\discovery\Module
         }
         return $this->training;
     }
-
+    
     /* (non-PHPdoc)
      * @see application\discovery\module\training_info\Module::render()
      */
     function render()
     {
-        //        $html = array();
-        dump($this->get_training());
-    
-     //        if ($this->has_parameters())
-    //        {
-    //           
-    //            $html[] = $this->get_training_infos_table()->toHTML();
-    //        }
-    //        else
-    //        {
-    //            $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
-    //            
-    //            $tabs = new DynamicTabsRenderer('training_info_list');
-    //            foreach ($years as $year)
-    //            {
-    //                $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_training_infos_table($year)->toHTML()));
-    //            }
-    //            $html[] = $tabs->render();
-    //        
-    //        }
-    //        return implode("\n", $html);
+        $html = array();
+        
+        return implode("\n", $html);
     }
 
     function get_type()

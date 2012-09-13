@@ -1,10 +1,11 @@
 <?php
 namespace application\discovery\module\faculty;
 
+use common\libraries\Request;
+
+use common\libraries\DynamicVisualTabsRenderer;
+use common\libraries\DynamicVisualTab;
 use common\libraries\Filesystem;
-
-use application\discovery\Parameters;
-
 use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\Path;
@@ -22,11 +23,13 @@ use application\discovery\ModuleInstance;
 
 class Module extends \application\discovery\Module
 {
+    const PARAM_YEAR = 'year';
     /**
      * @var multitype:\application\discovery\module\faculty\Faculty
      */
     private $faculties;
     private $cache_faculties = array();
+    private $years;
 
     function __construct(Application $application, ModuleInstance $module_instance)
     {
@@ -36,45 +39,38 @@ class Module extends \application\discovery\Module
 
     static function get_module_parameters()
     {
-        return new Parameters();
+        $year = Request :: get(self :: PARAM_YEAR);
+        
+        $parameter = new Parameters();
+        if ($year)
+        {
+            $parameter->set_year($year);
+        }
+        
+        return $parameter;
     }
 
     /**
      * @return multitype:\application\discovery\module\faculty\Faculty
      */
-    function get_faculties()
+    function get_faculties($year)
     {
-        if (! isset($this->faculties))
+        if (! isset($this->faculties[$year]))
         {
-            $this->faculties = DataManager :: get_instance($this->get_module_instance())->retrieve_faculties();
+            $this->faculties[$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_faculties($year);
         }
-        return $this->faculties;
+        return $this->faculties[$year];
     }
 
-    function get_faculties_data($year = 0)
+    function get_faculties_data($year)
     {
         if (! isset($this->cache_faculties[$year]))
         {
-            if ($year == 0)
+            foreach ($this->get_faculties($year) as $faculty)
             {
-                $faculties = array();
-                foreach ($this->get_faculties() as $faculty)
-                {
-                    $faculties[] = $faculty;
-                }
+                $this->cache_faculties[$year][] = $faculty;
             }
-            else
-            {
-                $faculties = array();
-                foreach ($this->get_faculties() as $faculty)
-                {
-                    if ($faculty->get_year() == $year)
-                    {
-                        $faculties[] = $faculty;
-                    }
-                }
-            }
-            $this->cache_faculties[$year] = $faculties;
+        
         }
         return $this->cache_faculties[$year];
     }
@@ -84,7 +80,7 @@ class Module extends \application\discovery\Module
         return count($this->get_faculties_data($year)) > 0;
     }
 
-    function get_faculties_table($year = 0)
+    function get_faculties_table($year)
     {
         $faculties = $this->get_faculties_data($year);
         
@@ -93,57 +89,50 @@ class Module extends \application\discovery\Module
         foreach ($faculties as $key => $faculty)
         {
             $row = array();
-            if (! $year)
-            {
-                $row[] = $faculty->get_year();
-            }
-            //            $data_source = $this->get_module_instance()->get_setting('data_source');
-            //            $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
-            //                    'data_source' => $data_source));
-            //
-            //            if ($course_result_module_instance)
-            //            {
-            //                $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($faculty->get_programme_id(), 1);
-            //                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-            //                $row[] = '<a href="' . $url . '">' . $faculty->get_name() . '</a>';
-            //            }
-            //            else
-            //            {
+            
             $row[] = $faculty->get_name();
-            //            }
             $data[] = $row;
         }
         
         $table = new SortableTable($data);
-        if (! $year)
-        {
-            $table->set_header(0, Translation :: get('Year'), false, 'class="code"');
-            $table->set_header(1, Translation :: get('Name'), false);
-        }
-        else
-        {
-            $table->set_header(0, Translation :: get('Name'), false);
-        }
+        $table->set_header(0, Translation :: get('Name'), false);
+        
         return $table;
     }
 
+    function get_years()
+    {
+        if (! isset($this->years))
+        {
+            $this->years = DataManager :: get_instance($this->get_module_instance())->retrieve_years();
+        }
+        return $this->years;
+    
+    }
+    
     /* (non-PHPdoc)
      * @see application\discovery\module\faculty\Module::render()
      */
     function render()
     {
         $html = array();
-        
-        $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_application()->get_user_id());
-        
-        $tabs = new DynamicTabsRenderer('faculty_list');
-        
-        //        $tabs->add_tab(new DynamicContentTab(0, Translation :: get('AllYears'), null, $this->get_faculties_table(0)->toHTML()));
-        
-
-        foreach ($years as $year)
+        if (is_null(self :: get_module_parameters()->get_year()))
         {
-            $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_faculties_table($year)->toHTML()));
+            $years = $this->get_years();
+            $current_year = $years[0];
+        }
+        else
+        {
+            $current_year = self :: get_module_parameters()->get_year();
+        }
+        
+        $tabs = new DynamicVisualTabsRenderer('faculty_list', $this->get_faculties_table($current_year)->as_html());
+        
+        foreach ($this->get_years() as $year)
+        {
+            $parameters = self :: get_module_parameters();
+            $parameters->set_year($year);
+            $tabs->add_tab(new DynamicVisualTab($year, $year, null, $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), $current_year == $year));
         }
         
         $html[] = $tabs->render();

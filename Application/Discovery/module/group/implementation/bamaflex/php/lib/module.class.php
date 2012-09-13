@@ -180,7 +180,7 @@ class Module extends \application\discovery\module\group\Module
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         
-        $training_module_instance = \application\discovery\Module :: exists('application\discovery\module\training\implementation\bamaflex', array(
+        $faculty_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\faculty_info\implementation\bamaflex', array(
                 'data_source' => $data_source));
         
         $html = array();
@@ -198,10 +198,10 @@ class Module extends \application\discovery\module\group\Module
         }
         $properties[Translation :: get('History')] = implode('  |  ', $history);
         
-        if ($training_module_instance)
+        if ($faculty_info_module_instance)
         {
-            $parameters = new \application\discovery\module\training\implementation\bamaflex\Parameters($training->get_faculty_id(), $training->get_source());
-            $url = $this->get_instance_url($training_module_instance->get_id(), $parameters);
+            $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters($training->get_faculty_id(), $training->get_source());
+            $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $training->get_faculty() . '</a>';
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $training->get_faculty()));
         }

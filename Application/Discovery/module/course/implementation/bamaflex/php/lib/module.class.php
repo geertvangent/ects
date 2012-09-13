@@ -107,7 +107,7 @@ class Module extends \application\discovery\module\course\Module
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
 
-        $training_module_instance = \application\discovery\Module :: exists('application\discovery\module\training\implementation\bamaflex', array(
+        $faculty_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\faculty_info\implementation\bamaflex', array(
                 'data_source' => $data_source));
 
         $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
@@ -143,10 +143,10 @@ class Module extends \application\discovery\module\course\Module
             $properties[Translation :: get('Training')] = $course->get_training();
         }
 
-        if ($training_module_instance)
+        if ($faculty_info_module_instance)
         {
-            $parameters = new \application\discovery\module\training\implementation\bamaflex\Parameters($course->get_faculty_id(), $course->get_source());
-            $url = $this->get_instance_url($training_module_instance->get_id(), $parameters);
+            $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters($course->get_faculty_id(), $course->get_source());
+            $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $course->get_faculty() . '</a>';
         }
         else
