@@ -34,6 +34,7 @@ class DepartmentGroupSynchronization extends GroupSynchronization
         $children = array();
         $children[] = GroupSynchronization :: factory('user_type_employee', $this);
         $children[] = GroupSynchronization :: factory('user_type_teacher', $this);
+        $children[] = GroupSynchronization :: factory('user_type_guest_teacher', $this);
         $children[] = GroupSynchronization :: factory('user_type_student', $this);
         return $children;
     }

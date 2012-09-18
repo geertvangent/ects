@@ -65,6 +65,7 @@ class Autoloader
          'TeacherTrainingGroupSynchronization' => '/lib/synchronization/type/group/teacher_training.class.php',
          'TrainingGroupSynchronization' => '/lib/synchronization/type/group/training.class.php',
          'UserTypeEmployeeGroupSynchronization' => '/lib/synchronization/type/group/user_type_employee.class.php',
+         'UserTypeGuestTeacherGroupSynchronization' => '/lib/synchronization/type/group/user_type_guest_teacher.class.php',
          'UserTypeStudentGroupSynchronization' => '/lib/synchronization/type/group/user_type_student.class.php',
          'UserTypeTeacherGroupSynchronization' => '/lib/synchronization/type/group/user_type_teacher.class.php',
          'AllUserSynchronization' => '/lib/synchronization/type/user/all.class.php',

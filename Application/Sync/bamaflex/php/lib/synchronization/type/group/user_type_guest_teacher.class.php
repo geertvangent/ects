@@ -12,9 +12,9 @@ use group\Group;
 use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
 
-class UserTypeEmployeeGroupSynchronization extends GroupSynchronization
+class UserTypeGuestTeacherGroupSynchronization extends GroupSynchronization
 {
-    CONST IDENTIFIER = 'ATP';
+    CONST IDENTIFIER = 'GT';
 
     function get_department()
     {
@@ -28,15 +28,15 @@ class UserTypeEmployeeGroupSynchronization extends GroupSynchronization
 
     function get_name()
     {
-        return 'Administratief en technisch personeel';
+        return 'Gastprofessoren';
     }
 
     function get_user_official_codes()
     {
         $user_mails = array();
 
-        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_employee]  WHERE faculty_id IN (SELECT student_faculty_id FROM dbo.t_employee_faculties WHERE year > "2005-06" AND employee_faculty_id IN (SELECT employee_faculty_id FROM dbo.t_employee_faculties WHERE student_faculty_id = ' . $this->get_department()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID) . ')
-                AND type = 3 AND date_start <= current_timestamp AND (date_end >= current_timestamp OR date_end is null))';
+        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_guest_teacher]  WHERE faculty_id IN (SELECT student_faculty_id FROM dbo.t_employee_faculties WHERE year > "2005-06" AND employee_faculty_id IN (SELECT employee_faculty_id FROM dbo.t_employee_faculties WHERE student_faculty_id = ' . $this->get_department()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID) . ')
+                AND type = 4 AND date_start <= current_timestamp AND (date_end >= current_timestamp OR date_end is null))';
         $users = $this->get_result($query);
 
         while ($user = $users->next_result(false))

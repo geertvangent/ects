@@ -27,7 +27,7 @@ class AcademicYearExtraIntakeGroupSynchronization extends GroupSynchronization
 
     function get_user_official_codes()
     {
-        $query = 'SELECT DISTINCT id FROM [dbo].[v_discovery_profile_basic]  WHERE company_id LIKE CAST(LEFT(' . $this->get_academic_year() . ', 4) as VARCHAR)';
+        $query = 'SELECT DISTINCT id FROM [dbo].[v_discovery_profile_basic]  WHERE company_id LIKE CAST(LEFT(' . $this->get_academic_year() . ', 4) as VARCHAR) + \'%\'';
         
         $users = $this->get_result($query);
 

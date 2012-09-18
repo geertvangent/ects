@@ -27,7 +27,7 @@ class AcademicYearExtraGenerationGroupSynchronization extends GroupSynchronizati
 
     function get_user_official_codes()
     {
-        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user]  WHERE year = "' . $this->get_academic_year() . '" AND generation_student = 1 AND type = 1';
+        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE year = "' . $this->get_academic_year() . '" AND generation_student = 1 AND type = 1';
         $users = $this->get_result($query);
 
         $user_mails = array();

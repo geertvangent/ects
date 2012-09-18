@@ -202,7 +202,7 @@ class GroupSynchronization extends Synchronization
         $current_users = $group_data_manager->retrieve_distinct(GroupRelUser :: get_table_name(), GroupRelUser :: PROPERTY_USER_ID, $condition);
         
         $source_users = $this->get_users();
-        
+//         $source_users = array();
         $to_add = array_diff($source_users, $current_users);
         $to_delete = array_diff($current_users, $source_users);
         

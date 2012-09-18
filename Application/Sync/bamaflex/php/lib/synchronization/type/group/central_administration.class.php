@@ -29,7 +29,7 @@ class CentralAdministrationGroupSynchronization extends GroupSynchronization
     {
         $user_mails = array();
 
-        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user]  WHERE year = "' . $this->get_academic_year() . '" AND faculty_id = 0 AND type = 3';
+        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_employee]  WHERE year = "' . $this->get_academic_year() . '" AND faculty_id = 0 AND type = 3';
         $users = $this->get_result($query);
 
         while ($user = $users->next_result(false))
