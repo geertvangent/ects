@@ -44,7 +44,7 @@ class Module extends \application\discovery\module\enrollment\Module
         $data = array();
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $training_module_instance = \application\discovery\Module :: exists('application\discovery\module\training\implementation\bamaflex', array(
+        $faculty_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\faculty_info\implementation\bamaflex', array(
                 'data_source' => $data_source));
         
         $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
@@ -55,10 +55,10 @@ class Module extends \application\discovery\module\enrollment\Module
             $row = array();
             $row[] = $enrollment->get_year();
             
-            if ($training_module_instance)
+            if ($faculty_info_module_instance)
             {
-                $parameters = new \application\discovery\module\training\implementation\bamaflex\Parameters($enrollment->get_faculty_id(), $enrollment->get_source());
-                $url = $this->get_instance_url($training_module_instance->get_id(), $parameters);
+                $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters($enrollment->get_faculty_id(), $enrollment->get_source());
+                $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $enrollment->get_faculty() . '</a>';
             }
             else
