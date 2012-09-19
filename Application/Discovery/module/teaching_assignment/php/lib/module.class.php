@@ -22,16 +22,11 @@ use application\discovery\module\profile\DataManager;
 class Module extends \application\discovery\Module
 {
     const PARAM_USER_ID = 'user_id';
+    const PARAM_YEAR = 'year';
     /**
      * @var multitype:\application\discovery\module\teaching_assignment\TeachingAssignment
      */
     private $teaching_assignments;
-
-    function __construct(Application $application, ModuleInstance $module_instance)
-    {
-        parent :: __construct($application, $module_instance);
-    
-    }
 
     function get_teaching_assignment_parameters()
     {
@@ -46,10 +41,16 @@ class Module extends \application\discovery\Module
     static function get_module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
+        $year = Request :: get(self :: PARAM_YEAR);
         $parameter = new Parameters();
         if ($param_user)
         {
             $parameter->set_user_id($param_user);
+        }
+        
+        if ($year)
+        {
+            $parameter->set_year($year);
         }
         return $parameter;
     }
@@ -57,13 +58,16 @@ class Module extends \application\discovery\Module
     /**
      * @return multitype:\application\discovery\module\teaching_assignment\TeachingAssignment
      */
-    function get_teaching_assignments()
+    function get_teaching_assignments($parameters)
     {
-        if (! isset($this->teaching_assignments))
+        $year = $parameters->get_year();
+        $user_id = $parameters->get_user_id();
+        
+        if (! isset($this->teaching_assignments[$user_id][$year]))
         {
-            $this->teaching_assignments = DataManager :: get_instance($this->get_module_instance())->retrieve_teaching_assignments($this->get_teaching_assignment_parameters());
+            $this->teaching_assignments[$user_id][$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_teaching_assignments($parameters);
         }
-        return $this->teaching_assignments;
+        return $this->teaching_assignments[$user_id][$year];
     }
 
     function has_data($parameters = null)
@@ -71,7 +75,7 @@ class Module extends \application\discovery\Module
         $parameters = $parameters ? $parameters : $this->get_teaching_assignment_parameters();
         return $this->get_data_manager()->count_teaching_assignments($parameters);
     }
-
+    
     /* (non-PHPdoc)
      * @see application\discovery.Module::render()
      */
