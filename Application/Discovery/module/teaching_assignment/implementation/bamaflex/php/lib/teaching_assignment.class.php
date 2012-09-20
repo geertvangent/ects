@@ -15,10 +15,12 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     const PROPERTY_WEIGHT = 'weight';
     const PROPERTY_TIMEFRAME_ID = 'timeframe_id';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
-    const PROPERTY_TYPE = 'type';
+    const PROPERTY_MANAGER = 'manager';
+    const PROPERTY_TEACHER = 'teacher';
     
-    const TYPE_MANAGER = 1;
-    const TYPE_TEACHER = 2;
+    const TYPE_COORDINATOR_YES = 1;
+    const TYPE_COORDINATOR_NO = 0;
+    const TYPE_NONE = 2;
     
     const TIMEFRAME_ACADEMIC_YEAR = '1';
     const TIMEFRAME_FIRST_TERM = '2';
@@ -99,6 +101,16 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
         return $this->get_default_property(self :: PROPERTY_PROGRAMME_ID);
     }
 
+    function get_teacher()
+    {
+        return $this->get_default_property(self :: PROPERTY_TEACHER);
+    }
+
+    function get_manager()
+    {
+        return $this->get_default_property(self :: PROPERTY_MANAGER);
+    }
+
     /**
      * Sets the credits of this TeachingAssignment.
      * @param int $credits
@@ -171,6 +183,16 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
         $this->set_default_property(self :: PROPERTY_PROGRAMME_ID, $programme_id);
     }
 
+    function set_teacher($teacher)
+    {
+        $this->set_default_property(self :: PROPERTY_TEACHER, $teacher);
+    }
+
+    function set_manager($manager)
+    {
+        $this->set_default_property(self :: PROPERTY_MANAGER, $manager);
+    }
+
     /**
      * @param multitype:string $extended_property_names
      */
@@ -184,6 +206,8 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
         $extended_property_names[] = self :: PROPERTY_WEIGHT;
         $extended_property_names[] = self :: PROPERTY_TIMEFRAME_ID;
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
+        $extended_property_names[] = self :: PROPERTY_MANAGER;
+        $extended_property_names[] = self :: PROPERTY_TEACHER;
         
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -217,6 +241,66 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
                 break;
             case self :: TIMEFRAME_UNKNOWN :
                 return 'Unknown';
+                break;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    function get_manager_type()
+    {
+        return self :: manager_type($this->get_manager());
+    }
+
+    /**
+     * @return string
+     */
+    static function manager_type($type)
+    {
+        switch ($type)
+        {
+            case self :: TYPE_COORDINATOR_NO :
+                return 'ManagerCoordinatorNo';
+                break;
+            case self :: TYPE_COORDINATOR_YES :
+                return 'ManagerCoordinatorYes';
+                break;
+            case self :: TYPE_NONE :
+                return 'ManagerNone';
+                break;
+            default :
+                return 'ManagerNone';
+                break;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    function get_teacher_type()
+    {
+        return self :: teacher_type($this->get_teacher());
+    }
+
+    /**
+     * @return string
+     */
+    static function teacher_type($type)
+    {
+        switch ($type)
+        {
+            case self :: TYPE_COORDINATOR_NO :
+                return 'TeacherCoordinatorNo';
+                break;
+            case self :: TYPE_COORDINATOR_YES :
+                return 'TeacherCoordinatorYes';
+                break;
+            case self :: TYPE_NONE :
+                return 'TeacherNone';
+                break;
+            default :
+                return 'TeacherNone';
                 break;
         }
     }

@@ -24,7 +24,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         
         if (! isset($this->teaching_assignments[$person_id][$year]))
         {
-            $query = 'SELECT * FROM v_discovery_teaching_assignment_advanced WHERE person_id = "' . $person_id . '" AND year = "' . $year . '" ORDER BY faculty, training, name';
+            $query = 'SELECT * FROM v_discovery_teaching_assignment WHERE person_id = "' . $person_id . '" AND year = "' . $year . '" ORDER BY faculty, training, name';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
@@ -35,8 +35,6 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 {
                     $teaching_assignment = new TeachingAssignment();
                     $teaching_assignment->set_source($result->source);
-                    $teaching_assignment->set_type($result->type);
-                    $teaching_assignment->set_id($result->id);
                     $teaching_assignment->set_programme_id($result->programme_id);
                     $teaching_assignment->set_name($this->convert_to_utf8($result->name));
                     $teaching_assignment->set_year($this->convert_to_utf8($result->year));
@@ -48,6 +46,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $teaching_assignment->set_credits($result->credits);
                     $teaching_assignment->set_weight($result->weight);
                     $teaching_assignment->set_timeframe_id($result->timeframe_id);
+                    $teaching_assignment->set_manager($result->manager);
+                    $teaching_assignment->set_teacher($result->teacher);
                     $this->teaching_assignments[$person_id][$year][] = $teaching_assignment;
                 }
             }

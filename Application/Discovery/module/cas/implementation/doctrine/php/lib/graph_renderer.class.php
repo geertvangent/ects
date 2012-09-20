@@ -33,7 +33,7 @@ class GraphRenderer
         $this->action = $action;
         $this->module = $module;
         
-        $path =Path :: get(SYS_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/graph_data/' . md5(serialize(array($user_id, $application, 
+        $path = Path :: get(SYS_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/graph_data/' . md5(serialize(array($user_id, $application, 
                 $action)));
         
         if (! file_exists($path))

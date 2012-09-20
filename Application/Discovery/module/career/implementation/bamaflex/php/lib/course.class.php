@@ -47,8 +47,18 @@ class Course extends \application\discovery\module\career\Course
     const TYPE_EXTERNAL_REFUSED = 10;
     // NL : Vrijstelling
     const TYPE_EXEMPTION = 11;
-    //NL : DeelVrijstelling
+    // NL : DeelVrijstelling
     const TYPE_PARTIAL_EXEMPTION = 12;
+    // NL : Ontheffing
+    const TYPE_RELEASE = 13;
+    // NL : Uitgeschreven ontheffing
+    const TYPE_RELEASE_STRUCK = 14;
+    // NL : Uitgeschreven deelvrijstelling
+    const TYPE_PARTIAL_EXEMPTION_STRUCK = 15;
+    // NL : Uitgeschreven vrijstelling
+    const TYPE_EXEMPTION_STRUCK = 16;
+    // NL : Uitgeschreven EGO
+    const TYPE_EXTERNAL_STRUCK = 17;
 
     /**
      * Get the default properties
@@ -243,6 +253,21 @@ class Course extends \application\discovery\module\career\Course
             case self :: TYPE_PARTIAL_EXEMPTION :
                 return 'PartialExemption';
                 break;
+            case self :: TYPE_RELEASE :
+                return 'Release';
+                break;
+            case self :: TYPE_RELEASE_STRUCK :
+                return 'ReleaseStruck';
+                break;
+            case self :: TYPE_PARTIAL_EXEMPTION_STRUCK :
+                return 'PartialExemptionStruck';
+                break;
+            case self :: TYPE_EXEMPTION_STRUCK :
+                return 'ExemptionStruck';
+                break;
+            case self :: TYPE_EXTERNAL_STRUCK :
+                return 'ExternalStruck';
+                break;
         }
     }
 
@@ -254,7 +279,8 @@ class Course extends \application\discovery\module\career\Course
         return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS, self :: TYPE_EXTERNAL, self :: TYPE_CREDIT_HISTORY, 
                 self :: TYPE_STRUCK, self :: TYPE_EXCHANGE, self :: TYPE_CREDIT_HISTORY_INACTIVE, self :: TYPE_REFUSED, 
                 self :: TYPE_PREVIOUS_REFUSED, self :: TYPE_EXTERNAL_REFUSED, self :: TYPE_EXEMPTION, 
-                self :: TYPE_PARTIAL_EXEMPTION);
+                self :: TYPE_PARTIAL_EXEMPTION, self :: TYPE_RELEASE, self :: TYPE_RELEASE_STRUCK, 
+                self :: TYPE_PARTIAL_EXEMPTION_STRUCK, self :: TYPE_EXEMPTION_STRUCK, self :: TYPE_EXTERNAL_STRUCK);
     }
 
     /**

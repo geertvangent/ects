@@ -19,7 +19,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function retrieve_photo($id)
     {
         $relative_path = 'photo/' . Text :: char_at($id, 0) . '/' . $id . '.jpg';
-        $path = Path :: get_cache_path(__NAMESPACE__) . '/' . $relative_path;
+        $path = Path :: get(SYS_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
 
         if (! file_exists($path))
         {
@@ -44,12 +44,6 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 {
                     Filesystem :: copy_file(Theme :: get_common_image_system_path() . 'unknown.jpg', $path);
                 }
-
-                // $photo = new Photo();
-                // $photo->set_mime_type('image/jpeg');
-                // $photo->set_data(base64_encode($object->photo));
-
-                // return $photo;
             }
             else
             {
@@ -57,7 +51,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             }
         }
 
-        return Path :: get_cache_path(__NAMESPACE__, true) . $relative_path;
+        return Path :: get(WEB_FILE_PATH) . Path::namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
     }
 
     function retrieve_faculty($faculty_id)

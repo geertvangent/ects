@@ -87,6 +87,14 @@ class Module extends \application\discovery\module\teaching_assignment\Module
                 $row[] = $teaching_assignment->get_training();
             }
             
+            $image = '<img src="' . Theme :: get_image_path() . 'type/' . $teaching_assignment->get_manager() . '.png" alt="' . Translation :: get($teaching_assignment->get_manager_type()) . '" title="' . Translation :: get($teaching_assignment->get_manager_type()) . '"/>';
+            $row[] = $image;
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get($teaching_assignment->get_manager_type()), Translation :: get('Manager'));
+            
+            $image = '<img src="' . Theme :: get_image_path() . 'type/' . $teaching_assignment->get_teacher() . '.png" alt="' . Translation :: get($teaching_assignment->get_teacher_type()) . '" title="' . Translation :: get($teaching_assignment->get_teacher_type()) . '"/>';
+            $row[] = $image;
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get($teaching_assignment->get_teacher_type()), Translation :: get('Teacher'));
+            
             if ($course_module_instance)
             {
                 $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters($teaching_assignment->get_programme_id(), $teaching_assignment->get_source());
@@ -116,10 +124,12 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         
         $table->set_header(0, Translation :: get('Faculty'), false);
         $table->set_header(1, Translation :: get('Training'), false);
-        $table->set_header(2, Translation :: get('Name'), false);
-        $table->set_header(3, Translation :: get('Credits'), false, 'class="action"');
-        $table->set_header(4, '<img src="' . Theme :: get_image_path() . 'timeframe.png"/>', false);
-        $table->set_header(5, '', false);
+        $table->set_header(2, '<img src="' . Theme :: get_image_path() . 'manager.png"/>', false);
+        $table->set_header(3, '<img src="' . Theme :: get_image_path() . 'teacher.png"/>', false);
+        $table->set_header(4, Translation :: get('Name'), false);
+        $table->set_header(5, Translation :: get('Credits'), false, 'class="action"');
+        $table->set_header(6, '<img src="' . Theme :: get_image_path() . 'timeframe.png"/>', false);
+        $table->set_header(7, '', false);
         
         return $table;
     }
