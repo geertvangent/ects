@@ -18,6 +18,12 @@ class Autoloader
          'TicketForm' => '/lib/form/ticket.class.php',
          'Manager' => '/lib/manager/manager.class.php',
          'CreatorComponent' => '/lib/manager/component/creator.class.php',
+         'RestClient' => '/lib/rest/rest_client.class.php',
+         'RestResult' => '/lib/rest/rest_result.class.php',
+         'AuthenticationException' => '/lib/rtphplib/authentication_exception.class.php',
+         'HttpException' => '/lib/rtphplib/http_exception.class.php',
+         'RequestTracker' => '/lib/rtphplib/request_tracker.class.php',
+         'RequestTrackerException' => '/lib/rtphplib/request_tracker_exception.class.php',
          'Activator' => '/package/activate/activator.class.php',
          'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'

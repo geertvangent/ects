@@ -1,6 +1,8 @@
 <?php
 namespace application\ehb_helpdesk;
 
+use common\libraries\AndCondition;
+use common\libraries\NotCondition;
 use common\libraries\ObjectTableOrder;
 use common\libraries\PatternMatchCondition;
 use common\libraries\FormValidator;
@@ -37,7 +39,7 @@ class TicketForm extends FormValidator
 
     function __construct($component)
     {
-        parent :: __construct('ticket', 'post', 'http://helpdesk.ehb.be/rt/SelfService/Create2.html');
+        parent :: __construct('ticket', 'post', $component->get_url());
 
         $this->component = $component;
         $this->build();
@@ -63,7 +65,9 @@ class TicketForm extends FormValidator
         // General
         $this->addElement('category', Translation :: get('General'));
         $this->addElement('static', null, Translation :: get('Requestor'), $this->component->get_user()->get_email());
-        $this->addElement('text', self :: PROPERTY_SUBJECT, Translation :: get('Subject'), array("size" => "50"));
+        $this->addElement('text', self :: PROPERTY_SUBJECT, Translation :: get('Subject'), array("size" => "70"));
+        $this->addRule(self :: PROPERTY_SUBJECT,
+                Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
         $this->addElement('category');
 
         $this->addElement('category', Translation :: get('AdditionalInformation'));
@@ -81,7 +85,10 @@ class TicketForm extends FormValidator
         $this->addElement('static', null, null, Translation :: get('FacultyTrainingAutomatic'));
 
         // Faculty
-        $condition = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'DEP_*');
+        $conditions = array();
+        $conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'DEP_*');
+        $conditions[] = new NotCondition(new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'DEP_*_*'));
+        $condition = new AndCondition($conditions);
         $groups = \group\DataManager :: get_instance()->retrieve_groups($condition, null, null,
                 array(new ObjectTableOrder(\group\Group :: PROPERTY_NAME)));
 
@@ -110,12 +117,18 @@ class TicketForm extends FormValidator
 
         $this->addElement('select', self :: PROPERTY_TRAINING, Translation :: get('Training'), $training_options);
         $this->addElement('text', self :: PROPERTY_URL, Translation :: get('Url'), array("size" => "100"));
-//         $this->addElement('text', self :: PROPERTY_CC, Translation :: get('Cc'), array("size" => "50"));
+        $this->addRule(self :: PROPERTY_URL,
+                Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
         $this->addElement('category');
 
         // Issue
         $this->addElement('category', Translation :: get('Issue'));
-        $this->add_html_editor(self :: PROPERTY_ISSUE, Translation :: get('IssueDescription'), true);
+        $this->addElement('textarea', self :: PROPERTY_ISSUE, Translation :: get('IssueDescription'),
+                array("cols" => "100", "rows" => "20"));
+        $this->addRule(self :: PROPERTY_ISSUE,
+                Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
+        // $this->add_html_editor(self :: PROPERTY_ISSUE, Translation :: get('IssueDescription'), true);
+
         $this->addElement('file', self :: PROPERTY_ATTACHMENT, Translation :: get('Attachment'));
         $this->addElement('category');
 
