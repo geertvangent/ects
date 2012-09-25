@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+	<package>
+		<name>Cas</name>
+		<code>cas</code>
+		<context>application\ehb_sync\cas</context>
+		<section>application</section>
+		<category>education</category>
+		<authors>
+			<author>
+				<name>Hans De Bisschop</name>
+				<email>hans.de.bisschop@ehb.be</email>
+				<company>Erasmushogeschool Brussel</company>
+			</author>
+		</authors>
+		<version>3.0.0</version>
+		<cycle>
+			<phase>general_availability</phase>
+			<realm>main</realm>
+		</cycle>
+		<filename>pool/main/application/e/ehb_sync/ehb_sync-1.0.0.zip</filename>
+		<size></size>
+		<md5></md5>
+		<sha1></sha1>
+		<sha256></sha256>
+		<sha512></sha512>
+		<tagline></tagline>
+		<description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+			orci enim, auctor sit amet porttitor vel, sollicitudin vel augue. Etiam metus
+			dui, facilisis ac fermentum lobortis, sollicitudin nec sapien. Cum sociis
+			natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+			Morbi a nisl erat. Nulla pretium ipsum non neque tempor venenatis. Nulla
+			risus leo, eleifend nec auctor sed, ullamcorper quis ligula. Nam tempus
+			placerat mauris sed condimentum. Praesent vehicula fermentum dolor et luctus.
+			Nulla adipiscing vestibulum convallis. Aliquam aliquet gravida vulputate
+			viverra fusce.
+		</description>
+		<homepage></homepage>
+		<pre-depends>
+			<dependency type="registration">
+				<id>application\ehb_sync</id>
+				<version operator="4">3.0.0</version>
+			</dependency>
+		</pre-depends>
+	</package>
+</packages>

@@ -22,6 +22,8 @@ class Installer extends WebApplicationInstaller
     {
         $installers = array();
         $installers[] = new \application\ehb_sync\bamaflex\Installer($this->get_form_values());
+        $installers[] = new \application\ehb_sync\atlantis\Installer($this->get_form_values());
+        $installers[] = new \application\ehb_sync\cas\Installer($this->get_form_values());
         return $installers;
     }
 }

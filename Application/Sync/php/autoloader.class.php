@@ -19,6 +19,7 @@ class Autoloader
          'AtlantisComponent' => '/lib/manager/component/atlantis.class.php',
          'BamaflexComponent' => '/lib/manager/component/bamaflex.class.php',
          'BrowserComponent' => '/lib/manager/component/browser.class.php',
+         'CasComponent' => '/lib/manager/component/cas.class.php',
          'Activator' => '/package/activate/activator.class.php',
          'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'

@@ -13,6 +13,7 @@ class Manager extends WebApplication
     const ACTION_BROWSE = 'browser';
     const ACTION_BAMAFLEX = 'bamaflex';
     const ACTION_ATLANTIS = 'atlantis';
+    const ACTION_CAS = 'cas';
     
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
 
@@ -60,6 +61,14 @@ class Manager extends WebApplication
         if (! CommonDataManager :: get_registration(\application\ehb_sync\bamaflex\Manager :: context()) || $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\bamaflex\Manager :: context());
+        }
+        if (! CommonDataManager :: get_registration(\application\ehb_sync\atlantis\Manager :: context()) || $include_installed)
+        {
+            $package_list->add_package(\application\ehb_sync\atlantis\Manager :: context());
+        }
+        if (! CommonDataManager :: get_registration(\application\ehb_sync\cas\Manager :: context()) || $include_installed)
+        {
+            $package_list->add_package(\application\ehb_sync\cas\Manager :: context());
         }
         return $package_list;
     }

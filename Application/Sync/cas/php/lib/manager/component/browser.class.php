@@ -1,13 +1,11 @@
 <?php
-namespace application\ehb_sync;
-
-use common\libraries\NotAllowedException;
-
-use common\libraries\Utilities;
+namespace application\ehb_sync\cas;
 
 use common\libraries\Theme;
 
 use common\libraries\Translation;
+
+use common\libraries\Utilities;
 
 use common\libraries\DelegateComponent;
 
@@ -19,14 +17,9 @@ class BrowserComponent extends Manager implements DelegateComponent
      */
     function run()
     {
-        
-        if (! $this->get_user()->is_platform_admin())
-        {
-            throw new NotAllowedException();
-        }
-            
         $this->display_header();
-        $types = array(self :: ACTION_BAMAFLEX, self :: ACTION_ATLANTIS, self :: ACTION_CAS);
+        
+        $types = array(self :: ACTION_ALL_USERS);
         
         $html = array();
         foreach ($types as $type)
@@ -39,6 +32,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</a>';
         }
         echo implode("\n", $html);
+        
         $this->display_footer();
     }
 
