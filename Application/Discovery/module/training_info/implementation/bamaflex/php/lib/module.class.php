@@ -112,6 +112,19 @@ class Module extends \application\discovery\module\training_info\Module
             $properties[Translation :: get('Photos')] = implode("\n", $buttons);
         }
         
+        $training_results_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_results\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        if ($training_results_module_instance)
+        {
+            $parameters = new \application\discovery\module\training_results\implementation\bamaflex\Parameters();
+            $parameters->set_training_id($training->get_id());
+            $parameters->set_source($training->get_source());
+            
+            $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
+            $image = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\training_results\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\training_results\implementation\bamaflex');
+            $properties[Translation :: get('TypeName', null, 'application\discovery\module\training_results\implementation\bamaflex')] = $image;
+        }
         $table = new PropertiesTable($properties);
         
         return $table->toHtml();
@@ -339,7 +352,12 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
+        $photo_module_instance = \application\discovery\Module :: exists('application\discovery\module\photo\implementation\bamaflex', array(
+                'data_source' => $data_source));
         $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
                 'data_source' => $data_source));
         
         foreach ($package->get_courses() as $course)
@@ -356,6 +374,28 @@ class Module extends \application\discovery\module\training_info\Module
             else
             {
                 $row[] = $course->get_name();
+            }
+            if ($photo_module_instance || $course_result_module_instance)
+            {
+                $buttons = array();
+                
+                if ($photo_module_instance)
+                {
+                    $parameters = new \application\discovery\module\photo\Parameters();
+                    $parameters->set_programme_id($course->get_programme_id());
+                    
+                    $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
+                    $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                }
+                
+                if ($course_result_module_instance)
+                {
+                    $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
+                    $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                    $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\course_results\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\course_results\implementation\bamaflex');
+                }
+                
+                $row[] = implode("\n", $buttons);
             }
             
             $data[] = $row;
@@ -377,6 +417,28 @@ class Module extends \application\discovery\module\training_info\Module
                     {
                         $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                     }
+                    if ($photo_module_instance || $course_result_module_instance)
+                    {
+                        $buttons = array();
+                        
+                        if ($photo_module_instance)
+                        {
+                            $parameters = new \application\discovery\module\photo\Parameters();
+                            $parameters->set_programme_id($course->get_programme_id());
+                            
+                            $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
+                            $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                        }
+                        
+                        if ($course_result_module_instance)
+                        {
+                            $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
+                            $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                            $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\course_results\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\course_results\implementation\bamaflex');
+                        }
+                        
+                        $row[] = implode("\n", $buttons);
+                    }
                     
                     $data[] = $row;
                 }
@@ -386,6 +448,7 @@ class Module extends \application\discovery\module\training_info\Module
         $table->set_header(0, Translation :: get('Credits'), false);
         $table->getHeader()->setColAttributes(0, 'class="action"');
         $table->set_header(1, Translation :: get('Course'), false);
+        $table->set_header(2, null, false);
         return $table->as_html();
     }
 
@@ -418,7 +481,12 @@ class Module extends \application\discovery\module\training_info\Module
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
+        $photo_module_instance = \application\discovery\Module :: exists('application\discovery\module\photo\implementation\bamaflex', array(
+                'data_source' => $data_source));
         $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
                 'data_source' => $data_source));
         
         foreach ($trajectory->get_courses() as $course)
@@ -435,6 +503,29 @@ class Module extends \application\discovery\module\training_info\Module
             else
             {
                 $row[] = $course->get_name();
+            }
+            
+            if ($photo_module_instance || $course_result_module_instance)
+            {
+                $buttons = array();
+                
+                if ($photo_module_instance)
+                {
+                    $parameters = new \application\discovery\module\photo\Parameters();
+                    $parameters->set_programme_id($course->get_programme_id());
+                    
+                    $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
+                    $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                }
+                
+                if ($course_result_module_instance)
+                {
+                    $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($course->get_programme_id(), $course->get_source());
+                    $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                    $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\course_results\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\course_results\implementation\bamaflex');
+                }
+                
+                $row[] = implode("\n", $buttons);
             }
             
             $data[] = $row;
@@ -457,6 +548,29 @@ class Module extends \application\discovery\module\training_info\Module
                         $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                     }
                     
+                    if ($photo_module_instance || $course_result_module_instance)
+                    {
+                        $buttons = array();
+                        
+                        if ($photo_module_instance)
+                        {
+                            $parameters = new \application\discovery\module\photo\Parameters();
+                            $parameters->set_programme_id($course->get_programme_id());
+                            
+                            $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
+                            $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                        }
+                        
+                        if ($course_result_module_instance)
+                        {
+                            $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($child->get_programme_id(), $child->get_source());
+                            $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                            $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\course_results\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\course_results\implementation\bamaflex');
+                        }
+                        
+                        $row[] = implode("\n", $buttons);
+                    }
+                    
                     $data[] = $row;
                 }
             }
@@ -465,6 +579,7 @@ class Module extends \application\discovery\module\training_info\Module
         $table->set_header(0, Translation :: get('Credits'), false);
         $table->getHeader()->setColAttributes(0, 'class="action"');
         $table->set_header(1, Translation :: get('Course'), false);
+        $table->set_header(2, null, false);
         return $table->as_html();
     }
 
@@ -475,6 +590,11 @@ class Module extends \application\discovery\module\training_info\Module
         $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
                 'data_source' => $data_source));
         $photo_module_instance = \application\discovery\Module :: exists('application\discovery\module\photo\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        $course_module_instance = \application\discovery\Module :: exists('application\discovery\module\course\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        
+        $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
                 'data_source' => $data_source));
         
         foreach ($this->get_training()->get_courses() as $course)
@@ -493,7 +613,7 @@ class Module extends \application\discovery\module\training_info\Module
                 $row[] = $course->get_name();
             }
             
-            if ($photo_module_instance)
+            if ($photo_module_instance || $course_result_module_instance)
             {
                 $buttons = array();
                 
@@ -505,6 +625,14 @@ class Module extends \application\discovery\module\training_info\Module
                     $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                     $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
                 }
+                
+                if ($course_result_module_instance)
+                {
+                    $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($course->get_id(), $course->get_source());
+                    $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                    $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\course_results\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\course_results\implementation\bamaflex');
+                }
+                
                 $row[] = implode("\n", $buttons);
             }
             
@@ -528,7 +656,7 @@ class Module extends \application\discovery\module\training_info\Module
                         $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                     }
                     
-                    if ($photo_module_instance)
+                    if ($photo_module_instance || $course_result_module_instance)
                     {
                         $buttons = array();
                         
@@ -539,6 +667,13 @@ class Module extends \application\discovery\module\training_info\Module
                             
                             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                             $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\photo\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo\implementation\bamaflex');
+                        }
+                        
+                        if ($course_result_module_instance)
+                        {
+                            $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($child->get_id(), $child->get_source());
+                            $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                            $buttons[] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\course_results\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\course_results\implementation\bamaflex');
                         }
                         $row[] = implode("\n", $buttons);
                     }

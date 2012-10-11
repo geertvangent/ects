@@ -71,6 +71,8 @@ class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
                 $table_data[] = $row;
             }
             $table = new SortableTableFromArray($table_data);
+            $parameters = $this->get_parameters();
+            $table->set_additional_parameters($parameters);
             $table->set_header(0, '');
             $table->set_header(1, 'Type');
             $table->set_header(2, 'Description');

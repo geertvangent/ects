@@ -41,9 +41,13 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const RESULT_STRUCK = 8;
 
     const DISTINCTION_NONE = 1;
+    //Voldoende wijze
     const DISTINCTION_SUFFICIENT = 2;
+    //Onderscheiding
     const DISTINCTION_GOOD = 3;
+    //Grote onderscheiding
     const DISTINCTION_VERY_GOOD = 4;
+    //Grootste onderscheiding
     const DISTINCTION_EXCELLENT = 5;
 
     const EXCHANGE_TYPE_NONE = 1;
@@ -225,6 +229,10 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         return self :: distinction_string($this->get_distinction());
     }
 
+    function has_distinction()
+    {
+        return ! is_null($this->get_distinction());
+    }
     /**
      * @return string
      */
@@ -234,7 +242,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         switch ($distinction)
         {
             case self :: DISTINCTION_NONE :
-                return 'None';
+                return 'NoDistinction';
                 break;
             case self :: DISTINCTION_SUFFICIENT :
                 return 'Sufficient';

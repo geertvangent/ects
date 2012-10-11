@@ -84,6 +84,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $enrollment->set_result($result->result);
                     $enrollment->set_distinction($result->distinction);
                     $enrollment->set_generation_student($result->generation_student);
+                    $enrollment->set_person_id($result->person_id);
                     $this->enrollments[$id][] = $enrollment;
                 }
             }

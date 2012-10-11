@@ -130,7 +130,7 @@ class Module extends \application\discovery\module\course\Module
             $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
             $history[] = '<a href="' . $link . '">' . $course_history->get_year() . '</a>';
         }
-        $properties[Translation :: get('History')] = implode('&nbsp;&nbsp;|&nbsp;&nbsp;', $history);
+        $properties[Translation :: get('History')] = implode('  |  ', $history);
 
         if ($training_info_module_instance)
         {
@@ -353,6 +353,15 @@ class Module extends \application\discovery\module\course\Module
                     '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
 
             $properties[Translation :: get('Photos')] = implode("\n", $buttons);
+        }
+        
+        $course_result_module_instance = \application\discovery\Module :: exists('application\discovery\module\course_results\implementation\bamaflex', array(
+                'data_source' => $data_source));
+        if ($course_result_module_instance)
+        {
+            $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters($course->get_id(), $course->get_source());
+            $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+            $properties[Translation :: get('TypeName', null, 'application\discovery\module\course_results\implementation\bamaflex')] = Theme :: get_image('logo/16', 'png', Translation :: get('TypeName', null, 'application\discovery\module\course_results\implementation\bamaflex'), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\course_results\implementation\bamaflex');
         }
 
         $table = new PropertiesTable($properties);

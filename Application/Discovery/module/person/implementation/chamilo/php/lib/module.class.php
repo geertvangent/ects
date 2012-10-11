@@ -115,7 +115,7 @@ class Module extends \application\discovery\module\person\Module implements NewO
             $count_groups = GroupDataManager :: get_instance()->count_groups($this->get_subgroups_condition());
             if ($count_users > 0)
             {
-                $table = new UserBrowserTable($this, $parameters, $this->get_users_condition());
+                $table = new UserBrowserTable($this);
                 $tabs->add_tab(new DynamicContentTab(self :: TAB_USERS, Translation :: get('Users', null, 'user'), Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
             }
             if ($count_groups > 0)
@@ -235,7 +235,11 @@ class Module extends \application\discovery\module\person\Module implements NewO
 
     public function get_parameters()
     {
-        return $this->get_application()->get_parameters();
+        $parameters = $this->get_application()->get_parameters();
+        $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
+        $parameters[GroupManager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        return $parameters;
     }
 }
 ?>
