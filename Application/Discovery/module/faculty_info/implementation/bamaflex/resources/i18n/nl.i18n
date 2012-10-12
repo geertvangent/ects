@@ -1,0 +1,15 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\faculty_info\implementation\bamaflex
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Departement"
+TypeDescription = "Overzicht van departementen per jaar"
+Trainings = "Opleidingen"
+Name = "Naam"
+Deans = "Departementshoofd(en)"
+Year = "Jaar"
+History = "Historiek"
+Photos = "Foto's"
+Domain = "Domein"
+Credits = "Credits"
