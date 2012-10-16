@@ -31,6 +31,7 @@ class StudentTrainingTrajectoriesGroupSynchronization extends GroupSynchronizati
         $children[] = GroupSynchronization :: factory('student_training_trajectories_personal', $this);
         $children[] = GroupSynchronization :: factory('student_training_trajectories_individual', $this);
         $children[] = GroupSynchronization :: factory('student_training_trajectories_unknown', $this);
+        $children[] = GroupSynchronization :: factory('student_training_trajectories_parts', $this);
         return $children;
     }
 }
