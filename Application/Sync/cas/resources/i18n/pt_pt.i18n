@@ -1,5 +1,2 @@
-TypeName = "Bamaflex"
+TypeName = "CAS"
 AllUsersComponent = "All users"
-GroupsComponent = "Groups"
-NewUsersComponent = "New users"
-UpdateUsersComponent = "Update users"

@@ -11,10 +11,11 @@ class Manager extends SubManager
     const ACTION_UPDATE_USERS = 'update_users';
     const ACTION_COURSE_CATEGORIES = 'course_categories';
     const ACTION_GROUPS = 'groups';
+    const ACTION_ARCHIVE_GROUPS = 'archive_groups';
     const ACTION_COURSES = 'courses';
-    
+
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-    
+
     const PARAM_ACTION = 'bamaflex_action';
 
     function __construct($parent)

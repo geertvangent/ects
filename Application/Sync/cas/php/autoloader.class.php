@@ -18,6 +18,7 @@ class Autoloader
          'Manager' => '/lib/manager/manager.class.php',
          'AllUsersComponent' => '/lib/manager/component/all_users.class.php',
          'BrowserComponent' => '/lib/manager/component/browser.class.php',
+         'StatisticsComponent' => '/lib/manager/component/statistics.class.php',
          'Synchronization' => '/lib/synchronization/synchronization.class.php',
          'UserSynchronization' => '/lib/synchronization/type/user.class.php',
          'AllUserSynchronization' => '/lib/synchronization/type/user/all.class.php',

@@ -36,9 +36,16 @@ abstract class Synchronization
         return PlatformSetting::get('academic_year', __NAMESPACE__);
     }
 
+    function get_academic_year_end()
+    {
+        $year_parts = explode('-', $this->get_academic_year());
+
+        return '20'. $year_parts[1] .'-09-30 23:59:59.999';
+    }
+
     /**
      *
-     * @param $type string           
+     * @param $type string
      * @return Synchronization
      */
     static function factory($type)
@@ -54,7 +61,7 @@ abstract class Synchronization
 
     /**
      *
-     * @param $string string           
+     * @param $string string
      * @return string
      */
     function convert_to_utf8($string)
@@ -64,7 +71,7 @@ abstract class Synchronization
 
     /**
      *
-     * @param $query string           
+     * @param $query string
      * @return \common\libraries\RecordResultSet
      */
     function get_result($query)
@@ -76,8 +83,8 @@ abstract class Synchronization
 
     /**
      *
-     * @param $type string           
-     * @param $message string           
+     * @param $type string
+     * @param $message string
      */
     static function log($type, $message)
     {
