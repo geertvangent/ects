@@ -1,0 +1,8 @@
+TypeName = "Atlantis"
+ApplicationComponent = "Applications"
+RoleComponent = "Roles"
+UsersGroups = "Users/groups"
+
+
+
+PackageTypeNameAtlantis = ""
