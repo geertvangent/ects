@@ -1,3 +1,8 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\atlantis\role
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 TypeName = "Functie"
 BrowseRoles = "Lijst van functies"
 BrowseRolesDescription = "Geef een lijst weer van alle functies die gekoppeld kunnen worden aan één of meerdere toepassingen enerzijds en aan één of meerdere gebruikers en/of gebruikersgroepen anderzijds."

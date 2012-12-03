@@ -1,3 +1,8 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\atlantis\role\entity
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 TypeName = "Toegekende functies"
 BrowseRoleEntities = "Lijst van toegekende functies"
 BrowseRoleEntitiesDescription = "Geef een lijst weer van alle toegekende functies in een bepaalde context (departement, opleiding, vak)."

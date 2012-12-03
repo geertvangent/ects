@@ -24,7 +24,6 @@ class Autoloader
          'DeleterComponent' => '/lib/manager/component/deleter.class.php',
          'EditorComponent' => '/lib/manager/component/editor.class.php',
          'RightsComponent' => '/lib/manager/component/rights.class.php',
-         'ViewerComponent' => '/lib/manager/component/viewer.class.php',
          'RightTable' => '/lib/table/right/right_table.class.php',
          'RightTableCellRenderer' => '/lib/table/right/right_table_cell_renderer.class.php',
          'RightTableColumnModel' => '/lib/table/right/right_table_column_model.class.php',
