@@ -1,26 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Package = application\discovery\module\profile
+; Package = application\discovery\module\cas
 ; Language = nl
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-TypeName = "Profiel"
-General = "Algemeen"
-FirstName = "Voornaam"
-LastName = "Familienaam"
-Language = "Taal"
-NationalId = "Rijksregisternummer"
-CompanyId = "Stamnummer"
-Domicile = "Verblijfplaats"
-Telephone = "Telefoon"
-Mobile = "Mobiel"
-CommunicationNumbers = "Communicatie"
-Type = "Type"
-Device = "Apparaat"
-Number = "Nr."
-Official = "Officieel"
-Discontinued = "Buiten gebruik"
-EmailAddresses = "Email"
-Address = "Adres"
-Private = "Privé"
-CommunicationNumber = "Communicatie"
-Email = "Email"
+TypeName = "Cas"

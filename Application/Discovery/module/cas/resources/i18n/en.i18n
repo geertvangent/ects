@@ -1,27 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Package = application\discovery\module\profile
+; Package = application\discovery\module\cas
 ; Language = en
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-TypeName = "Profile"
-General = "General"
-FirstName = "First name"
-LastName = "Last name"
-Language = "Language"
-NationalId = "National ID"
-CompanyId = "Company ID"
-Domicile = "Domicile"
-Telephone = "Telephone"
-Mobile = "Mobile"
-CommunicationNumbers = "Communication numbers"
-Type = "Type"
-Device = "Device"
-Number = "Number"
-Official = "Official"
-Discontinued = "Discontinued"
-EmailAddresses = "EmailAddresses"
-Address = "Address"
-Private = "Private"
-CommunicationNumber = "Communication number"
-Email = "Email"
-PackageTypeNameProfile = ""
+TypeName = "Cas"
