@@ -87,7 +87,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
                 $query = 'SELECT count(id) AS \'count\', application_id, action_id, date_format(date, \'%Y-%m\') AS \'date\'
                     FROM cas_data.statistics
                     WHERE ((application_id IS NOT NULL AND action_id = 4) OR (application_id IS NULL AND action_id IN (1, 6)))
-                    GROUP BY person_id , date_format(date, \'%Y-%m\'), application_id , action_id
+                    GROUP BY date_format(date, \'%Y-%m\'), application_id , action_id
                     ORDER BY date DESC, action_id, application_id';
             }
             else
@@ -188,11 +188,11 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
             if ($application instanceof Application)
             {
 
-                $query = 'SELECT date FROM statistics WHERE person_id = "' . $official_code . '" AND action_id = "' . $action->get_id() . '" AND application_id = "' . $application->get_id() . '" ORDER BY date';
+                $query = 'SELECT date FROM statistics WHERE person_id = "' . $official_code . '" AND action_id = "' . $action->get_id() . '" AND application_id = "' . $application->get_id() . '" ORDER BY date LIMIT 1';
             }
             else
             {
-                $query = 'SELECT date FROM statistics WHERE person_id = "' . $official_code . '" AND action_id = "' . $action->get_id() . '" AND application_id IS NULL ORDER BY date';
+                $query = 'SELECT date FROM statistics WHERE person_id = "' . $official_code . '" AND action_id = "' . $action->get_id() . '" AND application_id IS NULL ORDER BY date LIMIT 1';
             }
         }
         else
@@ -200,11 +200,11 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
             if ($application instanceof Application)
             {
 
-                $query = 'SELECT date FROM statistics WHERE action_id = "' . $action->get_id() . '" AND application_id = "' . $application->get_id() . '" ORDER BY date';
+                $query = 'SELECT date FROM statistics WHERE action_id = "' . $action->get_id() . '" AND application_id = "' . $application->get_id() . '" ORDER BY date LIMIT 1';
             }
             else
             {
-                $query = 'SELECT date FROM statistics WHERE action_id = "' . $action->get_id() . '" AND application_id IS NULL ORDER BY date';
+                $query = 'SELECT date FROM statistics WHERE action_id = "' . $action->get_id() . '" AND application_id IS NULL ORDER BY date LIMIT 1';
             }
         }
 

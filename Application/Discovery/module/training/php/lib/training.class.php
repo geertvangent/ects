@@ -7,7 +7,7 @@ use application\discovery\DiscoveryItem;
 class Training extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
+
     const PROPERTY_YEAR = 'year';
     const PROPERTY_NAME = 'name';
     const PROPERTY_START_DATE = 'start_date';
@@ -74,7 +74,7 @@ class Training extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 

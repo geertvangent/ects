@@ -8,7 +8,7 @@ use application\discovery\DiscoveryDataManager;
 class Training extends \application\discovery\module\training\Training
 {
     const CLASS_NAME = __CLASS__;
-    
+
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_DOMAIN_ID = 'domain_id';
@@ -23,13 +23,16 @@ class Training extends \application\discovery\module\training\Training
     const PROPERTY_END_DATE = 'end_date';
     const PROPERTY_PREVIOUS_ID = 'previous_id';
     const PROPERTY_NEXT_ID = 'next_id';
-    
+
     const BAMA_TYPE_OTHER = 0;
     const BAMA_TYPE_BACHELOR = 1;
     const BAMA_TYPE_MASTER = 2;
     const BAMA_TYPE_CONTINUED = 3;
     const BAMA_TYPE_OLD = 4;
-    
+
+    const REFERENCE_PREVIOUS = 1;
+    const REFERENCE_NEXT = 2;
+
     private $majors;
     private $languages;
     private $packages;
@@ -38,6 +41,12 @@ class Training extends \application\discovery\module\training\Training
     private $trajectories;
     private $groups;
     private $courses;
+
+    /**
+     *
+     * @var multitype:HistoryReference
+     */
+    private $references;
 
     /**
      * @return int
@@ -133,7 +142,7 @@ class Training extends \application\discovery\module\training\Training
     /**
      * @return string
      */
-    static 
+    static
 
     function bama_type_string($bama_type)
     {
@@ -195,74 +204,6 @@ class Training extends \application\discovery\module\training\Training
     function set_end_date($end_date)
     {
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
-    }
-
-    function get_previous_id()
-    {
-        return $this->get_default_property(self :: PROPERTY_PREVIOUS_ID);
-    }
-
-    function set_previous_id($previous_id)
-    {
-        $this->set_default_property(self :: PROPERTY_PREVIOUS_ID, $previous_id);
-    }
-
-    function get_next_id()
-    {
-        return $this->get_default_property(self :: PROPERTY_NEXT_ID);
-    }
-
-    function set_next_id($next_id)
-    {
-        $this->set_default_property(self :: PROPERTY_NEXT_ID, $next_id);
-    }
-
-    function get_previous($module_instance, $recursive = true)
-    {
-        $trainings = array();
-        $training = $this;
-        if ($this->get_previous_id())
-        {
-            do
-            {
-                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($training->get_previous_id(), $training->get_source());
-                
-                $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
-                $trainings[] = $training;
-            }
-            while ($training instanceof Training && $training->get_previous_id() && $recursive);
-        }
-        return $trainings;
-    }
-
-    function get_next($module_instance, $recursive = true)
-    {
-        $trainings = array();
-        $training = $this;
-        if ($this->get_next_id())
-        {
-            do
-            {
-                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($training->get_next_id(), $training->get_source());
-                
-                $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
-                $trainings[] = $training;
-            }
-            while ($training instanceof Training && $training->get_next_id() && $recursive);
-        }
-        return $trainings;
-    }
-
-    function get_all($module_instance)
-    {
-        $trainings = $this->get_next($module_instance);
-        array_unshift($trainings, $this);
-        
-        foreach ($this->get_previous($module_instance) as $training)
-        {
-            array_unshift($trainings, $training);
-        }
-        return $trainings;
     }
 
     function get_majors()
@@ -455,7 +396,7 @@ class Training extends \application\discovery\module\training\Training
     /**
      * @param multitype:string $extended_property_names
      */
-    static 
+    static
 
     function get_default_property_names($extended_property_names = array())
     {
@@ -473,7 +414,7 @@ class Training extends \application\discovery\module\training\Training
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_ID;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -490,7 +431,7 @@ class Training extends \application\discovery\module\training\Training
         $current_date = time();
         $start_date = strtotime($this->get_start_date());
         $end_date = strtotime($this->get_end_date());
-        
+
         if ($current_date >= $start_date && $current_date <= $end_date)
         {
             return true;
@@ -499,6 +440,202 @@ class Training extends \application\discovery\module\training\Training
         {
             return false;
         }
+    }
+
+    /**
+     *
+     * @param $module_instance ModuleInstance
+     * @param $recursive boolean
+     * @return multitype:string:Training
+     */
+    function get_previous($module_instance, $recursive = true)
+    {
+        $trainings = array();
+        if ($this->has_previous_references())
+        {
+            foreach ($this->get_previous_references() as $previous_reference)
+            {
+                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
+                $parameters->set_training_id($previous_reference->get_id());
+                $parameters->set_source($previous_reference->get_source());
+
+                $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
+                if ($training instanceof Training)
+                {
+                    $trainings[$training->get_year()][] = $training;
+                }
+
+                if ($training->has_next_references(true) && $this->has_previous_references(true) && $recursive)
+                {
+                    $trainings = array_merge_recursive($trainings, $training->get_previous($module_instance));
+                }
+            }
+        }
+        return $trainings;
+    }
+
+    /**
+     *
+     * @param $module_instance ModuleInstance
+     * @param $recursive boolean
+     * @return multitype:string:Training
+     */
+    function get_next($module_instance, $recursive = true)
+    {
+        $trainings = array();
+
+        if ($this->has_next_references())
+        {
+            foreach ($this->get_next_references() as $next_reference)
+            {
+                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
+                $parameters->set_training_id($next_reference->get_id());
+                $parameters->set_source($next_reference->get_source());
+
+                $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
+                if ($training instanceof Training)
+                {
+                    $trainings[$training->get_year()][] = $training;
+                }
+
+                if ($training->has_previous_references(true) && $this->has_next_references(true) && $recursive)
+                {
+                    $trainings = array_merge_recursive($trainings, $training->get_next($module_instance));
+                }
+            }
+        }
+        return $trainings;
+    }
+
+    /**
+     *
+     * @param $module_instance ModuleInstance
+     * @return multitype:string:Faculty
+     */
+    function get_all($module_instance)
+    {
+        $trainings = $this->get_next($module_instance);
+        $trainings[$this->get_year()][] = $this;
+        $trainings = array_merge_recursive($trainings, $this->get_previous($module_instance));
+
+        ksort($trainings);
+
+        return $trainings;
+    }
+
+    /**
+     *
+     * @return multitype:HistoryReference
+     */
+    function get_previous_references()
+    {
+        return $this->get_references(self :: REFERENCE_PREVIOUS);
+    }
+
+    /**
+     *
+     * @param $previous_references multitype:HistoryReference
+     */
+    function set_previous_references($previous_references)
+    {
+        $this->set_references($previous_references, self :: REFERENCE_PREVIOUS);
+    }
+
+    /**
+     *
+     * @param $single integer
+     * @return boolean
+     */
+    function has_previous_references($single = false)
+    {
+        return $this->has_references(self :: REFERENCE_PREVIOUS, $single);
+    }
+
+    /**
+     *
+     * @param $previous_reference HistoryReference
+     */
+    function add_previous_reference(HistoryReference $previous_reference)
+    {
+        $this->add_reference($previous_reference, self :: REFERENCE_PREVIOUS);
+    }
+
+    /**
+     *
+     * @return multitype:HistoryReference
+     */
+    function get_next_references()
+    {
+        return $this->get_references(self :: REFERENCE_NEXT);
+    }
+
+    /**
+     *
+     * @param $next_references multitype:HistoryReference
+     */
+    function set_next_references($next_references)
+    {
+        $this->set_references($next_references, self :: REFERENCE_NEXT);
+    }
+
+    /**
+     *
+     * @param $single boolean
+     * @return boolean
+     */
+    function has_next_references($single = false)
+    {
+        return $this->has_references(self :: REFERENCE_NEXT, $single);
+    }
+
+    /**
+     *
+     * @param $next_reference HistoryReference
+     */
+    function add_next_reference(HistoryReference $next_reference)
+    {
+        $this->add_reference($next_reference, self :: REFERENCE_NEXT);
+    }
+
+    /**
+     *
+     * @param $type integer
+     * @return multitype:HistoryReference
+     */
+    function get_references($type)
+    {
+        return $this->references[$type];
+    }
+
+    /**
+     *
+     * @param $references multitype:HistoryReference
+     * @param $type integer
+     */
+    function set_references($references, $type)
+    {
+        $this->references[$type] = $references;
+    }
+
+    /**
+     *
+     * @param $type integer
+     * @param $single boolean
+     * @return boolean
+     */
+    function has_references($type, $single = false)
+    {
+        return $single ? (count($this->references[$type]) == 1) : (count($this->references[$type]) > 0);
+    }
+
+    /**
+     *
+     * @param $reference HistoryReference
+     * @param $type integer
+     */
+    function add_reference(HistoryReference $reference, $type)
+    {
+        $this->references[$type][] = $reference;
     }
 }
 ?>
