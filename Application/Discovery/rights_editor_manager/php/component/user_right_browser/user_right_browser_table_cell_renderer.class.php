@@ -2,29 +2,21 @@
 namespace application\discovery\rights_editor_manager;
 
 use application\discovery\UserEntity;
-
 use rights\LocationUserBrowserTableColumnModel;
-
 use application\discovery\DiscoveryDataManager;
-
 use application\discovery\PlatformUserEntity;
-
 use rights\LocationPlatformUserBrowserTableColumnModel;
-
 use common\libraries\AndCondition;
-
 use application\discovery\RightsGroupEntityRight;
-
 use common\libraries\EqualityCondition;
-
 use common\libraries\Theme;
-
 use common\libraries\ObjectTableCellRenderer;
 use common\libraries\Translation;
 use common\libraries\Utilities;
 use rights\RightsUtil;
 
 /**
+ *
  * @author Sven Vanpoucke
  * @package application.common.rights_editor_manager.component.location_group_bowser
  */
@@ -34,6 +26,7 @@ use rights\RightsUtil;
  */
 class UserRightBrowserTableCellRenderer extends ObjectTableCellRenderer
 {
+
     /**
      * The browser component
      */
@@ -41,13 +34,14 @@ class UserRightBrowserTableCellRenderer extends ObjectTableCellRenderer
 
     /**
      * Constructor
+     * 
      * @param Application $browser
      */
     function __construct($browser)
     {
         $this->browser = $browser;
     }
-
+    
     // Inherited
     function render_cell($column, $entity_item)
     {
@@ -66,10 +60,10 @@ class UserRightBrowserTableCellRenderer extends ObjectTableCellRenderer
 
     /**
      * Determines the value of the rights column
-     *
+     * 
      * @param LocationEntityBrowserTableColumn $column
      * @param Object $entity_item
-     * 
+     *
      * @return String
      */
     private function get_rights_column_value($column, $entity_item)

@@ -2,17 +2,18 @@
 namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
 
 use user\UserDataManager;
-
 use application\discovery\module\teaching_assignment\DataManagerInterface;
-
 use MDB2_Error;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
+
     private $teaching_assignments;
+
     private $years;
 
     /**
+     *
      * @param int $id
      * @return multitype:\application\discovery\module\teaching_assignment\implementation\bamaflex\TeachingAssignment
      */

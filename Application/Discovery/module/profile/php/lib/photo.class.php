@@ -2,13 +2,11 @@
 namespace application\discovery\module\profile;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\DataClass;
 
 class Photo extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_MIME_TYPE = 'mime_type';
     const PROPERTY_DATA = 'data';
 
@@ -32,7 +30,7 @@ class Photo extends DataClass
 
     /**
      *
-     * @param $mime_type int           
+     * @param $mime_type int
      */
     function set_mime_type($mime_type)
     {
@@ -41,8 +39,7 @@ class Photo extends DataClass
 
     /**
      *
-     * @param $data string
-     *            A base 64 encoded representation of the photo
+     * @param $data string A base 64 encoded representation of the photo
      */
     function set_data($data)
     {
@@ -51,7 +48,7 @@ class Photo extends DataClass
 
     /**
      *
-     * @param $extended_property_names multitype:string           
+     * @param $extended_property_names multitype:string
      */
     static function get_default_property_names($extended_property_names = array())
     {

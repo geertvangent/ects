@@ -2,7 +2,6 @@
 namespace application\discovery\module\student_year\implementation\bamaflex;
 
 use common\libraries\Display;
-
 use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicVisualTab;
@@ -15,7 +14,6 @@ use common\libraries\SortableTableFromArray;
 use common\libraries\Utilities;
 use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
-
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\enrollment\DataManager;
@@ -47,8 +45,8 @@ class Module extends \application\discovery\module\student_year\Module
         return $table;
     }
     
-    /* (non-PHPdoc)
-     * @see application\discovery\module\enrollment.Module::render()
+    /*
+     * (non-PHPdoc) @see application\discovery\module\enrollment.Module::render()
      */
     function render()
     {
@@ -56,7 +54,8 @@ class Module extends \application\discovery\module\student_year\Module
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_student_year_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_student_year_parameters()))
         {
             Display :: not_allowed();
         }

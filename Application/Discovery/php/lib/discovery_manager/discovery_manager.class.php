@@ -2,18 +2,14 @@
 namespace application\discovery;
 
 use common\libraries\NotAllowedException;
-
 use common\libraries\CommonDataManager;
-
 use common\libraries\Translation;
-
 use admin\AdminDataManager;
-
 use core\lynx\PackageList;
-
 use common\libraries\PlatformSetting;
 use common\libraries\Theme;
 use common\libraries\WebApplication;
+
 /**
  *
  * @package application.discovery
@@ -22,35 +18,30 @@ use common\libraries\WebApplication;
 class DiscoveryManager extends WebApplication
 {
     const APPLICATION_NAME = 'discovery';
-    
     const ACTION_BROWSE = 'browser';
     const ACTION_VIEW = 'viewer';
     const ACTION_MODULE = 'module';
     const ACTION_RIGHTS = 'rights';
-    
     const PARAM_USER_ID = 'user_id';
     const PARAM_MODULE_ID = 'module_id';
     const PARAM_CONTENT_TYPE = 'content_type';
     const PARAM_DIRECTION = 'direction';
-    
     const PARAM_DIRECTION_UP = 'up';
     const PARAM_DIRECTION_DOWN = 'down';
-    
     const DEFAULT_ACTION = self :: ACTION_VIEW;
 
     /**
      * Constructor
-     *
-     * @param $user User
-     *            The current user
+     * 
+     * @param $user User The current user
      */
     function __construct($user = null)
     {
         parent :: __construct($user);
-       // if (! $user->is_platform_admin())
-       // {
-        //    throw new NotAllowedException();
-       // }
+        // if (! $user->is_platform_admin())
+        // {
+        // throw new NotAllowedException();
+        // }
         Theme :: set_theme(PlatformSetting :: get('theme', __NAMESPACE__));
     }
 
@@ -60,13 +51,9 @@ class DiscoveryManager extends WebApplication
     }
 
     /**
-     * Helper function for the Application class, pending access to class
-     * constants via variables in PHP 5.3 e.g.
-     * $name
-     * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT
-     * Instead use: - self :: DEFAULT_ACTION in the
-     * context of this class - YourApplicationManager :: DEFAULT_ACTION in all
-     * other application classes
+     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
+     * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
+     * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
      */
     function get_default_action()
     {
@@ -75,7 +62,8 @@ class DiscoveryManager extends WebApplication
 
     static function get_installable_application_packages($include_installed = false)
     {
-        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__), Theme :: get_image_path() . 'logo/16.png');
+        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__), 
+                Theme :: get_image_path() . 'logo/16.png');
         
         $module_list = new PackageList(self :: context() . '\module', Translation :: get('Modules', null, __NAMESPACE__));
         
@@ -94,7 +82,9 @@ class DiscoveryManager extends WebApplication
                 
                 if (count($module_implementations) > 0)
                 {
-                    $module_implementations_list = new PackageList($module_type, Translation :: get('TypeName', null, $module_type), Theme :: get_image_path($module_type) . 'logo/16.png');
+                    $module_implementations_list = new PackageList($module_type, 
+                            Translation :: get('TypeName', null, $module_type), 
+                            Theme :: get_image_path($module_type) . 'logo/16.png');
                     
                     foreach ($module_implementations as $module_implementation)
                     {

@@ -7,35 +7,41 @@ use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
 use common\libraries\AdvancedElementFinderElementType;
 use common\libraries\Translation;
-
 use group\Group;
 use group\GroupDataManager;
-
 use common\libraries\AdvancedElementFinderElement;
 
 /**
  * Extension on the platform group entity specific for the course to limit the platform groups
- *
+ * 
  * @author Sven Vanpoucke
  */
 class PlatformGroupEntity extends \rights\PlatformGroupEntity
 {
+
     /**
      * The subscribed group ids for the course
+     * 
      * @var Array<int>
      */
     private $subscribed_platform_group_ids;
+
     /**
      * Limits the groups by id
+     * 
      * @var Array<int>
      */
     private $limited_groups;
+
     /**
      * Excludes the groups by id
+     * 
      * @var Array<int>
      */
     private $excluded_groups;
+
     private $publication_id;
+
     private static $instance;
 
     static function get_instance($publication_id)
@@ -47,7 +53,8 @@ class PlatformGroupEntity extends \rights\PlatformGroupEntity
         return self :: $instance;
     }
 
-    function __construct($publication_id, $subscribed_platform_group_ids = array(), $limited_groups = array(), $excluded_groups = array())
+    function __construct($publication_id, $subscribed_platform_group_ids = array(), $limited_groups = array(), 
+            $excluded_groups = array())
     {
         $this->publication_id = $publication_id;
         $this->limited_groups = $limited_groups;
@@ -80,7 +87,7 @@ class PlatformGroupEntity extends \rights\PlatformGroupEntity
 
     /**
      * Builds the condition with the limited and excluded groups
-     *
+     * 
      * @param Condition $condition
      * @return Condition
      */
@@ -95,7 +102,8 @@ class PlatformGroupEntity extends \rights\PlatformGroupEntity
         
         if ($this->excluded_groups)
         {
-            $conditions[] = new NotCondition(new InCondition(Group :: PROPERTY_ID, $this->excluded_groups, Group :: get_table_name()));
+            $conditions[] = new NotCondition(
+                    new InCondition(Group :: PROPERTY_ID, $this->excluded_groups, Group :: get_table_name()));
         }
         
         if ($condition)
@@ -117,6 +125,7 @@ class PlatformGroupEntity extends \rights\PlatformGroupEntity
 
     /**
      * Override the get root ids to only return the subscribed groups instead of the chamilo root group
+     * 
      * @return Array<int>
      */
     function get_root_ids()
@@ -130,10 +139,10 @@ class PlatformGroupEntity extends \rights\PlatformGroupEntity
     }
 
     /**
-     * Retrieves the entity item ids relevant for a given user.
-     * Overrides because only subscribed platformgroups need to be checked. Also none of their parents as they are not
-     * subscribed in the course, and therefore cannot have specific rights set to them
-     *
+     * Retrieves the entity item ids relevant for a given user. Overrides because only subscribed platformgroups need to
+     * be checked. Also none of their parents as they are not subscribed in the course, and therefore cannot have
+     * specific rights set to them
+     * 
      * @param integer $user_id
      * @return array
      */
@@ -152,14 +161,14 @@ class PlatformGroupEntity extends \rights\PlatformGroupEntity
      */
     function get_element_finder_type()
     {
-        return new AdvancedElementFinderElementType('platform_groups', Translation :: get('PlatformGroups'), __NAMESPACE__, 'platform_groups_feed', array(
-                'publication_id' => $this->publication_id));
+        return new AdvancedElementFinderElementType('platform_groups', Translation :: get('PlatformGroups'), 
+                __NAMESPACE__, 'platform_groups_feed', 
+                array('publication_id' => $this->publication_id));
     }
 
     function retrieve_entity_items($condition = null, $offset = null, $count = null, $order_property = null)
     {
         return GroupDataManager :: get_instance()->retrieve_groups($condition, $offset, $count, $order_property);
     }
-
 }
 ?>

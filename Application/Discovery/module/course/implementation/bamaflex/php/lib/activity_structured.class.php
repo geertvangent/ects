@@ -6,7 +6,6 @@ use application\discovery\DiscoveryDataManager;
 class ActivityStructured extends Activity
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_GROUP_ID = 'group_id';
     const PROPERTY_GROUP = 'group';
@@ -75,6 +74,7 @@ class ActivityStructured extends Activity
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -90,6 +90,7 @@ class ActivityStructured extends Activity
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -98,6 +99,7 @@ class ActivityStructured extends Activity
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

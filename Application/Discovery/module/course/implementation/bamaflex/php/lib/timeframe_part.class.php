@@ -2,14 +2,12 @@
 namespace application\discovery\module\course\implementation\bamaflex;
 
 use common\libraries\DatetimeUtilities;
-
 use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
 
 class TimeframePart extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_TIMEFRAME_ID = 'timeframe_id';
     const PROPERTY_NAME = 'name';
     const PROPERTY_DATE = 'date';
@@ -45,6 +43,7 @@ class TimeframePart extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -58,6 +57,7 @@ class TimeframePart extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -66,6 +66,7 @@ class TimeframePart extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

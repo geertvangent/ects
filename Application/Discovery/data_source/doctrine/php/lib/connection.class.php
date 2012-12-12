@@ -2,23 +2,22 @@
 namespace application\discovery\data_source\doctrine;
 
 use Doctrine\DBAL\DriverManager;
-
 use Doctrine\Common\ClassLoader;
-
 use common\libraries\DataSourceName;
 use common\libraries\DoctrineConnection;
 use common\libraries\Path;
-
 use application\discovery\DiscoveryDataManager;
 
 class Connection extends DoctrineConnection
 {
+
     /**
      * Instance of this class for the singleton pattern.
      */
     private static $instance;
+
     private $data_source_instance;
-    
+
     /**
      * The MDB2 Connection object.
      */
@@ -32,7 +31,8 @@ class Connection extends DoctrineConnection
         $classLoader = new ClassLoader('Doctrine', Path :: get_plugin_path());
         $classLoader->register();
         
-        $this->data_source_instance = DiscoveryDataManager :: get_instance()->retrieve_data_source_instance($data_source_instance_id);
+        $this->data_source_instance = DiscoveryDataManager :: get_instance()->retrieve_data_source_instance(
+                $data_source_instance_id);
         
         $driver = $this->data_source_instance->get_setting('driver');
         $host = $this->data_source_instance->get_setting('host');
@@ -51,6 +51,7 @@ class Connection extends DoctrineConnection
 
     /**
      * Returns the instance of this class.
+     * 
      * @return Connection The instance.
      */
     static function get_instance($data_source_instance_id)

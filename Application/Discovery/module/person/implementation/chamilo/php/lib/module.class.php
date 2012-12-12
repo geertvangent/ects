@@ -33,7 +33,7 @@ class Module extends \application\discovery\module\person\Module implements NewO
     const TAB_SUBGROUPS = 0;
     const TAB_USERS = 1;
     const TAB_DETAILS = 2;
-    
+
     private $action_bar;
 
     function render()
@@ -48,16 +48,16 @@ class Module extends \application\discovery\module\person\Module implements NewO
 
     function get_group_viewing_url($group)
     {
-        return $this->get_application()->get_url(array(
-                DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
-                GroupManager :: PARAM_GROUP_ID => $group->get_id()));
+        return $this->get_application()->get_url(
+                array(DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                        GroupManager :: PARAM_GROUP_ID => $group->get_id()));
     }
 
     function get_menu_html()
     {
-        $url = $this->get_application()->get_url(array(
-                DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
-                GroupManager :: PARAM_GROUP_ID => '%s'));
+        $url = $this->get_application()->get_url(
+                array(DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                        GroupManager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new GroupMenu($this->get_group(), urldecode($url));
         // $group_menu = new TreeMenu('GroupTreeMenu', new GroupTreeMenuDataProvider($this->get_url(),
         // $this->get_group()));
@@ -88,7 +88,8 @@ class Module extends \application\discovery\module\person\Module implements NewO
     {
         if (! $this->root_group)
         {
-            $group = GroupDataManager :: get_instance()->retrieve_groups(new EqualityCondition(Group :: PROPERTY_PARENT, 0))->next_result();
+            $group = GroupDataManager :: get_instance()->retrieve_groups(
+                    new EqualityCondition(Group :: PROPERTY_PARENT, 0))->next_result();
             $this->root_group = $group;
         }
         
@@ -116,31 +117,46 @@ class Module extends \application\discovery\module\person\Module implements NewO
             if ($count_users > 0)
             {
                 $table = new UserBrowserTable($this);
-                $tabs->add_tab(new DynamicContentTab(self :: TAB_USERS, Translation :: get('Users', null, 'user'), Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
+                $tabs->add_tab(
+                        new DynamicContentTab(self :: TAB_USERS, Translation :: get('Users', null, 'user'), 
+                                Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                                $table->as_html()));
             }
             if ($count_groups > 0)
             {
                 $table = new GroupBrowserTable($this, $parameters, $this->get_subgroups_condition());
-                $tabs->add_tab(new DynamicContentTab(self :: TAB_SUBGROUPS, Translation :: get('Subgroups'), Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
+                $tabs->add_tab(
+                        new DynamicContentTab(self :: TAB_SUBGROUPS, Translation :: get('Subgroups'), 
+                                Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                                $table->as_html()));
             }
             if ($count_users == 0 && $count_groups == 0)
             {
-                $html[] = Display :: warning_message(Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES), true);
+                $html[] = Display :: warning_message(
+                        Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES), true);
             }
         }
         else
         {
             $table = new GroupRelUserBrowserTable($this, $parameters, $this->get_users_condition());
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_USERS, Translation :: get('Users', null, 'user'), Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_USERS, Translation :: get('Users', null, 'user'), 
+                            Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
             
             $count_groups = GroupDataManager :: get_instance()->count_groups($this->get_subgroups_condition());
             if ($count_groups > 0)
             {
                 $table = new GroupBrowserTable($this, $parameters, $this->get_subgroups_condition());
-                $tabs->add_tab(new DynamicContentTab(self :: TAB_SUBGROUPS, Translation :: get('Subgroups'), Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
+                $tabs->add_tab(
+                        new DynamicContentTab(self :: TAB_SUBGROUPS, Translation :: get('Subgroups'), 
+                                Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                                $table->as_html()));
             }
             
-            $tabs->add_tab(new DynamicContentTab(self :: TAB_DETAILS, Translation :: get('Details'), Theme :: get_image_path('help') . 'logo/' . Theme :: ICON_MINI . '.png', $this->get_group_info()));
+            $tabs->add_tab(
+                    new DynamicContentTab(self :: TAB_DETAILS, Translation :: get('Details'), 
+                            Theme :: get_image_path('help') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                            $this->get_group_info()));
         }
         
         $html[] = $tabs->render();
@@ -217,7 +233,10 @@ class Module extends \application\discovery\module\person\Module implements NewO
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->set_search_url($this->get_application()->get_url($parameters));
         
-        $action_bar->add_common_action(new ToolbarItem(Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_browser.png', $this->get_application()->get_url(), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+        $action_bar->add_common_action(
+                new ToolbarItem(Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: get_common_image_path() . 'action_browser.png', $this->get_application()->get_url(), 
+                        ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
     }
 

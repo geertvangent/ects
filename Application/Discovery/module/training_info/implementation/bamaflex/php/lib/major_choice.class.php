@@ -2,18 +2,17 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-
 use application\discovery\DiscoveryDataManager;
 
 class MajorChoice extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_MAJOR_ID = 'major_id';
     const PROPERTY_NAME = 'name';
 
     /**
+     *
      * @return int
      */
     function get_source()
@@ -22,6 +21,7 @@ class MajorChoice extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $source
      */
     function set_source($source)
@@ -59,6 +59,7 @@ class MajorChoice extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

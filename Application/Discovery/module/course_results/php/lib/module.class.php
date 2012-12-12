@@ -2,18 +2,14 @@
 namespace application\discovery\module\course_results;
 
 use common\libraries\Path;
-
 use common\libraries\Filesystem;
-
 use common\libraries\Request;
-
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
@@ -21,12 +17,15 @@ use application\discovery\module\profile\DataManager;
 class Module extends \application\discovery\Module
 {
     const PARAM_PROGRAMME_ID = 'programme_id';
+
     /**
+     *
      * @var multitype:\application\discovery\module\course_results\Course
      */
     private $course_results;
-    
+
     /**
+     *
      * @var multitype:\application\discovery\module\course_results\MarkMoment
      */
     private $mark_moments;
@@ -47,30 +46,35 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\course_results\Course
      */
     function get_course_results()
     {
         if (! isset($this->course_results))
         {
-            $this->course_results = $this->get_data_manager()->retrieve_course_results($this->get_course_results_parameters());
+            $this->course_results = $this->get_data_manager()->retrieve_course_results(
+                    $this->get_course_results_parameters());
         }
         return $this->course_results;
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\course_results\MarkMoment
      */
     function get_mark_moments()
     {
         if (! isset($this->mark_moments))
         {
-            $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_course_results_parameters());
+            $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments(
+                    $this->get_course_results_parameters());
         }
         return $this->mark_moments;
     }
 
     /**
+     *
      * @return multitype:multitype:string
      */
     function get_table_data()
@@ -89,6 +93,7 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return multitype:string
      */
     function get_table_headers()
@@ -104,9 +109,9 @@ class Module extends \application\discovery\Module
         
         return $headers;
     }
-
-    /* (non-PHPdoc)
-     * @see application\discovery.Module::render()
+    
+    /*
+     * (non-PHPdoc) @see application\discovery.Module::render()
      */
     function render()
     {
@@ -138,7 +143,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

@@ -9,6 +9,7 @@ class Application extends DiscoveryItem
     const CLASS_NAME = __CLASS__;
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

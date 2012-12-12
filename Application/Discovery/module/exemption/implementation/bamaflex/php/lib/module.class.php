@@ -2,7 +2,6 @@
 namespace application\discovery\module\exemption\implementation\bamaflex;
 
 use common\libraries\Display;
-
 use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicVisualTab;
@@ -15,13 +14,13 @@ use common\libraries\SortableTableFromArray;
 use common\libraries\Utilities;
 use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
-
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\enrollment\DataManager;
 
 class Module extends \application\discovery\module\exemption\Module
 {
+
     private $cache_exemptions = array();
 
     function get_exemptions_data($year)
@@ -59,14 +58,18 @@ class Module extends \application\discovery\module\exemption\Module
             $row[] = $exemption->get_credits();
             $row[] = $exemption->get_name();
             $row[] = $exemption->get_type();
-            $row[] = DatetimeUtilities :: format_locale_date(Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $exemption->get_date_requested());
+            $row[] = DatetimeUtilities :: format_locale_date(
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    $exemption->get_date_requested());
             $row[] = $exemption->get_motivation();
             $row[] = $exemption->get_proof();
             $row[] = $exemption->get_remarks();
             
-            $image = '<img src="' . Theme :: get_image_path() . 'state/' . $exemption->get_state() . '.png" alt="' . Translation :: get($exemption->get_state_string()) . '" title="' . Translation :: get($exemption->get_state_string()) . '"/>';
+            $image = '<img src="' . Theme :: get_image_path() . 'state/' . $exemption->get_state() . '.png" alt="' . Translation :: get(
+                    $exemption->get_state_string()) . '" title="' . Translation :: get($exemption->get_state_string()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get($exemption->get_state_string()), Translation :: get('State'));
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get($exemption->get_state_string()), 
+                    Translation :: get('State'));
             
             $data[] = $row;
         }
@@ -85,8 +88,8 @@ class Module extends \application\discovery\module\exemption\Module
         return $table;
     }
     
-    /* (non-PHPdoc)
-     * @see application\discovery\module\exemption\Module::render()
+    /*
+     * (non-PHPdoc) @see application\discovery\module\exemption\Module::render()
      */
     function render()
     {
@@ -94,7 +97,8 @@ class Module extends \application\discovery\module\exemption\Module
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_exemption_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_exemption_parameters()))
         {
             Display :: not_allowed();
         }
@@ -103,7 +107,8 @@ class Module extends \application\discovery\module\exemption\Module
         
         if (count($this->get_exemptions()) > 0)
         {
-            $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years($this->get_exemption_parameters());
+            $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years(
+                    $this->get_exemption_parameters());
             
             $tabs = new DynamicTabsRenderer('exemption_list');
             
@@ -112,7 +117,6 @@ class Module extends \application\discovery\module\exemption\Module
                 $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_exemptions_table($year)->toHTML()));
             }
             $html[] = $tabs->render();
-        
         }
         else
         {

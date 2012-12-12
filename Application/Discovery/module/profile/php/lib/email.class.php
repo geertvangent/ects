@@ -2,22 +2,20 @@
 namespace application\discovery\module\profile;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\DataClass;
 
 class Email extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_ADDRESS = 'address';
-    
     const TYPE_PRIVATE = 1;
     const TYPE_OFFICIAL = 2;
     const TYPE_OFFICIAL_DISCONTINUED = 3;
     const TYPE_DISCONTINUED = 4;
 
     /**
+     *
      * @return int
      */
     function get_type()
@@ -26,6 +24,7 @@ class Email extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_type_string()
@@ -48,6 +47,7 @@ class Email extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_address()
@@ -56,6 +56,7 @@ class Email extends DataClass
     }
 
     /**
+     *
      * @param int $type
      */
     function set_type($type)
@@ -64,6 +65,7 @@ class Email extends DataClass
     }
 
     /**
+     *
      * @param string $address
      */
     function set_address($address)
@@ -72,6 +74,7 @@ class Email extends DataClass
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -83,6 +86,7 @@ class Email extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

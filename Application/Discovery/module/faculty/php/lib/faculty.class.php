@@ -7,11 +7,11 @@ use application\discovery\DiscoveryItem;
 class Faculty extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_YEAR = 'year';
     const PROPERTY_NAME = 'name';
 
     /**
+     *
      * @return string
      */
     function get_year()
@@ -20,6 +20,7 @@ class Faculty extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_name()
@@ -28,6 +29,7 @@ class Faculty extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $year
      */
     function set_year($year)
@@ -36,6 +38,7 @@ class Faculty extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $name
      */
     function set_name($name)
@@ -44,6 +47,7 @@ class Faculty extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -55,6 +59,7 @@ class Faculty extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -63,6 +68,7 @@ class Faculty extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

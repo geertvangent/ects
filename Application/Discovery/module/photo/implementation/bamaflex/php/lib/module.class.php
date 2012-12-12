@@ -2,21 +2,13 @@
 namespace application\discovery\module\photo\implementation\bamaflex;
 
 use common\libraries\Translation;
-
 use common\libraries\Breadcrumb;
-
 use common\libraries\BreadcrumbTrail;
-
 use application\discovery\module\photo\DataManager;
-
 use common\libraries\Request;
-
 use application\discovery\DiscoveryManager;
-
 use user\UserDataManager;
-
 use group\Group;
-
 use group\GroupDataManager;
 
 class Module extends \application\discovery\module\photo\Module
@@ -29,7 +21,8 @@ class Module extends \application\discovery\module\photo\Module
         
         if ($parameters->get_faculty_id())
         {
-            $faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty($parameters->get_faculty_id());
+            $faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty(
+                    $parameters->get_faculty_id());
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $faculty->get_year()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $faculty->get_name()));
             
@@ -58,7 +51,8 @@ class Module extends \application\discovery\module\photo\Module
         }
         elseif ($parameters->get_training_id())
         {
-            $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training($parameters->get_training_id());
+            $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
+                    $parameters->get_training_id());
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
@@ -85,7 +79,8 @@ class Module extends \application\discovery\module\photo\Module
         }
         elseif ($parameters->get_programme_id())
         {
-            $programme = DataManager :: get_instance($this->get_module_instance())->retrieve_programme($parameters->get_programme_id());
+            $programme = DataManager :: get_instance($this->get_module_instance())->retrieve_programme(
+                    $parameters->get_programme_id());
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_year()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_faculty()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_training()));
@@ -124,7 +119,6 @@ class Module extends \application\discovery\module\photo\Module
                     $groups[] = $group;
                 }
             }
-        
         }
         return $groups;
     }
@@ -142,7 +136,6 @@ class Module extends \application\discovery\module\photo\Module
 
     function get_context()
     {
-    
     }
 }
 ?>

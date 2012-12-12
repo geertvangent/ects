@@ -2,22 +2,15 @@
 namespace application\discovery\module\training_results\implementation\bamaflex;
 
 use common\libraries\Display;
-
 use common\libraries\Breadcrumb;
-
 use common\libraries\BreadcrumbTrail;
-
 use common\libraries\PropertiesTable;
-
 use user\UserDataManager;
-
 use common\libraries\Request;
-
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\training_results\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicContentTab;
 use common\libraries\Theme;
@@ -38,8 +31,9 @@ class Module extends \application\discovery\module\training_results\Module
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $profile_module_instance = \application\discovery\Module :: exists('application\discovery\module\profile\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $profile_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\profile\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         foreach ($this->get_training_results() as $enrollment)
         {
@@ -56,7 +50,8 @@ class Module extends \application\discovery\module\training_results\Module
                 }
                 else
                 {
-                    $row[] = $enrollment->get_optional_property('first_name') . ' ' . $enrollment->get_optional_property('last_name');
+                    $row[] = $enrollment->get_optional_property('first_name') . ' ' . $enrollment->get_optional_property(
+                            'last_name');
                 }
             }
             else
@@ -67,19 +62,30 @@ class Module extends \application\discovery\module\training_results\Module
                 }
                 else
                 {
-                    $row[] = $enrollment->get_optional_property('first_name') . ' ' . $enrollment->get_optional_property('last_name');
+                    $row[] = $enrollment->get_optional_property('first_name') . ' ' . $enrollment->get_optional_property(
+                            'last_name');
                 }
             }
             
             $row[] = $enrollment->get_unified_option();
             $row[] = $enrollment->get_unified_trajectory();
             
-            $row[] = Translation :: get($enrollment->get_contract_type_string(), null, 'application\discovery\module\enrollment\implementation\bamaflex');
+            $row[] = Translation :: get($enrollment->get_contract_type_string(), null, 
+                    'application\discovery\module\enrollment\implementation\bamaflex');
             if ($enrollment->is_special_result())
             {
-                $image = '<img src="' . Theme :: get_image_path('application\discovery\module\enrollment\implementation\bamaflex') . 'result_type/' . $enrollment->get_result() . '.png" alt="' . Translation :: get($enrollment->get_result_string(), null, 'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get($enrollment->get_result_string(), null, 'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
+                $image = '<img src="' . Theme :: get_image_path(
+                        'application\discovery\module\enrollment\implementation\bamaflex') . 'result_type/' . $enrollment->get_result() . '.png" alt="' . Translation :: get(
+                        $enrollment->get_result_string(), null, 
+                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get(
+                        $enrollment->get_result_string(), null, 
+                        'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, Translation :: get($enrollment->get_result_string(), null, 'application\discovery\module\enrollment\implementation\bamaflex'), Translation :: get('ResultType', null, 'application\discovery\module\enrollment\implementation\bamaflex'));
+                LegendTable :: get_instance()->add_symbol($image, 
+                        Translation :: get($enrollment->get_result_string(), null, 
+                                'application\discovery\module\enrollment\implementation\bamaflex'), 
+                        Translation :: get('ResultType', null, 
+                                'application\discovery\module\enrollment\implementation\bamaflex'));
             }
             else
             {
@@ -87,9 +93,18 @@ class Module extends \application\discovery\module\training_results\Module
             }
             if ($enrollment->has_distinction())
             {
-                $image = '<img src="' . Theme :: get_image_path('application\discovery\module\enrollment\implementation\bamaflex') . 'distinction_type/' . $enrollment->get_distinction() . '.png" alt="' . Translation :: get($enrollment->get_distinction_string(), null, 'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get($enrollment->get_distinction_string(), null, 'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
+                $image = '<img src="' . Theme :: get_image_path(
+                        'application\discovery\module\enrollment\implementation\bamaflex') . 'distinction_type/' . $enrollment->get_distinction() . '.png" alt="' . Translation :: get(
+                        $enrollment->get_distinction_string(), null, 
+                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get(
+                        $enrollment->get_distinction_string(), null, 
+                        'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, Translation :: get($enrollment->get_distinction_string(), null, 'application\discovery\module\enrollment\implementation\bamaflex'), Translation :: get('DistinctionType', null, 'application\discovery\module\enrollment\implementation\bamaflex'));
+                LegendTable :: get_instance()->add_symbol($image, 
+                        Translation :: get($enrollment->get_distinction_string(), null, 
+                                'application\discovery\module\enrollment\implementation\bamaflex'), 
+                        Translation :: get('DistinctionType', null, 
+                                'application\discovery\module\enrollment\implementation\bamaflex'));
             }
             else
             {
@@ -122,7 +137,6 @@ class Module extends \application\discovery\module\training_results\Module
             $parameter->set_source($source);
         }
         return $parameter;
-    
     }
 
     /**
@@ -168,8 +182,7 @@ class Module extends \application\discovery\module\training_results\Module
     }
     
     /*
-     * (non-PHPdoc) @see
-     * application\discovery\module\training_results.Module::render()
+     * (non-PHPdoc) @see application\discovery\module\training_results.Module::render()
      */
     function render()
     {
@@ -177,7 +190,8 @@ class Module extends \application\discovery\module\training_results\Module
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_training_results_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_training_results_parameters()))
         {
             Display :: not_allowed();
         }
@@ -206,12 +220,14 @@ class Module extends \application\discovery\module\training_results\Module
 
     function get_training_properties_table()
     {
-        $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training($this->get_training_info_parameters());
+        $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
+                $this->get_training_info_parameters());
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         
-        $faculty_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\faculty_info\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $faculty_info_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\faculty_info\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         $html = array();
         $properties = array();
@@ -230,7 +246,8 @@ class Module extends \application\discovery\module\training_results\Module
         
         if ($faculty_info_module_instance)
         {
-            $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters($training->get_faculty_id(), $training->get_source());
+            $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
+                    $training->get_faculty_id(), $training->get_source());
             $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $training->get_faculty() . '</a>';
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $training->get_faculty()));

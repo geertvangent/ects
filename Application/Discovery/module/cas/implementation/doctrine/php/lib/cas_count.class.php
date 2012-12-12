@@ -7,7 +7,6 @@ use application\discovery\DiscoveryItem;
 class CasCount extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
     const PROPERTY_COUNT = 'count';
     const PROPERTY_PERSON_ID = 'person_id';
     const PROPERTY_APPLICATION_ID = 'application_id';
@@ -15,6 +14,7 @@ class CasCount extends DiscoveryItem
     const PROPERTY_DATE = 'date';
 
     /**
+     *
      * @return int
      */
     function get_count()
@@ -23,6 +23,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $count
      */
     function set_count($count)
@@ -31,6 +32,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @return int
      */
     function get_person_id()
@@ -39,6 +41,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $person_id
      */
     function set_person_id($person_id)
@@ -47,6 +50,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @return int
      */
     function get_application_id()
@@ -55,6 +59,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $application_id
      */
     function set_application_id($application_id)
@@ -63,6 +68,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @return int
      */
     function get_action_id()
@@ -71,6 +77,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $action_id
      */
     function set_action_id($action_id)
@@ -79,6 +86,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @return timestamp
      */
     function get_date()
@@ -87,6 +95,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @param timestamp $date
      */
     function set_date($date)
@@ -95,6 +104,7 @@ class CasCount extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -104,11 +114,12 @@ class CasCount extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_APPLICATION_ID;
         $extended_property_names[] = self :: PROPERTY_ACTION_ID;
         $extended_property_names[] = self :: PROPERTY_DATE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

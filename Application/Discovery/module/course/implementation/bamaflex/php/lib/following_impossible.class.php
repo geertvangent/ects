@@ -7,7 +7,6 @@ use application\discovery\DiscoveryItem;
 class FollowingImpossible extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_CREDIT = 'credit';
     const PROPERTY_EXAM_DEGREE = 'exam_degree';
     const PROPERTY_EXAM_CREDIT = 'exam_credit';
@@ -43,6 +42,7 @@ class FollowingImpossible extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -55,6 +55,7 @@ class FollowingImpossible extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -63,6 +64,7 @@ class FollowingImpossible extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

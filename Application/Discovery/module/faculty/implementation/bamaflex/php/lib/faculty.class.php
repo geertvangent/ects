@@ -8,18 +8,16 @@ use application\discovery\DiscoveryDataManager;
 class Faculty extends \application\discovery\module\faculty\Faculty
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SOURCE = 'source';
-    
     const REFERENCE_PREVIOUS = 1;
     const REFERENCE_NEXT = 2;
-    
+
     /**
      *
      * @var multitype:string
      */
     private $deans;
-    
+
     /**
      *
      * @var multitype:HistoryReference

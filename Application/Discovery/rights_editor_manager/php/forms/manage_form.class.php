@@ -2,19 +2,12 @@
 namespace application\discovery\rights_editor_manager;
 
 use rights\NewPlatformGroupEntity;
-
 use rights\NewUserEntity;
-
 use rights\Right;
-
 use application\discovery\DiscoveryDataManager;
-
 use application\discovery\PlatformGroupEntity;
-
 use application\discovery\UserEntity;
-
 use common\libraries\Theme;
-
 use common\libraries\FormValidator;
 use common\libraries\Translation;
 use common\libraries\Utilities;
@@ -22,26 +15,22 @@ use common\libraries\ResourceManager;
 use common\libraries\Path;
 use common\libraries\EqualityCondition;
 use common\libraries\Session;
-
 use common\libraries\AdvancedElementFinderElementTypes;
 use common\libraries\AdvancedElementFinderElements;
 use application\discovery\RightsGroupEntityRight;
-
 use rights\RightsDataManager;
 use rights\RightsLocation;
 use rights\RightsUtil;
 
 /**
  * Form to display the rights on a more usable way with radio buttons.
- *
+ * 
  * @author Sven Vanpoucke
  * @package application.common.rights_editor_manager.component
  */
-
 class ManageForm extends FormValidator
 {
     const PROPERTY_RIGHT_OPTION = 'right_option';
-    
     const PROPERTY_SUBMIT = 'submit';
     const PROPERTY_RESET = 'reset';
     const PROPERTY_BUTTONS = 'buttons';
@@ -49,24 +38,24 @@ class ManageForm extends FormValidator
     const PROPERTY_GROUP_USE = 'group_use';
     const PROPERTY_ACTION = 'action';
     const PROPERTY_RIGHT = 'right';
-    
     const ACTION_GRANT = 1;
     const ACTION_DENY = 2;
-    
     const RIGHT_OPTION_ALL = 0;
     const RIGHT_OPTION_ME = 1;
     const RIGHT_OPTION_SELECT = 2;
-    
+
     /**
      * The context for the rights form
      */
     private $context;
-    
+
     /**
      * The available rights
+     * 
      * @var Array<Int>
      */
     private $available_rights;
+
     private $module_id;
 
     function __construct($module_id, $action, $available_rights)
@@ -91,7 +80,7 @@ class ManageForm extends FormValidator
 
     /**
      * Builds the form for a given right
-     *
+     * 
      * @param String $right_name
      * @param int $right_id
      */
@@ -105,8 +94,9 @@ class ManageForm extends FormValidator
         $element_template[] = '</div>';
         $element_template = implode("\n", $element_template);
         
-        $this->addElement('select', self :: PROPERTY_ACTION, '', array(
-                self :: ACTION_GRANT => Translation :: get('Grant'), self :: ACTION_DENY => Translation :: get('Deny')));
+        $this->addElement('select', self :: PROPERTY_ACTION, '', 
+                array(self :: ACTION_GRANT => Translation :: get('Grant'), 
+                        self :: ACTION_DENY => Translation :: get('Deny')));
         
         $this->get_renderer()->setElementTemplate($element_template, self :: PROPERTY_ACTION);
         
@@ -115,19 +105,18 @@ class ManageForm extends FormValidator
         
         $group = array();
         
-        $group[] = & $this->createElement('radio', null, null, Translation :: get('Everyone'), self :: RIGHT_OPTION_ALL, array(
-                'class' => 'other_option_selected'));
-        $group[] = & $this->createElement('radio', null, null, Translation :: get('OnlyForMe'), self :: RIGHT_OPTION_ME, array(
-                'class' => 'other_option_selected'));
-        $group[] = & $this->createElement('radio', null, null, Translation :: get('SelectSpecificEntities'), self :: RIGHT_OPTION_SELECT, array(
-                'class' => 'entity_option_selected'));
+        $group[] = & $this->createElement('radio', null, null, Translation :: get('Everyone'), self :: RIGHT_OPTION_ALL, 
+                array('class' => 'other_option_selected'));
+        $group[] = & $this->createElement('radio', null, null, Translation :: get('OnlyForMe'), self :: RIGHT_OPTION_ME, 
+                array('class' => 'other_option_selected'));
+        $group[] = & $this->createElement('radio', null, null, Translation :: get('SelectSpecificEntities'), 
+                self :: RIGHT_OPTION_SELECT, array('class' => 'entity_option_selected'));
         
         $this->addGroup($group, self :: PROPERTY_RIGHT_OPTION, '', '<br />');
         $this->get_renderer()->setElementTemplate($element_template, self :: PROPERTY_RIGHT_OPTION);
         
         // Add the advanced element finder
         
-
         $user_entity = new NewUserEntity();
         
         $this->entities = array();
@@ -159,7 +148,6 @@ class ManageForm extends FormValidator
         $this->addElement('advanced_element_finder', self :: PROPERTY_GROUP_USE, null, $types);
         $this->get_renderer()->setElementTemplate($element_template, self :: PROPERTY_GROUP_USE);
         $this->addElement('category');
-    
     }
 
     /**
@@ -169,19 +157,24 @@ class ManageForm extends FormValidator
     {
         $buttons = array();
         
-        $buttons[] = $this->createElement('style_submit_button', self :: PROPERTY_SUBMIT, Translation :: get('Submit', null, Utilities :: COMMON_LIBRARIES), array(
-                'class' => 'positive update'));
+        $buttons[] = $this->createElement('style_submit_button', self :: PROPERTY_SUBMIT, 
+                Translation :: get('Submit', null, Utilities :: COMMON_LIBRARIES), 
+                array('class' => 'positive update'));
         
-        $buttons[] = $this->createElement('style_reset_button', self :: PROPERTY_RESET, Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
-                'class' => 'normal empty'));
+        $buttons[] = $this->createElement('style_reset_button', self :: PROPERTY_RESET, 
+                Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), 
+                array('class' => 'normal empty'));
         
         $this->addGroup($buttons, self :: PROPERTY_BUTTONS, null, '&nbsp;', false);
         
-        $this->addElement('html', ResourceManager :: get_instance()->get_resource_html(Path :: get_common_extensions_path(true) . 'new_rights_editor_manager/resources/javascript/rights_form.js'));
+        $this->addElement('html', 
+                ResourceManager :: get_instance()->get_resource_html(
+                        Path :: get_common_extensions_path(true) . 'new_rights_editor_manager/resources/javascript/rights_form.js'));
     }
 
     /**
      * Handles the rights options for the specific location
+     * 
      * @param RightsLocation $location
      */
     function handle_rights()
@@ -302,17 +295,20 @@ class ManageForm extends FormValidator
                         }
                         else
                         {
-                            $succes &= $rights->unset_location_entity_right($this->context, $right_id, 0, 0, $location_id);
+                            $succes &= $rights->unset_location_entity_right($this->context, $right_id, 0, 0, 
+                                    $location_id);
                         }
                         break;
                     case self :: RIGHT_OPTION_ME :
                         if ($action == self :: ACTION_GRANT)
                         {
-                            $succes &= $rights->set_location_entity_right($this->context, $right_id, Session :: get_user_id(), 1, $location_id);
+                            $succes &= $rights->set_location_entity_right($this->context, $right_id, 
+                                    Session :: get_user_id(), 1, $location_id);
                         }
                         else
                         {
-                            $succes &= $rights->unset_location_entity_right($this->context, $right_id, Session :: get_user_id(), 1, $location_id);
+                            $succes &= $rights->unset_location_entity_right($this->context, $right_id, 
+                                    Session :: get_user_id(), 1, $location_id);
                         }
                         break;
                     case self :: RIGHT_OPTION_SELECT :
@@ -322,13 +318,15 @@ class ManageForm extends FormValidator
                             {
                                 if ($action == self :: ACTION_GRANT)
                                 {
-                                    $succes &= $rights->set_location_entity_right($this->context, $right_id, $target_id, $entity_type, $location_id);
+                                    $succes &= $rights->set_location_entity_right($this->context, $right_id, $target_id, 
+                                            $entity_type, $location_id);
                                 }
                                 
                                 else
                                 
                                 {
-                                    $succes &= $rights->unset_location_entity_right($this->context, $right_id, $target_id, $entity_type, $location_id);
+                                    $succes &= $rights->unset_location_entity_right($this->context, $right_id, 
+                                            $target_id, $entity_type, $location_id);
                                 }
                             }
                         }
@@ -336,8 +334,6 @@ class ManageForm extends FormValidator
             }
         }
         return $succes;
-    
     }
-
 }
 ?>

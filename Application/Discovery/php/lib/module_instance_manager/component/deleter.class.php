@@ -62,13 +62,18 @@ class ModuleInstanceManagerDeleterComponent extends ModuleInstanceManager
                 }
             }
             
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
-                    ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                    ($failures ? true : false), 
+                    array(
+                            ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES));
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array(
-                    'OBJECT' => Translation :: get('ModuleInstance')), Utilities :: COMMON_LIBRARIES)));
+            $this->display_error_page(
+                    htmlentities(
+                            Translation :: get('NoObjectSelected', 
+                                    array('OBJECT' => Translation :: get('ModuleInstance')), 
+                                    Utilities :: COMMON_LIBRARIES)));
         }
     }
 }

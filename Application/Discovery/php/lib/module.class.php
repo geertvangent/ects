@@ -14,16 +14,16 @@ use common\libraries\Application;
 /**
  *
  * @author Hans De Bisschop
- *        
  */
 class Module
 {
+
     /**
      *
      * @var Application
      */
     private $application;
-    
+
     /**
      *
      * @var ModuleInstance
@@ -32,8 +32,8 @@ class Module
 
     /**
      *
-     * @param $application Application           
-     * @param $module_instance ModuleInstance           
+     * @param $application Application
+     * @param $module_instance ModuleInstance
      */
     function __construct(Application $application, ModuleInstance $module_instance)
     {
@@ -43,8 +43,8 @@ class Module
 
     /**
      *
-     * @param $application Application           
-     * @param $module_instance ModuleInstance           
+     * @param $application Application
+     * @param $module_instance ModuleInstance
      * @return Module
      */
     static public function factory(Application $application, ModuleInstance $module_instance)
@@ -83,7 +83,8 @@ class Module
     static function exists($type, $settings)
     {
         $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_TYPE, $type);
-        $conditions[] = new NotCondition(new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, ModuleInstance :: TYPE_DISABLED));
+        $conditions[] = new NotCondition(
+                new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, ModuleInstance :: TYPE_DISABLED));
         $condition = new AndCondition($conditions);
         
         $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition);
@@ -129,7 +130,8 @@ class Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', 
+                Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = '\\' . __NAMESPACE__ . '\module\\' . $module . '\Module';
@@ -145,7 +147,8 @@ class Module
     {
         $types = array();
         
-        $directories = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', Filesystem :: LIST_DIRECTORIES, false);
+        $directories = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', 
+                Filesystem :: LIST_DIRECTORIES, false);
         
         foreach ($directories as $directory)
         {
@@ -161,12 +164,10 @@ class Module
     }
 
     /**
-     * Far from ideal and not really generic (because of the user)
-     * ...
-     * but it'll have to do for now
-     *
-     * @param $type string           
-     * @param $user user\User           
+     * Far from ideal and not really generic (because of the user) ... but it'll have to do for now
+     * 
+     * @param $type string
+     * @param $user user\User
      * @return \common\libraries\ToolbarItem NULL
      */
     function get_module_link($type, $user_id)
@@ -189,10 +190,13 @@ class Module
             $entities[$class_user_entity :: ENTITY_TYPE] = $class_user_entity :: get_instance();
             $entities[$class_group_entity :: ENTITY_TYPE] = $class_group_entity :: get_instance();
             
-            if (! $class_rights :: get_instance()->module_is_allowed($class_rights :: VIEW_RIGHT, $entities, $module_instance->get_id(), $parameters))
+            if (! $class_rights :: get_instance()->module_is_allowed($class_rights :: VIEW_RIGHT, $entities, 
+                    $module_instance->get_id(), $parameters))
             {
-                return new ToolbarItem(Translation :: get('ModuleNotAvailable', array(
-                        'MODULE' => Translation :: get('TypeName', null, $type))), Theme :: get_image_path($type) . 'logo/16_na.png', null, ToolbarItem :: DISPLAY_ICON);
+                return new ToolbarItem(
+                        Translation :: get('ModuleNotAvailable', 
+                                array('MODULE' => Translation :: get('TypeName', null, $type))), 
+                        Theme :: get_image_path($type) . 'logo/16_na.png', null, ToolbarItem :: DISPLAY_ICON);
             }
             else
             {
@@ -200,13 +204,16 @@ class Module
                 {
                     
                     $url = $this->get_instance_url($module_instance->get_id(), $parameters);
-                    return new ToolbarItem(Translation :: get('TypeName', null, $type), Theme :: get_image_path($type) . 'logo/16.png', $url, ToolbarItem :: DISPLAY_ICON);
+                    return new ToolbarItem(Translation :: get('TypeName', null, $type), 
+                            Theme :: get_image_path($type) . 'logo/16.png', $url, ToolbarItem :: DISPLAY_ICON);
                 }
                 else
                 {
                     $url = $this->get_instance_url($module_instance->get_id(), $parameters);
-                    return new ToolbarItem(Translation :: get('ModuleHasNoData', array(
-                            'MODULE' => Translation :: get('TypeName', null, $type))), Theme :: get_image_path($type) . 'logo/16_empty.png', $url, ToolbarItem :: DISPLAY_ICON);
+                    return new ToolbarItem(
+                            Translation :: get('ModuleHasNoData', 
+                                    array('MODULE' => Translation :: get('TypeName', null, $type))), 
+                            Theme :: get_image_path($type) . 'logo/16_empty.png', $url, ToolbarItem :: DISPLAY_ICON);
                 }
             }
         }
@@ -223,6 +230,5 @@ class Module
     {
         return DataConnector :: get_instance($this->get_module_instance());
     }
-
 }
 ?>

@@ -2,18 +2,15 @@
 namespace application\discovery\rights_editor_manager;
 
 use common\libraries\Application;
-
 use user\UserManager;
-
 use user\User;
-
 use group\Group;
-
 use common\libraries\ObjectTableColumnModel;
 use common\libraries\Utilities;
 use common\libraries\ObjectTableColumn;
 
 /**
+ *
  * @author Sven Vanpoucke
  * @package application.common.rights_editor_manager.component.location_group_bowser
  */
@@ -23,11 +20,12 @@ use common\libraries\ObjectTableColumn;
  */
 class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
 {
+
     /**
      * The table right columns
      */
     private static $rights_columns;
-    
+
     /**
      * The parent application component
      */
@@ -59,6 +57,7 @@ class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
 
     /**
      * Determines wheter a column is a rights column
+     * 
      * @param ObjectTableColumn $column
      * @return boolean
      */

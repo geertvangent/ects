@@ -2,25 +2,19 @@
 namespace application\discovery\rights_editor_manager;
 
 use application\discovery\DiscoveryDataManager;
-
 use application\discovery\PlatformGroupEntity;
-
 use rights\LocationPlatformGroupBrowserTableColumnModel;
-
 use common\libraries\AndCondition;
-
 use application\discovery\RightsGroupEntityRight;
-
 use common\libraries\EqualityCondition;
-
 use common\libraries\Theme;
-
 use common\libraries\ObjectTableCellRenderer;
 use common\libraries\Translation;
 use common\libraries\Utilities;
 use rights\RightsUtil;
 
 /**
+ *
  * @author Sven Vanpoucke
  * @package application.common.rights_editor_manager.component.location_group_bowser
  */
@@ -30,6 +24,7 @@ use rights\RightsUtil;
  */
 class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
 {
+
     /**
      * The browser component
      */
@@ -37,13 +32,14 @@ class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
 
     /**
      * Constructor
+     * 
      * @param Application $browser
      */
     function __construct($browser)
     {
         $this->browser = $browser;
     }
-
+    
     // Inherited
     function render_cell($column, $entity_item)
     {
@@ -62,10 +58,10 @@ class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
 
     /**
      * Determines the value of the rights column
-     *
+     * 
      * @param LocationEntityBrowserTableColumn $column
      * @param Object $entity_item
-     * 
+     *
      * @return String
      */
     private function get_rights_column_value($column, $entity_item)
@@ -80,7 +76,8 @@ class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
         $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, $group_id);
         $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_id);
         $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_ID, $entity_item->get_id());
-        $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, PlatformGroupEntity :: ENTITY_TYPE);
+        $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
+                PlatformGroupEntity :: ENTITY_TYPE);
         
         $condition = new AndCondition($conditions);
         

@@ -2,19 +2,12 @@
 namespace application\discovery\module\photo;
 
 use application\discovery\module\photo\implementation\bamaflex\GalleryBrowserTable;
-
 use application\discovery\DiscoveryManager;
-
 use user\User;
-
 use common\libraries\InCondition;
-
 use common\libraries\Path;
-
 use common\libraries\Filesystem;
-
 use application\discovery\ModuleInstance;
-
 use common\libraries\Request;
 
 class Module extends \application\discovery\Module
@@ -23,7 +16,6 @@ class Module extends \application\discovery\Module
     const PARAM_FACULTY_ID = 'faculty_id';
     const PARAM_PROGRAMME_ID = 'programme_id';
     const PARAM_TYPE = 'type';
-    
     const TYPE_TEACHER = 1;
     const TYPE_STUDENT = 2;
     const TYPE_EMPLOYEE = 3;
@@ -35,7 +27,6 @@ class Module extends \application\discovery\Module
 
     function has_parameters()
     {
-    
     }
 
     static function get_module_parameters()
@@ -84,7 +75,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

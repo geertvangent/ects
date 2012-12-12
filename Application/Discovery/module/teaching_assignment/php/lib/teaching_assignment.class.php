@@ -7,13 +7,13 @@ use application\discovery\DiscoveryItem;
 class TeachingAssignment extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_YEAR = 'year';
     const PROPERTY_TRAINING = 'training';
     const PROPERTY_TRAINING_ID = 'training_id';
     const PROPERTY_NAME = 'name';
 
     /**
+     *
      * @return string
      */
     function get_year()
@@ -22,6 +22,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_training()
@@ -30,6 +31,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @return integer
      */
     function get_training_id()
@@ -38,6 +40,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_name()
@@ -46,6 +49,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $year
      */
     function set_year($year)
@@ -54,6 +58,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $training
      */
     function set_training($training)
@@ -62,6 +67,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $training_id
      */
     function set_training_id($training_id)
@@ -70,6 +76,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $name
      */
     function set_name($name)
@@ -78,6 +85,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -91,6 +99,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -99,6 +108,7 @@ class TeachingAssignment extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

@@ -6,7 +6,7 @@ use common\libraries\ObjectTableColumn;
 use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
 use common\libraries\NewObjectTableColumnModel;
 
-class UserBrowserTableColumnModel extends NewObjectTableColumnModel implements
+class UserBrowserTableColumnModel extends NewObjectTableColumnModel implements 
         NewObjectTableColumnModelActionsColumnSupport
 {
 

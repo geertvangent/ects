@@ -2,9 +2,7 @@
 namespace application\discovery;
 
 use common\libraries\CommonDataManager;
-
 use common\libraries\WebApplication;
-
 use common\libraries\Request;
 use common\libraries\Path;
 use common\libraries\SubManager;
@@ -12,7 +10,6 @@ use common\libraries\EqualityCondition;
 use common\libraries\OrCondition;
 use common\libraries\AndCondition;
 use common\libraries\Utilities;
-
 use common\libraries\Registration;
 use admin\AdminDataManager;
 
@@ -21,7 +18,6 @@ class ModuleInstanceManager extends SubManager
     const PARAM_INSTANCE_ACTION = 'action';
     const PARAM_TYPE = 'type';
     const PARAM_CONTENT_TYPE = 'content_type';
-
     const ACTION_BROWSE_INSTANCES = 'browser';
     const ACTION_ACTIVATE_INSTANCE = 'activator';
     const ACTION_DEACTIVATE_INSTANCE = 'deactivator';
@@ -30,13 +26,12 @@ class ModuleInstanceManager extends SubManager
     const ACTION_CREATE_INSTANCE = 'creator';
     const ACTION_MANAGE_INSTANCE_RIGHTS = 'rights_editor';
     const ACTION_MOVE_INSTANCE = 'mover';
-
     const DEFAULT_ACTION = self :: ACTION_BROWSE_INSTANCES;
 
     function __construct($repository_manager)
     {
         parent :: __construct($repository_manager);
-
+        
         $instance_action = Request :: get(self :: PARAM_INSTANCE_ACTION);
         if ($instance_action)
         {
@@ -65,14 +60,9 @@ class ModuleInstanceManager extends SubManager
     }
 
     /**
-     * Helper function for the SubManager class,
-     * pending access to class constants via variables in PHP 5.3
-     * e.g. $name = $class :: DEFAULT_ACTION
-     *
-     * DO NOT USE IN THIS SUBMANAGER'S CONTEXT
-     * Instead use:
-     * - self :: DEFAULT_ACTION in the context of this class
-     * - YourSubManager :: DEFAULT_ACTION in all other application classes
+     * Helper function for the SubManager class, pending access to class constants via variables in PHP 5.3 e.g. $name =
+     * $class :: DEFAULT_ACTION DO NOT USE IN THIS SUBMANAGER'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
+     * context of this class - YourSubManager :: DEFAULT_ACTION in all other application classes
      */
     static function get_default_action()
     {
@@ -80,14 +70,9 @@ class ModuleInstanceManager extends SubManager
     }
 
     /**
-     * Helper function for the SubManager class,
-     * pending access to class constants via variables in PHP 5.3
-     * e.g. $name = $class :: PARAM_ACTION
-     *
-     * DO NOT USE IN THIS SUBMANAGER'S CONTEXT
-     * Instead use:
-     * - self :: PARAM_ACTION in the context of this class
-     * - YourSubManager :: PARAM_ACTION in all other application classes
+     * Helper function for the SubManager class, pending access to class constants via variables in PHP 5.3 e.g. $name =
+     * $class :: PARAM_ACTION DO NOT USE IN THIS SUBMANAGER'S CONTEXT Instead use: - self :: PARAM_ACTION in the context
+     * of this class - YourSubManager :: PARAM_ACTION in all other application classes
      */
     static function get_action_parameter()
     {
@@ -97,14 +82,16 @@ class ModuleInstanceManager extends SubManager
     static function get_registered_types($status = Registration :: STATUS_ACTIVE)
     {
         $instance_conditions = array();
-        $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE, Registration :: TYPE_EXTERNAL_REPOSITORY_MANAGER);
-        $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE, Registration :: TYPE_VIDEO_CONFERENCING_MANAGER);
-
+        $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE, 
+                Registration :: TYPE_EXTERNAL_REPOSITORY_MANAGER);
+        $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE, 
+                Registration :: TYPE_VIDEO_CONFERENCING_MANAGER);
+        
         $conditions = array();
         $conditions[] = new OrCondition($instance_conditions);
         $conditions[] = new EqualityCondition(Registration :: PROPERTY_STATUS, $status);
         $condition = new AndCondition($conditions);
-
+        
         return CommonDataManager :: retrieves(Registration :: class_name(), $condition);
     }
 

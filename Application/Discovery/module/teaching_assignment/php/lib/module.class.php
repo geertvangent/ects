@@ -2,9 +2,7 @@
 namespace application\discovery\module\teaching_assignment;
 
 use common\libraries\Filesystem;
-
 use common\libraries\Request;
-
 use common\libraries\Path;
 use common\libraries\WebApplication;
 use common\libraries\ResourceManager;
@@ -14,7 +12,6 @@ use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
@@ -23,7 +20,9 @@ class Module extends \application\discovery\Module
 {
     const PARAM_USER_ID = 'user_id';
     const PARAM_YEAR = 'year';
+
     /**
+     *
      * @var multitype:\application\discovery\module\teaching_assignment\TeachingAssignment
      */
     private $teaching_assignments;
@@ -56,6 +55,7 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\teaching_assignment\TeachingAssignment
      */
     function get_teaching_assignments($parameters)
@@ -65,7 +65,8 @@ class Module extends \application\discovery\Module
         
         if (! isset($this->teaching_assignments[$user_id][$year]))
         {
-            $this->teaching_assignments[$user_id][$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_teaching_assignments($parameters);
+            $this->teaching_assignments[$user_id][$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_teaching_assignments(
+                    $parameters);
         }
         return $this->teaching_assignments[$user_id][$year];
     }
@@ -76,8 +77,8 @@ class Module extends \application\discovery\Module
         return $this->get_data_manager()->count_teaching_assignments($parameters);
     }
     
-    /* (non-PHPdoc)
-     * @see application\discovery.Module::render()
+    /*
+     * (non-PHPdoc) @see application\discovery.Module::render()
      */
     function render()
     {
@@ -92,7 +93,9 @@ class Module extends \application\discovery\Module
             $row[] = $teaching_assignment->get_name();
             
             $class = 'teaching_assignment" style="" id="teaching_assignment_' . $key;
-            $details_action = new ToolbarItem(Translation :: get('ShowTeachingAssignments'), Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
+            $details_action = new ToolbarItem(Translation :: get('ShowTeachingAssignments'), 
+                    Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, 
+                    $class);
             $row[] = $details_action->as_html();
             $data[] = $row;
         }
@@ -108,7 +111,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

@@ -2,18 +2,14 @@
 namespace application\discovery\module\training_results;
 
 use common\libraries\Path;
-
 use common\libraries\Filesystem;
-
 use common\libraries\Request;
-
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
@@ -21,7 +17,9 @@ use application\discovery\module\profile\DataManager;
 class Module extends \application\discovery\Module
 {
     const PARAM_TRAINING_ID = 'training_id';
+
     /**
+     *
      * @var multitype:\application\discovery\module\training_results\Course
      */
     private $training_results;
@@ -42,18 +40,21 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\training_results\Course
      */
     function get_training_results()
     {
         if (! isset($this->training_results))
         {
-            $this->training_results = $this->get_data_manager()->retrieve_training_results($this->get_training_results_parameters());
+            $this->training_results = $this->get_data_manager()->retrieve_training_results(
+                    $this->get_training_results_parameters());
         }
         return $this->training_results;
     }
 
     /**
+     *
      * @return multitype:multitype:string
      */
     function get_table_data()
@@ -64,6 +65,7 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return multitype:string
      */
     function get_table_headers()
@@ -73,8 +75,8 @@ class Module extends \application\discovery\Module
         return $headers;
     }
     
-    /* (non-PHPdoc)
-     * @see application\discovery.Module::render()
+    /*
+     * (non-PHPdoc) @see application\discovery.Module::render()
      */
     function render()
     {
@@ -106,7 +108,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

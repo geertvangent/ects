@@ -2,18 +2,14 @@
 namespace application\discovery\module\group_user;
 
 use common\libraries\Path;
-
 use common\libraries\Filesystem;
-
 use common\libraries\Request;
-
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
@@ -21,11 +17,13 @@ use application\discovery\module\profile\DataManager;
 class Module extends \application\discovery\Module
 {
     const PARAM_GROUP_CLASS_ID = 'group_class_id';
+
     /**
+     *
      * @var multitype:\application\discovery\module\group_user\GroupUser
      */
     private $group_user;
-    
+
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
@@ -42,6 +40,7 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\group_user\GroupUser
      */
     function get_group_user()
@@ -52,15 +51,14 @@ class Module extends \application\discovery\Module
         }
         return $this->group_user;
     }
-
-
-    /* (non-PHPdoc)
-     * @see application\discovery.Module::render()
+    
+    /*
+     * (non-PHPdoc) @see application\discovery.Module::render()
      */
     function render()
     {
         $html = array();
-                
+        
         return implode("\n", $html);
     }
 
@@ -73,7 +71,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

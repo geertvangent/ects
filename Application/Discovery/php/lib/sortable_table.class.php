@@ -2,9 +2,7 @@
 namespace application\discovery;
 
 use common\libraries\Utilities;
-
 use common\libraries\Translation;
-
 use common\libraries\SortableTableFromArray;
 use HTML_Table;
 
@@ -13,6 +11,7 @@ class SortableTable extends SortableTableFromArray
 
     /**
      * Get table data to show on current page
+     * 
      * @see SortableTable#get_table_data
      */
     function get_table_data()
@@ -23,10 +22,10 @@ class SortableTable extends SortableTableFromArray
     function as_html($total_value, $total_column)
     {
         
-        //        $cols = $this->getHeader()->getColCount();
-        //        $this->setCellAttributes(0, 0, 'style="font-style:italic;text-align:center;" colspan="' . $cols . '"');
-        //        $this->setCellContents(0, 0, Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES));
-        //        
+        // $cols = $this->getHeader()->getColCount();
+        // $this->setCellAttributes(0, 0, 'style="font-style:italic;text-align:center;" colspan="' . $cols . '"');
+        // $this->setCellContents(0, 0, Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES));
+        //
         return $this->get_table_html($total_value, $total_column);
     }
 
@@ -36,9 +35,8 @@ class SortableTable extends SortableTableFromArray
     function get_table_html($total_value, $total_column)
     {
         // Make sure the header isn't dragable or droppable
-        //$this->setRowAttributes(0, array('class' => 'nodrag nodrop'), true);
+        // $this->setRowAttributes(0, array('class' => 'nodrag nodrop'), true);
         
-
         // Now process the rest of the table
         $pager = $this->get_pager();
         $offset = $pager->getOffsetByPageId();
@@ -70,8 +68,10 @@ class SortableTable extends SortableTableFromArray
             $data_row[$total_column] = $total_value;
             $data_row[0] = Translation :: get('Total');
             $this->addRow($data_row);
-            $this->setCellAttributes(($this->get_total_number_of_items()), 0, 'colspan="' . ($total_column) . '" style="font-weight:bold; text-transform:uppercase; text-align:right;"');
-            $this->setCellAttributes(($this->get_total_number_of_items()), $total_column, 'colspan="' . ($this->getColCount() - $total_column) . '" style="font-weight:bold; text-transform:uppercase;"');
+            $this->setCellAttributes(($this->get_total_number_of_items()), 0, 
+                    'colspan="' . ($total_column) . '" style="font-weight:bold; text-transform:uppercase; text-align:right;"');
+            $this->setCellAttributes(($this->get_total_number_of_items()), $total_column, 
+                    'colspan="' . ($this->getColCount() - $total_column) . '" style="font-weight:bold; text-transform:uppercase;"');
         }
         return HTML_Table :: toHTML();
     }

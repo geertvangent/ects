@@ -2,15 +2,12 @@
 namespace application\discovery\module\profile\implementation\bamaflex;
 
 use common\libraries\Translation;
-
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\DataClass;
 
 class Address extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_COUNTRY = 'country';
     const PROPERTY_STREET = 'street';
@@ -22,7 +19,6 @@ class Address extends DataClass
     const PROPERTY_SUBCITY = 'subcity';
     const PROPERTY_SUBCITY_ZIP_CODE = 'subcity_zip_code';
     const PROPERTY_REGION = 'region';
-    
     const TYPE_DOMICILE = 1;
     const TYPE_OFFICE = 2;
     const TYPE_ALTERNATIVE = 3;
@@ -31,6 +27,7 @@ class Address extends DataClass
     const TYPE_RESIDENCE = 6;
 
     /**
+     *
      * @return int
      */
     function get_type()
@@ -39,6 +36,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_type_string()
@@ -67,6 +65,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_country()
@@ -75,6 +74,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_street()
@@ -83,6 +83,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_number()
@@ -91,6 +92,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_box()
@@ -99,6 +101,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_room()
@@ -107,6 +110,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_city()
@@ -115,6 +119,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_city_zip_code()
@@ -123,6 +128,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_subcity()
@@ -131,6 +137,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_subcity_zip_code()
@@ -186,6 +193,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_region()
@@ -194,6 +202,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param int $type
      */
     function set_type($type)
@@ -202,6 +211,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $country
      */
     function set_country($country)
@@ -210,6 +220,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $street
      */
     function set_street($street)
@@ -218,6 +229,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $number
      */
     function set_number($number)
@@ -226,6 +238,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $box
      */
     function set_box($box)
@@ -234,6 +247,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $room
      */
     function set_room($room)
@@ -242,6 +256,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $city
      */
     function set_city($city)
@@ -250,6 +265,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $city_zip_code
      */
     function set_city_zip_code($city_zip_code)
@@ -258,6 +274,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $subcity
      */
     function set_subcity($subcity)
@@ -266,6 +283,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $subcity_zip_code
      */
     function set_subcity_zip_code($subcity_zip_code)
@@ -274,6 +292,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param string $region
      */
     function set_region($region)
@@ -282,6 +301,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -302,6 +322,7 @@ class Address extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

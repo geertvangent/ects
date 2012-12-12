@@ -5,12 +5,14 @@ use common\libraries\Translation;
 
 class LegendTable extends SortableTable
 {
+
     /**
      * Instance of this class for the singleton pattern.
      */
     private static $instance;
 
-    function __construct($table_data, $default_column = 1, $default_items_per_page = 20, $tablename = 'tablename', $default_direction = SORT_ASC)
+    function __construct($table_data, $default_column = 1, $default_items_per_page = 20, $tablename = 'tablename', 
+            $default_direction = SORT_ASC)
     {
         parent :: __construct($table_data, $default_column, $default_items_per_page, $tablename, $default_direction);
         
@@ -22,6 +24,7 @@ class LegendTable extends SortableTable
 
     /**
      * Get table data to show on current page
+     * 
      * @see SortableTable#get_table_data
      */
     function get_table_data()
@@ -41,6 +44,7 @@ class LegendTable extends SortableTable
 
     /**
      * Returns the instance of this class.
+     * 
      * @return LegendTable
      */
     static function get_instance()
@@ -53,6 +57,7 @@ class LegendTable extends SortableTable
     }
 
     /**
+     *
      * @param string $symbol
      * @param string $description
      */

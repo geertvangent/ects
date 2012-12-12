@@ -3,7 +3,6 @@ namespace application\discovery;
 
 use user\UserManager;
 use user\UserDataManager;
-
 use common\libraries\DelegateComponent;
 use common\libraries\Breadcrumb;
 use common\libraries\Display;
@@ -18,11 +17,11 @@ use common\libraries\DynamicVisualTab;
 use common\libraries\DynamicVisualTabsRenderer;
 use common\libraries\Redirect;
 use common\libraries\Request;
-
 use application\discovery\module\profile\Profile;
 use application\discovery\module\profile\implementation\bamaflex\SettingsConnector;
 
 /**
+ *
  * @author Hans De Bisschop
  * @package application.discovery
  */
@@ -38,7 +37,9 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
         if ($this->get_user()->is_platform_admin())
         {
             $link = $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_MODULE));
-            BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('Modules'), Theme :: get_common_image_path() . 'action_config.png', $link));
+            BreadcrumbTrail :: get_instance()->add_extra(
+                    new ToolbarItem(Translation :: get('Modules'), 
+                            Theme :: get_common_image_path() . 'action_config.png', $link));
         }
         
         if (! $module_id)
@@ -48,7 +49,8 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                 $module_content_type = ModuleInstance :: TYPE_USER;
             }
             $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_content_type);
-            $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance_by_condition($condition, $order_by);
+            $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance_by_condition(
+                    $condition, $order_by);
             if (! $current_module_instance)
             {
                 $this->display_header();
@@ -69,23 +71,29 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                 $module_parameters = array();
                 $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
                 $link = $this->get_url($module_parameters);
-                BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('Information'), Theme :: get_image_path() . 'action_information.png', $link));
+                BreadcrumbTrail :: get_instance()->add_extra(
+                        new ToolbarItem(Translation :: get('Information'), 
+                                Theme :: get_image_path() . 'action_information.png', $link));
                 break;
             case ModuleInstance :: TYPE_INFORMATION :
                 $module_parameters = array();
                 $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
                 $link = $this->get_url($module_parameters);
-                BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
+                BreadcrumbTrail :: get_instance()->add_extra(
+                        new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
                 break;
             case ModuleInstance :: TYPE_DETAILS :
                 $module_parameters = array();
                 $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
                 $link = $this->get_url($module_parameters);
-                BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
+                BreadcrumbTrail :: get_instance()->add_extra(
+                        new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
                 $module_parameters = array();
                 $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
                 $link = $this->get_url($module_parameters);
-                BreadcrumbTrail :: get_instance()->add_extra(new ToolbarItem(Translation :: get('Information'), Theme :: get_image_path() . 'action_information.png', $link));
+                BreadcrumbTrail :: get_instance()->add_extra(
+                        new ToolbarItem(Translation :: get('Information'), 
+                                Theme :: get_image_path() . 'action_information.png', $link));
                 break;
         }
         
@@ -94,8 +102,10 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
         if ($current_module_instance->get_content_type() != ModuleInstance :: TYPE_DETAILS)
         {
             $tabs = new DynamicVisualTabsRenderer('discovery', $current_module->render());
-            $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $current_module_instance->get_content_type());
-            $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition, null, null, $order_by);
+            $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, 
+                    $current_module_instance->get_content_type());
+            $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition, null, 
+                    null, $order_by);
             
             while ($module_instance = $module_instances->next_result())
             {
@@ -122,7 +132,11 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                             $module_parameters_array[DiscoveryManager :: PARAM_MODULE_ID] = $module_instance->get_id();
                             $selected = ($module_id == $module_instance->get_id() ? true : false);
                             $link = $this->get_url($module_parameters_array);
-                            $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), Translation :: get('TypeName', null, $module_instance->get_type()), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
+                            $tabs->add_tab(
+                                    new DynamicVisualTab($module_instance->get_id(), 
+                                            Translation :: get('TypeName', null, $module_instance->get_type()), 
+                                            Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, 
+                                            $selected));
                         }
                     }
                 }
@@ -132,8 +146,11 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                     $module_parameters_array[DiscoveryManager :: PARAM_MODULE_ID] = $module_instance->get_id();
                     $selected = ($module_id == $module_instance->get_id() ? true : false);
                     $link = $this->get_url($module_parameters_array);
-                    $tabs->add_tab(new DynamicVisualTab($module_instance->get_id(), Translation :: get('TypeName', null, $module_instance->get_type()), Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, $selected));
-                
+                    $tabs->add_tab(
+                            new DynamicVisualTab($module_instance->get_id(), 
+                                    Translation :: get('TypeName', null, $module_instance->get_type()), 
+                                    Theme :: get_image_path($module_instance->get_type()) . 'logo/22.png', $link, 
+                                    $selected));
                 }
             }
         }
@@ -143,7 +160,6 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
             $user_id = $module_parameters->get_user_id();
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $user->get_fullname()));
-        
         }
         
         if ($current_module_instance->get_content_type() != ModuleInstance :: TYPE_DETAILS)
@@ -152,7 +168,8 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
         }
         else
         {
-        	BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, Translation :: get('TypeName', null, $current_module_instance->get_type())));
+            BreadcrumbTrail :: get_instance()->add(
+                    new Breadcrumb(null, Translation :: get('TypeName', null, $current_module_instance->get_type())));
             $content = $current_module->render();
         }
         $this->display_header();

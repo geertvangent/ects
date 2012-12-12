@@ -7,10 +7,8 @@ use application\discovery\DiscoveryItem;
 class Material extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_TYPE = 'type';
-    
     const TYPE_REQUIRED = 1;
     const TYPE_OPTIONAL = 0;
 
@@ -35,6 +33,7 @@ class Material extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -46,6 +45,7 @@ class Material extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -54,6 +54,7 @@ class Material extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

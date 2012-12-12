@@ -2,9 +2,7 @@
 namespace application\discovery;
 
 use common\libraries\DataClassRetrievesParameters;
-
 use common\libraries\DataClassRetrieveParameters;
-
 use common\libraries\AjaxManager;
 use common\libraries\JsonAjaxResult;
 use common\libraries\Path;
@@ -17,7 +15,6 @@ use common\libraries\EqualityCondition;
 use common\libraries\InCondition;
 use common\libraries\AndCondition;
 use common\libraries\ObjectTableOrder;
-
 use user\UserDataManager;
 use user\User;
 
@@ -25,7 +22,6 @@ class DiscoveryAjaxUsersFeed extends AjaxManager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PROPERTY_ELEMENTS = 'elements';
-    
     const PARAM_PUBLICATION = 'publication_id';
 
     function required_parameters()
@@ -50,7 +46,7 @@ class DiscoveryAjaxUsersFeed extends AjaxManager
 
     /**
      * Returns all the elements for this feed
-     *
+     * 
      * @return Array
      */
     private function get_elements()
@@ -66,7 +62,9 @@ class DiscoveryAjaxUsersFeed extends AjaxManager
         {
             while ($user = $users->next_result())
             {
-                $user_category->add_child(new AdvancedElementFinderElement(UserEntity :: ENTITY_TYPE . '_' . $user->get_id(), 'type type_user', $user->get_fullname(), $user->get_official_code()));
+                $user_category->add_child(
+                        new AdvancedElementFinderElement(UserEntity :: ENTITY_TYPE . '_' . $user->get_id(), 
+                                'type type_user', $user->get_fullname(), $user->get_official_code()));
             }
         }
         
@@ -74,9 +72,8 @@ class DiscoveryAjaxUsersFeed extends AjaxManager
     }
 
     /**
-     * Retrieves the users from the course (direct subscribed and group
-     * subscribed)
-     *
+     * Retrieves the users from the course (direct subscribed and group subscribed)
+     * 
      * @return ResultSet
      */
     private function retrieve_users()
@@ -110,11 +107,10 @@ class DiscoveryAjaxUsersFeed extends AjaxManager
         {
             $condition = null;
         }
-        $parameters = new DataClassRetrievesParameters($condition, null, null, array(
-                new ObjectTableOrder(User :: PROPERTY_FIRSTNAME)));
+        $parameters = new DataClassRetrievesParameters($condition, null, null, 
+                array(new ObjectTableOrder(User :: PROPERTY_FIRSTNAME)));
         return \user\DataManager :: retrieves(\user\User :: class_name(), $parameters);
     }
-
 }
 
 ?>

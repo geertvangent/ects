@@ -2,28 +2,18 @@
 namespace application\discovery\module\group_user\implementation\bamaflex;
 
 use common\libraries\PropertiesTable;
-
 use common\libraries\BreadcrumbTrail;
-
 use common\libraries\Breadcrumb;
-
 use application\discovery\module\group\implementation\bamaflex\Group;
-
 use user\User;
-
 use common\libraries\Toolbar;
-
 use common\libraries\Display;
-
 use user\UserDataManager;
-
 use common\libraries\Request;
-
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\group_user\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicContentTab;
 use common\libraries\Theme;
@@ -60,7 +50,6 @@ class Module extends \application\discovery\module\group_user\Module
             $parameter->set_type($type);
         }
         return $parameter;
-    
     }
 
     function get_row($group_user)
@@ -74,13 +63,15 @@ class Module extends \application\discovery\module\group_user\Module
         $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($group_user->get_person_id());
         if ($user instanceof User)
         {
-            $profile_link = $this->get_module_link('application\discovery\module\profile\implementation\bamaflex', $user->get_id());
+            $profile_link = $this->get_module_link('application\discovery\module\profile\implementation\bamaflex', 
+                    $user->get_id());
             if ($profile_link)
             {
                 $toolbar->add_item($profile_link);
             }
             
-            $career_link = $this->get_module_link('application\discovery\module\career\implementation\bamaflex', $user->get_id());
+            $career_link = $this->get_module_link('application\discovery\module\career\implementation\bamaflex', 
+                    $user->get_id());
             if ($career_link)
             {
                 $toolbar->add_item($career_link);
@@ -148,7 +139,9 @@ class Module extends \application\discovery\module\group_user\Module
                 $html[] = $this->get_table($course_data);
             }
             
-            $tabs->add_tab(new DynamicContentTab(0, Translation :: get('Enrolled'), Theme :: get_image_path() . 'type/0.png', implode("\n", $html)));
+            $tabs->add_tab(
+                    new DynamicContentTab(0, Translation :: get('Enrolled'), Theme :: get_image_path() . 'type/0.png', 
+                            implode("\n", $html)));
         }
         
         if (count($data_struck) > 0 || count($course_data_struck) > 0)
@@ -161,7 +154,9 @@ class Module extends \application\discovery\module\group_user\Module
                 $html[] = $this->get_table($course_data_struck);
             }
             
-            $tabs->add_tab(new DynamicContentTab(1, Translation :: get('Struck'), Theme :: get_image_path() . 'type/1.png', implode("\n", $html)));
+            $tabs->add_tab(
+                    new DynamicContentTab(1, Translation :: get('Struck'), Theme :: get_image_path() . 'type/1.png', 
+                            implode("\n", $html)));
         }
         
         return $tabs->render();
@@ -177,9 +172,9 @@ class Module extends \application\discovery\module\group_user\Module
         
         return $table->as_html();
     }
-
-    /* (non-PHPdoc)
-     * @see application\discovery\module\group_user.Module::render()
+    
+    /*
+     * (non-PHPdoc) @see application\discovery\module\group_user.Module::render()
      */
     function render()
     {
@@ -198,8 +193,9 @@ class Module extends \application\discovery\module\group_user\Module
 
     function get_group_properties_table()
     {
-        $group = DataManager :: get_instance($this->get_module_instance())->retrieve_group($this->get_group_parameters());
-
+        $group = DataManager :: get_instance($this->get_module_instance())->retrieve_group(
+                $this->get_group_parameters());
+        
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $group->get_year();

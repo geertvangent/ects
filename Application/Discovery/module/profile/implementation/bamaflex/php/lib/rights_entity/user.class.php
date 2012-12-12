@@ -5,34 +5,36 @@ use common\libraries\InCondition;
 use common\libraries\NotCondition;
 use common\libraries\AndCondition;
 use common\libraries\Translation;
-
 use common\libraries\AdvancedElementFinderElementType;
 use common\libraries\AdvancedElementFinderElement;
-
 use user\UserDataManager;
 use user\User;
 use rights\UserEntity;
 
 /**
  * Extension on the user entity specific for the course to limit the users
- *
+ * 
  * @author Sven Vanpoucke
  */
 class RightsUserEntity extends UserEntity
 {
+
     /**
      * Limits the users by id
+     * 
      * @var Array<int>
      */
     private $limited_users;
-    
+
     /**
      * Excludes the users by id
+     * 
      * @var Array<int>
      */
     private $excluded_users;
+
     private $publication_id;
-    
+
     /**
      * Singleton
      */
@@ -66,7 +68,7 @@ class RightsUserEntity extends UserEntity
 
     /**
      * Builds the condition with the limited and excluded users
-     *
+     * 
      * @param Condition $condition
      * @return Condition
      */
@@ -106,8 +108,8 @@ class RightsUserEntity extends UserEntity
      */
     function get_element_finder_type()
     {
-        return new AdvancedElementFinderElementType('users', Translation :: get('Users'), __NAMESPACE__, 'users_feed', array(
-                'publication_id' => $this->publication_id));
+        return new AdvancedElementFinderElementType('users', Translation :: get('Users'), __NAMESPACE__, 'users_feed', 
+                array('publication_id' => $this->publication_id));
     }
 }
 

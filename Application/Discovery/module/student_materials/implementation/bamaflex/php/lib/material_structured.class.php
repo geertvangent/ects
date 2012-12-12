@@ -6,7 +6,6 @@ use application\discovery\DiscoveryDataManager;
 class MaterialStructured extends Material
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_ID = 'id';
     const PROPERTY_GROUP_ID = 'group_id';
@@ -157,6 +156,7 @@ class MaterialStructured extends Material
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -179,6 +179,7 @@ class MaterialStructured extends Material
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -187,6 +188,7 @@ class MaterialStructured extends Material
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

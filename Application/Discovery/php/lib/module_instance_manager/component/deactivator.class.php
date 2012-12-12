@@ -63,9 +63,11 @@ class ModuleInstanceManagerDeactivatorComponent extends ModuleInstanceManager
                 }
             }
             
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
-                    ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES, 
-                    self :: PARAM_CONTENT_TYPE => ModuleInstance :: TYPE_DISABLED));
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                    ($failures ? true : false), 
+                    array(
+                            ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES, 
+                            self :: PARAM_CONTENT_TYPE => ModuleInstance :: TYPE_DISABLED));
         }
         else
         {

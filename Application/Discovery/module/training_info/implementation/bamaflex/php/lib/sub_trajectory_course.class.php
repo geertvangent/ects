@@ -7,7 +7,6 @@ use application\discovery\DiscoveryDataManager;
 class SubTrajectoryCourse extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_NAME = 'name';
     const PROPERTY_TRAJECTORY_PART = 'trajectory_part';
@@ -15,10 +14,11 @@ class SubTrajectoryCourse extends DiscoveryItem
     const PROPERTY_SUB_TRAJECTORY_ID = 'sub_trajectory_id';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_PARENT_PROGRAMME_ID = 'parent_programme_id';
-    
+
     private $children;
 
     /**
+     *
      * @return int
      */
     function get_source()
@@ -27,6 +27,7 @@ class SubTrajectoryCourse extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $source
      */
     function set_source($source)
@@ -128,6 +129,7 @@ class SubTrajectoryCourse extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

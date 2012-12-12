@@ -7,40 +7,41 @@ use common\libraries\Utilities;
 use common\libraries\EqualityCondition;
 use common\libraries\Path;
 use common\libraries\DataClass;
-
 use DOMDocument;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */
-
 class ModuleInstanceSetting extends DataClass
 {
     const CLASS_NAME = __CLASS__;
     const TABLE_NAME = 'module_instance_setting';
-    
     const PROPERTY_MODULE_INSTANCE_ID = 'module_instance_id';
     const PROPERTY_VARIABLE = 'variable';
     const PROPERTY_VALUE = 'value';
-    
+
     /**
      * A static array containing all settings of discovery module instances
+     * 
      * @var array
      */
     private static $settings;
 
     /**
      * Get the default properties of all settings.
+     * 
      * @return array The property names.
      */
     static function get_default_property_names()
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_MODULE_INSTANCE_ID, 
-                self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
+        return parent :: get_default_property_names(
+                array(self :: PROPERTY_MODULE_INSTANCE_ID, self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -49,6 +50,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return int
      */
     function get_module_instance_id()
@@ -57,6 +59,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_variable()
@@ -65,6 +68,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_value()
@@ -88,6 +92,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     static function get_table_name()
@@ -96,6 +101,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     static function get_class_name()
@@ -104,6 +110,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @param ModuleInstance $module_instance
      * @return boolean
      */
@@ -145,6 +152,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @param string $variable
      * @param int $module_instance_id
      * @return mixed
@@ -160,6 +168,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @param int $module_instance_id
      * @return multitype:string
      */
@@ -174,6 +183,7 @@ class ModuleInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @param int $module_instance_id
      */
     static function load($module_instance_id)

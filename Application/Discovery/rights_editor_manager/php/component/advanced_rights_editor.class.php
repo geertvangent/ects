@@ -2,45 +2,31 @@
 namespace application\discovery\rights_editor_manager;
 
 use common\libraries\SortableTableFromArray;
-
 use application\discovery\UserEntity;
-
 use common\libraries\Translation;
-
 use common\libraries\DynamicVisualTab;
-
 use common\libraries\DynamicVisualTabsRenderer;
-
 use application\discovery\PlatformGroupEntity;
-
 use common\libraries\InCondition;
-
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\AndCondition;
-
 use application\discovery\RightsGroupEntityRight;
-
 use application\discovery\DiscoveryManager;
-
 use group\GroupDataManager;
-
 use group\GroupMenu;
-
 use group\GroupManager;
-
 use common\libraries\Request;
-
 use group\Group;
-
 use common\libraries\EqualityCondition;
 
 class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManager
 {
+
     private $group;
+
     private $root_group;
+
     private $entity;
-    
     const PARAM_ENTITY = 'entity';
 
     function run()
@@ -57,7 +43,8 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
     {
         $url = $this->get_url(array(GroupManager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new GroupMenu($this->get_group(), urldecode($url));
-        //$group_menu = new TreeMenu('GroupTreeMenu', new GroupTreeMenuDataProvider($this->get_url(), $this->get_group()));
+        // $group_menu = new TreeMenu('GroupTreeMenu', new GroupTreeMenuDataProvider($this->get_url(),
+        // $this->get_group()));
         $html = array();
         $html[] = '<div style="float: left; width: 18%; overflow: auto; height: 500px;">';
         $html[] = $group_menu->render_as_tree();
@@ -73,15 +60,19 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         $param[GroupManager :: PARAM_GROUP_ID] = $this->get_group();
         $param[self :: PARAM_ENTITY] = PlatformGroupEntity :: ENTITY_TYPE;
         $selected = $this->get_entity() == PlatformGroupEntity :: ENTITY_TYPE ? true : false;
-        $tabs->add_tab(new DynamicVisualTab('group', Translation :: get('GroupRights'), null, $this->get_url($param), $selected));
+        $tabs->add_tab(
+                new DynamicVisualTab('group', Translation :: get('GroupRights'), null, $this->get_url($param), $selected));
         
         $param[self :: PARAM_ENTITY] = UserEntity :: ENTITY_TYPE;
         $selected = $this->get_entity() == UserEntity :: ENTITY_TYPE ? true : false;
-        $tabs->add_tab(new DynamicVisualTab('user', Translation :: get('UserRights'), null, $this->get_url($param), $selected));
+        $tabs->add_tab(
+                new DynamicVisualTab('user', Translation :: get('UserRights'), null, $this->get_url($param), $selected));
         
         $param[self :: PARAM_ENTITY] = 0;
         $selected = $this->get_entity() == 0 ? true : false;
-        $tabs->add_tab(new DynamicVisualTab('everyone', Translation :: get('EveryoneRights'), null, $this->get_url($param), $selected));
+        $tabs->add_tab(
+                new DynamicVisualTab('everyone', Translation :: get('EveryoneRights'), null, $this->get_url($param), 
+                        $selected));
         
         $html = array();
         $html[] = '<div style="float: right; width: 80%;">';
@@ -126,7 +117,6 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
                 {
                     $table_data[0][] = '<div class="rightFalse"></div>';
                 }
-            
             }
             $table = new SortableTableFromArray($table_data);
             $column = 0;
@@ -138,7 +128,6 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
             
             return $table;
         }
-    
     }
 
     function get_entity()
@@ -151,7 +140,6 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
             {
                 $this->entity = PlatformGroupEntity :: ENTITY_TYPE;
             }
-        
         }
         
         return $this->entity;
@@ -160,20 +148,26 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
     function get_condition()
     {
         $group_conditions = array();
-        $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, Request :: get(DiscoveryManager :: PARAM_MODULE_ID));
-        $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, Request :: get(GroupManager :: PARAM_GROUP_ID));
+        $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, 
+                Request :: get(DiscoveryManager :: PARAM_MODULE_ID));
+        $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, 
+                Request :: get(GroupManager :: PARAM_GROUP_ID));
         
         if ($this->get_entity() == PlatformGroupEntity :: ENTITY_TYPE)
         {
-            $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, PlatformGroupEntity :: ENTITY_TYPE);
+            $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
+                    PlatformGroupEntity :: ENTITY_TYPE);
         }
         else
         {
-            $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, UserEntity :: ENTITY_TYPE);
+            $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
+                    UserEntity :: ENTITY_TYPE);
         }
         $group_condition = new AndCondition($group_conditions);
         
-        $group_ids = DiscoveryDataManager :: get_instance()->retrieve_distinct(RightsGroupEntityRight :: get_table_name(), RightsGroupEntityRight :: PROPERTY_ENTITY_ID, $group_condition);
+        $group_ids = DiscoveryDataManager :: get_instance()->retrieve_distinct(
+                RightsGroupEntityRight :: get_table_name(), RightsGroupEntityRight :: PROPERTY_ENTITY_ID, 
+                $group_condition);
         return new InCondition(Group :: PROPERTY_ID, $group_ids);
     }
 
@@ -196,7 +190,8 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
     {
         if (! $this->root_group)
         {
-            $group = GroupDataManager :: get_instance()->retrieve_groups(new EqualityCondition(Group :: PROPERTY_PARENT, 0))->next_result();
+            $group = GroupDataManager :: get_instance()->retrieve_groups(
+                    new EqualityCondition(Group :: PROPERTY_PARENT, 0))->next_result();
             $this->root_group = $group;
         }
         

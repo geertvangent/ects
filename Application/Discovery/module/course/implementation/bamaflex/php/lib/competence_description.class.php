@@ -8,6 +8,7 @@ class CompetenceDescription extends Competence
     const CLASS_NAME = __CLASS__;
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -16,6 +17,7 @@ class CompetenceDescription extends Competence
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

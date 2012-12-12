@@ -1,9 +1,8 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
+
 use group\Group;
-
 use group\DefaultGroupTableCellRenderer;
-
 use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\EqualityCondition;
@@ -13,7 +12,7 @@ use common\libraries\Theme;
 
 class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
 {
-    
+
     /**
      * The repository browser component
      */
@@ -21,6 +20,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
 
     /**
      * Constructor
+     * 
      * @param RepositoryManagerBrowserComponent $browser
      */
     function __construct($browser)
@@ -28,7 +28,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
         parent :: __construct();
         $this->browser = $browser;
     }
-
+    
     // Inherited
     function render_cell($column, $group)
     {
@@ -46,10 +46,10 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
                 return '<a href="' . htmlentities($this->browser->get_group_viewing_url($group)) . '" title="' . $title . '">' . $title_short . '</a>';
             case Group :: PROPERTY_DESCRIPTION :
                 $description = strip_tags(parent :: render_cell($column, $group));
-                //				if(strlen($description) > 175)
-                //				{
-                //					$description = mb_substr($description,0,170).'&hellip;';
-                //				}
+                // if(strlen($description) > 175)
+                // {
+                // $description = mb_substr($description,0,170).'&hellip;';
+                // }
                 return Utilities :: truncate_string($description);
             case Translation :: get('Users', null, 'user') :
                 return $group->count_users();

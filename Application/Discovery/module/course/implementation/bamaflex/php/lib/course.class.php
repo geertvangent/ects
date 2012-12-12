@@ -2,21 +2,20 @@
 namespace application\discovery\module\course\implementation\bamaflex;
 
 use application\discovery\module\course\DataManager;
-
 use common\libraries\StringUtilities;
 use common\libraries\Utilities;
-
 use application\discovery\DiscoveryItem;
 use application\discovery\DiscoveryDataManager;
 
 /**
  * application.discovery.module.courses.discovery
+ * 
  * @author Hans De Bisschop
  */
 class Course extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Course properties
      */
@@ -50,44 +49,54 @@ class Course extends DiscoveryItem
     const PROPERTY_PREVIOUS_PARENT_ID = 'previous_parent_id';
     const PROPERTY_NEXT_ID = 'next_id';
     const PROPERTY_APPROVED = 'approved';
-	const PROPERTY_EXCHANGE = 'exchange';
-	
+    const PROPERTY_EXCHANGE = 'exchange';
     const TIMEFRAME_ACADEMIC_YEAR = '1';
     const TIMEFRAME_FIRST_TERM = '2';
     const TIMEFRAME_SECOND_TERM = '3';
     const TIMEFRAME_BOTH_TERMS = '4';
     const TIMEFRAME_UNKNOWN = '5';
-
     const PROGRAMME_TYPE_SIMPLE = 1;
     const PROGRAMME_TYPE_COMPLEX = 2;
     const PROGRAMME_TYPE_PART = 4;
-
     const RESULT_SCALE_NUMBER = 1;
     const RESULT_SCALE_PASS_FAIL = 2;
     const RESULT_SCALE_ADVICE = 3;
-
     const SCORE_CALCULATION_NUMBER = 1;
     const SCORE_CALCULATION_DIFFERENCE = 7;
 
     private $second_chance;
+
     private $following_impossible;
+
     private $costs;
+
     private $evaluations;
+
     private $activities;
+
     private $materials;
+
     private $competences;
+
     private $languages;
+
     private $timeframe_parts;
+
     private $teachers;
+
     private $children;
 
     private $materials_by_type;
+
     private $teachers_by_type;
+
     private $costs_by_type;
+
     private $activities_by_type;
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -123,24 +132,25 @@ class Course extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_PARENT_ID;
         $extended_property_names[] = self :: PROPERTY_NEXT_ID;
         $extended_property_names[] = self :: PROPERTY_APPROVED;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
     }
-    
+
     function get_parent_id()
     {
         return $this->get_default_property(self :: PROPERTY_PARENT_ID);
     }
-    
+
     function set_parent_id($parent_id)
     {
         $this->set_default_property(self :: PROPERTY_PARENT_ID, $parent_id);
@@ -247,6 +257,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_programme_type_string()
@@ -255,6 +266,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     static function programme_type_string($programme_type)
@@ -294,6 +306,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_timeframe()
@@ -302,6 +315,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     static function timeframe($timeframe_id)
@@ -385,12 +399,12 @@ class Course extends DiscoveryItem
     {
         $this->set_default_property(self :: PROPERTY_APPROVED, $approved);
     }
-    
+
     function get_exchange()
     {
         return $this->get_default_property(self :: PROPERTY_EXCHANGE);
     }
-    
+
     function set_exchange($exchange)
     {
         $this->set_default_property(self :: PROPERTY_APPROVED, $exchange);
@@ -405,7 +419,7 @@ class Course extends DiscoveryItem
             do
             {
                 $parameters = new Parameters($course->get_previous_id(), $course->get_source());
-
+                
                 $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
                 $courses[] = $course;
             }
@@ -423,7 +437,7 @@ class Course extends DiscoveryItem
             do
             {
                 $parameters = new Parameters($course->get_next_id(), $course->get_source());
-
+                
                 $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
                 $courses[] = $course;
             }
@@ -436,7 +450,7 @@ class Course extends DiscoveryItem
     {
         $courses = $this->get_next($module_instance);
         array_unshift($courses, $this);
-
+        
         foreach ($this->get_previous($module_instance) as $course)
         {
             array_unshift($courses, $course);
@@ -445,6 +459,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_result_scale_string()
@@ -453,6 +468,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     static function result_scale_string($result_scale_id)
@@ -533,27 +549,27 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (! StringUtilities :: is_null_or_empty($this->get_goals(), true))
         {
             return true;
         }
-
+        
         if (! StringUtilities :: is_null_or_empty($this->get_contents(), true))
         {
             return true;
         }
-
+        
         if (! StringUtilities :: is_null_or_empty($this->get_coaching(), true))
         {
             return true;
         }
-
+        
         if (! StringUtilities :: is_null_or_empty($this->get_succession(), true))
         {
             return true;
         }
-
+        
         return false;
     }
 
@@ -608,6 +624,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()
@@ -616,6 +633,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return the $second_chance
      */
     public function get_second_chance()
@@ -624,6 +642,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $second_chance
      */
     public function set_second_chance($second_chance)
@@ -632,6 +651,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return the $following_impossible
      */
     public function get_following_impossible()
@@ -640,6 +660,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $following_impossible
      */
     public function set_following_impossible($following_impossible)
@@ -648,6 +669,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return the $costs
      */
     public function get_costs()
@@ -656,6 +678,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $costs
      */
     public function set_costs($costs)
@@ -669,12 +692,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_costs();
         }
-
+        
         if (! isset($this->costs_by_type[$type]))
         {
             $this->costs_by_type[Cost :: TYPE_MATERIAL] = false;
             $this->costs_by_type[Cost :: TYPE_ADDITIONAL] = false;
-
+            
             foreach ($this->get_costs() as $cost)
             {
                 $this->costs_by_type[$cost->get_type()] = $cost;
@@ -684,6 +707,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return the $evaluations
      */
     public function get_evaluations()
@@ -692,6 +716,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $evaluations
      */
     public function set_evaluations($evaluations)
@@ -711,16 +736,17 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (count($this->get_evaluations()) > 0)
         {
             return true;
         }
-
+        
         return false;
     }
 
     /**
+     *
      * @return the $activities
      */
     public function get_activities()
@@ -729,6 +755,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $activities
      */
     public function set_activities($activities)
@@ -748,12 +775,12 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (count($this->get_activities()) > 0)
         {
             return true;
         }
-
+        
         return false;
     }
 
@@ -763,13 +790,13 @@ class Course extends DiscoveryItem
         {
             return $this->get_activities();
         }
-
+        
         if (! isset($this->activities_by_type[$type]))
         {
             $this->activities_by_type[ActivityDescription :: CLASS_NAME] = array();
             $this->activities_by_type[ActivityStructured :: CLASS_NAME] = array();
             $this->activities_by_type[ActivityTotal :: CLASS_NAME] = false;
-
+            
             foreach ($this->get_activities() as $activity)
             {
                 if ($activity instanceof ActivityTotal)
@@ -786,6 +813,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return the $materials
      */
     public function get_materials()
@@ -794,6 +822,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $materials
      */
     public function set_materials($materials)
@@ -807,12 +836,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_materials();
         }
-
+        
         if (! isset($this->materials_by_type[$type]))
         {
             $this->materials_by_type[Material :: TYPE_OPTIONAL] = array();
             $this->materials_by_type[Material :: TYPE_REQUIRED] = array();
-
+            
             foreach ($this->get_materials() as $material)
             {
                 $this->materials_by_type[$material->get_type()][] = $material;
@@ -833,16 +862,17 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (count($this->get_materials_by_type($type)) > 0)
         {
             return true;
         }
-
+        
         return false;
     }
 
     /**
+     *
      * @return the $competences
      */
     public function get_competences()
@@ -851,6 +881,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $competences
      */
     public function set_competences($competences)
@@ -864,12 +895,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_competences();
         }
-
+        
         if (! isset($this->competences_by_type[$type]))
         {
             $this->competences_by_type[Competence :: TYPE_BEGIN] = array();
             $this->competences_by_type[Competence :: TYPE_END] = array();
-
+            
             foreach ($this->get_competences() as $competence)
             {
                 $this->competences_by_type[$competence->get_type()][] = $competence;
@@ -890,16 +921,17 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (count($this->get_competences_by_type($type)) > 0)
         {
             return true;
         }
-
+        
         return false;
     }
 
     /**
+     *
      * @return the $languages
      */
     public function get_languages()
@@ -913,6 +945,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $languages
      */
     public function set_languages($languages)
@@ -926,6 +959,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return the $timeframe_parts
      */
     public function get_timeframe_parts()
@@ -939,6 +973,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @param field_type $timeframe_parts
      */
     public function set_timeframe_parts($timeframe_parts)
@@ -947,6 +982,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return the $teachers
      */
     public function get_teachers()
@@ -956,17 +992,16 @@ class Course extends DiscoveryItem
 
     function get_teachers_by_type($type)
     {
-
         if (is_null($type))
         {
             return $this->get_teachers();
         }
-
+        
         if (! isset($this->teachers_by_type[$type]))
         {
             $this->teachers_by_type[Teacher :: TYPE_TEACHER] = array();
             $this->teachers_by_type[Teacher :: TYPE_COORDINATOR] = array();
-
+            
             foreach ($this->get_teachers() as $teacher)
             {
                 $this->teachers_by_type[$teacher->is_coordinator()][] = $teacher;
@@ -1027,6 +1062,7 @@ class Course extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     static function score_calculation_string($score_calculation)
@@ -1037,13 +1073,14 @@ class Course extends DiscoveryItem
                 return 'ScoreCalculationNumber';
                 break;
             case self :: SCORE_CALCULATION_DIFFERENCE :
-
+                
                 return 'ScoreCalculationDifference';
                 break;
         }
     }
 
     /**
+     *
      * @param field_type $teachers
      */
     public function set_teachers($teachers)
@@ -1095,7 +1132,7 @@ class Course extends DiscoveryItem
     {
         $this->children = $children;
     }
-    
+
     function add_child($child)
     {
         $this->children[] = $child;
@@ -1103,17 +1140,17 @@ class Course extends DiscoveryItem
 
     function get_children()
     {
-        //        if ($this->get_programme_type() == self :: PROGRAMME_TYPE_COMPLEX)
-        //        {
-        //            if (! isset($this->children))
-        //            {
+        // if ($this->get_programme_type() == self :: PROGRAMME_TYPE_COMPLEX)
+        // {
+        // if (! isset($this->children))
+        // {
         //
-        //            }
-        //        }
-        //        else
-        //        {
-        //            $this->children = array();
-        //        }
+        // }
+        // }
+        // else
+        // {
+        // $this->children = array();
+        // }
         return $this->children;
     }
 
@@ -1121,5 +1158,4 @@ class Course extends DiscoveryItem
     {
         return count($this->get_children()) > 0;
     }
-
 }

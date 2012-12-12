@@ -7,7 +7,6 @@ use application\discovery\DiscoveryItem;
 class Profile extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_NAME = 'name';
     const PROPERTY_IDENTIFICATION_CODE = 'identification_code';
     const PROPERTY_EMAIL = 'email';
@@ -16,6 +15,7 @@ class Profile extends DiscoveryItem
     const PROPERTY_PHOTO = 'photo';
 
     /**
+     *
      * @return Name
      */
     function get_name()
@@ -24,6 +24,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @return multitype:IdentificationCode
      */
     function get_identification_code()
@@ -32,6 +33,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @return multitype:Email
      */
     function get_email()
@@ -40,6 +42,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @return multitype:Communication
      */
     function get_communication()
@@ -48,6 +51,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_language()
@@ -56,6 +60,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @return Photo
      */
     function get_photo()
@@ -64,6 +69,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param Name $name
      */
     function set_name(Name $name)
@@ -72,6 +78,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:IdentificationCode $code
      */
     function set_identification_code($identification_code)
@@ -80,6 +87,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:Email $email
      */
     function set_email($email)
@@ -88,6 +96,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:Communication $communication
      */
     function set_communication($communication)
@@ -96,6 +105,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $language
      */
     function set_language($language)
@@ -104,6 +114,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param Photo $photo
      */
     function set_photo(Photo $photo)
@@ -112,6 +123,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param IdentificationCode $code
      */
     function add_identification_code(IdentificationCode $code)
@@ -122,6 +134,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param Communication $communication
      */
     function add_communication(Communication $communication)
@@ -132,6 +145,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param Email $email
      */
     function add_email(Email $email)
@@ -142,6 +156,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -157,6 +172,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -165,6 +181,7 @@ class Profile extends DiscoveryItem
     }
 
     /**
+     *
      * @return boolean
      */
     function has_photo()

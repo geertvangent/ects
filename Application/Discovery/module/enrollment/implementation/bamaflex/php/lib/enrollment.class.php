@@ -2,15 +2,12 @@
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
 use common\libraries\Translation;
-
 use application\discovery\module\career\DataManager;
-
 use application\discovery\DiscoveryDataManager;
 
 class Enrollment extends \application\discovery\module\enrollment\Enrollment
 {
     const CLASS_NAME = __CLASS__;
-
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_FACULTY = 'faculty';
     const PROPERTY_FACULTY_ID = 'faculty_id';
@@ -23,38 +20,34 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     const PROPERTY_DISTINCTION = 'distinction';
     const PROPERTY_EXCHANGE_TYPE = 'exchange_type';
     const PROPERTY_GENERATION_STUDENT = 'generation_student';
-
     const CONTRACT_TYPE_ALL = 0;
     const CONTRACT_TYPE_DEGREE = 1;
     const CONTRACT_TYPE_CREDIT = 2;
     const CONTRACT_TYPE_EXAM_DEGREE = 3;
     const CONTRACT_TYPE_EXAM_CREDIT = 4;
     const CONTRACT_TYPE_OLD_DEGREE = 5;
-
     const TRAJECTORY_TYPE_TEMPLATE = 1;
     const TRAJECTORY_TYPE_PERSONAL = 2;
     const TRAJECTORY_TYPE_INDIVIDUAL = 3;
     const TRAJECTORY_TYPE_UNKNOWN = 4;
-
     const RESULT_TOLERATED = 6;
     const RESULT_GRADUALLY_TOLERATED = 7;
     const RESULT_STRUCK = 8;
-
     const DISTINCTION_NONE = 1;
-    //Voldoende wijze
+    // Voldoende wijze
     const DISTINCTION_SUFFICIENT = 2;
-    //Onderscheiding
+    // Onderscheiding
     const DISTINCTION_GOOD = 3;
-    //Grote onderscheiding
+    // Grote onderscheiding
     const DISTINCTION_VERY_GOOD = 4;
-    //Grootste onderscheiding
+    // Grootste onderscheiding
     const DISTINCTION_EXCELLENT = 5;
-
     const EXCHANGE_TYPE_NONE = 1;
     const EXCHANGE_TYPE_INCOMING = 2;
     const EXCHANGE_TYPE_OUTGOING = 3;
 
     /**
+     *
      * @return int
      */
     function get_source()
@@ -63,6 +56,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_faculty()
@@ -76,6 +70,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return int
      */
     function get_contract_type()
@@ -84,6 +79,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_contract_type_string()
@@ -92,6 +88,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     static function contract_type_string($contract_type)
@@ -117,6 +114,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return int
      */
     function get_contract_id()
@@ -125,6 +123,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return int
      */
     function get_trajectory_type()
@@ -133,6 +132,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_trajectory_type_string()
@@ -155,6 +155,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_trajectory()
@@ -163,6 +164,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_unified_trajectory()
@@ -178,6 +180,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_option_choice()
@@ -186,6 +189,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_graduation_option()
@@ -194,26 +198,28 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_unified_option()
     {
         $options = array();
-
+        
         if ($this->get_option_choice())
         {
             $options[] = $this->get_option_choice();
         }
-
+        
         if ($this->get_graduation_option())
         {
             $options[] = $this->get_graduation_option();
         }
-
+        
         return implode(' - ', $options);
     }
 
     /**
+     *
      * @return int
      */
     function get_distinction()
@@ -222,6 +228,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_distinction_string()
@@ -233,12 +240,13 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     {
         return ! is_null($this->get_distinction());
     }
+
     /**
+     *
      * @return string
      */
     static function distinction_string($distinction)
     {
-
         switch ($distinction)
         {
             case self :: DISTINCTION_NONE :
@@ -260,6 +268,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return int
      */
     function get_exchange_type()
@@ -268,6 +277,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_exchange_type_string()
@@ -276,11 +286,11 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     static function exchange_type_string($exchange_type)
     {
-
         switch ($exchange_type)
         {
             case self :: EXCHANGE_TYPE_NONE :
@@ -306,6 +316,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param int $source
      */
     function set_source($source)
@@ -314,6 +325,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param string $faculty
      */
     function set_faculty($faculty)
@@ -327,6 +339,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param int $contract_type
      */
     function set_contract_type($contract_type)
@@ -335,6 +348,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param int $contract_id
      */
     function set_contract_id($contract_id)
@@ -343,6 +357,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param int $trajectory_type
      */
     function set_trajectory_type($trajectory_type)
@@ -351,6 +366,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param string $trajectory
      */
     function set_trajectory($trajectory)
@@ -359,6 +375,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param string $option_choice
      */
     function set_option_choice($option_choice)
@@ -367,6 +384,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param string $graduation_option
      */
     function set_graduation_option($graduation_option)
@@ -375,6 +393,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param int $distinction
      */
     function set_distinction($distinction)
@@ -383,6 +402,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function get_result_string()
@@ -391,6 +411,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     static function result_string($result)
@@ -413,6 +434,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return multitype:string
      */
     static function get_results()
@@ -423,6 +445,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -437,11 +460,12 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         $extended_property_names[] = self :: PROPERTY_OPTION_CHOICE;
         $extended_property_names[] = self :: PROPERTY_GRADUATION_OPTION;
         $extended_property_names[] = self :: PROPERTY_DISTINCTION;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -450,6 +474,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     }
 
     /**
+     *
      * @return string
      */
     function __toString()
@@ -457,18 +482,13 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         $string = array();
         $string[] = $this->get_year();
         $string[] = $this->get_training();
-
+        
         if ($this->get_unified_option())
         {
             $string[] = $this->get_unified_option();
         }
-
+        
         return implode(' | ', $string);
-    }
-
-    function get_training_object()
-    {
-        return DataManager :: get_instance($this->get_instance())->retrieve_training($this->get_source(), $this->get_training_id());
     }
 }
 ?>

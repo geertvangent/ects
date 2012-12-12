@@ -2,7 +2,6 @@
 namespace application\discovery\module\faculty_info;
 
 use common\libraries\Request;
-
 use common\libraries\DynamicVisualTabsRenderer;
 use common\libraries\DynamicVisualTab;
 use common\libraries\Filesystem;
@@ -17,18 +16,21 @@ use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 
 class Module extends \application\discovery\Module
 {
     const PARAM_FACULTY_ID = 'faculty_id';
+
     /**
+     *
      * @var multitype:\application\discovery\module\faculty_info\Faculty
      */
     private $faculty;
+
     private $cache_trainings = array();
+
     private $cache_faculty = array();
 
     function __construct(Application $application, ModuleInstance $module_instance)
@@ -51,23 +53,24 @@ class Module extends \application\discovery\Module
             $parameter->set_faculty_id($faculty);
         }
         return $parameter;
-    
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\faculty_info\Faculty
      */
     function get_faculty()
     {
         if (! isset($this->faculty))
         {
-            $this->faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty($this->get_faculty_parameters());
+            $this->faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty(
+                    $this->get_faculty_parameters());
         }
         return $this->faculty;
     }
     
-    /* (non-PHPdoc)
-     * @see application\discovery\module\faculty_info\Module::render()
+    /*
+     * (non-PHPdoc) @see application\discovery\module\faculty_info\Module::render()
      */
     function render()
     {
@@ -85,7 +88,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;
@@ -101,10 +105,10 @@ class Module extends \application\discovery\Module
         
         if (! isset($this->cache_trainings[$source][$faculty_id]))
         {
-            $this->cache_trainings[$source][$faculty_id] = DataManager :: get_instance($this->get_module_instance())->retrieve_trainings($parameters);
+            $this->cache_trainings[$source][$faculty_id] = DataManager :: get_instance($this->get_module_instance())->retrieve_trainings(
+                    $parameters);
         }
         return $this->cache_trainings[$source][$faculty_id];
     }
-
 }
 ?>

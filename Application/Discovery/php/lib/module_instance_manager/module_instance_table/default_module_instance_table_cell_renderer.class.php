@@ -2,7 +2,6 @@
 namespace application\discovery;
 
 use common\libraries;
-
 use common\libraries\Translation;
 use common\libraries\Utilities;
 use common\libraries\ObjectTableCellRenderer;
@@ -28,7 +27,8 @@ class DefaultModuleInstanceTableCellRenderer extends ObjectTableCellRenderer
             case ModuleInstance :: PROPERTY_TITLE :
                 return Translation :: get('TypeName', null, $module_instance->get_type());
             case ModuleInstance :: PROPERTY_DESCRIPTION :
-                return Utilities :: truncate_string(Translation :: get('TypeDescription', null, $module_instance->get_type()), 50);
+                return Utilities :: truncate_string(
+                        Translation :: get('TypeDescription', null, $module_instance->get_type()), 50);
             case ModuleInstance :: PROPERTY_DISPLAY_ORDER :
                 return $module_instance->get_display_order();
             default :

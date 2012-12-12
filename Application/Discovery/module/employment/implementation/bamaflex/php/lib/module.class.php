@@ -2,31 +2,19 @@
 namespace application\discovery\module\employment\implementation\bamaflex;
 
 use application\discovery\LegendTable;
-
 use application\discovery\SortableTable;
-
 use application\discovery\ModuleInstance;
-
 use common\libraries\PropertiesTable;
-
 use common\libraries\StringUtilities;
-
 use common\libraries\Display;
-
 use common\libraries\Path;
-
 use common\libraries\ToolbarItem;
-
 use common\libraries\Toolbar;
-
 use common\libraries\Theme;
-
 use common\libraries\SortableTableFromArray;
-
 use common\libraries\Utilities;
 use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
-
 use application\discovery\module\profile\DataManager;
 
 class Module extends \application\discovery\module\employment\Module
@@ -38,7 +26,8 @@ class Module extends \application\discovery\module\employment\Module
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_employment_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_employment_parameters()))
         {
             Display :: not_allowed();
         }
@@ -47,7 +36,6 @@ class Module extends \application\discovery\module\employment\Module
         if (count($this->get_employments()) > 0)
         {
             $html[] = $this->get_table()->toHTML();
-        
         }
         else
         {
@@ -94,7 +82,6 @@ class Module extends \application\discovery\module\employment\Module
         {
             return $departments[0];
         }
-    
     }
 
     function get_table()
@@ -143,13 +130,17 @@ class Module extends \application\discovery\module\employment\Module
             
             if ($employment->get_end_date())
             {
-                $end_date = DatetimeUtilities :: format_locale_date(Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $employment->get_end_date());
+                $end_date = DatetimeUtilities :: format_locale_date(
+                        Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                        $employment->get_end_date());
             }
             else
             {
                 $end_date = '';
             }
-            $start_date = DatetimeUtilities :: format_locale_date(Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $employment->get_start_date());
+            $start_date = DatetimeUtilities :: format_locale_date(
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    $employment->get_start_date());
             
             $row[] = $start_date;
             $row[] = $end_date;
@@ -158,21 +149,29 @@ class Module extends \application\discovery\module\employment\Module
             
             if ($employment->get_fund_id())
             {
-                $image = '<img src="' . Theme :: get_image_path() . 'fund/' . $employment->get_fund_id() . '.png" alt="' . Translation :: get($employment->get_fund_string()) . '" title="' . Translation :: get($employment->get_fund_string()) . '" />';
+                $image = '<img src="' . Theme :: get_image_path() . 'fund/' . $employment->get_fund_id() . '.png" alt="' . Translation :: get(
+                        $employment->get_fund_string()) . '" title="' . Translation :: get(
+                        $employment->get_fund_string()) . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, Translation :: get($employment->get_fund_string()), Translation :: get('Fund'));
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get($employment->get_fund_string()), 
+                        Translation :: get('Fund'));
             }
             else
             {
-                $image = '<img src="' . Theme :: get_image_path() . 'fund/0.png" alt="' . Translation :: get('UnknownFund') . '" title="' . Translation :: get('UnknownFund') . '" />';
+                $image = '<img src="' . Theme :: get_image_path() . 'fund/0.png" alt="' . Translation :: get(
+                        'UnknownFund') . '" title="' . Translation :: get('UnknownFund') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, Translation :: get('UnknownFund'), Translation :: get('Fund'));
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('UnknownFund'), 
+                        Translation :: get('Fund'));
             }
             $row[] = $employment->get_pay_scale();
             
-            $image = '<img src="' . Theme :: get_image_path() . 'active/' . $employment->get_active() . '.png" alt="' . Translation :: get($employment->get_active_string()) . '" title="' . Translation :: get($employment->get_active_string()) . '" />';
+            $image = '<img src="' . Theme :: get_image_path() . 'active/' . $employment->get_active() . '.png" alt="' . Translation :: get(
+                    $employment->get_active_string()) . '" title="' . Translation :: get(
+                    $employment->get_active_string()) . '" />';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get($employment->get_active_string()), Translation :: get('Active'));
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get($employment->get_active_string()), 
+                    Translation :: get('Active'));
             
             if ($employment->get_interruption())
             {
@@ -207,11 +206,15 @@ class Module extends \application\discovery\module\employment\Module
                     }
                     
                     $row[] = '<span class="employment_part">' . $part->get_volume() . '%' . '</span>';
-                    $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $part->get_start_date()) . '</span>';
+                    $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(
+                            Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                            $part->get_start_date()) . '</span>';
                     
                     if ($part->get_end_date())
                     {
-                        $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $part->get_end_date()) . '</span>';
+                        $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(
+                                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                                $part->get_end_date()) . '</span>';
                     }
                     else
                     {
@@ -220,7 +223,6 @@ class Module extends \application\discovery\module\employment\Module
                     $data[] = $row;
                 }
             }
-        
         }
         
         $table = new SortableTable($data);

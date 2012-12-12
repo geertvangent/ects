@@ -5,12 +5,13 @@ use application\discovery\ModuleInstance;
 
 class DataSource extends \application\discovery\DataSource
 {
+
     private $connection;
 
     /**
      * Constructor
-     *
-     * @param $module_instance ModuleInstance           
+     * 
+     * @param $module_instance ModuleInstance
      */
     function __construct(ModuleInstance $module_instance)
     {
@@ -34,7 +35,7 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      * Returns the connection
-     *
+     * 
      * @return Connection the connection
      */
     function get_connection()
@@ -44,8 +45,8 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      * Sets the connection
-     *
-     * @param $connection Connection           
+     * 
+     * @param $connection Connection
      */
     function set_connection($connection)
     {

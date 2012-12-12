@@ -2,21 +2,21 @@
 namespace application\discovery\module\group_user\implementation\bamaflex;
 
 use application\discovery\module\group\implementation\bamaflex\Group;
-
 use common\libraries\ArrayResultSet;
 use user\UserDataManager;
-
 use application\discovery\module\group_user\MarkMoment;
 use application\discovery\module\group_user\DataManagerInterface;
-
 use MDB2_Error;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
+
     private $group_user = array();
+
     private $group;
 
     /**
+     *
      * @param int $programme_id
      * @return multitype:\application\discovery\module\group_user\implementation\bamaflex\GroupUser
      */
@@ -86,7 +86,6 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $group->set_type_id($result->type_id);
                 
                 $this->group[$source][$type][$group_class_id] = $group;
-            
             }
         }
         

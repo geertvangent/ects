@@ -2,16 +2,15 @@
 namespace application\discovery\module\advice\implementation\bamaflex;
 
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-
 use user\UserDataManager;
-
 use application\discovery\module\advice\DataManagerInterface;
-
 use MDB2_Error;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
+
     private $advices;
+
     private $enrollments;
 
     /**
@@ -23,7 +22,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-
+        
         if (! isset($this->advices[$person_id]))
         {
             $query = 'SELECT * FROM v_discovery_advice_basic
@@ -34,10 +33,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 		            			measures IS NOT NULL OR
 		            			advice IS NOT NULL)
             			ORDER BY year DESC';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -59,12 +58,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $advice->set_try($result->try);
                     $advice->set_decision_type_id($result->decision_type_id);
                     $advice->set_decision_type($this->convert_to_utf8($result->decision_type));
-
+                    
                     $this->advices[$person_id][] = $advice;
                 }
             }
         }
-
+        
         return $this->advices[$person_id];
     }
 
@@ -72,7 +71,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-
+        
         $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic
             			WHERE person_id = "' . $person_id . '"
             				AND (motivation IS NOT NULL OR
@@ -80,16 +79,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 		            			vote IS NOT NULL OR
 		            			measures IS NOT NULL OR
 		            			advice IS NOT NULL)';
-
+        
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-
+        
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
             return $result->advices_count;
         }
-
+        
         return 0;
     }
 
@@ -105,12 +104,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC, id';
-
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
+            
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -136,7 +135,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 }

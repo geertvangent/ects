@@ -2,13 +2,11 @@
 namespace application\discovery\module\faculty\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-
 use application\discovery\DiscoveryDataManager;
 
 class Dean extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_FACULTY_ID = 'faculty_id';
     const PROPERTY_FUNCTION_ID = 'function_id';
@@ -16,6 +14,7 @@ class Dean extends DiscoveryItem
     const PROPERTY_FUNCTION = 'function';
 
     /**
+     *
      * @return int
      */
     function get_source()
@@ -24,6 +23,7 @@ class Dean extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $source
      */
     function set_source($source)
@@ -72,6 +72,7 @@ class Dean extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -86,6 +87,7 @@ class Dean extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

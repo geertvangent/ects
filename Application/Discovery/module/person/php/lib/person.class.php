@@ -7,13 +7,13 @@ use application\discovery\DiscoveryItem;
 class Person extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_OFFICIAL_CODE = 'official_code';
     const PROPERTY_FIRST_NAME = 'first_name';
     const PROPERTY_LAST_NAME = 'last_name';
     const PROPERTY_EMAIL = 'email';
 
     /**
+     *
      * @return string
      */
     function get_email()
@@ -22,6 +22,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_first_name()
@@ -30,6 +31,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $year
      */
     function set_first_name($first_name)
@@ -38,6 +40,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $name
      */
     function set_email($email)
@@ -46,6 +49,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_last_name()
@@ -54,6 +58,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $year
      */
     function set_last_name($last_name)
@@ -62,6 +67,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_official_code()
@@ -70,6 +76,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $official_code
      */
     function set_official_code($official_code)
@@ -78,6 +85,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -91,6 +99,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -99,6 +108,7 @@ class Person extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

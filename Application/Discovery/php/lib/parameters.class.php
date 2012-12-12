@@ -3,6 +3,7 @@ namespace application\discovery;
 
 class Parameters
 {
+
     private $parameters = array();
 
     function get_parameter($key)

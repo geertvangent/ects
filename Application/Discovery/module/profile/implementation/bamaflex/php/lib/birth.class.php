@@ -2,24 +2,20 @@
 namespace application\discovery\module\profile\implementation\bamaflex;
 
 use common\libraries\Utilities;
-
 use common\libraries\Translation;
-
 use common\libraries\DatetimeUtilities;
-
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\DataClass;
 
 class Birth extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_DATE = 'date';
     const PROPERTY_PLACE = 'place';
     const PROPERTY_COUNTRY = 'country';
 
     /**
+     *
      * @return int
      */
     function get_date()
@@ -38,6 +34,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_place()
@@ -46,6 +43,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_country()
@@ -54,6 +52,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @param int $date
      */
     function set_date($date)
@@ -62,6 +61,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @param string $place
      */
     function set_place($place)
@@ -70,6 +70,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @param string $country
      */
     function set_country($country)
@@ -78,6 +79,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @return boolean
      */
     function has_date()
@@ -86,6 +88,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @return boolean
      */
     function has_location()
@@ -94,6 +97,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_location()
@@ -112,6 +116,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -124,6 +129,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -132,6 +138,7 @@ class Birth extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

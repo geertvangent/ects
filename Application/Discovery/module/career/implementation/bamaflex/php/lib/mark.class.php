@@ -2,22 +2,20 @@
 namespace application\discovery\module\career\implementation\bamaflex;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.career.implementation.bamaflex.discovery
+ * 
  * @author Hans De Bisschop
  */
 class Mark extends \application\discovery\module\career\Mark
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SUB_STATUS = 'sub_status';
     const PROPERTY_PUBLISH_STATUS = 'publish_status';
     const PROPERTY_ABANDONED = 'abandoned';
-    
     const STATUS_EXEMPTION = 1;
     const STATUS_CREDIT = 2;
     const STATUS_DELIBERATED = 3;
@@ -27,12 +25,12 @@ class Mark extends \application\discovery\module\career\Mark
     const STATUS_POSTPONED = 7;
     const STATUS_NO_CREDIT = 8;
     const STATUS_DETERMINED = 9;
-    
     const ABANDONED_NO = 1;
     const ABANDONED_YES = 2;
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -47,6 +45,7 @@ class Mark extends \application\discovery\module\career\Mark
 
     /**
      * Returns the sub_status of this Mark.
+     * 
      * @return string The sub_status.
      */
     function get_sub_status()
@@ -56,6 +55,7 @@ class Mark extends \application\discovery\module\career\Mark
 
     /**
      * Sets the sub_status of this Mark.
+     * 
      * @param string $sub_status
      */
     function set_sub_status($sub_status)
@@ -74,6 +74,7 @@ class Mark extends \application\discovery\module\career\Mark
     }
 
     /**
+     *
      * @return string
      */
     function get_status_string()
@@ -82,6 +83,7 @@ class Mark extends \application\discovery\module\career\Mark
     }
 
     /**
+     *
      * @return string
      */
     static function status_string($status)
@@ -125,8 +127,9 @@ class Mark extends \application\discovery\module\career\Mark
 
     function is_credit()
     {
-        if (in_array($this->get_status(), array(self :: STATUS_EXEMPTION, self :: STATUS_CREDIT, 
-                self :: STATUS_DELIBERATED, self :: STATUS_TOLERATED)) && ! $this->is_abandoned())
+        if (in_array($this->get_status(), 
+                array(self :: STATUS_EXEMPTION, self :: STATUS_CREDIT, self :: STATUS_DELIBERATED, 
+                        self :: STATUS_TOLERATED)) && ! $this->is_abandoned())
         {
             return true;
         }
@@ -160,5 +163,4 @@ class Mark extends \application\discovery\module\career\Mark
         $mark->set_sub_status($sub_status);
         return $mark;
     }
-
 }

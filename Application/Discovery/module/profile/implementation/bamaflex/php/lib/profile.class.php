@@ -6,7 +6,6 @@ use application\discovery\DiscoveryDataManager;
 class Profile extends \application\discovery\module\profile\Profile
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_GENDER = 'gender';
     const PROPERTY_BIRTH = 'birth';
     const PROPERTY_NATIONALITY = 'nationality';
@@ -14,14 +13,15 @@ class Profile extends \application\discovery\module\profile\Profile
     const PROPERTY_FIRST_UNIVERSITY_COLLEGE = 'first_university_college';
     const PROPERTY_FIRST_UNIVERSITY = 'university';
     const PROPERTY_LEARNING_CREDIT = 'learning_credit';
-    
+
     private $previous_college;
+
     private $previous_university;
-    
     const GENDER_MALE = 1;
     const GENDER_FEMALE = 2;
 
     /**
+     *
      * @return the $previous_college
      */
     public function get_previous_college()
@@ -30,6 +30,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param field_type $previous_college
      */
     public function set_previous_college($previous_college)
@@ -38,6 +39,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return the $previous_university
      */
     public function get_previous_university()
@@ -46,6 +48,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param field_type $previous_university
      */
     public function set_previous_university($previous_university)
@@ -54,6 +57,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return int
      */
     function get_gender()
@@ -62,6 +66,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return string
      */
     function get_gender_string()
@@ -80,6 +85,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return Birth
      */
     function get_birth()
@@ -88,6 +94,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return multitype:Nationality
      */
     function get_nationality()
@@ -96,6 +103,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return string
      */
     function get_nationality_string()
@@ -111,6 +119,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return multitype:Address
      */
     function get_address()
@@ -119,6 +128,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param int $gender
      */
     function set_gender($gender)
@@ -127,6 +137,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param Birth $birth
      */
     function set_birth(Birth $birth)
@@ -135,6 +146,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param multitype:Nationality $nationality
      */
     function set_nationality($nationality)
@@ -143,6 +155,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param multitype:Address $address
      */
     function set_address($address)
@@ -151,6 +164,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param Nationality $nationality
      */
     function add_nationality(Nationality $nationality)
@@ -161,6 +175,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param Address $address
      */
     function add_address(Address $address)
@@ -192,16 +207,16 @@ class Profile extends \application\discovery\module\profile\Profile
 
     function get_learning_credit()
     {
-    	return $this->get_default_property(self :: PROPERTY_LEARNING_CREDIT);
+        return $this->get_default_property(self :: PROPERTY_LEARNING_CREDIT);
     }
-    
+
     function set_learning_credit($learning_credit)
     {
         $this->set_default_property(self :: PROPERTY_LEARNING_CREDIT, $learning_credit);
     }
-    
-    
+
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -217,6 +232,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

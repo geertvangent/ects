@@ -7,13 +7,13 @@ use application\discovery\DiscoveryItem;
 class Cas extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_PERSON_ID = 'person_id';
     const PROPERTY_APPLICATION_ID = 'application_id';
     const PROPERTY_ACTION_ID = 'action_id';
     const PROPERTY_DATE = 'date';
 
     /**
+     *
      * @return int
      */
     function get_person_id()
@@ -22,6 +22,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $person_id
      */
     function set_person_id($person_id)
@@ -30,6 +31,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @return int
      */
     function get_application_id()
@@ -38,6 +40,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $application_id
      */
     function set_application_id($application_id)
@@ -46,6 +49,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @return int
      */
     function get_action_id()
@@ -54,6 +58,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $action_id
      */
     function set_action_id($action_id)
@@ -62,6 +67,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @return timestamp
      */
     function get_date()
@@ -70,6 +76,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @param timestamp $date
      */
     function set_date($date)
@@ -78,6 +85,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -91,6 +99,7 @@ class Cas extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

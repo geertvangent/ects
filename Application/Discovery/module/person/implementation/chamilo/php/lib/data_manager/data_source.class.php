@@ -2,14 +2,14 @@
 namespace application\discovery\module\person\implementation\chamilo;
 
 use application\discovery\module\person\DataManagerInterface;
-
 use user\UserDataManager;
 
 class DataSource implements DataManagerInterface
 {
 
     /**
-     * @return \application\discovery\module\person\implementation\chamilo\Person|boolean
+     *
+     * @return \application\discovery\module\person\implementation\chamilo\Person boolean
      */
     function retrieve_persons($condition, $offset, $count, $order_by)
     {

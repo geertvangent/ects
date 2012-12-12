@@ -2,12 +2,12 @@
 namespace application\discovery\module\career;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.career.discovery
+ * 
  * @author Hans De Bisschop
  */
 class MarkMoment extends DataClass
@@ -21,6 +21,7 @@ class MarkMoment extends DataClass
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -33,6 +34,7 @@ class MarkMoment extends DataClass
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -42,6 +44,7 @@ class MarkMoment extends DataClass
 
     /**
      * Returns the name of this MarkMoment.
+     * 
      * @return string The name.
      */
     function get_name()
@@ -51,6 +54,7 @@ class MarkMoment extends DataClass
 
     /**
      * Sets the name of this Mark.
+     * 
      * @param string $name
      */
     function set_name($name)
@@ -59,6 +63,7 @@ class MarkMoment extends DataClass
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()

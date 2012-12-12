@@ -2,9 +2,7 @@
 namespace application\discovery;
 
 use rights\NewPlatformGroupEntity;
-
 use rights\NewUserEntity;
-
 use common\libraries\Utilities;
 use common\libraries\Display;
 use common\libraries\DelegateComponent;
@@ -12,7 +10,6 @@ use common\libraries\Request;
 use common\libraries\BreadcrumbTrail;
 use common\libraries\Breadcrumb;
 use common\libraries\Translation;
-
 use common\extensions\new_rights_editor_manager\RightsEditorManager;
 
 /**
@@ -20,10 +17,11 @@ use common\extensions\new_rights_editor_manager\RightsEditorManager;
  * @author Hans De Bisschop
  * @package application.phrases
  */
-
 class DiscoveryManagerRightsComponent extends DiscoveryManager implements DelegateComponent
 {
+
     private $module_instance_id;
+
     private $namespace;
 
     function run()
@@ -32,7 +30,8 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
         $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
         $this->namespace = '\\' . $module_instance->get_type() . '\Rights';
         $namespace = $this->namespace;
-        RightsEditorManager :: launch($this, 'discovery_' . $this->module_instance_id, $this->get_locations(), $this->get_entities());
+        RightsEditorManager :: launch($this, 'discovery_' . $this->module_instance_id, $this->get_locations(), 
+                $this->get_entities());
     }
 
     function get_locations()
@@ -65,7 +64,8 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
 
     function get_additional_parameters()
     {
-        $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance(Request :: get(self :: PARAM_MODULE_ID));
+        $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance(
+                Request :: get(self :: PARAM_MODULE_ID));
         $namespace = '\\' . $module_instance->get_type() . '\Module';
         $parameters = $namespace :: get_module_parameters();
         $parameters = array_keys($parameters->get_parameters());

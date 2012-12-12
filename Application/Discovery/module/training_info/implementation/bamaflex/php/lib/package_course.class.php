@@ -2,13 +2,11 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-
 use application\discovery\DiscoveryDataManager;
 
 class PackageCourse extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_NAME = 'name';
     const PROPERTY_TRAJECTORY_PART = 'trajectory_part';
@@ -16,10 +14,11 @@ class PackageCourse extends DiscoveryItem
     const PROPERTY_PACKAGE_ID = 'package_id';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_PARENT_PROGRAMME_ID = 'parent_programme_id';
-    
+
     private $children;
 
     /**
+     *
      * @return int
      */
     function get_source()
@@ -28,6 +27,7 @@ class PackageCourse extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $source
      */
     function set_source($source)
@@ -129,6 +129,7 @@ class PackageCourse extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

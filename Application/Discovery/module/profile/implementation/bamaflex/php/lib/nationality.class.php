@@ -2,22 +2,19 @@
 namespace application\discovery\module\profile\implementation\bamaflex;
 
 use common\libraries\Translation;
-
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\DataClass;
 
 class Nationality extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_NATIONALITY = 'nationality';
-    
     const TYPE_PRIMARY = 1;
     const TYPE_SECONDARY = 2;
 
     /**
+     *
      * @return int
      */
     function get_type()
@@ -26,6 +23,7 @@ class Nationality extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_type_string()
@@ -42,6 +40,7 @@ class Nationality extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_nationality()
@@ -50,6 +49,7 @@ class Nationality extends DataClass
     }
 
     /**
+     *
      * @param int $type
      */
     function set_type($type)
@@ -58,6 +58,7 @@ class Nationality extends DataClass
     }
 
     /**
+     *
      * @param string $nationality
      */
     function set_nationality($nationality)
@@ -66,6 +67,7 @@ class Nationality extends DataClass
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -77,6 +79,7 @@ class Nationality extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

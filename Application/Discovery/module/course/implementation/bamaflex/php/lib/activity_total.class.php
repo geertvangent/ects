@@ -6,7 +6,6 @@ use application\discovery\DiscoveryDataManager;
 class ActivityTotal extends Activity
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_TIME = 'time';
 
     function get_time()
@@ -20,6 +19,7 @@ class ActivityTotal extends Activity
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -30,6 +30,7 @@ class ActivityTotal extends Activity
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -38,6 +39,7 @@ class ActivityTotal extends Activity
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

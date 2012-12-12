@@ -2,22 +2,15 @@
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use common\libraries\Display;
-
 use common\libraries\Breadcrumb;
-
 use common\libraries\BreadcrumbTrail;
-
 use common\libraries\PropertiesTable;
-
 use user\UserDataManager;
-
 use common\libraries\Request;
-
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\course_results\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicContentTab;
 use common\libraries\Theme;
@@ -38,8 +31,9 @@ class Module extends \application\discovery\module\course_results\Module
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $profile_module_instance = \application\discovery\Module :: exists('application\discovery\module\profile\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $profile_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\profile\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         foreach ($this->get_course_results() as $course_result)
         {
@@ -47,7 +41,8 @@ class Module extends \application\discovery\module\course_results\Module
             
             if ($profile_module_instance)
             {
-                $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($course_result->get_person_id());
+                $user = UserDataManager :: get_instance()->retrieve_user_by_official_code(
+                        $course_result->get_person_id());
                 if ($user)
                 {
                     $parameters = new \application\discovery\module\profile\Parameters($user->get_id());
@@ -64,7 +59,8 @@ class Module extends \application\discovery\module\course_results\Module
                 $row[] = $course_result->get_person_last_name() . ' ' . $course_result->get_person_first_name();
             }
             
-            $row[] = Translation :: get($course_result->get_trajectory_type_string(), null, 'application\discovery\module\enrollment\implementation\bamaflex');
+            $row[] = Translation :: get($course_result->get_trajectory_type_string(), null, 
+                    'application\discovery\module\enrollment\implementation\bamaflex');
             
             foreach ($this->get_mark_moments() as $mark_moment)
             {
@@ -83,13 +79,31 @@ class Module extends \application\discovery\module\course_results\Module
                 {
                     if ($mark->is_abandoned())
                     {
-                        $mark_status_image = '<img src="' . Theme :: get_image_path('application\discovery\module\career\implementation\bamaflex') . 'status_type/' . $mark->get_status() . '_na.png" alt="' . Translation :: get($mark->get_status_string() . 'Abandoned', null, 'application\discovery\module\career\implementation\bamaflex') . '" title="' . Translation :: get($mark->get_status_string() . 'Abandoned', null, 'application\discovery\module\career\implementation\bamaflex') . '" />';
-                        LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string() . 'Abandoned', null, 'application\discovery\module\career\implementation\bamaflex'), Translation :: get('MarkStatus', null, 'application\discovery\module\career\implementation\bamaflex'));
+                        $mark_status_image = '<img src="' . Theme :: get_image_path(
+                                'application\discovery\module\career\implementation\bamaflex') . 'status_type/' . $mark->get_status() . '_na.png" alt="' . Translation :: get(
+                                $mark->get_status_string() . 'Abandoned', null, 
+                                'application\discovery\module\career\implementation\bamaflex') . '" title="' . Translation :: get(
+                                $mark->get_status_string() . 'Abandoned', null, 
+                                'application\discovery\module\career\implementation\bamaflex') . '" />';
+                        LegendTable :: get_instance()->add_symbol($mark_status_image, 
+                                Translation :: get($mark->get_status_string() . 'Abandoned', null, 
+                                        'application\discovery\module\career\implementation\bamaflex'), 
+                                Translation :: get('MarkStatus', null, 
+                                        'application\discovery\module\career\implementation\bamaflex'));
                     }
                     else
                     {
-                        $mark_status_image = '<img src="' . Theme :: get_image_path('application\discovery\module\career\implementation\bamaflex') . 'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string(), null, 'application\discovery\module\career\implementation\bamaflex') . '" title="' . Translation :: get($mark->get_status_string(), null, 'application\discovery\module\career\implementation\bamaflex') . '" />';
-                        LegendTable :: get_instance()->add_symbol($mark_status_image, Translation :: get($mark->get_status_string(), null, 'application\discovery\module\career\implementation\bamaflex'), Translation :: get('MarkStatus', null, 'application\discovery\module\career\implementation\bamaflex'));
+                        $mark_status_image = '<img src="' . Theme :: get_image_path(
+                                'application\discovery\module\career\implementation\bamaflex') . 'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get(
+                                $mark->get_status_string(), null, 
+                                'application\discovery\module\career\implementation\bamaflex') . '" title="' . Translation :: get(
+                                $mark->get_status_string(), null, 
+                                'application\discovery\module\career\implementation\bamaflex') . '" />';
+                        LegendTable :: get_instance()->add_symbol($mark_status_image, 
+                                Translation :: get($mark->get_status_string(), null, 
+                                        'application\discovery\module\career\implementation\bamaflex'), 
+                                Translation :: get('MarkStatus', null, 
+                                        'application\discovery\module\career\implementation\bamaflex'));
                     }
                     $row[] = $mark_status_image;
                 }
@@ -125,7 +139,6 @@ class Module extends \application\discovery\module\course_results\Module
             $parameter->set_source($source);
         }
         return $parameter;
-    
     }
 
     /**
@@ -173,8 +186,7 @@ class Module extends \application\discovery\module\course_results\Module
     }
     
     /*
-     * (non-PHPdoc) @see
-     * application\discovery\module\course_results.Module::render()
+     * (non-PHPdoc) @see application\discovery\module\course_results.Module::render()
      */
     function render()
     {
@@ -182,7 +194,8 @@ class Module extends \application\discovery\module\course_results\Module
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_course_results_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_course_results_parameters()))
         {
             Display :: not_allowed();
         }
@@ -211,15 +224,18 @@ class Module extends \application\discovery\module\course_results\Module
 
     function get_course_properties_table()
     {
-        $course = DataManager :: get_instance($this->get_module_instance())->retrieve_course($this->get_course_parameters());
+        $course = DataManager :: get_instance($this->get_module_instance())->retrieve_course(
+                $this->get_course_parameters());
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         
-        $faculty_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\faculty_info\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $faculty_info_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\faculty_info\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
-        $training_info_module_instance = \application\discovery\Module :: exists('application\discovery\module\training_info\implementation\bamaflex', array(
-                'data_source' => $data_source));
+        $training_info_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\training_info\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         $html = array();
         $properties = array();
@@ -238,7 +254,8 @@ class Module extends \application\discovery\module\course_results\Module
         
         if ($faculty_info_module_instance)
         {
-            $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters($course->get_faculty_id(), $course->get_source());
+            $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
+                    $course->get_faculty_id(), $course->get_source());
             $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $course->get_faculty() . '</a>';
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $course->get_faculty()));
@@ -251,7 +268,8 @@ class Module extends \application\discovery\module\course_results\Module
         
         if ($training_info_module_instance)
         {
-            $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters($course->get_training_id(), $course->get_source());
+            $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
+                    $course->get_training_id(), $course->get_source());
             $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Training')] = '<a href="' . $url . '">' . $course->get_training() . '</a>';
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $course->get_training()));

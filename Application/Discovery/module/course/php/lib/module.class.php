@@ -2,18 +2,14 @@
 namespace application\discovery\module\course;
 
 use common\libraries\Path;
-
 use common\libraries\Filesystem;
-
 use common\libraries\Request;
-
 use common\libraries\Theme;
 use common\libraries\SortableTableFromArray;
 use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
@@ -21,8 +17,9 @@ use application\discovery\module\profile\DataManager;
 class Module extends \application\discovery\Module
 {
     const PARAM_PROGRAMME_ID = 'programme_id';
-    
+
     /**
+     *
      * @var \application\discovery\module\course\Course
      */
     private $course;
@@ -43,6 +40,7 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return \application\discovery\module\course\Course
      */
     function get_course()
@@ -53,9 +51,9 @@ class Module extends \application\discovery\Module
         }
         return $this->course;
     }
-
-    /* (non-PHPdoc)
-     * @see application\discovery.Module::render()
+    
+    /*
+     * (non-PHPdoc) @see application\discovery.Module::render()
      */
     function render()
     {
@@ -73,7 +71,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

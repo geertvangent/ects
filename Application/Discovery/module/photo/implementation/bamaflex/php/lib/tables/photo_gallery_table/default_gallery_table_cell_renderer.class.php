@@ -2,7 +2,6 @@
 namespace application\discovery\module\photo\implementation\bamaflex;
 
 use user\User;
-
 use common\libraries\GalleryObjectTableCellRenderer;
 
 abstract class DefaultGalleryTableCellRenderer implements GalleryObjectTableCellRenderer

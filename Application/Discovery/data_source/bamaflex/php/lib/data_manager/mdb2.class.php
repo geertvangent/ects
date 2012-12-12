@@ -2,6 +2,7 @@
 namespace application\discovery\data_source\bamaflex;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */

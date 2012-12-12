@@ -1,16 +1,18 @@
 <?php
 namespace application\discovery\module\group\implementation\bamaflex;
 
+use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\group\DataManagerInterface;
-
 use application\discovery\module\training\implementation\bamaflex\Training;
 use MDB2_Error;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
+
     private $groups;
 
     /**
+     *
      * @param int $id
      * @return multitype:\application\discovery\module\group\implementation\bamaflex\Group
      */
@@ -80,9 +82,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $training->set_faculty($result->faculty);
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-                    $training->set_previous_id($result->previous_id);
-                    $training->set_next_id($this->retrieve_training_next_id($training));
                     
+                    $reference = new HistoryReference();
+                    $reference->set_id($result->previous_id);
+                    $reference->set_source($result->previous_source);
+                    $training->add_previous_reference($reference);
+                    
+                    $next = $this->retrieve_training_next_id($training);
+                    
+                    $reference = new HistoryReference();
+                    $reference->set_id($next->id);
+                    $reference->set_source($next->source);
+                    $training->add_next_reference($reference);
                     
                     $this->trainings[$training_id][$source] = $training;
                 }
@@ -94,20 +105,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     function retrieve_training_next_id($training)
     {
-        $query = 'SELECT id FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
+        $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
         
         if (! $results instanceof MDB2_Error)
         {
-            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-            return $result->id;
+            return $results->fetchRow(MDB2_FETCHMODE_OBJECT);
         }
         else
         {
             return false;
         }
     }
-
 }
 ?>

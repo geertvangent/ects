@@ -7,39 +7,40 @@ use common\libraries\Utilities;
 use common\libraries\EqualityCondition;
 use common\libraries\Path;
 use common\libraries\DataClass;
-
 use DOMDocument;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */
-
 class DataSourceInstanceSetting extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_DATA_SOURCE_INSTANCE_ID = 'data_source_instance_id';
     const PROPERTY_VARIABLE = 'variable';
     const PROPERTY_VALUE = 'value';
-    
+
     /**
      * A static array containing all settings of discovery module instances
+     * 
      * @var array
      */
     private static $settings;
 
     /**
      * Get the default properties of all settings.
+     * 
      * @return array The property names.
      */
     static function get_default_property_names()
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, 
-                self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
+        return parent :: get_default_property_names(
+                array(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -48,6 +49,7 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return int
      */
     function get_data_source_instance_id()
@@ -56,6 +58,7 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_variable()
@@ -64,6 +67,7 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_value()
@@ -87,6 +91,7 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     static function get_table_name()
@@ -95,6 +100,7 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     static function get_class_name()
@@ -103,12 +109,14 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @param DataSourceInstance $data_source_instance
      * @return boolean
      */
     static function initialize(DataSourceInstance $data_source_instance)
     {
-        $settings_file = Path :: namespace_to_full_path($data_source_instance->get_type()) . Utilities :: get_package_name_from_namespace($data_source_instance->get_type()) . '.xml';
+        $settings_file = Path :: namespace_to_full_path($data_source_instance->get_type()) . Utilities :: get_package_name_from_namespace(
+                $data_source_instance->get_type()) . '.xml';
         
         $doc = new DOMDocument();
         
@@ -145,6 +153,7 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @param string $variable
      * @param int $data_source_instance_id
      * @return mixed
@@ -160,6 +169,7 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @param int $data_source_instance_id
      * @return multitype:string
      */
@@ -174,6 +184,7 @@ class DataSourceInstanceSetting extends DataClass
     }
 
     /**
+     *
      * @param int $data_source_instance_id
      */
     static function load($data_source_instance_id)

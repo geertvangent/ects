@@ -7,9 +7,8 @@ use Exception;
 use application\discovery\PlatformGroupEntity;
 
 /**
- * Rights editor manager for unlimited amount of entities.
- * With simple and advanced interface.
- *
+ * Rights editor manager for unlimited amount of entities. With simple and advanced interface.
+ * 
  * @package application.common.rights_editor_manager
  * @author Sven Vanpoucke
  */
@@ -17,7 +16,6 @@ class RightsEditorManager extends SubManager
 {
     // Parameters
     const PARAM_ACTION = 'rights_action';
-    
     const PARAM_ENTITY_TYPE = 'entity_type';
     const PARAM_ENTITY_ID = 'entity_id';
     const PARAM_RIGHT_ID = 'right_id';
@@ -26,7 +24,7 @@ class RightsEditorManager extends SubManager
     const ACTION_EDIT_ADVANCED_RIGHTS = 'advanced_rights_editor';
     const ACTION_MANAGE = 'manager';
     const ACTION_SET_ENTITY_RIGHTS = 'entity_rights_setter';
-    
+
     /**
      * Cached selected entity
      */
@@ -37,11 +35,11 @@ class RightsEditorManager extends SubManager
     /**
      * Launches the rights editor with the additional properties
      * 
-     * @param $application Application           
+     * @param $application Application
      */
     static function launch($application)
     {
-        parent :: launch(__CLASS__, $application);    
+        parent :: launch(__CLASS__, $application);
     }
 
     /**
@@ -77,7 +75,6 @@ class RightsEditorManager extends SubManager
     /*
      * Builds the url to browse an entity @param int $entity_type @return String
      */
-    
     function get_entity_url($entity_type)
     {
         return $this->get_url(array(self :: PARAM_ENTITY_TYPE => $entity_type));
@@ -111,8 +108,7 @@ class RightsEditorManager extends SubManager
     // Helper functions
     
     /**
-     * Gets the selected entity type and if no type selected, uses the first
-     * available entity
+     * Gets the selected entity type and if no type selected, uses the first available entity
      * 
      * @return String
      */
@@ -140,7 +136,6 @@ class RightsEditorManager extends SubManager
         //
         // return $this->selected_entity;
     }
-
 }
 
 ?>

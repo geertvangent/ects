@@ -2,12 +2,12 @@
 namespace application\discovery\module\career\implementation\bamaflex;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.career.implementation.bamaflex.discovery
+ * 
  * @author Hans De Bisschop
  */
 class Course extends \application\discovery\module\career\Course
@@ -25,7 +25,6 @@ class Course extends \application\discovery\module\career\Course
     const PROPERTY_TYPE = 'type';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_PARENT_PROGRAMME_ID = 'parent_programme_id';
-    
     const TYPE_NORMAL = 1;
     // NL: AVO
     const TYPE_PREVIOUS = 2;
@@ -62,6 +61,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -87,6 +87,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -96,6 +97,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the source of this Course.
+     * 
      * @return int The source.
      */
     function get_source()
@@ -105,6 +107,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the source of this Course.
+     * 
      * @param int $source
      */
     function set_source($source)
@@ -114,6 +117,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the trajectory_part of this Course.
+     * 
      * @return string The trajectory_part.
      */
     function get_trajectory_part()
@@ -123,6 +127,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the trajectory_part of this Course.
+     * 
      * @param string $trajectory_part
      */
     function set_trajectory_part($trajectory_part)
@@ -132,6 +137,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the credits of this Course.
+     * 
      * @return int The credits.
      */
     function get_credits()
@@ -141,6 +147,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the credits of this Course.
+     * 
      * @param int $credits
      */
     function set_credits($credits)
@@ -150,6 +157,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the weight of this Course.
+     * 
      * @return int The weight.
      */
     function get_weight()
@@ -159,6 +167,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the weight of this Course.
+     * 
      * @param int $weight
      */
     function set_weight($weight)
@@ -168,6 +177,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the enrollment id of this Course.
+     * 
      * @return int The enrollment id.
      */
     function get_enrollment_id()
@@ -177,6 +187,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the enrollment id of this Course.
+     * 
      * @param int $enrollment_id
      */
     function set_enrollment_id($enrollment_id)
@@ -186,6 +197,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the type of this Course.
+     * 
      * @return int The type.
      */
     function get_type()
@@ -195,6 +207,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the type of this Course.
+     * 
      * @param int $type
      */
     function set_type($type)
@@ -203,6 +216,7 @@ class Course extends \application\discovery\module\career\Course
     }
 
     /**
+     *
      * @return string
      */
     function get_type_string()
@@ -211,6 +225,7 @@ class Course extends \application\discovery\module\career\Course
     }
 
     /**
+     *
      * @return string
      */
     static function type_string($type)
@@ -272,6 +287,7 @@ class Course extends \application\discovery\module\career\Course
     }
 
     /**
+     *
      * @return multitype:string
      */
     static function get_types()
@@ -284,6 +300,7 @@ class Course extends \application\discovery\module\career\Course
     }
 
     /**
+     *
      * @return boolean
      */
     function is_special_type()
@@ -293,6 +310,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the programme_id of this Course.
+     * 
      * @return int The programme_id.
      */
     function get_programme_id()
@@ -302,6 +320,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the programme_id of this Course.
+     * 
      * @param int $programme_id
      */
     function set_programme_id($programme_id)
@@ -311,6 +330,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the parent_programme_id of this Course.
+     * 
      * @return int The parent_programme_id.
      */
     function get_parent_programme_id()
@@ -320,6 +340,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the parent_programme_id of this Course.
+     * 
      * @param int $parent_programme_id
      */
     function set_parent_programme_id($parent_programme_id)
@@ -328,6 +349,7 @@ class Course extends \application\discovery\module\career\Course
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()
@@ -337,7 +359,6 @@ class Course extends \application\discovery\module\career\Course
 
     function get_mark_by_moment_id($moment_id)
     {
-        
         foreach ($this->get_marks() as $mark)
         {
             if ($mark->get_moment() == $moment_id)

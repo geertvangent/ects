@@ -6,7 +6,6 @@ use application\discovery\DiscoveryDataManager;
 class EvaluationStructured extends Evaluation
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_TRY = 'try';
     const PROPERTY_MOMENT_ID = 'moment_id';
@@ -97,6 +96,7 @@ class EvaluationStructured extends Evaluation
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -114,6 +114,7 @@ class EvaluationStructured extends Evaluation
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -122,6 +123,7 @@ class EvaluationStructured extends Evaluation
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

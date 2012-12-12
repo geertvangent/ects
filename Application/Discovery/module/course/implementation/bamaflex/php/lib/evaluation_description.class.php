@@ -8,6 +8,7 @@ class EvaluationDescription extends Evaluation
     const CLASS_NAME = __CLASS__;
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -16,6 +17,7 @@ class EvaluationDescription extends Evaluation
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

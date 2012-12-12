@@ -5,12 +5,13 @@ use application\discovery\ModuleInstance;
 
 class DataSource extends \application\discovery\DataSource
 {
+
     private $connection;
 
     /**
      * Constructor
-     *
-     * @param $module_instance ModuleInstance           
+     * 
+     * @param $module_instance ModuleInstance
      */
     function __construct(ModuleInstance $module_instance)
     {
@@ -39,7 +40,7 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      * Returns the connection
-     *
+     * 
      * @return Connection the connection
      */
     function get_connection()
@@ -49,8 +50,8 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      * Sets the connection
-     *
-     * @param $connection Connection           
+     * 
+     * @param $connection Connection
      */
     function set_connection($connection)
     {
@@ -59,12 +60,13 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      *
-     * @param $string string           
+     * @param $string string
      * @return string
      */
     function convert_to_utf8($string)
     {
-        if (Connection :: get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting('driver') == 'mssql')
+        if (Connection :: get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
+                'driver') == 'mssql')
         {
             return iconv('Windows-1252', 'UTF-8', $string);
         }

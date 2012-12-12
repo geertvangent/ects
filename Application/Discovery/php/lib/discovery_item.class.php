@@ -4,15 +4,15 @@ namespace application\discovery;
 use common\libraries\DataClass;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */
 class DiscoveryItem extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_TITLE = 'title';
-    
+
     private $instance;
 
     function get_instance()
@@ -26,6 +26,7 @@ class DiscoveryItem extends DataClass
     }
 
     /**
+     *
      * @param string $title
      */
     function set_title($title)
@@ -34,6 +35,7 @@ class DiscoveryItem extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_title()
@@ -42,6 +44,7 @@ class DiscoveryItem extends DataClass
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -52,6 +55,7 @@ class DiscoveryItem extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

@@ -6,7 +6,6 @@ use application\discovery\DiscoveryDataManager;
 class TeachingAssignment extends \application\discovery\module\teaching_assignment\TeachingAssignment
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_FACULTY = 'faculty';
     const PROPERTY_FACULTY_ID = 'faculty_id';
@@ -17,11 +16,9 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_MANAGER = 'manager';
     const PROPERTY_TEACHER = 'teacher';
-    
     const TYPE_COORDINATOR_YES = 1;
     const TYPE_COORDINATOR_NO = 0;
     const TYPE_NONE = 2;
-    
     const TIMEFRAME_ACADEMIC_YEAR = '1';
     const TIMEFRAME_FIRST_TERM = '2';
     const TIMEFRAME_SECOND_TERM = '3';
@@ -29,6 +26,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     const TIMEFRAME_UNKNOWN = '5';
 
     /**
+     *
      * @return int
      */
     function get_source()
@@ -42,6 +40,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return string
      */
     function get_faculty()
@@ -50,6 +49,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return integer
      */
     function get_faculty_id()
@@ -58,6 +58,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return integer
      */
     function get_timeframe_id()
@@ -67,6 +68,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Returns the trajectory_part of this TeachingAssignment.
+     * 
      * @return string The trajectory_part.
      */
     function get_trajectory_part()
@@ -76,6 +78,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Sets the trajectory_part of this TeachingAssignment.
+     * 
      * @param string $trajectory_part
      */
     function set_trajectory_part($trajectory_part)
@@ -85,6 +88,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Returns the credits of this TeachingAssignment.
+     * 
      * @return int The credits.
      */
     function get_credits()
@@ -94,6 +98,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Returns the programme_id of this TeachingAssignment.
+     * 
      * @return int programme_id.
      */
     function get_programme_id()
@@ -113,6 +118,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Sets the credits of this TeachingAssignment.
+     * 
      * @param int $credits
      */
     function set_credits($credits)
@@ -122,6 +128,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Returns the weight of this TeachingAssignment.
+     * 
      * @return int The weight.
      */
     function get_weight()
@@ -131,6 +138,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Sets the weight of this TeachingAssignment.
+     * 
      * @param int $weight
      */
     function set_weight($weight)
@@ -139,6 +147,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @param int $source
      */
     function set_source($source)
@@ -152,6 +161,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @param string $faculty
      */
     function set_faculty($faculty)
@@ -160,6 +170,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @param integer $faculty_id
      */
     function set_faculty_id($faculty_id)
@@ -168,6 +179,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @param string $timeframe_id
      */
     function set_timeframe_id($timeframe_id)
@@ -176,6 +188,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @param string $programme_id
      */
     function set_programme_id($programme_id)
@@ -194,6 +207,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -213,6 +227,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return string
      */
     function get_timeframe()
@@ -221,6 +236,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return string
      */
     static function timeframe($timeframe_id)
@@ -246,6 +262,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return string
      */
     function get_manager_type()
@@ -254,6 +271,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return string
      */
     static function manager_type($type)
@@ -276,6 +294,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return string
      */
     function get_teacher_type()
@@ -284,6 +303,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return string
      */
     static function teacher_type($type)
@@ -306,6 +326,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -314,6 +335,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

@@ -2,35 +2,34 @@
 namespace application\discovery\module\person;
 
 use common\libraries\Path;
-
 use common\libraries\Filesystem;
-
 use common\libraries\WebApplication;
 use common\libraries\Translation;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
 
 class Module extends \application\discovery\Module
 {
+
     /**
+     *
      * @var multitype:\application\discovery\module\person\Person
      */
     private $persons;
+
     private $cache_persons = array();
 
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-    
-     //        $this->persons = DataManager :: get_instance($module_instance)->retrieve_persons();
-    
-
+        
+        // $this->persons = DataManager :: get_instance($module_instance)->retrieve_persons();
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\person\Faculty
      */
     function get_persons()
@@ -71,9 +70,9 @@ class Module extends \application\discovery\Module
         
         return $table;
     }
-
-    /* (non-PHPdoc)
-     * @see application\discovery\module\person\Module::render()
+    
+    /*
+     * (non-PHPdoc) @see application\discovery\module\person\Module::render()
      */
     function render()
     {
@@ -93,7 +92,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;
@@ -101,6 +101,5 @@ class Module extends \application\discovery\Module
         }
         return $types;
     }
-
 }
 ?>

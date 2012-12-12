@@ -3,12 +3,12 @@ namespace application\discovery\module\profile\implementation\bamaflex;
 
 use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.profile.implementation.bamaflex
+ * 
  * @author Hans De Bisschop
  */
 class LearningCredit extends DiscoveryItem
@@ -16,20 +16,24 @@ class LearningCredit extends DiscoveryItem
     const CLASS_NAME = __CLASS__;
     
     /**
+     *
      * @var integer
      */
     const PROPERTY_PERSON_ID = 'person_id';
     /**
+     *
      * @var string
      */
     const PROPERTY_DATE = 'date';
     /**
+     *
      * @var integer
      */
     const PROPERTY_LEARNING_CREDIT = 'learning_credit';
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -44,6 +48,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -53,6 +58,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Returns the person_id of this LearningCredit.
+     * 
      * @return integer The person_id.
      */
     function get_person_id()
@@ -62,6 +68,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Sets the person_id of this LearningCredit.
+     * 
      * @param integer $person_id
      */
     function set_person_id($person_id)
@@ -71,6 +78,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Returns the date of this LearningCredit.
+     * 
      * @return string The date.
      */
     function get_date()
@@ -80,6 +88,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Sets the date of this LearningCredit.
+     * 
      * @param string $date
      */
     function set_date($date)
@@ -89,6 +98,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Returns the learning_credit of this LearningCredit.
+     * 
      * @return integer The learning_credit.
      */
     function get_learning_credit()
@@ -98,6 +108,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Sets the learning_credit of this LearningCredit.
+     * 
      * @param integer $learning_credit
      */
     function set_learning_credit($learning_credit)
@@ -106,6 +117,7 @@ class LearningCredit extends DiscoveryItem
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()

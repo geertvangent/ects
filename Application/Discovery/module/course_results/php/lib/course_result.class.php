@@ -2,12 +2,12 @@
 namespace application\discovery\module\course_results;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.course_results.discovery
+ * 
  * @author Hans De Bisschop
  */
 class CourseResult extends DataClass
@@ -24,6 +24,7 @@ class CourseResult extends DataClass
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -39,6 +40,7 @@ class CourseResult extends DataClass
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -48,6 +50,7 @@ class CourseResult extends DataClass
 
     /**
      * Returns the marks of this Course.
+     * 
      * @return multitype:Mark The marks.
      */
     function get_marks()
@@ -57,6 +60,7 @@ class CourseResult extends DataClass
 
     /**
      * Returns the person_first_name of this CourseResults.
+     * 
      * @return string
      */
     function get_person_first_name()
@@ -66,6 +70,7 @@ class CourseResult extends DataClass
 
     /**
      * Returns the person_last_name of this CourseResults.
+     * 
      * @return string
      */
     function get_person_last_name()
@@ -93,6 +98,7 @@ class CourseResult extends DataClass
 
     /**
      * Sets the marks of this Course.
+     * 
      * @param multitype:Mark $marks
      */
     function set_marks($marks)
@@ -102,6 +108,7 @@ class CourseResult extends DataClass
 
     /**
      * Sets the person_last_name of this CourseResults.
+     * 
      * @param string
      */
     function set_person_last_name($person_last_name)
@@ -111,6 +118,7 @@ class CourseResult extends DataClass
 
     /**
      * Sets the person_first_name of this CourseResults.
+     * 
      * @param string
      */
     function set_person_first_name($person_first_name)
@@ -124,6 +132,7 @@ class CourseResult extends DataClass
     }
 
     /**
+     *
      * @param Mark $mark
      */
     function add_mark(Mark $mark)
@@ -134,6 +143,7 @@ class CourseResult extends DataClass
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()

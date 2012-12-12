@@ -2,19 +2,16 @@
 namespace application\discovery\module\course\implementation\bamaflex;
 
 use user\UserDataManager;
-
 use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
 
 class Teacher extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_PERSON_ID = 'person_id';
     const PROPERTY_COORDINATOR = 'coordinator';
-    
     const TYPE_TEACHER = 0;
     const TYPE_COORDINATOR = 1;
 
@@ -64,6 +61,7 @@ class Teacher extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -78,6 +76,7 @@ class Teacher extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -86,6 +85,7 @@ class Teacher extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

@@ -7,10 +7,8 @@ use application\discovery\DiscoveryItem;
 class Cost extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_PRICE = 'price';
-    
     const TYPE_MATERIAL = 1;
     const TYPE_ADDITIONAL = 2;
 
@@ -39,7 +37,6 @@ class Cost extends DiscoveryItem
             case self :: TYPE_MATERIAL :
                 return 'Material';
                 break;
-        
         }
     }
 
@@ -59,6 +56,7 @@ class Cost extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -70,6 +68,7 @@ class Cost extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -78,6 +77,7 @@ class Cost extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

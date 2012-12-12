@@ -3,70 +3,82 @@ namespace application\discovery\module\employment\implementation\bamaflex;
 
 use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.employment.implementation.bamaflex
+ * 
  * @author Magali Gillard
  */
 class EmploymentParts extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
+     *
      * @var integer
      */
     const PROPERTY_ASSIGNMENT_ID = 'assignment_id';
     /**
+     *
      * @var string
      */
     const PROPERTY_HOURS = 'hours';
     /**
+     *
      * @var string
      */
     const PROPERTY_START_DATE = 'start_date';
     /**
+     *
      * @var string
      */
     const PROPERTY_END_DATE = 'end_date';
     /**
+     *
      * @var string
      */
     const PROPERTY_ASSIGNMENT_VOLUME = 'assignment_volume';
     /**
+     *
      * @var string
      */
     const PROPERTY_VOLUME = 'volume';
     /**
+     *
      * @var integer
      */
     const PROPERTY_FACULTY_ID = 'faculty_id';
     /**
+     *
      * @var string
      */
     const PROPERTY_FACULTY = 'faculty';
     /**
+     *
      * @var integer
      */
     const PROPERTY_TRAINING_ID = 'training_id';
     /**
+     *
      * @var string
      */
     const PROPERTY_TRAINING = 'training';
     /**
+     *
      * @var string
      */
     const PROPERTY_DEPARTMENT = 'department';
     /**
+     *
      * @var integer
      */
     const PROPERTY_DEPARTMENT_ID = 'department_id';
 
-
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -84,12 +96,13 @@ class EmploymentParts extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TRAINING;
         $extended_property_names[] = self :: PROPERTY_DEPARTMENT;
         $extended_property_names[] = self :: PROPERTY_DEPARTMENT_ID;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -99,6 +112,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the assignment_id of this EmploymentParts.
+     * 
      * @return integer The assignment_id.
      */
     function get_assignment_id()
@@ -108,6 +122,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the assignment_id of this EmploymentParts.
+     * 
      * @param integer $assignment_id
      */
     function set_assignment_id($assignment_id)
@@ -117,6 +132,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the hours of this EmploymentParts.
+     * 
      * @return string The hours.
      */
     function get_hours()
@@ -126,6 +142,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the hours of this EmploymentParts.
+     * 
      * @param string $hours
      */
     function set_hours($hours)
@@ -135,6 +152,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the start_date of this EmploymentParts.
+     * 
      * @return string The start_date.
      */
     function get_start_date()
@@ -144,6 +162,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the start_date of this EmploymentParts.
+     * 
      * @param string $start_date
      */
     function set_start_date($start_date)
@@ -153,6 +172,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the end_date of this EmploymentParts.
+     * 
      * @return string The end_date.
      */
     function get_end_date()
@@ -162,6 +182,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the end_date of this EmploymentParts.
+     * 
      * @param string $end_date
      */
     function set_end_date($end_date)
@@ -171,6 +192,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the assignment_volume of this EmploymentParts.
+     * 
      * @return string The assignment_volume.
      */
     function get_assignment_volume()
@@ -180,6 +202,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the assignment_volume of this EmploymentParts.
+     * 
      * @param string $assignment_volume
      */
     function set_assignment_volume($assignment_volume)
@@ -189,6 +212,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the volume of this EmploymentParts.
+     * 
      * @return string The volume.
      */
     function get_volume()
@@ -198,6 +222,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the volume of this EmploymentParts.
+     * 
      * @param string $volume
      */
     function set_volume($volume)
@@ -207,6 +232,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the faculty_id of this EmploymentParts.
+     * 
      * @return integer The faculty_id.
      */
     function get_faculty_id()
@@ -216,6 +242,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the faculty_id of this EmploymentParts.
+     * 
      * @param integer $faculty_id
      */
     function set_faculty_id($faculty_id)
@@ -225,6 +252,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the faculty of this EmploymentParts.
+     * 
      * @return string The faculty.
      */
     function get_faculty()
@@ -234,6 +262,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the faculty of this EmploymentParts.
+     * 
      * @param string $faculty
      */
     function set_faculty($faculty)
@@ -243,6 +272,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the training_id of this EmploymentParts.
+     * 
      * @return integer The training_id.
      */
     function get_training_id()
@@ -252,6 +282,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the training_id of this EmploymentParts.
+     * 
      * @param integer $training_id
      */
     function set_training_id($training_id)
@@ -261,6 +292,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the training of this EmploymentParts.
+     * 
      * @return string The training.
      */
     function get_training()
@@ -270,6 +302,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the training of this EmploymentParts.
+     * 
      * @param string $training
      */
     function set_training($training)
@@ -279,6 +312,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the department of this EmploymentParts.
+     * 
      * @return string The department.
      */
     function get_department()
@@ -288,6 +322,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the department of this EmploymentParts.
+     * 
      * @param string $department
      */
     function set_department($department)
@@ -297,6 +332,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Returns the department_id of this EmploymentParts.
+     * 
      * @return integer The department_id.
      */
     function get_department_id()
@@ -306,6 +342,7 @@ class EmploymentParts extends DiscoveryItem
 
     /**
      * Sets the department_id of this EmploymentParts.
+     * 
      * @param integer $department_id
      */
     function set_department_id($department_id)
@@ -313,8 +350,8 @@ class EmploymentParts extends DiscoveryItem
         $this->set_default_property(self :: PROPERTY_DEPARTMENT_ID, $department_id);
     }
 
-
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()

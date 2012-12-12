@@ -7,11 +7,9 @@ use application\discovery\DiscoveryItem;
 class SecondChance extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_EXAM = 'exam';
     const PROPERTY_ENROLLMENT = 'enrollment';
     const PROPERTY_EXAM_PARTS = 'exam_parts';
-    
     const EXAM_PARTS_ALL = 5;
     const EXAM_PARTS_FAILED = 6;
     const EXAM_PARTS_SPECIFIC = 10;
@@ -52,6 +50,7 @@ class SecondChance extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     static function exam_parts_string($exam_parts)
@@ -71,6 +70,7 @@ class SecondChance extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -83,6 +83,7 @@ class SecondChance extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -91,6 +92,7 @@ class SecondChance extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

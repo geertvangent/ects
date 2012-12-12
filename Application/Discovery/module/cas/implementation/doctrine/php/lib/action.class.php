@@ -7,7 +7,6 @@ use application\discovery\DiscoveryItem;
 class Action extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const AUTHENTICATION_SUCCESS = 1;
     const TICKET_GRANTING_TICKET_CREATED = 2;
     const TICKET_GRANTING_TICKET_DESTROYED = 3;
@@ -19,9 +18,9 @@ class Action extends DiscoveryItem
     const SERVICE_TICKET_VALIDATE_FAILED = 9;
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
-    
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();

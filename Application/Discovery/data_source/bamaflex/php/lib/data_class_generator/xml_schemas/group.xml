@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object name="group" table="v_discovery_group_basic"
-	namespace="application\discovery\module\group\implementation\bamaflex"
-	author="Magali Gillard">
+	namespace="application\discovery\module\group\implementation\bamaflex" author="Magali Gillard">
 	<properties>
 		<property name="type">
 			<option id="1">Training</option>

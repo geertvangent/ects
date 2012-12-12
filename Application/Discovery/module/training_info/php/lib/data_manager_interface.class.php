@@ -2,6 +2,7 @@
 namespace application\discovery\module\training_info;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */

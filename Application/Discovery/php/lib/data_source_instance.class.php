@@ -7,12 +7,12 @@ use common\libraries\EqualityCondition;
 use common\libraries\AndCondition;
 
 /**
+ *
  * @package application.discovery
  */
 class DataSourceInstance extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_NAME = 'name';
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_TYPE = 'type';
@@ -49,11 +49,12 @@ class DataSourceInstance extends DataClass
 
     static function get_default_property_names()
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_NAME, self :: PROPERTY_DESCRIPTION, 
-                self :: PROPERTY_TYPE));
+        return parent :: get_default_property_names(
+                array(self :: PROPERTY_NAME, self :: PROPERTY_DESCRIPTION, self :: PROPERTY_TYPE));
     }
 
     /**
+     *
      * @return string
      */
     static function get_table_name()
@@ -75,13 +76,14 @@ class DataSourceInstance extends DataClass
             }
         }
         
-        //        $succes = RepositoryRights :: get_instance()->create_location_in_external_instances_subtree($this->get_title(), $this->get_id(), RepositoryRights :: get_instance()->get_external_instances_subtree_root_id());
-        //        if (! $succes)
-        //        {
-        //            return false;
-        //        }
+        // $succes = RepositoryRights ::
+        // get_instance()->create_location_in_external_instances_subtree($this->get_title(), $this->get_id(),
+        // RepositoryRights :: get_instance()->get_external_instances_subtree_root_id());
+        // if (! $succes)
+        // {
+        // return false;
+        // }
         
-
         return true;
     }
 
@@ -93,7 +95,8 @@ class DataSourceInstance extends DataClass
         }
         else
         {
-            $condition = new EqualityCondition(DataSourceInstanceSetting :: PROPERTY_DATA_SOURCE_INSTANCE_ID, $this->get_id());
+            $condition = new EqualityCondition(DataSourceInstanceSetting :: PROPERTY_DATA_SOURCE_INSTANCE_ID, 
+                    $this->get_id());
             $settings = $this->get_data_manager()->retrieve_data_source_instance_settings($condition);
             
             while ($setting = $settings->next_result())
@@ -105,16 +108,16 @@ class DataSourceInstance extends DataClass
             }
         }
         
-        //        $location = RepositoryRights :: get_instance()->get_location_by_identifier_from_external_instances_subtree($this->get_id());
-        //        if ($location)
-        //        {
-        //            if (! $location->remove())
-        //            {
-        //                return false;
-        //            }
-        //        }
+        // $location = RepositoryRights ::
+        // get_instance()->get_location_by_identifier_from_external_instances_subtree($this->get_id());
+        // if ($location)
+        // {
+        // if (! $location->remove())
+        // {
+        // return false;
+        // }
+        // }
         
-
         return true;
     }
 
@@ -137,6 +140,7 @@ class DataSourceInstance extends DataClass
     }
 
     /**
+     *
      * @return multitype:string
      */
     public function get_settings()
@@ -145,6 +149,7 @@ class DataSourceInstance extends DataClass
     }
 
     /**
+     *
      * @param string $variable
      * @return string
      */
@@ -154,12 +159,12 @@ class DataSourceInstance extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
     {
         return DiscoveryDataManager :: get_instance();
     }
-
 }
 ?>

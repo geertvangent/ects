@@ -2,12 +2,12 @@
 namespace application\discovery\module\course_results;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.course_results.discovery
+ * 
  * @author Hans De Bisschop
  */
 class Mark extends DataClass
@@ -23,6 +23,7 @@ class Mark extends DataClass
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -37,6 +38,7 @@ class Mark extends DataClass
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -46,6 +48,7 @@ class Mark extends DataClass
 
     /**
      * Returns the moment of this Mark.
+     * 
      * @return string The moment.
      */
     function get_moment()
@@ -55,6 +58,7 @@ class Mark extends DataClass
 
     /**
      * Sets the moment of this Mark.
+     * 
      * @param string $moment
      */
     function set_moment($moment)
@@ -64,6 +68,7 @@ class Mark extends DataClass
 
     /**
      * Returns the result of this Mark.
+     * 
      * @return string The result.
      */
     function get_result()
@@ -73,6 +78,7 @@ class Mark extends DataClass
 
     /**
      * Sets the result of this Mark.
+     * 
      * @param string $result
      */
     function set_result($result)
@@ -87,6 +93,7 @@ class Mark extends DataClass
 
     /**
      * Returns the status of this Mark.
+     * 
      * @return string The status.
      */
     function get_status()
@@ -96,6 +103,7 @@ class Mark extends DataClass
 
     /**
      * Sets the status of this Mark.
+     * 
      * @param string $status
      */
     function set_status($status)
@@ -104,6 +112,7 @@ class Mark extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_status_string()
@@ -112,6 +121,7 @@ class Mark extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     static function status_string($status)
@@ -125,6 +135,7 @@ class Mark extends DataClass
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()

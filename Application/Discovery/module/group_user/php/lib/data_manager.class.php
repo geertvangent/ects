@@ -4,7 +4,6 @@ namespace application\discovery\module\group_user;
 use common\libraries\WebApplication;
 use common\libraries\Utilities;
 use common\libraries\Path;
-
 use application\discovery\DiscoveryManager;
 
 /**
@@ -14,6 +13,7 @@ use application\discovery\DiscoveryManager;
  */
 class DataManager
 {
+
     /**
      * Instance of this class for the singleton pattern.
      */

@@ -7,24 +7,21 @@ use common\libraries\EqualityCondition;
 use common\libraries\AndCondition;
 
 /**
+ *
  * @package application.discovery
  */
 class ModuleInstance extends DataClass
 {
     const CLASS_NAME = __CLASS__;
     const TABLE_NAME = 'module_instance';
-    
     const PROPERTY_TITLE = 'title';
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_TYPE = 'type';
-    
     const PROPERTY_CONTENT_TYPE = 'content_type';
-    
     const TYPE_DISABLED = 0;
     const TYPE_USER = 1;
     const TYPE_INFORMATION = 2;
     const TYPE_DETAILS = 3;
-    
     const PROPERTY_DISPLAY_ORDER = 'display_order';
 
     function set_title($title)
@@ -58,6 +55,7 @@ class ModuleInstance extends DataClass
     }
 
     /**
+     *
      * @param integer $content_type
      */
     function set_content_type($content_type)
@@ -66,6 +64,7 @@ class ModuleInstance extends DataClass
     }
 
     /**
+     *
      * @return integer
      */
     function get_content_type()
@@ -74,6 +73,7 @@ class ModuleInstance extends DataClass
     }
 
     /**
+     *
      * @param integer $display_order
      */
     function set_display_order($display_order)
@@ -82,6 +82,7 @@ class ModuleInstance extends DataClass
     }
 
     /**
+     *
      * @return integer
      */
     function get_display_order()
@@ -96,8 +97,9 @@ class ModuleInstance extends DataClass
 
     static function get_default_property_names()
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_TITLE, self :: PROPERTY_DESCRIPTION, 
-                self :: PROPERTY_TYPE, self :: PROPERTY_CONTENT_TYPE, self :: PROPERTY_DISPLAY_ORDER));
+        return parent :: get_default_property_names(
+                array(self :: PROPERTY_TITLE, self :: PROPERTY_DESCRIPTION, self :: PROPERTY_TYPE, 
+                        self :: PROPERTY_CONTENT_TYPE, self :: PROPERTY_DISPLAY_ORDER));
     }
 
     static function get_table_name()
@@ -141,16 +143,16 @@ class ModuleInstance extends DataClass
             }
         }
         
-        //        $location = RepositoryRights :: get_instance()->get_location_by_identifier_from_external_instances_subtree($this->get_id());
-        //        if ($location)
-        //        {
-        //            if (! $location->remove())
-        //            {
-        //                return false;
-        //            }
-        //        }
+        // $location = RepositoryRights ::
+        // get_instance()->get_location_by_identifier_from_external_instances_subtree($this->get_id());
+        // if ($location)
+        // {
+        // if (! $location->remove())
+        // {
+        // return false;
+        // }
+        // }
         
-
         return true;
     }
 
@@ -173,6 +175,7 @@ class ModuleInstance extends DataClass
     }
 
     /**
+     *
      * @return multitype:string
      */
     public function get_settings()
@@ -181,6 +184,7 @@ class ModuleInstance extends DataClass
     }
 
     /**
+     *
      * @param string $variable
      * @return string
      */
@@ -190,6 +194,7 @@ class ModuleInstance extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -221,6 +226,5 @@ class ModuleInstance extends DataClass
             return self :: TYPE_DISABLED;
         }
     }
-
 }
 ?>

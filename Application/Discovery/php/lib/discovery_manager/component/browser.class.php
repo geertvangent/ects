@@ -2,7 +2,6 @@
 namespace application\discovery;
 
 use user\User;
-
 use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
 use common\libraries\ActionBarSearchForm;
@@ -11,18 +10,19 @@ use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\ToolbarItem;
 use common\libraries\ActionBarRenderer;
-
 use application\discovery\module\profile\implementation\bamaflex\SettingsConnector;
 use application\discovery\module\profile\DataManager;
 
 /**
+ *
  * @author Hans De Bisschop
  * @package application.discovery
  */
-
 class DiscoveryManagerBrowserComponent extends DiscoveryManager
 {
+
     /**
+     *
      * @var ActionBarRenderer
      */
     private $action_bar;
@@ -65,7 +65,10 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->set_search_url($this->get_url());
         
-        $action_bar->add_common_action(new ToolbarItem(Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_browser.png', $this->get_url(), ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+        $action_bar->add_common_action(
+                new ToolbarItem(Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: get_common_image_path() . 'action_browser.png', $this->get_url(), 
+                        ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
     }
 }

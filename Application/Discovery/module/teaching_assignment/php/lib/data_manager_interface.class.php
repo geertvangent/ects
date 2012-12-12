@@ -2,6 +2,7 @@
 namespace application\discovery\module\teaching_assignment;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */
@@ -9,6 +10,7 @@ interface DataManagerInterface
 {
 
     /**
+     *
      * @param int $id
      * @return multitype:\application\discovery\module\teaching_assignment\TeachingAssignment
      */

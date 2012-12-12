@@ -6,11 +6,9 @@ use common\libraries\Utilities;
 
 class RightsGroupEntityRight extends DataClass
 {
-    //Keep track of the context so we know which table to call
+    // Keep track of the context so we know which table to call
     private $context;
-    
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_ENTITY_ID = 'entity_id';
     const PROPERTY_ENTITY_TYPE = 'entity_type';
     const PROPERTY_GROUP_ID = 'group_id';
@@ -19,8 +17,9 @@ class RightsGroupEntityRight extends DataClass
 
     static function get_default_property_names()
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_RIGHT_ID, self :: PROPERTY_ENTITY_ID, 
-                self :: PROPERTY_ENTITY_TYPE, self :: PROPERTY_GROUP_ID, self :: PROPERTY_MODULE_ID));
+        return parent :: get_default_property_names(
+                array(self :: PROPERTY_RIGHT_ID, self :: PROPERTY_ENTITY_ID, self :: PROPERTY_ENTITY_TYPE, 
+                        self :: PROPERTY_GROUP_ID, self :: PROPERTY_MODULE_ID));
     }
 
     function get_context()
@@ -92,10 +91,10 @@ class RightsGroupEntityRight extends DataClass
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
-    
+
     function get_string()
     {
-    	return $this->get_module_id() . '_' . $this->get_entity_type() . '_' . $this->get_entity_id() . '_' . $this->get_group_id();
+        return $this->get_module_id() . '_' . $this->get_entity_type() . '_' . $this->get_entity_id() . '_' . $this->get_group_id();
     }
 }
 

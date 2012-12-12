@@ -2,6 +2,7 @@
 namespace application\discovery\module\faculty_info;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */

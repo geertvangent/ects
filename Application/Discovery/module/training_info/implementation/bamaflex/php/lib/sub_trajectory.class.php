@@ -2,20 +2,19 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-
 use application\discovery\DiscoveryDataManager;
 
 class SubTrajectory extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_TRAJECTORY_ID = 'trajectory_id';
     const PROPERTY_NAME = 'name';
-    
+
     private $courses;
 
     /**
+     *
      * @return int
      */
     function get_source()
@@ -24,6 +23,7 @@ class SubTrajectory extends DiscoveryItem
     }
 
     /**
+     *
      * @param int $source
      */
     function set_source($source)
@@ -61,6 +61,7 @@ class SubTrajectory extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

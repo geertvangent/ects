@@ -2,9 +2,7 @@
 namespace application\discovery\module\training_info;
 
 use common\libraries\Filesystem;
-
 use common\libraries\Request;
-
 use common\libraries\DynamicContentTab;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\Path;
@@ -16,7 +14,6 @@ use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
@@ -24,11 +21,13 @@ use application\discovery\module\profile\DataManager;
 class Module extends \application\discovery\Module
 {
     const PARAM_TRAINING_ID = 'training_id';
-    
+
     /**
+     *
      * @var multitype:\application\discovery\module\training_info\Faculty
      */
     private $training;
+
     private $cache_training = array();
 
     function __construct(Application $application, ModuleInstance $module_instance)
@@ -51,23 +50,24 @@ class Module extends \application\discovery\Module
             $parameter->set_training_id($training);
         }
         return $parameter;
-    
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\training_info\Faculty
      */
     function get_training()
     {
         if (! isset($this->training))
         {
-            $this->training = DataManager :: get_instance($this->get_module_instance())->retrieve_training($this->get_training_parameters());
+            $this->training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
+                    $this->get_training_parameters());
         }
         return $this->training;
     }
     
-    /* (non-PHPdoc)
-     * @see application\discovery\module\training_info\Module::render()
+    /*
+     * (non-PHPdoc) @see application\discovery\module\training_info\Module::render()
      */
     function render()
     {
@@ -85,7 +85,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

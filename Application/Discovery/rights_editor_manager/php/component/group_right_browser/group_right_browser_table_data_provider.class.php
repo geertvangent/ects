@@ -2,10 +2,10 @@
 namespace application\discovery\rights_editor_manager;
 
 use group\GroupDataManager;
-
 use common\libraries\ObjectTableDataProvider;
 
 /**
+ *
  * @author Sven Vanpoucke
  * @package application.common.rights_editor_manager.component.location_group_bowser
  */
@@ -18,6 +18,7 @@ class GroupRightBrowserTableDataProvider extends ObjectTableDataProvider
 
     /**
      * Constructor
+     * 
      * @param Application $browser
      * @param Condition $condition
      */
@@ -30,7 +31,8 @@ class GroupRightBrowserTableDataProvider extends ObjectTableDataProvider
     {
         $order_property = $this->get_order_property($order_property);
         
-        return GroupDataManager :: get_instance()->retrieve_groups($this->get_condition(), $offset, $count, $order_property);
+        return GroupDataManager :: get_instance()->retrieve_groups($this->get_condition(), $offset, $count, 
+                $order_property);
     }
 
     function get_object_count()

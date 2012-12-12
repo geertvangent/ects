@@ -13,7 +13,6 @@ use common\libraries\EqualityCondition;
 use common\libraries\InCondition;
 use common\libraries\AndCondition;
 use common\libraries\ObjectTableOrder;
-
 use user\UserDataManager;
 use user\User;
 
@@ -21,7 +20,6 @@ class BamaflexAjaxUsersFeed extends AjaxManager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PROPERTY_ELEMENTS = 'elements';
-    
     const PARAM_MODULE_INSTANCE_ID = 'module_instance_id';
     const PARAM_PARAMETERS = 'parameters';
 
@@ -47,6 +45,7 @@ class BamaflexAjaxUsersFeed extends AjaxManager
 
     /**
      * Returns all the elements for this feed
+     * 
      * @return Array
      */
     private function get_elements()
@@ -62,7 +61,9 @@ class BamaflexAjaxUsersFeed extends AjaxManager
         {
             while ($user = $users->next_result())
             {
-                $user_category->add_child(new AdvancedElementFinderElement(RightsUserEntity :: ENTITY_TYPE . '_' . $user->get_id(), 'type type_user', $user->get_fullname(), $user->get_official_code()));
+                $user_category->add_child(
+                        new AdvancedElementFinderElement(RightsUserEntity :: ENTITY_TYPE . '_' . $user->get_id(), 
+                                'type type_user', $user->get_fullname(), $user->get_official_code()));
             }
         }
         
@@ -71,6 +72,7 @@ class BamaflexAjaxUsersFeed extends AjaxManager
 
     /**
      * Retrieves the users from the course (direct subscribed and group subscribed)
+     * 
      * @return ResultSet
      */
     private function retrieve_users()
@@ -90,7 +92,8 @@ class BamaflexAjaxUsersFeed extends AjaxManager
             $conditions[] = new OrCondition($name_conditions);
         }
         
-        $targets_entities = Rights :: get_instance()->get_module_targets_entities($this->get_parameter(self :: PARAM_MODULE_INSTANCE_ID), $this->get_parameter(self :: PARAM_PARAMETERS));
+        $targets_entities = Rights :: get_instance()->get_module_targets_entities(
+                $this->get_parameter(self :: PARAM_MODULE_INSTANCE_ID), $this->get_parameter(self :: PARAM_PARAMETERS));
         
         $conditions[] = new InCondition(User :: PROPERTY_ID, $targets_entities[RightsUserEntity :: ENTITY_TYPE]);
         $condition = new AndCondition($conditions);

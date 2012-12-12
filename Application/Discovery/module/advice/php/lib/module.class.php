@@ -2,9 +2,7 @@
 namespace application\discovery\module\advice;
 
 use common\libraries\Filesystem;
-
 use common\libraries\Request;
-
 use common\libraries\Path;
 use common\libraries\WebApplication;
 use common\libraries\ResourceManager;
@@ -14,7 +12,6 @@ use common\libraries\Translation;
 use common\libraries\PropertiesTable;
 use common\libraries\Display;
 use common\libraries\Application;
-
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
@@ -22,7 +19,9 @@ use application\discovery\module\profile\DataManager;
 class Module extends \application\discovery\Module
 {
     const PARAM_USER_ID = 'user_id';
+
     /**
+     *
      * @var multitype:\application\discovery\module\advice\Advice
      */
     private $advices;
@@ -30,7 +29,6 @@ class Module extends \application\discovery\Module
     function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
-    
     }
 
     function get_advice_parameters()
@@ -55,13 +53,15 @@ class Module extends \application\discovery\Module
     }
 
     /**
+     *
      * @return multitype:\application\discovery\module\advice\TeachingAssignment
      */
     function get_advices()
     {
         if (! isset($this->advices))
         {
-            $this->advices = DataManager :: get_instance($this->get_module_instance())->retrieve_advices($this->get_advice_parameters());
+            $this->advices = DataManager :: get_instance($this->get_module_instance())->retrieve_advices(
+                    $this->get_advice_parameters());
         }
         return $this->advices;
     }
@@ -71,9 +71,9 @@ class Module extends \application\discovery\Module
         $parameters = $parameters ? $parameters : $this->get_advice_parameters();
         return $this->get_data_manager()->count_advices($parameters);
     }
-
-    /* (non-PHPdoc)
-     * @see application\discovery.Module::render()
+    
+    /*
+     * (non-PHPdoc) @see application\discovery.Module::render()
      */
     function render()
     {
@@ -91,7 +91,8 @@ class Module extends \application\discovery\Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+        $modules = Filesystem :: get_directory_content(
+                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

@@ -7,13 +7,13 @@ use application\discovery\DiscoveryItem;
 class Training extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
     const PROPERTY_YEAR = 'year';
     const PROPERTY_NAME = 'name';
     const PROPERTY_START_DATE = 'start_date';
     const PROPERTY_END_DATE = 'end_date';
 
     /**
+     *
      * @return string
      */
     function get_year()
@@ -22,6 +22,7 @@ class Training extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_name()
@@ -40,6 +41,7 @@ class Training extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $year
      */
     function set_year($year)
@@ -48,6 +50,7 @@ class Training extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $name
      */
     function set_name($name)
@@ -66,6 +69,7 @@ class Training extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -74,11 +78,12 @@ class Training extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -87,6 +92,7 @@ class Training extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

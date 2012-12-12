@@ -2,18 +2,15 @@
 namespace application\discovery\module\course\implementation\bamaflex;
 
 use common\libraries\Session;
-
 use rights\RightsUtil;
 use common\libraries\Translation;
-
 use Exception;
 
 class Rights extends RightsUtil
 {
     const VIEW_RIGHT = '1';
-    
     const TYPE_PROFILE = 1;
-    
+
     private static $instance;
 
     static function get_instance()
@@ -40,7 +37,8 @@ class Rights extends RightsUtil
             }
             else
             {
-                return parent :: is_allowed($right, 'discovery_' . $module_instance_id, null, $entities, $parameters->get_user_id(), self :: TYPE_PROFILE, 0, self :: TREE_TYPE_ROOT);
+                return parent :: is_allowed($right, 'discovery_' . $module_instance_id, null, $entities, 
+                        $parameters->get_user_id(), self :: TYPE_PROFILE, 0, self :: TREE_TYPE_ROOT);
             }
         }
         catch (Exception $exception)
@@ -51,32 +49,38 @@ class Rights extends RightsUtil
 
     function get_module_location_by_identifier($module_instance_id, $parameters)
     {
-        return parent :: get_location_by_identifier('discovery_' . $module_instance_id, self :: TYPE_PROFILE, $parameters->get_user_id(), 0, self :: TREE_TYPE_ROOT);
+        return parent :: get_location_by_identifier('discovery_' . $module_instance_id, self :: TYPE_PROFILE, 
+                $parameters->get_user_id(), 0, self :: TREE_TYPE_ROOT);
     }
 
     function get_module_location_id_by_identifier($module_instance_id, $parameters)
     {
-        return parent :: get_location_id_by_identifier('discovery_' . $module_instance_id, self :: TYPE_PROFILE, $parameters->get_user_id(), 0, self :: TREE_TYPE_ROOT);
+        return parent :: get_location_id_by_identifier('discovery_' . $module_instance_id, self :: TYPE_PROFILE, 
+                $parameters->get_user_id(), 0, self :: TREE_TYPE_ROOT);
     }
 
     function create_module_location($module_instance_id, $parameters, $parent)
     {
-        return parent :: create_location('discovery_' . $module_instance_id, self :: TYPE_PROFILE, $parameters->get_user_id(), 1, $parent, 0, 0, self :: TREE_TYPE_ROOT);
+        return parent :: create_location('discovery_' . $module_instance_id, self :: TYPE_PROFILE, 
+                $parameters->get_user_id(), 1, $parent, 0, 0, self :: TREE_TYPE_ROOT);
     }
 
     function get_module_rights_location_entity_right($module_instance_id, $entity_id, $entity_type, $location_id)
     {
-        return parent :: get_rights_location_entity_right('discovery_' . $module_instance_id, self :: VIEW_RIGHT, $entity_id, $entity_type, $location_id);
+        return parent :: get_rights_location_entity_right('discovery_' . $module_instance_id, self :: VIEW_RIGHT, 
+                $entity_id, $entity_type, $location_id);
     }
 
     function invert_module_location_entity_right($module_instance_id, $right_id, $entity_id, $entity_type, $location_id)
     {
-        return parent :: invert_location_entity_right('discovery_' . $module_instance_id, $right_id, $entity_id, $entity_type, $location_id);
+        return parent :: invert_location_entity_right('discovery_' . $module_instance_id, $right_id, $entity_id, 
+                $entity_type, $location_id);
     }
 
     function get_module_targets_entities($module_instance_id, $parameters)
     {
-        return parent :: get_target_entities(self :: VIEW_RIGHT, 'discovery_' . $module_instance_id, $parameters->get_user_id(), self :: TYPE_PROFILE);
+        return parent :: get_target_entities(self :: VIEW_RIGHT, 'discovery_' . $module_instance_id, 
+                $parameters->get_user_id(), self :: TYPE_PROFILE);
     }
 }
 ?>

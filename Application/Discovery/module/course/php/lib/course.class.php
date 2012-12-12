@@ -2,12 +2,12 @@
 namespace application\discovery\module\course;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.courses.discovery
+ * 
  * @author Hans De Bisschop
  */
 class Course extends DataClass
@@ -45,6 +45,7 @@ class Course extends DataClass
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -81,6 +82,7 @@ class Course extends DataClass
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -339,6 +341,7 @@ class Course extends DataClass
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()

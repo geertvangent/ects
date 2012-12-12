@@ -63,14 +63,19 @@ class ModuleInstanceManagerActivatorComponent extends ModuleInstanceManager
                 }
             }
             
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
-                    ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES, 
-                    self :: PARAM_CONTENT_TYPE => $module_instance->get_content_type()));
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                    ($failures ? true : false), 
+                    array(
+                            ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_BROWSE_INSTANCES, 
+                            self :: PARAM_CONTENT_TYPE => $module_instance->get_content_type()));
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array(
-                    'OBJECT' => Translation :: get('ExternalRepository')), Utilities :: COMMON_LIBRARIES)));
+            $this->display_error_page(
+                    htmlentities(
+                            Translation :: get('NoObjectSelected', 
+                                    array('OBJECT' => Translation :: get('ExternalRepository')), 
+                                    Utilities :: COMMON_LIBRARIES)));
         }
     }
 }

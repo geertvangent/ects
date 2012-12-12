@@ -20,7 +20,7 @@ class Parameters extends \application\discovery\module\group_user\Parameters
     {
         return $this->get_parameter(Module :: PARAM_SOURCE);
     }
-    
+
     function set_type($type)
     {
         $this->set_parameter(Module :: PARAM_TYPE, $type);

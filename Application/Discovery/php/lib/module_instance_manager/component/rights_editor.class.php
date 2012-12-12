@@ -2,12 +2,13 @@
 namespace application\discovery;
 
 use application\discovery\rights_editor_manager\RightsEditorManager;
-
 use common\libraries\Request;
 
 class ModuleInstanceManagerRightsEditorComponent extends ModuleInstanceManager
 {
+
     private $module_instance_id;
+
     private $namespace;
 
     function run()

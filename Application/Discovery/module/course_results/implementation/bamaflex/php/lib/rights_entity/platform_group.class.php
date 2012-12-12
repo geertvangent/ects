@@ -7,40 +7,42 @@ use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
 use common\libraries\AdvancedElementFinderElementType;
 use common\libraries\Translation;
-
 use group\Group;
 use group\GroupDataManager;
-
 use rights\PlatformGroupEntity;
 use common\libraries\AdvancedElementFinderElement;
 
 /**
- * Extension on the platform group entity specific for the course to limit the
- * platform groups
- *
+ * Extension on the platform group entity specific for the course to limit the platform groups
+ * 
  * @author Sven Vanpoucke
  */
 class RightsPlatformGroupEntity extends PlatformGroupEntity
 {
+
     /**
      * The subscribed group ids for the course
      * 
      * @var Array<int>
      */
     private $subscribed_platform_group_ids;
+
     /**
      * Limits the groups by id
      * 
      * @var Array<int>
      */
     private $limited_groups;
+
     /**
      * Excludes the groups by id
      * 
      * @var Array<int>
      */
     private $excluded_groups;
+
     private $publication_id;
+
     private static $instance;
 
     static function get_instance($publication_id)
@@ -52,7 +54,8 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
         return self :: $instance;
     }
 
-    function __construct($publication_id, $subscribed_platform_group_ids = array(), $limited_groups = array(), $excluded_groups = array())
+    function __construct($publication_id, $subscribed_platform_group_ids = array(), $limited_groups = array(), 
+            $excluded_groups = array())
     {
         $this->publication_id = $publication_id;
         $this->limited_groups = $limited_groups;
@@ -85,8 +88,8 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
 
     /**
      * Builds the condition with the limited and excluded groups
-     *
-     * @param $condition Condition           
+     * 
+     * @param $condition Condition
      * @return Condition
      */
     public function get_condition(Condition $condition)
@@ -100,7 +103,8 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
         
         if ($this->excluded_groups)
         {
-            $conditions[] = new NotCondition(new InCondition(Group :: PROPERTY_ID, $this->excluded_groups, Group :: get_table_name()));
+            $conditions[] = new NotCondition(
+                    new InCondition(Group :: PROPERTY_ID, $this->excluded_groups, Group :: get_table_name()));
         }
         
         if ($condition)
@@ -121,8 +125,7 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
     }
 
     /**
-     * Override the get root ids to only return the subscribed groups instead of
-     * the chamilo root group
+     * Override the get root ids to only return the subscribed groups instead of the chamilo root group
      * 
      * @return Array<int>
      */
@@ -137,13 +140,11 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
     }
 
     /**
-     * Retrieves the entity item ids relevant for a given user.
-     * Overrides because only subscribed platformgroups need to be checked. Also
-     * none of their parents as they are not
-     * subscribed in the course, and therefore cannot have specific rights set
-     * to them
-     *
-     * @param $user_id integer           
+     * Retrieves the entity item ids relevant for a given user. Overrides because only subscribed platformgroups need to
+     * be checked. Also none of their parents as they are not subscribed in the course, and therefore cannot have
+     * specific rights set to them
+     * 
+     * @param $user_id integer
      * @return array
      */
     function retrieve_entity_item_ids_linked_to_user($user_id)
@@ -157,15 +158,14 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
     }
 
     /**
-     * Retrieves the type for the advanced element finder for the simple rights
-     * editor
+     * Retrieves the type for the advanced element finder for the simple rights editor
      */
     function get_element_finder_type()
     {
-        return new AdvancedElementFinderElementType('platform_groups', Translation :: get('PublicationPlatformGroups'), __NAMESPACE__, 'publication_platform_groups_feed', array(
-                'publication_id' => $this->publication_id));
+        return new AdvancedElementFinderElementType('platform_groups', Translation :: get('PublicationPlatformGroups'), 
+                __NAMESPACE__, 'publication_platform_groups_feed', 
+                array('publication_id' => $this->publication_id));
     }
-
 }
 
 ?>

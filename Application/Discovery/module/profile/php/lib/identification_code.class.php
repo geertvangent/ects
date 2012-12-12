@@ -2,20 +2,18 @@
 namespace application\discovery\module\profile;
 
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\DataClass;
 
 class IdentificationCode extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_TYPE = 'type';
     const PROPERTY_CODE = 'code';
-    
     const TYPE_NATIONAL = 1;
     const TYPE_COMPANY = 2;
 
     /**
+     *
      * @return int
      */
     function get_type()
@@ -24,6 +22,7 @@ class IdentificationCode extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_type_string()
@@ -40,6 +39,7 @@ class IdentificationCode extends DataClass
     }
 
     /**
+     *
      * @return string
      */
     function get_code()
@@ -48,6 +48,7 @@ class IdentificationCode extends DataClass
     }
 
     /**
+     *
      * @param int $type
      */
     function set_type($type)
@@ -56,6 +57,7 @@ class IdentificationCode extends DataClass
     }
 
     /**
+     *
      * @param string $code
      */
     function set_code($code)
@@ -64,6 +66,7 @@ class IdentificationCode extends DataClass
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -75,6 +78,7 @@ class IdentificationCode extends DataClass
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

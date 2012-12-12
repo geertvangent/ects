@@ -6,11 +6,11 @@ use application\discovery\DiscoveryDataManager;
 class Profile extends \application\discovery\module\profile\Profile
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_USERNAME = 'username';
     const PROPERTY_TIMEZONE = 'timezone';
 
     /**
+     *
      * @return int
      */
     function get_username()
@@ -19,6 +19,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return Birth
      */
     function get_timezone()
@@ -27,6 +28,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param int $username
      */
     function set_username($username)
@@ -35,6 +37,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param string $timezone
      */
     function set_timezone($timezone)
@@ -43,6 +46,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -54,6 +58,7 @@ class Profile extends \application\discovery\module\profile\Profile
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()

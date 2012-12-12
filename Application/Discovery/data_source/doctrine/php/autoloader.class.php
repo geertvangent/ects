@@ -6,19 +6,16 @@ class Autoloader
 
     /**
      * The array mapping class names to paths
-     *
+     * 
      * @var multitype:string
      */
-     private static $map = array(
-         'Autoloader' => '/autoloader.class.php',
-         'Connection' => '/lib/connection.class.php',
-         'DataSource' => '/lib/data_source.class.php',
-         'SettingsConnector' => '/settings/settings_connector.class.php'
-    );
+    private static $map = array('Autoloader' => '/autoloader.class.php', 'Connection' => '/lib/connection.class.php', 
+            'DataSource' => '/lib/data_source.class.php', 
+            'SettingsConnector' => '/settings/settings_connector.class.php');
 
     /**
      * Try to load the class
-     *
+     * 
      * @param $classname string
      * @return boolean
      */
@@ -29,13 +26,13 @@ class Autoloader
             require_once __DIR__ . self :: $map[$classname];
             return true;
         }
-
+        
         return false;
     }
 
     /**
      * Synchronize the autoloader
-     *
+     * 
      * @param $update boolean
      * @return multitype:string
      */
@@ -43,6 +40,5 @@ class Autoloader
     {
         return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
     }
-
 }
 ?>

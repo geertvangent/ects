@@ -2,32 +2,33 @@
 namespace application\discovery\module\employment\implementation\bamaflex;
 
 use application\discovery\module\employment\DataManagerInterface;
-
 use user\UserDataManager;
-
 use MDB2_Error;
 use stdClass;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
+
     private $employments = array();
+
     private $employment_parts = array();
 
     /**
+     *
      * @param int $id
-     * @return \application\discovery\module\employment\implementation\bamaflex\Employment|boolean
+     * @return \application\discovery\module\employment\implementation\bamaflex\Employment boolean
      */
     function retrieve_employments($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-
+        
         $official_code = $user->get_official_code();
-
+        
         $query = 'SELECT * FROM v_discovery_employment WHERE person_id = "' . $official_code . '" AND active = 1 ORDER BY start_date DESC';
-
+        
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-
+        
         if (! $results instanceof MDB2_Error)
         {
             while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -63,11 +64,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $employment->set_interruption_id($result->interruption_id);
                 $employment->set_interruption_category($result->interruption_category);
                 $employment->set_interruption_category_id($result->interruption_category_id);
-
-
+                
                 $this->employments[$official_code][] = $employment;
             }
-
+            
             return $this->employments[$official_code];
         }
         else
@@ -79,18 +79,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function count_employments($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-
+        
         $official_code = $user->get_official_code();
-
+        
         $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment WHERE person_id = "' . $official_code . '"';
-
+        
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-
+        
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-
+            
             return $result->employments_count;
         }
         else
@@ -102,10 +102,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function retrieve_employment_parts($employment_id)
     {
         $query = 'SELECT * FROM v_discovery_employment_parts WHERE assignment_id = "' . $employment_id . '" ORDER BY start_date';
-
+        
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-
+        
         if (! $results instanceof MDB2_Error)
         {
             while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -123,10 +123,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $employment_part->set_training($result->training);
                 $employment_part->set_department($result->department);
                 $employment_part->set_department_id($result->department_id);
-
+                
                 $this->employment_parts[$employment_id][] = $employment_part;
             }
-
+            
             return $this->employment_parts[$employment_id];
         }
         else

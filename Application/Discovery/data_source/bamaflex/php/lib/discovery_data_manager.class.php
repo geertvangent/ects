@@ -6,11 +6,13 @@ use common\libraries\WebApplication;
 use common\libraries\Utilities;
 
 /**
+ *
  * @package application.discovery
  * @author Hans De Bisschop
  */
 class DiscoveryDataManager
 {
+
     /**
      * Instance of this class for the singleton pattern.
      */
@@ -25,9 +27,9 @@ class DiscoveryDataManager
     }
 
     /**
-     * Uses a singleton pattern and a factory pattern to return the data
-     * manager. The configuration determines which data manager class is to
-     * be instantiated.
+     * Uses a singleton pattern and a factory pattern to return the data manager. The configuration determines which
+     * data manager class is to be instantiated.
+     * 
      * @return DiscoveryDataManagerInterface The data manager.
      */
     static function get_instance()

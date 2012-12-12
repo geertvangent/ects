@@ -3,12 +3,12 @@ namespace application\discovery\module\group\implementation\bamaflex;
 
 use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.group.implementation.bamaflex
+ * 
  * @author Magali Gillard
  */
 class Group extends DiscoveryItem
@@ -16,32 +16,36 @@ class Group extends DiscoveryItem
     const CLASS_NAME = __CLASS__;
     
     /**
+     *
      * @var integer
      */
     const PROPERTY_TRAINING_ID = 'training_id';
     /**
+     *
      * @var string
      */
     const PROPERTY_YEAR = 'year';
     /**
+     *
      * @var string
      */
     const PROPERTY_CODE = 'code';
     /**
+     *
      * @var string
      */
     const PROPERTY_DESCRIPTION = 'description';
     /**
+     *
      * @var integer
      */
     const PROPERTY_TYPE = 'type';
     /**
+     *
      * @var integer
      */
     const PROPERTY_TYPE_ID = 'type_id';
-    
     const PROPERTY_SOURCE = 'source';
-    
     const TYPE_TRAINING = 1;
     const TYPE_CLASS = 2;
     const TYPE_CUSTOM = 3;
@@ -49,6 +53,7 @@ class Group extends DiscoveryItem
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -67,6 +72,7 @@ class Group extends DiscoveryItem
 
     /**
      * Get the data class data manager
+     * 
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -76,6 +82,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the training_id of this Group.
+     * 
      * @return integer The training_id.
      */
     function get_training_id()
@@ -85,6 +92,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the training_id of this Group.
+     * 
      * @param integer $training_id
      */
     function set_training_id($training_id)
@@ -94,6 +102,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the year of this Group.
+     * 
      * @return string The year.
      */
     function get_year()
@@ -103,6 +112,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the year of this Group.
+     * 
      * @param string $year
      */
     function set_year($year)
@@ -112,6 +122,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the code of this Group.
+     * 
      * @return string The code.
      */
     function get_code()
@@ -121,6 +132,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the code of this Group.
+     * 
      * @param string $code
      */
     function set_code($code)
@@ -130,6 +142,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the description of this Group.
+     * 
      * @return string The description.
      */
     function get_description()
@@ -139,6 +152,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the description of this Group.
+     * 
      * @param string $description
      */
     function set_description($description)
@@ -148,6 +162,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the type of this Group.
+     * 
      * @return integer The type.
      */
     function get_type()
@@ -157,6 +172,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the type of this Group.
+     * 
      * @param integer $type
      */
     function set_type($type)
@@ -166,6 +182,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the type_id of this Group.
+     * 
      * @return integer The type_id.
      */
     function get_type_id()
@@ -175,6 +192,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the type_id of this Group.
+     * 
      * @param integer $type_id
      */
     function set_type_id($type_id)
@@ -193,6 +211,7 @@ class Group extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_type_string()
@@ -201,6 +220,7 @@ class Group extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     static function type_string($type)
@@ -223,8 +243,9 @@ class Group extends DiscoveryItem
     }
 
     /**
+     *
      * @param boolean $types_only
-     * @return multitype:integer|multitype:string
+     * @return multitype:integer multitype:string
      */
     static function get_type_types($types_only = false)
     {
@@ -239,6 +260,7 @@ class Group extends DiscoveryItem
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     static function get_table_name()

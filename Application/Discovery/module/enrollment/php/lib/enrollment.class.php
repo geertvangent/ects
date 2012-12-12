@@ -7,13 +7,11 @@ use application\discovery\DiscoveryItem;
 class Enrollment extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
     const PROPERTY_YEAR = 'year';
     const PROPERTY_TRAINING = 'training';
     const PROPERTY_TRAINING_ID = 'training_id';
     const PROPERTY_RESULT = 'result';
     const PROPERTY_PERSON_ID = 'person_id';
-    
     const RESULT_GRADUATED = 1;
     const RESULT_PASSED = 2;
     const RESULT_FAILED = 3;
@@ -21,6 +19,7 @@ class Enrollment extends DiscoveryItem
     const RESULT_NO_DATA = 5;
 
     /**
+     *
      * @return string
      */
     function get_year()
@@ -29,6 +28,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_training()
@@ -40,13 +40,14 @@ class Enrollment extends DiscoveryItem
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
     }
-    
+
     function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
 
     /**
+     *
      * @return string
      */
     function get_result()
@@ -55,6 +56,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function get_result_string()
@@ -63,6 +65,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     static function result_string($result)
@@ -88,6 +91,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @return multitype:string
      */
     static function get_results()
@@ -96,6 +100,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @return boolean
      */
     function is_special_result()
@@ -104,6 +109,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $year
      */
     function set_year($year)
@@ -112,18 +118,18 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $training
      */
     function set_training($training)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING, $training);
     }
-    
+
     function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
-    
 
     function set_training_id($training_id)
     {
@@ -131,6 +137,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @param string $result
      */
     function set_result($result)
@@ -139,6 +146,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @param multitype:string $extended_property_names
      */
     static function get_default_property_names($extended_property_names = array())
@@ -153,6 +161,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -161,6 +170,7 @@ class Enrollment extends DiscoveryItem
     }
 
     /**
+     *
      * @return string
      */
     function __toString()

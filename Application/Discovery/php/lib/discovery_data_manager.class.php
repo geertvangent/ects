@@ -2,7 +2,6 @@
 namespace application\discovery;
 
 use rights\RightsUtil;
-
 use common\libraries\Configuration;
 use common\libraries\WebApplication;
 use common\libraries\Utilities;
@@ -15,6 +14,7 @@ use DOMDocument;
  */
 class DiscoveryDataManager
 {
+
     /**
      * Instance of this class for the singleton pattern.
      */
@@ -31,7 +31,7 @@ class DiscoveryDataManager
     /**
      * Uses a singleton pattern and a factory pattern to return the data manager. The configuration determines which
      * data manager class is to be instantiated.
-     *
+     * 
      * @return DiscoveryDataManagerInterface The data manager.
      */
     static function get_instance()
@@ -51,27 +51,27 @@ class DiscoveryDataManager
                 WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) . 'php/rights/rights_location.xml');
         $right_location_entity_right = self :: parse_xml_file(
                 WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) . 'php/rights/rights_location_entity_right.xml');
-
-        if (! self :: get_instance()->create_storage_unit($module->get_id() . '_' . $right_location['name'],
+        
+        if (! self :: get_instance()->create_storage_unit($module->get_id() . '_' . $right_location['name'], 
                 $right_location['properties'], $right_location['indexes']))
         {
             return false;
         }
-
+        
         $rights = $module->get_type() . '\Rights';
         if (! $rights :: get_instance()->create_subtree_root_location(
                 DiscoveryManager :: APPLICATION_NAME . '_' . $module->get_id(), 0, RightsUtil :: TREE_TYPE_ROOT))
         {
             return false;
         }
-
+        
         if (! self :: get_instance()->create_storage_unit(
-                $module->get_id() . '_' . $right_location_entity_right['name'],
+                $module->get_id() . '_' . $right_location_entity_right['name'], 
                 $right_location_entity_right['properties'], $right_location_entity_right['indexes']))
         {
             return false;
         }
-
+        
         return true;
     }
 
@@ -80,7 +80,7 @@ class DiscoveryDataManager
         $name = '';
         $properties = array();
         $indexes = array();
-
+        
         $doc = new DOMDocument();
         $doc->load($file);
         $object = $doc->getElementsByTagname('object')->item(0);
@@ -116,7 +116,7 @@ class DiscoveryDataManager
         $result['name'] = $name;
         $result['properties'] = $properties;
         $result['indexes'] = $indexes;
-
+        
         return $result;
     }
 }
