@@ -48,11 +48,14 @@ class XlsxDefaultRendition extends XlsxRendition
      * @param \PHPExcel $php_excel
      * @param string $type
      */
-    static function save(\PHPExcel $php_excel, $type)
+    static function save(\PHPExcel $php_excel, $module)
     {
         $php_excel->setActiveSheetIndex(0);
 
-        $file_name = Translation :: get('TypeName', null, $type) . date('_Y-m-d_H-i-s') . '.xlsx';
+        $user_id = $module->get_module_parameters()->get_user_id();
+        $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
+
+        $file_name = str_replace(' ', '_', $user->get_fullname()) . '_' . Translation :: get('TypeName', null, $module->get_module_instance()->get_type()) . '.xlsx';
 
         $file = Path :: get(SYS_ARCHIVE_PATH) . Filesystem :: create_unique_name(Path :: get(SYS_ARCHIVE_PATH),
                 $file_name);

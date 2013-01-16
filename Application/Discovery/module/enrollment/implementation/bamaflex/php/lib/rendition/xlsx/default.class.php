@@ -59,7 +59,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         }
 
         return \application\discovery\XlsxDefaultRendition :: save($this->php_excel,
-                $this->get_module_instance()->get_type());
+                $this->get_module());
     }
 
     function process_enrollments($contract_type = Enrollment :: CONTRACT_TYPE_ALL)
@@ -92,7 +92,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $headers[] = Translation :: get('Contract');
         }
 
-        $headers[] = '-';
         $headers[] = Translation :: get('Result');
         $headers[] = Translation :: get('GenerationStudent');
 
@@ -125,22 +124,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
             if ($enrollment->is_special_result())
             {
-                $result_image = new \PHPExcel_Worksheet_Drawing();
-                $result_image->setName(Translation :: get($enrollment->get_result_string()));
-                $result_image->setDescription(Translation :: get($enrollment->get_result_string()));
-                $result_image->setPath(
-                        Theme :: get_image_system_path() . 'result_type/' . $enrollment->get_result() . '.png');
-                $result_image->setHeight(16);
-                $result_image->setCoordinates(\PHPExcel_Cell :: stringFromColumnIndex($column ++) . $row);
-                $result_image->setWorksheet($this->php_excel->getActiveSheet());
-            }
-            else
-            {
-                $column ++;
-            }
-
-            if ($enrollment->is_special_result())
-            {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row,
                         StringUtilities :: transcode_string(Translation :: get($enrollment->get_result_string())));
             }
@@ -165,7 +148,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \application\discovery\Rendition :: FORMAT_XLSX;
     }
 
     /*

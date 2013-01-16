@@ -14,7 +14,7 @@ use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
 
-class Module extends \application\discovery\Module
+abstract class Module extends \application\discovery\Module
 {
 
     private $cas_statistics;
@@ -31,12 +31,12 @@ class Module extends \application\discovery\Module
     function get_module_parameters()
     {
         $parameter = self :: module_parameters();
-        
+
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
         }
-        
+
         if (! $parameter->get_mode())
         {
             $parameter->set_mode(Parameters :: MODE_USER);
@@ -45,7 +45,7 @@ class Module extends \application\discovery\Module
         {
             $parameter->set_user_id(0);
         }
-        
+
         return $parameter;
     }
 
@@ -53,24 +53,24 @@ class Module extends \application\discovery\Module
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $param_mode = Request :: get(self :: PARAM_MODE);
-        
+
         $parameter = new Parameters();
-        
+
         if ($param_user)
         {
             $parameter->set_user_id($param_user);
         }
-        
+
         if ($param_mode)
         {
             $parameter->set_mode($param_mode);
-            
+
             if ($param_mode == Parameters :: MODE_GENERAL)
             {
                 $parameter->set_user_id(0);
             }
         }
-        
+
         return $parameter;
     }
 
@@ -80,7 +80,7 @@ class Module extends \application\discovery\Module
         {
             $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/cas_statistics/' . md5(
                     serialize($this->get_module_parameters()));
-            
+
             if (! file_exists($path))
             {
                 $this->cas_statistics = DataManager :: get_instance($this->get_module_instance())->retrieve_cas_statistics(
@@ -92,7 +92,7 @@ class Module extends \application\discovery\Module
                 $this->cas_statistics = unserialize(file_get_contents($path));
             }
         }
-        
+
         return $this->cas_statistics;
     }
 
@@ -110,16 +110,6 @@ class Module extends \application\discovery\Module
         $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_cas_statistics($parameters);
     }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery.Module::render()
-     */
-    function render()
-    {
-        $html = array();
-        
-        return implode("\n", $html);
-    }
 
     function get_type()
     {
@@ -129,7 +119,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)

@@ -54,7 +54,7 @@ class Module extends \application\discovery\Module
         if (! isset($this->course_results))
         {
             $this->course_results = $this->get_data_manager()->retrieve_course_results(
-                    $this->get_course_results_parameters());
+                    $this->get_module_parameters());
         }
         return $this->course_results;
     }
@@ -68,7 +68,7 @@ class Module extends \application\discovery\Module
         if (! isset($this->mark_moments))
         {
             $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments(
-                    $this->get_course_results_parameters());
+                    $this->get_module_parameters());
         }
         return $this->mark_moments;
     }

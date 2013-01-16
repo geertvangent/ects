@@ -106,9 +106,9 @@ class Module extends \application\discovery\module\group_user\Module
         $course_data = array();
         $course_data_struck = array();
         
-        if ($this->get_group_user_parameters()->get_type() == Group :: TYPE_CLASS)
+        if ($this->get_module_parameters()->get_type() == Group :: TYPE_CLASS)
         {
-            $parameters = $this->get_group_user_parameters();
+            $parameters = $this->get_module_parameters();
             $parameters->set_type(Group :: TYPE_CLASS_COURSE);
             $class_course_users = $this->get_data_manager()->retrieve_group_users($parameters);
             

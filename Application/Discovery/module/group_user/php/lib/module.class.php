@@ -47,7 +47,7 @@ class Module extends \application\discovery\Module
     {
         if (! isset($this->group_user))
         {
-            $this->group_user = $this->get_data_manager()->retrieve_group_users($this->get_group_user_parameters());
+            $this->group_user = $this->get_data_manager()->retrieve_group_users($this->get_module_parameters());
         }
         return $this->group_user;
     }

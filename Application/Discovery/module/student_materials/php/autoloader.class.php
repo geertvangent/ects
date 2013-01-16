@@ -15,7 +15,12 @@ class Autoloader
          'DataManager' => '/lib/data_manager.class.php',
          'DataManagerInterface' => '/lib/data_manager_interface.class.php',
          'Module' => '/lib/module.class.php',
-         'Parameters' => '/lib/parameters.class.php'
+         'Parameters' => '/lib/parameters.class.php',
+         'Rendition' => '/lib/rendition/rendition.class.php',
+         'HtmlRendition' => '/lib/rendition/format/html.class.php',
+         'XlsxRendition' => '/lib/rendition/format/xlsx.class.php',
+         'HtmlDefaultRendition' => '/lib/rendition/view/html/default.class.php',
+         'XlsxDefaultRendition' => '/lib/rendition/view/xlsx/default.class.php'
     );
 
     /**

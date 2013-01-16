@@ -48,7 +48,7 @@ class Module extends \application\discovery\Module
         if (! isset($this->training_results))
         {
             $this->training_results = $this->get_data_manager()->retrieve_training_results(
-                    $this->get_training_results_parameters());
+                    $this->get_module_parameters());
         }
         return $this->training_results;
     }

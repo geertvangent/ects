@@ -184,13 +184,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
 
-        $export_parameters = array_merge($this->get_module_parameters()->get_parameters(),
-                array(
-                        \application\discovery\DiscoveryManager :: PARAM_VIEW => \application\discovery\HtmlRendition :: VIEW_XLSX));
-        $url = $this->get_context()->get_url($export_parameters);
-
-        BreadcrumbTrail :: get_instance()->add_extra(
-                new ToolbarItem(Translation :: get('Excel'), Theme :: get_common_image_path() . 'export_excel.png', $url));
+        \application\discovery\HtmlDefaultRendition ::  add_export_action($this);
 
         return implode("\n", $html);
     }

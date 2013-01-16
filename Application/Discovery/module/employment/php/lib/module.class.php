@@ -4,18 +4,9 @@ namespace application\discovery\module\employment;
 use common\libraries\Filesystem;
 use common\libraries\Request;
 use common\libraries\Path;
-use common\libraries\WebApplication;
-use common\libraries\ResourceManager;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\PropertiesTable;
-use common\libraries\Display;
-use common\libraries\Application;
-use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 
-class Module extends \application\discovery\Module
+abstract class Module extends \application\discovery\Module
 {
 
     /**
@@ -70,35 +61,6 @@ class Module extends \application\discovery\Module
         $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_employments($parameters);
     }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery.Module::render()
-     */
-    function render()
-    {
-        $html = array();
-        
-        $data = array();
-        
-        foreach ($this->employments as $key => $employment)
-        {
-            $row = array();
-            $row[] = $employment->get_year();
-            $row[] = $employment->get_training();
-            
-            $class = 'employment" style="" id="employment_' . $key;
-            $details_action = new ToolbarItem(Translation :: get('ShowCourses'), 
-                    Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, 
-                    $class);
-            $row[] = $details_action->as_html();
-            $data[] = $row;
-        }
-        
-        // $path = Path :: namespace_to_full_path(__NAMESPACE__, true) . 'resources/javascript/employment.js';
-        // $html[] = ResourceManager :: get_instance()->get_resource_html($path);
-        
-        return implode("\n", $html);
-    }
 
     function get_type()
     {
@@ -108,7 +70,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)

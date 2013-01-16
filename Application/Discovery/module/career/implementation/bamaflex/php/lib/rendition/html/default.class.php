@@ -47,6 +47,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
+
+        \application\discovery\HtmlDefaultRendition ::  add_export_action($this);
+
         return implode("\n", $html);
     }
 

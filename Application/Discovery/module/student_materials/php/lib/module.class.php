@@ -4,17 +4,11 @@ namespace application\discovery\module\student_materials;
 use common\libraries\Path;
 use common\libraries\Filesystem;
 use common\libraries\Request;
-use common\libraries\Theme;
-use common\libraries\SortableTableFromArray;
-use common\libraries\Translation;
-use common\libraries\PropertiesTable;
-use common\libraries\Display;
 use common\libraries\Application;
-use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
 
-class Module extends \application\discovery\Module
+abstract class Module extends \application\discovery\Module
 {
 
     /**
@@ -46,7 +40,7 @@ class Module extends \application\discovery\Module
 
     function has_data($parameters = null)
     {
-        $parameters = $parameters ? $parameters : $this->get_student_materials_parameters();
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_materials($parameters);
     }
 
@@ -70,67 +64,6 @@ class Module extends \application\discovery\Module
         return $this->courses;
     }
 
-    /**
-     *
-     * @return multitype:multitype:string
-     */
-    function get_table_data()
-    {
-        $data = array();
-        
-        foreach ($this->courses as $course)
-        {
-            $row = array();
-            $row[] = $course->get_year();
-            $row[] = $course->get_name();
-            $data[] = $row;
-        }
-        
-        return $data;
-    }
-
-    /**
-     *
-     * @return multitype:string
-     */
-    function get_table_headers()
-    {
-        $headers = array();
-        $headers[] = array(Translation :: get('Year'), 'class="code"');
-        $headers[] = array(Translation :: get('Course'));
-        
-        foreach ($this->get_mark_moments() as $mark_moment)
-        {
-            $headers[] = array($mark_moment->get_name());
-        }
-        
-        return $headers;
-    }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery.Module::render()
-     */
-    function render()
-    {
-        $html = array();
-        
-        $table = new SortableTable($this->get_table_data());
-        
-        foreach ($this->get_table_headers() as $header_id => $header)
-        {
-            $table->set_header($header_id, $header[0], false);
-            
-            if ($header[1])
-            {
-                $table->getHeader()->setColAttributes($header_id, $header[1]);
-            }
-        }
-        
-        $html[] = $table->toHTML();
-        
-        return implode("\n", $html);
-    }
-
     function get_type()
     {
         return ModuleInstance :: TYPE_USER;
@@ -139,7 +72,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)

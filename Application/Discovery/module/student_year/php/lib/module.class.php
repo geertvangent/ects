@@ -13,7 +13,7 @@ use common\libraries\Application;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
 
-class Module extends \application\discovery\Module
+abstract class Module extends \application\discovery\Module
 {
 
     /**
@@ -47,14 +47,14 @@ class Module extends \application\discovery\Module
         if (! isset($this->student_years))
         {
             $this->student_years = DataManager :: get_instance($this->get_module_instance())->retrieve_student_years(
-                    $this->get_student_year_parameters());
+                    $this->get_module_parameters());
         }
         return $this->student_years;
     }
 
     function has_data($parameters = null)
     {
-        $parameters = $parameters ? $parameters : $this->get_student_year_parameters();
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_student_years($parameters);
     }
 
@@ -68,21 +68,11 @@ class Module extends \application\discovery\Module
         }
         return $parameter;
     }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery.Module::render()
-     */
-    function render()
-    {
-        $html = array();
-        
-        return implode("\n", $html);
-    }
 
     static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)

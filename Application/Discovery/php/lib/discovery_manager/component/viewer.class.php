@@ -36,7 +36,8 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
         $order_by = array(new ObjectTableOrder(ModuleInstance :: PROPERTY_DISPLAY_ORDER));
         if ($this->get_user()->is_platform_admin())
         {
-            $link = $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_MODULE));
+            $link = $this->get_url(
+                    array(self :: PARAM_ACTION => self :: ACTION_MODULE, self :: PARAM_MODULE_ID => null));
             BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(Translation :: get('Modules'),
                             Theme :: get_common_image_path() . 'action_config.png', $link));
@@ -71,7 +72,8 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
         {
             case ModuleInstance :: TYPE_USER :
                 $module_parameters = array();
-                $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+                $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+                $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
                 BreadcrumbTrail :: get_instance()->add_extra(
                         new ToolbarItem(Translation :: get('Information'),
@@ -79,19 +81,22 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                 break;
             case ModuleInstance :: TYPE_INFORMATION :
                 $module_parameters = array();
-                $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+                $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+                $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
                 BreadcrumbTrail :: get_instance()->add_extra(
                         new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
                 break;
             case ModuleInstance :: TYPE_DETAILS :
                 $module_parameters = array();
-                $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+                $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+                $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
                 BreadcrumbTrail :: get_instance()->add_extra(
                         new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
                 $module_parameters = array();
-                $module_parameters[DiscoveryManager :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+                $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+                $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
                 BreadcrumbTrail :: get_instance()->add_extra(
                         new ToolbarItem(Translation :: get('Information'),
@@ -104,7 +109,8 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
 
         if ($current_module_instance->get_content_type() != ModuleInstance :: TYPE_DETAILS)
         {
-            $rendered_module = RenditionImplementation::launch($current_module, Rendition :: FORMAT_HTML, $view ? $view : Rendition :: VIEW_DEFAULT, $this);
+            $rendered_module = RenditionImplementation :: launch($current_module, Rendition :: FORMAT_HTML,
+                    $view ? $view : Rendition :: VIEW_DEFAULT, $this);
             $tabs = new DynamicVisualTabsRenderer('discovery', $rendered_module);
             $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE,
                     $current_module_instance->get_content_type());

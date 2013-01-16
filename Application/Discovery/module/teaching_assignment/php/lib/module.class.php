@@ -16,7 +16,7 @@ use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
 
-class Module extends \application\discovery\Module
+abstract class Module extends \application\discovery\Module
 {
     const PARAM_USER_ID = 'user_id';
     const PARAM_YEAR = 'year';
@@ -46,7 +46,7 @@ class Module extends \application\discovery\Module
         {
             $parameter->set_user_id($param_user);
         }
-        
+
         if ($year)
         {
             $parameter->set_year($year);
@@ -62,7 +62,7 @@ class Module extends \application\discovery\Module
     {
         $year = $parameters->get_year();
         $user_id = $parameters->get_user_id();
-        
+
         if (! isset($this->teaching_assignments[$user_id][$year]))
         {
             $this->teaching_assignments[$user_id][$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_teaching_assignments(
@@ -73,33 +73,8 @@ class Module extends \application\discovery\Module
 
     function has_data($parameters = null)
     {
-        $parameters = $parameters ? $parameters : $this->get_teaching_assignment_parameters();
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_teaching_assignments($parameters);
-    }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery.Module::render()
-     */
-    function render()
-    {
-        $html = array();
-        $data = array();
-        
-        foreach ($this->teaching_assignments as $key => $teaching_assignment)
-        {
-            $row = array();
-            $row[] = $teaching_assignment->get_year();
-            $row[] = $teaching_assignment->get_training();
-            $row[] = $teaching_assignment->get_name();
-            
-            $class = 'teaching_assignment" style="" id="teaching_assignment_' . $key;
-            $details_action = new ToolbarItem(Translation :: get('ShowTeachingAssignments'), 
-                    Theme :: get_common_image_path() . 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, 
-                    $class);
-            $row[] = $details_action->as_html();
-            $data[] = $row;
-        }
-        return implode("\n", $html);
     }
 
     function get_type()
@@ -110,7 +85,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
