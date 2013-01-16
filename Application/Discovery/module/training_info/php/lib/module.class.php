@@ -35,12 +35,12 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    function get_training_parameters()
+    function get_module_parameters()
     {
-        return self :: get_module_parameters();
+        return self :: module_parameters();
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $training = Request :: get(self :: PARAM_TRAINING_ID);
         
@@ -61,7 +61,7 @@ class Module extends \application\discovery\Module
         if (! isset($this->training))
         {
             $this->training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
-                    $this->get_training_parameters());
+                    $this->get_module_parameters());
         }
         return $this->training;
     }

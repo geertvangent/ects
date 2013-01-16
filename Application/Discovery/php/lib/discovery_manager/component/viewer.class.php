@@ -117,7 +117,7 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                 $rights = $module_instance->get_type() . '\Rights';
                 $module_class = $module_instance->get_type() . '\Module';
 
-                $module_parameters = $module_class :: get_module_parameters();
+                $module_parameters = $module_class :: module_parameters();
 
                 if ($module_content_type == ModuleInstance :: TYPE_USER)
                 {

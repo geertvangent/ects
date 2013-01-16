@@ -201,7 +201,7 @@ class Module extends \application\discovery\module\advice\Module
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
         if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_advice_parameters()))
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -212,7 +212,7 @@ class Module extends \application\discovery\module\advice\Module
         {
             
             $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
-                    $this->get_advice_parameters());
+                    $this->get_module_parameters());
             foreach ($enrollments as $enrollment)
             {
                 if ($this->has_advices($enrollment))

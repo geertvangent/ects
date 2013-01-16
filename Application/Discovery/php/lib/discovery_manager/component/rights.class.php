@@ -67,7 +67,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
         $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance(
                 Request :: get(self :: PARAM_MODULE_ID));
         $namespace = '\\' . $module_instance->get_type() . '\Module';
-        $parameters = $namespace :: get_module_parameters();
+        $parameters = $namespace :: module_parameters();
         $parameters = array_keys($parameters->get_parameters());
         $parameters[] = self :: PARAM_MODULE_ID;
         return $parameters;

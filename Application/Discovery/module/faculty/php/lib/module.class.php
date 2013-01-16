@@ -38,7 +38,7 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $year = Request :: get(self :: PARAM_YEAR);
         
@@ -117,21 +117,21 @@ class Module extends \application\discovery\Module
     function render()
     {
         $html = array();
-        if (is_null(self :: get_module_parameters()->get_year()))
+        if (is_null(self :: module_parameters()->get_year()))
         {
             $years = $this->get_years();
             $current_year = $years[0];
         }
         else
         {
-            $current_year = self :: get_module_parameters()->get_year();
+            $current_year = self :: module_parameters()->get_year();
         }
         
         $tabs = new DynamicVisualTabsRenderer('faculty_list', $this->get_faculties_table($current_year)->as_html());
         
         foreach ($this->get_years() as $year)
         {
-            $parameters = self :: get_module_parameters();
+            $parameters = self :: module_parameters();
             $parameters->set_year($year);
             $tabs->add_tab(
                     new DynamicVisualTab($year, $year, null, 

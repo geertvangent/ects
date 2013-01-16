@@ -249,7 +249,7 @@ class Module extends \application\discovery\module\career\Module
     function get_enrollments()
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
-                $this->get_career_parameters());
+                $this->get_module_parameters());
         
         $contract_type_enrollments = array();
         
@@ -268,7 +268,7 @@ class Module extends \application\discovery\module\career\Module
     function get_contracts()
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
-                $this->get_career_parameters());
+                $this->get_module_parameters());
         
         $contract_enrollments = array();
         
@@ -477,13 +477,13 @@ class Module extends \application\discovery\module\career\Module
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
         if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_career_parameters()))
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
         
         $this->result_right = Rights :: get_instance()->module_is_allowed(Rights :: RESULT_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_career_parameters());
+                $this->get_module_instance()->get_id(), $this->get_module_parameters());
         
         $html = array();
         

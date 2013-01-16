@@ -38,12 +38,12 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    function get_faculty_parameters()
+    function get_module_parameters()
     {
-        return self :: get_module_parameters();
+        return self :: module_parameters();
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $faculty = Request :: get(self :: PARAM_FACULTY_ID);
         
@@ -64,7 +64,7 @@ class Module extends \application\discovery\Module
         if (! isset($this->faculty))
         {
             $this->faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty(
-                    $this->get_faculty_parameters());
+                    $this->get_module_parameters());
         }
         return $this->faculty;
     }

@@ -29,7 +29,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
 
         if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities,
-                $this->get_module_instance()->get_id(), $this->get_enrollment_parameters()))
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -37,13 +37,10 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $this->php_excel = new PHPExcel();
         $this->php_excel->removeSheetByIndex(0);
 
-        $file_name = Translation :: get('TypeName', null, $this->get_module_instance()->get_type()) . date(
-                '_Y-m-d_H-i-s') . '.xlsx';
-
         if (count($this->get_enrollments()) > 0)
         {
             $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types(
-                    $this->get_enrollment_parameters());
+                    $this->get_module_parameters());
 
             $this->php_excel->createSheet(0);
             $this->php_excel->setActiveSheetIndex(0);
@@ -61,18 +58,8 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             }
         }
 
-        $this->php_excel->setActiveSheetIndex(0);
-
-        $file = Path :: get(SYS_ARCHIVE_PATH) . Filesystem :: create_unique_name(Path :: get(SYS_ARCHIVE_PATH),
-                $file_name);
-
-        $this->php_excel_writer = PHPExcel_IOFactory :: createWriter($this->php_excel, 'Excel2007');
-        $this->php_excel_writer->save($file);
-
-        $this->php_excel->disconnectWorksheets();
-        unset($this->php_excel);
-
-        return $file;
+        return \application\discovery\XlsxDefaultRendition :: save($this->php_excel,
+                $this->get_module_instance()->get_type());
     }
 
     function process_enrollments($contract_type = Enrollment :: CONTRACT_TYPE_ALL)
@@ -93,128 +80,23 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             }
         }
 
-        $row = 1;
-        $column = 0;
-
-        $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                StringUtilities :: transcode_string(Translation :: get('Year')));
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                'FFFFFF');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-        // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-        $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
-        $column ++;
-
-        $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                StringUtilities :: transcode_string(Translation :: get('Faculty')));
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                'FFFFFF');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-        // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-        $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
-        $column ++;
-
-        $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                StringUtilities :: transcode_string(Translation :: get('Training')));
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                'FFFFFF');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-        // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-        $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
-        $column ++;
-
-        $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                StringUtilities :: transcode_string(Translation :: get('Option')));
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                'FFFFFF');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-        // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-        $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
-        $column ++;
-
-        $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                StringUtilities :: transcode_string(Translation :: get('Trajectory')));
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                'FFFFFF');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-        // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-        $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
-        $column ++;
+        $headers = array();
+        $headers[] = Translation :: get('Year');
+        $headers[] = Translation :: get('Faculty');
+        $headers[] = Translation :: get('Training');
+        $headers[] = Translation :: get('Option');
+        $headers[] = Translation :: get('Trajectory');
 
         if ($contract_type == Enrollment :: CONTRACT_TYPE_ALL)
         {
-            $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                    StringUtilities :: transcode_string(Translation :: get('Contract')));
-            $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                    \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-            $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                    'FFFFFF');
-            $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-            // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-            $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                    \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-            $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
-            $column ++;
+            $headers[] = Translation :: get('Contract');
         }
 
-        $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                '');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                'FFFFFF');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-        // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-        $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setWidth(3);
-        $column ++;
+        $headers[] = '-';
+        $headers[] = Translation :: get('Result');
+        $headers[] = Translation :: get('GenerationStudent');
 
-        $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                StringUtilities :: transcode_string(Translation :: get('Result')));
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                'FFFFFF');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-        // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-        $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
-        $column ++;
-
-        $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column, $row,
-                StringUtilities :: transcode_string(Translation :: get('GenerationStudent')));
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFill()->setFillType(
-                \PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB('c70d2f');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->getColor()->setRGB(
-                'FFFFFF');
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setName('Cambria');
-        // $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getFont()->setBold(true);
-        $this->php_excel->getActiveSheet()->getStyleByColumnAndRow($column, $row)->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-        $this->php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
-        $column ++;
+        \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
 
         $row = 2;
 
@@ -238,7 +120,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             if ($contract_type == Enrollment :: CONTRACT_TYPE_ALL)
             {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row,
-                        StringUtilities :: transcode_string($enrollment->get_contract_type_string()));
+                        StringUtilities :: transcode_string(Translation :: get($enrollment->get_contract_type_string())));
             }
 
             if ($enrollment->is_special_result())
@@ -247,7 +129,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 $result_image->setName(Translation :: get($enrollment->get_result_string()));
                 $result_image->setDescription(Translation :: get($enrollment->get_result_string()));
                 $result_image->setPath(
-                        Theme :: get_image_system_path(__NAMESPACE__) . 'result_type/' . $enrollment->get_result() . '.png');
+                        Theme :: get_image_system_path() . 'result_type/' . $enrollment->get_result() . '.png');
                 $result_image->setHeight(16);
                 $result_image->setCoordinates(\PHPExcel_Cell :: stringFromColumnIndex($column ++) . $row);
                 $result_image->setWorksheet($this->php_excel->getActiveSheet());
@@ -260,7 +142,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             if ($enrollment->is_special_result())
             {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row,
-                        StringUtilities :: transcode_string($enrollment->get_result_string()));
+                        StringUtilities :: transcode_string(Translation :: get($enrollment->get_result_string())));
             }
             else
             {
@@ -268,8 +150,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             }
 
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row,
-                    StringUtilities :: transcode_string(Translation :: get($enrollment->get_generation_student() == 1 ? 'Yes' : 'No', null,
-                                Utilities :: COMMON_LIBRARIES)));
+                    StringUtilities :: transcode_string(
+                            Translation :: get(
+                                    $enrollment->get_generation_student() == 1 ? 'GenerationStudent' : 'NoGenerationStudent')));
 
             $row ++;
         }

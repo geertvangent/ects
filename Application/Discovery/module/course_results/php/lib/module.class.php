@@ -40,7 +40,7 @@ class Module extends \application\discovery\Module
         return DataManager :: get_instance($this->get_module_instance());
     }
 
-    function get_course_results_parameters()
+    function get_module_parameters()
     {
         return new Parameters(Request :: get(self :: PARAM_PROGRAMME_ID));
     }

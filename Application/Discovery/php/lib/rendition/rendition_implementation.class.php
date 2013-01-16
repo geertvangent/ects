@@ -41,5 +41,15 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
     {
         return $this->get_module()->get_instance_url($instance_id, $instance_parameters);
     }
+
+    function get_module_parameters()
+    {
+        return $this->get_module()->get_module_parameters();
+    }
+
+    function has_data($parameters)
+    {
+        return $this->get_module()->has_data($parameters);
+    }
 }
 ?>

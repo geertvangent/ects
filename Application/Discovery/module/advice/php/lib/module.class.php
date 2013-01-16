@@ -31,9 +31,9 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    function get_advice_parameters()
+    function get_module_parameters()
     {
-        $parameter = self :: get_module_parameters();
+        $parameter = self :: module_parameters();
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
@@ -41,7 +41,7 @@ class Module extends \application\discovery\Module
         return $parameter;
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $parameter = new Parameters();
@@ -61,14 +61,14 @@ class Module extends \application\discovery\Module
         if (! isset($this->advices))
         {
             $this->advices = DataManager :: get_instance($this->get_module_instance())->retrieve_advices(
-                    $this->get_advice_parameters());
+                    $this->get_module_parameters());
         }
         return $this->advices;
     }
 
     function has_data($parameters = null)
     {
-        $parameters = $parameters ? $parameters : $this->get_advice_parameters();
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_advices($parameters);
     }
     

@@ -20,16 +20,16 @@ class Module extends \application\discovery\Module
     const TYPE_STUDENT = 2;
     const TYPE_EMPLOYEE = 3;
 
-    function get_photo_parameters()
+    function get_module_parameters()
     {
-        return self :: get_module_parameters();
+        return self :: module_parameters();
     }
 
     function has_parameters()
     {
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $faculty_id = Request :: get(self :: PARAM_FACULTY_ID);
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
@@ -58,7 +58,7 @@ class Module extends \application\discovery\Module
         // if (count($this->get_users()) > 0)
         // {
         $parameters = $this->get_application()->get_parameters();
-        $parameters = array_merge($parameters, $this->get_photo_parameters()->get_parameters());
+        $parameters = array_merge($parameters, $this->get_module_parameters()->get_parameters());
         $parameters[DiscoveryManager :: PARAM_MODULE_ID] = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
         $table = new GalleryBrowserTable($this, $parameters, $this->get_condition());
         $html[] = $table->as_html();

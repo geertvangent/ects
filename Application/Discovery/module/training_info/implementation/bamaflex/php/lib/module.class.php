@@ -33,9 +33,9 @@ class Module extends \application\discovery\module\training_info\Module
     const TAB_OPTION_MAJORS = 2;
     const TAB_OPTION_PACKAGES = 3;
 
-    function get_training_parameters()
+    function get_module_parameters()
     {
-        return self :: get_module_parameters();
+        return self :: module_parameters();
     }
 
     function get_general()
@@ -247,7 +247,7 @@ class Module extends \application\discovery\module\training_info\Module
         $html[] = '</br>';
         
         $tabs = new DynamicVisualTabsRenderer('training');
-        $current_tab = self :: get_module_parameters()->get_tab();
+        $current_tab = self :: module_parameters()->get_tab();
         switch ($current_tab)
         {
             case self :: TAB_GOALS :
@@ -285,7 +285,7 @@ class Module extends \application\discovery\module\training_info\Module
                 }
                 break;
         }
-        $parameters = self :: get_module_parameters();
+        $parameters = self :: module_parameters();
         
         $parameters->set_tab(self :: TAB_GOALS);
         $tabs->add_tab(
@@ -894,7 +894,7 @@ class Module extends \application\discovery\module\training_info\Module
         return $table->as_html();
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $current_tab = Request :: get(Module :: PARAM_TAB);
         if (is_null($current_tab))

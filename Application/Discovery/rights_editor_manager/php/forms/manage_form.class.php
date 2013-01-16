@@ -271,7 +271,7 @@ class ManageForm extends FormValidator
         
         foreach ($user_ids as $user_id)
         {
-            $parameters = $module :: get_module_parameters();
+            $parameters = $module :: module_parameters();
             $parameters->set_user_id($user_id);
             $location_id = $rights->get_module_location_id_by_identifier($module_id, $parameters);
             if (! $location_id)

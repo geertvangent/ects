@@ -176,14 +176,14 @@ class Module extends \application\discovery\module\teaching_assignment\Module
             Display :: not_allowed();
         }
         
-        if (is_null(self :: get_module_parameters()->get_year()))
+        if (is_null(self :: module_parameters()->get_year()))
         {
             $years = $this->get_years();
             $current_year = $years[0];
         }
         else
         {
-            $current_year = self :: get_module_parameters()->get_year();
+            $current_year = self :: module_parameters()->get_year();
         }
         $parameters = $this->get_teaching_assignment_parameters();
         $parameters->set_year($current_year);
@@ -197,7 +197,7 @@ class Module extends \application\discovery\module\teaching_assignment\Module
             
             foreach ($this->get_years() as $year)
             {
-                $parameters = self :: get_module_parameters();
+                $parameters = self :: module_parameters();
                 $parameters->set_year($year);
                 $tabs->add_tab(
                         new DynamicVisualTab($year, $year, null, 

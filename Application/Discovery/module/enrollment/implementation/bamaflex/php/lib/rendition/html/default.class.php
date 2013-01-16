@@ -1,6 +1,7 @@
 <?php
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
+use common\libraries\BreadcrumbTrail;
 use common\libraries\Toolbar;
 use common\libraries\Display;
 use common\libraries\DynamicContentTab;
@@ -150,7 +151,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
 
         if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities,
-                $this->get_module_instance()->get_id(), $this->get_enrollment_parameters()))
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -159,7 +160,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($this->get_enrollments()) > 0)
         {
             $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types(
-                    $this->get_enrollment_parameters());
+                    $this->get_module_parameters());
 
             $tabs = new DynamicTabsRenderer('enrollment_list');
             $tabs->add_tab(
@@ -183,16 +184,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
 
-        $toolbar = new Toolbar();
-
-        $export_parameters = array_merge($this->get_enrollment_parameters()->get_parameters(),
+        $export_parameters = array_merge($this->get_module_parameters()->get_parameters(),
                 array(
                         \application\discovery\DiscoveryManager :: PARAM_VIEW => \application\discovery\HtmlRendition :: VIEW_XLSX));
         $url = $this->get_context()->get_url($export_parameters);
-        $toolbar->add_item(
-                new ToolbarItem(Translation :: get('Excel'), Theme :: get_common_image_path() . 'export_excel.png', $url));
 
-        $html[] = $toolbar->as_html();
+        BreadcrumbTrail :: get_instance()->add_extra(
+                new ToolbarItem(Translation :: get('Excel'), Theme :: get_common_image_path() . 'export_excel.png', $url));
 
         return implode("\n", $html);
     }

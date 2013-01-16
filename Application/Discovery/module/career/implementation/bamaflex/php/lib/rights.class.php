@@ -90,7 +90,7 @@ class Rights extends RightsUtil
 
     function get_current_location($module_instance_id)
     {
-        $parameters = Module :: get_module_parameters();
+        $parameters = Module :: module_parameters();
         $location = $this->get_module_location_by_identifier($module_instance_id, $parameters);
         if ($location)
         {

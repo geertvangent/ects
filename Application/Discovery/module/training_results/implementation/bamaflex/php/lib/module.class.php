@@ -117,12 +117,12 @@ class Module extends \application\discovery\module\training_results\Module
         return $data;
     }
 
-    function get_training_results_parameters()
+    function get_module_parameters()
     {
-        return self :: get_module_parameters();
+        return self :: module_parameters();
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
@@ -202,7 +202,7 @@ class Module extends \application\discovery\module\training_results\Module
         return implode("\n", $html);
     }
 
-    static function get_training_info_parameters()
+    static function get_module_parameters()
     {
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $source = Request :: get(self :: PARAM_SOURCE);

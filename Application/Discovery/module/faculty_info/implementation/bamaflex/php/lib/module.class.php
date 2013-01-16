@@ -16,12 +16,12 @@ class Module extends \application\discovery\module\faculty_info\Module
 {
     const PARAM_SOURCE = 'source';
 
-    function get_faculty_parameters()
+    function get_module_parameters()
     {
-        return self :: get_module_parameters();
+        return self :: module_parameters();
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $faculty = Request :: get(self :: PARAM_FACULTY_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
@@ -227,7 +227,7 @@ class Module extends \application\discovery\module\faculty_info\Module
 
     function get_trainings_table()
     {
-        $trainings = $this->get_trainings_data($this->get_faculty_parameters());
+        $trainings = $this->get_trainings_data($this->get_module_parameters());
         
         $data = array();
         

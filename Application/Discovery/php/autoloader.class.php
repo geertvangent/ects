@@ -62,6 +62,7 @@ class Autoloader
          'HtmlRendition' => '/lib/rendition/format/html.class.php',
          'XlsxRendition' => '/lib/rendition/format/xlsx.class.php',
          'HtmlDefaultRendition' => '/lib/rendition/view/html/default.class.php',
+         'HtmlXlsxRendition' => '/lib/rendition/view/html/xlsx.class.php',
          'XlsxDefaultRendition' => '/lib/rendition/view/xlsx/default.class.php',
          'Activator' => '/package/activate/activator.class.php',
          'Deactivator' => '/package/deactivate/deactivator.class.php',

@@ -20,7 +20,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
 
         if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities,
-                $this->get_module_instance()->get_id(), $this->get_profile_parameters()))
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -109,7 +109,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $toolbar = new Toolbar();
 
-                $url = $this->get_rights_url($this->get_module_instance()->get_id(), $this->get_profile_parameters());
+                $url = $this->get_rights_url($this->get_module_instance()->get_id(), $this->get_module_parameters());
                 $toolbar->add_item(
                         new ToolbarItem(Translation :: get('Rights'),
                                 Theme :: get_common_image_path() . 'action_rights.png', $url));

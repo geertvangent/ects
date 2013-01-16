@@ -24,7 +24,7 @@ class Module extends \application\discovery\module\cas\Module
         if (! isset($this->action_statistics))
         {
             $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/cas_action_statistics/' . md5(
-                    serialize($this->get_cas_parameters()));
+                    serialize($this->get_module_parameters()));
             
             if (! file_exists($path))
             {
@@ -59,7 +59,7 @@ class Module extends \application\discovery\module\cas\Module
         if (count($action_statistics) == 1 && count($action_statistics[0]) > 0)
         {
             $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/data/' . md5(
-                    serialize(array($this->get_cas_parameters(), 0, $action->get_id())));
+                    serialize(array($this->get_module_parameters(), 0, $action->get_id())));
             
             if (! file_exists($path))
             {
@@ -91,7 +91,7 @@ class Module extends \application\discovery\module\cas\Module
             foreach ($action_statistics as $application_id => $application_statistics)
             {
                 $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/data/' . md5(
-                        serialize(array($this->get_cas_parameters(), $application_id, $action->get_id())));
+                        serialize(array($this->get_module_parameters(), $application_id, $action->get_id())));
                 
                 if (! file_exists($path))
                 {
@@ -116,7 +116,7 @@ class Module extends \application\discovery\module\cas\Module
                 $sub_tabs = new DynamicTabsRenderer('statistics_list_' . $action->get_id() . '_' . $application_id);
                 
                 $html = array();
-                $graph = new GraphRenderer($this, $this->get_cas_parameters()->get_user_id(), 
+                $graph = new GraphRenderer($this, $this->get_module_parameters()->get_user_id(), 
                         $applications[$application_id], $action, $data);
                 $sub_tabs->add_tab(
                         new DynamicContentTab(1, Translation :: get('Chart'), 
@@ -149,8 +149,8 @@ class Module extends \application\discovery\module\cas\Module
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if ($this->get_cas_parameters()->get_mode() == Parameters :: MODE_USER && ! Rights :: get_instance()->module_is_allowed(
-                Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_cas_parameters()))
+        if ($this->get_module_parameters()->get_mode() == Parameters :: MODE_USER && ! Rights :: get_instance()->module_is_allowed(
+                Rights :: VIEW_RIGHT, $entities, $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -159,7 +159,7 @@ class Module extends \application\discovery\module\cas\Module
         if (count($this->get_cas_statistics()) > 0)
         {
             $actions = DataManager :: get_instance($this->get_module_instance())->retrieve_actions(
-                    $this->get_cas_parameters());
+                    $this->get_module_parameters());
             
             $tabs = new DynamicTabsRenderer('statistics_list');
             

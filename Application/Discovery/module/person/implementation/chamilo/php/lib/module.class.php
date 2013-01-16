@@ -240,7 +240,7 @@ class Module extends \application\discovery\module\person\Module implements NewO
         return $action_bar;
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         return new Parameters();
     }

@@ -28,9 +28,9 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    function get_cas_parameters()
+    function get_module_parameters()
     {
-        $parameter = self :: get_module_parameters();
+        $parameter = self :: module_parameters();
         
         if (! $parameter->get_user_id())
         {
@@ -49,7 +49,7 @@ class Module extends \application\discovery\Module
         return $parameter;
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $param_mode = Request :: get(self :: PARAM_MODE);
@@ -79,12 +79,12 @@ class Module extends \application\discovery\Module
         if (! isset($this->cas_statistics))
         {
             $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/cas_statistics/' . md5(
-                    serialize($this->get_cas_parameters()));
+                    serialize($this->get_module_parameters()));
             
             if (! file_exists($path))
             {
                 $this->cas_statistics = DataManager :: get_instance($this->get_module_instance())->retrieve_cas_statistics(
-                        $this->get_cas_parameters());
+                        $this->get_module_parameters());
                 Filesystem :: write_to_file($path, serialize($this->cas_statistics));
             }
             else
@@ -107,7 +107,7 @@ class Module extends \application\discovery\Module
 
     function has_data($parameters = null)
     {
-        $parameters = $parameters ? $parameters : $this->get_cas_parameters();
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_cas_statistics($parameters);
     }
     

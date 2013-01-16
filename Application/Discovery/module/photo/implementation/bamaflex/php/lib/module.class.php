@@ -16,7 +16,7 @@ class Module extends \application\discovery\module\photo\Module
 
     function get_groups()
     {
-        $parameters = $this->get_photo_parameters();
+        $parameters = $this->get_module_parameters();
         $codes = array();
         
         if ($parameters->get_faculty_id())

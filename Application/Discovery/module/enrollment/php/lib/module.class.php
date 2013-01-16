@@ -15,7 +15,7 @@ use common\libraries\Application;
 use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 
-class Module extends \application\discovery\Module
+abstract class Module extends \application\discovery\Module
 {
 
     /**
@@ -30,9 +30,9 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    function get_enrollment_parameters()
+    function get_module_parameters()
     {
-        $parameter = self :: get_module_parameters();
+        $parameter = self :: module_parameters();
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
@@ -40,7 +40,7 @@ class Module extends \application\discovery\Module
         return $parameter;
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $parameter = new Parameters();
@@ -60,14 +60,14 @@ class Module extends \application\discovery\Module
         if (! isset($this->enrollments))
         {
             $this->enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
-                    $this->get_enrollment_parameters());
+                    $this->get_module_parameters());
         }
         return $this->enrollments;
     }
 
     function has_data($parameters = null)
     {
-        $parameters = $parameters ? $parameters : $this->get_enrollment_parameters();
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_enrollments($parameters);
     }
 

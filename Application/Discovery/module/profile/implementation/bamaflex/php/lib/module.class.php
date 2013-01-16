@@ -8,7 +8,7 @@ class Module extends \application\discovery\module\profile\Module
 
     function has_data($parameters = null)
     {
-        $parameters = $parameters ? $parameters : $this->get_profile_parameters();
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return DataManager :: get_instance($this->get_module_instance())->has_profile($parameters);
     }
 }

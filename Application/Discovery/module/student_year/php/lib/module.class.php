@@ -28,9 +28,9 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    function get_student_year_parameters()
+    function get_module_parameters()
     {
-        $parameter = self :: get_module_parameters();
+        $parameter = self :: module_parameters();
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
@@ -58,7 +58,7 @@ class Module extends \application\discovery\Module
         return $this->get_data_manager()->count_student_years($parameters);
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $parameter = new Parameters();

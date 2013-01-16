@@ -119,12 +119,12 @@ class Module extends \application\discovery\module\course_results\Module
         return $data;
     }
 
-    function get_course_results_parameters()
+    function get_module_parameters()
     {
-        return self :: get_module_parameters();
+        return self :: module_parameters();
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
@@ -206,7 +206,7 @@ class Module extends \application\discovery\module\course_results\Module
         return implode("\n", $html);
     }
 
-    static function get_course_parameters()
+    static function get_module_parameters()
     {
         $programme_id = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
@@ -225,7 +225,7 @@ class Module extends \application\discovery\module\course_results\Module
     function get_course_properties_table()
     {
         $course = DataManager :: get_instance($this->get_module_instance())->retrieve_course(
-                $this->get_course_parameters());
+                $this->get_module_parameters());
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         

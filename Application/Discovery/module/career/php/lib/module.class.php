@@ -4,13 +4,7 @@ namespace application\discovery\module\career;
 use common\libraries\Path;
 use common\libraries\Filesystem;
 use common\libraries\Request;
-use common\libraries\Theme;
-use common\libraries\SortableTableFromArray;
-use common\libraries\Translation;
-use common\libraries\PropertiesTable;
-use common\libraries\Display;
 use common\libraries\Application;
-use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 
 class Module extends \application\discovery\Module
@@ -34,9 +28,9 @@ class Module extends \application\discovery\Module
         parent :: __construct($application, $module_instance);
     }
 
-    function get_career_parameters()
+    function get_module_parameters()
     {
-        $parameter = self :: get_module_parameters();
+        $parameter = self :: module_parameters();
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
@@ -44,7 +38,7 @@ class Module extends \application\discovery\Module
         return $parameter;
     }
 
-    static function get_module_parameters()
+    static function module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $parameter = new Parameters();
@@ -63,14 +57,14 @@ class Module extends \application\discovery\Module
     {
         if (! isset($this->courses))
         {
-            $this->courses = $this->get_data_manager()->retrieve_courses($this->get_career_parameters());
+            $this->courses = $this->get_data_manager()->retrieve_courses($this->get_module_parameters());
         }
         return $this->courses;
     }
 
     function has_data($parameters = null)
     {
-        $parameters = $parameters ? $parameters : $this->get_career_parameters();
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_courses($parameters);
     }
 
@@ -82,70 +76,9 @@ class Module extends \application\discovery\Module
     {
         if (! isset($this->mark_moments))
         {
-            $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_career_parameters());
+            $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_module_parameters());
         }
         return $this->mark_moments;
-    }
-
-    /**
-     *
-     * @return multitype:multitype:string
-     */
-    function get_table_data()
-    {
-        $data = array();
-        
-        foreach ($this->courses as $course)
-        {
-            $row = array();
-            $row[] = $course->get_year();
-            $row[] = $course->get_name();
-            $data[] = $row;
-        }
-        
-        return $data;
-    }
-
-    /**
-     *
-     * @return multitype:string
-     */
-    function get_table_headers()
-    {
-        $headers = array();
-        $headers[] = array(Translation :: get('Year'), 'class="code"');
-        $headers[] = array(Translation :: get('Course'));
-        
-        foreach ($this->get_mark_moments() as $mark_moment)
-        {
-            $headers[] = array($mark_moment->get_name());
-        }
-        
-        return $headers;
-    }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery.Module::render()
-     */
-    function render()
-    {
-        $html = array();
-        
-        $table = new SortableTable($this->get_table_data());
-        
-        foreach ($this->get_table_headers() as $header_id => $header)
-        {
-            $table->set_header($header_id, $header[0], false);
-            
-            if ($header[1])
-            {
-                $table->getHeader()->setColAttributes($header_id, $header[1]);
-            }
-        }
-        
-        $html[] = $table->toHTML();
-        
-        return implode("\n", $html);
     }
 
     function get_type()
@@ -156,7 +89,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
