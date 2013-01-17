@@ -41,13 +41,13 @@ class Module extends \application\discovery\Module
     static function module_parameters()
     {
         $year = Request :: get(self :: PARAM_YEAR);
-        
+
         $parameter = new Parameters();
         if ($year)
         {
             $parameter->set_year($year);
         }
-        
+
         return $parameter;
     }
 
@@ -77,31 +77,6 @@ class Module extends \application\discovery\Module
         return $this->cache_faculties[$year];
     }
 
-    function has_faculties($year)
-    {
-        return count($this->get_faculties_data($year)) > 0;
-    }
-
-    function get_faculties_table($year)
-    {
-        $faculties = $this->get_faculties_data($year);
-        
-        $data = array();
-        
-        foreach ($faculties as $key => $faculty)
-        {
-            $row = array();
-            
-            $row[] = $faculty->get_name();
-            $data[] = $row;
-        }
-        
-        $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Name'), false);
-        
-        return $table;
-    }
-
     function get_years()
     {
         if (! isset($this->years))
@@ -109,39 +84,6 @@ class Module extends \application\discovery\Module
             $this->years = DataManager :: get_instance($this->get_module_instance())->retrieve_years();
         }
         return $this->years;
-    }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery\module\faculty\Module::render()
-     */
-    function render()
-    {
-        $html = array();
-        if (is_null(self :: module_parameters()->get_year()))
-        {
-            $years = $this->get_years();
-            $current_year = $years[0];
-        }
-        else
-        {
-            $current_year = self :: module_parameters()->get_year();
-        }
-        
-        $tabs = new DynamicVisualTabsRenderer('faculty_list', $this->get_faculties_table($current_year)->as_html());
-        
-        foreach ($this->get_years() as $year)
-        {
-            $parameters = self :: module_parameters();
-            $parameters->set_year($year);
-            $tabs->add_tab(
-                    new DynamicVisualTab($year, $year, null, 
-                            $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
-                            $current_year == $year));
-        }
-        
-        $html[] = $tabs->render();
-        
-        return implode("\n", $html);
     }
 
     function get_type()
@@ -152,7 +94,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
