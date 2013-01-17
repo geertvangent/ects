@@ -180,7 +180,8 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
         {
             BreadcrumbTrail :: get_instance()->add(
                     new Breadcrumb(null, Translation :: get('TypeName', null, $current_module_instance->get_type())));
-            $content = $current_module->render();
+            $content = RenditionImplementation :: launch($current_module, Rendition :: FORMAT_HTML,
+                    $view ? $view : Rendition :: VIEW_DEFAULT, $this);
         }
         $this->display_header();
         echo $content;

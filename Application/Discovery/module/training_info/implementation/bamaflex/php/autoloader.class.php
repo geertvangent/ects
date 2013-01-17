@@ -29,6 +29,10 @@ class Autoloader
          'SubTrajectoryCourse' => '/lib/sub_trajectory_course.class.php',
          'Trajectory' => '/lib/trajectory.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
+         'RenditionImplementation' => '/lib/rendition/rendition.class.php',
+         'HtmlDefaultRenditionImplementation' => '/lib/rendition/html/default.class.php',
+         'HtmlXlsxRenditionImplementation' => '/lib/rendition/html/xlsx.class.php',
+         'XlsxDefaultRenditionImplementation' => '/lib/rendition/xlsx/default.class.php',
          'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php',
          'RightsUserEntity' => '/lib/rights_entity/user.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php'
