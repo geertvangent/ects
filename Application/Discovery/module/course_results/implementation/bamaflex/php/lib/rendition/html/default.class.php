@@ -32,6 +32,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = $this->get_course_properties_table() . '</br>';
         $html[] = $this->get_course_results_table();
 
+        \application\discovery\HtmlDefaultRendition ::  add_export_action($this);
+
         return implode("\n", $html);
     }
 

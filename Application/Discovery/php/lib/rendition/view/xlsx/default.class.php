@@ -52,10 +52,18 @@ class XlsxDefaultRendition extends XlsxRendition
     {
         $php_excel->setActiveSheetIndex(0);
 
-        $user_id = $module->get_module_parameters()->get_user_id();
-        $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
+        if ($module->get_module_instance()->get_type() == \application\discovery\ModuleInstance :: TYPE_USER)
+        {
+            $user_id = $module->get_module_parameters()->get_user_id();
+            $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
 
-        $file_name = str_replace(' ', '_', $user->get_fullname()) . '_' . Translation :: get('TypeName', null, $module->get_module_instance()->get_type()) . '.xlsx';
+            $file_name = str_replace(' ', '_', $user->get_fullname()) . '_' . Translation :: get('TypeName', null,
+                    $module->get_module_instance()->get_type()) . '.xlsx';
+        }
+        else
+        {
+            $file_name = Translation :: get('TypeName', null, $module->get_module_instance()->get_type()) . '.xlsx';
+        }
 
         $file = Path :: get(SYS_ARCHIVE_PATH) . Filesystem :: create_unique_name(Path :: get(SYS_ARCHIVE_PATH),
                 $file_name);
