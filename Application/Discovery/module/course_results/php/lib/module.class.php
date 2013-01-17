@@ -4,17 +4,10 @@ namespace application\discovery\module\course_results;
 use common\libraries\Path;
 use common\libraries\Filesystem;
 use common\libraries\Request;
-use common\libraries\Theme;
-use common\libraries\SortableTableFromArray;
-use common\libraries\Translation;
-use common\libraries\PropertiesTable;
-use common\libraries\Display;
-use common\libraries\Application;
-use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
-use application\discovery\module\profile\DataManager;
+use application\discovery\module\course_results\DataManager;
 
-class Module extends \application\discovery\Module
+abstract class Module extends \application\discovery\Module
 {
     const PARAM_PROGRAMME_ID = 'programme_id';
 
@@ -29,11 +22,6 @@ class Module extends \application\discovery\Module
      * @var multitype:\application\discovery\module\course_results\MarkMoment
      */
     private $mark_moments;
-
-    function __construct(Application $application, ModuleInstance $module_instance)
-    {
-        parent :: __construct($application, $module_instance);
-    }
 
     function get_data_manager()
     {
@@ -53,8 +41,7 @@ class Module extends \application\discovery\Module
     {
         if (! isset($this->course_results))
         {
-            $this->course_results = $this->get_data_manager()->retrieve_course_results(
-                    $this->get_module_parameters());
+            $this->course_results = $this->get_data_manager()->retrieve_course_results($this->get_module_parameters());
         }
         return $this->course_results;
     }
@@ -67,71 +54,9 @@ class Module extends \application\discovery\Module
     {
         if (! isset($this->mark_moments))
         {
-            $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments(
-                    $this->get_module_parameters());
+            $this->mark_moments = $this->get_data_manager()->retrieve_mark_moments($this->get_module_parameters());
         }
         return $this->mark_moments;
-    }
-
-    /**
-     *
-     * @return multitype:multitype:string
-     */
-    function get_table_data()
-    {
-        $data = array();
-        
-        foreach ($this->courses as $course)
-        {
-            $row = array();
-            $row[] = $course->get_year();
-            $row[] = $course->get_name();
-            $data[] = $row;
-        }
-        
-        return $data;
-    }
-
-    /**
-     *
-     * @return multitype:string
-     */
-    function get_table_headers()
-    {
-        $headers = array();
-        $headers[] = array(Translation :: get('Year'), 'class="code"');
-        $headers[] = array(Translation :: get('Course'));
-        
-        foreach ($this->get_mark_moments() as $mark_moment)
-        {
-            $headers[] = array($mark_moment->get_name());
-        }
-        
-        return $headers;
-    }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery.Module::render()
-     */
-    function render()
-    {
-        $html = array();
-        
-        $table = new SortableTable($this->get_table_data());
-        
-        foreach ($this->get_table_headers() as $header_id => $header)
-        {
-            $table->set_header($header_id, $header[0], false);
-            
-            if ($header[1])
-            {
-                $table->getHeader()->setColAttributes($header_id, $header[1]);
-            }
-        }
-        
-        $html[] = $table->toHTML();
-        
-        return implode("\n", $html);
     }
 
     function get_type()
@@ -142,7 +67,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)

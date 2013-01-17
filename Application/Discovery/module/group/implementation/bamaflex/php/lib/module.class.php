@@ -1,27 +1,7 @@
 <?php
 namespace application\discovery\module\group\implementation\bamaflex;
 
-use common\libraries\PropertiesTable;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Breadcrumb;
 use common\libraries\Request;
-use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use common\libraries\Display;
-use common\libraries\DynamicContentTab;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\DynamicVisualTab;
-use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\ResourceManager;
-use common\libraries\Path;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\SortableTableFromArray;
-use common\libraries\Utilities;
-use common\libraries\DatetimeUtilities;
-use common\libraries\Translation;
-use application\discovery\LegendTable;
-use application\discovery\SortableTable;
-use application\discovery\module\enrollment\DataManager;
 
 class Module extends \application\discovery\module\group\Module
 {
@@ -46,7 +26,7 @@ class Module extends \application\discovery\module\group\Module
                     $groups[] = $group;
                 }
             }
-            
+
             $this->cache_groups[$type] = $groups;
         }
         return $this->cache_groups[$type];
@@ -64,172 +44,20 @@ class Module extends \application\discovery\module\group\Module
         }
     }
 
-    function get_groups_table($type)
-    {
-        $groups = $this->get_groups_data($type);
-        
-        $data = array();
-        
-        $data_source = $this->get_module_instance()->get_setting('data_source');
-        $group_user_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\group_user\implementation\bamaflex', 
-                array('data_source' => $data_source));
-        
-        foreach ($groups as $key => $group)
-        {
-            $row = array();
-            $row[] = $group->get_code();
-            $row[] = $group->get_description();
-            
-            if ($group_user_module_instance)
-            {
-                $parameters = new \application\discovery\module\group_user\implementation\bamaflex\Parameters(
-                        $group->get_type_id(), $group->get_source(), $group->get_type());
-                $url = $this->get_instance_url($group_user_module_instance->get_id(), $parameters);
-                $toolbar_item = new ToolbarItem(Translation :: get('Users'), 
-                        Theme :: get_image_path('application\discovery\module\group_user\implementation\bamaflex') . 'logo/16.png', 
-                        $url, ToolbarItem :: DISPLAY_ICON);
-                
-                $row[] = $toolbar_item->as_html();
-            }
-            else
-            {
-                $row[] = ' ';
-            }
-            
-            $data[] = $row;
-        }
-        
-        $table = new SortableTable($data);
-        
-        $table->set_header(0, Translation :: get('Code'), false);
-        $table->getHeader()->setColAttributes(0, 'class="code"');
-        
-        $table->set_header(1, Translation :: get('Description'), false);
-        
-        $table->set_header(2, ' ', false);
-        
-        return $table;
-    }
-    
-    /*
-     * (non-PHPdoc) @see application\discovery\module\group\Module::render()
-     */
-    function render()
-    {
-        // $entities = array();
-        // $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
-        // $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
-        //
-        // if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities,
-        // $this->get_module_instance()->get_id(), $this->get_module_parameters()))
-        // {
-        // Display :: not_allowed();
-        // }
-        //
-        $html = array();
-        
-        if ($this->has_groups())
-        {
-            $tabs = new DynamicTabsRenderer('group');
-            
-            if ($this->has_groups(Group :: TYPE_CLASS))
-            {
-                $tabs->add_tab(
-                        new DynamicContentTab(Group :: TYPE_CLASS, 
-                                Translation :: get(Group :: type_string(Group :: TYPE_CLASS)), 
-                                Theme :: get_image_path() . 'type/' . Group :: TYPE_CLASS . '.png', 
-                                $this->get_groups_table(Group :: TYPE_CLASS)->as_html()));
-            }
-            if ($this->has_groups(Group :: TYPE_CUSTOM))
-            {
-                $tabs->add_tab(
-                        new DynamicContentTab(Group :: TYPE_CUSTOM, 
-                                Translation :: get(Group :: type_string(Group :: TYPE_CUSTOM)), 
-                                Theme :: get_image_path() . 'type/' . Group :: TYPE_CUSTOM . '.png', 
-                                $this->get_groups_table(Group :: TYPE_CUSTOM)->as_html()));
-            }
-            if ($this->has_groups(Group :: TYPE_TRAINING))
-            {
-                $tabs->add_tab(
-                        new DynamicContentTab(Group :: TYPE_TRAINING, 
-                                Translation :: get(Group :: type_string(Group :: TYPE_TRAINING)), 
-                                Theme :: get_image_path() . 'type/' . Group :: TYPE_TRAINING . '.png', 
-                                $this->get_groups_table(Group :: TYPE_TRAINING)->as_html()));
-            }
-            $html[] = $this->get_training_properties_table() . '</br>';
-            
-            $html[] = $tabs->render();
-        }
-        else
-        {
-            $html[] = Display :: normal_message(Translation :: get('NoData'), true);
-        }
-        return implode("\n", $html);
-    }
-
-    static function get_training_parameters()
+    static function get_training_info_parameters()
     {
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
-        
+
         $parameter = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
         $parameter->set_training_id($training_id);
-        
+
         if ($source)
         {
             $parameter->set_source($source);
         }
-        
-        return $parameter;
-    }
 
-    function get_training_properties_table()
-    {
-        $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
-                $this->get_training_parameters());
-        
-        $data_source = $this->get_module_instance()->get_setting('data_source');
-        
-        $faculty_info_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\faculty_info\implementation\bamaflex', 
-                array('data_source' => $data_source));
-        
-        $html = array();
-        $properties = array();
-        $properties[Translation :: get('Year')] = $training->get_year();
-        
-        $history = array();
-        $trainings = $training->get_all($this->get_module_instance());
-        
-        foreach ($trainings as $training_history)
-        {
-            $parameters = new Parameters($training_history->get_id(), $training_history->get_source());
-            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-            $history[] = '<a href="' . $link . '">' . $training_history->get_year() . '</a>';
-        }
-        $properties[Translation :: get('History')] = implode('  |  ', $history);
-        
-        if ($faculty_info_module_instance)
-        {
-            $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
-                    $training->get_faculty_id(), $training->get_source());
-            $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
-            $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $training->get_faculty() . '</a>';
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $training->get_faculty()));
-        }
-        else
-        {
-            $properties[Translation :: get('Faculty')] = $training->get_faculty();
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
-        }
-        
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
-        
-        $table = new PropertiesTable($properties);
-        
-        $html[] = $table->toHtml();
-        return implode("\n", $html);
+        return $parameter;
     }
 }
 ?>

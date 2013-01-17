@@ -1,6 +1,14 @@
 <?php
 namespace application\discovery\module\group\implementation\bamaflex;
 
+use common\libraries\AndCondition;
+
+use common\libraries\Utilities;
+
+use application\discovery\data_source\bamaflex\History;
+
+use common\libraries\EqualityCondition;
+
 use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\group\DataManagerInterface;
 use application\discovery\module\training\implementation\bamaflex\Training;
@@ -20,14 +28,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $training_id = $parameters->get_training_id();
         $source = $parameters->get_source();
-        
+
         if (! isset($this->groups[$training_id]))
         {
             $query = 'SELECT * FROM v_discovery_group_advanced WHERE training_id = "' . $training_id . '" AND source = "' . $source . '" ORDER BY description';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -41,12 +49,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $group->set_description($this->convert_to_utf8($result->description));
                     $group->set_type($result->type);
                     $group->set_type_id($result->type_id);
-                    
+
                     $this->groups[$training_id][] = $group;
                 }
             }
         }
-        
+
         return $this->groups[$training_id];
     }
 
@@ -54,14 +62,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->trainings[$training_id][$source]))
         {
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE id = "' . $training_id . '" AND source = "' . $source . '"';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -82,24 +90,73 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $training->set_faculty($result->faculty);
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-                    
-                    $reference = new HistoryReference();
-                    $reference->set_id($result->previous_id);
-                    $reference->set_source($result->previous_source);
-                    $training->add_previous_reference($reference);
-                    
-                    $next = $this->retrieve_training_next_id($training);
-                    
-                    $reference = new HistoryReference();
-                    $reference->set_id($next->id);
-                    $reference->set_source($next->source);
-                    $training->add_next_reference($reference);
-                    
+
+                    $conditions = array();
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $training->get_id());
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $training->get_source());
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE,
+                            Utilities :: get_namespace_from_object($training));
+                    $condition = new AndCondition($conditions);
+
+                    $histories = \application\discovery\data_source\bamaflex\DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
+
+                    if ($histories->size() > 0)
+                    {
+                        while ($history = $histories->next_result())
+                        {
+                            $reference = new HistoryReference();
+                            $reference->set_id($history->get_previous_id());
+                            $reference->set_source($history->get_previous_source());
+                            $training->add_previous_reference($reference);
+                        }
+                    }
+                    else
+                    {
+                        if ($result->previous_id)
+                        {
+                            $reference = new HistoryReference();
+                            $reference->set_id($result->previous_id);
+                            $reference->set_source($result->previous_source);
+                            $training->add_previous_reference($reference);
+                        }
+                    }
+
+                    $conditions = array();
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $training->get_id());
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $training->get_source());
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE,
+                            Utilities :: get_namespace_from_object($training));
+                    $condition = new AndCondition($conditions);
+
+                    $histories = \application\discovery\data_source\bamaflex\DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    if ($histories->size() > 0)
+                    {
+                        while ($history = $histories->next_result())
+                        {
+                            $reference = new HistoryReference();
+                            $reference->set_id($history->get_history_id());
+                            $reference->set_source($history->get_history_source());
+                            $training->add_next_reference($reference);
+                        }
+                    }
+                    else
+                    {
+                        $next = $this->retrieve_training_next_id($training);
+
+                        if ($next)
+                        {
+                            $reference = new HistoryReference();
+                            $reference->set_id($next->id);
+                            $reference->set_source($next->source);
+                            $training->add_next_reference($reference);
+                        }
+                    }
+
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-        
+
         return $this->trainings[$training_id][$source];
     }
 
@@ -108,7 +165,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             return $results->fetchRow(MDB2_FETCHMODE_OBJECT);

@@ -148,7 +148,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @return string
      */
-    static 
+    static
 
     function bama_type_string($bama_type)
     {
@@ -403,7 +403,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @param multitype:string $extended_property_names
      */
-    static 
+    static
 
     function get_default_property_names($extended_property_names = array())
     {
@@ -421,7 +421,7 @@ class Training extends \application\discovery\module\training\Training
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_ID;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -439,7 +439,7 @@ class Training extends \application\discovery\module\training\Training
         $current_date = time();
         $start_date = strtotime($this->get_start_date());
         $end_date = strtotime($this->get_end_date());
-        
+
         if ($current_date >= $start_date && $current_date <= $end_date)
         {
             return true;
@@ -466,13 +466,13 @@ class Training extends \application\discovery\module\training\Training
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
                 $parameters->set_training_id($previous_reference->get_id());
                 $parameters->set_source($previous_reference->get_source());
-                
+
                 $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
                 if ($training instanceof Training)
                 {
                     $trainings[$training->get_year()][] = $training;
                 }
-                
+
                 if ($training->has_next_references(true) && $this->has_previous_references(true) && $recursive)
                 {
                     $trainings = array_merge_recursive($trainings, $training->get_previous($module_instance));
@@ -491,7 +491,7 @@ class Training extends \application\discovery\module\training\Training
     function get_next($module_instance, $recursive = true)
     {
         $trainings = array();
-        
+
         if ($this->has_next_references())
         {
             foreach ($this->get_next_references() as $next_reference)
@@ -499,13 +499,14 @@ class Training extends \application\discovery\module\training\Training
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
                 $parameters->set_training_id($next_reference->get_id());
                 $parameters->set_source($next_reference->get_source());
-                
+
                 $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
+
                 if ($training instanceof Training)
                 {
                     $trainings[$training->get_year()][] = $training;
                 }
-                
+
                 if ($training->has_previous_references(true) && $this->has_next_references(true) && $recursive)
                 {
                     $trainings = array_merge_recursive($trainings, $training->get_next($module_instance));
@@ -525,9 +526,9 @@ class Training extends \application\discovery\module\training\Training
         $trainings = $this->get_next($module_instance);
         $trainings[$this->get_year()][] = $this;
         $trainings = array_merge_recursive($trainings, $this->get_previous($module_instance));
-        
+
         ksort($trainings);
-        
+
         return $trainings;
     }
 

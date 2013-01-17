@@ -27,6 +27,11 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
         }
     }
 
+    function get_data_manager()
+    {
+        return $this->get_module()->get_data_manager();
+    }
+
     function get_module_instance()
     {
         return $this->get_module()->get_module_instance();
