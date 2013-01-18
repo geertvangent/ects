@@ -7,6 +7,7 @@ abstract class Rendition
 {
     const FORMAT_HTML = 'html';
     const FORMAT_XLSX = 'xlsx';
+    const FORMAT_ZIP = 'zip';
     const VIEW_DEFAULT = 'default';
 
     private $rendition_implementation;

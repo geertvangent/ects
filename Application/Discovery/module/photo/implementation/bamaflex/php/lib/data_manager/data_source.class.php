@@ -16,26 +16,26 @@ use MDB2_Error;
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
 
-    function retrieve_photo($id)
+    function retrieve_photo($id, $web = true)
     {
         $relative_path = 'photo/' . Text :: char_at($id, 0) . '/' . $id . '.jpg';
         $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
-        
+
         if (! file_exists($path))
         {
             $query = 'SELECT * FROM v_discovery_profile_photo WHERE id = "' . $id . '"';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $result = $statement->execute();
-            
+
             if (! $result instanceof MDB2_Error)
             {
                 $object = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
-                
+
                 if (! empty($object->photo))
                 {
                     Filesystem :: write_to_file($path, $object->photo);
-                    
+
                     $image_manipulation = ImageManipulation :: factory($path);
                     $image_manipulation->scale(600, 600, ImageManipulation :: SCALE_INSIDE);
                     $image_manipulation->write_to_file($path);
@@ -50,8 +50,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 Filesystem :: copy_file(Theme :: get_common_image_system_path() . 'unknown.jpg', $path);
             }
         }
-        
-        return Path :: get(WEB_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
+
+        return Path :: get($web ? WEB_FILE_PATH : SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
     }
 
     function retrieve_faculty($faculty_id)
@@ -62,20 +62,20 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             if (! isset($this->faculties[$faculty_id][$source]))
             {
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE id = "' . $faculty_id . '" AND source = "' . $source . '"';
-                
+
                 $statement = $this->get_connection()->prepare($query);
                 $results = $statement->execute();
-                
+
                 if (! $results instanceof MDB2_Error)
                 {
                     $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-                    
+
                     $faculty = new Faculty();
                     $faculty->set_source($result->source);
                     $faculty->set_id($result->id);
                     $faculty->set_name($this->convert_to_utf8($result->name));
                     $faculty->set_year($this->convert_to_utf8($result->year));
-                    
+
                     $this->faculties[$faculty_id][$source] = $faculty;
                 }
             }
@@ -90,14 +90,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function retrieve_training($training_id)
     {
         $source = 1;
-        
+
         if (! isset($this->trainings[$training_id][$source]))
         {
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE id = "' . $training_id . '" AND source = "' . $source . '"';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -118,19 +118,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $training->set_faculty($this->convert_to_utf8($result->faculty));
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-                    
+
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-        
+
         return $this->trainings[$training_id][$source];
     }
 
     function retrieve_programme($programme_id)
     {
         $source = 1;
-        
+
         if (! isset($this->course[$programme_id][$source]))
         {
             $query = 'SELECT * FROM v_discovery_course_advanced ';
@@ -140,7 +140,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             if (! $results instanceof MDB2_Error)
             {
                 $object = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-                
+
                 if ($object instanceof \stdClass)
                 {
                     $course = new Course();
@@ -170,7 +170,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $course->set_jury($object->jury);
                     $course->set_repleacable($object->repleacable);
                     $course->set_training_unit($this->convert_to_utf8($object->training_unit));
-                    
+
                     $this->course[$programme_id][$source] = $course;
                 }
             }

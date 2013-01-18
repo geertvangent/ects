@@ -19,6 +19,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $parameters[\application\discovery\DiscoveryManager :: PARAM_MODULE_ID] = Request :: get(
                 \application\discovery\DiscoveryManager :: PARAM_MODULE_ID);
 
+        \application\discovery\HtmlDefaultRendition ::  add_export_action($this, \application\discovery\HtmlRendition :: VIEW_ZIP);
+
         $table = new GalleryBrowserTable($this, $parameters, $this->get_module()->get_condition());
         return $table->as_html();
     }
