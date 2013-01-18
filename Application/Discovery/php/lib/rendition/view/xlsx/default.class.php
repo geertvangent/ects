@@ -48,33 +48,47 @@ class XlsxDefaultRendition extends XlsxRendition
      * @param \PHPExcel $php_excel
      * @param string $type
      */
-    static function save(\PHPExcel $php_excel, $module)
+    static function save(\PHPExcel $php_excel, $module, $file_name = null)
     {
         $php_excel->setActiveSheetIndex(0);
 
-        if ($module->get_module_instance()->get_type() == \application\discovery\ModuleInstance :: TYPE_USER)
+        if ($file_name)
         {
-            $user_id = $module->get_module_parameters()->get_user_id();
-            $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
-
-            $file_name = str_replace(' ', '_', $user->get_fullname()) . '_' . Translation :: get('TypeName', null,
-                    $module->get_module_instance()->get_type()) . '.xlsx';
+            $file_name = $file_name . '.xlsx';
         }
         else
         {
-            $file_name = Translation :: get('TypeName', null, $module->get_module_instance()->get_type()) . '.xlsx';
+            if ($module->get_module_instance()->get_content_type() == \application\discovery\ModuleInstance :: TYPE_USER)
+            {
+                $user_id = $module->get_module_parameters()->get_user_id();
+                $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
+
+                $file_name = $user->get_fullname() . ' ' . Translation :: get('TypeName', null,
+                        $module->get_module_instance()->get_type()) . '.xlsx';
+            }
+            else
+            {
+                $file_name = Translation :: get('TypeName', null, $module->get_module_instance()->get_type()) . '.xlsx';
+            }
         }
 
-        $file = Path :: get(SYS_ARCHIVE_PATH) . Filesystem :: create_unique_name(Path :: get(SYS_ARCHIVE_PATH),
-                $file_name);
+        $path = Path :: get_temp_path($module->get_module_instance()->get_type()) . 'xlsx/';
+        $file = $path . Filesystem :: create_unique_name($path, $file_name);
 
-        $php_excel_writer = \PHPExcel_IOFactory :: createWriter($php_excel, 'Excel2007');
-        $php_excel_writer->save($file);
+        if (Filesystem :: create_dir($path))
+        {
+            $php_excel_writer = \PHPExcel_IOFactory :: createWriter($php_excel, 'Excel2007');
+            $php_excel_writer->save($file);
 
-        $php_excel->disconnectWorksheets();
-        unset($php_excel);
+            $php_excel->disconnectWorksheets();
+            unset($php_excel);
 
-        return $file;
+            return $file;
+        }
+        else
+        {
+            throw new \Exception(Translation :: get('PathNotCreated', array('PATH' => $path)));
+        }
     }
 }
 ?>

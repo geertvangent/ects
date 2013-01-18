@@ -55,11 +55,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
 
             $html[] = $tabs->render();
+
+            \application\discovery\HtmlDefaultRendition :: add_export_action($this);
         }
         else
         {
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
+
         return implode("\n", $html);
     }
 

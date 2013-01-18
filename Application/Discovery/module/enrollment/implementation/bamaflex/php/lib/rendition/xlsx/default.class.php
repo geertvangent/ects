@@ -92,7 +92,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $headers[] = Translation :: get('Contract');
         }
 
-        $headers[] = Translation :: get('Result');
+        $headers[] = Translation :: get('ResultType');
         $headers[] = Translation :: get('GenerationStudent');
 
         \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);

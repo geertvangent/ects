@@ -1,6 +1,7 @@
 <?php
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
+use application\discovery\module\course_results\DataManager;
 use common\libraries\Translation;
 use common\libraries\StringUtilities;
 use common\libraries\Display;
@@ -35,7 +36,17 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
         $this->process_course_results();
 
-        return \application\discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \application\discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module(),
+                $this->get_file_name());
+    }
+
+    function get_file_name()
+    {
+        $course = DataManager :: get_instance($this->get_module_instance())->retrieve_course(
+                Module :: get_course_parameters());
+
+        return $course->get_name() . ' ' . Translation :: get('TypeName', null,
+                $this->get_module_instance()->get_type()) . ' ' . $course->get_year();
     }
 
     function process_course_results()
@@ -48,14 +59,16 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('LastName');
         $headers[] = Translation :: get('FirstName');
         $headers[] = Translation :: get('TrajectoryType');
-        $headers[] = Translation :: get('FirstMark');
-        $headers[] = Translation :: get('FirstMarkStatus');
-        $headers[] = Translation :: get('SecondMark');
-        $headers[] = Translation :: get('SecondMarkStatus');
+
+        foreach ($this->get_mark_moments() as $mark_moment)
+        {
+            $headers[] = $mark_moment->get_name();
+            $headers[] = Translation :: get('MarkStatus', array('TRY' => $mark_moment->get_name()));
+        }
 
         $this->php_excel->getActiveSheet()->getStyle(
                 'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
-                        \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
+                \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
 
         \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
 
@@ -83,10 +96,14 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row,
                             StringUtilities :: transcode_string($mark->get_visual_result()));
                 }
-                else
+                elseif ($mark->get_sub_status())
                 {
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row,
                             StringUtilities :: transcode_string($mark->get_sub_status()));
+                }
+                else
+                {
+                    $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row, '-');
                 }
 
                 if ($mark->get_status())

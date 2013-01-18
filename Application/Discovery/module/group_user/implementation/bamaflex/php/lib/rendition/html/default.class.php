@@ -21,11 +21,23 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     function render()
     {
+        $entities = array();
+        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
+        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
+
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities,
+                $this))
+        {
+            Display :: not_allowed();
+        }
+
         $html = array();
         $html[] = $this->get_group_properties_table();
         if (count($this->get_group_user()) > 0)
         {
             $html[] = $this->get_group_user_table();
+
+            \application\discovery\HtmlDefaultRendition ::  add_export_action($this);
         }
         else
         {
