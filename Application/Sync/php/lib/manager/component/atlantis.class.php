@@ -21,4 +21,3 @@ class AtlantisComponent extends Manager implements DelegateComponent
     }
 
 }
-?>

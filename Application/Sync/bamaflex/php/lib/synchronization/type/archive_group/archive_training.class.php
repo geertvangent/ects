@@ -5,7 +5,6 @@ namespace application\ehb_sync\bamaflex;
  * @package ehb.sync;
  */
 
-use common\libraries\Utilities;
 
 abstract class ArchiveTrainingGroupSynchronization extends ArchiveGroupSynchronization
 {
@@ -49,4 +48,3 @@ abstract class ArchiveTrainingGroupSynchronization extends ArchiveGroupSynchroni
         return $this->get_synchronization();
     }
 }
-?>

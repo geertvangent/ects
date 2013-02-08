@@ -20,4 +20,3 @@ class CasComponent extends Manager implements DelegateComponent
         \application\ehb_sync\cas\Manager :: launch($this);
     }
 }
-?>

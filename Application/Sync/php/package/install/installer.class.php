@@ -27,4 +27,3 @@ class Installer extends WebApplicationInstaller
         return $installers;
     }
 }
-?>

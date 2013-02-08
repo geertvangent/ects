@@ -9,7 +9,7 @@ namespace application\ehb_sync\bamaflex;
 class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'MA';
-    
+
     const RESULT_PROPERTY_TRAJECTORY = 'name';
     const RESULT_PROPERTY_TRAJECTORY_ID = 'id';
 
@@ -31,11 +31,11 @@ class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupS
     function get_children()
     {
         $trajectory = $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
-        
+
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_sub_trajectory_basic] WHERE trajectory_id = ' . $trajectory;
-        
+
         $trajectories = $this->get_result($query);
-        
+
         $children = array();
         while ($trajectory = $trajectories->next_result(false))
         {
@@ -44,4 +44,3 @@ class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupS
         return $children;
     }
 }
-?>

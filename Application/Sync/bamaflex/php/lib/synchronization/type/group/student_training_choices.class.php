@@ -33,4 +33,3 @@ class StudentTrainingChoicesGroupSynchronization extends GroupSynchronization
         return $children;
     }
 }
-?>

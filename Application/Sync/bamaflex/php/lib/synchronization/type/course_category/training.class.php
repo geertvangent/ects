@@ -6,12 +6,11 @@ namespace application\ehb_sync\bamaflex;
  * @package ehb.sync;
  */
 
-use common\libraries\Utilities;
 
 class TrainingCourseCategorySynchronization extends CourseCategorySynchronization
 {
     CONST IDENTIFIER = 'TRA';
-    
+
     const RESULT_PROPERTY_TRAINING = 'name';
     const RESULT_PROPERTY_TRAINING_ID = 'id';
 
@@ -34,4 +33,3 @@ class TrainingCourseCategorySynchronization extends CourseCategorySynchronizatio
         return $this->get_parameter(self :: RESULT_PROPERTY_TRAINING);
     }
 }
-?>

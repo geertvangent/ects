@@ -18,13 +18,13 @@ class BrowserComponent extends Manager implements DelegateComponent
     function run()
     {
         $this->display_header();
-        
+
         $types = array(self :: ACTION_DISCOVERY);
-        
+
         $html = array();
         foreach ($types as $type)
         {
-            
+
             $html[] = '<a href="' . $this->get_url(array(self :: PARAM_ACTION => $type)) . '">';
             $html[] = '<div class="create_block" style="background-image: url(' . Theme :: get_image_path() . 'component/' . $type . '.png);">';
             $html[] = Translation :: get(Utilities :: underscores_to_camelcase($type) . 'Component');
@@ -32,9 +32,8 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</a>';
         }
         echo implode("\n", $html);
-        
+
         $this->display_footer();
     }
 
 }
-?>

@@ -16,4 +16,3 @@ class Mdb2DataManager extends Mdb2Database implements DataManagerInterface
         $this->set_prefix('');
     }
 }
-?>

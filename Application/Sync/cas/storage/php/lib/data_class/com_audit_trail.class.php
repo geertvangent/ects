@@ -170,4 +170,3 @@ class ComAuditTrail extends DataClass
         return strtoupper(parent :: get_table_name());
     }
 }
-?>

@@ -16,4 +16,3 @@ class Installer extends \common\libraries\package\Installer
         parent :: __construct($values);
     }
 }
-?>

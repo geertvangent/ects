@@ -8,4 +8,3 @@ namespace application\ehb_sync\cas;
 interface DataManagerInterface extends \common\libraries\DataManagerInterface
 {
 }
-?>

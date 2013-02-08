@@ -111,4 +111,3 @@ class StatisticsComponent extends Manager implements DelegateComponent
         }
     }
 }
-?>

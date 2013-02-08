@@ -5,14 +5,12 @@ use user\User;
 
 use common\libraries\InCondition;
 
-use user\UserDataManager;
 
 use group\GroupRelUser;
 use group\GroupDataManager;
 use group\Group;
 
 use common\libraries\EqualityCondition;
-use common\libraries\Filesystem;
 use common\libraries\Utilities;
 use common\libraries\AndCondition;
 
@@ -28,25 +26,25 @@ class GroupSynchronization extends Synchronization
      * @var Synchronization
      */
     private $synchronization;
-    
+
     /**
      *
      * @var array
      */
     private $parameters;
-    
+
     /**
      *
      * @var Group
      */
     private $parent_group;
-    
+
     /**
      *
      * @var Group
      */
     private $current_group;
-    
+
     static $official_code_cache;
 
     function __construct(GroupSynchronization $synchronization, $parameters)
@@ -62,7 +60,7 @@ class GroupSynchronization extends Synchronization
         $this->synchronize();
         $this->synchronize_users();
         $children = $this->get_children();
-        
+
         foreach ($children as $child)
         {
             $child->run();
@@ -76,9 +74,9 @@ class GroupSynchronization extends Synchronization
      *
      * ..
      *
-     * @param $type string           
-     * @param $synchronization GroupSynchronization           
-     * @param $parameters array           
+     * @param $type string
+     * @param $synchronization GroupSynchronization
+     * @param $parameters array
      * @return GroupSynchronization
      */
     static function factory($type, GroupSynchronization $synchronization, $parameters = array())
@@ -117,7 +115,7 @@ class GroupSynchronization extends Synchronization
 
     /**
      *
-     * @param $group Group           
+     * @param $group Group
      */
     function set_current_group(Group $group)
     {
@@ -153,7 +151,7 @@ class GroupSynchronization extends Synchronization
 
     /**
      *
-     * @param $key string           
+     * @param $key string
      * @return string
      */
     function get_parameter($key)
@@ -170,14 +168,14 @@ class GroupSynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
-            
+
             $this->current_group = new Group();
             $this->current_group->set_name($name);
             $this->current_group->set_description($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
             $this->current_group->create();
-            
+
             self :: log('added', $this->current_group->get_name());
             flush();
         }
@@ -191,7 +189,7 @@ class GroupSynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-        
+
         return $this->current_group;
     }
 
@@ -205,7 +203,7 @@ class GroupSynchronization extends Synchronization
         //         $source_users = array();
         $to_add = array_diff($source_users, $current_users);
         $to_delete = array_diff($current_users, $source_users);
-        
+
         foreach ($to_add as $user_id)
         {
             $relation = new GroupRelUser();
@@ -213,12 +211,12 @@ class GroupSynchronization extends Synchronization
             $relation->set_user_id($user_id);
             $relation->create();
         }
-        
+
         $conditions = array();
         $conditions[] = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
         $conditions[] = new InCondition(GroupRelUser :: PROPERTY_USER_ID, $to_delete);
         $condition = new AndCondition($conditions);
-        
+
         return $group_data_manager->delete(GroupRelUser :: get_table_name(), $condition);
     }
 
@@ -253,7 +251,7 @@ class GroupSynchronization extends Synchronization
                     $user_ids[] = self :: $official_code_cache[$code];
                 }
             }
-            
+
             if (count($result_codes) > 0)
             {
                 $results = \user\DataManager :: retrieve_users_by_official_codes($result_codes);
@@ -264,8 +262,7 @@ class GroupSynchronization extends Synchronization
                 }
             }
         }
-        
+
         return $user_ids;
     }
 }
-?>

@@ -254,4 +254,3 @@ class Statistic extends DataClass
         return 'statistics';
     }
 }
-?>

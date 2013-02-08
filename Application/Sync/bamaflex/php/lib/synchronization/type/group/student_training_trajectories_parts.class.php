@@ -39,4 +39,3 @@ class StudentTrainingTrajectoriesPartsGroupSynchronization extends GroupSynchron
         return $children;
     }
 }
-?>

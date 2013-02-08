@@ -1,9 +1,7 @@
 <?php
 namespace application\ehb_sync\cas;
 
-use common\libraries\PlatformSetting;
 
-use common\libraries\Mdb2ResultSet;
 use common\libraries\Utilities;
 
 abstract class Synchronization
@@ -11,7 +9,7 @@ abstract class Synchronization
 
     /**
      *
-     * @param $type string           
+     * @param $type string
      * @return Synchronization
      */
     static function factory($type)
@@ -27,8 +25,8 @@ abstract class Synchronization
 
     /**
      *
-     * @param $type string           
-     * @param $message string           
+     * @param $type string
+     * @param $message string
      */
     static function log($type, $message)
     {

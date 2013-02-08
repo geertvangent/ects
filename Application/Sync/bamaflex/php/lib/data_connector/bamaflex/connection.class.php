@@ -70,4 +70,3 @@ class BamaflexConnection extends \common\libraries\Mdb2Connection
         $this->connection->setOption($option, $value);
     }
 }
-?>

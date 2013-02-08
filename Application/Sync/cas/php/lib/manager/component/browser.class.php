@@ -37,4 +37,3 @@ class BrowserComponent extends Manager implements DelegateComponent
     }
 
 }
-?>

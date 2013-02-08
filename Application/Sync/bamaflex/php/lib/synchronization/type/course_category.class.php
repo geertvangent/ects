@@ -18,25 +18,25 @@ class CourseCategorySynchronization extends Synchronization
      * @var Synchronization
      */
     private $synchronization;
-    
+
     /**
      *
      * @var array
      */
     private $parameters;
-    
+
     /**
      *
      * @var Group
      */
     private $parent_group;
-    
+
     /**
      *
      * @var Group
      */
     private $current_group;
-    
+
     static $official_code_cache;
 
     function __construct(CourseCategorySynchronization $synchronization, $parameters)
@@ -51,7 +51,7 @@ class CourseCategorySynchronization extends Synchronization
     {
         $this->synchronize();
         $children = $this->get_children();
-        
+
         foreach ($children as $child)
         {
             $child->run();
@@ -60,9 +60,9 @@ class CourseCategorySynchronization extends Synchronization
 
     /**
      *
-     * @param $type string           
-     * @param $synchronization GroupSynchronization           
-     * @param $parameters array           
+     * @param $type string
+     * @param $synchronization GroupSynchronization
+     * @param $parameters array
      * @return GroupSynchronization
      */
     static function factory($type, CourseCategorySynchronization $synchronization, $parameters = array())
@@ -99,7 +99,7 @@ class CourseCategorySynchronization extends Synchronization
 
     /**
      *
-     * @param $group Group           
+     * @param $group Group
      */
     function set_current_group(CourseCategory $group)
     {
@@ -135,7 +135,7 @@ class CourseCategorySynchronization extends Synchronization
 
     /**
      *
-     * @param $key string           
+     * @param $key string
      * @return string
      */
     function get_parameter($key)
@@ -152,14 +152,14 @@ class CourseCategorySynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
-            
+
             $this->current_group = new CourseCategory();
             $this->current_group->set_name($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
-            
+
             $this->current_group->create();
-            
+
             self :: log('added', $this->current_group->get_name());
             flush();
         }
@@ -172,7 +172,7 @@ class CourseCategorySynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-        
+
         return $this->current_group;
     }
 
@@ -185,4 +185,3 @@ class CourseCategorySynchronization extends Synchronization
         return array();
     }
 }
-?>

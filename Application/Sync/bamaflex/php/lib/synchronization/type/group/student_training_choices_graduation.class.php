@@ -9,7 +9,7 @@ namespace application\ehb_sync\bamaflex;
 class StudentTrainingChoicesGraduationGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'GR';
-    
+
     const RESULT_PROPERTY_CHOICE_GRADUATION = 'name';
     const RESULT_PROPERTY_CHOICE_GRADUATION_ID = 'id';
 
@@ -31,16 +31,15 @@ class StudentTrainingChoicesGraduationGroupSynchronization extends GroupSynchron
     function get_user_official_codes()
     {
         $user_mails = array();
-        
+
         $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE major_id = "' . $this->get_parameter(self :: RESULT_PROPERTY_CHOICE_GRADUATION_ID) . '" AND type = 1 AND result != 8';
         $users = $this->get_result($query);
-        
+
         while ($user = $users->next_result(false))
         {
             $user_mails[] = $user['person_id'];
         }
-        
+
         return $user_mails;
     }
 }
-?>

@@ -31,4 +31,3 @@ class ArchiveGroupsComponent extends Manager implements DelegateComponent
     }
 
 }
-?>

@@ -134,4 +134,3 @@ class DiscoveryComponent extends Manager implements DelegateComponent
     }
 
 }
-?>

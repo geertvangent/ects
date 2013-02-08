@@ -6,11 +6,7 @@ namespace application\ehb_sync\bamaflex;
  * @package ehb.sync;
  */
 
-use group\GroupDataManager;
-use group\Group;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
 
 class ArchiveUserTypeGuestTeacherGroupSynchronization extends ArchiveGroupSynchronization
 {
@@ -47,4 +43,3 @@ class ArchiveUserTypeGuestTeacherGroupSynchronization extends ArchiveGroupSynchr
         return $user_mails;
     }
 }
-?>

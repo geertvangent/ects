@@ -43,4 +43,3 @@ class StudentTrainingTrajectoriesPartGroupSynchronization extends GroupSynchroni
         return $user_mails;
     }
 }
-?>

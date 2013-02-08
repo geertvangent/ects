@@ -28,9 +28,9 @@ class StudentTrainingChoicesCombinationsGroupSynchronization extends GroupSynchr
     function get_children()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_choice_option_basic] WHERE training_id = ' . $this->get_choices()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
-        
+
         $combinations = $this->get_result($query);
-        
+
         $children = array();
         while ($combination = $combinations->next_result(false))
         {
@@ -39,4 +39,3 @@ class StudentTrainingChoicesCombinationsGroupSynchronization extends GroupSynchr
         return $children;
     }
 }
-?>

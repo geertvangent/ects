@@ -7,20 +7,13 @@ use common\libraries\Filesystem;
  * @package ehb.sync;
  */
 
-use common\libraries\AndCondition;
 
-use common\libraries\OrCondition;
 
-use common\libraries\PatternMatchCondition;
 
-use common\libraries\ObjectTableOrder;
 
-use common\libraries\EqualityCondition;
 
-use common\libraries\NotCondition;
 
 use user\User;
-use user\UserDataManager;
 
 class DocUserSynchronization extends UserSynchronization
 {
@@ -48,4 +41,3 @@ class DocUserSynchronization extends UserSynchronization
         }
     }
 }
-?>

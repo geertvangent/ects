@@ -6,11 +6,7 @@ namespace application\ehb_sync\bamaflex;
  * @package ehb.sync;
  */
 
-use group\GroupDataManager;
-use group\Group;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
 
 class UserTypeTeacherGroupSynchronization extends GroupSynchronization
 {
@@ -36,7 +32,7 @@ class UserTypeTeacherGroupSynchronization extends GroupSynchronization
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_basic] WHERE faculty_id = ' . $this->get_synchronization()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);
 
         $trainings = $this->get_result($query);
-        
+
         $children = array();
         while ($training = $trainings->next_result(false))
         {
@@ -45,4 +41,3 @@ class UserTypeTeacherGroupSynchronization extends GroupSynchronization
         return $children;
     }
 }
-?>

@@ -5,11 +5,7 @@ namespace application\ehb_sync\bamaflex;
  * @package ehb.sync;
  */
 
-use group\GroupDataManager;
-use group\Group;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
 
 class AcademicYearExtraGroupSynchronization extends GroupSynchronization
 {
@@ -33,4 +29,3 @@ class AcademicYearExtraGroupSynchronization extends GroupSynchronization
         return $children;
     }
 }
-?>

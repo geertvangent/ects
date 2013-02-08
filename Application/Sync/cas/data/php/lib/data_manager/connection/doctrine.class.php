@@ -6,7 +6,6 @@ use common\libraries\PlatformSetting;
 use common\libraries\Path;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Common\ClassLoader;
-use Exception;
 
 /**
  * This class represents the current CAS Account database connection.
@@ -103,4 +102,3 @@ class DoctrineConnection extends \common\libraries\DoctrineConnection
         $this->connection->setOption($option, $value);
     }
 }
-?>

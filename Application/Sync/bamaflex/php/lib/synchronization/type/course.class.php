@@ -2,15 +2,11 @@
 namespace application\ehb_sync\bamaflex;
 
 use application\weblcms\course\CourseGroupRelation;
-use common\libraries\EqualityCondition;
-use application\weblcms\course\CourseDataManager;
 use application\weblcms\CourseManagementRights;
 use application\weblcms\CourseSettingsConnector;
 use application\weblcms\CourseSettingsController;
-use application\weblcms\CourseCategory;
 use application\weblcms\course\Course;
 use application\weblcms\WeblcmsDataManager;
-use common\libraries\Utilities;
 
 /**
  *
@@ -134,4 +130,3 @@ class CourseSynchronization extends Synchronization
         }
     }
 }
-?>

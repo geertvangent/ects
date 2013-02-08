@@ -30,4 +30,3 @@ class ArchiveStudentTrainingGroupSynchronization extends ArchiveTrainingGroupSyn
         return $user_mails;
     }
 }
-?>

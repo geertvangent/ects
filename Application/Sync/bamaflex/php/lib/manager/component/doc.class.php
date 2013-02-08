@@ -23,4 +23,3 @@ class DocComponent extends Manager implements DelegateComponent
     }
 
 }
-?>

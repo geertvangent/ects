@@ -8,7 +8,7 @@ namespace application\ehb_sync\bamaflex;
 
 class StudentTrainingGroupSynchronization extends TrainingGroupSynchronization
 {
-    
+
     /*
      * (non-PHPdoc) @see
      * application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
@@ -27,4 +27,3 @@ class StudentTrainingGroupSynchronization extends TrainingGroupSynchronization
         return $children;
     }
 }
-?>

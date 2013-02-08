@@ -1,10 +1,7 @@
 <?php
 namespace application\ehb_sync\cas;
 
-use user\User;
-use user\UserDataManager;
 
-use common\libraries\Filesystem;
 use common\libraries\Utilities;
 
 /**
@@ -37,7 +34,7 @@ class UserSynchronization extends Synchronization
         $types = array();
         $types[] = 'create';
         $types[] = 'update';
-        
+
         return $types;
     }
 
@@ -55,4 +52,3 @@ class UserSynchronization extends Synchronization
         return 'person';
     }
 }
-?>

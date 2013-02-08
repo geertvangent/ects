@@ -17,4 +17,3 @@ class BamaflexDatabase extends Mdb2Database implements DataManagerInterface
         $this->set_prefix('');
     }
 }
-?>

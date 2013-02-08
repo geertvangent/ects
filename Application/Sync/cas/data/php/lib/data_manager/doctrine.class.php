@@ -16,4 +16,3 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
         $this->set_prefix('');
     }
 }
-?>

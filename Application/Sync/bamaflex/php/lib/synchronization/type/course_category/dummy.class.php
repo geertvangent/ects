@@ -11,4 +11,3 @@ class DummyCourseCategorySynchronization extends CourseCategorySynchronization
         $this->set_current_group($group);
     }
 }
-?>

@@ -5,14 +5,12 @@ use user\User;
 
 use common\libraries\InCondition;
 
-use user\UserDataManager;
 
 use group\GroupRelUser;
 use group\GroupDataManager;
 use group\Group;
 
 use common\libraries\EqualityCondition;
-use common\libraries\Filesystem;
 use common\libraries\Utilities;
 use common\libraries\AndCondition;
 
@@ -280,4 +278,3 @@ class ArchiveGroupSynchronization extends Synchronization
         return '20'. $year_parts[1] .'-09-30 23:59:59.999';
     }
 }
-?>

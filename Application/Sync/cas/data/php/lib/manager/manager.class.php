@@ -1,11 +1,6 @@
 <?php
 namespace application\ehb_sync\cas\data;
 
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\DynamicVisualTab;
-use common\libraries\Utilities;
-use common\libraries\DynamicVisualTabsRenderer;
 use common\libraries\SubManager;
 
 class Manager extends SubManager
@@ -29,4 +24,3 @@ class Manager extends SubManager
         parent :: launch(null, $application);
     }
 }
-?>

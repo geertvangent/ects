@@ -17,7 +17,7 @@ class BamaflexResultSet extends ArrayResultSet
         {
             $records[] = $this->process_record($record);
         }
-        
+
         parent :: __construct($records);
     }
 
@@ -35,7 +35,7 @@ class BamaflexResultSet extends ArrayResultSet
                 $field = $data;
             }
         }
-        
+
         return $record;
     }
 }

@@ -82,4 +82,3 @@ class Manager extends WebApplication
         return $package_list;
     }
 }
-?>

@@ -20,4 +20,3 @@ class BamaflexDataConnector extends \common\libraries\DataManager
     }
 
 }
-?>

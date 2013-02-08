@@ -6,11 +6,7 @@ namespace application\ehb_sync\bamaflex;
  * @package ehb.sync;
  */
 
-use group\Group;
-use group\GroupDataManager;
 
-use common\libraries\EqualityCondition;
-use common\libraries\Utilities;
 
 class StudentCourseGroupSynchronization extends CourseGroupSynchronization
 {
@@ -38,7 +34,7 @@ class StudentCourseGroupSynchronization extends CourseGroupSynchronization
         {
             $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE programme_id = "' . $this->get_parameter(self :: RESULT_PROPERTY_COURSE_ID) . '" AND type = 1 AND result != 8 AND programme_type = 1';
             $users = $this->get_result($query);
-            
+
             while ($user = $users->next_result(false))
             {
                 $user_mails[] = $user['person_id'];
@@ -48,4 +44,3 @@ class StudentCourseGroupSynchronization extends CourseGroupSynchronization
     }
 
 }
-?>

@@ -20,4 +20,3 @@ class BamaflexComponent extends Manager implements DelegateComponent
         \application\ehb_sync\bamaflex\Manager :: launch($this);
     }
 }
-?>

@@ -28,9 +28,9 @@ class StudentTrainingTrajectoriesTemplateGroupSynchronization extends GroupSynch
     function get_children()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_trajectory_basic] WHERE training_id = ' . $this->get_trajectory()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
-        
+
         $trajectories = $this->get_result($query);
-        
+
         $children = array();
         while ($trajectory = $trajectories->next_result(false))
         {
@@ -39,4 +39,3 @@ class StudentTrainingTrajectoriesTemplateGroupSynchronization extends GroupSynch
         return $children;
     }
 }
-?>

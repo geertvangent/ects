@@ -6,11 +6,7 @@ namespace application\ehb_sync\bamaflex;
  * @package ehb.sync;
  */
 
-use group\GroupDataManager;
-use group\Group;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
 
 class UserTypeEmployeeGroupSynchronization extends GroupSynchronization
 {
@@ -47,4 +43,3 @@ class UserTypeEmployeeGroupSynchronization extends GroupSynchronization
         return $user_mails;
     }
 }
-?>

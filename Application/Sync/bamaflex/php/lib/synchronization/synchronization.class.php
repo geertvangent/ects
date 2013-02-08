@@ -3,7 +3,6 @@ namespace application\ehb_sync\bamaflex;
 
 use common\libraries\PlatformSetting;
 
-use common\libraries\Mdb2ResultSet;
 use common\libraries\Utilities;
 
 abstract class Synchronization

@@ -3,6 +3,5 @@
 
     <resolvepath propertyName="package-directory" file="../../"/>
     <import file="../../../../../common/libraries/php/shared/build/build.xml" />
-    
-</project>
 
+</project>
