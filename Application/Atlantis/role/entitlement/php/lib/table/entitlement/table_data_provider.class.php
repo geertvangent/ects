@@ -3,7 +3,6 @@ namespace application\atlantis\role\entitlement;
 
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\NewObjectTableDataProvider;
-use common\libraries\ObjectTableDataProvider;
 
 class EntitlementTableDataProvider extends NewObjectTableDataProvider
 {
@@ -19,4 +18,3 @@ class EntitlementTableDataProvider extends NewObjectTableDataProvider
         return DataManager :: count(Entitlement :: class_name(), $this->get_condition());
     }
 }
-?>

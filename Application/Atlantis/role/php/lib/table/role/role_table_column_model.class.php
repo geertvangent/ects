@@ -19,4 +19,3 @@ class RoleTableColumnModel extends NewObjectTableColumnModel implements NewObjec
         $this->add_column(new ObjectTableColumn(Role :: PROPERTY_DESCRIPTION));
     }
 }
-?>

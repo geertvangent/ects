@@ -9,7 +9,7 @@ use common\libraries\Translation;
 use common\libraries\Utilities;
 use common\libraries\ToolbarItem;
 
-class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements 
+class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
         NewObjectTableCellRendererActionsColumnSupport
 {
 
@@ -27,7 +27,7 @@ class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
                 return $object->get_right()->get_name();
                 break;
         }
-        
+
         return parent :: render_cell($column, $object);
     }
 
@@ -37,10 +37,9 @@ class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
         if ($this->get_component()->get_user()->is_platform_admin())
         {
             $toolbar->add_item(new ToolbarItem(Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_delete.png', $this->get_component()->get_url(array(
-                    Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, 
+                    Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
                     Manager :: PARAM_ENTITLEMENT_ID => $entitlement->get_id())), ToolbarItem :: DISPLAY_ICON));
         }
         return $toolbar->as_html();
     }
 }
-?>

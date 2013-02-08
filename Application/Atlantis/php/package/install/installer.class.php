@@ -22,12 +22,11 @@ class Installer extends WebApplicationInstaller
     function get_additional_installers()
     {
         $installers = array();
-        
+
         $installers[] = new \application\atlantis\application\Installer($this->get_form_values());
         $installers[] = new \application\atlantis\role\Installer($this->get_form_values());
         $installers[] = new \application\atlantis\context\Installer($this->get_form_values());
-        
+
         return $installers;
     }
 }
-?>

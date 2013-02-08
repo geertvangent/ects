@@ -7,7 +7,7 @@ use common\libraries\StaticTableColumn;
 use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
 use common\libraries\NewObjectTableColumnModel;
 
-class EntitlementTableColumnModel extends NewObjectTableColumnModel implements 
+class EntitlementTableColumnModel extends NewObjectTableColumnModel implements
         NewObjectTableColumnModelActionsColumnSupport
 {
 
@@ -30,4 +30,3 @@ class EntitlementTableColumnModel extends NewObjectTableColumnModel implements
         }
     }
 }
-?>

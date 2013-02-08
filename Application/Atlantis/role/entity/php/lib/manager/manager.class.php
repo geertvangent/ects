@@ -37,4 +37,3 @@ class Manager extends SubManager
         parent :: launch(null, $application);
     }
 }
-?>

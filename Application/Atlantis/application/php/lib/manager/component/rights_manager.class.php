@@ -12,4 +12,3 @@ class RightsManagerComponent extends Manager
         \application\atlantis\application\right\Manager :: launch($this);
     }
 }
-?>

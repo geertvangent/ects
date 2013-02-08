@@ -5,4 +5,3 @@ class ViewerComponent extends Manager
 {
 
 }
-?>

@@ -1,8 +1,6 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\Utilities;
-use common\libraries\Configuration;
 /**
  * $Id: menu_data_manager.class.php 157 2009-11-10 13:44:02Z vanpouckesven $
  *
@@ -28,4 +26,3 @@ class DataManager extends \common\libraries\DataManager
         return 'mdb2';
     }
 }
-?>

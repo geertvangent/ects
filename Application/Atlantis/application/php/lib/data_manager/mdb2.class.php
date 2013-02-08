@@ -12,4 +12,3 @@ class Mdb2DataManager extends Mdb2Database
         $this->set_prefix('atlantis_');
     }
 }
-?>

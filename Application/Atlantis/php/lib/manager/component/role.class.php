@@ -1,7 +1,6 @@
 <?php
 namespace application\atlantis;
 
-use common\libraries\DelegateComponent;
 
 class RoleComponent extends Manager
 {
@@ -11,4 +10,3 @@ class RoleComponent extends Manager
         \application\atlantis\role\Manager :: launch($this);
     }
 }
-?>

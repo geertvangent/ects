@@ -3,7 +3,6 @@ namespace application\atlantis\role\entity;
 
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\NewObjectTableDataProvider;
-use common\libraries\ObjectTableDataProvider;
 
 class RoleEntityTableDataProvider extends NewObjectTableDataProvider
 {
@@ -19,4 +18,3 @@ class RoleEntityTableDataProvider extends NewObjectTableDataProvider
         return DataManager :: count(RoleEntity :: class_name(), $this->get_condition());
     }
 }
-?>

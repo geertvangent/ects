@@ -18,4 +18,3 @@ class ApplicationTableDataProvider extends NewObjectTableDataProvider
         return DataManager :: count(Application :: class_name(), $this->get_condition());
     }
 }
-?>

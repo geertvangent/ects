@@ -19,7 +19,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
     public function get_object_table_condition($object_table_class_name)
     {
         $query = $this->action_bar->get_query();
-        
+
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
@@ -58,4 +58,3 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         return $this->action_bar;
     }
 }
-?>

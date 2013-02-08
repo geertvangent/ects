@@ -43,4 +43,3 @@ class Manager extends SubManager
     }
 
 }
-?>

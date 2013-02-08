@@ -7,7 +7,6 @@ use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\ObjectTableFormAction;
 use common\libraries\ObjectTableFormActions;
-use common\libraries\PlatformSetting;
 
 class RoleEntityTable extends NewObjectTable implements NewObjectTableFormActionsSupport
 {
@@ -24,4 +23,3 @@ class RoleEntityTable extends NewObjectTable implements NewObjectTableFormAction
         return $actions;
     }
 }
-?>

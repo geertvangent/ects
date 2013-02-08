@@ -9,4 +9,3 @@ class RightComponent extends Manager
         \application\atlantis\application\right\Manager :: launch($this);
     }
 }
-?>

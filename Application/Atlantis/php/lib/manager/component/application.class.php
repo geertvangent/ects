@@ -9,4 +9,3 @@ class ApplicationComponent extends Manager
         \application\atlantis\application\Manager :: launch($this);
     }
 }
-?>

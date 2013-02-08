@@ -58,4 +58,3 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
     }
 
 }
-?>

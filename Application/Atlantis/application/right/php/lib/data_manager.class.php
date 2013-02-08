@@ -14,4 +14,3 @@ class DataManager extends \common\libraries\DataManager
         return 'mdb2';
     }
 }
-?>

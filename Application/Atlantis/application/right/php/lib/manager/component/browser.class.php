@@ -18,13 +18,13 @@ use common\libraries\NewObjectTableSupport;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {
-    
+
     private $action_bar;
 
     public function get_object_table_condition($object_table_class_name)
     {
         $query = $this->action_bar->get_query();
-        
+
         $conditions = array();
         if (isset($query) && $query != '')
         {
@@ -33,7 +33,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             $search_conditions[] = new PatternMatchCondition(Right :: PROPERTY_DESCRIPTION, '*' . $query . '*');
             $conditions[] = new OrCondition($search_conditions);
         }
-        
+
         $conditions[] = new EqualityCondition(Right :: PROPERTY_APPLICATION_ID, $this->get_parameter(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID));
         return new AndCondition($conditions);
     }
@@ -69,8 +69,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $application_id = Request :: get(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID);
         $application = \application\atlantis\application\DataManager :: retrieve(\application\atlantis\application\Application :: class_name(), (int) $application_id);
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
-    
+
     }
 
 }
-?>

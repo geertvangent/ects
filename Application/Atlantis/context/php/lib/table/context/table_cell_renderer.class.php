@@ -9,7 +9,7 @@ use common\libraries\NewObjectTableCellRenderer;
 use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
 use common\libraries\Toolbar;
 
-class ApplicationTableCellRenderer extends NewObjectTableCellRenderer implements 
+class ApplicationTableCellRenderer extends NewObjectTableCellRenderer implements
         NewObjectTableCellRendererActionsColumnSupport
 {
 
@@ -24,7 +24,7 @@ class ApplicationTableCellRenderer extends NewObjectTableCellRenderer implements
             case \application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME :
                 return $object->get_context()->get_context_name();
                 break;
-            
+
             case \application\atlantis\role\Role :: PROPERTY_NAME :
                 return $object->get_role()->get_name();
                 break;
@@ -34,14 +34,13 @@ class ApplicationTableCellRenderer extends NewObjectTableCellRenderer implements
 
     function get_object_actions($application)
     {
-        
+
         $toolbar = new Toolbar();
-        
+
         $toolbar->add_item(new ToolbarItem(Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_delete.png', $this->get_component()->get_url(array(
-                Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, 
+                Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
                 Manager :: PARAM_APPLICATION_ID => $application->get_id())), ToolbarItem :: DISPLAY_ICON));
-        
+
         return $toolbar->as_html();
     }
 }
-?>

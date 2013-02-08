@@ -3,7 +3,6 @@ namespace application\atlantis\context;
 
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\NewObjectTableDataProvider;
-use common\libraries\ObjectTableDataProvider;
 
 class ContextTableDataProvider extends NewObjectTableDataProvider
 {
@@ -19,4 +18,3 @@ class ContextTableDataProvider extends NewObjectTableDataProvider
         return DataManager :: count(Context :: class_name(), $this->get_condition());
     }
 }
-?>

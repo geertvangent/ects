@@ -7,7 +7,6 @@ use common\libraries\CommonDataManager;
 
 use common\libraries\Translation;
 
-use admin\AdminDataManager;
 
 use core\lynx\PackageList;
 
@@ -96,4 +95,3 @@ class Manager extends WebApplication
         return $package_list;
     }
 }
-?>

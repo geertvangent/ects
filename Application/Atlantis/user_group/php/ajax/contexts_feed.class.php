@@ -13,7 +13,6 @@ use common\libraries\InCondition;
 use common\libraries\AndCondition;
 use common\libraries\ObjectTableOrder;
 use common\libraries\AdvancedElementFinderElement;
-use common\libraries\OrCondition;
 
 class ContextAjaxContextsFeed extends AjaxManager
 {
@@ -255,5 +254,3 @@ class ContextAjaxContextsFeed extends AjaxManager
     }
 
 }
-
-?>

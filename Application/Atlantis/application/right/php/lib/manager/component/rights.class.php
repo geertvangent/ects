@@ -5,4 +5,3 @@ class RightsComponent extends Manager
 {
 
 }
-?>

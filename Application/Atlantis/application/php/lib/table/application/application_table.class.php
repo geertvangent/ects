@@ -23,4 +23,3 @@ class ApplicationTable extends NewObjectTable implements NewObjectTableFormActio
         return $actions;
     }
 }
-?>

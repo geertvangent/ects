@@ -9,4 +9,3 @@ class ContextComponent extends Manager
         \application\atlantis\context\Manager :: launch($this);
     }
 }
-?>

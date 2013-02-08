@@ -95,12 +95,12 @@ class Application extends DataClass
     {
         $this->set_default_property(self :: PROPERTY_URL, $url);
     }
-    
+
     function get_code()
     {
         return $this->get_default_property(self :: PROPERTY_CODE);
     }
-    
+
     function set_code($code)
     {
         $this->set_default_property(self :: PROPERTY_CODE, $code);

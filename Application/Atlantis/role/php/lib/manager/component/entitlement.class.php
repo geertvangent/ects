@@ -12,4 +12,3 @@ class EntitlementComponent extends Manager
         \application\atlantis\role\entitlement\Manager :: launch($this);
     }
 }
-?>

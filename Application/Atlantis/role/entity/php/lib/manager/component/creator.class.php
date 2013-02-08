@@ -15,13 +15,13 @@ class CreatorComponent extends Manager
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
-        
+
         $form = new EntityForm($this, $this->get_url());
-        
+
         if ($form->validate())
         {
             $values = $form->exportValues();
-            
+
             $failures = 0;
             foreach ($values['entity'] as $entity_type => $entity_ids)
             {
@@ -39,7 +39,7 @@ class CreatorComponent extends Manager
                             $entity->set_context_id($context);
                             $entity->set_start_date(Utilities :: time_from_datepicker($values['start_date']));
                             $entity->set_end_date(Utilities :: time_from_datepicker($values['end_date']));
-                            
+
                             if (! $entity->create())
                             {
                                 $failures ++;
@@ -48,7 +48,7 @@ class CreatorComponent extends Manager
                     }
                 }
             }
-            
+
             $count = (count($values['entity'][UserEntity :: ENTITY_TYPE]) + count(
                     $values['entity'][PlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
                     $values['context']) * count($values['start_date']) * count($values['end_date']);
@@ -84,8 +84,8 @@ class CreatorComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('Entities'));
                 }
             }
-            
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
                     ($failures ? true : false), array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
         }
         else
@@ -96,4 +96,3 @@ class CreatorComponent extends Manager
         }
     }
 }
-?>

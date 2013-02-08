@@ -3,8 +3,6 @@ namespace application\atlantis\application\right;
 
 use common\libraries\SubManager;
 
-use common\libraries\Utilities;
-use common\libraries\Request;
 /**
  * $Id: elude_manager.class.php
  *
@@ -20,9 +18,9 @@ class Manager extends SubManager
     const ACTION_RIGHTS = 'rights';
     const ACTION_CREATE = 'creator';
     const ACTION_ADD_ROLE = 'add_role';
-    
+
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-    
+
     const PARAM_RIGHT_ID = 'right_id';
     const PARAM_APPLICATION_ID = 'application_id';
 
@@ -71,4 +69,3 @@ class Manager extends SubManager
     }
 
 }
-?>

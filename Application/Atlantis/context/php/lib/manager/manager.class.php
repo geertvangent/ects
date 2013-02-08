@@ -6,11 +6,11 @@ use common\libraries\SubManager;
 class Manager extends SubManager
 {
     const PARAM_ACTION = 'context_action';
-    
+
     const ACTION_BROWSE = 'browser';
     const ACTION_DELETE = 'delete';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-    
+
     const PARAM_CONTEXT_ID = 'context_id';
 
     static function get_action_parameter()
@@ -41,4 +41,3 @@ class Manager extends SubManager
     }
 
 }
-?>

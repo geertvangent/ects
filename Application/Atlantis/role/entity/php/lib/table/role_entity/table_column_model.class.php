@@ -5,7 +5,7 @@ use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
 use common\libraries\NewObjectTableColumnModel;
 use common\libraries\ObjectTableColumn;
 
-class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements 
+class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
         NewObjectTableColumnModelActionsColumnSupport
 {
 
@@ -38,4 +38,3 @@ class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
         }
     }
 }
-?>

@@ -3,8 +3,6 @@ namespace application\atlantis\role\entitlement;
 
 use common\libraries\SubManager;
 
-use common\libraries\Utilities;
-use common\libraries\Request;
 
 class Manager extends SubManager
 {
@@ -15,7 +13,7 @@ class Manager extends SubManager
     const ACTION_EDIT = 'editor';
     const ACTION_RIGHTS = 'rights';
     const ACTION_LIST = 'lister';
-    
+
     const PARAM_ENTITLEMENT_ID = 'entitlement_id';
     const DEFAULT_ACTION = self :: ACTION_LIST;
 
@@ -52,4 +50,3 @@ class Manager extends SubManager
     }
 
 }
-?>

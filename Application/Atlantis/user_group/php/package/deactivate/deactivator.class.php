@@ -5,4 +5,3 @@ class Dectivator extends \common\libraries\package\Deactivator
 {
 
 }
-?>

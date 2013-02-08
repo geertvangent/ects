@@ -19,4 +19,3 @@ class RightTableColumnModel extends NewObjectTableColumnModel implements NewObje
         $this->add_column(new ObjectTableColumn(Right :: PROPERTY_DESCRIPTION));
     }
 }
-?>

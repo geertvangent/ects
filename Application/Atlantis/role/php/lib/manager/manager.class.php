@@ -6,7 +6,7 @@ use common\libraries\SubManager;
 class Manager extends SubManager
 {
     const PARAM_ACTION = 'action';
-    
+
     const ACTION_BROWSE = 'browser';
     const ACTION_VIEW = 'viewer';
     const ACTION_DELETE = 'deleter';
@@ -15,9 +15,9 @@ class Manager extends SubManager
     const ACTION_CREATE = 'creator';
     const ACTION_ENTITLEMENT = 'entitlement';
     const ACTION_ENTITY = 'entity';
-        
+
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-    
+
     const PARAM_ROLE_ID = 'role_id';
 
     static function get_action_parameter()
@@ -48,4 +48,3 @@ class Manager extends SubManager
     }
 
 }
-?>

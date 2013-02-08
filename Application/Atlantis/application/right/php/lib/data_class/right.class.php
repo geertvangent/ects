@@ -14,7 +14,7 @@ use common\libraries\DataClass;
 class Right extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Right properties
      */
@@ -22,13 +22,13 @@ class Right extends DataClass
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_APPLICATION_ID = 'application_id';
     const PROPERTY_CODE = 'code';
-    
+
     private $application;
 
     /**
      * Get the default properties
      *
-     * @param $extended_property_names multitype:string           
+     * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
     static function get_default_property_names($extended_property_names = array())
@@ -37,7 +37,7 @@ class Right extends DataClass
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
         $extended_property_names[] = self :: PROPERTY_APPLICATION_ID;
         $extended_property_names[] = self :: PROPERTY_CODE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -64,7 +64,7 @@ class Right extends DataClass
     /**
      * Sets the name of this Right.
      *
-     * @param $name text           
+     * @param $name text
      */
     function set_name($name)
     {
@@ -84,7 +84,7 @@ class Right extends DataClass
     /**
      * Sets the description of this Right.
      *
-     * @param $description text           
+     * @param $description text
      */
     function set_description($description)
     {
@@ -113,7 +113,7 @@ class Right extends DataClass
     /**
      * Sets the application_id of this Right.
      *
-     * @param $application_id int           
+     * @param $application_id int
      */
     function set_application_id($application_id)
     {

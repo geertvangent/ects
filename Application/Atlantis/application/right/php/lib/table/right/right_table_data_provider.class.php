@@ -3,7 +3,6 @@ namespace application\atlantis\application\right;
 
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\NewObjectTableDataProvider;
-use common\libraries\ObjectTableDataProvider;
 
 class RightTableDataProvider extends NewObjectTableDataProvider
 {
@@ -19,4 +18,3 @@ class RightTableDataProvider extends NewObjectTableDataProvider
         return DataManager :: count(Right :: class_name(), $this->get_condition());
     }
 }
-?>

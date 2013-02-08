@@ -12,7 +12,7 @@ use common\libraries\DataClass;
 class Entitlement extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Entitlement properties
      */
@@ -24,14 +24,14 @@ class Entitlement extends DataClass
     /**
      * Get the default properties
      *
-     * @param $extended_property_names multitype:string           
+     * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_RIGHT_ID;
         $extended_property_names[] = self :: PROPERTY_ROLE_ID;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -58,7 +58,7 @@ class Entitlement extends DataClass
     /**
      * Sets the application_right_id of this Entitlement.
      *
-     * @param $application_right_id integer           
+     * @param $application_right_id integer
      */
     function set_right_id($application_right_id)
     {
@@ -78,7 +78,7 @@ class Entitlement extends DataClass
     /**
      * Sets the role_id of this Entitlement.
      *
-     * @param $role_id integer           
+     * @param $role_id integer
      */
     function set_role_id($role_id)
     {

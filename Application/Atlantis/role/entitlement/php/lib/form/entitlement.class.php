@@ -18,7 +18,7 @@ class EntitlementForm extends FormValidator
     function __construct($component, $action)
     {
         parent :: __construct('entitlement', 'post', $action);
-        
+
         $this->component = $component;
         $this->build();
         $this->setDefaults();
@@ -32,13 +32,13 @@ class EntitlementForm extends FormValidator
         {
             $this->addElement('checkbox', 'right[' . $right->get_id() . ']', $right->get_name(), $right->get_description());
         }
-        
+
         $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Grant'), array(
                 'class' => 'positive grant'));
-        
+
         $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
                 'class' => 'normal empty'));
-        
+
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
 
@@ -59,8 +59,7 @@ class EntitlementForm extends FormValidator
                 $defaults['right'][$entitlement->get_right_id()] = 1;
             }
         }
-        
+
         parent :: setDefaults($defaults);
     }
 }
-?>

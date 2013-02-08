@@ -12,7 +12,7 @@ class ApplicationForm extends FormValidator
     function __construct($application, $action)
     {
         parent :: __construct('application', 'post', $action);
-        
+
         $this->application = $application;
         $this->build();
         $this->setDefaults();
@@ -28,7 +28,7 @@ class ApplicationForm extends FormValidator
                 "size" => "100"));
         $this->addElement('text', Application :: PROPERTY_CODE, Translation :: get('ApplicationCode'), array(
                 "size" => "50"));
-        
+
         if ($this->application->get_id())
         {
             $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES), array(
@@ -41,7 +41,7 @@ class ApplicationForm extends FormValidator
         }
         $buttons[] = $this->createElement('style_reset_button', 'reset', Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), array(
                 'class' => 'normal empty'));
-        
+
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
 
@@ -58,8 +58,7 @@ class ApplicationForm extends FormValidator
         $defaults[Application :: PROPERTY_DESCRIPTION] = $application->get_description();
         $defaults[Application :: PROPERTY_URL] = $application->get_url();
         $defaults[Application :: PROPERTY_CODE] = $application->get_code();
-        
+
         parent :: setDefaults($defaults);
     }
 }
-?>

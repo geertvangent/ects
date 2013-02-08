@@ -65,9 +65,9 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $this->right_id = Request :: get(\application\atlantis\application\right\Manager :: PARAM_RIGHT_ID);
         $this->role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
         $this->application_id = Request :: get(\application\atlantis\application\right\Manager :: PARAM_APPLICATION_ID);
-        
+
         $this->add_breadcrumb();
-        
+
         $this->display_header();
         $table = new EntitlementTable($this);
         echo ($table->as_html());
@@ -79,13 +79,13 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         if ($this->has_application_id())
         {
             $application = \application\atlantis\application\DataManager :: retrieve(\application\atlantis\application\Application :: class_name(), (int) $this->application_id);
-            
+
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
         }
         if ($this->has_right_id() && $this->has_application_id())
         {
             $right = \application\atlantis\application\right\DataManager :: retrieve(\application\atlantis\application\right\Right :: class_name(), (int) $this->right_id);
-            
+
             // BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null,
             // $right->get_application()->get_name()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $right->get_name()));
@@ -93,11 +93,10 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         if ($this->has_role_id())
         {
             $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(), (int) $this->role_id);
-            
+
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
         }
-    
+
     }
 
 }
-?>

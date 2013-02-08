@@ -3,7 +3,6 @@ namespace application\atlantis\user_group;
 
 use common\libraries\Utilities;
 use common\libraries\Translation;
-use common\libraries\Request;
 
 class CreatorComponent extends Manager
 {
@@ -47,4 +46,3 @@ class CreatorComponent extends Manager
     }
 
 }
-?>

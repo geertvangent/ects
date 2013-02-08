@@ -1,8 +1,6 @@
 <?php
 namespace application\atlantis\application\right;
 
-use common\libraries\Utilities;
-use common\libraries\Translation;
 use common\libraries\Request;
 
 class AddRoleComponent extends Manager
@@ -12,7 +10,7 @@ class AddRoleComponent extends Manager
     {
         $right_id = Request :: get(self :: PARAM_RIGHT_ID);
         $application_id = Request :: get(self :: PARAM_APPLICATION_ID);
-        
+
         $this->display_header();
         $form = new RoleForm($application_id, $right_id, $this->get_url(array(
                 self :: PARAM_ACTION => self :: ACTION_ADD_ROLE)));
@@ -21,5 +19,3 @@ class AddRoleComponent extends Manager
     }
 
 }
-
-?>
