@@ -25,4 +25,3 @@ class HtmlZipRenditionImplementation extends RenditionImplementation
         return \application\discovery\HtmlRendition :: VIEW_ZIP;
     }
 }
-?>

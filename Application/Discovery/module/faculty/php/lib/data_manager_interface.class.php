@@ -16,4 +16,3 @@ interface DataManagerInterface
      */
     function retrieve_faculties($year);
 }
-?>

@@ -26,4 +26,3 @@ class ActivityDescription extends Activity
         return implode(' | ', $string);
     }
 }
-?>

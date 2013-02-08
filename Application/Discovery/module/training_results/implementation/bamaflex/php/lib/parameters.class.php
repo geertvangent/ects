@@ -20,4 +20,3 @@ class Parameters extends \application\discovery\module\training_results\Paramete
         return $this->get_parameter(Module :: PARAM_SOURCE);
     }
 }
-?>

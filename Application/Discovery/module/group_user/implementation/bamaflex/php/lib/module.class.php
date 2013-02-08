@@ -53,4 +53,3 @@ class Module extends \application\discovery\module\group_user\Module
         return $parameter;
     }
 }
-?>

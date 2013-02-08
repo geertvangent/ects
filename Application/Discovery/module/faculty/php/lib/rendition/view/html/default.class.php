@@ -41,4 +41,3 @@ class HtmlDefaultRendition extends HtmlRendition
         return implode("\n", $html);
     }
 }
-?>

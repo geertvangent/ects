@@ -6,13 +6,13 @@ use common\libraries\DataClass;
 
 /**
  * application.discovery.connection.bamaflex.
- * 
+ *
  * @author GillardMagali
  */
 class HistoryReference extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * HistoryReference properties
      */
@@ -20,20 +20,20 @@ class HistoryReference extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     function get_data_manager()
@@ -43,7 +43,7 @@ class HistoryReference extends DataClass
 
     /**
      * Returns the source of this History.
-     * 
+     *
      * @return int The source.
      */
     function get_source()
@@ -53,7 +53,7 @@ class HistoryReference extends DataClass
 
     /**
      * Sets the source of this History.
-     * 
+     *
      * @param $source int
      */
     function set_source($source)

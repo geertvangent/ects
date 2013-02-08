@@ -2,10 +2,6 @@
 namespace application\discovery\module\photo\implementation\bamaflex;
 
 use common\libraries\InCondition;
-use application\discovery\module\photo\DataManager;
-use common\libraries\Request;
-use application\discovery\DiscoveryManager;
-use user\UserDataManager;
 use group\Group;
 use group\GroupDataManager;
 
@@ -112,4 +108,3 @@ class Module extends \application\discovery\module\photo\Module
         return new InCondition(\user\User :: PROPERTY_ID, $this->get_users());
     }
 }
-?>

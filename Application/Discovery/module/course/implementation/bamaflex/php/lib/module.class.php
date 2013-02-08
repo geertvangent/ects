@@ -35,4 +35,3 @@ class Module extends \application\discovery\module\course\Module
         return $parameter;
     }
 }
-?>

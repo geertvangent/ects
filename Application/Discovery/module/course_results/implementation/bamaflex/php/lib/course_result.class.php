@@ -3,17 +3,16 @@ namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use application\discovery\DiscoveryDataManager;
 use common\libraries\Utilities;
-use common\libraries\DataClass;
 
 /**
  * application.discovery.module.course_results.implementation.bamaflex.discovery
- * 
+ *
  * @author Hans De Bisschop
  */
 class CourseResult extends \application\discovery\module\course_results\CourseResult
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * CourseResults properties
      */
@@ -29,7 +28,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -37,13 +36,13 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
     {
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_TYPE;
         $extended_property_names[] = self :: PROPERTY_TYPE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -53,7 +52,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
 
     /**
      * Returns the trajectory_part of this Course.
-     * 
+     *
      * @return string The trajectory_part.
      */
     function get_trajectory_type()
@@ -63,7 +62,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
 
     /**
      * Sets the trajectory_part of this Course.
-     * 
+     *
      * @param string $trajectory_part
      */
     function set_trajectory_type($trajectory_type)
@@ -89,7 +88,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
                 return 'Individual';
                 break;
             case self :: TRAJECTORY_TYPE_UNKNOWN :
-                
+
                 return 'Unknown';
                 break;
         }
@@ -97,7 +96,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
 
     /**
      * Returns the type of this Course.
-     * 
+     *
      * @return int The type.
      */
     function get_type()
@@ -107,7 +106,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
 
     /**
      * Sets the type of this Course.
-     * 
+     *
      * @param int $type
      */
     function set_type($type)

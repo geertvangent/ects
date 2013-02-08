@@ -3,7 +3,6 @@ namespace application\discovery\module\photo\implementation\bamaflex;
 
 use common\libraries\DataClassCountParameters;
 use common\libraries\DataClassRetrievesParameters;
-use user\UserDataManager;
 use common\libraries\GalleryObjectTableDataProvider;
 
 class GalleryBrowserTableDataProvider extends GalleryObjectTableDataProvider
@@ -22,4 +21,3 @@ class GalleryBrowserTableDataProvider extends GalleryObjectTableDataProvider
         return \user\DataManager :: count(\user\User :: class_name(), $parameters);
     }
 }
-?>

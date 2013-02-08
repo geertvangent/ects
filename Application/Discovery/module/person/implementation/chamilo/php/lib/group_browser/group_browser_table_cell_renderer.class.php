@@ -5,10 +5,6 @@ use group\Group;
 use group\DefaultGroupTableCellRenderer;
 use common\libraries\Utilities;
 use common\libraries\Translation;
-use common\libraries\EqualityCondition;
-use common\libraries\ToolbarItem;
-use common\libraries\Toolbar;
-use common\libraries\Theme;
 
 class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
 {
@@ -20,7 +16,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
 
     /**
      * Constructor
-     * 
+     *
      * @param RepositoryManagerBrowserComponent $browser
      */
     function __construct($browser)
@@ -28,7 +24,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
         parent :: __construct();
         $this->browser = $browser;
     }
-    
+
     // Inherited
     function render_cell($column, $group)
     {
@@ -56,9 +52,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
             case Translation :: get('Subgroups') :
                 return $group->count_subgroups(true, true);
         }
-        
+
         return parent :: render_cell($column, $group);
     }
 }
-
-?>

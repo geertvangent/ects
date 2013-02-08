@@ -50,7 +50,7 @@ class FollowingImpossible extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_CREDIT;
         $extended_property_names[] = self :: PROPERTY_EXAM_DEGREE;
         $extended_property_names[] = self :: PROPERTY_EXAM_CREDIT;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -75,4 +75,3 @@ class FollowingImpossible extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

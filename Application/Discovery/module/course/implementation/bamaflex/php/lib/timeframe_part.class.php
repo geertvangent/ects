@@ -52,7 +52,7 @@ class TimeframePart extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TIMEFRAME_ID;
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_DATE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -74,4 +74,3 @@ class TimeframePart extends DiscoveryItem
         return DatetimeUtilities :: format_locale_date('%b %d, %Y', strtotime($this->get_date()));
     }
 }
-?>

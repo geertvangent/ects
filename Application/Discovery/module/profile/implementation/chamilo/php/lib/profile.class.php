@@ -53,7 +53,7 @@ class Profile extends \application\discovery\module\profile\Profile
     {
         $extended_property_names[] = self :: PROPERTY_USERNAME;
         $extended_property_names[] = self :: PROPERTY_TIMEZONE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -66,4 +66,3 @@ class Profile extends \application\discovery\module\profile\Profile
         return DiscoveryDataManager :: get_instance();
     }
 }
-?>

@@ -78,7 +78,7 @@ class SecondChance extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_EXAM;
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT;
         $extended_property_names[] = self :: PROPERTY_EXAM_PARTS;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -103,4 +103,3 @@ class SecondChance extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

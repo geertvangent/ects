@@ -21,4 +21,3 @@ abstract class RenditionImplementation extends \application\discovery\RenditionI
 
 
 }
-?>

@@ -647,4 +647,3 @@ class Training extends \application\discovery\module\training\Training
         $this->references[$type][] = $reference;
     }
 }
-?>

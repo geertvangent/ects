@@ -26,4 +26,3 @@ class CompetenceDescription extends Competence
         return implode(' | ', $string);
     }
 }
-?>

@@ -1,9 +1,6 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Request;
-use common\libraries\Translation;
-use common\libraries\Utilities;
 use common\libraries\EqualityCondition;
 use common\libraries\Path;
 use common\libraries\DataClass;
@@ -24,14 +21,14 @@ class ModuleInstanceSetting extends DataClass
 
     /**
      * A static array containing all settings of discovery module instances
-     * 
+     *
      * @var array
      */
     private static $settings;
 
     /**
      * Get the default properties of all settings.
-     * 
+     *
      * @return array The property names.
      */
     static function get_default_property_names()
@@ -118,24 +115,24 @@ class ModuleInstanceSetting extends DataClass
     {
         $settings_file = Path :: namespace_to_full_path($module_instance->get_type()) . 'php/settings/settings.xml';
         $doc = new DOMDocument();
-        
+
         $doc->load($settings_file);
         $object = $doc->getElementsByTagname('application')->item(0);
         $settings = $doc->getElementsByTagname('setting');
-        
+
         foreach ($settings as $index => $setting)
         {
             $external_setting = new ModuleInstanceSetting();
             $external_setting->set_module_instance_id($module_instance->get_id());
             $external_setting->set_variable($setting->getAttribute('name'));
             $external_setting->set_value($setting->getAttribute('default'));
-            
+
             if (! $external_setting->create())
             {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -163,7 +160,7 @@ class ModuleInstanceSetting extends DataClass
         {
             self :: load($module_instance_id);
         }
-        
+
         return (isset(self :: $settings[$module_instance_id][$variable]) ? self :: $settings[$module_instance_id][$variable] : null);
     }
 
@@ -178,7 +175,7 @@ class ModuleInstanceSetting extends DataClass
         {
             self :: load($module_instance_id);
         }
-        
+
         return self :: $settings[$module_instance_id];
     }
 
@@ -190,11 +187,10 @@ class ModuleInstanceSetting extends DataClass
     {
         $condition = new EqualityCondition(self :: PROPERTY_MODULE_INSTANCE_ID, $module_instance_id);
         $settings = DiscoveryDataManager :: get_instance()->retrieve_module_instance_settings($condition);
-        
+
         while ($setting = $settings->next_result())
         {
             self :: $settings[$module_instance_id][$setting->get_variable()] = $setting->get_value();
         }
     }
 }
-?>

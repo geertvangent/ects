@@ -3,7 +3,6 @@ namespace application\discovery\module\career\implementation\bamaflex;
 
 use application\discovery\DiscoveryDataManager;
 use common\libraries\Utilities;
-use common\libraries\DataClass;
 
 /**
  * application.discovery.module.career.implementation.bamaflex.discovery

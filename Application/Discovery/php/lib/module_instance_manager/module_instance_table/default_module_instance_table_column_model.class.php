@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Path;
 use common\libraries\ObjectTableColumnModel;
 use common\libraries\ObjectTableColumn;
 
@@ -18,7 +17,7 @@ class DefaultModuleInstanceTableColumnModel extends ObjectTableColumnModel
 
     /**
      * Gets the default columns for this model
-     * 
+     *
      * @return ContentObjectTableColumn[]
      */
     private static function get_default_columns()
@@ -31,4 +30,3 @@ class DefaultModuleInstanceTableColumnModel extends ObjectTableColumnModel
         return $columns;
     }
 }
-?>

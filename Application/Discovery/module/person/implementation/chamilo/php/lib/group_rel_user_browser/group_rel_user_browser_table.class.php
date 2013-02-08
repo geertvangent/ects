@@ -2,18 +2,14 @@
 namespace application\discovery\module\person\implementation\chamilo;
 
 use common\libraries\Utilities;
-use common\libraries\Request;
-use common\libraries\Translation;
 use common\libraries\ObjectTable;
-use common\libraries\ObjectTableFormActions;
-use common\libraries\ObjectTableFormAction;
 
 class GroupRelUserBrowserTable extends ObjectTable
 {
 
     /**
      * Constructor
-     * 
+     *
      * @see ContentObjectTable::ContentObjectTable()
      */
     function __construct($browser, $parameters, $condition)
@@ -21,7 +17,7 @@ class GroupRelUserBrowserTable extends ObjectTable
         $model = new GroupRelUserBrowserTableColumnModel();
         $renderer = new GroupRelUserBrowserTableCellRenderer($browser);
         $data_provider = new GroupRelUserBrowserTableDataProvider($browser, $condition);
-        parent :: __construct($data_provider, Utilities :: get_classname_from_namespace(__CLASS__, true), $model, 
+        parent :: __construct($data_provider, Utilities :: get_classname_from_namespace(__CLASS__, true), $model,
                 $renderer);
         $this->set_additional_parameters($parameters);
     }
@@ -32,7 +28,7 @@ class GroupRelUserBrowserTable extends ObjectTable
      */
     function get_objects($offset, $count, $order_column)
     {
-        $grouprelusers = $this->get_data_provider()->get_objects($offset, $count, 
+        $grouprelusers = $this->get_data_provider()->get_objects($offset, $count,
                 $this->get_column_model()->get_order_column($order_column - ($this->has_form_actions() ? 1 : 0)));
         $table_data = array();
         $column_count = $this->get_column_model()->get_column_count();
@@ -45,7 +41,7 @@ class GroupRelUserBrowserTable extends ObjectTable
             }
             for($i = 0; $i < $column_count; $i ++)
             {
-                $row[] = $this->get_cell_renderer()->render_cell($this->get_column_model()->get_column($i), 
+                $row[] = $this->get_cell_renderer()->render_cell($this->get_column_model()->get_column($i),
                         $groupreluser);
             }
             $table_data[] = $row;
@@ -53,4 +49,3 @@ class GroupRelUserBrowserTable extends ObjectTable
         return $table_data;
     }
 }
-?>

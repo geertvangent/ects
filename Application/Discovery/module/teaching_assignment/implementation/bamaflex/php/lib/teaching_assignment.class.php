@@ -68,7 +68,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Returns the trajectory_part of this TeachingAssignment.
-     * 
+     *
      * @return string The trajectory_part.
      */
     function get_trajectory_part()
@@ -78,7 +78,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Sets the trajectory_part of this TeachingAssignment.
-     * 
+     *
      * @param string $trajectory_part
      */
     function set_trajectory_part($trajectory_part)
@@ -88,7 +88,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Returns the credits of this TeachingAssignment.
-     * 
+     *
      * @return int The credits.
      */
     function get_credits()
@@ -98,7 +98,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Returns the programme_id of this TeachingAssignment.
-     * 
+     *
      * @return int programme_id.
      */
     function get_programme_id()
@@ -118,7 +118,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Sets the credits of this TeachingAssignment.
-     * 
+     *
      * @param int $credits
      */
     function set_credits($credits)
@@ -128,7 +128,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Returns the weight of this TeachingAssignment.
-     * 
+     *
      * @return int The weight.
      */
     function get_weight()
@@ -138,7 +138,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
 
     /**
      * Sets the weight of this TeachingAssignment.
-     * 
+     *
      * @param int $weight
      */
     function set_weight($weight)
@@ -222,7 +222,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_MANAGER;
         $extended_property_names[] = self :: PROPERTY_TEACHER;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -345,8 +345,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
         $string[] = $this->get_faculty();
         $string[] = $this->get_training();
         $string[] = $this->get_name();
-        
+
         return implode(' | ', $string);
     }
 }
-?>

@@ -124,7 +124,7 @@ class SubTrajectoryCourse extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_PART;
         $extended_property_names[] = self :: PROPERTY_PARENT_PROGRAMME_ID;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -137,4 +137,3 @@ class SubTrajectoryCourse extends DiscoveryItem
         return DiscoveryDataManager :: get_instance();
     }
 }
-?>

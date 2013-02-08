@@ -11,9 +11,7 @@ use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use common\libraries\DynamicTabsRenderer;
 use common\libraries\DynamicContentTab;
 use common\libraries\Theme;
-use common\libraries\SortableTableFromArray;
 use common\libraries\Utilities;
-use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
@@ -313,4 +311,3 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }
 }
-?>

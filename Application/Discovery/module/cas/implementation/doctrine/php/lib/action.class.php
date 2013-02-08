@@ -60,4 +60,3 @@ class Action extends DiscoveryItem
         }
     }
 }
-?>

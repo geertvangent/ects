@@ -6,10 +6,6 @@ namespace application\discovery\data_source\bamaflex;
  * @package application.discovery
  * @author Hans De Bisschop
  */
-use common\libraries\InCondition;
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\Mdb2Database;
 
 class Mdb2DiscoveryDataManager extends \application\discovery\Mdb2DiscoveryDataManager
 {
@@ -26,4 +22,3 @@ class Mdb2DiscoveryDataManager extends \application\discovery\Mdb2DiscoveryDataM
         return $this->retrieve_object(History :: get_table_name(), $condition, array(), History :: CLASS_NAME);
     }
 }
-?>

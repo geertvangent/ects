@@ -2,21 +2,9 @@
 namespace application\discovery\module\faculty;
 
 use common\libraries\Request;
-use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\DynamicVisualTab;
 use common\libraries\Filesystem;
-use common\libraries\DynamicContentTab;
-use common\libraries\DynamicTabsRenderer;
 use common\libraries\Path;
-use common\libraries\WebApplication;
-use common\libraries\ResourceManager;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\PropertiesTable;
-use common\libraries\Display;
 use common\libraries\Application;
-use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 
 class Module extends \application\discovery\Module
@@ -105,4 +93,3 @@ class Module extends \application\discovery\Module
         return $types;
     }
 }
-?>

@@ -4,17 +4,16 @@ namespace application\discovery\module\employment\implementation\bamaflex;
 use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
-use common\libraries\DataClass;
 
 /**
  * application.discovery.module.employment.implementation.bamaflex
- * 
+ *
  * @author Magali Gillard
  */
 class Employment extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      *
      * @var integer
@@ -140,7 +139,7 @@ class Employment extends DiscoveryItem
      * @var integer
      */
     const PROPERTY_CYCLES = 'cycles';
-    
+
     /**
      *
      * @var integer
@@ -170,11 +169,11 @@ class Employment extends DiscoveryItem
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static 
+    static
 
     function get_default_property_names($extended_property_names = array())
     {
@@ -207,13 +206,13 @@ class Employment extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_INTERRUPTION;
         $extended_property_names[] = self :: PROPERTY_INTERRUPTION_CATEGORY_ID;
         $extended_property_names[] = self :: PROPERTY_INTERRUPTION_CATEGORY;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -223,7 +222,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the person_id of this Employment.
-     * 
+     *
      * @return integer The person_id.
      */
     function get_person_id()
@@ -233,7 +232,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the person_id of this Employment.
-     * 
+     *
      * @param integer $person_id
      */
     function set_person_id($person_id)
@@ -243,7 +242,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the year of this Employment.
-     * 
+     *
      * @return string The year.
      */
     function get_year()
@@ -253,7 +252,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the year of this Employment.
-     * 
+     *
      * @param string $year
      */
     function set_year($year)
@@ -263,7 +262,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the assignment of this Employment.
-     * 
+     *
      * @return string The assignment.
      */
     function get_assignment()
@@ -282,7 +281,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the assignment of this Employment.
-     * 
+     *
      * @param string $assignment
      */
     function set_assignment($assignment)
@@ -292,7 +291,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the hours of this Employment.
-     * 
+     *
      * @return string The hours.
      */
     function get_hours()
@@ -302,7 +301,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the hours of this Employment.
-     * 
+     *
      * @param string $hours
      */
     function set_hours($hours)
@@ -312,7 +311,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the start_date of this Employment.
-     * 
+     *
      * @return string The start_date.
      */
     function get_start_date()
@@ -322,7 +321,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the start_date of this Employment.
-     * 
+     *
      * @param string $start_date
      */
     function set_start_date($start_date)
@@ -332,7 +331,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the end_date of this Employment.
-     * 
+     *
      * @return string The end_date.
      */
     function get_end_date()
@@ -342,7 +341,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the end_date of this Employment.
-     * 
+     *
      * @param string $end_date
      */
     function set_end_date($end_date)
@@ -352,7 +351,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the state_id of this Employment.
-     * 
+     *
      * @return integer The state_id.
      */
     function get_state_id()
@@ -362,7 +361,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the state_id of this Employment.
-     * 
+     *
      * @param integer $state_id
      */
     function set_state_id($state_id)
@@ -372,7 +371,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the state of this Employment.
-     * 
+     *
      * @return string The state.
      */
     function get_state()
@@ -382,7 +381,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the state of this Employment.
-     * 
+     *
      * @param string $state
      */
     function set_state($state)
@@ -392,7 +391,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the state_code of this Employment.
-     * 
+     *
      * @return string The state_code.
      */
     function get_state_code()
@@ -402,7 +401,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the state_code of this Employment.
-     * 
+     *
      * @param string $state_code
      */
     function set_state_code($state_code)
@@ -412,7 +411,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the office_id of this Employment.
-     * 
+     *
      * @return integer The office_id.
      */
     function get_office_id()
@@ -422,7 +421,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the office_id of this Employment.
-     * 
+     *
      * @param integer $office_id
      */
     function set_office_id($office_id)
@@ -432,7 +431,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the office of this Employment.
-     * 
+     *
      * @return string The office.
      */
     function get_office()
@@ -442,7 +441,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the office of this Employment.
-     * 
+     *
      * @param string $office
      */
     function set_office($office)
@@ -457,7 +456,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the category_id of this Employment.
-     * 
+     *
      * @return integer The category_id.
      */
     function get_category_id()
@@ -467,7 +466,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the category_id of this Employment.
-     * 
+     *
      * @param integer $category_id
      */
     function set_category_id($category_id)
@@ -477,7 +476,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the category_code of this Employment.
-     * 
+     *
      * @return string The category_code.
      */
     function get_category_code()
@@ -487,7 +486,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the category_code of this Employment.
-     * 
+     *
      * @param string $category_code
      */
     function set_category_code($category_code)
@@ -497,7 +496,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the category of this Employment.
-     * 
+     *
      * @return string The category.
      */
     function get_category()
@@ -507,7 +506,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the category of this Employment.
-     * 
+     *
      * @param string $category
      */
     function set_category($category)
@@ -517,7 +516,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the category_description of this Employment.
-     * 
+     *
      * @return string The category_description.
      */
     function get_category_description()
@@ -527,7 +526,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the category_description of this Employment.
-     * 
+     *
      * @param string $category_description
      */
     function set_category_description($category_description)
@@ -537,7 +536,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the description of this Employment.
-     * 
+     *
      * @return string The description.
      */
     function get_description()
@@ -547,7 +546,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the description of this Employment.
-     * 
+     *
      * @param string $description
      */
     function set_description($description)
@@ -557,7 +556,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the fund_id of this Employment.
-     * 
+     *
      * @return integer The fund_id.
      */
     function get_fund_id()
@@ -567,7 +566,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the fund_id of this Employment.
-     * 
+     *
      * @param integer $fund_id
      */
     function set_fund_id($fund_id)
@@ -577,7 +576,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the fund of this Employment.
-     * 
+     *
      * @return string The fund.
      */
     function get_fund()
@@ -587,7 +586,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the fund of this Employment.
-     * 
+     *
      * @param string $fund
      */
     function set_fund($fund)
@@ -608,7 +607,7 @@ class Employment extends DiscoveryItem
      *
      * @return string
      */
-    static 
+    static
 
     function fund_string($fund_id)
     {
@@ -631,7 +630,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the pay_scale_id of this Employment.
-     * 
+     *
      * @return integer The pay_scale_id.
      */
     function get_pay_scale_id()
@@ -641,7 +640,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the pay_scale_id of this Employment.
-     * 
+     *
      * @param integer $pay_scale_id
      */
     function set_pay_scale_id($pay_scale_id)
@@ -651,7 +650,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the pay_scale of this Employment.
-     * 
+     *
      * @return string The pay_scale.
      */
     function get_pay_scale()
@@ -661,7 +660,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the pay_scale of this Employment.
-     * 
+     *
      * @param string $pay_scale
      */
     function set_pay_scale($pay_scale)
@@ -671,7 +670,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the pay_scale_minimum_age of this Employment.
-     * 
+     *
      * @return integer The pay_scale_minimum_age.
      */
     function get_pay_scale_minimum_age()
@@ -681,7 +680,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the pay_scale_minimum_age of this Employment.
-     * 
+     *
      * @param integer $pay_scale_minimum_age
      */
     function set_pay_scale_minimum_age($pay_scale_minimum_age)
@@ -691,7 +690,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the pay_scale_minimum_wage of this Employment.
-     * 
+     *
      * @return float The pay_scale_minimum_wage.
      */
     function get_pay_scale_minimum_wage()
@@ -701,7 +700,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the pay_scale_minimum_wage of this Employment.
-     * 
+     *
      * @param float $pay_scale_minimum_wage
      */
     function set_pay_scale_minimum_wage($pay_scale_minimum_wage)
@@ -711,7 +710,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the pay_scale_maximum_wage of this Employment.
-     * 
+     *
      * @return float The pay_scale_maximum_wage.
      */
     function get_pay_scale_maximum_wage()
@@ -721,7 +720,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the pay_scale_maximum_wage of this Employment.
-     * 
+     *
      * @param float $pay_scale_maximum_wage
      */
     function set_pay_scale_maximum_wage($pay_scale_maximum_wage)
@@ -731,7 +730,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the active of this Employment.
-     * 
+     *
      * @return integer The active.
      */
     function get_active()
@@ -752,7 +751,7 @@ class Employment extends DiscoveryItem
      *
      * @return string
      */
-    static 
+    static
 
     function active_string($active)
     {
@@ -769,7 +768,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the active of this Employment.
-     * 
+     *
      * @param integer $active
      */
     function set_active($active)
@@ -779,7 +778,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the cycles of this Employment.
-     * 
+     *
      * @return integer The cycles.
      */
     function get_cycles()
@@ -789,7 +788,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the cycles of this Employment.
-     * 
+     *
      * @param integer $cycles
      */
     function set_cycles($cycles)
@@ -799,7 +798,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the interruption_id of this Employment.
-     * 
+     *
      * @return integer The interruption_id.
      */
     function get_interruption_id()
@@ -809,7 +808,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the interruption_id of this Employment.
-     * 
+     *
      * @param integer $interruption_id
      */
     function set_interruption_id($interruption_id)
@@ -819,7 +818,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the interruption of this Employment.
-     * 
+     *
      * @return string The interruption.
      */
     function get_interruption()
@@ -829,7 +828,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the interruption of this Employment.
-     * 
+     *
      * @param string $interruption
      */
     function set_interruption($interruption)
@@ -839,7 +838,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the interruption_category_id of this Employment.
-     * 
+     *
      * @return integer The interruption_category_id.
      */
     function get_interruption_category_id()
@@ -849,7 +848,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the interruption_category_id of this Employment.
-     * 
+     *
      * @param integer $interruption_category_id
      */
     function set_interruption_category_id($interruption_category_id)
@@ -859,7 +858,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Returns the interruption_category of this Employment.
-     * 
+     *
      * @return string The interruption_category.
      */
     function get_interruption_category()
@@ -869,7 +868,7 @@ class Employment extends DiscoveryItem
 
     /**
      * Sets the interruption_category of this Employment.
-     * 
+     *
      * @param string $interruption_category
      */
     function set_interruption_category($interruption_category)
@@ -881,7 +880,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static 
+    static
 
     function get_table_name()
     {

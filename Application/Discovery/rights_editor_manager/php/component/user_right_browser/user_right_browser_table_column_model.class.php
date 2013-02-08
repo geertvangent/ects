@@ -5,7 +5,6 @@ use user\UserManager;
 use user\User;
 use common\libraries\Application;
 use common\libraries\ObjectTableColumnModel;
-use common\libraries\Utilities;
 use common\libraries\ObjectTableColumn;
 
 /**
@@ -36,16 +35,16 @@ class UserRightBrowserTableColumnModel extends ObjectTableColumnModel
     function __construct($browser)
     {
         parent :: __construct($this->get_default_column());
-        
+
         $this->browser = $browser;
-        
+
         $this->set_default_order_column(1);
         $this->add_rights_columns();
     }
 
     /**
      * Determines wheter a column is a rights column
-     * 
+     *
      * @param ObjectTableColumn $column
      * @return boolean
      */
@@ -60,12 +59,12 @@ class UserRightBrowserTableColumnModel extends ObjectTableColumnModel
     function add_rights_columns()
     {
         $rights = $this->browser->get_available_rights();
-        
+
         foreach ($rights as $right_name => $right_id)
         {
             $column = new ObjectTableColumn($right_name, false);
             $this->add_column($column);
-            
+
             self :: $rights_columns[] = $column;
         }
     }
@@ -73,14 +72,13 @@ class UserRightBrowserTableColumnModel extends ObjectTableColumnModel
     function get_default_column()
     {
         $user_namespace = Application :: determine_namespace(UserManager :: APPLICATION_NAME);
-        
+
         $columns = array();
         $columns[] = new ObjectTableColumn(User :: PROPERTY_OFFICIAL_CODE, true, null, true, $user_namespace);
         $columns[] = new ObjectTableColumn(User :: PROPERTY_USERNAME, true, null, true, $user_namespace);
         $columns[] = new ObjectTableColumn(User :: PROPERTY_FIRSTNAME, true, null, true, $user_namespace);
         $columns[] = new ObjectTableColumn(User :: PROPERTY_LASTNAME, true, null, true, $user_namespace);
-        
+
         return $columns;
     }
 }
-?>

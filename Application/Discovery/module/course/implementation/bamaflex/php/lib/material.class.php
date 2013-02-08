@@ -40,7 +40,7 @@ class Material extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
         $extended_property_names[] = self :: PROPERTY_TYPE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -63,4 +63,3 @@ class Material extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

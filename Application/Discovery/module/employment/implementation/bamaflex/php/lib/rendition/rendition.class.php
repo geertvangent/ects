@@ -24,4 +24,3 @@ abstract class RenditionImplementation extends \application\discovery\RenditionI
         return $this->get_module()->get_employment_parts($employment_id);
     }
 }
-?>

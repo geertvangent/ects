@@ -36,17 +36,17 @@ class Name extends DataClass
     function get_first_names()
     {
         $names = array();
-        
+
         if ($this->get_first_name())
         {
             $names[] = $this->get_first_name();
         }
-        
+
         if ($this->get_other_first_names())
         {
             $names[] = $this->get_other_first_names();
         }
-        
+
         return implode(' ', $names);
     }
 
@@ -95,7 +95,7 @@ class Name extends DataClass
         $extended_property_names[] = self :: PROPERTY_FIRST_NAME;
         $extended_property_names[] = self :: PROPERTY_OTHER_FIRST_NAMES;
         $extended_property_names[] = self :: PROPERTY_LAST_NAME;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -117,4 +117,3 @@ class Name extends DataClass
         return $this->get_first_name() . ' ' . $this->get_last_name();
     }
 }
-?>

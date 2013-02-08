@@ -21,4 +21,3 @@ class DataSource implements DataManagerInterface
         return UserDataManager :: get_instance()->count_users($condition);
     }
 }
-?>

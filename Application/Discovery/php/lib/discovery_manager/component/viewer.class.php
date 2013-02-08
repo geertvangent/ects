@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery;
 
-use user\UserManager;
 use user\UserDataManager;
 use common\libraries\DelegateComponent;
 use common\libraries\Breadcrumb;
@@ -11,14 +10,10 @@ use common\libraries\ToolbarItem;
 use common\libraries\BreadcrumbTrail;
 use common\libraries\ObjectTableOrder;
 use common\libraries\EqualityCondition;
-use common\libraries\Session;
 use common\libraries\Theme;
 use common\libraries\DynamicVisualTab;
 use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\Redirect;
 use common\libraries\Request;
-use application\discovery\module\profile\Profile;
-use application\discovery\module\profile\implementation\bamaflex\SettingsConnector;
 
 /**
  *
@@ -192,4 +187,3 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
         $this->display_footer();
     }
 }
-?>

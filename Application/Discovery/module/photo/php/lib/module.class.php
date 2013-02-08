@@ -1,10 +1,6 @@
 <?php
 namespace application\discovery\module\photo;
 
-use application\discovery\module\photo\implementation\bamaflex\GalleryBrowserTable;
-use application\discovery\DiscoveryManager;
-use user\User;
-use common\libraries\InCondition;
 use common\libraries\Path;
 use common\libraries\Filesystem;
 use application\discovery\ModuleInstance;
@@ -59,4 +55,3 @@ class Module extends \application\discovery\Module
         return array();
     }
 }
-?>

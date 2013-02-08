@@ -52,4 +52,3 @@ class Parameters extends \application\discovery\Parameters
         $this->set_parameter(Module :: PARAM_TYPE, $type);
     }
 }
-?>

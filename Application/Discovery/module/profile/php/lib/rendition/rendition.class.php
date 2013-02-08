@@ -8,4 +8,3 @@ abstract class Rendition extends \application\discovery\Rendition
         return $this->get_rendition_implementation()->get_profile();
     }
 }
-?>

@@ -16,4 +16,3 @@ interface DataManagerInterface
      */
     function retrieve_student_years($student_year_parameters);
 }
-?>

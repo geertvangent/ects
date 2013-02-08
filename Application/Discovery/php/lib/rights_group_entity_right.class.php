@@ -18,7 +18,7 @@ class RightsGroupEntityRight extends DataClass
     static function get_default_property_names()
     {
         return parent :: get_default_property_names(
-                array(self :: PROPERTY_RIGHT_ID, self :: PROPERTY_ENTITY_ID, self :: PROPERTY_ENTITY_TYPE, 
+                array(self :: PROPERTY_RIGHT_ID, self :: PROPERTY_ENTITY_ID, self :: PROPERTY_ENTITY_TYPE,
                         self :: PROPERTY_GROUP_ID, self :: PROPERTY_MODULE_ID));
     }
 
@@ -97,5 +97,3 @@ class RightsGroupEntityRight extends DataClass
         return $this->get_module_id() . '_' . $this->get_entity_type() . '_' . $this->get_entity_id() . '_' . $this->get_group_id();
     }
 }
-
-?>

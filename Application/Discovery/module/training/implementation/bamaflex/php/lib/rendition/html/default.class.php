@@ -1,12 +1,7 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
 use common\libraries\ToolbarItem;
-use application\discovery\module\training\DataManager;
-use common\libraries\PropertiesTable;
-use common\libraries\Request;
 use common\libraries\Theme;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
@@ -140,4 +135,3 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }
 }
-?>

@@ -25,7 +25,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         if (! isset($this->actions))
         {
             $query = 'SELECT * FROM action WHERE id IN (1, 4, 6)';
-            
+
             $statement = $this->get_connection()->query($query);
             if (! $statement instanceof \PDOException)
             {
@@ -34,12 +34,12 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
                     $action = new Action();
                     $action->set_id($result->id);
                     $action->set_title($result->name);
-                    
+
                     $this->actions[] = $action;
                 }
             }
         }
-        
+
         return $this->actions;
     }
 
@@ -48,7 +48,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         if (! isset($this->applications))
         {
             $query = 'SELECT * FROM application';
-            
+
             $statement = $this->get_connection()->query($query);
             if (! $statement instanceof \PDOException)
             {
@@ -61,7 +61,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
                 }
             }
         }
-        
+
         return $this->applications;
     }
 
@@ -74,12 +74,12 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
     {
         $user_id = $parameters->get_user_id();
         $mode = $parameters->get_mode();
-        
+
         if ($mode == Parameters :: MODE_GENERAL)
         {
             $user_id = 0;
         }
-        
+
         if (! isset($this->cas_statistics[$user_id]))
         {
             if ($mode == Parameters :: MODE_GENERAL)
@@ -94,23 +94,23 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
             {
                 $user = UserDataManager :: get_instance()->retrieve_user($user_id);
                 $official_code = $user->get_official_code();
-                
+
                 $query = 'SELECT count(id) AS \'count\', person_id, application_id, action_id, date_format(date, \'%Y-%m\') AS \'date\'
                     FROM cas_data.statistics
                     WHERE person_id = "' . $official_code . '" AND ((application_id IS NOT NULL AND action_id = 4) OR (application_id IS NULL AND action_id IN (1, 6)))
                     GROUP BY person_id , date_format(date, \'%Y-%m\'), application_id , action_id
                     ORDER BY date DESC, action_id, application_id';
             }
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if (! $statement instanceof \PDOException)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $cas = new CasCount();
                     $cas->set_count($result->count);
-                    
+
                     if ($mode == Parameters :: MODE_GENERAL)
                     {
                         $cas->set_person_id(0);
@@ -119,16 +119,16 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
                     {
                         $cas->set_person_id($result->person_id);
                     }
-                    
+
                     $cas->set_action_id($result->action_id);
                     $cas->set_application_id($result->application_id);
                     $cas->set_date($result->date);
-                    
+
                     $this->cas_statistics[$user_id][] = $cas;
                 }
             }
         }
-        
+
         return $this->cas_statistics[$user_id];
     }
 
@@ -136,7 +136,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
     {
         $user_id = $parameters->get_user_id();
         $mode = $parameters->get_mode();
-        
+
         if ($mode == Parameters :: MODE_GENERAL)
         {
             $query = 'SELECT count(id) AS statistics_count FROM statistics WHERE ((application_id IS NOT NULL AND action_id = 4) OR (application_id IS NULL AND action_id IN (1, 6)))';
@@ -145,18 +145,18 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT count(id) AS statistics_count FROM statistics WHERE person_id = "' . $official_code . '" AND ((application_id IS NOT NULL AND action_id = 4) OR (application_id IS NULL AND action_id IN (1, 6)))';
         }
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if (! $statement instanceof \PDOException)
         {
             $record = $statement->fetch(\PDO :: FETCH_NUM);
             return (int) $record[0];
         }
-        
+
         return 0;
     }
 
@@ -165,15 +165,15 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         $query = 'SELECT count(id) AS statistics_count FROM statistics';
         $translator = new DoctrineConditionTranslator($this);
         $query .= $translator->render_query($condition);
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if (! $statement instanceof \PDOException)
         {
             $record = $statement->fetch(\PDO :: FETCH_NUM);
             return (int) $record[0];
         }
-        
+
         return 0;
     }
 
@@ -181,13 +181,13 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
     {
         if ($user_id != 0)
         {
-            
+
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-            
+
             if ($application instanceof Application)
             {
-                
+
                 $query = 'SELECT date FROM statistics WHERE person_id = "' . $official_code . '" AND action_id = "' . $action->get_id() . '" AND application_id = "' . $application->get_id() . '" ORDER BY date LIMIT 1';
             }
             else
@@ -199,7 +199,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         {
             if ($application instanceof Application)
             {
-                
+
                 $query = 'SELECT date FROM statistics WHERE action_id = "' . $action->get_id() . '" AND application_id = "' . $application->get_id() . '" ORDER BY date LIMIT 1';
             }
             else
@@ -207,16 +207,16 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
                 $query = 'SELECT date FROM statistics WHERE action_id = "' . $action->get_id() . '" AND application_id IS NULL ORDER BY date LIMIT 1';
             }
         }
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if (! $statement instanceof \PDOException)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->date;
         }
     }
-    
+
     // helper for DoctrineConditionTranslator
     function get_alias($table_name)
     {
@@ -241,4 +241,3 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         return $this->get_connection()->quote($value, $type, $quote, $escape_wildcards);
     }
 }
-?>

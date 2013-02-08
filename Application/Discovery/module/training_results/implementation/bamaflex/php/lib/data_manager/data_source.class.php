@@ -190,4 +190,3 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 }
-?>

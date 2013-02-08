@@ -54,7 +54,7 @@ class Faculty extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_NAME;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -79,4 +79,3 @@ class Faculty extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

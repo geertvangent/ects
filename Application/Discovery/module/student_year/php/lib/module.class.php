@@ -4,11 +4,6 @@ namespace application\discovery\module\student_year;
 use common\libraries\Path;
 use common\libraries\Filesystem;
 use common\libraries\Request;
-use common\libraries\Theme;
-use common\libraries\SortableTableFromArray;
-use common\libraries\Translation;
-use common\libraries\PropertiesTable;
-use common\libraries\Display;
 use common\libraries\Application;
 use application\discovery\ModuleInstance;
 use application\discovery\module\profile\DataManager;
@@ -88,4 +83,3 @@ abstract class Module extends \application\discovery\Module
         return ModuleInstance :: TYPE_USER;
     }
 }
-?>

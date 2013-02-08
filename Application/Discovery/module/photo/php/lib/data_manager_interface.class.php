@@ -9,4 +9,3 @@ namespace application\discovery\module\photo;
 interface DataManagerInterface
 {
 }
-?>

@@ -23,4 +23,3 @@ interface DataManagerInterface
      */
     function retrieve_mark_moments($course_results_parameters);
 }
-?>

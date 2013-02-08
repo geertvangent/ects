@@ -91,4 +91,3 @@ class XlsxDefaultRendition extends XlsxRendition
         }
     }
 }
-?>

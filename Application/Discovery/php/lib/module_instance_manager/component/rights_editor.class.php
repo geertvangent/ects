@@ -36,4 +36,3 @@ class ModuleInstanceManagerRightsEditorComponent extends ModuleInstanceManager
         return $this->module_instance_id;
     }
 }
-?>

@@ -30,4 +30,3 @@ class DummyRenditionImplementation extends AbstractRenditionImplementation
         return $this->format;
     }
 }
-?>

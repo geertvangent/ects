@@ -497,4 +497,3 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
                 $this->get_training_id());
     }
 }
-?>

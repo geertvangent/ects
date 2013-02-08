@@ -24,4 +24,3 @@ class GroupBrowserTableColumnModel extends DefaultGroupTableColumnModel
         $this->add_column(new StaticTableColumn(Translation :: get('Subgroups')));
     }
 }
-?>

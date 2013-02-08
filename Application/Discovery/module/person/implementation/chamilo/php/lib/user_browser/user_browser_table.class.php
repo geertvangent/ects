@@ -7,4 +7,3 @@ class UserBrowserTable extends NewObjectTable
 {
     const DEFAULT_ROW_COUNT = 20;
 }
-?>

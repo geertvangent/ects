@@ -8,7 +8,7 @@ class ModuleInstanceBrowserTableDataProvider extends ObjectTableDataProvider
 
     /**
      * Constructor
-     * 
+     *
      * @param ModuleInstanceManager $browser
      * @param Condition $condition
      */
@@ -27,7 +27,7 @@ class ModuleInstanceBrowserTableDataProvider extends ObjectTableDataProvider
     function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
-        return DiscoveryDataManager :: get_instance()->retrieve_module_instances($this->get_condition(), $offset, 
+        return DiscoveryDataManager :: get_instance()->retrieve_module_instances($this->get_condition(), $offset,
                 $count, $order_property);
     }
 
@@ -36,4 +36,3 @@ class ModuleInstanceBrowserTableDataProvider extends ObjectTableDataProvider
         return DiscoveryDataManager :: get_instance()->count_module_instances($this->get_condition());
     }
 }
-?>

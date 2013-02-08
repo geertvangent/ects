@@ -16,4 +16,3 @@ interface DataManagerInterface
      */
     function retrieve_group_users($group_user_parameters);
 }
-?>

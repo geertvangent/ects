@@ -114,7 +114,7 @@ class CasCount extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_APPLICATION_ID;
         $extended_property_names[] = self :: PROPERTY_ACTION_ID;
         $extended_property_names[] = self :: PROPERTY_DATE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -127,4 +127,3 @@ class CasCount extends DiscoveryItem
         return DiscoveryDataManager :: get_instance();
     }
 }
-?>

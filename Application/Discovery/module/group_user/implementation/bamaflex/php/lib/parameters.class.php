@@ -31,4 +31,3 @@ class Parameters extends \application\discovery\module\group_user\Parameters
         return $this->get_parameter(Module :: PARAM_TYPE);
     }
 }
-?>

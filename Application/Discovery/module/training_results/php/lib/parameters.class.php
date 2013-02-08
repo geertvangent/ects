@@ -19,4 +19,3 @@ class Parameters extends \application\discovery\Parameters
         $this->set_parameter(Module :: PARAM_TRAINING_ID, $training_id);
     }
 }
-?>

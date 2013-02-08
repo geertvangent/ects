@@ -167,7 +167,7 @@ class Profile extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_COMMUNICATION;
         $extended_property_names[] = self :: PROPERTY_LANGUAGE;
         $extended_property_names[] = self :: PROPERTY_PHOTO;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -189,4 +189,3 @@ class Profile extends DiscoveryItem
         return $this->get_photo() instanceof Photo && $this->get_photo()->get_mime_type() && $this->get_photo()->get_data();
     }
 }
-?>

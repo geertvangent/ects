@@ -18,7 +18,7 @@ class UserRightBrowserTableDataProvider extends ObjectTableDataProvider
 
     /**
      * Constructor
-     * 
+     *
      * @param Application $browser
      * @param Condition $condition
      */
@@ -30,8 +30,8 @@ class UserRightBrowserTableDataProvider extends ObjectTableDataProvider
     function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
-        
-        return UserDataManager :: get_instance()->retrieve_users($this->get_condition(), $offset, $count, 
+
+        return UserDataManager :: get_instance()->retrieve_users($this->get_condition(), $offset, $count,
                 $order_property);
     }
 
@@ -40,4 +40,3 @@ class UserRightBrowserTableDataProvider extends ObjectTableDataProvider
         return UserDataManager :: get_instance()->count_users($this->get_condition());
     }
 }
-?>

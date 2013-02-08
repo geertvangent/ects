@@ -109,12 +109,12 @@ class Profile extends \application\discovery\module\profile\Profile
     function get_nationality_string()
     {
         $nationalities = array();
-        
+
         foreach ($this->get_nationality() as $nationality)
         {
             $nationalities[] = $nationality->get_nationality();
         }
-        
+
         return implode(', ', $nationalities);
     }
 
@@ -227,7 +227,7 @@ class Profile extends \application\discovery\module\profile\Profile
         $extended_property_names[] = self :: PROPERTY_ADDRESS;
         $extended_property_names[] = self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE;
         $extended_property_names[] = self :: PROPERTY_FIRST_UNIVERSITY;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -240,4 +240,3 @@ class Profile extends \application\discovery\module\profile\Profile
         return DiscoveryDataManager :: get_instance();
     }
 }
-?>

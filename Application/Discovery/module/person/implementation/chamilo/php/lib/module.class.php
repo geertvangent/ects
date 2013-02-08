@@ -99,4 +99,3 @@ class Module extends \application\discovery\module\person\Module
         return new Parameters();
     }
 }
-?>

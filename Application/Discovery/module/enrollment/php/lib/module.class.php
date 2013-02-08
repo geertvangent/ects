@@ -4,15 +4,7 @@ namespace application\discovery\module\enrollment;
 use common\libraries\Filesystem;
 use common\libraries\Request;
 use common\libraries\Path;
-use common\libraries\WebApplication;
-use common\libraries\ResourceManager;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\PropertiesTable;
-use common\libraries\Display;
 use common\libraries\Application;
-use application\discovery\SortableTable;
 use application\discovery\ModuleInstance;
 
 abstract class Module extends \application\discovery\Module
@@ -90,4 +82,3 @@ abstract class Module extends \application\discovery\Module
         return $types;
     }
 }
-?>

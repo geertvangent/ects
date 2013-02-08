@@ -6,7 +6,6 @@ use common\libraries\Translation;
 use common\libraries\Utilities;
 use common\libraries\ObjectTableCellRenderer;
 use common\libraries\Theme;
-use common\libraries\DatetimeUtilities;
 
 class DefaultModuleInstanceTableCellRenderer extends ObjectTableCellRenderer
 {
@@ -41,4 +40,3 @@ class DefaultModuleInstanceTableCellRenderer extends ObjectTableCellRenderer
         return $object->get_id();
     }
 }
-?>

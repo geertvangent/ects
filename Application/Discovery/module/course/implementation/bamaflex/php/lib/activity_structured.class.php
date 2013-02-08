@@ -85,7 +85,7 @@ class ActivityStructured extends Activity
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_TIME;
         $extended_property_names[] = self :: PROPERTY_REMARKS;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -108,4 +108,3 @@ class ActivityStructured extends Activity
         return implode(' | ', $string);
     }
 }
-?>

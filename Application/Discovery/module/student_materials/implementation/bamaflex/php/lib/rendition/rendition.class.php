@@ -9,4 +9,3 @@ abstract class RenditionImplementation extends \application\discovery\RenditionI
         return $this->get_module()->has_enrollment_materials_by_type($year, $enrollment_id, $type);
     }
 }
-?>

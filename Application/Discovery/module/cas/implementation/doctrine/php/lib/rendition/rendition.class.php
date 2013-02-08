@@ -19,4 +19,3 @@ abstract class RenditionImplementation extends \application\discovery\RenditionI
         return $this->get_module()->get_applications();
     }
 }
-?>

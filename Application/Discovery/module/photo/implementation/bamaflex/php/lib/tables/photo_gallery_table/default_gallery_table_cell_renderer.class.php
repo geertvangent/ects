@@ -25,4 +25,3 @@ abstract class DefaultGalleryTableCellRenderer implements GalleryObjectTableCell
 
     abstract function get_cell_content(User $user);
 }
-?>

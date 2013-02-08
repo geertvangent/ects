@@ -6,13 +6,13 @@ use common\libraries\DataClass;
 
 /**
  * application.discovery.connection.bamaflex.
- * 
+ *
  * @author GillardMagali
  */
 class History extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * History properties
      */
@@ -24,7 +24,7 @@ class History extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -35,13 +35,13 @@ class History extends DataClass
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_ID;
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_SOURCE;
         $extended_property_names[] = self :: PROPERTY_TYPE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     function get_data_manager()
@@ -51,7 +51,7 @@ class History extends DataClass
 
     /**
      * Returns the history_id of this History.
-     * 
+     *
      * @return int The history_id.
      */
     function get_history_id()
@@ -61,7 +61,7 @@ class History extends DataClass
 
     /**
      * Sets the history_id of this History.
-     * 
+     *
      * @param int $history_id
      */
     function set_history_id($history_id)
@@ -71,7 +71,7 @@ class History extends DataClass
 
     /**
      * Returns the history_source of this History.
-     * 
+     *
      * @return int The history_source.
      */
     function get_history_source()
@@ -81,7 +81,7 @@ class History extends DataClass
 
     /**
      * Sets the history_source of this History.
-     * 
+     *
      * @param int $history_source
      */
     function set_history_source($history_source)
@@ -91,7 +91,7 @@ class History extends DataClass
 
     /**
      * Returns the previous_id of this History.
-     * 
+     *
      * @return int The previous_id.
      */
     function get_previous_id()
@@ -101,7 +101,7 @@ class History extends DataClass
 
     /**
      * Sets the previous_id of this History.
-     * 
+     *
      * @param int $previous_id
      */
     function set_previous_id($previous_id)
@@ -111,7 +111,7 @@ class History extends DataClass
 
     /**
      * Returns the previous_source of this History.
-     * 
+     *
      * @return int The previous_source.
      */
     function get_previous_source()
@@ -121,7 +121,7 @@ class History extends DataClass
 
     /**
      * Sets the previous_source of this History.
-     * 
+     *
      * @param int $previous_source
      */
     function set_previous_source($previous_source)
@@ -131,7 +131,7 @@ class History extends DataClass
 
     /**
      * Returns the type of this History.
-     * 
+     *
      * @return string The type.
      */
     function get_type()
@@ -141,7 +141,7 @@ class History extends DataClass
 
     /**
      * Sets the type of this History.
-     * 
+     *
      * @param string $type
      */
     function set_type($type)

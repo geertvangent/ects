@@ -5,11 +5,10 @@ use user\User;
 use user\DefaultUserTableColumnModel;
 use common\libraries\ObjectTableColumn;
 use common\libraries\StaticTableColumn;
-use common\libraries\Path;
 
 /**
  * $Id: user_browser_table_column_model.class.php 211 2009-11-13 13:28:39Z vanpouckesven $
- * 
+ *
  * @package user.lib.user_manager.component.user_browser
  */
 /**
@@ -36,7 +35,7 @@ class UserBrowserTableColumnModel extends DefaultUserTableColumnModel
 
     /**
      * Gets the modification column
-     * 
+     *
      * @return ContentObjectTableColumn
      */
     static function get_modification_column()
@@ -48,4 +47,3 @@ class UserBrowserTableColumnModel extends DefaultUserTableColumnModel
         return self :: $modification_column;
     }
 }
-?>

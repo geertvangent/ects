@@ -2,7 +2,6 @@
 namespace application\discovery\data_source\bamaflex;
 
 use common\libraries\Configuration;
-use common\libraries\WebApplication;
 use common\libraries\Utilities;
 
 /**
@@ -29,7 +28,7 @@ class DiscoveryDataManager
     /**
      * Uses a singleton pattern and a factory pattern to return the data manager. The configuration determines which
      * data manager class is to be instantiated.
-     * 
+     *
      * @return DiscoveryDataManagerInterface The data manager.
      */
     static function get_instance()
@@ -43,4 +42,3 @@ class DiscoveryDataManager
         return self :: $instance;
     }
 }
-?>

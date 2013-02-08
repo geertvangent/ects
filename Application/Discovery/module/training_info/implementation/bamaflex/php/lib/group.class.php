@@ -4,17 +4,16 @@ namespace application\discovery\module\training_info\implementation\bamaflex;
 use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
-use common\libraries\DataClass;
 
 /**
  * application.discovery.module.training.implementation.bamaflex
- * 
+ *
  * @author Hans De Bisschop
  */
 class Group extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      *
      * @var string
@@ -38,7 +37,7 @@ class Group extends DiscoveryItem
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -48,13 +47,13 @@ class Group extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_GROUP_ID;
         $extended_property_names[] = self :: PROPERTY_GROUP;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -64,7 +63,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the source of this Group.
-     * 
+     *
      * @return string The source.
      */
     function get_source()
@@ -74,7 +73,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the source of this Group.
-     * 
+     *
      * @param string $source
      */
     function set_source($source)
@@ -84,7 +83,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the training_id of this Group.
-     * 
+     *
      * @return integer The training_id.
      */
     function get_training_id()
@@ -94,7 +93,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the training_id of this Group.
-     * 
+     *
      * @param integer $training_id
      */
     function set_training_id($training_id)
@@ -104,7 +103,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the group_id of this Group.
-     * 
+     *
      * @return integer The group_id.
      */
     function get_group_id()
@@ -114,7 +113,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the group_id of this Group.
-     * 
+     *
      * @param integer $group_id
      */
     function set_group_id($group_id)
@@ -124,7 +123,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the group of this Group.
-     * 
+     *
      * @return string The group.
      */
     function get_group()
@@ -134,7 +133,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the group of this Group.
-     * 
+     *
      * @param string $group
      */
     function set_group($group)

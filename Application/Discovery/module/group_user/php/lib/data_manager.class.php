@@ -1,10 +1,6 @@
 <?php
 namespace application\discovery\module\group_user;
 
-use common\libraries\WebApplication;
-use common\libraries\Utilities;
-use common\libraries\Path;
-use application\discovery\DiscoveryManager;
 
 /**
  *
@@ -42,4 +38,3 @@ class DataManager
         return self :: $instance[$module_instance->get_id()];
     }
 }
-?>

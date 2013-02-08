@@ -1,16 +1,12 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
-use common\libraries\Theme;
-use common\libraries\Utilities;
 use common\libraries\StringUtilities;
-use common\libraries\Filesystem;
 use common\libraries\Translation;
 use common\libraries\Display;
 use common\libraries\Path;
 use application\discovery\module\enrollment\DataManager;
 use PHPExcel;
-use PHPExcel_IOFactory;
 
 require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
@@ -360,4 +356,3 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }
 }
-?>

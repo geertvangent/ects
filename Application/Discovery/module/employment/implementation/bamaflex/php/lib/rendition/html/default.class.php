@@ -1,16 +1,10 @@
 <?php
 namespace application\discovery\module\employment\implementation\bamaflex;
 
-use user\UserDataManager;
 use common\libraries\Display;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
-use application\discovery\module\career\DataManager;
-use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\DynamicContentTab;
 use common\libraries\Theme;
-use common\libraries\SortableTableFromArray;
 use common\libraries\Utilities;
 use common\libraries\DatetimeUtilities;
 use common\libraries\Translation;
@@ -220,4 +214,3 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }
 }
-?>

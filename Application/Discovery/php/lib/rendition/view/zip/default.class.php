@@ -39,4 +39,3 @@ class ZipDefaultRendition extends ZipRendition
         }
     }
 }
-?>

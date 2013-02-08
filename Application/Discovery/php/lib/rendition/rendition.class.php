@@ -103,4 +103,3 @@ abstract class Rendition
         return Utilities :: get_namespace_from_classname(get_called_class());
     }
 }
-?>

@@ -7,13 +7,13 @@ use common\libraries\DataClass;
 
 /**
  * application.discovery.module.career.discovery
- * 
+ *
  * @author Hans De Bisschop
  */
 class MarkMoment extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Mark moment properties
      */
@@ -21,20 +21,20 @@ class MarkMoment extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_NAME;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -44,7 +44,7 @@ class MarkMoment extends DataClass
 
     /**
      * Returns the name of this MarkMoment.
-     * 
+     *
      * @return string The name.
      */
     function get_name()
@@ -54,7 +54,7 @@ class MarkMoment extends DataClass
 
     /**
      * Sets the name of this Mark.
-     * 
+     *
      * @param string $name
      */
     function set_name($name)

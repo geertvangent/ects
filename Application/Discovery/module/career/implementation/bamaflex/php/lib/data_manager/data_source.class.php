@@ -4,13 +4,8 @@ namespace application\discovery\module\career\implementation\bamaflex;
 use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use common\libraries\ArrayResultSet;
 use user\UserDataManager;
 use application\discovery\module\career\MarkMoment;
-use application\discovery\module\career\Photo;
-use application\discovery\module\career\Communication;
-use application\discovery\module\career\Email;
-use application\discovery\module\career\IdentificationCode;
 use application\discovery\module\career\Name;
 use application\discovery\module\career\DataManagerInterface;
 use MDB2_Error;
@@ -46,12 +41,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY contract_type';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -60,7 +55,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->contract_types[$id];
     }
 
@@ -71,12 +66,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT DISTINCT contract_id FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -85,7 +80,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->contract_ids[$id];
     }
 
@@ -96,7 +91,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE id = ' . $training_id . ' AND source = ' . $source;
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -116,24 +111,24 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $training->set_faculty_id($result->faculty_id);
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-                    
+
                     $reference = new HistoryReference();
                     $reference->set_id($result->previous_id);
                     $reference->set_source($result->previous_source);
                     $training->add_previous_reference($reference);
-                    
+
                     $next = $this->retrieve_training_next_id($training);
-                    
+
                     $reference = new HistoryReference();
                     $reference->set_id($next->id);
                     $reference->set_source($next->source);
                     $training->add_next_reference($reference);
-                    
+
                     $this->trainings[$source][$training_id] = $training;
                 }
             }
         }
-        
+
         return $this->trainings[$source][$training_id];
     }
 
@@ -142,7 +137,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             return $results->fetchRow(MDB2_FETCHMODE_OBJECT);
@@ -165,12 +160,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC, id';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -190,12 +185,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $enrollment->set_option_choice($this->convert_to_utf8($result->option_choice));
                     $enrollment->set_graduation_option($this->convert_to_utf8($result->graduation_option));
                     $enrollment->set_result($result->result);
-                    
+
                     $this->enrollments[$id][] = $enrollment;
                 }
             }
         }
-        
+
         return $this->enrollments[$id];
     }
 
@@ -211,22 +206,22 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-            
+
             $child_courses = $this->retrieve_child_courses($parameters);
-            
+
             $query = 'SELECT * FROM v_discovery_career_advanced ';
             $query .= 'WHERE programme_parent_id IS NULL AND person_id = "' . $official_code . '" ';
             $query .= 'ORDER BY year, name';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
                 {
                     $course = $this->result_to_course($parameters, $result);
-                    
+
                     if ($result->programme_id && isset(
                             $child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
                     {
@@ -235,12 +230,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                             $course->add_child($child_course);
                         }
                     }
-                    
+
                     $this->courses[$user_id][$course->get_enrollment_id()][] = $course;
                 }
             }
         }
-        
+
         return $this->courses[$user_id];
     }
 
@@ -249,13 +244,13 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user_id = $parameters->get_user_id();
         $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         $official_code = $user->get_official_code();
-        
+
         $query = 'SELECT count(id) AS courses_count FROM v_discovery_career_advanced ';
         $query .= 'WHERE person_id = "' . $official_code . '"';
-        
+
         $statement = $this->get_connection()->prepare($query);
         $result = $statement->execute();
-        
+
         if (! $result instanceof MDB2_Error)
         {
             $result = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
@@ -271,14 +266,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT * FROM v_discovery_career_advanced ';
             $query .= 'WHERE programme_parent_id IS NOT NULL AND person_id = "' . $official_code . '" ';
             $query .= 'ORDER BY year, trajectory_part, name';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -288,7 +283,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->child_courses[$user_id];
     }
 
@@ -306,9 +301,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $course->set_credits($result->credits);
         $course->set_weight($result->weight);
         $course->set_source($result->source);
-        
+
         $marks = $this->retrieve_marks($parameters->get_user_id());
-        
+
         foreach ($this->retrieve_mark_moments($parameters) as $moment)
         {
             if (isset($marks[$result->source][$result->id][$moment->get_id()]))
@@ -320,10 +315,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             {
                 $mark = Mark :: factory($moment->get_id());
             }
-            
+
             $course->add_mark($mark);
         }
-        
+
         return $course;
     }
 
@@ -335,32 +330,32 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function retrieve_mark_moments($parameters)
     {
         $moments = array();
-        
+
         $mark_moment = new MarkMoment();
         $mark_moment->set_id(1);
         $mark_moment->set_name('1<sup>ste</sup> kans');
         $moments[1] = $mark_moment;
-        
+
         $mark_moment = new MarkMoment();
         $mark_moment->set_id(2);
         $mark_moment->set_name('2<sup>de</sup> kans');
         $moments[2] = $mark_moment;
-        
+
         return $moments;
-        
+
         // $user_id = $parameters->get_user_id();
         // if (! isset($this->mark_moments[$user_id]))
         // {
         // $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         // $official_code = $user->get_official_code();
-        
+
         // $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ';
         // $query .= 'WHERE person_id = "' . $official_code . '" ';
         // $query .= 'ORDER BY try_order';
-        
+
         // $statement = $this->get_connection()->prepare($query);
         // $results = $statement->execute();
-        
+
         // if (! $results instanceof MDB2_Error)
         // {
         // while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -368,14 +363,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         // $mark_moment = new MarkMoment();
         // $mark_moment->set_id($result->try_id);
         // $mark_moment->set_name($result->try_name);
-        
+
         // dump($mark_moment);
-        
+
         // $this->mark_moments[$user_id][$result->try_id] = $mark_moment;
         // }
         // }
         // }
-        
+
         // return $this->mark_moments[$user_id];
     }
 
@@ -389,13 +384,13 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT * FROM v_discovery_mark_advanced ';
             $query .= 'WHERE person_id = "' . $official_code . '"';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $result = $statement->execute();
-            
+
             if (! $result instanceof MDB2_Error)
             {
                 while ($mark_result = $result->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -407,13 +402,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $mark->set_sub_status($mark_result->sub_status);
                     $mark->set_publish_status($mark_result->publish_status);
                     $mark->set_abandoned($mark_result->abandoned);
-                    
+
                     $this->marks[$user_id][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
                 }
             }
         }
-        
+
         return $this->marks[$user_id];
     }
 }
-?>

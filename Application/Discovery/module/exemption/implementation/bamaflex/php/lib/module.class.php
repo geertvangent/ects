@@ -24,4 +24,3 @@ class Module extends \application\discovery\module\exemption\Module
         return $this->cache_exemptions[$year];
     }
 }
-?>

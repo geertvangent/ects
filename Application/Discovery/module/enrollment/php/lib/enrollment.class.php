@@ -156,7 +156,7 @@ class Enrollment extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_RESULT;
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -181,4 +181,3 @@ class Enrollment extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

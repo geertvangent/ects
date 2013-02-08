@@ -11,11 +11,11 @@ class LegendTable extends SortableTable
      */
     private static $instance;
 
-    function __construct($table_data, $default_column = 1, $default_items_per_page = 20, $tablename = 'tablename', 
+    function __construct($table_data, $default_column = 1, $default_items_per_page = 20, $tablename = 'tablename',
             $default_direction = SORT_ASC)
     {
         parent :: __construct($table_data, $default_column, $default_items_per_page, $tablename, $default_direction);
-        
+
         $this->set_header(0, '', false);
         $this->set_header(1, Translation :: get('Type'), false);
         $this->set_header(2, Translation :: get('Legend'), false);
@@ -24,13 +24,13 @@ class LegendTable extends SortableTable
 
     /**
      * Get table data to show on current page
-     * 
+     *
      * @see SortableTable#get_table_data
      */
     function get_table_data()
     {
         $table_data = array();
-        
+
         foreach ($this->get_data() as $category)
         {
             foreach ($category as $key => $row)
@@ -38,13 +38,13 @@ class LegendTable extends SortableTable
                 $table_data[$key] = $row;
             }
         }
-        
+
         return $table_data;
     }
 
     /**
      * Returns the instance of this class.
-     * 
+     *
      * @return LegendTable
      */
     static function get_instance()
@@ -64,7 +64,7 @@ class LegendTable extends SortableTable
     function add_symbol($symbol, $description = null, $category = null)
     {
         $key = md5($symbol);
-        
+
         $data = $this->get_data();
         if (! key_exists($category, $data) || ! key_exists($key, $data[$category]))
         {
@@ -73,4 +73,3 @@ class LegendTable extends SortableTable
         }
     }
 }
-?>

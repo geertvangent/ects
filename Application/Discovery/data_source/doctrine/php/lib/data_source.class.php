@@ -10,7 +10,7 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      * Constructor
-     * 
+     *
      * @param $module_instance ModuleInstance
      */
     function __construct(ModuleInstance $module_instance)
@@ -26,7 +26,7 @@ class DataSource extends \application\discovery\DataSource
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $this->connection = Connection :: get_instance($data_source)->get_connection();
-        
+
         // $this->connection->setOption('debug_handler', array(get_class($this),
         // 'debug'));
         // $this->connection->setOption('portability', MDB2_PORTABILITY_NONE);
@@ -35,7 +35,7 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      * Returns the connection
-     * 
+     *
      * @return Connection the connection
      */
     function get_connection()
@@ -45,7 +45,7 @@ class DataSource extends \application\discovery\DataSource
 
     /**
      * Sets the connection
-     * 
+     *
      * @param $connection Connection
      */
     function set_connection($connection)
@@ -53,4 +53,3 @@ class DataSource extends \application\discovery\DataSource
         $this->connection = $connection;
     }
 }
-?>

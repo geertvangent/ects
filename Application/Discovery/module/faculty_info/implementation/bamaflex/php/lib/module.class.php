@@ -2,15 +2,6 @@
 namespace application\discovery\module\faculty_info\implementation\bamaflex;
 
 use common\libraries\Request;
-use common\libraries\PropertiesTable;
-use application\discovery\LegendTable;
-use common\libraries\Utilities;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Breadcrumb;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use application\discovery\SortableTable;
-use common\libraries\Translation;
 
 class Module extends \application\discovery\module\faculty_info\Module
 {
@@ -39,4 +30,3 @@ class Module extends \application\discovery\module\faculty_info\Module
         return $parameter;
     }
 }
-?>

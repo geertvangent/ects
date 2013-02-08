@@ -2,8 +2,6 @@
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use application\discovery\module\course\implementation\bamaflex\Course;
-use common\libraries\ArrayResultSet;
-use user\UserDataManager;
 use application\discovery\module\career\MarkMoment;
 use application\discovery\module\career\implementation\bamaflex\Mark;
 use application\discovery\module\course_results\DataManagerInterface;
@@ -247,4 +245,3 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->marks[$programme_id][$source];
     }
 }
-?>

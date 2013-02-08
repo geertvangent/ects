@@ -26,4 +26,3 @@ class EvaluationDescription extends Evaluation
         return implode(' | ', $string);
     }
 }
-?>

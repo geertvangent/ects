@@ -75,4 +75,3 @@ abstract class AbstractRenditionImplementation
      */
     abstract function get_format();
 }
-?>

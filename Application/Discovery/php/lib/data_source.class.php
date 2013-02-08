@@ -8,7 +8,7 @@ class DataSource
 
     /**
      * Constructor
-     * 
+     *
      * @param ModuleInstance $module_instance
      */
     function __construct(ModuleInstance $module_instance)
@@ -26,4 +26,3 @@ class DataSource
         $this->module_instance = $module_instance;
     }
 }
-?>

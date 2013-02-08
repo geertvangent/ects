@@ -19,4 +19,3 @@ class Parameters extends \application\discovery\Parameters
         $this->set_parameter(Module :: PARAM_GROUP_CLASS_ID, $group_class_id);
     }
 }
-?>

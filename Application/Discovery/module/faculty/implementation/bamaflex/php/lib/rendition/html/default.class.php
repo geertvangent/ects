@@ -5,7 +5,6 @@ use common\libraries\ToolbarItem;
 use common\libraries\Theme;
 use application\discovery\SortableTable;
 use common\libraries\Translation;
-use common\libraries\Display;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -85,4 +84,3 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }
 }
-?>

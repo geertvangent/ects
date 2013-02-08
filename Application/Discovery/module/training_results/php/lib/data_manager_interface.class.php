@@ -16,4 +16,3 @@ interface DataManagerInterface
      */
     function retrieve_training_results($training_results_parameters);
 }
-?>

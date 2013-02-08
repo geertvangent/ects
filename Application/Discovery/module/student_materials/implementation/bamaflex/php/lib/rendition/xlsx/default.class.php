@@ -3,7 +3,6 @@ namespace application\discovery\module\student_materials\implementation\bamaflex
 
 use common\libraries\Path;
 use PHPExcel;
-use PHPExcel_IOFactory;
 
 require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
@@ -35,4 +34,3 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }
 }
-?>

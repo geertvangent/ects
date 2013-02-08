@@ -59,4 +59,3 @@ abstract class Module extends \application\discovery\Module
         return $types;
     }
 }
-?>

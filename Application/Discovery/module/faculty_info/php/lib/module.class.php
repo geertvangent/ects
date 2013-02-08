@@ -82,4 +82,3 @@ abstract class Module extends \application\discovery\Module
         return $this->cache_trainings[$source][$faculty_id];
     }
 }
-?>

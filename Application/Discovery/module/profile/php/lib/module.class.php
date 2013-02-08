@@ -79,4 +79,3 @@ class Module extends \application\discovery\Module
         return ModuleInstance :: TYPE_USER;
     }
 }
-?>

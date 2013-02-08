@@ -25,7 +25,7 @@ class BamaflexAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
 
     /**
      * Returns all the groups for this feed
-     * 
+     *
      * @return ResultSet
      */
     function retrieve_groups()
@@ -37,11 +37,11 @@ class BamaflexAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
             $q = '*' . $search_query . '*';
             $conditions[] = new PatternMatchCondition(Group :: PROPERTY_NAME, $q);
         }
-        
+
         // Set the filter conditions
         $filter = Request :: post(self :: PARAM_FILTER);
         $filter_id = substr($filter, 6);
-        
+
         if ($filter_id)
         {
             $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT, $filter_id);
@@ -50,14 +50,14 @@ class BamaflexAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
         {
             $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT, 0);
         }
-        
+
         $targets_entities = Rights :: get_instance()->get_module_targets_entities(
                 $this->get_parameter(self :: PARAM_MODULE_INSTANCE_ID), $this->get_parameter(self :: PARAM_PARAMETERS));
-        $conditions[] = new InCondition(Group :: PROPERTY_ID, 
+        $conditions[] = new InCondition(Group :: PROPERTY_ID,
                 $targets_entities[RightsPlatformGroupEntity :: ENTITY_TYPE]);
         $condition = new AndCondition($conditions);
-        
-        return GroupDataManager :: get_instance()->retrieve_groups($condition, null, null, 
+
+        return GroupDataManager :: get_instance()->retrieve_groups($condition, null, null,
                 array(new ObjectTableOrder(Group :: PROPERTY_NAME)));
     }
 
@@ -68,47 +68,45 @@ class BamaflexAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
     {
         $filter = Request :: post(self :: PARAM_FILTER);
         $filter_id = substr($filter, 6);
-        
+
         if (! $filter_id)
         {
             return;
         }
-        
+
         $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $filter_id);
         $relations = GroupDataManager :: get_instance()->retrieve_group_rel_users($condition);
-        
+
         $user_ids = array();
-        
+
         while ($relation = $relations->next_result())
         {
             $user_ids[] = $relation->get_user_id();
         }
-        
+
         return $user_ids;
     }
 
     /**
      * Returns the element for a specific group
-     * 
+     *
      * @return AdvancedElementFinderElement
      */
     function get_group_element($group)
     {
-        return new AdvancedElementFinderElement(RightsPlatformGroupEntity :: ENTITY_TYPE . '_' . $group->get_id(), 
-                'type type_group', $group->get_name(), $group->get_code(), 
+        return new AdvancedElementFinderElement(RightsPlatformGroupEntity :: ENTITY_TYPE . '_' . $group->get_id(),
+                'type type_group', $group->get_name(), $group->get_code(),
                 AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER);
     }
 
     /**
      * Returns the element for a specific user
-     * 
+     *
      * @return AdvancedElementFinderElement
      */
     function get_user_element($user)
     {
-        return new AdvancedElementFinderElement(RightsUserEntity :: ENTITY_TYPE . '_' . $user->get_id(), 
+        return new AdvancedElementFinderElement(RightsUserEntity :: ENTITY_TYPE . '_' . $user->get_id(),
                 'type type_user', $user->get_fullname(), $user->get_official_code());
     }
 }
-
-?>

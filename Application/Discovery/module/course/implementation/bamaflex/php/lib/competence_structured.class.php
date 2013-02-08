@@ -61,7 +61,7 @@ class CompetenceStructured extends Competence
         $extended_property_names[] = self :: PROPERTY_CODE;
         $extended_property_names[] = self :: PROPERTY_SUMMARY;
         $extended_property_names[] = self :: PROPERTY_LEVEL;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -84,4 +84,3 @@ class CompetenceStructured extends Competence
         return implode(' | ', $string);
     }
 }
-?>

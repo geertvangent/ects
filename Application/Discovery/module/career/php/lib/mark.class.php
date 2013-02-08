@@ -7,13 +7,13 @@ use common\libraries\DataClass;
 
 /**
  * application.discovery.module.career.discovery
- * 
+ *
  * @author Hans De Bisschop
  */
 class Mark extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Mark properties
      */
@@ -23,7 +23,7 @@ class Mark extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -32,13 +32,13 @@ class Mark extends DataClass
         $extended_property_names[] = self :: PROPERTY_MOMENT;
         $extended_property_names[] = self :: PROPERTY_RESULT;
         $extended_property_names[] = self :: PROPERTY_STATUS;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DiscoveryDataManagerInterface
      */
     function get_data_manager()
@@ -48,7 +48,7 @@ class Mark extends DataClass
 
     /**
      * Returns the moment of this Mark.
-     * 
+     *
      * @return string The moment.
      */
     function get_moment()
@@ -58,7 +58,7 @@ class Mark extends DataClass
 
     /**
      * Sets the moment of this Mark.
-     * 
+     *
      * @param string $moment
      */
     function set_moment($moment)
@@ -68,7 +68,7 @@ class Mark extends DataClass
 
     /**
      * Returns the result of this Mark.
-     * 
+     *
      * @return string The result.
      */
     function get_result()
@@ -78,7 +78,7 @@ class Mark extends DataClass
 
     /**
      * Sets the result of this Mark.
-     * 
+     *
      * @param string $result
      */
     function set_result($result)
@@ -93,7 +93,7 @@ class Mark extends DataClass
 
     /**
      * Returns the status of this Mark.
-     * 
+     *
      * @return string The status.
      */
     function get_status()
@@ -103,7 +103,7 @@ class Mark extends DataClass
 
     /**
      * Sets the status of this Mark.
-     * 
+     *
      * @param string $status
      */
     function set_status($status)

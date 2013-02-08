@@ -9,4 +9,3 @@ class Module extends \application\discovery\module\student_materials\Module
         return $this->get_data_manager()->count_materials($this->get_module_parameters(), $year, $enrollment_id, $type);
     }
 }
-?>

@@ -94,7 +94,7 @@ class Person extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_FIRST_NAME;
         $extended_property_names[] = self :: PROPERTY_LAST_NAME;
         $extended_property_names[] = self :: PROPERTY_OFFICIAL_CODE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -117,4 +117,3 @@ class Person extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

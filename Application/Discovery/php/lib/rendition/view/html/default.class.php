@@ -28,4 +28,3 @@ class HtmlDefaultRendition extends HtmlRendition
                         Theme :: get_image_path() . 'export/' . $type . '.png', $url));
     }
 }
-?>

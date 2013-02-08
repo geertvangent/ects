@@ -202,4 +202,3 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }
 }
-?>

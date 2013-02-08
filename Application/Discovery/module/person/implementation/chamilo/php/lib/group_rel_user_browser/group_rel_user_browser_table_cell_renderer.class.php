@@ -1,13 +1,9 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use common\libraries\Utilities;
 use group\GroupRelUser;
 use group\DefaultGroupRelUserTableCellRenderer;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
 use common\libraries\Toolbar;
-use common\libraries\Theme;
 use user\userManager;
 
 class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellRenderer
@@ -20,7 +16,7 @@ class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellR
 
     /**
      * Constructor
-     * 
+     *
      * @param RepositoryManagerBrowserComponent $browser
      */
     function __construct($browser)
@@ -28,7 +24,7 @@ class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellR
         parent :: __construct();
         $this->browser = $browser;
     }
-    
+
     // Inherited
     function render_cell($column, $groupreluser)
     {
@@ -36,7 +32,7 @@ class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellR
         {
             return $this->get_modification_links($groupreluser);
         }
-        
+
         // Add special features here
         switch ($column->get_name())
         {
@@ -52,22 +48,21 @@ class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellR
     private function get_modification_links($groupreluser)
     {
         $toolbar = new Toolbar();
-        
-        $profile_link = $this->browser->get_module_link('application\discovery\module\profile\implementation\bamaflex', 
+
+        $profile_link = $this->browser->get_module_link('application\discovery\module\profile\implementation\bamaflex',
                 $groupreluser->get_user_id());
         if ($profile_link)
         {
             $toolbar->add_item($profile_link);
         }
-        
-        $career_link = $this->browser->get_module_link('application\discovery\module\career\implementation\bamaflex', 
+
+        $career_link = $this->browser->get_module_link('application\discovery\module\career\implementation\bamaflex',
                 $groupreluser->get_user_id());
         if ($career_link)
         {
             $toolbar->add_item($career_link);
         }
-        
+
         return $toolbar->as_html();
     }
 }
-?>

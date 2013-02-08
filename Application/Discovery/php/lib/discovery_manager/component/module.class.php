@@ -9,4 +9,3 @@ class DiscoveryManagerModuleComponent extends DiscoveryManager
         ModuleInstanceManager :: launch($this);
     }
 }
-?>

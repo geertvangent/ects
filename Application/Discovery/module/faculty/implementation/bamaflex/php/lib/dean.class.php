@@ -82,7 +82,7 @@ class Dean extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_FUNCTION_ID;
         $extended_property_names[] = self :: PROPERTY_PERSON;
         $extended_property_names[] = self :: PROPERTY_FUNCTION;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -95,4 +95,3 @@ class Dean extends DiscoveryItem
         return DiscoveryDataManager :: get_instance();
     }
 }
-?>

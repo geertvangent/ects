@@ -72,4 +72,3 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
         return $this->get_module()->get_module_link($type, $user_id);
     }
 }
-?>

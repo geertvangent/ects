@@ -4,7 +4,6 @@ namespace application\discovery;
 use common\libraries\NotAllowedException;
 use common\libraries\CommonDataManager;
 use common\libraries\Translation;
-use admin\AdminDataManager;
 use core\lynx\PackageList;
 use common\libraries\PlatformSetting;
 use common\libraries\Theme;
@@ -103,4 +102,3 @@ class DiscoveryManager extends WebApplication
         return $package_list;
     }
 }
-?>

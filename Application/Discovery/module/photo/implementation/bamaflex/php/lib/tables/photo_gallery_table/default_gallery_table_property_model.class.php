@@ -24,4 +24,3 @@ class DefaultGalleryTablePropertyModel extends GalleryObjectTablePropertyModel
         return $properties;
     }
 }
-?>

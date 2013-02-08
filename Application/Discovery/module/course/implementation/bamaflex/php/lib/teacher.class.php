@@ -71,7 +71,7 @@ class Teacher extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
         $extended_property_names[] = self :: PROPERTY_COORDINATOR;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -91,7 +91,7 @@ class Teacher extends DiscoveryItem
     function __toString()
     {
         $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($this->get_person_id());
-        
+
         if ($user)
         {
             return $user->get_fullname();
@@ -102,4 +102,3 @@ class Teacher extends DiscoveryItem
         }
     }
 }
-?>

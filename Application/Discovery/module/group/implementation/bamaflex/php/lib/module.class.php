@@ -60,4 +60,3 @@ class Module extends \application\discovery\module\group\Module
         return $parameter;
     }
 }
-?>

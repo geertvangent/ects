@@ -174,7 +174,7 @@ class MaterialStructured extends Material
         $extended_property_names[] = self :: PROPERTY_MEDIUM;
         $extended_property_names[] = self :: PROPERTY_PRICE;
         $extended_property_names[] = self :: PROPERTY_FOR_SALE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -197,4 +197,3 @@ class MaterialStructured extends Material
         return implode(' | ', $string);
     }
 }
-?>

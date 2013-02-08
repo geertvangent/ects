@@ -3,13 +3,8 @@ namespace application\discovery;
 
 use rights\NewPlatformGroupEntity;
 use rights\NewUserEntity;
-use common\libraries\Utilities;
-use common\libraries\Display;
 use common\libraries\DelegateComponent;
 use common\libraries\Request;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Breadcrumb;
-use common\libraries\Translation;
 use common\extensions\new_rights_editor_manager\RightsEditorManager;
 
 /**
@@ -30,7 +25,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
         $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
         $this->namespace = '\\' . $module_instance->get_type() . '\Rights';
         $namespace = $this->namespace;
-        RightsEditorManager :: launch($this, 'discovery_' . $this->module_instance_id, $this->get_locations(), 
+        RightsEditorManager :: launch($this, 'discovery_' . $this->module_instance_id, $this->get_locations(),
                 $this->get_entities());
     }
 
@@ -38,7 +33,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
     {
         $namespace = $this->namespace;
         $locations = array();
-        
+
         $locations[] = $namespace :: get_instance()->get_current_location($this->module_instance_id);
         return $locations;
     }
@@ -46,13 +41,13 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
     function get_entities()
     {
         $excluded_users[] = $this->get_user_id();
-        
+
         $user_entity = new NewUserEntity();
-        
+
         $entities = array();
         $entities[NewUserEntity :: ENTITY_TYPE] = $user_entity;
         $entities[NewPlatformGroupEntity :: ENTITY_TYPE] = new NewPlatformGroupEntity();
-        
+
         return $entities;
     }
 
@@ -73,4 +68,3 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
         return $parameters;
     }
 }
-?>

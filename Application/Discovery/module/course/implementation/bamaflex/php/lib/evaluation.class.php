@@ -26,7 +26,7 @@ class Evaluation extends DiscoveryItem
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -49,4 +49,3 @@ class Evaluation extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

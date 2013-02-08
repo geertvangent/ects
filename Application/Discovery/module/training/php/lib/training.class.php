@@ -78,7 +78,7 @@ class Training extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -103,4 +103,3 @@ class Training extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

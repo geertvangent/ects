@@ -21,4 +21,3 @@ class Parameters
         return $this->parameters;
     }
 }
-?>

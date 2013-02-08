@@ -30,4 +30,3 @@ class Parameters extends \application\discovery\Parameters
         return $this->get_parameter(Module :: PARAM_YEAR);
     }
 }
-?>

@@ -317,7 +317,7 @@ class Address extends DataClass
         $extended_property_names[] = self :: PROPERTY_SUBCITY;
         $extended_property_names[] = self :: PROPERTY_SUBCITY_ZIP_CODE;
         $extended_property_names[] = self :: PROPERTY_REGION;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -333,45 +333,44 @@ class Address extends DataClass
     function __toString()
     {
         $address = array();
-        
+
         // Street, street number, box and room
         if ($this->get_street())
         {
             $street = array();
             $street[] = $this->get_street();
-            
+
             if ($this->get_number())
             {
                 $street[] = $this->get_number();
             }
-            
+
             if ($this->get_box())
             {
                 $street[] = Translation :: get('Box') . ' ' . $this->get_box();
             }
-            
+
             if ($this->get_room())
             {
                 $street[] = Translation :: get('Room') . ' ' . $this->get_room();
             }
-            
+
             $address[] = implode(' ', $street);
         }
-        
+
         // City and zip code
         $address[] = $this->get_unified_city_zip_code() . ' ' . $this->get_unified_city();
-        
+
         if ($this->get_region())
         {
             $address[] = $this->get_region();
         }
-        
+
         if ($this->get_country())
         {
             $address[] = $this->get_country();
         }
-        
+
         return implode('<br />', $address);
     }
 }
-?>

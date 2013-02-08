@@ -32,4 +32,3 @@ class Module extends \application\discovery\module\training_info\Module
                 $current_tab);
     }
 }
-?>

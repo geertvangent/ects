@@ -17,4 +17,3 @@ class Application extends DiscoveryItem
         return DiscoveryDataManager :: get_instance();
     }
 }
-?>

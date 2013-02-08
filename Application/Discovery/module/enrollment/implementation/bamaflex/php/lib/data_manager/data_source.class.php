@@ -2,11 +2,6 @@
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
 use user\UserDataManager;
-use application\discovery\module\enrollment\Photo;
-use application\discovery\module\enrollment\Communication;
-use application\discovery\module\enrollment\Email;
-use application\discovery\module\enrollment\IdentificationCode;
-use application\discovery\module\enrollment\Name;
 use application\discovery\module\enrollment\DataManagerInterface;
 use MDB2_Error;
 
@@ -29,12 +24,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY contract_type';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -43,7 +38,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->contract_types[$user_id];
     }
 
@@ -59,12 +54,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-            
+
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC, id';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             if (! $results instanceof MDB2_Error)
             {
                 while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -91,7 +86,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->enrollments[$id];
     }
 
@@ -100,19 +95,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $id = $parameters->get_user_id();
         $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
-        
+
         $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '"';
-        
+
         $statement = $this->get_connection()->prepare($query);
         $results = $statement->execute();
-        
+
         if (! $results instanceof MDB2_Error)
         {
             $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
             return $result->enrollments_count;
         }
-        
+
         return 0;
     }
 }
-?>

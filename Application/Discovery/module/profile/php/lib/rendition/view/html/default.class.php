@@ -152,4 +152,3 @@ class HtmlDefaultRendition extends HtmlRendition
         return $properties;
     }
 }
-?>

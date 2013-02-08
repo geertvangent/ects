@@ -17,7 +17,7 @@ class RightsGroupEntityRight extends DataClass
     static function get_default_property_names()
     {
         return parent :: get_default_property_names(
-                array(self :: PROPERTY_RIGHT_ID, self :: PROPERTY_ENTITY_ID, self :: PROPERTY_ENTITY_TYPE, 
+                array(self :: PROPERTY_RIGHT_ID, self :: PROPERTY_ENTITY_ID, self :: PROPERTY_ENTITY_TYPE,
                         self :: PROPERTY_GROUP_ID));
     }
 
@@ -81,5 +81,3 @@ class RightsGroupEntityRight extends DataClass
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 }
-
-?>

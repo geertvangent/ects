@@ -33,4 +33,3 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         return $this->years;
     }
 }
-?>

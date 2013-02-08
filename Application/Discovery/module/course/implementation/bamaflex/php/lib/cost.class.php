@@ -63,7 +63,7 @@ class Cost extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_PRICE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -88,4 +88,3 @@ class Cost extends DiscoveryItem
         return implode(' | ', $string);
     }
 }
-?>

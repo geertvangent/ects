@@ -45,4 +45,3 @@ class Module extends \application\discovery\module\training_results\Module
         return $parameter;
     }
 }
-?>

@@ -24,7 +24,7 @@ class GroupRelUserBrowserTableColumnModel extends DefaultGroupRelUserTableColumn
 
     /**
      * Gets the modification column
-     * 
+     *
      * @return ContentObjectTableColumn
      */
     static function get_modification_column()
@@ -36,4 +36,3 @@ class GroupRelUserBrowserTableColumnModel extends DefaultGroupRelUserTableColumn
         return self :: $modification_column;
     }
 }
-?>

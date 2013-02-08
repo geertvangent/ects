@@ -16,4 +16,3 @@ interface DataManagerInterface
      */
     function retrieve_persons($condition, $offset, $count, $order_by);
 }
-?>

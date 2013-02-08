@@ -56,7 +56,7 @@ class Package extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_NAME;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -89,4 +89,3 @@ class Package extends DiscoveryItem
         $this->courses[] = $course;
     }
 }
-?>

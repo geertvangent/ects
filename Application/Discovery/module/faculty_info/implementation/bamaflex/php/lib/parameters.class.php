@@ -20,4 +20,3 @@ class Parameters extends \application\discovery\module\faculty_info\Parameters
         return $this->get_parameter(Module :: PARAM_SOURCE);
     }
 }
-?>

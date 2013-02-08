@@ -11,4 +11,3 @@ class SettingsConnector
         return Theme :: get_themes();
     }
 }
-?>

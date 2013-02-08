@@ -1,13 +1,11 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Translation;
-use common\libraries\ObjectTableColumn;
 use common\libraries\StaticTableColumn;
 
 /**
  * $Id: module_instance_browser_table_column_model.class.php 204 2009-11-13 12:51:30Z kariboe $
- * 
+ *
  * @package repository.lib.repository_manager.component.browser
  */
 /**
@@ -38,7 +36,7 @@ class ModuleInstanceBrowserTableColumnModel extends DefaultModuleInstanceTableCo
 
     /**
      * Gets the modification column
-     * 
+     *
      * @return ContentObjectTableColumn
      */
     static function get_modification_column()
@@ -50,4 +48,3 @@ class ModuleInstanceBrowserTableColumnModel extends DefaultModuleInstanceTableCo
         return self :: $modification_column;
     }
 }
-?>

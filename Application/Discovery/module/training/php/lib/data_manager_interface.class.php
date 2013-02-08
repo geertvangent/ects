@@ -11,4 +11,3 @@ interface DataManagerInterface
 
     function retrieve_trainings($year);
 }
-?>

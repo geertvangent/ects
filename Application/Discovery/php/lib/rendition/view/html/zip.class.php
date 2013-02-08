@@ -28,4 +28,3 @@ class HtmlZipRendition extends HtmlRendition
         }
     }
 }
-?>

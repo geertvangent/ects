@@ -109,7 +109,7 @@ class EvaluationStructured extends Evaluation
         $extended_property_names[] = self :: PROPERTY_TYPE_ID;
         $extended_property_names[] = self :: PROPERTY_PERCENTAGE;
         $extended_property_names[] = self :: PROPERTY_PERMANENT;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -132,4 +132,3 @@ class EvaluationStructured extends Evaluation
         return implode(' | ', $string);
     }
 }
-?>

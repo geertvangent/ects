@@ -26,4 +26,3 @@ class MaterialDescription extends Material
         return implode(' | ', $string);
     }
 }
-?>

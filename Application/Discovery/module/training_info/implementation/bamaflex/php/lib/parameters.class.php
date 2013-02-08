@@ -31,4 +31,3 @@ class Parameters extends \application\discovery\module\training_info\Parameters
         return $this->get_parameter(Module :: PARAM_TAB);
     }
 }
-?>

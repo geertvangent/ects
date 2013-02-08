@@ -12,4 +12,3 @@ class Module extends \application\discovery\module\profile\Module
         return DataManager :: get_instance($this->get_module_instance())->has_profile($parameters);
     }
 }
-?>

@@ -141,4 +141,3 @@ class Rights extends RightsUtil
                 $parameters->get_user_id(), self :: TYPE_GROUP_USER);
     }
 }
-?>

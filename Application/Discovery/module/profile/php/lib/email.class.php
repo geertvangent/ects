@@ -81,7 +81,7 @@ class Email extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_ADDRESS;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -94,4 +94,3 @@ class Email extends DataClass
         return DiscoveryDataManager :: get_instance();
     }
 }
-?>

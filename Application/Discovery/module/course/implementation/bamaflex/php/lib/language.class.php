@@ -51,7 +51,7 @@ class Language extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_ID;
         $extended_property_names[] = self :: PROPERTY_LANGUAGE_ID;
         $extended_property_names[] = self :: PROPERTY_LANGUAGE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -73,4 +73,3 @@ class Language extends DiscoveryItem
         return $this->get_language();
     }
 }
-?>

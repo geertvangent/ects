@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\faculty_info\implementation\bamaflex;
 
-use common\libraries\Filesystem;
-use common\libraries\FileProperties;
 
 class HtmlXlsxRenditionImplementation extends RenditionImplementation
 {
@@ -28,4 +26,3 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
         return \application\discovery\HtmlRendition :: VIEW_XLSX;
     }
 }
-?>

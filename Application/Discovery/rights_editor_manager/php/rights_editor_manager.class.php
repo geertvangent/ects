@@ -2,13 +2,11 @@
 namespace application\discovery\rights_editor_manager;
 
 use common\libraries\SubManager;
-use common\libraries\Translation;
-use Exception;
 use application\discovery\PlatformGroupEntity;
 
 /**
  * Rights editor manager for unlimited amount of entities. With simple and advanced interface.
- * 
+ *
  * @package application.common.rights_editor_manager
  * @author Sven Vanpoucke
  */
@@ -19,7 +17,7 @@ class RightsEditorManager extends SubManager
     const PARAM_ENTITY_TYPE = 'entity_type';
     const PARAM_ENTITY_ID = 'entity_id';
     const PARAM_RIGHT_ID = 'right_id';
-    
+
     // Actions
     const ACTION_EDIT_ADVANCED_RIGHTS = 'advanced_rights_editor';
     const ACTION_MANAGE = 'manager';
@@ -29,12 +27,12 @@ class RightsEditorManager extends SubManager
      * Cached selected entity
      */
     private $selected_entity;
-    
+
     // Default functions
-    
+
     /**
      * Launches the rights editor with the additional properties
-     * 
+     *
      * @param $application Application
      */
     static function launch($application)
@@ -44,7 +42,7 @@ class RightsEditorManager extends SubManager
 
     /**
      * Returns the parameter with which this submanager's actions are described
-     * 
+     *
      * @return String
      */
     static function get_action_parameter()
@@ -54,7 +52,7 @@ class RightsEditorManager extends SubManager
 
     /**
      * Returns the default action for this submannager
-     * 
+     *
      * @return String
      */
     static function get_default_action()
@@ -64,14 +62,14 @@ class RightsEditorManager extends SubManager
 
     /**
      * Returns the path to the components folder
-     * 
+     *
      * @return String
      */
     function get_application_component_path()
     {
         return dirname(__FILE__) . '/component/';
     }
-    
+
     /*
      * Builds the url to browse an entity @param int $entity_type @return String
      */
@@ -79,12 +77,12 @@ class RightsEditorManager extends SubManager
     {
         return $this->get_url(array(self :: PARAM_ENTITY_TYPE => $entity_type));
     }
-    
+
     // Delegation
-    
+
     /**
      * Retrieves the available rights
-     * 
+     *
      * @return Array
      */
     function get_available_rights()
@@ -94,7 +92,7 @@ class RightsEditorManager extends SubManager
 
     /**
      * Retrieves additional information from the parent application
-     * 
+     *
      * @return String
      */
     function get_additional_information()
@@ -104,18 +102,18 @@ class RightsEditorManager extends SubManager
             return $this->get_parent()->get_additional_information();
         }
     }
-    
+
     // Helper functions
-    
+
     /**
      * Gets the selected entity type and if no type selected, uses the first available entity
-     * 
+     *
      * @return String
      */
     function get_selected_entity()
     {
         return new PlatformGroupEntity();
-        
+
         // if (! $this->selected_entity)
         // {
         // $selected_entity = $this->get_parameter(self :: PARAM_ENTITY_TYPE);
@@ -137,5 +135,3 @@ class RightsEditorManager extends SubManager
         // return $this->selected_entity;
     }
 }
-
-?>

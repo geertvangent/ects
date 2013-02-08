@@ -1,19 +1,10 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
-use application\discovery\module\cas\Parameters;
-use application\discovery\SortableTable;
 use common\libraries\Filesystem;
 use common\libraries\Path;
-use common\libraries\Theme;
-use common\libraries\Display;
-use common\libraries\DynamicContentTab;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\Translation;
 
-// use application\discovery\SortableTable;
-use application\discovery\module\cas\DataManager;
-
+//
 class Module extends \application\discovery\module\cas\Module
 {
 
@@ -52,4 +43,3 @@ class Module extends \application\discovery\module\cas\Module
         return $this->action_statistics[$action->get_id()];
     }
 }
-?>
