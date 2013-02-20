@@ -36,7 +36,7 @@ class XlsxDefaultRendition extends XlsxRendition
         $php_excel->getActiveSheet()->getStyle($range)->getFill()->setFillType(\PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB(
                 'c70d2f');
         $php_excel->getActiveSheet()->getStyle($range)->getFont()->getColor()->setRGB('FFFFFF');
-        $php_excel->getActiveSheet()->getStyle($range)->getFont()->setName('Cambria');
+        $php_excel->getActiveSheet()->getStyle($range)->getFont()->setName('DejaVu Serif');
         $php_excel->getActiveSheet()->getStyle($range)->getFont()->setBold(true);
         $php_excel->getActiveSheet()->getStyle($range)->getFont()->setSize(12);
         $php_excel->getActiveSheet()->getStyle($range)->getAlignment()->setHorizontal(

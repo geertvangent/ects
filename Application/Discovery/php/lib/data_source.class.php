@@ -1,7 +1,9 @@
 <?php
 namespace application\discovery;
 
-class DataSource
+use common\libraries\DoctrineDatabase;
+
+class DataSource extends DoctrineDatabase
 {
 
     private $module_instance;
@@ -14,6 +16,7 @@ class DataSource
     function __construct(ModuleInstance $module_instance)
     {
         $this->module_instance = $module_instance;
+        $this->initialize();
     }
 
     function get_module_instance()

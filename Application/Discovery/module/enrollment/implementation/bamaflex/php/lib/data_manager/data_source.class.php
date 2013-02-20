@@ -1,9 +1,11 @@
 <?php
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
+use Doctrine\DBAL\Driver\PDOStatement;
+use common\libraries\DoctrineConditionTranslator;
+use common\libraries\EqualityCondition;
 use user\UserDataManager;
 use application\discovery\module\enrollment\DataManagerInterface;
-use MDB2_Error;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -25,14 +27,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY contract_type';
+            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
+            $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced ' .
+                 $translator->render_query($condition);
 
-            if (! $results instanceof MDB2_Error)
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->contract_types[$user_id][] = $result->contract_type;
                 }
@@ -55,14 +60,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC, id';
+            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
+            $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY year DESC, id';
 
-            if (! $results instanceof MDB2_Error)
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $enrollment = new Enrollment();
                     $enrollment->set_source($result->source);
@@ -96,14 +104,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '"';
+        $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
+        $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced ' .
+             $translator->render_query($condition);
 
-        if (! $results instanceof MDB2_Error)
+        $statement = $this->query($query);
+
+        if ($statement instanceof PDOStatement)
         {
-            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->enrollments_count;
         }
 

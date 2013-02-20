@@ -34,6 +34,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 $this->get_module_instance()->get_id(), $this->get_module_parameters());
 
         $this->php_excel = new PHPExcel();
+        $this->php_excel->getDefaultStyle()->getFont()->setName('DejaVu Sans');
         $this->php_excel->removeSheetByIndex(0);
 
         if ($this->has_data())

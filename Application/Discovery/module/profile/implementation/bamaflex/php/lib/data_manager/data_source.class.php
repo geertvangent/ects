@@ -1,6 +1,7 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
+use Doctrine\DBAL\Driver\PDOStatement;
 use common\libraries\DoctrineConditionTranslator;
 use common\libraries\EqualityCondition;
 use user\UserDataManager;
@@ -10,41 +11,10 @@ use application\discovery\module\profile\Email;
 use application\discovery\module\profile\IdentificationCode;
 use application\discovery\module\profile\Name;
 use application\discovery\module\profile\DataManagerInterface;
-use MDB2_Error;
 use stdClass;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
-
-    function get_storage_type()
-    {
-        return 'doctrine';
-    }
-
-    /**
-     * Escapes a column name in accordance with the database type.
-     *
-     * @param $name string The column name.
-     * @param $table_alias String The alias of the table the coloumn is in
-     * @return string The escaped column name.
-     */
-    function escape_column_name($name, $table_alias = null)
-    {
-        $quoted_name = $this->get_connection()->quoteIdentifier($name);
-        if (! is_null($table_alias))
-        {
-            return $this->get_connection()->quoteIdentifier($table_alias) . '.' . $quoted_name;
-        }
-        else
-        {
-            return $quoted_name;
-        }
-    }
-
-    function quote($value, $type = null, $quote = true, $escape_wildcards = false)
-    {
-        return $this->get_connection()->quote($value, $type, $quote, $escape_wildcards);
-    }
 
     /**
      *
@@ -54,30 +24,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function retrieve_profile($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-
         $official_code = $user->get_official_code();
 
-//         $condition = new EqualityCondition('id', '2');
+        $condition = new EqualityCondition('id', '"' . $official_code . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-//         $translator = DoctrineConditionTranslator :: factory($this);
+        $query = 'SELECT * FROM INFORDATSYNC.dbo.v_discovery_profile_basic ' . $translator->render_query($condition);
 
-        $query = 'SELECT TOP 1 * FROM INFORDATSYNC.dbo.v_discovery_profile_basic;';
+        $statement = $this->query($query);
 
-//         $connection = mssql_connect('10.2.200.24', 'sa', 'er9sm5s');
-//         $rst = mssql_query($query, $connection);
-//         var_dump( mssql_get_last_message());
-//         var_dump(mssql_fetch_object($rst));
-
-        $statement = $this->get_connection()->query($query);
-        // $result = $statement->execute();
-
-        $object = $statement->fetch(\PDO :: FETCH_OBJ);
-        var_dump($object);
-        exit();
-
-        if (! $result instanceof MDB2_Error)
+        if ($statement instanceof PDOStatement)
         {
-            $object = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $object = $statement->fetch(\PDO :: FETCH_OBJ);
 
             $name = new Name();
             $name->set_first_name($this->convert_to_utf8($object->first_name));
@@ -128,17 +86,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function has_profile($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic WHERE id = "' . $official_code . '"';
+        $condition = new EqualityCondition('id', '"' . $official_code . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $result = $statement->execute();
+        $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic ' .
+             $translator->render_query($condition);
 
-        if (! $result instanceof MDB2_Error)
+        $statement = $this->query($query);
+
+        if ($statement instanceof PDOStatement)
         {
-            $object = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $object = $statement->fetch(\PDO :: FETCH_OBJ);
             return $object->profile_count;
         }
         return 0;
@@ -151,16 +111,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_emails($id)
     {
-        $query = 'SELECT * FROM v_discovery_profile_email WHERE id = "' . $id . '"';
+        $condition = new EqualityCondition('id', '"' . $id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
+        $query = 'SELECT * FROM v_discovery_profile_email ' . $translator->render_query($condition);
 
-        $emails = array();
+        $statement = $this->query($query);
 
-        if (! $results instanceof MDB2_Error)
+        if ($statement instanceof PDOStatement)
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $email = new Email();
                 $email->set_address($this->convert_to_utf8($result->address));
@@ -179,16 +139,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_learning_credits($id)
     {
-        $query = 'SELECT * FROM v_discovery_profile_learning_credit WHERE person_id = "' . $id . '" ORDER BY date DESC';
+        $condition = new EqualityCondition('person_id', '"' . $id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
+        $query = 'SELECT * FROM v_discovery_profile_learning_credit ' . $translator->render_query($condition) .
+             ' ORDER BY date DESC';
+
+        $statement = $this->query($query);
 
         $credits = array();
 
-        if (! $results instanceof MDB2_Error)
+        if ($statement instanceof PDOStatement)
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $credit = new LearningCredit();
                 $credit->set_id($result->id);
@@ -208,16 +171,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_communications($id)
     {
-        $query = 'SELECT * FROM v_discovery_profile_communication WHERE id = "' . $id . '"';
+        $condition = new EqualityCondition('id', '"' . $id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
+        $query = 'SELECT * FROM v_discovery_profile_communication ' . $translator->render_query($condition);
+
+        $statement = $this->query($query);
 
         $communications = array();
 
-        if (! $results instanceof MDB2_Error)
+        if ($statement instanceof PDOStatement)
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $communication = new Communication();
                 $communication->set_number($this->convert_to_utf8($result->number));
@@ -237,16 +202,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_addresses($id)
     {
-        $query = 'SELECT * FROM v_discovery_profile_address WHERE id  = "' . $id . '"';
+        $condition = new EqualityCondition('id', '"' . $id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
+        $query = 'SELECT * FROM v_discovery_profile_address ' . $translator->render_query($condition);
+
+        $statement = $this->query($query);
 
         $addresses = array();
 
-        if (! $results instanceof MDB2_Error)
+        if ($statement instanceof PDOStatement)
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $address = new Address();
                 $address->set_type($result->type);
@@ -274,14 +241,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_photo($id)
     {
-        $query = 'SELECT * FROM v_discovery_profile_photo WHERE id = "' . $id . '"';
+        $condition = new EqualityCondition('id', '"' . $id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $result = $statement->execute();
+        $query = 'SELECT * FROM v_discovery_profile_photo ' . $translator->render_query($condition);
 
-        if (! $result instanceof MDB2_Error)
+        $statement = $this->query($query);
+
+        if ($statement instanceof PDOStatement)
         {
-            $object = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $object = $statement->fetch(\PDO :: FETCH_OBJ);
 
             $photo = new Photo();
             $photo->set_mime_type('image/jpeg');
@@ -297,14 +266,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     private function retrieve_previous_college($id)
     {
-        $query = 'SELECT * FROM v_discovery_profile_previous_college WHERE id = "' . $id . '"';
+        $condition = new EqualityCondition('id', '"' . $id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $result = $statement->execute();
+        $query = 'SELECT * FROM v_discovery_profile_previous_college ' . $translator->render_query($condition);
 
-        if (! $result instanceof MDB2_Error)
+        $statement = $this->query($query);
+
+        if ($statement instanceof PDOStatement)
         {
-            $object = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $object = $statement->fetch(\PDO :: FETCH_OBJ);
+
             if ($object instanceof stdClass)
             {
                 $previous_college = new PreviousCollege();
@@ -329,14 +301,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     private function retrieve_previous_university($id)
     {
-        $query = 'SELECT * FROM v_discovery_profile_previous_university WHERE id = "' . $id . '"';
+        $condition = new EqualityCondition('id', '"' . $id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $result = $statement->execute();
+        $query = 'SELECT * FROM v_discovery_profile_previous_university ' . $translator->render_query($condition);
 
-        if (! $result instanceof MDB2_Error)
+        $statement = $this->query($query);
+
+        if ($statement instanceof PDOStatement)
         {
-            $object = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $object = $statement->fetch(\PDO :: FETCH_OBJ);
 
             if ($object instanceof stdClass)
             {
@@ -366,16 +340,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_nationalities($id)
     {
-        $query = 'SELECT * FROM v_discovery_profile_nationality WHERE id = "' . $id . '"';
+        $condition = new EqualityCondition('id', '"' . $id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
+        $query = 'SELECT * FROM v_discovery_profile_nationality ' . $translator->render_query($condition);
 
-        $nationalities = array();
+        $statement = $this->query($query);
 
-        if (! $results instanceof MDB2_Error)
+        $addresses = array();
+
+        if ($statement instanceof PDOStatement)
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $nationality = new Nationality();
                 $nationality->set_type($result->type);

@@ -2,13 +2,17 @@
 namespace application\discovery\module\career\implementation\bamaflex;
 
 use application\discovery\data_source\bamaflex\HistoryReference;
-use application\discovery\module\training\implementation\bamaflex\Training;
-use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use user\UserDataManager;
+use application\discovery\module\career\DataManagerInterface;
 use application\discovery\module\career\MarkMoment;
 use application\discovery\module\career\Name;
-use application\discovery\module\career\DataManagerInterface;
-use MDB2_Error;
+use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
+use application\discovery\module\training\implementation\bamaflex\Training;
+use common\libraries\AndCondition;
+use common\libraries\DoctrineConditionTranslator;
+use common\libraries\EqualityCondition;
+use common\libraries\NotCondition;
+use Doctrine\DBAL\Driver\PDOStatement;
+use user\UserDataManager;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -42,14 +46,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY contract_type';
+            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
+            $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced ' .
+                 $translator->render_query($condition) . ' ORDER BY contract_type';
 
-            if (! $results instanceof MDB2_Error)
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->contract_types[$id][] = $result->contract_type;
                 }
@@ -67,14 +74,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT DISTINCT contract_id FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC';
+            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
+            $query = 'SELECT DISTINCT contract_id FROM v_discovery_enrollment_advanced ' .
+                 $translator->render_query($condition) . ' ORDER BY year DESC';
 
-            if (! $results instanceof MDB2_Error)
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->contract_ids[$id][] = $result->contract_id;
                 }
@@ -88,13 +98,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         if (! isset($this->trainings[$source][$training_id]))
         {
-            $query = 'SELECT * FROM v_discovery_training_advanced WHERE id = ' . $training_id . ' AND source = ' . $source;
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
+            $conditions = array();
+            $conditions[] = new EqualityCondition('id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            if (! $results instanceof MDB2_Error)
+            $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $training = new Training();
                     $training->set_source($result->source);
@@ -134,13 +150,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     function retrieve_training_next_id($training)
     {
-        $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
+        $conditions = array();
+        $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');
+        $conditions[] = new EqualityCondition('source', '"' . $training->get_source() . '"');
+        $condition = new AndCondition($conditions);
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        if (! $results instanceof MDB2_Error)
+        $query = 'SELECT id, source FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+
+        $statement = $this->query($query);
+
+        if ($statement instanceof PDOStatement)
         {
-            return $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            return $statement->fetch(\PDO :: FETCH_OBJ);
         }
         else
         {
@@ -161,14 +183,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC, id';
+            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
+            $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY year DESC, id';
 
-            if (! $results instanceof MDB2_Error)
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $enrollment = new Enrollment();
                     $enrollment->set_instance($this->get_module_instance());
@@ -209,21 +234,25 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
             $child_courses = $this->retrieve_child_courses($parameters);
 
-            $query = 'SELECT * FROM v_discovery_career_advanced ';
-            $query .= 'WHERE programme_parent_id IS NULL AND person_id = "' . $official_code . '" ';
-            $query .= 'ORDER BY year, name';
+            $conditions = array();
+            $conditions[] = new EqualityCondition('programme_parent_id', null);
+            $conditions[] = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
+            $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY year, name';
 
-            if (! $results instanceof MDB2_Error)
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $course = $this->result_to_course($parameters, $result);
 
                     if ($result->programme_id && isset(
-                            $child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
+                        $child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
                     {
                         foreach ($child_courses[$result->source][$result->enrollment_id][$result->programme_id] as $child_course)
                         {
@@ -245,15 +274,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         $official_code = $user->get_official_code();
 
-        $query = 'SELECT count(id) AS courses_count FROM v_discovery_career_advanced ';
-        $query .= 'WHERE person_id = "' . $official_code . '"';
+        $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
 
-        $statement = $this->get_connection()->prepare($query);
-        $result = $statement->execute();
+        $query = 'SELECT count(id) AS courses_count FROM v_discovery_career_advanced ' .
+             $translator->render_query($condition);
 
-        if (! $result instanceof MDB2_Error)
+        $statement = $this->query($query);
+
+        if ($statement instanceof PDOStatement)
         {
-            $result = $result->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->courses_count;
         }
         return 0;
@@ -267,19 +298,24 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT * FROM v_discovery_career_advanced ';
-            $query .= 'WHERE programme_parent_id IS NOT NULL AND person_id = "' . $official_code . '" ';
-            $query .= 'ORDER BY year, trajectory_part, name';
+            $conditions = array();
+            $conditions[] = new NotCondition(new EqualityCondition('programme_parent_id', null));
+            $conditions[] = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
+            $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY year, trajectory_part, name';
 
-            if (! $results instanceof MDB2_Error)
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->child_courses[$user_id][$result->source][$result->enrollment_id][$result->programme_parent_id][] = $this->result_to_course(
-                            $parameters, $result);
+                        $parameters,
+                        $result);
                 }
             }
         }
@@ -349,22 +385,21 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         // $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         // $official_code = $user->get_official_code();
 
-        // $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ';
-        // $query .= 'WHERE person_id = "' . $official_code . '" ';
-        // $query .= 'ORDER BY try_order';
+        // $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+        // $translator = DoctrineConditionTranslator :: factory($this);
 
-        // $statement = $this->get_connection()->prepare($query);
-        // $results = $statement->execute();
+        // $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ' .
+        // $translator->render_query($condition) . ' ORDER BY try_order';
 
-        // if (! $results instanceof MDB2_Error)
+        // $statement = $this->query($query);
+
+        // if ($statement instanceof PDOStatement)
         // {
-        // while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+        // while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
         // {
         // $mark_moment = new MarkMoment();
         // $mark_moment->set_id($result->try_id);
         // $mark_moment->set_name($result->try_name);
-
-        // dump($mark_moment);
 
         // $this->mark_moments[$user_id][$result->try_id] = $mark_moment;
         // }
@@ -385,25 +420,26 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
-            $query = 'SELECT * FROM v_discovery_mark_advanced ';
-            $query .= 'WHERE person_id = "' . $official_code . '"';
+            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $translator = DoctrineConditionTranslator :: factory($this);
 
-            $statement = $this->get_connection()->prepare($query);
-            $result = $statement->execute();
+            $query = 'SELECT * FROM v_discovery_mark_advanced ' . $translator->render_query($condition);
 
-            if (! $result instanceof MDB2_Error)
+            $statement = $this->query($query);
+
+            if ($statement instanceof PDOStatement)
             {
-                while ($mark_result = $result->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $mark = new Mark();
-                    $mark->set_moment($mark_result->try_id);
-                    $mark->set_result($mark_result->result);
-                    $mark->set_status($mark_result->status);
-                    $mark->set_sub_status($mark_result->sub_status);
-                    $mark->set_publish_status($mark_result->publish_status);
-                    $mark->set_abandoned($mark_result->abandoned);
+                    $mark->set_moment($result->try_id);
+                    $mark->set_result($result->result);
+                    $mark->set_status($result->status);
+                    $mark->set_sub_status($result->sub_status);
+                    $mark->set_publish_status($result->publish_status);
+                    $mark->set_abandoned($result->abandoned);
 
-                    $this->marks[$user_id][$mark_result->source][$mark_result->enrollment_programme_id][$mark_result->try_id] = $mark;
+                    $this->marks[$user_id][$result->source][$result->enrollment_programme_id][$result->try_id] = $mark;
                 }
             }
         }
