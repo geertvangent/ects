@@ -118,7 +118,7 @@ class ModuleInstance extends DataClass
                 return false;
             }
         }
-        return DiscoveryDataManager :: create_module_rights_storage_units($this);
+        return DataManager :: create_module_rights_storage_units($this);
     }
 
     public function delete()
@@ -167,7 +167,7 @@ class ModuleInstance extends DataClass
     public function has_settings()
     {
         $condition = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
-        $settings = DiscoveryDataManager :: get_instance()->count_module_instance_settings($condition);
+        $settings = DataManager :: get_instance()->count_module_instance_settings($condition);
 
         return $settings > 0;
     }
@@ -193,11 +193,11 @@ class ModuleInstance extends DataClass
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        return DataManager :: get_instance();
     }
 
     function has_matching_settings($settings)

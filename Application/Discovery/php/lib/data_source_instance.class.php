@@ -133,7 +133,7 @@ class DataSourceInstance extends DataClass
     public function has_settings()
     {
         $condition = new EqualityCondition(DataSourceInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
-        $settings = DiscoveryDataManager :: get_instance()->count_data_source_instance_settings($condition);
+        $settings = DataManager :: get_instance()->count_data_source_instance_settings($condition);
 
         return $settings > 0;
     }
@@ -159,10 +159,10 @@ class DataSourceInstance extends DataClass
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        return DataManager :: get_instance();
     }
 }

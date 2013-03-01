@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+
 use application\discovery\DiscoveryItem;
 
 class Competence extends DiscoveryItem
@@ -40,17 +40,17 @@ class Competence extends DiscoveryItem
     {
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
         $extended_property_names[] = self :: PROPERTY_TYPE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

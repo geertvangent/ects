@@ -1,9 +1,12 @@
 <?php
 namespace application\discovery\module\group_user\implementation\bamaflex;
 
+use Doctrine\DBAL\Driver\PDOStatement;
+use common\libraries\DoctrineConditionTranslator;
+use common\libraries\AndCondition;
+use common\libraries\EqualityCondition;
 use application\discovery\module\group\implementation\bamaflex\Group;
 use application\discovery\module\group_user\DataManagerInterface;
-use MDB2_Error;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -22,19 +25,22 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $group_class_id = $group_user_parameters->get_group_class_id();
         $source = $group_user_parameters->get_source();
         $type = $group_user_parameters->get_type();
-
+        
         if (! isset($this->group_user[$group_class_id][$source][$type]))
         {
-            $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced ';
-            $query .= 'WHERE group_class_id = "' . $group_class_id . '" AND source = "' . $source . '" AND type = "' . $type . '" ';
-            $query .= 'ORDER BY last_name, first_name';
-
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('group_class_id', '"' . $group_class_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('type', '"' . $type . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced ' . $translator->render_query($condition) . ' ORDER BY last_name, first_name';
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $group_user = new GroupUser();
                     $group_user->set_source($result->source);
@@ -50,7 +56,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-
+        
         return $this->group_user[$group_class_id][$source][$type];
     }
 
@@ -59,33 +65,38 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $group_class_id = $parameters->get_group_class_id();
         $source = $parameters->get_source();
         $type = $parameters->get_type();
-
+        
         if (! isset($this->group[$source][$type][$group_class_id]))
         {
-            $query = 'SELECT * FROM v_discovery_group_advanced WHERE type_id = "' . $group_class_id . '" AND source = "' . $source . '" AND type = "' . $type . '"';
-
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('type_id', '"' . $group_class_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('type', '"' . $type . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_group_advanced ' . $translator->render_query($condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-
+                $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                
                 $group = new Group();
                 $group->set_id($result->id);
                 $group->set_source($result->source);
-
+                
                 $group->set_training_id($result->training_id);
                 $group->set_year($result->year);
                 $group->set_code($this->convert_to_utf8($result->code));
                 $group->set_description($this->convert_to_utf8($result->description));
                 $group->set_type($result->type);
                 $group->set_type_id($result->type_id);
-
+                
                 $this->group[$source][$type][$group_class_id] = $group;
             }
         }
-
+        
         return $this->group[$source][$type][$group_class_id];
     }
 }

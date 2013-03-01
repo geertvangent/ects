@@ -39,11 +39,11 @@ class ModuleInstanceSetting extends DataClass
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        return DataManager :: get_instance();
     }
 
     /**
@@ -186,7 +186,7 @@ class ModuleInstanceSetting extends DataClass
     static function load($module_instance_id)
     {
         $condition = new EqualityCondition(self :: PROPERTY_MODULE_INSTANCE_ID, $module_instance_id);
-        $settings = DiscoveryDataManager :: get_instance()->retrieve_module_instance_settings($condition);
+        $settings = DataManager :: get_instance()->retrieve_module_instance_settings($condition);
 
         while ($setting = $settings->next_result())
         {

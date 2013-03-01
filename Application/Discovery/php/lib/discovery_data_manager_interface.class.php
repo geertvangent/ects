@@ -6,7 +6,7 @@ namespace application\discovery;
  * @package application.discovery
  * @author Hans De Bisschop
  */
-interface DiscoveryDataManagerInterface
+interface DataManagerInterface
 {
 
     function initialize();
@@ -17,7 +17,7 @@ interface DiscoveryDataManagerInterface
 
     function any_content_object_is_published($object_ids);
 
-    function get_content_object_publication_attributes($object_id, $type = null, $offset = null, $count = null,
+    function get_content_object_publication_attributes($object_id, $type = null, $offset = null, $count = null, 
             $order_properties = null);
 
     function get_content_object_publication_attribute($publication_id);

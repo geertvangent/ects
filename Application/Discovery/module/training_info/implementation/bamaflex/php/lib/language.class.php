@@ -2,7 +2,7 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-use application\discovery\DiscoveryDataManager;
+
 
 class Language extends DiscoveryItem
 {
@@ -60,10 +60,10 @@ class Language extends DiscoveryItem
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 }

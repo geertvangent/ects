@@ -20,21 +20,16 @@ class Module extends \application\discovery\Module
 
     private $years;
 
-    function __construct(Application $application, ModuleInstance $module_instance)
-    {
-        parent :: __construct($application, $module_instance);
-    }
-
     static function module_parameters()
     {
         $year = Request :: get(self :: PARAM_YEAR);
-
+        
         $parameter = new Parameters();
         if ($year)
         {
             $parameter->set_year($year);
         }
-
+        
         return $parameter;
     }
 
@@ -81,7 +76,7 @@ class Module extends \application\discovery\Module
     static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
                 Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)

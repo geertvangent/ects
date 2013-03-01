@@ -17,8 +17,8 @@ class Autoloader
          'DataSource' => '/lib/data_source.class.php',
          'DataSourceInstance' => '/lib/data_source_instance.class.php',
          'DataSourceInstanceSetting' => '/lib/data_source_instance_setting.class.php',
-         'DiscoveryDataManager' => '/lib/discovery_data_manager.class.php',
-         'DiscoveryDataManagerInterface' => '/lib/discovery_data_manager_interface.class.php',
+         'DataManager' => '/lib/discovery_data_manager.class.php',
+         'DataManagerInterface' => '/lib/discovery_data_manager_interface.class.php',
          'DiscoveryItem' => '/lib/discovery_item.class.php',
          'LegendTable' => '/lib/legend_table.class.php',
          'Module' => '/lib/module.class.php',
@@ -29,7 +29,8 @@ class Autoloader
          'RightsGroupEntityRight' => '/lib/rights_group_entity_right.class.php',
          'SortableTable' => '/lib/sortable_table.class.php',
          'UserEntity' => '/lib/user_entity.class.php',
-         'Mdb2DiscoveryDataManager' => '/lib/data_manager/mdb2.class.php',
+         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
+         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'DiscoveryManager' => '/lib/discovery_manager/discovery_manager.class.php',
          'DiscoveryManagerBrowserComponent' => '/lib/discovery_manager/component/browser.class.php',
          'DiscoveryManagerModuleComponent' => '/lib/discovery_manager/component/module.class.php',
@@ -102,3 +103,4 @@ class Autoloader
     }
 
 }
+?>

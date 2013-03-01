@@ -4,7 +4,7 @@ namespace application\discovery\module\profile\implementation\bamaflex;
 use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\DatetimeUtilities;
-use application\discovery\DiscoveryDataManager;
+
 use common\libraries\DataClass;
 
 class Birth extends DataClass
@@ -130,11 +130,11 @@ class Birth extends DataClass
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 
     /**

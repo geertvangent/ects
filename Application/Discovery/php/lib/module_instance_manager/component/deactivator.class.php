@@ -27,7 +27,7 @@ class ModuleInstanceManagerDeactivatorComponent extends ModuleInstanceManager
 
             foreach ($ids as $id)
             {
-                $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($id);
+                $module_instance = DataManager :: get_instance()->retrieve_module_instance($id);
                 $module_instance->deactivate();
 
                 if (! $module_instance->update())

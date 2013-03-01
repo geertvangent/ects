@@ -2,7 +2,7 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-use application\discovery\DiscoveryDataManager;
+
 
 class SubTrajectoryCourse extends DiscoveryItem
 {
@@ -124,16 +124,16 @@ class SubTrajectoryCourse extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_CREDITS;
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_PART;
         $extended_property_names[] = self :: PROPERTY_PARENT_PROGRAMME_ID;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 }

@@ -3,7 +3,6 @@ namespace application\discovery\module\enrollment\implementation\bamaflex;
 
 use common\libraries\Translation;
 use application\discovery\module\career\DataManager;
-use application\discovery\DiscoveryDataManager;
 
 class Enrollment extends \application\discovery\module\enrollment\Enrollment
 {
@@ -204,17 +203,17 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
     function get_unified_option()
     {
         $options = array();
-
+        
         if ($this->get_option_choice())
         {
             $options[] = $this->get_option_choice();
         }
-
+        
         if ($this->get_graduation_option())
         {
             $options[] = $this->get_graduation_option();
         }
-
+        
         return implode(' - ', $options);
     }
 
@@ -460,17 +459,17 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         $extended_property_names[] = self :: PROPERTY_OPTION_CHOICE;
         $extended_property_names[] = self :: PROPERTY_GRADUATION_OPTION;
         $extended_property_names[] = self :: PROPERTY_DISTINCTION;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**
@@ -482,18 +481,18 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         $string = array();
         $string[] = $this->get_year();
         $string[] = $this->get_training();
-
+        
         if ($this->get_unified_option())
         {
             $string[] = $this->get_unified_option();
         }
-
+        
         return implode(' | ', $string);
     }
 
     function get_training_object()
     {
-        return DataManager :: get_instance($this->get_instance())->retrieve_training($this->get_source(),
+        return DataManager :: get_instance($this->get_instance())->retrieve_training($this->get_source(), 
                 $this->get_training_id());
     }
 }

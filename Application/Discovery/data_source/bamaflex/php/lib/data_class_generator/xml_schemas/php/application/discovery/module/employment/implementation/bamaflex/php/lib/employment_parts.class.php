@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\employment\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+use application\discovery\DataManager;
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
 
@@ -102,11 +102,11 @@ class EmploymentParts extends DiscoveryItem
     /**
      * Get the data class data manager
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        return DataManager :: get_instance();
     }
 
     /**

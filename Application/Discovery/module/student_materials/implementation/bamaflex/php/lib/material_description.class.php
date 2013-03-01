@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+
 
 class MaterialDescription extends Material
 {
@@ -9,11 +9,11 @@ class MaterialDescription extends Material
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

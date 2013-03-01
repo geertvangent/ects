@@ -19,7 +19,7 @@ class ModuleInstanceManagerUpdaterComponent extends ModuleInstanceManager
 
         if (isset($instance_id))
         {
-            $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($instance_id);
+            $module_instance = DataManager :: get_instance()->retrieve_module_instance($instance_id);
             $form = new ModuleInstanceForm(ModuleInstanceForm :: TYPE_EDIT, $module_instance,
                     $this->get_url(array(DiscoveryManager :: PARAM_MODULE_ID => $instance_id)));
 

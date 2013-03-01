@@ -1,19 +1,19 @@
 <?php
 namespace application\discovery\module\student_materials;
 
-use application\discovery\DiscoveryDataManager;
+
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.career.discovery
- *
+ * 
  * @author Hans De Bisschop
  */
 class Course extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Course properties
      */
@@ -24,7 +24,7 @@ class Course extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -34,23 +34,23 @@ class Course extends DataClass
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_MARKS;
         $extended_property_names[] = self :: PROPERTY_CHILDREN;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
-     * @return DiscoveryDataManagerInterface
+     * 
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**
      * Returns the year of this Course.
-     *
+     * 
      * @return string The year.
      */
     function get_year()
@@ -60,7 +60,7 @@ class Course extends DataClass
 
     /**
      * Sets the year of this Course.
-     *
+     * 
      * @param string $year
      */
     function set_year($year)
@@ -70,7 +70,7 @@ class Course extends DataClass
 
     /**
      * Returns the name of this Course.
-     *
+     * 
      * @return string The name.
      */
     function get_name()
@@ -80,7 +80,7 @@ class Course extends DataClass
 
     /**
      * Sets the name of this Course.
-     *
+     * 
      * @param string $name
      */
     function set_name($name)
@@ -90,7 +90,7 @@ class Course extends DataClass
 
     /**
      * Returns the marks of this Course.
-     *
+     * 
      * @return multitype:Mark The marks.
      */
     function get_marks()
@@ -127,13 +127,13 @@ class Course extends DataClass
                 return $mark;
             }
         }
-
+        
         return self :: factory($moment_id);
     }
 
     /**
      * Sets the marks of this Course.
-     *
+     * 
      * @param multitype:Mark $marks
      */
     function set_marks($marks)
@@ -143,7 +143,7 @@ class Course extends DataClass
 
     /**
      * Returns the children of this Course.
-     *
+     * 
      * @return multitype:Course The children.
      */
     function get_children()
@@ -153,7 +153,7 @@ class Course extends DataClass
 
     /**
      * Sets the children of this Course.
-     *
+     * 
      * @param multitype:Course $children
      */
     function set_children($children)

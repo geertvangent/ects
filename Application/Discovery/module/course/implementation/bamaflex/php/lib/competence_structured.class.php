@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+
 
 class CompetenceStructured extends Competence
 {
@@ -61,17 +61,17 @@ class CompetenceStructured extends Competence
         $extended_property_names[] = self :: PROPERTY_CODE;
         $extended_property_names[] = self :: PROPERTY_SUMMARY;
         $extended_property_names[] = self :: PROPERTY_LEVEL;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

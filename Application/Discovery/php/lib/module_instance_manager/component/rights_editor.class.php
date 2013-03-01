@@ -14,7 +14,7 @@ class ModuleInstanceManagerRightsEditorComponent extends ModuleInstanceManager
     function run()
     {
         $this->module_instance_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
-        $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
+        $module_instance = DataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
         $this->namespace = '\\' . $module_instance->get_type() . '\Rights';
         RightsEditorManager :: launch($this);
     }

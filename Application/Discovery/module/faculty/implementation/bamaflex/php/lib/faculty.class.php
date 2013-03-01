@@ -3,7 +3,6 @@ namespace application\discovery\module\faculty\implementation\bamaflex;
 
 use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\faculty\DataManager;
-use application\discovery\DiscoveryDataManager;
 
 class Faculty extends \application\discovery\module\faculty\Faculty
 {
@@ -58,13 +57,13 @@ class Faculty extends \application\discovery\module\faculty\Faculty
                 $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters();
                 $parameters->set_faculty_id($previous_reference->get_id());
                 $parameters->set_source($previous_reference->get_source());
-
+                
                 $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
                 if ($faculty instanceof Faculty)
                 {
                     $faculties[$faculty->get_year()][] = $faculty;
                 }
-
+                
                 if ($faculty->has_next_references(true) && $this->has_previous_references(true) && $recursive)
                 {
                     $faculties = array_merge_recursive($faculties, $faculty->get_previous($module_instance));
@@ -90,13 +89,13 @@ class Faculty extends \application\discovery\module\faculty\Faculty
                 $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters();
                 $parameters->set_faculty_id($next_reference->get_id());
                 $parameters->set_source($next_reference->get_source());
-
+                
                 $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
                 if ($faculty instanceof Faculty)
                 {
                     $faculties[$faculty->get_year()][] = $faculty;
                 }
-
+                
                 if ($faculty->has_previous_references(true) && $this->has_next_references(true) && $recursive)
                 {
                     $faculties = array_merge_recursive($faculties, $faculty->get_next($module_instance));
@@ -116,9 +115,9 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         $faculties = $this->get_next($module_instance);
         $faculties[$this->get_year()][] = $this;
         $faculties = array_merge_recursive($faculties, $this->get_previous($module_instance));
-
+        
         ksort($faculties);
-
+        
         return $faculties;
     }
 
@@ -295,16 +294,16 @@ class Faculty extends \application\discovery\module\faculty\Faculty
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        return DataManager :: get_instance();
     }
 }

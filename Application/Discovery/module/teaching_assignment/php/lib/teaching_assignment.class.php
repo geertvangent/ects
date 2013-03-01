@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\teaching_assignment;
 
-use application\discovery\DiscoveryDataManager;
+
 use application\discovery\DiscoveryItem;
 
 class TeachingAssignment extends DiscoveryItem
@@ -100,11 +100,11 @@ class TeachingAssignment extends DiscoveryItem
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 
     /**

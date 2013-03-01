@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+
 use application\discovery\DiscoveryItem;
 
 class Evaluation extends DiscoveryItem
@@ -32,11 +32,11 @@ class Evaluation extends DiscoveryItem
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 
     /**

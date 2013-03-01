@@ -1,6 +1,8 @@
 <?php
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
+use Doctrine\DBAL\Driver\PDOStatement;
+use common\libraries\DoctrineConditionTranslator;
 use common\libraries\AndCondition;
 use common\libraries\Utilities;
 use common\libraries\EqualityCondition;
@@ -9,8 +11,7 @@ use application\discovery\data_source\bamaflex\History;
 use application\discovery\module\course\implementation\bamaflex\Course;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\module\training_info\DataManagerInterface;
-use application\discovery\data_source\bamaflex\DiscoveryDataManager;
-use MDB2_Error;
+use application\discovery\data_source\bamaflex\DataManager;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -58,17 +59,23 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-
+        
         if (! isset($this->trainings[$training_id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_advanced WHERE id = "' . $training_id . '" AND source = "' . $source . '"';
-
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            
+            $conditions = array();
+            $conditions[] = new EqualityCondition('id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+            
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $training = new Training();
                     $training->set_source($result->source);
@@ -94,27 +101,27 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                         $training->set_majors($this->retrieve_majors($training_parameters));
                         $training->set_packages($this->retrieve_packages($training_parameters));
                     }
-
+                    
                     if ($training_parameters->get_tab() == Module :: TAB_TRAJECTORIES)
                     {
                         $training->set_trajectories($this->retrieve_trajectories($training_parameters));
                     }
                     $training->set_groups($this->retrieve_groups($training_parameters));
-
+                    
                     if ($training_parameters->get_tab() == Module :: TAB_COURSES)
                     {
                         $training->set_courses($this->retrieve_courses($training_parameters));
                     }
-
+                    
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE,
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
                             Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
-
-                    $histories = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
-
+                    
+                    $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
@@ -135,15 +142,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                             $training->add_previous_reference($reference);
                         }
                     }
-
+                    
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE,
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
                             Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
-
-                    $histories = DiscoveryDataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    
+                    $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
@@ -157,7 +164,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     else
                     {
                         $next = $this->retrieve_training_next_id($training);
-
+                        
                         if ($next)
                         {
                             $reference = new HistoryReference();
@@ -166,24 +173,28 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                             $training->add_next_reference($reference);
                         }
                     }
-
+                    
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-
+        
         return $this->trainings[$training_id][$source];
     }
 
     function retrieve_training_next_id($training)
     {
-        $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE previous_id = "' . $training->get_id() . '" AND source = "' . $training->get_source() . '"';
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
-
-        if (! $results instanceof MDB2_Error)
+        $conditions = array();
+        $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');
+        $conditions[] = new EqualityCondition('source', '"' . $training->get_source() . '"');
+        $condition = new AndCondition($conditions);
+        $translator = DoctrineConditionTranslator :: factory($this);
+        $query = 'SELECT id, source FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+        $statement = $this->query($query);
+        
+        if ($statement instanceof PDOStatement)
         {
-            return $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $result = $statement->fetch(\PDO :: FETCH_OBJ);
         }
         else
         {
@@ -195,18 +206,25 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-
+        
         if (! isset($this->majors[$training_id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_major_basic ';
-            $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-
+            $conditions = array();
+            $conditions[] = new EqualityCondition('training_id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_major_basic ' . $translator->render_query($condition);
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $major = new Major();
                     $major->set_id($result->id);
@@ -216,12 +234,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $major->set_choices($this->retrieve_major_choices($major->get_id(), $major->get_source()));
                     $major->set_choice_options(
                             $this->retrieve_major_choice_options($major->get_id(), $major->get_source()));
-
+                    
                     $this->majors[$training_id][$source][] = $major;
                 }
             }
         }
-
+        
         return $this->majors[$training_id][$source];
     }
 
@@ -229,30 +247,33 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-
+        
         if (! isset($this->languages[$training_id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_language_basic ';
-            $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('training_id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_language_basic ' . $translator->render_query($condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $language = new Language();
                     $language->set_id($result->id);
                     $language->set_training_id($result->training_id);
                     $language->set_name($this->convert_to_utf8($result->name));
                     $language->set_source($result->source);
-
+                    
                     $this->languages[$training_id][$source][] = $language;
                 }
             }
         }
-
+        
         return $this->languages[$training_id][$source];
     }
 
@@ -260,18 +281,24 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-
+        
         if (! isset($this->packages[$training_id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_package_advanced ';
-            $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-
+            $conditions = array();
+            $conditions[] = new EqualityCondition('id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_package_advanced ' . $translator->render_query($condition);
+            
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $package = new Package();
                     $package->set_id($result->id);
@@ -279,12 +306,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $package->set_name($this->convert_to_utf8($result->name));
                     $package->set_source($result->source);
                     $package->set_courses($this->retrieve_package_courses($package->get_id(), $package->get_source()));
-
+                    
                     $this->packages[$training_id][$source][] = $package;
                 }
             }
         }
-
+        
         return $this->packages[$training_id][$source];
     }
 
@@ -292,18 +319,21 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $id = $parameters->get_training_id();
         $source = $parameters->get_source();
-
+        
         if (! isset($this->courses[$id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_course_advanced ';
-            $query .= 'WHERE training_id = "' . $id . '" AND source = "' . $source . '" ORDER BY name';
-
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('training_id', '"' . $id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_course_advanced ' . $translator->render_query($condition) . ' ORDER BY name';
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $course = new Course();
                     $course->set_id($result->id);
@@ -312,7 +342,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $course->set_name($this->convert_to_utf8($result->name));
                     $course->set_source($result->source);
                     $course->set_credits($result->credits);
-
+                    
                     $this->courses[$id][$source][$result->id] = $course;
                 }
                 foreach ($this->courses[$id][$source] as $course)
@@ -324,7 +354,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-
+        
         return $this->courses[$id][$source];
     }
 
@@ -332,15 +362,20 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         if (! isset($this->package_courses[$id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced ';
-            $query .= 'WHERE package_id = "' . $id . '" AND source = "' . $source . '"';
-
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('package_id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced ' . $translator->render_query(
+                    $condition);
+            
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $trajectory = new PackageCourse();
                     $trajectory->set_id($result->id);
@@ -351,7 +386,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $trajectory->set_trajectory_part($result->trajectory_part);
                     $trajectory->set_credits($result->credits);
                     $trajectory->set_programme_id($result->programme_id);
-
+                    
                     $this->package_courses[$id][$source][$result->programme_id] = $trajectory;
                 }
                 foreach ($this->package_courses[$id][$source] as $package_course)
@@ -373,20 +408,25 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $source = $training_parameters->get_source();
         if (! isset($this->choices[$training_id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_choice_advanced ';
-            $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('training_id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_choice_advanced ' . $translator->render_query($condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $choice = new Choice();
                     $choice->set_id($result->id);
                     $choice->set_training_id($result->training_id);
                     $choice->set_name($this->convert_to_utf8($result->name));
                     $choice->set_source($result->source);
-
+                    
                     $this->choices[$training_id][$source][] = $choice;
                 }
             }
@@ -400,20 +440,26 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $source = $training_parameters->get_source();
         if (! isset($this->choice_options[$training_id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_choice_option_advanced ';
-            $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('training_id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_choice_option_advanced ' . $translator->render_query(
+                    $condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $choice_option = new ChoiceOption();
                     $choice_option->set_id($result->id);
                     $choice_option->set_training_id($result->training_id);
                     $choice_option->set_name($this->convert_to_utf8($result->name));
                     $choice_option->set_source($result->source);
-
+                    
                     $this->choice_options[$training_id][$source][] = $choice_option;
                 }
             }
@@ -427,13 +473,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $source = $training_parameters->get_source();
         if (! isset($this->trajectories[$training_id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_trajectory_advanced ';
-            $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('training_id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_trajectory_advanced ' . $translator->render_query($condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $trajectory = new Trajectory();
                     $trajectory->set_id($result->id);
@@ -442,7 +493,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $trajectory->set_source($result->source);
                     $trajectory->set_trajectories(
                             $this->retrieve_sub_trajectories($trajectory->get_id(), $trajectory->get_source()));
-
+                    
                     $this->trajectories[$training_id][$source][] = $trajectory;
                 }
             }
@@ -456,20 +507,25 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $source = $training_parameters->get_source();
         if (! isset($this->groups[$training_id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_group_advanced ';
-            $query .= 'WHERE training_id = "' . $training_id . '" AND source = "' . $source . '"';
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('training_id', '"' . $training_id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_group_advanced ' . $translator->render_query($condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $group = new Group();
                     $group->set_training_id($result->training_id);
                     $group->set_group_id($result->group_id);
                     $group->set_group($this->convert_to_utf8($result->group));
                     $group->set_source($result->source);
-
+                    
                     $this->groups[$training_id][$source][] = $group;
                 }
             }
@@ -481,13 +537,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         if (! isset($this->sub_trajectories[$id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced ';
-            $query .= 'WHERE trajectory_id = "' . $id . '" AND source = "' . $source . '"';
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('trajectory_id', '"' . $id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced ' . $translator->render_query(
+                    $condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $trajectory = new SubTrajectory();
                     $trajectory->set_id($result->id);
@@ -496,7 +558,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $trajectory->set_source($result->source);
                     $trajectory->set_courses(
                             $this->retrieve_sub_trajectory_courses($trajectory->get_id(), $trajectory->get_source()));
-
+                    
                     $this->sub_trajectories[$id][$source][] = $trajectory;
                 }
             }
@@ -508,13 +570,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         if (! isset($this->sub_trajectory_courses[$id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced ';
-            $query .= 'WHERE sub_trajectory_id = "' . $id . '" AND source = "' . $source . '"';
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('sub_trajectory_id', '"' . $id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced ' . $translator->render_query(
+                    $condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $trajectory = new SubTrajectoryCourse();
                     $trajectory->set_id($result->id);
@@ -525,7 +593,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $trajectory->set_trajectory_part($result->trajectory_part);
                     $trajectory->set_credits($result->credits);
                     $trajectory->set_programme_id($result->programme_id);
-
+                    
                     $this->sub_trajectory_courses[$id][$source][$result->programme_id] = $trajectory;
                 }
                 foreach ($this->sub_trajectory_courses[$id][$source] as $sub_trajectory_course)
@@ -545,20 +613,25 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         if (! isset($this->major_choices[$id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_major_choice_basic ';
-            $query .= 'WHERE major_id = "' . $id . '" AND source = "' . $source . '"';
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('major_id', '"' . $id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_major_choice_basic ' . $translator->render_query($condition);
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $major_choice = new MajorChoice();
                     $major_choice->set_id($result->id);
                     $major_choice->set_major_id($result->major_id);
                     $major_choice->set_name($this->convert_to_utf8($result->name));
                     $major_choice->set_source($result->source);
-
+                    
                     $this->major_choices[$id][$source][] = $major_choice;
                 }
             }
@@ -570,20 +643,27 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         if (! isset($this->major_choice_options[$id][$source]))
         {
-            $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic ';
-            $query .= 'WHERE major_id = "' . $id . '" AND source = "' . $source . '"';
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('major_id', '"' . $id . '"');
+            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic ' . $translator->render_query(
+                    $condition);
+            
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $major_choice_option = new MajorChoiceOption();
                     $major_choice_option->set_id($result->id);
                     $major_choice_option->set_major_id($result->major_id);
                     $major_choice_option->set_name($this->convert_to_utf8($result->name));
                     $major_choice_option->set_source($result->source);
-
+                    
                     $this->major_choice_options[$id][$source][] = $major_choice_option;
                 }
             }

@@ -22,7 +22,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
     function run()
     {
         $this->module_instance_id = Request :: get(self :: PARAM_MODULE_ID);
-        $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
+        $module_instance = DataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
         $this->namespace = '\\' . $module_instance->get_type() . '\Rights';
         $namespace = $this->namespace;
         RightsEditorManager :: launch($this, 'discovery_' . $this->module_instance_id, $this->get_locations(),
@@ -59,7 +59,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
 
     function get_additional_parameters()
     {
-        $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance(
+        $module_instance = DataManager :: get_instance()->retrieve_module_instance(
                 Request :: get(self :: PARAM_MODULE_ID));
         $namespace = '\\' . $module_instance->get_type() . '\Module';
         $parameters = $namespace :: module_parameters();

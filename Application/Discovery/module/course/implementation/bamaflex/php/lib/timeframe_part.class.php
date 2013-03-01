@@ -2,7 +2,7 @@
 namespace application\discovery\module\course\implementation\bamaflex;
 
 use common\libraries\DatetimeUtilities;
-use application\discovery\DiscoveryDataManager;
+
 use application\discovery\DiscoveryItem;
 
 class TimeframePart extends DiscoveryItem
@@ -58,11 +58,11 @@ class TimeframePart extends DiscoveryItem
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 
     /**

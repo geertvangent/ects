@@ -5,17 +5,16 @@ use application\discovery\module\course\DataManager;
 use common\libraries\StringUtilities;
 use common\libraries\Utilities;
 use application\discovery\DiscoveryItem;
-use application\discovery\DiscoveryDataManager;
 
 /**
  * application.discovery.module.courses.discovery
- *
+ * 
  * @author Hans De Bisschop
  */
 class Course extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Course properties
      */
@@ -96,7 +95,7 @@ class Course extends DiscoveryItem
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -132,18 +131,18 @@ class Course extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_PREVIOUS_PARENT_ID;
         $extended_property_names[] = self :: PROPERTY_NEXT_ID;
         $extended_property_names[] = self :: PROPERTY_APPROVED;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
-     * @return DiscoveryDataManagerInterface
+     * 
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     function get_parent_id()
@@ -419,7 +418,7 @@ class Course extends DiscoveryItem
             do
             {
                 $parameters = new Parameters($course->get_previous_id(), $course->get_source());
-
+                
                 $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
                 $courses[] = $course;
             }
@@ -437,7 +436,7 @@ class Course extends DiscoveryItem
             do
             {
                 $parameters = new Parameters($course->get_next_id(), $course->get_source());
-
+                
                 $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
                 $courses[] = $course;
             }
@@ -450,7 +449,7 @@ class Course extends DiscoveryItem
     {
         $courses = $this->get_next($module_instance);
         array_unshift($courses, $this);
-
+        
         foreach ($this->get_previous($module_instance) as $course)
         {
             array_unshift($courses, $course);
@@ -549,27 +548,27 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (! StringUtilities :: is_null_or_empty($this->get_goals(), true))
         {
             return true;
         }
-
+        
         if (! StringUtilities :: is_null_or_empty($this->get_contents(), true))
         {
             return true;
         }
-
+        
         if (! StringUtilities :: is_null_or_empty($this->get_coaching(), true))
         {
             return true;
         }
-
+        
         if (! StringUtilities :: is_null_or_empty($this->get_succession(), true))
         {
             return true;
         }
-
+        
         return false;
     }
 
@@ -692,12 +691,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_costs();
         }
-
+        
         if (! isset($this->costs_by_type[$type]))
         {
             $this->costs_by_type[Cost :: TYPE_MATERIAL] = false;
             $this->costs_by_type[Cost :: TYPE_ADDITIONAL] = false;
-
+            
             foreach ($this->get_costs() as $cost)
             {
                 $this->costs_by_type[$cost->get_type()] = $cost;
@@ -736,12 +735,12 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (count($this->get_evaluations()) > 0)
         {
             return true;
         }
-
+        
         return false;
     }
 
@@ -775,12 +774,12 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (count($this->get_activities()) > 0)
         {
             return true;
         }
-
+        
         return false;
     }
 
@@ -790,13 +789,13 @@ class Course extends DiscoveryItem
         {
             return $this->get_activities();
         }
-
+        
         if (! isset($this->activities_by_type[$type]))
         {
             $this->activities_by_type[ActivityDescription :: CLASS_NAME] = array();
             $this->activities_by_type[ActivityStructured :: CLASS_NAME] = array();
             $this->activities_by_type[ActivityTotal :: CLASS_NAME] = false;
-
+            
             foreach ($this->get_activities() as $activity)
             {
                 if ($activity instanceof ActivityTotal)
@@ -836,12 +835,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_materials();
         }
-
+        
         if (! isset($this->materials_by_type[$type]))
         {
             $this->materials_by_type[Material :: TYPE_OPTIONAL] = array();
             $this->materials_by_type[Material :: TYPE_REQUIRED] = array();
-
+            
             foreach ($this->get_materials() as $material)
             {
                 $this->materials_by_type[$material->get_type()][] = $material;
@@ -862,12 +861,12 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (count($this->get_materials_by_type($type)) > 0)
         {
             return true;
         }
-
+        
         return false;
     }
 
@@ -895,12 +894,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_competences();
         }
-
+        
         if (! isset($this->competences_by_type[$type]))
         {
             $this->competences_by_type[Competence :: TYPE_BEGIN] = array();
             $this->competences_by_type[Competence :: TYPE_END] = array();
-
+            
             foreach ($this->get_competences() as $competence)
             {
                 $this->competences_by_type[$competence->get_type()][] = $competence;
@@ -921,12 +920,12 @@ class Course extends DiscoveryItem
                 }
             }
         }
-
+        
         if (count($this->get_competences_by_type($type)) > 0)
         {
             return true;
         }
-
+        
         return false;
     }
 
@@ -996,12 +995,12 @@ class Course extends DiscoveryItem
         {
             return $this->get_teachers();
         }
-
+        
         if (! isset($this->teachers_by_type[$type]))
         {
             $this->teachers_by_type[Teacher :: TYPE_TEACHER] = array();
             $this->teachers_by_type[Teacher :: TYPE_COORDINATOR] = array();
-
+            
             foreach ($this->get_teachers() as $teacher)
             {
                 $this->teachers_by_type[$teacher->is_coordinator()][] = $teacher;
@@ -1073,7 +1072,7 @@ class Course extends DiscoveryItem
                 return 'ScoreCalculationNumber';
                 break;
             case self :: SCORE_CALCULATION_DIFFERENCE :
-
+                
                 return 'ScoreCalculationDifference';
                 break;
         }

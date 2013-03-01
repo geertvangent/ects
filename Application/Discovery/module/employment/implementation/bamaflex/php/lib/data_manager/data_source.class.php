@@ -1,9 +1,12 @@
 <?php
 namespace application\discovery\module\employment\implementation\bamaflex;
 
+use Doctrine\DBAL\Driver\PDOStatement;
+use common\libraries\DoctrineConditionTranslator;
+use common\libraries\AndCondition;
+use common\libraries\EqualityCondition;
 use application\discovery\module\employment\DataManagerInterface;
 use user\UserDataManager;
-use MDB2_Error;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -20,17 +23,22 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function retrieve_employments($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-
+        
         $official_code = $user->get_official_code();
-
-        $query = 'SELECT * FROM v_discovery_employment WHERE person_id = "' . $official_code . '" AND active = 1 ORDER BY start_date DESC';
-
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
-
-        if (! $results instanceof MDB2_Error)
+        
+        $conditions = array();
+        $conditions[] = new EqualityCondition('person_id', '"' . $official_code . '"');
+        $conditions[] = new EqualityCondition('active', 1);
+        $condition = new AndCondition($conditions);
+        $translator = DoctrineConditionTranslator :: factory($this);
+        
+        $query = 'SELECT * FROM v_discovery_employment ' . $translator->render_query($condition) . ' ORDER BY start_date DESC';
+        
+        $statement = $this->query($query);
+        
+        if ($statement instanceof PDOStatement)
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $employment = new Employment();
                 $employment->set_id($result->id);
@@ -63,10 +71,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $employment->set_interruption_id($result->interruption_id);
                 $employment->set_interruption_category($result->interruption_category);
                 $employment->set_interruption_category_id($result->interruption_category_id);
-
+                
                 $this->employments[$official_code][] = $employment;
             }
-
+            
             return $this->employments[$official_code];
         }
         else
@@ -78,18 +86,21 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     function count_employments($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-
+        
         $official_code = $user->get_official_code();
-
-        $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment WHERE person_id = "' . $official_code . '"';
-
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
-
-        if (! $results instanceof MDB2_Error)
+        
+        $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
+        
+        $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment ' . $translator->render_query(
+                $condition);
+        
+        $statement = $this->query($query);
+        
+        if ($statement instanceof PDOStatement)
         {
-            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
-
+            $result = $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            
             return $result->employments_count;
         }
         else
@@ -100,14 +111,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     function retrieve_employment_parts($employment_id)
     {
-        $query = 'SELECT * FROM v_discovery_employment_parts WHERE assignment_id = "' . $employment_id . '" ORDER BY start_date';
-
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
-
-        if (! $results instanceof MDB2_Error)
+        $condition = new EqualityCondition('assignment_id', '"' . $employment_id . '"');
+        $translator = DoctrineConditionTranslator :: factory($this);
+        
+        $query = 'SELECT * FROM v_discovery_employment_parts ' . $translator->render_query($condition) . ' ORDER BY start_date';
+        
+        $statement = $this->query($query);
+        
+        if ($statement instanceof PDOStatement)
         {
-            while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $employment_part = new EmploymentPart();
                 $employment_part->set_assignment_id($result->assignment_id);
@@ -122,10 +135,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $employment_part->set_training($result->training);
                 $employment_part->set_department($result->department);
                 $employment_part->set_department_id($result->department_id);
-
+                
                 $this->employment_parts[$employment_id][] = $employment_part;
             }
-
+            
             return $this->employment_parts[$employment_id];
         }
         else

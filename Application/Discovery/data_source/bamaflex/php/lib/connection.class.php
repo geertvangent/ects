@@ -3,9 +3,7 @@ namespace application\discovery\data_source\bamaflex;
 
 use common\libraries\DataSourceName;
 use common\libraries\Path;
-use application\discovery\DiscoveryDataManager;
 use common\libraries\DoctrineConnection;
-use MDB2;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Common\ClassLoader;
 
@@ -31,32 +29,29 @@ class Connection extends DoctrineConnection
     {
         $classLoader = new ClassLoader('Doctrine', Path :: get_plugin_path());
         $classLoader->register();
-
-        $this->data_source_instance = DiscoveryDataManager :: get_instance()->retrieve_data_source_instance(
-            $data_source_instance_id);
-
+        
+        $this->data_source_instance = \application\discovery\DataManager :: get_instance()->retrieve_data_source_instance(
+                $data_source_instance_id);
+        
         $driver = $this->data_source_instance->get_setting('driver');
         $host = $this->data_source_instance->get_setting('host');
         $username = $this->data_source_instance->get_setting('username');
         $password = $this->data_source_instance->get_setting('password');
         $database = $this->data_source_instance->get_setting('database');
-
+        
         $data_source_name = DataSourceName :: factory('Doctrine', $driver, $username, $host, $database, $password);
-
+        
         $configuration = new \Doctrine\DBAL\Configuration();
-        $connection_parameters = array(
-            'dbname' => $data_source_name->get_database(),
-            'user' => $data_source_name->get_username(),
-            'password' => $data_source_name->get_password(),
-            'host' => $data_source_name->get_host(),
-            'driver' => $data_source_name->get_driver(true));
-
+        $connection_parameters = array('dbname' => $data_source_name->get_database(), 
+                'user' => $data_source_name->get_username(), 'password' => $data_source_name->get_password(), 
+                'host' => $data_source_name->get_host(), 'driver' => $data_source_name->get_driver(true));
+        
         $this->connection = DriverManager :: getConnection($connection_parameters, $configuration);
     }
 
     /**
      * Returns the instance of this class.
-     *
+     * 
      * @return Connection The instance.
      */
     static function get_instance($data_source_instance_id)
@@ -68,11 +63,6 @@ class Connection extends DoctrineConnection
         return self :: $instance[$data_source_instance_id];
     }
 
-    /**
-     * Gets the database connection.
-     *
-     * @return mixed MDB2 DB Connection.
-     */
     function get_connection()
     {
         return $this->connection;

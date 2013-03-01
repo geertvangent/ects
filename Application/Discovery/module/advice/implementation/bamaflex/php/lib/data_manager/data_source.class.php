@@ -1,10 +1,15 @@
 <?php
 namespace application\discovery\module\advice\implementation\bamaflex;
 
+use Doctrine\DBAL\Driver\PDOStatement;
+use common\libraries\DoctrineConditionTranslator;
+use common\libraries\AndCondition;
+use common\libraries\NotCondition;
+use common\libraries\EqualityCondition;
+use common\libraries\OrCondition;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use user\UserDataManager;
 use application\discovery\module\advice\DataManagerInterface;
-use MDB2_Error;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -22,24 +27,30 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-
+        
         if (! isset($this->advices[$person_id]))
         {
-            $query = 'SELECT * FROM v_discovery_advice_basic
-            			WHERE person_id = "' . $person_id . '"
-            				AND (motivation IS NOT NULL OR
-		            			ombudsman IS NOT NULL OR
-		            			vote IS NOT NULL OR
-		            			measures IS NOT NULL OR
-		            			advice IS NOT NULL)
-            			ORDER BY year DESC';
-
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            $conditions = array();
+            $conditions[] = new EqualityCondition('person_id', '"' . $person_id . '"');
+            
+            $or_conditions = array();
+            $or_conditions[] = new NotCondition(new EqualityCondition('motivation', null));
+            $or_conditions[] = new NotCondition(new EqualityCondition('ombudsman', null));
+            $or_conditions[] = new NotCondition(new EqualityCondition('vote', null));
+            $or_conditions[] = new NotCondition(new EqualityCondition('measures', null));
+            $or_conditions[] = new NotCondition(new EqualityCondition('advice', null));
+            $conditions[] = new OrCondition($or_conditions);
+            
+            $condition = new AndCondition($conditions);
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_advice_basic ' . $translator->render_query($condition) . ' ORDER BY year DESC';
+            
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $advice = new Advice();
                     $advice->set_id($result->id);
@@ -58,12 +69,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $advice->set_try($result->try);
                     $advice->set_decision_type_id($result->decision_type_id);
                     $advice->set_decision_type($this->convert_to_utf8($result->decision_type));
-
+                    
                     $this->advices[$person_id][] = $advice;
                 }
             }
         }
-
+        
         return $this->advices[$person_id];
     }
 
@@ -71,24 +82,31 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-
-        $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic
-            			WHERE person_id = "' . $person_id . '"
-            				AND (motivation IS NOT NULL OR
-		            			ombudsman IS NOT NULL OR
-		            			vote IS NOT NULL OR
-		            			measures IS NOT NULL OR
-		            			advice IS NOT NULL)';
-
-        $statement = $this->get_connection()->prepare($query);
-        $results = $statement->execute();
-
-        if (! $results instanceof MDB2_Error)
+        
+        $conditions = array();
+        $conditions[] = new EqualityCondition('person_id', '"' . $person_id . '"');
+        
+        $or_conditions = array();
+        $or_conditions[] = new NotCondition(new EqualityCondition('motivation', null));
+        $or_conditions[] = new NotCondition(new EqualityCondition('ombudsman', null));
+        $or_conditions[] = new NotCondition(new EqualityCondition('vote', null));
+        $or_conditions[] = new NotCondition(new EqualityCondition('measures', null));
+        $or_conditions[] = new NotCondition(new EqualityCondition('advice', null));
+        $conditions[] = new OrCondition($or_conditions);
+        
+        $condition = new AndCondition($conditions);
+        $translator = DoctrineConditionTranslator :: factory($this);
+        
+        $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic ' . $translator->render_query(
+                $condition);
+        $statement = $this->query($query);
+        
+        if ($statement instanceof PDOStatement)
         {
-            $result = $results->fetchRow(MDB2_FETCHMODE_OBJECT);
+            $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->advices_count;
         }
-
+        
         return 0;
     }
 
@@ -104,15 +122,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
-            $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE person_id = "' . $official_code . '" ORDER BY year DESC, id';
-
-            $statement = $this->get_connection()->prepare($query);
-            $results = $statement->execute();
-
-            if (! $results instanceof MDB2_Error)
+            
+            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $translator = DoctrineConditionTranslator :: factory($this);
+            
+            $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) . ' ORDER BY year DESC, id';
+            
+            $statement = $this->query($query);
+            
+            if ($statement instanceof PDOStatement)
             {
-                while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $enrollment = new Enrollment();
                     $enrollment->set_source($result->source);
@@ -135,7 +155,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 }

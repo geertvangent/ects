@@ -1,19 +1,19 @@
 <?php
 namespace application\discovery\module\exemption\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+use application\discovery\DataManager;
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
 
 /**
  * application.discovery.module.exemption.implementation.bamaflex
- *
+ * 
  * @author Magali Gillard
  */
 class Exemption extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      *
      * @var integer
@@ -110,7 +110,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -134,23 +134,23 @@ class Exemption extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_MOTIVATION;
         $extended_property_names[] = self :: PROPERTY_EXTERNAL_ID;
         $extended_property_names[] = self :: PROPERTY_EXTERNAL;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
-     * @return DiscoveryDataManagerInterface
+     * 
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        return DataManager :: get_instance();
     }
 
     /**
      * Returns the enrollment_id of this Exemption.
-     *
+     * 
      * @return integer The enrollment_id.
      */
     function get_enrollment_id()
@@ -160,7 +160,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the enrollment_id of this Exemption.
-     *
+     * 
      * @param integer $enrollment_id
      */
     function set_enrollment_id($enrollment_id)
@@ -170,7 +170,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the year of this Exemption.
-     *
+     * 
      * @return string The year.
      */
     function get_year()
@@ -180,7 +180,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the year of this Exemption.
-     *
+     * 
      * @param string $year
      */
     function set_year($year)
@@ -190,7 +190,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the person_id of this Exemption.
-     *
+     * 
      * @return integer The person_id.
      */
     function get_person_id()
@@ -200,7 +200,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the person_id of this Exemption.
-     *
+     * 
      * @param integer $person_id
      */
     function set_person_id($person_id)
@@ -210,7 +210,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the programme_id of this Exemption.
-     *
+     * 
      * @return integer The programme_id.
      */
     function get_programme_id()
@@ -220,7 +220,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the programme_id of this Exemption.
-     *
+     * 
      * @param integer $programme_id
      */
     function set_programme_id($programme_id)
@@ -230,7 +230,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the programme_name of this Exemption.
-     *
+     * 
      * @return string The programme_name.
      */
     function get_programme_name()
@@ -240,7 +240,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the programme_name of this Exemption.
-     *
+     * 
      * @param string $programme_name
      */
     function set_programme_name($programme_name)
@@ -250,7 +250,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the type_id of this Exemption.
-     *
+     * 
      * @return integer The type_id.
      */
     function get_type_id()
@@ -260,7 +260,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the type_id of this Exemption.
-     *
+     * 
      * @param integer $type_id
      */
     function set_type_id($type_id)
@@ -270,7 +270,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the type of this Exemption.
-     *
+     * 
      * @return string The type.
      */
     function get_type()
@@ -280,7 +280,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the type of this Exemption.
-     *
+     * 
      * @param string $type
      */
     function set_type($type)
@@ -290,7 +290,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the result of this Exemption.
-     *
+     * 
      * @return string The result.
      */
     function get_result()
@@ -300,7 +300,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the result of this Exemption.
-     *
+     * 
      * @param string $result
      */
     function set_result($result)
@@ -310,7 +310,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the state of this Exemption.
-     *
+     * 
      * @return integer The state.
      */
     function get_state()
@@ -320,7 +320,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the state of this Exemption.
-     *
+     * 
      * @param integer $state
      */
     function set_state($state)
@@ -330,7 +330,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the credits of this Exemption.
-     *
+     * 
      * @return string The credits.
      */
     function get_credits()
@@ -340,7 +340,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the credits of this Exemption.
-     *
+     * 
      * @param string $credits
      */
     function set_credits($credits)
@@ -350,7 +350,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the proof of this Exemption.
-     *
+     * 
      * @return string The proof.
      */
     function get_proof()
@@ -360,7 +360,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the proof of this Exemption.
-     *
+     * 
      * @param string $proof
      */
     function set_proof($proof)
@@ -370,7 +370,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the date_requested of this Exemption.
-     *
+     * 
      * @return string The date_requested.
      */
     function get_date_requested()
@@ -380,7 +380,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the date_requested of this Exemption.
-     *
+     * 
      * @param string $date_requested
      */
     function set_date_requested($date_requested)
@@ -390,7 +390,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the date_closed of this Exemption.
-     *
+     * 
      * @return string The date_closed.
      */
     function get_date_closed()
@@ -400,7 +400,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the date_closed of this Exemption.
-     *
+     * 
      * @param string $date_closed
      */
     function set_date_closed($date_closed)
@@ -410,7 +410,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the remarks_public of this Exemption.
-     *
+     * 
      * @return string The remarks_public.
      */
     function get_remarks_public()
@@ -420,7 +420,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the remarks_public of this Exemption.
-     *
+     * 
      * @param string $remarks_public
      */
     function set_remarks_public($remarks_public)
@@ -430,7 +430,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the remarks_private of this Exemption.
-     *
+     * 
      * @return string The remarks_private.
      */
     function get_remarks_private()
@@ -440,7 +440,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the remarks_private of this Exemption.
-     *
+     * 
      * @param string $remarks_private
      */
     function set_remarks_private($remarks_private)
@@ -450,7 +450,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the motivation of this Exemption.
-     *
+     * 
      * @return string The motivation.
      */
     function get_motivation()
@@ -460,7 +460,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the motivation of this Exemption.
-     *
+     * 
      * @param string $motivation
      */
     function set_motivation($motivation)
@@ -470,7 +470,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the external_id of this Exemption.
-     *
+     * 
      * @return integer The external_id.
      */
     function get_external_id()
@@ -480,7 +480,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the external_id of this Exemption.
-     *
+     * 
      * @param integer $external_id
      */
     function set_external_id($external_id)
@@ -490,7 +490,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Returns the external of this Exemption.
-     *
+     * 
      * @return string The external.
      */
     function get_external()
@@ -500,7 +500,7 @@ class Exemption extends DiscoveryItem
 
     /**
      * Sets the external of this Exemption.
-     *
+     * 
      * @param string $external
      */
     function set_external($external)
@@ -545,11 +545,11 @@ class Exemption extends DiscoveryItem
     static function get_state_types($types_only = false)
     {
         $types = array();
-
+        
         $types[self :: STATE_PENDING] = self :: state_string(self :: STATE_PENDING);
         $types[self :: STATE_ACCEPTED] = self :: state_string(self :: STATE_ACCEPTED);
         $types[self :: STATE_REFUSED] = self :: state_string(self :: STATE_REFUSED);
-
+        
         return ($types_only ? array_keys($types) : $types);
     }
 

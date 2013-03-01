@@ -1,19 +1,19 @@
 <?php
 namespace application\discovery\module\course;
 
-use application\discovery\DiscoveryDataManager;
+
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
 /**
  * application.discovery.module.courses.discovery
- *
+ * 
  * @author Hans De Bisschop
  */
 class Course extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Course properties
      */
@@ -45,7 +45,7 @@ class Course extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -76,18 +76,18 @@ class Course extends DataClass
         $extended_property_names[] = self :: PROPERTY_JURY;
         $extended_property_names[] = self :: PROPERTY_REPLEACABLE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_UNIT;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
-     * @return DiscoveryDataManagerInterface
+     * 
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     function get_year()

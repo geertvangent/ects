@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
-use application\discovery\DiscoveryDataManager;
+
 use application\discovery\DiscoveryItem;
 
 class CasCount extends DiscoveryItem
@@ -120,10 +120,10 @@ class CasCount extends DiscoveryItem
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 }

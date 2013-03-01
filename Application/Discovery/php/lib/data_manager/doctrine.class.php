@@ -9,9 +9,9 @@ namespace application\discovery;
 use common\libraries\InCondition;
 use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
-use common\libraries\Mdb2Database;
+use common\libraries\DoctrineDatabase;
 
-class Mdb2DataManager extends Mdb2Database implements DataManagerInterface
+class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterface
 {
 
     function initialize()

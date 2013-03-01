@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\profile;
 
-use application\discovery\DiscoveryDataManager;
 use common\libraries\DataClass;
 
 class Photo extends DataClass
@@ -54,17 +53,17 @@ class Photo extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_MIME_TYPE;
         $extended_property_names[] = self :: PROPERTY_DATA;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 
     function get_source()
@@ -77,7 +76,7 @@ class Photo extends DataClass
         $source[] = 'base64';
         $source[] = ',';
         $source[] = $this->get_data();
-
+        
         return implode('', $source);
     }
 

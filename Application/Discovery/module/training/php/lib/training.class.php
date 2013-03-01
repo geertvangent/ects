@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\training;
 
-use application\discovery\DiscoveryDataManager;
+
 use application\discovery\DiscoveryItem;
 
 class Training extends DiscoveryItem
@@ -78,17 +78,17 @@ class Training extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

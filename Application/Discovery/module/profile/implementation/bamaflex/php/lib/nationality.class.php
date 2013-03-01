@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+
 use common\libraries\DataClass;
 
 class Nationality extends DataClass
@@ -73,17 +73,17 @@ class Nationality extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_NATIONALITY;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     function __toString()

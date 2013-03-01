@@ -18,9 +18,9 @@ class ModuleInstanceManagerMoverComponent extends ModuleInstanceManager
 
         if (isset($id))
         {
-            $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($id);
+            $module_instance = DataManager :: get_instance()->retrieve_module_instance($id);
 
-            $max = DiscoveryDataManager :: get_instance()->count_module_instances(
+            $max = DataManager :: get_instance()->count_module_instances(
                     new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
 
             $display_order = $module_instance->get_display_order();
@@ -36,7 +36,7 @@ class ModuleInstanceManagerMoverComponent extends ModuleInstanceManager
                         $module_instance->get_content_type());
                 $condition = new AndCondition($conditions);
 
-                $items = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition);
+                $items = DataManager :: get_instance()->retrieve_module_instances($condition);
                 $new_module_instance = $items->next_result();
                 $new_module_instance->set_display_order($display_order);
                 // dump($new_module_instance->get_display_order());

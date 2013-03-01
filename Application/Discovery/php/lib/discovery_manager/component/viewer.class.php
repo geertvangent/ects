@@ -45,7 +45,7 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                 $module_content_type = ModuleInstance :: TYPE_USER;
             }
             $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_content_type);
-            $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance_by_condition(
+            $current_module_instance = DataManager :: get_instance()->retrieve_module_instance_by_condition(
                     $condition, $order_by);
             if (! $current_module_instance)
             {
@@ -57,7 +57,7 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
         }
         else
         {
-            $current_module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instance($module_id);
+            $current_module_instance = DataManager :: get_instance()->retrieve_module_instance($module_id);
             $module_content_type = $current_module_instance->get_content_type();
         }
 
@@ -109,7 +109,7 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
             $tabs = new DynamicVisualTabsRenderer('discovery', $rendered_module);
             $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE,
                     $current_module_instance->get_content_type());
-            $module_instances = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition, null,
+            $module_instances = DataManager :: get_instance()->retrieve_module_instances($condition, null,
                     null, $order_by);
 
             while ($module_instance = $module_instances->next_result())

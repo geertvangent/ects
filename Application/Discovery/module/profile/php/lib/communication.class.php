@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\profile;
 
-use application\discovery\DiscoveryDataManager;
 use common\libraries\DataClass;
 
 class Communication extends DataClass
@@ -142,10 +141,10 @@ class Communication extends DataClass
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 }

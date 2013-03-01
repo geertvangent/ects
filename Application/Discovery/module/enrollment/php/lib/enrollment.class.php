@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\enrollment;
 
-use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
 
 class Enrollment extends DiscoveryItem
@@ -156,17 +155,17 @@ class Enrollment extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_RESULT;
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

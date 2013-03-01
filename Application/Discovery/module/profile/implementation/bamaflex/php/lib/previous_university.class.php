@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
@@ -64,7 +64,7 @@ class PreviousUniversity extends DataClass
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 
     /**

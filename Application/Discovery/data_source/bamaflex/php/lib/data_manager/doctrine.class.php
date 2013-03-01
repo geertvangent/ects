@@ -6,7 +6,7 @@ namespace application\discovery\data_source\bamaflex;
  * @package application.discovery
  * @author Hans De Bisschop
  */
-class Mdb2DataManager extends \application\discovery\Mdb2DataManager
+class DoctrineDataManager extends \application\discovery\DoctrineDataManager
 {
 
     function initialize()

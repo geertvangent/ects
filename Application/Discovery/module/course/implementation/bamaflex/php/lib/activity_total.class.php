@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+
 
 class ActivityTotal extends Activity
 {
@@ -25,17 +25,17 @@ class ActivityTotal extends Activity
     static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_TIME;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

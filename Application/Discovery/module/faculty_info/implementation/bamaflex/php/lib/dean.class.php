@@ -2,7 +2,7 @@
 namespace application\discovery\module\faculty_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-use application\discovery\DiscoveryDataManager;
+
 
 class Dean extends DiscoveryItem
 {
@@ -82,16 +82,16 @@ class Dean extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_FUNCTION_ID;
         $extended_property_names[] = self :: PROPERTY_PERSON;
         $extended_property_names[] = self :: PROPERTY_FUNCTION;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 }

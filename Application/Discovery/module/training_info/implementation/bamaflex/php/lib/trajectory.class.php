@@ -2,7 +2,7 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-use application\discovery\DiscoveryDataManager;
+
 
 class Trajectory extends DiscoveryItem
 {
@@ -56,17 +56,17 @@ class Trajectory extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_NAME;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     function get_trajectories()

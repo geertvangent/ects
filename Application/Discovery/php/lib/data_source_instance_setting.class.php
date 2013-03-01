@@ -39,11 +39,11 @@ class DataSourceInstanceSetting extends DataClass
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        return DataManager :: get_instance();
     }
 
     /**
@@ -188,7 +188,7 @@ class DataSourceInstanceSetting extends DataClass
     static function load($data_source_instance_id)
     {
         $condition = new EqualityCondition(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, $data_source_instance_id);
-        $settings = DiscoveryDataManager :: get_instance()->retrieve_data_source_instance_settings($condition);
+        $settings = DataManager :: get_instance()->retrieve_data_source_instance_settings($condition);
 
         while ($setting = $settings->next_result())
         {

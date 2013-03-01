@@ -38,7 +38,7 @@ class HistoryReference extends DataClass
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        return DataManager :: get_instance();
     }
 
     /**

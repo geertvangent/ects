@@ -249,7 +249,7 @@ class ModuleInstanceForm extends FormValidator
 
             foreach ($settings as $name => $value)
             {
-                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
+                $setting = DataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
                         $name, $module_instance->get_id());
                 $setting->set_value($value);
 
@@ -285,7 +285,7 @@ class ModuleInstanceForm extends FormValidator
             $module_instance->set_content_type(ModuleInstance :: TYPE_DISABLED);
         }
 
-        $display_order = DiscoveryDataManager :: get_instance()->count_module_instances(
+        $display_order = DataManager :: get_instance()->count_module_instances(
                 new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
         $display_order ++;
 
@@ -302,7 +302,7 @@ class ModuleInstanceForm extends FormValidator
 
             foreach ($settings as $name => $value)
             {
-                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
+                $setting = DataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
                         $name, $module_instance->get_id());
                 $setting->set_value($value);
 
@@ -368,7 +368,7 @@ class ModuleInstanceForm extends FormValidator
         {
             foreach ($settings as $name => $setting)
             {
-                $setting = DiscoveryDataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
+                $setting = DataManager :: get_instance()->retrieve_module_instance_setting_from_variable_name(
                         $name, $module_instance->get_id());
                 if ($setting instanceof ModuleInstanceSetting)
                 {

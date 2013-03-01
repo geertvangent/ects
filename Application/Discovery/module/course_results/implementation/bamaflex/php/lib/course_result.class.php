@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
-use application\discovery\DiscoveryDataManager;
+
 use common\libraries\Utilities;
 
 /**
@@ -43,11 +43,11 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
     /**
      * Get the data class data manager
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+//         return DataManager :: get_instance();
     }
 
     /**

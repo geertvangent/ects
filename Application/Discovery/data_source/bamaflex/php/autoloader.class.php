@@ -13,7 +13,7 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'Connection' => '/lib/connection.class.php',
          'DataSource' => '/lib/data_source.class.php',
-         'DiscoveryDataManager' => '/lib/discovery_data_manager.class.php',
+         'DataManager' => '/lib/discovery_data_manager.class.php',
          'History' => '/lib/history.class.php',
          'HistoryReference' => '/lib/history_reference.class.php',
          'MyTemplate' => '/lib/data_class_generator/my_template.class.php',
@@ -27,7 +27,8 @@ class Autoloader
          'application\discovery\module\profile\implementation\bamaflex\LearningCredit' => '/lib/data_class_generator/xml_schemas/php/application/discovery/module/profile/implementation/bamaflex/php/lib/learning_credit.class.php',
          'application\discovery\module\student_year\implementation\bamaflex\StudentYear' => '/lib/data_class_generator/xml_schemas/php/application/discovery/module/student_year/implementation/bamaflex/php/lib/student_year.class.php',
          'application\discovery\module\training\implementation\bamaflex\Group' => '/lib/data_class_generator/xml_schemas/php/application/discovery/module/training/implementation/bamaflex/php/lib/group.class.php',
-         'Mdb2DiscoveryDataManager' => '/lib/data_manager/mdb2.class.php',
+         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
+         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'SettingsConnector' => '/settings/settings_connector.class.php'
     );
 
@@ -60,3 +61,4 @@ class Autoloader
     }
 
 }
+?>

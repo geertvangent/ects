@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\profile;
 
-use application\discovery\DiscoveryDataManager;
 use application\discovery\DiscoveryItem;
 
 class Profile extends DiscoveryItem
@@ -167,17 +166,17 @@ class Profile extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_COMMUNICATION;
         $extended_property_names[] = self :: PROPERTY_LANGUAGE;
         $extended_property_names[] = self :: PROPERTY_PHOTO;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      *
-     * @return DiscoveryDataManagerInterface
+     * @return DataManagerInterface
      */
     function get_data_manager()
     {
-        return DiscoveryDataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**
