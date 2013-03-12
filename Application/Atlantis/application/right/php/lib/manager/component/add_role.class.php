@@ -6,7 +6,7 @@ use common\libraries\Request;
 class AddRoleComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         $right_id = Request :: get(self :: PARAM_RIGHT_ID);
         $application_id = Request :: get(self :: PARAM_APPLICATION_ID);

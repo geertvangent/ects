@@ -12,7 +12,7 @@ class Installer extends \common\libraries\package\Installer
     /**
      * Constructor
      */
-    function __construct($values)
+    public function __construct($values)
     {
         parent :: __construct($values, DataManager :: get_instance());
     }
@@ -37,7 +37,7 @@ class Installer extends \common\libraries\package\Installer
 //         return true;
 //     }
 
-    function get_additional_installers()
+    public function get_additional_installers()
     {
         $installers = array();
 

@@ -7,7 +7,7 @@ use common\libraries\Translation;
 class CreatorComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
 
 

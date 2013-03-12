@@ -11,7 +11,7 @@ class RoleForm extends FormValidator
 {
     private $right;
 
-    function __construct($application, $right, $action)
+    public function __construct($application, $right, $action)
     {
         parent :: __construct('role', 'post', $action);
 
@@ -21,7 +21,7 @@ class RoleForm extends FormValidator
         $this->setDefaults();
     }
 
-    function build()
+    public function build()
     {
         $this->addElement('static', null, Translation :: get('Application'), $this->application);
         $this->addElement('static', null, Translation :: get('Right'), $this->right);
@@ -42,7 +42,7 @@ class RoleForm extends FormValidator
      * @param $defaults array
      *            Default values for this form's parameters.
      */
-    function setDefaults($defaults = array ())
+    public function setDefaults($defaults = array ())
     {
        $defaults[Entitlement :: PROPERTY_RIGHT_ID] = $this->right;
         parent :: setDefaults($defaults);

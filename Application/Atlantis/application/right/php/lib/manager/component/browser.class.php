@@ -38,7 +38,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         return new AndCondition($conditions);
     }
 
-    function run()
+    public function run()
     {
         $this->add_breadcrumb();
         $this->display_header();
@@ -49,7 +49,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $this->display_footer();
     }
 
-    function get_action_bar()
+    public function get_action_bar()
     {
         if (! isset($this->action_bar))
         {
@@ -64,7 +64,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         return $this->action_bar;
     }
 
-    function add_breadcrumb()
+    public function add_breadcrumb()
     {
         $application_id = Request :: get(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID);
         $application = \application\atlantis\application\DataManager :: retrieve(\application\atlantis\application\Application :: class_name(), (int) $application_id);

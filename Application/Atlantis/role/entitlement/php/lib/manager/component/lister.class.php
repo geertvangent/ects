@@ -20,7 +20,7 @@ class ListerComponent extends Manager implements DelegateComponent
     private $application_id;
     private $role_id;
 
-    function run()
+    public function run()
     {
         $renderer_name = Utilities :: get_classname_from_object($this, true);
         $this->role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
@@ -141,17 +141,17 @@ class ListerComponent extends Manager implements DelegateComponent
         }
     }
 
-    function get_application_id()
+    public function get_application_id()
     {
         return $this->application_id;
     }
 
-    function get_role_id()
+    public function get_role_id()
     {
         return $this->role_id;
     }
 
-    function add_breadcrumb()
+    public function add_breadcrumb()
     {
         $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(), (int) $this->role_id);
 

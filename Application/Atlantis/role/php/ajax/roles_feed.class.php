@@ -30,7 +30,7 @@ class RoleAjaxRolesFeed extends AjaxManager
      *
      * @return string[]
      */
-    function required_parameters()
+    public function required_parameters()
     {
         return array();
     }
@@ -38,7 +38,7 @@ class RoleAjaxRolesFeed extends AjaxManager
     /**
      * Runs this ajax component
      */
-    function run()
+    public function run()
     {
         $result = new JsonAjaxResult();
 

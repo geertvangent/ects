@@ -14,7 +14,7 @@ use common\libraries\NewObjectTableSupport;
 class ListerComponent extends Manager implements NewObjectTableSupport
 {
 
-    function run()
+    public function run()
     {
         $renderer_name = Utilities :: get_classname_from_object($this, true);
         $tabs = new DynamicVisualTabsRenderer($renderer_name, $this->get_rights(Request :: get(self :: PARAM_APPLICATION_ID)));
@@ -32,7 +32,7 @@ class ListerComponent extends Manager implements NewObjectTableSupport
         $this->display_footer();
     }
 
-    function get_rights($application_id)
+    public function get_rights($application_id)
     {
         $parameters = new DataClassRetrievesParameters(new EqualityCondition(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID, $application_id));
         $rights = DataManager :: retrieves(\application\atlantis\application\right\Right :: class_name(), $parameters);
@@ -44,7 +44,7 @@ class ListerComponent extends Manager implements NewObjectTableSupport
         return $table->toHtml();
     }
 
-    function get_display_rights($rights)
+    public function get_display_rights($rights)
     {
         $properties = array();
 

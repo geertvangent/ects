@@ -11,7 +11,7 @@ class RightForm extends FormValidator
 {
     private $right;
 
-    function __construct($right, $action)
+    public function __construct($right, $action)
     {
         parent :: __construct('right', 'post', $action);
 
@@ -20,7 +20,7 @@ class RightForm extends FormValidator
         $this->setDefaults();
     }
 
-    function build()
+    public function build()
     {
         $this->addElement('static', null, Translation :: get('Application'), $this->right->get_application()->get_name());
 
@@ -52,7 +52,7 @@ class RightForm extends FormValidator
      * @param $defaults array
      *            Default values for this form's parameters.
      */
-    function setDefaults($defaults = array ())
+    public function setDefaults($defaults = array ())
     {
         $right = $this->right;
         $defaults[Right :: PROPERTY_NAME] = $right->get_name();

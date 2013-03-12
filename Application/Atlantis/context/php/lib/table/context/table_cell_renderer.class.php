@@ -32,7 +32,7 @@ class ApplicationTableCellRenderer extends NewObjectTableCellRenderer implements
         return parent :: render_cell($column, $object);
     }
 
-    function get_object_actions($application)
+    public function get_object_actions($application)
     {
 
         $toolbar = new Toolbar();

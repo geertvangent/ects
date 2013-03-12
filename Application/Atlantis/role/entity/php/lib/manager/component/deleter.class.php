@@ -10,7 +10,7 @@ use common\libraries\Translation;
 class DeleterComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         $ids = Request :: get(self :: PARAM_ROLE_ENTITY_ID);
         $failures = 0;

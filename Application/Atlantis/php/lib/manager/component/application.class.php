@@ -4,7 +4,7 @@ namespace application\atlantis;
 class ApplicationComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         \application\atlantis\application\Manager :: launch($this);
     }

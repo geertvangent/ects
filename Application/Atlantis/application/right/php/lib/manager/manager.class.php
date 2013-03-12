@@ -24,7 +24,7 @@ class Manager extends SubManager
     const PARAM_RIGHT_ID = 'right_id';
     const PARAM_APPLICATION_ID = 'application_id';
 
-    static function get_action_parameter()
+    public static function get_action_parameter()
     {
         return self :: PARAM_ACTION;
     }
@@ -41,7 +41,7 @@ class Manager extends SubManager
      * - YourApplicationManager :: APPLICATION_NAME in all other application
      * classes
      */
-    function get_application_name()
+    public function get_application_name()
     {
         return self :: APPLICATION_NAME;
     }
@@ -58,12 +58,12 @@ class Manager extends SubManager
      * - YourApplicationManager :: DEFAULT_ACTION in all other application
      * classes
      */
-    static function get_default_action()
+    public static function get_default_action()
     {
         return self :: DEFAULT_ACTION;
     }
 
-    static function launch($application)
+    public static function launch($application)
     {
         parent :: launch(null, $application);
     }

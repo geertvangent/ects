@@ -9,7 +9,7 @@ use common\libraries\Translation;
 class CreatorComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         if (! $this->get_user()->is_platform_admin())
         {

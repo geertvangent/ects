@@ -21,7 +21,7 @@ class EntityForm extends FormValidator
     const PROPERTY_START_DATE = 'start_date';
     const PROPERTY_END_DATE = 'end_date';
 
-    function __construct($application, $action)
+    public function __construct($application, $action)
     {
         parent :: __construct('application', 'post', $action);
 
@@ -30,7 +30,7 @@ class EntityForm extends FormValidator
         $this->setDefaults();
     }
 
-    function build()
+    public function build()
     {
         // entity
         $user_entity = new UserEntity();
@@ -96,7 +96,7 @@ class EntityForm extends FormValidator
      *
      * @param $defaults array Default values for this form's parameters.
      */
-    function setDefaults($defaults = array ())
+    public function setDefaults($defaults = array ())
     {
         parent :: setDefaults($defaults);
     }

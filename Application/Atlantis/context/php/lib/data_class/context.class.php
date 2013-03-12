@@ -26,7 +26,7 @@ class Context extends DataClass
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_PARENT_ID;
         $extended_property_names[] = self :: PROPERTY_PARENT_TYPE;
@@ -41,7 +41,7 @@ class Context extends DataClass
      * Get the data class data manager
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -50,7 +50,7 @@ class Context extends DataClass
      * Returns the parent_id of this Context.
      * @return integer The parent_id.
      */
-    function get_parent_id()
+    public function get_parent_id()
     {
         return $this->get_default_property(self :: PROPERTY_PARENT_ID);
     }
@@ -59,7 +59,7 @@ class Context extends DataClass
      * Sets the parent_id of this Context.
      * @param integer $parent_id
      */
-    function set_parent_id($parent_id)
+    public function set_parent_id($parent_id)
     {
         $this->set_default_property(self :: PROPERTY_PARENT_ID, $parent_id);
     }
@@ -67,7 +67,7 @@ class Context extends DataClass
      * Returns the parent_type of this Context.
      * @return integer The parent_type.
      */
-    function get_parent_type()
+    public function get_parent_type()
     {
         return $this->get_default_property(self :: PROPERTY_PARENT_TYPE);
     }
@@ -76,7 +76,7 @@ class Context extends DataClass
      * Sets the parent_type of this Context.
      * @param integer $parent_type
      */
-    function set_parent_type($parent_type)
+    public function set_parent_type($parent_type)
     {
         $this->set_default_property(self :: PROPERTY_PARENT_TYPE, $parent_type);
     }
@@ -84,7 +84,7 @@ class Context extends DataClass
      * Returns the context_id of this Context.
      * @return integer The context_id.
      */
-    function get_context_id()
+    public function get_context_id()
     {
         return $this->get_default_property(self :: PROPERTY_CONTEXT_ID);
     }
@@ -93,7 +93,7 @@ class Context extends DataClass
      * Sets the context_id of this Context.
      * @param integer $context_id
      */
-    function set_context_id($context_id)
+    public function set_context_id($context_id)
     {
         $this->set_default_property(self :: PROPERTY_CONTEXT_ID, $context_id);
     }
@@ -101,7 +101,7 @@ class Context extends DataClass
      * Returns the context_name of this Context.
      * @return text The context_name.
      */
-    function get_context_name()
+    public function get_context_name()
     {
         return $this->get_default_property(self :: PROPERTY_CONTEXT_NAME);
     }
@@ -110,7 +110,7 @@ class Context extends DataClass
      * Sets the context_name of this Context.
      * @param text $context_name
      */
-    function set_context_name($context_name)
+    public function set_context_name($context_name)
     {
         $this->set_default_property(self :: PROPERTY_CONTEXT_NAME, $context_name);
     }
@@ -118,7 +118,7 @@ class Context extends DataClass
      * Returns the context_type of this Context.
      * @return integer The context_type.
      */
-    function get_context_type()
+    public function get_context_type()
     {
         return $this->get_default_property(self :: PROPERTY_CONTEXT_TYPE);
     }
@@ -127,7 +127,7 @@ class Context extends DataClass
      * Sets the context_type of this Context.
      * @param integer $context_type
      */
-    function set_context_type($context_type)
+    public function set_context_type($context_type)
     {
         $this->set_default_property(self :: PROPERTY_CONTEXT_TYPE, $context_type);
     }
@@ -135,7 +135,7 @@ class Context extends DataClass
     /**
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

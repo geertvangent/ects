@@ -8,7 +8,7 @@ use common\libraries\Request;
 class EditorComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         $role_id = Request :: get(self :: PARAM_ROLE_ID);
 

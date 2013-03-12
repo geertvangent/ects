@@ -45,22 +45,22 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         }
     }
 
-    function has_role_id()
+    public function has_role_id()
     {
         return isset($this->role_id);
     }
 
-    function has_right_id()
+    public function has_right_id()
     {
         return isset($this->right_id);
     }
 
-    function has_application_id()
+    public function has_application_id()
     {
         return isset($this->application_id);
     }
 
-    function run()
+    public function run()
     {
         $this->right_id = Request :: get(\application\atlantis\application\right\Manager :: PARAM_RIGHT_ID);
         $this->role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
@@ -74,7 +74,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $this->display_footer();
     }
 
-    function add_breadcrumb()
+    public function add_breadcrumb()
     {
         if ($this->has_application_id())
         {

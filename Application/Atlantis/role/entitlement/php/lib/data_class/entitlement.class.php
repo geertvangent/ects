@@ -27,7 +27,7 @@ class Entitlement extends DataClass
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_RIGHT_ID;
         $extended_property_names[] = self :: PROPERTY_ROLE_ID;
@@ -40,7 +40,7 @@ class Entitlement extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -50,7 +50,7 @@ class Entitlement extends DataClass
      *
      * @return integer The application_right_id.
      */
-    function get_right_id()
+    public function get_right_id()
     {
         return $this->get_default_property(self :: PROPERTY_RIGHT_ID);
     }
@@ -60,7 +60,7 @@ class Entitlement extends DataClass
      *
      * @param $application_right_id integer
      */
-    function set_right_id($application_right_id)
+    public function set_right_id($application_right_id)
     {
         $this->set_default_property(self :: PROPERTY_RIGHT_ID, $application_right_id);
     }
@@ -70,7 +70,7 @@ class Entitlement extends DataClass
      *
      * @return integer The role_id.
      */
-    function get_role_id()
+    public function get_role_id()
     {
         return $this->get_default_property(self :: PROPERTY_ROLE_ID);
     }
@@ -80,7 +80,7 @@ class Entitlement extends DataClass
      *
      * @param $role_id integer
      */
-    function set_role_id($role_id)
+    public function set_role_id($role_id)
     {
         $this->set_default_property(self :: PROPERTY_ROLE_ID, $role_id);
     }
@@ -89,12 +89,12 @@ class Entitlement extends DataClass
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
-    function get_right()
+    public function get_right()
     {
         if (! isset($this->right))
         {
@@ -103,7 +103,7 @@ class Entitlement extends DataClass
         return $this->right;
     }
 
-    function get_role()
+    public function get_role()
     {
         if (! isset($this->role))
         {

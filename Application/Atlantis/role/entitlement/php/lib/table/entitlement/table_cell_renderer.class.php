@@ -31,7 +31,7 @@ class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
         return parent :: render_cell($column, $object);
     }
 
-    function get_object_actions($entitlement)
+    public function get_object_actions($entitlement)
     {
         $toolbar = new Toolbar();
         if ($this->get_component()->get_user()->is_platform_admin())

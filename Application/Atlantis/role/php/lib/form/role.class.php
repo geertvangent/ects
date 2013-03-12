@@ -9,7 +9,7 @@ class RoleForm extends FormValidator
 {
     private $role;
 
-    function __construct($role, $action)
+    public function __construct($role, $action)
     {
         parent :: __construct('role', 'post', $action);
 
@@ -18,7 +18,7 @@ class RoleForm extends FormValidator
         $this->setDefaults();
     }
 
-    function build()
+    public function build()
     {
         $this->addElement('text', Role :: PROPERTY_NAME, Translation :: get('RoleName'), array("size" => "50"));
         $this->addRule(Role :: PROPERTY_NAME, Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 'required');
@@ -46,7 +46,7 @@ class RoleForm extends FormValidator
      * @param $defaults array
      *            Default values for this form's parameters.
      */
-    function setDefaults($defaults = array ())
+    public function setDefaults($defaults = array ())
     {
         $role = $this->role;
         $defaults[Role :: PROPERTY_NAME] = $role->get_name();

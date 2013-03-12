@@ -15,7 +15,7 @@ class EntitlementForm extends FormValidator
 {
     private $component;
 
-    function __construct($component, $action)
+    public function __construct($component, $action)
     {
         parent :: __construct('entitlement', 'post', $action);
 
@@ -24,7 +24,7 @@ class EntitlementForm extends FormValidator
         $this->setDefaults();
     }
 
-    function build()
+    public function build()
     {
         $parameters = new DataClassRetrievesParameters(new EqualityCondition(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID, $this->component->get_application_id()));
         $rights = \application\atlantis\application\right\DataManager :: retrieves(\application\atlantis\application\right\Right :: class_name(), $parameters);
@@ -48,7 +48,7 @@ class EntitlementForm extends FormValidator
      * @param $defaults array
      *            Default values for this form's parameters.
      */
-    function setDefaults($defaults = array ())
+    public function setDefaults($defaults = array ())
     {
         $parameters = new DataClassRetrievesParameters(new EqualityCondition(Entitlement :: PROPERTY_ROLE_ID, $this->component->get_role_id()));
         $entitlements = DataManager :: retrieves(Entitlement :: class_name(), $parameters);

@@ -61,32 +61,32 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         }
     }
 
-    function has_role_id()
+    public function has_role_id()
     {
         return isset($this->role_id);
     }
 
-    function has_context_id()
+    public function has_context_id()
     {
         return isset($this->context_id);
     }
 
-    function has_entity()
+    public function has_entity()
     {
         return isset($this->entity_id) && isset($this->entity_type);
     }
 
-    function has_start_date()
+    public function has_start_date()
     {
         return isset($this->start_date);
     }
 
-    function has_end_date()
+    public function has_end_date()
     {
         return isset($this->end_date);
     }
 
-    function add_breadcrumb()
+    public function add_breadcrumb()
     {
         if ($this->has_role_id())
         {
@@ -112,7 +112,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
     /**
      * Runs this component and displays its output.
      */
-    function run()
+    public function run()
     {
         $this->entity_type = Request :: get(self :: PARAM_ENTITY_TYPE);
         $this->entity_id = Request :: get(self :: PARAM_ENTITY_ID);

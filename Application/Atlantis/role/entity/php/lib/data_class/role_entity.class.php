@@ -38,7 +38,7 @@ class RoleEntity extends DataClass
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_ENTITY_TYPE;
         $extended_property_names[] = self :: PROPERTY_ENTITY_ID;
@@ -55,7 +55,7 @@ class RoleEntity extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -65,7 +65,7 @@ class RoleEntity extends DataClass
      *
      * @return integer The entity_type.
      */
-    function get_entity_type()
+    public function get_entity_type()
     {
         return $this->get_default_property(self :: PROPERTY_ENTITY_TYPE);
     }
@@ -75,7 +75,7 @@ class RoleEntity extends DataClass
      *
      * @param $entity_type integer
      */
-    function set_entity_type($entity_type)
+    public function set_entity_type($entity_type)
     {
         $this->set_default_property(self :: PROPERTY_ENTITY_TYPE, $entity_type);
     }
@@ -85,7 +85,7 @@ class RoleEntity extends DataClass
      *
      * @return integer The entity_id.
      */
-    function get_entity_id()
+    public function get_entity_id()
     {
         return $this->get_default_property(self :: PROPERTY_ENTITY_ID);
     }
@@ -95,7 +95,7 @@ class RoleEntity extends DataClass
      *
      * @param $entity_id integer
      */
-    function set_entity_id($entity_id)
+    public function set_entity_id($entity_id)
     {
         $this->set_default_property(self :: PROPERTY_ENTITY_ID, $entity_id);
     }
@@ -105,7 +105,7 @@ class RoleEntity extends DataClass
      *
      * @return integer The context_id.
      */
-    function get_context_id()
+    public function get_context_id()
     {
         return $this->get_default_property(self :: PROPERTY_CONTEXT_ID);
     }
@@ -115,7 +115,7 @@ class RoleEntity extends DataClass
      *
      * @param $context_id integer
      */
-    function set_context_id($context_id)
+    public function set_context_id($context_id)
     {
         $this->set_default_property(self :: PROPERTY_CONTEXT_ID, $context_id);
     }
@@ -125,7 +125,7 @@ class RoleEntity extends DataClass
      *
      * @return integer The role_id.
      */
-    function get_role_id()
+    public function get_role_id()
     {
         return $this->get_default_property(self :: PROPERTY_ROLE_ID);
     }
@@ -135,27 +135,27 @@ class RoleEntity extends DataClass
      *
      * @param $role_id integer
      */
-    function set_role_id($role_id)
+    public function set_role_id($role_id)
     {
         $this->set_default_property(self :: PROPERTY_ROLE_ID, $role_id);
     }
 
-    function get_start_date()
+    public function get_start_date()
     {
         return $this->get_default_property(self :: PROPERTY_START_DATE);
     }
 
-    function set_start_date($start_date)
+    public function set_start_date($start_date)
     {
         $this->set_default_property(self :: PROPERTY_START_DATE, $start_date);
     }
 
-    function get_end_date()
+    public function get_end_date()
     {
         return $this->get_default_property(self :: PROPERTY_END_DATE);
     }
 
-    function set_end_date($end_date)
+    public function set_end_date($end_date)
     {
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
     }
@@ -164,18 +164,18 @@ class RoleEntity extends DataClass
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
-    function get_entity_type_image()
+    public function get_entity_type_image()
     {
         return Theme :: get_image('entity_type/' . $this->get_entity_type(), 'png', null, null,
                 ToolbarItem :: DISPLAY_ICON, false, __NAMESPACE__);
     }
 
-    function get_entity()
+    public function get_entity()
     {
         if (! isset($this->entity))
         {
@@ -184,7 +184,7 @@ class RoleEntity extends DataClass
         return $this->entity;
     }
 
-    static function entity($entity_type, $entity_id)
+    public static function entity($entity_type, $entity_id)
     {
         switch ($entity_type)
         {
@@ -197,7 +197,7 @@ class RoleEntity extends DataClass
         }
     }
 
-    function get_entity_name()
+    public function get_entity_name()
     {
         switch ($this->get_entity_type())
         {
@@ -210,7 +210,7 @@ class RoleEntity extends DataClass
         }
     }
 
-    static function entity_name($entity_type, $entity_id)
+    public static function entity_name($entity_type, $entity_id)
     {
         switch ($entity_type)
         {
@@ -223,7 +223,7 @@ class RoleEntity extends DataClass
         }
     }
 
-    function get_role()
+    public function get_role()
     {
         if (! isset($this->role))
         {
@@ -233,7 +233,7 @@ class RoleEntity extends DataClass
         return $this->role;
     }
 
-    function get_context()
+    public function get_context()
     {
         if (! isset($this->context))
         {

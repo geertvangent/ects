@@ -13,7 +13,7 @@ class ApplicationTableCellRenderer extends NewObjectTableCellRenderer implements
         NewObjectTableCellRendererActionsColumnSupport
 {
 
-    function get_object_actions($application)
+    public function get_object_actions($application)
     {
         $toolbar = new Toolbar();
         if ($this->get_component()->get_user()->is_platform_admin())

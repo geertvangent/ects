@@ -29,7 +29,7 @@ class ContextAjaxContextsFeed extends AjaxManager
     /**
      * Runs this ajax component
      */
-    function run()
+    public function run()
     {
         $result = new JsonAjaxResult();
 
@@ -146,7 +146,7 @@ class ContextAjaxContextsFeed extends AjaxManager
      * The length for the filter prefix to remove
      */
 
-    function required_parameters()
+    public function required_parameters()
     {
         return array();
     }
@@ -156,7 +156,7 @@ class ContextAjaxContextsFeed extends AjaxManager
      *
      * @return ResultSet
      */
-    function retrieve_contexts()
+    public function retrieve_contexts()
     {
         // Set the conditions for the search query
         $search_query = Request :: post(self :: PARAM_SEARCH_QUERY);
@@ -228,7 +228,7 @@ class ContextAjaxContextsFeed extends AjaxManager
      *
      * @return AdvancedElementFinderElement
      */
-    function get_context_element($context)
+    public function get_context_element($context)
     {
         return new AdvancedElementFinderElement('context_' . $context->get_id(), 'type type_context', $context->get_context_name(), $context->get_context_name(), AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER);
     }

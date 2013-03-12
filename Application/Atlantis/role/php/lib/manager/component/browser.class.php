@@ -33,7 +33,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         }
     }
 
-    function run()
+    public function run()
     {
         $this->display_header();
         $this->action_bar = $this->get_action_bar();
@@ -43,7 +43,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $this->display_footer();
     }
 
-    function get_action_bar()
+    public function get_action_bar()
     {
         if (! isset($this->action_bar))
         {

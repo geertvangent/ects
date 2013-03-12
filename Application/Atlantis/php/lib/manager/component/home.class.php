@@ -14,7 +14,7 @@ use common\libraries\DynamicTabsRenderer;
 class HomeComponent extends Manager implements DelegateComponent
 {
 
-    function run()
+    public function run()
     {
         $renderer_name = Utilities :: get_classname_from_object($this, true);
         $tabs = new DynamicTabsRenderer($renderer_name);

@@ -9,7 +9,7 @@ class ApplicationForm extends FormValidator
 {
     private $application;
 
-    function __construct($application, $action)
+    public function __construct($application, $action)
     {
         parent :: __construct('application', 'post', $action);
 
@@ -18,7 +18,7 @@ class ApplicationForm extends FormValidator
         $this->setDefaults();
     }
 
-    function build()
+    public function build()
     {
         $this->addElement('text', Application :: PROPERTY_NAME, Translation :: get('ApplicationName'), array(
                 "size" => "50"));
@@ -51,7 +51,7 @@ class ApplicationForm extends FormValidator
      * @param $defaults array
      *            Default values for this form's parameters.
      */
-    function setDefaults($defaults = array ())
+    public function setDefaults($defaults = array ())
     {
         $application = $this->application;
         $defaults[Application :: PROPERTY_NAME] = $application->get_name();

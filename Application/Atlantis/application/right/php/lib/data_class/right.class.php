@@ -31,7 +31,7 @@ class Right extends DataClass
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
@@ -46,7 +46,7 @@ class Right extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -56,7 +56,7 @@ class Right extends DataClass
      *
      * @return text The name.
      */
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
@@ -66,7 +66,7 @@ class Right extends DataClass
      *
      * @param $name text
      */
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
@@ -76,7 +76,7 @@ class Right extends DataClass
      *
      * @return text The description.
      */
-    function get_description()
+    public function get_description()
     {
         return $this->get_default_property(self :: PROPERTY_DESCRIPTION);
     }
@@ -86,7 +86,7 @@ class Right extends DataClass
      *
      * @param $description text
      */
-    function set_description($description)
+    public function set_description($description)
     {
         $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
     }
@@ -96,12 +96,12 @@ class Right extends DataClass
      *
      * @return int The application_id.
      */
-    function get_application_id()
+    public function get_application_id()
     {
         return $this->get_default_property(self :: PROPERTY_APPLICATION_ID);
     }
 
-    function get_application()
+    public function get_application()
     {
         if (! isset($this->application))
         {
@@ -115,17 +115,17 @@ class Right extends DataClass
      *
      * @param $application_id int
      */
-    function set_application_id($application_id)
+    public function set_application_id($application_id)
     {
         $this->set_default_property(self :: PROPERTY_APPLICATION_ID, $application_id);
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_default_property(self :: PROPERTY_CODE);
     }
 
-    function set_code($code)
+    public function set_code($code)
     {
         $this->set_default_property(self :: PROPERTY_CODE, $code);
     }
@@ -134,7 +134,7 @@ class Right extends DataClass
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

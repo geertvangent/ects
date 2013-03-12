@@ -8,7 +8,7 @@ use common\libraries\Request;
 class EditorComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         $application_id = Request :: get(self :: PARAM_APPLICATION_ID);
 

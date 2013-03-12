@@ -13,7 +13,7 @@ class RightTableCellRenderer extends NewObjectTableCellRenderer implements
         NewObjectTableCellRendererActionsColumnSupport
 {
 
-    function get_object_actions($right)
+    public function get_object_actions($right)
     {
         $toolbar = new Toolbar();
         if ($this->get_component()->get_user()->is_platform_admin())
