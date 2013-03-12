@@ -11,17 +11,17 @@ class CentralAdministrationGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'CA';
 
-    function get_code()
+    public function get_code()
     {
         return self :: IDENTIFIER;
     }
 
-    function get_name()
+    public function get_name()
     {
         return 'Centrale administratie';
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
 

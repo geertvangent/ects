@@ -12,22 +12,22 @@ class StudentCourseGroupSynchronization extends CourseGroupSynchronization
 {
     CONST IDENTIFIER = 'COU_STU';
 
-    function get_group_type()
+    public function get_group_type()
     {
         return 'student_course';
     }
 
-    function get_department_id()
+    public function get_department_id()
     {
         return $this->get_synchronization()->get_training()->get_department_id();
     }
 
-    function get_training_id()
+    public function get_training_id()
     {
         return $this->get_synchronization()->get_training()->get_parameter(StudentTrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
         if ($this->get_parameter(self :: RESULT_PROPERTY_TYPE) != 2)

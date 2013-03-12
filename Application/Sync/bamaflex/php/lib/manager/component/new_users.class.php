@@ -9,7 +9,7 @@ class NewUsersComponent extends Manager implements DelegateComponent
     /**
      * Runs this component and displays its output.
      */
-    function run()
+    public function run()
     {
         ini_set("memory_limit", "-1");
         ini_set("max_execution_time", "18000");

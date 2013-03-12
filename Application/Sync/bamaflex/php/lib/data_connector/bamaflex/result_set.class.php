@@ -6,7 +6,7 @@ use common\libraries\ArrayResultSet;
 class BamaflexResultSet extends ArrayResultSet
 {
 
-    function __construct($handle)
+    public function __construct($handle)
     {
         $records = array();
         if ($handle instanceof \MDB2_Error)
@@ -21,7 +21,7 @@ class BamaflexResultSet extends ArrayResultSet
         parent :: __construct($records);
     }
 
-    function process_record($record)
+    public function process_record($record)
     {
         foreach ($record as &$field)
         {

@@ -9,22 +9,22 @@ class StudentTrainingChoicesOptionsGroupSynchronization extends GroupSynchroniza
 {
     CONST IDENTIFIER = 'OP';
 
-    function get_choices()
+    public function get_choices()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
     }
 
-    function get_name()
+    public function get_name()
     {
         return 'Keuzeopties';
     }
 
-    function get_children()
+    public function get_children()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_choice_basic] WHERE training_id = ' . $this->get_choices()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
 

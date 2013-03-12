@@ -16,19 +16,19 @@ use user\User;
 class AllUserSynchronization extends UserSynchronization
 {
 
-    function get_data()
+    public function get_data()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_sync_user]';
 
         return $this->get_result($query);
     }
 
-    function get_type()
+    public function get_type()
     {
         return 'create';
     }
 
-    function process_data($person)
+    public function process_data($person)
     {
         $user = \user\DataManager :: retrieve_user_by_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
 
@@ -157,7 +157,7 @@ class AllUserSynchronization extends UserSynchronization
         flush();
     }
 
-    function run()
+    public function run()
     {
         $user_result_set = $this->get_data();
 

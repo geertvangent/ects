@@ -9,17 +9,17 @@ class DepartmentCourseCategorySynchronization extends CourseCategorySynchronizat
     const RESULT_PROPERTY_DEPARTMENT = 'name';
     const RESULT_PROPERTY_DEPARTMENT_ID = 'id';
 
-    function get_code()
+    public function get_code()
     {
         return self :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT_ID);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT);
     }
 
-    function get_children()
+    public function get_children()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_basic] WHERE faculty_id = ' . $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT_ID);
 

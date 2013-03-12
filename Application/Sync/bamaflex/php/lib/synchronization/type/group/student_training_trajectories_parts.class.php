@@ -10,22 +10,22 @@ class StudentTrainingTrajectoriesPartsGroupSynchronization extends GroupSynchron
 {
     CONST IDENTIFIER = 'PA';
 
-    function get_trajectory()
+    public function get_trajectory()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
     }
 
-    function get_name()
+    public function get_name()
     {
         return 'Trajectschijven';
     }
 
-    function get_children()
+    public function get_children()
     {
         $query = 'SELECT DISTINCT trajectory_part FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE exchange = 0 AND training_id = ' . $this->get_trajectory()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
 

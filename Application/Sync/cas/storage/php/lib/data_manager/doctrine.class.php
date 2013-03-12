@@ -9,7 +9,7 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
     /**
      * Initialiser, creates the connection and sets the database to UTF8
      */
-    function initialize()
+    public function initialize()
     {
         $this->set_connection(DoctrineConnection :: get_instance()->get_connection());
         $this->get_connection()->setCharset('utf8');

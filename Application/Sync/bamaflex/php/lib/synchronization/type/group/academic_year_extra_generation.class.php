@@ -11,17 +11,17 @@ class AcademicYearExtraGenerationGroupSynchronization extends GroupSynchronizati
 {
     CONST IDENTIFIER = 'GEN';
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
     }
 
-    function get_name()
+    public function get_name()
     {
         return 'Generatiestudenten';
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE year = "' . $this->get_academic_year() . '" AND generation_student = 1 AND type = 1';
         $users = $this->get_result($query);

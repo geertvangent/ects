@@ -15,17 +15,17 @@ class DepartmentGroupSynchronization extends GroupSynchronization
     const RESULT_PROPERTY_DEPARTMENT = 'name';
     const RESULT_PROPERTY_DEPARTMENT_ID = 'id';
 
-    function get_code()
+    public function get_code()
     {
         return self :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT_ID);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT);
     }
 
-    function get_children()
+    public function get_children()
     {
         $children = array();
         $children[] = GroupSynchronization :: factory('user_type_employee', $this);

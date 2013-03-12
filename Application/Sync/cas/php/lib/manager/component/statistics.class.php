@@ -18,7 +18,7 @@ class StatisticsComponent extends Manager implements DelegateComponent
     /**
      * Runs this component and displays its output.
      */
-    function run()
+    public function run()
     {
         try
         {
@@ -47,7 +47,7 @@ class StatisticsComponent extends Manager implements DelegateComponent
         }
     }
 
-    function convert(ComAuditTrail $audit_trail)
+    public function convert(ComAuditTrail $audit_trail)
     {
         $statistic = new Statistic();
         $statistic->set_action_id($this->action_map[$audit_trail->get_action()]);

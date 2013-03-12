@@ -64,7 +64,7 @@ class DoctrineConnection extends \common\libraries\DoctrineConnection
      *
      * @return Connection The instance.
      */
-    static function get_instance()
+    public static function get_instance()
     {
         if (! isset(self :: $instance))
         {
@@ -73,7 +73,7 @@ class DoctrineConnection extends \common\libraries\DoctrineConnection
         return self :: $instance;
     }
 
-    static function set_instance($connection)
+    public static function set_instance($connection)
     {
         self :: $instance = new self($connection);
     }
@@ -83,7 +83,7 @@ class DoctrineConnection extends \common\libraries\DoctrineConnection
      *
      * @return Doctrine\DBAL\Connection
      */
-    function get_connection()
+    public function get_connection()
     {
         return $this->connection;
     }
@@ -92,12 +92,12 @@ class DoctrineConnection extends \common\libraries\DoctrineConnection
      *
      * @param $connection Doctrine\DBAL\Connection
      */
-    function set_connection($connection)
+    public function set_connection($connection)
     {
         $this->connection = $connection;
     }
 
-    function set_option($option, $value)
+    public function set_option($option, $value)
     {
         $this->connection->setOption($option, $value);
     }

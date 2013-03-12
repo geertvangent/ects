@@ -18,7 +18,7 @@ class CourseSynchronization extends Synchronization
     private $course_categories_cache = array();
     const COURSE_TYPE = 1;
 
-    function run()
+    public function run()
     {
         $children = $this->get_children();
 
@@ -28,7 +28,7 @@ class CourseSynchronization extends Synchronization
         }
     }
 
-    function get_children()
+    public function get_children()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE programme_type in (1,4) AND exchange = 0 AND year = \'' . $this->get_academic_year() . '\'';
         return $this->get_result($query);
@@ -38,7 +38,7 @@ class CourseSynchronization extends Synchronization
      *
      * @return Group
      */
-    function synchronize($course)
+    public function synchronize($course)
     {
         $current_course = WeblcmsDataManager :: get_instance()->retrieve_course_by_visual_code($course['id']);
 

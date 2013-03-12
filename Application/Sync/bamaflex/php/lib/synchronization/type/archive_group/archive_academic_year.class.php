@@ -10,17 +10,17 @@ class ArchiveAcademicYearGroupSynchronization extends ArchiveGroupSynchronizatio
 {
     CONST IDENTIFIER = 'AY';
 
-    function get_code()
+    public function get_code()
     {
         return self :: IDENTIFIER . '_' . $this->get_academic_year();
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_academic_year();
     }
 
-    function get_children()
+    public function get_children()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_faculty_basic] WHERE year = \'' . $this->get_academic_year() . '\'';
         $departments = $this->get_result($query);

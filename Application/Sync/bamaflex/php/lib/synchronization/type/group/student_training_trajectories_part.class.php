@@ -12,22 +12,22 @@ class StudentTrainingTrajectoriesPartGroupSynchronization extends GroupSynchroni
 
     const RESULT_PROPERTY_TRAJECTORY_PART = 'trajectory_part';
 
-    function get_part()
+    public function get_part()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_part()->get_current_group()->get_code() . '_' . $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_PART);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_PART);
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
 

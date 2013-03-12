@@ -15,7 +15,7 @@ class BrowserComponent extends Manager implements DelegateComponent
     /**
      * Runs this component and displays its output.
      */
-    function run()
+    public function run()
     {
         $this->display_header();
 

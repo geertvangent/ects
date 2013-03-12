@@ -10,7 +10,7 @@ use group\Group;
 
 class DummyGroupSynchronization extends GroupSynchronization
 {
-    function __construct(Group $group)
+    public function __construct(Group $group)
     {
         $this->set_current_group($group);
     }

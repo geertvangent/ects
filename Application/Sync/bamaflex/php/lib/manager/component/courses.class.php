@@ -13,7 +13,7 @@ class CoursesComponent extends Manager implements DelegateComponent
     /**
      * Runs this component and displays its output.
      */
-    function run()
+    public function run()
     {
         try
         {

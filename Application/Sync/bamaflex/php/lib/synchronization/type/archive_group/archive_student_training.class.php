@@ -11,12 +11,12 @@ class ArchiveStudentTrainingGroupSynchronization extends ArchiveTrainingGroupSyn
     /*
      * (non-PHPdoc) @see application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
      */
-    function get_group_type()
+    public function get_group_type()
     {
         return ArchiveUserTypeStudentGroupSynchronization :: IDENTIFIER;
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
         $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE training_id = "' . $this->get_parameter(

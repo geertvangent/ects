@@ -17,7 +17,7 @@ class BrowserComponent extends Manager implements DelegateComponent
     /**
      * Runs this component and displays its output.
      */
-    function run()
+    public function run()
     {
 
         if (! $this->get_user()->is_platform_admin())

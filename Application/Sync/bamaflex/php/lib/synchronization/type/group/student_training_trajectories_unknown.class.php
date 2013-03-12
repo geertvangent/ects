@@ -9,22 +9,22 @@ class StudentTrainingTrajectoriesUnknownGroupSynchronization extends GroupSynchr
 {
     CONST IDENTIFIER = 'UN';
 
-    function get_trajectory()
+    public function get_trajectory()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
     }
 
-    function get_name()
+    public function get_name()
     {
         return 'Onbekende deeltrajecten';
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
         $training = $this->get_trajectory()->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
