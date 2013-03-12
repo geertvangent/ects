@@ -13,9 +13,8 @@ class DataManager extends \common\libraries\DataManager
      *
      * @return string
      */
-    static function get_type()
+    public static function get_type()
     {
         return 'doctrine';
     }
 }
-?>

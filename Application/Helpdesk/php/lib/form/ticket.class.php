@@ -37,7 +37,7 @@ class TicketForm extends FormValidator
 
     private $component;
 
-    function __construct($component)
+    public function __construct($component)
     {
         parent :: __construct('ticket', 'post', $component->get_url());
 
@@ -46,7 +46,7 @@ class TicketForm extends FormValidator
         $this->setDefaults();
     }
 
-    function build()
+    public function build()
     {
         $this->addElement('hidden', self :: PROPERTY_QUEUE, self :: HELPDESK_QUEUE_ID);
         $this->addElement('hidden', self :: PROPERTY_ID, self :: HELPDESK_NEW);
@@ -145,7 +145,7 @@ class TicketForm extends FormValidator
      *
      * @param $defaults array Default values for this form's parameters.
      */
-    function setDefaults($defaults = array ())
+    public function setDefaults($defaults = array ())
     {
         $defaults[self :: PROPERTY_REQUESTOR] = $this->component->get_user()->get_email();
         $defaults[self :: PROPERTY_SYSTEM] = $_SERVER['HTTP_USER_AGENT'];
@@ -186,4 +186,3 @@ class TicketForm extends FormValidator
         parent :: setDefaults($defaults);
     }
 }
-?>

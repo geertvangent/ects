@@ -14,7 +14,7 @@ class CreatorComponent extends Manager
     /**
      * Runs this component and displays its output.
      */
-    function run()
+    public function run()
     {
         $form = new TicketForm($this);
 
@@ -116,7 +116,7 @@ class CreatorComponent extends Manager
         }
     }
 
-    function detect_browser_data()
+    public function detect_browser_data()
     {
         return '<script type=text/javascript language=javascript>
 <!-- Hide Javascript on old browsers
@@ -142,4 +142,3 @@ document.forms["ticket"].elements["Object-RT::Ticket--CustomField-7-Values"].val
 </script>';
     }
 }
-?>

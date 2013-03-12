@@ -2,7 +2,6 @@
 namespace application\ehb_helpdesk;
 
 use common\libraries\StringUtilities;
-use common\libraries\Cookie;
 use common\libraries\Path;
 use HTTP_Request;
 
@@ -15,14 +14,14 @@ class RestClient extends \RestClient
     const METHOD_GET = 'GET';
     const METHOD_PUT = 'PUT';
 
-    function __construct($server_url)
+    public function __construct($server_url)
     {
         parent :: __construct();
 
         $this->server_url = $server_url;
     }
 
-    function array_to_url($data)
+    public function array_to_url($data)
     {
         if (is_array($data))
         {
@@ -52,7 +51,7 @@ class RestClient extends \RestClient
      * a prefab function for a request @param method string @param url string @param data array @return
      * MediaMosaRestResult object
      */
-    function request($method, $url, $data = null)
+    public function request($method, $url, $data = null)
     {
         $this->set_http_method($method);
         $this->set_data_to_send('');
@@ -236,4 +235,3 @@ class RestClient extends \RestClient
         return $result;
     }
 }
-?>

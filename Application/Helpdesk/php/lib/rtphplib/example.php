@@ -86,5 +86,3 @@ print_r($response);
             /*
 $response = $rt->search("Owner='Nobody'",'-Created', 's');
 print_r($response);   */
-
-?>

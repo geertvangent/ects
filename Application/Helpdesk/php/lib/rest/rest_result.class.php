@@ -11,7 +11,7 @@ class RestResult extends \RestResult
 
     private $response_content_xml;
 
-    function set_response_content_xml()
+    public function set_response_content_xml()
     {
         if ($this->get_response_content())
         {
@@ -27,14 +27,14 @@ class RestResult extends \RestResult
      *
      * @return simplexmlelement object
      */
-    function get_response_content_xml()
+    public function get_response_content_xml()
     {
         return isset($this->response_content_xml) ? $this->response_content_xml : false;
 
     }
 
     // verifies if request has succeeded
-    function check_result($error = false, $ok = false)
+    public function check_result($error = false, $ok = false)
     {
         $result_id = (int) $this->response_content_xml->header->request_result_id;
 
@@ -56,4 +56,3 @@ class RestResult extends \RestResult
         }
     }
 }
-?>

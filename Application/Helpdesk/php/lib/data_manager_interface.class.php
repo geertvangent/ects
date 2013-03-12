@@ -8,4 +8,3 @@ namespace application\ehb_helpdesk;
 interface DataManagerInterface extends \common\libraries\DataManagerInterface
 {
 }
-?>

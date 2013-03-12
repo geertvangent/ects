@@ -71,7 +71,7 @@ class RequestTracker
      * @param string $user The username to authenticate with.
      * @param string $pass The password to authenticate with.
      */
-    function __construct($rootUrl, $user, $pass)
+    public function __construct($rootUrl, $user, $pass)
     {
         $this->url = $rootUrl . "/REST/1.0/";
         $this->user = $user;
@@ -449,4 +449,3 @@ class RequestTracker
         return $response;
     }
 }
-?>

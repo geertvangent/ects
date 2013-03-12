@@ -18,4 +18,3 @@ namespace application\ehb_helpdesk;
 class RequestTrackerException extends \Exception
 {
 }
-?>
