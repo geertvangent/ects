@@ -1,0 +1,21 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\atlantis\application
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Toepassing"
+BrowseApplications = "Lijst van toepassingen"
+BrowseApplicationsDescription = "Geef een lijst weer van alle toepassingen die aan een functie gekoppeld kunnen worden."
+CreateApplication = "Maak toepassing aan"
+CreateApplicationDescription = "Maak een toepassing aan, om ze aan één of meerdere functies te kunnen koppelen"
+Name = "Naam"
+Description = "Omschrijving"
+Url = "URL"
+CreatorComponent = "Maak toepassing aan"
+ApplicationName = "Toepassing"
+ApplicationDescription = "Omschrijving"
+ApplicationUrl = "URL"
+RightsManagerComponent = "Beschikbare rechten"
+ManageRight = "Beschikbare rechten"
+EditorComponent = "Pas toepassing aan"
+Application = ""

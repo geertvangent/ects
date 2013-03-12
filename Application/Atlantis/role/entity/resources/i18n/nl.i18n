@@ -1,0 +1,23 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\atlantis\role\entity
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Toegekende functies"
+BrowseRoleEntities = "Lijst van toegekende functies"
+BrowseRoleEntitiesDescription = "Geef een lijst weer van alle toegekende functies in een bepaalde context (departement, opleiding, vak)."
+CreateRoleEntity = "Ken functie toe"
+CreateRoleEntityDescription = "Ken een functie toe aan een bepaalde gebruiker of gebruikersgroep in  een bepaalde context (departement, opleiding, vak)."
+BrowseUsersGroups = "Lijst van gebruikers en/of groepen"
+BrowseUsersGroupsDescription = "Geef een lijst weer van alle functies die aan gebruikers en/of gebruikersgroepen toegekend werden in alle contexten."
+EntityType = "Type"
+EntityName = "Naam"
+Name = "Functie"
+ContextName = "Context"
+CreatorComponent = "Ken functie toe"
+UserGroup = "Gebruiker/gebruikersgroep"
+Roles = "Functies"
+Contexts = "Contexten"
+Entities = ""
+StartDate = "Stardatum"
+EndDate = "Einddatum" 
