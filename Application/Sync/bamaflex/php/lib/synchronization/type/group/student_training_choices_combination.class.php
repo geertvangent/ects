@@ -13,22 +13,22 @@ class StudentTrainingChoicesCombinationGroupSynchronization extends GroupSynchro
     const RESULT_PROPERTY_CHOICE_COMBINATION = 'name';
     const RESULT_PROPERTY_CHOICE_COMBINATION_ID = 'id';
 
-    function get_combination()
+    public function get_combination()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . $this->get_parameter(self :: RESULT_PROPERTY_CHOICE_COMBINATION_ID);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_CHOICE_COMBINATION);
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
 

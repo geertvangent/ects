@@ -15,17 +15,17 @@ class ArchiveDepartmentGroupSynchronization extends ArchiveGroupSynchronization
     const RESULT_PROPERTY_DEPARTMENT = 'name';
     const RESULT_PROPERTY_DEPARTMENT_ID = 'id';
 
-    function get_code()
+    public function get_code()
     {
         return self :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT_ID);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT);
     }
 
-    function get_children()
+    public function get_children()
     {
         $children = array();
         $children[] = ArchiveGroupSynchronization :: factory('archive_user_type_employee', $this);

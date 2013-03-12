@@ -10,17 +10,17 @@ use user\User;
 class AllUserSynchronization extends UserSynchronization
 {
 
-    function get_data()
+    public function get_data()
     {
         return \application\cas_user\account\DataManager :: retrieves(\application\cas_user\account\Account :: class_name());
     }
 
-    function get_type()
+    public function get_type()
     {
         return 'create';
     }
 
-    function process_data($person)
+    public function process_data($person)
     {
         $user = \user\DataManager :: retrieve_user_by_official_code($person->get_person_id());
 
@@ -113,7 +113,7 @@ class AllUserSynchronization extends UserSynchronization
         flush();
     }
 
-    function run()
+    public function run()
     {
         $user_result_set = $this->get_data();
 

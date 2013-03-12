@@ -11,12 +11,12 @@ class ArchiveTeacherTrainingGroupSynchronization extends ArchiveTrainingGroupSyn
     /*
      * (non-PHPdoc) @see application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
      */
-    function get_group_type()
+    public function get_group_type()
     {
         return ArchiveUserTypeTeacherGroupSynchronization :: IDENTIFIER;
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
 

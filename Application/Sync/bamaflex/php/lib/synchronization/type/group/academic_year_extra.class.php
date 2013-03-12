@@ -11,17 +11,17 @@ class AcademicYearExtraGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'EXT';
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
     }
 
-    function get_name()
+    public function get_name()
     {
         return 'Extra';
     }
 
-    function get_children()
+    public function get_children()
     {
         $children = array();
         $children[] = GroupSynchronization :: factory('academic_year_extra_generation', $this);

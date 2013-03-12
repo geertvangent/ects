@@ -13,7 +13,7 @@ abstract class Synchronization
      */
     private $data_manager;
 
-    function __construct()
+    public function __construct()
     {
         $this->data_manager = BamaflexDataConnector :: get_instance();
     }
@@ -22,7 +22,7 @@ abstract class Synchronization
      *
      * @return SqlDataManager
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return $this->data_manager;
     }
@@ -30,12 +30,12 @@ abstract class Synchronization
      *
      * @return string
      */
-    function get_academic_year()
+    public function get_academic_year()
     {
         return PlatformSetting::get('academic_year', __NAMESPACE__);
     }
 
-    function get_academic_year_end()
+    public function get_academic_year_end()
     {
         $year_parts = explode('-', $this->get_academic_year());
 
@@ -47,7 +47,7 @@ abstract class Synchronization
      * @param $type string
      * @return Synchronization
      */
-    static function factory($type)
+    public static function factory($type)
     {
         $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'Synchronization';
         if (class_exists($class))
@@ -56,14 +56,14 @@ abstract class Synchronization
         }
     }
 
-    abstract function run();
+    abstract public function run();
 
     /**
      *
      * @param $string string
      * @return string
      */
-    function convert_to_utf8($string)
+    public function convert_to_utf8($string)
     {
         return iconv('cp1252', 'UTF-8', $string);
     }
@@ -73,7 +73,7 @@ abstract class Synchronization
      * @param $query string
      * @return \common\libraries\RecordResultSet
      */
-    function get_result($query)
+    public function get_result($query)
     {
         $statement = $this->get_data_manager()->get_connection()->prepare($query);
 
@@ -85,7 +85,7 @@ abstract class Synchronization
      * @param $type string
      * @param $message string
      */
-    static function log($type, $message)
+    public static function log($type, $message)
     {
         echo '[' . str_pad(strtoupper($type), 18, ' ', STR_PAD_LEFT) . '] ' . $message . "\n";
     }

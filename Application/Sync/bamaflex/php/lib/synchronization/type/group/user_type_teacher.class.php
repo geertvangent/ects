@@ -10,22 +10,22 @@ class UserTypeTeacherGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'OP';
 
-    function get_department()
+    public function get_department()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
     }
 
-    function get_name()
+    public function get_name()
     {
         return 'Onderwijzend Personeel';
     }
 
-    function get_children()
+    public function get_children()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_basic] WHERE faculty_id = ' . $this->get_synchronization()->get_parameter(
                 DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);

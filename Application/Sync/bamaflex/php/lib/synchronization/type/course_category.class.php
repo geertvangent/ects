@@ -37,9 +37,9 @@ class CourseCategorySynchronization extends Synchronization
      */
     private $current_group;
 
-    static $official_code_cache;
+    public static $official_code_cache;
 
-    function __construct(CourseCategorySynchronization $synchronization, $parameters)
+    public function __construct(CourseCategorySynchronization $synchronization, $parameters)
     {
         parent :: __construct();
         $this->synchronization = $synchronization;
@@ -47,7 +47,7 @@ class CourseCategorySynchronization extends Synchronization
         $this->determine_current_group();
     }
 
-    function run()
+    public function run()
     {
         $this->synchronize();
         $children = $this->get_children();
@@ -65,7 +65,7 @@ class CourseCategorySynchronization extends Synchronization
      * @param $parameters array
      * @return GroupSynchronization
      */
-    static function factory($type, CourseCategorySynchronization $synchronization, $parameters = array())
+    public static function factory($type, CourseCategorySynchronization $synchronization, $parameters = array())
     {
         $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'CourseCategorySynchronization';
         if (class_exists($class))
@@ -74,7 +74,7 @@ class CourseCategorySynchronization extends Synchronization
         }
     }
 
-    function determine_current_group()
+    public function determine_current_group()
     {
         $this->current_group = WeblcmsDataManager :: get_instance()->retrieve_course_category_by_code($this->get_code());
     }
@@ -83,7 +83,7 @@ class CourseCategorySynchronization extends Synchronization
      *
      * @return boolean
      */
-    function exists()
+    public function exists()
     {
         return $this->current_group instanceof CourseCategory;
     }
@@ -92,7 +92,7 @@ class CourseCategorySynchronization extends Synchronization
      *
      * @return Group
      */
-    function get_current_group()
+    public function get_current_group()
     {
         return $this->current_group;
     }
@@ -101,7 +101,7 @@ class CourseCategorySynchronization extends Synchronization
      *
      * @param $group Group
      */
-    function set_current_group(CourseCategory $group)
+    public function set_current_group(CourseCategory $group)
     {
         $this->current_group = $group;
     }
@@ -110,7 +110,7 @@ class CourseCategorySynchronization extends Synchronization
      *
      * @return Synchronization
      */
-    function get_synchronization()
+    public function get_synchronization()
     {
         return $this->synchronization;
     }
@@ -119,7 +119,7 @@ class CourseCategorySynchronization extends Synchronization
      *
      * @return Group
      */
-    function get_parent_group()
+    public function get_parent_group()
     {
         return $this->get_synchronization()->get_current_group();
     }
@@ -128,7 +128,7 @@ class CourseCategorySynchronization extends Synchronization
      *
      * @return array
      */
-    function get_parameters()
+    public function get_parameters()
     {
         return $this->parameters;
     }
@@ -138,7 +138,7 @@ class CourseCategorySynchronization extends Synchronization
      * @param $key string
      * @return string
      */
-    function get_parameter($key)
+    public function get_parameter($key)
     {
         return $this->parameters[$key];
     }
@@ -147,7 +147,7 @@ class CourseCategorySynchronization extends Synchronization
      *
      * @return Group
      */
-    function synchronize()
+    public function synchronize()
     {
         if (! $this->exists())
         {
@@ -180,7 +180,7 @@ class CourseCategorySynchronization extends Synchronization
      *
      * @return array
      */
-    function get_children()
+    public function get_children()
     {
         return array();
     }

@@ -20,7 +20,7 @@ class UserSynchronization extends Synchronization
     const RESULT_PROPERTY_STATUS = 'status';
     const RESULT_PROPERTY_QUOTA = 'quota';
 
-    function run()
+    public function run()
     {
         foreach (self :: get_user_types() as $type)
         {
@@ -29,7 +29,7 @@ class UserSynchronization extends Synchronization
         }
     }
 
-    static function get_user_types()
+    public static function get_user_types()
     {
         $types = array();
         $types[] = 'create';
@@ -38,7 +38,7 @@ class UserSynchronization extends Synchronization
         return $types;
     }
 
-    static function factory($type)
+    public static function factory($type)
     {
         $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'UserSynchronization';
         if (class_exists($class))
@@ -47,7 +47,7 @@ class UserSynchronization extends Synchronization
         }
     }
 
-    function get_type()
+    public function get_type()
     {
         return 'person';
     }

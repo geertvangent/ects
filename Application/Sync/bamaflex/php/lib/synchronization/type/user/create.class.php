@@ -21,7 +21,7 @@ use user\UserDataManager;
 class CreateUserSynchronization extends UserSynchronization
 {
 
-    function get_data()
+    public function get_data()
     {
         $conditions = array();
 
@@ -60,12 +60,12 @@ class CreateUserSynchronization extends UserSynchronization
         return $this->get_result($query);
     }
 
-    function get_type()
+    public function get_type()
     {
         return 'create';
     }
 
-    function process_data($person)
+    public function process_data($person)
     {
         $utf_last_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_LAST_NAME]);
         $utf_first_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_FIRST_NAME]);
@@ -159,7 +159,7 @@ class CreateUserSynchronization extends UserSynchronization
         flush();
     }
 
-    function run()
+    public function run()
     {
         $user_result_set = $this->get_data();
 

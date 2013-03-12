@@ -13,24 +13,24 @@ class Manager extends SubManager
 
     const PARAM_ACTION = 'cas_action';
 
-    function __construct($parent)
+    public function __construct($parent)
     {
         ini_set("memory_limit", "-1");
         ini_set("max_execution_time", "18000");
         parent :: __construct($parent);
     }
 
-    static function get_action_parameter()
+    public static function get_action_parameter()
     {
         return self :: PARAM_ACTION;
     }
 
-    function get_default_action()
+    public function get_default_action()
     {
         return self :: DEFAULT_ACTION;
     }
 
-    static function launch($application)
+    public static function launch($application)
     {
         parent :: launch(null, $application);
     }

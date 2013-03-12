@@ -12,22 +12,22 @@ class ArchiveUserTypeEmployeeGroupSynchronization extends ArchiveGroupSynchroniz
 {
     CONST IDENTIFIER = 'ATP';
 
-    function get_department()
+    public function get_department()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
     }
 
-    function get_name()
+    public function get_name()
     {
         return 'Administratief en technisch personeel';
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
 

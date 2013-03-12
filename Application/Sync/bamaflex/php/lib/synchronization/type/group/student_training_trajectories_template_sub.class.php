@@ -13,22 +13,22 @@ class StudentTrainingTrajectoriesTemplateSubGroupSynchronization extends GroupSy
     const RESULT_PROPERTY_TRAJECTORY = 'name';
     const RESULT_PROPERTY_TRAJECTORY_ID = 'id';
 
-    function get_main_template()
+    public function get_main_template()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_main_template()->get_current_group()->get_code() . '_' . self :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY);
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
 

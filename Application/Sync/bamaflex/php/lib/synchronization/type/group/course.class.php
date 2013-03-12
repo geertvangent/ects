@@ -16,23 +16,23 @@ abstract class CourseGroupSynchronization extends GroupSynchronization
     const RESULT_PROPERTY_PARENT_ID = 'parent_id';
     const RESULT_PROPERTY_TYPE = 'programme_type';
 
-    function get_code()
+    public function get_code()
     {
         return $this :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_COURSE_ID);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_COURSE);
     }
 
-    abstract function get_department_id();
+    abstract public function get_department_id();
 
-    abstract function get_training_id();
+    abstract public function get_training_id();
 
-    abstract function get_group_type();
+    abstract public function get_group_type();
 
-    function get_children()
+    public function get_children()
     {
         $children = array();
 

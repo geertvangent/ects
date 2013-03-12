@@ -12,18 +12,18 @@ use user\User;
 class UpdateUserSynchronization extends UserSynchronization
 {
 
-    function get_data()
+    public function get_data()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_sync_user] WHERE status not like 0';
         return $this->get_result($query);
     }
 
-    function get_type()
+    public function get_type()
     {
         return 'update';
     }
 
-    function process_data($person)
+    public function process_data($person)
     {
         $user = UserDataManager :: get_instance()->retrieve_user_by_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
 
@@ -138,7 +138,7 @@ class UpdateUserSynchronization extends UserSynchronization
         flush();
     }
 
-    function run()
+    public function run()
     {
         $user_result_set = $this->get_data();
 

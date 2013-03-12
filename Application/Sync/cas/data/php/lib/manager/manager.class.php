@@ -9,17 +9,17 @@ class Manager extends SubManager
     const ACTION_BROWSE = 'browser';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
 
-    static function get_action_parameter()
+    public static function get_action_parameter()
     {
         return self :: PARAM_ACTION;
     }
 
-    function get_default_action()
+    public function get_default_action()
     {
         return self :: DEFAULT_ACTION;
     }
 
-    static function launch($application)
+    public static function launch($application)
     {
         parent :: launch(null, $application);
     }

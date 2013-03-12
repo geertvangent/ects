@@ -23,7 +23,7 @@ class ComAuditTrail extends DataClass
      *
      * @return array The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         return parent :: get_default_property_names(
                 array(self :: PROPERTY_USER, self :: PROPERTY_CLIENT_IP, self :: PROPERTY_SERVER_IP,
@@ -31,7 +31,7 @@ class ComAuditTrail extends DataClass
                         self :: PROPERTY_DATE));
     }
 
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -165,7 +165,7 @@ class ComAuditTrail extends DataClass
     /**
      * @return string
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return strtoupper(parent :: get_table_name());
     }

@@ -18,7 +18,7 @@ use user\User;
 class DocUserSynchronization extends UserSynchronization
 {
 
-    function run()
+    public function run()
     {
         $query = 'SELECT [Content] FROM [WSS_Content].[dbo].[AllDocStreams] WHERE id = "B54A3613-E840-4FCE-B9EB-BB04ECD38F87"';
 

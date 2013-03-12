@@ -45,9 +45,9 @@ class GroupSynchronization extends Synchronization
      */
     private $current_group;
 
-    static $official_code_cache;
+    public static $official_code_cache;
 
-    function __construct(GroupSynchronization $synchronization, $parameters)
+    public function __construct(GroupSynchronization $synchronization, $parameters)
     {
         parent :: __construct();
         $this->synchronization = $synchronization;
@@ -55,7 +55,7 @@ class GroupSynchronization extends Synchronization
         $this->determine_current_group();
     }
 
-    function run()
+    public function run()
     {
         $this->synchronize();
         $this->synchronize_users();
@@ -79,7 +79,7 @@ class GroupSynchronization extends Synchronization
      * @param $parameters array
      * @return GroupSynchronization
      */
-    static function factory($type, GroupSynchronization $synchronization, $parameters = array())
+    public static function factory($type, GroupSynchronization $synchronization, $parameters = array())
     {
         $file = dirname(__FILE__) . '/group/' . $type . '.class.php';
         $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'GroupSynchronization';
@@ -90,7 +90,7 @@ class GroupSynchronization extends Synchronization
         }
     }
 
-    function determine_current_group()
+    public function determine_current_group()
     {
         $this->current_group = GroupDataManager :: get_instance()->retrieve_group_by_code_and_parent_id($this->get_code(), $this->get_parent_group()->get_id());
     }
@@ -99,7 +99,7 @@ class GroupSynchronization extends Synchronization
      *
      * @return boolean
      */
-    function exists()
+    public function exists()
     {
         return $this->current_group instanceof Group;
     }
@@ -108,7 +108,7 @@ class GroupSynchronization extends Synchronization
      *
      * @return Group
      */
-    function get_current_group()
+    public function get_current_group()
     {
         return $this->current_group;
     }
@@ -117,7 +117,7 @@ class GroupSynchronization extends Synchronization
      *
      * @param $group Group
      */
-    function set_current_group(Group $group)
+    public function set_current_group(Group $group)
     {
         $this->current_group = $group;
     }
@@ -126,7 +126,7 @@ class GroupSynchronization extends Synchronization
      *
      * @return Synchronization
      */
-    function get_synchronization()
+    public function get_synchronization()
     {
         return $this->synchronization;
     }
@@ -135,7 +135,7 @@ class GroupSynchronization extends Synchronization
      *
      * @return Group
      */
-    function get_parent_group()
+    public function get_parent_group()
     {
         return $this->get_synchronization()->get_current_group();
     }
@@ -144,7 +144,7 @@ class GroupSynchronization extends Synchronization
      *
      * @return array
      */
-    function get_parameters()
+    public function get_parameters()
     {
         return $this->parameters;
     }
@@ -154,7 +154,7 @@ class GroupSynchronization extends Synchronization
      * @param $key string
      * @return string
      */
-    function get_parameter($key)
+    public function get_parameter($key)
     {
         return $this->parameters[$key];
     }
@@ -163,7 +163,7 @@ class GroupSynchronization extends Synchronization
      *
      * @return Group
      */
-    function synchronize()
+    public function synchronize()
     {
         if (! $this->exists())
         {
@@ -193,7 +193,7 @@ class GroupSynchronization extends Synchronization
         return $this->current_group;
     }
 
-    function synchronize_users()
+    public function synchronize_users()
     {
         $group_data_manager = GroupDataManager :: get_instance();
 
@@ -224,17 +224,17 @@ class GroupSynchronization extends Synchronization
      *
      * @return array
      */
-    function get_children()
+    public function get_children()
     {
         return array();
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         return array();
     }
 
-    function get_users()
+    public function get_users()
     {
         $official_codes = $this->get_user_official_codes();
         $user_ids = array();

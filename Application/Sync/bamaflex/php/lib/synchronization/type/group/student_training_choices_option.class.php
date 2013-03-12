@@ -12,22 +12,22 @@ class StudentTrainingChoicesOptionGroupSynchronization extends GroupSynchronizat
     const RESULT_PROPERTY_CHOICE_OPTION = 'name';
     const RESULT_PROPERTY_CHOICE_OPTION_ID = 'id';
 
-    function get_option()
+    public function get_option()
     {
         return $this->get_synchronization();
     }
 
-    function get_code()
+    public function get_code()
     {
         return $this->get_parent_group()->get_code() . '_' . $this->get_parameter(self :: RESULT_PROPERTY_CHOICE_OPTION_ID);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_parameter(self :: RESULT_PROPERTY_CHOICE_OPTION);
     }
 
-    function get_user_official_codes()
+    public function get_user_official_codes()
     {
         $user_mails = array();
 

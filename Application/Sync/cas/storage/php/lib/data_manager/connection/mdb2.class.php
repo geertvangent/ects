@@ -46,7 +46,7 @@ class Mdb2Connection extends \common\libraries\Mdb2Connection
      *
      * @return Connection The instance.
      */
-    static function get_instance()
+    public static function get_instance()
     {
         if (! isset(self :: $instance))
         {
@@ -60,12 +60,12 @@ class Mdb2Connection extends \common\libraries\Mdb2Connection
      *
      * @return mixed MDB2 DB Conenction.
      */
-    function get_connection()
+    public function get_connection()
     {
         return $this->connection;
     }
 
-    function set_option($option, $value)
+    public function set_option($option, $value)
     {
         $this->connection->setOption($option, $value);
     }

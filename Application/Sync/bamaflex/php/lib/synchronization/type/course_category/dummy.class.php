@@ -6,7 +6,7 @@ use application\weblcms\CourseCategory;
 class DummyCourseCategorySynchronization extends CourseCategorySynchronization
 {
 
-    function __construct(CourseCategory $group)
+    public function __construct(CourseCategory $group)
     {
         $this->set_current_group($group);
     }
