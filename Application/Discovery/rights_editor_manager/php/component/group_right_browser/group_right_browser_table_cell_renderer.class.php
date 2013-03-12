@@ -30,13 +30,13 @@ class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
      *
      * @param Application $browser
      */
-    function __construct($browser)
+    public function __construct($browser)
     {
         $this->browser = $browser;
     }
 
     // Inherited
-    function render_cell($column, $entity_item)
+    public function render_cell($column, $entity_item)
     {
         if (GroupRightBrowserTableColumnModel :: is_rights_column($column))
         {
@@ -46,7 +46,7 @@ class GroupRightBrowserTableCellRenderer extends ObjectTableCellRenderer
         return parent :: render_cell($column, $entity_item);
     }
 
-    function render_id_cell($entity)
+    public function render_id_cell($entity)
     {
         return null;
     }

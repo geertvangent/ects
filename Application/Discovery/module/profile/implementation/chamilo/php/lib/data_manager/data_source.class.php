@@ -27,7 +27,7 @@ class DataSource implements DataManagerInterface
      * @param $id int
      * @return \application\discovery\module\profile\implementation\chamilo\Profile boolean
      */
-    function retrieve_profile($parameters)
+    public function retrieve_profile($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         if ($user instanceof User)
@@ -74,7 +74,7 @@ class DataSource implements DataManagerInterface
      * @param $id int
      * @return string
      */
-    function get_language($id)
+    public function get_language($id)
     {
         $user_language_is_allowed = PlatformSetting :: get('allow_user_change_platform_language',
                 CoreApplication :: get_application_namespace(UserManager :: APPLICATION_NAME));
@@ -107,7 +107,7 @@ class DataSource implements DataManagerInterface
      * @param $id int
      * @return string
      */
-    function get_timezone($id)
+    public function get_timezone($id)
     {
         $user_timezone_is_allowed = PlatformSetting :: get('allow_user_change_platform_timezone',
                 CoreApplication :: get_application_namespace(UserManager :: APPLICATION_NAME));
@@ -138,7 +138,7 @@ class DataSource implements DataManagerInterface
      * @param $user User
      * @return \application\discovery\module\profile\Photo
      */
-    function retrieve_photo(User $user)
+    public function retrieve_photo(User $user)
     {
         $photo_path = $user->get_full_picture_path();
 

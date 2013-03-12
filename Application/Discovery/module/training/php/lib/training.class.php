@@ -16,7 +16,7 @@ class Training extends DiscoveryItem
      *
      * @return string
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -25,17 +25,17 @@ class Training extends DiscoveryItem
      *
      * @return string
      */
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
 
-    function get_start_date()
+    public function get_start_date()
     {
         return $this->get_default_property(self :: PROPERTY_START_DATE);
     }
 
-    function get_end_date()
+    public function get_end_date()
     {
         return $this->get_default_property(self :: PROPERTY_END_DATE);
     }
@@ -44,7 +44,7 @@ class Training extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -53,17 +53,17 @@ class Training extends DiscoveryItem
      *
      * @param string $name
      */
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
 
-    function set_start_date($start_date)
+    public function set_start_date($start_date)
     {
         $this->set_default_property(self :: PROPERTY_START_DATE, $start_date);
     }
 
-    function set_end_date($end_date)
+    public function set_end_date($end_date)
     {
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
     }
@@ -72,7 +72,7 @@ class Training extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_NAME;
@@ -86,7 +86,7 @@ class Training extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -95,7 +95,7 @@ class Training extends DiscoveryItem
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         $string[] = $this->get_year();

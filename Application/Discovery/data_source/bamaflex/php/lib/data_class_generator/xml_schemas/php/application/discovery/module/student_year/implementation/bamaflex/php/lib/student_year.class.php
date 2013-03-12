@@ -61,7 +61,7 @@ class StudentYear extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
@@ -78,7 +78,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -88,7 +88,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @return string The source.
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -98,7 +98,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @param string $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
@@ -108,7 +108,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @return integer The person_id.
      */
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
@@ -118,7 +118,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @param integer $person_id
      */
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
@@ -128,7 +128,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @return string The year.
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -138,7 +138,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -148,7 +148,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @return integer The enrollment_id.
      */
-    function get_enrollment_id()
+    public function get_enrollment_id()
     {
         return $this->get_default_property(self :: PROPERTY_ENROLLMENT_ID);
     }
@@ -158,7 +158,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @param integer $enrollment_id
      */
-    function set_enrollment_id($enrollment_id)
+    public function set_enrollment_id($enrollment_id)
     {
         $this->set_default_property(self :: PROPERTY_ENROLLMENT_ID, $enrollment_id);
     }
@@ -168,7 +168,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @return integer The scholarship_id.
      */
-    function get_scholarship_id()
+    public function get_scholarship_id()
     {
         return $this->get_default_property(self :: PROPERTY_SCHOLARSHIP_ID);
     }
@@ -178,7 +178,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @param integer $scholarship_id
      */
-    function set_scholarship_id($scholarship_id)
+    public function set_scholarship_id($scholarship_id)
     {
         $this->set_default_property(self :: PROPERTY_SCHOLARSHIP_ID, $scholarship_id);
     }
@@ -188,7 +188,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @return integer The reduced_registration_fee_id.
      */
-    function get_reduced_registration_fee_id()
+    public function get_reduced_registration_fee_id()
     {
         return $this->get_default_property(self :: PROPERTY_REDUCED_REGISTRATION_FEE_ID);
     }
@@ -198,7 +198,7 @@ class StudentYear extends DiscoveryItem
      * 
      * @param integer $reduced_registration_fee_id
      */
-    function set_reduced_registration_fee_id($reduced_registration_fee_id)
+    public function set_reduced_registration_fee_id($reduced_registration_fee_id)
     {
         $this->set_default_property(self :: PROPERTY_REDUCED_REGISTRATION_FEE_ID, $reduced_registration_fee_id);
     }
@@ -207,7 +207,7 @@ class StudentYear extends DiscoveryItem
      *
      * @return string
      */
-    function get_scholarship_string()
+    public function get_scholarship_string()
     {
         return self :: scholarship_string($this->get_scholarship());
     }
@@ -216,7 +216,7 @@ class StudentYear extends DiscoveryItem
      *
      * @return string
      */
-    static function scholarship_string($scholarship)
+    public static function scholarship_string($scholarship)
     {
         switch ($scholarship)
         {
@@ -243,7 +243,7 @@ class StudentYear extends DiscoveryItem
      * @param boolean $types_only
      * @return multitype:integer multitype:string
      */
-    static function get_scholarship_types($types_only = false)
+    public static function get_scholarship_types($types_only = false)
     {
         $types = array();
         
@@ -260,7 +260,7 @@ class StudentYear extends DiscoveryItem
      *
      * @return string
      */
-    function get_reduced_registration_fee_string()
+    public function get_reduced_registration_fee_string()
     {
         return self :: reduced_registration_fee_string($this->get_reduced_registration_fee());
     }
@@ -269,7 +269,7 @@ class StudentYear extends DiscoveryItem
      *
      * @return string
      */
-    static function reduced_registration_fee_string($reduced_registration_fee)
+    public static function reduced_registration_fee_string($reduced_registration_fee)
     {
         switch ($reduced_registration_fee)
         {
@@ -296,7 +296,7 @@ class StudentYear extends DiscoveryItem
      * @param boolean $types_only
      * @return multitype:integer multitype:string
      */
-    static function get_reduced_registration_fee_types($types_only = false)
+    public static function get_reduced_registration_fee_types($types_only = false)
     {
         $types = array();
         
@@ -318,7 +318,7 @@ class StudentYear extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

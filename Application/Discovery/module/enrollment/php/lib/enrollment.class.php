@@ -21,7 +21,7 @@ class Enrollment extends DiscoveryItem
      *
      * @return string
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -30,17 +30,17 @@ class Enrollment extends DiscoveryItem
      *
      * @return string
      */
-    function get_training()
+    public function get_training()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING);
     }
 
-    function get_training_id()
+    public function get_training_id()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
     }
 
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
@@ -49,7 +49,7 @@ class Enrollment extends DiscoveryItem
      *
      * @return string
      */
-    function get_result()
+    public function get_result()
     {
         return $this->get_default_property(self :: PROPERTY_RESULT);
     }
@@ -58,7 +58,7 @@ class Enrollment extends DiscoveryItem
      *
      * @return string
      */
-    function get_result_string()
+    public function get_result_string()
     {
         return self :: result_string($this->get_result());
     }
@@ -67,7 +67,7 @@ class Enrollment extends DiscoveryItem
      *
      * @return string
      */
-    static function result_string($result)
+    public static function result_string($result)
     {
         switch ($result)
         {
@@ -93,7 +93,7 @@ class Enrollment extends DiscoveryItem
      *
      * @return multitype:string
      */
-    static function get_results()
+    public static function get_results()
     {
         return array(self :: RESULT_PASSED, self :: RESULT_FAILED, self :: RESULT_NOT_RELEVANT, self :: RESULT_NO_DATA);
     }
@@ -102,7 +102,7 @@ class Enrollment extends DiscoveryItem
      *
      * @return boolean
      */
-    function is_special_result()
+    public function is_special_result()
     {
         return ($this->get_result() != self :: RESULT_NOT_RELEVANT);
     }
@@ -111,7 +111,7 @@ class Enrollment extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -120,17 +120,17 @@ class Enrollment extends DiscoveryItem
      *
      * @param string $training
      */
-    function set_training($training)
+    public function set_training($training)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING, $training);
     }
 
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
 
-    function set_training_id($training_id)
+    public function set_training_id($training_id)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
     }
@@ -139,7 +139,7 @@ class Enrollment extends DiscoveryItem
      *
      * @param string $result
      */
-    function set_result($result)
+    public function set_result($result)
     {
         $this->set_default_property(self :: PROPERTY_RESULT, $result);
     }
@@ -148,7 +148,7 @@ class Enrollment extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_TRAINING;
@@ -163,7 +163,7 @@ class Enrollment extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -172,7 +172,7 @@ class Enrollment extends DiscoveryItem
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         $string[] = $this->get_year();

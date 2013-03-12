@@ -13,7 +13,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return int
      */
-    function get_username()
+    public function get_username()
     {
         return $this->get_default_property(self :: PROPERTY_USERNAME);
     }
@@ -22,7 +22,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return Birth
      */
-    function get_timezone()
+    public function get_timezone()
     {
         return $this->get_default_property(self :: PROPERTY_TIMEZONE);
     }
@@ -31,7 +31,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param int $username
      */
-    function set_username($username)
+    public function set_username($username)
     {
         $this->set_default_property(self :: PROPERTY_USERNAME, $username);
     }
@@ -40,7 +40,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param string $timezone
      */
-    function set_timezone($timezone)
+    public function set_timezone($timezone)
     {
         $this->set_default_property(self :: PROPERTY_TIMEZONE, $timezone);
     }
@@ -49,7 +49,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_USERNAME;
         $extended_property_names[] = self :: PROPERTY_TIMEZONE;
@@ -61,7 +61,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }

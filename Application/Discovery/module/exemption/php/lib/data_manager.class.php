@@ -28,7 +28,7 @@ class DataManager
      * @param $module_instance ModuleInstance
      * @return DataManagerInterface
      */
-    static function get_instance($module_instance)
+    public static function get_instance($module_instance)
     {
         if (! isset(self :: $instance) || ! isset(self :: $instance[$module_instance->get_id()]))
         {

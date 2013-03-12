@@ -8,7 +8,7 @@ class Module extends \application\discovery\module\teaching_assignment\Module
 
     private $cache_teaching_assignments = array();
 
-    function get_teaching_assignments_data($parameters)
+    public function get_teaching_assignments_data($parameters)
     {
         $year = $parameters->get_year();
         $user_id = $parameters->get_user_id();
@@ -23,7 +23,7 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         return $this->cache_teaching_assignments[$user_id][$year];
     }
 
-    function get_years()
+    public function get_years()
     {
         if (! isset($this->years))
         {

@@ -146,7 +146,7 @@ class Employment extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
@@ -182,7 +182,7 @@ class Employment extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -192,7 +192,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The person_id.
      */
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
@@ -202,7 +202,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $person_id
      */
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
@@ -212,7 +212,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The year.
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -222,7 +222,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -232,7 +232,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The assignment.
      */
-    function get_assignment()
+    public function get_assignment()
     {
         return $this->get_default_property(self :: PROPERTY_ASSIGNMENT);
     }
@@ -242,7 +242,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $assignment
      */
-    function set_assignment($assignment)
+    public function set_assignment($assignment)
     {
         $this->set_default_property(self :: PROPERTY_ASSIGNMENT, $assignment);
     }
@@ -252,7 +252,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The hours.
      */
-    function get_hours()
+    public function get_hours()
     {
         return $this->get_default_property(self :: PROPERTY_HOURS);
     }
@@ -262,7 +262,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $hours
      */
-    function set_hours($hours)
+    public function set_hours($hours)
     {
         $this->set_default_property(self :: PROPERTY_HOURS, $hours);
     }
@@ -272,7 +272,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The start_date.
      */
-    function get_start_date()
+    public function get_start_date()
     {
         return $this->get_default_property(self :: PROPERTY_START_DATE);
     }
@@ -282,7 +282,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $start_date
      */
-    function set_start_date($start_date)
+    public function set_start_date($start_date)
     {
         $this->set_default_property(self :: PROPERTY_START_DATE, $start_date);
     }
@@ -292,7 +292,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The end_date.
      */
-    function get_end_date()
+    public function get_end_date()
     {
         return $this->get_default_property(self :: PROPERTY_END_DATE);
     }
@@ -302,7 +302,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $end_date
      */
-    function set_end_date($end_date)
+    public function set_end_date($end_date)
     {
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
     }
@@ -312,7 +312,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The state_id.
      */
-    function get_state_id()
+    public function get_state_id()
     {
         return $this->get_default_property(self :: PROPERTY_STATE_ID);
     }
@@ -322,7 +322,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $state_id
      */
-    function set_state_id($state_id)
+    public function set_state_id($state_id)
     {
         $this->set_default_property(self :: PROPERTY_STATE_ID, $state_id);
     }
@@ -332,7 +332,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The state.
      */
-    function get_state()
+    public function get_state()
     {
         return $this->get_default_property(self :: PROPERTY_STATE);
     }
@@ -342,7 +342,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $state
      */
-    function set_state($state)
+    public function set_state($state)
     {
         $this->set_default_property(self :: PROPERTY_STATE, $state);
     }
@@ -352,7 +352,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The state_code.
      */
-    function get_state_code()
+    public function get_state_code()
     {
         return $this->get_default_property(self :: PROPERTY_STATE_CODE);
     }
@@ -362,7 +362,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $state_code
      */
-    function set_state_code($state_code)
+    public function set_state_code($state_code)
     {
         $this->set_default_property(self :: PROPERTY_STATE_CODE, $state_code);
     }
@@ -372,7 +372,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The office_id.
      */
-    function get_office_id()
+    public function get_office_id()
     {
         return $this->get_default_property(self :: PROPERTY_OFFICE_ID);
     }
@@ -382,7 +382,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $office_id
      */
-    function set_office_id($office_id)
+    public function set_office_id($office_id)
     {
         $this->set_default_property(self :: PROPERTY_OFFICE_ID, $office_id);
     }
@@ -392,7 +392,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The office.
      */
-    function get_office()
+    public function get_office()
     {
         return $this->get_default_property(self :: PROPERTY_OFFICE);
     }
@@ -402,7 +402,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $office
      */
-    function set_office($office)
+    public function set_office($office)
     {
         $this->set_default_property(self :: PROPERTY_OFFICE, $office);
     }
@@ -412,7 +412,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The category_id.
      */
-    function get_category_id()
+    public function get_category_id()
     {
         return $this->get_default_property(self :: PROPERTY_CATEGORY_ID);
     }
@@ -422,7 +422,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $category_id
      */
-    function set_category_id($category_id)
+    public function set_category_id($category_id)
     {
         $this->set_default_property(self :: PROPERTY_CATEGORY_ID, $category_id);
     }
@@ -432,7 +432,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The category_code.
      */
-    function get_category_code()
+    public function get_category_code()
     {
         return $this->get_default_property(self :: PROPERTY_CATEGORY_CODE);
     }
@@ -442,7 +442,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $category_code
      */
-    function set_category_code($category_code)
+    public function set_category_code($category_code)
     {
         $this->set_default_property(self :: PROPERTY_CATEGORY_CODE, $category_code);
     }
@@ -452,7 +452,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The category.
      */
-    function get_category()
+    public function get_category()
     {
         return $this->get_default_property(self :: PROPERTY_CATEGORY);
     }
@@ -462,7 +462,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $category
      */
-    function set_category($category)
+    public function set_category($category)
     {
         $this->set_default_property(self :: PROPERTY_CATEGORY, $category);
     }
@@ -472,7 +472,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The category_description.
      */
-    function get_category_description()
+    public function get_category_description()
     {
         return $this->get_default_property(self :: PROPERTY_CATEGORY_DESCRIPTION);
     }
@@ -482,7 +482,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $category_description
      */
-    function set_category_description($category_description)
+    public function set_category_description($category_description)
     {
         $this->set_default_property(self :: PROPERTY_CATEGORY_DESCRIPTION, $category_description);
     }
@@ -492,7 +492,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The description.
      */
-    function get_description()
+    public function get_description()
     {
         return $this->get_default_property(self :: PROPERTY_DESCRIPTION);
     }
@@ -502,7 +502,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $description
      */
-    function set_description($description)
+    public function set_description($description)
     {
         $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
     }
@@ -512,7 +512,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The fund_id.
      */
-    function get_fund_id()
+    public function get_fund_id()
     {
         return $this->get_default_property(self :: PROPERTY_FUND_ID);
     }
@@ -522,7 +522,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $fund_id
      */
-    function set_fund_id($fund_id)
+    public function set_fund_id($fund_id)
     {
         $this->set_default_property(self :: PROPERTY_FUND_ID, $fund_id);
     }
@@ -532,7 +532,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The fund.
      */
-    function get_fund()
+    public function get_fund()
     {
         return $this->get_default_property(self :: PROPERTY_FUND);
     }
@@ -542,7 +542,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $fund
      */
-    function set_fund($fund)
+    public function set_fund($fund)
     {
         $this->set_default_property(self :: PROPERTY_FUND, $fund);
     }
@@ -552,7 +552,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The pay_scale_id.
      */
-    function get_pay_scale_id()
+    public function get_pay_scale_id()
     {
         return $this->get_default_property(self :: PROPERTY_PAY_SCALE_ID);
     }
@@ -562,7 +562,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $pay_scale_id
      */
-    function set_pay_scale_id($pay_scale_id)
+    public function set_pay_scale_id($pay_scale_id)
     {
         $this->set_default_property(self :: PROPERTY_PAY_SCALE_ID, $pay_scale_id);
     }
@@ -572,7 +572,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The pay_scale.
      */
-    function get_pay_scale()
+    public function get_pay_scale()
     {
         return $this->get_default_property(self :: PROPERTY_PAY_SCALE);
     }
@@ -582,7 +582,7 @@ class Employment extends DiscoveryItem
      *
      * @param string $pay_scale
      */
-    function set_pay_scale($pay_scale)
+    public function set_pay_scale($pay_scale)
     {
         $this->set_default_property(self :: PROPERTY_PAY_SCALE, $pay_scale);
     }
@@ -592,7 +592,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The pay_scale_minimum_age.
      */
-    function get_pay_scale_minimum_age()
+    public function get_pay_scale_minimum_age()
     {
         return $this->get_default_property(self :: PROPERTY_PAY_SCALE_MINIMUM_AGE);
     }
@@ -602,7 +602,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $pay_scale_minimum_age
      */
-    function set_pay_scale_minimum_age($pay_scale_minimum_age)
+    public function set_pay_scale_minimum_age($pay_scale_minimum_age)
     {
         $this->set_default_property(self :: PROPERTY_PAY_SCALE_MINIMUM_AGE, $pay_scale_minimum_age);
     }
@@ -612,7 +612,7 @@ class Employment extends DiscoveryItem
      *
      * @return float The pay_scale_minimum_wage.
      */
-    function get_pay_scale_minimum_wage()
+    public function get_pay_scale_minimum_wage()
     {
         return $this->get_default_property(self :: PROPERTY_PAY_SCALE_MINIMUM_WAGE);
     }
@@ -622,7 +622,7 @@ class Employment extends DiscoveryItem
      *
      * @param float $pay_scale_minimum_wage
      */
-    function set_pay_scale_minimum_wage($pay_scale_minimum_wage)
+    public function set_pay_scale_minimum_wage($pay_scale_minimum_wage)
     {
         $this->set_default_property(self :: PROPERTY_PAY_SCALE_MINIMUM_WAGE, $pay_scale_minimum_wage);
     }
@@ -632,7 +632,7 @@ class Employment extends DiscoveryItem
      *
      * @return float The pay_scale_maximum_wage.
      */
-    function get_pay_scale_maximum_wage()
+    public function get_pay_scale_maximum_wage()
     {
         return $this->get_default_property(self :: PROPERTY_PAY_SCALE_MAXIMUM_WAGE);
     }
@@ -642,7 +642,7 @@ class Employment extends DiscoveryItem
      *
      * @param float $pay_scale_maximum_wage
      */
-    function set_pay_scale_maximum_wage($pay_scale_maximum_wage)
+    public function set_pay_scale_maximum_wage($pay_scale_maximum_wage)
     {
         $this->set_default_property(self :: PROPERTY_PAY_SCALE_MAXIMUM_WAGE, $pay_scale_maximum_wage);
     }
@@ -652,7 +652,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The active.
      */
-    function get_active()
+    public function get_active()
     {
         return $this->get_default_property(self :: PROPERTY_ACTIVE);
     }
@@ -662,7 +662,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $active
      */
-    function set_active($active)
+    public function set_active($active)
     {
         $this->set_default_property(self :: PROPERTY_ACTIVE, $active);
     }
@@ -672,7 +672,7 @@ class Employment extends DiscoveryItem
      *
      * @return integer The cycles.
      */
-    function get_cycles()
+    public function get_cycles()
     {
         return $this->get_default_property(self :: PROPERTY_CYCLES);
     }
@@ -682,7 +682,7 @@ class Employment extends DiscoveryItem
      *
      * @param integer $cycles
      */
-    function set_cycles($cycles)
+    public function set_cycles($cycles)
     {
         $this->set_default_property(self :: PROPERTY_CYCLES, $cycles);
     }
@@ -691,7 +691,7 @@ class Employment extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

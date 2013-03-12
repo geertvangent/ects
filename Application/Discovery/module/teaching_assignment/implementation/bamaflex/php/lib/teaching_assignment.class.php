@@ -29,12 +29,12 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return int
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
 
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
@@ -43,7 +43,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return string
      */
-    function get_faculty()
+    public function get_faculty()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY);
     }
@@ -52,7 +52,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return integer
      */
-    function get_faculty_id()
+    public function get_faculty_id()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY_ID);
     }
@@ -61,7 +61,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return integer
      */
-    function get_timeframe_id()
+    public function get_timeframe_id()
     {
         return $this->get_default_property(self :: PROPERTY_TIMEFRAME_ID);
     }
@@ -71,7 +71,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      * 
      * @return string The trajectory_part.
      */
-    function get_trajectory_part()
+    public function get_trajectory_part()
     {
         return $this->get_default_property(self :: PROPERTY_TRAJECTORY_PART);
     }
@@ -81,7 +81,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      * 
      * @param string $trajectory_part
      */
-    function set_trajectory_part($trajectory_part)
+    public function set_trajectory_part($trajectory_part)
     {
         $this->set_default_property(self :: PROPERTY_TRAJECTORY_PART, $trajectory_part);
     }
@@ -91,7 +91,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      * 
      * @return int The credits.
      */
-    function get_credits()
+    public function get_credits()
     {
         return $this->get_default_property(self :: PROPERTY_CREDITS);
     }
@@ -101,17 +101,17 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      * 
      * @return int programme_id.
      */
-    function get_programme_id()
+    public function get_programme_id()
     {
         return $this->get_default_property(self :: PROPERTY_PROGRAMME_ID);
     }
 
-    function get_teacher()
+    public function get_teacher()
     {
         return $this->get_default_property(self :: PROPERTY_TEACHER);
     }
 
-    function get_manager()
+    public function get_manager()
     {
         return $this->get_default_property(self :: PROPERTY_MANAGER);
     }
@@ -121,7 +121,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      * 
      * @param int $credits
      */
-    function set_credits($credits)
+    public function set_credits($credits)
     {
         $this->set_default_property(self :: PROPERTY_CREDITS, $credits);
     }
@@ -131,7 +131,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      * 
      * @return int The weight.
      */
-    function get_weight()
+    public function get_weight()
     {
         return $this->get_default_property(self :: PROPERTY_WEIGHT);
     }
@@ -141,7 +141,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      * 
      * @param int $weight
      */
-    function set_weight($weight)
+    public function set_weight($weight)
     {
         $this->set_default_property(self :: PROPERTY_WEIGHT, $weight);
     }
@@ -150,12 +150,12 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @param int $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
 
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
@@ -164,7 +164,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @param string $faculty
      */
-    function set_faculty($faculty)
+    public function set_faculty($faculty)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY, $faculty);
     }
@@ -173,7 +173,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @param integer $faculty_id
      */
-    function set_faculty_id($faculty_id)
+    public function set_faculty_id($faculty_id)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
     }
@@ -182,7 +182,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @param string $timeframe_id
      */
-    function set_timeframe_id($timeframe_id)
+    public function set_timeframe_id($timeframe_id)
     {
         $this->set_default_property(self :: PROPERTY_TIMEFRAME_ID, $timeframe_id);
     }
@@ -191,17 +191,17 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @param string $programme_id
      */
-    function set_programme_id($programme_id)
+    public function set_programme_id($programme_id)
     {
         $this->set_default_property(self :: PROPERTY_PROGRAMME_ID, $programme_id);
     }
 
-    function set_teacher($teacher)
+    public function set_teacher($teacher)
     {
         $this->set_default_property(self :: PROPERTY_TEACHER, $teacher);
     }
 
-    function set_manager($manager)
+    public function set_manager($manager)
     {
         $this->set_default_property(self :: PROPERTY_MANAGER, $manager);
     }
@@ -210,7 +210,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_FACULTY;
@@ -230,7 +230,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return string
      */
-    function get_timeframe()
+    public function get_timeframe()
     {
         return self :: timeframe($this->get_timeframe_id());
     }
@@ -239,7 +239,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return string
      */
-    static function timeframe($timeframe_id)
+    public static function timeframe($timeframe_id)
     {
         switch ($timeframe_id)
         {
@@ -265,7 +265,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return string
      */
-    function get_manager_type()
+    public function get_manager_type()
     {
         return self :: manager_type($this->get_manager());
     }
@@ -274,7 +274,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return string
      */
-    static function manager_type($type)
+    public static function manager_type($type)
     {
         switch ($type)
         {
@@ -297,7 +297,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return string
      */
-    function get_teacher_type()
+    public function get_teacher_type()
     {
         return self :: teacher_type($this->get_teacher());
     }
@@ -306,7 +306,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return string
      */
-    static function teacher_type($type)
+    public static function teacher_type($type)
     {
         switch ($type)
         {
@@ -329,7 +329,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -338,7 +338,7 @@ class TeachingAssignment extends \application\discovery\module\teaching_assignme
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         $string[] = $this->get_year();

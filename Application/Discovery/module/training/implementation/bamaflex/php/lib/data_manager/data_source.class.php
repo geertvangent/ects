@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
-use common\libraries\PatternMatchCondition;
 use common\libraries\NotCondition;
 use common\libraries\DoctrineConditionTranslator;
 use Doctrine\DBAL\Driver\PDOStatement;
@@ -31,7 +30,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param $id int
      * @return multitype:\application\discovery\module\training\implementation\bamaflex\TeachingAssignment
      */
-    function retrieve_trainings($year)
+    public function retrieve_trainings($year)
     {
         if (! isset($this->trainings[$year]))
         {
@@ -81,7 +80,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->trainings[$year];
     }
 
-    function retrieve_training_next_id($training)
+    public function retrieve_training_next_id($training)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');
@@ -103,7 +102,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_years()
+    public function retrieve_years()
     {
         if (! isset($this->years))
         {
@@ -126,7 +125,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->years;
     }
 
-    function retrieve_faculty($faculty_parameters)
+    public function retrieve_faculty($faculty_parameters)
     {
         $faculty_id = $faculty_parameters->get_faculty_id();
         $source = $faculty_parameters->get_source();
@@ -226,7 +225,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_faculty_next_id($faculty)
+    public function retrieve_faculty_next_id($faculty)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $faculty->get_id() . '"');
@@ -247,7 +246,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_deans($source, $faculty_id)
+    public function retrieve_deans($source, $faculty_id)
     {
         if (! isset($this->deans[$source][$faculty_id]))
         {

@@ -7,12 +7,12 @@ class Module extends \application\discovery\module\course_results\Module
 {
     const PARAM_SOURCE = 'source';
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return self :: module_parameters();
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
@@ -29,7 +29,7 @@ class Module extends \application\discovery\module\course_results\Module
         return $parameter;
     }
 
-    static function get_course_parameters()
+    public static function get_course_parameters()
     {
         $programme_id = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);

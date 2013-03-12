@@ -23,12 +23,12 @@ abstract class Module extends \application\discovery\Module
      */
     private $mark_moments;
 
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance($this->get_module_instance());
     }
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return new Parameters(Request :: get(self :: PARAM_PROGRAMME_ID));
     }
@@ -37,7 +37,7 @@ abstract class Module extends \application\discovery\Module
      *
      * @return multitype:\application\discovery\module\course_results\Course
      */
-    function get_course_results()
+    public function get_course_results()
     {
         if (! isset($this->course_results))
         {
@@ -50,7 +50,7 @@ abstract class Module extends \application\discovery\Module
      *
      * @return multitype:\application\discovery\module\course_results\MarkMoment
      */
-    function get_mark_moments()
+    public function get_mark_moments()
     {
         if (! isset($this->mark_moments))
         {
@@ -59,12 +59,12 @@ abstract class Module extends \application\discovery\Module
         return $this->mark_moments;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_DETAILS;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 

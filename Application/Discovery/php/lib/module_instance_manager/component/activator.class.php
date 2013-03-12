@@ -8,7 +8,7 @@ use common\libraries\Utilities;
 class ModuleInstanceManagerActivatorComponent extends ModuleInstanceManager
 {
 
-    function run()
+    public function run()
     {
         if (! $this->get_user()->is_platform_admin())
         {

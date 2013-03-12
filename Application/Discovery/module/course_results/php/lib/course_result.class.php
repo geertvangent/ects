@@ -28,7 +28,7 @@ class CourseResult extends DataClass
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_MARKS;
         $extended_property_names[] = self :: PROPERTY_PERSON_FIRST_NAME;
@@ -43,7 +43,7 @@ class CourseResult extends DataClass
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -53,7 +53,7 @@ class CourseResult extends DataClass
      * 
      * @return multitype:Mark The marks.
      */
-    function get_marks()
+    public function get_marks()
     {
         return $this->get_default_property(self :: PROPERTY_MARKS);
     }
@@ -63,7 +63,7 @@ class CourseResult extends DataClass
      * 
      * @return string
      */
-    function get_person_first_name()
+    public function get_person_first_name()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_FIRST_NAME);
     }
@@ -73,17 +73,17 @@ class CourseResult extends DataClass
      * 
      * @return string
      */
-    function get_person_last_name()
+    public function get_person_last_name()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_LAST_NAME);
     }
 
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
 
-    function get_mark_by_moment_id($moment_id)
+    public function get_mark_by_moment_id($moment_id)
     {
         foreach ($this->get_marks() as $mark)
         {
@@ -101,7 +101,7 @@ class CourseResult extends DataClass
      * 
      * @param multitype:Mark $marks
      */
-    function set_marks($marks)
+    public function set_marks($marks)
     {
         $this->set_default_property(self :: PROPERTY_MARKS, $marks);
     }
@@ -111,7 +111,7 @@ class CourseResult extends DataClass
      * 
      * @param string
      */
-    function set_person_last_name($person_last_name)
+    public function set_person_last_name($person_last_name)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_LAST_NAME, $person_last_name);
     }
@@ -121,12 +121,12 @@ class CourseResult extends DataClass
      * 
      * @param string
      */
-    function set_person_first_name($person_first_name)
+    public function set_person_first_name($person_first_name)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_FIRST_NAME, $person_first_name);
     }
 
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
@@ -135,7 +135,7 @@ class CourseResult extends DataClass
      *
      * @param Mark $mark
      */
-    function add_mark(Mark $mark)
+    public function add_mark(Mark $mark)
     {
         $marks = $this->get_marks();
         $marks[] = $mark;
@@ -146,7 +146,7 @@ class CourseResult extends DataClass
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

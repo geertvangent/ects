@@ -22,14 +22,14 @@ class ModuleInstanceBrowserTableColumnModel extends DefaultModuleInstanceTableCo
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
         parent :: __construct();
         $this->set_default_order_column(1);
         $this->add_column(self :: get_modification_column());
     }
 
-    function get_display_order_column_property()
+    public function get_display_order_column_property()
     {
         return ModuleInstance :: PROPERTY_DISPLAY_ORDER;
     }
@@ -39,7 +39,7 @@ class ModuleInstanceBrowserTableColumnModel extends DefaultModuleInstanceTableCo
      *
      * @return ContentObjectTableColumn
      */
-    static function get_modification_column()
+    public static function get_modification_column()
     {
         if (! isset(self :: $modification_column))
         {

@@ -23,7 +23,7 @@ class Module extends \application\discovery\module\career\Module
      *
      * @return multitype:multitype:string
      */
-    function get_table_data($enrollment)
+    public function get_table_data($enrollment)
     {
         $data = array();
         $training = $enrollment->get_training_object();
@@ -226,7 +226,7 @@ class Module extends \application\discovery\module\career\Module
      *
      * @return multitype:string
      */
-    function get_table_headers()
+    public function get_table_headers()
     {
         $headers = array();
         $headers[] = array(Translation :: get('Year'), 'class="code"');
@@ -243,7 +243,7 @@ class Module extends \application\discovery\module\career\Module
         return $headers;
     }
 
-    function get_enrollments()
+    public function get_enrollments()
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
                 $this->get_module_parameters());
@@ -262,7 +262,7 @@ class Module extends \application\discovery\module\career\Module
         return $contract_type_enrollments;
     }
 
-    function get_contracts()
+    public function get_contracts()
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
                 $this->get_module_parameters());
@@ -284,7 +284,7 @@ class Module extends \application\discovery\module\career\Module
         return $contract_enrollments;
     }
 
-    function get_enrollment_courses()
+    public function get_enrollment_courses()
     {
         $html = array();
 
@@ -467,7 +467,7 @@ class Module extends \application\discovery\module\career\Module
     /*
      * (non-PHPdoc) @see application\discovery\module\career.Module::render()
      */
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();

@@ -27,7 +27,7 @@ class Mark extends DataClass
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_MOMENT;
         $extended_property_names[] = self :: PROPERTY_RESULT;
@@ -41,7 +41,7 @@ class Mark extends DataClass
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -51,7 +51,7 @@ class Mark extends DataClass
      * 
      * @return string The moment.
      */
-    function get_moment()
+    public function get_moment()
     {
         return $this->get_default_property(self :: PROPERTY_MOMENT);
     }
@@ -61,7 +61,7 @@ class Mark extends DataClass
      * 
      * @param string $moment
      */
-    function set_moment($moment)
+    public function set_moment($moment)
     {
         $this->set_default_property(self :: PROPERTY_MOMENT, $moment);
     }
@@ -71,7 +71,7 @@ class Mark extends DataClass
      * 
      * @return string The result.
      */
-    function get_result()
+    public function get_result()
     {
         return $this->get_default_property(self :: PROPERTY_RESULT);
     }
@@ -81,12 +81,12 @@ class Mark extends DataClass
      * 
      * @param string $result
      */
-    function set_result($result)
+    public function set_result($result)
     {
         $this->set_default_property(self :: PROPERTY_RESULT, $result);
     }
 
-    function get_visual_result()
+    public function get_visual_result()
     {
         return (is_numeric($this->get_result()) ? (float) $this->get_result() : $this->get_result());
     }
@@ -96,7 +96,7 @@ class Mark extends DataClass
      * 
      * @return string The status.
      */
-    function get_status()
+    public function get_status()
     {
         return $this->get_default_property(self :: PROPERTY_STATUS);
     }
@@ -106,7 +106,7 @@ class Mark extends DataClass
      * 
      * @param string $status
      */
-    function set_status($status)
+    public function set_status($status)
     {
         $this->set_default_property(self :: PROPERTY_STATUS, $status);
     }
@@ -115,7 +115,7 @@ class Mark extends DataClass
      *
      * @return string
      */
-    function get_status_string()
+    public function get_status_string()
     {
         return self :: status_string($this->get_status());
     }
@@ -124,7 +124,7 @@ class Mark extends DataClass
      *
      * @return string
      */
-    static function status_string($status)
+    public static function status_string($status)
     {
         switch ($status)
         {
@@ -138,12 +138,12 @@ class Mark extends DataClass
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
-    static function factory($moment_id = 0, $result = null, $status = null)
+    public static function factory($moment_id = 0, $result = null, $status = null)
     {
         $mark = new self();
         $mark->set_moment($moment_id);

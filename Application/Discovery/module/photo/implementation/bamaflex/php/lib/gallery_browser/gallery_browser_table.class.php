@@ -12,7 +12,7 @@ class GalleryBrowserTable extends GalleryObjectTable
      *
      * @see ContentObjectTable::ContentObjectTable()
      */
-    function __construct($browser, $parameters, $condition)
+    public function __construct($browser, $parameters, $condition)
     {
         $property_model = new GalleryBrowserTablePropertyModel();
         $cell_renderer = new GalleryBrowserTableCellRenderer($browser);

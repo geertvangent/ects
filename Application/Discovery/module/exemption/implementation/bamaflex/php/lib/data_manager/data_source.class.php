@@ -19,7 +19,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\exemption\implementation\bamaflex\TeachingAssignment
      */
-    function retrieve_exemptions($parameters)
+    public function retrieve_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
@@ -64,7 +64,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->exemptions[$person_id];
     }
 
-    function count_exemptions($parameters)
+    public function count_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
@@ -86,7 +86,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return 0;
     }
 
-    function retrieve_years($parameters)
+    public function retrieve_years($parameters)
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();

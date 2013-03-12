@@ -5,7 +5,7 @@ namespace application\discovery\module\course\implementation\bamaflex;
 class HtmlXlsxRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         \application\discovery\Rendition :: launch($this);
     }
@@ -13,7 +13,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -21,7 +21,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\HtmlRendition :: VIEW_XLSX;
     }

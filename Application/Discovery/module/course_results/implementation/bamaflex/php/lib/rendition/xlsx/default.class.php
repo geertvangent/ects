@@ -18,7 +18,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     private $php_excel;
 
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -39,7 +39,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 $this->get_file_name());
     }
 
-    function get_file_name()
+    public function get_file_name()
     {
         $course = DataManager :: get_instance($this->get_module_instance())->retrieve_course(
                 Module :: get_course_parameters());
@@ -48,7 +48,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 $this->get_module_instance()->get_type()) . ' ' . $course->get_year();
     }
 
-    function process_course_results()
+    public function process_course_results()
     {
         $this->php_excel->createSheet(0);
         $this->php_excel->setActiveSheetIndex(0);
@@ -127,7 +127,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
@@ -135,7 +135,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

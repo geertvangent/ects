@@ -19,7 +19,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
 
     private $namespace;
 
-    function run()
+    public function run()
     {
         $this->module_instance_id = Request :: get(self :: PARAM_MODULE_ID);
         $module_instance = DataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
@@ -29,7 +29,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
                 $this->get_entities());
     }
 
-    function get_locations()
+    public function get_locations()
     {
         $namespace = $this->namespace;
         $locations = array();
@@ -38,7 +38,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
         return $locations;
     }
 
-    function get_entities()
+    public function get_entities()
     {
         $excluded_users[] = $this->get_user_id();
 
@@ -51,13 +51,13 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
         return $entities;
     }
 
-    function get_available_rights()
+    public function get_available_rights()
     {
         $namespace = $this->namespace;
         return $namespace :: get_available_rights();
     }
 
-    function get_additional_parameters()
+    public function get_additional_parameters()
     {
         $module_instance = DataManager :: get_instance()->retrieve_module_instance(
                 Request :: get(self :: PARAM_MODULE_ID));

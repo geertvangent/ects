@@ -16,7 +16,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @return string
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -25,7 +25,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @return string
      */
-    function get_training()
+    public function get_training()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING);
     }
@@ -34,7 +34,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @return integer
      */
-    function get_training_id()
+    public function get_training_id()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
     }
@@ -43,7 +43,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @return string
      */
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
@@ -52,7 +52,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -61,7 +61,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @param string $training
      */
-    function set_training($training)
+    public function set_training($training)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING, $training);
     }
@@ -70,7 +70,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @param string $training_id
      */
-    function set_training_id($training_id)
+    public function set_training_id($training_id)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
     }
@@ -79,7 +79,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @param string $name
      */
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
@@ -88,7 +88,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_TRAINING;
@@ -102,7 +102,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
@@ -111,7 +111,7 @@ class TeachingAssignment extends DiscoveryItem
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         $string[] = $this->get_year();

@@ -25,7 +25,7 @@ class MarkMoment extends DataClass
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_NAME;
         
@@ -37,7 +37,7 @@ class MarkMoment extends DataClass
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -47,7 +47,7 @@ class MarkMoment extends DataClass
      * 
      * @return string The name.
      */
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
@@ -57,7 +57,7 @@ class MarkMoment extends DataClass
      * 
      * @param string $name
      */
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
@@ -66,7 +66,7 @@ class MarkMoment extends DataClass
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

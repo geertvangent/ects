@@ -29,7 +29,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
     private $entity;
     const PARAM_ENTITY = 'entity';
 
-    function run()
+    public function run()
     {
         $menu = $this->get_menu_html();
 
@@ -39,7 +39,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         $this->display_footer();
     }
 
-    function get_menu_html()
+    public function get_menu_html()
     {
         $url = $this->get_url(array(GroupManager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new GroupMenu($this->get_group(), urldecode($url));
@@ -53,7 +53,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         return implode($html, "\n");
     }
 
-    function get_rights()
+    public function get_rights()
     {
         $tabs = new DynamicVisualTabsRenderer('rights', $this->get_table()->as_html());
         $param = array();
@@ -82,7 +82,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         return implode($html, "\n");
     }
 
-    function get_table()
+    public function get_table()
     {
         if ($this->get_entity() == PlatformGroupEntity :: ENTITY_TYPE)
         {
@@ -130,7 +130,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         }
     }
 
-    function get_entity()
+    public function get_entity()
     {
         if (! isset($this->entity))
         {
@@ -145,7 +145,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         return $this->entity;
     }
 
-    function get_condition()
+    public function get_condition()
     {
         $group_conditions = array();
         $group_conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID,
@@ -171,7 +171,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         return new InCondition(Group :: PROPERTY_ID, $group_ids);
     }
 
-    function get_group()
+    public function get_group()
     {
         if (! $this->group)
         {
@@ -186,7 +186,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         return $this->group;
     }
 
-    function get_root_group()
+    public function get_root_group()
     {
         if (! $this->root_group)
         {

@@ -19,7 +19,7 @@ use application\discovery\module\profile\Photo;
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
 
-    function retrieve_photo($id, $web = true)
+    public function retrieve_photo($id, $web = true)
     {
         $relative_path = 'photo/' . Text :: char_at($id, 0) . '/' . $id . '.jpg';
         $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
@@ -59,7 +59,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return Path :: get($web ? WEB_FILE_PATH : SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
     }
 
-    function retrieve_faculty($faculty_id)
+    public function retrieve_faculty($faculty_id)
     {
         $source = 1;
         if ($faculty_id && $source)
@@ -97,7 +97,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_training($training_id)
+    public function retrieve_training($training_id)
     {
         $source = 1;
         
@@ -142,7 +142,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->trainings[$training_id][$source];
     }
 
-    function retrieve_programme($programme_id)
+    public function retrieve_programme($programme_id)
     {
         $source = 1;
         

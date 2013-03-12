@@ -19,7 +19,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param unknown_type $id
      * @return multitype:int
      */
-    function retrieve_contract_types($parameters)
+    public function retrieve_contract_types($parameters)
     {
         $user_id = $parameters->get_user_id();
         if (! isset($this->contract_types[$user_id]))
@@ -52,7 +52,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Enrollment
      */
-    function retrieve_enrollments($parameters)
+    public function retrieve_enrollments($parameters)
     {
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
@@ -98,7 +98,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->enrollments[$id];
     }
 
-    function count_enrollments($parameters)
+    public function count_enrollments($parameters)
     {
         $id = $parameters->get_user_id();
         $user = UserDataManager :: get_instance()->retrieve_user($id);

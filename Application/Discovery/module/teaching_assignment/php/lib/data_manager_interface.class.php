@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param int $id
      * @return multitype:\application\discovery\module\teaching_assignment\TeachingAssignment
      */
-    function retrieve_teaching_assignments($person_id);
+    public function retrieve_teaching_assignments($person_id);
 }

@@ -23,7 +23,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param $id int
      * @return multitype:\application\discovery\module\advice\implementation\bamaflex\TeachingAssignment
      */
-    function retrieve_advices($parameters)
+    public function retrieve_advices($parameters)
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
@@ -78,7 +78,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->advices[$person_id];
     }
 
-    function count_advices($parameters)
+    public function count_advices($parameters)
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
@@ -115,7 +115,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param $id int
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Enrollment
      */
-    function retrieve_enrollments($parameters)
+    public function retrieve_enrollments($parameters)
     {
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))

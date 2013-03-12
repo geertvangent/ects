@@ -9,7 +9,7 @@ use common\libraries\StringUtilities;
 class XlsxDefaultRendition extends XlsxRendition
 {
 
-    function render()
+    public function render()
     {
         return null;
     }
@@ -19,7 +19,7 @@ class XlsxDefaultRendition extends XlsxRendition
      * @param \PHPExcel $php_excel
      * @param multitype:string $headers
      */
-    static function set_headers(\PHPExcel $php_excel, $headers, $row = 1)
+    public static function set_headers(\PHPExcel $php_excel, $headers, $row = 1)
     {
         $column = 0;
 
@@ -48,7 +48,7 @@ class XlsxDefaultRendition extends XlsxRendition
      * @param \PHPExcel $php_excel
      * @param string $type
      */
-    static function save(\PHPExcel $php_excel, $module, $file_name = null)
+    public static function save(\PHPExcel $php_excel, $module, $file_name = null)
     {
         $php_excel->setActiveSheetIndex(0);
 

@@ -14,7 +14,7 @@ class DiscoveryInstaller extends WebApplicationInstaller
     /**
      * Constructor
      */
-    function __construct($values)
+    public function __construct($values)
     {
         parent :: __construct($values, DataManager :: get_instance());
     }

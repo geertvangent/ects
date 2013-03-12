@@ -38,7 +38,7 @@ class RightsUserEntity extends UserEntity
      */
     private static $instance;
 
-    static function get_instance($publication_id)
+    public static function get_instance($publication_id)
     {
         if (! isset(self :: $instance))
         {
@@ -47,7 +47,7 @@ class RightsUserEntity extends UserEntity
         return self :: $instance;
     }
 
-    function __construct($publication_id, $limited_users = array(), $excluded_users = array())
+    public function __construct($publication_id, $limited_users = array(), $excluded_users = array())
     {
         $this->limited_users = $limited_users;
         $this->excluded_users = $excluded_users;
@@ -104,7 +104,7 @@ class RightsUserEntity extends UserEntity
     /**
      * Retrieves the type for the advanced element finder for the simple rights editor
      */
-    function get_element_finder_type()
+    public function get_element_finder_type()
     {
         return new AdvancedElementFinderElementType('users', Translation :: get('Users'), __NAMESPACE__, 'users_feed',
                 array('publication_id' => $this->publication_id));

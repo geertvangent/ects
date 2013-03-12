@@ -13,7 +13,7 @@ class Photo extends DataClass
      *
      * @return int
      */
-    function get_mime_type()
+    public function get_mime_type()
     {
         return $this->get_default_property(self :: PROPERTY_MIME_TYPE);
     }
@@ -22,7 +22,7 @@ class Photo extends DataClass
      *
      * @return string A base 64 encoded representation of the photo
      */
-    function get_data()
+    public function get_data()
     {
         return $this->get_default_property(self :: PROPERTY_DATA);
     }
@@ -31,7 +31,7 @@ class Photo extends DataClass
      *
      * @param $mime_type int
      */
-    function set_mime_type($mime_type)
+    public function set_mime_type($mime_type)
     {
         $this->set_default_property(self :: PROPERTY_MIME_TYPE, $mime_type);
     }
@@ -40,7 +40,7 @@ class Photo extends DataClass
      *
      * @param $data string A base 64 encoded representation of the photo
      */
-    function set_data($data)
+    public function set_data($data)
     {
         $this->set_default_property(self :: PROPERTY_DATA, $data);
     }
@@ -49,7 +49,7 @@ class Photo extends DataClass
      *
      * @param $extended_property_names multitype:string
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_MIME_TYPE;
         $extended_property_names[] = self :: PROPERTY_DATA;
@@ -61,12 +61,12 @@ class Photo extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
 
-    function get_source()
+    public function get_source()
     {
         $source = array();
         $source[] = 'data';
@@ -80,7 +80,7 @@ class Photo extends DataClass
         return implode('', $source);
     }
 
-    function has_data()
+    public function has_data()
     {
         if ($this->get_data())
         {

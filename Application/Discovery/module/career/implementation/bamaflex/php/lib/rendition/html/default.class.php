@@ -19,7 +19,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     private $credits = array();
 
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -50,7 +50,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_enrollment_courses()
+    public function get_enrollment_courses()
     {
         $html = array();
         
@@ -233,7 +233,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      *
      * @return multitype:string
      */
-    function get_table_headers()
+    public function get_table_headers()
     {
         $headers = array();
         $headers[] = array(Translation :: get('Year'), 'class="code"');
@@ -254,7 +254,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      *
      * @return multitype:multitype:string
      */
-    function get_table_data($enrollment)
+    public function get_table_data($enrollment)
     {
         $data = array();
         $training = $enrollment->get_training_object();
@@ -452,7 +452,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $data;
     }
 
-    function get_enrollments()
+    public function get_enrollments()
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
                 $this->get_module_parameters());
@@ -471,7 +471,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $contract_type_enrollments;
     }
 
-    function get_contracts()
+    public function get_contracts()
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
                 $this->get_module_parameters());
@@ -496,7 +496,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -504,7 +504,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

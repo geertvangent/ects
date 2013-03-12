@@ -21,7 +21,7 @@ class DiscoveryAjaxUsersFeed extends AjaxManager
     const PROPERTY_ELEMENTS = 'elements';
     const PARAM_PUBLICATION = 'publication_id';
 
-    function required_parameters()
+    public function required_parameters()
     {
         return array(self :: PARAM_PUBLICATION);
     }
@@ -29,7 +29,7 @@ class DiscoveryAjaxUsersFeed extends AjaxManager
     /**
      * Runs this ajax component
      */
-    function run()
+    public function run()
     {
         $result = new JsonAjaxResult();
 

@@ -10,7 +10,7 @@ class DefaultModuleInstanceTableColumnModel extends ObjectTableColumnModel
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
         parent :: __construct(self :: get_default_columns(), 1);
     }

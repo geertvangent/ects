@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param int $id
      * @return \application\discovery\module\employments\Employment boolean
      */
-    function retrieve_employments($id);
+    public function retrieve_employments($id);
 }

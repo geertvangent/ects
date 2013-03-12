@@ -22,7 +22,7 @@ class GroupBrowserTableDataProvider extends ObjectTableDataProvider
      * @param RepositoryManagerComponent $browser
      * @param Condition $condition
      */
-    function __construct($browser, $condition)
+    public function __construct($browser, $condition)
     {
         parent :: __construct($browser, $condition);
     }
@@ -35,7 +35,7 @@ class GroupBrowserTableDataProvider extends ObjectTableDataProvider
      * @param string $order_property
      * @return ResultSet A set of matching learning objects.
      */
-    function get_objects($offset, $count, $order_property = null)
+    public function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
         return GroupDataManager :: get_instance()->retrieve_groups($this->get_condition(), $offset, $count,
@@ -47,7 +47,7 @@ class GroupBrowserTableDataProvider extends ObjectTableDataProvider
      *
      * @return int
      */
-    function get_object_count()
+    public function get_object_count()
     {
         return GroupDataManager :: get_instance()->count_groups($this->get_condition());
     }

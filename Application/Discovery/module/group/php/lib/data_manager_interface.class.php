@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param int $id
      * @return multitype:\application\discovery\module\group\Group
      */
-    function retrieve_groups($training_id);
+    public function retrieve_groups($training_id);
 }

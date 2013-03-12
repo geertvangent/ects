@@ -11,7 +11,7 @@ class LegendTable extends SortableTable
      */
     private static $instance;
 
-    function __construct($table_data, $default_column = 1, $default_items_per_page = 20, $tablename = 'tablename',
+    public function __construct($table_data, $default_column = 1, $default_items_per_page = 20, $tablename = 'tablename',
             $default_direction = SORT_ASC)
     {
         parent :: __construct($table_data, $default_column, $default_items_per_page, $tablename, $default_direction);
@@ -27,7 +27,7 @@ class LegendTable extends SortableTable
      *
      * @see SortableTable#get_table_data
      */
-    function get_table_data()
+    public function get_table_data()
     {
         $table_data = array();
 
@@ -47,7 +47,7 @@ class LegendTable extends SortableTable
      *
      * @return LegendTable
      */
-    static function get_instance()
+    public static function get_instance()
     {
         if (! isset(self :: $instance))
         {
@@ -61,7 +61,7 @@ class LegendTable extends SortableTable
      * @param string $symbol
      * @param string $description
      */
-    function add_symbol($symbol, $description = null, $category = null)
+    public function add_symbol($symbol, $description = null, $category = null)
     {
         $key = md5($symbol);
 

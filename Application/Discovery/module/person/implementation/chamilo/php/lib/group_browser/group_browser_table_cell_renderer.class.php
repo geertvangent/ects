@@ -19,14 +19,14 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
      *
      * @param RepositoryManagerBrowserComponent $browser
      */
-    function __construct($browser)
+    public function __construct($browser)
     {
         parent :: __construct();
         $this->browser = $browser;
     }
 
     // Inherited
-    function render_cell($column, $group)
+    public function render_cell($column, $group)
     {
         // Add special features here
         switch ($column->get_name())

@@ -11,7 +11,7 @@ class ModuleInstanceManagerRightsEditorComponent extends ModuleInstanceManager
 
     private $namespace;
 
-    function run()
+    public function run()
     {
         $this->module_instance_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
         $module_instance = DataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
@@ -19,19 +19,19 @@ class ModuleInstanceManagerRightsEditorComponent extends ModuleInstanceManager
         RightsEditorManager :: launch($this);
     }
 
-    function get_available_rights()
+    public function get_available_rights()
     {
         $namespace = $this->namespace;
         return $namespace :: get_available_rights();
     }
 
-    function get_additional_parameters()
+    public function get_additional_parameters()
     {
         $parameters[] = DiscoveryManager :: PARAM_MODULE_ID;
         return $parameters;
     }
 
-    function get_module_instance_id()
+    public function get_module_instance_id()
     {
         return $this->module_instance_id;
     }

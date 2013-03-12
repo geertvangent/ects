@@ -8,7 +8,7 @@ use group\GroupDataManager;
 class Module extends \application\discovery\module\photo\Module
 {
 
-    function get_groups()
+    public function get_groups()
     {
         $parameters = $this->get_module_parameters();
         $codes = array();
@@ -92,7 +92,7 @@ class Module extends \application\discovery\module\photo\Module
         return $groups;
     }
 
-    function get_users()
+    public function get_users()
     {
         $users = array();
         foreach ($this->get_groups() as $group)
@@ -103,7 +103,7 @@ class Module extends \application\discovery\module\photo\Module
         return array_unique($users);
     }
 
-    function get_condition()
+    public function get_condition()
     {
         return new InCondition(\user\User :: PROPERTY_ID, $this->get_users());
     }

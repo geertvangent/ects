@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param int $id
      * @return multitype:\application\discovery\module\enrollment\Enrollment
      */
-    function retrieve_enrollments($id);
+    public function retrieve_enrollments($id);
 }

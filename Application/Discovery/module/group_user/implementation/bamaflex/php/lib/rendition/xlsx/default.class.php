@@ -19,7 +19,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     private $php_excel;
 
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -42,7 +42,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 $this->get_file_name());
     }
 
-    function get_file_name()
+    public function get_file_name()
     {
         $group = DataManager :: get_instance($this->get_module_instance())->retrieve_group(
                 Module :: get_group_parameters());
@@ -51,7 +51,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 $this->get_module_instance()->get_type()) . ' ' . $group->get_year();
     }
 
-    function process_group_users()
+    public function process_group_users()
     {
         $data = array();
         $data_struck = array();
@@ -206,7 +206,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         }
     }
 
-    function get_row($group_user)
+    public function get_row($group_user)
     {
         $row = array();
         $row[] = $group_user->get_person_id();
@@ -218,7 +218,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
@@ -226,7 +226,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

@@ -32,7 +32,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_TRAJECTORY_TYPE;
         $extended_property_names[] = self :: PROPERTY_TYPE;
@@ -45,7 +45,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
@@ -55,7 +55,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return string The trajectory_part.
      */
-    function get_trajectory_type()
+    public function get_trajectory_type()
     {
         return $this->get_default_property(self :: PROPERTY_TRAJECTORY_TYPE);
     }
@@ -65,7 +65,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @param string $trajectory_part
      */
-    function set_trajectory_type($trajectory_type)
+    public function set_trajectory_type($trajectory_type)
     {
         $this->set_default_property(self :: PROPERTY_TRAJECTORY_TYPE, $trajectory_type);
     }
@@ -74,7 +74,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return string
      */
-    function get_trajectory_type_string()
+    public function get_trajectory_type_string()
     {
         switch ($this->get_trajectory_type())
         {
@@ -99,7 +99,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return int The type.
      */
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
@@ -109,7 +109,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @param int $type
      */
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
@@ -118,7 +118,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return string
      */
-    function get_type_string()
+    public function get_type_string()
     {
         return self :: type_string($this->get_type());
     }
@@ -127,7 +127,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return string
      */
-    static function type_string($type)
+    public static function type_string($type)
     {
         switch ($type)
         {
@@ -144,7 +144,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return multitype:string
      */
-    static function get_types()
+    public static function get_types()
     {
         return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS);
     }
@@ -153,7 +153,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return boolean
      */
-    function is_special_type()
+    public function is_special_type()
     {
         return ($this->get_type() != self :: TYPE_NORMAL);
     }
@@ -162,7 +162,7 @@ class CourseResult extends \application\discovery\module\course_results\CourseRe
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

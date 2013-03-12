@@ -8,7 +8,7 @@ class Module extends \application\discovery\module\advice\Module
 
     private $cache_advices = array();
 
-    function get_advices_data($enrollment)
+    public function get_advices_data($enrollment)
     {
         if (! isset($this->cache_advices[$enrollment->get_id()]))
         {
@@ -26,7 +26,7 @@ class Module extends \application\discovery\module\advice\Module
         return $this->cache_advices[$enrollment->get_id()];
     }
 
-    function has_advices($enrollment = null)
+    public function has_advices($enrollment = null)
     {
         if ($enrollment)
         {

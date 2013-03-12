@@ -81,7 +81,7 @@ class EmploymentParts extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_ASSIGNMENT_ID;
         $extended_property_names[] = self :: PROPERTY_HOURS;
@@ -104,7 +104,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -114,7 +114,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return integer The assignment_id.
      */
-    function get_assignment_id()
+    public function get_assignment_id()
     {
         return $this->get_default_property(self :: PROPERTY_ASSIGNMENT_ID);
     }
@@ -124,7 +124,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param integer $assignment_id
      */
-    function set_assignment_id($assignment_id)
+    public function set_assignment_id($assignment_id)
     {
         $this->set_default_property(self :: PROPERTY_ASSIGNMENT_ID, $assignment_id);
     }
@@ -134,7 +134,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The hours.
      */
-    function get_hours()
+    public function get_hours()
     {
         return $this->get_default_property(self :: PROPERTY_HOURS);
     }
@@ -144,7 +144,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param string $hours
      */
-    function set_hours($hours)
+    public function set_hours($hours)
     {
         $this->set_default_property(self :: PROPERTY_HOURS, $hours);
     }
@@ -154,7 +154,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The start_date.
      */
-    function get_start_date()
+    public function get_start_date()
     {
         return $this->get_default_property(self :: PROPERTY_START_DATE);
     }
@@ -164,7 +164,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param string $start_date
      */
-    function set_start_date($start_date)
+    public function set_start_date($start_date)
     {
         $this->set_default_property(self :: PROPERTY_START_DATE, $start_date);
     }
@@ -174,7 +174,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The end_date.
      */
-    function get_end_date()
+    public function get_end_date()
     {
         return $this->get_default_property(self :: PROPERTY_END_DATE);
     }
@@ -184,7 +184,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param string $end_date
      */
-    function set_end_date($end_date)
+    public function set_end_date($end_date)
     {
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
     }
@@ -194,7 +194,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The assignment_volume.
      */
-    function get_assignment_volume()
+    public function get_assignment_volume()
     {
         return $this->get_default_property(self :: PROPERTY_ASSIGNMENT_VOLUME);
     }
@@ -204,7 +204,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param string $assignment_volume
      */
-    function set_assignment_volume($assignment_volume)
+    public function set_assignment_volume($assignment_volume)
     {
         $this->set_default_property(self :: PROPERTY_ASSIGNMENT_VOLUME, $assignment_volume);
     }
@@ -214,7 +214,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The volume.
      */
-    function get_volume()
+    public function get_volume()
     {
         return $this->get_default_property(self :: PROPERTY_VOLUME);
     }
@@ -224,7 +224,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param string $volume
      */
-    function set_volume($volume)
+    public function set_volume($volume)
     {
         $this->set_default_property(self :: PROPERTY_VOLUME, $volume);
     }
@@ -234,7 +234,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return integer The faculty_id.
      */
-    function get_faculty_id()
+    public function get_faculty_id()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY_ID);
     }
@@ -244,7 +244,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param integer $faculty_id
      */
-    function set_faculty_id($faculty_id)
+    public function set_faculty_id($faculty_id)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
     }
@@ -254,7 +254,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The faculty.
      */
-    function get_faculty()
+    public function get_faculty()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY);
     }
@@ -264,7 +264,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param string $faculty
      */
-    function set_faculty($faculty)
+    public function set_faculty($faculty)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY, $faculty);
     }
@@ -274,7 +274,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return integer The training_id.
      */
-    function get_training_id()
+    public function get_training_id()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
     }
@@ -284,7 +284,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param integer $training_id
      */
-    function set_training_id($training_id)
+    public function set_training_id($training_id)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
     }
@@ -294,7 +294,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The training.
      */
-    function get_training()
+    public function get_training()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING);
     }
@@ -304,7 +304,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param string $training
      */
-    function set_training($training)
+    public function set_training($training)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING, $training);
     }
@@ -314,7 +314,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The department.
      */
-    function get_department()
+    public function get_department()
     {
         return $this->get_default_property(self :: PROPERTY_DEPARTMENT);
     }
@@ -324,7 +324,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param string $department
      */
-    function set_department($department)
+    public function set_department($department)
     {
         $this->set_default_property(self :: PROPERTY_DEPARTMENT, $department);
     }
@@ -334,7 +334,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return integer The department_id.
      */
-    function get_department_id()
+    public function get_department_id()
     {
         return $this->get_default_property(self :: PROPERTY_DEPARTMENT_ID);
     }
@@ -344,7 +344,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @param integer $department_id
      */
-    function set_department_id($department_id)
+    public function set_department_id($department_id)
     {
         $this->set_default_property(self :: PROPERTY_DEPARTMENT_ID, $department_id);
     }
@@ -353,7 +353,7 @@ class EmploymentParts extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

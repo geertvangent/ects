@@ -11,32 +11,32 @@ class FollowingImpossible extends DiscoveryItem
     const PROPERTY_EXAM_DEGREE = 'exam_degree';
     const PROPERTY_EXAM_CREDIT = 'exam_credit';
 
-    function get_credit()
+    public function get_credit()
     {
         return $this->get_default_property(self :: PROPERTY_CREDIT);
     }
 
-    function set_credit($credit)
+    public function set_credit($credit)
     {
         $this->set_default_property(self :: PROPERTY_CREDIT, $credit);
     }
 
-    function get_exam_degree()
+    public function get_exam_degree()
     {
         return $this->get_default_property(self :: PROPERTY_EXAM_DEGREE);
     }
 
-    function set_exam_degree($exam_degree)
+    public function set_exam_degree($exam_degree)
     {
         $this->set_default_property(self :: PROPERTY_EXAM_DEGREE, $exam_degree);
     }
 
-    function get_exam_credit()
+    public function get_exam_credit()
     {
         return $this->get_default_property(self :: PROPERTY_EXAM_CREDIT);
     }
 
-    function set_exam_credit($exam_credit)
+    public function set_exam_credit($exam_credit)
     {
         $this->set_default_property(self :: PROPERTY_EXAM_CREDIT, $exam_credit);
     }
@@ -45,7 +45,7 @@ class FollowingImpossible extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_CREDIT;
         $extended_property_names[] = self :: PROPERTY_EXAM_DEGREE;
@@ -58,7 +58,7 @@ class FollowingImpossible extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
@@ -67,7 +67,7 @@ class FollowingImpossible extends DiscoveryItem
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         $string[] = $this->get_type();

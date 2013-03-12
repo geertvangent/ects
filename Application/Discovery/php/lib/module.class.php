@@ -35,7 +35,7 @@ class Module
      * @param $application Application
      * @param $module_instance ModuleInstance
      */
-    function __construct(Application $application, ModuleInstance $module_instance)
+    public function __construct(Application $application, ModuleInstance $module_instance)
     {
         $this->application = $application;
         $this->module_instance = $module_instance;
@@ -47,7 +47,7 @@ class Module
      * @param $module_instance ModuleInstance
      * @return Module
      */
-    static public function factory(Application $application, ModuleInstance $module_instance)
+    public static function factory(Application $application, ModuleInstance $module_instance)
     {
         $class = $module_instance->get_type() . '\\Module';
         
@@ -58,7 +58,7 @@ class Module
      *
      * @return string
      */
-    function render()
+    public function render()
     {
         return '';
     }
@@ -67,7 +67,7 @@ class Module
      *
      * @return \application\discovery\ModuleInstance
      */
-    function get_module_instance()
+    public function get_module_instance()
     {
         return $this->module_instance;
     }
@@ -76,12 +76,12 @@ class Module
      *
      * @return \application\discovery\Application
      */
-    function get_application()
+    public function get_application()
     {
         return $this->application;
     }
 
-    static function exists($type, $settings)
+    public static function exists($type, $settings)
     {
         $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_TYPE, $type);
         $conditions[] = new NotCondition(
@@ -99,7 +99,7 @@ class Module
         return false;
     }
 
-    function get_instance_url($instance_id, $instance_parameters)
+    public function get_instance_url($instance_id, $instance_parameters)
     {
         $parameters = array();
         $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $instance_id;
@@ -110,7 +110,7 @@ class Module
         return $this->get_application()->get_url($parameters);
     }
 
-    function get_rights_url($instance_id, $instance_parameters)
+    public function get_rights_url($instance_id, $instance_parameters)
     {
         $parameters = array();
         $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $instance_id;
@@ -122,12 +122,12 @@ class Module
         return $this->get_application()->get_url($parameters);
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         return array();
     }
 
-    static function get_available_types()
+    public static function get_available_types()
     {
         $types = array();
         
@@ -144,7 +144,7 @@ class Module
         return $types;
     }
 
-    function get_packages_from_filesystem()
+    public function get_packages_from_filesystem()
     {
         $types = array();
         
@@ -159,7 +159,7 @@ class Module
         return $types;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_DISABLED;
     }
@@ -171,7 +171,7 @@ class Module
      * @param $user user\User
      * @return \common\libraries\ToolbarItem NULL
      */
-    function get_module_link($type, $user_id)
+    public function get_module_link($type, $user_id)
     {
         $module_instance = \application\discovery\Module :: exists($type);
         
@@ -222,12 +222,12 @@ class Module
         return null;
     }
 
-    function has_data($module_parameters)
+    public function has_data($module_parameters)
     {
         return true;
     }
 
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataConnector :: get_instance($this->get_module_instance());
     }

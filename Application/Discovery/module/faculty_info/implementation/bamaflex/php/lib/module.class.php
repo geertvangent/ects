@@ -7,12 +7,12 @@ class Module extends \application\discovery\module\faculty_info\Module
 {
     const PARAM_SOURCE = 'source';
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return self :: module_parameters();
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $faculty = Request :: get(self :: PARAM_FACULTY_ID);
         $source = Request :: get(self :: PARAM_SOURCE);

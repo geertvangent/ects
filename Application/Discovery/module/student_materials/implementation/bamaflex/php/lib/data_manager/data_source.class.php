@@ -30,7 +30,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:string
      */
-    function retrieve_years($parameters)
+    public function retrieve_years($parameters)
     {
         $id = $parameters->get_user_id();
         if (! isset($this->years[$id]))
@@ -63,7 +63,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Enrollment
      */
-    function retrieve_enrollments($parameters)
+    public function retrieve_enrollments($parameters)
     {
         $id = $parameters->get_user_id();
         
@@ -110,7 +110,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $user_id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Course
      */
-    function retrieve_courses($enrollment_id)
+    public function retrieve_courses($enrollment_id)
     {
         if (! isset($this->courses[$enrollment_id]))
         {
@@ -176,7 +176,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->child_courses[$enrollment_id];
     }
 
-    function result_to_course($result)
+    public function result_to_course($result)
     {
         $course = new Course();
         $course->set_id($result->id);
@@ -198,7 +198,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\MaterialStructured
      */
-    function retrieve_materials($programme_id, $type)
+    public function retrieve_materials($programme_id, $type)
     {
         if (! isset($this->materials[$programme_id][$type]))
         {
@@ -241,7 +241,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->materials[$programme_id][$type];
     }
 
-    function count_materials($parameters = null, $year = null, $enrollment_id = null, $type = null)
+    public function count_materials($parameters = null, $year = null, $enrollment_id = null, $type = null)
     {
         $id = $parameters->get_user_id();
         

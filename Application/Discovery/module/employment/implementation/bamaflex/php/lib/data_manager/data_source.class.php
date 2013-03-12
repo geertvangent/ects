@@ -20,7 +20,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return \application\discovery\module\employment\implementation\bamaflex\Employment boolean
      */
-    function retrieve_employments($parameters)
+    public function retrieve_employments($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         
@@ -83,7 +83,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function count_employments($parameters)
+    public function count_employments($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         
@@ -109,7 +109,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_employment_parts($employment_id)
+    public function retrieve_employment_parts($employment_id)
     {
         $condition = new EqualityCondition('assignment_id', '"' . $employment_id . '"');
         $translator = DoctrineConditionTranslator :: factory($this);

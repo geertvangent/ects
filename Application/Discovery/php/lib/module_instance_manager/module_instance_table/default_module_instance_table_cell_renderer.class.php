@@ -10,11 +10,11 @@ use common\libraries\Theme;
 class DefaultModuleInstanceTableCellRenderer extends ObjectTableCellRenderer
 {
 
-    function __construct()
+    public function __construct()
     {
     }
 
-    function render_cell($column, $module_instance)
+    public function render_cell($column, $module_instance)
     {
         switch ($column->get_name())
         {
@@ -35,7 +35,7 @@ class DefaultModuleInstanceTableCellRenderer extends ObjectTableCellRenderer
         }
     }
 
-    function render_id_cell($object)
+    public function render_id_cell($object)
     {
         return $object->get_id();
     }

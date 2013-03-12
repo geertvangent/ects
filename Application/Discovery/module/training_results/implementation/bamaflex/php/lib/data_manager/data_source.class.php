@@ -24,7 +24,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $programme_id
      * @return multitype:\application\discovery\module\course_result\implementation\bamaflex\CourseResult
      */
-    function retrieve_training_results($training_results_parameters)
+    public function retrieve_training_results($training_results_parameters)
     {
         $training_id = $training_results_parameters->get_training_id();
         $source = $training_results_parameters->get_source();
@@ -73,7 +73,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->training_results[$training_id][$source];
     }
 
-    function retrieve_training($training_parameters)
+    public function retrieve_training($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -182,7 +182,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->trainings[$training_id][$source];
     }
 
-    function retrieve_training_next_id($training)
+    public function retrieve_training_next_id($training)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');

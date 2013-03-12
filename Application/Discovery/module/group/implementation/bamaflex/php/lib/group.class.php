@@ -56,7 +56,7 @@ class Group extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
@@ -74,7 +74,7 @@ class Group extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
@@ -84,7 +84,7 @@ class Group extends DiscoveryItem
      *
      * @return integer The training_id.
      */
-    function get_training_id()
+    public function get_training_id()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
     }
@@ -94,7 +94,7 @@ class Group extends DiscoveryItem
      *
      * @param integer $training_id
      */
-    function set_training_id($training_id)
+    public function set_training_id($training_id)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
     }
@@ -104,7 +104,7 @@ class Group extends DiscoveryItem
      *
      * @return string The year.
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -114,7 +114,7 @@ class Group extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -124,7 +124,7 @@ class Group extends DiscoveryItem
      *
      * @return string The code.
      */
-    function get_code()
+    public function get_code()
     {
         return $this->get_default_property(self :: PROPERTY_CODE);
     }
@@ -134,7 +134,7 @@ class Group extends DiscoveryItem
      *
      * @param string $code
      */
-    function set_code($code)
+    public function set_code($code)
     {
         $this->set_default_property(self :: PROPERTY_CODE, $code);
     }
@@ -144,7 +144,7 @@ class Group extends DiscoveryItem
      *
      * @return string The description.
      */
-    function get_description()
+    public function get_description()
     {
         return $this->get_default_property(self :: PROPERTY_DESCRIPTION);
     }
@@ -154,7 +154,7 @@ class Group extends DiscoveryItem
      *
      * @param string $description
      */
-    function set_description($description)
+    public function set_description($description)
     {
         $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
     }
@@ -164,7 +164,7 @@ class Group extends DiscoveryItem
      *
      * @return integer The type.
      */
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
@@ -174,7 +174,7 @@ class Group extends DiscoveryItem
      *
      * @param integer $type
      */
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
@@ -184,7 +184,7 @@ class Group extends DiscoveryItem
      *
      * @return integer The type_id.
      */
-    function get_type_id()
+    public function get_type_id()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE_ID);
     }
@@ -194,17 +194,17 @@ class Group extends DiscoveryItem
      *
      * @param integer $type_id
      */
-    function set_type_id($type_id)
+    public function set_type_id($type_id)
     {
         $this->set_default_property(self :: PROPERTY_TYPE_ID, $type_id);
     }
 
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
 
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
@@ -213,7 +213,7 @@ class Group extends DiscoveryItem
      *
      * @return string
      */
-    function get_type_string()
+    public function get_type_string()
     {
         return self :: type_string($this->get_type());
     }
@@ -222,7 +222,7 @@ class Group extends DiscoveryItem
      *
      * @return string
      */
-    static function type_string($type)
+    public static function type_string($type)
     {
         switch ($type)
         {
@@ -246,7 +246,7 @@ class Group extends DiscoveryItem
      * @param boolean $types_only
      * @return multitype:integer multitype:string
      */
-    static function get_type_types($types_only = false)
+    public static function get_type_types($types_only = false)
     {
         $types = array();
 
@@ -262,7 +262,7 @@ class Group extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

@@ -9,7 +9,7 @@ use common\libraries\BreadcrumbTrail;
 class DiscoveryManagerModuleComponent extends DiscoveryManager
 {
 
-    function run()
+    public function run()
     {
         $module_parameters = array();
         $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;

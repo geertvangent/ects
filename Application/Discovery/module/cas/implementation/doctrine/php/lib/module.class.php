@@ -10,7 +10,7 @@ class Module extends \application\discovery\module\cas\Module
 
     private $action_statistics;
 
-    function get_action_statistics($action)
+    public function get_action_statistics($action)
     {
         if (! isset($this->action_statistics))
         {

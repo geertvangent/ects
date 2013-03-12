@@ -9,5 +9,5 @@ namespace application\discovery\module\training;
 interface DataManagerInterface
 {
 
-    function retrieve_trainings($year);
+    public function retrieve_trainings($year);
 }

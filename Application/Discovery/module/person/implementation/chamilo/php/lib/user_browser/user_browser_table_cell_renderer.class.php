@@ -18,7 +18,7 @@ class UserBrowserTableCellRenderer extends NewObjectTableCellRenderer implements
         NewObjectTableCellRendererActionsColumnSupport
 {
 
-    function get_object_actions($user)
+    public function get_object_actions($user)
     {
         $toolbar = new Toolbar();
 

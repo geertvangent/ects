@@ -21,7 +21,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return \application\discovery\module\profile\implementation\bamaflex\Profile boolean
      */
-    function retrieve_profile($parameters)
+    public function retrieve_profile($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();
@@ -83,7 +83,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function has_profile($parameters)
+    public function has_profile($parameters)
     {
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();

@@ -12,7 +12,7 @@ use common\libraries\Request;
 class Module extends \application\discovery\module\person\Module
 {
 
-    function get_group()
+    public function get_group()
     {
         if (! $this->group)
         {
@@ -27,7 +27,7 @@ class Module extends \application\discovery\module\person\Module
         return $this->group;
     }
 
-    function get_root_group()
+    public function get_root_group()
     {
         if (! $this->root_group)
         {
@@ -39,7 +39,7 @@ class Module extends \application\discovery\module\person\Module
         return $this->root_group;
     }
 
-    function get_subgroups_condition($query = null)
+    public function get_subgroups_condition($query = null)
     {
         if (isset($query) && $query != '')
         {
@@ -57,7 +57,7 @@ class Module extends \application\discovery\module\person\Module
         return $condition;
     }
 
-    function get_users_condition($query = null)
+    public function get_users_condition($query = null)
     {
         if (isset($query) && $query != '')
         {
@@ -69,7 +69,7 @@ class Module extends \application\discovery\module\person\Module
         }
     }
 
-    static function query_to_condition($query)
+    public static function query_to_condition($query)
     {
         $queries = Utilities :: split_query($query);
 
@@ -94,7 +94,7 @@ class Module extends \application\discovery\module\person\Module
         return new AndCondition($conditions);
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         return new Parameters();
     }

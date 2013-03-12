@@ -31,7 +31,7 @@ class Mark extends \application\discovery\module\career\Mark
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SUB_STATUS;
         $extended_property_names[] = self :: PROPERTY_PUBLISH_STATUS;
@@ -45,7 +45,7 @@ class Mark extends \application\discovery\module\career\Mark
      *
      * @return string The sub_status.
      */
-    function get_sub_status()
+    public function get_sub_status()
     {
         return $this->get_default_property(self :: PROPERTY_SUB_STATUS);
     }
@@ -55,17 +55,17 @@ class Mark extends \application\discovery\module\career\Mark
      *
      * @param string $sub_status
      */
-    function set_sub_status($sub_status)
+    public function set_sub_status($sub_status)
     {
         $this->set_default_property(self :: PROPERTY_SUB_STATUS, $sub_status);
     }
 
-    function get_publish_status()
+    public function get_publish_status()
     {
         return $this->get_default_property(self :: PROPERTY_PUBLISH_STATUS);
     }
 
-    function set_publish_status($publish_status)
+    public function set_publish_status($publish_status)
     {
         $this->set_default_property(self :: PROPERTY_PUBLISH_STATUS, $publish_status);
     }
@@ -74,7 +74,7 @@ class Mark extends \application\discovery\module\career\Mark
      *
      * @return string
      */
-    function get_status_string()
+    public function get_status_string()
     {
         return self :: status_string($this->get_status());
     }
@@ -83,7 +83,7 @@ class Mark extends \application\discovery\module\career\Mark
      *
      * @return string
      */
-    static function status_string($status)
+    public static function status_string($status)
     {
         $prefix = 'MarkStatus';
 
@@ -122,7 +122,7 @@ class Mark extends \application\discovery\module\career\Mark
         }
     }
 
-    function is_credit()
+    public function is_credit()
     {
         if (in_array($this->get_status(),
                 array(self :: STATUS_EXEMPTION, self :: STATUS_CREDIT, self :: STATUS_DELIBERATED,
@@ -136,22 +136,22 @@ class Mark extends \application\discovery\module\career\Mark
         }
     }
 
-    function get_abandoned()
+    public function get_abandoned()
     {
         return $this->get_default_property(self :: PROPERTY_ABANDONED);
     }
 
-    function set_abandoned($abandoned)
+    public function set_abandoned($abandoned)
     {
         $this->set_default_property(self :: PROPERTY_ABANDONED, $abandoned);
     }
 
-    function is_abandoned()
+    public function is_abandoned()
     {
         return $this->get_abandoned() == self :: ABANDONED_YES;
     }
 
-    static function factory($moment_id = 0, $result = null, $status = null, $sub_status = null)
+    public static function factory($moment_id = 0, $result = null, $status = null, $sub_status = null)
     {
         $mark = new self();
         $mark->set_moment($moment_id);

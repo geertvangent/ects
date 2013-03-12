@@ -54,7 +54,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @return int
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -63,82 +63,82 @@ class Training extends \application\discovery\module\training\Training
      *
      * @param int $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
 
-    function get_credits()
+    public function get_credits()
     {
         return $this->get_default_property(self :: PROPERTY_CREDITS);
     }
 
-    function set_credits($credits)
+    public function set_credits($credits)
     {
         $this->set_default_property(self :: PROPERTY_CREDITS, $credits);
     }
 
-    function get_domain_id()
+    public function get_domain_id()
     {
         return $this->get_default_property(self :: PROPERTY_DOMAIN_ID);
     }
 
-    function set_domain_id($domain_id)
+    public function set_domain_id($domain_id)
     {
         $this->set_default_property(self :: PROPERTY_DOMAIN_ID, $domain_id);
     }
 
-    function get_domain()
+    public function get_domain()
     {
         return $this->get_default_property(self :: PROPERTY_DOMAIN);
     }
 
-    function set_domain($domain)
+    public function set_domain($domain)
     {
         $this->set_default_property(self :: PROPERTY_DOMAIN, $domain);
     }
 
-    function get_goals()
+    public function get_goals()
     {
         return $this->get_default_property(self :: PROPERTY_GOALS);
     }
 
-    function set_goals($goals)
+    public function set_goals($goals)
     {
         $this->set_default_property(self :: PROPERTY_GOALS, $goals);
     }
 
-    function get_type_id()
+    public function get_type_id()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE_ID);
     }
 
-    function set_type_id($type_id)
+    public function set_type_id($type_id)
     {
         $this->set_default_property(self :: PROPERTY_TYPE_ID, $type_id);
     }
 
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
 
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
 
-    function get_bama_type()
+    public function get_bama_type()
     {
         return $this->get_default_property(self :: PROPERTY_BAMA_TYPE);
     }
 
-    function set_bama_type($bama_type)
+    public function set_bama_type($bama_type)
     {
         $this->set_default_property(self :: PROPERTY_BAMA_TYPE, $bama_type);
     }
 
-    function get_bama_type_string()
+    public function get_bama_type_string()
     {
         return self :: bama_type_string($this->get_bama_type());
     }
@@ -149,7 +149,7 @@ class Training extends \application\discovery\module\training\Training
      */
     static 
 
-    function bama_type_string($bama_type)
+    public function bama_type_string($bama_type)
     {
         switch ($bama_type)
         {
@@ -171,72 +171,72 @@ class Training extends \application\discovery\module\training\Training
         }
     }
 
-    function get_faculty_id()
+    public function get_faculty_id()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY_ID);
     }
 
-    function set_faculty_id($faculty_id)
+    public function set_faculty_id($faculty_id)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
     }
 
-    function get_faculty()
+    public function get_faculty()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY);
     }
 
-    function set_faculty($faculty)
+    public function set_faculty($faculty)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY, $faculty);
     }
 
-    function get_start_date()
+    public function get_start_date()
     {
         return $this->get_default_property(self :: PROPERTY_START_DATE);
     }
 
-    function set_start_date($start_date)
+    public function set_start_date($start_date)
     {
         $this->set_default_property(self :: PROPERTY_START_DATE, $start_date);
     }
 
-    function get_end_date()
+    public function get_end_date()
     {
         return $this->get_default_property(self :: PROPERTY_END_DATE);
     }
 
-    function set_end_date($end_date)
+    public function set_end_date($end_date)
     {
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
     }
 
-    function get_majors()
+    public function get_majors()
     {
         return $this->majors;
     }
 
-    function set_majors($majors)
+    public function set_majors($majors)
     {
         $this->majors = $majors;
     }
 
-    function has_majors()
+    public function has_majors()
     {
         return count($this->majors) > 0;
     }
 
-    function add_major($major)
+    public function add_major($major)
     {
         $this->majors[] = $major;
     }
 
-    function get_languages()
+    public function get_languages()
     {
         return $this->languages;
     }
 
-    function get_languages_string()
+    public function get_languages_string()
     {
         $languages = array();
         foreach ($this->get_languages() as $language)
@@ -246,127 +246,127 @@ class Training extends \application\discovery\module\training\Training
         return implode(',', $languages);
     }
 
-    function set_languages($languages)
+    public function set_languages($languages)
     {
         $this->languages = $languages;
     }
 
-    function has_languages()
+    public function has_languages()
     {
         return count($this->languages) > 0;
     }
 
-    function add_language($language)
+    public function add_language($language)
     {
         $this->languages[] = $language;
     }
 
-    function get_packages()
+    public function get_packages()
     {
         return $this->packages;
     }
 
-    function set_packages($packages)
+    public function set_packages($packages)
     {
         $this->packages = $packages;
     }
 
-    function has_packages()
+    public function has_packages()
     {
         return count($this->packages) > 0;
     }
 
-    function add_package($package)
+    public function add_package($package)
     {
         $this->packages[] = $package;
     }
 
-    function get_courses()
+    public function get_courses()
     {
         return $this->courses;
     }
 
-    function set_courses($courses)
+    public function set_courses($courses)
     {
         $this->courses = $courses;
     }
 
-    function has_courses()
+    public function has_courses()
     {
         return count($this->courses) > 0;
     }
 
-    function add_course($course)
+    public function add_course($course)
     {
         $this->courses[] = $course;
     }
 
-    function get_choices()
+    public function get_choices()
     {
         return $this->choices;
     }
 
-    function set_choices($choices)
+    public function set_choices($choices)
     {
         $this->choices = $choices;
     }
 
-    function has_choices()
+    public function has_choices()
     {
         return count($this->choices) > 0;
     }
 
-    function add_choice($choice)
+    public function add_choice($choice)
     {
         $this->choices[] = $choice;
     }
 
-    function get_choice_options()
+    public function get_choice_options()
     {
         return $this->choice_options;
     }
 
-    function set_choice_options($choice_options)
+    public function set_choice_options($choice_options)
     {
         $this->choice_options = $choice_options;
     }
 
-    function has_choice_options()
+    public function has_choice_options()
     {
         return count($this->choice_options) > 0;
     }
 
-    function add_choice_option($choice_option)
+    public function add_choice_option($choice_option)
     {
         $this->choice_options[] = $choice_option;
     }
 
-    function get_trajectories()
+    public function get_trajectories()
     {
         return $this->trajectories;
     }
 
-    function set_trajectories($trajectories)
+    public function set_trajectories($trajectories)
     {
         $this->trajectories = $trajectories;
     }
 
-    function has_trajectories()
+    public function has_trajectories()
     {
         return count($this->trajectories) > 0;
     }
 
-    function add_trajectory($trajectory)
+    public function add_trajectory($trajectory)
     {
         $this->trajectories[] = $trajectory;
     }
 
-    function has_options()
+    public function has_options()
     {
         return $this->has_choice_options() || $this->has_choices() || $this->has_majors() || $this->has_packages();
     }
 
-    function has_major_choices()
+    public function has_major_choices()
     {
         foreach ($this->get_majors() as $major)
         {
@@ -378,22 +378,22 @@ class Training extends \application\discovery\module\training\Training
         return false;
     }
 
-    function get_groups()
+    public function get_groups()
     {
         return $this->groups;
     }
 
-    function set_groups($groups)
+    public function set_groups($groups)
     {
         $this->groups = $groups;
     }
 
-    function has_groups()
+    public function has_groups()
     {
         return count($this->groups) > 0;
     }
 
-    function add_group($group)
+    public function add_group($group)
     {
         $this->groups[] = $group;
     }
@@ -404,7 +404,7 @@ class Training extends \application\discovery\module\training\Training
      */
     static 
 
-    function get_default_property_names($extended_property_names = array())
+    public function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_CREDITS;
@@ -428,12 +428,12 @@ class Training extends \application\discovery\module\training\Training
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
 
-    function is_current()
+    public function is_current()
     {
         $current_date = time();
         $start_date = strtotime($this->get_start_date());
@@ -455,7 +455,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $recursive boolean
      * @return multitype:string:Training
      */
-    function get_previous($module_instance, $recursive = true)
+    public function get_previous($module_instance, $recursive = true)
     {
         $trainings = array();
         if ($this->has_previous_references())
@@ -487,7 +487,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $recursive boolean
      * @return multitype:string:Training
      */
-    function get_next($module_instance, $recursive = true)
+    public function get_next($module_instance, $recursive = true)
     {
         $trainings = array();
         
@@ -520,7 +520,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $module_instance ModuleInstance
      * @return multitype:string:Faculty
      */
-    function get_all($module_instance)
+    public function get_all($module_instance)
     {
         $trainings = $this->get_next($module_instance);
         $trainings[$this->get_year()][] = $this;
@@ -535,7 +535,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @return multitype:HistoryReference
      */
-    function get_previous_references()
+    public function get_previous_references()
     {
         return $this->get_references(self :: REFERENCE_PREVIOUS);
     }
@@ -544,7 +544,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @param $previous_references multitype:HistoryReference
      */
-    function set_previous_references($previous_references)
+    public function set_previous_references($previous_references)
     {
         $this->set_references($previous_references, self :: REFERENCE_PREVIOUS);
     }
@@ -554,7 +554,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $single integer
      * @return boolean
      */
-    function has_previous_references($single = false)
+    public function has_previous_references($single = false)
     {
         return $this->has_references(self :: REFERENCE_PREVIOUS, $single);
     }
@@ -563,7 +563,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @param $previous_reference HistoryReference
      */
-    function add_previous_reference(HistoryReference $previous_reference)
+    public function add_previous_reference(HistoryReference $previous_reference)
     {
         $this->add_reference($previous_reference, self :: REFERENCE_PREVIOUS);
     }
@@ -572,7 +572,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @return multitype:HistoryReference
      */
-    function get_next_references()
+    public function get_next_references()
     {
         return $this->get_references(self :: REFERENCE_NEXT);
     }
@@ -581,7 +581,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @param $next_references multitype:HistoryReference
      */
-    function set_next_references($next_references)
+    public function set_next_references($next_references)
     {
         $this->set_references($next_references, self :: REFERENCE_NEXT);
     }
@@ -591,7 +591,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $single boolean
      * @return boolean
      */
-    function has_next_references($single = false)
+    public function has_next_references($single = false)
     {
         return $this->has_references(self :: REFERENCE_NEXT, $single);
     }
@@ -600,7 +600,7 @@ class Training extends \application\discovery\module\training\Training
      *
      * @param $next_reference HistoryReference
      */
-    function add_next_reference(HistoryReference $next_reference)
+    public function add_next_reference(HistoryReference $next_reference)
     {
         $this->add_reference($next_reference, self :: REFERENCE_NEXT);
     }
@@ -610,7 +610,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $type integer
      * @return multitype:HistoryReference
      */
-    function get_references($type)
+    public function get_references($type)
     {
         return $this->references[$type];
     }
@@ -620,7 +620,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $references multitype:HistoryReference
      * @param $type integer
      */
-    function set_references($references, $type)
+    public function set_references($references, $type)
     {
         $this->references[$type] = $references;
     }
@@ -631,7 +631,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $single boolean
      * @return boolean
      */
-    function has_references($type, $single = false)
+    public function has_references($type, $single = false)
     {
         return $single ? (count($this->references[$type]) == 1) : (count($this->references[$type]) > 0);
     }
@@ -641,7 +641,7 @@ class Training extends \application\discovery\module\training\Training
      * @param $reference HistoryReference
      * @param $type integer
      */
-    function add_reference(HistoryReference $reference, $type)
+    public function add_reference(HistoryReference $reference, $type)
     {
         $this->references[$type][] = $reference;
     }

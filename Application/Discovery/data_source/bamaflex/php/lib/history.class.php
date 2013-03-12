@@ -28,7 +28,7 @@ class History extends DataClass
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_HISTORY_ID;
         $extended_property_names[] = self :: PROPERTY_HISTORY_SOURCE;
@@ -44,7 +44,7 @@ class History extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -54,7 +54,7 @@ class History extends DataClass
      *
      * @return int The history_id.
      */
-    function get_history_id()
+    public function get_history_id()
     {
         return $this->get_default_property(self :: PROPERTY_HISTORY_ID);
     }
@@ -64,7 +64,7 @@ class History extends DataClass
      *
      * @param int $history_id
      */
-    function set_history_id($history_id)
+    public function set_history_id($history_id)
     {
         $this->set_default_property(self :: PROPERTY_HISTORY_ID, $history_id);
     }
@@ -74,7 +74,7 @@ class History extends DataClass
      *
      * @return int The history_source.
      */
-    function get_history_source()
+    public function get_history_source()
     {
         return $this->get_default_property(self :: PROPERTY_HISTORY_SOURCE);
     }
@@ -84,7 +84,7 @@ class History extends DataClass
      *
      * @param int $history_source
      */
-    function set_history_source($history_source)
+    public function set_history_source($history_source)
     {
         $this->set_default_property(self :: PROPERTY_HISTORY_SOURCE, $history_source);
     }
@@ -94,7 +94,7 @@ class History extends DataClass
      *
      * @return int The previous_id.
      */
-    function get_previous_id()
+    public function get_previous_id()
     {
         return $this->get_default_property(self :: PROPERTY_PREVIOUS_ID);
     }
@@ -104,7 +104,7 @@ class History extends DataClass
      *
      * @param int $previous_id
      */
-    function set_previous_id($previous_id)
+    public function set_previous_id($previous_id)
     {
         $this->set_default_property(self :: PROPERTY_PREVIOUS_ID, $previous_id);
     }
@@ -114,7 +114,7 @@ class History extends DataClass
      *
      * @return int The previous_source.
      */
-    function get_previous_source()
+    public function get_previous_source()
     {
         return $this->get_default_property(self :: PROPERTY_PREVIOUS_SOURCE);
     }
@@ -124,7 +124,7 @@ class History extends DataClass
      *
      * @param int $previous_source
      */
-    function set_previous_source($previous_source)
+    public function set_previous_source($previous_source)
     {
         $this->set_default_property(self :: PROPERTY_PREVIOUS_SOURCE, $previous_source);
     }
@@ -134,7 +134,7 @@ class History extends DataClass
      *
      * @return string The type.
      */
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
@@ -144,7 +144,7 @@ class History extends DataClass
      *
      * @param string $type
      */
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
@@ -153,7 +153,7 @@ class History extends DataClass
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

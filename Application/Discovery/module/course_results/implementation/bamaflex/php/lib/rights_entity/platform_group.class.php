@@ -43,7 +43,7 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
 
     private static $instance;
 
-    static function get_instance($publication_id)
+    public static function get_instance($publication_id)
     {
         if (! isset(self :: $instance))
         {
@@ -52,7 +52,7 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
         return self :: $instance;
     }
 
-    function __construct($publication_id, $subscribed_platform_group_ids = array(), $limited_groups = array(),
+    public function __construct($publication_id, $subscribed_platform_group_ids = array(), $limited_groups = array(),
             $excluded_groups = array())
     {
         $this->publication_id = $publication_id;
@@ -74,12 +74,12 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
         $this->excluded_groups = $excluded_groups;
     }
 
-    function get_subscribed_platform_group_ids()
+    public function get_subscribed_platform_group_ids()
     {
         return $this->subscribed_platform_group_ids;
     }
 
-    function set_subscribed_platform_group_ids($subscribed_platform_group_ids)
+    public function set_subscribed_platform_group_ids($subscribed_platform_group_ids)
     {
         $this->subscribed_platform_group_ids = $subscribed_platform_group_ids;
     }
@@ -127,7 +127,7 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
      *
      * @return Array<int>
      */
-    function get_root_ids()
+    public function get_root_ids()
     {
         if (! empty($this->subscribed_platform_group_ids))
         {
@@ -145,7 +145,7 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
      * @param $user_id integer
      * @return array
      */
-    function retrieve_entity_item_ids_linked_to_user($user_id)
+    public function retrieve_entity_item_ids_linked_to_user($user_id)
     {
         if (is_null($this->platform_group_cache[$user_id]))
         {
@@ -158,7 +158,7 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
     /**
      * Retrieves the type for the advanced element finder for the simple rights editor
      */
-    function get_element_finder_type()
+    public function get_element_finder_type()
     {
         return new AdvancedElementFinderElementType('platform_groups', Translation :: get('PublicationPlatformGroups'),
                 __NAMESPACE__, 'publication_platform_groups_feed',

@@ -30,14 +30,14 @@ class UserBrowserTableCellRenderer extends DefaultUserTableCellRenderer
      * 
      * @param $browser RepositoryManagerBrowserComponent
      */
-    function __construct($browser)
+    public function __construct($browser)
     {
         parent :: __construct();
         $this->browser = $browser;
     }
     
     // Inherited
-    function render_cell($column, $user)
+    public function render_cell($column, $user)
     {
         if ($column === UserBrowserTableColumnModel :: get_modification_column())
         {

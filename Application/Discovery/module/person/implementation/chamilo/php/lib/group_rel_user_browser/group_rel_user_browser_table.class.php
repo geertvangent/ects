@@ -12,7 +12,7 @@ class GroupRelUserBrowserTable extends ObjectTable
      *
      * @see ContentObjectTable::ContentObjectTable()
      */
-    function __construct($browser, $parameters, $condition)
+    public function __construct($browser, $parameters, $condition)
     {
         $model = new GroupRelUserBrowserTableColumnModel();
         $renderer = new GroupRelUserBrowserTableCellRenderer($browser);
@@ -26,7 +26,7 @@ class GroupRelUserBrowserTable extends ObjectTable
      * A typical ObjectTable would get the database-id of the object as a unique identifier. GroupRelUser has no such
      * field since it's a relation, so we need to overwrite this function here.
      */
-    function get_objects($offset, $count, $order_column)
+    public function get_objects($offset, $count, $order_column)
     {
         $grouprelusers = $this->get_data_provider()->get_objects($offset, $count,
                 $this->get_column_model()->get_order_column($order_column - ($this->has_form_actions() ? 1 : 0)));

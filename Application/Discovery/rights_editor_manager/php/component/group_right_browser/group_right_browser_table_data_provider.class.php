@@ -22,12 +22,12 @@ class GroupRightBrowserTableDataProvider extends ObjectTableDataProvider
      * @param Application $browser
      * @param Condition $condition
      */
-    function __construct($browser, $condition)
+    public function __construct($browser, $condition)
     {
         parent :: __construct($browser, $condition);
     }
 
-    function get_objects($offset, $count, $order_property = null)
+    public function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
 
@@ -35,7 +35,7 @@ class GroupRightBrowserTableDataProvider extends ObjectTableDataProvider
                 $order_property);
     }
 
-    function get_object_count()
+    public function get_object_count()
     {
         return GroupDataManager :: get_instance()->count_groups($this->get_condition());
     }

@@ -2,14 +2,13 @@
 namespace application\discovery\module\training_results\implementation\bamaflex;
 
 use common\libraries\Translation;
-use common\libraries\ObjectTableOrder;
 use common\libraries\EqualityCondition;
 use application\discovery\DataSourceInstance;
 
 class SettingsConnector
 {
 
-    static function get_data_sources()
+    public static function get_data_sources()
     {
         $condition = new EqualityCondition(DataSourceInstance :: PROPERTY_TYPE, 
                 'application\discovery\data_source\bamaflex');

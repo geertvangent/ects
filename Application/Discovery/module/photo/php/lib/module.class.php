@@ -16,12 +16,12 @@ class Module extends \application\discovery\Module
     const TYPE_STUDENT = 2;
     const TYPE_EMPLOYEE = 3;
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return self :: module_parameters();
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $faculty_id = Request :: get(self :: PARAM_FACULTY_ID);
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
@@ -31,12 +31,12 @@ class Module extends \application\discovery\Module
         return new Parameters($faculty_id, $training_id, $programme_id, $type);
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_DETAILS;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 
@@ -50,7 +50,7 @@ class Module extends \application\discovery\Module
         return $types;
     }
 
-    function get_users()
+    public function get_users()
     {
         return array();
     }

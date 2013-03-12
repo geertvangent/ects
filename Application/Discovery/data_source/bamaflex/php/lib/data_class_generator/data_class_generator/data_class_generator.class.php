@@ -18,7 +18,7 @@ class DataClassGenerator
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
     }
 
@@ -32,7 +32,7 @@ class DataClassGenerator
      * @param string $description the description
      * @param string $author, the author
      */
-    function generate_data_class($dom_xpath)
+    public function generate_data_class($dom_xpath)
     {
         $content_object = $dom_xpath->query('/object')->item(0);
 

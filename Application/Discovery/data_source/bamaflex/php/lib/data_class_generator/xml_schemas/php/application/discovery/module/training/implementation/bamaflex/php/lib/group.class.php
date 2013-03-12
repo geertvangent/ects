@@ -41,7 +41,7 @@ class Group extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
@@ -56,7 +56,7 @@ class Group extends DiscoveryItem
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -66,7 +66,7 @@ class Group extends DiscoveryItem
      * 
      * @return string The source.
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -76,7 +76,7 @@ class Group extends DiscoveryItem
      * 
      * @param string $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
@@ -86,7 +86,7 @@ class Group extends DiscoveryItem
      * 
      * @return integer The training_id.
      */
-    function get_training_id()
+    public function get_training_id()
     {
         return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
     }
@@ -96,7 +96,7 @@ class Group extends DiscoveryItem
      * 
      * @param integer $training_id
      */
-    function set_training_id($training_id)
+    public function set_training_id($training_id)
     {
         $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
     }
@@ -106,7 +106,7 @@ class Group extends DiscoveryItem
      * 
      * @return integer The group_id.
      */
-    function get_group_id()
+    public function get_group_id()
     {
         return $this->get_default_property(self :: PROPERTY_GROUP_ID);
     }
@@ -116,7 +116,7 @@ class Group extends DiscoveryItem
      * 
      * @param integer $group_id
      */
-    function set_group_id($group_id)
+    public function set_group_id($group_id)
     {
         $this->set_default_property(self :: PROPERTY_GROUP_ID, $group_id);
     }
@@ -126,7 +126,7 @@ class Group extends DiscoveryItem
      * 
      * @return string The group.
      */
-    function get_group()
+    public function get_group()
     {
         return $this->get_default_property(self :: PROPERTY_GROUP);
     }
@@ -136,7 +136,7 @@ class Group extends DiscoveryItem
      * 
      * @param string $group
      */
-    function set_group($group)
+    public function set_group($group)
     {
         $this->set_default_property(self :: PROPERTY_GROUP, $group);
     }
@@ -145,7 +145,7 @@ class Group extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

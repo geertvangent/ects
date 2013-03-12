@@ -12,7 +12,7 @@ use common\libraries\Theme;
 class ModuleInstanceManagerCreatorComponent extends ModuleInstanceManager
 {
 
-    function run()
+    public function run()
     {
         $trail = BreadcrumbTrail :: get_instance();
         $trail->add_help('module_instance general');

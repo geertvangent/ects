@@ -14,14 +14,14 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     private $php_excel;
 
-    function render()
+    public function render()
     {
     }
 
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
@@ -29,7 +29,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

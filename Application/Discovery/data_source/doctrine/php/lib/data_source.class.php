@@ -13,7 +13,7 @@ class DataSource extends \application\discovery\DataSource
      * 
      * @param $module_instance ModuleInstance
      */
-    function __construct(ModuleInstance $module_instance)
+    public function __construct(ModuleInstance $module_instance)
     {
         parent :: __construct($module_instance);
         $this->initialize();
@@ -22,7 +22,7 @@ class DataSource extends \application\discovery\DataSource
     /**
      * Initialiser, creates the connection and sets the database to UTF8
      */
-    function initialize()
+    public function initialize()
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $this->connection = Connection :: get_instance($data_source)->get_connection();
@@ -34,7 +34,7 @@ class DataSource extends \application\discovery\DataSource
      * 
      * @return Connection the connection
      */
-    function get_connection()
+    public function get_connection()
     {
         return $this->connection;
     }
@@ -44,7 +44,7 @@ class DataSource extends \application\discovery\DataSource
      * 
      * @param $connection Connection
      */
-    function set_connection($connection)
+    public function set_connection($connection)
     {
         $this->connection = $connection;
     }

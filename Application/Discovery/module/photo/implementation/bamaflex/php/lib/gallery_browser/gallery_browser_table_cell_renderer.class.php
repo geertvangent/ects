@@ -10,13 +10,13 @@ class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
 
     private $browser;
 
-    function __construct($browser)
+    public function __construct($browser)
     {
         parent :: __construct();
         $this->browser = $browser;
     }
 
-    function get_cell_content(User $user)
+    public function get_cell_content(User $user)
     {
         $photo = DataManager :: get_instance($this->browser->get_module_instance())->retrieve_photo(
                 $user->get_official_code());

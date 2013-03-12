@@ -16,12 +16,12 @@ class Module extends \application\discovery\module\training_info\Module
     const TAB_OPTION_MAJORS = 2;
     const TAB_OPTION_PACKAGES = 3;
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return self :: module_parameters();
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $current_tab = Request :: get(Module :: PARAM_TAB);
         if (is_null($current_tab))

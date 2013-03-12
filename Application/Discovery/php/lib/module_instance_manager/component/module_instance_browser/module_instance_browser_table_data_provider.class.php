@@ -12,7 +12,7 @@ class ModuleInstanceBrowserTableDataProvider extends ObjectTableDataProvider
      * @param ModuleInstanceManager $browser
      * @param Condition $condition
      */
-    function __construct($browser, $condition)
+    public function __construct($browser, $condition)
     {
         parent :: __construct($browser, $condition);
     }
@@ -24,14 +24,14 @@ class ModuleInstanceBrowserTableDataProvider extends ObjectTableDataProvider
      * @param string $order_property
      * @return ResultSet A set of matching external repositories.
      */
-    function get_objects($offset, $count, $order_property = null)
+    public function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
         return DataManager :: get_instance()->retrieve_module_instances($this->get_condition(), $offset,
                 $count, $order_property);
     }
 
-    function get_object_count()
+    public function get_object_count()
     {
         return DataManager :: get_instance()->count_module_instances($this->get_condition());
     }

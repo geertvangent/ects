@@ -9,12 +9,12 @@ class Module extends \application\discovery\module\group\Module
 
     private $cache_groups = array();
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return new Parameters(Request :: get(self :: PARAM_TRAINING_ID), Request :: get(self :: PARAM_SOURCE));
     }
 
-    function get_groups_data($type)
+    public function get_groups_data($type)
     {
         if (! isset($this->cache_groups[$type]))
         {
@@ -32,7 +32,7 @@ class Module extends \application\discovery\module\group\Module
         return $this->cache_groups[$type];
     }
 
-    function has_groups($type)
+    public function has_groups($type)
     {
         if ($type)
         {
@@ -44,7 +44,7 @@ class Module extends \application\discovery\module\group\Module
         }
     }
 
-    static function get_training_info_parameters()
+    public static function get_training_info_parameters()
     {
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $source = Request :: get(self :: PARAM_SOURCE);

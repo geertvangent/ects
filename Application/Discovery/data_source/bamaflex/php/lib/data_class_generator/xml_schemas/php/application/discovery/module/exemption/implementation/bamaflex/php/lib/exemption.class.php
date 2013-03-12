@@ -114,7 +114,7 @@ class Exemption extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
@@ -143,7 +143,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -153,7 +153,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return integer The enrollment_id.
      */
-    function get_enrollment_id()
+    public function get_enrollment_id()
     {
         return $this->get_default_property(self :: PROPERTY_ENROLLMENT_ID);
     }
@@ -163,7 +163,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param integer $enrollment_id
      */
-    function set_enrollment_id($enrollment_id)
+    public function set_enrollment_id($enrollment_id)
     {
         $this->set_default_property(self :: PROPERTY_ENROLLMENT_ID, $enrollment_id);
     }
@@ -173,7 +173,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The year.
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -183,7 +183,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -193,7 +193,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return integer The person_id.
      */
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
@@ -203,7 +203,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param integer $person_id
      */
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
@@ -213,7 +213,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return integer The programme_id.
      */
-    function get_programme_id()
+    public function get_programme_id()
     {
         return $this->get_default_property(self :: PROPERTY_PROGRAMME_ID);
     }
@@ -223,7 +223,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param integer $programme_id
      */
-    function set_programme_id($programme_id)
+    public function set_programme_id($programme_id)
     {
         $this->set_default_property(self :: PROPERTY_PROGRAMME_ID, $programme_id);
     }
@@ -233,7 +233,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The programme_name.
      */
-    function get_programme_name()
+    public function get_programme_name()
     {
         return $this->get_default_property(self :: PROPERTY_PROGRAMME_NAME);
     }
@@ -243,7 +243,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $programme_name
      */
-    function set_programme_name($programme_name)
+    public function set_programme_name($programme_name)
     {
         $this->set_default_property(self :: PROPERTY_PROGRAMME_NAME, $programme_name);
     }
@@ -253,7 +253,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return integer The type_id.
      */
-    function get_type_id()
+    public function get_type_id()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE_ID);
     }
@@ -263,7 +263,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param integer $type_id
      */
-    function set_type_id($type_id)
+    public function set_type_id($type_id)
     {
         $this->set_default_property(self :: PROPERTY_TYPE_ID, $type_id);
     }
@@ -273,7 +273,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The type.
      */
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
@@ -283,7 +283,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $type
      */
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
@@ -293,7 +293,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The result.
      */
-    function get_result()
+    public function get_result()
     {
         return $this->get_default_property(self :: PROPERTY_RESULT);
     }
@@ -303,7 +303,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $result
      */
-    function set_result($result)
+    public function set_result($result)
     {
         $this->set_default_property(self :: PROPERTY_RESULT, $result);
     }
@@ -313,7 +313,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return integer The state.
      */
-    function get_state()
+    public function get_state()
     {
         return $this->get_default_property(self :: PROPERTY_STATE);
     }
@@ -323,7 +323,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param integer $state
      */
-    function set_state($state)
+    public function set_state($state)
     {
         $this->set_default_property(self :: PROPERTY_STATE, $state);
     }
@@ -333,7 +333,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The credits.
      */
-    function get_credits()
+    public function get_credits()
     {
         return $this->get_default_property(self :: PROPERTY_CREDITS);
     }
@@ -343,7 +343,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $credits
      */
-    function set_credits($credits)
+    public function set_credits($credits)
     {
         $this->set_default_property(self :: PROPERTY_CREDITS, $credits);
     }
@@ -353,7 +353,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The proof.
      */
-    function get_proof()
+    public function get_proof()
     {
         return $this->get_default_property(self :: PROPERTY_PROOF);
     }
@@ -363,7 +363,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $proof
      */
-    function set_proof($proof)
+    public function set_proof($proof)
     {
         $this->set_default_property(self :: PROPERTY_PROOF, $proof);
     }
@@ -373,7 +373,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The date_requested.
      */
-    function get_date_requested()
+    public function get_date_requested()
     {
         return $this->get_default_property(self :: PROPERTY_DATE_REQUESTED);
     }
@@ -383,7 +383,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $date_requested
      */
-    function set_date_requested($date_requested)
+    public function set_date_requested($date_requested)
     {
         $this->set_default_property(self :: PROPERTY_DATE_REQUESTED, $date_requested);
     }
@@ -393,7 +393,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The date_closed.
      */
-    function get_date_closed()
+    public function get_date_closed()
     {
         return $this->get_default_property(self :: PROPERTY_DATE_CLOSED);
     }
@@ -403,7 +403,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $date_closed
      */
-    function set_date_closed($date_closed)
+    public function set_date_closed($date_closed)
     {
         $this->set_default_property(self :: PROPERTY_DATE_CLOSED, $date_closed);
     }
@@ -413,7 +413,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The remarks_public.
      */
-    function get_remarks_public()
+    public function get_remarks_public()
     {
         return $this->get_default_property(self :: PROPERTY_REMARKS_PUBLIC);
     }
@@ -423,7 +423,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $remarks_public
      */
-    function set_remarks_public($remarks_public)
+    public function set_remarks_public($remarks_public)
     {
         $this->set_default_property(self :: PROPERTY_REMARKS_PUBLIC, $remarks_public);
     }
@@ -433,7 +433,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The remarks_private.
      */
-    function get_remarks_private()
+    public function get_remarks_private()
     {
         return $this->get_default_property(self :: PROPERTY_REMARKS_PRIVATE);
     }
@@ -443,7 +443,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $remarks_private
      */
-    function set_remarks_private($remarks_private)
+    public function set_remarks_private($remarks_private)
     {
         $this->set_default_property(self :: PROPERTY_REMARKS_PRIVATE, $remarks_private);
     }
@@ -453,7 +453,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The motivation.
      */
-    function get_motivation()
+    public function get_motivation()
     {
         return $this->get_default_property(self :: PROPERTY_MOTIVATION);
     }
@@ -463,7 +463,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $motivation
      */
-    function set_motivation($motivation)
+    public function set_motivation($motivation)
     {
         $this->set_default_property(self :: PROPERTY_MOTIVATION, $motivation);
     }
@@ -473,7 +473,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return integer The external_id.
      */
-    function get_external_id()
+    public function get_external_id()
     {
         return $this->get_default_property(self :: PROPERTY_EXTERNAL_ID);
     }
@@ -483,7 +483,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param integer $external_id
      */
-    function set_external_id($external_id)
+    public function set_external_id($external_id)
     {
         $this->set_default_property(self :: PROPERTY_EXTERNAL_ID, $external_id);
     }
@@ -493,7 +493,7 @@ class Exemption extends DiscoveryItem
      * 
      * @return string The external.
      */
-    function get_external()
+    public function get_external()
     {
         return $this->get_default_property(self :: PROPERTY_EXTERNAL);
     }
@@ -503,7 +503,7 @@ class Exemption extends DiscoveryItem
      * 
      * @param string $external
      */
-    function set_external($external)
+    public function set_external($external)
     {
         $this->set_default_property(self :: PROPERTY_EXTERNAL, $external);
     }
@@ -512,7 +512,7 @@ class Exemption extends DiscoveryItem
      *
      * @return string
      */
-    function get_state_string()
+    public function get_state_string()
     {
         return self :: state_string($this->get_state());
     }
@@ -521,7 +521,7 @@ class Exemption extends DiscoveryItem
      *
      * @return string
      */
-    static function state_string($state)
+    public static function state_string($state)
     {
         switch ($state)
         {
@@ -542,7 +542,7 @@ class Exemption extends DiscoveryItem
      * @param boolean $types_only
      * @return multitype:integer multitype:string
      */
-    static function get_state_types($types_only = false)
+    public static function get_state_types($types_only = false)
     {
         $types = array();
         
@@ -557,7 +557,7 @@ class Exemption extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

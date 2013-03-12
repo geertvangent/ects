@@ -6,7 +6,7 @@ class Module extends \application\discovery\module\exemption\Module
 
     private $cache_exemptions = array();
 
-    function get_exemptions_data($year)
+    public function get_exemptions_data($year)
     {
         if (! isset($this->cache_exemptions[$year]))
         {

@@ -14,69 +14,69 @@ class RightsGroupEntityRight extends DataClass
     const PROPERTY_GROUP_ID = 'group_id';
     const PROPERTY_RIGHT_ID = 'right_id';
 
-    static function get_default_property_names()
+    public static function get_default_property_names()
     {
         return parent :: get_default_property_names(
                 array(self :: PROPERTY_RIGHT_ID, self :: PROPERTY_ENTITY_ID, self :: PROPERTY_ENTITY_TYPE,
                         self :: PROPERTY_GROUP_ID));
     }
 
-    function get_context()
+    public function get_context()
     {
         return $this->context;
     }
 
-    function set_context($context)
+    public function set_context($context)
     {
         $this->context = $context;
     }
 
-    function get_entity_id()
+    public function get_entity_id()
     {
         return $this->get_default_property(self :: PROPERTY_ENTITY_ID);
     }
 
-    function set_entity_id($entity_id)
+    public function set_entity_id($entity_id)
     {
         $this->set_default_property(self :: PROPERTY_ENTITY_ID, $entity_id);
     }
 
-    function get_entity_type()
+    public function get_entity_type()
     {
         return $this->get_default_property(self :: PROPERTY_ENTITY_TYPE);
     }
 
-    function set_entity_type($entity_type)
+    public function set_entity_type($entity_type)
     {
         $this->set_default_property(self :: PROPERTY_ENTITY_TYPE, $entity_type);
     }
 
-    function get_group_id()
+    public function get_group_id()
     {
         return $this->get_default_property(self :: PROPERTY_GROUP_ID);
     }
 
-    function set_group_id($group_id)
+    public function set_group_id($group_id)
     {
         $this->set_default_property(self :: PROPERTY_GROUP_ID, $group_id);
     }
 
-    function get_right_id()
+    public function get_right_id()
     {
         return $this->get_default_property(self :: PROPERTY_RIGHT_ID);
     }
 
-    function set_right_id($right_id)
+    public function set_right_id($right_id)
     {
         $this->set_default_property(self :: PROPERTY_RIGHT_ID, $right_id);
     }
 
-    function get_data_manager()
+    public function get_data_manager()
     {
         return Rights :: get_instance();
     }
 
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

@@ -15,7 +15,7 @@ class IdentificationCode extends DataClass
      *
      * @return int
      */
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
@@ -24,7 +24,7 @@ class IdentificationCode extends DataClass
      *
      * @return string
      */
-    function get_type_string()
+    public function get_type_string()
     {
         switch ($this->get_type())
         {
@@ -41,7 +41,7 @@ class IdentificationCode extends DataClass
      *
      * @return string
      */
-    function get_code()
+    public function get_code()
     {
         return $this->get_default_property(self :: PROPERTY_CODE);
     }
@@ -50,7 +50,7 @@ class IdentificationCode extends DataClass
      *
      * @param int $type
      */
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
@@ -59,7 +59,7 @@ class IdentificationCode extends DataClass
      *
      * @param string $code
      */
-    function set_code($code)
+    public function set_code($code)
     {
         $this->set_default_property(self :: PROPERTY_CODE, $code);
     }
@@ -68,7 +68,7 @@ class IdentificationCode extends DataClass
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_CODE;
@@ -80,7 +80,7 @@ class IdentificationCode extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }

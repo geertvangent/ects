@@ -15,7 +15,7 @@ class UserRightBrowserTable extends ObjectTable
      *
      * @see ContentObjectTable::ContentObjectTable()
      */
-    function __construct($browser, $parameters, $condition)
+    public function __construct($browser, $parameters, $condition)
     {
         $selected_entity = $browser->get_selected_entity();
 

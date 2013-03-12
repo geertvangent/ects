@@ -38,7 +38,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:int
      */
-    function retrieve_contract_types($parameters)
+    public function retrieve_contract_types($parameters)
     {
         $id = $parameters->get_user_id();
         if (! isset($this->contract_types[$id]))
@@ -66,7 +66,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->contract_types[$id];
     }
 
-    function retrieve_contract_ids($parameters)
+    public function retrieve_contract_ids($parameters)
     {
         $id = $parameters->get_user_id();
         if (! isset($this->contract_ids[$id]))
@@ -94,7 +94,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->contract_ids[$id];
     }
 
-    function retrieve_training($source, $training_id)
+    public function retrieve_training($source, $training_id)
     {
         if (! isset($this->trainings[$source][$training_id]))
         {
@@ -148,7 +148,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->trainings[$source][$training_id];
     }
 
-    function retrieve_training_next_id($training)
+    public function retrieve_training_next_id($training)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');
@@ -175,7 +175,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Enrollment
      */
-    function retrieve_enrollments($parameters)
+    public function retrieve_enrollments($parameters)
     {
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
@@ -223,7 +223,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $user_id
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Course
      */
-    function retrieve_courses($parameters)
+    public function retrieve_courses($parameters)
     {
         $user_id = $parameters->get_user_id();
         if (! isset($this->courses[$user_id]))
@@ -266,7 +266,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->courses[$user_id];
     }
 
-    function count_courses($parameters)
+    public function count_courses($parameters)
     {
         $user_id = $parameters->get_user_id();
         $user = UserDataManager :: get_instance()->retrieve_user($user_id);
@@ -319,7 +319,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->child_courses[$user_id];
     }
 
-    function result_to_course($parameters, $result)
+    public function result_to_course($parameters, $result)
     {
         $course = new Course();
         $course->set_id($result->id);
@@ -359,7 +359,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param string $user_id
      * @return multitype:\application\discovery\module\career\MarkMoment
      */
-    function retrieve_mark_moments($parameters)
+    public function retrieve_mark_moments($parameters)
     {
         $moments = array();
         
@@ -409,7 +409,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      *
      * @return multitype:multitype:multitype:stdClass
      */
-    function retrieve_marks($user_id)
+    public function retrieve_marks($user_id)
     {
         if (! isset($this->marks[$user_id]))
         {

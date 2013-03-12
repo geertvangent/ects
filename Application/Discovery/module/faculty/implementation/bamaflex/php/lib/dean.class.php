@@ -16,7 +16,7 @@ class Dean extends DiscoveryItem
      *
      * @return int
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -25,47 +25,47 @@ class Dean extends DiscoveryItem
      *
      * @param int $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
 
-    function get_faculty_id()
+    public function get_faculty_id()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY_ID);
     }
 
-    function set_faculty_id($faculty_id)
+    public function set_faculty_id($faculty_id)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
     }
 
-    function get_function_id()
+    public function get_function_id()
     {
         return $this->get_default_property(self :: PROPERTY_FUNCTION_ID);
     }
 
-    function set_function_id($function_id)
+    public function set_function_id($function_id)
     {
         $this->set_default_property(self :: PROPERTY_FUNCTION_ID, $function_id);
     }
 
-    function get_person()
+    public function get_person()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON);
     }
 
-    function set_person($person)
+    public function set_person($person)
     {
         $this->set_default_property(self :: PROPERTY_PERSON, $person);
     }
 
-    function get_function()
+    public function get_function()
     {
         return $this->get_default_property(self :: PROPERTY_FUNCTION);
     }
 
-    function set_function($function)
+    public function set_function($function)
     {
         $this->set_default_property(self :: PROPERTY_FUNCTION, $function);
     }
@@ -74,7 +74,7 @@ class Dean extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_FACULTY_ID;
@@ -89,7 +89,7 @@ class Dean extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }

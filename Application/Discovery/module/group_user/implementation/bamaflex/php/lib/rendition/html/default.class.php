@@ -19,7 +19,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see application\discovery\module\group_user.Module::render()
      */
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -46,7 +46,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_group_properties_table()
+    public function get_group_properties_table()
     {
         $group = DataManager :: get_instance($this->get_module_instance())->retrieve_group(
                 Module :: get_group_parameters());
@@ -61,7 +61,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $table->toHtml();
     }
 
-    function get_group_user_table()
+    public function get_group_user_table()
     {
         $data = array();
         $data_struck = array();
@@ -141,7 +141,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_row($group_user)
+    public function get_row($group_user)
     {
         $row = array();
         $row[] = $group_user->get_last_name();
@@ -171,7 +171,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $row;
     }
 
-    function get_table($data)
+    public function get_table($data)
     {
         $table = new SortableTable($data);
 
@@ -185,7 +185,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -193,7 +193,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

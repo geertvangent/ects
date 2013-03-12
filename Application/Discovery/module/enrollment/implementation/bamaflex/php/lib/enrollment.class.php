@@ -49,7 +49,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return int
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -58,12 +58,12 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_faculty()
+    public function get_faculty()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY);
     }
 
-    function get_faculty_id()
+    public function get_faculty_id()
     {
         return $this->get_default_property(self :: PROPERTY_FACULTY_ID);
     }
@@ -72,7 +72,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return int
      */
-    function get_contract_type()
+    public function get_contract_type()
     {
         return $this->get_default_property(self :: PROPERTY_CONTRACT_TYPE);
     }
@@ -81,7 +81,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_contract_type_string()
+    public function get_contract_type_string()
     {
         return self :: contract_type_string($this->get_contract_type());
     }
@@ -90,7 +90,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    static function contract_type_string($contract_type)
+    public static function contract_type_string($contract_type)
     {
         switch ($contract_type)
         {
@@ -116,7 +116,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return int
      */
-    function get_contract_id()
+    public function get_contract_id()
     {
         return $this->get_default_property(self :: PROPERTY_CONTRACT_ID);
     }
@@ -125,7 +125,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return int
      */
-    function get_trajectory_type()
+    public function get_trajectory_type()
     {
         return $this->get_default_property(self :: PROPERTY_TRAJECTORY_TYPE);
     }
@@ -134,7 +134,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_trajectory_type_string()
+    public function get_trajectory_type_string()
     {
         switch ($this->get_trajectory_type())
         {
@@ -157,7 +157,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_trajectory()
+    public function get_trajectory()
     {
         return $this->get_default_property(self :: PROPERTY_TRAJECTORY);
     }
@@ -166,7 +166,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_unified_trajectory()
+    public function get_unified_trajectory()
     {
         if ($this->get_trajectory_type() == self :: TRAJECTORY_TYPE_TEMPLATE)
         {
@@ -182,7 +182,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_option_choice()
+    public function get_option_choice()
     {
         return $this->get_default_property(self :: PROPERTY_OPTION_CHOICE);
     }
@@ -191,7 +191,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_graduation_option()
+    public function get_graduation_option()
     {
         return $this->get_default_property(self :: PROPERTY_GRADUATION_OPTION);
     }
@@ -200,7 +200,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_unified_option()
+    public function get_unified_option()
     {
         $options = array();
         
@@ -221,7 +221,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return int
      */
-    function get_distinction()
+    public function get_distinction()
     {
         return $this->get_default_property(self :: PROPERTY_DISTINCTION);
     }
@@ -230,12 +230,12 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_distinction_string()
+    public function get_distinction_string()
     {
         return self :: distinction_string($this->get_distinction());
     }
 
-    function has_distinction()
+    public function has_distinction()
     {
         return ! is_null($this->get_distinction());
     }
@@ -244,7 +244,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    static function distinction_string($distinction)
+    public static function distinction_string($distinction)
     {
         switch ($distinction)
         {
@@ -270,7 +270,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return int
      */
-    function get_exchange_type()
+    public function get_exchange_type()
     {
         return $this->get_default_property(self :: PROPERTY_EXCHANGE_TYPE);
     }
@@ -279,7 +279,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_exchange_type_string()
+    public function get_exchange_type_string()
     {
         return self :: exchange_type_string($this->get_exchange_type());
     }
@@ -288,7 +288,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    static function exchange_type_string($exchange_type)
+    public static function exchange_type_string($exchange_type)
     {
         switch ($exchange_type)
         {
@@ -304,12 +304,12 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         }
     }
 
-    function get_generation_student()
+    public function get_generation_student()
     {
         return $this->get_default_property(self :: PROPERTY_GENERATION_STUDENT);
     }
 
-    function set_generation_student($generation_student)
+    public function set_generation_student($generation_student)
     {
         $this->set_default_property(self :: PROPERTY_GENERATION_STUDENT, $generation_student);
     }
@@ -318,7 +318,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param int $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
@@ -327,12 +327,12 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param string $faculty
      */
-    function set_faculty($faculty)
+    public function set_faculty($faculty)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY, $faculty);
     }
 
-    function set_faculty_id($faculty_id)
+    public function set_faculty_id($faculty_id)
     {
         $this->set_default_property(self :: PROPERTY_FACULTY_ID, $faculty_id);
     }
@@ -341,7 +341,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param int $contract_type
      */
-    function set_contract_type($contract_type)
+    public function set_contract_type($contract_type)
     {
         $this->set_default_property(self :: PROPERTY_CONTRACT_TYPE, $contract_type);
     }
@@ -350,7 +350,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param int $contract_id
      */
-    function set_contract_id($contract_id)
+    public function set_contract_id($contract_id)
     {
         $this->set_default_property(self :: PROPERTY_CONTRACT_ID, $contract_id);
     }
@@ -359,7 +359,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param int $trajectory_type
      */
-    function set_trajectory_type($trajectory_type)
+    public function set_trajectory_type($trajectory_type)
     {
         $this->set_default_property(self :: PROPERTY_TRAJECTORY_TYPE, $trajectory_type);
     }
@@ -368,7 +368,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param string $trajectory
      */
-    function set_trajectory($trajectory)
+    public function set_trajectory($trajectory)
     {
         $this->set_default_property(self :: PROPERTY_TRAJECTORY, $trajectory);
     }
@@ -377,7 +377,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param string $option_choice
      */
-    function set_option_choice($option_choice)
+    public function set_option_choice($option_choice)
     {
         $this->set_default_property(self :: PROPERTY_OPTION_CHOICE, $option_choice);
     }
@@ -386,7 +386,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param string $graduation_option
      */
-    function set_graduation_option($graduation_option)
+    public function set_graduation_option($graduation_option)
     {
         $this->set_default_property(self :: PROPERTY_GRADUATION_OPTION, $graduation_option);
     }
@@ -395,7 +395,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param int $distinction
      */
-    function set_distinction($distinction)
+    public function set_distinction($distinction)
     {
         $this->set_default_property(self :: PROPERTY_DISTINCTION, $distinction);
     }
@@ -404,7 +404,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function get_result_string()
+    public function get_result_string()
     {
         return self :: result_string($this->get_result());
     }
@@ -413,7 +413,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    static function result_string($result)
+    public static function result_string($result)
     {
         switch ($result)
         {
@@ -436,7 +436,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return multitype:string
      */
-    static function get_results()
+    public static function get_results()
     {
         $results = parent :: get_results();
         $results[] = self :: RESULT_TOLERATED;
@@ -447,7 +447,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_FACULTY;
@@ -467,7 +467,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -476,7 +476,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         $string[] = $this->get_year();
@@ -490,7 +490,7 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
         return implode(' | ', $string);
     }
 
-    function get_training_object()
+    public function get_training_object()
     {
         return DataManager :: get_instance($this->get_instance())->retrieve_training($this->get_source(), 
                 $this->get_training_id());

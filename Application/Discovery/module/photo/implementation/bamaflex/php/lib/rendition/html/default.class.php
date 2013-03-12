@@ -10,7 +10,7 @@ use application\discovery\module\photo\DataManager;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         $this->set_breadcrumbs();
 
@@ -25,7 +25,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $table->as_html();
     }
 
-    function set_breadcrumbs()
+    public function set_breadcrumbs()
     {
         $parameters = $this->get_module_parameters();
         $codes = array();
@@ -101,7 +101,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -109,7 +109,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

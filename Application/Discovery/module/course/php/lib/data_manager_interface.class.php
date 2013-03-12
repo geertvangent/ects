@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param Parameters $courses_parameters
      * @return multitype:\application\discovery\module\course\Courses
      */
-    function retrieve_course($course_parameters);
+    public function retrieve_course($course_parameters);
 }

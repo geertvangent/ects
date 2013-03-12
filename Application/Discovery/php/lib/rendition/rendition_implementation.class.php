@@ -6,12 +6,12 @@ use common\libraries\Utilities;
 abstract class RenditionImplementation extends AbstractRenditionImplementation
 {
 
-    static function launch(Module $module, $format, $view, $context)
+    public static function launch(Module $module, $format, $view, $context)
     {
         return self :: factory($module, $format, $view, $context)->render();
     }
 
-    static function factory(Module $module, $format, $view, $context)
+    public static function factory(Module $module, $format, $view, $context)
     {
         $namespace = Utilities :: get_namespace_from_object($module);
         $class = $namespace . '\\' . Utilities :: underscores_to_camelcase($format) . Utilities :: underscores_to_camelcase(
@@ -27,47 +27,47 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
         }
     }
 
-    function get_data_manager()
+    public function get_data_manager()
     {
         return $this->get_module()->get_data_manager();
     }
 
-    function get_module_instance()
+    public function get_module_instance()
     {
         return $this->get_module()->get_module_instance();
     }
 
-    function get_rights_url($instance_id, $instance_parameters)
+    public function get_rights_url($instance_id, $instance_parameters)
     {
         return $this->get_module()->get_rights_url($instance_id, $instance_parameters);
     }
 
-    function get_instance_url($instance_id, $instance_parameters)
+    public function get_instance_url($instance_id, $instance_parameters)
     {
         return $this->get_module()->get_instance_url($instance_id, $instance_parameters);
     }
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return $this->get_module()->get_module_parameters();
     }
 
-    function module_parameters()
+    public function module_parameters()
     {
         return $this->get_module()->module_parameters();
     }
 
-    function has_data($parameters)
+    public function has_data($parameters)
     {
         return $this->get_module()->has_data($parameters);
     }
 
-    function get_application()
+    public function get_application()
     {
         return $this->get_module()->get_application();
     }
 
-    function get_module_link($type, $user_id)
+    public function get_module_link($type, $user_id)
     {
         return $this->get_module()->get_module_link($type, $user_id);
     }

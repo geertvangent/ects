@@ -16,37 +16,37 @@ class DataSourceInstance extends DataClass
     const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_TYPE = 'type';
 
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
 
-    function set_description($description)
+    public function set_description($description)
     {
         $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
     }
 
-    function get_description()
+    public function get_description()
     {
         return $this->get_default_property(self :: PROPERTY_DESCRIPTION);
     }
 
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
 
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
 
-    static function get_default_property_names()
+    public static function get_default_property_names()
     {
         return parent :: get_default_property_names(
                 array(self :: PROPERTY_NAME, self :: PROPERTY_DESCRIPTION, self :: PROPERTY_TYPE));
@@ -56,7 +56,7 @@ class DataSourceInstance extends DataClass
      *
      * @return string
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
@@ -161,7 +161,7 @@ class DataSourceInstance extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }

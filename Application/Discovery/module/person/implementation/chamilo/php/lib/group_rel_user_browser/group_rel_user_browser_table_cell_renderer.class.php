@@ -19,14 +19,14 @@ class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellR
      *
      * @param RepositoryManagerBrowserComponent $browser
      */
-    function __construct($browser)
+    public function __construct($browser)
     {
         parent :: __construct();
         $this->browser = $browser;
     }
 
     // Inherited
-    function render_cell($column, $groupreluser)
+    public function render_cell($column, $groupreluser)
     {
         if ($column === GroupRelUserBrowserTableColumnModel :: get_modification_column())
         {

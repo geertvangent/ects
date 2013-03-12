@@ -60,7 +60,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return int
      */
-    function get_gender()
+    public function get_gender()
     {
         return $this->get_default_property(self :: PROPERTY_GENDER);
     }
@@ -69,7 +69,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return string
      */
-    function get_gender_string()
+    public function get_gender_string()
     {
         switch ($this->get_gender())
         {
@@ -88,7 +88,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return Birth
      */
-    function get_birth()
+    public function get_birth()
     {
         return $this->get_default_property(self :: PROPERTY_BIRTH);
     }
@@ -97,7 +97,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return multitype:Nationality
      */
-    function get_nationality()
+    public function get_nationality()
     {
         return $this->get_default_property(self :: PROPERTY_NATIONALITY);
     }
@@ -106,7 +106,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return string
      */
-    function get_nationality_string()
+    public function get_nationality_string()
     {
         $nationalities = array();
 
@@ -122,7 +122,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return multitype:Address
      */
-    function get_address()
+    public function get_address()
     {
         return $this->get_default_property(self :: PROPERTY_ADDRESS);
     }
@@ -131,7 +131,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param int $gender
      */
-    function set_gender($gender)
+    public function set_gender($gender)
     {
         $this->set_default_property(self :: PROPERTY_GENDER, $gender);
     }
@@ -140,7 +140,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param Birth $birth
      */
-    function set_birth(Birth $birth)
+    public function set_birth(Birth $birth)
     {
         $this->set_default_property(self :: PROPERTY_BIRTH, $birth);
     }
@@ -149,7 +149,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param multitype:Nationality $nationality
      */
-    function set_nationality($nationality)
+    public function set_nationality($nationality)
     {
         $this->set_default_property(self :: PROPERTY_NATIONALITY, $nationality);
     }
@@ -158,7 +158,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param multitype:Address $address
      */
-    function set_address($address)
+    public function set_address($address)
     {
         $this->set_default_property(self :: PROPERTY_ADDRESS, $address);
     }
@@ -167,7 +167,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param Nationality $nationality
      */
-    function add_nationality(Nationality $nationality)
+    public function add_nationality(Nationality $nationality)
     {
         $nationalities = $this->get_nationality();
         $nationalities[] = $nationality;
@@ -178,39 +178,39 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param Address $address
      */
-    function add_address(Address $address)
+    public function add_address(Address $address)
     {
         $addresses = $this->get_address();
         $addresses[] = $address;
         $this->set_address($addresses);
     }
 
-    function set_first_university_college($first_university_college)
+    public function set_first_university_college($first_university_college)
     {
         $this->set_default_property(self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE, $first_university_college);
     }
 
-    function get_first_university_college()
+    public function get_first_university_college()
     {
         return $this->get_default_property(self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE);
     }
 
-    function set_first_university($first_university)
+    public function set_first_university($first_university)
     {
         $this->set_default_property(self :: PROPERTY_FIRST_UNIVERSITY, $first_university);
     }
 
-    function get_first_university()
+    public function get_first_university()
     {
         return $this->get_default_property(self :: PROPERTY_FIRST_UNIVERSITY);
     }
 
-    function get_learning_credit()
+    public function get_learning_credit()
     {
         return $this->get_default_property(self :: PROPERTY_LEARNING_CREDIT);
     }
 
-    function set_learning_credit($learning_credit)
+    public function set_learning_credit($learning_credit)
     {
         $this->set_default_property(self :: PROPERTY_LEARNING_CREDIT, $learning_credit);
     }
@@ -219,7 +219,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_GENDER;
         $extended_property_names[] = self :: PROPERTY_BIRTH;
@@ -235,7 +235,7 @@ class Profile extends \application\discovery\module\profile\Profile
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }

@@ -33,7 +33,7 @@ class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
     /**
      * Constructor
      */
-    function __construct($browser)
+    public function __construct($browser)
     {
         parent :: __construct($this->get_default_column());
 
@@ -43,7 +43,7 @@ class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
         $this->add_rights_columns();
     }
 
-    function get_default_column()
+    public function get_default_column()
     {
         $user_namespace = Application :: determine_namespace(UserManager :: APPLICATION_NAME);
 
@@ -62,7 +62,7 @@ class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
      */
     static
 
-    function is_rights_column($column)
+    public function is_rights_column($column)
     {
         return in_array($column, self :: $rights_columns);
     }
@@ -70,7 +70,7 @@ class GroupRightBrowserTableColumnModel extends ObjectTableColumnModel
     /**
      * Adds the rights columns to the column model
      */
-    function add_rights_columns()
+    public function add_rights_columns()
     {
         $rights = $this->browser->get_available_rights();
 

@@ -18,7 +18,7 @@ class ModuleInstanceManagerBrowserComponent extends ModuleInstanceManager
 
     private $action_bar;
 
-    function run()
+    public function run()
     {
         if (! $this->get_user()->is_platform_admin())
         {
@@ -65,7 +65,7 @@ class ModuleInstanceManagerBrowserComponent extends ModuleInstanceManager
         $this->display_footer();
     }
 
-    function get_condition()
+    public function get_condition()
     {
         $query = $this->action_bar->get_query();
 
@@ -80,7 +80,7 @@ class ModuleInstanceManagerBrowserComponent extends ModuleInstanceManager
         return $condition;
     }
 
-    function get_content_type()
+    public function get_content_type()
     {
         $content_type = Request :: get(self :: PARAM_CONTENT_TYPE);
         if (! isset($content_type))
@@ -90,7 +90,7 @@ class ModuleInstanceManagerBrowserComponent extends ModuleInstanceManager
         return $content_type;
     }
 
-    function get_action_bar()
+    public function get_action_bar()
     {
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->add_common_action(

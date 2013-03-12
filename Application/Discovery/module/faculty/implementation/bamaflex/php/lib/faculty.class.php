@@ -27,7 +27,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @return int
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -36,7 +36,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @param $source int
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
@@ -47,7 +47,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $recursive boolean
      * @return multitype:string:Faculty
      */
-    function get_previous($module_instance, $recursive = true)
+    public function get_previous($module_instance, $recursive = true)
     {
         $faculties = array();
         if ($this->has_previous_references())
@@ -79,7 +79,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $recursive boolean
      * @return multitype:string:Faculty
      */
-    function get_next($module_instance, $recursive = true)
+    public function get_next($module_instance, $recursive = true)
     {
         $faculties = array();
         if ($this->has_next_references())
@@ -110,7 +110,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $module_instance ModuleInstance
      * @return multitype:string:Faculty
      */
-    function get_all($module_instance)
+    public function get_all($module_instance)
     {
         $faculties = $this->get_next($module_instance);
         $faculties[$this->get_year()][] = $this;
@@ -125,7 +125,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @return multitype:string
      */
-    function get_deans()
+    public function get_deans()
     {
         return $this->deans;
     }
@@ -134,7 +134,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @param $deans multitype:string
      */
-    function set_deans($deans)
+    public function set_deans($deans)
     {
         $this->deans = $deans;
     }
@@ -143,7 +143,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @return boolean
      */
-    function has_deans()
+    public function has_deans()
     {
         return count($this->deans) > 0;
     }
@@ -152,7 +152,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @param $dean string
      */
-    function add_dean($dean)
+    public function add_dean($dean)
     {
         $this->deans[] = $dean;
     }
@@ -161,7 +161,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @return string
      */
-    function get_deans_string()
+    public function get_deans_string()
     {
         $deans = array();
         foreach ($this->get_deans() as $dean)
@@ -175,7 +175,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @return multitype:HistoryReference
      */
-    function get_previous_references()
+    public function get_previous_references()
     {
         return $this->get_references(self :: REFERENCE_PREVIOUS);
     }
@@ -184,7 +184,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @param $previous_references multitype:HistoryReference
      */
-    function set_previous_references($previous_references)
+    public function set_previous_references($previous_references)
     {
         $this->set_references($previous_references, self :: REFERENCE_PREVIOUS);
     }
@@ -194,7 +194,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $single integer
      * @return boolean
      */
-    function has_previous_references($single = false)
+    public function has_previous_references($single = false)
     {
         return $this->has_references(self :: REFERENCE_PREVIOUS, $single);
     }
@@ -203,7 +203,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @param $previous_reference HistoryReference
      */
-    function add_previous_reference(HistoryReference $previous_reference)
+    public function add_previous_reference(HistoryReference $previous_reference)
     {
         $this->add_reference($previous_reference, self :: REFERENCE_PREVIOUS);
     }
@@ -212,7 +212,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @return multitype:HistoryReference
      */
-    function get_next_references()
+    public function get_next_references()
     {
         return $this->get_references(self :: REFERENCE_NEXT);
     }
@@ -221,7 +221,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @param $next_references multitype:HistoryReference
      */
-    function set_next_references($next_references)
+    public function set_next_references($next_references)
     {
         $this->set_references($next_references, self :: REFERENCE_NEXT);
     }
@@ -231,7 +231,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $single boolean
      * @return boolean
      */
-    function has_next_references($single = false)
+    public function has_next_references($single = false)
     {
         return $this->has_references(self :: REFERENCE_NEXT, $single);
     }
@@ -240,7 +240,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @param $next_reference HistoryReference
      */
-    function add_next_reference(HistoryReference $next_reference)
+    public function add_next_reference(HistoryReference $next_reference)
     {
         $this->add_reference($next_reference, self :: REFERENCE_NEXT);
     }
@@ -250,7 +250,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $type integer
      * @return multitype:HistoryReference
      */
-    function get_references($type)
+    public function get_references($type)
     {
         return $this->references[$type];
     }
@@ -260,7 +260,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $references multitype:HistoryReference
      * @param $type integer
      */
-    function set_references($references, $type)
+    public function set_references($references, $type)
     {
         $this->references[$type] = $references;
     }
@@ -271,7 +271,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $single boolean
      * @return boolean
      */
-    function has_references($type, $single = false)
+    public function has_references($type, $single = false)
     {
         return $single ? (count($this->references[$type]) == 1) : (count($this->references[$type]) > 0);
     }
@@ -281,7 +281,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $reference HistoryReference
      * @param $type integer
      */
-    function add_reference(HistoryReference $reference, $type)
+    public function add_reference(HistoryReference $reference, $type)
     {
         $this->references[$type][] = $reference;
     }
@@ -291,7 +291,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      * @param $extended_property_names multitype:string
      * @return $extended_property_names multitype:string
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         
@@ -302,7 +302,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }

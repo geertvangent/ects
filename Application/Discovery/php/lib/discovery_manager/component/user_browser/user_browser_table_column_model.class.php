@@ -25,7 +25,7 @@ class UserBrowserTableColumnModel extends DefaultUserTableColumnModel
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
         parent :: __construct();
         $this->add_column(new ObjectTableColumn(User :: PROPERTY_EMAIL));
@@ -38,7 +38,7 @@ class UserBrowserTableColumnModel extends DefaultUserTableColumnModel
      *
      * @return ContentObjectTableColumn
      */
-    static function get_modification_column()
+    public static function get_modification_column()
     {
         if (! isset(self :: $modification_column))
         {

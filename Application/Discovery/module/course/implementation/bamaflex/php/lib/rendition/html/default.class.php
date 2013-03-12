@@ -17,7 +17,7 @@ use common\libraries\BreadcrumbTrail;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         $html = array();
         $course = $this->get_course();
@@ -73,7 +73,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_general()
+    public function get_general()
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
         
@@ -379,7 +379,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_materials()
+    public function get_materials()
     {
         $course = $this->get_course();
         $tabs = new DynamicTabsRenderer('course_materials');
@@ -400,7 +400,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_materials_by_type($type)
+    public function get_materials_by_type($type)
     {
         $course = $this->get_course();
         
@@ -432,7 +432,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_course_materials_by_type($course, $type)
+    public function get_course_materials_by_type($course, $type)
     {
         $html = array();
         $table_data = array();
@@ -516,7 +516,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_activities()
+    public function get_activities()
     {
         $course = $this->get_course();
         
@@ -550,7 +550,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_course_activities($course)
+    public function get_course_activities($course)
     {
         $html = array();
         $table_data = array();
@@ -603,7 +603,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_competences()
+    public function get_competences()
     {
         $course = $this->get_course();
         $tabs = new DynamicTabsRenderer('competences');
@@ -624,7 +624,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_competences_by_type($type)
+    public function get_competences_by_type($type)
     {
         $course = $this->get_course();
         $html = array();
@@ -657,7 +657,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_course_competences_by_type($course, $type)
+    public function get_course_competences_by_type($course, $type)
     {
         $table_data = array();
         
@@ -696,7 +696,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_content()
+    public function get_content()
     {
         $html = array();
         $course = $this->get_course();
@@ -729,7 +729,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_course_contents($course)
+    public function get_course_contents($course)
     {
         $html = array();
         
@@ -785,7 +785,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_evaluations()
+    public function get_evaluations()
     {
         $html = array();
         $course = $this->get_course();
@@ -814,7 +814,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_course_evaluations($course)
+    public function get_course_evaluations($course)
     {
         $html = array();
         $table_data = array();
@@ -972,7 +972,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -980,7 +980,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

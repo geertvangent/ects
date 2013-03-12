@@ -11,7 +11,7 @@ class ActivityDescription extends Activity
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -20,7 +20,7 @@ class ActivityDescription extends Activity
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         return implode(' | ', $string);

@@ -32,7 +32,7 @@ class UserRightBrowserTableColumnModel extends ObjectTableColumnModel
     /**
      * Constructor
      */
-    function __construct($browser)
+    public function __construct($browser)
     {
         parent :: __construct($this->get_default_column());
 
@@ -48,7 +48,7 @@ class UserRightBrowserTableColumnModel extends ObjectTableColumnModel
      * @param ObjectTableColumn $column
      * @return boolean
      */
-    static function is_rights_column($column)
+    public static function is_rights_column($column)
     {
         return in_array($column, self :: $rights_columns);
     }
@@ -56,7 +56,7 @@ class UserRightBrowserTableColumnModel extends ObjectTableColumnModel
     /**
      * Adds the rights columns to the column model
      */
-    function add_rights_columns()
+    public function add_rights_columns()
     {
         $rights = $this->browser->get_available_rights();
 
@@ -69,7 +69,7 @@ class UserRightBrowserTableColumnModel extends ObjectTableColumnModel
         }
     }
 
-    function get_default_column()
+    public function get_default_column()
     {
         $user_namespace = Application :: determine_namespace(UserManager :: APPLICATION_NAME);
 

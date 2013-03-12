@@ -17,7 +17,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\student_year\implementation\bamaflex\StudentYear
      */
-    function retrieve_student_years($parameters)
+    public function retrieve_student_years($parameters)
     {
         $id = $parameters->get_user_id();
         if (! isset($this->student_years[$id]))
@@ -53,7 +53,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->student_years[$id];
     }
 
-    function count_student_years($parameters)
+    public function count_student_years($parameters)
     {
         $id = $parameters->get_user_id();
         $user = UserDataManager :: get_instance()->retrieve_user($id);

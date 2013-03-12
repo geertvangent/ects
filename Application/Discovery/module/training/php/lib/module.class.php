@@ -20,7 +20,7 @@ class Module extends \application\discovery\Module
 
     private $years;
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $year = Request :: get(self :: PARAM_YEAR);
         
@@ -37,7 +37,7 @@ class Module extends \application\discovery\Module
      *
      * @return multitype:\application\discovery\module\training\Faculty
      */
-    function get_trainings($year)
+    public function get_trainings($year)
     {
         if (! isset($this->trainings[$year]))
         {
@@ -47,7 +47,7 @@ class Module extends \application\discovery\Module
         return $this->trainings[$year];
     }
 
-    function get_trainings_data($year)
+    public function get_trainings_data($year)
     {
         if (! isset($this->cache_trainings[$year]))
         {
@@ -59,7 +59,7 @@ class Module extends \application\discovery\Module
         return $this->cache_trainings[$year];
     }
 
-    function get_years()
+    public function get_years()
     {
         if (! isset($this->years))
         {
@@ -68,12 +68,12 @@ class Module extends \application\discovery\Module
         return $this->years;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_INFORMATION;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
         

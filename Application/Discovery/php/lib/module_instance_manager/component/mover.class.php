@@ -10,7 +10,7 @@ use common\libraries\EqualityCondition;
 class ModuleInstanceManagerMoverComponent extends ModuleInstanceManager
 {
 
-    function run()
+    public function run()
     {
         $id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
         $direction = Request :: get(DiscoveryManager :: PARAM_DIRECTION);

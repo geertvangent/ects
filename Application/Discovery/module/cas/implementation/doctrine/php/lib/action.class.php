@@ -21,12 +21,12 @@ class Action extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
 
-    function get_name()
+    public function get_name()
     {
         switch ($this->get_id())
         {

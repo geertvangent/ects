@@ -17,7 +17,7 @@ class Profile extends DiscoveryItem
      *
      * @return Name
      */
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
@@ -26,7 +26,7 @@ class Profile extends DiscoveryItem
      *
      * @return multitype:IdentificationCode
      */
-    function get_identification_code()
+    public function get_identification_code()
     {
         return $this->get_default_property(self :: PROPERTY_IDENTIFICATION_CODE);
     }
@@ -35,7 +35,7 @@ class Profile extends DiscoveryItem
      *
      * @return multitype:Email
      */
-    function get_email()
+    public function get_email()
     {
         return $this->get_default_property(self :: PROPERTY_EMAIL);
     }
@@ -44,7 +44,7 @@ class Profile extends DiscoveryItem
      *
      * @return multitype:Communication
      */
-    function get_communication()
+    public function get_communication()
     {
         return $this->get_default_property(self :: PROPERTY_COMMUNICATION);
     }
@@ -53,7 +53,7 @@ class Profile extends DiscoveryItem
      *
      * @return string
      */
-    function get_language()
+    public function get_language()
     {
         return $this->get_default_property(self :: PROPERTY_LANGUAGE);
     }
@@ -62,7 +62,7 @@ class Profile extends DiscoveryItem
      *
      * @return Photo
      */
-    function get_photo()
+    public function get_photo()
     {
         return $this->get_default_property(self :: PROPERTY_PHOTO);
     }
@@ -71,7 +71,7 @@ class Profile extends DiscoveryItem
      *
      * @param Name $name
      */
-    function set_name(Name $name)
+    public function set_name(Name $name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
@@ -80,7 +80,7 @@ class Profile extends DiscoveryItem
      *
      * @param multitype:IdentificationCode $code
      */
-    function set_identification_code($identification_code)
+    public function set_identification_code($identification_code)
     {
         $this->set_default_property(self :: PROPERTY_IDENTIFICATION_CODE, $identification_code);
     }
@@ -89,7 +89,7 @@ class Profile extends DiscoveryItem
      *
      * @param multitype:Email $email
      */
-    function set_email($email)
+    public function set_email($email)
     {
         $this->set_default_property(self :: PROPERTY_EMAIL, $email);
     }
@@ -98,7 +98,7 @@ class Profile extends DiscoveryItem
      *
      * @param multitype:Communication $communication
      */
-    function set_communication($communication)
+    public function set_communication($communication)
     {
         $this->set_default_property(self :: PROPERTY_COMMUNICATION, $communication);
     }
@@ -107,7 +107,7 @@ class Profile extends DiscoveryItem
      *
      * @param string $language
      */
-    function set_language($language)
+    public function set_language($language)
     {
         $this->set_default_property(self :: PROPERTY_LANGUAGE, $language);
     }
@@ -116,7 +116,7 @@ class Profile extends DiscoveryItem
      *
      * @param Photo $photo
      */
-    function set_photo(Photo $photo)
+    public function set_photo(Photo $photo)
     {
         $this->set_default_property(self :: PROPERTY_PHOTO, $photo);
     }
@@ -125,7 +125,7 @@ class Profile extends DiscoveryItem
      *
      * @param IdentificationCode $code
      */
-    function add_identification_code(IdentificationCode $code)
+    public function add_identification_code(IdentificationCode $code)
     {
         $codes = $this->get_identification_code();
         $codes[] = $code;
@@ -136,7 +136,7 @@ class Profile extends DiscoveryItem
      *
      * @param Communication $communication
      */
-    function add_communication(Communication $communication)
+    public function add_communication(Communication $communication)
     {
         $communications = $this->get_communication();
         $communications[] = $communication;
@@ -147,7 +147,7 @@ class Profile extends DiscoveryItem
      *
      * @param Email $email
      */
-    function add_email(Email $email)
+    public function add_email(Email $email)
     {
         $emails = $this->get_email();
         $emails[] = $email;
@@ -158,7 +158,7 @@ class Profile extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_IDENTIFICATION_CODE;
@@ -174,7 +174,7 @@ class Profile extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -183,7 +183,7 @@ class Profile extends DiscoveryItem
      *
      * @return boolean
      */
-    function has_photo()
+    public function has_photo()
     {
         return $this->get_photo() instanceof Photo && $this->get_photo()->get_mime_type() && $this->get_photo()->get_data();
     }

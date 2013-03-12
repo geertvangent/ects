@@ -14,7 +14,7 @@ use application\discovery\module\enrollment\DataManager;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function get_enrollments_table($contract_type = Enrollment :: CONTRACT_TYPE_ALL)
+    public function get_enrollments_table($contract_type = Enrollment :: CONTRACT_TYPE_ALL)
     {
         if ($contract_type == Enrollment :: CONTRACT_TYPE_ALL)
         {
@@ -135,7 +135,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $table;
     }
 
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -183,7 +183,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -191,7 +191,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

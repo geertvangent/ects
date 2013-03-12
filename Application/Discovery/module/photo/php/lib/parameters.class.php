@@ -4,7 +4,7 @@ namespace application\discovery\module\photo;
 class Parameters extends \application\discovery\Parameters
 {
 
-    function __construct($faculty_id = null, $training_id = null, $programme_id = null, $type = null)
+    public function __construct($faculty_id = null, $training_id = null, $programme_id = null, $type = null)
     {
         $this->set_faculty_id($faculty_id);
         $this->set_training_id($training_id);
@@ -12,42 +12,42 @@ class Parameters extends \application\discovery\Parameters
         $this->set_type($type);
     }
 
-    function get_faculty_id()
+    public function get_faculty_id()
     {
         return $this->get_parameter(Module :: PARAM_FACULTY_ID);
     }
 
-    function set_faculty_id($faculty_id)
+    public function set_faculty_id($faculty_id)
     {
         $this->set_parameter(Module :: PARAM_FACULTY_ID, $faculty_id);
     }
 
-    function get_training_id()
+    public function get_training_id()
     {
         return $this->get_parameter(Module :: PARAM_TRAINING_ID);
     }
 
-    function set_training_id($training_id)
+    public function set_training_id($training_id)
     {
         $this->set_parameter(Module :: PARAM_TRAINING_ID, $training_id);
     }
 
-    function get_programme_id()
+    public function get_programme_id()
     {
         return $this->get_parameter(Module :: PARAM_PROGRAMME_ID);
     }
 
-    function set_programme_id($programme_id)
+    public function set_programme_id($programme_id)
     {
         $this->set_parameter(Module :: PARAM_PROGRAMME_ID, $programme_id);
     }
 
-    function get_type()
+    public function get_type()
     {
         return $this->get_parameter(Module :: PARAM_TYPE);
     }
 
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_parameter(Module :: PARAM_TYPE, $type);
     }

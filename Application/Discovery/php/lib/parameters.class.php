@@ -6,17 +6,17 @@ class Parameters
 
     private $parameters = array();
 
-    function get_parameter($key)
+    public function get_parameter($key)
     {
         return $this->parameters[$key];
     }
 
-    function set_parameter($key, $value)
+    public function set_parameter($key, $value)
     {
         $this->parameters[$key] = $value;
     }
 
-    function get_parameters()
+    public function get_parameters()
     {
         return $this->parameters;
     }

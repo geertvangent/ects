@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param Parameters $student_year_parameters
      * @return multitype:\application\discovery\module\student_year\StudentYear
      */
-    function retrieve_student_years($student_year_parameters);
+    public function retrieve_student_years($student_year_parameters);
 }

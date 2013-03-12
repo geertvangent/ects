@@ -22,32 +22,32 @@ class ModuleInstance extends DataClass
     const TYPE_DETAILS = 3;
     const PROPERTY_DISPLAY_ORDER = 'display_order';
 
-    function set_title($title)
+    public function set_title($title)
     {
         $this->set_default_property(self :: PROPERTY_TITLE, $title);
     }
 
-    function get_title()
+    public function get_title()
     {
         return $this->get_default_property(self :: PROPERTY_TITLE);
     }
 
-    function set_description($description)
+    public function set_description($description)
     {
         $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
     }
 
-    function get_description()
+    public function get_description()
     {
         return $this->get_default_property(self :: PROPERTY_DESCRIPTION);
     }
 
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
 
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
@@ -56,7 +56,7 @@ class ModuleInstance extends DataClass
      *
      * @param integer $content_type
      */
-    function set_content_type($content_type)
+    public function set_content_type($content_type)
     {
         $this->set_default_property(self :: PROPERTY_CONTENT_TYPE, $content_type);
     }
@@ -65,7 +65,7 @@ class ModuleInstance extends DataClass
      *
      * @return integer
      */
-    function get_content_type()
+    public function get_content_type()
     {
         return $this->get_default_property(self :: PROPERTY_CONTENT_TYPE);
     }
@@ -74,7 +74,7 @@ class ModuleInstance extends DataClass
      *
      * @param integer $display_order
      */
-    function set_display_order($display_order)
+    public function set_display_order($display_order)
     {
         $this->set_default_property(self :: PROPERTY_DISPLAY_ORDER, $display_order);
     }
@@ -83,24 +83,24 @@ class ModuleInstance extends DataClass
      *
      * @return integer
      */
-    function get_display_order()
+    public function get_display_order()
     {
         return $this->get_default_property(self :: PROPERTY_DISPLAY_ORDER);
     }
 
-    function is_enabled()
+    public function is_enabled()
     {
         return $this->get_content_type() != self :: TYPE_DISABLED;
     }
 
-    static function get_default_property_names()
+    public static function get_default_property_names()
     {
         return parent :: get_default_property_names(
                 array(self :: PROPERTY_TITLE, self :: PROPERTY_DESCRIPTION, self :: PROPERTY_TYPE,
                         self :: PROPERTY_CONTENT_TYPE, self :: PROPERTY_DISPLAY_ORDER));
     }
 
-    static function get_table_name()
+    public static function get_table_name()
     {
         return self :: TABLE_NAME;
     }
@@ -195,12 +195,12 @@ class ModuleInstance extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
 
-    function has_matching_settings($settings)
+    public function has_matching_settings($settings)
     {
         foreach ($settings as $key => $setting)
         {
@@ -212,7 +212,7 @@ class ModuleInstance extends DataClass
         return true;
     }
 
-    function get_module_type()
+    public function get_module_type()
     {
         if ($this->get_type())
         {

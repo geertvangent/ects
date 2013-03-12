@@ -18,7 +18,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     private $faculties;
 
-    function retrieve_faculty($faculty_parameters)
+    public function retrieve_faculty($faculty_parameters)
     {
         $faculty_id = $faculty_parameters->get_faculty_id();
         $source = $faculty_parameters->get_source();
@@ -118,7 +118,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_faculty_next_id($faculty)
+    public function retrieve_faculty_next_id($faculty)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $faculty->get_id() . '"');
@@ -139,7 +139,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_deans($source, $faculty_id)
+    public function retrieve_deans($source, $faculty_id)
     {
         if (! isset($this->deans[$source][$faculty_id]))
         {
@@ -172,7 +172,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->deans[$source][$faculty_id];
     }
 
-    function retrieve_trainings($parameters)
+    public function retrieve_trainings($parameters)
     {
         $faculty_id = $parameters->get_faculty_id();
         $source = $parameters->get_source();

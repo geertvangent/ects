@@ -12,7 +12,7 @@ abstract class Rendition
 
     private $rendition_implementation;
 
-    function __construct($rendition_implementation)
+    public function __construct($rendition_implementation)
     {
         $this->rendition_implementation = $rendition_implementation;
     }
@@ -71,12 +71,12 @@ abstract class Rendition
         $this->rendition_implementation->set_module($module);
     }
 
-    static function launch($rendition_implementation)
+    public static function launch($rendition_implementation)
     {
         return static :: factory($rendition_implementation)->render();
     }
 
-    static function factory($rendition_implementation)
+    public static function factory($rendition_implementation)
     {
         $class = static :: context() . '\\' . Utilities :: underscores_to_camelcase($rendition_implementation->get_format()) . Utilities :: underscores_to_camelcase(
                 $rendition_implementation->get_view()) . 'Rendition';
@@ -88,7 +88,7 @@ abstract class Rendition
      *
      * @return string
      */
-    static function class_name()
+    public static function class_name()
     {
         return get_called_class();
     }
@@ -98,7 +98,7 @@ abstract class Rendition
      *
      * @return string
      */
-    static function context()
+    public static function context()
     {
         return Utilities :: get_namespace_from_classname(get_called_class());
     }

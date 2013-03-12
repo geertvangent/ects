@@ -13,12 +13,12 @@ class Module extends \application\discovery\module\course\Module
     const TAB_CONTENT = 5;
     const TAB_EVALUATIONS = 6;
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return self :: module_parameters();
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);

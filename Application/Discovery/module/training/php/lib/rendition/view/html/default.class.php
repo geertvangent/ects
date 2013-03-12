@@ -11,7 +11,7 @@ use common\libraries\DynamicVisualTabsRenderer;
 class HtmlDefaultRendition extends HtmlRendition
 {
 
-    function render()
+    public function render()
     {
         BreadcrumbTrail :: get_instance()->add(
                 new Breadcrumb(null, Translation :: get('TypeName', null, Utilities :: get_namespace_from_object($this))));

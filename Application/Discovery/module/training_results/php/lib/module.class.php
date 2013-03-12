@@ -17,12 +17,12 @@ class Module extends \application\discovery\Module
      */
     private $training_results;
 
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance($this->get_module_instance());
     }
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return new Parameters(Request :: get(self :: PARAM_TRAINING_ID));
     }
@@ -31,7 +31,7 @@ class Module extends \application\discovery\Module
      *
      * @return multitype:\application\discovery\module\training_results\Course
      */
-    function get_training_results()
+    public function get_training_results()
     {
         if (! isset($this->training_results))
         {
@@ -41,12 +41,12 @@ class Module extends \application\discovery\Module
         return $this->training_results;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_DETAILS;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 

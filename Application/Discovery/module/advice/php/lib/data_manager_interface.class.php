@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param int $id
      * @return multitype:\application\discovery\module\advice\Advice
      */
-    function retrieve_advices($person_id);
+    public function retrieve_advices($person_id);
 }

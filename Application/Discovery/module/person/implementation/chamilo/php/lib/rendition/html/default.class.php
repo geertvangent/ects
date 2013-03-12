@@ -20,7 +20,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
     private $action_bar;
 
-    function render()
+    public function render()
     {
         $this->action_bar = $this->get_action_bar();
         $html[] = $this->action_bar->as_html() . '<br />';
@@ -30,7 +30,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return implode("\n", $html);
     }
 
-    function get_action_bar()
+    public function get_action_bar()
     {
         $parameters = $this->get_application()->get_parameters(true);
         $parameters[\application\discovery\DiscoveryManager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
@@ -45,7 +45,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return $action_bar;
     }
 
-    function get_menu_html()
+    public function get_menu_html()
     {
         $url = $this->get_application()->get_url(
                 array(
@@ -61,7 +61,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return implode($html, "\n");
     }
 
-    function get_user_html()
+    public function get_user_html()
     {
         $html = array();
         $html[] = '<div style="float: right; width: 73%;">';
@@ -141,7 +141,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return implode($html, "\n");
     }
 
-    function get_group_info()
+    public function get_group_info()
     {
         $group_id = $this->get_group();
         $group = \group\GroupDataManager :: get_instance()->retrieve_group($group_id);
@@ -161,7 +161,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return implode("\n", $html);
     }
 
-    function get_group_viewing_url($group)
+    public function get_group_viewing_url($group)
     {
         return $this->get_application()->get_url(
                 array(
@@ -189,7 +189,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -197,7 +197,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

@@ -27,7 +27,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $programme_id
      * @return multitype:\application\discovery\module\course_result\implementation\bamaflex\CourseResult
      */
-    function retrieve_course_results($course_results_parameters)
+    public function retrieve_course_results($course_results_parameters)
     {
         $programme_id = $course_results_parameters->get_programme_id();
         $source = $course_results_parameters->get_source();
@@ -57,7 +57,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->course_results[$programme_id][$source];
     }
 
-    function retrieve_course($course_parameters)
+    public function retrieve_course($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
@@ -86,7 +86,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->course[$programme_id][$source];
     }
 
-    function result_to_course($object)
+    public function result_to_course($object)
     {
         $course = new Course();
         $course->set_id($object->id);
@@ -122,7 +122,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $course;
     }
 
-    function retrieve_course_next_id($course)
+    public function retrieve_course_next_id($course)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $course->get_id() . '"');
@@ -144,7 +144,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function result_to_course_result($course_results_parameters, $result)
+    public function result_to_course_result($course_results_parameters, $result)
     {
         $course_result = new CourseResult();
         $course_result->set_id($result->id);
@@ -180,7 +180,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param string $user$programme_id
      * @return multitype:\application\discovery\module\course_results\MarkMoment
      */
-    function retrieve_mark_moments($course_results_parameters)
+    public function retrieve_mark_moments($course_results_parameters)
     {
         $moments = array();
         
@@ -228,7 +228,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      *
      * @return multitype:multitype:multitype:stdClass
      */
-    function retrieve_marks($programme_id, $source)
+    public function retrieve_marks($programme_id, $source)
     {
         if (! isset($this->marks[$programme_id][$source]))
         {

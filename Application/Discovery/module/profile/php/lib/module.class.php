@@ -18,12 +18,12 @@ class Module extends \application\discovery\Module
     private $profile;
     const PARAM_USER_ID = 'user_id';
 
-    function __construct(Application $application, ModuleInstance $module_instance)
+    public function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
     }
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         $parameter = self :: module_parameters();
         if (! $parameter->get_user_id())
@@ -33,7 +33,7 @@ class Module extends \application\discovery\Module
         return $parameter;
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $parameter = new Parameters();
@@ -48,7 +48,7 @@ class Module extends \application\discovery\Module
      *
      * @return \application\discovery\module\profile\Profile
      */
-    function get_profile()
+    public function get_profile()
     {
         if (! isset($this->profile))
         {
@@ -59,7 +59,7 @@ class Module extends \application\discovery\Module
         return $this->profile;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
         
@@ -73,7 +73,7 @@ class Module extends \application\discovery\Module
         return $types;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_USER;
     }

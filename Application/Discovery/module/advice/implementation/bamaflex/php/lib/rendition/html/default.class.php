@@ -14,7 +14,7 @@ use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -96,7 +96,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_advices_table($enrollment)
+    public function get_advices_table($enrollment)
     {
         $advices = $this->get_advices_data($enrollment);
 
@@ -236,7 +236,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -244,7 +244,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

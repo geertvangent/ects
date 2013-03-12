@@ -17,7 +17,7 @@ use common\libraries\Translation;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -49,7 +49,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
     }
 
-    function get_enrollments($year)
+    public function get_enrollments($year)
     {
         $year_enrollments = array();
 
@@ -107,7 +107,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_enrollment_materials($enrollment_id)
+    public function get_enrollment_materials($enrollment_id)
     {
         $tabs = new DynamicTabsRenderer('study_materials_' . $enrollment_id);
 
@@ -127,7 +127,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_enrollment_materials_by_type($enrollment_id, $type)
+    public function get_enrollment_materials_by_type($enrollment_id, $type)
     {
         $table_data = array();
         $total_price = 0;
@@ -298,7 +298,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -306,7 +306,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

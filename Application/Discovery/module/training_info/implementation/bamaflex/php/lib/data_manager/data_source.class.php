@@ -55,7 +55,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\training_info\implementation\bamaflex\TeachingAssignment
      */
-    function retrieve_training($training_parameters)
+    public function retrieve_training($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -182,7 +182,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->trainings[$training_id][$source];
     }
 
-    function retrieve_training_next_id($training)
+    public function retrieve_training_next_id($training)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');
@@ -202,7 +202,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_majors($training_parameters)
+    public function retrieve_majors($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -243,7 +243,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->majors[$training_id][$source];
     }
 
-    function retrieve_languages($training_parameters)
+    public function retrieve_languages($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -277,7 +277,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->languages[$training_id][$source];
     }
 
-    function retrieve_packages($training_parameters)
+    public function retrieve_packages($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -315,7 +315,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->packages[$training_id][$source];
     }
 
-    function retrieve_courses($parameters)
+    public function retrieve_courses($parameters)
     {
         $id = $parameters->get_training_id();
         $source = $parameters->get_source();
@@ -358,7 +358,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->courses[$id][$source];
     }
 
-    function retrieve_package_courses($id, $source)
+    public function retrieve_package_courses($id, $source)
     {
         if (! isset($this->package_courses[$id][$source]))
         {
@@ -402,7 +402,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->package_courses[$id][$source];
     }
 
-    function retrieve_choices($training_parameters)
+    public function retrieve_choices($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -434,7 +434,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->choices[$training_id][$source];
     }
 
-    function retrieve_choice_options($training_parameters)
+    public function retrieve_choice_options($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -467,7 +467,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->choice_options[$training_id][$source];
     }
 
-    function retrieve_trajectories($training_parameters)
+    public function retrieve_trajectories($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -501,7 +501,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->trajectories[$training_id][$source];
     }
 
-    function retrieve_groups($training_parameters)
+    public function retrieve_groups($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -533,7 +533,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->groups[$training_id][$source];
     }
 
-    function retrieve_sub_trajectories($id, $source)
+    public function retrieve_sub_trajectories($id, $source)
     {
         if (! isset($this->sub_trajectories[$id][$source]))
         {
@@ -566,7 +566,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->sub_trajectories[$id][$source];
     }
 
-    function retrieve_sub_trajectory_courses($id, $source)
+    public function retrieve_sub_trajectory_courses($id, $source)
     {
         if (! isset($this->sub_trajectory_courses[$id][$source]))
         {
@@ -609,7 +609,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->sub_trajectory_courses[$id][$source];
     }
 
-    function retrieve_major_choices($id, $source)
+    public function retrieve_major_choices($id, $source)
     {
         if (! isset($this->major_choices[$id][$source]))
         {
@@ -639,7 +639,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->major_choices[$id][$source];
     }
 
-    function retrieve_major_choice_options($id, $source)
+    public function retrieve_major_choice_options($id, $source)
     {
         if (! isset($this->major_choice_options[$id][$source]))
         {

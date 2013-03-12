@@ -15,12 +15,12 @@ class DiscoveryItem extends DataClass
 
     private $instance;
 
-    function get_instance()
+    public function get_instance()
     {
         return $this->instance;
     }
 
-    function set_instance($instance)
+    public function set_instance($instance)
     {
         $this->instance = $instance;
     }
@@ -29,7 +29,7 @@ class DiscoveryItem extends DataClass
      *
      * @param string $title
      */
-    function set_title($title)
+    public function set_title($title)
     {
         $this->set_default_property(self :: PROPERTY_TITLE, $title);
     }
@@ -38,7 +38,7 @@ class DiscoveryItem extends DataClass
      *
      * @return string
      */
-    function get_title()
+    public function get_title()
     {
         return $this->get_default_property(self :: PROPERTY_TITLE);
     }
@@ -47,7 +47,7 @@ class DiscoveryItem extends DataClass
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_TITLE;
 
@@ -58,7 +58,7 @@ class DiscoveryItem extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }

@@ -62,7 +62,7 @@ class GroupUser extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
@@ -82,7 +82,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
@@ -92,7 +92,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return string The source.
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -102,7 +102,7 @@ class GroupUser extends DiscoveryItem
      *
      * @param string $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
@@ -112,7 +112,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return integer The enrollment_id.
      */
-    function get_enrollment_id()
+    public function get_enrollment_id()
     {
         return $this->get_default_property(self :: PROPERTY_ENROLLMENT_ID);
     }
@@ -122,7 +122,7 @@ class GroupUser extends DiscoveryItem
      *
      * @param integer $enrollment_id
      */
-    function set_enrollment_id($enrollment_id)
+    public function set_enrollment_id($enrollment_id)
     {
         $this->set_default_property(self :: PROPERTY_ENROLLMENT_ID, $enrollment_id);
     }
@@ -132,7 +132,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return integer The person_id.
      */
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
@@ -142,7 +142,7 @@ class GroupUser extends DiscoveryItem
      *
      * @param integer $person_id
      */
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
@@ -152,7 +152,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return string The last_name.
      */
-    function get_last_name()
+    public function get_last_name()
     {
         return $this->get_default_property(self :: PROPERTY_LAST_NAME);
     }
@@ -162,7 +162,7 @@ class GroupUser extends DiscoveryItem
      *
      * @param string $last_name
      */
-    function set_last_name($last_name)
+    public function set_last_name($last_name)
     {
         $this->set_default_property(self :: PROPERTY_LAST_NAME, $last_name);
     }
@@ -172,7 +172,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return string The first_name.
      */
-    function get_first_name()
+    public function get_first_name()
     {
         return $this->get_default_property(self :: PROPERTY_FIRST_NAME);
     }
@@ -182,7 +182,7 @@ class GroupUser extends DiscoveryItem
      *
      * @param string $first_name
      */
-    function set_first_name($first_name)
+    public function set_first_name($first_name)
     {
         $this->set_default_property(self :: PROPERTY_FIRST_NAME, $first_name);
     }
@@ -192,7 +192,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return integer The group_class_id.
      */
-    function get_group_class_id()
+    public function get_group_class_id()
     {
         return $this->get_default_property(self :: PROPERTY_GROUP_CLASS_ID);
     }
@@ -202,7 +202,7 @@ class GroupUser extends DiscoveryItem
      *
      * @param integer $group_class_id
      */
-    function set_group_class_id($group_class_id)
+    public function set_group_class_id($group_class_id)
     {
         $this->set_default_property(self :: PROPERTY_GROUP_CLASS_ID, $group_class_id);
     }
@@ -212,7 +212,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return string The year.
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -222,7 +222,7 @@ class GroupUser extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -232,7 +232,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return integer The struck.
      */
-    function get_struck()
+    public function get_struck()
     {
         return $this->get_default_property(self :: PROPERTY_STRUCK);
     }
@@ -242,17 +242,17 @@ class GroupUser extends DiscoveryItem
      *
      * @param integer $struck
      */
-    function set_struck($struck)
+    public function set_struck($struck)
     {
         $this->set_default_property(self :: PROPERTY_STRUCK, $struck);
     }
 
-    function get_type()
+    public function get_type()
     {
         return $this->get_default_property(self :: PROPERTY_TYPE);
     }
 
-    function set_type($type)
+    public function set_type($type)
     {
         $this->set_default_property(self :: PROPERTY_TYPE, $type);
     }
@@ -261,7 +261,7 @@ class GroupUser extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

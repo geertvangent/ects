@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param int $id
      * @return multitype:\application\discovery\module\exemption\Exemption
      */
-    function retrieve_exemptions($person_id);
+    public function retrieve_exemptions($person_id);
 }

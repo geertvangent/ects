@@ -4,7 +4,7 @@ namespace application\discovery\module\photo\implementation\bamaflex;
 class HtmlZipRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         \application\discovery\Rendition :: launch($this);
     }
@@ -12,7 +12,7 @@ class HtmlZipRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -20,7 +20,7 @@ class HtmlZipRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\HtmlRendition :: VIEW_ZIP;
     }

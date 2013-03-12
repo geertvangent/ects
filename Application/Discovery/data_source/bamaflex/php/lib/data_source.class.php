@@ -7,7 +7,7 @@ class DataSource extends \application\discovery\DataSource
     /**
      * Initialiser, creates the connection and sets the database to UTF8
      */
-    function initialize()
+    public function initialize()
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $connection = Connection :: get_instance($data_source)->get_connection();
@@ -31,7 +31,7 @@ class DataSource extends \application\discovery\DataSource
      * @param $string string
      * @return string
      */
-    function convert_to_utf8($string)
+    public function convert_to_utf8($string)
     {
         if (Connection :: get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
                 'driver') == 'mssql')

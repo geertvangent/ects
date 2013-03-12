@@ -19,14 +19,14 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
      * 
      * @param ModuleInstanceManager $browser
      */
-    function __construct($browser)
+    public function __construct($browser)
     {
         parent :: __construct();
         $this->browser = $browser;
     }
     
     // Inherited
-    function render_cell($column, $module_instance)
+    public function render_cell($column, $module_instance)
     {
         if ($column === ModuleInstanceBrowserTableColumnModel :: get_modification_column())
         {

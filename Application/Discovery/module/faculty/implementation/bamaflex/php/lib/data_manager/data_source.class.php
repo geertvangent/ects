@@ -24,7 +24,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param $id int
      * @return multitype:\application\discovery\module\faculty\implementation\bamaflex\TeachingAssignment
      */
-    function retrieve_faculties($year)
+    public function retrieve_faculties($year)
     {
         if (! isset($this->faculties[$year]))
         {
@@ -66,7 +66,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->faculties[$year];
     }
 
-    function retrieve_faculty($faculty_parameters)
+    public function retrieve_faculty($faculty_parameters)
     {
         $faculty_id = $faculty_parameters->get_parameter(Faculty :: PROPERTY_ID);
         $source = $faculty_parameters->get_parameter(Faculty :: PROPERTY_SOURCE);
@@ -119,7 +119,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_faculty_next_id($faculty)
+    public function retrieve_faculty_next_id($faculty)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $faculty->get_id() . '"');
@@ -140,7 +140,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_years()
+    public function retrieve_years()
     {
         if (! isset($this->years))
         {
@@ -161,7 +161,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->years;
     }
 
-    function retrieve_deans($source, $faculty_id)
+    public function retrieve_deans($source, $faculty_id)
     {
         if (! isset($this->deans[$source][$faculty_id]))
         {

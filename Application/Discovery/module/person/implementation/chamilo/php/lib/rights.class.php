@@ -19,7 +19,7 @@ class Rights extends RightsUtil
 
     private static $instance;
 
-    static function get_instance()
+    public static function get_instance()
     {
         if (! isset(self :: $instance))
         {
@@ -28,12 +28,12 @@ class Rights extends RightsUtil
         return self :: $instance;
     }
 
-    static function get_available_rights()
+    public static function get_available_rights()
     {
         return array(Translation :: get('ViewRight') => self :: VIEW_RIGHT);
     }
 
-    function get_current_location($module_instance_id)
+    public function get_current_location($module_instance_id)
     {
         $parameters = Module :: module_parameters();
         $location = $this->get_module_location_by_identifier($module_instance_id, $parameters);
@@ -48,7 +48,7 @@ class Rights extends RightsUtil
         }
     }
 
-    function module_is_allowed($right, $entities, $module_instance_id, $parameters)
+    public function module_is_allowed($right, $entities, $module_instance_id, $parameters)
     {
         try
         {
@@ -100,7 +100,7 @@ class Rights extends RightsUtil
         }
     }
 
-    function is_visible($module_instance_id, $parameters)
+    public function is_visible($module_instance_id, $parameters)
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -109,42 +109,42 @@ class Rights extends RightsUtil
         return $this->module_is_allowed(self :: VIEW_RIGHT, $entities, $module_instance_id, $parameters);
     }
 
-    function get_module_location_by_identifier($module_instance_id, $parameters)
+    public function get_module_location_by_identifier($module_instance_id, $parameters)
     {
         return parent :: get_location_by_identifier('discovery_' . $module_instance_id, self :: TYPE_PERSON, 
                 $parameters->get_user_id(), 0, self :: TREE_TYPE_ROOT);
     }
 
-    function get_module_location_id_by_identifier($module_instance_id, $parameters)
+    public function get_module_location_id_by_identifier($module_instance_id, $parameters)
     {
         return parent :: get_location_id_by_identifier('discovery_' . $module_instance_id, self :: TYPE_PERSON, 
                 $parameters->get_user_id(), 0, self :: TREE_TYPE_ROOT);
     }
 
-    function create_module_location($module_instance_id, $parameters, $parent, $return_location)
+    public function create_module_location($module_instance_id, $parameters, $parent, $return_location)
     {
         return parent :: create_location('discovery_' . $module_instance_id, self :: TYPE_PERSON, 
                 $parameters->get_user_id(), 1, $parent, 0, 0, self :: TREE_TYPE_ROOT, $return_location);
     }
 
-    function get_module_root($module_instance_id)
+    public function get_module_root($module_instance_id)
     {
         return parent :: get_root('discovery_' . $module_instance_id);
     }
 
-    function get_module_rights_location_entity_right($module_instance_id, $entity_id, $entity_type, $location_id)
+    public function get_module_rights_location_entity_right($module_instance_id, $entity_id, $entity_type, $location_id)
     {
         return parent :: get_rights_location_entity_right('discovery_' . $module_instance_id, self :: VIEW_RIGHT, 
                 $entity_id, $entity_type, $location_id);
     }
 
-    function invert_module_location_entity_right($module_instance_id, $right_id, $entity_id, $entity_type, $location_id)
+    public function invert_module_location_entity_right($module_instance_id, $right_id, $entity_id, $entity_type, $location_id)
     {
         return parent :: invert_location_entity_right('discovery_' . $module_instance_id, $right_id, $entity_id, 
                 $entity_type, $location_id);
     }
 
-    function get_module_targets_entities($module_instance_id, $parameters)
+    public function get_module_targets_entities($module_instance_id, $parameters)
     {
         return parent :: get_target_entities(self :: VIEW_RIGHT, 'discovery_' . $module_instance_id, 
                 $parameters->get_user_id(), self :: TYPE_PERSON);

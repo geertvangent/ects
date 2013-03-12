@@ -17,12 +17,12 @@ abstract class Module extends \application\discovery\Module
      */
     private $exemptions;
 
-    function __construct(Application $application, ModuleInstance $module_instance)
+    public function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
     }
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         $parameter = self :: module_parameters();
         if (! $parameter->get_user_id())
@@ -32,7 +32,7 @@ abstract class Module extends \application\discovery\Module
         return $parameter;
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $parameter = new Parameters();
@@ -47,7 +47,7 @@ abstract class Module extends \application\discovery\Module
      *
      * @return multitype:\application\discovery\module\exemption\TeachingAssignment
      */
-    function get_exemptions()
+    public function get_exemptions()
     {
         if (! isset($this->exemptions))
         {
@@ -57,18 +57,18 @@ abstract class Module extends \application\discovery\Module
         return $this->exemptions;
     }
 
-    function has_data($parameters = null)
+    public function has_data($parameters = null)
     {
         $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_exemptions($parameters);
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_USER;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 

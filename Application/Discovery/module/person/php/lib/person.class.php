@@ -16,7 +16,7 @@ class Person extends DiscoveryItem
      *
      * @return string
      */
-    function get_email()
+    public function get_email()
     {
         return $this->get_default_property(self :: PROPERTY_EMAIL);
     }
@@ -25,7 +25,7 @@ class Person extends DiscoveryItem
      *
      * @return string
      */
-    function get_first_name()
+    public function get_first_name()
     {
         return $this->get_default_property(self :: PROPERTY_FIRST_NAME);
     }
@@ -34,7 +34,7 @@ class Person extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_first_name($first_name)
+    public function set_first_name($first_name)
     {
         $this->set_default_property(self :: PROPERTY_FIRST_NAME, $first_name);
     }
@@ -43,7 +43,7 @@ class Person extends DiscoveryItem
      *
      * @param string $name
      */
-    function set_email($email)
+    public function set_email($email)
     {
         $this->set_default_property(self :: PROPERTY_EMAIL, $email);
     }
@@ -52,7 +52,7 @@ class Person extends DiscoveryItem
      *
      * @return string
      */
-    function get_last_name()
+    public function get_last_name()
     {
         return $this->get_default_property(self :: PROPERTY_LAST_NAME);
     }
@@ -61,7 +61,7 @@ class Person extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_last_name($last_name)
+    public function set_last_name($last_name)
     {
         $this->set_default_property(self :: PROPERTY_LAST_NAME, $last_name);
     }
@@ -70,7 +70,7 @@ class Person extends DiscoveryItem
      *
      * @return string
      */
-    function get_official_code()
+    public function get_official_code()
     {
         return $this->get_default_property(self :: PROPERTY_OFFICIAL_CODE);
     }
@@ -79,7 +79,7 @@ class Person extends DiscoveryItem
      *
      * @param string $official_code
      */
-    function set_official_code($official_code)
+    public function set_official_code($official_code)
     {
         $this->set_default_property(self :: PROPERTY_OFFICIAL_CODE, $official_code);
     }
@@ -88,7 +88,7 @@ class Person extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_EMAIL;
         $extended_property_names[] = self :: PROPERTY_FIRST_NAME;
@@ -102,7 +102,7 @@ class Person extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
@@ -111,7 +111,7 @@ class Person extends DiscoveryItem
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         return implode(' | ', $string);

@@ -12,7 +12,7 @@ use common\libraries\Theme;
 class RightsEditorManagerManagerComponent extends RightsEditorManager
 {
 
-    function run()
+    public function run()
     {
         $this->action_bar = $this->get_action_bar();
         $form = new ManageForm($this->get_parent()->get_module_instance_id(), $this->get_url(),
@@ -44,7 +44,7 @@ class RightsEditorManagerManagerComponent extends RightsEditorManager
      *
      * @return ActionBarRenderer
      */
-    function get_action_bar()
+    public function get_action_bar()
     {
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
 

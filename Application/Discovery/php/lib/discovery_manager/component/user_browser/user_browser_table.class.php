@@ -20,7 +20,7 @@ class UserBrowserTable extends ObjectTable
      *
      * @see ContentObjectTable::ContentObjectTable()
      */
-    function __construct($browser, $parameters, $condition)
+    public function __construct($browser, $parameters, $condition)
     {
         $model = new UserBrowserTableColumnModel();
         $renderer = new UserBrowserTableCellRenderer($browser);

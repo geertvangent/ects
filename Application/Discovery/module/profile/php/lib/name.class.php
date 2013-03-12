@@ -14,7 +14,7 @@ class Name extends DataClass
      *
      * @return string
      */
-    function get_first_name()
+    public function get_first_name()
     {
         return $this->get_default_property(self :: PROPERTY_FIRST_NAME);
     }
@@ -23,7 +23,7 @@ class Name extends DataClass
      *
      * @return string
      */
-    function get_other_first_names()
+    public function get_other_first_names()
     {
         return $this->get_default_property(self :: PROPERTY_OTHER_FIRST_NAMES);
     }
@@ -32,7 +32,7 @@ class Name extends DataClass
      *
      * @return string
      */
-    function get_first_names()
+    public function get_first_names()
     {
         $names = array();
         
@@ -53,7 +53,7 @@ class Name extends DataClass
      *
      * @return string
      */
-    function get_last_name()
+    public function get_last_name()
     {
         return $this->get_default_property(self :: PROPERTY_LAST_NAME);
     }
@@ -62,7 +62,7 @@ class Name extends DataClass
      *
      * @param string $first_name
      */
-    function set_first_name($first_name)
+    public function set_first_name($first_name)
     {
         $this->set_default_property(self :: PROPERTY_FIRST_NAME, $first_name);
     }
@@ -71,7 +71,7 @@ class Name extends DataClass
      *
      * @param string $other_first_names
      */
-    function set_other_first_names($other_first_names)
+    public function set_other_first_names($other_first_names)
     {
         $this->set_default_property(self :: PROPERTY_OTHER_FIRST_NAMES, $other_first_names);
     }
@@ -80,7 +80,7 @@ class Name extends DataClass
      *
      * @param string $last_name
      */
-    function set_last_name($last_name)
+    public function set_last_name($last_name)
     {
         $this->set_default_property(self :: PROPERTY_LAST_NAME, $last_name);
     }
@@ -89,7 +89,7 @@ class Name extends DataClass
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_FIRST_NAME;
         $extended_property_names[] = self :: PROPERTY_OTHER_FIRST_NAMES;
@@ -102,7 +102,7 @@ class Name extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -111,7 +111,7 @@ class Name extends DataClass
      *
      * @return string
      */
-    function get_full_name()
+    public function get_full_name()
     {
         return $this->get_first_name() . ' ' . $this->get_last_name();
     }

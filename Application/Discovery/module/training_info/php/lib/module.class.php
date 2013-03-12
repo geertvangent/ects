@@ -16,12 +16,12 @@ abstract class Module extends \application\discovery\Module
      */
     private $training;
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return self :: module_parameters();
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $training = Request :: get(self :: PARAM_TRAINING_ID);
 
@@ -37,7 +37,7 @@ abstract class Module extends \application\discovery\Module
      *
      * @return multitype:\application\discovery\module\training_info\Faculty
      */
-    function get_training()
+    public function get_training()
     {
         if (! isset($this->training))
         {
@@ -47,12 +47,12 @@ abstract class Module extends \application\discovery\Module
         return $this->training;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_DETAILS;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 

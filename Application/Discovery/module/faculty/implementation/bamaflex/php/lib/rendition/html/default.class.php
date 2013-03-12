@@ -9,12 +9,12 @@ use common\libraries\Translation;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         return \application\discovery\module\faculty\Rendition :: launch($this);
     }
 
-    function get_faculties_table($year)
+    public function get_faculties_table($year)
     {
         $faculties = $this->get_faculties_data($year);
 
@@ -71,7 +71,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -79,7 +79,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

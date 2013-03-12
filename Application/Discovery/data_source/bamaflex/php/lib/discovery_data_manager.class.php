@@ -9,7 +9,7 @@ namespace application\discovery\data_source\bamaflex;
 class DataManager extends \common\libraries\DataManager
 {
 
-    static function get_type()
+    public static function get_type()
     {
         return 'doctrine';
     }

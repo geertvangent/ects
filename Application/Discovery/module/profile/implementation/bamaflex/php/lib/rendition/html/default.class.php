@@ -13,7 +13,7 @@ use common\libraries\Display;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -125,7 +125,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
     }
 
-    function get_general_properties()
+    public function get_general_properties()
     {
         $properties = array();
 
@@ -165,7 +165,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $properties;
     }
 
-    function get_previous()
+    public function get_previous()
     {
         $html = array();
         $previous_college = $this->get_profile()->get_previous_college();
@@ -259,7 +259,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -267,7 +267,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

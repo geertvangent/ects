@@ -14,7 +14,7 @@ use common\libraries\BreadcrumbTrail;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         BreadcrumbTrail :: get_instance()->add(
                 new Breadcrumb(null, Translation :: get('TypeName', null, Utilities :: get_namespace_from_object($this))));
@@ -26,7 +26,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_context()
+    public function get_context()
     {
         $html = array();
 
@@ -39,7 +39,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_faculty_properties_table()
+    public function get_faculty_properties_table()
     {
         $properties = array();
         $properties[Translation :: get('Year')] = $this->get_faculty()->get_year();
@@ -194,7 +194,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return new PropertiesTable($properties);
     }
 
-    function get_trainings_table()
+    public function get_trainings_table()
     {
         $trainings = $this->get_trainings_data($this->get_module_parameters());
 
@@ -308,7 +308,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -316,7 +316,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

@@ -30,7 +30,7 @@ class ModuleInstanceForm extends FormValidator
 
     private $form_type;
 
-    function __construct($form_type, $module_instance, $action)
+    public function __construct($form_type, $module_instance, $action)
     {
         parent :: __construct('module_instance', 'post', $action);
 
@@ -49,7 +49,7 @@ class ModuleInstanceForm extends FormValidator
         $this->setDefaults();
     }
 
-    function build_basic_form()
+    public function build_basic_form()
     {
         $module_instance = $this->module_instance;
         $configuration = $this->configuration;
@@ -69,7 +69,7 @@ class ModuleInstanceForm extends FormValidator
         $tabs_generator->render();
     }
 
-    function build_general_form()
+    public function build_general_form()
     {
         $this->addElement('hidden', ModuleInstance :: PROPERTY_TYPE, $this->module_instance->get_type());
         $this->addElement('text', ModuleInstance :: PROPERTY_TITLE,
@@ -82,7 +82,7 @@ class ModuleInstanceForm extends FormValidator
                 Translation :: get('Enabled', null, Utilities :: COMMON_LIBRARIES));
     }
 
-    function build_settings_form()
+    public function build_settings_form()
     {
         $module_instance = $this->module_instance;
         $configuration = $this->configuration;
@@ -195,7 +195,7 @@ class ModuleInstanceForm extends FormValidator
         }
     }
 
-    function build_editing_form()
+    public function build_editing_form()
     {
         $this->build_basic_form();
 
@@ -209,7 +209,7 @@ class ModuleInstanceForm extends FormValidator
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
 
-    function build_creation_form()
+    public function build_creation_form()
     {
         $this->build_basic_form();
 
@@ -221,7 +221,7 @@ class ModuleInstanceForm extends FormValidator
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
 
-    function update_module_instance()
+    public function update_module_instance()
     {
         $module_instance = $this->module_instance;
         $values = $this->exportValues();
@@ -268,7 +268,7 @@ class ModuleInstanceForm extends FormValidator
         return true;
     }
 
-    function create_module_instance()
+    public function create_module_instance()
     {
         $module_instance = $this->module_instance;
         $values = $this->exportValues();
@@ -327,7 +327,7 @@ class ModuleInstanceForm extends FormValidator
      *
      * @param $defaults array Default values for this form's parameters.
      */
-    function setDefaults($defaults = array ())
+    public function setDefaults($defaults = array ())
     {
         $module_instance = $this->module_instance;
         $defaults[ModuleInstance :: PROPERTY_ID] = $module_instance->get_id();
@@ -380,7 +380,7 @@ class ModuleInstanceForm extends FormValidator
         parent :: setDefaults($defaults);
     }
 
-    function get_module_instance_types()
+    public function get_module_instance_types()
     {
         $path = Path :: get_common_extensions_path() . 'module_instance_manager/implementation/';
         $folders = Filesystem :: get_directory_content($path, Filesystem :: LIST_DIRECTORIES, false);
@@ -394,7 +394,7 @@ class ModuleInstanceForm extends FormValidator
         return $types;
     }
 
-    function parse_settings()
+    public function parse_settings()
     {
         $module_instance = $this->module_instance;
         $path = Path :: namespace_to_path($module_instance->get_type());

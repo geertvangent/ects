@@ -11,7 +11,7 @@ use common\libraries\Filesystem;
 class ZipDefaultRendition extends ZipRendition
 {
 
-    function render()
+    public function render()
     {
         return null;
     }
@@ -20,7 +20,7 @@ class ZipDefaultRendition extends ZipRendition
      *
      * @param string $temporary_directory
      */
-    static function save($temporary_directory, $file_name)
+    public static function save($temporary_directory, $file_name)
     {
         $zip = Filecompression :: factory();
         $zip_path = $zip->create_archive($temporary_directory);

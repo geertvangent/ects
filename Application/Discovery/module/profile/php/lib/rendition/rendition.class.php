@@ -3,7 +3,7 @@ namespace application\discovery\module\profile;
 
 abstract class Rendition extends \application\discovery\Rendition
 {
-    function get_profile()
+    public function get_profile()
     {
         return $this->get_rendition_implementation()->get_profile();
     }

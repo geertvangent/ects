@@ -10,13 +10,13 @@ use common\libraries\BreadcrumbTrail;
 class HtmlDefaultRendition extends HtmlRendition
 {
 
-    function render()
+    public function render()
     {
         $html = array();
         return implode("\n", $html);
     }
 
-    static function add_export_action(\application\discovery\RenditionImplementation $rendition_implementation,
+    public static function add_export_action(\application\discovery\RenditionImplementation $rendition_implementation,
             $type = \application\discovery\HtmlRendition :: VIEW_XLSX)
     {
         $export_parameters = array_merge($rendition_implementation->get_module_parameters()->get_parameters(),

@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param Parameters $group_user_parameters
      * @return multitype:\application\discovery\module\group_user\GroupUser
      */
-    function retrieve_group_users($group_user_parameters);
+    public function retrieve_group_users($group_user_parameters);
 }

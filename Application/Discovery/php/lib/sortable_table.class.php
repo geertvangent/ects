@@ -14,12 +14,12 @@ class SortableTable extends SortableTableFromArray
      *
      * @see SortableTable#get_table_data
      */
-    function get_table_data()
+    public function get_table_data()
     {
         return $this->get_data();
     }
 
-    function as_html($total_value, $total_column)
+    public function as_html($total_value, $total_column)
     {
 
         // $cols = $this->getHeader()->getColCount();
@@ -32,7 +32,7 @@ class SortableTable extends SortableTableFromArray
     /**
      * Get the HTML-code with the data-table.
      */
-    function get_table_html($total_value, $total_column)
+    public function get_table_html($total_value, $total_column)
     {
         // Make sure the header isn't dragable or droppable
         // $this->setRowAttributes(0, array('class' => 'nodrag nodrop'), true);

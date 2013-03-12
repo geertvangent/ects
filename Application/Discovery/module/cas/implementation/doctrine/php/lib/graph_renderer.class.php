@@ -31,7 +31,7 @@ class GraphRenderer
 
     private $graph_data = array();
 
-    function __construct($module, $user_id, $application, $action, $statistics)
+    public function __construct($module, $user_id, $application, $action, $statistics)
     {
         $this->user_id = $user_id;
         $this->application = $application;
@@ -54,7 +54,7 @@ class GraphRenderer
         }
     }
 
-    function table()
+    public function table()
     {
         $url_format = $this->url_format;
         $table_data = array();
@@ -76,7 +76,7 @@ class GraphRenderer
         return $table->as_html();
     }
 
-    function chart()
+    public function chart()
     {
         $image_id = md5(serialize($this->graph_data));
         $image_path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/chart/';
@@ -123,7 +123,7 @@ class GraphRenderer
         return '<img src="' . $web_path . '" border="0" alt="' . $alt_title . '" title="' . $alt_title . '" />';
     }
 
-    function get_config()
+    public function get_config()
     {
         $config = array();
 
@@ -139,7 +139,7 @@ class GraphRenderer
         return $config;
     }
 
-    function get_months()
+    public function get_months()
     {
         if (! isset($this->months))
         {
@@ -173,7 +173,7 @@ class GraphRenderer
         return $this->months;
     }
 
-    function get_data()
+    public function get_data()
     {
         $data = array();
 

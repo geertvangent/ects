@@ -8,7 +8,7 @@ use common\libraries\FileProperties;
 class HtmlXlsxRendition extends HtmlRendition
 {
 
-    function render()
+    public function render()
     {
         $file_path = RenditionImplementation :: launch($this->get_module(),
                 \application\discovery\Rendition :: FORMAT_XLSX, \application\discovery\Rendition :: VIEW_DEFAULT,

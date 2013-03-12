@@ -17,7 +17,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
      */
     private $temporary_directory;
 
-    function render()
+    public function render()
     {
         $this->prepare_file_system();
 
@@ -37,7 +37,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
         return \application\discovery\ZipDefaultRendition :: save($this->temporary_directory, $this->get_file_name());
     }
 
-    function get_file_name()
+    public function get_file_name()
     {
         $file_name_parts = array();
 
@@ -114,7 +114,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
         return implode(' ', $file_name_parts) . ' ' . Translation :: get('TypeName');
     }
 
-    function prepare_file_system()
+    public function prepare_file_system()
     {
         $user_id = Session :: get_user_id();
 
@@ -128,7 +128,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
@@ -136,7 +136,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

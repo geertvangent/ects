@@ -14,37 +14,37 @@ class SecondChance extends DiscoveryItem
     const EXAM_PARTS_FAILED = 6;
     const EXAM_PARTS_SPECIFIC = 10;
 
-    function get_exam()
+    public function get_exam()
     {
         return $this->get_default_property(self :: PROPERTY_EXAM);
     }
 
-    function set_exam($exam)
+    public function set_exam($exam)
     {
         $this->set_default_property(self :: PROPERTY_EXAM, $exam);
     }
 
-    function get_enrollment()
+    public function get_enrollment()
     {
         return $this->get_default_property(self :: PROPERTY_ENROLLMENT);
     }
 
-    function set_enrollment($enrollment)
+    public function set_enrollment($enrollment)
     {
         $this->set_default_property(self :: PROPERTY_ENROLLMENT, $enrollment);
     }
 
-    function get_exam_parts()
+    public function get_exam_parts()
     {
         return $this->get_default_property(self :: PROPERTY_EXAM_PARTS);
     }
 
-    function set_exam_parts($exam_parts)
+    public function set_exam_parts($exam_parts)
     {
         $this->set_default_property(self :: PROPERTY_EXAM_PARTS, $exam_parts);
     }
 
-    function get_exam_parts_string()
+    public function get_exam_parts_string()
     {
         return self :: exam_parts_string($this->get_exam_parts());
     }
@@ -53,7 +53,7 @@ class SecondChance extends DiscoveryItem
      *
      * @return string
      */
-    static function exam_parts_string($exam_parts)
+    public static function exam_parts_string($exam_parts)
     {
         switch ($exam_parts)
         {
@@ -73,7 +73,7 @@ class SecondChance extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_EXAM;
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT;
@@ -86,7 +86,7 @@ class SecondChance extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -95,7 +95,7 @@ class SecondChance extends DiscoveryItem
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         $string[] = $this->get_exam();

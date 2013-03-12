@@ -35,7 +35,7 @@ class RightsEditorManager extends SubManager
      *
      * @param $application Application
      */
-    static function launch($application)
+    public static function launch($application)
     {
         parent :: launch(__CLASS__, $application);
     }
@@ -45,7 +45,7 @@ class RightsEditorManager extends SubManager
      *
      * @return String
      */
-    static function get_action_parameter()
+    public static function get_action_parameter()
     {
         return self :: PARAM_ACTION;
     }
@@ -55,7 +55,7 @@ class RightsEditorManager extends SubManager
      *
      * @return String
      */
-    static function get_default_action()
+    public static function get_default_action()
     {
         return self :: ACTION_MANAGE;
     }
@@ -65,7 +65,7 @@ class RightsEditorManager extends SubManager
      *
      * @return String
      */
-    function get_application_component_path()
+    public function get_application_component_path()
     {
         return dirname(__FILE__) . '/component/';
     }
@@ -73,7 +73,7 @@ class RightsEditorManager extends SubManager
     /*
      * Builds the url to browse an entity @param int $entity_type @return String
      */
-    function get_entity_url($entity_type)
+    public function get_entity_url($entity_type)
     {
         return $this->get_url(array(self :: PARAM_ENTITY_TYPE => $entity_type));
     }
@@ -85,7 +85,7 @@ class RightsEditorManager extends SubManager
      *
      * @return Array
      */
-    function get_available_rights()
+    public function get_available_rights()
     {
         return $this->get_parent()->get_available_rights();
     }
@@ -95,7 +95,7 @@ class RightsEditorManager extends SubManager
      *
      * @return String
      */
-    function get_additional_information()
+    public function get_additional_information()
     {
         if (method_exists($this->get_parent(), 'get_additional_information'))
         {
@@ -110,7 +110,7 @@ class RightsEditorManager extends SubManager
      *
      * @return String
      */
-    function get_selected_entity()
+    public function get_selected_entity()
     {
         return new PlatformGroupEntity();
 

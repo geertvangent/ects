@@ -16,7 +16,7 @@ use application\discovery\module\group\DataManager;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         $html = array();
 
@@ -59,7 +59,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_groups_table($type)
+    public function get_groups_table($type)
     {
         $groups = $this->get_groups_data($type);
 
@@ -106,7 +106,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $table;
     }
 
-    function get_training_properties_table()
+    public function get_training_properties_table()
     {
         $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
                 Module :: get_training_info_parameters());
@@ -239,7 +239,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -247,7 +247,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

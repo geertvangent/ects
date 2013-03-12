@@ -8,7 +8,7 @@ use common\libraries\FileProperties;
 class HtmlZipRendition extends HtmlRendition
 {
 
-    function render()
+    public function render()
     {
         $file_path = RenditionImplementation :: launch($this->get_module(),
                 \application\discovery\Rendition :: FORMAT_ZIP, \application\discovery\Rendition :: VIEW_DEFAULT,

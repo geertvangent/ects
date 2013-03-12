@@ -25,7 +25,7 @@ class ModuleInstanceManager extends SubManager
     const ACTION_MOVE_INSTANCE = 'mover';
     const DEFAULT_ACTION = self :: ACTION_BROWSE_INSTANCES;
 
-    function __construct($repository_manager)
+    public function __construct($repository_manager)
     {
         parent :: __construct($repository_manager);
 
@@ -36,22 +36,22 @@ class ModuleInstanceManager extends SubManager
         }
     }
 
-    function set_action($action)
+    public function set_action($action)
     {
         $this->set_parameter(self :: PARAM_INSTANCE_ACTION, $action);
     }
 
-    function get_action()
+    public function get_action()
     {
         return $this->get_parameter(self :: PARAM_INSTANCE_ACTION);
     }
 
-    function get_application_component_path()
+    public function get_application_component_path()
     {
         return WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) . 'module_instance_manager/component/';
     }
 
-    static function launch($application)
+    public static function launch($application)
     {
         parent :: launch(__CLASS__, $application);
     }
@@ -61,7 +61,7 @@ class ModuleInstanceManager extends SubManager
      * $class :: DEFAULT_ACTION DO NOT USE IN THIS SUBMANAGER'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
      * context of this class - YourSubManager :: DEFAULT_ACTION in all other application classes
      */
-    static function get_default_action()
+    public static function get_default_action()
     {
         return self :: DEFAULT_ACTION;
     }
@@ -71,12 +71,12 @@ class ModuleInstanceManager extends SubManager
      * $class :: PARAM_ACTION DO NOT USE IN THIS SUBMANAGER'S CONTEXT Instead use: - self :: PARAM_ACTION in the context
      * of this class - YourSubManager :: PARAM_ACTION in all other application classes
      */
-    static function get_action_parameter()
+    public static function get_action_parameter()
     {
         return self :: PARAM_INSTANCE_ACTION;
     }
 
-    static function get_registered_types($status = Registration :: STATUS_ACTIVE)
+    public static function get_registered_types($status = Registration :: STATUS_ACTIVE)
     {
         $instance_conditions = array();
         $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE,
@@ -92,7 +92,7 @@ class ModuleInstanceManager extends SubManager
         return CommonDataManager :: retrieves(Registration :: class_name(), $condition);
     }
 
-    static function exists($instance_type, $type)
+    public static function exists($instance_type, $type)
     {
         $manager_class = self :: get_manager_class($instance_type);
         return $manager_class :: exists($type);

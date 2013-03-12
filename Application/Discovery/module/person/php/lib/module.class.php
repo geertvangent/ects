@@ -8,12 +8,12 @@ use common\libraries\Filesystem;
 abstract class Module extends \application\discovery\Module
 {
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_INFORMATION;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 

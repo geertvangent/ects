@@ -33,7 +33,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\enrollment\implementation\bamaflex\Course
      */
-    function retrieve_course($course_parameters)
+    public function retrieve_course($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
@@ -63,7 +63,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->course[$programme_id][$source];
     }
 
-    function result_to_course($course_parameters, $object)
+    public function result_to_course($course_parameters, $object)
     {
         $course = new Course();
         $course->set_id($object->id);
@@ -217,7 +217,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $course;
     }
 
-    function retrieve_course_next_id($course)
+    public function retrieve_course_next_id($course)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $course->get_id() . '"');
@@ -240,7 +240,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         }
     }
 
-    function retrieve_children($course_parameters)
+    public function retrieve_children($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
@@ -277,7 +277,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\EvaluationStructured
      */
-    function retrieve_evaluations($course_parameters)
+    public function retrieve_evaluations($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
@@ -323,7 +323,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\ActivityStructured
      */
-    function retrieve_activities($course_parameters)
+    public function retrieve_activities($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
@@ -367,7 +367,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\MaterialStructured
      */
-    function retrieve_materials($course_parameters)
+    public function retrieve_materials($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
@@ -418,7 +418,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\CompetenceStructured
      */
-    function retrieve_competences($course_parameters)
+    public function retrieve_competences($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
@@ -461,7 +461,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\Language
      */
-    function retrieve_languages($course_parameters)
+    public function retrieve_languages($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
@@ -501,7 +501,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\TimeframePart
      */
-    function retrieve_timeframe_parts($course)
+    public function retrieve_timeframe_parts($course)
     {
         $timeframe_id = $course->get_timeframe_id();
         $source = $course->get_source();
@@ -541,7 +541,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param Parameter $course_parameters
      * @return multitype:\application\discovery\module\course\implementation\bamaflex\Teacher
      */
-    function retrieve_teachers($course_parameters)
+    public function retrieve_teachers($course_parameters)
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();

@@ -31,7 +31,7 @@ class DataSourceInstanceSetting extends DataClass
      *
      * @return array The property names.
      */
-    static function get_default_property_names()
+    public static function get_default_property_names()
     {
         return parent :: get_default_property_names(
                 array(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
@@ -41,7 +41,7 @@ class DataSourceInstanceSetting extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -50,7 +50,7 @@ class DataSourceInstanceSetting extends DataClass
      *
      * @return int
      */
-    function get_data_source_instance_id()
+    public function get_data_source_instance_id()
     {
         return $this->get_default_property(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID);
     }
@@ -59,7 +59,7 @@ class DataSourceInstanceSetting extends DataClass
      *
      * @return string
      */
-    function get_variable()
+    public function get_variable()
     {
         return $this->get_default_property(self :: PROPERTY_VARIABLE);
     }
@@ -68,22 +68,22 @@ class DataSourceInstanceSetting extends DataClass
      *
      * @return string
      */
-    function get_value()
+    public function get_value()
     {
         return $this->get_default_property(self :: PROPERTY_VALUE);
     }
 
-    function set_data_source_instance_id($data_source_instance_id)
+    public function set_data_source_instance_id($data_source_instance_id)
     {
         $this->set_default_property(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, $data_source_instance_id);
     }
 
-    function set_variable($variable)
+    public function set_variable($variable)
     {
         $this->set_default_property(self :: PROPERTY_VARIABLE, $variable);
     }
 
-    function set_value($value)
+    public function set_value($value)
     {
         $this->set_default_property(self :: PROPERTY_VALUE, $value);
     }
@@ -92,7 +92,7 @@ class DataSourceInstanceSetting extends DataClass
      *
      * @return string
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
@@ -101,7 +101,7 @@ class DataSourceInstanceSetting extends DataClass
      *
      * @return string
      */
-    static function get_class_name()
+    public static function get_class_name()
     {
         return self :: CLASS_NAME;
     }
@@ -111,7 +111,7 @@ class DataSourceInstanceSetting extends DataClass
      * @param DataSourceInstance $data_source_instance
      * @return boolean
      */
-    static function initialize(DataSourceInstance $data_source_instance)
+    public static function initialize(DataSourceInstance $data_source_instance)
     {
         $settings_file = Path :: namespace_to_full_path($data_source_instance->get_type()) . Utilities :: get_package_name_from_namespace(
                 $data_source_instance->get_type()) . '.xml';
@@ -138,7 +138,7 @@ class DataSourceInstanceSetting extends DataClass
         return true;
     }
 
-    function delete()
+    public function delete()
     {
         if (! parent :: delete())
         {
@@ -156,7 +156,7 @@ class DataSourceInstanceSetting extends DataClass
      * @param int $data_source_instance_id
      * @return mixed
      */
-    static function get($variable, $data_source_instance_id)
+    public static function get($variable, $data_source_instance_id)
     {
         if (! isset(self :: $settings[$data_source_instance_id]))
         {
@@ -171,7 +171,7 @@ class DataSourceInstanceSetting extends DataClass
      * @param int $data_source_instance_id
      * @return multitype:string
      */
-    static function get_all($data_source_instance_id)
+    public static function get_all($data_source_instance_id)
     {
         if (! isset(self :: $settings[$data_source_instance_id]))
         {
@@ -185,7 +185,7 @@ class DataSourceInstanceSetting extends DataClass
      *
      * @param int $data_source_instance_id
      */
-    static function load($data_source_instance_id)
+    public static function load($data_source_instance_id)
     {
         $condition = new EqualityCondition(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, $data_source_instance_id);
         $settings = DataManager :: get_instance()->retrieve_data_source_instance_settings($condition);

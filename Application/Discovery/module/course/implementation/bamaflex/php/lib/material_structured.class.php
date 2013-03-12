@@ -20,137 +20,137 @@ class MaterialStructured extends Material
     const PROPERTY_PRICE = 'price';
     const PROPERTY_FOR_SALE = 'for_sale';
 
-    function get_programme_id()
+    public function get_programme_id()
     {
         return $this->get_default_property(self :: PROPERTY_PROGRAMME_ID);
     }
 
-    function set_programme_id($programme_id)
+    public function set_programme_id($programme_id)
     {
         $this->set_default_property(self :: PROPERTY_PROGRAMME_ID, $programme_id);
     }
 
-    function get_id()
+    public function get_id()
     {
         return $this->get_default_property(self :: PROPERTY_ID);
     }
 
-    function set_id($id)
+    public function set_id($id)
     {
         $this->set_default_property(self :: PROPERTY_ID, $id);
     }
 
-    function get_group_id()
+    public function get_group_id()
     {
         return $this->get_default_property(self :: PROPERTY_GROUP_ID);
     }
 
-    function set_group_id($group_id)
+    public function set_group_id($group_id)
     {
         $this->set_default_property(self :: PROPERTY_GROUP_ID, $group_id);
     }
 
-    function get_group()
+    public function get_group()
     {
         return $this->get_default_property(self :: PROPERTY_GROUP);
     }
 
-    function set_group($group)
+    public function set_group($group)
     {
         $this->set_default_property(self :: PROPERTY_GROUP, $group);
     }
 
-    function get_title()
+    public function get_title()
     {
         return $this->get_default_property(self :: PROPERTY_TITLE);
     }
 
-    function set_title($title)
+    public function set_title($title)
     {
         $this->set_default_property(self :: PROPERTY_TITLE, $title);
     }
 
-    function get_author()
+    public function get_author()
     {
         return $this->get_default_property(self :: PROPERTY_AUTHOR);
     }
 
-    function set_author($author)
+    public function set_author($author)
     {
         $this->set_default_property(self :: PROPERTY_AUTHOR, $author);
     }
 
-    function get_editor()
+    public function get_editor()
     {
         return $this->get_default_property(self :: PROPERTY_EDITOR);
     }
 
-    function set_editor($editor)
+    public function set_editor($editor)
     {
         $this->set_default_property(self :: PROPERTY_EDITOR, $editor);
     }
 
-    function get_edition()
+    public function get_edition()
     {
         return $this->get_default_property(self :: PROPERTY_EDITION);
     }
 
-    function set_edition($edition)
+    public function set_edition($edition)
     {
         $this->set_default_property(self :: PROPERTY_EDITION, $edition);
     }
 
-    function get_isbn()
+    public function get_isbn()
     {
         return $this->get_default_property(self :: PROPERTY_ISBN);
     }
 
-    function set_isbn($isbn)
+    public function set_isbn($isbn)
     {
         $this->set_default_property(self :: PROPERTY_ISBN, $isbn);
     }
 
-    function get_medium_id()
+    public function get_medium_id()
     {
         return $this->get_default_property(self :: PROPERTY_MEDIUM_ID);
     }
 
-    function set_medium_id($medium_id)
+    public function set_medium_id($medium_id)
     {
         $this->set_default_property(self :: PROPERTY_MEDIUM_ID, $medium_id);
     }
 
-    function get_medium()
+    public function get_medium()
     {
         return $this->get_default_property(self :: PROPERTY_MEDIUM);
     }
 
-    function set_medium($medium)
+    public function set_medium($medium)
     {
         $this->set_default_property(self :: PROPERTY_MEDIUM, $medium);
     }
 
-    function get_price()
+    public function get_price()
     {
         return $this->get_default_property(self :: PROPERTY_PRICE);
     }
 
-    function set_price($price)
+    public function set_price($price)
     {
         $this->set_default_property(self :: PROPERTY_PRICE, $price);
     }
 
-    function get_price_string()
+    public function get_price_string()
     {
         return $this->get_price() . ' &euro;';
     }
 
-    function get_for_sale()
+    public function get_for_sale()
     {
         return $this->get_default_property(self :: PROPERTY_FOR_SALE);
     }
 
-    function set_for_sale($for_sale)
+    public function set_for_sale($for_sale)
     {
         $this->set_default_property(self :: PROPERTY_FOR_SALE, $for_sale);
     }
@@ -159,7 +159,7 @@ class MaterialStructured extends Material
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_ID;
@@ -182,7 +182,7 @@ class MaterialStructured extends Material
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
 //         return DataManager :: get_instance();
     }
@@ -191,7 +191,7 @@ class MaterialStructured extends Material
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         return implode(' | ', $string);

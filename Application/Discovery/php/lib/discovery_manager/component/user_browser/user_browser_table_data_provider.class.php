@@ -22,7 +22,7 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
      * @param UserManagerComponent $browser
      * @param Condition $condition
      */
-    function __construct($browser, $condition)
+    public function __construct($browser, $condition)
     {
         parent :: __construct($browser, $condition);
     }
@@ -37,7 +37,7 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
      * @param string $order_property
      * @return ResultSet A set of matching learning objects.
      */
-    function get_objects($offset, $count, $order_property = null)
+    public function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
         return UserDataManager :: get_instance()->retrieve_users($this->get_condition(), $offset, $count,
@@ -49,7 +49,7 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
      *
      * @return int
      */
-    function get_object_count()
+    public function get_object_count()
     {
         return UserDataManager :: get_instance()->count_users($this->get_condition());
     }

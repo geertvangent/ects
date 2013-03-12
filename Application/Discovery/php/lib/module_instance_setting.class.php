@@ -31,7 +31,7 @@ class ModuleInstanceSetting extends DataClass
      *
      * @return array The property names.
      */
-    static function get_default_property_names()
+    public static function get_default_property_names()
     {
         return parent :: get_default_property_names(
                 array(self :: PROPERTY_MODULE_INSTANCE_ID, self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
@@ -41,7 +41,7 @@ class ModuleInstanceSetting extends DataClass
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -50,7 +50,7 @@ class ModuleInstanceSetting extends DataClass
      *
      * @return int
      */
-    function get_module_instance_id()
+    public function get_module_instance_id()
     {
         return $this->get_default_property(self :: PROPERTY_MODULE_INSTANCE_ID);
     }
@@ -59,7 +59,7 @@ class ModuleInstanceSetting extends DataClass
      *
      * @return string
      */
-    function get_variable()
+    public function get_variable()
     {
         return $this->get_default_property(self :: PROPERTY_VARIABLE);
     }
@@ -68,22 +68,22 @@ class ModuleInstanceSetting extends DataClass
      *
      * @return string
      */
-    function get_value()
+    public function get_value()
     {
         return $this->get_default_property(self :: PROPERTY_VALUE);
     }
 
-    function set_module_instance_id($module_instance_id)
+    public function set_module_instance_id($module_instance_id)
     {
         $this->set_default_property(self :: PROPERTY_MODULE_INSTANCE_ID, $module_instance_id);
     }
 
-    function set_variable($variable)
+    public function set_variable($variable)
     {
         $this->set_default_property(self :: PROPERTY_VARIABLE, $variable);
     }
 
-    function set_value($value)
+    public function set_value($value)
     {
         $this->set_default_property(self :: PROPERTY_VALUE, $value);
     }
@@ -92,7 +92,7 @@ class ModuleInstanceSetting extends DataClass
      *
      * @return string
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return self :: TABLE_NAME;
     }
@@ -101,7 +101,7 @@ class ModuleInstanceSetting extends DataClass
      *
      * @return string
      */
-    static function get_class_name()
+    public static function get_class_name()
     {
         return self :: CLASS_NAME;
     }
@@ -111,7 +111,7 @@ class ModuleInstanceSetting extends DataClass
      * @param ModuleInstance $module_instance
      * @return boolean
      */
-    static function initialize(ModuleInstance $module_instance)
+    public static function initialize(ModuleInstance $module_instance)
     {
         $settings_file = Path :: namespace_to_full_path($module_instance->get_type()) . 'php/settings/settings.xml';
         $doc = new DOMDocument();
@@ -136,7 +136,7 @@ class ModuleInstanceSetting extends DataClass
         return true;
     }
 
-    function delete()
+    public function delete()
     {
         if (! parent :: delete())
         {
@@ -154,7 +154,7 @@ class ModuleInstanceSetting extends DataClass
      * @param int $module_instance_id
      * @return mixed
      */
-    static function get($variable, $module_instance_id)
+    public static function get($variable, $module_instance_id)
     {
         if (! isset(self :: $settings[$module_instance_id]))
         {
@@ -169,7 +169,7 @@ class ModuleInstanceSetting extends DataClass
      * @param int $module_instance_id
      * @return multitype:string
      */
-    static function get_all($module_instance_id)
+    public static function get_all($module_instance_id)
     {
         if (! isset(self :: $settings[$module_instance_id]))
         {
@@ -183,7 +183,7 @@ class ModuleInstanceSetting extends DataClass
      *
      * @param int $module_instance_id
      */
-    static function load($module_instance_id)
+    public static function load($module_instance_id)
     {
         $condition = new EqualityCondition(self :: PROPERTY_MODULE_INSTANCE_ID, $module_instance_id);
         $settings = DataManager :: get_instance()->retrieve_module_instance_settings($condition);

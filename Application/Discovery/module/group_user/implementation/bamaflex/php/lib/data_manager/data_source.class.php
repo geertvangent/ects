@@ -20,7 +20,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $programme_id
      * @return multitype:\application\discovery\module\group_user\implementation\bamaflex\GroupUser
      */
-    function retrieve_group_users($group_user_parameters)
+    public function retrieve_group_users($group_user_parameters)
     {
         $group_class_id = $group_user_parameters->get_group_class_id();
         $source = $group_user_parameters->get_source();
@@ -60,7 +60,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->group_user[$group_class_id][$source][$type];
     }
 
-    function retrieve_group($parameters)
+    public function retrieve_group($parameters)
     {
         $group_class_id = $parameters->get_group_class_id();
         $source = $parameters->get_source();

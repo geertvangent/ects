@@ -10,7 +10,7 @@ use common\libraries\Theme;
 class HtmlDefaultRendition extends HtmlRendition
 {
 
-    function render()
+    public function render()
     {
         $html = array();
 
@@ -118,7 +118,7 @@ class HtmlDefaultRendition extends HtmlRendition
      *
      * @return multitype:string
      */
-    function get_general_properties()
+    public function get_general_properties()
     {
         $properties = array();
         $properties[Translation :: get('FirstName')] = $this->get_profile()->get_name()->get_first_names();

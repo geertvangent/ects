@@ -17,12 +17,12 @@ abstract class Module extends \application\discovery\Module
      */
     private $course;
 
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance($this->get_module_instance());
     }
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return new Parameters(Request :: get(self :: PARAM_PROGRAMME_ID));
     }
@@ -31,7 +31,7 @@ abstract class Module extends \application\discovery\Module
      *
      * @return \application\discovery\module\course\Course
      */
-    function get_course()
+    public function get_course()
     {
         if (! isset($this->course))
         {
@@ -40,12 +40,12 @@ abstract class Module extends \application\discovery\Module
         return $this->course;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_DETAILS;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 

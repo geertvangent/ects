@@ -9,5 +9,5 @@ namespace application\discovery\module\faculty_info;
 interface DataManagerInterface
 {
 
-    function retrieve_faculty($faculty_parameters);
+    public function retrieve_faculty($faculty_parameters);
 }

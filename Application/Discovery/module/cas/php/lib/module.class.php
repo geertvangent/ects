@@ -17,12 +17,12 @@ abstract class Module extends \application\discovery\Module
     const PARAM_USER_ID = 'user_id';
     const PARAM_MODE = 'mode';
 
-    function __construct(Application $application, ModuleInstance $module_instance)
+    public function __construct(Application $application, ModuleInstance $module_instance)
     {
         parent :: __construct($application, $module_instance);
     }
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         $parameter = self :: module_parameters();
 
@@ -43,7 +43,7 @@ abstract class Module extends \application\discovery\Module
         return $parameter;
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $param_mode = Request :: get(self :: PARAM_MODE);
@@ -68,7 +68,7 @@ abstract class Module extends \application\discovery\Module
         return $parameter;
     }
 
-    function get_cas_statistics()
+    public function get_cas_statistics()
     {
         if (! isset($this->cas_statistics))
         {
@@ -90,7 +90,7 @@ abstract class Module extends \application\discovery\Module
         return $this->cas_statistics;
     }
 
-    function get_applications()
+    public function get_applications()
     {
         if (! isset($this->applications))
         {
@@ -99,18 +99,18 @@ abstract class Module extends \application\discovery\Module
         return $this->applications;
     }
 
-    function has_data($parameters = null)
+    public function has_data($parameters = null)
     {
         $parameters = $parameters ? $parameters : $this->get_module_parameters();
         return $this->get_data_manager()->count_cas_statistics($parameters);
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_USER;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 

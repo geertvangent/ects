@@ -36,7 +36,7 @@ class LearningCredit extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
         $extended_property_names[] = self :: PROPERTY_DATE;
@@ -50,7 +50,7 @@ class LearningCredit extends DiscoveryItem
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -60,7 +60,7 @@ class LearningCredit extends DiscoveryItem
      * 
      * @return integer The person_id.
      */
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
@@ -70,7 +70,7 @@ class LearningCredit extends DiscoveryItem
      * 
      * @param integer $person_id
      */
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
@@ -80,7 +80,7 @@ class LearningCredit extends DiscoveryItem
      * 
      * @return string The date.
      */
-    function get_date()
+    public function get_date()
     {
         return $this->get_default_property(self :: PROPERTY_DATE);
     }
@@ -90,7 +90,7 @@ class LearningCredit extends DiscoveryItem
      * 
      * @param string $date
      */
-    function set_date($date)
+    public function set_date($date)
     {
         $this->set_default_property(self :: PROPERTY_DATE, $date);
     }
@@ -100,7 +100,7 @@ class LearningCredit extends DiscoveryItem
      * 
      * @return integer The learning_credit.
      */
-    function get_learning_credit()
+    public function get_learning_credit()
     {
         return $this->get_default_property(self :: PROPERTY_LEARNING_CREDIT);
     }
@@ -110,7 +110,7 @@ class LearningCredit extends DiscoveryItem
      * 
      * @param integer $learning_credit
      */
-    function set_learning_credit($learning_credit)
+    public function set_learning_credit($learning_credit)
     {
         $this->set_default_property(self :: PROPERTY_LEARNING_CREDIT, $learning_credit);
     }
@@ -119,12 +119,12 @@ class LearningCredit extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
-    function get_html()
+    public function get_html()
     {
         if (is_null($this->get_learning_credit()))
         {

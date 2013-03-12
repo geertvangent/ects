@@ -53,7 +53,7 @@ class ManageForm extends FormValidator
 
     private $module_id;
 
-    function __construct($module_id, $action, $available_rights)
+    public function __construct($module_id, $action, $available_rights)
     {
         parent :: __construct('manager', 'post', $action);
 
@@ -66,7 +66,7 @@ class ManageForm extends FormValidator
     /**
      * Builds the form
      */
-    function build_form()
+    public function build_form()
     {
         $this->build_right_form();
 
@@ -172,7 +172,7 @@ class ManageForm extends FormValidator
      *
      * @param RightsLocation $location
      */
-    function handle_rights()
+    public function handle_rights()
     {
         $values = $this->exportValues();
         $succes = true;
@@ -195,7 +195,7 @@ class ManageForm extends FormValidator
         return $succes;
     }
 
-    function handle_group_rights($group_ids, $right_id)
+    public function handle_group_rights($group_ids, $right_id)
     {
         $values = $this->exportValues();
         $option = $values[self :: PROPERTY_RIGHT_OPTION];
@@ -253,7 +253,7 @@ class ManageForm extends FormValidator
         return $succes;
     }
 
-    function handle_user_rights($user_ids, $right_id)
+    public function handle_user_rights($user_ids, $right_id)
     {
         $values = $this->exportValues();
         $module_id = $this->module_id;

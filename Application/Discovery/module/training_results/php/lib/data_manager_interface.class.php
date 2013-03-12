@@ -14,5 +14,5 @@ interface DataManagerInterface
      * @param Parameters $training_results_parameters
      * @return multitype:\application\discovery\module\training_results\CourseResults
      */
-    function retrieve_training_results($training_results_parameters);
+    public function retrieve_training_results($training_results_parameters);
 }

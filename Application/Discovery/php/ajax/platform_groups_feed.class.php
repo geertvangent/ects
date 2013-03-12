@@ -17,7 +17,7 @@ class DiscoveryAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
 {
     const PARAM_PUBLICATION = 'publication_id';
 
-    function required_parameters()
+    public function required_parameters()
     {
         return array();
     }
@@ -27,7 +27,7 @@ class DiscoveryAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
      *
      * @return ResultSet
      */
-    function retrieve_groups()
+    public function retrieve_groups()
     {
         // Set the conditions for the search query
         $search_query = Request :: post(self :: PARAM_SEARCH_QUERY);
@@ -62,7 +62,7 @@ class DiscoveryAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
     /**
      * Retrieves all the users for the selected group
      */
-    function get_user_ids()
+    public function get_user_ids()
     {
         $filter = Request :: post(self :: PARAM_FILTER);
         $filter_id = substr($filter, 2);
@@ -90,7 +90,7 @@ class DiscoveryAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
      *
      * @return AdvancedElementFinderElement
      */
-    function get_group_element($group)
+    public function get_group_element($group)
     {
         return new AdvancedElementFinderElement(PlatformGroupEntity :: ENTITY_TYPE . '_' . $group->get_id(),
                 'type type_group', $group->get_name(), $group->get_code(),
@@ -102,7 +102,7 @@ class DiscoveryAjaxPlatformGroupsFeed extends CommonAjaxGroupsFeed
      *
      * @return AdvancedElementFinderElement
      */
-    function get_user_element($user)
+    public function get_user_element($user)
     {
         return new AdvancedElementFinderElement(UserEntity :: ENTITY_TYPE . '_' . $user->get_id(), 'type type_user',
                 $user->get_fullname(), $user->get_official_code());

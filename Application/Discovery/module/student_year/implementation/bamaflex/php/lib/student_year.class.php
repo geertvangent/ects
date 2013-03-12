@@ -36,7 +36,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_REDUCED_REGISTRATION_FEE_ID;
@@ -49,7 +49,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -59,7 +59,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      * 
      * @return string The source.
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -69,7 +69,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      * 
      * @param string $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
@@ -79,7 +79,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      * 
      * @return integer The reduced_registration_fee_id.
      */
-    function get_reduced_registration_fee_id()
+    public function get_reduced_registration_fee_id()
     {
         return $this->get_default_property(self :: PROPERTY_REDUCED_REGISTRATION_FEE_ID);
     }
@@ -89,7 +89,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      * 
      * @param integer $reduced_registration_fee_id
      */
-    function set_reduced_registration_fee_id($reduced_registration_fee_id)
+    public function set_reduced_registration_fee_id($reduced_registration_fee_id)
     {
         $this->set_default_property(self :: PROPERTY_REDUCED_REGISTRATION_FEE_ID, $reduced_registration_fee_id);
     }
@@ -98,7 +98,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      *
      * @return string
      */
-    function get_reduced_registration_fee_string()
+    public function get_reduced_registration_fee_string()
     {
         return self :: reduced_registration_fee_string($this->get_reduced_registration_fee_id());
     }
@@ -107,7 +107,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      *
      * @return string
      */
-    static function reduced_registration_fee_string($reduced_registration_fee)
+    public static function reduced_registration_fee_string($reduced_registration_fee)
     {
         switch ($reduced_registration_fee)
         {
@@ -134,7 +134,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      * @param boolean $types_only
      * @return multitype:integer multitype:string
      */
-    static function get_reduced_registration_fee_types($types_only = false)
+    public static function get_reduced_registration_fee_types($types_only = false)
     {
         $types = array();
         
@@ -156,7 +156,7 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

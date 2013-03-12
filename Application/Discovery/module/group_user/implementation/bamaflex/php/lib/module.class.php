@@ -8,12 +8,12 @@ class Module extends \application\discovery\module\group_user\Module
     const PARAM_SOURCE = 'source';
     const PARAM_TYPE = 'type';
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return self :: module_parameters();
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $group_class_id = Request :: get(self :: PARAM_GROUP_CLASS_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
@@ -35,7 +35,7 @@ class Module extends \application\discovery\module\group_user\Module
         return $parameter;
     }
 
-    static function get_group_parameters()
+    public static function get_group_parameters()
     {
         $group_class_id = Request :: get(self :: PARAM_GROUP_CLASS_ID);
         $source = Request :: get(self :: PARAM_SOURCE);

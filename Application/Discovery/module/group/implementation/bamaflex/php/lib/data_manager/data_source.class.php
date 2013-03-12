@@ -21,7 +21,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\group\implementation\bamaflex\Group
      */
-    function retrieve_groups($parameters)
+    public function retrieve_groups($parameters)
     {
         $training_id = $parameters->get_training_id();
         $source = $parameters->get_source();
@@ -60,7 +60,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->groups[$training_id];
     }
 
-    function retrieve_training($training_parameters)
+    public function retrieve_training($training_parameters)
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
@@ -168,7 +168,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->trainings[$training_id][$source];
     }
 
-    function retrieve_training_next_id($training)
+    public function retrieve_training_next_id($training)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');

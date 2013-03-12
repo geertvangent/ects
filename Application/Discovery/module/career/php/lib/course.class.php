@@ -28,7 +28,7 @@ class Course extends DataClass
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_NAME;
@@ -43,7 +43,7 @@ class Course extends DataClass
      * 
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -53,7 +53,7 @@ class Course extends DataClass
      * 
      * @return string The year.
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -63,7 +63,7 @@ class Course extends DataClass
      * 
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -73,7 +73,7 @@ class Course extends DataClass
      * 
      * @return string The name.
      */
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
@@ -83,7 +83,7 @@ class Course extends DataClass
      * 
      * @param string $name
      */
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
@@ -93,12 +93,12 @@ class Course extends DataClass
      * 
      * @return multitype:Mark The marks.
      */
-    function get_marks()
+    public function get_marks()
     {
         return $this->get_default_property(self :: PROPERTY_MARKS);
     }
 
-    function get_mark_by_moment_id($moment_id)
+    public function get_mark_by_moment_id($moment_id)
     {
         // if ($this->has_children())
         // {
@@ -136,7 +136,7 @@ class Course extends DataClass
      * 
      * @param multitype:Mark $marks
      */
-    function set_marks($marks)
+    public function set_marks($marks)
     {
         $this->set_default_property(self :: PROPERTY_MARKS, $marks);
     }
@@ -146,7 +146,7 @@ class Course extends DataClass
      * 
      * @return multitype:Course The children.
      */
-    function get_children()
+    public function get_children()
     {
         return $this->get_default_property(self :: PROPERTY_CHILDREN);
     }
@@ -156,7 +156,7 @@ class Course extends DataClass
      * 
      * @param multitype:Course $children
      */
-    function set_children($children)
+    public function set_children($children)
     {
         $this->set_default_property(self :: PROPERTY_CHILDREN, $children);
     }
@@ -165,7 +165,7 @@ class Course extends DataClass
      *
      * @param Course $course
      */
-    function add_child(Course $course)
+    public function add_child(Course $course)
     {
         $courses = $this->get_children();
         $courses[] = $course;
@@ -176,7 +176,7 @@ class Course extends DataClass
      *
      * @param Mark $mark
      */
-    function add_mark(Mark $mark)
+    public function add_mark(Mark $mark)
     {
         $marks = $this->get_marks();
         $marks[] = $mark;
@@ -187,7 +187,7 @@ class Course extends DataClass
      *
      * @return boolean
      */
-    function has_children()
+    public function has_children()
     {
         return count($this->get_children()) > 0;
     }
@@ -196,7 +196,7 @@ class Course extends DataClass
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

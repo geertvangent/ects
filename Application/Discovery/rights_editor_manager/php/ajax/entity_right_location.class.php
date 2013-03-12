@@ -16,12 +16,12 @@ class WeblcmsAjaxEntityRightLocation extends AjaxManager
     const PARAM_RIGHTS = 'rights';
     const PROPERTY_SUCCESS = 'success';
 
-    function required_parameters()
+    public function required_parameters()
     {
         return array(self :: PARAM_LOCATIONS, self :: PARAM_RIGHTS);
     }
 
-    function run()
+    public function run()
     {
         $locations = $this->get_parameter(self :: PARAM_LOCATIONS);
         $locations = json_decode($locations);

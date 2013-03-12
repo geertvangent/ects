@@ -21,7 +21,7 @@ class BamaflexAjaxUsersFeed extends AjaxManager
     const PARAM_MODULE_INSTANCE_ID = 'module_instance_id';
     const PARAM_PARAMETERS = 'parameters';
 
-    function required_parameters()
+    public function required_parameters()
     {
         return array(self :: PARAM_MODULE_INSTANCE_ID, self :: PARAM_USER_ID);
     }
@@ -29,7 +29,7 @@ class BamaflexAjaxUsersFeed extends AjaxManager
     /**
      * Runs this ajax component
      */
-    function run()
+    public function run()
     {
         $result = new JsonAjaxResult();
 

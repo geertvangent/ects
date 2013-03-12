@@ -20,7 +20,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
      * @param unknown_type $id
      * @return multitype:int
      */
-    function retrieve_actions($parameters)
+    public function retrieve_actions($parameters)
     {
         if (! isset($this->actions))
         {
@@ -43,7 +43,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         return $this->actions;
     }
 
-    function retrieve_applications()
+    public function retrieve_applications()
     {
         if (! isset($this->applications))
         {
@@ -70,7 +70,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\cas\implementation\doctrine\Cas
      */
-    function retrieve_cas_statistics($parameters)
+    public function retrieve_cas_statistics($parameters)
     {
         $user_id = $parameters->get_user_id();
         $mode = $parameters->get_mode();
@@ -132,7 +132,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         return $this->cas_statistics[$user_id];
     }
 
-    function count_cas_statistics($parameters)
+    public function count_cas_statistics($parameters)
     {
         $user_id = $parameters->get_user_id();
         $mode = $parameters->get_mode();
@@ -160,7 +160,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         return 0;
     }
 
-    function count_cas_graph_statistics($condition)
+    public function count_cas_graph_statistics($condition)
     {
         $query = 'SELECT count(id) AS statistics_count FROM statistics';
         $translator = new DoctrineConditionTranslator($this);
@@ -177,7 +177,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         return 0;
     }
 
-    function retrieve_first_date($user_id, $action, $application)
+    public function retrieve_first_date($user_id, $action, $application)
     {
         if ($user_id != 0)
         {
@@ -218,12 +218,12 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
     }
 
     // helper for DoctrineConditionTranslator
-    function get_alias($table_name)
+    public function get_alias($table_name)
     {
         return $table_name;
     }
 
-    function escape_column_name($name, $table_alias = null)
+    public function escape_column_name($name, $table_alias = null)
     {
         $quoted_name = $this->get_connection()->quoteIdentifier($name);
         if (! is_null($table_alias))
@@ -236,7 +236,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         }
     }
 
-    function quote($value, $type = null, $quote = true, $escape_wildcards = false)
+    public function quote($value, $type = null, $quote = true, $escape_wildcards = false)
     {
         return $this->get_connection()->quote($value, $type, $quote, $escape_wildcards);
     }

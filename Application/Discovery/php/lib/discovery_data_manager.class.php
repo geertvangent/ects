@@ -20,7 +20,7 @@ class DataManager extends \common\libraries\DataManager
      * 
      * @return string
      */
-    static function get_type()
+    public static function get_type()
     {
         return 'doctrine';
     }
@@ -41,7 +41,7 @@ class DataManager extends \common\libraries\DataManager
     // }
     // return self :: $instance;
     // }
-    static function create_module_rights_storage_units($module)
+    public static function create_module_rights_storage_units($module)
     {
         $right_location = self :: parse_xml_file(
                 WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) . 'php/rights/rights_location.xml');

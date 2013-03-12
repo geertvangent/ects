@@ -18,7 +18,7 @@ use common\libraries\BreadcrumbTrail;
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
-    function render()
+    public function render()
     {
         $html = array();
         $training = $this->get_training();
@@ -100,7 +100,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_general()
+    public function get_general()
     {
         $training = $this->get_training();
         $properties = array();
@@ -284,7 +284,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $table->toHtml();
     }
 
-    function get_options()
+    public function get_options()
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('options');
@@ -313,7 +313,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_choices()
+    public function get_choices()
     {
         $training = $this->get_training();
         $data = array();
@@ -354,7 +354,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_majors()
+    public function get_majors()
     {
         $training = $this->get_training();
         
@@ -390,7 +390,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_packages()
+    public function get_packages()
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('packages');
@@ -405,7 +405,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_major_choices($major)
+    public function get_major_choices($major)
     {
         $html = array();
         $data = array();
@@ -446,7 +446,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_package_courses($package)
+    public function get_package_courses($package)
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
@@ -571,7 +571,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $table->as_html();
     }
 
-    function get_trajectories()
+    public function get_trajectories()
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('trajectories');
@@ -586,7 +586,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_sub_trajectories($trajectory)
+    public function get_sub_trajectories($trajectory)
     {
         $tabs = new DynamicTabsRenderer('sub_trajectories_' . $trajectory->get_id());
         
@@ -600,7 +600,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $tabs->render();
     }
 
-    function get_sub_trajectory_courses($trajectory)
+    public function get_sub_trajectory_courses($trajectory)
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
@@ -727,7 +727,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return $table->as_html();
     }
 
-    function get_courses()
+    public function get_courses()
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
@@ -858,7 +858,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -866,7 +866,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

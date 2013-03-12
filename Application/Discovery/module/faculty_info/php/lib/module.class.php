@@ -19,12 +19,12 @@ abstract class Module extends \application\discovery\Module
 
     private $cache_trainings = array();
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return self :: module_parameters();
     }
 
-    static function module_parameters()
+    public static function module_parameters()
     {
         $faculty = Request :: get(self :: PARAM_FACULTY_ID);
 
@@ -40,7 +40,7 @@ abstract class Module extends \application\discovery\Module
      *
      * @return multitype:\application\discovery\module\faculty_info\Faculty
      */
-    function get_faculty()
+    public function get_faculty()
     {
         if (! isset($this->faculty))
         {
@@ -50,12 +50,12 @@ abstract class Module extends \application\discovery\Module
         return $this->faculty;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_DETAILS;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 
@@ -69,7 +69,7 @@ abstract class Module extends \application\discovery\Module
         return $types;
     }
 
-    function get_trainings_data($parameters)
+    public function get_trainings_data($parameters)
     {
         $faculty_id = $parameters->get_faculty_id();
         $source = $parameters->get_source();

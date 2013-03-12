@@ -17,7 +17,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     private $php_excel;
 
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -37,7 +37,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         return \application\discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
     }
 
-    function process_teaching_assignments()
+    public function process_teaching_assignments()
     {
         $headers = array();
         $headers[] = Translation :: get('Faculty');
@@ -105,7 +105,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
@@ -113,7 +113,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

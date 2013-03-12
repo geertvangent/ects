@@ -54,7 +54,7 @@ class Connection extends DoctrineConnection
      * 
      * @return Connection The instance.
      */
-    static function get_instance($data_source_instance_id)
+    public static function get_instance($data_source_instance_id)
     {
         if (! isset(self :: $instance) || ! isset(self :: $instance[$data_source_instance_id]))
         {
@@ -63,17 +63,17 @@ class Connection extends DoctrineConnection
         return self :: $instance[$data_source_instance_id];
     }
 
-    function get_connection()
+    public function get_connection()
     {
         return $this->connection;
     }
 
-    function set_option($option, $value)
+    public function set_option($option, $value)
     {
         $this->connection->setOption($option, $value);
     }
 
-    function get_data_source_instance()
+    public function get_data_source_instance()
     {
         return $this->data_source_instance;
     }

@@ -25,7 +25,7 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
      */
     private $action_bar;
 
-    function run()
+    public function run()
     {
         $this->action_bar = $this->get_action_bar();
 
@@ -40,7 +40,7 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
         $this->display_footer();
     }
 
-    function get_condition()
+    public function get_condition()
     {
         $query = $this->action_bar->get_query();
 
@@ -58,7 +58,7 @@ class DiscoveryManagerBrowserComponent extends DiscoveryManager
         }
     }
 
-    function get_action_bar()
+    public function get_action_bar()
     {
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->set_search_url($this->get_url());

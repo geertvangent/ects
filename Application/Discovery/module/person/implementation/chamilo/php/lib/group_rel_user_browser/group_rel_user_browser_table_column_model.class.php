@@ -15,7 +15,7 @@ class GroupRelUserBrowserTableColumnModel extends DefaultGroupRelUserTableColumn
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
         parent :: __construct();
         $this->set_default_order_column(1);
@@ -27,7 +27,7 @@ class GroupRelUserBrowserTableColumnModel extends DefaultGroupRelUserTableColumn
      *
      * @return ContentObjectTableColumn
      */
-    static function get_modification_column()
+    public static function get_modification_column()
     {
         if (! isset(self :: $modification_column))
         {

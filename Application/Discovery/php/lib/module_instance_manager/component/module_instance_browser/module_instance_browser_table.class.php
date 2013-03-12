@@ -20,7 +20,7 @@ class ModuleInstanceBrowserTable extends ObjectTable
      *
      * @see ContentObjectTable::ContentObjectTable()
      */
-    function __construct($browser, $parameters, $condition)
+    public function __construct($browser, $parameters, $condition)
     {
         $model = new ModuleInstanceBrowserTableColumnModel();
         $renderer = new ModuleInstanceBrowserTableCellRenderer($browser);

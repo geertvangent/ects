@@ -16,7 +16,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see application\discovery\module\training_results.Module::render()
      */
-    function render()
+    public function render()
     {
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
@@ -36,7 +36,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_training_properties_table()
+    public function get_training_properties_table()
     {
         $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
                 Module :: get_training_info_parameters());
@@ -166,7 +166,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         return implode("\n", $html);
     }
 
-    function get_training_results_table()
+    public function get_training_results_table()
     {
         $html = array();
 
@@ -195,7 +195,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      *
      * @return multitype:multitype:string
      */
-    function get_table_data()
+    public function get_table_data()
     {
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
@@ -288,7 +288,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      *
      * @return multitype:string
      */
-    function get_table_headers()
+    public function get_table_headers()
     {
         $headers = array();
         $headers[] = array(Translation :: get('Name'));
@@ -304,7 +304,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
-    function get_format()
+    public function get_format()
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
@@ -312,7 +312,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
-    function get_view()
+    public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
     }

@@ -14,12 +14,12 @@ interface DataManagerInterface
      * @param Parameters $course_results_parameters
      * @return multitype:\application\discovery\module\course_results\CourseResults
      */
-    function retrieve_course_results($course_results_parameters);
+    public function retrieve_course_results($course_results_parameters);
 
     /**
      *
      * @param Parameters $course_results_parameters
      * @return multitype:\application\discovery\module\course_results\MarkMoment
      */
-    function retrieve_mark_moments($course_results_parameters);
+    public function retrieve_mark_moments($course_results_parameters);
 }

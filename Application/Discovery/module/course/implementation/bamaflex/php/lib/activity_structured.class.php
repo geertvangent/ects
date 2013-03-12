@@ -13,62 +13,62 @@ class ActivityStructured extends Activity
     const PROPERTY_TIME = 'time';
     const PROPERTY_REMARKS = 'remarks';
 
-    function get_programme_id()
+    public function get_programme_id()
     {
         return $this->get_default_property(self :: PROPERTY_PROGRAMME_ID);
     }
 
-    function set_programme_id($programme_id)
+    public function set_programme_id($programme_id)
     {
         $this->set_default_property(self :: PROPERTY_PROGRAMME_ID, $programme_id);
     }
 
-    function get_group_id()
+    public function get_group_id()
     {
         return $this->get_default_property(self :: PROPERTY_GROUP_ID);
     }
 
-    function set_group_id($group_id)
+    public function set_group_id($group_id)
     {
         $this->set_default_property(self :: PROPERTY_GROUP_ID, $group_id);
     }
 
-    function get_group()
+    public function get_group()
     {
         return $this->get_default_property(self :: PROPERTY_GROUP);
     }
 
-    function set_group($group)
+    public function set_group($group)
     {
         $this->set_default_property(self :: PROPERTY_GROUP, $group);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
 
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
 
-    function get_time()
+    public function get_time()
     {
         return $this->get_default_property(self :: PROPERTY_TIME);
     }
 
-    function set_time($time)
+    public function set_time($time)
     {
         $this->set_default_property(self :: PROPERTY_TIME, $time);
     }
 
-    function get_remarks()
+    public function get_remarks()
     {
         return $this->get_default_property(self :: PROPERTY_REMARKS);
     }
 
-    function set_remarks($remarks)
+    public function set_remarks($remarks)
     {
         $this->set_default_property(self :: PROPERTY_REMARKS, $remarks);
     }
@@ -77,7 +77,7 @@ class ActivityStructured extends Activity
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_GROUP_ID;
@@ -93,7 +93,7 @@ class ActivityStructured extends Activity
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }
@@ -102,7 +102,7 @@ class ActivityStructured extends Activity
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $string = array();
         return implode(' | ', $string);

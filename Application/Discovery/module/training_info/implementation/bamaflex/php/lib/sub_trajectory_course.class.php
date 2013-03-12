@@ -21,7 +21,7 @@ class SubTrajectoryCourse extends DiscoveryItem
      *
      * @return int
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -30,92 +30,92 @@ class SubTrajectoryCourse extends DiscoveryItem
      *
      * @param int $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
 
-    function get_credits()
+    public function get_credits()
     {
         return $this->get_default_property(self :: PROPERTY_CREDITS);
     }
 
-    function set_credits($credits)
+    public function set_credits($credits)
     {
         $this->set_default_property(self :: PROPERTY_CREDITS, $credits);
     }
 
-    function get_trajectory_part()
+    public function get_trajectory_part()
     {
         return $this->get_default_property(self :: PROPERTY_TRAJECTORY_PART);
     }
 
-    function set_trajectory_part($trajectory_part)
+    public function set_trajectory_part($trajectory_part)
     {
         $this->set_default_property(self :: PROPERTY_TRAJECTORY_PART, $trajectory_part);
     }
 
-    function get_sub_trajectory_id()
+    public function get_sub_trajectory_id()
     {
         return $this->get_default_property(self :: PROPERTY_SUB_TRAJECTORY_ID);
     }
 
-    function set_sub_trajectory_id($sub_trajectory_id)
+    public function set_sub_trajectory_id($sub_trajectory_id)
     {
         $this->set_default_property(self :: PROPERTY_SUB_TRAJECTORY_ID, $sub_trajectory_id);
     }
 
-    function get_programme_id()
+    public function get_programme_id()
     {
         return $this->get_default_property(self :: PROPERTY_PROGRAMME_ID);
     }
 
-    function set_programme_id($programme_id)
+    public function set_programme_id($programme_id)
     {
         $this->set_default_property(self :: PROPERTY_PROGRAMME_ID, $programme_id);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
 
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
 
-    function get_children()
+    public function get_children()
     {
         return $this->children;
     }
 
-    function set_children($children)
+    public function set_children($children)
     {
         $this->children = $children;
     }
 
-    function add_child($child)
+    public function add_child($child)
     {
         $this->children[] = $child;
     }
 
-    function has_children()
+    public function has_children()
     {
         return count($this->children) > 0;
     }
 
-    function get_parent_programme_id()
+    public function get_parent_programme_id()
     {
         return $this->get_default_property(self :: PROPERTY_PARENT_PROGRAMME_ID);
     }
 
-    function set_parent_programme_id($parent_programme_id)
+    public function set_parent_programme_id($parent_programme_id)
     {
         $this->set_default_property(self :: PROPERTY_PARENT_PROGRAMME_ID, $parent_programme_id);
     }
 
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_SUB_TRAJECTORY_ID;
@@ -132,7 +132,7 @@ class SubTrajectoryCourse extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }

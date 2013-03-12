@@ -17,12 +17,12 @@ abstract class Module extends \application\discovery\Module
      */
     private $group_user;
 
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance($this->get_module_instance());
     }
 
-    function get_module_parameters()
+    public function get_module_parameters()
     {
         return new Parameters(Request :: get(self :: PARAM_GROUP_CLASS_ID));
     }
@@ -31,7 +31,7 @@ abstract class Module extends \application\discovery\Module
      *
      * @return multitype:\application\discovery\module\group_user\GroupUser
      */
-    function get_group_user()
+    public function get_group_user()
     {
         if (! isset($this->group_user))
         {
@@ -40,12 +40,12 @@ abstract class Module extends \application\discovery\Module
         return $this->group_user;
     }
 
-    function get_type()
+    public function get_type()
     {
         return ModuleInstance :: TYPE_DETAILS;
     }
 
-    static function get_available_implementations()
+    public static function get_available_implementations()
     {
         $types = array();
 

@@ -21,7 +21,7 @@ abstract class AbstractRenditionImplementation
      * @param \common\libraries\Application $context
      * @param \application\discovery\Module $module
      */
-    function __construct($context, Module $module)
+    public function __construct($context, Module $module)
     {
         $this->context = $context;
         $this->module = $module;
@@ -67,11 +67,11 @@ abstract class AbstractRenditionImplementation
      *
      * @return string
      */
-    abstract function get_view();
+    abstract public function get_view();
 
     /**
      *
      * @return string
      */
-    abstract function get_format();
+    abstract public function get_format();
 }

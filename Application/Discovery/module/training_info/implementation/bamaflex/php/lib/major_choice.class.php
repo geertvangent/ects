@@ -15,7 +15,7 @@ class MajorChoice extends DiscoveryItem
      *
      * @return int
      */
-    function get_source()
+    public function get_source()
     {
         return $this->get_default_property(self :: PROPERTY_SOURCE);
     }
@@ -24,32 +24,32 @@ class MajorChoice extends DiscoveryItem
      *
      * @param int $source
      */
-    function set_source($source)
+    public function set_source($source)
     {
         $this->set_default_property(self :: PROPERTY_SOURCE, $source);
     }
 
-    function get_major_id()
+    public function get_major_id()
     {
         return $this->get_default_property(self :: PROPERTY_MAJOR_ID);
     }
 
-    function set_major_id($major_id)
+    public function set_major_id($major_id)
     {
         $this->set_default_property(self :: PROPERTY_MAJOR_ID, $major_id);
     }
 
-    function get_name()
+    public function get_name()
     {
         return $this->get_default_property(self :: PROPERTY_NAME);
     }
 
-    function set_name($name)
+    public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
 
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_MAJOR_ID;
@@ -62,7 +62,7 @@ class MajorChoice extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }

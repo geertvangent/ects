@@ -23,7 +23,7 @@ use common\libraries\Request;
 class DiscoveryManagerViewerComponent extends DiscoveryManager implements DelegateComponent
 {
 
-    function run()
+    public function run()
     {
         $module_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
         $module_content_type = Request :: get(DiscoveryManager :: PARAM_CONTENT_TYPE);

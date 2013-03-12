@@ -16,7 +16,7 @@ class Cas extends DiscoveryItem
      *
      * @return int
      */
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
@@ -25,7 +25,7 @@ class Cas extends DiscoveryItem
      *
      * @param int $person_id
      */
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
@@ -34,7 +34,7 @@ class Cas extends DiscoveryItem
      *
      * @return int
      */
-    function get_application_id()
+    public function get_application_id()
     {
         return $this->get_default_property(self :: PROPERTY_APPLICATION_ID);
     }
@@ -43,7 +43,7 @@ class Cas extends DiscoveryItem
      *
      * @param int $application_id
      */
-    function set_application_id($application_id)
+    public function set_application_id($application_id)
     {
         $this->set_default_property(self :: PROPERTY_APPLICATION_ID, $application_id);
     }
@@ -52,7 +52,7 @@ class Cas extends DiscoveryItem
      *
      * @return int
      */
-    function get_action_id()
+    public function get_action_id()
     {
         return $this->get_default_property(self :: PROPERTY_ACTION_ID);
     }
@@ -61,7 +61,7 @@ class Cas extends DiscoveryItem
      *
      * @param int $action_id
      */
-    function set_action_id($action_id)
+    public function set_action_id($action_id)
     {
         $this->set_default_property(self :: PROPERTY_ACTION_ID, $action_id);
     }
@@ -70,7 +70,7 @@ class Cas extends DiscoveryItem
      *
      * @return timestamp
      */
-    function get_date()
+    public function get_date()
     {
         return $this->get_default_property(self :: PROPERTY_DATE);
     }
@@ -79,7 +79,7 @@ class Cas extends DiscoveryItem
      *
      * @param timestamp $date
      */
-    function set_date($date)
+    public function set_date($date)
     {
         $this->set_default_property(self :: PROPERTY_DATE, $date);
     }
@@ -88,7 +88,7 @@ class Cas extends DiscoveryItem
      *
      * @param multitype:string $extended_property_names
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
         $extended_property_names[] = self :: PROPERTY_APPLICATION_ID;
@@ -102,7 +102,7 @@ class Cas extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         // return DataManager :: get_instance();
     }

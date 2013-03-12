@@ -6,7 +6,7 @@ use application\discovery\module\profile\DataManager;
 class Module extends \application\discovery\module\employment\Module
 {
 
-    function get_unique_faculty($parts)
+    public function get_unique_faculty($parts)
     {
         $faculties = array();
         foreach ($parts as $part)
@@ -26,7 +26,7 @@ class Module extends \application\discovery\module\employment\Module
         }
     }
 
-    function get_unique_department($parts)
+    public function get_unique_department($parts)
     {
         $departments = array();
         foreach ($parts as $part)
@@ -46,7 +46,7 @@ class Module extends \application\discovery\module\employment\Module
         }
     }
 
-    function get_employment_parts($employment_id)
+    public function get_employment_parts($employment_id)
     {
         return DataManager :: get_instance($this->get_module_instance())->retrieve_employment_parts($employment_id);
     }

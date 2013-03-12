@@ -20,7 +20,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      * @param int $id
      * @return multitype:\application\discovery\module\teaching_assignment\implementation\bamaflex\TeachingAssignment
      */
-    function retrieve_teaching_assignments($parameters)
+    public function retrieve_teaching_assignments($parameters)
     {
         $user_id = $parameters->get_user_id();
         $year = $parameters->get_year();
@@ -65,7 +65,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return $this->teaching_assignments[$person_id][$year];
     }
 
-    function count_teaching_assignments($parameters)
+    public function count_teaching_assignments($parameters)
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
@@ -86,7 +86,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return 0;
     }
 
-    function retrieve_years($parameters)
+    public function retrieve_years($parameters)
     {
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();

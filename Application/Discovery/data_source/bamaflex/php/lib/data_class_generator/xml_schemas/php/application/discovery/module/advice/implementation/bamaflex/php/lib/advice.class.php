@@ -96,7 +96,7 @@ class Advice extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static function get_default_property_names($extended_property_names = array())
+    public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_ENROLLMENT_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
@@ -122,7 +122,7 @@ class Advice extends DiscoveryItem
      *
      * @return DataManagerInterface
      */
-    function get_data_manager()
+    public function get_data_manager()
     {
         return DataManager :: get_instance();
     }
@@ -132,7 +132,7 @@ class Advice extends DiscoveryItem
      *
      * @return integer The enrollment_id.
      */
-    function get_enrollment_id()
+    public function get_enrollment_id()
     {
         return $this->get_default_property(self :: PROPERTY_ENROLLMENT_ID);
     }
@@ -142,7 +142,7 @@ class Advice extends DiscoveryItem
      *
      * @param integer $enrollment_id
      */
-    function set_enrollment_id($enrollment_id)
+    public function set_enrollment_id($enrollment_id)
     {
         $this->set_default_property(self :: PROPERTY_ENROLLMENT_ID, $enrollment_id);
     }
@@ -152,7 +152,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The year.
      */
-    function get_year()
+    public function get_year()
     {
         return $this->get_default_property(self :: PROPERTY_YEAR);
     }
@@ -162,7 +162,7 @@ class Advice extends DiscoveryItem
      *
      * @param string $year
      */
-    function set_year($year)
+    public function set_year($year)
     {
         $this->set_default_property(self :: PROPERTY_YEAR, $year);
     }
@@ -172,7 +172,7 @@ class Advice extends DiscoveryItem
      *
      * @return integer The person_id.
      */
-    function get_person_id()
+    public function get_person_id()
     {
         return $this->get_default_property(self :: PROPERTY_PERSON_ID);
     }
@@ -182,7 +182,7 @@ class Advice extends DiscoveryItem
      *
      * @param integer $person_id
      */
-    function set_person_id($person_id)
+    public function set_person_id($person_id)
     {
         $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
     }
@@ -192,7 +192,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The motivation.
      */
-    function get_motivation()
+    public function get_motivation()
     {
         return $this->get_default_property(self :: PROPERTY_MOTIVATION);
     }
@@ -202,7 +202,7 @@ class Advice extends DiscoveryItem
      *
      * @param string $motivation
      */
-    function set_motivation($motivation)
+    public function set_motivation($motivation)
     {
         $this->set_default_property(self :: PROPERTY_MOTIVATION, $motivation);
     }
@@ -212,7 +212,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The ombudsman.
      */
-    function get_ombudsman()
+    public function get_ombudsman()
     {
         return $this->get_default_property(self :: PROPERTY_OMBUDSMAN);
     }
@@ -222,7 +222,7 @@ class Advice extends DiscoveryItem
      *
      * @param string $ombudsman
      */
-    function set_ombudsman($ombudsman)
+    public function set_ombudsman($ombudsman)
     {
         $this->set_default_property(self :: PROPERTY_OMBUDSMAN, $ombudsman);
     }
@@ -232,7 +232,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The vote.
      */
-    function get_vote()
+    public function get_vote()
     {
         return $this->get_default_property(self :: PROPERTY_VOTE);
     }
@@ -242,7 +242,7 @@ class Advice extends DiscoveryItem
      *
      * @param string $vote
      */
-    function set_vote($vote)
+    public function set_vote($vote)
     {
         $this->set_default_property(self :: PROPERTY_VOTE, $vote);
     }
@@ -252,7 +252,7 @@ class Advice extends DiscoveryItem
      *
      * @return integer The measures_visible.
      */
-    function get_measures_visible()
+    public function get_measures_visible()
     {
         return $this->get_default_property(self :: PROPERTY_MEASURES_VISIBLE);
     }
@@ -262,7 +262,7 @@ class Advice extends DiscoveryItem
      *
      * @param integer $measures_visible
      */
-    function set_measures_visible($measures_visible)
+    public function set_measures_visible($measures_visible)
     {
         $this->set_default_property(self :: PROPERTY_MEASURES_VISIBLE, $measures_visible);
     }
@@ -272,7 +272,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The measures.
      */
-    function get_measures()
+    public function get_measures()
     {
         return $this->get_default_property(self :: PROPERTY_MEASURES);
     }
@@ -282,7 +282,7 @@ class Advice extends DiscoveryItem
      *
      * @param string $measures
      */
-    function set_measures($measures)
+    public function set_measures($measures)
     {
         $this->set_default_property(self :: PROPERTY_MEASURES, $measures);
     }
@@ -292,7 +292,7 @@ class Advice extends DiscoveryItem
      *
      * @return integer The advice_visible.
      */
-    function get_advice_visible()
+    public function get_advice_visible()
     {
         return $this->get_default_property(self :: PROPERTY_ADVICE_VISIBLE);
     }
@@ -302,7 +302,7 @@ class Advice extends DiscoveryItem
      *
      * @param integer $advice_visible
      */
-    function set_advice_visible($advice_visible)
+    public function set_advice_visible($advice_visible)
     {
         $this->set_default_property(self :: PROPERTY_ADVICE_VISIBLE, $advice_visible);
     }
@@ -312,7 +312,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The advice.
      */
-    function get_advice()
+    public function get_advice()
     {
         return $this->get_default_property(self :: PROPERTY_ADVICE);
     }
@@ -322,7 +322,7 @@ class Advice extends DiscoveryItem
      *
      * @param string $advice
      */
-    function set_advice($advice)
+    public function set_advice($advice)
     {
         $this->set_default_property(self :: PROPERTY_ADVICE, $advice);
     }
@@ -332,7 +332,7 @@ class Advice extends DiscoveryItem
      *
      * @return integer The measures_valid.
      */
-    function get_measures_valid()
+    public function get_measures_valid()
     {
         return $this->get_default_property(self :: PROPERTY_MEASURES_VALID);
     }
@@ -342,7 +342,7 @@ class Advice extends DiscoveryItem
      *
      * @param integer $measures_valid
      */
-    function set_measures_valid($measures_valid)
+    public function set_measures_valid($measures_valid)
     {
         $this->set_default_property(self :: PROPERTY_MEASURES_VALID, $measures_valid);
     }
@@ -352,7 +352,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The date.
      */
-    function get_date()
+    public function get_date()
     {
         return $this->get_default_property(self :: PROPERTY_DATE);
     }
@@ -362,7 +362,7 @@ class Advice extends DiscoveryItem
      *
      * @param string $date
      */
-    function set_date($date)
+    public function set_date($date)
     {
         $this->set_default_property(self :: PROPERTY_DATE, $date);
     }
@@ -372,7 +372,7 @@ class Advice extends DiscoveryItem
      *
      * @return integer The try.
      */
-    function get_try()
+    public function get_try()
     {
         return $this->get_default_property(self :: PROPERTY_TRY);
     }
@@ -382,7 +382,7 @@ class Advice extends DiscoveryItem
      *
      * @param integer $try
      */
-    function set_try($try)
+    public function set_try($try)
     {
         $this->set_default_property(self :: PROPERTY_TRY, $try);
     }
@@ -392,7 +392,7 @@ class Advice extends DiscoveryItem
      *
      * @return integer The decision_type_id.
      */
-    function get_decision_type_id()
+    public function get_decision_type_id()
     {
         return $this->get_default_property(self :: PROPERTY_DECISION_TYPE_ID);
     }
@@ -402,7 +402,7 @@ class Advice extends DiscoveryItem
      *
      * @param integer $decision_type_id
      */
-    function set_decision_type_id($decision_type_id)
+    public function set_decision_type_id($decision_type_id)
     {
         $this->set_default_property(self :: PROPERTY_DECISION_TYPE_ID, $decision_type_id);
     }
@@ -412,7 +412,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The decision_type.
      */
-    function get_decision_type()
+    public function get_decision_type()
     {
         return $this->get_default_property(self :: PROPERTY_DECISION_TYPE);
     }
@@ -422,7 +422,7 @@ class Advice extends DiscoveryItem
      *
      * @param string $decision_type
      */
-    function set_decision_type($decision_type)
+    public function set_decision_type($decision_type)
     {
         $this->set_default_property(self :: PROPERTY_DECISION_TYPE, $decision_type);
     }
@@ -431,7 +431,7 @@ class Advice extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static function get_table_name()
+    public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

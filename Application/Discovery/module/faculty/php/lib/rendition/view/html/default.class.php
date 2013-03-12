@@ -9,7 +9,7 @@ class HtmlDefaultRendition extends HtmlRendition
     /*
      * (non-PHPdoc) @see application\discovery\module\faculty\Module::render()
      */
-    function render()
+    public function render()
     {
         $html = array();
         if (is_null($this->get_rendition_implementation()->module_parameters()->get_year()))
