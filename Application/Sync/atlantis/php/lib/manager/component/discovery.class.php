@@ -2,20 +2,13 @@
 namespace application\ehb_sync\atlantis;
 
 use application\discovery\ModuleInstance;
-
 use group\GroupDataManager;
 use group\Group;
-
 use common\libraries\InCondition;
-
 use application\discovery\DiscoveryDataManager;
-
 use common\libraries\DataClassRetrievesParameters;
-
 use common\libraries\EqualityCondition;
-
 use common\libraries\DataClassRetrieveParameters;
-
 use common\libraries\DelegateComponent;
 
 class DiscoveryComponent extends Manager implements DelegateComponent
@@ -30,43 +23,61 @@ class DiscoveryComponent extends Manager implements DelegateComponent
         {
             echo '<pre>';
             echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
-
+            
             $old_entity_rights = DiscoveryDataManager :: get_instance()->retrieve_rights_group_entity_rights();
             $new_entity_right_cache = array();
             $old_entity_right_cache = array();
-
+            
             while ($old_entity_right = $old_entity_rights->next_result())
             {
                 $old_entity_right_cache[$old_entity_right->get_id()] = $old_entity_right->get_string();
             }
-
-            $condition = new EqualityCondition(\application\atlantis\application\Application :: PROPERTY_CODE, 'DISCOVERY');
+            
+            $condition = new EqualityCondition(
+                \application\atlantis\application\Application :: PROPERTY_CODE, 
+                'DISCOVERY');
             $parameters = DataClassRetrieveParameters :: generate($condition);
-            $application = \application\atlantis\application\DataManager :: retrieve(\application\atlantis\application\Application :: class_name(), $parameters);
-
-            $condition = new EqualityCondition(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID, $application->get_id());
+            $application = \application\atlantis\application\DataManager :: retrieve(
+                \application\atlantis\application\Application :: class_name(), 
+                $parameters);
+            
+            $condition = new EqualityCondition(
+                \application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID, 
+                $application->get_id());
             $parameters = DataClassRetrievesParameters :: generate($condition);
-            $rights = \application\atlantis\application\right\DataManager :: retrieves(\application\atlantis\application\right\Right :: class_name(), $parameters);
-
+            $rights = \application\atlantis\application\right\DataManager :: retrieves(
+                \application\atlantis\application\right\Right :: class_name(), 
+                $parameters);
+            
             while ($right = $rights->next_result())
             {
-                $condition = new EqualityCondition(\application\discovery\ModuleInstance :: PROPERTY_TYPE, $right->get_code());
+                $condition = new EqualityCondition(
+                    \application\discovery\ModuleInstance :: PROPERTY_TYPE, 
+                    $right->get_code());
                 $module_instance = DiscoveryDataManager :: get_instance()->retrieve_module_instances($condition)->next_result();
                 if ($module_instance instanceof ModuleInstance)
                 {
-                    $condition = new EqualityCondition(\application\atlantis\role\entitlement\Entitlement :: PROPERTY_RIGHT_ID, $right->get_id());
+                    $condition = new EqualityCondition(
+                        \application\atlantis\role\entitlement\Entitlement :: PROPERTY_RIGHT_ID, 
+                        $right->get_id());
                     $parameters = DataClassRetrievesParameters :: generate($condition);
-                    $entitlements = \application\atlantis\role\entitlement\DataManager :: retrieves(\application\atlantis\role\entitlement\Entitlement :: class_name(), $parameters);
-
+                    $entitlements = \application\atlantis\role\entitlement\DataManager :: retrieves(
+                        \application\atlantis\role\entitlement\Entitlement :: class_name(), 
+                        $parameters);
+                    
                     while ($entitlement = $entitlements->next_result())
                     {
-                        $condition = new EqualityCondition(\application\atlantis\role\entity\RoleEntity :: PROPERTY_ROLE_ID, $entitlement->get_role_id());
+                        $condition = new EqualityCondition(
+                            \application\atlantis\role\entity\RoleEntity :: PROPERTY_ROLE_ID, 
+                            $entitlement->get_role_id());
                         $parameters = DataClassRetrievesParameters :: generate($condition);
-                        $entities = \application\atlantis\role\entity\DataManager :: retrieves(\application\atlantis\role\entity\RoleEntity :: class_name(), $parameters);
-
+                        $entities = \application\atlantis\role\entity\DataManager :: retrieves(
+                            \application\atlantis\role\entity\RoleEntity :: class_name(), 
+                            $parameters);
+                        
                         while ($entity = $entities->next_result())
                         {
-
+                            
                             $context = $entity->get_context();
                             $codes = array();
                             switch ($context->get_context_type())
@@ -89,28 +100,28 @@ class DiscoveryComponent extends Manager implements DelegateComponent
                                     $codes[] = 'COU_STU_' . $context->get_context_id();
                                     break;
                             }
-
+                            
                             $condition = new InCondition(Group :: PROPERTY_CODE, $codes);
                             $groups = GroupDataManager :: get_instance()->retrieve_groups($condition);
-
+                            
                             while ($group = $groups->next_result())
                             {
-                                $new_entity_right_cache[] = $module_instance->get_id() . '_' . $entity->get_entity_type() . '_' . $entity->get_entity_id() . '_' . $group->get_id();
-
+                                $new_entity_right_cache[] = $module_instance->get_id() . '_' . $entity->get_entity_type() .
+                                     '_' . $entity->get_entity_id() . '_' . $group->get_id();
                             }
                         }
                     }
                 }
             }
-
+            
             $to_delete = array_diff($old_entity_right_cache, $new_entity_right_cache);
             $to_add = array_diff($new_entity_right_cache, $old_entity_right_cache);
-
+            
             foreach ($to_delete as $entity_right_id => $entity)
             {
                 DiscoveryDataManager :: get_instance()->delete_rights_group_entity_rights($entity_right_id);
             }
-
+            
             foreach ($to_add as $key => $entity)
             {
                 $entity = explode('_', $entity);
@@ -120,10 +131,10 @@ class DiscoveryComponent extends Manager implements DelegateComponent
                 $entity_right->set_right_id(1);
                 $entity_right->set_module_id($entity[0]);
                 $entity_right->set_group_id($entity[3]);
-
+                
                 $entity_right->create();
             }
-
+            
             echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
             echo '</pre>';
         }
@@ -132,5 +143,4 @@ class DiscoveryComponent extends Manager implements DelegateComponent
             echo 'Synchronization failed';
         }
     }
-
 }

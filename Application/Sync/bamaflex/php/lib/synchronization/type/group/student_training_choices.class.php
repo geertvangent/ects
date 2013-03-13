@@ -2,9 +2,9 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
-
 class StudentTrainingChoicesGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'CH';

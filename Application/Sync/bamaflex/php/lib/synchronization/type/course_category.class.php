@@ -3,16 +3,15 @@ namespace application\ehb_sync\bamaflex;
 
 use application\weblcms\CourseCategory;
 use application\weblcms\WeblcmsDataManager;
-
 use common\libraries\Utilities;
 
 /**
  *
  * @package ehb.sync;
  */
-
 class CourseCategorySynchronization extends Synchronization
 {
+
     /**
      *
      * @var Synchronization
@@ -51,7 +50,7 @@ class CourseCategorySynchronization extends Synchronization
     {
         $this->synchronize();
         $children = $this->get_children();
-
+        
         foreach ($children as $child)
         {
             $child->run();
@@ -152,14 +151,14 @@ class CourseCategorySynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
-
+            
             $this->current_group = new CourseCategory();
             $this->current_group->set_name($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
-
+            
             $this->current_group->create();
-
+            
             self :: log('added', $this->current_group->get_name());
             flush();
         }
@@ -172,7 +171,7 @@ class CourseCategorySynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-
+        
         return $this->current_group;
     }
 

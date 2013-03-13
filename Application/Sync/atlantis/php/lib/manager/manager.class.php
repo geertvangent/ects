@@ -7,9 +7,7 @@ class Manager extends SubManager
 {
     const ACTION_BROWSE = 'browser';
     const ACTION_DISCOVERY = 'discovery';
-
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-
     const PARAM_ACTION = 'discovey_action';
 
     public function __construct($parent)

@@ -15,15 +15,19 @@ class GroupsComponent extends Manager implements DelegateComponent
         {
             echo '<pre>';
             Synchronization :: log('Group sync started', date('c', time()));
-
+            
             $root_group = \group\DataManager :: get_root_group();
-
-            $synchronization = GroupSynchronization :: factory('academic_year', new DummyGroupSynchronization($root_group));
+            
+            $synchronization = GroupSynchronization :: factory(
+                'academic_year', 
+                new DummyGroupSynchronization($root_group));
             $synchronization->run();
-
-            $synchronization = GroupSynchronization :: factory('central_administration', new DummyGroupSynchronization($root_group));
+            
+            $synchronization = GroupSynchronization :: factory(
+                'central_administration', 
+                new DummyGroupSynchronization($root_group));
             $synchronization->run();
-
+            
             Synchronization :: log('Group sync ended', date('c', time()));
             echo '</pre>';
         }
@@ -32,5 +36,4 @@ class GroupsComponent extends Manager implements DelegateComponent
             echo 'Synchronization failed';
         }
     }
-
 }

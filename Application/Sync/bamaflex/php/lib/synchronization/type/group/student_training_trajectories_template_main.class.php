@@ -5,11 +5,9 @@ namespace application\ehb_sync\bamaflex;
  *
  * @package ehb.sync;
  */
-
 class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'MA';
-
     const RESULT_PROPERTY_TRAJECTORY = 'name';
     const RESULT_PROPERTY_TRAJECTORY_ID = 'id';
 
@@ -20,7 +18,8 @@ class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupS
 
     public function get_code()
     {
-        return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
+        return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER . '_' .
+             $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
     }
 
     public function get_name()
@@ -31,15 +30,19 @@ class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupS
     public function get_children()
     {
         $trajectory = $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
-
-        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_sub_trajectory_basic] WHERE trajectory_id = ' . $trajectory;
-
+        
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_sub_trajectory_basic] WHERE trajectory_id = ' .
+             $trajectory;
+        
         $trajectories = $this->get_result($query);
-
+        
         $children = array();
         while ($trajectory = $trajectories->next_result(false))
         {
-            $children[] = GroupSynchronization :: factory('student_training_trajectories_template_sub', $this, $trajectory);
+            $children[] = GroupSynchronization :: factory(
+                'student_training_trajectories_template_sub', 
+                $this, 
+                $trajectory);
         }
         return $children;
     }

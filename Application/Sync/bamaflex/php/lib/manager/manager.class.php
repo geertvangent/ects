@@ -13,9 +13,7 @@ class Manager extends SubManager
     const ACTION_GROUPS = 'groups';
     const ACTION_ARCHIVE_GROUPS = 'archive_groups';
     const ACTION_COURSES = 'courses';
-
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-
     const PARAM_ACTION = 'bamaflex_action';
 
     public function __construct($parent)

@@ -2,11 +2,9 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
-
-
-
 class AcademicYearExtraGenerationGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'GEN';
@@ -23,9 +21,10 @@ class AcademicYearExtraGenerationGroupSynchronization extends GroupSynchronizati
 
     public function get_user_official_codes()
     {
-        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE year = "' . $this->get_academic_year() . '" AND generation_student = 1 AND type = 1';
+        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE year = "' .
+             $this->get_academic_year() . '" AND generation_student = 1 AND type = 1';
         $users = $this->get_result($query);
-
+        
         $user_mails = array();
         while ($user = $users->next_result(false))
         {

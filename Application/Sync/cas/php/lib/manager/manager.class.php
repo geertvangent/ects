@@ -8,9 +8,7 @@ class Manager extends SubManager
     const ACTION_BROWSE = 'browser';
     const ACTION_ALL_USERS = 'all_users';
     const ACTION_STATISTICS = 'statistics';
-
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-
     const PARAM_ACTION = 'cas_action';
 
     public function __construct($parent)

@@ -5,12 +5,9 @@ namespace application\ehb_sync\bamaflex;
  *
  * @package ehb.sync;
  */
-
-
 class TrainingCourseCategorySynchronization extends CourseCategorySynchronization
 {
     CONST IDENTIFIER = 'TRA';
-
     const RESULT_PROPERTY_TRAINING = 'name';
     const RESULT_PROPERTY_TRAINING_ID = 'id';
 

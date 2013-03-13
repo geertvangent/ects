@@ -5,7 +5,10 @@ namespace application\ehb_sync\bamaflex;
  *
  * @package ehb.sync;
  */
-class ArchiveUserTypeEmployeeGroupSynchronization extends ArchiveGroupSynchronization
+
+
+
+class UserTypeEmployeeGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'ATP';
 
@@ -27,20 +30,16 @@ class ArchiveUserTypeEmployeeGroupSynchronization extends ArchiveGroupSynchroniz
     public function get_user_official_codes()
     {
         $user_mails = array();
-        
-        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_employee]  WHERE faculty_id = ' .
-             $this->get_department()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID) .
-             '
-                AND type = 3 AND date_start <= \'' .
-             $this->get_academic_year_end() . '\' AND (date_end >= \'' . $this->get_academic_year_end() .
-             '\' OR date_end is null)';
+
+        $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_employee]  WHERE faculty_id IN (SELECT student_faculty_id FROM dbo.t_employee_faculties WHERE year > "2005-06" AND employee_faculty_id IN (SELECT employee_faculty_id FROM dbo.t_employee_faculties WHERE student_faculty_id = ' . $this->get_department()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID) . ')
+                AND type = 3 AND date_start <= current_timestamp AND (date_end >= current_timestamp OR date_end is null))';
         $users = $this->get_result($query);
-        
+
         while ($user = $users->next_result(false))
         {
             $user_mails[] = $user['person_id'];
         }
-        
+
         return $user_mails;
     }
 }

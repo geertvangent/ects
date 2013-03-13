@@ -2,7 +2,6 @@
 namespace application\ehb_sync;
 
 use common\libraries\NotAllowedException;
-
 use common\libraries\DelegateComponent;
 
 class BamaflexComponent extends Manager implements DelegateComponent

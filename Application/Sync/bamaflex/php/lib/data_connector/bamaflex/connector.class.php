@@ -7,6 +7,7 @@ namespace application\ehb_sync\bamaflex;
  */
 class BamaflexDataConnector extends \common\libraries\DataManager
 {
+
     public static $instance;
 
     public static function get_instance()
@@ -18,5 +19,4 @@ class BamaflexDataConnector extends \common\libraries\DataManager
         }
         return self :: $instance[static :: context()];
     }
-
 }

@@ -2,15 +2,12 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
-
-
-
 class ArchiveDepartmentGroupSynchronization extends ArchiveGroupSynchronization
 {
     CONST IDENTIFIER = 'DEP';
-
     const RESULT_PROPERTY_ACADEMIC_YEAR = 'year';
     const RESULT_PROPERTY_DEPARTMENT = 'name';
     const RESULT_PROPERTY_DEPARTMENT_ID = 'id';

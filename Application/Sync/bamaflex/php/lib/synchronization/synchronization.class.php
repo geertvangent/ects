@@ -2,11 +2,11 @@
 namespace application\ehb_sync\bamaflex;
 
 use common\libraries\PlatformSetting;
-
 use common\libraries\Utilities;
 
 abstract class Synchronization
 {
+
     /**
      *
      * @var SqlDataManager
@@ -26,20 +26,21 @@ abstract class Synchronization
     {
         return $this->data_manager;
     }
+
     /**
      *
      * @return string
      */
     public function get_academic_year()
     {
-        return PlatformSetting::get('academic_year', __NAMESPACE__);
+        return PlatformSetting :: get('academic_year', __NAMESPACE__);
     }
 
     public function get_academic_year_end()
     {
         $year_parts = explode('-', $this->get_academic_year());
-
-        return '20'. $year_parts[1] .'-09-30 23:59:59.999';
+        
+        return '20' . $year_parts[1] . '-09-30 23:59:59.999';
     }
 
     /**
@@ -76,7 +77,7 @@ abstract class Synchronization
     public function get_result($query)
     {
         $statement = $this->get_data_manager()->get_connection()->prepare($query);
-
+        
         return new BamaflexResultSet($statement->execute());
     }
 

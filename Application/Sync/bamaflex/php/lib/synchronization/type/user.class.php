@@ -1,14 +1,12 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-
 use common\libraries\Utilities;
 
 /**
  *
  * @package ehb.sync;
  */
-
 class UserSynchronization extends Synchronization
 {
     const RESULT_PROPERTY_PERSON_ID = 'id';
@@ -34,7 +32,7 @@ class UserSynchronization extends Synchronization
         $types = array();
         $types[] = 'create';
         $types[] = 'update';
-
+        
         return $types;
     }
 

@@ -21,5 +21,4 @@ class DocComponent extends Manager implements DelegateComponent
             echo 'Synchronization failed';
         }
     }
-
 }

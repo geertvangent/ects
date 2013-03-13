@@ -2,11 +2,9 @@
 namespace application\ehb_sync\bamaflex;
 
 /**
+ *
  * @package ehb.sync;
  */
-
-
-
 class AcademicYearExtraGroupSynchronization extends GroupSynchronization
 {
     CONST IDENTIFIER = 'EXT';

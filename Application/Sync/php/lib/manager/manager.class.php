@@ -18,7 +18,7 @@ class Manager extends WebApplication
 
     /**
      * Constructor
-     *
+     * 
      * @param $user_id int
      */
     public function __construct($user)
@@ -48,13 +48,17 @@ class Manager extends WebApplication
 
     public static function get_installable_application_packages($include_installed = false)
     {
-        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__),
-                Theme :: get_image_path() . 'logo/16.png');
-        if (! CommonDataManager :: get_registration(\application\ehb_sync\bamaflex\Manager :: context()) || $include_installed)
+        $package_list = new PackageList(
+            self :: context(), 
+            Translation :: get('TypeName', null, __NAMESPACE__), 
+            Theme :: get_image_path() . 'logo/16.png');
+        if (! CommonDataManager :: get_registration(\application\ehb_sync\bamaflex\Manager :: context()) ||
+             $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\bamaflex\Manager :: context());
         }
-        if (! CommonDataManager :: get_registration(\application\ehb_sync\atlantis\Manager :: context()) || $include_installed)
+        if (! CommonDataManager :: get_registration(\application\ehb_sync\atlantis\Manager :: context()) ||
+             $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\atlantis\Manager :: context());
         }
@@ -62,23 +66,26 @@ class Manager extends WebApplication
         {
             $package_list->add_package(\application\ehb_sync\cas\Manager :: context());
         }
-
-        $cas_list = new PackageList(\application\ehb_sync\cas\Manager :: context(),
-                Translation :: get('TypeName', null, \application\ehb_sync\cas\Manager :: context()),
-                Theme :: get_image_path(\application\ehb_sync\cas\Manager :: context()) . 'logo/16.png');
-
-        if (! CommonDataManager :: get_registration(\application\ehb_sync\cas\storage\Manager :: context()) || $include_installed)
+        
+        $cas_list = new PackageList(
+            \application\ehb_sync\cas\Manager :: context(), 
+            Translation :: get('TypeName', null, \application\ehb_sync\cas\Manager :: context()), 
+            Theme :: get_image_path(\application\ehb_sync\cas\Manager :: context()) . 'logo/16.png');
+        
+        if (! CommonDataManager :: get_registration(\application\ehb_sync\cas\storage\Manager :: context()) ||
+             $include_installed)
         {
             $cas_list->add_package(\application\ehb_sync\cas\storage\Manager :: context());
         }
-
-        if (! CommonDataManager :: get_registration(\application\ehb_sync\cas\data\Manager :: context()) || $include_installed)
+        
+        if (! CommonDataManager :: get_registration(\application\ehb_sync\cas\data\Manager :: context()) ||
+             $include_installed)
         {
             $cas_list->add_package(\application\ehb_sync\cas\data\Manager :: context());
         }
-
+        
         $package_list->add_child($cas_list);
-
+        
         return $package_list;
     }
 }

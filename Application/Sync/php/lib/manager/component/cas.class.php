@@ -2,7 +2,6 @@
 namespace application\ehb_sync;
 
 use common\libraries\NotAllowedException;
-
 use common\libraries\DelegateComponent;
 
 class CasComponent extends Manager implements DelegateComponent
