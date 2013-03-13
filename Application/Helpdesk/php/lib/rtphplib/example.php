@@ -7,19 +7,18 @@ $pass = "h3lp.d145y";
 
 $rt = new RequestTracker($url, $user, $pass);
 
-//Get the properties of an existing ticket, given the ID
+// Get the properties of an existing ticket, given the ID
 
 // $response = $rt->getTicketProperties(22679);
 // print_r($response);
 
-//Create a new ticket- see http://requesttracker.wikia.com/wiki/REST#Ticket_Create for all fields
+// Create a new ticket- see http://requesttracker.wikia.com/wiki/REST#Ticket_Create for all fields
 
 $content = array(
-    'Queue'=>'helpdeskdesiderius',
-    'Requestor'=>'hans.de.bisschop@ehb.be',
-    'Subject'=>'Test',
-    'Text'=>'Test ticket via REST'
-);
+    'Queue' => 'helpdeskdesiderius', 
+    'Requestor' => 'hans.de.bisschop@ehb.be', 
+    'Subject' => 'Test', 
+    'Text' => 'Test ticket via REST');
 $response = $rt->createTicket($content);
 print_r($response);
 

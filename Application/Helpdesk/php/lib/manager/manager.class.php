@@ -11,7 +11,7 @@ class Manager extends WebApplication
 
     /**
      * Constructor
-     *
+     * 
      * @param $user_id int
      */
     public function __construct($user)

@@ -17,22 +17,22 @@ class CreatorComponent extends Manager
     public function run()
     {
         $form = new TicketForm($this);
-
+        
         if ($form->validate())
         {
             $url = PlatformSetting :: get('url', __NAMESPACE__);
             $username = PlatformSetting :: get('username', __NAMESPACE__);
             $password = PlatformSetting :: get('password', __NAMESPACE__);
             $queue = PlatformSetting :: get('queue', __NAMESPACE__);
-
+            
             $values = $form->exportValues();
-
+            
             $request_tracker = new RestClient($url . '/REST/1.0/');
             $request_tracker->set_connexion_mode(RestClient :: MODE_CURL);
             // $request_tracker = new RequestTracker($url, $username, $password);
-
+            
             $ticket_values = array();
-
+            
             $ticket_values['Queue'] = $queue;
             $ticket_values['Requestor'] = $values[TicketForm :: PROPERTY_REQUESTOR];
             $ticket_values['Subject'] = $values[TicketForm :: PROPERTY_SUBJECT];
@@ -43,45 +43,48 @@ class CreatorComponent extends Manager
             $ticket_values['CF-6'] = $values[TicketForm :: PROPERTY_URL];
             $ticket_values['CF-7'] = $values[TicketForm :: PROPERTY_SYSTEM];
             $ticket_values['id'] = 'ticket/new';
-
+            
             $content = array();
             $content['user'] = $username;
             $content['pass'] = $password;
             $content['content'] = $request_tracker->array_to_url($ticket_values);
             $content['Attachment'] = file_get_contents($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name']);
             $content['attachment-1'] = file_get_contents($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name']);
-
+            
             // $response = $request_tracker->createTicket($content);
             $response = $request_tracker->request(RestClient :: METHOD_POST, 'ticket/new', array('content' => $content));
-
+            
             if ($response->get_response_http_code() == 200)
             {
                 if ($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['error'] == UPLOAD_ERR_OK)
                 {
                     preg_match_all('/# Ticket (.*) created\./', $response->get_response_content(), $matches);
                     $ticket_id = $matches[1][0];
-
+                    
                     $ticket_values = array();
                     $ticket_values['Action'] = 'comment';
                     $ticket_values['id'] = $ticket_id;
                     $ticket_values['Ticket'] = $ticket_id;
                     $ticket_values['Text'] = 'Attachment bij ticket verzonden via het helpdeskformulier';
                     $ticket_values['Attachment'] = $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['name'];
-
+                    
                     $endpoint = '/REST/1.0/ticket/' . $ticket_id . '/comment';
-
+                    
                     $file_properties = FileProperties :: from_path(
-                            $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name']);
-
+                        $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name']);
+                    
                     $request = new HTTP_Request2($url . $endpoint);
                     $request->setMethod(HTTP_Request2 :: METHOD_POST);
                     $request->addPostParameter('user', $username);
                     $request->addPostParameter('pass', $password);
                     $request->addPostParameter('content', $request_tracker->array_to_url($ticket_values));
-                    $request->addUpload('attachment_1', $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name'],
-                            $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name'], $file_properties->get_type());
+                    $request->addUpload(
+                        'attachment_1', 
+                        $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name'], 
+                        $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name'], 
+                        $file_properties->get_type());
                     $response = $request->send();
-
+                    
                     if ($response->getStatus() == '200')
                     {
                         $this->redirect(Translation :: get('TicketSubmitted'), false, $this->get_parameters());
