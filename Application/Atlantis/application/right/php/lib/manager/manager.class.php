@@ -5,7 +5,7 @@ use common\libraries\SubManager;
 
 /**
  * $Id: elude_manager.class.php
- *
+ * 
  * @package application.elude
  */
 class Manager extends SubManager
@@ -18,9 +18,7 @@ class Manager extends SubManager
     const ACTION_RIGHTS = 'rights';
     const ACTION_CREATE = 'creator';
     const ACTION_ADD_ROLE = 'add_role';
-
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-
     const PARAM_RIGHT_ID = 'right_id';
     const PARAM_APPLICATION_ID = 'application_id';
 
@@ -30,16 +28,9 @@ class Manager extends SubManager
     }
 
     /**
-     * Helper function for the Application class,
-     * pending access to class constants via variables in PHP 5.3
-     * e.g.
-     * $name = $class :: APPLICATION_NAME
-     *
-     * DO NOT USE IN THIS APPLICATION'S CONTEXT
-     * Instead use:
-     * - self :: APPLICATION_NAME in the context of this class
-     * - YourApplicationManager :: APPLICATION_NAME in all other application
-     * classes
+     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
+     * = $class :: APPLICATION_NAME DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: APPLICATION_NAME in
+     * the context of this class - YourApplicationManager :: APPLICATION_NAME in all other application classes
      */
     public function get_application_name()
     {
@@ -47,16 +38,9 @@ class Manager extends SubManager
     }
 
     /**
-     * Helper function for the Application class,
-     * pending access to class constants via variables in PHP 5.3
-     * e.g.
-     * $name = $class :: DEFAULT_ACTION
-     *
-     * DO NOT USE IN THIS APPLICATION'S CONTEXT
-     * Instead use:
-     * - self :: DEFAULT_ACTION in the context of this class
-     * - YourApplicationManager :: DEFAULT_ACTION in all other application
-     * classes
+     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
+     * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
+     * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
      */
     public static function get_default_action()
     {
@@ -67,5 +51,4 @@ class Manager extends SubManager
     {
         parent :: launch(null, $application);
     }
-
 }

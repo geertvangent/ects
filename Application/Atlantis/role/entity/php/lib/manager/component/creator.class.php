@@ -15,13 +15,13 @@ class CreatorComponent extends Manager
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
-
+        
         $form = new EntityForm($this, $this->get_url());
-
+        
         if ($form->validate())
         {
             $values = $form->exportValues();
-
+            
             $failures = 0;
             foreach ($values['entity'] as $entity_type => $entity_ids)
             {
@@ -34,12 +34,12 @@ class CreatorComponent extends Manager
                             $entity = new RoleEntity();
                             $entity->set_entity_id($entity_id);
                             $entity->set_entity_type(
-                                    $entity_type == 'user' ? UserEntity :: ENTITY_TYPE : PlatformGroupEntity :: ENTITY_TYPE);
+                                $entity_type == 'user' ? UserEntity :: ENTITY_TYPE : PlatformGroupEntity :: ENTITY_TYPE);
                             $entity->set_role_id($role);
                             $entity->set_context_id($context);
                             $entity->set_start_date(Utilities :: time_from_datepicker($values['start_date']));
                             $entity->set_end_date(Utilities :: time_from_datepicker($values['end_date']));
-
+                            
                             if (! $entity->create())
                             {
                                 $failures ++;
@@ -48,11 +48,11 @@ class CreatorComponent extends Manager
                     }
                 }
             }
-
-            $count = (count($values['entity'][UserEntity :: ENTITY_TYPE]) + count(
-                    $values['entity'][PlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
-                    $values['context']) * count($values['start_date']) * count($values['end_date']);
-            var_dump($count);
+            
+            $count = (count($values['entity'][UserEntity :: ENTITY_TYPE]) +
+                 count($values['entity'][PlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) *
+                 count($values['context']) * count($values['start_date']) * count($values['end_date']);
+            // var_dump($count);
             if ($failures)
             {
                 if ($count == 1)
@@ -84,9 +84,11 @@ class CreatorComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('Entities'));
                 }
             }
-
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
-                    ($failures ? true : false), array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
+            
+            $this->redirect(
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                ($failures ? true : false), 
+                array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
         }
         else
         {

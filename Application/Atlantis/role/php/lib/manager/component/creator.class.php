@@ -13,25 +13,30 @@ class CreatorComponent extends Manager
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
-
+        
         $role = new Role();
-
+        
         $form = new RoleForm($role, $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)));
-
+        
         if ($form->validate())
         {
             $values = $form->exportValues();
-
+            
             $role->set_name($values[Role :: PROPERTY_NAME]);
             $role->set_description($values[Role :: PROPERTY_DESCRIPTION]);
-
+            
             $success = $role->create();
-
+            
             $parameters = array();
             $parameters[self :: PARAM_ACTION] = self :: ACTION_BROWSE;
-
-            $this->redirect(Translation :: get($success ? 'ObjectCreated' : 'ObjectNotCreated', array(
-                    'OBJECT' => Translation :: get('Role')), Utilities :: COMMON_LIBRARIES), ($success ? false : true), $parameters);
+            
+            $this->redirect(
+                Translation :: get(
+                    $success ? 'ObjectCreated' : 'ObjectNotCreated', 
+                    array('OBJECT' => Translation :: get('Role')), 
+                    Utilities :: COMMON_LIBRARIES), 
+                ($success ? false : true), 
+                $parameters);
         }
         else
         {
@@ -39,7 +44,5 @@ class CreatorComponent extends Manager
             $form->display();
             $this->display_footer();
         }
-
     }
-
 }

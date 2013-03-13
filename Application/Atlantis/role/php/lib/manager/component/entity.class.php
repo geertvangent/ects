@@ -1,8 +1,6 @@
 <?php
 namespace application\atlantis\role;
 
-
-
 class EntityComponent extends Manager
 {
 

@@ -5,8 +5,8 @@ use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
 use common\libraries\NewObjectTableColumnModel;
 use common\libraries\ObjectTableColumn;
 
-class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
-        NewObjectTableColumnModelActionsColumnSupport
+class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements 
+    NewObjectTableColumnModelActionsColumnSupport
 {
 
     /**
@@ -26,7 +26,7 @@ class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
         if (! $this->get_component()->has_context_id())
         {
             $this->add_column(
-                    new ObjectTableColumn(\application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME, false));
+                new ObjectTableColumn(\application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME, false));
         }
         if (! $this->get_component()->has_start_date())
         {

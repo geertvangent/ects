@@ -16,9 +16,12 @@ class ContextTable extends NewObjectTable implements NewObjectTableFormActionsSu
     public function get_implemented_form_actions()
     {
         $actions = new ObjectTableFormActions(__NAMESPACE__, Manager :: PARAM_ACTION);
-
-        $actions->add_form_action(new ObjectTableFormAction(Manager :: ACTION_DELETE, Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
-
+        
+        $actions->add_form_action(
+            new ObjectTableFormAction(
+                Manager :: ACTION_DELETE, 
+                Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
+        
         return $actions;
     }
 }

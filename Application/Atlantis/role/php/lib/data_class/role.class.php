@@ -6,12 +6,13 @@ use common\libraries\DataClass;
 
 /**
  * application.atlantis.role.
+ * 
  * @author GillardMagali
  */
 class Role extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Role properties
      */
@@ -20,6 +21,7 @@ class Role extends DataClass
 
     /**
      * Get the default properties
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -27,12 +29,13 @@ class Role extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -42,6 +45,7 @@ class Role extends DataClass
 
     /**
      * Returns the name of this Role.
+     * 
      * @return text The name.
      */
     public function get_name()
@@ -51,14 +55,17 @@ class Role extends DataClass
 
     /**
      * Sets the name of this Role.
+     * 
      * @param text $name
      */
     public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
+
     /**
      * Returns the description of this Role.
+     * 
      * @return text The description.
      */
     public function get_description()
@@ -68,6 +75,7 @@ class Role extends DataClass
 
     /**
      * Sets the description of this Role.
+     * 
      * @param text $description
      */
     public function set_description($description)
@@ -76,6 +84,7 @@ class Role extends DataClass
     }
 
     /**
+     *
      * @return string The table name of the data class
      */
     public static function get_table_name()

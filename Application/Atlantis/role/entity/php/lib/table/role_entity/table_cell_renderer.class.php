@@ -10,8 +10,8 @@ use common\libraries\Translation;
 use common\libraries\Utilities;
 use common\libraries\ToolbarItem;
 
-class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
-        NewObjectTableCellRendererActionsColumnSupport
+class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements 
+    NewObjectTableCellRendererActionsColumnSupport
 {
 
     public function render_cell($column, $object)
@@ -39,7 +39,7 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
                 return DatetimeUtilities :: format_locale_date($date_format, $object->get_end_date());
                 break;
         }
-
+        
         return parent :: render_cell($column, $object);
     }
 
@@ -49,12 +49,14 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
         if ($this->get_component()->get_user()->is_platform_admin())
         {
             $toolbar->add_item(
-                    new ToolbarItem(Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
-                            Theme :: get_common_image_path() . 'action_delete.png',
-                            $this->get_component()->get_url(
-                                    array(Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
-                                            Manager :: PARAM_ROLE_ENTITY_ID => $role_entity->get_id())),
-                            ToolbarItem :: DISPLAY_ICON));
+                new ToolbarItem(
+                    Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), 
+                    Theme :: get_common_image_path() . 'action_delete.png', 
+                    $this->get_component()->get_url(
+                        array(
+                            Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, 
+                            Manager :: PARAM_ROLE_ENTITY_ID => $role_entity->get_id())), 
+                    ToolbarItem :: DISPLAY_ICON));
         }
         return $toolbar->as_html();
     }

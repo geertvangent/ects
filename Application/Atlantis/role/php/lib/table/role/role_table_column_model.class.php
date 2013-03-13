@@ -2,9 +2,7 @@
 namespace application\atlantis\role;
 
 use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
-
 use common\libraries\NewObjectTableColumnModel;
-
 use common\libraries\ObjectTableColumn;
 
 class RoleTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport

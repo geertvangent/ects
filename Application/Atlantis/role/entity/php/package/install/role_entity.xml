@@ -7,9 +7,7 @@
 		<property name="entity_id" type="integer" />
 		<property name="context_id" type="integer" />
 		<property name="role_id" type="integer" />
-		<property name="start_date" type="integer" unsigned="1"
-			notnull="1" />
-		<property name="end_date" type="integer" unsigned="1"
-			notnull="1" />
+		<property name="start_date" type="integer" unsigned="1" notnull="1" />
+		<property name="end_date" type="integer" unsigned="1" notnull="1" />
 	</properties>
 </object>

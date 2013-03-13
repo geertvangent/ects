@@ -10,5 +10,4 @@ class SettingsAtlantisConnector
     {
         return Theme :: get_themes();
     }
-
 }

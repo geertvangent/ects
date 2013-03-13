@@ -3,7 +3,6 @@ namespace application\atlantis\role\entitlement;
 
 use common\libraries\SubManager;
 
-
 class Manager extends SubManager
 {
     const PARAM_ACTION = 'entitlement_action';
@@ -13,7 +12,6 @@ class Manager extends SubManager
     const ACTION_EDIT = 'editor';
     const ACTION_RIGHTS = 'rights';
     const ACTION_LIST = 'lister';
-
     const PARAM_ENTITLEMENT_ID = 'entitlement_id';
     const DEFAULT_ACTION = self :: ACTION_LIST;
 
@@ -23,16 +21,9 @@ class Manager extends SubManager
     }
 
     /**
-     * Helper function for the Application class,
-     * pending access to class constants via variables in PHP 5.3
-     * e.g.
-     * $name = $class :: APPLICATION_NAME
-     *
-     * DO NOT USE IN THIS APPLICATION'S CONTEXT
-     * Instead use:
-     * - self :: APPLICATION_NAME in the context of this class
-     * - YourApplicationManager :: APPLICATION_NAME in all other application
-     * classes
+     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
+     * = $class :: APPLICATION_NAME DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: APPLICATION_NAME in
+     * the context of this class - YourApplicationManager :: APPLICATION_NAME in all other application classes
      */
     public function get_application_name()
     {
@@ -48,5 +39,4 @@ class Manager extends SubManager
     {
         parent :: launch(null, $application);
     }
-
 }

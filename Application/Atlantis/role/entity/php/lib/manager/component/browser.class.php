@@ -23,7 +23,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
     private $start_date;
 
     private $end_date;
-
+    
     /*
      * (non-PHPdoc) @see common\libraries.NewObjectTableSupport::get_object_table_condition()
      */
@@ -91,21 +91,25 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         if ($this->has_role_id())
         {
             BreadcrumbTrail :: get_instance()->add(
-                    new Breadcrumb(null,
-                            \application\atlantis\role\DataManager :: retrieve(
-                                    \application\atlantis\role\Role :: class_name(), (int) $this->role_id)->get_name()));
+                new Breadcrumb(
+                    null, 
+                    \application\atlantis\role\DataManager :: retrieve(
+                        \application\atlantis\role\Role :: class_name(), 
+                        (int) $this->role_id)->get_name()));
         }
         if ($this->has_context_id())
         {
             BreadcrumbTrail :: get_instance()->add(
-                    new Breadcrumb(null,
-                            \application\atlantis\context\DataManager :: retrieve(
-                                    \application\atlantis\context\Context :: class_name(), (int) $this->context_id)->get_context_name()));
+                new Breadcrumb(
+                    null, 
+                    \application\atlantis\context\DataManager :: retrieve(
+                        \application\atlantis\context\Context :: class_name(), 
+                        (int) $this->context_id)->get_context_name()));
         }
         if ($this->has_entity())
         {
             BreadcrumbTrail :: get_instance()->add(
-                    new Breadcrumb(null, RoleEntity :: entity_name($this->entity_type, $this->entity_id)));
+                new Breadcrumb(null, RoleEntity :: entity_name($this->entity_type, $this->entity_id)));
         }
     }
 
@@ -120,12 +124,12 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $this->role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
         $this->start_date = Request :: get(self :: PARAM_START_DATE);
         $this->end_date = Request :: get(self :: PARAM_END_DATE);
-
+        
         $this->add_breadcrumb();
         $this->display_header();
         $table = new RoleEntityTable($this);
         echo ($table->as_html());
-
+        
         $this->display_footer();
     }
 }

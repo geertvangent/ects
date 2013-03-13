@@ -18,7 +18,10 @@ class RoleTable extends NewObjectTable implements NewObjectTableFormActionsSuppo
         $actions = new ObjectTableFormActions(__NAMESPACE__, Manager :: PARAM_ACTION);
         if ($this->get_component()->get_user()->is_platform_admin())
         {
-            $actions->add_form_action(new ObjectTableFormAction(Manager :: ACTION_DELETE, Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
+            $actions->add_form_action(
+                new ObjectTableFormAction(
+                    Manager :: ACTION_DELETE, 
+                    Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
         }
         return $actions;
     }

@@ -12,7 +12,6 @@ class Manager extends SubManager
     const ACTION_EDIT = 'editor';
     const ACTION_CREATE = 'creator';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-
     const PARAM_CONTEXT_ID = 'context_id';
 
     public static function get_action_parameter()
@@ -21,16 +20,9 @@ class Manager extends SubManager
     }
 
     /**
-     * Helper function for the Application class,
-     * pending access to class constants via variables in PHP 5.3
-     * e.g.
-     * $name = $class :: DEFAULT_ACTION
-     *
-     * DO NOT USE IN THIS APPLICATION'S CONTEXT
-     * Instead use:
-     * - self :: DEFAULT_ACTION in the context of this class
-     * - YourApplicationManager :: DEFAULT_ACTION in all other application
-     * classes
+     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
+     * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
+     * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
      */
     public function get_default_action()
     {
@@ -41,5 +33,4 @@ class Manager extends SubManager
     {
         parent :: launch(null, $application);
     }
-
 }
