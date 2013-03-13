@@ -28,7 +28,7 @@ class ModuleInstanceManager extends SubManager
     public function __construct($repository_manager)
     {
         parent :: __construct($repository_manager);
-
+        
         $instance_action = Request :: get(self :: PARAM_INSTANCE_ACTION);
         if ($instance_action)
         {
@@ -48,7 +48,8 @@ class ModuleInstanceManager extends SubManager
 
     public function get_application_component_path()
     {
-        return WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) . 'module_instance_manager/component/';
+        return WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) .
+             'module_instance_manager/component/';
     }
 
     public static function launch($application)
@@ -79,16 +80,18 @@ class ModuleInstanceManager extends SubManager
     public static function get_registered_types($status = Registration :: STATUS_ACTIVE)
     {
         $instance_conditions = array();
-        $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE,
-                Registration :: TYPE_EXTERNAL_REPOSITORY_MANAGER);
-        $instance_conditions[] = new EqualityCondition(Registration :: PROPERTY_TYPE,
-                Registration :: TYPE_VIDEO_CONFERENCING_MANAGER);
-
+        $instance_conditions[] = new EqualityCondition(
+            Registration :: PROPERTY_TYPE, 
+            Registration :: TYPE_EXTERNAL_REPOSITORY_MANAGER);
+        $instance_conditions[] = new EqualityCondition(
+            Registration :: PROPERTY_TYPE, 
+            Registration :: TYPE_VIDEO_CONFERENCING_MANAGER);
+        
         $conditions = array();
         $conditions[] = new OrCondition($instance_conditions);
         $conditions[] = new EqualityCondition(Registration :: PROPERTY_STATUS, $status);
         $condition = new AndCondition($conditions);
-
+        
         return CommonDataManager :: retrieves(Registration :: class_name(), $condition);
     }
 

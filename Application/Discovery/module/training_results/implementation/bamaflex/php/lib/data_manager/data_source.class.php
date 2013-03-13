@@ -37,8 +37,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT vdea.*, vdp.first_name, vdp.last_name FROM v_discovery_enrollment_advanced AS vdea JOIN v_discovery_profile_basic AS vdp ON vdea.person_id = vdp.id ' . $translator->render_query(
-                    $condition) . ' ORDER BY vdp.first_name, vdp.last_name';
+            $query = 'SELECT vdea.*, vdp.first_name, vdp.last_name FROM v_discovery_enrollment_advanced AS vdea JOIN v_discovery_profile_basic AS vdp ON vdea.person_id = vdp.id ' .
+                 $translator->render_query($condition) . ' ORDER BY vdp.first_name, vdp.last_name';
             
             $statement = $this->query($query);
             if ($statement instanceof PDOStatement)
@@ -114,12 +114,13 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
-                            Utilities :: get_namespace_from_object($training));
+                    $conditions[] = new EqualityCondition(
+                        History :: PROPERTY_TYPE, 
+                        Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
                     
                     $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
-                            $condition);
+                        $condition);
                     
                     if ($histories->size() > 0)
                     {
@@ -145,12 +146,13 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
-                            Utilities :: get_namespace_from_object($training));
+                    $conditions[] = new EqualityCondition(
+                        History :: PROPERTY_TYPE, 
+                        Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
                     
                     $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
-                            $condition);
+                        $condition);
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())

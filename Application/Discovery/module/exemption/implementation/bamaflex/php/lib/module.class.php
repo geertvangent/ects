@@ -18,7 +18,7 @@ class Module extends \application\discovery\module\exemption\Module
                     $exemptions[] = $exemption;
                 }
             }
-
+            
             $this->cache_exemptions[$year] = $exemptions;
         }
         return $this->cache_exemptions[$year];

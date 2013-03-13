@@ -32,7 +32,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new AndCondition($conditions);
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT * FROM v_discovery_employment ' . $translator->render_query($condition) . ' ORDER BY start_date DESC';
+        $query = 'SELECT * FROM v_discovery_employment ' . $translator->render_query($condition) .
+             ' ORDER BY start_date DESC';
         
         $statement = $this->query($query);
         
@@ -92,8 +93,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment ' . $translator->render_query(
-                $condition);
+        $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment ' .
+             $translator->render_query($condition);
         
         $statement = $this->query($query);
         
@@ -114,7 +115,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new EqualityCondition('assignment_id', '"' . $employment_id . '"');
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT * FROM v_discovery_employment_parts ' . $translator->render_query($condition) . ' ORDER BY start_date';
+        $query = 'SELECT * FROM v_discovery_employment_parts ' . $translator->render_query($condition) .
+             ' ORDER BY start_date';
         
         $statement = $this->query($query);
         

@@ -31,7 +31,7 @@ class Connection extends DoctrineConnection
         $classLoader->register();
         
         $this->data_source_instance = \application\discovery\DataManager :: get_instance()->retrieve_data_source_instance(
-                $data_source_instance_id);
+            $data_source_instance_id);
         
         $driver = $this->data_source_instance->get_setting('driver');
         $host = $this->data_source_instance->get_setting('host');
@@ -42,9 +42,12 @@ class Connection extends DoctrineConnection
         $data_source_name = DataSourceName :: factory('Doctrine', $driver, $username, $host, $database, $password);
         
         $configuration = new \Doctrine\DBAL\Configuration();
-        $connection_parameters = array('dbname' => $data_source_name->get_database(), 
-                'user' => $data_source_name->get_username(), 'password' => $data_source_name->get_password(), 
-                'host' => $data_source_name->get_host(), 'driver' => $data_source_name->get_driver(true));
+        $connection_parameters = array(
+            'dbname' => $data_source_name->get_database(), 
+            'user' => $data_source_name->get_username(), 
+            'password' => $data_source_name->get_password(), 
+            'host' => $data_source_name->get_host(), 
+            'driver' => $data_source_name->get_driver(true));
         
         $this->connection = DriverManager :: getConnection($connection_parameters, $configuration);
     }

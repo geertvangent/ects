@@ -28,7 +28,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_year_advanced ' . $translator->render_query($condition) . ' ORDER BY year DESC, id';
+            $query = 'SELECT * FROM v_discovery_year_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY year DESC, id';
             
             $statement = $this->query($query);
             
@@ -62,8 +63,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT count(id) AS student_years_count FROM v_discovery_year_advanced ' . $translator->render_query(
-                $condition);
+        $query = 'SELECT count(id) AS student_years_count FROM v_discovery_year_advanced ' .
+             $translator->render_query($condition);
         
         $statement = $this->query($query);
         

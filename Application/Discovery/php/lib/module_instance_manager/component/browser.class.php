@@ -24,41 +24,57 @@ class ModuleInstanceManagerBrowserComponent extends ModuleInstanceManager
         {
             $this->not_allowed();
         }
-
+        
         $this->action_bar = $this->get_action_bar();
         $parameters = $this->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
         $table = new ModuleInstanceBrowserTable($this, $parameters, $this->get_condition());
-
+        
         $tabs = new DynamicVisualTabsRenderer('module', $table->as_html());
         $param = array();
         $param[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
         $selected = $this->get_content_type() == ModuleInstance :: TYPE_INFORMATION ? true : false;
         $tabs->add_tab(
-                new DynamicVisualTab(ModuleInstance :: TYPE_INFORMATION, Translation :: get('Information'), null,
-                        $this->get_url($param), $selected));
-
+            new DynamicVisualTab(
+                ModuleInstance :: TYPE_INFORMATION, 
+                Translation :: get('Information'), 
+                null, 
+                $this->get_url($param), 
+                $selected));
+        
         $param = array();
         $param[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
         $selected = $this->get_content_type() == ModuleInstance :: TYPE_USER ? true : false;
         $tabs->add_tab(
-                new DynamicVisualTab(ModuleInstance :: TYPE_USER, Translation :: get('User'), null,
-                        $this->get_url($param), $selected));
-
+            new DynamicVisualTab(
+                ModuleInstance :: TYPE_USER, 
+                Translation :: get('User'), 
+                null, 
+                $this->get_url($param), 
+                $selected));
+        
         $param = array();
         $param[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_DETAILS;
         $selected = $this->get_content_type() == ModuleInstance :: TYPE_DETAILS ? true : false;
         $tabs->add_tab(
-                new DynamicVisualTab(ModuleInstance :: TYPE_DETAILS, Translation :: get('Details'), null,
-                        $this->get_url($param), $selected));
-
+            new DynamicVisualTab(
+                ModuleInstance :: TYPE_DETAILS, 
+                Translation :: get('Details'), 
+                null, 
+                $this->get_url($param), 
+                $selected));
+        
         $param = array();
         $param[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_DISABLED;
         $selected = $this->get_content_type() == ModuleInstance :: TYPE_DISABLED ? true : false;
         $tabs->add_tab(
-                new DynamicVisualTab(ModuleInstance :: TYPE_DISABLED, Translation :: get('Disabled'), null,
-                        $this->get_url($param), $selected));
-
+            new DynamicVisualTab(
+                ModuleInstance :: TYPE_DISABLED, 
+                Translation :: get('Disabled'), 
+                null, 
+                $this->get_url($param), 
+                $selected));
+        
         $this->display_header();
         echo $this->action_bar->as_html();
         echo $tabs->render();
@@ -68,7 +84,7 @@ class ModuleInstanceManagerBrowserComponent extends ModuleInstanceManager
     public function get_condition()
     {
         $query = $this->action_bar->get_query();
-
+        
         if (isset($query) && $query != '')
         {
             $conditions = array();
@@ -94,12 +110,13 @@ class ModuleInstanceManagerBrowserComponent extends ModuleInstanceManager
     {
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->add_common_action(
-                new ToolbarItem(Translation :: get('AddModuleInstance'),
-                        Theme :: get_common_image_path() . 'action_create.png',
-                        $this->get_url(
-                                array(
-                                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_CREATE_INSTANCE)),
-                        ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+            new ToolbarItem(
+                Translation :: get('AddModuleInstance'), 
+                Theme :: get_common_image_path() . 'action_create.png', 
+                $this->get_url(
+                    array(
+                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_CREATE_INSTANCE)), 
+                ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
     }
 }

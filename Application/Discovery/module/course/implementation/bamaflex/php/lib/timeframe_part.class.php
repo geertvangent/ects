@@ -2,7 +2,6 @@
 namespace application\discovery\module\course\implementation\bamaflex;
 
 use common\libraries\DatetimeUtilities;
-
 use application\discovery\DiscoveryItem;
 
 class TimeframePart extends DiscoveryItem
@@ -52,7 +51,7 @@ class TimeframePart extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TIMEFRAME_ID;
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_DATE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -62,7 +61,7 @@ class TimeframePart extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

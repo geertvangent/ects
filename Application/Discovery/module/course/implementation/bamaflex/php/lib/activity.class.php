@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-
 use application\discovery\DiscoveryItem;
 
 class Activity extends DiscoveryItem

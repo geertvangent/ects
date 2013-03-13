@@ -6,8 +6,8 @@ use common\libraries\ObjectTableColumn;
 use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
 use common\libraries\NewObjectTableColumnModel;
 
-class UserBrowserTableColumnModel extends NewObjectTableColumnModel implements
-        NewObjectTableColumnModelActionsColumnSupport
+class UserBrowserTableColumnModel extends NewObjectTableColumnModel implements 
+    NewObjectTableColumnModelActionsColumnSupport
 {
 
     public function initialize_columns()

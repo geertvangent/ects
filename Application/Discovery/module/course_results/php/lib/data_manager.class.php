@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\course_results;
 
-
 /**
  *
  * @package application.discovery

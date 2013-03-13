@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\person;
 
-
 use application\discovery\DiscoveryItem;
 
 class Person extends DiscoveryItem
@@ -94,7 +93,7 @@ class Person extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_FIRST_NAME;
         $extended_property_names[] = self :: PROPERTY_LAST_NAME;
         $extended_property_names[] = self :: PROPERTY_OFFICIAL_CODE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -104,7 +103,7 @@ class Person extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

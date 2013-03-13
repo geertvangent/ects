@@ -116,8 +116,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
-                            Utilities :: get_namespace_from_object($training));
+                    $conditions[] = new EqualityCondition(
+                        History :: PROPERTY_TYPE, 
+                        Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
                     
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
@@ -146,8 +147,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
-                            Utilities :: get_namespace_from_object($training));
+                    $conditions[] = new EqualityCondition(
+                        History :: PROPERTY_TYPE, 
+                        Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
                     
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
@@ -233,7 +235,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $major->set_source($result->source);
                     $major->set_choices($this->retrieve_major_choices($major->get_id(), $major->get_source()));
                     $major->set_choice_options(
-                            $this->retrieve_major_choice_options($major->get_id(), $major->get_source()));
+                        $this->retrieve_major_choice_options($major->get_id(), $major->get_source()));
                     
                     $this->majors[$training_id][$source][] = $major;
                 }
@@ -328,7 +330,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_advanced ' . $translator->render_query($condition) . ' ORDER BY name';
+            $query = 'SELECT * FROM v_discovery_course_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY name';
             $statement = $this->query($query);
             
             if ($statement instanceof PDOStatement)
@@ -368,8 +371,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced ' . $translator->render_query(
-                    $condition);
+            $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced ' .
+                 $translator->render_query($condition);
             
             $statement = $this->query($query);
             
@@ -394,7 +397,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     if (! is_null($package_course->get_parent_programme_id()))
                     {
                         $this->package_courses[$id][$source][$package_course->get_parent_programme_id()]->add_child(
-                                $package_course);
+                            $package_course);
                     }
                 }
             }
@@ -447,7 +450,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_training_choice_option_advanced ' . $translator->render_query(
-                    $condition);
+                $condition);
             $statement = $this->query($query);
             
             if ($statement instanceof PDOStatement)
@@ -492,7 +495,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $trajectory->set_name($this->convert_to_utf8($result->name));
                     $trajectory->set_source($result->source);
                     $trajectory->set_trajectories(
-                            $this->retrieve_sub_trajectories($trajectory->get_id(), $trajectory->get_source()));
+                        $this->retrieve_sub_trajectories($trajectory->get_id(), $trajectory->get_source()));
                     
                     $this->trajectories[$training_id][$source][] = $trajectory;
                 }
@@ -543,8 +546,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced ' . $translator->render_query(
-                    $condition);
+            $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced ' .
+                 $translator->render_query($condition);
             $statement = $this->query($query);
             
             if ($statement instanceof PDOStatement)
@@ -557,7 +560,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $trajectory->set_name($this->convert_to_utf8($result->name));
                     $trajectory->set_source($result->source);
                     $trajectory->set_courses(
-                            $this->retrieve_sub_trajectory_courses($trajectory->get_id(), $trajectory->get_source()));
+                        $this->retrieve_sub_trajectory_courses($trajectory->get_id(), $trajectory->get_source()));
                     
                     $this->sub_trajectories[$id][$source][] = $trajectory;
                 }
@@ -576,8 +579,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced ' . $translator->render_query(
-                    $condition);
+            $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced ' .
+                 $translator->render_query($condition);
             $statement = $this->query($query);
             
             if ($statement instanceof PDOStatement)
@@ -601,7 +604,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     if (! is_null($sub_trajectory_course->get_parent_programme_id()))
                     {
                         $this->sub_trajectory_courses[$id][$source][$sub_trajectory_course->get_parent_programme_id()]->add_child(
-                                $sub_trajectory_course);
+                            $sub_trajectory_course);
                     }
                 }
             }
@@ -649,8 +652,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic ' . $translator->render_query(
-                    $condition);
+            $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic ' .
+                 $translator->render_query($condition);
             
             $statement = $this->query($query);
             

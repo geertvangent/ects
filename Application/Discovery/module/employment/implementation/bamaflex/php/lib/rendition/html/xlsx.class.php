@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\employment\implementation\bamaflex;
 
-
 class HtmlXlsxRenditionImplementation extends RenditionImplementation
 {
 
@@ -9,7 +8,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
     {
         \application\discovery\Rendition :: launch($this);
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -17,7 +16,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

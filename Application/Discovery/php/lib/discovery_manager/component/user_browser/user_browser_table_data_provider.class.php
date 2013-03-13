@@ -6,7 +6,7 @@ use common\libraries\ObjectTableDataProvider;
 
 /**
  * $Id: user_browser_table_data_provider.class.php 211 2009-11-13 13:28:39Z vanpouckesven $
- *
+ * 
  * @package user.lib.user_manager.component.user_browser
  */
 /**
@@ -18,7 +18,7 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
 
     /**
      * Constructor
-     *
+     * 
      * @param UserManagerComponent $browser
      * @param Condition $condition
      */
@@ -29,7 +29,7 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
 
     /**
      * Gets the users
-     *
+     * 
      * @param String $user
      * @param String $category
      * @param int $offset
@@ -40,13 +40,16 @@ class UserBrowserTableDataProvider extends ObjectTableDataProvider
     public function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
-        return UserDataManager :: get_instance()->retrieve_users($this->get_condition(), $offset, $count,
-                $order_property);
+        return UserDataManager :: get_instance()->retrieve_users(
+            $this->get_condition(), 
+            $offset, 
+            $count, 
+            $order_property);
     }
 
     /**
      * Gets the number of users in the table
-     *
+     * 
      * @return int
      */
     public function get_object_count()

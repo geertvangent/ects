@@ -24,7 +24,7 @@ class GroupRelUserBrowserTableColumnModel extends DefaultGroupRelUserTableColumn
 
     /**
      * Gets the modification column
-     *
+     * 
      * @return ContentObjectTableColumn
      */
     public static function get_modification_column()

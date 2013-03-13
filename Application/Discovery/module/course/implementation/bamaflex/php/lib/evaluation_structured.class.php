@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-
-
 class EvaluationStructured extends Evaluation
 {
     const CLASS_NAME = __CLASS__;
@@ -109,7 +107,7 @@ class EvaluationStructured extends Evaluation
         $extended_property_names[] = self :: PROPERTY_TYPE_ID;
         $extended_property_names[] = self :: PROPERTY_PERCENTAGE;
         $extended_property_names[] = self :: PROPERTY_PERMANENT;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -119,7 +117,7 @@ class EvaluationStructured extends Evaluation
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

@@ -96,8 +96,12 @@ class ModuleInstance extends DataClass
     public static function get_default_property_names()
     {
         return parent :: get_default_property_names(
-                array(self :: PROPERTY_TITLE, self :: PROPERTY_DESCRIPTION, self :: PROPERTY_TYPE,
-                        self :: PROPERTY_CONTENT_TYPE, self :: PROPERTY_DISPLAY_ORDER));
+            array(
+                self :: PROPERTY_TITLE, 
+                self :: PROPERTY_DESCRIPTION, 
+                self :: PROPERTY_TYPE, 
+                self :: PROPERTY_CONTENT_TYPE, 
+                self :: PROPERTY_DISPLAY_ORDER));
     }
 
     public static function get_table_name()
@@ -131,7 +135,7 @@ class ModuleInstance extends DataClass
         {
             $condition = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
             $settings = $this->get_data_manager()->retrieve_module_instance_settings($condition);
-
+            
             while ($setting = $settings->next_result())
             {
                 if (! $setting->delete())
@@ -140,7 +144,7 @@ class ModuleInstance extends DataClass
                 }
             }
         }
-
+        
         // $location = RepositoryRights ::
         // get_instance()->get_location_by_identifier_from_external_instances_subtree($this->get_id());
         // if ($location)
@@ -150,7 +154,7 @@ class ModuleInstance extends DataClass
         // return false;
         // }
         // }
-
+        
         return true;
     }
 
@@ -168,7 +172,7 @@ class ModuleInstance extends DataClass
     {
         $condition = new EqualityCondition(ModuleInstanceSetting :: PROPERTY_MODULE_INSTANCE_ID, $this->get_id());
         $settings = DataManager :: get_instance()->count_module_instance_settings($condition);
-
+        
         return $settings > 0;
     }
 

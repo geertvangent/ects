@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\course;
 
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 

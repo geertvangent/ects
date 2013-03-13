@@ -40,7 +40,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_results_advanced ' . $translator->render_query($condition) . ' ORDER BY person_last_name, person_first_name';
+            $query = 'SELECT * FROM v_discovery_course_results_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY person_last_name, person_first_name';
             
             $statement = $this->query($query);
             
@@ -49,7 +50,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->course_results[$programme_id][$source][] = $this->result_to_course_result(
-                            $course_results_parameters, $result);
+                        $course_results_parameters, 
+                        $result);
                 }
             }
         }
@@ -154,8 +156,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $course_result->set_person_id($result->person_id);
         $course_result->set_trajectory_type($result->trajectory_type);
         
-        $marks = $this->retrieve_marks($course_results_parameters->get_programme_id(), 
-                $course_results_parameters->get_source());
+        $marks = $this->retrieve_marks(
+            $course_results_parameters->get_programme_id(), 
+            $course_results_parameters->get_source());
         
         foreach ($this->retrieve_mark_moments($course_results_parameters) as $moment)
         {

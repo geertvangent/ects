@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
-
 use application\discovery\DiscoveryItem;
 
 class Application extends DiscoveryItem
@@ -14,6 +13,6 @@ class Application extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 }

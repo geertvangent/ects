@@ -25,15 +25,18 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
         $module_instance = DataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
         $this->namespace = '\\' . $module_instance->get_type() . '\Rights';
         $namespace = $this->namespace;
-        RightsEditorManager :: launch($this, 'discovery_' . $this->module_instance_id, $this->get_locations(),
-                $this->get_entities());
+        RightsEditorManager :: launch(
+            $this, 
+            'discovery_' . $this->module_instance_id, 
+            $this->get_locations(), 
+            $this->get_entities());
     }
 
     public function get_locations()
     {
         $namespace = $this->namespace;
         $locations = array();
-
+        
         $locations[] = $namespace :: get_instance()->get_current_location($this->module_instance_id);
         return $locations;
     }
@@ -41,13 +44,13 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
     public function get_entities()
     {
         $excluded_users[] = $this->get_user_id();
-
+        
         $user_entity = new NewUserEntity();
-
+        
         $entities = array();
         $entities[NewUserEntity :: ENTITY_TYPE] = $user_entity;
         $entities[NewPlatformGroupEntity :: ENTITY_TYPE] = new NewPlatformGroupEntity();
-
+        
         return $entities;
     }
 
@@ -60,7 +63,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
     public function get_additional_parameters()
     {
         $module_instance = DataManager :: get_instance()->retrieve_module_instance(
-                Request :: get(self :: PARAM_MODULE_ID));
+            Request :: get(self :: PARAM_MODULE_ID));
         $namespace = '\\' . $module_instance->get_type() . '\Module';
         $parameters = $namespace :: module_parameters();
         $parameters = array_keys($parameters->get_parameters());

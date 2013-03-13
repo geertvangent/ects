@@ -20,7 +20,7 @@ class Module extends \application\discovery\module\advice\Module
                     $advices[] = $advice;
                 }
             }
-
+            
             $this->cache_advices[$enrollment->get_id()] = $advices;
         }
         return $this->cache_advices[$enrollment->get_id()];

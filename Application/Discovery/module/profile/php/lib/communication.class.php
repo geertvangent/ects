@@ -135,7 +135,7 @@ class Communication extends DataClass
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_DEVICE;
         $extended_property_names[] = self :: PROPERTY_NUMBER;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -145,6 +145,6 @@ class Communication extends DataClass
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 }

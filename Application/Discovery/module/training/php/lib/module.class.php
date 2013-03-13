@@ -42,7 +42,7 @@ class Module extends \application\discovery\Module
         if (! isset($this->trainings[$year]))
         {
             $this->trainings[$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_trainings(
-                    $year);
+                $year);
         }
         return $this->trainings[$year];
     }
@@ -78,7 +78,9 @@ class Module extends \application\discovery\Module
         $types = array();
         
         $modules = Filesystem :: get_directory_content(
-                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
+            false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

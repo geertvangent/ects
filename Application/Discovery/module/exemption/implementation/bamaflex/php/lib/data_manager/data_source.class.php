@@ -29,7 +29,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new EqualityCondition('person_id', '"' . $person_id . '"');
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_exemption_basic ' . $translator->render_query($condition) . ' ORDER BY year DESC, programme_name';
+            $query = 'SELECT * FROM v_discovery_exemption_basic ' . $translator->render_query($condition) .
+                 ' ORDER BY year DESC, programme_name';
             
             $statement = $this->query($query);
             
@@ -72,8 +73,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new EqualityCondition('person_id', '"' . $person_id . '"');
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic ' . $translator->render_query(
-                $condition);
+        $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic ' .
+             $translator->render_query($condition);
         
         $statement = $this->query($query);
         
@@ -92,7 +93,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         if (! isset($this->years[$person_id]))
         {
-            $query = 'SELECT DISTINCT year FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id . '" ORDER BY year DESC';
+            $query = 'SELECT DISTINCT year FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id .
+                 '" ORDER BY year DESC';
             
             $statement = $this->query($query);
             

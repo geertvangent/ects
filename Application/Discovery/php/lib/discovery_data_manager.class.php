@@ -44,26 +44,33 @@ class DataManager extends \common\libraries\DataManager
     public static function create_module_rights_storage_units($module)
     {
         $right_location = self :: parse_xml_file(
-                WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) . 'php/rights/rights_location.xml');
+            WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) .
+                 'php/rights/rights_location.xml');
         $right_location_entity_right = self :: parse_xml_file(
-                WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) . 'php/rights/rights_location_entity_right.xml');
+            WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) .
+                 'php/rights/rights_location_entity_right.xml');
         
-        if (! self :: get_instance()->create_storage_unit($module->get_id() . '_' . $right_location['name'], 
-                $right_location['properties'], $right_location['indexes']))
+        if (! self :: get_instance()->create_storage_unit(
+            $module->get_id() . '_' . $right_location['name'], 
+            $right_location['properties'], 
+            $right_location['indexes']))
         {
             return false;
         }
         
         $rights = $module->get_type() . '\Rights';
         if (! $rights :: get_instance()->create_subtree_root_location(
-                DiscoveryManager :: APPLICATION_NAME . '_' . $module->get_id(), 0, RightsUtil :: TREE_TYPE_ROOT))
+            DiscoveryManager :: APPLICATION_NAME . '_' . $module->get_id(), 
+            0, 
+            RightsUtil :: TREE_TYPE_ROOT))
         {
             return false;
         }
         
         if (! self :: get_instance()->create_storage_unit(
-                $module->get_id() . '_' . $right_location_entity_right['name'], 
-                $right_location_entity_right['properties'], $right_location_entity_right['indexes']))
+            $module->get_id() . '_' . $right_location_entity_right['name'], 
+            $right_location_entity_right['properties'], 
+            $right_location_entity_right['indexes']))
         {
             return false;
         }
@@ -104,7 +111,7 @@ class DataManager extends \common\libraries\DataManager
             foreach ($index_properties as $subkey => $index_property)
             {
                 $index_info['fields'][$index_property->getAttribute('name')] = array(
-                        'length' => $index_property->getAttribute('length'));
+                    'length' => $index_property->getAttribute('length'));
             }
             $indexes[$index->getAttribute('name')] = $index_info;
         }

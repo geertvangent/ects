@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\exemption;
 
-
 /**
  *
  * @package application.discovery

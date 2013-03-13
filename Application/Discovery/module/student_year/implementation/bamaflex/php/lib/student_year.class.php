@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\student_year\implementation\bamaflex;
 
-
 use common\libraries\Utilities;
 
 /**
@@ -139,15 +138,15 @@ class StudentYear extends \application\discovery\module\student_year\StudentYear
         $types = array();
         
         $types[self :: REDUCED_REGISTRATION_FEE_NO] = self :: reduced_registration_fee_string(
-                self :: REDUCED_REGISTRATION_FEE_NO);
+            self :: REDUCED_REGISTRATION_FEE_NO);
         $types[self :: REDUCED_REGISTRATION_FEE_YES] = self :: reduced_registration_fee_string(
-                self :: REDUCED_REGISTRATION_FEE_YES);
+            self :: REDUCED_REGISTRATION_FEE_YES);
         $types[self :: REDUCED_REGISTRATION_FEE_ALMOST] = self :: reduced_registration_fee_string(
-                self :: REDUCED_REGISTRATION_FEE_ALMOST);
+            self :: REDUCED_REGISTRATION_FEE_ALMOST);
         $types[self :: REDUCED_REGISTRATION_FEE_PENDING] = self :: reduced_registration_fee_string(
-                self :: REDUCED_REGISTRATION_FEE_PENDING);
+            self :: REDUCED_REGISTRATION_FEE_PENDING);
         $types[self :: REDUCED_REGISTRATION_FEE_REFUSED] = self :: reduced_registration_fee_string(
-                self :: REDUCED_REGISTRATION_FEE_REFUSED);
+            self :: REDUCED_REGISTRATION_FEE_REFUSED);
         
         return ($types_only ? array_keys($types) : $types);
     }

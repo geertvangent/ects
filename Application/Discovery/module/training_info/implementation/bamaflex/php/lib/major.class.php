@@ -3,7 +3,6 @@ namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
 
-
 class Major extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;

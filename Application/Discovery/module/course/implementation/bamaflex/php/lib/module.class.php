@@ -23,7 +23,7 @@ class Module extends \application\discovery\module\course\Module
         $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
         $parameter = new Parameters();
-
+        
         if ($programme)
         {
             $parameter->set_programme_id($programme);

@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-
-
 class CompetenceStructured extends Competence
 {
     const CLASS_NAME = __CLASS__;

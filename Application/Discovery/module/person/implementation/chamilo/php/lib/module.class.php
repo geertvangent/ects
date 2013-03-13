@@ -17,13 +17,13 @@ class Module extends \application\discovery\module\person\Module
         if (! $this->group)
         {
             $this->group = Request :: get(\group\GroupManager :: PARAM_GROUP_ID);
-
+            
             if (! $this->group)
             {
                 $this->group = $this->get_root_group()->get_id();
             }
         }
-
+        
         return $this->group;
     }
 
@@ -32,10 +32,10 @@ class Module extends \application\discovery\module\person\Module
         if (! $this->root_group)
         {
             $group = \group\GroupDataManager :: get_instance()->retrieve_groups(
-                    new EqualityCondition(\group\Group :: PROPERTY_PARENT, 0))->next_result();
+                new EqualityCondition(\group\Group :: PROPERTY_PARENT, 0))->next_result();
             $this->root_group = $group;
         }
-
+        
         return $this->root_group;
     }
 
@@ -53,7 +53,7 @@ class Module extends \application\discovery\module\person\Module
         {
             $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT, $this->get_group());
         }
-
+        
         return $condition;
     }
 
@@ -72,14 +72,14 @@ class Module extends \application\discovery\module\person\Module
     public static function query_to_condition($query)
     {
         $queries = Utilities :: split_query($query);
-
+        
         if (is_null($queries))
         {
             return null;
         }
-
+        
         $conditions = array();
-
+        
         foreach ($queries as $query)
         {
             $pattern_conditions = array();
@@ -87,10 +87,10 @@ class Module extends \application\discovery\module\person\Module
             $pattern_conditions[] = new PatternMatchCondition(\user\User :: PROPERTY_LASTNAME, '*' . $query . '*');
             $pattern_conditions[] = new PatternMatchCondition(\user\User :: PROPERTY_USERNAME, '*' . $query . '*');
             $pattern_conditions[] = new PatternMatchCondition(\user\User :: PROPERTY_OFFICIAL_CODE, '*' . $query . '*');
-
+            
             $conditions[] = new OrCondition($pattern_conditions);
         }
-
+        
         return new AndCondition($conditions);
     }
 

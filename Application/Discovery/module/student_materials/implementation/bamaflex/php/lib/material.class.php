@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
-
 use application\discovery\DiscoveryItem;
 
 class Material extends DiscoveryItem

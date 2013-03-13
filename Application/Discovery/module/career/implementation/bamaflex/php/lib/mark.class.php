@@ -1,10 +1,9 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
-
 /**
  * application.discovery.module.career.implementation.bamaflex.discovery
- *
+ * 
  * @author Hans De Bisschop
  */
 class Mark extends \application\discovery\module\career\Mark
@@ -27,7 +26,7 @@ class Mark extends \application\discovery\module\career\Mark
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -36,13 +35,13 @@ class Mark extends \application\discovery\module\career\Mark
         $extended_property_names[] = self :: PROPERTY_SUB_STATUS;
         $extended_property_names[] = self :: PROPERTY_PUBLISH_STATUS;
         $extended_property_names[] = self :: PROPERTY_ABANDONED;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Returns the sub_status of this Mark.
-     *
+     * 
      * @return string The sub_status.
      */
     public function get_sub_status()
@@ -52,7 +51,7 @@ class Mark extends \application\discovery\module\career\Mark
 
     /**
      * Sets the sub_status of this Mark.
-     *
+     * 
      * @param string $sub_status
      */
     public function set_sub_status($sub_status)
@@ -86,7 +85,7 @@ class Mark extends \application\discovery\module\career\Mark
     public static function status_string($status)
     {
         $prefix = 'MarkStatus';
-
+        
         switch ($status)
         {
             case self :: STATUS_EXEMPTION :
@@ -124,9 +123,10 @@ class Mark extends \application\discovery\module\career\Mark
 
     public function is_credit()
     {
-        if (in_array($this->get_status(),
-                array(self :: STATUS_EXEMPTION, self :: STATUS_CREDIT, self :: STATUS_DELIBERATED,
-                        self :: STATUS_TOLERATED)) && ! $this->is_abandoned())
+        if (in_array(
+            $this->get_status(), 
+            array(self :: STATUS_EXEMPTION, self :: STATUS_CREDIT, self :: STATUS_DELIBERATED, self :: STATUS_TOLERATED)) &&
+             ! $this->is_abandoned())
         {
             return true;
         }

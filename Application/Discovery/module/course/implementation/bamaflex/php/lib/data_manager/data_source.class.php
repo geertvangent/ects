@@ -554,8 +554,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_teaching_assignment_teacher_advanced ' . $translator->render_query(
-                    $condition);
+            $query = 'SELECT * FROM v_discovery_teaching_assignment_teacher_advanced ' .
+                 $translator->render_query($condition);
             
             $statement = $this->query($query);
             

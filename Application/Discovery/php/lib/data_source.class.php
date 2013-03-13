@@ -10,7 +10,7 @@ class DataSource extends DoctrineDatabase
 
     /**
      * Constructor
-     *
+     * 
      * @param ModuleInstance $module_instance
      */
     public function __construct(ModuleInstance $module_instance)

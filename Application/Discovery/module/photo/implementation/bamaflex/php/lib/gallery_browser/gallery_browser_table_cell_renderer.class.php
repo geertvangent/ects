@@ -19,17 +19,18 @@ class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
     public function get_cell_content(User $user)
     {
         $photo = DataManager :: get_instance($this->browser->get_module_instance())->retrieve_photo(
-                $user->get_official_code());
-
+            $user->get_official_code());
+        
         $html[] = '<h4>' . $user->get_fullname() . '</h4>';
-        $profile_link = $this->browser->get_module_link('application\discovery\module\profile\implementation\bamaflex',
-                $user->get_id());
+        $profile_link = $this->browser->get_module_link(
+            'application\discovery\module\profile\implementation\bamaflex', 
+            $user->get_id());
         $html[] = '<a href="' . $profile_link->get_href() . '">';
-
+        
         // if ($photo->has_data())
         // {
         $html[] = '<img src="' . $photo . '" style="width: 150px; border: 1px solid grey;"/>';
-
+        
         // }
         // else
         // {

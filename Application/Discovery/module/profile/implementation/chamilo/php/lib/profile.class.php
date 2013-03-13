@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\profile\implementation\chamilo;
 
-
-
 class Profile extends \application\discovery\module\profile\Profile
 {
     const CLASS_NAME = __CLASS__;

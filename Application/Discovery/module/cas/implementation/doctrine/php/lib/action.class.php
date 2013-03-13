@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
-
 use application\discovery\DiscoveryItem;
 
 class Action extends DiscoveryItem
@@ -23,7 +22,7 @@ class Action extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     public function get_name()

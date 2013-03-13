@@ -26,15 +26,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-
+            
             $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
             $translator = DoctrineConditionTranslator :: factory($this);
-
+            
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced ' .
                  $translator->render_query($condition);
-
+            
             $statement = $this->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -43,7 +43,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-
+        
         return $this->contract_types[$user_id];
     }
 
@@ -59,15 +59,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
             $translator = DoctrineConditionTranslator :: factory($this);
-
+            
             $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
                  ' ORDER BY year DESC, id';
-
+            
             $statement = $this->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -94,7 +94,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 
@@ -103,21 +103,21 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $id = $parameters->get_user_id();
         $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
-
+        
         $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
         $translator = DoctrineConditionTranslator :: factory($this);
-
+        
         $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced ' .
              $translator->render_query($condition);
-
+        
         $statement = $this->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->enrollments_count;
         }
-
+        
         return 0;
     }
 }

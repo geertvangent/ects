@@ -492,7 +492,8 @@ class Enrollment extends \application\discovery\module\enrollment\Enrollment
 
     public function get_training_object()
     {
-        return DataManager :: get_instance($this->get_instance())->retrieve_training($this->get_source(), 
-                $this->get_training_id());
+        return DataManager :: get_instance($this->get_instance())->retrieve_training(
+            $this->get_source(), 
+            $this->get_training_id());
     }
 }

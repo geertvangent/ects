@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\student_materials;
 
-
 /**
  *
  * @package application.discovery

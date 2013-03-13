@@ -16,7 +16,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
 
     /**
      * Constructor
-     *
+     * 
      * @param RepositoryManagerBrowserComponent $browser
      */
     public function __construct($browser)
@@ -24,7 +24,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
         parent :: __construct();
         $this->browser = $browser;
     }
-
+    
     // Inherited
     public function render_cell($column, $group)
     {
@@ -39,7 +39,8 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
                 {
                     $title_short = mb_substr($title_short, 0, 50) . '&hellip;';
                 }
-                return '<a href="' . htmlentities($this->browser->get_group_viewing_url($group)) . '" title="' . $title . '">' . $title_short . '</a>';
+                return '<a href="' . htmlentities($this->browser->get_group_viewing_url($group)) . '" title="' . $title .
+                     '">' . $title_short . '</a>';
             case Group :: PROPERTY_DESCRIPTION :
                 $description = strip_tags(parent :: render_cell($column, $group));
                 // if(strlen($description) > 175)
@@ -52,7 +53,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
             case Translation :: get('Subgroups') :
                 return $group->count_subgroups(true, true);
         }
-
+        
         return parent :: render_cell($column, $group);
     }
 }

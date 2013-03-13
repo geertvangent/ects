@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-
-
 class EvaluationDescription extends Evaluation
 {
     const CLASS_NAME = __CLASS__;
@@ -13,7 +11,7 @@ class EvaluationDescription extends Evaluation
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

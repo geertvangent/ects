@@ -8,7 +8,7 @@ class HtmlZipRenditionImplementation extends RenditionImplementation
     {
         \application\discovery\Rendition :: launch($this);
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -16,7 +16,7 @@ class HtmlZipRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

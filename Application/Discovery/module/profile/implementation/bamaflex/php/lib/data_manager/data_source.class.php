@@ -91,8 +91,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new EqualityCondition('id', '"' . $official_code . '"');
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic ' . $translator->render_query(
-                $condition);
+        $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic ' .
+             $translator->render_query($condition);
         
         $statement = $this->query($query);
         if ($statement instanceof PDOStatement)
@@ -141,7 +141,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new EqualityCondition('person_id', '"' . $id . '"');
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT * FROM v_discovery_profile_learning_credit ' . $translator->render_query($condition) . ' ORDER BY date DESC';
+        $query = 'SELECT * FROM v_discovery_profile_learning_credit ' . $translator->render_query($condition) .
+             ' ORDER BY date DESC';
         
         $statement = $this->query($query);
         

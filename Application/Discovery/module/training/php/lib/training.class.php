@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\training;
 
-
 use application\discovery\DiscoveryItem;
 
 class Training extends DiscoveryItem

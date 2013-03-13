@@ -36,7 +36,7 @@ class Module extends \application\discovery\Module
         if (! isset($this->training_results))
         {
             $this->training_results = $this->get_data_manager()->retrieve_training_results(
-                    $this->get_module_parameters());
+                $this->get_module_parameters());
         }
         return $this->training_results;
     }
@@ -49,9 +49,11 @@ class Module extends \application\discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
-                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
+            false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

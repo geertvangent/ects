@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
-
 use application\discovery\DiscoveryItem;
 
 class Cas extends DiscoveryItem

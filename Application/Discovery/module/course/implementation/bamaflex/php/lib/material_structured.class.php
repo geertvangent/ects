@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-
-
 class MaterialStructured extends Material
 {
     const CLASS_NAME = __CLASS__;
@@ -174,7 +172,7 @@ class MaterialStructured extends Material
         $extended_property_names[] = self :: PROPERTY_MEDIUM;
         $extended_property_names[] = self :: PROPERTY_PRICE;
         $extended_property_names[] = self :: PROPERTY_FOR_SALE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -184,7 +182,7 @@ class MaterialStructured extends Material
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

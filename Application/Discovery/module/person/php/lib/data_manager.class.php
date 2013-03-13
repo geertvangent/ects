@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\person;
 
-
 /**
  *
  * @package application.discovery

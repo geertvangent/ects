@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\group_user;
 
-
 /**
  *
  * @package application.discovery

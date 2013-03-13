@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
-
 use application\discovery\DiscoveryItem;
 
 class CasCount extends DiscoveryItem
@@ -114,7 +113,7 @@ class CasCount extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_APPLICATION_ID;
         $extended_property_names[] = self :: PROPERTY_ACTION_ID;
         $extended_property_names[] = self :: PROPERTY_DATE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -124,6 +123,6 @@ class CasCount extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 }

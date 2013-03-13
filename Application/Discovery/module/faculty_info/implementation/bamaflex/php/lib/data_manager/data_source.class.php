@@ -50,8 +50,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $faculty->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $faculty->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
-                            Utilities :: get_namespace_from_object($faculty));
+                    $conditions[] = new EqualityCondition(
+                        History :: PROPERTY_TYPE, 
+                        Utilities :: get_namespace_from_object($faculty));
                     $condition = new AndCondition($conditions);
                     
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
@@ -79,8 +80,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $faculty->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $faculty->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
-                            Utilities :: get_namespace_from_object($faculty));
+                    $conditions[] = new EqualityCondition(
+                        History :: PROPERTY_TYPE, 
+                        Utilities :: get_namespace_from_object($faculty));
                     $condition = new AndCondition($conditions);
                     
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
@@ -149,7 +151,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_faculty_dean_advanced ' . $translator->render_query($condition) . ' ORDER BY person';
+            $query = 'SELECT * FROM v_discovery_faculty_dean_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY person';
             
             $statement = $this->query($query);
             
@@ -184,7 +187,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition) . ' ORDER BY name';
+            $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY name';
             
             $statement = $this->query($query);
             

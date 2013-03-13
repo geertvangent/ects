@@ -31,7 +31,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new EqualityCondition('year', '"' . $year . '"');
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_faculty_advanced ' . $translator->render_query($condition) . ' ORDER BY year DESC, name';
+            $query = 'SELECT * FROM v_discovery_faculty_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY year DESC, name';
             
             $statement = $this->query($query);
             
@@ -171,7 +172,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_faculty_dean_advanced ' . $translator->render_query($condition) . ' ORDER BY person';
+            $query = 'SELECT * FROM v_discovery_faculty_dean_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY person';
             $statement = $this->query($query);
             
             if ($statement instanceof PDOStatement)

@@ -7,13 +7,13 @@ use common\libraries\Utilities;
 
 /**
  * application.discovery.module.advice.implementation.bamaflex
- *
+ * 
  * @author Magali Gillard
  */
 class Advice extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      *
      * @var integer
@@ -92,7 +92,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -113,13 +113,13 @@ class Advice extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TRY;
         $extended_property_names[] = self :: PROPERTY_DECISION_TYPE_ID;
         $extended_property_names[] = self :: PROPERTY_DECISION_TYPE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -129,7 +129,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the enrollment_id of this Advice.
-     *
+     * 
      * @return integer The enrollment_id.
      */
     public function get_enrollment_id()
@@ -139,7 +139,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the enrollment_id of this Advice.
-     *
+     * 
      * @param integer $enrollment_id
      */
     public function set_enrollment_id($enrollment_id)
@@ -149,7 +149,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the year of this Advice.
-     *
+     * 
      * @return string The year.
      */
     public function get_year()
@@ -159,7 +159,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the year of this Advice.
-     *
+     * 
      * @param string $year
      */
     public function set_year($year)
@@ -169,7 +169,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the person_id of this Advice.
-     *
+     * 
      * @return integer The person_id.
      */
     public function get_person_id()
@@ -179,7 +179,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the person_id of this Advice.
-     *
+     * 
      * @param integer $person_id
      */
     public function set_person_id($person_id)
@@ -189,7 +189,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the motivation of this Advice.
-     *
+     * 
      * @return string The motivation.
      */
     public function get_motivation()
@@ -199,7 +199,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the motivation of this Advice.
-     *
+     * 
      * @param string $motivation
      */
     public function set_motivation($motivation)
@@ -209,7 +209,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the ombudsman of this Advice.
-     *
+     * 
      * @return string The ombudsman.
      */
     public function get_ombudsman()
@@ -219,7 +219,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the ombudsman of this Advice.
-     *
+     * 
      * @param string $ombudsman
      */
     public function set_ombudsman($ombudsman)
@@ -229,7 +229,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the vote of this Advice.
-     *
+     * 
      * @return string The vote.
      */
     public function get_vote()
@@ -239,7 +239,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the vote of this Advice.
-     *
+     * 
      * @param string $vote
      */
     public function set_vote($vote)
@@ -249,7 +249,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the measures_visible of this Advice.
-     *
+     * 
      * @return integer The measures_visible.
      */
     public function get_measures_visible()
@@ -259,7 +259,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the measures_visible of this Advice.
-     *
+     * 
      * @param integer $measures_visible
      */
     public function set_measures_visible($measures_visible)
@@ -269,7 +269,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the measures of this Advice.
-     *
+     * 
      * @return string The measures.
      */
     public function get_measures()
@@ -279,7 +279,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the measures of this Advice.
-     *
+     * 
      * @param string $measures
      */
     public function set_measures($measures)
@@ -289,7 +289,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the advice_visible of this Advice.
-     *
+     * 
      * @return integer The advice_visible.
      */
     public function get_advice_visible()
@@ -299,7 +299,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the advice_visible of this Advice.
-     *
+     * 
      * @param integer $advice_visible
      */
     public function set_advice_visible($advice_visible)
@@ -309,7 +309,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the advice of this Advice.
-     *
+     * 
      * @return string The advice.
      */
     public function get_advice()
@@ -319,7 +319,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the advice of this Advice.
-     *
+     * 
      * @param string $advice
      */
     public function set_advice($advice)
@@ -329,7 +329,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the measures_valid of this Advice.
-     *
+     * 
      * @return integer The measures_valid.
      */
     public function get_measures_valid()
@@ -339,7 +339,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the measures_valid of this Advice.
-     *
+     * 
      * @param integer $measures_valid
      */
     public function set_measures_valid($measures_valid)
@@ -349,7 +349,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the date of this Advice.
-     *
+     * 
      * @return string The date.
      */
     public function get_date()
@@ -359,7 +359,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the date of this Advice.
-     *
+     * 
      * @param string $date
      */
     public function set_date($date)
@@ -369,7 +369,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the try of this Advice.
-     *
+     * 
      * @return integer The try.
      */
     public function get_try()
@@ -379,7 +379,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the try of this Advice.
-     *
+     * 
      * @param integer $try
      */
     public function set_try($try)
@@ -389,7 +389,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the decision_type_id of this Advice.
-     *
+     * 
      * @return integer The decision_type_id.
      */
     public function get_decision_type_id()
@@ -399,7 +399,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the decision_type_id of this Advice.
-     *
+     * 
      * @param integer $decision_type_id
      */
     public function set_decision_type_id($decision_type_id)
@@ -409,7 +409,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Returns the decision_type of this Advice.
-     *
+     * 
      * @return string The decision_type.
      */
     public function get_decision_type()
@@ -419,7 +419,7 @@ class Advice extends DiscoveryItem
 
     /**
      * Sets the decision_type of this Advice.
-     *
+     * 
      * @param string $decision_type
      */
     public function set_decision_type($decision_type)

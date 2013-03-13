@@ -4,7 +4,6 @@ namespace application\discovery\module\profile\implementation\bamaflex;
 use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\DatetimeUtilities;
-
 use common\libraries\DataClass;
 
 class Birth extends DataClass
@@ -29,7 +28,7 @@ class Birth extends DataClass
         {
             $format = Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES);
         }
-
+        
         return DatetimeUtilities :: format_locale_date($format, $this->get_date());
     }
 
@@ -106,12 +105,12 @@ class Birth extends DataClass
         {
             $location[] = $this->get_place();
         }
-
+        
         if ($this->get_country())
         {
             $location[] = '(' . $this->get_country() . ')';
         }
-
+        
         return implode(' ', $location);
     }
 
@@ -124,7 +123,7 @@ class Birth extends DataClass
         $extended_property_names[] = self :: PROPERTY_DATE;
         $extended_property_names[] = self :: PROPERTY_PLACE;
         $extended_property_names[] = self :: PROPERTY_COUNTRY;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -134,7 +133,7 @@ class Birth extends DataClass
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**
@@ -144,7 +143,7 @@ class Birth extends DataClass
     public function __toString()
     {
         $birth_date = $this->get_formatted_date();
-
+        
         if ($this->has_location())
         {
             return Translation :: get('BornIn', array('DATE' => $birth_date, 'PLACE' => $this->get_location()));

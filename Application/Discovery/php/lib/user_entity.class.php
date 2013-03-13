@@ -10,7 +10,7 @@ use user\User;
 
 /**
  * Extension on the user entity specific for the course to limit the users
- *
+ * 
  * @author Sven Vanpoucke
  */
 class UserEntity extends \rights\UserEntity
@@ -18,14 +18,14 @@ class UserEntity extends \rights\UserEntity
 
     /**
      * Limits the users by id
-     *
+     * 
      * @var Array<int>
      */
     private $limited_users;
 
     /**
      * Excludes the users by id
-     *
+     * 
      * @var Array<int>
      */
     private $excluded_users;
@@ -65,35 +65,35 @@ class UserEntity extends \rights\UserEntity
 
     /**
      * Builds the condition with the limited and excluded users
-     *
+     * 
      * @param Condition $condition
      * @return Condition
      */
     public function get_condition(Condition $condition)
     {
         $conditions = array();
-
+        
         if ($this->limited_users)
         {
             $conditions[] = new InCondition(User :: PROPERTY_ID, $this->limited_users);
         }
-
+        
         if ($this->excluded_users)
         {
             $conditions[] = new NotCondition(new InCondition(User :: PROPERTY_ID, $this->excluded_users));
         }
-
+        
         if ($condition)
         {
             $conditions[] = $condition;
         }
-
+        
         $count = count($conditions);
         if ($count > 1)
         {
             return new AndCondition($conditions);
         }
-
+        
         if ($count == 1)
         {
             return $conditions[0];
@@ -105,7 +105,11 @@ class UserEntity extends \rights\UserEntity
      */
     public function get_element_finder_type()
     {
-        return new AdvancedElementFinderElementType('users', Translation :: get('Users'), __NAMESPACE__, 'users_feed',
-                array('publication_id' => $this->publication_id));
+        return new AdvancedElementFinderElementType(
+            'users', 
+            Translation :: get('Users'), 
+            __NAMESPACE__, 
+            'users_feed', 
+            array('publication_id' => $this->publication_id));
     }
 }

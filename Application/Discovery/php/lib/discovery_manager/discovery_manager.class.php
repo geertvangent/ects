@@ -63,8 +63,10 @@ class DiscoveryManager extends WebApplication
 
     public static function get_installable_application_packages($include_installed = false)
     {
-        $package_list = new PackageList(self :: context(), Translation :: get('TypeName', null, __NAMESPACE__), 
-                Theme :: get_image_path() . 'logo/16.png');
+        $package_list = new PackageList(
+            self :: context(), 
+            Translation :: get('TypeName', null, __NAMESPACE__), 
+            Theme :: get_image_path() . 'logo/16.png');
         
         $module_list = new PackageList(self :: context() . '\module', Translation :: get('Modules', null, __NAMESPACE__));
         
@@ -83,9 +85,10 @@ class DiscoveryManager extends WebApplication
                 
                 if (count($module_implementations) > 0)
                 {
-                    $module_implementations_list = new PackageList($module_type, 
-                            Translation :: get('TypeName', null, $module_type), 
-                            Theme :: get_image_path($module_type) . 'logo/16.png');
+                    $module_implementations_list = new PackageList(
+                        $module_type, 
+                        Translation :: get('TypeName', null, $module_type), 
+                        Theme :: get_image_path($module_type) . 'logo/16.png');
                     
                     foreach ($module_implementations as $module_implementation)
                     {

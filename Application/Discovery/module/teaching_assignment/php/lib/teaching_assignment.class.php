@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\teaching_assignment;
 
-
 use application\discovery\DiscoveryItem;
 
 class TeachingAssignment extends DiscoveryItem
@@ -94,7 +93,7 @@ class TeachingAssignment extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TRAINING;
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_NAME;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -104,7 +103,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

@@ -38,7 +38,7 @@ abstract class Module extends \application\discovery\Module
         {
             $parameter->set_user_id($param_user);
         }
-
+        
         if ($year)
         {
             $parameter->set_year($year);
@@ -54,11 +54,11 @@ abstract class Module extends \application\discovery\Module
     {
         $year = $parameters->get_year();
         $user_id = $parameters->get_user_id();
-
+        
         if (! isset($this->teaching_assignments[$user_id][$year]))
         {
             $this->teaching_assignments[$user_id][$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_teaching_assignments(
-                    $parameters);
+                $parameters);
         }
         return $this->teaching_assignments[$user_id][$year];
     }
@@ -77,9 +77,11 @@ abstract class Module extends \application\discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
-                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
+            false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

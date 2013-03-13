@@ -26,7 +26,7 @@ class Module extends \application\discovery\module\group\Module
                     $groups[] = $group;
                 }
             }
-
+            
             $this->cache_groups[$type] = $groups;
         }
         return $this->cache_groups[$type];
@@ -48,15 +48,15 @@ class Module extends \application\discovery\module\group\Module
     {
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
-
+        
         $parameter = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
         $parameter->set_training_id($training_id);
-
+        
         if ($source)
         {
             $parameter->set_source($source);
         }
-
+        
         return $parameter;
     }
 }

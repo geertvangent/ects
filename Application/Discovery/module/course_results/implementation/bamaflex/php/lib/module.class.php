@@ -17,7 +17,7 @@ class Module extends \application\discovery\module\course_results\Module
         $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
         $parameter = new Parameters();
-
+        
         if ($programme)
         {
             $parameter->set_programme_id($programme);
@@ -33,15 +33,15 @@ class Module extends \application\discovery\module\course_results\Module
     {
         $programme_id = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
-
+        
         $parameter = new \application\discovery\module\course\implementation\bamaflex\Parameters();
         $parameter->set_programme_id($programme_id);
-
+        
         if ($source)
         {
             $parameter->set_source($source);
         }
-
+        
         return $parameter;
     }
 }

@@ -34,7 +34,7 @@ class DataSource extends \application\discovery\DataSource
     public function convert_to_utf8($string)
     {
         if (Connection :: get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
-                'driver') == 'mssql')
+            'driver') == 'mssql')
         {
             return iconv('Windows-1252', 'UTF-8', $string);
         }

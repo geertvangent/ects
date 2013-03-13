@@ -58,11 +58,15 @@ class UserBrowserTableCellRenderer extends DefaultUserTableCellRenderer
         $toolbar = new Toolbar();
         
         $url = $this->browser->get_url(
-                array(DiscoveryManager :: PARAM_ACTION => DiscoveryManager :: ACTION_VIEW, 
-                        DiscoveryManager :: PARAM_USER_ID => $user->get_id()));
+            array(
+                DiscoveryManager :: PARAM_ACTION => DiscoveryManager :: ACTION_VIEW, 
+                DiscoveryManager :: PARAM_USER_ID => $user->get_id()));
         $toolbar->add_item(
-                new ToolbarItem(Translation :: get('View', null, Utilities :: COMMON_LIBRARIES), 
-                        Theme :: get_common_image_path() . 'action_details.png', $url, ToolbarItem :: DISPLAY_ICON));
+            new ToolbarItem(
+                Translation :: get('View', null, Utilities :: COMMON_LIBRARIES), 
+                Theme :: get_common_image_path() . 'action_details.png', 
+                $url, 
+                ToolbarItem :: DISPLAY_ICON));
         
         return $toolbar->as_html();
     }

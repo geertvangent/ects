@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\employment\implementation\bamaflex;
 
-
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
 
@@ -173,9 +172,9 @@ class Employment extends DiscoveryItem
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
-    static 
+    static public 
 
-    public function get_default_property_names($extended_property_names = array())
+    function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
         $extended_property_names[] = self :: PROPERTY_YEAR;
@@ -607,9 +606,9 @@ class Employment extends DiscoveryItem
      *
      * @return string
      */
-    static 
+    static public 
 
-    public function fund_string($fund_id)
+    function fund_string($fund_id)
     {
         switch ($fund_id)
         {
@@ -751,9 +750,9 @@ class Employment extends DiscoveryItem
      *
      * @return string
      */
-    static 
+    static public 
 
-    public function active_string($active)
+    function active_string($active)
     {
         switch ($active)
         {
@@ -880,9 +879,9 @@ class Employment extends DiscoveryItem
      *
      * @return string The table name of the data class
      */
-    static 
+    static public 
 
-    public function get_table_name()
+    function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }

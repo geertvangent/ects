@@ -25,14 +25,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(
+            Rights :: VIEW_RIGHT, 
+            $entities, 
+            $this->get_module_instance()->get_id(), 
+            $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
         
-        $this->result_right = Rights :: get_instance()->module_is_allowed(Rights :: RESULT_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_module_parameters());
+        $this->result_right = Rights :: get_instance()->module_is_allowed(
+            Rights :: RESULT_RIGHT, 
+            $entities, 
+            $this->get_module_instance()->get_id(), 
+            $this->get_module_parameters());
         
         $html = array();
         
@@ -69,24 +75,30 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 if ($enrollment->is_special_result())
                 {
                     $tab_image_path = Theme :: get_image_path(
-                            Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' . $enrollment->get_result() . '.png';
-                    $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get(
-                            $enrollment->get_result_string()) . '" title="' . Translation :: get(
-                            $enrollment->get_result_string()) . '" />';
+                        Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' .
+                         $enrollment->get_result() . '.png';
+                    $tab_image = '<img src="' . $tab_image_path . '" alt="' .
+                         Translation :: get($enrollment->get_result_string()) . '" title="' .
+                         Translation :: get($enrollment->get_result_string()) . '" />';
                     $contract_html[] = $tab_image;
-                    LegendTable :: get_instance()->add_symbol($tab_image, 
-                            Translation :: get($enrollment->get_result_string()), Translation :: get('ResultType'));
+                    LegendTable :: get_instance()->add_symbol(
+                        $tab_image, 
+                        Translation :: get($enrollment->get_result_string()), 
+                        Translation :: get('ResultType'));
                 }
                 
                 $contract_html[] = '</th><th class="action">';
                 $tab_image_path = Theme :: get_image_path(
-                        Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'contract_type/' . $enrollment->get_contract_type() . '.png';
-                $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get(
-                        $enrollment->get_contract_type_string()) . '" title="' . Translation :: get(
-                        $enrollment->get_contract_type_string()) . '" />';
+                    Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'contract_type/' .
+                     $enrollment->get_contract_type() . '.png';
+                $tab_image = '<img src="' . $tab_image_path . '" alt="' .
+                     Translation :: get($enrollment->get_contract_type_string()) . '" title="' .
+                     Translation :: get($enrollment->get_contract_type_string()) . '" />';
                 $contract_html[] = $tab_image;
-                LegendTable :: get_instance()->add_symbol($tab_image, 
-                        Translation :: get($enrollment->get_contract_type_string()), Translation :: get('ContractType'));
+                LegendTable :: get_instance()->add_symbol(
+                    $tab_image, 
+                    Translation :: get($enrollment->get_contract_type_string()), 
+                    Translation :: get('ContractType'));
                 
                 $contract_html[] = '</th><th>';
                 
@@ -130,12 +142,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 if ($last_enrollment->is_special_result())
                 {
                     $tab_image_path = Theme :: get_image_path(
-                            Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' . $last_enrollment->get_result() . '.png';
-                    $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get(
-                            $last_enrollment->get_result_string()) . '" title="' . Translation :: get(
-                            $last_enrollment->get_result_string()) . '" />';
-                    LegendTable :: get_instance()->add_symbol($tab_image, 
-                            Translation :: get($last_enrollment->get_result_string()), Translation :: get('ResultType'));
+                        Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'result_type/' .
+                         $last_enrollment->get_result() . '.png';
+                    $tab_image = '<img src="' . $tab_image_path . '" alt="' .
+                         Translation :: get($last_enrollment->get_result_string()) . '" title="' .
+                         Translation :: get($last_enrollment->get_result_string()) . '" />';
+                    LegendTable :: get_instance()->add_symbol(
+                        $tab_image, 
+                        Translation :: get($last_enrollment->get_result_string()), 
+                        Translation :: get('ResultType'));
                 }
                 else
                 {
@@ -168,29 +183,31 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $row = array();
                     $row[] = $year;
-                    $row[] = '<img src="' . Theme :: get_image_path() . 'course_type/' . $type . '.png" alt="' . Translation :: get(
-                            Course :: type_string($type)) . '" title="' . Translation :: get(
-                            Course :: type_string($type)) . '" />';
+                    $row[] = '<img src="' . Theme :: get_image_path() . 'course_type/' . $type . '.png" alt="' .
+                         Translation :: get(Course :: type_string($type)) . '" title="' .
+                         Translation :: get(Course :: type_string($type)) . '" />';
                     $row[] = Translation :: get(Course :: type_string($type));
                     $row[] = $credits;
                     if (in_array($type, Course :: get_types_for_total_credits()))
                     {
                         if ($training->is_current() && $year == $training->get_year() && $type == Course :: TYPE_NORMAL)
                         {
-                            $row[] = '<img src="' . Theme :: get_image_path() . 'total_type/3.png" alt="' . Translation :: get(
-                                    'CreditPending') . '" title="' . Translation :: get('CreditPending') . '" />';
+                            $row[] = '<img src="' . Theme :: get_image_path() . 'total_type/3.png" alt="' .
+                                 Translation :: get('CreditPending') . '" title="' . Translation :: get('CreditPending') .
+                                 '" />';
                         }
                         else
                         {
-                            $row[] = '<img src="' . Theme :: get_image_path() . 'total_type/1.png" alt="' . Translation :: get(
-                                    'CreditTrue') . '" title="' . Translation :: get('CreditTrue') . '" />';
+                            $row[] = '<img src="' . Theme :: get_image_path() . 'total_type/1.png" alt="' .
+                                 Translation :: get('CreditTrue') . '" title="' . Translation :: get('CreditTrue') .
+                                 '" />';
                             $total += $credits;
                         }
                     }
                     else
                     {
-                        $row[] = '<img src="' . Theme :: get_image_path() . 'total_type/2.png" alt="' . Translation :: get(
-                                'CreditFalse') . '" title="' . Translation :: get('CreditFalse') . '" />';
+                        $row[] = '<img src="' . Theme :: get_image_path() . 'total_type/2.png" alt="' .
+                             Translation :: get('CreditFalse') . '" title="' . Translation :: get('CreditFalse') . '" />';
                     }
                     
                     $table_data[] = $row;
@@ -200,8 +217,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 if ($training->get_credits())
                 {
-                    $table_data[] = array(' ', ' ', Translation :: get('Total'), 
-                            $total . '/' . $training->get_credits(), ' ');
+                    $table_data[] = array(
+                        ' ', 
+                        ' ', 
+                        Translation :: get('Total'), 
+                        $total . '/' . $training->get_credits(), 
+                        ' ');
                 }
                 else
                 {
@@ -220,8 +241,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $contract_html[] = $table->toHTML();
             $contract_html[] = '<br />';
             $tabs->add_tab(
-                    new DynamicContentTab('contract_' . $last_enrollment->get_contract_id() . '', $tab_name, 
-                            $tab_image_path, implode("\n", $contract_html)));
+                new DynamicContentTab(
+                    'contract_' . $last_enrollment->get_contract_id() . '', 
+                    $tab_name, 
+                    $tab_image_path, 
+                    implode("\n", $contract_html)));
         }
         
         $html[] = $tabs->render();
@@ -261,7 +285,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\course\implementation\bamaflex', array('data_source' => $data_source));
+            'application\discovery\module\course\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         $course = $this->get_courses();
         
@@ -277,11 +302,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $this->credits[$enrollment->get_contract_id()][$course->get_year()][$course->get_type()] += $course->get_credits();
                 }
-                $course_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() . '.png" alt="' . Translation :: get(
-                        $course->get_type_string()) . '" title="' . Translation :: get($course->get_type_string()) . '" />';
+                $course_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $course->get_type() .
+                     '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' .
+                     Translation :: get($course->get_type_string()) . '" />';
                 $row[] = $course_type_image;
-                LegendTable :: get_instance()->add_symbol($course_type_image, 
-                        Translation :: get($course->get_type_string()), Translation :: get('CourseType'));
+                LegendTable :: get_instance()->add_symbol(
+                    $course_type_image, 
+                    Translation :: get($course->get_type_string()), 
+                    Translation :: get('CourseType'));
             }
             else
             {
@@ -291,7 +319,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($course_module_instance)
             {
                 $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
-                        $course->get_programme_id(), $course->get_source());
+                    $course->get_programme_id(), 
+                    $course->get_source());
                 $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $course->get_name() . '</a>';
             }
@@ -305,7 +334,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             foreach ($this->get_mark_moments() as $mark_moment)
             {
                 $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
-                if ((! $course->has_children() || $course->get_parent_programme_id()) && ($mark->is_credit() || $enrollment->get_result() == Enrollment :: RESULT_NO_DATA) && (! $course->is_special_type()) && ! $added)
+                if ((! $course->has_children() || $course->get_parent_programme_id()) &&
+                     ($mark->is_credit() || $enrollment->get_result() == Enrollment :: RESULT_NO_DATA) &&
+                     (! $course->is_special_type()) && ! $added)
                 {
                     $added = true;
                     $this->credits[$enrollment->get_contract_id()][$course->get_year()][$course->get_type()] += $course->get_credits();
@@ -326,20 +357,24 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         if ($mark->is_abandoned())
                         {
-                            $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '_na.png" alt="' . Translation :: get(
-                                    $mark->get_status_string() . 'Abandoned') . '" title="' . Translation :: get(
-                                    $mark->get_status_string() . 'Abandoned') . '" />';
-                            LegendTable :: get_instance()->add_symbol($mark_status_image, 
-                                    Translation :: get($mark->get_status_string() . 'Abandoned'), 
-                                    Translation :: get('MarkStatus'));
+                            $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' .
+                                 $mark->get_status() . '_na.png" alt="' .
+                                 Translation :: get($mark->get_status_string() . 'Abandoned') . '" title="' .
+                                 Translation :: get($mark->get_status_string() . 'Abandoned') . '" />';
+                            LegendTable :: get_instance()->add_symbol(
+                                $mark_status_image, 
+                                Translation :: get($mark->get_status_string() . 'Abandoned'), 
+                                Translation :: get('MarkStatus'));
                         }
                         else
                         {
-                            $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get(
-                                    $mark->get_status_string()) . '" title="' . Translation :: get(
-                                    $mark->get_status_string()) . '" />';
-                            LegendTable :: get_instance()->add_symbol($mark_status_image, 
-                                    Translation :: get($mark->get_status_string()), Translation :: get('MarkStatus'));
+                            $mark_status_image = '<img src="' . Theme :: get_image_path() . 'status_type/' .
+                                 $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) .
+                                 '" title="' . Translation :: get($mark->get_status_string()) . '" />';
+                            LegendTable :: get_instance()->add_symbol(
+                                $mark_status_image, 
+                                Translation :: get($mark->get_status_string()), 
+                                Translation :: get('MarkStatus'));
                         }
                         $row[] = $mark_status_image;
                     }
@@ -352,11 +387,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($mark->get_result())
                     {
-                        $result_na_image = '<img src="' . Theme :: get_image_path() . 'mark_result_na.png" alt="' . Translation :: get(
-                                'ResultNotYetAvailable') . '" title="' . Translation :: get('ResultNotYetAvailable') . '" />';
+                        $result_na_image = '<img src="' . Theme :: get_image_path() . 'mark_result_na.png" alt="' .
+                             Translation :: get('ResultNotYetAvailable') . '" title="' .
+                             Translation :: get('ResultNotYetAvailable') . '" />';
                         $row[] = $result_na_image;
-                        LegendTable :: get_instance()->add_symbol($result_na_image, 
-                                Translation :: get('ResultNotYetAvailable'), Translation :: get('MarkResult'));
+                        LegendTable :: get_instance()->add_symbol(
+                            $result_na_image, 
+                            Translation :: get('ResultNotYetAvailable'), 
+                            Translation :: get('MarkResult'));
                     }
                     else
                     {
@@ -380,11 +418,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $this->credits[$enrollment->get_contract_id()][$child->get_year()][$child->get_type()] += $child->get_credits();
                         
-                        $child_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' . $child->get_type() . '.png" alt="' . Translation :: get(
-                                $child->get_type_string()) . '" title="' . Translation :: get($child->get_type_string()) . '" />';
+                        $child_type_image = '<img src="' . Theme :: get_image_path() . 'course_type/' .
+                             $child->get_type() . '.png" alt="' . Translation :: get($child->get_type_string()) .
+                             '" title="' . Translation :: get($child->get_type_string()) . '" />';
                         $row[] = $child_type_image;
-                        LegendTable :: get_instance()->add_symbol($child_type_image, 
-                                Translation :: get($child->get_type_string()), Translation :: get('CourseType'));
+                        LegendTable :: get_instance()->add_symbol(
+                            $child_type_image, 
+                            Translation :: get($child->get_type_string()), 
+                            Translation :: get('CourseType'));
                     }
                     else
                     {
@@ -394,9 +435,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     if ($course_module_instance)
                     {
                         $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
-                                $child->get_programme_id(), $child->get_source());
+                            $child->get_programme_id(), 
+                            $child->get_source());
                         $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
-                        $row[] = '<span class="course_child_link"><a href="' . $url . '">' . $child->get_name() . '</a></span>';
+                        $row[] = '<span class="course_child_link"><a href="' . $url . '">' . $child->get_name() .
+                             '</a></span>';
                     }
                     else
                     {
@@ -407,7 +450,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     foreach ($this->get_mark_moments() as $mark_moment)
                     {
                         $mark = $child->get_mark_by_moment_id($mark_moment->get_id());
-                        if (! $child->is_special_type() && ($mark->is_credit() || $enrollment->get_result() == Enrollment :: RESULT_NO_DATA) && ! $added)
+                        if (! $child->is_special_type() &&
+                             ($mark->is_credit() || $enrollment->get_result() == Enrollment :: RESULT_NO_DATA) &&
+                             ! $added)
                         {
                             $added = true;
                             if ($course->is_special_type())
@@ -429,12 +474,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         {
                             if ($mark->get_result())
                             {
-                                $result_na_image = '<img src="' . Theme :: get_image_path() . 'mark_result_na.png" alt="' . Translation :: get(
-                                        'ResultNotYetAvailable') . '" title="' . Translation :: get(
-                                        'ResultNotYetAvailable') . '" />';
+                                $result_na_image = '<img src="' . Theme :: get_image_path() . 'mark_result_na.png" alt="' .
+                                     Translation :: get('ResultNotYetAvailable') . '" title="' .
+                                     Translation :: get('ResultNotYetAvailable') . '" />';
                                 $row[] = $result_na_image;
-                                LegendTable :: get_instance()->add_symbol($result_na_image, 
-                                        Translation :: get('ResultNotYetAvailable'), Translation :: get('MarkResult'));
+                                LegendTable :: get_instance()->add_symbol(
+                                    $result_na_image, 
+                                    Translation :: get('ResultNotYetAvailable'), 
+                                    Translation :: get('MarkResult'));
                             }
                             else
                             {
@@ -455,7 +502,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_enrollments()
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
-                $this->get_module_parameters());
+            $this->get_module_parameters());
         
         $contract_type_enrollments = array();
         
@@ -474,7 +521,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_contracts()
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
-                $this->get_module_parameters());
+            $this->get_module_parameters());
         
         $contract_enrollments = array();
         

@@ -14,9 +14,9 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
     public static function factory(Module $module, $format, $view, $context)
     {
         $namespace = Utilities :: get_namespace_from_object($module);
-        $class = $namespace . '\\' . Utilities :: underscores_to_camelcase($format) . Utilities :: underscores_to_camelcase(
-                $view) . 'RenditionImplementation';
-
+        $class = $namespace . '\\' . Utilities :: underscores_to_camelcase($format) .
+             Utilities :: underscores_to_camelcase($view) . 'RenditionImplementation';
+        
         if (! class_exists($class, true))
         {
             return new DummyRenditionImplementation($context, $module, $format, $view);

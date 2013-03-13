@@ -44,7 +44,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_advice_basic ' . $translator->render_query($condition) . ' ORDER BY year DESC';
+            $query = 'SELECT * FROM v_discovery_advice_basic ' . $translator->render_query($condition) .
+                 ' ORDER BY year DESC';
             
             $statement = $this->query($query);
             
@@ -97,8 +98,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new AndCondition($conditions);
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic ' . $translator->render_query(
-                $condition);
+        $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic ' .
+             $translator->render_query($condition);
         $statement = $this->query($query);
         
         if ($statement instanceof PDOStatement)
@@ -126,7 +127,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) . ' ORDER BY year DESC, id';
+            $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY year DESC, id';
             
             $statement = $this->query($query);
             

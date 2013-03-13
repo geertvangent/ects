@@ -21,20 +21,20 @@ class DataSourceInstanceSetting extends DataClass
 
     /**
      * A static array containing all settings of discovery module instances
-     *
+     * 
      * @var array
      */
     private static $settings;
 
     /**
      * Get the default properties of all settings.
-     *
+     * 
      * @return array The property names.
      */
     public static function get_default_property_names()
     {
         return parent :: get_default_property_names(
-                array(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
+            array(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
     }
 
     /**
@@ -113,28 +113,28 @@ class DataSourceInstanceSetting extends DataClass
      */
     public static function initialize(DataSourceInstance $data_source_instance)
     {
-        $settings_file = Path :: namespace_to_full_path($data_source_instance->get_type()) . Utilities :: get_package_name_from_namespace(
-                $data_source_instance->get_type()) . '.xml';
-
+        $settings_file = Path :: namespace_to_full_path($data_source_instance->get_type()) .
+             Utilities :: get_package_name_from_namespace($data_source_instance->get_type()) . '.xml';
+        
         $doc = new DOMDocument();
-
+        
         $doc->load($settings_file);
         $object = $doc->getElementsByTagname('application')->item(0);
         $settings = $doc->getElementsByTagname('setting');
-
+        
         foreach ($settings as $index => $setting)
         {
             $external_setting = new DataSourceInstanceSetting();
             $external_setting->set_data_source_instance_id($data_source_instance->get_id());
             $external_setting->set_variable($setting->getAttribute('name'));
             $external_setting->set_value($setting->getAttribute('default'));
-
+            
             if (! $external_setting->create())
             {
                 return false;
             }
         }
-
+        
         return true;
     }
 
@@ -162,7 +162,7 @@ class DataSourceInstanceSetting extends DataClass
         {
             self :: load($data_source_instance_id);
         }
-
+        
         return (isset(self :: $settings[$data_source_instance_id][$variable]) ? self :: $settings[$data_source_instance_id][$variable] : null);
     }
 
@@ -177,7 +177,7 @@ class DataSourceInstanceSetting extends DataClass
         {
             self :: load($data_source_instance_id);
         }
-
+        
         return self :: $settings[$data_source_instance_id];
     }
 
@@ -189,7 +189,7 @@ class DataSourceInstanceSetting extends DataClass
     {
         $condition = new EqualityCondition(self :: PROPERTY_DATA_SOURCE_INSTANCE_ID, $data_source_instance_id);
         $settings = DataManager :: get_instance()->retrieve_data_source_instance_settings($condition);
-
+        
         while ($setting = $settings->next_result())
         {
             self :: $settings[$data_source_instance_id][$setting->get_variable()] = $setting->get_value();

@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\student_year;
 
-
 /**
  *
  * @package application.discovery

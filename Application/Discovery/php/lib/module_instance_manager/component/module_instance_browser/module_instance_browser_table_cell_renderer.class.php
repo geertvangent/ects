@@ -64,90 +64,105 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
             if ($allowed["moveup"])
             {
                 $toolbar->add_item(
-                        new ToolbarItem(Translation :: get('MoveUp', null, Utilities :: COMMON_LIBRARIES), 
-                                Theme :: get_common_image_path() . 'action_up.png', 
-                                $this->browser->get_url(
-                                        array(
-                                                ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MOVE_INSTANCE, 
-                                                DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(), 
-                                                DiscoveryManager :: PARAM_DIRECTION => DiscoveryManager :: PARAM_DIRECTION_UP)), 
-                                ToolbarItem :: DISPLAY_ICON));
+                    new ToolbarItem(
+                        Translation :: get('MoveUp', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: get_common_image_path() . 'action_up.png', 
+                        $this->browser->get_url(
+                            array(
+                                ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MOVE_INSTANCE, 
+                                DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(), 
+                                DiscoveryManager :: PARAM_DIRECTION => DiscoveryManager :: PARAM_DIRECTION_UP)), 
+                        ToolbarItem :: DISPLAY_ICON));
             }
             else
             {
                 $toolbar->add_item(
-                        new ToolbarItem(Translation :: get('MoveUpNotAvailable', null, Utilities :: COMMON_LIBRARIES), 
-                                Theme :: get_common_image_path() . 'action_up_na.png', null, ToolbarItem :: DISPLAY_ICON));
+                    new ToolbarItem(
+                        Translation :: get('MoveUpNotAvailable', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: get_common_image_path() . 'action_up_na.png', 
+                        null, 
+                        ToolbarItem :: DISPLAY_ICON));
             }
             
             if ($allowed["movedown"])
             {
                 $toolbar->add_item(
-                        new ToolbarItem(Translation :: get('MoveDown', null, Utilities :: COMMON_LIBRARIES), 
-                                Theme :: get_common_image_path() . 'action_down.png', 
-                                $this->browser->get_url(
-                                        array(
-                                                ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MOVE_INSTANCE, 
-                                                DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(), 
-                                                DiscoveryManager :: PARAM_DIRECTION => DiscoveryManager :: PARAM_DIRECTION_DOWN)), 
-                                ToolbarItem :: DISPLAY_ICON));
+                    new ToolbarItem(
+                        Translation :: get('MoveDown', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: get_common_image_path() . 'action_down.png', 
+                        $this->browser->get_url(
+                            array(
+                                ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MOVE_INSTANCE, 
+                                DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(), 
+                                DiscoveryManager :: PARAM_DIRECTION => DiscoveryManager :: PARAM_DIRECTION_DOWN)), 
+                        ToolbarItem :: DISPLAY_ICON));
             }
             else
             {
                 $toolbar->add_item(
-                        new ToolbarItem(Translation :: get('MoveDownNotAvailable', null, Utilities :: COMMON_LIBRARIES), 
-                                Theme :: get_common_image_path() . 'action_down_na.png', null, 
-                                ToolbarItem :: DISPLAY_ICON));
+                    new ToolbarItem(
+                        Translation :: get('MoveDownNotAvailable', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: get_common_image_path() . 'action_down_na.png', 
+                        null, 
+                        ToolbarItem :: DISPLAY_ICON));
             }
         }
         
         if ($module_instance->is_enabled())
         {
             $toolbar->add_item(
-                    new ToolbarItem(Translation :: get('Deactivate', null, Utilities :: COMMON_LIBRARIES), 
-                            Theme :: get_common_image_path() . 'action_deactivate.png', 
-                            $this->browser->get_url(
-                                    array(
-                                            ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_DEACTIVATE_INSTANCE, 
-                                            DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
-                            ToolbarItem :: DISPLAY_ICON, true));
+                new ToolbarItem(
+                    Translation :: get('Deactivate', null, Utilities :: COMMON_LIBRARIES), 
+                    Theme :: get_common_image_path() . 'action_deactivate.png', 
+                    $this->browser->get_url(
+                        array(
+                            ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_DEACTIVATE_INSTANCE, 
+                            DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                    ToolbarItem :: DISPLAY_ICON, 
+                    true));
         }
         else
         {
             $toolbar->add_item(
-                    new ToolbarItem(Translation :: get('Activate', null, Utilities :: COMMON_LIBRARIES), 
-                            Theme :: get_common_image_path() . 'action_activate.png', 
-                            $this->browser->get_url(
-                                    array(
-                                            ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_ACTIVATE_INSTANCE, 
-                                            DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
-                            ToolbarItem :: DISPLAY_ICON, true));
+                new ToolbarItem(
+                    Translation :: get('Activate', null, Utilities :: COMMON_LIBRARIES), 
+                    Theme :: get_common_image_path() . 'action_activate.png', 
+                    $this->browser->get_url(
+                        array(
+                            ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_ACTIVATE_INSTANCE, 
+                            DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                    ToolbarItem :: DISPLAY_ICON, 
+                    true));
         }
         
         $toolbar->add_item(
-                new ToolbarItem(Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES), 
-                        Theme :: get_common_image_path() . 'action_edit.png', 
-                        $this->browser->get_url(
-                                array(
-                                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_UPDATE_INSTANCE, 
-                                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
-                        ToolbarItem :: DISPLAY_ICON));
+            new ToolbarItem(
+                Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES), 
+                Theme :: get_common_image_path() . 'action_edit.png', 
+                $this->browser->get_url(
+                    array(
+                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_UPDATE_INSTANCE, 
+                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                ToolbarItem :: DISPLAY_ICON));
         $toolbar->add_item(
-                new ToolbarItem(Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), 
-                        Theme :: get_common_image_path() . 'action_delete.png', 
-                        $this->browser->get_url(
-                                array(
-                                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_DELETE_INSTANCE, 
-                                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
-                        ToolbarItem :: DISPLAY_ICON, true));
+            new ToolbarItem(
+                Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), 
+                Theme :: get_common_image_path() . 'action_delete.png', 
+                $this->browser->get_url(
+                    array(
+                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_DELETE_INSTANCE, 
+                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                ToolbarItem :: DISPLAY_ICON, 
+                true));
         $toolbar->add_item(
-                new ToolbarItem(Translation :: get('ManageRights', null, RightsManager :: APPLICATION_NAME), 
-                        Theme :: get_common_image_path() . 'action_rights.png', 
-                        $this->browser->get_url(
-                                array(
-                                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MANAGE_INSTANCE_RIGHTS, 
-                                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
-                        ToolbarItem :: DISPLAY_ICON));
+            new ToolbarItem(
+                Translation :: get('ManageRights', null, RightsManager :: APPLICATION_NAME), 
+                Theme :: get_common_image_path() . 'action_rights.png', 
+                $this->browser->get_url(
+                    array(
+                        ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MANAGE_INSTANCE_RIGHTS, 
+                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                ToolbarItem :: DISPLAY_ICON));
         return $toolbar->as_html();
     }
 
@@ -157,7 +172,7 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
         $movedown_allowed = true;
         
         $count = DataManager :: get_instance()->count_module_instances(
-                new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
+            new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
         if ($count == 1)
         {
             $moveup_allowed = false;

@@ -17,7 +17,7 @@ class Module extends \application\discovery\module\training_results\Module
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
         $parameter = new Parameters();
-
+        
         if ($training_id)
         {
             $parameter->set_training_id($training_id);
@@ -33,15 +33,15 @@ class Module extends \application\discovery\module\training_results\Module
     {
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
-
+        
         $parameter = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
         $parameter->set_training_id($training_id);
-
+        
         if ($source)
         {
             $parameter->set_source($source);
         }
-
+        
         return $parameter;
     }
 }

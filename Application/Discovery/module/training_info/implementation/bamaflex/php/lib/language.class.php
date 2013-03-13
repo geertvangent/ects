@@ -3,7 +3,6 @@ namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
 
-
 class Language extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
@@ -54,7 +53,7 @@ class Language extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
         $extended_property_names[] = self :: PROPERTY_NAME;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -64,6 +63,6 @@ class Language extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 }

@@ -28,7 +28,9 @@ class Module extends \application\discovery\module\training_info\Module
         {
             $current_tab = self :: TAB_GOALS;
         }
-        return new Parameters(Request :: get(self :: PARAM_TRAINING_ID), Request :: get(self :: PARAM_SOURCE),
-                $current_tab);
+        return new Parameters(
+            Request :: get(self :: PARAM_TRAINING_ID), 
+            Request :: get(self :: PARAM_SOURCE), 
+            $current_tab);
     }
 }

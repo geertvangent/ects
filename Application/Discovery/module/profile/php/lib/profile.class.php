@@ -185,6 +185,7 @@ class Profile extends DiscoveryItem
      */
     public function has_photo()
     {
-        return $this->get_photo() instanceof Photo && $this->get_photo()->get_mime_type() && $this->get_photo()->get_data();
+        return $this->get_photo() instanceof Photo && $this->get_photo()->get_mime_type() &&
+             $this->get_photo()->get_data();
     }
 }

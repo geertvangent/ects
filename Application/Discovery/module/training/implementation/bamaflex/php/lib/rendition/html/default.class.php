@@ -22,16 +22,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $training_info_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\training_info\implementation\bamaflex', 
-                array('data_source' => $data_source));
+            'application\discovery\module\training_info\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         $group_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\group\implementation\bamaflex', array('data_source' => $data_source));
+            'application\discovery\module\group\implementation\bamaflex', 
+            array('data_source' => $data_source));
         $photo_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\photo\implementation\bamaflex', array('data_source' => $data_source));
+            'application\discovery\module\photo\implementation\bamaflex', 
+            array('data_source' => $data_source));
         $training_results_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\training_results\implementation\bamaflex', 
-                array('data_source' => $data_source));
+            'application\discovery\module\training_results\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         foreach ($trainings as $key => $training)
         {
@@ -40,7 +42,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($training_info_module_instance)
             {
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
-                        $training->get_id(), $training->get_source());
+                    $training->get_id(), 
+                    $training->get_source());
                 $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $training->get_name() . '</a>';
             }
@@ -52,12 +55,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $row[] = $training->get_domain();
             $row[] = $training->get_credits();
             
-            $bama_type_image = '<img src="' . Theme :: get_image_path() . 'bama_type/' . $training->get_bama_type() . '.png" alt="' . Translation :: get(
-                    $training->get_bama_type_string()) . '" title="' . Translation :: get(
-                    $training->get_bama_type_string()) . '" />';
+            $bama_type_image = '<img src="' . Theme :: get_image_path() . 'bama_type/' . $training->get_bama_type() .
+                 '.png" alt="' . Translation :: get($training->get_bama_type_string()) . '" title="' .
+                 Translation :: get($training->get_bama_type_string()) . '" />';
             $row[] = $bama_type_image;
-            LegendTable :: get_instance()->add_symbol($bama_type_image, 
-                    Translation :: get($training->get_bama_type_string()), Translation :: get('BamaType'));
+            LegendTable :: get_instance()->add_symbol(
+                $bama_type_image, 
+                Translation :: get($training->get_bama_type_string()), 
+                Translation :: get('BamaType'));
             
             if ($group_module_instance || $photo_module_instance || $training_results_module_instance)
             {
@@ -66,11 +71,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 if ($group_module_instance)
                 {
                     $parameters = new \application\discovery\module\group\implementation\bamaflex\Parameters(
-                            $training->get_id(), $training->get_source());
+                        $training->get_id(), 
+                        $training->get_source());
                     $url = $this->get_instance_url($group_module_instance->get_id(), $parameters);
-                    $toolbar_item = new ToolbarItem(Translation :: get('Groups'), 
-                            Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') . 'logo/16.png', 
-                            $url, ToolbarItem :: DISPLAY_ICON);
+                    $toolbar_item = new ToolbarItem(
+                        Translation :: get('Groups'), 
+                        Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') .
+                             'logo/16.png', 
+                            $url, 
+                            ToolbarItem :: DISPLAY_ICON);
                     
                     $buttons[] = $toolbar_item->as_html();
                 }
@@ -81,11 +90,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters->set_training_id($training->get_id());
                     
                     $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
-                    $buttons[] = Theme :: get_image('logo/16', 'png', 
-                            Translation :: get('TypeName', null, 
-                                    'application\discovery\module\photo\implementation\bamaflex'), $url, 
-                            ToolbarItem :: DISPLAY_ICON, false, 
-                            'application\discovery\module\photo\implementation\bamaflex');
+                    $buttons[] = Theme :: get_image(
+                        'logo/16', 
+                        'png', 
+                        Translation :: get(
+                            'TypeName', 
+                            null, 
+                            'application\discovery\module\photo\implementation\bamaflex'), 
+                        $url, 
+                        ToolbarItem :: DISPLAY_ICON, 
+                        false, 
+                        'application\discovery\module\photo\implementation\bamaflex');
                 }
                 
                 if ($training_results_module_instance)
@@ -95,11 +110,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters->set_source($training->get_source());
                     
                     $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
-                    $buttons[] = Theme :: get_image('logo/16', 'png', 
-                            Translation :: get('TypeName', null, 
-                                    'application\discovery\module\training_results\implementation\bamaflex'), $url, 
-                            ToolbarItem :: DISPLAY_ICON, false, 
-                            'application\discovery\module\training_results\implementation\bamaflex');
+                    $buttons[] = Theme :: get_image(
+                        'logo/16', 
+                        'png', 
+                        Translation :: get(
+                            'TypeName', 
+                            null, 
+                            'application\discovery\module\training_results\implementation\bamaflex'), 
+                        $url, 
+                        ToolbarItem :: DISPLAY_ICON, 
+                        false, 
+                        'application\discovery\module\training_results\implementation\bamaflex');
                 }
                 
                 $row[] = implode("\n", $buttons);

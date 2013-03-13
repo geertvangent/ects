@@ -147,9 +147,9 @@ class Training extends \application\discovery\module\training\Training
      *
      * @return string
      */
-    static 
+    static public 
 
-    public function bama_type_string($bama_type)
+    function bama_type_string($bama_type)
     {
         switch ($bama_type)
         {
@@ -402,9 +402,9 @@ class Training extends \application\discovery\module\training\Training
      *
      * @param multitype:string $extended_property_names
      */
-    static 
+    static public 
 
-    public function get_default_property_names($extended_property_names = array())
+    function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_CREDITS;

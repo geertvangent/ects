@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\advice;
 
-
 /**
  *
  * @package application.discovery

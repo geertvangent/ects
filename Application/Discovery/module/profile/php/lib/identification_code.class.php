@@ -72,7 +72,7 @@ class IdentificationCode extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_CODE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -82,6 +82,6 @@ class IdentificationCode extends DataClass
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 }

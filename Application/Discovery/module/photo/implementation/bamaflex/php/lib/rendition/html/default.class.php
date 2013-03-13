@@ -13,14 +13,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
         $this->set_breadcrumbs();
-
+        
         $parameters = $this->get_application()->get_parameters();
         $parameters = array_merge($parameters, $this->get_module_parameters()->get_parameters());
         $parameters[\application\discovery\DiscoveryManager :: PARAM_MODULE_ID] = Request :: get(
-                \application\discovery\DiscoveryManager :: PARAM_MODULE_ID);
-
-        \application\discovery\HtmlDefaultRendition ::  add_export_action($this, \application\discovery\HtmlRendition :: VIEW_ZIP);
-
+            \application\discovery\DiscoveryManager :: PARAM_MODULE_ID);
+        
+        \application\discovery\HtmlDefaultRendition :: add_export_action(
+            $this, 
+            \application\discovery\HtmlRendition :: VIEW_ZIP);
+        
         $table = new GalleryBrowserTable($this, $parameters, $this->get_module()->get_condition());
         return $table->as_html();
     }
@@ -29,14 +31,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $parameters = $this->get_module_parameters();
         $codes = array();
-
+        
         if ($parameters->get_faculty_id())
         {
             $faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty(
-                    $parameters->get_faculty_id());
+                $parameters->get_faculty_id());
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $faculty->get_year()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $faculty->get_name()));
-
+            
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
@@ -56,11 +58,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         elseif ($parameters->get_training_id())
         {
             $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
-                    $parameters->get_training_id());
+                $parameters->get_training_id());
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
-
+            
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
@@ -77,12 +79,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         elseif ($parameters->get_programme_id())
         {
             $programme = DataManager :: get_instance($this->get_module_instance())->retrieve_programme(
-                    $parameters->get_programme_id());
+                $parameters->get_programme_id());
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_year()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_faculty()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_training()));
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_name()));
-
+            
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
@@ -97,7 +99,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
         }
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -105,7 +107,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

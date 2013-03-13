@@ -3,7 +3,6 @@ namespace application\discovery\module\faculty_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
 
-
 class Dean extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;

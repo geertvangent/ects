@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
 
-
-
 class TeachingAssignment extends \application\discovery\module\teaching_assignment\TeachingAssignment
 {
     const CLASS_NAME = __CLASS__;

@@ -18,22 +18,25 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
-
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities,
-                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
+        
+        if (! Rights :: get_instance()->module_is_allowed(
+            Rights :: VIEW_RIGHT, 
+            $entities, 
+            $this->get_module_instance()->get_id(), 
+            $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
-
+        
         if ($this->get_profile())
         {
             $html = array();
             $html[] = \application\discovery\module\profile\Rendition :: launch($this);
-
+            
             if (count($this->get_profile()->get_address()) > 1)
             {
                 $data = array();
-
+                
                 foreach ($this->get_profile()->get_address() as $address)
                 {
                     $row = array();
@@ -48,15 +51,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $row[] = $address->get_country();
                     $data[] = $row;
                 }
-
-                $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
-                        __NAMESPACE__) . 'types/address.png);">';
+                
+                $html[] = '<div class="content_object" style="background-image: url(' .
+                     Theme :: get_image_path(__NAMESPACE__) . 'types/address.png);">';
                 $html[] = '<div class="title">';
                 $html[] = Translation :: get('Addresses');
                 $html[] = '</div>';
-
+                
                 $html[] = '<div class="description">';
-
+                
                 $table = new SortableTable($data);
                 $table->set_header(0, Translation :: get('Type'), false);
                 $table->set_header(1, Translation :: get('Street'), false);
@@ -68,16 +71,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $table->set_header(7, Translation :: get('Region'), false);
                 $table->set_header(8, Translation :: get('Country'), false);
                 $html[] = $table->toHTML();
-
+                
                 $html[] = '</div>';
                 $html[] = '</div>';
             }
-
+            
             $count_learning_credit = count($this->get_profile()->get_learning_credit());
             if ($count_learning_credit > 1)
             {
                 $data = array();
-
+                
                 foreach ($this->get_profile()->get_learning_credit() as $learning_credit)
                 {
                     $row = array();
@@ -85,38 +88,40 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $row[] = $learning_credit->get_html();
                     $data[] = $row;
                 }
-
-                $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
-                        __NAMESPACE__) . 'types/learning_credit.png);">';
+                
+                $html[] = '<div class="content_object" style="background-image: url(' .
+                     Theme :: get_image_path(__NAMESPACE__) . 'types/learning_credit.png);">';
                 $html[] = '<div class="title">';
                 $html[] = Translation :: get('LearningCredits');
                 $html[] = '</div>';
-
+                
                 $html[] = '<div class="description">';
-
+                
                 $table = new SortableTable($data);
                 $table->set_header(0, Translation :: get('Date'), false);
                 $table->set_header(1, Translation :: get('Credits'), false);
                 $html[] = $table->toHTML();
-
+                
                 $html[] = '</div>';
                 $html[] = '</div>';
             }
-
+            
             $html[] = $this->get_previous();
-
+            
             if ($this->get_context()->get_user()->is_platform_admin())
             {
                 $toolbar = new Toolbar();
-
+                
                 $url = $this->get_rights_url($this->get_module_instance()->get_id(), $this->get_module_parameters());
                 $toolbar->add_item(
-                        new ToolbarItem(Translation :: get('Rights'),
-                                Theme :: get_common_image_path() . 'action_rights.png', $url));
-
+                    new ToolbarItem(
+                        Translation :: get('Rights'), 
+                        Theme :: get_common_image_path() . 'action_rights.png', 
+                        $url));
+                
                 $html[] = $toolbar->as_html();
             }
-
+            
             return implode("\n", $html);
         }
         else
@@ -128,40 +133,41 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_general_properties()
     {
         $properties = array();
-
+        
         if ($this->get_profile()->get_birth()->has_date())
         {
             $properties[Translation :: get('BirthDate')] = $this->get_profile()->get_birth();
         }
-
+        
         $properties[Translation :: get('Nationality')] = $this->get_profile()->get_nationality_string();
         $properties[Translation :: get('Gender')] = Translation :: get($this->get_profile()->get_gender_string());
-
+        
         if (count($this->get_profile()->get_address()) == 1)
         {
             $address = $this->get_profile()->get_address();
             $address = $address[0];
-
+            
             $properties[Translation :: get('Address')] = $address;
         }
-
+        
         if (count($this->get_profile()->get_learning_credit()) == 1)
         {
             $learning_credit = array_pop($this->get_profile()->get_learning_credit());
-
-            $properties[Translation :: get('LearningCredit')] = $learning_credit->get_html() . ' (' . $learning_credit->get_date() . ')';
+            
+            $properties[Translation :: get('LearningCredit')] = $learning_credit->get_html() . ' (' .
+                 $learning_credit->get_date() . ')';
         }
-
+        
         if ($this->get_profile()->get_first_university_college())
         {
             $properties[Translation :: get('FirstUniversityCollege')] = $this->get_profile()->get_first_university_college();
         }
-
+        
         if ($this->get_profile()->get_first_university())
         {
             $properties[Translation :: get('FirstUniversity')] = $this->get_profile()->get_first_university();
         }
-
+        
         return $properties;
     }
 
@@ -173,8 +179,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $properties = array();
             $properties[Translation :: get('Date')] = $previous_college->get_date();
-            $properties[Translation :: get('Degree')] = '(' . $previous_college->get_degree_type() . ') ' . $previous_college->get_degree_name();
-
+            $properties[Translation :: get('Degree')] = '(' . $previous_college->get_degree_type() . ') ' .
+                 $previous_college->get_degree_name();
+            
             $school = array();
             $school[] = $previous_college->get_school_name();
             if ($previous_college->get_school_city())
@@ -190,34 +197,34 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $properties[Translation :: get('TrainingName')] = $previous_college->get_training_name();
             }
-
+            
             if (! StringUtilities :: is_null_or_empty($previous_college->get_info(), true))
             {
                 $properties[Translation :: get('Info')] = $previous_college->get_info();
             }
-
+            
             $table = new PropertiesTable($properties);
-            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
-                    __NAMESPACE__) . 'types/previous_college.png);">';
+            $html[] = '<div class="content_object" style="background-image: url(' .
+                 Theme :: get_image_path(__NAMESPACE__) . 'types/previous_college.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('PreviousCollege');
             $html[] = '</div>';
-
+            
             $html[] = '<div class="description">';
-
+            
             $html[] = $table->toHtml();
             $html[] = '</div>';
             $html[] = '</div>';
         }
-
+        
         $previous_university = $this->get_profile()->get_previous_university();
-
+        
         if ($previous_university)
         {
             $properties = array();
             $properties[Translation :: get('Date')] = $previous_university->get_date();
             $properties[Translation :: get('Type')] = $previous_university->get_type_string();
-
+            
             $school = array();
             $school[] = $previous_university->get_school_name();
             if ($previous_university->get_school_city())
@@ -229,31 +236,31 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $school[] = $previous_university->get_country_name();
             }
             $properties[Translation :: get('School')] = implode('<br>', $school);
-
+            
             if ($previous_university->get_training_name())
             {
                 $properties[Translation :: get('TrainingName')] = $previous_university->get_training_name();
             }
-
+            
             if (! StringUtilities :: is_null_or_empty($previous_university->get_info(), true))
             {
                 $properties[Translation :: get('Info')] = $previous_university->get_info();
             }
-
+            
             $table = new PropertiesTable($properties);
-            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
-                    __NAMESPACE__) . 'types/previous_university.png);">';
+            $html[] = '<div class="content_object" style="background-image: url(' .
+                 Theme :: get_image_path(__NAMESPACE__) . 'types/previous_university.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('PreviousUniversity');
             $html[] = '</div>';
-
+            
             $html[] = '<div class="description">';
-
+            
             $html[] = $table->toHtml();
             $html[] = '</div>';
             $html[] = '</div>';
         }
-
+        
         return implode("\n", $html);
     }
     /*
@@ -263,7 +270,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

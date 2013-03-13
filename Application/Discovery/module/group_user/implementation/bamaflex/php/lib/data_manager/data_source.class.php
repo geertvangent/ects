@@ -35,7 +35,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced ' . $translator->render_query($condition) . ' ORDER BY last_name, first_name';
+            $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced ' . $translator->render_query($condition) .
+                 ' ORDER BY last_name, first_name';
             $statement = $this->query($query);
             
             if ($statement instanceof PDOStatement)

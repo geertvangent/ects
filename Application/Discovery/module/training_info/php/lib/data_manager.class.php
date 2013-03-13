@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\training_info;
 
-
 /**
  *
  * @package application.discovery

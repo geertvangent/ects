@@ -78,14 +78,15 @@ abstract class Rendition
 
     public static function factory($rendition_implementation)
     {
-        $class = static :: context() . '\\' . Utilities :: underscores_to_camelcase($rendition_implementation->get_format()) . Utilities :: underscores_to_camelcase(
-                $rendition_implementation->get_view()) . 'Rendition';
+        $class = static :: context() . '\\' .
+             Utilities :: underscores_to_camelcase($rendition_implementation->get_format()) .
+             Utilities :: underscores_to_camelcase($rendition_implementation->get_view()) . 'Rendition';
         return new $class($rendition_implementation);
     }
 
     /**
      * Get the fully qualified class name of the Application object
-     *
+     * 
      * @return string
      */
     public static function class_name()
@@ -95,7 +96,7 @@ abstract class Rendition
 
     /**
      * Get the namespace of the Application object
-     *
+     * 
      * @return string
      */
     public static function context()

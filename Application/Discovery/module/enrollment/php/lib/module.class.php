@@ -52,7 +52,7 @@ abstract class Module extends \application\discovery\Module
         if (! isset($this->enrollments))
         {
             $this->enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
-                    $this->get_module_parameters());
+                $this->get_module_parameters());
         }
         return $this->enrollments;
     }
@@ -71,9 +71,11 @@ abstract class Module extends \application\discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
-                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
+            false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

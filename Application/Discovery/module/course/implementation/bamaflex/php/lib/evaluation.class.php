@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-
 use application\discovery\DiscoveryItem;
 
 class Evaluation extends DiscoveryItem
@@ -26,7 +25,7 @@ class Evaluation extends DiscoveryItem
     public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -36,7 +35,7 @@ class Evaluation extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**

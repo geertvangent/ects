@@ -1,19 +1,18 @@
 <?php
 namespace application\discovery\module\group_user\implementation\bamaflex;
 
-
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
 
 /**
  * application.discovery.module.group_user.implementation.bamaflex
- *
+ * 
  * @author Magali Gillard
  */
 class GroupUser extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      *
      * @var string
@@ -58,7 +57,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -73,23 +72,23 @@ class GroupUser extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_YEAR;
         $extended_property_names[] = self :: PROPERTY_STRUCK;
         $extended_property_names[] = self :: PROPERTY_TYPE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**
      * Returns the source of this GroupUser.
-     *
+     * 
      * @return string The source.
      */
     public function get_source()
@@ -99,7 +98,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Sets the source of this GroupUser.
-     *
+     * 
      * @param string $source
      */
     public function set_source($source)
@@ -109,7 +108,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Returns the enrollment_id of this GroupUser.
-     *
+     * 
      * @return integer The enrollment_id.
      */
     public function get_enrollment_id()
@@ -119,7 +118,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Sets the enrollment_id of this GroupUser.
-     *
+     * 
      * @param integer $enrollment_id
      */
     public function set_enrollment_id($enrollment_id)
@@ -129,7 +128,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Returns the person_id of this GroupUser.
-     *
+     * 
      * @return integer The person_id.
      */
     public function get_person_id()
@@ -139,7 +138,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Sets the person_id of this GroupUser.
-     *
+     * 
      * @param integer $person_id
      */
     public function set_person_id($person_id)
@@ -149,7 +148,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Returns the last_name of this GroupUser.
-     *
+     * 
      * @return string The last_name.
      */
     public function get_last_name()
@@ -159,7 +158,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Sets the last_name of this GroupUser.
-     *
+     * 
      * @param string $last_name
      */
     public function set_last_name($last_name)
@@ -169,7 +168,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Returns the first_name of this GroupUser.
-     *
+     * 
      * @return string The first_name.
      */
     public function get_first_name()
@@ -179,7 +178,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Sets the first_name of this GroupUser.
-     *
+     * 
      * @param string $first_name
      */
     public function set_first_name($first_name)
@@ -189,7 +188,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Returns the group_class_id of this GroupUser.
-     *
+     * 
      * @return integer The group_class_id.
      */
     public function get_group_class_id()
@@ -199,7 +198,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Sets the group_class_id of this GroupUser.
-     *
+     * 
      * @param integer $group_class_id
      */
     public function set_group_class_id($group_class_id)
@@ -209,7 +208,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Returns the year of this GroupUser.
-     *
+     * 
      * @return string The year.
      */
     public function get_year()
@@ -219,7 +218,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Sets the year of this GroupUser.
-     *
+     * 
      * @param string $year
      */
     public function set_year($year)
@@ -229,7 +228,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Returns the struck of this GroupUser.
-     *
+     * 
      * @return integer The struck.
      */
     public function get_struck()
@@ -239,7 +238,7 @@ class GroupUser extends DiscoveryItem
 
     /**
      * Sets the struck of this GroupUser.
-     *
+     * 
      * @param integer $struck
      */
     public function set_struck($struck)

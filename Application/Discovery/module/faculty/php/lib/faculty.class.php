@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\faculty;
 
-
 use application\discovery\DiscoveryItem;
 
 class Faculty extends DiscoveryItem

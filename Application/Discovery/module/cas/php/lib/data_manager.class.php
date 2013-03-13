@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\cas;
 
-
 /**
  *
  * @package application.discovery

@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\career;
 
-
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 

@@ -34,7 +34,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_teaching_assignment ' . $translator->render_query($condition) . ' ORDER BY faculty, training, name';
+            $query = 'SELECT * FROM v_discovery_teaching_assignment ' . $translator->render_query($condition) .
+                 ' ORDER BY faculty, training, name';
             
             $statement = $this->query($query);
             
@@ -73,8 +74,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $condition = new EqualityCondition('person_id', '"' . $person_id . '"');
         $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced ' . $translator->render_query(
-                $condition);
+        $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced ' .
+             $translator->render_query($condition);
         
         $statement = $this->query($query);
         
@@ -95,8 +96,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $condition = new EqualityCondition('person_id', '"' . $person_id . '"');
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT DISTINCT year FROM v_discovery_teaching_assignment_advanced ' . $translator->render_query(
-                    $condition) . ' ORDER BY year DESC';
+            $query = 'SELECT DISTINCT year FROM v_discovery_teaching_assignment_advanced ' .
+                 $translator->render_query($condition) . ' ORDER BY year DESC';
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();

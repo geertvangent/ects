@@ -29,13 +29,13 @@ class Module extends \application\discovery\Module
     public static function module_parameters()
     {
         $year = Request :: get(self :: PARAM_YEAR);
-
+        
         $parameter = new Parameters();
         if ($year)
         {
             $parameter->set_year($year);
         }
-
+        
         return $parameter;
     }
 
@@ -48,7 +48,7 @@ class Module extends \application\discovery\Module
         if (! isset($this->faculties[$year]))
         {
             $this->faculties[$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_faculties(
-                    $year);
+                $year);
         }
         return $this->faculties[$year];
     }
@@ -82,9 +82,11 @@ class Module extends \application\discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
-                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
+            false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

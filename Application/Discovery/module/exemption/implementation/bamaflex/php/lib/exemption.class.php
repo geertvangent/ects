@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery\module\exemption\implementation\bamaflex;
 
-
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
 

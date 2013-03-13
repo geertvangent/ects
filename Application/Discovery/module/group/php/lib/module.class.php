@@ -25,7 +25,7 @@ abstract class Module extends \application\discovery\Module
     public static function module_parameters()
     {
         $training = Request :: get(self :: PARAM_TRAINING_ID);
-
+        
         $parameter = new Parameters();
         if ($training)
         {
@@ -43,7 +43,7 @@ abstract class Module extends \application\discovery\Module
         if (! isset($this->groups))
         {
             $this->groups = DataManager :: get_instance($this->get_module_instance())->retrieve_groups(
-                    $this->get_module_parameters());
+                $this->get_module_parameters());
         }
         return $this->groups;
     }
@@ -56,9 +56,11 @@ abstract class Module extends \application\discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
-                Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', Filesystem :: LIST_DIRECTORIES, false);
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
+            false);
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;

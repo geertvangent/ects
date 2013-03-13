@@ -1,19 +1,18 @@
 <?php
 namespace application\discovery\module\group\implementation\bamaflex;
 
-
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
 
 /**
  * application.discovery.module.group.implementation.bamaflex
- *
+ * 
  * @author Magali Gillard
  */
 class Group extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      *
      * @var integer
@@ -52,7 +51,7 @@ class Group extends DiscoveryItem
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -65,23 +64,23 @@ class Group extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TYPE;
         $extended_property_names[] = self :: PROPERTY_TYPE_ID;
         $extended_property_names[] = self :: PROPERTY_SOURCE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**
      * Returns the training_id of this Group.
-     *
+     * 
      * @return integer The training_id.
      */
     public function get_training_id()
@@ -91,7 +90,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the training_id of this Group.
-     *
+     * 
      * @param integer $training_id
      */
     public function set_training_id($training_id)
@@ -101,7 +100,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the year of this Group.
-     *
+     * 
      * @return string The year.
      */
     public function get_year()
@@ -111,7 +110,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the year of this Group.
-     *
+     * 
      * @param string $year
      */
     public function set_year($year)
@@ -121,7 +120,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the code of this Group.
-     *
+     * 
      * @return string The code.
      */
     public function get_code()
@@ -131,7 +130,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the code of this Group.
-     *
+     * 
      * @param string $code
      */
     public function set_code($code)
@@ -141,7 +140,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the description of this Group.
-     *
+     * 
      * @return string The description.
      */
     public function get_description()
@@ -151,7 +150,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the description of this Group.
-     *
+     * 
      * @param string $description
      */
     public function set_description($description)
@@ -161,7 +160,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the type of this Group.
-     *
+     * 
      * @return integer The type.
      */
     public function get_type()
@@ -171,7 +170,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the type of this Group.
-     *
+     * 
      * @param integer $type
      */
     public function set_type($type)
@@ -181,7 +180,7 @@ class Group extends DiscoveryItem
 
     /**
      * Returns the type_id of this Group.
-     *
+     * 
      * @return integer The type_id.
      */
     public function get_type_id()
@@ -191,7 +190,7 @@ class Group extends DiscoveryItem
 
     /**
      * Sets the type_id of this Group.
-     *
+     * 
      * @param integer $type_id
      */
     public function set_type_id($type_id)
@@ -249,12 +248,12 @@ class Group extends DiscoveryItem
     public static function get_type_types($types_only = false)
     {
         $types = array();
-
+        
         $types[self :: TYPE_TRAINING] = self :: type_string(self :: TYPE_TRAINING);
         $types[self :: TYPE_CLASS] = self :: type_string(self :: TYPE_CLASS);
         $types[self :: TYPE_CUSTOM] = self :: type_string(self :: TYPE_CUSTOM);
         $types[self :: TYPE_CLASS_COURSE] = self :: type_string(self :: TYPE_CLASS_COURSE);
-
+        
         return ($types_only ? array_keys($types) : $types);
     }
 

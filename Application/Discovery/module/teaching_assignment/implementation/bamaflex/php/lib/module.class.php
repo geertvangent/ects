@@ -12,7 +12,7 @@ class Module extends \application\discovery\module\teaching_assignment\Module
     {
         $year = $parameters->get_year();
         $user_id = $parameters->get_user_id();
-
+        
         if (! isset($this->cache_teaching_assignments[$user_id][$year]))
         {
             foreach ($this->get_teaching_assignments($parameters) as $teaching_assignment)
@@ -28,7 +28,7 @@ class Module extends \application\discovery\module\teaching_assignment\Module
         if (! isset($this->years))
         {
             $this->years = DataManager :: get_instance($this->get_module_instance())->retrieve_years(
-                    $this->get_module_parameters());
+                $this->get_module_parameters());
         }
         return $this->years;
     }

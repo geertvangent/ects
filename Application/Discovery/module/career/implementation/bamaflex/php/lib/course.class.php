@@ -1,18 +1,17 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
-
 use common\libraries\Utilities;
 
 /**
  * application.discovery.module.career.implementation.bamaflex.discovery
- *
+ * 
  * @author Hans De Bisschop
  */
 class Course extends \application\discovery\module\career\Course
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Course properties
      */
@@ -63,7 +62,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -78,29 +77,35 @@ class Course extends \application\discovery\module\career\Course
         $extended_property_names[] = self :: PROPERTY_PARENT_PROGRAMME_ID;
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_PROGRAMME_TYPE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     public static function get_types_for_total_credits()
     {
-        return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS, self :: TYPE_EXTERNAL, self :: TYPE_CREDIT_HISTORY,
-                self :: TYPE_EXCHANGE, self :: TYPE_EXEMPTION, self :: TYPE_PARTIAL_EXEMPTION);
+        return array(
+            self :: TYPE_NORMAL, 
+            self :: TYPE_PREVIOUS, 
+            self :: TYPE_EXTERNAL, 
+            self :: TYPE_CREDIT_HISTORY, 
+            self :: TYPE_EXCHANGE, 
+            self :: TYPE_EXEMPTION, 
+            self :: TYPE_PARTIAL_EXEMPTION);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**
      * Returns the source of this Course.
-     *
+     * 
      * @return int The source.
      */
     public function get_source()
@@ -110,7 +115,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the source of this Course.
-     *
+     * 
      * @param int $source
      */
     public function set_source($source)
@@ -120,7 +125,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the trajectory_part of this Course.
-     *
+     * 
      * @return string The trajectory_part.
      */
     public function get_trajectory_part()
@@ -130,7 +135,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the trajectory_part of this Course.
-     *
+     * 
      * @param string $trajectory_part
      */
     public function set_trajectory_part($trajectory_part)
@@ -140,7 +145,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the credits of this Course.
-     *
+     * 
      * @return int The credits.
      */
     public function get_credits()
@@ -150,7 +155,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the credits of this Course.
-     *
+     * 
      * @param int $credits
      */
     public function set_credits($credits)
@@ -160,7 +165,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the weight of this Course.
-     *
+     * 
      * @return int The weight.
      */
     public function get_weight()
@@ -170,7 +175,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the weight of this Course.
-     *
+     * 
      * @param int $weight
      */
     public function set_weight($weight)
@@ -180,7 +185,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the enrollment id of this Course.
-     *
+     * 
      * @return int The enrollment id.
      */
     public function get_enrollment_id()
@@ -190,7 +195,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the enrollment id of this Course.
-     *
+     * 
      * @param int $enrollment_id
      */
     public function set_enrollment_id($enrollment_id)
@@ -200,7 +205,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the type of this Course.
-     *
+     * 
      * @return int The type.
      */
     public function get_type()
@@ -210,7 +215,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the type of this Course.
-     *
+     * 
      * @param int $type
      */
     public function set_type($type)
@@ -295,11 +300,24 @@ class Course extends \application\discovery\module\career\Course
      */
     public static function get_types()
     {
-        return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS, self :: TYPE_EXTERNAL, self :: TYPE_CREDIT_HISTORY,
-                self :: TYPE_STRUCK, self :: TYPE_EXCHANGE, self :: TYPE_CREDIT_HISTORY_INACTIVE, self :: TYPE_REFUSED,
-                self :: TYPE_PREVIOUS_REFUSED, self :: TYPE_EXTERNAL_REFUSED, self :: TYPE_EXEMPTION,
-                self :: TYPE_PARTIAL_EXEMPTION, self :: TYPE_RELEASE, self :: TYPE_RELEASE_STRUCK,
-                self :: TYPE_PARTIAL_EXEMPTION_STRUCK, self :: TYPE_EXEMPTION_STRUCK, self :: TYPE_EXTERNAL_STRUCK);
+        return array(
+            self :: TYPE_NORMAL, 
+            self :: TYPE_PREVIOUS, 
+            self :: TYPE_EXTERNAL, 
+            self :: TYPE_CREDIT_HISTORY, 
+            self :: TYPE_STRUCK, 
+            self :: TYPE_EXCHANGE, 
+            self :: TYPE_CREDIT_HISTORY_INACTIVE, 
+            self :: TYPE_REFUSED, 
+            self :: TYPE_PREVIOUS_REFUSED, 
+            self :: TYPE_EXTERNAL_REFUSED, 
+            self :: TYPE_EXEMPTION, 
+            self :: TYPE_PARTIAL_EXEMPTION, 
+            self :: TYPE_RELEASE, 
+            self :: TYPE_RELEASE_STRUCK, 
+            self :: TYPE_PARTIAL_EXEMPTION_STRUCK, 
+            self :: TYPE_EXEMPTION_STRUCK, 
+            self :: TYPE_EXTERNAL_STRUCK);
     }
 
     /**
@@ -313,7 +331,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the programme_id of this Course.
-     *
+     * 
      * @return int The programme_id.
      */
     public function get_programme_id()
@@ -323,7 +341,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the programme_id of this Course.
-     *
+     * 
      * @param int $programme_id
      */
     public function set_programme_id($programme_id)
@@ -333,7 +351,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Returns the parent_programme_id of this Course.
-     *
+     * 
      * @return int The parent_programme_id.
      */
     public function get_parent_programme_id()
@@ -343,7 +361,7 @@ class Course extends \application\discovery\module\career\Course
 
     /**
      * Sets the parent_programme_id of this Course.
-     *
+     * 
      * @param int $parent_programme_id
      */
     public function set_parent_programme_id($parent_programme_id)
@@ -369,7 +387,7 @@ class Course extends \application\discovery\module\career\Course
                 return $mark;
             }
         }
-
+        
         return Mark :: factory($moment_id);
     }
 

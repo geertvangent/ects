@@ -9,7 +9,7 @@ class GalleryBrowserTable extends GalleryObjectTable
 
     /**
      * Constructor
-     *
+     * 
      * @see ContentObjectTable::ContentObjectTable()
      */
     public function __construct($browser, $parameters, $condition)
@@ -17,9 +17,9 @@ class GalleryBrowserTable extends GalleryObjectTable
         $property_model = new GalleryBrowserTablePropertyModel();
         $cell_renderer = new GalleryBrowserTableCellRenderer($browser);
         $data_provider = new GalleryBrowserTableDataProvider($browser, $condition);
-
+        
         parent :: __construct($data_provider, self :: DEFAULT_NAME, $cell_renderer, $property_model);
-
+        
         $this->set_default_row_count(2);
         $this->set_default_column_count(4);
         $this->set_additional_parameters($parameters);

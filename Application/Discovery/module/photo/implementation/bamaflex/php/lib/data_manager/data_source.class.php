@@ -56,7 +56,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             }
         }
         
-        return Path :: get($web ? WEB_FILE_PATH : SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
+        return Path :: get($web ? WEB_FILE_PATH : SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' .
+             $relative_path;
     }
 
     public function retrieve_faculty($faculty_id)

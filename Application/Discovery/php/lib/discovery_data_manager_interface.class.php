@@ -18,7 +18,7 @@ interface DataManagerInterface
     public function any_content_object_is_published($object_ids);
 
     public function get_content_object_publication_attributes($object_id, $type = null, $offset = null, $count = null, 
-            $order_properties = null);
+        $order_properties = null);
 
     public function get_content_object_publication_attribute($publication_id);
 

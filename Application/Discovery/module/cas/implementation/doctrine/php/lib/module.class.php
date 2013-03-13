@@ -14,13 +14,13 @@ class Module extends \application\discovery\module\cas\Module
     {
         if (! isset($this->action_statistics))
         {
-            $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/cas_action_statistics/' . md5(
-                    serialize($this->get_module_parameters()));
-
+            $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/cas_action_statistics/' .
+                 md5(serialize($this->get_module_parameters()));
+            
             if (! file_exists($path))
             {
                 $this->action_statistics = array();
-
+                
                 foreach ($this->get_cas_statistics() as $cas_statistic)
                 {
                     if ($cas_statistic->get_application_id())
@@ -39,7 +39,7 @@ class Module extends \application\discovery\module\cas\Module
                 $this->action_statistics = unserialize(file_get_contents($path));
             }
         }
-
+        
         return $this->action_statistics[$action->get_id()];
     }
 }

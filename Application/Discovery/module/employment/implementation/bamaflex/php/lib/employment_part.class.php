@@ -1,19 +1,18 @@
 <?php
 namespace application\discovery\module\employment\implementation\bamaflex;
 
-
 use application\discovery\DiscoveryItem;
 use common\libraries\Utilities;
 
 /**
  * application.discovery.module.employment.implementation.bamaflex
- *
+ * 
  * @author Magali Gillard
  */
 class EmploymentPart extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      *
      * @var integer
@@ -69,7 +68,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -87,7 +86,7 @@ class EmploymentPart extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_TRAINING;
         $extended_property_names[] = self :: PROPERTY_DEPARTMENT;
         $extended_property_names[] = self :: PROPERTY_DEPARTMENT_ID;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
@@ -98,12 +97,12 @@ class EmploymentPart extends DiscoveryItem
      */
     public function get_data_manager()
     {
-//         return DataManager :: get_instance();
+        // return DataManager :: get_instance();
     }
 
     /**
      * Returns the assignment_id of this EmploymentParts.
-     *
+     * 
      * @return integer The assignment_id.
      */
     public function get_assignment_id()
@@ -113,7 +112,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the assignment_id of this EmploymentParts.
-     *
+     * 
      * @param integer $assignment_id
      */
     public function set_assignment_id($assignment_id)
@@ -123,7 +122,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the hours of this EmploymentParts.
-     *
+     * 
      * @return string The hours.
      */
     public function get_hours()
@@ -133,7 +132,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the hours of this EmploymentParts.
-     *
+     * 
      * @param string $hours
      */
     public function set_hours($hours)
@@ -143,7 +142,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the start_date of this EmploymentParts.
-     *
+     * 
      * @return string The start_date.
      */
     public function get_start_date()
@@ -153,7 +152,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the start_date of this EmploymentParts.
-     *
+     * 
      * @param string $start_date
      */
     public function set_start_date($start_date)
@@ -163,7 +162,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the end_date of this EmploymentParts.
-     *
+     * 
      * @return string The end_date.
      */
     public function get_end_date()
@@ -173,7 +172,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the end_date of this EmploymentParts.
-     *
+     * 
      * @param string $end_date
      */
     public function set_end_date($end_date)
@@ -183,7 +182,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the assignment_volume of this EmploymentParts.
-     *
+     * 
      * @return string The assignment_volume.
      */
     public function get_assignment_volume()
@@ -193,7 +192,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the assignment_volume of this EmploymentParts.
-     *
+     * 
      * @param string $assignment_volume
      */
     public function set_assignment_volume($assignment_volume)
@@ -203,7 +202,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the volume of this EmploymentParts.
-     *
+     * 
      * @return string The volume.
      */
     public function get_volume()
@@ -222,7 +221,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the volume of this EmploymentParts.
-     *
+     * 
      * @param string $volume
      */
     public function set_volume($volume)
@@ -232,7 +231,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the faculty_id of this EmploymentParts.
-     *
+     * 
      * @return integer The faculty_id.
      */
     public function get_faculty_id()
@@ -242,7 +241,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the faculty_id of this EmploymentParts.
-     *
+     * 
      * @param integer $faculty_id
      */
     public function set_faculty_id($faculty_id)
@@ -252,7 +251,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the faculty of this EmploymentParts.
-     *
+     * 
      * @return string The faculty.
      */
     public function get_faculty()
@@ -262,7 +261,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the faculty of this EmploymentParts.
-     *
+     * 
      * @param string $faculty
      */
     public function set_faculty($faculty)
@@ -272,7 +271,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the training_id of this EmploymentParts.
-     *
+     * 
      * @return integer The training_id.
      */
     public function get_training_id()
@@ -282,7 +281,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the training_id of this EmploymentParts.
-     *
+     * 
      * @param integer $training_id
      */
     public function set_training_id($training_id)
@@ -292,7 +291,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Returns the training of this EmploymentParts.
-     *
+     * 
      * @return string The training.
      */
     public function get_training()
@@ -302,7 +301,7 @@ class EmploymentPart extends DiscoveryItem
 
     /**
      * Sets the training of this EmploymentParts.
-     *
+     * 
      * @param string $training
      */
     public function set_training($training)

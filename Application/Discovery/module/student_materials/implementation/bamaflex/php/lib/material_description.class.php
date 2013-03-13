@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
-
-
 class MaterialDescription extends Material
 {
     const CLASS_NAME = __CLASS__;
