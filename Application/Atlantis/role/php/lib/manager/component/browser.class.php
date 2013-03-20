@@ -2,7 +2,6 @@
 namespace application\atlantis\role;
 
 use common\libraries\DelegateComponent;
-
 use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
 use common\libraries\Theme;
@@ -14,6 +13,7 @@ use common\libraries\NewObjectTableSupport;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {
+
     private $action_bar;
 
     public function get_object_table_condition($object_table_class_name)
@@ -33,7 +33,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         }
     }
 
-    function run()
+    public function run()
     {
         $this->display_header();
         $this->action_bar = $this->get_action_bar();
@@ -43,19 +43,21 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $this->display_footer();
     }
 
-    function get_action_bar()
+    public function get_action_bar()
     {
         if (! isset($this->action_bar))
         {
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
             if ($this->get_user()->is_platform_admin())
             {
-                $this->action_bar->add_common_action(new ToolbarItem(Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), Theme :: get_common_image_path() . 'action_create.png', $this->get_url(array(
-                        self :: PARAM_ACTION => self :: ACTION_CREATE))));
+                $this->action_bar->add_common_action(
+                    new ToolbarItem(
+                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: get_common_image_path() . 'action_create.png', 
+                        $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());
         }
         return $this->action_bar;
     }
 }
-?>

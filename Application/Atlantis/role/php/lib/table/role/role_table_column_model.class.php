@@ -2,9 +2,7 @@
 namespace application\atlantis\role;
 
 use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
-
 use common\libraries\NewObjectTableColumnModel;
-
 use common\libraries\ObjectTableColumn;
 
 class RoleTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport
@@ -19,4 +17,3 @@ class RoleTableColumnModel extends NewObjectTableColumnModel implements NewObjec
         $this->add_column(new ObjectTableColumn(Role :: PROPERTY_DESCRIPTION));
     }
 }
-?>

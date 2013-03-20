@@ -1,14 +1,10 @@
 <?php
-
 namespace application\atlantis\role;
 
 use common\libraries\Translation;
-
 use common\libraries\DataClassRetrievesParameters;
-
 use common\libraries\AjaxManager;
 use common\libraries\JsonAjaxResult;
-use common\libraries\Path;
 use common\libraries\AdvancedElementFinderElements;
 use common\libraries\AdvancedElementFinderElement;
 use common\libraries\Request;
@@ -20,18 +16,17 @@ class RoleAjaxRolesFeed extends AjaxManager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PARAM_OFFSET = 'offset';
-    
     const PROPERTY_TOTAL_ELEMENTS = 'total_elements';
     const PROPERTY_ELEMENTS = 'elements';
-    
+
     private $role_count = 0;
 
     /**
      * Returns the required parameters
-     *
+     * 
      * @return string[]
      */
-    function required_parameters()
+    public function required_parameters()
     {
         return array();
     }
@@ -39,7 +34,7 @@ class RoleAjaxRolesFeed extends AjaxManager
     /**
      * Runs this ajax component
      */
-    function run()
+    public function run()
     {
         $result = new JsonAjaxResult();
         
@@ -57,7 +52,7 @@ class RoleAjaxRolesFeed extends AjaxManager
 
     /**
      * Returns all the elements for this feed
-     *
+     * 
      * @return AdvancedElementFinderElements
      */
     private function get_elements()
@@ -87,8 +82,9 @@ class RoleAjaxRolesFeed extends AjaxManager
         // Set the conditions for the search query
         if ($search_query && $search_query != '')
         {
-            $conditions[] = Utilities :: query_to_condition($search_query, array(Role :: PROPERTY_NAME, 
-                    Role :: PROPERTY_DESCRIPTION));
+            $conditions[] = Utilities :: query_to_condition(
+                $search_query, 
+                array(Role :: PROPERTY_NAME, Role :: PROPERTY_DESCRIPTION));
         }
         
         // Combine the conditions
@@ -104,15 +100,18 @@ class RoleAjaxRolesFeed extends AjaxManager
         }
         
         $this->role_count = DataManager :: count(Role :: class_name(), $condition);
-        $parameters = new DataClassRetrievesParameters($condition, 100, $this->get_offset(), array(
-                new ObjectTableOrder(Role :: PROPERTY_NAME)));
+        $parameters = new DataClassRetrievesParameters(
+            $condition, 
+            100, 
+            $this->get_offset(), 
+            array(new ObjectTableOrder(Role :: PROPERTY_NAME)));
         
         return DataManager :: retrieves(Role :: class_name(), $parameters);
     }
 
     /**
      * Returns the selected offset
-     *
+     * 
      * @return int
      */
     protected function get_offset()
@@ -128,9 +127,10 @@ class RoleAjaxRolesFeed extends AjaxManager
 
     protected function get_element_for_role($role)
     {
-        return new AdvancedElementFinderElement('role_' . $role->get_id(), 'type type_role', $role->get_name(), $role->get_description());
+        return new AdvancedElementFinderElement(
+            'role_' . $role->get_id(), 
+            'type type_role', 
+            $role->get_name(), 
+            $role->get_description());
     }
-
 }
-
-?>

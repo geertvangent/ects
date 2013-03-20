@@ -2,7 +2,6 @@
 namespace application\atlantis\role\entitlement;
 
 use common\libraries\InCondition;
-
 use common\libraries\AndCondition;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
@@ -13,8 +12,11 @@ use common\libraries\NewObjectTableSupport;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {
+
     private $right_id;
+
     private $role_id;
+
     private $application_id;
 
     public function get_object_table_condition($object_table_class_name)
@@ -34,8 +36,12 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         }
         if ($this->application_id)
         {
-            $condition = new EqualityCondition(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID, $this->application_id);
-            $rights = \application\atlantis\application\right\DataManager :: retrieves(\application\atlantis\application\right\Right :: class_name(), $condition);
+            $condition = new EqualityCondition(
+                \application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID, 
+                $this->application_id);
+            $rights = \application\atlantis\application\right\DataManager :: retrieves(
+                \application\atlantis\application\right\Right :: class_name(), 
+                $condition);
             $right_ids = array();
             while ($right = $rights->next_result())
             {
@@ -45,22 +51,22 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         }
     }
 
-    function has_role_id()
+    public function has_role_id()
     {
         return isset($this->role_id);
     }
 
-    function has_right_id()
+    public function has_right_id()
     {
         return isset($this->right_id);
     }
 
-    function has_application_id()
+    public function has_application_id()
     {
         return isset($this->application_id);
     }
 
-    function run()
+    public function run()
     {
         $this->right_id = Request :: get(\application\atlantis\application\right\Manager :: PARAM_RIGHT_ID);
         $this->role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
@@ -74,17 +80,21 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $this->display_footer();
     }
 
-    function add_breadcrumb()
+    public function add_breadcrumb()
     {
         if ($this->has_application_id())
         {
-            $application = \application\atlantis\application\DataManager :: retrieve(\application\atlantis\application\Application :: class_name(), (int) $this->application_id);
+            $application = \application\atlantis\application\DataManager :: retrieve(
+                \application\atlantis\application\Application :: class_name(), 
+                (int) $this->application_id);
             
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
         }
         if ($this->has_right_id() && $this->has_application_id())
         {
-            $right = \application\atlantis\application\right\DataManager :: retrieve(\application\atlantis\application\right\Right :: class_name(), (int) $this->right_id);
+            $right = \application\atlantis\application\right\DataManager :: retrieve(
+                \application\atlantis\application\right\Right :: class_name(), 
+                (int) $this->right_id);
             
             // BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null,
             // $right->get_application()->get_name()));
@@ -92,12 +102,11 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         }
         if ($this->has_role_id())
         {
-            $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(), (int) $this->role_id);
+            $role = \application\atlantis\role\DataManager :: retrieve(
+                \application\atlantis\role\Role :: class_name(), 
+                (int) $this->role_id);
             
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
         }
-    
     }
-
 }
-?>

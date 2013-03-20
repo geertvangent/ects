@@ -9,7 +9,7 @@ use common\libraries\Translation;
 class CreatorComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         if (! $this->get_user()->is_platform_admin())
         {
@@ -34,7 +34,7 @@ class CreatorComponent extends Manager
                             $entity = new RoleEntity();
                             $entity->set_entity_id($entity_id);
                             $entity->set_entity_type(
-                                    $entity_type == 'user' ? UserEntity :: ENTITY_TYPE : PlatformGroupEntity :: ENTITY_TYPE);
+                                $entity_type == 'user' ? UserEntity :: ENTITY_TYPE : PlatformGroupEntity :: ENTITY_TYPE);
                             $entity->set_role_id($role);
                             $entity->set_context_id($context);
                             $entity->set_start_date(Utilities :: time_from_datepicker($values['start_date']));
@@ -49,10 +49,10 @@ class CreatorComponent extends Manager
                 }
             }
             
-            $count = (count($values['entity'][UserEntity :: ENTITY_TYPE]) + count(
-                    $values['entity'][PlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
-                    $values['context']) * count($values['start_date']) * count($values['end_date']);
-            var_dump($count);
+            $count = (count($values['entity'][UserEntity :: ENTITY_TYPE]) +
+                 count($values['entity'][PlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) *
+                 count($values['context']) * count($values['start_date']) * count($values['end_date']);
+            // var_dump($count);
             if ($failures)
             {
                 if ($count == 1)
@@ -85,8 +85,10 @@ class CreatorComponent extends Manager
                 }
             }
             
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
-                    ($failures ? true : false), array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
+            $this->redirect(
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                ($failures ? true : false), 
+                array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
         }
         else
         {
@@ -96,4 +98,3 @@ class CreatorComponent extends Manager
         }
     }
 }
-?>

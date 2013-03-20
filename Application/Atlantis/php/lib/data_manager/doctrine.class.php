@@ -3,7 +3,6 @@ namespace application\atlantis;
 
 use common\libraries\DoctrineDatabase;
 
-class DoctrineDataManager extends DoctrineDatabase 
+class DoctrineDataManager extends DoctrineDatabase
 {
 }
-?>

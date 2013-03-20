@@ -2,9 +2,7 @@
 namespace application\atlantis\application\right;
 
 use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
-
 use common\libraries\NewObjectTableColumnModel;
-
 use common\libraries\ObjectTableColumn;
 
 class RightTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport
@@ -19,4 +17,3 @@ class RightTableColumnModel extends NewObjectTableColumnModel implements NewObje
         $this->add_column(new ObjectTableColumn(Right :: PROPERTY_DESCRIPTION));
     }
 }
-?>

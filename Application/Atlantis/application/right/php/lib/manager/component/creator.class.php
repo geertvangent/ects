@@ -3,12 +3,11 @@ namespace application\atlantis\application\right;
 
 use common\libraries\Utilities;
 use common\libraries\Translation;
-use common\libraries\Request;
 
 class CreatorComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         if (! $this->get_user()->is_platform_admin())
         {
@@ -16,7 +15,8 @@ class CreatorComponent extends Manager
         }
         
         $right = new Right();
-        $right->set_application_id($this->get_parameter(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID));
+        $right->set_application_id(
+            $this->get_parameter(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID));
         
         $form = new RightForm($right, $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)));
         
@@ -33,8 +33,13 @@ class CreatorComponent extends Manager
             $parameters = array();
             $parameters[self :: PARAM_ACTION] = self :: ACTION_BROWSE;
             
-            $this->redirect(Translation :: get($success ? 'ObjectCreated' : 'ObjectNotCreated', array(
-                    'OBJECT' => Translation :: get('Right')), Utilities :: COMMON_LIBRARIES), ($success ? false : true), $parameters);
+            $this->redirect(
+                Translation :: get(
+                    $success ? 'ObjectCreated' : 'ObjectNotCreated', 
+                    array('OBJECT' => Translation :: get('Right')), 
+                    Utilities :: COMMON_LIBRARIES), 
+                ($success ? false : true), 
+                $parameters);
         }
         else
         {
@@ -42,8 +47,5 @@ class CreatorComponent extends Manager
             $form->display();
             $this->display_footer();
         }
-    
     }
-
 }
-?>

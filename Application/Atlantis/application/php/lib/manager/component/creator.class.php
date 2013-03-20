@@ -3,15 +3,12 @@ namespace application\atlantis\application;
 
 use common\libraries\Utilities;
 use common\libraries\Translation;
-use common\libraries\Request;
 
 class CreatorComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
-        
-       
         if (! $this->get_user()->is_platform_admin())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
@@ -35,8 +32,13 @@ class CreatorComponent extends Manager
             $parameters = array();
             $parameters[self :: PARAM_ACTION] = self :: ACTION_BROWSE;
             
-            $this->redirect(Translation :: get($success ? 'ObjectCreated' : 'ObjectNotCreated', array(
-                    'OBJECT' => Translation :: get('Application')), Utilities :: COMMON_LIBRARIES), ($success ? false : true), $parameters);
+            $this->redirect(
+                Translation :: get(
+                    $success ? 'ObjectCreated' : 'ObjectNotCreated', 
+                    array('OBJECT' => Translation :: get('Application')), 
+                    Utilities :: COMMON_LIBRARIES), 
+                ($success ? false : true), 
+                $parameters);
         }
         else
         {
@@ -44,8 +46,5 @@ class CreatorComponent extends Manager
             $form->display();
             $this->display_footer();
         }
-    
     }
-
 }
-?>

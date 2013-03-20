@@ -8,9 +8,8 @@ use common\libraries\Request;
 class EditorComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
-        
         $application_id = Request :: get(self :: PARAM_APPLICATION_ID);
         
         if (isset($application_id))
@@ -22,8 +21,10 @@ class EditorComponent extends Manager
                 $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
             }
             
-            $form = new ApplicationForm($application, $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_EDIT, 
-                    self :: PARAM_APPLICATION_ID => $application_id)));
+            $form = new ApplicationForm(
+                $application, 
+                $this->get_url(
+                    array(self :: PARAM_ACTION => self :: ACTION_EDIT, self :: PARAM_APPLICATION_ID => $application_id)));
             
             if ($form->validate())
             {
@@ -39,8 +40,13 @@ class EditorComponent extends Manager
                 $parameters = array();
                 $parameters[self :: PARAM_ACTION] = self :: ACTION_BROWSE;
                 
-                $this->redirect(Translation :: get($success ? 'ObjectUpdated' : 'ObjectNotUpdated', array(
-                        'OBJECT' => Translation :: get('Application')), Utilities :: COMMON_LIBRARIES), ($success ? false : true), $parameters);
+                $this->redirect(
+                    Translation :: get(
+                        $success ? 'ObjectUpdated' : 'ObjectNotUpdated', 
+                        array('OBJECT' => Translation :: get('Application')), 
+                        Utilities :: COMMON_LIBRARIES), 
+                    ($success ? false : true), 
+                    $parameters);
             }
             else
             {
@@ -51,10 +57,12 @@ class EditorComponent extends Manager
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array(
-                    'OBJECT' => Translation :: get('Application')), Utilities :: COMMON_LIBRARIES)));
+            $this->display_error_page(
+                htmlentities(
+                    Translation :: get(
+                        'NoObjectSelected', 
+                        array('OBJECT' => Translation :: get('Application')), 
+                        Utilities :: COMMON_LIBRARIES)));
         }
     }
-
 }
-?>

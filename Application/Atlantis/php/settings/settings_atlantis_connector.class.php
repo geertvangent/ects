@@ -6,10 +6,8 @@ use common\libraries\Theme;
 class SettingsAtlantisConnector
 {
 
-    function get_themes()
+    public function get_themes()
     {
         return Theme :: get_themes();
     }
-
 }
-?>

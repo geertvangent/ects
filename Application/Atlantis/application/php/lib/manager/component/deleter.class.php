@@ -8,7 +8,7 @@ use common\libraries\Translation;
 class DeleterComponent extends Manager
 {
 
-    function run()
+    public function run()
     {
         $ids = Request :: get(self :: PARAM_APPLICATION_ID);
         $failures = 0;
@@ -69,14 +69,19 @@ class DeleterComponent extends Manager
                 }
             }
             
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), ($failures ? true : false), array(
-                    Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
+            $this->redirect(
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                ($failures ? true : false), 
+                array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoObjectSelected', array(
-                    'OBJECT' => Translation :: get('Application')), Utilities :: COMMON_LIBRARIES)));
+            $this->display_error_page(
+                htmlentities(
+                    Translation :: get(
+                        'NoObjectSelected', 
+                        array('OBJECT' => Translation :: get('Application')), 
+                        Utilities :: COMMON_LIBRARIES)));
         }
     }
 }
-?>

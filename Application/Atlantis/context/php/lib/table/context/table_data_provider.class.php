@@ -3,20 +3,22 @@ namespace application\atlantis\context;
 
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\NewObjectTableDataProvider;
-use common\libraries\ObjectTableDataProvider;
 
 class ContextTableDataProvider extends NewObjectTableDataProvider
 {
 
-    function get_objects($offset, $count, $order_property = null)
+    public function get_objects($offset, $count, $order_property = null)
     {
-        $parameters = new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $this->get_order_property($order_property));
+        $parameters = new DataClassRetrievesParameters(
+            $this->get_condition(), 
+            $count, 
+            $offset, 
+            $this->get_order_property($order_property));
         return DataManager :: retrieves(Context :: class_name(), $parameters);
     }
 
-    function get_object_count()
+    public function get_object_count()
     {
         return DataManager :: count(Context :: class_name(), $this->get_condition());
     }
 }
-?>

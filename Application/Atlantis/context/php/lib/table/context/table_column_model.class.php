@@ -18,4 +18,3 @@ class ContextTableColumnModel extends NewObjectTableColumnModel implements NewOb
         $this->add_column(new ObjectTableColumn(\application\atlantis\role\Role :: PROPERTY_NAME, false));
     }
 }
-?>

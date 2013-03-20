@@ -1,5 +1,4 @@
 <?php
-
 namespace application\atlantis\context;
 
 use common\libraries\JsonAjaxResult;
@@ -14,24 +13,22 @@ use common\libraries\InCondition;
 use common\libraries\AndCondition;
 use common\libraries\ObjectTableOrder;
 use common\libraries\AdvancedElementFinderElement;
-use common\libraries\OrCondition;
 
 class ContextAjaxContextsFeed extends AjaxManager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PARAM_OFFSET = 'offset';
     const PARAM_FILTER = 'filter';
-    
     const PROPERTY_ELEMENTS = 'elements';
     const PROPERTY_TOTAL_ELEMENTS = 'total_elements';
     const FILTER_PREFIX_LENGTH = 8;
-    
+
     protected $context_count = 0;
 
     /**
      * Runs this ajax component
      */
-    function run()
+    public function run()
     {
         $result = new JsonAjaxResult();
         
@@ -50,7 +47,7 @@ class ContextAjaxContextsFeed extends AjaxManager
 
     /**
      * Returns all the elements for this feed
-     *
+     * 
      * @return AdvancedElementFinderElements
      */
     private function get_elements()
@@ -132,7 +129,6 @@ class ContextAjaxContextsFeed extends AjaxManager
     // new ObjectTableOrder(User :: PROPERTY_LASTNAME), new
     // ObjectTableOrder(User :: PROPERTY_FIRSTNAME)));
     // }
-    
     protected function get_offset()
     {
         $offset = Request :: post(self :: PARAM_OFFSET);
@@ -147,18 +143,17 @@ class ContextAjaxContextsFeed extends AjaxManager
     /**
      * The length for the filter prefix to remove
      */
-    
-    function required_parameters()
+    public function required_parameters()
     {
         return array();
     }
 
     /**
      * Returns all the contexts for this feed
-     *
+     * 
      * @return ResultSet
      */
-    function retrieve_contexts()
+    public function retrieve_contexts()
     {
         // Set the conditions for the search query
         $search_query = Request :: post(self :: PARAM_SEARCH_QUERY);
@@ -193,8 +188,11 @@ class ContextAjaxContextsFeed extends AjaxManager
             $condition = $conditions[0];
         }
         
-        $parameters = new DataClassRetrievesParameters($condition, null, null, array(
-                new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME)));
+        $parameters = new DataClassRetrievesParameters(
+            $condition, 
+            null, 
+            null, 
+            array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME)));
         return DataManager :: retrieves(Context :: class_name(), $parameters);
     }
     
@@ -227,12 +225,17 @@ class ContextAjaxContextsFeed extends AjaxManager
     
     /**
      * Returns the element for a specific context
-     *
+     * 
      * @return AdvancedElementFinderElement
      */
-    function get_context_element($context)
+    public function get_context_element($context)
     {
-        return new AdvancedElementFinderElement('context_' . $context->get_id(), 'type type_context', $context->get_context_name(), $context->get_context_name(), AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER);
+        return new AdvancedElementFinderElement(
+            'context_' . $context->get_id(), 
+            'type type_context', 
+            $context->get_context_name(), 
+            $context->get_context_name(), 
+            AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER);
     }
     
     // /**
@@ -254,7 +257,4 @@ class ContextAjaxContextsFeed extends AjaxManager
         $filter = Request :: post(self :: PARAM_FILTER);
         return substr($filter, static :: FILTER_PREFIX_LENGTH);
     }
-
 }
-
-?>

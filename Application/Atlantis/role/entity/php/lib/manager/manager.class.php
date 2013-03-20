@@ -17,7 +17,7 @@ class Manager extends SubManager
     const PARAM_START_DATE = 'start_date';
     const PARAM_END_DATE = 'end_date';
 
-    static function get_action_parameter()
+    public static function get_action_parameter()
     {
         return self :: PARAM_ACTION;
     }
@@ -27,14 +27,13 @@ class Manager extends SubManager
      * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
      * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
      */
-    function get_default_action()
+    public function get_default_action()
     {
         return self :: DEFAULT_ACTION;
     }
 
-    static function launch($application)
+    public static function launch($application)
     {
         parent :: launch(null, $application);
     }
 }
-?>
