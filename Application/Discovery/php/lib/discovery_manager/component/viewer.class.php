@@ -55,6 +55,7 @@ class DiscoveryManagerViewerComponent extends DiscoveryManager implements Delega
                 $this->display_header();
                 echo Display :: warning_message(Translation :: get('NoModuleInstance'), true);
                 $this->display_footer();
+                exit;
             }
             $module_id = $current_module_instance->get_id();
         }
