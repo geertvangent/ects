@@ -11,6 +11,8 @@ use common\libraries\Translation;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\enrollment\DataManager;
+use common\libraries\Breadcrumb;
+use common\libraries\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -20,15 +22,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function render()
     {
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(
-            Rights :: VIEW_RIGHT, 
-            $entities, 
-            $this->get_module_instance()->get_id(), 
-            $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -38,7 +39,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($this->get_exemptions()) > 0)
         {
             $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years(
-                $this->get_module_parameters());
+                    $this->get_module_parameters());
             
             $tabs = new DynamicTabsRenderer('exemption_list');
             
@@ -68,20 +69,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $row[] = $exemption->get_name();
             $row[] = $exemption->get_type();
             $row[] = DatetimeUtilities :: format_locale_date(
-                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
-                $exemption->get_date_requested());
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    $exemption->get_date_requested());
             $row[] = $exemption->get_motivation();
             $row[] = $exemption->get_proof();
             $row[] = $exemption->get_remarks();
             
-            $image = '<img src="' . Theme :: get_image_path() . 'state/' . $exemption->get_state() . '.png" alt="' .
-                 Translation :: get($exemption->get_state_string()) . '" title="' .
-                 Translation :: get($exemption->get_state_string()) . '"/>';
+            $image = '<img src="' . Theme :: get_image_path() . 'state/' . $exemption->get_state() . '.png" alt="' . Translation :: get(
+                    $exemption->get_state_string()) . '" title="' . Translation :: get($exemption->get_state_string()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol(
-                $image, 
-                Translation :: get($exemption->get_state_string()), 
-                Translation :: get('State'));
+            LegendTable :: get_instance()->add_symbol($image, Translation :: get($exemption->get_state_string()), 
+                    Translation :: get('State'));
             
             $data[] = $row;
         }

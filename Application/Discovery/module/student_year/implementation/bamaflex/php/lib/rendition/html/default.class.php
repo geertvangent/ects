@@ -4,6 +4,8 @@ namespace application\discovery\module\student_year\implementation\bamaflex;
 use application\discovery\SortableTable;
 use common\libraries\Translation;
 use common\libraries\Display;
+use common\libraries\Breadcrumb;
+use common\libraries\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -37,15 +39,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function render()
     {
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(
-            Rights :: VIEW_RIGHT, 
-            $entities, 
-            $this->get_module_instance()->get_id(), 
-            $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }

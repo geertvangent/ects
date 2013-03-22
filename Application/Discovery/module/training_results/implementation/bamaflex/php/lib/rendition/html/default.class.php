@@ -22,11 +22,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(
-            Rights :: VIEW_RIGHT, 
-            $entities, 
-            $this->get_module_instance()->get_id(), 
-            $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -42,17 +39,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_training_properties_table()
     {
         $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
-            Module :: get_training_info_parameters());
+                Module :: get_training_info_parameters());
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         
         $faculty_info_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\faculty_info\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\faculty_info\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $training->get_year();
+        
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));
         
         $history = array();
         $trainings = $training->get_all($this->get_module_instance());
@@ -91,56 +90,45 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array(
-                            $year, 
-                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                                 $year_training->get_name() . '</a>');
+                        $previous_history = array($year, 
+                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_name() . '</a>');
                     }
                     elseif ($i == count($year_trainings))
                     {
-                        $next_history = array(
-                            $year, 
-                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                                 $year_training->get_name() . '</a>');
+                        $next_history = array($year, 
+                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_name() . '</a>');
                     }
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                         $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                             $year_training->get_year() . '</a>';
+                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_year() . '</a>';
                     }
                 }
                 elseif ($year_training->has_next_references() && ! $year_training->has_next_references(true))
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array(
-                            $year, 
-                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                                 $year_training->get_name() . '</a>');
+                        $previous_history = array($year, 
+                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_name() . '</a>');
                     }
                     elseif ($i == count($year_trainings))
                     {
-                        $next_history = array(
-                            $year, 
-                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                                 $year_training->get_name() . '</a>');
+                        $next_history = array($year, 
+                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_name() . '</a>');
                     }
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                         $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                             $year_training->get_year() . '</a>';
+                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_year() . '</a>';
                     }
                 }
                 else
                 {
                     $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                     $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                    $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                         $year_training->get_year() . '</a>';
+                    $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_year() . '</a>';
                 }
             }
             $i ++;
@@ -161,8 +149,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if ($faculty_info_module_instance)
         {
             $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
-                $training->get_faculty_id(), 
-                $training->get_source());
+                    $training->get_faculty_id(), $training->get_source());
             $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $training->get_faculty() . '</a>';
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $training->get_faculty()));
@@ -215,8 +202,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $profile_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\profile\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\profile\implementation\bamaflex', array('data_source' => $data_source));
         
         foreach ($this->get_training_results() as $enrollment)
         {
@@ -233,8 +219,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 }
                 else
                 {
-                    $row[] = $enrollment->get_optional_property('first_name') . ' ' .
-                         $enrollment->get_optional_property('last_name');
+                    $row[] = $enrollment->get_optional_property('first_name') . ' ' . $enrollment->get_optional_property(
+                            'last_name');
                 }
             }
             else
@@ -245,42 +231,30 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 }
                 else
                 {
-                    $row[] = $enrollment->get_optional_property('first_name') . ' ' .
-                         $enrollment->get_optional_property('last_name');
+                    $row[] = $enrollment->get_optional_property('first_name') . ' ' . $enrollment->get_optional_property(
+                            'last_name');
                 }
             }
             
             $row[] = $enrollment->get_unified_option();
             $row[] = $enrollment->get_unified_trajectory();
             
-            $row[] = Translation :: get(
-                $enrollment->get_contract_type_string(), 
-                null, 
-                'application\discovery\module\enrollment\implementation\bamaflex');
+            $row[] = Translation :: get($enrollment->get_contract_type_string(), null, 
+                    'application\discovery\module\enrollment\implementation\bamaflex');
             if ($enrollment->is_special_result())
             {
-                $image = '<img src="' .
-                     Theme :: get_image_path('application\discovery\module\enrollment\implementation\bamaflex') .
-                     'result_type/' . $enrollment->get_result() . '.png" alt="' .
-                     Translation :: get(
-                        $enrollment->get_result_string(), 
-                        null, 
-                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' .
-                     Translation :: get(
-                        $enrollment->get_result_string(), 
-                        null, 
+                $image = '<img src="' . Theme :: get_image_path(
+                        'application\discovery\module\enrollment\implementation\bamaflex') . 'result_type/' . $enrollment->get_result() . '.png" alt="' . Translation :: get(
+                        $enrollment->get_result_string(), null, 
+                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get(
+                        $enrollment->get_result_string(), null, 
                         'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get(
-                        $enrollment->get_result_string(), 
-                        null, 
-                        'application\discovery\module\enrollment\implementation\bamaflex'), 
-                    Translation :: get(
-                        'ResultType', 
-                        null, 
-                        'application\discovery\module\enrollment\implementation\bamaflex'));
+                LegendTable :: get_instance()->add_symbol($image, 
+                        Translation :: get($enrollment->get_result_string(), null, 
+                                'application\discovery\module\enrollment\implementation\bamaflex'), 
+                        Translation :: get('ResultType', null, 
+                                'application\discovery\module\enrollment\implementation\bamaflex'));
             }
             else
             {
@@ -288,28 +262,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             if ($enrollment->has_distinction())
             {
-                $image = '<img src="' .
-                     Theme :: get_image_path('application\discovery\module\enrollment\implementation\bamaflex') .
-                     'distinction_type/' . $enrollment->get_distinction() . '.png" alt="' .
-                     Translation :: get(
-                        $enrollment->get_distinction_string(), 
-                        null, 
-                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' .
-                     Translation :: get(
-                        $enrollment->get_distinction_string(), 
-                        null, 
+                $image = '<img src="' . Theme :: get_image_path(
+                        'application\discovery\module\enrollment\implementation\bamaflex') . 'distinction_type/' . $enrollment->get_distinction() . '.png" alt="' . Translation :: get(
+                        $enrollment->get_distinction_string(), null, 
+                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get(
+                        $enrollment->get_distinction_string(), null, 
                         'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get(
-                        $enrollment->get_distinction_string(), 
-                        null, 
-                        'application\discovery\module\enrollment\implementation\bamaflex'), 
-                    Translation :: get(
-                        'DistinctionType', 
-                        null, 
-                        'application\discovery\module\enrollment\implementation\bamaflex'));
+                LegendTable :: get_instance()->add_symbol($image, 
+                        Translation :: get($enrollment->get_distinction_string(), null, 
+                                'application\discovery\module\enrollment\implementation\bamaflex'), 
+                        Translation :: get('DistinctionType', null, 
+                                'application\discovery\module\enrollment\implementation\bamaflex'));
             }
             else
             {

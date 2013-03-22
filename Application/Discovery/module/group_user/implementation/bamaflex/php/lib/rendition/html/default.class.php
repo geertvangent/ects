@@ -48,7 +48,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_group_properties_table()
     {
         $group = DataManager :: get_instance($this->get_module_instance())->retrieve_group(
-            Module :: get_group_parameters());
+                Module :: get_group_parameters());
         
         $properties = array();
         $properties[Translation :: get('Year')] = $group->get_year();
@@ -118,11 +118,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             
             $tabs->add_tab(
-                new DynamicContentTab(
-                    0, 
-                    Translation :: get('Enrolled'), 
-                    Theme :: get_image_path() . 'type/0.png', 
-                    implode("\n", $html)));
+                    new DynamicContentTab(0, Translation :: get('Enrolled'), Theme :: get_image_path() . 'type/0.png', 
+                            implode("\n", $html)));
         }
         
         if (count($data_struck) > 0 || count($course_data_struck) > 0)
@@ -136,11 +133,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             
             $tabs->add_tab(
-                new DynamicContentTab(
-                    1, 
-                    Translation :: get('Struck'), 
-                    Theme :: get_image_path() . 'type/1.png', 
-                    implode("\n", $html)));
+                    new DynamicContentTab(1, Translation :: get('Struck'), Theme :: get_image_path() . 'type/1.png', 
+                            implode("\n", $html)));
         }
         
         return $tabs->render();
@@ -157,17 +151,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $user = \user\DataManager :: retrieve_user_by_official_code($group_user->get_person_id());
         if ($user instanceof \user\User)
         {
-            $profile_link = $this->get_module_link(
-                'application\discovery\module\profile\implementation\bamaflex', 
-                $user->get_id());
+            $profile_link = $this->get_module_link('application\discovery\module\profile\implementation\bamaflex', 
+                    $user->get_id());
             if ($profile_link)
             {
                 $toolbar->add_item($profile_link);
             }
             
-            $career_link = $this->get_module_link(
-                'application\discovery\module\career\implementation\bamaflex', 
-                $user->get_id());
+            $career_link = $this->get_module_link('application\discovery\module\career\implementation\bamaflex', 
+                    $user->get_id());
             if ($career_link)
             {
                 $toolbar->add_item($career_link);

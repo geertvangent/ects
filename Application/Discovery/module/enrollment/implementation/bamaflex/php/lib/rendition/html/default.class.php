@@ -10,6 +10,8 @@ use common\libraries\Translation;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\enrollment\DataManager;
+use common\libraries\Breadcrumb;
+use common\libraries\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -36,12 +38,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $faculty_info_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\faculty_info\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\faculty_info\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         $training_info_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\training_info\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\training_info\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         foreach ($enrollments as $key => $enrollment)
         {
@@ -51,8 +53,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($faculty_info_module_instance)
             {
                 $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
-                    $enrollment->get_faculty_id(), 
-                    $enrollment->get_source());
+                        $enrollment->get_faculty_id(), $enrollment->get_source());
                 $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $enrollment->get_faculty() . '</a>';
             }
@@ -64,8 +65,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($training_info_module_instance)
             {
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
-                    $enrollment->get_training_id(), 
-                    $enrollment->get_source());
+                        $enrollment->get_training_id(), $enrollment->get_source());
                 $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $enrollment->get_training() . '</a>';
             }
@@ -84,14 +84,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             if ($enrollment->is_special_result())
             {
-                $image = '<img src="' . Theme :: get_image_path() . 'result_type/' . $enrollment->get_result() .
-                     '.png" alt="' . Translation :: get($enrollment->get_result_string()) . '" title="' .
-                     Translation :: get($enrollment->get_result_string()) . '" />';
+                $image = '<img src="' . Theme :: get_image_path() . 'result_type/' . $enrollment->get_result() . '.png" alt="' . Translation :: get(
+                        $enrollment->get_result_string()) . '" title="' . Translation :: get(
+                        $enrollment->get_result_string()) . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get($enrollment->get_result_string()), 
-                    Translation :: get('ResultType'));
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get($enrollment->get_result_string()), 
+                        Translation :: get('ResultType'));
             }
             else
             {
@@ -100,14 +98,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             if ($enrollment->get_generation_student() == 1)
             {
-                $image = '<img src="' . Theme :: get_image_path() . 'generation_student/' .
-                     $enrollment->get_generation_student() . '.png" alt="' . Translation :: get('GenerationStudent') .
-                     '" title="' . Translation :: get('GenerationStudent') . '" />';
+                $image = '<img src="' . Theme :: get_image_path() . 'generation_student/' . $enrollment->get_generation_student() . '.png" alt="' . Translation :: get(
+                        'GenerationStudent') . '" title="' . Translation :: get('GenerationStudent') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get('GenerationStudent'), 
-                    Translation :: get('Enrollment'));
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('GenerationStudent'), 
+                        Translation :: get('Enrollment'));
             }
             else
             {
@@ -144,15 +139,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(
-            Rights :: VIEW_RIGHT, 
-            $entities, 
-            $this->get_module_instance()->get_id(), 
-            $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
+                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -161,24 +155,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($this->get_enrollments()) > 0)
         {
             $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types(
-                $this->get_module_parameters());
+                    $this->get_module_parameters());
             
             $tabs = new DynamicTabsRenderer('enrollment_list');
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Enrollment :: CONTRACT_TYPE_ALL, 
-                    Translation :: get('AllContracts'), 
-                    Theme :: get_image_path() . 'contract_type/0.png', 
-                    $this->get_enrollments_table(Enrollment :: CONTRACT_TYPE_ALL)->toHTML()));
+                    new DynamicContentTab(Enrollment :: CONTRACT_TYPE_ALL, Translation :: get('AllContracts'), 
+                            Theme :: get_image_path() . 'contract_type/0.png', 
+                            $this->get_enrollments_table(Enrollment :: CONTRACT_TYPE_ALL)->toHTML()));
             
             foreach ($contract_types as $contract_type)
             {
                 $tabs->add_tab(
-                    new DynamicContentTab(
-                        $contract_type, 
-                        Translation :: get(Enrollment :: contract_type_string($contract_type)), 
-                        Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', 
-                        $this->get_enrollments_table($contract_type)->toHTML()));
+                        new DynamicContentTab($contract_type, 
+                                Translation :: get(Enrollment :: contract_type_string($contract_type)), 
+                                Theme :: get_image_path() . 'contract_type/' . $contract_type . '.png', 
+                                $this->get_enrollments_table($contract_type)->toHTML()));
             }
             
             $html[] = $tabs->render();

@@ -34,54 +34,40 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $tabs = new DynamicTabsRenderer('course');
         $tabs->add_tab(
-            new DynamicContentTab(
-                Module :: TAB_GENERAL, 
-                Translation :: get('General'), 
-                Theme :: get_image_path() . 'tabs/' . Module :: TAB_GENERAL . '.png', 
-                $this->get_general()));
+                new DynamicContentTab(Module :: TAB_GENERAL, Translation :: get('General'), 
+                        Theme :: get_image_path() . 'tabs/' . Module :: TAB_GENERAL . '.png', $this->get_general()));
         if ($course->has_materials())
         {
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Module :: TAB_MATERIALS, 
-                    Translation :: get('Materials'), 
-                    Theme :: get_image_path() . 'tabs/' . Module :: TAB_MATERIALS . '.png', 
-                    $this->get_materials()));
+                    new DynamicContentTab(Module :: TAB_MATERIALS, Translation :: get('Materials'), 
+                            Theme :: get_image_path() . 'tabs/' . Module :: TAB_MATERIALS . '.png', 
+                            $this->get_materials()));
         }
         if ($course->has_activities())
         {
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Module :: TAB_ACTIVITIES, 
-                    Translation :: get('Activities'), 
-                    Theme :: get_image_path() . 'tabs/' . Module :: TAB_ACTIVITIES . '.png', 
-                    $this->get_activities()));
+                    new DynamicContentTab(Module :: TAB_ACTIVITIES, Translation :: get('Activities'), 
+                            Theme :: get_image_path() . 'tabs/' . Module :: TAB_ACTIVITIES . '.png', 
+                            $this->get_activities()));
         }
         if ($course->has_competences())
         {
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Module :: TAB_COMPETENCES, 
-                    Translation :: get('Competences'), 
-                    Theme :: get_image_path() . 'tabs/' . Module :: TAB_COMPETENCES . '.png', 
-                    $this->get_competences()));
+                    new DynamicContentTab(Module :: TAB_COMPETENCES, Translation :: get('Competences'), 
+                            Theme :: get_image_path() . 'tabs/' . Module :: TAB_COMPETENCES . '.png', 
+                            $this->get_competences()));
         }
         if ($course->has_content())
         {
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Module :: TAB_CONTENT, 
-                    Translation :: get('Content'), 
-                    Theme :: get_image_path() . 'tabs/' . Module :: TAB_CONTENT . '.png', 
-                    $this->get_content()));
+                    new DynamicContentTab(Module :: TAB_CONTENT, Translation :: get('Content'), 
+                            Theme :: get_image_path() . 'tabs/' . Module :: TAB_CONTENT . '.png', $this->get_content()));
         }
         
         $tabs->add_tab(
-            new DynamicContentTab(
-                Module :: TAB_EVALUATIONS, 
-                Translation :: get('Evaluations'), 
-                Theme :: get_image_path() . 'tabs/' . Module :: TAB_EVALUATIONS . '.png', 
-                $this->get_evaluations()));
+                new DynamicContentTab(Module :: TAB_EVALUATIONS, Translation :: get('Evaluations'), 
+                        Theme :: get_image_path() . 'tabs/' . Module :: TAB_EVALUATIONS . '.png', 
+                        $this->get_evaluations()));
         
         $html[] = $tabs->render();
         return implode("\n", $html);
@@ -92,16 +78,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data_source = $this->get_module_instance()->get_setting('data_source');
         
         $faculty_info_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\faculty_info\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\faculty_info\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         $training_info_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\training_info\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\training_info\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         $teaching_assignment_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\teaching_assignment\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\teaching_assignment\implementation\bamaflex', 
+                array('data_source' => $data_source));
         
         $course = $this->get_course();
         $html = array();
@@ -122,8 +108,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if ($training_info_module_instance)
         {
             $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
-                $course->get_training_id(), 
-                $course->get_source());
+                    $course->get_training_id(), $course->get_source());
             $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Training')] = '<a href="' . $url . '">' . $course->get_training() . '</a>';
         }
@@ -135,8 +120,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if ($faculty_info_module_instance)
         {
             $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
-                $course->get_faculty_id(), 
-                $course->get_source());
+                    $course->get_faculty_id(), $course->get_source());
             $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $course->get_faculty() . '</a>';
         }
@@ -159,9 +143,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $parameters = new Parameters($child->get_id(), $child->get_source());
                 $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
                 $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
-                $programme_parts[] = Translation :: get(
-                    'CreditAmount', 
-                    array('COURSE' => $link, 'CREDITS' => $child->get_credits()));
+                $programme_parts[] = Translation :: get('CreditAmount', 
+                        array('COURSE' => $link, 'CREDITS' => $child->get_credits()));
             }
             $properties[Translation :: get('ProgrammeParts')] = implode('<br/>', $programme_parts);
         }
@@ -170,14 +153,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             if (! is_null($course->get_timeframe_visual_id()))
             {
-                $image = '<img src="' . Theme :: get_image_path() . 'general/timeframe/' .
-                     $course->get_timeframe_visual_id() . '.png" alt="' . Translation :: get($course->get_timeframe()) .
-                     '" title="' . Translation :: get($course->get_timeframe()) . '"/>';
+                $image = '<img src="' . Theme :: get_image_path() . 'general/timeframe/' . $course->get_timeframe_visual_id() . '.png" alt="' . Translation :: get(
+                        $course->get_timeframe()) . '" title="' . Translation :: get($course->get_timeframe()) . '"/>';
                 $properties[Translation :: get('Timeframe')] = $image;
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get($course->get_timeframe()), 
-                    Translation :: get('Timeframe'));
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get($course->get_timeframe()), 
+                        Translation :: get('Timeframe'));
                 
                 $properties[Translation :: get('TimeframeParts')] = $course->get_timeframe_parts_string();
             }
@@ -210,7 +190,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         if ($user)
                         {
                             $parameters = new \application\discovery\module\teaching_assignment\Parameters(
-                                $user->get_id());
+                                    $user->get_id());
                             $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
                             
                             $coordinators[] = '<a href="' . $url . '">' . $coordinator . '</a>';
@@ -242,7 +222,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         if ($user)
                         {
                             $parameters = new \application\discovery\module\teaching_assignment\Parameters(
-                                $user->get_id());
+                                    $user->get_id());
                             $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
                             
                             $teachers[] = '<a href="' . $url . '">' . $teacher . '</a>';
@@ -267,34 +247,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
         
         $images = array();
-        $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/degree.png" alt="' .
-             Translation :: get('DegreePossible') . '" title="' . Translation :: get('DegreePossible') . '"/>';
-        LegendTable :: get_instance()->add_symbol(
-            $image, 
-            Translation :: get('DegreePossible'), 
-            Translation :: get('FollowingPossible'));
+        $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/degree.png" alt="' . Translation :: get(
+                'DegreePossible') . '" title="' . Translation :: get('DegreePossible') . '"/>';
+        LegendTable :: get_instance()->add_symbol($image, Translation :: get('DegreePossible'), 
+                Translation :: get('FollowingPossible'));
         $images[] = $image;
         if (! is_null($course->get_following_impossible()->get_credit()))
         {
             if ($course->get_following_impossible()->get_credit())
             {
-                $image = '<img src="' . Theme :: get_image_path() .
-                     'general/following_impossible/credit_impossible.png" alt="' . Translation :: get(
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit_impossible.png" alt="' . Translation :: get(
                         'CreditImpossible') . '" title="' . Translation :: get('CreditImpossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get('CreditImpossible'), 
-                    Translation :: get('FollowingPossible'));
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('CreditImpossible'), 
+                        Translation :: get('FollowingPossible'));
                 $images[] = $image;
             }
             else
             {
-                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit.png" alt="' .
-                     Translation :: get('CreditPossible') . '" title="' . Translation :: get('CreditPossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get('CreditPossible'), 
-                    Translation :: get('FollowingPossible'));
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/credit.png" alt="' . Translation :: get(
+                        'CreditPossible') . '" title="' . Translation :: get('CreditPossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('CreditPossible'), 
+                        Translation :: get('FollowingPossible'));
                 $images[] = $image;
             }
         }
@@ -303,25 +276,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             if ($course->get_following_impossible()->get_exam_degree())
             {
-                $image = '<img src="' . Theme :: get_image_path() .
-                     'general/following_impossible/exam_degree_impossible.png" alt="' .
-                     Translation :: get('ExamDegreeImpossible') . '" title="' .
-                     Translation :: get('ExamDegreeImpossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get('ExamDegreeImpossible'), 
-                    Translation :: get('FollowingPossible'));
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree_impossible.png" alt="' . Translation :: get(
+                        'ExamDegreeImpossible') . '" title="' . Translation :: get('ExamDegreeImpossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamDegreeImpossible'), 
+                        Translation :: get('FollowingPossible'));
                 $images[] = $image;
             }
             else
             {
-                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree.png" alt="' .
-                     Translation :: get('ExamDegreePossible') . '" title="' . Translation :: get('ExamDegreePossible') .
-                     '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get('ExamDegreePossible'), 
-                    Translation :: get('FollowingPossible'));
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_degree.png" alt="' . Translation :: get(
+                        'ExamDegreePossible') . '" title="' . Translation :: get('ExamDegreePossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamDegreePossible'), 
+                        Translation :: get('FollowingPossible'));
                 $images[] = $image;
             }
         }
@@ -330,25 +296,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             if ($course->get_following_impossible()->get_exam_credit())
             {
-                $image = '<img src="' . Theme :: get_image_path() .
-                     'general/following_impossible/exam_credit_impossible.png" alt="' .
-                     Translation :: get('ExamCreditImpossible') . '" title="' .
-                     Translation :: get('ExamCreditImpossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get('ExamCreditImpossible'), 
-                    Translation :: get('FollowingPossible'));
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit_impossible.png" alt="' . Translation :: get(
+                        'ExamCreditImpossible') . '" title="' . Translation :: get('ExamCreditImpossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamCreditImpossible'), 
+                        Translation :: get('FollowingPossible'));
                 $images[] = $image;
             }
             else
             {
-                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit.png" alt="' .
-                     Translation :: get('ExamCreditPossible') . '" title="' . Translation :: get('ExamCreditPossible') .
-                     '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get('ExamCreditPossible'), 
-                    Translation :: get('FollowingPossible'));
+                $image = '<img src="' . Theme :: get_image_path() . 'general/following_impossible/exam_credit.png" alt="' . Translation :: get(
+                        'ExamCreditPossible') . '" title="' . Translation :: get('ExamCreditPossible') . '"/>';
+                LegendTable :: get_instance()->add_symbol($image, Translation :: get('ExamCreditPossible'), 
+                        Translation :: get('FollowingPossible'));
                 $images[] = $image;
             }
         }
@@ -357,8 +316,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $photo_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\photo\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\photo\implementation\bamaflex', array('data_source' => $data_source));
         
         if ($photo_module_instance)
         {
@@ -369,20 +327,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_STUDENT);
             
             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
-            $image = Theme :: get_image(
-                'type/2', 
-                'png', 
-                Translation :: get('Students', null, 'application\discovery\module\photo'), 
-                $url, 
-                ToolbarItem :: DISPLAY_ICON, 
-                false, 
-                'application\discovery\module\photo');
+            $image = Theme :: get_image('type/2', 'png', 
+                    Translation :: get('Students', null, 'application\discovery\module\photo'), $url, 
+                    ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
             $buttons[] = $image;
-            LegendTable :: get_instance()->add_symbol(
-                $image, 
-                Translation :: get('Students', null, 'application\discovery\module\photo
+            LegendTable :: get_instance()->add_symbol($image, 
+                    Translation :: get('Students', null, 'application\discovery\module\photo
                     '), 
-                Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
             
             // teachers
             $parameters = new \application\discovery\module\photo\Parameters();
@@ -391,48 +343,34 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
             
-            $image = Theme :: get_image(
-                'type/1', 
-                'png', 
-                Translation :: get('Teachers', null, 'application\discovery\module\photo
-                    '), 
-                $url, 
-                ToolbarItem :: DISPLAY_ICON, 
-                false, 
-                'application\discovery\module\photo');
+            $image = Theme :: get_image('type/1', 'png', 
+                    Translation :: get('Teachers', null, 'application\discovery\module\photo
+                    '), $url, 
+                    ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
             $buttons[] = $image;
-            LegendTable :: get_instance()->add_symbol(
-                $image, 
-                Translation :: get('Teachers', null, 'application\discovery\module\photo
+            LegendTable :: get_instance()->add_symbol($image, 
+                    Translation :: get('Teachers', null, 'application\discovery\module\photo
                     '), 
-                Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
             
             $properties[Translation :: get('Photos')] = implode("\n", $buttons);
         }
         
         $course_result_module_instance = \application\discovery\Module :: exists(
-            'application\discovery\module\course_results\implementation\bamaflex', 
-            array('data_source' => $data_source));
+                'application\discovery\module\course_results\implementation\bamaflex', 
+                array('data_source' => $data_source));
         if ($course_result_module_instance)
         {
             $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
-                $course->get_id(), 
-                $course->get_source());
+                    $course->get_id(), $course->get_source());
             $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-            $properties[Translation :: get(
-                'TypeName', 
-                null, 
-                'application\discovery\module\course_results\implementation\bamaflex')] = Theme :: get_image(
-                'logo/16', 
-                'png', 
-                Translation :: get(
-                    'TypeName', 
-                    null, 
-                    'application\discovery\module\course_results\implementation\bamaflex'), 
-                $url, 
-                ToolbarItem :: DISPLAY_ICON, 
-                false, 
-                'application\discovery\module\course_results\implementation\bamaflex');
+            $properties[Translation :: get('TypeName', null, 
+                    'application\discovery\module\course_results\implementation\bamaflex')] = Theme :: get_image(
+                    'logo/16', 'png', 
+                    Translation :: get('TypeName', null, 
+                            'application\discovery\module\course_results\implementation\bamaflex'), $url, 
+                    ToolbarItem :: DISPLAY_ICON, false, 
+                    'application\discovery\module\course_results\implementation\bamaflex');
         }
         
         $table = new PropertiesTable($properties);
@@ -449,20 +387,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if ($course->has_materials(Material :: TYPE_REQUIRED))
         {
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Material :: TYPE_REQUIRED, 
-                    Translation :: get('Required'), 
-                    null, 
-                    $this->get_materials_by_type(Material :: TYPE_REQUIRED)));
+                    new DynamicContentTab(Material :: TYPE_REQUIRED, Translation :: get('Required'), null, 
+                            $this->get_materials_by_type(Material :: TYPE_REQUIRED)));
         }
         if ($course->has_materials(Material :: TYPE_OPTIONAL))
         {
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Material :: TYPE_OPTIONAL, 
-                    Translation :: get('Optional'), 
-                    null, 
-                    $this->get_materials_by_type(Material :: TYPE_OPTIONAL)));
+                    new DynamicContentTab(Material :: TYPE_OPTIONAL, Translation :: get('Optional'), null, 
+                            $this->get_materials_by_type(Material :: TYPE_OPTIONAL)));
         }
         
         return $tabs->render();
@@ -479,22 +411,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($course->has_materials($type, false))
             {
                 $tabs->add_tab(
-                    new DynamicContentTab(
-                        $course->get_id(), 
-                        Translation :: get('General'), 
-                        null, 
-                        $this->get_course_materials_by_type($course, $type)));
+                        new DynamicContentTab($course->get_id(), Translation :: get('General'), null, 
+                                $this->get_course_materials_by_type($course, $type)));
             }
             foreach ($course->get_children() as $child)
             {
                 if ($child->has_materials($type, false))
                 {
                     $tabs->add_tab(
-                        new DynamicContentTab(
-                            $child->get_id(), 
-                            $child->get_name(), 
-                            null, 
-                            $this->get_course_materials_by_type($child, $type)));
+                            new DynamicContentTab($child->get_id(), $child->get_name(), null, 
+                                    $this->get_course_materials_by_type($child, $type)));
                 }
             }
             $html[] = $tabs->render();
@@ -549,22 +475,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 
                 if ($material->get_for_sale())
                 {
-                    $image = '<img src="' . Theme :: get_image_path() . 'material/for_sale.png" alt="' .
-                         Translation :: get('IsForSale') . '" title="' . Translation :: get('IsForSale') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
-                        $image, 
-                        Translation :: get('IsForSale'), 
-                        Translation :: get('ForSale'));
+                    $image = '<img src="' . Theme :: get_image_path() . 'material/for_sale.png" alt="' . Translation :: get(
+                            'IsForSale') . '" title="' . Translation :: get('IsForSale') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsForSale'), 
+                            Translation :: get('ForSale'));
                     $table_row[] = $image;
                 }
                 else
                 {
-                    $image = '<img src="' . Theme :: get_image_path() . 'material/not_for_sale.png" alt="' .
-                         Translation :: get('IsNotForSale') . '" title="' . Translation :: get('IsNotForSale') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
-                        $image, 
-                        Translation :: get('IsNotForSale'), 
-                        Translation :: get('ForSale'));
+                    $image = '<img src="' . Theme :: get_image_path() . 'material/not_for_sale.png" alt="' . Translation :: get(
+                            'IsNotForSale') . '" title="' . Translation :: get('IsNotForSale') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsNotForSale'), 
+                            Translation :: get('ForSale'));
                     $table_row[] = $image;
                 }
                 
@@ -606,22 +528,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($course->has_activities(false))
             {
                 $tabs->add_tab(
-                    new DynamicContentTab(
-                        $course->get_id(), 
-                        Translation :: get('General'), 
-                        null, 
-                        $this->get_course_activities($course)));
+                        new DynamicContentTab($course->get_id(), Translation :: get('General'), null, 
+                                $this->get_course_activities($course)));
             }
             foreach ($course->get_children() as $child)
             {
                 if ($child->has_activities(false))
                 {
                     $tabs->add_tab(
-                        new DynamicContentTab(
-                            $child->get_id(), 
-                            $child->get_name(), 
-                            null, 
-                            $this->get_course_activities($child)));
+                            new DynamicContentTab($child->get_id(), $child->get_name(), null, 
+                                    $this->get_course_activities($child)));
                 }
             }
             $html[] = $tabs->render();
@@ -694,20 +610,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($course->get_competences_by_type(Competence :: TYPE_BEGIN)) > 0)
         {
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Competence :: TYPE_BEGIN, 
-                    Translation :: get('BeginCompetence'), 
-                    Theme :: get_image_path() . 'competence/tabs/' . Competence :: TYPE_BEGIN . '.png', 
-                    $this->get_competences_by_type(Competence :: TYPE_BEGIN)));
+                    new DynamicContentTab(Competence :: TYPE_BEGIN, Translation :: get('BeginCompetence'), 
+                            Theme :: get_image_path() . 'competence/tabs/' . Competence :: TYPE_BEGIN . '.png', 
+                            $this->get_competences_by_type(Competence :: TYPE_BEGIN)));
         }
         if (count($course->get_competences_by_type(Competence :: TYPE_END)) > 0)
         {
             $tabs->add_tab(
-                new DynamicContentTab(
-                    Competence :: TYPE_END, 
-                    Translation :: get('EndCompetence'), 
-                    Theme :: get_image_path() . 'competence/tabs/' . Competence :: TYPE_END . '.png', 
-                    $this->get_competences_by_type(Competence :: TYPE_END)));
+                    new DynamicContentTab(Competence :: TYPE_END, Translation :: get('EndCompetence'), 
+                            Theme :: get_image_path() . 'competence/tabs/' . Competence :: TYPE_END . '.png', 
+                            $this->get_competences_by_type(Competence :: TYPE_END)));
         }
         return $tabs->render();
     }
@@ -723,22 +635,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($course->has_competences($type, false))
             {
                 $tabs->add_tab(
-                    new DynamicContentTab(
-                        $course->get_id(), 
-                        Translation :: get('General'), 
-                        null, 
-                        $this->get_course_competences_by_type($course, $type)));
+                        new DynamicContentTab($course->get_id(), Translation :: get('General'), null, 
+                                $this->get_course_competences_by_type($course, $type)));
             }
             foreach ($course->get_children() as $child)
             {
                 if ($child->has_competences($type, false))
                 {
                     $tabs->add_tab(
-                        new DynamicContentTab(
-                            $child->get_id(), 
-                            $child->get_name(), 
-                            null, 
-                            $this->get_course_competences_by_type($child, $type)));
+                            new DynamicContentTab($child->get_id(), $child->get_name(), null, 
+                                    $this->get_course_competences_by_type($child, $type)));
                 }
             }
             $html[] = $tabs->render();
@@ -801,22 +707,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($course->has_content(false))
             {
                 $tabs->add_tab(
-                    new DynamicContentTab(
-                        $course->get_id(), 
-                        Translation :: get('General'), 
-                        null, 
-                        $this->get_course_contents($course)));
+                        new DynamicContentTab($course->get_id(), Translation :: get('General'), null, 
+                                $this->get_course_contents($course)));
             }
             foreach ($course->get_children() as $child)
             {
                 if ($child->has_content(false))
                 {
                     $tabs->add_tab(
-                        new DynamicContentTab(
-                            $child->get_id(), 
-                            $child->get_name(), 
-                            null, 
-                            $this->get_course_contents($child)));
+                            new DynamicContentTab($child->get_id(), $child->get_name(), null, 
+                                    $this->get_course_contents($child)));
                 }
             }
             $html[] = $tabs->render();
@@ -835,8 +735,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         if (! StringUtilities :: is_null_or_empty($course->get_goals(), true))
         {
-            $html[] = '<div class="content_object" style="background-image: url(' .
-                 Theme :: get_image_path(__NAMESPACE__) . 'content/goals.png);">';
+            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
+                    __NAMESPACE__) . 'content/goals.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('Goals');
             $html[] = '</div>';
@@ -848,8 +748,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         if (! StringUtilities :: is_null_or_empty($course->get_contents(), true))
         {
-            $html[] = '<div class="content_object" style="background-image: url(' .
-                 Theme :: get_image_path(__NAMESPACE__) . 'content/contents.png);">';
+            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
+                    __NAMESPACE__) . 'content/contents.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('Contents');
             $html[] = '</div>';
@@ -860,8 +760,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
         if (! StringUtilities :: is_null_or_empty($course->get_coaching(), true))
         {
-            $html[] = '<div class="content_object" style="background-image: url(' .
-                 Theme :: get_image_path(__NAMESPACE__) . 'content/coaching.png);">';
+            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
+                    __NAMESPACE__) . 'content/coaching.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('Coaching');
             $html[] = '</div>';
@@ -872,8 +772,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
         if (! StringUtilities :: is_null_or_empty($course->get_succession(), true))
         {
-            $html[] = '<div class="content_object" style="background-image: url(' .
-                 Theme :: get_image_path(__NAMESPACE__) . 'content/succession.png);">';
+            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
+                    __NAMESPACE__) . 'content/succession.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('Succession');
             $html[] = '</div>';
@@ -895,20 +795,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $tabs = new DynamicTabsRenderer('course_evaluations');
             
             $tabs->add_tab(
-                new DynamicContentTab(
-                    $course->get_id(), 
-                    Translation :: get('General'), 
-                    null, 
-                    $this->get_course_evaluations($course)));
+                    new DynamicContentTab($course->get_id(), Translation :: get('General'), null, 
+                            $this->get_course_evaluations($course)));
             
             foreach ($course->get_children() as $child)
             {
                 $tabs->add_tab(
-                    new DynamicContentTab(
-                        $child->get_id(), 
-                        $child->get_name(), 
-                        null, 
-                        $this->get_course_evaluations($child)));
+                        new DynamicContentTab($child->get_id(), $child->get_name(), null, 
+                                $this->get_course_evaluations($child)));
             }
             $html[] = $tabs->render();
         }
@@ -928,39 +822,29 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $properties = array();
         $properties[Translation :: get('Credits')] = $course->get_credits();
         $properties[Translation :: get('Weight')] = $course->get_weight();
-        if (($course->get_programme_type() == Course :: PROGRAMME_TYPE_SIMPLE ||
-             $course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX) && ! is_null(
+        if (($course->get_programme_type() == Course :: PROGRAMME_TYPE_SIMPLE || $course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX) && ! is_null(
                 $course->get_deliberation()))
         {
-            $properties[Translation :: get('Deliberation')] = Translation :: get(
-                'DeliberationInfo', 
-                array('DELIBERATION' => $course->get_deliberation()));
+            $properties[Translation :: get('Deliberation')] = Translation :: get('DeliberationInfo', 
+                    array('DELIBERATION' => $course->get_deliberation()));
         }
-        if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_SIMPLE ||
-             $course->get_programme_type() == Course :: PROGRAMME_TYPE_PART)
+        if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_SIMPLE || $course->get_programme_type() == Course :: PROGRAMME_TYPE_PART)
         {
             $properties[Translation :: get('Quotation')] = Translation :: get($course->get_result_scale_string());
             $second_chance = array();
             if ($course->get_second_chance()->get_exam())
             {
-                $exam_image = '<img src="' . Theme :: get_image_path() .
-                     'evaluation/second_chance/exam_allowed.png" alt="' . Translation :: get('SecondChanceExamAllowed') .
-                     '" title="' . Translation :: get('SecondChanceExamAllowed') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $exam_image, 
-                    Translation :: get('SecondChanceExamAllowed'), 
-                    Translation :: get('SecondChanceExam'));
+                $exam_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_allowed.png" alt="' . Translation :: get(
+                        'SecondChanceExamAllowed') . '" title="' . Translation :: get('SecondChanceExamAllowed') . '"/>';
+                LegendTable :: get_instance()->add_symbol($exam_image, Translation :: get('SecondChanceExamAllowed'), 
+                        Translation :: get('SecondChanceExam'));
             }
             else
             {
-                $exam_image = '<img src="' . Theme :: get_image_path() .
-                     'evaluation/second_chance/exam_not_allowed.png" alt="' .
-                     Translation :: get('SecondChanceExamNotAllowed') . '" title="' .
-                     Translation :: get('SecondChanceExamNotAllowed') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $exam_image, 
-                    Translation :: get('SecondChanceExamNotAllowed'), 
-                    Translation :: get('SecondChanceExam'));
+                $exam_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_not_allowed.png" alt="' . Translation :: get(
+                        'SecondChanceExamNotAllowed') . '" title="' . Translation :: get('SecondChanceExamNotAllowed') . '"/>';
+                LegendTable :: get_instance()->add_symbol($exam_image, Translation :: get('SecondChanceExamNotAllowed'), 
+                        Translation :: get('SecondChanceExam'));
             }
             $second_chance[] = $exam_image;
             
@@ -968,25 +852,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 if ($course->get_second_chance()->get_enrollment())
                 {
-                    $enrollment_image = '<img src="' . Theme :: get_image_path() .
-                         'evaluation/second_chance/enrollment_allowed.png" alt="' .
-                         Translation :: get('SecondChanceEnrollmentAllowed') . '" title="' .
-                         Translation :: get('SecondChanceEnrollmentAllowed') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
-                        $enrollment_image, 
-                        Translation :: get('SecondChanceEnrollmentAllowed'), 
-                        Translation :: get('SecondChanceEnrollment'));
+                    $enrollment_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/enrollment_allowed.png" alt="' . Translation :: get(
+                            'SecondChanceEnrollmentAllowed') . '" title="' . Translation :: get(
+                            'SecondChanceEnrollmentAllowed') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($enrollment_image, 
+                            Translation :: get('SecondChanceEnrollmentAllowed'), 
+                            Translation :: get('SecondChanceEnrollment'));
                 }
                 else
                 {
-                    $enrollment_image = '<img src="' . Theme :: get_image_path() .
-                         'evaluation/second_chance/enrollment_not_allowed.png" alt="' .
-                         Translation :: get('SecondChanceEnrollmentNotAllowed') . '" title="' .
-                         Translation :: get('SecondChanceEnrollmentNotAllowed') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
-                        $enrollment_image, 
-                        Translation :: get('SecondChanceEnrollmentNotAllowed'), 
-                        Translation :: get('SecondChanceEnrollment'));
+                    $enrollment_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/enrollment_not_allowed.png" alt="' . Translation :: get(
+                            'SecondChanceEnrollmentNotAllowed') . '" title="' . Translation :: get(
+                            'SecondChanceEnrollmentNotAllowed') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($enrollment_image, 
+                            Translation :: get('SecondChanceEnrollmentNotAllowed'), 
+                            Translation :: get('SecondChanceEnrollment'));
                 }
                 $second_chance[] = $enrollment_image;
             }
@@ -998,7 +878,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if (! is_null($course->get_score_calculation()))
             {
                 $properties[Translation :: get('ScoreCalculation')] = Translation :: get(
-                    $course->get_score_calculation_string());
+                        $course->get_score_calculation_string());
             }
             $quotation_parts = array();
             
@@ -1008,22 +888,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
                 $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
                 
-                $quotation_parts[] = Translation :: get(
-                    'QuotationParts', 
-                    array('COURSE' => $link, 'RESULT_SCALE' => Translation :: get($child->get_result_scale_string())));
+                $quotation_parts[] = Translation :: get('QuotationParts', 
+                        array('COURSE' => $link, 
+                                'RESULT_SCALE' => Translation :: get($child->get_result_scale_string())));
             }
             $properties[Translation :: get('Quotation')] = implode('<br/>', $quotation_parts);
             
             if (! is_null($course->get_second_chance()->get_exam_parts()))
             {
-                $exam_parts_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_parts/' .
-                     $course->get_second_chance()->get_exam_parts() . '.png" alt="' .
-                     Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '" title="' .
-                     Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '"/>';
-                LegendTable :: get_instance()->add_symbol(
-                    $exam_parts_image, 
-                    Translation :: get($course->get_second_chance()->get_exam_parts_string()), 
-                    Translation :: get('SecondChance'));
+                $exam_parts_image = '<img src="' . Theme :: get_image_path() . 'evaluation/second_chance/exam_parts/' . $course->get_second_chance()->get_exam_parts() . '.png" alt="' . Translation :: get(
+                        $course->get_second_chance()->get_exam_parts_string()) . '" title="' . Translation :: get(
+                        $course->get_second_chance()->get_exam_parts_string()) . '"/>';
+                LegendTable :: get_instance()->add_symbol($exam_parts_image, 
+                        Translation :: get($course->get_second_chance()->get_exam_parts_string()), 
+                        Translation :: get('SecondChance'));
                 
                 $properties[Translation :: get('SecondChance')] = $exam_parts_image;
             }
@@ -1057,23 +935,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 
                 if ($evaluation->get_permanent())
                 {
-                    $image = '<img src="' . Theme :: get_image_path() . 'evaluation/permanent.png" alt="' .
-                         Translation :: get('IsPermanent') . '" title="' . Translation :: get('IsPermanent') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
-                        $image, 
-                        Translation :: get('IsPermanent'), 
-                        Translation :: get('Permanent'));
+                    $image = '<img src="' . Theme :: get_image_path() . 'evaluation/permanent.png" alt="' . Translation :: get(
+                            'IsPermanent') . '" title="' . Translation :: get('IsPermanent') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsPermanent'), 
+                            Translation :: get('Permanent'));
                     $table_row[] = $image;
                 }
                 else
                 {
-                    $image = '<img src="' . Theme :: get_image_path() . 'evaluation/not_permanent.png" alt="' .
-                         Translation :: get('IsNotPermanent') . '" title="' . Translation :: get('IsNotPermanent') .
-                         '"/>';
-                    LegendTable :: get_instance()->add_symbol(
-                        $image, 
-                        Translation :: get('IsNotPermanent'), 
-                        Translation :: get('Permanent'));
+                    $image = '<img src="' . Theme :: get_image_path() . 'evaluation/not_permanent.png" alt="' . Translation :: get(
+                            'IsNotPermanent') . '" title="' . Translation :: get('IsNotPermanent') . '"/>';
+                    LegendTable :: get_instance()->add_symbol($image, Translation :: get('IsNotPermanent'), 
+                            Translation :: get('Permanent'));
                     $table_row[] = $image;
                 }
                 
