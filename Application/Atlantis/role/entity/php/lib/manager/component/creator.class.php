@@ -21,7 +21,6 @@ class CreatorComponent extends Manager
         if ($form->validate())
         {
             $values = $form->exportValues();
-            
             $failures = 0;
             foreach ($values['entity'] as $entity_type => $entity_ids)
             {
@@ -34,7 +33,7 @@ class CreatorComponent extends Manager
                             $entity = new RoleEntity();
                             $entity->set_entity_id($entity_id);
                             $entity->set_entity_type(
-                                    $entity_type == 'user' ? UserEntity :: ENTITY_TYPE : PlatformGroupEntity :: ENTITY_TYPE);
+                                    $entity_type == 1 ? UserEntity :: ENTITY_TYPE : PlatformGroupEntity :: ENTITY_TYPE);
                             $entity->set_role_id($role);
                             $entity->set_context_id($context);
                             $entity->set_start_date(Utilities :: time_from_datepicker($values['start_date']));
