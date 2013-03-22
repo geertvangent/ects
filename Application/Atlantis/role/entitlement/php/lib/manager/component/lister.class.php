@@ -1,6 +1,7 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
+use application\atlantis\role\Role;
 use common\libraries\DelegateComponent;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
@@ -27,21 +28,21 @@ class ListerComponent extends Manager implements DelegateComponent
         
         // for each application, a list of rights
         $applications = \application\atlantis\application\DataManager :: retrieves(
-            \application\atlantis\application\Application :: class_name());
+                \application\atlantis\application\Application :: class_name());
         if (! $this->application_id)
         {
             $this->application_id = $applications->next_result()->get_id();
             $applications->reset();
         }
         
-        $form = new EntitlementForm(
-            $this, 
-            $this->get_url(
-                array(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $this->application_id)));
+        $form = new EntitlementForm($this, 
+                $this->get_url(
+                        array(
+                                \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $this->application_id)));
         if ($form->validate())
         {
             $parameters = new DataClassRetrievesParameters(
-                new EqualityCondition(Entitlement :: PROPERTY_ROLE_ID, $this->role_id));
+                    new EqualityCondition(Entitlement :: PROPERTY_ROLE_ID, $this->role_id));
             $entitlements = DataManager :: retrieves(Entitlement :: class_name(), $parameters);
             $stored_rights = array();
             while ($entitlement = $entitlements->next_result())
@@ -65,7 +66,7 @@ class ListerComponent extends Manager implements DelegateComponent
             foreach ($to_delete as $right_id)
             {
                 if (! DataManager :: delete(
-                    DataManager :: retrieve(Entitlement :: class_name(), (int) $stored_entitlements[$right_id])))
+                        DataManager :: retrieve(Entitlement :: class_name(), (int) $stored_entitlements[$right_id])))
                 {
                     $failures ++;
                 }
@@ -114,12 +115,10 @@ class ListerComponent extends Manager implements DelegateComponent
                 }
             }
             
-            $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
-                ($failures ? true : false), 
-                array(
-                    Manager :: PARAM_ACTION => Manager :: ACTION_LIST, 
-                    \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $this->application_id));
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                    ($failures ? true : false), 
+                    array(Manager :: PARAM_ACTION => Manager :: ACTION_LIST, 
+                            \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $this->application_id));
         }
         else
         {
@@ -128,9 +127,8 @@ class ListerComponent extends Manager implements DelegateComponent
             while ($application = $applications->next_result())
             {
                 $link = $this->get_url(
-                    array(
-                        \application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->role_id, 
-                        \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $application->get_id()));
+                        array(\application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->role_id, 
+                                \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $application->get_id()));
                 if ($application->get_id() == $this->application_id)
                 {
                     $selected = true;
@@ -141,7 +139,7 @@ class ListerComponent extends Manager implements DelegateComponent
                 }
                 
                 $tabs->add_tab(
-                    new DynamicVisualTab($application->get_id, $application->get_name(), '', $link, $selected));
+                        new DynamicVisualTab($application->get_id, $application->get_name(), '', $link, $selected));
             }
             $this->add_breadcrumb();
             $this->display_header();
@@ -162,9 +160,8 @@ class ListerComponent extends Manager implements DelegateComponent
 
     public function add_breadcrumb()
     {
-        $role = \application\atlantis\role\DataManager :: retrieve(
-            \application\atlantis\role\Role :: class_name(), 
-            (int) $this->role_id);
+        $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(), 
+                (int) $this->role_id);
         
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
     }
