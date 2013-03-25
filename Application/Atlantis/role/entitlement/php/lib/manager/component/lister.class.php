@@ -1,6 +1,7 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
+use application\atlantis\SessionBreadcrumbs;
 use application\atlantis\role\Role;
 use common\libraries\DelegateComponent;
 use common\libraries\Breadcrumb;
@@ -25,6 +26,13 @@ class ListerComponent extends Manager implements DelegateComponent
         $renderer_name = Utilities :: get_classname_from_object($this, true);
         $this->role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
         $this->application_id = Request :: get(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID);
+        $role = \application\atlantis\role\DataManager :: retrieve_by_id(
+                \application\atlantis\role\Role :: class_name(), (int) $this->role_id);
+        
+        SessionBreadcrumbs :: add(
+                new Breadcrumb($this->get_url(), 
+                        Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()), 
+                                array('ROLE' => $role->get_name()))));
         
         // for each application, a list of rights
         $applications = \application\atlantis\application\DataManager :: retrieves(

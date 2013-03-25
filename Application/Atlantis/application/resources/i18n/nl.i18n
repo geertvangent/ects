@@ -3,7 +3,7 @@
 ; Language = nl
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-TypeName = "Toepassing"
+TypeName = "Toepassingen"
 BrowseApplications = "Lijst van toepassingen"
 BrowseApplicationsDescription = "Geef een lijst weer van alle toepassingen die aan een functie gekoppeld kunnen worden."
 CreateApplication = "Maak toepassing aan"

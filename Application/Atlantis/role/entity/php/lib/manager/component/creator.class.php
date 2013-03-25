@@ -1,8 +1,10 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use rights\PlatformGroupEntity;
-use rights\UserEntity;
+use common\libraries\Breadcrumb;
+use application\atlantis\SessionBreadcrumbs;
+use rights\NewPlatformGroupEntity;
+use rights\NewUserEntity;
 use common\libraries\Utilities;
 use common\libraries\Translation;
 
@@ -11,6 +13,10 @@ class CreatorComponent extends Manager
 
     public function run()
     {
+        SessionBreadcrumbs :: add(
+                new Breadcrumb($this->get_url(), 
+                        Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
+        
         if (! $this->get_user()->is_platform_admin())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
@@ -32,8 +38,7 @@ class CreatorComponent extends Manager
                         {
                             $entity = new RoleEntity();
                             $entity->set_entity_id($entity_id);
-                            $entity->set_entity_type(
-                                    $entity_type == 1 ? UserEntity :: ENTITY_TYPE : PlatformGroupEntity :: ENTITY_TYPE);
+                            $entity->set_entity_type($entity_type);
                             $entity->set_role_id($role);
                             $entity->set_context_id($context);
                             $entity->set_start_date(Utilities :: time_from_datepicker($values['start_date']));
@@ -48,8 +53,8 @@ class CreatorComponent extends Manager
                 }
             }
             
-            $count = (count($values['entity'][UserEntity :: ENTITY_TYPE]) + count(
-                    $values['entity'][PlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
+            $count = (count($values['entity'][NewUserEntity :: ENTITY_TYPE]) + count(
+                    $values['entity'][NewPlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
                     $values['context']) * count($values['start_date']) * count($values['end_date']);
             // var_dump($count);
             if ($failures)

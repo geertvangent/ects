@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\role;
 
+use common\libraries\Breadcrumb;
+use application\atlantis\SessionBreadcrumbs;
 use common\libraries\Utilities;
 use common\libraries\Translation;
 
@@ -9,6 +11,10 @@ class CreatorComponent extends Manager
 
     public function run()
     {
+        SessionBreadcrumbs :: add(
+                new Breadcrumb($this->get_url(), 
+                        Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
+        
         if (! $this->get_user()->is_platform_admin())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
@@ -31,12 +37,9 @@ class CreatorComponent extends Manager
             $parameters[self :: PARAM_ACTION] = self :: ACTION_BROWSE;
             
             $this->redirect(
-                Translation :: get(
-                    $success ? 'ObjectCreated' : 'ObjectNotCreated', 
-                    array('OBJECT' => Translation :: get('Role')), 
-                    Utilities :: COMMON_LIBRARIES), 
-                ($success ? false : true), 
-                $parameters);
+                    Translation :: get($success ? 'ObjectCreated' : 'ObjectNotCreated', 
+                            array('OBJECT' => Translation :: get('Role')), Utilities :: COMMON_LIBRARIES), 
+                    ($success ? false : true), $parameters);
         }
         else
         {

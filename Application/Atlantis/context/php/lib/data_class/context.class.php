@@ -1,6 +1,11 @@
 <?php
 namespace application\atlantis\context;
 
+use common\libraries\DataClassRetrievesParameters;
+use common\libraries\DataClassRetrieveParameters;
+use common\libraries\AndCondition;
+use common\libraries\EqualityCondition;
+use common\libraries\DataClassCountParameters;
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
@@ -156,5 +161,50 @@ class Context extends DataClass
     public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
+    }
+
+    public function has_children()
+    {
+        $conditions = array();
+        $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, $this->get_context_id());
+        $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, $this->get_context_type());
+        $condition = new AndCondition($conditions);
+        
+        return DataManager :: count(Context :: class_name(), new DataClassCountParameters($condition)) > 0;
+    }
+
+    public function is_parent_of($context)
+    {
+        if ($context->get_parent_id() == $this->get_context_id() && $context->get_parent_type() == $this->get_context_type())
+        {
+            
+            return true;
+        }
+        elseif ($this->get_id() == 0)
+        {
+            return true;
+        }
+        elseif ($context->get_parent_id() != 0)
+        {
+            $conditions = array();
+            $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, $this->get_context_id());
+            $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, $this->get_context_type());
+            $condition = new AndCondition($conditions);
+            
+            $children = DataManager :: retrieves(Context :: class_name(), new DataClassRetrievesParameters($condition));
+            while ($child = $children->next_result())
+            {
+                if ($child->is_parent_of($context))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        else
+        {
+            return false;
+        }
     }
 }

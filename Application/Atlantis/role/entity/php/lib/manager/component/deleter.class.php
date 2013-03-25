@@ -11,6 +11,9 @@ class DeleterComponent extends Manager
     public function run()
     {
         $ids = Request :: get(self :: PARAM_ROLE_ENTITY_ID);
+        $context_id = Request :: get(\application\atlantis\context\Manager :: PARAM_CONTEXT_ID);
+        $role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
+        
         $failures = 0;
         
         if (! empty($ids))
@@ -69,19 +72,18 @@ class DeleterComponent extends Manager
                 }
             }
             
-            $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
-                ($failures ? true : false), 
-                array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                    ($failures ? true : false), 
+                    array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE, 
+                            \application\atlantis\role\Manager :: PARAM_ROLE_ID => $role_id, 
+                            \application\atlantis\context\Manager :: PARAM_CONTEXT_ID=> $context_id));
         }
         else
         {
             $this->display_error_page(
-                htmlentities(
-                    Translation :: get(
-                        'NoObjectSelected', 
-                        array('OBJECT' => Translation :: get('Right')), 
-                        Utilities :: COMMON_LIBRARIES)));
+                    htmlentities(
+                            Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('Right')), 
+                                    Utilities :: COMMON_LIBRARIES)));
         }
     }
 }

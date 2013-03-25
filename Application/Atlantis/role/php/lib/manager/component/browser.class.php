@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\role;
 
+use common\libraries\Redirect;
+use application\atlantis\SessionBreadcrumbs;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
 use common\libraries\DelegateComponent;
@@ -37,6 +39,8 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
 
     public function run()
     {
+        SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
+        
         $this->display_header();
         $this->action_bar = $this->get_action_bar();
         echo $this->action_bar->as_html();

@@ -9,3 +9,5 @@ Grant = "Toekennen"
 Deny = "Weigeren"
 
 Entitlements = ""
+GrantRights = "Toegekende rechten voor {TYPE}"
+ListerComponent = "Rechten toekennen aan {ROLE}"

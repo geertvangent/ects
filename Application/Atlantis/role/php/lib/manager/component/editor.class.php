@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\role;
 
+use common\libraries\Breadcrumb;
+use application\atlantis\SessionBreadcrumbs;
 use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\Request;
@@ -10,6 +12,10 @@ class EditorComponent extends Manager
 
     public function run()
     {
+        SessionBreadcrumbs :: add(
+                new Breadcrumb($this->get_url(), 
+                        Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
+        
         $role_id = Request :: get(self :: PARAM_ROLE_ID);
         
         if (isset($role_id))
@@ -22,9 +28,9 @@ class EditorComponent extends Manager
                 $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
             }
             
-            $form = new RoleForm(
-                $role, 
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_EDIT, self :: PARAM_ROLE_ID => $role_id)));
+            $form = new RoleForm($role, 
+                    $this->get_url(
+                            array(self :: PARAM_ACTION => self :: ACTION_EDIT, self :: PARAM_ROLE_ID => $role_id)));
             
             if ($form->validate())
             {
@@ -39,12 +45,9 @@ class EditorComponent extends Manager
                 $parameters[self :: PARAM_ACTION] = self :: ACTION_BROWSE;
                 
                 $this->redirect(
-                    Translation :: get(
-                        $success ? 'ObjectUpdated' : 'ObjectNotUpdated', 
-                        array('OBJECT' => Translation :: get('Role')), 
-                        Utilities :: COMMON_LIBRARIES), 
-                    ($success ? false : true), 
-                    $parameters);
+                        Translation :: get($success ? 'ObjectUpdated' : 'ObjectNotUpdated', 
+                                array('OBJECT' => Translation :: get('Role')), Utilities :: COMMON_LIBRARIES), 
+                        ($success ? false : true), $parameters);
             }
             else
             {
@@ -56,11 +59,9 @@ class EditorComponent extends Manager
         else
         {
             $this->display_error_page(
-                htmlentities(
-                    Translation :: get(
-                        'NoObjectSelected', 
-                        array('OBJECT' => Translation :: get('Role')), 
-                        Utilities :: COMMON_LIBRARIES)));
+                    htmlentities(
+                            Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('Role')), 
+                                    Utilities :: COMMON_LIBRARIES)));
         }
     }
 }

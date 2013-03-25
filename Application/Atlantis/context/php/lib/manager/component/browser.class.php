@@ -1,6 +1,9 @@
 <?php
 namespace application\atlantis\context;
 
+use common\libraries\Request;
+use common\libraries\Breadcrumb;
+use application\atlantis\SessionBreadcrumbs;
 use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
 use common\libraries\Theme;
@@ -22,15 +25,13 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
+            // $search_conditions[] = new PatternMatchCondition(\application\atlantis\role\entity\RoleEntity ::
+            // PROPERTY_ID,
+            // '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                \application\atlantis\role\entity\RoleEntity :: PROPERTY_ID, 
-                '*' . $query . '*');
-            $search_conditions[] = new PatternMatchCondition(
-                \application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME, 
-                '*' . $query . '*');
-            $search_conditions[] = new PatternMatchCondition(
-                \application\atlantis\role\Role :: PROPERTY_NAME, 
-                '*' . $query . '*');
+                    \application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME, '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(\application\atlantis\role\Role :: PROPERTY_NAME, 
+                    '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
         else
@@ -39,14 +40,31 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         }
     }
 
+    function get_context()
+    {
+        if (! $this->context)
+        {
+            $this->context = Request :: get(self :: PARAM_CONTEXT_ID);
+            
+            if (! $this->context)
+            {
+                $this->context = 0;
+            }
+        }
+        
+        return $this->context;
+    }
+
     public function run()
     {
-        $this->display_header();
+        SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
         
-        // $this->action_bar = $this->get_action_bar();
-        // echo ($this->action_bar->as_html());
         $table = new ContextTable($this);
-        echo ($table->as_html());
+        $this->display_header();
+        $this->get_action_bar()->as_html();
+        $menu = new Menu($this->get_context());
+        echo $menu->render_as_tree();
+        echo $table->as_html();
         $this->display_footer();
     }
 
@@ -55,11 +73,6 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         if (! isset($this->action_bar))
         {
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
-            $this->action_bar->add_common_action(
-                new ToolbarItem(
-                    Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                    Theme :: get_common_image_path() . 'action_create.png', 
-                    $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             
             $this->action_bar->set_search_url($this->get_url());
         }

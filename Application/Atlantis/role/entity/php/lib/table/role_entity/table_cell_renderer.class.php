@@ -53,7 +53,9 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
                             Theme :: get_common_image_path() . 'action_delete.png', 
                             $this->get_component()->get_url(
                                     array(Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, 
-                                            Manager :: PARAM_ROLE_ENTITY_ID => $role_entity->get_id())), 
+                                            Manager :: PARAM_ROLE_ENTITY_ID => $role_entity->get_id(), 
+                                            \application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->get_component()->get_role_id(), 
+                                            \application\atlantis\context\Manager :: PARAM_CONTEXT_ID => $this->get_component()->get_context_id())), 
                             ToolbarItem :: DISPLAY_ICON));
         }
         return $toolbar->as_html();

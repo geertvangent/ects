@@ -1,6 +1,9 @@
 <?php
 namespace application\atlantis\role\entity;
 
+use common\libraries\Translation;
+use common\libraries\Redirect;
+use application\atlantis\SessionBreadcrumbs;
 use common\libraries\DelegateComponent;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
@@ -66,9 +69,19 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         return isset($this->role_id);
     }
 
+    public function get_role_id()
+    {
+        return $this->role_id;
+    }
+
     public function has_context_id()
     {
         return isset($this->context_id);
+    }
+
+    public function get_context_id()
+    {
+        return $this->context_id;
     }
 
     public function has_entity()
@@ -88,28 +101,58 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
 
     public function add_breadcrumb()
     {
-        if ($this->has_role_id())
+        if ($this->has_context_id() && ! $this->has_entity() && ! $this->has_role_id())
         {
-            BreadcrumbTrail :: get_instance()->add(
-                new Breadcrumb(
-                    null, 
-                    \application\atlantis\role\DataManager :: retrieve(
-                        \application\atlantis\role\Role :: class_name(), 
-                        (int) $this->role_id)->get_name()));
+            $context = \application\atlantis\context\DataManager :: retrieve(
+                    \application\atlantis\context\Context :: class_name(), (int) $this->context_id);
+            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $context->get_context_name()));
+            SessionBreadcrumbs :: add(
+                    new Breadcrumb($this->get_url(), 
+                            Translation :: get('GrantedContexts', array('TYPE' => $context->get_context_name()))));
         }
-        if ($this->has_context_id())
+        elseif (! $this->has_context_id() && $this->has_entity() && ! $this->has_role_id())
         {
-            BreadcrumbTrail :: get_instance()->add(
-                new Breadcrumb(
-                    null, 
-                    \application\atlantis\context\DataManager :: retrieve(
-                        \application\atlantis\context\Context :: class_name(), 
-                        (int) $this->context_id)->get_context_name()));
+            // BreadcrumbTrail :: get_instance()->add(
+            // new Breadcrumb(null, RoleEntity :: entity_name($this->entity_type, $this->entity_id)));
         }
-        if ($this->has_entity())
+        elseif (! $this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
         {
-            BreadcrumbTrail :: get_instance()->add(
-                new Breadcrumb(null, RoleEntity :: entity_name($this->entity_type, $this->entity_id)));
+            $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(), 
+                    (int) $this->role_id);
+            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
+            SessionBreadcrumbs :: add(
+                    new Breadcrumb($this->get_url(), 
+                            Translation :: get('GrantedRoles', array('TYPE' => $role->get_name()))));
+        }
+        elseif ($this->has_context_id() && $this->has_entity() && ! $this->has_role_id())
+        {
+            // no entity
+        }
+        elseif ($this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
+        {
+            $context = \application\atlantis\context\DataManager :: retrieve(
+                    \application\atlantis\context\Context :: class_name(), (int) $this->context_id);
+            
+            $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(), 
+                    (int) $this->role_id);
+            
+            SessionBreadcrumbs :: add(
+                    new Breadcrumb($this->get_url(), 
+                            Translation :: get('GrantedContextsRoles', 
+                                    array('CONTEXT' => $context->get_context_name(), 'ROLE' => $role->get_name()))));
+        }
+        elseif (! $this->has_context_id() && $this->has_entity() && $this->has_role_id())
+        {
+            // no entity
+        }
+        
+        elseif ($this->has_context_id() && $this->has_entity() && $this->has_role_id())
+        {
+            // no entity
+        }
+        else
+        {
+            SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('Granted')));
         }
     }
 
@@ -126,6 +169,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         $this->end_date = Request :: get(self :: PARAM_END_DATE);
         
         $this->add_breadcrumb();
+        
         $this->display_header();
         $table = new RoleEntityTable($this);
         echo ($table->as_html());

@@ -1,6 +1,9 @@
 <?php
 namespace application\atlantis\application;
 
+use common\libraries\Redirect;
+use common\libraries\Breadcrumb;
+use application\atlantis\SessionBreadcrumbs;
 use common\libraries\DelegateComponent;
 use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
@@ -36,6 +39,8 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
 
     public function run()
     {
+        SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
+        
         $this->display_header();
         
         $this->action_bar = $this->get_action_bar();
@@ -54,10 +59,9 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             if ($this->get_user()->is_platform_admin())
             {
                 $this->action_bar->add_common_action(
-                    new ToolbarItem(
-                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                        Theme :: get_common_image_path() . 'action_create.png', 
-                        $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
+                        new ToolbarItem(Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
+                                Theme :: get_common_image_path() . 'action_create.png', 
+                                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());
         }
