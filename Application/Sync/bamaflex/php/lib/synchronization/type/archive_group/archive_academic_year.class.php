@@ -21,10 +21,10 @@ class ArchiveAcademicYearGroupSynchronization extends ArchiveGroupSynchronizatio
 
     public function get_children()
     {
-        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_faculty_basic] WHERE year = \'' .
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_faculty_advanced] WHERE year = \'' .
              $this->get_academic_year() . '\'';
         $departments = $this->get_result($query);
-        
+
         $children = array();
         while ($department = $departments->next_result())
         {

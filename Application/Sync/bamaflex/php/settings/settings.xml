@@ -8,6 +8,7 @@
 			<setting name="user" field="text" default="root" />
 			<setting name="password" field="text" default="" />
 			<setting name="academic_year" field="text" default="" />
+			<setting name="archive_academic_year" field="text" default="" />
 		</category>
 	</settings>
 </package>

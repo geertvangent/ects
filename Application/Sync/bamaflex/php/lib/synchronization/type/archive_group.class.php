@@ -1,6 +1,7 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
+use common\libraries\PlatformSetting;
 use user\User;
 use common\libraries\InCondition;
 use group\GroupRelUser;
@@ -56,7 +57,7 @@ class ArchiveGroupSynchronization extends Synchronization
         $this->synchronize();
         $this->synchronize_users();
         $children = $this->get_children();
-        
+
         foreach ($children as $child)
         {
             $child->run();
@@ -65,7 +66,7 @@ class ArchiveGroupSynchronization extends Synchronization
 
     /**
      * Enter description here . ..
-     * 
+     *
      * @param $type string
      * @param $synchronization GroupSynchronization
      * @param $parameters array
@@ -85,7 +86,7 @@ class ArchiveGroupSynchronization extends Synchronization
     public function determine_current_group()
     {
         $this->current_group = GroupDataManager :: get_instance()->retrieve_group_by_code_and_parent_id(
-            $this->get_code(), 
+            $this->get_code(),
             $this->get_parent_group()->get_id());
     }
 
@@ -162,14 +163,14 @@ class ArchiveGroupSynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
-            
+
             $this->current_group = new Group();
             $this->current_group->set_name($name);
             $this->current_group->set_description($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
             $this->current_group->create();
-            
+
             self :: log('added', $this->current_group->get_name());
             flush();
         }
@@ -183,24 +184,24 @@ class ArchiveGroupSynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-        
+
         return $this->current_group;
     }
 
     public function synchronize_users()
     {
         $group_data_manager = GroupDataManager :: get_instance();
-        
+
         $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
         $current_users = $group_data_manager->retrieve_distinct(
-            GroupRelUser :: get_table_name(), 
-            GroupRelUser :: PROPERTY_USER_ID, 
+            GroupRelUser :: get_table_name(),
+            GroupRelUser :: PROPERTY_USER_ID,
             $condition);
         $source_users = $this->get_users();
         // $source_users = array();
         $to_add = array_diff($source_users, $current_users);
         $to_delete = array_diff($current_users, $source_users);
-        
+
         foreach ($to_add as $user_id)
         {
             $relation = new GroupRelUser();
@@ -208,12 +209,12 @@ class ArchiveGroupSynchronization extends Synchronization
             $relation->set_user_id($user_id);
             $relation->create();
         }
-        
+
         $conditions = array();
         $conditions[] = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
         $conditions[] = new InCondition(GroupRelUser :: PROPERTY_USER_ID, $to_delete);
         $condition = new AndCondition($conditions);
-        
+
         return $group_data_manager->delete(GroupRelUser :: get_table_name(), $condition);
     }
 
@@ -248,7 +249,7 @@ class ArchiveGroupSynchronization extends Synchronization
                     $user_ids[] = self :: $official_code_cache[$code];
                 }
             }
-            
+
             if (count($result_codes) > 0)
             {
                 $results = \user\DataManager :: retrieve_users_by_official_codes($result_codes);
@@ -259,19 +260,25 @@ class ArchiveGroupSynchronization extends Synchronization
                 }
             }
         }
-        
+
         return $user_ids;
     }
 
     public function get_academic_year()
     {
-        return '2011-12';
+        return PlatformSetting :: get('archive_academic_year', __NAMESPACE__);
+    }
+
+    public function is_old()
+    {
+        $year_parts = explode('-', $this->get_academic_year());
+        return (int) $year_parts[0] < 2005;
     }
 
     public function get_academic_year_end()
     {
         $year_parts = explode('-', $this->get_academic_year());
-        
+
         return '20' . $year_parts[1] . '-09-30 23:59:59.999';
     }
 }

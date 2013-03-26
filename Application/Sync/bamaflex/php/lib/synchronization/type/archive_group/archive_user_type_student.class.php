@@ -26,12 +26,16 @@ class ArchiveUserTypeStudentGroupSynchronization extends ArchiveGroupSynchroniza
 
     public function get_children()
     {
-        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_basic] WHERE faculty_id = ' .
-             $this->get_synchronization()->get_parameter(
-                ArchiveDepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);
-        
+        $faculty_id = $this->get_synchronization()->get_parameter(
+            ArchiveDepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);
+        $faculty_source = $this->get_synchronization()->get_parameter(
+            ArchiveDepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_SOURCE);
+
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_advanced] WHERE faculty_id = ' . $faculty_id .
+             ' AND source = ' . $faculty_source;
+
         $trainings = $this->get_result($query);
-        
+
         $children = array();
         while ($training = $trainings->next_result(false))
         {

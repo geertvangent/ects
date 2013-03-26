@@ -11,10 +11,12 @@ class ArchiveDepartmentGroupSynchronization extends ArchiveGroupSynchronization
     const RESULT_PROPERTY_ACADEMIC_YEAR = 'year';
     const RESULT_PROPERTY_DEPARTMENT = 'name';
     const RESULT_PROPERTY_DEPARTMENT_ID = 'id';
+    const RESULT_PROPERTY_DEPARTMENT_SOURCE = 'source';
 
     public function get_code()
     {
-        return self :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT_ID);
+        return ($this->is_old() ? 'OLD_' : '') . self :: IDENTIFIER . '_' .
+             $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT_ID);
     }
 
     public function get_name()

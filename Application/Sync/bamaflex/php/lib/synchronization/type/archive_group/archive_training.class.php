@@ -18,7 +18,7 @@ abstract class ArchiveTrainingGroupSynchronization extends ArchiveGroupSynchroni
     public function get_code()
     {
         $parent = $this->get_synchronization();
-        return self :: IDENTIFIER . '_' . $this->get_group_type() . '_' .
+        return ($this->is_old() ? 'OLD_' : '') . self :: IDENTIFIER . '_' . $this->get_group_type() . '_' .
              $this->get_parameter(self :: RESULT_PROPERTY_TRAINING_ID);
     }
 
