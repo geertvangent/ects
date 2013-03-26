@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\user_group;
 
+use common\libraries\Breadcrumb;
+use application\atlantis\SessionBreadcrumbs;
 use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
 use common\libraries\Theme;
@@ -22,9 +24,12 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
-            $search_conditions[] = new PatternMatchCondition(Application :: PROPERTY_NAME, '*' . $query . '*');
-            $search_conditions[] = new PatternMatchCondition(Application :: PROPERTY_DESCRIPTION, '*' . $query . '*');
-            $search_conditions[] = new PatternMatchCondition(Application :: PROPERTY_URL, '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(
+                    \application\atlantis\application\Application :: PROPERTY_NAME, '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(
+                    \application\atlantis\application\Application :: PROPERTY_DESCRIPTION, '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(
+                    \application\atlantis\application\Application :: PROPERTY_URL, '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
         else
@@ -35,6 +40,8 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
 
     public function run()
     {
+        SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
+        
         $this->display_header();
         
         $this->action_bar = $this->get_action_bar();
@@ -50,10 +57,9 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         {
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
             $this->action_bar->add_common_action(
-                new ToolbarItem(
-                    Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                    Theme :: get_common_image_path() . 'action_create.png', 
-                    $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
+                    new ToolbarItem(Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
+                            Theme :: get_common_image_path() . 'action_create.png', 
+                            $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             
             $this->action_bar->set_search_url($this->get_url());
         }

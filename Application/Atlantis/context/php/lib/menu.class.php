@@ -111,7 +111,7 @@ class Menu extends HTML_Menu
             
             $menu_item = array();
             $menu_item['title'] = $context->get_context_name();
-            // $menu_item['url'] = $this->get_url($group->get_id());
+            $menu_item['url'] = $this->get_url($context->get_id());
             
             $sub_menu_items = $this->get_menu_items($context->get_context_id(), $context->get_context_type());
             if (count($sub_menu_items) > 0)
@@ -145,7 +145,9 @@ class Menu extends HTML_Menu
         $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, $parent_type);
         $condition = new AndCondition($conditions);
         
-        $contexts = DataManager :: retrieves(Context :: class_name(), new DataClassRetrievesParameters($condition));
+        $contexts = DataManager :: retrieves(Context :: class_name(), 
+                new DataClassRetrievesParameters($condition, null, null, 
+                        array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME))));
         while ($context = $contexts->next_result())
         {
             $context_id = $context->get_id();

@@ -14,17 +14,19 @@ class CreatorComponent extends Manager
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
         
-        $application = new Application();
+        $application = new \application\atlantis\application\Application();
         
-        $form = new ApplicationForm($application, $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)));
+        $form = new \application\atlantis\application\ApplicationForm($application, 
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)));
         
         if ($form->validate())
         {
             $values = $form->exportValues();
             
-            $application->set_name($values[Application :: PROPERTY_NAME]);
-            $application->set_description($values[Application :: PROPERTY_DESCRIPTION]);
-            $application->set_url($values[Application :: PROPERTY_URL]);
+            $application->set_name($values[\application\atlantis\application\Application :: PROPERTY_NAME]);
+            $application->set_description(
+                    $values[\application\atlantis\application\Application :: PROPERTY_DESCRIPTION]);
+            $application->set_url($values[\application\atlantis\application\Application :: PROPERTY_URL]);
             
             $success = $application->create();
             
@@ -32,12 +34,9 @@ class CreatorComponent extends Manager
             $parameters[self :: PARAM_ACTION] = self :: ACTION_BROWSE;
             
             $this->redirect(
-                Translation :: get(
-                    $success ? 'ObjectCreated' : 'ObjectNotCreated', 
-                    array('OBJECT' => Translation :: get('Application')), 
-                    Utilities :: COMMON_LIBRARIES), 
-                ($success ? false : true), 
-                $parameters);
+                    Translation :: get($success ? 'ObjectCreated' : 'ObjectNotCreated', 
+                            array('OBJECT' => Translation :: get('Application')), Utilities :: COMMON_LIBRARIES), 
+                    ($success ? false : true), $parameters);
         }
         else
         {

@@ -3,7 +3,7 @@
 ; Language = nl
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-TypeName = "Rechten toekennen"
+TypeName = "Toegekende rechten"
 
 Grant = "Toekennen"
 Deny = "Weigeren"

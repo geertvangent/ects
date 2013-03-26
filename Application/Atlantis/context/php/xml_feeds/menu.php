@@ -29,7 +29,9 @@ if (Authentication :: is_valid())
     $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, $context->get_context_type());
     $condition = new AndCondition($conditions);
     
-    $contexts = DataManager :: retrieves(Context :: class_name(), new DataClassRetrievesParameters($condition))->as_array();
+    $contexts = DataManager :: retrieves(Context :: class_name(), 
+            new DataClassRetrievesParameters($condition, null, null, 
+                    array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME))))->as_array();
 }
 
 header('Content-Type: text/xml');
