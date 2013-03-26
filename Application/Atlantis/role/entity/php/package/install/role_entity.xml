@@ -7,7 +7,17 @@
 		<property name="entity_id" type="integer" />
 		<property name="context_id" type="integer" />
 		<property name="role_id" type="integer" />
-		<property name="start_date" type="integer" unsigned="1" notnull="1" />
-		<property name="end_date" type="integer" unsigned="1" notnull="1" />
+		<property name="start_date" type="integer" unsigned="1"
+			notnull="1" />
+		<property name="end_date" type="integer" unsigned="1"
+			notnull="1" />
 	</properties>
+	<index name="role_entity" type="unique">
+		<indexproperty name="entity_type" />
+		<indexproperty name="entity_id" />
+		<indexproperty name="context_id" />
+		<indexproperty name="role_id" />
+		<indexproperty name="start_date" />
+		<indexproperty name="end_date" />
+	</index>
 </object>

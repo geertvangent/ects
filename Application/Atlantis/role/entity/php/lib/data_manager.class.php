@@ -23,6 +23,6 @@ class DataManager extends \common\libraries\DataManager
      */
     public static function get_type()
     {
-        return 'mdb2';
+        return 'doctrine';
     }
 }
