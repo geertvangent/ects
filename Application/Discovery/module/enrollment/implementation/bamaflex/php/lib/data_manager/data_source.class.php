@@ -27,7 +27,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced ' .
@@ -60,7 +60,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
@@ -104,7 +104,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
         
-        $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+        $condition = new EqualityCondition('person_id', $official_code);
         $translator = DoctrineConditionTranslator :: factory($this);
         
         $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced ' .

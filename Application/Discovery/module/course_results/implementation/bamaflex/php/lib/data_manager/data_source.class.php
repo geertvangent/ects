@@ -35,8 +35,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->course_results[$programme_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('programme_id', '"' . $programme_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('programme_id', $programme_id);
+            $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -67,8 +67,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->course[$programme_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', '"' . $programme_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('id', $programme_id);
+            $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -127,8 +127,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_course_next_id($course)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', '"' . $course->get_id() . '"');
-        $conditions[] = new EqualityCondition('source', '"' . $course->get_source() . '"');
+        $conditions[] = new EqualityCondition('previous_id', $course->get_id());
+        $conditions[] = new EqualityCondition('source', $course->get_source());
         $condition = new AndCondition($conditions);
         $translator = DoctrineConditionTranslator :: factory($this);
         
@@ -236,8 +236,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->marks[$programme_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('programme_id', '"' . $programme_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('programme_id', $programme_id);
+            $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             

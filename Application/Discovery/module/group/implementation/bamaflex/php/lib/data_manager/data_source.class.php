@@ -29,13 +29,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->groups[$training_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', '"' . $training_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('training_id', $training_id);
+            $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_group_advanced ' . $translator->render_query($condition) .
-                 ' ORDER BY description';
+            $query = 'SELECT * FROM v_discovery_group_advanced ' . $translator->render_query($condition) . ' ORDER BY description';
             
             $statement = $this->query($query);
             
@@ -69,8 +68,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->trainings[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', '"' . $training_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('id', $training_id);
+            $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -101,18 +100,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(
-                        History :: PROPERTY_TYPE, 
-                        Utilities :: get_namespace_from_object($training));
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
+                            Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
                     
                     $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
-                        $condition);
+                            $condition);
                     
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
                         {
+                            
                             $reference = new HistoryReference();
                             $reference->set_id($history->get_previous_id());
                             $reference->set_source($history->get_previous_source());
@@ -133,13 +132,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(
-                        History :: PROPERTY_TYPE, 
-                        Utilities :: get_namespace_from_object($training));
+                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
+                            Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
                     
                     $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
-                        $condition);
+                            $condition);
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
@@ -174,8 +172,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_training_next_id($training)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');
-        $conditions[] = new EqualityCondition('source', '"' . $training->get_source() . '"');
+        $conditions[] = new EqualityCondition('previous_id', $training->get_id());
+        $conditions[] = new EqualityCondition('source', $training->get_source());
         $condition = new AndCondition($conditions);
         $translator = DoctrineConditionTranslator :: factory($this);
         

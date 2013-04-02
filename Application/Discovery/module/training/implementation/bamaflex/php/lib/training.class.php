@@ -523,6 +523,7 @@ class Training extends \application\discovery\module\training\Training
     public function get_all($module_instance)
     {
         $trainings = $this->get_next($module_instance);
+        
         $trainings[$this->get_year()][] = $this;
         $trainings = array_merge_recursive($trainings, $this->get_previous($module_instance));
         

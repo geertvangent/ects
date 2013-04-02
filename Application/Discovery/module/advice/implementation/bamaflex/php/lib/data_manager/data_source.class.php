@@ -31,7 +31,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->advices[$person_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('person_id', '"' . $person_id . '"');
+            $conditions[] = new EqualityCondition('person_id', $person_id);
             
             $or_conditions = array();
             $or_conditions[] = new NotCondition(new EqualityCondition('motivation', null));
@@ -85,7 +85,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
         $conditions = array();
-        $conditions[] = new EqualityCondition('person_id', '"' . $person_id . '"');
+        $conditions[] = new EqualityCondition('person_id', $person_id);
         
         $or_conditions = array();
         $or_conditions[] = new NotCondition(new EqualityCondition('motivation', null));
@@ -124,7 +124,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .

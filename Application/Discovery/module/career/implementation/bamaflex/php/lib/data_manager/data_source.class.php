@@ -46,7 +46,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced ' .
@@ -74,7 +74,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT DISTINCT contract_id FROM v_discovery_enrollment_advanced ' .
@@ -99,8 +99,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->trainings[$source][$training_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', '"' . $training_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('id', $training_id);
+            $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -151,8 +151,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_training_next_id($training)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');
-        $conditions[] = new EqualityCondition('source', '"' . $training->get_source() . '"');
+        $conditions[] = new EqualityCondition('previous_id', $training->get_id());
+        $conditions[] = new EqualityCondition('source', $training->get_source());
         $condition = new AndCondition($conditions);
         $translator = DoctrineConditionTranslator :: factory($this);
         
@@ -183,7 +183,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
@@ -236,7 +236,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $conditions = array();
             $conditions[] = new EqualityCondition('programme_parent_id', null);
-            $conditions[] = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $conditions[] = new EqualityCondition('person_id', $official_code);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -274,7 +274,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         $official_code = $user->get_official_code();
         
-        $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+        $condition = new EqualityCondition('person_id', $official_code);
         $translator = DoctrineConditionTranslator :: factory($this);
         
         $query = 'SELECT count(id) AS courses_count FROM v_discovery_career_advanced ' .
@@ -300,7 +300,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $conditions = array();
             $conditions[] = new NotCondition(new EqualityCondition('programme_parent_id', null));
-            $conditions[] = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $conditions[] = new EqualityCondition('person_id', $official_code);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -385,7 +385,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         // $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         // $official_code = $user->get_official_code();
         
-        // $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+        // $condition = new EqualityCondition('person_id', $official_code);
         // $translator = DoctrineConditionTranslator :: factory($this);
         
         // $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ' .
@@ -420,7 +420,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_mark_advanced ' . $translator->render_query($condition);

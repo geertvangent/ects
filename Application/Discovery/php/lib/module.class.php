@@ -85,7 +85,7 @@ class Module
     {
         $conditions[] = new EqualityCondition(ModuleInstance :: PROPERTY_TYPE, $type);
         $conditions[] = new NotCondition(
-            new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, ModuleInstance :: TYPE_DISABLED));
+                new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, ModuleInstance :: TYPE_DISABLED));
         $condition = new AndCondition($conditions);
         
         $module_instances = DataManager :: get_instance()->retrieve_module_instances($condition);
@@ -131,10 +131,8 @@ class Module
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(
-            Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', 
-            Filesystem :: LIST_DIRECTORIES, 
-            false);
+        $modules = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', 
+                Filesystem :: LIST_DIRECTORIES, false);
         foreach ($modules as $module)
         {
             $namespace = '\\' . __NAMESPACE__ . '\module\\' . $module . '\Module';
@@ -150,10 +148,8 @@ class Module
     {
         $types = array();
         
-        $directories = Filesystem :: get_directory_content(
-            Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', 
-            Filesystem :: LIST_DIRECTORIES, 
-            false);
+        $directories = Filesystem :: get_directory_content(Path :: namespace_to_full_path(__NAMESPACE__) . 'module/', 
+                Filesystem :: LIST_DIRECTORIES, false);
         
         foreach ($directories as $directory)
         {
@@ -175,7 +171,7 @@ class Module
      * @param $user user\User
      * @return \common\libraries\ToolbarItem NULL
      */
-    public function get_module_link($type, $user_id)
+    public function get_module_link($type, $user_id, $check_data = true)
     {
         $module_instance = \application\discovery\Module :: exists($type);
         
@@ -195,42 +191,30 @@ class Module
             $entities[$class_user_entity :: ENTITY_TYPE] = $class_user_entity :: get_instance();
             $entities[$class_group_entity :: ENTITY_TYPE] = $class_group_entity :: get_instance();
             
-            if (! $class_rights :: get_instance()->module_is_allowed(
-                $class_rights :: VIEW_RIGHT, 
-                $entities, 
-                $module_instance->get_id(), 
-                $parameters))
+            if (! $class_rights :: get_instance()->module_is_allowed($class_rights :: VIEW_RIGHT, $entities, 
+                    $module_instance->get_id(), $parameters))
             {
                 return new ToolbarItem(
-                    Translation :: get(
-                        'ModuleNotAvailable', 
-                        array('MODULE' => Translation :: get('TypeName', null, $type))), 
-                    Theme :: get_image_path($type) . 'logo/16_na.png', 
-                    null, 
-                    ToolbarItem :: DISPLAY_ICON);
+                        Translation :: get('ModuleNotAvailable', 
+                                array('MODULE' => Translation :: get('TypeName', null, $type))), 
+                        Theme :: get_image_path($type) . 'logo/16_na.png', null, ToolbarItem :: DISPLAY_ICON);
             }
             else
             {
-                if ($module->has_data($parameters))
+                if (($check_data && $module->has_data($parameters)) || ! $check_data)
                 {
-                    
                     $url = $this->get_instance_url($module_instance->get_id(), $parameters);
-                    return new ToolbarItem(
-                        Translation :: get('TypeName', null, $type), 
-                        Theme :: get_image_path($type) . 'logo/16.png', 
-                        $url, 
-                        ToolbarItem :: DISPLAY_ICON);
+                    return new ToolbarItem(Translation :: get('TypeName', null, $type), 
+                            Theme :: get_image_path($type) . 'logo/16.png', $url, ToolbarItem :: DISPLAY_ICON);
                 }
                 else
+                
                 {
                     $url = $this->get_instance_url($module_instance->get_id(), $parameters);
                     return new ToolbarItem(
-                        Translation :: get(
-                            'ModuleHasNoData', 
-                            array('MODULE' => Translation :: get('TypeName', null, $type))), 
-                        Theme :: get_image_path($type) . 'logo/16_empty.png', 
-                        $url, 
-                        ToolbarItem :: DISPLAY_ICON);
+                            Translation :: get('ModuleHasNoData', 
+                                    array('MODULE' => Translation :: get('TypeName', null, $type))), 
+                            Theme :: get_image_path($type) . 'logo/16_empty.png', $url, ToolbarItem :: DISPLAY_ICON);
                 }
             }
         }

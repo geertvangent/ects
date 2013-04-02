@@ -49,20 +49,11 @@ class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellR
     {
         $toolbar = new Toolbar();
         
-        $profile_link = $this->browser->get_module_link(
-            'application\discovery\module\profile\implementation\bamaflex', 
-            $groupreluser->get_user_id());
+        $profile_link = $this->browser->get_module_link('application\discovery\module\profile\implementation\bamaflex', 
+                $groupreluser->get_user_id(), false);
         if ($profile_link)
         {
             $toolbar->add_item($profile_link);
-        }
-        
-        $career_link = $this->browser->get_module_link(
-            'application\discovery\module\career\implementation\bamaflex', 
-            $groupreluser->get_user_id());
-        if ($career_link)
-        {
-            $toolbar->add_item($career_link);
         }
         
         return $toolbar->as_html();

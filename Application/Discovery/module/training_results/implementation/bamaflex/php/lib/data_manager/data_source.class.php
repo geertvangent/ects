@@ -32,8 +32,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->training_results[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', '"' . $training_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('training_id', $training_id);
+            $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -82,8 +82,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', '"' . $training_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
+            $conditions[] = new EqualityCondition('id', $training_id);
+            $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
@@ -187,8 +187,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_training_next_id($training)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', '"' . $training->get_id() . '"');
-        $conditions[] = new EqualityCondition('source', '"' . $training->get_source() . '"');
+        $conditions[] = new EqualityCondition('previous_id', $training->get_id());
+        $conditions[] = new EqualityCondition('source', $training->get_source());
         $condition = new AndCondition($conditions);
         $translator = DoctrineConditionTranslator :: factory($this);
         

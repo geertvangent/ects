@@ -238,8 +238,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $buttons[] = $image;
             LegendTable :: get_instance()->add_symbol($image, 
                     Translation :: get('Students', null, 'application\discovery\module\photo
-                    '), 
-                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+                    '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
             
             // teachers
             $parameters = new \application\discovery\module\photo\Parameters();
@@ -249,13 +248,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
             $image = Theme :: get_image('type/1', 'png', 
                     Translation :: get('Teachers', null, 'application\discovery\module\photo
-                    '), $url, 
-                    ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
+                    '), $url, ToolbarItem :: DISPLAY_ICON, false, 'application\discovery\module\photo');
             $buttons[] = $image;
             LegendTable :: get_instance()->add_symbol($image, 
                     Translation :: get('Teachers', null, 'application\discovery\module\photo
-                    '), 
-                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+                    '), Translation :: get('TypeName', null, 'application\discovery\module\photo'));
             
             $properties[Translation :: get('Photos')] = implode("\n", $buttons);
         }

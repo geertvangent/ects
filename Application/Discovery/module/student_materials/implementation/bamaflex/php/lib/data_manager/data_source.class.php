@@ -1,6 +1,7 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
+use common\libraries\OrCondition;
 use common\libraries\InCondition;
 use common\libraries\NotCondition;
 use common\libraries\AndCondition;
@@ -38,11 +39,11 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT DISTINCT year FROM v_discovery_enrollment_advanced ' . $translator->render_query(
-                $condition) . ' ORDER BY year DESC';
+                    $condition) . ' ORDER BY year DESC';
             
             $statement = $this->query($query);
             
@@ -72,11 +73,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $condition = new EqualityCondition('person_id', $official_code);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
-                 ' ORDER BY year DESC, id';
+            $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) . ' ORDER BY year DESC, id';
             
             $statement = $this->query($query);
             
@@ -119,12 +119,11 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $conditions = array();
             $conditions[] = new EqualityCondition('programme_parent_id', null);
-            $conditions[] = new EqualityCondition('enrollment_id', '"' . $enrollment_id . '"');
+            $conditions[] = new EqualityCondition('enrollment_id', $enrollment_id);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) .
-                 ' ORDER BY year, name';
+            $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) . ' ORDER BY year, name';
             
             $statement = $this->query($query);
             
@@ -134,8 +133,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 {
                     $course = $this->result_to_course($result);
                     
-                    if ($result->programme_id &&
-                         isset($child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
+                    if ($result->programme_id && isset(
+                            $child_courses[$result->source][$result->enrollment_id][$result->programme_id]))
                     {
                         foreach ($child_courses[$result->source][$result->enrollment_id][$result->programme_id] as $child_course)
                         {
@@ -157,12 +156,11 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $conditions = array();
             $conditions[] = new NotCondition(new EqualityCondition('programme_parent_id', null));
-            $conditions[] = new EqualityCondition('enrollment_id', '"' . $enrollment_id . '"');
+            $conditions[] = new EqualityCondition('enrollment_id', $enrollment_id);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) .
-                 ' ORDER BY year, trajectory_part, name';
+            $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) . ' ORDER BY year, trajectory_part, name';
             
             $statement = $this->query($query);
             
@@ -171,7 +169,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->child_courses[$enrollment_id][$result->source][$result->enrollment_id][$result->programme_parent_id][] = $this->result_to_course(
-                        $result);
+                            $result);
                 }
             }
         }
@@ -206,8 +204,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->materials[$programme_id][$type]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('programme_id', '"' . $programme_id . '"');
-            $conditions[] = new EqualityCondition('required', '"' . $type . '"');
+            $conditions[] = new EqualityCondition('programme_id', $programme_id);
+            $conditions[] = new EqualityCondition('required', $type);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -253,16 +251,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! $enrollment_id)
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('person_id', '"' . $official_code . '"');
+            $conditions[] = new EqualityCondition('person_id', $official_code);
             
             if ($year)
             {
-                $conditions[] = new EqualityCondition('year', '"' . $year . '"');
+                $conditions[] = new EqualityCondition('year', $year);
             }
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             $query = 'SELECT DISTINCT id FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition);
-            
             $enrollments_ids = array();
             
             $statement = $this->query($query);
@@ -281,11 +278,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         
         if (count($enrollments_ids) > 0)
         {
-            $condition = new InCondition('enrollment_id', '"' . implode('","', $enrollments_ids) . '"');
+            
+            // $condition = new InCondition('enrollment_id', implode(',', $enrollments_ids));
+            $conditions = array();
+            foreach ($enrollments_ids as $enrollments_id)
+            {
+                $conditions[] = new EqualityCondition('enrollment_id', $enrollments_id);
+            }
+            $condition = new OrCondition($conditions);
+            
             $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT DISTINCT programme_id FROM v_discovery_career_advanced ' .
-                 $translator->render_query($condition);
+            $query = 'SELECT DISTINCT programme_id FROM v_discovery_career_advanced ' . $translator->render_query(
+                    $condition);
             // $query .= 'WHERE enrollment_id IN ("' . implode('","', $enrollments_ids) . '")';
             
             $course_ids = array();
@@ -302,20 +307,28 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             if (count($course_ids) > 0)
             {
                 $conditions = array();
-                $conditions[] = new InCondition('programme_id', '"' . implode('","', $course_ids) . '"');
+                
+                $programme_conditions = array();
+                foreach ($enrollments_ids as $enrollments_id)
+                {
+                    $programme_conditions[] = new EqualityCondition('programme_id', $enrollments_id);
+                }
+                $conditions[] = new OrCondition($programme_conditions);
+                
+                // $conditions[] = new InCondition('programme_id', implode(',', $course_ids));
                 
                 // $query .= 'WHERE programme_id IN("' . implode('","', $course_ids) . '")';
                 
                 if (! is_null($type))
                 {
-                    $conditions[] = new EqualityCondition('required', '"' . $type . '"');
+                    $conditions[] = new EqualityCondition('required', $type);
                 }
                 
                 $condition = new AndCondition($conditions);
                 $translator = DoctrineConditionTranslator :: factory($this);
                 
-                $query = 'SELECT count(id) AS materials_count FROM v_discovery_course_material ' .
-                     $translator->render_query($condition);
+                $query = 'SELECT count(id) AS materials_count FROM v_discovery_course_material ' . $translator->render_query(
+                        $condition);
                 
                 $statement = $this->query($query);
                 

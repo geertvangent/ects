@@ -29,9 +29,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->group_user[$group_class_id][$source][$type]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('group_class_id', '"' . $group_class_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
-            $conditions[] = new EqualityCondition('type', '"' . $type . '"');
+            $conditions[] = new EqualityCondition('group_class_id', $group_class_id);
+            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition('type', $type);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -70,9 +70,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->group[$source][$type][$group_class_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('type_id', '"' . $group_class_id . '"');
-            $conditions[] = new EqualityCondition('source', '"' . $source . '"');
-            $conditions[] = new EqualityCondition('type', '"' . $type . '"');
+            $conditions[] = new EqualityCondition('type_id', $group_class_id);
+            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition('type', $type);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             

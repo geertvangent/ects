@@ -23,7 +23,7 @@ class SortableTable extends SortableTableFromArray
     {
         
         // $cols = $this->getHeader()->getColCount();
-        // $this->setCellAttributes(0, 0, 'style="font-style:italic;text-align:center;" colspan="' . $cols . '"');
+        // $this->setCellAttributes(0, 0, 'style="font-style:italic;text-align:center;" colspan="' . $cols);
         // $this->setCellContents(0, 0, Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES));
         //
         return $this->get_table_html($total_value, $total_column);

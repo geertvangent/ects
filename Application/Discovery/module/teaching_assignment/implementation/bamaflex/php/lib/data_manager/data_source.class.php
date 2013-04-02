@@ -29,8 +29,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->teaching_assignments[$person_id][$year]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('person_id', '"' . $person_id . '"');
-            $conditions[] = new EqualityCondition('year', '"' . $year . '"');
+            $conditions[] = new EqualityCondition('person_id', $person_id);
+            $conditions[] = new EqualityCondition('year', $year);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
             
@@ -71,7 +71,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
-        $condition = new EqualityCondition('person_id', '"' . $person_id . '"');
+        $condition = new EqualityCondition('person_id', $person_id);
         $translator = DoctrineConditionTranslator :: factory($this);
         
         $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced ' .
@@ -93,7 +93,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         if (! isset($this->years[$person_id]))
         {
-            $condition = new EqualityCondition('person_id', '"' . $person_id . '"');
+            $condition = new EqualityCondition('person_id', $person_id);
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT DISTINCT year FROM v_discovery_teaching_assignment_advanced ' .
