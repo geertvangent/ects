@@ -125,7 +125,6 @@ class CreatorComponent extends Manager
                     }
                 }
             }
-            exit;
             $count = (count($values['entity'][NewUserEntity :: ENTITY_TYPE]) + count(
                     $values['entity'][NewPlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
                     $values['context']) * count($values['start_date']) * count($values['end_date']);
@@ -161,6 +160,9 @@ class CreatorComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('Entities'));
                 }
             }
+            
+            $synchronization = new \application\ehb_sync\atlantis\DiscoverySynchronization();
+            $synchronization->run();
             
             $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
                     ($failures ? true : false), array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));

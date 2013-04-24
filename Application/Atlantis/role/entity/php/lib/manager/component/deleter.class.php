@@ -1,6 +1,7 @@
 <?php
 namespace application\atlantis\role\entity;
 
+use application\ehb_sync\atlantis\DiscoverySynchronization;
 use common\libraries\Request;
 use common\libraries\Utilities;
 use common\libraries\Translation;
@@ -72,11 +73,14 @@ class DeleterComponent extends Manager
                 }
             }
             
+            $synchronization = new DiscoverySynchronization();
+            $synchronization->run();
+            
             $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
                     ($failures ? true : false), 
                     array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE, 
                             \application\atlantis\role\Manager :: PARAM_ROLE_ID => $role_id, 
-                            \application\atlantis\context\Manager :: PARAM_CONTEXT_ID=> $context_id));
+                            \application\atlantis\context\Manager :: PARAM_CONTEXT_ID => $context_id));
         }
         else
         {

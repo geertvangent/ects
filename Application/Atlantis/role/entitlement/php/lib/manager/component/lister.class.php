@@ -1,6 +1,7 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
+use application\ehb_sync\atlantis\DiscoverySynchronization;
 use application\atlantis\SessionBreadcrumbs;
 use application\atlantis\role\Role;
 use common\libraries\DelegateComponent;
@@ -122,6 +123,9 @@ class ListerComponent extends Manager implements DelegateComponent
                     $parameter = array('OBJECTS' => Translation :: get('Entitlements'));
                 }
             }
+            
+            $synchronization = new DiscoverySynchronization();
+            $synchronization->run();
             
             $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
                     ($failures ? true : false), 

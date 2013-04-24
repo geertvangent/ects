@@ -41,7 +41,7 @@ class Autoloader
      * @param $classname string
      * @return boolean
      */
-    static function load($classname)
+    public static function load($classname)
     {
         if (isset(self :: $map[$classname]))
         {
@@ -58,7 +58,7 @@ class Autoloader
      * @param $update boolean
      * @return multitype:string
      */
-    static function synch($update)
+    public static function synch($update)
     {
         return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
     }

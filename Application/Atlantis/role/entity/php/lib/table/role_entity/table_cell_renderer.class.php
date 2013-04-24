@@ -1,6 +1,7 @@
 <?php
 namespace application\atlantis\role\entity;
 
+use rights\NewPlatformGroupEntity;
 use common\libraries\DatetimeUtilities;
 use common\libraries\NewObjectTableCellRenderer;
 use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
@@ -21,8 +22,14 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
             case RoleEntity :: PROPERTY_ENTITY_TYPE :
                 return $object->get_entity_type_image();
                 break;
-            case 'entity_name' :
+            case Translation :: get('EntityName') :
                 return $object->get_entity_name();
+                break;
+            case Translation :: get('Path') :
+                if ($object->get_entity_type() == NewPlatformGroupEntity :: ENTITY_TYPE)
+                {
+                    return $object->get_entity()->get_fully_qualified_name();
+                }
                 break;
             case \application\atlantis\role\Role :: PROPERTY_NAME :
                 return $object->get_role()->get_name();
@@ -31,11 +38,11 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
                 return $object->get_context()->get_context_name();
                 break;
             case RoleEntity :: PROPERTY_START_DATE :
-                $date_format = Translation :: get('DateTimeFormatLong', null, Utilities :: COMMON_LIBRARIES);
+                $date_format = Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES);
                 return DatetimeUtilities :: format_locale_date($date_format, $object->get_start_date());
                 break;
             case RoleEntity :: PROPERTY_END_DATE :
-                $date_format = Translation :: get('DateTimeFormatLong', null, Utilities :: COMMON_LIBRARIES);
+                $date_format = Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES);
                 return DatetimeUtilities :: format_locale_date($date_format, $object->get_end_date());
                 break;
         }

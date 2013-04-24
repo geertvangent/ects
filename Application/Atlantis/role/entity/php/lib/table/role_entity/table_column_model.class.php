@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\role\entity;
 
+use common\libraries\Translation;
+use common\libraries\StaticTableColumn;
 use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
 use common\libraries\NewObjectTableColumnModel;
 use common\libraries\ObjectTableColumn;
@@ -17,7 +19,8 @@ class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
         if (! $this->get_component()->has_entity())
         {
             $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_ENTITY_TYPE, false));
-            $this->add_column(new ObjectTableColumn('entity_name', false));
+            $this->add_column(new StaticTableColumn(Translation :: get('EntityName')));
+            $this->add_column(new StaticTableColumn(Translation :: get('Path')));
         }
         if (! $this->get_component()->has_role_id())
         {
