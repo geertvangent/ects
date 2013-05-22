@@ -2,31 +2,10 @@
 	$(document)
 			.ready(
 					function() {
-						// var creationDates = $("#start_date,#end_date")
-						// .datetimepicker(
-						// {
-						// timeFormat : 'hh:mm',
-						// dateFormat : 'dd-mm-yy',
-						// separator : ' ',
-						// onSelect : function(selectedDate) {
-						// var option = (this.id == "start_date") ? "minDate"
-						// : "maxDate", instance = $(this)
-						// .data("datetimepicker"), date = $.datetimepicker
-						// .parseDate(
-						// instance.settings.dateFormat
-						// || $.datetimepicker._defaults.dateFormat,
-						// selectedDate,
-						// instance.settings);
-						// creationDates.not(this)
-						// .datetimepicker("option",
-						// option, date);
-						// }
-						// });
-
 						$('#start_date')
-								.datetimepicker(
+								.datepicker(
 										{
-											timeFormat : 'hh:mm',
+										//	timeFormat : 'hh:mm',
 											dateFormat : 'yy-mm-dd',
 											separator : ' ',
 											onClose : function(dateText, inst) {
@@ -49,7 +28,7 @@
 											onSelect : function(
 													selectedDateTime) {
 												var start = $(this)
-														.datetimepicker(
+														.datepicker(
 																'getDate');
 												var instance = $(this).data(
 														"datepicker");
@@ -59,15 +38,15 @@
 																		|| $.datepicker._defaults.dateFormat,
 																selectedDateTime,
 																instance.settings);
-												$('#end_date').datetimepicker(
+												$('#end_date').datepicker(
 														"option", "minDate",
 														date);
 											}
 										});
 						$('#end_date')
-								.datetimepicker(
+								.datepicker(
 										{
-											timeFormat : 'hh:mm',
+										//	timeFormat : 'hh:mm',
 											dateFormat : 'yy-mm-dd',
 											separator : ' ',
 											onClose : function(dateText, inst) {
@@ -89,18 +68,18 @@
 											onSelect : function(
 													selectedDateTime) {
 												var end = $(this)
-														.datetimepicker(
+														.datepicker(
 																'getDate');
 												var instance = $(this).data(
 														"datepicker");
 												var date = $.datepicker
 														.parseDate(
 																instance.settings.dateFormat
-																		|| $.datetimepicker._defaults.dateFormat,
+																		|| $.datepicker._defaults.dateFormat,
 																selectedDateTime,
 																instance.settings);
 												$('#start_date')
-														.datetimepicker(
+														.datepicker(
 																"option",
 																"maxDate", date);
 											}

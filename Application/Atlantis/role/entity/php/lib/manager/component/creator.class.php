@@ -42,8 +42,8 @@ class CreatorComponent extends Manager
                     {
                         foreach ($values['context']['context'] as $context)
                         {
-                            $new_start_date = Utilities :: time_from_datepicker($values['start_date']);
-                            $new_end_date = Utilities :: time_from_datepicker($values['end_date']);
+                            $new_start_date = Utilities :: time_from_datepicker_without_timepicker($values['start_date']);
+                            $new_end_date = Utilities :: time_from_datepicker_without_timepicker($values['end_date']);
 
                             $conditions = array();
                             $conditions[] = new EqualityCondition(
@@ -135,8 +135,6 @@ class CreatorComponent extends Manager
 
     public function merge_entities($parameters, $condition, $start_date, $end_date)
     {
-//         $merge_parameters = clone $parameters;
-
         if ($condition instanceof Condition)
         {
             $parameters->set_condition(new AndCondition($parameters->get_condition(), $condition));
