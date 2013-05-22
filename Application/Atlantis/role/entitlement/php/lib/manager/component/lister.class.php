@@ -3,7 +3,6 @@ namespace application\atlantis\role\entitlement;
 
 use application\ehb_sync\atlantis\DiscoverySynchronization;
 use application\atlantis\SessionBreadcrumbs;
-use application\atlantis\role\Role;
 use common\libraries\DelegateComponent;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
@@ -29,12 +28,12 @@ class ListerComponent extends Manager implements DelegateComponent
         $this->application_id = Request :: get(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID);
         $role = \application\atlantis\role\DataManager :: retrieve_by_id(
                 \application\atlantis\role\Role :: class_name(), (int) $this->role_id);
-        
+
         SessionBreadcrumbs :: add(
-                new Breadcrumb($this->get_url(), 
-                        Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()), 
+                new Breadcrumb($this->get_url(),
+                        Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()),
                                 array('ROLE' => $role->get_name()))));
-        
+
         // for each application, a list of rights
         $applications = \application\atlantis\application\DataManager :: retrieves(
                 \application\atlantis\application\Application :: class_name());
@@ -43,8 +42,8 @@ class ListerComponent extends Manager implements DelegateComponent
             $this->application_id = $applications->next_result()->get_id();
             $applications->reset();
         }
-        
-        $form = new EntitlementForm($this, 
+
+        $form = new EntitlementForm($this,
                 $this->get_url(
                         array(
                                 \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $this->application_id)));
@@ -61,17 +60,17 @@ class ListerComponent extends Manager implements DelegateComponent
                     $stored_rights[$entitlement->get_id()] = $entitlement->get_right_id();
                 }
             }
-            
+
             $stored_entitlements = array_flip($stored_rights);
-            
+
             $export_values = $form->exportValues();
-            
+
             $selected_rights = array_keys($export_values['right']);
-            
+
             $to_delete = array_diff($stored_rights, $selected_rights);
             $to_add = array_diff($selected_rights, $stored_rights);
             $failures = 0;
-            
+
             foreach ($to_delete as $right_id)
             {
                 if (! DataManager :: delete(
@@ -80,7 +79,7 @@ class ListerComponent extends Manager implements DelegateComponent
                     $failures ++;
                 }
             }
-            
+
             foreach ($to_add as $right_id)
             {
                 $entitlement = new Entitlement();
@@ -91,7 +90,7 @@ class ListerComponent extends Manager implements DelegateComponent
                     $failures ++;
                 }
             }
-            
+
             if ($failures)
             {
                 if ((count($to_add) + count($to_delete)) == 1)
@@ -123,23 +122,20 @@ class ListerComponent extends Manager implements DelegateComponent
                     $parameter = array('OBJECTS' => Translation :: get('Entitlements'));
                 }
             }
-            
-            $synchronization = new DiscoverySynchronization();
-            $synchronization->run();
-            
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
-                    ($failures ? true : false), 
-                    array(Manager :: PARAM_ACTION => Manager :: ACTION_LIST, 
+
+            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
+                    ($failures ? true : false),
+                    array(Manager :: PARAM_ACTION => Manager :: ACTION_LIST,
                             \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $this->application_id));
         }
         else
         {
             $tabs = new DynamicVisualTabsRenderer($renderer_name, $form->toHtml());
-            
+
             while ($application = $applications->next_result())
             {
                 $link = $this->get_url(
-                        array(\application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->role_id, 
+                        array(\application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->role_id,
                                 \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $application->get_id()));
                 if ($application->get_id() == $this->application_id)
                 {
@@ -149,7 +145,7 @@ class ListerComponent extends Manager implements DelegateComponent
                 {
                     $selected = false;
                 }
-                
+
                 $tabs->add_tab(
                         new DynamicVisualTab($application->get_id, $application->get_name(), '', $link, $selected));
             }
@@ -172,9 +168,9 @@ class ListerComponent extends Manager implements DelegateComponent
 
     public function add_breadcrumb()
     {
-        $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(), 
+        $role = \application\atlantis\role\DataManager :: retrieve(\application\atlantis\role\Role :: class_name(),
                 (int) $this->role_id);
-        
+
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
     }
 }
