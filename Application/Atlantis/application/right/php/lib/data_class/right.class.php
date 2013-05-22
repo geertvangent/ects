@@ -4,16 +4,19 @@ namespace application\atlantis\application\right;
 use application\atlantis\application\Application;
 use common\libraries\Utilities;
 use common\libraries\DataClass;
+use application\atlantis\role\entitlement\Entitlement;
+use common\libraries\EqualityCondition;
+use common\libraries\DataClassRetrievesParameters;
 
 /**
  * application.atlantis.application.right.
- * 
+ *
  * @author GillardMagali
  */
 class Right extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Right properties
      */
@@ -26,7 +29,7 @@ class Right extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
@@ -36,13 +39,13 @@ class Right extends DataClass
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
         $extended_property_names[] = self :: PROPERTY_APPLICATION_ID;
         $extended_property_names[] = self :: PROPERTY_CODE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -52,7 +55,7 @@ class Right extends DataClass
 
     /**
      * Returns the name of this Right.
-     * 
+     *
      * @return text The name.
      */
     public function get_name()
@@ -62,7 +65,7 @@ class Right extends DataClass
 
     /**
      * Sets the name of this Right.
-     * 
+     *
      * @param $name text
      */
     public function set_name($name)
@@ -72,7 +75,7 @@ class Right extends DataClass
 
     /**
      * Returns the description of this Right.
-     * 
+     *
      * @return text The description.
      */
     public function get_description()
@@ -82,7 +85,7 @@ class Right extends DataClass
 
     /**
      * Sets the description of this Right.
-     * 
+     *
      * @param $description text
      */
     public function set_description($description)
@@ -92,7 +95,7 @@ class Right extends DataClass
 
     /**
      * Returns the application_id of this Right.
-     * 
+     *
      * @return int The application_id.
      */
     public function get_application_id()
@@ -105,7 +108,7 @@ class Right extends DataClass
         if (! isset($this->application))
         {
             $this->application = \application\atlantis\application\DataManager :: retrieve(
-                Application :: class_name(), 
+                Application :: class_name(),
                 (int) $this->get_application_id());
         }
         return $this->application;
@@ -113,7 +116,7 @@ class Right extends DataClass
 
     /**
      * Sets the application_id of this Right.
-     * 
+     *
      * @param $application_id int
      */
     public function set_application_id($application_id)
@@ -138,5 +141,23 @@ class Right extends DataClass
     public static function get_table_name()
     {
         return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
+    }
+
+    public function delete()
+    {
+        $condition = new EqualityCondition(Entitlement :: PROPERTY_RIGHT_ID, $this->get_id());
+        $entitlements = \application\atlantis\role\entitlement\DataManager :: retrieves(
+            Entitlement :: class_name(),
+            new DataClassRetrievesParameters($condition));
+
+        while ($entitlement = $entitlements->next_result())
+        {
+            if (! $entitlement->delete())
+            {
+                return false;
+            }
+        }
+
+        return parent :: delete();
     }
 }
