@@ -23,7 +23,7 @@ class CreatorComponent extends Manager
                 $this->get_url(),
                 Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
 
-        if (! $this->get_user()->is_platform_admin())
+        if (!\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
@@ -42,7 +42,8 @@ class CreatorComponent extends Manager
                     {
                         foreach ($values['context']['context'] as $context)
                         {
-                            $new_start_date = Utilities :: time_from_datepicker_without_timepicker($values['start_date']);
+                            $new_start_date = Utilities :: time_from_datepicker_without_timepicker(
+                                $values['start_date']);
                             $new_end_date = Utilities :: time_from_datepicker_without_timepicker($values['end_date']);
 
                             $conditions = array();

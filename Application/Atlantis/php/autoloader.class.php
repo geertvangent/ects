@@ -19,6 +19,7 @@ class Autoloader
          'ApplicationComponent' => '/lib/manager/component/application.class.php',
          'ContextComponent' => '/lib/manager/component/context.class.php',
          'HomeComponent' => '/lib/manager/component/home.class.php',
+         'RightsComponent' => '/lib/manager/component/rights.class.php',
          'RightComponent' => '/lib/manager/component/right.class.php',
          'RoleComponent' => '/lib/manager/component/role.class.php',
          'Activator' => '/package/activate/activator.class.php',

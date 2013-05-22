@@ -27,7 +27,7 @@ class DeleterComponent extends Manager
             {
                 $role_entity = DataManager :: retrieve(RoleEntity :: class_name(), (int) $id);
 
-                if (! $this->get_user()->is_platform_admin())
+                if (! \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
                 {
                     $failures ++;
                 }
@@ -72,18 +72,22 @@ class DeleterComponent extends Manager
                 }
             }
 
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
-                    ($failures ? true : false),
-                    array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE,
-                            \application\atlantis\role\Manager :: PARAM_ROLE_ID => $role_id,
-                            \application\atlantis\context\Manager :: PARAM_CONTEXT_ID => $context_id));
+            $this->redirect(
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
+                ($failures ? true : false),
+                array(
+                    Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE,
+                    \application\atlantis\role\Manager :: PARAM_ROLE_ID => $role_id,
+                    \application\atlantis\context\Manager :: PARAM_CONTEXT_ID => $context_id));
         }
         else
         {
             $this->display_error_page(
-                    htmlentities(
-                            Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('Right')),
-                                    Utilities :: COMMON_LIBRARIES)));
+                htmlentities(
+                    Translation :: get(
+                        'NoObjectSelected',
+                        array('OBJECT' => Translation :: get('Right')),
+                        Utilities :: COMMON_LIBRARIES)));
         }
     }
 }
