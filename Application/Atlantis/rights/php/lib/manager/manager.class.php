@@ -10,7 +10,7 @@ use common\libraries\SubManager;
 
 class Manager extends SubManager
 {
-    const PARAM_ACTION = 'quota_rights_action';
+    const PARAM_ACTION = 'access_rights_action';
     const PARAM_LOCATION_ENTITY_RIGHT_GROUP_ID = 'location_entity_right_group_id';
     const ACTION_CREATE = 'creator';
     const ACTION_ACCESS = 'accessor';
@@ -36,27 +36,27 @@ class Manager extends SubManager
     public function get_tabs($current_tab, $content)
     {
         $tabs = new DynamicVisualTabsRenderer(Utilities :: get_classname_from_namespace(__NAMESPACE__, true), $content);
-        
+
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_CREATE, 
-                Translation :: get('Add'), 
-                Theme :: get_image_path() . 'tab/' . self :: ACTION_CREATE . '.png', 
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)), 
+                self :: ACTION_CREATE,
+                Translation :: get('Add'),
+                Theme :: get_image_path() . 'tab/' . self :: ACTION_CREATE . '.png',
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)),
                 ($current_tab == self :: ACTION_CREATE ? true : false)));
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_ACCESS, 
-                Translation :: get('GeneralAccess'), 
-                Theme :: get_image_path() . 'tab/' . self :: ACTION_ACCESS . '.png', 
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_ACCESS)), 
+                self :: ACTION_ACCESS,
+                Translation :: get('GeneralAccess'),
+                Theme :: get_image_path() . 'tab/' . self :: ACTION_ACCESS . '.png',
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_ACCESS)),
                 ($current_tab == self :: ACTION_ACCESS ? true : false)));
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_BROWSE, 
-                Translation :: get('Targets'), 
-                Theme :: get_image_path() . 'tab/' . self :: ACTION_BROWSE . '.png', 
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_BROWSE)), 
+                self :: ACTION_BROWSE,
+                Translation :: get('Targets'),
+                Theme :: get_image_path() . 'tab/' . self :: ACTION_BROWSE . '.png',
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_BROWSE)),
                 ($current_tab == self :: ACTION_BROWSE ? true : false)));
         return $tabs;
     }

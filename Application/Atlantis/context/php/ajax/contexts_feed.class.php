@@ -9,10 +9,11 @@ use common\libraries\AjaxManager;
 use common\libraries\Request;
 use common\libraries\PatternMatchCondition;
 use common\libraries\EqualityCondition;
-use common\libraries\InCondition;
 use common\libraries\AndCondition;
 use common\libraries\ObjectTableOrder;
 use common\libraries\AdvancedElementFinderElement;
+use group\GroupDataManager;
+use common\libraries\DataClassCache;
 
 class ContextAjaxContextsFeed extends AjaxManager
 {
@@ -31,104 +32,135 @@ class ContextAjaxContextsFeed extends AjaxManager
     public function run()
     {
         $result = new JsonAjaxResult();
-        
+
         $elements = $this->get_elements();
         $elements = $elements->as_array();
-        
+
         $result->set_property(self :: PROPERTY_ELEMENTS, $elements);
-        
+
         if ($this->context_count > 0)
         {
             $result->set_property(self :: PROPERTY_TOTAL_ELEMENTS, $this->context_count);
         }
-        
+
         $result->display();
     }
 
     /**
      * Returns all the elements for this feed
-     * 
+     *
      * @return AdvancedElementFinderElements
      */
     private function get_elements()
     {
         $elements = new AdvancedElementFinderElements();
-        
+
+        // Target groups
+        if (! $this->get_user()->is_platform_admin() &&
+             \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        {
+            $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
+        }
+
         $contexts = $this->retrieve_contexts();
         if ($contexts && $contexts->size() > 0)
         {
             $context_category = new AdvancedElementFinderElement('contexts', 'category', Translation :: get('Contexts'));
             $elements->add_element($context_category);
-            
+
             while ($context = $contexts->next_result())
             {
-                $context_category->add_child($this->get_context_element($context));
+                DataClassCache :: truncate(\group\Group :: class_name());
+
+                $groups = array();
+                switch ($context->get_context_type())
+                {
+                    case 0 :
+                        $code = 'CA';
+                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                        if ($context_group)
+                        {
+                            $groups[] = $context_group;
+                        }
+
+                        break;
+                    case 1 :
+                        $code = 'AY_' . $context->get_context_name();
+                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                        if ($context_group)
+                        {
+                            $groups[] = $context_group;
+                        }
+                        break;
+                    case 2 :
+                        $code = 'DEP_' . $context->get_context_id();
+                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                        if ($context_group)
+                        {
+                            $groups[] = $context_group;
+                        }
+                        break;
+                    case 3 :
+                        $code = 'TRA_OP_' . $context->get_context_id();
+                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                        if ($context_group)
+                        {
+                            $groups[] = $context_group;
+                        }
+
+                        $code = 'TRA_STU_' . $context->get_context_id();
+                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                        if ($context_group)
+                        {
+                            $groups[] = $context_group;
+                        }
+                        break;
+                }
+
+                if (count($groups) > 0)
+                {
+                    if ($this->get_user()->is_platform_admin())
+                    {
+                        $context_category->add_child($this->get_context_element($context));
+                    }
+                    elseif (! $this->get_user()->is_platform_admin() &&
+                         \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+                    {
+                        $added = false;
+
+                        foreach ($target_groups as $target_group)
+                        {
+                            if ($added)
+                            {
+                                break;
+                            }
+
+                            foreach ($groups as $group)
+                            {
+                                $is_parent = $group->is_parent_of($target_group);
+                                $is_child = $group->is_child_of($target_group);
+
+                                if ($is_parent || $is_child || $target_group == $group->get_id())
+                                {
+                                    $context_category->add_child($this->get_context_element($context));
+                                    $added = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-        
-        // // Add users
-        // $users = $this->retrieve_users();
-        // if ($users && $users->size() > 0)
-        // {
-        // // Add user category
-        // $user_category = new AdvancedElementFinderElement('users',
-        // 'category', 'Users', 'Users');
-        // $elements->add_element($user_category);
-        
-        // while ($user = $users->next_result())
-        // {
-        // $user_category->add_child($this->get_user_element($user));
-        // }
-        // }
-        
+
         return $elements;
     }
-    
-    // /**
-    // * Retrieves all the users for the selected context
-    // */
-    // private function retrieve_users()
-    // {
-    // $conditions = array();
-    
-    // $user_ids = $this->get_user_ids();
-    // if (count($user_ids) == 0)
-    // {
-    // return;
-    // }
-    
-    // $conditions[] = new InCondition(User :: PROPERTY_ID, $user_ids);
-    
-    // $search_query = Request :: post(self :: PARAM_SEARCH_QUERY);
-    
-    // // Set the conditions for the search query
-    // if ($search_query && $search_query != '')
-    // {
-    // $conditions[] = Utilities :: query_to_condition($search_query, array(User
-    // :: PROPERTY_USERNAME,
-    // User :: PROPERTY_FIRSTNAME, User :: PROPERTY_LASTNAME));
-    // }
-    
-    // // Combine the conditions
-    // $count = count($conditions);
-    // if ($count > 1)
-    // {
-    // $condition = new AndCondition($conditions);
-    // }
-    
-    // if ($count == 1)
-    // {
-    // $condition = $conditions[0];
-    // }
-    
-    // $this->context_count = UserDataManager ::
-    // get_instance()->count_users($condition);
-    
-    // return UserDataManager :: get_instance()->retrieve_users($condition,
-    // $this->get_offset(), 100, array(
-    // new ObjectTableOrder(User :: PROPERTY_LASTNAME), new
-    // ObjectTableOrder(User :: PROPERTY_FIRSTNAME)));
-    // }
+
     protected function get_offset()
     {
         $offset = Request :: post(self :: PARAM_OFFSET);
@@ -136,7 +168,7 @@ class ContextAjaxContextsFeed extends AjaxManager
         {
             $offset = 0;
         }
-        
+
         return $offset;
     }
 
@@ -150,7 +182,7 @@ class ContextAjaxContextsFeed extends AjaxManager
 
     /**
      * Returns all the contexts for this feed
-     * 
+     *
      * @return ResultSet
      */
     public function retrieve_contexts()
@@ -162,9 +194,9 @@ class ContextAjaxContextsFeed extends AjaxManager
             $q = '*' . $search_query . '*';
             $conditions[] = new PatternMatchCondition(Context :: PROPERTY_CONTEXT_NAME, $q);
         }
-        
+
         $filter_id = $this->get_filter();
-        
+
         if ($filter_id)
         {
             $context = DataManager :: retrieve(Context :: class_name(), (int) $filter_id);
@@ -175,80 +207,42 @@ class ContextAjaxContextsFeed extends AjaxManager
         {
             $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, 0);
         }
-        
+
         // Combine the conditions
         $count = count($conditions);
         if ($count > 1)
         {
             $condition = new AndCondition($conditions);
         }
-        
+
         if ($count == 1)
         {
             $condition = $conditions[0];
         }
-        
+
         $parameters = new DataClassRetrievesParameters(
-            $condition, 
-            null, 
-            null, 
+            $condition,
+            null,
+            null,
             array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME)));
         return DataManager :: retrieves(Context :: class_name(), $parameters);
     }
-    
-    // /**
-    // * Retrieves all the users for the selected context
-    // */
-    // function get_user_ids()
-    // {
-    // $filter_id = $this->get_filter();
-    
-    // if (! $filter_id)
-    // {
-    // return;
-    // }
-    
-    // $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID,
-    // $filter_id);
-    // $relations = GroupDataManager ::
-    // get_instance()->retrieve_context_rel_users($condition);
-    
-    // $user_ids = array();
-    
-    // while ($relation = $relations->next_result())
-    // {
-    // $user_ids[] = $relation->get_user_id();
-    // }
-    
-    // return $user_ids;
-    // }
-    
+
     /**
      * Returns the element for a specific context
-     * 
+     *
      * @return AdvancedElementFinderElement
      */
     public function get_context_element($context)
     {
         return new AdvancedElementFinderElement(
-            'context_' . $context->get_id(), 
-            'type type_context', 
-            $context->get_context_name(), 
-            $context->get_context_name(), 
+            'context_' . $context->get_id(),
+            'type type_context',
+            $context->get_context_name(),
+            $context->get_context_name(),
             AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER);
     }
-    
-    // /**
-    // * Returns the element for a specific user
-    // *
-    // * @return AdvancedElementFinderElement
-    // */
-    // function get_user_element($user)
-    // {
-    // return new AdvancedElementFinderElement('user_' . $user->get_id(), 'type
-    // type_user', $user->get_fullname(), $user->get_official_code());
-    // }
-    
+
     /**
      * Returns the id of the selected filter
      */

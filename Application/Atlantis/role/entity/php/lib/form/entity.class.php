@@ -1,8 +1,6 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use rights\NewUserEntity;
-use rights\NewPlatformGroupEntity;
 use common\libraries\Path;
 use common\libraries\ResourceManager;
 use common\libraries\AdvancedElementFinderElementType;
@@ -33,11 +31,11 @@ class EntityForm extends FormValidator
     public function build()
     {
         // entity
-        $user_entity = new NewUserEntity();
+        $user_entity = new UserEntity();
 
         $entities = array();
-        $entities[NewUserEntity :: ENTITY_TYPE] = $user_entity;
-        $entities[NewPlatformGroupEntity :: ENTITY_TYPE] = new NewPlatformGroupEntity();
+        $entities[UserEntity :: ENTITY_TYPE] = $user_entity;
+        $entities[PlatformGroupEntity :: ENTITY_TYPE] = new PlatformGroupEntity();
 
         $types = new AdvancedElementFinderElementTypes();
 

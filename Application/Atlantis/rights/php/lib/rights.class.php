@@ -2,8 +2,6 @@
 namespace application\atlantis\rights;
 
 use rights\RightsLocationEntityRight;
-use rights\NewPlatformGroupEntity;
-use rights\NewUserEntity;
 use rights\RightsUtil;
 use rights\RightsDataManager;
 use common\libraries\Translation;
@@ -11,6 +9,9 @@ use common\libraries\EqualityCondition;
 use common\libraries\DataClassCountParameters;
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\InCondition;
+use application\atlantis\role\entity\UserEntity;
+use application\atlantis\role\entity\PlatformGroupEntity;
+use common\libraries\DataClassCache;
 
 class Rights extends RightsUtil
 {
@@ -20,11 +21,13 @@ class Rights extends RightsUtil
 
     private static $target_users;
 
+    private static $target_groups;
+
     private static $authorized_users;
 
     /**
      *
-     * @return \repository\quota\rights\Rights
+     * @return \repository\access\rights\Rights
      */
     public static function get_instance()
     {
@@ -43,8 +46,8 @@ class Rights extends RightsUtil
     public function access_is_allowed()
     {
         $entities = array();
-        $entities[NewUserEntity :: ENTITY_TYPE] = new NewUserEntity();
-        $entities[NewPlatformGroupEntity :: ENTITY_TYPE] = new NewPlatformGroupEntity();
+        $entities[UserEntity :: ENTITY_TYPE] = new UserEntity();
+        $entities[PlatformGroupEntity :: ENTITY_TYPE] = new PlatformGroupEntity();
 
         return parent :: is_allowed(
             self :: VIEW_RIGHT,
@@ -57,65 +60,63 @@ class Rights extends RightsUtil
             self :: TREE_TYPE_ROOT);
     }
 
-    public function get_quota_view_rights_location_entity_right($entity_id, $entity_type)
+    public function get_access_view_rights_location_entity_right($entity_id, $entity_type)
     {
         return parent :: get_rights_location_entity_right(
             'atlantis',
             self :: VIEW_RIGHT,
             $entity_id,
             $entity_type,
-            self :: get_quota_root_id());
+            self :: get_access_root_id());
     }
 
-    public function invert_quota_location_entity_right($right_id, $entity_id, $entity_type)
+    public function invert_access_location_entity_right($right_id, $entity_id, $entity_type)
     {
         return parent :: invert_location_entity_right(
             'atlantis',
             $right_id,
             $entity_id,
             $entity_type,
-            self :: get_quota_root_id());
+            self :: get_access_root_id());
     }
 
-    public function get_quota_targets_entities()
+    public function get_access_targets_entities()
     {
         return parent :: get_target_entities(self :: VIEW_RIGHT, 'atlantis');
     }
 
-    public function get_quota_root()
+    public function get_access_root()
     {
         return parent :: get_root('atlantis');
     }
 
-    public function get_quota_root_id()
+    public function get_access_root_id()
     {
         return parent :: get_root_id('atlantis');
     }
 
-    public function create_quota_root()
+    public function create_access_root()
     {
         return parent :: create_location('atlantis');
     }
 
-    public function get_quota_location_entity_right($entity_id, $entity_type)
+    public function get_access_location_entity_right($entity_id, $entity_type)
     {
         return RightsDataManager :: get_instance()->retrieve_rights_location_entity_right(
             'atlantis',
             self :: VIEW_RIGHT,
             $entity_id,
             $entity_type,
-            $this->get_quota_root_id());
+            $this->get_access_root_id());
     }
 
-    public function get_target_users(\user\User $user)
+    public function get_target_groups(\user\User $user)
     {
-        if (! isset(self :: $target_users[$user->get_id()]))
+        if (! isset(self :: $target_groups[$user->get_id()]))
         {
             $allowed_groups = array();
 
-            $location_entity_right = $this->get_quota_location_entity_right(
-                $user->get_id(),
-                NewUserEntity :: ENTITY_TYPE);
+            $location_entity_right = $this->get_access_location_entity_right($user->get_id(), UserEntity :: ENTITY_TYPE);
             if ($location_entity_right instanceof RightsLocationEntityRight)
             {
                 $condition = new EqualityCondition(
@@ -136,9 +137,9 @@ class Rights extends RightsUtil
 
             foreach ($user_group_ids as $user_group_id)
             {
-                $location_entity_right = $this->get_quota_location_entity_right(
+                $location_entity_right = $this->get_access_location_entity_right(
                     $user_group_id,
-                    NewPlatformGroupEntity :: ENTITY_TYPE);
+                    PlatformGroupEntity :: ENTITY_TYPE);
                 if ($location_entity_right instanceof RightsLocationEntityRight)
                 {
                     $condition = new EqualityCondition(
@@ -156,10 +157,23 @@ class Rights extends RightsUtil
                 }
             }
 
+            self :: $target_groups[$user->get_id()] = $allowed_groups;
+        }
+
+        return self :: $target_groups[$user->get_id()];
+    }
+
+    public function get_target_users(\user\User $user)
+    {
+        if (! isset(self :: $target_users[$user->get_id()]))
+        {
+            $allowed_groups = self :: get_target_groups($user);
+
             self :: $target_users[$user->get_id()] = array();
 
             if (count($allowed_groups) > 0)
             {
+                DataClassCache :: truncate(\group\Group :: class_name());
                 $condition = new InCondition(\group\Group :: PROPERTY_ID, $allowed_groups);
                 $groups = \group\DataManager :: get_instance()->retrieve_groups($condition);
 
@@ -184,6 +198,27 @@ class Rights extends RightsUtil
     public function is_target_user(\user\User $user, $target_user_id)
     {
         return in_array($target_user_id, $this->get_target_users($user));
+    }
+
+    public function is_target_group(\user\User $user, $target_group_id)
+    {
+        foreach ($this->get_target_groups($user) as $group_id)
+        {
+            if ($target_group_id == $group_id)
+            {
+                return true;
+            }
+            else
+            {
+                $group = \group\DataManager :: get_instance()->retrieve_group($group_id);
+                if ($group->is_parent_of($target_group_id))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public function get_authorized_users(\user\User $user)
@@ -220,13 +255,13 @@ class Rights extends RightsUtil
                 {
                     switch ($location_entity_right->get_entity_type())
                     {
-                        case NewUserEntity :: ENTITY_TYPE :
+                        case UserEntity :: ENTITY_TYPE :
                             if (! in_array($location_entity_right->get_entity_id(), $user_ids))
                             {
                                 $user_ids[] = $location_entity_right->get_entity_id();
                             }
                             break;
-                        case NewPlatformGroupEntity :: ENTITY_TYPE :
+                        case PlatformGroupEntity :: ENTITY_TYPE :
                             $group = \group\DataManager :: get_instance()->retrieve_group(
                                 $location_entity_right->get_entity_id());
 
