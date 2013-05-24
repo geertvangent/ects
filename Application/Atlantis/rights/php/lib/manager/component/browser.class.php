@@ -3,6 +3,10 @@ namespace application\atlantis\rights;
 
 use common\libraries\NotAllowedException;
 use common\libraries\NewObjectTableSupport;
+use application\atlantis\SessionBreadcrumbs;
+use common\libraries\Breadcrumb;
+use common\libraries\Translation;
+use common\libraries\Utilities;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport
 {
@@ -13,14 +17,19 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         {
             throw new NotAllowedException();
         }
-        
+
+        SessionBreadcrumbs :: add(
+            new Breadcrumb(
+                $this->get_url(),
+                Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
+
         $table = new EntityTable($this);
-        
+
         $this->display_header();
         echo $this->get_tabs(self :: ACTION_BROWSE, $table->as_html())->render();
         $this->display_footer();
     }
-    
+
     /*
      * (non-PHPdoc) @see common\libraries.NewObjectTableSupport::get_object_table_condition()
      */

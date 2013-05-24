@@ -7,6 +7,8 @@ use common\libraries\DynamicVisualTab;
 use common\libraries\Utilities;
 use common\libraries\DynamicVisualTabsRenderer;
 use common\libraries\SubManager;
+use application\atlantis\SessionBreadcrumbs;
+use common\libraries\Breadcrumb;
 
 class Manager extends SubManager
 {
@@ -17,6 +19,13 @@ class Manager extends SubManager
     const ACTION_BROWSE = 'browser';
     const ACTION_DELETE = 'deleter';
     const DEFAULT_ACTION = self :: ACTION_CREATE;
+
+    public function __construct($parent)
+    {
+        parent :: __construct($parent);
+
+        SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
+    }
 
     public static function get_action_parameter()
     {

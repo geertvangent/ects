@@ -37,6 +37,10 @@ class DeleterComponent extends Manager
                     {
                         $failures ++;
                     }
+                    else
+                    {
+                        $role_entity->track($this->get_user_id(), RoleEntityTracker :: ACTION_TYPE_DELETE);
+                    }
                 }
             }
 

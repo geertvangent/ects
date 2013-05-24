@@ -3,6 +3,9 @@ namespace application\atlantis\rights;
 
 use common\libraries\NotAllowedException;
 use common\libraries\Translation;
+use application\atlantis\SessionBreadcrumbs;
+use common\libraries\Breadcrumb;
+use common\libraries\Utilities;
 
 class CreatorComponent extends Manager
 {
@@ -13,6 +16,11 @@ class CreatorComponent extends Manager
         {
             throw new NotAllowedException();
         }
+
+        SessionBreadcrumbs :: add(
+            new Breadcrumb(
+                $this->get_url(),
+                Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
 
         $form = new RightsGroupForm($this, $this->get_url());
 

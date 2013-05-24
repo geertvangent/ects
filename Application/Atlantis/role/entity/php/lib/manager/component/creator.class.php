@@ -12,6 +12,7 @@ use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\Condition;
 use common\libraries\NotCondition;
+use common\libraries\ObjectTableOrder;
 
 class CreatorComponent extends Manager
 {
@@ -23,7 +24,7 @@ class CreatorComponent extends Manager
                 $this->get_url(),
                 Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
 
-        if (!\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        if (! \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
@@ -61,7 +62,13 @@ class CreatorComponent extends Manager
                                 $role);
                             $condition = new AndCondition($conditions);
 
-                            $parameters = new DataClassRetrievesParameters($condition);
+                            $parameters = new DataClassRetrievesParameters(
+                                $condition,
+                                null,
+                                null,
+                                array(
+                                    new ObjectTableOrder(
+                                        \application\atlantis\role\entity\RoleEntity :: PROPERTY_START_DATE)));
 
                             $has_merged = $this->merge_entities($parameters, null, $new_start_date, $new_end_date);
 
@@ -78,6 +85,10 @@ class CreatorComponent extends Manager
                                 if (! $entity->create())
                                 {
                                     $failures ++;
+                                }
+                                else
+                                {
+                                    $entity->track($this->get_user_id(), RoleEntityTracker :: ACTION_TYPE_CREATE);
                                 }
                             }
                         }
@@ -172,7 +183,10 @@ class CreatorComponent extends Manager
 
                     if ($was_merged)
                     {
-                        $role_entity->delete();
+                        if ($role_entity->delete())
+                        {
+                            $role_entity->track($this->get_user_id(), RoleEntityTracker :: ACTION_TYPE_MERGE);
+                        }
                     }
 
                     return true || $was_merged;
@@ -199,7 +213,10 @@ class CreatorComponent extends Manager
 
                     if ($was_merged)
                     {
-                        $role_entity->delete();
+                        if ($role_entity->delete())
+                        {
+                            $role_entity->track($this->get_user_id(), RoleEntityTracker :: ACTION_TYPE_MERGE);
+                        }
                     }
 
                     return true || $was_merged;
@@ -226,7 +243,10 @@ class CreatorComponent extends Manager
 
                     if ($was_merged)
                     {
-                        $role_entity->delete();
+                        if ($role_entity->delete())
+                        {
+                            $role_entity->track($this->get_user_id(), RoleEntityTracker :: ACTION_TYPE_MERGE);
+                        }
                     }
 
                     return true || $was_merged;

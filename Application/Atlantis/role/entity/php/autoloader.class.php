@@ -15,6 +15,7 @@ class Autoloader
          'EntityAjaxUserEntityFeed' => '/ajax/user_entity_feed.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'RoleEntity' => '/lib/data_class/role_entity.class.php',
+         'RoleEntityTracker' => '/lib/data_class/role_entity_tracker.class.php',
          'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
          'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'PlatformGroupEntity' => '/lib/entities/platform_group_entity.class.php',

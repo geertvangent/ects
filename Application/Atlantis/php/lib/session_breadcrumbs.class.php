@@ -6,7 +6,7 @@ use common\libraries\Session;
 
 /**
  * application.atlantis.
- * 
+ *
  * @author GillardMagali
  */
 class SessionBreadcrumbs

@@ -3,6 +3,9 @@ namespace application\atlantis\rights;
 
 use common\libraries\NotAllowedException;
 use common\libraries\Translation;
+use application\atlantis\SessionBreadcrumbs;
+use common\libraries\Breadcrumb;
+use common\libraries\Utilities;
 
 class AccessorComponent extends Manager
 {
@@ -13,15 +16,20 @@ class AccessorComponent extends Manager
         {
             throw new NotAllowedException();
         }
-        
+
+        SessionBreadcrumbs :: add(
+            new Breadcrumb(
+                $this->get_url(),
+                Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
+
         $form = new RightsForm($this, $this->get_url());
-        
+
         if ($form->validate())
         {
             $success = $form->set_rights();
-            
+
             $this->redirect(
-                Translation :: get($success ? 'AccessRightsSaved' : 'AccessRightsNotSaved'), 
+                Translation :: get($success ? 'AccessRightsSaved' : 'AccessRightsNotSaved'),
                 ($success ? false : true));
         }
         else

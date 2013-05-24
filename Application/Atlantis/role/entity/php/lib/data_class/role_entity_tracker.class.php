@@ -12,7 +12,7 @@ use common\libraries\DataClass;
  *
  * @author GillardMagali
  */
-class RoleEntity extends DataClass
+class RoleEntityTracker extends DataClass
 {
     const CLASS_NAME = __CLASS__;
 
@@ -25,6 +25,12 @@ class RoleEntity extends DataClass
     const PROPERTY_ROLE_ID = 'role_id';
     const PROPERTY_START_DATE = 'start_date';
     const PROPERTY_END_DATE = 'end_date';
+    const PROPERTY_USER_ID = 'user_id';
+    const PROPERTY_ACTION_DATE = 'action_date';
+    const PROPERTY_ACTION_TYPE = 'action_type';
+    const ACTION_TYPE_CREATE = 1;
+    const ACTION_TYPE_DELETE = 2;
+    const ACTION_TYPE_MERGE = 3;
 
     private $entity;
 
@@ -46,6 +52,9 @@ class RoleEntity extends DataClass
         $extended_property_names[] = self :: PROPERTY_ROLE_ID;
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
+        $extended_property_names[] = self :: PROPERTY_USER_ID;
+        $extended_property_names[] = self :: PROPERTY_ACTION_DATE;
+        $extended_property_names[] = self :: PROPERTY_ACTION_TYPE;
 
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -160,6 +169,36 @@ class RoleEntity extends DataClass
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
     }
 
+    public function get_user_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_USER_ID);
+    }
+
+    public function set_user_id($user_id)
+    {
+        $this->set_default_property(self :: PROPERTY_USER_ID, $user_id);
+    }
+
+    public function get_action_date()
+    {
+        return $this->get_default_property(self :: PROPERTY_ACTION_DATE);
+    }
+
+    public function set_action_date($action_date)
+    {
+        $this->set_default_property(self :: PROPERTY_ACTION_DATE, $action_date);
+    }
+
+    public function get_action_type()
+    {
+        return $this->get_default_property(self :: PROPERTY_ACTION_TYPE);
+    }
+
+    public function set_action_type($action_type)
+    {
+        $this->set_default_property(self :: PROPERTY_ACTION_TYPE, $action_type);
+    }
+
     /**
      *
      * @return string The table name of the data class
@@ -249,21 +288,5 @@ class RoleEntity extends DataClass
                 (int) $this->get_context_id());
         }
         return $this->context;
-    }
-
-    public function track($user_id, $action_type, $action_date = null)
-    {
-        $tracker = new RoleEntityTracker();
-        $tracker->set_entity_type($this->get_entity_type());
-        $tracker->set_entity_id($this->get_entity_id());
-        $tracker->set_context_id($this->get_context_id());
-        $tracker->set_role_id($this->get_role_id());
-        $tracker->set_start_date($this->get_start_date());
-        $tracker->set_end_date($this->get_end_date());
-        $tracker->set_user_id($user_id);
-        $tracker->set_action_type($action_type);
-        $tracker->set_action_date($action_date ? $action_date : time());
-
-        return $tracker->create();
     }
 }
