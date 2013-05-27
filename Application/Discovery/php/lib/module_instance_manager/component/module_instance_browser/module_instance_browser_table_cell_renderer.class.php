@@ -70,8 +70,8 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
                         $this->browser->get_url(
                             array(
                                 ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MOVE_INSTANCE, 
-                                DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(), 
-                                DiscoveryManager :: PARAM_DIRECTION => DiscoveryManager :: PARAM_DIRECTION_UP)), 
+                                Manager :: PARAM_MODULE_ID => $module_instance->get_id(), 
+                                Manager :: PARAM_DIRECTION => Manager :: PARAM_DIRECTION_UP)), 
                         ToolbarItem :: DISPLAY_ICON));
             }
             else
@@ -93,8 +93,8 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
                         $this->browser->get_url(
                             array(
                                 ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MOVE_INSTANCE, 
-                                DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id(), 
-                                DiscoveryManager :: PARAM_DIRECTION => DiscoveryManager :: PARAM_DIRECTION_DOWN)), 
+                                Manager :: PARAM_MODULE_ID => $module_instance->get_id(), 
+                                Manager :: PARAM_DIRECTION => Manager :: PARAM_DIRECTION_DOWN)), 
                         ToolbarItem :: DISPLAY_ICON));
             }
             else
@@ -117,7 +117,7 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
                     $this->browser->get_url(
                         array(
                             ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_DEACTIVATE_INSTANCE, 
-                            DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                            Manager :: PARAM_MODULE_ID => $module_instance->get_id())), 
                     ToolbarItem :: DISPLAY_ICON, 
                     true));
         }
@@ -130,7 +130,7 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
                     $this->browser->get_url(
                         array(
                             ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_ACTIVATE_INSTANCE, 
-                            DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                            Manager :: PARAM_MODULE_ID => $module_instance->get_id())), 
                     ToolbarItem :: DISPLAY_ICON, 
                     true));
         }
@@ -142,7 +142,7 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
                 $this->browser->get_url(
                     array(
                         ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_UPDATE_INSTANCE, 
-                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                        Manager :: PARAM_MODULE_ID => $module_instance->get_id())), 
                 ToolbarItem :: DISPLAY_ICON));
         $toolbar->add_item(
             new ToolbarItem(
@@ -151,7 +151,7 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
                 $this->browser->get_url(
                     array(
                         ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_DELETE_INSTANCE, 
-                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                        Manager :: PARAM_MODULE_ID => $module_instance->get_id())), 
                 ToolbarItem :: DISPLAY_ICON, 
                 true));
         $toolbar->add_item(
@@ -161,7 +161,7 @@ class ModuleInstanceBrowserTableCellRenderer extends DefaultModuleInstanceTableC
                 $this->browser->get_url(
                     array(
                         ModuleInstanceManager :: PARAM_INSTANCE_ACTION => ModuleInstanceManager :: ACTION_MANAGE_INSTANCE_RIGHTS, 
-                        DiscoveryManager :: PARAM_MODULE_ID => $module_instance->get_id())), 
+                        Manager :: PARAM_MODULE_ID => $module_instance->get_id())), 
                 ToolbarItem :: DISPLAY_ICON));
         return $toolbar->as_html();
     }

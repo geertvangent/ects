@@ -13,7 +13,7 @@ class ModuleInstanceManagerRightsEditorComponent extends ModuleInstanceManager
 
     public function run()
     {
-        $this->module_instance_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
+        $this->module_instance_id = Request :: get(Manager :: PARAM_MODULE_ID);
         $module_instance = DataManager :: get_instance()->retrieve_module_instance($this->module_instance_id);
         $this->namespace = '\\' . $module_instance->get_type() . '\Rights';
         RightsEditorManager :: launch($this);
@@ -27,7 +27,7 @@ class ModuleInstanceManagerRightsEditorComponent extends ModuleInstanceManager
 
     public function get_additional_parameters()
     {
-        $parameters[] = DiscoveryManager :: PARAM_MODULE_ID;
+        $parameters[] = Manager :: PARAM_MODULE_ID;
         return $parameters;
     }
 

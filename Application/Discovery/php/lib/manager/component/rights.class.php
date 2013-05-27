@@ -12,7 +12,7 @@ use common\extensions\new_rights_editor_manager\RightsEditorManager;
  * @author Hans De Bisschop
  * @package application.phrases
  */
-class DiscoveryManagerRightsComponent extends DiscoveryManager implements DelegateComponent
+class RightsComponent extends Manager implements DelegateComponent
 {
 
     private $module_instance_id;
@@ -26,9 +26,9 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
         $this->namespace = '\\' . $module_instance->get_type() . '\Rights';
         $namespace = $this->namespace;
         RightsEditorManager :: launch(
-            $this, 
-            'discovery_' . $this->module_instance_id, 
-            $this->get_locations(), 
+            $this,
+            'discovery_' . $this->module_instance_id,
+            $this->get_locations(),
             $this->get_entities());
     }
 
@@ -36,7 +36,7 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
     {
         $namespace = $this->namespace;
         $locations = array();
-        
+
         $locations[] = $namespace :: get_instance()->get_current_location($this->module_instance_id);
         return $locations;
     }
@@ -44,13 +44,13 @@ class DiscoveryManagerRightsComponent extends DiscoveryManager implements Delega
     public function get_entities()
     {
         $excluded_users[] = $this->get_user_id();
-        
+
         $user_entity = new NewUserEntity();
-        
+
         $entities = array();
         $entities[NewUserEntity :: ENTITY_TYPE] = $user_entity;
         $entities[NewPlatformGroupEntity :: ENTITY_TYPE] = new NewPlatformGroupEntity();
-        
+
         return $entities;
     }
 

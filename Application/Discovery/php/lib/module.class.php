@@ -102,7 +102,7 @@ class Module
     public function get_instance_url($instance_id, $instance_parameters)
     {
         $parameters = array();
-        $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $instance_id;
+        $parameters[Manager :: PARAM_MODULE_ID] = $instance_id;
         foreach ($instance_parameters->get_parameters() as $key => $value)
         {
             $parameters[$key] = $value;
@@ -113,8 +113,8 @@ class Module
     public function get_rights_url($instance_id, $instance_parameters)
     {
         $parameters = array();
-        $parameters[DiscoveryManager :: PARAM_MODULE_ID] = $instance_id;
-        $parameters[DiscoveryManager :: PARAM_ACTION] = DiscoveryManager :: ACTION_RIGHTS;
+        $parameters[Manager :: PARAM_MODULE_ID] = $instance_id;
+        $parameters[Manager :: PARAM_ACTION] = Manager :: ACTION_RIGHTS;
         foreach ($instance_parameters->get_parameters() as $key => $value)
         {
             $parameters[$key] = $value;

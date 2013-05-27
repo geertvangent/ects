@@ -3,6 +3,7 @@
 	<package>
 		<name>Discovery</name>
 		<code>discovery</code>
+		<context>application\discovery\module\training\implementation\bamaflex</context>
 		<section>application</section>
 		<category>research</category>
 		<authors>

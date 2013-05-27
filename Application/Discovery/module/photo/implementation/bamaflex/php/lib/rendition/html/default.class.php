@@ -16,8 +16,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $parameters = $this->get_application()->get_parameters();
         $parameters = array_merge($parameters, $this->get_module_parameters()->get_parameters());
-        $parameters[\application\discovery\DiscoveryManager :: PARAM_MODULE_ID] = Request :: get(
-            \application\discovery\DiscoveryManager :: PARAM_MODULE_ID);
+        $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = Request :: get(
+            \application\discovery\Manager :: PARAM_MODULE_ID);
         
         \application\discovery\HtmlDefaultRendition :: add_export_action(
             $this, 

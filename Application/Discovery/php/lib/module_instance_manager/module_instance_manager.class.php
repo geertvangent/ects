@@ -48,7 +48,7 @@ class ModuleInstanceManager extends SubManager
 
     public function get_application_component_path()
     {
-        return WebApplication :: get_application_class_lib_path(DiscoveryManager :: APPLICATION_NAME) .
+        return WebApplication :: get_application_class_lib_path(Manager :: APPLICATION_NAME) .
              'module_instance_manager/component/';
     }
 

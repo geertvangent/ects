@@ -12,8 +12,8 @@ class ModuleInstanceManagerMoverComponent extends ModuleInstanceManager
 
     public function run()
     {
-        $id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
-        $direction = Request :: get(DiscoveryManager :: PARAM_DIRECTION);
+        $id = Request :: get(Manager :: PARAM_MODULE_ID);
+        $direction = Request :: get(Manager :: PARAM_DIRECTION);
         $succes = true;
         
         if (isset($id))
@@ -24,7 +24,7 @@ class ModuleInstanceManagerMoverComponent extends ModuleInstanceManager
                 new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_instance->get_content_type()));
             
             $display_order = $module_instance->get_display_order();
-            $new_place = ($display_order + ($direction == DiscoveryManager :: PARAM_DIRECTION_UP ? - 1 : 1));
+            $new_place = ($display_order + ($direction == Manager :: PARAM_DIRECTION_UP ? - 1 : 1));
             
             if ($new_place > 0 && $new_place <= $max)
             {

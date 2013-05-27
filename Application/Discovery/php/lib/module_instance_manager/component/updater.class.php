@@ -15,7 +15,7 @@ class ModuleInstanceManagerUpdaterComponent extends ModuleInstanceManager
             $this->not_allowed();
         }
         
-        $instance_id = Request :: get(DiscoveryManager :: PARAM_MODULE_ID);
+        $instance_id = Request :: get(Manager :: PARAM_MODULE_ID);
         
         if (isset($instance_id))
         {
@@ -23,7 +23,7 @@ class ModuleInstanceManagerUpdaterComponent extends ModuleInstanceManager
             $form = new ModuleInstanceForm(
                 ModuleInstanceForm :: TYPE_EDIT, 
                 $module_instance, 
-                $this->get_url(array(DiscoveryManager :: PARAM_MODULE_ID => $instance_id)));
+                $this->get_url(array(Manager :: PARAM_MODULE_ID => $instance_id)));
             
             if ($form->validate())
             {

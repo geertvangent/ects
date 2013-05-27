@@ -4,6 +4,7 @@
 		<name>Discovery</name>
 		<code>discovery</code>
 		<section>application</section>
+		<context>application\discovery\module\course_results</context>
 		<category>research</category>
 		<authors>
 			<author>

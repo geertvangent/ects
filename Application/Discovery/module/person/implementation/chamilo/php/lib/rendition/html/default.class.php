@@ -37,7 +37,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_action_bar()
     {
         $parameters = $this->get_application()->get_parameters(true);
-        $parameters[\application\discovery\DiscoveryManager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->set_search_url($this->get_application()->get_url($parameters));
@@ -53,7 +53,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $url = $this->get_application()->get_url(
                 array(
-                        \application\discovery\DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                        \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
                         \group\GroupManager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new \group\GroupMenu($this->get_group(), urldecode($url));
         
@@ -76,7 +76,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
         $parameters[\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
-        $parameters[\application\discovery\DiscoveryManager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         
         $query = $this->action_bar->get_query();
         if (isset($query) && $query != '')
@@ -169,7 +169,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         return $this->get_application()->get_url(
                 array(
-                        \application\discovery\DiscoveryManager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                        \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
                         \group\GroupManager :: PARAM_GROUP_ID => $group->get_id()));
     }
     
@@ -186,7 +186,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
         $parameters[\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
-        $parameters[\application\discovery\DiscoveryManager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         return $parameters;
     }
     

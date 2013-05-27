@@ -44,10 +44,10 @@ class DataManager extends \common\libraries\DataManager
     public static function create_module_rights_storage_units($module)
     {
         $right_location = self :: parse_xml_file(
-            WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) .
+            WebApplication :: get_application_path(Manager :: APPLICATION_NAME) .
                  'php/rights/rights_location.xml');
         $right_location_entity_right = self :: parse_xml_file(
-            WebApplication :: get_application_path(DiscoveryManager :: APPLICATION_NAME) .
+            WebApplication :: get_application_path(Manager :: APPLICATION_NAME) .
                  'php/rights/rights_location_entity_right.xml');
         
         if (! self :: get_instance()->create_storage_unit(
@@ -60,7 +60,7 @@ class DataManager extends \common\libraries\DataManager
         
         $rights = $module->get_type() . '\Rights';
         if (! $rights :: get_instance()->create_subtree_root_location(
-            DiscoveryManager :: APPLICATION_NAME . '_' . $module->get_id(), 
+            Manager :: APPLICATION_NAME . '_' . $module->get_id(), 
             0, 
             RightsUtil :: TREE_TYPE_ROOT))
         {

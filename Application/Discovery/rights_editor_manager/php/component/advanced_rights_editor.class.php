@@ -11,7 +11,7 @@ use common\libraries\InCondition;
 use application\discovery\DiscoveryDataManager;
 use common\libraries\AndCondition;
 use application\discovery\RightsGroupEntityRight;
-use application\discovery\DiscoveryManager;
+use application\discovery\Manager;
 use group\GroupDataManager;
 use group\GroupMenu;
 use group\GroupManager;
@@ -154,7 +154,7 @@ class RightsEditorManagerAdvancedRightsEditorComponent extends RightsEditorManag
         $group_conditions = array();
         $group_conditions[] = new EqualityCondition(
             RightsGroupEntityRight :: PROPERTY_MODULE_ID, 
-            Request :: get(DiscoveryManager :: PARAM_MODULE_ID));
+            Request :: get(Manager :: PARAM_MODULE_ID));
         $group_conditions[] = new EqualityCondition(
             RightsGroupEntityRight :: PROPERTY_GROUP_ID, 
             Request :: get(GroupManager :: PARAM_GROUP_ID));
