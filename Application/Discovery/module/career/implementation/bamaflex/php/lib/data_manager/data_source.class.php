@@ -288,13 +288,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         return 0;
     }
 
-    private function retrieve_child_courses($enrollment_id)
+    private function retrieve_child_courses($enrollment_ids)
     {
+        $enrollment_id = md5(serialize($enrollment_ids));
+
         if (! isset($this->child_courses[$enrollment_id]))
         {
             $conditions = array();
             $conditions[] = new NotCondition(new EqualityCondition('programme_parent_id', null));
-            $conditions[] = new EqualityCondition('enrollment_id', $enrollment_id);
+            $conditions[] = new InCondition('enrollment_id', $enrollment_ids);
             $condition = new AndCondition($conditions);
             $translator = DoctrineConditionTranslator :: factory($this);
 

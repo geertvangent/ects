@@ -6,8 +6,6 @@ use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\career\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\DynamicContentTab;
 use common\libraries\Theme;
 use common\libraries\Utilities;
 use common\libraries\Translation;
