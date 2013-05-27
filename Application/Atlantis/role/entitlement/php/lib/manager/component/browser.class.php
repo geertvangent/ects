@@ -51,17 +51,17 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
 
     public function has_role_id()
     {
-        return !is_null($this->role_id);
+        return !empty($this->role_id);
     }
 
     public function has_right_id()
     {
-        return !is_null($this->right_id);
+        return !empty($this->right_id);
     }
 
     public function has_application_id()
     {
-        return !is_null($this->application_id);
+        return !empty($this->application_id);
     }
 
     public function run()
