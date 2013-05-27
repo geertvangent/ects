@@ -5,9 +5,9 @@ use common\libraries\BreadcrumbTrail;
 use common\libraries\Theme;
 use common\libraries\CommonDataManager;
 use common\libraries\Translation;
-use core\lynx\PackageList;
 use common\libraries\WebApplication;
 use common\libraries\NotAllowedException;
+use common\libraries\package\PackageList;
 
 class Manager extends WebApplication
 {
