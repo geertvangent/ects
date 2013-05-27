@@ -112,10 +112,10 @@ class RightsForm extends FormValidator
                     $target_id,
                     $entity_type);
                 $condition = new EqualityCondition(
-                    LocationEntityRightGroup :: PROPERTY_LOCATION_ENTITY_RIGHT_ID,
+                    RightsLocationEntityRightGroup :: PROPERTY_LOCATION_ENTITY_RIGHT_ID,
                     $location_entity_right->get_id());
 
-                if (! DataManager :: deletes(LocationEntityRightGroup :: class_name(), $condition))
+                if (! DataManager :: deletes(RightsLocationEntityRightGroup :: class_name(), $condition))
                 {
                     return false;
                 }

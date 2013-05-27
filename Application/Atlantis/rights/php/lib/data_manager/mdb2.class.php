@@ -12,6 +12,6 @@ class Mdb2DataManager extends Mdb2Database implements DataManagerInterface
     public function initialize()
     {
         parent :: initialize();
-        $this->set_prefix('atlantis_rights_');
+        $this->set_prefix('atlantis_');
     }
 }

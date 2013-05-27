@@ -51,7 +51,7 @@ class Rights extends RightsUtil
 
         return parent :: is_allowed(
             self :: VIEW_RIGHT,
-            'atlantis',
+            __NAMESPACE__,
             null,
             $entities,
             0,
@@ -63,7 +63,7 @@ class Rights extends RightsUtil
     public function get_access_view_rights_location_entity_right($entity_id, $entity_type)
     {
         return parent :: get_rights_location_entity_right(
-            'atlantis',
+            __NAMESPACE__,
             self :: VIEW_RIGHT,
             $entity_id,
             $entity_type,
@@ -73,7 +73,7 @@ class Rights extends RightsUtil
     public function invert_access_location_entity_right($right_id, $entity_id, $entity_type)
     {
         return parent :: invert_location_entity_right(
-            'atlantis',
+            __NAMESPACE__,
             $right_id,
             $entity_id,
             $entity_type,
@@ -82,28 +82,28 @@ class Rights extends RightsUtil
 
     public function get_access_targets_entities()
     {
-        return parent :: get_target_entities(self :: VIEW_RIGHT, 'atlantis');
+        return parent :: get_target_entities(self :: VIEW_RIGHT, __NAMESPACE__);
     }
 
     public function get_access_root()
     {
-        return parent :: get_root('atlantis');
+        return parent :: get_root(__NAMESPACE__);
     }
 
     public function get_access_root_id()
     {
-        return parent :: get_root_id('atlantis');
+        return parent :: get_root_id(__NAMESPACE__);
     }
 
     public function create_access_root()
     {
-        return parent :: create_location('atlantis');
+        return parent :: create_location(__NAMESPACE__);
     }
 
     public function get_access_location_entity_right($entity_id, $entity_type)
     {
-        return RightsDataManager :: get_instance()->retrieve_rights_location_entity_right(
-            'atlantis',
+        return \rights\DataManager :: retrieve_rights_location_entity_right(
+            __NAMESPACE__,
             self :: VIEW_RIGHT,
             $entity_id,
             $entity_type,
@@ -120,9 +120,9 @@ class Rights extends RightsUtil
             if ($location_entity_right instanceof RightsLocationEntityRight)
             {
                 $condition = new EqualityCondition(
-                    LocationEntityRightGroup :: PROPERTY_LOCATION_ENTITY_RIGHT_ID,
+                    RightsLocationEntityRightGroup :: PROPERTY_LOCATION_ENTITY_RIGHT_ID,
                     $location_entity_right->get_id());
-                $right_groups = DataManager :: retrieves(LocationEntityRightGroup :: class_name(), $condition);
+                $right_groups = DataManager :: retrieves(RightsLocationEntityRightGroup :: class_name(), $condition);
 
                 while ($right_group = $right_groups->next_result())
                 {
@@ -143,9 +143,9 @@ class Rights extends RightsUtil
                 if ($location_entity_right instanceof RightsLocationEntityRight)
                 {
                     $condition = new EqualityCondition(
-                        LocationEntityRightGroup :: PROPERTY_LOCATION_ENTITY_RIGHT_ID,
+                        RightsLocationEntityRightGroup :: PROPERTY_LOCATION_ENTITY_RIGHT_ID,
                         $location_entity_right->get_id());
-                    $right_groups = DataManager :: retrieves(LocationEntityRightGroup :: class_name(), $condition);
+                    $right_groups = DataManager :: retrieves(RightsLocationEntityRightGroup :: class_name(), $condition);
 
                     while ($right_group = $right_groups->next_result())
                     {
@@ -230,8 +230,8 @@ class Rights extends RightsUtil
 
             foreach ($user_group_ids as $user_group_id)
             {
-                $condition = new EqualityCondition(LocationEntityRightGroup :: PROPERTY_GROUP_ID, $user_group_id);
-                $right_groups = DataManager :: retrieves(LocationEntityRightGroup :: class_name(), $condition);
+                $condition = new EqualityCondition(RightsLocationEntityRightGroup :: PROPERTY_GROUP_ID, $user_group_id);
+                $right_groups = DataManager :: retrieves(RightsLocationEntityRightGroup :: class_name(), $condition);
 
                 while ($right_group = $right_groups->next_result())
                 {
@@ -246,9 +246,9 @@ class Rights extends RightsUtil
 
             if (count($location_entity_right_ids) > 0)
             {
-                $condition = new InCondition(LocationEntityRight :: PROPERTY_ID, $location_entity_right_ids);
+                $condition = new InCondition(RightsLocationEntityRight :: PROPERTY_ID, $location_entity_right_ids);
                 $location_entity_rights = RightsDataManager :: get_instance()->retrieve_rights_location_rights(
-                    'atlantis',
+                    __NAMESPACE__,
                     $condition);
 
                 while ($location_entity_right = $location_entity_rights->next_result())

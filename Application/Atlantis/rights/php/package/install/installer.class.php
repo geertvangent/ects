@@ -14,7 +14,7 @@ class Installer extends \common\libraries\package\Installer
         parent :: __construct($values, DataManager :: get_instance());
     }
 
-    public function install_extra()
+    public function extra()
     {
         if (! Rights :: get_instance()->create_access_root())
         {

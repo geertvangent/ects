@@ -25,6 +25,8 @@ class Installer extends WebApplicationInstaller
         $installers[] = 'application\atlantis\application';
         $installers[] = 'application\atlantis\role';
         $installers[] = 'application\atlantis\context';
+        $installers[] = 'application\atlantis\rights';
+        $installers[] = 'application\atlantis\user_group';
 
         return $installers;
     }

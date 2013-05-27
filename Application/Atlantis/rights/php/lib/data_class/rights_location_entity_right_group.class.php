@@ -1,8 +1,8 @@
 <?php
 namespace application\atlantis\rights;
 
-use rights\RightsDataManager;
-use group\GroupDataManager;
+use group\DataManager as GroupDataManager;
+use group\Group;
 use common\libraries\Utilities;
 use common\libraries\DataClass;
 
@@ -10,7 +10,7 @@ use common\libraries\DataClass;
  *
  * @author Hans De Bisschop
  */
-class LocationEntityRightGroup extends DataClass
+class RightsLocationEntityRightGroup extends DataClass
 {
     const CLASS_NAME = __CLASS__;
 
@@ -21,7 +21,7 @@ class LocationEntityRightGroup extends DataClass
     const PROPERTY_GROUP_ID = 'group_id';
 
     /**
-     * The group of the LocationEntityRightGroup
+     * The group of the RightsLocationEntityRightGroup
      *
      * @var \group\Group
      */
@@ -29,7 +29,7 @@ class LocationEntityRightGroup extends DataClass
 
     /**
      *
-     * @var LocationEntityRightGroup
+     * @var RightsLocationEntityRightGroup
      */
     private $location_entity_right;
 
@@ -66,9 +66,8 @@ class LocationEntityRightGroup extends DataClass
     {
         if (! isset($this->location_entity_right))
         {
-            $this->location_entity_right = RightsDataManager :: get_instance()->retrieve_rights_location_entity_right_by_id(
-                'atlantis',
-                $this->get_location_entity_right_id());
+            $this->location_entity_right = \rights\DataManager :: retrieve_rights_location_entity_right_by_id(
+                    __NAMESPACE__, $this->get_location_entity_right_id());
         }
         return $this->location_entity_right;
     }
@@ -87,7 +86,7 @@ class LocationEntityRightGroup extends DataClass
     {
         if (! isset($this->group))
         {
-            $this->group = GroupDataManager :: get_instance()->retrieve_group($this->get_group_id());
+            $this->group = GroupDataManager :: retrieve_by_id(Group :: class_name(), $this->get_group_id());
         }
         return $this->group;
     }

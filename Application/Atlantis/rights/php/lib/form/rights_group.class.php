@@ -9,7 +9,6 @@ use common\libraries\Translation;
 use common\libraries\FormValidator;
 use common\libraries\Utilities;
 use common\libraries\AdvancedElementFinderElementTypes;
-use common\libraries\AdvancedElementFinderElements;
 
 class RightsGroupForm extends FormValidator
 {
@@ -102,18 +101,18 @@ class RightsGroupForm extends FormValidator
                 {
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
-                        LocationEntityRightGroup :: PROPERTY_LOCATION_ENTITY_RIGHT_ID,
+                        RightsLocationEntityRightGroup :: PROPERTY_LOCATION_ENTITY_RIGHT_ID,
                         $location_entity_right->get_id());
-                    $conditions[] = new EqualityCondition(LocationEntityRightGroup :: PROPERTY_GROUP_ID, $group_id);
+                    $conditions[] = new EqualityCondition(RightsLocationEntityRightGroup :: PROPERTY_GROUP_ID, $group_id);
                     $condition = new AndCondition($conditions);
 
                     $existing_right_group = DataManager :: retrieve(
-                        LocationEntityRightGroup :: class_name(),
+                        RightsLocationEntityRightGroup :: class_name(),
                         $condition);
 
-                    if (! $existing_right_group instanceof LocationEntityRightGroup)
+                    if (! $existing_right_group instanceof RightsLocationEntityRightGroup)
                     {
-                        $new_right_group = new LocationEntityRightGroup();
+                        $new_right_group = new RightsLocationEntityRightGroup();
                         $new_right_group->set_location_entity_right_id($location_entity_right->get_id());
                         $new_right_group->set_group_id($group_id);
 
