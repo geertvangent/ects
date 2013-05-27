@@ -64,6 +64,12 @@ class Manager extends WebApplication
             $package_list->add_package(\application\atlantis\application\Manager :: context());
         }
 
+        if (! CommonDataManager :: get_registration(\application\atlantis\rights\Manager :: context()) ||
+        $include_installed)
+        {
+            $package_list->add_package(\application\atlantis\rights\Manager :: context());
+        }
+
         if (! CommonDataManager :: get_registration(\application\atlantis\context\Manager :: context()) ||
              $include_installed)
         {

@@ -70,66 +70,66 @@ class ContextAjaxContextsFeed extends AjaxManager
 
             while ($context = $contexts->next_result())
             {
-                DataClassCache :: truncate(\group\Group :: class_name());
-
-                $groups = array();
-                switch ($context->get_context_type())
+                if ($this->get_user()->is_platform_admin())
                 {
-                    case 0 :
-                        $code = 'CA';
-                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                        if ($context_group)
-                        {
-                            $groups[] = $context_group;
-                        }
-
-                        break;
-                    case 1 :
-                        $code = 'AY_' . $context->get_context_name();
-                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                        if ($context_group)
-                        {
-                            $groups[] = $context_group;
-                        }
-                        break;
-                    case 2 :
-                        $code = 'DEP_' . $context->get_context_id();
-                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                        if ($context_group)
-                        {
-                            $groups[] = $context_group;
-                        }
-                        break;
-                    case 3 :
-                        $code = 'TRA_OP_' . $context->get_context_id();
-                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                        if ($context_group)
-                        {
-                            $groups[] = $context_group;
-                        }
-
-                        $code = 'TRA_STU_' . $context->get_context_id();
-                        $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                        if ($context_group)
-                        {
-                            $groups[] = $context_group;
-                        }
-                        break;
+                    $context_category->add_child($this->get_context_element($context));
                 }
-
-                if (count($groups) > 0)
+                elseif (! $this->get_user()->is_platform_admin() &&
+                     \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
                 {
-                    if ($this->get_user()->is_platform_admin())
+                    DataClassCache :: truncate(\group\Group :: class_name());
+
+                    $groups = array();
+                    switch ($context->get_context_type())
                     {
-                        $context_category->add_child($this->get_context_element($context));
+                        case 0 :
+                            $code = 'CA';
+                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                            if ($context_group)
+                            {
+                                $groups[] = $context_group;
+                            }
+
+                            break;
+                        case 1 :
+                            $code = 'AY_' . $context->get_context_name();
+                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                            if ($context_group)
+                            {
+                                $groups[] = $context_group;
+                            }
+                            break;
+                        case 2 :
+                            $code = 'DEP_' . $context->get_context_id();
+                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                            if ($context_group)
+                            {
+                                $groups[] = $context_group;
+                            }
+                            break;
+                        case 3 :
+                            $code = 'TRA_OP_' . $context->get_context_id();
+                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                            if ($context_group)
+                            {
+                                $groups[] = $context_group;
+                            }
+
+                            $code = 'TRA_STU_' . $context->get_context_id();
+                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
+
+                            if ($context_group)
+                            {
+                                $groups[] = $context_group;
+                            }
+                            break;
                     }
-                    elseif (! $this->get_user()->is_platform_admin() &&
-                         \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+
+                    if (count($groups) > 0)
                     {
                         $added = false;
 

@@ -16,12 +16,12 @@ use HTML_Menu_ArrayRenderer;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
- * 
+ *
  * @package group.lib
  */
 /**
  * This class provides a navigation menu to allow a user to browse through categories of courses.
- * 
+ *
  * @author Bart Mollet
  */
 class Menu extends HTML_Menu
@@ -48,29 +48,29 @@ class Menu extends HTML_Menu
 
     /**
      * Creates a new category navigation menu.
-     * 
+     *
      * @param int $owner The ID of the owner of the categories to provide in this menu.
      * @param int $current_category The ID of the current category in the menu.
      * @param string $url_format The format to use for the URL of a category. Passed to sprintf(). Defaults to the
      *            string "?category=%s".
      * @param array $extra_items An array of extra tree items, added to the root.
      */
-    function __construct($current_category, $url_format = '?application=atlantis&go=context&context_id=%s', $include_root = true, $show_complete_tree = false, 
-            $hide_current_category = false)
+    function __construct($current_category, $url_format = '?application=atlantis&go=context&context_id=%s', $include_root = true, $show_complete_tree = false,
+        $hide_current_category = false)
     {
         $this->include_root = $include_root;
         $this->show_complete_tree = $show_complete_tree;
         $this->hide_current_category = $hide_current_category;
-        
+
         if ($current_category == '0' || is_null($current_category))
         {
             // $conditions = array();
             // $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, 0);
             // $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, 0);
             // $condition = new AndCondition($conditions);
-            
+
             // $context = DataManager :: retrieve(Context :: class_name(), new DataClassRetrieveParameters($condition));
-            
+
             $context = new Context();
             $context->set_id(0);
             $context->set_context_type(0);
@@ -83,7 +83,7 @@ class Menu extends HTML_Menu
             $context = DataManager :: retrieve_by_id(Context :: class_name(), (int) $current_category);
             $this->current_category = $context;
         }
-        
+
         $this->urlFmt = $url_format;
         $menu = $this->get_menu();
         parent :: __construct($menu);
@@ -94,13 +94,13 @@ class Menu extends HTML_Menu
     function get_menu()
     {
         $include_root = $this->include_root;
-        
+
         $context = new Context();
         $context->set_id(0);
         $context->set_context_type(0);
         $context->set_context_id(0);
         $context->set_context_name(Translation :: get('Root'));
-        
+
         if (! $include_root)
         {
             return $this->get_menu_items($context->get_context_id(), $context->get_context_type());
@@ -108,17 +108,17 @@ class Menu extends HTML_Menu
         else
         {
             $menu = array();
-            
+
             $menu_item = array();
             $menu_item['title'] = $context->get_context_name();
             $menu_item['url'] = $this->get_url($context->get_id());
-            
+
             $sub_menu_items = $this->get_menu_items($context->get_context_id(), $context->get_context_type());
             if (count($sub_menu_items) > 0)
             {
                 $menu_item['sub'] = $sub_menu_items;
             }
-            
+
             $menu_item['class'] = 'home';
             $menu_item[OptionsMenuRenderer :: KEY_ID] = $context->get_id();
             $menu[$context->get_id()] = $menu_item;
@@ -128,7 +128,7 @@ class Menu extends HTML_Menu
 
     /**
      * Returns the menu items.
-     * 
+     *
      * @param array $extra_items An array of extra tree items, added to the root.
      * @return array An array with all menu items. The structure of this array is the structure needed by
      *         PEAR::HTML_Menu, on which this class is based.
@@ -136,34 +136,40 @@ class Menu extends HTML_Menu
     private function get_menu_items($parent_id = 0, $parent_type = 0)
     {
         $current_category = $this->current_category;
-        
+
         $show_complete_tree = $this->show_complete_tree;
         $hide_current_category = $this->hide_current_category;
-        
+
         $conditions = array();
         $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, $parent_id);
         $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, $parent_type);
         $condition = new AndCondition($conditions);
-        
-        $contexts = DataManager :: retrieves(Context :: class_name(), 
-                new DataClassRetrievesParameters($condition, null, null, 
-                        array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME))));
+
+        $contexts = DataManager :: retrieves(
+            Context :: class_name(),
+            new DataClassRetrievesParameters(
+                $condition,
+                null,
+                null,
+                array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME))));
         while ($context = $contexts->next_result())
         {
             $context_id = $context->get_id();
-            
+
             if (! ($context_id == $current_category->get_id() && $hide_current_category))
             {
                 $menu_item = array();
                 $menu_item['title'] = $context->get_context_name();
                 $menu_item['url'] = $this->get_url($context->get_id());
-                
-                if ($context->is_parent_of($current_category) || $context->get_id() == $current_category->get_id() || $show_complete_tree)
+
+                if ($context->is_parent_of($current_category) || $context->get_id() == $current_category->get_id() ||
+                     $show_complete_tree)
                 {
                     if ($context->has_children())
                     {
-                        $menu_item['sub'] = $this->get_menu_items($context->get_context_id(), 
-                                $context->get_context_type());
+                        $menu_item['sub'] = $this->get_menu_items(
+                            $context->get_context_id(),
+                            $context->get_context_type());
                     }
                 }
                 else
@@ -173,19 +179,19 @@ class Menu extends HTML_Menu
                         $menu_item['children'] = 'expand';
                     }
                 }
-                
+
                 $menu_item['class'] = 'category';
                 $menu_item[OptionsMenuRenderer :: KEY_ID] = $context->get_id();
                 $menu[$context->get_id()] = $menu_item;
             }
         }
-        
+
         return $menu;
     }
 
     /**
      * Gets the URL of a given category
-     * 
+     *
      * @param int $category The id of the category
      * @return string The requested URL
      */
@@ -203,7 +209,7 @@ class Menu extends HTML_Menu
 
     /**
      * Get the breadcrumbs which lead to the current category.
-     * 
+     *
      * @return array The breadcrumbs.
      */
     function get_breadcrumbs()
@@ -220,13 +226,15 @@ class Menu extends HTML_Menu
 
     /**
      * Renders the menu as a tree
-     * 
+     *
      * @return string The HTML formatted tree
      */
     function render_as_tree()
     {
-        $renderer = new TreeMenuRenderer($this->get_tree_name(), 
-                Path :: get(WEB_PATH) . 'application/atlantis/context/php/xml_feeds/menu.php', $this->urlFmt);
+        $renderer = new TreeMenuRenderer(
+            $this->get_tree_name(),
+            Path :: get(WEB_PATH) . 'application/atlantis/context/php/xml_feeds/menu.php',
+            $this->urlFmt);
         $this->render($renderer, 'sitemap');
         return $renderer->toHTML();
     }

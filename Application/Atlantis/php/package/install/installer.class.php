@@ -5,7 +5,7 @@ use common\libraries\WebApplicationInstaller;
 
 /**
  * Atlantis application
- * 
+ *
  * @package application.atlantis
  */
 class Installer extends WebApplicationInstaller
@@ -19,14 +19,13 @@ class Installer extends WebApplicationInstaller
         parent :: __construct($values, DataManager :: get_instance());
     }
 
-    public function get_additional_installers()
+    public function get_additional_packages()
     {
         $installers = array();
-        
-        $installers[] = new \application\atlantis\application\Installer($this->get_form_values());
-        $installers[] = new \application\atlantis\role\Installer($this->get_form_values());
-        $installers[] = new \application\atlantis\context\Installer($this->get_form_values());
-        
+        $installers[] = 'application\atlantis\application';
+        $installers[] = 'application\atlantis\role';
+        $installers[] = 'application\atlantis\context';
+
         return $installers;
     }
 }

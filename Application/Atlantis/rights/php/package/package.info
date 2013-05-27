@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <packages>
 	<package>
-		<name>Repository Disk Quota</name>
+		<name>Atlantis Access Management</name>
 		<code>rights</code>
-		<context>repository\quota\rights</context>
-		<section>core</section>
-		<category>core</category>
+		<context>application\atlantis\rights</context>
+		<section>application</section>
+		<category>research</category>
 		<authors></authors>
 		<version>3.0.0</version>
 		<cycle>
@@ -23,7 +23,7 @@
 		<homepage></homepage>
 		<pre-depends>
 			<dependency type="registration">
-				<id>repository\quota</id>
+				<id>application\atlantis</id>
 				<version operator="4">3.0.0</version>
 			</dependency>
 		</pre-depends>

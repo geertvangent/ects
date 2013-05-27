@@ -54,21 +54,30 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
     {
         $toolbar = new Toolbar();
 
-        switch ($role_entity->get_entity_type())
+        $is_target = false;
+
+        if ($this->get_component()->get_user()->is_platform_admin())
         {
-            case UserEntity :: ENTITY_TYPE :
-                $is_target = \application\atlantis\rights\Rights :: get_instance()->is_target_user(
-                    $this->get_component()->get_user(),
-                    $role_entity->get_entity_id());
-                break;
-            case PlatformGroupEntity :: ENTITY_TYPE :
-                $is_target = \application\atlantis\rights\Rights :: get_instance()->is_target_group(
-                    $this->get_component()->get_user(),
-                    $role_entity->get_entity_id());
-                break;
+            $is_target = true;
+        }
+        else
+        {
+            switch ($role_entity->get_entity_type())
+            {
+                case UserEntity :: ENTITY_TYPE :
+                    $is_target = \application\atlantis\rights\Rights :: get_instance()->is_target_user(
+                        $this->get_component()->get_user(),
+                        $role_entity->get_entity_id());
+                    break;
+                case PlatformGroupEntity :: ENTITY_TYPE :
+                    $is_target = \application\atlantis\rights\Rights :: get_instance()->is_target_group(
+                        $this->get_component()->get_user(),
+                        $role_entity->get_entity_id());
+                    break;
+            }
         }
 
-        if ($this->get_component()->get_user()->is_platform_admin() || $is_target)
+        if ($is_target)
         {
             $toolbar->add_item(
                 new ToolbarItem(
