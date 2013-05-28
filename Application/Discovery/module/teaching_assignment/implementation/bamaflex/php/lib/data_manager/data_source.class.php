@@ -37,7 +37,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_teaching_assignment ' . $translator->render_query($condition) .
                  ' ORDER BY faculty, training, name';
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -77,7 +77,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced ' .
              $translator->render_query($condition);
         
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {
@@ -102,7 +102,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {

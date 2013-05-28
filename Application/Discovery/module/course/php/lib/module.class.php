@@ -4,7 +4,7 @@ namespace application\discovery\module\course;
 use common\libraries\Path;
 use common\libraries\Filesystem;
 use common\libraries\Request;
-use application\discovery\ModuleInstance;
+use application\discovery\instance\Instance;
 use application\discovery\module\course\DataManager;
 
 abstract class Module extends \application\discovery\Module
@@ -42,7 +42,7 @@ abstract class Module extends \application\discovery\Module
 
     public function get_type()
     {
-        return ModuleInstance :: TYPE_DETAILS;
+        return Instance :: TYPE_DETAILS;
     }
 
     public static function get_available_implementations()

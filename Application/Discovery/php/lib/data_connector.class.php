@@ -24,7 +24,7 @@ class DataConnector
 
     /**
      *
-     * @param $module_instance ModuleInstance
+     * @param $module_instance Instance
      * @return DataManagerInterface
      */
     public static function get_instance($module_instance)

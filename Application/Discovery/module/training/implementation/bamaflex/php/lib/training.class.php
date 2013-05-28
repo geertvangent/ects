@@ -451,7 +451,7 @@ class Training extends \application\discovery\module\training\Training
 
     /**
      *
-     * @param $module_instance ModuleInstance
+     * @param $module_instance Instance
      * @param $recursive boolean
      * @return multitype:string:Training
      */
@@ -483,7 +483,7 @@ class Training extends \application\discovery\module\training\Training
 
     /**
      *
-     * @param $module_instance ModuleInstance
+     * @param $module_instance Instance
      * @param $recursive boolean
      * @return multitype:string:Training
      */
@@ -517,7 +517,7 @@ class Training extends \application\discovery\module\training\Training
 
     /**
      *
-     * @param $module_instance ModuleInstance
+     * @param $module_instance Instance
      * @return multitype:string:Faculty
      */
     public function get_all($module_instance)

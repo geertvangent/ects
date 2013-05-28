@@ -33,7 +33,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced ' .
                  $translator->render_query($condition);
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -66,7 +66,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
                  ' ORDER BY year DESC, id';
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -110,7 +110,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced ' .
              $translator->render_query($condition);
         
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {

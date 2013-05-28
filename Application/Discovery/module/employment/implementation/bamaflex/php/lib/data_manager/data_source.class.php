@@ -35,7 +35,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT * FROM v_discovery_employment ' . $translator->render_query($condition) .
              ' ORDER BY start_date DESC';
         
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {
@@ -96,7 +96,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment ' .
              $translator->render_query($condition);
         
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {
@@ -118,7 +118,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT * FROM v_discovery_employment_parts ' . $translator->render_query($condition) .
              ' ORDER BY start_date';
         
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {

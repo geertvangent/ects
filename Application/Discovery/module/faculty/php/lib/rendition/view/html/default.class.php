@@ -12,6 +12,7 @@ class HtmlDefaultRendition extends HtmlRendition
     public function render()
     {
         $html = array();
+
         if (is_null($this->get_rendition_implementation()->module_parameters()->get_year()))
         {
             $years = $this->get_rendition_implementation()->get_years();

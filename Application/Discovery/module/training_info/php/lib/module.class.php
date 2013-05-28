@@ -4,7 +4,7 @@ namespace application\discovery\module\training_info;
 use common\libraries\Filesystem;
 use common\libraries\Request;
 use common\libraries\Path;
-use application\discovery\ModuleInstance;
+use application\discovery\instance\Instance;
 
 abstract class Module extends \application\discovery\Module
 {
@@ -49,7 +49,7 @@ abstract class Module extends \application\discovery\Module
 
     public function get_type()
     {
-        return ModuleInstance :: TYPE_DETAILS;
+        return Instance :: TYPE_DETAILS;
     }
 
     public static function get_available_implementations()

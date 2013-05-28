@@ -45,7 +45,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT DISTINCT year FROM v_discovery_enrollment_advanced ' . $translator->render_query(
                     $condition) . ' ORDER BY year DESC';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -78,7 +78,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
             $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) . ' ORDER BY year DESC, id';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -125,7 +125,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
             $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) . ' ORDER BY year, name';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -162,7 +162,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
             $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) . ' ORDER BY year, trajectory_part, name';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -211,7 +211,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
             $query = 'SELECT * FROM v_discovery_course_material ' . $translator->render_query($condition);
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -262,7 +262,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT DISTINCT id FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition);
             $enrollments_ids = array();
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -294,7 +294,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             // $query .= 'WHERE enrollment_id IN ("' . implode('","', $enrollments_ids) . '")';
 
             $course_ids = array();
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -326,7 +326,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $query = 'SELECT count(id) AS materials_count FROM v_discovery_course_material ' . $translator->render_query(
                         $condition);
 
-                $statement = $this->query($query);
+                $statement = $this->get_connection()->query($query);
 
                 if ($statement instanceof PDOStatement)
                 {

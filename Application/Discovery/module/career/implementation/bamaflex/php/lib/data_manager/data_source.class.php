@@ -52,7 +52,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced ' .
                  $translator->render_query($condition) . ' ORDER BY contract_type';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -80,7 +80,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT DISTINCT contract_id FROM v_discovery_enrollment_advanced ' .
                  $translator->render_query($condition) . ' ORDER BY year DESC';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -106,7 +106,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
             $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -158,7 +158,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
         $query = 'SELECT id, source FROM v_discovery_training_advanced ' . $translator->render_query($condition);
 
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
 
         if ($statement instanceof PDOStatement)
         {
@@ -189,7 +189,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
                  ' ORDER BY year DESC, id';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -241,7 +241,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) .
                  ' ORDER BY year, name';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -278,7 +278,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT count(id) AS courses_count FROM v_discovery_career_advanced ' .
              $translator->render_query($condition);
 
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
 
         if ($statement instanceof PDOStatement)
         {
@@ -303,7 +303,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_career_advanced ' . $translator->render_query($condition) .
                  ' ORDER BY year, trajectory_part, name';
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {
@@ -387,7 +387,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         // $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ' .
         // $translator->render_query($condition) . ' ORDER BY try_order';
 
-        // $statement = $this->query($query);
+        // $statement = $this->get_connection()->query($query);
 
         // if ($statement instanceof PDOStatement)
         // {
@@ -419,7 +419,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
             $query = 'SELECT * FROM v_discovery_mark_advanced ' . $translator->render_query($condition);
 
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
             {

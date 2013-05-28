@@ -4,7 +4,7 @@ namespace application\discovery\module\employment;
 use common\libraries\Filesystem;
 use common\libraries\Request;
 use common\libraries\Path;
-use application\discovery\ModuleInstance;
+use application\discovery\instance\Instance;
 
 abstract class Module extends \application\discovery\Module
 {
@@ -16,7 +16,7 @@ abstract class Module extends \application\discovery\Module
     private $employments;
     const PARAM_USER_ID = 'user_id';
 
-    public function __construct(Application $application, ModuleInstance $module_instance)
+    public function __construct(Application $application, Instance $module_instance)
     {
         parent :: __construct($application, $module_instance);
     }
@@ -64,7 +64,7 @@ abstract class Module extends \application\discovery\Module
 
     public function get_type()
     {
-        return ModuleInstance :: TYPE_USER;
+        return Instance :: TYPE_USER;
     }
 
     public static function get_available_implementations()

@@ -71,7 +71,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -191,7 +191,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $translator = DoctrineConditionTranslator :: factory($this);
         $query = 'SELECT id, source FROM v_discovery_training_advanced ' . $translator->render_query($condition);
         
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {
@@ -221,7 +221,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -258,7 +258,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_training_language_basic ' . $translator->render_query($condition);
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -295,7 +295,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -330,7 +330,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_course_advanced ' . $translator->render_query($condition) . ' ORDER BY name';
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -372,7 +372,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced ' . $translator->render_query(
                     $condition);
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -416,7 +416,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_training_choice_advanced ' . $translator->render_query($condition);
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -449,7 +449,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_training_choice_option_advanced ' . $translator->render_query(
                     $condition);
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -481,7 +481,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_training_trajectory_advanced ' . $translator->render_query($condition);
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -515,7 +515,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_training_group_advanced ' . $translator->render_query($condition);
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -546,7 +546,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced ' . $translator->render_query(
                     $condition);
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -579,7 +579,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced ' . $translator->render_query(
                     $condition);
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -621,7 +621,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_training_major_choice_basic ' . $translator->render_query($condition);
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -653,7 +653,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic ' . $translator->render_query(
                     $condition);
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {

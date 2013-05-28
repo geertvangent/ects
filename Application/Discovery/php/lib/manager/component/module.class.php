@@ -5,6 +5,7 @@ use common\libraries\Theme;
 use common\libraries\Translation;
 use common\libraries\ToolbarItem;
 use common\libraries\BreadcrumbTrail;
+use application\discovery\instance\Instance;
 
 class ModuleComponent extends Manager
 {
@@ -12,7 +13,7 @@ class ModuleComponent extends Manager
     public function run()
     {
         $module_parameters = array();
-        $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+        $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_USER;
         $module_parameters[self :: PARAM_MODULE_ID] = null;
         $module_parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
 
@@ -21,7 +22,7 @@ class ModuleComponent extends Manager
             new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
 
         $module_parameters = array();
-        $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+        $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
         $module_parameters[self :: PARAM_MODULE_ID] = null;
         $module_parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
 
@@ -33,6 +34,6 @@ class ModuleComponent extends Manager
                 Theme :: get_image_path() . 'action_information.png',
                 $link));
 
-        ModuleInstanceManager :: launch($this);
+        \application\discovery\instance\Manager :: launch($this);
     }
 }

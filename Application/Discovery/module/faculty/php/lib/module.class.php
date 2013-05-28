@@ -5,7 +5,7 @@ use common\libraries\Request;
 use common\libraries\Filesystem;
 use common\libraries\Path;
 use common\libraries\Application;
-use application\discovery\ModuleInstance;
+use application\discovery\instance\Instance;
 
 class Module extends \application\discovery\Module
 {
@@ -21,7 +21,7 @@ class Module extends \application\discovery\Module
 
     private $years;
 
-    public function __construct(Application $application, ModuleInstance $module_instance)
+    public function __construct(Application $application, Instance $module_instance)
     {
         parent :: __construct($application, $module_instance);
     }
@@ -76,7 +76,7 @@ class Module extends \application\discovery\Module
 
     public function get_type()
     {
-        return ModuleInstance :: TYPE_INFORMATION;
+        return Instance :: TYPE_INFORMATION;
     }
 
     public static function get_available_implementations()

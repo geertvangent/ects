@@ -3,7 +3,7 @@ namespace application\discovery\module\photo;
 
 use common\libraries\Path;
 use common\libraries\Filesystem;
-use application\discovery\ModuleInstance;
+use application\discovery\instance\Instance;
 use common\libraries\Request;
 
 class Module extends \application\discovery\Module
@@ -33,7 +33,7 @@ class Module extends \application\discovery\Module
 
     public function get_type()
     {
-        return ModuleInstance :: TYPE_DETAILS;
+        return Instance :: TYPE_DETAILS;
     }
 
     public static function get_available_implementations()

@@ -2,6 +2,8 @@
 namespace application\discovery;
 
 use common\libraries\DoctrineDatabase;
+use common\libraries\Filesystem;
+use common\libraries\Path;
 
 class DataSource extends DoctrineDatabase
 {
@@ -10,10 +12,10 @@ class DataSource extends DoctrineDatabase
 
     /**
      * Constructor
-     * 
-     * @param ModuleInstance $module_instance
+     *
+     * @param Instance $module_instance
      */
-    public function __construct(ModuleInstance $module_instance)
+    public function __construct(\application\discovery\instance\Instance $module_instance)
     {
         $this->module_instance = $module_instance;
         $this->initialize();
@@ -24,8 +26,29 @@ class DataSource extends DoctrineDatabase
         return $this->module_instance;
     }
 
-    public function set_module_instance(ModuleInstance $module_instance)
+    public function set_module_instance(\application\discovery\instance\Instance $module_instance)
     {
         $this->module_instance = $module_instance;
+    }
+
+    public static function get_available_types()
+    {
+        $types = array();
+
+        $data_sources = Filesystem :: get_directory_content(
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'data_source/',
+            Filesystem :: LIST_DIRECTORIES,
+            false);
+
+        $exceptions = array('php', 'resources');
+
+        foreach ($data_sources as $data_source)
+        {
+            if (! in_array($data_source, $exceptions))
+            {
+                $types[] = __NAMESPACE__ . '\data_source\\' . $data_source;
+            }
+        }
+        return $types;
     }
 }

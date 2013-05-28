@@ -31,7 +31,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_year_advanced ' . $translator->render_query($condition) .
                  ' ORDER BY year DESC, id';
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -66,7 +66,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $query = 'SELECT count(id) AS student_years_count FROM v_discovery_year_advanced ' .
              $translator->render_query($condition);
         
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {

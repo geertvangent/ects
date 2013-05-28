@@ -5,7 +5,7 @@ use common\libraries\Filesystem;
 use common\libraries\Request;
 use common\libraries\Path;
 use common\libraries\Application;
-use application\discovery\ModuleInstance;
+use application\discovery\instance\Instance;
 use application\discovery\module\profile\DataManager;
 
 abstract class Module extends \application\discovery\Module
@@ -18,7 +18,7 @@ abstract class Module extends \application\discovery\Module
      */
     private $advices;
 
-    public function __construct(Application $application, ModuleInstance $module_instance)
+    public function __construct(Application $application, Instance $module_instance)
     {
         parent :: __construct($application, $module_instance);
     }
@@ -66,7 +66,7 @@ abstract class Module extends \application\discovery\Module
 
     public function get_type()
     {
-        return ModuleInstance :: TYPE_USER;
+        return Instance :: TYPE_USER;
     }
 
     public static function get_available_implementations()

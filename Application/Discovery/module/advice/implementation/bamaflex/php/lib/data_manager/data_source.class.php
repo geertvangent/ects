@@ -47,7 +47,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_advice_basic ' . $translator->render_query($condition) .
                  ' ORDER BY year DESC';
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -100,7 +100,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         
         $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic ' .
              $translator->render_query($condition);
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {
@@ -130,7 +130,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
                  ' ORDER BY year DESC, id';
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {

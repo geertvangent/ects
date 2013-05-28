@@ -31,7 +31,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_profile_photo ' . $translator->render_query($condition);
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -75,7 +75,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 
                 $query = 'SELECT * FROM v_discovery_faculty_advanced ' . $translator->render_query($condition);
                 
-                $statement = $this->query($query);
+                $statement = $this->get_connection()->query($query);
                 
                 if ($statement instanceof PDOStatement)
                 {
@@ -112,7 +112,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -157,7 +157,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_course_advanced ' . $translator->render_query($condition);
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {

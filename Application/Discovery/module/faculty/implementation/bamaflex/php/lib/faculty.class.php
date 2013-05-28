@@ -43,7 +43,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
 
     /**
      *
-     * @param $module_instance ModuleInstance
+     * @param $module_instance Instance
      * @param $recursive boolean
      * @return multitype:string:Faculty
      */
@@ -75,7 +75,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
 
     /**
      *
-     * @param $module_instance ModuleInstance
+     * @param $module_instance Instance
      * @param $recursive boolean
      * @return multitype:string:Faculty
      */
@@ -107,7 +107,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
 
     /**
      *
-     * @param $module_instance ModuleInstance
+     * @param $module_instance Instance
      * @return multitype:string:Faculty
      */
     public function get_all($module_instance)

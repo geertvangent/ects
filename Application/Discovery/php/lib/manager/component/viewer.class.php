@@ -1,7 +1,6 @@
 <?php
 namespace application\discovery;
 
-use user\UserDataManager;
 use common\libraries\DelegateComponent;
 use common\libraries\Breadcrumb;
 use common\libraries\Display;
@@ -14,6 +13,9 @@ use common\libraries\Theme;
 use common\libraries\DynamicVisualTab;
 use common\libraries\DynamicVisualTabsRenderer;
 use common\libraries\Request;
+use common\libraries\DataClassRetrieveParameters;
+use application\discovery\instance\Instance;
+use common\libraries\DataClassRetrievesParameters;
 
 /**
  *
@@ -28,7 +30,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         $module_id = Request :: get(Manager :: PARAM_MODULE_ID);
         $module_content_type = Request :: get(Manager :: PARAM_CONTENT_TYPE);
 
-        $order_by = array(new ObjectTableOrder(ModuleInstance :: PROPERTY_DISPLAY_ORDER));
+        $order_by = array(new ObjectTableOrder(Instance :: PROPERTY_DISPLAY_ORDER));
         if ($this->get_user()->is_platform_admin())
         {
             $link = $this->get_url(
@@ -44,24 +46,29 @@ class ViewerComponent extends Manager implements DelegateComponent
         {
             if (! $module_content_type)
             {
-                $module_content_type = ModuleInstance :: TYPE_USER;
+                $module_content_type = Instance :: TYPE_USER;
             }
-            $condition = new EqualityCondition(ModuleInstance :: PROPERTY_CONTENT_TYPE, $module_content_type);
-            $current_module_instance = DataManager :: get_instance()->retrieve_module_instance_by_condition(
-                $condition,
-                $order_by);
+
+            $condition = new EqualityCondition(Instance :: PROPERTY_CONTENT_TYPE, $module_content_type);
+            $current_module_instance = \application\discovery\instance\DataManager :: retrieve(
+                Instance :: class_name(),
+                new DataClassRetrieveParameters($condition, $order_by));
+
             if (! $current_module_instance)
             {
                 $this->display_header();
-                echo Display :: warning_message(Translation :: get('NoModuleInstance'), true);
+                echo Display :: warning_message(Translation :: get('NoInstance'), true);
                 $this->display_footer();
                 exit();
             }
+
             $module_id = $current_module_instance->get_id();
         }
         else
         {
-            $current_module_instance = DataManager :: get_instance()->retrieve_module_instance($module_id);
+            $current_module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
+                Instance :: class_name(),
+                (int) $module_id);
             $module_content_type = $current_module_instance->get_content_type();
         }
 
@@ -69,9 +76,9 @@ class ViewerComponent extends Manager implements DelegateComponent
 
         switch ($module_content_type)
         {
-            case ModuleInstance :: TYPE_USER :
+            case Instance :: TYPE_USER :
                 $module_parameters = array();
-                $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+                $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
                 $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
                 BreadcrumbTrail :: get_instance()->add_extra(
@@ -80,23 +87,23 @@ class ViewerComponent extends Manager implements DelegateComponent
                         Theme :: get_image_path() . 'action_information.png',
                         $link));
                 break;
-            case ModuleInstance :: TYPE_INFORMATION :
+            case Instance :: TYPE_INFORMATION :
                 $module_parameters = array();
-                $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+                $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_USER;
                 $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
                 break;
-            case ModuleInstance :: TYPE_DETAILS :
+            case Instance :: TYPE_DETAILS :
                 $module_parameters = array();
-                $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_USER;
+                $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_USER;
                 $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(Translation :: get('User'), Theme :: get_image_path() . 'action_user.png', $link));
                 $module_parameters = array();
-                $module_parameters[self :: PARAM_CONTENT_TYPE] = ModuleInstance :: TYPE_INFORMATION;
+                $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
                 $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
                 BreadcrumbTrail :: get_instance()->add_extra(
@@ -110,7 +117,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         $current_module = Module :: factory($this, $current_module_instance);
         $view = Request :: get(self :: PARAM_VIEW);
 
-        if ($current_module_instance->get_content_type() != ModuleInstance :: TYPE_DETAILS)
+        if ($current_module_instance->get_content_type() != Instance :: TYPE_DETAILS)
         {
             $rendered_module = RenditionImplementation :: launch(
                 $current_module,
@@ -119,13 +126,11 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $this);
             $tabs = new DynamicVisualTabsRenderer('discovery', $rendered_module);
             $condition = new EqualityCondition(
-                ModuleInstance :: PROPERTY_CONTENT_TYPE,
+                Instance :: PROPERTY_CONTENT_TYPE,
                 $current_module_instance->get_content_type());
-            $module_instances = DataManager :: get_instance()->retrieve_module_instances(
-                $condition,
-                null,
-                null,
-                $order_by);
+            $module_instances = \application\discovery\instance\DataManager :: retrieves(
+                Instance :: class_name(),
+                new DataClassRetrievesParameters($condition, null, null, $order_by));
 
             while ($module_instance = $module_instances->next_result())
             {
@@ -135,7 +140,7 @@ class ViewerComponent extends Manager implements DelegateComponent
 
                 $module_parameters = $module_class :: module_parameters();
 
-                if ($module_content_type == ModuleInstance :: TYPE_USER)
+                if ($module_content_type == Instance :: TYPE_USER)
                 {
                     if (! $module_parameters->get_user_id())
                     {
@@ -179,14 +184,14 @@ class ViewerComponent extends Manager implements DelegateComponent
             }
         }
 
-        if ($current_module_instance->get_content_type() == ModuleInstance :: TYPE_USER)
+        if ($current_module_instance->get_content_type() == Instance :: TYPE_USER)
         {
             $user_id = $module_parameters->get_user_id();
-            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $user->get_fullname()));
         }
 
-        if ($current_module_instance->get_content_type() != ModuleInstance :: TYPE_DETAILS)
+        if ($current_module_instance->get_content_type() != Instance :: TYPE_DETAILS)
         {
             $content = $tabs->render();
         }

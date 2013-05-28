@@ -34,7 +34,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $translator = DoctrineConditionTranslator :: factory($this);
                 
                 $query = 'SELECT * FROM v_discovery_faculty_advanced' . $translator->render_query($condition);
-                $statement = $this->query($query);
+                $statement = $this->get_connection()->query($query);
                 
                 if ($statement instanceof PDOStatement)
                 {
@@ -127,7 +127,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $translator = DoctrineConditionTranslator :: factory($this);
         
         $query = 'SELECT id, source FROM v_discovery_faculty_advanced ' . $translator->render_query($condition);
-        $statement = $this->query($query);
+        $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
         {
@@ -151,7 +151,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_faculty_dean_advanced ' . $translator->render_query($condition) . ' ORDER BY person';
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {
@@ -186,7 +186,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             
             $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition) . ' ORDER BY name';
             
-            $statement = $this->query($query);
+            $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
             {

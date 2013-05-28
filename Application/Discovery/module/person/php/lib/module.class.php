@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\person;
 
-use application\discovery\ModuleInstance;
+use application\discovery\instance\Instance;
 use common\libraries\Path;
 use common\libraries\Filesystem;
 
@@ -10,7 +10,7 @@ abstract class Module extends \application\discovery\Module
 
     public function get_type()
     {
-        return ModuleInstance :: TYPE_INFORMATION;
+        return Instance :: TYPE_INFORMATION;
     }
 
     public static function get_available_implementations()

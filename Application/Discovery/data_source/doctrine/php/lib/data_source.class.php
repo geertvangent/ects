@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\data_source\doctrine;
 
-use application\discovery\ModuleInstance;
+use application\discovery\instance\Instance;
 
 class DataSource extends \application\discovery\DataSource
 {
@@ -11,9 +11,9 @@ class DataSource extends \application\discovery\DataSource
     /**
      * Constructor
      * 
-     * @param $module_instance ModuleInstance
+     * @param $module_instance Instance
      */
-    public function __construct(ModuleInstance $module_instance)
+    public function __construct(Instance $module_instance)
     {
         parent :: __construct($module_instance);
         $this->initialize();
