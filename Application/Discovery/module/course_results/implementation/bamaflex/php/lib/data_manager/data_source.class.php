@@ -10,6 +10,8 @@ use application\discovery\module\career\MarkMoment;
 use application\discovery\module\career\implementation\bamaflex\Mark;
 use application\discovery\module\course_results\DataManagerInterface;
 use stdClass;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -35,8 +37,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->course_results[$programme_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('programme_id', $programme_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('programme_id'), 
+                new StaticConditionVariable($programme_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_course_results_advanced WHERE ' .
@@ -67,8 +73,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->course[$programme_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', $programme_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($programme_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
@@ -127,8 +137,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_course_next_id($course)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', $course->get_id());
-        $conditions[] = new EqualityCondition('source', $course->get_source());
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('previous_id'), 
+            new StaticConditionVariable($course->get_id()));
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('source'), 
+            new StaticConditionVariable($course->get_source()));
         $condition = new AndCondition($conditions);
         
         $query = 'SELECT id FROM v_discovery_course_advanced WHERE ' .
@@ -236,8 +250,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->marks[$programme_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('programme_id', $programme_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('programme_id'), 
+                new StaticConditionVariable($programme_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_mark_advanced WHERE ' .

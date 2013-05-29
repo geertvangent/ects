@@ -26,8 +26,6 @@ class Autoloader
         'HtmlDefaultRenditionImplementation' => '/lib/rendition/html/default.class.php', 
         'HtmlXlsxRenditionImplementation' => '/lib/rendition/html/xlsx.class.php', 
         'XlsxDefaultRenditionImplementation' => '/lib/rendition/xlsx/default.class.php', 
-        'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php', 
-        'RightsUserEntity' => '/lib/rights_entity/user.class.php', 
         'UserBrowserTable' => '/lib/user_browser/user_browser_table.class.php', 
         'UserBrowserTableCellRenderer' => '/lib/user_browser/user_browser_table_cell_renderer.class.php', 
         'UserBrowserTableColumnModel' => '/lib/user_browser/user_browser_table_column_model.class.php', 

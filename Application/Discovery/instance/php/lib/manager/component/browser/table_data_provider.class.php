@@ -12,7 +12,7 @@ class InstanceBrowserTableDataProvider extends ObjectTableDataProvider
     {
         $order_property = $this->get_order_property($order_property);
         return DataManager :: retrieves(
-            Instance :: class_name(),
+            Instance :: class_name(), 
             new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property));
     }
 

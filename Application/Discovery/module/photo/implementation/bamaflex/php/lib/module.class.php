@@ -3,7 +3,6 @@ namespace application\discovery\module\photo\implementation\bamaflex;
 
 use common\libraries\InCondition;
 use group\Group;
-use group\GroupDataManager;
 
 class Module extends \application\discovery\module\photo\Module
 {
@@ -81,7 +80,7 @@ class Module extends \application\discovery\module\photo\Module
         {
             foreach ($codes as $code)
             {
-                $group = GroupDataManager :: retrieve_group_by_code($code);
+                $group = \group\DataManager :: retrieve_group_by_code($code);
                 
                 if ($group instanceof Group)
                 {

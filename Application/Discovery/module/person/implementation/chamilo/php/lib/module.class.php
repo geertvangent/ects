@@ -8,6 +8,7 @@ use common\libraries\OrCondition;
 use common\libraries\PatternMatchCondition;
 use common\libraries\EqualityCondition;
 use common\libraries\Request;
+use common\libraries\DataClassRetrieveParameters;
 
 class Module extends \application\discovery\module\person\Module
 {
@@ -31,8 +32,9 @@ class Module extends \application\discovery\module\person\Module
     {
         if (! $this->root_group)
         {
-            $group = \group\GroupDataManager :: get_instance()->retrieve_groups(
-                new EqualityCondition(\group\Group :: PROPERTY_PARENT, 0))->next_result();
+            $group = \group\DataManager :: retrieve(
+                \group\Group :: class_name(), 
+                new DataClassRetrieveParameters(new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0)));
             $this->root_group = $group;
         }
         
@@ -51,7 +53,7 @@ class Module extends \application\discovery\module\person\Module
         }
         else
         {
-            $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT, $this->get_group());
+            $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $this->get_group());
         }
         
         return $condition;

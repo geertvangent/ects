@@ -21,11 +21,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        $entities = array();
-        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
-        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
-        
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, $this))
+        if (! Rights :: is_allowed(Rights :: VIEW_RIGHT, $this))
         {
             Display :: not_allowed();
         }

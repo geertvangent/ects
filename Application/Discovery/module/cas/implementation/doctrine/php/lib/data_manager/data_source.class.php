@@ -5,6 +5,8 @@ use application\discovery\module\cas\Parameters;
 use common\libraries\DoctrineConditionTranslator;
 use application\discovery\module\cas\DataManagerInterface;
 use user\UserDataManager;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\doctrine\DataSource implements DataManagerInterface
 {

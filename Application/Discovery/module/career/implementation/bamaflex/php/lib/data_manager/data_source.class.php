@@ -13,6 +13,8 @@ use common\libraries\NotCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
 use user\UserDataManager;
 use common\libraries\InCondition;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -46,7 +48,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', $official_code);
+            $condition = new EqualityCondition(
+                new StaticColumnConditionVariable('person_id'), 
+                new StaticConditionVariable($official_code));
             
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
@@ -74,7 +78,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', $official_code);
+            $condition = new EqualityCondition(
+                new StaticColumnConditionVariable('person_id'), 
+                new StaticConditionVariable($official_code));
             
             $query = 'SELECT DISTINCT contract_id FROM v_discovery_enrollment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
@@ -98,8 +104,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->trainings[$source][$training_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
@@ -150,8 +160,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_training_next_id($training)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', $training->get_id());
-        $conditions[] = new EqualityCondition('source', $training->get_source());
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('previous_id'), 
+            new StaticConditionVariable($training->get_id()));
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('source'), 
+            new StaticConditionVariable($training->get_source()));
         $condition = new AndCondition($conditions);
         
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
@@ -182,7 +196,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', $official_code);
+            $condition = new EqualityCondition(
+                new StaticColumnConditionVariable('person_id'), 
+                new StaticConditionVariable($official_code));
             
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
@@ -232,8 +248,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $child_courses = $this->retrieve_child_courses($enrollment_ids);
             
             $conditions = array();
-            $conditions[] = new EqualityCondition('programme_parent_id', null);
-            $conditions[] = new InCondition('enrollment_id', $enrollment_ids);
+            $conditions[] = new EqualityCondition(new StaticColumnConditionVariable('programme_parent_id'), null);
+            $conditions[] = new InCondition(new StaticColumnConditionVariable('enrollment_id'), $enrollment_ids);
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_career_advanced WHERE ' .
@@ -271,7 +287,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         $official_code = $user->get_official_code();
         
-        $condition = new EqualityCondition('person_id', $official_code);
+        $condition = new EqualityCondition(
+            new StaticColumnConditionVariable('person_id'), 
+            new StaticConditionVariable($official_code));
         
         $query = 'SELECT count(id) AS courses_count FROM v_discovery_career_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -293,8 +311,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->child_courses[$enrollment_id]))
         {
             $conditions = array();
-            $conditions[] = new NotCondition(new EqualityCondition('programme_parent_id', null));
-            $conditions[] = new InCondition('enrollment_id', $enrollment_ids);
+            $conditions[] = new NotCondition(
+                new EqualityCondition(new StaticColumnConditionVariable('programme_parent_id'), null));
+            $conditions[] = new InCondition(new StaticColumnConditionVariable('enrollment_id'), $enrollment_ids);
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_career_advanced WHERE ' .
@@ -379,7 +398,8 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         // $user = UserDataManager :: get_instance()->retrieve_user($user_id);
         // $official_code = $user->get_official_code();
         
-        // $condition = new EqualityCondition('person_id', $official_code);
+        // $condition = new EqualityCondition(new StaticColumnConditionVariable('person_id'), new
+        // StaticConditionVariable($official_code));
         //
         
         // $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ' .
@@ -412,7 +432,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $enrollment_id = md5(serialize($enrollment_ids));
         if (! isset($this->marks[$enrollment_id]))
         {
-            $condition = new InCondition('enrollment_id', $enrollment_ids);
+            $condition = new InCondition(new StaticColumnConditionVariable('enrollment_id'), $enrollment_ids);
             
             $query = 'SELECT * FROM v_discovery_mark_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());

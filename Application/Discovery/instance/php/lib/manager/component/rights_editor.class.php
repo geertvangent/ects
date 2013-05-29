@@ -16,7 +16,7 @@ class RightsEditorComponent extends Manager
         $this->instance_id = Request :: get(Manager :: PARAM_MODULE_ID);
         $instance = DataManager :: retrieve_by_id(Instance :: class_name(), (int) $this->instance_id);
         $this->namespace = '\\' . $instance->get_type() . '\Rights';
-
+        
         RightsEditorManager :: launch($this);
     }
 

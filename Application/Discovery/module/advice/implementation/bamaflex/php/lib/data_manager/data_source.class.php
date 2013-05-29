@@ -10,6 +10,8 @@ use common\libraries\OrCondition;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use user\UserDataManager;
 use application\discovery\module\advice\DataManagerInterface;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -31,14 +33,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->advices[$person_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('person_id', $person_id);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('person_id'), 
+                new StaticConditionVariable($person_id));
             
             $or_conditions = array();
-            $or_conditions[] = new NotCondition(new EqualityCondition('motivation', null));
-            $or_conditions[] = new NotCondition(new EqualityCondition('ombudsman', null));
-            $or_conditions[] = new NotCondition(new EqualityCondition('vote', null));
-            $or_conditions[] = new NotCondition(new EqualityCondition('measures', null));
-            $or_conditions[] = new NotCondition(new EqualityCondition('advice', null));
+            $or_conditions[] = new NotCondition(
+                new EqualityCondition(new StaticColumnConditionVariable('motivation'), null));
+            $or_conditions[] = new NotCondition(
+                new EqualityCondition(new StaticColumnConditionVariable('ombudsman'), null));
+            $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('vote'), null));
+            $or_conditions[] = new NotCondition(
+                new EqualityCondition(new StaticColumnConditionVariable('measures'), null));
+            $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('advice'), null));
             $conditions[] = new OrCondition($or_conditions);
             
             $condition = new AndCondition($conditions);
@@ -84,14 +91,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
         $conditions = array();
-        $conditions[] = new EqualityCondition('person_id', $person_id);
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('person_id'), 
+            new StaticConditionVariable($person_id));
         
         $or_conditions = array();
-        $or_conditions[] = new NotCondition(new EqualityCondition('motivation', null));
-        $or_conditions[] = new NotCondition(new EqualityCondition('ombudsman', null));
-        $or_conditions[] = new NotCondition(new EqualityCondition('vote', null));
-        $or_conditions[] = new NotCondition(new EqualityCondition('measures', null));
-        $or_conditions[] = new NotCondition(new EqualityCondition('advice', null));
+        $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('motivation'), null));
+        $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('ombudsman'), null));
+        $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('vote'), null));
+        $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('measures'), null));
+        $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('advice'), null));
         $conditions[] = new OrCondition($or_conditions);
         
         $condition = new AndCondition($conditions);
@@ -122,7 +131,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', $official_code);
+            $condition = new EqualityCondition(
+                new StaticColumnConditionVariable('person_id'), 
+                new StaticConditionVariable($official_code));
             
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .

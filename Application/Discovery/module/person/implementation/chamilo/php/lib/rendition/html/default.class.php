@@ -13,6 +13,7 @@ use common\libraries\Utilities;
 use common\libraries\Translation;
 use common\libraries\ToolbarItem;
 use common\libraries\ActionBarRenderer;
+use common\libraries\DataClassCountParameters;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements NewObjectTableSupport
 {
@@ -85,9 +86,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         {
             $count_users = \user\DataManager :: count(
                 \user\User :: class_name(), 
-                $this->get_users_condition($this->action_bar->get_query()));
-            $count_groups = \group\GroupDataManager :: get_instance()->count_groups(
-                $this->get_subgroups_condition($this->action_bar->get_query()));
+                new DataClassCountParameters($this->get_users_condition($this->action_bar->get_query())));
+            $count_groups = \group\DataManager :: count(
+                \group\Group :: class_name(), 
+                new DataClassCountParameters($this->get_subgroups_condition($this->action_bar->get_query())));
             
             if ($count_users > 0)
             {
@@ -96,7 +98,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                     new DynamicContentTab(
                         self :: TAB_USERS, 
                         Translation :: get('Users', null, 'user'), 
-                        Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                        Theme :: get_image_path(__NAMESPACE__) . 'tab/users.png', 
                         $table->as_html()));
             }
             
@@ -110,7 +112,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                     new DynamicContentTab(
                         self :: TAB_SUBGROUPS, 
                         Translation :: get('Subgroups'), 
-                        Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                        Theme :: get_image_path(__NAMESPACE__) . 'tab/groups.png', 
                         $table->as_html()));
             }
             
@@ -131,11 +133,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 new DynamicContentTab(
                     self :: TAB_USERS, 
                     Translation :: get('Users', null, 'user'), 
-                    Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                    Theme :: get_image_path(__NAMESPACE__) . 'tab/users.png', 
                     $table->as_html()));
             
-            $count_groups = \group\GroupDataManager :: get_instance()->count_groups(
-                $this->get_subgroups_condition($this->action_bar->get_query()));
+            $count_groups = \group\DataManager :: count(
+                \group\Group :: class_name(), 
+                new DataClassCountParameters($this->get_subgroups_condition($this->action_bar->get_query())));
             if ($count_groups > 0)
             {
                 $table = new GroupBrowserTable(
@@ -146,7 +149,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                     new DynamicContentTab(
                         self :: TAB_SUBGROUPS, 
                         Translation :: get('Subgroups'), 
-                        Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                        Theme :: get_image_path(__NAMESPACE__) . 'tab/groups.png', 
                         $table->as_html()));
             }
             
@@ -154,7 +157,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 new DynamicContentTab(
                     self :: TAB_DETAILS, 
                     Translation :: get('Details'), 
-                    Theme :: get_image_path('help') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                    Theme :: get_image_path(__NAMESPACE__) . 'tab/details.png', 
                     $this->get_group_info()));
         }
         
@@ -169,7 +172,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_group_info()
     {
         $group_id = $this->get_group();
-        $group = \group\GroupDataManager :: get_instance()->retrieve_group($group_id);
+        $group = \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), (int) $group_id);
         
         $html = array();
         

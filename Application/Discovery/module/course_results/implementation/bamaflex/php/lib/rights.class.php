@@ -1,39 +1,28 @@
 <?php
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
-use application\discovery\module\course_results\DataManager;
 use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
 use common\libraries\InCondition;
 use common\libraries\OrCondition;
-use common\libraries\Translation;
 use common\libraries\Session;
 use application\discovery\RightsGroupEntityRight;
-use rights\RightsUtil;
 use Exception;
+use rights\NewUserEntity;
+use rights\NewPlatformGroupEntity;
+use application\discovery\module\course_results\DataManager;
+use common\libraries\DataClassRetrievesParameters;
 
-class Rights extends RightsUtil
+class Rights
 {
     const VIEW_RIGHT = '1';
-    const TYPE_COURSE_RESULTS = 1;
 
-    private static $instance;
-
-    public static function get_instance()
+    public static function is_visible($module_instance_id, $parameters)
     {
-        if (! isset(self :: $instance))
-        {
-            self :: $instance = new self();
-        }
-        return self :: $instance;
+        return self :: is_allowed(self :: VIEW_RIGHT, $module_instance_id, $parameters);
     }
 
-    public static function get_available_rights()
-    {
-        return array(Translation :: get('ViewRight') => self :: VIEW_RIGHT);
-    }
-
-    public function module_is_allowed($right, $entities, $module_instance_id, $parameters)
+    public static function is_allowed($right, $module_instance_id, $parameters)
     {
         try
         {
@@ -41,11 +30,14 @@ class Rights extends RightsUtil
             $parameter->set_programme_id($parameters->get_programme_id());
             $parameter->set_source($parameters->get_source());
             
-            $module_instance = \application\discovery\DataManager :: get_instance()->retrieve_module_instance(
-                $module_instance_id);
+            $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
+                \application\discovery\instance\Instance :: class_name(), 
+                (int) $module_instance_id);
             
             $course = DataManager :: get_instance($module_instance)->retrieve_course($parameter);
-            $current_user = \user\UserDataManager :: get_instance()->retrieve_user(Session :: get_user_id());
+            $current_user = \user\DataManager :: retrieve_by_id(
+                \user\User :: class_name(), 
+                (int) Session :: get_user_id());
             
             $codes = array();
             $codes[] = 'DEP_' . $course->get_faculty_id();
@@ -53,7 +45,9 @@ class Rights extends RightsUtil
             $codes[] = 'TRA_STU_' . $course->get_training_id();
             $condition = new InCondition(\group\Group :: PROPERTY_CODE, $codes);
             
-            $groups = \group\DataManager :: get_instance()->retrieve_groups($condition);
+            $groups = \group\DataManager :: retrieves(
+                \group\Group :: class_name(), 
+                new DataClassRetrievesParameters($condition));
             if ($groups->size() > 0)
             {
                 $group_ids = array();
@@ -76,7 +70,7 @@ class Rights extends RightsUtil
                     Session :: get_user_id());
                 $user_entity_conditions[] = new EqualityCondition(
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
-                    RightsUserEntity :: ENTITY_TYPE);
+                    NewUserEntity :: ENTITY_TYPE);
                 $entities_conditions[] = new AndCondition($user_entity_conditions);
                 
                 $group_entity_conditions = array();
@@ -85,7 +79,7 @@ class Rights extends RightsUtil
                     $current_user_group_ids);
                 $group_entity_conditions[] = new EqualityCondition(
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
-                    RightsPlatformGroupEntity :: ENTITY_TYPE);
+                    NewPlatformGroupEntity :: ENTITY_TYPE);
                 $entities_conditions[] = new AndCondition($group_entity_conditions);
                 
                 $conditions[] = new OrCondition($entities_conditions);
@@ -100,96 +94,31 @@ class Rights extends RightsUtil
                 }
                 else
                 {
-                    return parent :: is_allowed(
-                        $right, 
-                        'discovery_' . $module_instance_id, 
-                        null, 
-                        $entities, 
-                        $parameters->get_programme_id(), 
-                        self :: TYPE_COURSE_RESULTS, 
-                        0, 
-                        self :: TREE_TYPE_ROOT);
+                    if ($current_user->is_platform_admin())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
             else
             {
-                return parent :: is_allowed(
-                    $right, 
-                    'discovery_' . $module_instance_id, 
-                    null, 
-                    $entities, 
-                    $parameters->get_programme_id(), 
-                    self :: TYPE_COURSE_RESULTS, 
-                    0, 
-                    self :: TREE_TYPE_ROOT);
+                if ($current_user->is_platform_admin())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         catch (Exception $exception)
         {
             return false;
         }
-    }
-
-    public function get_module_location_by_identifier($module_instance_id, $parameters)
-    {
-        return parent :: get_location_by_identifier(
-            'discovery_' . $module_instance_id, 
-            self :: TYPE_COURSE_RESULTS, 
-            $parameters->get_user_id(), 
-            0, 
-            self :: TREE_TYPE_ROOT);
-    }
-
-    public function get_module_location_id_by_identifier($module_instance_id, $parameters)
-    {
-        return parent :: get_location_id_by_identifier(
-            'discovery_' . $module_instance_id, 
-            self :: TYPE_COURSE_RESULTS, 
-            $parameters->get_user_id(), 
-            0, 
-            self :: TREE_TYPE_ROOT);
-    }
-
-    public function create_module_location($module_instance_id, $parameters, $parent)
-    {
-        return parent :: create_location(
-            'discovery_' . $module_instance_id, 
-            self :: TYPE_COURSE_RESULTS, 
-            $parameters->get_user_id(), 
-            1, 
-            $parent, 
-            0, 
-            0, 
-            self :: TREE_TYPE_ROOT);
-    }
-
-    public function get_module_rights_location_entity_right($module_instance_id, $entity_id, $entity_type, $location_id)
-    {
-        return parent :: get_rights_location_entity_right(
-            'discovery_' . $module_instance_id, 
-            self :: VIEW_RIGHT, 
-            $entity_id, 
-            $entity_type, 
-            $location_id);
-    }
-
-    public function invert_module_location_entity_right($module_instance_id, $right_id, $entity_id, $entity_type, 
-        $location_id)
-    {
-        return parent :: invert_location_entity_right(
-            'discovery_' . $module_instance_id, 
-            $right_id, 
-            $entity_id, 
-            $entity_type, 
-            $location_id);
-    }
-
-    public function get_module_targets_entities($module_instance_id, $parameters)
-    {
-        return parent :: get_target_entities(
-            self :: VIEW_RIGHT, 
-            'discovery_' . $module_instance_id, 
-            $parameters->get_user_id(), 
-            self :: TYPE_COURSE_RESULTS);
     }
 }

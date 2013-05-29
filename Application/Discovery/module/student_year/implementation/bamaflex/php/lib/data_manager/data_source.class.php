@@ -6,6 +6,8 @@ use Doctrine\DBAL\Driver\PDOStatement;
 use common\libraries\EqualityCondition;
 use application\discovery\module\student_year\DataManagerInterface;
 use user\UserDataManager;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -25,7 +27,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $user = UserDataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
-            $condition = new EqualityCondition('person_id', $official_code);
+            $condition = new EqualityCondition(
+                new StaticColumnConditionVariable('person_id'), 
+                new StaticConditionVariable($official_code));
             
             $query = 'SELECT * FROM v_discovery_year_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
@@ -60,7 +64,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user = UserDataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
         
-        $condition = new EqualityCondition('person_id', $official_code);
+        $condition = new EqualityCondition(
+            new StaticColumnConditionVariable('person_id'), 
+            new StaticConditionVariable($official_code));
         
         $query = 'SELECT count(id) AS student_years_count FROM v_discovery_year_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());

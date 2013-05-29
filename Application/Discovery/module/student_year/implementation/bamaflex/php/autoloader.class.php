@@ -19,8 +19,6 @@ class Autoloader
         'HtmlDefaultRenditionImplementation' => '/lib/rendition/html/default.class.php', 
         'HtmlXlsxRenditionImplementation' => '/lib/rendition/html/xlsx.class.php', 
         'XlsxDefaultRenditionImplementation' => '/lib/rendition/xlsx/default.class.php', 
-        'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php', 
-        'RightsUserEntity' => '/lib/rights_entity/user.class.php', 
         'SettingsConnector' => '/settings/settings_connector.class.php');
 
     /**

@@ -98,10 +98,10 @@ class Instance extends DataClass
     {
         return parent :: get_default_property_names(
             array(
-                self :: PROPERTY_TITLE,
-                self :: PROPERTY_DESCRIPTION,
-                self :: PROPERTY_TYPE,
-                self :: PROPERTY_CONTENT_TYPE,
+                self :: PROPERTY_TITLE, 
+                self :: PROPERTY_DESCRIPTION, 
+                self :: PROPERTY_TYPE, 
+                self :: PROPERTY_CONTENT_TYPE, 
                 self :: PROPERTY_DISPLAY_ORDER));
     }
 
@@ -119,7 +119,7 @@ class Instance extends DataClass
             }
         }
         return true;
-        //return DataManager :: create_module_rights_storage_units($this);
+        // return DataManager :: create_module_rights_storage_units($this);
     }
 
     public function delete()
@@ -131,8 +131,10 @@ class Instance extends DataClass
         else
         {
             $condition = new EqualityCondition(InstanceSetting :: PROPERTY_INSTANCE_ID, $this->get_id());
-            $settings = DataManager :: retrieves(InstanceSetting :: class_name(), new DataClassRetrievesParameters($condition));
-
+            $settings = DataManager :: retrieves(
+                InstanceSetting :: class_name(), 
+                new DataClassRetrievesParameters($condition));
+            
             while ($setting = $settings->next_result())
             {
                 if (! $setting->delete())
@@ -141,7 +143,7 @@ class Instance extends DataClass
                 }
             }
         }
-
+        
         return true;
     }
 
@@ -159,7 +161,7 @@ class Instance extends DataClass
     {
         $condition = new EqualityCondition(InstanceSetting :: PROPERTY_INSTANCE_ID, $this->get_id());
         $settings = DataManager :: count(InstanceSetting :: class_name(), new DataClassCountParameters($condition));
-
+        
         return $settings > 0;
     }
 

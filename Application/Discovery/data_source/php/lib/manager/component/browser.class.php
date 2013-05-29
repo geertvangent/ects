@@ -20,12 +20,12 @@ class BrowserComponent extends Manager
         {
             $this->not_allowed();
         }
-
+        
         $this->action_bar = $this->get_action_bar();
         $parameters = $this->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
         $table = new InstanceBrowserTable($this, $parameters, $this->get_condition());
-
+        
         $this->display_header();
         echo $this->action_bar->as_html();
         echo $table->as_html();
@@ -35,13 +35,13 @@ class BrowserComponent extends Manager
     public function get_condition()
     {
         $query = $this->action_bar->get_query();
-
+        
         if (isset($query) && $query != '')
         {
             $conditions = array();
             $conditions[] = new PatternMatchCondition(Instance :: PROPERTY_NAME, '*' . $query . '*');
             $conditions[] = new PatternMatchCondition(Instance :: PROPERTY_DESCRIPTION, '*' . $query . '*');
-
+            
             $condition = new AndCondition($conditions);
             return $condition;
         }
@@ -56,9 +56,9 @@ class BrowserComponent extends Manager
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->add_common_action(
             new ToolbarItem(
-                Translation :: get('AddInstance'),
-                Theme :: get_common_image_path() . 'action_create.png',
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE_INSTANCE)),
+                Translation :: get('AddInstance'), 
+                Theme :: get_common_image_path() . 'action_create.png', 
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE_INSTANCE)), 
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
     }

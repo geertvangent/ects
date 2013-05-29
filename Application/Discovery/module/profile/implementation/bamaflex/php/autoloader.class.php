@@ -11,8 +11,6 @@ class Autoloader
      */
     private static $map = array(
         'Autoloader' => '/autoloader.class.php', 
-        'BamaflexAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php', 
-        'BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php', 
         'Address' => '/lib/address.class.php', 
         'Birth' => '/lib/birth.class.php', 
         'LearningCredit' => '/lib/learning_credit.class.php', 
@@ -27,8 +25,6 @@ class Autoloader
         'DataSource' => '/lib/data_manager/data_source.class.php', 
         'RenditionImplementation' => '/lib/rendition/rendition.class.php', 
         'HtmlDefaultRenditionImplementation' => '/lib/rendition/html/default.class.php', 
-        'RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php', 
-        'RightsUserEntity' => '/lib/rights_entity/user.class.php', 
         'SettingsConnector' => '/settings/settings_connector.class.php');
 
     /**

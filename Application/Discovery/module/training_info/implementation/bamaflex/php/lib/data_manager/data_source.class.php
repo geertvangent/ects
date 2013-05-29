@@ -12,6 +12,8 @@ use application\discovery\module\course\implementation\bamaflex\Course;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\module\training_info\DataManagerInterface;
 use application\discovery\data_source\bamaflex\DataManager;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -64,8 +66,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
@@ -187,8 +193,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_training_next_id($training)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', $training->get_id());
-        $conditions[] = new EqualityCondition('previous_source', $training->get_source());
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('previous_id'), 
+            new StaticConditionVariable($training->get_id()));
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('previous_source'), 
+            new StaticConditionVariable($training->get_source()));
         $condition = new AndCondition($conditions);
         
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
@@ -214,8 +224,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->majors[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('training_id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_major_basic WHERE ' .
@@ -255,8 +269,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->languages[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('training_id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_language_basic WHERE ' .
@@ -289,8 +307,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->packages[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_package_advanced WHERE ' .
@@ -327,8 +349,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->courses[$id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', $id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('training_id'), 
+                new StaticConditionVariable($id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
@@ -367,12 +393,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->package_courses[$id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('package_id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('package_id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
-            $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced ' .
-                 $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -412,8 +442,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->choices[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('training_id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_choice_advanced WHERE ' .
@@ -444,12 +478,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->choice_options[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('training_id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
-            $query = 'SELECT * FROM v_discovery_training_choice_option_advanced ' . $translator->render_query(
-                $condition);
+            $query = 'SELECT * FROM v_discovery_training_choice_option_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
@@ -476,8 +514,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->trajectories[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('training_id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_trajectory_advanced WHERE ' .
@@ -510,8 +552,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->groups[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('training_id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_group_advanced WHERE ' .
@@ -540,12 +586,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->sub_trajectories[$id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('trajectory_id', $id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('trajectory_id'), 
+                new StaticConditionVariable($id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
-            $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced ' .
-                 $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
@@ -572,12 +622,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->sub_trajectory_courses[$id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('sub_trajectory_id', $id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('sub_trajectory_id'), 
+                new StaticConditionVariable($id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
-            $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced ' .
-                 $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
@@ -614,8 +668,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->major_choices[$id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('major_id', $id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('major_id'), 
+                new StaticConditionVariable($id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_major_choice_basic WHERE ' .
@@ -644,12 +702,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->major_choice_options[$id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('major_id', $id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('major_id'), 
+                new StaticConditionVariable($id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
-            $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic ' .
-                 $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             

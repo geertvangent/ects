@@ -5,35 +5,17 @@ use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
 use common\libraries\InCondition;
 use common\libraries\OrCondition;
-use common\libraries\Translation;
 use common\libraries\Session;
 use application\discovery\RightsGroupEntityRight;
-use user\UserDataManager;
-use rights\RightsUtil;
 use Exception;
+use rights\NewUserEntity;
+use rights\NewPlatformGroupEntity;
 
-class Rights extends RightsUtil
+class Rights
 {
     const VIEW_RIGHT = '1';
-    const TYPE_GROUP_USER = 1;
 
-    private static $instance;
-
-    public static function get_instance()
-    {
-        if (! isset(self :: $instance))
-        {
-            self :: $instance = new self();
-        }
-        return self :: $instance;
-    }
-
-    public static function get_available_rights()
-    {
-        return array(Translation :: get('ViewRight') => self :: VIEW_RIGHT);
-    }
-
-    public function module_is_allowed($right, $entities, $rendition_implementation)
+    public static function is_allowed($right, $rendition_implementation)
     {
         try
         {
@@ -57,7 +39,9 @@ class Rights extends RightsUtil
                     $group_ids[] = $parent->get_id();
                 }
             }
-            $current_user = UserDataManager :: get_instance()->retrieve_user(Session :: get_user_id());
+            $current_user = \user\DataManager :: retrieve_by_id(
+                \user\User :: class_name(), 
+                (int) Session :: get_user_id());
             $current_user_group_ids = $current_user->get_groups(true);
             
             $conditions = array();
@@ -73,7 +57,7 @@ class Rights extends RightsUtil
                 Session :: get_user_id());
             $user_entity_conditions[] = new EqualityCondition(
                 RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
-                RightsUserEntity :: ENTITY_TYPE);
+                NewUserEntity :: ENTITY_TYPE);
             $entities_conditions[] = new AndCondition($user_entity_conditions);
             
             $group_entity_conditions = array();
@@ -82,7 +66,7 @@ class Rights extends RightsUtil
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
                 RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
-                RightsPlatformGroupEntity :: ENTITY_TYPE);
+                NewPlatformGroupEntity :: ENTITY_TYPE);
             $entities_conditions[] = new AndCondition($group_entity_conditions);
             
             $conditions[] = new OrCondition($entities_conditions);
@@ -110,68 +94,5 @@ class Rights extends RightsUtil
         {
             return false;
         }
-    }
-
-    public function get_module_location_by_identifier($module_instance_id, $parameters)
-    {
-        return parent :: get_location_by_identifier(
-            'discovery_' . $module_instance_id, 
-            self :: TYPE_GROUP_USER, 
-            $parameters->get_user_id(), 
-            0, 
-            self :: TREE_TYPE_ROOT);
-    }
-
-    public function get_module_location_id_by_identifier($module_instance_id, $parameters)
-    {
-        return parent :: get_location_id_by_identifier(
-            'discovery_' . $module_instance_id, 
-            self :: TYPE_GROUP_USER, 
-            $parameters->get_user_id(), 
-            0, 
-            self :: TREE_TYPE_ROOT);
-    }
-
-    public function create_module_location($module_instance_id, $parameters, $parent)
-    {
-        return parent :: create_location(
-            'discovery_' . $module_instance_id, 
-            self :: TYPE_GROUP_USER, 
-            $parameters->get_user_id(), 
-            1, 
-            $parent, 
-            0, 
-            0, 
-            self :: TREE_TYPE_ROOT);
-    }
-
-    public function get_module_rights_location_entity_right($module_instance_id, $entity_id, $entity_type, $location_id)
-    {
-        return parent :: get_rights_location_entity_right(
-            'discovery_' . $module_instance_id, 
-            self :: VIEW_RIGHT, 
-            $entity_id, 
-            $entity_type, 
-            $location_id);
-    }
-
-    public function invert_module_location_entity_right($module_instance_id, $right_id, $entity_id, $entity_type, 
-        $location_id)
-    {
-        return parent :: invert_location_entity_right(
-            'discovery_' . $module_instance_id, 
-            $right_id, 
-            $entity_id, 
-            $entity_type, 
-            $location_id);
-    }
-
-    public function get_module_targets_entities($module_instance_id, $parameters)
-    {
-        return parent :: get_target_entities(
-            self :: VIEW_RIGHT, 
-            'discovery_' . $module_instance_id, 
-            $parameters->get_user_id(), 
-            self :: TYPE_GROUP_USER);
     }
 }

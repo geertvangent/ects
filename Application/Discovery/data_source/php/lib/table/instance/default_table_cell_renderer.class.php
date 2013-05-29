@@ -27,7 +27,7 @@ class DefaultInstanceTableCellRenderer extends ObjectTableCellRenderer
                 return Translation :: get('TypeName', null, $module_instance->get_type());
             case Instance :: PROPERTY_DESCRIPTION :
                 return Utilities :: truncate_string(
-                    Translation :: get('TypeDescription', null, $module_instance->get_type()),
+                    Translation :: get('TypeDescription', null, $module_instance->get_type()), 
                     50);
             default :
                 return '&nbsp;';

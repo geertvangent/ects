@@ -6,6 +6,8 @@ use common\libraries\DoctrineConditionTranslator;
 use common\libraries\EqualityCondition;
 use user\UserDataManager;
 use application\discovery\module\exemption\DataManagerInterface;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -26,7 +28,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         
         if (! isset($this->exemptions[$person_id]))
         {
-            $condition = new EqualityCondition('person_id', $person_id);
+            $condition = new EqualityCondition(
+                new StaticColumnConditionVariable('person_id'), 
+                new StaticConditionVariable($person_id));
             
             $query = 'SELECT * FROM v_discovery_exemption_basic WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
@@ -70,7 +74,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user_id = $parameters->get_user_id();
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
-        $condition = new EqualityCondition('person_id', $person_id);
+        $condition = new EqualityCondition(
+            new StaticColumnConditionVariable('person_id'), 
+            new StaticConditionVariable($person_id));
         
         $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());

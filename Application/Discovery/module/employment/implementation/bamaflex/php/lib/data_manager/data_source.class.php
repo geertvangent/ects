@@ -7,6 +7,8 @@ use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
 use application\discovery\module\employment\DataManagerInterface;
 use user\UserDataManager;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -27,8 +29,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $official_code = $user->get_official_code();
         
         $conditions = array();
-        $conditions[] = new EqualityCondition('person_id', $official_code);
-        $conditions[] = new EqualityCondition('active', 1);
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('person_id'), 
+            new StaticConditionVariable($official_code));
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('active'), 
+            new StaticConditionVariable(1));
         $condition = new AndCondition($conditions);
         
         $query = 'SELECT * FROM v_discovery_employment WHERE ' .
@@ -90,7 +96,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         
         $official_code = $user->get_official_code();
         
-        $condition = new EqualityCondition('person_id', $official_code);
+        $condition = new EqualityCondition(
+            new StaticColumnConditionVariable('person_id'), 
+            new StaticConditionVariable($official_code));
         
         $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -111,7 +119,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     public function retrieve_employment_parts($employment_id)
     {
-        $condition = new EqualityCondition('assignment_id', $employment_id);
+        $condition = new EqualityCondition(
+            new StaticColumnConditionVariable('assignment_id'), 
+            new StaticConditionVariable($employment_id));
         
         $query = 'SELECT * FROM v_discovery_employment_parts WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY start_date';

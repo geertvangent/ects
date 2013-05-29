@@ -12,6 +12,8 @@ use application\discovery\module\profile\IdentificationCode;
 use application\discovery\module\profile\Name;
 use application\discovery\module\profile\DataManagerInterface;
 use stdClass;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -26,7 +28,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();
         
-        $condition = new EqualityCondition('id', $official_code);
+        $condition = new EqualityCondition(
+            new StaticColumnConditionVariable('id'), 
+            new StaticConditionVariable($official_code));
         
         $query = 'SELECT * FROM v_discovery_profile_basic WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -88,7 +92,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();
         
-        $condition = new EqualityCondition('id', $official_code);
+        $condition = new EqualityCondition(
+            new StaticColumnConditionVariable('id'), 
+            new StaticConditionVariable($official_code));
         
         $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -109,7 +115,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_emails($id)
     {
-        $condition = new EqualityCondition('id', $id);
+        $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
         
         $query = 'SELECT * FROM v_discovery_profile_email WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -137,7 +143,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_learning_credits($id)
     {
-        $condition = new EqualityCondition('person_id', $id);
+        $condition = new EqualityCondition(
+            new StaticColumnConditionVariable('person_id'), 
+            new StaticConditionVariable($id));
         
         $query = 'SELECT * FROM v_discovery_profile_learning_credit WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY date DESC';
@@ -168,7 +176,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_communications($id)
     {
-        $condition = new EqualityCondition('id', $id);
+        $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
         
         $query = 'SELECT * FROM v_discovery_profile_communication WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -199,7 +207,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_addresses($id)
     {
-        $condition = new EqualityCondition('id', $id);
+        $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
         
         $query = 'SELECT * FROM v_discovery_profile_address WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -238,7 +246,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_photo($id)
     {
-        $condition = new EqualityCondition('id', $id);
+        $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
         
         $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -263,7 +271,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     private function retrieve_previous_college($id)
     {
-        $condition = new EqualityCondition('id', $id);
+        $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
         
         $query = 'SELECT * FROM v_discovery_profile_previous_college WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -298,7 +306,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     private function retrieve_previous_university($id)
     {
-        $condition = new EqualityCondition('id', $id);
+        $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
         
         $query = 'SELECT * FROM v_discovery_profile_previous_university WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -337,7 +345,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     private function retrieve_nationalities($id)
     {
-        $condition = new EqualityCondition('id', $id);
+        $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
         
         $query = 'SELECT * FROM v_discovery_profile_nationality WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());

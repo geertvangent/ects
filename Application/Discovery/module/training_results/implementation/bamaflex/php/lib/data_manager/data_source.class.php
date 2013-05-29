@@ -11,6 +11,8 @@ use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use application\discovery\module\training_results\DataManagerInterface;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -32,12 +34,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->training_results[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('training_id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('training_id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
-            $query = 'SELECT vdea.*, vdp.first_name, vdp.last_name FROM v_discovery_enrollment_advanced AS vdea JOIN v_discovery_profile_basic AS vdp ON vdea.person_id = vdp.id ' .
-                 $translator->render_query($condition) . ' ORDER BY vdp.first_name, vdp.last_name';
+            $query = 'SELECT vdea.*, vdp.first_name, vdp.last_name FROM v_discovery_enrollment_advanced AS vdea JOIN v_discovery_profile_basic AS vdp ON vdea.person_id = vdp.id WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ' ORDER BY vdp.first_name, vdp.last_name';
             
             $statement = $this->get_connection()->query($query);
             if ($statement instanceof PDOStatement)
@@ -81,8 +88,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
@@ -187,8 +198,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_training_next_id($training)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', $training->get_id());
-        $conditions[] = new EqualityCondition('source', $training->get_source());
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('previous_id'), 
+            new StaticConditionVariable($training->get_id()));
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('source'), 
+            new StaticConditionVariable($training->get_source()));
         $condition = new AndCondition($conditions);
         
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .

@@ -4,7 +4,6 @@ namespace application\discovery\module\profile;
 use common\libraries\Path;
 use common\libraries\Filesystem;
 use common\libraries\Request;
-use common\libraries\Application;
 use application\discovery\instance\Instance;
 use application\discovery\module\profile\DataManager;
 
@@ -17,11 +16,6 @@ class Module extends \application\discovery\Module
      */
     private $profile;
     const PARAM_USER_ID = 'user_id';
-
-    public function __construct(Application $application, Instance $module_instance)
-    {
-        parent :: __construct($application, $module_instance);
-    }
 
     public function get_module_parameters()
     {

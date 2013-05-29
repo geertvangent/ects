@@ -1,8 +1,9 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use group\GroupDataManager;
 use common\libraries\ObjectTableDataProvider;
+use common\libraries\DataClassRetrievesParameters;
+use common\libraries\DataClassCountParameters;
 
 /**
  * $Id: group_rel_user_browser_table_data_provider.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -38,11 +39,9 @@ class GroupRelUserBrowserTableDataProvider extends ObjectTableDataProvider
     public function get_objects($offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
-        return GroupDataManager :: get_instance()->retrieve_group_rel_users(
-            $this->get_condition(), 
-            $offset, 
-            $count, 
-            $order_property);
+        return \group\DataManager :: retrieves(
+            \group\GroupRelUser :: class_name(), 
+            new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property));
     }
 
     /**
@@ -52,6 +51,8 @@ class GroupRelUserBrowserTableDataProvider extends ObjectTableDataProvider
      */
     public function get_object_count()
     {
-        return GroupDataManager :: get_instance()->count_group_rel_users($this->get_condition());
+        return \group\DataManager :: count(
+            \group\GroupRelUser :: class_name(), 
+            new DataClassCountParameters($this->get_condition()));
     }
 }

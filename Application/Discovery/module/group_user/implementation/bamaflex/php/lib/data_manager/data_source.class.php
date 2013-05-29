@@ -7,6 +7,8 @@ use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
 use application\discovery\module\group\implementation\bamaflex\Group;
 use application\discovery\module\group_user\DataManagerInterface;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -29,9 +31,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->group_user[$group_class_id][$source][$type]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('group_class_id', $group_class_id);
-            $conditions[] = new EqualityCondition('source', $source);
-            $conditions[] = new EqualityCondition('type', $type);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('group_class_id'), 
+                new StaticConditionVariable($group_class_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('type'), 
+                new StaticConditionVariable($type));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced WHERE ' .
@@ -70,9 +78,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->group[$source][$type][$group_class_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('type_id', $group_class_id);
-            $conditions[] = new EqualityCondition('source', $source);
-            $conditions[] = new EqualityCondition('type', $type);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('type_id'), 
+                new StaticConditionVariable($group_class_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('type'), 
+                new StaticConditionVariable($type));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_group_advanced WHERE ' .

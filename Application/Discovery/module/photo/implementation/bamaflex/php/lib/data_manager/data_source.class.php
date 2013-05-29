@@ -15,6 +15,8 @@ use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\module\faculty\implementation\bamaflex\Faculty;
 use application\discovery\module\photo\DataManagerInterface;
 use application\discovery\module\profile\Photo;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -26,7 +28,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         
         if (! file_exists($path))
         {
-            $condition = new EqualityCondition('id', $id);
+            $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
             
             $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
@@ -68,8 +70,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             if (! isset($this->faculties[$faculty_id][$source]))
             {
                 $conditions = array();
-                $conditions[] = new EqualityCondition('id', $faculty_id);
-                $conditions[] = new EqualityCondition('source', $source);
+                $conditions[] = new EqualityCondition(
+                    new StaticColumnConditionVariable('id'), 
+                    new StaticConditionVariable($faculty_id));
+                $conditions[] = new EqualityCondition(
+                    new StaticColumnConditionVariable('source'), 
+                    new StaticConditionVariable($source));
                 $condition = new AndCondition($conditions);
                 
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
@@ -105,8 +111,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->trainings[$training_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', $training_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
@@ -150,8 +160,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->course[$programme_id][$source]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('id', $programme_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($programme_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .

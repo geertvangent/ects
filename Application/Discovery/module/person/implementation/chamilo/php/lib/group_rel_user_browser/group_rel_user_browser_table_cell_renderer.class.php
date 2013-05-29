@@ -4,7 +4,6 @@ namespace application\discovery\module\person\implementation\chamilo;
 use group\GroupRelUser;
 use group\DefaultGroupRelUserTableCellRenderer;
 use common\libraries\Toolbar;
-use user\userManager;
 
 class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellRenderer
 {
@@ -39,7 +38,7 @@ class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellR
             // Exceptions that need post-processing go here ...
             case GroupRelUser :: PROPERTY_USER_ID :
                 $user_id = parent :: render_cell($column, $groupreluser);
-                $user = UserManager :: retrieve_user($user_id);
+                $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
                 return $user->get_fullname();
         }
         return parent :: render_cell($column, $groupreluser);

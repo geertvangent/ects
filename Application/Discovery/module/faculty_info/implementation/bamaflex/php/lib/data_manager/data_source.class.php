@@ -12,6 +12,8 @@ use application\discovery\module\faculty_info\DataManagerInterface;
 use common\libraries\AndCondition;
 use common\libraries\Utilities;
 use common\libraries\EqualityCondition;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -28,11 +30,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             if (! isset($this->faculties[$faculty_id][$source]))
             {
                 $conditions = array();
-                $conditions[] = new EqualityCondition('id', $faculty_id);
-                $conditions[] = new EqualityCondition('source', $source);
+                $conditions[] = new EqualityCondition(
+                    new StaticColumnConditionVariable('id'), 
+                    new StaticConditionVariable($faculty_id));
+                $conditions[] = new EqualityCondition(
+                    new StaticColumnConditionVariable('source'), 
+                    new StaticConditionVariable($source));
                 $condition = new AndCondition($conditions);
                 
-                $query = 'SELECT * FROM v_discovery_faculty_advancedWHERE ' .
+                $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
                      DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
                 $statement = $this->get_connection()->query($query);
                 
@@ -123,8 +129,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_faculty_next_id($faculty)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', $faculty->get_id());
-        $conditions[] = new EqualityCondition('source', $faculty->get_source());
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('previous_id'), 
+            new StaticConditionVariable($faculty->get_id()));
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('source'), 
+            new StaticConditionVariable($faculty->get_source()));
         $condition = new AndCondition($conditions);
         
         $query = 'SELECT id, source FROM v_discovery_faculty_advanced WHERE ' .
@@ -146,8 +156,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->deans[$source][$faculty_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('source', $source);
-            $conditions[] = new EqualityCondition('faculty_id', $faculty_id);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('faculty_id'), 
+                new StaticConditionVariable($faculty_id));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_faculty_dean_advanced WHERE ' .
@@ -181,8 +195,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->trainings[$source][$faculty_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('faculty_id', $faculty_id);
-            $conditions[] = new EqualityCondition('source', $source);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('faculty_id'), 
+                new StaticConditionVariable($faculty_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .

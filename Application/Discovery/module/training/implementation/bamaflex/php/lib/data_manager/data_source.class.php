@@ -13,6 +13,8 @@ use application\discovery\module\faculty\implementation\bamaflex\Dean;
 use application\discovery\module\faculty\implementation\bamaflex\Faculty;
 use application\discovery\module\training\DataManagerInterface;
 use application\discovery\data_source\bamaflex\HistoryReference;
+use common\libraries\StaticColumnConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -34,7 +36,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         if (! isset($this->trainings[$year]))
         {
-            $condition = new EqualityCondition('year', $year);
+            $condition = new EqualityCondition(
+                new StaticColumnConditionVariable('year'), 
+                new StaticConditionVariable($year));
             
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
@@ -84,8 +88,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_training_next_id($training)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', $training->get_id());
-        $conditions[] = new EqualityCondition('source', $training->get_source());
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('previous_id'), 
+            new StaticConditionVariable($training->get_id()));
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('source'), 
+            new StaticConditionVariable($training->get_source()));
         $condition = new AndCondition($conditions);
         
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
@@ -106,7 +114,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         if (! isset($this->years))
         {
-            $condition = new NotCondition(new EqualityCondition('year', null));
+            $condition = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('year'), null));
             
             $query = 'SELECT DISTINCT year FROM v_discovery_training_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
@@ -134,8 +142,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             if (! isset($this->faculties[$faculty_id][$source]))
             {
                 $conditions = array();
-                $conditions[] = new EqualityCondition('id', $faculty_id);
-                $conditions[] = new EqualityCondition('source', $source);
+                $conditions[] = new EqualityCondition(
+                    new StaticColumnConditionVariable('id'), 
+                    new StaticConditionVariable($faculty_id));
+                $conditions[] = new EqualityCondition(
+                    new StaticColumnConditionVariable('source'), 
+                    new StaticConditionVariable($source));
                 $condition = new AndCondition($conditions);
                 
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
@@ -230,8 +242,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_faculty_next_id($faculty)
     {
         $conditions = array();
-        $conditions[] = new EqualityCondition('previous_id', $faculty->get_id());
-        $conditions[] = new EqualityCondition('source', $faculty->get_source());
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('previous_id'), 
+            new StaticConditionVariable($faculty->get_id()));
+        $conditions[] = new EqualityCondition(
+            new StaticColumnConditionVariable('source'), 
+            new StaticConditionVariable($faculty->get_source()));
         $condition = new AndCondition($conditions);
         
         $query = 'SELECT id, source FROM v_discovery_faculty_advanced WHERE ' .
@@ -253,8 +269,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->deans[$source][$faculty_id]))
         {
             $conditions = array();
-            $conditions[] = new EqualityCondition('source', $source);
-            $conditions[] = new EqualityCondition('faculty_id', $faculty_id);
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('faculty_id'), 
+                new StaticConditionVariable($faculty_id));
             $condition = new AndCondition($conditions);
             
             $query = 'SELECT * FROM v_discovery_faculty_dean_advanced WHERE ' .

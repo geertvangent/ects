@@ -11,8 +11,6 @@ class Autoloader
      */
     private static $map = array(
         'Autoloader' => '/autoloader.class.php', 
-        'application\discovery\module\profile\implementation\bamaflex\BamaflexAjaxPlatformGroupsFeed' => '/ajax/platform_groups_feed.class.php', 
-        'application\discovery\module\profile\implementation\bamaflex\BamaflexAjaxUsersFeed' => '/ajax/users_feed.class.php', 
         'Activity' => '/lib/activity.class.php', 
         'ActivityDescription' => '/lib/activity_description.class.php', 
         'ActivityStructured' => '/lib/activity_structured.class.php', 
@@ -41,8 +39,6 @@ class Autoloader
         'HtmlDefaultRenditionImplementation' => '/lib/rendition/html/default.class.php', 
         'HtmlXlsxRenditionImplementation' => '/lib/rendition/html/xlsx.class.php', 
         'XlsxDefaultRenditionImplementation' => '/lib/rendition/xlsx/default.class.php', 
-        'application\discovery\module\profile\implementation\bamaflex\RightsPlatformGroupEntity' => '/lib/rights_entity/platform_group.class.php', 
-        'application\discovery\module\profile\implementation\bamaflex\RightsUserEntity' => '/lib/rights_entity/user.class.php', 
         'SettingsConnector' => '/settings/settings_connector.class.php');
 
     /**

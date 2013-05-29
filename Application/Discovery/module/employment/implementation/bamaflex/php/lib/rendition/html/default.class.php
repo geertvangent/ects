@@ -18,13 +18,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
         
-        $entities = array();
-        $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
-        $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
-        
-        if (! Rights :: get_instance()->module_is_allowed(
+        if (! Rights :: is_allowed(
             Rights :: VIEW_RIGHT, 
-            $entities, 
             $this->get_module_instance()->get_id(), 
             $this->get_module_parameters()))
         {
