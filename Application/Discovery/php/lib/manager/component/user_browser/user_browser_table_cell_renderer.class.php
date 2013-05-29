@@ -58,9 +58,7 @@ class UserBrowserTableCellRenderer extends DefaultUserTableCellRenderer
         $toolbar = new Toolbar();
         
         $url = $this->browser->get_url(
-            array(
-                Manager :: PARAM_ACTION => Manager :: ACTION_VIEW, 
-                Manager :: PARAM_USER_ID => $user->get_id()));
+            array(Manager :: PARAM_ACTION => Manager :: ACTION_VIEW, Manager :: PARAM_USER_ID => $user->get_id()));
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('View', null, Utilities :: COMMON_LIBRARIES), 

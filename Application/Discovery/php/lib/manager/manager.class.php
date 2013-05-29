@@ -33,7 +33,7 @@ class Manager extends WebApplication
 
     /**
      * Constructor
-     *
+     * 
      * @param $user User The current user
      */
     public function __construct($user = null)
@@ -60,44 +60,44 @@ class Manager extends WebApplication
     public static function get_installable_application_packages($include_installed = false)
     {
         $package_list = new PackageList(
-            self :: context(),
-            Translation :: get('TypeName', null, __NAMESPACE__),
+            self :: context(), 
+            Translation :: get('TypeName', null, __NAMESPACE__), 
             Theme :: get_image_path() . 'logo/16.png');
-
+        
         $module_list = new PackageList(self :: context() . '\module', Translation :: get('Modules', null, __NAMESPACE__));
-
+        
         foreach (Module :: get_packages_from_filesystem() as $module_type)
         {
             if (! CommonDataManager :: get_registration($module_type) || $include_installed)
             {
                 $module_list->add_package($module_type);
             }
-
+            
             $module_class = '\\' . $module_type . '\Module';
-
+            
             if (class_exists($module_class))
             {
                 $module_implementations = $module_class :: get_available_implementations();
-
+                
                 if (count($module_implementations) > 0)
                 {
                     $module_implementations_list = new PackageList(
-                        $module_type,
-                        Translation :: get('TypeName', null, $module_type),
+                        $module_type, 
+                        Translation :: get('TypeName', null, $module_type), 
                         Theme :: get_image_path($module_type) . 'logo/16.png');
-
+                    
                     foreach ($module_implementations as $module_implementation)
                     {
                         $module_implementations_list->add_package($module_implementation);
                     }
-
+                    
                     $module_list->add_child($module_implementations_list);
                 }
             }
         }
-
+        
         $package_list->add_child($module_list);
-
+        
         return $package_list;
     }
 }

@@ -65,11 +65,7 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
 
     public function retrieve_module_instance_by_condition($condition, $order_by)
     {
-        return $this->retrieve_object(
-            Instance :: get_table_name(), 
-            $condition, 
-            $order_by, 
-            Instance :: CLASS_NAME);
+        return $this->retrieve_object(Instance :: get_table_name(), $condition, $order_by, Instance :: CLASS_NAME);
     }
 
     public function retrieve_module_instances($condition = null, $offset = null, $max_objects = null, $order_by = null)
@@ -188,7 +184,9 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
 
     public function retrieve_data_source_instance($data_source_instance_id)
     {
-        $condition = new EqualityCondition(\application\discovery\data_source\Instance :: PROPERTY_ID, $data_source_instance_id);
+        $condition = new EqualityCondition(
+            \application\discovery\data_source\Instance :: PROPERTY_ID, 
+            $data_source_instance_id);
         return $this->retrieve_object(
             \application\discovery\data_source\Instance :: get_table_name(), 
             $condition, 
@@ -212,12 +210,14 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
         return $this->count_objects(\application\discovery\data_source\Instance :: get_table_name(), $condition);
     }
 
-    public function create_data_source_instance_setting(\application\discovery\data_source\InstanceSetting $data_source_instance_setting)
+    public function create_data_source_instance_setting(
+        \application\discovery\data_source\InstanceSetting $data_source_instance_setting)
     {
         return $this->create($data_source_instance_setting);
     }
 
-    public function update_data_source_instance_setting(\application\discovery\data_source\InstanceSetting $data_source_instance_setting)
+    public function update_data_source_instance_setting(
+        \application\discovery\data_source\InstanceSetting $data_source_instance_setting)
     {
         $condition = new EqualityCondition(
             \application\discovery\data_source\InstanceSetting :: PROPERTY_ID, 
@@ -225,7 +225,8 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
         return $this->update($data_source_instance_setting, $condition);
     }
 
-    public function delete_data_source_instance_setting(\application\discovery\data_source\InstanceSetting $data_source_instance_setting)
+    public function delete_data_source_instance_setting(
+        \application\discovery\data_source\InstanceSetting $data_source_instance_setting)
     {
         $condition = new EqualityCondition(
             \application\discovery\data_source\InstanceSetting :: PROPERTY_ID, 
@@ -275,7 +276,9 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
         $conditions[] = new EqualityCondition(
             \application\discovery\data_source\InstanceSetting :: PROPERTY_DATA_SOURCE_INSTANCE_ID, 
             $data_source_instance_id);
-        $conditions[] = new EqualityCondition(\application\discovery\data_source\InstanceSetting :: PROPERTY_VARIABLE, $variable);
+        $conditions[] = new EqualityCondition(
+            \application\discovery\data_source\InstanceSetting :: PROPERTY_VARIABLE, 
+            $variable);
         $condition = new AndCondition($conditions);
         return $this->retrieve_object(
             \application\discovery\data_source\InstanceSetting :: get_table_name(), 
@@ -286,13 +289,17 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
 
     public function update_data_source_instance($data_source_instance)
     {
-        $condition = new EqualityCondition(\application\discovery\data_source\Instance :: PROPERTY_ID, $data_source_instance->get_id());
+        $condition = new EqualityCondition(
+            \application\discovery\data_source\Instance :: PROPERTY_ID, 
+            $data_source_instance->get_id());
         return $this->update($data_source_instance, $condition);
     }
 
     public function delete_data_source_instance($data_source_instance)
     {
-        $condition = new EqualityCondition(\application\discovery\data_source\Instance :: PROPERTY_ID, $data_source_instance->get_id());
+        $condition = new EqualityCondition(
+            \application\discovery\data_source\Instance :: PROPERTY_ID, 
+            $data_source_instance->get_id());
         return $this->delete(\application\discovery\data_source\Instance :: get_table_name(), $condition);
     }
 

@@ -12,7 +12,7 @@ class DataSource extends DoctrineDatabase
 
     /**
      * Constructor
-     *
+     * 
      * @param Instance $module_instance
      */
     public function __construct(\application\discovery\instance\Instance $module_instance)
@@ -34,14 +34,14 @@ class DataSource extends DoctrineDatabase
     public static function get_available_types()
     {
         $types = array();
-
+        
         $data_sources = Filesystem :: get_directory_content(
-            Path :: namespace_to_full_path(__NAMESPACE__) . 'data_source/',
-            Filesystem :: LIST_DIRECTORIES,
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'data_source/', 
+            Filesystem :: LIST_DIRECTORIES, 
             false);
-
+        
         $exceptions = array('php', 'resources');
-
+        
         foreach ($data_sources as $data_source)
         {
             if (! in_array($data_source, $exceptions))

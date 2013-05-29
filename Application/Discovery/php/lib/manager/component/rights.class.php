@@ -26,9 +26,9 @@ class RightsComponent extends Manager implements DelegateComponent
         $this->namespace = '\\' . $module_instance->get_type() . '\Rights';
         $namespace = $this->namespace;
         RightsEditorManager :: launch(
-            $this,
-            'discovery_' . $this->module_instance_id,
-            $this->get_locations(),
+            $this, 
+            'discovery_' . $this->module_instance_id, 
+            $this->get_locations(), 
             $this->get_entities());
     }
 
@@ -36,7 +36,7 @@ class RightsComponent extends Manager implements DelegateComponent
     {
         $namespace = $this->namespace;
         $locations = array();
-
+        
         $locations[] = $namespace :: get_instance()->get_current_location($this->module_instance_id);
         return $locations;
     }
@@ -44,13 +44,13 @@ class RightsComponent extends Manager implements DelegateComponent
     public function get_entities()
     {
         $excluded_users[] = $this->get_user_id();
-
+        
         $user_entity = new NewUserEntity();
-
+        
         $entities = array();
         $entities[NewUserEntity :: ENTITY_TYPE] = $user_entity;
         $entities[NewPlatformGroupEntity :: ENTITY_TYPE] = new NewPlatformGroupEntity();
-
+        
         return $entities;
     }
 

@@ -60,7 +60,8 @@ class XlsxDefaultRendition extends XlsxRendition
         }
         else
         {
-            if ($module->get_module_instance()->get_content_type() == \application\discovery\instance\Instance :: TYPE_USER)
+            if ($module->get_module_instance()->get_content_type() ==
+                 \application\discovery\instance\Instance :: TYPE_USER)
             {
                 $user_id = $module->get_module_parameters()->get_user_id();
                 $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);

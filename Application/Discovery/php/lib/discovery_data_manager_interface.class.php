@@ -58,11 +58,14 @@ interface DataManagerInterface
 
     public function count_data_source_instances($condition = null);
 
-    public function create_data_source_instance_setting(\application\discovery\data_source\InstanceSetting $data_source_instance_setting);
+    public function create_data_source_instance_setting(
+        \application\discovery\data_source\InstanceSetting $data_source_instance_setting);
 
-    public function update_data_source_instance_setting(\application\discovery\data_source\InstanceSetting $data_source_instance_setting);
+    public function update_data_source_instance_setting(
+        \application\discovery\data_source\InstanceSetting $data_source_instance_setting);
 
-    public function delete_data_source_instance_setting(\application\discovery\data_source\InstanceSetting $data_source_instance_setting);
+    public function delete_data_source_instance_setting(
+        \application\discovery\data_source\InstanceSetting $data_source_instance_setting);
 
     public function retrieve_data_source_instance_setting($id);
 

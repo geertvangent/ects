@@ -23,7 +23,7 @@ class Installer extends WebApplicationInstaller
     {
         $installers = array();
         $installers[] = 'application\discovery\instance';
-
+        
         return $installers;
     }
 }
