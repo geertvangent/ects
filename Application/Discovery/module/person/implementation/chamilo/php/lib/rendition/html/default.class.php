@@ -43,18 +43,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $action_bar->set_search_url($this->get_application()->get_url($parameters));
         
         $action_bar->add_common_action(
-                new ToolbarItem(Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), 
-                        Theme :: get_common_image_path() . 'action_browser.png', $this->get_application()->get_url(), 
-                        ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+            new ToolbarItem(
+                Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), 
+                Theme :: get_common_image_path() . 'action_browser.png', 
+                $this->get_application()->get_url(), 
+                ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
     }
 
     public function get_menu_html()
     {
         $url = $this->get_application()->get_url(
-                array(
-                        \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
-                        \group\GroupManager :: PARAM_GROUP_ID => '%s'));
+            array(
+                \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                \group\GroupManager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new \group\GroupMenu($this->get_group(), urldecode($url));
         
         $html = array();
@@ -81,60 +83,79 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $query = $this->action_bar->get_query();
         if (isset($query) && $query != '')
         {
-            $count_users = \user\DataManager :: count(\user\User :: class_name(), 
-                    $this->get_users_condition($this->action_bar->get_query()));
+            $count_users = \user\DataManager :: count(
+                \user\User :: class_name(), 
+                $this->get_users_condition($this->action_bar->get_query()));
             $count_groups = \group\GroupDataManager :: get_instance()->count_groups(
-                    $this->get_subgroups_condition($this->action_bar->get_query()));
+                $this->get_subgroups_condition($this->action_bar->get_query()));
             
             if ($count_users > 0)
             {
                 $table = new UserBrowserTable($this);
                 $tabs->add_tab(
-                        new DynamicContentTab(self :: TAB_USERS, Translation :: get('Users', null, 'user'), 
-                                Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', 
-                                $table->as_html()));
+                    new DynamicContentTab(
+                        self :: TAB_USERS, 
+                        Translation :: get('Users', null, 'user'), 
+                        Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                        $table->as_html()));
             }
             
             if ($count_groups > 0)
             {
-                $table = new GroupBrowserTable($this, $parameters, 
-                        $this->get_subgroups_condition($this->action_bar->get_query()));
+                $table = new GroupBrowserTable(
+                    $this, 
+                    $parameters, 
+                    $this->get_subgroups_condition($this->action_bar->get_query()));
                 $tabs->add_tab(
-                        new DynamicContentTab(self :: TAB_SUBGROUPS, Translation :: get('Subgroups'), 
-                                Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', 
-                                $table->as_html()));
+                    new DynamicContentTab(
+                        self :: TAB_SUBGROUPS, 
+                        Translation :: get('Subgroups'), 
+                        Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                        $table->as_html()));
             }
             
             if ($count_users == 0 && $count_groups == 0)
             {
                 $html[] = Display :: warning_message(
-                        Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES), true);
+                    Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES), 
+                    true);
             }
         }
         else
         {
-            $table = new GroupRelUserBrowserTable($this, $parameters, 
-                    $this->get_users_condition($this->action_bar->get_query()));
+            $table = new GroupRelUserBrowserTable(
+                $this, 
+                $parameters, 
+                $this->get_users_condition($this->action_bar->get_query()));
             $tabs->add_tab(
-                    new DynamicContentTab(self :: TAB_USERS, Translation :: get('Users', null, 'user'), 
-                            Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', $table->as_html()));
+                new DynamicContentTab(
+                    self :: TAB_USERS, 
+                    Translation :: get('Users', null, 'user'), 
+                    Theme :: get_image_path('user') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                    $table->as_html()));
             
             $count_groups = \group\GroupDataManager :: get_instance()->count_groups(
-                    $this->get_subgroups_condition($this->action_bar->get_query()));
+                $this->get_subgroups_condition($this->action_bar->get_query()));
             if ($count_groups > 0)
             {
-                $table = new GroupBrowserTable($this, $parameters, 
-                        $this->get_subgroups_condition($this->action_bar->get_query()));
+                $table = new GroupBrowserTable(
+                    $this, 
+                    $parameters, 
+                    $this->get_subgroups_condition($this->action_bar->get_query()));
                 $tabs->add_tab(
-                        new DynamicContentTab(self :: TAB_SUBGROUPS, Translation :: get('Subgroups'), 
-                                Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', 
-                                $table->as_html()));
+                    new DynamicContentTab(
+                        self :: TAB_SUBGROUPS, 
+                        Translation :: get('Subgroups'), 
+                        Theme :: get_image_path('group') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                        $table->as_html()));
             }
             
             $tabs->add_tab(
-                    new DynamicContentTab(self :: TAB_DETAILS, Translation :: get('Details'), 
-                            Theme :: get_image_path('help') . 'logo/' . Theme :: ICON_MINI . '.png', 
-                            $this->get_group_info()));
+                new DynamicContentTab(
+                    self :: TAB_DETAILS, 
+                    Translation :: get('Details'), 
+                    Theme :: get_image_path('help') . 'logo/' . Theme :: ICON_MINI . '.png', 
+                    $this->get_group_info()));
         }
         
         $html[] = $tabs->render();
@@ -157,7 +178,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $description = $group->get_description();
         if ($description)
         {
-            $html[] = '<b>' . Translation :: get('Description', null, Utilities :: COMMON_LIBRARIES) . '</b>: ' . $description . '<br />';
+            $html[] = '<b>' . Translation :: get('Description', null, Utilities :: COMMON_LIBRARIES) . '</b>: ' .
+                 $description . '<br />';
         }
         
         $html[] = '<br />';
@@ -168,9 +190,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_group_viewing_url($group)
     {
         return $this->get_application()->get_url(
-                array(
-                        \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
-                        \group\GroupManager :: PARAM_GROUP_ID => $group->get_id()));
+            array(
+                \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                \group\GroupManager :: PARAM_GROUP_ID => $group->get_id()));
     }
     
     /*

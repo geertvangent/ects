@@ -32,7 +32,6 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('person_id', $person_id);
             $conditions[] = new EqualityCondition('year', $year);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT * FROM v_discovery_teaching_assignment ' . $translator->render_query($condition) .
                  ' ORDER BY faculty, training, name';
@@ -72,7 +71,6 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
         $condition = new EqualityCondition('person_id', $person_id);
-        $translator = DoctrineConditionTranslator :: factory($this);
         
         $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced ' .
              $translator->render_query($condition);
@@ -94,7 +92,6 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->years[$person_id]))
         {
             $condition = new EqualityCondition('person_id', $person_id);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT DISTINCT year FROM v_discovery_teaching_assignment_advanced ' .
                  $translator->render_query($condition) . ' ORDER BY year DESC';

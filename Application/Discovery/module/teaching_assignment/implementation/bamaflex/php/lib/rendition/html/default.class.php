@@ -23,8 +23,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(
+            Rights :: VIEW_RIGHT, 
+            $entities, 
+            $this->get_module_instance()->get_id(), 
+            $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -45,17 +48,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         if ($this->has_data())
         {
-            $tabs = new DynamicVisualTabsRenderer('teaching_assignment_list', 
-                    $this->get_teaching_assignments_table($parameters)->toHTML());
+            $tabs = new DynamicVisualTabsRenderer(
+                'teaching_assignment_list', 
+                $this->get_teaching_assignments_table($parameters)->toHTML());
             
             foreach ($this->get_years() as $year)
             {
                 $parameters = $this->get_module_parameters();
                 $parameters->set_year($year);
                 $tabs->add_tab(
-                        new DynamicVisualTab($year, $year, null, 
-                                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
-                                $current_year == $year));
+                    new DynamicVisualTab(
+                        $year, 
+                        $year, 
+                        null, 
+                        $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
+                        $current_year == $year));
             }
             
             $html[] = $tabs->render();
@@ -76,19 +83,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\course\implementation\bamaflex', array('data_source' => $data_source));
+            'application\discovery\module\course\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         $course_result_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\course_results\implementation\bamaflex', 
-                array('data_source' => $data_source));
+            'application\discovery\module\course_results\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         $faculty_info_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\faculty_info\implementation\bamaflex', 
-                array('data_source' => $data_source));
+            'application\discovery\module\faculty_info\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         $training_info_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\training_info\implementation\bamaflex', 
-                array('data_source' => $data_source));
+            'application\discovery\module\training_info\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         foreach ($teaching_assignments as $key => $teaching_assignment)
         {
@@ -97,7 +105,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($faculty_info_module_instance)
             {
                 $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
-                        $teaching_assignment->get_faculty_id(), $teaching_assignment->get_source());
+                    $teaching_assignment->get_faculty_id(), 
+                    $teaching_assignment->get_source());
                 $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $teaching_assignment->get_faculty() . '</a>';
             }
@@ -109,7 +118,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($training_info_module_instance)
             {
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
-                        $teaching_assignment->get_training_id(), $teaching_assignment->get_source());
+                    $teaching_assignment->get_training_id(), 
+                    $teaching_assignment->get_source());
                 $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $teaching_assignment->get_training() . '</a>';
             }
@@ -118,24 +128,29 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row[] = $teaching_assignment->get_training();
             }
             
-            $image = '<img src="' . Theme :: get_image_path() . 'type/' . $teaching_assignment->get_manager() . '.png" alt="' . Translation :: get(
-                    $teaching_assignment->get_manager_type()) . '" title="' . Translation :: get(
-                    $teaching_assignment->get_manager_type()) . '"/>';
+            $image = '<img src="' . Theme :: get_image_path() . 'type/' . $teaching_assignment->get_manager() .
+                 '.png" alt="' . Translation :: get($teaching_assignment->get_manager_type()) . '" title="' .
+                 Translation :: get($teaching_assignment->get_manager_type()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol($image, 
-                    Translation :: get($teaching_assignment->get_manager_type()), Translation :: get('Manager'));
+            LegendTable :: get_instance()->add_symbol(
+                $image, 
+                Translation :: get($teaching_assignment->get_manager_type()), 
+                Translation :: get('Manager'));
             
-            $image = '<img src="' . Theme :: get_image_path() . 'type/' . $teaching_assignment->get_teacher() . '.png" alt="' . Translation :: get(
-                    $teaching_assignment->get_teacher_type()) . '" title="' . Translation :: get(
-                    $teaching_assignment->get_teacher_type()) . '"/>';
+            $image = '<img src="' . Theme :: get_image_path() . 'type/' . $teaching_assignment->get_teacher() .
+                 '.png" alt="' . Translation :: get($teaching_assignment->get_teacher_type()) . '" title="' .
+                 Translation :: get($teaching_assignment->get_teacher_type()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol($image, 
-                    Translation :: get($teaching_assignment->get_teacher_type()), Translation :: get('Teacher'));
+            LegendTable :: get_instance()->add_symbol(
+                $image, 
+                Translation :: get($teaching_assignment->get_teacher_type()), 
+                Translation :: get('Teacher'));
             
             if ($course_module_instance)
             {
                 $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
-                        $teaching_assignment->get_programme_id(), $teaching_assignment->get_source());
+                    $teaching_assignment->get_programme_id(), 
+                    $teaching_assignment->get_source());
                 $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
                 $row[] = '<a href="' . $url . '">' . $teaching_assignment->get_name() . '</a>';
             }
@@ -144,20 +159,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row[] = $teaching_assignment->get_name();
             }
             $row[] = $teaching_assignment->get_credits();
-            $image = '<img src="' . Theme :: get_image_path() . 'timeframe/' . $teaching_assignment->get_timeframe_id() . '.png" alt="' . Translation :: get(
-                    $teaching_assignment->get_timeframe()) . '" title="' . Translation :: get(
-                    $teaching_assignment->get_timeframe()) . '"/>';
+            $image = '<img src="' . Theme :: get_image_path() . 'timeframe/' . $teaching_assignment->get_timeframe_id() .
+                 '.png" alt="' . Translation :: get($teaching_assignment->get_timeframe()) . '" title="' .
+                 Translation :: get($teaching_assignment->get_timeframe()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol($image, Translation :: get($teaching_assignment->get_timeframe()), 
-                    Translation :: get('Timeframe'));
+            LegendTable :: get_instance()->add_symbol(
+                $image, 
+                Translation :: get($teaching_assignment->get_timeframe()), 
+                Translation :: get('Timeframe'));
             
             if ($course_result_module_instance)
             {
                 $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
-                        $teaching_assignment->get_programme_id(), $teaching_assignment->get_source());
+                    $teaching_assignment->get_programme_id(), 
+                    $teaching_assignment->get_source());
                 $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-                $row[] = Theme :: get_common_image('action_details', 'png', Translation :: get('CourseResults'), $url, 
-                        ToolbarItem :: DISPLAY_ICON);
+                $row[] = Theme :: get_common_image(
+                    'action_details', 
+                    'png', 
+                    Translation :: get('CourseResults'), 
+                    $url, 
+                    ToolbarItem :: DISPLAY_ICON);
             }
             
             $data[] = $row;

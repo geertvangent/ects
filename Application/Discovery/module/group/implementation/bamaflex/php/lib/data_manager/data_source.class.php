@@ -32,9 +32,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('training_id', $training_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_group_advanced ' . $translator->render_query($condition) . ' ORDER BY description';
+            $query = 'SELECT * FROM v_discovery_group_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ' ORDER BY description';
             
             $statement = $this->get_connection()->query($query);
             
@@ -71,9 +72,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('id', $training_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)
@@ -100,12 +101,13 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
-                            Utilities :: get_namespace_from_object($training));
+                    $conditions[] = new EqualityCondition(
+                        History :: PROPERTY_TYPE, 
+                        Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
                     
                     $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
-                            $condition);
+                        $condition);
                     
                     if ($histories->size() > 0)
                     {
@@ -132,12 +134,13 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $training->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $training->get_source());
-                    $conditions[] = new EqualityCondition(History :: PROPERTY_TYPE, 
-                            Utilities :: get_namespace_from_object($training));
+                    $conditions[] = new EqualityCondition(
+                        History :: PROPERTY_TYPE, 
+                        Utilities :: get_namespace_from_object($training));
                     $condition = new AndCondition($conditions);
                     
                     $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
-                            $condition);
+                        $condition);
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
@@ -175,9 +178,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $conditions[] = new EqualityCondition('previous_id', $training->get_id());
         $conditions[] = new EqualityCondition('source', $training->get_source());
         $condition = new AndCondition($conditions);
-        $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT id, source FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+        $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
+             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)

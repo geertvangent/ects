@@ -23,8 +23,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(
+            Rights :: VIEW_RIGHT, 
+            $entities, 
+            $this->get_module_instance()->get_id(), 
+            $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -53,8 +56,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $data[] = $row;
                 }
                 
-                $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
-                        __NAMESPACE__) . 'types/address.png);">';
+                $html[] = '<div class="content_object" style="background-image: url(' .
+                     Theme :: get_image_path(__NAMESPACE__) . 'types/address.png);">';
                 $html[] = '<div class="title">';
                 $html[] = Translation :: get('Addresses');
                 $html[] = '</div>';
@@ -90,8 +93,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $data[] = $row;
                 }
                 
-                $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
-                        __NAMESPACE__) . 'types/learning_credit.png);">';
+                $html[] = '<div class="content_object" style="background-image: url(' .
+                     Theme :: get_image_path(__NAMESPACE__) . 'types/learning_credit.png);">';
                 $html[] = '<div class="title">';
                 $html[] = Translation :: get('LearningCredits');
                 $html[] = '</div>';
@@ -115,8 +118,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 
                 $url = $this->get_rights_url($this->get_module_instance()->get_id(), $this->get_module_parameters());
                 $toolbar->add_item(
-                        new ToolbarItem(Translation :: get('Rights'), 
-                                Theme :: get_common_image_path() . 'action_rights.png', $url));
+                    new ToolbarItem(
+                        Translation :: get('Rights'), 
+                        Theme :: get_common_image_path() . 'action_rights.png', 
+                        $url));
                 
                 $html[] = $toolbar->as_html();
             }
@@ -155,7 +160,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $learning_credit = array_pop($this->get_profile()->get_learning_credit());
             
-            $properties[Translation :: get('LearningCredit')] = $learning_credit->get_html() . ' (' . $learning_credit->get_date() . ')';
+            $properties[Translation :: get('LearningCredit')] = $learning_credit->get_html() . ' (' .
+                 $learning_credit->get_date() . ')';
         }
         
         if ($this->get_profile()->get_first_university_college())
@@ -179,7 +185,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $properties = array();
             $properties[Translation :: get('Date')] = $previous_college->get_date();
-            $properties[Translation :: get('Degree')] = '(' . $previous_college->get_degree_type() . ') ' . $previous_college->get_degree_name();
+            $properties[Translation :: get('Degree')] = '(' . $previous_college->get_degree_type() . ') ' .
+                 $previous_college->get_degree_name();
             
             $school = array();
             $school[] = $previous_college->get_school_name();
@@ -203,8 +210,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             
             $table = new PropertiesTable($properties);
-            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
-                    __NAMESPACE__) . 'types/previous_college.png);">';
+            $html[] = '<div class="content_object" style="background-image: url(' .
+                 Theme :: get_image_path(__NAMESPACE__) . 'types/previous_college.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('PreviousCollege');
             $html[] = '</div>';
@@ -247,8 +254,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             
             $table = new PropertiesTable($properties);
-            $html[] = '<div class="content_object" style="background-image: url(' . Theme :: get_image_path(
-                    __NAMESPACE__) . 'types/previous_university.png);">';
+            $html[] = '<div class="content_object" style="background-image: url(' .
+                 Theme :: get_image_path(__NAMESPACE__) . 'types/previous_university.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('PreviousUniversity');
             $html[] = '</div>';

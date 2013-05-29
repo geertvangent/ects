@@ -33,9 +33,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('source', $source);
             $conditions[] = new EqualityCondition('type', $type);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced ' . $translator->render_query($condition) .
+            $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY last_name, first_name';
             $statement = $this->get_connection()->query($query);
             
@@ -74,9 +74,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('source', $source);
             $conditions[] = new EqualityCondition('type', $type);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_group_advanced ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_group_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
             
             if ($statement instanceof PDOStatement)

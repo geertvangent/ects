@@ -14,7 +14,7 @@ class Module extends \application\discovery\module\career\Module
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
         }
-
+        
         return $parameter;
     }
 
@@ -23,17 +23,17 @@ class Module extends \application\discovery\module\career\Module
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $param_contract_id = Request :: get(self :: PARAM_CONTRACT_ID);
         $parameter = new Parameters();
-
+        
         if ($param_user)
         {
             $parameter->set_user_id($param_user);
         }
-
-        if (!is_null($param_contract_id))
+        
+        if (! is_null($param_contract_id))
         {
             $parameter->set_contract_id($param_contract_id);
         }
-
+        
         return $parameter;
     }
 

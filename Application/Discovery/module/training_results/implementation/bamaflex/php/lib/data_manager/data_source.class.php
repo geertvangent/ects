@@ -35,7 +35,6 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('training_id', $training_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
             $query = 'SELECT vdea.*, vdp.first_name, vdp.last_name FROM v_discovery_enrollment_advanced AS vdea JOIN v_discovery_profile_basic AS vdp ON vdea.person_id = vdp.id ' .
                  $translator->render_query($condition) . ' ORDER BY vdp.first_name, vdp.last_name';
@@ -85,8 +84,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('id', $training_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
-            $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+            
+            $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -190,9 +190,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $conditions[] = new EqualityCondition('previous_id', $training->get_id());
         $conditions[] = new EqualityCondition('source', $training->get_source());
         $condition = new AndCondition($conditions);
-        $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT id, source FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+        $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
+             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         
         $statement = $this->get_connection()->query($query);
         

@@ -27,9 +27,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! file_exists($path))
         {
             $condition = new EqualityCondition('id', $id);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_profile_photo ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -71,9 +71,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $conditions[] = new EqualityCondition('id', $faculty_id);
                 $conditions[] = new EqualityCondition('source', $source);
                 $condition = new AndCondition($conditions);
-                $translator = DoctrineConditionTranslator :: factory($this);
                 
-                $query = 'SELECT * FROM v_discovery_faculty_advanced ' . $translator->render_query($condition);
+                $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
+                     DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
                 
                 $statement = $this->get_connection()->query($query);
                 
@@ -108,9 +108,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('id', $training_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_training_advanced ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -153,9 +153,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('id', $programme_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_advanced ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             

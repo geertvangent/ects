@@ -44,9 +44,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('id', $programme_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_advanced ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -223,9 +223,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $conditions[] = new EqualityCondition('previous_id', $course->get_id());
         $conditions[] = new EqualityCondition('source', $course->get_source());
         $condition = new AndCondition($conditions);
-        $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT id FROM v_discovery_course_advanced ' . $translator->render_query($condition);
+        $query = 'SELECT id FROM v_discovery_course_advanced WHERE ' .
+             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         
         $statement = $this->get_connection()->query($query);
         
@@ -250,9 +250,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $conditions[] = new EqualityCondition('parent_id', parent_id);
         $conditions[] = new EqualityCondition('source', $source);
         $condition = new AndCondition($conditions);
-        $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT * FROM v_discovery_course_advanced ' . $translator->render_query($condition);
+        $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
+             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         
         $statement = $this->get_connection()->query($query);
         
@@ -288,9 +288,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('programme_id', $programme_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_evaluation ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_course_evaluation WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -334,9 +334,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('programme_id', $programme_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_activity ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_course_activity WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -378,9 +378,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('programme_id', $programme_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_material ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_course_material WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -429,9 +429,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('programme_id', $programme_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_competence ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_course_competence WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -472,9 +472,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('programme_id', $programme_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_language ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_course_language WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -512,9 +512,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('timeframe_id', $timeframe_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_course_timeframe_part ' . $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_course_timeframe_part WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             
@@ -552,10 +552,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new EqualityCondition('programme_id', $programme_id);
             $conditions[] = new EqualityCondition('source', $source);
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_teaching_assignment_teacher_advanced ' .
-                 $translator->render_query($condition);
+            $query = 'SELECT * FROM v_discovery_teaching_assignment_teacher_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             
             $statement = $this->get_connection()->query($query);
             

@@ -18,7 +18,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
     public function render()
-    {        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+    {
+        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
         
         $entities = array();
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();

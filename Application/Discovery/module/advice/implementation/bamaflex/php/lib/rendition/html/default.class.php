@@ -24,8 +24,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(
+            Rights :: VIEW_RIGHT, 
+            $entities, 
+            $this->get_module_instance()->get_id(), 
+            $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
@@ -36,7 +39,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             
             $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
-                    $this->get_module_parameters());
+                $this->get_module_parameters());
             
             foreach ($enrollments as $enrollment)
             {
@@ -48,25 +51,36 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     
                     if ($enrollment->is_special_result())
                     {
-                        $tab_image_path = Theme :: get_image_path($enrollment_namespace) . 'result_type/' . $enrollment->get_result() . '.png';
-                        $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get(
-                                $enrollment->get_result_string(), null, $enrollment_namespace) . '" title="' . Translation :: get(
-                                $enrollment->get_result_string(), null, $enrollment_namespace) . '" />';
+                        $tab_image_path = Theme :: get_image_path($enrollment_namespace) . 'result_type/' .
+                             $enrollment->get_result() . '.png';
+                        $tab_image = '<img src="' . $tab_image_path . '" alt="' .
+                             Translation :: get($enrollment->get_result_string(), null, $enrollment_namespace) .
+                             '" title="' .
+                             Translation :: get($enrollment->get_result_string(), null, $enrollment_namespace) . '" />';
                         $html[] = $tab_image;
-                        LegendTable :: get_instance()->add_symbol($tab_image, 
-                                Translation :: get($enrollment->get_result_string(), null, $enrollment_namespace), 
-                                Translation :: get('ResultType'), null, $enrollment_namespace);
+                        LegendTable :: get_instance()->add_symbol(
+                            $tab_image, 
+                            Translation :: get($enrollment->get_result_string(), null, $enrollment_namespace), 
+                            Translation :: get('ResultType'), 
+                            null, 
+                            $enrollment_namespace);
                     }
                     
                     $html[] = '</th><th class="action">';
-                    $tab_image_path = Theme :: get_image_path($enrollment_namespace) . 'contract_type/' . $enrollment->get_contract_type() . '.png';
-                    $tab_image = '<img src="' . $tab_image_path . '" alt="' . Translation :: get(
-                            $enrollment->get_contract_type_string(), null, $enrollment_namespace) . '" title="' . Translation :: get(
-                            $enrollment->get_contract_type_string(), null, $enrollment_namespace) . '" />';
+                    $tab_image_path = Theme :: get_image_path($enrollment_namespace) . 'contract_type/' .
+                         $enrollment->get_contract_type() . '.png';
+                    $tab_image = '<img src="' . $tab_image_path . '" alt="' .
+                         Translation :: get($enrollment->get_contract_type_string(), null, $enrollment_namespace) .
+                         '" title="' .
+                         Translation :: get($enrollment->get_contract_type_string(), null, $enrollment_namespace) .
+                         '" />';
                     $html[] = $tab_image;
-                    LegendTable :: get_instance()->add_symbol($tab_image, 
-                            Translation :: get($enrollment->get_contract_type_string(), null, $enrollment_namespace), 
-                            Translation :: get('ContractType'), null, $enrollment_namespace);
+                    LegendTable :: get_instance()->add_symbol(
+                        $tab_image, 
+                        Translation :: get($enrollment->get_contract_type_string(), null, $enrollment_namespace), 
+                        Translation :: get('ContractType'), 
+                        null, 
+                        $enrollment_namespace);
                     
                     $html[] = '</th><th>';
                     
@@ -113,16 +127,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
                 
-                $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_MOTIVATION . '.png" alt="' . Translation :: get(
-                        Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '" title="' . Translation :: get(
-                        Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '"/>';
+                $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_MOTIVATION . '.png" alt="' .
+                     Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '" title="' .
+                     Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '"/>';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, 
-                        Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)), Translation :: get('Type'));
+                LegendTable :: get_instance()->add_symbol(
+                    $image, 
+                    Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)), 
+                    Translation :: get('Type'));
                 
                 $row[] = $advice->get_try();
                 $row[] = DatetimeUtilities :: format_locale_date(
-                        Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $advice->get_date());
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    $advice->get_date());
                 $row[] = $advice->get_decision_type();
                 
                 $row[] = $advice->get_motivation();
@@ -134,16 +151,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
                 
-                $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_OMBUDSMAN . '.png" alt="' . Translation :: get(
-                        Advice :: type_string(Advice :: TYPE_OMBUDSMAN)) . '" title="' . Translation :: get(
-                        Advice :: type_string(Advice :: TYPE_OMBUDSMAN)) . '"/>';
+                $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_OMBUDSMAN . '.png" alt="' .
+                     Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)) . '" title="' .
+                     Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)) . '"/>';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, 
-                        Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)), Translation :: get('Type'));
+                LegendTable :: get_instance()->add_symbol(
+                    $image, 
+                    Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)), 
+                    Translation :: get('Type'));
                 
                 $row[] = $advice->get_try();
                 $row[] = DatetimeUtilities :: format_locale_date(
-                        Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $advice->get_date());
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    $advice->get_date());
                 $row[] = $advice->get_decision_type();
                 $row[] = $advice->get_ombudsman();
                 
@@ -154,16 +174,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
                 
-                $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_VOTE . '.png" alt="' . Translation :: get(
-                        Advice :: type_string(Advice :: TYPE_VOTE)) . '" title="' . Translation :: get(
-                        Advice :: type_string(Advice :: TYPE_VOTE)) . '"/>';
+                $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_VOTE . '.png" alt="' .
+                     Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)) . '" title="' .
+                     Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)) . '"/>';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, 
-                        Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)), Translation :: get('Type'));
+                LegendTable :: get_instance()->add_symbol(
+                    $image, 
+                    Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)), 
+                    Translation :: get('Type'));
                 
                 $row[] = $advice->get_try();
                 $row[] = DatetimeUtilities :: format_locale_date(
-                        Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $advice->get_date());
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    $advice->get_date());
                 $row[] = $advice->get_decision_type();
                 $row[] = $advice->get_vote();
                 
@@ -175,27 +198,30 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row = array();
                 if ($advice->get_measures_valid())
                 {
-                    $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_MEASURES_VALID . '.png" alt="' . Translation :: get(
-                            Advice :: type_string(Advice :: TYPE_MEASURES_VALID)) . '" title="' . Translation :: get(
-                            Advice :: type_string(Advice :: TYPE_MEASURES_VALID)) . '"/>';
+                    $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_MEASURES_VALID .
+                         '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)) .
+                         '" title="' . Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)) . '"/>';
                     $row[] = $image;
-                    LegendTable :: get_instance()->add_symbol($image, 
-                            Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)), 
-                            Translation :: get('Type'));
+                    LegendTable :: get_instance()->add_symbol(
+                        $image, 
+                        Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)), 
+                        Translation :: get('Type'));
                 }
                 else
                 {
-                    $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_MEASURES_INVALID . '.png" alt="' . Translation :: get(
-                            Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)) . '" title="' . Translation :: get(
-                            Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)) . '"/>';
+                    $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_MEASURES_INVALID .
+                         '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)) .
+                         '" title="' . Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)) . '"/>';
                     $row[] = $image;
-                    LegendTable :: get_instance()->add_symbol($image, 
-                            Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)), 
-                            Translation :: get('Type'));
+                    LegendTable :: get_instance()->add_symbol(
+                        $image, 
+                        Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)), 
+                        Translation :: get('Type'));
                 }
                 $row[] = $advice->get_try();
                 $row[] = DatetimeUtilities :: format_locale_date(
-                        Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $advice->get_date());
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    $advice->get_date());
                 $row[] = $advice->get_decision_type();
                 $row[] = $advice->get_measures();
                 
@@ -206,16 +232,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
                 
-                $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_ADVICE . '.png" alt="' . Translation :: get(
-                        Advice :: type_string(Advice :: TYPE_ADVICE)) . '" title="' . Translation :: get(
-                        Advice :: type_string(Advice :: TYPE_ADVICE)) . '"/>';
+                $image = '<img src="' . Theme :: get_image_path() . 'type/' . Advice :: TYPE_ADVICE . '.png" alt="' .
+                     Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)) . '" title="' .
+                     Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)) . '"/>';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol($image, 
-                        Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)), Translation :: get('Type'));
+                LegendTable :: get_instance()->add_symbol(
+                    $image, 
+                    Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)), 
+                    Translation :: get('Type'));
                 
                 $row[] = $advice->get_try();
                 $row[] = DatetimeUtilities :: format_locale_date(
-                        Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), $advice->get_date());
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    $advice->get_date());
                 $row[] = $advice->get_decision_type();
                 $row[] = $advice->get_advice();
                 

@@ -27,9 +27,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->exemptions[$person_id]))
         {
             $condition = new EqualityCondition('person_id', $person_id);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_exemption_basic ' . $translator->render_query($condition) .
+            $query = 'SELECT * FROM v_discovery_exemption_basic WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, programme_name';
             
             $statement = $this->get_connection()->query($query);
@@ -71,10 +71,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
         $condition = new EqualityCondition('person_id', $person_id);
-        $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic ' .
-             $translator->render_query($condition);
+        $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic WHERE ' .
+             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         
         $statement = $this->get_connection()->query($query);
         

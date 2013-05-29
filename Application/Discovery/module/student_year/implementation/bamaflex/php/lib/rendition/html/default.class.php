@@ -45,8 +45,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $entities[RightsUserEntity :: ENTITY_TYPE] = RightsUserEntity :: get_instance();
         $entities[RightsPlatformGroupEntity :: ENTITY_TYPE] = RightsPlatformGroupEntity :: get_instance();
         
-        if (! Rights :: get_instance()->module_is_allowed(Rights :: VIEW_RIGHT, $entities, 
-                $this->get_module_instance()->get_id(), $this->get_module_parameters()))
+        if (! Rights :: get_instance()->module_is_allowed(
+            Rights :: VIEW_RIGHT, 
+            $entities, 
+            $this->get_module_instance()->get_id(), 
+            $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }

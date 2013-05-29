@@ -28,26 +28,29 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($this->has_groups(Group :: TYPE_CLASS))
             {
                 $tabs->add_tab(
-                        new DynamicContentTab(Group :: TYPE_CLASS, 
-                                Translation :: get(Group :: type_string(Group :: TYPE_CLASS)), 
-                                Theme :: get_image_path() . 'type/' . Group :: TYPE_CLASS . '.png', 
-                                $this->get_groups_table(Group :: TYPE_CLASS)->as_html()));
+                    new DynamicContentTab(
+                        Group :: TYPE_CLASS, 
+                        Translation :: get(Group :: type_string(Group :: TYPE_CLASS)), 
+                        Theme :: get_image_path() . 'type/' . Group :: TYPE_CLASS . '.png', 
+                        $this->get_groups_table(Group :: TYPE_CLASS)->as_html()));
             }
             if ($this->has_groups(Group :: TYPE_CUSTOM))
             {
                 $tabs->add_tab(
-                        new DynamicContentTab(Group :: TYPE_CUSTOM, 
-                                Translation :: get(Group :: type_string(Group :: TYPE_CUSTOM)), 
-                                Theme :: get_image_path() . 'type/' . Group :: TYPE_CUSTOM . '.png', 
-                                $this->get_groups_table(Group :: TYPE_CUSTOM)->as_html()));
+                    new DynamicContentTab(
+                        Group :: TYPE_CUSTOM, 
+                        Translation :: get(Group :: type_string(Group :: TYPE_CUSTOM)), 
+                        Theme :: get_image_path() . 'type/' . Group :: TYPE_CUSTOM . '.png', 
+                        $this->get_groups_table(Group :: TYPE_CUSTOM)->as_html()));
             }
             if ($this->has_groups(Group :: TYPE_TRAINING))
             {
                 $tabs->add_tab(
-                        new DynamicContentTab(Group :: TYPE_TRAINING, 
-                                Translation :: get(Group :: type_string(Group :: TYPE_TRAINING)), 
-                                Theme :: get_image_path() . 'type/' . Group :: TYPE_TRAINING . '.png', 
-                                $this->get_groups_table(Group :: TYPE_TRAINING)->as_html()));
+                    new DynamicContentTab(
+                        Group :: TYPE_TRAINING, 
+                        Translation :: get(Group :: type_string(Group :: TYPE_TRAINING)), 
+                        Theme :: get_image_path() . 'type/' . Group :: TYPE_TRAINING . '.png', 
+                        $this->get_groups_table(Group :: TYPE_TRAINING)->as_html()));
             }
             $html[] = $this->get_training_properties_table() . '</br>';
             
@@ -68,7 +71,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $group_user_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\group_user\implementation\bamaflex', array('data_source' => $data_source));
+            'application\discovery\module\group_user\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         foreach ($groups as $key => $group)
         {
@@ -79,11 +83,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($group_user_module_instance)
             {
                 $parameters = new \application\discovery\module\group_user\implementation\bamaflex\Parameters(
-                        $group->get_type_id(), $group->get_source(), $group->get_type());
+                    $group->get_type_id(), 
+                    $group->get_source(), 
+                    $group->get_type());
                 $url = $this->get_instance_url($group_user_module_instance->get_id(), $parameters);
-                $toolbar_item = new ToolbarItem(Translation :: get('Users'), 
-                        Theme :: get_image_path('application\discovery\module\group_user\implementation\bamaflex') . 'logo/16.png', 
-                        $url, ToolbarItem :: DISPLAY_ICON);
+                $toolbar_item = new ToolbarItem(
+                    Translation :: get('Users'), 
+                    Theme :: get_image_path('application\discovery\module\group_user\implementation\bamaflex') .
+                         'logo/16.png', 
+                        $url, 
+                        ToolbarItem :: DISPLAY_ICON);
                 
                 $row[] = $toolbar_item->as_html();
             }
@@ -110,13 +119,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_training_properties_table()
     {
         $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
-                Module :: get_training_info_parameters());
+            Module :: get_training_info_parameters());
         
         $data_source = $this->get_module_instance()->get_setting('data_source');
         
         $faculty_info_module_instance = \application\discovery\Module :: exists(
-                'application\discovery\module\faculty_info\implementation\bamaflex', 
-                array('data_source' => $data_source));
+            'application\discovery\module\faculty_info\implementation\bamaflex', 
+            array('data_source' => $data_source));
         
         $html = array();
         $properties = array();
@@ -159,45 +168,56 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array($year, 
-                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_name() . '</a>');
+                        $previous_history = array(
+                            $year, 
+                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                 $year_training->get_name() . '</a>');
                     }
                     elseif ($i == count($year_trainings))
                     {
-                        $next_history = array($year, 
-                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_name() . '</a>');
+                        $next_history = array(
+                            $year, 
+                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                 $year_training->get_name() . '</a>');
                     }
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                         $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_year() . '</a>';
+                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                             $year_training->get_year() . '</a>';
                     }
                 }
                 elseif ($year_training->has_next_references() && ! $year_training->has_next_references(true))
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array($year, 
-                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_name() . '</a>');
+                        $previous_history = array(
+                            $year, 
+                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                 $year_training->get_name() . '</a>');
                     }
                     elseif ($i == count($year_trainings))
                     {
-                        $next_history = array($year, 
-                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_name() . '</a>');
+                        $next_history = array(
+                            $year, 
+                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                 $year_training->get_name() . '</a>');
                     }
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                         $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_year() . '</a>';
+                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                             $year_training->get_year() . '</a>';
                     }
                 }
                 else
                 {
                     $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                     $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                    $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' . $year_training->get_year() . '</a>';
+                    $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                         $year_training->get_year() . '</a>';
                 }
             }
             $i ++;
@@ -219,7 +239,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if ($faculty_info_module_instance)
         {
             $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
-                    $training->get_faculty_id(), $training->get_source());
+                $training->get_faculty_id(), 
+                $training->get_source());
             $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
             $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $training->get_faculty() . '</a>';
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $training->get_faculty()));

@@ -42,10 +42,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $conditions[] = new OrCondition($or_conditions);
             
             $condition = new AndCondition($conditions);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_advice_basic ' . $translator->render_query($condition) .
-                 ' ORDER BY year DESC';
+            $query = 'SELECT * FROM v_discovery_advice_basic WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
             
             $statement = $this->get_connection()->query($query);
             
@@ -96,10 +95,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $conditions[] = new OrCondition($or_conditions);
         
         $condition = new AndCondition($conditions);
-        $translator = DoctrineConditionTranslator :: factory($this);
         
-        $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic ' .
-             $translator->render_query($condition);
+        $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic WHERE ' .
+             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
         
         if ($statement instanceof PDOStatement)
@@ -125,9 +123,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             $official_code = $user->get_official_code();
             
             $condition = new EqualityCondition('person_id', $official_code);
-            $translator = DoctrineConditionTranslator :: factory($this);
             
-            $query = 'SELECT * FROM v_discovery_enrollment_advanced ' . $translator->render_query($condition) .
+            $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, id';
             
             $statement = $this->get_connection()->query($query);
