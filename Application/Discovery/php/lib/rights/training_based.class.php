@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\photo\implementation\bamaflex;
+namespace application\discovery;
 
 use common\libraries\AndCondition;
 use common\libraries\EqualityCondition;
@@ -12,7 +12,7 @@ use rights\NewUserEntity;
 use rights\NewPlatformGroupEntity;
 use common\libraries\DataClassRetrievesParameters;
 
-class Rights
+abstract class TrainingBasedRights
 {
     const VIEW_RIGHT = '1';
 
@@ -29,46 +29,17 @@ class Rights
                 \user\User :: class_name(),
                 (int) Session :: get_user_id());
 
-//             if ($current_user->is_platform_admin())
-//             {
-//                 return true;
-//             }
+            if ($current_user->is_platform_admin())
+            {
+                return true;
+            }
+
+            $context = static :: get_context($module_instance_id, $parameters);
 
             $codes = array();
-
-            if ($parameters->get_faculty_id())
-            {
-                $codes[] = 'DEP_' . $parameters->get_faculty_id();
-            }
-            elseif ($parameters->get_training_id())
-            {
-                $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
-                    \application\discovery\instance\Instance :: class_name(),
-                    (int) $module_instance_id);
-                $training = \application\discovery\module\photo\DataManager :: get_instance($module_instance)->retrieve_training(
-                    $parameters->get_training_id());
-
-                $codes[] = 'DEP_' . $training->get_faculty_id();
-                $codes[] = 'TRA_OP_' . $training->get_id();
-                $codes[] = 'TRA_STU_' . $training->get_id();
-            }
-            elseif ($parameters->get_programme_id())
-            {
-                $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
-                    \application\discovery\instance\Instance :: class_name(),
-                    (int) $module_instance_id);
-                $course = \application\discovery\module\photo\DataManager :: get_instance($module_instance)->retrieve_programme(
-                    $parameters->get_programme_id());
-
-                $codes[] = 'DEP_' . $course->get_faculty_id();
-                $codes[] = 'TRA_OP_' . $course->get_training_id();
-                $codes[] = 'TRA_STU_' . $course->get_training_id();
-            }
-            else
-            {
-                return false;
-            }
-
+            $codes[] = 'DEP_' . $context->get_faculty_id();
+            $codes[] = 'TRA_OP_' . $context->get_training_id();
+            $codes[] = 'TRA_STU_' . $context->get_training_id();
             $condition = new InCondition(\group\Group :: PROPERTY_CODE, $codes);
 
             $groups = \group\DataManager :: retrieves(
@@ -134,4 +105,12 @@ class Rights
             return false;
         }
     }
+
+    /**
+     *
+     * @param int $module_instance_id
+     * @param Parameters $parameters
+     * @return TrainingBasedContext
+     */
+    public abstract function get_context($module_instance_id, $parameters);
 }
