@@ -14,7 +14,6 @@ class Autoloader
          'Dean' => '/lib/dean.class.php',
          'Faculty' => '/lib/faculty.class.php',
          'Module' => '/lib/module.class.php',
-         'Rights' => '/lib/rights.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'RenditionImplementation' => '/lib/rendition/rendition.class.php',
          'HtmlDefaultRenditionImplementation' => '/lib/rendition/html/default.class.php',

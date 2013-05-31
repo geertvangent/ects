@@ -12,7 +12,6 @@ class Autoloader
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'Module' => '/lib/module.class.php',
-         'Rights' => '/lib/rights.class.php',
          'Training' => '/lib/training.class.php',
          'DataSource' => '/lib/data_manager/data_source.class.php',
          'RenditionImplementation' => '/lib/rendition/rendition.class.php',
