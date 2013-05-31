@@ -182,14 +182,14 @@ class GroupMenu extends HTML_Menu
                 if ($group->is_parent_of($current_category) || $group->get_id() == $current_category->get_id() ||
                      $show_complete_tree)
                 {
-                    if ($group->has_children())
+                    if ($group->has_children() && $show_url)
                     {
                         $menu_item['sub'] = $this->get_menu_items($group->get_id());
                     }
                 }
                 else
                 {
-                    if ($group->has_children())
+                    if ($group->has_children() && $show_url)
                     {
                         $menu_item['children'] = 'expand';
                     }
