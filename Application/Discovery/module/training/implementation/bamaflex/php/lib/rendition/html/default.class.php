@@ -103,9 +103,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                  'logo/16.png',
                                 $url,
                                 ToolbarItem :: DISPLAY_ICON);
-
-                        $buttons[] = $toolbar_item->as_html();
                     }
+                    else
+                    {
+                        $toolbar_item = new ToolbarItem(
+                            Translation :: get('GroupsNotAvailable'),
+                            Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') .
+                                 'logo/16_na.png',
+                                null,
+                                ToolbarItem :: DISPLAY_ICON);
+                    }
+
+                    $buttons[] = $toolbar_item->as_html();
                 }
 
                 if ($photo_module_instance)
@@ -129,6 +138,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                 null,
                                 'application\discovery\module\photo\implementation\bamaflex'),
                             $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\photo\implementation\bamaflex');
+                    }
+                    else
+                    {
+                        $buttons[] = Theme :: get_image(
+                            'logo/16_na',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\photo\implementation\bamaflex'),
+                            null,
                             ToolbarItem :: DISPLAY_ICON,
                             false,
                             'application\discovery\module\photo\implementation\bamaflex');
@@ -157,6 +180,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                 null,
                                 'application\discovery\module\training_results\implementation\bamaflex'),
                             $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\training_results\implementation\bamaflex');
+                    }
+                    else
+                    {
+                        $buttons[] = Theme :: get_image(
+                            'logo/16_na',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\training_results\implementation\bamaflex'),
+                            null,
                             ToolbarItem :: DISPLAY_ICON,
                             false,
                             'application\discovery\module\training_results\implementation\bamaflex');

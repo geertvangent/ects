@@ -267,9 +267,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $photo_module_instance->get_id(),
                 $parameters);
 
+            $buttons = array();
+
             if ($is_allowed)
             {
-                $buttons = array();
                 // students
                 $parameters = new \application\discovery\module\photo\Parameters();
                 $parameters->set_faculty_id($this->get_faculty()->get_id());
@@ -336,9 +337,78 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     Translation :: get('Employees', null, 'application\discovery\module\photo
                     '),
                     Translation :: get('TypeName', null, 'application\discovery\module\photo'));
-
-                $properties[Translation :: get('Photos')] = implode("\n", $buttons);
             }
+            else
+            {
+                // students
+                $image = Theme :: get_image(
+                    'type/2_na',
+                    'png',
+                    Translation :: get('StudentsNotAvailable', null, 'application\discovery\module\photo'),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    'application\discovery\module\photo');
+                $buttons[] = $image;
+                LegendTable :: get_instance()->add_symbol(
+                    $image,
+                    Translation :: get(
+                        'StudentsNotAvailable',
+                        null,
+                        'application\discovery\module\photo
+                    '),
+                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+
+                // teachers
+                $image = Theme :: get_image(
+                    'type/1_na',
+                    'png',
+                    Translation :: get(
+                        'TeachersNotAvailable',
+                        null,
+                        'application\discovery\module\photo
+                    '),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    'application\discovery\module\photo');
+                $buttons[] = $image;
+
+                LegendTable :: get_instance()->add_symbol(
+                    $image,
+                    Translation :: get(
+                        'TeachersNotAvailable',
+                        null,
+                        'application\discovery\module\photo
+                    '),
+                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+
+                // Employees
+                $image = Theme :: get_image(
+                    'type/3_na',
+                    'png',
+                    Translation :: get(
+                        'EmployeesNotAvailable',
+                        null,
+                        'application\discovery\module\photo
+                    '),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    'application\discovery\module\photo');
+                $buttons[] = $image;
+
+                LegendTable :: get_instance()->add_symbol(
+                    $image,
+                    Translation :: get(
+                        'EmployeesNotAvailable',
+                        null,
+                        'application\discovery\module\photo
+                    '),
+                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+            }
+
+            $properties[Translation :: get('Photos')] = implode("\n", $buttons);
         }
         return new PropertiesTable($properties);
     }
@@ -437,9 +507,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                  'logo/16.png',
                                 $url,
                                 ToolbarItem :: DISPLAY_ICON);
-
-                        $buttons[] = $toolbar_item->as_html();
                     }
+                    else {
+                        $toolbar_item = new ToolbarItem(
+                            Translation :: get('GroupsNotAvailable'),
+                            Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') .
+                            'logo/16_na.png',
+                            null,
+                            ToolbarItem :: DISPLAY_ICON);
+                    }
+
+                    $buttons[] = $toolbar_item->as_html();
                 }
 
                 if ($photo_module_instance)
@@ -464,6 +542,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                 null,
                                 'application\discovery\module\photo\implementation\bamaflex'),
                             $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\photo\implementation\bamaflex');
+                    }
+                    else
+                    {
+                        $buttons[] = Theme :: get_image(
+                            'logo/16_na',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\photo\implementation\bamaflex'),
+                            null,
                             ToolbarItem :: DISPLAY_ICON,
                             false,
                             'application\discovery\module\photo\implementation\bamaflex');
@@ -496,6 +588,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                 null,
                                 'application\discovery\module\training_results\implementation\bamaflex'),
                             $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\training_results\implementation\bamaflex');
+                    }
+                    else
+                    {
+                        $buttons[] = Theme :: get_image(
+                            'logo/16_na',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\training_results\implementation\bamaflex'),
+                            null,
                             ToolbarItem :: DISPLAY_ICON,
                             false,
                             'application\discovery\module\training_results\implementation\bamaflex');

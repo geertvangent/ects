@@ -111,13 +111,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                              'logo/16.png',
                             $url,
                             ToolbarItem :: DISPLAY_ICON);
-
-                    $row[] = $toolbar_item->as_html();
                 }
                 else
                 {
-                    $row[] = ' ';
+                    $toolbar_item = new ToolbarItem(
+                        Translation :: get('UsersNotAvailable'),
+                        Theme :: get_image_path('application\discovery\module\group_user\implementation\bamaflex') .
+                             'logo/16_na.png',
+                            null,
+                            ToolbarItem :: DISPLAY_ICON);
                 }
+
+                $row[] = $toolbar_item->as_html();
             }
             else
             {

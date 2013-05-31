@@ -88,6 +88,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         false,
                         'application\discovery\module\photo\implementation\bamaflex');
                 }
+                else {
+                    $row[] = Theme :: get_image(
+                        'logo/16_na',
+                        'png',
+                        Translation :: get(
+                            'TypeName',
+                            null,
+                            'application\discovery\module\photo\implementation\bamaflex'),
+                        null,
+                        ToolbarItem :: DISPLAY_ICON,
+                        false,
+                        'application\discovery\module\photo\implementation\bamaflex');
+                }
             }
             $data[] = $row;
         }

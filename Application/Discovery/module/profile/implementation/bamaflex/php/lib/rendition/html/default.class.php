@@ -30,47 +30,53 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html = array();
             $html[] = \application\discovery\module\profile\Rendition :: launch($this);
 
-            if (count($this->get_profile()->get_address()) > 1)
+            if (Rights :: is_allowed(
+                Rights :: CONTACT_RIGHT,
+                $this->get_module_instance()->get_id(),
+                $this->get_module_parameters()))
             {
-                $data = array();
-
-                foreach ($this->get_profile()->get_address() as $address)
+                if (count($this->get_profile()->get_address()) > 1)
                 {
-                    $row = array();
-                    $row[] = Translation :: get($address->get_type_string());
-                    $row[] = $address->get_street();
-                    $row[] = $address->get_number();
-                    $row[] = $address->get_box();
-                    $row[] = $address->get_room();
-                    $row[] = $address->get_unified_city();
-                    $row[] = $address->get_unified_city_zip_code();
-                    $row[] = $address->get_region();
-                    $row[] = $address->get_country();
-                    $data[] = $row;
+                    $data = array();
+
+                    foreach ($this->get_profile()->get_address() as $address)
+                    {
+                        $row = array();
+                        $row[] = Translation :: get($address->get_type_string());
+                        $row[] = $address->get_street();
+                        $row[] = $address->get_number();
+                        $row[] = $address->get_box();
+                        $row[] = $address->get_room();
+                        $row[] = $address->get_unified_city();
+                        $row[] = $address->get_unified_city_zip_code();
+                        $row[] = $address->get_region();
+                        $row[] = $address->get_country();
+                        $data[] = $row;
+                    }
+
+                    $html[] = '<div class="content_object" style="background-image: url(' .
+                         Theme :: get_image_path(__NAMESPACE__) . 'types/address.png);">';
+                    $html[] = '<div class="title">';
+                    $html[] = Translation :: get('Addresses');
+                    $html[] = '</div>';
+
+                    $html[] = '<div class="description">';
+
+                    $table = new SortableTable($data);
+                    $table->set_header(0, Translation :: get('Type'), false);
+                    $table->set_header(1, Translation :: get('Street'), false);
+                    $table->set_header(2, Translation :: get('Number'), false);
+                    $table->set_header(3, Translation :: get('Box'), false);
+                    $table->set_header(4, Translation :: get('Room'), false);
+                    $table->set_header(5, Translation :: get('City'), false);
+                    $table->set_header(6, Translation :: get('ZipCode'), false);
+                    $table->set_header(7, Translation :: get('Region'), false);
+                    $table->set_header(8, Translation :: get('Country'), false);
+                    $html[] = $table->toHTML();
+
+                    $html[] = '</div>';
+                    $html[] = '</div>';
                 }
-
-                $html[] = '<div class="content_object" style="background-image: url(' .
-                     Theme :: get_image_path(__NAMESPACE__) . 'types/address.png);">';
-                $html[] = '<div class="title">';
-                $html[] = Translation :: get('Addresses');
-                $html[] = '</div>';
-
-                $html[] = '<div class="description">';
-
-                $table = new SortableTable($data);
-                $table->set_header(0, Translation :: get('Type'), false);
-                $table->set_header(1, Translation :: get('Street'), false);
-                $table->set_header(2, Translation :: get('Number'), false);
-                $table->set_header(3, Translation :: get('Box'), false);
-                $table->set_header(4, Translation :: get('Room'), false);
-                $table->set_header(5, Translation :: get('City'), false);
-                $table->set_header(6, Translation :: get('ZipCode'), false);
-                $table->set_header(7, Translation :: get('Region'), false);
-                $table->set_header(8, Translation :: get('Country'), false);
-                $html[] = $table->toHTML();
-
-                $html[] = '</div>';
-                $html[] = '</div>';
             }
 
             $count_learning_credit = count($this->get_profile()->get_learning_credit());
@@ -127,12 +133,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $properties[Translation :: get('Nationality')] = $this->get_profile()->get_nationality_string();
         $properties[Translation :: get('Gender')] = Translation :: get($this->get_profile()->get_gender_string());
 
-        if (count($this->get_profile()->get_address()) == 1)
+        if (Rights :: is_allowed(
+            Rights :: CONTACT_RIGHT,
+            $this->get_module_instance()->get_id(),
+            $this->get_module_parameters()))
         {
-            $address = $this->get_profile()->get_address();
-            $address = $address[0];
+            if (count($this->get_profile()->get_address()) == 1)
+            {
+                $address = $this->get_profile()->get_address();
+                $address = $address[0];
 
-            $properties[Translation :: get('Address')] = $address;
+                $properties[Translation :: get('Address')] = $address;
+            }
         }
 
         if (count($this->get_profile()->get_learning_credit()) == 1)
@@ -262,5 +274,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
+    }
+
+    public function is_allowed_to_contact()
+    {
+        return Rights :: is_allowed(
+            Rights :: CONTACT_RIGHT,
+            $this->get_module_instance()->get_id(),
+            $this->get_module_parameters());
     }
 }

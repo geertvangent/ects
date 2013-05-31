@@ -22,6 +22,7 @@ class Autoloader
          'GroupRelUserBrowserTableCellRenderer' => '/lib/group_rel_user_browser/group_rel_user_browser_table_cell_renderer.class.php',
          'GroupRelUserBrowserTableColumnModel' => '/lib/group_rel_user_browser/group_rel_user_browser_table_column_model.class.php',
          'GroupRelUserBrowserTableDataProvider' => '/lib/group_rel_user_browser/group_rel_user_browser_table_data_provider.class.php',
+         'GroupMenu' => '/lib/menu/group.class.php',
          'RenditionImplementation' => '/lib/rendition/rendition.class.php',
          'HtmlDefaultRenditionImplementation' => '/lib/rendition/html/default.class.php',
          'HtmlXlsxRenditionImplementation' => '/lib/rendition/html/xlsx.class.php',

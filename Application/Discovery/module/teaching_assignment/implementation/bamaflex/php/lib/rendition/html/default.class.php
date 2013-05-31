@@ -225,7 +225,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 }
                 else
                 {
-                    $row[] = ' ';
+                    $row[] = Theme :: get_common_image(
+                        'action_details_na',
+                        'png',
+                        Translation :: get('CourseResultsNotAvailable'),
+                        null,
+                        ToolbarItem :: DISPLAY_ICON);
                 }
             }
 

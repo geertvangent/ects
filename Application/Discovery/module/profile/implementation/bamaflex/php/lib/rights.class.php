@@ -5,4 +5,5 @@ use application\discovery\UserBasedRights;
 
 class Rights extends UserBasedRights
 {
+    const CONTACT_RIGHT = '2';
 }

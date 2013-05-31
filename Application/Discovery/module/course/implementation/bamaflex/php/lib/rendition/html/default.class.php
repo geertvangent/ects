@@ -467,11 +467,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $photo_module_instance->get_id(),
                 $parameters);
 
+            $buttons = array();
+
             if ($is_allowed)
             {
-                $buttons = array();
                 // students
-
                 $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                 $image = Theme :: get_image(
                     'type/2',
@@ -507,12 +507,53 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $buttons[] = $image;
                 LegendTable :: get_instance()->add_symbol(
                     $image,
-                    Translation :: get('Teachers', null, 'application\discovery\module\photo
+                    Translation :: get(
+                        'TeachersNotAvailable',
+                        null,
+                        'application\discovery\module\photo
+                    '),
+                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
+            }
+            else
+            {
+                $image = Theme :: get_image(
+                    'type/2_na',
+                    'png',
+                    Translation :: get('StudentsNotAvailable', null, 'application\discovery\module\photo'),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    'application\discovery\module\photo');
+                $buttons[] = $image;
+
+                LegendTable :: get_instance()->add_symbol(
+                    $image,
+                    Translation :: get(
+                        'StudentsNotAvailable',
+                        null,
+                        'application\discovery\module\photo
                     '),
                     Translation :: get('TypeName', null, 'application\discovery\module\photo'));
 
-                $properties[Translation :: get('Photos')] = implode("\n", $buttons);
+                $image = Theme :: get_image(
+                    'type/1_na',
+                    'png',
+                    Translation :: get('TeachersNotAvailable', null, 'application\discovery\module\photo
+                    '),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    'application\discovery\module\photo');
+                $buttons[] = $image;
+
+                LegendTable :: get_instance()->add_symbol(
+                    $image,
+                    Translation :: get('TeachersNotAvailable', null, 'application\discovery\module\photo
+                    '),
+                    Translation :: get('TypeName', null, 'application\discovery\module\photo'));
             }
+
+            $properties[Translation :: get('Photos')] = implode("\n", $buttons);
         }
 
         $course_result_module_instance = \application\discovery\Module :: exists(
@@ -543,6 +584,23 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         null,
                         'application\discovery\module\course_results\implementation\bamaflex'),
                     $url,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    'application\discovery\module\course_results\implementation\bamaflex');
+            }
+            else
+            {
+                $properties[Translation :: get(
+                    'TypeName',
+                    null,
+                    'application\discovery\module\course_results\implementation\bamaflex')] = Theme :: get_image(
+                    'logo/16_na',
+                    'png',
+                    Translation :: get(
+                        'TypeName',
+                        null,
+                        'application\discovery\module\course_results\implementation\bamaflex'),
+                    null,
                     ToolbarItem :: DISPLAY_ICON,
                     false,
                     'application\discovery\module\course_results\implementation\bamaflex');

@@ -46,6 +46,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             'application\discovery\module\faculty_info\implementation\bamaflex',
             array('data_source' => $data_source));
 
+        $training_info_module_instance = \application\discovery\Module :: exists(
+            'application\discovery\module\training_info\implementation\bamaflex',
+            array('data_source' => $data_source));
+
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $training->get_year();
@@ -65,8 +69,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 foreach ($year_trainings as $year_training)
                 {
                     $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-                    $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                    $multi_history[] = '<a href="' . $link . '">' . $year_training->get_name() . '</a>';
+
+                    $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $training_info_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                        $multi_history[] = '<a href="' . $link . '">' . $year_training->get_name() . '</a>';
+                    }
+                    else
+                    {
+                        $multi_history[] = $year_training->get_name();
+                    }
                 }
 
                 if ($i == 1)
@@ -89,56 +106,151 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array(
-                            $year,
-                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                                 $year_training->get_name() . '</a>');
+                        $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                            \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                            $training_info_module_instance->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $previous_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                     $year_training->get_name() . '</a>');
+                        }
+                        else
+                        {
+                            $previous_history = array($year,
+
+                            $year_training->get_name());
+                        }
                     }
                     elseif ($i == count($year_trainings))
                     {
-                        $next_history = array(
-                            $year,
-                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                                 $year_training->get_name() . '</a>');
+                        $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                            \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                            $training_info_module_instance->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $next_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                     $year_training->get_name() . '</a>');
+                        }
+                        else
+                        {
+                            $next_history = array($year,
+
+                            $year_training->get_name());
+                        }
                     }
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                             $year_training->get_year() . '</a>';
+
+                        $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                            \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                            $training_info_module_instance->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                            $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                 $year_training->get_year() . '</a>';
+                        }
+                        else
+                        {
+                            $history[] = $year_training->get_year();
+                        }
                     }
                 }
                 elseif ($year_training->has_next_references() && ! $year_training->has_next_references(true))
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array(
-                            $year,
-                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                                 $year_training->get_name() . '</a>');
+                        $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                            \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                            $training_info_module_instance->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $previous_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                     $year_training->get_name() . '</a>');
+                        }
+                        else
+                        {
+                            $previous_history = array($year,
+
+                            $year_training->get_name());
+                        }
                     }
                     elseif ($i == count($year_trainings))
                     {
-                        $next_history = array(
-                            $year,
-                            '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                                 $year_training->get_name() . '</a>');
+                        $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                            \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                            $training_info_module_instance->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $next_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                     $year_training->get_name() . '</a>');
+                        }
+                        else
+                        {
+                            $next_history = array($year,
+
+                            $year_training->get_name());
+                        }
                     }
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                             $year_training->get_year() . '</a>';
+
+                        $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                            \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                            $training_info_module_instance->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                            $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                                 $year_training->get_year() . '</a>';
+                        }
+                        else
+                        {
+                            $history[] = $year_training->get_year();
+                        }
                     }
                 }
                 else
                 {
                     $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-                    $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                    $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
-                         $year_training->get_year() . '</a>';
+
+                    $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $training_info_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                        $history[] = '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
+                             $year_training->get_year() . '</a>';
+                    }
+                    else
+                    {
+                        $history[] = $year_training->get_year();
+                    }
                 }
             }
             $i ++;
@@ -161,8 +273,22 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
                 $training->get_faculty_id(),
                 $training->get_source());
-            $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
-            $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $training->get_faculty() . '</a>';
+
+            $is_allowed = \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: is_allowed(
+                \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                $faculty_info_module_instance->get_id(),
+                $parameters);
+
+            if ($is_allowed)
+            {
+                $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
+                $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $training->get_faculty() .
+                     '</a>';
+            }
+            else
+            {
+                $properties[Translation :: get('Faculty')] = $training->get_faculty();
+            }
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $training->get_faculty()));
         }
         else
@@ -226,8 +352,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 if ($user)
                 {
                     $parameters = new \application\discovery\module\profile\Parameters($user->get_id());
-                    $url = $this->get_instance_url($profile_module_instance->get_id(), $parameters);
-                    $row[] = '<a href="' . $url . '">' . $user->get_fullname() . '</a>';
+
+                    $is_allowed = \application\discovery\module\profile\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\profile\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $profile_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $url = $this->get_instance_url($profile_module_instance->get_id(), $parameters);
+                        $row[] = '<a href="' . $url . '">' . $user->get_fullname() . '</a>';
+                    }
+                    else
+                    {
+                        $row[] = $user->get_fullname();
+                    }
                 }
                 else
                 {
@@ -259,12 +398,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $image = '<img src="' .
                      Theme :: get_image_path('application\discovery\module\enrollment\implementation\bamaflex') .
-                     'result_type/' . $enrollment->get_result() . '.png" alt="' .
-                     Translation :: get(
+                     'result_type/' . $enrollment->get_result() . '.png" alt="' . Translation :: get(
                         $enrollment->get_result_string(),
                         null,
-                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' .
-                     Translation :: get(
+                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get(
                         $enrollment->get_result_string(),
                         null,
                         'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
@@ -288,12 +425,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $image = '<img src="' .
                      Theme :: get_image_path('application\discovery\module\enrollment\implementation\bamaflex') .
-                     'distinction_type/' . $enrollment->get_distinction() . '.png" alt="' .
-                     Translation :: get(
+                     'distinction_type/' . $enrollment->get_distinction() . '.png" alt="' . Translation :: get(
                         $enrollment->get_distinction_string(),
                         null,
-                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' .
-                     Translation :: get(
+                        'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get(
                         $enrollment->get_distinction_string(),
                         null,
                         'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
