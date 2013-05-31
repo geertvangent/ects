@@ -25,7 +25,7 @@ class Autoloader
          'Activator' => '/package/activate/activator.class.php',
          'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php',
-         'SettingsAtlantisConnector' => '/settings/settings_atlantis_connector.class.php'
+         'SettingsConnector' => '/settings/connector.class.php'
     );
 
     /**

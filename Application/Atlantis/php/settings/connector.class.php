@@ -3,7 +3,7 @@ namespace application\atlantis;
 
 use common\libraries\Theme;
 
-class SettingsAtlantisConnector
+class SettingsConnector
 {
 
     public function get_themes()

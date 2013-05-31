@@ -8,6 +8,7 @@ use common\libraries\Translation;
 use common\libraries\WebApplication;
 use common\libraries\NotAllowedException;
 use common\libraries\package\PackageList;
+use common\libraries\PlatformSetting;
 
 class Manager extends WebApplication
 {
@@ -29,6 +30,8 @@ class Manager extends WebApplication
         {
             throw new NotAllowedException();
         }
+
+        Theme :: set_theme(PlatformSetting :: get('theme', __NAMESPACE__));
     }
 
     /**
@@ -65,7 +68,7 @@ class Manager extends WebApplication
         }
 
         if (! CommonDataManager :: get_registration(\application\atlantis\rights\Manager :: context()) ||
-        $include_installed)
+             $include_installed)
         {
             $package_list->add_package(\application\atlantis\rights\Manager :: context());
         }
