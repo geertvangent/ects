@@ -1,8 +1,6 @@
 <?php
 namespace application\discovery\module\advice\implementation\bamaflex;
 
-use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-
 class Module extends \application\discovery\module\advice\Module
 {
 
@@ -20,7 +18,7 @@ class Module extends \application\discovery\module\advice\Module
                     $advices[] = $advice;
                 }
             }
-            
+
             $this->cache_advices[$enrollment->get_id()] = $advices;
         }
         return $this->cache_advices[$enrollment->get_id()];

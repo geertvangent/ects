@@ -11,6 +11,7 @@ use Exception;
 use rights\NewUserEntity;
 use rights\NewPlatformGroupEntity;
 use common\libraries\DataClassRetrievesParameters;
+use common\libraries\DataClassCountParameters;
 
 abstract class TrainingBasedRights
 {
@@ -83,8 +84,9 @@ abstract class TrainingBasedRights
                 $conditions[] = new OrCondition($entities_conditions);
                 $condition = new AndCondition($conditions);
 
-                $count = \application\discovery\DataManager :: get_instance()->count_rights_group_entity_rights(
-                    $condition);
+                $count = DataManager :: count(
+                    RightsGroupEntityRight :: class_name(),
+                    new DataClassCountParameters($condition));
 
                 if ($count > 0)
                 {

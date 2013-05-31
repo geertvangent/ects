@@ -16,7 +16,7 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
         $namespace = Utilities :: get_namespace_from_object($module);
         $class = $namespace . '\\' . Utilities :: underscores_to_camelcase($format) .
              Utilities :: underscores_to_camelcase($view) . 'RenditionImplementation';
-        
+
         if (! class_exists($class, true))
         {
             return new DummyRenditionImplementation($context, $module, $format, $view);
@@ -35,11 +35,6 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
     public function get_module_instance()
     {
         return $this->get_module()->get_module_instance();
-    }
-
-    public function get_rights_url($instance_id, $instance_parameters)
-    {
-        return $this->get_module()->get_rights_url($instance_id, $instance_parameters);
     }
 
     public function get_instance_url($instance_id, $instance_parameters)

@@ -67,7 +67,6 @@ class Instance extends DataClass
             }
         }
         return true;
-        // return DataManager :: create_module_rights_storage_units($this);
     }
 
     public function delete()
@@ -80,9 +79,9 @@ class Instance extends DataClass
         {
             $condition = new EqualityCondition(InstanceSetting :: PROPERTY_INSTANCE_ID, $this->get_id());
             $settings = DataManager :: retrieves(
-                InstanceSetting :: class_name(), 
+                InstanceSetting :: class_name(),
                 new DataClassRetrievesParameters($condition));
-            
+
             while ($setting = $settings->next_result())
             {
                 if (! $setting->delete())
@@ -91,7 +90,7 @@ class Instance extends DataClass
                 }
             }
         }
-        
+
         return true;
     }
 
@@ -109,7 +108,7 @@ class Instance extends DataClass
     {
         $condition = new EqualityCondition(InstanceSetting :: PROPERTY_INSTANCE_ID, $this->get_id());
         $settings = DataManager :: count(InstanceSetting :: class_name(), new DataClassCountParameters($condition));
-        
+
         return $settings > 0;
     }
 

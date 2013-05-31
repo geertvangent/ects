@@ -19,6 +19,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
+        if (! Rights :: is_allowed(
+            Rights :: VIEW_RIGHT,
+            $this->get_module_instance()->get_id(),
+            $this->get_module_parameters()))
+        {
+            Display :: not_allowed();
+        }
+
         $html = array();
         $course = $this->get_course();
 
@@ -91,6 +99,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
 
+        $course_module_instance = \application\discovery\Module :: exists(
+            'application\discovery\module\course\implementation\bamaflex',
+            array('data_source' => $data_source));
+
         $faculty_info_module_instance = \application\discovery\Module :: exists(
             'application\discovery\module\faculty_info\implementation\bamaflex',
             array('data_source' => $data_source));
@@ -114,9 +126,23 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         foreach ($courses as $course_history)
         {
             $parameters = new Parameters($course_history->get_id(), $course_history->get_source());
-            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-            $history[] = '<a href="' . $link . '">' . $course_history->get_year() . '</a>';
+
+            $is_allowed = \application\discovery\module\course\implementation\bamaflex\Rights :: is_allowed(
+                \application\discovery\module\course\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                $course_module_instance->get_id(),
+                $parameters);
+
+            if ($is_allowed)
+            {
+                $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                $history[] = '<a href="' . $link . '">' . $course_history->get_year() . '</a>';
+            }
+            else
+            {
+                $history[] = $course_history->get_year();
+            }
         }
+
         $properties[Translation :: get('History')] = implode('  |  ', $history);
 
         if ($training_info_module_instance)
@@ -124,8 +150,22 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
                 $course->get_training_id(),
                 $course->get_source());
-            $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
-            $properties[Translation :: get('Training')] = '<a href="' . $url . '">' . $course->get_training() . '</a>';
+
+            $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                $training_info_module_instance->get_id(),
+                $parameters);
+
+            if ($is_allowed)
+            {
+                $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
+                $properties[Translation :: get('Training')] = '<a href="' . $url . '">' . $course->get_training() .
+                     '</a>';
+            }
+            else
+            {
+                $properties[Translation :: get('Training')] = $course->get_training();
+            }
         }
         else
         {
@@ -137,8 +177,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
                 $course->get_faculty_id(),
                 $course->get_source());
-            $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
-            $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $course->get_faculty() . '</a>';
+
+            $is_allowed = \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: is_allowed(
+                \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                $faculty_info_module_instance->get_id(),
+                $parameters);
+
+            if ($is_allowed)
+            {
+                $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
+                $properties[Translation :: get('Faculty')] = '<a href="' . $url . '">' . $course->get_faculty() . '</a>';
+            }
+            else
+            {
+                $properties[Translation :: get('Faculty')] = $course->get_faculty();
+            }
         }
         else
         {
@@ -158,7 +211,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $parameters = new Parameters($child->get_id(), $child->get_source());
                 $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
+
+                $is_allowed = \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: is_allowed(
+                    \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                    $course_module_instance->get_id(),
+                    $parameters);
+
+                if ($is_allowed)
+                {
+                    $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
+                }
+                else
+                {
+                    $link = $child->get_name();
+                }
                 $programme_parts[] = Translation :: get(
                     'CreditAmount',
                     array('COURSE' => $link, 'CREDITS' => $child->get_credits()));
@@ -211,9 +277,24 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         {
                             $parameters = new \application\discovery\module\teaching_assignment\Parameters(
                                 $user->get_id());
-                            $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
 
-                            $coordinators[] = '<a href="' . $url . '">' . $coordinator . '</a>';
+                            $is_allowed = \application\discovery\module\teaching_assignment\implementation\bamaflex\Rights :: is_allowed(
+                                \application\discovery\module\teaching_assignment\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                                $teaching_assignment_module_instance->get_id(),
+                                $parameters);
+
+                            if ($is_allowed)
+                            {
+                                $url = $this->get_instance_url(
+                                    $teaching_assignment_module_instance->get_id(),
+                                    $parameters);
+
+                                $coordinators[] = '<a href="' . $url . '">' . $coordinator . '</a>';
+                            }
+                            else
+                            {
+                                $coordinators[] = $coordinator;
+                            }
                         }
                         else
                         {
@@ -243,9 +324,24 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         {
                             $parameters = new \application\discovery\module\teaching_assignment\Parameters(
                                 $user->get_id());
-                            $url = $this->get_instance_url($teaching_assignment_module_instance->get_id(), $parameters);
 
-                            $teachers[] = '<a href="' . $url . '">' . $teacher . '</a>';
+                            $is_allowed = \application\discovery\module\teaching_assignment\implementation\bamaflex\Rights :: is_allowed(
+                                \application\discovery\module\teaching_assignment\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                                $teaching_assignment_module_instance->get_id(),
+                                $parameters);
+
+                            if ($is_allowed)
+                            {
+                                $url = $this->get_instance_url(
+                                    $teaching_assignment_module_instance->get_id(),
+                                    $parameters);
+
+                                $teachers[] = '<a href="' . $url . '">' . $teacher . '</a>';
+                            }
+                            else
+                            {
+                                $teachers[] = $teacher;
+                            }
                         }
                         else
                         {
@@ -427,21 +523,30 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
                 $course->get_id(),
                 $course->get_source());
-            $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-            $properties[Translation :: get(
-                'TypeName',
-                null,
-                'application\discovery\module\course_results\implementation\bamaflex')] = Theme :: get_image(
-                'logo/16',
-                'png',
-                Translation :: get(
+
+            $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
+                \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                $course_result_module_instance->get_id(),
+                $parameters);
+
+            if ($is_allowed)
+            {
+                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                $properties[Translation :: get(
                     'TypeName',
                     null,
-                    'application\discovery\module\course_results\implementation\bamaflex'),
-                $url,
-                ToolbarItem :: DISPLAY_ICON,
-                false,
-                'application\discovery\module\course_results\implementation\bamaflex');
+                    'application\discovery\module\course_results\implementation\bamaflex')] = Theme :: get_image(
+                    'logo/16',
+                    'png',
+                    Translation :: get(
+                        'TypeName',
+                        null,
+                        'application\discovery\module\course_results\implementation\bamaflex'),
+                    $url,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    'application\discovery\module\course_results\implementation\bamaflex');
+            }
         }
 
         $table = new PropertiesTable($properties);
@@ -1024,11 +1129,29 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             $quotation_parts = array();
 
+            $data_source = $this->get_module_instance()->get_setting('data_source');
+            $course_module_instance = \application\discovery\Module :: exists(
+                'application\discovery\module\course\implementation\bamaflex',
+                array('data_source' => $data_source));
+
             foreach ($course->get_children() as $child)
             {
                 $parameters = new Parameters($child->get_id(), $child->get_source());
-                $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
+
+                $is_allowed = \application\discovery\module\course\implementation\bamaflex\Rights :: is_allowed(
+                    \application\discovery\module\course\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                    $course_module_instance->get_id(),
+                    $parameters);
+
+                if ($is_allowed)
+                {
+                    $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                    $link = '<a href="' . $child_url . '">' . $child->get_name() . '</a>';
+                }
+                else
+                {
+                    $link = $child->get_name();
+                }
 
                 $quotation_parts[] = Translation :: get(
                     'QuotationParts',

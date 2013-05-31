@@ -15,7 +15,6 @@ class Manager extends SubManager
     const ACTION_UPDATE_INSTANCE = 'updater';
     const ACTION_DELETE_INSTANCE = 'deleter';
     const ACTION_CREATE_INSTANCE = 'creator';
-    const ACTION_MANAGE_INSTANCE_RIGHTS = 'rights_editor';
     const ACTION_MOVE_INSTANCE = 'mover';
     const DEFAULT_ACTION = self :: ACTION_BROWSE_INSTANCES;
 

@@ -115,18 +115,6 @@ class Module
         return $this->get_application()->get_url($parameters);
     }
 
-    public function get_rights_url($instance_id, $instance_parameters)
-    {
-        $parameters = array();
-        $parameters[Manager :: PARAM_MODULE_ID] = $instance_id;
-        $parameters[Manager :: PARAM_ACTION] = Manager :: ACTION_RIGHTS;
-        foreach ($instance_parameters->get_parameters() as $key => $value)
-        {
-            $parameters[$key] = $value;
-        }
-        return $this->get_application()->get_url($parameters);
-    }
-
     public static function get_available_implementations()
     {
         return array();

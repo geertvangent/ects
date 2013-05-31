@@ -9,12 +9,21 @@ use common\libraries\Theme;
 use common\libraries\Translation;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
+use common\libraries\Display;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
     public function render()
     {
+        if (! Rights :: is_allowed(
+            Rights :: VIEW_RIGHT,
+            $this->get_module_instance()->get_id(),
+            $this->get_module_parameters()))
+        {
+            Display :: not_allowed();
+        }
+
         $html = array();
 
         $html[] = $this->get_context();
@@ -55,8 +64,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 foreach ($year_faculties as $faculty)
                 {
                     $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
-                    $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                    $multi_history[] = '<a href="' . $link . '">' . $faculty->get_name() . '</a>';
+
+                    $is_allowed = Rights :: is_allowed(
+                        Rights :: VIEW_RIGHT,
+                        $this->get_module_instance()->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                        $multi_history[] = '<a href="' . $link . '">' . $faculty->get_name() . '</a>';
+                    }
+                    else
+                    {
+                        $multi_history[] = $faculty->get_name();
+                    }
                 }
 
                 if ($i == 1)
@@ -79,56 +101,143 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array(
-                            $year,
-                            '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() .
-                                 '</a>');
+                        $is_allowed = Rights :: is_allowed(
+                            Rights :: VIEW_RIGHT,
+                            $this->get_module_instance()->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $previous_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() .
+                                     '</a>');
+                        }
+                        else
+                        {
+                            $previous_history = array($year, $faculty->get_name());
+                        }
                     }
                     elseif ($i == count($faculties))
                     {
-                        $next_history = array(
-                            $year,
-                            '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() .
-                                 '</a>');
+                        $is_allowed = Rights :: is_allowed(
+                            Rights :: VIEW_RIGHT,
+                            $this->get_module_instance()->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $next_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() .
+                                     '</a>');
+                        }
+                        else
+                        {
+                            $next_history = array($year, $faculty->get_name());
+                        }
                     }
                     else
                     {
                         $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
-                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                        $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' .
-                             $faculty->get_year() . '</a>';
+
+                        $is_allowed = Rights :: is_allowed(
+                            Rights :: VIEW_RIGHT,
+                            $this->get_module_instance()->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                            $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' .
+                                 $faculty->get_year() . '</a>';
+                        }
+                        else
+                        {
+                            $history[] = $faculty->get_year();
+                        }
                     }
                 }
                 elseif ($faculty->has_next_references() && ! $faculty->has_next_references(true))
                 {
                     if ($i == 1)
                     {
-                        $previous_history = array(
-                            $year,
-                            '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() .
-                                 '</a>');
+                        $is_allowed = Rights :: is_allowed(
+                            Rights :: VIEW_RIGHT,
+                            $this->get_module_instance()->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $previous_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() .
+                                     '</a>');
+                        }
+                        else
+                        {
+                            $previous_history = array($year, $faculty->get_name());
+                        }
                     }
                     elseif ($i == count($faculties))
                     {
-                        $next_history = array(
-                            $year,
-                            '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() .
-                                 '</a>');
+                        $is_allowed = Rights :: is_allowed(
+                            Rights :: VIEW_RIGHT,
+                            $this->get_module_instance()->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $next_history = array(
+                                $year,
+                                '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_name() .
+                                     '</a>');
+                        }
+                        else
+                        {
+                            $next_history = array($year, $faculty->get_name());
+                        }
                     }
                     else
                     {
                         $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
-                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                        $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' .
-                             $faculty->get_year() . '</a>';
+
+                        $is_allowed = Rights :: is_allowed(
+                            Rights :: VIEW_RIGHT,
+                            $this->get_module_instance()->get_id(),
+                            $parameters);
+
+                        if ($is_allowed)
+                        {
+                            $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                            $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' .
+                                 $faculty->get_year() . '</a>';
+                        }
+                        else
+                        {
+                            $history[] = $faculty->get_year();
+                        }
                     }
                 }
                 else
                 {
                     $parameters = new Parameters($faculty->get_id(), $faculty->get_source());
-                    $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-                    $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' . $faculty->get_year() .
-                         '</a>';
+
+                    $is_allowed = Rights :: is_allowed(
+                        Rights :: VIEW_RIGHT,
+                        $this->get_module_instance()->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
+                        $history[] = '<a href="' . $link . '" title="' . $faculty->get_name() . '">' .
+                             $faculty->get_year() . '</a>';
+                    }
+                    else
+                    {
+                        $history[] = $faculty->get_year();
+                    }
                 }
             }
             $i ++;
@@ -261,8 +370,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
                     $training->get_id(),
                     $training->get_source());
-                $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
-                $row[] = '<a href="' . $url . '">' . $training->get_name() . '</a>';
+
+                $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
+                    \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                    $training_info_module_instance->get_id(),
+                    $parameters);
+
+                if ($is_allowed)
+                {
+                    $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
+                    $row[] = '<a href="' . $url . '">' . $training->get_name() . '</a>';
+                }
+                else
+                {
+                    $row[] = $training->get_name();
+                }
             }
             else
             {
@@ -300,15 +422,24 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters = new \application\discovery\module\group\implementation\bamaflex\Parameters(
                         $training->get_id(),
                         $training->get_source());
-                    $url = $this->get_instance_url($group_module_instance->get_id(), $parameters);
-                    $toolbar_item = new ToolbarItem(
-                        Translation :: get('Groups'),
-                        Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') .
-                             'logo/16.png',
-                            $url,
-                            ToolbarItem :: DISPLAY_ICON);
 
-                    $buttons[] = $toolbar_item->as_html();
+                    $is_allowed = \application\discovery\module\group\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\group\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $group_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $url = $this->get_instance_url($group_module_instance->get_id(), $parameters);
+                        $toolbar_item = new ToolbarItem(
+                            Translation :: get('Groups'),
+                            Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') .
+                                 'logo/16.png',
+                                $url,
+                                ToolbarItem :: DISPLAY_ICON);
+
+                        $buttons[] = $toolbar_item->as_html();
+                    }
                 }
 
                 if ($photo_module_instance)
@@ -349,18 +480,26 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters->set_training_id($training->get_id());
                     $parameters->set_source($training->get_source());
 
-                    $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
-                    $buttons[] = Theme :: get_image(
-                        'logo/16',
-                        'png',
-                        Translation :: get(
-                            'TypeName',
-                            null,
-                            'application\discovery\module\training_results\implementation\bamaflex'),
-                        $url,
-                        ToolbarItem :: DISPLAY_ICON,
-                        false,
-                        'application\discovery\module\training_results\implementation\bamaflex');
+                    $is_allowed = \application\discovery\module\training_results\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\training_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $training_results_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
+                        $buttons[] = Theme :: get_image(
+                            'logo/16',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\training_results\implementation\bamaflex'),
+                            $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\training_results\implementation\bamaflex');
+                    }
                 }
                 $row[] = implode("\n", $buttons);
             }

@@ -24,7 +24,6 @@ class Autoloader
          'DeactivatorComponent' => '/lib/manager/component/deactivator.class.php',
          'DeleterComponent' => '/lib/manager/component/deleter.class.php',
          'MoverComponent' => '/lib/manager/component/mover.class.php',
-         'RightsEditorComponent' => '/lib/manager/component/rights_editor.class.php',
          'UpdaterComponent' => '/lib/manager/component/updater.class.php',
          'InstanceBrowserTable' => '/lib/manager/component/browser/table.class.php',
          'InstanceBrowserTableCellRenderer' => '/lib/manager/component/browser/table_cell_renderer.class.php',

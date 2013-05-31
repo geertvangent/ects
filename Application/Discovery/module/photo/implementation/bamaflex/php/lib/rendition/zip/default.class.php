@@ -7,6 +7,7 @@ use application\discovery\module\photo\DataManager;
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\Path;
 use common\libraries\Session;
+use common\libraries\Display;
 
 class ZipDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -19,39 +20,47 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
+        if (! Rights :: is_allowed(
+            Rights :: VIEW_RIGHT,
+            $this->get_module_instance()->get_id(),
+            $this->get_module_parameters()))
+        {
+            Display :: not_allowed();
+        }
+
         $this->prepare_file_system();
-        
+
         $parameters = new DataClassRetrievesParameters($this->get_module()->get_condition());
         $users = \user\DataManager :: retrieves(\user\User :: class_name(), $parameters);
-        
+
         while ($user = $users->next_result())
         {
             $photo = DataManager :: get_instance($this->get_module_instance())->retrieve_photo(
-                $user->get_official_code(), 
+                $user->get_official_code(),
                 false);
-            
+
             $file = $this->temporary_directory . Filesystem :: create_safe_name($user->get_fullname()) . '.jpg';
-            
+
             Filesystem :: copy_file($photo, $file);
         }
-        
+
         return \application\discovery\ZipDefaultRendition :: save($this->temporary_directory, $this->get_file_name());
     }
 
     public function get_file_name()
     {
         $file_name_parts = array();
-        
+
         $parameters = $this->get_module_parameters();
         $codes = array();
-        
+
         if ($parameters->get_faculty_id())
         {
             $faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty(
                 $parameters->get_faculty_id());
             $file_name_parts[] = $faculty->get_year();
             $file_name_parts[] = $faculty->get_name();
-            
+
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
@@ -75,7 +84,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
             $file_name_parts[] = $training->get_year();
             $file_name_parts[] = $training->get_faculty();
             $file_name_parts[] = $training->get_name();
-            
+
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
@@ -97,7 +106,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
             $file_name_parts[] = $programme->get_faculty();
             $file_name_parts[] = $programme->get_training();
             $file_name_parts[] = $programme->get_name();
-            
+
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
@@ -111,21 +120,21 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
                 }
             }
         }
-        
+
         return implode(' ', $file_name_parts) . ' ' . Translation :: get('TypeName');
     }
 
     public function prepare_file_system()
     {
         $user_id = Session :: get_user_id();
-        
+
         $this->temporary_directory = Path :: get_temp_path(__NAMESPACE__) . $user_id . '/export_photos/';
         if (! is_dir($this->temporary_directory))
         {
             mkdir($this->temporary_directory, 0777, true);
         }
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -133,7 +142,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

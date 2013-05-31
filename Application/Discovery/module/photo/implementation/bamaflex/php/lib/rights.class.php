@@ -29,10 +29,10 @@ class Rights
                 \user\User :: class_name(),
                 (int) Session :: get_user_id());
 
-//             if ($current_user->is_platform_admin())
-//             {
-//                 return true;
-//             }
+            if ($current_user->is_platform_admin())
+            {
+                return true;
+            }
 
             $codes = array();
 

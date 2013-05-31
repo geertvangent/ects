@@ -319,22 +319,30 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $parameters->set_training_id($training->get_id());
             $parameters->set_source($training->get_source());
 
-            $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
-            $image = Theme :: get_image(
-                'logo/16',
-                'png',
-                Translation :: get(
+            $is_allowed = \application\discovery\module\training_results\implementation\bamaflex\Rights :: is_allowed(
+                \application\discovery\module\training_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                $training_results_module_instance->get_id(),
+                $parameters);
+
+            if ($is_allowed)
+            {
+                $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
+                $image = Theme :: get_image(
+                    'logo/16',
+                    'png',
+                    Translation :: get(
+                        'TypeName',
+                        null,
+                        'application\discovery\module\training_results\implementation\bamaflex'),
+                    $url,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    'application\discovery\module\training_results\implementation\bamaflex');
+                $properties[Translation :: get(
                     'TypeName',
                     null,
-                    'application\discovery\module\training_results\implementation\bamaflex'),
-                $url,
-                ToolbarItem :: DISPLAY_ICON,
-                false,
-                'application\discovery\module\training_results\implementation\bamaflex');
-            $properties[Translation :: get(
-                'TypeName',
-                null,
-                'application\discovery\module\training_results\implementation\bamaflex')] = $image;
+                    'application\discovery\module\training_results\implementation\bamaflex')] = $image;
+            }
         }
         $table = new PropertiesTable($properties);
 
@@ -586,18 +594,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
                         $course->get_programme_id(),
                         $course->get_source());
-                    $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-                    $buttons[] = Theme :: get_image(
-                        'logo/16',
-                        'png',
-                        Translation :: get(
-                            'TypeName',
-                            null,
-                            'application\discovery\module\course_results\implementation\bamaflex'),
-                        $url,
-                        ToolbarItem :: DISPLAY_ICON,
-                        false,
-                        'application\discovery\module\course_results\implementation\bamaflex');
+
+                    $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $course_result_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                        $buttons[] = Theme :: get_image(
+                            'logo/16',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\course_results\implementation\bamaflex'),
+                            $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\course_results\implementation\bamaflex');
+                    }
                 }
 
                 $row[] = implode("\n", $buttons);
@@ -662,18 +679,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
                                 $child->get_programme_id(),
                                 $child->get_source());
-                            $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-                            $buttons[] = Theme :: get_image(
-                                'logo/16',
-                                'png',
-                                Translation :: get(
-                                    'TypeName',
-                                    null,
-                                    'application\discovery\module\course_results\implementation\bamaflex'),
-                                $url,
-                                ToolbarItem :: DISPLAY_ICON,
-                                false,
-                                'application\discovery\module\course_results\implementation\bamaflex');
+
+                            $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
+                                \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                                $course_result_module_instance->get_id(),
+                                $parameters);
+
+                            if ($is_allowed)
+                            {
+                                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                                $buttons[] = Theme :: get_image(
+                                    'logo/16',
+                                    'png',
+                                    Translation :: get(
+                                        'TypeName',
+                                        null,
+                                        'application\discovery\module\course_results\implementation\bamaflex'),
+                                    $url,
+                                    ToolbarItem :: DISPLAY_ICON,
+                                    false,
+                                    'application\discovery\module\course_results\implementation\bamaflex');
+                            }
                         }
 
                         $row[] = implode("\n", $buttons);
@@ -796,18 +822,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
                         $course->get_programme_id(),
                         $course->get_source());
-                    $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-                    $buttons[] = Theme :: get_image(
-                        'logo/16',
-                        'png',
-                        Translation :: get(
-                            'TypeName',
-                            null,
-                            'application\discovery\module\course_results\implementation\bamaflex'),
-                        $url,
-                        ToolbarItem :: DISPLAY_ICON,
-                        false,
-                        'application\discovery\module\course_results\implementation\bamaflex');
+
+                    $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $course_result_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                        $buttons[] = Theme :: get_image(
+                            'logo/16',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\course_results\implementation\bamaflex'),
+                            $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\course_results\implementation\bamaflex');
+                    }
                 }
 
                 $row[] = implode("\n", $buttons);
@@ -872,18 +907,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
                                 $child->get_programme_id(),
                                 $child->get_source());
-                            $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-                            $buttons[] = Theme :: get_image(
-                                'logo/16',
-                                'png',
-                                Translation :: get(
-                                    'TypeName',
-                                    null,
-                                    'application\discovery\module\course_results\implementation\bamaflex'),
-                                $url,
-                                ToolbarItem :: DISPLAY_ICON,
-                                false,
-                                'application\discovery\module\course_results\implementation\bamaflex');
+
+                            $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
+                                \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                                $course_result_module_instance->get_id(),
+                                $parameters);
+
+                            if ($is_allowed)
+                            {
+                                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                                $buttons[] = Theme :: get_image(
+                                    'logo/16',
+                                    'png',
+                                    Translation :: get(
+                                        'TypeName',
+                                        null,
+                                        'application\discovery\module\course_results\implementation\bamaflex'),
+                                    $url,
+                                    ToolbarItem :: DISPLAY_ICON,
+                                    false,
+                                    'application\discovery\module\course_results\implementation\bamaflex');
+                            }
                         }
 
                         $row[] = implode("\n", $buttons);
@@ -973,18 +1017,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
                         $course->get_id(),
                         $course->get_source());
-                    $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-                    $buttons[] = Theme :: get_image(
-                        'logo/16',
-                        'png',
-                        Translation :: get(
-                            'TypeName',
-                            null,
-                            'application\discovery\module\course_results\implementation\bamaflex'),
-                        $url,
-                        ToolbarItem :: DISPLAY_ICON,
-                        false,
-                        'application\discovery\module\course_results\implementation\bamaflex');
+
+                    $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $course_result_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                        $buttons[] = Theme :: get_image(
+                            'logo/16',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\course_results\implementation\bamaflex'),
+                            $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\course_results\implementation\bamaflex');
+                    }
                 }
 
                 $row[] = implode("\n", $buttons);
@@ -1049,18 +1102,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
                                 $child->get_id(),
                                 $child->get_source());
-                            $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
-                            $buttons[] = Theme :: get_image(
-                                'logo/16',
-                                'png',
-                                Translation :: get(
-                                    'TypeName',
-                                    null,
-                                    'application\discovery\module\course_results\implementation\bamaflex'),
-                                $url,
-                                ToolbarItem :: DISPLAY_ICON,
-                                false,
-                                'application\discovery\module\course_results\implementation\bamaflex');
+
+                            $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
+                                \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                                $course_result_module_instance->get_id(),
+                                $parameters);
+
+                            if ($is_allowed)
+                            {
+                                $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
+                                $buttons[] = Theme :: get_image(
+                                    'logo/16',
+                                    'png',
+                                    Translation :: get(
+                                        'TypeName',
+                                        null,
+                                        'application\discovery\module\course_results\implementation\bamaflex'),
+                                    $url,
+                                    ToolbarItem :: DISPLAY_ICON,
+                                    false,
+                                    'application\discovery\module\course_results\implementation\bamaflex');
+                            }
                         }
                         $row[] = implode("\n", $buttons);
                     }

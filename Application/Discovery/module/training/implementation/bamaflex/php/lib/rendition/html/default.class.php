@@ -23,10 +23,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $year));
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
+
         $training_info_module_instance = \application\discovery\Module :: exists(
             'application\discovery\module\training_info\implementation\bamaflex',
             array('data_source' => $data_source));
-
         $group_module_instance = \application\discovery\Module :: exists(
             'application\discovery\module\group\implementation\bamaflex',
             array('data_source' => $data_source));
@@ -88,15 +88,24 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters = new \application\discovery\module\group\implementation\bamaflex\Parameters(
                         $training->get_id(),
                         $training->get_source());
-                    $url = $this->get_instance_url($group_module_instance->get_id(), $parameters);
-                    $toolbar_item = new ToolbarItem(
-                        Translation :: get('Groups'),
-                        Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') .
-                             'logo/16.png',
-                            $url,
-                            ToolbarItem :: DISPLAY_ICON);
 
-                    $buttons[] = $toolbar_item->as_html();
+                    $is_allowed = \application\discovery\module\group\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\group\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $group_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $url = $this->get_instance_url($group_module_instance->get_id(), $parameters);
+                        $toolbar_item = new ToolbarItem(
+                            Translation :: get('Groups'),
+                            Theme :: get_image_path('application\discovery\module\group\implementation\bamaflex') .
+                                 'logo/16.png',
+                                $url,
+                                ToolbarItem :: DISPLAY_ICON);
+
+                        $buttons[] = $toolbar_item->as_html();
+                    }
                 }
 
                 if ($photo_module_instance)
@@ -132,18 +141,26 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $parameters->set_training_id($training->get_id());
                     $parameters->set_source($training->get_source());
 
-                    $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
-                    $buttons[] = Theme :: get_image(
-                        'logo/16',
-                        'png',
-                        Translation :: get(
-                            'TypeName',
-                            null,
-                            'application\discovery\module\training_results\implementation\bamaflex'),
-                        $url,
-                        ToolbarItem :: DISPLAY_ICON,
-                        false,
-                        'application\discovery\module\training_results\implementation\bamaflex');
+                    $is_allowed = \application\discovery\module\training_results\implementation\bamaflex\Rights :: is_allowed(
+                        \application\discovery\module\training_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                        $training_results_module_instance->get_id(),
+                        $parameters);
+
+                    if ($is_allowed)
+                    {
+                        $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
+                        $buttons[] = Theme :: get_image(
+                            'logo/16',
+                            'png',
+                            Translation :: get(
+                                'TypeName',
+                                null,
+                                'application\discovery\module\training_results\implementation\bamaflex'),
+                            $url,
+                            ToolbarItem :: DISPLAY_ICON,
+                            false,
+                            'application\discovery\module\training_results\implementation\bamaflex');
+                    }
                 }
 
                 $row[] = implode("\n", $buttons);
