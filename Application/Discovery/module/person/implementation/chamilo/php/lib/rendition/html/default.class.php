@@ -14,6 +14,16 @@ use common\libraries\Translation;
 use common\libraries\ToolbarItem;
 use common\libraries\ActionBarRenderer;
 use common\libraries\DataClassCountParameters;
+use common\libraries\EqualityCondition;
+use application\discovery\RightsGroupEntityRight;
+use common\libraries\Session;
+use rights\NewUserEntity;
+use common\libraries\AndCondition;
+use common\libraries\InCondition;
+use rights\NewPlatformGroupEntity;
+use common\libraries\OrCondition;
+use common\libraries\DataClassDistinctParameters;
+use common\libraries\DataClassRetrieveParameters;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements NewObjectTableSupport
 {
@@ -22,6 +32,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     const TAB_DETAILS = 2;
 
     private $action_bar;
+
+    private $allowed_groups;
+
+    private $current_group;
 
     public function render()
     {
@@ -68,8 +82,61 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return implode($html, "\n");
     }
 
+    public function get_current_group()
+    {
+        if (! isset($this->current_group))
+        {
+            if ($this->get_group() == '0' || is_null($this->get_group()))
+            {
+                $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
+                $group = \group\DataManager :: retrieve(
+                    \group\Group :: class_name(),
+                    new DataClassRetrieveParameters($condition));
+                $this->current_group = $group;
+            }
+            else
+            {
+                $this->current_group = \group\DataManager :: retrieve_by_id(
+                    \group\Group :: class_name(),
+                    (int) $this->get_group());
+            }
+        }
+
+        return $this->current_group;
+    }
+
     public function get_user_html()
     {
+        $current_group = $this->get_current_group();
+        $show_users = false;
+        $show_subgroups = false;
+        if (! $this->get_context()->get_user()->is_platform_admin())
+        {
+            foreach ($this->get_allowed_groups() as $allowed_group_id)
+            {
+                if ($current_group->is_child_of($allowed_group_id) || $current_group->is_parent_of($allowed_group_id) ||
+                     $allowed_group_id == $current_group->get_id())
+                {
+                    $show_subgroups = true;
+
+                    if ($current_group->is_child_of($allowed_group_id) || $allowed_group_id == $current_group->get_id())
+                    {
+                        $show_users = true;
+                        break;
+                    }
+                    else
+                    {
+                        $show_users = false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            $show_users = true;
+            $show_subgroups = true;
+        }
+
         $html = array();
         $html[] = '<div style="float: right; width: 73%;">';
 
@@ -125,32 +192,38 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         }
         else
         {
-            $table = new GroupRelUserBrowserTable(
-                $this,
-                $parameters,
-                $this->get_users_condition($this->action_bar->get_query()));
-            $tabs->add_tab(
-                new DynamicContentTab(
-                    self :: TAB_USERS,
-                    Translation :: get('Users', null, 'user'),
-                    Theme :: get_image_path(__NAMESPACE__) . 'tab/users.png',
-                    $table->as_html()));
-
-            $count_groups = \group\DataManager :: count(
-                \group\Group :: class_name(),
-                new DataClassCountParameters($this->get_subgroups_condition($this->action_bar->get_query())));
-            if ($count_groups > 0)
+            if ($show_users)
             {
-                $table = new GroupBrowserTable(
+                $table = new GroupRelUserBrowserTable(
                     $this,
                     $parameters,
-                    $this->get_subgroups_condition($this->action_bar->get_query()));
+                    $this->get_users_condition($this->action_bar->get_query()));
                 $tabs->add_tab(
                     new DynamicContentTab(
-                        self :: TAB_SUBGROUPS,
-                        Translation :: get('Subgroups'),
-                        Theme :: get_image_path(__NAMESPACE__) . 'tab/groups.png',
+                        self :: TAB_USERS,
+                        Translation :: get('Users', null, 'user'),
+                        Theme :: get_image_path(__NAMESPACE__) . 'tab/users.png',
                         $table->as_html()));
+            }
+
+            if ($show_subgroups)
+            {
+                $count_groups = \group\DataManager :: count(
+                    \group\Group :: class_name(),
+                    new DataClassCountParameters($this->get_subgroups_condition($this->action_bar->get_query())));
+                if ($count_groups > 0)
+                {
+                    $table = new GroupBrowserTable(
+                        $this,
+                        $parameters,
+                        $this->get_subgroups_condition($this->action_bar->get_query()));
+                    $tabs->add_tab(
+                        new DynamicContentTab(
+                            self :: TAB_SUBGROUPS,
+                            Translation :: get('Subgroups'),
+                            Theme :: get_image_path(__NAMESPACE__) . 'tab/groups.png',
+                            $table->as_html()));
+                }
             }
 
             $tabs->add_tab(
@@ -229,5 +302,48 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_view()
     {
         return \application\discovery\Rendition :: VIEW_DEFAULT;
+    }
+
+    public function get_allowed_groups()
+    {
+        if (! isset($this->allowed_groups))
+        {
+            $current_user_group_ids = $this->get_context()->get_user()->get_groups(true);
+
+            $conditions = array();
+            $conditions[] = new EqualityCondition(
+                RightsGroupEntityRight :: PROPERTY_MODULE_ID,
+                $this->get_module_instance()->get_id());
+            $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, Rights :: VIEW_RIGHT);
+
+            $entities_conditions = array();
+
+            $user_entity_conditions = array();
+            $user_entity_conditions[] = new EqualityCondition(
+                RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
+                Session :: get_user_id());
+            $user_entity_conditions[] = new EqualityCondition(
+                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
+                NewUserEntity :: ENTITY_TYPE);
+            $entities_conditions[] = new AndCondition($user_entity_conditions);
+
+            $group_entity_conditions = array();
+            $group_entity_conditions[] = new InCondition(
+                RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
+                $current_user_group_ids);
+            $group_entity_conditions[] = new EqualityCondition(
+                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
+                NewPlatformGroupEntity :: ENTITY_TYPE);
+            $entities_conditions[] = new AndCondition($group_entity_conditions);
+
+            $conditions[] = new OrCondition($entities_conditions);
+            $condition = new AndCondition($conditions);
+
+            $this->allowed_groups = \application\discovery\DataManager :: distinct(
+                RightsGroupEntityRight :: class_name(),
+                new DataClassDistinctParameters($condition, RightsGroupEntityRight :: PROPERTY_GROUP_ID));
+        }
+
+        return $this->allowed_groups;
     }
 }

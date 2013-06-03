@@ -39,8 +39,36 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
                 {
                     $title_short = mb_substr($title_short, 0, 50) . '&hellip;';
                 }
-                return '<a href="' . htmlentities($this->browser->get_group_viewing_url($group)) . '" title="' . $title .
-                     '">' . $title_short . '</a>';
+
+                $show_url = false;
+
+                if (! $this->browser->get_context()->get_user()->is_platform_admin())
+                {
+                    foreach ($this->browser->get_allowed_groups() as $allowed_group_id)
+                    {
+                        if ($group->is_child_of($allowed_group_id) || $group->is_parent_of($allowed_group_id) ||
+                             $allowed_group_id == $group->get_id())
+                        {
+                            $show_url = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    $show_url = true;
+                }
+
+                if ($show_url)
+                {
+
+                    return '<a href="' . htmlentities($this->browser->get_group_viewing_url($group)) . '" title="' .
+                         $title . '">' . $title_short . '</a>';
+                }
+                else
+                {
+                    return $title_short;
+                }
             case Group :: PROPERTY_DESCRIPTION :
                 $description = strip_tags(parent :: render_cell($column, $group));
                 // if(strlen($description) > 175)

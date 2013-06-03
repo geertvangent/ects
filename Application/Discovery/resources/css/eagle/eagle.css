@@ -47,3 +47,9 @@ div#legend {
     overflow: hidden;
     vertical-align: middle;
 }
+
+ul.tree-menu li div a.category_disabled {
+    color: #9f9f9f;
+    cursor: default;
+    background-image: url(../../images/eagle/treemenu/disabled.png);
+}

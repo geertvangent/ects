@@ -10,14 +10,6 @@ use common\libraries\TreeMenuRenderer;
 use common\libraries\DataClassRetrievesParameters;
 use HTML_Menu;
 use HTML_Menu_ArrayRenderer;
-use application\discovery\RightsGroupEntityRight;
-use rights\NewUserEntity;
-use common\libraries\AndCondition;
-use common\libraries\InCondition;
-use rights\NewPlatformGroupEntity;
-use common\libraries\OrCondition;
-use common\libraries\DataClassDistinctParameters;
-use common\libraries\Session;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -51,8 +43,6 @@ class GroupMenu extends HTML_Menu
 
     private $hide_current_category;
 
-    private $allowed_groups;
-
     private $rendition;
 
     /**
@@ -71,25 +61,7 @@ class GroupMenu extends HTML_Menu
         $this->include_root = $include_root;
         $this->show_complete_tree = $show_complete_tree;
         $this->hide_current_category = $hide_current_category;
-
-        if ($rendition->get_group() == '0' || is_null($rendition->get_group()))
-        {
-            $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
-            $group = \group\DataManager :: retrieves(
-                \group\Group :: class_name(),
-                new DataClassRetrievesParameters(
-                    $condition,
-                    1,
-                    null,
-                    new ObjectTableOrder(\group\Group :: PROPERTY_NAME)))->next_result();
-            $this->current_category = $group;
-        }
-        else
-        {
-            $this->current_category = \group\DataManager :: retrieve(
-                \group\Group :: class_name(),
-                new EqualityCondition(\group\Group :: PROPERTY_ID, $rendition->get_group()));
-        }
+        $this->current_category = $rendition->get_current_group();
 
         $this->urlFmt = $url_format;
         $menu = $this->get_menu();
@@ -162,20 +134,29 @@ class GroupMenu extends HTML_Menu
 
                 $show_url = false;
 
-                foreach ($this->get_allowed_groups() as $allowed_group_id)
+                if (! $this->rendition->get_context()->get_user()->is_platform_admin())
                 {
-                    if ($group->is_child_of($allowed_group_id) || $group->is_parent_of($allowed_group_id)  || $allowed_group_id == $group_id)
+                    foreach ($this->rendition->get_allowed_groups() as $allowed_group_id)
                     {
-                        $show_url = true;
-                        break;
+                        if ($group->is_child_of($allowed_group_id) || $group->is_parent_of($allowed_group_id) ||
+                             $allowed_group_id == $group_id)
+                        {
+                            $show_url = true;
+                            break;
+                        }
                     }
+                }
+                else
+                {
+                    $show_url = true;
                 }
 
                 if ($show_url)
                 {
                     $menu_item['url'] = $this->get_url($group->get_id());
                 }
-                else {
+                else
+                {
                     $menu_item['url'] = '#';
                 }
 
@@ -197,11 +178,11 @@ class GroupMenu extends HTML_Menu
 
                 if ($show_url)
                 {
-                $menu_item['class'] = 'category';
+                    $menu_item['class'] = 'category';
                 }
                 else
                 {
-                    $menu_item['class'] = 'disabled';
+                    $menu_item['class'] = 'category_disabled';
                 }
 
                 $menu_item[OptionsMenuRenderer :: KEY_ID] = $group->get_id();
@@ -265,48 +246,5 @@ class GroupMenu extends HTML_Menu
     public static function get_tree_name()
     {
         return Utilities :: get_classname_from_namespace(self :: TREE_NAME, true);
-    }
-
-    public function get_allowed_groups()
-    {
-        if (! isset($this->allowed_groups))
-        {
-            $current_user_group_ids = $this->rendition->get_context()->get_user()->get_groups(true);
-
-            $conditions = array();
-            $conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_MODULE_ID,
-                $this->rendition->get_module_instance()->get_id());
-            $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, Rights :: VIEW_RIGHT);
-
-            $entities_conditions = array();
-
-            $user_entity_conditions = array();
-            $user_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
-                Session :: get_user_id());
-            $user_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
-                NewUserEntity :: ENTITY_TYPE);
-            $entities_conditions[] = new AndCondition($user_entity_conditions);
-
-            $group_entity_conditions = array();
-            $group_entity_conditions[] = new InCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
-                $current_user_group_ids);
-            $group_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
-                NewPlatformGroupEntity :: ENTITY_TYPE);
-            $entities_conditions[] = new AndCondition($group_entity_conditions);
-
-            $conditions[] = new OrCondition($entities_conditions);
-            $condition = new AndCondition($conditions);
-
-            $this->allowed_groups = \application\discovery\DataManager :: distinct(
-                RightsGroupEntityRight :: class_name(),
-                new DataClassDistinctParameters($condition, RightsGroupEntityRight :: PROPERTY_GROUP_ID));
-        }
-
-        return $this->allowed_groups;
     }
 }
