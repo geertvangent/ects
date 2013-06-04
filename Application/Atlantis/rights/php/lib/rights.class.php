@@ -12,6 +12,7 @@ use common\libraries\InCondition;
 use application\atlantis\role\entity\UserEntity;
 use application\atlantis\role\entity\PlatformGroupEntity;
 use common\libraries\DataClassCache;
+use common\libraries\PropertyConditionVariable;
 
 class Rights extends RightsUtil
 {
@@ -174,8 +175,12 @@ class Rights extends RightsUtil
             if (count($allowed_groups) > 0)
             {
                 DataClassCache :: truncate(\group\Group :: class_name());
-                $condition = new InCondition(\group\Group :: PROPERTY_ID, $allowed_groups);
-                $groups = \group\DataManager :: get_instance()->retrieve_groups($condition);
+                $condition = new InCondition(
+                    new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_ID),
+                    $allowed_groups);
+                $groups = \group\DataManager :: retrieves(
+                    \group\Group :: class_name(),
+                    new DataClassRetrievesParameters($condition));
 
                 while ($group = $groups->next_result())
                 {
@@ -210,7 +215,7 @@ class Rights extends RightsUtil
             }
             else
             {
-                $group = \group\DataManager :: get_instance()->retrieve_group($group_id);
+                $group = \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), (int) $group_id);
                 if ($group->is_parent_of($target_group_id))
                 {
                     return true;

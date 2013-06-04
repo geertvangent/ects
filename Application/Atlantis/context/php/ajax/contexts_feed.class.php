@@ -12,7 +12,6 @@ use common\libraries\EqualityCondition;
 use common\libraries\AndCondition;
 use common\libraries\ObjectTableOrder;
 use common\libraries\AdvancedElementFinderElement;
-use group\GroupDataManager;
 use common\libraries\DataClassCache;
 
 class ContextAjaxContextsFeed extends AjaxManager
@@ -79,78 +78,19 @@ class ContextAjaxContextsFeed extends AjaxManager
                 {
                     DataClassCache :: truncate(\group\Group :: class_name());
 
-                    $groups = array();
-                    switch ($context->get_context_type())
+                    $group = \group\DataManager :: retrieve_group_by_code($context->get_context_id());
+
+                    if ($group instanceof \group\Group)
                     {
-                        case 0 :
-                            $code = 'CA';
-                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                            if ($context_group)
-                            {
-                                $groups[] = $context_group;
-                            }
-
-                            break;
-                        case 1 :
-                            $code = 'AY_' . $context->get_context_name();
-                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                            if ($context_group)
-                            {
-                                $groups[] = $context_group;
-                            }
-                            break;
-                        case 2 :
-                            $code = 'DEP_' . $context->get_context_id();
-                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                            if ($context_group)
-                            {
-                                $groups[] = $context_group;
-                            }
-                            break;
-                        case 3 :
-                            $code = 'TRA_OP_' . $context->get_context_id();
-                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                            if ($context_group)
-                            {
-                                $groups[] = $context_group;
-                            }
-
-                            $code = 'TRA_STU_' . $context->get_context_id();
-                            $context_group = \group\DataManager :: retrieve_group_by_code($code);
-
-                            if ($context_group)
-                            {
-                                $groups[] = $context_group;
-                            }
-                            break;
-                    }
-
-                    if (count($groups) > 0)
-                    {
-                        $added = false;
-
                         foreach ($target_groups as $target_group)
                         {
-                            if ($added)
+                            $is_parent = $group->is_parent_of($target_group);
+                            $is_child = $group->is_child_of($target_group);
+
+                            if ($is_parent || $is_child || $target_group == $group->get_id())
                             {
+                                $context_category->add_child($this->get_context_element($context));
                                 break;
-                            }
-
-                            foreach ($groups as $group)
-                            {
-                                $is_parent = $group->is_parent_of($target_group);
-                                $is_child = $group->is_child_of($target_group);
-
-                                if ($is_parent || $is_child || $target_group == $group->get_id())
-                                {
-                                    $context_category->add_child($this->get_context_element($context));
-                                    $added = true;
-                                    break;
-                                }
                             }
                         }
                     }
@@ -201,11 +141,11 @@ class ContextAjaxContextsFeed extends AjaxManager
         {
             $context = DataManager :: retrieve(Context :: class_name(), (int) $filter_id);
             $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, $context->get_context_type());
-            $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, $context->get_context_id());
+            $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, $context->get_id());
         }
         else
         {
-            $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, 0);
+            $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, '0');
         }
 
         // Combine the conditions
@@ -235,12 +175,59 @@ class ContextAjaxContextsFeed extends AjaxManager
      */
     public function get_context_element($context)
     {
+        if ($this->get_user()->is_platform_admin())
+        {
+            if ($context->get_context_type() != 4 && $context->get_context_type() != 7)
+            {
+                $element_type = AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER;
+                $element_class = 'type type_context_folder';
+            }
+            else
+            {
+                $element_class = 'type type_context_simple';
+                $element_type = AdvancedElementFinderElement :: TYPE_SELECTABLE;
+            }
+        }
+        elseif (\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        {
+            if ($context->get_context_type() != 4 && $context->get_context_type() != 7)
+            {
+                $group = \group\DataManager :: retrieve_group_by_code($context->get_context_id());
+
+                $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups(
+                    $this->get_user());
+
+                foreach ($target_groups as $target_group)
+                {
+                    if ($target_group == $group->get_id())
+                    {
+                        $element_type = AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER;
+                    }
+                    elseif ($group->is_child_of($target_group))
+                    {
+                        $element_type = AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER;
+                    }
+                    elseif ($group->is_parent_of($target_group))
+                    {
+                        $element_type = AdvancedElementFinderElement :: TYPE_FILTER;
+                    }
+                }
+
+                $element_class = 'type type_context_folder';
+            }
+            else
+            {
+                $element_type = AdvancedElementFinderElement :: TYPE_SELECTABLE;
+                $element_class = 'type type_context_simple';
+            }
+        }
+
         return new AdvancedElementFinderElement(
             'context_' . $context->get_id(),
-            'type type_context',
+            $element_class,
             $context->get_context_name(),
             $context->get_context_name(),
-            AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER);
+            $element_type);
     }
 
     /**

@@ -11,6 +11,7 @@ use common\libraries\DataClassRetrievesParameters;
 use common\libraries\ObjectTableOrder;
 use common\libraries\InCondition;
 use common\libraries\EqualityCondition;
+use common\libraries\DataClassCountParameters;
 
 /**
  * Feed to return users from the user entity
@@ -81,7 +82,7 @@ class EntityAjaxUserEntityFeed extends UserAjaxUsersFeed
             $condition = $conditions[0];
         }
 
-        $this->set_user_count(\user\DataManager :: count(User :: class_name(), $condition));
+        $this->set_user_count(\user\DataManager :: count(User :: class_name(), new DataClassCountParameters($condition)));
         $parameters = new DataClassRetrievesParameters(
             $condition,
             100,

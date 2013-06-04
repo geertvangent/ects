@@ -64,3 +64,13 @@ div.items {
     clear: both;
     width: 100%;
 }
+
+ul.tree-menu li div a.type_context_simple
+{
+    background-image: url(../../images/eagle/treemenu/context_simple.png);
+}
+
+ul.tree-menu li div a.type_context_folder
+{
+    background-image: url(../../images/eagle/treemenu/context_folder.png);
+}

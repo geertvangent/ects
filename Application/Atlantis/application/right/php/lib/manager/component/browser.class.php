@@ -1,7 +1,6 @@
 <?php
 namespace application\atlantis\application\right;
 
-use common\libraries\Redirect;
 use application\atlantis\SessionBreadcrumbs;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
@@ -26,7 +25,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
     public function get_object_table_condition($object_table_class_name)
     {
         $query = $this->action_bar->get_query();
-        
+
         $conditions = array();
         if (isset($query) && $query != '')
         {
@@ -35,8 +34,8 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             $search_conditions[] = new PatternMatchCondition(Right :: PROPERTY_DESCRIPTION, '*' . $query . '*');
             $conditions[] = new OrCondition($search_conditions);
         }
-        
-        $conditions[] = new EqualityCondition(Right :: PROPERTY_APPLICATION_ID, 
+
+        $conditions[] = new EqualityCondition(Right :: PROPERTY_APPLICATION_ID,
                 $this->get_parameter(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID));
         return new AndCondition($conditions);
     }
@@ -60,8 +59,8 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             if ($this->get_user()->is_platform_admin())
             {
                 $this->action_bar->add_common_action(
-                        new ToolbarItem(Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                                Theme :: get_common_image_path() . 'action_create.png', 
+                        new ToolbarItem(Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
+                                Theme :: get_common_image_path() . 'action_create.png',
                                 $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());

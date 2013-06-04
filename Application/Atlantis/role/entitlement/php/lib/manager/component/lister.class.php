@@ -1,7 +1,6 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use application\ehb_sync\atlantis\DiscoverySynchronization;
 use application\atlantis\SessionBreadcrumbs;
 use common\libraries\DelegateComponent;
 use common\libraries\Breadcrumb;

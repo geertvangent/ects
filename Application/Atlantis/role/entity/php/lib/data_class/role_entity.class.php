@@ -1,7 +1,6 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use group\GroupDataManager;
 use common\libraries\ToolbarItem;
 use common\libraries\Theme;
 use common\libraries\Utilities;
@@ -198,7 +197,7 @@ class RoleEntity extends DataClass
                 return \user\DataManager :: retrieve(\user\User :: class_name(), (int) $entity_id);
                 break;
             case 2 :
-                return GroupDataManager :: get_instance()->retrieve_group($entity_id);
+                return \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), $entity_id);
                 break;
         }
     }

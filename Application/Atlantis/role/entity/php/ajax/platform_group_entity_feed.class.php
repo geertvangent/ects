@@ -3,17 +3,14 @@ namespace application\atlantis\role\entity;
 
 use common\libraries\AdvancedElementFinderElement;
 use group\GroupAjaxPlatformGroupsFeed;
-use common\libraries\Request;
 use common\libraries\PatternMatchCondition;
-use common\libraries\EqualityCondition;
-use group\Group;
+use common\libraries\Request;
 use common\libraries\OrCondition;
-use common\libraries\InCondition;
+use common\libraries\EqualityCondition;
 use common\libraries\AndCondition;
-use group\GroupDataManager;
+use common\libraries\DataClassRetrievesParameters;
 use common\libraries\ObjectTableOrder;
-use common\libraries\AdvancedElementFinderElements;
-use common\libraries\Translation;
+use common\libraries\ArrayResultSet;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -91,166 +88,136 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
             $user->get_official_code());
     }
 
-    // /**
-    // * Returns all the groups for this feed
-    // *
-    // * @return ResultSet
-    // */
-    // public function retrieve_groups()
-    // {
-    // // Set the conditions for the search query
-    // $search_query = Request :: post(self :: PARAM_SEARCH_QUERY);
-    // if ($search_query && $search_query != '')
-    // {
-    // $q = '*' . $search_query . '*';
-    // $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_NAME, $q);
-    // $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, $q);
-    // $conditions[] = new OrCondition($name_conditions);
-    // }
-
-    // $filter_id = $this->get_filter();
-
-    // if ($filter_id)
-    // {
-    // $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT, $filter_id);
-    // }
-    // else
-    // {
-    // $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT, 0);
-    // }
-
-    // // if (! $this->get_user()->is_platform_admin() &&
-    // // \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
-    // // {
-    // // $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
-
-    // // if (count($target_groups) > 0)
-    // // {
-    // // $conditions[] = new InCondition(Group :: PROPERTY_ID, $target_groups);
-    // // }
-    // // else
-    // // {
-    // // $conditions[] = new EqualityCondition(Group :: PROPERTY_ID, - 1);
-    // // }
-    // // }
-
-    // // Combine the conditions
-    // $count = count($conditions);
-    // if ($count > 1)
-    // {
-    // $condition = new AndCondition($conditions);
-    // }
-
-    // if ($count == 1)
-    // {
-    // $condition = $conditions[0];
-    // }
-
-    // return GroupDataManager :: get_instance()->retrieve_groups(
-    // $condition,
-    // null,
-    // null,
-    // array(new ObjectTableOrder(Group :: PROPERTY_NAME)));
-    // }
-
     /**
-     * Returns all the elements for this feed
+     * Returns all the groups for this feed
      *
-     * @return AdvancedElementFinderElements
+     * @return ResultSet
      */
-    public function get_elements()
+    public function retrieve_groups()
     {
-        $elements = new AdvancedElementFinderElements();
-
-        // Add groups
-        $groups = $this->retrieve_groups();
-
-        // Target groups
-        if (! $this->get_user()->is_platform_admin() &&
-             \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        // Set the conditions for the search query
+        $search_query = Request :: post(self :: PARAM_SEARCH_QUERY);
+        if ($search_query && $search_query != '')
         {
-            $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
-        }
-
-        if ($groups && $groups->size() > 0)
-        {
-            // Add group category
-            $group_category = new AdvancedElementFinderElement(
-                'groups',
-                'category',
-                Translation :: get('Groups'),
-                Translation :: get('Groups'));
-            $elements->add_element($group_category);
-
-            while ($group = $groups->next_result())
-            {
-                if ($this->get_user()->is_platform_admin())
-                {
-                    $group_category->add_child($this->get_group_element($group));
-                }
-                elseif (! $this->get_user()->is_platform_admin() &&
-                     \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
-                {
-                    foreach ($target_groups as $target_group)
-                    {
-                        $is_parent = $group->is_parent_of($target_group);
-                        $is_child = $group->is_child_of($target_group);
-
-                        if ($is_parent || $is_child || $target_group == $group->get_id())
-                        {
-                            $group_category->add_child($this->get_group_element($group));
-                            break;
-                        }
-                    }
-                }
-            }
+            $q = '*' . $search_query . '*';
+            $name_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_NAME, $q);
+            $name_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, $q);
+            $conditions[] = new OrCondition($name_conditions);
         }
 
         $filter_id = $this->get_filter();
 
         if ($filter_id)
         {
-            $add_users = false;
+            $conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $filter_id);
+        }
+        else
+        {
+            $conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
+        }
 
-            if ($this->get_user()->is_platform_admin())
-            {
-                $add_users = true;
-            }
-            elseif (! $this->get_user()->is_platform_admin() &&
-                 \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
-            {
-                $group = \group\DataManager :: get_instance()->retrieve_group($filter_id);
+        // Combine the conditions
+        $count = count($conditions);
+        if ($count > 1)
+        {
+            $condition = new AndCondition($conditions);
+        }
 
+        if ($count == 1)
+        {
+            $condition = $conditions[0];
+        }
+
+        $groups = \group\DataManager :: retrieves(
+            \group\Group :: class_name(),
+            new DataClassRetrievesParameters(
+                $condition,
+                null,
+                null,
+                array(new ObjectTableOrder(\group\Group :: PROPERTY_NAME))));
+
+        if ($this->get_user()->is_platform_admin())
+        {
+            return $groups;
+        }
+        elseif (\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        {
+            $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
+
+            $allowed_groups = array();
+
+            while ($group = $groups->next_result())
+            {
                 foreach ($target_groups as $target_group)
                 {
+                    $is_parent = $group->is_parent_of($target_group);
                     $is_child = $group->is_child_of($target_group);
 
-                    if ($is_child || $target_group == $group->get_id())
+                    if ($is_parent || $is_child || $target_group == $group->get_id())
                     {
-                        $add_users = true;
+                        $allowed_groups[] = $group;
                         break;
                     }
                 }
             }
 
-            if ($add_users)
-            {
-                // Add users
-                $users = $this->retrieve_users();
-                if ($users && $users->size() > 0)
-                {
-                    // Add user category
-                    $user_category = new AdvancedElementFinderElement('users', 'category', 'Users', 'Users');
-                    $elements->add_element($user_category);
+            return new ArrayResultSet($allowed_groups);
+        }
+    }
 
-                    while ($user = $users->next_result())
-                    {
-                        $user_category->add_child($this->get_user_element($user));
-                    }
+    /**
+     * Retrieves all the users for the selected group
+     */
+    public function get_user_ids()
+    {
+        $filter_id = $this->get_filter();
+
+        if (! $filter_id)
+        {
+            return;
+        }
+
+        $add_users = false;
+
+        if ($this->get_user()->is_platform_admin())
+        {
+            $add_users = true;
+        }
+        elseif (! $this->get_user()->is_platform_admin() &&
+             \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        {
+            $group = \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), (int) $filter_id);
+            $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
+
+            foreach ($target_groups as $target_group)
+            {
+                $is_child = $group->is_child_of($target_group);
+
+                if ($is_child || $target_group == $group->get_id())
+                {
+                    $add_users = true;
+                    break;
                 }
             }
         }
 
-        return $elements;
+        if ($add_users)
+        {
+            $condition = new EqualityCondition(\group\GroupRelUser :: PROPERTY_GROUP_ID, $filter_id);
+            $relations = \group\DataManager :: retrieves(\group\GroupRelUser :: class_name(), $condition);
+
+            $user_ids = array();
+
+            while ($relation = $relations->next_result())
+            {
+                $user_ids[] = $relation->get_user_id();
+            }
+
+            return $user_ids;
+        }
+        else
+        {
+            return;
+        }
     }
 }
