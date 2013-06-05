@@ -11,23 +11,27 @@ class GroupsComponent extends Manager implements DelegateComponent
      */
     public function run()
     {
+        ini_set("memory_limit", "-1");
+        ini_set("max_execution_time", "18000");
+        header('Content-Type: text/html; charset=utf-8');
+
         try
         {
             echo '<pre>';
             Synchronization :: log('Group sync started', date('c', time()));
-            
+
             $root_group = \group\DataManager :: get_root_group();
-            
+
             $synchronization = GroupSynchronization :: factory(
-                'academic_year', 
+                'academic_year',
                 new DummyGroupSynchronization($root_group));
             $synchronization->run();
-            
+
             $synchronization = GroupSynchronization :: factory(
-                'central_administration', 
+                'central_administration',
                 new DummyGroupSynchronization($root_group));
             $synchronization->run();
-            
+
             Synchronization :: log('Group sync ended', date('c', time()));
             echo '</pre>';
         }

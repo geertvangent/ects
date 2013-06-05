@@ -6,18 +6,18 @@ use common\libraries\ArrayResultSet;
 class BamaflexResultSet extends ArrayResultSet
 {
 
-    public function __construct($handle)
+    public function __construct($statement)
     {
         $records = array();
-        if ($handle instanceof \MDB2_Error)
+
+        if (! $statement instanceof \PDOException)
         {
-            var_dump($handle);
+            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            {
+                $records[] = $this->process_record($record);
+            }
         }
-        while ($record = $handle->fetchRow(MDB2_FETCHMODE_ASSOC))
-        {
-            $records[] = $this->process_record($record);
-        }
-        
+
         parent :: __construct($records);
     }
 
@@ -35,7 +35,7 @@ class BamaflexResultSet extends ArrayResultSet
                 $field = $data;
             }
         }
-        
+
         return $record;
     }
 }

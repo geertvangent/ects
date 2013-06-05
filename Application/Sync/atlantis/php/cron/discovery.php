@@ -4,8 +4,6 @@ namespace application\ehb_sync\atlantis;
 /**
  * This script will load the requested application and launch it.
  */
-use Exception;
-
 require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
 
 try

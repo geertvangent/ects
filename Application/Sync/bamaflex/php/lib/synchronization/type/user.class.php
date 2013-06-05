@@ -32,7 +32,7 @@ class UserSynchronization extends Synchronization
         $types = array();
         $types[] = 'create';
         $types[] = 'update';
-        
+
         return $types;
     }
 

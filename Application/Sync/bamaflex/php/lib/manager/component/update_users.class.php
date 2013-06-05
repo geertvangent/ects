@@ -13,15 +13,16 @@ class UpdateUsersComponent extends Manager implements DelegateComponent
     {
         ini_set("memory_limit", "-1");
         ini_set("max_execution_time", "18000");
-        
+        header('Content-Type: text/html; charset=utf-8');
+
         try
         {
             echo '<pre>';
             echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
-            
+
             $synchronization = UserSynchronization :: factory('update');
             $synchronization->run();
-            
+
             echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
             echo '</pre>';
         }

@@ -3,9 +3,9 @@ namespace application\ehb_sync;
 
 use common\libraries\Theme;
 use common\libraries\Translation;
-use core\lynx\PackageList;
 use common\libraries\CommonDataManager;
 use common\libraries\WebApplication;
+use common\libraries\package\PackageList;
 
 class Manager extends WebApplication
 {

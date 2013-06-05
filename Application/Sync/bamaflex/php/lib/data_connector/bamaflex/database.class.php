@@ -1,9 +1,9 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\Mdb2Database;
+use common\libraries\DoctrineDatabase;
 
-class BamaflexDatabase extends Mdb2Database implements DataManagerInterface
+class BamaflexDatabase extends DoctrineDatabase implements DataManagerInterface
 {
 
     /**
@@ -12,8 +12,7 @@ class BamaflexDatabase extends Mdb2Database implements DataManagerInterface
     public function initialize()
     {
         $this->set_connection(BamaflexConnection :: get_instance()->get_connection());
-        $this->get_connection()->setCharset('utf8');
-        $this->get_connection()->prepare('SET TEXTSIZE 2000000')->execute();
+        $this->get_connection()->query('SET TEXTSIZE 2000000');
         $this->set_prefix('');
     }
 }

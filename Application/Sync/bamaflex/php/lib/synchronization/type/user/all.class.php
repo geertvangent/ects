@@ -13,7 +13,7 @@ class AllUserSynchronization extends UserSynchronization
     public function get_data()
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_sync_user]';
-        
+
         return $this->get_result($query);
     }
 
@@ -25,15 +25,15 @@ class AllUserSynchronization extends UserSynchronization
     public function process_data($person)
     {
         $user = \user\DataManager :: retrieve_user_by_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
-        
+
         $utf_last_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_LAST_NAME]);
         $utf_first_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_FIRST_NAME]);
         if (! $user instanceof User)
         {
             $user = new User();
-            
+
             $user->set_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
-            
+
             $user->set_auth_source('cas');
             $user->set_password('PLACEHOLDER');
             $user->set_expiration_date(0);
@@ -45,15 +45,15 @@ class AllUserSynchronization extends UserSynchronization
         {
             $user_copy = clone $user;
         }
-        
+
         $user->set_lastname($utf_last_name);
         $user->set_firstname($utf_first_name);
-        
+
         if (($person[self :: RESULT_PROPERTY_QUOTA] * 1024 * 1024) > $user->get_disk_quota())
         {
             $user->set_disk_quota($person[self :: RESULT_PROPERTY_QUOTA] * 1024 * 1024);
         }
-        
+
         switch ($person[self :: RESULT_PROPERTY_STATUS])
         {
             case 0 :
@@ -66,7 +66,7 @@ class AllUserSynchronization extends UserSynchronization
             case 1 :
                 $user->set_active(1);
                 $user->set_status(1);
-                
+
                 if ($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE]));
@@ -86,7 +86,7 @@ class AllUserSynchronization extends UserSynchronization
             case 2 :
                 $user->set_active(1);
                 $user->set_status(1);
-                
+
                 if ($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE]));
@@ -101,7 +101,7 @@ class AllUserSynchronization extends UserSynchronization
             case 3 :
                 $user->set_active(1);
                 $user->set_status(5);
-                
+
                 if ($person[self :: RESULT_PROPERTY_EMAIL_STUDENT])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_STUDENT]));
@@ -114,7 +114,7 @@ class AllUserSynchronization extends UserSynchronization
                 }
                 break;
         }
-        
+
         if ($user_copy instanceof User)
         {
             if ($user != $user_copy)
@@ -129,23 +129,29 @@ class AllUserSynchronization extends UserSynchronization
                     echo '++ Failed:' . $utf_first_name . ' ' . $utf_last_name . "\n";
                 }
             }
-            
+
             unset($user);
             unset($user_copy);
         }
         else
         {
-            
-            if ($user->create())
+            try
             {
-                echo 'Added: [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
-                     $utf_last_name . "\n";
+                if ($user->create())
+                {
+                    echo 'Added: [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
+                         $utf_last_name . "\n";
+                }
+                else
+                {
+                    echo '++ Failed: ' . $utf_first_name . ' ' . $utf_last_name . "\n";
+                }
             }
-            else
+            catch (\Exception $exception)
             {
                 echo '++ Failed: ' . $utf_first_name . ' ' . $utf_last_name . "\n";
             }
-            
+
             unset($user);
         }
         flush();
@@ -154,7 +160,7 @@ class AllUserSynchronization extends UserSynchronization
     public function run()
     {
         $user_result_set = $this->get_data();
-        
+
         while ($user = $user_result_set->next_result(false))
         {
             $this->process_data($user);

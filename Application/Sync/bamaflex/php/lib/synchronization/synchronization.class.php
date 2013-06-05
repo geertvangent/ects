@@ -39,7 +39,7 @@ abstract class Synchronization
     public function get_academic_year_end()
     {
         $year_parts = explode('-', $this->get_academic_year());
-        
+
         return '20' . $year_parts[1] . '-09-30 23:59:59.999';
     }
 
@@ -66,7 +66,7 @@ abstract class Synchronization
      */
     public function convert_to_utf8($string)
     {
-        return iconv('cp1252', 'UTF-8', $string);
+        return trim(iconv('cp1252', 'UTF-8', $string));
     }
 
     /**
@@ -76,9 +76,8 @@ abstract class Synchronization
      */
     public function get_result($query)
     {
-        $statement = $this->get_data_manager()->get_connection()->prepare($query);
-        
-        return new BamaflexResultSet($statement->execute());
+        $statement = $this->get_data_manager()->get_connection()->query($query);
+        return new BamaflexResultSet($statement);
     }
 
     /**

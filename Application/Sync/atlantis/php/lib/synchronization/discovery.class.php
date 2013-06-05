@@ -3,8 +3,6 @@ namespace application\ehb_sync\atlantis;
 
 use common\libraries\AndCondition;
 use common\libraries\InequalityCondition;
-use application\discovery\ModuleInstance;
-use group\GroupDataManager;
 use group\Group;
 use common\libraries\InCondition;
 use application\discovery\DataManager;
@@ -43,10 +41,10 @@ class DiscoverySynchronization
         while ($right = $rights->next_result())
         {
             $condition = new EqualityCondition(
-                \application\discovery\ModuleInstance :: PROPERTY_TYPE,
+                \application\discovery\instance\Instance :: PROPERTY_TYPE,
                 $right->get_code());
             $module_instance = DataManager :: get_instance()->retrieve_module_instances($condition)->next_result();
-            if ($module_instance instanceof ModuleInstance)
+            if ($module_instance instanceof \application\discovery\instance\Instance)
             {
                 $condition = new EqualityCondition(
                     \application\atlantis\role\entitlement\Entitlement :: PROPERTY_RIGHT_ID,
@@ -103,7 +101,9 @@ class DiscoverySynchronization
                         }
 
                         $condition = new InCondition(Group :: PROPERTY_CODE, $codes);
-                        $groups = GroupDataManager :: get_instance()->retrieve_groups($condition);
+                        $groups = \group\DataManager :: retrieves(
+                            \group\Group :: class_name(),
+                            new DataClassRetrievesParameters($condition));
 
                         while ($group = $groups->next_result())
                         {
