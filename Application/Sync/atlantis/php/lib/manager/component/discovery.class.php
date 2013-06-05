@@ -1,8 +1,6 @@
 <?php
 namespace application\ehb_sync\atlantis;
 
-use application\ehb_sync\atlantis\php\lib\synchronization\DiscoverySynchronization;
-
 use common\libraries\DelegateComponent;
 
 class DiscoveryComponent extends Manager implements DelegateComponent
