@@ -17,10 +17,12 @@ class Manager extends WebApplication
 {
     const APPLICATION_NAME = 'discovery';
     const ACTION_VIEW = 'viewer';
+    const ACTION_CODE = 'code';
     const ACTION_MODULE = 'module';
     const ACTION_DATA_SOURCE = 'data_source';
     const PARAM_USER_ID = 'user_id';
     const PARAM_MODULE_ID = 'module_id';
+    const PARAM_OFFICIAL_CODE = 'official_code';
     const PARAM_CONTENT_TYPE = 'content_type';
     const PARAM_DIRECTION = 'direction';
     const PARAM_DIRECTION_UP = 'up';

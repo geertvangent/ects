@@ -27,6 +27,7 @@ class Autoloader
          'DataSourceComponent' => '/lib/manager/component/data_source.class.php',
          'ModuleComponent' => '/lib/manager/component/module.class.php',
          'ViewerComponent' => '/lib/manager/component/viewer.class.php',
+         'CodeComponent' => '/lib/manager/component/code.class.php',
          'AbstractRenditionImplementation' => '/lib/rendition/abstract_rendition_implementation.class.php',
          'DummyRenditionImplementation' => '/lib/rendition/dummy_rendition_implementation.class.php',
          'Rendition' => '/lib/rendition/rendition.class.php',
