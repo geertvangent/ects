@@ -11,18 +11,18 @@ class DiscoveryComponent extends Manager implements DelegateComponent
      */
     public function run()
     {
-        try
-        {
+//         try
+//         {
             echo '<pre>';
             echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
             $synchronization = new DiscoverySynchronization();
             $synchronization->run();
             echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
             echo '</pre>';
-        }
-        catch (\Exception $exception)
-        {
-            echo 'Synchronization failed';
-        }
+//         }
+//         catch (\Exception $exception)
+//         {
+//             echo 'Synchronization failed';
+//         }
     }
 }

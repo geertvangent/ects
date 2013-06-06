@@ -3,19 +3,20 @@ namespace application\ehb_sync\atlantis;
 
 use common\libraries\AndCondition;
 use common\libraries\InequalityCondition;
-use group\Group;
-use common\libraries\InCondition;
 use application\discovery\DataManager;
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\EqualityCondition;
 use common\libraries\DataClassRetrieveParameters;
+use common\libraries\PropertyConditionVariable;
+use common\libraries\StaticConditionVariable;
+use application\discovery\RightsGroupEntityRight;
 
 class DiscoverySynchronization
 {
 
     function run()
     {
-        $old_entity_rights = DataManager :: get_instance()->retrieve_rights_group_entity_rights();
+        $old_entity_rights = DataManager :: retrieves(RightsGroupEntityRight :: class_name());
         $new_entity_right_cache = array();
         $old_entity_right_cache = array();
 
@@ -24,16 +25,26 @@ class DiscoverySynchronization
             $old_entity_right_cache[$old_entity_right->get_id()] = $old_entity_right->get_string();
         }
 
-        $condition = new EqualityCondition(\application\atlantis\application\Application :: PROPERTY_CODE, 'DISCOVERY');
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(
+                \application\atlantis\application\Application :: class_name(),
+                \application\atlantis\application\Application :: PROPERTY_CODE),
+            new StaticConditionVariable('DISCOVERY'));
+
         $parameters = DataClassRetrieveParameters :: generate($condition);
+
         $application = \application\atlantis\application\DataManager :: retrieve(
             \application\atlantis\application\Application :: class_name(),
             $parameters);
 
         $condition = new EqualityCondition(
-            \application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID,
-            $application->get_id());
+            new PropertyConditionVariable(
+                \application\atlantis\application\right\Right :: class_name(),
+                \application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID),
+            new StaticConditionVariable($application->get_id()));
+
         $parameters = DataClassRetrievesParameters :: generate($condition);
+
         $rights = \application\atlantis\application\right\DataManager :: retrieves(
             \application\atlantis\application\right\Right :: class_name(),
             $parameters);
@@ -41,15 +52,25 @@ class DiscoverySynchronization
         while ($right = $rights->next_result())
         {
             $condition = new EqualityCondition(
-                \application\discovery\instance\Instance :: PROPERTY_TYPE,
-                $right->get_code());
-            $module_instance = DataManager :: get_instance()->retrieve_module_instances($condition)->next_result();
+                new PropertyConditionVariable(
+                    \application\discovery\instance\Instance :: class_name(),
+                    \application\discovery\instance\Instance :: PROPERTY_TYPE),
+                new StaticConditionVariable($right->get_code()));
+
+            $module_instance = \application\discovery\instance\DataManager :: retrieve(
+                \application\discovery\instance\Instance :: class_name(),
+                new DataClassRetrieveParameters($condition));
+
             if ($module_instance instanceof \application\discovery\instance\Instance)
             {
                 $condition = new EqualityCondition(
-                    \application\atlantis\role\entitlement\Entitlement :: PROPERTY_RIGHT_ID,
-                    $right->get_id());
+                    new PropertyConditionVariable(
+                        \application\atlantis\role\entitlement\Entitlement :: class_name(),
+                        \application\atlantis\role\entitlement\Entitlement :: PROPERTY_RIGHT_ID),
+                    new StaticConditionVariable($right->get_id()));
+
                 $parameters = DataClassRetrievesParameters :: generate($condition);
+
                 $entitlements = \application\atlantis\role\entitlement\DataManager :: retrieves(
                     \application\atlantis\role\entitlement\Entitlement :: class_name(),
                     $parameters);
@@ -58,19 +79,28 @@ class DiscoverySynchronization
                 {
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
-                        \application\atlantis\role\entity\RoleEntity :: PROPERTY_ROLE_ID,
-                        $entitlement->get_role_id());
-                    $conditions[] = new InequalityCondition(
-                        \application\atlantis\role\entity\RoleEntity :: PROPERTY_START_DATE,
-                        InequalityCondition :: LESS_THAN_OR_EQUAL,
-                        time());
-                    $conditions[] = new InequalityCondition(
-                        \application\atlantis\role\entity\RoleEntity :: PROPERTY_END_DATE,
-                        InequalityCondition :: GREATER_THAN_OR_EQUAL,
-                        time());
-                    $condition = new AndCondition($conditions);
+                        new PropertyConditionVariable(
+                            \application\atlantis\role\entity\RoleEntity :: class_name(),
+                            \application\atlantis\role\entity\RoleEntity :: PROPERTY_ROLE_ID),
+                        new StaticConditionVariable($entitlement->get_role_id()));
 
+                    $conditions[] = new InequalityCondition(
+                        new PropertyConditionVariable(
+                            \application\atlantis\role\entity\RoleEntity :: class_name(),
+                            \application\atlantis\role\entity\RoleEntity :: PROPERTY_START_DATE),
+                        InequalityCondition :: LESS_THAN_OR_EQUAL,
+                        new StaticConditionVariable(time()));
+
+                    $conditions[] = new InequalityCondition(
+                        new PropertyConditionVariable(
+                            \application\atlantis\role\entity\RoleEntity :: class_name(),
+                            \application\atlantis\role\entity\RoleEntity :: PROPERTY_END_DATE),
+                        InequalityCondition :: GREATER_THAN_OR_EQUAL,
+                        new StaticConditionVariable(time()));
+
+                    $condition = new AndCondition($conditions);
                     $parameters = DataClassRetrievesParameters :: generate($condition);
+
                     $entities = \application\atlantis\role\entity\DataManager :: retrieves(
                         \application\atlantis\role\entity\RoleEntity :: class_name(),
                         $parameters);
@@ -78,38 +108,10 @@ class DiscoverySynchronization
                     while ($entity = $entities->next_result())
                     {
                         $context = $entity->get_context();
-                        $codes = array();
-                        switch ($context->get_context_type())
-                        {
-                            case 0 :
-                                $codes[] = 'CA';
-                                break;
-                            case 1 :
-                                $codes[] = 'AY_' . $context->get_context_name();
-                                break;
-                            case 2 :
-                                $codes[] = 'DEP_' . $context->get_context_id();
-                                break;
-                            case 3 :
-                                $codes[] = 'TRA_OP_' . $context->get_context_id();
-                                $codes[] = 'TRA_STU_' . $context->get_context_id();
-                                break;
-                            case 4 :
-                                $codes[] = 'COU_OP_' . $context->get_context_id();
-                                $codes[] = 'COU_STU_' . $context->get_context_id();
-                                break;
-                        }
+                        $group = \group\DataManager :: retrieve_group_by_code($context->get_context_id());
 
-                        $condition = new InCondition(Group :: PROPERTY_CODE, $codes);
-                        $groups = \group\DataManager :: retrieves(
-                            \group\Group :: class_name(),
-                            new DataClassRetrievesParameters($condition));
-
-                        while ($group = $groups->next_result())
-                        {
-                            $new_entity_right_cache[] = $module_instance->get_id() . '_' . $entity->get_entity_type() .
-                                 '_' . $entity->get_entity_id() . '_' . $group->get_id();
-                        }
+                        $new_entity_right_cache[] = $module_instance->get_id() . '_' . $entity->get_entity_type() . '_' .
+                             $entity->get_entity_id() . '_' . $group->get_id();
                     }
                 }
             }
@@ -120,7 +122,13 @@ class DiscoverySynchronization
 
         foreach ($to_delete as $entity_right_id => $entity)
         {
-            DataManager :: get_instance()->delete_rights_group_entity_rights($entity_right_id);
+            $condition = new EqualityCondition(
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: PROPERTY_ID),
+                new StaticConditionVariable($entity_right_id));
+
+            DataManager :: deletes(RightsGroupEntityRight :: class_name(), $condition);
         }
 
         foreach ($to_add as $key => $entity)
