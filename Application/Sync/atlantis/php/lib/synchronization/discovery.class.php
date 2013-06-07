@@ -107,8 +107,9 @@ class DiscoverySynchronization
 
                     while ($entity = $entities->next_result())
                     {
-                        $context = $entity->get_context();
-                        $group = \group\DataManager :: retrieve_group_by_code($context->get_context_id());
+                        $group = \group\DataManager :: retrieve_by_id(
+                            \group\Group :: class_name(),
+                            $entity->get_context());
 
                         $new_entity_right_cache[] = $module_instance->get_id() . '_' . $entity->get_entity_type() . '_' .
                              $entity->get_entity_id() . '_' . $group->get_id();
