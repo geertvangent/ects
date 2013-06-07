@@ -13,6 +13,8 @@ use common\libraries\Translation;
 use common\libraries\ToolbarItem;
 use common\libraries\ActionBarRenderer;
 use common\libraries\NewObjectTableSupport;
+use common\libraries\PropertyConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport
 {
@@ -29,7 +31,11 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
             $search_conditions = array();
 
             $search_conditions[] = new PatternMatchCondition(
-                    \application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME, '*' . $query . '*');
+                new PropertyConditionVariable(
+                    \application\atlantis\context\Context :: class_name(),
+                    \application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME),
+                '*' . $query . '*');
+
             $conditions[] = new OrCondition($search_conditions);
         }
         if ($this->get_context() != 0)
@@ -45,10 +51,12 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
             $context->set_context_name(Translation :: get('Root'));
         }
 
-        $conditions[] = new EqualityCondition(\application\atlantis\context\Context :: PROPERTY_PARENT_ID,
-                $context->get_context_id());
-        $conditions[] = new EqualityCondition(\application\atlantis\context\Context :: PROPERTY_PARENT_TYPE,
-                $context->get_context_type());
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(
+                \application\atlantis\context\Context :: class_name(),
+                \application\atlantis\context\Context :: PROPERTY_PARENT_ID),
+            new StaticConditionVariable($context->get_id()));
+
         return new AndCondition($conditions);
     }
 
@@ -92,18 +100,19 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         {
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
             $this->action_bar->add_common_action(
-                    new ToolbarItem(Translation :: get('TypeName', null, '\application\atlantis\role\entity'),
-                            Theme :: get_image_path('\application\atlantis\role\entity') . 'logo/16.png',
-                            $this->get_url(
-                                    array(
-                                            \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE,
-                                            \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY,
-                                            \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE,
-                                            Manager :: PARAM_CONTEXT_ID => $this->get_context())),
-                            ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+                new ToolbarItem(
+                    Translation :: get('TypeName', null, '\application\atlantis\role\entity'),
+                    Theme :: get_image_path('\application\atlantis\role\entity') . 'logo/16.png',
+                    $this->get_url(
+                        array(
+                            \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE,
+                            \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY,
+                            \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE,
+                            Manager :: PARAM_CONTEXT_ID => $this->get_context())),
+                    ToolbarItem :: DISPLAY_ICON_AND_LABEL));
 
             $this->action_bar->set_search_url(
-                    $this->get_url(array(Manager :: PARAM_CONTEXT_ID => $this->get_context())));
+                $this->get_url(array(Manager :: PARAM_CONTEXT_ID => $this->get_context())));
         }
         return $this->action_bar;
     }

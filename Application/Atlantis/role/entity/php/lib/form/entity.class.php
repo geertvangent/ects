@@ -66,7 +66,7 @@ class EntityForm extends FormValidator
             new AdvancedElementFinderElementType(
                 'contexts',
                 Translation :: get('Contexts'),
-                'application\atlantis\context',
+                'application\atlantis\role\entity',
                 'contexts_feed',
                 array()));
 

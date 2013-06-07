@@ -35,13 +35,14 @@ class CreatorComponent extends Manager
         {
             $values = $form->exportValues();
             $failures = 0;
+
             foreach ($values['entity'] as $entity_type => $entity_ids)
             {
                 foreach ($entity_ids as $entity_id)
                 {
                     foreach ($values['role']['role'] as $role)
                     {
-                        foreach ($values['context']['context'] as $context)
+                        foreach ($values['context'][NewPlatformGroupEntity :: ENTITY_TYPE] as $context)
                         {
                             $new_start_date = Utilities :: time_from_datepicker_without_timepicker(
                                 $values['start_date']);

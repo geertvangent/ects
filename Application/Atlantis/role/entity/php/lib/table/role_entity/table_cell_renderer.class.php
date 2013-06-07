@@ -35,7 +35,7 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
                 return $object->get_role()->get_name();
                 break;
             case \application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME :
-                return $object->get_context()->get_context_name();
+                return $object->get_context()->get_fully_qualified_name();
                 break;
             case RoleEntity :: PROPERTY_START_DATE :
                 $date_format = Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES);

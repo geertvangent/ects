@@ -3,7 +3,6 @@ namespace application\atlantis\context;
 
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\Translation;
-use common\libraries\AndCondition;
 use common\libraries\Utilities;
 use common\libraries\Path;
 use common\libraries\EqualityCondition;
@@ -12,6 +11,8 @@ use common\libraries\OptionsMenuRenderer;
 use common\libraries\TreeMenuRenderer;
 use HTML_Menu;
 use HTML_Menu_ArrayRenderer;
+use common\libraries\PropertyConditionVariable;
+use common\libraries\StaticConditionVariable;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -63,13 +64,6 @@ class Menu extends HTML_Menu
 
         if ($current_category == '0' || is_null($current_category))
         {
-            // $conditions = array();
-            // $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, 0);
-            // $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, 0);
-            // $condition = new AndCondition($conditions);
-
-            // $context = DataManager :: retrieve(Context :: class_name(), new DataClassRetrieveParameters($condition));
-
             $context = new Context();
             $context->set_id(0);
             $context->set_context_type(0);
@@ -102,7 +96,7 @@ class Menu extends HTML_Menu
 
         if (! $include_root)
         {
-            return $this->get_menu_items($context->get_context_id(), $context->get_context_type());
+            return $this->get_menu_items($context->get_id());
         }
         else
         {
@@ -112,7 +106,7 @@ class Menu extends HTML_Menu
             $menu_item['title'] = $context->get_context_name();
             $menu_item['url'] = $this->get_url($context->get_id());
 
-            $sub_menu_items = $this->get_menu_items($context->get_context_id(), $context->get_context_type());
+            $sub_menu_items = $this->get_menu_items($context->get_id());
             if (count($sub_menu_items) > 0)
             {
                 $menu_item['sub'] = $sub_menu_items;
@@ -132,17 +126,16 @@ class Menu extends HTML_Menu
      * @return array An array with all menu items. The structure of this array is the structure needed by
      *         PEAR::HTML_Menu, on which this class is based.
      */
-    private function get_menu_items($parent_id = 0, $parent_type = 0)
+    private function get_menu_items($parent_id = 0)
     {
         $current_category = $this->current_category;
 
         $show_complete_tree = $this->show_complete_tree;
         $hide_current_category = $this->hide_current_category;
 
-        $conditions = array();
-        $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_ID, $parent_id);
-        $conditions[] = new EqualityCondition(Context :: PROPERTY_PARENT_TYPE, $parent_type);
-        $condition = new AndCondition($conditions);
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_ID),
+            new StaticConditionVariable($parent_id));
 
         $contexts = DataManager :: retrieves(
             Context :: class_name(),
@@ -151,6 +144,7 @@ class Menu extends HTML_Menu
                 null,
                 null,
                 array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME))));
+
         while ($context = $contexts->next_result())
         {
             $context_id = $context->get_id();
@@ -166,9 +160,7 @@ class Menu extends HTML_Menu
                 {
                     if ($context->has_children())
                     {
-                        $menu_item['sub'] = $this->get_menu_items(
-                            $context->get_context_id(),
-                            $context->get_context_type());
+                        $menu_item['sub'] = $this->get_menu_items($context->get_id());
                     }
                 }
                 else
