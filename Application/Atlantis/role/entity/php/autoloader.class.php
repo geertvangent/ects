@@ -11,9 +11,9 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
+         'EntityAjaxContextsFeed' => '/ajax/contexts_feed.class.php',
          'EntityAjaxPlatformGroupEntityFeed' => '/ajax/platform_group_entity_feed.class.php',
          'EntityAjaxUserEntityFeed' => '/ajax/user_entity_feed.class.php',
-         'EntityAjaxContextsFeed' => '/ajax/contexts_feed.class.php',
          'DataManager' => '/lib/data_manager.class.php',
          'RoleEntity' => '/lib/data_class/role_entity.class.php',
          'RoleEntityTracker' => '/lib/data_class/role_entity_tracker.class.php',

@@ -34,7 +34,7 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
             case \application\atlantis\role\Role :: PROPERTY_NAME :
                 return $object->get_role()->get_name();
                 break;
-            case \application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME :
+            case \group\Group :: PROPERTY_NAME :
                 return $object->get_context()->get_fully_qualified_name();
                 break;
             case RoleEntity :: PROPERTY_START_DATE :
