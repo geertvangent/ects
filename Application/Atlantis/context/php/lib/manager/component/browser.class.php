@@ -31,30 +31,24 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
             $search_conditions = array();
 
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(
-                    \application\atlantis\context\Context :: class_name(),
-                    \application\atlantis\context\Context :: PROPERTY_CONTEXT_NAME),
+                new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_NAME),
                 '*' . $query . '*');
 
             $conditions[] = new OrCondition($search_conditions);
         }
         if ($this->get_context() != 0)
         {
-            $context = DataManager :: retrieve_by_id(Context :: class_name(), (int) $this->get_context());
+            $context = \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), (int) $this->get_context());
         }
         else
         {
-            $context = new Context();
+            $context = new \group\Group();
             $context->set_id(0);
-            $context->set_context_type(0);
-            $context->set_context_id(0);
-            $context->set_context_name(Translation :: get('Root'));
+            $context->set_name(Translation :: get('Root'));
         }
 
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(
-                \application\atlantis\context\Context :: class_name(),
-                \application\atlantis\context\Context :: PROPERTY_PARENT_ID),
+            new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($context->get_id()));
 
         return new AndCondition($conditions);
