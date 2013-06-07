@@ -104,9 +104,6 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
                             \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE,
                             Manager :: PARAM_CONTEXT_ID => $this->get_context())),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
-
-            $this->action_bar->set_search_url(
-                $this->get_url(array(Manager :: PARAM_CONTEXT_ID => $this->get_context())));
         }
         return $this->action_bar;
     }
