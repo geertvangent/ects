@@ -13,13 +13,16 @@ use common\libraries\DynamicTabsRenderer;
 use common\libraries\Display;
 use common\libraries\Breadcrumb;
 use common\libraries\BreadcrumbTrail;
+use application\discovery\AccessAllowedInterface;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
 
     public function render()
     {
-        if (! Rights :: is_allowed(
+        $application_is_allowed = $this->get_application() instanceof AccessAllowedInterface;
+
+        if (! $application_is_allowed && ! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
@@ -538,7 +541,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $image = Theme :: get_image(
                     'type/1_na',
                     'png',
-                    Translation :: get('TeachersNotAvailable', null, 'application\discovery\module\photo
+                    Translation :: get(
+                        'TeachersNotAvailable',
+                        null,
+                        'application\discovery\module\photo
                     '),
                     null,
                     ToolbarItem :: DISPLAY_ICON,
@@ -548,7 +554,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                 LegendTable :: get_instance()->add_symbol(
                     $image,
-                    Translation :: get('TeachersNotAvailable', null, 'application\discovery\module\photo
+                    Translation :: get(
+                        'TeachersNotAvailable',
+                        null,
+                        'application\discovery\module\photo
                     '),
                     Translation :: get('TypeName', null, 'application\discovery\module\photo'));
             }

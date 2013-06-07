@@ -13,6 +13,7 @@ class Autoloader
          'Autoloader' => '/autoloader.class.php',
          'DataConnector' => '/lib/data_connector.class.php',
          'DataManager' => '/lib/data_manager.class.php',
+         'AccessAllowedInterface' => '/lib/access_allowed_interface.class.php',
          'DataManagerInterface' => '/lib/data_manager_interface.class.php',
          'DataSource' => '/lib/data_source.class.php',
          'DiscoveryItem' => '/lib/discovery_item.class.php',
