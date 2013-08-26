@@ -98,6 +98,16 @@ class Manager extends WebApplication
 
         $package_list->add_child($module_list);
 
+        if (! CommonDataManager :: get_registration(self :: context() . '\data_source') || $include_installed)
+        {
+            $package_list->add_package(self :: context() . '\data_source');
+        }
+
+        if (! CommonDataManager :: get_registration(self :: context() . '\instance') || $include_installed)
+        {
+            $package_list->add_package(self :: context() . '\instance');
+        }
+
         return $package_list;
     }
 }
