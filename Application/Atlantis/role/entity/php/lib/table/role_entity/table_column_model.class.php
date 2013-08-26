@@ -24,11 +24,11 @@ class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
         }
         if (! $this->get_component()->has_role_id())
         {
-            $this->add_column(new ObjectTableColumn(\application\atlantis\role\Role :: PROPERTY_NAME, false));
+            $this->add_column(new StaticTableColumn(Translation :: get('Role')));
         }
         if (! $this->get_component()->has_context_id())
         {
-            $this->add_column(new ObjectTableColumn(\group\Group :: PROPERTY_NAME, false));
+            $this->add_column(new StaticTableColumn(Translation :: get('Context')));
         }
 
         $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_START_DATE, false));
