@@ -11,7 +11,6 @@ use common\libraries\Translation;
 use common\libraries\PropertyConditionVariable;
 use common\libraries\DataClassRetrievesParameters;
 use common\libraries\PlatformSetting;
-use common\libraries\EqualityCondition;
 use common\libraries\InequalityCondition;
 use common\libraries\StaticConditionVariable;
 
