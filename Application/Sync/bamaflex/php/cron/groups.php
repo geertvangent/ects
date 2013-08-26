@@ -10,7 +10,7 @@ require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
 try
 {
     ini_set("memory_limit", "-1");
-    ini_set("max_execution_time", "18000");
+    ini_set("max_execution_time", "0");
     echo '<pre>';
     Synchronization :: log('Group sync started', date('c', time()));
 

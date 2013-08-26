@@ -12,7 +12,7 @@ class GroupsComponent extends Manager implements DelegateComponent
     public function run()
     {
         ini_set("memory_limit", "-1");
-        ini_set("max_execution_time", "18000");
+        ini_set("max_execution_time", "0");
         header('Content-Type: text/html; charset=utf-8');
 
         try

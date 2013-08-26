@@ -109,7 +109,7 @@ class DiscoverySynchronization
                     {
                         $group = \group\DataManager :: retrieve_by_id(
                             \group\Group :: class_name(),
-                            $entity->get_context());
+                            $entity->get_context()->get_id());
 
                         $new_entity_right_cache[] = $module_instance->get_id() . '_' . $entity->get_entity_type() . '_' .
                              $entity->get_entity_id() . '_' . $group->get_id();

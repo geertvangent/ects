@@ -52,20 +52,39 @@ class Manager extends WebApplication
             self :: context(),
             Translation :: get('TypeName', null, __NAMESPACE__),
             Theme :: get_image_path() . 'logo/16.png');
+
         if (! CommonDataManager :: get_registration(\application\ehb_sync\bamaflex\Manager :: context()) ||
              $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\bamaflex\Manager :: context());
         }
+
         if (! CommonDataManager :: get_registration(\application\ehb_sync\atlantis\Manager :: context()) ||
              $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\atlantis\Manager :: context());
         }
+
         if (! CommonDataManager :: get_registration(\application\ehb_sync\cas\Manager :: context()) || $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\cas\Manager :: context());
         }
+
+        $cas_list = new \common\libraries\package\PackageList(
+            self :: context() . '\cas',
+            Translation :: get('Cas', null, __NAMESPACE__));
+
+        if (! CommonDataManager :: get_registration(self :: context() . '\cas\data') || $include_installed)
+        {
+            $cas_list->add_package(self :: context() . '\cas\data');
+        }
+
+        if (! CommonDataManager :: get_registration(self :: context() . '\cas\storage') || $include_installed)
+        {
+            $cas_list->add_package(self :: context() . '\cas\storage');
+        }
+
+        $package_list->add_child($cas_list);
 
         return $package_list;
     }

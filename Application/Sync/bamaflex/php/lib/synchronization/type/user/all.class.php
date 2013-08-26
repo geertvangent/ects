@@ -119,14 +119,23 @@ class AllUserSynchronization extends UserSynchronization
         {
             if ($user != $user_copy)
             {
-                if ($user->update())
+                try
                 {
-                    echo 'Updated:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
-                         $utf_last_name . "\n";
+                    if ($user->update())
+                    {
+                        echo 'Updated:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
+                             $utf_last_name . "\n";
+                    }
+                    else
+                    {
+                        echo '++ FAIL:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
+                             $utf_last_name . "\n";
+                    }
                 }
-                else
+                catch (\Exception $exception)
                 {
-                    echo '++ Failed:' . $utf_first_name . ' ' . $utf_last_name . "\n";
+                    echo '++ FAIL:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
+                         $utf_last_name . "\n";
                 }
             }
 
@@ -144,12 +153,14 @@ class AllUserSynchronization extends UserSynchronization
                 }
                 else
                 {
-                    echo '++ Failed: ' . $utf_first_name . ' ' . $utf_last_name . "\n";
+                    echo '++ FAIL:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
+                         $utf_last_name . "\n";
                 }
             }
             catch (\Exception $exception)
             {
-                echo '++ Failed: ' . $utf_first_name . ' ' . $utf_last_name . "\n";
+                echo '++ FAIL:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
+                     $utf_last_name . "\n";
             }
 
             unset($user);
