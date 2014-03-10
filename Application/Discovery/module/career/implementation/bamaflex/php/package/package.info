@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+	<package>
+		<name>Discovery</name>
+		<code>discovery</code>
+		<section>application</section>
+		<context>application\discovery\module\career\implementation\bamaflex</context>
+		<category>research</category>
+		<authors>
+			<author>
+				<name>Hans De Bisschop</name>
+				<email>hans.de.bisschop@ehb.be</email>
+				<company>Erasmushogeschool Brussel</company>
+			</author>
+		</authors>
+		<version>3.0.0</version>
+		<cycle>
+			<phase>general_availability</phase>
+			<realm>main</realm>
+		</cycle>
+		<filename>pool/main/application/d/discovery/discovery-1.0.0.zip</filename>
+		<size></size>
+		<md5></md5>
+		<sha1></sha1>
+		<sha256></sha256>
+		<sha512></sha512>
+		<tagline></tagline>
+		<description>NASA's Space Shuttle program, officially called Space
+			Transportation System (STS), is the United States government's current manned
+			launch vehicle. The winged Space Shuttle orbiter is launched vertically,
+			usually carrying five to seven astronauts (although eight have been carried)
+			and up to 50,000 lb (22 700 kg) of payload into low earth orbit. When its
+			mission is complete, the shuttle can independently move itself out of orbit
+			using its Maneuvering System (it orients itself appropriately and fires its
+			main OMS engines, thus slowing it down) and re-enter the Earth's atmosphere.
+			During descent and landing the orbiter acts as a re-entry vehicle and a
+			glider, using its OMS system and flight surfaces to make adjustments.</description>
+		<homepage></homepage>
+		<dependencies>
+			<server>
+				<dependency>
+					<id>php</id>
+					<version operator="4">5.3.0</version>
+					<relation>1</relation>
+				</dependency>
+			</server>
+		</dependencies>
+	</package>
+</packages>

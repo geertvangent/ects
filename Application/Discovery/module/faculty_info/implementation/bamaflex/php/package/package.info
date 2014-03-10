@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+	<package>
+		<name>Discovery</name>
+		<code>discovery</code>
+		<section>application</section>
+		<context>application\discovery\module\faculty_info\implementation\bamaflex</context>
+		<category>research</category>
+		<authors>
+			<author>
+				<name>Hans De Bisschop</name>
+				<email>hans.de.bisschop@ehb.be</email>
+				<company>Erasmushogeschool Brussel</company>
+			</author>
+		</authors>
+		<version>3.0.0</version>
+		<cycle>
+			<phase>general_availability</phase>
+			<realm>main</realm>
+		</cycle>
+		<filename>pool/main/application/d/discovery/discovery-1.0.0.zip</filename>
+		<size></size>
+		<md5></md5>
+		<sha1></sha1>
+		<sha256></sha256>
+		<sha512></sha512>
+		<tagline></tagline>
+		<description></description>
+		<homepage></homepage>
+		<dependencies>
+			<server>
+				<dependency>
+					<id>php</id>
+					<version operator="4">5.3.0</version>
+					<relation>1</relation>
+				</dependency>
+			</server>
+		</dependencies>
+	</package>
+</packages>
