@@ -7,6 +7,7 @@ use common\libraries\BreadcrumbTrail;
 use common\libraries\Request;
 use common\libraries\Display;
 use application\discovery\module\photo\DataManager;
+use application\discovery\AccessAllowedInterface;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -20,7 +21,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = Request :: get(
             \application\discovery\Manager :: PARAM_MODULE_ID);
 
-        if (! Rights :: is_allowed(
+        $application_is_allowed = $this->get_application() instanceof AccessAllowedInterface;
+
+        if (! $application_is_allowed && ! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))

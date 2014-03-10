@@ -13,7 +13,7 @@
 				<company>Erasmushogeschool Brussel</company>
 			</author>
 		</authors>
-		<version>3.0.0</version>
+		<version>4.0.0</version>
 		<cycle>
 			<phase>general_availability</phase>
 			<realm>main</realm>

@@ -49,7 +49,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                 $contracts = $this->get_contracts();
                 $last_enrollment = array_shift($contracts);
-                $contract = $last_enrollment[0]->get_contract_id();
+                $last_enrollment = $last_enrollment[0];
+                $contract = ($last_enrollment->get_contract_id() ? $last_enrollment->get_contract_id() : 0);
             }
 
             $html[] = $this->get_enrollment_courses($contract);
