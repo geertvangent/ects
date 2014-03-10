@@ -129,9 +129,6 @@ class HomeComponent extends Manager implements DelegateComponent
         // Context tab
         $namespace = \application\atlantis\context\Manager :: context();
         $actions = array();
-        $actions[] = new DynamicSearchAction(
-            $namespace,
-            $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CONTEXT)));
         $actions[] = new DynamicAction(
             Translation :: get('BrowseContexts', null, $namespace),
             Translation :: get('BrowseContextsDescription', null, $namespace),

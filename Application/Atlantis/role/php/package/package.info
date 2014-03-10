@@ -7,7 +7,7 @@
 		<section>application</section>
 		<category>research</category>
 		<authors></authors>
-		<version>3.0.0</version>
+		<version>4.0.0</version>
 		<cycle>
 			<phase>general_availability</phase>
 			<realm>main</realm>
@@ -28,7 +28,7 @@
 		<pre-depends>
 			<dependency type="registration">
 				<id>application\atlantis</id>
-				<version operator="4">3.0.0</version>
+				<version operator="4">4.0.0</version>
 			</dependency>
 		</pre-depends>
 	</package>

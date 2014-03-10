@@ -282,9 +282,7 @@ class RoleEntityTracker extends DataClass
     {
         if (! isset($this->context))
         {
-            $this->context = \application\atlantis\context\DataManager :: retrieve(
-                \application\atlantis\context\Context :: class_name(),
-                (int) $this->get_context_id());
+            $this->context = \group\DataManager :: retrieve(\group\Group :: class_name(), (int) $this->get_context_id());
         }
         return $this->context;
     }
