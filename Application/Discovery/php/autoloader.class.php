@@ -11,9 +11,9 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
+         'AccessAllowedInterface' => '/lib/access_allowed_interface.class.php',
          'DataConnector' => '/lib/data_connector.class.php',
          'DataManager' => '/lib/data_manager.class.php',
-         'AccessAllowedInterface' => '/lib/access_allowed_interface.class.php',
          'DataManagerInterface' => '/lib/data_manager_interface.class.php',
          'DataSource' => '/lib/data_source.class.php',
          'DiscoveryItem' => '/lib/discovery_item.class.php',
@@ -25,10 +25,10 @@ class Autoloader
          'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
          'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
+         'CodeComponent' => '/lib/manager/component/code.class.php',
          'DataSourceComponent' => '/lib/manager/component/data_source.class.php',
          'ModuleComponent' => '/lib/manager/component/module.class.php',
          'ViewerComponent' => '/lib/manager/component/viewer.class.php',
-         'CodeComponent' => '/lib/manager/component/code.class.php',
          'AbstractRenditionImplementation' => '/lib/rendition/abstract_rendition_implementation.class.php',
          'DummyRenditionImplementation' => '/lib/rendition/dummy_rendition_implementation.class.php',
          'Rendition' => '/lib/rendition/rendition.class.php',
