@@ -11,6 +11,7 @@ use PHPExcel;
 
 require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
+
 {
 
     /**

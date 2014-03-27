@@ -1,14 +1,22 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-class LoginData extends Data
+use common\libraries\DataClass;
+
+class LoginData extends DataClass
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_PLATFORM = 'platform';
-    const PROPERTY_DATE = 'date';
     const PROPERTY_USER_ID = 'user_id';
     const PROPERTY_USER_OFFICIAL_CODE = 'user_official_code';
     const PROPERTY_USER_EMAIL = 'user_email';
+
+    public static function get_filters($filters = array())
+    {
+        $filters[] = self :: PROPERTY_PLATFORM;
+
+        return parent :: get_filters($filters);
+    }
 
     public function get_platform()
     {
@@ -18,16 +26,6 @@ class LoginData extends Data
     public function set_platform($platform)
     {
         $this->set_default_property(self :: PROPERTY_PLATFORM, $platform);
-    }
-
-    public function get_date()
-    {
-        return $this->get_default_property(self :: PROPERTY_DATE);
-    }
-
-    public function set_date($date)
-    {
-        $this->set_default_property(self :: PROPERTY_DATE, $date);
     }
 
     public function get_user_id()
@@ -63,7 +61,6 @@ class LoginData extends Data
     public static function get_default_property_names($extended_property_names = array())
     {
         $extended_property_names[] = self :: PROPERTY_PLATFORM;
-        $extended_property_names[] = self :: PROPERTY_DATE;
         $extended_property_names[] = self :: PROPERTY_USER_ID;
         $extended_property_names[] = self :: PROPERTY_USER_OFFICIAL_CODE;
         $extended_property_names[] = self :: PROPERTY_USER_EMAIL;

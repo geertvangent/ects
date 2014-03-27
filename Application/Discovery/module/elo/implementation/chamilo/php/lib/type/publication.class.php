@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-class ContentObjectData extends Data
+class PublicationData extends TypeData
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_PLATFORM = 'platform';
@@ -10,10 +10,20 @@ class ContentObjectData extends Data
     const PROPERTY_TOOL = 'tool';
     const PROPERTY_OBJECT_TYPE = 'object_type';
     const PROPERTY_NAME = 'name';
-    const PROPERTY_DATE = 'date';
     const PROPERTY_USER_ID = 'user_id';
     const PROPERTY_USER_OFFICIAL_CODE = 'user_official_code';
     const PROPERTY_USER_EMAIL = 'user_email';
+
+    public static function get_filters($filters = array())
+    {
+        $filters[] = self :: PROPERTY_PLATFORM;
+        $filters[] = self :: PROPERTY_APPLICATION;
+        $filters[] = self :: PROPERTY_COURSE;
+        $filters[] = self :: PROPERTY_TOOL;
+        $filters[] = self :: PROPERTY_OBJECT_TYPE;
+
+        return parent :: get_filters($filters);
+    }
 
     public function get_platform()
     {
@@ -75,16 +85,6 @@ class ContentObjectData extends Data
         $this->set_default_property(self :: PROPERTY_NAME, $name);
     }
 
-    public function get_date()
-    {
-        return $this->get_default_property(self :: PROPERTY_DATE);
-    }
-
-    public function set_date($date)
-    {
-        $this->set_default_property(self :: PROPERTY_DATE, $date);
-    }
-
     public function get_user_id()
     {
         return $this->get_default_property(self :: PROPERTY_USER_ID);
@@ -123,7 +123,6 @@ class ContentObjectData extends Data
         $extended_property_names[] = self :: PROPERTY_TOOL;
         $extended_property_names[] = self :: PROPERTY_OBJECT_TYPE;
         $extended_property_names[] = self :: PROPERTY_NAME;
-        $extended_property_names[] = self :: PROPERTY_DATE;
         $extended_property_names[] = self :: PROPERTY_USER_ID;
         $extended_property_names[] = self :: PROPERTY_USER_OFFICIAL_CODE;
         $extended_property_names[] = self :: PROPERTY_USER_EMAIL;

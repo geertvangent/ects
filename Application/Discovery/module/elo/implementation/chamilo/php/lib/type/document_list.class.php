@@ -1,16 +1,26 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-class DocumentListData extends Data
+use common\libraries\DataClass;
+
+class DocumentListData extends DataClass
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_COURSE = 'course';
     const PROPERTY_TOOL = 'tool';
-    const PROPERTY_DATE = 'date';
     const PROPERTY_SIZE = 'size';
     const PROPERTY_USER_ID = 'user_id';
     const PROPERTY_USER_OFFICIAL_CODE = 'user_official_code';
     const PROPERTY_USER_EMAIL = 'user_email';
+
+    public static function get_filters($filters = array())
+    {
+        $filters[] = self :: PROPERTY_COURSE;
+        $filters[] = self :: PROPERTY_TOOL;
+        $filters[] = self :: PROPERTY_SIZE;
+
+        return parent :: get_filters($filters);
+    }
 
     public function get_course()
     {
@@ -30,16 +40,6 @@ class DocumentListData extends Data
     public function set_tool($tool)
     {
         $this->set_default_property(self :: PROPERTY_TOOL, $tool);
-    }
-
-    public function get_date()
-    {
-        return $this->get_default_property(self :: PROPERTY_DATE);
-    }
-
-    public function set_date($date)
-    {
-        $this->set_default_property(self :: PROPERTY_DATE, $date);
     }
 
     public function get_size()
@@ -86,7 +86,6 @@ class DocumentListData extends Data
     {
         $extended_property_names[] = self :: PROPERTY_COURSE;
         $extended_property_names[] = self :: PROPERTY_TOOL;
-        $extended_property_names[] = self :: PROPERTY_DATE;
         $extended_property_names[] = self :: PROPERTY_SIZE;
         $extended_property_names[] = self :: PROPERTY_USER_ID;
         $extended_property_names[] = self :: PROPERTY_USER_OFFICIAL_CODE;
