@@ -11,15 +11,15 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'DataManager' => '/lib/data_manager.class.php',
-         'DataManagerInterface' => '/lib/data_manager_interface.class.php',
-         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
-         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
          'AtlantisComponent' => '/lib/manager/component/atlantis.class.php',
          'BamaflexComponent' => '/lib/manager/component/bamaflex.class.php',
          'BrowserComponent' => '/lib/manager/component/browser.class.php',
          'CasComponent' => '/lib/manager/component/cas.class.php',
+         'DataManager' => '/lib/storage/data_manager/data_manager.class.php',
+         'DataManagerInterface' => '/lib/storage/data_manager/data_manager_interface.class.php',
+         'DoctrineDataManager' => '/lib/storage/data_manager/implementation/doctrine.class.php',
+         'Mdb2DataManager' => '/lib/storage/data_manager/implementation/mdb2.class.php',
          'Activator' => '/package/activate/activator.class.php',
          'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'
