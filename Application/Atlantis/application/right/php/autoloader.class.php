@@ -11,10 +11,6 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'DataManager' => '/lib/data_manager.class.php',
-         'Right' => '/lib/data_class/right.class.php',
-         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
-         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'RightForm' => '/lib/form/right.class.php',
          'RoleForm' => '/lib/form/role.class.php',
          'Manager' => '/lib/manager/manager.class.php',
@@ -24,6 +20,10 @@ class Autoloader
          'DeleterComponent' => '/lib/manager/component/deleter.class.php',
          'EditorComponent' => '/lib/manager/component/editor.class.php',
          'RightsComponent' => '/lib/manager/component/rights.class.php',
+         'DataManager' => '/lib/table/data_manager.class.php',
+         'Right' => '/lib/table/data_class/right.class.php',
+         'DoctrineDataManager' => '/lib/table/data_manager/doctrine.class.php',
+         'Mdb2DataManager' => '/lib/table/data_manager/mdb2.class.php',
          'RightTable' => '/lib/table/right/right_table.class.php',
          'RightTableCellRenderer' => '/lib/table/right/right_table_cell_renderer.class.php',
          'RightTableColumnModel' => '/lib/table/right/right_table_column_model.class.php',

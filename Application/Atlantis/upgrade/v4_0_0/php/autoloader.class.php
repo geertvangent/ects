@@ -9,7 +9,10 @@ class Autoloader
      *
      * @var multitype:string
      */
-    private static $map = array('Autoloader' => '/autoloader.class.php', 'Upgrader' => '/lib/upgrader.class.php');
+     private static $map = array(
+         'Autoloader' => '/autoloader.class.php',
+         'Upgrader' => '/lib/upgrader.class.php'
+    );
 
     /**
      * Try to load the class
@@ -38,5 +41,6 @@ class Autoloader
     {
         return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
     }
+
 }
 ?>

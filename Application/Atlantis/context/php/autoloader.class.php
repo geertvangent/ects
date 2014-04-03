@@ -11,12 +11,12 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'DataManager' => '/lib/data_manager.class.php',
          'Menu' => '/lib/menu.class.php',
-         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
-         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
          'BrowserComponent' => '/lib/manager/component/browser.class.php',
+         'DataManager' => '/lib/storage/data_manager.class.php',
+         'DoctrineDataManager' => '/lib/storage/data_manager/doctrine.class.php',
+         'Mdb2DataManager' => '/lib/storage/data_manager/mdb2.class.php',
          'ContextTable' => '/lib/table/context/table.class.php',
          'ContextTableCellRenderer' => '/lib/table/context/table_cell_renderer.class.php',
          'ContextTableColumnModel' => '/lib/table/context/table_column_model.class.php',

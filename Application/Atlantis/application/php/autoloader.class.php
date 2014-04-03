@@ -11,10 +11,6 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'DataManager' => '/lib/data_manager.class.php',
-         'Application' => '/lib/data_class/application.class.php',
-         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
-         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'ApplicationForm' => '/lib/form/application.class.php',
          'Manager' => '/lib/manager/manager.class.php',
          'BrowserComponent' => '/lib/manager/component/browser.class.php',
@@ -24,6 +20,10 @@ class Autoloader
          'ListerComponent' => '/lib/manager/component/lister.class.php',
          'RightsComponent' => '/lib/manager/component/rights.class.php',
          'RightsManagerComponent' => '/lib/manager/component/rights_manager.class.php',
+         'DataManager' => '/lib/storage/data_manager.class.php',
+         'Application' => '/lib/storage/data_class/application.class.php',
+         'DoctrineDataManager' => '/lib/storage/data_manager/doctrine.class.php',
+         'Mdb2DataManager' => '/lib/storage/data_manager/mdb2.class.php',
          'ApplicationTable' => '/lib/table/application/application_table.class.php',
          'ApplicationTableCellRenderer' => '/lib/table/application/application_table_cell_renderer.class.php',
          'ApplicationTableColumnModel' => '/lib/table/application/application_table_column_model.class.php',
