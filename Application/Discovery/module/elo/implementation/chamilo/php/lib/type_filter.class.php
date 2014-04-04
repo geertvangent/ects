@@ -2,9 +2,12 @@
 namespace application\discovery\module\elo\implementation\chamilo;
 
 use common\libraries\Translation;
-use application\discovery\module\elo\DataManager;
+use common\libraries\PropertyConditionVariable;
+use common\libraries\EqualityCondition;
+use common\libraries\StaticConditionVariable;
+use common\libraries\DateFormatConditionVariable;
 
-class TypeDataFilter
+abstract class TypeDataFilter
 {
     const DATE_DAY = 1;
     const DATE_WEEK = 2;
@@ -14,22 +17,11 @@ class TypeDataFilter
     const DATE_WEEKDAY = 6;
     const DATE_MONTH = 7;
 
-    private $rendition_implementation;
     private $type;
 
-    public function __construct($type, $rendition_implementation)
+    public function __construct($type)
     {
-        $this->rendition_implementation = $rendition_implementation;
-    }
-
-    public function get_rendition_implementation()
-    {
-        return $this->rendition_implementation;
-    }
-
-    public function set_rendition_implementation($rendition_implementation)
-    {
-        $this->rendition_implementation = $rendition_implementation;
+        $this->type = $type;
     }
 
     public function get_type()
@@ -42,10 +34,10 @@ class TypeDataFilter
         $this->type = $type;
     }
 
-    public static function factory($type, $rendition_implementation)
+    public static function factory($type)
     {
         $class_name = $type . 'Filter';
-        return new $class_name($type, $rendition_implementation);
+        return new $class_name($type);
     }
 
     public function get_options($filter)
@@ -57,9 +49,7 @@ class TypeDataFilter
                 break;
 
             default :
-                return DataManager :: get_instance($this->rendition_implementation->get_module())->retrieve_filter_options(
-                    $this->get_type(),
-                    $filter);
+                return DataManager :: retrieve_filter_options($this->get_type(), $filter);
                 break;
         }
     }
@@ -74,5 +64,80 @@ class TypeDataFilter
             self :: DATE_HOUR => Translation :: get('Hour'),
             self :: DATE_WEEKDAY => Translation :: get('WeekDay'),
             self :: DATE_MONTH => Translation :: get('Month'));
+    }
+
+    public function format_filter_option($filter, $value)
+    {
+        switch ($filter)
+        {
+            case TypeData :: PROPERTY_DATE :
+                return $value;
+                break;
+            default :
+                return $value;
+        }
+    }
+
+    public function get_filter_property($module_type, $filter, $value)
+    {
+        switch ($filter)
+        {
+            case TypeData :: PROPERTY_DATE :
+                return $this->get_date_filter_property($module_type, $filter, $value);
+                break;
+            default :
+                return new PropertyConditionVariable($module_type, $filter);
+        }
+    }
+
+    public function get_date_filter_property($module_type, $filter, $value)
+    {
+        $property = new PropertyConditionVariable($module_type, $filter);
+        switch ($value)
+        {
+            case self :: DATE_DAY :
+                $format = '%Y-%m-%d';
+                break;
+            case self :: DATE_WEEK :
+                $format = '%Y-%u';
+                break;
+            case self :: DATE_MONTH_YEAR :
+                $format = '%Y-%m';
+                break;
+            case self :: DATE_YEAR :
+                $format = '%Y';
+                break;
+            case self :: DATE_HOUR :
+                $format = '%H';
+                break;
+            case self :: DATE_WEEKDAY :
+                $format = '%W';
+                break;
+            case self :: DATE_MONTH :
+                $format = '%M';
+                break;
+        }
+        return new DateFormatConditionVariable($format, $property);
+    }
+
+    public function get_filter_condition($module_type, $filter, $value)
+    {
+        switch ($filter)
+        {
+            case TypeData :: PROPERTY_DATE :
+                return null;
+                break;
+            default :
+                if ($value == - 1)
+                {
+                    return null;
+                }
+                else
+                {
+                    return new EqualityCondition(
+                        new PropertyConditionVariable($module_type, $filter),
+                        new StaticConditionVariable($value));
+                }
+        }
     }
 }

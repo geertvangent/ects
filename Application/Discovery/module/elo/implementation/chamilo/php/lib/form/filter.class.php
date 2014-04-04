@@ -47,9 +47,10 @@ class FilterForm extends FormValidator
                 'select',
                 $filter,
                 Translation :: get('Filter' . Utilities :: underscores_to_camelcase($filter)),
-                TypeDataFilter :: factory($this->module_class_name, $this->rendition_implementation)->get_options(
+                TypeDataFilter :: factory($this->module_class_name)->get_options(
                     $filter),
                 array('class' => 'postback'));
+
         }
 
         $this->addElement(

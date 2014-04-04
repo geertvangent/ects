@@ -5,6 +5,7 @@ use common\libraries\Theme;
 use common\libraries\Translation;
 use common\libraries\NotAllowedException;
 use common\libraries\Utilities;
+use application\discovery\SortableTable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -30,6 +31,43 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $filters,
                 $this->get_application()->get_url(array(Module :: PARAM_MODULE_TYPE => $module_type)));
             $html[] = $form->display();
+
+            if ($form->validate())
+            {
+                $values = $form->exportValues();
+                foreach ($filters as $filter)
+                {
+                    $filter_values[$filter] = $values[$filter];
+                }
+                $data = DataManager :: retrieve_data($module_class_name, $filter_values);
+
+                $table_data = array();
+                foreach ($data as $row)
+                {
+                    $table_data_row = array();
+                    foreach ($row as $property => $value)
+                    {
+                        $table_data_row[] = TypeDataFilter :: factory($module_class_name)->format_filter_option(
+                            $property,
+                            $value);
+                    }
+
+                    $table_data[] = $table_data_row;
+                }
+
+                $table = new SortableTable($table_data);
+
+                foreach ($filters as $key => $filter)
+                {
+                    $table->set_header(
+                        $key,
+                        Translation :: get('Filter' . Utilities :: underscores_to_camelcase($filter)),
+                        false);
+                }
+                $table->set_header(count($filters), Translation :: get('Count'));
+
+                $html[] = $table->as_html();
+            }
         }
         else
         {
