@@ -70,9 +70,6 @@ abstract class TypeDataFilter
     {
         switch ($filter)
         {
-            case TypeData :: PROPERTY_DATE :
-                return $value;
-                break;
             default :
                 return $value;
         }

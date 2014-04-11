@@ -15,7 +15,7 @@ class ContentObjectDataFilter extends TypeDataFilter
         switch ($filter)
         {
             case ContentObjectData :: PROPERTY_PLATFORM :
-                return $value;
+                return $value == 1 ? 'dokeos' : 'chamilo';
                 break;
             case ContentObjectData :: PROPERTY_OBJECT_TYPE :
                 return Translation :: get('TypeName', null, Utilities :: get_namespace_from_classname($value));
