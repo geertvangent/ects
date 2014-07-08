@@ -11,14 +11,14 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
+         'DataManager' => '/lib/data_manager.class.php',
+         'DataManagerInterface' => '/lib/data_manager_interface.class.php',
+         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
+         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
          'AllUsersComponent' => '/lib/manager/component/all_users.class.php',
          'BrowserComponent' => '/lib/manager/component/browser.class.php',
          'StatisticsComponent' => '/lib/manager/component/statistics.class.php',
-         'DataManager' => '/lib/storage/data_manager/data_manager.class.php',
-         'DataManagerInterface' => '/lib/storage/data_manager/data_manager_interface.class.php',
-         'DoctrineDataManager' => '/lib/storage/data_manager/implementation/doctrine.class.php',
-         'Mdb2DataManager' => '/lib/storage/data_manager/implementation/mdb2.class.php',
          'Synchronization' => '/lib/synchronization/synchronization.class.php',
          'UserSynchronization' => '/lib/synchronization/type/user.class.php',
          'AllUserSynchronization' => '/lib/synchronization/type/user/all.class.php',

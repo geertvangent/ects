@@ -30,11 +30,11 @@ class StudentCourseGroupSynchronization extends CourseGroupSynchronization
         $user_mails = array();
         if ($this->get_parameter(self :: RESULT_PROPERTY_TYPE) != 2)
         {
-            $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE programme_id = "' .
+            $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE programme_id = ' .
                  $this->get_parameter(self :: RESULT_PROPERTY_COURSE_ID) .
-                 '" AND type = 1 AND result != 8 AND (programme_type = 1 OR (programme_type = 6 AND exchange_type = 2))';
+                 ' AND type = 1 AND result != 8 AND (programme_type = 1 OR programme_type = 6)';
             $users = $this->get_result($query);
-            
+
             while ($user = $users->next_result(false))
             {
                 $user_mails[] = $user['person_id'];

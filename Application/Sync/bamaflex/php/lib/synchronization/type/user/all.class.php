@@ -12,7 +12,10 @@ class AllUserSynchronization extends UserSynchronization
 
     public function get_data()
     {
-        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_sync_user]';
+        $academic_year = $this->get_academic_year();
+        $academic_year = explode(',', $academic_year);
+
+        $query = 'EXEC [dbo].[sp_sync_user] @academiejaar = N\'' . $academic_year[0] . '\'';
 
         return $this->get_result($query);
     }
@@ -65,37 +68,40 @@ class AllUserSynchronization extends UserSynchronization
                 break;
             case 1 :
                 $user->set_active(1);
-                $user->set_status(1);
 
                 if ($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE]));
                     $user->set_email($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE]));
+                    $user->set_status(1);
                 }
                 elseif ($person[self :: RESULT_PROPERTY_EMAIL_STUDENT])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_STUDENT]));
                     $user->set_email($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_STUDENT]));
+                    $user->set_status(5);
                 }
                 else
                 {
                     $user->set_username($person[self :: RESULT_PROPERTY_PERSON_ID]);
                     $user->set_email($person[self :: RESULT_PROPERTY_PERSON_ID] . '@void.ehb.be');
+                    $user->set_status(5);
                 }
                 break;
             case 2 :
                 $user->set_active(1);
-                $user->set_status(1);
 
                 if ($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE]));
                     $user->set_email($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE]));
+                    $user->set_status(1);
                 }
                 else
                 {
                     $user->set_username($person[self :: RESULT_PROPERTY_PERSON_ID]);
                     $user->set_email($person[self :: RESULT_PROPERTY_PERSON_ID] . '@void.ehb.be');
+                    $user->set_status(5);
                 }
                 break;
             case 3 :

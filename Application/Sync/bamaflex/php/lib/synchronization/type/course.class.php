@@ -15,7 +15,7 @@ class CourseSynchronization extends Synchronization
 {
 
     private $course_categories_cache = array();
-    const COURSE_TYPE = 1;
+    const COURSE_TYPE = array('2012-13' => 1, '2013-14' => 5, '2014-15' => 6);
 
     public function run()
     {
@@ -29,8 +29,10 @@ class CourseSynchronization extends Synchronization
 
     public function get_children()
     {
-        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE programme_type in (1,4) AND exchange = 0 AND year = \'' .
-             $this->get_academic_year() . '\'';
+        $academic_years = explode(',', $this->get_academic_year());
+
+        $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE programme_type in (1,4) AND exchange = 0 AND year IN (\'' .
+             implode('\',\'', $academic_years) . '\')';
         return $this->get_result($query);
     }
 
@@ -57,7 +59,10 @@ class CourseSynchronization extends Synchronization
             $new_course->set_titular_id(null);
             $new_course->set_language('nl');
             $new_course->set_category_id($this->course_categories_cache[$category_code]->get_id());
-            $new_course->set_course_type_id(self :: COURSE_TYPE);
+
+            $course_types = self :: COURSE_TYPE;
+
+            $new_course->set_course_type_id($course_types[$course['year']]);
             // $new_course->set_foreign_property(Course :: FOREIGN_PROPERTY_COURSE_TYPE, $value)
 
             if ($new_course->create())

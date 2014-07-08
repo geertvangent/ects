@@ -14,6 +14,7 @@ class Manager extends WebApplication
     const ACTION_BAMAFLEX = 'bamaflex';
     const ACTION_ATLANTIS = 'atlantis';
     const ACTION_CAS = 'cas';
+    const ACTION_DATA = 'data';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
 
     /**

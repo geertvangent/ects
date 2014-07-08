@@ -19,6 +19,7 @@ class AllUsersComponent extends Manager implements DelegateComponent
         {
             echo '<pre>';
             echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
+            flush();
 
             $synchronization = UserSynchronization :: factory('all');
             $synchronization->run();

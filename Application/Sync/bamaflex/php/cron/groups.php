@@ -13,6 +13,7 @@ try
     ini_set("max_execution_time", "0");
     echo '<pre>';
     Synchronization :: log('Group sync started', date('c', time()));
+    flush();
 
     $root_group = \group\DataManager :: get_root_group();
 

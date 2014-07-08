@@ -19,6 +19,7 @@ class CoursesComponent extends Manager implements DelegateComponent
         {
             echo '<pre>';
             Synchronization :: log('Courses sync started', date('c', time()));
+            flush();
 
             $synchronization = new CourseSynchronization();
             $synchronization->run();

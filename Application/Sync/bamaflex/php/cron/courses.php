@@ -13,6 +13,7 @@ try
     ini_set("max_execution_time", "18000");
     echo '<pre>';
     Synchronization :: log('Courses sync started', date('c', time()));
+    flush();
 
     $synchronization = new CourseSynchronization();
     $synchronization->run();

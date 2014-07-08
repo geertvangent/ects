@@ -19,6 +19,7 @@ class ArchiveGroupsComponent extends Manager implements DelegateComponent
         {
             echo '<pre>';
             Synchronization :: log('Group sync started', date('c', time()));
+            flush();
 
             $root_group = \group\DataManager :: get_root_group();
 

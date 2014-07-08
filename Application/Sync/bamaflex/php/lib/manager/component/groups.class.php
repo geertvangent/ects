@@ -2,6 +2,7 @@
 namespace application\ehb_sync\bamaflex;
 
 use common\libraries\DelegateComponent;
+use common\libraries\PlatformSetting;
 
 class GroupsComponent extends Manager implements DelegateComponent
 {
@@ -19,13 +20,20 @@ class GroupsComponent extends Manager implements DelegateComponent
         {
             echo '<pre>';
             Synchronization :: log('Group sync started', date('c', time()));
+            flush();
+
+            $years = PlatformSetting :: get('academic_year', __NAMESPACE__);
+            $years = explode(',', $years);
 
             $root_group = \group\DataManager :: get_root_group();
 
-            $synchronization = GroupSynchronization :: factory(
-                'academic_year',
-                new DummyGroupSynchronization($root_group));
-            $synchronization->run();
+            foreach ($years as $year)
+            {
+                $synchronization = GroupSynchronization :: factory(
+                    'academic_year',
+                    new DummyGroupSynchronization($root_group, $year));
+                $synchronization->run();
+            }
 
             $synchronization = GroupSynchronization :: factory(
                 'central_administration',
