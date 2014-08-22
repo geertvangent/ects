@@ -1,18 +1,17 @@
 <?php
 namespace application\atlantis\user_group;
 
-use common\libraries\Utilities;
-use common\libraries\DataClass;
+use libraries\DataClass;
 
 /**
  * application.atlantis.context.
- * 
+ *
  * @author GillardMagali
  */
 class Context extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Context properties
      */
@@ -24,7 +23,7 @@ class Context extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -35,13 +34,13 @@ class Context extends DataClass
         $extended_property_names[] = self :: PROPERTY_CONTEXT_ID;
         $extended_property_names[] = self :: PROPERTY_CONTEXT_NAME;
         $extended_property_names[] = self :: PROPERTY_CONTEXT_TYPE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -51,7 +50,7 @@ class Context extends DataClass
 
     /**
      * Returns the parent_id of this Context.
-     * 
+     *
      * @return integer The parent_id.
      */
     public function get_parent_id()
@@ -61,7 +60,7 @@ class Context extends DataClass
 
     /**
      * Sets the parent_id of this Context.
-     * 
+     *
      * @param integer $parent_id
      */
     public function set_parent_id($parent_id)
@@ -71,7 +70,7 @@ class Context extends DataClass
 
     /**
      * Returns the parent_type of this Context.
-     * 
+     *
      * @return integer The parent_type.
      */
     public function get_parent_type()
@@ -81,7 +80,7 @@ class Context extends DataClass
 
     /**
      * Sets the parent_type of this Context.
-     * 
+     *
      * @param integer $parent_type
      */
     public function set_parent_type($parent_type)
@@ -91,7 +90,7 @@ class Context extends DataClass
 
     /**
      * Returns the context_id of this Context.
-     * 
+     *
      * @return integer The context_id.
      */
     public function get_context_id()
@@ -101,7 +100,7 @@ class Context extends DataClass
 
     /**
      * Sets the context_id of this Context.
-     * 
+     *
      * @param integer $context_id
      */
     public function set_context_id($context_id)
@@ -111,7 +110,7 @@ class Context extends DataClass
 
     /**
      * Returns the context_name of this Context.
-     * 
+     *
      * @return text The context_name.
      */
     public function get_context_name()
@@ -121,7 +120,7 @@ class Context extends DataClass
 
     /**
      * Sets the context_name of this Context.
-     * 
+     *
      * @param text $context_name
      */
     public function set_context_name($context_name)
@@ -131,7 +130,7 @@ class Context extends DataClass
 
     /**
      * Returns the context_type of this Context.
-     * 
+     *
      * @return integer The context_type.
      */
     public function get_context_type()
@@ -141,20 +140,11 @@ class Context extends DataClass
 
     /**
      * Sets the context_type of this Context.
-     * 
+     *
      * @param integer $context_type
      */
     public function set_context_type($context_type)
     {
         $this->set_default_property(self :: PROPERTY_CONTEXT_TYPE, $context_type);
-    }
-
-    /**
-     *
-     * @return string The table name of the data class
-     */
-    public static function get_table_name()
-    {
-        return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 }

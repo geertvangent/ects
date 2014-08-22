@@ -1,9 +1,9 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\NotAllowedException;
-use common\libraries\Utilities;
-use common\libraries\Translation;
+use libraries\NotAllowedException;
+use libraries\Utilities;
+use libraries\Translation;
 
 class DeleterComponent extends Manager
 {
@@ -15,7 +15,7 @@ class DeleterComponent extends Manager
             throw new NotAllowedException();
         }
 
-        $ids = \common\libraries\Request :: get(self :: PARAM_LOCATION_ENTITY_RIGHT_GROUP_ID);
+        $ids = \libraries\Request :: get(self :: PARAM_LOCATION_ENTITY_RIGHT_GROUP_ID);
         $failures = 0;
 
         if (! empty($ids))

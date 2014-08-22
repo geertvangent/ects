@@ -1,9 +1,9 @@
 <?php
 namespace application\atlantis\user_group;
 
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\Request;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\Request;
 
 class EditorComponent extends Manager
 {

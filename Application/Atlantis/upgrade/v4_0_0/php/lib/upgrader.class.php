@@ -1,15 +1,14 @@
 <?php
 namespace application\atlantis\upgrade\v4_0_0;
 
-use common\libraries\CommonDataManager;
-use common\libraries\package\Package;
+use configuration\DataManager;
 
 /**
  *
  * @author Hans De Bisschop
  * @author Magali Gillard
  */
-class Upgrader extends \common\libraries\package\Upgrader
+class Upgrader extends \configuration\package\Upgrader
 {
 
     /**
@@ -17,11 +16,11 @@ class Upgrader extends \common\libraries\package\Upgrader
      */
     public function __construct()
     {
-        parent :: __construct(CommonDataManager :: get_instance());
+        parent :: __construct(DataManager :: get_instance());
     }
 
     /*
-     * (non-PHPdoc) @see \common\libraries\package\Upgrader::run()
+     * (non-PHPdoc) @see \libraries\package\Upgrader::run()
      */
     public function run()
     {
@@ -30,8 +29,8 @@ class Upgrader extends \common\libraries\package\Upgrader
         $success = $data_manager->transactional(
             function ($c) use($data_manager)
             {
-                $package = Package :: get('application\atlantis');
-                $registration = CommonDataManager :: get_registration('application\atlantis');
+                $package = \configuration\package\Package :: get('application\atlantis');
+                $registration = DataManager :: get_registration('application\atlantis');
                 $registration->set_version($package->get_version());
                 if (! $registration->update())
                 {

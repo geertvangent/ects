@@ -1,11 +1,10 @@
 <?php
 namespace application\atlantis\application;
 
-use common\libraries\Utilities;
-use common\libraries\DataClass;
-use common\libraries\EqualityCondition;
 use application\atlantis\application\right\Right;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\DataClass;
+use libraries\EqualityCondition;
+use libraries\DataClassRetrievesParameters;
 
 /**
  * application.atlantis.application.
@@ -118,15 +117,6 @@ class Application extends DataClass
     public function set_code($code)
     {
         $this->set_default_property(self :: PROPERTY_CODE, $code);
-    }
-
-    /**
-     *
-     * @return string The table name of the data class
-     */
-    public static function get_table_name()
-    {
-        return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
     public function delete()

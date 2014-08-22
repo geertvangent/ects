@@ -1,9 +1,7 @@
 <?php
 namespace application\atlantis\application;
 
-use common\libraries\SubManager;
-
-class Manager extends SubManager
+class Manager extends \libraries\SubManager
 {
     const PARAM_ACTION = 'application_action';
     const ACTION_BROWSE = 'browser';

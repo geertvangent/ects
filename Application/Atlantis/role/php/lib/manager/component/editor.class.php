@@ -1,11 +1,11 @@
 <?php
 namespace application\atlantis\role;
 
-use common\libraries\Breadcrumb;
+use libraries\Breadcrumb;
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\Request;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\Request;
 
 class EditorComponent extends Manager
 {

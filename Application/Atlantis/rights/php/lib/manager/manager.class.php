@@ -1,14 +1,14 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\DynamicVisualTab;
-use common\libraries\Utilities;
-use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\SubManager;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\DynamicVisualTab;
+use libraries\Utilities;
+use libraries\DynamicVisualTabsRenderer;
+use libraries\SubManager;
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\Breadcrumb;
+use libraries\Breadcrumb;
 
 class Manager extends SubManager
 {

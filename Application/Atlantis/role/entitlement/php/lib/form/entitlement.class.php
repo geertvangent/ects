@@ -1,11 +1,11 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\EqualityCondition;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\FormValidator;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\EqualityCondition;
+use libraries\DataClassRetrievesParameters;
+use libraries\FormValidator;
 
 class EntitlementForm extends FormValidator
 {

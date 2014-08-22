@@ -1,11 +1,11 @@
 <?php
 namespace application\atlantis\application\right;
 
-use common\libraries\SubManager;
+use libraries\SubManager;
 
 /**
  * $Id: elude_manager.class.php
- * 
+ *
  * @package application.elude
  */
 class Manager extends SubManager

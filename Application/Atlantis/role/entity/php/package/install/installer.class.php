@@ -6,7 +6,7 @@ namespace application\atlantis\role\entity;
  * 
  * @package application.atlantis
  */
-class Installer extends \common\libraries\package\Installer
+class Installer extends \configuration\package\Installer
 {
 
     /**

@@ -1,12 +1,12 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\NotAllowedException;
-use common\libraries\NewObjectTableSupport;
+use libraries\NotAllowedException;
+use libraries\NewObjectTableSupport;
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\Breadcrumb;
-use common\libraries\Translation;
-use common\libraries\Utilities;
+use libraries\Breadcrumb;
+use libraries\Translation;
+use libraries\Utilities;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport
 {

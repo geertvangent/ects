@@ -1,8 +1,8 @@
 <?php
 namespace application\atlantis;
 
-use common\libraries\Breadcrumb;
-use common\libraries\Session;
+use libraries\Breadcrumb;
+use libraries\Session;
 
 /**
  * application.atlantis.

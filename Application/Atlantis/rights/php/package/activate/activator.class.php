@@ -1,8 +1,8 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\package\NotAllowed;
+use configuration\package\NotAllowed;
 
-class Activator extends \common\libraries\package\Activator implements NotAllowed
+class Activator extends \configuration\package\Activator implements NotAllowed
 {
 }

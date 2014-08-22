@@ -1,14 +1,14 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use rights\NewUserEntity;
-use rights\NewPlatformGroupEntity;
-use common\libraries\Translation;
-use common\libraries\FormValidator;
-use common\libraries\Utilities;
-use common\libraries\AdvancedElementFinderElementTypes;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
+use libraries\Translation;
+use libraries\FormValidator;
+use libraries\Utilities;
+use libraries\AdvancedElementFinderElementTypes;
+use core\rights\NewPlatformGroupEntity;
+use core\rights\NewUserEntity;
 
 class RightsGroupForm extends FormValidator
 {

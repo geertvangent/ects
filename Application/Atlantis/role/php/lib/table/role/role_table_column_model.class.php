@@ -1,9 +1,9 @@
 <?php
 namespace application\atlantis\role;
 
-use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
-use common\libraries\NewObjectTableColumnModel;
-use common\libraries\ObjectTableColumn;
+use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\NewObjectTableColumnModel;
+use libraries\ObjectTableColumn;
 
 class RoleTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport
 {

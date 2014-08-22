@@ -1,16 +1,16 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use common\libraries\Translation;
+use libraries\Translation;
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\InCondition;
-use common\libraries\AndCondition;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\DelegateComponent;
-use common\libraries\Request;
-use common\libraries\EqualityCondition;
-use common\libraries\NewObjectTableSupport;
+use libraries\InCondition;
+use libraries\AndCondition;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\DelegateComponent;
+use libraries\Request;
+use libraries\EqualityCondition;
+use libraries\NewObjectTableSupport;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {

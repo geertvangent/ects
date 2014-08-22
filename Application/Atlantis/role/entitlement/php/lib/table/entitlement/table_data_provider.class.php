@@ -1,8 +1,8 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\NewObjectTableDataProvider;
+use libraries\DataClassRetrievesParameters;
+use libraries\NewObjectTableDataProvider;
 
 class EntitlementTableDataProvider extends NewObjectTableDataProvider
 {

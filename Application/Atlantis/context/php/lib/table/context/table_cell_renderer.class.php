@@ -1,12 +1,12 @@
 <?php
 namespace application\atlantis\context;
 
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\Toolbar;
-use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
-use common\libraries\NewObjectTableCellRenderer;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\Toolbar;
+use libraries\NewObjectTableCellRendererActionsColumnSupport;
+use libraries\NewObjectTableCellRenderer;
 
 class ContextTableCellRenderer extends NewObjectTableCellRenderer implements 
         NewObjectTableCellRendererActionsColumnSupport

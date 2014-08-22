@@ -1,15 +1,15 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use rights\NewPlatformGroupEntity;
-use common\libraries\DatetimeUtilities;
-use common\libraries\NewObjectTableCellRenderer;
-use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
-use common\libraries\Toolbar;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\Utilities;
-use common\libraries\ToolbarItem;
+use libraries\DatetimeUtilities;
+use libraries\NewObjectTableCellRenderer;
+use libraries\NewObjectTableCellRendererActionsColumnSupport;
+use libraries\Toolbar;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\Utilities;
+use libraries\ToolbarItem;
+use core\rights\NewPlatformGroupEntity;
 
 class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
     NewObjectTableCellRendererActionsColumnSupport

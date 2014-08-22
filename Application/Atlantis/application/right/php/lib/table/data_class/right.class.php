@@ -2,11 +2,10 @@
 namespace application\atlantis\application\right;
 
 use application\atlantis\application\Application;
-use common\libraries\Utilities;
-use common\libraries\DataClass;
+use libraries\DataClass;
 use application\atlantis\role\entitlement\Entitlement;
-use common\libraries\EqualityCondition;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\EqualityCondition;
+use libraries\DataClassRetrievesParameters;
 
 /**
  * application.atlantis.application.right.
@@ -132,15 +131,6 @@ class Right extends DataClass
     public function set_code($code)
     {
         $this->set_default_property(self :: PROPERTY_CODE, $code);
-    }
-
-    /**
-     *
-     * @return string The table name of the data class
-     */
-    public static function get_table_name()
-    {
-        return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
     public function delete()

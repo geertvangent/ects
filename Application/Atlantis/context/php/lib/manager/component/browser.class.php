@@ -1,20 +1,21 @@
 <?php
 namespace application\atlantis\context;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\Request;
-use common\libraries\Breadcrumb;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
+use libraries\Request;
+use libraries\Breadcrumb;
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\OrCondition;
-use common\libraries\PatternMatchCondition;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\ActionBarRenderer;
-use common\libraries\NewObjectTableSupport;
-use common\libraries\PropertyConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\OrCondition;
+use libraries\PatternMatchCondition;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\ActionBarRenderer;
+use libraries\NewObjectTableSupport;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
+use core\group\Group;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport
 {
@@ -31,24 +32,24 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
             $search_conditions = array();
 
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_NAME),
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME),
                 '*' . $query . '*');
 
             $conditions[] = new OrCondition($search_conditions);
         }
         if ($this->get_context() != 0)
         {
-            $context = \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), (int) $this->get_context());
+            $context = \core\group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $this->get_context());
         }
         else
         {
-            $context = new \group\Group();
+            $context = new Group();
             $context->set_id(0);
             $context->set_name(Translation :: get('Root'));
         }
 
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_PARENT_ID),
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($context->get_id()));
 
         return new AndCondition($conditions);

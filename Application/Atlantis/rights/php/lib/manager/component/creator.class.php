@@ -1,11 +1,11 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\NotAllowedException;
-use common\libraries\Translation;
+use libraries\NotAllowedException;
+use libraries\Translation;
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\Breadcrumb;
-use common\libraries\Utilities;
+use libraries\Breadcrumb;
+use libraries\Utilities;
 
 class CreatorComponent extends Manager
 {

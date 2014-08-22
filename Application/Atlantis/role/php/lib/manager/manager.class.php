@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role;
 
-use common\libraries\SubManager;
+use libraries\SubManager;
 
 class Manager extends SubManager
 {

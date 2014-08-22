@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\context;
 
-use common\libraries\DoctrineDatabase;
+use libraries\DoctrineDatabase;
 
 class DoctrineDataManager extends DoctrineDatabase
 {

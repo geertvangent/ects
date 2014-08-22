@@ -1,6 +1,6 @@
 <?php
 namespace application\atlantis\role;
 
-class Activator extends \common\libraries\package\Activator
+class Activator extends \configuration\package\Activator
 {
 }

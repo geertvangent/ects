@@ -1,8 +1,8 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\NewObjectTableDataProvider;
+use libraries\DataClassRetrievesParameters;
+use libraries\NewObjectTableDataProvider;
 
 class RoleEntityTableDataProvider extends NewObjectTableDataProvider
 {

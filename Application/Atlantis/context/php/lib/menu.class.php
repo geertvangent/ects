@@ -1,19 +1,20 @@
 <?php
 namespace application\atlantis\context;
 
-use common\libraries\Utilities;
-use common\libraries\Path;
-use common\libraries\EqualityCondition;
-use common\libraries\ObjectTableOrder;
-use common\libraries\OptionsMenuRenderer;
-use common\libraries\TreeMenuRenderer;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\Utilities;
+use libraries\Path;
+use libraries\EqualityCondition;
+use libraries\ObjectTableOrder;
+use libraries\OptionsMenuRenderer;
+use libraries\TreeMenuRenderer;
+use libraries\DataClassRetrievesParameters;
 use HTML_Menu;
 use HTML_Menu_ArrayRenderer;
-use common\libraries\AndCondition;
-use common\libraries\PatternMatchCondition;
-use common\libraries\NotCondition;
-use common\libraries\OrCondition;
+use libraries\AndCondition;
+use libraries\PatternMatchCondition;
+use libraries\NotCondition;
+use libraries\OrCondition;
+use core\group\Group;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -65,21 +66,17 @@ class Menu extends HTML_Menu
 
         if ($current_category == '0' || is_null($current_category))
         {
-            $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
-            $group = \group\DataManager :: retrieves(
-                \group\Group :: class_name(),
-                new DataClassRetrievesParameters(
-                    $condition,
-                    1,
-                    null,
-                    new ObjectTableOrder(\group\Group :: PROPERTY_NAME)))->next_result();
+            $condition = new EqualityCondition(Group :: PROPERTY_PARENT_ID, 0);
+            $group = \core\group\DataManager :: retrieves(
+                Group :: class_name(),
+                new DataClassRetrievesParameters($condition, 1, null, new ObjectTableOrder(Group :: PROPERTY_NAME)))->next_result();
             $this->current_category = $group;
         }
         else
         {
-            $this->current_category = \group\DataManager :: retrieve(
-                \group\Group :: class_name(),
-                new EqualityCondition(\group\Group :: PROPERTY_ID, $current_category));
+            $this->current_category = \core\group\DataManager :: retrieve(
+                Group :: class_name(),
+                new EqualityCondition(Group :: PROPERTY_ID, $current_category));
         }
 
         $this->urlFmt = $url_format;
@@ -93,10 +90,10 @@ class Menu extends HTML_Menu
     {
         $include_root = $this->include_root;
 
-        $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
-        $group = \group\DataManager :: retrieves(
-            \group\Group :: class_name(),
-            new DataClassRetrievesParameters($condition, 1, null, new ObjectTableOrder(\group\Group :: PROPERTY_NAME)))->next_result();
+        $condition = new EqualityCondition(Group :: PROPERTY_PARENT_ID, 0);
+        $group = \core\group\DataManager :: retrieves(
+            Group :: class_name(),
+            new DataClassRetrievesParameters($condition, 1, null, new ObjectTableOrder(Group :: PROPERTY_NAME)))->next_result();
         if (! $include_root)
         {
             return $this->get_menu_items($group->get_id());
@@ -138,29 +135,28 @@ class Menu extends HTML_Menu
         $hide_current_category = $this->hide_current_category;
 
         $code_conditions = array();
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'AY_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'CA*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'DEP_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'TRA_OP_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'TRA_STU_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'AY_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'CA*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'DEP_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_OP_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*');
 
         $not_code_conditions = array();
-        $not_code_conditions[] = new NotCondition(
-            new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'TRA_STU_*_*'));
-        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'COU_OP_*'));
+        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*_*'));
+        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(Group :: PROPERTY_CODE, 'COU_OP_*'));
 
         $conditions = array();
         $conditions[] = new OrCondition($code_conditions);
         $conditions[] = new AndCondition($not_code_conditions);
-        $conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $parent_id);
+        $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT_ID, $parent_id);
         $condition = new AndCondition($conditions);
 
-        $groups = \group\DataManager :: retrieves(
-            \group\Group :: class_name(),
-            new DataClassRetrievesParameters($condition, null, null, new ObjectTableOrder(\group\Group :: PROPERTY_NAME)));
+        $groups = DataManager :: retrieves(
+            Group :: class_name(),
+            new DataClassRetrievesParameters($condition, null, null, new ObjectTableOrder(Group :: PROPERTY_NAME)));
 
         while ($group = $groups->next_result())
-       
+
         {
             $group_id = $group->get_id();
 

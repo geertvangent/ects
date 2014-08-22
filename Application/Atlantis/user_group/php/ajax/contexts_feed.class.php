@@ -1,17 +1,17 @@
 <?php
 namespace application\atlantis\user_group;
 
-use common\libraries\JsonAjaxResult;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\AdvancedElementFinderElements;
-use common\libraries\Translation;
-use common\libraries\AjaxManager;
-use common\libraries\Request;
-use common\libraries\PatternMatchCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\AndCondition;
-use common\libraries\ObjectTableOrder;
-use common\libraries\AdvancedElementFinderElement;
+use libraries\JsonAjaxResult;
+use libraries\DataClassRetrievesParameters;
+use libraries\AdvancedElementFinderElements;
+use libraries\Translation;
+use libraries\AjaxManager;
+use libraries\Request;
+use libraries\PatternMatchCondition;
+use libraries\EqualityCondition;
+use libraries\AndCondition;
+use libraries\ObjectTableOrder;
+use libraries\AdvancedElementFinderElement;
 
 class ContextAjaxContextsFeed extends AjaxManager
 {

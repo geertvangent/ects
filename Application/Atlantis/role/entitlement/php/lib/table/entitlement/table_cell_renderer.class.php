@@ -1,13 +1,13 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use common\libraries\NewObjectTableCellRenderer;
-use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
-use common\libraries\Toolbar;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\Utilities;
-use common\libraries\ToolbarItem;
+use libraries\NewObjectTableCellRenderer;
+use libraries\NewObjectTableCellRendererActionsColumnSupport;
+use libraries\Toolbar;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\Utilities;
+use libraries\ToolbarItem;
 
 class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements 
     NewObjectTableCellRendererActionsColumnSupport

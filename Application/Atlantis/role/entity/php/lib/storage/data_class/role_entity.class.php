@@ -1,10 +1,11 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\Utilities;
-use common\libraries\DataClass;
+use libraries\ToolbarItem;
+use libraries\Theme;
+use libraries\DataClass;
+use core\user\User;
+use core\group\Group;
 
 /**
  * application.atlantis.role.entity.
@@ -159,15 +160,6 @@ class RoleEntity extends DataClass
         $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
     }
 
-    /**
-     *
-     * @return string The table name of the data class
-     */
-    public static function get_table_name()
-    {
-        return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
-    }
-
     public function get_entity_type_image()
     {
         return Theme :: get_image(
@@ -194,10 +186,10 @@ class RoleEntity extends DataClass
         switch ($entity_type)
         {
             case 1 :
-                return \user\DataManager :: retrieve(\user\User :: class_name(), (int) $entity_id);
+                return \core\user\DataManager :: retrieve(User :: class_name(), (int) $entity_id);
                 break;
             case 2 :
-                return \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), $entity_id);
+                return \core\group\DataManager :: retrieve_by_id(Group :: class_name(), $entity_id);
                 break;
         }
     }
@@ -243,7 +235,7 @@ class RoleEntity extends DataClass
     {
         if (! isset($this->context))
         {
-            $this->context = \group\DataManager :: retrieve(\group\Group :: class_name(), (int) $this->get_context_id());
+            $this->context = \core\group\DataManager :: retrieve(Group :: class_name(), (int) $this->get_context_id());
         }
         return $this->context;
     }

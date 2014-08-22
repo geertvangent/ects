@@ -1,9 +1,9 @@
 <?php
 namespace application\atlantis\user_group;
 
-use common\libraries\Request;
-use common\libraries\Utilities;
-use common\libraries\Translation;
+use libraries\Request;
+use libraries\Utilities;
+use libraries\Translation;
 
 class DeleterComponent extends Manager
 {

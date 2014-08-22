@@ -1,13 +1,13 @@
 <?php
 namespace application\atlantis\user_group;
 
-use common\libraries\Utilities;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\NewObjectTableCellRenderer;
-use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
-use common\libraries\Toolbar;
+use libraries\Utilities;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\NewObjectTableCellRenderer;
+use libraries\NewObjectTableCellRendererActionsColumnSupport;
+use libraries\Toolbar;
 
 class ApplicationTableCellRenderer extends NewObjectTableCellRenderer implements 
     NewObjectTableCellRendererActionsColumnSupport

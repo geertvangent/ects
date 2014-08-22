@@ -1,14 +1,13 @@
 <?php
 namespace application\atlantis;
 
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Theme;
-use common\libraries\CommonDataManager;
-use common\libraries\Translation;
-use common\libraries\WebApplication;
-use common\libraries\NotAllowedException;
-use common\libraries\package\PackageList;
-use common\libraries\PlatformSetting;
+use libraries\BreadcrumbTrail;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\WebApplication;
+use libraries\NotAllowedException;
+use libraries\PlatformSetting;
+use configuration\package\PackageList;
 
 class Manager extends WebApplication
 {
@@ -61,31 +60,31 @@ class Manager extends WebApplication
             Translation :: get('TypeName', null, __NAMESPACE__),
             Theme :: get_image_path() . 'logo/16.png');
 
-        if (! CommonDataManager :: get_registration(\application\atlantis\application\Manager :: context()) ||
+        if (! \configuration\DataManager :: get_registration(\application\atlantis\application\Manager :: context()) ||
              $include_installed)
         {
             $package_list->add_package(\application\atlantis\application\Manager :: context());
         }
 
-        if (! CommonDataManager :: get_registration(\application\atlantis\rights\Manager :: context()) ||
+        if (! \configuration\DataManager :: get_registration(\application\atlantis\rights\Manager :: context()) ||
              $include_installed)
         {
             $package_list->add_package(\application\atlantis\rights\Manager :: context());
         }
 
-        if (! CommonDataManager :: get_registration(\application\atlantis\context\Manager :: context()) ||
+        if (! \configuration\DataManager :: get_registration(\application\atlantis\context\Manager :: context()) ||
              $include_installed)
         {
             $package_list->add_package(\application\atlantis\context\Manager :: context());
         }
 
-        if (! CommonDataManager :: get_registration(\application\atlantis\role\Manager :: context()) ||
+        if (! \configuration\DataManager :: get_registration(\application\atlantis\role\Manager :: context()) ||
              $include_installed)
         {
             $package_list->add_package(\application\atlantis\role\Manager :: context());
         }
 
-        if (! CommonDataManager :: get_registration(\application\atlantis\user_group\Manager :: context()) ||
+        if (! \configuration\DataManager :: get_registration(\application\atlantis\user_group\Manager :: context()) ||
              $include_installed)
         {
             $package_list->add_package(\application\atlantis\user_group\Manager :: context());
@@ -96,8 +95,8 @@ class Manager extends WebApplication
             Translation :: get('TypeName', null, \application\atlantis\application\Manager :: context()),
             Theme :: get_image_path(\application\atlantis\application\Manager :: context()) . 'logo/16.png');
 
-        if (! CommonDataManager :: get_registration(\application\atlantis\application\right\Manager :: context()) ||
-             $include_installed)
+        if (! \configuration\DataManager :: get_registration(
+            \application\atlantis\application\right\Manager :: context()) || $include_installed)
         {
             $application_list->add_package(\application\atlantis\application\right\Manager :: context());
         }
@@ -109,13 +108,13 @@ class Manager extends WebApplication
             Translation :: get('TypeName', null, \application\atlantis\role\Manager :: context()),
             Theme :: get_image_path(\application\atlantis\role\Manager :: context()) . 'logo/16.png');
 
-        if (! CommonDataManager :: get_registration(\application\atlantis\role\entitlement\Manager :: context()) ||
-             $include_installed)
+        if (! \configuration\DataManager :: get_registration(
+            \application\atlantis\role\entitlement\Manager :: context()) || $include_installed)
         {
             $role_list->add_package(\application\atlantis\role\entitlement\Manager :: context());
         }
 
-        if (! CommonDataManager :: get_registration(\application\atlantis\role\entity\Manager :: context()) ||
+        if (! \configuration\DataManager :: get_registration(\application\atlantis\role\entity\Manager :: context()) ||
              $include_installed)
         {
             $role_list->add_package(\application\atlantis\role\entity\Manager :: context());

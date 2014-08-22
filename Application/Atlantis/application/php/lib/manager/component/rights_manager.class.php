@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\application;
 
-use common\libraries\Request;
+use libraries\Request;
 
 class RightsManagerComponent extends Manager
 {

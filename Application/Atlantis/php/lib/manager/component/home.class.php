@@ -1,15 +1,15 @@
 <?php
 namespace application\atlantis;
 
-use common\libraries\BreadcrumbTrail;
-use common\libraries\DynamicSearchAction;
-use common\libraries\DelegateComponent;
-use common\libraries\DynamicAction;
-use common\libraries\Translation;
-use common\libraries\Theme;
-use common\libraries\DynamicActionsTab;
-use common\libraries\Utilities;
-use common\libraries\DynamicTabsRenderer;
+use libraries\BreadcrumbTrail;
+use libraries\DynamicSearchAction;
+use libraries\DelegateComponent;
+use libraries\DynamicAction;
+use libraries\Translation;
+use libraries\Theme;
+use libraries\DynamicActionsTab;
+use libraries\Utilities;
+use libraries\DynamicTabsRenderer;
 
 class HomeComponent extends Manager implements DelegateComponent
 {

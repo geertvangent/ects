@@ -2,16 +2,16 @@
 namespace application\atlantis\role;
 
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\Breadcrumb;
-use common\libraries\DelegateComponent;
-use common\libraries\OrCondition;
-use common\libraries\PatternMatchCondition;
-use common\libraries\Theme;
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\ActionBarRenderer;
-use common\libraries\NewObjectTableSupport;
+use libraries\Breadcrumb;
+use libraries\DelegateComponent;
+use libraries\OrCondition;
+use libraries\PatternMatchCondition;
+use libraries\Theme;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\ActionBarRenderer;
+use libraries\NewObjectTableSupport;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {

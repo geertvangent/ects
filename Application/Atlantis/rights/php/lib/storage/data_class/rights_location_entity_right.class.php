@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\rights;
 
-class RightsLocationEntityRight extends \rights\RightsLocationEntityRight
+class RightsLocationEntityRight extends \core\rights\RightsLocationEntityRight
 {
 
     public function get_data_manager()

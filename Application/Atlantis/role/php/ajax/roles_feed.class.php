@@ -1,16 +1,16 @@
 <?php
 namespace application\atlantis\role;
 
-use common\libraries\Translation;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\AjaxManager;
-use common\libraries\JsonAjaxResult;
-use common\libraries\AdvancedElementFinderElements;
-use common\libraries\AdvancedElementFinderElement;
-use common\libraries\Request;
-use common\libraries\AndCondition;
-use common\libraries\ObjectTableOrder;
-use common\libraries\Utilities;
+use libraries\Translation;
+use libraries\DataClassRetrievesParameters;
+use libraries\AjaxManager;
+use libraries\JsonAjaxResult;
+use libraries\AdvancedElementFinderElements;
+use libraries\AdvancedElementFinderElement;
+use libraries\Request;
+use libraries\AndCondition;
+use libraries\ObjectTableOrder;
+use libraries\Utilities;
 
 class RoleAjaxRolesFeed extends AjaxManager
 {

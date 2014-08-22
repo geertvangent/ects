@@ -1,14 +1,14 @@
 <?php
 namespace application\atlantis\role;
 
-use common\libraries\Application;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\Utilities;
-use common\libraries\ToolbarItem;
-use common\libraries\NewObjectTableCellRenderer;
-use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
-use common\libraries\Toolbar;
+use libraries\Application;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\Utilities;
+use libraries\ToolbarItem;
+use libraries\NewObjectTableCellRenderer;
+use libraries\NewObjectTableCellRendererActionsColumnSupport;
+use libraries\Toolbar;
 
 class RoleTableCellRenderer extends NewObjectTableCellRenderer implements NewObjectTableCellRendererActionsColumnSupport
 {

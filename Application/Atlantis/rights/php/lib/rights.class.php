@@ -1,20 +1,19 @@
 <?php
 namespace application\atlantis\rights;
 
-use rights\RightsLocationEntityRight;
-use rights\RightsUtil;
-use rights\RightsDataManager;
-use common\libraries\Translation;
-use common\libraries\EqualityCondition;
-use common\libraries\DataClassCountParameters;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\InCondition;
+use libraries\Translation;
+use libraries\EqualityCondition;
+use libraries\DataClassCountParameters;
+use libraries\DataClassRetrievesParameters;
+use libraries\InCondition;
 use application\atlantis\role\entity\UserEntity;
 use application\atlantis\role\entity\PlatformGroupEntity;
-use common\libraries\DataClassCache;
-use common\libraries\PropertyConditionVariable;
+use libraries\DataClassCache;
+use libraries\PropertyConditionVariable;
+use core\user\User;
+use core\group\Group;
 
-class Rights extends RightsUtil
+class Rights extends \core\rights\RightsUtil
 {
     const VIEW_RIGHT = '1';
 
@@ -103,7 +102,7 @@ class Rights extends RightsUtil
 
     public function get_access_location_entity_right($entity_id, $entity_type)
     {
-        return \rights\DataManager :: retrieve_rights_location_entity_right(
+        return \core\rights\DataManager :: retrieve_rights_location_entity_right(
             __NAMESPACE__,
             self :: VIEW_RIGHT,
             $entity_id,
@@ -111,7 +110,7 @@ class Rights extends RightsUtil
             $this->get_access_root_id());
     }
 
-    public function get_target_groups(\user\User $user)
+    public function get_target_groups(User $user)
     {
         if (! isset(self :: $target_groups[$user->get_id()]))
         {
@@ -164,7 +163,7 @@ class Rights extends RightsUtil
         return self :: $target_groups[$user->get_id()];
     }
 
-    public function get_target_users(\user\User $user)
+    public function get_target_users(User $user)
     {
         if (! isset(self :: $target_users[$user->get_id()]))
         {
@@ -174,12 +173,12 @@ class Rights extends RightsUtil
 
             if (count($allowed_groups) > 0)
             {
-                DataClassCache :: truncate(\group\Group :: class_name());
+                DataClassCache :: truncate(Group :: class_name());
                 $condition = new InCondition(
-                    new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_ID),
+                    new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
                     $allowed_groups);
-                $groups = \group\DataManager :: retrieves(
-                    \group\Group :: class_name(),
+                $groups = \core\group\DataManager :: retrieves(
+                    Group :: class_name(),
                     new DataClassRetrievesParameters($condition));
 
                 while ($group = $groups->next_result())
@@ -200,12 +199,12 @@ class Rights extends RightsUtil
         return self :: $target_users[$user->get_id()];
     }
 
-    public function is_target_user(\user\User $user, $target_user_id)
+    public function is_target_user(User $user, $target_user_id)
     {
         return in_array($target_user_id, $this->get_target_users($user));
     }
 
-    public function is_target_group(\user\User $user, $target_group_id)
+    public function is_target_group(User $user, $target_group_id)
     {
         foreach ($this->get_target_groups($user) as $group_id)
         {
@@ -215,7 +214,7 @@ class Rights extends RightsUtil
             }
             else
             {
-                $group = \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), (int) $group_id);
+                $group = \core\group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $group_id);
                 if ($group->is_parent_of($target_group_id))
                 {
                     return true;
@@ -226,7 +225,7 @@ class Rights extends RightsUtil
         return false;
     }
 
-    public function get_authorized_users(\user\User $user)
+    public function get_authorized_users(User $user)
     {
         if (! isset(self :: $authorized_users[$user->get_id()]))
         {
@@ -252,7 +251,7 @@ class Rights extends RightsUtil
             if (count($location_entity_right_ids) > 0)
             {
                 $condition = new InCondition(RightsLocationEntityRight :: PROPERTY_ID, $location_entity_right_ids);
-                $location_entity_rights = RightsDataManager :: get_instance()->retrieve_rights_location_rights(
+                $location_entity_rights = \core\rights\DataManager :: get_instance()->retrieve_rights_location_rights(
                     __NAMESPACE__,
                     $condition);
 
@@ -267,10 +266,10 @@ class Rights extends RightsUtil
                             }
                             break;
                         case PlatformGroupEntity :: ENTITY_TYPE :
-                            $group = \group\DataManager :: get_instance()->retrieve_group(
+                            $group = \core\group\DataManager :: get_instance()->retrieve_group(
                                 $location_entity_right->get_entity_id());
 
-                            if ($group instanceof \group\Group)
+                            if ($group instanceof Group)
                             {
                                 $group_user_ids = $group->get_users(true, true);
 
@@ -289,22 +288,22 @@ class Rights extends RightsUtil
 
             if (count($user_ids) > 0)
             {
-                $condition = new InCondition(\user\User :: PROPERTY_ID, $user_ids);
-                $authorized_user_count = \user\DataManager :: count(
-                    \user\User :: class_name(),
+                $condition = new InCondition(User :: PROPERTY_ID, $user_ids);
+                $authorized_user_count = \core\user\DataManager :: count(
+                    User :: class_name(),
                     new DataClassCountParameters($condition));
 
                 if ($authorized_user_count == 0)
                 {
-                    $condition = new InCondition(\user\User :: PROPERTY_PLATFORMADMIN, 1);
+                    $condition = new InCondition(User :: PROPERTY_PLATFORMADMIN, 1);
                 }
             }
             else
             {
-                $condition = new InCondition(\user\User :: PROPERTY_PLATFORMADMIN, 1);
+                $condition = new InCondition(User :: PROPERTY_PLATFORMADMIN, 1);
             }
-            $authorized_users = \user\DataManager :: retrieves(
-                \user\User :: class_name(),
+            $authorized_users = \core\user\DataManager :: retrieves(
+                User :: class_name(),
                 new DataClassRetrievesParameters($condition));
 
             while ($authorized_user = $authorized_users->next_result())

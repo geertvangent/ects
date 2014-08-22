@@ -1,10 +1,10 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use common\libraries\Translation;
-use common\libraries\StaticTableColumn;
-use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
-use common\libraries\NewObjectTableColumnModel;
+use libraries\Translation;
+use libraries\StaticTableColumn;
+use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\NewObjectTableColumnModel;
 
 class EntitlementTableColumnModel extends NewObjectTableColumnModel implements 
     NewObjectTableColumnModelActionsColumnSupport

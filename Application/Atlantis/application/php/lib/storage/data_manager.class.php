@@ -13,8 +13,9 @@ namespace application\atlantis\application;
  * @author Hans De Bisschop
  * @author Dieter De Neef
  */
-class DataManager extends \common\libraries\DataManager
+class DataManager extends \libraries\DataManager
 {
+    const PREFIX = "atlantis_";
 
     /**
      * Gets the type of DataManager to be instantiated

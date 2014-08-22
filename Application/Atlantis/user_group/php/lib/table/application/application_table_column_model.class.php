@@ -1,9 +1,9 @@
 <?php
 namespace application\atlantis\user_group;
 
-use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
-use common\libraries\NewObjectTableColumnModel;
-use common\libraries\ObjectTableColumn;
+use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\NewObjectTableColumnModel;
+use libraries\ObjectTableColumn;
 
 class ApplicationTableColumnModel extends NewObjectTableColumnModel implements 
         NewObjectTableColumnModelActionsColumnSupport

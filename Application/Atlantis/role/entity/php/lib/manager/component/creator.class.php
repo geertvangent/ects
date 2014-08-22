@@ -1,18 +1,18 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\Breadcrumb;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
+use libraries\DataClassRetrievesParameters;
+use libraries\Breadcrumb;
 use application\atlantis\SessionBreadcrumbs;
-use rights\NewPlatformGroupEntity;
-use rights\NewUserEntity;
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\Condition;
-use common\libraries\NotCondition;
-use common\libraries\ObjectTableOrder;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\Condition;
+use libraries\NotCondition;
+use libraries\ObjectTableOrder;
+use core\rights\NewPlatformGroupEntity;
+use core\rights\NewUserEntity;
 
 class CreatorComponent extends Manager
 {

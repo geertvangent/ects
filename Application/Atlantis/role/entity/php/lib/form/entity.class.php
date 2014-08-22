@@ -1,13 +1,13 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\Path;
-use common\libraries\ResourceManager;
-use common\libraries\AdvancedElementFinderElementType;
-use common\libraries\AdvancedElementFinderElementTypes;
-use common\libraries\FormValidator;
-use common\libraries\Utilities;
-use common\libraries\Translation;
+use libraries\Path;
+use libraries\ResourceManager;
+use libraries\AdvancedElementFinderElementType;
+use libraries\AdvancedElementFinderElementTypes;
+use libraries\FormValidator;
+use libraries\Utilities;
+use libraries\Translation;
 
 class EntityForm extends FormValidator
 {

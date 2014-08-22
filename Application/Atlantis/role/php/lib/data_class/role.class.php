@@ -1,11 +1,10 @@
 <?php
 namespace application\atlantis\role;
 
-use common\libraries\Utilities;
-use common\libraries\DataClass;
+use libraries\DataClass;
 use application\atlantis\role\entity\RoleEntity;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\EqualityCondition;
+use libraries\DataClassRetrievesParameters;
+use libraries\EqualityCondition;
 use application\atlantis\role\entitlement\Entitlement;
 
 /**
@@ -85,15 +84,6 @@ class Role extends DataClass
     public function set_description($description)
     {
         $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
-    }
-
-    /**
-     *
-     * @return string The table name of the data class
-     */
-    public static function get_table_name()
-    {
-        return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
     public function delete()

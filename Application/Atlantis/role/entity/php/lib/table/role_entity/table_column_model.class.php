@@ -1,11 +1,11 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\Translation;
-use common\libraries\StaticTableColumn;
-use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
-use common\libraries\NewObjectTableColumnModel;
-use common\libraries\ObjectTableColumn;
+use libraries\Translation;
+use libraries\StaticTableColumn;
+use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\NewObjectTableColumnModel;
+use libraries\ObjectTableColumn;
 
 class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
     NewObjectTableColumnModelActionsColumnSupport

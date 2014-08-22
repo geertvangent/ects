@@ -1,10 +1,10 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\AdvancedElementFinderElementType;
-use common\libraries\Translation;
+use libraries\AdvancedElementFinderElementType;
+use libraries\Translation;
 
-class PlatformGroupEntity extends \rights\PlatformGroupEntity
+class PlatformGroupEntity extends \core\rights\PlatformGroupEntity
 {
 
     /**

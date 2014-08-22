@@ -2,20 +2,20 @@
 namespace application\atlantis\application\right;
 
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Request;
-use common\libraries\DelegateComponent;
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\OrCondition;
-use common\libraries\PatternMatchCondition;
-use common\libraries\Theme;
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\ActionBarRenderer;
-use common\libraries\NewObjectTableSupport;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\Request;
+use libraries\DelegateComponent;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
+use libraries\OrCondition;
+use libraries\PatternMatchCondition;
+use libraries\Theme;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\ActionBarRenderer;
+use libraries\NewObjectTableSupport;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {
@@ -35,8 +35,9 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             $conditions[] = new OrCondition($search_conditions);
         }
 
-        $conditions[] = new EqualityCondition(Right :: PROPERTY_APPLICATION_ID,
-                $this->get_parameter(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID));
+        $conditions[] = new EqualityCondition(
+            Right :: PROPERTY_APPLICATION_ID,
+            $this->get_parameter(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID));
         return new AndCondition($conditions);
     }
 
@@ -59,9 +60,10 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             if ($this->get_user()->is_platform_admin())
             {
                 $this->action_bar->add_common_action(
-                        new ToolbarItem(Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
-                                Theme :: get_common_image_path() . 'action_create.png',
-                                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
+                    new ToolbarItem(
+                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
+                        Theme :: get_common_image_path() . 'action_create.png',
+                        $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());
         }
@@ -72,8 +74,12 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
     {
         $application_id = Request :: get(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID);
         $application = \application\atlantis\application\DataManager :: retrieve(
-                \application\atlantis\application\Application :: class_name(), (int) $application_id);
+            \application\atlantis\application\Application :: class_name(),
+            (int) $application_id);
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
-        SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get ('AvailableRights', array('TYPE' => $application->get_name()))));
+        SessionBreadcrumbs :: add(
+            new Breadcrumb(
+                $this->get_url(),
+                Translation :: get('AvailableRights', array('TYPE' => $application->get_name()))));
     }
 }

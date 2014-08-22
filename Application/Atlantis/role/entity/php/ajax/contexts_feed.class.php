@@ -1,18 +1,19 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\AdvancedElementFinderElement;
-use group\GroupAjaxPlatformGroupsFeed;
-use common\libraries\PatternMatchCondition;
-use common\libraries\Request;
-use common\libraries\OrCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\AndCondition;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\ObjectTableOrder;
-use common\libraries\ArrayResultSet;
-use common\libraries\DataClassCountParameters;
-use common\libraries\NotCondition;
+use libraries\AdvancedElementFinderElement;
+use libraries\PatternMatchCondition;
+use libraries\Request;
+use libraries\OrCondition;
+use libraries\EqualityCondition;
+use libraries\AndCondition;
+use libraries\DataClassRetrievesParameters;
+use libraries\ObjectTableOrder;
+use libraries\ArrayResultSet;
+use libraries\DataClassCountParameters;
+use libraries\NotCondition;
+use core\group\Group;
+use core\group\GroupAjaxPlatformGroupsFeed;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -35,25 +36,24 @@ class EntityAjaxContextsFeed extends GroupAjaxPlatformGroupsFeed
     public function get_group_element($group)
     {
         $code_conditions = array();
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'AY_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'CA*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'DEP_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'TRA_OP_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'TRA_STU_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'AY_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'CA*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'DEP_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_OP_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*');
 
         $not_code_conditions = array();
-        $not_code_conditions[] = new NotCondition(
-            new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'TRA_STU_*_*'));
-        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'COU_OP_*'));
+        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*_*'));
+        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(Group :: PROPERTY_CODE, 'COU_OP_*'));
 
         $conditions = array();
         $conditions[] = new OrCondition($code_conditions);
         $conditions[] = new AndCondition($not_code_conditions);
-        $conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $group->get_id());
+        $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT_ID, $group->get_id());
         $condition = new AndCondition($conditions);
 
-        $children_count = \group\DataManager :: count(
-            \group\Group :: class_name(),
+        $children_count = \core\group\DataManager :: count(
+            Group :: class_name(),
             new DataClassCountParameters($condition));
 
         if ($this->get_user()->is_platform_admin())
@@ -106,11 +106,11 @@ class EntityAjaxContextsFeed extends GroupAjaxPlatformGroupsFeed
                     }
                 }
 
-                if (! $type)
-                {
-                    $element_type = AdvancedElementFinderElement :: TYPE_FILTER;
-                    $element_class = 'type type_context_folder';
-                }
+//                 if (! $type)
+//                 {
+//                     $element_type = AdvancedElementFinderElement :: TYPE_FILTER;
+//                     $element_class = 'type type_context_folder';
+//                 }
             }
         }
         else
@@ -153,29 +153,29 @@ class EntityAjaxContextsFeed extends GroupAjaxPlatformGroupsFeed
         if ($search_query && $search_query != '')
         {
             $q = '*' . $search_query . '*';
-            $name_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_NAME, $q);
-            $name_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, $q);
+            $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_NAME, $q);
+            $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, $q);
             $conditions[] = new OrCondition($name_conditions);
         }
 
         $code_conditions = array();
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'AY_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'CA*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'DEP_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'TRA_OP_*');
-        $code_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, 'TRA_STU_*');
-        $code_conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'AY_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'CA*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'DEP_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_OP_*');
+        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*');
+        $code_conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT_ID, 0);
         $conditions[] = new OrCondition($code_conditions);
 
         $filter_id = $this->get_filter();
 
         if ($filter_id)
         {
-            $conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $filter_id);
+            $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT_ID, $filter_id);
         }
         else
         {
-            $conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
+            $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT_ID, 0);
         }
 
         // Combine the conditions
@@ -190,13 +190,9 @@ class EntityAjaxContextsFeed extends GroupAjaxPlatformGroupsFeed
             $condition = $conditions[0];
         }
 
-        $groups = \group\DataManager :: retrieves(
-            \group\Group :: class_name(),
-            new DataClassRetrievesParameters(
-                $condition,
-                null,
-                null,
-                array(new ObjectTableOrder(\group\Group :: PROPERTY_NAME))));
+        $groups = \core\group\DataManager :: retrieves(
+            Group :: class_name(),
+            new DataClassRetrievesParameters($condition, null, null, array(new ObjectTableOrder(Group :: PROPERTY_NAME))));
 
         if ($this->get_user()->is_platform_admin())
         {

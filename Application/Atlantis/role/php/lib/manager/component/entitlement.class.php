@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role;
 
-use common\libraries\Request;
+use libraries\Request;
 
 class EntitlementComponent extends Manager
 {

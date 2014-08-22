@@ -1,17 +1,16 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\AdvancedElementFinderElement;
-use user\UserAjaxUsersFeed;
-use common\libraries\Request;
-use common\libraries\Utilities;
-use user\User;
-use common\libraries\AndCondition;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\ObjectTableOrder;
-use common\libraries\InCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\DataClassCountParameters;
+use libraries\AdvancedElementFinderElement;
+use libraries\Request;
+use libraries\Utilities;
+use libraries\AndCondition;
+use libraries\DataClassRetrievesParameters;
+use libraries\ObjectTableOrder;
+use libraries\InCondition;
+use libraries\EqualityCondition;
+use libraries\DataClassCountParameters;
+use core\user\User;
 
 /**
  * Feed to return users from the user entity
@@ -19,7 +18,7 @@ use common\libraries\DataClassCountParameters;
  * @package rights
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class EntityAjaxUserEntityFeed extends UserAjaxUsersFeed
+class EntityAjaxUserEntityFeed extends \core\user\UserAjaxUsersFeed
 {
 
     /**
@@ -82,13 +81,14 @@ class EntityAjaxUserEntityFeed extends UserAjaxUsersFeed
             $condition = $conditions[0];
         }
 
-        $this->set_user_count(\user\DataManager :: count(User :: class_name(), new DataClassCountParameters($condition)));
+        $this->set_user_count(
+            \core\user\DataManager :: count(User :: class_name(), new DataClassCountParameters($condition)));
         $parameters = new DataClassRetrievesParameters(
             $condition,
             100,
             $this->get_offset(),
             array(new ObjectTableOrder(User :: PROPERTY_FIRSTNAME), new ObjectTableOrder(User :: PROPERTY_LASTNAME)));
 
-        return \user\DataManager :: retrieves(User :: class_name(), $parameters);
+        return \core\user\DataManager :: retrieves(User :: class_name(), $parameters);
     }
 }

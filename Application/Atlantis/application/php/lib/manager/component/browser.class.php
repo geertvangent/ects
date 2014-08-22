@@ -1,17 +1,17 @@
 <?php
 namespace application\atlantis\application;
 
-use common\libraries\Breadcrumb;
+use libraries\Breadcrumb;
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\DelegateComponent;
-use common\libraries\OrCondition;
-use common\libraries\PatternMatchCondition;
-use common\libraries\Theme;
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\ActionBarRenderer;
-use common\libraries\NewObjectTableSupport;
+use libraries\DelegateComponent;
+use libraries\OrCondition;
+use libraries\PatternMatchCondition;
+use libraries\Theme;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\ActionBarRenderer;
+use libraries\NewObjectTableSupport;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {
@@ -58,9 +58,10 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             if ($this->get_user()->is_platform_admin())
             {
                 $this->action_bar->add_common_action(
-                        new ToolbarItem(Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
-                                Theme :: get_common_image_path() . 'action_create.png',
-                                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
+                    new ToolbarItem(
+                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
+                        Theme :: get_common_image_path() . 'action_create.png',
+                        $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());
         }

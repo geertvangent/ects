@@ -1,8 +1,8 @@
 <?php
 namespace application\atlantis\user_group;
 
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\NewObjectTableDataProvider;
+use libraries\DataClassRetrievesParameters;
+use libraries\NewObjectTableDataProvider;
 
 class ApplicationTableDataProvider extends NewObjectTableDataProvider
 {

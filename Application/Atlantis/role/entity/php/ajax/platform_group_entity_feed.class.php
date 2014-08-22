@@ -1,16 +1,18 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use common\libraries\AdvancedElementFinderElement;
-use group\GroupAjaxPlatformGroupsFeed;
-use common\libraries\PatternMatchCondition;
-use common\libraries\Request;
-use common\libraries\OrCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\AndCondition;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\ObjectTableOrder;
-use common\libraries\ArrayResultSet;
+use libraries\AdvancedElementFinderElement;
+use libraries\PatternMatchCondition;
+use libraries\Request;
+use libraries\OrCondition;
+use libraries\EqualityCondition;
+use libraries\AndCondition;
+use libraries\DataClassRetrievesParameters;
+use libraries\ObjectTableOrder;
+use libraries\ArrayResultSet;
+use core\group\GroupAjaxPlatformGroupsFeed;
+use core\group\Group;
+use core\group\GroupRelUser;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -100,8 +102,8 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
         if ($search_query && $search_query != '')
         {
             $q = '*' . $search_query . '*';
-            $name_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_NAME, $q);
-            $name_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, $q);
+            $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_NAME, $q);
+            $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, $q);
             $conditions[] = new OrCondition($name_conditions);
         }
 
@@ -109,11 +111,11 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
 
         if ($filter_id)
         {
-            $conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $filter_id);
+            $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT_ID, $filter_id);
         }
         else
         {
-            $conditions[] = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
+            $conditions[] = new EqualityCondition(Group :: PROPERTY_PARENT_ID, 0);
         }
 
         // Combine the conditions
@@ -128,13 +130,9 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
             $condition = $conditions[0];
         }
 
-        $groups = \group\DataManager :: retrieves(
-            \group\Group :: class_name(),
-            new DataClassRetrievesParameters(
-                $condition,
-                null,
-                null,
-                array(new ObjectTableOrder(\group\Group :: PROPERTY_NAME))));
+        $groups = \core\group\DataManager :: retrieves(
+            Group :: class_name(),
+            new DataClassRetrievesParameters($condition, null, null, array(new ObjectTableOrder(Group :: PROPERTY_NAME))));
 
         if ($this->get_user()->is_platform_admin())
         {
@@ -186,7 +184,7 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
         elseif (! $this->get_user()->is_platform_admin() &&
              \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
         {
-            $group = \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), (int) $filter_id);
+            $group = \core\group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $filter_id);
             $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
 
             foreach ($target_groups as $target_group)
@@ -203,8 +201,8 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
 
         if ($add_users)
         {
-            $condition = new EqualityCondition(\group\GroupRelUser :: PROPERTY_GROUP_ID, $filter_id);
-            $relations = \group\DataManager :: retrieves(\group\GroupRelUser :: class_name(), $condition);
+            $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $filter_id);
+            $relations = \core\group\DataManager :: retrieves(GroupRelUser :: class_name(), $condition);
 
             $user_ids = array();
 

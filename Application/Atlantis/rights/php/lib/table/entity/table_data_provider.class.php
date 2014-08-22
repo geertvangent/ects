@@ -1,9 +1,9 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\DataClassCountParameters;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\NewObjectTableDataProvider;
+use libraries\DataClassCountParameters;
+use libraries\DataClassRetrievesParameters;
+use libraries\NewObjectTableDataProvider;
 
 class EntityTableDataProvider extends NewObjectTableDataProvider
 {

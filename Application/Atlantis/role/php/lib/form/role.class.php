@@ -1,9 +1,9 @@
 <?php
 namespace application\atlantis\role;
 
-use common\libraries\FormValidator;
-use common\libraries\Utilities;
-use common\libraries\Translation;
+use libraries\FormValidator;
+use libraries\Utilities;
+use libraries\Translation;
 
 class RoleForm extends FormValidator
 {

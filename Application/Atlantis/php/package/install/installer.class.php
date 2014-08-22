@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis;
 
-use common\libraries\WebApplicationInstaller;
+use libraries\WebApplicationInstaller;
 
 /**
  * Atlantis application

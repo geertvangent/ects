@@ -1,8 +1,8 @@
 <?php
 namespace application\atlantis\user_group;
 
-use common\libraries\Utilities;
-use common\libraries\Translation;
+use libraries\Utilities;
+use libraries\Translation;
 
 class CreatorComponent extends Manager
 {

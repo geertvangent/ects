@@ -2,16 +2,16 @@
 namespace application\atlantis\role\entitlement;
 
 use application\atlantis\SessionBreadcrumbs;
-use common\libraries\DelegateComponent;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\DynamicVisualTab;
-use common\libraries\Request;
-use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\EqualityCondition;
-use common\libraries\Translation;
-use common\libraries\Utilities;
+use libraries\DelegateComponent;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\DynamicVisualTab;
+use libraries\Request;
+use libraries\DynamicVisualTabsRenderer;
+use libraries\DataClassRetrievesParameters;
+use libraries\EqualityCondition;
+use libraries\Translation;
+use libraries\Utilities;
 
 class ListerComponent extends Manager implements DelegateComponent
 {

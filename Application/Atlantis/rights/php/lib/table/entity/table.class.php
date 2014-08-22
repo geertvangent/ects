@@ -1,13 +1,13 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\Translation;
-use common\libraries\ObjectTableFormAction;
-use common\libraries\ObjectTableFormActions;
-use common\libraries\NewObjectTableFormActionsSupport;
-use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
-use common\libraries\NewObjectTable;
-use common\libraries\Utilities;
+use libraries\Translation;
+use libraries\ObjectTableFormAction;
+use libraries\ObjectTableFormActions;
+use libraries\NewObjectTableFormActionsSupport;
+use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\NewObjectTable;
+use libraries\Utilities;
 
 class EntityTable extends NewObjectTable implements NewObjectTableColumnModelActionsColumnSupport, 
     NewObjectTableFormActionsSupport

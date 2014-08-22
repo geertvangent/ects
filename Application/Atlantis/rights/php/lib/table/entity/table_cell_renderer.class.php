@@ -1,15 +1,17 @@
 <?php
 namespace application\atlantis\rights;
 
-use rights\NewPlatformGroupEntity;
-use rights\NewUserEntity;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\Toolbar;
-use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
-use common\libraries\NewObjectTableCellRenderer;
-use common\libraries\Translation;
-use common\libraries\Utilities;
+use libraries\ToolbarItem;
+use libraries\Theme;
+use libraries\Toolbar;
+use libraries\NewObjectTableCellRendererActionsColumnSupport;
+use libraries\NewObjectTableCellRenderer;
+use libraries\Translation;
+use libraries\Utilities;
+use core\rights\NewUserEntity;
+use core\user\User;
+use core\group\Group;
+use core\rights\NewPlatformGroupEntity;
 
 class EntityTableCellRenderer extends NewObjectTableCellRenderer implements
     NewObjectTableCellRendererActionsColumnSupport
@@ -25,10 +27,10 @@ class EntityTableCellRenderer extends NewObjectTableCellRenderer implements
                 switch ($location_entity_right->get_entity_type())
                 {
                     case NewUserEntity :: ENTITY_TYPE :
-                        $context = \user\User :: context();
+                        $context = User :: context();
                         break;
                     case NewPlatformGroupEntity :: ENTITY_TYPE :
-                        $context = \group\Group :: context();
+                        $context = Group :: context();
                         break;
                 }
 
@@ -45,12 +47,12 @@ class EntityTableCellRenderer extends NewObjectTableCellRenderer implements
                 switch ($location_entity_right->get_entity_type())
                 {
                     case NewUserEntity :: ENTITY_TYPE :
-                        return \user\DataManager :: retrieve(
-                            \user\User :: class_name(),
+                        return \core\user\DataManager :: retrieve(
+                            \core\user\User :: class_name(),
                             (int) $location_entity_right->get_entity_id())->get_fullname();
                     case NewPlatformGroupEntity :: ENTITY_TYPE :
-                        return \group\DataManager :: retrieve_by_id(
-                            \group\Group :: class_name(),
+                        return \core\group\DataManager :: retrieve_by_id(
+                            \core\group\Group :: class_name(),
                             (int) $location_entity_right->get_entity_id())->get_name();
                 }
             case Translation :: get('Group') :

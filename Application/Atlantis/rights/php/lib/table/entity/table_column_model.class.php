@@ -1,10 +1,10 @@
 <?php
 namespace application\atlantis\rights;
 
-use common\libraries\Translation;
-use common\libraries\StaticTableColumn;
-use common\libraries\NewObjectTableColumnModel;
-use common\libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\Translation;
+use libraries\StaticTableColumn;
+use libraries\NewObjectTableColumnModel;
+use libraries\NewObjectTableColumnModelActionsColumnSupport;
 
 class EntityTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport
 {

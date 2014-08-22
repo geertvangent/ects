@@ -1,6 +1,6 @@
 <?php
 namespace application\atlantis\rights;
 
-class RightsLocation extends \rights\RightsLocation
+class RightsLocation extends \core\rights\RightsLocation
 {
 }
