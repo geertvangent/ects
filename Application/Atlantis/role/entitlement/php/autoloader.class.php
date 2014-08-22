@@ -1,6 +1,8 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
+use libraries\AutoloaderUtilities;
+
 class Autoloader
 {
 
@@ -9,25 +11,24 @@ class Autoloader
      *
      * @var multitype:string
      */
-     private static $map = array(
-         'Autoloader' => '/autoloader.class.php',
-         'EntitlementForm' => '/lib/form/entitlement.class.php',
-         'Manager' => '/lib/manager/manager.class.php',
-         'BrowserComponent' => '/lib/manager/component/browser.class.php',
-         'DeleterComponent' => '/lib/manager/component/deleter.class.php',
-         'ListerComponent' => '/lib/manager/component/lister.class.php',
-         'DataManager' => '/lib/storage/data_manager.class.php',
-         'Entitlement' => '/lib/storage/data_class/entitlement.class.php',
-         'DoctrineDataManager' => '/lib/storage/data_manager/doctrine.class.php',
-         'Mdb2DataManager' => '/lib/storage/data_manager/mdb2.class.php',
-         'EntitlementTable' => '/lib/table/entitlement/table.class.php',
-         'EntitlementTableCellRenderer' => '/lib/table/entitlement/table_cell_renderer.class.php',
-         'EntitlementTableColumnModel' => '/lib/table/entitlement/table_column_model.class.php',
-         'EntitlementTableDataProvider' => '/lib/table/entitlement/table_data_provider.class.php',
-         'Activator' => '/package/activate/activator.class.php',
-         'Deactivator' => '/package/deactivate/deactivator.class.php',
-         'Installer' => '/package/install/installer.class.php'
-    );
+    private static $map = array(
+        'Autoloader' => '/autoloader.class.php',
+        'EntitlementForm' => '/lib/form/entitlement.class.php',
+        'Manager' => '/lib/manager/manager.class.php',
+        'BrowserComponent' => '/lib/manager/component/browser.class.php',
+        'DeleterComponent' => '/lib/manager/component/deleter.class.php',
+        'ListerComponent' => '/lib/manager/component/lister.class.php',
+        'DataManager' => '/lib/storage/data_manager.class.php',
+        'Entitlement' => '/lib/storage/data_class/entitlement.class.php',
+        'DoctrineDataManager' => '/lib/storage/data_manager/doctrine.class.php',
+        'Mdb2DataManager' => '/lib/storage/data_manager/mdb2.class.php',
+        'EntitlementTable' => '/lib/table/entitlement/table.class.php',
+        'EntitlementTableCellRenderer' => '/lib/table/entitlement/table_cell_renderer.class.php',
+        'EntitlementTableColumnModel' => '/lib/table/entitlement/table_column_model.class.php',
+        'EntitlementTableDataProvider' => '/lib/table/entitlement/table_data_provider.class.php',
+        'Activator' => '/package/activate/activator.class.php',
+        'Deactivator' => '/package/deactivate/deactivator.class.php',
+        'Installer' => '/package/install/installer.class.php');
 
     /**
      * Try to load the class
@@ -54,8 +55,7 @@ class Autoloader
      */
     public static function synch($update)
     {
-        return \libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
+        return AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
     }
-
 }
 ?>

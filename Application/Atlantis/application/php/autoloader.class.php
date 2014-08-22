@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\application;
 
-use libraries\Utilities;
+use libraries\AutoloaderUtilities;
 
 class Autoloader
 {
@@ -59,7 +59,7 @@ class Autoloader
      */
     public static function synch($update)
     {
-        return Utilities :: synch(__DIR__, __DIR__, $update);
+        return AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
     }
 }
 ?>
