@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use common\libraries\Path;
+use libraries\Path;
 use SimpleXMLElement;
 
 require_once Path :: get_plugin_path() . '/webservices/rest/client/rest_result.class.php';

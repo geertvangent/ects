@@ -1,18 +1,19 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use common\libraries\AndCondition;
-use common\libraries\NotCondition;
-use common\libraries\ObjectTableOrder;
-use common\libraries\PatternMatchCondition;
-use common\libraries\FormValidator;
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\PropertyConditionVariable;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\PlatformSetting;
-use common\libraries\InequalityCondition;
-use common\libraries\StaticConditionVariable;
+use libraries\AndCondition;
+use libraries\NotCondition;
+use libraries\ObjectTableOrder;
+use libraries\PatternMatchCondition;
+use libraries\FormValidator;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\PropertyConditionVariable;
+use libraries\DataClassRetrievesParameters;
+use libraries\PlatformSetting;
+use libraries\InequalityCondition;
+use libraries\StaticConditionVariable;
+use core\group\Group;
 
 class TicketForm extends FormValidator
 {
@@ -93,33 +94,29 @@ class TicketForm extends FormValidator
 
         // Academic year
         $code = 'AY_' . PlatformSetting :: get('academic_year', 'application\ehb_sync\bamaflex');
-        $academic_year = \group\DataManager :: retrieve_group_by_code($code);
+        $academic_year = \core\group\DataManager :: retrieve_group_by_code($code);
 
         // Faculty
         $conditions = array();
         $conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_CODE),
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
             'DEP_*');
         $conditions[] = new NotCondition(
             new PatternMatchCondition(
-                new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_CODE),
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
                 'DEP_*_*'));
         $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_LEFT_VALUE),
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_LEFT_VALUE),
             InequalityCondition :: GREATER_THAN,
             new StaticConditionVariable($academic_year->get_left_value()));
         $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_RIGHT_VALUE),
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_RIGHT_VALUE),
             InequalityCondition :: LESS_THAN,
             new StaticConditionVariable($academic_year->get_right_value()));
         $condition = new AndCondition($conditions);
-        $groups = \group\DataManager :: retrieves(
-            \group\Group :: class_name(),
-            new DataClassRetrievesParameters(
-                $condition,
-                null,
-                null,
-                array(new ObjectTableOrder(\group\Group :: PROPERTY_NAME))));
+        $groups = \core\group\DataManager :: retrieves(
+            Group :: class_name(),
+            new DataClassRetrievesParameters($condition, null, null, array(new ObjectTableOrder(Group :: PROPERTY_NAME))));
 
         $faculty_options = array();
         $faculty_options['Centrale Administratie'] = 'Centrale Administratie';
@@ -134,25 +131,21 @@ class TicketForm extends FormValidator
         // Training
         $conditions = array();
         $conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_CODE),
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
             'TRA_OP_*');
         $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_LEFT_VALUE),
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_LEFT_VALUE),
             InequalityCondition :: GREATER_THAN,
             new StaticConditionVariable($academic_year->get_left_value()));
         $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(\group\Group :: class_name(), \group\Group :: PROPERTY_RIGHT_VALUE),
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_RIGHT_VALUE),
             InequalityCondition :: LESS_THAN,
             new StaticConditionVariable($academic_year->get_right_value()));
         $condition = new AndCondition($conditions);
 
-        $groups = \group\DataManager :: retrieves(
-            \group\Group :: class_name(),
-            new DataClassRetrievesParameters(
-                $condition,
-                null,
-                null,
-                array(new ObjectTableOrder(\group\Group :: PROPERTY_NAME))));
+        $groups = \core\group\DataManager :: retrieves(
+            Group :: class_name(),
+            new DataClassRetrievesParameters($condition, null, null, array(new ObjectTableOrder(Group :: PROPERTY_NAME))));
 
         $training_options = array();
         $training_options['Andere'] = 'Andere';

@@ -1,8 +1,8 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use common\libraries\StringUtilities;
-use common\libraries\Path;
+use libraries\StringUtilities;
+use libraries\Path;
 use HTTP_Request;
 
 require_once Path :: get_plugin_path() . 'webservices/rest/client/rest_client.class.php';
