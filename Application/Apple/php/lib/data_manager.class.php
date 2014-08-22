@@ -7,7 +7,7 @@ namespace application\ehb_apple;
  */
 class DataManager extends \libraries\DataManager
 {
-const PREFIX = 'atlantis_';
+const PREFIX = 'ehb_apple_';
     /**
      * Gets the type of DataManager to be instantiated
      *
