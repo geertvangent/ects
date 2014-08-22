@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_apple;
 
-use common\libraries\WebApplication;
+use libraries\WebApplication;
 
 class Manager extends WebApplication
 {
@@ -11,7 +11,7 @@ class Manager extends WebApplication
 
     /**
      * Constructor
-     * 
+     *
      * @param $user_id int
      */
     public function __construct($user)
