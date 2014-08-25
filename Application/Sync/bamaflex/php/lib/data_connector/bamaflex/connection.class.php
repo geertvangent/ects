@@ -1,18 +1,18 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\DataSourceName;
-use common\libraries\PlatformSetting;
+use libraries\DataSourceName;
+use libraries\PlatformSetting;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Common\ClassLoader;
-use common\libraries\Path;
+use libraries\Path;
 
 /**
  * This class represents the current CAS Account database connection.
  *
  * @author Hans De Bisschop
  */
-class BamaflexConnection extends \common\libraries\DoctrineConnection
+class BamaflexConnection extends \libraries\DoctrineConnection
 {
 
     /**

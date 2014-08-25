@@ -1,9 +1,9 @@
 <?php
 namespace application\ehb_sync\cas\storage;
 
-use common\libraries\DataSourceName;
-use common\libraries\PlatformSetting;
-use common\libraries\Path;
+use libraries\DataSourceName;
+use libraries\PlatformSetting;
+use libraries\Path;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Common\ClassLoader;
 
@@ -12,7 +12,7 @@ use Doctrine\Common\ClassLoader;
  * 
  * @author Hans De Bisschop
  */
-class DoctrineConnection extends \common\libraries\DoctrineConnection
+class DoctrineConnection extends \libraries\DoctrineConnection
 {
 
     /**

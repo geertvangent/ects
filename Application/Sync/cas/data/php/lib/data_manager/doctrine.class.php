@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\cas\data;
 
-use common\libraries\DoctrineDatabase;
+use libraries\DoctrineDatabase;
 
 class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterface
 {
@@ -13,6 +13,5 @@ class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterfa
     {
         $this->set_connection(DoctrineConnection :: get_instance()->get_connection());
         $this->get_connection()->setCharset('utf8');
-        $this->set_prefix('');
     }
 }

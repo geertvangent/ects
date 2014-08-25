@@ -6,6 +6,6 @@ namespace application\cas_user\account\test;
  * 
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class CheckSourceCodeTest extends \common\libraries\CheckSourceCodeTest
+class CheckSourceCodeTest extends \libraries\CheckSourceCodeTest
 {
 }

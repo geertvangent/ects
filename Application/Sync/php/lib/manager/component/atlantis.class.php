@@ -1,8 +1,8 @@
 <?php
 namespace application\ehb_sync;
 
-use common\libraries\NotAllowedException;
-use common\libraries\DelegateComponent;
+use libraries\NotAllowedException;
+use libraries\DelegateComponent;
 
 class AtlantisComponent extends Manager implements DelegateComponent
 {

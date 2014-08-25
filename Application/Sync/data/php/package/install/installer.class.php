@@ -5,7 +5,7 @@ namespace application\ehb_sync\data;
  *
  * @author Hans De Bisschop
  */
-class Installer extends \common\libraries\package\Installer
+class Installer extends \configuration\package\Installer
 {
 
     /**

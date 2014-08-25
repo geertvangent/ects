@@ -5,7 +5,7 @@ namespace application\ehb_sync\bamaflex;
  *
  * @package ehb.sync;
  */
-use group\Group;
+use core\group\Group;
 
 class ArchiveDummyGroupSynchronization extends ArchiveGroupSynchronization
 {

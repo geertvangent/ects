@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\data;
 
-use common\libraries\DelegateComponent;
+use libraries\DelegateComponent;
 
 class RepositoryDocumentComponent extends Manager implements DelegateComponent
 {

@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\ArrayResultSet;
+use libraries\ArrayResultSet;
 
 class BamaflexResultSet extends ArrayResultSet
 {

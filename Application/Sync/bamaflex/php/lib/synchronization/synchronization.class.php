@@ -1,8 +1,8 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\PlatformSetting;
-use common\libraries\Utilities;
+use libraries\PlatformSetting;
+use libraries\Utilities;
 
 abstract class Synchronization
 {
@@ -72,7 +72,7 @@ abstract class Synchronization
     /**
      *
      * @param $query string
-     * @return \common\libraries\RecordResultSet
+     * @return \libraries\RecordResultSet
      */
     public function get_result($query)
     {

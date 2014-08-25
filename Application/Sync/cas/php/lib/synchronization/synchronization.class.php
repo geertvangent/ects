@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\cas;
 
-use common\libraries\Utilities;
+use libraries\Utilities;
 
 abstract class Synchronization
 {

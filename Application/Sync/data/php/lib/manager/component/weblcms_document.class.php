@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\data;
 
-use common\libraries\DelegateComponent;
+use libraries\DelegateComponent;
 
 class WeblcmsDocumentComponent extends Manager implements DelegateComponent
 {

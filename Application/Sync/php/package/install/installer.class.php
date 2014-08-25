@@ -5,7 +5,7 @@ namespace application\ehb_sync;
  *
  * @author Hans De Bisschop
  */
-use common\libraries\WebApplicationInstaller;
+use libraries\WebApplicationInstaller;
 
 class Installer extends WebApplicationInstaller
 {

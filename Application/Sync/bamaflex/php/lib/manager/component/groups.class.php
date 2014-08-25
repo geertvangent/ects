@@ -1,8 +1,8 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\DelegateComponent;
-use common\libraries\PlatformSetting;
+use libraries\DelegateComponent;
+use libraries\PlatformSetting;
 
 class GroupsComponent extends Manager implements DelegateComponent
 {
@@ -25,7 +25,7 @@ class GroupsComponent extends Manager implements DelegateComponent
             $years = PlatformSetting :: get('academic_year', __NAMESPACE__);
             $years = explode(',', $years);
 
-            $root_group = \group\DataManager :: get_root_group();
+            $root_group = \core\group\DataManager :: get_root_group();
 
             foreach ($years as $year)
             {

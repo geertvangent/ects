@@ -1,15 +1,16 @@
 <?php
 namespace application\ehb_sync\atlantis;
 
-use common\libraries\AndCondition;
-use common\libraries\InequalityCondition;
+use libraries\AndCondition;
+use libraries\InequalityCondition;
 use application\discovery\DataManager;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\EqualityCondition;
-use common\libraries\DataClassRetrieveParameters;
-use common\libraries\PropertyConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\DataClassRetrievesParameters;
+use libraries\EqualityCondition;
+use libraries\DataClassRetrieveParameters;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
 use application\discovery\RightsGroupEntityRight;
+use core\group\Group;
 
 class DiscoverySynchronization
 {
@@ -107,8 +108,8 @@ class DiscoverySynchronization
 
                     while ($entity = $entities->next_result())
                     {
-                        $group = \group\DataManager :: retrieve_by_id(
-                            \group\Group :: class_name(),
+                        $group = \core\group\DataManager :: retrieve_by_id(
+                            Group :: class_name(),
                             $entity->get_context()->get_id());
 
                         $new_entity_right_cache[] = $module_instance->get_id() . '_' . $entity->get_entity_type() . '_' .

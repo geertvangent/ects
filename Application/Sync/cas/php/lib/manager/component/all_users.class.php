@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\cas;
 
-use common\libraries\DelegateComponent;
+use libraries\DelegateComponent;
 
 class AllUsersComponent extends Manager implements DelegateComponent
 {

@@ -1,8 +1,8 @@
 <?php
 namespace application\ehb_sync\data;
 
-use common\libraries\FileLogger;
-use common\libraries\DataClassCache;
+use libraries\FileLogger;
+use libraries\DataClassCache;
 use repository\content_object\introduction\Introduction;
 
 /**

@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\DelegateComponent;
+use libraries\DelegateComponent;
 
 class ArchiveGroupsComponent extends Manager implements DelegateComponent
 {
@@ -21,7 +21,7 @@ class ArchiveGroupsComponent extends Manager implements DelegateComponent
             Synchronization :: log('Group sync started', date('c', time()));
             flush();
 
-            $root_group = \group\DataManager :: get_root_group();
+            $root_group = \core\group\DataManager :: get_root_group();
 
             $synchronization = ArchiveGroupSynchronization :: factory(
                 'archive_academic_year',

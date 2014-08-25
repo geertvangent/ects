@@ -1,14 +1,14 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\PlatformSetting;
-use common\libraries\InCondition;
-use group\GroupRelUser;
-use group\Group;
-use common\libraries\EqualityCondition;
-use common\libraries\Utilities;
-use common\libraries\AndCondition;
-use common\libraries\DataClassDistinctParameters;
+use libraries\PlatformSetting;
+use libraries\InCondition;
+use core\group\Group;
+use libraries\EqualityCondition;
+use libraries\Utilities;
+use libraries\AndCondition;
+use libraries\DataClassDistinctParameters;
+use core\group\GroupRelUser;
 
 /**
  *
@@ -84,7 +84,7 @@ class ArchiveGroupSynchronization extends Synchronization
 
     public function determine_current_group()
     {
-        $this->current_group = \group\DataManager :: retrieve_group_by_code_and_parent_id(
+        $this->current_group = \core\group\DataManager :: retrieve_group_by_code_and_parent_id(
             $this->get_code(),
             $this->get_parent_group()->get_id());
     }
@@ -190,8 +190,8 @@ class ArchiveGroupSynchronization extends Synchronization
     public function synchronize_users()
     {
         $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
-        $current_users = \group\DataManager :: distinct(
-            \group\GroupRelUser :: class_name(),
+        $current_users = \core\group\DataManager :: distinct(
+            \core\group\GroupRelUser :: class_name(),
             new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
         $source_users = $this->get_users();
         // $source_users = array();
@@ -200,18 +200,20 @@ class ArchiveGroupSynchronization extends Synchronization
 
         foreach ($to_add as $user_id)
         {
-            $relation = new \group\GroupRelUser();
+            $relation = new \core\group\GroupRelUser();
             $relation->set_group_id($this->current_group->get_id());
             $relation->set_user_id($user_id);
             $relation->create();
         }
 
         $conditions = array();
-        $conditions[] = new EqualityCondition(\group\GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
-        $conditions[] = new InCondition(\group\GroupRelUser :: PROPERTY_USER_ID, $to_delete);
+        $conditions[] = new EqualityCondition(
+            \core\group\GroupRelUser :: PROPERTY_GROUP_ID,
+            $this->current_group->get_id());
+        $conditions[] = new InCondition(\core\group\GroupRelUser :: PROPERTY_USER_ID, $to_delete);
         $condition = new AndCondition($conditions);
 
-        return \group\DataManager :: deletes(\group\GroupRelUser :: class_name(), $condition);
+        return \core\group\DataManager :: deletes(\core\group\GroupRelUser :: class_name(), $condition);
     }
 
     /**
@@ -248,7 +250,7 @@ class ArchiveGroupSynchronization extends Synchronization
 
             if (count($result_codes) > 0)
             {
-                $results = \user\DataManager :: retrieve_users_by_official_codes($result_codes);
+                $results = \core\user\DataManager :: retrieve_users_by_official_codes($result_codes);
                 while ($result = $results->next_result())
                 {
                     $user_ids[] = $result->get_id();

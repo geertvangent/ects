@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\cas\data;
 
-use common\libraries\Mdb2Database;
+use libraries\Mdb2Database;
 
 class Mdb2DataManager extends Mdb2Database implements DataManagerInterface
 {
@@ -13,6 +13,5 @@ class Mdb2DataManager extends Mdb2Database implements DataManagerInterface
     {
         $this->set_connection(Mdb2Connection :: get_instance()->get_connection());
         $this->get_connection()->setCharset('utf8');
-        $this->set_prefix('');
     }
 }

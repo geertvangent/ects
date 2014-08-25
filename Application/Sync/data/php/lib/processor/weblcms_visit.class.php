@@ -2,10 +2,10 @@
 namespace application\ehb_sync\data;
 
 use application\weblcms\CourseTool;
-use common\libraries\FileLogger;
-use common\libraries\DataClassRetrieveParameters;
-use common\libraries\ObjectTableOrder;
-use common\libraries\DataClassCache;
+use libraries\FileLogger;
+use libraries\DataClassRetrieveParameters;
+use libraries\ObjectTableOrder;
+use libraries\DataClassCache;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal

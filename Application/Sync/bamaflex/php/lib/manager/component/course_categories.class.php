@@ -2,8 +2,8 @@
 namespace application\ehb_sync\bamaflex;
 
 use application\weblcms\CourseCategory;
-use common\libraries\DelegateComponent;
-use common\libraries\PlatformSetting;
+use libraries\DelegateComponent;
+use libraries\PlatformSetting;
 
 class CourseCategoriesComponent extends Manager implements DelegateComponent
 {

@@ -1,11 +1,11 @@
 <?php
 namespace application\ehb_sync;
 
-use common\libraries\NotAllowedException;
-use common\libraries\Utilities;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\DelegateComponent;
+use libraries\NotAllowedException;
+use libraries\Utilities;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\DelegateComponent;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

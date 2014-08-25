@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\data;
 
-use common\libraries\DataClass;
+use libraries\DataClass;
 
 /**
  * Tracks the visits of a user to the personal calendar

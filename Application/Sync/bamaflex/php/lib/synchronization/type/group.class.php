@@ -1,13 +1,13 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\InCondition;
-use group\GroupRelUser;
-use group\Group;
-use common\libraries\EqualityCondition;
-use common\libraries\Utilities;
-use common\libraries\AndCondition;
-use common\libraries\DataClassDistinctParameters;
+use libraries\InCondition;
+use core\group\GroupRelUser;
+use core\group\Group;
+use libraries\EqualityCondition;
+use libraries\Utilities;
+use libraries\AndCondition;
+use libraries\DataClassDistinctParameters;
 
 /**
  *
@@ -84,7 +84,7 @@ class GroupSynchronization extends Synchronization
 
     public function determine_current_group()
     {
-        $this->current_group = \group\DataManager :: retrieve_group_by_code_and_parent_id(
+        $this->current_group = \core\group\DataManager :: retrieve_group_by_code_and_parent_id(
             $this->get_code(),
             $this->get_parent_group()->get_id());
     }
@@ -190,7 +190,7 @@ class GroupSynchronization extends Synchronization
     public function synchronize_users()
     {
         $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
-        $current_users = \group\DataManager :: distinct(
+        $current_users = \core\group\DataManager :: distinct(
             GroupRelUser :: class_name(),
             new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
         $source_users = $this->get_users();
@@ -211,7 +211,7 @@ class GroupSynchronization extends Synchronization
         $conditions[] = new InCondition(GroupRelUser :: PROPERTY_USER_ID, $to_delete);
         $condition = new AndCondition($conditions);
 
-        return \group\DataManager :: deletes(GroupRelUser :: class_name(), $condition);
+        return \core\group\DataManager :: deletes(GroupRelUser :: class_name(), $condition);
     }
 
     /**
@@ -248,7 +248,7 @@ class GroupSynchronization extends Synchronization
 
             if (count($result_codes) > 0)
             {
-                $results = \user\DataManager :: retrieve_users_by_official_codes($result_codes);
+                $results = \core\user\DataManager :: retrieve_users_by_official_codes($result_codes);
                 while ($result = $results->next_result())
                 {
                     $user_ids[] = $result->get_id();

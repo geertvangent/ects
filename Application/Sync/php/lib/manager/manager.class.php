@@ -1,11 +1,10 @@
 <?php
 namespace application\ehb_sync;
 
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\CommonDataManager;
-use common\libraries\WebApplication;
-use common\libraries\package\PackageList;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\WebApplication;
+use configuration\DataManager;
 
 class Manager extends WebApplication
 {
@@ -49,38 +48,36 @@ class Manager extends WebApplication
 
     public static function get_installable_application_packages($include_installed = false)
     {
-        $package_list = new PackageList(
+        $package_list = new \configuration\package\PackageList(
             self :: context(),
             Translation :: get('TypeName', null, __NAMESPACE__),
             Theme :: get_image_path() . 'logo/16.png');
 
-        if (! CommonDataManager :: get_registration(\application\ehb_sync\bamaflex\Manager :: context()) ||
-             $include_installed)
+        if (! DataManager :: get_registration(\application\ehb_sync\bamaflex\Manager :: context()) || $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\bamaflex\Manager :: context());
         }
 
-        if (! CommonDataManager :: get_registration(\application\ehb_sync\atlantis\Manager :: context()) ||
-             $include_installed)
+        if (! DataManager :: get_registration(\application\ehb_sync\atlantis\Manager :: context()) || $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\atlantis\Manager :: context());
         }
 
-        if (! CommonDataManager :: get_registration(\application\ehb_sync\cas\Manager :: context()) || $include_installed)
+        if (! DataManager :: get_registration(\application\ehb_sync\cas\Manager :: context()) || $include_installed)
         {
             $package_list->add_package(\application\ehb_sync\cas\Manager :: context());
         }
 
-        $cas_list = new \common\libraries\package\PackageList(
+        $cas_list = new \configuration\package\PackageList(
             self :: context() . '\cas',
             Translation :: get('Cas', null, __NAMESPACE__));
 
-        if (! CommonDataManager :: get_registration(self :: context() . '\cas\data') || $include_installed)
+        if (! DataManager :: get_registration(self :: context() . '\cas\data') || $include_installed)
         {
             $cas_list->add_package(self :: context() . '\cas\data');
         }
 
-        if (! CommonDataManager :: get_registration(self :: context() . '\cas\storage') || $include_installed)
+        if (! DataManager :: get_registration(self :: context() . '\cas\storage') || $include_installed)
         {
             $cas_list->add_package(self :: context() . '\cas\storage');
         }

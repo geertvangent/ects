@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use common\libraries\SubManager;
+use libraries\SubManager;
 
 class Manager extends SubManager
 {

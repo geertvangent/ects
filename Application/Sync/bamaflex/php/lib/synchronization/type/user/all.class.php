@@ -5,7 +5,7 @@ namespace application\ehb_sync\bamaflex;
  *
  * @package ehb.sync;
  */
-use user\User;
+use core\user\User;
 
 class AllUserSynchronization extends UserSynchronization
 {
@@ -27,7 +27,7 @@ class AllUserSynchronization extends UserSynchronization
 
     public function process_data($person)
     {
-        $user = \user\DataManager :: retrieve_user_by_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
+        $user = \core\user\DataManager :: retrieve_user_by_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
 
         $utf_last_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_LAST_NAME]);
         $utf_first_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_FIRST_NAME]);

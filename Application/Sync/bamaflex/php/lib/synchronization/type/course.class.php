@@ -6,6 +6,7 @@ use application\weblcms\CourseManagementRights;
 use application\weblcms\CourseSettingsConnector;
 use application\weblcms\CourseSettingsController;
 use application\weblcms\course\Course;
+use core\group\Group;
 
 /**
  *
@@ -83,8 +84,8 @@ class CourseSynchronization extends Synchronization
 
                 self :: log('added', $new_course->get_title());
 
-                $group = \group\DataManager :: retrieve_group_by_code($teacher_code);
-                if ($group instanceof \group\Group)
+                $group = \core\group\DataManager :: retrieve_group_by_code($teacher_code);
+                if ($group instanceof Group)
                 {
                     \application\weblcms\course\DataManager :: subscribe_group_to_course(
                         $new_course->get_id(),
@@ -93,8 +94,8 @@ class CourseSynchronization extends Synchronization
                     self :: log('added teacher group', $new_course->get_title());
                 }
 
-                $group = \group\DataManager :: retrieve_group_by_code($student_code);
-                if ($group instanceof \group\Group)
+                $group = \core\group\DataManager :: retrieve_group_by_code($student_code);
+                if ($group instanceof Group)
                 {
                     \application\weblcms\course\DataManager :: subscribe_group_to_course(
                         $new_course->get_id(),
@@ -114,8 +115,8 @@ class CourseSynchronization extends Synchronization
             $teacher_code = 'COU_OP_' . $course['id'];
             $student_code = 'COU_STU_' . $course['id'];
 
-            $group = \group\DataManager :: retrieve_group_by_code($teacher_code);
-            if ($group instanceof \group\Group)
+            $group = \core\group\DataManager :: retrieve_group_by_code($teacher_code);
+            if ($group instanceof Group)
             {
                 if (! \application\weblcms\course\DataManager :: is_group_direct_subscribed_to_course(
                     $current_course->get_id(),
@@ -129,8 +130,8 @@ class CourseSynchronization extends Synchronization
                 }
             }
 
-            $group = \group\DataManager :: retrieve_group_by_code($student_code);
-            if ($group instanceof \group\Group)
+            $group = \core\group\DataManager :: retrieve_group_by_code($student_code);
+            if ($group instanceof Group)
             {
                 if (! \application\weblcms\course\DataManager :: is_group_direct_subscribed_to_course(
                     $current_course->get_id(),

@@ -5,7 +5,7 @@ namespace application\ehb_sync\cas;
  *
  * @package ehb.sync;
  */
-use user\User;
+use core\user\User;
 
 class AllUserSynchronization extends UserSynchronization
 {
@@ -23,7 +23,7 @@ class AllUserSynchronization extends UserSynchronization
 
     public function process_data($person)
     {
-        $user = \user\DataManager :: retrieve_user_by_official_code($person->get_person_id());
+        $user = \core\user\DataManager :: retrieve_user_by_official_code($person->get_person_id());
         
         if (! $user instanceof User)
         {

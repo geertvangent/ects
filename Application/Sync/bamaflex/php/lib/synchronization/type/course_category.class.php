@@ -2,7 +2,7 @@
 namespace application\ehb_sync\bamaflex;
 
 use application\weblcms\CourseCategory;
-use common\libraries\Utilities;
+use libraries\Utilities;
 
 /**
  *

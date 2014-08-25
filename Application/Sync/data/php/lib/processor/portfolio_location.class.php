@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\data;
 
-use common\libraries\FileLogger;
+use libraries\FileLogger;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
