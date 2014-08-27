@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
 
-use common\libraries\StringUtilities;
-use common\libraries\Translation;
-use common\libraries\Display;
-use common\libraries\Path;
+use libraries\StringUtilities;
+use libraries\Translation;
+use libraries\Display;
+use libraries\Path;
 use PHPExcel;
 
 require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';

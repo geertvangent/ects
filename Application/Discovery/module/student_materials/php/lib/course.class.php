@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\student_materials;
 
-use common\libraries\Utilities;
-use common\libraries\DataClass;
+use libraries\Utilities;
+use libraries\DataClass;
 use application\discovery\module\career\Mark;
 
 /**

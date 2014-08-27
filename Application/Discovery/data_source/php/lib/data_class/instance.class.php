@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\DataClass;
-use common\libraries\EqualityCondition;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\DataClassCountParameters;
+use libraries\DataClass;
+use libraries\EqualityCondition;
+use libraries\DataClassRetrievesParameters;
+use libraries\DataClassCountParameters;
 
 /**
  *

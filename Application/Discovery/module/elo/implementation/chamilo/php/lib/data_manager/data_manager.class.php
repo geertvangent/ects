@@ -1,17 +1,17 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use common\libraries\DataClassProperties;
-use common\libraries\ObjectTableOrder;
-use common\libraries\RecordRetrievesParameters;
-use common\libraries\FunctionConditionVariable;
-use common\libraries\PropertyConditionVariable;
-use common\libraries\StaticConditionVariable;
-use common\libraries\GroupBy;
-use common\libraries\AndCondition;
-use common\libraries\Condition;
+use libraries\DataClassProperties;
+use libraries\ObjectTableOrder;
+use libraries\RecordRetrievesParameters;
+use libraries\FunctionConditionVariable;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
+use libraries\GroupBy;
+use libraries\AndCondition;
+use libraries\Condition;
 
-class DataManager extends \common\libraries\DataManager
+class DataManager extends \libraries\DataManager
 {
     const COUNT = 'count';
 

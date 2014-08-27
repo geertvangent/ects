@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\ObjectTableColumnModel;
-use common\libraries\ObjectTableColumn;
+use libraries\ObjectTableColumnModel;
+use libraries\ObjectTableColumn;
 
 class DefaultInstanceTableColumnModel extends ObjectTableColumnModel
 {

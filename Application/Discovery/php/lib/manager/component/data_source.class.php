@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\BreadcrumbTrail;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\BreadcrumbTrail;
 use application\discovery\instance\Instance;
 
 class DataSourceComponent extends Manager

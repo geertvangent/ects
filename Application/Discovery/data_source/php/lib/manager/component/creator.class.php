@@ -1,12 +1,12 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\ToolbarItem;
-use common\libraries\SortableTableFromArray;
-use common\libraries\Request;
-use common\libraries\Translation;
-use common\libraries\Utilities;
-use common\libraries\Theme;
+use libraries\ToolbarItem;
+use libraries\SortableTableFromArray;
+use libraries\Request;
+use libraries\Translation;
+use libraries\Utilities;
+use libraries\Theme;
 use application\discovery\DataSource;
 
 class CreatorComponent extends Manager

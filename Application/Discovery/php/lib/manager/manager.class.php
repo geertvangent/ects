@@ -1,12 +1,12 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\CommonDataManager;
-use common\libraries\Translation;
-use common\libraries\PlatformSetting;
-use common\libraries\Theme;
-use common\libraries\WebApplication;
-use common\libraries\package\PackageList;
+use libraries\Translation;
+use libraries\PlatformSetting;
+use libraries\Theme;
+use libraries\WebApplication;
+use configuration\package\PackageList;
+use configuration\DataManager;
 
 /**
  *
@@ -68,7 +68,7 @@ class Manager extends WebApplication
 
         foreach (Module :: get_packages_from_filesystem() as $module_type)
         {
-            if (! CommonDataManager :: get_registration($module_type) || $include_installed)
+            if (! DataManager :: get_registration($module_type) || $include_installed)
             {
                 $module_list->add_package($module_type);
             }
@@ -98,12 +98,12 @@ class Manager extends WebApplication
 
         $package_list->add_child($module_list);
 
-        if (! CommonDataManager :: get_registration(self :: context() . '\data_source') || $include_installed)
+        if (! DataManager :: get_registration(self :: context() . '\data_source') || $include_installed)
         {
             $package_list->add_package(self :: context() . '\data_source');
         }
 
-        if (! CommonDataManager :: get_registration(self :: context() . '\instance') || $include_installed)
+        if (! DataManager :: get_registration(self :: context() . '\instance') || $include_installed)
         {
             $package_list->add_package(self :: context() . '\instance');
         }

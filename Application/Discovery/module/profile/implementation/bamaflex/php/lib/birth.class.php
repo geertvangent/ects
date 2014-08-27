@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\DatetimeUtilities;
-use common\libraries\DataClass;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\DatetimeUtilities;
+use libraries\DataClass;
 
 class Birth extends DataClass
 {

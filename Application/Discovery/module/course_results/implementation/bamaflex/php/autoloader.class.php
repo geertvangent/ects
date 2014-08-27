@@ -48,7 +48,7 @@ class Autoloader
      */
     public static function synch($update)
     {
-        return \common\libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
+        return \libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
     }
 
 }

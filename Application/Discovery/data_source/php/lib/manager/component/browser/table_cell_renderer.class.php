@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\Translation;
-use common\libraries\Utilities;
-use common\libraries\ToolbarItem;
-use common\libraries\Toolbar;
-use common\libraries\Theme;
+use libraries\Translation;
+use libraries\Utilities;
+use libraries\ToolbarItem;
+use libraries\Toolbar;
+use libraries\Theme;
 
 class InstanceBrowserTableCellRenderer extends DefaultInstanceTableCellRenderer
 {

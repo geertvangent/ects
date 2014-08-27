@@ -2,13 +2,12 @@
 namespace application\discovery\module\employment\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\DoctrineConditionTranslator;
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
+use libraries\DoctrineConditionTranslator;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
 use application\discovery\module\employment\DataManagerInterface;
-use user\UserDataManager;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -24,25 +23,25 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
      */
     public function retrieve_employments($parameters)
     {
-        $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-        
+        $user = \core\user\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+
         $official_code = $user->get_official_code();
-        
+
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($official_code));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('active'), 
+            new StaticColumnConditionVariable('active'),
             new StaticConditionVariable(1));
         $condition = new AndCondition($conditions);
-        
+
         $query = 'SELECT * FROM v_discovery_employment WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
              ' ORDER BY start_date DESC';
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -78,10 +77,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $employment->set_interruption_id($result->interruption_id);
                 $employment->set_interruption_category($result->interruption_category);
                 $employment->set_interruption_category_id($result->interruption_category_id);
-                
+
                 $this->employments[$official_code][] = $employment;
             }
-            
+
             return $this->employments[$official_code];
         }
         else
@@ -92,23 +91,23 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
     public function count_employments($parameters)
     {
-        $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-        
+        $user = \core\user\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+
         $official_code = $user->get_official_code();
-        
+
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($official_code));
-        
+
         $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $result = $statement->fetch(\PDO :: FETCH_OBJ);
-            
+
             return $result->employments_count;
         }
         else
@@ -120,14 +119,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_employment_parts($employment_id)
     {
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('assignment_id'), 
+            new StaticColumnConditionVariable('assignment_id'),
             new StaticConditionVariable($employment_id));
-        
+
         $query = 'SELECT * FROM v_discovery_employment_parts WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY start_date';
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -145,10 +144,10 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 $employment_part->set_training($result->training);
                 $employment_part->set_department($result->department);
                 $employment_part->set_department_id($result->department_id);
-                
+
                 $this->employment_parts[$employment_id][] = $employment_part;
             }
-            
+
             return $this->employment_parts[$employment_id];
         }
         else

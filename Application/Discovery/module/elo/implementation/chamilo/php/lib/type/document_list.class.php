@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use common\libraries\DataClass;
+use libraries\DataClass;
 
 class DocumentListData extends DataClass
 {

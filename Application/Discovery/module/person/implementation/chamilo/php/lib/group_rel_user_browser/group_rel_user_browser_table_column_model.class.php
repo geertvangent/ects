@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use group\DefaultGroupRelUserTableColumnModel;
-use common\libraries\StaticTableColumn;
+use core\group\DefaultGroupRelUserTableColumnModel;
+use libraries\StaticTableColumn;
 
 class GroupRelUserBrowserTableColumnModel extends DefaultGroupRelUserTableColumnModel
 {
@@ -24,7 +24,7 @@ class GroupRelUserBrowserTableColumnModel extends DefaultGroupRelUserTableColumn
 
     /**
      * Gets the modification column
-     * 
+     *
      * @return ContentObjectTableColumn
      */
     public static function get_modification_column()

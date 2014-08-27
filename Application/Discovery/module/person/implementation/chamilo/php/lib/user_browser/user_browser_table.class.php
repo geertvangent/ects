@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use common\libraries\NewObjectTable;
+use libraries\NewObjectTable;
 
 class UserBrowserTable extends NewObjectTable
 {

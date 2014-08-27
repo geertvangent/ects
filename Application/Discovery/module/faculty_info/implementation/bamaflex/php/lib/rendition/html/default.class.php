@@ -2,14 +2,14 @@
 namespace application\discovery\module\faculty_info\implementation\bamaflex;
 
 use application\discovery\SortableTable;
-use common\libraries\PropertiesTable;
-use common\libraries\ToolbarItem;
+use libraries\PropertiesTable;
+use libraries\ToolbarItem;
 use application\discovery\LegendTable;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Display;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\Display;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

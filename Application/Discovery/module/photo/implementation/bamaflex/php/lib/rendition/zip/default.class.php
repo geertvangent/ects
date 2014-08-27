@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use common\libraries\Translation;
-use common\libraries\Filesystem;
+use libraries\Translation;
+use libraries\Filesystem;
 use application\discovery\module\photo\DataManager;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\Path;
-use common\libraries\Session;
-use common\libraries\Display;
+use libraries\DataClassRetrievesParameters;
+use libraries\Path;
+use libraries\Session;
+use libraries\Display;
 
 class ZipDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -31,7 +31,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
         $this->prepare_file_system();
 
         $parameters = new DataClassRetrievesParameters($this->get_module()->get_condition());
-        $users = \user\DataManager :: retrieves(\user\User :: class_name(), $parameters);
+        $users = \core\user\DataManager :: retrieves(\core\user\User :: class_name(), $parameters);
 
         while ($user = $users->next_result())
         {

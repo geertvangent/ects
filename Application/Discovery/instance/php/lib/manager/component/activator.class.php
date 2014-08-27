@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\instance;
 
-use common\libraries\Request;
-use common\libraries\Translation;
-use common\libraries\Utilities;
+use libraries\Request;
+use libraries\Translation;
+use libraries\Utilities;
 
 class ActivatorComponent extends Manager
 {

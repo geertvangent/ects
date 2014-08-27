@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\ObjectTable;
+use libraries\ObjectTable;
 
 class InstanceBrowserTable extends ObjectTable
 {

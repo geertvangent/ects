@@ -2,13 +2,12 @@
 namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\DoctrineConditionTranslator;
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use user\UserDataManager;
+use libraries\DoctrineConditionTranslator;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
 use application\discovery\module\teaching_assignment\DataManagerInterface;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -26,25 +25,25 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $user_id = $parameters->get_user_id();
         $year = $parameters->get_year();
-        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+
         if (! isset($this->teaching_assignments[$person_id][$year]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($person_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('year'), 
+                new StaticColumnConditionVariable('year'),
                 new StaticConditionVariable($year));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_teaching_assignment WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY faculty, training, name';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -68,24 +67,24 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->teaching_assignments[$person_id][$year];
     }
 
     public function count_teaching_assignments($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($person_id));
-        
+
         $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $result = $statement->fetch(\PDO :: FETCH_OBJ);
@@ -97,21 +96,21 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_years($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         if (! isset($this->years[$person_id]))
         {
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($person_id));
-            
+
             $query = 'SELECT DISTINCT year FROM v_discovery_teaching_assignment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -120,7 +119,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->years[$person_id];
     }
 }

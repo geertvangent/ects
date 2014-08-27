@@ -1,15 +1,15 @@
 <?php
 namespace application\discovery\module\employment\implementation\bamaflex;
 
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Breadcrumb;
-use common\libraries\Display;
+use libraries\BreadcrumbTrail;
+use libraries\Breadcrumb;
+use libraries\Display;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
-use common\libraries\Theme;
-use common\libraries\Utilities;
-use common\libraries\DatetimeUtilities;
-use common\libraries\Translation;
+use libraries\Theme;
+use libraries\Utilities;
+use libraries\DatetimeUtilities;
+use libraries\Translation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

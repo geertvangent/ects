@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use common\libraries\Utilities;
-use common\libraries\Path;
-use common\libraries\EqualityCondition;
-use common\libraries\ObjectTableOrder;
-use common\libraries\OptionsMenuRenderer;
-use common\libraries\TreeMenuRenderer;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\Utilities;
+use libraries\Path;
+use libraries\EqualityCondition;
+use libraries\ObjectTableOrder;
+use libraries\OptionsMenuRenderer;
+use libraries\TreeMenuRenderer;
+use libraries\DataClassRetrievesParameters;
 use HTML_Menu;
 use HTML_Menu_ArrayRenderer;
 
@@ -74,10 +74,14 @@ class GroupMenu extends HTML_Menu
     {
         $include_root = $this->include_root;
 
-        $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
-        $group = \group\DataManager :: retrieves(
-            \group\Group :: class_name(),
-            new DataClassRetrievesParameters($condition, 1, null, new ObjectTableOrder(\group\Group :: PROPERTY_NAME)))->next_result();
+        $condition = new EqualityCondition(\core\group\Group :: PROPERTY_PARENT_ID, 0);
+        $group = \core\group\DataManager :: retrieves(
+            \core\group\Group :: class_name(),
+            new DataClassRetrievesParameters(
+                $condition,
+                1,
+                null,
+                new ObjectTableOrder(\core\group\Group :: PROPERTY_NAME)))->next_result();
         if (! $include_root)
         {
             return $this->get_menu_items($group->get_id());
@@ -118,10 +122,14 @@ class GroupMenu extends HTML_Menu
         $show_complete_tree = $this->show_complete_tree;
         $hide_current_category = $this->hide_current_category;
 
-        $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $parent_id);
-        $groups = \group\DataManager :: retrieves(
-            \group\Group :: class_name(),
-            new DataClassRetrievesParameters($condition, null, null, new ObjectTableOrder(\group\Group :: PROPERTY_NAME)));
+        $condition = new EqualityCondition(\core\group\Group :: PROPERTY_PARENT_ID, $parent_id);
+        $groups = \core\group\DataManager :: retrieves(
+            \core\group\Group :: class_name(),
+            new DataClassRetrievesParameters(
+                $condition,
+                null,
+                null,
+                new ObjectTableOrder(\core\group\Group :: PROPERTY_NAME)));
 
         while ($group = $groups->next_result())
         {

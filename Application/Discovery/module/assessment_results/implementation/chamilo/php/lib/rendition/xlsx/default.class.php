@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\assessment_results\implementation\chamilo;
 
-use common\libraries\Path;
+use libraries\Path;
 use PHPExcel;
 
 require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';

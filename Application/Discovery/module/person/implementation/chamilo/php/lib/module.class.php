@@ -1,14 +1,14 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use common\libraries\AndCondition;
-use common\libraries\Utilities;
+use libraries\AndCondition;
+use libraries\Utilities;
 use application\discovery\Parameters;
-use common\libraries\OrCondition;
-use common\libraries\PatternMatchCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\Request;
-use common\libraries\DataClassRetrieveParameters;
+use libraries\OrCondition;
+use libraries\PatternMatchCondition;
+use libraries\EqualityCondition;
+use libraries\Request;
+use libraries\DataClassRetrieveParameters;
 
 class Module extends \application\discovery\module\person\Module
 {
@@ -17,14 +17,14 @@ class Module extends \application\discovery\module\person\Module
     {
         if (! $this->group)
         {
-            $this->group = Request :: get(\group\GroupManager :: PARAM_GROUP_ID);
-            
+            $this->group = Request :: get(\core\group\GroupManager :: PARAM_GROUP_ID);
+
             if (! $this->group)
             {
                 $this->group = $this->get_root_group()->get_id();
             }
         }
-        
+
         return $this->group;
     }
 
@@ -32,12 +32,12 @@ class Module extends \application\discovery\module\person\Module
     {
         if (! $this->root_group)
         {
-            $group = \group\DataManager :: retrieve(
-                \group\Group :: class_name(), 
-                new DataClassRetrieveParameters(new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0)));
+            $group = \core\group\DataManager :: retrieve(
+                \core\group\Group :: class_name(),
+                new DataClassRetrieveParameters(new EqualityCondition(\core\group\Group :: PROPERTY_PARENT_ID, 0)));
             $this->root_group = $group;
         }
-        
+
         return $this->root_group;
     }
 
@@ -46,16 +46,16 @@ class Module extends \application\discovery\module\person\Module
         if (isset($query) && $query != '')
         {
             $or_conditions = array();
-            $or_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_NAME, '*' . $query . '*');
-            $or_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_DESCRIPTION, '*' . $query . '*');
-            $or_conditions[] = new PatternMatchCondition(\group\Group :: PROPERTY_CODE, '*' . $query . '*');
+            $or_conditions[] = new PatternMatchCondition(\core\group\Group :: PROPERTY_NAME, '*' . $query . '*');
+            $or_conditions[] = new PatternMatchCondition(\core\group\Group :: PROPERTY_DESCRIPTION, '*' . $query . '*');
+            $or_conditions[] = new PatternMatchCondition(\core\group\Group :: PROPERTY_CODE, '*' . $query . '*');
             return new OrCondition($or_conditions);
         }
         else
         {
-            $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $this->get_group());
+            $condition = new EqualityCondition(\core\group\Group :: PROPERTY_PARENT_ID, $this->get_group());
         }
-        
+
         return $condition;
     }
 
@@ -67,32 +67,34 @@ class Module extends \application\discovery\module\person\Module
         }
         else
         {
-            return new EqualityCondition(\group\GroupRelUser :: PROPERTY_GROUP_ID, $this->get_group());
+            return new EqualityCondition(\core\group\GroupRelUser :: PROPERTY_GROUP_ID, $this->get_group());
         }
     }
 
     public static function query_to_condition($query)
     {
         $queries = Utilities :: split_query($query);
-        
+
         if (is_null($queries))
         {
             return null;
         }
-        
+
         $conditions = array();
-        
+
         foreach ($queries as $query)
         {
             $pattern_conditions = array();
-            $pattern_conditions[] = new PatternMatchCondition(\user\User :: PROPERTY_FIRSTNAME, '*' . $query . '*');
-            $pattern_conditions[] = new PatternMatchCondition(\user\User :: PROPERTY_LASTNAME, '*' . $query . '*');
-            $pattern_conditions[] = new PatternMatchCondition(\user\User :: PROPERTY_USERNAME, '*' . $query . '*');
-            $pattern_conditions[] = new PatternMatchCondition(\user\User :: PROPERTY_OFFICIAL_CODE, '*' . $query . '*');
-            
+            $pattern_conditions[] = new PatternMatchCondition(\core\user\User :: PROPERTY_FIRSTNAME, '*' . $query . '*');
+            $pattern_conditions[] = new PatternMatchCondition(\core\user\User :: PROPERTY_LASTNAME, '*' . $query . '*');
+            $pattern_conditions[] = new PatternMatchCondition(\core\user\User :: PROPERTY_USERNAME, '*' . $query . '*');
+            $pattern_conditions[] = new PatternMatchCondition(
+                \core\user\User :: PROPERTY_OFFICIAL_CODE,
+                '*' . $query . '*');
+
             $conditions[] = new OrCondition($pattern_conditions);
         }
-        
+
         return new AndCondition($conditions);
     }
 

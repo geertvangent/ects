@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\DataClass;
-use common\libraries\Utilities;
+use libraries\DataClass;
+use libraries\Utilities;
 
 class RightsGroupEntityRight extends DataClass
 {

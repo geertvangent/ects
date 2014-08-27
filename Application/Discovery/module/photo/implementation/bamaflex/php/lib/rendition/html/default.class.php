@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use common\libraries\Translation;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Request;
-use common\libraries\Display;
+use libraries\Translation;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\Request;
+use libraries\Display;
 use application\discovery\module\photo\DataManager;
 use application\discovery\AccessAllowedInterface;
 

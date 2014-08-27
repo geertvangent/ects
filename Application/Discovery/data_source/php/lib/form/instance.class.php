@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\FormValidator;
-use common\libraries\Translation;
-use common\libraries\Utilities;
-use common\libraries\Theme;
-use common\libraries\Path;
-use common\libraries\DynamicFormTabsRenderer;
-use common\libraries\DynamicFormTab;
+use libraries\FormValidator;
+use libraries\Translation;
+use libraries\Utilities;
+use libraries\Theme;
+use libraries\Path;
+use libraries\DynamicFormTabsRenderer;
+use libraries\DynamicFormTab;
 use DOMDocument;
 
 class InstanceForm extends FormValidator

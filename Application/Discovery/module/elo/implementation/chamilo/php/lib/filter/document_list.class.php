@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use common\libraries\Translation;
+use libraries\Translation;
 
 class DocumentListDataFilter extends TypeDataFilter
 {

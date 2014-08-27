@@ -2,8 +2,8 @@
 namespace application\discovery\module\course\implementation\bamaflex;
 
 use application\discovery\module\course\DataManager;
-use common\libraries\StringUtilities;
-use common\libraries\Utilities;
+use libraries\StringUtilities;
+use libraries\Utilities;
 use application\discovery\DiscoveryItem;
 
 /**

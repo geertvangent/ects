@@ -2,7 +2,6 @@
 namespace application\discovery\module\photo\implementation\bamaflex;
 
 use application\discovery\module\photo\DataManager;
-use user\User;
 
 class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
 {
@@ -15,7 +14,7 @@ class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
         $this->browser = $browser;
     }
 
-    public function get_cell_content(User $user)
+    public function get_cell_content(\core\user\User $user)
     {
         $photo = DataManager :: get_instance($this->browser->get_module_instance())->retrieve_photo(
             $user->get_official_code());

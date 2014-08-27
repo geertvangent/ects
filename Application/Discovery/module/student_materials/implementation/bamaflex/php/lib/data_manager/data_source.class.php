@@ -1,18 +1,17 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
-use common\libraries\OrCondition;
-use common\libraries\NotCondition;
-use common\libraries\AndCondition;
+use libraries\OrCondition;
+use libraries\NotCondition;
+use libraries\AndCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\DoctrineConditionTranslator;
-use common\libraries\EqualityCondition;
+use libraries\DoctrineConditionTranslator;
+use libraries\EqualityCondition;
 use application\discovery\module\career\implementation\bamaflex\Course;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use user\UserDataManager;
 use application\discovery\module\student_materials\DataManagerInterface;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -37,7 +36,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $id = $parameters->get_user_id();
         if (! isset($this->years[$id]))
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($id);
+            $user = \core\user\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
             $condition = new EqualityCondition(
@@ -72,7 +71,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
 
         if (! isset($this->enrollments[$id]))
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($id);
+            $user = \core\user\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
             $condition = new EqualityCondition(
@@ -262,7 +261,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $id = $parameters->get_user_id();
 
-        $user = UserDataManager :: get_instance()->retrieve_user($id);
+        $user = \core\user\DataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
         if (! $enrollment_id)
         {

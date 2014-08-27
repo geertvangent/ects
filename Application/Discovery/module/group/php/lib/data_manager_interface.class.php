@@ -12,7 +12,7 @@ interface DataManagerInterface
     /**
      *
      * @param int $id
-     * @return multitype:\application\discovery\module\group\Group
+     * @return multitype:\application\discovery\module\core\group\Group
      */
     public function retrieve_groups($training_id);
 }

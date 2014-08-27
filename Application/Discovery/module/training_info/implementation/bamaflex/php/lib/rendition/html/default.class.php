@@ -2,18 +2,18 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\SortableTable;
-use common\libraries\DynamicContentTab;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\PropertiesTable;
+use libraries\DynamicContentTab;
+use libraries\DynamicTabsRenderer;
+use libraries\PropertiesTable;
 use application\discovery\LegendTable;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\DynamicVisualTab;
-use common\libraries\Display;
-use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
+use libraries\ToolbarItem;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\DynamicVisualTab;
+use libraries\Display;
+use libraries\DynamicVisualTabsRenderer;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use common\libraries\Utilities;
-use common\libraries\ObjectTable;
+use libraries\Utilities;
+use libraries\ObjectTable;
 
 class GroupBrowserTable extends ObjectTable
 {

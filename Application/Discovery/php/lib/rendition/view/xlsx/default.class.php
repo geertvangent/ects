@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Filesystem;
-use common\libraries\Path;
-use common\libraries\Translation;
-use common\libraries\StringUtilities;
+use libraries\Filesystem;
+use libraries\Path;
+use libraries\Translation;
+use libraries\StringUtilities;
 
 class XlsxDefaultRendition extends XlsxRendition
 {
@@ -64,7 +64,7 @@ class XlsxDefaultRendition extends XlsxRendition
                  \application\discovery\instance\Instance :: TYPE_USER)
             {
                 $user_id = $module->get_module_parameters()->get_user_id();
-                $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
+                $user = \core\user\DataManager :: retrieve_by_id(\core\user\User :: class_name(), (int) $user_id);
                 
                 $file_name = $user->get_fullname() . ' ' .
                      Translation :: get('TypeName', null, $module->get_module_instance()->get_type()) . '.xlsx';

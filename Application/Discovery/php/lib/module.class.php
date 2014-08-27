@@ -1,16 +1,16 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\Path;
-use common\libraries\Filesystem;
-use common\libraries\NotCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\AndCondition;
-use common\libraries\Application;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\Path;
+use libraries\Filesystem;
+use libraries\NotCondition;
+use libraries\EqualityCondition;
+use libraries\AndCondition;
+use libraries\Application;
+use libraries\DataClassRetrievesParameters;
 
 /**
  *
@@ -166,7 +166,7 @@ class Module
      *
      * @param $type string
      * @param $user user\User
-     * @return \common\libraries\ToolbarItem NULL
+     * @return \libraries\ToolbarItem NULL
      */
     public function get_module_link($type, $user_id, $check_data = true)
     {

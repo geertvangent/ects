@@ -3,10 +3,10 @@ namespace application\discovery\module\cas\implementation\doctrine;
 
 use application\discovery\SortableTable;
 use application\discovery\module\cas\DataManager;
-use common\libraries\Filesystem;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\Path;
+use libraries\Filesystem;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\Path;
 use pChart;
 
 require_once Path :: get_plugin_path() . '/pChart/pChart/pChart.class';
@@ -201,7 +201,7 @@ class GraphRenderer
             }
         }
 
-        // $user = \user\DataManager :: retrieve(\user\User :: class_name(), (int) $this->user_id);
+        // $user = \core\user\DataManager :: retrieve(\core\user\User :: class_name(), (int) $this->user_id);
 
         // $official_code = $user->get_official_code();
 

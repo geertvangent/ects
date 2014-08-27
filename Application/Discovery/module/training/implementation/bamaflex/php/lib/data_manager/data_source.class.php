@@ -1,20 +1,20 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
-use common\libraries\NotCondition;
-use common\libraries\DoctrineConditionTranslator;
+use libraries\NotCondition;
+use libraries\DoctrineConditionTranslator;
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\Utilities;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
+use libraries\Utilities;
 use application\discovery\data_source\bamaflex\History;
 use application\discovery\data_source\bamaflex\DataManager;
 use application\discovery\module\faculty\implementation\bamaflex\Dean;
 use application\discovery\module\faculty\implementation\bamaflex\Faculty;
 use application\discovery\module\training\DataManagerInterface;
 use application\discovery\data_source\bamaflex\HistoryReference;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {

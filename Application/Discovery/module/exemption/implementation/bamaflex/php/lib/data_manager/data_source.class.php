@@ -2,12 +2,11 @@
 namespace application\discovery\module\exemption\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\DoctrineConditionTranslator;
-use common\libraries\EqualityCondition;
-use user\UserDataManager;
+use libraries\DoctrineConditionTranslator;
+use libraries\EqualityCondition;
 use application\discovery\module\exemption\DataManagerInterface;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -24,20 +23,20 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+
         if (! isset($this->exemptions[$person_id]))
         {
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($person_id));
-            
+
             $query = 'SELECT * FROM v_discovery_exemption_basic WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, programme_name';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -65,44 +64,44 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->exemptions[$person_id];
     }
 
     public function count_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($person_id));
-        
+
         $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->exemptions_count;
         }
-        
+
         return 0;
     }
 
     public function retrieve_years($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         if (! isset($this->years[$person_id]))
         {
             $query = 'SELECT DISTINCT year FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id .
                  '" ORDER BY year DESC';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -111,7 +110,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->years[$person_id];
     }
 }

@@ -1,16 +1,16 @@
 <?php
 namespace application\discovery\module\group_user\implementation\bamaflex;
 
-use common\libraries\Theme;
-use common\libraries\DynamicContentTab;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\Toolbar;
-use common\libraries\PropertiesTable;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
+use libraries\Theme;
+use libraries\DynamicContentTab;
+use libraries\DynamicTabsRenderer;
+use libraries\Toolbar;
+use libraries\PropertiesTable;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
 use application\discovery\SortableTable;
-use common\libraries\Translation;
-use common\libraries\Display;
+use libraries\Translation;
+use libraries\Display;
 use application\discovery\module\group_user\DataManager;
 use application\discovery\module\group\implementation\bamaflex\Group;
 
@@ -153,8 +153,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         $toolbar = new Toolbar();
 
-        $user = \user\DataManager :: retrieve_user_by_official_code($group_user->get_person_id());
-        if ($user instanceof \user\User)
+        $user = \core\user\DataManager :: retrieve_user_by_official_code($group_user->get_person_id());
+        if ($user instanceof \core\user\User)
         {
             $profile_link = $this->get_module_link(
                 'application\discovery\module\profile\implementation\bamaflex',

@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\assessment_results\implementation\chamilo;
 
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\NewObjectTableDataProvider;
+use libraries\DataClassRetrievesParameters;
+use libraries\NewObjectTableDataProvider;
 
 /**
  * $Id: user_browser_table_data_provider.class.php 211 2009-11-13 13:28:39Z vanpouckesven $
@@ -31,7 +31,7 @@ class UserBrowserTableDataProvider extends NewObjectTableDataProvider
         $order_property = $this->get_order_property($order_property);
         
         $parameters = new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property);
-        return \user\DataManager :: retrieves(\user\User :: class_name(), $parameters);
+        return \core\user\DataManager :: retrieves(\core\user\User :: class_name(), $parameters);
     }
 
     /**
@@ -41,6 +41,6 @@ class UserBrowserTableDataProvider extends NewObjectTableDataProvider
      */
     public function get_object_count()
     {
-        return \user\DataManager :: count(\user\User :: class_name(), $this->get_condition());
+        return \core\user\DataManager :: count(\core\user\User :: class_name(), $this->get_condition());
     }
 }

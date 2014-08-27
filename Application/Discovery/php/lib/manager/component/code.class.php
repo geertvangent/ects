@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\DelegateComponent;
-use common\libraries\Translation;
-use common\libraries\Request;
+use libraries\DelegateComponent;
+use libraries\Translation;
+use libraries\Request;
 
 /**
  *
@@ -18,12 +18,12 @@ class CodeComponent extends Manager implements DelegateComponent
         $module_id = Request :: get(Manager :: PARAM_MODULE_ID);
         $official_code = Request :: get(Manager :: PARAM_OFFICIAL_CODE);
 
-        $user = \user\DataManager :: retrieve_user_by_official_code($official_code);
+        $user = \core\user\DataManager :: retrieve_user_by_official_code($official_code);
         $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
             \application\discovery\instance\Instance :: class_name(),
             (int) $module_id);
 
-        if ($user instanceof \user\User && $module_instance instanceof \application\discovery\instance\Instance &&
+        if ($user instanceof \core\user\User && $module_instance instanceof \application\discovery\instance\Instance &&
              $module_instance->get_content_type() == \application\discovery\instance\Instance :: TYPE_USER)
         {
             $parameters = array();

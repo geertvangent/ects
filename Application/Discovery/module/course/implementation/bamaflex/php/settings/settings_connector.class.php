@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-use common\libraries\Translation;
-use common\libraries\ObjectTableOrder;
-use common\libraries\EqualityCondition;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\Translation;
+use libraries\ObjectTableOrder;
+use libraries\EqualityCondition;
+use libraries\DataClassRetrievesParameters;
 
 class SettingsConnector
 {

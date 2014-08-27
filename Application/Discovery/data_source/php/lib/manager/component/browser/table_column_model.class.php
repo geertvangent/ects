@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\StaticTableColumn;
+use libraries\StaticTableColumn;
 
 class InstanceBrowserTableColumnModel extends DefaultInstanceTableColumnModel
 {

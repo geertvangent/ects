@@ -2,8 +2,8 @@
 namespace application\discovery\module\person;
 
 use application\discovery\instance\Instance;
-use common\libraries\Path;
-use common\libraries\Filesystem;
+use libraries\Path;
+use libraries\Filesystem;
 
 abstract class Module extends \application\discovery\Module
 {

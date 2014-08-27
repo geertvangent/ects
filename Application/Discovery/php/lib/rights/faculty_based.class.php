@@ -1,18 +1,18 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\InCondition;
-use common\libraries\OrCondition;
-use common\libraries\Session;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
+use libraries\InCondition;
+use libraries\OrCondition;
+use libraries\Session;
 use application\discovery\RightsGroupEntityRight;
 use Exception;
-use rights\NewUserEntity;
-use rights\NewPlatformGroupEntity;
-use common\libraries\PropertyConditionVariable;
-use common\libraries\StaticConditionVariable;
-use common\libraries\DataClassCountParameters;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
+use libraries\DataClassCountParameters;
+use core\rights\NewUserEntity;
+use core\rights\NewPlatformGroupEntity;
 
 abstract class FacultyBasedRights
 {
@@ -27,8 +27,8 @@ abstract class FacultyBasedRights
     {
         try
         {
-            $current_user = \user\DataManager :: retrieve_by_id(
-                \user\User :: class_name(),
+            $current_user = \core\user\DataManager :: retrieve_by_id(
+                \core\user\User :: class_name(),
                 (int) Session :: get_user_id());
 
             if ($current_user->is_platform_admin())
@@ -38,9 +38,9 @@ abstract class FacultyBasedRights
 
             $context = static :: get_context($module_instance_id, $parameters);
 
-            $group = \group\DataManager :: retrieve_group_by_code('DEP_' . $context);
+            $group = \core\group\DataManager :: retrieve_group_by_code('DEP_' . $context);
 
-            if ($group instanceof \group\Group)
+            if ($group instanceof \core\group\Group)
             {
                 $current_user_group_ids = $current_user->get_groups(true);
 

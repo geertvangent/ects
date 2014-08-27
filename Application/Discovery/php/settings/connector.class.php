@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Theme;
+use libraries\Theme;
 
 class SettingsConnector
 {

@@ -1,15 +1,15 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-use common\libraries\DoctrineConditionTranslator;
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
+use libraries\DoctrineConditionTranslator;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\StringUtilities;
+use libraries\StringUtilities;
 use application\discovery\module\course\DataManagerInterface;
 use stdClass;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {

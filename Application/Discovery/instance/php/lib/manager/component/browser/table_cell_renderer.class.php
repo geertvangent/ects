@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\instance;
 
-use common\libraries\EqualityCondition;
-use common\libraries\Translation;
-use common\libraries\Utilities;
-use common\libraries\ToolbarItem;
-use common\libraries\Toolbar;
-use common\libraries\Theme;
-use common\libraries\DataClassCountParameters;
+use libraries\EqualityCondition;
+use libraries\Translation;
+use libraries\Utilities;
+use libraries\ToolbarItem;
+use libraries\Toolbar;
+use libraries\Theme;
+use libraries\DataClassCountParameters;
 
 class InstanceBrowserTableCellRenderer extends DefaultInstanceTableCellRenderer
 {

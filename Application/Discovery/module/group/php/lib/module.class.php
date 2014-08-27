@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\group;
 
-use common\libraries\Filesystem;
-use common\libraries\Request;
-use common\libraries\Path;
+use libraries\Filesystem;
+use libraries\Request;
+use libraries\Path;
 use application\discovery\instance\Instance;
 use application\discovery\module\profile\DataManager;
 
@@ -13,7 +13,7 @@ abstract class Module extends \application\discovery\Module
 
     /**
      *
-     * @var multitype:\application\discovery\module\group\Group
+     * @var multitype:\application\discovery\module\core\group\Group
      */
     private $groups;
 
@@ -36,7 +36,7 @@ abstract class Module extends \application\discovery\Module
 
     /**
      *
-     * @return multitype:\application\discovery\module\group\Group
+     * @return multitype:\application\discovery\module\core\group\Group
      */
     public function get_groups()
     {

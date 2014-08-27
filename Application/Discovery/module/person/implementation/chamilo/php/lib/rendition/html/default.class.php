@@ -1,29 +1,27 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Breadcrumb;
-use common\libraries\NewObjectTableSupport;
-use common\libraries\Display;
-use common\libraries\DynamicContentTab;
-use common\libraries\ActionBarSearchForm;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\Theme;
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\ActionBarRenderer;
-use common\libraries\DataClassCountParameters;
-use common\libraries\EqualityCondition;
+use libraries\BreadcrumbTrail;
+use libraries\Breadcrumb;
+use libraries\NewObjectTableSupport;
+use libraries\Display;
+use libraries\DynamicContentTab;
+use libraries\ActionBarSearchForm;
+use libraries\DynamicTabsRenderer;
+use libraries\Theme;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\ActionBarRenderer;
+use libraries\DataClassCountParameters;
+use libraries\EqualityCondition;
 use application\discovery\RightsGroupEntityRight;
-use common\libraries\Session;
-use rights\NewUserEntity;
-use common\libraries\AndCondition;
-use common\libraries\InCondition;
-use rights\NewPlatformGroupEntity;
-use common\libraries\OrCondition;
-use common\libraries\DataClassDistinctParameters;
-use common\libraries\DataClassRetrieveParameters;
+use libraries\Session;
+use libraries\AndCondition;
+use libraries\InCondition;
+use libraries\OrCondition;
+use libraries\DataClassDistinctParameters;
+use libraries\DataClassRetrieveParameters;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements NewObjectTableSupport
 {
@@ -71,7 +69,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $url = $this->get_application()->get_url(
             array(
                 \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
-                \group\GroupManager :: PARAM_GROUP_ID => '%s'));
+                \core\group\GroupManager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new GroupMenu($this, urldecode($url));
 
         $html = array();
@@ -88,16 +86,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         {
             if ($this->get_group() == '0' || is_null($this->get_group()))
             {
-                $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, 0);
-                $group = \group\DataManager :: retrieve(
-                    \group\Group :: class_name(),
+                $condition = new EqualityCondition(\core\group\Group :: PROPERTY_PARENT_ID, 0);
+                $group = \core\group\DataManager :: retrieve(
+                    \core\group\Group :: class_name(),
                     new DataClassRetrieveParameters($condition));
                 $this->current_group = $group;
             }
             else
             {
-                $this->current_group = \group\DataManager :: retrieve_by_id(
-                    \group\Group :: class_name(),
+                $this->current_group = \core\group\DataManager :: retrieve_by_id(
+                    \core\group\Group :: class_name(),
                     (int) $this->get_group());
             }
         }
@@ -145,17 +143,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $parameters[\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\core\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
         $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
 
         $query = $this->action_bar->get_query();
         if (isset($query) && $query != '')
         {
-            $count_users = \user\DataManager :: count(
-                \user\User :: class_name(),
+            $count_users = \core\user\DataManager :: count(
+                \core\user\User :: class_name(),
                 new DataClassCountParameters($this->get_users_condition($this->action_bar->get_query())));
-            $count_groups = \group\DataManager :: count(
-                \group\Group :: class_name(),
+            $count_groups = \core\group\DataManager :: count(
+                \core\group\Group :: class_name(),
                 new DataClassCountParameters($this->get_subgroups_condition($this->action_bar->get_query())));
 
             if ($count_users > 0)
@@ -208,8 +206,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
             if ($show_subgroups)
             {
-                $count_groups = \group\DataManager :: count(
-                    \group\Group :: class_name(),
+                $count_groups = \core\group\DataManager :: count(
+                    \core\group\Group :: class_name(),
                     new DataClassCountParameters($this->get_subgroups_condition($this->action_bar->get_query())));
                 if ($count_groups > 0)
                 {
@@ -245,7 +243,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_group_info()
     {
         $group_id = $this->get_group();
-        $group = \group\DataManager :: retrieve_by_id(\group\Group :: class_name(), (int) $group_id);
+        $group = \core\group\DataManager :: retrieve_by_id(\core\group\Group :: class_name(), (int) $group_id);
 
         $html = array();
 
@@ -268,11 +266,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return $this->get_application()->get_url(
             array(
                 \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
-                \group\GroupManager :: PARAM_GROUP_ID => $group->get_id()));
+                \core\group\GroupManager :: PARAM_GROUP_ID => $group->get_id()));
     }
 
     /*
-     * (non-PHPdoc) @see \common\libraries\NewObjectTableSupport::get_object_table_condition()
+     * (non-PHPdoc) @see \libraries\NewObjectTableSupport::get_object_table_condition()
      */
     public function get_object_table_condition($object_table_class_name)
     {
@@ -283,7 +281,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $parameters[\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\core\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
         $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         return $parameters;
     }
@@ -324,7 +322,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 Session :: get_user_id());
             $user_entity_conditions[] = new EqualityCondition(
                 RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
-                NewUserEntity :: ENTITY_TYPE);
+                \core\rights\NewUserEntity :: ENTITY_TYPE);
             $entities_conditions[] = new AndCondition($user_entity_conditions);
 
             $group_entity_conditions = array();
@@ -333,7 +331,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
                 RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
-                NewPlatformGroupEntity :: ENTITY_TYPE);
+                \core\rights\NewPlatformGroupEntity :: ENTITY_TYPE);
             $entities_conditions[] = new AndCondition($group_entity_conditions);
 
             $conditions[] = new OrCondition($entities_conditions);

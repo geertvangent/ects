@@ -1,14 +1,12 @@
 <?php
 namespace application\discovery\module\profile\implementation\chamilo;
 
-use common\libraries\CommonDataManager;
-use user\UserSetting;
-use user\UserManager;
-use user\User;
-use user\UserDataManager;
-use common\libraries\MimeUtil;
-use common\libraries\CoreApplication;
-use common\libraries\PlatformSetting;
+use core\user\UserSetting;
+use core\user\UserManager;
+use core\user\User;
+use libraries\MimeUtil;
+use libraries\CoreApplication;
+use libraries\PlatformSetting;
 use application\discovery\module\profile\Photo;
 use application\discovery\module\profile\Communication;
 use application\discovery\module\profile\Email;
@@ -26,7 +24,7 @@ class DataSource implements DataManagerInterface
      */
     public function retrieve_profile($parameters)
     {
-        $user = UserDataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \core\user\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         if ($user instanceof User)
         {
             $name = new Name();
@@ -52,11 +50,11 @@ class DataSource implements DataManagerInterface
             $communication->set_device(Communication :: DEVICE_TELEPHONE);
             $profile->add_communication($communication);
 
-            $profile->set_language($this->get_language($id));
+            $profile->set_language($this->get_language());
             $profile->set_photo($this->retrieve_photo($user));
 
             $profile->set_username($user->get_username());
-            $profile->set_timezone($this->get_timezone($id));
+            $profile->set_timezone($this->get_timezone());
 
             return $profile;
         }
@@ -79,8 +77,8 @@ class DataSource implements DataManagerInterface
 
         if ($user_language_is_allowed)
         {
-            $setting = CommonDataManager :: retrieve_setting_from_variable_name('platform_language');
-            $user_setting = UserDataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
+            $setting = \configuration\DataManager :: retrieve_setting_from_variable_name('platform_language');
+            $user_setting = \core\user\DataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
 
             if ($user_setting instanceof UserSetting)
             {
@@ -96,7 +94,7 @@ class DataSource implements DataManagerInterface
             $language_code = PlatformSetting :: get('platform_language');
         }
 
-        return \common\libraries\CommonDataManager :: retrieve_language_from_isocode($language_code)->get_english_name();
+        return \configuration\DataManager :: retrieve_language_from_isocode($language_code)->get_english_name();
     }
 
     /**
@@ -112,8 +110,8 @@ class DataSource implements DataManagerInterface
 
         if ($user_timezone_is_allowed)
         {
-            $setting = CommonDataManager :: retrieve_setting_from_variable_name('platform_timezone');
-            $user_setting = UserDataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
+            $setting = \configuration\DataManager :: retrieve_setting_from_variable_name('platform_timezone');
+            $user_setting = \core\user\DataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
 
             if ($user_setting instanceof UserSetting)
             {

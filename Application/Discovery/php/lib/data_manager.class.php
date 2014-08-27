@@ -6,7 +6,7 @@ namespace application\discovery;
  * @package application.discovery
  * @author Hans De Bisschop
  */
-class DataManager extends \common\libraries\DataManager
+class DataManager extends \libraries\DataManager
 {
 
     /**

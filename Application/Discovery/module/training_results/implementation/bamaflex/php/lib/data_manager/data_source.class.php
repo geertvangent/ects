@@ -2,17 +2,17 @@
 namespace application\discovery\module\training_results\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\DoctrineConditionTranslator;
-use common\libraries\AndCondition;
-use common\libraries\Utilities;
+use libraries\DoctrineConditionTranslator;
+use libraries\AndCondition;
+use libraries\Utilities;
 use application\discovery\data_source\bamaflex\History;
-use common\libraries\EqualityCondition;
+use libraries\EqualityCondition;
 use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use application\discovery\module\training_results\DataManagerInterface;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {

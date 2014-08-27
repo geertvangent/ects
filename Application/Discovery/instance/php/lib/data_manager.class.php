@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery\instance;
 
-use common\libraries\EqualityCondition;
-use common\libraries\AndCondition;
-use common\libraries\DataClassRetrieveParameters;
+use libraries\EqualityCondition;
+use libraries\AndCondition;
+use libraries\DataClassRetrieveParameters;
 
-class DataManager extends \common\libraries\DataManager
+class DataManager extends \libraries\DataManager
 {
 
     /**

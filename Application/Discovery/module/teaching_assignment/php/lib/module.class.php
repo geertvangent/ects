@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\teaching_assignment;
 
-use common\libraries\Filesystem;
-use common\libraries\Request;
-use common\libraries\Path;
+use libraries\Filesystem;
+use libraries\Request;
+use libraries\Path;
 use application\discovery\instance\Instance;
 use application\discovery\module\profile\DataManager;
 

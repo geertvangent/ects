@@ -1,21 +1,21 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\DelegateComponent;
-use common\libraries\Breadcrumb;
-use common\libraries\Display;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\ObjectTableOrder;
-use common\libraries\EqualityCondition;
-use common\libraries\Theme;
-use common\libraries\DynamicVisualTab;
-use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\Request;
-use common\libraries\DataClassRetrieveParameters;
+use libraries\DelegateComponent;
+use libraries\Breadcrumb;
+use libraries\Display;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\BreadcrumbTrail;
+use libraries\ObjectTableOrder;
+use libraries\EqualityCondition;
+use libraries\Theme;
+use libraries\DynamicVisualTab;
+use libraries\DynamicVisualTabsRenderer;
+use libraries\Request;
+use libraries\DataClassRetrieveParameters;
 use application\discovery\instance\Instance;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\DataClassRetrievesParameters;
 
 /**
  *
@@ -187,7 +187,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         if ($current_module_instance->get_content_type() == Instance :: TYPE_USER)
         {
             $user_id = $module_parameters->get_user_id();
-            $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $user_id);
+            $user = \core\user\DataManager :: retrieve_by_id(\core\user\User :: class_name(), (int) $user_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $user->get_fullname()));
         }
         

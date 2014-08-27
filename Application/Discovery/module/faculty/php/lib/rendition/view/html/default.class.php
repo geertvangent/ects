@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\faculty;
 
-use common\libraries\DynamicVisualTab;
-use common\libraries\DynamicVisualTabsRenderer;
+use libraries\DynamicVisualTab;
+use libraries\DynamicVisualTabsRenderer;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\Request;
-use common\libraries\EqualityCondition;
-use common\libraries\Authentication;
-use common\libraries\ObjectTableOrder;
+use libraries\DataClassRetrievesParameters;
+use libraries\Request;
+use libraries\EqualityCondition;
+use libraries\Authentication;
+use libraries\ObjectTableOrder;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $
@@ -21,10 +21,14 @@ $groups_tree = array();
 if (Authentication :: is_valid())
 {
     $parent_id = Request :: get('parent_id');
-    $condition = new EqualityCondition(\group\Group :: PROPERTY_PARENT_ID, $parent_id);
-    $groups_tree = \group\DataManager :: retrieves(
-        \group\Group :: class_name(),
-        new DataClassRetrievesParameters($condition, null, null, new ObjectTableOrder(\group\Group :: PROPERTY_NAME)))->as_array();
+    $condition = new EqualityCondition(\core\group\Group :: PROPERTY_PARENT_ID, $parent_id);
+    $groups_tree = \core\group\DataManager :: retrieves(
+        \core\group\Group :: class_name(),
+        new DataClassRetrievesParameters(
+            $condition,
+            null,
+            null,
+            new ObjectTableOrder(\core\group\Group :: PROPERTY_NAME)))->as_array();
 }
 
 header('Content-Type: text/xml');

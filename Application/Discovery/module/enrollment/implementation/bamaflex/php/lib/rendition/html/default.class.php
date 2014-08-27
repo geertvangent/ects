@@ -1,16 +1,16 @@
 <?php
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
-use common\libraries\Display;
-use common\libraries\DynamicContentTab;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\Theme;
-use common\libraries\Translation;
+use libraries\Display;
+use libraries\DynamicContentTab;
+use libraries\DynamicTabsRenderer;
+use libraries\Theme;
+use libraries\Translation;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\enrollment\DataManager;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

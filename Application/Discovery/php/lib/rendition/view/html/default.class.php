@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Utilities;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\ToolbarItem;
-use common\libraries\BreadcrumbTrail;
+use libraries\Utilities;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\ToolbarItem;
+use libraries\BreadcrumbTrail;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use common\libraries\Translation;
-use common\libraries\Utilities;
+use libraries\Translation;
+use libraries\Utilities;
 
 class PublicationDataFilter extends TypeDataFilter
 {

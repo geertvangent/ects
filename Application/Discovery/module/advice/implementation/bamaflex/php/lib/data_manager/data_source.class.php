@@ -2,16 +2,15 @@
 namespace application\discovery\module\advice\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\DoctrineConditionTranslator;
-use common\libraries\AndCondition;
-use common\libraries\NotCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\OrCondition;
+use libraries\DoctrineConditionTranslator;
+use libraries\AndCondition;
+use libraries\NotCondition;
+use libraries\EqualityCondition;
+use libraries\OrCondition;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use user\UserDataManager;
 use application\discovery\module\advice\DataManagerInterface;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -28,15 +27,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     public function retrieve_advices($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+
         if (! isset($this->advices[$person_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($person_id));
-            
+
             $or_conditions = array();
             $or_conditions[] = new NotCondition(
                 new EqualityCondition(new StaticColumnConditionVariable('motivation'), null));
@@ -47,14 +46,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 new EqualityCondition(new StaticColumnConditionVariable('measures'), null));
             $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('advice'), null));
             $conditions[] = new OrCondition($or_conditions);
-            
+
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_advice_basic WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -76,25 +75,25 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $advice->set_try($result->try);
                     $advice->set_decision_type_id($result->decision_type_id);
                     $advice->set_decision_type($this->convert_to_utf8($result->decision_type));
-                    
+
                     $this->advices[$person_id][] = $advice;
                 }
             }
         }
-        
+
         return $this->advices[$person_id];
     }
 
     public function count_advices($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = UserDataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($person_id));
-        
+
         $or_conditions = array();
         $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('motivation'), null));
         $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('ombudsman'), null));
@@ -102,19 +101,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('measures'), null));
         $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('advice'), null));
         $conditions[] = new OrCondition($or_conditions);
-        
+
         $condition = new AndCondition($conditions);
-        
+
         $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->advices_count;
         }
-        
+
         return 0;
     }
 
@@ -128,19 +127,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($id);
+            $user = \core\user\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-            
+
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($official_code));
-            
+
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, id';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -166,7 +165,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->enrollments[$id];
     }
 }

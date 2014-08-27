@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\Translation;
-use common\libraries\ActionBarRenderer;
-use common\libraries\ActionBarSearchForm;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\AndCondition;
-use common\libraries\PatternMatchCondition;
+use libraries\Translation;
+use libraries\ActionBarRenderer;
+use libraries\ActionBarSearchForm;
+use libraries\ToolbarItem;
+use libraries\Theme;
+use libraries\AndCondition;
+use libraries\PatternMatchCondition;
 
 class BrowserComponent extends Manager
 {

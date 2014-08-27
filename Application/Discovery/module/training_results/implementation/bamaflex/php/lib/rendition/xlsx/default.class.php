@@ -2,10 +2,10 @@
 namespace application\discovery\module\training_results\implementation\bamaflex;
 
 use application\discovery\module\training_results\DataManager;
-use common\libraries\StringUtilities;
-use common\libraries\Translation;
-use common\libraries\Display;
-use common\libraries\Path;
+use libraries\StringUtilities;
+use libraries\Translation;
+use libraries\Display;
+use libraries\Path;
 use PHPExcel;
 
 require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';

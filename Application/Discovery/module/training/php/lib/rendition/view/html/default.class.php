@@ -1,12 +1,12 @@
 <?php
 namespace application\discovery\module\training;
 
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\DynamicVisualTab;
-use common\libraries\DynamicVisualTabsRenderer;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\DynamicVisualTab;
+use libraries\DynamicVisualTabsRenderer;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

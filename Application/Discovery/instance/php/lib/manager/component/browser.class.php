@@ -1,17 +1,17 @@
 <?php
 namespace application\discovery\instance;
 
-use common\libraries\DynamicVisualTab;
-use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\Request;
-use common\libraries\EqualityCondition;
-use common\libraries\Translation;
-use common\libraries\ActionBarRenderer;
-use common\libraries\ActionBarSearchForm;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\AndCondition;
-use common\libraries\PatternMatchCondition;
+use libraries\DynamicVisualTab;
+use libraries\DynamicVisualTabsRenderer;
+use libraries\Request;
+use libraries\EqualityCondition;
+use libraries\Translation;
+use libraries\ActionBarRenderer;
+use libraries\ActionBarSearchForm;
+use libraries\ToolbarItem;
+use libraries\Theme;
+use libraries\AndCondition;
+use libraries\PatternMatchCondition;
 
 class BrowserComponent extends Manager
 {

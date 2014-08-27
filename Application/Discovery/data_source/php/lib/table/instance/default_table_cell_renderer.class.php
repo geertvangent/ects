@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\Translation;
-use common\libraries\Utilities;
-use common\libraries\ObjectTableCellRenderer;
-use common\libraries\Theme;
+use libraries\Translation;
+use libraries\Utilities;
+use libraries\ObjectTableCellRenderer;
+use libraries\Theme;
 
 class DefaultInstanceTableCellRenderer extends ObjectTableCellRenderer
 {

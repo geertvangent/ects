@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\faculty_info\implementation\bamaflex;
 
-use common\libraries\DoctrineConditionTranslator;
+use libraries\DoctrineConditionTranslator;
 use Doctrine\DBAL\Driver\PDOStatement;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\data_source\bamaflex\History;
@@ -9,11 +9,11 @@ use application\discovery\module\faculty\implementation\bamaflex\Faculty;
 use application\discovery\data_source\bamaflex\DataManager;
 use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\faculty_info\DataManagerInterface;
-use common\libraries\AndCondition;
-use common\libraries\Utilities;
-use common\libraries\EqualityCondition;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\AndCondition;
+use libraries\Utilities;
+use libraries\EqualityCondition;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {

@@ -2,10 +2,10 @@
 namespace application\discovery\module\profile;
 
 use application\discovery\SortableTable;
-use common\libraries\Display;
-use common\libraries\PropertiesTable;
-use common\libraries\Translation;
-use common\libraries\Theme;
+use libraries\Display;
+use libraries\PropertiesTable;
+use libraries\Translation;
+use libraries\Theme;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

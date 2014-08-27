@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\Utilities;
+use libraries\Utilities;
 
 abstract class RenditionImplementation extends AbstractRenditionImplementation
 {

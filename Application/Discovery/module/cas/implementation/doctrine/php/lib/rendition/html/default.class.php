@@ -3,16 +3,16 @@ namespace application\discovery\module\cas\implementation\doctrine;
 
 use application\discovery\module\cas\Parameters;
 use application\discovery\SortableTable;
-use common\libraries\Filesystem;
-use common\libraries\Path;
-use common\libraries\Theme;
-use common\libraries\Display;
-use common\libraries\DynamicContentTab;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\Translation;
+use libraries\Filesystem;
+use libraries\Path;
+use libraries\Theme;
+use libraries\Display;
+use libraries\DynamicContentTab;
+use libraries\DynamicTabsRenderer;
+use libraries\Translation;
 use application\discovery\module\cas\DataManager;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

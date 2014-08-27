@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\instance;
 
-use common\libraries\SubManager;
+use libraries\SubManager;
 
 class Manager extends SubManager
 {

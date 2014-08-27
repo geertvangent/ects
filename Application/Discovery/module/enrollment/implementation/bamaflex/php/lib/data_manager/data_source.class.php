@@ -2,12 +2,11 @@
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use common\libraries\DoctrineConditionTranslator;
-use common\libraries\EqualityCondition;
-use user\UserDataManager;
+use libraries\DoctrineConditionTranslator;
+use libraries\EqualityCondition;
 use application\discovery\module\enrollment\DataManagerInterface;
-use common\libraries\StaticColumnConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\StaticColumnConditionVariable;
+use libraries\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
 {
@@ -26,18 +25,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $user_id = $parameters->get_user_id();
         if (! isset($this->contract_types[$user_id]))
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            $user = \core\user\DataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
-            
+
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($official_code));
-            
+
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -46,7 +45,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->contract_types[$user_id];
     }
 
@@ -60,19 +59,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($id);
+            $user = \core\user\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-            
+
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($official_code));
-            
+
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, id';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -99,31 +98,31 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->enrollments[$id];
     }
 
     public function count_enrollments($parameters)
     {
         $id = $parameters->get_user_id();
-        $user = UserDataManager :: get_instance()->retrieve_user($id);
+        $user = \core\user\DataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
-        
+
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($official_code));
-        
+
         $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->enrollments_count;
         }
-        
+
         return 0;
     }
 }

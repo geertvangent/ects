@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\ObjectTableDataProvider;
-use common\libraries\DataClassRetrievesParameters;
-use common\libraries\DataClassCountParameters;
+use libraries\ObjectTableDataProvider;
+use libraries\DataClassRetrievesParameters;
+use libraries\DataClassCountParameters;
 
 class InstanceBrowserTableDataProvider extends ObjectTableDataProvider
 {

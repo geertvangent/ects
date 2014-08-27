@@ -1,18 +1,18 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-use common\libraries\StringUtilities;
+use libraries\StringUtilities;
 use application\discovery\SortableTable;
-use common\libraries\PropertiesTable;
-use common\libraries\ToolbarItem;
+use libraries\PropertiesTable;
+use libraries\ToolbarItem;
 use application\discovery\LegendTable;
-use common\libraries\Theme;
-use common\libraries\DynamicContentTab;
-use common\libraries\Translation;
-use common\libraries\DynamicTabsRenderer;
-use common\libraries\Display;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
+use libraries\Theme;
+use libraries\DynamicContentTab;
+use libraries\Translation;
+use libraries\DynamicTabsRenderer;
+use libraries\Display;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
 use application\discovery\AccessAllowedInterface;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
@@ -275,7 +275,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                     if ($coordinator->is_coordinator())
                     {
-                        $user = \user\DataManager :: retrieve_user_by_official_code($coordinator->get_person_id());
+                        $user = \core\user\DataManager :: retrieve_user_by_official_code($coordinator->get_person_id());
                         if ($user)
                         {
                             $parameters = new \application\discovery\module\teaching_assignment\Parameters(
@@ -322,7 +322,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if (! $teacher->is_coordinator())
                     {
-                        $user = \user\DataManager :: retrieve_user_by_official_code($teacher->get_person_id());
+                        $user = \core\user\DataManager :: retrieve_user_by_official_code($teacher->get_person_id());
                         if ($user)
                         {
                             $parameters = new \application\discovery\module\teaching_assignment\Parameters(

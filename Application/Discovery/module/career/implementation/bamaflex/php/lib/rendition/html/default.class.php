@@ -1,18 +1,18 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
-use common\libraries\Display;
+use libraries\Display;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\career\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use common\libraries\Theme;
-use common\libraries\Utilities;
-use common\libraries\Translation;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\DynamicVisualTabsRenderer;
-use common\libraries\DynamicVisualTab;
+use libraries\Theme;
+use libraries\Utilities;
+use libraries\Translation;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\DynamicVisualTabsRenderer;
+use libraries\DynamicVisualTab;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

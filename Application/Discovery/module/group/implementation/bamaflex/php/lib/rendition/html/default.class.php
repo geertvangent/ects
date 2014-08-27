@@ -1,16 +1,16 @@
 <?php
 namespace application\discovery\module\group\implementation\bamaflex;
 
-use common\libraries\PropertiesTable;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Display;
+use libraries\PropertiesTable;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\Display;
 use application\discovery\SortableTable;
-use common\libraries\ToolbarItem;
-use common\libraries\Theme;
-use common\libraries\Translation;
-use common\libraries\DynamicContentTab;
-use common\libraries\DynamicTabsRenderer;
+use libraries\ToolbarItem;
+use libraries\Theme;
+use libraries\Translation;
+use libraries\DynamicContentTab;
+use libraries\DynamicTabsRenderer;
 use application\discovery\module\group\DataManager;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation

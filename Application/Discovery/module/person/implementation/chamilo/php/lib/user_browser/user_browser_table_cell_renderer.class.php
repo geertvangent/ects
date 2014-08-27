@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use common\libraries\Toolbar;
-use common\libraries\NewObjectTableCellRendererActionsColumnSupport;
-use common\libraries\NewObjectTableCellRenderer;
+use libraries\Toolbar;
+use libraries\NewObjectTableCellRendererActionsColumnSupport;
+use libraries\NewObjectTableCellRenderer;
 
 /**
  * $Id: user_browser_table_cell_renderer.class.php 211 2009-11-13 13:28:39Z vanpouckesven $

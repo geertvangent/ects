@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\cas\implementation\doctrine;
 
-use common\libraries\Filesystem;
-use common\libraries\Path;
+use libraries\Filesystem;
+use libraries\Path;
 
 //
 class Module extends \application\discovery\module\cas\Module

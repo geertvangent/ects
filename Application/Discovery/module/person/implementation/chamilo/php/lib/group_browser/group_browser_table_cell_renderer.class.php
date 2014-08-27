@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use group\Group;
-use group\DefaultGroupTableCellRenderer;
-use common\libraries\Utilities;
-use common\libraries\Translation;
+use core\group\Group;
+use core\group\DefaultGroupTableCellRenderer;
+use libraries\Utilities;
+use libraries\Translation;
 
 class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
 {

@@ -1,15 +1,15 @@
 <?php
 namespace application\discovery\module\advice\implementation\bamaflex;
 
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
 use application\discovery\SortableTable;
-use common\libraries\DatetimeUtilities;
+use libraries\DatetimeUtilities;
 use application\discovery\LegendTable;
-use common\libraries\Translation;
-use common\libraries\Theme;
-use common\libraries\Utilities;
-use common\libraries\Display;
+use libraries\Translation;
+use libraries\Theme;
+use libraries\Utilities;
+use libraries\Display;
 use application\discovery\module\enrollment\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 

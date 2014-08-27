@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\profile;
 
-use common\libraries\DataClass;
+use libraries\DataClass;
 
 class IdentificationCode extends DataClass
 {

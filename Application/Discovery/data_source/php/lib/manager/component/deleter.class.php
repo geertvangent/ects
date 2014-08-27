@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\Request;
-use common\libraries\Translation;
-use common\libraries\Utilities;
+use libraries\Request;
+use libraries\Translation;
+use libraries\Utilities;
 
 class DeleterComponent extends Manager
 {

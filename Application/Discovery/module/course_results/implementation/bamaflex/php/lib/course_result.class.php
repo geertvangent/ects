@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
-use common\libraries\Utilities;
+use libraries\Utilities;
 
 /**
  * application.discovery.module.course_results.implementation.bamaflex.discovery

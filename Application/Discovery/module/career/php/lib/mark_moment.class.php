@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\career;
 
-use common\libraries\Utilities;
-use common\libraries\DataClass;
+use libraries\Utilities;
+use libraries\DataClass;
 
 /**
  * application.discovery.module.career.discovery

@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\data_source;
 
-class Installer extends \common\libraries\package\Installer
+class Installer extends \configuration\package\Installer
 {
 
     /**

@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use common\libraries\GalleryObjectTable;
+use libraries\GalleryObjectTable;
 
 class GalleryBrowserTable extends GalleryObjectTable
 {

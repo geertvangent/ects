@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
-use common\libraries\Path;
+use libraries\Path;
 
 require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';
 class XlsxDefaultRenditionImplementation extends RenditionImplementation

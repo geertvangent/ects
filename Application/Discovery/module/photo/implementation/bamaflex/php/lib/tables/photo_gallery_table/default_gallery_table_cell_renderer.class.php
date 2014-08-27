@@ -1,8 +1,7 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use user\User;
-use common\libraries\GalleryObjectTableCellRenderer;
+use libraries\GalleryObjectTableCellRenderer;
 
 abstract class DefaultGalleryTableCellRenderer implements GalleryObjectTableCellRenderer
 {
@@ -23,5 +22,5 @@ abstract class DefaultGalleryTableCellRenderer implements GalleryObjectTableCell
         return $user->get_id();
     }
 
-    abstract public function get_cell_content(User $user);
+    abstract public function get_cell_content(\core\user\User $user);
 }

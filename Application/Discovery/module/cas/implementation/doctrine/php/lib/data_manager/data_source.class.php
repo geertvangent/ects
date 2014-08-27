@@ -2,9 +2,8 @@
 namespace application\discovery\module\cas\implementation\doctrine;
 
 use application\discovery\module\cas\Parameters;
-use common\libraries\DoctrineConditionTranslator;
+use libraries\DoctrineConditionTranslator;
 use application\discovery\module\cas\DataManagerInterface;
-use user\UserDataManager;
 
 class DataSource extends \application\discovery\data_source\doctrine\DataSource implements DataManagerInterface
 {
@@ -92,7 +91,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
             }
             else
             {
-                $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+                $user = \core\user\DataManager :: get_instance()->retrieve_user($user_id);
                 $official_code = $user->get_official_code();
 
                 $query = 'SELECT count(id) AS \'count\', person_id, application_id, action_id, date_format(date, \'%Y-%m\') AS \'date\'
@@ -143,7 +142,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         }
         else
         {
-            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            $user = \core\user\DataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
             $query = 'SELECT count(id) AS statistics_count FROM statistics WHERE person_id = "' . $official_code .
@@ -183,7 +182,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
         if ($user_id != 0)
         {
 
-            $user = UserDataManager :: get_instance()->retrieve_user($user_id);
+            $user = \core\user\DataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
             if ($application instanceof Application)

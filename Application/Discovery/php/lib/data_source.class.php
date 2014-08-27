@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\DoctrineDatabase;
-use common\libraries\Filesystem;
-use common\libraries\Path;
+use libraries\DoctrineDatabase;
+use libraries\Filesystem;
+use libraries\Path;
 
 class DataSource extends DoctrineDatabase
 {

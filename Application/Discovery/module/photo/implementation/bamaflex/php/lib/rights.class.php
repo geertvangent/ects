@@ -1,16 +1,16 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\InCondition;
-use common\libraries\OrCondition;
-use common\libraries\Session;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
+use libraries\InCondition;
+use libraries\OrCondition;
+use libraries\Session;
 use application\discovery\RightsGroupEntityRight;
 use Exception;
-use rights\NewUserEntity;
-use rights\NewPlatformGroupEntity;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\DataClassRetrievesParameters;
+use core\rights\NewPlatformGroupEntity;
+use core\rights\NewUserEntity;
 
 class Rights
 {
@@ -25,8 +25,8 @@ class Rights
     {
         try
         {
-            $current_user = \user\DataManager :: retrieve_by_id(
-                \user\User :: class_name(),
+            $current_user = \core\user\DataManager :: retrieve_by_id(
+                \core\user\User :: class_name(),
                 (int) Session :: get_user_id());
 
             if ($current_user->is_platform_admin())
@@ -69,10 +69,10 @@ class Rights
                 return false;
             }
 
-            $condition = new InCondition(\group\Group :: PROPERTY_CODE, $codes);
+            $condition = new InCondition(\core\group\Group :: PROPERTY_CODE, $codes);
 
-            $groups = \group\DataManager :: retrieves(
-                \group\Group :: class_name(),
+            $groups = \core\group\DataManager :: retrieves(
+                \core\group\Group :: class_name(),
                 new DataClassRetrievesParameters($condition));
 
             if ($groups->size() > 0)

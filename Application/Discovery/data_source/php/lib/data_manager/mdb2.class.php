@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\Mdb2Database;
+use libraries\Mdb2Database;
 
 class Mdb2DataManager extends Mdb2Database
 {

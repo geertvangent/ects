@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery\data_source;
 
-use common\libraries\EqualityCondition;
-use common\libraries\Path;
-use common\libraries\DataClass;
+use libraries\EqualityCondition;
+use libraries\Path;
+use libraries\DataClass;
 use DOMDocument;
-use common\libraries\DataClassRetrievesParameters;
+use libraries\DataClassRetrievesParameters;
 
 /**
  *

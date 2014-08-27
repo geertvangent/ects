@@ -2,13 +2,13 @@
 namespace application\discovery\module\training_results\implementation\bamaflex;
 
 use application\discovery\LegendTable;
-use common\libraries\Theme;
+use libraries\Theme;
 use application\discovery\SortableTable;
-use common\libraries\PropertiesTable;
-use common\libraries\Breadcrumb;
-use common\libraries\BreadcrumbTrail;
-use common\libraries\Translation;
-use common\libraries\Display;
+use libraries\PropertiesTable;
+use libraries\Breadcrumb;
+use libraries\BreadcrumbTrail;
+use libraries\Translation;
+use libraries\Display;
 use application\discovery\module\training_results\DataManager;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
@@ -345,7 +345,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         foreach ($this->get_training_results() as $enrollment)
         {
             $row = array();
-            $user = \user\DataManager :: retrieve_user_by_official_code($enrollment->get_person_id());
+            $user = \core\user\DataManager :: retrieve_user_by_official_code($enrollment->get_person_id());
 
             if ($profile_module_instance)
             {

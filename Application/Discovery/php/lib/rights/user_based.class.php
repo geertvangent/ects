@@ -1,17 +1,17 @@
 <?php
 namespace application\discovery;
 
-use common\libraries\AndCondition;
-use common\libraries\EqualityCondition;
-use common\libraries\InCondition;
-use common\libraries\OrCondition;
-use common\libraries\Session;
+use libraries\AndCondition;
+use libraries\EqualityCondition;
+use libraries\InCondition;
+use libraries\OrCondition;
+use libraries\Session;
 use Exception;
-use rights\NewUserEntity;
-use rights\NewPlatformGroupEntity;
-use common\libraries\DataClassCountParameters;
-use common\libraries\PropertyConditionVariable;
-use common\libraries\StaticConditionVariable;
+use libraries\DataClassCountParameters;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
+use core\rights\NewUserEntity;
+use core\rights\NewPlatformGroupEntity;
 
 class UserBasedRights
 {
@@ -26,8 +26,8 @@ class UserBasedRights
     {
         try
         {
-            $current_user = \user\DataManager :: retrieve_by_id(
-                \user\User :: class_name(),
+            $current_user = \core\user\DataManager :: retrieve_by_id(
+                \core\user\User :: class_name(),
                 (int) Session :: get_user_id());
 
             if ($current_user->is_platform_admin())
@@ -35,7 +35,9 @@ class UserBasedRights
                 return true;
             }
 
-            $user = \user\DataManager :: retrieve_by_id(\user\User :: class_name(), (int) $parameters->get_user_id());
+            $user = \core\user\DataManager :: retrieve_by_id(
+                \core\user\User :: class_name(),
+                (int) $parameters->get_user_id());
 
             $user_group_ids = $user->get_groups(true);
             $current_user_group_ids = $current_user->get_groups(true);

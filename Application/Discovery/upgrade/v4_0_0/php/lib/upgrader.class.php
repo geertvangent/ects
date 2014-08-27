@@ -1,15 +1,14 @@
 <?php
 namespace application\discovery\upgrade\v4_0_0;
 
-use common\libraries\CommonDataManager;
-use common\libraries\package\Package;
+use configuration\package\Package;
 
 /**
  *
  * @author Hans De Bisschop
  * @author Magali Gillard
  */
-class Upgrader extends \common\libraries\package\Upgrader
+class Upgrader extends \configuration\package\Upgrader
 {
 
     /**
@@ -17,11 +16,11 @@ class Upgrader extends \common\libraries\package\Upgrader
      */
     public function __construct()
     {
-        parent :: __construct(CommonDataManager :: get_instance());
+        parent :: __construct(\configuration\DataManager :: get_instance());
     }
 
     /*
-     * (non-PHPdoc) @see \common\libraries\package\Upgrader::run()
+     * (non-PHPdoc) @see \configuration\package\Upgrader::run()
      */
     public function run()
     {
@@ -31,7 +30,7 @@ class Upgrader extends \common\libraries\package\Upgrader
             function ($c) use($data_manager)
             {
                 $package = Package :: get('application\discovery');
-                $registration = CommonDataManager :: get_registration('application\discovery');
+                $registration = \configuration\DataManager :: get_registration('application\discovery');
                 $registration->set_version($package->get_version());
                 if (! $registration->update())
                 {

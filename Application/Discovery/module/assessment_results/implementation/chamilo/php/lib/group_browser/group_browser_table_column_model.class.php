@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\assessment_results\implementation\chamilo;
 
-use group\DefaultGroupTableColumnModel;
-use common\libraries\Translation;
-use common\libraries\StaticTableColumn;
+use core\group\DefaultGroupTableColumnModel;
+use libraries\Translation;
+use libraries\StaticTableColumn;
 
 class GroupBrowserTableColumnModel extends DefaultGroupTableColumnModel
 {
