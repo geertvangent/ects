@@ -5,10 +5,13 @@ use libraries\DoctrineDatabase;
 
 class DoctrineDataManager extends DoctrineDatabase implements DataManagerInterface
 {
-
+	/* (non-PHPdoc)
+     * @see \application\discovery\DataManagerInterface::initialize()
+     */
     public function initialize()
     {
-        parent :: initialize();
-        $this->set_prefix('discovery_');
+        // TODO Auto-generated method stub
+
     }
+
 }

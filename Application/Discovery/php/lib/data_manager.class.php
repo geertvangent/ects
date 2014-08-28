@@ -8,6 +8,7 @@ namespace application\discovery;
  */
 class DataManager extends \libraries\DataManager
 {
+    const PREFIX = 'discovery_';
 
     /**
      * Gets the type of DataManager to be instantiated

@@ -7,10 +7,10 @@ use libraries\DataClassRetrieveParameters;
 
 class DataManager extends \libraries\DataManager
 {
-
+const PREFIX = 'discovery_data_source_';
     /**
      * Gets the type of DataManager to be instantiated
-     * 
+     *
      * @return string
      */
     public static function get_type()
@@ -24,7 +24,7 @@ class DataManager extends \libraries\DataManager
         $conditions[] = new EqualityCondition(InstanceSetting :: PROPERTY_INSTANCE_ID, $instance_id);
         $conditions[] = new EqualityCondition(InstanceSetting :: PROPERTY_VARIABLE, $variable);
         $condition = new AndCondition($conditions);
-        
+
         return self :: retrieve(InstanceSetting :: class_name(), new DataClassRetrieveParameters($condition));
     }
 }

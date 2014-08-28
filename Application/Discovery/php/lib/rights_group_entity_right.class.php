@@ -2,7 +2,6 @@
 namespace application\discovery;
 
 use libraries\DataClass;
-use libraries\Utilities;
 
 class RightsGroupEntityRight extends DataClass
 {
@@ -19,10 +18,10 @@ class RightsGroupEntityRight extends DataClass
     {
         return parent :: get_default_property_names(
             array(
-                self :: PROPERTY_RIGHT_ID, 
-                self :: PROPERTY_ENTITY_ID, 
-                self :: PROPERTY_ENTITY_TYPE, 
-                self :: PROPERTY_GROUP_ID, 
+                self :: PROPERTY_RIGHT_ID,
+                self :: PROPERTY_ENTITY_ID,
+                self :: PROPERTY_ENTITY_TYPE,
+                self :: PROPERTY_GROUP_ID,
                 self :: PROPERTY_MODULE_ID));
     }
 
@@ -91,10 +90,6 @@ class RightsGroupEntityRight extends DataClass
         return DataManager :: get_instance();
     }
 
-    public static function get_table_name()
-    {
-        return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
-    }
 
     public function get_string()
     {

@@ -5,10 +5,14 @@ use libraries\Mdb2Database;
 
 class Mdb2DataManager extends Mdb2Database implements DataManagerInterface
 {
-
+	/* (non-PHPdoc)
+     * @see \application\discovery\DataManagerInterface::initialize()
+     */
     public function initialize()
     {
-        parent :: initialize();
-        $this->set_prefix('discovery_');
+        // TODO Auto-generated method stub
+
     }
+
+
 }
