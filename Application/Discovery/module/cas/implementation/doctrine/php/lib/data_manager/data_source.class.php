@@ -3,9 +3,8 @@ namespace application\discovery\module\cas\implementation\doctrine;
 
 use application\discovery\module\cas\Parameters;
 use libraries\DoctrineConditionTranslator;
-use application\discovery\module\cas\DataManagerInterface;
 
-class DataSource extends \application\discovery\data_source\doctrine\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\doctrine\DataSource
 {
 
     private $actions;
@@ -96,7 +95,8 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource 
 
                 $query = 'SELECT count(id) AS \'count\', person_id, application_id, action_id, date_format(date, \'%Y-%m\') AS \'date\'
                     FROM cas_data.statistics
-                    WHERE person_id = "' . $official_code . '" AND ((application_id IS NOT NULL AND action_id = 4) OR (application_id IS NULL AND action_id IN (1, 6)))
+                    WHERE person_id = "' .
+                     $official_code . '" AND ((application_id IS NOT NULL AND action_id = 4) OR (application_id IS NULL AND action_id IN (1, 6)))
                     GROUP BY person_id , date_format(date, \'%Y-%m\'), application_id , action_id
                     ORDER BY date DESC, action_id, application_id';
             }

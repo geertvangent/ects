@@ -1,9 +1,7 @@
 <?php
 namespace application\discovery\module\assessment_results\implementation\chamilo;
 
-use application\discovery\module\assessment_results\DataManagerInterface;
-
-class DataSource implements DataManagerInterface
+class DataSource
 {
 
     /**

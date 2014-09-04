@@ -4,11 +4,10 @@ namespace application\discovery\module\student_year\implementation\bamaflex;
 use libraries\DoctrineConditionTranslator;
 use Doctrine\DBAL\Driver\PDOStatement;
 use libraries\EqualityCondition;
-use application\discovery\module\student_year\DataManagerInterface;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     private $student_years = array();

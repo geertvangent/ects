@@ -9,11 +9,10 @@ use libraries\DoctrineConditionTranslator;
 use libraries\EqualityCondition;
 use application\discovery\module\career\implementation\bamaflex\Course;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use application\discovery\module\student_materials\DataManagerInterface;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     private $years = array();

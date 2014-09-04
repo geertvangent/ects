@@ -13,11 +13,10 @@ use libraries\Path;
 use application\discovery\module\course\implementation\bamaflex\Course;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\module\faculty\implementation\bamaflex\Faculty;
-use application\discovery\module\photo\DataManagerInterface;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     public function retrieve_photo($id, $web = true)

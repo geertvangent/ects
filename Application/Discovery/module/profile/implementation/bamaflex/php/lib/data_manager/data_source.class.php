@@ -9,12 +9,11 @@ use application\discovery\module\profile\Communication;
 use application\discovery\module\profile\Email;
 use application\discovery\module\profile\IdentificationCode;
 use application\discovery\module\profile\Name;
-use application\discovery\module\profile\DataManagerInterface;
 use stdClass;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     /**

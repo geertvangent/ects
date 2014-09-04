@@ -11,12 +11,11 @@ use application\discovery\data_source\bamaflex\History;
 use application\discovery\data_source\bamaflex\DataManager;
 use application\discovery\module\faculty\implementation\bamaflex\Dean;
 use application\discovery\module\faculty\implementation\bamaflex\Faculty;
-use application\discovery\module\training\DataManagerInterface;
 use application\discovery\data_source\bamaflex\HistoryReference;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     private $trainings;
@@ -37,14 +36,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->trainings[$year]))
         {
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('year'), 
+                new StaticColumnConditionVariable('year'),
                 new StaticConditionVariable($year));
-            
+
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, name';
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -64,24 +63,24 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $training->set_faculty_id($result->faculty_id);
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-                    
+
                     // $reference = new HistoryReference();
                     // $reference->set_id($result->previous_id);
                     // $reference->set_source($result->previous_source);
                     // $training->add_previous_reference($reference);
-                    
+
                     // $next = $this->retrieve_training_next_id($training);
-                    
+
                     // $reference = new HistoryReference();
                     // $reference->set_id($next->id);
                     // $reference->set_source($next->source);
                     // $training->add_next_reference($reference);
-                    
+
                     $this->trainings[$year][] = $training;
                 }
             }
         }
-        
+
         return $this->trainings[$year];
     }
 
@@ -89,17 +88,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('previous_id'), 
+            new StaticColumnConditionVariable('previous_id'),
             new StaticConditionVariable($training->get_id()));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('source'), 
+            new StaticColumnConditionVariable('source'),
             new StaticConditionVariable($training->get_source()));
         $condition = new AndCondition($conditions);
-        
+
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             return $statement->fetch(\PDO :: FETCH_OBJ);
@@ -115,12 +114,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         if (! isset($this->years))
         {
             $condition = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('year'), null));
-            
+
             $query = 'SELECT DISTINCT year FROM v_discovery_training_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -129,7 +128,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                 }
             }
         }
-        
+
         return $this->years;
     }
 
@@ -143,37 +142,37 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
             {
                 $conditions = array();
                 $conditions[] = new EqualityCondition(
-                    new StaticColumnConditionVariable('id'), 
+                    new StaticColumnConditionVariable('id'),
                     new StaticConditionVariable($faculty_id));
                 $conditions[] = new EqualityCondition(
-                    new StaticColumnConditionVariable('source'), 
+                    new StaticColumnConditionVariable('source'),
                     new StaticConditionVariable($source));
                 $condition = new AndCondition($conditions);
-                
+
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
                      DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-                
+
                 $statement = $this->get_connection()->query($query);
-                
+
                 if ($statement instanceof PDOStatement)
                 {
                     $result = $statement->fetch(\PDO :: FETCH_OBJ);
-                    
+
                     $faculty = new Faculty();
                     $faculty->set_source($result->source);
                     $faculty->set_id($result->id);
                     $faculty->set_name($this->convert_to_utf8($result->name));
                     $faculty->set_year($this->convert_to_utf8($result->year));
                     $faculty->set_deans($this->retrieve_deans($faculty->get_source(), $faculty->get_id()));
-                    
+
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_ID, $faculty->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_HISTORY_SOURCE, $faculty->get_source());
                     $conditions[] = new EqualityCondition(
-                        History :: PROPERTY_TYPE, 
+                        History :: PROPERTY_TYPE,
                         Utilities :: get_namespace_from_object($faculty));
                     $condition = new AndCondition($conditions);
-                    
+
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
                     if ($histories->size() > 0)
                     {
@@ -195,15 +194,15 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                             $faculty->add_previous_reference($reference);
                         }
                     }
-                    
+
                     $conditions = array();
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_ID, $faculty->get_id());
                     $conditions[] = new EqualityCondition(History :: PROPERTY_PREVIOUS_SOURCE, $faculty->get_source());
                     $conditions[] = new EqualityCondition(
-                        History :: PROPERTY_TYPE, 
+                        History :: PROPERTY_TYPE,
                         Utilities :: get_namespace_from_object($faculty));
                     $condition = new AndCondition($conditions);
-                    
+
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
                     if ($histories->size() > 0)
                     {
@@ -218,7 +217,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     else
                     {
                         $next = $this->retrieve_faculty_next_id($faculty);
-                        
+
                         if ($next)
                         {
                             $reference = new HistoryReference();
@@ -227,7 +226,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                             $faculty->add_next_reference($reference);
                         }
                     }
-                    
+
                     $this->faculties[$faculty_id][$source] = $faculty;
                 }
             }
@@ -243,17 +242,17 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('previous_id'), 
+            new StaticColumnConditionVariable('previous_id'),
             new StaticConditionVariable($faculty->get_id()));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('source'), 
+            new StaticColumnConditionVariable('source'),
             new StaticConditionVariable($faculty->get_source()));
         $condition = new AndCondition($conditions);
-        
+
         $query = 'SELECT id, source FROM v_discovery_faculty_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
@@ -270,18 +269,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('faculty_id'), 
+                new StaticColumnConditionVariable('faculty_id'),
                 new StaticConditionVariable($faculty_id));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_faculty_dean_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY person';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -293,7 +292,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource 
                     $dean->set_function_id($result->function_id);
                     $dean->set_person($this->convert_to_utf8($result->person));
                     $dean->set_function($this->convert_to_utf8($result->function));
-                    
+
                     $this->deans[$source][$faculty_id][] = $dean;
                 }
             }

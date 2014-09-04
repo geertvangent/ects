@@ -5,11 +5,10 @@ use Doctrine\DBAL\Driver\PDOStatement;
 use libraries\DoctrineConditionTranslator;
 use libraries\AndCondition;
 use libraries\EqualityCondition;
-use application\discovery\module\teaching_assignment\DataManagerInterface;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     private $teaching_assignments;

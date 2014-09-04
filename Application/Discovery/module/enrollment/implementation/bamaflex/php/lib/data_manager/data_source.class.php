@@ -4,11 +4,10 @@ namespace application\discovery\module\enrollment\implementation\bamaflex;
 use Doctrine\DBAL\Driver\PDOStatement;
 use libraries\DoctrineConditionTranslator;
 use libraries\EqualityCondition;
-use application\discovery\module\enrollment\DataManagerInterface;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     private $contract_types = array();

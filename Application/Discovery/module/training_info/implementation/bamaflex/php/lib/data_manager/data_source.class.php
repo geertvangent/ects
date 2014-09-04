@@ -10,12 +10,11 @@ use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\data_source\bamaflex\History;
 use application\discovery\module\course\implementation\bamaflex\Course;
 use application\discovery\module\training\implementation\bamaflex\Training;
-use application\discovery\module\training_info\DataManagerInterface;
 use application\discovery\data_source\bamaflex\DataManager;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     private $trainings;

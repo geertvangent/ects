@@ -8,11 +8,10 @@ use libraries\NotCondition;
 use libraries\EqualityCondition;
 use libraries\OrCondition;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use application\discovery\module\advice\DataManagerInterface;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     private $advices;

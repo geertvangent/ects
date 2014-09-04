@@ -7,11 +7,9 @@ use libraries\Filesystem;
 use libraries\Theme;
 use libraries\Translation;
 use libraries\Path;
-use pChart;
 
-require_once Path :: get_plugin_path() . '/pChart/pChart/pChart.class';
-require_once Path :: get_plugin_path() . '/pChart/pChart/pData.class';
-
+require_once Path :: get_plugin_path() . '/pChart/pChart/pChart.class.php';
+require_once Path :: get_plugin_path() . '/pChart/pChart/pData.class.php';
 class GraphRenderer
 {
 
@@ -90,7 +88,7 @@ class GraphRenderer
             }
             $font = Path :: get_plugin_path() . 'pChart/Fonts/tahoma.ttf';
 
-            $graph = new pChart(840, 490);
+            $graph = new \pChart(840, 490);
             $graph->reportWarnings();
             $graph->loadColorPalette(Path :: get(SYS_LAYOUT_PATH) . Theme :: get_theme() . '/plugin/pchart/tones.txt');
             $graph->setFontProperties($font, 8);

@@ -4,7 +4,6 @@ namespace application\discovery\module\profile\implementation\chamilo;
 use core\user\UserSetting;
 use core\user\UserManager;
 use core\user\User;
-use libraries\MimeUtil;
 use libraries\CoreApplication;
 use libraries\PlatformSetting;
 use application\discovery\module\profile\Photo;
@@ -12,9 +11,9 @@ use application\discovery\module\profile\Communication;
 use application\discovery\module\profile\Email;
 use application\discovery\module\profile\IdentificationCode;
 use application\discovery\module\profile\Name;
-use application\discovery\module\profile\DataManagerInterface;
+use libraries\FileType;
 
-class DataSource implements DataManagerInterface
+class DataSource
 {
 
     /**
@@ -141,7 +140,7 @@ class DataSource implements DataManagerInterface
         $photo_data = file_get_contents($photo_path);
 
         $photo = new Photo();
-        $photo->set_mime_type(\MimeUtil :: ext_to_mimetype($photo_extension));
+        $photo->set_mime_type(FileType::get_mimetype($photo_extension));
         $photo->set_data(base64_encode($photo_data));
 
         return $photo;

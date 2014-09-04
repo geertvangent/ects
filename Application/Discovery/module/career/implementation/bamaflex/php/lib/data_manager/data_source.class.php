@@ -2,7 +2,6 @@
 namespace application\discovery\module\career\implementation\bamaflex;
 
 use application\discovery\data_source\bamaflex\HistoryReference;
-use application\discovery\module\career\DataManagerInterface;
 use application\discovery\module\career\MarkMoment;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use application\discovery\module\training\implementation\bamaflex\Training;
@@ -15,7 +14,7 @@ use libraries\InCondition;
 use libraries\StaticColumnConditionVariable;
 use libraries\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource implements DataManagerInterface
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {
 
     private $contract_types = array();
