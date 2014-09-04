@@ -141,7 +141,7 @@ class DataSource implements DataManagerInterface
         $photo_data = file_get_contents($photo_path);
 
         $photo = new Photo();
-        $photo->set_mime_type(MimeUtil :: ext_to_mimetype($photo_extension));
+        $photo->set_mime_type(\MimeUtil :: ext_to_mimetype($photo_extension));
         $photo->set_data(base64_encode($photo_data));
 
         return $photo;

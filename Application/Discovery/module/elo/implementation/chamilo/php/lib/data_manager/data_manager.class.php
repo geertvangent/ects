@@ -13,6 +13,7 @@ use libraries\Condition;
 
 class DataManager extends \libraries\DataManager
 {
+    const PREFIX = 'discovery_elo_';
     const COUNT = 'count';
 
     public static function get_type()

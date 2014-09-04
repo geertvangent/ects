@@ -6,15 +6,16 @@ namespace application\discovery\data_source\bamaflex;
  * @package application.discovery
  * @author Hans De Bisschop
  */
-class Mdb2DataManager extends \application\discovery\Mdb2DataManager
+class DataManager extends \libraries\DataManager
 {
+    const PREFIX = 'discovery_bamaflex_';
 
-    public function initialize()
+    public static function get_type()
     {
-        parent :: initialize();
-        $this->set_prefix('discovery_bamaflex_');
+        return 'doctrine';
     }
 
+    //TODO : copy from DoctrineDataManager
     public function retrieve_history_by_conditions($condition)
     {
         return $this->retrieve_objects(History :: get_table_name(), $condition, null, null, array(), History :: CLASS_NAME);
