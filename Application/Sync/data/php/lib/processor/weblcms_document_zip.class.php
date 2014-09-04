@@ -56,7 +56,7 @@ class WeblcmsDocumentZipProcessor
      */
     public function run()
     {
-        $this->dm = \user\integration\tracking\DataManager :: get_instance();
+        $this->dm = \core\user\integration\core\tracking\DataManager :: get_instance();
         $this->intialize_tool_ids_by_name();
 
         try
@@ -109,7 +109,8 @@ class WeblcmsDocumentZipProcessor
         $count = 100000;
 
         $base_query = 'SELECT * FROM tracking_user_visit WHERE enter_date > ' . $start_time . ' AND enter_date <= ' .
-             $end_time . ' AND location LIKE "%application=weblcms%" AND location LIKE "%tool_action=zip_and_download%" LIMIT ';
+             $end_time .
+             ' AND location LIKE "%application=weblcms%" AND location LIKE "%tool_action=zip_and_download%" LIMIT ';
 
         do
         {
@@ -140,8 +141,8 @@ class WeblcmsDocumentZipProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\user\integration\tracking\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\user\integration\tracking\Visit :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_USER_ID];
 
         $query = array();
 
@@ -178,7 +179,7 @@ class WeblcmsDocumentZipProcessor
         $visit->set_course_id($course_id);
         $visit->set_tool_id($course_tool_id);
         $visit->set_category_id($category_id);
-        $visit->set_access_date($visit_tracker[\user\integration\tracking\Visit :: PROPERTY_ENTER_DATE]);
+        $visit->set_access_date($visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_ENTER_DATE]);
 
         if (! $visit->save())
         {

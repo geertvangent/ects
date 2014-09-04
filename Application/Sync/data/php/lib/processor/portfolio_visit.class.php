@@ -48,7 +48,7 @@ class PortfolioVisitProcessor
      */
     public function run()
     {
-        $this->dm = \user\integration\tracking\DataManager :: get_instance();
+        $this->dm = \core\user\integration\core\tracking\DataManager :: get_instance();
 
         try
         {
@@ -119,8 +119,8 @@ class PortfolioVisitProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\user\integration\tracking\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\user\integration\tracking\Visit :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_USER_ID];
 
         $query = array();
 
@@ -145,10 +145,10 @@ class PortfolioVisitProcessor
         $visit->set_portfolio_id($portfolio_id);
         $visit->set_publication_id($publication_id);
         $visit->set_item_id($item_id);
-        $visit->set_access_date($visit_tracker[\user\integration\tracking\Visit :: PROPERTY_ENTER_DATE]);
+        $visit->set_access_date($visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_ENTER_DATE]);
         $visit->set_time(
-            $visit_tracker[\user\integration\tracking\Visit :: PROPERTY_LEAVE_DATE] -
-                 $visit_tracker[\user\integration\tracking\Visit :: PROPERTY_ENTER_DATE]);
+            $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_LEAVE_DATE] -
+                 $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_ENTER_DATE]);
 
         if (! $visit->save())
         {

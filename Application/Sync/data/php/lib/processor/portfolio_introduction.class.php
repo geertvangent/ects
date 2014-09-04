@@ -3,7 +3,7 @@ namespace application\ehb_sync\data;
 
 use libraries\FileLogger;
 use libraries\DataClassCache;
-use repository\content_object\introduction\Introduction;
+use core\repository\content_object\introduction\Introduction;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
