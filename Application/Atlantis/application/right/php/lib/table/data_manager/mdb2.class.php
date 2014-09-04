@@ -1,9 +1,0 @@
-<?php
-namespace application\atlantis\application\right;
-
-use libraries\Mdb2Database;
-
-class Mdb2DataManager extends Mdb2Database
-{
-
-}
