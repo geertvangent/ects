@@ -3,7 +3,7 @@ namespace application\ehb_sync\bamaflex;
 
 use libraries\DoctrineDatabase;
 
-class BamaflexDatabase extends DoctrineDatabase implements DataManagerInterface
+class BamaflexDatabase extends DoctrineDatabase
 {
 
     /**
