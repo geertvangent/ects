@@ -36,7 +36,7 @@ class Module
      * @param $application Application
      * @param $module_instance Instance
      */
-    public function __construct(Application $application,\application\discovery\instance\Instance $module_instance)
+    public function __construct(Application $application, \application\discovery\instance\Instance $module_instance)
     {
         $this->application = $application;
         $this->module_instance = $module_instance;
@@ -48,7 +48,7 @@ class Module
      * @param $module_instance Instance
      * @return Module
      */
-    public static function factory(Application $application,\application\discovery\instance\Instance $module_instance)
+    public static function factory(Application $application, \application\discovery\instance\Instance $module_instance)
     {
         $class = $module_instance->get_type() . '\\Module';
         
