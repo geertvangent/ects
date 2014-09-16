@@ -23,14 +23,14 @@ class InstanceSetting extends DataClass
 
     /**
      * A static array containing all settings of discovery module instances
-     *
+     * 
      * @var array
      */
     private static $settings;
 
     /**
      * Get the default properties of all settings.
-     *
+     * 
      * @return array The property names.
      */
     public static function get_default_property_names()
@@ -108,24 +108,24 @@ class InstanceSetting extends DataClass
     {
         $settings_file = Path :: namespace_to_full_path($instance->get_type()) . 'php/settings/settings.xml';
         $doc = new DOMDocument();
-
+        
         $doc->load($settings_file);
         $object = $doc->getElementsByTagname('application')->item(0);
         $settings = $doc->getElementsByTagname('setting');
-
+        
         foreach ($settings as $index => $setting)
         {
             $external_setting = new InstanceSetting();
             $external_setting->set_instance_id($instance->get_id());
             $external_setting->set_variable($setting->getAttribute('name'));
             $external_setting->set_value($setting->getAttribute('default'));
-
+            
             if (! $external_setting->create())
             {
                 return false;
             }
         }
-
+        
         return true;
     }
 
@@ -153,7 +153,7 @@ class InstanceSetting extends DataClass
         {
             self :: load($instance_id);
         }
-
+        
         return (isset(self :: $settings[$instance_id][$variable]) ? self :: $settings[$instance_id][$variable] : null);
     }
 
@@ -168,7 +168,7 @@ class InstanceSetting extends DataClass
         {
             self :: load($instance_id);
         }
-
+        
         return self :: $settings[$instance_id];
     }
 
@@ -179,10 +179,10 @@ class InstanceSetting extends DataClass
     public static function load($instance_id)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(self :: class_name(), self :: PROPERTY_INSTANCE_ID),
+            new PropertyConditionVariable(self :: class_name(), self :: PROPERTY_INSTANCE_ID), 
             new StaticConditionVariable($instance_id));
         $settings = DataManager :: retrieves(self :: class_name(), new DataClassRetrievesParameters($condition));
-
+        
         while ($setting = $settings->next_result())
         {
             self :: $settings[$instance_id][$setting->get_variable()] = $setting->get_value();

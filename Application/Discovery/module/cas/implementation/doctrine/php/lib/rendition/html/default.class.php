@@ -21,11 +21,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
         
-        if ($this->get_module_parameters()->get_mode() == Parameters :: MODE_USER &&
-             ! Rights :: is_allowed(
-                Rights :: VIEW_RIGHT, 
-                $this->get_module_instance()->get_id(), 
-                $this->get_module_parameters()))
+        if ($this->get_module_parameters()->get_mode() == Parameters :: MODE_USER && ! Rights :: is_allowed(
+            Rights :: VIEW_RIGHT, 
+            $this->get_module_instance()->get_id(), 
+            $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }

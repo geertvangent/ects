@@ -71,10 +71,10 @@ abstract class Module extends \application\discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
-            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/',
-            Filesystem :: LIST_DIRECTORIES,
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {

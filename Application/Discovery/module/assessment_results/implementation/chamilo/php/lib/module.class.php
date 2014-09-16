@@ -19,13 +19,13 @@ class Module extends \application\discovery\module\assessment_results\Module
         if (! $this->group)
         {
             $this->group = Request :: get(\core\group\Manager :: PARAM_GROUP_ID);
-
+            
             if (! $this->group)
             {
                 $this->group = $this->get_root_group()->get_id();
             }
         }
-
+        
         return $this->group;
     }
 
@@ -36,12 +36,12 @@ class Module extends \application\discovery\module\assessment_results\Module
             $group = \core\group\DataManager :: get_instance()->retrieve_groups(
                 new EqualityCondition(
                     new PropertyConditionVariable(
-                        \core\group\Group :: class_name(),
-                        \core\group\Group :: PROPERTY_PARENT),
+                        \core\group\Group :: class_name(), 
+                        \core\group\Group :: PROPERTY_PARENT), 
                     new StaticConditionVariable(0)))->next_result();
             $this->root_group = $group;
         }
-
+        
         return $this->root_group;
     }
 
@@ -58,10 +58,10 @@ class Module extends \application\discovery\module\assessment_results\Module
         else
         {
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_PARENT),
+                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_PARENT), 
                 new StaticConditionVariable($this->get_group()));
         }
-
+        
         return $condition;
     }
 
@@ -75,8 +75,8 @@ class Module extends \application\discovery\module\assessment_results\Module
         {
             return new EqualityCondition(
                 new PropertyConditionVariable(
-                    \core\group\GroupRelUser :: class_name(),
-                    \core\group\GroupRelUser :: PROPERTY_GROUP_ID),
+                    \core\group\GroupRelUser :: class_name(), 
+                    \core\group\GroupRelUser :: PROPERTY_GROUP_ID), 
                 new StaticConditionVariable($this->get_group()));
         }
     }
@@ -84,14 +84,14 @@ class Module extends \application\discovery\module\assessment_results\Module
     public static function query_to_condition($query)
     {
         $queries = Utilities :: split_query($query);
-
+        
         if (is_null($queries))
         {
             return null;
         }
-
+        
         $conditions = array();
-
+        
         foreach ($queries as $query)
         {
             $pattern_conditions = array();
@@ -99,12 +99,12 @@ class Module extends \application\discovery\module\assessment_results\Module
             $pattern_conditions[] = new PatternMatchCondition(\core\user\User :: PROPERTY_LASTNAME, '*' . $query . '*');
             $pattern_conditions[] = new PatternMatchCondition(\core\user\User :: PROPERTY_USERNAME, '*' . $query . '*');
             $pattern_conditions[] = new PatternMatchCondition(
-                \core\user\User :: PROPERTY_OFFICIAL_CODE,
+                \core\user\User :: PROPERTY_OFFICIAL_CODE, 
                 '*' . $query . '*');
-
+            
             $conditions[] = new OrCondition($pattern_conditions);
         }
-
+        
         return new AndCondition($conditions);
     }
 

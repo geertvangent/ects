@@ -15,7 +15,7 @@ use libraries\NewObjectTableCellRenderer;
  * Cell renderer for the user object browser table
  */
 class UserBrowserTableCellRenderer extends NewObjectTableCellRenderer implements 
-        NewObjectTableCellRendererActionsColumnSupport
+    NewObjectTableCellRendererActionsColumnSupport
 {
 
     public function get_object_actions($user)
@@ -23,7 +23,9 @@ class UserBrowserTableCellRenderer extends NewObjectTableCellRenderer implements
         $toolbar = new Toolbar();
         
         $profile_link = $this->get_component()->get_module_link(
-                'application\discovery\module\profile\implementation\bamaflex', $user->get_id(), false);
+            'application\discovery\module\profile\implementation\bamaflex', 
+            $user->get_id(), 
+            false);
         if ($profile_link)
         {
             $toolbar->add_item($profile_link);

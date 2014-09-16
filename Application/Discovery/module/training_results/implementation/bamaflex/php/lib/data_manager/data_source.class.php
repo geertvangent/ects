@@ -30,22 +30,22 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     {
         $training_id = $training_results_parameters->get_training_id();
         $source = $training_results_parameters->get_source();
-
+        
         if (! isset($this->training_results[$training_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'),
+                new StaticColumnConditionVariable('training_id'), 
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT vdea.*, vdp.first_name, vdp.last_name FROM v_discovery_enrollment_advanced AS vdea JOIN v_discovery_profile_basic AS vdp ON vdea.person_id = vdp.id WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY vdp.first_name, vdp.last_name';
-
+            
             $statement = $this->get_connection()->query($query);
             if ($statement instanceof PDOStatement)
             {
@@ -75,7 +75,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 }
             }
         }
-
+        
         return $this->training_results[$training_id][$source];
     }
 
@@ -83,24 +83,24 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-
+        
         if (! isset($this->trainings[$training_id][$source]))
         {
-
+            
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'),
+                new StaticColumnConditionVariable('id'), 
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -121,22 +121,22 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                     $training->set_faculty($this->convert_to_utf8($result->faculty));
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-
+                    
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_ID),
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_ID), 
                         new StaticConditionVariable($training->get_id()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_SOURCE),
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_SOURCE), 
                         new StaticConditionVariable($training->get_source()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE),
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE), 
                         new StaticConditionVariable(Utilities :: get_namespace_from_object($training)));
                     $condition = new AndCondition($conditions);
-
+                    
                     $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
                         $condition);
-
+                    
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
@@ -157,19 +157,19 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                             $training->add_previous_reference($reference);
                         }
                     }
-
+                    
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_ID),
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_ID), 
                         new StaticConditionVariable($training->get_id()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_SOURCE),
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_SOURCE), 
                         new StaticConditionVariable($training->get_source()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE),
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE), 
                         new StaticConditionVariable(Utilities :: get_namespace_from_object($training)));
                     $condition = new AndCondition($conditions);
-
+                    
                     $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
                         $condition);
                     if ($histories->size() > 0)
@@ -185,7 +185,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                     else
                     {
                         $next = $this->retrieve_training_next_id($training);
-
+                        
                         if ($next)
                         {
                             $reference = new HistoryReference();
@@ -194,12 +194,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                             $training->add_next_reference($reference);
                         }
                     }
-
+                    
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-
+        
         return $this->trainings[$training_id][$source];
     }
 
@@ -207,18 +207,18 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('previous_id'),
+            new StaticColumnConditionVariable('previous_id'), 
             new StaticConditionVariable($training->get_id()));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('source'),
+            new StaticColumnConditionVariable('source'), 
             new StaticConditionVariable($training->get_source()));
         $condition = new AndCondition($conditions);
-
+        
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             return $result = $statement->fetch(\PDO :: FETCH_OBJ);

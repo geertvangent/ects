@@ -16,7 +16,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -24,7 +24,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

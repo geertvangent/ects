@@ -6,7 +6,6 @@ use libraries\Translation;
 class DocumentListDataFilter extends TypeDataFilter
 {
     const CLASS_NAME = __CLASS__;
-
     const SIZE_ANY = 0;
     const SIZE_1_MB = 1;
     const SIZE_10_MB = 2;
@@ -37,17 +36,17 @@ class DocumentListDataFilter extends TypeDataFilter
                 return $this->get_size_options();
                 break;
         }
-
+        
         return parent :: get_options($filter);
     }
 
     public function get_size_options()
     {
         return array(
-            self :: SIZE_ANY => Translation :: get('AnySize'),
-            self :: SIZE_1_MB => Translation :: get('Size1Mb'),
-            self :: SIZE_10_MB => Translation :: get('Size10Mb'),
-            self :: SIZE_100_MB => Translation :: get('Size100Mb'),
+            self :: SIZE_ANY => Translation :: get('AnySize'), 
+            self :: SIZE_1_MB => Translation :: get('Size1Mb'), 
+            self :: SIZE_10_MB => Translation :: get('Size10Mb'), 
+            self :: SIZE_100_MB => Translation :: get('Size100Mb'), 
             self :: SIZE_1000_MB => Translation :: get('Size1000Mb'));
     }
 }
