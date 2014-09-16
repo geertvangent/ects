@@ -94,8 +94,12 @@ class BrowserComponent extends Manager
         if (isset($query) && $query != '')
         {
             $conditions = array();
-            $conditions[] = new PatternMatchCondition(Instance :: PROPERTY_TITLE, '*' . $query . '*');
-            $conditions[] = new PatternMatchCondition(Instance :: PROPERTY_DESCRIPTION, '*' . $query . '*');
+            $conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_TITLE), 
+                '*' . $query . '*');
+            $conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_DESCRIPTION), 
+                '*' . $query . '*');
         }
         
         $conditions[] = new EqualityCondition(

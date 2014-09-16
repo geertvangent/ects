@@ -8,6 +8,7 @@ use libraries\ToolbarItem;
 use libraries\Theme;
 use libraries\AndCondition;
 use libraries\PatternMatchCondition;
+use libraries\PropertyConditionVariable;
 
 class BrowserComponent extends Manager
 {
@@ -39,8 +40,12 @@ class BrowserComponent extends Manager
         if (isset($query) && $query != '')
         {
             $conditions = array();
-            $conditions[] = new PatternMatchCondition(Instance :: PROPERTY_NAME, '*' . $query . '*');
-            $conditions[] = new PatternMatchCondition(Instance :: PROPERTY_DESCRIPTION, '*' . $query . '*');
+            $conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_NAME), 
+                '*' . $query . '*');
+            $conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_DESCRIPTION), 
+                '*' . $query . '*');
             
             $condition = new AndCondition($conditions);
             return $condition;

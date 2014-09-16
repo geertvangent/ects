@@ -47,7 +47,6 @@ class Rights
                     RightsGroupEntityRight :: class_name(), 
                     RightsGroupEntityRight :: PROPERTY_RIGHT_ID), 
                 new StaticConditionVariable($right));
-            $conditions[] = new InCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, $user_group_ids);
             
             $entities_conditions = array();
             
@@ -66,7 +65,9 @@ class Rights
             
             $group_entity_conditions = array();
             $group_entity_conditions[] = new InCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_ID, 
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(), 
+                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID), 
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(

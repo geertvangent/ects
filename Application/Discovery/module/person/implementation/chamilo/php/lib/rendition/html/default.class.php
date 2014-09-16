@@ -339,7 +339,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
             
             $group_entity_conditions = array();
             $group_entity_conditions[] = new InCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_ID, 
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(), 
+                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID), 
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(

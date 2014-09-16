@@ -199,34 +199,9 @@ class GraphRenderer
             }
         }
         
-        // $user = \core\user\DataManager :: retrieve(\core\user\User :: class_name(), (int) $this->user_id);
-        
-        // $official_code = $user->get_official_code();
-        
-        // foreach ($this->get_months() as $key => $month)
-        // {
-        // $conditions = array();
-        // $conditions[] = new EqualityCondition(new PropertyConditionVariable(Cas :: class_name(), Cas ::
-        // PROPERTY_PERSON_ID), new StaticConditionVariable($official_code));
-        // $conditions[] = new EqualityCondition(new PropertyConditionVariable(Cas :: class_name(), Cas ::
         // PROPERTY_ACTION_ID), new StaticConditionVariable($this->action->get_id()));
         // $conditions[] = new EqualityCondition(new PropertyConditionVariable(Cas :: class_name(), Cas ::
         // PROPERTY_APPLICATION_ID), new StaticConditionVariable($this->application->get_id()));
-        // $first_day_of_month = mktime(0, 0, 0, date('n', $month), 1, date('Y', $month));
-        // $first_day_of_next_month = strtotime("+1 month", $first_day_of_month);
-        // $conditions[] = new InequalityCondition(Cas :: PROPERTY_DATE, InEqualityCondition :: GREATER_THAN_OR_EQUAL,
-        // date('Y-m-d G:i:s', $first_day_of_month));
-        // $conditions[] = new InequalityCondition(Cas :: PROPERTY_DATE, InEqualityCondition :: LESS_THAN,
-        // date('Y-m-d
-        // G:i:s', $first_day_of_next_month));
-        
-        // $condition = new AndCondition($conditions);
-        
-        // $count = DataManager :: get_instance($this->module->get_module_instance())->count_cas_graph_statistics(
-        // $condition);
-        // $data[$key][$this->application->get_id()] = $count;
-        // }
-        
         return $data;
     }
 }
