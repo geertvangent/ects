@@ -248,7 +248,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $mark_status_image = '<img src="' .
                              Theme :: get_image_path('application\discovery\module\career\implementation\bamaflex') .
-                             'status_type/' . $mark->get_status() . '_na.png" alt="' . Translation :: get(
+                             'status_type/' . $mark->get_status() . '_na.png" alt="' .
+                             Translation :: get(
                                 $mark->get_status_string() . 'Abandoned', 
                                 null, 
                                 'application\discovery\module\career\implementation\bamaflex') . '" title="' . Translation :: get(
@@ -270,7 +271,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $mark_status_image = '<img src="' .
                              Theme :: get_image_path('application\discovery\module\career\implementation\bamaflex') .
-                             'status_type/' . $mark->get_status() . '.png" alt="' . Translation :: get(
+                             'status_type/' . $mark->get_status() . '.png" alt="' .
+                             Translation :: get(
                                 $mark->get_status_string(), 
                                 null, 
                                 'application\discovery\module\career\implementation\bamaflex') . '" title="' . Translation :: get(
