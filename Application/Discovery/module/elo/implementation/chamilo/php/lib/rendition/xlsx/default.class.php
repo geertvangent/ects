@@ -1,12 +1,9 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\Path;
-
-require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -14,7 +11,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

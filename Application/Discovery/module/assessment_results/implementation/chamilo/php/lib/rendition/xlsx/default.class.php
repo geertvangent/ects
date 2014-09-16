@@ -1,10 +1,8 @@
 <?php
 namespace application\discovery\module\assessment_results\implementation\chamilo;
 
-use libraries\Path;
 use PHPExcel;
 
-require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
 
@@ -17,7 +15,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -25,7 +23,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
