@@ -23,24 +23,24 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     {
         $relative_path = 'photo/' . Text :: char_at($id, 0) . '/' . $id . '.jpg';
         $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
-
+        
         if (! file_exists($path))
         {
             $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+            
             $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 $object = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                
                 if (! empty($object->photo))
                 {
                     Filesystem :: write_to_file($path, $object->photo);
-
+                    
                     $image_manipulation = ImageManipulation :: factory($path);
                     $image_manipulation->scale(600, 600, ImageManipulation :: SCALE_INSIDE);
                     $image_manipulation->write_to_file($path);
@@ -55,7 +55,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 Filesystem :: copy_file(Theme :: get_common_image_system_path() . 'unknown.jpg', $path);
             }
         }
-
+        
         return Path :: get($web ? WEB_FILE_PATH : SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' .
              $relative_path;
     }
@@ -69,28 +69,28 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             {
                 $conditions = array();
                 $conditions[] = new EqualityCondition(
-                    new StaticColumnConditionVariable('id'),
+                    new StaticColumnConditionVariable('id'), 
                     new StaticConditionVariable($faculty_id));
                 $conditions[] = new EqualityCondition(
-                    new StaticColumnConditionVariable('source'),
+                    new StaticColumnConditionVariable('source'), 
                     new StaticConditionVariable($source));
                 $condition = new AndCondition($conditions);
-
+                
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
                      DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+                
                 $statement = $this->get_connection()->query($query);
-
+                
                 if ($statement instanceof PDOStatement)
                 {
                     $result = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                    
                     $faculty = new Faculty();
                     $faculty->set_source($result->source);
                     $faculty->set_id($result->id);
                     $faculty->set_name($this->convert_to_utf8($result->name));
                     $faculty->set_year($this->convert_to_utf8($result->year));
-
+                    
                     $this->faculties[$faculty_id][$source] = $faculty;
                 }
             }
@@ -105,23 +105,23 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     public function retrieve_training($training_id)
     {
         $source = 1;
-
+        
         if (! isset($this->trainings[$training_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'),
+                new StaticColumnConditionVariable('id'), 
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -142,39 +142,39 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                     $training->set_faculty($this->convert_to_utf8($result->faculty));
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-
+                    
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-
+        
         return $this->trainings[$training_id][$source];
     }
 
     public function retrieve_programme($programme_id)
     {
         $source = 1;
-
+        
         if (! isset($this->course[$programme_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'),
+                new StaticColumnConditionVariable('id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 $object = $result = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                
                 if ($object instanceof \stdClass)
                 {
                     $course = new Course();
@@ -204,7 +204,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                     $course->set_jury($object->jury);
                     $course->set_repleacable($object->repleacable);
                     $course->set_training_unit($this->convert_to_utf8($object->training_unit));
-
+                    
                     $this->course[$programme_id][$source] = $course;
                 }
             }

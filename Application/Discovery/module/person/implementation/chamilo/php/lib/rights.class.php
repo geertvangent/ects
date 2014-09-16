@@ -24,51 +24,51 @@ class Rights
         try
         {
             $user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+                \core\user\User :: class_name(), 
                 (int) $parameters->get_user_id());
             $current_user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+                \core\user\User :: class_name(), 
                 (int) Session :: get_user_id());
-
+            
             $user_group_ids = $user->get_groups(true);
             $current_user_group_ids = $current_user->get_groups(true);
-
+            
             $conditions = array();
             $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_instance_id);
             $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, $right);
             $conditions[] = new InCondition(
                 new PropertyConditionVariable(
-                    RightsGroupEntityRight :: class_name(),
-                    RightsGroupEntityRight :: PROPERTY_GROUP_ID),
+                    RightsGroupEntityRight :: class_name(), 
+                    RightsGroupEntityRight :: PROPERTY_GROUP_ID), 
                 $user_group_ids);
-
+            
             $entities_conditions = array();
-
+            
             $user_entity_conditions = array();
             $user_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
+                RightsGroupEntityRight :: PROPERTY_ENTITY_ID, 
                 Session :: get_user_id());
             $user_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
+                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
                 \core\rights\NewUserEntity :: ENTITY_TYPE);
             $entities_conditions[] = new AndCondition($user_entity_conditions);
-
+            
             $group_entity_conditions = array();
             $group_entity_conditions[] = new InCondition(
                 new PropertyConditionVariable(
-                    RightsGroupEntityRight :: class_name(),
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID),
+                    RightsGroupEntityRight :: class_name(), 
+                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID), 
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
+                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE, 
                 \core\rights\NewPlatformGroupEntity :: ENTITY_TYPE);
             $entities_conditions[] = new AndCondition($group_entity_conditions);
-
+            
             $conditions[] = new OrCondition($entities_conditions);
             $condition = new AndCondition($conditions);
-
+            
             $count = \application\discovery\DataManager :: get_instance()->count_rights_group_entity_rights($condition);
-
+            
             if ($count > 0)
             {
                 return true;

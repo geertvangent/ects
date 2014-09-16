@@ -25,38 +25,38 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     {
         $user = \core\user\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();
-
+        
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('id'),
+            new StaticColumnConditionVariable('id'), 
             new StaticConditionVariable($official_code));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_basic WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             $object = $statement->fetch(\PDO :: FETCH_OBJ);
-
+            
             $name = new Name();
             $name->set_first_name($this->convert_to_utf8($object->first_name));
             $name->set_other_first_names($this->convert_to_utf8($object->other_first_names));
             $name->set_last_name($this->convert_to_utf8($object->last_name));
-
+            
             $birth = new Birth();
             $birth->set_date(strtotime($object->birth_date));
             $birth->set_place($this->convert_to_utf8($object->birth_place));
             $birth->set_country($this->convert_to_utf8($object->birth_country));
-
+            
             $national_id = new IdentificationCode();
             $national_id->set_type(IdentificationCode :: TYPE_NATIONAL);
             $national_id->set_code($this->convert_to_utf8($object->national_id));
-
+            
             $company_id = new IdentificationCode();
             $company_id->set_type(IdentificationCode :: TYPE_COMPANY);
             $company_id->set_code($this->convert_to_utf8($object->company_id));
-
+            
             $profile = new Profile();
             $profile->set_title($name->get_full_name());
             $profile->set_name($name);
@@ -68,7 +68,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             $profile->set_photo($this->retrieve_photo($official_code));
             $profile->set_first_university($object->first_university);
             $profile->set_first_university_college($object->first_university_college);
-
+            
             $profile->set_gender($this->convert_to_utf8($object->gender));
             $profile->set_birth($birth);
             $profile->set_address($this->retrieve_addresses($official_code));
@@ -76,7 +76,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             $profile->set_previous_college($this->retrieve_previous_college($official_code));
             $profile->set_previous_university($this->retrieve_previous_university($official_code));
             $profile->set_learning_credit($this->retrieve_learning_credits($official_code));
-
+            
             return $profile;
         }
         else
@@ -89,14 +89,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     {
         $user = \core\user\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();
-
+        
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('id'),
+            new StaticColumnConditionVariable('id'), 
             new StaticConditionVariable($official_code));
-
+        
         $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
         if ($statement instanceof PDOStatement)
         {
@@ -114,12 +114,12 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     private function retrieve_emails($id)
     {
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_email WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -130,7 +130,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 $emails[] = $email;
             }
         }
-
+        
         return $emails;
     }
 
@@ -142,16 +142,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     private function retrieve_learning_credits($id)
     {
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'),
+            new StaticColumnConditionVariable('person_id'), 
             new StaticConditionVariable($id));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_learning_credit WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY date DESC';
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         $credits = array();
-
+        
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -175,14 +175,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     private function retrieve_communications($id)
     {
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_communication WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         $communications = array();
-
+        
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -194,7 +194,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 $communications[] = $communication;
             }
         }
-
+        
         return $communications;
     }
 
@@ -206,14 +206,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     private function retrieve_addresses($id)
     {
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_address WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         $addresses = array();
-
+        
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -233,7 +233,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 $addresses[] = $address;
             }
         }
-
+        
         return $addresses;
     }
 
@@ -245,20 +245,20 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     private function retrieve_photo($id)
     {
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             $object = $statement->fetch(\PDO :: FETCH_OBJ);
-
+            
             $photo = new Photo();
             $photo->set_mime_type('image/jpeg');
             $photo->set_data(base64_encode($object->photo));
-
+            
             return $photo;
         }
         else
@@ -270,16 +270,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     private function retrieve_previous_college($id)
     {
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_previous_college WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             $object = $statement->fetch(\PDO :: FETCH_OBJ);
-
+            
             if ($object instanceof stdClass)
             {
                 $previous_college = new PreviousCollege();
@@ -295,7 +295,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 $previous_college->set_country_id($object->country_id);
                 $previous_college->set_country_name($this->convert_to_utf8($object->country_name));
                 $previous_college->set_info($this->convert_to_utf8($object->info));
-
+                
                 return $previous_college;
             }
         }
@@ -305,16 +305,16 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     private function retrieve_previous_university($id)
     {
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_previous_university WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             $object = $statement->fetch(\PDO :: FETCH_OBJ);
-
+            
             if ($object instanceof stdClass)
             {
                 $previous_university = new PreviousUniversity();
@@ -328,11 +328,11 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 $previous_university->set_country_id($object->country_id);
                 $previous_university->set_country_name($this->convert_to_utf8($object->country_name));
                 $previous_university->set_info($this->convert_to_utf8($object->info));
-
+                
                 return $previous_university;
             }
         }
-
+        
         return false;
     }
 
@@ -344,14 +344,14 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     private function retrieve_nationalities($id)
     {
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+        
         $query = 'SELECT * FROM v_discovery_profile_nationality WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         $addresses = array();
-
+        
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -362,7 +362,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 $nationalities[] = $nationality;
             }
         }
-
+        
         return $nationalities;
     }
 }

@@ -25,15 +25,24 @@
 		<sha512></sha512>
 		<tagline></tagline>
 		<description>NASA's Space Shuttle program, officially called Space
-			Transportation System (STS), is the United States government's current manned
-			launch vehicle. The winged Space Shuttle orbiter is launched vertically,
-			usually carrying five to seven astronauts (although eight have been carried)
-			and up to 50,000 lb (22 700 kg) of payload into low earth orbit. When its
-			mission is complete, the shuttle can independently move itself out of orbit
-			using its Maneuvering System (it orients itself appropriately and fires its
-			main OMS engines, thus slowing it down) and re-enter the Earth's atmosphere.
-			During descent and landing the orbiter acts as a re-entry vehicle and a
-			glider, using its OMS system and flight surfaces to make adjustments.</description>
+			Transportation System (STS), is the United States government's
+			current manned
+			launch vehicle. The winged Space Shuttle orbiter is
+			launched vertically,
+			usually carrying five to seven astronauts
+			(although eight have been carried)
+			and up to 50,000 lb (22 700 kg) of
+			payload into low earth orbit. When its
+			mission is complete, the
+			shuttle can independently move itself out of orbit
+			using its
+			Maneuvering System (it orients itself appropriately and fires its
+			main OMS engines, thus slowing it down) and re-enter the Earth's
+			atmosphere.
+			During descent and landing the orbiter acts as a re-entry
+			vehicle and a
+			glider, using its OMS system and flight surfaces to make
+			adjustments.</description>
 		<homepage></homepage>
 		<dependencies>
 			<server>

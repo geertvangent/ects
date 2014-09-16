@@ -12,7 +12,7 @@ class Module extends \application\discovery\module\photo\Module
     {
         $parameters = $this->get_module_parameters();
         $codes = array();
-
+        
         if ($parameters->get_faculty_id())
         {
             if (! $parameters->get_type())
@@ -76,13 +76,13 @@ class Module extends \application\discovery\module\photo\Module
             }
         }
         $groups = array();
-
+        
         if (count($codes) > 0)
         {
             foreach ($codes as $code)
             {
                 $group = \core\group\DataManager :: retrieve_group_by_code($code);
-
+                
                 if ($group instanceof Group)
                 {
                     $groups[] = $group;
@@ -99,14 +99,14 @@ class Module extends \application\discovery\module\photo\Module
         {
             $users = array_merge($users, $group->get_users(true, true));
         }
-
+        
         return array_unique($users);
     }
 
     public function get_condition()
     {
         return new InCondition(
-            new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_ID),
+            new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_ID), 
             $this->get_users());
     }
 }

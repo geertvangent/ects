@@ -14,8 +14,8 @@ class DataManager extends \libraries\DataManager
     {
         return 'doctrine';
     }
-
-    //TODO : copy from DoctrineDataManager
+    
+    // TODO : copy from DoctrineDataManager
     public function retrieve_history_by_conditions($condition)
     {
         return $this->retrieve_objects(History :: get_table_name(), $condition, null, null, array(), History :: CLASS_NAME);

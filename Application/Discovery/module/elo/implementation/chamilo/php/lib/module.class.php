@@ -13,7 +13,7 @@ class Module extends \application\discovery\module\elo\Module
     const TYPE_DOCUMENT_LIST = 'document_list';
     const TYPE_LOGIN = 'login';
     const TYPE_PUBLICATION = 'publication';
-
+    
     // Parameters
     const PARAM_MODULE_TYPE = 'module_type';
 
@@ -25,12 +25,12 @@ class Module extends \application\discovery\module\elo\Module
     public static function get_module_types()
     {
         return array(
-            self :: TYPE_CONTENT_OBJECT,
-            self :: TYPE_COURSE_ACCESS,
-            self :: TYPE_COURSE_LIST,
-            self :: TYPE_COURSE_TIME,
-            self :: TYPE_DOCUMENT_LIST,
-            self :: TYPE_LOGIN,
+            self :: TYPE_CONTENT_OBJECT, 
+            self :: TYPE_COURSE_ACCESS, 
+            self :: TYPE_COURSE_LIST, 
+            self :: TYPE_COURSE_TIME, 
+            self :: TYPE_DOCUMENT_LIST, 
+            self :: TYPE_LOGIN, 
             self :: TYPE_PUBLICATION);
     }
 
