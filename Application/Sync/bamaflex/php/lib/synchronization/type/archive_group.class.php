@@ -10,6 +10,7 @@ use libraries\AndCondition;
 use libraries\DataClassDistinctParameters;
 use core\group\GroupRelUser;
 use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
 
 /**
  *
@@ -190,7 +191,9 @@ class ArchiveGroupSynchronization extends Synchronization
 
     public function synchronize_users()
     {
-        $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new StaticConditionVariable($this->current_group->get_id()));
         $current_users = \core\group\DataManager :: distinct(
             \core\group\GroupRelUser :: class_name(),
             new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
@@ -209,8 +212,8 @@ class ArchiveGroupSynchronization extends Synchronization
 
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            \core\group\GroupRelUser :: PROPERTY_GROUP_ID,
-            $this->current_group->get_id());
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new StaticConditionVariable($this->current_group->get_id()));
         $conditions[] = new InCondition(
             new PropertyConditionVariable(
                 \core\group\GroupRelUser :: class_name(),

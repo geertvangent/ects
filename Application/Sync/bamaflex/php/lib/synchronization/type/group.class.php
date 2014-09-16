@@ -8,6 +8,7 @@ use libraries\EqualityCondition;
 use libraries\Utilities;
 use libraries\AndCondition;
 use libraries\DataClassDistinctParameters;
+use libraries\StaticConditionVariable;
 use libraries\PropertyConditionVariable;
 
 /**
@@ -190,7 +191,9 @@ class GroupSynchronization extends Synchronization
 
     public function synchronize_users()
     {
-        $condition = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new StaticConditionVariable($this->current_group->get_id()));
         $current_users = \core\group\DataManager :: distinct(
             GroupRelUser :: class_name(),
             new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
@@ -208,10 +211,13 @@ class GroupSynchronization extends Synchronization
         }
 
         $conditions = array();
-        $conditions[] = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new StaticConditionVariable($this->current_group->get_id()));
         $conditions[] = new InCondition(
             new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_USER_ID),
             $to_delete);
+
         $condition = new AndCondition($conditions);
 
         return \core\group\DataManager :: deletes(GroupRelUser :: class_name(), $condition);

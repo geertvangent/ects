@@ -16,6 +16,7 @@ class AtlantisComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-        \application\ehb_sync\atlantis\Manager :: launch($this);
+
+        \libraries\Application :: launch(\application\ehb_sync\atlantis\Manager :: context(), $this->get_user(), $this);
     }
 }
