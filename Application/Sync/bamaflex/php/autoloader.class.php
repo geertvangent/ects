@@ -7,18 +7,15 @@ class Autoloader
     /**
      * The array mapping class names to paths
      *
-     * @var multitype:string
+     * @var string[]
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'DataManager' => '/lib/data_manager.class.php',
-         'DataManagerInterface' => '/lib/data_manager_interface.class.php',
          'BamaflexConnection' => '/lib/data_connector/bamaflex/connection.class.php',
          'BamaflexDataConnector' => '/lib/data_connector/bamaflex/connector.class.php',
          'BamaflexDatabase' => '/lib/data_connector/bamaflex/database.class.php',
          'BamaflexResultSet' => '/lib/data_connector/bamaflex/result_set.class.php',
-         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
-         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
          'AllUsersComponent' => '/lib/manager/component/all_users.class.php',
          'ArchiveGroupsComponent' => '/lib/manager/component/archive_groups.class.php',
@@ -26,8 +23,6 @@ class Autoloader
          'CoursesComponent' => '/lib/manager/component/courses.class.php',
          'CourseCategoriesComponent' => '/lib/manager/component/course_categories.class.php',
          'GroupsComponent' => '/lib/manager/component/groups.class.php',
-         'NewUsersComponent' => '/lib/manager/component/new_users.class.php',
-         'UpdateUsersComponent' => '/lib/manager/component/update_users.class.php',
          'Synchronization' => '/lib/synchronization/synchronization.class.php',
          'ArchiveGroupSynchronization' => '/lib/synchronization/type/archive_group.class.php',
          'CourseSynchronization' => '/lib/synchronization/type/course.class.php',
@@ -83,8 +78,6 @@ class Autoloader
          'UserTypeStudentGroupSynchronization' => '/lib/synchronization/type/group/user_type_student.class.php',
          'UserTypeTeacherGroupSynchronization' => '/lib/synchronization/type/group/user_type_teacher.class.php',
          'AllUserSynchronization' => '/lib/synchronization/type/user/all.class.php',
-         'CreateUserSynchronization' => '/lib/synchronization/type/user/create.class.php',
-         'UpdateUserSynchronization' => '/lib/synchronization/type/user/update.class.php',
          'Activator' => '/package/activate/activator.class.php',
          'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'
@@ -93,7 +86,7 @@ class Autoloader
     /**
      * Try to load the class
      *
-     * @param $classname string
+     * @param string $classname
      * @return boolean
      */
     public static function load($classname)
@@ -110,8 +103,8 @@ class Autoloader
     /**
      * Synchronize the autoloader
      *
-     * @param $update boolean
-     * @return multitype:string
+     * @param boolean $update
+     * @return string[]
      */
     public static function synch($update)
     {

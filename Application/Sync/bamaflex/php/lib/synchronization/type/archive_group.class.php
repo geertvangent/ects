@@ -9,6 +9,7 @@ use libraries\Utilities;
 use libraries\AndCondition;
 use libraries\DataClassDistinctParameters;
 use core\group\GroupRelUser;
+use libraries\PropertyConditionVariable;
 
 /**
  *
@@ -210,7 +211,11 @@ class ArchiveGroupSynchronization extends Synchronization
         $conditions[] = new EqualityCondition(
             \core\group\GroupRelUser :: PROPERTY_GROUP_ID,
             $this->current_group->get_id());
-        $conditions[] = new InCondition(\core\group\GroupRelUser :: PROPERTY_USER_ID, $to_delete);
+        $conditions[] = new InCondition(
+            new PropertyConditionVariable(
+                \core\group\GroupRelUser :: class_name(),
+                \core\group\GroupRelUser :: PROPERTY_USER_ID),
+            $to_delete);
         $condition = new AndCondition($conditions);
 
         return \core\group\DataManager :: deletes(\core\group\GroupRelUser :: class_name(), $condition);

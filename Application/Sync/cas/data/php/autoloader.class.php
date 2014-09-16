@@ -7,15 +7,12 @@ class Autoloader
     /**
      * The array mapping class names to paths
      *
-     * @var multitype:string
+     * @var string[]
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'DataManager' => '/lib/data_manager.class.php',
-         'DataManagerInterface' => '/lib/data_manager_interface.class.php',
          'Statistic' => '/lib/data_class/statistic.class.php',
-         'DoctrineDataManager' => '/lib/data_manager/doctrine.class.php',
-         'Mdb2DataManager' => '/lib/data_manager/mdb2.class.php',
          'DoctrineConnection' => '/lib/data_manager/connection/doctrine.class.php',
          'Mdb2Connection' => '/lib/data_manager/connection/mdb2.class.php',
          'Manager' => '/lib/manager/manager.class.php',
@@ -27,7 +24,7 @@ class Autoloader
     /**
      * Try to load the class
      *
-     * @param $classname string
+     * @param string $classname
      * @return boolean
      */
     public static function load($classname)
@@ -44,8 +41,8 @@ class Autoloader
     /**
      * Synchronize the autoloader
      *
-     * @param $update boolean
-     * @return multitype:string
+     * @param boolean $update
+     * @return string[]
      */
     public static function synch($update)
     {

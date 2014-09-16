@@ -8,6 +8,7 @@ use libraries\EqualityCondition;
 use libraries\Utilities;
 use libraries\AndCondition;
 use libraries\DataClassDistinctParameters;
+use libraries\PropertyConditionVariable;
 
 /**
  *
@@ -208,7 +209,9 @@ class GroupSynchronization extends Synchronization
 
         $conditions = array();
         $conditions[] = new EqualityCondition(GroupRelUser :: PROPERTY_GROUP_ID, $this->current_group->get_id());
-        $conditions[] = new InCondition(GroupRelUser :: PROPERTY_USER_ID, $to_delete);
+        $conditions[] = new InCondition(
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_USER_ID),
+            $to_delete);
         $condition = new AndCondition($conditions);
 
         return \core\group\DataManager :: deletes(GroupRelUser :: class_name(), $condition);
