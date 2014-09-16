@@ -12,6 +12,7 @@ use libraries\Translation;
 use libraries\ToolbarItem;
 use libraries\ActionBarRenderer;
 use libraries\NewObjectTableSupport;
+use libraries\PropertyConditionVariable;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport, DelegateComponent
 {
@@ -25,8 +26,12 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
-            $search_conditions[] = new PatternMatchCondition(Role :: PROPERTY_NAME, '*' . $query . '*');
-            $search_conditions[] = new PatternMatchCondition(Role :: PROPERTY_DESCRIPTION, '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Role :: class_name(), Role :: PROPERTY_NAME),
+                '*' . $query . '*');
+            $search_conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Role :: class_name(), Role :: PROPERTY_DESCRIPTION),
+                '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
         else

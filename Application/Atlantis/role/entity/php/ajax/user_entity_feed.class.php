@@ -11,6 +11,7 @@ use libraries\InCondition;
 use libraries\EqualityCondition;
 use libraries\DataClassCountParameters;
 use core\user\User;
+use libraries\PropertyConditionVariable;
 
 /**
  * Feed to return users from the user entity
@@ -61,7 +62,9 @@ class EntityAjaxUserEntityFeed extends \core\user\UserAjaxUsersFeed
 
             if (count($target_users) > 0)
             {
-                $conditions[] = new InCondition(User :: PROPERTY_ID, $target_users);
+                $conditions[] = new InCondition(
+                    new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID),
+                    $target_users);
             }
             else
             {

@@ -11,6 +11,7 @@ use libraries\Translation;
 use libraries\ToolbarItem;
 use libraries\ActionBarRenderer;
 use libraries\NewObjectTableSupport;
+use libraries\PropertyConditionVariable;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport
 {
@@ -20,16 +21,25 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
     public function get_object_table_condition($object_table_class_name)
     {
         $query = $this->action_bar->get_query();
-        
+
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
-                    \application\atlantis\application\Application :: PROPERTY_NAME, '*' . $query . '*');
+                new PropertyConditionVariable(
+                    \application\atlantis\application\Application :: class_name(),
+                    \application\atlantis\application\Application :: PROPERTY_NAME),
+                '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                    \application\atlantis\application\Application :: PROPERTY_DESCRIPTION, '*' . $query . '*');
+                new PropertyConditionVariable(
+                    \application\atlantis\application\Application :: class_name(),
+                    \application\atlantis\application\Application :: PROPERTY_DESCRIPTION),
+                '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                    \application\atlantis\application\Application :: PROPERTY_URL, '*' . $query . '*');
+                new PropertyConditionVariable(
+                    \application\atlantis\application\Application :: class_name(),
+                    \application\atlantis\application\Application :: PROPERTY_URL),
+                '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
         else
@@ -41,9 +51,9 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
     public function run()
     {
         SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
-        
+
         $this->display_header();
-        
+
         $this->action_bar = $this->get_action_bar();
         echo ($this->action_bar->as_html());
         $table = new ApplicationTable($this);
@@ -57,10 +67,11 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         {
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
             $this->action_bar->add_common_action(
-                    new ToolbarItem(Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                            Theme :: get_common_image_path() . 'action_create.png', 
-                            $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
-            
+                new ToolbarItem(
+                    Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
+                    Theme :: get_common_image_path() . 'action_create.png',
+                    $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
+
             $this->action_bar->set_search_url($this->get_url());
         }
         return $this->action_bar;

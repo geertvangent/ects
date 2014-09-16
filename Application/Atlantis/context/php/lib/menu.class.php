@@ -15,6 +15,7 @@ use libraries\PatternMatchCondition;
 use libraries\NotCondition;
 use libraries\OrCondition;
 use core\group\Group;
+use libraries\PropertyConditionVariable;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -135,15 +136,31 @@ class Menu extends HTML_Menu
         $hide_current_category = $this->hide_current_category;
 
         $code_conditions = array();
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'AY_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'CA*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'DEP_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_OP_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+            'AY_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+            'CA*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+            'DEP_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+            'TRA_OP_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+            'TRA_STU_*');
 
         $not_code_conditions = array();
-        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*_*'));
-        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(Group :: PROPERTY_CODE, 'COU_OP_*'));
+        $not_code_conditions[] = new NotCondition(
+            new PatternMatchCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+                'TRA_STU_*_*'));
+        $not_code_conditions[] = new NotCondition(
+            new PatternMatchCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+                'COU_OP_*'));
 
         $conditions = array();
         $conditions[] = new OrCondition($code_conditions);

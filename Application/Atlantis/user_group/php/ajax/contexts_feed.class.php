@@ -12,6 +12,7 @@ use libraries\EqualityCondition;
 use libraries\AndCondition;
 use libraries\ObjectTableOrder;
 use libraries\AdvancedElementFinderElement;
+use libraries\PropertyConditionVariable;
 
 class ContextAjaxContextsFeed extends AjaxManager
 {
@@ -64,70 +65,9 @@ class ContextAjaxContextsFeed extends AjaxManager
                 $context_category->add_child($this->get_context_element($context));
             }
         }
-
-        // // Add users
-        // $users = $this->retrieve_users();
-        // if ($users && $users->size() > 0)
-        // {
-        // // Add user category
-        // $user_category = new AdvancedElementFinderElement('users',
-        // 'category', 'Users', 'Users');
-        // $elements->add_element($user_category);
-
-        // while ($user = $users->next_result())
-        // {
-        // $user_category->add_child($this->get_user_element($user));
-        // }
-        // }
-
         return $elements;
     }
 
-    // /**
-    // * Retrieves all the users for the selected context
-    // */
-    // private function retrieve_users()
-    // {
-    // $conditions = array();
-
-    // $user_ids = $this->get_user_ids();
-    // if (count($user_ids) == 0)
-    // {
-    // return;
-    // }
-
-    // $conditions[] = new InCondition(User :: PROPERTY_ID, $user_ids);
-
-    // $search_query = Request :: post(self :: PARAM_SEARCH_QUERY);
-
-    // // Set the conditions for the search query
-    // if ($search_query && $search_query != '')
-    // {
-    // $conditions[] = Utilities :: query_to_condition($search_query, array(User
-    // :: PROPERTY_USERNAME,
-    // User :: PROPERTY_FIRSTNAME, User :: PROPERTY_LASTNAME));
-    // }
-
-    // // Combine the conditions
-    // $count = count($conditions);
-    // if ($count > 1)
-    // {
-    // $condition = new AndCondition($conditions);
-    // }
-
-    // if ($count == 1)
-    // {
-    // $condition = $conditions[0];
-    // }
-
-    // $this->context_count = UserDataManager ::
-    // get_instance()->count_users($condition);
-
-    // return UserDataManager :: get_instance()->retrieve_users($condition,
-    // $this->get_offset(), 100, array(
-    // new ObjectTableOrder(User :: PROPERTY_LASTNAME), new
-    // ObjectTableOrder(User :: PROPERTY_FIRSTNAME)));
-    // }
     protected function get_offset()
     {
         $offset = Request :: post(self :: PARAM_OFFSET);
@@ -159,7 +99,9 @@ class ContextAjaxContextsFeed extends AjaxManager
         if ($search_query && $search_query != '')
         {
             $q = '*' . $search_query . '*';
-            $conditions[] = new PatternMatchCondition(Context :: PROPERTY_CONTEXT_NAME, $q);
+            $conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_CONTEXT_NAME),
+                $q);
         }
 
         $filter_id = $this->get_filter();

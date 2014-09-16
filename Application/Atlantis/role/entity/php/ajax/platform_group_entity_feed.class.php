@@ -13,6 +13,7 @@ use libraries\ArrayResultSet;
 use core\group\GroupAjaxPlatformGroupsFeed;
 use core\group\Group;
 use core\group\GroupRelUser;
+use libraries\PropertyConditionVariable;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -102,8 +103,12 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
         if ($search_query && $search_query != '')
         {
             $q = '*' . $search_query . '*';
-            $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_NAME, $q);
-            $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, $q);
+            $name_conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME),
+                $q);
+            $name_conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+                $q);
             $conditions[] = new OrCondition($name_conditions);
         }
 

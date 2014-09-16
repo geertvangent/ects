@@ -250,7 +250,11 @@ class Rights extends \core\rights\RightsUtil
 
             if (count($location_entity_right_ids) > 0)
             {
-                $condition = new InCondition(RightsLocationEntityRight :: PROPERTY_ID, $location_entity_right_ids);
+                $condition = new InCondition(
+                    new PropertyConditionVariable(
+                        RightsLocationEntityRight :: class_name(),
+                        RightsLocationEntityRight :: PROPERTY_ID),
+                    $location_entity_right_ids);
                 $location_entity_rights = \core\rights\DataManager :: get_instance()->retrieve_rights_location_rights(
                     __NAMESPACE__,
                     $condition);
@@ -288,19 +292,25 @@ class Rights extends \core\rights\RightsUtil
 
             if (count($user_ids) > 0)
             {
-                $condition = new InCondition(User :: PROPERTY_ID, $user_ids);
+                $condition = new InCondition(
+                    new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID),
+                    $user_ids);
                 $authorized_user_count = \core\user\DataManager :: count(
                     User :: class_name(),
                     new DataClassCountParameters($condition));
 
                 if ($authorized_user_count == 0)
                 {
-                    $condition = new InCondition(User :: PROPERTY_PLATFORMADMIN, 1);
+                    $condition = new InCondition(
+                        new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_PLATFORMADMIN),
+                        1);
                 }
             }
             else
             {
-                $condition = new InCondition(User :: PROPERTY_PLATFORMADMIN, 1);
+                $condition = new InCondition(
+                    new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_PLATFORMADMIN),
+                    1);
             }
             $authorized_users = \core\user\DataManager :: retrieves(
                 User :: class_name(),
