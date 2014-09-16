@@ -38,15 +38,31 @@ class EntityAjaxContextsFeed extends GroupAjaxPlatformGroupsFeed
     public function get_group_element($group)
     {
         $code_conditions = array();
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'AY_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'CA*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'DEP_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_OP_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'AY_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'CA*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'DEP_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'TRA_OP_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'TRA_STU_*');
         
         $not_code_conditions = array();
-        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*_*'));
-        $not_code_conditions[] = new NotCondition(new PatternMatchCondition(Group :: PROPERTY_CODE, 'COU_OP_*'));
+        $not_code_conditions[] = new NotCondition(
+            new PatternMatchCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+                'TRA_STU_*_*'));
+        $not_code_conditions[] = new NotCondition(
+            new PatternMatchCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+                'COU_OP_*'));
         
         $conditions = array();
         $conditions[] = new OrCondition($code_conditions);
@@ -157,20 +173,35 @@ class EntityAjaxContextsFeed extends GroupAjaxPlatformGroupsFeed
         if ($search_query && $search_query != '')
         {
             $q = '*' . $search_query . '*';
-            $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_NAME, $q);
-            $name_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, $q);
+            $name_conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME), 
+                $q);
+            $name_conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+                $q);
             $conditions[] = new OrCondition($name_conditions);
         }
         
         $code_conditions = array();
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'AY_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'CA*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'DEP_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_OP_*');
-        $code_conditions[] = new PatternMatchCondition(Group :: PROPERTY_CODE, 'TRA_STU_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'AY_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'CA*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'DEP_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'TRA_OP_*');
+        $code_conditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            'TRA_STU_*');
         $code_conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
             new StaticConditionVariable(0));
+
         $conditions[] = new OrCondition($code_conditions);
         
         $filter_id = $this->get_filter();

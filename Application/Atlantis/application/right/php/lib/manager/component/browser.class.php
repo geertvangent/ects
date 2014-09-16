@@ -38,6 +38,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_DESCRIPTION), 
                 '*' . $query . '*');
+            
             $conditions[] = new OrCondition($search_conditions);
         }
         

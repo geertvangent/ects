@@ -55,7 +55,9 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             {
                 $right_ids[] = $right->get_id();
             }
-            return new InCondition(Entitlement :: PROPERTY_RIGHT_ID, $right_ids);
+            return new InCondition(
+                new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_RIGHT_ID), 
+                $right_ids);
         }
     }
 

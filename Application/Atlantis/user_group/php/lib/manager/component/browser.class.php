@@ -11,6 +11,7 @@ use libraries\Translation;
 use libraries\ToolbarItem;
 use libraries\ActionBarRenderer;
 use libraries\NewObjectTableSupport;
+use libraries\PropertyConditionVariable;
 
 class BrowserComponent extends Manager implements NewObjectTableSupport
 {
@@ -25,13 +26,19 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         {
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
-                \application\atlantis\application\Application :: PROPERTY_NAME, 
+                new PropertyConditionVariable(
+                    \application\atlantis\application\Application :: class_name(), 
+                    \application\atlantis\application\Application :: PROPERTY_NAME), 
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                \application\atlantis\application\Application :: PROPERTY_DESCRIPTION, 
+                new PropertyConditionVariable(
+                    \application\atlantis\application\Application :: class_name(), 
+                    \application\atlantis\application\Application :: PROPERTY_DESCRIPTION), 
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                \application\atlantis\application\Application :: PROPERTY_URL, 
+                new PropertyConditionVariable(
+                    \application\atlantis\application\Application :: class_name(), 
+                    \application\atlantis\application\Application :: PROPERTY_URL), 
                 '*' . $query . '*');
             return new OrCondition($search_conditions);
         }

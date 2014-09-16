@@ -101,7 +101,9 @@ class ContextAjaxContextsFeed extends AjaxManager
         if ($search_query && $search_query != '')
         {
             $q = '*' . $search_query . '*';
-            $conditions[] = new PatternMatchCondition(Context :: PROPERTY_CONTEXT_NAME, $q);
+            $conditions[] = new PatternMatchCondition(
+                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_CONTEXT_NAME), 
+                $q);
         }
         
         $filter_id = $this->get_filter();
@@ -142,7 +144,7 @@ class ContextAjaxContextsFeed extends AjaxManager
             array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME)));
         return DataManager :: retrieves(Context :: class_name(), $parameters);
     }
-
+    
     /**
      * Returns the element for a specific context
      * 
@@ -157,7 +159,7 @@ class ContextAjaxContextsFeed extends AjaxManager
             $context->get_context_name(), 
             AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER);
     }
-
+    
     /**
      * Returns the id of the selected filter
      */

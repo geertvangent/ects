@@ -63,7 +63,9 @@ class EntityAjaxUserEntityFeed extends \core\user\UserAjaxUsersFeed
             
             if (count($target_users) > 0)
             {
-                $conditions[] = new InCondition(User :: PROPERTY_ID, $target_users);
+                $conditions[] = new InCondition(
+                    new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), 
+                    $target_users);
             }
             else
             {
