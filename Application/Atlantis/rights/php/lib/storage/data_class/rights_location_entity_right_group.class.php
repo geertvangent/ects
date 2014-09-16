@@ -10,7 +10,7 @@ use libraries\DataClass;
 class RightsLocationEntityRightGroup extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Request properties
      */
@@ -19,7 +19,7 @@ class RightsLocationEntityRightGroup extends DataClass
 
     /**
      * The group of the RightsLocationEntityRightGroup
-     *
+     * 
      * @var \group\Group
      */
     private $group;
@@ -32,7 +32,7 @@ class RightsLocationEntityRightGroup extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
@@ -40,13 +40,13 @@ class RightsLocationEntityRightGroup extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_LOCATION_ENTITY_RIGHT_ID;
         $extended_property_names[] = self :: PROPERTY_GROUP_ID;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -64,7 +64,7 @@ class RightsLocationEntityRightGroup extends DataClass
         if (! isset($this->location_entity_right))
         {
             $this->location_entity_right = \core\rights\DataManager :: retrieve_rights_location_entity_right_by_id(
-                __NAMESPACE__,
+                __NAMESPACE__, 
                 $this->get_location_entity_right_id());
         }
         return $this->location_entity_right;
@@ -85,7 +85,7 @@ class RightsLocationEntityRightGroup extends DataClass
         if (! isset($this->group))
         {
             $this->group = \core\group\DataManager :: retrieve_by_id(
-                \core\group\Group :: class_name(),
+                \core\group\Group :: class_name(), 
                 $this->get_group_id());
         }
         return $this->group;

@@ -11,7 +11,7 @@ use libraries\Utilities;
 use libraries\ToolbarItem;
 use core\rights\NewPlatformGroupEntity;
 
-class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
+class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements 
     NewObjectTableCellRendererActionsColumnSupport
 {
 
@@ -46,16 +46,16 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
                 return DatetimeUtilities :: format_locale_date($date_format, $object->get_end_date());
                 break;
         }
-
+        
         return parent :: render_cell($column, $object);
     }
 
     public function get_object_actions($role_entity)
     {
         $toolbar = new Toolbar();
-
+        
         $is_target = false;
-
+        
         if ($this->get_component()->get_user()->is_platform_admin())
         {
             $is_target = true;
@@ -66,32 +66,32 @@ class RoleEntityTableCellRenderer extends NewObjectTableCellRenderer implements
             {
                 case UserEntity :: ENTITY_TYPE :
                     $is_target = \application\atlantis\rights\Rights :: get_instance()->is_target_user(
-                        $this->get_component()->get_user(),
+                        $this->get_component()->get_user(), 
                         $role_entity->get_entity_id());
                     break;
                 case PlatformGroupEntity :: ENTITY_TYPE :
                     $is_target = \application\atlantis\rights\Rights :: get_instance()->is_target_group(
-                        $this->get_component()->get_user(),
+                        $this->get_component()->get_user(), 
                         $role_entity->get_entity_id());
                     break;
             }
         }
-
+        
         if ($is_target)
         {
             $toolbar->add_item(
                 new ToolbarItem(
-                    Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: get_common_image_path() . 'action_delete.png',
+                    Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), 
+                    Theme :: get_common_image_path() . 'action_delete.png', 
                     $this->get_component()->get_url(
                         array(
-                            Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
-                            Manager :: PARAM_ROLE_ENTITY_ID => $role_entity->get_id(),
-                            \application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->get_component()->get_role_id(),
-                            \application\atlantis\context\Manager :: PARAM_CONTEXT_ID => $this->get_component()->get_context_id())),
+                            Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, 
+                            Manager :: PARAM_ROLE_ENTITY_ID => $role_entity->get_id(), 
+                            \application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->get_component()->get_role_id(), 
+                            \application\atlantis\context\Manager :: PARAM_CONTEXT_ID => $this->get_component()->get_context_id())), 
                     ToolbarItem :: DISPLAY_ICON));
         }
-
+        
         return $toolbar->as_html();
     }
 }

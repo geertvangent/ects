@@ -1,76 +1,74 @@
 .tab {
-    border: 1px solid #ebebeb;
-    background-color: #fafcfc;
-    z-index: 1000;
-    clear: both;
+	border: 1px solid #ebebeb;
+	background-color: #fafcfc;
+	z-index: 1000;
+	clear: both;
 }
 
 #tabs ul {
-    display: none;
+	display: none;
 }
 
 #tabs a:link {
-    color: #303030;
+	color: #303030;
 }
 
 #tabs a:visited {
-    color: #303030;
+	color: #303030;
 }
 
 #tabs a:hover {
-    color: red;
+	color: red;
 }
 
 div.vertical_action {
-    clear: both;
-    width: 100%;
-    overflow: hidden;
-    padding: 10px 0px 10px 0px;
-    border-top: 1px solid #EBEBEB;
+	clear: both;
+	width: 100%;
+	overflow: hidden;
+	padding: 10px 0px 10px 0px;
+	border-top: 1px solid #EBEBEB;
 }
 
 div.vertical_action div.icon {
-    float: left;
-    width: 64px;
-    height: 64px;
+	float: left;
+	width: 64px;
+	height: 64px;
 }
 
 div.vertical_action div.icon img {
-    margin: 16px;
+	margin: 16px;
 }
 
 div.vertical_action div.description {
-    margin-left: 64px;
+	margin-left: 64px;
 }
 
 div.vertical_action div.description .binary_checkbox {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 div.vertical_action h4 {
-    margin: 0px;
-    padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 span.active {
-    color: green;
+	color: green;
 }
 
 span.inactive {
-    color: red;
+	color: red;
 }
 
 div.items {
-    clear: both;
-    width: 100%;
+	clear: both;
+	width: 100%;
 }
 
-ul.tree-menu li div a.type_context_simple
-{
-    background-image: url(../../images/eagle/treemenu/context_simple.png);
+ul.tree-menu li div a.type_context_simple {
+	background-image: url(../../images/eagle/treemenu/context_simple.png);
 }
 
-ul.tree-menu li div a.type_context_folder
-{
-    background-image: url(../../images/eagle/treemenu/context_folder.png);
+ul.tree-menu li div a.type_context_folder {
+	background-image: url(../../images/eagle/treemenu/context_folder.png);
 }

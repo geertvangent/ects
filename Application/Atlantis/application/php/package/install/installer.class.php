@@ -3,7 +3,7 @@ namespace application\atlantis\application;
 
 /**
  * Atlantis application
- *
+ * 
  * @package application.atlantis
  */
 class Installer extends \configuration\package\Installer

@@ -5,7 +5,7 @@ use libraries\Application;
 
 /**
  * $Id: elude_manager.class.php
- *
+ * 
  * @package application.elude
  */
 class Manager extends Application

@@ -5,7 +5,7 @@ use libraries\WebApplicationInstaller;
 
 /**
  * Atlantis application
- *
+ * 
  * @package application.atlantis
  */
 class Installer extends WebApplicationInstaller
@@ -27,7 +27,7 @@ class Installer extends WebApplicationInstaller
         $installers[] = 'application\atlantis\context';
         $installers[] = 'application\atlantis\rights';
         $installers[] = 'application\atlantis\user_group';
-
+        
         return $installers;
     }
 }

@@ -11,11 +11,11 @@ class EntityTableDataProvider extends NewObjectTableDataProvider
     public function get_objects($offset, $count, $order_property = null)
     {
         $parameters = new DataClassRetrievesParameters(
-            $this->get_condition(),
-            $count,
-            $offset,
+            $this->get_condition(), 
+            $count, 
+            $offset, 
             $this->get_order_property($order_property));
-
+        
         return DataManager :: retrieves(RightsLocationEntityRightGroup :: class_name(), $parameters);
     }
 

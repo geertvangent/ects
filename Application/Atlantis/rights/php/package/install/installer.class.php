@@ -24,7 +24,7 @@ class Installer extends \configuration\package\Installer
         {
             $this->add_message(self :: TYPE_NORMAL, Translation :: get('AccessLocationCreated'));
         }
-
+        
         return true;
     }
 }

@@ -13,10 +13,10 @@ class PlatformGroupEntity extends \core\rights\PlatformGroupEntity
     public function get_element_finder_type()
     {
         return new AdvancedElementFinderElementType(
-            'platform_groups',
-            Translation :: get('PlatformGroups'),
-            __NAMESPACE__,
-            'platform_group_entity_feed',
+            'platform_groups', 
+            Translation :: get('PlatformGroups'), 
+            __NAMESPACE__, 
+            'platform_group_entity_feed', 
             array());
     }
 }

@@ -22,8 +22,9 @@ class DeleterComponent extends Manager
             
             foreach ($ids as $id)
             {
-                $application = DataManager :: retrieve(\application\atlantis\application\Application :: class_name(), 
-                        (int) $id);
+                $application = DataManager :: retrieve(
+                    \application\atlantis\application\Application :: class_name(), 
+                    (int) $id);
                 
                 if (! $this->get_user()->is_platform_admin())
                 {
@@ -70,15 +71,19 @@ class DeleterComponent extends Manager
                 }
             }
             
-            $this->redirect(Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
-                    ($failures ? true : false), array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
+            $this->redirect(
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                ($failures ? true : false), 
+                array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
         }
         else
         {
             $this->display_error_page(
-                    htmlentities(
-                            Translation :: get('NoObjectSelected', array('OBJECT' => Translation :: get('Application')), 
-                                    Utilities :: COMMON_LIBRARIES)));
+                htmlentities(
+                    Translation :: get(
+                        'NoObjectSelected', 
+                        array('OBJECT' => Translation :: get('Application')), 
+                        Utilities :: COMMON_LIBRARIES)));
         }
     }
 }

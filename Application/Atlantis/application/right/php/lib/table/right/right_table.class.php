@@ -20,7 +20,7 @@ class RightTable extends NewObjectTable implements NewObjectTableFormActionsSupp
         {
             $actions->add_form_action(
                 new ObjectTableFormAction(
-                    Manager :: ACTION_DELETE,
+                    Manager :: ACTION_DELETE, 
                     Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
         }
         return $actions;

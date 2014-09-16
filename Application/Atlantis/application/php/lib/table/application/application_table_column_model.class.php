@@ -5,7 +5,7 @@ use libraries\NewObjectTableColumnModelActionsColumnSupport;
 use libraries\NewObjectTableColumnModel;
 use libraries\ObjectTableColumn;
 
-class ApplicationTableColumnModel extends NewObjectTableColumnModel implements
+class ApplicationTableColumnModel extends NewObjectTableColumnModel implements 
     NewObjectTableColumnModelActionsColumnSupport
 {
 

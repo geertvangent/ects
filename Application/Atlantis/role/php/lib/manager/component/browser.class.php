@@ -21,7 +21,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
     public function get_object_table_condition($object_table_class_name)
     {
         $query = $this->action_bar->get_query();
-
+        
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
@@ -38,7 +38,7 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
     public function run()
     {
         SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
-
+        
         $this->display_header();
         $this->action_bar = $this->get_action_bar();
         echo $this->action_bar->as_html();
@@ -56,8 +56,8 @@ class BrowserComponent extends Manager implements NewObjectTableSupport, Delegat
             {
                 $this->action_bar->add_common_action(
                     new ToolbarItem(
-                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
-                        Theme :: get_common_image_path() . 'action_create.png',
+                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: get_common_image_path() . 'action_create.png', 
                         $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());

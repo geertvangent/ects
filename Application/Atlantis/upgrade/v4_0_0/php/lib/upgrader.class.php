@@ -18,14 +18,14 @@ class Upgrader extends \configuration\package\Upgrader
     {
         parent :: __construct(DataManager :: get_instance());
     }
-
+    
     /*
      * (non-PHPdoc) @see \libraries\package\Upgrader::run()
      */
     public function run()
     {
         $data_manager = $this->get_data_manager();
-
+        
         $success = $data_manager->transactional(
             function ($c) use($data_manager)
             {
@@ -36,10 +36,10 @@ class Upgrader extends \configuration\package\Upgrader
                 {
                     return false;
                 }
-
+                
                 return true;
             });
-
+        
         return $success;
     }
 }

@@ -12,8 +12,9 @@ class CreatorComponent extends Manager
     public function run()
     {
         SessionBreadcrumbs :: add(
-                new Breadcrumb($this->get_url(), 
-                        Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
+            new Breadcrumb(
+                $this->get_url(), 
+                Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
         
         if (! $this->get_user()->is_platform_admin())
         {
@@ -37,9 +38,12 @@ class CreatorComponent extends Manager
             $parameters[self :: PARAM_ACTION] = self :: ACTION_BROWSE;
             
             $this->redirect(
-                    Translation :: get($success ? 'ObjectCreated' : 'ObjectNotCreated', 
-                            array('OBJECT' => Translation :: get('Role')), Utilities :: COMMON_LIBRARIES), 
-                    ($success ? false : true), $parameters);
+                Translation :: get(
+                    $success ? 'ObjectCreated' : 'ObjectNotCreated', 
+                    array('OBJECT' => Translation :: get('Role')), 
+                    Utilities :: COMMON_LIBRARIES), 
+                ($success ? false : true), 
+                $parameters);
         }
         else
         {

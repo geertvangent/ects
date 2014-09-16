@@ -9,13 +9,13 @@ use core\user\User;
 
 /**
  * application.atlantis.role.entity.
- *
+ * 
  * @author GillardMagali
  */
 class RoleEntityTracker extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * RoleEntity properties
      */
@@ -40,7 +40,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
@@ -55,13 +55,13 @@ class RoleEntityTracker extends DataClass
         $extended_property_names[] = self :: PROPERTY_USER_ID;
         $extended_property_names[] = self :: PROPERTY_ACTION_DATE;
         $extended_property_names[] = self :: PROPERTY_ACTION_TYPE;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -71,7 +71,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Returns the entity_type of this RoleEntity.
-     *
+     * 
      * @return integer The entity_type.
      */
     public function get_entity_type()
@@ -81,7 +81,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Sets the entity_type of this RoleEntity.
-     *
+     * 
      * @param $entity_type integer
      */
     public function set_entity_type($entity_type)
@@ -91,7 +91,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Returns the entity_id of this RoleEntity.
-     *
+     * 
      * @return integer The entity_id.
      */
     public function get_entity_id()
@@ -101,7 +101,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Sets the entity_id of this RoleEntity.
-     *
+     * 
      * @param $entity_id integer
      */
     public function set_entity_id($entity_id)
@@ -111,7 +111,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Returns the context_id of this RoleEntity.
-     *
+     * 
      * @return integer The context_id.
      */
     public function get_context_id()
@@ -121,7 +121,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Sets the context_id of this RoleEntity.
-     *
+     * 
      * @param $context_id integer
      */
     public function set_context_id($context_id)
@@ -131,7 +131,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Returns the role_id of this RoleEntity.
-     *
+     * 
      * @return integer The role_id.
      */
     public function get_role_id()
@@ -141,7 +141,7 @@ class RoleEntityTracker extends DataClass
 
     /**
      * Sets the role_id of this RoleEntity.
-     *
+     * 
      * @param $role_id integer
      */
     public function set_role_id($role_id)
@@ -202,12 +202,12 @@ class RoleEntityTracker extends DataClass
     public function get_entity_type_image()
     {
         return Theme :: get_image(
-            'entity_type/' . $this->get_entity_type(),
-            'png',
-            null,
-            null,
-            ToolbarItem :: DISPLAY_ICON,
-            false,
+            'entity_type/' . $this->get_entity_type(), 
+            'png', 
+            null, 
+            null, 
+            ToolbarItem :: DISPLAY_ICON, 
+            false, 
             __NAMESPACE__);
     }
 
@@ -264,7 +264,7 @@ class RoleEntityTracker extends DataClass
         if (! isset($this->role))
         {
             $this->role = \application\atlantis\role\DataManager :: retrieve(
-                \application\atlantis\role\Role :: class_name(),
+                \application\atlantis\role\Role :: class_name(), 
                 (int) $this->get_role_id());
         }
         return $this->role;
