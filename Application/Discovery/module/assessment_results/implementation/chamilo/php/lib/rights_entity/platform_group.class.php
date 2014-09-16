@@ -9,6 +9,7 @@ use libraries\Translation;
 use core\rights\PlatformGroupEntity;
 use libraries\Condition;
 use core\group\Group;
+use libraries\PropertyConditionVariable;
 
 /**
  * Extension on the platform group entity specific for the course to limit the platform groups
@@ -96,13 +97,19 @@ class RightsPlatformGroupEntity extends PlatformGroupEntity
 
         if ($this->limited_groups)
         {
-            $conditions[] = new InCondition(Group :: PROPERTY_ID, $this->limited_groups, Group :: get_table_name());
+            $conditions[] = new InCondition(
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
+                $this->limited_groups,
+                Group :: get_table_name());
         }
 
         if ($this->excluded_groups)
         {
             $conditions[] = new NotCondition(
-                new InCondition(Group :: PROPERTY_ID, $this->excluded_groups, Group :: get_table_name()));
+                new InCondition(
+                    new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
+                    $this->excluded_groups,
+                    Group :: get_table_name()));
         }
 
         if ($condition)

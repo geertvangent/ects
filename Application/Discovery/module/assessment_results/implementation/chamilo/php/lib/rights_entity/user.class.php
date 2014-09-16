@@ -9,6 +9,7 @@ use libraries\AdvancedElementFinderElementType;
 use core\rights\UserEntity;
 use libraries\Condition;
 use core\user\User;
+use libraries\PropertyConditionVariable;
 
 /**
  * Extension on the user entity specific for the course to limit the users
@@ -77,12 +78,17 @@ class RightsUserEntity extends UserEntity
 
         if ($this->limited_users)
         {
-            $conditions[] = new InCondition(User :: PROPERTY_ID, $this->limited_users);
+            $conditions[] = new InCondition(
+                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID),
+                $this->limited_users);
         }
 
         if ($this->excluded_users)
         {
-            $conditions[] = new NotCondition(new InCondition(User :: PROPERTY_ID, $this->excluded_users));
+            $conditions[] = new NotCondition(
+                new InCondition(
+                    new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID),
+                    $this->excluded_users));
         }
 
         if ($condition)

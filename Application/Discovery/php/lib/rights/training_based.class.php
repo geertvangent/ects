@@ -12,6 +12,7 @@ use libraries\DataClassRetrievesParameters;
 use libraries\DataClassCountParameters;
 use core\rights\NewUserEntity;
 use core\rights\NewPlatformGroupEntity;
+use libraries\PropertyConditionVariable;
 
 abstract class TrainingBasedRights
 {
@@ -41,7 +42,9 @@ abstract class TrainingBasedRights
             $codes[] = 'DEP_' . $context->get_faculty_id();
             $codes[] = 'TRA_OP_' . $context->get_training_id();
             $codes[] = 'TRA_STU_' . $context->get_training_id();
-            $condition = new InCondition(\core\group\Group :: PROPERTY_CODE, $codes);
+            $condition = new InCondition(
+                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_CODE),
+                $codes);
 
             $groups = \core\group\DataManager :: retrieves(
                 \core\group\Group :: class_name(),
@@ -59,7 +62,11 @@ abstract class TrainingBasedRights
                 $conditions = array();
                 $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_instance_id);
                 $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, $right);
-                $conditions[] = new InCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, $group_ids);
+                $conditions[] = new InCondition(
+                    new PropertyConditionVariable(
+                        RightsGroupEntityRight :: class_name(),
+                        RightsGroupEntityRight :: PROPERTY_GROUP_ID),
+                    $group_ids);
 
                 $entities_conditions = array();
 
@@ -74,8 +81,10 @@ abstract class TrainingBasedRights
 
                 $group_entity_conditions = array();
                 $group_entity_conditions[] = new InCondition(
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
-                      $current_user_group_ids);
+                    new PropertyConditionVariable(
+                        RightsGroupEntityRight :: class_name(),
+                        RightsGroupEntityRight :: PROPERTY_ENTITY_ID),
+                    $current_user_group_ids);
                 $group_entity_conditions[] = new EqualityCondition(
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
                     NewPlatformGroupEntity :: ENTITY_TYPE);

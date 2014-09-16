@@ -22,6 +22,7 @@ use libraries\InCondition;
 use libraries\OrCondition;
 use libraries\DataClassDistinctParameters;
 use libraries\DataClassRetrieveParameters;
+use libraries\PropertyConditionVariable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements NewObjectTableSupport
 {
@@ -69,7 +70,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $url = $this->get_application()->get_url(
             array(
                 \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
-                \core\group\GroupManager :: PARAM_GROUP_ID => '%s'));
+                \core\group\Manager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new GroupMenu($this, urldecode($url));
 
         $html = array();
@@ -143,7 +144,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $parameters[\core\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\core\group\Manager :: PARAM_GROUP_ID] = $this->get_group();
         $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
 
         $query = $this->action_bar->get_query();
@@ -266,7 +267,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return $this->get_application()->get_url(
             array(
                 \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
-                \core\group\GroupManager :: PARAM_GROUP_ID => $group->get_id()));
+                \core\group\Manager :: PARAM_GROUP_ID => $group->get_id()));
     }
 
     /*
@@ -281,7 +282,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $parameters[\core\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\core\group\Manager :: PARAM_GROUP_ID] = $this->get_group();
         $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         return $parameters;
     }
@@ -327,7 +328,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
             $group_entity_conditions = array();
             $group_entity_conditions[] = new InCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID),
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
                 RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,

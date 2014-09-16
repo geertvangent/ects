@@ -3,6 +3,7 @@ namespace application\discovery\module\photo\implementation\bamaflex;
 
 use libraries\InCondition;
 use core\group\Group;
+use libraries\PropertyConditionVariable;
 
 class Module extends \application\discovery\module\photo\Module
 {
@@ -104,6 +105,8 @@ class Module extends \application\discovery\module\photo\Module
 
     public function get_condition()
     {
-        return new InCondition(\core\user\User :: PROPERTY_ID, $this->get_users());
+        return new InCondition(
+            new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_ID),
+            $this->get_users());
     }
 }

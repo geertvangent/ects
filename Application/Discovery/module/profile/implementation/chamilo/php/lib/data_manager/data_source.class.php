@@ -2,7 +2,6 @@
 namespace application\discovery\module\profile\implementation\chamilo;
 
 use core\user\UserSetting;
-use core\user\UserManager;
 use core\user\User;
 use libraries\CoreApplication;
 use libraries\PlatformSetting;
@@ -72,7 +71,7 @@ class DataSource
     {
         $user_language_is_allowed = PlatformSetting :: get(
             'allow_user_change_platform_language',
-            CoreApplication :: get_application_namespace(UserManager :: APPLICATION_NAME));
+            CoreApplication :: get_application_namespace(\core\user\Manager :: APPLICATION_NAME));
 
         if ($user_language_is_allowed)
         {
@@ -105,7 +104,7 @@ class DataSource
     {
         $user_timezone_is_allowed = PlatformSetting :: get(
             'allow_user_change_platform_timezone',
-            CoreApplication :: get_application_namespace(UserManager :: APPLICATION_NAME));
+            CoreApplication :: get_application_namespace(\core\user\Manager :: APPLICATION_NAME));
 
         if ($user_timezone_is_allowed)
         {

@@ -10,6 +10,7 @@ use application\discovery\RightsGroupEntityRight;
 use Exception;
 use core\rights\NewUserEntity;
 use core\rights\NewPlatformGroupEntity;
+use libraries\PropertyConditionVariable;
 
 class Rights
 {
@@ -37,7 +38,11 @@ class Rights
             $conditions = array();
             $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_instance_id);
             $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, $right);
-            $conditions[] = new InCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, $user_group_ids);
+            $conditions[] = new InCondition(
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: PROPERTY_GROUP_ID),
+                $user_group_ids);
 
             $entities_conditions = array();
 
@@ -52,7 +57,9 @@ class Rights
 
             $group_entity_conditions = array();
             $group_entity_conditions[] = new InCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID),
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
                 RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,

@@ -11,6 +11,7 @@ use Exception;
 use libraries\DataClassRetrievesParameters;
 use core\rights\NewPlatformGroupEntity;
 use core\rights\NewUserEntity;
+use libraries\PropertyConditionVariable;
 
 class Rights
 {
@@ -69,7 +70,9 @@ class Rights
                 return false;
             }
 
-            $condition = new InCondition(\core\group\Group :: PROPERTY_CODE, $codes);
+            $condition = new InCondition(
+                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_CODE),
+                $codes);
 
             $groups = \core\group\DataManager :: retrieves(
                 \core\group\Group :: class_name(),
@@ -87,7 +90,11 @@ class Rights
                 $conditions = array();
                 $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_instance_id);
                 $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, $right);
-                $conditions[] = new InCondition(RightsGroupEntityRight :: PROPERTY_GROUP_ID, $group_ids);
+                $conditions[] = new InCondition(
+                    new PropertyConditionVariable(
+                        RightsGroupEntityRight :: class_name(),
+                        RightsGroupEntityRight :: PROPERTY_GROUP_ID),
+                    $group_ids);
 
                 $entities_conditions = array();
 
@@ -102,7 +109,9 @@ class Rights
 
                 $group_entity_conditions = array();
                 $group_entity_conditions[] = new InCondition(
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
+                    new PropertyConditionVariable(
+                        RightsGroupEntityRight :: class_name(),
+                        RightsGroupEntityRight :: PROPERTY_ENTITY_ID),
                     $current_user_group_ids);
                 $group_entity_conditions[] = new EqualityCondition(
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,

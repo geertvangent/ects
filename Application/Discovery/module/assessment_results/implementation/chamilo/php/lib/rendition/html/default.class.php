@@ -56,7 +56,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $url = $this->get_application()->get_url(
             array(
                 \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
-                \core\group\GroupManager :: PARAM_GROUP_ID => '%s'));
+                \core\group\Manager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new \core\group\GroupMenu($this->get_group(), urldecode($url));
 
         $html = array();
@@ -77,7 +77,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $parameters[\core\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\core\group\Manager :: PARAM_GROUP_ID] = $this->get_group();
         $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
 
         $query = $this->action_bar->get_query();
@@ -192,7 +192,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return $this->get_application()->get_url(
             array(
                 \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
-                \core\group\GroupManager :: PARAM_GROUP_ID => $group->get_id()));
+                \core\group\Manager :: PARAM_GROUP_ID => $group->get_id()));
     }
 
     /*
@@ -207,7 +207,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $parameters[\core\group\GroupManager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\core\group\Manager :: PARAM_GROUP_ID] = $this->get_group();
         $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         return $parameters;
     }

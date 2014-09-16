@@ -7,12 +7,11 @@ class Autoloader
     /**
      * The array mapping class names to paths
      *
-     * @var multitype:string
+     * @var string[]
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
          'DataManager' => '/lib/data_manager.class.php',
-         'DataManagerInterface' => '/lib/data_manager_interface.class.php',
          'Module' => '/lib/module.class.php',
          'Rendition' => '/lib/rendition/rendition.class.php',
          'HtmlRendition' => '/lib/rendition/format/html.class.php',
@@ -24,7 +23,7 @@ class Autoloader
     /**
      * Try to load the class
      *
-     * @param $classname string
+     * @param string $classname
      * @return boolean
      */
     public static function load($classname)
@@ -41,8 +40,8 @@ class Autoloader
     /**
      * Synchronize the autoloader
      *
-     * @param $update boolean
-     * @return multitype:string
+     * @param boolean $update
+     * @return string[]
      */
     public static function synch($update)
     {

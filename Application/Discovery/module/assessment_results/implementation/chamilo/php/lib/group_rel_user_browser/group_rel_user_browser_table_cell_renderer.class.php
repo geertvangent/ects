@@ -3,7 +3,6 @@ namespace application\discovery\module\assessment_results\implementation\chamilo
 
 use libraries\Toolbar;
 use core\group\DefaultGroupRelUserTableCellRenderer;
-use core\user\UserManager;
 use core\group\GroupRelUser;
 
 class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellRenderer
@@ -39,7 +38,7 @@ class GroupRelUserBrowserTableCellRenderer extends DefaultGroupRelUserTableCellR
             // Exceptions that need post-processing go here ...
             case GroupRelUser :: PROPERTY_USER_ID :
                 $user_id = parent :: render_cell($column, $groupreluser);
-                $user = UserManager :: retrieve_user($user_id);
+                $user = \core\user\Manager :: retrieve_user($user_id);
                 return $user->get_fullname();
         }
         return parent :: render_cell($column, $groupreluser);
