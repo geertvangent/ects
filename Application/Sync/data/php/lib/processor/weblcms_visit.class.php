@@ -4,8 +4,9 @@ namespace application\ehb_sync\data;
 use application\weblcms\CourseTool;
 use libraries\FileLogger;
 use libraries\DataClassRetrieveParameters;
-use libraries\ObjectTableOrder;
 use libraries\DataClassCache;
+use libraries\OrderBy;
+use libraries\PropertyConditionVariable;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
@@ -91,7 +92,9 @@ class WeblcmsVisitProcessor
     {
         $parameters = new DataClassRetrieveParameters(
             null,
-            array(new ObjectTableOrder(WeblcmsVisit :: PROPERTY_ACCESS_DATE, SORT_DESC)));
+            array(
+                new OrderBy(
+                    new PropertyConditionVariable(WeblcmsVisit :: class_name(), WeblcmsVisit :: PROPERTY_ACCESS_DATE))));
         $last_visit = DataManager :: retrieve(WeblcmsVisit :: class_name(), $parameters);
 
         if (! $last_visit instanceof WeblcmsVisit)

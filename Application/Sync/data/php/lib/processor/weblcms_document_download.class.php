@@ -4,8 +4,9 @@ namespace application\ehb_sync\data;
 use application\weblcms\CourseTool;
 use libraries\FileLogger;
 use libraries\DataClassRetrieveParameters;
-use libraries\ObjectTableOrder;
+use libraries\PropertyConditionVariable;
 use libraries\DataClassCache;
+use libraries\OrderBy;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
@@ -91,7 +92,11 @@ class WeblcmsDocumentDownloadProcessor
     {
         $parameters = new DataClassRetrieveParameters(
             null,
-            array(new ObjectTableOrder(WeblcmsDocumentDownload :: PROPERTY_ACCESS_DATE, SORT_DESC)));
+            array(
+                new OrderBy(
+                    new PropertyConditionVariable(
+                        WeblcmsDocumentDownload :: class_name(),
+                        WeblcmsDocumentDownload :: PROPERTY_ACCESS_DATE))));
         $last_visit = DataManager :: retrieve(WeblcmsDocumentDownload :: class_name(), $parameters);
 
         if (! $last_visit instanceof WeblcmsDocumentDownload)
@@ -140,8 +145,8 @@ class WeblcmsDocumentDownloadProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\core\user\integration\core\tracking\Visit  :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\core\user\integration\core\tracking\Visit  :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_USER_ID];
 
         $query = array();
 
@@ -180,7 +185,7 @@ class WeblcmsDocumentDownloadProcessor
         $visit->set_tool_id($course_tool_id);
         $visit->set_category_id($category_id);
         $visit->set_publication_id($publication_id);
-        $visit->set_access_date($visit_tracker[\core\user\integration\core\tracking\Visit  :: PROPERTY_ENTER_DATE]);
+        $visit->set_access_date($visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_ENTER_DATE]);
 
         if (! $visit->save())
         {

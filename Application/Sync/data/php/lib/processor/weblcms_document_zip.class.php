@@ -4,8 +4,9 @@ namespace application\ehb_sync\data;
 use application\weblcms\CourseTool;
 use libraries\FileLogger;
 use libraries\DataClassRetrieveParameters;
-use libraries\ObjectTableOrder;
+use libraries\PropertyConditionVariable;
 use libraries\DataClassCache;
+use libraries\OrderBy;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
@@ -91,7 +92,11 @@ class WeblcmsDocumentZipProcessor
     {
         $parameters = new DataClassRetrieveParameters(
             null,
-            array(new ObjectTableOrder(WeblcmsDocumentZip :: PROPERTY_ACCESS_DATE, SORT_DESC)));
+            array(
+                new OrderBy(
+                    new PropertyConditionVariable(
+                        WeblcmsDocumentZip :: class_name(),
+                        WeblcmsDocumentZip :: PROPERTY_ACCESS_DATE))));
         $last_visit = DataManager :: retrieve(WeblcmsDocumentZip :: class_name(), $parameters);
 
         if (! $last_visit instanceof WeblcmsDocumentZip)

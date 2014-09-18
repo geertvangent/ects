@@ -3,8 +3,9 @@ namespace application\ehb_sync\data;
 
 use libraries\FileLogger;
 use libraries\DataClassRetrieveParameters;
-use libraries\ObjectTableOrder;
+use libraries\PropertyConditionVariable;
 use libraries\DataClassCache;
+use libraries\OrderBy;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
@@ -69,7 +70,12 @@ class PersonalCalendarVisitProcessor
     {
         $parameters = new DataClassRetrieveParameters(
             null,
-            array(new ObjectTableOrder(PersonalCalendarVisit :: PROPERTY_ACCESS_DATE, SORT_DESC)));
+            array(
+                new OrderBy(
+                    new PropertyConditionVariable(
+                        PersonalCalendarVisit :: class_name(),
+                        PersonalCalendarVisit :: PROPERTY_ACCESS_DATE),
+                    SORT_DESC)));
         $last_visit = DataManager :: retrieve(PersonalCalendarVisit :: class_name(), $parameters);
 
         if (! $last_visit instanceof PersonalCalendarVisit)
