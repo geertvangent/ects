@@ -4,7 +4,7 @@ namespace application\atlantis\context;
 use libraries\Utilities;
 use libraries\Path;
 use libraries\EqualityCondition;
-
+use libraries\StaticConditionVariable;
 use libraries\OptionsMenuRenderer;
 use libraries\TreeMenuRenderer;
 use libraries\DataClassRetrievesParameters;
@@ -20,12 +20,12 @@ use libraries\OrderBy;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
- * 
+ *
  * @package group.lib
  */
 /**
  * This class provides a navigation menu to allow a user to browse through categories of courses.
- * 
+ *
  * @author Bart Mollet
  */
 class Menu extends HTML_Menu
@@ -52,27 +52,27 @@ class Menu extends HTML_Menu
 
     /**
      * Creates a new category navigation menu.
-     * 
+     *
      * @param int $owner The ID of the owner of the categories to provide in this menu.
      * @param int $current_category The ID of the current category in the menu.
      * @param string $url_format The format to use for the URL of a category. Passed to sprintf(). Defaults to the
      *            string "?category=%s".
      * @param array $extra_items An array of extra tree items, added to the root.
      */
-    public function __construct($current_category, $url_format = '?application=atlantis&go=context&context_id=%s', $include_root = true, $show_complete_tree = false, 
+    public function __construct($current_category, $url_format = '?application=atlantis&go=context&context_id=%s', $include_root = true, $show_complete_tree = false,
         $hide_current_category = false)
     {
         $this->include_root = $include_root;
         $this->show_complete_tree = $show_complete_tree;
         $this->hide_current_category = $hide_current_category;
-        
+
         if ($current_category == '0' || is_null($current_category))
         {
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
                 new StaticConditionVariable(0));
             $group = \core\group\DataManager :: retrieves(
-                Group :: class_name(), 
+                Group :: class_name(),
                 new DataClassRetrievesParameters(
                     $condition,
                     1,
@@ -83,12 +83,12 @@ class Menu extends HTML_Menu
         else
         {
             $this->current_category = \core\group\DataManager :: retrieve(
-                Group :: class_name(), 
+                Group :: class_name(),
                 new EqualityCondition(
-                    new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID), 
+                    new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
                     new StaticConditionVariable($current_category)));
         }
-        
+
         $this->urlFmt = $url_format;
         $menu = $this->get_menu();
         parent :: __construct($menu);
@@ -99,12 +99,12 @@ class Menu extends HTML_Menu
     public function get_menu()
     {
         $include_root = $this->include_root;
-        
+
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable(0));
         $group = \core\group\DataManager :: retrieves(
-            Group :: class_name(), 
+            Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 1,
@@ -117,18 +117,18 @@ class Menu extends HTML_Menu
         else
         {
             $menu = array();
-            
+
             $menu_item = array();
             $menu_item['title'] = $group->get_name();
             // $menu_item['url'] = $this->get_url($group->get_id());
             $menu_item['url'] = $this->get_home_url();
-            
+
             $sub_menu_items = $this->get_menu_items($group->get_id());
             if (count($sub_menu_items) > 0)
             {
                 $menu_item['sub'] = $sub_menu_items;
             }
-            
+
             $menu_item['class'] = 'home';
             $menu_item[OptionsMenuRenderer :: KEY_ID] = $group->get_id();
             $menu[$group->get_id()] = $menu_item;
@@ -138,7 +138,7 @@ class Menu extends HTML_Menu
 
     /**
      * Returns the menu items.
-     * 
+     *
      * @param array $extra_items An array of extra tree items, added to the root.
      * @return array An array with all menu items. The structure of this array is the structure needed by
      *         PEAR::HTML_Menu, on which this class is based.
@@ -146,64 +146,64 @@ class Menu extends HTML_Menu
     private function get_menu_items($parent_id = 0)
     {
         $current_category = $this->current_category;
-        
+
         $show_complete_tree = $this->show_complete_tree;
         $hide_current_category = $this->hide_current_category;
-        
+
         $code_conditions = array();
         $code_conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
             'AY_*');
         $code_conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
             'CA*');
         $code_conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
             'DEP_*');
         $code_conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
             'TRA_OP_*');
         $code_conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
             'TRA_STU_*');
-        
+
         $not_code_conditions = array();
         $not_code_conditions[] = new NotCondition(
             new PatternMatchCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
                 'TRA_STU_*_*'));
         $not_code_conditions[] = new NotCondition(
             new PatternMatchCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
                 'COU_OP_*'));
-        
+
         $conditions = array();
         $conditions[] = new OrCondition($code_conditions);
         $conditions[] = new AndCondition($not_code_conditions);
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($parent_id));
         $condition = new AndCondition($conditions);
-        
+
         $groups = DataManager :: retrieves(
-            Group :: class_name(), 
+            Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 null,
                 null,
                 new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME))));
-        
+
         while ($group = $groups->next_result())
-        
+
         {
             $group_id = $group->get_id();
-            
+
             if (! ($group_id == $current_category->get_id() && $hide_current_category))
             {
                 $menu_item = array();
                 $menu_item['title'] = $group->get_name();
                 $menu_item['url'] = $this->get_url($group->get_id());
-                
+
                 if ($group->is_parent_of($current_category) || $group->get_id() == $current_category->get_id() ||
                      $show_complete_tree)
                 {
@@ -219,19 +219,19 @@ class Menu extends HTML_Menu
                         $menu_item['children'] = 'expand';
                     }
                 }
-                
+
                 $menu_item['class'] = 'category';
                 $menu_item[OptionsMenuRenderer :: KEY_ID] = $group->get_id();
                 $menu[$group->get_id()] = $menu_item;
             }
         }
-        
+
         return $menu;
     }
 
     /**
      * Gets the URL of a given category
-     * 
+     *
      * @param int $category The id of the category
      * @return string The requested URL
      */
@@ -249,7 +249,7 @@ class Menu extends HTML_Menu
 
     /**
      * Get the breadcrumbs which lead to the current category.
-     * 
+     *
      * @return array The breadcrumbs.
      */
     public function get_breadcrumbs()
@@ -266,14 +266,14 @@ class Menu extends HTML_Menu
 
     /**
      * Renders the menu as a tree
-     * 
+     *
      * @return string The HTML formatted tree
      */
     function render_as_tree()
     {
         $renderer = new TreeMenuRenderer(
-            $this->get_tree_name(), 
-            Path :: get(WEB_PATH) . 'application/atlantis/context/php/xml_feeds/menu.php', 
+            $this->get_tree_name(),
+            Path :: get(WEB_PATH) . 'application/atlantis/context/php/xml_feeds/menu.php',
             $this->urlFmt);
         $this->render($renderer, 'sitemap');
         return $renderer->toHTML();

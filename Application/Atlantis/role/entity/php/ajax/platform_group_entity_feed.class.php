@@ -14,10 +14,11 @@ use core\group\Group;
 use core\group\GroupRelUser;
 use libraries\PropertyConditionVariable;
 use libraries\OrderBy;
+use libraries\StaticConditionVariable;
 
 /**
  * Feed to return the platform groups for the platform group entity
- * 
+ *
  * @package roup
  * @author Sven Vanpoucke
  */
@@ -30,7 +31,7 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
 
     /**
      * Returns the element for a specific group
-     * 
+     *
      * @return AdvancedElementFinderElement
      */
     public function get_group_element($group)
@@ -42,7 +43,7 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
         elseif (\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
         {
             $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
-            
+
             if (in_array($group->get_id(), $target_groups))
             {
                 $type = AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER;
@@ -57,7 +58,7 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
                         break;
                     }
                 }
-                
+
                 if (! $type)
                 {
                     $type = AdvancedElementFinderElement :: TYPE_FILTER;
@@ -68,32 +69,32 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
         {
             $type = AdvancedElementFinderElement :: TYPE_FILTER;
         }
-        
+
         return new AdvancedElementFinderElement(
-            PlatformGroupEntity :: ENTITY_TYPE . '_' . $group->get_id(), 
-            'type type_group', 
-            $group->get_name(), 
-            $group->get_code(), 
+            PlatformGroupEntity :: ENTITY_TYPE . '_' . $group->get_id(),
+            'type type_group',
+            $group->get_name(),
+            $group->get_code(),
             $type);
     }
 
     /**
      * Returns the element for a specific user
-     * 
+     *
      * @return AdvancedElementFinderElement
      */
     public function get_user_element($user)
     {
         return new AdvancedElementFinderElement(
-            UserEntity :: ENTITY_TYPE . '_' . $user->get_id(), 
-            'type type_user', 
-            $user->get_fullname(), 
+            UserEntity :: ENTITY_TYPE . '_' . $user->get_id(),
+            'type type_user',
+            $user->get_fullname(),
             $user->get_official_code());
     }
 
     /**
      * Returns all the groups for this feed
-     * 
+     *
      * @return ResultSet
      */
     public function retrieve_groups()
@@ -104,49 +105,49 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
         {
             $q = '*' . $search_query . '*';
             $name_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME), 
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME),
                 $q);
             $name_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE), 
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
                 $q);
             $conditions[] = new OrCondition($name_conditions);
         }
-        
+
         $filter_id = $this->get_filter();
-        
+
         if ($filter_id)
         {
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
                 new StaticConditionVariable($filter_id));
         }
         else
         {
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
                 new StaticConditionVariable(0));
         }
-        
+
         // Combine the conditions
         $count = count($conditions);
         if ($count > 1)
         {
             $condition = new AndCondition($conditions);
         }
-        
+
         if ($count == 1)
         {
             $condition = $conditions[0];
         }
-        
+
         $groups = \core\group\DataManager :: retrieves(
-            Group :: class_name(), 
+            Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 null,
                 null,
                 array(new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME)))));
-        
+
         if ($this->get_user()->is_platform_admin())
         {
             return $groups;
@@ -154,16 +155,16 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
         elseif (\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
         {
             $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
-            
+
             $allowed_groups = array();
-            
+
             while ($group = $groups->next_result())
             {
                 foreach ($target_groups as $target_group)
                 {
                     $is_parent = $group->is_parent_of($target_group);
                     $is_child = $group->is_child_of($target_group);
-                    
+
                     if ($is_parent || $is_child || $target_group == $group->get_id())
                     {
                         $allowed_groups[] = $group;
@@ -171,7 +172,7 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
                     }
                 }
             }
-            
+
             return new ArrayResultSet($allowed_groups);
         }
     }
@@ -182,14 +183,14 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
     public function get_user_ids()
     {
         $filter_id = $this->get_filter();
-        
+
         if (! $filter_id)
         {
             return;
         }
-        
+
         $add_users = false;
-        
+
         if ($this->get_user()->is_platform_admin())
         {
             $add_users = true;
@@ -199,11 +200,11 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
         {
             $group = \core\group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $filter_id);
             $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
-            
+
             foreach ($target_groups as $target_group)
             {
                 $is_child = $group->is_child_of($target_group);
-                
+
                 if ($is_child || $target_group == $group->get_id())
                 {
                     $add_users = true;
@@ -211,21 +212,21 @@ class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
                 }
             }
         }
-        
+
         if ($add_users)
         {
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID), 
+                new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
                 new StaticConditionVariable($filter_id));
             $relations = \core\group\DataManager :: retrieves(GroupRelUser :: class_name(), $condition);
-            
+
             $user_ids = array();
-            
+
             while ($relation = $relations->next_result())
             {
                 $user_ids[] = $relation->get_user_id();
             }
-            
+
             return $user_ids;
         }
         else
