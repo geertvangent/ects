@@ -1,0 +1,290 @@
+<?php
+namespace application\ehb_sync\bamaflex;
+
+use libraries\PlatformSetting;
+use libraries\InCondition;
+use core\group\Group;
+use libraries\EqualityCondition;
+use libraries\Utilities;
+use libraries\AndCondition;
+use libraries\DataClassDistinctParameters;
+use core\group\GroupRelUser;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
+
+/**
+ *
+ * @package ehb.sync;
+ */
+class ArchiveGroupSynchronization extends Synchronization
+{
+
+    /**
+     *
+     * @var Synchronization
+     */
+    private $synchronization;
+
+    /**
+     *
+     * @var array
+     */
+    private $parameters;
+
+    /**
+     *
+     * @var Group
+     */
+    private $parent_group;
+
+    /**
+     *
+     * @var Group
+     */
+    private $current_group;
+
+    public static $official_code_cache;
+
+    public function __construct(ArchiveGroupSynchronization $synchronization, $parameters)
+    {
+        parent :: __construct();
+        $this->synchronization = $synchronization;
+        $this->parameters = $parameters;
+        $this->determine_current_group();
+    }
+
+    public function run()
+    {
+        $this->synchronize();
+        $this->synchronize_users();
+        $children = $this->get_children();
+
+        foreach ($children as $child)
+        {
+            $child->run();
+        }
+    }
+
+    /**
+     * Enter description here . ..
+     *
+     * @param $type string
+     * @param $synchronization GroupSynchronization
+     * @param $parameters array
+     * @return GroupSynchronization
+     */
+    public static function factory($type, ArchiveGroupSynchronization $synchronization, $parameters = array())
+    {
+        $file = dirname(__FILE__) . '/archive_group/' . $type . '.class.php';
+        $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'GroupSynchronization';
+        if (file_exists($file))
+        {
+            require_once $file;
+            return new $class($synchronization, $parameters);
+        }
+    }
+
+    public function determine_current_group()
+    {
+        $this->current_group = \core\group\DataManager :: retrieve_group_by_code_and_parent_id(
+            $this->get_code(),
+            $this->get_parent_group()->get_id());
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function exists()
+    {
+        return $this->current_group instanceof Group;
+    }
+
+    /**
+     *
+     * @return Group
+     */
+    public function get_current_group()
+    {
+        return $this->current_group;
+    }
+
+    /**
+     *
+     * @param $group Group
+     */
+    public function set_current_group(Group $group)
+    {
+        $this->current_group = $group;
+    }
+
+    /**
+     *
+     * @return Synchronization
+     */
+    public function get_synchronization()
+    {
+        return $this->synchronization;
+    }
+
+    /**
+     *
+     * @return Group
+     */
+    public function get_parent_group()
+    {
+        return $this->get_synchronization()->get_current_group();
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function get_parameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     *
+     * @param $key string
+     * @return string
+     */
+    public function get_parameter($key)
+    {
+        return $this->parameters[$key];
+    }
+
+    /**
+     *
+     * @return Group
+     */
+    public function synchronize()
+    {
+        if (! $this->exists())
+        {
+            $name = $this->convert_to_utf8($this->get_name());
+
+            $this->current_group = new Group();
+            $this->current_group->set_name($name);
+            $this->current_group->set_description($name);
+            $this->current_group->set_code($this->get_code());
+            $this->current_group->set_parent($this->get_parent_group()->get_id());
+            $this->current_group->create();
+
+            self :: log('added', $this->current_group->get_name());
+            flush();
+        }
+        else
+        {
+            $name = $this->convert_to_utf8($this->get_name());
+            if ($this->current_group->get_name() != $name)
+            {
+                $this->current_group->set_name($name);
+                $this->current_group->set_description($name);
+                $this->current_group->update();
+            }
+        }
+
+        return $this->current_group;
+    }
+
+    public function synchronize_users()
+    {
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new StaticConditionVariable($this->current_group->get_id()));
+        $current_users = \core\group\DataManager :: distinct(
+            \core\group\GroupRelUser :: class_name(),
+            new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
+        $source_users = $this->get_users();
+        // $source_users = array();
+        $to_add = array_diff($source_users, $current_users);
+        $to_delete = array_diff($current_users, $source_users);
+
+        foreach ($to_add as $user_id)
+        {
+            $relation = new \core\group\GroupRelUser();
+            $relation->set_group_id($this->current_group->get_id());
+            $relation->set_user_id($user_id);
+            $relation->create();
+        }
+
+        $conditions = array();
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new StaticConditionVariable($this->current_group->get_id()));
+        $conditions[] = new InCondition(
+            new PropertyConditionVariable(
+                \core\group\GroupRelUser :: class_name(),
+                \core\group\GroupRelUser :: PROPERTY_USER_ID),
+            $to_delete);
+        $condition = new AndCondition($conditions);
+
+        return \core\group\DataManager :: deletes(\core\group\GroupRelUser :: class_name(), $condition);
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function get_children()
+    {
+        return array();
+    }
+
+    public function get_user_official_codes()
+    {
+        return array();
+    }
+
+    public function get_users()
+    {
+        $official_codes = $this->get_user_official_codes();
+        $user_ids = array();
+        if (count($official_codes) > 0)
+        {
+            foreach ($official_codes as $code)
+            {
+                if (! isset(self :: $official_code_cache[$code]))
+                {
+                    $result_codes[] = $code;
+                }
+                else
+                {
+                    $user_ids[] = self :: $official_code_cache[$code];
+                }
+            }
+
+            if (count($result_codes) > 0)
+            {
+                $results = \core\user\DataManager :: retrieve_users_by_official_codes($result_codes);
+                while ($result = $results->next_result())
+                {
+                    $user_ids[] = $result->get_id();
+                    self :: $official_code_cache[$result->get_official_code()] = $result->get_id();
+                }
+            }
+        }
+
+        return $user_ids;
+    }
+
+    public function get_academic_year()
+    {
+        return PlatformSetting :: get('archive_academic_year', __NAMESPACE__);
+    }
+
+    public function is_old()
+    {
+        $year_parts = explode('-', $this->get_academic_year());
+        return (int) $year_parts[0] < 2005;
+    }
+
+    public function get_academic_year_end()
+    {
+        $year_parts = explode('-', $this->get_academic_year());
+
+        return '20' . $year_parts[1] . '-09-30 23:59:59.999';
+    }
+}
