@@ -2,11 +2,11 @@
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use libraries\Translation;
-
 use libraries\EqualityCondition;
 use libraries\DataClassRetrievesParameters;
 use libraries\StaticConditionVariable;
 use libraries\PropertyConditionVariable;
+use libraries\OrderBy;
 
 class SettingsConnector
 {
@@ -15,10 +15,10 @@ class SettingsConnector
     {
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \application\discovery\data_source\Instance :: class_name(), 
-                \application\discovery\data_source\Instance :: PROPERTY_TYPE), 
+                \application\discovery\data_source\Instance :: class_name(),
+                \application\discovery\data_source\Instance :: PROPERTY_TYPE),
             new StaticConditionVariable('application\discovery\data_source\bamaflex'));
-        
+
         $instances = \application\discovery\data_source\DataManager :: retrieves(
             \application\discovery\data_source\Instance :: class_name(),
             new DataClassRetrievesParameters(
