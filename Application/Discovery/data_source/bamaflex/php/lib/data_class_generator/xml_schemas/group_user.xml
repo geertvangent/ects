@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object name="group_user" table="v_discovery_group_user_advanced"
+	namespace="application\discovery\module\group_user\implementation\bamaflex"
+	author="Magali Gillard">
+</object>

@@ -1,0 +1,18 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\group_user\implementation\bamaflex
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Group memberships"
+TypeDescription = "Overview of all enrolled and struck users for a user group in a specific training"
+Title = "Title"
+Description = "Description"
+DataSource = "Data source"
+NoData = "There is currently no data available"
+FirstName = "First name"
+LastName = "Last name"
+Enrolled = "Enrolled"
+ClassCourse = "Member of the class via a course"
+Struck = "Struck"
+Year = ""
+Code = ""
