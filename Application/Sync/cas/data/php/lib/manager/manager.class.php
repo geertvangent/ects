@@ -1,9 +1,9 @@
 <?php
 namespace application\ehb_sync\cas\data;
 
-use libraries\SubManager;
+use libraries\Application;
 
-class Manager extends SubManager
+class Manager extends Application
 {
     const PARAM_ACTION = 'account_action';
     const ACTION_BROWSE = 'browser';
@@ -17,10 +17,5 @@ class Manager extends SubManager
     public function get_default_action()
     {
         return self :: DEFAULT_ACTION;
-    }
-
-    public static function launch($application)
-    {
-        parent :: launch(null, $application);
     }
 }

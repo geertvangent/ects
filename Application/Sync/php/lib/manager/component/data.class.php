@@ -17,6 +17,6 @@ class DataComponent extends Manager implements DelegateComponent
             throw new NotAllowedException();
         }
 
-        \application\ehb_sync\data\Manager :: launch($this);
+        \libraries\Application :: launch(\application\ehb_sync\data\Manager :: context(), $this->get_user(), $this);
     }
 }

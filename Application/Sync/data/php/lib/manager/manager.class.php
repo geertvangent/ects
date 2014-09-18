@@ -1,9 +1,9 @@
 <?php
 namespace application\ehb_sync\data;
 
-use libraries\SubManager;
+use libraries\Application;
 
-class Manager extends SubManager
+class Manager extends Application
 {
     const ACTION_BROWSE = 'browser';
     const ACTION_WEBLCMS = 'weblcms';
@@ -18,13 +18,13 @@ class Manager extends SubManager
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     const PARAM_ACTION = 'data_action';
 
-    public function __construct($parent)
+    public function __construct($user = null, $application = null)
     {
         // Make sure we don't get any timeouts
         ini_set("memory_limit", "-1");
         set_time_limit(0);
 
-        parent :: __construct($parent);
+        parent :: __construct($user, $application);
     }
 
     public static function get_action_parameter()
@@ -35,10 +35,5 @@ class Manager extends SubManager
     public function get_default_action()
     {
         return self :: DEFAULT_ACTION;
-    }
-
-    public static function launch($application)
-    {
-        parent :: launch(null, $application);
     }
 }

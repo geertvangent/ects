@@ -6,6 +6,8 @@ use application\ehb_sync\cas\data\Statistic;
 use libraries\DataClassRetrievesParameters;
 use application\ehb_sync\cas\storage\ComAuditTrail;
 use libraries\DelegateComponent;
+use libraries\StaticConditionVariable;
+use libraries\PropertyConditionVariable;
 
 class StatisticsComponent extends Manager implements DelegateComponent
 {
@@ -71,7 +73,9 @@ class StatisticsComponent extends Manager implements DelegateComponent
             $statistic->set_user($email_address);
             $user = \core\user\DataManager :: retrieve(
                 \core\user\User :: class_name(),
-                new EqualityCondition(\core\user\User :: PROPERTY_USERNAME, $email_address));
+                new EqualityCondition(
+                    new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_USERNAME),
+                    new StaticConditionVariable($email_address)));
             if ($user instanceof \core\user\User)
             {
                 $statistic->set_person_id($user->get_official_code());
@@ -85,7 +89,9 @@ class StatisticsComponent extends Manager implements DelegateComponent
             $statistic->set_user($email_address);
             $user = \core\user\DataManager :: retrieve(
                 \core\user\User :: class_name(),
-                new EqualityCondition(\core\user\User :: PROPERTY_USERNAME, $email_address));
+                new EqualityCondition(
+                    new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_USERNAME),
+                    new StaticConditionVariable($email_address)));
             if ($user instanceof \core\user\User)
             {
                 $statistic->set_person_id($user->get_official_code());

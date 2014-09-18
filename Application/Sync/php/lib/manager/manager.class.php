@@ -3,10 +3,10 @@ namespace application\ehb_sync;
 
 use libraries\Theme;
 use libraries\Translation;
-use libraries\WebApplication;
+use libraries\Application;
 use configuration\DataManager;
 
-class Manager extends WebApplication
+class Manager extends Application
 {
     const APPLICATION_NAME = 'ehb_sync';
     const ACTION_BROWSE = 'browser';
@@ -15,16 +15,6 @@ class Manager extends WebApplication
     const ACTION_CAS = 'cas';
     const ACTION_DATA = 'data';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
-
-    /**
-     * Constructor
-     *
-     * @param $user_id int
-     */
-    public function __construct($user)
-    {
-        parent :: __construct($user);
-    }
 
     /**
      * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name

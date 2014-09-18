@@ -16,6 +16,7 @@ class CasComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-        \application\ehb_sync\cas\Manager :: launch($this);
+
+        \libraries\Application :: launch(\application\ehb_sync\cas\Manager :: context(), $this->get_user(), $this);
     }
 }
