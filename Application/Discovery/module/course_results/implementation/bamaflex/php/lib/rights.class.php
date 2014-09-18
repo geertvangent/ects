@@ -15,13 +15,13 @@ class Rights extends TrainingBasedRights
         $parameter = new \application\discovery\module\course\implementation\bamaflex\Parameters();
         $parameter->set_programme_id($parameters->get_programme_id());
         $parameter->set_source($parameters->get_source());
-
+        
         $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
-            \application\discovery\instance\Instance :: class_name(),
+            \application\discovery\instance\Instance :: class_name(), 
             (int) $module_instance_id);
-
+        
         $course = DataManager :: get_instance($module_instance)->retrieve_course($parameter);
-
+        
         return new TrainingBasedContext($course->get_faculty_id(), $course->get_training_id());
     }
 }

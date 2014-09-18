@@ -8,6 +8,8 @@ use libraries\Translation;
 use libraries\EqualityCondition;
 use libraries\DataClassCountParameters;
 use libraries\DataClassRetrieveParameters;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
 
 class MoverComponent extends Manager
 {
@@ -25,7 +27,9 @@ class MoverComponent extends Manager
             $max = DataManager :: count(
                 Instance :: class_name(), 
                 new DataClassCountParameters(
-                    new EqualityCondition(Instance :: PROPERTY_CONTENT_TYPE, $instance->get_content_type())));
+                    new EqualityCondition(
+                        new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_CONTENT_TYPE), 
+                        new StaticConditionVariable($instance->get_content_type()))));
             
             $display_order = $instance->get_display_order();
             $new_place = ($display_order + ($direction == Manager :: PARAM_DIRECTION_UP ? - 1 : 1));
@@ -34,8 +38,12 @@ class MoverComponent extends Manager
             {
                 $instance->set_display_order($new_place);
                 
-                $conditions[] = new EqualityCondition(Instance :: PROPERTY_DISPLAY_ORDER, $new_place);
-                $conditions[] = new EqualityCondition(Instance :: PROPERTY_CONTENT_TYPE, $instance->get_content_type());
+                $conditions[] = new EqualityCondition(
+                    new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_DISPLAY_ORDER), 
+                    new StaticConditionVariable($new_place));
+                $conditions[] = new EqualityCondition(
+                    new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_CONTENT_TYPE), 
+                    new StaticConditionVariable($instance->get_content_type()));
                 $condition = new AndCondition($conditions);
                 
                 $new_instance = DataManager :: retrieve(

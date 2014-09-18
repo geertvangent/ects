@@ -4,11 +4,9 @@ namespace application\discovery\module\career\implementation\bamaflex;
 use libraries\StringUtilities;
 use libraries\Translation;
 use libraries\Display;
-use libraries\Path;
 use application\discovery\module\enrollment\DataManager;
 use PHPExcel;
 
-require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
 
@@ -21,99 +19,99 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
         if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT, 
-            $this->get_module_instance()->get_id(), 
+            Rights :: VIEW_RIGHT,
+            $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
-        
+
         $this->result_right = Rights :: is_allowed(
-            Rights :: RESULT_RIGHT, 
-            $this->get_module_instance()->get_id(), 
+            Rights :: RESULT_RIGHT,
+            $this->get_module_instance()->get_id(),
             $this->get_module_parameters());
-        
+
         $this->php_excel = new PHPExcel();
         $this->php_excel->getDefaultStyle()->getFont()->setName('DejaVu Sans');
         $this->php_excel->removeSheetByIndex(0);
-        
+
         if ($this->has_data())
         {
             $this->process_enrollment_courses();
         }
-        
+
         return \application\discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
     }
 
     public function process_enrollment_courses()
     {
         $contracts = $this->get_contracts();
-        
+
         $this->php_excel->createSheet(0);
         $this->php_excel->setActiveSheetIndex(0);
         $this->php_excel->getActiveSheet()->setTitle(Translation :: get('Index'));
-        
+
         $row = 1;
         $worksheet_key = 1;
-        
+
         $headers = array();
         $headers[] = '#';
         $headers[] = Translation :: get('Training');
         $headers[] = Translation :: get('Option');
         $headers[] = Translation :: get('Result');
-        
+
         \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
         $row ++;
-        
+
         foreach ($contracts as $contract)
         {
             $last_enrollment = $contract[0];
-            
+
             $column = 0;
-            
+
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++, 
-                $row, 
+                $column ++,
+                $row,
                 StringUtilities :: transcode_string($worksheet_key));
-            
+
             if ($last_enrollment->get_contract_id())
             {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                    $column ++, 
-                    $row, 
+                    $column ++,
+                    $row,
                     StringUtilities :: transcode_string($last_enrollment->get_training()));
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                    $column ++, 
-                    $row, 
+                    $column ++,
+                    $row,
                     StringUtilities :: transcode_string($last_enrollment->get_unified_option()));
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                    $column ++, 
-                    $row, 
+                    $column ++,
+                    $row,
                     StringUtilities :: transcode_string(Translation :: get($last_enrollment->get_result_string())));
             }
             else
             {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                    $column ++, 
-                    $row, 
+                    $column ++,
+                    $row,
                     StringUtilities :: transcode_string(Translation :: get('Various')));
             }
-            
+
             $row ++;
             $worksheet_key ++;
         }
-        
+
         $worksheet_key = 1;
-        
+
         foreach ($contracts as $contract)
         {
             $this->php_excel->createSheet($worksheet_key);
             $this->php_excel->setActiveSheetIndex($worksheet_key);
-            
+
             $row = 1;
-            
+
             $headers = array();
-            
+
             $headers[] = Translation :: get('Year');
             $headers[] = Translation :: get('Credits');
             $headers[] = Translation :: get('Type');
@@ -129,88 +127,88 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $headers[] = Translation :: get('Trajectory');
             $headers[] = Translation :: get('ResultType');
             $headers[] = Translation :: get('ContractType');
-            
+
             $this->php_excel->getActiveSheet()->getStyle(
                 'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
                 \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
-            
+
             $this->php_excel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(
                 \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
-            
+
             \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
             $row ++;
-            
+
             foreach ($contract as $enrollment)
             {
                 $training = $enrollment->get_training_object();
-                
+
                 $courses = $this->get_module()->get_data_manager()->retrieve_courses(array($enrollment->get_id()));
-                
+
                 foreach ($courses[$enrollment->get_id()] as $course)
                 {
                     $column = 0;
-                    
+
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string($course->get_year()));
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string($course->get_credits()));
-                    
+
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string(Translation :: get($course->get_type_string())));
-                    
+
                     if ($course->has_children())
                     {
                         $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                            $column ++, 
-                            $row, 
+                            $column ++,
+                            $row,
                             StringUtilities :: transcode_string(
                                 Translation :: get(Course :: programme_type_string(Course :: PROGRAMME_TYPE_COMPLEX))));
                     }
                     else
                     {
                         $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                            $column ++, 
-                            $row, 
+                            $column ++,
+                            $row,
                             StringUtilities :: transcode_string(
                                 Translation :: get(Course :: programme_type_string(Course :: PROGRAMME_TYPE_SIMPLE))));
                     }
-                    
+
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string(Translation :: get($course->get_name())));
-                    
+
                     foreach ($this->get_mark_moments() as $mark_moment)
                     {
                         $mark = $course->get_mark_by_moment_id($mark_moment->get_id());
-                        
+
                         if ($mark->get_publish_status() == 1 || ! $training->is_current() || $this->result_right)
                         {
                             if ($mark->get_result())
                             {
                                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                    $column ++, 
-                                    $row, 
+                                    $column ++,
+                                    $row,
                                     StringUtilities :: transcode_string(Translation :: get($mark->get_visual_result())));
                             }
                             elseif ($mark->get_sub_status())
                             {
                                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                    $column ++, 
-                                    $row, 
+                                    $column ++,
+                                    $row,
                                     StringUtilities :: transcode_string(Translation :: get($mark->get_sub_status())));
                             }
                             else
                             {
                                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row, '-');
                             }
-                            
+
                             if ($mark->get_status())
                             {
                                 if ($mark->is_abandoned())
@@ -222,8 +220,8 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                                     $mark_status = Translation :: get($mark->get_status_string());
                                 }
                                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                    $column ++, 
-                                    $row, 
+                                    $column ++,
+                                    $row,
                                     StringUtilities :: transcode_string($mark_status));
                             }
                             else
@@ -236,91 +234,91 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                             if ($mark->get_result())
                             {
                                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                    $column ++, 
-                                    $row, 
+                                    $column ++,
+                                    $row,
                                     StringUtilities :: transcode_string(Translation :: get('ResultNotYetAvailable')));
                             }
                             else
                             {
                                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row, '-');
                             }
-                            
+
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row, '-');
                         }
                     }
-                    
+
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string($enrollment->get_year()));
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string($enrollment->get_training()));
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string($enrollment->get_unified_option()));
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string($enrollment->get_unified_trajectory()));
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string(Translation :: get($enrollment->get_result_string())));
                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                        $column ++, 
-                        $row, 
+                        $column ++,
+                        $row,
                         StringUtilities :: transcode_string(Translation :: get($enrollment->get_contract_type_string())));
-                    
+
                     $row ++;
-                    
+
                     if ($course->has_children())
                     {
                         foreach ($course->get_children() as $child)
                         {
                             $column = 0;
-                            
+
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string($child->get_year()));
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string($child->get_credits()));
-                            
+
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string(Translation :: get($child->get_type_string())));
-                            
+
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string(
                                     Translation :: get(Course :: programme_type_string(Course :: PROGRAMME_TYPE_PART))));
-                            
+
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string($child->get_name()));
-                            
+
                             $added = false;
                             foreach ($this->get_mark_moments() as $mark_moment)
                             {
                                 $mark = $child->get_mark_by_moment_id($mark_moment->get_id());
-                                
+
                                 if ($mark->get_publish_status() == 1 || ! $training->is_current() || $this->result_right)
                                 {
                                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                        $column ++, 
-                                        $row, 
+                                        $column ++,
+                                        $row,
                                         StringUtilities :: transcode_string($mark->get_result()));
                                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                        $column ++, 
-                                        $row, 
+                                        $column ++,
+                                        $row,
                                         '-');
                                 }
                                 else
@@ -328,64 +326,64 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                                     if ($mark->get_result())
                                     {
                                         $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                            $column ++, 
-                                            $row, 
+                                            $column ++,
+                                            $row,
                                             StringUtilities :: transcode_string(
                                                 Translation :: get('ResultNotYetAvailable')));
                                     }
                                     else
                                     {
                                         $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                            $column ++, 
-                                            $row, 
+                                            $column ++,
+                                            $row,
                                             '-');
                                     }
                                     $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                        $column ++, 
-                                        $row, 
+                                        $column ++,
+                                        $row,
                                         '-');
                                 }
                             }
-                            
+
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string($enrollment->get_year()));
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string($enrollment->get_training()));
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string($enrollment->get_unified_option()));
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string($enrollment->get_unified_trajectory()));
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string(
                                     Translation :: get($enrollment->get_result_string())));
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                                $column ++, 
-                                $row, 
+                                $column ++,
+                                $row,
                                 StringUtilities :: transcode_string(
                                     Translation :: get($enrollment->get_contract_type_string())));
-                            
+
                             $range = 'A' . $row . ':' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1) .
                                  $row;
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->setItalic(true);
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->getColor()->setRGB(
                                 'AAAAAA');
-                            
+
                             $row ++;
                         }
                     }
                 }
             }
-            
+
             $this->php_excel->getActiveSheet()->setTitle((string) $worksheet_key);
             $worksheet_key ++;
         }
@@ -395,9 +393,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     {
         $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
             $this->get_module_parameters());
-        
+
         $contract_enrollments = array();
-        
+
         foreach ($enrollments as $enrollment)
         {
             if ($enrollment->get_contract_id())
@@ -412,7 +410,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         krsort($contract_enrollments);
         return $contract_enrollments;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -420,7 +418,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     {
         return \application\discovery\Rendition :: FORMAT_XLSX;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

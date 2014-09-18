@@ -6,10 +6,12 @@ use libraries\Request;
 use libraries\EqualityCondition;
 use libraries\Authentication;
 use libraries\ObjectTableOrder;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $
- *
+ * 
  * @package group.xml_feeds
  * @author Hans De Bisschop
  * @author Dieter De Neef
@@ -21,13 +23,15 @@ $groups_tree = array();
 if (Authentication :: is_valid())
 {
     $parent_id = Request :: get('parent_id');
-    $condition = new EqualityCondition(\core\group\Group :: PROPERTY_PARENT_ID, $parent_id);
+    $condition = new EqualityCondition(
+        new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_PARENT_ID), 
+        new StaticConditionVariable($parent_id));
     $groups_tree = \core\group\DataManager :: retrieves(
-        \core\group\Group :: class_name(),
+        \core\group\Group :: class_name(), 
         new DataClassRetrievesParameters(
-            $condition,
-            null,
-            null,
+            $condition, 
+            null, 
+            null, 
             new ObjectTableOrder(\core\group\Group :: PROPERTY_NAME)))->as_array();
 }
 
@@ -39,7 +43,7 @@ echo '</tree>';
 function dump_tree($groups)
 {
     $html = array();
-
+    
     if (contains_results($groups))
     {
         dump_groups_tree($groups);

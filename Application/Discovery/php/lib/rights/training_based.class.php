@@ -13,6 +13,7 @@ use libraries\DataClassCountParameters;
 use core\rights\NewUserEntity;
 use core\rights\NewPlatformGroupEntity;
 use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
 
 abstract class TrainingBasedRights
 {
@@ -28,28 +29,28 @@ abstract class TrainingBasedRights
         try
         {
             $current_user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+                \core\user\User :: class_name(), 
                 (int) Session :: get_user_id());
-
+            
             if ($current_user->is_platform_admin())
             {
                 return true;
             }
-
+            
             $context = static :: get_context($module_instance_id, $parameters);
-
+            
             $codes = array();
             $codes[] = 'DEP_' . $context->get_faculty_id();
             $codes[] = 'TRA_OP_' . $context->get_training_id();
             $codes[] = 'TRA_STU_' . $context->get_training_id();
             $condition = new InCondition(
-                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_CODE),
+                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_CODE), 
                 $codes);
-
+            
             $groups = \core\group\DataManager :: retrieves(
-                \core\group\Group :: class_name(),
+                \core\group\Group :: class_name(), 
                 new DataClassRetrievesParameters($condition));
-
+            
             if ($groups->size() > 0)
             {
                 $group_ids = array();
@@ -58,45 +59,54 @@ abstract class TrainingBasedRights
                     $group_ids[] = $group->get_id();
                 }
                 $current_user_group_ids = $current_user->get_groups(true);
-
+                
                 $conditions = array();
-                $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_instance_id);
-                $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, $right);
-                $conditions[] = new InCondition(
+                $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(
-                        RightsGroupEntityRight :: class_name(),
-                        RightsGroupEntityRight :: PROPERTY_GROUP_ID),
-                    $group_ids);
-
+                        RightsGroupEntityRight :: class_name(), 
+                        RightsGroupEntityRight :: PROPERTY_MODULE_ID), 
+                    new StaticConditionVariable($module_instance_id));
+                $conditions[] = new EqualityCondition(
+                    new PropertyConditionVariable(
+                        RightsGroupEntityRight :: class_name(), 
+                        RightsGroupEntityRight :: PROPERTY_RIGHT_ID), 
+                    new StaticConditionVariable($right));
+                
                 $entities_conditions = array();
-
+                
                 $user_entity_conditions = array();
                 $user_entity_conditions[] = new EqualityCondition(
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
-                    Session :: get_user_id());
+                    new PropertyConditionVariable(
+                        RightsGroupEntityRight :: class_name(), 
+                        RightsGroupEntityRight :: PROPERTY_ENTITY_ID), 
+                    new StaticConditionVariable(Session :: get_user_id()));
                 $user_entity_conditions[] = new EqualityCondition(
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
-                    NewUserEntity :: ENTITY_TYPE);
+                    new PropertyConditionVariable(
+                        RightsGroupEntityRight :: class_name(), 
+                        RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE), 
+                    new StaticConditionVariable(NewUserEntity :: ENTITY_TYPE));
                 $entities_conditions[] = new AndCondition($user_entity_conditions);
-
+                
                 $group_entity_conditions = array();
                 $group_entity_conditions[] = new InCondition(
                     new PropertyConditionVariable(
-                        RightsGroupEntityRight :: class_name(),
-                        RightsGroupEntityRight :: PROPERTY_ENTITY_ID),
+                        RightsGroupEntityRight :: class_name(), 
+                        RightsGroupEntityRight :: PROPERTY_ENTITY_ID), 
                     $current_user_group_ids);
                 $group_entity_conditions[] = new EqualityCondition(
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
-                    NewPlatformGroupEntity :: ENTITY_TYPE);
+                    new PropertyConditionVariable(
+                        RightsGroupEntityRight :: class_name(), 
+                        RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE), 
+                    new StaticConditionVariable(NewPlatformGroupEntity :: ENTITY_TYPE));
                 $entities_conditions[] = new AndCondition($group_entity_conditions);
-
+                
                 $conditions[] = new OrCondition($entities_conditions);
                 $condition = new AndCondition($conditions);
-
+                
                 $count = DataManager :: count(
-                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: class_name(), 
                     new DataClassCountParameters($condition));
-
+                
                 if ($count > 0)
                 {
                     return true;

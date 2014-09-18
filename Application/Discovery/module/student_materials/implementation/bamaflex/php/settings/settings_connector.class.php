@@ -14,8 +14,10 @@ class SettingsConnector
     public static function get_data_sources()
     {
         $condition = new EqualityCondition(
-            \application\discovery\data_source\Instance :: PROPERTY_TYPE,
-            'application\discovery\data_source\bamaflex');
+            new PropertyConditionVariable(
+                \application\discovery\data_source\Instance :: class_name(), 
+                \application\discovery\data_source\Instance :: PROPERTY_TYPE), 
+            new StaticConditionVariable('application\discovery\data_source\bamaflex'));
         $instances = \application\discovery\data_source\DataManager :: retrieves(
             \application\discovery\data_source\Instance :: class_name(),
             new DataClassRetrievesParameters(

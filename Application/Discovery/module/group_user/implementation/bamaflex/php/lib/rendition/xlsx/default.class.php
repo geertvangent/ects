@@ -6,10 +6,8 @@ use application\discovery\module\group\implementation\bamaflex\Group;
 use libraries\StringUtilities;
 use libraries\Translation;
 use libraries\Display;
-use libraries\Path;
 use PHPExcel;
 
-require_once Path :: get_plugin_path() . 'phpexcel/PHPExcel.php';
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
 {

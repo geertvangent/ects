@@ -12,6 +12,8 @@ use libraries\DynamicFormTabsRenderer;
 use libraries\DynamicFormTab;
 use DOMDocument;
 use libraries\DataClassCountParameters;
+use libraries\StaticConditionVariable;
+use libraries\PropertyConditionVariable;
 
 class InstanceForm extends FormValidator
 {
@@ -325,7 +327,9 @@ class InstanceForm extends FormValidator
         $display_order = DataManager :: count(
             Instance :: class_name(), 
             new DataClassCountParameters(
-                new EqualityCondition(Instance :: PROPERTY_CONTENT_TYPE, $instance->get_content_type())));
+                new EqualityCondition(
+                    new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_CONTENT_TYPE), 
+                    new StaticConditionVariable($instance->get_content_type()))));
         $display_order ++;
         
         $instance->set_display_order($display_order);

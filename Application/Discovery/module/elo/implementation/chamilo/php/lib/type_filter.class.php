@@ -47,7 +47,7 @@ abstract class TypeDataFilter
             case TypeData :: PROPERTY_DATE :
                 return $this->get_date_options();
                 break;
-
+            
             default :
                 return DataManager :: retrieve_filter_options($this->get_type(), $filter);
                 break;
@@ -57,12 +57,12 @@ abstract class TypeDataFilter
     public function get_date_options()
     {
         return array(
-            self :: DATE_DAY => Translation :: get('Day'),
-            self :: DATE_WEEK => Translation :: get('Week'),
-            self :: DATE_MONTH_YEAR => Translation :: get('MonthYear'),
-            self :: DATE_YEAR => Translation :: get('Year'),
-            self :: DATE_HOUR => Translation :: get('Hour'),
-            self :: DATE_WEEKDAY => Translation :: get('WeekDay'),
+            self :: DATE_DAY => Translation :: get('Day'), 
+            self :: DATE_WEEK => Translation :: get('Week'), 
+            self :: DATE_MONTH_YEAR => Translation :: get('MonthYear'), 
+            self :: DATE_YEAR => Translation :: get('Year'), 
+            self :: DATE_HOUR => Translation :: get('Hour'), 
+            self :: DATE_WEEKDAY => Translation :: get('WeekDay'), 
             self :: DATE_MONTH => Translation :: get('Month'));
     }
 
@@ -132,7 +132,7 @@ abstract class TypeDataFilter
                 else
                 {
                     return new EqualityCondition(
-                        new PropertyConditionVariable($module_type, $filter),
+                        new PropertyConditionVariable($module_type, $filter), 
                         new StaticConditionVariable($value));
                 }
         }

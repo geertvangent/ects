@@ -11,6 +11,7 @@ use application\discovery\RightsGroupEntityRight;
 use Exception;
 use core\rights\RightsUtil;
 use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
 
 class Rights extends RightsUtil
 {
@@ -62,23 +63,30 @@ class Rights extends RightsUtil
             $current_user_group_ids = $current_user->get_groups(true);
 
             $conditions = array();
-            $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_MODULE_ID, $module_instance_id);
-            $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, $right);
-            $conditions[] = new InCondition(
+            $conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(
                     RightsGroupEntityRight :: class_name(),
-                    RightsGroupEntityRight :: PROPERTY_GROUP_ID),
-                $user_group_ids);
+                    RightsGroupEntityRight :: PROPERTY_MODULE_ID),
+                new StaticConditionVariable($module_instance_id));
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: PROPERTY_RIGHT_ID),
+                new StaticConditionVariable($right));
 
             $entities_conditions = array();
 
             $user_entity_conditions = array();
             $user_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_ID,
-                Session :: get_user_id());
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID),
+                new StaticConditionVariable(Session :: get_user_id()));
             $user_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
-                RightsUserEntity :: ENTITY_TYPE);
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE),
+                new StaticConditionVariable(RightsUserEntity :: ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($user_entity_conditions);
 
             $group_entity_conditions = array();
@@ -88,8 +96,10 @@ class Rights extends RightsUtil
                     RightsGroupEntityRight :: PROPERTY_ENTITY_ID),
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
-                RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE,
-                RightsPlatformGroupEntity :: ENTITY_TYPE);
+                new PropertyConditionVariable(
+                    RightsGroupEntityRight :: class_name(),
+                    RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE),
+                new StaticConditionVariable(RightsPlatformGroupEntity :: ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($group_entity_conditions);
 
             $conditions[] = new OrCondition($entities_conditions);

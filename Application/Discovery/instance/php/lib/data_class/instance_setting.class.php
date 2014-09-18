@@ -6,6 +6,8 @@ use libraries\Path;
 use libraries\DataClass;
 use DOMDocument;
 use libraries\DataClassRetrievesParameters;
+use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
 
 /**
  *
@@ -176,7 +178,9 @@ class InstanceSetting extends DataClass
      */
     public static function load($instance_id)
     {
-        $condition = new EqualityCondition(self :: PROPERTY_INSTANCE_ID, $instance_id);
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(self :: class_name(), self :: PROPERTY_INSTANCE_ID), 
+            new StaticConditionVariable($instance_id));
         $settings = DataManager :: retrieves(self :: class_name(), new DataClassRetrievesParameters($condition));
         
         while ($setting = $settings->next_result())

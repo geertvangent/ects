@@ -51,7 +51,9 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $module_content_type = Instance :: TYPE_USER;
             }
 
-            $condition = new EqualityCondition(Instance :: PROPERTY_CONTENT_TYPE, $module_content_type);
+            $condition = new EqualityCondition(
+                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_CONTENT_TYPE), 
+                new StaticConditionVariable($module_content_type));
             $current_module_instance = \application\discovery\instance\DataManager :: retrieve(
                 Instance :: class_name(),
                 new DataClassRetrieveParameters($condition, $order_by));
@@ -128,8 +130,8 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $this);
             $tabs = new DynamicVisualTabsRenderer('discovery', $rendered_module);
             $condition = new EqualityCondition(
-                Instance :: PROPERTY_CONTENT_TYPE,
-                $current_module_instance->get_content_type());
+                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_CONTENT_TYPE), 
+                new StaticConditionVariable($current_module_instance->get_content_type()));
             $module_instances = \application\discovery\instance\DataManager :: retrieves(
                 Instance :: class_name(),
                 new DataClassRetrievesParameters($condition, null, null, $order_by));

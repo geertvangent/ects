@@ -34,6 +34,6 @@ class ModuleComponent extends Manager
                 Theme :: get_image_path() . 'action_information.png', 
                 $link));
         
-        \application\discovery\instance\Manager :: launch($this);
+        \libraries\Application :: launch(\application\discovery\instance\Manager :: context(), $this->get_user(), $this);
     }
 }

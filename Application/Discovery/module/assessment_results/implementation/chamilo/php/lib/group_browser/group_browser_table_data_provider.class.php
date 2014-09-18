@@ -5,7 +5,7 @@ use libraries\ObjectTableDataProvider;
 
 /**
  * $Id: group_browser_table_data_provider.class.php 224 2009-11-13 14:40:30Z kariboe $
- *
+ * 
  * @package groups.lib.group_manager.component.group_browser
  */
 /**
@@ -17,7 +17,7 @@ class GroupBrowserTableDataProvider extends ObjectTableDataProvider
 
     /**
      * Constructor
-     *
+     * 
      * @param RepositoryManagerComponent $browser
      * @param Condition $condition
      */
@@ -28,7 +28,7 @@ class GroupBrowserTableDataProvider extends ObjectTableDataProvider
 
     /**
      * Gets the learning objects
-     *
+     * 
      * @param int $offset
      * @param int $count
      * @param string $order_property
@@ -38,15 +38,15 @@ class GroupBrowserTableDataProvider extends ObjectTableDataProvider
     {
         $order_property = $this->get_order_property($order_property);
         return \core\group\DataManager :: get_instance()->retrieve_groups(
-            $this->get_condition(),
-            $offset,
-            $count,
+            $this->get_condition(), 
+            $offset, 
+            $count, 
             $order_property);
     }
 
     /**
      * Gets the number of learning objects in the table
-     *
+     * 
      * @return int
      */
     public function get_object_count()

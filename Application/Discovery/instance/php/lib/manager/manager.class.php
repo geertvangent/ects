@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\SubManager;
+use libraries\Application;
 
-class Manager extends SubManager
+class Manager extends Application
 {
     const PARAM_ACTION = 'action';
     const PARAM_TYPE = 'type';
@@ -31,10 +31,5 @@ class Manager extends SubManager
     public function get_default_action()
     {
         return self :: DEFAULT_ACTION;
-    }
-
-    public static function launch($application)
-    {
-        parent :: launch(null, $application);
     }
 }

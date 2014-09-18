@@ -41,6 +41,9 @@ class DataSourceComponent extends Manager
                 Theme :: get_image_path() . 'action_information.png', 
                 $link));
         
-        \application\discovery\data_source\Manager :: launch($this);
+        \libraries\Application :: launch(
+            \application\discovery\data_source\Manager :: context(), 
+            $this->get_user(), 
+            $this);
     }
 }
