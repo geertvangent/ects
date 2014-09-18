@@ -2,7 +2,7 @@
 namespace application\discovery\module\elo\implementation\chamilo;
 
 use libraries\DataClassProperties;
-use libraries\ObjectTableOrder;
+
 use libraries\RecordRetrievesParameters;
 use libraries\FunctionConditionVariable;
 use libraries\PropertyConditionVariable;
@@ -10,6 +10,7 @@ use libraries\StaticConditionVariable;
 use libraries\GroupBy;
 use libraries\AndCondition;
 use libraries\Condition;
+use libraries\OrderBy;
 
 class DataManager extends \libraries\DataManager
 {
@@ -26,10 +27,10 @@ class DataManager extends \libraries\DataManager
         $properties = new DataClassProperties();
         $properties->add(
             new FunctionConditionVariable(
-                FunctionConditionVariable :: DISTINCT, 
-                new PropertyConditionVariable($type, $filter), 
+                FunctionConditionVariable :: DISTINCT,
+                new PropertyConditionVariable($type, $filter),
                 $filter));
-        $order_by = array(new ObjectTableOrder($filter));
+        $order_by = array(new OrderBy(new PropertyConditionVariable($filter->get_class_name(), $filter)));
         $parameters = new RecordRetrievesParameters($properties, null, null, null, $order_by);
         $records = self :: records($type, $parameters)->as_array();
         $results = array();
