@@ -10,10 +10,11 @@ use libraries\Request;
 use libraries\PatternMatchCondition;
 use libraries\EqualityCondition;
 use libraries\AndCondition;
-use libraries\ObjectTableOrder;
+
 use libraries\AdvancedElementFinderElement;
 use libraries\StaticConditionVariable;
 use libraries\PropertyConditionVariable;
+use libraries\OrderBy;
 
 class ContextAjaxContextsFeed extends AjaxManager
 {
@@ -141,7 +142,8 @@ class ContextAjaxContextsFeed extends AjaxManager
             $condition, 
             null, 
             null, 
-            array(new ObjectTableOrder(Context :: PROPERTY_CONTEXT_NAME)));
+            array(
+                new OrderBy(new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_CONTEXT_NAME))));
         return DataManager :: retrieves(Context :: class_name(), $parameters);
     }
     

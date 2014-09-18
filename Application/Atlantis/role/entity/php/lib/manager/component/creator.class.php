@@ -10,11 +10,13 @@ use libraries\Utilities;
 use libraries\Translation;
 use libraries\Condition;
 use libraries\NotCondition;
-use libraries\ObjectTableOrder;
+
 use core\rights\NewPlatformGroupEntity;
 use core\rights\NewUserEntity;
-use libraries\StaticConditionVariable;
+use libraries\OrderBy;
 use libraries\PropertyConditionVariable;
+use libraries\StaticConditionVariable;
+
 
 class CreatorComponent extends Manager
 {
@@ -78,8 +80,10 @@ class CreatorComponent extends Manager
                                 null, 
                                 null, 
                                 array(
-                                    new ObjectTableOrder(
-                                        \application\atlantis\role\entity\RoleEntity :: PROPERTY_START_DATE)));
+                                    new OrderBy(
+                                        new PropertiesConditionVariable(
+                                            \application\atlantis\role\entity\RoleEntity :: class_name(),
+                                            \application\atlantis\role\entity\RoleEntity :: PROPERTY_START_DATE))));
                             
                             $has_merged = $this->merge_entities($parameters, null, $new_start_date, $new_end_date);
                             

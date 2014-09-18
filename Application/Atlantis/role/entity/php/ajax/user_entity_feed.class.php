@@ -6,13 +6,13 @@ use libraries\Request;
 use libraries\Utilities;
 use libraries\AndCondition;
 use libraries\DataClassRetrievesParameters;
-use libraries\ObjectTableOrder;
+
 use libraries\InCondition;
 use libraries\EqualityCondition;
 use libraries\DataClassCountParameters;
 use core\user\User;
 use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\OrderBy;
 
 /**
  * Feed to return users from the user entity
@@ -93,7 +93,9 @@ class EntityAjaxUserEntityFeed extends \core\user\UserAjaxUsersFeed
             $condition, 
             100, 
             $this->get_offset(), 
-            array(new ObjectTableOrder(User :: PROPERTY_FIRSTNAME), new ObjectTableOrder(User :: PROPERTY_LASTNAME)));
+            array(
+                new OrderBy(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_FIRSTNAME)),
+                new OrderBy(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_LASTNAME))));
         
         return \core\user\DataManager :: retrieves(User :: class_name(), $parameters);
     }
