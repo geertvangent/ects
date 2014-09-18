@@ -8,13 +8,14 @@ use libraries\OrCondition;
 use libraries\EqualityCondition;
 use libraries\AndCondition;
 use libraries\DataClassRetrievesParameters;
-use libraries\ObjectTableOrder;
+
 use libraries\ArrayResultSet;
 use libraries\DataClassCountParameters;
 use libraries\NotCondition;
 use core\group\Group;
 use core\group\GroupAjaxPlatformGroupsFeed;
 use libraries\PropertyConditionVariable;
+use libraries\OrderBy;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -223,7 +224,11 @@ class EntityAjaxContextsFeed extends GroupAjaxPlatformGroupsFeed
 
         $groups = \core\group\DataManager :: retrieves(
             Group :: class_name(),
-            new DataClassRetrievesParameters($condition, null, null, array(new ObjectTableOrder(Group :: PROPERTY_NAME))));
+            new DataClassRetrievesParameters(
+                $condition,
+                null,
+                null,
+                array(new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME)))));
 
         if ($this->get_user()->is_platform_admin())
         {

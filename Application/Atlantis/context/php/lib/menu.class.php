@@ -4,7 +4,7 @@ namespace application\atlantis\context;
 use libraries\Utilities;
 use libraries\Path;
 use libraries\EqualityCondition;
-use libraries\ObjectTableOrder;
+
 use libraries\OptionsMenuRenderer;
 use libraries\TreeMenuRenderer;
 use libraries\DataClassRetrievesParameters;
@@ -16,6 +16,7 @@ use libraries\NotCondition;
 use libraries\OrCondition;
 use core\group\Group;
 use libraries\PropertyConditionVariable;
+use libraries\OrderBy;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -70,7 +71,11 @@ class Menu extends HTML_Menu
             $condition = new EqualityCondition(Group :: PROPERTY_PARENT_ID, 0);
             $group = \core\group\DataManager :: retrieves(
                 Group :: class_name(),
-                new DataClassRetrievesParameters($condition, 1, null, new ObjectTableOrder(Group :: PROPERTY_NAME)))->next_result();
+                new DataClassRetrievesParameters(
+                    $condition,
+                    1,
+                    null,
+                    new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME))))->next_result();
             $this->current_category = $group;
         }
         else
@@ -94,7 +99,11 @@ class Menu extends HTML_Menu
         $condition = new EqualityCondition(Group :: PROPERTY_PARENT_ID, 0);
         $group = \core\group\DataManager :: retrieves(
             Group :: class_name(),
-            new DataClassRetrievesParameters($condition, 1, null, new ObjectTableOrder(Group :: PROPERTY_NAME)))->next_result();
+            new DataClassRetrievesParameters(
+                $condition,
+                1,
+                null,
+                new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME))))->next_result();
         if (! $include_root)
         {
             return $this->get_menu_items($group->get_id());
@@ -170,7 +179,11 @@ class Menu extends HTML_Menu
 
         $groups = DataManager :: retrieves(
             Group :: class_name(),
-            new DataClassRetrievesParameters($condition, null, null, new ObjectTableOrder(Group :: PROPERTY_NAME)));
+            new DataClassRetrievesParameters(
+                $condition,
+                null,
+                null,
+                new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME))));
 
         while ($group = $groups->next_result())
 
