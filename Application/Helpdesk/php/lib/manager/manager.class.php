@@ -1,23 +1,13 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use libraries\WebApplication;
+use libraries\Application;
 
-class Manager extends WebApplication
+class Manager extends Application
 {
     const APPLICATION_NAME = 'rt';
     const ACTION_CREATE = 'creator';
     const DEFAULT_ACTION = self :: ACTION_CREATE;
-
-    /**
-     * Constructor
-     * 
-     * @param $user_id int
-     */
-    public function __construct($user)
-    {
-        parent :: __construct($user);
-    }
 
     /**
      * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
