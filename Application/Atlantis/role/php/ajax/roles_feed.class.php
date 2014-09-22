@@ -13,7 +13,7 @@ use libraries\PropertyConditionVariable;
 use libraries\Utilities;
 use libraries\OrderBy;
 
-class RoleAjaxRolesFeed extends AjaxManager
+class AjaxRolesFeed extends AjaxManager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PARAM_OFFSET = 'offset';

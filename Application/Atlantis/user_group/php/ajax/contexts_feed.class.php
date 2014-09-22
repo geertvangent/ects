@@ -16,7 +16,7 @@ use libraries\StaticConditionVariable;
 use libraries\PropertyConditionVariable;
 use libraries\OrderBy;
 
-class ContextAjaxContextsFeed extends AjaxManager
+class AjaxContextsFeed extends AjaxManager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PARAM_OFFSET = 'offset';
@@ -33,41 +33,41 @@ class ContextAjaxContextsFeed extends AjaxManager
     public function run()
     {
         $result = new JsonAjaxResult();
-        
+
         $elements = $this->get_elements();
         $elements = $elements->as_array();
-        
+
         $result->set_property(self :: PROPERTY_ELEMENTS, $elements);
-        
+
         if ($this->context_count > 0)
         {
             $result->set_property(self :: PROPERTY_TOTAL_ELEMENTS, $this->context_count);
         }
-        
+
         $result->display();
     }
 
     /**
      * Returns all the elements for this feed
-     * 
+     *
      * @return AdvancedElementFinderElements
      */
     private function get_elements()
     {
         $elements = new AdvancedElementFinderElements();
-        
+
         $contexts = $this->retrieve_contexts();
         if ($contexts && $contexts->size() > 0)
         {
             $context_category = new AdvancedElementFinderElement('contexts', 'category', Translation :: get('Contexts'));
             $elements->add_element($context_category);
-            
+
             while ($context = $contexts->next_result())
             {
                 $context_category->add_child($this->get_context_element($context));
             }
         }
-        
+
         return $elements;
     }
 
@@ -78,7 +78,7 @@ class ContextAjaxContextsFeed extends AjaxManager
         {
             $offset = 0;
         }
-        
+
         return $offset;
     }
 
@@ -92,7 +92,7 @@ class ContextAjaxContextsFeed extends AjaxManager
 
     /**
      * Returns all the contexts for this feed
-     * 
+     *
      * @return ResultSet
      */
     public function retrieve_contexts()
@@ -103,65 +103,65 @@ class ContextAjaxContextsFeed extends AjaxManager
         {
             $q = '*' . $search_query . '*';
             $conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_CONTEXT_NAME), 
+                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_CONTEXT_NAME),
                 $q);
         }
-        
+
         $filter_id = $this->get_filter();
-        
+
         if ($filter_id)
         {
             $context = DataManager :: retrieve(Context :: class_name(), (int) $filter_id);
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_TYPE), 
+                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_TYPE),
                 new StaticConditionVariable($context->get_context_type()));
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_ID), 
+                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_ID),
                 new StaticConditionVariable($context->get_context_id()));
         }
         else
         {
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_ID), 
+                new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_ID),
                 new StaticConditionVariable(0));
         }
-        
+
         // Combine the conditions
         $count = count($conditions);
         if ($count > 1)
         {
             $condition = new AndCondition($conditions);
         }
-        
+
         if ($count == 1)
         {
             $condition = $conditions[0];
         }
-        
+
         $parameters = new DataClassRetrievesParameters(
-            $condition, 
-            null, 
-            null, 
+            $condition,
+            null,
+            null,
             array(
                 new OrderBy(new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_CONTEXT_NAME))));
         return DataManager :: retrieves(Context :: class_name(), $parameters);
     }
-    
+
     /**
      * Returns the element for a specific context
-     * 
+     *
      * @return AdvancedElementFinderElement
      */
     public function get_context_element($context)
     {
         return new AdvancedElementFinderElement(
-            'context_' . $context->get_id(), 
-            'type type_context', 
-            $context->get_context_name(), 
-            $context->get_context_name(), 
+            'context_' . $context->get_id(),
+            'type type_context',
+            $context->get_context_name(),
+            $context->get_context_name(),
             AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER);
     }
-    
+
     /**
      * Returns the id of the selected filter
      */
