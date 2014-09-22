@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
+namespace application\discovery\upgrade\v4_0_0;
 
 class Autoloader
 {
@@ -11,15 +11,7 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'Module' => '/lib/module.class.php',
-         'Rights' => '/lib/rights.class.php',
-         'TeachingAssignment' => '/lib/teaching_assignment.class.php',
-         'DataSource' => '/lib/data_manager/data_source.class.php',
-         'RenditionImplementation' => '/lib/rendition/rendition.class.php',
-         'HtmlDefaultRenditionImplementation' => '/lib/rendition/html/default.class.php',
-         'HtmlXlsxRenditionImplementation' => '/lib/rendition/html/xlsx.class.php',
-         'XlsxDefaultRenditionImplementation' => '/lib/rendition/xlsx/default.class.php',
-         'SettingsConnector' => '/settings/settings_connector.class.php'
+         'Upgrader' => '/lib/upgrader.class.php'
     );
 
     /**
