@@ -5,8 +5,8 @@ use libraries\TableFormActionsSupport;
 use libraries\NewObjectTable;
 use libraries\Utilities;
 use libraries\Translation;
-use libraries\ObjectTableFormAction;
-use libraries\ObjectTableFormActions;
+use libraries\TableFormAction;
+use libraries\TableFormActions;
 
 class ApplicationTable extends NewObjectTable implements TableFormActionsSupport
 {
@@ -15,10 +15,10 @@ class ApplicationTable extends NewObjectTable implements TableFormActionsSupport
 
     public function get_implemented_form_actions()
     {
-        $actions = new ObjectTableFormActions(__NAMESPACE__, Manager :: PARAM_ACTION);
+        $actions = new TableFormActions(__NAMESPACE__, Manager :: PARAM_ACTION);
 
         $actions->add_form_action(
-            new ObjectTableFormAction(
+            new TableFormAction(
                 Manager :: ACTION_DELETE,
                 Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
 
