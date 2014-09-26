@@ -2,11 +2,12 @@
 namespace application\discovery\module\cas\implementation\doctrine;
 
 use libraries\Translation;
-use libraries\ObjectTableOrder;
 use libraries\EqualityCondition;
 use libraries\DataClassRetrievesParameters;
 use libraries\PropertyConditionVariable;
 use libraries\StaticConditionVariable;
+use libraries\OrderBy;
+use libraries\PropertiesConditionVariable;
 
 class SettingsConnector
 {
@@ -15,19 +16,23 @@ class SettingsConnector
     {
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \application\discovery\data_source\Instance :: class_name(), 
-                \application\discovery\data_source\Instance :: PROPERTY_TYPE), 
+                \application\discovery\data_source\Instance :: class_name(),
+                \application\discovery\data_source\Instance :: PROPERTY_TYPE),
             new StaticConditionVariable('application\discovery\data_source\doctrine'));
         $instances = \application\discovery\data_source\DataManager :: retrieves(
-            \application\discovery\data_source\Instance :: class_name(), 
+            \application\discovery\data_source\Instance :: class_name(),
             new DataClassRetrievesParameters(
-                $condition, 
-                null, 
-                null, 
-                array(new ObjectTableOrder(\application\discovery\data_source\Instance :: PROPERTY_NAME))));
-        
+                $condition,
+                null,
+                null,
+                array(
+                    new OrderBy(
+                        new PropertiesConditionVariable(
+                            \application\discovery\data_source\Instance :: class_name(),
+                            \application\discovery\data_source\Instance :: PROPERTY_NAME)))));
+
         $data_sources = array();
-        
+
         if ($instances->size() == 0)
         {
             $data_sources[0] = Translation :: get('AddConnectionInstanceFirst');
@@ -39,7 +44,7 @@ class SettingsConnector
                 $data_sources[$instance->get_id()] = $instance->get_name();
             }
         }
-        
+
         return $data_sources;
     }
 }
