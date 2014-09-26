@@ -3,9 +3,9 @@ namespace application\discovery\module\photo\implementation\bamaflex;
 
 use libraries\DataClassCountParameters;
 use libraries\DataClassRetrievesParameters;
-use libraries\GalleryObjectTableDataProvider;
+use libraries\GalleryTableDataProvider;
 
-class GalleryBrowserTableDataProvider extends GalleryObjectTableDataProvider
+class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
 {
 
     public function get_objects($offset, $count, $order_property = null)
@@ -19,5 +19,20 @@ class GalleryBrowserTableDataProvider extends GalleryObjectTableDataProvider
     {
         $parameters = new DataClassCountParameters($this->get_condition());
         return \core\user\DataManager :: count(\core\user\User :: class_name(), $parameters);
+    }
+    /*
+     * (non-PHPdoc) @see \libraries\TableDataProvider::retrieve_data()
+     */
+    public function retrieve_data($condition, $offset, $count, $order_property = null)
+    {
+        // TODO Auto-generated method stub
+    }
+
+    /*
+     * (non-PHPdoc) @see \libraries\TableDataProvider::count_data()
+     */
+    public function count_data($condition)
+    {
+        // TODO Auto-generated method stub
     }
 }

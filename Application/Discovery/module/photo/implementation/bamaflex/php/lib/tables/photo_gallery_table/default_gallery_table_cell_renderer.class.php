@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\GalleryObjectTableCellRenderer;
+use libraries\GalleryTableCellRenderer;
 
-abstract class DefaultGalleryTableCellRenderer implements GalleryObjectTableCellRenderer
+abstract class DefaultGalleryTableCellRenderer implements GalleryTableCellRenderer
 {
 
     public function __construct()

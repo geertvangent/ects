@@ -3,11 +3,11 @@ namespace application\discovery\module\person\implementation\chamilo;
 
 use application\discovery\module\person\Person;
 use libraries\ObjectTableColumn;
-use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\TableColumnModelActionsColumnSupport;
 use libraries\NewObjectTableColumnModel;
 
-class UserBrowserTableColumnModel extends NewObjectTableColumnModel implements 
-    NewObjectTableColumnModelActionsColumnSupport
+class UserBrowserTableColumnModel extends NewObjectTableColumnModel implements
+    TableColumnModelActionsColumnSupport
 {
 
     public function initialize_columns()

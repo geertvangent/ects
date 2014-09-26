@@ -10,8 +10,7 @@ class Autoloader
      * @var string[]
      */
      private static $map = array(
-         'Autoloader' => '/autoloader.class.php',
-         'Upgrader' => '/lib/upgrader.class.php'
+         'Autoloader' => '/autoloader.class.php'
     );
 
     /**
