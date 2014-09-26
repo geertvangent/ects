@@ -1,11 +1,11 @@
 <?php
 namespace application\atlantis\application\right;
 
-use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\TableColumnModelActionsColumnSupport;
 use libraries\NewObjectTableColumnModel;
 use libraries\ObjectTableColumn;
 
-class RightTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport
+class RightTableColumnModel extends NewObjectTableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**

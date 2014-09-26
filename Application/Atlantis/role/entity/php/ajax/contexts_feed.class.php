@@ -13,7 +13,7 @@ use libraries\ArrayResultSet;
 use libraries\DataClassCountParameters;
 use libraries\NotCondition;
 use core\group\Group;
-use core\group\GroupAjaxPlatformGroupsFeed;
+use core\group\AjaxPlatformGroupsFeed;
 use libraries\PropertyConditionVariable;
 use libraries\OrderBy;
 
@@ -23,7 +23,7 @@ use libraries\OrderBy;
  * @package roup
  * @author Sven Vanpoucke
  */
-class EntityAjaxContextsFeed extends GroupAjaxPlatformGroupsFeed
+class EntityAjaxContextsFeed extends AjaxPlatformGroupsFeed
 {
     /**
      * The length for the filter prefix to remove

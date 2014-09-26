@@ -10,8 +10,8 @@ use libraries\Utilities;
 use libraries\Translation;
 use libraries\Condition;
 use libraries\NotCondition;
-use core\rights\NewPlatformGroupEntity;
-use core\rights\NewUserEntity;
+use core\rights\PlatformGroupEntity;
+use core\rights\UserEntity;
 use libraries\OrderBy;
 use libraries\PropertyConditionVariable;
 use libraries\StaticConditionVariable;
@@ -45,7 +45,7 @@ class CreatorComponent extends Manager
                 {
                     foreach ($values['role']['role'] as $role)
                     {
-                        foreach ($values['context'][NewPlatformGroupEntity :: ENTITY_TYPE] as $context)
+                        foreach ($values['context'][PlatformGroupEntity :: ENTITY_TYPE] as $context)
                         {
                             $new_start_date = Utilities :: time_from_datepicker_without_timepicker(
                                 $values['start_date']);
@@ -110,8 +110,8 @@ class CreatorComponent extends Manager
                 }
             }
 
-            $count = (count($values['entity'][NewUserEntity :: ENTITY_TYPE]) + count(
-                $values['entity'][NewPlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
+            $count = (count($values['entity'][UserEntity :: ENTITY_TYPE]) + count(
+                $values['entity'][PlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
                 $values['context']) * count($values['start_date']) * count($values['end_date']);
 
             if ($failures)

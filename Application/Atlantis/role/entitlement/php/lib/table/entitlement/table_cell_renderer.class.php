@@ -2,15 +2,15 @@
 namespace application\atlantis\role\entitlement;
 
 use libraries\NewObjectTableCellRenderer;
-use libraries\NewObjectTableCellRendererActionsColumnSupport;
+use libraries\TableColumnModelActionsColumnSupport;
 use libraries\Toolbar;
 use libraries\Theme;
 use libraries\Translation;
 use libraries\Utilities;
 use libraries\ToolbarItem;
 
-class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements 
-    NewObjectTableCellRendererActionsColumnSupport
+class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
+    TableColumnModelActionsColumnSupport
 {
 
     public function render_cell($column, $object)
@@ -27,7 +27,7 @@ class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
                 return $object->get_right()->get_name();
                 break;
         }
-        
+
         return parent :: render_cell($column, $object);
     }
 
@@ -38,12 +38,12 @@ class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
         {
             $toolbar->add_item(
                 new ToolbarItem(
-                    Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), 
-                    Theme :: get_common_image_path() . 'action_delete.png', 
+                    Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
+                    Theme :: get_common_image_path() . 'action_delete.png',
                     $this->get_component()->get_url(
                         array(
-                            Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, 
-                            Manager :: PARAM_ENTITLEMENT_ID => $entitlement->get_id())), 
+                            Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
+                            Manager :: PARAM_ENTITLEMENT_ID => $entitlement->get_id())),
                     ToolbarItem :: DISPLAY_ICON));
         }
         return $toolbar->as_html();

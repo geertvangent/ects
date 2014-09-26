@@ -1,11 +1,11 @@
 <?php
 namespace application\atlantis\context;
 
-use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\TableColumnModelActionsColumnSupport;
 use libraries\NewObjectTableColumnModel;
 use libraries\ObjectTableColumn;
 
-class ContextTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport
+class ContextTableColumnModel extends NewObjectTableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**

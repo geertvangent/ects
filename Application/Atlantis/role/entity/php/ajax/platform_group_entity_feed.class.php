@@ -9,7 +9,7 @@ use libraries\EqualityCondition;
 use libraries\AndCondition;
 use libraries\DataClassRetrievesParameters;
 use libraries\ArrayResultSet;
-use core\group\GroupAjaxPlatformGroupsFeed;
+use core\group\AjaxPlatformGroupsFeed;
 use core\group\Group;
 use core\group\GroupRelUser;
 use libraries\PropertyConditionVariable;
@@ -22,7 +22,7 @@ use libraries\StaticConditionVariable;
  * @package roup
  * @author Sven Vanpoucke
  */
-class EntityAjaxPlatformGroupEntityFeed extends GroupAjaxPlatformGroupsFeed
+class EntityAjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
 {
     /**
      * The length for the filter prefix to remove

@@ -12,12 +12,12 @@ use libraries\Theme;
 use libraries\Translation;
 use libraries\ToolbarItem;
 use libraries\ActionBarRenderer;
-use libraries\NewObjectTableSupport;
+use libraries\TableSupport;
 use libraries\PropertyConditionVariable;
 use libraries\StaticConditionVariable;
 use core\group\Group;
 
-class BrowserComponent extends Manager implements NewObjectTableSupport
+class BrowserComponent extends Manager implements TableSupport
 {
 
     private $action_bar;
@@ -26,15 +26,15 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
     {
         $query = $this->action_bar->get_query();
         $conditions = array();
-        
+
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
-            
+
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME), 
+                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME),
                 '*' . $query . '*');
-            
+
             $conditions[] = new OrCondition($search_conditions);
         }
         if ($this->get_context() != 0)
@@ -47,11 +47,11 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
             $context->set_id(0);
             $context->set_name(Translation :: get('Root'));
         }
-        
+
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($context->get_id()));
-        
+
         return new AndCondition($conditions);
     }
 
@@ -60,24 +60,24 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
         if (! $this->context)
         {
             $this->context = Request :: get(self :: PARAM_CONTEXT_ID);
-            
+
             if (! $this->context)
             {
                 $this->context = 0;
             }
         }
-        
+
         return $this->context;
     }
 
     public function run()
     {
         SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
-        
+
         $this->set_parameter(Manager :: PARAM_CONTEXT_ID, $this->get_context());
         $table = new ContextTable($this);
         $this->display_header();
-        
+
         echo '<div style="float: left; width: 30%; overflow:auto;">';
         $menu = new Menu($this->get_context());
         echo $menu->render_as_tree();
@@ -96,16 +96,25 @@ class BrowserComponent extends Manager implements NewObjectTableSupport
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
             $this->action_bar->add_common_action(
                 new ToolbarItem(
-                    Translation :: get('TypeName', null, '\application\atlantis\role\entity'), 
-                    Theme :: get_image_path('\application\atlantis\role\entity') . 'logo/16.png', 
+                    Translation :: get('TypeName', null, '\application\atlantis\role\entity'),
+                    Theme :: get_image_path('\application\atlantis\role\entity') . 'logo/16.png',
                     $this->get_url(
                         array(
-                            \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE, 
-                            \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY, 
-                            \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE, 
-                            Manager :: PARAM_CONTEXT_ID => $this->get_context())), 
+                            \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE,
+                            \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY,
+                            \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE,
+                            Manager :: PARAM_CONTEXT_ID => $this->get_context())),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }
         return $this->action_bar;
     }
+	/* (non-PHPdoc)
+     * @see \libraries\TableSupport::get_table_condition()
+     */
+    public function get_table_condition($table_class_name)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
 }

@@ -1,14 +1,14 @@
 <?php
 namespace application\atlantis\role;
 
-use libraries\NewObjectTableFormActionsSupport;
+use libraries\TableFormActionsSupport;
 use libraries\NewObjectTable;
 use libraries\Utilities;
 use libraries\Translation;
 use libraries\ObjectTableFormAction;
 use libraries\ObjectTableFormActions;
 
-class RoleTable extends NewObjectTable implements NewObjectTableFormActionsSupport
+class RoleTable extends NewObjectTable implements TableFormActionsSupport
 {
     const TABLE_IDENTIFIER = Manager :: PARAM_ROLE_ID;
     const DEFAULT_ROW_COUNT = 20;
@@ -20,7 +20,7 @@ class RoleTable extends NewObjectTable implements NewObjectTableFormActionsSuppo
         {
             $actions->add_form_action(
                 new ObjectTableFormAction(
-                    Manager :: ACTION_DELETE, 
+                    Manager :: ACTION_DELETE,
                     Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
         }
         return $actions;

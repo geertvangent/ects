@@ -4,9 +4,9 @@ namespace application\atlantis\rights;
 use libraries\Translation;
 use libraries\StaticTableColumn;
 use libraries\NewObjectTableColumnModel;
-use libraries\NewObjectTableColumnModelActionsColumnSupport;
+use libraries\TableColumnModelActionsColumnSupport;
 
-class EntityTableColumnModel extends NewObjectTableColumnModel implements NewObjectTableColumnModelActionsColumnSupport
+class EntityTableColumnModel extends NewObjectTableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**

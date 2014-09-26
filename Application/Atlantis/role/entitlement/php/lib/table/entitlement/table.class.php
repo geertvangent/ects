@@ -1,14 +1,14 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use libraries\NewObjectTableFormActionsSupport;
+use libraries\TableFormActionsSupport;
 use libraries\NewObjectTable;
 use libraries\Utilities;
 use libraries\Translation;
 use libraries\ObjectTableFormAction;
 use libraries\ObjectTableFormActions;
 
-class EntitlementTable extends NewObjectTable implements NewObjectTableFormActionsSupport
+class EntitlementTable extends NewObjectTable implements TableFormActionsSupport
 {
     const TABLE_IDENTIFIER = Manager :: PARAM_ENTITLEMENT_ID;
     const DEFAULT_ROW_COUNT = 20;
@@ -20,7 +20,7 @@ class EntitlementTable extends NewObjectTable implements NewObjectTableFormActio
         {
             $actions->add_form_action(
                 new ObjectTableFormAction(
-                    Manager :: ACTION_DELETE, 
+                    Manager :: ACTION_DELETE,
                     Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
         }
         return $actions;
