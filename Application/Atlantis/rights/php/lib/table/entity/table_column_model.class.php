@@ -3,10 +3,10 @@ namespace application\atlantis\rights;
 
 use libraries\Translation;
 use libraries\StaticTableColumn;
-use libraries\NewObjectTableColumnModel;
+use libraries\TableColumnModel;
 use libraries\TableColumnModelActionsColumnSupport;
 
-class EntityTableColumnModel extends NewObjectTableColumnModel implements TableColumnModelActionsColumnSupport
+class EntityTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**

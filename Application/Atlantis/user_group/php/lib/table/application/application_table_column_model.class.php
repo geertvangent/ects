@@ -2,11 +2,10 @@
 namespace application\atlantis\user_group;
 
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\NewObjectTableColumnModel;
-use libraries\ObjectTableColumn;
+use libraries\TableColumnModel;
+use libraries\TableColumn;
 
-class ApplicationTableColumnModel extends NewObjectTableColumnModel implements
-    TableColumnModelActionsColumnSupport
+class ApplicationTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**
@@ -14,8 +13,8 @@ class ApplicationTableColumnModel extends NewObjectTableColumnModel implements
      */
     public function initialize_columns()
     {
-        $this->add_column(new ObjectTableColumn(\application\atlantis\application\Application :: PROPERTY_NAME));
-        $this->add_column(new ObjectTableColumn(\application\atlantis\application\Application :: PROPERTY_DESCRIPTION));
-        $this->add_column(new ObjectTableColumn(\application\atlantis\application\Application :: PROPERTY_URL));
+        $this->add_column(new TableColumn(\application\atlantis\application\Application :: PROPERTY_NAME));
+        $this->add_column(new TableColumn(\application\atlantis\application\Application :: PROPERTY_DESCRIPTION));
+        $this->add_column(new TableColumn(\application\atlantis\application\Application :: PROPERTY_URL));
     }
 }

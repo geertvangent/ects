@@ -4,11 +4,10 @@ namespace application\atlantis\role\entity;
 use libraries\Translation;
 use libraries\StaticTableColumn;
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\NewObjectTableColumnModel;
-use libraries\ObjectTableColumn;
+use libraries\TableColumnModel;
+use libraries\TableColumn;
 
-class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
-    TableColumnModelActionsColumnSupport
+class RoleEntityTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**
@@ -18,7 +17,7 @@ class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
     {
         if (! $this->get_component()->has_entity())
         {
-            $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_ENTITY_TYPE, false));
+            $this->add_column(new TableColumn(RoleEntity :: PROPERTY_ENTITY_TYPE, false));
             $this->add_column(new StaticTableColumn(Translation :: get('EntityName')));
             $this->add_column(new StaticTableColumn(Translation :: get('Path')));
         }
@@ -31,7 +30,7 @@ class RoleEntityTableColumnModel extends NewObjectTableColumnModel implements
             $this->add_column(new StaticTableColumn(Translation :: get('Context')));
         }
 
-        $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_START_DATE, false));
-        $this->add_column(new ObjectTableColumn(RoleEntity :: PROPERTY_END_DATE, false));
+        $this->add_column(new TableColumn(RoleEntity :: PROPERTY_START_DATE, false));
+        $this->add_column(new TableColumn(RoleEntity :: PROPERTY_END_DATE, false));
     }
 }

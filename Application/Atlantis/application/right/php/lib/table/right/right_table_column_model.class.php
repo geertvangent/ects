@@ -2,10 +2,10 @@
 namespace application\atlantis\application\right;
 
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\NewObjectTableColumnModel;
-use libraries\ObjectTableColumn;
+use libraries\TableColumnModel;
+use libraries\TableColumn;
 
-class RightTableColumnModel extends NewObjectTableColumnModel implements TableColumnModelActionsColumnSupport
+class RightTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**
@@ -13,7 +13,7 @@ class RightTableColumnModel extends NewObjectTableColumnModel implements TableCo
      */
     public function initialize_columns()
     {
-        $this->add_column(new ObjectTableColumn(Right :: PROPERTY_NAME));
-        $this->add_column(new ObjectTableColumn(Right :: PROPERTY_DESCRIPTION));
+        $this->add_column(new TableColumn(Right :: PROPERTY_NAME));
+        $this->add_column(new TableColumn(Right :: PROPERTY_DESCRIPTION));
     }
 }
