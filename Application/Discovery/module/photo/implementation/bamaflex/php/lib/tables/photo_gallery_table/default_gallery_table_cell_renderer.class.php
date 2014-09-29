@@ -3,7 +3,7 @@ namespace application\discovery\module\photo\implementation\bamaflex;
 
 use libraries\GalleryTableCellRenderer;
 
-abstract class DefaultGalleryTableCellRenderer implements GalleryTableCellRenderer
+abstract class DefaultGalleryTableCellRenderer extends GalleryTableCellRenderer
 {
 
     public function __construct()

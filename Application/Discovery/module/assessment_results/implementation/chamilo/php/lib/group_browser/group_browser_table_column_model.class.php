@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery\module\assessment_results\implementation\chamilo;
 
-use core\group\DefaultGroupTableColumnModel;
 use libraries\Translation;
 use libraries\StaticTableColumn;
+use core\group\GroupTableColumnModel;
 
-class GroupBrowserTableColumnModel extends DefaultGroupTableColumnModel
+class GroupBrowserTableColumnModel extends GroupTableColumnModel
 {
 
     /**
@@ -16,10 +16,9 @@ class GroupBrowserTableColumnModel extends DefaultGroupTableColumnModel
     /**
      * Constructor
      */
-    public function __construct()
+    public function initialize_columns()
     {
-        parent :: __construct();
-        $this->set_default_order_column(1);
+        parent :: initialize_columns();
         $this->add_column(new StaticTableColumn(Translation :: get('Users', null, 'user')));
         $this->add_column(new StaticTableColumn(Translation :: get('Subgroups')));
     }

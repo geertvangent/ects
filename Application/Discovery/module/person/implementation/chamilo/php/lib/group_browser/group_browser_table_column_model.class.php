@@ -1,25 +1,19 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use core\group\DefaultGroupTableColumnModel;
+use core\group\GroupRelUserTableColumnModel;
 use libraries\Translation;
 use libraries\StaticTableColumn;
 
-class GroupBrowserTableColumnModel extends DefaultGroupTableColumnModel
+class GroupBrowserTableColumnModel extends GroupRelUserTableColumnModel
 {
-
-    /**
-     * The tables modification column
-     */
-    private static $modification_column;
 
     /**
      * Constructor
      */
-    public function __construct()
+    public function initialize_columns()
     {
-        parent :: __construct();
-        $this->set_default_order_column(1);
+        parent :: initialize_columns();
         $this->add_column(new StaticTableColumn(Translation :: get('Users', null, 'user')));
         $this->add_column(new StaticTableColumn(Translation :: get('Subgroups')));
     }

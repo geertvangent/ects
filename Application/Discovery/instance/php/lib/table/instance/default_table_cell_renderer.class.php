@@ -3,10 +3,10 @@ namespace application\discovery\instance;
 
 use libraries\Translation;
 use libraries\Utilities;
-use libraries\ObjectTableCellRenderer;
+use libraries\TableCellRenderer;
 use libraries\Theme;
 
-class DefaultInstanceTableCellRenderer extends ObjectTableCellRenderer
+class DefaultInstanceTableCellRenderer extends TableCellRenderer
 {
 
     public function __construct()
@@ -27,7 +27,7 @@ class DefaultInstanceTableCellRenderer extends ObjectTableCellRenderer
                 return Translation :: get('TypeName', null, $module_instance->get_type());
             case Instance :: PROPERTY_DESCRIPTION :
                 return Utilities :: truncate_string(
-                    Translation :: get('TypeDescription', null, $module_instance->get_type()), 
+                    Translation :: get('TypeDescription', null, $module_instance->get_type()),
                     50);
             case Instance :: PROPERTY_DISPLAY_ORDER :
                 return $module_instance->get_display_order();

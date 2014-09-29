@@ -2,11 +2,11 @@
 namespace application\discovery\module\assessment_results\implementation\chamilo;
 
 use core\group\Group;
-use core\group\DefaultGroupTableCellRenderer;
+use core\group\GroupTableCellRenderer;
 use libraries\Utilities;
 use libraries\Translation;
 
-class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
+class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
 {
 
     /**
@@ -16,7 +16,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
 
     /**
      * Constructor
-     * 
+     *
      * @param RepositoryManagerBrowserComponent $browser
      */
     public function __construct($browser)
@@ -24,7 +24,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
         parent :: __construct();
         $this->browser = $browser;
     }
-    
+
     // Inherited
     public function render_cell($column, $group)
     {
@@ -53,7 +53,7 @@ class GroupBrowserTableCellRenderer extends DefaultGroupTableCellRenderer
             case Translation :: get('Subgroups') :
                 return $group->count_subgroups(true, true);
         }
-        
+
         return parent :: render_cell($column, $group);
     }
 }

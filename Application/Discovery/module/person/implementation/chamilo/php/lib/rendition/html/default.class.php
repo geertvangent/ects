@@ -360,4 +360,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         return $this->allowed_groups;
     }
+	/* (non-PHPdoc)
+     * @see \libraries\TableSupport::get_table_condition()
+     */
+    public function get_table_condition($table_class_name)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
 }

@@ -3,7 +3,7 @@ namespace application\discovery\module\assessment_results\implementation\chamilo
 
 use libraries\Toolbar;
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\NewObjectTableCellRenderer;
+use libraries\TableCellRenderer;
 
 /**
  * $Id: user_browser_table_cell_renderer.class.php 211 2009-11-13 13:28:39Z vanpouckesven $
@@ -14,8 +14,7 @@ use libraries\NewObjectTableCellRenderer;
 /**
  * Cell renderer for the user object browser table
  */
-class UserBrowserTableCellRenderer extends NewObjectTableCellRenderer implements
-    TableColumnModelActionsColumnSupport
+class UserBrowserTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
 {
 
     public function get_object_actions($user)
@@ -32,5 +31,12 @@ class UserBrowserTableCellRenderer extends NewObjectTableCellRenderer implements
         }
 
         return $toolbar->as_html();
+    }
+    /*
+     * (non-PHPdoc) @see \libraries\TableCellRenderer::render_id_cell()
+     */
+    public function render_id_cell($result)
+    {
+        // TODO Auto-generated method stub
     }
 }
