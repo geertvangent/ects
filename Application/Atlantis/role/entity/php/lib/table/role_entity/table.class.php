@@ -2,13 +2,13 @@
 namespace application\atlantis\role\entity;
 
 use libraries\TableFormActionsSupport;
-use libraries\NewObjectTable;
+use libraries\Table;
 use libraries\Utilities;
 use libraries\Translation;
 use libraries\TableFormAction;
 use libraries\TableFormActions;
 
-class RoleEntityTable extends NewObjectTable implements TableFormActionsSupport
+class RoleEntityTable extends Table implements TableFormActionsSupport
 {
     const TABLE_IDENTIFIER = Manager :: PARAM_ROLE_ENTITY_ID;
     const DEFAULT_ROW_COUNT = 20;

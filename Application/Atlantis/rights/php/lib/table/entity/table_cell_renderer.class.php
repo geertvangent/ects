@@ -5,7 +5,7 @@ use libraries\ToolbarItem;
 use libraries\Theme;
 use libraries\Toolbar;
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\NewObjectTableCellRenderer;
+use libraries\TableCellRenderer;
 use libraries\Translation;
 use libraries\Utilities;
 use core\rights\UserEntity;
@@ -13,8 +13,7 @@ use core\user\User;
 use core\group\Group;
 use core\rights\PlatformGroupEntity;
 
-class EntityTableCellRenderer extends NewObjectTableCellRenderer implements
-    TableColumnModelActionsColumnSupport
+class EntityTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
 {
 
     public function render_cell($column, $object)
@@ -83,4 +82,13 @@ class EntityTableCellRenderer extends NewObjectTableCellRenderer implements
 
         return $toolbar->as_html();
     }
+	/* (non-PHPdoc)
+     * @see \libraries\TableCellRenderer::render_id_cell()
+     */
+    public function render_id_cell($result)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
 }

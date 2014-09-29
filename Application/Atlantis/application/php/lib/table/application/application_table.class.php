@@ -2,13 +2,13 @@
 namespace application\atlantis\application;
 
 use libraries\TableFormActionsSupport;
-use libraries\NewObjectTable;
+use libraries\Table;
 use libraries\Utilities;
 use libraries\Translation;
 use libraries\TableFormAction;
 use libraries\TableFormActions;
 
-class ApplicationTable extends NewObjectTable implements TableFormActionsSupport
+class ApplicationTable extends Table implements TableFormActionsSupport
 {
     const TABLE_IDENTIFIER = Manager :: PARAM_APPLICATION_ID;
     const DEFAULT_ROW_COUNT = 20;

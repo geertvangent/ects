@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use libraries\NewObjectTableCellRenderer;
+use libraries\TableCellRenderer;
 use libraries\TableColumnModelActionsColumnSupport;
 use libraries\Toolbar;
 use libraries\Theme;
@@ -9,8 +9,7 @@ use libraries\Translation;
 use libraries\Utilities;
 use libraries\ToolbarItem;
 
-class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
-    TableColumnModelActionsColumnSupport
+class EntitlementTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
 {
 
     public function render_cell($column, $object)
@@ -48,4 +47,13 @@ class EntitlementTableCellRenderer extends NewObjectTableCellRenderer implements
         }
         return $toolbar->as_html();
     }
+	/* (non-PHPdoc)
+     * @see \libraries\TableCellRenderer::render_id_cell()
+     */
+    public function render_id_cell($result)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
 }

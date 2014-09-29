@@ -6,10 +6,9 @@ use libraries\Translation;
 use libraries\ToolbarItem;
 use libraries\Toolbar;
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\NewObjectTableCellRenderer;
+use libraries\TableCellRenderer;
 
-class ContextTableCellRenderer extends NewObjectTableCellRenderer implements
-    TableColumnModelActionsColumnSupport
+class ContextTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
 {
 
     public function get_object_actions($object)
@@ -30,4 +29,13 @@ class ContextTableCellRenderer extends NewObjectTableCellRenderer implements
 
         return $toolbar->as_html();
     }
+	/* (non-PHPdoc)
+     * @see \libraries\TableCellRenderer::render_id_cell()
+     */
+    public function render_id_cell($result)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
 }

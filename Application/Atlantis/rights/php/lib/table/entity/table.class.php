@@ -6,10 +6,10 @@ use libraries\TableFormAction;
 use libraries\TableFormActions;
 use libraries\TableFormActionsSupport;
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\NewObjectTable;
+use libraries\Table;
 use libraries\Utilities;
 
-class EntityTable extends NewObjectTable implements TableColumnModelActionsColumnSupport, TableFormActionsSupport
+class EntityTable extends Table implements TableColumnModelActionsColumnSupport, TableFormActionsSupport
 {
     const TABLE_IDENTIFIER = Manager :: PARAM_LOCATION_ENTITY_RIGHT_GROUP_ID;
     const DEFAULT_ROW_COUNT = 20;

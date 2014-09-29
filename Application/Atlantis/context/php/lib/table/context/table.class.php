@@ -1,8 +1,8 @@
 <?php
 namespace application\atlantis\context;
 
-use libraries\NewObjectTable;
+use libraries\Table;
 
-class ContextTable extends NewObjectTable
+class ContextTable extends Table
 {
 }

@@ -6,11 +6,11 @@ use libraries\Theme;
 use libraries\Translation;
 use libraries\Utilities;
 use libraries\ToolbarItem;
-use libraries\NewObjectTableCellRenderer;
+use libraries\TableCellRenderer;
 use libraries\TableColumnModelActionsColumnSupport;
 use libraries\Toolbar;
 
-class RoleTableCellRenderer extends NewObjectTableCellRenderer implements TableColumnModelActionsColumnSupport
+class RoleTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
 {
 
     public function get_object_actions($role)
@@ -72,4 +72,13 @@ class RoleTableCellRenderer extends NewObjectTableCellRenderer implements TableC
 
         return $toolbar->as_html();
     }
+	/* (non-PHPdoc)
+     * @see \libraries\TableCellRenderer::render_id_cell()
+     */
+    public function render_id_cell($result)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
 }
