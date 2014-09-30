@@ -27,7 +27,7 @@
 		<homepage></homepage>
 		<pre-depends>
 			<dependency type="registration">
-				<id>common\libraries</id>
+				<id>configuration</id>
 				<version operator="4">4.0.0</version>
 			</dependency>
 		</pre-depends>
