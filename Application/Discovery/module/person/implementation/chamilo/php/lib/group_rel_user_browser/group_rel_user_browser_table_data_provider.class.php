@@ -28,15 +28,10 @@ class GroupRelUserBrowserTableDataProvider extends TableDataProvider
         parent :: __construct($browser, $condition);
     }
 
-    /**
-     * Gets the learning objects
-     *
-     * @param int $offset
-     * @param int $count
-     * @param string $order_property
-     * @return ResultSet A set of matching learning objects.
+    /*
+     * (non-PHPdoc) @see \libraries\TableDataProvider::retrieve_data()
      */
-    public function get_objects($offset, $count, $order_property = null)
+    public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
         return \core\group\DataManager :: retrieves(
@@ -44,30 +39,13 @@ class GroupRelUserBrowserTableDataProvider extends TableDataProvider
             new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property));
     }
 
-    /**
-     * Gets the number of learning objects in the table
-     *
-     * @return int
-     */
-    public function get_object_count()
-    {
-        return \core\group\DataManager :: count(
-            \core\group\GroupRelUser :: class_name(),
-            new DataClassCountParameters($this->get_condition()));
-    }
-    /*
-     * (non-PHPdoc) @see \libraries\TableDataProvider::retrieve_data()
-     */
-    public function retrieve_data($condition, $offset, $count, $order_property = null)
-    {
-        // TODO Auto-generated method stub
-    }
-
     /*
      * (non-PHPdoc) @see \libraries\TableDataProvider::count_data()
      */
     public function count_data($condition)
     {
-        // TODO Auto-generated method stub
+        return \core\group\DataManager :: count(
+            \core\group\GroupRelUser :: class_name(),
+            new DataClassCountParameters($this->get_condition()));
     }
 }

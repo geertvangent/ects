@@ -28,7 +28,7 @@ class GroupBrowserTableDataProvider extends TableDataProvider
         parent :: __construct($browser, $condition);
     }
 
-    public function retrieve_data($offset, $count, $order_property = null)
+    public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
         return \core\group\DataManager :: retrieves(

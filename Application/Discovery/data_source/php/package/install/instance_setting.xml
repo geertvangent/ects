@@ -3,7 +3,7 @@
 	<properties>
 		<property name="id" type="integer" unsigned="1" notnull="1"
 			autoincrement="true" />
-		<property name="module_instance_id" type="integer" unsigned="1"
+		<property name="instance_id" type="integer" unsigned="1"
 			notnull="1" />
 		<property name="variable" type="text" length="255" fixed="true" />
 		<property name="value" type="text" />

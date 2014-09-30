@@ -16,7 +16,7 @@ use libraries\TableDataProvider;
 class UserBrowserTableDataProvider extends TableDataProvider
 {
 
-    public function retrieve_data($offset, $count, $order_property = null)
+    public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
 
@@ -29,7 +29,7 @@ class UserBrowserTableDataProvider extends TableDataProvider
      *
      * @return int
      */
-    public function count_data()
+    public function count_data($condition)
     {
         return \core\user\DataManager :: count(\core\user\User :: class_name(), $this->get_condition());
     }

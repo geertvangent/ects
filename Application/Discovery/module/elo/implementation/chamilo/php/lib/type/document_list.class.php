@@ -1,9 +1,7 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\DataClass;
-
-class DocumentListData extends DataClass
+class DocumentListData extends TypeData
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_COURSE = 'course';
@@ -18,7 +16,7 @@ class DocumentListData extends DataClass
         $filters[] = self :: PROPERTY_COURSE;
         $filters[] = self :: PROPERTY_TOOL;
         $filters[] = self :: PROPERTY_SIZE;
-        
+
         return parent :: get_filters($filters);
     }
 
@@ -90,7 +88,7 @@ class DocumentListData extends DataClass
         $extended_property_names[] = self :: PROPERTY_USER_ID;
         $extended_property_names[] = self :: PROPERTY_USER_OFFICIAL_CODE;
         $extended_property_names[] = self :: PROPERTY_USER_EMAIL;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 }
