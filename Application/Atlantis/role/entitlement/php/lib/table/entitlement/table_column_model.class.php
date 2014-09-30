@@ -4,9 +4,9 @@ namespace application\atlantis\role\entitlement;
 use libraries\Translation;
 use libraries\StaticTableColumn;
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\TableColumnModel;
+use libraries\DataClassTableColumnModel;
 
-class EntitlementTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
+class EntitlementTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**

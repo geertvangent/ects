@@ -2,10 +2,10 @@
 namespace application\atlantis\role;
 
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\TableColumnModel;
-use libraries\TableColumn;
+use libraries\DataClassTableColumnModel;
+use libraries\DataClassPropertyTableColumn;
 
-class RoleTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
+class RoleTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**
@@ -13,7 +13,7 @@ class RoleTableColumnModel extends TableColumnModel implements TableColumnModelA
      */
     public function initialize_columns()
     {
-        $this->add_column(new TableColumn(Role :: PROPERTY_NAME));
-        $this->add_column(new TableColumn(Role :: PROPERTY_DESCRIPTION));
+        $this->add_column(new DataClassPropertyTableColumn(Role :: class_name(), Role :: PROPERTY_NAME));
+        $this->add_column(new DataClassPropertyTableColumn(Role :: class_name(), Role :: PROPERTY_DESCRIPTION));
     }
 }

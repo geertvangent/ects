@@ -8,20 +8,17 @@ use libraries\TableDataProvider;
 class EntityTableDataProvider extends TableDataProvider
 {
 
-    public function retrieve_data($offset, $count, $order_property = null)
+    public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
-        $parameters = new DataClassRetrievesParameters(
-            $this->get_condition(),
-            $count,
-            $offset,
-            $this->get_order_property($order_property));
+        $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
 
         return DataManager :: retrieves(RightsLocationEntityRightGroup :: class_name(), $parameters);
     }
 
-    public function count_data()
+    public function count_data($condition)
     {
-        $parameters = new DataClassCountParameters($this->get_condition());
-        return DataManager :: count(RightsLocationEntityRightGroup :: class_name(), $parameters);
+        return DataManager :: count(
+            RightsLocationEntityRightGroup :: class_name(),
+            new DataClassCountParameters($condition));
     }
 }

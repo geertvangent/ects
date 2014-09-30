@@ -10,8 +10,6 @@ use libraries\Utilities;
 use libraries\Translation;
 use libraries\Condition;
 use libraries\NotCondition;
-use core\rights\PlatformGroupEntity;
-use core\rights\UserEntity;
 use libraries\OrderBy;
 use libraries\PropertyConditionVariable;
 use libraries\StaticConditionVariable;

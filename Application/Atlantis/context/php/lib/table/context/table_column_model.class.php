@@ -2,10 +2,10 @@
 namespace application\atlantis\context;
 
 use libraries\TableColumnModelActionsColumnSupport;
-use libraries\TableColumnModel;
-use libraries\TableColumn;
+use libraries\DataClassTableColumnModel;
+use libraries\DataClassPropertyTableColumn;
 
-class ContextTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
+class ContextTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**
@@ -13,6 +13,7 @@ class ContextTableColumnModel extends TableColumnModel implements TableColumnMod
      */
     public function initialize_columns()
     {
-        $this->add_column(new TableColumn(\core\group\Group :: PROPERTY_NAME));
+        $this->add_column(
+            new DataClassPropertyTableColumn(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_NAME));
     }
 }
