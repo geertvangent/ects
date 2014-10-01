@@ -6,14 +6,14 @@ use libraries\Theme;
 use libraries\Translation;
 use libraries\Utilities;
 use libraries\ToolbarItem;
-use libraries\TableCellRenderer;
-use libraries\TableColumnModelActionsColumnSupport;
+use libraries\DataClassTableCellRenderer;
+use libraries\TableCellRendererActionsColumnSupport;
 use libraries\Toolbar;
 
-class RoleTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
+class RoleTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
 
-    public function get_object_actions($role)
+    public function get_actions($role)
     {
         $toolbar = new Toolbar();
         if ($this->get_component()->get_user()->is_platform_admin())
@@ -72,13 +72,4 @@ class RoleTableCellRenderer extends TableCellRenderer implements TableColumnMode
 
         return $toolbar->as_html();
     }
-	/* (non-PHPdoc)
-     * @see \libraries\TableCellRenderer::render_id_cell()
-     */
-    public function render_id_cell($result)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
 }

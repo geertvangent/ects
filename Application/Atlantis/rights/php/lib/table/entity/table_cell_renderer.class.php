@@ -4,8 +4,8 @@ namespace application\atlantis\rights;
 use libraries\ToolbarItem;
 use libraries\Theme;
 use libraries\Toolbar;
-use libraries\TableColumnModelActionsColumnSupport;
-use libraries\TableCellRenderer;
+use libraries\TableCellRendererActionsColumnSupport;
+use libraries\DataClassTableCellRenderer;
 use libraries\Translation;
 use libraries\Utilities;
 use core\rights\UserEntity;
@@ -13,7 +13,7 @@ use core\user\User;
 use core\group\Group;
 use core\rights\PlatformGroupEntity;
 
-class EntityTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
+class EntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
 
     public function render_cell($column, $object)
@@ -63,7 +63,7 @@ class EntityTableCellRenderer extends TableCellRenderer implements TableColumnMo
         return parent :: render_cell($column, $object);
     }
 
-    public function get_object_actions($object)
+    public function get_actions($object)
     {
         $toolbar = new Toolbar();
 
@@ -82,13 +82,4 @@ class EntityTableCellRenderer extends TableCellRenderer implements TableColumnMo
 
         return $toolbar->as_html();
     }
-	/* (non-PHPdoc)
-     * @see \libraries\TableCellRenderer::render_id_cell()
-     */
-    public function render_id_cell($result)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
 }

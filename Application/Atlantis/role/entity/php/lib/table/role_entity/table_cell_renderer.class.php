@@ -2,8 +2,8 @@
 namespace application\atlantis\role\entity;
 
 use libraries\DatetimeUtilities;
-use libraries\TableCellRenderer;
-use libraries\TableColumnModelActionsColumnSupport;
+use libraries\DataClassTableCellRenderer;
+use libraries\TableCellRendererActionsColumnSupport;
 use libraries\Toolbar;
 use libraries\Theme;
 use libraries\Translation;
@@ -11,7 +11,7 @@ use libraries\Utilities;
 use libraries\ToolbarItem;
 use core\rights\PlatformGroupEntity;
 
-class RoleEntityTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
+class RoleEntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
 
     public function render_cell($column, $object)
@@ -49,7 +49,7 @@ class RoleEntityTableCellRenderer extends TableCellRenderer implements TableColu
         return parent :: render_cell($column, $object);
     }
 
-    public function get_object_actions($role_entity)
+    public function get_actions($role_entity)
     {
         $toolbar = new Toolbar();
 
@@ -92,12 +92,5 @@ class RoleEntityTableCellRenderer extends TableCellRenderer implements TableColu
         }
 
         return $toolbar->as_html();
-    }
-    /*
-     * (non-PHPdoc) @see \libraries\TableCellRenderer::render_id_cell()
-     */
-    public function render_id_cell($result)
-    {
-        // TODO Auto-generated method stub
     }
 }

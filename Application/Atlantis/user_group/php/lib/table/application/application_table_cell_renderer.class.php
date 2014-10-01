@@ -5,14 +5,14 @@ use libraries\Utilities;
 use libraries\Theme;
 use libraries\Translation;
 use libraries\ToolbarItem;
-use libraries\TableCellRenderer;
-use libraries\TableColumnModelActionsColumnSupport;
+use libraries\DataClassTableCellRenderer;
+use libraries\TableCellRendererActionsColumnSupport;
 use libraries\Toolbar;
 
-class ApplicationTableCellRenderer extends TableCellRenderer implements TableColumnModelActionsColumnSupport
+class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
 
-    public function get_object_actions($application)
+    public function get_actions($application)
     {
         $toolbar = new Toolbar();
 
@@ -46,13 +46,4 @@ class ApplicationTableCellRenderer extends TableCellRenderer implements TableCol
 
         return $toolbar->as_html();
     }
-	/* (non-PHPdoc)
-     * @see \libraries\TableCellRenderer::render_id_cell()
-     */
-    public function render_id_cell($result)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
 }

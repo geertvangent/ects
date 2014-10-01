@@ -123,7 +123,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     {
         if ($this->has_context_id() && ! $this->has_entity() && ! $this->has_role_id())
         {
-            $context = \core\group\DataManager :: retrieve(Group :: class_name(), (int) $this->context_id);
+            $context = \core\group\DataManager :: retrieve_by_id(
+                \core\group\Group :: class_name(),
+                (int) $this->context_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $context->get_name()));
             SessionBreadcrumbs :: add(
                 new Breadcrumb(
@@ -137,7 +139,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         }
         elseif (! $this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
         {
-            $role = \application\atlantis\role\DataManager :: retrieve(
+            $role = \application\atlantis\role\DataManager :: retrieve_by_id(
                 \application\atlantis\role\Role :: class_name(),
                 (int) $this->role_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
@@ -150,9 +152,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         }
         elseif ($this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
         {
-            $context = \core\group\DataManager :: retrieve(Group :: class_name(), (int) $this->context_id);
+            $context = \core\group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $this->context_id);
 
-            $role = \application\atlantis\role\DataManager :: retrieve(
+            $role = \application\atlantis\role\DataManager :: retrieve_by_id(
                 \application\atlantis\role\Role :: class_name(),
                 (int) $this->role_id);
 
@@ -198,13 +200,11 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
         $this->display_footer();
     }
-	/* (non-PHPdoc)
-     * @see \libraries\TableSupport::get_table_condition()
+    /*
+     * (non-PHPdoc) @see \libraries\TableSupport::get_table_condition()
      */
     public function get_table_condition($table_class_name)
     {
         // TODO Auto-generated method stub
-
     }
-
 }
