@@ -20,7 +20,7 @@ use libraries\OrderBy;
  * @package rights
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class EntityAjaxUserEntityFeed extends \core\user\AjaxUsersFeed
+class AjaxUserEntityFeed extends \core\user\AjaxUsersFeed
 {
 
     /**

@@ -11,9 +11,9 @@ class Autoloader
      */
      private static $map = array(
          'Autoloader' => '/autoloader.class.php',
-         'EntityAjaxContextsFeed' => '/ajax/contexts_feed.class.php',
-         'EntityAjaxPlatformGroupEntityFeed' => '/ajax/platform_group_entity_feed.class.php',
-         'EntityAjaxUserEntityFeed' => '/ajax/user_entity_feed.class.php',
+         'AjaxContextsFeed' => '/ajax/contexts_feed.class.php',
+         'AjaxPlatformGroupEntityFeed' => '/ajax/platform_group_entity_feed.class.php',
+         'AjaxUserEntityFeed' => '/ajax/user_entity_feed.class.php',
          'PlatformGroupEntity' => '/lib/entities/platform_group_entity.class.php',
          'UserEntity' => '/lib/entities/user_entity.class.php',
          'EntityForm' => '/lib/form/entity.class.php',
@@ -62,4 +62,3 @@ class Autoloader
     }
 
 }
-?>
