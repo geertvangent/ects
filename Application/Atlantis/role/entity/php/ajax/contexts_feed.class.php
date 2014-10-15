@@ -23,7 +23,7 @@ use libraries\storage\OrderBy;
  * @package roup
  * @author Sven Vanpoucke
  */
-class EntityAjaxContextsFeed extends AjaxPlatformGroupsFeed
+class AjaxContextsFeed extends AjaxPlatformGroupsFeed
 {
     /**
      * The length for the filter prefix to remove
