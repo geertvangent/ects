@@ -10,14 +10,6 @@ use libraries\architecture\WebApplicationInstaller;
 class Installer extends WebApplicationInstaller
 {
 
-    /**
-     * Constructor
-     */
-    public function __construct($values)
-    {
-        parent :: __construct($values, DataManager :: get_instance());
-    }
-
     public function get_additional_installers()
     {
         $installers = array();
