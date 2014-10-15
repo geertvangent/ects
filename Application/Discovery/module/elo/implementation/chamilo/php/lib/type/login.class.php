@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\DataClass;
+use libraries\storage\DataClass;
 
 class LoginData extends DataClass
 {

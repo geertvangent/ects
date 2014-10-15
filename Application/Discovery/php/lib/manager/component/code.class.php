@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery;
 
-use libraries\DelegateComponent;
-use libraries\Translation;
-use libraries\Request;
+use libraries\architecture\DelegateComponent;
+use libraries\platform\Translation;
+use libraries\platform\Request;
 
 /**
  *

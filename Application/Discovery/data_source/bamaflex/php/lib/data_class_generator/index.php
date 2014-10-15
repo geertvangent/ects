@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\data_source\bamaflex;
 
-use libraries\Path;
-use libraries\Filesystem;
+use libraries\file\Path;
+use libraries\file\Filesystem;
 use DOMDocument;
 use DOMXPath;
 

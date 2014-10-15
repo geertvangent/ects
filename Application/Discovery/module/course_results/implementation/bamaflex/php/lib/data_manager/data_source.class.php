@@ -2,15 +2,15 @@
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\DoctrineConditionTranslator;
-use libraries\AndCondition;
-use libraries\EqualityCondition;
+use libraries\storage\DoctrineConditionTranslator;
+use libraries\storage\AndCondition;
+use libraries\storage\EqualityCondition;
 use application\discovery\module\course\implementation\bamaflex\Course;
 use application\discovery\module\career\MarkMoment;
 use application\discovery\module\career\implementation\bamaflex\Mark;
 use stdClass;
-use libraries\StaticColumnConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\StaticColumnConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {

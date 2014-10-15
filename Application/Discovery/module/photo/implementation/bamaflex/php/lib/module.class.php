@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\InCondition;
+use libraries\storage\InCondition;
 use core\group\Group;
-use libraries\PropertyConditionVariable;
+use libraries\storage\PropertyConditionVariable;
 
 class Module extends \application\discovery\module\photo\Module
 {

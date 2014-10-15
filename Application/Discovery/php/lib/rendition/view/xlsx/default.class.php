@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery;
 
-use libraries\Filesystem;
-use libraries\Path;
-use libraries\Translation;
-use libraries\StringUtilities;
+use libraries\file\Filesystem;
+use libraries\file\Path;
+use libraries\platform\Translation;
+use libraries\utilities\StringUtilities;
 
 class XlsxDefaultRendition extends XlsxRendition
 {

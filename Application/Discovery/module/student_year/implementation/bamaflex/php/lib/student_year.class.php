@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\student_year\implementation\bamaflex;
 
-use libraries\Utilities;
+use libraries\utilities\Utilities;
 
 /**
  * application.discovery.module.student_year.implementation.bamaflex

@@ -1,17 +1,17 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\AndCondition;
-use libraries\EqualityCondition;
-use libraries\InCondition;
-use libraries\OrCondition;
-use libraries\Session;
+use libraries\storage\AndCondition;
+use libraries\storage\EqualityCondition;
+use libraries\storage\InCondition;
+use libraries\storage\OrCondition;
+use libraries\platform\Session;
 use application\discovery\RightsGroupEntityRight;
 use Exception;
 use core\rights\UserEntity;
 use core\rights\PlatformGroupEntity;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class Rights
 {

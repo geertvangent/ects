@@ -1,18 +1,18 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\Utilities;
-use libraries\Path;
-use libraries\EqualityCondition;
-use libraries\OptionsMenuRenderer;
-use libraries\TreeMenuRenderer;
-use libraries\DataClassRetrievesParameters;
+use libraries\utilities\Utilities;
+use libraries\file\Path;
+use libraries\storage\EqualityCondition;
+use libraries\format\OptionsMenuRenderer;
+use libraries\format\TreeMenuRenderer;
+use libraries\storage\DataClassRetrievesParameters;
 use HTML_Menu;
 use HTML_Menu_ArrayRenderer;
 use core\group\Group;
-use libraries\OrderBy;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\OrderBy;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $

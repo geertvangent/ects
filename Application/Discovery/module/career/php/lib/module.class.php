@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\career;
 
-use libraries\Path;
-use libraries\Filesystem;
-use libraries\Request;
-use libraries\Application;
+use libraries\file\Path;
+use libraries\file\Filesystem;
+use libraries\platform\Request;
+use libraries\architecture\Application;
 use application\discovery\instance\Instance;
 
 class Module extends \application\discovery\Module

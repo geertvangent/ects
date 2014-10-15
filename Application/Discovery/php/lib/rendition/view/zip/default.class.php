@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery;
 
-use libraries\Translation;
-use libraries\Session;
-use libraries\Path;
-use libraries\Filecompression;
-use libraries\Filesystem;
+use libraries\platform\Translation;
+use libraries\platform\Session;
+use libraries\file\Path;
+use libraries\file\Filecompression;
+use libraries\file\Filesystem;
 
 class ZipDefaultRendition extends ZipRendition
 {

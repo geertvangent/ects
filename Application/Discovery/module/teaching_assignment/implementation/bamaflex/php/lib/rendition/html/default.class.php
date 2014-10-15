@@ -2,15 +2,15 @@
 namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
 
 use application\discovery\SortableTable;
-use libraries\ToolbarItem;
+use libraries\format\ToolbarItem;
 use application\discovery\LegendTable;
-use libraries\Theme;
-use libraries\Translation;
-use libraries\Display;
-use libraries\DynamicVisualTab;
-use libraries\DynamicVisualTabsRenderer;
-use libraries\Breadcrumb;
-use libraries\BreadcrumbTrail;
+use libraries\format\Theme;
+use libraries\platform\Translation;
+use libraries\format\Display;
+use libraries\format\DynamicVisualTab;
+use libraries\format\DynamicVisualTabsRenderer;
+use libraries\format\Breadcrumb;
+use libraries\format\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

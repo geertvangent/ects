@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\Request;
-use libraries\Translation;
-use libraries\Utilities;
+use libraries\platform\Request;
+use libraries\platform\Translation;
+use libraries\utilities\Utilities;
 
 class DeactivatorComponent extends Manager
 {

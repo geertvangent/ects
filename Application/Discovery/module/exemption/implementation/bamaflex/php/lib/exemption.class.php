@@ -2,7 +2,7 @@
 namespace application\discovery\module\exemption\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-use libraries\Utilities;
+use libraries\utilities\Utilities;
 
 /**
  * application.discovery.module.exemption.implementation.bamaflex

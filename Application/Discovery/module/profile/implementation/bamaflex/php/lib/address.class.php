@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use libraries\Translation;
-use libraries\DataClass;
+use libraries\platform\Translation;
+use libraries\storage\DataClass;
 
 class Address extends DataClass
 {

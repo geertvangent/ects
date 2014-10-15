@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\data_source\bamaflex;
 
-use libraries\DataSourceName;
-use libraries\Path;
-use libraries\DoctrineConnection;
+use libraries\storage\DataSourceName;
+use libraries\file\Path;
+use libraries\storage\DoctrineConnection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Common\ClassLoader;
 

@@ -2,7 +2,7 @@
 namespace application\discovery\module\training_info\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
-use libraries\Utilities;
+use libraries\utilities\Utilities;
 
 /**
  * application.discovery.module.training.implementation.bamaflex

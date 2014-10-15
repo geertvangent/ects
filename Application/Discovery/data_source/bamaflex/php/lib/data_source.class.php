@@ -11,7 +11,7 @@ class DataSource extends \application\discovery\DataSource
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $connection = Connection :: get_instance($data_source)->get_connection();
-        
+
         if (Connection :: get_instance($data_source)->get_data_source_instance()->get_setting('driver') == 'mssql')
         {
             // Necessary to retrieve complete photos and other large datasets
@@ -22,7 +22,7 @@ class DataSource extends \application\discovery\DataSource
         {
             $connection->setCharset('utf8');
         }
-        
+
         $this->set_connection($connection);
     }
 

@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery;
 
-use libraries\Translation;
-use libraries\PlatformSetting;
-use libraries\Theme;
-use libraries\Application;
+use libraries\platform\Translation;
+use libraries\platform\PlatformSetting;
+use libraries\format\Theme;
+use libraries\architecture\Application;
 use configuration\package\PackageList;
 use configuration\DataManager;
 

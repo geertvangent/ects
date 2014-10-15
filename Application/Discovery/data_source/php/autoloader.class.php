@@ -23,12 +23,10 @@ class Autoloader
          'DeleterComponent' => '/lib/manager/component/deleter.class.php',
          'MoverComponent' => '/lib/manager/component/mover.class.php',
          'UpdaterComponent' => '/lib/manager/component/updater.class.php',
-         'InstanceBrowserTable' => '/lib/manager/component/browser/table.class.php',
-         'InstanceBrowserTableCellRenderer' => '/lib/manager/component/browser/table_cell_renderer.class.php',
-         'InstanceBrowserTableColumnModel' => '/lib/manager/component/browser/table_column_model.class.php',
-         'InstanceBrowserTableDataProvider' => '/lib/manager/component/browser/table_data_provider.class.php',
-         'DefaultInstanceTableCellRenderer' => '/lib/table/instance/default_table_cell_renderer.class.php',
-         'DefaultInstanceTableColumnModel' => '/lib/table/instance/default_table_column_model.class.php',
+         'InstanceTable' => '/lib/table/instance/table.class.php',
+         'InstanceTableCellRenderer' => '/lib/table/instance/table_cell_renderer.class.php',
+         'InstanceTableColumnModel' => '/lib/table/instance/table_column_model.class.php',
+         'InstanceTableDataProvider' => '/lib/table/instance/table_data_provider.class.php',
          'Activator' => '/package/activate/activator.class.php',
          'Deactivator' => '/package/deactivate/deactivator.class.php',
          'Installer' => '/package/install/installer.class.php'
@@ -59,7 +57,7 @@ class Autoloader
      */
     public static function synch($update)
     {
-        return \libraries\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
+        return \libraries\utilities\AutoloaderUtilities :: synch(__DIR__, __DIR__, $update);
     }
 
 }

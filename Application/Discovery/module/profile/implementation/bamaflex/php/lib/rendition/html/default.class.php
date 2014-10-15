@@ -1,14 +1,14 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use libraries\BreadcrumbTrail;
-use libraries\Breadcrumb;
-use libraries\PropertiesTable;
-use libraries\StringUtilities;
+use libraries\format\BreadcrumbTrail;
+use libraries\format\Breadcrumb;
+use libraries\format\PropertiesTable;
+use libraries\utilities\StringUtilities;
 use application\discovery\SortableTable;
-use libraries\Theme;
-use libraries\Translation;
-use libraries\Display;
+use libraries\format\Theme;
+use libraries\platform\Translation;
+use libraries\format\Display;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

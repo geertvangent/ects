@@ -3,7 +3,7 @@ namespace application\discovery\module\student_year\implementation\bamaflex;
 
 use application\discovery\DataManager;
 use application\discovery\DiscoveryItem;
-use libraries\Utilities;
+use libraries\utilities\Utilities;
 
 /**
  * application.discovery.module.student_year.implementation.bamaflex

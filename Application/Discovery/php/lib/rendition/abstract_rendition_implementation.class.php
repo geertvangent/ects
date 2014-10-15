@@ -6,7 +6,7 @@ abstract class AbstractRenditionImplementation
 
     /**
      *
-     * @var \libraries\Application
+     * @var \libraries\architecture\Application
      */
     private $context;
 
@@ -18,7 +18,7 @@ abstract class AbstractRenditionImplementation
 
     /**
      *
-     * @param \libraries\Application $context
+     * @param \libraries\architecture\Application $context
      * @param \application\discovery\Module $module
      */
     public function __construct($context, Module $module)
@@ -29,7 +29,7 @@ abstract class AbstractRenditionImplementation
 
     /**
      *
-     * @return \libraries\Application
+     * @return \libraries\architecture\Application
      */
     public function get_context()
     {
@@ -38,7 +38,7 @@ abstract class AbstractRenditionImplementation
 
     /**
      *
-     * @param \libraries\Application $context
+     * @param \libraries\architecture\Application $context
      */
     public function set_context($context)
     {

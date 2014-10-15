@@ -2,16 +2,16 @@
 namespace application\discovery\module\profile\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\DoctrineConditionTranslator;
-use libraries\EqualityCondition;
+use libraries\storage\DoctrineConditionTranslator;
+use libraries\storage\EqualityCondition;
 use application\discovery\module\profile\Photo;
 use application\discovery\module\profile\Communication;
 use application\discovery\module\profile\Email;
 use application\discovery\module\profile\IdentificationCode;
 use application\discovery\module\profile\Name;
 use stdClass;
-use libraries\StaticColumnConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\StaticColumnConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {

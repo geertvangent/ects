@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\data_source\bamaflex;
 
-use libraries\Utilities;
-use libraries\DataClass;
+use libraries\utilities\Utilities;
+use libraries\storage\DataClass;
 
 /**
  * application.discovery.connection.bamaflex.

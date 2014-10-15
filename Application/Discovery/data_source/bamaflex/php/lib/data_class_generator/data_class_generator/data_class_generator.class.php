@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\data_source\bamaflex;
 
-use libraries\Path;
-use libraries\Utilities;
+use libraries\file\Path;
+use libraries\utilities\Utilities;
 use \MDB2_Error;
 
 /**

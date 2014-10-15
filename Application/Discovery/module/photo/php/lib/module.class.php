@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\photo;
 
-use libraries\Path;
-use libraries\Filesystem;
+use libraries\file\Path;
+use libraries\file\Filesystem;
 use application\discovery\instance\Instance;
-use libraries\Request;
+use libraries\platform\Request;
 
 class Module extends \application\discovery\Module
 {

@@ -1,18 +1,18 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\DataClassProperties;
+use libraries\storage\DataClassProperties;
 
-use libraries\RecordRetrievesParameters;
-use libraries\FunctionConditionVariable;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
-use libraries\GroupBy;
-use libraries\AndCondition;
-use libraries\Condition;
-use libraries\OrderBy;
+use libraries\storage\RecordRetrievesParameters;
+use libraries\storage\FunctionConditionVariable;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
+use libraries\storage\GroupBy;
+use libraries\storage\AndCondition;
+use libraries\storage\Condition;
+use libraries\storage\OrderBy;
 
-class DataManager extends \libraries\DataManager
+class DataManager extends \libraries\storage\DataManager
 {
     const PREFIX = 'discovery_elo_';
     const COUNT = 'count';
@@ -30,17 +30,17 @@ class DataManager extends \libraries\DataManager
                 FunctionConditionVariable :: DISTINCT,
                 new PropertyConditionVariable($type, $filter),
                 $filter));
-        $order_by = array(new OrderBy(new PropertyConditionVariable($filter->get_class_name(), $filter)));
+        $order_by = array(new OrderBy(new PropertyConditionVariable($type, $filter)));
         $parameters = new RecordRetrievesParameters($properties, null, null, null, $order_by);
         $records = self :: records($type, $parameters)->as_array();
         $results = array();
-        
+
         $results[- 1] = '----';
-        
+
         foreach ($records as $record)
         {
             $results[$record[$filter]] = TypeDataFilter :: factory($type)->format_filter_option(
-                $filter, 
+                $filter,
                 $record[$filter]);
         }
         return $results;
@@ -49,27 +49,27 @@ class DataManager extends \libraries\DataManager
     public static function retrieve_data($module_type, $filter_values)
     {
         $properties = new DataClassProperties();
-        
+
         $group_by = new GroupBy();
         $conditions = array();
         foreach ($filter_values as $filter => $value)
         {
             $property = TypeDataFilter :: factory($module_type)->get_filter_property($module_type, $filter, $value);
-            
+
             $properties->add($property);
-            
+
             $group_by->add($property);
-            
+
             $filter_condition = TypeDataFilter :: factory($module_type)->get_filter_condition(
-                $module_type, 
-                $filter, 
+                $module_type,
+                $filter,
                 $value);
             if ($filter_condition instanceof Condition)
             {
                 $conditions[] = $filter_condition;
             }
         }
-        
+
         if (count($conditions))
         {
             $condition = new AndCondition($conditions);
@@ -80,12 +80,12 @@ class DataManager extends \libraries\DataManager
         }
         $properties->add(
             new FunctionConditionVariable(
-                FunctionConditionVariable :: COUNT, 
-                new StaticConditionVariable(1), 
+                FunctionConditionVariable :: COUNT,
+                new StaticConditionVariable(1),
                 self :: COUNT));
-        
+
         $parameters = new RecordRetrievesParameters($properties, $condition, null, null, null, null, $group_by);
-        
+
         return self :: records($module_type, $parameters)->as_array();
     }
 }

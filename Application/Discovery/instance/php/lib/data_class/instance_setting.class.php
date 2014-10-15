@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\EqualityCondition;
-use libraries\Path;
-use libraries\DataClass;
+use libraries\storage\EqualityCondition;
+use libraries\file\Path;
+use libraries\storage\DataClass;
 use DOMDocument;
-use libraries\DataClassRetrievesParameters;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 /**
  *

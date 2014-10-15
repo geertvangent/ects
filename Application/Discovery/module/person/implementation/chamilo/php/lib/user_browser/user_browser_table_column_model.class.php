@@ -2,20 +2,19 @@
 namespace application\discovery\module\person\implementation\chamilo;
 
 use application\discovery\module\person\Person;
-use libraries\ObjectTableColumn;
-use libraries\NewObjectTableColumnModelActionsColumnSupport;
-use libraries\NewObjectTableColumnModel;
+use libraries\format\TableColumn;
+use libraries\format\TableColumnModelActionsColumnSupport;
+use libraries\format\TableColumnModel;
 
-class UserBrowserTableColumnModel extends NewObjectTableColumnModel implements 
-    NewObjectTableColumnModelActionsColumnSupport
+class UserBrowserTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     public function initialize_columns()
     {
         $user_alias = \core\user\DataManager :: get_instance()->get_alias(\core\user\User :: get_table_name());
-        $this->add_column(new ObjectTableColumn(\core\user\User :: PROPERTY_OFFICIAL_CODE, true, $user_alias, true));
-        $this->add_column(new ObjectTableColumn(\core\user\User :: PROPERTY_LASTNAME, true, $user_alias, true));
-        $this->add_column(new ObjectTableColumn(\core\user\User :: PROPERTY_FIRSTNAME, true, $user_alias, true));
-        $this->add_column(new ObjectTableColumn(Person :: PROPERTY_EMAIL));
+        $this->add_column(new TableColumn(\core\user\User :: PROPERTY_OFFICIAL_CODE, true, $user_alias, true));
+        $this->add_column(new TableColumn(\core\user\User :: PROPERTY_LASTNAME, true, $user_alias, true));
+        $this->add_column(new TableColumn(\core\user\User :: PROPERTY_FIRSTNAME, true, $user_alias, true));
+        $this->add_column(new TableColumn(Person :: PROPERTY_EMAIL));
     }
 }

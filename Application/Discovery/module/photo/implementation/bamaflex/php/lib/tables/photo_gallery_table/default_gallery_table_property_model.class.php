@@ -1,25 +1,15 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\GalleryObjectTablePropertyModel;
-use libraries\GalleryObjectTableProperty;
+use libraries\format\GalleryTablePropertyModel;
+use libraries\format\GalleryTableProperty;
 
-class DefaultGalleryTablePropertyModel extends GalleryObjectTablePropertyModel
+class DefaultGalleryTablePropertyModel extends GalleryTablePropertyModel
 {
 
-    /**
-     * Constructor
-     */
-    public function __construct()
+    public function initialize_properties()
     {
-        parent :: __construct(self :: get_default_properties(), 0);
-    }
-
-    private static function get_default_properties()
-    {
-        $properties = array();
-        $properties[] = new GalleryObjectTableProperty(\core\user\User :: PROPERTY_LASTNAME);
-        $properties[] = new GalleryObjectTableProperty(\core\user\User :: PROPERTY_FIRSTNAME);
-        return $properties;
+        $this->add_property(new GalleryTableProperty(\core\user\User :: PROPERTY_LASTNAME));
+        $this->add_property(new GalleryTableProperty(\core\user\User :: PROPERTY_FIRSTNAME));
     }
 }

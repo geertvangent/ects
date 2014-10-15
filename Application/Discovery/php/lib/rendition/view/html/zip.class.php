@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery;
 
-use libraries\Translation;
-use libraries\Filesystem;
-use libraries\FileProperties;
+use libraries\platform\Translation;
+use libraries\file\Filesystem;
+use libraries\file\FileProperties;
 
 class HtmlZipRendition extends HtmlRendition
 {

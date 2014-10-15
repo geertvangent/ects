@@ -1,23 +1,23 @@
 <?php
 namespace application\discovery;
 
-use libraries\DelegateComponent;
-use libraries\Breadcrumb;
-use libraries\Display;
-use libraries\Translation;
-use libraries\ToolbarItem;
-use libraries\BreadcrumbTrail;
-use libraries\EqualityCondition;
-use libraries\Theme;
-use libraries\DynamicVisualTab;
-use libraries\DynamicVisualTabsRenderer;
-use libraries\Request;
-use libraries\DataClassRetrieveParameters;
+use libraries\architecture\DelegateComponent;
+use libraries\format\Breadcrumb;
+use libraries\format\Display;
+use libraries\platform\Translation;
+use libraries\format\ToolbarItem;
+use libraries\format\BreadcrumbTrail;
+use libraries\storage\EqualityCondition;
+use libraries\format\Theme;
+use libraries\format\DynamicVisualTab;
+use libraries\format\DynamicVisualTabsRenderer;
+use libraries\platform\Request;
+use libraries\storage\DataClassRetrieveParameters;
 use application\discovery\instance\Instance;
-use libraries\DataClassRetrievesParameters;
-use libraries\OrderBy;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\storage\OrderBy;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 /**
  *

@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use libraries\Utilities;
+use libraries\utilities\Utilities;
 
 abstract class Rendition
 {

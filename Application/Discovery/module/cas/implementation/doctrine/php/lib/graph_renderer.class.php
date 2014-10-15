@@ -3,10 +3,10 @@ namespace application\discovery\module\cas\implementation\doctrine;
 
 use application\discovery\SortableTable;
 use application\discovery\module\cas\DataManager;
-use libraries\Filesystem;
-use libraries\Theme;
-use libraries\Translation;
-use libraries\Path;
+use libraries\file\Filesystem;
+use libraries\format\Theme;
+use libraries\platform\Translation;
+use libraries\file\Path;
 
 require_once Path :: get_plugin_path() . '/pChart/pChart/pChart.class.php';
 require_once Path :: get_plugin_path() . '/pChart/pChart/pData.class.php';

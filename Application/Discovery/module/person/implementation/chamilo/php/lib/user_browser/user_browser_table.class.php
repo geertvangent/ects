@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\NewObjectTable;
+use libraries\format\Table;
 
-class UserBrowserTable extends NewObjectTable
+class UserBrowserTable extends Table
 {
     const DEFAULT_ROW_COUNT = 20;
 }

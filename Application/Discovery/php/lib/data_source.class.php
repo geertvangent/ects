@@ -2,8 +2,8 @@
 namespace application\discovery;
 
 use libraries\storage\DoctrineDatabase;
-use libraries\Filesystem;
-use libraries\Path;
+use libraries\file\Filesystem;
+use libraries\file\Path;
 
 class DataSource extends DoctrineDatabase
 {

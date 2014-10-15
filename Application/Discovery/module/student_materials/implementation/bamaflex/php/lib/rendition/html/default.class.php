@@ -1,19 +1,19 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
-use libraries\Display;
+use libraries\format\Display;
 use application\discovery\module\course\implementation\bamaflex\Material;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\career\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use libraries\DynamicTabsRenderer;
-use libraries\DynamicContentTab;
-use libraries\Theme;
-use libraries\Utilities;
-use libraries\Translation;
-use libraries\Breadcrumb;
-use libraries\BreadcrumbTrail;
+use libraries\format\DynamicTabsRenderer;
+use libraries\format\DynamicContentTab;
+use libraries\format\Theme;
+use libraries\utilities\Utilities;
+use libraries\platform\Translation;
+use libraries\format\Breadcrumb;
+use libraries\format\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

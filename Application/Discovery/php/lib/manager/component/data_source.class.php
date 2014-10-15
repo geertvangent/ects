@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery;
 
-use libraries\Theme;
-use libraries\Translation;
-use libraries\ToolbarItem;
-use libraries\BreadcrumbTrail;
+use libraries\format\Theme;
+use libraries\platform\Translation;
+use libraries\format\ToolbarItem;
+use libraries\format\BreadcrumbTrail;
 use application\discovery\instance\Instance;
 
 class DataSourceComponent extends Manager
@@ -41,7 +41,7 @@ class DataSourceComponent extends Manager
                 Theme :: get_image_path() . 'action_information.png', 
                 $link));
         
-        \libraries\Application :: launch(
+        \libraries\architecture\Application :: launch(
             \application\discovery\data_source\Manager :: context(), 
             $this->get_user(), 
             $this);

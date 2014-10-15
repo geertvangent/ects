@@ -2,9 +2,9 @@
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use application\discovery\module\course_results\DataManager;
-use libraries\Translation;
-use libraries\StringUtilities;
-use libraries\Display;
+use libraries\platform\Translation;
+use libraries\utilities\StringUtilities;
+use libraries\format\Display;
 use PHPExcel;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation

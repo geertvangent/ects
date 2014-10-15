@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\profile;
 
-use libraries\DataClass;
+use libraries\storage\DataClass;
 
 class Photo extends DataClass
 {

@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use libraries\Utilities;
-use libraries\DataClass;
+use libraries\utilities\Utilities;
+use libraries\storage\DataClass;
 
 /**
  * application.discovery.module.profile.implementation.bamaflex.

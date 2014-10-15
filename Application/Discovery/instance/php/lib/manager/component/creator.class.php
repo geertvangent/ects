@@ -1,12 +1,12 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\ToolbarItem;
-use libraries\SortableTableFromArray;
-use libraries\Request;
-use libraries\Translation;
-use libraries\Utilities;
-use libraries\Theme;
+use libraries\format\ToolbarItem;
+use libraries\format\SortableTableFromArray;
+use libraries\platform\Request;
+use libraries\platform\Translation;
+use libraries\utilities\Utilities;
+use libraries\format\Theme;
 use application\discovery\Module;
 
 class CreatorComponent extends Manager
@@ -18,28 +18,28 @@ class CreatorComponent extends Manager
         {
             $this->not_allowed();
         }
-        
+
         $type = Request :: get(self :: PARAM_TYPE);
         if ($type)
         {
             $instance = new Instance();
             $instance->set_type($type);
-            
+
             $form = new InstanceForm(
-                InstanceForm :: TYPE_CREATE, 
-                $instance, 
+                InstanceForm :: TYPE_CREATE,
+                $instance,
                 $this->get_url(array(self :: PARAM_TYPE => $type)));
-            
+
             if ($form->validate())
             {
                 $success = $form->create_instance();
-                
+
                 $this->redirect(
                     Translation :: get(
-                        $success ? 'ObjectAdded' : 'ObjectNotAdded', 
-                        array('OBJECT' => Translation :: get('Instance')), 
-                        Utilities :: COMMON_LIBRARIES), 
-                    ($success ? false : true), 
+                        $success ? 'ObjectAdded' : 'ObjectNotAdded',
+                        array('OBJECT' => Translation :: get('Instance')),
+                        Utilities :: COMMON_LIBRARIES),
+                    ($success ? false : true),
                     array(self :: PARAM_ACTION => self :: ACTION_BROWSE_INSTANCES));
             }
             else
@@ -53,7 +53,7 @@ class CreatorComponent extends Manager
         {
             $available_types = Module :: get_available_types();
             $table_data = array();
-            
+
             foreach ($available_types as $available_type)
             {
                 $name = htmlentities(Translation :: get('TypeName', null, $available_type));
@@ -63,15 +63,15 @@ class CreatorComponent extends Manager
                 $row[] = $name;
                 $row[] = htmlentities(Translation :: get('TypeDescription', null, $available_type));
                 $row[] = Theme :: get_common_image(
-                    'action_add', 
-                    'png', 
-                    Translation :: get('AddInstance'), 
-                    $this->get_url(array(self :: PARAM_TYPE => $available_type)), 
+                    'action_add',
+                    'png',
+                    Translation :: get('AddInstance'),
+                    $this->get_url(array(self :: PARAM_TYPE => $available_type)),
                     ToolbarItem :: DISPLAY_ICON);
-                
+
                 $table_data[] = $row;
             }
-            
+
             $table = new SortableTableFromArray($table_data);
             $parameters = $this->get_parameters();
             $table->set_additional_parameters($parameters);
@@ -79,7 +79,7 @@ class CreatorComponent extends Manager
             $table->set_header(1, 'Type');
             $table->set_header(2, 'Description');
             $table->set_header(3, '');
-            
+
             $this->display_header();
             echo $table->as_html();
             $this->display_footer();

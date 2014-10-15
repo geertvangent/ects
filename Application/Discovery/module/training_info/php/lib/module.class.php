@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\training_info;
 
-use libraries\Filesystem;
-use libraries\Request;
-use libraries\Path;
+use libraries\file\Filesystem;
+use libraries\platform\Request;
+use libraries\file\Path;
 use application\discovery\instance\Instance;
 
 abstract class Module extends \application\discovery\Module

@@ -1,16 +1,16 @@
 <?php
 namespace application\discovery\module\student_materials\implementation\bamaflex;
 
-use libraries\OrCondition;
-use libraries\NotCondition;
-use libraries\AndCondition;
+use libraries\storage\OrCondition;
+use libraries\storage\NotCondition;
+use libraries\storage\AndCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\DoctrineConditionTranslator;
-use libraries\EqualityCondition;
+use libraries\storage\DoctrineConditionTranslator;
+use libraries\storage\EqualityCondition;
 use application\discovery\module\career\implementation\bamaflex\Course;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use libraries\StaticColumnConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\StaticColumnConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {

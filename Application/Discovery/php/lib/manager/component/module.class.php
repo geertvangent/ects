@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery;
 
-use libraries\Theme;
-use libraries\Translation;
-use libraries\ToolbarItem;
-use libraries\BreadcrumbTrail;
+use libraries\format\Theme;
+use libraries\platform\Translation;
+use libraries\format\ToolbarItem;
+use libraries\format\BreadcrumbTrail;
 use application\discovery\instance\Instance;
 
 class ModuleComponent extends Manager
@@ -34,6 +34,6 @@ class ModuleComponent extends Manager
                 Theme :: get_image_path() . 'action_information.png', 
                 $link));
         
-        \libraries\Application :: launch(\application\discovery\instance\Manager :: context(), $this->get_user(), $this);
+        \libraries\architecture\Application :: launch(\application\discovery\instance\Manager :: context(), $this->get_user(), $this);
     }
 }
