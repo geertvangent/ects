@@ -9,7 +9,7 @@ use Doctrine\Common\ClassLoader;
 
 /**
  * This class represents the current CAS Account database connection.
- * 
+ *
  * @author Hans De Bisschop
  */
 class DoctrineConnection extends \libraries\storage\DoctrineConnection
@@ -28,14 +28,14 @@ class DoctrineConnection extends \libraries\storage\DoctrineConnection
 
     /**
      * Use $config = Configuration :: get_instance(); to retrieve DB settings
-     * 
+     *
      * @param $connection Doctrine\DBAL\Connection
      */
     private function __construct($connection = null)
     {
         $classLoader = new ClassLoader('Doctrine', Path :: get_plugin_path());
         $classLoader->register();
-        
+
         if (is_null($connection))
         {
             $cas_dbms = PlatformSetting :: get('dbms', \application\ehb_sync\cas\data\Manager :: context());
@@ -43,22 +43,22 @@ class DoctrineConnection extends \libraries\storage\DoctrineConnection
             $cas_password = PlatformSetting :: get('password', \application\ehb_sync\cas\data\Manager :: context());
             $cas_host = PlatformSetting :: get('host', \application\ehb_sync\cas\data\Manager :: context());
             $cas_database = PlatformSetting :: get('database', \application\ehb_sync\cas\data\Manager :: context());
-            
+
             $data_source_name = DataSourceName :: factory(
-                'doctrine', 
-                $cas_dbms, 
-                $cas_user, 
-                $cas_host, 
-                $cas_database, 
+                'doctrine',
+                $cas_dbms,
+                $cas_user,
+                $cas_host,
+                $cas_database,
                 $cas_password);
-            
+
             $configuration = new \Doctrine\DBAL\Configuration();
             $connection_parameters = array(
-                'dbname' => $data_source_name->get_database(), 
-                'user' => $data_source_name->get_username(), 
-                'password' => $data_source_name->get_password(), 
-                'host' => $data_source_name->get_host(), 
-                'driver' => $data_source_name->get_driver(true));
+                'dbname' => $data_source_name->get_database(),
+                'user' => $data_source_name->get_username(),
+                'password' => $data_source_name->get_password(),
+                'host' => $data_source_name->get_host(),
+                'driverClass' => $data_source_name->get_driver(true));
             $this->connection = DriverManager :: getConnection($connection_parameters, $configuration);
         }
         else
@@ -69,7 +69,7 @@ class DoctrineConnection extends \libraries\storage\DoctrineConnection
 
     /**
      * Returns the instance of this class.
-     * 
+     *
      * @return Connection The instance.
      */
     public static function get_instance()
@@ -88,7 +88,7 @@ class DoctrineConnection extends \libraries\storage\DoctrineConnection
 
     /**
      * Gets the database connection.
-     * 
+     *
      * @return Doctrine\DBAL\Connection
      */
     public function get_connection()
