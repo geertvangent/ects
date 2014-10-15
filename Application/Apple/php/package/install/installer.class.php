@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_apple;
 
-use libraries\WebApplicationInstaller;
+use libraries\architecture\WebApplicationInstaller;
 
 /**
  *
