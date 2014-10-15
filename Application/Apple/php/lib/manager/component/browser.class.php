@@ -1,8 +1,8 @@
 <?php
 namespace application\ehb_apple;
 
-use libraries\Display;
-use libraries\DelegateComponent;
+use libraries\format\Display;
+use libraries\architecture\DelegateComponent;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {
