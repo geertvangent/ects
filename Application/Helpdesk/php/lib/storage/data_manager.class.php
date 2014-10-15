@@ -5,7 +5,7 @@ namespace application\ehb_helpdesk;
  *
  * @author Hans De Bisschop
  */
-class DataManager extends \libraries\DataManager
+class DataManager extends \libraries\storage\DataManager
 {
 const PREFIX = 'ehb_helpdesk_';
     /**

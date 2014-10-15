@@ -1,20 +1,20 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use libraries\AndCondition;
-use libraries\NotCondition;
+use libraries\storage\AndCondition;
+use libraries\storage\NotCondition;
 
-use libraries\PatternMatchCondition;
-use libraries\FormValidator;
-use libraries\Utilities;
-use libraries\Translation;
-use libraries\PropertyConditionVariable;
-use libraries\DataClassRetrievesParameters;
-use libraries\PlatformSetting;
-use libraries\InequalityCondition;
-use libraries\StaticConditionVariable;
+use libraries\storage\PatternMatchCondition;
+use libraries\format\FormValidator;
+use libraries\utilities\Utilities;
+use libraries\platform\Translation;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\platform\PlatformSetting;
+use libraries\storage\InequalityCondition;
+use libraries\storage\StaticConditionVariable;
 use core\group\Group;
-use libraries\OrderBy;
+use libraries\storage\OrderBy;
 
 class TicketForm extends FormValidator
 {

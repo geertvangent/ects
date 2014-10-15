@@ -1,10 +1,10 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use libraries\StringUtilities;
+use libraries\utilities\StringUtilities;
 use HTTP_Request;
 
-class RestClient extends \libraries\RestClient
+class RestClient extends \libraries\protocol\RestClient
 {
 
     private $server_url;

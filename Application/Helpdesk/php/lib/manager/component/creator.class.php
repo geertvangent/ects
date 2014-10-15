@@ -1,10 +1,10 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use libraries\Translation;
-use libraries\FileProperties;
-use libraries\PlatformSetting;
-use libraries\Path;
+use libraries\platform\Translation;
+use libraries\file\FileProperties;
+use libraries\platform\PlatformSetting;
+use libraries\file\Path;
 use HTTP_Request2;
 
 require_once Path :: get_plugin_path() . 'pear/HTTP/Request2.php';

@@ -3,7 +3,7 @@ namespace application\ehb_helpdesk;
 
 use SimpleXMLElement;
 
-class RestResult extends \libraries\RestResult
+class RestResult extends \libraries\protocol\RestResult
 {
 
     private $response_content_xml;
