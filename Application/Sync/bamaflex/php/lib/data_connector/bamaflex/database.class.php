@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\bamaflex;
 
-use libraries\DoctrineDatabase;
+use libraries\storage\DoctrineDatabase;
 
 class BamaflexDatabase extends DoctrineDatabase
 {
