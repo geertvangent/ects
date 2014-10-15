@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+	<package>
+		<name>Atlantis</name>
+		<code>atlantis</code>
+		<context>application\atlantis</context>
+		<section>application</section>
+		<category>research</category>
+		<authors></authors>
+		<version>4.0.0</version>
+		<cycle>
+			<phase>general_availability</phase>
+			<realm>main</realm>
+		</cycle>
+		<filename>pool/main/application/a/atlantis/atlantis-1.0.0.zip
+		</filename>
+		<size></size>
+		<md5></md5>
+		<sha1></sha1>
+		<sha256></sha256>
+		<sha512></sha512>
+		<tagline></tagline>
+		<description>
+			Atlantis is a legendary island first mentioned in Plato's
+			dialogues Timaeus and Critias, written about 360 BC.
+		</description>
+		<homepage></homepage>
+		<pre-depends>
+			<dependency type="registration">
+				<id>configuration</id>
+				<version operator="4">4.0.0</version>
+			</dependency>
+		</pre-depends>
+	</package>
+</packages>
