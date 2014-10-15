@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
-use libraries\ToolbarItem;
-use libraries\Theme;
+use libraries\format\ToolbarItem;
+use libraries\format\Theme;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
-use libraries\Translation;
-use libraries\Breadcrumb;
-use libraries\BreadcrumbTrail;
+use libraries\platform\Translation;
+use libraries\format\Breadcrumb;
+use libraries\format\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

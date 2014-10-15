@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\data_source;
 
-use libraries\Application;
+use libraries\architecture\Application;
 
 class Manager extends Application
 {

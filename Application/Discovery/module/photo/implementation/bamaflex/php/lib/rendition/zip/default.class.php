@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\Translation;
-use libraries\Filesystem;
+use libraries\platform\Translation;
+use libraries\file\Filesystem;
 use application\discovery\module\photo\DataManager;
-use libraries\DataClassRetrievesParameters;
-use libraries\Path;
-use libraries\Session;
-use libraries\Display;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\file\Path;
+use libraries\platform\Session;
+use libraries\format\Display;
 
 class ZipDefaultRenditionImplementation extends RenditionImplementation
 {

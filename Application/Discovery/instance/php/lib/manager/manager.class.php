@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\Application;
+use libraries\architecture\Application;
 
 class Manager extends Application
 {

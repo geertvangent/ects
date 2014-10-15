@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery\module\student_year\implementation\bamaflex;
 
-use libraries\DoctrineConditionTranslator;
+use libraries\storage\DoctrineConditionTranslator;
 use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\EqualityCondition;
-use libraries\StaticColumnConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\EqualityCondition;
+use libraries\storage\StaticColumnConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {

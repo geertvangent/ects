@@ -1,12 +1,12 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\DataClass;
-use libraries\EqualityCondition;
-use libraries\DataClassRetrievesParameters;
-use libraries\DataClassCountParameters;
-use libraries\StaticConditionVariable;
-use libraries\PropertyConditionVariable;
+use libraries\storage\DataClass;
+use libraries\storage\EqualityCondition;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\storage\DataClassCountParameters;
+use libraries\storage\StaticConditionVariable;
+use libraries\storage\PropertyConditionVariable;
 
 /**
  *

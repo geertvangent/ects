@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
 
-use libraries\StringUtilities;
-use libraries\Translation;
-use libraries\Display;
+use libraries\utilities\StringUtilities;
+use libraries\platform\Translation;
+use libraries\format\Display;
 use PHPExcel;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation

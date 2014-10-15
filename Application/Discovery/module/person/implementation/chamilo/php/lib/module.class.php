@@ -1,16 +1,16 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\AndCondition;
-use libraries\Utilities;
+use libraries\storage\AndCondition;
+use libraries\utilities\Utilities;
 use application\discovery\Parameters;
-use libraries\OrCondition;
-use libraries\PatternMatchCondition;
-use libraries\EqualityCondition;
-use libraries\Request;
-use libraries\DataClassRetrieveParameters;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\OrCondition;
+use libraries\storage\PatternMatchCondition;
+use libraries\storage\EqualityCondition;
+use libraries\platform\Request;
+use libraries\storage\DataClassRetrieveParameters;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class Module extends \application\discovery\module\person\Module
 {

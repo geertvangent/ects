@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\career\implementation\bamaflex;
 
-use libraries\StringUtilities;
-use libraries\Translation;
-use libraries\Display;
+use libraries\utilities\StringUtilities;
+use libraries\platform\Translation;
+use libraries\format\Display;
 use application\discovery\module\enrollment\DataManager;
 use PHPExcel;
 

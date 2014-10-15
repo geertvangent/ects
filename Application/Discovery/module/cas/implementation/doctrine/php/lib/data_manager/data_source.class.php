@@ -2,7 +2,7 @@
 namespace application\discovery\module\cas\implementation\doctrine;
 
 use application\discovery\module\cas\Parameters;
-use libraries\DoctrineConditionTranslator;
+use libraries\storage\DoctrineConditionTranslator;
 
 class DataSource extends \application\discovery\data_source\doctrine\DataSource
 {

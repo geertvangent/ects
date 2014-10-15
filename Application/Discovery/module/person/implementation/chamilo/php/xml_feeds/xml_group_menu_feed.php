@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\DataClassRetrievesParameters;
-use libraries\Request;
-use libraries\EqualityCondition;
-use libraries\Authentication;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
-use libraries\OrderBy;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\platform\Request;
+use libraries\storage\EqualityCondition;
+use libraries\authentication\Authentication;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
+use libraries\storage\OrderBy;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $

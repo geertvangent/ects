@@ -3,13 +3,13 @@ namespace application\discovery\module\profile\implementation\chamilo;
 
 use core\user\UserSetting;
 use core\user\User;
-use libraries\PlatformSetting;
+use libraries\platform\PlatformSetting;
 use application\discovery\module\profile\Photo;
 use application\discovery\module\profile\Communication;
 use application\discovery\module\profile\Email;
 use application\discovery\module\profile\IdentificationCode;
 use application\discovery\module\profile\Name;
-use libraries\FileType;
+use libraries\file\FileType;
 
 class DataSource
 {

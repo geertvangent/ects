@@ -1,20 +1,20 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\DynamicVisualTab;
-use libraries\DynamicVisualTabsRenderer;
-use libraries\Request;
-use libraries\EqualityCondition;
-use libraries\Translation;
-use libraries\ActionBarRenderer;
-use libraries\ActionBarSearchForm;
-use libraries\ToolbarItem;
-use libraries\Theme;
-use libraries\AndCondition;
-use libraries\PatternMatchCondition;
-use libraries\StaticConditionVariable;
-use libraries\PropertyConditionVariable;
-use libraries\TableSupport;
+use libraries\format\DynamicVisualTab;
+use libraries\format\DynamicVisualTabsRenderer;
+use libraries\platform\Request;
+use libraries\storage\EqualityCondition;
+use libraries\platform\Translation;
+use libraries\format\ActionBarRenderer;
+use libraries\format\ActionBarSearchForm;
+use libraries\format\ToolbarItem;
+use libraries\format\Theme;
+use libraries\storage\AndCondition;
+use libraries\storage\PatternMatchCondition;
+use libraries\storage\StaticConditionVariable;
+use libraries\storage\PropertyConditionVariable;
+use libraries\format\TableSupport;
 
 class BrowserComponent extends Manager implements TableSupport
 {

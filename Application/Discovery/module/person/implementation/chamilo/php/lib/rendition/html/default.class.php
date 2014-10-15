@@ -1,29 +1,29 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\BreadcrumbTrail;
-use libraries\Breadcrumb;
-use libraries\TableSupport;
-use libraries\Display;
-use libraries\DynamicContentTab;
-use libraries\ActionBarSearchForm;
-use libraries\DynamicTabsRenderer;
-use libraries\Theme;
-use libraries\Utilities;
-use libraries\Translation;
-use libraries\ToolbarItem;
-use libraries\ActionBarRenderer;
-use libraries\DataClassCountParameters;
-use libraries\EqualityCondition;
+use libraries\format\BreadcrumbTrail;
+use libraries\format\Breadcrumb;
+use libraries\format\TableSupport;
+use libraries\format\Display;
+use libraries\format\DynamicContentTab;
+use libraries\format\ActionBarSearchForm;
+use libraries\format\DynamicTabsRenderer;
+use libraries\format\Theme;
+use libraries\utilities\Utilities;
+use libraries\platform\Translation;
+use libraries\format\ToolbarItem;
+use libraries\format\ActionBarRenderer;
+use libraries\storage\DataClassCountParameters;
+use libraries\storage\EqualityCondition;
 use application\discovery\RightsGroupEntityRight;
-use libraries\Session;
-use libraries\AndCondition;
-use libraries\InCondition;
-use libraries\OrCondition;
-use libraries\DataClassDistinctParameters;
-use libraries\DataClassRetrieveParameters;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\platform\Session;
+use libraries\storage\AndCondition;
+use libraries\storage\InCondition;
+use libraries\storage\OrCondition;
+use libraries\storage\DataClassDistinctParameters;
+use libraries\storage\DataClassRetrieveParameters;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements TableSupport
 {
@@ -361,7 +361,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         return $this->allowed_groups;
     }
 	/* (non-PHPdoc)
-     * @see \libraries\TableSupport::get_table_condition()
+     * @see \libraries\format\TableSupport::get_table_condition()
      */
     public function get_table_condition($table_class_name)
     {

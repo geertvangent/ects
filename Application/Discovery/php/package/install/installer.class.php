@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use libraries\WebApplicationInstaller;
+use libraries\architecture\WebApplicationInstaller;
 
 /**
  *

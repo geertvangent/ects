@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\GalleryTableCellRenderer;
+use libraries\format\GalleryTableCellRenderer;
 
 abstract class DefaultGalleryTableCellRenderer extends GalleryTableCellRenderer
 {

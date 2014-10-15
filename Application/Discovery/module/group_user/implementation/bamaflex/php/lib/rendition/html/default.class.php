@@ -1,16 +1,16 @@
 <?php
 namespace application\discovery\module\group_user\implementation\bamaflex;
 
-use libraries\Theme;
-use libraries\DynamicContentTab;
-use libraries\DynamicTabsRenderer;
-use libraries\Toolbar;
-use libraries\PropertiesTable;
-use libraries\Breadcrumb;
-use libraries\BreadcrumbTrail;
+use libraries\format\Theme;
+use libraries\format\DynamicContentTab;
+use libraries\format\DynamicTabsRenderer;
+use libraries\format\Toolbar;
+use libraries\format\PropertiesTable;
+use libraries\format\Breadcrumb;
+use libraries\format\BreadcrumbTrail;
 use application\discovery\SortableTable;
-use libraries\Translation;
-use libraries\Display;
+use libraries\platform\Translation;
+use libraries\format\Display;
 use application\discovery\module\group_user\DataManager;
 use application\discovery\module\group\implementation\bamaflex\Group;
 

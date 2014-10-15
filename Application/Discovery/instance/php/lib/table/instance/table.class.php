@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\DataClassTable;
+use libraries\format\DataClassTable;
 
 class InstanceTable extends DataClassTable
 {

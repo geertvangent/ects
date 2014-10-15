@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\GalleryTablePropertyModel;
-use libraries\GalleryTableProperty;
+use libraries\format\GalleryTablePropertyModel;
+use libraries\format\GalleryTableProperty;
 
 class DefaultGalleryTablePropertyModel extends GalleryTablePropertyModel
 {

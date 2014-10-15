@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery;
 
-use libraries\Translation;
-use libraries\SortableTableFromArray;
+use libraries\platform\Translation;
+use libraries\format\SortableTableFromArray;
 use HTML_Table;
 
 class SortableTable extends SortableTableFromArray

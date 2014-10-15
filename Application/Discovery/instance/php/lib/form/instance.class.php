@@ -1,19 +1,19 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\EqualityCondition;
-use libraries\Filesystem;
-use libraries\FormValidator;
-use libraries\Translation;
-use libraries\Utilities;
-use libraries\Theme;
-use libraries\Path;
-use libraries\DynamicFormTabsRenderer;
-use libraries\DynamicFormTab;
+use libraries\storage\EqualityCondition;
+use libraries\file\Filesystem;
+use libraries\format\FormValidator;
+use libraries\platform\Translation;
+use libraries\utilities\Utilities;
+use libraries\format\Theme;
+use libraries\file\Path;
+use libraries\format\DynamicFormTabsRenderer;
+use libraries\format\DynamicFormTab;
 use DOMDocument;
-use libraries\DataClassCountParameters;
-use libraries\StaticConditionVariable;
-use libraries\PropertyConditionVariable;
+use libraries\storage\DataClassCountParameters;
+use libraries\storage\StaticConditionVariable;
+use libraries\storage\PropertyConditionVariable;
 
 class InstanceForm extends FormValidator
 {

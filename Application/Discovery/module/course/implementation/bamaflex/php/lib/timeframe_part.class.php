@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\course\implementation\bamaflex;
 
-use libraries\DatetimeUtilities;
+use libraries\utilities\DatetimeUtilities;
 use application\discovery\DiscoveryItem;
 
 class TimeframePart extends DiscoveryItem

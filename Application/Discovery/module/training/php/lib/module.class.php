@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\training;
 
-use libraries\Filesystem;
-use libraries\Request;
-use libraries\Path;
+use libraries\file\Filesystem;
+use libraries\platform\Request;
+use libraries\file\Path;
 use application\discovery\instance\Instance;
 
 class Module extends \application\discovery\Module

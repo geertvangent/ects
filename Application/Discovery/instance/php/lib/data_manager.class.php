@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\EqualityCondition;
-use libraries\AndCondition;
-use libraries\DataClassRetrieveParameters;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\EqualityCondition;
+use libraries\storage\AndCondition;
+use libraries\storage\DataClassRetrieveParameters;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
-class DataManager extends \libraries\DataManager
+class DataManager extends \libraries\storage\DataManager
 {
     const PREFIX = 'discovery_module_';
 

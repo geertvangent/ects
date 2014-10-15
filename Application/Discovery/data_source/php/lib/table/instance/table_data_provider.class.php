@@ -1,15 +1,15 @@
 <?php
 namespace application\discovery\data_source;
 
-use libraries\DataClassRetrievesParameters;
-use libraries\DataClassCountParameters;
-use libraries\DataClassTableDataProvider;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\storage\DataClassCountParameters;
+use libraries\format\DataClassTableDataProvider;
 
 class InstanceTableDataProvider extends DataClassTableDataProvider
 {
 
     /*
-     * (non-PHPdoc) @see \libraries\TableDataProvider::retrieve_data()
+     * (non-PHPdoc) @see \libraries\format\TableDataProvider::retrieve_data()
      */
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
@@ -19,7 +19,7 @@ class InstanceTableDataProvider extends DataClassTableDataProvider
     }
 
     /*
-     * (non-PHPdoc) @see \libraries\TableDataProvider::count_data()
+     * (non-PHPdoc) @see \libraries\format\TableDataProvider::count_data()
      */
     public function count_data($condition)
     {

@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\advice;
 
-use libraries\Filesystem;
-use libraries\Request;
-use libraries\Path;
-use libraries\Application;
+use libraries\file\Filesystem;
+use libraries\platform\Request;
+use libraries\file\Path;
+use libraries\architecture\Application;
 use application\discovery\instance\Instance;
 use application\discovery\module\profile\DataManager;
 

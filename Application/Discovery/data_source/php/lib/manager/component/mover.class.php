@@ -1,15 +1,15 @@
 <?php
 namespace application\discovery\data_source;
 
-use libraries\AndCondition;
-use libraries\Request;
-use libraries\Utilities;
-use libraries\Translation;
-use libraries\EqualityCondition;
-use libraries\DataClassCountParameters;
-use libraries\DataClassRetrieveParameters;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\AndCondition;
+use libraries\platform\Request;
+use libraries\utilities\Utilities;
+use libraries\platform\Translation;
+use libraries\storage\EqualityCondition;
+use libraries\storage\DataClassCountParameters;
+use libraries\storage\DataClassRetrieveParameters;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class MoverComponent extends Manager
 {

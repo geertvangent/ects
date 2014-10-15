@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\data_source;
 
-use libraries\Translation;
-use libraries\Utilities;
-use libraries\ToolbarItem;
-use libraries\Toolbar;
-use libraries\Theme;
-use libraries\TableCellRendererActionsColumnSupport;
-use libraries\DataClassTableCellRenderer;
+use libraries\platform\Translation;
+use libraries\utilities\Utilities;
+use libraries\format\ToolbarItem;
+use libraries\format\Toolbar;
+use libraries\format\Theme;
+use libraries\format\TableCellRendererActionsColumnSupport;
+use libraries\format\DataClassTableCellRenderer;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

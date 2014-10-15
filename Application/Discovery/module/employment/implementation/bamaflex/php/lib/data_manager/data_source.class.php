@@ -2,11 +2,11 @@
 namespace application\discovery\module\employment\implementation\bamaflex;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\DoctrineConditionTranslator;
-use libraries\AndCondition;
-use libraries\EqualityCondition;
-use libraries\StaticColumnConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\DoctrineConditionTranslator;
+use libraries\storage\AndCondition;
+use libraries\storage\EqualityCondition;
+use libraries\storage\StaticColumnConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {

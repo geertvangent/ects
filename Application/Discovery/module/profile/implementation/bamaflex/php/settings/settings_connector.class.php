@@ -1,12 +1,12 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use libraries\Translation;
-use libraries\EqualityCondition;
-use libraries\DataClassRetrievesParameters;
-use libraries\OrderBy;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\platform\Translation;
+use libraries\storage\EqualityCondition;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\storage\OrderBy;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class SettingsConnector
 {

@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\faculty_info;
 
-use libraries\Request;
-use libraries\Filesystem;
-use libraries\Path;
+use libraries\platform\Request;
+use libraries\file\Filesystem;
+use libraries\file\Path;
 use application\discovery\instance\Instance;
 
 abstract class Module extends \application\discovery\Module

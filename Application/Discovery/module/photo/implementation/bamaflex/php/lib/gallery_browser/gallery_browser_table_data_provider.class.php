@@ -1,14 +1,14 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\DataClassCountParameters;
-use libraries\DataClassRetrievesParameters;
-use libraries\GalleryTableDataProvider;
+use libraries\storage\DataClassCountParameters;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\format\GalleryTableDataProvider;
 
 class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
 {
     /*
-     * (non-PHPdoc) @see \libraries\TableDataProvider::retrieve_data()
+     * (non-PHPdoc) @see \libraries\format\TableDataProvider::retrieve_data()
      */
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
@@ -18,7 +18,7 @@ class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
     }
 
     /*
-     * (non-PHPdoc) @see \libraries\TableDataProvider::count_data()
+     * (non-PHPdoc) @see \libraries\format\TableDataProvider::count_data()
      */
     public function count_data($condition)
     {

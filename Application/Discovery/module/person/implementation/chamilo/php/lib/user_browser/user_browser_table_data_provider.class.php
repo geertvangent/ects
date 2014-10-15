@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\DataClassRetrievesParameters;
-use libraries\TableDataProvider;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\format\TableDataProvider;
 
 /**
  * $Id: user_browser_table_data_provider.class.php 211 2009-11-13 13:28:39Z vanpouckesven $

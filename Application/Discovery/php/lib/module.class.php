@@ -1,18 +1,18 @@
 <?php
 namespace application\discovery;
 
-use libraries\Theme;
-use libraries\Translation;
-use libraries\ToolbarItem;
-use libraries\Path;
-use libraries\Filesystem;
-use libraries\NotCondition;
-use libraries\EqualityCondition;
-use libraries\AndCondition;
-use libraries\Application;
-use libraries\DataClassRetrievesParameters;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\format\Theme;
+use libraries\platform\Translation;
+use libraries\format\ToolbarItem;
+use libraries\file\Path;
+use libraries\file\Filesystem;
+use libraries\storage\NotCondition;
+use libraries\storage\EqualityCondition;
+use libraries\storage\AndCondition;
+use libraries\architecture\Application;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 /**
  *
@@ -174,7 +174,7 @@ class Module
      * 
      * @param $type string
      * @param $user user\User
-     * @return \libraries\ToolbarItem NULL
+     * @return \libraries\format\ToolbarItem NULL
      */
     public function get_module_link($type, $user_id, $check_data = true)
     {

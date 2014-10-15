@@ -1,15 +1,15 @@
 <?php
 namespace application\discovery;
 
-use libraries\AndCondition;
-use libraries\EqualityCondition;
-use libraries\InCondition;
-use libraries\OrCondition;
-use libraries\Session;
+use libraries\storage\AndCondition;
+use libraries\storage\EqualityCondition;
+use libraries\storage\InCondition;
+use libraries\storage\OrCondition;
+use libraries\platform\Session;
 use Exception;
-use libraries\DataClassCountParameters;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\DataClassCountParameters;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
 use core\rights\UserEntity;
 use core\rights\PlatformGroupEntity;
 

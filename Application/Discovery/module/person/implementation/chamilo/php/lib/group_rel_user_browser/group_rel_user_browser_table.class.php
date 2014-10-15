@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\Utilities;
-use libraries\Table;
+use libraries\utilities\Utilities;
+use libraries\format\Table;
 
 class GroupRelUserBrowserTable extends Table
 {

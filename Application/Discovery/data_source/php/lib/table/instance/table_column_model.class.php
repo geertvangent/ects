@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\data_source;
 
-use libraries\TableColumnModelActionsColumnSupport;
-use libraries\DataClassPropertyTableColumn;
-use libraries\DataClassTableColumnModel;
+use libraries\format\TableColumnModelActionsColumnSupport;
+use libraries\format\DataClassPropertyTableColumn;
+use libraries\format\DataClassTableColumnModel;
 
 class InstanceTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

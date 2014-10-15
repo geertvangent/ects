@@ -1,11 +1,11 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\FormValidator;
-use libraries\Translation;
-use libraries\Path;
-use libraries\Utilities;
-use libraries\ResourceManager;
+use libraries\format\FormValidator;
+use libraries\platform\Translation;
+use libraries\file\Path;
+use libraries\utilities\Utilities;
+use libraries\format\ResourceManager;
 
 class FilterForm extends FormValidator
 {

@@ -1,13 +1,13 @@
 <?php
 namespace application\discovery\data_source;
 
-use libraries\EqualityCondition;
-use libraries\AndCondition;
-use libraries\DataClassRetrieveParameters;
-use libraries\StaticConditionVariable;
-use libraries\PropertyConditionVariable;
+use libraries\storage\EqualityCondition;
+use libraries\storage\AndCondition;
+use libraries\storage\DataClassRetrieveParameters;
+use libraries\storage\StaticConditionVariable;
+use libraries\storage\PropertyConditionVariable;
 
-class DataManager extends \libraries\DataManager
+class DataManager extends \libraries\storage\DataManager
 {
     const PREFIX = 'discovery_data_source_';
 

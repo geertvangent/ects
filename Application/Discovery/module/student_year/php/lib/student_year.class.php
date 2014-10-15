@@ -2,7 +2,7 @@
 namespace application\discovery\module\student_year;
 
 use application\discovery\DiscoveryItem;
-use libraries\Utilities;
+use libraries\utilities\Utilities;
 
 /**
  * application.discovery.module.student_year.implementation.bamaflex

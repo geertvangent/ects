@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\Toolbar;
-use libraries\TableColumnModelActionsColumnSupport;
-use libraries\TableCellRenderer;
+use libraries\format\Toolbar;
+use libraries\format\TableColumnModelActionsColumnSupport;
+use libraries\format\TableCellRenderer;
 
 /**
  * $Id: user_browser_table_cell_renderer.class.php 211 2009-11-13 13:28:39Z vanpouckesven $
@@ -33,7 +33,7 @@ class UserBrowserTableCellRenderer extends TableCellRenderer implements TableCol
         return $toolbar->as_html();
     }
     /*
-     * (non-PHPdoc) @see \libraries\TableCellRenderer::render_id_cell()
+     * (non-PHPdoc) @see \libraries\format\TableCellRenderer::render_id_cell()
      */
     public function render_id_cell($result)
     {

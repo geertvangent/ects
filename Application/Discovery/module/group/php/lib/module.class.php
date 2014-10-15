@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\group;
 
-use libraries\Filesystem;
-use libraries\Request;
-use libraries\Path;
+use libraries\file\Filesystem;
+use libraries\platform\Request;
+use libraries\file\Path;
 use application\discovery\instance\Instance;
 use application\discovery\module\profile\DataManager;
 

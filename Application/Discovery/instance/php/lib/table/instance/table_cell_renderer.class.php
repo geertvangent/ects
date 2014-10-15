@@ -1,18 +1,18 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\EqualityCondition;
-use libraries\Translation;
-use libraries\Utilities;
-use libraries\ToolbarItem;
-use libraries\Toolbar;
-use libraries\Theme;
-use libraries\DataClassCountParameters;
-use libraries\StaticConditionVariable;
-use libraries\PropertyConditionVariable;
-use libraries\TableCellRendererActionsColumnSupport;
-use libraries\DataClassTableCellRenderer;
-use libraries\DisplayOrderPropertyTableColumn;
+use libraries\storage\EqualityCondition;
+use libraries\platform\Translation;
+use libraries\utilities\Utilities;
+use libraries\format\ToolbarItem;
+use libraries\format\Toolbar;
+use libraries\format\Theme;
+use libraries\storage\DataClassCountParameters;
+use libraries\storage\StaticConditionVariable;
+use libraries\storage\PropertyConditionVariable;
+use libraries\format\TableCellRendererActionsColumnSupport;
+use libraries\format\DataClassTableCellRenderer;
+use libraries\format\DisplayOrderPropertyTableColumn;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

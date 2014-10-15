@@ -1,20 +1,20 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\AndCondition;
+use libraries\storage\AndCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\DoctrineConditionTranslator;
-use libraries\EqualityCondition;
-use libraries\ImageManipulation;
-use libraries\Theme;
-use libraries\Filesystem;
-use libraries\Text;
-use libraries\Path;
+use libraries\storage\DoctrineConditionTranslator;
+use libraries\storage\EqualityCondition;
+use libraries\file\ImageManipulation;
+use libraries\format\Theme;
+use libraries\file\Filesystem;
+use libraries\utilities\Text;
+use libraries\file\Path;
 use application\discovery\module\course\implementation\bamaflex\Course;
 use application\discovery\module\training\implementation\bamaflex\Training;
 use application\discovery\module\faculty\implementation\bamaflex\Faculty;
-use libraries\StaticColumnConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\StaticColumnConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {

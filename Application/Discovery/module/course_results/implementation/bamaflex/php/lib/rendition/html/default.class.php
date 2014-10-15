@@ -2,13 +2,13 @@
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use application\discovery\LegendTable;
-use libraries\Theme;
+use libraries\format\Theme;
 use application\discovery\SortableTable;
-use libraries\PropertiesTable;
-use libraries\Breadcrumb;
-use libraries\BreadcrumbTrail;
-use libraries\Translation;
-use libraries\Display;
+use libraries\format\PropertiesTable;
+use libraries\format\Breadcrumb;
+use libraries\format\BreadcrumbTrail;
+use libraries\platform\Translation;
+use libraries\format\Display;
 use application\discovery\module\course_results\DataManager;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation

@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use libraries\DataClass;
+use libraries\storage\DataClass;
 
 /**
  *

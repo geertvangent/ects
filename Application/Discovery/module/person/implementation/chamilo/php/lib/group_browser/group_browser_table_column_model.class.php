@@ -2,8 +2,8 @@
 namespace application\discovery\module\person\implementation\chamilo;
 
 use core\group\GroupRelUserTableColumnModel;
-use libraries\Translation;
-use libraries\StaticTableColumn;
+use libraries\platform\Translation;
+use libraries\format\StaticTableColumn;
 
 class GroupBrowserTableColumnModel extends GroupRelUserTableColumnModel
 {

@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\TableDataProvider;
-use libraries\DataClassRetrievesParameters;
-use libraries\DataClassCountParameters;
+use libraries\format\TableDataProvider;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\storage\DataClassCountParameters;
 
 /**
  * $Id: group_browser_table_data_provider.class.php 224 2009-11-13 14:40:30Z kariboe $

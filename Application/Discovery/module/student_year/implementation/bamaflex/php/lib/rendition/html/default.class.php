@@ -2,10 +2,10 @@
 namespace application\discovery\module\student_year\implementation\bamaflex;
 
 use application\discovery\SortableTable;
-use libraries\Translation;
-use libraries\Display;
-use libraries\Breadcrumb;
-use libraries\BreadcrumbTrail;
+use libraries\platform\Translation;
+use libraries\format\Display;
+use libraries\format\Breadcrumb;
+use libraries\format\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

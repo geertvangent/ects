@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\TableColumnModelActionsColumnSupport;
-use libraries\DataClassPropertyTableColumn;
-use libraries\DataClassTableColumnModel;
-use libraries\DisplayOrderPropertyTableColumn;
+use libraries\format\TableColumnModelActionsColumnSupport;
+use libraries\format\DataClassPropertyTableColumn;
+use libraries\format\DataClassTableColumnModel;
+use libraries\format\DisplayOrderPropertyTableColumn;
 
 class InstanceTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

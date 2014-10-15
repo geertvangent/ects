@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
-use libraries\Request;
+use libraries\platform\Request;
 
 class Module extends \application\discovery\module\course_results\Module
 {

@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\Theme;
-use libraries\Translation;
-use libraries\NotAllowedException;
-use libraries\Utilities;
+use libraries\format\Theme;
+use libraries\platform\Translation;
+use libraries\architecture\NotAllowedException;
+use libraries\utilities\Utilities;
 use application\discovery\SortableTable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation

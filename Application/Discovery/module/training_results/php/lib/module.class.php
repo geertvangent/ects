@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\training_results;
 
-use libraries\Path;
-use libraries\Filesystem;
-use libraries\Request;
+use libraries\file\Path;
+use libraries\file\Filesystem;
+use libraries\platform\Request;
 use application\discovery\instance\Instance;
 use application\discovery\module\training_results\DataManager;
 

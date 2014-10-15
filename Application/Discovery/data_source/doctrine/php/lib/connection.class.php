@@ -3,9 +3,9 @@ namespace application\discovery\data_source\doctrine;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Common\ClassLoader;
-use libraries\DataSourceName;
-use libraries\DoctrineConnection;
-use libraries\Path;
+use libraries\storage\DataSourceName;
+use libraries\storage\DoctrineConnection;
+use libraries\file\Path;
 
 class Connection extends DoctrineConnection
 {

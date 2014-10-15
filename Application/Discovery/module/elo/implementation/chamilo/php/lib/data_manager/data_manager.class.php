@@ -1,18 +1,18 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\DataClassProperties;
+use libraries\storage\DataClassProperties;
 
-use libraries\RecordRetrievesParameters;
-use libraries\FunctionConditionVariable;
-use libraries\PropertyConditionVariable;
-use libraries\StaticConditionVariable;
-use libraries\GroupBy;
-use libraries\AndCondition;
-use libraries\Condition;
-use libraries\OrderBy;
+use libraries\storage\RecordRetrievesParameters;
+use libraries\storage\FunctionConditionVariable;
+use libraries\storage\PropertyConditionVariable;
+use libraries\storage\StaticConditionVariable;
+use libraries\storage\GroupBy;
+use libraries\storage\AndCondition;
+use libraries\storage\Condition;
+use libraries\storage\OrderBy;
 
-class DataManager extends \libraries\DataManager
+class DataManager extends \libraries\storage\DataManager
 {
     const PREFIX = 'discovery_elo_';
     const COUNT = 'count';

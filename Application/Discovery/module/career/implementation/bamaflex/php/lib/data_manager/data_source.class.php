@@ -5,14 +5,14 @@ use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\career\MarkMoment;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use application\discovery\module\training\implementation\bamaflex\Training;
-use libraries\AndCondition;
-use libraries\DoctrineConditionTranslator;
-use libraries\EqualityCondition;
-use libraries\NotCondition;
+use libraries\storage\AndCondition;
+use libraries\storage\DoctrineConditionTranslator;
+use libraries\storage\EqualityCondition;
+use libraries\storage\NotCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\InCondition;
-use libraries\StaticColumnConditionVariable;
-use libraries\StaticConditionVariable;
+use libraries\storage\InCondition;
+use libraries\storage\StaticColumnConditionVariable;
+use libraries\storage\StaticConditionVariable;
 
 class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 {

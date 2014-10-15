@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\TableDataProvider;
-use libraries\DataClassRetrievesParameters;
-use libraries\DataClassCountParameters;
+use libraries\format\TableDataProvider;
+use libraries\storage\DataClassRetrievesParameters;
+use libraries\storage\DataClassCountParameters;
 
 /**
  * $Id: group_rel_user_browser_table_data_provider.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -29,7 +29,7 @@ class GroupRelUserBrowserTableDataProvider extends TableDataProvider
     }
 
     /*
-     * (non-PHPdoc) @see \libraries\TableDataProvider::retrieve_data()
+     * (non-PHPdoc) @see \libraries\format\TableDataProvider::retrieve_data()
      */
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
@@ -40,7 +40,7 @@ class GroupRelUserBrowserTableDataProvider extends TableDataProvider
     }
 
     /*
-     * (non-PHPdoc) @see \libraries\TableDataProvider::count_data()
+     * (non-PHPdoc) @see \libraries\format\TableDataProvider::count_data()
      */
     public function count_data($condition)
     {

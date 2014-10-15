@@ -2,9 +2,9 @@
 namespace application\discovery\module\person\implementation\chamilo;
 
 use application\discovery\module\person\Person;
-use libraries\TableColumn;
-use libraries\TableColumnModelActionsColumnSupport;
-use libraries\TableColumnModel;
+use libraries\format\TableColumn;
+use libraries\format\TableColumnModelActionsColumnSupport;
+use libraries\format\TableColumnModel;
 
 class UserBrowserTableColumnModel extends TableColumnModel implements TableColumnModelActionsColumnSupport
 {
