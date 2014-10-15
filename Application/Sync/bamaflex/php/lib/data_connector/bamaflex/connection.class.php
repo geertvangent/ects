@@ -46,7 +46,7 @@ class BamaflexConnection extends \libraries\DoctrineConnection
             'user' => $data_source_name->get_username(),
             'password' => $data_source_name->get_password(),
             'host' => $data_source_name->get_host(),
-            'driver' => $data_source_name->get_driver(true));
+            'driverClass' => $data_source_name->get_driver(true));
         $this->connection = DriverManager :: getConnection($connection_parameters, $configuration);
     }
 
