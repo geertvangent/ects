@@ -1,0 +1,87 @@
+<?php
+namespace application\discovery\module\student_year;
+
+use libraries\file\Path;
+use libraries\file\Filesystem;
+use libraries\platform\Request;
+use libraries\architecture\Application;
+use application\discovery\instance\Instance;
+use application\discovery\module\profile\DataManager;
+
+abstract class Module extends \application\discovery\Module
+{
+
+    /**
+     *
+     * @var multitype:\application\discovery\module\student_year\StudentYear
+     */
+    private $student_years;
+    const PARAM_USER_ID = 'user_id';
+
+    public function __construct(Application $application, Instance $module_instance)
+    {
+        parent :: __construct($application, $module_instance);
+    }
+
+    public function get_module_parameters()
+    {
+        $parameter = self :: module_parameters();
+        if (! $parameter->get_user_id())
+        {
+            $parameter->set_user_id($this->get_application()->get_user_id());
+        }
+        return $parameter;
+    }
+
+    /**
+     *
+     * @return multitype:\application\discovery\module\student_year\StudentYear
+     */
+    public function get_student_years()
+    {
+        if (! isset($this->student_years))
+        {
+            $this->student_years = DataManager :: get_instance($this->get_module_instance())->retrieve_student_years(
+                $this->get_module_parameters());
+        }
+        return $this->student_years;
+    }
+
+    public function has_data($parameters = null)
+    {
+        $parameters = $parameters ? $parameters : $this->get_module_parameters();
+        return $this->get_data_manager()->count_student_years($parameters);
+    }
+
+    public static function module_parameters()
+    {
+        $param_user = Request :: get(self :: PARAM_USER_ID);
+        $parameter = new Parameters();
+        if ($param_user)
+        {
+            $parameter->set_user_id($param_user);
+        }
+        return $parameter;
+    }
+
+    public static function get_available_implementations()
+    {
+        $types = array();
+        
+        $modules = Filesystem :: get_directory_content(
+            Path :: namespace_to_full_path(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
+            false);
+        foreach ($modules as $module)
+        {
+            $namespace = __NAMESPACE__ . '\implementation\\' . $module;
+            $types[] = $namespace;
+        }
+        return $types;
+    }
+
+    public function get_type()
+    {
+        return Instance :: TYPE_USER;
+    }
+}

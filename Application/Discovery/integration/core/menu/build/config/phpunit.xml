@@ -1,0 +1,13 @@
+<phpunit
+	bootstrap="../../../../../../../libraries/test/bootstrap.php">
+	<testsuites>
+		<testsuite name="Source">
+			<directory suffix="_test.class.php">../../test/source</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../../php</directory>
+		</whitelist>
+	</filter>
+</phpunit>

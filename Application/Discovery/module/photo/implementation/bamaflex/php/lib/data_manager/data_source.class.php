@@ -1,0 +1,214 @@
+<?php
+namespace application\discovery\module\photo\implementation\bamaflex;
+
+use libraries\storage\AndCondition;
+use Doctrine\DBAL\Driver\PDOStatement;
+use libraries\storage\DoctrineConditionTranslator;
+use libraries\storage\EqualityCondition;
+use libraries\file\ImageManipulation;
+use libraries\format\Theme;
+use libraries\file\Filesystem;
+use libraries\utilities\Text;
+use libraries\file\Path;
+use application\discovery\module\course\implementation\bamaflex\Course;
+use application\discovery\module\training\implementation\bamaflex\Training;
+use application\discovery\module\faculty\implementation\bamaflex\Faculty;
+use libraries\storage\StaticColumnConditionVariable;
+use libraries\storage\StaticConditionVariable;
+
+class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+{
+
+    public function retrieve_photo($id, $web = true)
+    {
+        $relative_path = 'photo/' . Text :: char_at($id, 0) . '/' . $id . '.jpg';
+        $path = Path :: get(SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' . $relative_path;
+        
+        if (! file_exists($path))
+        {
+            $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
+            
+            $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+            
+            $statement = $this->get_connection()->query($query);
+            
+            if ($statement instanceof PDOStatement)
+            {
+                $object = $statement->fetch(\PDO :: FETCH_OBJ);
+                
+                if (! empty($object->photo))
+                {
+                    Filesystem :: write_to_file($path, $object->photo);
+                    
+                    $image_manipulation = ImageManipulation :: factory($path);
+                    $image_manipulation->scale(600, 600, ImageManipulation :: SCALE_INSIDE);
+                    $image_manipulation->write_to_file($path);
+                }
+                else
+                {
+                    Filesystem :: copy_file(Theme :: get_common_image_system_path() . 'unknown.jpg', $path);
+                }
+            }
+            else
+            {
+                Filesystem :: copy_file(Theme :: get_common_image_system_path() . 'unknown.jpg', $path);
+            }
+        }
+        
+        return Path :: get($web ? WEB_FILE_PATH : SYS_FILE_PATH) . Path :: namespace_to_path(__NAMESPACE__) . '/' .
+             $relative_path;
+    }
+
+    public function retrieve_faculty($faculty_id)
+    {
+        $source = 1;
+        if ($faculty_id && $source)
+        {
+            if (! isset($this->faculties[$faculty_id][$source]))
+            {
+                $conditions = array();
+                $conditions[] = new EqualityCondition(
+                    new StaticColumnConditionVariable('id'), 
+                    new StaticConditionVariable($faculty_id));
+                $conditions[] = new EqualityCondition(
+                    new StaticColumnConditionVariable('source'), 
+                    new StaticConditionVariable($source));
+                $condition = new AndCondition($conditions);
+                
+                $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
+                     DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                
+                $statement = $this->get_connection()->query($query);
+                
+                if ($statement instanceof PDOStatement)
+                {
+                    $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                    
+                    $faculty = new Faculty();
+                    $faculty->set_source($result->source);
+                    $faculty->set_id($result->id);
+                    $faculty->set_name($this->convert_to_utf8($result->name));
+                    $faculty->set_year($this->convert_to_utf8($result->year));
+                    
+                    $this->faculties[$faculty_id][$source] = $faculty;
+                }
+            }
+            return $this->faculties[$faculty_id][$source];
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function retrieve_training($training_id)
+    {
+        $source = 1;
+        
+        if (! isset($this->trainings[$training_id][$source]))
+        {
+            $conditions = array();
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($training_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
+            $condition = new AndCondition($conditions);
+            
+            $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+            
+            $statement = $this->get_connection()->query($query);
+            
+            if ($statement instanceof PDOStatement)
+            {
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                {
+                    $training = new Training();
+                    $training->set_source($result->source);
+                    $training->set_id($result->id);
+                    $training->set_name($this->convert_to_utf8($result->name));
+                    $training->set_year($this->convert_to_utf8($result->year));
+                    $training->set_credits($result->credits);
+                    $training->set_domain_id($result->domain_id);
+                    $training->set_domain($this->convert_to_utf8($result->domain));
+                    $training->set_goals(nl2br($this->convert_to_utf8($result->goals)));
+                    $training->set_type_id($result->type_id);
+                    $training->set_type($this->convert_to_utf8($result->type));
+                    $training->set_bama_type($result->bama_type);
+                    $training->set_faculty_id($result->faculty_id);
+                    $training->set_faculty($this->convert_to_utf8($result->faculty));
+                    $training->set_start_date($result->start_date);
+                    $training->set_end_date($result->end_date);
+                    
+                    $this->trainings[$training_id][$source] = $training;
+                }
+            }
+        }
+        
+        return $this->trainings[$training_id][$source];
+    }
+
+    public function retrieve_programme($programme_id)
+    {
+        $source = 1;
+        
+        if (! isset($this->course[$programme_id][$source]))
+        {
+            $conditions = array();
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('id'), 
+                new StaticConditionVariable($programme_id));
+            $conditions[] = new EqualityCondition(
+                new StaticColumnConditionVariable('source'), 
+                new StaticConditionVariable($source));
+            $condition = new AndCondition($conditions);
+            
+            $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
+                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+            
+            $statement = $this->get_connection()->query($query);
+            
+            if ($statement instanceof PDOStatement)
+            {
+                $object = $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                
+                if ($object instanceof \stdClass)
+                {
+                    $course = new Course();
+                    $course->set_id($object->id);
+                    $course->set_year($object->year);
+                    $course->set_faculty_id($object->faculty_id);
+                    $course->set_faculty($this->convert_to_utf8($object->faculty));
+                    $course->set_training_id($object->training_id);
+                    $course->set_training($this->convert_to_utf8($object->training));
+                    $course->set_name($this->convert_to_utf8($object->name));
+                    $course->set_source($object->source);
+                    $course->set_trajectory_part($object->trajectory_part);
+                    $course->set_credits($object->credits);
+                    $course->set_programme_type($object->programme_type);
+                    $course->set_weight($object->weight);
+                    $course->set_timeframe_visual_id($object->timeframe_visual_id);
+                    $course->set_timeframe_id($object->timeframe_id);
+                    $course->set_result_scale_id($object->result_scale_id);
+                    $course->set_deliberation($object->deliberation);
+                    $course->set_score_calculation($object->score_calculation);
+                    $course->set_level($this->convert_to_utf8($object->level));
+                    $course->set_kind($this->convert_to_utf8($object->kind));
+                    $course->set_goals($this->convert_to_utf8($object->goals));
+                    $course->set_contents($this->convert_to_utf8($object->contents));
+                    $course->set_coaching($this->convert_to_utf8($object->coaching));
+                    $course->set_succession($this->convert_to_utf8($object->succession));
+                    $course->set_jury($object->jury);
+                    $course->set_repleacable($object->repleacable);
+                    $course->set_training_unit($this->convert_to_utf8($object->training_unit));
+                    
+                    $this->course[$programme_id][$source] = $course;
+                }
+            }
+        }
+        return $this->course[$programme_id][$source];
+    }
+}
