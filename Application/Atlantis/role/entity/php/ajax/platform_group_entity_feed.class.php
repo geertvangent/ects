@@ -22,7 +22,7 @@ use libraries\storage\StaticConditionVariable;
  * @package roup
  * @author Sven Vanpoucke
  */
-class EntityAjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
+class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
 {
     /**
      * The length for the filter prefix to remove
