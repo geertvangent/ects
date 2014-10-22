@@ -2,9 +2,13 @@
 namespace application\discovery;
 
 use libraries\utilities\Utilities;
+use libraries\architecture\ClassContext;
 
 abstract class Rendition
 {
+    use ClassContext;
+
+    // Formats
     const FORMAT_HTML = 'html';
     const FORMAT_XLSX = 'xlsx';
     const FORMAT_ZIP = 'zip';
@@ -82,25 +86,5 @@ abstract class Rendition
              Utilities :: underscores_to_camelcase($rendition_implementation->get_format()) .
              Utilities :: underscores_to_camelcase($rendition_implementation->get_view()) . 'Rendition';
         return new $class($rendition_implementation);
-    }
-
-    /**
-     * Get the fully qualified class name of the Application object
-     * 
-     * @return string
-     */
-    public static function class_name()
-    {
-        return get_called_class();
-    }
-
-    /**
-     * Get the namespace of the Application object
-     * 
-     * @return string
-     */
-    public static function context()
-    {
-        return Utilities :: get_namespace_from_classname(get_called_class());
     }
 }
