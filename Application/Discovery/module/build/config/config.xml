@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <actions/>
+    <description>TypeName&#xd;
+        &#xd;
+        &lt;p&gt;Dependencies&#xd;
+        &lt;img src=&quot;http://10.2.201.104/html/jenkins/dev/application/discovery/module/build/chart/dependencies.svg&quot; /&gt;&#xd;
+        Pyramid&#xd;
+        &lt;img src=&quot;http://10.2.201.104/html/jenkins/dev/application/discovery/module/build/chart/overview-pyramid.svg&quot; /&gt;&#xd;
+        &lt;/p&gt;</description>
+    <logRotator>
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>15</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+    </logRotator>
+    <keepDependencies>false</keepDependencies>
+    <properties/>
+    <scm class="hudson.scm.NullSCM"/>
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <authToken>502ca597634db</authToken>
+    <triggers class="vector"/>
+    <concurrentBuild>false</concurrentBuild>
+    <customWorkspace>/var/www/html/jenkins/dev/application/discovery/module/</customWorkspace>
+    <builders>
+        <hudson.plugins.phing.PhingBuilder>
+            <buildFile>build/config/build.xml</buildFile>
+            <useModuleRoot>true</useModuleRoot>
+        </hudson.plugins.phing.PhingBuilder>
+    </builders>
+    <publishers>
+        <hudson.tasks.BuildTrigger>
+            <childProjects>application_discovery_module_advice, application_discovery_module_career, application_discovery_module_cas, application_discovery_module_course, application_discovery_module_course_results, application_discovery_module_elo, application_discovery_module_employment, application_discovery_module_enrollment, application_discovery_module_exemption, application_discovery_module_faculty, application_discovery_module_faculty_info, application_discovery_module_group, application_discovery_module_group_user, application_discovery_module_person, application_discovery_module_photo, application_discovery_module_profile, application_discovery_module_student_materials, application_discovery_module_student_year, application_discovery_module_teaching_assignment, application_discovery_module_training, application_discovery_module_training_info, application_discovery_module_training_results</childProjects>
+            <threshold>
+                <name>FAILURE</name>
+                <ordinal>2</ordinal>
+                <color>RED</color>
+            </threshold>
+        </hudson.tasks.BuildTrigger>
+    </publishers>
+    <buildWrappers/>
+</project>
