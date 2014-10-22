@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <actions/>
-    <description>CAS Data&#xd;
+    <description>Bamaflex&#xd;
         &#xd;
         &lt;p&gt;Dependencies&#xd;
-        &lt;img src=&quot;http://10.2.201.104/html/jenkins/dev/application/ehb_sync/cas/data/build/chart/dependencies.svg&quot; /&gt;&#xd;
+        &lt;img src=&quot;http://10.2.201.104/html/jenkins/dev/application/ehb_sync/data/build/chart/dependencies.svg&quot; /&gt;&#xd;
         Pyramid&#xd;
-        &lt;img src=&quot;http://10.2.201.104/html/jenkins/dev/application/ehb_sync/cas/data/build/chart/overview-pyramid.svg&quot; /&gt;&#xd;
+        &lt;img src=&quot;http://10.2.201.104/html/jenkins/dev/application/ehb_sync/data/build/chart/overview-pyramid.svg&quot; /&gt;&#xd;
         &lt;/p&gt;</description>
     <logRotator>
         <daysToKeep>-1</daysToKeep>
@@ -24,7 +24,7 @@
     <authToken>502ca597634db</authToken>
     <triggers class="vector"/>
     <concurrentBuild>false</concurrentBuild>
-    <customWorkspace>/var/www/html/jenkins/dev/application/ehb_sync/cas/data/</customWorkspace>
+    <customWorkspace>/var/www/html/jenkins/dev/application/ehb_sync/data/</customWorkspace>
     <builders>
         <hudson.plugins.phing.PhingBuilder>
             <buildFile>build/config/build.xml</buildFile>

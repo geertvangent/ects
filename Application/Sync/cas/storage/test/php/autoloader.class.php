@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\upgrade\v4_0_0;
+namespace application\ehb_sync\cas\storage\test;
 
 class Autoloader
 {
@@ -10,7 +10,8 @@ class Autoloader
      * @var string[]
      */
      private static $map = array(
-         'Autoloader' => '/autoloader.class.php'
+         'Autoloader' => '/autoloader.class.php',
+         'CheckSourceCodeTest' => '/source/check_source_code_test.class.php'
     );
 
     /**

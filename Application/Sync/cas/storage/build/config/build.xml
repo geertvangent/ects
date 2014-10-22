@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="application\cas_user\account" default="build">
-
+<project name="application\ehb_sync\cas\storage" default="build">
     <resolvepath propertyName="package-directory" file="../../"/>
-    <import file="../../../../../common/libraries/php/shared/build/build.xml" />
-
+    <import file="../../../../../../libraries/php/build/build.xml" />
 </project>
