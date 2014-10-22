@@ -1,0 +1,13 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\atlantis\role\entitlement
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Toegekende rechten"
+
+Grant = "Toekennen"
+Deny = "Weigeren"
+
+Entitlements = ""
+GrantRights = "Toegekende rechten voor {TYPE}"
+ListerComponent = "Rechten toekennen aan {ROLE}"
