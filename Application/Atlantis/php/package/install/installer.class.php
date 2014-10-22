@@ -1,14 +1,14 @@
 <?php
 namespace application\atlantis;
 
-use libraries\architecture\WebApplicationInstaller;
+
 
 /**
  * Atlantis application
  *
  * @package application.atlantis
  */
-class Installer extends WebApplicationInstaller
+class Installer extends \configuration\package\Installer
 {
 
     public static function get_additional_packages()
