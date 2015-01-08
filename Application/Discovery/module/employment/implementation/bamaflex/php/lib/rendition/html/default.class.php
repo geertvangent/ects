@@ -9,7 +9,7 @@ use application\discovery\SortableTable;
 use libraries\format\Theme;
 use libraries\utilities\Utilities;
 use libraries\utilities\DatetimeUtilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

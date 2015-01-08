@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\storage\StaticConditionVariable;
 use libraries\storage\EqualityCondition;
 use libraries\storage\DataClassRetrievesParameters;

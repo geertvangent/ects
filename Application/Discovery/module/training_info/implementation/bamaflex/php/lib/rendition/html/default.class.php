@@ -8,7 +8,7 @@ use libraries\format\PropertiesTable;
 use application\discovery\LegendTable;
 use libraries\format\ToolbarItem;
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\DynamicVisualTab;
 use libraries\format\Display;
 use libraries\format\DynamicVisualTabsRenderer;

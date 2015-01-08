@@ -2,7 +2,7 @@
 namespace application\discovery\module\profile\implementation\bamaflex;
 
 use libraries\utilities\Utilities;
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 /**
  * application.discovery.module.profile.implementation.bamaflex.

@@ -7,7 +7,7 @@ use libraries\format\PropertiesTable;
 use libraries\utilities\StringUtilities;
 use application\discovery\SortableTable;
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Display;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation

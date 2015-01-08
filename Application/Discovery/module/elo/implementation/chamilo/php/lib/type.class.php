@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 class TypeData extends DataClass
 {

@@ -2,7 +2,7 @@
 namespace application\discovery\module\training;
 
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;
 use libraries\format\DynamicVisualTab;

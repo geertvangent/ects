@@ -7,7 +7,7 @@ use libraries\format\DynamicTabsRenderer;
 use libraries\format\Theme;
 use libraries\utilities\Utilities;
 use libraries\utilities\DatetimeUtilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\enrollment\DataManager;

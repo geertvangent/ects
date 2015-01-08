@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\profile\implementation\bamaflex;
 
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 class Nationality extends DataClass
 {

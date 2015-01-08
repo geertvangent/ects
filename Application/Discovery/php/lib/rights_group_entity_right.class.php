@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 class RightsGroupEntityRight extends DataClass
 {

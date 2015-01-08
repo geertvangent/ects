@@ -4,7 +4,7 @@ namespace application\discovery\module\group_user\implementation\bamaflex;
 use application\discovery\module\group_user\DataManager;
 use application\discovery\module\group\implementation\bamaflex\Group;
 use libraries\utilities\StringUtilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Display;
 use PHPExcel;
 

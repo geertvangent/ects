@@ -3,7 +3,7 @@ namespace application\discovery;
 
 use libraries\file\Filesystem;
 use libraries\file\Path;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\StringUtilities;
 
 class XlsxDefaultRendition extends XlsxRendition

@@ -4,7 +4,7 @@ namespace application\discovery\instance;
 use libraries\storage\AndCondition;
 use libraries\platform\Request;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\storage\EqualityCondition;
 use libraries\storage\DataClassCountParameters;
 use libraries\storage\DataClassRetrieveParameters;

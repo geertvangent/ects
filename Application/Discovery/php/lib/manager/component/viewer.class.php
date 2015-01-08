@@ -4,7 +4,7 @@ namespace application\discovery;
 use libraries\architecture\DelegateComponent;
 use libraries\format\Breadcrumb;
 use libraries\format\Display;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\ToolbarItem;
 use libraries\format\BreadcrumbTrail;
 use libraries\storage\EqualityCondition;

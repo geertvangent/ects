@@ -4,7 +4,7 @@ namespace application\discovery\module\exemption;
 use libraries\file\Filesystem;
 use libraries\platform\Request;
 use libraries\file\Path;
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 use application\discovery\instance\Instance;
 
 abstract class Module extends \application\discovery\Module

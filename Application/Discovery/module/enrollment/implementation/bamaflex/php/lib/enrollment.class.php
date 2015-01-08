@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use application\discovery\module\career\DataManager;
 
 class Enrollment extends \application\discovery\module\enrollment\Enrollment

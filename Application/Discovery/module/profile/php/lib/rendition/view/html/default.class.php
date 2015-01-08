@@ -4,7 +4,7 @@ namespace application\discovery\module\profile;
 use application\discovery\SortableTable;
 use libraries\format\Display;
 use libraries\format\PropertiesTable;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Theme;
 
 class HtmlDefaultRendition extends HtmlRendition

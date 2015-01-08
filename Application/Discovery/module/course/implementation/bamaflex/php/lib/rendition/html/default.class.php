@@ -8,7 +8,7 @@ use libraries\format\ToolbarItem;
 use application\discovery\LegendTable;
 use libraries\format\Theme;
 use libraries\format\DynamicContentTab;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\DynamicTabsRenderer;
 use libraries\format\Display;
 use libraries\format\Breadcrumb;

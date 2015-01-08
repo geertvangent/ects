@@ -5,7 +5,7 @@ use libraries\format\DynamicVisualTab;
 use libraries\format\DynamicVisualTabsRenderer;
 use libraries\platform\Request;
 use libraries\storage\EqualityCondition;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\ActionBarRenderer;
 use libraries\format\ActionBarSearchForm;
 use libraries\format\ToolbarItem;

@@ -2,7 +2,7 @@
 namespace application\discovery;
 
 use libraries\architecture\DelegateComponent;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\platform\Request;
 
 /**

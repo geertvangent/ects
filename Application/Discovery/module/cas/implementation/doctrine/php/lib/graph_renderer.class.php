@@ -5,7 +5,7 @@ use application\discovery\SortableTable;
 use application\discovery\module\cas\DataManager;
 use libraries\file\Filesystem;
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\file\Path;
 
 require_once Path :: get_plugin_path() . '/pChart/pChart/pChart.class.php';

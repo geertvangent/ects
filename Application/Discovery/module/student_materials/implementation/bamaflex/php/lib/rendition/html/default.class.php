@@ -11,7 +11,7 @@ use libraries\format\DynamicTabsRenderer;
 use libraries\format\DynamicContentTab;
 use libraries\format\Theme;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;
 

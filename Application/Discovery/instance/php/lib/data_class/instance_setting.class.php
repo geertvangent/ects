@@ -3,7 +3,7 @@ namespace application\discovery\instance;
 
 use libraries\storage\EqualityCondition;
 use libraries\file\Path;
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 use DOMDocument;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\storage\PropertyConditionVariable;

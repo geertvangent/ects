@@ -2,7 +2,7 @@
 namespace application\discovery\module\enrollment\implementation\bamaflex;
 
 use libraries\utilities\StringUtilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Display;
 use application\discovery\module\enrollment\DataManager;
 use PHPExcel;

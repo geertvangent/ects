@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\photo\implementation\bamaflex;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\file\Filesystem;
 use application\discovery\module\photo\DataManager;
 use libraries\storage\DataClassRetrievesParameters;

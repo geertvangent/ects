@@ -4,7 +4,7 @@ namespace application\discovery\module\person\implementation\chamilo;
 use core\group\Group;
 use core\group\GroupTableCellRenderer;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
 {

@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 use libraries\storage\EqualityCondition;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\storage\DataClassCountParameters;

@@ -4,7 +4,7 @@ namespace application\discovery\module\faculty\implementation\bamaflex;
 use libraries\format\ToolbarItem;
 use libraries\format\Theme;
 use application\discovery\SortableTable;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;
 

@@ -2,7 +2,7 @@
 namespace application\discovery\instance;
 
 use libraries\platform\Request;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 
 class DeleterComponent extends Manager

@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\training\implementation\bamaflex;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\storage\PropertyConditionVariable;
 use libraries\storage\EqualityCondition;
 use libraries\storage\DataClassRetrievesParameters;

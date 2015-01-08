@@ -2,7 +2,7 @@
 namespace application\discovery\module\student_year\implementation\bamaflex;
 
 use application\discovery\SortableTable;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Display;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;

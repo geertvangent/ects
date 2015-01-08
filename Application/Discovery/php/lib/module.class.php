@@ -2,14 +2,14 @@
 namespace application\discovery;
 
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\ToolbarItem;
 use libraries\file\Path;
 use libraries\file\Filesystem;
 use libraries\storage\NotCondition;
 use libraries\storage\EqualityCondition;
 use libraries\storage\AndCondition;
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\storage\PropertyConditionVariable;
 use libraries\storage\StaticConditionVariable;

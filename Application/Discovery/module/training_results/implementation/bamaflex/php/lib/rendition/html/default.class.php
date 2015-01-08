@@ -7,7 +7,7 @@ use application\discovery\SortableTable;
 use libraries\format\PropertiesTable;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Display;
 use application\discovery\module\training_results\DataManager;
 

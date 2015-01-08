@@ -2,9 +2,9 @@
 namespace application\discovery\module\profile\implementation\bamaflex;
 
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\DatetimeUtilities;
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 class Birth extends DataClass
 {

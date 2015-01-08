@@ -2,7 +2,7 @@
 namespace application\discovery\instance;
 
 use libraries\storage\EqualityCondition;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 use libraries\format\ToolbarItem;
 use libraries\format\Toolbar;
@@ -11,7 +11,7 @@ use libraries\storage\DataClassCountParameters;
 use libraries\storage\StaticConditionVariable;
 use libraries\storage\PropertyConditionVariable;
 use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\DataClassTableCellRenderer;
+use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
 use libraries\format\DisplayOrderPropertyTableColumn;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport

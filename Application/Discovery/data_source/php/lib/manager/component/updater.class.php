@@ -2,7 +2,7 @@
 namespace application\discovery\data_source;
 
 use libraries\platform\Request;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 
 class UpdaterComponent extends Manager

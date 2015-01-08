@@ -3,7 +3,7 @@ namespace application\discovery\module\training_results\implementation\bamaflex;
 
 use application\discovery\module\training_results\DataManager;
 use libraries\utilities\StringUtilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Display;
 use PHPExcel;
 

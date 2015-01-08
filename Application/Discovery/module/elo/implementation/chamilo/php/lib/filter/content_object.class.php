@@ -2,7 +2,7 @@
 namespace application\discovery\module\elo\implementation\chamilo;
 
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class ContentObjectDataFilter extends TypeDataFilter
 {

@@ -3,7 +3,7 @@ namespace application\discovery;
 
 use libraries\utilities\Utilities;
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\ToolbarItem;
 use libraries\format\BreadcrumbTrail;
 

@@ -5,7 +5,7 @@ use application\discovery\SortableTable;
 use libraries\format\ToolbarItem;
 use application\discovery\LegendTable;
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Display;
 use libraries\format\DynamicVisualTab;
 use libraries\format\DynamicVisualTabsRenderer;

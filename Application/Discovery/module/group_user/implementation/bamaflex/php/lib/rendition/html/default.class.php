@@ -9,7 +9,7 @@ use libraries\format\PropertiesTable;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;
 use application\discovery\SortableTable;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Display;
 use application\discovery\module\group_user\DataManager;
 use application\discovery\module\group\implementation\bamaflex\Group;

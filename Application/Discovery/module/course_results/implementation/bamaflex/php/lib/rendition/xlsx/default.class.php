@@ -2,7 +2,7 @@
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use application\discovery\module\course_results\DataManager;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\StringUtilities;
 use libraries\format\Display;
 use PHPExcel;

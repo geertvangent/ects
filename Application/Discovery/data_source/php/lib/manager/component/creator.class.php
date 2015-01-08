@@ -4,7 +4,7 @@ namespace application\discovery\data_source;
 use libraries\format\ToolbarItem;
 use libraries\format\SortableTableFromArray;
 use libraries\platform\Request;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 use libraries\format\Theme;
 use application\discovery\DataSource;

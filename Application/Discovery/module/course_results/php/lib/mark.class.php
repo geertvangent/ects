@@ -2,7 +2,7 @@
 namespace application\discovery\module\course_results;
 
 use libraries\utilities\Utilities;
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 /**
  * application.discovery.module.course_results.discovery

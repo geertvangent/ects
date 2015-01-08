@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\platform\Session;
 use libraries\file\Path;
 use libraries\file\Filecompression;

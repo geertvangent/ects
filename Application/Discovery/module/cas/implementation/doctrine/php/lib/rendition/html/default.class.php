@@ -9,7 +9,7 @@ use libraries\format\Theme;
 use libraries\format\Display;
 use libraries\format\DynamicContentTab;
 use libraries\format\DynamicTabsRenderer;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use application\discovery\module\cas\DataManager;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;

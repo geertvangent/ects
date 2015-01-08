@@ -3,7 +3,7 @@ namespace application\discovery;
 
 use libraries\platform\PlatformSetting;
 use libraries\format\Theme;
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 
 /**
  *

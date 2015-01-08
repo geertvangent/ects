@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class LegendTable extends SortableTable
 {

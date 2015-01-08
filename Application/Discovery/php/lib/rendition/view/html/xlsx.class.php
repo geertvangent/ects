@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\file\Filesystem;
 use libraries\file\FileProperties;
 

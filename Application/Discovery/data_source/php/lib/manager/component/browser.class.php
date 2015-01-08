@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\data_source;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\ActionBarRenderer;
 use libraries\format\ActionBarSearchForm;
 use libraries\format\ToolbarItem;
