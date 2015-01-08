@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 
 class Manager extends Application
 {

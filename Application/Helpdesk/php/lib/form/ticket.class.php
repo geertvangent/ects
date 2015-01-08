@@ -7,7 +7,7 @@ use libraries\storage\NotCondition;
 use libraries\storage\PatternMatchCondition;
 use libraries\format\FormValidator;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\storage\PropertyConditionVariable;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\platform\PlatformSetting;

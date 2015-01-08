@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_helpdesk;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\file\FileProperties;
 use libraries\platform\PlatformSetting;
 use libraries\file\Path;
