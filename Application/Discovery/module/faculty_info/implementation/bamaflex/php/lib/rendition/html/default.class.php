@@ -3,9 +3,9 @@ namespace application\discovery\module\faculty_info\implementation\bamaflex;
 
 use application\discovery\SortableTable;
 use libraries\format\PropertiesTable;
-use libraries\format\ToolbarItem;
+use libraries\format\structure\ToolbarItem;
 use application\discovery\LegendTable;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;

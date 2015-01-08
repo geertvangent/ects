@@ -1,9 +1,9 @@
 <?php
 namespace application\discovery;
 
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;
-use libraries\format\ToolbarItem;
+use libraries\format\structure\ToolbarItem;
 use libraries\format\BreadcrumbTrail;
 use application\discovery\instance\Instance;
 

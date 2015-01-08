@@ -2,7 +2,7 @@
 namespace application\discovery\module\course_results\implementation\bamaflex;
 
 use application\discovery\LegendTable;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use application\discovery\SortableTable;
 use libraries\format\PropertiesTable;
 use libraries\format\Breadcrumb;

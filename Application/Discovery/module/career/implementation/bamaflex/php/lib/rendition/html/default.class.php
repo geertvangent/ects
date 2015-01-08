@@ -6,7 +6,7 @@ use application\discovery\LegendTable;
 use application\discovery\SortableTable;
 use application\discovery\module\career\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\utilities\Utilities;
 use libraries\platform\translation\Translation;
 use libraries\format\Breadcrumb;

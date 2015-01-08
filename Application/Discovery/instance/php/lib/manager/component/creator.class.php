@@ -1,12 +1,12 @@
 <?php
 namespace application\discovery\instance;
 
-use libraries\format\ToolbarItem;
+use libraries\format\structure\ToolbarItem;
 use libraries\format\SortableTableFromArray;
 use libraries\platform\Request;
 use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use application\discovery\Module;
 
 class CreatorComponent extends Manager

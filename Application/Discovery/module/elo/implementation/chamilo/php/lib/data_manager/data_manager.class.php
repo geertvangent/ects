@@ -12,7 +12,7 @@ use libraries\storage\AndCondition;
 use libraries\storage\Condition;
 use libraries\storage\OrderBy;
 
-class DataManager extends \libraries\storage\DataManager
+class DataManager extends \libraries\storage\data_manager\DataManager
 {
     const PREFIX = 'discovery_elo_';
     const COUNT = 'count';

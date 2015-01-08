@@ -7,7 +7,7 @@ use application\discovery\SortableTable;
 use libraries\utilities\DatetimeUtilities;
 use application\discovery\LegendTable;
 use libraries\platform\translation\Translation;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\utilities\Utilities;
 use libraries\format\Display;
 use application\discovery\module\enrollment\DataManager;

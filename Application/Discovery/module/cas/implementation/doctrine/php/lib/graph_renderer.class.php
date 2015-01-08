@@ -4,7 +4,7 @@ namespace application\discovery\module\cas\implementation\doctrine;
 use application\discovery\SortableTable;
 use application\discovery\module\cas\DataManager;
 use libraries\file\Filesystem;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;
 use libraries\file\Path;
 

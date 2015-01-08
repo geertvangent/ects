@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;
 use libraries\architecture\NotAllowedException;
 use libraries\utilities\Utilities;

@@ -3,7 +3,7 @@ namespace application\discovery\module\person\implementation\chamilo;
 
 use core\group\GroupRelUser;
 use core\group\GroupRelUserTableCellRenderer;
-use libraries\format\Toolbar;
+use libraries\format\structure\Toolbar;
 
 class GroupRelUserBrowserTableCellRenderer extends GroupRelUserTableCellRenderer
 {

@@ -6,7 +6,7 @@ use libraries\format\Breadcrumb;
 use libraries\format\Display;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\utilities\Utilities;
 use libraries\utilities\DatetimeUtilities;
 use libraries\platform\translation\Translation;

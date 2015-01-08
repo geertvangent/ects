@@ -5,7 +5,7 @@ use application\discovery\module\cas\Parameters;
 use application\discovery\SortableTable;
 use libraries\file\Filesystem;
 use libraries\file\Path;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\format\Display;
 use libraries\format\DynamicContentTab;
 use libraries\format\DynamicTabsRenderer;

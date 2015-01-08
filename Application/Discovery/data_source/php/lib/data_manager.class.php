@@ -7,7 +7,7 @@ use libraries\storage\DataClassRetrieveParameters;
 use libraries\storage\StaticConditionVariable;
 use libraries\storage\PropertyConditionVariable;
 
-class DataManager extends \libraries\storage\DataManager
+class DataManager extends \libraries\storage\data_manager\DataManager
 {
     const PREFIX = 'discovery_data_source_';
 

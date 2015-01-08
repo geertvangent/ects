@@ -3,9 +3,9 @@ namespace application\discovery\data_source;
 
 use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
-use libraries\format\ToolbarItem;
-use libraries\format\Toolbar;
-use libraries\format\Theme;
+use libraries\format\structure\ToolbarItem;
+use libraries\format\structure\Toolbar;
+use libraries\format\theme\Theme;
 use libraries\format\TableCellRendererActionsColumnSupport;
 use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
 

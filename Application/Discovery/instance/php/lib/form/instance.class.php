@@ -6,7 +6,7 @@ use libraries\file\Filesystem;
 use libraries\format\FormValidator;
 use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\file\Path;
 use libraries\format\DynamicFormTabsRenderer;
 use libraries\format\DynamicFormTab;

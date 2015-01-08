@@ -6,7 +6,7 @@ use Doctrine\DBAL\Driver\PDOStatement;
 use libraries\storage\DoctrineConditionTranslator;
 use libraries\storage\EqualityCondition;
 use libraries\file\ImageManipulation;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\file\Filesystem;
 use libraries\utilities\Text;
 use libraries\file\Path;

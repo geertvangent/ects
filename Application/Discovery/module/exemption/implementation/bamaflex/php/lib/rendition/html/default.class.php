@@ -4,7 +4,7 @@ namespace application\discovery\module\exemption\implementation\bamaflex;
 use libraries\format\Display;
 use libraries\format\DynamicContentTab;
 use libraries\format\DynamicTabsRenderer;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\utilities\Utilities;
 use libraries\utilities\DatetimeUtilities;
 use libraries\platform\translation\Translation;

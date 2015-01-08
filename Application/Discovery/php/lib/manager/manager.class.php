@@ -2,7 +2,7 @@
 namespace application\discovery;
 
 use libraries\platform\PlatformSetting;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\architecture\application\Application;
 
 /**

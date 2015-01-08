@@ -2,9 +2,9 @@
 namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
 
 use application\discovery\SortableTable;
-use libraries\format\ToolbarItem;
+use libraries\format\structure\ToolbarItem;
 use application\discovery\LegendTable;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;
 use libraries\format\Display;
 use libraries\format\DynamicVisualTab;

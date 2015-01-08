@@ -9,7 +9,7 @@ use application\discovery\module\career\DataManager;
 use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
 use libraries\format\DynamicTabsRenderer;
 use libraries\format\DynamicContentTab;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\utilities\Utilities;
 use libraries\platform\translation\Translation;
 use libraries\format\Breadcrumb;

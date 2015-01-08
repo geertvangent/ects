@@ -1,10 +1,10 @@
 <?php
 namespace application\discovery\module\group_user\implementation\bamaflex;
 
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\format\DynamicContentTab;
 use libraries\format\DynamicTabsRenderer;
-use libraries\format\Toolbar;
+use libraries\format\structure\Toolbar;
 use libraries\format\PropertiesTable;
 use libraries\format\Breadcrumb;
 use libraries\format\BreadcrumbTrail;

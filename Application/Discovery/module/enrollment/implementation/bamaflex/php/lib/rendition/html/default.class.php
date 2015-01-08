@@ -4,7 +4,7 @@ namespace application\discovery\module\enrollment\implementation\bamaflex;
 use libraries\format\Display;
 use libraries\format\DynamicContentTab;
 use libraries\format\DynamicTabsRenderer;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;
 use application\discovery\LegendTable;
 use application\discovery\SortableTable;

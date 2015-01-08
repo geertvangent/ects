@@ -5,7 +5,7 @@ use application\discovery\SortableTable;
 use libraries\format\Display;
 use libraries\format\PropertiesTable;
 use libraries\platform\translation\Translation;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

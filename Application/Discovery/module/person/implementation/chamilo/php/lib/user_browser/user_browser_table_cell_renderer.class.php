@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\person\implementation\chamilo;
 
-use libraries\format\Toolbar;
+use libraries\format\structure\Toolbar;
 use libraries\format\TableColumnModelActionsColumnSupport;
 use libraries\format\TableCellRenderer;
 

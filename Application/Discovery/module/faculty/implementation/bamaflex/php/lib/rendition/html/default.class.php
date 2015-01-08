@@ -1,8 +1,8 @@
 <?php
 namespace application\discovery\module\faculty\implementation\bamaflex;
 
-use libraries\format\ToolbarItem;
-use libraries\format\Theme;
+use libraries\format\structure\ToolbarItem;
+use libraries\format\theme\Theme;
 use application\discovery\SortableTable;
 use libraries\platform\translation\Translation;
 use libraries\format\Breadcrumb;
