@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\rights;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\storage\EqualityCondition;
 use libraries\storage\DataClassCountParameters;
 use libraries\storage\DataClassRetrievesParameters;

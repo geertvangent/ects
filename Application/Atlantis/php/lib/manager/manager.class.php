@@ -3,7 +3,7 @@ namespace application\atlantis;
 
 use libraries\format\BreadcrumbTrail;
 use libraries\format\Theme;
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 use libraries\architecture\NotAllowedException;
 use libraries\platform\PlatformSetting;
 

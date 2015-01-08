@@ -2,7 +2,7 @@
 namespace application\atlantis\role\entity;
 
 use libraries\format\AdvancedElementFinderElementType;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class UserEntity extends \core\rights\UserEntity
 {

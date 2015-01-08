@@ -2,7 +2,7 @@
 namespace application\atlantis\user_group;
 
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\platform\Request;
 
 class EditorComponent extends Manager

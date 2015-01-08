@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use application\atlantis\SessionBreadcrumbs;
 use libraries\architecture\DelegateComponent;
 use libraries\format\Breadcrumb;

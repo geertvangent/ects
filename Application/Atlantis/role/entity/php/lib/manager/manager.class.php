@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role\entity;
 
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 
 class Manager extends Application
 {

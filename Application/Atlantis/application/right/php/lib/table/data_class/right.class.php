@@ -2,7 +2,7 @@
 namespace application\atlantis\application\right;
 
 use application\atlantis\application\Application;
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 use application\atlantis\role\entitlement\Entitlement;
 use libraries\storage\EqualityCondition;
 use libraries\storage\DataClassRetrievesParameters;

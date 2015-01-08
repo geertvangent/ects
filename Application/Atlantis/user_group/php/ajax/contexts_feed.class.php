@@ -4,7 +4,7 @@ namespace application\atlantis\user_group;
 use libraries\architecture\JsonAjaxResult;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\format\AdvancedElementFinderElements;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\architecture\AjaxManager;
 use libraries\platform\Request;
 use libraries\storage\PatternMatchCondition;

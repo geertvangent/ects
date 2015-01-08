@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\application\right;
 
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 
 /**
  * $Id: elude_manager.class.php

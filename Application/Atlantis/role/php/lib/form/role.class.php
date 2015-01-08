@@ -3,7 +3,7 @@ namespace application\atlantis\role;
 
 use libraries\format\FormValidator;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class RoleForm extends FormValidator
 {

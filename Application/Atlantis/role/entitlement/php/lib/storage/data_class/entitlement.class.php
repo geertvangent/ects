@@ -2,7 +2,7 @@
 namespace application\atlantis\role\entitlement;
 
 use libraries\utilities\Utilities;
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 /**
  * application.atlantis.role.entitlement.

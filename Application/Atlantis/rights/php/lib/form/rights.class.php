@@ -2,7 +2,7 @@
 namespace application\atlantis\rights;
 
 use libraries\storage\EqualityCondition;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\FormValidator;
 use libraries\utilities\Utilities;
 use libraries\format\AdvancedElementFinderElementTypes;

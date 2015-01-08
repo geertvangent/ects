@@ -7,7 +7,7 @@ use libraries\storage\DataClassRetrievesParameters;
 use libraries\format\Breadcrumb;
 use application\atlantis\SessionBreadcrumbs;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\storage\Condition;
 use libraries\storage\NotCondition;
 use libraries\storage\OrderBy;

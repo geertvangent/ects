@@ -7,7 +7,7 @@ use libraries\format\AdvancedElementFinderElementType;
 use libraries\format\AdvancedElementFinderElementTypes;
 use libraries\format\FormValidator;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class EntityForm extends FormValidator
 {

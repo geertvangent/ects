@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\StaticTableColumn;
 use libraries\format\TableColumnModelActionsColumnSupport;
 use libraries\format\DataClassTableColumnModel;

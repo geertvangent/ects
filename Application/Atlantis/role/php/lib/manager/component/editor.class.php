@@ -4,7 +4,7 @@ namespace application\atlantis\role;
 use libraries\format\Breadcrumb;
 use application\atlantis\SessionBreadcrumbs;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\platform\Request;
 
 class EditorComponent extends Manager

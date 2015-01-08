@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\architecture\AjaxManager;
 use libraries\architecture\JsonAjaxResult;

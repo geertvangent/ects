@@ -3,9 +3,9 @@ namespace application\atlantis\user_group;
 
 use libraries\utilities\Utilities;
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\ToolbarItem;
-use libraries\format\DataClassTableCellRenderer;
+use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
 use libraries\format\TableCellRendererActionsColumnSupport;
 use libraries\format\Toolbar;
 

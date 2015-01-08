@@ -2,11 +2,11 @@
 namespace application\atlantis\context;
 
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\ToolbarItem;
 use libraries\format\Toolbar;
 use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\DataClassTableCellRenderer;
+use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
 
 class ContextTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

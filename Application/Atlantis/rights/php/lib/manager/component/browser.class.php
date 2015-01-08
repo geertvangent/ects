@@ -5,7 +5,7 @@ use libraries\architecture\NotAllowedException;
 use libraries\format\TableSupport;
 use application\atlantis\SessionBreadcrumbs;
 use libraries\format\Breadcrumb;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 
 class BrowserComponent extends Manager implements TableSupport

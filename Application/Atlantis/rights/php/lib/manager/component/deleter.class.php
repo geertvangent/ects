@@ -3,7 +3,7 @@ namespace application\atlantis\rights;
 
 use libraries\architecture\NotAllowedException;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class DeleterComponent extends Manager
 {

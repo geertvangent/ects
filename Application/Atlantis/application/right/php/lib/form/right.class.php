@@ -4,7 +4,7 @@ namespace application\atlantis\application\right;
 use application\atlantis\role\entitlement\Entitlement;
 use libraries\format\FormValidator;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class RightForm extends FormValidator
 {

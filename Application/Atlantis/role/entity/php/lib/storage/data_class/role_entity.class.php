@@ -3,7 +3,7 @@ namespace application\atlantis\role\entity;
 
 use libraries\format\ToolbarItem;
 use libraries\format\Theme;
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 use core\user\User;
 use core\group\Group;
 

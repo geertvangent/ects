@@ -6,7 +6,7 @@ use libraries\platform\Request;
 use libraries\format\DynamicVisualTabsRenderer;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\storage\EqualityCondition;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\DynamicContentTab;
 use libraries\utilities\Utilities;
 use libraries\format\TableSupport;

@@ -8,7 +8,7 @@ use libraries\storage\OrCondition;
 use libraries\storage\PatternMatchCondition;
 use libraries\format\Theme;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\ToolbarItem;
 use libraries\format\ActionBarRenderer;
 use libraries\format\TableSupport;

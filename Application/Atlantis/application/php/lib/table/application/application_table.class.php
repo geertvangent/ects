@@ -4,7 +4,7 @@ namespace application\atlantis\application;
 use libraries\format\TableFormActionsSupport;
 use libraries\format\Table;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\TableFormAction;
 use libraries\format\TableFormActions;
 

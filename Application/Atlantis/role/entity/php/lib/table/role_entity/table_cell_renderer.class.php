@@ -2,11 +2,11 @@
 namespace application\atlantis\role\entity;
 
 use libraries\utilities\DatetimeUtilities;
-use libraries\format\DataClassTableCellRenderer;
+use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
 use libraries\format\TableCellRendererActionsColumnSupport;
 use libraries\format\Toolbar;
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 use libraries\format\ToolbarItem;
 use core\rights\PlatformGroupEntity;

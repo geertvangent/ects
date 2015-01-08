@@ -2,7 +2,7 @@
 namespace application\atlantis\rights;
 
 use libraries\architecture\NotAllowedException;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use application\atlantis\SessionBreadcrumbs;
 use libraries\format\Breadcrumb;
 use libraries\utilities\Utilities;

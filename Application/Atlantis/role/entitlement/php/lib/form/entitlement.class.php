@@ -2,7 +2,7 @@
 namespace application\atlantis\role\entitlement;
 
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\storage\EqualityCondition;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\format\FormValidator;

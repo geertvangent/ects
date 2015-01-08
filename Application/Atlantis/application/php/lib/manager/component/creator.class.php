@@ -4,7 +4,7 @@ namespace application\atlantis\application;
 use libraries\format\Breadcrumb;
 use application\atlantis\SessionBreadcrumbs;
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class CreatorComponent extends Manager
 {

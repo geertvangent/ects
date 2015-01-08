@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\user_group;
 
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 /**
  * application.atlantis.context.

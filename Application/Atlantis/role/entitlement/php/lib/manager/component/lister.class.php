@@ -10,7 +10,7 @@ use libraries\platform\Request;
 use libraries\format\DynamicVisualTabsRenderer;
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\storage\EqualityCondition;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 use libraries\storage\PropertyConditionVariable;
 use libraries\storage\StaticConditionVariable;

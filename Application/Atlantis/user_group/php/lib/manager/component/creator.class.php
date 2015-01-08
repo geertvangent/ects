@@ -2,7 +2,7 @@
 namespace application\atlantis\user_group;
 
 use libraries\utilities\Utilities;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 
 class CreatorComponent extends Manager
 {

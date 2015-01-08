@@ -5,7 +5,7 @@ use libraries\format\BreadcrumbTrail;
 use libraries\format\DynamicSearchAction;
 use libraries\architecture\DelegateComponent;
 use libraries\format\DynamicAction;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\Theme;
 use libraries\format\DynamicActionsTab;
 use libraries\utilities\Utilities;

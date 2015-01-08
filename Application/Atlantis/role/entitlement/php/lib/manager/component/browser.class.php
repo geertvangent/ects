@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\role\entitlement;
 
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use application\atlantis\SessionBreadcrumbs;
 use libraries\storage\InCondition;
 use libraries\storage\AndCondition;

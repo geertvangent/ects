@@ -2,11 +2,11 @@
 namespace application\atlantis\rights;
 
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\format\DynamicVisualTab;
 use libraries\utilities\Utilities;
 use libraries\format\DynamicVisualTabsRenderer;
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 use application\atlantis\SessionBreadcrumbs;
 use libraries\format\Breadcrumb;
 

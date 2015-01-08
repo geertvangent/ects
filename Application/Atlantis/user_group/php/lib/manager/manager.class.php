@@ -1,7 +1,7 @@
 <?php
 namespace application\atlantis\user_group;
 
-use libraries\architecture\Application;
+use libraries\architecture\application\Application;
 
 class Manager extends Application
 {
