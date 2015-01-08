@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\cas\data;
 
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 /**
  *

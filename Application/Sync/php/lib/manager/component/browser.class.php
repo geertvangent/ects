@@ -4,7 +4,7 @@ namespace application\ehb_sync;
 use libraries\architecture\NotAllowedException;
 use libraries\utilities\Utilities;
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\architecture\DelegateComponent;
 
 class BrowserComponent extends Manager implements DelegateComponent

@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\data;
 
-use libraries\storage\DataClass;
+use libraries\storage\data_class\DataClass;
 
 /**
  * Tracks the visits of a user to a course

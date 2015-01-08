@@ -2,7 +2,7 @@
 namespace application\ehb_sync\cas;
 
 use libraries\format\Theme;
-use libraries\platform\Translation;
+use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 use libraries\architecture\DelegateComponent;
 
