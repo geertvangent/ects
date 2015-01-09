@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\data_source;
 
-use libraries\format\FormValidator;
+use libraries\format\form\FormValidator;
 use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 use libraries\format\theme\Theme;

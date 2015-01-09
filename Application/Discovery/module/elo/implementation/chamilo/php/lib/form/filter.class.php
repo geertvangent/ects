@@ -1,7 +1,7 @@
 <?php
 namespace application\discovery\module\elo\implementation\chamilo;
 
-use libraries\format\FormValidator;
+use libraries\format\form\FormValidator;
 use libraries\platform\translation\Translation;
 use libraries\file\Path;
 use libraries\utilities\Utilities;
