@@ -5,7 +5,7 @@ namespace application\ehb_apple;
  *
  * @author Hans De Bisschop
  */
-class DataManager extends \libraries\storage\DataManager
+class DataManager extends \libraries\storage\data_manager\DataManager
 {
 const PREFIX = 'ehb_apple_';
     /**
