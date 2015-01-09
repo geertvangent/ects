@@ -1,18 +1,19 @@
 <?php
 namespace Chamilo\Application\Atlantis\Role\Entity\Ajax;
 
-use Chamilo\Libraries\Format\AdvancedElementFinderElement;
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
+use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\InCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\DataClassCountParameters;
-use Chamilo\Core\User\User;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
 
 /**
  * Feed to return users from the user entity
@@ -20,7 +21,7 @@ use Chamilo\Libraries\Storage\OrderBy;
  * @package rights
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class AjaxUserEntityFeed extends \Chamilo\Core\User\AjaxUsersFeed
+class AjaxUserEntityFeed extends \Chamilo\Core\User\Ajax\AjaxUsersFeed
 {
 
     /**
@@ -59,7 +60,8 @@ class AjaxUserEntityFeed extends \Chamilo\Core\User\AjaxUsersFeed
         if (! $this->get_user()->is_platform_admin() &&
              \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_users = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_users($this->get_user());
+            $target_users = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_users(
+                $this->get_user());
 
             if (count($target_users) > 0)
             {
@@ -88,7 +90,7 @@ class AjaxUserEntityFeed extends \Chamilo\Core\User\AjaxUsersFeed
         }
 
         $this->set_user_count(
-            \Chamilo\Core\User\DataManager :: count(User :: class_name(), new DataClassCountParameters($condition)));
+            \Chamilo\Core\User\storage\DataManager :: count(User :: class_name(), new DataClassCountParameters($condition)));
         $parameters = new DataClassRetrievesParameters(
             $condition,
             100,
@@ -97,6 +99,6 @@ class AjaxUserEntityFeed extends \Chamilo\Core\User\AjaxUsersFeed
                 new OrderBy(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_FIRSTNAME)),
                 new OrderBy(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_LASTNAME))));
 
-        return \Chamilo\Core\User\DataManager :: retrieves(User :: class_name(), $parameters);
+        return \Chamilo\Core\User\storage\DataManager :: retrieves(User :: class_name(), $parameters);
     }
 }

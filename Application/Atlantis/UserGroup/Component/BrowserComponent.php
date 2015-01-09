@@ -3,15 +3,15 @@ namespace Chamilo\Application\Atlantis\UserGroup\Component;
 
 use Chamilo\Libraries\Format\Breadcrumb;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Storage\OrCondition;
-use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\ActionBarRenderer;
 use Chamilo\Libraries\Format\TableSupport;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 
 class BrowserComponent extends Manager implements TableSupport
 {

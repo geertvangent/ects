@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Atlantis\Role\Entity\Component;
 
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 

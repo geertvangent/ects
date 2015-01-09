@@ -2,16 +2,16 @@
 namespace Chamilo\Application\Atlantis\Role\Ajax;
 
 use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Architecture\AjaxManager;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Chamilo\Libraries\Format\AdvancedElementFinderElements;
-use Chamilo\Libraries\Format\AdvancedElementFinderElement;
-use Chamilo\Libraries\Platform\Request;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Storage\Query\OrderBy;
 
 class AjaxRolesFeed extends AjaxManager
 {

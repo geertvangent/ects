@@ -9,8 +9,8 @@ use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRe
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Core\Rights\UserEntity;
-use Chamilo\Core\User\User;
-use Chamilo\Core\Group\Group;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Rights\PlatformGroupEntity;
 
 class EntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
@@ -46,7 +46,7 @@ class EntityTableCellRenderer extends DataClassTableCellRenderer implements Tabl
                 switch ($location_entity_right->get_entity_type())
                 {
                     case UserEntity :: ENTITY_TYPE :
-                        return \Chamilo\Core\User\DataManager :: retrieve(
+                        return \Chamilo\Core\User\storage\DataManager :: retrieve(
                             \Chamilo\Core\User\User :: class_name(),
                             (int) $location_entity_right->get_entity_id())->get_fullname();
                     case PlatformGroupEntity :: ENTITY_TYPE :

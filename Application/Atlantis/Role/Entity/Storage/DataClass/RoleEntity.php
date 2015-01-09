@@ -4,8 +4,8 @@ namespace Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Core\User\User;
-use Chamilo\Core\Group\Group;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Core\Group\Storage\DataClass\Group;
 
 /**
  * application.atlantis.role.entity.
@@ -186,7 +186,7 @@ class RoleEntity extends DataClass
         switch ($entity_type)
         {
             case 1 :
-                return \Chamilo\Core\User\DataManager :: retrieve(User :: class_name(), (int) $entity_id);
+                return \Chamilo\Core\User\storage\DataManager :: retrieve(User :: class_name(), (int) $entity_id);
                 break;
             case 2 :
                 return \Chamilo\Core\Group\DataManager :: retrieve_by_id(Group :: class_name(), $entity_id);

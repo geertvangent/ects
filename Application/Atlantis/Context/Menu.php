@@ -3,20 +3,20 @@ namespace Chamilo\Application\Atlantis\Context;
 
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Format\OptionsMenuRenderer;
 use Chamilo\Libraries\Format\TreeMenuRenderer;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\HTML_Menu;
 use Chamilo\HTML_Menu_ArrayRenderer;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\PatternMatchCondition;
-use Chamilo\Libraries\Storage\NotCondition;
-use Chamilo\Libraries\Storage\OrCondition;
-use Chamilo\Core\Group\Group;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
+use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
+use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\OrderBy;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $

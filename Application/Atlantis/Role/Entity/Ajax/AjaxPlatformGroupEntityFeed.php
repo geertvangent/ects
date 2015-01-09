@@ -1,20 +1,20 @@
 <?php
 namespace Chamilo\Application\Atlantis\Role\Entity\Ajax;
 
-use Chamilo\Libraries\Format\AdvancedElementFinderElement;
-use Chamilo\Libraries\Storage\PatternMatchCondition;
-use Chamilo\Libraries\Platform\Request;
-use Chamilo\Libraries\Storage\OrCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\ArrayResultSet;
-use Chamilo\Core\Group\AjaxPlatformGroupsFeed;
-use Chamilo\Core\Group\Group;
+use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
+use Chamilo\Core\Group\Ajax\AjaxPlatformGroupsFeed;
+use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Group\GroupRelUser;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\OrderBy;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 /**
  * Feed to return the platform groups for the platform group entity

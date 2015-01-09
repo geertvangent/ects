@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Atlantis\Role\Entity\Test\Source;
 
-use Chamilo\\Libraries\Architecture\TestApplication;
+namespace Chamilo\Librairies\Architecture\TestApplication;
 
 /**
  * This test case checks the php syntax for the php files of this package

@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Atlantis\Application\Right\Component;
 
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Session\Request;
 
 class AddRoleComponent extends Manager
 {

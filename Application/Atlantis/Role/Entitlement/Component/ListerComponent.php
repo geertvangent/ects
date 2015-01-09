@@ -6,14 +6,14 @@ use Chamilo\Libraries\Architecture\DelegateComponent;
 use Chamilo\Libraries\Format\Breadcrumb;
 use Chamilo\Libraries\Format\BreadcrumbTrail;
 use Chamilo\Libraries\Format\DynamicVisualTab;
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class ListerComponent extends Manager implements DelegateComponent
 {

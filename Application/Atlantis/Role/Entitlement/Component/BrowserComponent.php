@@ -3,16 +3,16 @@ namespace Chamilo\Application\Atlantis\Role\Entitlement\Component;
 
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Storage\InCondition;
-use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Format\Breadcrumb;
 use Chamilo\Libraries\Format\BreadcrumbTrail;
 use Chamilo\Libraries\Architecture\DelegateComponent;
-use Chamilo\Libraries\Platform\Request;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Format\TableSupport;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {

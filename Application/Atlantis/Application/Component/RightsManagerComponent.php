@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Atlantis\Application\Component;
 
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Session\Request;
 
 class RightsManagerComponent extends Manager
 {

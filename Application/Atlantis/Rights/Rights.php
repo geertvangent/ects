@@ -2,17 +2,17 @@
 namespace Chamilo\Application\Atlantis\Rights;
 
 use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\DataClassCountParameters;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Application\Atlantis\Role\Entity\UserEntity;
 use Chamilo\Application\Atlantis\Role\Entity\PlatformGroupEntity;
 use Chamilo\Libraries\Storage\DataClassCache;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Core\User\User;
-use Chamilo\Core\Group\Group;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class Rights extends \Chamilo\Core\Rights\RightsUtil
 {
@@ -304,7 +304,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                 $condition = new InCondition(
                     new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), 
                     $user_ids);
-                $authorized_user_count = \Chamilo\Core\User\DataManager :: count(
+                $authorized_user_count = \Chamilo\Core\User\storage\DataManager :: count(
                     User :: class_name(), 
                     new DataClassCountParameters($condition));
                 
@@ -321,7 +321,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                     new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_PLATFORMADMIN), 
                     1);
             }
-            $authorized_users = \Chamilo\Core\User\DataManager :: retrieves(
+            $authorized_users = \Chamilo\Core\User\storage\DataManager :: retrieves(
                 User :: class_name(), 
                 new DataClassRetrievesParameters($condition));
             
