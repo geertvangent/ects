@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application;
+namespace Chamilo\Application\Atlantis\application\component;
 
 use libraries\format\Breadcrumb;
 use application\atlantis\SessionBreadcrumbs;

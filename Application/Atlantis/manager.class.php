@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis;
+namespace Chamilo\Application\Atlantis;
 
 use libraries\format\BreadcrumbTrail;
 use libraries\format\theme\Theme;

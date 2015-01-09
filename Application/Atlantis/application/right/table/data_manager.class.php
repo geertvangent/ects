@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application\right;
+namespace Chamilo\Application\Atlantis\application\right\table;
 
 class DataManager extends \libraries\storage\data_manager\DataManager
 {

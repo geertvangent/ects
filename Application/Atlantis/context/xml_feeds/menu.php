@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\context;
+namespace Chamilo\Application\Atlantis\context\xml_feeds;
 
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\storage\AndCondition;

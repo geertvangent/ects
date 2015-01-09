@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\context;
+namespace Chamilo\Application\Atlantis\context\table\context;
 
 use libraries\format\Table;
 

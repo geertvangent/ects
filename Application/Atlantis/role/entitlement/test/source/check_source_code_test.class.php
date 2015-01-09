@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entitlement\test;
+namespace Chamilo\Application\Atlantis\role\entitlement\test\source;
 
 use \libraries\architecture\TestApplication;
 

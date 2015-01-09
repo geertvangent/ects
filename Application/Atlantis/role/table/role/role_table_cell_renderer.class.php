@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role;
+namespace Chamilo\Application\Atlantis\role\table\role;
 
 use libraries\architecture\application\Application;
 use libraries\format\theme\Theme;

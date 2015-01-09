@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application\right;
+namespace Chamilo\Application\Atlantis\application\right\table\right;
 
 use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
 use libraries\format\TableCellRendererActionsColumnSupport;

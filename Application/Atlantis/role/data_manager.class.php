@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role;
+namespace Chamilo\Application\Atlantis\role;
 
 class DataManager extends \libraries\storage\data_manager\DataManager
 {

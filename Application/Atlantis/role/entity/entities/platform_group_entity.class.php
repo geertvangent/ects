@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entity;
+namespace Chamilo\Application\Atlantis\role\entity\entities;
 
 use libraries\format\AdvancedElementFinderElementType;
 use libraries\platform\translation\Translation;

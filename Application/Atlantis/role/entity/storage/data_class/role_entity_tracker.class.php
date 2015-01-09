@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entity;
+namespace Chamilo\Application\Atlantis\role\entity\storage\data_class;
 
 use libraries\format\structure\ToolbarItem;
 use libraries\format\theme\Theme;

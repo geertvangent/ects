@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\rights;
+namespace Chamilo\Application\Atlantis\rights\table\entity;
 
 use libraries\storage\DataClassCountParameters;
 use libraries\storage\DataClassRetrievesParameters;

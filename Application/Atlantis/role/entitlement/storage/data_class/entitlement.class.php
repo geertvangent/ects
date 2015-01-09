@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entitlement;
+namespace Chamilo\Application\Atlantis\role\entitlement\storage\data_class;
 
 use libraries\utilities\Utilities;
 use libraries\storage\data_class\DataClass;

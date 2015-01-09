@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\rights\test;
+namespace Chamilo\Application\Atlantis\rights\test\source;
 
 use \libraries\architecture\TestApplication;
 

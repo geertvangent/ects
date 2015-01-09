@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application\right;
+namespace Chamilo\Application\Atlantis\application\right\form;
 
 use application\atlantis\role\entitlement\Entitlement;
 use libraries\format\form\FormValidator;

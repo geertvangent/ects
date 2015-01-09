@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\rights;
+namespace Chamilo\Application\Atlantis\rights\table\entity;
 
 use libraries\format\structure\ToolbarItem;
 use libraries\format\theme\Theme;

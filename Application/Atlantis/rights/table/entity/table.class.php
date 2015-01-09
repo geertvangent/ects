@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\rights;
+namespace Chamilo\Application\Atlantis\rights\table\entity;
 
 use libraries\platform\translation\Translation;
 use libraries\format\TableFormAction;

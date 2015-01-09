@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entity;
+namespace Chamilo\Application\Atlantis\role\entity\form;
 
 use libraries\file\Path;
 use libraries\format\ResourceManager;

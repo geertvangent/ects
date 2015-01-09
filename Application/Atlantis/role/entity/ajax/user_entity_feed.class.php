@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entity;
+namespace Chamilo\Application\Atlantis\role\entity\ajax;
 
 use libraries\format\AdvancedElementFinderElement;
 use libraries\platform\Request;

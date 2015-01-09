@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\rights;
+namespace Chamilo\Application\Atlantis\rights;
 
 use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;

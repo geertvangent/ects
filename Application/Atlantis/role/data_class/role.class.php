@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role;
+namespace Chamilo\Application\Atlantis\role\data_class;
 
 use libraries\storage\data_class\DataClass;
 use application\atlantis\role\entity\RoleEntity;

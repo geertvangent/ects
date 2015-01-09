@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\rights;
+namespace Chamilo\Application\Atlantis\rights\component;
 
 use libraries\architecture\NotAllowedException;
 use libraries\platform\translation\Translation;

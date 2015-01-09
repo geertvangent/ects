@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role;
+namespace Chamilo\Application\Atlantis\role\ajax;
 
 use libraries\platform\translation\Translation;
 use libraries\storage\DataClassRetrievesParameters;

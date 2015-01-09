@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis;
+namespace Chamilo\Application\Atlantis\component;
 
 class RoleComponent extends Manager
 {

@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\rights;
+namespace Chamilo\Application\Atlantis\rights\form;
 
 use libraries\storage\AndCondition;
 use libraries\storage\EqualityCondition;

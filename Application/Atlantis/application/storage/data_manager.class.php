@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application;
+namespace Chamilo\Application\Atlantis\application\storage;
 
 /**
  * $Id: menu_data_manager.class.php 157 2009-11-10 13:44:02Z vanpouckesven $

@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entity;
+namespace Chamilo\Application\Atlantis\role\entity\table\role_entity;
 
 use libraries\platform\translation\Translation;
 use libraries\format\StaticTableColumn;

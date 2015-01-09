@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entitlement;
+namespace Chamilo\Application\Atlantis\role\entitlement\form;
 
 use libraries\utilities\Utilities;
 use libraries\platform\translation\Translation;

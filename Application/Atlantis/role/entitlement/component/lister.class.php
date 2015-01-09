@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entitlement;
+namespace Chamilo\Application\Atlantis\role\entitlement\component;
 
 use application\atlantis\SessionBreadcrumbs;
 use libraries\architecture\DelegateComponent;

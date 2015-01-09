@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\user_group;
+namespace Chamilo\Application\Atlantis\user_group\table\application;
 
 use libraries\format\TableFormActionsSupport;
 use libraries\format\Table;

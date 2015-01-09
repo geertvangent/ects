@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application;
+namespace Chamilo\Application\Atlantis\application\package;
 
 class Deactivator extends \configuration\package\Deactivator
 {

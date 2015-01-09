@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\user_group;
+namespace Chamilo\Application\Atlantis\user_group\component;
 
 use libraries\utilities\Utilities;
 use libraries\platform\translation\Translation;

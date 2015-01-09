@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entitlement;
+namespace Chamilo\Application\Atlantis\role\entitlement\component;
 
 use libraries\platform\translation\Translation;
 use application\atlantis\SessionBreadcrumbs;

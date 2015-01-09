@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entitlement;
+namespace Chamilo\Application\Atlantis\role\entitlement\component;
 
 use libraries\platform\Request;
 use libraries\utilities\Utilities;

@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entity;
+namespace Chamilo\Application\Atlantis\role\entity\table\role_entity;
 
 use libraries\utilities\DatetimeUtilities;
 use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;

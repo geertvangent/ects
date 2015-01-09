@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\application\right;
+namespace Chamilo\Application\Atlantis\application\right\table\right;
 
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\format\TableDataProvider;

@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\rights;
+namespace Chamilo\Application\Atlantis\rights\storage\data_class;
 
 use libraries\storage\data_class\DataClass;
 

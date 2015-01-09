@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entity;
+namespace Chamilo\Application\Atlantis\role\entity\component;
 
 use libraries\platform\translation\Translation;
 use application\atlantis\SessionBreadcrumbs;

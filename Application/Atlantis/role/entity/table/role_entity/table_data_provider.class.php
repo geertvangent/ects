@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entity;
+namespace Chamilo\Application\Atlantis\role\entity\table\role_entity;
 
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\format\TableDataProvider;

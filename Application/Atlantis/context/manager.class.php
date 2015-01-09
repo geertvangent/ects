@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\context;
+namespace Chamilo\Application\Atlantis\context;
 
 use libraries\architecture\application\Application;
 

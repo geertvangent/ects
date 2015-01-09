@@ -1,5 +1,5 @@
 <?php
-namespace application\atlantis\role\entitlement;
+namespace Chamilo\Application\Atlantis\role\entitlement\table\entitlement;
 
 use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
 use libraries\format\TableCellRendererActionsColumnSupport;
