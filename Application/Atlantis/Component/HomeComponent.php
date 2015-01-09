@@ -1,15 +1,17 @@
 <?php
 namespace Chamilo\Application\Atlantis\Component;
 
-use Chamilo\Libraries\Format\BreadcrumbTrail;
-use Chamilo\Libraries\Format\DynamicSearchAction;
-use Chamilo\Libraries\Architecture\DelegateComponent;
-use Chamilo\Libraries\Format\DynamicAction;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Tabs\DynamicSearchAction;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Format\Tabs\DynamicAction;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Format\DynamicActionsTab;
+use Chamilo\Libraries\Format\Tabs\DynamicActionsTab;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
+use Chamilo\Application\Atlantis\Manager;
+use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 
 class HomeComponent extends Manager implements DelegateComponent
 {

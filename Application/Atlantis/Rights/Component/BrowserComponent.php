@@ -1,12 +1,13 @@
 <?php
 namespace Chamilo\Application\Atlantis\Rights\Component;
 
-use Chamilo\Libraries\Architecture\NotAllowedException;
-use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Atlantis\Rights\Manager;
 
 class BrowserComponent extends Manager implements TableSupport
 {
@@ -37,13 +38,11 @@ class BrowserComponent extends Manager implements TableSupport
     {
         // TODO Auto-generated method stub
     }
-	/* (non-PHPdoc)
-     * @see \libraries\format\TableSupport::get_table_condition()
+    /*
+     * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */
     public function get_table_condition($table_class_name)
     {
         // TODO Auto-generated method stub
-
     }
-
 }

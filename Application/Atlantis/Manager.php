@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Atlantis;
 
-use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Architecture\Application\Application;
-use Chamilo\Libraries\Architecture\NotAllowedException;
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 
 class Manager extends Application
 {

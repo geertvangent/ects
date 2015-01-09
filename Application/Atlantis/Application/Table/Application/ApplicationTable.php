@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Atlantis\Application\Table\Application;
 
-use Chamilo\Libraries\Format\TableFormActionsSupport;
-use Chamilo\Libraries\Format\Table;
+use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
+use Chamilo\Libraries\Format\Table\Table;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Format\TableFormAction;
-use Chamilo\Libraries\Format\TableFormActions;
+use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
+use Chamilo\Libraries\Format\Table\FormAction\TableFormActions;
 
 class ApplicationTable extends Table implements TableFormActionsSupport
 {

@@ -4,18 +4,21 @@ namespace Chamilo\Application\Atlantis\Context\Component;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\ActionBarRenderer;
-use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Application\Atlantis\Context\Manager;
+use Chamilo\Application\Atlantis\Context\Table\Context\ContextTable;
+use Chamilo\Application\Atlantis\Context\Menu;
 
 class BrowserComponent extends Manager implements TableSupport
 {
@@ -39,7 +42,9 @@ class BrowserComponent extends Manager implements TableSupport
         }
         if ($this->get_context() != 0)
         {
-            $context = \Chamilo\Core\Group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $this->get_context());
+            $context = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
+                Group :: class_name(),
+                (int) $this->get_context());
         }
         else
         {
@@ -108,13 +113,11 @@ class BrowserComponent extends Manager implements TableSupport
         }
         return $this->action_bar;
     }
-	/* (non-PHPdoc)
-     * @see \libraries\format\TableSupport::get_table_condition()
+    /*
+     * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */
     public function get_table_condition($table_class_name)
     {
         // TODO Auto-generated method stub
-
     }
-
 }

@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Atlantis\Role\Table\Role;
 
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Libraries\Format\TableDataProvider;
+use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 
 class RoleTableDataProvider extends TableDataProvider

@@ -3,13 +3,16 @@ namespace Chamilo\Application\Atlantis\Role\Entity\Table\RoleEntity;
 
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
-use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Core\Rights\PlatformGroupEntity;
+use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
+use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
+use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Chamilo\Application\Atlantis\Role\Entity\Manager;
 
 class RoleEntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

@@ -5,14 +5,15 @@ use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Application\Atlantis\Role\Entitlement\Manager;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {
@@ -44,11 +45,11 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         {
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Right\Right :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Right\Right :: PROPERTY_APPLICATION_ID),
+                    \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+                    \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
                 new StaticConditionVariable($this->application_id));
             $rights = \Chamilo\Application\Atlantis\Application\Right\DataManager :: retrieves(
-                \Chamilo\Application\Atlantis\Application\Right\Right :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
                 $condition);
             $right_ids = array();
             while ($right = $rights->next_result())
@@ -95,7 +96,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         if ($this->has_application_id())
         {
             $application = \Chamilo\Application\Atlantis\Application\DataManager :: retrieve(
-                \Chamilo\Application\Atlantis\Application\Application :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
                 (int) $this->application_id);
 
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
@@ -113,7 +114,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         if ($this->has_right_id() && $this->has_application_id())
         {
             $right = \Chamilo\Application\Atlantis\Application\Right\DataManager :: retrieve(
-                \Chamilo\Application\Atlantis\Application\Right\Right :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
                 (int) $this->right_id);
 
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $right->get_name()));
@@ -129,7 +130,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         if ($this->has_role_id())
         {
             $role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve(
-                \Chamilo\Application\Atlantis\Role\Role :: class_name(),
+                \Chamilo\Application\Atlantis\Role\DataClass\Role :: class_name(),
                 (int) $this->role_id);
 
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));

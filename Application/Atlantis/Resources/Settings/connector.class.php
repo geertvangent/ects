@@ -1,7 +1,6 @@
 <?php
-namespace application\atlantis;
-
-use libraries\format\theme\Theme;
+namespace Chamilo\Application\Atlantis;
+use Chamilo\Libraries\Format\Theme\Theme;
 
 class SettingsConnector
 {

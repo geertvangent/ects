@@ -4,14 +4,14 @@ namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Format\Structure\Toolbar;
-use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Core\Rights\UserEntity;
+use Chamilo\Core\Rights\Entity\UserEntity;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Core\Rights\PlatformGroupEntity;
+use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
 
 class EntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -47,11 +47,11 @@ class EntityTableCellRenderer extends DataClassTableCellRenderer implements Tabl
                 {
                     case UserEntity :: ENTITY_TYPE :
                         return \Chamilo\Core\User\storage\DataManager :: retrieve(
-                            \Chamilo\Core\User\User :: class_name(),
+                            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
                             (int) $location_entity_right->get_entity_id())->get_fullname();
                     case PlatformGroupEntity :: ENTITY_TYPE :
-                        return \Chamilo\Core\Group\DataManager :: retrieve_by_id(
-                            \Chamilo\Core\Group\Group :: class_name(),
+                        return \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
+                            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
                             (int) $location_entity_right->get_entity_id())->get_name();
                 }
             case Translation :: get('Group') :

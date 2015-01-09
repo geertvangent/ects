@@ -4,6 +4,7 @@ namespace Chamilo\Application\Atlantis\Application\Form;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Application\Atlantis\Application\Storage\DataClass\Application;
 
 class ApplicationForm extends FormValidator
 {

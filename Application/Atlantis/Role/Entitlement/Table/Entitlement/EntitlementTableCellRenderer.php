@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Atlantis\Role\Entitlement\Table\Entitlement;
 
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
-use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation\Translation;

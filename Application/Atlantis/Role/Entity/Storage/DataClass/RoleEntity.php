@@ -6,16 +6,17 @@ use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager;
 
 /**
  * application.atlantis.role.entity.
- * 
+ *
  * @author GillardMagali
  */
 class RoleEntity extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * RoleEntity properties
      */
@@ -34,7 +35,7 @@ class RoleEntity extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
@@ -46,13 +47,13 @@ class RoleEntity extends DataClass
         $extended_property_names[] = self :: PROPERTY_ROLE_ID;
         $extended_property_names[] = self :: PROPERTY_START_DATE;
         $extended_property_names[] = self :: PROPERTY_END_DATE;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -62,7 +63,7 @@ class RoleEntity extends DataClass
 
     /**
      * Returns the entity_type of this RoleEntity.
-     * 
+     *
      * @return integer The entity_type.
      */
     public function get_entity_type()
@@ -72,7 +73,7 @@ class RoleEntity extends DataClass
 
     /**
      * Sets the entity_type of this RoleEntity.
-     * 
+     *
      * @param $entity_type integer
      */
     public function set_entity_type($entity_type)
@@ -82,7 +83,7 @@ class RoleEntity extends DataClass
 
     /**
      * Returns the entity_id of this RoleEntity.
-     * 
+     *
      * @return integer The entity_id.
      */
     public function get_entity_id()
@@ -92,7 +93,7 @@ class RoleEntity extends DataClass
 
     /**
      * Sets the entity_id of this RoleEntity.
-     * 
+     *
      * @param $entity_id integer
      */
     public function set_entity_id($entity_id)
@@ -102,7 +103,7 @@ class RoleEntity extends DataClass
 
     /**
      * Returns the context_id of this RoleEntity.
-     * 
+     *
      * @return integer The context_id.
      */
     public function get_context_id()
@@ -112,7 +113,7 @@ class RoleEntity extends DataClass
 
     /**
      * Sets the context_id of this RoleEntity.
-     * 
+     *
      * @param $context_id integer
      */
     public function set_context_id($context_id)
@@ -122,7 +123,7 @@ class RoleEntity extends DataClass
 
     /**
      * Returns the role_id of this RoleEntity.
-     * 
+     *
      * @return integer The role_id.
      */
     public function get_role_id()
@@ -132,7 +133,7 @@ class RoleEntity extends DataClass
 
     /**
      * Sets the role_id of this RoleEntity.
-     * 
+     *
      * @param $role_id integer
      */
     public function set_role_id($role_id)
@@ -163,12 +164,12 @@ class RoleEntity extends DataClass
     public function get_entity_type_image()
     {
         return Theme :: get_image(
-            'entity_type/' . $this->get_entity_type(), 
-            'png', 
-            null, 
-            null, 
-            ToolbarItem :: DISPLAY_ICON, 
-            false, 
+            'entity_type/' . $this->get_entity_type(),
+            'png',
+            null,
+            null,
+            ToolbarItem :: DISPLAY_ICON,
+            false,
             __NAMESPACE__);
     }
 
@@ -189,7 +190,7 @@ class RoleEntity extends DataClass
                 return \Chamilo\Core\User\storage\DataManager :: retrieve(User :: class_name(), (int) $entity_id);
                 break;
             case 2 :
-                return \Chamilo\Core\Group\DataManager :: retrieve_by_id(Group :: class_name(), $entity_id);
+                return \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(Group :: class_name(), $entity_id);
                 break;
         }
     }
@@ -225,7 +226,7 @@ class RoleEntity extends DataClass
         if (! isset($this->role))
         {
             $this->role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve(
-                \Chamilo\Application\Atlantis\Role\Role :: class_name(), 
+                \Chamilo\Application\Atlantis\Role\DataClass\Role :: class_name(),
                 (int) $this->get_role_id());
         }
         return $this->role;
@@ -235,7 +236,9 @@ class RoleEntity extends DataClass
     {
         if (! isset($this->context))
         {
-            $this->context = \Chamilo\Core\Group\DataManager :: retrieve(Group :: class_name(), (int) $this->get_context_id());
+            $this->context = \Chamilo\Core\Group\storage\DataManager :: retrieve(
+                Group :: class_name(),
+                (int) $this->get_context_id());
         }
         return $this->context;
     }
@@ -252,7 +255,7 @@ class RoleEntity extends DataClass
         $tracker->set_user_id($user_id);
         $tracker->set_action_type($action_type);
         $tracker->set_action_date($action_date ? $action_date : time());
-        
+
         return $tracker->create();
     }
 }

@@ -1,9 +1,10 @@
 <?php
 namespace Chamilo\Application\Atlantis\Application\Table\Application;
 
-use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
-use Chamilo\Libraries\Format\DataClassTableColumnModel;
-use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
+use Chamilo\Application\Atlantis\Application\Storage\DataClass\Application;
 
 class ApplicationTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

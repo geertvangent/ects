@@ -2,10 +2,11 @@
 namespace Chamilo\Application\Atlantis\Role\Entity\Table\RoleEntity;
 
 use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Format\StaticTableColumn;
-use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
-use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
-use Chamilo\Libraries\Format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
+use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
+use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 
 class RoleEntityTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

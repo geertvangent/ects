@@ -11,10 +11,12 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Chamilo\Core\Group\Ajax\AjaxPlatformGroupsFeed;
 use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Core\Group\GroupRelUser;
+use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Chamilo\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -42,7 +44,8 @@ class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
         }
         elseif (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+                $this->get_user());
 
             if (in_array($group->get_id(), $target_groups))
             {
@@ -140,7 +143,7 @@ class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
             $condition = $conditions[0];
         }
 
-        $groups = \Chamilo\Core\Group\DataManager :: retrieves(
+        $groups = \Chamilo\Core\Group\storage\DataManager :: retrieves(
             Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
@@ -154,7 +157,8 @@ class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
         }
         elseif (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+                $this->get_user());
 
             $allowed_groups = array();
 
@@ -198,8 +202,9 @@ class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
         elseif (! $this->get_user()->is_platform_admin() &&
              \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $group = \Chamilo\Core\Group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $filter_id);
-            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups($this->get_user());
+            $group = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(Group :: class_name(), (int) $filter_id);
+            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+                $this->get_user());
 
             foreach ($target_groups as $target_group)
             {
@@ -218,7 +223,7 @@ class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
                 new StaticConditionVariable($filter_id));
-            $relations = \Chamilo\Core\Group\DataManager :: retrieves(GroupRelUser :: class_name(), $condition);
+            $relations = \Chamilo\Core\Group\storage\DataManager :: retrieves(GroupRelUser :: class_name(), $condition);
 
             $user_ids = array();
 

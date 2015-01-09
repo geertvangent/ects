@@ -1,11 +1,12 @@
 <?php
 namespace Chamilo\Application\Atlantis\Rights\Component;
 
-use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Atlantis\Rights\Manager;
 
 class AccessorComponent extends Manager
 {
@@ -16,20 +17,20 @@ class AccessorComponent extends Manager
         {
             throw new NotAllowedException();
         }
-        
+
         SessionBreadcrumbs :: add(
             new Breadcrumb(
-                $this->get_url(), 
+                $this->get_url(),
                 Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
-        
+
         $form = new RightsForm($this, $this->get_url());
-        
+
         if ($form->validate())
         {
             $success = $form->set_rights();
-            
+
             $this->redirect(
-                Translation :: get($success ? 'AccessRightsSaved' : 'AccessRightsNotSaved'), 
+                Translation :: get($success ? 'AccessRightsSaved' : 'AccessRightsNotSaved'),
                 ($success ? false : true));
         }
         else

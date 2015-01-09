@@ -84,8 +84,8 @@ class RightsLocationEntityRightGroup extends DataClass
     {
         if (! isset($this->group))
         {
-            $this->group = \Chamilo\Core\Group\DataManager :: retrieve_by_id(
-                \Chamilo\Core\Group\Group :: class_name(), 
+            $this->group = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
+                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
                 $this->get_group_id());
         }
         return $this->group;

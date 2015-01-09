@@ -6,10 +6,11 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Authentication\Authentication;
-use Chamilo\Application\Atlantis\UserGroup\Context;
+use Chamilo\Application\Atlantis\UserGroup\Storage\DataClass\Context;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Application\Atlantis\Context\Storage\DataManager;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $

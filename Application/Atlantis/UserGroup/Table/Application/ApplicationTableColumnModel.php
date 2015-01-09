@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\Atlantis\UserGroup\Table\Application;
 
-use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
-use Chamilo\Libraries\Format\DataClassTableColumnModel;
-use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 
 class ApplicationTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
@@ -15,15 +15,15 @@ class ApplicationTableColumnModel extends DataClassTableColumnModel implements T
     {
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Chamilo\Application\Atlantis\Application\Application :: class_name(),
-                \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_NAME));
+                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME));
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Chamilo\Application\Atlantis\Application\Application :: class_name(),
-                \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_DESCRIPTION));
+                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION));
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Chamilo\Application\Atlantis\Application\Application :: class_name(),
-                \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_URL));
+                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL));
     }
 }

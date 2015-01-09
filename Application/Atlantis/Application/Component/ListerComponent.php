@@ -1,17 +1,18 @@
 <?php
 namespace Chamilo\Application\Atlantis\Application\Component;
 
-use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Format\DynamicContentTab;
+use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Application\Atlantis\Application\Manager;
 
 class ListerComponent extends Manager implements TableSupport
 {
@@ -46,10 +47,12 @@ class ListerComponent extends Manager implements TableSupport
         $parameters = new DataClassRetrievesParameters(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Right\Right :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Right\Right :: PROPERTY_APPLICATION_ID),
+                    \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+                    \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
                 new StaticConditionVariable($application_id)));
-        $rights = DataManager :: retrieves(\Chamilo\Application\Atlantis\Application\Right\Right :: class_name(), $parameters);
+        $rights = DataManager :: retrieves(
+            \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+            $parameters);
         $properties = $this->get_display_rights($rights);
         $table = new PropertiesTable($properties);
 
@@ -74,13 +77,11 @@ class ListerComponent extends Manager implements TableSupport
     {
         // TODO Auto-generated method stub
     }
-	/* (non-PHPdoc)
-     * @see \libraries\format\TableSupport::get_table_condition()
+    /*
+     * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */
     public function get_table_condition($table_class_name)
     {
         // TODO Auto-generated method stub
-
     }
-
 }

@@ -3,7 +3,7 @@ namespace Chamilo\Application\Atlantis\Application\Right\Table\DataClass;
 
 use Chamilo\Application\Atlantis\Application\Application;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Application\Atlantis\Role\Entitlement\Entitlement;
+use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;

@@ -5,11 +5,9 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Format\OptionsMenuRenderer;
-use Chamilo\Libraries\Format\TreeMenuRenderer;
+use Chamilo\Libraries\Format\Menu\OptionsMenuRenderer;
+use Chamilo\Libraries\Format\Menu\TreeMenuRenderer;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\HTML_Menu;
-use Chamilo\HTML_Menu_ArrayRenderer;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
@@ -17,6 +15,7 @@ use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Application\Atlantis\Context\Storage\DataManager;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -28,7 +27,7 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
  *
  * @author Bart Mollet
  */
-class Menu extends HTML_Menu
+class Menu extends \HTML_Menu
 {
     const TREE_NAME = __CLASS__;
 
@@ -71,7 +70,7 @@ class Menu extends HTML_Menu
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
                 new StaticConditionVariable(0));
-            $group = \Chamilo\Core\Group\DataManager :: retrieves(
+            $group = \Chamilo\Core\Group\storage\DataManager :: retrieves(
                 Group :: class_name(),
                 new DataClassRetrievesParameters(
                     $condition,
@@ -82,7 +81,7 @@ class Menu extends HTML_Menu
         }
         else
         {
-            $this->current_category = \Chamilo\Core\Group\DataManager :: retrieve(
+            $this->current_category = \Chamilo\Core\Group\storage\DataManager :: retrieve(
                 Group :: class_name(),
                 new EqualityCondition(
                     new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
@@ -92,7 +91,7 @@ class Menu extends HTML_Menu
         $this->urlFmt = $url_format;
         $menu = $this->get_menu();
         parent :: __construct($menu);
-        $this->array_renderer = new HTML_Menu_ArrayRenderer();
+        $this->array_renderer = new \HTML_Menu_ArrayRenderer();
         $this->forceCurrentUrl($this->get_url($this->current_category->get_id()));
     }
 
@@ -103,7 +102,7 @@ class Menu extends HTML_Menu
         $condition = new EqualityCondition(
             new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable(0));
-        $group = \Chamilo\Core\Group\DataManager :: retrieves(
+        $group = \Chamilo\Core\Group\storage\DataManager :: retrieves(
             Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,

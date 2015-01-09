@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Atlantis\UserGroup\Component;
 
-use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
@@ -9,9 +9,11 @@ use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\ActionBarRenderer;
-use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Application\Atlantis\UserGroup\Manager;
+use Chamilo\Application\Atlantis\UserGroup\Table\Application\ApplicationTable;
 
 class BrowserComponent extends Manager implements TableSupport
 {
@@ -27,18 +29,18 @@ class BrowserComponent extends Manager implements TableSupport
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Application :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_NAME),
+                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME),
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Application :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_DESCRIPTION),
+                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION),
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Application :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_URL),
+                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL),
                 '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
@@ -76,13 +78,11 @@ class BrowserComponent extends Manager implements TableSupport
         }
         return $this->action_bar;
     }
-	/* (non-PHPdoc)
-     * @see \libraries\format\TableSupport::get_table_condition()
+    /*
+     * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */
     public function get_table_condition($table_class_name)
     {
         // TODO Auto-generated method stub
-
     }
-
 }

@@ -6,11 +6,14 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\AdvancedElementFinderElementTypes;
-use Chamilo\Core\Rights\PlatformGroupEntity;
-use Chamilo\Core\Rights\UserEntity;
+use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementTypes;
+use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
+use Chamilo\Core\Rights\Entity\UserEntity;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
+use Chamilo\Application\Atlantis\Rights\Storage\DataManager;
+use Chamilo\Application\Atlantis\Rights\Rights;
 
 class RightsGroupForm extends FormValidator
 {

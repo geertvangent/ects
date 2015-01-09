@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Atlantis;
 
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Platform\Session;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Platform\Session\Session;
 
 /**
  * application.atlantis.
- * 
+ *
  * @author GillardMagali
  */
 class SessionBreadcrumbs

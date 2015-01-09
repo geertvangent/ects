@@ -3,7 +3,7 @@ namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
 
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Libraries\Format\TableDataProvider;
+use Chamilo\Libraries\Format\Table\TableDataProvider;
 
 class EntityTableDataProvider extends TableDataProvider
 {

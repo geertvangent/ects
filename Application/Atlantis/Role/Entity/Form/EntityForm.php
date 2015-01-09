@@ -3,11 +3,13 @@ namespace Chamilo\Application\Atlantis\Role\Entity\Form;
 
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\ResourceManager;
-use Chamilo\Libraries\Format\AdvancedElementFinderElementType;
-use Chamilo\Libraries\Format\AdvancedElementFinderElementTypes;
+use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementType;
+use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementTypes;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Chamilo\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
 
 class EntityForm extends FormValidator
 {
@@ -22,7 +24,7 @@ class EntityForm extends FormValidator
     public function __construct($application, $action)
     {
         parent :: __construct('application', 'post', $action);
-        
+
         $this->application = $application;
         $this->build();
         $this->setDefaults();
@@ -32,91 +34,91 @@ class EntityForm extends FormValidator
     {
         // entity
         $user_entity = new UserEntity();
-        
+
         $entities = array();
         $entities[UserEntity :: ENTITY_TYPE] = $user_entity;
         $entities[PlatformGroupEntity :: ENTITY_TYPE] = new PlatformGroupEntity();
-        
+
         $types = new AdvancedElementFinderElementTypes();
-        
+
         foreach ($entities as $entity)
         {
             $types->add_element_type($entity->get_element_finder_type());
         }
-        
+
         $this->addElement('advanced_element_finder', self :: PROPERTY_ENTITY, Translation :: get('UserGroup'), $types);
-        
+
         // roles
         $types = new AdvancedElementFinderElementTypes();
-        
+
         $types->add_element_type(
             new AdvancedElementFinderElementType(
-                'roles', 
-                Translation :: get('Roles'), 
-                'application\atlantis\role', 
-                'roles_feed', 
+                'roles',
+                Translation :: get('Roles'),
+                'application\atlantis\role',
+                'roles_feed',
                 array()));
-        
+
         $this->addElement('advanced_element_finder', self :: PROPERTY_ROLE, Translation :: get('Roles'), $types);
-        
+
         // context
         $types = new AdvancedElementFinderElementTypes();
-        
+
         $types->add_element_type(
             new AdvancedElementFinderElementType(
-                'contexts', 
-                Translation :: get('Contexts'), 
-                'application\atlantis\role\entity', 
-                'contexts_feed', 
+                'contexts',
+                Translation :: get('Contexts'),
+                'application\atlantis\role\entity',
+                'contexts_feed',
                 array()));
-        
+
         $this->addElement('advanced_element_finder', self :: PROPERTY_CONTEXT, Translation :: get('Contexts'), $types);
-        
+
         // start date
         $this->addElement(
-            'text', 
-            self :: PROPERTY_START_DATE, 
-            Translation :: get('StartDate'), 
+            'text',
+            self :: PROPERTY_START_DATE,
+            Translation :: get('StartDate'),
             'id="start_date" style="width:120px;"');
         $this->addRule(
-            self :: PROPERTY_START_DATE, 
-            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 
+            self :: PROPERTY_START_DATE,
+            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
             'required');
-        
+
         // end date
         $this->addElement(
-            'text', 
-            self :: PROPERTY_END_DATE, 
-            Translation :: get('EndDate'), 
+            'text',
+            self :: PROPERTY_END_DATE,
+            Translation :: get('EndDate'),
             'id="end_date" style="width:120px;"');
         $this->addRule(
-            self :: PROPERTY_END_DATE, 
-            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 
+            self :: PROPERTY_END_DATE,
+            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
             'required');
-        
+
         // buttons
         $buttons[] = $this->createElement(
-            'style_submit_button', 
-            'submit', 
-            Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
+            'style_submit_button',
+            'submit',
+            Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
             array('class' => 'positive'));
         $buttons[] = $this->createElement(
-            'style_reset_button', 
-            'reset', 
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), 
+            'style_reset_button',
+            'reset',
+            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
             array('class' => 'normal empty'));
-        
+
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
-        
+
         $this->addElement(
-            'html', 
+            'html',
             ResourceManager :: get_instance()->get_resource_html(
                 Path :: namespace_to_full_path(__NAMESPACE__, true) . 'resources/javascript/dates.js'));
     }
 
     /**
      * Sets default values.
-     * 
+     *
      * @param $defaults array Default values for this form's parameters.
      */
     public function setDefaults($defaults = array ())

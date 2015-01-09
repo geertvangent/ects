@@ -3,12 +3,12 @@ namespace Chamilo\Application\Atlantis\Rights;
 
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Format\DynamicVisualTab;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
 
 class Manager extends Application
 {
@@ -23,7 +23,7 @@ class Manager extends Application
     public function __construct($user = null, $application = null)
     {
         parent :: __construct($user, $application);
-        
+
         SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
     }
 
@@ -45,27 +45,27 @@ class Manager extends Application
     public function get_tabs($current_tab, $content)
     {
         $tabs = new DynamicVisualTabsRenderer(Utilities :: get_classname_from_namespace(__NAMESPACE__, true), $content);
-        
+
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_CREATE, 
-                Translation :: get('Add'), 
-                Theme :: get_image_path() . 'tab/' . self :: ACTION_CREATE . '.png', 
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)), 
+                self :: ACTION_CREATE,
+                Translation :: get('Add'),
+                Theme :: get_image_path() . 'tab/' . self :: ACTION_CREATE . '.png',
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)),
                 ($current_tab == self :: ACTION_CREATE ? true : false)));
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_ACCESS, 
-                Translation :: get('GeneralAccess'), 
-                Theme :: get_image_path() . 'tab/' . self :: ACTION_ACCESS . '.png', 
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_ACCESS)), 
+                self :: ACTION_ACCESS,
+                Translation :: get('GeneralAccess'),
+                Theme :: get_image_path() . 'tab/' . self :: ACTION_ACCESS . '.png',
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_ACCESS)),
                 ($current_tab == self :: ACTION_ACCESS ? true : false)));
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_BROWSE, 
-                Translation :: get('Targets'), 
-                Theme :: get_image_path() . 'tab/' . self :: ACTION_BROWSE . '.png', 
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_BROWSE)), 
+                self :: ACTION_BROWSE,
+                Translation :: get('Targets'),
+                Theme :: get_image_path() . 'tab/' . self :: ACTION_BROWSE . '.png',
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_BROWSE)),
                 ($current_tab == self :: ACTION_BROWSE ? true : false)));
         return $tabs;
     }

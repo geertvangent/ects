@@ -7,7 +7,7 @@ use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
-use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 
 class RoleTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport

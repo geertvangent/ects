@@ -2,22 +2,23 @@
 namespace Chamilo\Application\Atlantis\Role\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Application\Atlantis\Role\Entity\RoleEntity;
+use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\Atlantis\Role\Entitlement\Entitlement;
+use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Application\Atlantis\Role\DataManager;
 
 /**
  * application.atlantis.role.
- * 
+ *
  * @author GillardMagali
  */
 class Role extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * Role properties
      */
@@ -26,7 +27,7 @@ class Role extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -34,13 +35,13 @@ class Role extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_NAME;
         $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -50,7 +51,7 @@ class Role extends DataClass
 
     /**
      * Returns the name of this Role.
-     * 
+     *
      * @return text The name.
      */
     public function get_name()
@@ -60,7 +61,7 @@ class Role extends DataClass
 
     /**
      * Sets the name of this Role.
-     * 
+     *
      * @param text $name
      */
     public function set_name($name)
@@ -70,7 +71,7 @@ class Role extends DataClass
 
     /**
      * Returns the description of this Role.
-     * 
+     *
      * @return text The description.
      */
     public function get_description()
@@ -80,7 +81,7 @@ class Role extends DataClass
 
     /**
      * Sets the description of this Role.
-     * 
+     *
      * @param text $description
      */
     public function set_description($description)
@@ -91,12 +92,12 @@ class Role extends DataClass
     public function delete()
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ROLE_ID), 
+            new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ROLE_ID),
             new StaticConditionVariable($this->get_id()));
-        $role_entities = \Chamilo\Application\Atlantis\Role\Entity\DataManager :: retrieves(
-            RoleEntity :: class_name(), 
+        $role_entities = \Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
+            RoleEntity :: class_name(),
             new DataClassRetrievesParameters($condition));
-        
+
         while ($role_entity = $role_entities->next_result())
         {
             if (! $role_entity->delete())
@@ -104,14 +105,14 @@ class Role extends DataClass
                 return false;
             }
         }
-        
+
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_ROLE_ID), 
+            new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_ROLE_ID),
             new StaticConditionVariable($this->get_id()));
-        $entitlements = \Chamilo\Application\Atlantis\Role\Entitlement\DataManager :: retrieves(
-            Entitlement :: class_name(), 
+        $entitlements = \Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataManager :: retrieves(
+            Entitlement :: class_name(),
             new DataClassRetrievesParameters($condition));
-        
+
         while ($entitlement = $entitlements->next_result())
         {
             if (! $entitlement->delete())
@@ -119,7 +120,7 @@ class Role extends DataClass
                 return false;
             }
         }
-        
+
         return parent :: delete();
     }
 }

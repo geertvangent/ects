@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Atlantis\Role\Entity\Entities;
 
-use Chamilo\Libraries\Format\AdvancedElementFinderElementType;
+use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementType;
 use Chamilo\Libraries\Platform\Translation\Translation;
 
-class UserEntity extends \Chamilo\Core\Rights\UserEntity
+class UserEntity extends \Chamilo\Core\Rights\Entity\UserEntity
 {
 
     /**
@@ -13,10 +13,10 @@ class UserEntity extends \Chamilo\Core\Rights\UserEntity
     public function get_element_finder_type()
     {
         return new AdvancedElementFinderElementType(
-            'users', 
-            Translation :: get('Users'), 
-            __NAMESPACE__, 
-            'user_entity_feed', 
+            'users',
+            Translation :: get('Users'),
+            __NAMESPACE__,
+            'user_entity_feed',
             array());
     }
 }
