@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\component;
+namespace Chamilo\Application\Atlantis\Role\Component;
 
-use libraries\platform\Request;
+use Chamilo\Libraries\Platform\Request;
 
 class EntitlementComponent extends Manager
 {
@@ -9,10 +9,10 @@ class EntitlementComponent extends Manager
     public function run()
     {
         $this->set_parameter(
-            \application\atlantis\role\Manager :: PARAM_ROLE_ID, 
-            Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID));
-        \libraries\architecture\Application :: launch(
-            \application\atlantis\role\entitlement\Manager :: context(), 
+            \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID, 
+            Request :: get(\Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID));
+        \Chamilo\Libraries\Architecture\Application :: launch(
+            \Chamilo\Application\Atlantis\Role\Entitlement\Manager :: context(), 
             $this->get_user(), 
             $this);
     }

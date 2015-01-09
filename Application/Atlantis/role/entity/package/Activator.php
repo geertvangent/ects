@@ -1,6 +1,6 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entity\package;
+namespace Chamilo\Application\Atlantis\Role\Entity\Package;
 
-class Activator extends \configuration\package\Activator
+class Activator extends \Chamilo\Configuration\Package\Activator
 {
 }

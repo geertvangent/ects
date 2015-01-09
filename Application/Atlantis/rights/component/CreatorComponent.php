@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\component;
+namespace Chamilo\Application\Atlantis\Rights\Component;
 
-use libraries\architecture\NotAllowedException;
-use libraries\platform\translation\Translation;
-use application\atlantis\SessionBreadcrumbs;
-use libraries\format\Breadcrumb;
-use libraries\utilities\Utilities;
+use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class CreatorComponent extends Manager
 {

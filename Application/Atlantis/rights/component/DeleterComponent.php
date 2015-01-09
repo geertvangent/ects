@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\component;
+namespace Chamilo\Application\Atlantis\Rights\Component;
 
-use libraries\architecture\NotAllowedException;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
 class DeleterComponent extends Manager
 {
@@ -15,7 +15,7 @@ class DeleterComponent extends Manager
             throw new NotAllowedException();
         }
         
-        $ids = \libraries\platform\Request :: get(self :: PARAM_LOCATION_ENTITY_RIGHT_GROUP_ID);
+        $ids = \Chamilo\Libraries\Platform\Request :: get(self :: PARAM_LOCATION_ENTITY_RIGHT_GROUP_ID);
         $failures = 0;
         
         if (! empty($ids))

@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group\table\application;
+namespace Chamilo\Application\Atlantis\UserGroup\Table\Application;
 
-use libraries\utilities\Utilities;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
-use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\structure\Toolbar;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Structure\Toolbar;
 
 class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

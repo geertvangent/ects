@@ -1,17 +1,17 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\component;
+namespace Chamilo\Application\Atlantis\Application\Component;
 
-use libraries\format\PropertiesTable;
-use libraries\platform\Request;
-use libraries\format\DynamicVisualTabsRenderer;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\EqualityCondition;
-use libraries\platform\translation\Translation;
-use libraries\format\DynamicContentTab;
-use libraries\utilities\Utilities;
-use libraries\format\TableSupport;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\PropertyConditionVariable;
+use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\DynamicContentTab;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
 
 class ListerComponent extends Manager implements TableSupport
 {
@@ -46,10 +46,10 @@ class ListerComponent extends Manager implements TableSupport
         $parameters = new DataClassRetrievesParameters(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \application\atlantis\application\right\Right :: class_name(),
-                    \application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID),
+                    \Chamilo\Application\Atlantis\Application\Right\Right :: class_name(),
+                    \Chamilo\Application\Atlantis\Application\Right\Right :: PROPERTY_APPLICATION_ID),
                 new StaticConditionVariable($application_id)));
-        $rights = DataManager :: retrieves(\application\atlantis\application\right\Right :: class_name(), $parameters);
+        $rights = DataManager :: retrieves(\Chamilo\Application\Atlantis\Application\Right\Right :: class_name(), $parameters);
         $properties = $this->get_display_rights($rights);
         $table = new PropertiesTable($properties);
 

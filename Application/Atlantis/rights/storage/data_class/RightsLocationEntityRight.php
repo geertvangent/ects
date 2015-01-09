@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\storage\data_class;
+namespace Chamilo\Application\Atlantis\Rights\Storage\DataClass;
 
-class RightsLocationEntityRight extends \core\rights\RightsLocationEntityRight
+class RightsLocationEntityRight extends \Chamilo\Core\Rights\RightsLocationEntityRight
 {
 
     public function get_data_manager()

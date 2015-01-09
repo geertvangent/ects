@@ -1,14 +1,14 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights;
+namespace Chamilo\Application\Atlantis\Rights;
 
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\DynamicVisualTab;
-use libraries\utilities\Utilities;
-use libraries\format\DynamicVisualTabsRenderer;
-use libraries\architecture\application\Application;
-use application\atlantis\SessionBreadcrumbs;
-use libraries\format\Breadcrumb;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\DynamicVisualTab;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Format\Breadcrumb;
 
 class Manager extends Application
 {

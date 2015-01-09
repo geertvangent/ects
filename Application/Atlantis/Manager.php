@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Atlantis;
 
-use libraries\format\BreadcrumbTrail;
-use libraries\format\theme\Theme;
-use libraries\architecture\application\Application;
-use libraries\architecture\NotAllowedException;
-use libraries\platform\PlatformSetting;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Platform\PlatformSetting;
 
 class Manager extends Application
 {
@@ -23,7 +23,7 @@ class Manager extends Application
     {
         parent :: __construct($user, $application);
 
-        if (! \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        if (! \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }

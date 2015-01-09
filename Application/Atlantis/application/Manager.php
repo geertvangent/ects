@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\application;
+namespace Chamilo\Application\Atlantis\Application;
 
-class Manager extends \libraries\architecture\Application
+class Manager extends \Chamilo\Libraries\Architecture\Application
 {
     const PARAM_ACTION = 'application_action';
     const ACTION_BROWSE = 'browser';

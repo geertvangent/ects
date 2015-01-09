@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\table\application;
+namespace Chamilo\Application\Atlantis\Application\Table\Application;
 
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\DataClassTableColumnModel;
-use libraries\format\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
 
 class ApplicationTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

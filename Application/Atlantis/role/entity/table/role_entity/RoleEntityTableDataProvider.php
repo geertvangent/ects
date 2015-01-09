@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entity\table\role_entity;
+namespace Chamilo\Application\Atlantis\Role\Entity\Table\RoleEntity;
 
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\format\TableDataProvider;
-use libraries\storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Format\TableDataProvider;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
 
 class RoleEntityTableDataProvider extends TableDataProvider
 {

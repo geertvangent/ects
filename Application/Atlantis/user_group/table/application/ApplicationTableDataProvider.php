@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group\table\application;
+namespace Chamilo\Application\Atlantis\UserGroup\Table\Application;
 
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\format\TableDataProvider;
-use libraries\storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Format\TableDataProvider;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
 
 class ApplicationTableDataProvider extends TableDataProvider
 {
@@ -11,13 +11,13 @@ class ApplicationTableDataProvider extends TableDataProvider
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
         $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
-        return DataManager :: retrieves(\application\atlantis\application\Application :: class_name(), $parameters);
+        return DataManager :: retrieves(\Chamilo\Application\Atlantis\Application\Application :: class_name(), $parameters);
     }
 
     public function count_data($condition)
     {
         return DataManager :: count(
-            \application\atlantis\application\Application :: class_name(),
+            \Chamilo\Application\Atlantis\Application\Application :: class_name(),
             new DataClassCountParameters($condition));
     }
 }

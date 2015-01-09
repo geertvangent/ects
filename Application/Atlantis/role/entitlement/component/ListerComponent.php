@@ -1,19 +1,19 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entitlement\component;
+namespace Chamilo\Application\Atlantis\Role\Entitlement\Component;
 
-use application\atlantis\SessionBreadcrumbs;
-use libraries\architecture\DelegateComponent;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
-use libraries\format\DynamicVisualTab;
-use libraries\platform\Request;
-use libraries\format\DynamicVisualTabsRenderer;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\EqualityCondition;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\DynamicVisualTab;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 class ListerComponent extends Manager implements DelegateComponent
 {
@@ -25,10 +25,10 @@ class ListerComponent extends Manager implements DelegateComponent
     public function run()
     {
         $renderer_name = Utilities :: get_classname_from_object($this, true);
-        $this->role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
-        $this->application_id = Request :: get(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID);
-        $role = \application\atlantis\role\DataManager :: retrieve_by_id(
-            \application\atlantis\role\Role :: class_name(), 
+        $this->role_id = Request :: get(\Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
+        $this->application_id = Request :: get(\Chamilo\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID);
+        $role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve_by_id(
+            \Chamilo\Application\Atlantis\Role\Role :: class_name(), 
             (int) $this->role_id);
         
         SessionBreadcrumbs :: add(
@@ -39,8 +39,8 @@ class ListerComponent extends Manager implements DelegateComponent
                     array('ROLE' => $role->get_name()))));
         
         // for each application, a list of rights
-        $applications = \application\atlantis\application\DataManager :: retrieves(
-            \application\atlantis\application\Application :: class_name());
+        $applications = \Chamilo\Application\Atlantis\Application\DataManager :: retrieves(
+            \Chamilo\Application\Atlantis\Application\Application :: class_name());
         if (! $this->application_id)
         {
             $this->application_id = $applications->next_result()->get_id();
@@ -50,7 +50,7 @@ class ListerComponent extends Manager implements DelegateComponent
         $form = new EntitlementForm(
             $this, 
             $this->get_url(
-                array(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $this->application_id)));
+                array(\Chamilo\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID => $this->application_id)));
         if ($form->validate())
         {
             $parameters = new DataClassRetrievesParameters(
@@ -134,7 +134,7 @@ class ListerComponent extends Manager implements DelegateComponent
                 ($failures ? true : false), 
                 array(
                     Manager :: PARAM_ACTION => Manager :: ACTION_LIST, 
-                    \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $this->application_id));
+                    \Chamilo\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID => $this->application_id));
         }
         else
         {
@@ -144,8 +144,8 @@ class ListerComponent extends Manager implements DelegateComponent
             {
                 $link = $this->get_url(
                     array(
-                        \application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->role_id, 
-                        \application\atlantis\application\Manager :: PARAM_APPLICATION_ID => $application->get_id()));
+                        \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $this->role_id, 
+                        \Chamilo\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID => $application->get_id()));
                 if ($application->get_id() == $this->application_id)
                 {
                     $selected = true;
@@ -177,8 +177,8 @@ class ListerComponent extends Manager implements DelegateComponent
 
     public function add_breadcrumb()
     {
-        $role = \application\atlantis\role\DataManager :: retrieve(
-            \application\atlantis\role\Role :: class_name(), 
+        $role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve(
+            \Chamilo\Application\Atlantis\Role\Role :: class_name(), 
             (int) $this->role_id);
         
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));

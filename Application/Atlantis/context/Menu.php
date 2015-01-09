@@ -1,22 +1,22 @@
 <?php
-namespace Chamilo\Application\Atlantis\context;
+namespace Chamilo\Application\Atlantis\Context;
 
-use libraries\utilities\Utilities;
-use libraries\file\Path;
-use libraries\storage\EqualityCondition;
-use libraries\storage\StaticConditionVariable;
-use libraries\format\OptionsMenuRenderer;
-use libraries\format\TreeMenuRenderer;
-use libraries\storage\DataClassRetrievesParameters;
-use HTML_Menu;
-use HTML_Menu_ArrayRenderer;
-use libraries\storage\AndCondition;
-use libraries\storage\PatternMatchCondition;
-use libraries\storage\NotCondition;
-use libraries\storage\OrCondition;
-use core\group\Group;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\OrderBy;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Format\OptionsMenuRenderer;
+use Chamilo\Libraries\Format\TreeMenuRenderer;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\HTML_Menu;
+use Chamilo\HTML_Menu_ArrayRenderer;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Storage\NotCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Core\Group\Group;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\OrderBy;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -71,7 +71,7 @@ class Menu extends HTML_Menu
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
                 new StaticConditionVariable(0));
-            $group = \core\group\DataManager :: retrieves(
+            $group = \Chamilo\Core\Group\DataManager :: retrieves(
                 Group :: class_name(),
                 new DataClassRetrievesParameters(
                     $condition,
@@ -82,7 +82,7 @@ class Menu extends HTML_Menu
         }
         else
         {
-            $this->current_category = \core\group\DataManager :: retrieve(
+            $this->current_category = \Chamilo\Core\Group\DataManager :: retrieve(
                 Group :: class_name(),
                 new EqualityCondition(
                     new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
@@ -103,7 +103,7 @@ class Menu extends HTML_Menu
         $condition = new EqualityCondition(
             new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable(0));
-        $group = \core\group\DataManager :: retrieves(
+        $group = \Chamilo\Core\Group\DataManager :: retrieves(
             Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,

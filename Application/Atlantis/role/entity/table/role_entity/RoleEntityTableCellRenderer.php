@@ -1,15 +1,15 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entity\table\role_entity;
+namespace Chamilo\Application\Atlantis\Role\Entity\Table\RoleEntity;
 
-use libraries\utilities\DatetimeUtilities;
-use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
-use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\structure\Toolbar;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use libraries\format\structure\ToolbarItem;
-use core\rights\PlatformGroupEntity;
+use Chamilo\Libraries\Utilities\DatetimeUtilities;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Core\Rights\PlatformGroupEntity;
 
 class RoleEntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -64,12 +64,12 @@ class RoleEntityTableCellRenderer extends DataClassTableCellRenderer implements 
             switch ($role_entity->get_entity_type())
             {
                 case UserEntity :: ENTITY_TYPE :
-                    $is_target = \application\atlantis\rights\Rights :: get_instance()->is_target_user(
+                    $is_target = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->is_target_user(
                         $this->get_component()->get_user(),
                         $role_entity->get_entity_id());
                     break;
                 case PlatformGroupEntity :: ENTITY_TYPE :
-                    $is_target = \application\atlantis\rights\Rights :: get_instance()->is_target_group(
+                    $is_target = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->is_target_group(
                         $this->get_component()->get_user(),
                         $role_entity->get_entity_id());
                     break;
@@ -86,8 +86,8 @@ class RoleEntityTableCellRenderer extends DataClassTableCellRenderer implements 
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
                             Manager :: PARAM_ROLE_ENTITY_ID => $role_entity->get_id(),
-                            \application\atlantis\role\Manager :: PARAM_ROLE_ID => $this->get_component()->get_role_id(),
-                            \application\atlantis\context\Manager :: PARAM_CONTEXT_ID => $this->get_component()->get_context_id())),
+                            \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $this->get_component()->get_role_id(),
+                            \Chamilo\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID => $this->get_component()->get_context_id())),
                     ToolbarItem :: DISPLAY_ICON));
         }
 

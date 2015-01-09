@@ -1,21 +1,21 @@
 <?php
-namespace Chamilo\Application\Atlantis\context\component;
+namespace Chamilo\Application\Atlantis\Context\Component;
 
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\platform\Request;
-use libraries\format\Breadcrumb;
-use application\atlantis\SessionBreadcrumbs;
-use libraries\storage\OrCondition;
-use libraries\storage\PatternMatchCondition;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\ActionBarRenderer;
-use libraries\format\TableSupport;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
-use core\group\Group;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\ActionBarRenderer;
+use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Core\Group\Group;
 
 class BrowserComponent extends Manager implements TableSupport
 {
@@ -39,7 +39,7 @@ class BrowserComponent extends Manager implements TableSupport
         }
         if ($this->get_context() != 0)
         {
-            $context = \core\group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $this->get_context());
+            $context = \Chamilo\Core\Group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $this->get_context());
         }
         else
         {
@@ -100,9 +100,9 @@ class BrowserComponent extends Manager implements TableSupport
                     Theme :: get_image_path('\application\atlantis\role\entity') . 'logo/16.png',
                     $this->get_url(
                         array(
-                            \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE,
-                            \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY,
-                            \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE,
+                            \Chamilo\Application\Atlantis\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Manager :: ACTION_ROLE,
+                            \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
+                            \Chamilo\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE,
                             Manager :: PARAM_CONTEXT_ID => $this->get_context())),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }

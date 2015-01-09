@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\package;
+namespace Chamilo\Application\Atlantis\Rights\Package;
 
-use configuration\package\NotAllowed;
+use Chamilo\Configuration\Package\NotAllowed;
 
-class Activator extends \configuration\package\Activator implements NotAllowed
+class Activator extends \Chamilo\Configuration\Package\Activator implements NotAllowed
 {
 }

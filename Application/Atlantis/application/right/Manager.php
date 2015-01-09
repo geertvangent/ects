@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\right;
+namespace Chamilo\Application\Atlantis\Application\Right;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 /**
  * $Id: elude_manager.class.php

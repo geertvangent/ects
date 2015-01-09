@@ -1,10 +1,10 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\table\entity;
+namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
 
-use libraries\platform\translation\Translation;
-use libraries\format\StaticTableColumn;
-use libraries\format\DataClassTableColumnModel;
-use libraries\format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\StaticTableColumn;
+use Chamilo\Libraries\Format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
 
 class EntityTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

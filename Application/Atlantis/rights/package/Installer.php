@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\package;
+namespace Chamilo\Application\Atlantis\Rights\Package;
 
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
-class Installer extends \configuration\package\Installer
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 
     public function extra()

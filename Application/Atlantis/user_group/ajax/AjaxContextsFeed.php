@@ -1,20 +1,20 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group\ajax;
+namespace Chamilo\Application\Atlantis\UserGroup\Ajax;
 
-use libraries\architecture\JsonAjaxResult;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\format\AdvancedElementFinderElements;
-use libraries\platform\translation\Translation;
-use libraries\architecture\AjaxManager;
-use libraries\platform\Request;
-use libraries\storage\PatternMatchCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\AndCondition;
+use Chamilo\Libraries\Architecture\JsonAjaxResult;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Format\AdvancedElementFinderElements;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Architecture\AjaxManager;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\AndCondition;
 
-use libraries\format\AdvancedElementFinderElement;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\OrderBy;
+use Chamilo\Libraries\Format\AdvancedElementFinderElement;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\OrderBy;
 
 class AjaxContextsFeed extends AjaxManager
 {

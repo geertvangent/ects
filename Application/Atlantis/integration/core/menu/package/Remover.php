@@ -1,6 +1,6 @@
 <?php
-namespace Chamilo\Application\Atlantis\integration\core\menu\package;
+namespace Chamilo\Application\Atlantis\Integration\Core\Menu\Package;
 
-class Remover extends \configuration\package\Remover
+class Remover extends \Chamilo\Configuration\Package\Remover
 {
 }

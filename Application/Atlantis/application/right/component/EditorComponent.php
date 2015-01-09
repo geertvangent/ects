@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\right\component;
+namespace Chamilo\Application\Atlantis\Application\Right\Component;
 
-use libraries\format\Breadcrumb;
-use application\atlantis\SessionBreadcrumbs;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
-use libraries\platform\Request;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Request;
 
 class EditorComponent extends Manager
 {

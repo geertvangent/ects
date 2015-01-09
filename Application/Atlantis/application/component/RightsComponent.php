@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\component;
+namespace Chamilo\Application\Atlantis\Application\Component;
 
 class RightsComponent extends Manager
 {

@@ -1,17 +1,17 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\ajax;
+namespace Chamilo\Application\Atlantis\Role\Ajax;
 
-use libraries\platform\translation\Translation;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\architecture\AjaxManager;
-use libraries\architecture\JsonAjaxResult;
-use libraries\format\AdvancedElementFinderElements;
-use libraries\format\AdvancedElementFinderElement;
-use libraries\platform\Request;
-use libraries\storage\AndCondition;
-use libraries\storage\PropertyConditionVariable;
-use libraries\utilities\Utilities;
-use libraries\storage\OrderBy;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Architecture\AjaxManager;
+use Chamilo\Libraries\Architecture\JsonAjaxResult;
+use Chamilo\Libraries\Format\AdvancedElementFinderElements;
+use Chamilo\Libraries\Format\AdvancedElementFinderElement;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\OrderBy;
 
 class AjaxRolesFeed extends AjaxManager
 {

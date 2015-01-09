@@ -1,20 +1,20 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights;
+namespace Chamilo\Application\Atlantis\Rights;
 
-use libraries\platform\translation\Translation;
-use libraries\storage\EqualityCondition;
-use libraries\storage\DataClassCountParameters;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\InCondition;
-use application\atlantis\role\entity\UserEntity;
-use application\atlantis\role\entity\PlatformGroupEntity;
-use libraries\storage\DataClassCache;
-use libraries\storage\PropertyConditionVariable;
-use core\user\User;
-use core\group\Group;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Application\Atlantis\Role\Entity\UserEntity;
+use Chamilo\Application\Atlantis\Role\Entity\PlatformGroupEntity;
+use Chamilo\Libraries\Storage\DataClassCache;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Core\User\User;
+use Chamilo\Core\Group\Group;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class Rights extends \core\rights\RightsUtil
+class Rights extends \Chamilo\Core\Rights\RightsUtil
 {
     const VIEW_RIGHT = '1';
 
@@ -103,7 +103,7 @@ class Rights extends \core\rights\RightsUtil
 
     public function get_access_location_entity_right($entity_id, $entity_type)
     {
-        return \core\rights\DataManager :: retrieve_rights_location_entity_right(
+        return \Chamilo\Core\Rights\DataManager :: retrieve_rights_location_entity_right(
             __NAMESPACE__, 
             self :: VIEW_RIGHT, 
             $entity_id, 
@@ -182,7 +182,7 @@ class Rights extends \core\rights\RightsUtil
                 $condition = new InCondition(
                     new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID), 
                     $allowed_groups);
-                $groups = \core\group\DataManager :: retrieves(
+                $groups = \Chamilo\Core\Group\DataManager :: retrieves(
                     Group :: class_name(), 
                     new DataClassRetrievesParameters($condition));
                 
@@ -219,7 +219,7 @@ class Rights extends \core\rights\RightsUtil
             }
             else
             {
-                $group = \core\group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $group_id);
+                $group = \Chamilo\Core\Group\DataManager :: retrieve_by_id(Group :: class_name(), (int) $group_id);
                 if ($group->is_parent_of($target_group_id))
                 {
                     return true;
@@ -264,7 +264,7 @@ class Rights extends \core\rights\RightsUtil
                         RightsLocationEntityRight :: class_name(), 
                         RightsLocationEntityRight :: PROPERTY_ID), 
                     $location_entity_right_ids);
-                $location_entity_rights = \core\rights\DataManager :: get_instance()->retrieve_rights_location_rights(
+                $location_entity_rights = \Chamilo\Core\Rights\DataManager :: get_instance()->retrieve_rights_location_rights(
                     __NAMESPACE__, 
                     $condition);
                 
@@ -279,7 +279,7 @@ class Rights extends \core\rights\RightsUtil
                             }
                             break;
                         case PlatformGroupEntity :: ENTITY_TYPE :
-                            $group = \core\group\DataManager :: get_instance()->retrieve_group(
+                            $group = \Chamilo\Core\Group\DataManager :: get_instance()->retrieve_group(
                                 $location_entity_right->get_entity_id());
                             
                             if ($group instanceof Group)
@@ -304,7 +304,7 @@ class Rights extends \core\rights\RightsUtil
                 $condition = new InCondition(
                     new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), 
                     $user_ids);
-                $authorized_user_count = \core\user\DataManager :: count(
+                $authorized_user_count = \Chamilo\Core\User\DataManager :: count(
                     User :: class_name(), 
                     new DataClassCountParameters($condition));
                 
@@ -321,7 +321,7 @@ class Rights extends \core\rights\RightsUtil
                     new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_PLATFORMADMIN), 
                     1);
             }
-            $authorized_users = \core\user\DataManager :: retrieves(
+            $authorized_users = \Chamilo\Core\User\DataManager :: retrieves(
                 User :: class_name(), 
                 new DataClassRetrievesParameters($condition));
             

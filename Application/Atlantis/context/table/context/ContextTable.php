@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\context\table\context;
+namespace Chamilo\Application\Atlantis\Context\Table\Context;
 
-use libraries\format\Table;
+use Chamilo\Libraries\Format\Table;
 
 class ContextTable extends Table
 {

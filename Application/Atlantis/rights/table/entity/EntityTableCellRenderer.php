@@ -1,17 +1,17 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\table\entity;
+namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
 
-use libraries\format\structure\ToolbarItem;
-use libraries\format\theme\Theme;
-use libraries\format\structure\Toolbar;
-use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use core\rights\UserEntity;
-use core\user\User;
-use core\group\Group;
-use core\rights\PlatformGroupEntity;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Core\Rights\UserEntity;
+use Chamilo\Core\User\User;
+use Chamilo\Core\Group\Group;
+use Chamilo\Core\Rights\PlatformGroupEntity;
 
 class EntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -46,12 +46,12 @@ class EntityTableCellRenderer extends DataClassTableCellRenderer implements Tabl
                 switch ($location_entity_right->get_entity_type())
                 {
                     case UserEntity :: ENTITY_TYPE :
-                        return \core\user\DataManager :: retrieve(
-                            \core\user\User :: class_name(),
+                        return \Chamilo\Core\User\DataManager :: retrieve(
+                            \Chamilo\Core\User\User :: class_name(),
                             (int) $location_entity_right->get_entity_id())->get_fullname();
                     case PlatformGroupEntity :: ENTITY_TYPE :
-                        return \core\group\DataManager :: retrieve_by_id(
-                            \core\group\Group :: class_name(),
+                        return \Chamilo\Core\Group\DataManager :: retrieve_by_id(
+                            \Chamilo\Core\Group\Group :: class_name(),
                             (int) $location_entity_right->get_entity_id())->get_name();
                 }
             case Translation :: get('Group') :

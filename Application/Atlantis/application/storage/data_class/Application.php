@@ -1,12 +1,12 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\storage\data_class;
+namespace Chamilo\Application\Atlantis\Application\Storage\DataClass;
 
-use application\atlantis\application\right\Right;
-use libraries\storage\data_class\DataClass;
-use libraries\storage\EqualityCondition;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Application\Atlantis\Application\Right\Right;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 /**
  * application.atlantis.application.
@@ -126,7 +126,7 @@ class Application extends DataClass
         $condition = new EqualityCondition(
             new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_APPLICATION_ID), 
             new StaticConditionVariable($this->get_id()));
-        $rights = \application\atlantis\application\right\DataManager :: retrieves(
+        $rights = \Chamilo\Application\Atlantis\Application\Right\DataManager :: retrieves(
             Right :: class_name(), 
             new DataClassRetrievesParameters($condition));
         

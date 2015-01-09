@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\right\table\right;
+namespace Chamilo\Application\Atlantis\Application\Right\Table\Right;
 
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\DataClassTableColumnModel;
-use libraries\format\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
 
 class RightTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

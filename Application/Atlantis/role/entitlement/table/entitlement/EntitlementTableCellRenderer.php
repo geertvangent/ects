@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entitlement\table\entitlement;
+namespace Chamilo\Application\Atlantis\Role\Entitlement\Table\Entitlement;
 
-use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
-use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\structure\Toolbar;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use libraries\format\structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
 
 class EntitlementTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

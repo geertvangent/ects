@@ -1,16 +1,16 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\form;
+namespace Chamilo\Application\Atlantis\Rights\Form;
 
-use libraries\storage\EqualityCondition;
-use libraries\platform\translation\Translation;
-use libraries\format\form\FormValidator;
-use libraries\utilities\Utilities;
-use libraries\format\AdvancedElementFinderElementTypes;
-use libraries\format\AdvancedElementFinderElements;
-use core\rights\UserEntity;
-use core\rights\PlatformGroupEntity;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Form\FormValidator;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\AdvancedElementFinderElementTypes;
+use Chamilo\Libraries\Format\AdvancedElementFinderElements;
+use Chamilo\Core\Rights\UserEntity;
+use Chamilo\Core\Rights\PlatformGroupEntity;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
 
 class RightsForm extends FormValidator
 {

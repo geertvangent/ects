@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\integration\core\menu\package;
+namespace Chamilo\Application\Atlantis\Integration\Core\Menu\Package;
 
-use core\menu\MenuInstaller;
+use Chamilo\Core\Menu\MenuInstaller;
 
 class Installer extends MenuInstaller
 {

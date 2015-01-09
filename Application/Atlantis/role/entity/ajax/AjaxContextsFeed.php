@@ -1,21 +1,21 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entity\ajax;
+namespace Chamilo\Application\Atlantis\Role\Entity\Ajax;
 
-use libraries\format\AdvancedElementFinderElement;
-use libraries\storage\PatternMatchCondition;
-use libraries\platform\Request;
-use libraries\storage\OrCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\AndCondition;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\ArrayResultSet;
-use libraries\storage\DataClassCountParameters;
-use libraries\storage\NotCondition;
-use core\group\Group;
-use core\group\AjaxPlatformGroupsFeed;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\OrderBy;
+use Chamilo\Libraries\Format\AdvancedElementFinderElement;
+use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\ArrayResultSet;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\NotCondition;
+use Chamilo\Core\Group\Group;
+use Chamilo\Core\Group\AjaxPlatformGroupsFeed;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\OrderBy;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -72,7 +72,7 @@ class AjaxContextsFeed extends AjaxPlatformGroupsFeed
             new StaticConditionVariable($group->get_id()));
         $condition = new AndCondition($conditions);
 
-        $children_count = \core\group\DataManager :: count(
+        $children_count = \Chamilo\Core\Group\DataManager :: count(
             Group :: class_name(),
             new DataClassCountParameters($condition));
 
@@ -89,9 +89,9 @@ class AjaxContextsFeed extends AjaxPlatformGroupsFeed
                 $element_class = 'type type_context_simple';
             }
         }
-        elseif (\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        elseif (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups($this->get_user());
 
             if (in_array($group->get_id(), $target_groups))
             {
@@ -231,7 +231,7 @@ class AjaxContextsFeed extends AjaxPlatformGroupsFeed
             $condition = $conditions[0];
         }
 
-        $groups = \core\group\DataManager :: retrieves(
+        $groups = \Chamilo\Core\Group\DataManager :: retrieves(
             Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
@@ -243,9 +243,9 @@ class AjaxContextsFeed extends AjaxPlatformGroupsFeed
         {
             return $groups;
         }
-        elseif (\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        elseif (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \application\atlantis\rights\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups($this->get_user());
 
             $allowed_groups = array();
 

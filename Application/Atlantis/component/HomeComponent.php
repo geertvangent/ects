@@ -1,15 +1,15 @@
 <?php
-namespace Chamilo\Application\Atlantis\component;
+namespace Chamilo\Application\Atlantis\Component;
 
-use libraries\format\BreadcrumbTrail;
-use libraries\format\DynamicSearchAction;
-use libraries\architecture\DelegateComponent;
-use libraries\format\DynamicAction;
-use libraries\platform\translation\Translation;
-use libraries\format\theme\Theme;
-use libraries\format\DynamicActionsTab;
-use libraries\utilities\Utilities;
-use libraries\format\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\DynamicSearchAction;
+use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Format\DynamicAction;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\DynamicActionsTab;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\DynamicTabsRenderer;
 
 class HomeComponent extends Manager implements DelegateComponent
 {
@@ -22,7 +22,7 @@ class HomeComponent extends Manager implements DelegateComponent
         $tabs = new DynamicTabsRenderer($renderer_name);
 
         // Role tab
-        $namespace = \application\atlantis\role\Manager :: context();
+        $namespace = \Chamilo\Application\Atlantis\Role\Manager :: context();
         $actions = array();
         $actions[] = new DynamicSearchAction(
             $namespace,
@@ -41,7 +41,7 @@ class HomeComponent extends Manager implements DelegateComponent
                 $this->get_url(
                     array(
                         self :: PARAM_ACTION => self :: ACTION_ROLE,
-                        \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_CREATE)));
+                        \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Manager :: ACTION_CREATE)));
         }
         $tabs->add_tab(
             new DynamicActionsTab(
@@ -51,7 +51,7 @@ class HomeComponent extends Manager implements DelegateComponent
                 $actions));
 
         // Application tab
-        $namespace = \application\atlantis\application\Manager :: context();
+        $namespace = \Chamilo\Application\Atlantis\Application\Manager :: context();
         $actions = array();
         $actions[] = new DynamicSearchAction(
             $namespace,
@@ -70,7 +70,7 @@ class HomeComponent extends Manager implements DelegateComponent
                 $this->get_url(
                     array(
                         self :: PARAM_ACTION => self :: ACTION_APPLICATION,
-                        \application\atlantis\application\Manager :: PARAM_ACTION => \application\atlantis\application\Manager :: ACTION_CREATE)));
+                        \Chamilo\Application\Atlantis\Application\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Application\Manager :: ACTION_CREATE)));
         }
         $tabs->add_tab(
             new DynamicActionsTab(
@@ -80,7 +80,7 @@ class HomeComponent extends Manager implements DelegateComponent
                 $actions));
 
         // RoleEntity tab
-        $namespace = \application\atlantis\role\entity\Manager :: context();
+        $namespace = \Chamilo\Application\Atlantis\Role\Entity\Manager :: context();
         $actions = array();
         $actions[] = new DynamicAction(
             Translation :: get('BrowseRoleEntities', null, $namespace),
@@ -89,10 +89,10 @@ class HomeComponent extends Manager implements DelegateComponent
             $this->get_url(
                 array(
                     self :: PARAM_ACTION => self :: ACTION_ROLE,
-                    \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY,
-                    \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE)));
+                    \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
+                    \Chamilo\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE)));
 
-        if (\application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+        if (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             $actions[] = new DynamicAction(
                 Translation :: get('CreateRoleEntity', null, $namespace),
@@ -101,7 +101,7 @@ class HomeComponent extends Manager implements DelegateComponent
                 $this->get_url(
                     array(
                         self :: PARAM_ACTION => self :: ACTION_ROLE,
-                        \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY)));
+                        \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Manager :: ACTION_ENTITY)));
         }
 
         $tabs->add_tab(
@@ -127,7 +127,7 @@ class HomeComponent extends Manager implements DelegateComponent
         // get_image_path() . 'usersgroups.png', $actions));
 
         // Context tab
-        $namespace = \application\atlantis\context\Manager :: context();
+        $namespace = \Chamilo\Application\Atlantis\Context\Manager :: context();
         $actions = array();
         $actions[] = new DynamicAction(
             Translation :: get('BrowseContexts', null, $namespace),
@@ -145,7 +145,7 @@ class HomeComponent extends Manager implements DelegateComponent
         if ($this->get_user()->is_platform_admin())
         {
             // Rights tab
-            $namespace = \application\atlantis\rights\Manager :: context();
+            $namespace = \Chamilo\Application\Atlantis\Rights\Manager :: context();
             $actions = array();
             $actions[] = new DynamicAction(
                 Translation :: get('ConfigureRights', null, $namespace),

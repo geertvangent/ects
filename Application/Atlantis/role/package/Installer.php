@@ -1,12 +1,12 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\package;
+namespace Chamilo\Application\Atlantis\Role\Package;
 
 /**
  * Atlantis application
  *
  * @package application.atlantis
  */
-class Installer extends \configuration\package\Installer
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 
     public static function get_additional_packages()

@@ -1,10 +1,10 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entity\entities;
+namespace Chamilo\Application\Atlantis\Role\Entity\Entities;
 
-use libraries\format\AdvancedElementFinderElementType;
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Format\AdvancedElementFinderElementType;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
-class PlatformGroupEntity extends \core\rights\PlatformGroupEntity
+class PlatformGroupEntity extends \Chamilo\Core\Rights\PlatformGroupEntity
 {
 
     /**

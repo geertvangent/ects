@@ -1,6 +1,6 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group\package;
+namespace Chamilo\Application\Atlantis\UserGroup\Package;
 
-class Activator extends \configuration\package\Activator
+class Activator extends \Chamilo\Configuration\Package\Activator
 {
 }

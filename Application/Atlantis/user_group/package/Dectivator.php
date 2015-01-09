@@ -1,6 +1,6 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group\package;
+namespace Chamilo\Application\Atlantis\UserGroup\Package;
 
-class Dectivator extends \configuration\package\Deactivator
+class Dectivator extends \Chamilo\Configuration\Package\Deactivator
 {
 }

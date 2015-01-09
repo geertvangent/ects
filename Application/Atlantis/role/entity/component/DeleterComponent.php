@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entity\component;
+namespace Chamilo\Application\Atlantis\Role\Entity\Component;
 
-use libraries\platform\Request;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
 class DeleterComponent extends Manager
 {
@@ -11,8 +11,8 @@ class DeleterComponent extends Manager
     public function run()
     {
         $ids = Request :: get(self :: PARAM_ROLE_ENTITY_ID);
-        $context_id = Request :: get(\application\atlantis\context\Manager :: PARAM_CONTEXT_ID);
-        $role_id = Request :: get(\application\atlantis\role\Manager :: PARAM_ROLE_ID);
+        $context_id = Request :: get(\Chamilo\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID);
+        $role_id = Request :: get(\Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
         
         $failures = 0;
         
@@ -27,7 +27,7 @@ class DeleterComponent extends Manager
             {
                 $role_entity = DataManager :: retrieve(RoleEntity :: class_name(), (int) $id);
                 
-                if (! \application\atlantis\rights\Rights :: get_instance()->access_is_allowed())
+                if (! \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
                 {
                     $failures ++;
                 }
@@ -81,8 +81,8 @@ class DeleterComponent extends Manager
                 ($failures ? true : false), 
                 array(
                     Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE, 
-                    \application\atlantis\role\Manager :: PARAM_ROLE_ID => $role_id, 
-                    \application\atlantis\context\Manager :: PARAM_CONTEXT_ID => $context_id));
+                    \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $role_id, 
+                    \Chamilo\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID => $context_id));
         }
         else
         {

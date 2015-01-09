@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\table\role;
+namespace Chamilo\Application\Atlantis\Role\Table\Role;
 
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\DataClassTableColumnModel;
-use libraries\format\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
 
 class RoleTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

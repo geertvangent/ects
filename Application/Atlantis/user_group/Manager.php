@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group;
+namespace Chamilo\Application\Atlantis\UserGroup;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

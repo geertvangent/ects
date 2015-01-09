@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group\component;
+namespace Chamilo\Application\Atlantis\UserGroup\Component;
 
-use libraries\platform\Request;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
 class DeleterComponent extends Manager
 {
@@ -23,7 +23,7 @@ class DeleterComponent extends Manager
             foreach ($ids as $id)
             {
                 $application = DataManager :: retrieve(
-                    \application\atlantis\application\Application :: class_name(), 
+                    \Chamilo\Application\Atlantis\Application\Application :: class_name(), 
                     (int) $id);
                 
                 if (! $this->get_user()->is_platform_admin())

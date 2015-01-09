@@ -1,12 +1,12 @@
 <?php
-namespace Chamilo\Application\Atlantis\context\table\context;
+namespace Chamilo\Application\Atlantis\Context\Table\Context;
 
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\structure\Toolbar;
-use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 
 class ContextTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -21,9 +21,9 @@ class ContextTableCellRenderer extends DataClassTableCellRenderer implements Tab
                 Theme :: get_image_path('\application\atlantis\role\entity') . 'logo/16.png',
                 $this->get_component()->get_url(
                     array(
-                        \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE,
-                        \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY,
-                        \application\atlantis\role\entity\Manager :: PARAM_ACTION => \application\atlantis\role\entity\Manager :: ACTION_BROWSE,
+                        \Chamilo\Application\Atlantis\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Manager :: ACTION_ROLE,
+                        \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
+                        \Chamilo\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE,
                         Manager :: PARAM_CONTEXT_ID => $object->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
 

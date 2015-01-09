@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\table\application;
+namespace Chamilo\Application\Atlantis\Application\Table\Application;
 
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\format\TableDataProvider;
-use libraries\storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Format\TableDataProvider;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
 
 class ApplicationTableDataProvider extends TableDataProvider
 {

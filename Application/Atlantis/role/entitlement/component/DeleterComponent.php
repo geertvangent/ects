@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entitlement\component;
+namespace Chamilo\Application\Atlantis\Role\Entitlement\Component;
 
-use libraries\platform\Request;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
 class DeleterComponent extends Manager
 {

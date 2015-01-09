@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Atlantis;
 
-use libraries\format\Breadcrumb;
-use libraries\platform\Session;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Platform\Session;
 
 /**
  * application.atlantis.

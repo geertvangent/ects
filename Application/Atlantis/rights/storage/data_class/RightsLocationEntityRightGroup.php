@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\storage\data_class;
+namespace Chamilo\Application\Atlantis\Rights\Storage\DataClass;
 
-use libraries\storage\data_class\DataClass;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  *
@@ -63,7 +63,7 @@ class RightsLocationEntityRightGroup extends DataClass
     {
         if (! isset($this->location_entity_right))
         {
-            $this->location_entity_right = \core\rights\DataManager :: retrieve_rights_location_entity_right_by_id(
+            $this->location_entity_right = \Chamilo\Core\Rights\DataManager :: retrieve_rights_location_entity_right_by_id(
                 __NAMESPACE__, 
                 $this->get_location_entity_right_id());
         }
@@ -84,8 +84,8 @@ class RightsLocationEntityRightGroup extends DataClass
     {
         if (! isset($this->group))
         {
-            $this->group = \core\group\DataManager :: retrieve_by_id(
-                \core\group\Group :: class_name(), 
+            $this->group = \Chamilo\Core\Group\DataManager :: retrieve_by_id(
+                \Chamilo\Core\Group\Group :: class_name(), 
                 $this->get_group_id());
         }
         return $this->group;

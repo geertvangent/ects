@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\storage;
+namespace Chamilo\Application\Atlantis\Application\Storage;
 
 /**
  * $Id: menu_data_manager.class.php 157 2009-11-10 13:44:02Z vanpouckesven $
@@ -13,7 +13,7 @@ namespace Chamilo\Application\Atlantis\application\storage;
  * @author Hans De Bisschop
  * @author Dieter De Neef
  */
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
     const PREFIX = "atlantis_";
 

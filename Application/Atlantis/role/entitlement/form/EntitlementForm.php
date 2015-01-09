@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entitlement\form;
+namespace Chamilo\Application\Atlantis\Role\Entitlement\Form;
 
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
-use libraries\storage\EqualityCondition;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\format\form\FormValidator;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Format\Form\FormValidator;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 class EntitlementForm extends FormValidator
 {
@@ -28,11 +28,11 @@ class EntitlementForm extends FormValidator
         $parameters = new DataClassRetrievesParameters(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \application\atlantis\application\right\Right :: class_name(), 
-                    \application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID), 
+                    \Chamilo\Application\Atlantis\Application\Right\Right :: class_name(), 
+                    \Chamilo\Application\Atlantis\Application\Right\Right :: PROPERTY_APPLICATION_ID), 
                 new StaticConditionVariable($this->component->get_application_id())));
-        $rights = \application\atlantis\application\right\DataManager :: retrieves(
-            \application\atlantis\application\right\Right :: class_name(), 
+        $rights = \Chamilo\Application\Atlantis\Application\Right\DataManager :: retrieves(
+            \Chamilo\Application\Atlantis\Application\Right\Right :: class_name(), 
             $parameters);
         while ($right = $rights->next_result())
         {

@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\component;
+namespace Chamilo\Application\Atlantis\Application\Component;
 
-use libraries\platform\Request;
+use Chamilo\Libraries\Platform\Request;
 
 class RightsManagerComponent extends Manager
 {
@@ -9,8 +9,8 @@ class RightsManagerComponent extends Manager
     public function run()
     {
         $this->set_parameter(self :: PARAM_APPLICATION_ID, Request :: get(self :: PARAM_APPLICATION_ID));
-        \libraries\architecture\Application :: launch(
-            \application\atlantis\application\right\Manager :: context(), 
+        \Chamilo\Libraries\Architecture\Application :: launch(
+            \Chamilo\Application\Atlantis\Application\Right\Manager :: context(), 
             $this->get_user(), 
             $this);
     }

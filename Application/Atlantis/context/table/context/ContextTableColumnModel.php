@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\context\table\context;
+namespace Chamilo\Application\Atlantis\Context\Table\Context;
 
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\DataClassTableColumnModel;
-use libraries\format\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
 
 class ContextTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
@@ -14,6 +14,6 @@ class ContextTableColumnModel extends DataClassTableColumnModel implements Table
     public function initialize_columns()
     {
         $this->add_column(
-            new DataClassPropertyTableColumn(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_NAME));
+            new DataClassPropertyTableColumn(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_NAME));
     }
 }

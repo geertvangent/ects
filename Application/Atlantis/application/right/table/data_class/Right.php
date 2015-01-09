@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\right\table\data_class;
+namespace Chamilo\Application\Atlantis\Application\Right\Table\DataClass;
 
-use application\atlantis\application\Application;
-use libraries\storage\data_class\DataClass;
-use application\atlantis\role\entitlement\Entitlement;
-use libraries\storage\EqualityCondition;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Application\Atlantis\Application\Application;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Application\Atlantis\Role\Entitlement\Entitlement;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 /**
  * application.atlantis.application.right.
@@ -108,7 +108,7 @@ class Right extends DataClass
     {
         if (! isset($this->application))
         {
-            $this->application = \application\atlantis\application\DataManager :: retrieve(
+            $this->application = \Chamilo\Application\Atlantis\Application\DataManager :: retrieve(
                 Application :: class_name(), 
                 (int) $this->get_application_id());
         }
@@ -140,7 +140,7 @@ class Right extends DataClass
         $condition = new EqualityCondition(
             new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_RIGHT_ID), 
             new StaticConditionVariable($this->get_id()));
-        $entitlements = \application\atlantis\role\entitlement\DataManager :: retrieves(
+        $entitlements = \Chamilo\Application\Atlantis\Role\Entitlement\DataManager :: retrieves(
             Entitlement :: class_name(), 
             new DataClassRetrievesParameters($condition));
         

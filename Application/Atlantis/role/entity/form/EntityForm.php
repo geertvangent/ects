@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entity\form;
+namespace Chamilo\Application\Atlantis\Role\Entity\Form;
 
-use libraries\file\Path;
-use libraries\format\ResourceManager;
-use libraries\format\AdvancedElementFinderElementType;
-use libraries\format\AdvancedElementFinderElementTypes;
-use libraries\format\form\FormValidator;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\ResourceManager;
+use Chamilo\Libraries\Format\AdvancedElementFinderElementType;
+use Chamilo\Libraries\Format\AdvancedElementFinderElementTypes;
+use Chamilo\Libraries\Format\Form\FormValidator;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
 class EntityForm extends FormValidator
 {

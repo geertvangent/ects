@@ -1,15 +1,15 @@
 <?php
-namespace Chamilo\Application\Atlantis\context\xml_feeds;
+namespace Chamilo\Application\Atlantis\Context\XmlFeeds;
 
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\AndCondition;
-use libraries\platform\Request;
-use libraries\storage\EqualityCondition;
-use libraries\authentication\Authentication;
-use application\atlantis\user_group\Context;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\OrderBy;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Authentication\Authentication;
+use Chamilo\Application\Atlantis\UserGroup\Context;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\OrderBy;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $

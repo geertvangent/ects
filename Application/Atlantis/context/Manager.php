@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\context;
+namespace Chamilo\Application\Atlantis\Context;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

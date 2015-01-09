@@ -1,23 +1,23 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\right\component;
+namespace Chamilo\Application\Atlantis\Application\Right\Component;
 
-use application\atlantis\SessionBreadcrumbs;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
-use libraries\platform\Request;
-use libraries\architecture\DelegateComponent;
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\OrCondition;
-use libraries\storage\PatternMatchCondition;
-use libraries\format\theme\Theme;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\ActionBarRenderer;
-use libraries\format\TableSupport;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\ActionBarRenderer;
+use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {
@@ -45,7 +45,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_APPLICATION_ID),
             new StaticConditionVariable(
-                $this->get_parameter(\application\atlantis\application\Manager :: PARAM_APPLICATION_ID)));
+                $this->get_parameter(\Chamilo\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID)));
         return new AndCondition($conditions);
     }
 
@@ -80,9 +80,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
     public function add_breadcrumb()
     {
-        $application_id = Request :: get(\application\atlantis\application\right\Right :: PROPERTY_APPLICATION_ID);
-        $application = \application\atlantis\application\DataManager :: retrieve(
-            \application\atlantis\application\Application :: class_name(),
+        $application_id = Request :: get(\Chamilo\Application\Atlantis\Application\Right\Right :: PROPERTY_APPLICATION_ID);
+        $application = \Chamilo\Application\Atlantis\Application\DataManager :: retrieve(
+            \Chamilo\Application\Atlantis\Application\Application :: class_name(),
             (int) $application_id);
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
         SessionBreadcrumbs :: add(

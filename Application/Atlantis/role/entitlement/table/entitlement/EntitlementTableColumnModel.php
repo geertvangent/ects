@@ -1,10 +1,10 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entitlement\table\entitlement;
+namespace Chamilo\Application\Atlantis\Role\Entitlement\Table\Entitlement;
 
-use libraries\platform\translation\Translation;
-use libraries\format\StaticTableColumn;
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\DataClassTableColumnModel;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\StaticTableColumn;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\DataClassTableColumnModel;
 
 class EntitlementTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\right\table;
+namespace Chamilo\Application\Atlantis\Application\Right\Table;
 
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
     const PREFIX = "atlantis_";
 

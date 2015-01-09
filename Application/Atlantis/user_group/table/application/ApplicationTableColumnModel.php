@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group\table\application;
+namespace Chamilo\Application\Atlantis\UserGroup\Table\Application;
 
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\DataClassTableColumnModel;
-use libraries\format\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
 
 class ApplicationTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
@@ -15,15 +15,15 @@ class ApplicationTableColumnModel extends DataClassTableColumnModel implements T
     {
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \application\atlantis\application\Application :: class_name(),
-                \application\atlantis\application\Application :: PROPERTY_NAME));
+                \Chamilo\Application\Atlantis\Application\Application :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_NAME));
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \application\atlantis\application\Application :: class_name(),
-                \application\atlantis\application\Application :: PROPERTY_DESCRIPTION));
+                \Chamilo\Application\Atlantis\Application\Application :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_DESCRIPTION));
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \application\atlantis\application\Application :: class_name(),
-                \application\atlantis\application\Application :: PROPERTY_URL));
+                \Chamilo\Application\Atlantis\Application\Application :: class_name(),
+                \Chamilo\Application\Atlantis\Application\Application :: PROPERTY_URL));
     }
 }

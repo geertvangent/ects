@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\application\table\application;
+namespace Chamilo\Application\Atlantis\Application\Table\Application;
 
-use libraries\utilities\Utilities;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
-use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\structure\Toolbar;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Structure\Toolbar;
 
 class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -52,9 +52,9 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
                 Theme :: get_image_path('\application\atlantis\role\entitlement') . 'logo/16.png',
                 $this->get_component()->get_url(
                     array(
-                        \application\atlantis\Manager :: PARAM_ACTION => \application\atlantis\Manager :: ACTION_ROLE,
-                        \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITLEMENT,
-                        \application\atlantis\role\entitlement\Manager :: PARAM_ACTION => \application\atlantis\role\entitlement\Manager :: ACTION_BROWSE,
+                        \Chamilo\Application\Atlantis\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Manager :: ACTION_ROLE,
+                        \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Manager :: ACTION_ENTITLEMENT,
+                        \Chamilo\Application\Atlantis\Role\Entitlement\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Entitlement\Manager :: ACTION_BROWSE,
                         Manager :: PARAM_APPLICATION_ID => $application->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
 

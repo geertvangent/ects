@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\rights\table\entity;
+namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
 
-use libraries\platform\translation\Translation;
-use libraries\format\TableFormAction;
-use libraries\format\TableFormActions;
-use libraries\format\TableFormActionsSupport;
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\Table;
-use libraries\utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\TableFormAction;
+use Chamilo\Libraries\Format\TableFormActions;
+use Chamilo\Libraries\Format\TableFormActionsSupport;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\Table;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class EntityTable extends Table implements TableColumnModelActionsColumnSupport, TableFormActionsSupport
 {

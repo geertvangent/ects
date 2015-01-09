@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entity\storage\data_class;
+namespace Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass;
 
-use libraries\format\structure\ToolbarItem;
-use libraries\format\theme\Theme;
-use libraries\storage\data_class\DataClass;
-use core\group\Group;
-use core\user\User;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Core\Group\Group;
+use Chamilo\Core\User\User;
 
 /**
  * application.atlantis.role.entity.
@@ -225,10 +225,10 @@ class RoleEntityTracker extends DataClass
         switch ($entity_type)
         {
             case 1 :
-                return \core\user\DataManager :: retrieve(User :: class_name(), (int) $entity_id);
+                return \Chamilo\Core\User\DataManager :: retrieve(User :: class_name(), (int) $entity_id);
                 break;
             case 2 :
-                return \core\group\DataManager :: retrieve_by_id(Group :: class_name(), $entity_id);
+                return \Chamilo\Core\Group\DataManager :: retrieve_by_id(Group :: class_name(), $entity_id);
                 break;
         }
     }
@@ -263,8 +263,8 @@ class RoleEntityTracker extends DataClass
     {
         if (! isset($this->role))
         {
-            $this->role = \application\atlantis\role\DataManager :: retrieve(
-                \application\atlantis\role\Role :: class_name(), 
+            $this->role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve(
+                \Chamilo\Application\Atlantis\Role\Role :: class_name(), 
                 (int) $this->get_role_id());
         }
         return $this->role;
@@ -274,7 +274,7 @@ class RoleEntityTracker extends DataClass
     {
         if (! isset($this->context))
         {
-            $this->context = \core\group\DataManager :: retrieve(Group :: class_name(), (int) $this->get_context_id());
+            $this->context = \Chamilo\Core\Group\DataManager :: retrieve(Group :: class_name(), (int) $this->get_context_id());
         }
         return $this->context;
     }

@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\Atlantis\user_group\component;
+namespace Chamilo\Application\Atlantis\UserGroup\Component;
 
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
 class CreatorComponent extends Manager
 {
@@ -14,9 +14,9 @@ class CreatorComponent extends Manager
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
         
-        $application = new \application\atlantis\application\Application();
+        $application = new \Chamilo\Application\Atlantis\Application\Application();
         
-        $form = new \application\atlantis\application\ApplicationForm(
+        $form = new \Chamilo\Application\Atlantis\Application\ApplicationForm(
             $application, 
             $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)));
         
@@ -24,10 +24,10 @@ class CreatorComponent extends Manager
         {
             $values = $form->exportValues();
             
-            $application->set_name($values[\application\atlantis\application\Application :: PROPERTY_NAME]);
+            $application->set_name($values[\Chamilo\Application\Atlantis\Application\Application :: PROPERTY_NAME]);
             $application->set_description(
-                $values[\application\atlantis\application\Application :: PROPERTY_DESCRIPTION]);
-            $application->set_url($values[\application\atlantis\application\Application :: PROPERTY_URL]);
+                $values[\Chamilo\Application\Atlantis\Application\Application :: PROPERTY_DESCRIPTION]);
+            $application->set_url($values[\Chamilo\Application\Atlantis\Application\Application :: PROPERTY_URL]);
             
             $success = $application->create();
             

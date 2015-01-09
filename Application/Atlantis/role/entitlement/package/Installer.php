@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\role\entitlement\package;
+namespace Chamilo\Application\Atlantis\Role\Entitlement\Package;
 
 /**
  * Atlantis application
  *
  * @package application.atlantis
  */
-class Installer extends \configuration\package\Installer
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 }
