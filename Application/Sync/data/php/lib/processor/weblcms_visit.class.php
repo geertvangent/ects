@@ -4,7 +4,7 @@ namespace application\ehb_sync\data;
 use application\weblcms\CourseTool;
 use libraries\file\FileLogger;
 use libraries\storage\DataClassRetrieveParameters;
-use libraries\storage\DataClassCache;
+use libraries\storage\Cache\DataClassCache;
 use libraries\storage\OrderBy;
 use libraries\storage\PropertyConditionVariable;
 
@@ -144,8 +144,8 @@ class WeblcmsVisitProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_USER_ID];
 
         $query = array();
 
@@ -184,10 +184,11 @@ class WeblcmsVisitProcessor
         $visit->set_tool_id($course_tool_id);
         $visit->set_category_id($category_id);
         $visit->set_publication_id($publication_id);
-        $visit->set_access_date($visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_ENTER_DATE]);
+        $visit->set_access_date(
+            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
         $visit->set_time(
-            $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_LEAVE_DATE] -
-                 $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_ENTER_DATE]);
+            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LEAVE_DATE] -
+                 $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
 
         if (! $visit->save())
 

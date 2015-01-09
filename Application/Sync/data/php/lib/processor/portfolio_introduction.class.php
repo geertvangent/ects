@@ -2,7 +2,7 @@
 namespace application\ehb_sync\data;
 
 use libraries\file\FileLogger;
-use libraries\storage\DataClassCache;
+use libraries\storage\Cache\DataClassCache;
 use core\repository\content_object\introduction\Introduction;
 
 /**

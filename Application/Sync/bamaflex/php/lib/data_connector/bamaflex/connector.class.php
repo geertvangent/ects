@@ -5,7 +5,7 @@ namespace application\ehb_sync\bamaflex;
  *
  * @author Hans De Bisschop
  */
-class BamaflexDataConnector extends \libraries\storage\DataManager
+class BamaflexDataConnector extends \libraries\storage\data_manager\DataManager
 {
 
     public static $instance;

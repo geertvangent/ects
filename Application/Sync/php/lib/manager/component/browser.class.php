@@ -3,7 +3,7 @@ namespace application\ehb_sync;
 
 use libraries\architecture\NotAllowedException;
 use libraries\utilities\Utilities;
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;
 use libraries\architecture\DelegateComponent;
 

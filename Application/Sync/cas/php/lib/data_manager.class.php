@@ -5,7 +5,7 @@ namespace application\ehb_sync\cas;
  *
  * @author Hans De Bisschop
  */
-class DataManager extends \libraries\storage\DataManager
+class DataManager extends \libraries\storage\data_manager\DataManager
 {
 
     /**

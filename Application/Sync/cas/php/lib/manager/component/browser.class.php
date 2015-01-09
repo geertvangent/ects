@@ -1,7 +1,7 @@
 <?php
 namespace application\ehb_sync\cas;
 
-use libraries\format\Theme;
+use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;
 use libraries\architecture\DelegateComponent;

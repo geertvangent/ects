@@ -5,7 +5,7 @@ use application\weblcms\CourseTool;
 use libraries\file\FileLogger;
 use libraries\storage\DataClassRetrieveParameters;
 use libraries\storage\PropertyConditionVariable;
-use libraries\storage\DataClassCache;
+use libraries\storage\Cache\DataClassCache;
 use libraries\storage\OrderBy;
 
 /**
@@ -146,8 +146,8 @@ class WeblcmsDocumentZipProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit  :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit  :: PROPERTY_USER_ID];
 
         $query = array();
 
@@ -184,7 +184,7 @@ class WeblcmsDocumentZipProcessor
         $visit->set_course_id($course_id);
         $visit->set_tool_id($course_tool_id);
         $visit->set_category_id($category_id);
-        $visit->set_access_date($visit_tracker[\core\user\integration\core\tracking\Visit :: PROPERTY_ENTER_DATE]);
+        $visit->set_access_date($visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit  :: PROPERTY_ENTER_DATE]);
 
         if (! $visit->save())
         {
