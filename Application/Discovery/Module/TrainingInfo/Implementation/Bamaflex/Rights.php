@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex;
 
 use Chamilo\Application\Discovery\Module\TrainingInfo\DataManager;
-use Chamilo\Application\Discovery\TrainingBasedRights;
+use Chamilo\Application\Discovery\Rights\TrainingBasedRights;
 use Chamilo\Application\Discovery\TrainingBasedContext;
 
 class Rights extends TrainingBasedRights

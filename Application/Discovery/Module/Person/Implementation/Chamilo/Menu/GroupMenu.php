@@ -5,9 +5,8 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Format\Menu\OptionsMenuRenderer;
-use Chamilo\Libraries\Format\TreeMenuRenderer;
+use Chamilo\Libraries\Format\Menu\TreeMenuRenderer;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\HTML_Menu_ArrayRenderer;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
@@ -68,7 +67,7 @@ class GroupMenu extends \HTML_Menu
         $this->urlFmt = $url_format;
         $menu = $this->get_menu();
         parent :: __construct($menu);
-        $this->array_renderer = new HTML_Menu_ArrayRenderer();
+        $this->array_renderer = new \HTML_Menu_ArrayRenderer();
         $this->forceCurrentUrl($this->get_url($this->current_category->get_id()));
     }
 
@@ -108,8 +107,7 @@ class GroupMenu extends \HTML_Menu
             }
 
             $menu_item['class'] = 'home';
-            $menu_item[\Chamilo\Libraries\Format\Menu\OptionsMenuRenderer:: :: KEY_ID] =
-            $group->get_id();
+            $menu_item[\Chamilo\Libraries\Format\Menu\OptionsMenuRenderer :: KEY_ID] = $group->get_id();
             $menu[$group->get_id()] = $menu_item;
             return $menu;
         }

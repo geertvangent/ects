@@ -4,6 +4,7 @@ namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\PublicationData;
 
 class PublicationDataFilter extends TypeDataFilter
 {
@@ -13,7 +14,7 @@ class PublicationDataFilter extends TypeDataFilter
     {
         switch ($filter)
         {
-            case PublicationData:: :: PROPERTY_PLATFORM :
+            case PublicationData :: PROPERTY_PLATFORM :
                 return $value == 1 ? 'dokeos' : 'chamilo';
                 break;
             case PublicationData :: PROPERTY_OBJECT_TYPE :
@@ -21,7 +22,6 @@ class PublicationDataFilter extends TypeDataFilter
                 break;
         }
 
-
-return parent :: format_filter_option($filter, $value);
+        return parent :: format_filter_option($filter, $value);
     }
 }

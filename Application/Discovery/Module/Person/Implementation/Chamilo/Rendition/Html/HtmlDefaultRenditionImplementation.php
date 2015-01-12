@@ -3,7 +3,7 @@ namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Ren
 
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\DynamicContentTab;
 use Chamilo\Libraries\Format\ActionBarSearchForm;

@@ -3,7 +3,6 @@ namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\D
 
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\\MDB2_Error;
 
 /**
  * Dataclass generator used to generate dataclasses with given properties

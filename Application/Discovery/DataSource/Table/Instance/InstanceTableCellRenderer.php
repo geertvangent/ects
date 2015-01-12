@@ -6,9 +6,10 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 use Chamilo\Application\Discovery\DataSource\DataClass\Instance;
+use Chamilo\Application\Discovery\DataSource\Manager;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
