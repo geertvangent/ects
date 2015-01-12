@@ -5,6 +5,8 @@ use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Application\Atlantis\Rights\Manager;
+use Chamilo\Application\Atlantis\Rights\Storage\DataManager;
+use Chamilo\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
 
 class DeleterComponent extends Manager
 {

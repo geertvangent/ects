@@ -2,6 +2,7 @@
 namespace Chamilo\Application\Atlantis\Rights\Package;
 
 use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Application\Atlantis\Rights\Rights;
 
 class Installer extends \Chamilo\Configuration\Package\Installer
 {

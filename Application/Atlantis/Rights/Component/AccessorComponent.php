@@ -7,6 +7,7 @@ use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Atlantis\Rights\Manager;
+use Chamilo\Application\Atlantis\Rights\Form\RightsForm;
 
 class AccessorComponent extends Manager
 {

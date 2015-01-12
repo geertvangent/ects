@@ -5,6 +5,8 @@ use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Application\Atlantis\Role\Manager;
+use Chamilo\Application\Atlantis\Role\DataManager;
+use Chamilo\Application\Atlantis\Role\DataClass\Role;
 
 class DeleterComponent extends Manager
 {

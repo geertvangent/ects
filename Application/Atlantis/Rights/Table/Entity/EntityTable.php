@@ -8,6 +8,7 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Table;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Atlantis\Rights\Manager;
 
 class EntityTable extends Table implements TableColumnModelActionsColumnSupport, TableFormActionsSupport
 {

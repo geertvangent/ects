@@ -6,6 +6,8 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Application\Atlantis\Role\Entity\Manager;
 use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
+use Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager;
+use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 
 class DeleterComponent extends Manager
 {

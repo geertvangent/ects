@@ -4,6 +4,8 @@ namespace Chamilo\Application\Atlantis\Application\Table\Application;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Application\Atlantis\Application\Storage\DataManager;
+use Chamilo\Application\Atlantis\Application\Storage\DataClass\Application;
 
 class ApplicationTableDataProvider extends TableDataProvider
 {

@@ -13,6 +13,8 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Application\Atlantis\Application\Manager;
+use Chamilo\Application\Atlantis\Application\Storage\DataManager;
+use Chamilo\Application\Atlantis\Application\Storage\DataClass\Application;
 
 class ListerComponent extends Manager implements TableSupport
 {

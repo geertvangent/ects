@@ -8,6 +8,7 @@ use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Application\Atlantis\Application\Right\Manager;
 
 class RightTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

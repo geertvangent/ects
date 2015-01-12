@@ -7,6 +7,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormActions;
+use Chamilo\Application\Atlantis\Role\Entity\Manager;
 
 class RoleEntityTable extends Table implements TableFormActionsSupport
 {

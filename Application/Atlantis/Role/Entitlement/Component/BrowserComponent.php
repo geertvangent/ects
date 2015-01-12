@@ -14,6 +14,8 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Application\Atlantis\Role\Entitlement\Manager;
+use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
+use Chamilo\Application\Atlantis\Role\Entitlement\Table\Entitlement\EntitlementTable;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {
@@ -48,7 +50,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                     \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
                     \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
                 new StaticConditionVariable($this->application_id));
-            $rights = \Chamilo\Application\Atlantis\Application\Right\DataManager :: retrieves(
+            $rights = \Chamilo\Application\Atlantis\Application\Right\Table\DataManager :: retrieves(
                 \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
                 $condition);
             $right_ids = array();
@@ -81,7 +83,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     {
         $this->right_id = Request :: get(\Chamilo\Application\Atlantis\Application\Right\Manager :: PARAM_RIGHT_ID);
         $this->role_id = Request :: get(\Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
-        $this->application_id = Request :: get(\Chamilo\Application\Atlantis\Application\Right\Manager :: PARAM_APPLICATION_ID);
+        $this->application_id = Request :: get(
+            \Chamilo\Application\Atlantis\Application\Right\Manager :: PARAM_APPLICATION_ID);
 
         $this->add_breadcrumb();
 
@@ -95,7 +98,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     {
         if ($this->has_application_id())
         {
-            $application = \Chamilo\Application\Atlantis\Application\DataManager :: retrieve(
+            $application = \Chamilo\Application\Atlantis\Application\Storage\DataManager :: retrieve(
                 \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
                 (int) $this->application_id);
 
@@ -113,7 +116,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
         if ($this->has_right_id() && $this->has_application_id())
         {
-            $right = \Chamilo\Application\Atlantis\Application\Right\DataManager :: retrieve(
+            $right = \Chamilo\Application\Atlantis\Application\Right\Table\DataManager :: retrieve(
                 \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
                 (int) $this->right_id);
 
@@ -140,13 +143,11 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                     Translation :: get('GrantRights', array('TYPE' => $role->get_name()))));
         }
     }
-	/* (non-PHPdoc)
-     * @see \libraries\format\TableSupport::get_table_condition()
+    /*
+     * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */
     public function get_table_condition($table_class_name)
     {
         // TODO Auto-generated method stub
-
     }
-
 }

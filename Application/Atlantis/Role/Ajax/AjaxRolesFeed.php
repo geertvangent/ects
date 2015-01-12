@@ -13,6 +13,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Application\Atlantis\Role\DataClass\Role;
+use Chamilo\Application\Atlantis\Role\DataManager;
 
 class AjaxRolesFeed extends AjaxManager
 {

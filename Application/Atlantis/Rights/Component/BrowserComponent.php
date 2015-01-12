@@ -8,6 +8,7 @@ use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Atlantis\Rights\Manager;
+use Chamilo\Application\Atlantis\Rights\Table\Entity\EntityTable;
 
 class BrowserComponent extends Manager implements TableSupport
 {

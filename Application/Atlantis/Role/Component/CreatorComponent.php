@@ -7,6 +7,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Application\Atlantis\Role\Manager;
 use Chamilo\Application\Atlantis\Role\DataClass\Role;
+use Chamilo\Application\Atlantis\Role\Form\RoleForm;
 
 class CreatorComponent extends Manager
 {

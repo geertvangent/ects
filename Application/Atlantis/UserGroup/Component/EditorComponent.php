@@ -5,6 +5,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation\Translation;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Application\Atlantis\UserGroup\Manager;
+use Chamilo\Application\Atlantis\UserGroup\Storage\DataManager;
 
 class EditorComponent extends Manager
 {
@@ -33,10 +34,12 @@ class EditorComponent extends Manager
             {
                 $values = $form->exportValues();
 
-                $application->set_name($values[\Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME]);
+                $application->set_name(
+                    $values[\Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME]);
                 $application->set_description(
                     $values[\Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION]);
-                $application->set_url($values[\Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL]);
+                $application->set_url(
+                    $values[\Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL]);
 
                 $success = $application->update();
 
