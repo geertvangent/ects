@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\integration\core\menu;
+namespace Application\Discovery\integration\core\menu\package;
 
 use core\menu\MenuInstaller;
 

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\training;
+namespace Application\Discovery\module\training\rendition\view\html;
 
 use libraries\utilities\Utilities;
 use libraries\platform\translation\Translation;

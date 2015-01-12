@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\career;
+namespace Application\Discovery\module\career\rendition\view\html;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

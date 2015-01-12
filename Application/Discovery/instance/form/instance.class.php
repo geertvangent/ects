@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance;
+namespace Application\Discovery\instance\form;
 
 use libraries\storage\EqualityCondition;
 use libraries\file\Filesystem;

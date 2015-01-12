@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery\rendition\view\zip;
 
 use libraries\platform\translation\Translation;
 use libraries\platform\Session;

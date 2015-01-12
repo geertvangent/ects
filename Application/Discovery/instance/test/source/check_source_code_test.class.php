@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance\test;
+namespace Application\Discovery\instance\test\source;
 
 use \libraries\architecture\TestApplication;
 

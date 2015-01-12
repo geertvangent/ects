@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery;
 
 use libraries\storage\data_class\DataClass;
 

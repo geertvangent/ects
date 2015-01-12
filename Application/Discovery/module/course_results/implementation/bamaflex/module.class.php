@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\course_results\implementation\bamaflex;
+namespace Application\Discovery\module\course_results\implementation\bamaflex;
 
 use libraries\platform\Request;
 

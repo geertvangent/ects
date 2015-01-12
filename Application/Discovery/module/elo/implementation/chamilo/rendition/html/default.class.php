@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\elo\implementation\chamilo;
+namespace Application\Discovery\module\elo\implementation\chamilo\rendition\html;
 
 use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;

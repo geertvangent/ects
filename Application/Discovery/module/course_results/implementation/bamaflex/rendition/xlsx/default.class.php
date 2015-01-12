@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\course_results\implementation\bamaflex;
+namespace Application\Discovery\module\course_results\implementation\bamaflex\rendition\xlsx;
 
 use application\discovery\module\course_results\DataManager;
 use libraries\platform\translation\Translation;

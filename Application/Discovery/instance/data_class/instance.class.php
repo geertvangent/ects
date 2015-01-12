@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance;
+namespace Application\Discovery\instance\data_class;
 
 use libraries\storage\data_class\DataClass;
 use libraries\storage\EqualityCondition;

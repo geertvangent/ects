@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\training\implementation\bamaflex;
+namespace Application\Discovery\data_source\bamaflex\data_class_generator\xml_schemas\php\application\discovery\module\training\implementation\bamaflex\php\lib;
 
 use application\discovery\DataManager;
 use application\discovery\DiscoveryItem;

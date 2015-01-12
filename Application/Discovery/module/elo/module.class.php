@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\elo;
+namespace Application\Discovery\module\elo;
 
 use application\discovery\instance\Instance;
 use libraries\file\Path;

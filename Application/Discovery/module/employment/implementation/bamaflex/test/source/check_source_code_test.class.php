@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\employment\implementation\bamaflex\test;
+namespace Application\Discovery\module\employment\implementation\bamaflex\test\source;
 
 /**
  * This test case checks the php syntax for the php files of this package

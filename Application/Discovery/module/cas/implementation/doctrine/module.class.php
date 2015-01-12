@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\cas\implementation\doctrine;
+namespace Application\Discovery\module\cas\implementation\doctrine;
 
 use libraries\file\Filesystem;
 use libraries\file\Path;

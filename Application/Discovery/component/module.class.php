@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery\component;
 
 use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;

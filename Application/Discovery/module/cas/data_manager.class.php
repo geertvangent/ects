@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\cas;
+namespace Application\Discovery\module\cas;
 
 /**
  *

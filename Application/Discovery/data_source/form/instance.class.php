@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\data_source;
+namespace Application\Discovery\data_source\form;
 
 use libraries\format\form\FormValidator;
 use libraries\platform\translation\Translation;

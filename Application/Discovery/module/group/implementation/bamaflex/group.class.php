@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\group\implementation\bamaflex;
+namespace Application\Discovery\module\group\implementation\bamaflex;
 
 use application\discovery\DiscoveryItem;
 use libraries\utilities\Utilities;

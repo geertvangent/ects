@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\chamilo;
+namespace Application\Discovery\module\profile\implementation\chamilo\data_manager;
 
 use core\user\UserSetting;
 use core\user\User;

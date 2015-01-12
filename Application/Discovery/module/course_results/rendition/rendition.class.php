@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\course_results;
+namespace Application\Discovery\module\course_results\rendition;
 
 abstract class Rendition extends \application\discovery\Rendition
 {

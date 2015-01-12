@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\exemption\implementation\bamaflex;
+namespace Application\Discovery\module\exemption\implementation\bamaflex;
 
 class Module extends \application\discovery\module\exemption\Module
 {

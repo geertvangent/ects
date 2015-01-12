@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\training\implementation\bamaflex;
+namespace Application\Discovery\module\training\implementation\bamaflex\rendition\html;
 
 class HtmlXlsxRenditionImplementation extends RenditionImplementation
 {

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\bamaflex;
+namespace Application\Discovery\module\profile\implementation\bamaflex;
 
 use libraries\platform\translation\Translation;
 use libraries\storage\data_class\DataClass;

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\person\implementation\chamilo;
+namespace Application\Discovery\module\person\implementation\chamilo\group_rel_user_browser;
 
 use libraries\utilities\Utilities;
 use libraries\format\Table;

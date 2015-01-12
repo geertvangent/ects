@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile;
+namespace Application\Discovery\module\profile;
 
 use libraries\storage\data_class\DataClass;
 

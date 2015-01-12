@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery\rendition\view\xlsx;
 
 use libraries\file\Filesystem;
 use libraries\file\Path;

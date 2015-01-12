@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\training\implementation\bamaflex;
+namespace Application\Discovery\module\training\implementation\bamaflex;
 
 use application\discovery\module\training\DataManager;
 use application\discovery\data_source\bamaflex\HistoryReference;

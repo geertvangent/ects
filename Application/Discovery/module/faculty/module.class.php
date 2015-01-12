@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\faculty;
+namespace Application\Discovery\module\faculty;
 
 use libraries\platform\Request;
 use libraries\file\Filesystem;

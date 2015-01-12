@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\person\implementation\chamilo;
+namespace Application\Discovery\module\person\implementation\chamilo\rendition\xlsx;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {

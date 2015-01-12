@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\cas\implementation\doctrine;
+namespace Application\Discovery\module\cas\implementation\doctrine\data_manager;
 
 use application\discovery\module\cas\Parameters;
 use libraries\storage\DoctrineConditionTranslator;

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\elo;
+namespace Application\Discovery\module\elo\rendition\view\html;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

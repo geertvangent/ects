@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\photo;
+namespace Application\Discovery\module\photo\rendition\view\xlsx;
 
 class XlsxDefaultRendition extends XlsxRendition
 {

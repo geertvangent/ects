@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\group_user\implementation\bamaflex;
+namespace Application\Discovery\module\group_user\implementation\bamaflex\data_manager;
 
 use Doctrine\DBAL\Driver\PDOStatement;
 use libraries\storage\DoctrineConditionTranslator;

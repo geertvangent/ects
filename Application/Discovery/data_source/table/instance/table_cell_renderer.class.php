@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\data_source;
+namespace Application\Discovery\data_source\table\instance;
 
 use libraries\platform\translation\Translation;
 use libraries\utilities\Utilities;

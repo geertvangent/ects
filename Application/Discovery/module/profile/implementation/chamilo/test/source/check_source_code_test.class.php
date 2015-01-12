@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\chamilo\test;
+namespace Application\Discovery\module\profile\implementation\chamilo\test\source;
 
 /**
  * This test case checks the php syntax for the php files of this package

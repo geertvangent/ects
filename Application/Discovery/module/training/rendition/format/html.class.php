@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\training;
+namespace Application\Discovery\module\training\rendition\format;
 
 class HtmlRendition extends Rendition
 {

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery\rendition;
 
 use libraries\utilities\Utilities;
 use libraries\architecture\ClassContext;

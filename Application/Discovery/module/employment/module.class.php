@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\employment;
+namespace Application\Discovery\module\employment;
 
 use libraries\file\Filesystem;
 use libraries\platform\Request;

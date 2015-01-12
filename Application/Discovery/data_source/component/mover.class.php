@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\data_source;
+namespace Application\Discovery\data_source\component;
 
 use libraries\storage\AndCondition;
 use libraries\platform\Request;

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\photo\implementation\bamaflex;
+namespace Application\Discovery\module\photo\implementation\bamaflex;
 
 use libraries\storage\InCondition;
 use core\group\Group;

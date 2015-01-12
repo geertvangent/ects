@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\enrollment;
+namespace Application\Discovery\module\enrollment;
 
 use libraries\file\Filesystem;
 use libraries\platform\Request;

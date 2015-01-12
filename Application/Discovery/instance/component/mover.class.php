@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance;
+namespace Application\Discovery\instance\component;
 
 use libraries\storage\AndCondition;
 use libraries\platform\Request;

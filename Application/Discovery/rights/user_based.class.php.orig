@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery\rights;
 
 use libraries\storage\AndCondition;
 use libraries\storage\EqualityCondition;

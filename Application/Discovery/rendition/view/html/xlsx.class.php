@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery\rendition\view\html;
 
 use libraries\platform\translation\Translation;
 use libraries\file\Filesystem;

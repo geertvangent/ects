@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\exemption;
+namespace Application\Discovery\module\exemption;
 
 use libraries\file\Filesystem;
 use libraries\platform\Request;

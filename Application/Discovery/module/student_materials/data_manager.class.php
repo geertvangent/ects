@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\student_materials;
+namespace Application\Discovery\module\student_materials;
 
 /**
  *

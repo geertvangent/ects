@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\student_year;
+namespace Application\Discovery\module\student_year;
 
 use libraries\file\Path;
 use libraries\file\Filesystem;

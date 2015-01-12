@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\photo\implementation\bamaflex;
+namespace Application\Discovery\module\photo\implementation\bamaflex\data_manager;
 
 use libraries\storage\AndCondition;
 use Doctrine\DBAL\Driver\PDOStatement;

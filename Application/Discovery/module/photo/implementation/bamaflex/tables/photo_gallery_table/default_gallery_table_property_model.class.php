@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\photo\implementation\bamaflex;
+namespace Application\Discovery\module\photo\implementation\bamaflex\tables\photo_gallery_table;
 
 use libraries\format\GalleryTablePropertyModel;
 use libraries\format\GalleryTableProperty;

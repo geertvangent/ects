@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\chamilo;
+namespace Application\Discovery\module\profile\implementation\chamilo;
 
 class Profile extends \application\discovery\module\profile\Profile
 {

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\exemption;
+namespace Application\Discovery\module\exemption\rendition\format;
 
 class HtmlRendition extends Rendition
 {

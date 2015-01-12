@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\faculty;
+namespace Application\Discovery\module\faculty\rendition\view\html;
 
 use libraries\format\DynamicVisualTab;
 use libraries\format\DynamicVisualTabsRenderer;

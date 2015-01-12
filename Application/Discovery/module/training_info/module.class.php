@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\training_info;
+namespace Application\Discovery\module\training_info;
 
 use libraries\file\Filesystem;
 use libraries\platform\Request;

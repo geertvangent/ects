@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\exemption\implementation\bamaflex;
+namespace Application\Discovery\module\exemption\implementation\bamaflex\rendition\html;
 
 use libraries\format\Display;
 use libraries\format\DynamicContentTab;

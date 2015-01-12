@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\person\implementation\chamilo;
+namespace Application\Discovery\module\person\implementation\chamilo\user_browser;
 
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\format\TableDataProvider;

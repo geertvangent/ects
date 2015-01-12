@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\student_materials\implementation\bamaflex;
+namespace Application\Discovery\module\student_materials\implementation\bamaflex\data_manager;
 
 use libraries\storage\OrCondition;
 use libraries\storage\NotCondition;

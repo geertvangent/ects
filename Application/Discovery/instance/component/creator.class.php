@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance;
+namespace Application\Discovery\instance\component;
 
 use libraries\format\structure\ToolbarItem;
 use libraries\format\SortableTableFromArray;

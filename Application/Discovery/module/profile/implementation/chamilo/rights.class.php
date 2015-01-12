@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\chamilo;
+namespace Application\Discovery\module\profile\implementation\chamilo;
 
 use application\discovery\UserBasedRights;
 

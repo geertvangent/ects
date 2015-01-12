@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\data_source;
+namespace Application\Discovery\data_source\table\instance;
 
 use libraries\format\table\extension\data_class_table\DataClassTable;
 

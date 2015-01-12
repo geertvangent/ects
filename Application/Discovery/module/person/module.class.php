@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\person;
+namespace Application\Discovery\module\person;
 
 use application\discovery\instance\Instance;
 use libraries\file\Path;

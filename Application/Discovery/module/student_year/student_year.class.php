@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\student_year;
+namespace Application\Discovery\module\student_year;
 
 use application\discovery\DiscoveryItem;
 use libraries\utilities\Utilities;

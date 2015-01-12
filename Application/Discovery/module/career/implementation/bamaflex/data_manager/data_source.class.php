@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\career\implementation\bamaflex;
+namespace Application\Discovery\module\career\implementation\bamaflex\data_manager;
 
 use application\discovery\data_source\bamaflex\HistoryReference;
 use application\discovery\module\career\MarkMoment;

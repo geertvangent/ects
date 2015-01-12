@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\training_info\implementation\bamaflex;
+namespace Application\Discovery\module\training_info\implementation\bamaflex\rendition\html;
 
 use application\discovery\SortableTable;
 use libraries\format\DynamicContentTab;

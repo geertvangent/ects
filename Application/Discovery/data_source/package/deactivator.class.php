@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\data_source;
+namespace Application\Discovery\data_source\package;
 
 class Deactivator extends \configuration\package\Deactivator
 {

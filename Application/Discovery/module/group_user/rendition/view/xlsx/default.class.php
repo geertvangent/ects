@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\group_user;
+namespace Application\Discovery\module\group_user\rendition\view\xlsx;
 
 class XlsxDefaultRendition extends XlsxRendition
 {

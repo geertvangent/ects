@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile\implementation\bamaflex;
+namespace Application\Discovery\module\profile\implementation\bamaflex\rendition\html;
 
 use libraries\format\BreadcrumbTrail;
 use libraries\format\Breadcrumb;

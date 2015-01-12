@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\advice\test;
+namespace Application\Discovery\module\advice\test\source;
 
 /**
  * This test case checks the php syntax for the php files of this package

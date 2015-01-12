@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance;
+namespace Application\Discovery\instance\table\instance;
 
 use libraries\format\TableColumnModelActionsColumnSupport;
 use libraries\format\DataClassPropertyTableColumn;

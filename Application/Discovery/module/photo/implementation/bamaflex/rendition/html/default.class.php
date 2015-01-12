@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\photo\implementation\bamaflex;
+namespace Application\Discovery\module\photo\implementation\bamaflex\rendition\html;
 
 use libraries\platform\translation\Translation;
 use libraries\format\Breadcrumb;

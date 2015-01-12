@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\career;
+namespace Application\Discovery\module\career;
 
 use libraries\utilities\Utilities;
 use libraries\storage\data_class\DataClass;

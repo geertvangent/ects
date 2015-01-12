@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\student_materials\implementation\bamaflex;
+namespace Application\Discovery\module\student_materials\implementation\bamaflex\rendition\html;
 
 use libraries\format\Display;
 use application\discovery\module\course\implementation\bamaflex\Material;

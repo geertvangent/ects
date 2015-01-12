@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\photo\implementation\bamaflex;
+namespace Application\Discovery\module\photo\implementation\bamaflex\gallery_browser;
 
 use libraries\storage\DataClassCountParameters;
 use libraries\storage\DataClassRetrievesParameters;

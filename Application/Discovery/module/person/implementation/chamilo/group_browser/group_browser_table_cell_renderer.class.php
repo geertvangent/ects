@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\person\implementation\chamilo;
+namespace Application\Discovery\module\person\implementation\chamilo\group_browser;
 
 use core\group\Group;
 use core\group\GroupTableCellRenderer;

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery;
 
 use libraries\platform\PlatformSetting;
 use libraries\format\theme\Theme;

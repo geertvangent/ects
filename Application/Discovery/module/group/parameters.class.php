@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\group;
+namespace Application\Discovery\module\group;
 
 class Parameters extends \application\discovery\Parameters
 {

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance;
+namespace Application\Discovery\instance\package;
 
 class Installer extends \configuration\package\Installer
 {

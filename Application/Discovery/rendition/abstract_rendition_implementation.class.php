@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery\rendition;
 
 abstract class AbstractRenditionImplementation
 {

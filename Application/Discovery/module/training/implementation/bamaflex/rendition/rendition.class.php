@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\training\implementation\bamaflex;
+namespace Application\Discovery\module\training\implementation\bamaflex\rendition;
 
 abstract class RenditionImplementation extends \application\discovery\RenditionImplementation
 {

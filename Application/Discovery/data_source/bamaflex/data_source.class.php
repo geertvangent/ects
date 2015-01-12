@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\data_source\bamaflex;
+namespace Application\Discovery\data_source\bamaflex;
 
 class DataSource extends \application\discovery\DataSource
 {

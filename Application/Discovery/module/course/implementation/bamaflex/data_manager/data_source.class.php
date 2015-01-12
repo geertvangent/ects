@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\course\implementation\bamaflex;
+namespace Application\Discovery\module\course\implementation\bamaflex\data_manager;
 
 use libraries\storage\DoctrineConditionTranslator;
 use libraries\storage\AndCondition;

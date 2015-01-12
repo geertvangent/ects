@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\teaching_assignment;
+namespace Application\Discovery\module\teaching_assignment\rendition\view\html;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

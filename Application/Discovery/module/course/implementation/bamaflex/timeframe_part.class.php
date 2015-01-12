@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\course\implementation\bamaflex;
+namespace Application\Discovery\module\course\implementation\bamaflex;
 
 use libraries\utilities\DatetimeUtilities;
 use application\discovery\DiscoveryItem;

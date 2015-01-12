@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\course\implementation\bamaflex;
+namespace Application\Discovery\module\course\implementation\bamaflex;
 
 use application\discovery\module\course\DataManager;
 use application\discovery\TrainingBasedRights;

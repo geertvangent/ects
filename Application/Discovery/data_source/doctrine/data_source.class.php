@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\data_source\doctrine;
+namespace Application\Discovery\data_source\doctrine;
 
 use application\discovery\instance\Instance;
 

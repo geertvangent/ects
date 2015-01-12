@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery;
+namespace Application\Discovery\component;
 
 use libraries\architecture\DelegateComponent;
 use libraries\platform\translation\Translation;

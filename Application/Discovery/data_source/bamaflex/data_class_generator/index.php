@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\data_source\bamaflex;
+namespace Application\Discovery\data_source\bamaflex\data_class_generator;
 
 use libraries\file\Path;
 use libraries\file\Filesystem;

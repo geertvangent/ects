@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\group_user\implementation\bamaflex;
+namespace Application\Discovery\module\group_user\implementation\bamaflex\rendition\xlsx;
 
 use application\discovery\module\group_user\DataManager;
 use application\discovery\module\group\implementation\bamaflex\Group;

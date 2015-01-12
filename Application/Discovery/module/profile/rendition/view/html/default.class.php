@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\profile;
+namespace Application\Discovery\module\profile\rendition\view\html;
 
 use application\discovery\SortableTable;
 use libraries\format\Display;

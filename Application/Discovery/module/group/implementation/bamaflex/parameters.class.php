@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\group\implementation\bamaflex;
+namespace Application\Discovery\module\group\implementation\bamaflex;
 
 class Parameters extends \application\discovery\module\group\Parameters
 {

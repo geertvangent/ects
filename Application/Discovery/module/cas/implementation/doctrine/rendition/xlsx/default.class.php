@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\cas\implementation\doctrine;
+namespace Application\Discovery\module\cas\implementation\doctrine\rendition\xlsx;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {

@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\faculty_info;
+namespace Application\Discovery\module\faculty_info;
 
 class Parameters extends \application\discovery\Parameters
 {

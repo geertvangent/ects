@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\module\teaching_assignment\implementation\bamaflex;
+namespace Application\Discovery\module\teaching_assignment\implementation\bamaflex\rendition\xlsx;
 
 use libraries\utilities\StringUtilities;
 use libraries\platform\translation\Translation;

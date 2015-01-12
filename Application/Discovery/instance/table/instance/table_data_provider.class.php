@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance;
+namespace Application\Discovery\instance\table\instance;
 
 use libraries\storage\DataClassRetrievesParameters;
 use libraries\storage\DataClassCountParameters;

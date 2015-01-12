@@ -1,5 +1,5 @@
 <?php
-namespace application\discovery\instance;
+namespace Application\Discovery\instance\data_class;
 
 use libraries\storage\EqualityCondition;
 use libraries\file\Path;
