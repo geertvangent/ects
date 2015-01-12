@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="application\personal_calendar\integration\core\home" default="build">
-
-    <resolvepath propertyName="package-directory" file="../../"/>
-    <import file="../../../../../../../configuration/build/config/build.xml" />
-    
-</project>
