@@ -4,10 +4,10 @@ namespace Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Ba
 use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\PropertiesTable;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\TrainingResults\DataManager;
 
@@ -345,7 +345,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         foreach ($this->get_training_results() as $enrollment)
         {
             $row = array();
-            $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($enrollment->get_person_id());
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code($enrollment->get_person_id());
             
             if ($profile_module_instance)
             {

@@ -4,7 +4,7 @@ namespace Chamilo\Application\Discovery\DataSource\Doctrine;
 use Chamilo\Doctrine\DBAL\DriverManager;
 use Chamilo\Doctrine\Common\ClassLoader;
 use Chamilo\Libraries\Storage\DataSourceName;
-use Chamilo\Libraries\Storage\DoctrineConnection;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection;
 use Chamilo\Libraries\File\Path;
 
 class Connection extends DoctrineConnection

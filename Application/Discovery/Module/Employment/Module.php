@@ -2,9 +2,9 @@
 namespace Chamilo\Application\Discovery\Module\Employment;
 
 use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Libraries\Architecture\Application\Application;
 
 abstract class Module extends \Chamilo\Application\Discovery\Module

@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupRelUserBrowser;
 
-use Chamilo\Libraries\Format\TableDataProvider;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\DataClassCountParameters;
+use Chamilo\Libraries\Format\Table\TableDataProvider;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 
 /**
  * $Id: group_rel_user_browser_table_data_provider.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -34,8 +34,8 @@ class GroupRelUserBrowserTableDataProvider extends TableDataProvider
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
         $order_property = $this->get_order_property($order_property);
-        return \Chamilo\Core\Group\DataManager :: retrieves(
-            \Chamilo\Core\Group\GroupRelUser :: class_name(),
+        return \Chamilo\Core\Group\Storage\DataManager :: retrieves(
+            \Chamilo\Core\Group\Storage\DataClass\GroupRelUser :: class_name(),
             new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property));
     }
 
@@ -44,8 +44,8 @@ class GroupRelUserBrowserTableDataProvider extends TableDataProvider
      */
     public function count_data($condition)
     {
-        return \Chamilo\Core\Group\DataManager :: count(
-            \Chamilo\Core\Group\GroupRelUser :: class_name(),
+        return \Chamilo\Core\Group\Storage\DataManager :: count(
+            \Chamilo\Core\Group\Storage\DataClass\GroupRelUser :: class_name(),
             new DataClassCountParameters($this->get_condition()));
     }
 }

@@ -1,10 +1,11 @@
 <?php
 namespace Chamilo\Application\Discovery\Instance\Table\Instance;
 
-use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
-use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
-use Chamilo\Libraries\Format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\DisplayOrderPropertyTableColumn;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class InstanceTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

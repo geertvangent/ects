@@ -3,8 +3,8 @@ namespace Chamilo\Application\Discovery\DataSource\Component;
 
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\SortableTableFromArray;
-use Chamilo\Libraries\Platform\Request;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Application\Discovery\DataSource;

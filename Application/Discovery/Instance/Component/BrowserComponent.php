@@ -3,18 +3,19 @@ namespace Chamilo\Application\Discovery\Instance\Component;
 
 use Chamilo\Libraries\Format\DynamicVisualTab;
 use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
-use Chamilo\Libraries\Platform\Request;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Format\ActionBarRenderer;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
 use Chamilo\Libraries\Format\ActionBarSearchForm;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\PatternMatchCondition;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class BrowserComponent extends Manager implements TableSupport
 {

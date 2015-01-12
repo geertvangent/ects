@@ -1,11 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBrowser;
 
-use Chamilo\Core\Group\GroupRelUserTableColumnModel;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\StaticTableColumn;
 
-class GroupBrowserTableColumnModel extends GroupRelUserTableColumnModel
+class GroupBrowserTableColumnModel extends \Chamilo\Core\Group\Table\GroupRelUser\GroupRelUserTableColumnModel
 {
 
     /**

@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person;
 
-use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
 

@@ -1,6 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\ContentObjectData;
+
 class LoginDataFilter extends TypeDataFilter
 {
     const CLASS_NAME = __CLASS__;

@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBrowser;
 
-use Chamilo\Core\Group\Group;
-use Chamilo\Core\Group\GroupTableCellRenderer;
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Core\Group\Table\Group\GroupTableCellRenderer;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 
 class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
 {

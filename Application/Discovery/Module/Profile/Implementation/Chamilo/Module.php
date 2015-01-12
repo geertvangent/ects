@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Chamilo;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 
 class Module extends \Chamilo\Application\Discovery\Module\Profile\Module
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 class Address extends DataClass

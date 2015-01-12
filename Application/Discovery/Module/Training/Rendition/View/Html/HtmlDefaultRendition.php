@@ -2,11 +2,12 @@
 namespace Chamilo\Application\Discovery\Module\Training\Rendition\View\Html;
 
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\DynamicVisualTab;
 use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Application\Discovery\Rendition\Format\HtmlRendition;
 
 class HtmlDefaultRendition extends HtmlRendition
 {
@@ -26,26 +27,26 @@ class HtmlDefaultRendition extends HtmlRendition
             $current_year = $this->get_rendition_implementation()->module_parameters()->get_year();
         }
         $tabs = new DynamicVisualTabsRenderer(
-            'training_list', 
+            'training_list',
             $this->get_rendition_implementation()->get_trainings_table($current_year)->as_html());
-        
+
         foreach ($this->get_rendition_implementation()->get_years() as $year)
         {
-            
+
             $parameters = $this->get_rendition_implementation()->module_parameters();
             $parameters->set_year($year);
             $tabs->add_tab(
                 new DynamicVisualTab(
-                    $year, 
-                    $year, 
-                    null, 
+                    $year,
+                    $year,
+                    null,
                     $this->get_rendition_implementation()->get_instance_url(
-                        $this->get_rendition_implementation()->get_module_instance()->get_id(), 
-                        $parameters), 
+                        $this->get_rendition_implementation()->get_module_instance()->get_id(),
+                        $parameters),
                     $current_year == $year));
         }
         $html[] = $tabs->render();
-        
+
         return implode("\n", $html);
     }
 }

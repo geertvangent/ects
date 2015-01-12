@@ -2,17 +2,17 @@
 namespace Chamilo\Application\Discovery;
 
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Storage\NotCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Architecture\Application\Application;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 /**
  *
@@ -38,7 +38,7 @@ class Module
      * @param $application Application
      * @param $module_instance Instance
      */
-    public function __construct(Application $application,\Chamilo\Application\Discovery\Instance\Instance $module_instance)
+    public function __construct(Application $application,\Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
     {
         $this->application = $application;
         $this->module_instance = $module_instance;
@@ -50,7 +50,7 @@ class Module
      * @param $module_instance Instance
      * @return Module
      */
-    public static function factory(Application $application,\Chamilo\Application\Discovery\Instance\Instance $module_instance)
+    public static function factory(Application $application,\Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
     {
         $class = $module_instance->get_type() . '\\Module';
         
@@ -88,19 +88,19 @@ class Module
     {
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Discovery\Instance\Instance :: class_name(), 
-                \Chamilo\Application\Discovery\Instance\Instance :: PROPERTY_TYPE), 
+                \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
+                \Chamilo\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_TYPE), 
             new StaticConditionVariable($type));
         $conditions[] = new NotCondition(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Discovery\Instance\Instance :: class_name(), 
-                    \Chamilo\Application\Discovery\Instance\Instance :: PROPERTY_CONTENT_TYPE), 
-                new StaticConditionVariable(\Chamilo\Application\Discovery\Instance\Instance :: TYPE_DISABLED)));
+                    \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
+                    \Chamilo\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_CONTENT_TYPE), 
+                new StaticConditionVariable(\Chamilo\Application\Discovery\Instance\DataClass\Instance :: TYPE_DISABLED)));
         $condition = new AndCondition($conditions);
         
         $module_instances = \Chamilo\Application\Discovery\Instance\DataManager :: retrieves(
-            \Chamilo\Application\Discovery\Instance\Instance :: class_name(), 
+            \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
             new DataClassRetrievesParameters($condition));
         while ($module_instance = $module_instances->next_result())
         {
@@ -166,7 +166,7 @@ class Module
 
     public function get_type()
     {
-        return \Chamilo\Application\Discovery\Instance\Instance :: TYPE_DISABLED;
+        return \Chamilo\Application\Discovery\Instance\DataClass\Instance :: TYPE_DISABLED;
     }
 
     /**

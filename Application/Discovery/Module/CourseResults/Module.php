@@ -3,8 +3,8 @@ namespace Chamilo\Application\Discovery\Module\CourseResults;
 
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Platform\Request;
-use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Application\Discovery\Module\CourseResults\DataManager;
 
 abstract class Module extends \Chamilo\Application\Discovery\Module

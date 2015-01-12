@@ -4,10 +4,10 @@ namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bama
 use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\PropertiesTable;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\CourseResults\DataManager;
 
@@ -193,7 +193,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             if ($profile_module_instance)
             {
-                $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($course_result->get_person_id());
+                $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code($course_result->get_person_id());
                 if ($user)
                 {
                     $parameters = new \Chamilo\Application\Discovery\Module\Profile\Parameters($user->get_id());

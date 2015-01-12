@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type;
 
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeData;
+
 class CourseTimeData extends TypeData
 {
     const CLASS_NAME = __CLASS__;
@@ -15,7 +17,7 @@ class CourseTimeData extends TypeData
     {
         $filters[] = self :: PROPERTY_COURSE;
         $filters[] = self :: PROPERTY_TOOL;
-        
+
         return parent :: get_filters($filters);
     }
 
@@ -87,7 +89,7 @@ class CourseTimeData extends TypeData
         $extended_property_names[] = self :: PROPERTY_USER_ID;
         $extended_property_names[] = self :: PROPERTY_USER_OFFICIAL_CODE;
         $extended_property_names[] = self :: PROPERTY_USER_EMAIL;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 }

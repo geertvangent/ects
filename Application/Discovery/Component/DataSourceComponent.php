@@ -2,10 +2,10 @@
 namespace Chamilo\Application\Discovery\Component;
 
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
-use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class DataSourceComponent extends Manager
 {

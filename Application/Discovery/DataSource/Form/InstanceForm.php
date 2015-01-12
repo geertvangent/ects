@@ -2,13 +2,15 @@
 namespace Chamilo\Application\Discovery\DataSource\Form;
 
 use Chamilo\Libraries\Format\Form\FormValidator;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\DynamicFormTabsRenderer;
 use Chamilo\Libraries\Format\DynamicFormTab;
 use Chamilo\DOMDocument;
+use Chamilo\Application\Discovery\DataSource\DataClass\InstanceSetting;
+use Chamilo\Application\Discovery\DataSource\DataClass\Instance;
 
 class InstanceForm extends FormValidator
 {

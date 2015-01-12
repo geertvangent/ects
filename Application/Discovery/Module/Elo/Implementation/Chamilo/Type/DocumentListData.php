@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type;
 
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeData;
+
 class DocumentListData extends TypeData
 {
     const CLASS_NAME = __CLASS__;

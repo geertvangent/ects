@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Exemption\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -22,7 +22,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function retrieve_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
         if (! isset($this->exemptions[$person_id]))
         {
@@ -38,7 +38,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $exemption = new Exemption();
                     $exemption->set_id($result->id);
@@ -70,7 +70,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function count_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
         $condition = new EqualityCondition(
             new StaticColumnConditionVariable('person_id'), 
@@ -83,7 +83,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         
         if ($statement instanceof PDOStatement)
         {
-            $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
+            $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->exemptions_count;
         }
         
@@ -93,7 +93,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function retrieve_years($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         if (! isset($this->years[$person_id]))
         {
             $query = 'SELECT DISTINCT year FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id .
@@ -103,7 +103,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->years[$person_id][] = $result->year;
                 }

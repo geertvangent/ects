@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Rendition\Xlsx;
 
-use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\String\StringUtilities;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
 use Chamilo\PHPExcel;
@@ -129,11 +129,11 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $headers[] = Translation :: get('ContractType');
 
             $this->php_excel->getActiveSheet()->getStyle(
-                'A:' . \Chamilo\PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
-                \Chamilo\PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
+                'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
+                \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
 
             $this->php_excel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(
-                \Chamilo\PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
+                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
 
             \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
             $row ++;
@@ -372,8 +372,8 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                                 StringUtilities :: transcode_string(
                                     Translation :: get($enrollment->get_contract_type_string())));
 
-                            $range = 'A' . $row . ':' . \Chamilo\PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1) .
-                                 $row;
+                            $range = 'A' . $row . ':' .
+                                 \Chamilo\PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1) . $row;
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->setItalic(true);
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->getColor()->setRGB(
                                 'AAAAAA');

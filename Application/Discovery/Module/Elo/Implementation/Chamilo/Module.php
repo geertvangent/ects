@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo;
 
 use Chamilo\Application\Discovery\Parameters;
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Session\Request;
 
 class Module extends \Chamilo\Application\Discovery\Module\Elo\Module
 {

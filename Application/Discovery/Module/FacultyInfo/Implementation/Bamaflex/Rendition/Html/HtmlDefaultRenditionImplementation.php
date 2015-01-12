@@ -2,13 +2,13 @@
 namespace Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rendition\Html;
 
 use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Display;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation

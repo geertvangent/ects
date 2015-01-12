@@ -1,11 +1,12 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource;
 
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\DataClassRetrieveParameters;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Application\Discovery\DataSource\DataClass\InstanceSetting;
 
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
@@ -13,7 +14,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
     /**
      * Gets the type of DataManager to be instantiated
-     * 
+     *
      * @return string
      */
     public static function get_type()
@@ -25,13 +26,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID), 
+            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID),
             new StaticConditionVariable($instance_id));
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_VARIABLE), 
+            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_VARIABLE),
             new StaticConditionVariable($variable));
         $condition = new AndCondition($conditions);
-        
+
         return self :: retrieve(InstanceSetting :: class_name(), new DataClassRetrieveParameters($condition));
     }
 }

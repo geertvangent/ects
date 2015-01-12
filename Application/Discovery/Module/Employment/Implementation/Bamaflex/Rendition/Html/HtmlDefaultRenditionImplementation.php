@@ -1,15 +1,15 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Employment\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Libraries\Format\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

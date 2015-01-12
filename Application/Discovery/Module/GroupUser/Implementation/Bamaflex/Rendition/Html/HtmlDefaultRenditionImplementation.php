@@ -5,11 +5,11 @@ use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Format\DynamicContentTab;
 use Chamilo\Libraries\Format\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Structure\Toolbar;
-use Chamilo\Libraries\Format\PropertiesTable;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\GroupUser\DataManager;
 use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
@@ -153,8 +153,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $toolbar = new Toolbar();
         
-        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($group_user->get_person_id());
-        if ($user instanceof \Chamilo\Core\User\User)
+        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code($group_user->get_person_id());
+        if ($user instanceof \Chamilo\Core\User\Storage\DataClass\User)
         {
             $profile_link = $this->get_module_link(
                 'application\discovery\module\profile\implementation\bamaflex', 

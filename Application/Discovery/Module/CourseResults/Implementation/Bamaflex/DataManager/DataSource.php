@@ -1,16 +1,15 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
 use Chamilo\Application\Discovery\Module\Career\MarkMoment;
 use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
-use Chamilo\StdClass;
-use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -32,35 +31,35 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $programme_id = $course_results_parameters->get_programme_id();
         $source = $course_results_parameters->get_source();
-        
+
         if (! isset($this->course_results[$programme_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('programme_id'), 
+                new StaticColumnConditionVariable('programme_id'),
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_course_results_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY person_last_name, person_first_name';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->course_results[$programme_id][$source][] = $this->result_to_course_result(
-                        $course_results_parameters, 
+                        $course_results_parameters,
                         $result);
                 }
             }
         }
-        
+
         return $this->course_results[$programme_id][$source];
     }
 
@@ -68,27 +67,27 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-        
+
         if (! isset($this->course[$programme_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'), 
+                new StaticColumnConditionVariable('id'),
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
-                $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
-                if ($result instanceof stdClass)
+                $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                if ($result instanceof \stdClass)
                 {
                     $this->course[$programme_id][$source] = $this->result_to_course($result);
                 }
@@ -129,7 +128,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $course->set_previous_id($object->previous_id);
         $course->set_previous_parent_id($object->previous_parent_id);
         $course->set_next_id($this->retrieve_course_next_id($course));
-        
+
         return $course;
     }
 
@@ -137,20 +136,20 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('previous_id'), 
+            new StaticColumnConditionVariable('previous_id'),
             new StaticConditionVariable($course->get_id()));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('source'), 
+            new StaticColumnConditionVariable('source'),
             new StaticConditionVariable($course->get_source()));
         $condition = new AndCondition($conditions);
-        
+
         $query = 'SELECT id FROM v_discovery_course_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
-            $result = $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
+            $result = $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->id;
         }
         else
@@ -168,11 +167,11 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $course_result->set_person_first_name($this->convert_to_utf8($result->person_first_name));
         $course_result->set_person_id($result->person_id);
         $course_result->set_trajectory_type($result->trajectory_type);
-        
+
         $marks = $this->retrieve_marks(
-            $course_results_parameters->get_programme_id(), 
+            $course_results_parameters->get_programme_id(),
             $course_results_parameters->get_source());
-        
+
         foreach ($this->retrieve_mark_moments($course_results_parameters) as $moment)
         {
             if (isset($marks[$result->source][$result->id][$moment->get_id()]))
@@ -184,10 +183,10 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             {
                 $mark = Mark :: factory($moment->get_id());
             }
-            
+
             $course_result->add_mark($mark);
         }
-        
+
         return $course_result;
     }
 
@@ -199,31 +198,31 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function retrieve_mark_moments($course_results_parameters)
     {
         $moments = array();
-        
+
         $mark_moment = new MarkMoment();
         $mark_moment->set_id(1);
         $mark_moment->set_name('1<sup>ste</sup> kans');
         $moments[1] = $mark_moment;
-        
+
         $mark_moment = new MarkMoment();
         $mark_moment->set_id(2);
         $mark_moment->set_name('2<sup>de</sup> kans');
         $moments[2] = $mark_moment;
-        
+
         return $moments;
-        
+
         // $programme_id = $course_results_parameters->get_programme_id();
         // $source = $course_results_parameters->get_source();
-        
+
         // if (! isset($this->mark_moments[$programme_id][$source]))
         // {
         // $query = 'SELECT DISTINCT try_id, try_name, try_order FROM v_discovery_mark_advanced ';
         // $query .= 'WHERE programme_id = "' . $programme_id . '" AND source = ' . $source . ' ';
         // $query .= 'ORDER BY try_order';
-        
+
         // $statement = $this->get_connection()->prepare($query);
         // $results = $statement->execute();
-        
+
         // if (! $results instanceof MDB2_Error)
         // {
         // while ($result = $results->fetchRow(MDB2_FETCHMODE_OBJECT))
@@ -231,12 +230,12 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         // $mark_moment = new MarkMoment();
         // $mark_moment->set_id($result->try_id);
         // $mark_moment->set_name($result->try_name);
-        
+
         // $this->mark_moments[$programme_id][$source][$result->try_id] = $mark_moment;
         // }
         // }
         // }
-        
+
         // return $this->mark_moments[$programme_id][$source];
     }
 
@@ -250,21 +249,21 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('programme_id'), 
+                new StaticColumnConditionVariable('programme_id'),
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_mark_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $mark = new Mark();
                     $mark->set_moment($result->try_id);
@@ -273,12 +272,12 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                     $mark->set_sub_status($result->sub_status);
                     $mark->set_publish_status($result->publish_status);
                     $mark->set_abandoned($result->abandoned);
-                    
+
                     $this->marks[$programme_id][$source][$result->source][$result->enrollment_programme_id][$result->try_id] = $mark;
                 }
             }
         }
-        
+
         return $this->marks[$programme_id][$source];
     }
 }

@@ -1,18 +1,19 @@
 <?php
 namespace Chamilo\Application\Discovery\Instance\Table\Instance;
 
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Storage\DataClassCountParameters;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 use Chamilo\Libraries\Format\DisplayOrderPropertyTableColumn;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

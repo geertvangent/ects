@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Employment\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -22,7 +22,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
      */
     public function retrieve_employments($parameters)
     {
-        $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         
         $official_code = $user->get_official_code();
         
@@ -43,7 +43,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $employment = new Employment();
                 $employment->set_id($result->id);
@@ -90,7 +90,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
 
     public function count_employments($parameters)
     {
-        $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         
         $official_code = $user->get_official_code();
         
@@ -105,7 +105,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         
         if ($statement instanceof PDOStatement)
         {
-            $result = $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
+            $result = $result = $statement->fetch(\PDO :: FETCH_OBJ);
             
             return $result->employments_count;
         }
@@ -128,7 +128,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
             {
                 $employment_part = new EmploymentPart();
                 $employment_part->set_assignment_id($result->assignment_id);

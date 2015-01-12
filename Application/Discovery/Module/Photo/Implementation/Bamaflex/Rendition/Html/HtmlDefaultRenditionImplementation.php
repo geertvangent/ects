@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Photo\DataManager;
 use Chamilo\Application\Discovery\AccessAllowedInterface;

@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\Zip;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Application\Discovery\Module\Photo\DataManager;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Platform\Session;
+use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\Format\Display;
 
 class ZipDefaultRenditionImplementation extends RenditionImplementation
@@ -31,7 +31,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
         $this->prepare_file_system();
         
         $parameters = new DataClassRetrievesParameters($this->get_module()->get_condition());
-        $users = \Chamilo\Core\User\DataManager :: retrieves(\Chamilo\Core\User\User :: class_name(), $parameters);
+        $users = \Chamilo\Core\User\Storage\DataManager :: retrieves(\Chamilo\Core\User\Storage\DataClass\User :: class_name(), $parameters);
         
         while ($user = $users->next_result())
         {

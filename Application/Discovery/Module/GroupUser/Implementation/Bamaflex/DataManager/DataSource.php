@@ -1,13 +1,13 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
-use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -48,7 +48,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $group_user = new GroupUser();
                     $group_user->set_source($result->source);
@@ -94,7 +94,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
+                $result = $statement->fetch(\PDO :: FETCH_OBJ);
                 
                 $group = new Group();
                 $group->set_id($result->id);

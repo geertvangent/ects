@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex;
 
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 

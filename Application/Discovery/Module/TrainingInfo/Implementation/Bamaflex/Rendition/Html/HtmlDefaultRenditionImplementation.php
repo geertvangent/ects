@@ -4,16 +4,16 @@ namespace Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaf
 use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\DynamicContentTab;
 use Chamilo\Libraries\Format\DynamicTabsRenderer;
-use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\DynamicVisualTab;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

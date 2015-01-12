@@ -1,16 +1,16 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\DataManager;
 
-use Chamilo\Libraries\Storage\DataClassProperties;
-
-use Chamilo\Libraries\Storage\RecordRetrievesParameters;
-use Chamilo\Libraries\Storage\FunctionConditionVariable;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\GroupBy;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\Condition;
-use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
+use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Variable\FunctionConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\GroupBy;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\Condition;
+use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {

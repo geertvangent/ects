@@ -1,19 +1,21 @@
 <?php
 namespace Chamilo\Application\Discovery\Instance\Form;
 
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Format\Form\FormValidator;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\DynamicFormTabsRenderer;
 use Chamilo\Libraries\Format\DynamicFormTab;
 use Chamilo\DOMDocument;
-use Chamilo\Libraries\Storage\DataClassCountParameters;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Application\Discovery\Instance\DataClass\InstanceSetting;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class InstanceForm extends FormValidator
 {

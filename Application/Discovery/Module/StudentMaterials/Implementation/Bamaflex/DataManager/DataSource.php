@@ -1,16 +1,16 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\StudentMaterials\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\NotCondition;
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
-use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -35,7 +35,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $id = $parameters->get_user_id();
         if (! isset($this->years[$id]))
         {
-            $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
             $condition = new EqualityCondition(
@@ -49,7 +49,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->years[$id][] = $result->year;
                 }
@@ -70,7 +70,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         
         if (! isset($this->enrollments[$id]))
         {
-            $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
             $condition = new EqualityCondition(
@@ -85,7 +85,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $enrollment = new Enrollment();
                     $enrollment->set_source($result->source);
@@ -135,7 +135,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $course = $this->result_to_course($result);
                     
@@ -176,7 +176,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $this->child_courses[$enrollment_id][$result->source][$result->enrollment_id][$result->programme_parent_id][] = $this->result_to_course(
                         $result);
@@ -229,7 +229,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $material = new MaterialStructured();
                     $material->set_programme_id($result->programme_id);
@@ -260,7 +260,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $id = $parameters->get_user_id();
         
-        $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($id);
+        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
         if (! $enrollment_id)
         {
@@ -284,7 +284,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $statement = $this->get_connection()->query($query);
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $enrollments_ids[] = $result->id;
                 }
@@ -314,7 +314,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $course_ids[] = $result->programme_id;
                 }
@@ -349,7 +349,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 
                 if ($statement instanceof PDOStatement)
                 {
-                    $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
+                    $result = $statement->fetch(\PDO :: FETCH_OBJ);
                     return $result->materials_count;
                 }
             }

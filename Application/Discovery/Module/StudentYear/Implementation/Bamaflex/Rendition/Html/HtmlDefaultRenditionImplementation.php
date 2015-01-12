@@ -2,10 +2,10 @@
 namespace Chamilo\Application\Discovery\Module\StudentYear\Implementation\Bamaflex\Rendition\Html;
 
 use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

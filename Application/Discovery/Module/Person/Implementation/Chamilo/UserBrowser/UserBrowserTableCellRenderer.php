@@ -2,8 +2,8 @@
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\UserBrowser;
 
 use Chamilo\Libraries\Format\Structure\Toolbar;
-use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
-use Chamilo\Libraries\Format\TableCellRenderer;
+use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\TableCellRenderer;
 
 /**
  * $Id: user_browser_table_cell_renderer.class.php 211 2009-11-13 13:28:39Z vanpouckesven $

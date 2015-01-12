@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex;
 
-use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Session\Request;
 
 class Module extends \Chamilo\Application\Discovery\Module\Group\Module
 {

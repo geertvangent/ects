@@ -2,7 +2,6 @@
 namespace Chamilo\Application\Discovery\Rendition;
 
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Architecture\ClassContext;
 
 abstract class Rendition
 {

@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource\Bamaflex;
 
-use Chamilo\Libraries\Storage\DataSourceName;
+use Chamilo\Libraries\Storage\Doctrine\DataSourceName;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Storage\DoctrineConnection;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection;
 use Chamilo\Doctrine\DBAL\DriverManager;
 use Chamilo\Doctrine\Common\ClassLoader;
 

@@ -1,13 +1,13 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\XmlFeeds;
 
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Platform\Request;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Authentication\Authentication;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\OrderBy;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $
@@ -24,16 +24,16 @@ if (Authentication :: is_valid())
 {
     $parent_id = Request :: get('parent_id');
     $condition = new EqualityCondition(
-        new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID),
+        new PropertyConditionVariable(\Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID),
         new StaticConditionVariable($parent_id));
-    $groups_tree = \Chamilo\Core\Group\DataManager :: retrieves(
-        \Chamilo\Core\Group\Group :: class_name(),
+    $groups_tree = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
+        \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
         new DataClassRetrievesParameters(
             $condition,
             null,
             null,
             new OrderBy(
-                new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_NAME))))->as_array();
+                new PropertyConditionVariable(\Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_NAME))))->as_array();
 }
 
 header('Content-Type: text/xml');

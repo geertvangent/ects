@@ -1,19 +1,21 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Format\DynamicContentTab;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Application\Discovery\AccessAllowedInterface;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Cost;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -275,7 +277,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                     if ($coordinator->is_coordinator())
                     {
-                        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($coordinator->get_person_id());
+                        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code(
+                            $coordinator->get_person_id());
                         if ($user)
                         {
                             $parameters = new \Chamilo\Application\Discovery\Module\TeachingAssignment\Parameters(
@@ -322,7 +325,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if (! $teacher->is_coordinator())
                     {
-                        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($teacher->get_person_id());
+                        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code(
+                            $teacher->get_person_id());
                         if ($user)
                         {
                             $parameters = new \Chamilo\Application\Discovery\Module\TeachingAssignment\Parameters(

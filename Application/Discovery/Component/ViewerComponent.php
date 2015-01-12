@@ -2,22 +2,22 @@
 namespace Chamilo\Application\Discovery\Component;
 
 use Chamilo\Libraries\Architecture\DelegateComponent;
-use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Format\DynamicVisualTab;
 use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
-use Chamilo\Libraries\Platform\Request;
-use Chamilo\Libraries\Storage\DataClassRetrieveParameters;
-use Chamilo\Application\Discovery\Instance\Instance;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\OrderBy;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 /**
  *
@@ -192,7 +192,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         if ($current_module_instance->get_content_type() == Instance :: TYPE_USER)
         {
             $user_id = $module_parameters->get_user_id();
-            $user = \Chamilo\Core\User\DataManager :: retrieve_by_id(\Chamilo\Core\User\User :: class_name(), (int) $user_id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(\Chamilo\Core\User\Storage\DataClass\User :: class_name(), (int) $user_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $user->get_fullname()));
         }
 

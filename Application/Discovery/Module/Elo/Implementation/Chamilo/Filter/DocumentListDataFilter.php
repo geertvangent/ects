@@ -1,7 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\DocumentListData;
 
 class DocumentListDataFilter extends TypeDataFilter
 {
@@ -36,17 +38,17 @@ class DocumentListDataFilter extends TypeDataFilter
                 return $this->get_size_options();
                 break;
         }
-        
+
         return parent :: get_options($filter);
     }
 
     public function get_size_options()
     {
         return array(
-            self :: SIZE_ANY => Translation :: get('AnySize'), 
-            self :: SIZE_1_MB => Translation :: get('Size1Mb'), 
-            self :: SIZE_10_MB => Translation :: get('Size10Mb'), 
-            self :: SIZE_100_MB => Translation :: get('Size100Mb'), 
+            self :: SIZE_ANY => Translation :: get('AnySize'),
+            self :: SIZE_1_MB => Translation :: get('Size1Mb'),
+            self :: SIZE_10_MB => Translation :: get('Size10Mb'),
+            self :: SIZE_100_MB => Translation :: get('Size100Mb'),
             self :: SIZE_1000_MB => Translation :: get('Size1000Mb'));
     }
 }

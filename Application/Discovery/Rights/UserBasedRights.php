@@ -1,17 +1,18 @@
 <?php
 namespace Chamilo\Application\Discovery\Rights;
 
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\InCondition;
-use Chamilo\Libraries\Storage\OrCondition;
-use Chamilo\Libraries\Platform\Session;
-use Chamilo\Exception;
-use Chamilo\Libraries\Storage\DataClassCountParameters;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Core\Rights\UserEntity;
-use Chamilo\Core\Rights\PlatformGroupEntity;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
+use Chamilo\Libraries\Platform\Session\Session;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Core\Rights\Entity\UserEntity;
+use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
+use Chamilo\Application\Discovery\DataManager;
 
 class UserBasedRights
 {
@@ -26,8 +27,8 @@ class UserBasedRights
     {
         try
         {
-            $current_user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
-                \Chamilo\Core\User\User :: class_name(),
+            $current_user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
                 (int) Session :: get_user_id());
 
             if ($current_user->is_platform_admin())
@@ -35,8 +36,8 @@ class UserBasedRights
                 return true;
             }
 
-            $user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
-                \Chamilo\Core\User\User :: class_name(),
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
                 (int) $parameters->get_user_id());
 
             $user_group_ids = $user->get_groups(true);
@@ -103,7 +104,7 @@ class UserBasedRights
                 return false;
             }
         }
-        catch (Exception $exception)
+        catch (\Exception $exception)
         {
             return false;
         }

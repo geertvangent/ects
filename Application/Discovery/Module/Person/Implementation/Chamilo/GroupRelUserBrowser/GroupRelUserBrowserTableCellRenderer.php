@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupRelUserBrowser;
 
-use Chamilo\Core\Group\GroupRelUser;
-use Chamilo\Core\Group\GroupRelUserTableCellRenderer;
+use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
+use Chamilo\Core\Group\Table\GroupRelUser\GroupRelUserTableCellRenderer;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 
 class GroupRelUserBrowserTableCellRenderer extends GroupRelUserTableCellRenderer
@@ -38,7 +38,9 @@ class GroupRelUserBrowserTableCellRenderer extends GroupRelUserTableCellRenderer
             // Exceptions that need post-processing go here ...
             case GroupRelUser :: PROPERTY_USER_ID :
                 $user_id = parent :: render_cell($column, $groupreluser);
-                $user = \Chamilo\Core\User\DataManager :: retrieve_by_id(\Chamilo\Core\User\User :: class_name(), (int) $user_id);
+                $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+                    \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+                    (int) $user_id);
                 return $user->get_fullname();
         }
         return parent :: render_cell($column, $groupreluser);

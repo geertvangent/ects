@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Instance\Table\Instance;
 
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\DataClassCountParameters;
-use Chamilo\Libraries\Format\DataClassTableDataProvider;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 
 class InstanceTableDataProvider extends DataClassTableDataProvider
 {

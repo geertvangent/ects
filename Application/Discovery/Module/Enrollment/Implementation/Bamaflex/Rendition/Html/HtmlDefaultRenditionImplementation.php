@@ -5,12 +5,12 @@ use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\DynamicContentTab;
 use Chamilo\Libraries\Format\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
-use Chamilo\Libraries\Format\Breadcrumb;
-use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

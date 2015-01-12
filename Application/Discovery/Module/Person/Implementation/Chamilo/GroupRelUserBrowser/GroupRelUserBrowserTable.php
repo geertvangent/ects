@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupRelUserBrowser;
 
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Table;
+use Chamilo\Libraries\Format\Table\Table;
 
 class GroupRelUserBrowserTable extends Table
 {

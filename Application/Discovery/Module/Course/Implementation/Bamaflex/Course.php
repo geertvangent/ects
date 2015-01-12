@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex;
 
 use Chamilo\Application\Discovery\Module\Course\DataManager;
-use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Discovery\DiscoveryItem;
 

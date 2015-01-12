@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\UserBrowser;
 
-use Chamilo\Libraries\Format\Table;
+use Chamilo\Libraries\Format\Table\Table;
 
 class UserBrowserTable extends Table
 {

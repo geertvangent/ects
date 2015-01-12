@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Discovery\Module\Career\DataManager;
 
 class Enrollment extends \Chamilo\Application\Discovery\Module\Enrollment\Enrollment

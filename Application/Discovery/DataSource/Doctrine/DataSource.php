@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource\Doctrine;
 
-use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource
 {

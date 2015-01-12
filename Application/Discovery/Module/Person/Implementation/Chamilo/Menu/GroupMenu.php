@@ -3,16 +3,15 @@ namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Men
 
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Format\OptionsMenuRenderer;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Format\Menu\OptionsMenuRenderer;
 use Chamilo\Libraries\Format\TreeMenuRenderer;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\HTML_Menu;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\HTML_Menu_ArrayRenderer;
-use Chamilo\Core\Group\Group;
-use Chamilo\Libraries\Storage\OrderBy;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -24,7 +23,7 @@ use Chamilo\Libraries\Storage\StaticConditionVariable;
  *
  * @author Bart Mollet
  */
-class GroupMenu extends HTML_Menu
+class GroupMenu extends \HTML_Menu
 {
     const TREE_NAME = __CLASS__;
 
@@ -78,10 +77,12 @@ class GroupMenu extends HTML_Menu
         $include_root = $this->include_root;
 
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID),
+            new PropertyConditionVariable(
+                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
+                \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable(0));
-        $group = \Chamilo\Core\Group\DataManager :: retrieves(
-            \Chamilo\Core\Group\Group :: class_name(),
+        $group = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
+            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 1,
@@ -107,7 +108,8 @@ class GroupMenu extends HTML_Menu
             }
 
             $menu_item['class'] = 'home';
-            $menu_item[OptionsMenuRenderer :: KEY_ID] = $group->get_id();
+            $menu_item[\Chamilo\Libraries\Format\Menu\OptionsMenuRenderer:: :: KEY_ID] =
+            $group->get_id();
             $menu[$group->get_id()] = $menu_item;
             return $menu;
         }
@@ -128,10 +130,12 @@ class GroupMenu extends HTML_Menu
         $hide_current_category = $this->hide_current_category;
 
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID),
+            new PropertyConditionVariable(
+                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
+                \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($parent_id));
-        $groups = \Chamilo\Core\Group\DataManager :: retrieves(
-            \Chamilo\Core\Group\Group :: class_name(),
+        $groups = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
+            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 null,

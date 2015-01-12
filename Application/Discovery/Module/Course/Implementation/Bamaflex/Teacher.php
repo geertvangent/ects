@@ -88,7 +88,7 @@ class Teacher extends DiscoveryItem
      */
     public function __toString()
     {
-        $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user_by_official_code($this->get_person_id());
+        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user_by_official_code($this->get_person_id());
         
         if ($user)
         {

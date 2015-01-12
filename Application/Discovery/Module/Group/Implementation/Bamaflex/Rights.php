@@ -17,7 +17,7 @@ class Rights extends TrainingBasedRights
         $parameter->set_source($parameters->get_source());
         
         $module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
-            \Chamilo\Application\Discovery\Instance\Instance :: class_name(), 
+            \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
             (int) $module_instance_id);
         $training = DataManager :: get_instance($module_instance)->retrieve_training($parameter);
         

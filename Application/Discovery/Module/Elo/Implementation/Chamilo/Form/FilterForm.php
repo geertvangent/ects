@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Form;
 
 use Chamilo\Libraries\Format\Form\FormValidator;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\ResourceManager;

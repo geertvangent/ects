@@ -1,18 +1,18 @@
 <?php
 namespace Chamilo\Application\Discovery\Rights;
 
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\InCondition;
-use Chamilo\Libraries\Storage\OrCondition;
-use Chamilo\Libraries\Platform\Session;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
+use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Application\Discovery\RightsGroupEntityRight;
-use Chamilo\Exception;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\DataClassCountParameters;
-use Chamilo\Core\Rights\UserEntity;
-use Chamilo\Core\Rights\PlatformGroupEntity;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Core\Rights\Entity\UserEntity;
+use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
+use Chamilo\Application\Discovery\DataManager;
 
 abstract class FacultyBasedRights
 {
@@ -27,8 +27,8 @@ abstract class FacultyBasedRights
     {
         try
         {
-            $current_user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
-                \Chamilo\Core\User\User :: class_name(),
+            $current_user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
                 (int) Session :: get_user_id());
 
             if ($current_user->is_platform_admin())
@@ -38,9 +38,9 @@ abstract class FacultyBasedRights
 
             $context = static :: get_context($module_instance_id, $parameters);
 
-            $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code('DEP_' . $context);
+            $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code('DEP_' . $context);
 
-            if ($group instanceof \Chamilo\Core\Group\Group)
+            if ($group instanceof \Chamilo\Core\Group\Storage\DataClass\Group)
             {
                 $current_user_group_ids = $current_user->get_groups(true);
 
@@ -110,7 +110,7 @@ abstract class FacultyBasedRights
                 return false;
             }
         }
-        catch (Exception $exception)
+        catch (\Exception $exception)
         {
             return false;
         }

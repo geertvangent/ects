@@ -2,7 +2,9 @@
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\ContentObjectData;
 
 class ContentObjectDataFilter extends TypeDataFilter
 {

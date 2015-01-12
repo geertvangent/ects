@@ -2,8 +2,8 @@
 namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rendition\Xlsx;
 
 use Chamilo\Application\Discovery\Module\CourseResults\DataManager;
-use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\PHPExcel;
 
@@ -66,8 +66,8 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         }
 
         $this->php_excel->getActiveSheet()->getStyle(
-            'A:' . \Chamilo\PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
-            \Chamilo\PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
+            'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
+            \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
 
         \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
 

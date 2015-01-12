@@ -1,18 +1,18 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
-use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
 use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
-use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -49,7 +49,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $statement = $this->get_connection()->query($query);
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $enrollment = new Enrollment();
                     $enrollment->set_source($result->source);
@@ -103,7 +103,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
                 {
                     $training = new Training();
                     $training->set_source($result->source);
@@ -221,7 +221,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         
         if ($statement instanceof PDOStatement)
         {
-            return $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
+            return $result = $statement->fetch(\PDO :: FETCH_OBJ);
         }
         else
         {
