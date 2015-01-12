@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\teaching_assignment\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex;
 
-class TeachingAssignment extends \application\discovery\module\teaching_assignment\TeachingAssignment
+class TeachingAssignment extends \Chamilo\Application\Discovery\Module\TeachingAssignment\TeachingAssignment
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_SOURCE = 'source';

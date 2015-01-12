@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\photo;
+namespace Chamilo\Application\Discovery\Module\Photo;
 
 /**
  *

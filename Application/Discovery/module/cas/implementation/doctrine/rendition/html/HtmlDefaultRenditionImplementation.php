@@ -1,18 +1,18 @@
 <?php
-namespace Application\Discovery\module\cas\implementation\doctrine\rendition\html;
+namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rendition\Html;
 
-use application\discovery\module\cas\Parameters;
-use application\discovery\SortableTable;
-use libraries\file\Filesystem;
-use libraries\file\Path;
-use libraries\format\theme\Theme;
-use libraries\format\Display;
-use libraries\format\DynamicContentTab;
-use libraries\format\DynamicTabsRenderer;
-use libraries\platform\translation\Translation;
-use application\discovery\module\cas\DataManager;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
+use Chamilo\Application\Discovery\Module\Cas\Parameters;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\DynamicContentTab;
+use Chamilo\Libraries\Format\DynamicTabsRenderer;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Application\Discovery\Module\Cas\DataManager;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -159,7 +159,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -167,6 +167,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

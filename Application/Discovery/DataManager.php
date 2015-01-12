@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery;
+namespace Chamilo\Application\Discovery;
 
 /**
  *
  * @package application.discovery
  * @author Hans De Bisschop
  */
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
     const PREFIX = 'discovery_';
 

@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\data_source\bamaflex\data_class_generator\xml_schemas\php\application\discovery\module\group\implementation\bamaflex\php\lib;
+namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\XmlSchemas\Php\Application\Discovery\Module\Group\Implementation\Bamaflex\Php\Lib;
 
-use application\discovery\DataManager;
-use application\discovery\DiscoveryItem;
-use libraries\utilities\Utilities;
+use Chamilo\Application\Discovery\DataManager;
+use Chamilo\Application\Discovery\DiscoveryItem;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.group.implementation.bamaflex

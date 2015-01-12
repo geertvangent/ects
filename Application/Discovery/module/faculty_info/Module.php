@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\module\faculty_info;
+namespace Chamilo\Application\Discovery\Module\FacultyInfo;
 
-use libraries\platform\Request;
-use libraries\file\Filesystem;
-use libraries\file\Path;
-use application\discovery\instance\Instance;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Application\Discovery\Instance\Instance;
 
-abstract class Module extends \application\discovery\Module
+abstract class Module extends \Chamilo\Application\Discovery\Module
 {
     const PARAM_FACULTY_ID = 'faculty_id';
 

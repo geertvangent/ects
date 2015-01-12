@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\person;
+namespace Chamilo\Application\Discovery\Module\Person;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class Person extends DiscoveryItem
 {

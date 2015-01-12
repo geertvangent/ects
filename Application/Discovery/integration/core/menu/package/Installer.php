@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\integration\core\menu\package;
+namespace Chamilo\Application\Discovery\Integration\Core\Menu\Package;
 
-use core\menu\MenuInstaller;
+use Chamilo\Core\Menu\MenuInstaller;
 
 class Installer extends MenuInstaller
 {

@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\group;
+namespace Chamilo\Application\Discovery\Module\Group;
 
-use libraries\file\Filesystem;
-use libraries\platform\Request;
-use libraries\file\Path;
-use application\discovery\instance\Instance;
-use application\discovery\module\profile\DataManager;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Application\Discovery\Module\Profile\DataManager;
 
-abstract class Module extends \application\discovery\Module
+abstract class Module extends \Chamilo\Application\Discovery\Module
 {
     const PARAM_TRAINING_ID = 'training_id';
 

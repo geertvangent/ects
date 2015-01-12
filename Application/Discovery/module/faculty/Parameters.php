@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\faculty;
+namespace Chamilo\Application\Discovery\Module\Faculty;
 
-class Parameters extends \application\discovery\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Parameters
 {
 
     public function __construct($year)

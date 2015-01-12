@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex;
 
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\InCondition;
-use libraries\storage\OrCondition;
-use libraries\platform\Session;
-use application\discovery\RightsGroupEntityRight;
-use Exception;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
+use Chamilo\Exception;
 <<<<<<< local
 use libraries\DataClassRetrievesParameters;
 =======

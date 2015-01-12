@@ -1,14 +1,14 @@
 <?php
-namespace Application\Discovery\module\course_results\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex;
 
-use libraries\utilities\Utilities;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.course_results.implementation.bamaflex.discovery
  * 
  * @author Hans De Bisschop
  */
-class CourseResult extends \application\discovery\module\course_results\CourseResult
+class CourseResult extends \Chamilo\Application\Discovery\Module\CourseResults\CourseResult
 {
     const CLASS_NAME = __CLASS__;
     

@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\training_results\implementation\bamaflex\rendition\xlsx;
+namespace Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\Xlsx;
 
-use application\discovery\module\training_results\DataManager;
-use libraries\utilities\StringUtilities;
-use libraries\platform\translation\Translation;
-use libraries\format\Display;
-use PHPExcel;
+use Chamilo\Application\Discovery\Module\TrainingResults\DataManager;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\PHPExcel;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -31,7 +31,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
         $this->process_training_results();
 
-        return \application\discovery\XlsxDefaultRendition :: save(
+        return \Chamilo\Application\Discovery\XlsxDefaultRendition :: save(
             $this->php_excel,
             $this->get_module(),
             $this->get_file_name());
@@ -62,10 +62,10 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('DistinctionType');
 
         $this->php_excel->getActiveSheet()->getStyle(
-            'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
-            \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
+            'A:' . \Chamilo\PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
+            \Chamilo\PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
 
-        \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+        \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
 
         $row = 2;
 
@@ -136,7 +136,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -144,6 +144,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

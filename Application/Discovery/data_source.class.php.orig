@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery;
+namespace Chamilo\Application\Discovery;
 
-use libraries\storage\DoctrineDatabase;
+use Chamilo\Libraries\Storage\DoctrineDatabase;
 <<<<<<< local
 use libraries\Filesystem;
 use libraries\Path;

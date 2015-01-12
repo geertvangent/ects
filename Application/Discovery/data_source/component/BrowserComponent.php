@@ -1,15 +1,15 @@
 <?php
-namespace Application\Discovery\data_source\component;
+namespace Chamilo\Application\Discovery\DataSource\Component;
 
-use libraries\platform\translation\Translation;
-use libraries\format\ActionBarRenderer;
-use libraries\format\ActionBarSearchForm;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\theme\Theme;
-use libraries\storage\AndCondition;
-use libraries\storage\PatternMatchCondition;
-use libraries\storage\PropertyConditionVariable;
-use libraries\format\TableSupport;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\ActionBarRenderer;
+use Chamilo\Libraries\Format\ActionBarSearchForm;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Format\TableSupport;
 
 class BrowserComponent extends Manager implements TableSupport
 {

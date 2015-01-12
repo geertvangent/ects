@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\profile\rendition\view\html;
+namespace Chamilo\Application\Discovery\Module\Profile\Rendition\View\Html;
 
-use application\discovery\SortableTable;
-use libraries\format\Display;
-use libraries\format\PropertiesTable;
-use libraries\platform\translation\Translation;
-use libraries\format\theme\Theme;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Theme\Theme;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

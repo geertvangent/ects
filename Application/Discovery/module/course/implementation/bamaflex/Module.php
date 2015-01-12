@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\course\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex;
 
-use libraries\platform\Request;
+use Chamilo\Libraries\Platform\Request;
 
-class Module extends \application\discovery\module\course\Module
+class Module extends \Chamilo\Application\Discovery\Module\Course\Module
 {
     const PARAM_SOURCE = 'source';
     const TAB_GENERAL = 1;

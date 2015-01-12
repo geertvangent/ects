@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\group_user;
+namespace Chamilo\Application\Discovery\Module\GroupUser;
 
-use libraries\file\Path;
-use libraries\file\Filesystem;
-use libraries\platform\Request;
-use application\discovery\instance\Instance;
-use application\discovery\module\group_user\DataManager;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Application\Discovery\Module\GroupUser\DataManager;
 
-abstract class Module extends \application\discovery\Module
+abstract class Module extends \Chamilo\Application\Discovery\Module
 {
     const PARAM_GROUP_CLASS_ID = 'group_class_id';
 

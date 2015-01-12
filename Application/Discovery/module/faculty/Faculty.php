@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\faculty;
+namespace Chamilo\Application\Discovery\Module\Faculty;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class Faculty extends DiscoveryItem
 {

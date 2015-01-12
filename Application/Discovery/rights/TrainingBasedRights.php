@@ -1,19 +1,19 @@
 <?php
-namespace Application\Discovery\rights;
+namespace Chamilo\Application\Discovery\Rights;
 
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\InCondition;
-use libraries\storage\OrCondition;
-use libraries\platform\Session;
-use application\discovery\RightsGroupEntityRight;
-use Exception;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\DataClassCountParameters;
-use core\rights\UserEntity;
-use core\rights\PlatformGroupEntity;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
+use Chamilo\Exception;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
+use Chamilo\Core\Rights\UserEntity;
+use Chamilo\Core\Rights\PlatformGroupEntity;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 abstract class TrainingBasedRights
 {
@@ -28,8 +28,8 @@ abstract class TrainingBasedRights
     {
         try
         {
-            $current_user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+            $current_user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\User :: class_name(),
                 (int) Session :: get_user_id());
 
             if ($current_user->is_platform_admin())
@@ -44,11 +44,11 @@ abstract class TrainingBasedRights
             $codes[] = 'TRA_OP_' . $context->get_training_id();
             $codes[] = 'TRA_STU_' . $context->get_training_id();
             $condition = new InCondition(
-                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_CODE),
+                new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_CODE),
                 $codes);
 
-            $groups = \core\group\DataManager :: retrieves(
-                \core\group\Group :: class_name(),
+            $groups = \Chamilo\Core\Group\DataManager :: retrieves(
+                \Chamilo\Core\Group\Group :: class_name(),
                 new DataClassRetrievesParameters($condition));
 
             if ($groups->size() > 0)

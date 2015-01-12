@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\employment\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Employment\Implementation\Bamaflex;
 
-use application\discovery\UserBasedRights;
+use Chamilo\Application\Discovery\UserBasedRights;
 
 class Rights extends UserBasedRights
 {

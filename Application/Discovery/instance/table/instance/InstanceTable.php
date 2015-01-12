@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\instance\table\instance;
+namespace Chamilo\Application\Discovery\Instance\Table\Instance;
 
-use libraries\format\table\extension\data_class_table\DataClassTable;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
 
 class InstanceTable extends DataClassTable
 {

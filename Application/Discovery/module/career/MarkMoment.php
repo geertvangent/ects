@@ -1,8 +1,8 @@
 <?php
-namespace Application\Discovery\module\career;
+namespace Chamilo\Application\Discovery\Module\Career;
 
-use libraries\utilities\Utilities;
-use libraries\storage\data_class\DataClass;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  * application.discovery.module.career.discovery

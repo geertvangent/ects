@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\profile;
+namespace Chamilo\Application\Discovery\Module\Profile;
 
-use libraries\storage\data_class\DataClass;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 class Email extends DataClass
 {

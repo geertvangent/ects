@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\module\exemption\rendition;
+namespace Chamilo\Application\Discovery\Module\Exemption\Rendition;
 
-abstract class Rendition extends \application\discovery\Rendition
+abstract class Rendition extends \Chamilo\Application\Discovery\Rendition
 {
 }

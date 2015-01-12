@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\training_results;
+namespace Chamilo\Application\Discovery\Module\TrainingResults;
 
-class Parameters extends \application\discovery\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Parameters
 {
 
     public function __construct($training_id)

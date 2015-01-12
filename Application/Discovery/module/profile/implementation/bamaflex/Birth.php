@@ -1,10 +1,10 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex;
 
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
-use libraries\utilities\DatetimeUtilities;
-use libraries\storage\data_class\DataClass;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\DatetimeUtilities;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 class Birth extends DataClass
 {

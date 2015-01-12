@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\enrollment;
+namespace Chamilo\Application\Discovery\Module\Enrollment;
 
-use libraries\file\Filesystem;
-use libraries\platform\Request;
-use libraries\file\Path;
-use libraries\architecture\application\Application;
-use application\discovery\instance\Instance;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Application\Discovery\Instance\Instance;
 
-abstract class Module extends \application\discovery\Module
+abstract class Module extends \Chamilo\Application\Discovery\Module
 {
 
     /**

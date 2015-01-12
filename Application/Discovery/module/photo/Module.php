@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\module\photo;
+namespace Chamilo\Application\Discovery\Module\Photo;
 
-use libraries\file\Path;
-use libraries\file\Filesystem;
-use application\discovery\instance\Instance;
-use libraries\platform\Request;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Libraries\Platform\Request;
 
-class Module extends \application\discovery\Module
+class Module extends \Chamilo\Application\Discovery\Module
 {
     const PARAM_TRAINING_ID = 'training_id';
     const PARAM_FACULTY_ID = 'faculty_id';

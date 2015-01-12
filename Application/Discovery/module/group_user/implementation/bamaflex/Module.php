@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\group_user\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex;
 
-use libraries\platform\Request;
+use Chamilo\Libraries\Platform\Request;
 
-class Module extends \application\discovery\module\group_user\Module
+class Module extends \Chamilo\Application\Discovery\Module\GroupUser\Module
 {
     const PARAM_SOURCE = 'source';
     const PARAM_TYPE = 'type';
@@ -41,7 +41,7 @@ class Module extends \application\discovery\module\group_user\Module
         $source = Request :: get(self :: PARAM_SOURCE);
         $type = Request :: get(self :: PARAM_TYPE);
         
-        $parameter = new \application\discovery\module\group_user\implementation\bamaflex\Parameters();
+        $parameter = new \Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Parameters();
         $parameter->set_group_class_id($group_class_id);
         $parameter->set_type($type);
         

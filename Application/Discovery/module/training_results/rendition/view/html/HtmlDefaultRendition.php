@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\training_results\rendition\view\html;
+namespace Chamilo\Application\Discovery\Module\TrainingResults\Rendition\View\Html;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

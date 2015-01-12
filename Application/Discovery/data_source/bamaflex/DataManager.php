@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\data_source\bamaflex;
+namespace Chamilo\Application\Discovery\DataSource\Bamaflex;
 
 /**
  *
  * @package application.discovery
  * @author Hans De Bisschop
  */
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
     const PREFIX = 'discovery_bamaflex_';
 

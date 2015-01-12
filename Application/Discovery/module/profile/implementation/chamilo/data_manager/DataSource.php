@@ -1,15 +1,15 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\chamilo\data_manager;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Chamilo\DataManager;
 
-use core\user\UserSetting;
-use core\user\User;
-use libraries\platform\PlatformSetting;
-use application\discovery\module\profile\Photo;
-use application\discovery\module\profile\Communication;
-use application\discovery\module\profile\Email;
-use application\discovery\module\profile\IdentificationCode;
-use application\discovery\module\profile\Name;
-use libraries\file\FileType;
+use Chamilo\Core\User\UserSetting;
+use Chamilo\Core\User\User;
+use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Application\Discovery\Module\Profile\Photo;
+use Chamilo\Application\Discovery\Module\Profile\Communication;
+use Chamilo\Application\Discovery\Module\Profile\Email;
+use Chamilo\Application\Discovery\Module\Profile\IdentificationCode;
+use Chamilo\Application\Discovery\Module\Profile\Name;
+use Chamilo\Libraries\File\FileType;
 
 class DataSource
 {
@@ -21,7 +21,7 @@ class DataSource
      */
     public function retrieve_profile($parameters)
     {
-        $user = \core\user\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         if ($user instanceof User)
         {
             $name = new Name();
@@ -70,12 +70,12 @@ class DataSource
     {
         $user_language_is_allowed = PlatformSetting :: get(
             'allow_user_change_platform_language', 
-            \core\user\Manager :: context());
+            \Chamilo\Core\User\Manager :: context());
         
         if ($user_language_is_allowed)
         {
-            $setting = \configuration\DataManager :: retrieve_setting_from_variable_name('platform_language');
-            $user_setting = \core\user\DataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
+            $setting = \Chamilo\Configuration\DataManager :: retrieve_setting_from_variable_name('platform_language');
+            $user_setting = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
             
             if ($user_setting instanceof UserSetting)
             {
@@ -91,7 +91,7 @@ class DataSource
             $language_code = PlatformSetting :: get('platform_language');
         }
         
-        return \configuration\DataManager :: retrieve_language_from_isocode($language_code)->get_english_name();
+        return \Chamilo\Configuration\DataManager :: retrieve_language_from_isocode($language_code)->get_english_name();
     }
 
     /**
@@ -103,12 +103,12 @@ class DataSource
     {
         $user_timezone_is_allowed = PlatformSetting :: get(
             'allow_user_change_platform_timezone', 
-            \core\user\Manager :: context());
+            \Chamilo\Core\User\Manager :: context());
         
         if ($user_timezone_is_allowed)
         {
-            $setting = \configuration\DataManager :: retrieve_setting_from_variable_name('platform_timezone');
-            $user_setting = \core\user\DataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
+            $setting = \Chamilo\Configuration\DataManager :: retrieve_setting_from_variable_name('platform_timezone');
+            $user_setting = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
             
             if ($user_setting instanceof UserSetting)
             {

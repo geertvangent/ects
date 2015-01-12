@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\elo;
+namespace Chamilo\Application\Discovery\Module\Elo;
 
-use application\discovery\instance\Instance;
-use libraries\file\Path;
-use libraries\file\Filesystem;
+use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Filesystem;
 
-abstract class Module extends \application\discovery\Module
+abstract class Module extends \Chamilo\Application\Discovery\Module
 {
 
     public function get_type()

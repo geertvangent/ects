@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\instance;
+namespace Chamilo\Application\Discovery\Instance;
 
-use libraries\storage\EqualityCondition;
-use libraries\storage\AndCondition;
-use libraries\storage\DataClassRetrieveParameters;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
     const PREFIX = 'discovery_module_';
 

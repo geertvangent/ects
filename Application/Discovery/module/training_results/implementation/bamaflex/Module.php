@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\training_results\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex;
 
-use libraries\platform\Request;
+use Chamilo\Libraries\Platform\Request;
 
-class Module extends \application\discovery\module\training_results\Module
+class Module extends \Chamilo\Application\Discovery\Module\TrainingResults\Module
 {
     const PARAM_SOURCE = 'source';
 
@@ -34,7 +34,7 @@ class Module extends \application\discovery\module\training_results\Module
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
         
-        $parameter = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
+        $parameter = new \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters();
         $parameter->set_training_id($training_id);
         
         if ($source)

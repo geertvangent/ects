@@ -1,10 +1,10 @@
 <?php
-namespace Application\Discovery\module\cas\implementation\doctrine\data_manager;
+namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\DataManager;
 
-use application\discovery\module\cas\Parameters;
-use libraries\storage\DoctrineConditionTranslator;
+use Chamilo\Application\Discovery\Module\Cas\Parameters;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
 
-class DataSource extends \application\discovery\data_source\doctrine\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Doctrine\DataSource
 {
 
     private $actions;
@@ -25,9 +25,9 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
             $query = 'SELECT * FROM action WHERE id IN (1, 4, 6)';
             
             $statement = $this->get_connection()->query($query);
-            if (! $statement instanceof \PDOException)
+            if (! $statement instanceof \Chamilo\PDOException)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $action = new Action();
                     $action->set_id($result->id);
@@ -48,9 +48,9 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
             $query = 'SELECT * FROM application';
             
             $statement = $this->get_connection()->query($query);
-            if (! $statement instanceof \PDOException)
+            if (! $statement instanceof \Chamilo\PDOException)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $application = new Application();
                     $application->set_id($result->id);
@@ -90,7 +90,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
             }
             else
             {
-                $user = \core\user\DataManager :: get_instance()->retrieve_user($user_id);
+                $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id);
                 $official_code = $user->get_official_code();
                 
                 $query = 'SELECT count(id) AS \'count\', person_id, application_id, action_id, date_format(date, \'%Y-%m\') AS \'date\'
@@ -103,9 +103,9 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
             
             $statement = $this->get_connection()->query($query);
             
-            if (! $statement instanceof \PDOException)
+            if (! $statement instanceof \Chamilo\PDOException)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $cas = new CasCount();
                     $cas->set_count($result->count);
@@ -142,7 +142,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
         }
         else
         {
-            $user = \core\user\DataManager :: get_instance()->retrieve_user($user_id);
+            $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
             
             $query = 'SELECT count(id) AS statistics_count FROM statistics WHERE person_id = "' . $official_code .
@@ -151,9 +151,9 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
         
         $statement = $this->get_connection()->query($query);
         
-        if (! $statement instanceof \PDOException)
+        if (! $statement instanceof \Chamilo\PDOException)
         {
-            $record = $statement->fetch(\PDO :: FETCH_NUM);
+            $record = $statement->fetch(\Chamilo\PDO :: FETCH_NUM);
             return (int) $record[0];
         }
         
@@ -168,9 +168,9 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
         
         $statement = $this->get_connection()->query($query);
         
-        if (! $statement instanceof \PDOException)
+        if (! $statement instanceof \Chamilo\PDOException)
         {
-            $record = $statement->fetch(\PDO :: FETCH_NUM);
+            $record = $statement->fetch(\Chamilo\PDO :: FETCH_NUM);
             return (int) $record[0];
         }
         
@@ -182,7 +182,7 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
         if ($user_id != 0)
         {
             
-            $user = \core\user\DataManager :: get_instance()->retrieve_user($user_id);
+            $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
             
             if ($application instanceof Application)
@@ -214,9 +214,9 @@ class DataSource extends \application\discovery\data_source\doctrine\DataSource
         
         $statement = $this->get_connection()->query($query);
         
-        if (! $statement instanceof \PDOException)
+        if (! $statement instanceof \Chamilo\PDOException)
         {
-            $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             return $result->date;
         }
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\exemption\rendition\view\xlsx;
+namespace Chamilo\Application\Discovery\Module\Exemption\Rendition\View\Xlsx;
 
 class XlsxDefaultRendition extends XlsxRendition
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\data_source\bamaflex\data_class_generator;
+namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator;
 
 /**
  * ************************************************************************* template.php ------------------- begin :

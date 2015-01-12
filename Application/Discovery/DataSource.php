@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery;
+namespace Chamilo\Application\Discovery;
 
-use libraries\storage\DoctrineDatabase;
-use libraries\file\Filesystem;
-use libraries\file\Path;
+use Chamilo\Libraries\Storage\DoctrineDatabase;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
 
 class DataSource extends DoctrineDatabase
 {
@@ -15,7 +15,7 @@ class DataSource extends DoctrineDatabase
      * 
      * @param Instance $module_instance
      */
-    public function __construct(\application\discovery\instance\Instance $module_instance)
+    public function __construct(\Chamilo\Application\Discovery\Instance\Instance $module_instance)
     {
         $this->module_instance = $module_instance;
         $this->initialize();
@@ -26,7 +26,7 @@ class DataSource extends DoctrineDatabase
         return $this->module_instance;
     }
 
-    public function set_module_instance(\application\discovery\instance\Instance $module_instance)
+    public function set_module_instance(\Chamilo\Application\Discovery\Instance\Instance $module_instance)
     {
         $this->module_instance = $module_instance;
     }

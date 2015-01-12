@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\group_browser;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBrowser;
 
-use core\group\GroupRelUserTableColumnModel;
-use libraries\platform\translation\Translation;
-use libraries\format\StaticTableColumn;
+use Chamilo\Core\Group\GroupRelUserTableColumnModel;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\StaticTableColumn;
 
 class GroupBrowserTableColumnModel extends GroupRelUserTableColumnModel
 {

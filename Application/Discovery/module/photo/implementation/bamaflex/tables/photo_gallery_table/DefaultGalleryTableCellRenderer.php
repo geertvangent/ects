@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\tables\photo_gallery_table;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Tables\PhotoGalleryTable;
 
-use libraries\format\GalleryTableCellRenderer;
+use Chamilo\Libraries\Format\GalleryTableCellRenderer;
 
 abstract class DefaultGalleryTableCellRenderer extends GalleryTableCellRenderer
 {
@@ -22,5 +22,5 @@ abstract class DefaultGalleryTableCellRenderer extends GalleryTableCellRenderer
         return $user->get_id();
     }
 
-    abstract public function get_cell_content(\core\user\User $user);
+    abstract public function get_cell_content(\Chamilo\Core\User\User $user);
 }

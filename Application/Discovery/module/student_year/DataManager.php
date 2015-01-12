@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\student_year;
+namespace Chamilo\Application\Discovery\Module\StudentYear;
 
 /**
  *

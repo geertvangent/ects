@@ -1,22 +1,22 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\data_manager;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\DataManager;
 
-use libraries\storage\AndCondition;
-use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\storage\DoctrineConditionTranslator;
-use libraries\storage\EqualityCondition;
-use libraries\file\ImageManipulation;
-use libraries\format\theme\Theme;
-use libraries\file\Filesystem;
-use libraries\utilities\Text;
-use libraries\file\Path;
-use application\discovery\module\course\implementation\bamaflex\Course;
-use application\discovery\module\training\implementation\bamaflex\Training;
-use application\discovery\module\faculty\implementation\bamaflex\Faculty;
-use libraries\storage\StaticColumnConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\File\ImageManipulation;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Utilities\Text;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
+use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
+use Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
+use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
     public function retrieve_photo($id, $web = true)
@@ -35,7 +35,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                $object = $statement->fetch(\PDO :: FETCH_OBJ);
+                $object = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
                 
                 if (! empty($object->photo))
                 {
@@ -83,7 +83,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 
                 if ($statement instanceof PDOStatement)
                 {
-                    $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                    $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
                     
                     $faculty = new Faculty();
                     $faculty->set_source($result->source);
@@ -124,7 +124,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $training = new Training();
                     $training->set_source($result->source);
@@ -173,9 +173,9 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                $object = $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                $object = $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
                 
-                if ($object instanceof \stdClass)
+                if ($object instanceof \Chamilo\StdClass)
                 {
                     $course = new Course();
                     $course->set_id($object->id);

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\training_info\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class MajorChoiceOption extends DiscoveryItem
 {

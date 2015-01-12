@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\rights;
+namespace Chamilo\Application\Discovery\Rights;
 
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\InCondition;
-use libraries\storage\OrCondition;
-use libraries\platform\Session;
-use Exception;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Exception;
 <<<<<<< local
 use libraries\DataClassCountParameters;
 use libraries\PropertyConditionVariable;

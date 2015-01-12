@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\rendition\view\html;
+namespace Chamilo\Application\Discovery\Rendition\View\Html;
 
-use libraries\platform\translation\Translation;
-use libraries\file\Filesystem;
-use libraries\file\FileProperties;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\FileProperties;
 
 class HtmlXlsxRendition extends HtmlRendition
 {
@@ -12,8 +12,8 @@ class HtmlXlsxRendition extends HtmlRendition
     {
         $file_path = RenditionImplementation :: launch(
             $this->get_module(), 
-            \application\discovery\Rendition :: FORMAT_XLSX, 
-            \application\discovery\Rendition :: VIEW_DEFAULT, 
+            \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX, 
+            \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT, 
             $this->get_context());
         
         $file_properties = FileProperties :: from_path($file_path);
@@ -29,7 +29,7 @@ class HtmlXlsxRendition extends HtmlRendition
         }
         else
         {
-            throw new \Exception(Translation :: get('FileSendForDownloadFailed'));
+            throw new \Chamilo\Exception(Translation :: get('FileSendForDownloadFailed'));
         }
     }
 }

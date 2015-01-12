@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\employment;
+namespace Chamilo\Application\Discovery\Module\Employment;
 
 /**
  *

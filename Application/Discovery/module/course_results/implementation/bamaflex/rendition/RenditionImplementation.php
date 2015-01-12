@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\course_results\implementation\bamaflex\rendition;
+namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rendition;
 
-abstract class RenditionImplementation extends \application\discovery\RenditionImplementation
+abstract class RenditionImplementation extends \Chamilo\Application\Discovery\RenditionImplementation
 {
 
     public function get_course_results()

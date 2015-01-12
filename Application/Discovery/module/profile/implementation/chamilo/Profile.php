@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\chamilo;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Chamilo;
 
-class Profile extends \application\discovery\module\profile\Profile
+class Profile extends \Chamilo\Application\Discovery\Module\Profile\Profile
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_USERNAME = 'username';

@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\chamilo;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Chamilo;
 
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
-class Module extends \application\discovery\module\profile\Module
+class Module extends \Chamilo\Application\Discovery\Module\Profile\Module
 {
     
     /*

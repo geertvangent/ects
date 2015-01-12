@@ -1,18 +1,18 @@
 <?php
-namespace Application\Discovery\instance\table\instance;
+namespace Chamilo\Application\Discovery\Instance\Table\Instance;
 
-use libraries\storage\EqualityCondition;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\structure\Toolbar;
-use libraries\format\theme\Theme;
-use libraries\storage\DataClassCountParameters;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\PropertyConditionVariable;
-use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
-use libraries\format\DisplayOrderPropertyTableColumn;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Format\DisplayOrderPropertyTableColumn;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -53,8 +53,8 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                         $this->get_component()->get_url(
                             array(
                                 Manager :: PARAM_ACTION => Manager :: ACTION_MOVE_INSTANCE,
-                                \application\discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id(),
-                                \application\discovery\Manager :: PARAM_DIRECTION => \application\discovery\Manager :: PARAM_DIRECTION_UP)),
+                                \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id(),
+                                \Chamilo\Application\Discovery\Manager :: PARAM_DIRECTION => \Chamilo\Application\Discovery\Manager :: PARAM_DIRECTION_UP)),
                         ToolbarItem :: DISPLAY_ICON));
             }
             else
@@ -76,8 +76,8 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                         $this->get_component()->get_url(
                             array(
                                 Manager :: PARAM_ACTION => Manager :: ACTION_MOVE_INSTANCE,
-                                \application\discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id(),
-                                \application\discovery\Manager :: PARAM_DIRECTION => \application\discovery\Manager :: PARAM_DIRECTION_DOWN)),
+                                \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id(),
+                                \Chamilo\Application\Discovery\Manager :: PARAM_DIRECTION => \Chamilo\Application\Discovery\Manager :: PARAM_DIRECTION_DOWN)),
                         ToolbarItem :: DISPLAY_ICON));
             }
             else
@@ -100,7 +100,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                     $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_DEACTIVATE_INSTANCE,
-                            \application\discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
+                            \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
                     ToolbarItem :: DISPLAY_ICON,
                     true));
         }
@@ -113,7 +113,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                     $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_ACTIVATE_INSTANCE,
-                            \application\discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
+                            \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
                     ToolbarItem :: DISPLAY_ICON,
                     true));
         }
@@ -125,7 +125,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_UPDATE_INSTANCE,
-                        \application\discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
+                        \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
         $toolbar->add_item(
             new ToolbarItem(
@@ -134,7 +134,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_DELETE_INSTANCE,
-                        \application\discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
+                        \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
                 ToolbarItem :: DISPLAY_ICON,
                 true));
         return $toolbar->as_html();

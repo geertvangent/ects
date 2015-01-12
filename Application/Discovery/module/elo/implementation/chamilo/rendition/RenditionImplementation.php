@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo\rendition;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition;
 
-abstract class RenditionImplementation extends \application\discovery\RenditionImplementation
+abstract class RenditionImplementation extends \Chamilo\Application\Discovery\RenditionImplementation
 {
 }

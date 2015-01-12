@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\rendition\view\zip;
+namespace Chamilo\Application\Discovery\Rendition\View\Zip;
 
-use libraries\platform\translation\Translation;
-use libraries\platform\Session;
-use libraries\file\Path;
-use libraries\file\Filecompression;
-use libraries\file\Filesystem;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Filecompression;
+use Chamilo\Libraries\File\Filesystem;
 
 class ZipDefaultRendition extends ZipRendition
 {
@@ -35,7 +35,7 @@ class ZipDefaultRendition extends ZipRendition
         }
         else
         {
-            throw new \Exception(Translation :: get('FileMoveFailed'));
+            throw new \Chamilo\Exception(Translation :: get('FileMoveFailed'));
         }
     }
 }

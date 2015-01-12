@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\student_materials\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\StudentMaterials\Implementation\Bamaflex;
 
 class MaterialDescription extends Material
 {

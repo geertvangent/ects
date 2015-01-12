@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\package;
+namespace Chamilo\Application\Discovery\Package;
 
 
 
@@ -8,7 +8,7 @@ namespace Application\Discovery\package;
  * @author Hans De Bisschop
  * @package application.discovery
  */
-class Installer extends \configuration\package\Installer
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 
     public static function get_additional_packages()

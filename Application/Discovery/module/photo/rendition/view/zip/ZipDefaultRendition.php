@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\photo\rendition\view\zip;
+namespace Chamilo\Application\Discovery\Module\Photo\Rendition\View\Zip;
 
 class ZipDefaultRendition extends ZipRendition
 {

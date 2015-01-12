@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\instance;
+namespace Chamilo\Application\Discovery\Instance;
 
 class Autoloader
 {

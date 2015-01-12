@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex;
 
-use application\discovery\module\profile\DataManager;
+use Chamilo\Application\Discovery\Module\Profile\DataManager;
 
-class Module extends \application\discovery\module\profile\Module
+class Module extends \Chamilo\Application\Discovery\Module\Profile\Module
 {
 
     public function has_data($parameters = null)

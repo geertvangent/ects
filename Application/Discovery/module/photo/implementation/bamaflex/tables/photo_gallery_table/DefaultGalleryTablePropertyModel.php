@@ -1,15 +1,15 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\tables\photo_gallery_table;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Tables\PhotoGalleryTable;
 
-use libraries\format\GalleryTablePropertyModel;
-use libraries\format\GalleryTableProperty;
+use Chamilo\Libraries\Format\GalleryTablePropertyModel;
+use Chamilo\Libraries\Format\GalleryTableProperty;
 
 class DefaultGalleryTablePropertyModel extends GalleryTablePropertyModel
 {
 
     public function initialize_properties()
     {
-        $this->add_property(new GalleryTableProperty(\core\user\User :: PROPERTY_LASTNAME));
-        $this->add_property(new GalleryTableProperty(\core\user\User :: PROPERTY_FIRSTNAME));
+        $this->add_property(new GalleryTableProperty(\Chamilo\Core\User\User :: PROPERTY_LASTNAME));
+        $this->add_property(new GalleryTableProperty(\Chamilo\Core\User\User :: PROPERTY_FIRSTNAME));
     }
 }

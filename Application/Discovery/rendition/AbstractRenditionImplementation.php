@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\rendition;
+namespace Chamilo\Application\Discovery\Rendition;
 
 abstract class AbstractRenditionImplementation
 {

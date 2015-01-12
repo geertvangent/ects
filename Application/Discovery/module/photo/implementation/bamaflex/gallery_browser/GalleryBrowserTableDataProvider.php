@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\gallery_browser;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser;
 
-use libraries\storage\DataClassCountParameters;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\format\GalleryTableDataProvider;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Format\GalleryTableDataProvider;
 
 class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
 {
@@ -14,7 +14,7 @@ class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
     {
         $order_property = $this->get_order_property($order_property);
         $parameters = new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property);
-        return \core\user\DataManager :: retrieves(\core\user\User :: class_name(), $parameters);
+        return \Chamilo\Core\User\DataManager :: retrieves(\Chamilo\Core\User\User :: class_name(), $parameters);
     }
 
     /*
@@ -23,6 +23,6 @@ class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
     public function count_data($condition)
     {
         $parameters = new DataClassCountParameters($this->get_condition());
-        return \core\user\DataManager :: count(\core\user\User :: class_name(), $parameters);
+        return \Chamilo\Core\User\DataManager :: count(\Chamilo\Core\User\User :: class_name(), $parameters);
     }
 }

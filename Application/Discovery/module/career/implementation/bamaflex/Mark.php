@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\module\career\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex;
 
 /**
  * application.discovery.module.career.implementation.bamaflex.discovery
  * 
  * @author Hans De Bisschop
  */
-class Mark extends \application\discovery\module\career\Mark
+class Mark extends \Chamilo\Application\Discovery\Module\Career\Mark
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_SUB_STATUS = 'sub_status';

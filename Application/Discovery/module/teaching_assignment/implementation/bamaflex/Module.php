@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\teaching_assignment\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex;
 
-use application\discovery\module\teaching_assignment\DataManager;
+use Chamilo\Application\Discovery\Module\TeachingAssignment\DataManager;
 
-class Module extends \application\discovery\module\teaching_assignment\Module
+class Module extends \Chamilo\Application\Discovery\Module\TeachingAssignment\Module
 {
 
     private $cache_teaching_assignments = array();

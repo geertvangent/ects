@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\rendition;
+namespace Chamilo\Application\Discovery\Rendition;
 
-use libraries\utilities\Utilities;
-use libraries\architecture\ClassContext;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\ClassContext;
 
 abstract class Rendition
 {
-    use ClassContext;
+    use Chamilo\ClassContext;
 
     // Formats
     const FORMAT_HTML = 'html';

@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\data_source\component;
+namespace Chamilo\Application\Discovery\DataSource\Component;
 
-use libraries\format\structure\ToolbarItem;
-use libraries\format\SortableTableFromArray;
-use libraries\platform\Request;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use libraries\format\theme\Theme;
-use application\discovery\DataSource;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\SortableTableFromArray;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Application\Discovery\DataSource;
 
 class CreatorComponent extends Manager
 {

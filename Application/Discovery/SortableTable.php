@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery;
+namespace Chamilo\Application\Discovery;
 
-use libraries\platform\translation\Translation;
-use libraries\format\SortableTableFromArray;
-use HTML_Table;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\SortableTableFromArray;
+use Chamilo\HTML_Table;
 
 class SortableTable extends SortableTableFromArray
 {

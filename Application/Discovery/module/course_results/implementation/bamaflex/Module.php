@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\course_results\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex;
 
-use libraries\platform\Request;
+use Chamilo\Libraries\Platform\Request;
 
-class Module extends \application\discovery\module\course_results\Module
+class Module extends \Chamilo\Application\Discovery\Module\CourseResults\Module
 {
     const PARAM_SOURCE = 'source';
 
@@ -34,7 +34,7 @@ class Module extends \application\discovery\module\course_results\Module
         $programme_id = Request :: get(self :: PARAM_PROGRAMME_ID);
         $source = Request :: get(self :: PARAM_SOURCE);
         
-        $parameter = new \application\discovery\module\course\implementation\bamaflex\Parameters();
+        $parameter = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters();
         $parameter->set_programme_id($programme_id);
         
         if ($source)

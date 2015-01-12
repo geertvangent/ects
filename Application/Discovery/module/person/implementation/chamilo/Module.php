@@ -1,25 +1,25 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo;
 
-use libraries\storage\AndCondition;
-use libraries\utilities\Utilities;
-use application\discovery\Parameters;
-use libraries\storage\OrCondition;
-use libraries\storage\PatternMatchCondition;
-use libraries\storage\EqualityCondition;
-use libraries\platform\Request;
-use libraries\storage\DataClassRetrieveParameters;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Discovery\Parameters;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Storage\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class Module extends \application\discovery\module\person\Module
+class Module extends \Chamilo\Application\Discovery\Module\Person\Module
 {
 
     public function get_group()
     {
         if (! $this->group)
         {
-            $this->group = Request :: get(\core\group\Manager :: PARAM_GROUP_ID);
+            $this->group = Request :: get(\Chamilo\Core\Group\Manager :: PARAM_GROUP_ID);
             
             if (! $this->group)
             {
@@ -34,13 +34,13 @@ class Module extends \application\discovery\module\person\Module
     {
         if (! $this->root_group)
         {
-            $group = \core\group\DataManager :: retrieve(
-                \core\group\Group :: class_name(), 
+            $group = \Chamilo\Core\Group\DataManager :: retrieve(
+                \Chamilo\Core\Group\Group :: class_name(), 
                 new DataClassRetrieveParameters(
                     new EqualityCondition(
                         new PropertyConditionVariable(
-                            \core\group\Group :: class_name(), 
-                            \core\group\Group :: PROPERTY_PARENT_ID), 
+                            \Chamilo\Core\Group\Group :: class_name(), 
+                            \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID), 
                         new StaticConditionVariable(0))));
             $this->root_group = $group;
         }
@@ -54,22 +54,22 @@ class Module extends \application\discovery\module\person\Module
         {
             $or_conditions = array();
             $or_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_NAME), 
+                new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_NAME), 
                 '*' . $query . '*');
             $or_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \core\group\Group :: class_name(), 
-                    \core\group\Group :: PROPERTY_DESCRIPTION), 
+                    \Chamilo\Core\Group\Group :: class_name(), 
+                    \Chamilo\Core\Group\Group :: PROPERTY_DESCRIPTION), 
                 '*' . $query . '*');
             $or_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_CODE), 
+                new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_CODE), 
                 '*' . $query . '*');
             return new OrCondition($or_conditions);
         }
         else
         {
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_PARENT_ID), 
+                new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID), 
                 new StaticConditionVariable($this->get_group()));
         }
         
@@ -86,8 +86,8 @@ class Module extends \application\discovery\module\person\Module
         {
             return new EqualityCondition(
                 new PropertyConditionVariable(
-                    \core\group\GroupRelUser :: class_name(), 
-                    \core\group\GroupRelUser :: PROPERTY_GROUP_ID), 
+                    \Chamilo\Core\Group\GroupRelUser :: class_name(), 
+                    \Chamilo\Core\Group\GroupRelUser :: PROPERTY_GROUP_ID), 
                 new StaticConditionVariable($this->get_group()));
         }
     }
@@ -107,16 +107,16 @@ class Module extends \application\discovery\module\person\Module
         {
             $pattern_conditions = array();
             $pattern_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_FIRSTNAME), 
+                new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_FIRSTNAME), 
                 '*' . $query . '*');
             $pattern_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_LASTNAME), 
+                new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_LASTNAME), 
                 '*' . $query . '*');
             $pattern_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_USERNAME), 
+                new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_USERNAME), 
                 '*' . $query . '*');
             $pattern_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_OFFICIAL_CODE), 
+                new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_OFFICIAL_CODE), 
                 '*' . $query . '*');
             
             $conditions[] = new OrCondition($pattern_conditions);

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\group_user\implementation\bamaflex\rendition;
+namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rendition;
 
-abstract class RenditionImplementation extends \application\discovery\RenditionImplementation
+abstract class RenditionImplementation extends \Chamilo\Application\Discovery\RenditionImplementation
 {
 
     public function get_group_user()

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\elo;
+namespace Chamilo\Application\Discovery\Module\Elo;
 
 /**
  *

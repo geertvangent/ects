@@ -1,21 +1,21 @@
 <?php
-namespace Application\Discovery\module\training_info\implementation\bamaflex\data_manager;
+namespace Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\storage\DoctrineConditionTranslator;
-use libraries\storage\AndCondition;
-use libraries\utilities\Utilities;
-use libraries\storage\EqualityCondition;
-use application\discovery\data_source\bamaflex\HistoryReference;
-use application\discovery\data_source\bamaflex\History;
-use application\discovery\module\course\implementation\bamaflex\Course;
-use application\discovery\module\training\implementation\bamaflex\Training;
-use application\discovery\data_source\bamaflex\DataManager;
-use libraries\storage\StaticColumnConditionVariable;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
+use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\DataManager;
+use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
     private $trainings;
@@ -81,7 +81,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $training = new Training();
                     $training->set_source($result->source);
@@ -216,7 +216,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            return $statement->fetch(\PDO :: FETCH_OBJ);
+            return $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
         }
         else
         {
@@ -250,7 +250,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $major = new Major();
                     $major->set_id($result->id);
@@ -291,7 +291,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $language = new Language();
                     $language->set_id($result->id);
@@ -332,7 +332,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $package = new Package();
                     $package->set_id($result->id);
@@ -371,7 +371,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $course = new Course();
                     $course->set_id($result->id);
@@ -416,7 +416,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $trajectory = new PackageCourse();
                     $trajectory->set_id($result->id);
@@ -464,7 +464,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $choice = new Choice();
                     $choice->set_id($result->id);
@@ -500,7 +500,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $choice_option = new ChoiceOption();
                     $choice_option->set_id($result->id);
@@ -536,7 +536,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $trajectory = new Trajectory();
                     $trajectory->set_id($result->id);
@@ -574,7 +574,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $group = new Group();
                     $group->set_training_id($result->training_id);
@@ -608,7 +608,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $trajectory = new SubTrajectory();
                     $trajectory->set_id($result->id);
@@ -644,7 +644,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $trajectory = new SubTrajectoryCourse();
                     $trajectory->set_id($result->id);
@@ -690,7 +690,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $major_choice = new MajorChoice();
                     $major_choice->set_id($result->id);
@@ -725,7 +725,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $major_choice_option = new MajorChoiceOption();
                     $major_choice_option->set_id($result->id);

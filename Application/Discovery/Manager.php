@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery;
+namespace Chamilo\Application\Discovery;
 
-use libraries\platform\PlatformSetting;
-use libraries\format\theme\Theme;
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 /**
  *

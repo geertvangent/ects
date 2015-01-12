@@ -1,22 +1,22 @@
 <?php
-namespace Application\Discovery\module\training\implementation\bamaflex\data_manager;
+namespace Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\DataManager;
 
-use libraries\storage\NotCondition;
-use libraries\storage\DoctrineConditionTranslator;
-use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\utilities\Utilities;
-use application\discovery\data_source\bamaflex\History;
-use application\discovery\data_source\bamaflex\DataManager;
-use application\discovery\module\faculty\implementation\bamaflex\Dean;
-use application\discovery\module\faculty\implementation\bamaflex\Faculty;
-use application\discovery\data_source\bamaflex\HistoryReference;
-use libraries\storage\StaticColumnConditionVariable;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\NotCondition;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\DataManager;
+use Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Dean;
+use Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
     private $trainings;
@@ -47,7 +47,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $training = new Training();
                     $training->set_source($result->source);
@@ -102,7 +102,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            return $statement->fetch(\PDO :: FETCH_OBJ);
+            return $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
         }
         else
         {
@@ -123,7 +123,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $this->years[] = $result->year;
                 }
@@ -157,7 +157,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                 
                 if ($statement instanceof PDOStatement)
                 {
-                    $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                    $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
                     
                     $faculty = new Faculty();
                     $faculty->set_source($result->source);
@@ -264,7 +264,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
         }
         else
         {
@@ -292,7 +292,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $dean = new Dean();
                     $dean->set_source($result->source);

@@ -1,18 +1,18 @@
 <?php
-namespace Application\Discovery\module\course_results\implementation\bamaflex\data_manager;
+namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\storage\DoctrineConditionTranslator;
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use application\discovery\module\course\implementation\bamaflex\Course;
-use application\discovery\module\career\MarkMoment;
-use application\discovery\module\career\implementation\bamaflex\Mark;
-use stdClass;
-use libraries\storage\StaticColumnConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
+use Chamilo\Application\Discovery\Module\Career\MarkMoment;
+use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
+use Chamilo\StdClass;
+use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
     private $mark_moments = array();
@@ -52,7 +52,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $this->course_results[$programme_id][$source][] = $this->result_to_course_result(
                         $course_results_parameters, 
@@ -87,7 +87,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
                 if ($result instanceof stdClass)
                 {
                     $this->course[$programme_id][$source] = $this->result_to_course($result);
@@ -150,7 +150,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            $result = $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            $result = $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             return $result->id;
         }
         else
@@ -264,7 +264,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $mark = new Mark();
                     $mark->set_moment($result->try_id);

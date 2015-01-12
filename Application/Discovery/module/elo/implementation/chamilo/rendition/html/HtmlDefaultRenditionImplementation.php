@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo\rendition\html;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\Html;
 
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\architecture\NotAllowedException;
-use libraries\utilities\Utilities;
-use application\discovery\SortableTable;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Discovery\SortableTable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -91,7 +91,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -99,6 +99,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

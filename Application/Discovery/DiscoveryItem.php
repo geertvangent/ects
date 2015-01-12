@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery;
+namespace Chamilo\Application\Discovery;
 
-use libraries\storage\data_class\DataClass;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  *

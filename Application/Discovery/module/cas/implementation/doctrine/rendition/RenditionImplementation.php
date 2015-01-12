@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\cas\implementation\doctrine\rendition;
+namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rendition;
 
-abstract class RenditionImplementation extends \application\discovery\RenditionImplementation
+abstract class RenditionImplementation extends \Chamilo\Application\Discovery\RenditionImplementation
 {
 
     public function get_cas_statistics()

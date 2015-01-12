@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\component;
+namespace Chamilo\Application\Discovery\Component;
 
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\BreadcrumbTrail;
-use application\discovery\instance\Instance;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Application\Discovery\Instance\Instance;
 
 class ModuleComponent extends Manager
 {
@@ -34,6 +34,6 @@ class ModuleComponent extends Manager
                 Theme :: get_image_path() . 'action_information.png', 
                 $link));
         
-        \libraries\architecture\Application :: launch(\application\discovery\instance\Manager :: context(), $this->get_user(), $this);
+        \Chamilo\Libraries\Architecture\Application :: launch(\Chamilo\Application\Discovery\Instance\Manager :: context(), $this->get_user(), $this);
     }
 }

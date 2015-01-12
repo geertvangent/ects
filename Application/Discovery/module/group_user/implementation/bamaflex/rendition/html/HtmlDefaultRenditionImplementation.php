@@ -1,18 +1,18 @@
 <?php
-namespace Application\Discovery\module\group_user\implementation\bamaflex\rendition\html;
+namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rendition\Html;
 
-use libraries\format\theme\Theme;
-use libraries\format\DynamicContentTab;
-use libraries\format\DynamicTabsRenderer;
-use libraries\format\structure\Toolbar;
-use libraries\format\PropertiesTable;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
-use application\discovery\SortableTable;
-use libraries\platform\translation\Translation;
-use libraries\format\Display;
-use application\discovery\module\group_user\DataManager;
-use application\discovery\module\group\implementation\bamaflex\Group;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\DynamicContentTab;
+use Chamilo\Libraries\Format\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Application\Discovery\Module\GroupUser\DataManager;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -35,7 +35,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $html[] = $this->get_group_user_table();
             
-            \application\discovery\HtmlDefaultRendition :: add_export_action($this);
+            \Chamilo\Application\Discovery\HtmlDefaultRendition :: add_export_action($this);
         }
         else
         {
@@ -153,8 +153,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $toolbar = new Toolbar();
         
-        $user = \core\user\DataManager :: retrieve_user_by_official_code($group_user->get_person_id());
-        if ($user instanceof \core\user\User)
+        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($group_user->get_person_id());
+        if ($user instanceof \Chamilo\Core\User\User)
         {
             $profile_link = $this->get_module_link(
                 'application\discovery\module\profile\implementation\bamaflex', 
@@ -185,7 +185,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -193,6 +193,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\career\implementation\bamaflex\rendition\xlsx;
+namespace Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Rendition\Xlsx;
 
-use libraries\utilities\StringUtilities;
-use libraries\platform\translation\Translation;
-use libraries\format\Display;
-use application\discovery\module\enrollment\DataManager;
-use PHPExcel;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
+use Chamilo\PHPExcel;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -40,7 +40,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $this->process_enrollment_courses();
         }
 
-        return \application\discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \Chamilo\Application\Discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
     }
 
     public function process_enrollment_courses()
@@ -60,7 +60,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('Option');
         $headers[] = Translation :: get('Result');
 
-        \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
+        \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
         $row ++;
 
         foreach ($contracts as $contract)
@@ -129,13 +129,13 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $headers[] = Translation :: get('ContractType');
 
             $this->php_excel->getActiveSheet()->getStyle(
-                'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
+                'A:' . \Chamilo\PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
+                \Chamilo\PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
 
             $this->php_excel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(
-                \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
+                \Chamilo\PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
 
-            \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
+            \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
             $row ++;
 
             foreach ($contract as $enrollment)
@@ -372,7 +372,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                                 StringUtilities :: transcode_string(
                                     Translation :: get($enrollment->get_contract_type_string())));
 
-                            $range = 'A' . $row . ':' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1) .
+                            $range = 'A' . $row . ':' . \Chamilo\PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1) .
                                  $row;
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->setItalic(true);
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->getColor()->setRGB(
@@ -416,7 +416,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -424,6 +424,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

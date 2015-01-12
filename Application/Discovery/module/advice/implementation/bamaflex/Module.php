@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\advice\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex;
 
-class Module extends \application\discovery\module\advice\Module
+class Module extends \Chamilo\Application\Discovery\Module\Advice\Module
 {
 
     private $cache_advices = array();

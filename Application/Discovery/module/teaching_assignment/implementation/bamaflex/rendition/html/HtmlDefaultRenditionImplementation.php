@@ -1,16 +1,16 @@
 <?php
-namespace Application\Discovery\module\teaching_assignment\implementation\bamaflex\rendition\html;
+namespace Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rendition\Html;
 
-use application\discovery\SortableTable;
-use libraries\format\structure\ToolbarItem;
-use application\discovery\LegendTable;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\Display;
-use libraries\format\DynamicVisualTab;
-use libraries\format\DynamicVisualTabsRenderer;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Application\Discovery\LegendTable;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\DynamicVisualTab;
+use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -62,7 +62,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             $html[] = $tabs->render();
             
-            \application\discovery\HtmlDefaultRendition :: add_export_action($this);
+            \Chamilo\Application\Discovery\HtmlDefaultRendition :: add_export_action($this);
         }
         else
         {
@@ -77,19 +77,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $teaching_assignments = $this->get_teaching_assignments_data($parameters);
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $course_module_instance = \application\discovery\Module :: exists(
+        $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\course\implementation\bamaflex', 
             array('data_source' => $data_source));
         
-        $course_result_module_instance = \application\discovery\Module :: exists(
+        $course_result_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\course_results\implementation\bamaflex', 
             array('data_source' => $data_source));
         
-        $faculty_info_module_instance = \application\discovery\Module :: exists(
+        $faculty_info_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\faculty_info\implementation\bamaflex', 
             array('data_source' => $data_source));
         
-        $training_info_module_instance = \application\discovery\Module :: exists(
+        $training_info_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\training_info\implementation\bamaflex', 
             array('data_source' => $data_source));
         
@@ -99,12 +99,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             if ($faculty_info_module_instance)
             {
-                $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
+                $parameters = new \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Parameters(
                     $teaching_assignment->get_faculty_id(), 
                     $teaching_assignment->get_source());
                 
-                $is_allowed = \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: is_allowed(
-                    \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: VIEW_RIGHT, 
+                $is_allowed = \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: is_allowed(
+                    \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
                     $faculty_info_module_instance->get_id(), 
                     $parameters);
                 
@@ -125,12 +125,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             if ($training_info_module_instance)
             {
-                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
+                $parameters = new \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters(
                     $teaching_assignment->get_training_id(), 
                     $teaching_assignment->get_source());
                 
-                $is_allowed = \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: is_allowed(
-                    \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: VIEW_RIGHT, 
+                $is_allowed = \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: is_allowed(
+                    \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
                     $faculty_info_module_instance->get_id(), 
                     $parameters);
                 
@@ -169,12 +169,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             if ($course_module_instance)
             {
-                $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
                     $teaching_assignment->get_programme_id(), 
                     $teaching_assignment->get_source());
                 
-                $is_allowed = \application\discovery\module\course\implementation\bamaflex\Rights :: is_allowed(
-                    \application\discovery\module\course\implementation\bamaflex\Rights :: VIEW_RIGHT, 
+                $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
+                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
                     $course_module_instance->get_id(), 
                     $parameters);
                 
@@ -204,12 +204,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             
             if ($course_result_module_instance)
             {
-                $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
+                $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
                     $teaching_assignment->get_programme_id(), 
                     $teaching_assignment->get_source());
                 
-                $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
-                    \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT, 
+                $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
+                    \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
                     $course_result_module_instance->get_id(), 
                     $parameters);
                 
@@ -256,7 +256,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -264,6 +264,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

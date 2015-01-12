@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\career\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex;
 
-use libraries\platform\Request;
+use Chamilo\Libraries\Platform\Request;
 
-class Module extends \application\discovery\module\career\Module
+class Module extends \Chamilo\Application\Discovery\Module\Career\Module
 {
     const PARAM_CONTRACT_ID = 'contract_id';
 

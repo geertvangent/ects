@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery;
+namespace Chamilo\Application\Discovery;
 
-use libraries\platform\translation\Translation;
+use Chamilo\Libraries\Platform\Translation\Translation;
 
 class LegendTable extends SortableTable
 {

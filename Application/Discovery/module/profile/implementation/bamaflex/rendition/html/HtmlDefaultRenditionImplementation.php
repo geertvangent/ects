@@ -1,14 +1,14 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\bamaflex\rendition\html;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Rendition\Html;
 
-use libraries\format\BreadcrumbTrail;
-use libraries\format\Breadcrumb;
-use libraries\format\PropertiesTable;
-use libraries\utilities\StringUtilities;
-use application\discovery\SortableTable;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\Display;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Display;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -28,7 +28,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if ($this->get_profile())
         {
             $html = array();
-            $html[] = \application\discovery\module\profile\Rendition :: launch($this);
+            $html[] = \Chamilo\Application\Discovery\Module\Profile\Rendition :: launch($this);
             
             if (Rights :: is_allowed(
                 Rights :: CONTACT_RIGHT, 
@@ -265,7 +265,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -273,7 +273,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 
     public function is_allowed_to_contact()

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\group;
+namespace Chamilo\Application\Discovery\Module\Group;
 
 /**
  *

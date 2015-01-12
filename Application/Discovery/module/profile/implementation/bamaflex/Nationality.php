@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex;
 
-use libraries\storage\data_class\DataClass;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 class Nationality extends DataClass
 {

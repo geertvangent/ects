@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\data_source\bamaflex;
+namespace Chamilo\Application\Discovery\DataSource\Bamaflex;
 
-use libraries\storage\DataSourceName;
-use libraries\file\Path;
-use libraries\storage\DoctrineConnection;
-use Doctrine\DBAL\DriverManager;
-use Doctrine\Common\ClassLoader;
+use Chamilo\Libraries\Storage\DataSourceName;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Storage\DoctrineConnection;
+use Chamilo\Doctrine\DBAL\DriverManager;
+use Chamilo\Doctrine\Common\ClassLoader;
 
 class Connection extends DoctrineConnection
 {
@@ -30,8 +30,8 @@ class Connection extends DoctrineConnection
         $classLoader = new ClassLoader('Doctrine', Path :: get_plugin_path());
         $classLoader->register();
 
-        $this->data_source_instance = \application\discovery\data_source\DataManager :: retrieve_by_id(
-            \application\discovery\data_source\Instance :: class_name(),
+        $this->data_source_instance = \Chamilo\Application\Discovery\DataSource\DataManager :: retrieve_by_id(
+            \Chamilo\Application\Discovery\DataSource\Instance :: class_name(),
             (int) $data_source_instance_id);
 
         $driver = $this->data_source_instance->get_setting('driver');
@@ -42,7 +42,7 @@ class Connection extends DoctrineConnection
 
         $data_source_name = DataSourceName :: factory('Doctrine', $driver, $username, $host, $database, $password);
 
-        $configuration = new \Doctrine\DBAL\Configuration();
+        $configuration = new \Chamilo\Doctrine\DBAL\Configuration();
         $connection_parameters = array(
             'dbname' => $data_source_name->get_database(),
             'user' => $data_source_name->get_username(),

@@ -1,19 +1,19 @@
 <?php
-namespace Application\Discovery\module\student_materials\implementation\bamaflex\rendition\html;
+namespace Chamilo\Application\Discovery\Module\StudentMaterials\Implementation\Bamaflex\Rendition\Html;
 
-use libraries\format\Display;
-use application\discovery\module\course\implementation\bamaflex\Material;
-use application\discovery\LegendTable;
-use application\discovery\SortableTable;
-use application\discovery\module\career\DataManager;
-use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use libraries\format\DynamicTabsRenderer;
-use libraries\format\DynamicContentTab;
-use libraries\format\theme\Theme;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Material;
+use Chamilo\Application\Discovery\LegendTable;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Application\Discovery\Module\Career\DataManager;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
+use Chamilo\Libraries\Format\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\DynamicContentTab;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -165,18 +165,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $table_row = array();
                 
                 $data_source = $this->get_module_instance()->get_setting('data_source');
-                $course_module_instance = \application\discovery\Module :: exists(
+                $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
                     'application\discovery\module\course\implementation\bamaflex', 
                     array('data_source' => $data_source));
                 
                 if ($course_module_instance)
                 {
-                    $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                    $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
                         $course->get_programme_id(), 
                         $course->get_source());
                     
-                    $is_allowed = \application\discovery\module\course\implementation\bamaflex\Rights :: is_allowed(
-                        \application\discovery\module\course\implementation\bamaflex\Rights :: VIEW_RIGHT, 
+                    $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
+                        \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
                         $course_module_instance->get_id(), 
                         $parameters);
                     
@@ -251,18 +251,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         $table_row = array();
                         
                         $data_source = $this->get_module_instance()->get_setting('data_source');
-                        $course_module_instance = \application\discovery\Module :: exists(
+                        $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
                             'application\discovery\module\course\implementation\bamaflex', 
                             array('data_source' => $data_source));
                         
                         if ($course_module_instance)
                         {
-                            $parameters = new \application\discovery\module\course\implementation\bamaflex\Parameters(
+                            $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
                                 $course->get_programme_id(), 
                                 1);
                             
-                            $is_allowed = \application\discovery\module\course\implementation\bamaflex\Rights :: is_allowed(
-                                \application\discovery\module\course\implementation\bamaflex\Rights :: VIEW_RIGHT, 
+                            $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
+                                \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
                                 $course_module_instance->get_id(), 
                                 $parameters);
                             
@@ -360,7 +360,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -368,6 +368,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

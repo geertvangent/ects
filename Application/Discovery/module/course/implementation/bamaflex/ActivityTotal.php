@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\course\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex;
 
 class ActivityTotal extends Activity
 {

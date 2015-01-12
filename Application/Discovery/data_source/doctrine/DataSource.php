@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\data_source\doctrine;
+namespace Chamilo\Application\Discovery\DataSource\Doctrine;
 
-use application\discovery\instance\Instance;
+use Chamilo\Application\Discovery\Instance\Instance;
 
-class DataSource extends \application\discovery\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource
 {
 
     private $connection;

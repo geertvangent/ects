@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\module\training\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex;
 
-class Module extends \application\discovery\module\training\Module
+class Module extends \Chamilo\Application\Discovery\Module\Training\Module
 {
 }

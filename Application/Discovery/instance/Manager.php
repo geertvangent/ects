@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\instance;
+namespace Chamilo\Application\Discovery\Instance;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

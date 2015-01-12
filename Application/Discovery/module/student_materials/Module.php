@@ -1,14 +1,14 @@
 <?php
-namespace Application\Discovery\module\student_materials;
+namespace Chamilo\Application\Discovery\Module\StudentMaterials;
 
-use libraries\file\Path;
-use libraries\file\Filesystem;
-use libraries\platform\Request;
-use libraries\architecture\application\Application;
-use application\discovery\instance\Instance;
-use application\discovery\module\profile\DataManager;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Application\Discovery\Module\Profile\DataManager;
 
-abstract class Module extends \application\discovery\Module
+abstract class Module extends \Chamilo\Application\Discovery\Module
 {
 
     /**

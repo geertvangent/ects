@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\faculty_info\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex;
 
-class Parameters extends \application\discovery\module\faculty_info\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Module\FacultyInfo\Parameters
 {
 
     public function __construct($faculty_id, $source)

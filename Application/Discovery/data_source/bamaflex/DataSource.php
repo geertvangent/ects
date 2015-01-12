@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\data_source\bamaflex;
+namespace Chamilo\Application\Discovery\DataSource\Bamaflex;
 
-class DataSource extends \application\discovery\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource
 {
 
     /**

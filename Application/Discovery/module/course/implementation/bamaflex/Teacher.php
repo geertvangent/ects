@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\course\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class Teacher extends DiscoveryItem
 {
@@ -88,7 +88,7 @@ class Teacher extends DiscoveryItem
      */
     public function __toString()
     {
-        $user = \core\user\DataManager :: get_instance()->retrieve_user_by_official_code($this->get_person_id());
+        $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user_by_official_code($this->get_person_id());
         
         if ($user)
         {

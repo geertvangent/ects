@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\gallery_browser;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser;
 
 class GalleryBrowserTablePropertyModel extends DefaultGalleryTablePropertyModel
 {

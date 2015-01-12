@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\cas\implementation\doctrine;
+namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class Application extends DiscoveryItem
 {

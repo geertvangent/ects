@@ -1,15 +1,15 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo;
 
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\InCondition;
-use libraries\storage\OrCondition;
-use libraries\platform\Session;
-use application\discovery\RightsGroupEntityRight;
-use Exception;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
+use Chamilo\Exception;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 class Rights
 {
@@ -24,11 +24,11 @@ class Rights
     {
         try
         {
-            $user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+            $user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\User :: class_name(),
                 (int) $parameters->get_user_id());
-            $current_user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+            $current_user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\User :: class_name(),
                 (int) Session :: get_user_id());
 
             $user_group_ids = $user->get_groups(true);
@@ -58,7 +58,7 @@ class Rights
                 new PropertyConditionVariable(
                     RightsGroupEntityRight :: class_name(),
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE),
-                new StaticConditionVariable(\core\rights\UserEntity :: ENTITY_TYPE));
+                new StaticConditionVariable(\Chamilo\Core\Rights\UserEntity :: ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($user_entity_conditions);
 
             $group_entity_conditions = array();
@@ -71,13 +71,13 @@ class Rights
                 new PropertyConditionVariable(
                     RightsGroupEntityRight :: class_name(),
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE),
-                new StaticConditionVariable(\core\rights\PlatformGroupEntity :: ENTITY_TYPE));
+                new StaticConditionVariable(\Chamilo\Core\Rights\PlatformGroupEntity :: ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($group_entity_conditions);
 
             $conditions[] = new OrCondition($entities_conditions);
             $condition = new AndCondition($conditions);
 
-            $count = \application\discovery\DataManager :: get_instance()->count_rights_group_entity_rights($condition);
+            $count = \Chamilo\Application\Discovery\DataManager :: get_instance()->count_rights_group_entity_rights($condition);
 
             if ($count > 0)
             {

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\cas;
+namespace Chamilo\Application\Discovery\Module\Cas;
 
 /**
  *

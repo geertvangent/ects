@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\component;
+namespace Chamilo\Application\Discovery\Component;
 
-use libraries\architecture\DelegateComponent;
-use libraries\platform\translation\Translation;
-use libraries\platform\Request;
+use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Request;
 
 /**
  *
@@ -18,13 +18,13 @@ class CodeComponent extends Manager implements DelegateComponent
         $module_id = Request :: get(Manager :: PARAM_MODULE_ID);
         $official_code = Request :: get(Manager :: PARAM_OFFICIAL_CODE);
         
-        $user = \core\user\DataManager :: retrieve_user_by_official_code($official_code);
-        $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
-            \application\discovery\instance\Instance :: class_name(), 
+        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($official_code);
+        $module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
+            \Chamilo\Application\Discovery\Instance\Instance :: class_name(), 
             (int) $module_id);
         
-        if ($user instanceof \core\user\User && $module_instance instanceof \application\discovery\instance\Instance &&
-             $module_instance->get_content_type() == \application\discovery\instance\Instance :: TYPE_USER)
+        if ($user instanceof \Chamilo\Core\User\User && $module_instance instanceof \Chamilo\Application\Discovery\Instance\Instance &&
+             $module_instance->get_content_type() == \Chamilo\Application\Discovery\Instance\Instance :: TYPE_USER)
         {
             $parameters = array();
             $parameters[self :: PARAM_APPLICATION] = self :: APPLICATION_NAME;
@@ -36,7 +36,7 @@ class CodeComponent extends Manager implements DelegateComponent
         }
         else
         {
-            throw new \Exception(Translation :: get('NoSuchUserOrModule'));
+            throw new \Chamilo\Exception(Translation :: get('NoSuchUserOrModule'));
         }
     }
 }

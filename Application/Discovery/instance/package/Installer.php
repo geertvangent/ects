@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\instance\package;
+namespace Chamilo\Application\Discovery\Instance\Package;
 
-class Installer extends \configuration\package\Installer
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 }

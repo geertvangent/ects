@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\enrollment;
+namespace Chamilo\Application\Discovery\Module\Enrollment;
 
 /**
  *

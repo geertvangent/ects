@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\teaching_assignment\implementation\bamaflex\test\source;
+namespace Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Test\Source;
 
 /**
  * This test case checks the php syntax for the php files of this package
  *
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class CheckSourceCodeTest extends \libraries\architecture\CheckSourceCodeTest
+class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\CheckSourceCodeTest
 {
 }

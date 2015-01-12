@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\data_source\table\instance;
+namespace Chamilo\Application\Discovery\DataSource\Table\Instance;
 
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\structure\Toolbar;
-use libraries\format\theme\Theme;
-use libraries\format\TableCellRendererActionsColumnSupport;
-use libraries\format\table\extension\data_class_table\DataClassTableCellRenderer;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -42,7 +42,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_UPDATE_INSTANCE,
-                        \application\discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
+                        \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
         $toolbar->add_item(
             new ToolbarItem(
@@ -51,7 +51,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_DELETE_INSTANCE,
-                        \application\discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
+                        \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $module_instance->get_id())),
                 ToolbarItem :: DISPLAY_ICON,
                 true));
         return $toolbar->as_html();

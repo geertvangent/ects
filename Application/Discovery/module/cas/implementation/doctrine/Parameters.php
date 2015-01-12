@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\module\cas\implementation\doctrine;
+namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
-class Parameters extends \application\discovery\module\profile\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Module\Profile\Parameters
 {
 }

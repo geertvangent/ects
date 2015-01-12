@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\xml_feeds;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\XmlFeeds;
 
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\platform\Request;
-use libraries\storage\EqualityCondition;
-use libraries\authentication\Authentication;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\OrderBy;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Authentication\Authentication;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\OrderBy;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $
@@ -24,16 +24,16 @@ if (Authentication :: is_valid())
 {
     $parent_id = Request :: get('parent_id');
     $condition = new EqualityCondition(
-        new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_PARENT_ID),
+        new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID),
         new StaticConditionVariable($parent_id));
-    $groups_tree = \core\group\DataManager :: retrieves(
-        \core\group\Group :: class_name(),
+    $groups_tree = \Chamilo\Core\Group\DataManager :: retrieves(
+        \Chamilo\Core\Group\Group :: class_name(),
         new DataClassRetrievesParameters(
             $condition,
             null,
             null,
             new OrderBy(
-                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_NAME))))->as_array();
+                new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_NAME))))->as_array();
 }
 
 header('Content-Type: text/xml');

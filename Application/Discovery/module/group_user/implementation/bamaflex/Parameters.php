@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\group_user\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex;
 
-class Parameters extends \application\discovery\module\group_user\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Module\GroupUser\Parameters
 {
 
     public function __construct($group_class_id, $source, $type)

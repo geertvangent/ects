@@ -1,29 +1,29 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\rendition\html;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rendition\Html;
 
-use libraries\format\BreadcrumbTrail;
-use libraries\format\Breadcrumb;
-use libraries\format\TableSupport;
-use libraries\format\Display;
-use libraries\format\DynamicContentTab;
-use libraries\format\ActionBarSearchForm;
-use libraries\format\DynamicTabsRenderer;
-use libraries\format\theme\Theme;
-use libraries\utilities\Utilities;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\ActionBarRenderer;
-use libraries\storage\DataClassCountParameters;
-use libraries\storage\EqualityCondition;
-use application\discovery\RightsGroupEntityRight;
-use libraries\platform\Session;
-use libraries\storage\AndCondition;
-use libraries\storage\InCondition;
-use libraries\storage\OrCondition;
-use libraries\storage\DataClassDistinctParameters;
-use libraries\storage\DataClassRetrieveParameters;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\TableSupport;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\DynamicContentTab;
+use Chamilo\Libraries\Format\ActionBarSearchForm;
+use Chamilo\Libraries\Format\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\ActionBarRenderer;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Storage\DataClassDistinctParameters;
+use Chamilo\Libraries\Storage\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements TableSupport
 {
@@ -52,7 +52,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_action_bar()
     {
         $parameters = $this->get_application()->get_parameters(true);
-        $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[\Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
 
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->set_search_url($this->get_application()->get_url($parameters));
@@ -70,8 +70,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $url = $this->get_application()->get_url(
             array(
-                \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
-                \core\group\Manager :: PARAM_GROUP_ID => '%s'));
+                \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
+                \Chamilo\Core\Group\Manager :: PARAM_GROUP_ID => '%s'));
         $group_menu = new GroupMenu($this, urldecode($url));
 
         $html = array();
@@ -90,18 +90,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
             {
                 $condition = new EqualityCondition(
                     new PropertyConditionVariable(
-                        \core\group\Group :: class_name(),
-                        \core\group\Group :: PROPERTY_PARENT_ID),
+                        \Chamilo\Core\Group\Group :: class_name(),
+                        \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID),
                     new StaticConditionVariable(0));
-                $group = \core\group\DataManager :: retrieve(
-                    \core\group\Group :: class_name(),
+                $group = \Chamilo\Core\Group\DataManager :: retrieve(
+                    \Chamilo\Core\Group\Group :: class_name(),
                     new DataClassRetrieveParameters($condition));
                 $this->current_group = $group;
             }
             else
             {
-                $this->current_group = \core\group\DataManager :: retrieve_by_id(
-                    \core\group\Group :: class_name(),
+                $this->current_group = \Chamilo\Core\Group\DataManager :: retrieve_by_id(
+                    \Chamilo\Core\Group\Group :: class_name(),
                     (int) $this->get_group());
             }
         }
@@ -149,17 +149,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $parameters[\core\group\Manager :: PARAM_GROUP_ID] = $this->get_group();
-        $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[\Chamilo\Core\Group\Manager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
 
         $query = $this->action_bar->get_query();
         if (isset($query) && $query != '')
         {
-            $count_users = \core\user\DataManager :: count(
-                \core\user\User :: class_name(),
+            $count_users = \Chamilo\Core\User\DataManager :: count(
+                \Chamilo\Core\User\User :: class_name(),
                 new DataClassCountParameters($this->get_users_condition($this->action_bar->get_query())));
-            $count_groups = \core\group\DataManager :: count(
-                \core\group\Group :: class_name(),
+            $count_groups = \Chamilo\Core\Group\DataManager :: count(
+                \Chamilo\Core\Group\Group :: class_name(),
                 new DataClassCountParameters($this->get_subgroups_condition($this->action_bar->get_query())));
 
             if ($count_users > 0)
@@ -212,8 +212,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
             if ($show_subgroups)
             {
-                $count_groups = \core\group\DataManager :: count(
-                    \core\group\Group :: class_name(),
+                $count_groups = \Chamilo\Core\Group\DataManager :: count(
+                    \Chamilo\Core\Group\Group :: class_name(),
                     new DataClassCountParameters($this->get_subgroups_condition($this->action_bar->get_query())));
                 if ($count_groups > 0)
                 {
@@ -249,7 +249,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_group_info()
     {
         $group_id = $this->get_group();
-        $group = \core\group\DataManager :: retrieve_by_id(\core\group\Group :: class_name(), (int) $group_id);
+        $group = \Chamilo\Core\Group\DataManager :: retrieve_by_id(\Chamilo\Core\Group\Group :: class_name(), (int) $group_id);
 
         $html = array();
 
@@ -271,8 +271,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         return $this->get_application()->get_url(
             array(
-                \application\discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
-                \core\group\Manager :: PARAM_GROUP_ID => $group->get_id()));
+                \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(),
+                \Chamilo\Core\Group\Manager :: PARAM_GROUP_ID => $group->get_id()));
     }
 
     /*
@@ -287,8 +287,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $parameters = $this->get_application()->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
-        $parameters[\core\group\Manager :: PARAM_GROUP_ID] = $this->get_group();
-        $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[\Chamilo\Core\Group\Manager :: PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         return $parameters;
     }
 
@@ -297,7 +297,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
 
     /*
@@ -305,7 +305,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 
     public function get_allowed_groups()
@@ -334,7 +334,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 new PropertyConditionVariable(
                     RightsGroupEntityRight :: class_name(),
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE),
-                new StaticConditionVariable(\core\rights\UserEntity :: ENTITY_TYPE));
+                new StaticConditionVariable(\Chamilo\Core\Rights\UserEntity :: ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($user_entity_conditions);
 
             $group_entity_conditions = array();
@@ -347,13 +347,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 new PropertyConditionVariable(
                     RightsGroupEntityRight :: class_name(),
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE),
-                new StaticConditionVariable(\core\rights\PlatformGroupEntity :: ENTITY_TYPE));
+                new StaticConditionVariable(\Chamilo\Core\Rights\PlatformGroupEntity :: ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($group_entity_conditions);
 
             $conditions[] = new OrCondition($entities_conditions);
             $condition = new AndCondition($conditions);
 
-            $this->allowed_groups = \application\discovery\DataManager :: distinct(
+            $this->allowed_groups = \Chamilo\Application\Discovery\DataManager :: distinct(
                 RightsGroupEntityRight :: class_name(),
                 new DataClassDistinctParameters($condition, RightsGroupEntityRight :: PROPERTY_GROUP_ID));
         }

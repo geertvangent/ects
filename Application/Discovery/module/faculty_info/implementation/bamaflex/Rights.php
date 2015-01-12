@@ -1,8 +1,8 @@
 <?php
-namespace Application\Discovery\module\faculty_info\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex;
 
-use application\discovery\FacultyBasedRights;
-use application\discovery\module\faculty_info\DataManager;
+use Chamilo\Application\Discovery\FacultyBasedRights;
+use Chamilo\Application\Discovery\Module\FacultyInfo\DataManager;
 
 class Rights extends FacultyBasedRights
 {
@@ -11,8 +11,8 @@ class Rights extends FacultyBasedRights
      */
     public function get_context($module_instance_id, $parameters)
     {
-        $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
-            \application\discovery\instance\Instance :: class_name(), 
+        $module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
+            \Chamilo\Application\Discovery\Instance\Instance :: class_name(), 
             (int) $module_instance_id);
         $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
         

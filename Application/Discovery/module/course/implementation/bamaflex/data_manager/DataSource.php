@@ -1,16 +1,16 @@
 <?php
-namespace Application\Discovery\module\course\implementation\bamaflex\data_manager;
+namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\DataManager;
 
-use libraries\storage\DoctrineConditionTranslator;
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\utilities\StringUtilities;
-use stdClass;
-use libraries\storage\StaticColumnConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\StdClass;
+use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
     private $course = array();
@@ -57,7 +57,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                $result = $statement->fetch(\PDO :: FETCH_OBJ);
+                $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
                 
                 if ($result instanceof stdClass)
                 {
@@ -240,7 +240,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             return $result->id;
         }
         else
@@ -271,7 +271,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
             {
                 if (! isset($this->course[$result->id][$source]))
                 {
@@ -313,7 +313,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $evaluation = new EvaluationStructured();
                     $evaluation->set_programme_id($result->programme_id);
@@ -363,7 +363,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $activity = new ActivityStructured();
                     $activity->set_programme_id($result->programme_id);
@@ -411,7 +411,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $material = new MaterialStructured();
                     $material->set_programme_id($result->programme_id);
@@ -466,7 +466,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $competence = new CompetenceStructured();
                     $competence->set_programme_id($result->programme_id);
@@ -513,7 +513,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $language = new Language();
                     $language->set_programme_id($result->programme_id);
@@ -557,7 +557,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $timeframe_part = new TimeframePart();
                     $timeframe_part->set_timeframe_id($result->timeframe_id);
@@ -601,7 +601,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $teacher = new Teacher();
                     $teacher->set_programme_id($result->programme_id);

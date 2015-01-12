@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\data_source\bamaflex\data_class_generator\data_class_generator;
+namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\DataClassGenerator;
 
-use libraries\file\Path;
-use libraries\utilities\Utilities;
-use \MDB2_Error;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\\MDB2_Error;
 
 /**
  * Dataclass generator used to generate dataclasses with given properties

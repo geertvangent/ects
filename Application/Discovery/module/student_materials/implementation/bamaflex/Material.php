@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\student_materials\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\StudentMaterials\Implementation\Bamaflex;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class Material extends DiscoveryItem
 {

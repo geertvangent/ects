@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\rendition;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rendition;
 
-abstract class RenditionImplementation extends \application\discovery\RenditionImplementation
+abstract class RenditionImplementation extends \Chamilo\Application\Discovery\RenditionImplementation
 {
 
     public function get_group()

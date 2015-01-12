@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex;
 
-class Parameters extends \application\discovery\module\profile\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Module\Profile\Parameters
 {
 }

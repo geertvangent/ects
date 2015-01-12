@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\instance\data_class;
+namespace Chamilo\Application\Discovery\Instance\DataClass;
 
-use libraries\storage\EqualityCondition;
-use libraries\file\Path;
-use libraries\storage\data_class\DataClass;
-use DOMDocument;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\DOMDocument;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 /**
  *

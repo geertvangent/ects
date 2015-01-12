@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\employment\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Employment\Implementation\Bamaflex;
 
-use application\discovery\module\profile\DataManager;
+use Chamilo\Application\Discovery\Module\Profile\DataManager;
 
-class Module extends \application\discovery\module\employment\Module
+class Module extends \Chamilo\Application\Discovery\Module\Employment\Module
 {
 
     public function get_unique_faculty($parts)

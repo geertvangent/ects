@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\package;
+namespace Chamilo\Application\Discovery\Package;
 
-class Deactivator extends \configuration\package\Deactivator
+class Deactivator extends \Chamilo\Configuration\Package\Deactivator
 {
 }

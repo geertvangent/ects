@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\module\training;
+namespace Chamilo\Application\Discovery\Module\Training;
 
-use libraries\file\Filesystem;
-use libraries\platform\Request;
-use libraries\file\Path;
-use application\discovery\instance\Instance;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Application\Discovery\Instance\Instance;
 
-class Module extends \application\discovery\Module
+class Module extends \Chamilo\Application\Discovery\Module
 {
     const PARAM_YEAR = 'year';
 

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\profile;
+namespace Chamilo\Application\Discovery\Module\Profile;
 
-class Parameters extends \application\discovery\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Parameters
 {
 
     public function __construct($user_id)

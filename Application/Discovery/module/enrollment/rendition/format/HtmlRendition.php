@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\enrollment\rendition\format;
+namespace Chamilo\Application\Discovery\Module\Enrollment\Rendition\Format;
 
 class HtmlRendition extends Rendition
 {

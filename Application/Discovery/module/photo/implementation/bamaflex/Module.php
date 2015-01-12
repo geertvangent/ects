@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex;
 
-use libraries\storage\InCondition;
-use core\group\Group;
-use libraries\storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Core\Group\Group;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
 
-class Module extends \application\discovery\module\photo\Module
+class Module extends \Chamilo\Application\Discovery\Module\Photo\Module
 {
 
     public function get_groups()
@@ -81,7 +81,7 @@ class Module extends \application\discovery\module\photo\Module
         {
             foreach ($codes as $code)
             {
-                $group = \core\group\DataManager :: retrieve_group_by_code($code);
+                $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($code);
                 
                 if ($group instanceof Group)
                 {
@@ -106,7 +106,7 @@ class Module extends \application\discovery\module\photo\Module
     public function get_condition()
     {
         return new InCondition(
-            new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_ID), 
+            new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_ID), 
             $this->get_users());
     }
 }

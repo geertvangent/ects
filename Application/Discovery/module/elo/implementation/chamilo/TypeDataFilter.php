@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo;
 
-use libraries\platform\translation\Translation;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\EqualityCondition;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\DateFormatConditionVariable;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\DateFormatConditionVariable;
 
 abstract class TypeDataFilter
 {

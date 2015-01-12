@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo\filter;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
 class CourseTimeDataFilter extends TypeDataFilter
 {

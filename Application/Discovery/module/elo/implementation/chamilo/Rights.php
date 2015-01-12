@@ -1,17 +1,17 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo;
 
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\InCondition;
-use libraries\storage\OrCondition;
-use libraries\platform\Session;
-use application\discovery\RightsGroupEntityRight;
-use Exception;
-use core\rights\UserEntity;
-use core\rights\PlatformGroupEntity;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
+use Chamilo\Exception;
+use Chamilo\Core\Rights\UserEntity;
+use Chamilo\Core\Rights\PlatformGroupEntity;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 class Rights
 {
@@ -26,11 +26,11 @@ class Rights
     {
         try
         {
-            $user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+            $user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\User :: class_name(),
                 (int) $parameters->get_user_id());
-            $current_user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+            $current_user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\User :: class_name(),
                 (int) Session :: get_user_id());
 
             $user_group_ids = $user->get_groups(true);
@@ -79,7 +79,7 @@ class Rights
             $conditions[] = new OrCondition($entities_conditions);
             $condition = new AndCondition($conditions);
 
-            $count = \application\discovery\DataManager :: get_instance()->count_rights_group_entity_rights($condition);
+            $count = \Chamilo\Application\Discovery\DataManager :: get_instance()->count_rights_group_entity_rights($condition);
 
             if ($count > 0)
             {

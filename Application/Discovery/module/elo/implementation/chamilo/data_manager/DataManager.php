@@ -1,18 +1,18 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo\data_manager;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\DataManager;
 
-use libraries\storage\DataClassProperties;
+use Chamilo\Libraries\Storage\DataClassProperties;
 
-use libraries\storage\RecordRetrievesParameters;
-use libraries\storage\FunctionConditionVariable;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\GroupBy;
-use libraries\storage\AndCondition;
-use libraries\storage\Condition;
-use libraries\storage\OrderBy;
+use Chamilo\Libraries\Storage\RecordRetrievesParameters;
+use Chamilo\Libraries\Storage\FunctionConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\GroupBy;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\Condition;
+use Chamilo\Libraries\Storage\OrderBy;
 
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
     const PREFIX = 'discovery_elo_';
     const COUNT = 'count';

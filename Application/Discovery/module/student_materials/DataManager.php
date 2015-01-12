@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\student_materials;
+namespace Chamilo\Application\Discovery\Module\StudentMaterials;
 
 /**
  *

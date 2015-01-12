@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\gallery_browser;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser;
 
-use libraries\format\GalleryTable;
+use Chamilo\Libraries\Format\GalleryTable;
 
 class GalleryBrowserTable extends GalleryTable
 {

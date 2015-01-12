@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\profile;
+namespace Chamilo\Application\Discovery\Module\Profile;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class Profile extends DiscoveryItem
 {

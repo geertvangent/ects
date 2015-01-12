@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\cas;
+namespace Chamilo\Application\Discovery\Module\Cas;
 
-class Parameters extends \application\discovery\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Parameters
 {
     const MODE_GENERAL = 1;
     const MODE_USER = 2;

@@ -1,10 +1,10 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo;
 
-use application\discovery\Parameters;
-use libraries\platform\Request;
+use Chamilo\Application\Discovery\Parameters;
+use Chamilo\Libraries\Platform\Request;
 
-class Module extends \application\discovery\module\elo\Module
+class Module extends \Chamilo\Application\Discovery\Module\Elo\Module
 {
     const TYPE_CONTENT_OBJECT = 'content_object';
     const TYPE_COURSE_ACCESS = 'course_access';

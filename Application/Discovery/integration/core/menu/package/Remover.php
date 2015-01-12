@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\integration\core\menu\package;
+namespace Chamilo\Application\Discovery\Integration\Core\Menu\Package;
 
-class Remover extends \configuration\package\Remover
+class Remover extends \Chamilo\Configuration\Package\Remover
 {
 }

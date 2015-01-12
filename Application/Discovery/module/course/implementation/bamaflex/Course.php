@@ -1,10 +1,10 @@
 <?php
-namespace Application\Discovery\module\course\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex;
 
-use application\discovery\module\course\DataManager;
-use libraries\utilities\StringUtilities;
-use libraries\utilities\Utilities;
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\Module\Course\DataManager;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 /**
  * application.discovery.module.courses.discovery

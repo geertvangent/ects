@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\career;
+namespace Chamilo\Application\Discovery\Module\Career;
 
-use libraries\file\Path;
-use libraries\file\Filesystem;
-use libraries\platform\Request;
-use libraries\architecture\application\Application;
-use application\discovery\instance\Instance;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Application\Discovery\Instance\Instance;
 
-class Module extends \application\discovery\Module
+class Module extends \Chamilo\Application\Discovery\Module
 {
     const PARAM_USER_ID = 'user_id';
 

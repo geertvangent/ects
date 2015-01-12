@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\data_source\table\instance;
+namespace Chamilo\Application\Discovery\DataSource\Table\Instance;
 
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\DataClassPropertyTableColumn;
-use libraries\format\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\DataClassTableColumnModel;
 
 class InstanceTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

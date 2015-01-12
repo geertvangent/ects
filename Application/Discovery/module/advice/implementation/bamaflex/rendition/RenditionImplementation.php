@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\advice\implementation\bamaflex\rendition;
+namespace Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rendition;
 
-abstract class RenditionImplementation extends \application\discovery\RenditionImplementation
+abstract class RenditionImplementation extends \Chamilo\Application\Discovery\RenditionImplementation
 {
 
     public function has_advices($enrollment)

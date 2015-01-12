@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\course_results;
+namespace Chamilo\Application\Discovery\Module\CourseResults;
 
-class Parameters extends \application\discovery\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Parameters
 {
 
     public function __construct($programme_id)

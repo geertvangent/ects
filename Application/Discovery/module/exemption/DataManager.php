@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\exemption;
+namespace Chamilo\Application\Discovery\Module\Exemption;
 
 /**
  *

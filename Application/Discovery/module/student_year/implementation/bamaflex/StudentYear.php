@@ -1,14 +1,14 @@
 <?php
-namespace Application\Discovery\module\student_year\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\StudentYear\Implementation\Bamaflex;
 
-use libraries\utilities\Utilities;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.student_year.implementation.bamaflex
  * 
  * @author Hans De Bisschop
  */
-class StudentYear extends \application\discovery\module\student_year\StudentYear
+class StudentYear extends \Chamilo\Application\Discovery\Module\StudentYear\StudentYear
 {
     const CLASS_NAME = __CLASS__;
     

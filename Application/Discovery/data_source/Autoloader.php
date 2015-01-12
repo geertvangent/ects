@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\data_source;
+namespace Chamilo\Application\Discovery\DataSource;
 
 class Autoloader
 {

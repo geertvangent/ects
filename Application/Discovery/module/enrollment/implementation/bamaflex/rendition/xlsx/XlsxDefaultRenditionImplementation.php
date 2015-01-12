@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\enrollment\implementation\bamaflex\rendition\xlsx;
+namespace Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\Xlsx;
 
-use libraries\utilities\StringUtilities;
-use libraries\platform\translation\Translation;
-use libraries\format\Display;
-use application\discovery\module\enrollment\DataManager;
-use PHPExcel;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
+use Chamilo\PHPExcel;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -50,7 +50,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             }
         }
 
-        return \application\discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \Chamilo\Application\Discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
     }
 
     public function process_enrollments($contract_type = Enrollment :: CONTRACT_TYPE_ALL)
@@ -86,7 +86,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('ResultType');
         $headers[] = Translation :: get('GenerationStudent');
 
-        \application\discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+        \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
 
         $row = 2;
 
@@ -155,7 +155,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -163,6 +163,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

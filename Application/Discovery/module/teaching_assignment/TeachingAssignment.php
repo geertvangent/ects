@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\teaching_assignment;
+namespace Chamilo\Application\Discovery\Module\TeachingAssignment;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class TeachingAssignment extends DiscoveryItem
 {

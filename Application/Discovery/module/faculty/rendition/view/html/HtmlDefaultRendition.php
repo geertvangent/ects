@@ -1,8 +1,8 @@
 <?php
-namespace Application\Discovery\module\faculty\rendition\view\html;
+namespace Chamilo\Application\Discovery\Module\Faculty\Rendition\View\Html;
 
-use libraries\format\DynamicVisualTab;
-use libraries\format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Format\DynamicVisualTab;
+use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

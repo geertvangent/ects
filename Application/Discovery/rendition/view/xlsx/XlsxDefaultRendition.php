@@ -1,10 +1,10 @@
 <?php
-namespace Application\Discovery\rendition\view\xlsx;
+namespace Chamilo\Application\Discovery\Rendition\View\Xlsx;
 
-use libraries\file\Filesystem;
-use libraries\file\Path;
-use libraries\platform\translation\Translation;
-use libraries\utilities\StringUtilities;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class XlsxDefaultRendition extends XlsxRendition
 {
@@ -19,7 +19,7 @@ class XlsxDefaultRendition extends XlsxRendition
      * @param \PHPExcel $php_excel
      * @param multitype:string $headers
      */
-    public static function set_headers(\PHPExcel $php_excel, $headers, $row = 1)
+    public static function set_headers(\Chamilo\PHPExcel $php_excel, $headers, $row = 1)
     {
         $column = 0;
         
@@ -34,15 +34,15 @@ class XlsxDefaultRendition extends XlsxRendition
         }
         
         // Set styles
-        $range = 'A' . $row . ':' . \PHPExcel_Cell :: stringFromColumnIndex($column - 1) . $row;
-        $php_excel->getActiveSheet()->getStyle($range)->getFill()->setFillType(\PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB(
+        $range = 'A' . $row . ':' . \Chamilo\PHPExcel_Cell :: stringFromColumnIndex($column - 1) . $row;
+        $php_excel->getActiveSheet()->getStyle($range)->getFill()->setFillType(\Chamilo\PHPExcel_Style_Fill :: FILL_SOLID)->getStartColor()->setRGB(
             'c70d2f');
         $php_excel->getActiveSheet()->getStyle($range)->getFont()->getColor()->setRGB('FFFFFF');
         $php_excel->getActiveSheet()->getStyle($range)->getFont()->setName('DejaVu Serif');
         $php_excel->getActiveSheet()->getStyle($range)->getFont()->setBold(true);
         $php_excel->getActiveSheet()->getStyle($range)->getFont()->setSize(12);
         $php_excel->getActiveSheet()->getStyle($range)->getAlignment()->setHorizontal(
-            \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
+            \Chamilo\PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
     }
 
     /**
@@ -50,7 +50,7 @@ class XlsxDefaultRendition extends XlsxRendition
      * @param \PHPExcel $php_excel
      * @param string $type
      */
-    public static function save(\PHPExcel $php_excel, $module, $file_name = null)
+    public static function save(\Chamilo\PHPExcel $php_excel, $module, $file_name = null)
     {
         $php_excel->setActiveSheetIndex(0);
         
@@ -61,10 +61,10 @@ class XlsxDefaultRendition extends XlsxRendition
         else
         {
             if ($module->get_module_instance()->get_content_type() ==
-                 \application\discovery\instance\Instance :: TYPE_USER)
+                 \Chamilo\Application\Discovery\Instance\Instance :: TYPE_USER)
             {
                 $user_id = $module->get_module_parameters()->get_user_id();
-                $user = \core\user\DataManager :: retrieve_by_id(\core\user\User :: class_name(), (int) $user_id);
+                $user = \Chamilo\Core\User\DataManager :: retrieve_by_id(\Chamilo\Core\User\User :: class_name(), (int) $user_id);
                 
                 $file_name = $user->get_fullname() . ' ' .
                      Translation :: get('TypeName', null, $module->get_module_instance()->get_type()) . '.xlsx';
@@ -80,7 +80,7 @@ class XlsxDefaultRendition extends XlsxRendition
         
         if (Filesystem :: create_dir($path))
         {
-            $php_excel_writer = \PHPExcel_IOFactory :: createWriter($php_excel, 'Excel2007');
+            $php_excel_writer = \Chamilo\PHPExcel_IOFactory :: createWriter($php_excel, 'Excel2007');
             $php_excel_writer->save($file);
             
             $php_excel->disconnectWorksheets();
@@ -90,7 +90,7 @@ class XlsxDefaultRendition extends XlsxRendition
         }
         else
         {
-            throw new \Exception(Translation :: get('PathNotCreated', array('PATH' => $path)));
+            throw new \Chamilo\Exception(Translation :: get('PathNotCreated', array('PATH' => $path)));
         }
     }
 }

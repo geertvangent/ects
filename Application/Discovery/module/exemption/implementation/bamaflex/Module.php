@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\exemption\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Exemption\Implementation\Bamaflex;
 
-class Module extends \application\discovery\module\exemption\Module
+class Module extends \Chamilo\Application\Discovery\Module\Exemption\Module
 {
 
     private $cache_exemptions = array();

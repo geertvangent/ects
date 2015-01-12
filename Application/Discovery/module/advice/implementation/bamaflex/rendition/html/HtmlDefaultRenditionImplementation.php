@@ -1,17 +1,17 @@
 <?php
-namespace Application\Discovery\module\advice\implementation\bamaflex\rendition\html;
+namespace Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rendition\Html;
 
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
-use application\discovery\SortableTable;
-use libraries\utilities\DatetimeUtilities;
-use application\discovery\LegendTable;
-use libraries\platform\translation\Translation;
-use libraries\format\theme\Theme;
-use libraries\utilities\Utilities;
-use libraries\format\Display;
-use application\discovery\module\enrollment\DataManager;
-use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Utilities\DatetimeUtilities;
+use Chamilo\Application\Discovery\LegendTable;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -266,7 +266,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -274,6 +274,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

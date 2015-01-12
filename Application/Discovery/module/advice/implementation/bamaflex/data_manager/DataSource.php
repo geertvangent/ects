@@ -1,17 +1,17 @@
 <?php
-namespace Application\Discovery\module\advice\implementation\bamaflex\data_manager;
+namespace Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\storage\DoctrineConditionTranslator;
-use libraries\storage\AndCondition;
-use libraries\storage\NotCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\OrCondition;
-use application\discovery\module\enrollment\implementation\bamaflex\Enrollment;
-use libraries\storage\StaticColumnConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\NotCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
+use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
     private $advices;
@@ -26,7 +26,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     public function retrieve_advices($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
         if (! isset($this->advices[$person_id]))
         {
@@ -55,7 +55,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $advice = new Advice();
                     $advice->set_id($result->id);
@@ -86,7 +86,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
     public function count_advices($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \core\user\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
         
         $conditions = array();
         $conditions[] = new EqualityCondition(
@@ -109,7 +109,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             return $result->advices_count;
         }
         
@@ -126,7 +126,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
-            $user = \core\user\DataManager :: get_instance()->retrieve_user($id);
+            $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
             
             $condition = new EqualityCondition(
@@ -141,7 +141,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $enrollment = new Enrollment();
                     $enrollment->set_source($result->source);

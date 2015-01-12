@@ -1,17 +1,17 @@
 <?php
-namespace Application\Discovery\rights;
+namespace Chamilo\Application\Discovery\Rights;
 
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\InCondition;
-use libraries\storage\OrCondition;
-use libraries\platform\Session;
-use Exception;
-use libraries\storage\DataClassCountParameters;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
-use core\rights\UserEntity;
-use core\rights\PlatformGroupEntity;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Exception;
+use Chamilo\Libraries\Storage\DataClassCountParameters;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Core\Rights\UserEntity;
+use Chamilo\Core\Rights\PlatformGroupEntity;
 
 class UserBasedRights
 {
@@ -26,8 +26,8 @@ class UserBasedRights
     {
         try
         {
-            $current_user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+            $current_user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\User :: class_name(),
                 (int) Session :: get_user_id());
 
             if ($current_user->is_platform_admin())
@@ -35,8 +35,8 @@ class UserBasedRights
                 return true;
             }
 
-            $user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+            $user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\User :: class_name(),
                 (int) $parameters->get_user_id());
 
             $user_group_ids = $user->get_groups(true);

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\group_user;
+namespace Chamilo\Application\Discovery\Module\GroupUser;
 
-class Parameters extends \application\discovery\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Parameters
 {
 
     public function __construct($group_class_id)

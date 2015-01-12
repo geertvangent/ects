@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\enrollment;
+namespace Chamilo\Application\Discovery\Module\Enrollment;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class Enrollment extends DiscoveryItem
 {

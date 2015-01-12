@@ -1,19 +1,19 @@
 <?php
-namespace Application\Discovery\module\course\implementation\bamaflex\rendition\html;
+namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\Html;
 
-use libraries\utilities\StringUtilities;
-use application\discovery\SortableTable;
-use libraries\format\PropertiesTable;
-use libraries\format\structure\ToolbarItem;
-use application\discovery\LegendTable;
-use libraries\format\theme\Theme;
-use libraries\format\DynamicContentTab;
-use libraries\platform\translation\Translation;
-use libraries\format\DynamicTabsRenderer;
-use libraries\format\Display;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
-use application\discovery\AccessAllowedInterface;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Format\PropertiesTable;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Application\Discovery\LegendTable;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\DynamicContentTab;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Application\Discovery\AccessAllowedInterface;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -102,19 +102,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
 
-        $course_module_instance = \application\discovery\Module :: exists(
+        $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\course\implementation\bamaflex',
             array('data_source' => $data_source));
 
-        $faculty_info_module_instance = \application\discovery\Module :: exists(
+        $faculty_info_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\faculty_info\implementation\bamaflex',
             array('data_source' => $data_source));
 
-        $training_info_module_instance = \application\discovery\Module :: exists(
+        $training_info_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\training_info\implementation\bamaflex',
             array('data_source' => $data_source));
 
-        $teaching_assignment_module_instance = \application\discovery\Module :: exists(
+        $teaching_assignment_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\teaching_assignment\implementation\bamaflex',
             array('data_source' => $data_source));
 
@@ -130,8 +130,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $parameters = new Parameters($course_history->get_id(), $course_history->get_source());
 
-            $is_allowed = \application\discovery\module\course\implementation\bamaflex\Rights :: is_allowed(
-                \application\discovery\module\course\implementation\bamaflex\Rights :: VIEW_RIGHT,
+            $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
+                \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                 $course_module_instance->get_id(),
                 $parameters);
 
@@ -150,12 +150,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         if ($training_info_module_instance)
         {
-            $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters(
+            $parameters = new \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters(
                 $course->get_training_id(),
                 $course->get_source());
 
-            $is_allowed = \application\discovery\module\training_info\implementation\bamaflex\Rights :: is_allowed(
-                \application\discovery\module\training_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+            $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
+                \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                 $training_info_module_instance->get_id(),
                 $parameters);
 
@@ -177,12 +177,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         if ($faculty_info_module_instance)
         {
-            $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters(
+            $parameters = new \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Parameters(
                 $course->get_faculty_id(),
                 $course->get_source());
 
-            $is_allowed = \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: is_allowed(
-                \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+            $is_allowed = \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: is_allowed(
+                \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                 $faculty_info_module_instance->get_id(),
                 $parameters);
 
@@ -215,8 +215,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $parameters = new Parameters($child->get_id(), $child->get_source());
                 $child_url = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
 
-                $is_allowed = \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: is_allowed(
-                    \application\discovery\module\faculty_info\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                $is_allowed = \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: is_allowed(
+                    \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                     $course_module_instance->get_id(),
                     $parameters);
 
@@ -275,14 +275,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                     if ($coordinator->is_coordinator())
                     {
-                        $user = \core\user\DataManager :: retrieve_user_by_official_code($coordinator->get_person_id());
+                        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($coordinator->get_person_id());
                         if ($user)
                         {
-                            $parameters = new \application\discovery\module\teaching_assignment\Parameters(
+                            $parameters = new \Chamilo\Application\Discovery\Module\TeachingAssignment\Parameters(
                                 $user->get_id());
 
-                            $is_allowed = \application\discovery\module\teaching_assignment\implementation\bamaflex\Rights :: is_allowed(
-                                \application\discovery\module\teaching_assignment\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                            $is_allowed = \Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights :: is_allowed(
+                                \Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                                 $teaching_assignment_module_instance->get_id(),
                                 $parameters);
 
@@ -322,14 +322,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if (! $teacher->is_coordinator())
                     {
-                        $user = \core\user\DataManager :: retrieve_user_by_official_code($teacher->get_person_id());
+                        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($teacher->get_person_id());
                         if ($user)
                         {
-                            $parameters = new \application\discovery\module\teaching_assignment\Parameters(
+                            $parameters = new \Chamilo\Application\Discovery\Module\TeachingAssignment\Parameters(
                                 $user->get_id());
 
-                            $is_allowed = \application\discovery\module\teaching_assignment\implementation\bamaflex\Rights :: is_allowed(
-                                \application\discovery\module\teaching_assignment\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                            $is_allowed = \Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights :: is_allowed(
+                                \Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                                 $teaching_assignment_module_instance->get_id(),
                                 $parameters);
 
@@ -455,18 +455,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $properties[Translation :: get('FollowingPossible')] = implode(' ', $images);
 
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $photo_module_instance = \application\discovery\Module :: exists(
+        $photo_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\photo\implementation\bamaflex',
             array('data_source' => $data_source));
 
         if ($photo_module_instance)
         {
-            $parameters = new \application\discovery\module\photo\Parameters();
+            $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
             $parameters->set_programme_id($course->get_id());
-            $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_STUDENT);
+            $parameters->set_type(\Chamilo\Application\Discovery\Module\Photo\Module :: TYPE_STUDENT);
 
-            $is_allowed = \application\discovery\module\photo\implementation\bamaflex\Rights :: is_allowed(
-                \application\discovery\module\photo\implementation\bamaflex\Rights :: VIEW_RIGHT,
+            $is_allowed = \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: is_allowed(
+                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                 $photo_module_instance->get_id(),
                 $parameters);
 
@@ -492,9 +492,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     Translation :: get('TypeName', null, 'application\discovery\module\photo'));
 
                 // teachers
-                $parameters = new \application\discovery\module\photo\Parameters();
+                $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
                 $parameters->set_programme_id($course->get_id());
-                $parameters->set_type(\application\discovery\module\photo\Module :: TYPE_TEACHER);
+                $parameters->set_type(\Chamilo\Application\Discovery\Module\Photo\Module :: TYPE_TEACHER);
 
                 $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
 
@@ -565,17 +565,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $properties[Translation :: get('Photos')] = implode("\n", $buttons);
         }
 
-        $course_result_module_instance = \application\discovery\Module :: exists(
+        $course_result_module_instance = \Chamilo\Application\Discovery\Module :: exists(
             'application\discovery\module\course_results\implementation\bamaflex',
             array('data_source' => $data_source));
         if ($course_result_module_instance)
         {
-            $parameters = new \application\discovery\module\course_results\implementation\bamaflex\Parameters(
+            $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
                 $course->get_id(),
                 $course->get_source());
 
-            $is_allowed = \application\discovery\module\course_results\implementation\bamaflex\Rights :: is_allowed(
-                \application\discovery\module\course_results\implementation\bamaflex\Rights :: VIEW_RIGHT,
+            $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
+                \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                 $course_result_module_instance->get_id(),
                 $parameters);
 
@@ -1197,7 +1197,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $quotation_parts = array();
 
             $data_source = $this->get_module_instance()->get_setting('data_source');
-            $course_module_instance = \application\discovery\Module :: exists(
+            $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
                 'application\discovery\module\course\implementation\bamaflex',
                 array('data_source' => $data_source));
 
@@ -1205,8 +1205,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $parameters = new Parameters($child->get_id(), $child->get_source());
 
-                $is_allowed = \application\discovery\module\course\implementation\bamaflex\Rights :: is_allowed(
-                    \application\discovery\module\course\implementation\bamaflex\Rights :: VIEW_RIGHT,
+                $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
+                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
                     $course_module_instance->get_id(),
                     $parameters);
 
@@ -1313,7 +1313,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
 
     /*
@@ -1321,6 +1321,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\person\rendition\format;
+namespace Chamilo\Application\Discovery\Module\Person\Rendition\Format;
 
 class XlsxRendition extends Rendition
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\gallery_browser;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser;
 
-use application\discovery\module\photo\DataManager;
+use Chamilo\Application\Discovery\Module\Photo\DataManager;
 
 class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
 {
@@ -14,7 +14,7 @@ class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
         $this->browser = $browser;
     }
 
-    public function get_cell_content(\core\user\User $user)
+    public function get_cell_content(\Chamilo\Core\User\User $user)
     {
         $photo = DataManager :: get_instance($this->browser->get_module_instance())->retrieve_photo(
             $user->get_official_code());

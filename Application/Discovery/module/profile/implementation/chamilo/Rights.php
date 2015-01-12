@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\chamilo;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Chamilo;
 
-use application\discovery\UserBasedRights;
+use Chamilo\Application\Discovery\UserBasedRights;
 
 class Rights extends UserBasedRights
 {

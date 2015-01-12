@@ -1,19 +1,19 @@
 <?php
-namespace Application\Discovery\module\profile\implementation\bamaflex\data_manager;
+namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\storage\DoctrineConditionTranslator;
-use libraries\storage\EqualityCondition;
-use application\discovery\module\profile\Photo;
-use application\discovery\module\profile\Communication;
-use application\discovery\module\profile\Email;
-use application\discovery\module\profile\IdentificationCode;
-use application\discovery\module\profile\Name;
-use stdClass;
-use libraries\storage\StaticColumnConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Application\Discovery\Module\Profile\Photo;
+use Chamilo\Application\Discovery\Module\Profile\Communication;
+use Chamilo\Application\Discovery\Module\Profile\Email;
+use Chamilo\Application\Discovery\Module\Profile\IdentificationCode;
+use Chamilo\Application\Discovery\Module\Profile\Name;
+use Chamilo\StdClass;
+use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
     /**
@@ -23,7 +23,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
      */
     public function retrieve_profile($parameters)
     {
-        $user = \core\user\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();
         
         $condition = new EqualityCondition(
@@ -37,7 +37,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            $object = $statement->fetch(\PDO :: FETCH_OBJ);
+            $object = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             
             $name = new Name();
             $name->set_first_name($this->convert_to_utf8($object->first_name));
@@ -87,7 +87,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
 
     public function has_profile($parameters)
     {
-        $user = \core\user\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
         $official_code = $user->get_official_code();
         
         $condition = new EqualityCondition(
@@ -100,7 +100,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         $statement = $this->get_connection()->query($query);
         if ($statement instanceof PDOStatement)
         {
-            $object = $statement->fetch(\PDO :: FETCH_OBJ);
+            $object = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             return $object->profile_count;
         }
         return 0;
@@ -122,7 +122,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
             {
                 $email = new Email();
                 $email->set_address($this->convert_to_utf8($result->address));
@@ -154,7 +154,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
             {
                 $credit = new LearningCredit();
                 $credit->set_id($result->id);
@@ -185,7 +185,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
             {
                 $communication = new Communication();
                 $communication->set_number($this->convert_to_utf8($result->number));
@@ -216,7 +216,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
             {
                 $address = new Address();
                 $address->set_type($result->type);
@@ -253,7 +253,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            $object = $statement->fetch(\PDO :: FETCH_OBJ);
+            $object = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             
             $photo = new Photo();
             $photo->set_mime_type('image/jpeg');
@@ -278,7 +278,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            $object = $statement->fetch(\PDO :: FETCH_OBJ);
+            $object = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             
             if ($object instanceof stdClass)
             {
@@ -313,7 +313,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            $object = $statement->fetch(\PDO :: FETCH_OBJ);
+            $object = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
             
             if ($object instanceof stdClass)
             {
@@ -354,7 +354,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
             {
                 $nationality = new Nationality();
                 $nationality->set_type($result->type);

@@ -1,19 +1,19 @@
 <?php
-namespace Application\Discovery\module\group\implementation\bamaflex\data_manager;
+namespace Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
-use libraries\storage\DoctrineConditionTranslator;
-use libraries\storage\AndCondition;
-use libraries\utilities\Utilities;
-use application\discovery\data_source\bamaflex\History;
-use libraries\storage\EqualityCondition;
-use application\discovery\data_source\bamaflex\HistoryReference;
-use application\discovery\module\training\implementation\bamaflex\Training;
-use libraries\storage\StaticColumnConditionVariable;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
+use Chamilo\Libraries\Storage\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
-class DataSource extends \application\discovery\data_source\bamaflex\DataSource
+class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
     private $groups;
@@ -47,7 +47,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $group = new Group();
                     $group->set_id($result->id);
@@ -89,7 +89,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
             
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ))
                 {
                     $training = new Training();
                     $training->set_source($result->source);
@@ -120,7 +120,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                         new StaticConditionVariable(Utilities :: get_namespace_from_object($training)));
                     $condition = new AndCondition($conditions);
                     
-                    $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
+                    $histories = \Chamilo\Application\Discovery\DataSource\Bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
                         $condition);
                     
                     if ($histories->size() > 0)
@@ -157,7 +157,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
                         new StaticConditionVariable(Utilities :: get_namespace_from_object($training)));
                     $condition = new AndCondition($conditions);
                     
-                    $histories = \application\discovery\data_source\bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
+                    $histories = \Chamilo\Application\Discovery\DataSource\Bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
                         $condition);
                     if ($histories->size() > 0)
                     {
@@ -207,7 +207,7 @@ class DataSource extends \application\discovery\data_source\bamaflex\DataSource
         
         if ($statement instanceof PDOStatement)
         {
-            return $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            return $result = $statement->fetch(\Chamilo\PDO :: FETCH_OBJ);
         }
         else
         {

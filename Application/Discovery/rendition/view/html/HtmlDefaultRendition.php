@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\rendition\view\html;
+namespace Chamilo\Application\Discovery\Rendition\View\Html;
 
-use libraries\utilities\Utilities;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\BreadcrumbTrail;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
 
 class HtmlDefaultRendition extends HtmlRendition
 {
@@ -15,12 +15,12 @@ class HtmlDefaultRendition extends HtmlRendition
         return '';
     }
 
-    public static function add_export_action(\application\discovery\RenditionImplementation $rendition_implementation, 
-        $type = \application\discovery\HtmlRendition :: VIEW_XLSX)
+    public static function add_export_action(\Chamilo\Application\Discovery\RenditionImplementation $rendition_implementation, 
+        $type = \Chamilo\Application\Discovery\HtmlRendition :: VIEW_XLSX)
     {
         $export_parameters = array_merge(
             $rendition_implementation->get_module_parameters()->get_parameters(), 
-            array(\application\discovery\Manager :: PARAM_VIEW => $type));
+            array(\Chamilo\Application\Discovery\Manager :: PARAM_VIEW => $type));
         $url = $rendition_implementation->get_context()->get_url($export_parameters);
         
         BreadcrumbTrail :: get_instance()->add_extra(

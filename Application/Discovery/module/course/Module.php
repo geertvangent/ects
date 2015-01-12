@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\course;
+namespace Chamilo\Application\Discovery\Module\Course;
 
-use libraries\file\Path;
-use libraries\file\Filesystem;
-use libraries\platform\Request;
-use application\discovery\instance\Instance;
-use application\discovery\module\course\DataManager;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Application\Discovery\Module\Course\DataManager;
 
-abstract class Module extends \application\discovery\Module
+abstract class Module extends \Chamilo\Application\Discovery\Module
 {
     const PARAM_PROGRAMME_ID = 'programme_id';
 

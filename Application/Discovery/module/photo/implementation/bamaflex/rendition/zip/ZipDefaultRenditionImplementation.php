@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\rendition\zip;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\Zip;
 
-use libraries\platform\translation\Translation;
-use libraries\file\Filesystem;
-use application\discovery\module\photo\DataManager;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\file\Path;
-use libraries\platform\Session;
-use libraries\format\Display;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Application\Discovery\Module\Photo\DataManager;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Libraries\Format\Display;
 
 class ZipDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -31,7 +31,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
         $this->prepare_file_system();
         
         $parameters = new DataClassRetrievesParameters($this->get_module()->get_condition());
-        $users = \core\user\DataManager :: retrieves(\core\user\User :: class_name(), $parameters);
+        $users = \Chamilo\Core\User\DataManager :: retrieves(\Chamilo\Core\User\User :: class_name(), $parameters);
         
         while ($user = $users->next_result())
         {
@@ -44,7 +44,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
             Filesystem :: copy_file($photo, $file);
         }
         
-        return \application\discovery\ZipDefaultRendition :: save($this->temporary_directory, $this->get_file_name());
+        return \Chamilo\Application\Discovery\ZipDefaultRendition :: save($this->temporary_directory, $this->get_file_name());
     }
 
     public function get_file_name()
@@ -140,7 +140,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
     }
     
     /*
@@ -148,6 +148,6 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

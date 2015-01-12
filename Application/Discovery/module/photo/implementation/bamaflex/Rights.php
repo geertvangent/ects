@@ -1,18 +1,18 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex;
 
-use libraries\storage\AndCondition;
-use libraries\storage\EqualityCondition;
-use libraries\storage\InCondition;
-use libraries\storage\OrCondition;
-use libraries\platform\Session;
-use application\discovery\RightsGroupEntityRight;
-use Exception;
-use libraries\storage\DataClassRetrievesParameters;
-use core\rights\PlatformGroupEntity;
-use core\rights\UserEntity;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\OrCondition;
+use Chamilo\Libraries\Platform\Session;
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
+use Chamilo\Exception;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Core\Rights\PlatformGroupEntity;
+use Chamilo\Core\Rights\UserEntity;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 class Rights
 {
@@ -27,8 +27,8 @@ class Rights
     {
         try
         {
-            $current_user = \core\user\DataManager :: retrieve_by_id(
-                \core\user\User :: class_name(),
+            $current_user = \Chamilo\Core\User\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\User :: class_name(),
                 (int) Session :: get_user_id());
 
             if ($current_user->is_platform_admin())
@@ -44,10 +44,10 @@ class Rights
             }
             elseif ($parameters->get_training_id())
             {
-                $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
-                    \application\discovery\instance\Instance :: class_name(),
+                $module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
+                    \Chamilo\Application\Discovery\Instance\Instance :: class_name(),
                     (int) $module_instance_id);
-                $training = \application\discovery\module\photo\DataManager :: get_instance($module_instance)->retrieve_training(
+                $training = \Chamilo\Application\Discovery\Module\Photo\DataManager :: get_instance($module_instance)->retrieve_training(
                     $parameters->get_training_id());
 
                 $codes[] = 'DEP_' . $training->get_faculty_id();
@@ -56,10 +56,10 @@ class Rights
             }
             elseif ($parameters->get_programme_id())
             {
-                $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
-                    \application\discovery\instance\Instance :: class_name(),
+                $module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
+                    \Chamilo\Application\Discovery\Instance\Instance :: class_name(),
                     (int) $module_instance_id);
-                $course = \application\discovery\module\photo\DataManager :: get_instance($module_instance)->retrieve_programme(
+                $course = \Chamilo\Application\Discovery\Module\Photo\DataManager :: get_instance($module_instance)->retrieve_programme(
                     $parameters->get_programme_id());
 
                 $codes[] = 'DEP_' . $course->get_faculty_id();
@@ -72,11 +72,11 @@ class Rights
             }
 
             $condition = new InCondition(
-                new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_CODE),
+                new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_CODE),
                 $codes);
 
-            $groups = \core\group\DataManager :: retrieves(
-                \core\group\Group :: class_name(),
+            $groups = \Chamilo\Core\Group\DataManager :: retrieves(
+                \Chamilo\Core\Group\Group :: class_name(),
                 new DataClassRetrievesParameters($condition));
 
             if ($groups->size() > 0)
@@ -131,7 +131,7 @@ class Rights
                 $conditions[] = new OrCondition($entities_conditions);
                 $condition = new AndCondition($conditions);
 
-                $count = \application\discovery\DataManager :: get_instance()->count_rights_group_entity_rights(
+                $count = \Chamilo\Application\Discovery\DataManager :: get_instance()->count_rights_group_entity_rights(
                     $condition);
 
                 if ($count > 0)

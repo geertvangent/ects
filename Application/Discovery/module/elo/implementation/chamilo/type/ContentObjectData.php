@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo\type;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type;
 
 class ContentObjectData extends TypeData
 {

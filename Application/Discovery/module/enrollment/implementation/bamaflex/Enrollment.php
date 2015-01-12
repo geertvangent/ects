@@ -1,10 +1,10 @@
 <?php
-namespace Application\Discovery\module\enrollment\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex;
 
-use libraries\platform\translation\Translation;
-use application\discovery\module\career\DataManager;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Application\Discovery\Module\Career\DataManager;
 
-class Enrollment extends \application\discovery\module\enrollment\Enrollment
+class Enrollment extends \Chamilo\Application\Discovery\Module\Enrollment\Enrollment
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_SOURCE = 'source';

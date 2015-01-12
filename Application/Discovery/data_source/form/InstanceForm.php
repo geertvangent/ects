@@ -1,14 +1,14 @@
 <?php
-namespace Application\Discovery\data_source\form;
+namespace Chamilo\Application\Discovery\DataSource\Form;
 
-use libraries\format\form\FormValidator;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use libraries\format\theme\Theme;
-use libraries\file\Path;
-use libraries\format\DynamicFormTabsRenderer;
-use libraries\format\DynamicFormTab;
-use DOMDocument;
+use Chamilo\Libraries\Format\Form\FormValidator;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\DynamicFormTabsRenderer;
+use Chamilo\Libraries\Format\DynamicFormTab;
+use Chamilo\DOMDocument;
 
 class InstanceForm extends FormValidator
 {

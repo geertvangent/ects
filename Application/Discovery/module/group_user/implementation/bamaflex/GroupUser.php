@@ -1,8 +1,8 @@
 <?php
-namespace Application\Discovery\module\group_user\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex;
 
-use application\discovery\DiscoveryItem;
-use libraries\utilities\Utilities;
+use Chamilo\Application\Discovery\DiscoveryItem;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.group_user.implementation.bamaflex

@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\student_materials;
+namespace Chamilo\Application\Discovery\Module\StudentMaterials;
 
-use libraries\utilities\Utilities;
-use libraries\storage\data_class\DataClass;
-use application\discovery\module\career\Mark;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Application\Discovery\Module\Career\Mark;
 
 /**
  * application.discovery.module.career.discovery

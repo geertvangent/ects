@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\cas\implementation\doctrine;
+namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
-use libraries\file\Filesystem;
-use libraries\file\Path;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
 
 //
-class Module extends \application\discovery\module\cas\Module
+class Module extends \Chamilo\Application\Discovery\Module\Cas\Module
 {
 
     private $action_statistics;

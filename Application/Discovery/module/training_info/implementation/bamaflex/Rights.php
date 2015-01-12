@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\training_info\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex;
 
-use application\discovery\module\training_info\DataManager;
-use application\discovery\TrainingBasedRights;
-use application\discovery\TrainingBasedContext;
+use Chamilo\Application\Discovery\Module\TrainingInfo\DataManager;
+use Chamilo\Application\Discovery\TrainingBasedRights;
+use Chamilo\Application\Discovery\TrainingBasedContext;
 
 class Rights extends TrainingBasedRights
 {
@@ -12,12 +12,12 @@ class Rights extends TrainingBasedRights
      */
     public function get_context($module_instance_id, $parameters)
     {
-        $parameter = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
+        $parameter = new \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters();
         $parameter->set_training_id($parameters->get_training_id());
         $parameter->set_source($parameters->get_source());
         
-        $module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
-            \application\discovery\instance\Instance :: class_name(), 
+        $module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
+            \Chamilo\Application\Discovery\Instance\Instance :: class_name(), 
             (int) $module_instance_id);
         $training = DataManager :: get_instance($module_instance)->retrieve_training($parameter);
         

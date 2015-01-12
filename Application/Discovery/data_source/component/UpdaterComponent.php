@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\data_source\component;
+namespace Chamilo\Application\Discovery\DataSource\Component;
 
-use libraries\platform\Request;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class UpdaterComponent extends Manager
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\group_user\rendition\view\html;
+namespace Chamilo\Application\Discovery\Module\GroupUser\Rendition\View\Html;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

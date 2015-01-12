@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\cas\implementation\doctrine;
+namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
-use application\discovery\UserBasedRights;
+use Chamilo\Application\Discovery\UserBasedRights;
 
 class Rights extends UserBasedRights
 {

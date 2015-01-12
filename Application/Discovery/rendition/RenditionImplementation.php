@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\rendition;
+namespace Chamilo\Application\Discovery\Rendition;
 
-use libraries\utilities\Utilities;
+use Chamilo\Libraries\Utilities\Utilities;
 
 abstract class RenditionImplementation extends AbstractRenditionImplementation
 {

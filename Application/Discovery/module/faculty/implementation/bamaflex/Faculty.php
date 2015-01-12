@@ -1,10 +1,10 @@
 <?php
-namespace Application\Discovery\module\faculty\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex;
 
-use application\discovery\data_source\bamaflex\HistoryReference;
-use application\discovery\module\faculty\DataManager;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Chamilo\Application\Discovery\Module\Faculty\DataManager;
 
-class Faculty extends \application\discovery\module\faculty\Faculty
+class Faculty extends \Chamilo\Application\Discovery\Module\Faculty\Faculty
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_SOURCE = 'source';
@@ -54,7 +54,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         {
             foreach ($this->get_previous_references() as $previous_reference)
             {
-                $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters();
+                $parameters = new \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Parameters();
                 $parameters->set_faculty_id($previous_reference->get_id());
                 $parameters->set_source($previous_reference->get_source());
                 
@@ -86,7 +86,7 @@ class Faculty extends \application\discovery\module\faculty\Faculty
         {
             foreach ($this->get_next_references() as $next_reference)
             {
-                $parameters = new \application\discovery\module\faculty_info\implementation\bamaflex\Parameters();
+                $parameters = new \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Parameters();
                 $parameters->set_faculty_id($next_reference->get_id());
                 $parameters->set_source($next_reference->get_source());
                 

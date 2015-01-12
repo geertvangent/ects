@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\profile;
+namespace Chamilo\Application\Discovery\Module\Profile;
 
-use libraries\file\Path;
-use libraries\file\Filesystem;
-use libraries\platform\Request;
-use application\discovery\instance\Instance;
-use application\discovery\module\profile\DataManager;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Application\Discovery\Module\Profile\DataManager;
 
-class Module extends \application\discovery\Module
+class Module extends \Chamilo\Application\Discovery\Module
 {
 
     /**

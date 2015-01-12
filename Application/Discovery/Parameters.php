@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery;
+namespace Chamilo\Application\Discovery;
 
 class Parameters
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\elo\implementation\chamilo\rendition\xlsx;
+namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\Xlsx;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -9,7 +9,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -17,6 +17,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

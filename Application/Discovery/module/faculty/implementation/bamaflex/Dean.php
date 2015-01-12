@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\faculty\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex;
 
-use application\discovery\DiscoveryItem;
+use Chamilo\Application\Discovery\DiscoveryItem;
 
 class Dean extends DiscoveryItem
 {

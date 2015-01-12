@@ -1,9 +1,9 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\user_browser;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\UserBrowser;
 
-use libraries\format\structure\Toolbar;
-use libraries\format\TableColumnModelActionsColumnSupport;
-use libraries\format\TableCellRenderer;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\TableCellRenderer;
 
 /**
  * $Id: user_browser_table_cell_renderer.class.php 211 2009-11-13 13:28:39Z vanpouckesven $

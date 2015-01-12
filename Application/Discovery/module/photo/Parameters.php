@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\photo;
+namespace Chamilo\Application\Discovery\Module\Photo;
 
-class Parameters extends \application\discovery\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Parameters
 {
 
     public function __construct($faculty_id = null, $training_id = null, $programme_id = null, $type = null)

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\rendition;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition;
 
-abstract class RenditionImplementation extends \application\discovery\RenditionImplementation
+abstract class RenditionImplementation extends \Chamilo\Application\Discovery\RenditionImplementation
 {
 
     public function get_student_years()

@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\rendition\html;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rendition\Html;
 
 class HtmlXlsxRenditionImplementation extends RenditionImplementation
 {
 
     public function render()
     {
-        \application\discovery\Rendition :: launch($this);
+        \Chamilo\Application\Discovery\Rendition :: launch($this);
     }
     
     /*
@@ -14,7 +14,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -22,6 +22,6 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\HtmlRendition :: VIEW_XLSX;
+        return \Chamilo\Application\Discovery\HtmlRendition :: VIEW_XLSX;
     }
 }

@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\module\student_year\implementation\bamaflex\rendition\html;
+namespace Chamilo\Application\Discovery\Module\StudentYear\Implementation\Bamaflex\Rendition\Html;
 
-use application\discovery\SortableTable;
-use libraries\platform\translation\Translation;
-use libraries\format\Display;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -67,7 +67,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -75,6 +75,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

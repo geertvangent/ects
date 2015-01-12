@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\person;
+namespace Chamilo\Application\Discovery\Module\Person;
 
 /**
  *

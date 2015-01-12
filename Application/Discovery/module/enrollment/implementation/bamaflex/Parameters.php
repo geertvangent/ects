@@ -1,6 +1,6 @@
 <?php
-namespace Application\Discovery\module\enrollment\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex;
 
-class Parameters extends \application\discovery\module\enrollment\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Module\Enrollment\Parameters
 {
 }

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\data_source;
+namespace Chamilo\Application\Discovery\DataSource;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

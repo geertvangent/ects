@@ -1,7 +1,7 @@
 <?php
-namespace Application\Discovery\module\course_results\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex;
 
-class Parameters extends \application\discovery\module\course_results\Parameters
+class Parameters extends \Chamilo\Application\Discovery\Module\CourseResults\Parameters
 {
 
     public function __construct($programme_id, $source)

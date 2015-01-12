@@ -1,8 +1,8 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\user_browser;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\UserBrowser;
 
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\format\TableDataProvider;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Format\TableDataProvider;
 
 /**
  * $Id: user_browser_table_data_provider.class.php 211 2009-11-13 13:28:39Z vanpouckesven $
@@ -21,7 +21,7 @@ class UserBrowserTableDataProvider extends TableDataProvider
         $order_property = $this->get_order_property($order_property);
 
         $parameters = new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property);
-        return \core\user\DataManager :: retrieves(\core\user\User :: class_name(), $parameters);
+        return \Chamilo\Core\User\DataManager :: retrieves(\Chamilo\Core\User\User :: class_name(), $parameters);
     }
 
     /**
@@ -31,6 +31,6 @@ class UserBrowserTableDataProvider extends TableDataProvider
      */
     public function count_data($condition)
     {
-        return \core\user\DataManager :: count(\core\user\User :: class_name(), $this->get_condition());
+        return \Chamilo\Core\User\DataManager :: count(\Chamilo\Core\User\User :: class_name(), $this->get_condition());
     }
 }

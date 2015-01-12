@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\data_manager;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\DataManager;
 
 class DataSource
 {
@@ -10,11 +10,11 @@ class DataSource
      */
     public function retrieve_persons($condition, $offset, $count, $order_by)
     {
-        return \core\user\DataManager :: get_instance()->retrieve_users($condition, $offset, $count, $order_by);
+        return \Chamilo\Core\User\DataManager :: get_instance()->retrieve_users($condition, $offset, $count, $order_by);
     }
 
     public function count_persons($condition)
     {
-        return \core\user\DataManager :: get_instance()->count_users($condition);
+        return \Chamilo\Core\User\DataManager :: get_instance()->count_users($condition);
     }
 }

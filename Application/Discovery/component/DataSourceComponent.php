@@ -1,11 +1,11 @@
 <?php
-namespace Application\Discovery\component;
+namespace Chamilo\Application\Discovery\Component;
 
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\BreadcrumbTrail;
-use application\discovery\instance\Instance;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Application\Discovery\Instance\Instance;
 
 class DataSourceComponent extends Manager
 {
@@ -41,8 +41,8 @@ class DataSourceComponent extends Manager
                 Theme :: get_image_path() . 'action_information.png', 
                 $link));
         
-        \libraries\architecture\Application :: launch(
-            \application\discovery\data_source\Manager :: context(), 
+        \Chamilo\Libraries\Architecture\Application :: launch(
+            \Chamilo\Application\Discovery\DataSource\Manager :: context(), 
             $this->get_user(), 
             $this);
     }

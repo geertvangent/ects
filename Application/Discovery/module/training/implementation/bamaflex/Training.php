@@ -1,10 +1,10 @@
 <?php
-namespace Application\Discovery\module\training\implementation\bamaflex;
+namespace Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex;
 
-use application\discovery\module\training\DataManager;
-use application\discovery\data_source\bamaflex\HistoryReference;
+use Chamilo\Application\Discovery\Module\Training\DataManager;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
 
-class Training extends \application\discovery\module\training\Training
+class Training extends \Chamilo\Application\Discovery\Module\Training\Training
 {
     const CLASS_NAME = __CLASS__;
     const PROPERTY_SOURCE = 'source';
@@ -463,7 +463,7 @@ class Training extends \application\discovery\module\training\Training
         {
             foreach ($this->get_previous_references() as $previous_reference)
             {
-                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
+                $parameters = new \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters();
                 $parameters->set_training_id($previous_reference->get_id());
                 $parameters->set_source($previous_reference->get_source());
                 
@@ -496,7 +496,7 @@ class Training extends \application\discovery\module\training\Training
         {
             foreach ($this->get_next_references() as $next_reference)
             {
-                $parameters = new \application\discovery\module\training_info\implementation\bamaflex\Parameters();
+                $parameters = new \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters();
                 $parameters->set_training_id($next_reference->get_id());
                 $parameters->set_source($next_reference->get_source());
                 

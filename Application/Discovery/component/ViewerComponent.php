@@ -1,23 +1,23 @@
 <?php
-namespace Application\Discovery\component;
+namespace Chamilo\Application\Discovery\Component;
 
-use libraries\architecture\DelegateComponent;
-use libraries\format\Breadcrumb;
-use libraries\format\Display;
-use libraries\platform\translation\Translation;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\BreadcrumbTrail;
-use libraries\storage\EqualityCondition;
-use libraries\format\theme\Theme;
-use libraries\format\DynamicVisualTab;
-use libraries\format\DynamicVisualTabsRenderer;
-use libraries\platform\Request;
-use libraries\storage\DataClassRetrieveParameters;
-use application\discovery\instance\Instance;
-use libraries\storage\DataClassRetrievesParameters;
-use libraries\storage\OrderBy;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\DynamicVisualTab;
+use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Storage\DataClassRetrieveParameters;
+use Chamilo\Application\Discovery\Instance\Instance;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 /**
  *
@@ -55,7 +55,7 @@ class ViewerComponent extends Manager implements DelegateComponent
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_CONTENT_TYPE),
                 new StaticConditionVariable($module_content_type));
-            $current_module_instance = \application\discovery\instance\DataManager :: retrieve(
+            $current_module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve(
                 Instance :: class_name(),
                 new DataClassRetrieveParameters($condition, $order_by));
 
@@ -71,7 +71,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         }
         else
         {
-            $current_module_instance = \application\discovery\instance\DataManager :: retrieve_by_id(
+            $current_module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
                 Instance :: class_name(),
                 (int) $module_id);
             $module_content_type = $current_module_instance->get_content_type();
@@ -133,7 +133,7 @@ class ViewerComponent extends Manager implements DelegateComponent
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_CONTENT_TYPE),
                 new StaticConditionVariable($current_module_instance->get_content_type()));
-            $module_instances = \application\discovery\instance\DataManager :: retrieves(
+            $module_instances = \Chamilo\Application\Discovery\Instance\DataManager :: retrieves(
                 Instance :: class_name(),
                 new DataClassRetrievesParameters($condition, null, null, $order_by));
 
@@ -192,7 +192,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         if ($current_module_instance->get_content_type() == Instance :: TYPE_USER)
         {
             $user_id = $module_parameters->get_user_id();
-            $user = \core\user\DataManager :: retrieve_by_id(\core\user\User :: class_name(), (int) $user_id);
+            $user = \Chamilo\Core\User\DataManager :: retrieve_by_id(\Chamilo\Core\User\User :: class_name(), (int) $user_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $user->get_fullname()));
         }
 

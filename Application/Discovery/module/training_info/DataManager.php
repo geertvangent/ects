@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\module\training_info;
+namespace Chamilo\Application\Discovery\Module\TrainingInfo;
 
 /**
  *

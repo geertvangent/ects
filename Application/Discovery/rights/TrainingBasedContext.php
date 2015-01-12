@@ -1,5 +1,5 @@
 <?php
-namespace Application\Discovery\rights;
+namespace Chamilo\Application\Discovery\Rights;
 
 class TrainingBasedContext
 {

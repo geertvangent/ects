@@ -1,13 +1,13 @@
 <?php
-namespace Application\Discovery\module\photo\implementation\bamaflex\rendition\html;
+namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\Html;
 
-use libraries\platform\translation\Translation;
-use libraries\format\Breadcrumb;
-use libraries\format\BreadcrumbTrail;
-use libraries\platform\Request;
-use libraries\format\Display;
-use application\discovery\module\photo\DataManager;
-use application\discovery\AccessAllowedInterface;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Format\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Application\Discovery\Module\Photo\DataManager;
+use Chamilo\Application\Discovery\AccessAllowedInterface;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -18,8 +18,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         
         $parameters = $this->get_application()->get_parameters();
         $parameters = array_merge($parameters, $this->get_module_parameters()->get_parameters());
-        $parameters[\application\discovery\Manager :: PARAM_MODULE_ID] = Request :: get(
-            \application\discovery\Manager :: PARAM_MODULE_ID);
+        $parameters[\Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID] = Request :: get(
+            \Chamilo\Application\Discovery\Manager :: PARAM_MODULE_ID);
         
         $application_is_allowed = $this->get_application() instanceof AccessAllowedInterface;
         
@@ -31,9 +31,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             Display :: not_allowed();
         }
         
-        \application\discovery\HtmlDefaultRendition :: add_export_action(
+        \Chamilo\Application\Discovery\HtmlDefaultRendition :: add_export_action(
             $this, 
-            \application\discovery\HtmlRendition :: VIEW_ZIP);
+            \Chamilo\Application\Discovery\HtmlRendition :: VIEW_ZIP);
         
         $table = new GalleryBrowserTable($this, $parameters, $this->get_module()->get_condition());
         return $table->as_html();
@@ -117,7 +117,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \application\discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -125,6 +125,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \application\discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
     }
 }

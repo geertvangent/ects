@@ -1,20 +1,20 @@
 <?php
-namespace Application\Discovery\instance\component;
+namespace Chamilo\Application\Discovery\Instance\Component;
 
-use libraries\format\DynamicVisualTab;
-use libraries\format\DynamicVisualTabsRenderer;
-use libraries\platform\Request;
-use libraries\storage\EqualityCondition;
-use libraries\platform\translation\Translation;
-use libraries\format\ActionBarRenderer;
-use libraries\format\ActionBarSearchForm;
-use libraries\format\structure\ToolbarItem;
-use libraries\format\theme\Theme;
-use libraries\storage\AndCondition;
-use libraries\storage\PatternMatchCondition;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\PropertyConditionVariable;
-use libraries\format\TableSupport;
+use Chamilo\Libraries\Format\DynamicVisualTab;
+use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Platform\Request;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Format\ActionBarRenderer;
+use Chamilo\Libraries\Format\ActionBarSearchForm;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Format\TableSupport;
 
 class BrowserComponent extends Manager implements TableSupport
 {
@@ -139,7 +139,7 @@ class BrowserComponent extends Manager implements TableSupport
                 Theme :: get_common_image_path() . 'action_config.png',
                 $this->get_url(
                     array(
-                        \application\discovery\Manager :: PARAM_ACTION => \application\discovery\Manager :: ACTION_DATA_SOURCE,
+                        \Chamilo\Application\Discovery\Manager :: PARAM_ACTION => \Chamilo\Application\Discovery\Manager :: ACTION_DATA_SOURCE,
                         self :: PARAM_ACTION => null)),
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
 

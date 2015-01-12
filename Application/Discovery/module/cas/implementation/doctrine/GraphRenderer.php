@@ -1,12 +1,12 @@
 <?php
-namespace Application\Discovery\module\cas\implementation\doctrine;
+namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
-use application\discovery\SortableTable;
-use application\discovery\module\cas\DataManager;
-use libraries\file\Filesystem;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\file\Path;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Application\Discovery\Module\Cas\DataManager;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\File\Path;
 
 require_once Path :: get_plugin_path() . '/pChart/pChart/pChart.class.php';
 require_once Path :: get_plugin_path() . '/pChart/pChart/pData.class.php';
@@ -88,7 +88,7 @@ class GraphRenderer
             }
             $font = Path :: get_plugin_path() . 'pChart/Fonts/tahoma.ttf';
             
-            $graph = new \pChart(840, 490);
+            $graph = new \Chamilo\PChart(840, 490);
             $graph->reportWarnings();
             $graph->loadColorPalette(Path :: get(SYS_LAYOUT_PATH) . Theme :: get_theme() . '/plugin/pchart/tones.txt');
             $graph->setFontProperties($font, 8);

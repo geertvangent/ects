@@ -1,8 +1,8 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\group_rel_user_browser;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupRelUserBrowser;
 
-use core\group\GroupRelUserTableColumnModel;
-use libraries\format\TableColumnModelActionsColumnSupport;
+use Chamilo\Core\Group\GroupRelUserTableColumnModel;
+use Chamilo\Libraries\Format\TableColumnModelActionsColumnSupport;
 
 class GroupRelUserBrowserTableColumnModel extends GroupRelUserTableColumnModel implements
     TableColumnModelActionsColumnSupport

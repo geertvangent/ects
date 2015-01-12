@@ -1,18 +1,18 @@
 <?php
-namespace Application\Discovery\module\person\implementation\chamilo\menu;
+namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Menu;
 
-use libraries\utilities\Utilities;
-use libraries\file\Path;
-use libraries\storage\EqualityCondition;
-use libraries\format\OptionsMenuRenderer;
-use libraries\format\TreeMenuRenderer;
-use libraries\storage\DataClassRetrievesParameters;
-use HTML_Menu;
-use HTML_Menu_ArrayRenderer;
-use core\group\Group;
-use libraries\storage\OrderBy;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Format\OptionsMenuRenderer;
+use Chamilo\Libraries\Format\TreeMenuRenderer;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\HTML_Menu;
+use Chamilo\HTML_Menu_ArrayRenderer;
+use Chamilo\Core\Group\Group;
+use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -78,10 +78,10 @@ class GroupMenu extends HTML_Menu
         $include_root = $this->include_root;
 
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_PARENT_ID),
+            new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable(0));
-        $group = \core\group\DataManager :: retrieves(
-            \core\group\Group :: class_name(),
+        $group = \Chamilo\Core\Group\DataManager :: retrieves(
+            \Chamilo\Core\Group\Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 1,
@@ -128,10 +128,10 @@ class GroupMenu extends HTML_Menu
         $hide_current_category = $this->hide_current_category;
 
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(\core\group\Group :: class_name(), \core\group\Group :: PROPERTY_PARENT_ID),
+            new PropertyConditionVariable(\Chamilo\Core\Group\Group :: class_name(), \Chamilo\Core\Group\Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($parent_id));
-        $groups = \core\group\DataManager :: retrieves(
-            \core\group\Group :: class_name(),
+        $groups = \Chamilo\Core\Group\DataManager :: retrieves(
+            \Chamilo\Core\Group\Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 null,
