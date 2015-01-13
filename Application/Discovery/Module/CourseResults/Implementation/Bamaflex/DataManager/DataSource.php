@@ -10,6 +10,7 @@ use Chamilo\Application\Discovery\Module\Career\MarkMoment;
 use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\CourseResult;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

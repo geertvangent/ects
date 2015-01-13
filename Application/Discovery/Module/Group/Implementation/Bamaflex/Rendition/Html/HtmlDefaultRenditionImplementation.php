@@ -9,8 +9,8 @@ use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\DynamicContentTab;
-use Chamilo\Libraries\Format\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
+use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Application\Discovery\Module\Group\DataManager;
 use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
 
@@ -416,7 +416,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
 
     /*
@@ -424,6 +424,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
     }
 }

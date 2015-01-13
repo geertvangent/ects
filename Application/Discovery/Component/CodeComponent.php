@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Component;
 
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Platform\Session\Request;
 
@@ -37,7 +37,7 @@ class CodeComponent extends Manager implements DelegateComponent
         }
         else
         {
-            throw new \Chamilo\Exception(Translation :: get('NoSuchUserOrModule'));
+            throw new \Exception(Translation :: get('NoSuchUserOrModule'));
         }
     }
 }

@@ -5,7 +5,6 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 abstract class Rendition
 {
-    use Chamilo\ClassContext;
 
     // Formats
     const FORMAT_HTML = 'html';

@@ -16,8 +16,8 @@ class HtmlDefaultRendition extends HtmlRendition
         return '';
     }
 
-    public static function add_export_action(\Chamilo\Application\Discovery\RenditionImplementation $rendition_implementation,
-        $type = \Chamilo\Application\Discovery\HtmlRendition :: VIEW_XLSX)
+    public static function add_export_action(\Chamilo\Application\Discovery\Rendition\RenditionImplementation $rendition_implementation,
+        $type = \Chamilo\Application\Discovery\Rendition\Format\HtmlRendition :: VIEW_XLSX)
     {
         $export_parameters = array_merge(
             $rendition_implementation->get_module_parameters()->get_parameters(),

@@ -5,8 +5,8 @@ use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\ResourceManager;
 use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 
 class FilterForm extends FormValidator
 {
@@ -60,7 +60,7 @@ class FilterForm extends FormValidator
 
         $this->addElement(
             'html',
-            ResourceManager :: get_instance()->get_resource_html(
+            \Chamilo\Libraries\Format\Utilities\ResourceManager :: get_instance()->get_resource_html(
                 Path :: get_web_common_libraries_path() . 'resources/javascript/postback.js'));
     }
 

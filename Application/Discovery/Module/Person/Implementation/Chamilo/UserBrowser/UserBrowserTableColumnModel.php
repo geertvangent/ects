@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\UserBrowser;
 
 use Chamilo\Application\Discovery\Module\Person\Person;
-use Chamilo\Libraries\Format\TableColumn;
+use Chamilo\Libraries\Format\Table\Column\TableColumn;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\TableColumnModel;
 

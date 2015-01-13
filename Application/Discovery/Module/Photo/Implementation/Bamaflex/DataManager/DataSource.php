@@ -8,7 +8,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\File\ImageManipulation\ImageManipulation;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Utilities\Text;
+use Chamilo\Libraries\Utilities\String\Text;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
 use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;

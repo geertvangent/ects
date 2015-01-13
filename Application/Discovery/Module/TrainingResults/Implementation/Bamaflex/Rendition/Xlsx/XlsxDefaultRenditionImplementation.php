@@ -5,7 +5,7 @@ use Chamilo\Application\Discovery\Module\TrainingResults\DataManager;
 use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\PHPExcel;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -26,12 +26,12 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             Display :: not_allowed();
         }
 
-        $this->php_excel = new PHPExcel();
+        $this->php_excel = new \PHPExcel();
         $this->php_excel->removeSheetByIndex(0);
 
         $this->process_training_results();
 
-        return \Chamilo\Application\Discovery\XlsxDefaultRendition :: save(
+        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save(
             $this->php_excel,
             $this->get_module(),
             $this->get_file_name());
@@ -65,7 +65,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
             \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
 
-        \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
+            $this->php_excel,
+            $headers);
 
         $row = 2;
 
@@ -136,7 +138,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -144,6 +146,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
     }
 }

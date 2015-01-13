@@ -4,7 +4,7 @@ namespace Chamilo\Application\Discovery\Rendition\View\Zip;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\File\Filecompression;
+use Chamilo\Libraries\File\Compression\Filecompression;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Application\Discovery\Rendition\Format\ZipRendition;
 
@@ -36,7 +36,7 @@ class ZipDefaultRendition extends ZipRendition
         }
         else
         {
-            throw new \Chamilo\Exception(Translation :: get('FileMoveFailed'));
+            throw new \Exception(Translation :: get('FileMoveFailed'));
         }
     }
 }

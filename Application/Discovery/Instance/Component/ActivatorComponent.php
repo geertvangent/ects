@@ -4,6 +4,7 @@ namespace Chamilo\Application\Discovery\Instance\Component;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Discovery\Instance\Manager;
 
 class ActivatorComponent extends Manager
 {
@@ -14,28 +15,28 @@ class ActivatorComponent extends Manager
         {
             $this->not_allowed();
         }
-        
+
         $ids = Request :: get(Manager :: PARAM_MODULE_ID);
         $failures = 0;
-        
+
         if (! empty($ids))
         {
             if (! is_array($ids))
             {
                 $ids = array($ids);
             }
-            
+
             foreach ($ids as $id)
             {
                 $instance = DataManager :: retrieve_by_id(Instance :: class_name(), (int) $id);
                 $instance->activate();
-                
+
                 if (! $instance->update())
                 {
                     $failures ++;
                 }
             }
-            
+
             if ($failures)
             {
                 if (count($ids) == 1)
@@ -62,12 +63,12 @@ class ActivatorComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('VideosConferencing'));
                 }
             }
-            
+
             $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
-                ($failures ? true : false), 
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
+                ($failures ? true : false),
                 array(
-                    self :: PARAM_ACTION => self :: ACTION_BROWSE_INSTANCES, 
+                    self :: PARAM_ACTION => self :: ACTION_BROWSE_INSTANCES,
                     self :: PARAM_CONTENT_TYPE => $instance->get_content_type()));
         }
         else
@@ -75,8 +76,8 @@ class ActivatorComponent extends Manager
             $this->display_error_page(
                 htmlentities(
                     Translation :: get(
-                        'NoObjectSelected', 
-                        array('OBJECT' => Translation :: get('ExternalRepository')), 
+                        'NoObjectSelected',
+                        array('OBJECT' => Translation :: get('ExternalRepository')),
                         Utilities :: COMMON_LIBRARIES)));
         }
     }

@@ -3,7 +3,7 @@ namespace Chamilo\Application\Discovery\DataSource\Component;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
-use Chamilo\Libraries\Format\ActionBarSearchForm;
+use Chamilo\Libraries\Format\Structure\ActionBarSearchForm;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
@@ -11,6 +11,8 @@ use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Application\Discovery\DataSource\DataClass\Instance;
+use Chamilo\Application\Discovery\DataSource\Table\Instance\InstanceTable;
+use Chamilo\Application\Discovery\DataSource\Manager;
 
 class BrowserComponent extends Manager implements TableSupport
 {

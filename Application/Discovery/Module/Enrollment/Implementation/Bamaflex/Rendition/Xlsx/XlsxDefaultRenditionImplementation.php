@@ -5,7 +5,8 @@ use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
-use Chamilo\PHPExcel;
+
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -26,7 +27,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             Display :: not_allowed();
         }
 
-        $this->php_excel = new PHPExcel();
+        $this->php_excel = new \PHPExcel();
         $this->php_excel->removeSheetByIndex(0);
 
         if (count($this->get_enrollments()) > 0)
@@ -50,7 +51,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             }
         }
 
-        return \Chamilo\Application\Discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
     }
 
     public function process_enrollments($contract_type = Enrollment :: CONTRACT_TYPE_ALL)
@@ -86,7 +87,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('ResultType');
         $headers[] = Translation :: get('GenerationStudent');
 
-        \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
 
         $row = 2;
 
@@ -155,7 +156,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -163,6 +164,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
     }
 }

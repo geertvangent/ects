@@ -10,9 +10,9 @@ use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Format\TableCellRendererActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
-use Chamilo\Libraries\Format\DisplayOrderPropertyTableColumn;
+use Chamilo\Libraries\Format\Table\Column\DisplayOrderPropertyTableColumn;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport

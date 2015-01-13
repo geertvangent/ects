@@ -7,6 +7,7 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\TeachingAssignment;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -25,24 +26,24 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $user_id = $parameters->get_user_id();
         $year = $parameters->get_year();
         $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+
         if (! isset($this->teaching_assignments[$person_id][$year]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($person_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('year'), 
+                new StaticColumnConditionVariable('year'),
                 new StaticConditionVariable($year));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_teaching_assignment WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY faculty, training, name';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -66,7 +67,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 }
             }
         }
-        
+
         return $this->teaching_assignments[$person_id][$year];
     }
 
@@ -74,16 +75,16 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $user_id = $parameters->get_user_id();
         $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($person_id));
-        
+
         $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $result = $statement->fetch(\PDO :: FETCH_OBJ);
@@ -99,17 +100,17 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         if (! isset($this->years[$person_id]))
         {
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($person_id));
-            
+
             $query = 'SELECT DISTINCT year FROM v_discovery_teaching_assignment_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -118,7 +119,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 }
             }
         }
-        
+
         return $this->years[$person_id];
     }
 }

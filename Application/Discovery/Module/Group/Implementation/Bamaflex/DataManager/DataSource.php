@@ -12,6 +12,7 @@ use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Traini
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -27,24 +28,24 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $training_id = $parameters->get_training_id();
         $source = $parameters->get_source();
-        
+
         if (! isset($this->groups[$training_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'), 
+                new StaticColumnConditionVariable('training_id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_group_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY description';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -58,12 +59,12 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                     $group->set_description($this->convert_to_utf8($result->description));
                     $group->set_type($result->type);
                     $group->set_type_id($result->type_id);
-                    
+
                     $this->groups[$training_id][] = $group;
                 }
             }
         }
-        
+
         return $this->groups[$training_id];
     }
 
@@ -71,22 +72,22 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->trainings[$training_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'), 
+                new StaticColumnConditionVariable('id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -107,27 +108,27 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                     $training->set_faculty($this->convert_to_utf8($result->faculty));
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-                    
+
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_ID), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_ID),
                         new StaticConditionVariable($training->get_id()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_SOURCE), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_SOURCE),
                         new StaticConditionVariable($training->get_source()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE),
                         new StaticConditionVariable(Utilities :: get_namespace_from_object($training)));
                     $condition = new AndCondition($conditions);
-                    
+
                     $histories = \Chamilo\Application\Discovery\DataSource\Bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
                         $condition);
-                    
+
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
                         {
-                            
+
                             $reference = new HistoryReference();
                             $reference->set_id($history->get_previous_id());
                             $reference->set_source($history->get_previous_source());
@@ -144,19 +145,19 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                             $training->add_previous_reference($reference);
                         }
                     }
-                    
+
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_ID), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_ID),
                         new StaticConditionVariable($training->get_id()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_SOURCE), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_SOURCE),
                         new StaticConditionVariable($training->get_source()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE),
                         new StaticConditionVariable(Utilities :: get_namespace_from_object($training)));
                     $condition = new AndCondition($conditions);
-                    
+
                     $histories = \Chamilo\Application\Discovery\DataSource\Bamaflex\DataManager :: get_instance()->retrieve_history_by_conditions(
                         $condition);
                     if ($histories->size() > 0)
@@ -172,7 +173,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                     else
                     {
                         $next = $this->retrieve_training_next_id($training);
-                        
+
                         if ($next)
                         {
                             $reference = new HistoryReference();
@@ -181,12 +182,12 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                             $training->add_next_reference($reference);
                         }
                     }
-                    
+
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-        
+
         return $this->trainings[$training_id][$source];
     }
 
@@ -194,17 +195,17 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('previous_id'), 
+            new StaticColumnConditionVariable('previous_id'),
             new StaticConditionVariable($training->get_id()));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('source'), 
+            new StaticColumnConditionVariable('source'),
             new StaticConditionVariable($training->get_source()));
         $condition = new AndCondition($conditions);
-        
+
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             return $result = $statement->fetch(\PDO :: FETCH_OBJ);

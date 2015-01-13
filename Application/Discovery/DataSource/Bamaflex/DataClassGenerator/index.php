@@ -3,8 +3,7 @@ namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator;
 
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
-use Chamilo\DOMDocument;
-use Chamilo\DOMXPath;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\DataClassGenerator\DataClassGenerator;
 
 ini_set('include_path', realpath(dirname(__FILE__) . '/../../../../../../../common/libraries/plugin/pear'));
 require_once dirname(__FILE__) . '/../../../../../../../common/global.inc.php';
@@ -21,13 +20,13 @@ foreach ($xml_files as $xml_file)
         $xml_file_path = $xml_path . $xml_file;
         log_message('Start generating content object for: ' . $xml_file);
         log_message('Retrieving properties');
-        
-        $dom_document = new DOMDocument('1.0', 'UTF-8');
+
+        $dom_document = new \DOMDocument('1.0', 'UTF-8');
         $dom_document->load($xml_file_path);
-        $dom_xpath = new DOMXPath($dom_document);
-        
+        $dom_xpath = new \DOMXPath($dom_document);
+
         $content_object = $dom_xpath->query('/object')->item(0);
-        
+
         if (file_exists(
             dirname(__FILE__) . '/xml_schemas/php/' .
                  Path :: namespace_to_path($content_object->getAttribute('namespace')) . '/php/lib/' .
@@ -39,11 +38,11 @@ foreach ($xml_files as $xml_file)
                  $content_object->getAttribute('name') . '.class.php');
             log_message('Object type already exists');
         }
-        
+
         // dump($xml_definition);
         log_message('Generating data class');
         $data_class_generator->generate_data_class($dom_xpath);
-        
+
         echo '<hr />';
     }
 }
@@ -52,7 +51,7 @@ exit();
 
 /**
  * Create folders for the application
- * 
+ *
  * @param $location String - The location of the application
  * @param $name String - The name of the application
  */
@@ -64,7 +63,7 @@ function create_folder($name)
 
 /**
  * Move a file from the root to the install folder
- * 
+ *
  * @param $file String - Path of the file
  * @return String $new_file - New path of the file
  */
@@ -78,7 +77,7 @@ function move_file($name)
 
 /**
  * Retrieves the properties from a data xml file
- * 
+ *
  * @param $file String - The xml file
  * @return Array of String - The properties
  */
@@ -87,8 +86,8 @@ function retrieve_properties_from_xml_file($file)
     $name = '';
     $properties = array();
     $indexes = array();
-    
-    $doc = new DOMDocument();
+
+    $doc = new \DOMDocument();
     $doc->load($file);
     $object = $doc->getElementsByTagname('object')->item(0);
     $name = $object->getAttribute('name');
@@ -125,13 +124,13 @@ function retrieve_properties_from_xml_file($file)
     $result['namespace'] = $namespace;
     $result['properties'] = $properties;
     $result['indexes'] = $indexes;
-    
+
     return $result;
 }
 
 /**
  * Log a message to the screen
- * 
+ *
  * @param $message String - The message
  */
 function log_message($message)

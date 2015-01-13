@@ -5,8 +5,8 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\DynamicVisualTab;
-use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Application\Discovery\Rendition\Format\HtmlRendition;
 
 class HtmlDefaultRendition extends HtmlRendition

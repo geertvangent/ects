@@ -3,7 +3,6 @@ namespace Chamilo\Application\Discovery;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\SortableTableFromArray;
-use Chamilo\HTML_Table;
 
 class SortableTable extends SortableTableFromArray
 {
@@ -69,6 +68,6 @@ class SortableTable extends SortableTableFromArray
                 'colspan="' . ($this->getColCount() - $total_column) .
                      '" style="font-weight:bold; text-transform:uppercase;"');
         }
-        return HTML_Table :: toHTML();
+        return \HTML_Table :: toHTML();
     }
 }

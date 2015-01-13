@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBrowser;
 
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\StaticTableColumn;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 
 class GroupBrowserTableColumnModel extends \Chamilo\Core\Group\Table\GroupRelUser\GroupRelUserTableColumnModel
 {

@@ -3,13 +3,14 @@ namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Chamilo\Da
 
 use Chamilo\Core\User\Storage\DataClass\UserSetting;
 use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Application\Discovery\Module\Profile\Photo;
 use Chamilo\Application\Discovery\Module\Profile\Communication;
 use Chamilo\Application\Discovery\Module\Profile\Email;
 use Chamilo\Application\Discovery\Module\Profile\IdentificationCode;
 use Chamilo\Application\Discovery\Module\Profile\Name;
 use Chamilo\Libraries\File\FileType;
+use Chamilo\Application\Discovery\Module\Profile\Implementation\Chamilo\Profile;
 
 class DataSource
 {
@@ -74,7 +75,7 @@ class DataSource
 
         if ($user_language_is_allowed)
         {
-            $setting = \Chamilo\Configuration\DataManager :: retrieve_setting_from_variable_name('platform_language');
+            $setting = \Chamilo\Configuration\Storage\DataManager :: retrieve_setting_from_variable_name('platform_language');
             $user_setting = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
 
             if ($user_setting instanceof UserSetting)
@@ -91,7 +92,7 @@ class DataSource
             $language_code = PlatformSetting :: get('platform_language');
         }
 
-        return \Chamilo\Configuration\DataManager :: retrieve_language_from_isocode($language_code)->get_english_name();
+        return \Chamilo\Configuration\Storage\DataManager :: retrieve_language_from_isocode($language_code)->get_english_name();
     }
 
     /**
@@ -107,7 +108,7 @@ class DataSource
 
         if ($user_timezone_is_allowed)
         {
-            $setting = \Chamilo\Configuration\DataManager :: retrieve_setting_from_variable_name('platform_timezone');
+            $setting = \Chamilo\Configuration\Storage\DataManager :: retrieve_setting_from_variable_name('platform_timezone');
             $user_setting = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user_setting($id, $setting->get_id());
 
             if ($user_setting instanceof UserSetting)

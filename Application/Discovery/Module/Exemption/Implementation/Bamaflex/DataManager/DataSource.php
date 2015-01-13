@@ -6,6 +6,7 @@ use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Module\Exemption\Implementation\Bamaflex\Exemption;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -23,19 +24,19 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $user_id = $parameters->get_user_id();
         $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+
         if (! isset($this->exemptions[$person_id]))
         {
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'), 
+                new StaticColumnConditionVariable('person_id'),
                 new StaticConditionVariable($person_id));
-            
+
             $query = 'SELECT * FROM v_discovery_exemption_basic WHERE ' .
                  DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, programme_name';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -63,7 +64,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 }
             }
         }
-        
+
         return $this->exemptions[$person_id];
     }
 
@@ -71,22 +72,22 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $user_id = $parameters->get_user_id();
         $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-        
+
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($person_id));
-        
+
         $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->exemptions_count;
         }
-        
+
         return 0;
     }
 
@@ -98,9 +99,9 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         {
             $query = 'SELECT DISTINCT year FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id .
                  '" ORDER BY year DESC';
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -109,7 +110,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 }
             }
         }
-        
+
         return $this->years[$person_id];
     }
 }

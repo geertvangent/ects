@@ -5,9 +5,9 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Format\DynamicContentTab;
-use Chamilo\Libraries\Format\ActionBarSearchForm;
-use Chamilo\Libraries\Format\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
+use Chamilo\Libraries\Format\Structure\ActionBarSearchForm;
+use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
@@ -20,12 +20,16 @@ use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
-use Chamilo\Libraries\Storage\DataClassDistinctParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rights;
 use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBrowser\GroupBrowserTable;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\UserBrowser\UserBrowserTable;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Menu\GroupMenu;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupRelUserBrowser\GroupRelUserBrowserTable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements TableSupport
 {
@@ -301,7 +305,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
 
     /*
@@ -309,7 +313,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
     }
 
     public function get_allowed_groups()
@@ -351,7 +355,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 new PropertyConditionVariable(
                     RightsGroupEntityRight :: class_name(),
                     RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE),
-                new StaticConditionVariable(\Chamilo\Core\Rights\PlatformGroupEntity :: ENTITY_TYPE));
+                new StaticConditionVariable(\Chamilo\Core\Rights\Entity\PlatformGroupEntity :: ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($group_entity_conditions);
 
             $conditions[] = new OrCondition($entities_conditions);

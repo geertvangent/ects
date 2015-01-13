@@ -6,7 +6,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        \Chamilo\Application\Discovery\Rendition :: launch($this);
+        \Chamilo\Application\Discovery\Rendition\Rendition :: launch($this);
     }
     
     /*
@@ -14,7 +14,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
     
     /*

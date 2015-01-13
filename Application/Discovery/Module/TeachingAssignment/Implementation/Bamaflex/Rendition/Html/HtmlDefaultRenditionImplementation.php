@@ -7,8 +7,8 @@ use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Format\DynamicVisualTab;
-use Chamilo\Libraries\Format\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 
@@ -256,7 +256,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_HTML;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
     
     /*
@@ -264,6 +264,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
     }
 }

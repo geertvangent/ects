@@ -10,6 +10,7 @@ use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Module;
 
 class ZipDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -146,7 +147,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -154,6 +155,6 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
     }
 }

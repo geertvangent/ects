@@ -83,7 +83,7 @@ class XlsxDefaultRendition extends XlsxRendition
 
         if (Filesystem :: create_dir($path))
         {
-            $php_excel_writer = \Chamilo\PHPExcel_IOFactory :: createWriter($php_excel, 'Excel2007');
+            $php_excel_writer = \PHPExcel_IOFactory :: createWriter($php_excel, 'Excel2007');
             $php_excel_writer->save($file);
 
             $php_excel->disconnectWorksheets();
@@ -93,7 +93,7 @@ class XlsxDefaultRendition extends XlsxRendition
         }
         else
         {
-            throw new \Chamilo\Exception(Translation :: get('PathNotCreated', array('PATH' => $path)));
+            throw new \Exception(Translation :: get('PathNotCreated', array('PATH' => $path)));
         }
     }
 }

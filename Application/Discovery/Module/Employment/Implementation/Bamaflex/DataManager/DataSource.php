@@ -7,6 +7,8 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Module\Employment\Implementation\Bamaflex\Employment;
+use Chamilo\Application\Discovery\Module\Employment\Implementation\Bamaflex\EmploymentPart;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -23,24 +25,24 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function retrieve_employments($parameters)
     {
         $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-        
+
         $official_code = $user->get_official_code();
-        
+
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($official_code));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('active'), 
+            new StaticColumnConditionVariable('active'),
             new StaticConditionVariable(1));
         $condition = new AndCondition($conditions);
-        
+
         $query = 'SELECT * FROM v_discovery_employment WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
              ' ORDER BY start_date DESC';
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -76,10 +78,10 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 $employment->set_interruption_id($result->interruption_id);
                 $employment->set_interruption_category($result->interruption_category);
                 $employment->set_interruption_category_id($result->interruption_category_id);
-                
+
                 $this->employments[$official_code][] = $employment;
             }
-            
+
             return $this->employments[$official_code];
         }
         else
@@ -91,22 +93,22 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function count_employments($parameters)
     {
         $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
-        
+
         $official_code = $user->get_official_code();
-        
+
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'), 
+            new StaticColumnConditionVariable('person_id'),
             new StaticConditionVariable($official_code));
-        
+
         $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             $result = $result = $statement->fetch(\PDO :: FETCH_OBJ);
-            
+
             return $result->employments_count;
         }
         else
@@ -118,14 +120,14 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function retrieve_employment_parts($employment_id)
     {
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('assignment_id'), 
+            new StaticColumnConditionVariable('assignment_id'),
             new StaticConditionVariable($employment_id));
-        
+
         $query = 'SELECT * FROM v_discovery_employment_parts WHERE ' .
              DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY start_date';
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -143,10 +145,10 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 $employment_part->set_training($result->training);
                 $employment_part->set_department($result->department);
                 $employment_part->set_department_id($result->department_id);
-                
+
                 $this->employment_parts[$employment_id][] = $employment_part;
             }
-            
+
             return $this->employment_parts[$employment_id];
         }
         else

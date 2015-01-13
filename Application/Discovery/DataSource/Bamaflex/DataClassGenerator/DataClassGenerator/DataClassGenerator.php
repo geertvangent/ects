@@ -3,6 +3,8 @@ namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\D
 
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\Connection;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\MyTemplate;
 
 /**
  * Dataclass generator used to generate dataclasses with given properties

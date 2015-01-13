@@ -4,12 +4,13 @@ namespace Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Da
 use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\NotCondition;
+use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Advice;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

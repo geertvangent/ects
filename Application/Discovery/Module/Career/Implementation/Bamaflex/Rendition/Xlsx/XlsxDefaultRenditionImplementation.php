@@ -5,7 +5,8 @@ use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
-use Chamilo\PHPExcel;
+
+use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -31,7 +32,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters());
 
-        $this->php_excel = new PHPExcel();
+        $this->php_excel = new \PHPExcel();
         $this->php_excel->getDefaultStyle()->getFont()->setName('DejaVu Sans');
         $this->php_excel->removeSheetByIndex(0);
 
@@ -40,7 +41,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $this->process_enrollment_courses();
         }
 
-        return \Chamilo\Application\Discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
     }
 
     public function process_enrollment_courses()
@@ -60,7 +61,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('Option');
         $headers[] = Translation :: get('Result');
 
-        \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
+        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
         $row ++;
 
         foreach ($contracts as $contract)
@@ -135,7 +136,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $this->php_excel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(
                 \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
 
-            \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
+            \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
             $row ++;
 
             foreach ($contract as $enrollment)
@@ -372,8 +373,8 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                                 StringUtilities :: transcode_string(
                                     Translation :: get($enrollment->get_contract_type_string())));
 
-                            $range = 'A' . $row . ':' .
-                                 \Chamilo\PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1) . $row;
+                            $range = 'A' . $row . ':' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1) .
+                                 $row;
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->setItalic(true);
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->getColor()->setRGB(
                                 'AAAAAA');
@@ -416,7 +417,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -424,6 +425,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
     }
 }

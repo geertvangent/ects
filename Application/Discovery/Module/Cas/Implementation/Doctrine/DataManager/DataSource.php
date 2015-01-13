@@ -3,6 +3,9 @@ namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\DataM
 
 use Chamilo\Application\Discovery\Module\Cas\Parameters;
 use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Action;
+use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Application;
+use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\CasCount;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Doctrine\DataSource
 {
@@ -95,7 +98,8 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Doctrine\Data
 
                 $query = 'SELECT count(id) AS \'count\', person_id, application_id, action_id, date_format(date, \'%Y-%m\') AS \'date\'
                     FROM cas_data.statistics
-                    WHERE person_id = "' . $official_code . '" AND ((application_id IS NOT NULL AND action_id = 4) OR (application_id IS NULL AND action_id IN (1, 6)))
+                    WHERE person_id = "' .
+                     $official_code . '" AND ((application_id IS NOT NULL AND action_id = 4) OR (application_id IS NULL AND action_id IN (1, 6)))
                     GROUP BY person_id , date_format(date, \'%Y-%m\'), application_id , action_id
                     ORDER BY date DESC, action_id, application_id';
             }

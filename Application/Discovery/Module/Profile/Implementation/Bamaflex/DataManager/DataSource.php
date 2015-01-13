@@ -11,6 +11,13 @@ use Chamilo\Application\Discovery\Module\Profile\IdentificationCode;
 use Chamilo\Application\Discovery\Module\Profile\Name;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Address;
+use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Birth;
+use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\LearningCredit;
+use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Nationality;
+use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\PreviousCollege;
+use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\PreviousUniversity;
+use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Profile;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

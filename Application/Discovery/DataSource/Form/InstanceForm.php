@@ -6,9 +6,8 @@ use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Format\DynamicFormTabsRenderer;
-use Chamilo\Libraries\Format\DynamicFormTab;
-use Chamilo\DOMDocument;
+use Chamilo\Libraries\Format\Tabs\DynamicFormTabsRenderer;
+use Chamilo\Libraries\Format\Tabs\DynamicFormTab;
 use Chamilo\Application\Discovery\DataSource\DataClass\InstanceSetting;
 use Chamilo\Application\Discovery\DataSource\DataClass\Instance;
 
@@ -386,7 +385,7 @@ class InstanceForm extends FormValidator
 
         if (file_exists($file))
         {
-            $doc = new DOMDocument();
+            $doc = new \DOMDocument();
             $doc->load($file);
             $object = $doc->getElementsByTagname('package')->item(0);
             $name = $object->getAttribute('name');

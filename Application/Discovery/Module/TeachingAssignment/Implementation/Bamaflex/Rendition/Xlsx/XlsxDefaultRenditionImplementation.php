@@ -4,7 +4,7 @@ namespace Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation
 use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\PHPExcel;
+
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -25,12 +25,12 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             Display :: not_allowed();
         }
 
-        $this->php_excel = new PHPExcel();
+        $this->php_excel = new \PHPExcel();
         $this->php_excel->removeSheetByIndex(0);
 
         $this->process_teaching_assignments();
 
-        return \Chamilo\Application\Discovery\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
     }
 
     public function process_teaching_assignments()
@@ -58,7 +58,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
             $row ++;
 
-            \Chamilo\Application\Discovery\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+            \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
 
             $parameters = $this->get_module_parameters();
             $parameters->set_year($year);
@@ -114,7 +114,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Chamilo\Application\Discovery\Rendition :: FORMAT_XLSX;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_XLSX;
     }
 
     /*
@@ -122,6 +122,6 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\Rendition :: VIEW_DEFAULT;
+        return \Chamilo\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
     }
 }

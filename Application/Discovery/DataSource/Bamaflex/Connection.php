@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource\Bamaflex;
 
-use Chamilo\Libraries\Storage\Doctrine\DataSourceName;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\DataSourceName;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection;
-use Chamilo\Doctrine\DBAL\DriverManager;
-use Chamilo\Doctrine\Common\ClassLoader;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\Common\ClassLoader;
 
 class Connection extends DoctrineConnection
 {
@@ -31,7 +31,7 @@ class Connection extends DoctrineConnection
         $classLoader->register();
 
         $this->data_source_instance = \Chamilo\Application\Discovery\DataSource\DataManager :: retrieve_by_id(
-            \Chamilo\Application\Discovery\DataSource\Instance :: class_name(),
+            \Chamilo\Application\Discovery\DataSource\DataClass\Instance :: class_name(),
             (int) $data_source_instance_id);
 
         $driver = $this->data_source_instance->get_setting('driver');
@@ -42,7 +42,7 @@ class Connection extends DoctrineConnection
 
         $data_source_name = DataSourceName :: factory('Doctrine', $driver, $username, $host, $database, $password);
 
-        $configuration = new \Chamilo\Doctrine\DBAL\Configuration();
+        $configuration = new \Doctrine\DBAL\Configuration();
         $connection_parameters = array(
             'dbname' => $data_source_name->get_database(),
             'user' => $data_source_name->get_username(),
