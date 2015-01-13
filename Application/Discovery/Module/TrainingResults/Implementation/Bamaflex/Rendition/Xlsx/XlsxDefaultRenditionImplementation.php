@@ -6,6 +6,8 @@ use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {

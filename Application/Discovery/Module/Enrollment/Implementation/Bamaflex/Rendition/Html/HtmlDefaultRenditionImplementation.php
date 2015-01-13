@@ -12,6 +12,8 @@ use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -213,7 +215,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
 
-        \Chamilo\Application\Discovery\HtmlDefaultRendition :: add_export_action($this);
+        \Chamilo\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
 
         return implode("\n", $html);
     }

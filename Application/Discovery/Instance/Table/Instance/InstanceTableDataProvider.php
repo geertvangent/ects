@@ -4,6 +4,8 @@ namespace Chamilo\Application\Discovery\Instance\Table\Instance;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
+use Chamilo\Application\Discovery\Instance\DataManager;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class InstanceTableDataProvider extends DataClassTableDataProvider
 {

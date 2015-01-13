@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Rendition;
 
+use Chamilo\Application\Discovery\Module;
+
 abstract class AbstractRenditionImplementation
 {
 

@@ -14,6 +14,7 @@ use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
 use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Advice;
+use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rights;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Rendition\Format;
 
-use Chamilo\Application\Discovery\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Rendition\Rendition;
 
-class ZipRendition extends RenditionImplementation
+class ZipRendition extends Rendition
 {
 }

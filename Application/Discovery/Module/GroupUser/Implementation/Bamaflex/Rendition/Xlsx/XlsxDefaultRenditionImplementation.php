@@ -6,7 +6,9 @@ use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
 use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
-
+use Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
@@ -115,7 +117,10 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
                 \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
 
-            \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition  :: set_headers($this->php_excel, $headers, $row);
+            \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
+                $this->php_excel,
+                $headers,
+                $row);
             $row ++;
 
             foreach ($data as $group_user)

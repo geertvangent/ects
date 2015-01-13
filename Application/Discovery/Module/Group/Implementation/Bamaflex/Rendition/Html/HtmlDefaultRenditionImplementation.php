@@ -13,6 +13,10 @@ use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Application\Discovery\Module\Group\DataManager;
 use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Parameters;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

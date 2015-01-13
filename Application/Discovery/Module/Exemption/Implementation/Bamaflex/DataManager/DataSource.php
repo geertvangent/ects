@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Exemption\Implementation\Bamaflex\DataManager;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
@@ -32,7 +32,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($person_id));
 
             $query = 'SELECT * FROM v_discovery_exemption_basic WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, programme_name';
 
             $statement = $this->get_connection()->query($query);
@@ -78,7 +78,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($person_id));
 
         $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 

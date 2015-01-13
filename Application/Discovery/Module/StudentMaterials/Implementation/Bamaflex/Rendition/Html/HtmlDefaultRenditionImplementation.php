@@ -14,6 +14,8 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Application\Discovery\Module\StudentMaterials\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\StudentMaterials\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

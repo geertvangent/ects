@@ -5,8 +5,9 @@ use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
-
 use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
+use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -41,7 +42,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $this->process_enrollment_courses();
         }
 
-        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save(
+            $this->php_excel,
+            $this->get_module());
     }
 
     public function process_enrollment_courses()
@@ -61,7 +64,10 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('Option');
         $headers[] = Translation :: get('Result');
 
-        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
+        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
+            $this->php_excel,
+            $headers,
+            $row);
         $row ++;
 
         foreach ($contracts as $contract)
@@ -136,7 +142,10 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $this->php_excel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(
                 \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
 
-            \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers, $row);
+            \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
+                $this->php_excel,
+                $headers,
+                $row);
             $row ++;
 
             foreach ($contract as $enrollment)

@@ -14,6 +14,8 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
+use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -61,7 +63,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
 
-        \Chamilo\Application\Discovery\HtmlDefaultRendition :: add_export_action($this);
+        \Chamilo\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
 
         return implode("\n", $html);
     }

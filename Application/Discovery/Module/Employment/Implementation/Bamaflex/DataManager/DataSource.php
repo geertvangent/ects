@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Employment\Implementation\Bamaflex\DataManager;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
@@ -38,7 +38,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new AndCondition($conditions);
 
         $query = 'SELECT * FROM v_discovery_employment WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+             ConditionTranslator :: render($condition, null, $this->get_connection()) .
              ' ORDER BY start_date DESC';
 
         $statement = $this->get_connection()->query($query);
@@ -101,7 +101,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($official_code));
 
         $query = 'SELECT count(id) AS employments_count FROM v_discovery_employment WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -124,7 +124,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($employment_id));
 
         $query = 'SELECT * FROM v_discovery_employment_parts WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY start_date';
+             ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY start_date';
 
         $statement = $this->get_connection()->query($query);
 

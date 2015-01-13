@@ -12,6 +12,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Application\Discovery\DataSource\DataClass\Instance;
 use Chamilo\Application\Discovery\DataSource\Manager;
+use Chamilo\Application\Discovery\DataSource\DataManager;
 
 class MoverComponent extends Manager
 {

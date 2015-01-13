@@ -6,7 +6,7 @@ use Chamilo\Application\Discovery\Module\Career\MarkMoment;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
 use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
@@ -53,7 +53,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($official_code));
 
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY contract_type';
 
             $statement = $this->get_connection()->query($query);
@@ -83,7 +83,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($official_code));
 
             $query = 'SELECT DISTINCT contract_id FROM v_discovery_enrollment_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
 
             $statement = $this->get_connection()->query($query);
 
@@ -113,7 +113,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                 ConditionTranslator :: render($condition, null, $this->get_connection());
 
             $statement = $this->get_connection()->query($query);
 
@@ -169,7 +169,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new AndCondition($conditions);
 
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -201,7 +201,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($official_code));
 
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, id';
 
             $statement = $this->get_connection()->query($query);
@@ -253,7 +253,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_career_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year, name';
 
             $statement = $this->get_connection()->query($query);
@@ -292,7 +292,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($official_code));
 
         $query = 'SELECT count(id) AS courses_count FROM v_discovery_career_advanced WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -317,7 +317,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_career_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year, trajectory_part, name';
 
             $statement = $this->get_connection()->query($query);
@@ -435,7 +435,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new InCondition(new StaticColumnConditionVariable('enrollment_id'), $enrollment_ids);
 
             $query = 'SELECT * FROM v_discovery_mark_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                 ConditionTranslator :: render($condition, null, $this->get_connection());
 
             $statement = $this->get_connection()->query($query);
 

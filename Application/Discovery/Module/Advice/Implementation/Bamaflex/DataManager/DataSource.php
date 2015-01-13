@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\DataManager;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
@@ -27,7 +27,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function retrieve_advices($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
 
         if (! isset($this->advices[$person_id]))
         {
@@ -50,7 +50,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_advice_basic WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
 
             $statement = $this->get_connection()->query($query);
 
@@ -87,7 +87,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function count_advices($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
 
         $conditions = array();
         $conditions[] = new EqualityCondition(
@@ -105,7 +105,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new AndCondition($conditions);
 
         $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
 
         if ($statement instanceof PDOStatement)
@@ -127,7 +127,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
-            $user = \Chamilo\Core\User\DataManager :: get_instance()->retrieve_user($id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
             $condition = new EqualityCondition(
@@ -135,8 +135,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($official_code));
 
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
-                 ' ORDER BY year DESC, id';
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC, id';
 
             $statement = $this->get_connection()->query($query);
 

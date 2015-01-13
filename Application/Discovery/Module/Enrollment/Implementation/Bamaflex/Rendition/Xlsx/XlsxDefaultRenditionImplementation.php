@@ -5,8 +5,9 @@ use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
-
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -51,7 +52,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             }
         }
 
-        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save(
+            $this->php_excel,
+            $this->get_module());
     }
 
     public function process_enrollments($contract_type = Enrollment :: CONTRACT_TYPE_ALL)
@@ -87,7 +90,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('ResultType');
         $headers[] = Translation :: get('GenerationStudent');
 
-        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
+            $this->php_excel,
+            $headers);
 
         $row = 2;
 

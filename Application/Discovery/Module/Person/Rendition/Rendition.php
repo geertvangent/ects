@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Rendition;
 
-use Chamilo\Application\Discovery\Module\Person\Rendition\Rendition;
+use Chamilo\Application\Discovery\Rendition\Rendition;
 
 abstract class Rendition extends Rendition
 {

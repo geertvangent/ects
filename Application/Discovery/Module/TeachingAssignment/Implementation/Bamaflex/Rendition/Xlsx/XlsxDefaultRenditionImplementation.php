@@ -4,7 +4,8 @@ namespace Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation
 use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
-
+use Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -30,7 +31,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
         $this->process_teaching_assignments();
 
-        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save($this->php_excel, $this->get_module());
+        return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save(
+            $this->php_excel,
+            $this->get_module());
     }
 
     public function process_teaching_assignments()
@@ -58,7 +61,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 \PHPExcel_Style_Alignment :: HORIZONTAL_CENTER);
             $row ++;
 
-            \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+            \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
+                $this->php_excel,
+                $headers);
 
             $parameters = $this->get_module_parameters();
             $parameters->set_year($year);

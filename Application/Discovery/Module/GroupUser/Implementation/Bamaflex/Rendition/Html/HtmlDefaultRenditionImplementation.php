@@ -13,6 +13,9 @@ use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\GroupUser\DataManager;
 use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
+use Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -35,7 +38,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $html[] = $this->get_group_user_table();
 
-            \Chamilo\Application\Discovery\HtmlDefaultRendition :: add_export_action($this);
+            \Chamilo\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
         }
         else
         {

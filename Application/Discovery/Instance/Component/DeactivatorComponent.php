@@ -6,6 +6,7 @@ use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Application\Discovery\Instance\Manager;
+use Chamilo\Application\Discovery\Instance\DataManager;
 
 class DeactivatorComponent extends Manager
 {

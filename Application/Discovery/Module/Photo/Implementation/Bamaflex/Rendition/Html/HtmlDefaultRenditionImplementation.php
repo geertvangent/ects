@@ -9,6 +9,9 @@ use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Photo\DataManager;
 use Chamilo\Application\Discovery\AccessAllowedInterface;
 use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser\GalleryBrowserTable;
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -32,9 +35,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             Display :: not_allowed();
         }
 
-        \Chamilo\Application\Discovery\HtmlDefaultRendition :: add_export_action(
+        \Chamilo\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action(
             $this,
-            \Chamilo\Application\Discovery\HtmlRendition :: VIEW_ZIP);
+            \Chamilo\Application\Discovery\Rendition\Format\HtmlRendition :: VIEW_ZIP);
 
         $table = new GalleryBrowserTable($this, $parameters, $this->get_module()->get_condition());
         return $table->as_html();

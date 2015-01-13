@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\DataManager;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
@@ -33,7 +33,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($official_code));
 
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                 ConditionTranslator :: render($condition, null, $this->get_connection());
 
             $statement = $this->get_connection()->query($query);
 
@@ -67,7 +67,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($official_code));
 
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, id';
 
             $statement = $this->get_connection()->query($query);
@@ -113,7 +113,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($official_code));
 
         $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 

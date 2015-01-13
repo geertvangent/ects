@@ -4,7 +4,7 @@ namespace Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\D
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
@@ -36,7 +36,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($year));
 
             $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, name';
 
             $statement = $this->get_connection()->query($query);
@@ -91,7 +91,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 $condition = new AndCondition($conditions);
 
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
-                     DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                     ConditionTranslator :: render($condition, null, $this->get_connection());
 
                 $statement = $this->get_connection()->query($query);
 
@@ -141,7 +141,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new AndCondition($conditions);
 
         $query = 'SELECT id, source FROM v_discovery_faculty_advanced WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
 
         if ($statement instanceof PDOStatement)
@@ -187,7 +187,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_faculty_dean_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY person';
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY person';
             $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)

@@ -3,7 +3,7 @@ namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Dat
 
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\File\ImageManipulation\ImageManipulation;
 use Chamilo\Libraries\Format\Theme\Theme;
@@ -29,7 +29,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
             $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                 ConditionTranslator :: render($condition, null, $this->get_connection());
 
             $statement = $this->get_connection()->query($query);
 
@@ -77,7 +77,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 $condition = new AndCondition($conditions);
 
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
-                     DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                     ConditionTranslator :: render($condition, null, $this->get_connection());
 
                 $statement = $this->get_connection()->query($query);
 
@@ -118,7 +118,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                 ConditionTranslator :: render($condition, null, $this->get_connection());
 
             $statement = $this->get_connection()->query($query);
 
@@ -167,7 +167,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                 ConditionTranslator :: render($condition, null, $this->get_connection());
 
             $statement = $this->get_connection()->query($query);
 

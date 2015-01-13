@@ -11,6 +11,9 @@ use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\TrainingResults\DataManager;
 use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Parameters;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -31,7 +34,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = $this->get_training_properties_table() . '</br>';
         $html[] = $this->get_training_results_table();
 
-        \Chamilo\Application\Discovery\HtmlDefaultRendition :: add_export_action($this);
+        \Chamilo\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
 
         return implode("\n", $html);
     }

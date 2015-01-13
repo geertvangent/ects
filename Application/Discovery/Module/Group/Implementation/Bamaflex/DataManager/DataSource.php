@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\DataManager;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
@@ -41,7 +41,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_group_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY description';
 
             $statement = $this->get_connection()->query($query);
@@ -85,7 +85,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                 ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)
@@ -203,7 +203,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new AndCondition($conditions);
 
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
 
         if ($statement instanceof PDOStatement)

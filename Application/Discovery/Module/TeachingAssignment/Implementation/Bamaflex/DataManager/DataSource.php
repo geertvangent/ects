@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\DataManager;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
@@ -39,7 +39,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_teaching_assignment WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY faculty, training, name';
 
             $statement = $this->get_connection()->query($query);
@@ -81,7 +81,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($person_id));
 
         $query = 'SELECT count(id) AS teaching_assignments_count FROM v_discovery_teaching_assignment_advanced WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -104,7 +104,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($person_id));
 
             $query = 'SELECT DISTINCT year FROM v_discovery_teaching_assignment_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
 
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();

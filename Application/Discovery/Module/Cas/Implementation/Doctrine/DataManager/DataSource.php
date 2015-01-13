@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\DataManager;
 
 use Chamilo\Application\Discovery\Module\Cas\Parameters;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Action;
 use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Application;
 use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\CasCount;
@@ -166,7 +166,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Doctrine\Data
     public function count_cas_graph_statistics($condition)
     {
         $query = 'SELECT count(id) AS statistics_count FROM statistics';
-        $translator = new DoctrineConditionTranslator($this);
+        $translator = new ConditionTranslator($this);
         $query .= $translator->render_query($condition);
 
         $statement = $this->get_connection()->query($query);
@@ -224,7 +224,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Doctrine\Data
         }
     }
 
-    // helper for DoctrineConditionTranslator
+    // helper for ConditionTranslator
     public function get_alias($table_name)
     {
         return $table_name;

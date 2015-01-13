@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\Xlsx;
 
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\RenditionImplementation;
+
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
 

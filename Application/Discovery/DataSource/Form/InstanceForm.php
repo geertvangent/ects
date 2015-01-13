@@ -10,6 +10,7 @@ use Chamilo\Libraries\Format\Tabs\DynamicFormTabsRenderer;
 use Chamilo\Libraries\Format\Tabs\DynamicFormTab;
 use Chamilo\Application\Discovery\DataSource\DataClass\InstanceSetting;
 use Chamilo\Application\Discovery\DataSource\DataClass\Instance;
+use Chamilo\Application\Discovery\DataSource\DataManager;
 
 class InstanceForm extends FormValidator
 {

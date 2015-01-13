@@ -13,6 +13,8 @@ use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Application\Discovery\Module\Exemption\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\Module\Exemption\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

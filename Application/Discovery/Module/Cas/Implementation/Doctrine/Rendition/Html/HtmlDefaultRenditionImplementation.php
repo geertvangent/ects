@@ -14,6 +14,8 @@ use Chamilo\Application\Discovery\Module\Cas\DataManager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\GraphRenderer;
+use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rights;
+use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

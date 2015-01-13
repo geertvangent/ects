@@ -14,6 +14,10 @@ use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters;
+use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\Xlsx;
 
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\RenditionImplementation;
+
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
 

@@ -6,6 +6,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\DateFormatConditionVariable;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\DataManager\DataManager;
 
 abstract class TypeDataFilter
 {

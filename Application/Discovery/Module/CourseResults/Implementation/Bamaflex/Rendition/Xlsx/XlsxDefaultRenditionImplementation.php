@@ -5,7 +5,9 @@ use Chamilo\Application\Discovery\Module\CourseResults\DataManager;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Libraries\Format\Display;
-
+use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -69,7 +71,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
             \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
 
-        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+        \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
+            $this->php_excel,
+            $headers);
 
         $row = 2;
 

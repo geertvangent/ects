@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\Html;
 
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\RenditionImplementation;
+
 class HtmlZipRenditionImplementation extends RenditionImplementation
 {
 
@@ -8,7 +10,7 @@ class HtmlZipRenditionImplementation extends RenditionImplementation
     {
         \Chamilo\Application\Discovery\Rendition\Rendition :: launch($this);
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -16,12 +18,12 @@ class HtmlZipRenditionImplementation extends RenditionImplementation
     {
         return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
     public function get_view()
     {
-        return \Chamilo\Application\Discovery\HtmlRendition :: VIEW_ZIP;
+        return \Chamilo\Application\Discovery\Rendition\Format\HtmlRendition :: VIEW_ZIP;
     }
 }

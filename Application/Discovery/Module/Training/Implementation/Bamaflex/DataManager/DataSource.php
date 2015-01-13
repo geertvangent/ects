@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\DataManager;
 
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
@@ -42,7 +42,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new StaticConditionVariable($year));
 
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, name';
             $statement = $this->get_connection()->query($query);
 
@@ -98,7 +98,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new AndCondition($conditions);
 
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
 
         if ($statement instanceof PDOStatement)
@@ -118,7 +118,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('year'), null));
 
             $query = 'SELECT DISTINCT year FROM v_discovery_training_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
 
             $statement = $this->get_connection()->query($query);
 
@@ -152,7 +152,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 $condition = new AndCondition($conditions);
 
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
-                     DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+                     ConditionTranslator :: render($condition, null, $this->get_connection());
 
                 $statement = $this->get_connection()->query($query);
 
@@ -260,7 +260,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new AndCondition($conditions);
 
         $query = 'SELECT id, source FROM v_discovery_faculty_advanced WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
 
         if ($statement instanceof PDOStatement)
@@ -287,7 +287,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             $condition = new AndCondition($conditions);
 
             $query = 'SELECT * FROM v_discovery_faculty_dean_advanced WHERE ' .
-                 DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY person';
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY person';
 
             $statement = $this->get_connection()->query($query);
 

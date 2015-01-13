@@ -14,6 +14,8 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupp
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 use Chamilo\Libraries\Format\Table\Column\DisplayOrderPropertyTableColumn;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
+use Chamilo\Application\Discovery\Instance\Manager;
+use Chamilo\Application\Discovery\Instance\DataManager;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

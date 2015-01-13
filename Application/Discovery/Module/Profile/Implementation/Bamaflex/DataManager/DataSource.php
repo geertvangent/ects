@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\DataManager;
 
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DoctrineConditionTranslator;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Application\Discovery\Module\Profile\Photo;
 use Chamilo\Application\Discovery\Module\Profile\Communication;
@@ -37,7 +37,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($official_code));
 
         $query = 'SELECT * FROM v_discovery_profile_basic WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -101,7 +101,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($official_code));
 
         $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
         if ($statement instanceof PDOStatement)
@@ -122,7 +122,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
         $query = 'SELECT * FROM v_discovery_profile_email WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -152,7 +152,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             new StaticConditionVariable($id));
 
         $query = 'SELECT * FROM v_discovery_profile_learning_credit WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY date DESC';
+             ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY date DESC';
 
         $statement = $this->get_connection()->query($query);
 
@@ -183,7 +183,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
         $query = 'SELECT * FROM v_discovery_profile_communication WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -214,7 +214,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
         $query = 'SELECT * FROM v_discovery_profile_address WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -253,7 +253,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
         $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -278,7 +278,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
         $query = 'SELECT * FROM v_discovery_profile_previous_college WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -313,7 +313,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
         $query = 'SELECT * FROM v_discovery_profile_previous_university WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
@@ -352,7 +352,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
         $query = 'SELECT * FROM v_discovery_profile_nationality WHERE ' .
-             DoctrineConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition, null, $this->get_connection());
 
         $statement = $this->get_connection()->query($query);
 
