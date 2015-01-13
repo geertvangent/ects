@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_helpdesk;
+namespace Application\EhbHelpdesk\package;
 
 class Deactivator extends \configuration\package\Deactivator
 {

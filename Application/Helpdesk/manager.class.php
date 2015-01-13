@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_helpdesk;
+namespace Application\EhbHelpdesk;
 
 use libraries\architecture\application\Application;
 

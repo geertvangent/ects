@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_helpdesk;
+namespace Application\EhbHelpdesk\form;
 
 use libraries\storage\AndCondition;
 use libraries\storage\NotCondition;

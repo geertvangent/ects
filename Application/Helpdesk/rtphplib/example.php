@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_helpdesk;
+namespace Application\EhbHelpdesk\rtphplib;
 
 $url = "http://helpdesk.ehb.be/rt";
 $user = "desiderius";

@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_helpdesk;
+namespace Application\EhbHelpdesk\rest;
 
 use libraries\utilities\StringUtilities;
 use HTTP_Request;

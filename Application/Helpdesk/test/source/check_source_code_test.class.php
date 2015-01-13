@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_helpdesk\test;
+namespace Application\EhbHelpdesk\test\source;
 
 use \libraries\architecture\TestApplication;
 

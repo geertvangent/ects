@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_helpdesk;
+namespace Application\EhbHelpdesk\component;
 
 use libraries\platform\translation\Translation;
 use libraries\file\FileProperties;
