@@ -1,10 +1,9 @@
 <?php
 namespace Chamilo\Application\EhbHelpdesk\Rest;
 
-use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\HTTP_Request;
+use Chamilo\Libraries\Utilities\String\StringUtilities;
 
-class RestClient extends \Chamilo\Libraries\Protocol\RestClient
+class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\RestClient
 {
 
     private $server_url;
@@ -119,7 +118,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\RestClient
         $request_properties['user'] = $this->get_basic_login();
         $request_properties['pass'] = $this->get_basic_password();
 
-        $request = new HTTP_Request($this->get_url(), $request_properties);
+        $request = new \HTTP_Request($this->get_url(), $request_properties);
 
         /*
          * addition

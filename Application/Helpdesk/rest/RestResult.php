@@ -1,9 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbHelpdesk\Rest;
 
-use Chamilo\SimpleXMLElement;
-
-class RestResult extends \Chamilo\Libraries\Protocol\RestResult
+class RestResult extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\RestResult
 {
 
     private $response_content_xml;
@@ -14,7 +12,7 @@ class RestResult extends \Chamilo\Libraries\Protocol\RestResult
         {
             if ($xml = simplexml_load_string($this->get_response_content()))
             {
-                $this->response_content_xml = new SimpleXMLElement($this->get_response_content());
+                $this->response_content_xml = new \SimpleXMLElement($this->get_response_content());
             }
         }
     }

@@ -1,20 +1,19 @@
 <?php
 namespace Chamilo\Application\EhbHelpdesk\Form;
 
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\NotCondition;
-
-use Chamilo\Libraries\Storage\PatternMatchCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Platform\PlatformSetting;
-use Chamilo\Libraries\Storage\InequalityCondition;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Core\Group\Group;
-use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
+use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Libraries\Storage\Query\OrderBy;
 
 class TicketForm extends FormValidator
 {
@@ -95,7 +94,7 @@ class TicketForm extends FormValidator
 
         // Academic year
         $code = 'AY_' . PlatformSetting :: get('academic_year', 'application\ehb_sync\bamaflex');
-        $academic_year = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($code);
+        $academic_year = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($code);
 
         // Faculty
         $conditions = array();
@@ -115,7 +114,7 @@ class TicketForm extends FormValidator
             InequalityCondition :: LESS_THAN,
             new StaticConditionVariable($academic_year->get_right_value()));
         $condition = new AndCondition($conditions);
-        $groups = \Chamilo\Core\Group\DataManager :: retrieves(
+        $groups = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
             Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
@@ -148,7 +147,7 @@ class TicketForm extends FormValidator
             new StaticConditionVariable($academic_year->get_right_value()));
         $condition = new AndCondition($conditions);
 
-        $groups = \Chamilo\Core\Group\DataManager :: retrieves(
+        $groups = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
             Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,

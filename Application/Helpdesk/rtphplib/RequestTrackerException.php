@@ -15,6 +15,6 @@ namespace Chamilo\Application\EhbHelpdesk\Rtphplib;
  * http://requesttracker.wikia.com/wiki/REST Depending on your request type, this will determine how you create your
  * array of values. See the example script for a demonstration.
  */
-class RequestTrackerException extends \Chamilo\Exception
+class RequestTrackerException extends \Exception
 {
 }
