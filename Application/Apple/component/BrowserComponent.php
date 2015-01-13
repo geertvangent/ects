@@ -2,7 +2,8 @@
 namespace Chamilo\Application\EhbApple\Component;
 
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbApple\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {
