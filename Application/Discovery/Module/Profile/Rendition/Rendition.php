@@ -1,7 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Profile\Rendition;
 
-abstract class Rendition extends \Chamilo\Application\Discovery\Rendition
+use Chamilo\Application\Discovery\Module\Profile\Rendition\Rendition;
+
+abstract class Rendition extends Rendition
 {
 
     public function get_profile()

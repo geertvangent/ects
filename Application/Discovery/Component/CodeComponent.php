@@ -4,6 +4,7 @@ namespace Chamilo\Application\Discovery\Component;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Application\Discovery\Manager;
 
 /**
  *
@@ -25,7 +26,8 @@ class CodeComponent extends Manager implements DelegateComponent
 
         if ($user instanceof \Chamilo\Core\User\Storage\DataClass\User &&
              $module_instance instanceof \Chamilo\Application\Discovery\Instance\DataClass\Instance &&
-             $module_instance->get_content_type() == \Chamilo\Application\Discovery\Instance\DataClass\Instance :: TYPE_USER)
+             $module_instance->get_content_type() ==
+             \Chamilo\Application\Discovery\Instance\DataClass\Instance :: TYPE_USER)
         {
             $parameters = array();
             $parameters[self :: PARAM_APPLICATION] = self :: APPLICATION_NAME;

@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\TrainingInfo\Rendition;
 
-abstract class Rendition extends \Chamilo\Application\Discovery\Rendition
+use Chamilo\Application\Discovery\Module\TrainingInfo\Rendition\Rendition;
+
+abstract class Rendition extends Rendition
 {
 }
