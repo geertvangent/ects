@@ -1,5 +1,5 @@
 <?php
-namespace Application\EhbHelpdesk\rtphplib;
+namespace Chamilo\Application\EhbHelpdesk\Rtphplib;
 
 /**
  * RTPHPLib v1.0 Copyright (C) 2012 Samuel Schmidt Permission is hereby granted, free of charge, to any person obtaining
@@ -15,6 +15,6 @@ namespace Application\EhbHelpdesk\rtphplib;
  * http://requesttracker.wikia.com/wiki/REST Depending on your request type, this will determine how you create your
  * array of values. See the example script for a demonstration.
  */
-class RequestTrackerException extends \Exception
+class RequestTrackerException extends \Chamilo\Exception
 {
 }

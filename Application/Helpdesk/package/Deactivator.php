@@ -1,6 +1,6 @@
 <?php
-namespace Application\EhbHelpdesk\package;
+namespace Chamilo\Application\EhbHelpdesk\Package;
 
-class Deactivator extends \configuration\package\Deactivator
+class Deactivator extends \Chamilo\Configuration\Package\Deactivator
 {
 }

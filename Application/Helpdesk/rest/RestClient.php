@@ -1,10 +1,10 @@
 <?php
-namespace Application\EhbHelpdesk\rest;
+namespace Chamilo\Application\EhbHelpdesk\Rest;
 
-use libraries\utilities\StringUtilities;
-use HTTP_Request;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\HTTP_Request;
 
-class RestClient extends \libraries\protocol\RestClient
+class RestClient extends \Chamilo\Libraries\Protocol\RestClient
 {
 
     private $server_url;

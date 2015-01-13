@@ -1,6 +1,6 @@
 <?php
-namespace Application\EhbHelpdesk\package;
+namespace Chamilo\Application\EhbHelpdesk\Package;
 
-class Activator extends \Chamilo\configuration\package\Activator
+class Activator extends \Chamilo\Chamilo\Configuration\Package\Activator
 {
 }

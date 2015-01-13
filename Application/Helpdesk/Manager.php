@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbHelpdesk;
+namespace Chamilo\Application\EhbHelpdesk;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

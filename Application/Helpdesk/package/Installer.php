@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbHelpdesk\package;
+namespace Chamilo\Application\EhbHelpdesk\Package;
 
 /**
  *
  * @author Hans De Bisschop
  */
-use libraries\architecture\WebApplicationInstaller;
+use Chamilo\Libraries\Architecture\WebApplicationInstaller;
 
 class Installer extends WebApplicationInstaller
 {

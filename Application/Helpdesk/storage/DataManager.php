@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbHelpdesk\storage;
+namespace Chamilo\Application\EhbHelpdesk\Storage;
 
 /**
  *
  * @author Hans De Bisschop
  */
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
 const PREFIX = 'ehb_helpdesk_';
     /**

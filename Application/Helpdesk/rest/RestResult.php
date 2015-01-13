@@ -1,9 +1,9 @@
 <?php
-namespace Application\EhbHelpdesk\rest;
+namespace Chamilo\Application\EhbHelpdesk\Rest;
 
-use SimpleXMLElement;
+use Chamilo\SimpleXMLElement;
 
-class RestResult extends \libraries\protocol\RestResult
+class RestResult extends \Chamilo\Libraries\Protocol\RestResult
 {
 
     private $response_content_xml;

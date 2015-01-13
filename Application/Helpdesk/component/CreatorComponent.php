@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbHelpdesk\component;
+namespace Chamilo\Application\EhbHelpdesk\Component;
 
-use libraries\platform\translation\Translation;
-use libraries\file\FileProperties;
-use libraries\platform\PlatformSetting;
-use libraries\file\Path;
-use HTTP_Request2;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\File\FileProperties;
+use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\File\Path;
+use Chamilo\HTTP_Request2;
 
 require_once Path :: get_plugin_path() . 'pear/HTTP/Request2.php';
 class CreatorComponent extends Manager
