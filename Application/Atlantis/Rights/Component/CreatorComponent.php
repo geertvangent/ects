@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Atlantis\Rights\Component;
 
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Utilities\Utilities;

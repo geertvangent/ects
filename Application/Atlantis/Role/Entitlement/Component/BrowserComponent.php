@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Atlantis\Role\Entitlement\Component;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;

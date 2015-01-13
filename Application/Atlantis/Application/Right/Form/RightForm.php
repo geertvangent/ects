@@ -4,7 +4,7 @@ namespace Chamilo\Application\Atlantis\Application\Right\Form;
 use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right;
 
 class RightForm extends FormValidator

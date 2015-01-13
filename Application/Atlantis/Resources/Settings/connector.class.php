@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis;
+namespace Chamilo\Application\Atlantis\Resources\Settings;
 use Chamilo\Libraries\Format\Theme\Theme;
 
 class SettingsConnector

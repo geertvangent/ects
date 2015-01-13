@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Chamilo\Application\Atlantis\Role\Entity\Component;
+namespace Application\Atlantis\Role\Entity\Component;
 
 use Chamilo\Libraries\Storage\AndCondition;
 use Chamilo\Libraries\Storage\EqualityCondition;

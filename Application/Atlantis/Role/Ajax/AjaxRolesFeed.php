@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Atlantis\Role\Ajax;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Architecture\AjaxManager;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;

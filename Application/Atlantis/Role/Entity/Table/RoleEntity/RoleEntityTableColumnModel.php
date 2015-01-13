@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Atlantis\Role\Entity\Table\RoleEntity;
 
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;

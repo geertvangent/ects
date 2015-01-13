@@ -4,7 +4,7 @@ namespace Chamilo\Application\Atlantis\Role\Component;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Atlantis\Role\Manager;
 use Chamilo\Application\Atlantis\Role\DataClass\Role;
 use Chamilo\Application\Atlantis\Role\Form\RoleForm;

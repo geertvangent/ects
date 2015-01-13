@@ -3,7 +3,7 @@ namespace Chamilo\Application\Atlantis\Role\Form;
 
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Atlantis\Role\DataClass\Role;
 
 class RoleForm extends FormValidator

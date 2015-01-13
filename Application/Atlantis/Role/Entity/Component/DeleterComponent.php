@@ -3,7 +3,7 @@ namespace Chamilo\Application\Atlantis\Role\Entity\Component;
 
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Atlantis\Role\Entity\Manager;
 use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
 use Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager;

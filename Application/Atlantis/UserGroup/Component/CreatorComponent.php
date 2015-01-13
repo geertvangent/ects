@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Atlantis\UserGroup\Component;
 
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Atlantis\UserGroup\Manager;
 
 class CreatorComponent extends Manager

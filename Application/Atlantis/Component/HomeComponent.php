@@ -5,7 +5,7 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicSearchAction;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Tabs\DynamicAction;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Format\Tabs\DynamicActionsTab;
 use Chamilo\Libraries\Utilities\Utilities;

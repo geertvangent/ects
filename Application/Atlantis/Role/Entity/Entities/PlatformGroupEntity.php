@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Atlantis\Role\Entity\Entities;
 
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementType;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 
 class PlatformGroupEntity extends \Chamilo\Core\Rights\Entity\PlatformGroupEntity
 {

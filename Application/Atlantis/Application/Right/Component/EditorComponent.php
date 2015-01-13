@@ -4,7 +4,7 @@ namespace Chamilo\Application\Atlantis\Application\Right\Component;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Application\Atlantis\Application\Right\Manager;
 use Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right;
