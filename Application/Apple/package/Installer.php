@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbApple\package;
+namespace Chamilo\Application\EhbApple\Package;
 
-use libraries\architecture\WebApplicationInstaller;
+use Chamilo\Libraries\Architecture\WebApplicationInstaller;
 
 /**
  *
