@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_apple;
+namespace Application\EhbApple;
 
 use libraries\architecture\application\Application;
 

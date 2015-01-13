@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_apple;
+namespace Application\EhbApple\package;
 
 class Activator extends \Chamilo\configuration\package\Activator
 {

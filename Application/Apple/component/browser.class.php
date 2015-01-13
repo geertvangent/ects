@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_apple;
+namespace Application\EhbApple\component;
 
 use libraries\format\Display;
 use libraries\architecture\DelegateComponent;

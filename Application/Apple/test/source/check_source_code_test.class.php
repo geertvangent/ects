@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_apple\test;
+namespace Application\EhbApple\test\source;
 
 use \libraries\architecture\TestApplication;
 
