@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\data\processor;
+namespace Chamilo\Application\EhbSync\Data\Processor;
 
-use libraries\file\FileLogger;
+use Chamilo\Libraries\File\FileLogger;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
@@ -45,13 +45,13 @@ class PortfolioLocationProcessor
      */
     public function run()
     {
-        $this->dm = \application\portfolio\DataManager :: get_instance();
+        $this->dm = \Chamilo\Application\Portfolio\DataManager :: get_instance();
 
         try
         {
             $this->process_visit_tracker();
         }
-        catch (\Exception $ex)
+        catch (\Chamilo\Exception $ex)
         {
             var_dump($ex->getMessage());
         }
@@ -64,18 +64,18 @@ class PortfolioLocationProcessor
      */
     protected function process_visit_tracker()
     {
-        $publications = \application\portfolio\DataManager :: retrieves(
-            \application\portfolio\Publication :: class_name());
+        $publications = \Chamilo\Application\Portfolio\DataManager :: retrieves(
+            \Chamilo\Application\Portfolio\Publication :: class_name());
 
         while ($publication = $publications->next_result())
         {
             // Initialize the root location
-            $root = \application\portfolio\Rights :: get_instance()->initialize_user_tree(
+            $root = \Chamilo\Application\Portfolio\Rights :: get_instance()->initialize_user_tree(
                 $publication->get_publisher_id());
 
             // Create a location for all publications
-            $location = \application\portfolio\Rights :: get_instance()->create_location_in_users_subtree(
-                \application\portfolio\Rights :: TYPE_PUBLICATION,
+            $location = \Chamilo\Application\Portfolio\Rights :: get_instance()->create_location_in_users_subtree(
+                \Chamilo\Application\Portfolio\Rights :: TYPE_PUBLICATION,
                 $publication->get_id(),
                 $root->get_id(),
                 $publication->get_publisher_id(),
@@ -88,9 +88,9 @@ JOIN old_portfolio_portfolio_location AS oppl ON oppurl.location_id = oppl.id
 WHERE type = 1 AND item_id =' . $location->get_id();
 
             $result = $this->dm->get_connection()->query($query);
-            while ($user_right = $result->fetch(\PDO :: FETCH_ASSOC))
+            while ($user_right = $result->fetch(\Chamilo\PDO :: FETCH_ASSOC))
             {
-                $rights_location_entity_right = new \application\portfolio\RightsLocationEntityRight();
+                $rights_location_entity_right = new \Chamilo\Application\Portfolio\RightsLocationEntityRight();
                 $rights_location_entity_right->set_location_id($location->get_id());
 
                 switch ($user_right['user_id'])
@@ -134,9 +134,9 @@ JOIN old_portfolio_portfolio_location AS oppl ON oppurl.location_id = oppl.id
 WHERE type = 1 AND item_id =' . $location->get_id();
 
             $result = $this->dm->get_connection()->query($query);
-            while ($group_right = $result->fetch(\PDO :: FETCH_ASSOC))
+            while ($group_right = $result->fetch(\Chamilo\PDO :: FETCH_ASSOC))
             {
-                $rights_location_entity_right = new \application\portfolio\RightsLocationEntityRight();
+                $rights_location_entity_right = new \Chamilo\Application\Portfolio\RightsLocationEntityRight();
                 $rights_location_entity_right->set_location_id($location->get_id());
                 $rights_location_entity_right->set_entity_id($group_right['group_id']);
                 $rights_location_entity_right->set_entity_type(2);

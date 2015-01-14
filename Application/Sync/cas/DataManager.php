@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbSync\cas;
+namespace Chamilo\Application\EhbSync\Cas;
 
 /**
  *
  * @author Hans De Bisschop
  */
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
 
     /**

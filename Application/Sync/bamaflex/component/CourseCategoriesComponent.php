@@ -1,9 +1,9 @@
 <?php
-namespace Application\EhbSync\bamaflex\component;
+namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
-use application\weblcms\CourseCategory;
-use libraries\architecture\DelegateComponent;
-use libraries\platform\PlatformSetting;
+use Chamilo\Application\Weblcms\CourseCategory;
+use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Platform\PlatformSetting;
 
 class CourseCategoriesComponent extends Manager implements DelegateComponent
 {
@@ -40,7 +40,7 @@ class CourseCategoriesComponent extends Manager implements DelegateComponent
             Synchronization :: log('Course categories sync ended', date('c', time()));
             echo '</pre>';
         }
-        catch (\Exception $exception)
+        catch (\Chamilo\Exception $exception)
         {
             echo 'Synchronization failed';
         }

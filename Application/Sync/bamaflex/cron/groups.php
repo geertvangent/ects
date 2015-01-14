@@ -1,5 +1,5 @@
 <?php
-namespace Application\EhbSync\bamaflex\cron;
+namespace Chamilo\Application\EhbSync\Bamaflex\Cron;
 
 /**
  * This script will load the requested application and launch it.
@@ -15,7 +15,7 @@ try
     Synchronization :: log('Group sync started', date('c', time()));
     flush();
 
-    $root_group = \core\group\DataManager :: get_root_group();
+    $root_group = \Chamilo\Core\Group\DataManager :: get_root_group();
 
     $synchronization = GroupSynchronization :: factory('academic_year', new DummyGroupSynchronization($root_group));
     $synchronization->run();
@@ -28,7 +28,7 @@ try
     Synchronization :: log('Group sync ended', date('c', time()));
     echo '</pre>';
 }
-catch (\Exception $exception)
+catch (\Chamilo\Exception $exception)
 {
     echo 'Synchronization failed';
 }

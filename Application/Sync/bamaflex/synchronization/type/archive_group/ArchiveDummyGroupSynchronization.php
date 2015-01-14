@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type\archive_group;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroup;
 
 /**
  *
  * @package ehb.sync;
  */
-use core\group\Group;
+use Chamilo\Core\Group\Group;
 
 class ArchiveDummyGroupSynchronization extends ArchiveGroupSynchronization
 {

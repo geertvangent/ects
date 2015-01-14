@@ -1,13 +1,13 @@
 <?php
-namespace Application\EhbSync\cas\component;
+namespace Chamilo\Application\EhbSync\Cas\Component;
 
-use libraries\storage\EqualityCondition;
-use application\ehb_sync\cas\data\Statistic;
-use libraries\storage\DataClassRetrievesParameters;
-use application\ehb_sync\cas\storage\ComAuditTrail;
-use libraries\architecture\DelegateComponent;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Application\EhbSync\Cas\Data\Statistic;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Application\EhbSync\Cas\Storage\ComAuditTrail;
+use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
 
 class StatisticsComponent extends Manager implements DelegateComponent
 {
@@ -35,7 +35,7 @@ class StatisticsComponent extends Manager implements DelegateComponent
 
             $parameters = new DataClassRetrievesParameters(null, 200000);
 
-            $audit_trails = \application\ehb_sync\cas\storage\DataManager :: retrieves(
+            $audit_trails = \Chamilo\Application\EhbSync\Cas\Storage\DataManager :: retrieves(
                 ComAuditTrail :: class_name(),
                 $parameters);
 
@@ -50,7 +50,7 @@ class StatisticsComponent extends Manager implements DelegateComponent
             echo '[  STAT SYNC ENDED] ' . date('c', time()) . "\n";
             echo '</pre>';
         }
-        catch (\Exception $exception)
+        catch (\Chamilo\Exception $exception)
         {
             echo 'Processing statistics failed';
         }
@@ -71,12 +71,12 @@ class StatisticsComponent extends Manager implements DelegateComponent
         {
             $email_address = trim(str_replace(']', '', str_replace('[username: ', '', $audit_trail->get_user())));
             $statistic->set_user($email_address);
-            $user = \core\user\DataManager :: retrieve(
-                \core\user\User :: class_name(),
+            $user = \Chamilo\Core\User\DataManager :: retrieve(
+                \Chamilo\Core\User\User :: class_name(),
                 new EqualityCondition(
-                    new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_USERNAME),
+                    new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_USERNAME),
                     new StaticConditionVariable($email_address)));
-            if ($user instanceof \core\user\User)
+            if ($user instanceof \Chamilo\Core\User\User)
             {
                 $statistic->set_person_id($user->get_official_code());
             }
@@ -87,12 +87,12 @@ class StatisticsComponent extends Manager implements DelegateComponent
         {
             $email_address = trim($audit_trail->get_user());
             $statistic->set_user($email_address);
-            $user = \core\user\DataManager :: retrieve(
-                \core\user\User :: class_name(),
+            $user = \Chamilo\Core\User\DataManager :: retrieve(
+                \Chamilo\Core\User\User :: class_name(),
                 new EqualityCondition(
-                    new PropertyConditionVariable(\core\user\User :: class_name(), \core\user\User :: PROPERTY_USERNAME),
+                    new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_USERNAME),
                     new StaticConditionVariable($email_address)));
-            if ($user instanceof \core\user\User)
+            if ($user instanceof \Chamilo\Core\User\User)
             {
                 $statistic->set_person_id($user->get_official_code());
             }

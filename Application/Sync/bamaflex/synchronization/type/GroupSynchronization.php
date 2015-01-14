@@ -1,15 +1,15 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type;
 
-use libraries\storage\InCondition;
-use core\group\GroupRelUser;
-use core\group\Group;
-use libraries\storage\EqualityCondition;
-use libraries\utilities\Utilities;
-use libraries\storage\AndCondition;
-use libraries\storage\DataClassDistinctParameters;
-use libraries\storage\StaticConditionVariable;
-use libraries\storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Core\Group\GroupRelUser;
+use Chamilo\Core\Group\Group;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\DataClassDistinctParameters;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
 
 /**
  *
@@ -86,7 +86,7 @@ class GroupSynchronization extends Synchronization
 
     public function determine_current_group()
     {
-        $this->current_group = \core\group\DataManager :: retrieve_group_by_code_and_parent_id(
+        $this->current_group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code_and_parent_id(
             $this->get_code(),
             $this->get_parent_group()->get_id());
     }
@@ -194,7 +194,7 @@ class GroupSynchronization extends Synchronization
         $condition = new EqualityCondition(
             new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
             new StaticConditionVariable($this->current_group->get_id()));
-        $current_users = \core\group\DataManager :: distinct(
+        $current_users = \Chamilo\Core\Group\DataManager :: distinct(
             GroupRelUser :: class_name(),
             new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
         $source_users = $this->get_users();
@@ -220,7 +220,7 @@ class GroupSynchronization extends Synchronization
 
         $condition = new AndCondition($conditions);
 
-        return \core\group\DataManager :: deletes(GroupRelUser :: class_name(), $condition);
+        return \Chamilo\Core\Group\DataManager :: deletes(GroupRelUser :: class_name(), $condition);
     }
 
     /**
@@ -257,7 +257,7 @@ class GroupSynchronization extends Synchronization
 
             if (count($result_codes) > 0)
             {
-                $results = \core\user\DataManager :: retrieve_users_by_official_codes($result_codes);
+                $results = \Chamilo\Core\User\DataManager :: retrieve_users_by_official_codes($result_codes);
                 while ($result = $results->next_result())
                 {
                     $user_ids[] = $result->get_id();

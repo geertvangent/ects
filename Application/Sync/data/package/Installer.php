@@ -1,10 +1,10 @@
 <?php
-namespace Application\EhbSync\data\package;
+namespace Chamilo\Application\EhbSync\Data\Package;
 
 /**
  *
  * @author Hans De Bisschop
  */
-class Installer extends \configuration\package\Installer
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 }

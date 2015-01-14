@@ -1,19 +1,19 @@
 <?php
-namespace Application\EhbSync\cas\synchronization\type\user;
+namespace Chamilo\Application\EhbSync\Cas\Synchronization\Type\User;
 
 /**
  *
  * @package ehb.sync;
  */
-use core\user\User;
+use Chamilo\Core\User\User;
 
 class AllUserSynchronization extends UserSynchronization
 {
 
     public function get_data()
     {
-        return \application\cas_user\account\DataManager :: retrieves(
-            \application\cas_user\account\Account :: class_name());
+        return \Chamilo\Application\CasUser\Account\DataManager :: retrieves(
+            \Chamilo\Application\CasUser\Account\Account :: class_name());
     }
 
     public function get_type()
@@ -23,7 +23,7 @@ class AllUserSynchronization extends UserSynchronization
 
     public function process_data($person)
     {
-        $user = \core\user\DataManager :: retrieve_user_by_official_code($person->get_person_id());
+        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($person->get_person_id());
         
         if (! $user instanceof User)
         {

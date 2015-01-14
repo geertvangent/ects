@@ -1,6 +1,6 @@
 <?php
-namespace Application\EhbSync\bamaflex\package;
+namespace Chamilo\Application\EhbSync\Bamaflex\Package;
 
-class Deactivator extends \configuration\package\Deactivator
+class Deactivator extends \Chamilo\Configuration\Package\Deactivator
 {
 }

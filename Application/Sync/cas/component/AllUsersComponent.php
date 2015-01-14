@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\cas\component;
+namespace Chamilo\Application\EhbSync\Cas\Component;
 
-use libraries\architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\DelegateComponent;
 
 class AllUsersComponent extends Manager implements DelegateComponent
 {
@@ -22,7 +22,7 @@ class AllUsersComponent extends Manager implements DelegateComponent
             echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
             echo '</pre>';
         }
-        catch (\Exception $exception)
+        catch (\Chamilo\Exception $exception)
         {
             echo 'Synchronization failed';
         }

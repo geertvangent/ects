@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\cas\synchronization;
+namespace Chamilo\Application\EhbSync\Cas\Synchronization;
 
-use libraries\utilities\Utilities;
+use Chamilo\Libraries\Utilities\Utilities;
 
 abstract class Synchronization
 {

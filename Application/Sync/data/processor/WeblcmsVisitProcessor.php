@@ -1,12 +1,12 @@
 <?php
-namespace Application\EhbSync\data\processor;
+namespace Chamilo\Application\EhbSync\Data\Processor;
 
-use application\weblcms\CourseTool;
-use libraries\file\FileLogger;
-use libraries\storage\DataClassRetrieveParameters;
-use libraries\storage\Cache\DataClassCache;
-use libraries\storage\OrderBy;
-use libraries\storage\PropertyConditionVariable;
+use Chamilo\Application\Weblcms\CourseTool;
+use Chamilo\Libraries\File\FileLogger;
+use Chamilo\Libraries\Storage\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\Cache\DataClassCache;
+use Chamilo\Libraries\Storage\OrderBy;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
@@ -57,14 +57,14 @@ class WeblcmsVisitProcessor
      */
     public function run()
     {
-        $this->dm = \core\user\integration\core\tracking\DataManager :: get_instance();
+        $this->dm = \Chamilo\Core\User\Integration\Core\Tracking\DataManager :: get_instance();
         $this->intialize_tool_ids_by_name();
 
         try
         {
             $this->process_visit_tracker();
         }
-        catch (\Exception $ex)
+        catch (\Chamilo\Exception $ex)
         {
             var_dump($ex->getMessage());
         }
@@ -77,7 +77,7 @@ class WeblcmsVisitProcessor
     {
         $query = 'SELECT id, name FROM weblcms_course_tool';
         $result = $this->dm->get_connection()->query($query);
-        while ($course_tool = $result->fetch(\PDO :: FETCH_ASSOC))
+        while ($course_tool = $result->fetch(\Chamilo\PDO :: FETCH_ASSOC))
         {
             $this->tool_ids_by_name[$course_tool[CourseTool :: PROPERTY_NAME]] = $course_tool[CourseTool :: PROPERTY_ID];
         }
@@ -122,7 +122,7 @@ class WeblcmsVisitProcessor
             $row_counter = 0;
 
             $result = $this->dm->get_connection()->query($query);
-            while ($visit_tracker_row = $result->fetch(\PDO :: FETCH_ASSOC))
+            while ($visit_tracker_row = $result->fetch(\Chamilo\PDO :: FETCH_ASSOC))
             {
                 $this->handle_visit_tracker($visit_tracker_row);
                 $row_counter ++;
@@ -144,8 +144,8 @@ class WeblcmsVisitProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\Chamilo\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\Chamilo\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_USER_ID];
 
         $query = array();
 
@@ -185,10 +185,10 @@ class WeblcmsVisitProcessor
         $visit->set_category_id($category_id);
         $visit->set_publication_id($publication_id);
         $visit->set_access_date(
-            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
+            $visit_tracker[\Chamilo\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
         $visit->set_time(
-            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LEAVE_DATE] -
-                 $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
+            $visit_tracker[\Chamilo\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LEAVE_DATE] -
+                 $visit_tracker[\Chamilo\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
 
         if (! $visit->save())
 

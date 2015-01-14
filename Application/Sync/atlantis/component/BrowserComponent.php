@@ -1,10 +1,10 @@
 <?php
-namespace Application\EhbSync\atlantis\component;
+namespace Chamilo\Application\EhbSync\Atlantis\Component;
 
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\utilities\Utilities;
-use libraries\architecture\DelegateComponent;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\DelegateComponent;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

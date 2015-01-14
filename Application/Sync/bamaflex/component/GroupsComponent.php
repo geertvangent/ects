@@ -1,8 +1,8 @@
 <?php
-namespace Application\EhbSync\bamaflex\component;
+namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
-use libraries\architecture\DelegateComponent;
-use libraries\platform\PlatformSetting;
+use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Platform\PlatformSetting;
 
 class GroupsComponent extends Manager implements DelegateComponent
 {
@@ -25,7 +25,7 @@ class GroupsComponent extends Manager implements DelegateComponent
             $years = PlatformSetting :: get('academic_year', __NAMESPACE__);
             $years = explode(',', $years);
 
-            $root_group = \core\group\DataManager :: get_root_group();
+            $root_group = \Chamilo\Core\Group\DataManager :: get_root_group();
 
             foreach ($years as $year)
             {
@@ -43,7 +43,7 @@ class GroupsComponent extends Manager implements DelegateComponent
             Synchronization :: log('Group sync ended', date('c', time()));
             echo '</pre>';
         }
-        catch (\Exception $exception)
+        catch (\Chamilo\Exception $exception)
         {
             echo 'Synchronization failed';
         }

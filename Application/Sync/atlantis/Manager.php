@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\atlantis;
+namespace Chamilo\Application\EhbSync\Atlantis;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

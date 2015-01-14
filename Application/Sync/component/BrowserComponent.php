@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbSync\component;
+namespace Chamilo\Application\EhbSync\Component;
 
-use libraries\architecture\NotAllowedException;
-use libraries\utilities\Utilities;
-use libraries\format\theme\Theme;
-use libraries\platform\translation\Translation;
-use libraries\architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Architecture\DelegateComponent;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

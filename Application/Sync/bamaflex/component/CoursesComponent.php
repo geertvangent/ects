@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\bamaflex\component;
+namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
-use libraries\architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\DelegateComponent;
 
 class CoursesComponent extends Manager implements DelegateComponent
 {
@@ -27,7 +27,7 @@ class CoursesComponent extends Manager implements DelegateComponent
             Synchronization :: log('Courses sync ended', date('c', time()));
             echo '</pre>';
         }
-        catch (\Exception $exception)
+        catch (\Chamilo\Exception $exception)
         {
             echo 'Synchronization failed';
             Synchronization :: log('Synchronization failed', date('c', time()));

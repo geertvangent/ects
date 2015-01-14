@@ -1,10 +1,10 @@
 <?php
-namespace Application\EhbSync\atlantis\package;
+namespace Chamilo\Application\EhbSync\Atlantis\Package;
 
 /**
  *
  * @author Hans De Bisschop
  */
-class Installer extends \configuration\package\Installer
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 }

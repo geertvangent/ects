@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\cas\storage;
+namespace Chamilo\Application\EhbSync\Cas\Storage;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

@@ -1,8 +1,8 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type;
 
-use application\weblcms\CourseCategory;
-use libraries\utilities\Utilities;
+use Chamilo\Application\Weblcms\CourseCategory;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  *
@@ -74,7 +74,7 @@ class CourseCategorySynchronization extends Synchronization
 
     public function determine_current_group()
     {
-        $this->current_group = \application\weblcms\DataManager :: retrieve_course_category_by_code(
+        $this->current_group = \Chamilo\Application\Weblcms\DataManager :: retrieve_course_category_by_code(
             $this->get_code());
     }
 

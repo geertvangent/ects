@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\cas\storage\data_class;
+namespace Chamilo\Application\EhbSync\Cas\Storage\DataClass;
 
-use libraries\storage\data_class\DataClass;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  *

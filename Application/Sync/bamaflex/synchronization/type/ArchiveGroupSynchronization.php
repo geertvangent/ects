@@ -1,16 +1,16 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type;
 
-use libraries\platform\PlatformSetting;
-use libraries\storage\InCondition;
-use core\group\Group;
-use libraries\storage\EqualityCondition;
-use libraries\utilities\Utilities;
-use libraries\storage\AndCondition;
-use libraries\storage\DataClassDistinctParameters;
-use core\group\GroupRelUser;
-use libraries\storage\PropertyConditionVariable;
-use libraries\storage\StaticConditionVariable;
+use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Core\Group\Group;
+use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\DataClassDistinctParameters;
+use Chamilo\Core\Group\GroupRelUser;
+use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 /**
  *
@@ -86,7 +86,7 @@ class ArchiveGroupSynchronization extends Synchronization
 
     public function determine_current_group()
     {
-        $this->current_group = \core\group\DataManager :: retrieve_group_by_code_and_parent_id(
+        $this->current_group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code_and_parent_id(
             $this->get_code(),
             $this->get_parent_group()->get_id());
     }
@@ -194,8 +194,8 @@ class ArchiveGroupSynchronization extends Synchronization
         $condition = new EqualityCondition(
             new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
             new StaticConditionVariable($this->current_group->get_id()));
-        $current_users = \core\group\DataManager :: distinct(
-            \core\group\GroupRelUser :: class_name(),
+        $current_users = \Chamilo\Core\Group\DataManager :: distinct(
+            \Chamilo\Core\Group\GroupRelUser :: class_name(),
             new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
         $source_users = $this->get_users();
         // $source_users = array();
@@ -204,7 +204,7 @@ class ArchiveGroupSynchronization extends Synchronization
 
         foreach ($to_add as $user_id)
         {
-            $relation = new \core\group\GroupRelUser();
+            $relation = new \Chamilo\Core\Group\GroupRelUser();
             $relation->set_group_id($this->current_group->get_id());
             $relation->set_user_id($user_id);
             $relation->create();
@@ -216,12 +216,12 @@ class ArchiveGroupSynchronization extends Synchronization
             new StaticConditionVariable($this->current_group->get_id()));
         $conditions[] = new InCondition(
             new PropertyConditionVariable(
-                \core\group\GroupRelUser :: class_name(),
-                \core\group\GroupRelUser :: PROPERTY_USER_ID),
+                \Chamilo\Core\Group\GroupRelUser :: class_name(),
+                \Chamilo\Core\Group\GroupRelUser :: PROPERTY_USER_ID),
             $to_delete);
         $condition = new AndCondition($conditions);
 
-        return \core\group\DataManager :: deletes(\core\group\GroupRelUser :: class_name(), $condition);
+        return \Chamilo\Core\Group\DataManager :: deletes(\Chamilo\Core\Group\GroupRelUser :: class_name(), $condition);
     }
 
     /**
@@ -258,7 +258,7 @@ class ArchiveGroupSynchronization extends Synchronization
 
             if (count($result_codes) > 0)
             {
-                $results = \core\user\DataManager :: retrieve_users_by_official_codes($result_codes);
+                $results = \Chamilo\Core\User\DataManager :: retrieve_users_by_official_codes($result_codes);
                 while ($result = $results->next_result())
                 {
                     $user_ids[] = $result->get_id();

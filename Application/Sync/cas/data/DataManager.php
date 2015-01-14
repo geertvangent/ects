@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbSync\cas\data;
+namespace Chamilo\Application\EhbSync\Cas\Data;
 
 /**
  *
  * @author Hans De Bisschop
  */
-class DataManager extends \libraries\storage\data_manager\DataManager
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
     const PREFIX = 'ehb_sync_';
     /**

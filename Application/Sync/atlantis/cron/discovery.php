@@ -1,5 +1,5 @@
 <?php
-namespace Application\EhbSync\atlantis\cron;
+namespace Chamilo\Application\EhbSync\Atlantis\Cron;
 
 /**
  * This script will load the requested application and launch it.
@@ -17,7 +17,7 @@ try
     echo '[  DISCOVERY SYNC ENDED] ' . date('c', time()) . "\n";
     echo '</pre>';
 }
-catch (\Exception $exception)
+catch (\Chamilo\Exception $exception)
 {
     echo 'Synchronization failed';
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Application\EhbSync\bamaflex\cron;
+namespace Chamilo\Application\EhbSync\Bamaflex\Cron;
 
 /**
  * This script will load the requested application and launch it.
@@ -21,7 +21,7 @@ try
     Synchronization :: log('Courses sync ended', date('c', time()));
     echo '</pre>';
 }
-catch (\Exception $exception)
+catch (\Chamilo\Exception $exception)
 {
     echo 'Synchronization failed';
 }

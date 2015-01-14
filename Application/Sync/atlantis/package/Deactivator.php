@@ -1,6 +1,6 @@
 <?php
-namespace Application\EhbSync\atlantis\package;
+namespace Chamilo\Application\EhbSync\Atlantis\Package;
 
-class Deactivator extends \configuration\package\Deactivator
+class Deactivator extends \Chamilo\Configuration\Package\Deactivator
 {
 }

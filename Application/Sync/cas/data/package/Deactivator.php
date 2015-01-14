@@ -1,6 +1,6 @@
 <?php
-namespace Application\EhbSync\cas\data\package;
+namespace Chamilo\Application\EhbSync\Cas\Data\Package;
 
-class Deactivator extends \configuration\package\Deactivator
+class Deactivator extends \Chamilo\Configuration\Package\Deactivator
 {
 }

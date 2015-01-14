@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\bamaflex;
+namespace Chamilo\Application\EhbSync\Bamaflex;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\data\storage\data_class;
+namespace Chamilo\Application\EhbSync\Data\Storage\DataClass;
 
-use libraries\storage\data_class\DataClass;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  * Tracks the visits of a user to the personal calendar

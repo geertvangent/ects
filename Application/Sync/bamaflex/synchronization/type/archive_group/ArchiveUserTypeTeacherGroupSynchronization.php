@@ -1,5 +1,5 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type\archive_group;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroup;
 
 /**
  *

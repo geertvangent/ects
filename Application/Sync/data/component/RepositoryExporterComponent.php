@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\data\component;
+namespace Chamilo\Application\EhbSync\Data\Component;
 
-use libraries\architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\DelegateComponent;
 
 class RepositoryExporterComponent extends Manager implements DelegateComponent
 {
@@ -25,7 +25,7 @@ class RepositoryExporterComponent extends Manager implements DelegateComponent
 
             echo '</pre>';
         }
-        catch (\Exception $exception)
+        catch (\Chamilo\Exception $exception)
         {
             echo 'Synchronization failed';
         }

@@ -1,14 +1,14 @@
 <?php
-namespace Application\EhbSync\cas\storage\test\source;
+namespace Chamilo\Application\EhbSync\Cas\Storage\Test\Source;
 
-use \libraries\architecture\TestApplication;
+use Chamilo\\Libraries\Architecture\TestApplication;
 
 /**
  * This test case checks the php syntax for the php files of this package
  *
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class CheckSourceCodeTest extends \libraries\architecture\CheckSourceCodeTest
+class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\CheckSourceCodeTest
 {
-    use TestApplication;
+    use Chamilo\TestApplication;
 }

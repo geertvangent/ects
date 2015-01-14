@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type;
 
-use libraries\utilities\Utilities;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  *

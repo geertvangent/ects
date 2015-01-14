@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\bamaflex\data_connector\bamaflex;
+namespace Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex;
 
-use libraries\storage\ArrayResultSet;
+use Chamilo\Libraries\Storage\ArrayResultSet;
 
 class BamaflexResultSet extends ArrayResultSet
 {
@@ -10,9 +10,9 @@ class BamaflexResultSet extends ArrayResultSet
     {
         $records = array();
 
-        if (! $statement instanceof \PDOException)
+        if (! $statement instanceof \Chamilo\PDOException)
         {
-            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            while ($record = $statement->fetch(\Chamilo\PDO :: FETCH_ASSOC))
             {
                 $records[] = $this->process_record($record);
             }

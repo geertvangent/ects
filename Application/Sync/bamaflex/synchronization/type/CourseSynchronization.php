@@ -1,12 +1,12 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type;
 
-use application\weblcms\course\CourseGroupRelation;
-use application\weblcms\CourseManagementRights;
-use application\weblcms\CourseSettingsConnector;
-use application\weblcms\CourseSettingsController;
-use application\weblcms\course\Course;
-use core\group\Group;
+use Chamilo\Application\Weblcms\Course\CourseGroupRelation;
+use Chamilo\Application\Weblcms\CourseManagementRights;
+use Chamilo\Application\Weblcms\CourseSettingsConnector;
+use Chamilo\Application\Weblcms\CourseSettingsController;
+use Chamilo\Application\Weblcms\Course\Course;
+use Chamilo\Core\Group\Group;
 
 /**
  *
@@ -43,7 +43,7 @@ class CourseSynchronization extends Synchronization
      */
     public function synchronize($course)
     {
-        $current_course = \application\weblcms\course\DataManager :: retrieve_course_by_visual_code($course['id']);
+        $current_course = \Chamilo\Application\Weblcms\Course\DataManager :: retrieve_course_by_visual_code($course['id']);
 
         if (! $current_course instanceof Course)
         {
@@ -54,7 +54,7 @@ class CourseSynchronization extends Synchronization
 
             if (! array_key_exists($category_code, $this->course_categories_cache))
             {
-                $this->course_categories_cache[$category_code] = \application\weblcms\DataManager :: retrieve_course_category_by_code(
+                $this->course_categories_cache[$category_code] = \Chamilo\Application\Weblcms\DataManager :: retrieve_course_category_by_code(
                     $category_code);
             }
             $new_course->set_titular_id(null);
@@ -84,20 +84,20 @@ class CourseSynchronization extends Synchronization
 
                 self :: log('added', $new_course->get_title());
 
-                $group = \core\group\DataManager :: retrieve_group_by_code($teacher_code);
+                $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($teacher_code);
                 if ($group instanceof Group)
                 {
-                    \application\weblcms\course\DataManager :: subscribe_group_to_course(
+                    \Chamilo\Application\Weblcms\Course\DataManager :: subscribe_group_to_course(
                         $new_course->get_id(),
                         $group->get_id(),
                         CourseGroupRelation :: STATUS_TEACHER);
                     self :: log('added teacher group', $new_course->get_title());
                 }
 
-                $group = \core\group\DataManager :: retrieve_group_by_code($student_code);
+                $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($student_code);
                 if ($group instanceof Group)
                 {
-                    \application\weblcms\course\DataManager :: subscribe_group_to_course(
+                    \Chamilo\Application\Weblcms\Course\DataManager :: subscribe_group_to_course(
                         $new_course->get_id(),
                         $group->get_id(),
                         CourseGroupRelation :: STATUS_STUDENT);
@@ -115,14 +115,14 @@ class CourseSynchronization extends Synchronization
             $teacher_code = 'COU_OP_' . $course['id'];
             $student_code = 'COU_STU_' . $course['id'];
 
-            $group = \core\group\DataManager :: retrieve_group_by_code($teacher_code);
+            $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($teacher_code);
             if ($group instanceof Group)
             {
-                if (! \application\weblcms\course\DataManager :: is_group_direct_subscribed_to_course(
+                if (! \Chamilo\Application\Weblcms\Course\DataManager :: is_group_direct_subscribed_to_course(
                     $current_course->get_id(),
                     $group->get_id()))
                 {
-                    \application\weblcms\course\DataManager :: subscribe_group_to_course(
+                    \Chamilo\Application\Weblcms\Course\DataManager :: subscribe_group_to_course(
                         $current_course->get_id(),
                         $group->get_id(),
                         CourseGroupRelation :: STATUS_TEACHER);
@@ -130,14 +130,14 @@ class CourseSynchronization extends Synchronization
                 }
             }
 
-            $group = \core\group\DataManager :: retrieve_group_by_code($student_code);
+            $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($student_code);
             if ($group instanceof Group)
             {
-                if (! \application\weblcms\course\DataManager :: is_group_direct_subscribed_to_course(
+                if (! \Chamilo\Application\Weblcms\Course\DataManager :: is_group_direct_subscribed_to_course(
                     $current_course->get_id(),
                     $group->get_id()))
                 {
-                    \application\weblcms\course\DataManager :: subscribe_group_to_course(
+                    \Chamilo\Application\Weblcms\Course\DataManager :: subscribe_group_to_course(
                         $current_course->get_id(),
                         $group->get_id(),
                         CourseGroupRelation :: STATUS_STUDENT);

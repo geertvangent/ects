@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbSync\cas\storage\package;
+namespace Chamilo\Application\EhbSync\Cas\Storage\Package;
 
 /**
  *
  * @author Hans De Bisschop
  */
-class Installer extends \configuration\package\Installer
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 
     /**

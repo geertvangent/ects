@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbSync\bamaflex\data_connector\bamaflex;
+namespace Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex;
 
 /**
  *
  * @author Hans De Bisschop
  */
-class BamaflexDataConnector extends \libraries\storage\data_manager\DataManager
+class BamaflexDataConnector extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
 
     public static $instance;

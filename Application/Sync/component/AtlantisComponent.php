@@ -1,8 +1,8 @@
 <?php
-namespace Application\EhbSync\component;
+namespace Chamilo\Application\EhbSync\Component;
 
-use libraries\architecture\NotAllowedException;
-use libraries\architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Architecture\DelegateComponent;
 
 class AtlantisComponent extends Manager implements DelegateComponent
 {
@@ -17,6 +17,6 @@ class AtlantisComponent extends Manager implements DelegateComponent
             throw new NotAllowedException();
         }
 
-        \libraries\architecture\Application :: launch(\application\ehb_sync\atlantis\Manager :: context(), $this->get_user(), $this);
+        \Chamilo\Libraries\Architecture\Application :: launch(\Chamilo\Application\EhbSync\Atlantis\Manager :: context(), $this->get_user(), $this);
     }
 }

@@ -1,10 +1,10 @@
 <?php
-namespace Application\EhbSync\cas\cron;
+namespace Chamilo\Application\EhbSync\Cas\Cron;
 
 /**
  * This script will load the requested application and launch it.
  */
-use Exception;
+use Chamilo\Exception;
 
 require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
 
@@ -21,7 +21,7 @@ try
     echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
     echo '</pre>';
 }
-catch (\Exception $exception)
+catch (\Chamilo\Exception $exception)
 {
     echo 'Synchronization failed';
 }

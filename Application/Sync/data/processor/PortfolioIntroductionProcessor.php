@@ -1,9 +1,9 @@
 <?php
-namespace Application\EhbSync\data\processor;
+namespace Chamilo\Application\EhbSync\Data\Processor;
 
-use libraries\file\FileLogger;
-use libraries\storage\Cache\DataClassCache;
-use core\repository\content_object\introduction\Introduction;
+use Chamilo\Libraries\File\FileLogger;
+use Chamilo\Libraries\Storage\Cache\DataClassCache;
+use Chamilo\Core\Repository\ContentObject\Introduction\Introduction;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
@@ -47,13 +47,13 @@ class PortfolioIntroductionProcessor
      */
     public function run()
     {
-        $this->dm = \application\portfolio\DataManager :: get_instance();
+        $this->dm = \Chamilo\Application\Portfolio\DataManager :: get_instance();
 
         try
         {
             $this->process_visit_tracker();
         }
-        catch (\Exception $ex)
+        catch (\Chamilo\Exception $ex)
         {
             var_dump($ex->getMessage());
         }
@@ -70,7 +70,7 @@ class PortfolioIntroductionProcessor
 
         $result = $this->dm->get_connection()->query($query);
 
-        while ($portfolio_introduction_row = $result->fetch(\PDO :: FETCH_ASSOC))
+        while ($portfolio_introduction_row = $result->fetch(\Chamilo\PDO :: FETCH_ASSOC))
         {
             $this->handle_portfolio_introduction($portfolio_introduction_row);
         }
@@ -102,7 +102,7 @@ class PortfolioIntroductionProcessor
         }
         else
         {
-            $publication = new \application\portfolio\Publication();
+            $publication = new \Chamilo\Application\Portfolio\Publication();
             $publication->set_content_object_id($introduction->get_id());
             $publication->set_publisher_id($introduction->get_owner_id());
             $publication->set_published(time());

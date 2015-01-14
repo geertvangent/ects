@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\data;
+namespace Chamilo\Application\EhbSync\Data;
 
-use libraries\architecture\application\Application;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 class Manager extends Application
 {

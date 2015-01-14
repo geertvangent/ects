@@ -1,7 +1,7 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type\course_category;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseCategory;
 
-use application\weblcms\CourseCategory;
+use Chamilo\Application\Weblcms\CourseCategory;
 
 class DummyCourseCategorySynchronization extends CourseCategorySynchronization
 {

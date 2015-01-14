@@ -1,11 +1,11 @@
 <?php
-namespace Application\EhbSync\bamaflex\synchronization\type\group;
+namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group;
 
 /**
  *
  * @package ehb.sync;
  */
-use core\group\Group;
+use Chamilo\Core\Group\Group;
 
 class DummyGroupSynchronization extends GroupSynchronization
 {

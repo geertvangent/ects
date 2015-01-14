@@ -1,6 +1,6 @@
 <?php
-namespace Application\EhbSync\cas\package;
+namespace Chamilo\Application\EhbSync\Cas\Package;
 
-class Activator extends \Chamilo\configuration\package\Activator
+class Activator extends \Chamilo\Chamilo\Configuration\Package\Activator
 {
 }
