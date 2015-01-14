@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\atlantis;
+namespace Application\EhbSync\atlantis\cron;
 
 /**
  * This script will load the requested application and launch it.

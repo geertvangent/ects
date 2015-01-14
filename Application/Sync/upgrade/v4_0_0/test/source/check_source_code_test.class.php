@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\upgrade\v4_0_0\test;
+namespace Application\EhbSync\upgrade\v4_0_0\test\source;
 
 /**
  * This test case checks the php syntax for the php files of this package

@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\atlantis;
+namespace Application\EhbSync\atlantis\package;
 
 class Activator extends \Chamilo\configuration\package\Activator
 {

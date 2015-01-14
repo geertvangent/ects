@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync;
+namespace Application\EhbSync\package;
 
 class Deactivator extends \configuration\package\Deactivator
 {

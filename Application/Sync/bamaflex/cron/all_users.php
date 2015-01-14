@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\bamaflex;
+namespace Application\EhbSync\bamaflex\cron;
 
 /**
  * This script will load the requested application and launch it.

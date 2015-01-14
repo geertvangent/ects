@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\bamaflex;
+namespace Application\EhbSync\bamaflex\data_connector\bamaflex;
 
 use libraries\storage\DoctrineDatabase;
 

@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\cas;
+namespace Application\EhbSync\cas\component;
 
 use libraries\architecture\DelegateComponent;
 

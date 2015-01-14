@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\bamaflex\test;
+namespace Application\EhbSync\bamaflex\test\source;
 
 use \libraries\architecture\TestApplication;
 

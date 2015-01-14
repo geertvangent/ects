@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\cas;
+namespace Application\EhbSync\cas\cron;
 
 /**
  * This script will load the requested application and launch it.

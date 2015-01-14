@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\cas\data;
+namespace Application\EhbSync\cas\data\data_manager\connection;
 
 use libraries\storage\DataSourceName;
 use libraries\platform\PlatformSetting;

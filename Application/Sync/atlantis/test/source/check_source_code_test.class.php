@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\atlantis\test;
+namespace Application\EhbSync\atlantis\test\source;
 
 use \libraries\architecture\TestApplication;
 

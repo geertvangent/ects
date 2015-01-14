@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\bamaflex;
+namespace Application\EhbSync\bamaflex\synchronization;
 
 use libraries\platform\PlatformSetting;
 use libraries\utilities\Utilities;

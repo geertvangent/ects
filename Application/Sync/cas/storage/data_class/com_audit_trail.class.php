@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\cas\storage;
+namespace Application\EhbSync\cas\storage\data_class;
 
 use libraries\storage\data_class\DataClass;
 

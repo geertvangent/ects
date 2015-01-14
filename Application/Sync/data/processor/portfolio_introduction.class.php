@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\data;
+namespace Application\EhbSync\data\processor;
 
 use libraries\file\FileLogger;
 use libraries\storage\Cache\DataClassCache;

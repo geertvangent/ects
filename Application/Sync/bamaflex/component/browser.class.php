@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\bamaflex;
+namespace Application\EhbSync\bamaflex\component;
 
 use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;

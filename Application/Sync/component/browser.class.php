@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync;
+namespace Application\EhbSync\component;
 
 use libraries\architecture\NotAllowedException;
 use libraries\utilities\Utilities;

@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\data;
+namespace Application\EhbSync\data\processor;
 
 use application\weblcms\CourseTool;
 use libraries\file\FileLogger;

@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\atlantis;
+namespace Application\EhbSync\atlantis\synchronization;
 
 use libraries\storage\AndCondition;
 use libraries\storage\InequalityCondition;

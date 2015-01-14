@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\bamaflex;
+namespace Application\EhbSync\bamaflex\synchronization\type;
 
 use application\weblcms\course\CourseGroupRelation;
 use application\weblcms\CourseManagementRights;

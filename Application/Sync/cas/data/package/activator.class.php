@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\cas\data;
+namespace Application\EhbSync\cas\data\package;
 
 class Activator extends \Chamilo\configuration\package\Activator
 {

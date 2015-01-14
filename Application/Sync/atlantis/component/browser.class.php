@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\atlantis;
+namespace Application\EhbSync\atlantis\component;
 
 use libraries\format\theme\Theme;
 use libraries\platform\translation\Translation;

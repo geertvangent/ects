@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\bamaflex;
+namespace Application\EhbSync\bamaflex\synchronization\type;
 
 use application\weblcms\CourseCategory;
 use libraries\utilities\Utilities;

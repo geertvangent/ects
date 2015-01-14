@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\cas\storage\test;
+namespace Application\EhbSync\cas\storage\test\source;
 
 use \libraries\architecture\TestApplication;
 

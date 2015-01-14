@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\data;
+namespace Application\EhbSync\data\component;
 
 use libraries\architecture\DelegateComponent;
 

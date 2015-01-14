@@ -1,5 +1,5 @@
 <?php
-namespace application\ehb_sync\bamaflex;
+namespace Application\EhbSync\bamaflex\synchronization\type;
 
 use libraries\storage\InCondition;
 use core\group\GroupRelUser;
