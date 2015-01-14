@@ -3,7 +3,8 @@ namespace Chamilo\Application\EhbSync\Data\Processor;
 
 use Chamilo\Libraries\File\FileLogger;
 use Chamilo\Libraries\Storage\Cache\DataClassCache;
-use Chamilo\Core\Repository\ContentObject\Introduction\Introduction;
+use Chamilo\Core\Repository\ContentObject\Introduction\Storage\DataClass\Introduction;
+use Chamilo\Application\Portfolio\Storage\DataClass\Publication;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
@@ -47,7 +48,7 @@ class PortfolioIntroductionProcessor
      */
     public function run()
     {
-        $this->dm = \Chamilo\Application\Portfolio\DataManager :: get_instance();
+        $this->dm = \Chamilo\Application\Portfolio\Storage\DataManager :: get_instance();
 
         try
         {
@@ -102,7 +103,7 @@ class PortfolioIntroductionProcessor
         }
         else
         {
-            $publication = new \Chamilo\Application\Portfolio\Publication();
+            $publication = new Publication();
             $publication->set_content_object_id($introduction->get_id());
             $publication->set_publisher_id($introduction->get_owner_id());
             $publication->set_published(time());

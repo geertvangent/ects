@@ -4,7 +4,8 @@ namespace Chamilo\Application\EhbSync\Cas\Cron;
 /**
  * This script will load the requested application and launch it.
  */
-use Chamilo\Exception;
+use Exception;
+use Chamilo\Application\EhbSync\Cas\Synchronization\Type\UserSynchronization;
 
 require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
 
@@ -14,10 +15,10 @@ try
     ini_set("max_execution_time", "18000");
     echo '<pre>';
     echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
-    
+
     $synchronization = UserSynchronization :: factory('all');
     $synchronization->run();
-    
+
     echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
     echo '</pre>';
 }

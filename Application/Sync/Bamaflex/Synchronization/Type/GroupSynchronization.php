@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type;
 
-use Chamilo\Libraries\Storage\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;

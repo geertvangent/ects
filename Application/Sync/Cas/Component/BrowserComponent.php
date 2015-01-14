@@ -2,9 +2,10 @@
 namespace Chamilo\Application\EhbSync\Cas\Component;
 
 use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\Platform\Translation\Translation;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbSync\Cas\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {
@@ -15,13 +16,13 @@ class BrowserComponent extends Manager implements DelegateComponent
     public function run()
     {
         $this->display_header();
-        
+
         $types = array(self :: ACTION_ALL_USERS, self :: ACTION_STATISTICS);
-        
+
         $html = array();
         foreach ($types as $type)
         {
-            
+
             $html[] = '<a href="' . $this->get_url(array(self :: PARAM_ACTION => $type)) . '">';
             $html[] = '<div class="create_block" style="background-image: url(' . Theme :: get_image_path() .
                  'component/' . $type . '.png);">';
@@ -30,7 +31,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</a>';
         }
         echo implode("\n", $html);
-        
+
         $this->display_footer();
     }
 }

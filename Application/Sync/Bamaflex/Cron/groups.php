@@ -1,10 +1,13 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Cron;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\GroupSynchronization;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group\DummyGroupSynchronization;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
+
 /**
  * This script will load the requested application and launch it.
  */
-
 require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
 
 try

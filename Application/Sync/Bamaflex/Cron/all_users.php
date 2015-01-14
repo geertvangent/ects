@@ -1,10 +1,11 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Cron;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\UserSynchronization;
+
 /**
  * This script will load the requested application and launch it.
  */
-
 require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
 
 try

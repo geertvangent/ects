@@ -1,9 +1,8 @@
 <?php
 namespace Chamilo\Application\EhbSync\Cas\Storage\DataManager\Connection;
 
-use Chamilo\Libraries\Storage\DataSourceName;
+use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\MDB2;
 
 /**
  * This class represents the current CAS Account database connection.
@@ -42,7 +41,7 @@ class Mdb2Connection extends \Chamilo\Libraries\Storage\DataManager\Mdb2\Mdb2Con
             $cas_database,
             $cas_password);
 
-        $this->connection = MDB2 :: connect($data_source_name->get_connection_string(), array('debug' => 3));
+        $this->connection = \MDB2 :: connect($data_source_name->get_connection_string(), array('debug' => 3));
     }
 
     /**

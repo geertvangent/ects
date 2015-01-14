@@ -1,13 +1,15 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\GroupSynchronization;
+
 /**
  *
  * @package ehb.sync;
  */
 class StudentTrainingGroupSynchronization extends TrainingGroupSynchronization
 {
-    
+
     /*
      * (non-PHPdoc) @see application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
      */

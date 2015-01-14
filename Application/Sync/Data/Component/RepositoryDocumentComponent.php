@@ -2,6 +2,8 @@
 namespace Chamilo\Application\EhbSync\Data\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbSync\Data\Processor\RepositoryDocumentDownloadProcessor;
+use Chamilo\Application\EhbSync\Data\Manager;
 
 class RepositoryDocumentComponent extends Manager implements DelegateComponent
 {

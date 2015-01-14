@@ -2,6 +2,8 @@
 namespace Chamilo\Application\EhbSync\Cas\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbSync\Cas\Synchronization\Type\UserSynchronization;
+use Chamilo\Application\EhbSync\Cas\Manager;
 
 class AllUsersComponent extends Manager implements DelegateComponent
 {
@@ -15,10 +17,10 @@ class AllUsersComponent extends Manager implements DelegateComponent
         {
             echo '<pre>';
             echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
-            
+
             $synchronization = UserSynchronization :: factory('all');
             $synchronization->run();
-            
+
             echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
             echo '</pre>';
         }

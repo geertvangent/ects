@@ -1,12 +1,13 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
-use Chamilo\Application\Weblcms\CourseCategory;
+use Chamilo\Application\Weblcms\Storage\DataClass\CourseCategory;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseCategorySynchronization;
 use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
 use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseCategory\DummyCourseCategorySynchronization;
+use Chamilo\Application\EhbSync\Bamaflex\Manager;
 
 class CourseCategoriesComponent extends Manager implements DelegateComponent
 {

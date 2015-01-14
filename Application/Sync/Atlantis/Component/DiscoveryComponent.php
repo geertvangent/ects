@@ -2,6 +2,8 @@
 namespace Chamilo\Application\EhbSync\Atlantis\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbSync\Atlantis\Manager;
+use Chamilo\Application\EhbSync\Atlantis\Synchronization\DiscoverySynchronization;
 
 class DiscoveryComponent extends Manager implements DelegateComponent
 {

@@ -1,8 +1,9 @@
 <?php
 namespace Chamilo\Application\EhbSync\Component;
 
-use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbSync\Manager;
 
 class AtlantisComponent extends Manager implements DelegateComponent
 {

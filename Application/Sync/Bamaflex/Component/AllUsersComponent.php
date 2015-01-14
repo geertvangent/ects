@@ -2,6 +2,8 @@
 namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\UserSynchronization;
+use Chamilo\Application\EhbSync\Bamaflex\Manager;
 
 class AllUsersComponent extends Manager implements DelegateComponent
 {

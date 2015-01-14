@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Atlantis\Test\Source;
 
-use Chamilo\\Libraries\Architecture\TestApplication;
+use Chamilo\Libraries\Architecture\TestApplication;
 
 /**
  * This test case checks the php syntax for the php files of this package

@@ -13,7 +13,7 @@ class AllUserSynchronization extends UserSynchronization
 
     public function get_data()
     {
-        return \Chamilo\Application\CasUser\Account\DataManager :: retrieves(
+        return \Chamilo\Application\CasUser\Account\Storage\DataManager\DataManager :: retrieves(
             \Chamilo\Application\CasUser\Account\Account :: class_name());
     }
 

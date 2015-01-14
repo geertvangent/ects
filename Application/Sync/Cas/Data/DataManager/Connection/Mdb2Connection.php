@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\EhbSync\Cas\Data\DataManager\Connection;
 
-use Chamilo\Libraries\Storage\DataSourceName;
+use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\MDB2;
+use MDB2;
 
 /**
  * This class represents the current CAS Account database connection.
