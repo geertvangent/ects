@@ -27,7 +27,7 @@ class AllUsersComponent extends Manager implements DelegateComponent
             echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
             echo '</pre>';
         }
-        catch (\Chamilo\Exception $exception)
+        catch (\Exception $exception)
         {
             echo 'Synchronization failed';
         }

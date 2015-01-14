@@ -21,7 +21,7 @@ try
     Synchronization :: log('Courses sync ended', date('c', time()));
     echo '</pre>';
 }
-catch (\Chamilo\Exception $exception)
+catch (\Exception $exception)
 {
     echo 'Synchronization failed';
 }

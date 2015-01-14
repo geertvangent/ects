@@ -53,7 +53,7 @@ class PortfolioIntroductionProcessor
         {
             $this->process_visit_tracker();
         }
-        catch (\Chamilo\Exception $ex)
+        catch (\Exception $ex)
         {
             var_dump($ex->getMessage());
         }
@@ -70,7 +70,7 @@ class PortfolioIntroductionProcessor
 
         $result = $this->dm->get_connection()->query($query);
 
-        while ($portfolio_introduction_row = $result->fetch(\Chamilo\PDO :: FETCH_ASSOC))
+        while ($portfolio_introduction_row = $result->fetch(\PDO :: FETCH_ASSOC))
         {
             $this->handle_portfolio_introduction($portfolio_introduction_row);
         }

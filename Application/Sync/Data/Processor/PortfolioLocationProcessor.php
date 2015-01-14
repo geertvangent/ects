@@ -51,7 +51,7 @@ class PortfolioLocationProcessor
         {
             $this->process_visit_tracker();
         }
-        catch (\Chamilo\Exception $ex)
+        catch (\Exception $ex)
         {
             var_dump($ex->getMessage());
         }
@@ -88,7 +88,7 @@ JOIN old_portfolio_portfolio_location AS oppl ON oppurl.location_id = oppl.id
 WHERE type = 1 AND item_id =' . $location->get_id();
 
             $result = $this->dm->get_connection()->query($query);
-            while ($user_right = $result->fetch(\Chamilo\PDO :: FETCH_ASSOC))
+            while ($user_right = $result->fetch(\PDO :: FETCH_ASSOC))
             {
                 $rights_location_entity_right = new \Chamilo\Application\Portfolio\RightsLocationEntityRight();
                 $rights_location_entity_right->set_location_id($location->get_id());
@@ -134,7 +134,7 @@ JOIN old_portfolio_portfolio_location AS oppl ON oppurl.location_id = oppl.id
 WHERE type = 1 AND item_id =' . $location->get_id();
 
             $result = $this->dm->get_connection()->query($query);
-            while ($group_right = $result->fetch(\Chamilo\PDO :: FETCH_ASSOC))
+            while ($group_right = $result->fetch(\PDO :: FETCH_ASSOC))
             {
                 $rights_location_entity_right = new \Chamilo\Application\Portfolio\RightsLocationEntityRight();
                 $rights_location_entity_right->set_location_id($location->get_id());

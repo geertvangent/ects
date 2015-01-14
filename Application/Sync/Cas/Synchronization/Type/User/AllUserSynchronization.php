@@ -5,7 +5,7 @@ namespace Chamilo\Application\EhbSync\Cas\Synchronization\Type\User;
  *
  * @package ehb.sync;
  */
-use Chamilo\Core\User\User;
+use Chamilo\Core\User\Storage\DataClass\User;
 
 class AllUserSynchronization extends UserSynchronization
 {

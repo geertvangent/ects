@@ -5,7 +5,8 @@ namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\User;
  *
  * @package ehb.sync;
  */
-use Chamilo\Core\User\User;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\UserSynchronization;
 
 class AllUserSynchronization extends UserSynchronization
 {
@@ -27,7 +28,8 @@ class AllUserSynchronization extends UserSynchronization
 
     public function process_data($person)
     {
-        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
+        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code(
+            $person[self :: RESULT_PROPERTY_PERSON_ID]);
 
         $utf_last_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_LAST_NAME]);
         $utf_first_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_FIRST_NAME]);
@@ -138,7 +140,7 @@ class AllUserSynchronization extends UserSynchronization
                              $utf_last_name . "\n";
                     }
                 }
-                catch (\Chamilo\Exception $exception)
+                catch (\Exception $exception)
                 {
                     echo '++ FAIL:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
                          $utf_last_name . "\n";
@@ -163,7 +165,7 @@ class AllUserSynchronization extends UserSynchronization
                          $utf_last_name . "\n";
                 }
             }
-            catch (\Chamilo\Exception $exception)
+            catch (\Exception $exception)
             {
                 echo '++ FAIL:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
                      $utf_last_name . "\n";

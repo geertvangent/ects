@@ -10,9 +10,9 @@ class BamaflexResultSet extends ArrayResultSet
     {
         $records = array();
 
-        if (! $statement instanceof \Chamilo\PDOException)
+        if (! $statement instanceof \PDOException)
         {
-            while ($record = $statement->fetch(\Chamilo\PDO :: FETCH_ASSOC))
+            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
             {
                 $records[] = $this->process_record($record);
             }

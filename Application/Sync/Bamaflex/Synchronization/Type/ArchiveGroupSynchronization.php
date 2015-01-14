@@ -9,7 +9,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\AndCondition;
 use Chamilo\Libraries\Storage\DataClassDistinctParameters;
 use Chamilo\Core\Group\GroupRelUser;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\StaticConditionVariable;
 
 /**

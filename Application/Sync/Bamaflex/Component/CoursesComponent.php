@@ -27,7 +27,7 @@ class CoursesComponent extends Manager implements DelegateComponent
             Synchronization :: log('Courses sync ended', date('c', time()));
             echo '</pre>';
         }
-        catch (\Chamilo\Exception $exception)
+        catch (\Exception $exception)
         {
             echo 'Synchronization failed';
             Synchronization :: log('Synchronization failed', date('c', time()));

@@ -7,7 +7,7 @@ use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
 use Chamilo\Application\EhbSync\Cas\Storage\ComAuditTrail;
 use Chamilo\Libraries\Architecture\DelegateComponent;
 use Chamilo\Libraries\Storage\StaticConditionVariable;
-use Chamilo\Libraries\Storage\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 
 class StatisticsComponent extends Manager implements DelegateComponent
 {
@@ -50,7 +50,7 @@ class StatisticsComponent extends Manager implements DelegateComponent
             echo '[  STAT SYNC ENDED] ' . date('c', time()) . "\n";
             echo '</pre>';
         }
-        catch (\Chamilo\Exception $exception)
+        catch (\Exception $exception)
         {
             echo 'Processing statistics failed';
         }

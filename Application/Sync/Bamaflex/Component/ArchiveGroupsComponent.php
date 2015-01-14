@@ -31,7 +31,7 @@ class ArchiveGroupsComponent extends Manager implements DelegateComponent
             Synchronization :: log('Group sync ended', date('c', time()));
             echo '</pre>';
         }
-        catch (\Chamilo\Exception $exception)
+        catch (\Exception $exception)
         {
             echo 'Synchronization failed';
         }
