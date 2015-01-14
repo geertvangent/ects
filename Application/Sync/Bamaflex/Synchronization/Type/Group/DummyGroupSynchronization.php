@@ -5,7 +5,7 @@ namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group;
  *
  * @package ehb.sync;
  */
-use Chamilo\Core\Group\Group;
+use Chamilo\Core\Group\Storage\DataClass\Group;
 
 class DummyGroupSynchronization extends GroupSynchronization
 {

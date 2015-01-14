@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Data\Component;
 
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 class WeblcmsDocumentZipComponent extends Manager implements DelegateComponent
 {

@@ -6,7 +6,7 @@ use Chamilo\Application\Weblcms\CourseManagementRights;
 use Chamilo\Application\Weblcms\CourseSettingsConnector;
 use Chamilo\Application\Weblcms\CourseSettingsController;
 use Chamilo\Application\Weblcms\Course\Course;
-use Chamilo\Core\Group\Group;
+use Chamilo\Core\Group\Storage\DataClass\Group;
 
 /**
  *
@@ -84,7 +84,7 @@ class CourseSynchronization extends Synchronization
 
                 self :: log('added', $new_course->get_title());
 
-                $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($teacher_code);
+                $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($teacher_code);
                 if ($group instanceof Group)
                 {
                     \Chamilo\Application\Weblcms\Course\DataManager :: subscribe_group_to_course(
@@ -94,7 +94,7 @@ class CourseSynchronization extends Synchronization
                     self :: log('added teacher group', $new_course->get_title());
                 }
 
-                $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($student_code);
+                $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($student_code);
                 if ($group instanceof Group)
                 {
                     \Chamilo\Application\Weblcms\Course\DataManager :: subscribe_group_to_course(
@@ -115,7 +115,7 @@ class CourseSynchronization extends Synchronization
             $teacher_code = 'COU_OP_' . $course['id'];
             $student_code = 'COU_STU_' . $course['id'];
 
-            $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($teacher_code);
+            $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($teacher_code);
             if ($group instanceof Group)
             {
                 if (! \Chamilo\Application\Weblcms\Course\DataManager :: is_group_direct_subscribed_to_course(
@@ -130,7 +130,7 @@ class CourseSynchronization extends Synchronization
                 }
             }
 
-            $group = \Chamilo\Core\Group\DataManager :: retrieve_group_by_code($student_code);
+            $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($student_code);
             if ($group instanceof Group)
             {
                 if (! \Chamilo\Application\Weblcms\Course\DataManager :: is_group_direct_subscribed_to_course(

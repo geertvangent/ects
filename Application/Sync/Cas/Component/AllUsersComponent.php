@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Cas\Component;
 
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 class AllUsersComponent extends Manager implements DelegateComponent
 {

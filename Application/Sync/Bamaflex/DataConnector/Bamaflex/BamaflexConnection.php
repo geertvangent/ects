@@ -2,7 +2,7 @@
 namespace Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex;
 
 use Chamilo\Libraries\Storage\DataSourceName;
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Doctrine\DBAL\DriverManager;
 use Chamilo\Doctrine\Common\ClassLoader;
 use Chamilo\Libraries\File\Path;
@@ -12,7 +12,7 @@ use Chamilo\Libraries\File\Path;
  *
  * @author Hans De Bisschop
  */
-class BamaflexConnection extends \Chamilo\Libraries\Storage\DoctrineConnection
+class BamaflexConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection
 {
 
     /**

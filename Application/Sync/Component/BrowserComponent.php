@@ -5,7 +5,7 @@ use Chamilo\Libraries\Architecture\NotAllowedException;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation\Translation;
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

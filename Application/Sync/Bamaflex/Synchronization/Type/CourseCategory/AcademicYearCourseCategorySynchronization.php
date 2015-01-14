@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseCategory;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseCategorySynchronization;
+
 class AcademicYearCourseCategorySynchronization extends CourseCategorySynchronization
 {
     CONST IDENTIFIER = 'AY';

@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex;
 
-use Chamilo\Libraries\Storage\ArrayResultSet;
+use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 
 class BamaflexResultSet extends ArrayResultSet
 {

@@ -23,7 +23,7 @@ class AllUserSynchronization extends UserSynchronization
 
     public function process_data($person)
     {
-        $user = \Chamilo\Core\User\DataManager :: retrieve_user_by_official_code($person->get_person_id());
+        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code($person->get_person_id());
         
         if (! $user instanceof User)
         {

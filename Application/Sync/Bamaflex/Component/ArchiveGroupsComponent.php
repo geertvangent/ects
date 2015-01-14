@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 class ArchiveGroupsComponent extends Manager implements DelegateComponent
 {
@@ -21,7 +21,7 @@ class ArchiveGroupsComponent extends Manager implements DelegateComponent
             Synchronization :: log('Group sync started', date('c', time()));
             flush();
 
-            $root_group = \Chamilo\Core\Group\DataManager :: get_root_group();
+            $root_group = \Chamilo\Core\Group\Storage\DataManager :: get_root_group();
 
             $synchronization = ArchiveGroupSynchronization :: factory(
                 'archive_academic_year',

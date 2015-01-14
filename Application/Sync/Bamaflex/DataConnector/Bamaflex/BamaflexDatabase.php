@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex;
 
-use Chamilo\Libraries\Storage\DoctrineDatabase;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Database;
 
-class BamaflexDatabase extends DoctrineDatabase
+class BamaflexDatabase extends Database
 {
 
     /**

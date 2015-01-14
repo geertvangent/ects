@@ -2,7 +2,7 @@
 namespace Chamilo\Application\EhbSync\Component;
 
 use Chamilo\Libraries\Architecture\NotAllowedException;
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 class BamaflexComponent extends Manager implements DelegateComponent
 {

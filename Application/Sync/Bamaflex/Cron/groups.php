@@ -15,7 +15,7 @@ try
     Synchronization :: log('Group sync started', date('c', time()));
     flush();
 
-    $root_group = \Chamilo\Core\Group\DataManager :: get_root_group();
+    $root_group = \Chamilo\Core\Group\Storage\DataManager :: get_root_group();
 
     $synchronization = GroupSynchronization :: factory('academic_year', new DummyGroupSynchronization($root_group));
     $synchronization->run();

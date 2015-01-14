@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization;
 
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Utilities\Utilities;
 
 abstract class Synchronization

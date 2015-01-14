@@ -2,7 +2,7 @@
 namespace Chamilo\Application\EhbSync\Cas\Data\DataManager\Connection;
 
 use Chamilo\Libraries\Storage\DataSourceName;
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Doctrine\DBAL\DriverManager;
 use Chamilo\Doctrine\Common\ClassLoader;
@@ -12,7 +12,7 @@ use Chamilo\Doctrine\Common\ClassLoader;
  *
  * @author Hans De Bisschop
  */
-class DoctrineConnection extends \Chamilo\Libraries\Storage\DoctrineConnection
+class DoctrineConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection
 {
 
     /**

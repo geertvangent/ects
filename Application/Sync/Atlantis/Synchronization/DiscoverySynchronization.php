@@ -1,16 +1,16 @@
 <?php
 namespace Chamilo\Application\EhbSync\Atlantis\Synchronization;
 
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\InequalityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
 use Chamilo\Application\Discovery\DataManager;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\EqualityCondition;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Application\Discovery\RightsGroupEntityRight;
-use Chamilo\Core\Group\Group;
+use Chamilo\Core\Group\Storage\DataClass\Group;
 
 class DiscoverySynchronization
 {
@@ -108,7 +108,7 @@ class DiscoverySynchronization
 
                     while ($entity = $entities->next_result())
                     {
-                        $group = \Chamilo\Core\Group\DataManager :: retrieve_by_id(
+                        $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
                             Group :: class_name(),
                             $entity->get_context()->get_id());
 

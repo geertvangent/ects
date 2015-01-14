@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Atlantis\Component;
 
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 class DiscoveryComponent extends Manager implements DelegateComponent
 {

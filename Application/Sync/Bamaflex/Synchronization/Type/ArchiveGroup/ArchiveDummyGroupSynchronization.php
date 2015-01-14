@@ -5,7 +5,8 @@ namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroup
  *
  * @package ehb.sync;
  */
-use Chamilo\Core\Group\Group;
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroupSynchronization;
 
 class ArchiveDummyGroupSynchronization extends ArchiveGroupSynchronization
 {

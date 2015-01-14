@@ -2,7 +2,7 @@
 namespace Chamilo\Application\EhbSync\Cas\Storage\DataManager\Connection;
 
 use Chamilo\Libraries\Storage\DataSourceName;
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\MDB2;
 
 /**

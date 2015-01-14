@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
-use Chamilo\Libraries\Architecture\DelegateComponent;
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 
 class GroupsComponent extends Manager implements DelegateComponent
 {
@@ -25,7 +25,7 @@ class GroupsComponent extends Manager implements DelegateComponent
             $years = PlatformSetting :: get('academic_year', __NAMESPACE__);
             $years = explode(',', $years);
 
-            $root_group = \Chamilo\Core\Group\DataManager :: get_root_group();
+            $root_group = \Chamilo\Core\Group\Storage\DataManager :: get_root_group();
 
             foreach ($years as $year)
             {

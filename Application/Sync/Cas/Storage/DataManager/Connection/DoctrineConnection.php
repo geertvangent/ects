@@ -1,18 +1,18 @@
 <?php
 namespace Chamilo\Application\EhbSync\Cas\Storage\DataManager\Connection;
 
-use Chamilo\Libraries\Storage\DataSourceName;
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Storage\DataManager\DataSourceName;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Doctrine\DBAL\DriverManager;
-use Chamilo\Doctrine\Common\ClassLoader;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\Common\ClassLoader;
 
 /**
  * This class represents the current CAS Account database connection.
  *
  * @author Hans De Bisschop
  */
-class DoctrineConnection extends \Chamilo\Libraries\Storage\DoctrineConnection
+class DoctrineConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection
 {
 
     /**
@@ -40,9 +40,13 @@ class DoctrineConnection extends \Chamilo\Libraries\Storage\DoctrineConnection
         {
             $cas_dbms = PlatformSetting :: get('dbms', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
             $cas_user = PlatformSetting :: get('user', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
-            $cas_password = PlatformSetting :: get('password', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
+            $cas_password = PlatformSetting :: get(
+                'password',
+                \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
             $cas_host = PlatformSetting :: get('host', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
-            $cas_database = PlatformSetting :: get('database', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
+            $cas_database = PlatformSetting :: get(
+                'database',
+                \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
 
             $data_source_name = DataSourceName :: factory(
                 'doctrine',
@@ -52,7 +56,7 @@ class DoctrineConnection extends \Chamilo\Libraries\Storage\DoctrineConnection
                 $cas_database,
                 $cas_password);
 
-            $configuration = new \Chamilo\Doctrine\DBAL\Configuration();
+            $configuration = new \Doctrine\DBAL\Configuration();
             $connection_parameters = array(
                 'dbname' => $data_source_name->get_database(),
                 'user' => $data_source_name->get_username(),

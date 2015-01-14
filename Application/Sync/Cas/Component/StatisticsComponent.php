@@ -1,13 +1,14 @@
 <?php
 namespace Chamilo\Application\EhbSync\Cas\Component;
 
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Application\EhbSync\Cas\Data\Statistic;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Application\EhbSync\Cas\Storage\ComAuditTrail;
-use Chamilo\Libraries\Architecture\DelegateComponent;
-use Chamilo\Libraries\Storage\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Application\EhbSync\Cas\Data\DataClass\Statistic;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Application\EhbSync\Cas\Storage\DataClass\ComAuditTrail;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Application\EhbSync\Cas\Manager;
 
 class StatisticsComponent extends Manager implements DelegateComponent
 {
@@ -71,12 +72,14 @@ class StatisticsComponent extends Manager implements DelegateComponent
         {
             $email_address = trim(str_replace(']', '', str_replace('[username: ', '', $audit_trail->get_user())));
             $statistic->set_user($email_address);
-            $user = \Chamilo\Core\User\DataManager :: retrieve(
-                \Chamilo\Core\User\User :: class_name(),
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve(
+                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
                 new EqualityCondition(
-                    new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_USERNAME),
+                    new PropertyConditionVariable(
+                        \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+                        \Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_USERNAME),
                     new StaticConditionVariable($email_address)));
-            if ($user instanceof \Chamilo\Core\User\User)
+            if ($user instanceof \Chamilo\Core\User\Storage\DataClass\User)
             {
                 $statistic->set_person_id($user->get_official_code());
             }
@@ -87,12 +90,14 @@ class StatisticsComponent extends Manager implements DelegateComponent
         {
             $email_address = trim($audit_trail->get_user());
             $statistic->set_user($email_address);
-            $user = \Chamilo\Core\User\DataManager :: retrieve(
-                \Chamilo\Core\User\User :: class_name(),
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve(
+                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
                 new EqualityCondition(
-                    new PropertyConditionVariable(\Chamilo\Core\User\User :: class_name(), \Chamilo\Core\User\User :: PROPERTY_USERNAME),
+                    new PropertyConditionVariable(
+                        \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+                        \Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_USERNAME),
                     new StaticConditionVariable($email_address)));
-            if ($user instanceof \Chamilo\Core\User\User)
+            if ($user instanceof \Chamilo\Core\User\Storage\DataClass\User)
             {
                 $statistic->set_person_id($user->get_official_code());
             }

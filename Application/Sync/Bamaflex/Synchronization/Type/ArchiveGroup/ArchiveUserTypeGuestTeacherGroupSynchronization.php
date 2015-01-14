@@ -1,6 +1,8 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroup;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroupSynchronization;
+
 /**
  *
  * @package ehb.sync;
@@ -32,9 +34,8 @@ class ArchiveUserTypeGuestTeacherGroupSynchronization extends ArchiveGroupSynchr
         {
             $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_guest_teacher]  WHERE faculty_id = ' . $this->get_department()->get_parameter(
                 ArchiveDepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID) . '
-                AND type = 4 AND date_start <= \'' .
-                 $this->get_academic_year_end() . '\' AND (date_end >= \'' . $this->get_academic_year_end() .
-                 '\' OR date_end is null)';
+                AND type = 4 AND date_start <= \'' . $this->get_academic_year_end() . '\' AND (date_end >= \'' .
+                 $this->get_academic_year_end() . '\' OR date_end is null)';
             $users = $this->get_result($query);
 
             while ($user = $users->next_result(false))

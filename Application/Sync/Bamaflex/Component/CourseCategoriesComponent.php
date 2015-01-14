@@ -2,8 +2,8 @@
 namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
 use Chamilo\Application\Weblcms\CourseCategory;
-use Chamilo\Libraries\Architecture\DelegateComponent;
-use Chamilo\Libraries\Platform\PlatformSetting;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 
 class CourseCategoriesComponent extends Manager implements DelegateComponent
 {

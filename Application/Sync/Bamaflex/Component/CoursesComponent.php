@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
-use Chamilo\Libraries\Architecture\DelegateComponent;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 class CoursesComponent extends Manager implements DelegateComponent
 {
