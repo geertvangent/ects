@@ -1,6 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\GroupSynchronization;
 /**
  *
  * @package ehb.sync;
@@ -29,9 +30,9 @@ class StudentTrainingChoicesOptionsGroupSynchronization extends GroupSynchroniza
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_choice_basic] WHERE training_id = ' .
              $this->get_choices()->get_training()->get_parameter(
                 TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
-        
+
         $options = $this->get_result($query);
-        
+
         $children = array();
         while ($option = $options->next_result(false))
         {

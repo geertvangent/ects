@@ -1,11 +1,12 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex;
 
-use Chamilo\Libraries\Storage\DataSourceName;
+use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\Doctrine\DBAL\DriverManager;
-use Chamilo\Doctrine\Common\ClassLoader;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\Common\ClassLoader;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Application\EhbSync\Bamaflex\Manager;
 
 /**
  * This class represents the current CAS Account database connection.
@@ -40,7 +41,7 @@ class BamaflexConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine
         $classLoader->register();
 
         $data_source_name = DataSourceName :: factory('doctrine', $dbms, $user, $host, $database, $password);
-        $configuration = new \Chamilo\Doctrine\DBAL\Configuration();
+        $configuration = new \Doctrine\DBAL\Configuration();
         $connection_parameters = array(
             'dbname' => $data_source_name->get_database(),
             'user' => $data_source_name->get_username(),

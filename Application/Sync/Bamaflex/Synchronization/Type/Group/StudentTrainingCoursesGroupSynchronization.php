@@ -1,6 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\GroupSynchronization;
 /**
  *
  * @package ehb.sync;
@@ -30,7 +31,7 @@ class StudentTrainingCoursesGroupSynchronization extends GroupSynchronization
              $this->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID) .
              ' AND parent_id IS NULL AND exchange = 0';
         $courses = $this->get_result($query);
-        
+
         $children = array();
         while ($course = $courses->next_result(false))
         {

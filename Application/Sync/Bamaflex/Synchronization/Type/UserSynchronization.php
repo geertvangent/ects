@@ -2,6 +2,7 @@
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type;
 
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
 
 /**
  *

@@ -1,6 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\GroupSynchronization;
 /**
  *
  * @package ehb.sync;
@@ -30,18 +31,18 @@ class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupS
     public function get_children()
     {
         $trajectory = $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
-        
+
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_sub_trajectory_basic] WHERE trajectory_id = ' .
              $trajectory;
-        
+
         $trajectories = $this->get_result($query);
-        
+
         $children = array();
         while ($trajectory = $trajectories->next_result(false))
         {
             $children[] = GroupSynchronization :: factory(
-                'student_training_trajectories_template_sub', 
-                $this, 
+                'student_training_trajectories_template_sub',
+                $this,
                 $trajectory);
         }
         return $children;

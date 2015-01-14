@@ -1,6 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group;
 
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\GroupSynchronization;
 /**
  *
  * @package ehb.sync;
@@ -32,21 +33,21 @@ abstract class CourseGroupSynchronization extends GroupSynchronization
     public function get_children()
     {
         $children = array();
-        
+
         if (is_null($this->get_parameter(self :: RESULT_PROPERTY_PARENT_ID)) &&
              $this->get_parameter(self :: RESULT_PROPERTY_TYPE) == 2)
         {
             $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE parent_id = ' .
              $this->get_parameter(self :: RESULT_PROPERTY_COURSE_ID) . ' AND exchange = 0';
-        
+
         $courses = $this->get_result($query);
-        
+
         while ($course = $courses->next_result(false))
         {
             $children[] = GroupSynchronization :: factory($this->get_group_type(), $this, $course);
         }
     }
-    
+
     return $children;
 }
 }

@@ -2,6 +2,7 @@
 namespace Chamilo\Application\EhbSync\Cas\Synchronization\Type;
 
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Application\EhbSync\Cas\Synchronization\Synchronization;
 
 /**
  *
@@ -32,7 +33,7 @@ class UserSynchronization extends Synchronization
         $types = array();
         $types[] = 'create';
         $types[] = 'update';
-        
+
         return $types;
     }
 

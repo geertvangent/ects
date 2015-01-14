@@ -5,9 +5,8 @@ namespace Chamilo\Application\EhbSync\Package;
  *
  * @author Hans De Bisschop
  */
-use Chamilo\Libraries\Architecture\WebApplicationInstaller;
 
-class Installer extends WebApplicationInstaller
+class Installer extends \Chamilo\Configuration\Package\Installer
 {
 
     public function get_additional_installers()

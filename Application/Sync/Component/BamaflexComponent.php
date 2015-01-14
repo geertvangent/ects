@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\EhbSync\Component;
 
-use Chamilo\Libraries\Architecture\NotAllowedException;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 class BamaflexComponent extends Manager implements DelegateComponent
@@ -17,6 +17,6 @@ class BamaflexComponent extends Manager implements DelegateComponent
             throw new NotAllowedException();
         }
 
-        \Chamilo\Libraries\Architecture\Application :: launch(\Chamilo\Application\EhbSync\Bamaflex\Manager :: context(), $this->get_user(), $this);
+        \Chamilo\Libraries\Architecture\Application\Application :: launch(\Chamilo\Application\EhbSync\Bamaflex\Manager :: context(), $this->get_user(), $this);
     }
 }

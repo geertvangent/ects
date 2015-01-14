@@ -2,6 +2,8 @@
 namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseSynchronization;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
 
 class CoursesComponent extends Manager implements DelegateComponent
 {

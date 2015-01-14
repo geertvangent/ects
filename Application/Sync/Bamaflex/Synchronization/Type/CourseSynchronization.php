@@ -7,6 +7,7 @@ use Chamilo\Application\Weblcms\CourseSettingsConnector;
 use Chamilo\Application\Weblcms\CourseSettingsController;
 use Chamilo\Application\Weblcms\Course\Course;
 use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
 
 /**
  *
@@ -43,7 +44,8 @@ class CourseSynchronization extends Synchronization
      */
     public function synchronize($course)
     {
-        $current_course = \Chamilo\Application\Weblcms\Course\DataManager :: retrieve_course_by_visual_code($course['id']);
+        $current_course = \Chamilo\Application\Weblcms\Course\DataManager :: retrieve_course_by_visual_code(
+            $course['id']);
 
         if (! $current_course instanceof Course)
         {

@@ -2,6 +2,8 @@
 namespace Chamilo\Application\EhbSync\Bamaflex\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroupSynchronization;
+use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroup\ArchiveDummyGroupSynchronization;
 
 class ArchiveGroupsComponent extends Manager implements DelegateComponent
 {
