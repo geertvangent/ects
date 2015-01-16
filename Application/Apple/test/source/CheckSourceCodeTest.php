@@ -1,7 +1,6 @@
 <?php
 namespace Chamilo\Application\EhbApple\Test\Source;
 
-use Chamilo\Libraries\Architecture\TestApplication;
 
 /**
  * This test case checks the php syntax for the php files of this package
