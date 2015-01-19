@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\EhbSync\Atlantis\Cron;
+namespace Ehb\Application\Sync\Atlantis\Cron;
 
-use Chamilo\Application\EhbSync\Atlantis\Synchronization\DiscoverySynchronization;
+use Ehb\Application\Sync\Atlantis\Synchronization\DiscoverySynchronization;
 
 /**
  * This script will load the requested application and launch it.

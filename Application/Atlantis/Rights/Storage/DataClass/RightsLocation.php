@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Storage\DataClass;
+namespace Ehb\Application\Atlantis\Rights\Storage\DataClass;
 
 class RightsLocation extends \Chamilo\Core\Rights\RightsLocation
 {

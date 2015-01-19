@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Right\Table\DataClass;
+namespace Ehb\Application\Atlantis\Application\Right\Table\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataManager;
+use Ehb\Application\Atlantis\Application\Right\Table\DataManager;
 
 /**
  * application.atlantis.application.right.
@@ -108,8 +108,8 @@ class Right extends DataClass
     {
         if (! isset($this->application))
         {
-            $this->application = \Chamilo\Application\Atlantis\Application\Storage\DataManager :: retrieve(
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+            $this->application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve(
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
                 (int) $this->get_application_id());
         }
         return $this->application;
@@ -140,7 +140,7 @@ class Right extends DataClass
         $condition = new EqualityCondition(
             new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_RIGHT_ID),
             new StaticConditionVariable($this->get_id()));
-        $entitlements = \Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataManager :: retrieves(
+        $entitlements = \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager :: retrieves(
             Entitlement :: class_name(),
             new DataClassRetrievesParameters($condition));
 

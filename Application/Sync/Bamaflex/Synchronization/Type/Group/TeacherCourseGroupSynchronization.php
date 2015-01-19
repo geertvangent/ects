@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group;
 
 /**
  *

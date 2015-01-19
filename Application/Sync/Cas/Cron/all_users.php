@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Cron;
+namespace Ehb\Application\Sync\Cas\Cron;
 
 /**
  * This script will load the requested application and launch it.
  */
 use Exception;
-use Chamilo\Application\EhbSync\Cas\Synchronization\Type\UserSynchronization;
+use Ehb\Application\Sync\Cas\Synchronization\Type\UserSynchronization;
 
 require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
 

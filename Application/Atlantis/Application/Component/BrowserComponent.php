@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Component;
+namespace Ehb\Application\Atlantis\Application\Component;
 
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
@@ -13,9 +13,9 @@ use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\Atlantis\Application\Manager;
-use Chamilo\Application\Atlantis\Application\Storage\DataClass\Application;
-use Chamilo\Application\Atlantis\Application\Table\Application\ApplicationTable;
+use Ehb\Application\Atlantis\Application\Manager;
+use Ehb\Application\Atlantis\Application\Storage\DataClass\Application;
+use Ehb\Application\Atlantis\Application\Table\Application\ApplicationTable;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {

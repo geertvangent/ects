@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Synchronization;
+namespace Ehb\Application\Sync\Cas\Synchronization;
 
 use Chamilo\Libraries\Utilities\Utilities;
 

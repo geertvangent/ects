@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Cron;
+namespace Ehb\Application\Sync\Bamaflex\Cron;
 
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\GroupSynchronization;
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\Group\DummyGroupSynchronization;
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\DummyGroupSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 
 /**
  * This script will load the requested application and launch it.

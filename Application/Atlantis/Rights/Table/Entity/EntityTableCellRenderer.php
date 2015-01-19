@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
+namespace Ehb\Application\Atlantis\Rights\Table\Entity;
 
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme\Theme;
@@ -12,7 +12,7 @@ use Chamilo\Core\Rights\Entity\UserEntity;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
-use Chamilo\Application\Atlantis\Rights\Manager;
+use Ehb\Application\Atlantis\Rights\Manager;
 
 class EntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

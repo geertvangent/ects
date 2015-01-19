@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Storage\DataManager\Connection;
+namespace Ehb\Application\Sync\Cas\Storage\DataManager\Connection;
 
 use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
@@ -27,11 +27,11 @@ class Mdb2Connection extends \Chamilo\Libraries\Storage\DataManager\Mdb2\Mdb2Con
      */
     private function __construct()
     {
-        $cas_dbms = PlatformSetting :: get('dbms', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
-        $cas_user = PlatformSetting :: get('user', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
-        $cas_password = PlatformSetting :: get('password', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
-        $cas_host = PlatformSetting :: get('host', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
-        $cas_database = PlatformSetting :: get('database', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
+        $cas_dbms = PlatformSetting :: get('dbms', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
+        $cas_user = PlatformSetting :: get('user', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
+        $cas_password = PlatformSetting :: get('password', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
+        $cas_host = PlatformSetting :: get('host', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
+        $cas_database = PlatformSetting :: get('database', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
 
         $data_source_name = DataSourceName :: factory(
             'mdb2',

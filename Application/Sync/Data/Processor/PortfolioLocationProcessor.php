@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Data\Processor;
+namespace Ehb\Application\Sync\Data\Processor;
 
 use Chamilo\Libraries\File\FileLogger;
 

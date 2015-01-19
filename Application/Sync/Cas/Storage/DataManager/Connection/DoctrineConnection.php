@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Storage\DataManager\Connection;
+namespace Ehb\Application\Sync\Cas\Storage\DataManager\Connection;
 
 use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
@@ -38,15 +38,15 @@ class DoctrineConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine
 
         if (is_null($connection))
         {
-            $cas_dbms = PlatformSetting :: get('dbms', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
-            $cas_user = PlatformSetting :: get('user', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
+            $cas_dbms = PlatformSetting :: get('dbms', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
+            $cas_user = PlatformSetting :: get('user', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
             $cas_password = PlatformSetting :: get(
                 'password',
-                \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
-            $cas_host = PlatformSetting :: get('host', \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
+                \Ehb\Application\Sync\Cas\Storage\Manager :: context());
+            $cas_host = PlatformSetting :: get('host', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
             $cas_database = PlatformSetting :: get(
                 'database',
-                \Chamilo\Application\EhbSync\Cas\Storage\Manager :: context());
+                \Ehb\Application\Sync\Cas\Storage\Manager :: context());
 
             $data_source_name = DataSourceName :: factory(
                 'doctrine',

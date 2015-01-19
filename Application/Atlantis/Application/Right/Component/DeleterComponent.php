@@ -1,12 +1,12 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Right\Component;
+namespace Ehb\Application\Atlantis\Application\Right\Component;
 
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Application\Right\Manager;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataManager;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right;
+use Ehb\Application\Atlantis\Application\Right\Manager;
+use Ehb\Application\Atlantis\Application\Right\Table\DataManager;
+use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
 
 class DeleterComponent extends Manager
 {

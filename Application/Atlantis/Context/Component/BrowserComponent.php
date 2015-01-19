@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\Context\Component;
+namespace Ehb\Application\Atlantis\Context\Component;
 
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Format\Theme\Theme;
@@ -16,9 +16,9 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Application\Atlantis\Context\Manager;
-use Chamilo\Application\Atlantis\Context\Table\Context\ContextTable;
-use Chamilo\Application\Atlantis\Context\Menu;
+use Ehb\Application\Atlantis\Context\Manager;
+use Ehb\Application\Atlantis\Context\Table\Context\ContextTable;
+use Ehb\Application\Atlantis\Context\Menu;
 
 class BrowserComponent extends Manager implements TableSupport
 {
@@ -105,9 +105,9 @@ class BrowserComponent extends Manager implements TableSupport
                     Theme :: get_image_path('\application\atlantis\role\entity') . 'logo/16.png',
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Atlantis\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Manager :: ACTION_ROLE,
-                            \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
-                            \Chamilo\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE,
+                            \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,
+                            \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
+                            \Ehb\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE,
                             Manager :: PARAM_CONTEXT_ID => $this->get_context())),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }

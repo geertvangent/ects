@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\UserGroup\Component;
+namespace Ehb\Application\Atlantis\UserGroup\Component;
 
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\UserGroup\Manager;
+use Ehb\Application\Atlantis\UserGroup\Manager;
 
 class CreatorComponent extends Manager
 {
@@ -15,9 +15,9 @@ class CreatorComponent extends Manager
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
 
-        $application = new \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application();
+        $application = new \Ehb\Application\Atlantis\Application\Storage\DataClass\Application();
 
-        $form = new \Chamilo\Application\Atlantis\Application\Form\ApplicationForm(
+        $form = new \Ehb\Application\Atlantis\Application\Form\ApplicationForm(
             $application,
             $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)));
 
@@ -25,10 +25,10 @@ class CreatorComponent extends Manager
         {
             $values = $form->exportValues();
 
-            $application->set_name($values[\Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME]);
+            $application->set_name($values[\Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME]);
             $application->set_description(
-                $values[\Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION]);
-            $application->set_url($values[\Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL]);
+                $values[\Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION]);
+            $application->set_url($values[\Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL]);
 
             $success = $application->create();
 

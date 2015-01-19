@@ -1,12 +1,12 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\User;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\User;
 
 /**
  *
  * @package ehb.sync;
  */
 use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\UserSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\UserSynchronization;
 
 class AllUserSynchronization extends UserSynchronization
 {

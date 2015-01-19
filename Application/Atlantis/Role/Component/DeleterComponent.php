@@ -1,12 +1,12 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Component;
+namespace Ehb\Application\Atlantis\Role\Component;
 
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Role\Manager;
-use Chamilo\Application\Atlantis\Role\DataManager;
-use Chamilo\Application\Atlantis\Role\DataClass\Role;
+use Ehb\Application\Atlantis\Role\Manager;
+use Ehb\Application\Atlantis\Role\DataManager;
+use Ehb\Application\Atlantis\Role\DataClass\Role;
 
 class DeleterComponent extends Manager
 {

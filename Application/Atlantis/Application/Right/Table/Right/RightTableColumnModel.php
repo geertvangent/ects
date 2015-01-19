@@ -1,10 +1,10 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Right\Table\Right;
+namespace Ehb\Application\Atlantis\Application\Right\Table\Right;
 
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right;
+use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
 
 class RightTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

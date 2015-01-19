@@ -1,10 +1,10 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Form;
+namespace Ehb\Application\Atlantis\Role\Form;
 
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Role\DataClass\Role;
+use Ehb\Application\Atlantis\Role\DataClass\Role;
 
 class RoleForm extends FormValidator
 {

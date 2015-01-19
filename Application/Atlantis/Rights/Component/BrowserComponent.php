@@ -1,14 +1,14 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Component;
+namespace Ehb\Application\Atlantis\Rights\Component;
 
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\Atlantis\Rights\Manager;
-use Chamilo\Application\Atlantis\Rights\Table\Entity\EntityTable;
+use Ehb\Application\Atlantis\Rights\Manager;
+use Ehb\Application\Atlantis\Rights\Table\Entity\EntityTable;
 
 class BrowserComponent extends Manager implements TableSupport
 {

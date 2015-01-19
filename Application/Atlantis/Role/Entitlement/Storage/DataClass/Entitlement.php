@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass;
+namespace Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass;
 
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataManager;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
 
 /**
  * application.atlantis.role.entitlement.
@@ -101,8 +101,8 @@ class Entitlement extends DataClass
     {
         if (! isset($this->right))
         {
-            $this->right = \Chamilo\Application\Atlantis\Application\Right\Table\DataManager :: retrieve(
-                \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+            $this->right = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieve(
+                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
                 (int) $this->get_right_id());
         }
         return $this->right;
@@ -112,8 +112,8 @@ class Entitlement extends DataClass
     {
         if (! isset($this->role))
         {
-            $this->role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve(
-                \Chamilo\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $this->role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve(
+                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
                 (int) $this->get_role_id());
         }
         return $this->role;

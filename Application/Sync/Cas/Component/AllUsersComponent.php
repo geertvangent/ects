@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Component;
+namespace Ehb\Application\Sync\Cas\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbSync\Cas\Synchronization\Type\UserSynchronization;
-use Chamilo\Application\EhbSync\Cas\Manager;
+use Ehb\Application\Sync\Cas\Synchronization\Type\UserSynchronization;
+use Ehb\Application\Sync\Cas\Manager;
 
 class AllUsersComponent extends Manager implements DelegateComponent
 {

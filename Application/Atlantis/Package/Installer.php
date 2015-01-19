@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Package;
+namespace Ehb\Application\Atlantis\Package;
 
 
 

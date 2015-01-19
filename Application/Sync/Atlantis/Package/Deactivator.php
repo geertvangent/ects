@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Atlantis\Package;
+namespace Ehb\Application\Sync\Atlantis\Package;
 
 class Deactivator extends \Chamilo\Configuration\Package\Deactivator
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Data\Test\Source;
+namespace Ehb\Application\Sync\Cas\Data\Test\Source;
 
 use Chamilo\Libraries\Architecture\TestApplication;
 

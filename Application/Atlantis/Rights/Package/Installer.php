@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Package;
+namespace Ehb\Application\Atlantis\Rights\Package;
 
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Rights\Rights;
+use Ehb\Application\Atlantis\Rights\Rights;
 
 class Installer extends \Chamilo\Configuration\Package\Installer
 {

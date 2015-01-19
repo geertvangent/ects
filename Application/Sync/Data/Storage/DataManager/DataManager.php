@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Data\Storage\DataManager;
+namespace Ehb\Application\Sync\Data\Storage\DataManager;
 
 /**
  *

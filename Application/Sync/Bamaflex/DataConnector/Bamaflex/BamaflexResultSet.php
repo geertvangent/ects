@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex;
+namespace Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex;
 
 use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 

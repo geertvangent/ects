@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\EhbSync\Data\Component;
+namespace Ehb\Application\Sync\Data\Component;
 
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbSync\Data\Manager;
+use Ehb\Application\Sync\Data\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

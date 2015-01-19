@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\Atlantis\UserGroup\Component;
+namespace Ehb\Application\Atlantis\UserGroup\Component;
 
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Format\Theme\Theme;
@@ -12,8 +12,8 @@ use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\Atlantis\UserGroup\Manager;
-use Chamilo\Application\Atlantis\UserGroup\Table\Application\ApplicationTable;
+use Ehb\Application\Atlantis\UserGroup\Manager;
+use Ehb\Application\Atlantis\UserGroup\Table\Application\ApplicationTable;
 
 class BrowserComponent extends Manager implements TableSupport
 {
@@ -29,18 +29,18 @@ class BrowserComponent extends Manager implements TableSupport
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME),
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION),
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL),
                 '*' . $query . '*');
             return new OrCondition($search_conditions);
         }

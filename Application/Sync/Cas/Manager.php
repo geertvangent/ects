@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas;
+namespace Ehb\Application\Sync\Cas;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 

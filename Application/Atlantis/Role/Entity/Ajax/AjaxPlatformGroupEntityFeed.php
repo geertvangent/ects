@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Ajax;
+namespace Ehb\Application\Atlantis\Role\Entity\Ajax;
 
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
@@ -15,8 +15,8 @@ use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -42,9 +42,9 @@ class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
         {
             $type = AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER;
         }
-        elseif (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+            $target_groups = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
                 $this->get_user());
 
             if (in_array($group->get_id(), $target_groups))
@@ -155,9 +155,9 @@ class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
         {
             return $groups;
         }
-        elseif (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+            $target_groups = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
                 $this->get_user());
 
             $allowed_groups = array();
@@ -200,10 +200,10 @@ class AjaxPlatformGroupEntityFeed extends AjaxPlatformGroupsFeed
             $add_users = true;
         }
         elseif (! $this->get_user()->is_platform_admin() &&
-             \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+             \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             $group = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(Group :: class_name(), (int) $filter_id);
-            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+            $target_groups = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
                 $this->get_user());
 
             foreach ($target_groups as $target_group)

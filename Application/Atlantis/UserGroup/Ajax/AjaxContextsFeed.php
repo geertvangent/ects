@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\UserGroup\Ajax;
+namespace Ehb\Application\Atlantis\UserGroup\Ajax;
 
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -14,8 +14,8 @@ use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementF
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
-use Chamilo\Application\Atlantis\UserGroup\Storage\DataClass\Context;
-use Chamilo\Application\Atlantis\UserGroup\Storage\DataManager;
+use Ehb\Application\Atlantis\UserGroup\Storage\DataClass\Context;
+use Ehb\Application\Atlantis\UserGroup\Storage\DataManager;
 
 class AjaxContextsFeed extends AjaxManager
 {

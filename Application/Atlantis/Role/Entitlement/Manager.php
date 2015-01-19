@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entitlement;
+namespace Ehb\Application\Atlantis\Role\Entitlement;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 

@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Component;
+namespace Ehb\Application\Atlantis\Role\Entity\Component;
 
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
@@ -13,9 +13,9 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Atlantis\Role\Entity\Manager;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
-use Chamilo\Application\Atlantis\Role\Entity\Table\RoleEntity\RoleEntityTable;
+use Ehb\Application\Atlantis\Role\Entity\Manager;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
+use Ehb\Application\Atlantis\Role\Entity\Table\RoleEntity\RoleEntityTable;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {
@@ -142,8 +142,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         }
         elseif (! $this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
         {
-            $role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Chamilo\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
                 (int) $this->role_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
             SessionBreadcrumbs :: add(
@@ -159,8 +159,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 Group :: class_name(),
                 (int) $this->context_id);
 
-            $role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Chamilo\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
                 (int) $this->role_id);
 
             SessionBreadcrumbs :: add(
@@ -192,8 +192,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     {
         $this->entity_type = Request :: get(self :: PARAM_ENTITY_TYPE);
         $this->entity_id = Request :: get(self :: PARAM_ENTITY_ID);
-        $this->context_id = Request :: get(\Chamilo\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID);
-        $this->role_id = Request :: get(\Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
+        $this->context_id = Request :: get(\Ehb\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID);
+        $this->role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
         $this->start_date = Request :: get(self :: PARAM_START_DATE);
         $this->end_date = Request :: get(self :: PARAM_END_DATE);
 

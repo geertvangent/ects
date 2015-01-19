@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex;
+namespace Ehb\Application\Sync\Bamaflex;
 
 /**
  *

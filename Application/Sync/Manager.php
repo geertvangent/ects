@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync;
+namespace Ehb\Application\Sync;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entitlement\Form;
+namespace Ehb\Application\Atlantis\Role\Entitlement\Form;
 
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
@@ -8,8 +8,8 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
-use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataManager;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
 
 class EntitlementForm extends FormValidator
 {
@@ -30,11 +30,11 @@ class EntitlementForm extends FormValidator
         $parameters = new DataClassRetrievesParameters(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
+                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
                 new StaticConditionVariable($this->component->get_application_id())));
-        $rights = \Chamilo\Application\Atlantis\Application\Right\Table\DataManager :: retrieves(
-            \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+        $rights = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieves(
+            \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
             $parameters);
         while ($right = $rights->next_result())
         {

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Atlantis;
+namespace Ehb\Application\Sync\Atlantis;
 
 /**
  *

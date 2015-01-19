@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <packages>
-	<package>
-		<name>Ehb Synchronization</name>
-		<code>ehb_sync</code>
-		<context>application\ehb_sync</context>
-		<section>application</section>
-		<category>research</category>
-		<authors>
-			<author>
-				<name>Hans De Bisschop</name>
-				<email>hans.de.bisschop@ehb.be</email>
-				<company>Erasmushogeschool Brussel</company>
-			</author>
-		</authors>
-		<version>4.0.0</version>
-		<cycle>
-			<phase>general_availability</phase>
-			<realm>main</realm>
-		</cycle>
-		<filename>pool/main/application/e/ehb_sync/ehb_sync-1.0.0.zip</filename>
-		<size></size>
-		<md5></md5>
-		<sha1></sha1>
-		<sha256></sha256>
-		<sha512></sha512>
-		<tagline></tagline>
-		<description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+  <package>
+    <name>Ehb Synchronization</name>
+    <code>EhbSync</code>
+    <context>Ehb\Application\EhbSync</context>
+    <type>Chamilo\Application</type>
+    <category>research</category>
+    <authors>
+      <author>
+        <name>Hans De Bisschop</name>
+        <email>hans.de.bisschop@ehb.be</email>
+        <company>Erasmushogeschool Brussel</company>
+      </author>
+    </authors>
+    <version>4.0.0</version>
+    <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
 			orci enim, auctor sit amet porttitor vel, sollicitudin vel augue. Etiam metus
 			dui, facilisis ac fermentum lobortis, sollicitudin nec sapien. Cum sociis
 			natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
@@ -35,12 +24,11 @@
 			Nulla adipiscing vestibulum convallis. Aliquam aliquet gravida vulputate
 			viverra fusce.
 		</description>
-		<homepage></homepage>
-		<pre-depends>
-			<dependency type="registration">
-				<id>common\libraries</id>
-				<version operator="4">4.0.0</version>
-			</dependency>
-		</pre-depends>
-	</package>
+    <pre-depends>
+      <dependency type="registration">
+        <id>Chamilo\Common\Libraries</id>
+        <version operator="4">4.0.0</version>
+      </dependency>
+    </pre-depends>
+  </package>
 </packages>

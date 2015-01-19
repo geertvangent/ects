@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Right\Table\Right;
+namespace Ehb\Application\Atlantis\Application\Right\Table\Right;
 
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataManager;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right;
+use Ehb\Application\Atlantis\Application\Right\Table\DataManager;
+use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
 
 class RightTableDataProvider extends TableDataProvider
 {

@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Data\DataClass;
+namespace Ehb\Application\Sync\Cas\Data\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Application\EhbSync\Cas\Data\DataManager;
+use Ehb\Application\Sync\Cas\Data\DataManager;
 
 /**
  *

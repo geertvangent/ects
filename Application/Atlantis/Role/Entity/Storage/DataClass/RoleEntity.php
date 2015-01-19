@@ -1,12 +1,12 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass;
+namespace Ehb\Application\Atlantis\Role\Entity\Storage\DataClass;
 
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataManager;
 
 /**
  * application.atlantis.role.entity.
@@ -225,8 +225,8 @@ class RoleEntity extends DataClass
     {
         if (! isset($this->role))
         {
-            $this->role = \Chamilo\Application\Atlantis\Role\DataManager :: retrieve(
-                \Chamilo\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $this->role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve(
+                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
                 (int) $this->get_role_id());
         }
         return $this->role;

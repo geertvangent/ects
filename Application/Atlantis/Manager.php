@@ -23,7 +23,7 @@ class Manager extends Application
     {
         parent :: __construct($user, $application);
 
-        if (! \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }

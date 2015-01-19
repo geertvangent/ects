@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\EhbSync\Data\Component;
+namespace Ehb\Application\Sync\Data\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbSync\Data\Manager;
-use Chamilo\Application\EhbSync\Data\Processor\WeblcmsVisitProcessor;
+use Ehb\Application\Sync\Data\Manager;
+use Ehb\Application\Sync\Data\Processor\WeblcmsVisitProcessor;
 
 class WeblcmsComponent extends Manager implements DelegateComponent
 {

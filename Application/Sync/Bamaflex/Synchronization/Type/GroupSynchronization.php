@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type;
 
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
@@ -10,7 +10,7 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 
 /**
  *

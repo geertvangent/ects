@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
+namespace Ehb\Application\Atlantis\Rights\Table\Entity;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;

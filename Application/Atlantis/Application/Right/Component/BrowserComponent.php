@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Right\Component;
+namespace Ehb\Application\Atlantis\Application\Right\Component;
 
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
@@ -18,9 +18,9 @@ use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Atlantis\Application\Right\Manager;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right;
-use Chamilo\Application\Atlantis\Application\Right\Table\Right\RightTable;
+use Ehb\Application\Atlantis\Application\Right\Manager;
+use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
+use Ehb\Application\Atlantis\Application\Right\Table\Right\RightTable;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {
@@ -48,7 +48,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_APPLICATION_ID),
             new StaticConditionVariable(
-                $this->get_parameter(\Chamilo\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID)));
+                $this->get_parameter(\Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID)));
         return new AndCondition($conditions);
     }
 
@@ -84,9 +84,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     public function add_breadcrumb()
     {
         $application_id = Request :: get(
-            \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID);
-        $application = \Chamilo\Application\Atlantis\Application\Storage\DataManager :: retrieve(
-            \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+            \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID);
+        $application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve(
+            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
             (int) $application_id);
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
         SessionBreadcrumbs :: add(

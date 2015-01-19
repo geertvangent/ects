@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\EhbSync\Data\Component;
+namespace Ehb\Application\Sync\Data\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbSync\Data\Processor\PersonalCalendarVisitProcessor;
-use Chamilo\Application\EhbSync\Data\Manager;
+use Ehb\Application\Sync\Data\Processor\PersonalCalendarVisitProcessor;
+use Ehb\Application\Sync\Data\Manager;
 
 class PersonalCalendarComponent extends Manager implements DelegateComponent
 {

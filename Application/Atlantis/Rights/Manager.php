@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights;
+namespace Ehb\Application\Atlantis\Rights;
 
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation;
@@ -7,7 +7,7 @@ use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Architecture\Application\Application;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 
 class Manager extends Application

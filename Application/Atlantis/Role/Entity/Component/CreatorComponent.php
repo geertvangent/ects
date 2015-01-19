@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Component;
+namespace Ehb\Application\Atlantis\Role\Entity\Component;
 
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Condition\Condition;
@@ -14,12 +14,12 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
-use Chamilo\Application\Atlantis\Role\Entity\Manager;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
-use Chamilo\Application\Atlantis\Role\Entity\Form\EntityForm;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
+use Ehb\Application\Atlantis\Role\Entity\Manager;
+use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
+use Ehb\Application\Atlantis\Role\Entity\Form\EntityForm;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 
 class CreatorComponent extends Manager
 {
@@ -31,7 +31,7 @@ class CreatorComponent extends Manager
                 $this->get_url(),
                 Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
 
-        if (! \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
@@ -58,23 +58,23 @@ class CreatorComponent extends Manager
                             $conditions = array();
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
-                                    \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
-                                    \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ENTITY_TYPE),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ENTITY_TYPE),
                                 new StaticConditionVariable($entity_type));
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
-                                    \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
-                                    \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ENTITY_ID),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ENTITY_ID),
                                 new StaticConditionVariable($entity_id));
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
-                                    \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
-                                    \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_CONTEXT_ID),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_CONTEXT_ID),
                                 new StaticConditionVariable($context));
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
-                                    \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
-                                    \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ROLE_ID),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ROLE_ID),
                                 new StaticConditionVariable($role));
                             $condition = new AndCondition($conditions);
 
@@ -85,8 +85,8 @@ class CreatorComponent extends Manager
                                 array(
                                     new OrderBy(
                                         new PropertiesConditionVariable(
-                                            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
-                                            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_START_DATE))));
+                                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_START_DATE))));
 
                             $has_merged = $this->merge_entities($parameters, null, $new_start_date, $new_end_date);
 
@@ -170,8 +170,8 @@ class CreatorComponent extends Manager
             $parameters->set_condition(new AndCondition($parameters->get_condition(), $condition));
         }
 
-        $role_entities = \Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
-            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+        $role_entities = \Ehb\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
+            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
             $parameters);
 
         while ($role_entity = $role_entities->next_result())
@@ -193,7 +193,7 @@ class CreatorComponent extends Manager
                     $condition = new NotCondition(
                         new EqualityCondition(
                             new PropertyConditionVariable(
-                                \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
                                 RoleEntity :: PROPERTY_ID),
                             new StaticConditionVariable($role_entity->get_id())));
 
@@ -227,7 +227,7 @@ class CreatorComponent extends Manager
                     $condition = new NotCondition(
                         new EqualityCondition(
                             new PropertyConditionVariable(
-                                \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
                                 RoleEntity :: PROPERTY_ID),
                             new StaticConditionVariable($role_entity->get_id())));
 
@@ -261,7 +261,7 @@ class CreatorComponent extends Manager
                     $condition = new NotCondition(
                         new EqualityCondition(
                             new PropertyConditionVariable(
-                                \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
                                 RoleEntity :: PROPERTY_ID),
                             new StaticConditionVariable($role_entity->get_id())));
 

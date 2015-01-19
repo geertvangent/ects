@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\EhbSync\Component;
+namespace Ehb\Application\Sync\Component;
 
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbSync\Manager;
+use Ehb\Application\Sync\Manager;
 
 class CasComponent extends Manager implements DelegateComponent
 {
@@ -19,7 +19,7 @@ class CasComponent extends Manager implements DelegateComponent
         }
 
         \Chamilo\Libraries\Architecture\Application\Application :: launch(
-            \Chamilo\Application\EhbSync\Cas\Manager :: context(),
+            \Ehb\Application\Sync\Cas\Manager :: context(),
             $this->get_user(),
             $this);
     }

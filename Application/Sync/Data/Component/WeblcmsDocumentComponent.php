@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\EhbSync\Data\Component;
+namespace Ehb\Application\Sync\Data\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbSync\Data\Processor\WeblcmsDocumentDownloadProcessor;
-use Chamilo\Application\EhbSync\Data\Manager;
+use Ehb\Application\Sync\Data\Processor\WeblcmsDocumentDownloadProcessor;
+use Ehb\Application\Sync\Data\Manager;
 
 class WeblcmsDocumentComponent extends Manager implements DelegateComponent
 {

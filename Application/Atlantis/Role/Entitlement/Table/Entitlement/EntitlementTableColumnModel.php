@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entitlement\Table\Entitlement;
+namespace Ehb\Application\Atlantis\Role\Entitlement\Table\Entitlement;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;

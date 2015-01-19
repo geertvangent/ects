@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Package;
+namespace Ehb\Application\Sync\Package;
 
 class Activator extends \Chamilo\Configuration\Package\Activator
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Atlantis\Test\Source;
+namespace Ehb\Application\Sync\Atlantis\Test\Source;
 
 use Chamilo\Libraries\Architecture\TestApplication;
 

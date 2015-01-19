@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Component;
+namespace Ehb\Application\Atlantis\Application\Component;
 
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Application\Manager;
-use Chamilo\Application\Atlantis\Application\Storage\DataClass\Application;
-use Chamilo\Application\Atlantis\Application\Form\ApplicationForm;
+use Ehb\Application\Atlantis\Application\Manager;
+use Ehb\Application\Atlantis\Application\Storage\DataClass\Application;
+use Ehb\Application\Atlantis\Application\Form\ApplicationForm;
 
 class CreatorComponent extends Manager
 {

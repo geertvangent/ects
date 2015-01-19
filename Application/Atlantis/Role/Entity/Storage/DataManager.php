@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Storage;
+namespace Ehb\Application\Atlantis\Role\Entity\Storage;
 
 /**
  * $Id: menu_data_manager.class.php 157 2009-11-10 13:44:02Z vanpouckesven $

@@ -1,14 +1,14 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Component;
+namespace Ehb\Application\Sync\Cas\Component;
 
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\EhbSync\Cas\Data\DataClass\Statistic;
+use Ehb\Application\Sync\Cas\Data\DataClass\Statistic;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Application\EhbSync\Cas\Storage\DataClass\ComAuditTrail;
+use Ehb\Application\Sync\Cas\Storage\DataClass\ComAuditTrail;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\EhbSync\Cas\Manager;
+use Ehb\Application\Sync\Cas\Manager;
 
 class StatisticsComponent extends Manager implements DelegateComponent
 {
@@ -36,7 +36,7 @@ class StatisticsComponent extends Manager implements DelegateComponent
 
             $parameters = new DataClassRetrievesParameters(null, 200000);
 
-            $audit_trails = \Chamilo\Application\EhbSync\Cas\Storage\DataManager :: retrieves(
+            $audit_trails = \Ehb\Application\Sync\Cas\Storage\DataManager :: retrieves(
                 ComAuditTrail :: class_name(),
                 $parameters);
 

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entitlement\Table\Entitlement;
+namespace Ehb\Application\Atlantis\Role\Entitlement\Table\Entitlement;
 
 use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
 use Chamilo\Libraries\Format\Table\Table;
@@ -7,7 +7,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormActions;
-use Chamilo\Application\Atlantis\Role\Entitlement\Manager;
+use Ehb\Application\Atlantis\Role\Entitlement\Manager;
 
 class EntitlementTable extends Table implements TableFormActionsSupport
 {

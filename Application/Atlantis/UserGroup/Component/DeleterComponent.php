@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\UserGroup\Component;
+namespace Ehb\Application\Atlantis\UserGroup\Component;
 
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\UserGroup\Manager;
-use Chamilo\Application\Atlantis\UserGroup\Storage\DataManager;
+use Ehb\Application\Atlantis\UserGroup\Manager;
+use Ehb\Application\Atlantis\UserGroup\Storage\DataManager;
 
 class DeleterComponent extends Manager
 {
@@ -25,7 +25,7 @@ class DeleterComponent extends Manager
             foreach ($ids as $id)
             {
                 $application = DataManager :: retrieve(
-                    \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
                     (int) $id);
 
                 if (! $this->get_user()->is_platform_admin())

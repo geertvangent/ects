@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Component;
+namespace Ehb\Application\Atlantis\Role\Component;
 
-use Chamilo\Application\Atlantis\Role\Manager;
+use Ehb\Application\Atlantis\Role\Manager;
 
 class ViewerComponent extends Manager
 {

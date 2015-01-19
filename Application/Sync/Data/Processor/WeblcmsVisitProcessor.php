@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Data\Processor;
+namespace Ehb\Application\Sync\Data\Processor;
 
 use Chamilo\Application\Weblcms\Storage\DataClass\CourseTool;
 use Chamilo\Libraries\File\FileLogger;
@@ -7,8 +7,8 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Cache\DataClassCache;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\EhbSync\Data\Storage\DataClass\WeblcmsVisit;
-use Chamilo\Application\EhbSync\Data\Storage\DataManager\DataManager;
+use Ehb\Application\Sync\Data\Storage\DataClass\WeblcmsVisit;
+use Ehb\Application\Sync\Data\Storage\DataManager\DataManager;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal

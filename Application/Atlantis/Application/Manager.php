@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application;
+namespace Ehb\Application\Atlantis\Application;
 
 class Manager extends \Chamilo\Libraries\Architecture\Application\Application
 {

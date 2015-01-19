@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Test\Source;
+namespace Ehb\Application\Sync\Test\Source;
 
 use Chamilo\Libraries\Architecture\TestApplication;
 

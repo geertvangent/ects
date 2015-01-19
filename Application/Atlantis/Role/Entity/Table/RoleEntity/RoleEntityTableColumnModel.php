@@ -1,12 +1,12 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Table\RoleEntity;
+namespace Ehb\Application\Atlantis\Role\Entity\Table\RoleEntity;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 
 class RoleEntityTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

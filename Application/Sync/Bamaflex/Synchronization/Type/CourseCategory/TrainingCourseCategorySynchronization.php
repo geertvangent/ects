@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseCategory;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategory;
 
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseCategorySynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategorySynchronization;
 
 /**
  *

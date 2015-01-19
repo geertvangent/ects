@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Storage\DataClass;
+namespace Ehb\Application\Atlantis\Rights\Storage\DataClass;
 
-use Chamilo\Application\Atlantis\Rights\Storage\DataManager;
+use Ehb\Application\Atlantis\Rights\Storage\DataManager;
 
 class RightsLocationEntityRight extends \Chamilo\Core\Rights\RightsLocationEntityRight
 {

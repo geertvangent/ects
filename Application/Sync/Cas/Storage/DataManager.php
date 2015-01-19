@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Storage;
+namespace Ehb\Application\Sync\Cas\Storage;
 
 /**
  *

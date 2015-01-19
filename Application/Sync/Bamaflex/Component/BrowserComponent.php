@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Component;
+namespace Ehb\Application\Sync\Bamaflex\Component;
 
 use Chamilo\Libraries\Format\Theme\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbSync\Bamaflex\Manager;
+use Ehb\Application\Sync\Bamaflex\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

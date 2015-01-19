@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Component;
+namespace Ehb\Application\Atlantis\Rights\Component;
 
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\Atlantis\Rights\Manager;
-use Chamilo\Application\Atlantis\Rights\Form\RightsForm;
+use Ehb\Application\Atlantis\Rights\Manager;
+use Ehb\Application\Atlantis\Rights\Form\RightsForm;
 
 class AccessorComponent extends Manager
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Table\Role;
+namespace Ehb\Application\Atlantis\Role\Table\Role;
 
 use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
 use Chamilo\Libraries\Format\Table\Table;
@@ -7,7 +7,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormActions;
-use Chamilo\Application\Atlantis\Role\Manager;
+use Ehb\Application\Atlantis\Role\Manager;
 
 class RoleTable extends Table implements TableFormActionsSupport
 {

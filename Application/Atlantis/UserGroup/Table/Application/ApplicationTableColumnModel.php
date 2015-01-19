@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\UserGroup\Table\Application;
+namespace Ehb\Application\Atlantis\UserGroup\Table\Application;
 
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
@@ -15,15 +15,15 @@ class ApplicationTableColumnModel extends DataClassTableColumnModel implements T
     {
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME));
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME));
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION));
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION));
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL));
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL));
     }
 }

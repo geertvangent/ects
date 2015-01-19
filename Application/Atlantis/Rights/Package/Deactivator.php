@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Package;
+namespace Ehb\Application\Atlantis\Rights\Package;
 
 use Chamilo\Configuration\Package\NotAllowed;
 

@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Component;
+namespace Ehb\Application\Atlantis\Role\Component;
 
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Role\Manager;
-use Chamilo\Application\Atlantis\Role\DataClass\Role;
-use Chamilo\Application\Atlantis\Role\Form\RoleForm;
+use Ehb\Application\Atlantis\Role\Manager;
+use Ehb\Application\Atlantis\Role\DataClass\Role;
+use Ehb\Application\Atlantis\Role\Form\RoleForm;
 
 class CreatorComponent extends Manager
 {

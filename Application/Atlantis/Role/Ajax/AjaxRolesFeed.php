@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Ajax;
+namespace Ehb\Application\Atlantis\Role\Ajax;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -12,8 +12,8 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\Query\OrderBy;
-use Chamilo\Application\Atlantis\Role\DataClass\Role;
-use Chamilo\Application\Atlantis\Role\DataManager;
+use Ehb\Application\Atlantis\Role\DataClass\Role;
+use Ehb\Application\Atlantis\Role\DataManager;
 
 class AjaxRolesFeed extends AjaxManager
 {

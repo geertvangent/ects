@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Right\Component;
+namespace Ehb\Application\Atlantis\Application\Right\Component;
 
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Application\Atlantis\Application\Right\Manager;
-use Chamilo\Application\Atlantis\Application\Right\Form\RoleForm;
+use Ehb\Application\Atlantis\Application\Right\Manager;
+use Ehb\Application\Atlantis\Application\Right\Form\RoleForm;
 
 class AddRoleComponent extends Manager
 {

@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Component;
+namespace Ehb\Application\Atlantis\Role\Entity\Component;
 
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Role\Entity\Manager;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
+use Ehb\Application\Atlantis\Role\Entity\Manager;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataManager;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 
 class DeleterComponent extends Manager
 {
@@ -15,8 +15,8 @@ class DeleterComponent extends Manager
     public function run()
     {
         $ids = Request :: get(self :: PARAM_ROLE_ENTITY_ID);
-        $context_id = Request :: get(\Chamilo\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID);
-        $role_id = Request :: get(\Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
+        $context_id = Request :: get(\Ehb\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID);
+        $role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
 
         $failures = 0;
 
@@ -31,7 +31,7 @@ class DeleterComponent extends Manager
             {
                 $role_entity = DataManager :: retrieve(RoleEntity :: class_name(), (int) $id);
 
-                if (! \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+                if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
                 {
                     $failures ++;
                 }
@@ -85,8 +85,8 @@ class DeleterComponent extends Manager
                 ($failures ? true : false),
                 array(
                     Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE,
-                    \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $role_id,
-                    \Chamilo\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID => $context_id));
+                    \Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $role_id,
+                    \Ehb\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID => $context_id));
         }
         else
         {

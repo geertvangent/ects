@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Form;
+namespace Ehb\Application\Atlantis\Rights\Form;
 
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Platform\Translation;
@@ -11,9 +11,9 @@ use Chamilo\Core\Rights\Entity\UserEntity;
 use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\Atlantis\Rights\Rights;
-use Chamilo\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
-use Chamilo\Application\Atlantis\Rights\Storage\DataManager;
+use Ehb\Application\Atlantis\Rights\Rights;
+use Ehb\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
+use Ehb\Application\Atlantis\Rights\Storage\DataManager;
 
 class RightsForm extends FormValidator
 {

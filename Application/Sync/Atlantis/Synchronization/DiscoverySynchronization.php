@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Atlantis\Synchronization;
+namespace Ehb\Application\Sync\Atlantis\Synchronization;
 
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
@@ -28,26 +28,26 @@ class DiscoverySynchronization
 
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
-                \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_CODE),
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_CODE),
             new StaticConditionVariable('DISCOVERY'));
 
         $parameters = DataClassRetrieveParameters :: generate($condition);
 
-        $application = \Chamilo\Application\Atlantis\Application\Storage\DataManager :: retrieve(
-            \Chamilo\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+        $application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve(
+            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
             $parameters);
 
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
-                \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
+                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
             new StaticConditionVariable($application->get_id()));
 
         $parameters = DataClassRetrievesParameters :: generate($condition);
 
-        $rights = \Chamilo\Application\Atlantis\Application\Right\Table\DataManager :: retrieves(
-            \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+        $rights = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieves(
+            \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
             $parameters);
 
         while ($right = $rights->next_result())
@@ -66,14 +66,14 @@ class DiscoverySynchronization
             {
                 $condition = new EqualityCondition(
                     new PropertyConditionVariable(
-                        \Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement :: class_name(),
-                        \Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement :: PROPERTY_RIGHT_ID),
+                        \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement :: class_name(),
+                        \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement :: PROPERTY_RIGHT_ID),
                     new StaticConditionVariable($right->get_id()));
 
                 $parameters = DataClassRetrievesParameters :: generate($condition);
 
-                $entitlements = \Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataManager :: retrieves(
-                    \Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement :: class_name(),
+                $entitlements = \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager :: retrieves(
+                    \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement :: class_name(),
                     $parameters);
 
                 while ($entitlement = $entitlements->next_result())
@@ -81,29 +81,29 @@ class DiscoverySynchronization
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
                         new PropertyConditionVariable(
-                            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
-                            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ROLE_ID),
+                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ROLE_ID),
                         new StaticConditionVariable($entitlement->get_role_id()));
 
                     $conditions[] = new InequalityCondition(
                         new PropertyConditionVariable(
-                            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
-                            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_START_DATE),
+                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_START_DATE),
                         InequalityCondition :: LESS_THAN_OR_EQUAL,
                         new StaticConditionVariable(time()));
 
                     $conditions[] = new InequalityCondition(
                         new PropertyConditionVariable(
-                            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
-                            \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_END_DATE),
+                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_END_DATE),
                         InequalityCondition :: GREATER_THAN_OR_EQUAL,
                         new StaticConditionVariable(time()));
 
                     $condition = new AndCondition($conditions);
                     $parameters = DataClassRetrievesParameters :: generate($condition);
 
-                    $entities = \Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
-                        \Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                    $entities = \Ehb\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
+                        \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
                         $parameters);
 
                     while ($entity = $entities->next_result())

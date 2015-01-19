@@ -1,10 +1,10 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization;
 
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex\BamaflexDataConnector;
-use Chamilo\Application\EhbSync\Bamaflex\DataConnector\Bamaflex\BamaflexResultSet;
+use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexDataConnector;
+use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexResultSet;
 
 abstract class Synchronization
 {

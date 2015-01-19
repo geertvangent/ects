@@ -1,14 +1,14 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\DataClass;
+namespace Ehb\Application\Atlantis\Role\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\Atlantis\Role\DataManager;
+use Ehb\Application\Atlantis\Role\DataManager;
 
 /**
  * application.atlantis.role.
@@ -94,7 +94,7 @@ class Role extends DataClass
         $condition = new EqualityCondition(
             new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ROLE_ID),
             new StaticConditionVariable($this->get_id()));
-        $role_entities = \Chamilo\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
+        $role_entities = \Ehb\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
             RoleEntity :: class_name(),
             new DataClassRetrievesParameters($condition));
 
@@ -109,7 +109,7 @@ class Role extends DataClass
         $condition = new EqualityCondition(
             new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_ROLE_ID),
             new StaticConditionVariable($this->get_id()));
-        $entitlements = \Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataManager :: retrieves(
+        $entitlements = \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager :: retrieves(
             Entitlement :: class_name(),
             new DataClassRetrievesParameters($condition));
 

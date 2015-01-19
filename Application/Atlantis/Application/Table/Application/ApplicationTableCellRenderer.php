@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Table\Application;
+namespace Ehb\Application\Atlantis\Application\Table\Application;
 
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Theme\Theme;
@@ -8,7 +8,7 @@ use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Structure\Toolbar;
-use Chamilo\Application\Atlantis\Application\Manager;
+use Ehb\Application\Atlantis\Application\Manager;
 
 class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -53,9 +53,9 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
                 Theme :: get_image_path('\application\atlantis\role\entitlement') . 'logo/16.png',
                 $this->get_component()->get_url(
                     array(
-                        \Chamilo\Application\Atlantis\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Manager :: ACTION_ROLE,
-                        \Chamilo\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Manager :: ACTION_ENTITLEMENT,
-                        \Chamilo\Application\Atlantis\Role\Entitlement\Manager :: PARAM_ACTION => \Chamilo\Application\Atlantis\Role\Entitlement\Manager :: ACTION_BROWSE,
+                        \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,
+                        \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITLEMENT,
+                        \Ehb\Application\Atlantis\Role\Entitlement\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entitlement\Manager :: ACTION_BROWSE,
                         Manager :: PARAM_APPLICATION_ID => $application->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
 

@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entitlement\Table\Entitlement;
+namespace Ehb\Application\Atlantis\Role\Entitlement\Table\Entitlement;
 
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
-use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataManager;
-use Chamilo\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 
 class EntitlementTableDataProvider extends TableDataProvider
 {

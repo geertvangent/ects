@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Cron;
+namespace Ehb\Application\Sync\Bamaflex\Cron;
 
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\CourseSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseSynchronization;
 
 /**
  * This script will load the requested application and launch it.

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Context;
+namespace Ehb\Application\Atlantis\Context;
 
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\File\Path;
@@ -15,7 +15,7 @@ use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
-use Chamilo\Application\Atlantis\Context\Storage\DataManager;
+use Ehb\Application\Atlantis\Context\Storage\DataManager;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $

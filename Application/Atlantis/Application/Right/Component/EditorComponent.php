@@ -1,15 +1,15 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Right\Component;
+namespace Ehb\Application\Atlantis\Application\Right\Component;
 
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Application\Atlantis\Application\Right\Manager;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right;
-use Chamilo\Application\Atlantis\Rights\Storage\DataManager;
-use Chamilo\Application\Atlantis\Application\Right\Form\RightForm;
+use Ehb\Application\Atlantis\Application\Right\Manager;
+use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
+use Ehb\Application\Atlantis\Rights\Storage\DataManager;
+use Ehb\Application\Atlantis\Application\Right\Form\RightForm;
 
 class EditorComponent extends Manager
 {

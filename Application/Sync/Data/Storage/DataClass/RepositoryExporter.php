@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbSync\Data\Storage\DataClass;
+namespace Ehb\Application\Sync\Data\Storage\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 

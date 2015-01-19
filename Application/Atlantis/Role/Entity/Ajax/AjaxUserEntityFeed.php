@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Ajax;
+namespace Ehb\Application\Atlantis\Role\Entity\Ajax;
 
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
 use Chamilo\Libraries\Platform\Session\Request;
@@ -13,7 +13,7 @@ use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
 
 /**
  * Feed to return users from the user entity
@@ -58,9 +58,9 @@ class AjaxUserEntityFeed extends \Chamilo\Core\User\Ajax\AjaxUsersFeed
         }
 
         if (! $this->get_user()->is_platform_admin() &&
-             \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+             \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_users = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_users(
+            $target_users = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_users(
                 $this->get_user());
 
             if (count($target_users) > 0)

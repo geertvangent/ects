@@ -1,8 +1,8 @@
 <?php
-namespace Chamilo\Application\EhbSync\Cas\Synchronization\Type;
+namespace Ehb\Application\Sync\Cas\Synchronization\Type;
 
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\EhbSync\Cas\Synchronization\Synchronization;
+use Ehb\Application\Sync\Cas\Synchronization\Synchronization;
 
 /**
  *

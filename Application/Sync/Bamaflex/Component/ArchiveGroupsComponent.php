@@ -1,11 +1,11 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Component;
+namespace Ehb\Application\Sync\Bamaflex\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroupSynchronization;
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroup\ArchiveDummyGroupSynchronization;
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Synchronization;
-use Chamilo\Application\EhbSync\Bamaflex\Manager;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\ArchiveGroupSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\ArchiveGroup\ArchiveDummyGroupSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
+use Ehb\Application\Sync\Bamaflex\Manager;
 class ArchiveGroupsComponent extends Manager implements DelegateComponent
 {
 

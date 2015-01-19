@@ -1,7 +1,7 @@
 <?php
-namespace Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroup;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\ArchiveGroup;
 
-use Chamilo\Application\EhbSync\Bamaflex\Synchronization\Type\ArchiveGroupSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\ArchiveGroupSynchronization;
 /**
  *
  * @package ehb.sync;

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Form;
+namespace Ehb\Application\Atlantis\Role\Entity\Form;
 
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
@@ -8,8 +8,8 @@ use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementF
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
 
 class EntityForm extends FormValidator
 {

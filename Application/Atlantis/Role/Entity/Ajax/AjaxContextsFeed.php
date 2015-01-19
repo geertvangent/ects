@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Role\Entity\Ajax;
+namespace Ehb\Application\Atlantis\Role\Entity\Ajax;
 
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
@@ -16,8 +16,8 @@ use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Group\Ajax\AjaxPlatformGroupsFeed;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
-use Chamilo\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
 
 /**
  * Feed to return the platform groups for the platform group entity
@@ -91,9 +91,9 @@ class AjaxContextsFeed extends AjaxPlatformGroupsFeed
                 $element_class = 'type type_context_simple';
             }
         }
-        elseif (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+            $target_groups = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
                 $this->get_user());
 
             if (in_array($group->get_id(), $target_groups))
@@ -246,9 +246,9 @@ class AjaxContextsFeed extends AjaxPlatformGroupsFeed
         {
             return $groups;
         }
-        elseif (\Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Chamilo\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+            $target_groups = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
                 $this->get_user());
 
             $allowed_groups = array();

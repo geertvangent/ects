@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
+namespace Ehb\Application\Atlantis\Rights\Table\Entity;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
@@ -8,7 +8,7 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Table;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\Atlantis\Rights\Manager;
+use Ehb\Application\Atlantis\Rights\Manager;
 
 class EntityTable extends Table implements TableColumnModelActionsColumnSupport, TableFormActionsSupport
 {

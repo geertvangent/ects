@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Component;
+namespace Ehb\Application\Atlantis\Application\Component;
 
 use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Platform\Session\Request;
@@ -12,9 +12,9 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\Atlantis\Application\Manager;
-use Chamilo\Application\Atlantis\Application\Storage\DataManager;
-use Chamilo\Application\Atlantis\Application\Storage\DataClass\Application;
+use Ehb\Application\Atlantis\Application\Manager;
+use Ehb\Application\Atlantis\Application\Storage\DataManager;
+use Ehb\Application\Atlantis\Application\Storage\DataClass\Application;
 
 class ListerComponent extends Manager implements TableSupport
 {
@@ -49,11 +49,11 @@ class ListerComponent extends Manager implements TableSupport
         $parameters = new DataClassRetrievesParameters(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
-                    \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
+                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
                 new StaticConditionVariable($application_id)));
         $rights = DataManager :: retrieves(
-            \Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+            \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
             $parameters);
         $properties = $this->get_display_rights($rights);
         $table = new PropertiesTable($properties);

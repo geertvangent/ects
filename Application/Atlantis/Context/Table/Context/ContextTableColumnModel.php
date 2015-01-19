@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis\Context\Table\Context;
+namespace Ehb\Application\Atlantis\Context\Table\Context;
 
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;

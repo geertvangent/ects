@@ -1,10 +1,10 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Form;
+namespace Ehb\Application\Atlantis\Application\Form;
 
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Application\Storage\DataClass\Application;
+use Ehb\Application\Atlantis\Application\Storage\DataClass\Application;
 
 class ApplicationForm extends FormValidator
 {

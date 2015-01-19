@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\Atlantis\Application\Right\Component;
+namespace Ehb\Application\Atlantis\Application\Right\Component;
 
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Atlantis\Application\Right\Manager;
-use Chamilo\Application\Atlantis\Application\Right\Table\DataClass\Right;
-use Chamilo\Application\Atlantis\Application\Right\Form\RightForm;
+use Ehb\Application\Atlantis\Application\Right\Manager;
+use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
+use Ehb\Application\Atlantis\Application\Right\Form\RightForm;
 
 class CreatorComponent extends Manager
 {
@@ -26,7 +26,7 @@ class CreatorComponent extends Manager
 
         $right = new Right();
         $right->set_application_id(
-            $this->get_parameter(\Chamilo\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID));
+            $this->get_parameter(\Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID));
 
         $form = new RightForm($right, $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE)));
 
