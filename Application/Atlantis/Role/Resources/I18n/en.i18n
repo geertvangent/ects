@@ -1,0 +1,20 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\atlantis\role
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Role"
+BrowseRoles = "Browse roles"
+BrowseRolesDescription = "Browse and search the list of available roles"
+CreateRole = "Create a new role"
+CreateRoleDescription = "Add a new role to the list of available roles"
+EntityComponent = "Entities"
+EditorComponent = "Editor"
+RoleName = "Name"
+RoleDescription = "Description"
+EntitlementComponent = "Entitlements"
+CreatorComponent = "Creator"
+RoleEntity = "Role entity"
+List = "List of entitlements"
+
+PackageTypeNameRole = ""
