@@ -1,0 +1,21 @@
+<?php
+namespace Chamilo\Application\Discovery\Instance\Table\Instance;
+
+use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\Table\Column\DisplayOrderPropertyTableColumn;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
+
+class InstanceTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
+{
+
+    public function initialize_columns()
+    {
+        $this->add_column(new DataClassPropertyTableColumn(Instance :: class_name(), Instance :: PROPERTY_TYPE));
+        $this->add_column(new DataClassPropertyTableColumn(Instance :: class_name(), Instance :: PROPERTY_TITLE));
+        $this->add_column(new DataClassPropertyTableColumn(Instance :: class_name(), Instance :: PROPERTY_DESCRIPTION));
+        $this->add_column(
+            new DisplayOrderPropertyTableColumn(Instance :: class_name(), Instance :: PROPERTY_DISPLAY_ORDER));
+    }
+}

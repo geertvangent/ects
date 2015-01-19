@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object name="exemption" table="v_discovery_exemption_basic"
+	namespace="application\discovery\module\exemption\implementation\bamaflex"
+	author="Magali Gillard">
+	<properties>
+		<property name="state">
+			<option id="1">Pending</option>
+			<option id="2">Accepted</option>
+			<option id="3">Refused</option>
+		</property>
+	</properties>
+</object>

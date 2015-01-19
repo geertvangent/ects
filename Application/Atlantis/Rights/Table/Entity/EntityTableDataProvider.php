@@ -1,0 +1,26 @@
+<?php
+namespace Chamilo\Application\Atlantis\Rights\Table\Entity;
+
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Format\Table\TableDataProvider;
+use Chamilo\Application\Atlantis\Rights\Storage\DataManager;
+use Chamilo\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
+
+class EntityTableDataProvider extends TableDataProvider
+{
+
+    public function retrieve_data($condition, $offset, $count, $order_property = null)
+    {
+        $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
+
+        return DataManager :: retrieves(RightsLocationEntityRightGroup :: class_name(), $parameters);
+    }
+
+    public function count_data($condition)
+    {
+        return DataManager :: count(
+            RightsLocationEntityRightGroup :: class_name(),
+            new DataClassCountParameters($condition));
+    }
+}
