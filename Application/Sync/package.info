@@ -2,7 +2,7 @@
 <packages>
   <package>
     <name>Ehb Synchronization</name>
-    <code>EhbSync</code>
+    <code>Sync</code>
     <context>Ehb\Application\EhbSync</context>
     <type>Chamilo\Application</type>
     <category>research</category>

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Package;
+namespace Ehb\Application\Helpdesk\Package;
 
 class Installer extends \Chamilo\Configuration\Package\Installer
 {

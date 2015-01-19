@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Rtphplib;
+namespace Ehb\Application\Helpdesk\Rtphplib;
 
 $url = "http://helpdesk.ehb.be/rt";
 $user = "desiderius";

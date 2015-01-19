@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Storage;
+namespace Ehb\Application\Helpdesk\Storage;
 
 /**
  *
