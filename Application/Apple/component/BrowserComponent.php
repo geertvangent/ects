@@ -1,9 +1,9 @@
 <?php
-namespace Chamilo\Application\EhbApple\Component;
+namespace Ehb\Application\Apple\Component;
 
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Application\EhbApple\Manager;
+use Ehb\Application\Apple\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbApple\Package;
+namespace Ehb\Application\Apple\Package;
 
 /**
  *

@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbApple;
+namespace Ehb\Application\Apple;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
