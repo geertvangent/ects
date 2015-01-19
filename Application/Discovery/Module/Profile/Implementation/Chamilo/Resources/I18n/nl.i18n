@@ -1,0 +1,9 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\profile\implementation\chamilo
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Basisprofiel"
+Username = "Gebruikersnaam"
+Timezone = "Tijdszone"
+TypeDescription = "Basisprofiel van een gebruiker"
