@@ -1,0 +1,24 @@
+<?php
+namespace Chamilo\Application\Discovery\DataSource\Bamaflex;
+
+/**
+ *
+ * @package application.discovery
+ * @author Hans De Bisschop
+ */
+class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
+{
+    const PREFIX = 'discovery_bamaflex_';
+
+    public static function get_type()
+    {
+        return 'doctrine';
+    }
+    
+    // TODO : copy from DoctrineDataManager
+    public function retrieve_history_by_conditions($condition)
+    {
+        return $this->retrieve_objects(History :: get_table_name(), $condition, null, null, array(), History :: CLASS_NAME);
+        return $this->retrieve_object(History :: get_table_name(), $condition, array(), History :: CLASS_NAME);
+    }
+}

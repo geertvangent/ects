@@ -1,0 +1,10 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\atlantis\context
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Contexten"
+Contexts = "Contexten"
+BrowseContexts = "Lijst van contexten"
+BrowseContextsDescription = "Geef een lijst weer van alle contexten waarbinnen functies toegekend kunnen worden aan gebruikers en/of groepen van gebruikers"
+ContextName = "Context"

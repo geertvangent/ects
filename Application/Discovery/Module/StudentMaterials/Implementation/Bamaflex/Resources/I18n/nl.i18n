@@ -1,0 +1,22 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\student_materials\implementation\bamaflex
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Studiemateriaal"
+TypeDescription = "Overzicht van studiemateriaal per jaar, opleiding en type"
+Required = "Verplicht"
+IsForSale = "Te koop"
+ForSale = "Cursusdienst"
+IsNotForSale = "Niet te koop"
+Course = "Opleidingsonderdeel"
+Group = "Type"
+Title = "Titel"
+Edition = "Uitgave"
+Author = "Auteur"
+Editor = "Uitgever"
+Isbn = "ISBN"
+Medium = "Medium"
+Remarks = "Opmerkingen"
+Price = "Prijs"
+Optional = "Aanbevolen"
