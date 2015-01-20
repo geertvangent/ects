@@ -254,7 +254,7 @@ class GroupMenu extends \HTML_Menu
     {
         $renderer = new TreeMenuRenderer(
             $this->get_tree_name(),
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) . 'php/xml_feeds/xml_group_menu_feed.php',
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) . 'php/xml_feeds/xml_group_menu_feed.php',
             $this->urlFmt);
         $this->render($renderer, 'sitemap');
         return $renderer->toHTML();

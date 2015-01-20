@@ -36,7 +36,7 @@ class DataSource extends Database
         $types = array();
 
         $data_sources = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'data_source/',
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'data_source/',
             Filesystem :: LIST_DIRECTORIES,
             false);
 

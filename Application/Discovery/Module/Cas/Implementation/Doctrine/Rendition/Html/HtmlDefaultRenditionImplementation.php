@@ -65,7 +65,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         if (count($action_statistics) == 1 && count($action_statistics[0]) > 0)
         {
-            $path = Path :: getInstance()->getStoragePath() . ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . '/data/' .
+            $path = Path :: getInstance()->getStoragePath() . Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . '/data/' .
                  md5(serialize(array($this->get_module_parameters(), 0, $action->get_id())));
 
             if (! file_exists($path))

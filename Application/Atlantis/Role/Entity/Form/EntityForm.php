@@ -113,7 +113,7 @@ class EntityForm extends FormValidator
         $this->addElement(
             'html',
             ResourceManager :: get_instance()->get_resource_html(
-                ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) . 'resources/javascript/dates.js'));
+                Path :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) . 'resources/javascript/dates.js'));
     }
 
     /**

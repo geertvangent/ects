@@ -133,7 +133,7 @@ class Module
         $types = array();
         
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/', 
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/', 
             Filesystem :: LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
@@ -152,7 +152,7 @@ class Module
         $types = array();
         
         $directories = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/', 
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/', 
             Filesystem :: LIST_DIRECTORIES, 
             false);
         

@@ -379,7 +379,7 @@ class InstanceForm extends FormValidator
     {
         $instance = $this->instance;
 
-        $file = ClassnameUtilities :: getInstance()->namespaceToFullPath($instance->get_type()) . '/php/settings/settings.xml';
+        $file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) . '/php/settings/settings.xml';
         $result = array();
 
         if (file_exists($file))
