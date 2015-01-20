@@ -1,0 +1,13 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\person\implementation\chamilo
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Users"
+Username = "Username"
+Timezone = "Timezone"
+Details = "Details"
+Code = "Code"
+Email = "Email"
+Subgroups = "Subgroups"
+TypeDescription = "Browse for users"
