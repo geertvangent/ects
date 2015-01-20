@@ -4,10 +4,10 @@ namespace Chamilo\Application\Discovery\DataSource\Doctrine;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Common\ClassLoader;
 use Chamilo\Libraries\Storage\DataManager\DataSourceName;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Connection;
 use Chamilo\Libraries\File\Path;
 
-class Connection extends DoctrineConnection
+class Connection extends Connection
 {
 
     /**

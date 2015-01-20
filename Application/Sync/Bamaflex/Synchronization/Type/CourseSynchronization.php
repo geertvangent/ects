@@ -44,7 +44,7 @@ class CourseSynchronization extends Synchronization
      */
     public function synchronize($course)
     {
-        $current_course = \Chamilo\Application\Weblcms\Course\Storage\DataManager\DataManager :: retrieve_course_by_visual_code(
+        $current_course = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_course_by_visual_code(
             $course['id']);
 
         if (! $current_course instanceof Course)
@@ -56,7 +56,7 @@ class CourseSynchronization extends Synchronization
 
             if (! array_key_exists($category_code, $this->course_categories_cache))
             {
-                $this->course_categories_cache[$category_code] = \Chamilo\Application\Weblcms\Storage\DataManager\DataManager :: retrieve_course_category_by_code(
+                $this->course_categories_cache[$category_code] = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_course_category_by_code(
                     $category_code);
             }
             $new_course->set_titular_id(null);
@@ -89,7 +89,7 @@ class CourseSynchronization extends Synchronization
                 $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($teacher_code);
                 if ($group instanceof Group)
                 {
-                    \Chamilo\Application\Weblcms\Course\Storage\DataManager\DataManager :: subscribe_group_to_course(
+                    \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_group_to_course(
                         $new_course->get_id(),
                         $group->get_id(),
                         CourseGroupRelation :: STATUS_TEACHER);
@@ -99,7 +99,7 @@ class CourseSynchronization extends Synchronization
                 $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($student_code);
                 if ($group instanceof Group)
                 {
-                    \Chamilo\Application\Weblcms\Course\Storage\DataManager\DataManager :: subscribe_group_to_course(
+                    \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_group_to_course(
                         $new_course->get_id(),
                         $group->get_id(),
                         CourseGroupRelation :: STATUS_STUDENT);
@@ -120,11 +120,11 @@ class CourseSynchronization extends Synchronization
             $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($teacher_code);
             if ($group instanceof Group)
             {
-                if (! \Chamilo\Application\Weblcms\Course\Storage\DataManager\DataManager :: is_group_direct_subscribed_to_course(
+                if (! \Chamilo\Application\Weblcms\Course\Storage\DataManager :: is_group_direct_subscribed_to_course(
                     $current_course->get_id(),
                     $group->get_id()))
                 {
-                    \Chamilo\Application\Weblcms\Course\Storage\DataManager\DataManager :: subscribe_group_to_course(
+                    \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_group_to_course(
                         $current_course->get_id(),
                         $group->get_id(),
                         CourseGroupRelation :: STATUS_TEACHER);
@@ -135,11 +135,11 @@ class CourseSynchronization extends Synchronization
             $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($student_code);
             if ($group instanceof Group)
             {
-                if (! \Chamilo\Application\Weblcms\Course\Storage\DataManager\DataManager :: is_group_direct_subscribed_to_course(
+                if (! \Chamilo\Application\Weblcms\Course\Storage\DataManager :: is_group_direct_subscribed_to_course(
                     $current_course->get_id(),
                     $group->get_id()))
                 {
-                    \Chamilo\Application\Weblcms\Course\Storage\DataManager\DataManager :: subscribe_group_to_course(
+                    \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_group_to_course(
                         $current_course->get_id(),
                         $group->get_id(),
                         CourseGroupRelation :: STATUS_STUDENT);

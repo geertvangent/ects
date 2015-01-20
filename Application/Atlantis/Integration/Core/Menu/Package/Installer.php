@@ -1,8 +1,7 @@
 <?php
 namespace Ehb\Application\Atlantis\Integration\Core\Menu\Package;
 
-use Chamilo\Core\Menu\MenuInstaller;
+class Installer extends \Chamilo\Core\Menu\Package\Installer
 
-class Installer extends MenuInstaller
 {
 }

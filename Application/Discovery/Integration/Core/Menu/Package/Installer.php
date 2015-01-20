@@ -1,8 +1,6 @@
 <?php
 namespace Chamilo\Application\Discovery\Integration\Core\Menu\Package;
 
-use Chamilo\Core\Menu\MenuInstaller;
-
-class Installer extends MenuInstaller
+class Installer extends \Chamilo\Core\Menu\Package\Installer
 {
 }
