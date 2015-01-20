@@ -13,7 +13,7 @@ use Ehb\Application\Sync\Bamaflex\Manager;
  *
  * @author Hans De Bisschop
  */
-class BamaflexConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection
+class BamaflexConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\Connection
 {
 
     /**

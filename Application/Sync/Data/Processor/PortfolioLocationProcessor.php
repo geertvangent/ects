@@ -70,12 +70,12 @@ class PortfolioLocationProcessor
         while ($publication = $publications->next_result())
         {
             // Initialize the root location
-            $root = \Chamilo\Application\Portfolio\Rights\Rights :: get_instance()->initialize_user_tree(
+            $root = \Chamilo\Application\Portfolio\Rights :: get_instance()->initialize_user_tree(
                 $publication->get_publisher_id());
 
             // Create a location for all publications
-            $location = \Chamilo\Application\Portfolio\Rights\Rights :: get_instance()->create_location_in_users_subtree(
-                \Chamilo\Application\Portfolio\Rights\Rights :: TYPE_PUBLICATION,
+            $location = \Chamilo\Application\Portfolio\Rights :: get_instance()->create_location_in_users_subtree(
+                \Chamilo\Application\Portfolio\Rights :: TYPE_PUBLICATION,
                 $publication->get_id(),
                 $root->get_id(),
                 $publication->get_publisher_id(),
@@ -90,7 +90,7 @@ WHERE type = 1 AND item_id =' . $location->get_id();
             $result = $this->dm->get_connection()->query($query);
             while ($user_right = $result->fetch(\PDO :: FETCH_ASSOC))
             {
-                $rights_location_entity_right = new \Chamilo\Application\Portfolio\Rights\RightsLocationEntityRight();
+                $rights_location_entity_right = new \Chamilo\Application\Portfolio\Storage\DataClass\RightsLocationEntityRight();
                 $rights_location_entity_right->set_location_id($location->get_id());
 
                 switch ($user_right['user_id'])
@@ -136,7 +136,7 @@ WHERE type = 1 AND item_id =' . $location->get_id();
             $result = $this->dm->get_connection()->query($query);
             while ($group_right = $result->fetch(\PDO :: FETCH_ASSOC))
             {
-                $rights_location_entity_right = new \Chamilo\Application\Portfolio\Rights\RightsLocationEntityRight();
+                $rights_location_entity_right = new \Chamilo\Application\Portfolio\Storage\DataClass\RightsLocationEntityRight();
                 $rights_location_entity_right->set_location_id($location->get_id());
                 $rights_location_entity_right->set_entity_id($group_right['group_id']);
                 $rights_location_entity_right->set_entity_type(2);

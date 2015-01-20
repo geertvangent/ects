@@ -21,7 +21,7 @@ use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
  * @package rights
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class AjaxUserEntityFeed extends \Chamilo\Core\User\Ajax\AjaxUsersFeed
+class AjaxUserEntityFeed extends \Chamilo\Core\User\Ajax\UsersFeed
 {
 
     /**

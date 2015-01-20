@@ -12,7 +12,7 @@ use Doctrine\Common\ClassLoader;
  *
  * @author Hans De Bisschop
  */
-class DoctrineConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\DoctrineConnection
+class DoctrineConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\Connection
 {
 
     /**

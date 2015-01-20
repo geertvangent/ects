@@ -2,6 +2,7 @@
 namespace Ehb\Application\Atlantis\Component;
 
 use Ehb\Application\Atlantis\Manager;
+
 class ApplicationComponent extends Manager
 {
 

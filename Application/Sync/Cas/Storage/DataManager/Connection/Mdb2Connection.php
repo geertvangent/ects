@@ -9,7 +9,7 @@ use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
  *
  * @author Hans De Bisschop
  */
-class Mdb2Connection extends \Chamilo\Libraries\Storage\DataManager\Mdb2\Mdb2Connection
+class Mdb2Connection extends \Chamilo\Libraries\Storage\DataManager\Mdb2\Connection
 {
 
     /**
