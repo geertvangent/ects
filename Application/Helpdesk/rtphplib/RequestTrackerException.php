@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Rtphplib;
+namespace Ehb\Application\Helpdesk\Rtphplib;
 
 /**
  * RTPHPLib v1.0 Copyright (C) 2012 Samuel Schmidt Permission is hereby granted, free of charge, to any person obtaining

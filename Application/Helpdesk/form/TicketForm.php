@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Form;
+namespace Ehb\Application\Helpdesk\Form;
 
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;

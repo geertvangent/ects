@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Test\Source;
+namespace Ehb\Application\Helpdesk\Test\Source;
 
 /**
  * This test case checks the php syntax for the php files of this package

@@ -2,7 +2,7 @@
 <packages>
   <package>
     <name>Apple on Campus</name>
-    <code>EhbApple</code>
+    <code>Apple</code>
     <context>Ehb\Application\Apple</context>
     <type>Chamilo\Application</type>
     <category>communication</category>

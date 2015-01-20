@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk;
+namespace Ehb\Application\Helpdesk;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 

@@ -1,13 +1,13 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Component;
+namespace Ehb\Application\Helpdesk\Component;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\File\Properties\FileProperties;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Application\EhbHelpdesk\Form\TicketForm;
-use Chamilo\Application\EhbHelpdesk\Manager;
-use Chamilo\Application\EhbHelpdesk\Rest\RestClient;
+use Ehb\Application\Helpdesk\Form\TicketForm;
+use Ehb\Application\Helpdesk\Manager;
+use Ehb\Application\Helpdesk\Rest\RestClient;
 
 require_once Path :: getInstance()->getPluginPath() . 'pear/HTTP/Request2.php';
 class CreatorComponent extends Manager

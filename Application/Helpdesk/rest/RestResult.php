@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Rest;
+namespace Ehb\Application\Helpdesk\Rest;
 
 class RestResult extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\RestResult
 {

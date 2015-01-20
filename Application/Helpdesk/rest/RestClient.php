@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\EhbHelpdesk\Rest;
+namespace Ehb\Application\Helpdesk\Rest;
 
 use Chamilo\Libraries\Utilities\String\StringUtilities;
 
