@@ -1,5 +1,5 @@
 <?php
-namespace Chamilo\Application\Atlantis;
+namespace Ehb\Application\Atlantis;
 
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Architecture\Application\Application;

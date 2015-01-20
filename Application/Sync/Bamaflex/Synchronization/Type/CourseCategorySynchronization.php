@@ -75,7 +75,7 @@ class CourseCategorySynchronization extends Synchronization
 
     public function determine_current_group()
     {
-        $this->current_group = \Chamilo\Application\Weblcms\Storage\DataManager\DataManager :: retrieve_course_category_by_code(
+        $this->current_group = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_course_category_by_code(
             $this->get_code());
     }
 
