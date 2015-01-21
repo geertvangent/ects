@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Rendition\Html;
 
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;

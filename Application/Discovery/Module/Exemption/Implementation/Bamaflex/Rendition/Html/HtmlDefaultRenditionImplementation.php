@@ -4,7 +4,7 @@ namespace Chamilo\Application\Discovery\Module\Exemption\Implementation\Bamaflex
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Platform\Translation;

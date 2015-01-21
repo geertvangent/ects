@@ -5,7 +5,7 @@ use Chamilo\Application\Discovery\Module\Cas\Parameters;
 use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;

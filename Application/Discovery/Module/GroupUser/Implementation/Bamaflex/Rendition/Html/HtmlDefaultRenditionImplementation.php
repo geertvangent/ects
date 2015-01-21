@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Structure\Toolbar;

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Sync\Cas\Component;
 
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;

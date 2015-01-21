@@ -4,13 +4,13 @@ namespace Chamilo\Application\Discovery\DataSource\Form;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Theme\Theme;
-use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Tabs\DynamicFormTabsRenderer;
 use Chamilo\Libraries\Format\Tabs\DynamicFormTab;
 use Chamilo\Application\Discovery\DataSource\DataClass\InstanceSetting;
 use Chamilo\Application\Discovery\DataSource\DataClass\Instance;
 use Chamilo\Application\Discovery\DataSource\DataManager;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 class InstanceForm extends FormValidator
 {
@@ -321,8 +321,7 @@ class InstanceForm extends FormValidator
     }
 
     /**
-     * Sets default values.
-     * Traditionally, you will want to extend this method so it sets default for your learning
+     * Sets default values. Traditionally, you will want to extend this method so it sets default for your learning
      * object type's additional properties.
      *
      * @param $defaults array Default values for this form's parameters.
@@ -379,7 +378,8 @@ class InstanceForm extends FormValidator
     {
         $instance = $this->instance;
 
-        $file = ClassnameUtilities :: getInstance()->namespaceToFullPath($instance->get_type()) . '/php/settings/settings.xml';
+        $file = ClassnameUtilities :: getInstance()->namespaceToFullPath($instance->get_type()) .
+             '/php/settings/settings.xml';
         $result = array();
 
         if (file_exists($file))

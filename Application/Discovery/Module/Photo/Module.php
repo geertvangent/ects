@@ -1,7 +1,6 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Photo;
 
-use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Libraries\Platform\Session\Request;
@@ -27,7 +26,7 @@ class Module extends \Chamilo\Application\Discovery\Module
         $training_id = Request :: get(self :: PARAM_TRAINING_ID);
         $programme_id = Request :: get(self :: PARAM_PROGRAMME_ID);
         $type = Request :: get(self :: PARAM_TYPE);
-        
+
         return new Parameters($faculty_id, $training_id, $programme_id, $type);
     }
 
@@ -39,10 +38,10 @@ class Module extends \Chamilo\Application\Discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES, 
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
+            Filesystem :: LIST_DIRECTORIES,
             false);
         foreach ($modules as $module)
         {

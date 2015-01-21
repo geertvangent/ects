@@ -3,7 +3,7 @@ namespace Ehb\Application\Sync\Component;
 
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Ehb\Application\Sync\Manager;

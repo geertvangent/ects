@@ -1,7 +1,7 @@
 <?php
 namespace Chamilo\Application\Discovery;
 
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 
 class SettingsConnector
 {

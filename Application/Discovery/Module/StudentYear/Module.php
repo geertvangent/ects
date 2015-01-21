@@ -1,7 +1,6 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\StudentYear;
 
-use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Architecture\Application\Application;
@@ -67,10 +66,10 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES, 
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
+            Filesystem :: LIST_DIRECTORIES,
             false);
         foreach ($modules as $module)
         {

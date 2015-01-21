@@ -6,7 +6,7 @@ use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Application\Discovery\Module\Career\DataManager;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;

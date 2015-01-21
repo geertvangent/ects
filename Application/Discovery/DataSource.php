@@ -3,7 +3,6 @@ namespace Chamilo\Application\Discovery;
 
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Database;
 use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\File\Path;
 
 class DataSource extends Database
 {

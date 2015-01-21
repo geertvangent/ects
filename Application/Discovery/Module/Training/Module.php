@@ -3,7 +3,6 @@ namespace Chamilo\Application\Discovery\Module\Training;
 
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\File\Path;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class Module extends \Chamilo\Application\Discovery\Module
@@ -23,13 +22,13 @@ class Module extends \Chamilo\Application\Discovery\Module
     public static function module_parameters()
     {
         $year = Request :: get(self :: PARAM_YEAR);
-        
+
         $parameter = new Parameters();
         if ($year)
         {
             $parameter->set_year($year);
         }
-        
+
         return $parameter;
     }
 
@@ -76,10 +75,10 @@ class Module extends \Chamilo\Application\Discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES, 
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
+            Filesystem :: LIST_DIRECTORIES,
             false);
         foreach ($modules as $module)
         {

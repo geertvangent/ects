@@ -8,7 +8,7 @@ use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;

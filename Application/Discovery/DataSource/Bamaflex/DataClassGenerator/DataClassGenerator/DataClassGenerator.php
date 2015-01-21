@@ -1,7 +1,6 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\DataClassGenerator;
 
-use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\Connection;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\MyTemplate;
@@ -65,15 +64,20 @@ class DataClassGenerator
                 mkdir($location, 0777, true);
 
             if (! is_dir(
-                $location . ClassnameUtilities :: getInstance()->namespaceToPath($content_object->getAttribute('namespace')) . '/php/lib/'))
+                $location .
+                     ClassnameUtilities :: getInstance()->namespaceToPath($content_object->getAttribute('namespace')) .
+                     '/php/lib/'))
                 mkdir(
-                    $location . ClassnameUtilities :: getInstance()->namespaceToPath($content_object->getAttribute('namespace')) . '/php/lib/',
+                    $location .
+                     ClassnameUtilities :: getInstance()->namespaceToPath($content_object->getAttribute('namespace')) .
+                     '/php/lib/',
                     0777,
                     true);
 
             $file = fopen(
-                $location . ClassnameUtilities :: getInstance()->namespaceToPath($content_object->getAttribute('namespace')) . '/php/lib/' .
-                     $content_object->getAttribute('name') . '.class.php',
+                $location .
+                     ClassnameUtilities :: getInstance()->namespaceToPath($content_object->getAttribute('namespace')) .
+                     '/php/lib/' . $content_object->getAttribute('name') . '.class.php',
                     'w+');
 
             if ($file)

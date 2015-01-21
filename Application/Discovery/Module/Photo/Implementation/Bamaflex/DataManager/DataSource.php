@@ -6,7 +6,7 @@ use Doctrine\DBAL\Driver\PDOStatement;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\File\ImageManipulation\ImageManipulation;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Utilities\String\Text;
 use Chamilo\Libraries\File\Path;

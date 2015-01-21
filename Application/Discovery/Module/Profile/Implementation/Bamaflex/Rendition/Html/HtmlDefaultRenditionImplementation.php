@@ -6,7 +6,7 @@ use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Utilities\String\StringUtilities;
 use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Rendition\RenditionImplementation;

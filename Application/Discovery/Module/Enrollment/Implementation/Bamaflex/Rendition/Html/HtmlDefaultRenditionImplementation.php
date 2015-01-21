@@ -4,7 +4,7 @@ namespace Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamafle
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Discovery\LegendTable;
 use Chamilo\Application\Discovery\SortableTable;

@@ -6,7 +6,7 @@ use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Application\Discovery\LegendTable;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;

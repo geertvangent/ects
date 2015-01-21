@@ -6,7 +6,7 @@ use Chamilo\Libraries\Format\Table\SortableTableFromArray;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Application\Discovery\Module;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Application\Discovery\Instance\Form\InstanceForm;

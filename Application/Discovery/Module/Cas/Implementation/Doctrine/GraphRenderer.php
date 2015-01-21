@@ -4,7 +4,7 @@ namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine;
 use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Application\Discovery\Module\Cas\DataManager;
 use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\File\Path;
 

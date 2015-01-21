@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery;
 
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Architecture\Application\Application;
 
 /**

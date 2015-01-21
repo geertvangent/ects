@@ -2,7 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\Html;
 
 use Chamilo\Application\Discovery\LegendTable;
-use Chamilo\Libraries\Format\Theme\Theme;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
