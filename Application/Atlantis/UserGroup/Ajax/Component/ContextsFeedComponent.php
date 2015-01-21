@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Atlantis\UserGroup\Ajax;
+namespace Ehb\Application\Atlantis\UserGroup\Ajax\Component;
 
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -17,7 +17,7 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Ehb\Application\Atlantis\UserGroup\Storage\DataClass\Context;
 use Ehb\Application\Atlantis\UserGroup\Storage\DataManager;
 
-class AjaxContextsFeed extends AjaxManager
+class ContextsFeedComponent extends \Ehb\Application\Atlantis\UserGroup\Ajax\Manager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PARAM_OFFSET = 'offset';

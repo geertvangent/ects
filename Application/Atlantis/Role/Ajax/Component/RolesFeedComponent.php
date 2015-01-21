@@ -1,9 +1,8 @@
 <?php
-namespace Ehb\Application\Atlantis\Role\Ajax;
+namespace Ehb\Application\Atlantis\Role\Ajax\Component;
 
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Libraries\Architecture\AjaxManager;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElements;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
@@ -15,7 +14,7 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Ehb\Application\Atlantis\Role\DataClass\Role;
 use Ehb\Application\Atlantis\Role\DataManager;
 
-class AjaxRolesFeed extends AjaxManager
+class RolesFeedComponent extends \Ehb\Application\Atlantis\Role\Ajax\Manager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PARAM_OFFSET = 'offset';
