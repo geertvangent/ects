@@ -2,7 +2,6 @@
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Menu;
 
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Format\Menu\OptionsMenuRenderer;
 use Chamilo\Libraries\Format\Menu\TreeMenuRenderer;
@@ -254,8 +253,9 @@ class GroupMenu extends \HTML_Menu
     {
         $renderer = new TreeMenuRenderer(
             $this->get_tree_name(),
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) . 'php/xml_feeds/xml_group_menu_feed.php',
-            $this->urlFmt);
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) . 'php/xml_feeds/xml_group_menu_feed.php',
+
+                $this->urlFmt);
         $this->render($renderer, 'sitemap');
         return $renderer->toHTML();
     }

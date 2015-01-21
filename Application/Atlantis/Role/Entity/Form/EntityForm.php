@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entity\Form;
 
-use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementType;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementTypes;
@@ -10,6 +9,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
 use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
+use Chamilo\Libraries\File\Path;
 
 class EntityForm extends FormValidator
 {
@@ -113,7 +113,7 @@ class EntityForm extends FormValidator
         $this->addElement(
             'html',
             ResourceManager :: get_instance()->get_resource_html(
-                Path :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) . 'resources/javascript/dates.js'));
+                Path :: getInstance()->namespaceToFullPath('Chamilo\Configuration\\', true) . 'Resources/Javascript/Dates.js'));
     }
 
     /**
