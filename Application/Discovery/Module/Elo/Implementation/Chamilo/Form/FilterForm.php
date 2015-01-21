@@ -61,7 +61,7 @@ class FilterForm extends FormValidator
         $this->addElement(
             'html',
             \Chamilo\Libraries\Format\Utilities\ResourceManager :: get_instance()->get_resource_html(
-                Path :: get_web_common_libraries_path() . 'resources/javascript/postback.js'));
+                Path :: getInstance()->getConfigurationPath(true) . 'Resources/Javascript/Postback.js'));
     }
 
     /**
