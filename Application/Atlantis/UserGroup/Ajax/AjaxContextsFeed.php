@@ -86,7 +86,7 @@ class AjaxContextsFeed extends AjaxManager
     /**
      * The length for the filter prefix to remove
      */
-    public function required_parameters()
+    public function getRequiredPostParameters()
     {
         return array();
     }

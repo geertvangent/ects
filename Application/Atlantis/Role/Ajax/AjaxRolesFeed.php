@@ -29,7 +29,7 @@ class AjaxRolesFeed extends AjaxManager
      *
      * @return string[]
      */
-    public function required_parameters()
+    public function getRequiredPostParameters()
     {
         return array();
     }
