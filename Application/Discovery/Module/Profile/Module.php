@@ -1,7 +1,6 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Profile;
 
-use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
@@ -49,17 +48,17 @@ class Module extends \Chamilo\Application\Discovery\Module
             $this->profile = DataManager :: get_instance($this->get_module_instance())->retrieve_profile(
                 $this->get_module_parameters());
         }
-        
+
         return $this->profile;
     }
 
     public static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES, 
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES,
             false);
         foreach ($modules as $module)
         {

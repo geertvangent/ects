@@ -2,7 +2,6 @@
 namespace Chamilo\Application\Discovery\DataSource\DataClass;
 
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
@@ -106,7 +105,8 @@ class InstanceSetting extends DataClass
      */
     public static function initialize(Instance $instance)
     {
-        $settings_file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) . 'php/settings/settings.xml';
+        $settings_file = ClassnameUtilities :: getInstance()->namespaceToFullPath($instance->get_type()) . 'php/settings/settings.xml';
+            
         $doc = new \DOMDocument();
 
         $doc->load($settings_file);
