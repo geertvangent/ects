@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package context="ehb_helpdesk">
+	<settings>
+		<category name="helpdesk">
+			<setting name="url" field="text" default="http://rt.chamilo.org/" />
+			<setting name="username" field="text" />
+			<setting name="password" field="text" />
+			<setting name="queue" field="text" default="chamilo" />
+		</category>
+	</settings>
+</package>

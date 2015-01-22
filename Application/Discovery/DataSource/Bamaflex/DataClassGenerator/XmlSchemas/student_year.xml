@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object name="student_year" table="t_discovery_year_archive" namespace="application\discovery\module\student_year\implementation\bamaflex"
+	author="Hans De Bisschop">
+	<properties>
+		<property name="scholarship_id">
+			<option id="1">No</option>
+			<option id="2">Yes</option>
+			<option id="3">Almost</option>
+			<option id="4">Pending</option>
+			<option id="5">Refused</option>
+		</property>
+		<property name="reduced_registration_fee_id">
+			<option id="1">No</option>
+			<option id="2">Yes</option>
+			<option id="3">Almost</option>
+			<option id="4">Pending</option>
+			<option id="5">Refused</option>
+		</property>
+	</properties>
+</object>
