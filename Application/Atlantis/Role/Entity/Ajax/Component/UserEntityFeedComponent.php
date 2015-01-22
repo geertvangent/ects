@@ -21,7 +21,7 @@ use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
  * @package rights
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class AjaxUserEntityFeed extends \Chamilo\Core\User\Ajax\UsersFeed
+class UserEntityFeedComponent extends \Chamilo\Core\User\Ajax\UsersFeed
 {
 
     /**
@@ -90,7 +90,9 @@ class AjaxUserEntityFeed extends \Chamilo\Core\User\Ajax\UsersFeed
         }
 
         $this->set_user_count(
-            \Chamilo\Core\User\storage\DataManager :: count(User :: class_name(), new DataClassCountParameters($condition)));
+            \Chamilo\Core\User\storage\DataManager :: count(
+                User :: class_name(),
+                new DataClassCountParameters($condition)));
         $parameters = new DataClassRetrievesParameters(
             $condition,
             100,

@@ -9,7 +9,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
-use Chamilo\Core\Group\Ajax\PlatformGroupsFeed;
+use Chamilo\Core\Group\Ajax\Component\PlatformGroupsFeedComponent;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
@@ -24,7 +24,7 @@ use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
  * @package roup
  * @author Sven Vanpoucke
  */
-class AjaxPlatformGroupEntityFeed extends PlatformGroupsFeed
+class PlatformGroupEntityFeedComponent extends PlatformGroupsFeedComponent
 {
     /**
      * The length for the filter prefix to remove

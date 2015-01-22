@@ -13,7 +13,7 @@ use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Core\Group\Ajax\PlatformGroupsFeed;
+use Chamilo\Core\Group\Ajax\Component\PlatformGroupsFeedComponent;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
@@ -25,7 +25,7 @@ use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
  * @package roup
  * @author Sven Vanpoucke
  */
-class AjaxContextsFeed extends PlatformGroupsFeed
+class ContextsFeedComponent extends PlatformGroupsFeedComponent
 {
     /**
      * The length for the filter prefix to remove
