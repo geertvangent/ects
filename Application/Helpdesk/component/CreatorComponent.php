@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Helpdesk\Component;
 
-use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Properties\FileProperties;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Helpdesk\Form\TicketForm;
 use Ehb\Application\Helpdesk\Manager;
 use Ehb\Application\Helpdesk\Rest\RestClient;

@@ -1,13 +1,13 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\Xlsx;
 
-use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
-use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rights;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rights;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {

@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\Component;
 
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Application\Discovery\Manager;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Platform\Translation;
 
 /**
  *

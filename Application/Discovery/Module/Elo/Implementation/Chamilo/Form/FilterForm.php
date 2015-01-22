@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Form;
 
-use Chamilo\Libraries\Format\Form\FormValidator;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\RenditionImplementation;
 use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Form\FormValidator;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class FilterForm extends FormValidator
 {

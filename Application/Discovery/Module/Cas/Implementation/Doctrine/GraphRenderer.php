@@ -1,13 +1,13 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
-use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Application\Discovery\Module\Cas\DataManager;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 require_once Path :: getInstance()->getPluginPath() . '/pChart/pChart/pChart.class.php';
 require_once Path :: getInstance()->getPluginPath() . '/pChart/pChart/pData.class.php';

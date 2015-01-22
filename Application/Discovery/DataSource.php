@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery;
 
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Database;
 use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Database;
 
 class DataSource extends Database
 {

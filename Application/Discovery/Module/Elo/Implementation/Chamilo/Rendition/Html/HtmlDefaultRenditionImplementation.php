@@ -1,16 +1,16 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\Html;
 
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\DataManager\DataManager;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Form\FilterForm;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Module;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Form\FilterForm;
-use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
-use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Module;
-use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\DataManager\DataManager;
-use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

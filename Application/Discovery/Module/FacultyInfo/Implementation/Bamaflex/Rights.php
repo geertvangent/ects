@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex;
 
-use Chamilo\Application\Discovery\Rights\FacultyBasedRights;
 use Chamilo\Application\Discovery\Module\FacultyInfo\DataManager;
+use Chamilo\Application\Discovery\Rights\FacultyBasedRights;
 
 class Rights extends FacultyBasedRights
 {

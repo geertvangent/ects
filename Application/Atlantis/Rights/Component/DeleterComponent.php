@@ -2,11 +2,11 @@
 namespace Ehb\Application\Atlantis\Rights\Component;
 
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Rights\Manager;
-use Ehb\Application\Atlantis\Rights\Storage\DataManager;
 use Ehb\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
+use Ehb\Application\Atlantis\Rights\Storage\DataManager;
 
 class DeleterComponent extends Manager
 {

@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource\Doctrine;
 
-use Doctrine\DBAL\DriverManager;
-use Doctrine\Common\ClassLoader;
+use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Connection;
-use Chamilo\Libraries\File\Path;
+use Doctrine\Common\ClassLoader;
+use Doctrine\DBAL\DriverManager;
 
 class Connection extends Connection
 {

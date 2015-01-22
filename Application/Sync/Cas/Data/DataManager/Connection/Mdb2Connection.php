@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Sync\Cas\Data\DataManager\Connection;
 
-use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
+use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use MDB2;
 
 /**

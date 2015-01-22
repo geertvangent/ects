@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Sync\Data\Processor;
 
+use Chamilo\Application\Portfolio\Storage\DataClass\Publication;
+use Chamilo\Core\Repository\ContentObject\Introduction\Storage\DataClass\Introduction;
 use Chamilo\Libraries\File\FileLogger;
 use Chamilo\Libraries\Storage\Cache\DataClassCache;
-use Chamilo\Core\Repository\ContentObject\Introduction\Storage\DataClass\Introduction;
-use Chamilo\Application\Portfolio\Storage\DataClass\Publication;
 
 /**
  * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal

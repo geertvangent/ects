@@ -2,11 +2,15 @@
 <?php
 namespace Chamilo\Application\EhbSync\Cas\Storage\DataManager\Connection;
 
-use Chamilo\Libraries\DataSourceName;
-use Chamilo\Libraries\PlatformSetting;
-use Chamilo\Libraries\Path;
-use Chamilo\Doctrine\DBAL\DriverManager;
+
+
+
+
 use Chamilo\Doctrine\Common\ClassLoader;
+use Chamilo\Doctrine\DBAL\DriverManager;
+use Chamilo\Libraries\DataSourceName;
+use Chamilo\Libraries\Path;
+use Chamilo\Libraries\PlatformSetting;
 
 /**
  * This class represents the current CAS Account database connection.

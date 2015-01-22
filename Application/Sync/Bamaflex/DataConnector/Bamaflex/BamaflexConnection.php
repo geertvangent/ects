@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex;
 
-use Chamilo\Libraries\Storage\DataManager\DataSourceName;
-use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Doctrine\DBAL\DriverManager;
-use Doctrine\Common\ClassLoader;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
+use Chamilo\Libraries\Storage\DataManager\DataSourceName;
+use Doctrine\Common\ClassLoader;
+use Doctrine\DBAL\DriverManager;
 use Ehb\Application\Sync\Bamaflex\Manager;
 
 /**

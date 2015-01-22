@@ -1,31 +1,31 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\DataManager;
 
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityDescription;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityStructured;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityTotal;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Competence;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\CompetenceDescription;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\CompetenceStructured;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Cost;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\EvaluationDescription;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\EvaluationStructured;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\FollowingImpossible;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Language;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Material;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\MaterialDescription;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\MaterialStructured;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\SecondChance;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Teacher;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\TimeframePart;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Utilities\StringUtilities;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Cost;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\SecondChance;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\FollowingImpossible;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\EvaluationDescription;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityDescription;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityTotal;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\MaterialDescription;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Material;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\CompetenceDescription;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Competence;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\EvaluationStructured;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityStructured;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\MaterialStructured;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\CompetenceStructured;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Language;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\TimeframePart;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Teacher;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

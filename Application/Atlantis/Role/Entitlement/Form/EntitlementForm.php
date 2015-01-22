@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entitlement\Form;
 
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Form\FormValidator;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
 

@@ -2,8 +2,8 @@
 namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex;
 
 use Chamilo\Application\Discovery\Module\GroupUser\DataManager;
-use Chamilo\Application\Discovery\Rights\TrainingBasedRights;
 use Chamilo\Application\Discovery\Rights\TrainingBasedContext;
+use Chamilo\Application\Discovery\Rights\TrainingBasedRights;
 
 class Rights extends TrainingBasedRights
 {

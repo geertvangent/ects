@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Atlantis\Application\Table\Application;
 
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
-use Ehb\Application\Atlantis\Application\Storage\DataManager;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Ehb\Application\Atlantis\Application\Storage\DataClass\Application;
+use Ehb\Application\Atlantis\Application\Storage\DataManager;
 
 class ApplicationTableDataProvider extends TableDataProvider
 {

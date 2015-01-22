@@ -2,8 +2,8 @@
 namespace Ehb\Application\Sync\Data\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Ehb\Application\Sync\Data\Processor\PortfolioLocationProcessor;
 use Ehb\Application\Sync\Data\Manager;
+use Ehb\Application\Sync\Data\Processor\PortfolioLocationProcessor;
 
 class PortfolioLocationComponent extends Manager implements DelegateComponent
 {

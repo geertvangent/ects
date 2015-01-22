@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Atlantis\UserGroup\Storage\DataClass;
 
-use Ehb\Application\Atlantis\UserGroup\Storage\DataManager;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Ehb\Application\Atlantis\UserGroup\Storage\DataManager;
 
 /**
  * application.atlantis.context.

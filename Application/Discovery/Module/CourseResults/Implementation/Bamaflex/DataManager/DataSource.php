@@ -1,16 +1,16 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
+use Chamilo\Application\Discovery\Module\Career\MarkMoment;
+use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\CourseResult;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
-use Chamilo\Application\Discovery\Module\Career\MarkMoment;
-use Chamilo\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\CourseResult;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

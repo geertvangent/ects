@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
-use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\DocumentListData;
+use Chamilo\Libraries\Platform\Translation;
 
 class DocumentListDataFilter extends TypeDataFilter
 {

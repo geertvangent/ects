@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Sync\Cas\Data\DataManager\Connection;
 
-use Chamilo\Libraries\Storage\DataManager\DataSourceName;
-use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\File\Path;
-use Doctrine\DBAL\DriverManager;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
+use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Doctrine\Common\ClassLoader;
+use Doctrine\DBAL\DriverManager;
 
 /**
  * This class represents the current CAS Account database connection.

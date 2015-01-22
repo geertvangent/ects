@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Discovery\Instance\Component;
 
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
+use Chamilo\Application\Discovery\Instance\DataManager;
+use Chamilo\Application\Discovery\Instance\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\Discovery\Instance\Manager;
-use Chamilo\Application\Discovery\Instance\DataManager;
-use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class ActivatorComponent extends Manager
 {

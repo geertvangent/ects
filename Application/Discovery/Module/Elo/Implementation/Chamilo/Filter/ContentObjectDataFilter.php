@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 use Chamilo\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\ContentObjectData;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class ContentObjectDataFilter extends TypeDataFilter
 {

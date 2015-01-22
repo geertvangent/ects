@@ -2,12 +2,12 @@
 namespace Ehb\Application\Atlantis\Rights\Component;
 
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
-use Chamilo\Libraries\Platform\Translation;
-use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Application\Atlantis\Rights\Manager;
 use Ehb\Application\Atlantis\Rights\Form\RightsForm;
+use Ehb\Application\Atlantis\Rights\Manager;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 
 class AccessorComponent extends Manager
 {

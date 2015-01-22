@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 //
 class Module extends \Chamilo\Application\Discovery\Module\Cas\Module

@@ -1,18 +1,18 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Application\Discovery\LegendTable;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
-use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights;
-use Chamilo\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\TrainingInfo;
 
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 abstract class Module extends \Chamilo\Application\Discovery\Module
 {

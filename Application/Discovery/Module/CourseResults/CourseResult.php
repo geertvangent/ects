@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\CourseResults;
 
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.course_results.discovery

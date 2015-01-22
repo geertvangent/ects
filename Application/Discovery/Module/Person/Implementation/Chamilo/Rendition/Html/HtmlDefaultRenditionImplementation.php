@@ -1,35 +1,35 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rendition\Html;
 
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBrowser\GroupBrowserTable;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupRelUserBrowser\GroupRelUserBrowserTable;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Menu\GroupMenu;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rights;
+use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\UserBrowser\UserBrowserTable;
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
+use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
 use Chamilo\Libraries\Format\Structure\ActionBarSearchForm;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
+use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
-use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\Discovery\RightsGroupEntityRight;
 use Chamilo\Libraries\Platform\Session\Session;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\InCondition;
-use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rights;
-use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Rendition\RenditionImplementation;
-use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBrowser\GroupBrowserTable;
-use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\UserBrowser\UserBrowserTable;
-use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Menu\GroupMenu;
-use Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupRelUserBrowser\GroupRelUserBrowserTable;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements TableSupport
 {

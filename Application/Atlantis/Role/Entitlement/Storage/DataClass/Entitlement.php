@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass;
 
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
 
 /**

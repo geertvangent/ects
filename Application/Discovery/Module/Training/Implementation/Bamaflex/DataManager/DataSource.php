@@ -1,21 +1,21 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
-use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\DataManager;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
 use Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Dean;
 use Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
-use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
-use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

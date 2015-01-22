@@ -1,22 +1,22 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rendition\Html;
 
+use Chamilo\Application\Discovery\Module\Cas\DataManager;
+use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\GraphRenderer;
+use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rights;
 use Chamilo\Application\Discovery\Module\Cas\Parameters;
 use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
-use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Discovery\Module\Cas\DataManager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\GraphRenderer;
-use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rights;
-use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Rendition\RenditionImplementation;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
+use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

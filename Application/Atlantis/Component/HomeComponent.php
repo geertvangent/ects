@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Atlantis\Component;
 
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Tabs\DynamicSearchAction;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicAction;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Tabs\DynamicActionsTab;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Tabs\DynamicSearchAction;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Manager;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;
 

@@ -1,20 +1,20 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Application\Discovery\LegendTable;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Display;
+use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Advice;
+use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rights;
 use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
 use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
-use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rendition\RenditionImplementation;
-use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Advice;
-use Chamilo\Application\Discovery\Module\Advice\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\DatetimeUtilities;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

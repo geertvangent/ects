@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entity\Table\RoleEntity;
 
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
-use Ehb\Application\Atlantis\Role\Entity\Storage\DataManager;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataManager;
 
 class RoleEntityTableDataProvider extends TableDataProvider
 {

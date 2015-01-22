@@ -1,23 +1,23 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entitlement\Component;
 
-use Ehb\Application\Atlantis\SessionBreadcrumbs;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Atlantis\Role\Entitlement\Form\EntitlementForm;
 use Ehb\Application\Atlantis\Role\Entitlement\Manager;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
-use Ehb\Application\Atlantis\Role\Entitlement\Form\EntitlementForm;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 
 class ListerComponent extends Manager implements DelegateComponent
 {

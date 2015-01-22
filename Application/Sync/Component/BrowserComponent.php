@@ -2,10 +2,10 @@
 namespace Ehb\Application\Sync\Component;
 
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Sync\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent

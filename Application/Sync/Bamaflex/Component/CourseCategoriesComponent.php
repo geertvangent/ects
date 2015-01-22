@@ -4,10 +4,10 @@ namespace Ehb\Application\Sync\Bamaflex\Component;
 use Chamilo\Application\Weblcms\Storage\DataClass\CourseCategory;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategorySynchronization;
-use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
-use Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategory\DummyCourseCategorySynchronization;
 use Ehb\Application\Sync\Bamaflex\Manager;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategorySynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategory\DummyCourseCategorySynchronization;
 
 class CourseCategoriesComponent extends Manager implements DelegateComponent
 {

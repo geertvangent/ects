@@ -1,11 +1,11 @@
 <?php
 namespace Application\Atlantis\Role\Entity\Component;
 
-use Chamilo\Libraries\Storage\AndCondition;
-use Chamilo\Libraries\Storage\EqualityCondition;
-use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
-use Chamilo\Libraries\Format\Breadcrumb;
 use Chamilo\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Format\Breadcrumb;
+use Chamilo\Libraries\Storage\AndCondition;
+use Chamilo\Libraries\Storage\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\EqualityCondition;
 <<<<<<< local
 use libraries\Utilities;
 use libraries\Translation;

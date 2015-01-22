@@ -2,11 +2,11 @@
 namespace Ehb\Application\Atlantis\Role\Entitlement\Component;
 
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\Entitlement\Manager;
-use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
 
 class DeleterComponent extends Manager
 {

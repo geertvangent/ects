@@ -2,8 +2,8 @@
 namespace Ehb\Application\Atlantis\Application\Right\Component;
 
 use Chamilo\Libraries\Platform\Session\Request;
-use Ehb\Application\Atlantis\Application\Right\Manager;
 use Ehb\Application\Atlantis\Application\Right\Form\RoleForm;
+use Ehb\Application\Atlantis\Application\Right\Manager;
 
 class AddRoleComponent extends Manager
 {

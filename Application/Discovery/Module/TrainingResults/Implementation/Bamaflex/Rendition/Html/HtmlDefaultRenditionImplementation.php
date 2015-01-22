@@ -2,18 +2,18 @@
 namespace Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\Html;
 
 use Chamilo\Application\Discovery\LegendTable;
-use Chamilo\Libraries\Format\Theme;
+use Chamilo\Application\Discovery\Module\TrainingResults\DataManager;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Parameters;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights;
 use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Display;
-use Chamilo\Application\Discovery\Module\TrainingResults\DataManager;
-use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Parameters;
-use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Module;
-use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights;
-use Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

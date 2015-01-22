@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource\Bamaflex;
 
-use Chamilo\Libraries\Storage\DataManager\Doctrine\DataSourceName;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Connection;
-use Doctrine\DBAL\DriverManager;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\DataSourceName;
 use Doctrine\Common\ClassLoader;
+use Doctrine\DBAL\DriverManager;
 
 class Connection extends Connection
 {

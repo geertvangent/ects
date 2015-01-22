@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex;
 
-use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 
 class Module extends \Chamilo\Application\Discovery\Module\Photo\Module

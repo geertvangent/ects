@@ -1,18 +1,18 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
+use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
-use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
-use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
+use Chamilo\Libraries\Utilities\Utilities;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

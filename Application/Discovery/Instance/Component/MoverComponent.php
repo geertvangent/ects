@@ -1,18 +1,18 @@
 <?php
 namespace Chamilo\Application\Discovery\Instance\Component;
 
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
+use Chamilo\Application\Discovery\Instance\DataManager;
+use Chamilo\Application\Discovery\Instance\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Application\Discovery\Instance\DataClass\Instance;
-use Chamilo\Application\Discovery\Instance\Manager;
-use Chamilo\Application\Discovery\Instance\DataManager;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class MoverComponent extends Manager
 {

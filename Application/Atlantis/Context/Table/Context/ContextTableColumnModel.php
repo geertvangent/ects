@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Atlantis\Context\Table\Context;
 
-use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
-use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
+use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 
 class ContextTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

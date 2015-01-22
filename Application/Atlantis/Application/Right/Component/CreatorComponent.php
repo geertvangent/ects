@@ -2,12 +2,12 @@
 namespace Ehb\Application\Atlantis\Application\Right\Component;
 
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Ehb\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Atlantis\Application\Right\Form\RightForm;
 use Ehb\Application\Atlantis\Application\Right\Manager;
 use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
-use Ehb\Application\Atlantis\Application\Right\Form\RightForm;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 
 class CreatorComponent extends Manager
 {

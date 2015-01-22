@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Discovery\Instance;
 
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Application\Discovery\Instance\DataClass\InstanceSetting;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Discovery\Instance\DataClass\InstanceSetting;
 
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {

@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Atlantis\Rights\Table\Entity;
 
+use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Libraries\Format\Table\TableDataProvider;
-use Ehb\Application\Atlantis\Rights\Storage\DataManager;
 use Ehb\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
+use Ehb\Application\Atlantis\Rights\Storage\DataManager;
 
 class EntityTableDataProvider extends TableDataProvider
 {

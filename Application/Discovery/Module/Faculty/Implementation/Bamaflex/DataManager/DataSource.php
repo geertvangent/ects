@@ -1,15 +1,15 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Dean;
 use Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

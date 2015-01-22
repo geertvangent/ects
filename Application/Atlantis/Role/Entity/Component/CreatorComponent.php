@@ -1,25 +1,25 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entity\Component;
 
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Ehb\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\Condition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
-use Ehb\Application\Atlantis\Role\Entity\Manager;
-use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
 use Ehb\Application\Atlantis\Role\Entity\Form\EntityForm;
-use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
+use Ehb\Application\Atlantis\Role\Entity\Manager;
 use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 
 class CreatorComponent extends Manager
 {

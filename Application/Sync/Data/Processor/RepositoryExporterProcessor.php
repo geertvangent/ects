@@ -2,10 +2,10 @@
 namespace Ehb\Application\Sync\Data\Processor;
 
 use Chamilo\Libraries\File\FileLogger;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Cache\DataClassCache;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Ehb\Application\Sync\Data\Storage\DataClass\RepositoryExporter;
 use Ehb\Application\Sync\Data\Storage\DataManager\DataManager;
 

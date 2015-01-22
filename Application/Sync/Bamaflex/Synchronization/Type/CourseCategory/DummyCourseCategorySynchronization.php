@@ -1,6 +1,7 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategory;
 
+
 use Chamilo\Application\Weblcms\Storage\DataClass\CourseCategory;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategorySynchronization;
 

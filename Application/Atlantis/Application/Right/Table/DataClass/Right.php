@@ -2,12 +2,12 @@
 namespace Ehb\Application\Atlantis\Application\Right\Table\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Atlantis\Application\Right\Table\DataManager;
+use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 
 /**
  * application.atlantis.application.right.

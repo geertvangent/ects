@@ -1,21 +1,21 @@
 <?php
 namespace Ehb\Application\Atlantis\Rights;
 
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Cache\DataClassCache;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
-use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
-use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
-use Chamilo\Libraries\Storage\Cache\DataClassCache;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRight;
 use Ehb\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
 use Ehb\Application\Atlantis\Rights\Storage\DataManager;
+use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
+use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
 
 class Rights extends \Chamilo\Core\Rights\RightsUtil
 {

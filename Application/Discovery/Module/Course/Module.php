@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Course;
 
-use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Application\Discovery\Module\Course\DataManager;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Session\Request;
 
 abstract class Module extends \Chamilo\Application\Discovery\Module
 {

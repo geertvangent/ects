@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Atlantis\Context\Table\Context;
 
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class ContextTableDataProvider extends TableDataProvider
 {

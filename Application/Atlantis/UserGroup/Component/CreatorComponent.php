@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Atlantis\UserGroup\Component;
 
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\UserGroup\Manager;
 
 class CreatorComponent extends Manager

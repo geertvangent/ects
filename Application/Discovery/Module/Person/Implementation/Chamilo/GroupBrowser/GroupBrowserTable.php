@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBrowser;
 
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Table\Table;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class GroupBrowserTable extends Table
 {

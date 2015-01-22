@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Advice;
 
-use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Application\Discovery\Module\Profile\DataManager;
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Session\Request;
 
 abstract class Module extends \Chamilo\Application\Discovery\Module
 {

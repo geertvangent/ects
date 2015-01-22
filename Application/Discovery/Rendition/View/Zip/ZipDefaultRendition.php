@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Discovery\Rendition\View\Zip;
 
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Platform\Session\Session;
-use Chamilo\Libraries\File\Path;
+use Chamilo\Application\Discovery\Rendition\Format\ZipRendition;
 use Chamilo\Libraries\File\Compression\Filecompression;
 use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Application\Discovery\Rendition\Format\ZipRendition;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Platform\Session\Session;
+use Chamilo\Libraries\Platform\Translation;
 
 class ZipDefaultRendition extends ZipRendition
 {

@@ -2,8 +2,8 @@
 namespace Ehb\Application\Sync\Data\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Ehb\Application\Sync\Data\Processor\RepositoryExporterProcessor;
 use Ehb\Application\Sync\Data\Manager;
+use Ehb\Application\Sync\Data\Processor\RepositoryExporterProcessor;
 
 class RepositoryExporterComponent extends Manager implements DelegateComponent
 {

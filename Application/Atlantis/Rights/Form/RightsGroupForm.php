@@ -1,19 +1,19 @@
 <?php
 namespace Ehb\Application\Atlantis\Rights\Form;
 
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Form\FormValidator;
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementTypes;
 use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
 use Chamilo\Core\Rights\Entity\UserEntity;
+use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementTypes;
+use Chamilo\Libraries\Format\Form\FormValidator;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Atlantis\Rights\Rights;
 use Ehb\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
 use Ehb\Application\Atlantis\Rights\Storage\DataManager;
-use Ehb\Application\Atlantis\Rights\Rights;
 
 class RightsGroupForm extends FormValidator
 {

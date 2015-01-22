@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex;
 
-use Chamilo\Application\Discovery\Module\Training\DataManager;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Chamilo\Application\Discovery\Module\Training\DataManager;
 
 class Training extends \Chamilo\Application\Discovery\Module\Training\Training
 {

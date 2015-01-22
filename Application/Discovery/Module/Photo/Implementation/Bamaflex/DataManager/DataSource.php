@@ -1,21 +1,21 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\DataManager;
 
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\File\ImageManipulation\ImageManipulation;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Utilities\String\Text;
-use Chamilo\Libraries\File\Path;
 use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
-use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 use Chamilo\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
+use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\ImageManipulation\ImageManipulation;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Utilities\String\Text;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

@@ -2,8 +2,8 @@
 namespace Ehb\Application\Sync\Cas\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Ehb\Application\Sync\Cas\Synchronization\Type\UserSynchronization;
 use Ehb\Application\Sync\Cas\Manager;
+use Ehb\Application\Sync\Cas\Synchronization\Type\UserSynchronization;
 
 class AllUsersComponent extends Manager implements DelegateComponent
 {

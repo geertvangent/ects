@@ -1,14 +1,14 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\GroupUser;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\GroupUser;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

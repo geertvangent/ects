@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entity\Storage\DataClass;
 
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Core\Group\Storage\DataClass\Group;
 use Ehb\Application\Atlantis\Role\Entity\Storage\DataManager;
 
 /**

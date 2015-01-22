@@ -1,18 +1,18 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entity\Table\RoleEntity;
 
-use Chamilo\Libraries\Utilities\DatetimeUtilities;
+use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
+use Chamilo\Libraries\Format\Structure\Toolbar;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
-use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
-use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
 use Ehb\Application\Atlantis\Role\Entity\Manager;
+use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 
 class RoleEntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

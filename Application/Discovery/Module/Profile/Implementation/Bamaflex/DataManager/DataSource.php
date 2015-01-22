@@ -1,16 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\Discovery\Module\Profile\Photo;
 use Chamilo\Application\Discovery\Module\Profile\Communication;
 use Chamilo\Application\Discovery\Module\Profile\Email;
 use Chamilo\Application\Discovery\Module\Profile\IdentificationCode;
-use Chamilo\Application\Discovery\Module\Profile\Name;
-use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Address;
 use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Birth;
 use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\LearningCredit;
@@ -18,6 +11,13 @@ use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Nationa
 use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\PreviousCollege;
 use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\PreviousUniversity;
 use Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Profile;
+use Chamilo\Application\Discovery\Module\Profile\Name;
+use Chamilo\Application\Discovery\Module\Profile\Photo;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

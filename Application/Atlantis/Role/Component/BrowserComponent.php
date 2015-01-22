@@ -1,21 +1,21 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Component;
 
-use Ehb\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
-use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Ehb\Application\Atlantis\Role\Manager;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\DataClass\Role;
+use Ehb\Application\Atlantis\Role\Manager;
 use Ehb\Application\Atlantis\Role\Table\Role\RoleTable;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {

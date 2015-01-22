@@ -1,19 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\DataManager;
 
-use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
-use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
-use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\DataManager;
-use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\History;
+use Chamilo\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Choice;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\ChoiceOption;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Group;
@@ -21,12 +12,21 @@ use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\La
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Major;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\MajorChoice;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\MajorChoiceOption;
+use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Module;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Package;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\PackageCourse;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\SubTrajectory;
-use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Module;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\SubTrajectoryCourse;
 use Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Trajectory;
+use Chamilo\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
+use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\DataSource
 {

@@ -2,8 +2,8 @@
 namespace Ehb\Application\Atlantis\Role\Form;
 
 use Chamilo\Libraries\Format\Form\FormValidator;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\DataClass\Role;
 
 class RoleForm extends FormValidator

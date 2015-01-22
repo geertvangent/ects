@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\DataManager;
 
-use Chamilo\Application\Discovery\Module\Cas\Parameters;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Action;
 use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\Application;
 use Chamilo\Application\Discovery\Module\Cas\Implementation\Doctrine\CasCount;
+use Chamilo\Application\Discovery\Module\Cas\Parameters;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 
 class DataSource extends \Chamilo\Application\Discovery\DataSource\Doctrine\DataSource
 {

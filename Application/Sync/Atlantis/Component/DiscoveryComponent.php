@@ -1,6 +1,8 @@
 <?php
 namespace Ehb\Application\Sync\Atlantis\Component;
 
+
+
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Ehb\Application\Sync\Atlantis\Manager;
 use Ehb\Application\Sync\Atlantis\Synchronization\DiscoverySynchronization;

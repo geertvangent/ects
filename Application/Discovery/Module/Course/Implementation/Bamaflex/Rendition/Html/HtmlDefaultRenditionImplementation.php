@@ -1,34 +1,34 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\Table\PropertiesTable;
-use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Application\Discovery\AccessAllowedInterface;
 use Chamilo\Application\Discovery\LegendTable;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityDescription;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityStructured;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityTotal;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Competence;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\CompetenceDescription;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\CompetenceStructured;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Cost;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\EvaluationDescription;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Material;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\MaterialDescription;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Application\Discovery\AccessAllowedInterface;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Cost;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\RenditionImplementation;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Module;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Material;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\MaterialDescription;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityStructured;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityDescription;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityTotal;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Competence;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\CompetenceStructured;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\CompetenceDescription;
-use Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\EvaluationDescription;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
+use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

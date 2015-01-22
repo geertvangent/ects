@@ -2,12 +2,12 @@
 namespace Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rendition\Xlsx;
 
 use Chamilo\Application\Discovery\Module\CourseResults\DataManager;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\Libraries\Format\Display;
 use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Module;
 use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {

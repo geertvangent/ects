@@ -1,21 +1,21 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entitlement\Component;
 
-use Chamilo\Libraries\Platform\Translation;
-use Ehb\Application\Atlantis\SessionBreadcrumbs;
-use Chamilo\Libraries\Storage\Query\Condition\InCondition;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Atlantis\Role\Entitlement\Manager;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Ehb\Application\Atlantis\Role\Entitlement\Table\Entitlement\EntitlementTable;
+use Ehb\Application\Atlantis\SessionBreadcrumbs;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {

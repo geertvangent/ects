@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator;
 
-use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\DataClassGenerator\DataClassGenerator;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
 
 ini_set('include_path', realpath(dirname(__FILE__) . '/../../../../../../../common/libraries/plugin/pear'));
 require_once dirname(__FILE__) . '/../../../../../../../common/global.inc.php';

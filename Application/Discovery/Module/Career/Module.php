@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Career;
 
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
+use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Architecture\Application\Application;
-use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 class Module extends \Chamilo\Application\Discovery\Module
 {

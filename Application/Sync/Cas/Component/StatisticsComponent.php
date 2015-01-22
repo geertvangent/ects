@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Sync\Cas\Component;
 
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Ehb\Application\Sync\Cas\Data\DataClass\Statistic;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Ehb\Application\Sync\Cas\Storage\DataClass\ComAuditTrail;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Sync\Cas\Data\DataClass\Statistic;
 use Ehb\Application\Sync\Cas\Manager;
+use Ehb\Application\Sync\Cas\Storage\DataClass\ComAuditTrail;
 
 class StatisticsComponent extends Manager implements DelegateComponent
 {

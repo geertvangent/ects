@@ -1,11 +1,11 @@
 <?php
 namespace Chamilo\Application\Discovery\Rendition\View\Html;
 
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\File\Properties\FileProperties;
 use Chamilo\Application\Discovery\Rendition\Format\HtmlRendition;
 use Chamilo\Application\Discovery\Rendition\RenditionImplementation;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Properties\FileProperties;
+use Chamilo\Libraries\Platform\Translation;
 
 class HtmlZipRendition extends HtmlRendition
 {

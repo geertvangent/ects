@@ -1,17 +1,17 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Application\Discovery\AccessAllowedInterface;
+use Chamilo\Application\Discovery\Module\Photo\DataManager;
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser\GalleryBrowserTable;
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Module;
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights;
+use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Format\Display;
-use Chamilo\Application\Discovery\Module\Photo\DataManager;
-use Chamilo\Application\Discovery\AccessAllowedInterface;
-use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser\GalleryBrowserTable;
-use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Module;
-use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights;
-use Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Libraries\Platform\Translation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

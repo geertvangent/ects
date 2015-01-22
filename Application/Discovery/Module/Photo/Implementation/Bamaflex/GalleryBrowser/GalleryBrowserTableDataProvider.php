@@ -1,9 +1,9 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser;
 
+use Chamilo\Libraries\Format\Table\Extension\GalleryTable\GalleryTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Libraries\Format\Table\Extension\GalleryTable\GalleryTableDataProvider;
 
 class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
 {

@@ -1,19 +1,19 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\Html;
 
+use Chamilo\Application\Discovery\LegendTable;
+use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Discovery\LegendTable;
-use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Application\Discovery\Module\Enrollment\DataManager;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
-use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rights;
-use Chamilo\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\RenditionImplementation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

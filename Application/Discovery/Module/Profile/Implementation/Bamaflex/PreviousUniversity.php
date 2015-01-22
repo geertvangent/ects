@@ -1,8 +1,8 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex;
 
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.profile.implementation.bamaflex.

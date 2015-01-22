@@ -1,12 +1,12 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo;
 
+use Chamilo\Application\Discovery\RightsGroupEntityRight;
+use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
-use Chamilo\Libraries\Platform\Session\Session;
-use Chamilo\Application\Discovery\RightsGroupEntityRight;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 

@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type;
 
-use Chamilo\Application\Weblcms\Course\Storage\DataClass\CourseGroupRelation;
-use Chamilo\Application\Weblcms\Rights\CourseManagementRights;
 use Chamilo\Application\Weblcms\CourseSettingsConnector;
 use Chamilo\Application\Weblcms\CourseSettingsController;
 use Chamilo\Application\Weblcms\Course\Storage\DataClass\Course;
+use Chamilo\Application\Weblcms\Course\Storage\DataClass\CourseGroupRelation;
+use Chamilo\Application\Weblcms\Rights\CourseManagementRights;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 

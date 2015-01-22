@@ -1,10 +1,10 @@
 <?php
 namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\DataClassGenerator;
 
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\Connection;
 use Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator\MyTemplate;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * Dataclass generator used to generate dataclasses with given properties

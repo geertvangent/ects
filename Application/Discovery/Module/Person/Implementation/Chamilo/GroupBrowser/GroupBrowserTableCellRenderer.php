@@ -3,8 +3,8 @@ namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Gro
 
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Group\Table\Group\GroupTableCellRenderer;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 
 class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
 {

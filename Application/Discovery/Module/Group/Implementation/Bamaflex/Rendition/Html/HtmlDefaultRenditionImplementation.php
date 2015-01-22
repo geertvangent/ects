@@ -1,22 +1,22 @@
 <?php
 namespace Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Rendition\Html;
 
-use Chamilo\Libraries\Format\Table\PropertiesTable;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Display;
-use Chamilo\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
-use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Application\Discovery\Module\Group\DataManager;
 use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
 use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Module;
-use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Rights;
-use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Parameters;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Chamilo\Application\Discovery\Module\Group\Implementation\Bamaflex\Rights;
+use Chamilo\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
+use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
