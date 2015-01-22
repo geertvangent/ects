@@ -3,6 +3,7 @@ namespace Chamilo\Application\Discovery\Module\Course;
 
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Application\Discovery\Module\Course\DataManager;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Session\Request;
 
@@ -47,10 +48,10 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES, 
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
+            Filesystem :: LIST_DIRECTORIES,
             false);
         foreach ($modules as $module)
         {

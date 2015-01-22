@@ -3,6 +3,7 @@ namespace Chamilo\Application\Discovery;
 
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Database;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 class DataSource extends Database
 {
@@ -11,7 +12,7 @@ class DataSource extends Database
 
     /**
      * Constructor
-     * 
+     *
      * @param Instance $module_instance
      */
     public function __construct(\Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
@@ -33,14 +34,14 @@ class DataSource extends Database
     public static function get_available_types()
     {
         $types = array();
-        
+
         $data_sources = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'data_source/', 
-            Filesystem :: LIST_DIRECTORIES, 
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'data_source/',
+            Filesystem :: LIST_DIRECTORIES,
             false);
-        
+
         $exceptions = array('php', 'resources');
-        
+
         foreach ($data_sources as $data_source)
         {
             if (! in_array($data_source, $exceptions))

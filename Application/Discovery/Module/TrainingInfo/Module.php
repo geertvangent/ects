@@ -2,6 +2,7 @@
 namespace Chamilo\Application\Discovery\Module\TrainingInfo;
 
 use Chamilo\Application\Discovery\Instance\DataClass\Instance;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Session\Request;
 
@@ -23,7 +24,7 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     public static function module_parameters()
     {
         $training = Request :: get(self :: PARAM_TRAINING_ID);
-        
+
         $parameter = new Parameters();
         if ($training)
         {
@@ -54,10 +55,10 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-        
+
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES, 
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
+            Filesystem :: LIST_DIRECTORIES,
             false);
         foreach ($modules as $module)
         {

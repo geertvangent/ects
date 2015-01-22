@@ -9,16 +9,16 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
- * 
+ *
  * @package group.lib
  */
 /**
  * This class provides a navigation menu to allow a user to browse through categories of courses.
- * 
+ *
  * @author Bart Mollet
  */
 class GroupMenu extends \HTML_Menu
@@ -47,14 +47,14 @@ class GroupMenu extends \HTML_Menu
 
     /**
      * Creates a new category navigation menu.
-     * 
+     *
      * @param int $owner The ID of the owner of the categories to provide in this menu.
      * @param int $current_category The ID of the current category in the menu.
      * @param string $url_format The format to use for the URL of a category. Passed to sprintf(). Defaults to the
-     *        string "?category=%s".
+     *            string "?category=%s".
      * @param array $extra_items An array of extra tree items, added to the root.
      */
-    public function __construct($rendition, $url_format = '?application=group&go=browser&group_id=%s', $include_root = true, $show_complete_tree = false, 
+    public function __construct($rendition, $url_format = '?application=group&go=browser&group_id=%s', $include_root = true, $show_complete_tree = false,
         $hide_current_category = false)
     {
         $this->rendition = $rendition;
@@ -62,7 +62,7 @@ class GroupMenu extends \HTML_Menu
         $this->show_complete_tree = $show_complete_tree;
         $this->hide_current_category = $hide_current_category;
         $this->current_category = $rendition->get_current_group();
-        
+
         $this->urlFmt = $url_format;
         $menu = $this->get_menu();
         parent :: __construct($menu);
@@ -73,18 +73,18 @@ class GroupMenu extends \HTML_Menu
     public function get_menu()
     {
         $include_root = $this->include_root;
-        
+
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
-                \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID), 
+                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
+                \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable(0));
         $group = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
-            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
             new DataClassRetrievesParameters(
-                $condition, 
-                1, 
-                null, 
+                $condition,
+                1,
+                null,
                 new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME))))->next_result();
         if (! $include_root)
         {
@@ -93,18 +93,18 @@ class GroupMenu extends \HTML_Menu
         else
         {
             $menu = array();
-            
+
             $menu_item = array();
             $menu_item['title'] = $group->get_name();
             // $menu_item['url'] = $this->get_url($group->get_id());
             $menu_item['url'] = $this->get_home_url();
-            
+
             $sub_menu_items = $this->get_menu_items($group->get_id());
             if (count($sub_menu_items) > 0)
             {
                 $menu_item['sub'] = $sub_menu_items;
             }
-            
+
             $menu_item['class'] = 'home';
             $menu_item[\Chamilo\Libraries\Format\Menu\OptionsMenuRenderer :: KEY_ID] = $group->get_id();
             $menu[$group->get_id()] = $menu_item;
@@ -114,7 +114,7 @@ class GroupMenu extends \HTML_Menu
 
     /**
      * Returns the menu items.
-     * 
+     *
      * @param array $extra_items An array of extra tree items, added to the root.
      * @return array An array with all menu items. The structure of this array is the structure needed by
      *         PEAR::HTML_Menu, on which this class is based.
@@ -122,34 +122,34 @@ class GroupMenu extends \HTML_Menu
     private function get_menu_items($parent_id = 0)
     {
         $current_category = $this->current_category;
-        
+
         $show_complete_tree = $this->show_complete_tree;
         $hide_current_category = $this->hide_current_category;
-        
+
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
-                \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID), 
+                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
+                \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($parent_id));
         $groups = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
-            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
             new DataClassRetrievesParameters(
-                $condition, 
-                null, 
-                null, 
+                $condition,
+                null,
+                null,
                 new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME))));
-        
+
         while ($group = $groups->next_result())
         {
             $group_id = $group->get_id();
-            
+
             if (! ($group_id == $current_category->get_id() && $hide_current_category))
             {
                 $menu_item = array();
                 $menu_item['title'] = $group->get_name();
-                
+
                 $show_url = false;
-                
+
                 if (! $this->rendition->get_context()->get_user()->is_platform_admin())
                 {
                     foreach ($this->rendition->get_allowed_groups() as $allowed_group_id)
@@ -166,7 +166,7 @@ class GroupMenu extends \HTML_Menu
                 {
                     $show_url = true;
                 }
-                
+
                 if ($show_url)
                 {
                     $menu_item['url'] = $this->get_url($group->get_id());
@@ -175,7 +175,7 @@ class GroupMenu extends \HTML_Menu
                 {
                     $menu_item['url'] = '#';
                 }
-                
+
                 if ($group->is_parent_of($current_category) || $group->get_id() == $current_category->get_id() ||
                      $show_complete_tree)
                 {
@@ -191,7 +191,7 @@ class GroupMenu extends \HTML_Menu
                         $menu_item['children'] = 'expand';
                     }
                 }
-                
+
                 if ($show_url)
                 {
                     $menu_item['class'] = 'category';
@@ -200,18 +200,18 @@ class GroupMenu extends \HTML_Menu
                 {
                     $menu_item['class'] = 'category_disabled';
                 }
-                
+
                 $menu_item[OptionsMenuRenderer :: KEY_ID] = $group->get_id();
                 $menu[$group->get_id()] = $menu_item;
             }
         }
-        
+
         return $menu;
     }
 
     /**
      * Gets the URL of a given category
-     * 
+     *
      * @param int $category The id of the category
      * @return string The requested URL
      */
@@ -229,7 +229,7 @@ class GroupMenu extends \HTML_Menu
 
     /**
      * Get the breadcrumbs which lead to the current category.
-     * 
+     *
      * @return array The breadcrumbs.
      */
     public function get_breadcrumbs()
@@ -246,16 +246,16 @@ class GroupMenu extends \HTML_Menu
 
     /**
      * Renders the menu as a tree
-     * 
+     *
      * @return string The HTML formatted tree
      */
     public function render_as_tree()
     {
         $renderer = new TreeMenuRenderer(
-            $this->get_tree_name(), 
+            $this->get_tree_name(),
             ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) .
-                 'php/xml_feeds/xml_group_menu_feed.php', 
-                
+                 'php/xml_feeds/xml_group_menu_feed.php',
+
                 $this->urlFmt);
         $this->render($renderer, 'sitemap');
         return $renderer->toHTML();
