@@ -13,10 +13,10 @@ class Rights extends TrainingBasedRights
     public function get_context($module_instance_id, $parameters)
     {
         $module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
-            \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+            \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
             (int) $module_instance_id);
         $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
-
+        
         return new TrainingBasedContext($course->get_faculty_id(), $course->get_training_id());
     }
 }

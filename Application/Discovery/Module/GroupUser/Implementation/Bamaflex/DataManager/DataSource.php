@@ -27,26 +27,26 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $group_class_id = $group_user_parameters->get_group_class_id();
         $source = $group_user_parameters->get_source();
         $type = $group_user_parameters->get_type();
-
+        
         if (! isset($this->group_user[$group_class_id][$source][$type]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('group_class_id'),
+                new StaticColumnConditionVariable('group_class_id'), 
                 new StaticConditionVariable($group_class_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('type'),
+                new StaticColumnConditionVariable('type'), 
                 new StaticConditionVariable($type));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT DISTINCT * FROM v_discovery_group_user_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection()) .
                  ' ORDER BY last_name, first_name';
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -65,7 +65,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 }
             }
         }
-
+        
         return $this->group_user[$group_class_id][$source][$type];
     }
 
@@ -74,44 +74,44 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $group_class_id = $parameters->get_group_class_id();
         $source = $parameters->get_source();
         $type = $parameters->get_type();
-
+        
         if (! isset($this->group[$source][$type][$group_class_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('type_id'),
+                new StaticColumnConditionVariable('type_id'), 
                 new StaticConditionVariable($group_class_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('type'),
+                new StaticColumnConditionVariable('type'), 
                 new StaticConditionVariable($type));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_group_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 $result = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                
                 $group = new Group();
                 $group->set_id($result->id);
                 $group->set_source($result->source);
-
+                
                 $group->set_training_id($result->training_id);
                 $group->set_year($result->year);
                 $group->set_code($this->convert_to_utf8($result->code));
                 $group->set_description($this->convert_to_utf8($result->description));
                 $group->set_type($result->type);
                 $group->set_type_id($result->type_id);
-
+                
                 $this->group[$source][$type][$group_class_id] = $group;
             }
         }
-
+        
         return $this->group[$source][$type][$group_class_id];
     }
 }

@@ -30,9 +30,9 @@ class StudentTrainingTrajectoriesPartsGroupSynchronization extends GroupSynchron
     {
         $query = 'SELECT DISTINCT trajectory_part FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE exchange = 0 AND training_id = ' . $this->get_trajectory()->get_training()->get_parameter(
             TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
-
+        
         $trajectory_parts = $this->get_result($query);
-
+        
         $children = array();
         while ($trajectory_part = $trajectory_parts->next_result(false))
         {

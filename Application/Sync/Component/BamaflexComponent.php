@@ -17,10 +17,10 @@ class BamaflexComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-
+        
         \Chamilo\Libraries\Architecture\Application\Application :: launch(
-            \Ehb\Application\Sync\Bamaflex\Manager :: context(),
-            $this->get_user(),
+            \Ehb\Application\Sync\Bamaflex\Manager :: context(), 
+            $this->get_user(), 
             $this);
     }
 }

@@ -30,7 +30,7 @@ class Manager extends Application
 
     /**
      * Constructor
-     *
+     * 
      * @param $user User The current user
      */
     public function __construct($user = null, $application = null)

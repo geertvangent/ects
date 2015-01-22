@@ -5,7 +5,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 abstract class Rendition
 {
-
+    
     // Formats
     const FORMAT_HTML = 'html';
     const FORMAT_XLSX = 'xlsx';

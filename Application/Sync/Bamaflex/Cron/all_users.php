@@ -15,10 +15,10 @@ try
     echo '<pre>';
     echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
     flush();
-
+    
     $synchronization = UserSynchronization :: factory('all');
     $synchronization->run();
-
+    
     echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
     echo '</pre>';
 }

@@ -14,7 +14,7 @@ use Ehb\Application\Atlantis\UserGroup\Storage\DataClass\Context;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $
- *
+ * 
  * @package group.xml_feeds
  * @author Hans De Bisschop
  * @author Dieter De Neef
@@ -26,23 +26,23 @@ $context_tree = array();
 if (Authentication :: is_valid())
 {
     $parent_id = Request :: get('parent_id');
-
+    
     $context = DataManager :: retrieve_by_id(Context :: class_name(), (int) $parent_id);
     $conditions = array();
     $conditions[] = new EqualityCondition(
-        new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_ID),
+        new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_ID), 
         new StaticConditionVariable($context->get_context_id()));
     $conditions[] = new EqualityCondition(
-        new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_TYPE),
+        new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_TYPE), 
         new StaticConditionVariable($context->get_context_type()));
     $condition = new AndCondition($conditions);
-
+    
     $contexts = DataManager :: retrieves(
-        Context :: class_name(),
+        Context :: class_name(), 
         new DataClassRetrievesParameters(
-            $condition,
-            null,
-            null,
+            $condition, 
+            null, 
+            null, 
             array(new OrderBy(new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_CONTEXT_NAME)))))->as_array();
 }
 
@@ -54,10 +54,10 @@ echo '</tree>';
 function dump_tree($contexts)
 {
     $html = array();
-
+    
     if (contains_results($contexts))
     {
-
+        
         dump_contexts_tree($contexts);
     }
 }

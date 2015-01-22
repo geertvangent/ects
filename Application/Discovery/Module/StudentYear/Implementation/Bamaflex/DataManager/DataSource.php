@@ -25,17 +25,16 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         {
             $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'),
+                new StaticColumnConditionVariable('person_id'), 
                 new StaticConditionVariable($official_code));
-
+            
             $query = 'SELECT * FROM v_discovery_year_advanced WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
-                 ' ORDER BY year DESC, id';
-
+                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC, id';
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -48,12 +47,12 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                     $student_year->set_scholarship_id($result->scholarship_id);
                     $student_year->set_reduced_registration_fee_id($result->reduced_registration_fee_id);
                     $student_year->set_enrollment_id($result->enrollment_id);
-
+                    
                     $this->student_years[$id][] = $student_year;
                 }
             }
         }
-
+        
         return $this->student_years[$id];
     }
 
@@ -62,22 +61,22 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $id = $parameters->get_user_id();
         $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
         $official_code = $user->get_official_code();
-
+        
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'),
+            new StaticColumnConditionVariable('person_id'), 
             new StaticConditionVariable($official_code));
-
+        
         $query = 'SELECT count(id) AS student_years_count FROM v_discovery_year_advanced WHERE ' .
              ConditionTranslator :: render($condition, null, $this->get_connection());
-
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->student_years_count;
         }
-
+        
         return 0;
     }
 }

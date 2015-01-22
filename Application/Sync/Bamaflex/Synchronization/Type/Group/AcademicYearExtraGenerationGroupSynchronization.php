@@ -27,7 +27,7 @@ class AcademicYearExtraGenerationGroupSynchronization extends GroupSynchronizati
              $this->get_synchronization()->get_synchronization()->get_synchronization()->get_year() .
              '\' AND generation_student = 1 AND type = 1';
         $users = $this->get_result($query);
-
+        
         $user_mails = array();
         while ($user = $users->next_result(false))
         {

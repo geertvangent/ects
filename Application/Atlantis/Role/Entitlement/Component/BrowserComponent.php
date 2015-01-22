@@ -32,26 +32,26 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_RIGHT_ID),
+                new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_RIGHT_ID), 
                 new StaticConditionVariable($this->right_id));
-
+            
             return new AndCondition($conditions);
         }
         if ($this->role_id)
         {
             return new EqualityCondition(
-                new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_ROLE_ID),
+                new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_ROLE_ID), 
                 new StaticConditionVariable($this->role_id));
         }
         if ($this->application_id)
         {
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
-                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
+                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(), 
+                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID), 
                 new StaticConditionVariable($this->application_id));
             $rights = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieves(
-                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(), 
                 $condition);
             $right_ids = array();
             while ($right = $rights->next_result())
@@ -59,7 +59,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 $right_ids[] = $right->get_id();
             }
             return new InCondition(
-                new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_RIGHT_ID),
+                new PropertyConditionVariable(Entitlement :: class_name(), Entitlement :: PROPERTY_RIGHT_ID), 
                 $right_ids);
         }
     }
@@ -85,9 +85,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         $this->role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
         $this->application_id = Request :: get(
             \Ehb\Application\Atlantis\Application\Right\Manager :: PARAM_APPLICATION_ID);
-
+        
         $this->add_breadcrumb();
-
+        
         $this->display_header();
         $table = new EntitlementTable($this);
         echo ($table->as_html());
@@ -99,9 +99,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         if ($this->has_application_id())
         {
             $application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve(
-                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
                 (int) $this->application_id);
-
+            
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
             if (! $this->has_right_id())
             {
@@ -109,37 +109,37 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                     new Breadcrumb(
                         $this->get_url(
                             array(
-                                \Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID => $this->application_id)),
+                                \Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID => $this->application_id)), 
                         Translation :: get('GrantRights', array('TYPE' => $application->get_name()))));
             }
         }
-
+        
         if ($this->has_right_id() && $this->has_application_id())
         {
             $right = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieve(
-                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(), 
                 (int) $this->right_id);
-
+            
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $right->get_name()));
             SessionBreadcrumbs :: add(
                 new Breadcrumb(
                     $this->get_url(
                         array(
-                            \Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID => $this->application_id,
-                            \Ehb\Application\Atlantis\Application\Right\Manager :: PARAM_RIGHT_ID => $this->right_id)),
+                            \Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID => $this->application_id, 
+                            \Ehb\Application\Atlantis\Application\Right\Manager :: PARAM_RIGHT_ID => $this->right_id)), 
                     Translation :: get('GrantRights', array('TYPE' => $right->get_name()))));
         }
-
+        
         if ($this->has_role_id())
         {
             $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(), 
                 (int) $this->role_id);
-
+            
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
             SessionBreadcrumbs :: add(
                 new Breadcrumb(
-                    $this->get_url(array(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $this->role_id)),
+                    $this->get_url(array(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $this->role_id)), 
                     Translation :: get('GrantRights', array('TYPE' => $role->get_name()))));
         }
     }

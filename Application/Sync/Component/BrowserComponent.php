@@ -20,11 +20,11 @@ class BrowserComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-
+        
         $this->display_header();
-
+        
         $types = array(self :: ACTION_BAMAFLEX, self :: ACTION_ATLANTIS, self :: ACTION_CAS, self :: ACTION_DATA);
-
+        
         $html = array();
         foreach ($types as $type)
         {
@@ -35,9 +35,9 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</div>';
             $html[] = '</a>';
         }
-
+        
         echo implode("\n", $html);
-
+        
         $this->display_footer();
     }
 }

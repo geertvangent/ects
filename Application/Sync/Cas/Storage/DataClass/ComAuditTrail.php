@@ -21,19 +21,19 @@ class ComAuditTrail extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @return array The property names.
      */
     public static function get_default_property_names($extended_property_names = array())
     {
         return parent :: get_default_property_names(
             array(
-                self :: PROPERTY_USER,
-                self :: PROPERTY_CLIENT_IP,
-                self :: PROPERTY_SERVER_IP,
-                self :: PROPERTY_RESOURCE,
-                self :: PROPERTY_ACTION,
-                self :: PROPERTY_APPLICATION,
+                self :: PROPERTY_USER, 
+                self :: PROPERTY_CLIENT_IP, 
+                self :: PROPERTY_SERVER_IP, 
+                self :: PROPERTY_RESOURCE, 
+                self :: PROPERTY_ACTION, 
+                self :: PROPERTY_APPLICATION, 
                 self :: PROPERTY_DATE));
     }
 

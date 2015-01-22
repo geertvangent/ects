@@ -1,10 +1,6 @@
 <?php
 namespace Ehb\Application\Sync\Atlantis\Component;
 
-
-
-
-
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
@@ -20,13 +16,13 @@ class BrowserComponent extends Manager implements DelegateComponent
     public function run()
     {
         $this->display_header();
-
+        
         $types = array(self :: ACTION_DISCOVERY);
-
+        
         $html = array();
         foreach ($types as $type)
         {
-
+            
             $html[] = '<a href="' . $this->get_url(array(self :: PARAM_ACTION => $type)) . '">';
             $html[] = '<div class="create_block" style="background-image: url(' . Theme :: getInstance()->getImagePath() .
                  'component/' . $type . '.png);">';
@@ -35,7 +31,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</a>';
         }
         echo implode("\n", $html);
-
+        
         $this->display_footer();
     }
 }

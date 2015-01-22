@@ -106,7 +106,9 @@ class Module extends \Chamilo\Application\Discovery\Module\Photo\Module
     public function get_condition()
     {
         return new InCondition(
-            new PropertyConditionVariable(\Chamilo\Core\User\Storage\DataClass\User :: class_name(), \Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_ID), 
+            new PropertyConditionVariable(
+                \Chamilo\Core\User\Storage\DataClass\User :: class_name(), 
+                \Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_ID), 
             $this->get_users());
     }
 }

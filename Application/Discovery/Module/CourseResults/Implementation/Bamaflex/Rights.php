@@ -15,13 +15,13 @@ class Rights extends TrainingBasedRights
         $parameter = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters();
         $parameter->set_programme_id($parameters->get_programme_id());
         $parameter->set_source($parameters->get_source());
-
+        
         $module_instance = \Chamilo\Application\Discovery\Instance\DataManager :: retrieve_by_id(
-            \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+            \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
             (int) $module_instance_id);
-
+        
         $course = DataManager :: get_instance($module_instance)->retrieve_course($parameter);
-
+        
         return new TrainingBasedContext($course->get_faculty_id(), $course->get_training_id());
     }
 }

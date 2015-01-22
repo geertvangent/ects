@@ -7,7 +7,8 @@ namespace Ehb\Application\Atlantis\Role\Entity\Storage;
  * @package menu.lib
  */
 /**
- * This is a skeleton for a data manager for the Users table. Data managers must extend this class and implement its
+ * This is a skeleton for a data manager for the Users table.
+ * Data managers must extend this class and implement its
  * abstract methods.
  * 
  * @author Hans De Bisschop

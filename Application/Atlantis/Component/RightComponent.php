@@ -9,8 +9,8 @@ class RightComponent extends Manager
     public function run()
     {
         \Chamilo\Libraries\Architecture\Application\Application :: launch(
-            \Ehb\Application\Atlantis\Application\Right\Manager :: context(),
-            $this->get_user(),
+            \Ehb\Application\Atlantis\Application\Right\Manager :: context(), 
+            $this->get_user(), 
             $this);
     }
 }

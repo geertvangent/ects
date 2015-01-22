@@ -17,10 +17,10 @@ class CasComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-
+        
         \Chamilo\Libraries\Architecture\Application\Application :: launch(
-            \Ehb\Application\Sync\Cas\Manager :: context(),
-            $this->get_user(),
+            \Ehb\Application\Sync\Cas\Manager :: context(), 
+            $this->get_user(), 
             $this);
     }
 }

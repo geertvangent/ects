@@ -28,14 +28,14 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $user_id = $parameters->get_user_id();
         $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-
+        
         if (! isset($this->advices[$person_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'),
+                new StaticColumnConditionVariable('person_id'), 
                 new StaticConditionVariable($person_id));
-
+            
             $or_conditions = array();
             $or_conditions[] = new NotCondition(
                 new EqualityCondition(new StaticColumnConditionVariable('motivation'), null));
@@ -46,14 +46,14 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 new EqualityCondition(new StaticColumnConditionVariable('measures'), null));
             $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('advice'), null));
             $conditions[] = new OrCondition($or_conditions);
-
+            
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_advice_basic WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC';
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -75,12 +75,12 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                     $advice->set_try($result->try);
                     $advice->set_decision_type_id($result->decision_type_id);
                     $advice->set_decision_type($this->convert_to_utf8($result->decision_type));
-
+                    
                     $this->advices[$person_id][] = $advice;
                 }
             }
         }
-
+        
         return $this->advices[$person_id];
     }
 
@@ -88,12 +88,12 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     {
         $user_id = $parameters->get_user_id();
         $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
-
+        
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'),
+            new StaticColumnConditionVariable('person_id'), 
             new StaticConditionVariable($person_id));
-
+        
         $or_conditions = array();
         $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('motivation'), null));
         $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('ombudsman'), null));
@@ -101,19 +101,19 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('measures'), null));
         $or_conditions[] = new NotCondition(new EqualityCondition(new StaticColumnConditionVariable('advice'), null));
         $conditions[] = new OrCondition($or_conditions);
-
+        
         $condition = new AndCondition($conditions);
-
+        
         $query = 'SELECT count(id) AS advices_count FROM v_discovery_advice_basic WHERE ' .
              ConditionTranslator :: render($condition, null, $this->get_connection());
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
             $result = $statement->fetch(\PDO :: FETCH_OBJ);
             return $result->advices_count;
         }
-
+        
         return 0;
     }
 
@@ -129,16 +129,16 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         {
             $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
             $official_code = $user->get_official_code();
-
+            
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'),
+                new StaticColumnConditionVariable('person_id'), 
                 new StaticConditionVariable($official_code));
-
+            
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC, id';
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -164,7 +164,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 }

@@ -27,26 +27,26 @@ class HtmlDefaultRendition extends HtmlRendition
             $current_year = $this->get_rendition_implementation()->module_parameters()->get_year();
         }
         $tabs = new DynamicVisualTabsRenderer(
-            'training_list',
+            'training_list', 
             $this->get_rendition_implementation()->get_trainings_table($current_year)->as_html());
-
+        
         foreach ($this->get_rendition_implementation()->get_years() as $year)
         {
-
+            
             $parameters = $this->get_rendition_implementation()->module_parameters();
             $parameters->set_year($year);
             $tabs->add_tab(
                 new DynamicVisualTab(
-                    $year,
-                    $year,
-                    null,
+                    $year, 
+                    $year, 
+                    null, 
                     $this->get_rendition_implementation()->get_instance_url(
-                        $this->get_rendition_implementation()->get_module_instance()->get_id(),
-                        $parameters),
+                        $this->get_rendition_implementation()->get_module_instance()->get_id(), 
+                        $parameters), 
                     $current_year == $year));
         }
         $html[] = $tabs->render();
-
+        
         return implode("\n", $html);
     }
 }

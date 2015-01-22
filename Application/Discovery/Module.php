@@ -37,7 +37,8 @@ class Module
      * @param $application Application
      * @param $module_instance Instance
      */
-    public function __construct(Application $application,\Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
+    public function __construct(Application $application, 
+        \Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
     {
         $this->application = $application;
         $this->module_instance = $module_instance;
@@ -49,10 +50,11 @@ class Module
      * @param $module_instance Instance
      * @return Module
      */
-    public static function factory(Application $application,\Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
+    public static function factory(Application $application, 
+        \Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
     {
         $class = $module_instance->get_type() . '\\Module';
-
+        
         return new $class($application, $module_instance);
     }
 
@@ -87,19 +89,19 @@ class Module
     {
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(),
-                \Chamilo\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_TYPE),
+                \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
+                \Chamilo\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_TYPE), 
             new StaticConditionVariable($type));
         $conditions[] = new NotCondition(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(),
-                    \Chamilo\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_CONTENT_TYPE),
+                    \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
+                    \Chamilo\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_CONTENT_TYPE), 
                 new StaticConditionVariable(\Chamilo\Application\Discovery\Instance\DataClass\Instance :: TYPE_DISABLED)));
         $condition = new AndCondition($conditions);
-
+        
         $module_instances = \Chamilo\Application\Discovery\Instance\DataManager :: retrieves(
-            \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+            \Chamilo\Application\Discovery\Instance\DataClass\Instance :: class_name(), 
             new DataClassRetrievesParameters($condition));
         while ($module_instance = $module_instances->next_result())
         {
@@ -130,10 +132,10 @@ class Module
     public static function get_available_types()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/',
-            Filesystem :: LIST_DIRECTORIES,
+            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/', 
+            Filesystem :: LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {
@@ -149,17 +151,17 @@ class Module
     public function get_packages_from_filesystem()
     {
         $types = array();
-
+        
         $directories = Filesystem :: get_directory_content(
             ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/', 
-            Filesystem :: LIST_DIRECTORIES,
+            Filesystem :: LIST_DIRECTORIES, 
             false);
-
+        
         foreach ($directories as $directory)
         {
             $types[] = __NAMESPACE__ . '\module\\' . $directory;
         }
-
+        
         return $types;
     }
 
@@ -169,8 +171,9 @@ class Module
     }
 
     /**
-     * Far from ideal and not really generic (because of the user) . .. but it'll have to do for now
-     *
+     * Far from ideal and not really generic (because of the user) .
+     * .. but it'll have to do for now
+     * 
      * @param $type string
      * @param $user user\User
      * @return \libraries\format\ToolbarItem NULL
@@ -178,25 +181,25 @@ class Module
     public function get_module_link($type, $user_id, $check_data = true)
     {
         $module_instance = \Chamilo\Application\Discovery\Module :: exists($type);
-
+        
         if ($module_instance)
         {
             $class_parameters = $type . '\Parameters';
             $parameters = new $class_parameters();
             $parameters->set_user_id($user_id);
-
+            
             $module = Module :: factory($this->get_application(), $module_instance);
-
+            
             $class_rights = $type . '\Rights';
-
+            
             if (! $class_rights :: is_allowed($class_rights :: VIEW_RIGHT, $module_instance->get_id(), $parameters))
             {
                 return new ToolbarItem(
                     Translation :: get(
-                        'ModuleNotAvailable',
-                        array('MODULE' => Translation :: get('TypeName', null, $type))),
+                        'ModuleNotAvailable', 
+                        array('MODULE' => Translation :: get('TypeName', null, $type))), 
                     Theme :: get_image_path($type) . 'logo/16_na.png', 
-                    null,
+                    null, 
                     ToolbarItem :: DISPLAY_ICON);
             }
             else
@@ -205,26 +208,26 @@ class Module
                 {
                     $url = $this->get_instance_url($module_instance->get_id(), $parameters);
                     return new ToolbarItem(
-                        Translation :: get('TypeName', null, $type),
+                        Translation :: get('TypeName', null, $type), 
                         Theme :: get_image_path($type) . 'logo/16.png', 
-                        $url,
+                        $url, 
                         ToolbarItem :: DISPLAY_ICON);
                 }
                 else
-
+                
                 {
                     $url = $this->get_instance_url($module_instance->get_id(), $parameters);
                     return new ToolbarItem(
                         Translation :: get(
-                            'ModuleHasNoData',
-                            array('MODULE' => Translation :: get('TypeName', null, $type))),
+                            'ModuleHasNoData', 
+                            array('MODULE' => Translation :: get('TypeName', null, $type))), 
                         Theme :: get_image_path($type) . 'logo/16_empty.png', 
-                        $url,
+                        $url, 
                         ToolbarItem :: DISPLAY_ICON);
                 }
             }
         }
-
+        
         return null;
     }
 

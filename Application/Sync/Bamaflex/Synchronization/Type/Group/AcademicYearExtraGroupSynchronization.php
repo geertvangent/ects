@@ -2,6 +2,7 @@
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group;
 
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
+
 /**
  *
  * @package ehb.sync;

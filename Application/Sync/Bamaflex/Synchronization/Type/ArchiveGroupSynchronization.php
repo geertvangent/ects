@@ -59,7 +59,7 @@ class ArchiveGroupSynchronization extends Synchronization
         $this->synchronize();
         $this->synchronize_users();
         $children = $this->get_children();
-
+        
         foreach ($children as $child)
         {
             $child->run();
@@ -67,8 +67,9 @@ class ArchiveGroupSynchronization extends Synchronization
     }
 
     /**
-     * Enter description here . ..
-     *
+     * Enter description here .
+     * ..
+     * 
      * @param $type string
      * @param $synchronization GroupSynchronization
      * @param $parameters array
@@ -88,7 +89,7 @@ class ArchiveGroupSynchronization extends Synchronization
     public function determine_current_group()
     {
         $this->current_group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code_and_parent_id(
-            $this->get_code(),
+            $this->get_code(), 
             $this->get_parent_group()->get_id());
     }
 
@@ -165,14 +166,14 @@ class ArchiveGroupSynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
-
+            
             $this->current_group = new Group();
             $this->current_group->set_name($name);
             $this->current_group->set_description($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
             $this->current_group->create();
-
+            
             self :: log('added', $this->current_group->get_name());
             flush();
         }
@@ -186,23 +187,23 @@ class ArchiveGroupSynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-
+        
         return $this->current_group;
     }
 
     public function synchronize_users()
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID), 
             new StaticConditionVariable($this->current_group->get_id()));
         $current_users = \Chamilo\Core\Group\Storage\DataManager :: distinct(
-            GroupRelUser :: class_name(),
+            GroupRelUser :: class_name(), 
             new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
         $source_users = $this->get_users();
         // $source_users = array();
         $to_add = array_diff($source_users, $current_users);
         $to_delete = array_diff($current_users, $source_users);
-
+        
         foreach ($to_add as $user_id)
         {
             $relation = new GroupRelUser();
@@ -210,16 +211,16 @@ class ArchiveGroupSynchronization extends Synchronization
             $relation->set_user_id($user_id);
             $relation->create();
         }
-
+        
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID), 
             new StaticConditionVariable($this->current_group->get_id()));
         $conditions[] = new InCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_USER_ID),
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_USER_ID), 
             $to_delete);
         $condition = new AndCondition($conditions);
-
+        
         return \Chamilo\Core\Group\Storage\DataManager :: deletes(GroupRelUser :: class_name(), $condition);
     }
 
@@ -254,7 +255,7 @@ class ArchiveGroupSynchronization extends Synchronization
                     $user_ids[] = self :: $official_code_cache[$code];
                 }
             }
-
+            
             if (count($result_codes) > 0)
             {
                 $results = \Chamilo\Core\User\Storage\DataManager :: retrieve_users_by_official_codes($result_codes);
@@ -265,7 +266,7 @@ class ArchiveGroupSynchronization extends Synchronization
                 }
             }
         }
-
+        
         return $user_ids;
     }
 
@@ -283,7 +284,7 @@ class ArchiveGroupSynchronization extends Synchronization
     public function get_academic_year_end()
     {
         $year_parts = explode('-', $this->get_academic_year());
-
+        
         return '20' . $year_parts[1] . '-09-30 23:59:59.999';
     }
 }

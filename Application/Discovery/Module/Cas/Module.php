@@ -26,12 +26,12 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     public function get_module_parameters()
     {
         $parameter = self :: module_parameters();
-
+        
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
         }
-
+        
         if (! $parameter->get_mode())
         {
             $parameter->set_mode(Parameters :: MODE_USER);
@@ -40,7 +40,7 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
         {
             $parameter->set_user_id(0);
         }
-
+        
         return $parameter;
     }
 
@@ -48,24 +48,24 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     {
         $param_user = Request :: get(self :: PARAM_USER_ID);
         $param_mode = Request :: get(self :: PARAM_MODE);
-
+        
         $parameter = new Parameters();
-
+        
         if ($param_user)
         {
             $parameter->set_user_id($param_user);
         }
-
+        
         if ($param_mode)
         {
             $parameter->set_mode($param_mode);
-
+            
             if ($param_mode == Parameters :: MODE_GENERAL)
             {
                 $parameter->set_user_id(0);
             }
         }
-
+        
         return $parameter;
     }
 
@@ -73,9 +73,10 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     {
         if (! isset($this->cas_statistics))
         {
-            $path = Path :: getInstance()->getStoragePath() . ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . '/cas_statistics/' .
+            $path = Path :: getInstance()->getStoragePath() .
+                 ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . '/cas_statistics/' .
                  md5(serialize($this->get_module_parameters()));
-
+            
             if (! file_exists($path))
             {
                 $this->cas_statistics = DataManager :: get_instance($this->get_module_instance())->retrieve_cas_statistics(
@@ -87,7 +88,7 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
                 $this->cas_statistics = unserialize(file_get_contents($path));
             }
         }
-
+        
         return $this->cas_statistics;
     }
 
@@ -114,10 +115,10 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
-            Filesystem :: LIST_DIRECTORIES,
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
+            Filesystem :: LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {

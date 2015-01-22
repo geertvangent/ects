@@ -22,17 +22,18 @@ class Manager extends Application
     public function __construct($user = null, $application = null)
     {
         parent :: __construct($user, $application);
-
+        
         if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }
-
+        
         Theme :: getInstance()->setTheme(PlatformSetting :: get('theme', __NAMESPACE__));
     }
 
     /**
-     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
+     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
+     * $name
      * = $class :: APPLICATION_NAME DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: APPLICATION_NAME in
      * the context of this class - YourApplicationManager :: APPLICATION_NAME in all other application classes
      */
@@ -42,7 +43,8 @@ class Manager extends Application
     }
 
     /**
-     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
+     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
+     * $name
      * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
      * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
      */

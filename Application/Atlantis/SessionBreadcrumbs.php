@@ -6,7 +6,7 @@ use Chamilo\Libraries\Platform\Session\Session;
 
 /**
  * application.atlantis.
- *
+ * 
  * @author GillardMagali
  */
 class SessionBreadcrumbs

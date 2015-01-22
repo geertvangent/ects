@@ -25,23 +25,23 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
         if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT,
-            $this->get_module_instance()->get_id(),
+            Rights :: VIEW_RIGHT, 
+            $this->get_module_instance()->get_id(), 
             $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
-
+        
         $html = array();
         $training = $this->get_training();
-
+        
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
-
+        
         $html[] = $this->get_general();
         $html[] = '</br>';
-
+        
         $tabs = new DynamicVisualTabsRenderer('training');
         $current_tab = $this->module_parameters()->get_tab();
         switch ($current_tab)
@@ -52,7 +52,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             case Module :: TAB_OPTIONS :
                 if ($training->has_options())
                 {
-
+                    
                     $tabs->set_content($this->get_options());
                 }
                 else
@@ -82,40 +82,40 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 break;
         }
         $parameters = $this->module_parameters();
-
+        
         $parameters->set_tab(Module :: TAB_GOALS);
         $tabs->add_tab(
             new DynamicVisualTab(
-                Module :: TAB_GOALS,
-                Translation :: get('Goals'),
-                Theme :: getInstance()->getImagePath() . 'tabs/' . Module :: TAB_GOALS . '.png',
-                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                Module :: TAB_GOALS, 
+                Translation :: get('Goals'), 
+                Theme :: getInstance()->getImagePath() . 'tabs/' . Module :: TAB_GOALS . '.png', 
+                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
                 $current_tab == Module :: TAB_GOALS));
         $parameters->set_tab(Module :: TAB_OPTIONS);
         $tabs->add_tab(
             new DynamicVisualTab(
-                Module :: TAB_OPTIONS,
-                Translation :: get('Options'),
-                Theme :: getInstance()->getImagePath() . 'tabs/' . Module :: TAB_OPTIONS . '.png',
-                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                Module :: TAB_OPTIONS, 
+                Translation :: get('Options'), 
+                Theme :: getInstance()->getImagePath() . 'tabs/' . Module :: TAB_OPTIONS . '.png', 
+                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
                 $current_tab == Module :: TAB_OPTIONS));
         $parameters->set_tab(Module :: TAB_TRAJECTORIES);
         $tabs->add_tab(
             new DynamicVisualTab(
-                Module :: TAB_TRAJECTORIES,
-                Translation :: get('Trajectories'),
-                Theme :: getInstance()->getImagePath() . 'tabs/' . Module :: TAB_TRAJECTORIES . '.png',
-                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                Module :: TAB_TRAJECTORIES, 
+                Translation :: get('Trajectories'), 
+                Theme :: getInstance()->getImagePath() . 'tabs/' . Module :: TAB_TRAJECTORIES . '.png', 
+                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
                 $current_tab == Module :: TAB_TRAJECTORIES));
         $parameters->set_tab(Module :: TAB_COURSES);
         $tabs->add_tab(
             new DynamicVisualTab(
-                Module :: TAB_COURSES,
-                Translation :: get('Courses'),
-                Theme :: getInstance()->getImagePath() . 'tabs/' . Module :: TAB_COURSES . '.png',
-                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                Module :: TAB_COURSES, 
+                Translation :: get('Courses'), 
+                Theme :: getInstance()->getImagePath() . 'tabs/' . Module :: TAB_COURSES . '.png', 
+                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
                 $current_tab == Module :: TAB_COURSES));
-
+        
         $html[] = $tabs->render();
         return implode("\n", $html);
     }
@@ -125,26 +125,26 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $training = $this->get_training();
         $properties = array();
         $properties[Translation :: get('Year')] = $training->get_year();
-
+        
         $history = array();
         $trainings = $training->get_all($this->get_module_instance());
-
+        
         $i = 1;
         foreach ($trainings as $year => $year_trainings)
         {
             if (count($year_trainings) > 1)
             {
                 $multi_history = array();
-
+                
                 foreach ($year_trainings as $year_training)
                 {
                     $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-
+                    
                     $is_allowed = Rights :: is_allowed(
-                        Rights :: VIEW_RIGHT,
-                        $this->get_module_instance()->get_id(),
+                        Rights :: VIEW_RIGHT, 
+                        $this->get_module_instance()->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
@@ -155,7 +155,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         $multi_history[] = $year_training->get_name();
                     }
                 }
-
+                
                 if ($i == 1)
                 {
                     $previous_history = array($year, implode('  |  ', $multi_history));
@@ -168,29 +168,29 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             else
             {
                 $year_training = $year_trainings[0];
-
+                
                 $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-
+                
                 if ($year_training->has_previous_references() && ! $year_training->has_previous_references(true))
                 {
                     if ($i == 1)
                     {
                         $is_allowed = Rights :: is_allowed(
-                            Rights :: VIEW_RIGHT,
-                            $this->get_module_instance()->get_id(),
+                            Rights :: VIEW_RIGHT, 
+                            $this->get_module_instance()->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $previous_history = array(
-                                $year,
+                                $year, 
                                 '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
                                      $year_training->get_name() . '</a>');
                         }
                         else
                         {
-                            $previous_history = array($year,
+                            $previous_history = array($year, 
 
                             $year_training->get_name());
                         }
@@ -198,20 +198,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     elseif ($i == count($year_trainings))
                     {
                         $is_allowed = Rights :: is_allowed(
-                            Rights :: VIEW_RIGHT,
-                            $this->get_module_instance()->get_id(),
+                            Rights :: VIEW_RIGHT, 
+                            $this->get_module_instance()->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $next_history = array(
-                                $year,
+                                $year, 
                                 '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
                                      $year_training->get_name() . '</a>');
                         }
                         else
                         {
-                            $next_history = array($year,
+                            $next_history = array($year, 
 
                             $year_training->get_name());
                         }
@@ -220,10 +220,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                         $is_allowed = Rights :: is_allowed(
-                            Rights :: VIEW_RIGHT,
-                            $this->get_module_instance()->get_id(),
+                            Rights :: VIEW_RIGHT, 
+                            $this->get_module_instance()->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
@@ -241,20 +241,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     if ($i == 1)
                     {
                         $is_allowed = Rights :: is_allowed(
-                            Rights :: VIEW_RIGHT,
-                            $this->get_module_instance()->get_id(),
+                            Rights :: VIEW_RIGHT, 
+                            $this->get_module_instance()->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $previous_history = array(
-                                $year,
+                                $year, 
                                 '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
                                      $year_training->get_name() . '</a>');
                         }
                         else
                         {
-                            $previous_history = array($year,
+                            $previous_history = array($year, 
 
                             $year_training->get_name());
                         }
@@ -262,20 +262,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     elseif ($i == count($year_trainings))
                     {
                         $is_allowed = Rights :: is_allowed(
-                            Rights :: VIEW_RIGHT,
-                            $this->get_module_instance()->get_id(),
+                            Rights :: VIEW_RIGHT, 
+                            $this->get_module_instance()->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $next_history = array(
-                                $year,
+                                $year, 
                                 '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
                                      $year_training->get_name() . '</a>');
                         }
                         else
                         {
-                            $next_history = array($year,
+                            $next_history = array($year, 
 
                             $year_training->get_name());
                         }
@@ -283,12 +283,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-
+                        
                         $is_allowed = Rights :: is_allowed(
-                            Rights :: VIEW_RIGHT,
-                            $this->get_module_instance()->get_id(),
+                            Rights :: VIEW_RIGHT, 
+                            $this->get_module_instance()->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
@@ -304,12 +304,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 else
                 {
                     $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-
+                    
                     $is_allowed = Rights :: is_allowed(
-                        Rights :: VIEW_RIGHT,
-                        $this->get_module_instance()->get_id(),
+                        Rights :: VIEW_RIGHT, 
+                        $this->get_module_instance()->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
@@ -324,199 +324,199 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             $i ++;
         }
-
+        
         $properties[Translation :: get('History')] = implode('  |  ', $history);
-
+        
         if ($previous_history)
         {
             $properties[Translation :: get('HistoryWas', array('YEAR' => $previous_history[0]), 'application\discovery')] = $previous_history[1];
         }
-
+        
         if ($next_history)
         {
             $properties[Translation :: get('HistoryBecomes', array('YEAR' => $next_history[0]), 'application\discovery')] = $next_history[1];
         }
-
+        
         $properties[Translation :: get('BamaType')] = $training->get_bama_type_string();
         $properties[Translation :: get('Type')] = $training->get_type();
         $properties[Translation :: get('Domain')] = $training->get_domain();
         $properties[Translation :: get('Credits')] = $training->get_credits();
-
+        
         $properties[Translation :: get('StartDate')] = $training->get_start_date();
         $properties[Translation :: get('EndDate')] = $training->get_end_date();
         $properties[Translation :: get('Languages')] = $training->get_languages_string();
-
+        
         $groups = array();
         foreach ($training->get_groups() as $group)
         {
             $groups[] = $group->get_group() . ' <em>(' . $group->get_group_id() . ')</em>';
         }
-
+        
         if (count($groups) > 0)
         {
             $properties[Translation :: get('Groups')] = implode('<br />', $groups);
         }
-
+        
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $photo_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\photo\implementation\bamaflex',
+            'application\discovery\module\photo\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         if ($photo_module_instance)
         {
             $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
             $parameters->set_training_id($training->get_id());
             $parameters->set_type(\Chamilo\Application\Discovery\Module\Photo\Module :: TYPE_STUDENT);
-
+            
             $is_allowed = \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: is_allowed(
-                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                $photo_module_instance->get_id(),
+                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                $photo_module_instance->get_id(), 
                 $parameters);
-
+            
             $buttons = array();
-
+            
             if ($is_allowed)
             {
                 // students
-
+                
                 $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                 $image = Theme :: getInstance()->getImage(
-                    'type/2',
-                    'png',
-                    Translation :: get('Students', null, 'application\discovery\module\photo'),
-                    $url,
-                    ToolbarItem :: DISPLAY_ICON,
-                    false,
+                    'type/2', 
+                    'png', 
+                    Translation :: get('Students', null, 'application\discovery\module\photo'), 
+                    $url, 
+                    ToolbarItem :: DISPLAY_ICON, 
+                    false, 
                     'application\discovery\module\photo');
                 $buttons[] = $image;
                 LegendTable :: get_instance()->add_symbol(
-                    $image,
+                    $image, 
                     Translation :: get('Students', null, 'application\discovery\module\photo
-                    '),
+                    '), 
                     Translation :: get('TypeName', null, 'application\discovery\module\photo'));
-
+                
                 // teachers
                 $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
                 $parameters->set_training_id($training->get_id());
                 $parameters->set_type(\Chamilo\Application\Discovery\Module\Photo\Module :: TYPE_TEACHER);
-
+                
                 $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                 $image = Theme :: getInstance()->getImage(
-                    'type/1',
-                    'png',
+                    'type/1', 
+                    'png', 
                     Translation :: get('Teachers', null, 'application\discovery\module\photo
-                    '),
-                    $url,
-                    ToolbarItem :: DISPLAY_ICON,
-                    false,
+                    '), 
+                    $url, 
+                    ToolbarItem :: DISPLAY_ICON, 
+                    false, 
                     'application\discovery\module\photo');
                 $buttons[] = $image;
                 LegendTable :: get_instance()->add_symbol(
-                    $image,
+                    $image, 
                     Translation :: get('Teachers', null, 'application\discovery\module\photo
-                    '),
+                    '), 
                     Translation :: get('TypeName', null, 'application\discovery\module\photo'));
             }
             else
             {
                 // students
                 $image = Theme :: getInstance()->getImage(
-                    'type/2_na',
-                    'png',
-                    Translation :: get('StudentsNotAvailable', null, 'application\discovery\module\photo'),
-                    null,
-                    ToolbarItem :: DISPLAY_ICON,
-                    false,
+                    'type/2_na', 
+                    'png', 
+                    Translation :: get('StudentsNotAvailable', null, 'application\discovery\module\photo'), 
+                    null, 
+                    ToolbarItem :: DISPLAY_ICON, 
+                    false, 
                     'application\discovery\module\photo');
                 $buttons[] = $image;
                 LegendTable :: get_instance()->add_symbol(
-                    $image,
+                    $image, 
                     Translation :: get(
-                        'StudentsNotAvailable',
-                        null,
+                        'StudentsNotAvailable', 
+                        null, 
                         'application\discovery\module\photo
-                    '),
+                    '), 
                     Translation :: get('TypeName', null, 'application\discovery\module\photo'));
-
+                
                 // teachers
                 $image = Theme :: getInstance()->getImage(
-                    'type/1_na',
-                    'png',
+                    'type/1_na', 
+                    'png', 
                     Translation :: get(
-                        'TeachersNotAvailable',
-                        null,
+                        'TeachersNotAvailable', 
+                        null, 
                         'application\discovery\module\photo
-                    '),
-                    null,
-                    ToolbarItem :: DISPLAY_ICON,
-                    false,
+                    '), 
+                    null, 
+                    ToolbarItem :: DISPLAY_ICON, 
+                    false, 
                     'application\discovery\module\photo');
                 $buttons[] = $image;
                 LegendTable :: get_instance()->add_symbol(
-                    $image,
+                    $image, 
                     Translation :: get(
-                        'TeachersNotAvailable',
-                        null,
+                        'TeachersNotAvailable', 
+                        null, 
                         'application\discovery\module\photo
-                    '),
+                    '), 
                     Translation :: get('TypeName', null, 'application\discovery\module\photo'));
             }
-
+            
             $properties[Translation :: get('Photos')] = implode("\n", $buttons);
         }
-
+        
         $training_results_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\training_results\implementation\bamaflex',
+            'application\discovery\module\training_results\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         if ($training_results_module_instance)
         {
             $parameters = new \Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Parameters();
             $parameters->set_training_id($training->get_id());
             $parameters->set_source($training->get_source());
-
+            
             $is_allowed = \Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights :: is_allowed(
-                \Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                $training_results_module_instance->get_id(),
+                \Chamilo\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                $training_results_module_instance->get_id(), 
                 $parameters);
-
+            
             if ($is_allowed)
             {
                 $url = $this->get_instance_url($training_results_module_instance->get_id(), $parameters);
                 $image = Theme :: getInstance()->getImage(
-                    'logo/16',
-                    'png',
+                    'logo/16', 
+                    'png', 
                     Translation :: get(
-                        'TypeName',
-                        null,
-                        'application\discovery\module\training_results\implementation\bamaflex'),
-                    $url,
-                    ToolbarItem :: DISPLAY_ICON,
-                    false,
+                        'TypeName', 
+                        null, 
+                        'application\discovery\module\training_results\implementation\bamaflex'), 
+                    $url, 
+                    ToolbarItem :: DISPLAY_ICON, 
+                    false, 
                     'application\discovery\module\training_results\implementation\bamaflex');
             }
             else
             {
                 $image = Theme :: getInstance()->getImage(
-                    'logo/16_na',
-                    'png',
+                    'logo/16_na', 
+                    'png', 
                     Translation :: get(
-                        'TypeName',
-                        null,
-                        'application\discovery\module\training_results\implementation\bamaflex'),
-                    null,
-                    ToolbarItem :: DISPLAY_ICON,
-                    false,
+                        'TypeName', 
+                        null, 
+                        'application\discovery\module\training_results\implementation\bamaflex'), 
+                    null, 
+                    ToolbarItem :: DISPLAY_ICON, 
+                    false, 
                     'application\discovery\module\training_results\implementation\bamaflex');
             }
-
+            
             $properties[Translation :: get(
-                'TypeName',
-                null,
+                'TypeName', 
+                null, 
                 'application\discovery\module\training_results\implementation\bamaflex')] = $image;
         }
         $table = new PropertiesTable($properties);
-
+        
         return $table->toHtml();
     }
 
@@ -524,37 +524,37 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('options');
-
+        
         if ($training->has_choices())
         {
             $tabs->add_tab(
                 new DynamicContentTab(
-                    Module :: TAB_OPTION_CHOICES,
-                    Translation :: get('Choices'),
-                    null,
+                    Module :: TAB_OPTION_CHOICES, 
+                    Translation :: get('Choices'), 
+                    null, 
                     $this->get_choices()));
         }
-
+        
         if ($training->has_majors())
         {
             $tabs->add_tab(
                 new DynamicContentTab(
-                    Module :: TAB_OPTION_MAJORS,
-                    Translation :: get('Majors'),
-                    null,
+                    Module :: TAB_OPTION_MAJORS, 
+                    Translation :: get('Majors'), 
+                    null, 
                     $this->get_majors()));
         }
-
+        
         if ($training->has_packages())
         {
             $tabs->add_tab(
                 new DynamicContentTab(
-                    Module :: TAB_OPTION_PACKAGES,
-                    Translation :: get('Packages'),
-                    null,
+                    Module :: TAB_OPTION_PACKAGES, 
+                    Translation :: get('Packages'), 
+                    null, 
                     $this->get_packages()));
         }
-
+        
         return $tabs->render();
     }
 
@@ -568,7 +568,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $row = array();
             $row[] = $choice->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -577,13 +577,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         $data = array();
         foreach ($training->get_choice_options() as $choice_option)
         {
             $row = array();
             $row[] = $choice_option->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -592,47 +592,47 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         return implode("\n", $html);
     }
 
     public function get_majors()
     {
         $training = $this->get_training();
-
+        
         $html = array();
         $data = array();
         foreach ($training->get_majors() as $major)
         {
             $row = array();
             $row[] = $major->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
         $table->set_header(0, Translation :: get('Major'), false);
         $html[] = $table->as_html();
-
+        
         if ($training->has_major_choices())
         {
             $tabs = new DynamicTabsRenderer('majors');
-
+            
             foreach ($training->get_majors() as $major)
             {
                 if ($major->has_choices())
                 {
                     $tabs->add_tab(
                         new DynamicContentTab(
-                            $major->get_id(),
-                            $major->get_name(),
-                            null,
+                            $major->get_id(), 
+                            $major->get_name(), 
+                            null, 
                             $this->get_major_choices($major)));
                 }
             }
-
+            
             $html[] = '<br/>' . $tabs->render();
         }
         return implode("\n", $html);
@@ -642,17 +642,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('packages');
-
+        
         foreach ($training->get_packages() as $package)
         {
             $tabs->add_tab(
                 new DynamicContentTab(
-                    $package->get_id(),
-                    $package->get_name(),
-                    null,
+                    $package->get_id(), 
+                    $package->get_name(), 
+                    null, 
                     $this->get_package_courses($package)));
         }
-
+        
         return $tabs->render();
     }
 
@@ -660,13 +660,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $html = array();
         $data = array();
-
+        
         $html[] = '<div>';
         foreach ($major->get_choices() as $choice)
         {
             $row = array();
             $row[] = $choice->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -675,13 +675,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         $data = array();
         foreach ($major->get_choice_options() as $choice_option)
         {
             $row = array();
             $row[] = $choice_option->get_name();
-
+            
             $data[] = $row;
         }
         $table = new SortableTable($data);
@@ -690,10 +690,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
-
+        
         return implode("\n", $html);
     }
 
@@ -702,32 +702,32 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $photo_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\photo\implementation\bamaflex',
+            'application\discovery\module\photo\implementation\bamaflex', 
             array('data_source' => $data_source));
         $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course\implementation\bamaflex',
+            'application\discovery\module\course\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         $course_result_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course_results\implementation\bamaflex',
+            'application\discovery\module\course_results\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         foreach ($package->get_courses() as $course)
         {
             $row = array();
             $row[] = $course->get_credits();
-
+            
             if ($course_module_instance)
             {
                 $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
-                    $course->get_programme_id(),
+                    $course->get_programme_id(), 
                     $course->get_source());
-
+                
                 $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
-                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                    $course_module_instance->get_id(),
+                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                    $course_module_instance->get_id(), 
                     $parameters);
-
+                
                 if ($is_allowed)
                 {
                     $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
@@ -745,113 +745,113 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($photo_module_instance || $course_result_module_instance)
             {
                 $buttons = array();
-
+                
                 if ($photo_module_instance)
                 {
                     $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
                     $parameters->set_programme_id($course->get_programme_id());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $photo_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $photo_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16',
-                            'png',
+                            'logo/16', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\photo\implementation\bamaflex'),
-                            $url,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\photo\implementation\bamaflex'), 
+                            $url, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\photo\implementation\bamaflex');
                     }
                     else
                     {
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16_na',
-                            'png',
+                            'logo/16_na', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\photo\implementation\bamaflex'),
-                            null,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\photo\implementation\bamaflex'), 
+                            null, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\photo\implementation\bamaflex');
                     }
                 }
-
+                
                 if ($course_result_module_instance)
                 {
                     $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
-                        $course->get_programme_id(),
+                        $course->get_programme_id(), 
                         $course->get_source());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $course_result_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $course_result_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16',
-                            'png',
+                            'logo/16', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\course_results\implementation\bamaflex'),
-                            $url,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\course_results\implementation\bamaflex'), 
+                            $url, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\course_results\implementation\bamaflex');
                     }
                     else
                     {
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16_na',
-                            'png',
+                            'logo/16_na', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\course_results\implementation\bamaflex'),
-                            null,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\course_results\implementation\bamaflex'), 
+                            null, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\course_results\implementation\bamaflex');
                     }
                 }
-
+                
                 $row[] = implode("\n", $buttons);
             }
-
+            
             $data[] = $row;
-
+            
             if ($course->has_children())
             {
                 foreach ($course->get_children() as $child)
                 {
                     $row = array();
                     $row[] = '<span class="course_child_text">' . $child->get_credits() . '</span>';
-
+                    
                     if ($course_module_instance)
                     {
                         $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
-                            $child->get_programme_id(),
+                            $child->get_programme_id(), 
                             $child->get_source());
-
+                        
                         $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $course_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $course_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
@@ -870,94 +870,94 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     if ($photo_module_instance || $course_result_module_instance)
                     {
                         $buttons = array();
-
+                        
                         if ($photo_module_instance)
                         {
                             $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
                             $parameters->set_programme_id($course->get_programme_id());
-
+                            
                             $is_allowed = \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: is_allowed(
-                                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                                $photo_module_instance->get_id(),
+                                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                                $photo_module_instance->get_id(), 
                                 $parameters);
-
+                            
                             if ($is_allowed)
                             {
-
+                                
                                 $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16',
-                                    'png',
+                                    'logo/16', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\photo\implementation\bamaflex'),
-                                    $url,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\photo\implementation\bamaflex'), 
+                                    $url, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\photo\implementation\bamaflex');
                             }
                             else
                             {
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16_na',
-                                    'png',
+                                    'logo/16_na', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\photo\implementation\bamaflex'),
-                                    null,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\photo\implementation\bamaflex'), 
+                                    null, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\photo\implementation\bamaflex');
                             }
                         }
-
+                        
                         if ($course_result_module_instance)
                         {
                             $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
-                                $child->get_programme_id(),
+                                $child->get_programme_id(), 
                                 $child->get_source());
-
+                            
                             $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
-                                \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                                $course_result_module_instance->get_id(),
+                                \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                                $course_result_module_instance->get_id(), 
                                 $parameters);
-
+                            
                             if ($is_allowed)
                             {
                                 $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16',
-                                    'png',
+                                    'logo/16', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\course_results\implementation\bamaflex'),
-                                    $url,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\course_results\implementation\bamaflex'), 
+                                    $url, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\course_results\implementation\bamaflex');
                             }
                             else
                             {
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16_na',
-                                    'png',
+                                    'logo/16_na', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\course_results\implementation\bamaflex'),
-                                    null,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\course_results\implementation\bamaflex'), 
+                                    null, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\course_results\implementation\bamaflex');
                             }
                         }
-
+                        
                         $row[] = implode("\n", $buttons);
                     }
-
+                    
                     $data[] = $row;
                 }
             }
@@ -974,34 +974,34 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $training = $this->get_training();
         $tabs = new DynamicTabsRenderer('trajectories');
-
+        
         foreach ($training->get_trajectories() as $trajectory)
         {
             $tabs->add_tab(
                 new DynamicContentTab(
-                    $trajectory->get_id(),
-                    $trajectory->get_name(),
-                    null,
+                    $trajectory->get_id(), 
+                    $trajectory->get_name(), 
+                    null, 
                     $this->get_sub_trajectories($trajectory)));
         }
-
+        
         return $tabs->render();
     }
 
     public function get_sub_trajectories($trajectory)
     {
         $tabs = new DynamicTabsRenderer('sub_trajectories_' . $trajectory->get_id());
-
+        
         foreach ($trajectory->get_trajectories() as $trajectory)
         {
             $tabs->add_tab(
                 new DynamicContentTab(
-                    $trajectory->get_id(),
-                    $trajectory->get_name(),
-                    null,
+                    $trajectory->get_id(), 
+                    $trajectory->get_name(), 
+                    null, 
                     $this->get_sub_trajectory_courses($trajectory)));
         }
-
+        
         return $tabs->render();
     }
 
@@ -1010,32 +1010,32 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $photo_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\photo\implementation\bamaflex',
+            'application\discovery\module\photo\implementation\bamaflex', 
             array('data_source' => $data_source));
         $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course\implementation\bamaflex',
+            'application\discovery\module\course\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         $course_result_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course_results\implementation\bamaflex',
+            'application\discovery\module\course_results\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         foreach ($trajectory->get_courses() as $course)
         {
             $row = array();
             $row[] = $course->get_credits();
-
+            
             if ($course_module_instance)
             {
                 $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
-                    $course->get_programme_id(),
+                    $course->get_programme_id(), 
                     $course->get_source());
-
+                
                 $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
-                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                    $course_module_instance->get_id(),
+                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                    $course_module_instance->get_id(), 
                     $parameters);
-
+                
                 if ($is_allowed)
                 {
                     $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
@@ -1050,118 +1050,118 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row[] = $course->get_name();
             }
-
+            
             if ($photo_module_instance || $course_result_module_instance)
             {
                 $buttons = array();
-
+                
                 if ($photo_module_instance)
                 {
                     $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
                     $parameters->set_programme_id($course->get_programme_id());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $photo_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $photo_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
-
+                        
                         $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16',
-                            'png',
+                            'logo/16', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\photo\implementation\bamaflex'),
-                            $url,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\photo\implementation\bamaflex'), 
+                            $url, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\photo\implementation\bamaflex');
                     }
                     else
                     {
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16_na',
-                            'png',
+                            'logo/16_na', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\photo\implementation\bamaflex'),
-                            null,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\photo\implementation\bamaflex'), 
+                            null, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\photo\implementation\bamaflex');
                     }
                 }
-
+                
                 if ($course_result_module_instance)
                 {
                     $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
-                        $course->get_programme_id(),
+                        $course->get_programme_id(), 
                         $course->get_source());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $course_result_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $course_result_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16',
-                            'png',
+                            'logo/16', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\course_results\implementation\bamaflex'),
-                            $url,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\course_results\implementation\bamaflex'), 
+                            $url, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\course_results\implementation\bamaflex');
                     }
                     else
                     {
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16_na',
-                            'png',
+                            'logo/16_na', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\course_results\implementation\bamaflex'),
-                            null,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\course_results\implementation\bamaflex'), 
+                            null, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\course_results\implementation\bamaflex');
                     }
                 }
-
+                
                 $row[] = implode("\n", $buttons);
             }
-
+            
             $data[] = $row;
-
+            
             if ($course->has_children())
             {
                 foreach ($course->get_children() as $child)
                 {
                     $row = array();
                     $row[] = '<span class="course_child_text">' . $child->get_credits() . '</span>';
-
+                    
                     if ($course_module_instance)
                     {
                         $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
-                            $child->get_programme_id(),
+                            $child->get_programme_id(), 
                             $child->get_source());
-
+                        
                         $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $course_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $course_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
@@ -1177,97 +1177,97 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                     }
-
+                    
                     if ($photo_module_instance || $course_result_module_instance)
                     {
                         $buttons = array();
-
+                        
                         if ($photo_module_instance)
                         {
                             $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
                             $parameters->set_programme_id($course->get_programme_id());
-
+                            
                             $is_allowed = \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: is_allowed(
-                                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                                $photo_module_instance->get_id(),
+                                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                                $photo_module_instance->get_id(), 
                                 $parameters);
-
+                            
                             if ($is_allowed)
                             {
                                 $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16',
-                                    'png',
+                                    'logo/16', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\photo\implementation\bamaflex'),
-                                    $url,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\photo\implementation\bamaflex'), 
+                                    $url, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\photo\implementation\bamaflex');
                             }
                             else
                             {
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16_na',
-                                    'png',
+                                    'logo/16_na', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\photo\implementation\bamaflex'),
-                                    null,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\photo\implementation\bamaflex'), 
+                                    null, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\photo\implementation\bamaflex');
                             }
                         }
-
+                        
                         if ($course_result_module_instance)
                         {
                             $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
-                                $child->get_programme_id(),
+                                $child->get_programme_id(), 
                                 $child->get_source());
-
+                            
                             $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
-                                \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                                $course_result_module_instance->get_id(),
+                                \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                                $course_result_module_instance->get_id(), 
                                 $parameters);
-
+                            
                             if ($is_allowed)
                             {
                                 $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16',
-                                    'png',
+                                    'logo/16', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\course_results\implementation\bamaflex'),
-                                    $url,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\course_results\implementation\bamaflex'), 
+                                    $url, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\course_results\implementation\bamaflex');
                             }
                             else
                             {
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16_na',
-                                    'png',
+                                    'logo/16_na', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\course_results\implementation\bamaflex'),
-                                    null,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\course_results\implementation\bamaflex'), 
+                                    null, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\course_results\implementation\bamaflex');
                             }
                         }
-
+                        
                         $row[] = implode("\n", $buttons);
                     }
-
+                    
                     $data[] = $row;
                 }
             }
@@ -1285,35 +1285,35 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course\implementation\bamaflex',
+            'application\discovery\module\course\implementation\bamaflex', 
             array('data_source' => $data_source));
         $photo_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\photo\implementation\bamaflex',
+            'application\discovery\module\photo\implementation\bamaflex', 
             array('data_source' => $data_source));
         $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course\implementation\bamaflex',
+            'application\discovery\module\course\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         $course_result_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course_results\implementation\bamaflex',
+            'application\discovery\module\course_results\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         foreach ($this->get_training()->get_courses() as $course)
         {
             $row = array();
             $row[] = $course->get_credits();
-
+            
             if ($course_module_instance)
             {
                 $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
-                    $course->get_id(),
+                    $course->get_id(), 
                     $course->get_source());
-
+                
                 $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
-                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                    $course_module_instance->get_id(),
+                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                    $course_module_instance->get_id(), 
                     $parameters);
-
+                
                 if ($is_allowed)
                 {
                     $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
@@ -1328,117 +1328,117 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row[] = $course->get_name();
             }
-
+            
             if ($photo_module_instance || $course_result_module_instance)
             {
                 $buttons = array();
-
+                
                 if ($photo_module_instance)
                 {
                     $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
                     $parameters->set_programme_id($course->get_id());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $photo_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $photo_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16',
-                            'png',
+                            'logo/16', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\photo\implementation\bamaflex'),
-                            $url,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\photo\implementation\bamaflex'), 
+                            $url, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\photo\implementation\bamaflex');
                     }
                     else
                     {
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16_na',
-                            'png',
+                            'logo/16_na', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\photo\implementation\bamaflex'),
-                            null,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\photo\implementation\bamaflex'), 
+                            null, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\photo\implementation\bamaflex');
                     }
                 }
-
+                
                 if ($course_result_module_instance)
                 {
                     $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
-                        $course->get_id(),
+                        $course->get_id(), 
                         $course->get_source());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $course_result_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $course_result_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16',
-                            'png',
+                            'logo/16', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\course_results\implementation\bamaflex'),
-                            $url,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\course_results\implementation\bamaflex'), 
+                            $url, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\course_results\implementation\bamaflex');
                     }
                     else
                     {
                         $buttons[] = Theme :: getInstance()->getImage(
-                            'logo/16_na',
-                            'png',
+                            'logo/16_na', 
+                            'png', 
                             Translation :: get(
-                                'TypeName',
-                                null,
-                                'application\discovery\module\course_results\implementation\bamaflex'),
-                            null,
-                            ToolbarItem :: DISPLAY_ICON,
-                            false,
+                                'TypeName', 
+                                null, 
+                                'application\discovery\module\course_results\implementation\bamaflex'), 
+                            null, 
+                            ToolbarItem :: DISPLAY_ICON, 
+                            false, 
                             'application\discovery\module\course_results\implementation\bamaflex');
                     }
                 }
-
+                
                 $row[] = implode("\n", $buttons);
             }
-
+            
             $data[] = $row;
-
+            
             if ($course->has_children())
             {
                 foreach ($course->get_children() as $child)
                 {
                     $row = array();
                     $row[] = '<span class="course_child_text">' . $child->get_credits() . '</span>';
-
+                    
                     if ($course_module_instance)
                     {
                         $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
-                            $child->get_id(),
+                            $child->get_id(), 
                             $child->get_source());
-
+                        
                         $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $course_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $course_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
@@ -1454,96 +1454,96 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $row[] = '<span class="course_child_link">' . $child->get_name() . '</span>';
                     }
-
+                    
                     if ($photo_module_instance || $course_result_module_instance)
                     {
                         $buttons = array();
-
+                        
                         if ($photo_module_instance)
                         {
                             $parameters = new \Chamilo\Application\Discovery\Module\Photo\Parameters();
                             $parameters->set_programme_id($child->get_id());
-
+                            
                             $is_allowed = \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: is_allowed(
-                                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                                $photo_module_instance->get_id(),
+                                \Chamilo\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                                $photo_module_instance->get_id(), 
                                 $parameters);
-
+                            
                             if ($is_allowed)
                             {
                                 $url = $this->get_instance_url($photo_module_instance->get_id(), $parameters);
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16',
-                                    'png',
+                                    'logo/16', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\photo\implementation\bamaflex'),
-                                    $url,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\photo\implementation\bamaflex'), 
+                                    $url, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\photo\implementation\bamaflex');
                             }
                             else
                             {
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16_na',
-                                    'png',
+                                    'logo/16_na', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\photo\implementation\bamaflex'),
-                                    null,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\photo\implementation\bamaflex'), 
+                                    null, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\photo\implementation\bamaflex');
                             }
                         }
-
+                        
                         if ($course_result_module_instance)
                         {
                             $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
-                                $child->get_id(),
+                                $child->get_id(), 
                                 $child->get_source());
-
+                            
                             $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
-                                \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                                $course_result_module_instance->get_id(),
+                                \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                                $course_result_module_instance->get_id(), 
                                 $parameters);
-
+                            
                             if ($is_allowed)
                             {
                                 $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16',
-                                    'png',
+                                    'logo/16', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\course_results\implementation\bamaflex'),
-                                    $url,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\course_results\implementation\bamaflex'), 
+                                    $url, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\course_results\implementation\bamaflex');
                             }
                             else
                             {
                                 $buttons[] = Theme :: getInstance()->getImage(
-                                    'logo/16_na',
-                                    'png',
+                                    'logo/16_na', 
+                                    'png', 
                                     Translation :: get(
-                                        'TypeName',
-                                        null,
-                                        'application\discovery\module\course_results\implementation\bamaflex'),
-                                    null,
-                                    ToolbarItem :: DISPLAY_ICON,
-                                    false,
+                                        'TypeName', 
+                                        null, 
+                                        'application\discovery\module\course_results\implementation\bamaflex'), 
+                                    null, 
+                                    ToolbarItem :: DISPLAY_ICON, 
+                                    false, 
                                     'application\discovery\module\course_results\implementation\bamaflex');
                             }
                         }
                         $row[] = implode("\n", $buttons);
                     }
-
+                    
                     $data[] = $row;
                 }
             }
@@ -1555,7 +1555,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $table->set_header(2, '', false);
         return $table->as_html();
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -1563,7 +1563,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

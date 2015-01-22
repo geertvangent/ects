@@ -17,7 +17,7 @@ class Installer extends \Chamilo\Configuration\Package\Installer
         {
             $this->add_message(self :: TYPE_NORMAL, Translation :: get('AccessLocationCreated'));
         }
-
+        
         return true;
     }
 }

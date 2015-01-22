@@ -26,7 +26,7 @@ class AcademicYearGroupSynchronization extends GroupSynchronization
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_faculty_basic] WHERE year = \'' .
              $this->get_synchronization()->get_year() . '\'';
         $departments = $this->get_result($query);
-
+        
         $children = array();
         while ($department = $departments->next_result())
         {
@@ -35,7 +35,7 @@ class AcademicYearGroupSynchronization extends GroupSynchronization
             $children[] = GroupSynchronization :: factory('department', $this, $department);
             // }
         }
-
+        
         $children[] = GroupSynchronization :: factory('academic_year_extra', $this);
         return $children;
     }

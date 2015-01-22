@@ -15,36 +15,42 @@ class DataSourceComponent extends Manager
     {
         $module_parameters = array();
         $module_parameters[self :: PARAM_ACTION] = self :: ACTION_MODULE;
-
+        
         $link = $this->get_url($module_parameters);
         BreadcrumbTrail :: get_instance()->add_extra(
-            new ToolbarItem(Translation :: get('Modules'), Theme :: getInstance()->getCommonImagePath() . 'action_config.png', $link));
-
+            new ToolbarItem(
+                Translation :: get('Modules'), 
+                Theme :: getInstance()->getCommonImagePath() . 'action_config.png', 
+                $link));
+        
         $module_parameters = array();
         $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_USER;
         $module_parameters[self :: PARAM_MODULE_ID] = null;
         $module_parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
-
+        
         $link = $this->get_url($module_parameters);
         BreadcrumbTrail :: get_instance()->add_extra(
-            new ToolbarItem(Translation :: get('User'), Theme :: getInstance()->getImagePath() . 'action_user.png', $link));
-
+            new ToolbarItem(
+                Translation :: get('User'), 
+                Theme :: getInstance()->getImagePath() . 'action_user.png', 
+                $link));
+        
         $module_parameters = array();
         $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
         $module_parameters[self :: PARAM_MODULE_ID] = null;
         $module_parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
-
+        
         $link = $this->get_url($module_parameters);
-
+        
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
-                Translation :: get('Information'),
-                Theme :: getInstance()->getImagePath() . 'action_information.png',
+                Translation :: get('Information'), 
+                Theme :: getInstance()->getImagePath() . 'action_information.png', 
                 $link));
-
+        
         \Chamilo\Libraries\Architecture\Application\Application :: launch(
-            \Chamilo\Application\Discovery\DataSource\Manager :: context(),
-            $this->get_user(),
+            \Chamilo\Application\Discovery\DataSource\Manager :: context(), 
+            $this->get_user(), 
             $this);
     }
 }

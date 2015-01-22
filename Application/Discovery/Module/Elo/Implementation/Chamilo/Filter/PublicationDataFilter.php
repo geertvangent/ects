@@ -21,7 +21,7 @@ class PublicationDataFilter extends TypeDataFilter
                 return Translation :: get('TypeName', null, Utilities :: get_namespace_from_classname($value));
                 break;
         }
-
+        
         return parent :: format_filter_option($filter, $value);
     }
 }

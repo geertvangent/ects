@@ -15,7 +15,8 @@ namespace Chamilo\Application\Discovery\DataSource\Bamaflex\DataClassGenerator;
  */
 
 /**
- * Template class. By Nathan Codding of the phpBB group. The interface was originally inspired by PHPLib templates, and
+ * Template class.
+ * By Nathan Codding of the phpBB group. The interface was originally inspired by PHPLib templates, and
  * the template file formats are quite similar.
  */
 class MyTemplate
@@ -45,7 +46,8 @@ class MyTemplate
     public $uncompiled_code = array();
 
     /**
-     * Constructor. Simply sets the root dir.
+     * Constructor.
+     * Simply sets the root dir.
      */
     public function __construct($root = ".")
     {
@@ -53,7 +55,8 @@ class MyTemplate
     }
 
     /**
-     * Destroys this template object. Should be called when you're done with it, in order to clear out the template data
+     * Destroys this template object.
+     * Should be called when you're done with it, in order to clear out the template data
      * so you can load/parse a new template set.
      */
     public function destroy()
@@ -76,7 +79,8 @@ class MyTemplate
     }
 
     /**
-     * Sets the template filenames for handles. $filename_array should be a hash of handle => filename pairs.
+     * Sets the template filenames for handles.
+     * $filename_array should be a hash of handle => filename pairs.
      */
     public function set_filenames($filename_array)
     {
@@ -137,7 +141,8 @@ class MyTemplate
     }
 
     /**
-     * Inserts the uncompiled code for $handle as the value of $varname in the root-level. This can be used to
+     * Inserts the uncompiled code for $handle as the value of $varname in the root-level.
+     * This can be used to
      * effectively include a template in the middle of another template. Note that all desired assignments to the
      * variables in $handle should be done BEFORE calling this function.
      */
@@ -161,7 +166,8 @@ class MyTemplate
     }
 
     /**
-     * Block-level variable assignment. Adds a new block iteration with the given variable assignments. Note that this
+     * Block-level variable assignment.
+     * Adds a new block iteration with the given variable assignments. Note that this
      * should only be called once per block iteration.
      */
     public function assign_block_vars($blockname, $vararray)
@@ -198,7 +204,8 @@ class MyTemplate
     }
 
     /**
-     * Root-level variable assignment. Adds to current assignments, overriding any existing variable assignment with the
+     * Root-level variable assignment.
+     * Adds to current assignments, overriding any existing variable assignment with the
      * same name.
      */
     public function assign_vars($vararray)
@@ -213,7 +220,8 @@ class MyTemplate
     }
 
     /**
-     * Root-level variable assignment. Adds to current assignments, overriding any existing variable assignment with the
+     * Root-level variable assignment.
+     * Adds to current assignments, overriding any existing variable assignment with the
      * same name.
      */
     public function assign_var($varname, $varval)
@@ -244,7 +252,8 @@ class MyTemplate
     }
 
     /**
-     * If not already done, load the file for the given handle and populate the uncompiled_code[] hash with its code. Do
+     * If not already done, load the file for the given handle and populate the uncompiled_code[] hash with its code.
+     * Do
      * not compile.
      */
     public function loadfile($handle)
@@ -275,7 +284,8 @@ class MyTemplate
     }
 
     /**
-     * Compiles the given string of code, and returns the result in a string. If "do_not_echo" is true, the returned
+     * Compiles the given string of code, and returns the result in a string.
+     * If "do_not_echo" is true, the returned
      * code will not be directly executable, but can be used as part of a variable assignment for use in
      * assign_code_from_handle().
      */
@@ -425,7 +435,8 @@ class MyTemplate
     }
 
     /**
-     * Generates a reference to the given variable inside the given (possibly nested) block namespace. This is a string
+     * Generates a reference to the given variable inside the given (possibly nested) block namespace.
+     * This is a string
      * of the form: ' .
      * $this->_tpldata['parent'][$_parent_i]['$child1'][$_child1_i]['$child2'][$_child2_i]...['varname'] . ' It's ready
      * to be inserted into an "echo" line in one of the templates. NOTE: expects a trailing "." on the namespace.
@@ -448,7 +459,8 @@ class MyTemplate
     }
 
     /**
-     * Generates a reference to the array of data values for the given (possibly nested) block namespace. This is a
+     * Generates a reference to the array of data values for the given (possibly nested) block namespace.
+     * This is a
      * string of the form:
      * $this->_tpldata['parent'][$_parent_i]['$child1'][$_child1_i]['$child2'][$_child2_i]...['$childN'] If
      * $include_last_iterator is true, then [$_childN_i] will be appended to the form shown above. NOTE: does not expect

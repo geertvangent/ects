@@ -2,6 +2,7 @@
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategory;
 
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\CourseCategorySynchronization;
+
 class DepartmentCourseCategorySynchronization extends CourseCategorySynchronization
 {
     CONST IDENTIFIER = 'DEP';
@@ -23,9 +24,9 @@ class DepartmentCourseCategorySynchronization extends CourseCategorySynchronizat
     {
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_basic] WHERE faculty_id = ' .
              $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT_ID);
-
+        
         $trainings = $this->get_result($query);
-
+        
         $children = array();
         while ($training = $trainings->next_result(false))
         {

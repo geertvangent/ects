@@ -15,18 +15,18 @@ class DeleterComponent extends Manager
     {
         $ids = Request :: get(self :: PARAM_ENTITLEMENT_ID);
         $failures = 0;
-
+        
         if (! empty($ids))
         {
             if (! is_array($ids))
             {
                 $ids = array($ids);
             }
-
+            
             foreach ($ids as $id)
             {
                 $role_entity = DataManager :: retrieve(Entitlement :: class_name(), (int) $id);
-
+                
                 if (! $this->get_user()->is_platform_admin())
                 {
                     $failures ++;
@@ -39,7 +39,7 @@ class DeleterComponent extends Manager
                     }
                 }
             }
-
+            
             if ($failures)
             {
                 if (count($ids) == 1)
@@ -71,10 +71,10 @@ class DeleterComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('Entitlements'));
                 }
             }
-
+            
             $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
-                ($failures ? true : false),
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                ($failures ? true : false), 
                 array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
         }
         else
@@ -82,8 +82,8 @@ class DeleterComponent extends Manager
             $this->display_error_page(
                 htmlentities(
                     Translation :: get(
-                        'NoObjectSelected',
-                        array('OBJECT' => Translation :: get('Right')),
+                        'NoObjectSelected', 
+                        array('OBJECT' => Translation :: get('Right')), 
                         Utilities :: COMMON_LIBRARIES)));
         }
     }

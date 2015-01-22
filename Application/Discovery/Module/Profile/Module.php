@@ -48,17 +48,17 @@ class Module extends \Chamilo\Application\Discovery\Module
             $this->profile = DataManager :: get_instance($this->get_module_instance())->retrieve_profile(
                 $this->get_module_parameters());
         }
-
+        
         return $this->profile;
     }
 
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
             ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES,
+            Filesystem :: LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {

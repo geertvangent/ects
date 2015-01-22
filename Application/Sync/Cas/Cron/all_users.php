@@ -15,10 +15,10 @@ try
     ini_set("max_execution_time", "18000");
     echo '<pre>';
     echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
-
+    
     $synchronization = UserSynchronization :: factory('all');
     $synchronization->run();
-
+    
     echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
     echo '</pre>';
 }

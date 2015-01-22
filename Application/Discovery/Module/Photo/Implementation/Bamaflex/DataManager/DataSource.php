@@ -25,24 +25,24 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
         $relative_path = 'photo/' . Text :: char_at($id, 0) . '/' . $id . '.jpg';
         $path = Path :: getInstance()->getStoragePath() .
              ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . '/' . $relative_path;
-
+        
         if (! file_exists($path))
         {
             $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+            
             $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 $object = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                
                 if (! empty($object->photo))
                 {
                     Filesystem :: write_to_file($path, $object->photo);
-
+                    
                     $image_manipulation = ImageManipulation :: factory($path);
                     $image_manipulation->scale(600, 600, ImageManipulation :: SCALE_INSIDE);
                     $image_manipulation->write_to_file($path);
@@ -57,7 +57,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                 Filesystem :: copy_file(Theme :: getInstance()->getCommonImagePath(false) . 'unknown.jpg', $path);
             }
         }
-
+        
         return Path :: getInstance()->getStoragePath(__NAMESPACE__, $web) . $relative_path;
     }
 
@@ -70,28 +70,28 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
             {
                 $conditions = array();
                 $conditions[] = new EqualityCondition(
-                    new StaticColumnConditionVariable('id'),
+                    new StaticColumnConditionVariable('id'), 
                     new StaticConditionVariable($faculty_id));
                 $conditions[] = new EqualityCondition(
-                    new StaticColumnConditionVariable('source'),
+                    new StaticColumnConditionVariable('source'), 
                     new StaticConditionVariable($source));
                 $condition = new AndCondition($conditions);
-
+                
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
                      ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                
                 $statement = $this->get_connection()->query($query);
-
+                
                 if ($statement instanceof PDOStatement)
                 {
                     $result = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                    
                     $faculty = new Faculty();
                     $faculty->set_source($result->source);
                     $faculty->set_id($result->id);
                     $faculty->set_name($this->convert_to_utf8($result->name));
                     $faculty->set_year($this->convert_to_utf8($result->year));
-
+                    
                     $this->faculties[$faculty_id][$source] = $faculty;
                 }
             }
@@ -106,23 +106,23 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
     public function retrieve_training($training_id)
     {
         $source = 1;
-
+        
         if (! isset($this->trainings[$training_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'),
+                new StaticColumnConditionVariable('id'), 
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -143,39 +143,39 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                     $training->set_faculty($this->convert_to_utf8($result->faculty));
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-
+                    
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-
+        
         return $this->trainings[$training_id][$source];
     }
 
     public function retrieve_programme($programme_id)
     {
         $source = 1;
-
+        
         if (! isset($this->course[$programme_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'),
+                new StaticColumnConditionVariable('id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
                 $object = $result = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                
                 if ($object instanceof \StdClass)
                 {
                     $course = new Course();
@@ -205,7 +205,7 @@ class DataSource extends \Chamilo\Application\Discovery\DataSource\Bamaflex\Data
                     $course->set_jury($object->jury);
                     $course->set_repleacable($object->repleacable);
                     $course->set_training_unit($this->convert_to_utf8($object->training_unit));
-
+                    
                     $this->course[$programme_id][$source] = $course;
                 }
             }

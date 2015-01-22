@@ -17,27 +17,27 @@ class DeleterComponent extends Manager
         {
             $this->not_allowed();
         }
-
+        
         $ids = Request :: get(Manager :: PARAM_DATA_SOURCE_ID);
         $failures = 0;
-
+        
         if (! empty($ids))
         {
             if (! is_array($ids))
             {
                 $ids = array($ids);
             }
-
+            
             foreach ($ids as $id)
             {
                 $instance = DataManager :: retrieve_by_id(Instance :: class_name(), (int) $id);
-
+                
                 if (! $instance->delete())
                 {
                     $failures ++;
                 }
             }
-
+            
             if ($failures)
             {
                 if (count($ids) == 1)
@@ -64,10 +64,10 @@ class DeleterComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('VideosConferencing'));
                 }
             }
-
+            
             $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
-                ($failures ? true : false),
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
+                ($failures ? true : false), 
                 array(self :: PARAM_ACTION => self :: ACTION_BROWSE_INSTANCES));
         }
         else
@@ -75,8 +75,8 @@ class DeleterComponent extends Manager
             $this->display_error_page(
                 htmlentities(
                     Translation :: get(
-                        'NoObjectSelected',
-                        array('OBJECT' => Translation :: get('Instance')),
+                        'NoObjectSelected', 
+                        array('OBJECT' => Translation :: get('Instance')), 
                         Utilities :: COMMON_LIBRARIES)));
         }
     }

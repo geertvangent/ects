@@ -22,21 +22,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             throw new NotAllowedException();
         }
         $html = array();
-
+        
         $module_type = $this->get_module()->get_module_type();
         if ($module_type)
         {
             $module_class_name = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($module_type) . 'Data';
-
+            
             $filters = $module_class_name :: get_filters();
-
+            
             $form = new FilterForm(
-                $this,
-                $module_class_name,
-                $filters,
+                $this, 
+                $module_class_name, 
+                $filters, 
                 $this->get_application()->get_url(array(Module :: PARAM_MODULE_TYPE => $module_type)));
             $html[] = $form->display();
-
+            
             if ($form->validate())
             {
                 $values = $form->exportValues();
@@ -45,7 +45,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $filter_values[$filter] = $values[$filter];
                 }
                 $data = DataManager :: retrieve_data($module_class_name, $filter_values);
-
+                
                 $table_data = array();
                 foreach ($data as $row)
                 {
@@ -53,24 +53,24 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     foreach ($row as $property => $value)
                     {
                         $table_data_row[] = TypeDataFilter :: factory($module_class_name)->format_filter_option(
-                            $property,
+                            $property, 
                             $value);
                     }
-
+                    
                     $table_data[] = $table_data_row;
                 }
-
+                
                 $table = new SortableTable($table_data);
-
+                
                 foreach ($filters as $key => $filter)
                 {
                     $table->set_header(
-                        $key,
-                        Translation :: get('Filter' . Utilities :: underscores_to_camelcase($filter)),
+                        $key, 
+                        Translation :: get('Filter' . Utilities :: underscores_to_camelcase($filter)), 
                         false);
                 }
                 $table->set_header(count($filters), Translation :: get('Count'));
-
+                
                 $html[] = $table->as_html();
             }
         }
@@ -80,17 +80,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $html[] = '<a href="' . $this->get_application()->get_url(array(Module :: PARAM_MODULE_TYPE => $type)) .
                      '">';
-                $html[] = '<div class="create_block" style="background-image: url(' . Theme :: getInstance()->getImagePath() . 'type/' .
-                     $type . '.png);">';
+                $html[] = '<div class="create_block" style="background-image: url(' .
+                     Theme :: getInstance()->getImagePath() . 'type/' . $type . '.png);">';
                 $html[] = Translation :: get(Utilities :: underscores_to_camelcase($type) . 'Component');
                 $html[] = '</div>';
                 $html[] = '</a>';
             }
         }
-
+        
         return implode("\n", $html);
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -98,7 +98,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

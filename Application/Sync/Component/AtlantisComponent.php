@@ -17,7 +17,10 @@ class AtlantisComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-
-        \Chamilo\Libraries\Architecture\Application\Application :: launch(\Ehb\Application\Sync\Atlantis\Manager :: context(), $this->get_user(), $this);
+        
+        \Chamilo\Libraries\Architecture\Application\Application :: launch(
+            \Ehb\Application\Sync\Atlantis\Manager :: context(), 
+            $this->get_user(), 
+            $this);
     }
 }

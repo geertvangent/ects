@@ -21,27 +21,27 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
         if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT,
-            $this->get_module_instance()->get_id(),
+            Rights :: VIEW_RIGHT, 
+            $this->get_module_instance()->get_id(), 
             $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
-
+        
         $this->php_excel = new \PHPExcel();
         $this->php_excel->removeSheetByIndex(0);
-
+        
         if (count($this->get_enrollments()) > 0)
         {
             $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types(
                 $this->get_module_parameters());
-
+            
             $this->php_excel->createSheet(0);
             $this->php_excel->setActiveSheetIndex(0);
             $this->php_excel->getActiveSheet()->setTitle(Translation :: get('AllContracts'));
-
+            
             $this->process_enrollments();
-
+            
             foreach ($contract_types as $key => $contract_type)
             {
                 $this->php_excel->createSheet($key + 1);
@@ -51,9 +51,9 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 $this->process_enrollments($contract_type);
             }
         }
-
+        
         return \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save(
-            $this->php_excel,
+            $this->php_excel, 
             $this->get_module());
     }
 
@@ -74,88 +74,88 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                 }
             }
         }
-
+        
         $headers = array();
         $headers[] = Translation :: get('Year');
         $headers[] = Translation :: get('Faculty');
         $headers[] = Translation :: get('Training');
         $headers[] = Translation :: get('Option');
         $headers[] = Translation :: get('Trajectory');
-
+        
         if ($contract_type == Enrollment :: CONTRACT_TYPE_ALL)
         {
             $headers[] = Translation :: get('Contract');
         }
-
+        
         $headers[] = Translation :: get('ResultType');
         $headers[] = Translation :: get('GenerationStudent');
-
+        
         \Chamilo\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
-            $this->php_excel,
+            $this->php_excel, 
             $headers);
-
+        
         $row = 2;
-
+        
         foreach ($enrollments as $key => $enrollment)
         {
             $column = 0;
-
+            
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++,
-                $row,
+                $column ++, 
+                $row, 
                 StringUtilities :: transcode_string($enrollment->get_year()));
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++,
-                $row,
+                $column ++, 
+                $row, 
                 StringUtilities :: transcode_string($enrollment->get_faculty()));
-
+            
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++,
-                $row,
+                $column ++, 
+                $row, 
                 StringUtilities :: transcode_string($enrollment->get_training()));
-
+            
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++,
-                $row,
+                $column ++, 
+                $row, 
                 StringUtilities :: transcode_string($enrollment->get_unified_option()));
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++,
-                $row,
+                $column ++, 
+                $row, 
                 StringUtilities :: transcode_string($enrollment->get_unified_trajectory()));
-
+            
             if ($contract_type == Enrollment :: CONTRACT_TYPE_ALL)
             {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                    $column ++,
-                    $row,
+                    $column ++, 
+                    $row, 
                     StringUtilities :: transcode_string(Translation :: get($enrollment->get_contract_type_string())));
             }
-
+            
             if ($enrollment->is_special_result())
             {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                    $column ++,
-                    $row,
+                    $column ++, 
+                    $row, 
                     StringUtilities :: transcode_string(Translation :: get($enrollment->get_result_string())));
             }
             else
             {
                 $column ++;
             }
-
+            
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++,
-                $row,
+                $column ++, 
+                $row, 
                 StringUtilities :: transcode_string(
                     Translation :: get(
                         $enrollment->get_generation_student() == 1 ? 'GenerationStudent' : 'NoGenerationStudent')));
-
+            
             $row ++;
         }
-
+        
         $this->php_excel->getActiveSheet()->calculateColumnWidths();
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -163,7 +163,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     {
         return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_XLSX;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

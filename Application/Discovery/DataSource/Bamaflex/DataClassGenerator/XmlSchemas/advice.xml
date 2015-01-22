@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object name="advice" table="v_discovery_advice_basic"
-	namespace="application\discovery\module\advice\implementation\bamaflex"
+<object name="advice" table="v_discovery_advice_basic" namespace="application\discovery\module\advice\implementation\bamaflex"
 	author="Magali Gillard">
 	<properties>
 		<property name="type">

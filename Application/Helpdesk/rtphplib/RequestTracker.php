@@ -54,7 +54,8 @@ class RequestTracker
     protected $postFields;
 
     /**
-     * If false, will disable verification of SSL certificates. This is not recommended for production use. If SSL is
+     * If false, will disable verification of SSL certificates.
+     * This is not recommended for production use. If SSL is
      * not working and the RT host's cert is valid, you should verify that your curl installation has a CA cert bundle
      * installed.
      * 
@@ -66,8 +67,8 @@ class RequestTracker
      * Create a new instance for API requests
      * 
      * @param string $rootUrl The base URL to your request tracker installation. For example, if your RT is located at
-     *            "http://rt.example.com", your rootUrl would be "http://rt.example.com". There should be no trailing
-     *            slash.
+     *        "http://rt.example.com", your rootUrl would be "http://rt.example.com". There should be no trailing
+     *        slash.
      * @param string $user The username to authenticate with.
      * @param string $pass The password to authenticate with.
      */
@@ -79,7 +80,8 @@ class RequestTracker
     }
 
     /**
-     * Sends a request to your RT. In general, this function should not be called directly- should only be used by a
+     * Sends a request to your RT.
+     * In general, this function should not be called directly- should only be used by a
      * subclass if there is custom functionality not covered by the general API functions provided.
      */
     protected function send()

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object name="student_year" table="t_discovery_year_archive"
-	namespace="application\discovery\module\student_year\implementation\bamaflex"
+<object name="student_year" table="t_discovery_year_archive" namespace="application\discovery\module\student_year\implementation\bamaflex"
 	author="Hans De Bisschop">
 	<properties>
 		<property name="scholarship_id">

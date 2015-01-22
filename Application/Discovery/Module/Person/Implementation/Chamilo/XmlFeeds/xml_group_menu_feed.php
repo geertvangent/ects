@@ -11,7 +11,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 /**
  * $Id: xml_group_feed.php 224 2009-11-13 14:40:30Z kariboe $
- *
+ * 
  * @package group.xml_feeds
  * @author Hans De Bisschop
  * @author Dieter De Neef
@@ -24,16 +24,20 @@ if (Authentication :: is_valid())
 {
     $parent_id = Request :: get('parent_id');
     $condition = new EqualityCondition(
-        new PropertyConditionVariable(\Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID),
+        new PropertyConditionVariable(
+            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+            \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID), 
         new StaticConditionVariable($parent_id));
     $groups_tree = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
-        \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
+        \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
         new DataClassRetrievesParameters(
-            $condition,
-            null,
-            null,
+            $condition, 
+            null, 
+            null, 
             new OrderBy(
-                new PropertyConditionVariable(\Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_NAME))))->as_array();
+                new PropertyConditionVariable(
+                    \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+                    \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_NAME))))->as_array();
 }
 
 header('Content-Type: text/xml');
@@ -44,7 +48,7 @@ echo '</tree>';
 function dump_tree($groups)
 {
     $html = array();
-
+    
     if (contains_results($groups))
     {
         dump_groups_tree($groups);

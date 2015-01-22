@@ -10,7 +10,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
     {
         \Chamilo\Application\Discovery\Rendition\Rendition :: launch($this);
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -18,7 +18,7 @@ class HtmlXlsxRenditionImplementation extends RenditionImplementation
     {
         return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

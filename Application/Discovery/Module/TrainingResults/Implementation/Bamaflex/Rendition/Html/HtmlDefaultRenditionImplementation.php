@@ -23,19 +23,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
         if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT,
-            $this->get_module_instance()->get_id(),
+            Rights :: VIEW_RIGHT, 
+            $this->get_module_instance()->get_id(), 
             $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
-
+        
         $html = array();
         $html[] = $this->get_training_properties_table() . '</br>';
         $html[] = $this->get_training_results_table();
-
+        
         \Chamilo\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
-
+        
         return implode("\n", $html);
     }
 
@@ -43,42 +43,42 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
             Module :: get_training_info_parameters());
-
+        
         $data_source = $this->get_module_instance()->get_setting('data_source');
-
+        
         $faculty_info_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\faculty_info\implementation\bamaflex',
+            'application\discovery\module\faculty_info\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         $training_info_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\training_info\implementation\bamaflex',
+            'application\discovery\module\training_info\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         $html = array();
         $properties = array();
         $properties[Translation :: get('Year')] = $training->get_year();
-
+        
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));
-
+        
         $history = array();
         $trainings = $training->get_all($this->get_module_instance());
-
+        
         $i = 1;
         foreach ($trainings as $year => $year_trainings)
         {
             if (count($year_trainings) > 1)
             {
                 $multi_history = array();
-
+                
                 foreach ($year_trainings as $year_training)
                 {
                     $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $training_info_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $training_info_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
@@ -89,7 +89,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         $multi_history[] = $year_training->get_name();
                     }
                 }
-
+                
                 if ($i == 1)
                 {
                     $previous_history = array($year, implode('  |  ', $multi_history));
@@ -102,29 +102,29 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             else
             {
                 $year_training = $year_trainings[0];
-
+                
                 $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
                 $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
-
+                
                 if ($year_training->has_previous_references() && ! $year_training->has_previous_references(true))
                 {
                     if ($i == 1)
                     {
                         $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $training_info_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $training_info_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $previous_history = array(
-                                $year,
+                                $year, 
                                 '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
                                      $year_training->get_name() . '</a>');
                         }
                         else
                         {
-                            $previous_history = array($year,
+                            $previous_history = array($year, 
 
                             $year_training->get_name());
                         }
@@ -132,20 +132,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     elseif ($i == count($year_trainings))
                     {
                         $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $training_info_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $training_info_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $next_history = array(
-                                $year,
+                                $year, 
                                 '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
                                      $year_training->get_name() . '</a>');
                         }
                         else
                         {
-                            $next_history = array($year,
+                            $next_history = array($year, 
 
                             $year_training->get_name());
                         }
@@ -153,12 +153,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-
+                        
                         $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $training_info_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $training_info_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
@@ -176,20 +176,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     if ($i == 1)
                     {
                         $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $training_info_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $training_info_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $previous_history = array(
-                                $year,
+                                $year, 
                                 '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
                                      $year_training->get_name() . '</a>');
                         }
                         else
                         {
-                            $previous_history = array($year,
+                            $previous_history = array($year, 
 
                             $year_training->get_name());
                         }
@@ -197,20 +197,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     elseif ($i == count($year_trainings))
                     {
                         $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $training_info_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $training_info_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $next_history = array(
-                                $year,
+                                $year, 
                                 '<a href="' . $link . '" title="' . $year_training->get_name() . '">' .
                                      $year_training->get_name() . '</a>');
                         }
                         else
                         {
-                            $next_history = array($year,
+                            $next_history = array($year, 
 
                             $year_training->get_name());
                         }
@@ -218,12 +218,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     else
                     {
                         $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-
+                        
                         $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                            $training_info_module_instance->get_id(),
+                            \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                            $training_info_module_instance->get_id(), 
                             $parameters);
-
+                        
                         if ($is_allowed)
                         {
                             $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
@@ -239,12 +239,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 else
                 {
                     $parameters = new Parameters($year_training->get_id(), $year_training->get_source());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $training_info_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $training_info_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $link = $this->get_instance_url($this->get_module_instance()->get_id(), $parameters);
@@ -259,30 +259,30 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             $i ++;
         }
-
+        
         $properties[Translation :: get('History')] = implode('  |  ', $history);
-
+        
         if ($previous_history)
         {
             $properties[Translation :: get('HistoryWas', array('YEAR' => $previous_history[0]), 'application\discovery')] = $previous_history[1];
         }
-
+        
         if ($next_history)
         {
             $properties[Translation :: get('HistoryBecomes', array('YEAR' => $next_history[0]), 'application\discovery')] = $next_history[1];
         }
-
+        
         if ($faculty_info_module_instance)
         {
             $parameters = new \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Parameters(
-                $training->get_faculty_id(),
+                $training->get_faculty_id(), 
                 $training->get_source());
-
+            
             $is_allowed = \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                $faculty_info_module_instance->get_id(),
+                \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                $faculty_info_module_instance->get_id(), 
                 $parameters);
-
+            
             if ($is_allowed)
             {
                 $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
@@ -300,11 +300,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $properties[Translation :: get('Faculty')] = $training->get_faculty();
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
         }
-
+        
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
-
+        
         $table = new PropertiesTable($properties);
-
+        
         $html[] = $table->toHtml();
         return implode("\n", $html);
     }
@@ -312,25 +312,25 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_training_results_table()
     {
         $html = array();
-
+        
         $table_data = $this->get_table_data();
         if (count($table_data) > 0)
         {
             $table = new SortableTable($this->get_table_data());
-
+            
             foreach ($this->get_table_headers() as $header_id => $header)
             {
                 $table->set_header($header_id, $header[0], false);
-
+                
                 if ($header[1])
                 {
                     $table->getHeader()->setColAttributes($header_id, $header[1]);
                 }
             }
-
+            
             $html[] = $table->toHTML();
         }
-
+        
         return implode("\n", $html);
     }
 
@@ -343,26 +343,26 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $profile_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\profile\implementation\bamaflex',
+            'application\discovery\module\profile\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         foreach ($this->get_training_results() as $enrollment)
         {
             $row = array();
             $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code(
                 $enrollment->get_person_id());
-
+            
             if ($profile_module_instance)
             {
                 if ($user)
                 {
                     $parameters = new \Chamilo\Application\Discovery\Module\Profile\Parameters($user->get_id());
-
+                    
                     $is_allowed = \Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Rights :: is_allowed(
-                        \Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                        $profile_module_instance->get_id(),
+                        \Chamilo\Application\Discovery\Module\Profile\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                        $profile_module_instance->get_id(), 
                         $parameters);
-
+                    
                     if ($is_allowed)
                     {
                         $url = $this->get_instance_url($profile_module_instance->get_id(), $parameters);
@@ -391,36 +391,37 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                          $enrollment->get_optional_property('last_name');
                 }
             }
-
+            
             $row[] = $enrollment->get_unified_option();
             $row[] = $enrollment->get_unified_trajectory();
-
+            
             $row[] = Translation :: get(
-                $enrollment->get_contract_type_string(),
-                null,
+                $enrollment->get_contract_type_string(), 
+                null, 
                 'application\discovery\module\enrollment\implementation\bamaflex');
             if ($enrollment->is_special_result())
             {
                 $image = '<img src="' .
-                     Theme :: getInstance()->getImagePath('application\discovery\module\enrollment\implementation\bamaflex') .
-                     'result_type/' . $enrollment->get_result() . '.png" alt="' .
+                     Theme :: getInstance()->getImagePath(
+                        'application\discovery\module\enrollment\implementation\bamaflex') . 'result_type/' .
+                     $enrollment->get_result() . '.png" alt="' .
                      Translation :: get(
-                        $enrollment->get_result_string(),
-                        null,
+                        $enrollment->get_result_string(), 
+                        null, 
                         'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get(
-                        $enrollment->get_result_string(),
-                        null,
+                        $enrollment->get_result_string(), 
+                        null, 
                         'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
                 $row[] = $image;
                 LegendTable :: get_instance()->add_symbol(
-                    $image,
+                    $image, 
                     Translation :: get(
-                        $enrollment->get_result_string(),
-                        null,
-                        'application\discovery\module\enrollment\implementation\bamaflex'),
+                        $enrollment->get_result_string(), 
+                        null, 
+                        'application\discovery\module\enrollment\implementation\bamaflex'), 
                     Translation :: get(
-                        'ResultType',
-                        null,
+                        'ResultType', 
+                        null, 
                         'application\discovery\module\enrollment\implementation\bamaflex'));
             }
             else
@@ -430,35 +431,36 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($enrollment->has_distinction())
             {
                 $image = '<img src="' .
-                     Theme :: getInstance()->getImagePath('application\discovery\module\enrollment\implementation\bamaflex') .
-                     'distinction_type/' . $enrollment->get_distinction() . '.png" alt="' .
+                     Theme :: getInstance()->getImagePath(
+                        'application\discovery\module\enrollment\implementation\bamaflex') . 'distinction_type/' .
+                     $enrollment->get_distinction() . '.png" alt="' .
                      Translation :: get(
-                        $enrollment->get_distinction_string(),
-                        null,
+                        $enrollment->get_distinction_string(), 
+                        null, 
                         'application\discovery\module\enrollment\implementation\bamaflex') . '" title="' . Translation :: get(
-                        $enrollment->get_distinction_string(),
-                        null,
+                        $enrollment->get_distinction_string(), 
+                        null, 
                         'application\discovery\module\enrollment\implementation\bamaflex') . '" />';
                 $row[] = $image;
                 LegendTable :: get_instance()->add_symbol(
-                    $image,
+                    $image, 
                     Translation :: get(
-                        $enrollment->get_distinction_string(),
-                        null,
-                        'application\discovery\module\enrollment\implementation\bamaflex'),
+                        $enrollment->get_distinction_string(), 
+                        null, 
+                        'application\discovery\module\enrollment\implementation\bamaflex'), 
                     Translation :: get(
-                        'DistinctionType',
-                        null,
+                        'DistinctionType', 
+                        null, 
                         'application\discovery\module\enrollment\implementation\bamaflex'));
             }
             else
             {
                 $row[] = ' ';
             }
-
+            
             $data[] = $row;
         }
-
+        
         return $data;
     }
 
@@ -475,10 +477,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = array(Translation :: get('Contract'));
         $headers[] = array('');
         $headers[] = array('');
-
+        
         return $headers;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -486,7 +488,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

@@ -9,7 +9,7 @@ use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
  */
 class StudentTrainingGroupSynchronization extends TrainingGroupSynchronization
 {
-
+    
     /*
      * (non-PHPdoc) @see application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
      */

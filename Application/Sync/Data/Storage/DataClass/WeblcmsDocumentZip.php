@@ -5,14 +5,14 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  * Tracks the visits of a user to a course
- *
+ * 
  * @package application\ehb_sync\data
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  */
 class WeblcmsDocumentZip extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     // Properties
     const PROPERTY_USER_ID = 'user_id';
     const PROPERTY_COURSE_ID = 'course_id';
@@ -25,20 +25,20 @@ class WeblcmsDocumentZip extends DataClass
      * Inherited Functionality *
      * **************************************************************************************************************
      */
-
+    
     /**
      * Returns the default property names of this dataclass
-     *
+     * 
      * @return \string[]
      */
     public static function get_default_property_names()
     {
         return parent :: get_default_property_names(
             array(
-                self :: PROPERTY_USER_ID,
-                self :: PROPERTY_COURSE_ID,
-                self :: PROPERTY_TOOL_ID,
-                self :: PROPERTY_CATEGORY_ID,
+                self :: PROPERTY_USER_ID, 
+                self :: PROPERTY_COURSE_ID, 
+                self :: PROPERTY_TOOL_ID, 
+                self :: PROPERTY_CATEGORY_ID, 
                 self :: PROPERTY_ACCESS_DATE));
     }
 
@@ -47,10 +47,10 @@ class WeblcmsDocumentZip extends DataClass
      * Getters & Setters Functionality *
      * **************************************************************************************************************
      */
-
+    
     /**
      * Returns the user_id
-     *
+     * 
      * @return int
      */
     public function get_user_id()
@@ -60,7 +60,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Sets the user_id
-     *
+     * 
      * @param int $user_id
      */
     public function set_user_id($user_id)
@@ -70,7 +70,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Returns the course_id
-     *
+     * 
      * @return int
      */
     public function get_course_id()
@@ -80,7 +80,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Sets the course_id
-     *
+     * 
      * @param int $course_id
      */
     public function set_course_id($course_id)
@@ -90,7 +90,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Returns the tool_id
-     *
+     * 
      * @return int
      */
     public function get_tool_id()
@@ -100,7 +100,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Sets the tool_id
-     *
+     * 
      * @param int $tool_id
      */
     public function set_tool_id($tool_id)
@@ -110,7 +110,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Returns the category_id
-     *
+     * 
      * @return int
      */
     public function get_category_id()
@@ -120,7 +120,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Sets the category_id
-     *
+     * 
      * @param int $category_id
      */
     public function set_category_id($category_id)
@@ -130,7 +130,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Returns the access_date
-     *
+     * 
      * @return int
      */
     public function get_access_date()
@@ -140,7 +140,7 @@ class WeblcmsDocumentZip extends DataClass
 
     /**
      * Sets the access_date
-     *
+     * 
      * @param int $access_date
      */
     public function set_access_date($access_date)

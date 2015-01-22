@@ -17,16 +17,16 @@ class CoursesComponent extends Manager implements DelegateComponent
         ini_set("memory_limit", "-1");
         ini_set("max_execution_time", "18000");
         header('Content-Type: text/html; charset=utf-8');
-
+        
         try
         {
             echo '<pre>';
             Synchronization :: log('Courses sync started', date('c', time()));
             flush();
-
+            
             $synchronization = new CourseSynchronization();
             $synchronization->run();
-
+            
             Synchronization :: log('Courses sync ended', date('c', time()));
             echo '</pre>';
         }

@@ -11,9 +11,10 @@ use Ehb\Application\Sync\Data\Storage\DataClass\WeblcmsVisit;
 use Ehb\Application\Sync\Data\Storage\DataManager\DataManager;
 
 /**
- * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
+ * Upgrades the visit tracker table into the course visit tracker table.
+ * This script has been separated from the normal
  * upgrade procedure because of the amount of data and time it takes to finish this upgrade.
- *
+ * 
  * @author Sven Vanpoucke - Hogeschool Gent
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  */
@@ -22,22 +23,23 @@ class WeblcmsVisitProcessor
 
     /**
      * The logger object
-     *
+     * 
      * @var FileLogger
      */
     private $logger;
 
     /**
      * The tool id's by tool name
-     *
+     * 
      * @var int[string]
      */
     private $tool_ids_by_name;
 
     /**
-     * A chamilo DM to execute the queries. We use this DM because the credentials are stored in Chamilo and we can
+     * A chamilo DM to execute the queries.
+     * We use this DM because the credentials are stored in Chamilo and we can
      * reuse them
-     *
+     * 
      * @var mixed
      */
     private $dm;
@@ -61,7 +63,7 @@ class WeblcmsVisitProcessor
     {
         $this->dm = \Chamilo\Core\User\Integration\Core\Tracking\Storage\DataManager :: get_instance();
         $this->intialize_tool_ids_by_name();
-
+        
         try
         {
             $this->process_visit_tracker();
@@ -87,18 +89,18 @@ class WeblcmsVisitProcessor
 
     /**
      * Upgrades the course visit tracker
-     *
+     * 
      * @return bool
      */
     protected function process_visit_tracker()
     {
         $parameters = new DataClassRetrieveParameters(
-            null,
+            null, 
             array(
                 new OrderBy(
                     new PropertyConditionVariable(WeblcmsVisit :: class_name(), WeblcmsVisit :: PROPERTY_ACCESS_DATE))));
         $last_visit = DataManager :: retrieve(WeblcmsVisit :: class_name(), $parameters);
-
+        
         if (! $last_visit instanceof WeblcmsVisit)
         {
             $start_time = 0;
@@ -107,29 +109,29 @@ class WeblcmsVisitProcessor
         {
             $start_time = $last_visit->get_access_date();
         }
-
+        
         $end_time = time() - 86400;
-
+        
         $pattern = '%application=weblcms%go=course_viewer%';
         $offset = 0;
         $count = 100000;
-
+        
         $base_query = 'SELECT * FROM tracking_user_visit WHERE enter_date > ' . $start_time . ' AND enter_date <= ' .
              $end_time . ' AND location LIKE "' . $pattern . '" LIMIT ';
-
+        
         do
         {
             $query = $base_query . $offset . ', ' . $count;
-
+            
             $row_counter = 0;
-
+            
             $result = $this->dm->get_connection()->query($query);
             while ($visit_tracker_row = $result->fetch(\PDO :: FETCH_ASSOC))
             {
                 $this->handle_visit_tracker($visit_tracker_row);
                 $row_counter ++;
             }
-
+            
             $offset += $count;
             $this->log('Upgraded ' . ($offset + $row_counter) . ' records');
             flush();
@@ -139,7 +141,7 @@ class WeblcmsVisitProcessor
 
     /**
      * Handles a single visit tracker
-     *
+     * 
      * @param Visit $visit_tracker
      *
      * @return bool
@@ -148,17 +150,17 @@ class WeblcmsVisitProcessor
     {
         $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LOCATION];
         $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_USER_ID];
-
+        
         $query = array();
-
+        
         $url_parts = parse_url($location);
         parse_str($url_parts['query'], $query);
-
+        
         $course_id = $query['course'];
         $tool_name = $query['tool'];
         $publication_id = $query['publication'];
         $category_id = $query['category'];
-
+        
         /**
          * When multiple publications are used, it's mostly due to table actions and the publication is not really
          * visited
@@ -167,19 +169,19 @@ class WeblcmsVisitProcessor
         {
             return false;
         }
-
+        
         if (! $tool_name)
         {
             $tool_name = 'home';
         }
-
+        
         $course_tool_id = $this->tool_ids_by_name[$tool_name];
-
+        
         if (! $course_tool_id)
         {
             return false;
         }
-
+        
         $visit = new WeblcmsVisit();
         $visit->set_user_id($user_id);
         $visit->set_course_id($course_id);
@@ -191,16 +193,16 @@ class WeblcmsVisitProcessor
         $visit->set_time(
             $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LEAVE_DATE] -
                  $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
-
+        
         if (! $visit->save())
-
+        
         {
             return false;
         }
-
+        
         unset($visit);
         DataClassCache :: reset();
-
+        
         return true;
     }
 }

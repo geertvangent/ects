@@ -25,7 +25,7 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     public static function module_parameters()
     {
         $faculty = Request :: get(self :: PARAM_FACULTY_ID);
-
+        
         $parameter = new Parameters();
         if ($faculty)
         {
@@ -56,18 +56,18 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
+        
         $modules = Filesystem :: get_directory_content(
             ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES,
+            Filesystem :: LIST_DIRECTORIES, 
             false);
-
+        
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\implementation\\' . $module;
             $types[] = $namespace;
         }
-
+        
         return $types;
     }
 
@@ -75,7 +75,7 @@ abstract class Module extends \Chamilo\Application\Discovery\Module
     {
         $faculty_id = $parameters->get_faculty_id();
         $source = $parameters->get_source();
-
+        
         if (! isset($this->cache_trainings[$source][$faculty_id]))
         {
             $this->cache_trainings[$source][$faculty_id] = DataManager :: get_instance($this->get_module_instance())->retrieve_trainings(

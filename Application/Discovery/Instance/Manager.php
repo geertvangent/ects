@@ -24,7 +24,8 @@ class Manager extends Application
     }
 
     /**
-     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g. $name
+     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
+     * $name
      * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
      * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
      */

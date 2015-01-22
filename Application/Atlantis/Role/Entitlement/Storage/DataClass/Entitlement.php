@@ -7,13 +7,13 @@ use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager;
 
 /**
  * application.atlantis.role.entitlement.
- *
+ * 
  * @author GillardMagali
  */
 class Entitlement extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-
+    
     /**
      * Entitlement properties
      */
@@ -26,7 +26,7 @@ class Entitlement extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @param $extended_property_names multitype:string
      * @return multitype:string The property names.
      */
@@ -34,13 +34,13 @@ class Entitlement extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_RIGHT_ID;
         $extended_property_names[] = self :: PROPERTY_ROLE_ID;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -50,7 +50,7 @@ class Entitlement extends DataClass
 
     /**
      * Returns the application_right_id of this Entitlement.
-     *
+     * 
      * @return integer The application_right_id.
      */
     public function get_right_id()
@@ -60,7 +60,7 @@ class Entitlement extends DataClass
 
     /**
      * Sets the application_right_id of this Entitlement.
-     *
+     * 
      * @param $application_right_id integer
      */
     public function set_right_id($application_right_id)
@@ -70,7 +70,7 @@ class Entitlement extends DataClass
 
     /**
      * Returns the role_id of this Entitlement.
-     *
+     * 
      * @return integer The role_id.
      */
     public function get_role_id()
@@ -80,7 +80,7 @@ class Entitlement extends DataClass
 
     /**
      * Sets the role_id of this Entitlement.
-     *
+     * 
      * @param $role_id integer
      */
     public function set_role_id($role_id)
@@ -102,7 +102,7 @@ class Entitlement extends DataClass
         if (! isset($this->right))
         {
             $this->right = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieve(
-                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(), 
                 (int) $this->get_right_id());
         }
         return $this->right;
@@ -113,7 +113,7 @@ class Entitlement extends DataClass
         if (! isset($this->role))
         {
             $this->role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(), 
                 (int) $this->get_role_id());
         }
         return $this->role;

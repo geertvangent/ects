@@ -41,7 +41,7 @@ abstract class Synchronization
     public function get_academic_year_end()
     {
         $year_parts = explode('-', $this->get_academic_year());
-
+        
         return '20' . $year_parts[1] . '-09-30 23:59:59.999';
     }
 

@@ -1,8 +1,6 @@
 <?php
 namespace Chamilo\Application\Discovery\Package;
 
-
-
 /**
  *
  * @author Hans De Bisschop
@@ -15,7 +13,7 @@ class Installer extends \Chamilo\Configuration\Package\Installer
     {
         $installers = array();
         $installers[] = 'application\discovery\instance';
-
+        
         return $installers;
     }
 }

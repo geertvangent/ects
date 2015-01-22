@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <packages>
-  <package>
-    <name>Atlantis</name>
-    <code>Atlantis</code>
-    <context>Ehb\Application\Atlantis</context>
-    <type>Chamilo\Application</type>
-    <category>research</category>
-    <authors/>
-    <version>4.0.0</version>
-    <description>
+	<package>
+		<name>Atlantis</name>
+		<code>Atlantis</code>
+		<context>Ehb\Application\Atlantis</context>
+		<type>Chamilo\Application</type>
+		<category>research</category>
+		<authors />
+		<version>4.0.0</version>
+		<description>
 			Atlantis is a legendary island first mentioned in Plato's
-			dialogues Timaeus and Critias, written about 360 BC.
+			dialogues Timaeus and Critias, written about 360
+			BC.
 		</description>
-    <pre-depends>
-      <dependency type="registration">
-        <id>Chamilo\Configuration</id>
-        <version operator="4">4.0.0</version>
-      </dependency>
-    </pre-depends>
-  </package>
+		<pre-depends>
+			<dependency type="registration">
+				<id>Chamilo\Configuration</id>
+				<version operator="4">4.0.0</version>
+			</dependency>
+		</pre-depends>
+	</package>
 </packages>

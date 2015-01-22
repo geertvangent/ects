@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object name="course"
-	namespace="application\discovery\module\career\implementation\bamaflex">
+<object name="course" namespace="application\discovery\module\career\implementation\bamaflex">
 	<properties>
 		<property name="trajectory_part" type="string" />
 		<property name="credits" type="int" />

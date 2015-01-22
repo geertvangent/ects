@@ -25,18 +25,18 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     public function get_object_table_condition($object_table_class_name)
     {
         $query = $this->action_bar->get_query();
-
+        
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Application :: class_name(), Application :: PROPERTY_NAME),
+                new PropertyConditionVariable(Application :: class_name(), Application :: PROPERTY_NAME), 
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Application :: class_name(), Application :: PROPERTY_DESCRIPTION),
+                new PropertyConditionVariable(Application :: class_name(), Application :: PROPERTY_DESCRIPTION), 
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Application :: class_name(), Application :: PROPERTY_URL),
+                new PropertyConditionVariable(Application :: class_name(), Application :: PROPERTY_URL), 
                 '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
@@ -49,9 +49,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     public function run()
     {
         SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
-
+        
         $this->display_header();
-
+        
         $this->action_bar = $this->get_action_bar();
         echo ($this->action_bar->as_html());
         $table = new ApplicationTable($this);
@@ -64,13 +64,13 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         if (! isset($this->action_bar))
         {
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
-
+            
             if ($this->get_user()->is_platform_admin())
             {
                 $this->action_bar->add_common_action(
                     new ToolbarItem(
-                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
-                        Theme :: getInstance()->getCommonImagePath() . 'action_create.png',
+                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
+                        Theme :: getInstance()->getCommonImagePath() . 'action_create.png', 
                         $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());

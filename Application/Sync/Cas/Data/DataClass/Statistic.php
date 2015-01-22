@@ -55,17 +55,17 @@ class Statistic extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @return array The property names.
      */
     public static function get_default_property_names($extended_property_names = array())
     {
         return parent :: get_default_property_names(
             array(
-                self :: PROPERTY_USER,
-                self :: PROPERTY_PERSON_ID,
-                self :: PROPERTY_APPLICATION_ID,
-                self :: PROPERTY_ACTION_ID,
+                self :: PROPERTY_USER, 
+                self :: PROPERTY_PERSON_ID, 
+                self :: PROPERTY_APPLICATION_ID, 
+                self :: PROPERTY_ACTION_ID, 
                 self :: PROPERTY_DATE));
     }
 

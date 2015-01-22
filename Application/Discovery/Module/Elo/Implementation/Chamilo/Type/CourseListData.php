@@ -32,7 +32,7 @@ class CourseListData extends TypeData
     public static function get_filters($filters = array())
     {
         $filters[] = self :: PROPERTY_YEAR;
-
+        
         return parent :: get_filters($filters);
     }
 
@@ -40,7 +40,7 @@ class CourseListData extends TypeData
     {
         $extended_property_names[] = self :: PROPERTY_COURSE;
         $extended_property_names[] = self :: PROPERTY_YEAR;
-
+        
         return parent :: get_default_property_names($extended_property_names);
     }
 }

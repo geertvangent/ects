@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type;
 
-
 use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 
@@ -34,7 +33,7 @@ class UserSynchronization extends Synchronization
         $types = array();
         $types[] = 'create';
         $types[] = 'update';
-
+        
         return $types;
     }
 

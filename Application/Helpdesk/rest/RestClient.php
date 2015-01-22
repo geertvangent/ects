@@ -14,7 +14,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
     public function __construct($server_url)
     {
         parent :: __construct();
-
+        
         $this->server_url = $server_url;
     }
 
@@ -23,13 +23,13 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
         if (is_array($data))
         {
             $tmp = array();
-
+            
             foreach ($data as $key => $value)
             {
                 if (is_array($value))
                 {
                     $subtmp = array();
-
+                    
                     foreach ($value as $subkey => $subvalue)
                     {
                         $tmp[] = $key . '[]' . ': ' . str_replace("\n", "\n  ", str_replace("\r", '', $subvalue));
@@ -43,7 +43,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
             return implode(chr(10), $tmp);
         }
     }
-
+    
     /*
      * a prefab function for a request @param method string @param url string @param data array @return
      * MediaMosaRestResult object
@@ -52,7 +52,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
     {
         $this->set_http_method($method);
         $this->set_data_to_send('');
-
+        
         // different method need different handling of data
         if (($method == self :: METHOD_POST))
         {
@@ -65,13 +65,13 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
             if (is_array($data))
             {
                 $tmp = array();
-
+                
                 foreach ($data as $key => $value)
                 {
                     if (is_array($value))
                     {
                         $subtmp = array();
-
+                        
                         foreach ($value as $subkey => $subvalue)
                         {
                             $tmp[] = $key . '[]' . '=' . $subvalue;
@@ -82,7 +82,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
                         $tmp[] = $key . '=' . $value;
                     }
                 }
-
+                
                 $get_string = implode('&', $tmp);
                 $url .= '?' . $get_string;
             }
@@ -93,14 +93,14 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
             if (is_array($data))
                 $this->set_data_to_send($data);
         }
-
+        
         $this->set_url($url);
-
+        
         $response = $this->send_request();
         $response->set_response_content_xml();
         return $response;
     }
-
+    
     /*
      * override of parent function just to add more functionality 1. headers can be set in array key-value pairs 2.
      * headers are returned in array key-value pairs
@@ -112,27 +112,27 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
         $result->set_request_http_method($this->get_http_method());
         $result->set_request_sent_data($this->get_data_to_send());
         $result->set_request_url($this->get_url());
-
+        
         $request_properties = array();
         $request_properties['method'] = $this->get_http_method();
         $request_properties['user'] = $this->get_basic_login();
         $request_properties['pass'] = $this->get_basic_password();
-
+        
         $request = new \HTTP_Request($this->get_url(), $request_properties);
-
+        
         /*
          * addition
          */
         // possibly set a proxy
         if ($proxy = $this->get_proxy())
             $request->setProxy($proxy['server'], $proxy['port']);
-
+            
             // add data
         $data_to_send = $this->get_data_to_send();
-
+        
         if (isset($data_to_send))
         {
-
+            
             if (is_string($data_to_send))
             {
                 $request->setBody($data_to_send);
@@ -154,12 +154,12 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
                     if (count($values) > 0)
                     {
                         $file_path = $values[0];
-
+                        
                         if (StringUtilities :: start_with($file_path, '@'))
                         {
                             $file_path = substr($file_path, 1);
                         }
-
+                        
                         if (file_exists($file_path))
                         {
                             /*
@@ -176,7 +176,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
                      */
                     $file_content = $data_to_send['file'];
                 }
-
+                
                 $request->setBody($file_content);
             }
             /*
@@ -189,7 +189,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
                     $request->addPostData($key, $value);
                 }
             }
-
+            
             /*
              * If the mime type is given as a parameter, we use it to set the content-type request
              */
@@ -197,7 +197,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
             {
                 $request->addHeader('Content-type', $data_to_send['mime']);
             }
-
+            
             /*
              * addition
              */
@@ -211,7 +211,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
                 }
             }
         }
-
+        
         $req_result = $request->sendRequest(true);
         if ($req_result === true)
         {
@@ -228,7 +228,7 @@ class RestClient extends \Chamilo\Libraries\Protocol\Webservice\Rest\Client\Rest
             $result->set_response_http_code($request->getResponseCode());
             $result->set_response_error($request->getResponseReason());
         }
-
+        
         return $result;
     }
 }

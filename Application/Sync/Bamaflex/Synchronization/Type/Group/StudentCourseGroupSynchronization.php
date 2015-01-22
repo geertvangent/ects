@@ -34,7 +34,7 @@ class StudentCourseGroupSynchronization extends CourseGroupSynchronization
                  $this->get_parameter(self :: RESULT_PROPERTY_COURSE_ID) .
                  ' AND type = 1 AND result != 8 AND (programme_type = 1 OR programme_type = 6)';
             $users = $this->get_result($query);
-
+            
             while ($user = $users->next_result(false))
             {
                 $user_mails[] = $user['person_id'];

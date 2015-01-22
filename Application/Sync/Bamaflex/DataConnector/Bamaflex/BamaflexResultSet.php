@@ -9,7 +9,7 @@ class BamaflexResultSet extends ArrayResultSet
     public function __construct($statement)
     {
         $records = array();
-
+        
         if (! $statement instanceof \PDOException)
         {
             while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
@@ -17,7 +17,7 @@ class BamaflexResultSet extends ArrayResultSet
                 $records[] = $this->process_record($record);
             }
         }
-
+        
         parent :: __construct($records);
     }
 
@@ -35,7 +35,7 @@ class BamaflexResultSet extends ArrayResultSet
                 $field = $data;
             }
         }
-
+        
         return $record;
     }
 }

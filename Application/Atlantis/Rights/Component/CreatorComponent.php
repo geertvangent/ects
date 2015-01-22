@@ -18,20 +18,20 @@ class CreatorComponent extends Manager
         {
             throw new NotAllowedException();
         }
-
+        
         SessionBreadcrumbs :: add(
             new Breadcrumb(
-                $this->get_url(),
+                $this->get_url(), 
                 Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
-
+        
         $form = new RightsGroupForm($this, $this->get_url());
-
+        
         if ($form->validate())
         {
             $success = $form->set_rights();
-
+            
             $this->redirect(
-                Translation :: get($success ? 'AccessRightsSaved' : 'AccessRightsNotSaved'),
+                Translation :: get($success ? 'AccessRightsSaved' : 'AccessRightsNotSaved'), 
                 ($success ? false : true));
         }
         else

@@ -20,15 +20,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
-
+        
         if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT,
-            $this->get_module_instance()->get_id(),
+            Rights :: VIEW_RIGHT, 
+            $this->get_module_instance()->get_id(), 
             $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
-
+        
         if (is_null($this->get_module_parameters()->get_year()))
         {
             $years = $this->get_years();
@@ -40,37 +40,37 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
         $parameters = $this->get_module_parameters();
         $parameters->set_year($current_year);
-
+        
         $html = array();
-
+        
         if ($this->has_data())
         {
             $tabs = new DynamicVisualTabsRenderer(
-                'teaching_assignment_list',
+                'teaching_assignment_list', 
                 $this->get_teaching_assignments_table($parameters)->toHTML());
-
+            
             foreach ($this->get_years() as $year)
             {
                 $parameters = $this->get_module_parameters();
                 $parameters->set_year($year);
                 $tabs->add_tab(
                     new DynamicVisualTab(
-                        $year,
-                        $year,
-                        null,
-                        $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                        $year, 
+                        $year, 
+                        null, 
+                        $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
                         $current_year == $year));
             }
-
+            
             $html[] = $tabs->render();
-
+            
             \Chamilo\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
         }
         else
         {
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
-
+        
         return implode("\n", $html);
     }
 
@@ -80,36 +80,36 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course\implementation\bamaflex',
+            'application\discovery\module\course\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         $course_result_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\course_results\implementation\bamaflex',
+            'application\discovery\module\course_results\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         $faculty_info_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\faculty_info\implementation\bamaflex',
+            'application\discovery\module\faculty_info\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         $training_info_module_instance = \Chamilo\Application\Discovery\Module :: exists(
-            'application\discovery\module\training_info\implementation\bamaflex',
+            'application\discovery\module\training_info\implementation\bamaflex', 
             array('data_source' => $data_source));
-
+        
         foreach ($teaching_assignments as $key => $teaching_assignment)
         {
             $row = array();
-
+            
             if ($faculty_info_module_instance)
             {
                 $parameters = new \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Parameters(
-                    $teaching_assignment->get_faculty_id(),
+                    $teaching_assignment->get_faculty_id(), 
                     $teaching_assignment->get_source());
-
+                
                 $is_allowed = \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                    \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                    $faculty_info_module_instance->get_id(),
+                    \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                    $faculty_info_module_instance->get_id(), 
                     $parameters);
-
+                
                 if ($is_allowed)
                 {
                     $url = $this->get_instance_url($faculty_info_module_instance->get_id(), $parameters);
@@ -124,18 +124,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row[] = $teaching_assignment->get_faculty();
             }
-
+            
             if ($training_info_module_instance)
             {
                 $parameters = new \Chamilo\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters(
-                    $teaching_assignment->get_training_id(),
+                    $teaching_assignment->get_training_id(), 
                     $teaching_assignment->get_source());
-
+                
                 $is_allowed = \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: is_allowed(
-                    \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                    $faculty_info_module_instance->get_id(),
+                    \Chamilo\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                    $faculty_info_module_instance->get_id(), 
                     $parameters);
-
+                
                 if ($is_allowed)
                 {
                     $url = $this->get_instance_url($training_info_module_instance->get_id(), $parameters);
@@ -150,36 +150,38 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row[] = $teaching_assignment->get_training();
             }
-
-            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'type/' . $teaching_assignment->get_manager() .
-                 '.png" alt="' . Translation :: get($teaching_assignment->get_manager_type()) . '" title="' .
+            
+            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'type/' .
+                 $teaching_assignment->get_manager() . '.png" alt="' .
+                 Translation :: get($teaching_assignment->get_manager_type()) . '" title="' .
                  Translation :: get($teaching_assignment->get_manager_type()) . '"/>';
             $row[] = $image;
             LegendTable :: get_instance()->add_symbol(
-                $image,
-                Translation :: get($teaching_assignment->get_manager_type()),
+                $image, 
+                Translation :: get($teaching_assignment->get_manager_type()), 
                 Translation :: get('Manager'));
-
-            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'type/' . $teaching_assignment->get_teacher() .
-                 '.png" alt="' . Translation :: get($teaching_assignment->get_teacher_type()) . '" title="' .
+            
+            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'type/' .
+                 $teaching_assignment->get_teacher() . '.png" alt="' .
+                 Translation :: get($teaching_assignment->get_teacher_type()) . '" title="' .
                  Translation :: get($teaching_assignment->get_teacher_type()) . '"/>';
             $row[] = $image;
             LegendTable :: get_instance()->add_symbol(
-                $image,
-                Translation :: get($teaching_assignment->get_teacher_type()),
+                $image, 
+                Translation :: get($teaching_assignment->get_teacher_type()), 
                 Translation :: get('Teacher'));
-
+            
             if ($course_module_instance)
             {
                 $parameters = new \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters(
-                    $teaching_assignment->get_programme_id(),
+                    $teaching_assignment->get_programme_id(), 
                     $teaching_assignment->get_source());
-
+                
                 $is_allowed = \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: is_allowed(
-                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                    $course_module_instance->get_id(),
+                    \Chamilo\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                    $course_module_instance->get_id(), 
                     $parameters);
-
+                
                 if ($is_allowed)
                 {
                     $url = $this->get_instance_url($course_module_instance->get_id(), $parameters);
@@ -195,52 +197,53 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row[] = $teaching_assignment->get_name();
             }
             $row[] = $teaching_assignment->get_credits();
-            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'timeframe/' . $teaching_assignment->get_timeframe_id() .
-                 '.png" alt="' . Translation :: get($teaching_assignment->get_timeframe()) . '" title="' .
+            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'timeframe/' .
+                 $teaching_assignment->get_timeframe_id() . '.png" alt="' .
+                 Translation :: get($teaching_assignment->get_timeframe()) . '" title="' .
                  Translation :: get($teaching_assignment->get_timeframe()) . '"/>';
             $row[] = $image;
             LegendTable :: get_instance()->add_symbol(
-                $image,
-                Translation :: get($teaching_assignment->get_timeframe()),
+                $image, 
+                Translation :: get($teaching_assignment->get_timeframe()), 
                 Translation :: get('Timeframe'));
-
+            
             if ($course_result_module_instance)
             {
                 $parameters = new \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Parameters(
-                    $teaching_assignment->get_programme_id(),
+                    $teaching_assignment->get_programme_id(), 
                     $teaching_assignment->get_source());
-
+                
                 $is_allowed = \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: is_allowed(
-                    \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT,
-                    $course_result_module_instance->get_id(),
+                    \Chamilo\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\Rights :: VIEW_RIGHT, 
+                    $course_result_module_instance->get_id(), 
                     $parameters);
-
+                
                 if ($is_allowed)
                 {
                     $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
                     $row[] = Theme :: getInstance()->getCommonImage(
-                        'action_details',
-                        'png',
-                        Translation :: get('CourseResults'),
-                        $url,
+                        'action_details', 
+                        'png', 
+                        Translation :: get('CourseResults'), 
+                        $url, 
                         ToolbarItem :: DISPLAY_ICON);
                 }
                 else
                 {
                     $row[] = Theme :: getInstance()->getCommonImage(
-                        'action_details_na',
-                        'png',
-                        Translation :: get('CourseResultsNotAvailable'),
-                        null,
+                        'action_details_na', 
+                        'png', 
+                        Translation :: get('CourseResultsNotAvailable'), 
+                        null, 
                         ToolbarItem :: DISPLAY_ICON);
                 }
             }
-
+            
             $data[] = $row;
         }
-
+        
         $table = new SortableTable($data);
-
+        
         $table->set_header(0, Translation :: get('Faculty'), false);
         $table->set_header(1, Translation :: get('Training'), false);
         $table->set_header(2, '<img src="' . Theme :: getInstance()->getImagePath() . 'manager.png"/>', false);
@@ -249,10 +252,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $table->set_header(5, Translation :: get('Credits'), false, 'class="action"');
         $table->set_header(6, '<img src="' . Theme :: getInstance()->getImagePath() . 'timeframe.png"/>', false);
         $table->set_header(7, '', false);
-
+        
         return $table;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -260,7 +263,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         return \Chamilo\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
-
+    
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

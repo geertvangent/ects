@@ -31,7 +31,7 @@ class RoleEntityTableColumnModel extends DataClassTableColumnModel implements Ta
         {
             $this->add_column(new StaticTableColumn(Translation :: get('Context')));
         }
-
+        
         $this->add_column(
             new DataClassPropertyTableColumn(RoleEntity :: class_name(), RoleEntity :: PROPERTY_START_DATE, false));
         $this->add_column(

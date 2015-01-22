@@ -6,7 +6,7 @@ use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 
 /**
  * This class represents the current CAS Account database connection.
- *
+ * 
  * @author Hans De Bisschop
  */
 class Mdb2Connection extends \Chamilo\Libraries\Storage\DataManager\Mdb2\Connection
@@ -32,21 +32,21 @@ class Mdb2Connection extends \Chamilo\Libraries\Storage\DataManager\Mdb2\Connect
         $cas_password = PlatformSetting :: get('password', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
         $cas_host = PlatformSetting :: get('host', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
         $cas_database = PlatformSetting :: get('database', \Ehb\Application\Sync\Cas\Storage\Manager :: context());
-
+        
         $data_source_name = DataSourceName :: factory(
-            'mdb2',
-            $cas_dbms,
-            $cas_user,
-            $cas_host,
-            $cas_database,
+            'mdb2', 
+            $cas_dbms, 
+            $cas_user, 
+            $cas_host, 
+            $cas_database, 
             $cas_password);
-
+        
         $this->connection = \MDB2 :: connect($data_source_name->get_connection_string(), array('debug' => 3));
     }
 
     /**
      * Returns the instance of this class.
-     *
+     * 
      * @return Connection The instance.
      */
     public static function get_instance()
@@ -60,7 +60,7 @@ class Mdb2Connection extends \Chamilo\Libraries\Storage\DataManager\Mdb2\Connect
 
     /**
      * Gets the database connection.
-     *
+     * 
      * @return mixed MDB2 DB Conenction.
      */
     public function get_connection()

@@ -15,13 +15,14 @@ class Module extends \Chamilo\Application\Discovery\Module\Cas\Module
     {
         if (! isset($this->action_statistics))
         {
-            $path = Path :: getInstance()->getStoragePath() . ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . '/cas_action_statistics/' .
+            $path = Path :: getInstance()->getStoragePath() .
+                 ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . '/cas_action_statistics/' .
                  md5(serialize($this->get_module_parameters()));
-
+            
             if (! file_exists($path))
             {
                 $this->action_statistics = array();
-
+                
                 foreach ($this->get_cas_statistics() as $cas_statistic)
                 {
                     if ($cas_statistic->get_application_id())
@@ -40,7 +41,7 @@ class Module extends \Chamilo\Application\Discovery\Module\Cas\Module
                 $this->action_statistics = unserialize(file_get_contents($path));
             }
         }
-
+        
         return $this->action_statistics[$action->get_id()];
     }
 }
