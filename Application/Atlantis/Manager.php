@@ -7,7 +7,7 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'atlantis';
     const ACTION_CONTEXT = 'context';
@@ -22,12 +22,12 @@ class Manager extends Application
     public function __construct($user = null, $application = null)
     {
         parent :: __construct($user, $application);
-        
+
         if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }
-        
+
         Theme :: getInstance()->setTheme(PlatformSetting :: get('theme', __NAMESPACE__));
     }
 

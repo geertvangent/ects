@@ -3,7 +3,7 @@ namespace Ehb\Application\Sync;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'ehb_sync';
     const ACTION_BROWSE = 'browser';

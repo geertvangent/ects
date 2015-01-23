@@ -3,7 +3,7 @@ namespace Ehb\Application\Atlantis\Role\Entity;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const PARAM_ACTION = 'role_entity_action';
     const ACTION_BROWSE = 'browser';

@@ -3,7 +3,7 @@ namespace Ehb\Application\Sync\Data;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const ACTION_BROWSE = 'browser';
     const ACTION_WEBLCMS = 'weblcms';
@@ -23,7 +23,7 @@ class Manager extends Application
         // Make sure we don't get any timeouts
         ini_set("memory_limit", "-1");
         set_time_limit(0);
-        
+
         parent :: __construct($user, $application);
     }
 

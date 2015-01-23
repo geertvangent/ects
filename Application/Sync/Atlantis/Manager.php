@@ -3,7 +3,7 @@ namespace Ehb\Application\Sync\Atlantis;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const ACTION_BROWSE = 'browser';
     const ACTION_DISCOVERY = 'discovery';

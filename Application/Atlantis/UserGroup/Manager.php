@@ -3,7 +3,7 @@ namespace Ehb\Application\Atlantis\UserGroup;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const PARAM_ACTION = 'context_action';
     const ACTION_BROWSE = 'browser';

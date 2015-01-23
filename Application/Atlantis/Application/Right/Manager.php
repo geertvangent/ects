@@ -5,10 +5,10 @@ use Chamilo\Libraries\Architecture\Application\Application;
 
 /**
  * $Id: elude_manager.class.php
- * 
+ *
  * @package application.elude
  */
-class Manager extends Application
+abstract class Manager extends Application
 {
     const PARAM_ACTION = 'right_action';
     const ACTION_BROWSE = 'browser';

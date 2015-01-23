@@ -3,7 +3,7 @@ namespace Chamilo\Application\Discovery\DataSource;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const PARAM_ACTION = 'action';
     const PARAM_TYPE = 'type';

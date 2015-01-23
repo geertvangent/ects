@@ -10,7 +10,7 @@ use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
  * @package application.discovery
  * @author Hans De Bisschop
  */
-class Manager extends Application
+abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'discovery';
     const ACTION_VIEW = 'viewer';
@@ -30,7 +30,7 @@ class Manager extends Application
 
     /**
      * Constructor
-     * 
+     *
      * @param $user User The current user
      */
     public function __construct($user = null, $application = null)
