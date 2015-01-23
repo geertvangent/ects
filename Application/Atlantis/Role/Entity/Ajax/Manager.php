@@ -13,9 +13,4 @@ use Chamilo\Libraries\Architecture\JsonAjaxResult;
  */
 abstract class Manager extends AjaxManager
 {
-
-    public static function get_default_action()
-    {
-        JsonAjaxResult :: bad_request();
-    }
 }

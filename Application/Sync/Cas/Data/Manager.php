@@ -14,8 +14,4 @@ abstract class Manager extends Application
         return self :: PARAM_ACTION;
     }
 
-    public function get_default_action()
-    {
-        return self :: DEFAULT_ACTION;
-    }
 }

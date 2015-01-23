@@ -30,9 +30,4 @@ abstract class Manager extends Application
     {
         return self :: APPLICATION_NAME;
     }
-
-    public function get_default_action()
-    {
-        return self :: DEFAULT_ACTION;
-    }
 }
