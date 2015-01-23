@@ -13,6 +13,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 /**
  *
@@ -38,8 +39,7 @@ class Module
      * @param $application Application
      * @param $module_instance Instance
      */
-    public function __construct(Application $application,
-        Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
+    public function __construct(Application $application, Instance $module_instance)
     {
         $this->application = $application;
         $this->module_instance = $module_instance;
@@ -51,8 +51,7 @@ class Module
      * @param $module_instance Instance
      * @return Module
      */
-    public static function factory(Application $application,
-        Chamilo\Application\Discovery\Instance\DataClass\Instance $module_instance)
+    public static function factory(Application $application, Instance $module_instance)
     {
         $class = $module_instance->get_type() . '\\Module';
 
@@ -172,7 +171,8 @@ class Module
     }
 
     /**
-     * Far from ideal and not really generic (because of the user) . .. but it'll have to do for now
+     * Far from ideal and not really generic (because of the user) .
+     * .. but it'll have to do for now
      *
      * @param $type string
      * @param $user user\User

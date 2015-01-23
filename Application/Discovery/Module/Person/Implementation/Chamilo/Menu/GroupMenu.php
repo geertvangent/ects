@@ -51,7 +51,7 @@ class GroupMenu extends \HTML_Menu
      * @param int $owner The ID of the owner of the categories to provide in this menu.
      * @param int $current_category The ID of the current category in the menu.
      * @param string $url_format The format to use for the URL of a category. Passed to sprintf(). Defaults to the
-     *            string "?category=%s".
+     *        string "?category=%s".
      * @param array $extra_items An array of extra tree items, added to the root.
      */
     public function __construct($rendition, $url_format = '?application=group&go=browser&group_id=%s', $include_root = true, $show_complete_tree = false,
@@ -263,6 +263,6 @@ class GroupMenu extends \HTML_Menu
 
     public static function get_tree_name()
     {
-        return Utilities :: get_classname_from_namespace(self :: TREE_NAME, true);
+        return ClassnameUtilities :: getInstance()->getClassnameFromNamespace(self :: TREE_NAME, true);
     }
 }

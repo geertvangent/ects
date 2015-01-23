@@ -13,7 +13,7 @@ use Ehb\Application\Sync\Data\Storage\DataManager\DataManager;
  * Upgrades the visit tracker table into the course visit tracker table.
  * This script has been separated from the normal
  * upgrade procedure because of the amount of data and time it takes to finish this upgrade.
- * 
+ *
  * @author Sven Vanpoucke - Hogeschool Gent
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  */
@@ -22,7 +22,7 @@ class PersonalCalendarVisitProcessor
 
     /**
      * The logger object
-     * 
+     *
      * @var FileLogger
      */
     private $logger;
@@ -31,7 +31,7 @@ class PersonalCalendarVisitProcessor
      * A chamilo DM to execute the queries.
      * We use this DM because the credentials are stored in Chamilo and we can
      * reuse them
-     * 
+     *
      * @var mixed
      */
     private $dm;
@@ -54,7 +54,7 @@ class PersonalCalendarVisitProcessor
     public function run()
     {
         $this->dm = \Chamilo\Core\User\Integration\Core\Tracking\Storage\DataManager :: get_instance();
-        
+
         try
         {
             $this->process_visit_tracker();
@@ -67,21 +67,21 @@ class PersonalCalendarVisitProcessor
 
     /**
      * Upgrades the course visit tracker
-     * 
+     *
      * @return bool
      */
     protected function process_visit_tracker()
     {
         $parameters = new DataClassRetrieveParameters(
-            null, 
+            null,
             array(
                 new OrderBy(
                     new PropertyConditionVariable(
-                        PersonalCalendarVisit :: class_name(), 
-                        PersonalCalendarVisit :: PROPERTY_ACCESS_DATE), 
+                        PersonalCalendarVisit :: class_name(),
+                        PersonalCalendarVisit :: PROPERTY_ACCESS_DATE),
                     SORT_DESC)));
         $last_visit = DataManager :: retrieve(PersonalCalendarVisit :: class_name(), $parameters);
-        
+
         if (! $last_visit instanceof PersonalCalendarVisit)
         {
             $start_time = 0;
@@ -90,29 +90,29 @@ class PersonalCalendarVisitProcessor
         {
             $start_time = $last_visit->get_access_date();
         }
-        
+
         $end_time = time() - 86400;
-        
+
         $pattern = '%application=personal_calendar%';
         $offset = 0;
         $count = 100000;
-        
+
         $base_query = 'SELECT * FROM tracking_user_visit WHERE enter_date > ' . $start_time . ' AND enter_date <= ' .
              $end_time . ' AND location LIKE "' . $pattern . '" LIMIT ';
-        
+
         do
         {
             $query = $base_query . $offset . ', ' . $count;
-            
+
             $row_counter = 0;
-            
+
             $result = $this->dm->get_connection()->query($query);
             while ($visit_tracker_row = $result->fetch(\PDO :: FETCH_ASSOC))
             {
                 $this->handle_visit_tracker($visit_tracker_row);
                 $row_counter ++;
             }
-            
+
             $offset += $count;
             $this->log('Upgraded ' . ($offset + $row_counter) . ' records');
             flush();
@@ -122,23 +122,23 @@ class PersonalCalendarVisitProcessor
 
     /**
      * Handles a single visit tracker
-     * 
+     *
      * @param Visit $visit_tracker
      *
      * @return bool
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_USER_ID];
-        
+        $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_USER_ID];
+
         $query = array();
-        
+
         $url_parts = parse_url($location);
         parse_str($url_parts['query'], $query);
-        
+
         $publication_id = $query['personal_calendar'];
-        
+
         /**
          * When multiple publications are used, it's mostly due to table actions and the publication is not really
          * visited
@@ -147,24 +147,24 @@ class PersonalCalendarVisitProcessor
         {
             return false;
         }
-        
+
         $visit = new PersonalCalendarVisit();
         $visit->set_user_id($user_id);
         $visit->set_publication_id($publication_id);
         $visit->set_access_date(
-            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
+            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
         $visit->set_time(
-            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_LEAVE_DATE] -
-                 $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Tracker\Visit :: PROPERTY_ENTER_DATE]);
-        
+            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LEAVE_DATE] -
+                 $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
+
         if (! $visit->save())
         {
             return false;
         }
-        
+
         unset($visit);
         DataClassCache :: reset();
-        
+
         return true;
     }
 }
