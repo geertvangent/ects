@@ -16,9 +16,4 @@ abstract class Manager extends Application
     const PARAM_ENTITY_ID = 'entity_id';
     const PARAM_START_DATE = 'start_date';
     const PARAM_END_DATE = 'end_date';
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
 }

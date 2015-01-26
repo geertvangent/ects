@@ -26,9 +26,4 @@ abstract class Manager extends Application
 
         parent :: __construct($user, $application);
     }
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
 }

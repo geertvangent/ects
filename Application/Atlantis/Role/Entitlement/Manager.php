@@ -15,11 +15,6 @@ abstract class Manager extends Application
     const PARAM_ENTITLEMENT_ID = 'entitlement_id';
     const DEFAULT_ACTION = self :: ACTION_LIST;
 
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
-
     /**
      * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
      * $name

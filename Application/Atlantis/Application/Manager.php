@@ -15,9 +15,4 @@ abstract class Manager extends \Chamilo\Libraries\Architecture\Application\Appli
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     const PARAM_APPLICATION_ID = 'application_id';
     const PARAM_RIGHT_ID = 'right_id';
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
 }

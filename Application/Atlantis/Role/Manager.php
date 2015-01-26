@@ -16,9 +16,4 @@ abstract class Manager extends Application
     const ACTION_ENTITY = 'entity';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     const PARAM_ROLE_ID = 'role_id';
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
 }

@@ -27,11 +27,6 @@ abstract class Manager extends Application
         SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
     }
 
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
-
     public static function launch($application)
     {
         parent :: launch(null, $application);

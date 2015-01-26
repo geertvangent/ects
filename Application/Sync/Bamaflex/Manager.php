@@ -20,9 +20,4 @@ abstract class Manager extends Application
         ini_set("max_execution_time", "18000");
         parent :: __construct($user, $application);
     }
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
 }

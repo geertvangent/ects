@@ -13,9 +13,4 @@ abstract class Manager extends Application
     const ACTION_CREATE = 'creator';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     const PARAM_CONTEXT_ID = 'context_id';
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
 }

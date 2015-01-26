@@ -17,9 +17,4 @@ abstract class Manager extends Application
     const ACTION_CREATE_INSTANCE = 'creator';
     const ACTION_MOVE_INSTANCE = 'mover';
     const DEFAULT_ACTION = self :: ACTION_BROWSE_INSTANCES;
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
 }
