@@ -2,7 +2,6 @@
 namespace Chamilo\Application\Discovery\Module\Person\Implementation\Chamilo\Ajax;
 
 use Chamilo\Libraries\Architecture\AjaxManager;
-use Chamilo\Libraries\Architecture\JsonAjaxResult;
 
 /**
  *

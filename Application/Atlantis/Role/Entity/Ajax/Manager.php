@@ -2,7 +2,6 @@
 namespace Ehb\Application\Atlantis\Role\Entity\Ajax;
 
 use Chamilo\Libraries\Architecture\AjaxManager;
-use Chamilo\Libraries\Architecture\JsonAjaxResult;
 
 /**
  *
