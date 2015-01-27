@@ -3,8 +3,8 @@
 	<package>
 		<name>Menu</name>
 		<code>menu</code>
-		<context>application\discovery\integration\core\menu</context>
-		<section />
+		<context>Ehb\Application\Discovery\Integration\Core\Menu</context>
+		<type>Ehb\Application\Discovery\Integration</type>
 		<category />
 		<authors></authors>
 		<version>5.0.0</version>
@@ -25,11 +25,11 @@
 		<pre-depends>
 			<dependencies operator="1">
 				<dependency type="registration">
-					<id>application\calendar</id>
+					<id>Ehb\Application\Discovery</id>
 					<version operator="4">5.0.0</version>
 				</dependency>
 				<dependency type="registration">
-					<id>core\menu</id>
+					<id>Chamilo\Core\Menu</id>
 					<version operator="4">5.0.0</version>
 				</dependency>
 			</dependencies>

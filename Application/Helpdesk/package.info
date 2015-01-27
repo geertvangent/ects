@@ -3,7 +3,7 @@
 	<package>
 		<name>Helpdesk</name>
 		<code>Helpdesk</code>
-		<context>Ehb\Application\EhbHelpdesk</context>
+		<context>Ehb\Application\Helpdesk</context>
 		<type>Chamilo\Application</type>
 		<category>communication</category>
 		<authors>
@@ -31,7 +31,7 @@
 		</description>
 		<pre-depends>
 			<dependency type="registration">
-				<id>Chamilo\Common\Libraries</id>
+				<id>Chamilo\Configuration</id>
 				<version operator="4">4.0.0</version>
 			</dependency>
 		</pre-depends>
