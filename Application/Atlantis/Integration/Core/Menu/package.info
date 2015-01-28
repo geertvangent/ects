@@ -3,7 +3,7 @@
 	<package>
 		<name>Menu</name>
 		<code>menu</code>
-		<context>Ehb\Application\Atlantis\Integration\Core\Menu</context>
+		<context>Ehb\Application\Atlantis\Integration\Chamilo\Core\Menu</context>
 		<type>Ehb\Application\Atlantis\Integration</type>
 		<category />
 		<authors></authors>

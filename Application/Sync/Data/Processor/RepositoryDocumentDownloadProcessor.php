@@ -53,7 +53,7 @@ class RepositoryDocumentDownloadProcessor
      */
     public function run()
     {
-        $this->dm = \Chamilo\Core\User\Integration\Core\Tracking\Storage\DataManager :: get_instance();
+        $this->dm = \Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataManager :: get_instance();
 
         try
         {
@@ -128,8 +128,8 @@ class RepositoryDocumentDownloadProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_USER_ID];
 
         $query = array();
 
@@ -151,7 +151,7 @@ class RepositoryDocumentDownloadProcessor
         $visit->set_user_id($user_id);
         $visit->set_document_id($document_id);
         $visit->set_access_date(
-            $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
+            $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
 
         if (! $visit->save())
         {

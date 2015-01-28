@@ -3,7 +3,7 @@
 	<package>
 		<name>Menu</name>
 		<code>menu</code>
-		<context>Ehb\Application\Discovery\Integration\Core\Menu</context>
+		<context>Ehb\Application\Discovery\Integration\Chamilo\Core\Menu</context>
 		<type>Ehb\Application\Discovery\Integration</type>
 		<category />
 		<authors></authors>
