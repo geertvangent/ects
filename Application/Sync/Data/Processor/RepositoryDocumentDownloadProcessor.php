@@ -126,8 +126,8 @@ class RepositoryDocumentDownloadProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_USER_ID];
 
         $query = array();
 
