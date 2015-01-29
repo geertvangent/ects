@@ -1,4 +1,5 @@
 TypeName = "Helpdesk"
+TypeCategory = "Applications"
 CreatorComponent = "Submit a question"
 General = "General"
 Requestor = "Requestor"

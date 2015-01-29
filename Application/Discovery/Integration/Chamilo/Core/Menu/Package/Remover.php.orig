@@ -1,0 +1,10 @@
+<?php
+<<<<<<< local
+namespace Ehb\Application\Discovery\Integration\Core\Menu\Package;
+=======
+namespace Chamilo\Application\Discovery\Integration\Chamilo\Core\Menu\Package;
+>>>>>>> other
+
+class Remover extends \Chamilo\Configuration\Package\Action\Remover
+{
+}

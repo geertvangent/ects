@@ -6,6 +6,6 @@ namespace Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Test\So
  * 
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\CheckSourceCodeTest
+class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\Test\Source\CheckSourceCodeTest
 {
 }

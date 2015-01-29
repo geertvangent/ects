@@ -6,6 +6,6 @@ namespace Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Test\Sourc
  * 
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\CheckSourceCodeTest
+class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\Test\Source\CheckSourceCodeTest
 {
 }

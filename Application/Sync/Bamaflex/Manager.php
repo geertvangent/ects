@@ -3,7 +3,7 @@ namespace Ehb\Application\Sync\Bamaflex;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const ACTION_BROWSE = 'browser';
     const ACTION_ALL_USERS = 'all_users';
@@ -19,15 +19,5 @@ class Manager extends Application
         ini_set("memory_limit", "-1");
         ini_set("max_execution_time", "18000");
         parent :: __construct($user, $application);
-    }
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
-
-    public function get_default_action()
-    {
-        return self :: DEFAULT_ACTION;
     }
 }

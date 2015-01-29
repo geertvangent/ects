@@ -14,6 +14,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Application\Discovery\Instance\DataClass\Instance;
 
 /**
  *
@@ -171,7 +172,8 @@ class Module
     }
 
     /**
-     * Far from ideal and not really generic (because of the user) . .. but it'll have to do for now
+     * Far from ideal and not really generic (because of the user) .
+     * .. but it'll have to do for now
      *
      * @param $type string
      * @param $user user\User

@@ -51,7 +51,7 @@ class RepositoryExporterProcessor
      */
     public function run()
     {
-        $this->dm = \Chamilo\Core\User\Integration\Core\Tracking\Storage\DataManager :: get_instance();
+        $this->dm = \Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataManager :: get_instance();
 
         try
         {
@@ -126,8 +126,8 @@ class RepositoryExporterProcessor
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_USER_ID];
+        $location = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_USER_ID];
 
         $query = array();
 
@@ -145,7 +145,7 @@ class RepositoryExporterProcessor
             $visit->set_content_object_id($content_object_id);
             $visit->set_type($type);
             $visit->set_access_date(
-                $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
+                $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
 
             if (! $visit->save())
             {
@@ -160,7 +160,7 @@ class RepositoryExporterProcessor
             $visit->set_category_id($category_id);
             $visit->set_type($type);
             $visit->set_access_date(
-                $visit_tracker[\Chamilo\Core\User\Integration\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
+                $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
 
             if (! $visit->save())
             {

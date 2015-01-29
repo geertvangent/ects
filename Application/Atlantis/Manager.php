@@ -7,7 +7,7 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'atlantis';
     const ACTION_CONTEXT = 'context';
@@ -22,12 +22,12 @@ class Manager extends Application
     public function __construct($user = null, $application = null)
     {
         parent :: __construct($user, $application);
-        
+
         if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }
-        
+
         Theme :: getInstance()->setTheme(PlatformSetting :: get('theme', __NAMESPACE__));
     }
 
@@ -40,17 +40,6 @@ class Manager extends Application
     public function get_application_name()
     {
         return self :: APPLICATION_NAME;
-    }
-
-    /**
-     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
-     * $name
-     * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
-     * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
-     */
-    public function get_default_action()
-    {
-        return self :: DEFAULT_ACTION;
     }
 
     function display_header()

@@ -6,7 +6,7 @@ namespace Ehb\Application\Apple\Test\Source;
  * 
  * @author Sven Vanpoucke - Hogeschool Gent
  */
-class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\CheckSourceCodeTest
+class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\Test\Source\CheckSourceCodeTest
 {
-    use Chamilo\TestApplication;
+    use \Chamilo\Libraries\Architecture\Test\TestApplication;
 }

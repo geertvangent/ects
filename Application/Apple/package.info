@@ -31,8 +31,8 @@
 		</description>
 		<pre-depends>
 			<dependency type="registration">
-				<id>Chamilo\Common\Libraries</id>
-				<version operator="4">4.0.0</version>
+				<id>Chamilo\Configuration</id>
+				<version operator="4">5.0.0</version>
 			</dependency>
 		</pre-depends>
 	</package>

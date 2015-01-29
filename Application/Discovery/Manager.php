@@ -10,7 +10,7 @@ use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
  * @package application.discovery
  * @author Hans De Bisschop
  */
-class Manager extends Application
+abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'discovery';
     const ACTION_VIEW = 'viewer';
@@ -30,7 +30,7 @@ class Manager extends Application
 
     /**
      * Constructor
-     * 
+     *
      * @param $user User The current user
      */
     public function __construct($user = null, $application = null)
@@ -42,16 +42,5 @@ class Manager extends Application
     public function get_application_name()
     {
         return self :: APPLICATION_NAME;
-    }
-
-    /**
-     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
-     * $name
-     * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
-     * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
-     */
-    public function get_default_action()
-    {
-        return self :: DEFAULT_ACTION;
     }
 }

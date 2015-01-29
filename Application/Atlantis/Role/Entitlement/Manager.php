@@ -3,7 +3,7 @@ namespace Ehb\Application\Atlantis\Role\Entitlement;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const PARAM_ACTION = 'entitlement_action';
     const ACTION_BROWSE = 'browser';
@@ -15,11 +15,6 @@ class Manager extends Application
     const PARAM_ENTITLEMENT_ID = 'entitlement_id';
     const DEFAULT_ACTION = self :: ACTION_LIST;
 
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
-
     /**
      * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
      * $name
@@ -29,10 +24,5 @@ class Manager extends Application
     public function get_application_name()
     {
         return self :: APPLICATION_NAME;
-    }
-
-    public function get_default_action()
-    {
-        return self :: DEFAULT_ACTION;
     }
 }

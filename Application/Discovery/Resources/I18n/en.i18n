@@ -4,6 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Discovery"
+TypeCategory = "Applications"
 Modules = "Modules"
 Information = "Information"
 Type = "Type"

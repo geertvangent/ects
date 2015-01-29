@@ -3,7 +3,7 @@ namespace Ehb\Application\Atlantis\Role\Entity;
 
 use Chamilo\Libraries\Architecture\Application\Application;
 
-class Manager extends Application
+abstract class Manager extends Application
 {
     const PARAM_ACTION = 'role_entity_action';
     const ACTION_BROWSE = 'browser';
@@ -16,20 +16,4 @@ class Manager extends Application
     const PARAM_ENTITY_ID = 'entity_id';
     const PARAM_START_DATE = 'start_date';
     const PARAM_END_DATE = 'end_date';
-
-    public static function get_action_parameter()
-    {
-        return self :: PARAM_ACTION;
-    }
-
-    /**
-     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
-     * $name
-     * = $class :: DEFAULT_ACTION DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: DEFAULT_ACTION in the
-     * context of this class - YourApplicationManager :: DEFAULT_ACTION in all other application classes
-     */
-    public function get_default_action()
-    {
-        return self :: DEFAULT_ACTION;
-    }
 }

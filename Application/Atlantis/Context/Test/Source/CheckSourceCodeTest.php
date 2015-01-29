@@ -11,5 +11,5 @@ namespace Ehb\Librairies\Architecture\TestApplication;
  */
 class CheckSourceCodeTest extends \Chamilo\Libraries\Architecture\Test\Source\CheckSourceCodeTest
 {
-    use Chamilo\TestApplication;
+    use \Chamilo\Libraries\Architecture\Test\TestApplication;
 }
