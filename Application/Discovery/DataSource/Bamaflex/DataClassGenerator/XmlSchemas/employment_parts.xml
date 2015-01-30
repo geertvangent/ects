@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<object name="employment_parts" table="v_discovery_employment_parts" namespace="application\discovery\module\employment\implementation\bamaflex"
-	author="Magali Gillard">
-</object>

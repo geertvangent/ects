@@ -100,7 +100,7 @@ class Module
                 new StaticConditionVariable(\Ehb\Application\Discovery\Instance\DataClass\Instance :: TYPE_DISABLED)));
         $condition = new AndCondition($conditions);
 
-        $module_instances = \Ehb\Application\Discovery\Instance\DataManager :: retrieves(
+        $module_instances = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieves(
             \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
             new DataClassRetrievesParameters($condition));
         while ($module_instance = $module_instances->next_result())

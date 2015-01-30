@@ -101,8 +101,8 @@ class Entitlement extends DataClass
     {
         if (! isset($this->right))
         {
-            $this->right = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+            $this->right = \Ehb\Application\Atlantis\Application\Right\Storage\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
                 (int) $this->get_right_id());
         }
         return $this->right;

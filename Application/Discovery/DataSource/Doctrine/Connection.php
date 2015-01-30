@@ -29,32 +29,32 @@ class Connection extends Connection
     {
         $classLoader = new ClassLoader('Doctrine', Path :: getInstance()->getPluginPath());
         $classLoader->register();
-        
-        $this->data_source_instance = \Ehb\Application\Discovery\DataSource\DataManager :: retrieve_by_id(
-            \Ehb\Application\Discovery\DataSource\DataClass\Instance :: class_name(), 
+
+        $this->data_source_instance = \Ehb\Application\Discovery\DataSource\Storage\DataManager :: retrieve_by_id(
+            \Ehb\Application\Discovery\DataSource\DataClass\Instance :: class_name(),
             (int) $data_source_instance_id);
-        
+
         $driver = $this->data_source_instance->get_setting('driver');
         $host = $this->data_source_instance->get_setting('host');
         $username = $this->data_source_instance->get_setting('username');
         $password = $this->data_source_instance->get_setting('password');
         $database = $this->data_source_instance->get_setting('database');
-        
+
         $data_source_name = DataSourceName :: factory('Doctrine', $driver, $username, $host, $database, $password);
-        
+
         $configuration = new \Doctrine\DBAL\Configuration();
         $connection_parameters = array(
-            'dbname' => $data_source_name->get_database(), 
-            'user' => $data_source_name->get_username(), 
-            'password' => $data_source_name->get_password(), 
-            'host' => $data_source_name->get_host(), 
+            'dbname' => $data_source_name->get_database(),
+            'user' => $data_source_name->get_username(),
+            'password' => $data_source_name->get_password(),
+            'host' => $data_source_name->get_host(),
             'driverClass' => $data_source_name->get_driver(true));
         $this->connection = DriverManager :: getConnection($connection_parameters, $configuration);
     }
 
     /**
      * Returns the instance of this class.
-     * 
+     *
      * @return Connection The instance.
      */
     public static function get_instance($data_source_instance_id)

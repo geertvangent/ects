@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Atlantis\Application\Right\Table;
+namespace Ehb\Application\Atlantis\Application\Right\Storage;
 
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
@@ -7,7 +7,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
     /**
      * Gets the type of DataManager to be instantiated
-     * 
+     *
      * @return string
      */
     public static function get_type()

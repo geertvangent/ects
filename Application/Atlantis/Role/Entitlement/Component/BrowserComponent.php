@@ -47,11 +47,11 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         {
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
-                    \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID),
+                    \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: PROPERTY_APPLICATION_ID),
                 new StaticConditionVariable($this->application_id));
-            $rights = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieves(
-                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+            $rights = \Ehb\Application\Atlantis\Application\Right\Storage\DataManager :: retrieves(
+                \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
                 $condition);
             $right_ids = array();
             while ($right = $rights->next_result())
@@ -116,8 +116,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
         if ($this->has_right_id() && $this->has_application_id())
         {
-            $right = \Ehb\Application\Atlantis\Application\Right\Table\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: class_name(),
+            $right = \Ehb\Application\Atlantis\Application\Right\Storage\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
                 (int) $this->right_id);
 
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $right->get_name()));

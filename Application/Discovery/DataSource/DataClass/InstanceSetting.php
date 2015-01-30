@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\DataSource\DataClass;
 
-use Ehb\Application\Discovery\DataSource\DataManager;
+use Ehb\Application\Discovery\DataSource\Storage\DataManager;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;

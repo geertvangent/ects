@@ -3,7 +3,7 @@ namespace Ehb\Application\Discovery\DataSource\Form;
 
 use Ehb\Application\Discovery\DataSource\DataClass\Instance;
 use Ehb\Application\Discovery\DataSource\DataClass\InstanceSetting;
-use Ehb\Application\Discovery\DataSource\DataManager;
+use Ehb\Application\Discovery\DataSource\Storage\DataManager;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Format\Tabs\DynamicFormTab;
@@ -28,7 +28,7 @@ class InstanceForm extends FormValidator
     public function __construct($form_type, $instance, $action)
     {
         parent :: __construct('instance', 'post', $action);
-        
+
         $this->instance = $instance;
         $this->configuration = $this->parse_settings();
         $this->form_type = $form_type;
@@ -40,7 +40,7 @@ class InstanceForm extends FormValidator
         {
             $this->build_creation_form();
         }
-        
+
         $this->setDefaults();
     }
 
@@ -48,25 +48,25 @@ class InstanceForm extends FormValidator
     {
         $instance = $this->instance;
         $configuration = $this->configuration;
-        
+
         $tabs_generator = new DynamicFormTabsRenderer($this->getAttribute('name'), $this);
         $tabs_generator->add_tab(
             new DynamicFormTab(
-                'general', 
-                'General', 
-                Theme :: getInstance()->getCommonImagePath() . 'place_tab_view.png', 
+                'general',
+                'General',
+                Theme :: getInstance()->getCommonImagePath() . 'place_tab_view.png',
                 'build_general_form'));
-        
+
         if (count($configuration['settings']) > 0)
         {
             $tabs_generator->add_tab(
                 new DynamicFormTab(
-                    'settings', 
-                    'Settings', 
-                    Theme :: getInstance()->getCommonImagePath() . 'place_tab_settings.png', 
+                    'settings',
+                    'Settings',
+                    Theme :: getInstance()->getCommonImagePath() . 'place_tab_settings.png',
                     'build_settings_form'));
         }
-        
+
         $tabs_generator->render();
     }
 
@@ -74,17 +74,17 @@ class InstanceForm extends FormValidator
     {
         $this->addElement('hidden', Instance :: PROPERTY_TYPE, $this->instance->get_type());
         $this->addElement(
-            'text', 
-            Instance :: PROPERTY_NAME, 
-            Translation :: get('Name', null, $this->instance->get_type()), 
+            'text',
+            Instance :: PROPERTY_NAME,
+            Translation :: get('Name', null, $this->instance->get_type()),
             array("size" => "50"));
         $this->addRule(
-            Instance :: PROPERTY_NAME, 
-            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES), 
+            Instance :: PROPERTY_NAME,
+            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
             'required');
         $this->add_html_editor(
-            Instance :: PROPERTY_DESCRIPTION, 
-            Translation :: get('Description', null, $this->instance->get_type()), 
+            Instance :: PROPERTY_DESCRIPTION,
+            Translation :: get('Description', null, $this->instance->get_type()),
             true);
     }
 
@@ -92,31 +92,31 @@ class InstanceForm extends FormValidator
     {
         $instance = $this->instance;
         $configuration = $this->configuration;
-        
+
         $categories = count($configuration['settings']);
-        
+
         foreach ($configuration['settings'] as $category_name => $settings)
         {
             $has_settings = false;
-            
+
             foreach ($settings as $name => $setting)
             {
                 $label = Translation :: get(
-                    Utilities :: underscores_to_camelcase($name), 
-                    null, 
+                    Utilities :: underscores_to_camelcase($name),
+                    null,
                     $this->instance->get_type());
                 $name = self :: SETTINGS_PREFIX . '[' . $name . ']';
                 if (! $has_settings && $categories > 1)
                 {
                     $this->addElement(
-                        'category', 
+                        'category',
                         Translation :: get(
-                            Utilities :: underscores_to_camelcase($category_name), 
-                            null, 
+                            Utilities :: underscores_to_camelcase($category_name),
+                            null,
                             $this->instance->get_type()));
                     $has_settings = true;
                 }
-                
+
                 if ($setting['locked'] == 'true')
                 {
                     $this->addElement('static', $name, $label);
@@ -124,7 +124,7 @@ class InstanceForm extends FormValidator
                 elseif ($setting['field'] == 'text')
                 {
                     $this->add_textfield($name, $label, ($setting['required'] == 'true'));
-                    
+
                     $validations = $setting['validations'];
                     if ($validations)
                     {
@@ -136,11 +136,11 @@ class InstanceForm extends FormValidator
                                 {
                                     $validation['format'] = NULL;
                                 }
-                                
+
                                 $this->addRule(
-                                    $name, 
-                                    Translation :: get($validation['message'], null, $this->instance->get_type()), 
-                                    $validation['rule'], 
+                                    $name,
+                                    Translation :: get($validation['message'], null, $this->instance->get_type()),
+                                    $validation['rule'],
                                     $validation['format']);
                             }
                         }
@@ -167,7 +167,7 @@ class InstanceForm extends FormValidator
                     {
                         $options = $setting['options']['values'];
                     }
-                    
+
                     if ($setting['field'] == 'radio' || $setting['field'] == 'checkbox')
                     {
                         $group = array();
@@ -180,13 +180,13 @@ class InstanceForm extends FormValidator
                             else
                             {
                                 $group[] = & $this->createElement(
-                                    $setting['field'], 
-                                    $name, 
-                                    null, 
+                                    $setting['field'],
+                                    $name,
+                                    null,
                                     Translation :: get(
-                                        Utilities :: underscores_to_camelcase($option_name), 
-                                        null, 
-                                        $this->instance->get_type()), 
+                                        Utilities :: underscores_to_camelcase($option_name),
+                                        null,
+                                        $this->instance->get_type()),
                                     $option_value);
                             }
                         }
@@ -198,7 +198,7 @@ class InstanceForm extends FormValidator
                     }
                 }
             }
-            
+
             if ($has_settings && $categories > 1)
             {
                 $this->addElement('category');
@@ -209,38 +209,38 @@ class InstanceForm extends FormValidator
     public function build_editing_form()
     {
         $this->build_basic_form();
-        
+
         $this->addElement('hidden', Instance :: PROPERTY_ID);
-        
+
         $buttons[] = $this->createElement(
-            'style_submit_button', 
-            'submit', 
-            Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES), 
+            'style_submit_button',
+            'submit',
+            Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES),
             array('class' => 'positive update'));
         $buttons[] = $this->createElement(
-            'style_reset_button', 
-            'reset', 
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), 
+            'style_reset_button',
+            'reset',
+            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
             array('class' => 'normal empty'));
-        
+
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
 
     public function build_creation_form()
     {
         $this->build_basic_form();
-        
+
         $buttons[] = $this->createElement(
-            'style_submit_button', 
-            'submit', 
-            Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
+            'style_submit_button',
+            'submit',
+            Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
             array('class' => 'positive'));
         $buttons[] = $this->createElement(
-            'style_reset_button', 
-            'reset', 
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES), 
+            'style_reset_button',
+            'reset',
+            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
             array('class' => 'normal empty'));
-        
+
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
 
@@ -248,10 +248,10 @@ class InstanceForm extends FormValidator
     {
         $instance = $this->instance;
         $values = $this->exportValues();
-        
+
         $instance->set_name($values[Instance :: PROPERTY_NAME]);
         $instance->set_description($values[Instance :: PROPERTY_DESCRIPTION]);
-        
+
         if (! $instance->update())
         {
             return false;
@@ -260,25 +260,25 @@ class InstanceForm extends FormValidator
         {
             $settings = $values['settings'];
             $failures = 0;
-            
+
             foreach ($settings as $name => $value)
             {
                 $setting = DataManager :: retrieve_instance_setting_from_variable_name($name, $instance->get_id());
-                
+
                 $setting->set_value($value);
-                
+
                 if (! $setting->update())
                 {
                     $failures ++;
                 }
             }
-            
+
             if ($failures > 0)
             {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -286,10 +286,10 @@ class InstanceForm extends FormValidator
     {
         $instance = $this->instance;
         $values = $this->exportValues();
-        
+
         $instance->set_name($values[Instance :: PROPERTY_NAME]);
         $instance->set_description($values[Instance :: PROPERTY_DESCRIPTION]);
-        
+
         if (! $instance->create())
         {
             return false;
@@ -298,33 +298,32 @@ class InstanceForm extends FormValidator
         {
             $settings = $values['settings'];
             $failures = 0;
-            
+
             foreach ($settings as $name => $value)
             {
                 $setting = DataManager :: retrieve_instance_setting_from_variable_name($name, $instance->get_id());
-                
+
                 $setting->set_value($value);
-                
+
                 if (! $setting->update())
                 {
                     $failures ++;
                 }
             }
-            
+
             if ($failures > 0)
             {
                 return false;
             }
         }
-        
+
         return true;
     }
 
     /**
-     * Sets default values.
-     * Traditionally, you will want to extend this method so it sets default for your learning
+     * Sets default values. Traditionally, you will want to extend this method so it sets default for your learning
      * object type's additional properties.
-     * 
+     *
      * @param $defaults array Default values for this form's parameters.
      */
     public function setDefaults($defaults = array ())
@@ -339,31 +338,31 @@ class InstanceForm extends FormValidator
         {
             $defaults[Instance :: PROPERTY_NAME] = $instance->get_name();
         }
-        
+
         $defaults[Instance :: PROPERTY_TYPE] = $instance->get_type();
-        
+
         if (! $instance->get_description())
         {
             $defaults[Instance :: PROPERTY_DESCRIPTION] = Translation :: get(
-                'TypeDescription', 
-                null, 
+                'TypeDescription',
+                null,
                 $this->instance->get_type());
         }
         else
         {
             $defaults[Instance :: PROPERTY_DESCRIPTION] = $instance->get_description();
         }
-        
+
         if ($instance->is_identified())
         {
             $configuration = $this->configuration;
-            
+
             foreach ($configuration['settings'] as $category_name => $settings)
             {
                 foreach ($settings as $name => $setting)
                 {
                     $setting = DataManager :: retrieve_instance_setting_from_variable_name($name, $instance->get_id());
-                    
+
                     if ($setting instanceof InstanceSetting)
                     {
                         $defaults[self :: SETTINGS_PREFIX][$name] = $setting->get_value();
@@ -371,43 +370,43 @@ class InstanceForm extends FormValidator
                 }
             }
         }
-        
+
         parent :: setDefaults($defaults);
     }
 
     public function parse_settings()
     {
         $instance = $this->instance;
-        
+
         $file = ClassnameUtilities :: getInstance()->namespaceToFullPath($instance->get_type()) .
              '/php/settings/settings.xml';
-        
+
         $result = array();
-        
+
         if (file_exists($file))
         {
             $doc = new \DOMDocument();
             $doc->load($file);
             $object = $doc->getElementsByTagname('package')->item(0);
             $name = $object->getAttribute('name');
-            
+
             // Get categories
             $categories = $doc->getElementsByTagname('category');
             $settings = array();
-            
+
             foreach ($categories as $index => $category)
             {
                 $category_name = $category->getAttribute('name');
                 $category_properties = array();
-                
+
                 // Get settings in category
                 $properties = $category->getElementsByTagname('setting');
                 $attributes = array('field', 'default', 'locked');
-                
+
                 foreach ($properties as $index => $property)
                 {
                     $property_info = array();
-                    
+
                     foreach ($attributes as $index => $attribute)
                     {
                         if ($property->hasAttribute($attribute))
@@ -415,15 +414,15 @@ class InstanceForm extends FormValidator
                             $property_info[$attribute] = $property->getAttribute($attribute);
                         }
                     }
-                    
+
                     if ($property->hasChildNodes())
                     {
                         $property_options = $property->getElementsByTagname('options')->item(0);
-                        
+
                         if ($property_options)
                         {
                             $property_options_attributes = array('type', 'source');
-                            
+
                             foreach ($property_options_attributes as $index => $options_attribute)
                             {
                                 if ($property_options->hasAttribute($options_attribute))
@@ -432,7 +431,7 @@ class InstanceForm extends FormValidator
                                         $options_attribute);
                                 }
                             }
-                            
+
                             if ($property_options->getAttribute('type') == 'static' && $property_options->hasChildNodes())
                             {
                                 $options = $property_options->getElementsByTagname('option');
@@ -444,9 +443,9 @@ class InstanceForm extends FormValidator
                                 $property_info['options']['values'] = $options_info;
                             }
                         }
-                        
+
                         $property_validations = $property->getElementsByTagname('validations')->item(0);
-                        
+
                         if ($property_validations)
                         {
                             if ($property_validations->hasChildNodes())
@@ -456,8 +455,8 @@ class InstanceForm extends FormValidator
                                 foreach ($validations as $validation)
                                 {
                                     $validation_info[] = array(
-                                        'rule' => $validation->getAttribute('rule'), 
-                                        'message' => $validation->getAttribute('message'), 
+                                        'rule' => $validation->getAttribute('rule'),
+                                        'message' => $validation->getAttribute('message'),
                                         'format' => $validation->getAttribute('format'));
                                 }
                                 $property_info['validations'] = $validation_info;
@@ -466,14 +465,14 @@ class InstanceForm extends FormValidator
                     }
                     $category_properties[$property->getAttribute('name')] = $property_info;
                 }
-                
+
                 $settings[$category_name] = $category_properties;
             }
-            
+
             $result['name'] = $name;
             $result['settings'] = $settings;
         }
-        
+
         return $result;
     }
 

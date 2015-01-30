@@ -2,6 +2,7 @@
 namespace Ehb\Application\Discovery;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Ehb\Application\Discovery\Storage\DataManager;
 
 class RightsGroupEntityRight extends DataClass
 {
@@ -18,10 +19,10 @@ class RightsGroupEntityRight extends DataClass
     {
         return parent :: get_default_property_names(
             array(
-                self :: PROPERTY_RIGHT_ID, 
-                self :: PROPERTY_ENTITY_ID, 
-                self :: PROPERTY_ENTITY_TYPE, 
-                self :: PROPERTY_GROUP_ID, 
+                self :: PROPERTY_RIGHT_ID,
+                self :: PROPERTY_ENTITY_ID,
+                self :: PROPERTY_ENTITY_TYPE,
+                self :: PROPERTY_GROUP_ID,
                 self :: PROPERTY_MODULE_ID));
     }
 

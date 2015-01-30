@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\DataSource\DataClass;
 
-use Ehb\Application\Discovery\DataSource\DataManager;
+use Ehb\Application\Discovery\DataSource\Storage\DataManager;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -81,12 +81,12 @@ class Instance extends DataClass
         else
         {
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID), 
+                new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID),
                 new StaticConditionVariable($this->get_id()));
             $settings = DataManager :: retrieves(
-                InstanceSetting :: class_name(), 
+                InstanceSetting :: class_name(),
                 new DataClassRetrievesParameters($condition));
-            
+
             while ($setting = $settings->next_result())
             {
                 if (! $setting->delete())
@@ -95,7 +95,7 @@ class Instance extends DataClass
                 }
             }
         }
-        
+
         return true;
     }
 
@@ -112,10 +112,10 @@ class Instance extends DataClass
     public function has_settings()
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID), 
+            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID),
             new StaticConditionVariable($this->get_id()));
         $settings = DataManager :: count(InstanceSetting :: class_name(), new DataClassCountParameters($condition));
-        
+
         return $settings > 0;
     }
 

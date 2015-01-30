@@ -20,7 +20,7 @@ class CodeComponent extends Manager implements DelegateComponent
         $official_code = Request :: get(Manager :: PARAM_OFFICIAL_CODE);
 
         $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code($official_code);
-        $module_instance = \Ehb\Application\Discovery\Instance\DataManager :: retrieve_by_id(
+        $module_instance = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieve_by_id(
             \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
             (int) $module_id);
 

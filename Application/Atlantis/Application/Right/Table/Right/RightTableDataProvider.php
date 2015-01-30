@@ -4,8 +4,8 @@ namespace Ehb\Application\Atlantis\Application\Right\Table\Right;
 use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
-use Ehb\Application\Atlantis\Application\Right\Table\DataManager;
+use Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right;
+use Ehb\Application\Atlantis\Application\Right\Storage\DataManager;
 
 class RightTableDataProvider extends TableDataProvider
 {
