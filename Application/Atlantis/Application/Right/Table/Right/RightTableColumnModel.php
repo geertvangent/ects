@@ -4,7 +4,7 @@ namespace Ehb\Application\Atlantis\Application\Right\Table\Right;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
-use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
+use Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right;
 
 class RightTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

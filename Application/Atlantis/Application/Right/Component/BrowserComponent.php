@@ -18,7 +18,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Application\Right\Manager;
-use Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right;
+use Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right;
 use Ehb\Application\Atlantis\Application\Right\Table\Right\RightTable;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;
 
@@ -84,7 +84,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     public function add_breadcrumb()
     {
         $application_id = Request :: get(
-            \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID);
+            \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: PROPERTY_APPLICATION_ID);
         $application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve_by_id(
             \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
             (int) $application_id);
