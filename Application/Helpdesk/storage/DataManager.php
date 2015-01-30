@@ -7,11 +7,11 @@ namespace Ehb\Application\Helpdesk\Storage;
  */
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
-    const PREFIX = 'ehb_helpdesk_';
+    const PREFIX = 'helpdesk_';
 
     /**
      * Gets the type of DataManager to be instantiated
-     * 
+     *
      * @return string
      */
     public static function get_type()

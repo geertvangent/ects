@@ -7,7 +7,7 @@ namespace Ehb\Application\Sync;
  */
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
-    const PREFIX = 'ehb_sync_';
+    const PREFIX = 'sync_';
 
     /**
      * Gets the type of DataManager to be instantiated
