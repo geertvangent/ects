@@ -20,6 +20,7 @@ use Ehb\Application\Atlantis\Role\Entity\Manager;
 use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntityTracker;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 class CreatorComponent extends Manager
 {
@@ -28,21 +29,21 @@ class CreatorComponent extends Manager
     {
         SessionBreadcrumbs :: add(
             new Breadcrumb(
-                $this->get_url(), 
-                Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
-        
+                $this->get_url(),
+                Translation :: get(ClassnameUtilities::getInstance()->getClassnameFromNamespace(self :: class_name()))));
+
         if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
-        
+
         $form = new EntityForm($this, $this->get_url());
-        
+
         if ($form->validate())
         {
             $values = $form->exportValues();
             $failures = 0;
-            
+
             foreach ($values['entity'] as $entity_type => $entity_ids)
             {
                 foreach ($entity_ids as $entity_id)
@@ -54,42 +55,42 @@ class CreatorComponent extends Manager
                             $new_start_date = Utilities :: time_from_datepicker_without_timepicker(
                                 $values['start_date']);
                             $new_end_date = Utilities :: time_from_datepicker_without_timepicker($values['end_date']);
-                            
+
                             $conditions = array();
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
-                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
-                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ENTITY_TYPE), 
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ENTITY_TYPE),
                                 new StaticConditionVariable($entity_type));
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
-                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
-                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ENTITY_ID), 
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ENTITY_ID),
                                 new StaticConditionVariable($entity_id));
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
-                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
-                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_CONTEXT_ID), 
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_CONTEXT_ID),
                                 new StaticConditionVariable($context));
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
-                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
-                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ROLE_ID), 
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                    \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_ROLE_ID),
                                 new StaticConditionVariable($role));
                             $condition = new AndCondition($conditions);
-                            
+
                             $parameters = new DataClassRetrievesParameters(
-                                $condition, 
-                                null, 
-                                null, 
+                                $condition,
+                                null,
+                                null,
                                 array(
                                     new OrderBy(
                                         new PropertiesConditionVariable(
-                                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
+                                            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
                                             \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_START_DATE))));
-                            
+
                             $has_merged = $this->merge_entities($parameters, null, $new_start_date, $new_end_date);
-                            
+
                             if (! $has_merged)
                             {
                                 $entity = new RoleEntity();
@@ -99,7 +100,7 @@ class CreatorComponent extends Manager
                                 $entity->set_context_id($context);
                                 $entity->set_start_date($new_start_date);
                                 $entity->set_end_date($new_end_date);
-                                
+
                                 if (! $entity->create())
                                 {
                                     $failures ++;
@@ -113,11 +114,11 @@ class CreatorComponent extends Manager
                     }
                 }
             }
-            
+
             $count = (count($values['entity'][UserEntity :: ENTITY_TYPE]) + count(
                 $values['entity'][PlatformGroupEntity :: ENTITY_TYPE])) * count($values['role']) * count(
                 $values['context']) * count($values['start_date']) * count($values['end_date']);
-            
+
             if ($failures)
             {
                 if ($count == 1)
@@ -149,10 +150,10 @@ class CreatorComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('Entities'));
                 }
             }
-            
+
             $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
-                ($failures ? true : false), 
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
+                ($failures ? true : false),
                 array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
         }
         else
@@ -169,11 +170,11 @@ class CreatorComponent extends Manager
         {
             $parameters->set_condition(new AndCondition($parameters->get_condition(), $condition));
         }
-        
+
         $role_entities = \Ehb\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
-            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
+            \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
             $parameters);
-        
+
         while ($role_entity = $role_entities->next_result())
         {
             if ($role_entity->get_start_date() <= $start_date && $role_entity->get_end_date() >= $end_date)
@@ -193,16 +194,16 @@ class CreatorComponent extends Manager
                     $condition = new NotCondition(
                         new EqualityCondition(
                             new PropertyConditionVariable(
-                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
-                                RoleEntity :: PROPERTY_ID), 
+                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                RoleEntity :: PROPERTY_ID),
                             new StaticConditionVariable($role_entity->get_id())));
-                    
+
                     $was_merged = $this->merge_entities(
-                        $parameters, 
-                        $condition, 
-                        $role_entity->get_start_date(), 
+                        $parameters,
+                        $condition,
+                        $role_entity->get_start_date(),
                         $role_entity->get_end_date());
-                    
+
                     if ($was_merged)
                     {
                         if ($role_entity->delete())
@@ -210,7 +211,7 @@ class CreatorComponent extends Manager
                             $role_entity->track($this->get_user_id(), RoleEntityTracker :: ACTION_TYPE_MERGE);
                         }
                     }
-                    
+
                     return true || $was_merged;
                 }
             }
@@ -227,16 +228,16 @@ class CreatorComponent extends Manager
                     $condition = new NotCondition(
                         new EqualityCondition(
                             new PropertyConditionVariable(
-                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
-                                RoleEntity :: PROPERTY_ID), 
+                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                RoleEntity :: PROPERTY_ID),
                             new StaticConditionVariable($role_entity->get_id())));
-                    
+
                     $was_merged = $this->merge_entities(
-                        $parameters, 
-                        $condition, 
-                        $role_entity->get_start_date(), 
+                        $parameters,
+                        $condition,
+                        $role_entity->get_start_date(),
                         $role_entity->get_end_date());
-                    
+
                     if ($was_merged)
                     {
                         if ($role_entity->delete())
@@ -244,7 +245,7 @@ class CreatorComponent extends Manager
                             $role_entity->track($this->get_user_id(), RoleEntityTracker :: ACTION_TYPE_MERGE);
                         }
                     }
-                    
+
                     return true || $was_merged;
                 }
             }
@@ -261,16 +262,16 @@ class CreatorComponent extends Manager
                     $condition = new NotCondition(
                         new EqualityCondition(
                             new PropertyConditionVariable(
-                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(), 
-                                RoleEntity :: PROPERTY_ID), 
+                                \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
+                                RoleEntity :: PROPERTY_ID),
                             new StaticConditionVariable($role_entity->get_id())));
-                    
+
                     $was_merged = $this->merge_entities(
-                        $parameters, 
-                        $condition, 
-                        $role_entity->get_start_date(), 
+                        $parameters,
+                        $condition,
+                        $role_entity->get_start_date(),
                         $role_entity->get_end_date());
-                    
+
                     if ($was_merged)
                     {
                         if ($role_entity->delete())
@@ -278,7 +279,7 @@ class CreatorComponent extends Manager
                             $role_entity->track($this->get_user_id(), RoleEntityTracker :: ACTION_TYPE_MERGE);
                         }
                     }
-                    
+
                     return true || $was_merged;
                 }
             }

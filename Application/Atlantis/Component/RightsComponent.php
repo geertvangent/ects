@@ -2,15 +2,17 @@
 namespace Ehb\Application\Atlantis\Component;
 
 use Ehb\Application\Atlantis\Manager;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 
 class RightsComponent extends Manager
 {
 
     public function run()
     {
-        \Chamilo\Libraries\Architecture\Application\Application :: launch(
-            \Ehb\Application\Atlantis\Rights\Manager :: context(), 
-            $this->get_user(), 
+        $factory = new ApplicationFactory(
+            \Ehb\Application\Atlantis\Rights\Manager :: context(),
+            $this->get_user(),
             $this);
+        $factory->run();
     }
 }

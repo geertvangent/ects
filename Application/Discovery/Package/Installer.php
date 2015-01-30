@@ -8,12 +8,4 @@ namespace Ehb\Application\Discovery\Package;
  */
 class Installer extends \Chamilo\Configuration\Package\Installer
 {
-
-    public static function get_additional_packages()
-    {
-        $installers = array();
-        $installers[] = 'application\discovery\instance';
-        
-        return $installers;
-    }
 }

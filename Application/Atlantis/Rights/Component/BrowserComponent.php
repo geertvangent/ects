@@ -9,6 +9,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Rights\Manager;
 use Ehb\Application\Atlantis\Rights\Table\Entity\EntityTable;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 class BrowserComponent extends Manager implements TableSupport
 {
@@ -19,19 +20,19 @@ class BrowserComponent extends Manager implements TableSupport
         {
             throw new NotAllowedException();
         }
-        
+
         SessionBreadcrumbs :: add(
             new Breadcrumb(
-                $this->get_url(), 
-                Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
-        
+                $this->get_url(),
+                Translation :: get(ClassnameUtilities :: getInstance()->getClassnameFromNamespace(self :: class_name()))));
+
         $table = new EntityTable($this);
-        
+
         $this->display_header();
         echo $this->get_tabs(self :: ACTION_BROWSE, $table->as_html())->render();
         $this->display_footer();
     }
-    
+
     /*
      * (non-PHPdoc) @see common\libraries.NewObjectTableSupport::get_object_table_condition()
      */

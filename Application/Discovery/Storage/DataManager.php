@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Discovery;
+namespace Ehb\Application\Discovery\Storage;
 
 /**
  *
@@ -12,7 +12,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
     /**
      * Gets the type of DataManager to be instantiated
-     * 
+     *
      * @return string
      */
     public static function get_type()

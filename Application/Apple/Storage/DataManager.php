@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Apple;
+namespace Ehb\Application\Apple\Storage;
 
 /**
  *

@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Discovery\DataSource;
+namespace Ehb\Application\Discovery\DataSource\Storage;
 
 use Ehb\Application\Discovery\DataSource\DataClass\InstanceSetting;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
@@ -14,7 +14,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
     /**
      * Gets the type of DataManager to be instantiated
-     * 
+     *
      * @return string
      */
     public static function get_type()
@@ -26,13 +26,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID), 
+            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID),
             new StaticConditionVariable($instance_id));
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_VARIABLE), 
+            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_VARIABLE),
             new StaticConditionVariable($variable));
         $condition = new AndCondition($conditions);
-        
+
         return self :: retrieve(InstanceSetting :: class_name(), new DataClassRetrieveParameters($condition));
     }
 }

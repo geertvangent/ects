@@ -17,20 +17,20 @@ class DeleterComponent extends Manager
         $ids = Request :: get(self :: PARAM_ROLE_ENTITY_ID);
         $context_id = Request :: get(\Ehb\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID);
         $role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
-        
+
         $failures = 0;
-        
+
         if (! empty($ids))
         {
             if (! is_array($ids))
             {
                 $ids = array($ids);
             }
-            
+
             foreach ($ids as $id)
             {
-                $role_entity = DataManager :: retrieve(RoleEntity :: class_name(), (int) $id);
-                
+                $role_entity = DataManager :: retrieve_by_id(RoleEntity :: class_name(), (int) $id);
+
                 if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
                 {
                     $failures ++;
@@ -47,7 +47,7 @@ class DeleterComponent extends Manager
                     }
                 }
             }
-            
+
             if ($failures)
             {
                 if (count($ids) == 1)
@@ -79,13 +79,13 @@ class DeleterComponent extends Manager
                     $parameter = array('OBJECTS' => Translation :: get('RoleEntities'));
                 }
             }
-            
+
             $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES), 
-                ($failures ? true : false), 
+                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
+                ($failures ? true : false),
                 array(
-                    Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE, 
-                    \Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $role_id, 
+                    Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE,
+                    \Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $role_id,
                     \Ehb\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID => $context_id));
         }
         else
@@ -93,8 +93,8 @@ class DeleterComponent extends Manager
             $this->display_error_page(
                 htmlentities(
                     Translation :: get(
-                        'NoObjectSelected', 
-                        array('OBJECT' => Translation :: get('Right')), 
+                        'NoObjectSelected',
+                        array('OBJECT' => Translation :: get('Right')),
                         Utilities :: COMMON_LIBRARIES)));
         }
     }

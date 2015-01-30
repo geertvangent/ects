@@ -4,7 +4,7 @@ namespace Ehb\Application\Atlantis\Rights\Component;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Ehb\Application\Atlantis\Rights\Form\RightsGroupForm;
 use Ehb\Application\Atlantis\Rights\Manager;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;
@@ -18,20 +18,20 @@ class CreatorComponent extends Manager
         {
             throw new NotAllowedException();
         }
-        
+
         SessionBreadcrumbs :: add(
             new Breadcrumb(
-                $this->get_url(), 
-                Translation :: get(Utilities :: get_classname_from_namespace(self :: class_name()))));
-        
+                $this->get_url(),
+                Translation :: get(ClassnameUtilities :: getInstance()->getClassnameFromNamespace(self :: class_name()))));
+
         $form = new RightsGroupForm($this, $this->get_url());
-        
+
         if ($form->validate())
         {
             $success = $form->set_rights();
-            
+
             $this->redirect(
-                Translation :: get($success ? 'AccessRightsSaved' : 'AccessRightsNotSaved'), 
+                Translation :: get($success ? 'AccessRightsSaved' : 'AccessRightsNotSaved'),
                 ($success ? false : true));
         }
         else

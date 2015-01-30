@@ -7,7 +7,7 @@ use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;
 
 abstract class Manager extends Application
@@ -34,7 +34,9 @@ abstract class Manager extends Application
 
     public function get_tabs($current_tab, $content)
     {
-        $tabs = new DynamicVisualTabsRenderer(Utilities :: get_classname_from_namespace(__NAMESPACE__, true), $content);
+        $tabs = new DynamicVisualTabsRenderer(
+            ClassnameUtilities :: getInstance()->getClassnameFromNamespace(__NAMESPACE__, true),
+            $content);
 
         $tabs->add_tab(
             new DynamicVisualTab(

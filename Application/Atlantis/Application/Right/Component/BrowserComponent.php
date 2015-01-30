@@ -30,23 +30,23 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     public function get_object_table_condition($object_table_class_name)
     {
         $query = $this->action_bar->get_query();
-        
+
         $conditions = array();
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_NAME), 
+                new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_NAME),
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_DESCRIPTION), 
+                new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_DESCRIPTION),
                 '*' . $query . '*');
-            
+
             $conditions[] = new OrCondition($search_conditions);
         }
-        
+
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_APPLICATION_ID), 
+            new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_APPLICATION_ID),
             new StaticConditionVariable(
                 $this->get_parameter(\Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID)));
         return new AndCondition($conditions);
@@ -72,8 +72,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
             {
                 $this->action_bar->add_common_action(
                     new ToolbarItem(
-                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                        Theme :: getInstance()->getCommonImagePath() . 'action_create.png', 
+                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
+                        Theme :: getInstance()->getCommonImagePath() . 'action_create.png',
                         $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());
@@ -85,13 +85,13 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     {
         $application_id = Request :: get(
             \Ehb\Application\Atlantis\Application\Right\Table\DataClass\Right :: PROPERTY_APPLICATION_ID);
-        $application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve(
-            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
+        $application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve_by_id(
+            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
             (int) $application_id);
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
         SessionBreadcrumbs :: add(
             new Breadcrumb(
-                $this->get_url(), 
+                $this->get_url(),
                 Translation :: get('AvailableRights', array('TYPE' => $application->get_name()))));
     }
     /*
