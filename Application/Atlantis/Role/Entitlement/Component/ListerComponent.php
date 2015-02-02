@@ -29,7 +29,7 @@ class ListerComponent extends Manager implements DelegateComponent
 
     public function run()
     {
-        $renderer_name = Utilities :: get_classname_from_object($this, true);
+        $renderer_name = ClassnameUtilities::getInstance()->getClassnameFromObject($this, true);
         $this->role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
         $this->application_id = Request :: get(\Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID);
         $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
@@ -46,6 +46,7 @@ class ListerComponent extends Manager implements DelegateComponent
         // for each application, a list of rights
         $applications = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieves(
             \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name());
+        var_dump($applications);
         if (! $this->application_id)
         {
             $this->application_id = $applications->next_result()->get_id();

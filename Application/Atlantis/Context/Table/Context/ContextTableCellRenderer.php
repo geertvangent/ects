@@ -15,19 +15,19 @@ class ContextTableCellRenderer extends DataClassTableCellRenderer implements Tab
     public function get_actions($object)
     {
         $toolbar = new Toolbar();
-        
+
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('TypeName', null, '\application\atlantis\role\entity'), 
-                Theme :: getInstance()->getImagePath('\application\atlantis\role\entity') . 'logo/16.png', 
+                Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role\Entity'),
+                Theme :: getInstance()->getImagePath('\Ehb\Application\Atlantis\Role\Entity') . 'logo/16.png',
                 $this->get_component()->get_url(
                     array(
-                        \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE, 
-                        \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITY, 
-                        \Ehb\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE, 
-                        Manager :: PARAM_CONTEXT_ID => $object->get_id())), 
+                        \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,
+                        \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
+                        \Ehb\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE,
+                        Manager :: PARAM_CONTEXT_ID => $object->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
-        
+
         return $toolbar->as_html();
     }
 }

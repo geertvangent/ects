@@ -16,17 +16,19 @@ class EntitlementTableColumnModel extends DataClassTableColumnModel implements T
     {
         if (! $this->get_component()->has_role_id())
         {
-            $this->add_column(new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\role')));
+            $this->add_column(
+                new StaticTableColumn(Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role')));
         }
         if (! $this->get_component()->has_application_id())
         {
             $this->add_column(
-                new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\application')));
+                new StaticTableColumn(Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Application')));
         }
         if (! $this->get_component()->has_right_id())
         {
             $this->add_column(
-                new StaticTableColumn(Translation :: get('TypeName', null, '\application\atlantis\application\right')));
+                new StaticTableColumn(
+                    Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Application\Right')));
         }
     }
 }

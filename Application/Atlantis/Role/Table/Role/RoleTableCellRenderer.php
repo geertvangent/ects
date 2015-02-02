@@ -21,56 +21,56 @@ class RoleTableCellRenderer extends DataClassTableCellRenderer implements TableC
         {
             $toolbar->add_item(
                 new ToolbarItem(
-                    Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES), 
-                    Theme :: getInstance()->getCommonImagePath() . 'action_edit.png', 
+                    Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES),
+                    Theme :: getInstance()->getCommonImagePath() . 'action_edit.png',
                     $this->get_component()->get_url(
                         array(
-                            Manager :: PARAM_ACTION => Manager :: ACTION_EDIT, 
-                            Manager :: PARAM_ROLE_ID => $role->get_id())), 
+                            Manager :: PARAM_ACTION => Manager :: ACTION_EDIT,
+                            Manager :: PARAM_ROLE_ID => $role->get_id())),
                     ToolbarItem :: DISPLAY_ICON));
             $toolbar->add_item(
                 new ToolbarItem(
-                    Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES), 
-                    Theme :: getInstance()->getCommonImagePath() . 'action_delete.png', 
+                    Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
+                    Theme :: getInstance()->getCommonImagePath() . 'action_delete.png',
                     $this->get_component()->get_url(
                         array(
-                            Manager :: PARAM_ACTION => Manager :: ACTION_DELETE, 
-                            Manager :: PARAM_ROLE_ID => $role->get_id())), 
+                            Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
+                            Manager :: PARAM_ROLE_ID => $role->get_id())),
                     ToolbarItem :: DISPLAY_ICON));
             $toolbar->add_item(
                 new ToolbarItem(
-                    Translation :: get('List'), 
-                    Theme :: getInstance()->getImagePath() . 'list.png', 
+                    Translation :: get('List'),
+                    Theme :: getInstance()->getImagePath('Ehb\Application\Atlantis\Role') . 'list.png',
                     $this->get_component()->get_url(
                         array(
-                            Application :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE, 
-                            \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITLEMENT, 
-                            Manager :: PARAM_ROLE_ID => $role->get_id())), 
+                            Application :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,
+                            \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITLEMENT,
+                            Manager :: PARAM_ROLE_ID => $role->get_id())),
                     ToolbarItem :: DISPLAY_ICON));
         }
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('RoleEntity'), 
-                Theme :: getInstance()->getImagePath(__NAMESPACE__ . '\entity') . 'logo/16.png', 
+                Translation :: get('RoleEntity'),
+                Theme :: getInstance()->getImagePath('Ehb\Application\Atlantis\Role\Entity') . 'Logo/16.png',
                 $this->get_component()->get_url(
                     array(
-                        Application :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE, 
-                        \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITY, 
-                        \Ehb\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE, 
-                        Manager :: PARAM_ROLE_ID => $role->get_id())), 
+                        Application :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,
+                        \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
+                        \Ehb\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE,
+                        Manager :: PARAM_ROLE_ID => $role->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('TypeName', null, '\application\atlantis\role\entitlement'), 
-                Theme :: getInstance()->getImagePath('\application\atlantis\role\entitlement') . 'logo/16.png', 
+                Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role\Entitlement'),
+                Theme :: getInstance()->getImagePath('\Ehb\Application\Atlantis\Role\Entitlement') . 'Logo/16.png',
                 $this->get_component()->get_url(
                     array(
-                        \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE, 
-                        \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITLEMENT, 
-                        \Ehb\Application\Atlantis\Role\Entitlement\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entitlement\Manager :: ACTION_BROWSE, 
-                        Manager :: PARAM_ROLE_ID => $role->get_id())), 
+                        \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,
+                        \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITLEMENT,
+                        \Ehb\Application\Atlantis\Role\Entitlement\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entitlement\Manager :: ACTION_BROWSE,
+                        Manager :: PARAM_ROLE_ID => $role->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
-        
+
         return $toolbar->as_html();
     }
 }
