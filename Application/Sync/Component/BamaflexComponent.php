@@ -4,6 +4,7 @@ namespace Ehb\Application\Sync\Component;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Ehb\Application\Sync\Manager;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 
 class BamaflexComponent extends Manager implements DelegateComponent
 {
@@ -17,10 +18,8 @@ class BamaflexComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-        
-        \Chamilo\Libraries\Architecture\Application\Application :: launch(
-            \Ehb\Application\Sync\Bamaflex\Manager :: context(), 
-            $this->get_user(), 
-            $this);
+
+        $factory = new ApplicationFactory(\Ehb\Application\Sync\Bamaflex\Manager :: context(), $this->get_user(), $this);
+        $factory->run();
     }
 }

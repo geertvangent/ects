@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Sync\Cas\Synchronization;
 
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 abstract class Synchronization
 {
@@ -13,7 +13,8 @@ abstract class Synchronization
      */
     public static function factory($type)
     {
-        $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'Synchronization';
+        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+             'Synchronization';
         if (class_exists($class))
         {
             return new $class();

@@ -2,7 +2,7 @@
 namespace Ehb\Application\Sync\Bamaflex\Synchronization;
 
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexDataConnector;
 use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexResultSet;
 
@@ -41,7 +41,7 @@ abstract class Synchronization
     public function get_academic_year_end()
     {
         $year_parts = explode('-', $this->get_academic_year());
-        
+
         return '20' . $year_parts[1] . '-09-30 23:59:59.999';
     }
 
@@ -52,7 +52,8 @@ abstract class Synchronization
      */
     public static function factory($type)
     {
-        $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'Synchronization';
+        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+             'Synchronization';
         if (class_exists($class))
         {
             return new $class();

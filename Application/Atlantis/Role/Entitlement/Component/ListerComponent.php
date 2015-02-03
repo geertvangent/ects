@@ -46,7 +46,7 @@ class ListerComponent extends Manager implements DelegateComponent
         // for each application, a list of rights
         $applications = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieves(
             \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name());
-        var_dump($applications);
+
         if (! $this->application_id)
         {
             $this->application_id = $applications->next_result()->get_id();

@@ -2,7 +2,7 @@
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type;
 
 use Chamilo\Application\Weblcms\Storage\DataClass\CourseCategory;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 
 /**
@@ -50,7 +50,7 @@ class CourseCategorySynchronization extends Synchronization
     {
         $this->synchronize();
         $children = $this->get_children();
-        
+
         foreach ($children as $child)
         {
             $child->run();
@@ -66,7 +66,8 @@ class CourseCategorySynchronization extends Synchronization
      */
     public static function factory($type, CourseCategorySynchronization $synchronization, $parameters = array())
     {
-        $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'CourseCategorySynchronization';
+        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+             'CourseCategorySynchronization';
         if (class_exists($class))
         {
             return new $class($synchronization, $parameters);
@@ -152,14 +153,14 @@ class CourseCategorySynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
-            
+
             $this->current_group = new CourseCategory();
             $this->current_group->set_name($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
-            
+
             $this->current_group->create();
-            
+
             self :: log('added', $this->current_group->get_name());
             flush();
         }
@@ -172,7 +173,7 @@ class CourseCategorySynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-        
+
         return $this->current_group;
     }
 

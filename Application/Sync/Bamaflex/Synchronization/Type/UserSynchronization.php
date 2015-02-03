@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type;
 
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 
 /**
@@ -33,13 +33,14 @@ class UserSynchronization extends Synchronization
         $types = array();
         $types[] = 'create';
         $types[] = 'update';
-        
+
         return $types;
     }
 
     public static function factory($type)
     {
-        $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'UserSynchronization';
+        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+             'UserSynchronization';
         if (class_exists($class))
         {
             return new $class();

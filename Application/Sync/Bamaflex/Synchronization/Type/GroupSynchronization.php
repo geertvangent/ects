@@ -9,7 +9,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 
 /**
@@ -58,7 +58,7 @@ class GroupSynchronization extends Synchronization
         $this->synchronize();
         $this->synchronize_users();
         $children = $this->get_children();
-        
+
         foreach ($children as $child)
         {
             $child->run();
@@ -66,9 +66,8 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
-     * Enter description here .
-     * ..
-     * 
+     * Enter description here . ..
+     *
      * @param $type string
      * @param $synchronization GroupSynchronization
      * @param $parameters array
@@ -77,8 +76,9 @@ class GroupSynchronization extends Synchronization
     public static function factory($type, GroupSynchronization $synchronization, $parameters = array())
     {
         $file = dirname(__FILE__) . '/group/' . $type . '.class.php';
-        $class = __NAMESPACE__ . '\\' . Utilities :: underscores_to_camelcase($type) . 'GroupSynchronization';
-        
+        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+             'GroupSynchronization';
+
         if (file_exists($file))
         {
             require_once $file;
@@ -89,7 +89,7 @@ class GroupSynchronization extends Synchronization
     public function determine_current_group()
     {
         $this->current_group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code_and_parent_id(
-            $this->get_code(), 
+            $this->get_code(),
             $this->get_parent_group()->get_id());
     }
 
@@ -166,14 +166,14 @@ class GroupSynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
-            
+
             $this->current_group = new Group();
             $this->current_group->set_name($name);
             $this->current_group->set_description($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
             $this->current_group->create();
-            
+
             self :: log('added', $this->current_group->get_name());
             flush();
         }
@@ -187,23 +187,23 @@ class GroupSynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-        
+
         return $this->current_group;
     }
 
     public function synchronize_users()
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID), 
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
             new StaticConditionVariable($this->current_group->get_id()));
         $current_users = \Chamilo\Core\Group\Storage\DataManager :: distinct(
-            GroupRelUser :: class_name(), 
+            GroupRelUser :: class_name(),
             new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
         $source_users = $this->get_users();
         // $source_users = array();
         $to_add = array_diff($source_users, $current_users);
         $to_delete = array_diff($current_users, $source_users);
-        
+
         foreach ($to_add as $user_id)
         {
             $relation = new GroupRelUser();
@@ -211,17 +211,17 @@ class GroupSynchronization extends Synchronization
             $relation->set_user_id($user_id);
             $relation->create();
         }
-        
+
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID), 
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
             new StaticConditionVariable($this->current_group->get_id()));
         $conditions[] = new InCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_USER_ID), 
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_USER_ID),
             $to_delete);
-        
+
         $condition = new AndCondition($conditions);
-        
+
         return \Chamilo\Core\Group\Storage\DataManager :: deletes(GroupRelUser :: class_name(), $condition);
     }
 
@@ -256,7 +256,7 @@ class GroupSynchronization extends Synchronization
                     $user_ids[] = self :: $official_code_cache[$code];
                 }
             }
-            
+
             if (count($result_codes) > 0)
             {
                 $results = \Chamilo\Core\User\Storage\DataManager :: retrieve_users_by_official_codes($result_codes);
@@ -267,7 +267,7 @@ class GroupSynchronization extends Synchronization
                 }
             }
         }
-        
+
         return $user_ids;
     }
 }
