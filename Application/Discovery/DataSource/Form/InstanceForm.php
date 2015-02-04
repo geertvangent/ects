@@ -11,6 +11,7 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class InstanceForm extends FormValidator
 {
@@ -102,7 +103,7 @@ class InstanceForm extends FormValidator
             foreach ($settings as $name => $setting)
             {
                 $label = Translation :: get(
-                    Utilities :: underscores_to_camelcase($name),
+                    StringUtilities :: getInstance()->createString($name)->upperCamelize(),
                     null,
                     $this->instance->get_type());
                 $name = self :: SETTINGS_PREFIX . '[' . $name . ']';
@@ -111,7 +112,7 @@ class InstanceForm extends FormValidator
                     $this->addElement(
                         'category',
                         Translation :: get(
-                            Utilities :: underscores_to_camelcase($category_name),
+                            StringUtilities :: getInstance()->createString($category_name)->upperCamelize(),
                             null,
                             $this->instance->get_type()));
                     $has_settings = true;
@@ -378,8 +379,7 @@ class InstanceForm extends FormValidator
     {
         $instance = $this->instance;
 
-        $file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) .
-             '/php/settings/settings.xml';
+        $file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) . '/php/settings/settings.xml';
 
         $result = array();
 

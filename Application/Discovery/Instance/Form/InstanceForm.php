@@ -17,6 +17,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class InstanceForm extends FormValidator
 {
@@ -199,7 +200,7 @@ class InstanceForm extends FormValidator
                                     $name,
                                     null,
                                     Translation :: get(
-                                        Utilities :: underscores_to_camelcase($option_name),
+                                        StringUtilities :: getInstance()->createString($option_name)->upperCamelize(),
                                         null,
                                         Manager :: get_namespace(
                                             $this->instance->get_instance_type(),

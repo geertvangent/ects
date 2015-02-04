@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Discovery\Rendition;
 
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 abstract class Rendition
 {
-    
+    use \Chamilo\Libraries\Architecture\Traits\ClassContext;
     // Formats
     const FORMAT_HTML = 'html';
     const FORMAT_XLSX = 'xlsx';
@@ -80,9 +80,21 @@ abstract class Rendition
 
     public static function factory($rendition_implementation)
     {
-        $class = static :: context() . '\\' .
-             Utilities :: underscores_to_camelcase($rendition_implementation->get_format()) .
-             Utilities :: underscores_to_camelcase($rendition_implementation->get_view()) . 'Rendition';
+        $class = static :: context() . '\View\\' .
+             StringUtilities :: getInstance()->createString($rendition_implementation->get_format())->upperCamelize() .
+             '\\' .
+             StringUtilities :: getInstance()->createString($rendition_implementation->get_format())->upperCamelize() .
+             StringUtilities :: getInstance()->createString($rendition_implementation->get_view())->upperCamelize() .
+             'Rendition';
         return new $class($rendition_implementation);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public static function package()
+    {
+        return static :: context();
     }
 }

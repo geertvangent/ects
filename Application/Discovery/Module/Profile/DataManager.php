@@ -31,7 +31,7 @@ class DataManager
     {
         if (! isset(self :: $instance) || ! isset(self :: $instance[$module_instance->get_id()]))
         {
-            $class = $module_instance->get_type() . '\\DataSource';
+            $class = $module_instance->get_type() . '\\DataManager\DataSource';
             self :: $instance[$module_instance->get_id()] = new $class($module_instance);
         }
         return self :: $instance[$module_instance->get_id()];
