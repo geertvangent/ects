@@ -105,7 +105,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('User'),
-                        Theme :: getInstance()->getImagePath() . 'action_user.png',
+                        Theme :: getInstance()->getImagePath('Ehb\Appplication\Discovery') . 'action_user.png',
                         $link));
                 break;
             case Instance :: TYPE_DETAILS :
@@ -116,7 +116,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('User'),
-                        Theme :: getInstance()->getImagePath() . 'action_user.png',
+                        Theme :: getInstance()->getImagePath('Ehb\Appplication\Discovery') . 'action_user.png',
                         $link));
                 $module_parameters = array();
                 $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
@@ -125,7 +125,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('Information'),
-                        Theme :: getInstance()->getImagePath() . 'action_information.png',
+                        Theme :: getInstance()->getImagePath('Ehb\Appplication\Discovery') . 'action_information.png',
                         $link));
                 break;
         }
@@ -140,6 +140,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 Rendition :: FORMAT_HTML,
                 $view ? $view : Rendition :: VIEW_DEFAULT,
                 $this);
+
             $tabs = new DynamicVisualTabsRenderer('discovery', $rendered_module);
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_CONTENT_TYPE),

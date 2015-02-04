@@ -4,13 +4,13 @@ namespace Ehb\Application\Discovery\DataSource\Form;
 use Ehb\Application\Discovery\DataSource\DataClass\Instance;
 use Ehb\Application\Discovery\DataSource\DataClass\InstanceSetting;
 use Ehb\Application\Discovery\DataSource\Storage\DataManager;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Format\Tabs\DynamicFormTab;
 use Chamilo\Libraries\Format\Tabs\DynamicFormTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\File\Path;
 
 class InstanceForm extends FormValidator
 {
@@ -378,7 +378,7 @@ class InstanceForm extends FormValidator
     {
         $instance = $this->instance;
 
-        $file = ClassnameUtilities :: getInstance()->namespaceToFullPath($instance->get_type()) .
+        $file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) .
              '/php/settings/settings.xml';
 
         $result = array();

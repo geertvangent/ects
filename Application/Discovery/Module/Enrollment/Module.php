@@ -3,7 +3,7 @@ namespace Ehb\Application\Discovery\Module\Enrollment;
 
 use Ehb\Application\Discovery\Instance\DataClass\Instance;
 use Chamilo\Libraries\Architecture\Application\Application;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Session\Request;
 
@@ -73,7 +73,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
         $types = array();
 
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
             Filesystem :: LIST_DIRECTORIES,
             false);
         foreach ($modules as $module)

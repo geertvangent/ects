@@ -3,7 +3,7 @@ namespace Ehb\Application\Discovery;
 
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Database;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\File\Path;
 
 class DataSource extends Database
 {
@@ -36,7 +36,7 @@ class DataSource extends Database
         $types = array();
 
         $data_sources = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'data_source/',
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'DataSource/',
             Filesystem :: LIST_DIRECTORIES,
             false);
 
@@ -46,7 +46,7 @@ class DataSource extends Database
         {
             if (! in_array($data_source, $exceptions))
             {
-                $types[] = __NAMESPACE__ . '\data_source\\' . $data_source;
+                $types[] = __NAMESPACE__ . '\DataSource\\' . $data_source;
             }
         }
         return $types;

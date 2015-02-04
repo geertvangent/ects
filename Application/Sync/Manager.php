@@ -5,7 +5,7 @@ use Chamilo\Libraries\Architecture\Application\Application;
 
 abstract class Manager extends Application
 {
-    const APPLICATION_NAME = 'ehb_sync';
+    const APPLICATION_NAME = 'sync';
     const ACTION_BROWSE = 'browser';
     const ACTION_BAMAFLEX = 'bamaflex';
     const ACTION_ATLANTIS = 'atlantis';

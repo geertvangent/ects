@@ -10,6 +10,7 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\File\Path;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -51,7 +52,7 @@ class GroupMenu extends \HTML_Menu
      * @param int $owner The ID of the owner of the categories to provide in this menu.
      * @param int $current_category The ID of the current category in the menu.
      * @param string $url_format The format to use for the URL of a category. Passed to sprintf(). Defaults to the
-     *        string "?category=%s".
+     *            string "?category=%s".
      * @param array $extra_items An array of extra tree items, added to the root.
      */
     public function __construct($rendition, $url_format = '?application=group&go=browser&group_id=%s', $include_root = true, $show_complete_tree = false,
@@ -253,10 +254,9 @@ class GroupMenu extends \HTML_Menu
     {
         $renderer = new TreeMenuRenderer(
             $this->get_tree_name(),
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) .
-                 'php/xml_feeds/xml_group_menu_feed.php',
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__, true) . 'php/xml_feeds/xml_group_menu_feed.php',
 
-                $this->urlFmt);
+            $this->urlFmt);
         $this->render($renderer, 'sitemap');
         return $renderer->toHTML();
     }

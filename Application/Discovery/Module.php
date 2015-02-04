@@ -14,6 +14,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\File\Path;
 
 /**
  *
@@ -134,12 +135,12 @@ class Module
         $types = array();
 
         $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/',
+            ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . 'Module/',
             Filesystem :: LIST_DIRECTORIES,
             false);
         foreach ($modules as $module)
         {
-            $namespace = '\\' . __NAMESPACE__ . '\module\\' . $module . '\Module';
+            $namespace = '\\' . __NAMESPACE__ . '\Module\\' . $module . '\Module';
             if (class_exists($namespace, true))
             {
                 $types = array_merge($types, $namespace :: get_available_implementations());
@@ -153,13 +154,13 @@ class Module
         $types = array();
 
         $directories = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'module/',
+            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'Module/',
             Filesystem :: LIST_DIRECTORIES,
             false);
 
         foreach ($directories as $directory)
         {
-            $types[] = __NAMESPACE__ . '\module\\' . $directory;
+            $types[] = __NAMESPACE__ . '\Module\\' . $directory;
         }
 
         return $types;
@@ -171,8 +172,7 @@ class Module
     }
 
     /**
-     * Far from ideal and not really generic (because of the user) .
-     * .. but it'll have to do for now
+     * Far from ideal and not really generic (because of the user) . .. but it'll have to do for now
      *
      * @param $type string
      * @param $user user\User

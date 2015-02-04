@@ -25,7 +25,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
@@ -74,24 +74,24 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->trainings[$training_id][$source]))
         {
-            
+
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'), 
+                new StaticColumnConditionVariable('id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -120,32 +120,33 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                         $training->set_majors($this->retrieve_majors($training_parameters));
                         $training->set_packages($this->retrieve_packages($training_parameters));
                     }
-                    
+
                     if ($training_parameters->get_tab() == Module :: TAB_TRAJECTORIES)
                     {
                         $training->set_trajectories($this->retrieve_trajectories($training_parameters));
                     }
                     $training->set_groups($this->retrieve_groups($training_parameters));
-                    
+
                     if ($training_parameters->get_tab() == Module :: TAB_COURSES)
                     {
                         $training->set_courses($this->retrieve_courses($training_parameters));
                     }
-                    
+
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_ID), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_ID),
                         new StaticConditionVariable($training->get_id()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_SOURCE), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_HISTORY_SOURCE),
                         new StaticConditionVariable($training->get_source()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE), 
-                        new StaticConditionVariable(Utilities :: get_namespace_from_object($training)));
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE),
+                        new StaticConditionVariable(ClassnameUtilities :: getInstance()->getNamespaceFromObject(
+                            $training)));
                     $condition = new AndCondition($conditions);
-                    
+
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
-                    
+
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
@@ -166,19 +167,20 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                             $training->add_previous_reference($reference);
                         }
                     }
-                    
+
                     $conditions = array();
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_ID), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_ID),
                         new StaticConditionVariable($training->get_id()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_SOURCE), 
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_PREVIOUS_SOURCE),
                         new StaticConditionVariable($training->get_source()));
                     $conditions[] = new EqualityCondition(
-                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE), 
-                        new StaticConditionVariable(Utilities :: get_namespace_from_object($training)));
+                        new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE),
+                        new StaticConditionVariable(ClassnameUtilities :: getInstance()->getNamespaceFromObject(
+                            $training)));
                     $condition = new AndCondition($conditions);
-                    
+
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
                     if ($histories->size() > 0)
                     {
@@ -193,7 +195,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     else
                     {
                         $next = $this->retrieve_training_next_id($training);
-                        
+
                         if ($next)
                         {
                             $reference = new HistoryReference();
@@ -202,12 +204,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                             $training->add_next_reference($reference);
                         }
                     }
-                    
+
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-        
+
         return $this->trainings[$training_id][$source];
     }
 
@@ -215,18 +217,18 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('previous_id'), 
+            new StaticColumnConditionVariable('previous_id'),
             new StaticConditionVariable($training->get_id()));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('previous_source'), 
+            new StaticColumnConditionVariable('previous_source'),
             new StaticConditionVariable($training->get_source()));
         $condition = new AndCondition($conditions);
-        
+
         $query = 'SELECT id, source FROM v_discovery_training_advanced WHERE ' .
              ConditionTranslator :: render($condition, null, $this->get_connection());
-        
+
         $statement = $this->get_connection()->query($query);
-        
+
         if ($statement instanceof PDOStatement)
         {
             return $statement->fetch(\PDO :: FETCH_OBJ);
@@ -241,26 +243,26 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->majors[$training_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'), 
+                new StaticColumnConditionVariable('training_id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_major_basic WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -273,12 +275,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $major->set_choices($this->retrieve_major_choices($major->get_id(), $major->get_source()));
                     $major->set_choice_options(
                         $this->retrieve_major_choice_options($major->get_id(), $major->get_source()));
-                    
+
                     $this->majors[$training_id][$source][] = $major;
                 }
             }
         }
-        
+
         return $this->majors[$training_id][$source];
     }
 
@@ -286,22 +288,22 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->languages[$training_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'), 
+                new StaticColumnConditionVariable('training_id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_language_basic WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -311,12 +313,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $language->set_training_id($result->training_id);
                     $language->set_name($this->convert_to_utf8($result->name));
                     $language->set_source($result->source);
-                    
+
                     $this->languages[$training_id][$source][] = $language;
                 }
             }
         }
-        
+
         return $this->languages[$training_id][$source];
     }
 
@@ -324,25 +326,25 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $training_id = $training_parameters->get_training_id();
         $source = $training_parameters->get_source();
-        
+
         if (! isset($this->packages[$training_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'), 
+                new StaticColumnConditionVariable('id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_package_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-            
+
             $statement = $this->get_connection()->prepare($query);
             $results = $statement->execute();
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -353,12 +355,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $package->set_name($this->convert_to_utf8($result->name));
                     $package->set_source($result->source);
                     $package->set_courses($this->retrieve_package_courses($package->get_id(), $package->get_source()));
-                    
+
                     $this->packages[$training_id][$source][] = $package;
                 }
             }
         }
-        
+
         return $this->packages[$training_id][$source];
     }
 
@@ -366,22 +368,22 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $id = $parameters->get_training_id();
         $source = $parameters->get_source();
-        
+
         if (! isset($this->courses[$id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'), 
+                new StaticColumnConditionVariable('training_id'),
                 new StaticConditionVariable($id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY name';
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -393,7 +395,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $course->set_name($this->convert_to_utf8($result->name));
                     $course->set_source($result->source);
                     $course->set_credits($result->credits);
-                    
+
                     $this->courses[$id][$source][$result->id] = $course;
                 }
                 foreach ($this->courses[$id][$source] as $course)
@@ -405,7 +407,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                 }
             }
         }
-        
+
         return $this->courses[$id][$source];
     }
 
@@ -415,18 +417,18 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('package_id'), 
+                new StaticColumnConditionVariable('package_id'),
                 new StaticConditionVariable($id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_info_package_course_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -440,7 +442,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $trajectory->set_trajectory_part($result->trajectory_part);
                     $trajectory->set_credits($result->credits);
                     $trajectory->set_programme_id($result->programme_id);
-                    
+
                     $this->package_courses[$id][$source][$result->programme_id] = $trajectory;
                 }
                 foreach ($this->package_courses[$id][$source] as $package_course)
@@ -464,17 +466,17 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'), 
+                new StaticColumnConditionVariable('training_id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_choice_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -484,7 +486,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $choice->set_training_id($result->training_id);
                     $choice->set_name($this->convert_to_utf8($result->name));
                     $choice->set_source($result->source);
-                    
+
                     $this->choices[$training_id][$source][] = $choice;
                 }
             }
@@ -500,17 +502,17 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'), 
+                new StaticColumnConditionVariable('training_id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_choice_option_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -520,7 +522,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $choice_option->set_training_id($result->training_id);
                     $choice_option->set_name($this->convert_to_utf8($result->name));
                     $choice_option->set_source($result->source);
-                    
+
                     $this->choice_options[$training_id][$source][] = $choice_option;
                 }
             }
@@ -536,17 +538,17 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'), 
+                new StaticColumnConditionVariable('training_id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_trajectory_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -558,7 +560,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $trajectory->set_source($result->source);
                     $trajectory->set_trajectories(
                         $this->retrieve_sub_trajectories($trajectory->get_id(), $trajectory->get_source()));
-                    
+
                     $this->trajectories[$training_id][$source][] = $trajectory;
                 }
             }
@@ -574,17 +576,17 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('training_id'), 
+                new StaticColumnConditionVariable('training_id'),
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_group_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -594,7 +596,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $group->set_group_id($result->group_id);
                     $group->set_group($this->convert_to_utf8($result->group));
                     $group->set_source($result->source);
-                    
+
                     $this->groups[$training_id][$source][] = $group;
                 }
             }
@@ -608,17 +610,17 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('trajectory_id'), 
+                new StaticColumnConditionVariable('trajectory_id'),
                 new StaticConditionVariable($id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_sub_trajectory_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -630,7 +632,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $trajectory->set_source($result->source);
                     $trajectory->set_courses(
                         $this->retrieve_sub_trajectory_courses($trajectory->get_id(), $trajectory->get_source()));
-                    
+
                     $this->sub_trajectories[$id][$source][] = $trajectory;
                 }
             }
@@ -644,17 +646,17 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('sub_trajectory_id'), 
+                new StaticColumnConditionVariable('sub_trajectory_id'),
                 new StaticConditionVariable($id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_info_sub_trajectory_course_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -668,7 +670,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $trajectory->set_trajectory_part($result->trajectory_part);
                     $trajectory->set_credits($result->credits);
                     $trajectory->set_programme_id($result->programme_id);
-                    
+
                     $this->sub_trajectory_courses[$id][$source][$result->programme_id] = $trajectory;
                 }
                 foreach ($this->sub_trajectory_courses[$id][$source] as $sub_trajectory_course)
@@ -690,17 +692,17 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('major_id'), 
+                new StaticColumnConditionVariable('major_id'),
                 new StaticConditionVariable($id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_major_choice_basic WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -710,7 +712,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $major_choice->set_major_id($result->major_id);
                     $major_choice->set_name($this->convert_to_utf8($result->name));
                     $major_choice->set_source($result->source);
-                    
+
                     $this->major_choices[$id][$source][] = $major_choice;
                 }
             }
@@ -724,18 +726,18 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('major_id'), 
+                new StaticColumnConditionVariable('major_id'),
                 new StaticConditionVariable($id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'), 
+                new StaticColumnConditionVariable('source'),
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-            
+
             $query = 'SELECT * FROM v_discovery_training_major_choice_option_basic WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-            
+
             $statement = $this->get_connection()->query($query);
-            
+
             if ($statement instanceof PDOStatement)
             {
                 while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
@@ -745,7 +747,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $major_choice_option->set_major_id($result->major_id);
                     $major_choice_option->set_name($this->convert_to_utf8($result->name));
                     $major_choice_option->set_source($result->source);
-                    
+
                     $this->major_choice_options[$id][$source][] = $major_choice_option;
                 }
             }

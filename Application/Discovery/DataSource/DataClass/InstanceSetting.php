@@ -2,12 +2,12 @@
 namespace Ehb\Application\Discovery\DataSource\DataClass;
 
 use Ehb\Application\Discovery\DataSource\Storage\DataManager;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\File\Path;
 
 /**
  *
@@ -106,8 +106,7 @@ class InstanceSetting extends DataClass
      */
     public static function initialize(Instance $instance)
     {
-        $settings_file = ClassnameUtilities :: getInstance()->namespaceToFullPath($instance->get_type()) .
-             'php/settings/settings.xml';
+        $settings_file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) . 'php/settings/settings.xml';
 
         $doc = new \DOMDocument();
 
