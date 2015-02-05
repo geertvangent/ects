@@ -5,7 +5,7 @@ namespace Ehb\Application\Sync\Cas\Data\Package;
  *
  * @author Hans De Bisschop
  */
-class Installer extends \Chamilo\Configuration\Package\Installer
+class Installer extends \Chamilo\Configuration\Package\Action\Installer
 {
 
     /**

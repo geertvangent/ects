@@ -4,7 +4,7 @@ namespace Ehb\Application\Atlantis\Rights\Package;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Atlantis\Rights\Rights;
 
-class Installer extends \Chamilo\Configuration\Package\Installer
+class Installer extends \Chamilo\Configuration\Package\Action\Installer
 {
 
     public function extra()
@@ -17,7 +17,7 @@ class Installer extends \Chamilo\Configuration\Package\Installer
         {
             $this->add_message(self :: TYPE_NORMAL, Translation :: get('AccessLocationCreated'));
         }
-        
+
         return true;
     }
 }

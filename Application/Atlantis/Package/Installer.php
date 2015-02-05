@@ -6,6 +6,6 @@ namespace Ehb\Application\Atlantis\Package;
  *
  * @package application.atlantis
  */
-class Installer extends \Chamilo\Configuration\Package\Installer
+class Installer extends \Chamilo\Configuration\Package\Action\Installer
 {
 }
