@@ -1,0 +1,20 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = repository\quota\rights
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Access Manager"
+AccessorComponent = "Manage rights"
+RightsGroupAccess = "Who can manage role entities?"
+RightsGroupTargets = "In which contexts can they manage these role entities?"
+CreatorComponent = "Grant rights"
+GeneralAccess = "Access"
+Targets = "Target users / groups"
+Add = "Grant"
+BrowserComponent = "Manage targets"
+Type = ""
+Entity = ""
+Group = ""
+Path = ""
+ConfigureRights = "Manage access rights"
+ConfigureRightsDescription = "Which users can create and manage role entities"
