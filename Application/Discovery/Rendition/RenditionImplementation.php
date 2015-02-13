@@ -16,7 +16,7 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
     public static function factory(Module $module, $format, $view, $context)
     {
         $namespace = ClassnameUtilities :: getInstance()->getNamespaceFromObject($module);
-        $class = $namespace . '\\' . StringUtilities :: getInstance()->createString($format)->upperCamelize() .
+        $class = $namespace . '\Rendition\\' . StringUtilities :: getInstance()->createString($format)->upperCamelize() . '\\' . StringUtilities :: getInstance()->createString($format)->upperCamelize() .
              StringUtilities :: getInstance()->createString($view)->upperCamelize() . 'RenditionImplementation';
 
         if (! class_exists($class, true))

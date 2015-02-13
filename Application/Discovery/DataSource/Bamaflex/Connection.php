@@ -2,12 +2,11 @@
 namespace Ehb\Application\Discovery\DataSource\Bamaflex;
 
 use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Connection;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\DataSourceName;
 use Doctrine\Common\ClassLoader;
 use Doctrine\DBAL\DriverManager;
 
-class Connection extends Connection
+class Connection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\Connection
 {
 
     /**
@@ -31,7 +30,7 @@ class Connection extends Connection
         $classLoader->register();
 
         $this->data_source_instance = \Ehb\Application\Discovery\DataSource\Storage\DataManager :: retrieve_by_id(
-            \Ehb\Application\Discovery\DataSource\DataClass\Instance :: class_name(),
+            \Ehb\Application\Discovery\DataSource\Storage\DataClass\Instance :: class_name(),
             (int) $data_source_instance_id);
 
         $driver = $this->data_source_instance->get_setting('driver');
@@ -49,6 +48,7 @@ class Connection extends Connection
             'password' => $data_source_name->get_password(),
             'host' => $data_source_name->get_host(),
             'driverClass' => $data_source_name->get_driver(true));
+
 
         $this->connection = DriverManager :: getConnection($connection_parameters, $configuration);
     }
