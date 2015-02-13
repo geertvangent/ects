@@ -254,7 +254,6 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     private function retrieve_photo($id)
     {
         $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
         $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
              ConditionTranslator :: render($condition, null, $this->get_connection());
 
@@ -263,7 +262,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         if ($statement instanceof PDOStatement)
         {
             $object = $statement->fetch(\PDO :: FETCH_OBJ);
-var_dump($object);
+
             $photo = new Photo();
             $photo->set_mime_type('image/jpeg');
             $photo->set_data(base64_encode($object->photo));
