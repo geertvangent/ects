@@ -15,9 +15,11 @@ class DataSource extends Database
      *
      * @param Instance $module_instance
      */
-    public function __construct(\Ehb\Application\Discovery\Instance\DataClass\Instance $module_instance)
+    public function __construct(\Ehb\Application\Discovery\Instance\DataClass\Instance $module_instance,
+        $connection = null)
     {
         $this->module_instance = $module_instance;
+        parent :: __construct($connection);
     }
 
     public function get_module_instance()
