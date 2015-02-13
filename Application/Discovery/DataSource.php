@@ -18,7 +18,6 @@ class DataSource extends Database
     public function __construct(\Ehb\Application\Discovery\Instance\DataClass\Instance $module_instance)
     {
         $this->module_instance = $module_instance;
-        $this->initialize();
     }
 
     public function get_module_instance()
@@ -40,7 +39,7 @@ class DataSource extends Database
             Filesystem :: LIST_DIRECTORIES,
             false);
 
-        $exceptions = array('php', 'resources');
+        $exceptions = array('resources');
 
         foreach ($data_sources as $data_source)
         {

@@ -1,9 +1,8 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Profile\Rendition;
 
-use Ehb\Application\Discovery\Rendition\Rendition;
 
-abstract class Rendition extends Rendition
+abstract class Rendition extends \Ehb\Application\Discovery\Rendition\Rendition
 {
 
     public function get_profile()

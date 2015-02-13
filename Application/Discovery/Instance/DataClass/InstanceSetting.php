@@ -106,7 +106,7 @@ class InstanceSetting extends DataClass
      */
     public static function initialize(Instance $instance)
     {
-        $settings_file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) . 'php/settings/settings.xml';
+        $settings_file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) . 'Resources/Settings/settings.xml';
         $doc = new \DOMDocument();
 
         $doc->load($settings_file);

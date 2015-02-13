@@ -4,26 +4,23 @@ namespace Ehb\Application\Discovery\DataSource\Bamaflex;
 class DataSource extends \Ehb\Application\Discovery\DataSource
 {
 
-    /**
-     * Initialiser, creates the connection and sets the database to UTF8
-     */
-    public function initialize()
+    public function __construct(\Ehb\Application\Discovery\Instance\DataClass\Instance $module_instance)
     {
-        $data_source = $this->get_module_instance()->get_setting('data_source');
-        $connection = Connection :: get_instance($data_source)->get_connection();
-        
-        if (Connection :: get_instance($data_source)->get_data_source_instance()->get_setting('driver') == 'mssql')
+        parent :: __construct($module_instance);
+        $data_source_connection = Connection :: get_instance($this->get_module_instance()->get_setting('data_source'));
+
+        $this->connection = $data_source_connection->get_connection();
+
+        if ($data_source_connection->get_data_source_instance()->get_setting('driver') == 'mssql')
         {
             // Necessary to retrieve complete photos and other large datasets
             // from the database
-            $connection->prepare('SET TEXTSIZE 2000000')->execute();
+            $this->connection->prepare('SET TEXTSIZE 2000000')->execute();
         }
         else
         {
-            $connection->setCharset('utf8');
+            $this->connection->setCharset('utf8');
         }
-        
-        $this->set_connection($connection);
     }
 
     /**
