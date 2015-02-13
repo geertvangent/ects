@@ -104,7 +104,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             new StaticConditionVariable($official_code));
 
         $query = 'SELECT count(id) AS profile_count FROM v_discovery_profile_basic WHERE ' .
-             ConditionTranslator :: render($condition, null, $this->get_connection());
+             ConditionTranslator :: render($condition);
 
         $statement = $this->get_connection()->query($query);
         if ($statement instanceof PDOStatement)

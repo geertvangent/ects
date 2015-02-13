@@ -24,7 +24,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
      */
     public function retrieve_employments($parameters)
     {
-        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $parameters->get_user_id());
 
         $official_code = $user->get_official_code();
 
@@ -91,7 +93,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
 
     public function count_employments($parameters)
     {
-        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $parameters->get_user_id());
 
         $official_code = $user->get_official_code();
 

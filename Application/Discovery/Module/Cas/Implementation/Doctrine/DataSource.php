@@ -93,7 +93,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Doctrine\DataSour
             }
             else
             {
-                $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id);
+                $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+                    \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+                    $user_id);
                 $official_code = $user->get_official_code();
 
                 $query = 'SELECT count(id) AS \'count\', person_id, application_id, action_id, date_format(date, \'%Y-%m\') AS \'date\'

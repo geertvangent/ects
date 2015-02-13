@@ -45,7 +45,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $id = $parameters->get_user_id();
         if (! isset($this->contract_types[$id]))
         {
-            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+                $id);
             $official_code = $user->get_official_code();
 
             $condition = new EqualityCondition(
@@ -281,7 +283,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     public function count_courses($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id);
+        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $user_id);
         $official_code = $user->get_official_code();
 
         $condition = new EqualityCondition(

@@ -23,7 +23,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     public function retrieve_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $user_id)->get_official_code();
 
         if (! isset($this->exemptions[$person_id]))
         {
@@ -71,7 +73,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     public function count_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $user_id)->get_official_code();
 
         $condition = new EqualityCondition(
             new StaticColumnConditionVariable('person_id'),
@@ -94,7 +98,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     public function retrieve_years($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id)->get_official_code();
+        $person_id = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $user_id)->get_official_code();
         if (! isset($this->years[$person_id]))
         {
             $query = 'SELECT DISTINCT year FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id .

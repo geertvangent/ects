@@ -198,7 +198,7 @@ class Module
                     Translation :: get(
                         'ModuleNotAvailable',
                         array('MODULE' => Translation :: get('TypeName', null, $type))),
-                    Theme :: get_image_path($type) . 'logo/16_na.png',
+                    Theme :: getInstance()->getImagePath($type) . 'logo/16_na.png',
                     null,
                     ToolbarItem :: DISPLAY_ICON);
             }
@@ -209,7 +209,8 @@ class Module
                     $url = $this->get_instance_url($module_instance->get_id(), $parameters);
                     return new ToolbarItem(
                         Translation :: get('TypeName', null, $type),
-                        Theme :: get_image_path($type) . 'logo/16.png',
+
+                        Theme :: getInstance()->getImagePath($type) . 'logo/16.png',
                         $url,
                         ToolbarItem :: DISPLAY_ICON);
                 }
@@ -221,7 +222,7 @@ class Module
                         Translation :: get(
                             'ModuleHasNoData',
                             array('MODULE' => Translation :: get('TypeName', null, $type))),
-                        Theme :: get_image_path($type) . 'logo/16_empty.png',
+                        Theme :: getInstance()->getImagePath($type) . 'logo/16_empty.png',
                         $url,
                         ToolbarItem :: DISPLAY_ICON);
                 }

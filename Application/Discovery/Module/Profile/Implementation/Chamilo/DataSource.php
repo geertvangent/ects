@@ -22,7 +22,9 @@ class DataSource
      */
     public function retrieve_profile($parameters)
     {
-        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($parameters->get_user_id());
+        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $parameters->get_user_id());
         if ($user instanceof User)
         {
             $name = new Name();

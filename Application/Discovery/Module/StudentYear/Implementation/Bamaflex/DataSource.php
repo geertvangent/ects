@@ -23,7 +23,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $id = $parameters->get_user_id();
         if (! isset($this->student_years[$id]))
         {
-            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+                $id);
             $official_code = $user->get_official_code();
 
             $condition = new EqualityCondition(
@@ -59,7 +61,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     public function count_student_years($parameters)
     {
         $id = $parameters->get_user_id();
-        $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
+        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $id);
         $official_code = $user->get_official_code();
 
         $condition = new EqualityCondition(
