@@ -30,6 +30,7 @@ use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements TableSupport
 {
@@ -150,7 +151,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $html = array();
         $html[] = '<div style="float: right; width: 73%;">';
 
-        $renderer_name = Utilities :: get_classname_from_object($this, true);
+        $renderer_name = ClassnameUtilities::getInstance()->getClassnameFromObject($this, true);
         $tabs = new DynamicTabsRenderer($renderer_name);
 
         $parameters = $this->get_application()->get_parameters();

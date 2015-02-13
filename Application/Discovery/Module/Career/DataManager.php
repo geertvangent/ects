@@ -14,13 +14,6 @@ class DataManager
      */
     private static $instance;
 
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->initialize();
-    }
 
     /**
      *

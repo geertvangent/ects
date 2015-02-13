@@ -15,14 +15,6 @@ class DataManager
     private static $instance;
 
     /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->initialize();
-    }
-
-    /**
      *
      * @param $module_instance Instance
      * @return DataManagerInterface
