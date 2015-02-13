@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Discovery\DataSource\DataClass;
+namespace Ehb\Application\Discovery\DataSource\Storage\DataClass;
 
 use Ehb\Application\Discovery\DataSource\Storage\DataManager;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
@@ -17,7 +17,7 @@ use Chamilo\Libraries\File\Path;
 class InstanceSetting extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    const PROPERTY_INSTANCE_ID = 'instance_id';
+    const PROPERTY_INSTANCE_ID = 'data_source_instance_id';
     const PROPERTY_VARIABLE = 'variable';
     const PROPERTY_VALUE = 'value';
 

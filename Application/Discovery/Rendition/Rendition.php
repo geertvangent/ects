@@ -86,6 +86,7 @@ abstract class Rendition
              StringUtilities :: getInstance()->createString($rendition_implementation->get_format())->upperCamelize() .
              StringUtilities :: getInstance()->createString($rendition_implementation->get_view())->upperCamelize() .
              'Rendition';
+
         return new $class($rendition_implementation);
     }
 
