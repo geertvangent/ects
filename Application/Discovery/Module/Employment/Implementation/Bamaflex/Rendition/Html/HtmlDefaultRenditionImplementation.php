@@ -19,15 +19,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
-        
+
         if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT, 
-            $this->get_module_instance()->get_id(), 
+            Rights :: VIEW_RIGHT,
+            $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
-        
+
         $html = array();
         if (count($this->get_employments()) > 0)
         {
@@ -44,14 +44,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $data = array();
         $has_interruption = false;
-        
+
         foreach ($this->get_employments() as $employment)
         {
-            
+
             $parts = $this->get_employment_parts($employment->get_id());
             $unique_faculty = $this->get_unique_faculty($parts);
             $unique_department = $this->get_unique_department($parts);
-            
+
             $row = array();
             $row[] = $employment->get_year();
             if (count($parts) == 1)
@@ -66,29 +66,29 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row[] = implode(', ', $unique_faculty);
             }
-            
+
             if (count($parts) == 1)
-            
+
             {
                 $row[] = $parts[0]->get_department();
             }
             elseif (! is_array($unique_department))
-            
+
             {
                 $row[] = $unique_department;
             }
             else
-            
+
             {
                 $row[] = implode(', ', $unique_department);
             }
-            
+
             $row[] = $employment->get_assignment() . '%';
-            
+
             if ($employment->get_end_date())
             {
                 $end_date = DatetimeUtilities :: format_locale_date(
-                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                    Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES),
                     $employment->get_end_date());
             }
             else
@@ -96,23 +96,24 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $end_date = '';
             }
             $start_date = DatetimeUtilities :: format_locale_date(
-                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES),
                 $employment->get_start_date());
-            
+
             $row[] = $start_date;
             $row[] = $end_date;
             $row[] = $employment->get_office_category();
             $row[] = $employment->get_state();
-            
+
             if ($employment->get_fund_id())
             {
-                $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'fund/' . $employment->get_fund_id() .
-                     '.png" alt="' . Translation :: get($employment->get_fund_string()) . '" title="' .
-                     Translation :: get($employment->get_fund_string()) . '" />';
+                $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                    'Ehb/Application/Discovery/Module/Employment/Implementation/Bamaflex') . 'Fund/' .
+                     $employment->get_fund_id() . '.png" alt="' . Translation :: get($employment->get_fund_string()) .
+                     '" title="' . Translation :: get($employment->get_fund_string()) . '" />';
                 $row[] = $image;
                 LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get($employment->get_fund_string()), 
+                    $image,
+                    Translation :: get($employment->get_fund_string()),
                     Translation :: get('Fund'));
             }
             else
@@ -121,34 +122,35 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      Translation :: get('UnknownFund') . '" title="' . Translation :: get('UnknownFund') . '" />';
                 $row[] = $image;
                 LegendTable :: get_instance()->add_symbol(
-                    $image, 
-                    Translation :: get('UnknownFund'), 
+                    $image,
+                    Translation :: get('UnknownFund'),
                     Translation :: get('Fund'));
             }
             $row[] = $employment->get_pay_scale();
-            
-            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'active/' . $employment->get_active() .
-                 '.png" alt="' . Translation :: get($employment->get_active_string()) . '" title="' .
-                 Translation :: get($employment->get_active_string()) . '" />';
+
+            $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                'Ehb/Application/Discovery/Module/Employment/Implementation/Bamaflex') . 'Active/' .
+                 $employment->get_active() . '.png" alt="' . Translation :: get($employment->get_active_string()) .
+                 '" title="' . Translation :: get($employment->get_active_string()) . '" />';
             $row[] = $image;
             LegendTable :: get_instance()->add_symbol(
-                $image, 
-                Translation :: get($employment->get_active_string()), 
+                $image,
+                Translation :: get($employment->get_active_string()),
                 Translation :: get('Active'));
-            
+
             if ($employment->get_interruption())
             {
                 $has_interruption = true;
                 $row[] = $employment->get_interruption();
             }
-            
+
             $data[] = $row;
             if (count($parts) > 1)
             {
                 foreach ($parts as $part)
                 {
                     $row = array();
-                    
+
                     $row[] = ' ';
                     if (is_array($unique_faculty))
                     {
@@ -158,7 +160,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $row[] = ' ';
                     }
-                    
+
                     if (is_array($unique_department))
                     {
                         $row[] = '<span class="employment_part">' . $part->get_department() . '</span>';
@@ -167,16 +169,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $row[] = ' ';
                     }
-                    
+
                     $row[] = '<span class="employment_part">' . $part->get_volume() . '%' . '</span>';
                     $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(
-                        Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                        Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES),
                         $part->get_start_date()) . '</span>';
-                    
+
                     if ($part->get_end_date())
                     {
                         $row[] = '<span class="employment_part">' . DatetimeUtilities :: format_locale_date(
-                            Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES), 
+                            Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES),
                             $part->get_end_date()) . '</span>';
                     }
                     else
@@ -187,7 +189,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 }
             }
         }
-        
+
         $table = new SortableTable($data);
         $table->set_header(0, Translation :: get('Year'), false);
         $table->set_header(1, Translation :: get('Faculty'), false);
@@ -200,15 +202,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $table->set_header(8, Translation :: get('Fund'), false);
         $table->set_header(9, Translation :: get('PayScale'), false);
         $table->set_header(10, '', false);
-        
+
         if ($has_interruption)
         {
             $table->set_header(11, Translation :: get('Interruption'), false);
         }
-        
+
         return $table;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -216,7 +218,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         return \Ehb\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

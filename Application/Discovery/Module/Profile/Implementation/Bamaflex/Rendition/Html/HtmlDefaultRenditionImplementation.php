@@ -190,13 +190,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $school[] = $previous_college->get_country_name();
             }
+
             $properties[Translation :: get('School')] = implode('<br>', $school);
             if ($previous_college->get_training_name())
             {
                 $properties[Translation :: get('TrainingName')] = $previous_college->get_training_name();
             }
 
-            if (! StringUtilities :: is_null_or_empty($previous_college->get_info(), true))
+            if (! StringUtilities :: getInstance()->isNullOrEmpty($previous_college->get_info(), true))
+
             {
                 $properties[Translation :: get('Info')] = $previous_college->get_info();
             }

@@ -86,7 +86,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 if ($last_enrollment->is_special_result())
                 {
                     $tab_image_path = Theme :: getInstance()->getImagePath(
-                        Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'ResultType/' .
+                        Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ResultType/' .
                          $last_enrollment->get_result() . '.png';
 
                     $tab_image = '<img src="' . $tab_image_path . '" alt="' .
@@ -149,7 +149,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             if ($enrollment->is_special_result())
             {
                 $tab_image_path = Theme :: getInstance()->getImagePath(
-                    Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'ResultType/' .
+                    Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ResultType/' .
                      $enrollment->get_result() . '.png';
                 $tab_image = '<img src="' . $tab_image_path . '" alt="' .
                      Translation :: get($enrollment->get_result_string()) . '" title="' .
@@ -163,7 +163,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             $contract_html[] = '</th><th class="action">';
             $tab_image_path = Theme :: getInstance()->getImagePath(
-                Utilities :: get_namespace_from_classname(Enrollment :: CLASS_NAME)) . 'ContractType/' .
+                Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ContractType/' .
                  $enrollment->get_contract_type() . '.png';
             $tab_image = '<img src="' . $tab_image_path . '" alt="' .
                  Translation :: get($enrollment->get_contract_type_string()) . '" title="' .

@@ -15,6 +15,7 @@ use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Core\User\Storage\DataClass\User;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -194,7 +195,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
-            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(User :: class_name(), (int)$id);
             $official_code = $user->get_official_code();
 
             $condition = new EqualityCondition(
