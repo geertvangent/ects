@@ -18,10 +18,10 @@ class PublicationDataFilter extends TypeDataFilter
                 return $value == 1 ? 'dokeos' : 'chamilo';
                 break;
             case PublicationData :: PROPERTY_OBJECT_TYPE :
-                return Translation :: get('TypeName', null, Utilities :: get_namespace_from_classname($value));
+                return Translation :: get('TypeName', null, Utilities :: get_namespace_classname($value));
                 break;
         }
-        
+
         return parent :: format_filter_option($filter, $value);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\DataSource\Bamaflex\DataManager;
-use Ehb\Application\Discovery\DataSource\Bamaflex\History;
-use Ehb\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataManager;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\History;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\HistoryReference;
 use Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Dean;
 use Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
 use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
@@ -175,8 +175,8 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                         new StaticConditionVariable($faculty->get_source()));
                     $conditions[] = new EqualityCondition(
                         new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE),
-                        new StaticConditionVariable(ClassnameUtilities :: getInstance()->getNamespaceFromObject(
-                            $faculty)));
+                        new StaticConditionVariable(
+                            ClassnameUtilities :: getInstance()->getNamespaceFromObject($faculty)));
                     $condition = new AndCondition($conditions);
 
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
@@ -210,8 +210,8 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                         new StaticConditionVariable($faculty->get_source()));
                     $conditions[] = new EqualityCondition(
                         new PropertyConditionVariable(History :: class_name(), History :: PROPERTY_TYPE),
-                        new StaticConditionVariable(ClassnameUtilities :: getInstance()->getNamespaceFromObject(
-                            $faculty)));
+                        new StaticConditionVariable(
+                            ClassnameUtilities :: getInstance()->getNamespaceFromObject($faculty)));
                     $condition = new AndCondition($conditions);
 
                     $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\HistoryReference;
 use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
 use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
 use Ehb\Application\Discovery\Module\Career\MarkMoment;

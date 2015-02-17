@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\HistoryReference;
 use Ehb\Application\Discovery\Module\Faculty\DataManager;
 
 class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty

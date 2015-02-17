@@ -88,33 +88,41 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             new DynamicVisualTab(
                 Module :: TAB_GOALS,
                 Translation :: get('Goals'),
-                Theme :: getInstance()->getImagePath() . 'Tabs/' . Module :: TAB_GOALS . '.png',
-                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
-                $current_tab == Module :: TAB_GOALS));
+                Theme :: getInstance()->getImagePath(
+                    'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' .
+                     Module :: TAB_GOALS . '.png',
+                    $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                    $current_tab == Module :: TAB_GOALS));
         $parameters->set_tab(Module :: TAB_OPTIONS);
         $tabs->add_tab(
             new DynamicVisualTab(
                 Module :: TAB_OPTIONS,
                 Translation :: get('Options'),
-                Theme :: getInstance()->getImagePath() . 'Tabs/' . Module :: TAB_OPTIONS . '.png',
-                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
-                $current_tab == Module :: TAB_OPTIONS));
+                Theme :: getInstance()->getImagePath(
+                    'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' .
+                     Module :: TAB_OPTIONS . '.png',
+                    $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                    $current_tab == Module :: TAB_OPTIONS));
         $parameters->set_tab(Module :: TAB_TRAJECTORIES);
         $tabs->add_tab(
             new DynamicVisualTab(
                 Module :: TAB_TRAJECTORIES,
                 Translation :: get('Trajectories'),
-                Theme :: getInstance()->getImagePath() . 'Tabs/' . Module :: TAB_TRAJECTORIES . '.png',
-                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
-                $current_tab == Module :: TAB_TRAJECTORIES));
+                Theme :: getInstance()->getImagePath(
+                    'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' .
+                     Module :: TAB_TRAJECTORIES . '.png',
+                    $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                    $current_tab == Module :: TAB_TRAJECTORIES));
         $parameters->set_tab(Module :: TAB_COURSES);
         $tabs->add_tab(
             new DynamicVisualTab(
                 Module :: TAB_COURSES,
                 Translation :: get('Courses'),
-                Theme :: getInstance()->getImagePath() . 'Tabs/' . Module :: TAB_COURSES . '.png',
-                $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
-                $current_tab == Module :: TAB_COURSES));
+                Theme :: getInstance()->getImagePath(
+                    'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' .
+                     Module :: TAB_COURSES . '.png',
+                    $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
+                    $current_tab == Module :: TAB_COURSES));
 
         $html[] = $tabs->render();
         return implode("\n", $html);

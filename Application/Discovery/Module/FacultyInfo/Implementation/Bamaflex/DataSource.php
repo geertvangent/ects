@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\DataSource\Bamaflex\DataManager;
-use Ehb\Application\Discovery\DataSource\Bamaflex\History;
-use Ehb\Application\Discovery\DataSource\Bamaflex\HistoryReference;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataManager;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\History;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\HistoryReference;
 use Ehb\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Dean;
 use Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
 use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
@@ -67,7 +67,8 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                             ClassnameUtilities :: getInstance()->getNamespaceFromObject($faculty)));
                     $condition = new AndCondition($conditions);
 
-                    $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    $histories = DataManager :: retrieves(History :: class_name(), $condition);
+
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
@@ -102,7 +103,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                             ClassnameUtilities :: getInstance()->getNamespaceFromObject($faculty)));
                     $condition = new AndCondition($conditions);
 
-                    $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    $histories = DataManager :: retrieves(History :: class_name(), $condition);
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())

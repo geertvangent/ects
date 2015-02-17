@@ -114,9 +114,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             if ($enrollment->is_special_result())
             {
-                $image = '<img src="' .
-                     Theme :: getInstance()->getImagePath(
-                        'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ResultType/' .
+                $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                    'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ResultType/' .
                      $enrollment->get_result() . '.png" alt="' . Translation :: get($enrollment->get_result_string()) .
                      '" title="' . Translation :: get($enrollment->get_result_string()) . '" />';
                 $row[] = $image;
@@ -132,9 +131,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             if ($enrollment->get_generation_student() == 1)
             {
-                $image = '<img src="' .
-                     Theme :: getInstance()->getImagePath(
-                        'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'GenerationStudent/' .
+                $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                    'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'GenerationStudent/' .
                      $enrollment->get_generation_student() . '.png" alt="' . Translation :: get('GenerationStudent') .
                      '" title="' . Translation :: get('GenerationStudent') . '" />';
                 $row[] = $image;
