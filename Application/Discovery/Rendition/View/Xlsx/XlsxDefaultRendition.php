@@ -5,8 +5,7 @@ use Ehb\Application\Discovery\Rendition\Format\XlsxRendition;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\File\Export\Excel\ExcelExport;
 
 class XlsxDefaultRendition extends XlsxRendition
 {
@@ -30,7 +29,7 @@ class XlsxDefaultRendition extends XlsxRendition
             $php_excel->getActiveSheet()->setCellValueByColumnAndRow(
                 $column,
                 $row,
-                StringUtilities :: transcode_string($header));
+                ExcelExport :: transcode_string($header));
             $php_excel->getActiveSheet()->getColumnDimensionByColumn($column)->setAutoSize(true);
             $column ++;
         }

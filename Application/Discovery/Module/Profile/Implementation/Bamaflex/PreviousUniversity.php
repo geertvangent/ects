@@ -6,13 +6,13 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.profile.implementation.bamaflex.
- * 
+ *
  * @author GillardMagali
  */
 class PreviousUniversity extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * PreviousUniversity properties
      */
@@ -26,7 +26,7 @@ class PreviousUniversity extends DataClass
     const PROPERTY_COUNTRY_ID = 'country_id';
     const PROPERTY_COUNTRY_NAME = 'country_name';
     const PROPERTY_INFO = 'info';
-    
+
     // HOBU
     const TYPE_HIGHER_EDUCATION = 1;
     // UNIV
@@ -36,7 +36,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -52,13 +52,13 @@ class PreviousUniversity extends DataClass
         $extended_property_names[] = self :: PROPERTY_COUNTRY_ID;
         $extended_property_names[] = self :: PROPERTY_COUNTRY_NAME;
         $extended_property_names[] = self :: PROPERTY_INFO;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -68,7 +68,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the date of this PreviousUniversity.
-     * 
+     *
      * @return string The date.
      */
     public function get_date()
@@ -78,7 +78,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the date of this PreviousUniversity.
-     * 
+     *
      * @param string $date
      */
     public function set_date($date)
@@ -88,7 +88,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the type of this PreviousUniversity.
-     * 
+     *
      * @return int The type.
      */
     public function get_type()
@@ -98,7 +98,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the type of this PreviousUniversity.
-     * 
+     *
      * @param int $type
      */
     public function set_type($type)
@@ -129,7 +129,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the school_id of this PreviousUniversity.
-     * 
+     *
      * @return int The school_id.
      */
     public function get_school_id()
@@ -139,7 +139,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the school_id of this PreviousUniversity.
-     * 
+     *
      * @param int $school_id
      */
     public function set_school_id($school_id)
@@ -149,7 +149,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the school_name of this PreviousUniversity.
-     * 
+     *
      * @return string The school_name.
      */
     public function get_school_name()
@@ -159,7 +159,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the school_name of this PreviousUniversity.
-     * 
+     *
      * @param string $school_name
      */
     public function set_school_name($school_name)
@@ -169,7 +169,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the school_city of this PreviousUniversity.
-     * 
+     *
      * @return string The school_city.
      */
     public function get_school_city()
@@ -179,7 +179,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the school_city of this PreviousUniversity.
-     * 
+     *
      * @param string $school_city
      */
     public function set_school_city($school_city)
@@ -189,7 +189,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the training_id of this PreviousUniversity.
-     * 
+     *
      * @return int The training_id.
      */
     public function get_training_id()
@@ -199,7 +199,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the training_id of this PreviousUniversity.
-     * 
+     *
      * @param int $training_id
      */
     public function set_training_id($training_id)
@@ -209,7 +209,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the training_name of this PreviousUniversity.
-     * 
+     *
      * @return string The training_name.
      */
     public function get_training_name()
@@ -219,7 +219,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the training_name of this PreviousUniversity.
-     * 
+     *
      * @param string $training_name
      */
     public function set_training_name($training_name)
@@ -229,7 +229,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the country_id of this PreviousUniversity.
-     * 
+     *
      * @return int The country_id.
      */
     public function get_country_id()
@@ -239,7 +239,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the country_id of this PreviousUniversity.
-     * 
+     *
      * @param int $country_id
      */
     public function set_country_id($country_id)
@@ -249,7 +249,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the country_name of this PreviousUniversity.
-     * 
+     *
      * @return string The country_name.
      */
     public function get_country_name()
@@ -259,7 +259,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the country_name of this PreviousUniversity.
-     * 
+     *
      * @param string $country_name
      */
     public function set_country_name($country_name)
@@ -269,7 +269,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Returns the info of this PreviousUniversity.
-     * 
+     *
      * @return string The info.
      */
     public function get_info()
@@ -279,7 +279,7 @@ class PreviousUniversity extends DataClass
 
     /**
      * Sets the info of this PreviousUniversity.
-     * 
+     *
      * @param string $info
      */
     public function set_info($info)

@@ -22,7 +22,7 @@ class UserBrowserTableCellRenderer extends TableCellRenderer implements TableCol
         $toolbar = new Toolbar();
         
         $profile_link = $this->get_component()->get_module_link(
-            'application\discovery\module\profile\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\profile\Implementation\Bamaflex', 
             $user->get_id(), 
             false);
         if ($profile_link)

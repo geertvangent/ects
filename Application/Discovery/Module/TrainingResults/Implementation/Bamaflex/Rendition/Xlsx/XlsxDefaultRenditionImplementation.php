@@ -7,7 +7,7 @@ use Ehb\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Ren
 use Ehb\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\File\Export\Excel\ExcelExport;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -21,21 +21,21 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
         if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT, 
-            $this->get_module_instance()->get_id(), 
+            Rights :: VIEW_RIGHT,
+            $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
             Display :: not_allowed();
         }
-        
+
         $this->php_excel = new \PHPExcel();
         $this->php_excel->removeSheetByIndex(0);
-        
+
         $this->process_training_results();
-        
+
         return \Ehb\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: save(
-            $this->php_excel, 
-            $this->get_module(), 
+            $this->php_excel,
+            $this->get_module(),
             $this->get_file_name());
     }
 
@@ -43,7 +43,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     {
         $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
             Module :: get_training_info_parameters());
-        
+
         return $training->get_name() . ' ' .
              Translation :: get('TypeName', null, $this->get_module_instance()->get_type()) . ' ' . $training->get_year();
     }
@@ -53,7 +53,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $this->php_excel->createSheet(0);
         $this->php_excel->setActiveSheetIndex(0);
         $this->php_excel->getActiveSheet()->setTitle(Translation :: get('TypeName'));
-        
+
         $headers = array();
         $headers[] = Translation :: get('LastName');
         $headers[] = Translation :: get('FirstName');
@@ -62,79 +62,77 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation :: get('Contract');
         $headers[] = Translation :: get('ResultType');
         $headers[] = Translation :: get('DistinctionType');
-        
+
         $this->php_excel->getActiveSheet()->getStyle(
             'A:' . \PHPExcel_Cell :: stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
             \PHPExcel_Style_Alignment :: HORIZONTAL_LEFT);
-        
-        \Ehb\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers(
-            $this->php_excel, 
-            $headers);
-        
+
+        \Ehb\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition :: set_headers($this->php_excel, $headers);
+
         $row = 2;
-        
+
         foreach ($this->get_training_results() as $enrollment)
         {
             $column = 0;
-            
+
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++, 
-                $row, 
-                StringUtilities :: transcode_string($enrollment->get_optional_property('last_name')));
-            
+                $column ++,
+                $row,
+                ExcelExport :: transcode_string($enrollment->get_optional_property('last_name')));
+
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++, 
-                $row, 
-                StringUtilities :: transcode_string($enrollment->get_optional_property('first_name')));
-            
+                $column ++,
+                $row,
+                ExcelExport :: transcode_string($enrollment->get_optional_property('first_name')));
+
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++, 
-                $row, 
-                StringUtilities :: transcode_string($enrollment->get_unified_option()));
-            
+                $column ++,
+                $row,
+                ExcelExport :: transcode_string($enrollment->get_unified_option()));
+
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++, 
-                $row, 
-                StringUtilities :: transcode_string($enrollment->get_unified_trajectory()));
-            
+                $column ++,
+                $row,
+                ExcelExport :: transcode_string($enrollment->get_unified_trajectory()));
+
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++, 
-                $row, 
-                StringUtilities :: transcode_string(
+                $column ++,
+                $row,
+                ExcelExport :: transcode_string(
                     Translation :: get(
-                        $enrollment->get_contract_type_string(), 
-                        null, 
-                        'application\discovery\module\enrollment\implementation\bamaflex')));
-            
+                        $enrollment->get_contract_type_string(),
+                        null,
+                        'Ehb\Application\Discovery\Module\enrollment\Implementation\Bamaflex')));
+
             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                $column ++, 
-                $row, 
-                StringUtilities :: transcode_string(
+                $column ++,
+                $row,
+                ExcelExport :: transcode_string(
                     Translation :: get(
-                        $enrollment->get_result_string(), 
-                        null, 
-                        'application\discovery\module\enrollment\implementation\bamaflex')));
-            
+                        $enrollment->get_result_string(),
+                        null,
+                        'Ehb\Application\Discovery\Module\enrollment\Implementation\Bamaflex')));
+
             if ($enrollment->get_distinction_string())
             {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
-                    $column ++, 
-                    $row, 
-                    StringUtilities :: transcode_string(
+                    $column ++,
+                    $row,
+                    ExcelExport :: transcode_string(
                         Translation :: get(
-                            $enrollment->get_distinction_string(), 
-                            null, 
-                            'application\discovery\module\enrollment\implementation\bamaflex')));
+                            $enrollment->get_distinction_string(),
+                            null,
+                            'Ehb\Application\Discovery\Module\enrollment\Implementation\Bamaflex')));
             }
             else
             {
                 $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow($column ++, $row, '-');
             }
-            
+
             $row ++;
         }
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
@@ -142,7 +140,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     {
         return \Ehb\Application\Discovery\Rendition\Rendition :: FORMAT_XLSX;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */

@@ -160,7 +160,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if ($user instanceof \Chamilo\Core\User\Storage\DataClass\User)
         {
             $profile_link = $this->get_module_link(
-                'application\discovery\module\profile\implementation\bamaflex', 
+                'Ehb\Application\Discovery\Module\profile\Implementation\Bamaflex', 
                 $user->get_id());
             if ($profile_link)
             {

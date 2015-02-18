@@ -26,11 +26,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $faculty_info_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\faculty_info\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\faculty_info\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         $photo_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\photo\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\photo\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         foreach ($faculties as $key => $faculty)
@@ -83,11 +83,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         Translation :: get(
                             'TypeName', 
                             null, 
-                            'application\discovery\module\photo\implementation\bamaflex'), 
+                            'Ehb\Application\Discovery\Module\photo\Implementation\Bamaflex'), 
                         $url, 
                         ToolbarItem :: DISPLAY_ICON, 
                         false, 
-                        'application\discovery\module\photo\implementation\bamaflex');
+                        'Ehb\Application\Discovery\Module\photo\Implementation\Bamaflex');
                 }
                 else
                 {
@@ -97,11 +97,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         Translation :: get(
                             'TypeName', 
                             null, 
-                            'application\discovery\module\photo\implementation\bamaflex'), 
+                            'Ehb\Application\Discovery\Module\photo\Implementation\Bamaflex'), 
                         null, 
                         ToolbarItem :: DISPLAY_ICON, 
                         false, 
-                        'application\discovery\module\photo\implementation\bamaflex');
+                        'Ehb\Application\Discovery\Module\photo\Implementation\Bamaflex');
                 }
             }
             $data[] = $row;

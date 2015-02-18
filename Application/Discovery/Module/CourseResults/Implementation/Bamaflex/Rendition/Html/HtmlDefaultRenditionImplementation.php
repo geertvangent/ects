@@ -47,15 +47,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data_source = $this->get_module_instance()->get_setting('data_source');
         
         $course_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\course\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\course\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         $faculty_info_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\faculty_info\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\faculty_info\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         $training_info_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\training_info\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\training_info\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         $html = array();
@@ -188,7 +188,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $profile_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\profile\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\profile\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         foreach ($this->get_course_results() as $course_result)
@@ -232,7 +232,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $row[] = Translation :: get(
                 $course_result->get_trajectory_type_string(), 
                 null, 
-                'application\discovery\module\enrollment\implementation\bamaflex');
+                'Ehb\Application\Discovery\Module\enrollment\Implementation\Bamaflex');
             
             foreach ($this->get_mark_moments() as $mark_moment)
             {
@@ -253,49 +253,49 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $mark_status_image = '<img src="' .
                              Theme :: getInstance()->getImagePath(
-                                'application\discovery\module\career\implementation\bamaflex') . 'status_type/' .
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . 'status_type/' .
                              $mark->get_status() . '_na.png" alt="' .
                              Translation :: get(
                                 $mark->get_status_string() . 'Abandoned', 
                                 null, 
-                                'application\discovery\module\career\implementation\bamaflex') . '" title="' . Translation :: get(
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . '" title="' . Translation :: get(
                                 $mark->get_status_string() . 'Abandoned', 
                                 null, 
-                                'application\discovery\module\career\implementation\bamaflex') . '" />';
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . '" />';
                         LegendTable :: get_instance()->add_symbol(
                             $mark_status_image, 
                             Translation :: get(
                                 $mark->get_status_string() . 'Abandoned', 
                                 null, 
-                                'application\discovery\module\career\implementation\bamaflex'), 
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex'), 
                             Translation :: get(
                                 'MarkStatus', 
                                 null, 
-                                'application\discovery\module\career\implementation\bamaflex'));
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex'));
                     }
                     else
                     {
                         $mark_status_image = '<img src="' .
                              Theme :: getInstance()->getImagePath(
-                                'application\discovery\module\career\implementation\bamaflex') . 'status_type/' .
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . 'status_type/' .
                              $mark->get_status() . '.png" alt="' .
                              Translation :: get(
                                 $mark->get_status_string(), 
                                 null, 
-                                'application\discovery\module\career\implementation\bamaflex') . '" title="' . Translation :: get(
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . '" title="' . Translation :: get(
                                 $mark->get_status_string(), 
                                 null, 
-                                'application\discovery\module\career\implementation\bamaflex') . '" />';
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . '" />';
                         LegendTable :: get_instance()->add_symbol(
                             $mark_status_image, 
                             Translation :: get(
                                 $mark->get_status_string(), 
                                 null, 
-                                'application\discovery\module\career\implementation\bamaflex'), 
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex'), 
                             Translation :: get(
                                 'MarkStatus', 
                                 null, 
-                                'application\discovery\module\career\implementation\bamaflex'));
+                                'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex'));
                     }
                     $row[] = $mark_status_image;
                 }

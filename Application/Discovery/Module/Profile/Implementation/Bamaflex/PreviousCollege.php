@@ -6,13 +6,13 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.profile.implementation.bamaflex.
- * 
+ *
  * @author GillardMagali
  */
 class PreviousCollege extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      * PreviousCollege properties
      */
@@ -31,7 +31,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -49,13 +49,13 @@ class PreviousCollege extends DataClass
         $extended_property_names[] = self :: PROPERTY_COUNTRY_ID;
         $extended_property_names[] = self :: PROPERTY_COUNTRY_NAME;
         $extended_property_names[] = self :: PROPERTY_INFO;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -65,7 +65,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the date of this PreviousCollege.
-     * 
+     *
      * @return string The date.
      */
     public function get_date()
@@ -75,7 +75,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the date of this PreviousCollege.
-     * 
+     *
      * @param string $date
      */
     public function set_date($date)
@@ -85,7 +85,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the degree_id of this PreviousCollege.
-     * 
+     *
      * @return int The degree_id.
      */
     public function get_degree_id()
@@ -95,7 +95,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the degree_id of this PreviousCollege.
-     * 
+     *
      * @param int $degree_id
      */
     public function set_degree_id($degree_id)
@@ -105,7 +105,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the degree_type of this PreviousCollege.
-     * 
+     *
      * @return int The degree_type.
      */
     public function get_degree_type()
@@ -115,7 +115,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the degree_type of this PreviousCollege.
-     * 
+     *
      * @param int $degree_type
      */
     public function set_degree_type($degree_type)
@@ -125,7 +125,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the degree_name of this PreviousCollege.
-     * 
+     *
      * @return string The degree_name.
      */
     public function get_degree_name()
@@ -135,7 +135,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the degree_name of this PreviousCollege.
-     * 
+     *
      * @param string $degree_name
      */
     public function set_degree_name($degree_name)
@@ -145,7 +145,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the school_id of this PreviousCollege.
-     * 
+     *
      * @return int The school_id.
      */
     public function get_school_id()
@@ -155,7 +155,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the school_id of this PreviousCollege.
-     * 
+     *
      * @param int $school_id
      */
     public function set_school_id($school_id)
@@ -165,7 +165,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the school_name of this PreviousCollege.
-     * 
+     *
      * @return string The school_name.
      */
     public function get_school_name()
@@ -175,7 +175,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the school_name of this PreviousCollege.
-     * 
+     *
      * @param string $school_name
      */
     public function set_school_name($school_name)
@@ -185,7 +185,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the school_city of this PreviousCollege.
-     * 
+     *
      * @return string The school_city.
      */
     public function get_school_city()
@@ -195,7 +195,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the school_city of this PreviousCollege.
-     * 
+     *
      * @param string $school_city
      */
     public function set_school_city($school_city)
@@ -205,7 +205,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the training_id of this PreviousCollege.
-     * 
+     *
      * @return int The training_id.
      */
     public function get_training_id()
@@ -215,7 +215,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the training_id of this PreviousCollege.
-     * 
+     *
      * @param int $training_id
      */
     public function set_training_id($training_id)
@@ -225,7 +225,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the training_name of this PreviousCollege.
-     * 
+     *
      * @return string The training_name.
      */
     public function get_training_name()
@@ -235,7 +235,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the training_name of this PreviousCollege.
-     * 
+     *
      * @param string $training_name
      */
     public function set_training_name($training_name)
@@ -245,7 +245,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the country_id of this PreviousCollege.
-     * 
+     *
      * @return int The country_id.
      */
     public function get_country_id()
@@ -255,7 +255,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the country_id of this PreviousCollege.
-     * 
+     *
      * @param int $country_id
      */
     public function set_country_id($country_id)
@@ -265,7 +265,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the country_name of this PreviousCollege.
-     * 
+     *
      * @return string The country_name.
      */
     public function get_country_name()
@@ -275,7 +275,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the country_name of this PreviousCollege.
-     * 
+     *
      * @param string $country_name
      */
     public function set_country_name($country_name)
@@ -285,7 +285,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Returns the info of this PreviousCollege.
-     * 
+     *
      * @return string The info.
      */
     public function get_info()
@@ -295,7 +295,7 @@ class PreviousCollege extends DataClass
 
     /**
      * Sets the info of this PreviousCollege.
-     * 
+     *
      * @param string $info
      */
     public function set_info($info)

@@ -80,19 +80,19 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
         $course_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\course\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\course\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         $course_result_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\course_results\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\course_results\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         $faculty_info_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\faculty_info\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\faculty_info\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         $training_info_module_instance = \Ehb\Application\Discovery\Module :: exists(
-            'application\discovery\module\training_info\implementation\bamaflex', 
+            'Ehb\Application\Discovery\Module\training_info\Implementation\Bamaflex', 
             array('data_source' => $data_source));
         
         foreach ($teaching_assignments as $key => $teaching_assignment)

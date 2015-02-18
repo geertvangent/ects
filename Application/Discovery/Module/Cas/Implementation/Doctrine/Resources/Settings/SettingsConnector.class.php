@@ -16,11 +16,11 @@ class SettingsConnector
     {
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Ehb\Application\Discovery\DataSource\DataClass\Instance :: class_name(),
-                \Ehb\Application\Discovery\DataSource\DataClass\Instance :: PROPERTY_TYPE),
-            new StaticConditionVariable('application\discovery\data_source\doctrine'));
+                \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+                \Ehb\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_TYPE),
+            new StaticConditionVariable('Ehb\Application\Discovery\DataSource\Doctrine'));
         $instances = \Ehb\Application\Discovery\DataSource\Storage\DataManager :: retrieves(
-            \Ehb\Application\Discovery\DataSource\DataClass\Instance :: class_name(),
+            \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 null,
@@ -28,8 +28,8 @@ class SettingsConnector
                 array(
                     new OrderBy(
                         new PropertiesConditionVariable(
-                            \Ehb\Application\Discovery\DataSource\DataClass\Instance :: class_name(),
-                            \Ehb\Application\Discovery\DataSource\DataClass\Instance :: PROPERTY_NAME)))));
+                            \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+                            \Ehb\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_NAME)))));
 
         $data_sources = array();
 

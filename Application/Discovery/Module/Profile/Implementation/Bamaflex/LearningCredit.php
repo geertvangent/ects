@@ -6,13 +6,13 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.profile.implementation.bamaflex
- * 
+ *
  * @author Hans De Bisschop
  */
 class LearningCredit extends DiscoveryItem
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      *
      * @var integer
@@ -31,7 +31,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -40,13 +40,13 @@ class LearningCredit extends DiscoveryItem
         $extended_property_names[] = self :: PROPERTY_PERSON_ID;
         $extended_property_names[] = self :: PROPERTY_DATE;
         $extended_property_names[] = self :: PROPERTY_LEARNING_CREDIT;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -56,7 +56,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Returns the person_id of this LearningCredit.
-     * 
+     *
      * @return integer The person_id.
      */
     public function get_person_id()
@@ -66,7 +66,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Sets the person_id of this LearningCredit.
-     * 
+     *
      * @param integer $person_id
      */
     public function set_person_id($person_id)
@@ -76,7 +76,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Returns the date of this LearningCredit.
-     * 
+     *
      * @return string The date.
      */
     public function get_date()
@@ -86,7 +86,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Sets the date of this LearningCredit.
-     * 
+     *
      * @param string $date
      */
     public function set_date($date)
@@ -96,7 +96,7 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Returns the learning_credit of this LearningCredit.
-     * 
+     *
      * @return integer The learning_credit.
      */
     public function get_learning_credit()
@@ -106,21 +106,12 @@ class LearningCredit extends DiscoveryItem
 
     /**
      * Sets the learning_credit of this LearningCredit.
-     * 
+     *
      * @param integer $learning_credit
      */
     public function set_learning_credit($learning_credit)
     {
         $this->set_default_property(self :: PROPERTY_LEARNING_CREDIT, $learning_credit);
-    }
-
-    /**
-     *
-     * @return string The table name of the data class
-     */
-    public static function get_table_name()
-    {
-        return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 
     public function get_html()
@@ -137,5 +128,14 @@ class LearningCredit extends DiscoveryItem
         {
             return '<span style="color:#139a4f">' . $this->get_learning_credit() . '</span>';
         }
+    }
+
+    /**
+     *
+     * @return string The table name of the data class
+     */
+    public static function get_table_name()
+    {
+        return Utilities :: get_classname_from_namespace(self :: CLASS_NAME, true);
     }
 }

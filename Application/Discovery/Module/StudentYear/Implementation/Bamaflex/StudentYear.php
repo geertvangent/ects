@@ -5,19 +5,19 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.student_year.implementation.bamaflex
- * 
+ *
  * @author Hans De Bisschop
  */
 class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentYear
 {
     const CLASS_NAME = __CLASS__;
-    
+
     /**
      *
      * @var string
      */
     const PROPERTY_SOURCE = 'source';
-    
+
     /**
      *
      * @var integer
@@ -31,7 +31,7 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
 
     /**
      * Get the default properties
-     * 
+     *
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
@@ -39,13 +39,13 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
     {
         $extended_property_names[] = self :: PROPERTY_SOURCE;
         $extended_property_names[] = self :: PROPERTY_REDUCED_REGISTRATION_FEE_ID;
-        
+
         return parent :: get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     * 
+     *
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -55,7 +55,7 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
 
     /**
      * Returns the source of this StudentYear.
-     * 
+     *
      * @return string The source.
      */
     public function get_source()
@@ -65,7 +65,7 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
 
     /**
      * Sets the source of this StudentYear.
-     * 
+     *
      * @param string $source
      */
     public function set_source($source)
@@ -75,7 +75,7 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
 
     /**
      * Returns the reduced_registration_fee_id of this StudentYear.
-     * 
+     *
      * @return integer The reduced_registration_fee_id.
      */
     public function get_reduced_registration_fee_id()
@@ -85,7 +85,7 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
 
     /**
      * Sets the reduced_registration_fee_id of this StudentYear.
-     * 
+     *
      * @param integer $reduced_registration_fee_id
      */
     public function set_reduced_registration_fee_id($reduced_registration_fee_id)
@@ -136,7 +136,7 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
     public static function get_reduced_registration_fee_types($types_only = false)
     {
         $types = array();
-        
+
         $types[self :: REDUCED_REGISTRATION_FEE_NO] = self :: reduced_registration_fee_string(
             self :: REDUCED_REGISTRATION_FEE_NO);
         $types[self :: REDUCED_REGISTRATION_FEE_YES] = self :: reduced_registration_fee_string(
@@ -147,7 +147,7 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
             self :: REDUCED_REGISTRATION_FEE_PENDING);
         $types[self :: REDUCED_REGISTRATION_FEE_REFUSED] = self :: reduced_registration_fee_string(
             self :: REDUCED_REGISTRATION_FEE_REFUSED);
-        
+
         return ($types_only ? array_keys($types) : $types);
     }
 
