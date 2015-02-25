@@ -72,7 +72,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             $profile->set_email($this->retrieve_emails($official_code));
             $profile->set_communication($this->retrieve_communications($official_code));
             $profile->set_language($this->convert_to_utf8($object->language));
-            // $profile->set_photo($this->retrieve_photo($official_code));
+            $profile->set_photo($this->retrieve_photo($official_code));
             $profile->set_first_university($object->first_university);
             $profile->set_first_university_college($object->first_university_college);
 
@@ -265,7 +265,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
 
             $photo = new Photo();
             $photo->set_mime_type('image/jpeg');
-            $photo->set_data(base64_encode($object->photo));
+            $photo->set_data(base64_encode(hex2bin($object->photo)));
 
             return $photo;
         }

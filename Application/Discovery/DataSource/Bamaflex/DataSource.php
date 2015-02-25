@@ -31,14 +31,15 @@ class DataSource extends \Ehb\Application\Discovery\DataSource
      */
     public function convert_to_utf8($string)
     {
-        if (Connection :: get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
-            'driver') == 'mssql')
-        {
-            return iconv('Windows-1252', 'UTF-8', $string);
-        }
-        else
-        {
-            return iconv(mb_detect_encoding($string), 'UTF-8', $string);
-        }
+        return $string;
+//         if (Connection :: get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
+//             'driver') == 'mssql')
+//         {
+//             return iconv('Windows-1252', 'UTF-8', $string);
+//         }
+//         else
+//         {
+//             return iconv(mb_detect_encoding($string), 'UTF-8', $string);
+//         }
     }
 }
