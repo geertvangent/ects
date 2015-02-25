@@ -1,0 +1,5 @@
+TypeName = "Bamaflex"
+AllUsersComponent = "All users"
+GroupsComponent = "Groups"
+NewUsersComponent = "New users"
+UpdateUsersComponent = "Update users"
