@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Discovery\DataSource\Form;
 
-use Ehb\Application\Discovery\DataSource\DataClass\Instance;
-use Ehb\Application\Discovery\DataSource\DataClass\InstanceSetting;
+use Ehb\Application\Discovery\DataSource\Storage\DataClass\Instance;
+use Ehb\Application\Discovery\DataSource\Storage\DataClass\InstanceSetting;
 use Ehb\Application\Discovery\DataSource\Storage\DataManager;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Format\Tabs\DynamicFormTab;

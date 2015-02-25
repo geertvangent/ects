@@ -178,7 +178,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                                 new DynamicVisualTab(
                                     $module_instance->get_id(),
                                     Translation :: get('TypeName', null, $module_instance->get_type()),
-                                    Theme :: getInstance()->getImagePath($module_instance->get_type()) . 'logo/22.png',
+                                    Theme :: getInstance()->getImagePath($module_instance->get_type()) . 'Logo/22.png',
                                     $link,
                                     $selected));
                         }
@@ -194,7 +194,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                         new DynamicVisualTab(
                             $module_instance->get_id(),
                             Translation :: get('TypeName', null, $module_instance->get_type()),
-                            Theme :: getInstance()->getImagePath($module_instance->get_type()) . 'logo/22.png',
+                            Theme :: getInstance()->getImagePath($module_instance->get_type()) . 'Logo/22.png',
                             $link,
                             $selected));
                 }

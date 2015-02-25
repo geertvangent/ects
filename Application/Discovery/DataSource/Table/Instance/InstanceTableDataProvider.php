@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\DataSource\Table\Instance;
 
-use Ehb\Application\Discovery\DataSource\DataClass\Instance;
+use Ehb\Application\Discovery\DataSource\Storage\DataClass\Instance;
 use Ehb\Application\Discovery\DataSource\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
