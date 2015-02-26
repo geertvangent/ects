@@ -19,7 +19,7 @@ class ContextTableCellRenderer extends DataClassTableCellRenderer implements Tab
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role\Entity'),
-                Theme :: getInstance()->getImagePath('\Ehb\Application\Atlantis\Role\Entity') . 'logo/16.png',
+                Theme :: getInstance()->getImagePath('\Ehb\Application\Atlantis\Role\Entity') . 'Logo/16.png',
                 $this->get_component()->get_url(
                     array(
                         \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,

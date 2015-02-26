@@ -50,7 +50,7 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role\Entitlement'),
-                Theme :: getInstance()->getImagePath('\Ehb\Application\Atlantis\Role\Entitlement') . 'logo/16.png',
+                Theme :: getInstance()->getImagePath('\Ehb\Application\Atlantis\Role\Entitlement') . 'Logo/16.png',
                 $this->get_component()->get_url(
                     array(
                         \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,
