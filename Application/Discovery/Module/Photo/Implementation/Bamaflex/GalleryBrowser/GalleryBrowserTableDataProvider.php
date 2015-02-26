@@ -13,8 +13,7 @@ class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
      */
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
-        $order_property = $this->get_order_property($order_property);
-        $parameters = new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property);
+        $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
         return \Chamilo\Core\User\Storage\DataManager :: retrieves(
             \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
             $parameters);
@@ -25,7 +24,7 @@ class GalleryBrowserTableDataProvider extends GalleryTableDataProvider
      */
     public function count_data($condition)
     {
-        $parameters = new DataClassCountParameters($this->get_condition());
+        $parameters = new DataClassCountParameters($condition);
         return \Chamilo\Core\User\Storage\DataManager :: count(
             \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
             $parameters);
