@@ -265,7 +265,17 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
 
             $photo = new Photo();
             $photo->set_mime_type('image/jpeg');
-            $photo->set_data(base64_encode(hex2bin($object->photo)));
+
+            if ($this->IsBinary($object->photo))
+            {
+                $data = $object->photo;
+            }
+            else
+            {
+                $data = hex2bin($object->photo);
+            }
+
+            $photo->set_data(base64_encode($data));
 
             return $photo;
         }
@@ -273,6 +283,11 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         {
             return false;
         }
+    }
+
+    private function IsBinary($data)
+    {
+        return (0 || substr_count($data, "^ -~", "^\r\n") / 512 > 0.3 || substr_count($data, "\x00") > 0);
     }
 
     private function retrieve_previous_college($id)
