@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package context="atlantis">
+	<settings>
+		<category name="visual">
+			<setting name="theme" field="select" default="Eagle">
+				<options type="dynamic" source="get_themes" />
+			</setting>
+		</category>
+	</settings>
+</package>
