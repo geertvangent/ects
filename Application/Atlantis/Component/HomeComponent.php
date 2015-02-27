@@ -32,14 +32,14 @@ class HomeComponent extends Manager implements DelegateComponent
         $actions[] = new DynamicAction(
             Translation :: get('BrowseRoles', null, $namespace),
             Translation :: get('BrowseRolesDescription', null, $namespace),
-            Theme :: getInstance()->getImagePath($namespace) . 'Admin/browse.png',
+            Theme :: getInstance()->getImagesPath($namespace) . 'Admin/browse.png',
             $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_ROLE)));
         if ($this->get_user()->is_platform_admin())
         {
             $actions[] = new DynamicAction(
                 Translation :: get('CreateRole', null, $namespace),
                 Translation :: get('CreateRoleDescription', null, $namespace),
-                Theme :: getInstance()->getImagePath($namespace) . 'Admin/create.png',
+                Theme :: getInstance()->getImagesPath($namespace) . 'Admin/create.png',
                 $this->get_url(
                     array(
                         self :: PARAM_ACTION => self :: ACTION_ROLE,
@@ -49,7 +49,7 @@ class HomeComponent extends Manager implements DelegateComponent
             new DynamicActionsTab(
                 'role',
                 Translation :: get('TypeName', null, $namespace),
-                Theme :: getInstance()->getImagePath($namespace) . 'Logo/22.png',
+                Theme :: getInstance()->getImagesPath($namespace) . 'Logo/22.png',
                 $actions));
 
         // Application tab
@@ -61,14 +61,14 @@ class HomeComponent extends Manager implements DelegateComponent
         $actions[] = new DynamicAction(
             Translation :: get('BrowseApplications', null, $namespace),
             Translation :: get('BrowseApplicationsDescription', null, $namespace),
-            Theme :: getInstance()->getImagePath($namespace) . 'Admin/browse.png',
+            Theme :: getInstance()->getImagesPath($namespace) . 'Admin/browse.png',
             $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_APPLICATION)));
         if ($this->get_user()->is_platform_admin())
         {
             $actions[] = new DynamicAction(
                 Translation :: get('CreateApplication', null, $namespace),
                 Translation :: get('CreateApplicationDescription', null, $namespace),
-                Theme :: getInstance()->getImagePath($namespace) . 'Admin/create.png',
+                Theme :: getInstance()->getImagesPath($namespace) . 'Admin/create.png',
                 $this->get_url(
                     array(
                         self :: PARAM_ACTION => self :: ACTION_APPLICATION,
@@ -78,7 +78,7 @@ class HomeComponent extends Manager implements DelegateComponent
             new DynamicActionsTab(
                 'application',
                 Translation :: get('TypeName', null, $namespace),
-                Theme :: getInstance()->getImagePath($namespace) . 'Logo/22.png',
+                Theme :: getInstance()->getImagesPath($namespace) . 'Logo/22.png',
                 $actions));
 
         // RoleEntity tab
@@ -87,7 +87,7 @@ class HomeComponent extends Manager implements DelegateComponent
         $actions[] = new DynamicAction(
             Translation :: get('BrowseRoleEntities', null, $namespace),
             Translation :: get('BrowseRoleEntitiesDescription', null, $namespace),
-            Theme :: getInstance()->getImagePath($namespace) . 'Admin/browse.png',
+            Theme :: getInstance()->getImagesPath($namespace) . 'Admin/browse.png',
             $this->get_url(
                 array(
                     self :: PARAM_ACTION => self :: ACTION_ROLE,
@@ -99,7 +99,7 @@ class HomeComponent extends Manager implements DelegateComponent
             $actions[] = new DynamicAction(
                 Translation :: get('CreateRoleEntity', null, $namespace),
                 Translation :: get('CreateRoleEntityDescription', null, $namespace),
-                Theme :: getInstance()->getImagePath($namespace) . 'Admin/create.png',
+                Theme :: getInstance()->getImagesPath($namespace) . 'Admin/create.png',
                 $this->get_url(
                     array(
                         self :: PARAM_ACTION => self :: ACTION_ROLE,
@@ -110,7 +110,7 @@ class HomeComponent extends Manager implements DelegateComponent
             new DynamicActionsTab(
                 'role_entity',
                 Translation :: get('TypeName', null, $namespace),
-                Theme :: getInstance()->getImagePath($namespace) . 'Logo/22.png',
+                Theme :: getInstance()->getImagesPath($namespace) . 'Logo/22.png',
                 $actions));
 
         // Entity type
@@ -118,7 +118,7 @@ class HomeComponent extends Manager implements DelegateComponent
         // $actions = array();
         // $actions[] = new DynamicAction(Translation :: get('BrowseUsersGroups', null, $namespace),
         // Translation :: get('BrowseUsersGroupsDescription', null, $namespace),
-        // Theme :: getInstance()->getImagePath($namespace) . 'admin/browse.png',
+        // Theme :: getInstance()->getImagesPath($namespace) . 'admin/browse.png',
         // $this->get_url(
         // array(self :: PARAM_ACTION => self :: ACTION_ROLE,
         // \application\atlantis\role\Manager :: PARAM_ACTION => \application\atlantis\role\Manager :: ACTION_ENTITY,
@@ -134,14 +134,14 @@ class HomeComponent extends Manager implements DelegateComponent
         $actions[] = new DynamicAction(
             Translation :: get('BrowseContexts', null, $namespace),
             Translation :: get('BrowseContextsDescription', null, $namespace),
-            Theme :: getInstance()->getImagePath($namespace) . 'Admin/browse.png',
+            Theme :: getInstance()->getImagesPath($namespace) . 'Admin/browse.png',
             $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CONTEXT)));
 
         $tabs->add_tab(
             new DynamicActionsTab(
                 'context',
                 Translation :: get('TypeName', null, $namespace),
-                Theme :: getInstance()->getImagePath($namespace) . 'Logo/22.png',
+                Theme :: getInstance()->getImagesPath($namespace) . 'Logo/22.png',
                 $actions));
 
         if ($this->get_user()->is_platform_admin())
@@ -152,14 +152,14 @@ class HomeComponent extends Manager implements DelegateComponent
             $actions[] = new DynamicAction(
                 Translation :: get('ConfigureRights', null, $namespace),
                 Translation :: get('ConfigureRightsDescription', null, $namespace),
-                Theme :: getInstance()->getImagePath($namespace) . 'Admin/rights.png',
+                Theme :: getInstance()->getImagesPath($namespace) . 'Admin/rights.png',
                 $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_RIGHTS)));
 
             $tabs->add_tab(
                 new DynamicActionsTab(
                     'rights',
                     Translation :: get('TypeName', null, $namespace),
-                    Theme :: getInstance()->getImagePath($namespace) . 'Logo/22.png',
+                    Theme :: getInstance()->getImagesPath($namespace) . 'Logo/22.png',
                     $actions));
         }
 

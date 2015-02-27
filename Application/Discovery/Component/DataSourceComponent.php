@@ -21,7 +21,7 @@ class DataSourceComponent extends Manager
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get('Modules'),
-                Theme :: getInstance()->getCommonImagePath() . 'action_config.png',
+                Theme :: getInstance()->getCommonImagesPath() . 'action_config.png',
                 $link));
 
         $module_parameters = array();
@@ -33,7 +33,7 @@ class DataSourceComponent extends Manager
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get('User'),
-                Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'action_user.png',
+                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_user.png',
                 $link));
 
         $module_parameters = array();
@@ -46,7 +46,7 @@ class DataSourceComponent extends Manager
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get('Information'),
-                Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'action_information.png',
+                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_information.png',
                 $link));
 
         $factory = new ApplicationFactory(

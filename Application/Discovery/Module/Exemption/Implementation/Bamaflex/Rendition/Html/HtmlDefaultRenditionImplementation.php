@@ -75,7 +75,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $row[] = $exemption->get_proof();
             $row[] = $exemption->get_remarks();
 
-            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'State/' . $exemption->get_state() .
+            $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'State/' . $exemption->get_state() .
                  '.png" alt="' . Translation :: get($exemption->get_state_string()) . '" title="' .
                  Translation :: get($exemption->get_state_string()) . '"/>';
             $row[] = $image;

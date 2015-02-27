@@ -88,7 +88,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             new DynamicVisualTab(
                 Module :: TAB_GOALS,
                 Translation :: get('Goals'),
-                Theme :: getInstance()->getImagePath(
+                Theme :: getInstance()->getImagesPath(
                     'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/'.
                      Module :: TAB_GOALS . '.png',
                     $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
@@ -98,7 +98,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             new DynamicVisualTab(
                 Module :: TAB_OPTIONS,
                 Translation :: get('Options'),
-                Theme :: getInstance()->getImagePath(
+                Theme :: getInstance()->getImagesPath(
                     'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' .
                      Module :: TAB_OPTIONS . '.png',
                     $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
@@ -108,7 +108,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             new DynamicVisualTab(
                 Module :: TAB_TRAJECTORIES,
                 Translation :: get('Trajectories'),
-                Theme :: getInstance()->getImagePath(
+                Theme :: getInstance()->getImagesPath(
                     'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' .
                      Module :: TAB_TRAJECTORIES . '.png',
                     $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),
@@ -118,7 +118,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             new DynamicVisualTab(
                 Module :: TAB_COURSES,
                 Translation :: get('Courses'),
-                Theme :: getInstance()->getImagePath(
+                Theme :: getInstance()->getImagesPath(
                     'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' .
                      Module :: TAB_COURSES . '.png',
                     $this->get_instance_url($this->get_module_instance()->get_id(), $parameters),

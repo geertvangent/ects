@@ -252,7 +252,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($mark->is_abandoned())
                     {
-                        $mark_status_image = '<img src="' . Theme :: getInstance()->getImagePath(
+                        $mark_status_image = '<img src="' . Theme :: getInstance()->getImagesPath(
                             'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . 'StatusType/' .
                              $mark->get_status() . '_na.png" alt="' .
                              Translation :: get(
@@ -275,7 +275,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     }
                     else
                     {
-                        $mark_status_image = '<img src="' . Theme :: getInstance()->getImagePath(
+                        $mark_status_image = '<img src="' . Theme :: getInstance()->getImagesPath(
                             'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . 'StatusType/' .
                              $mark->get_status() . '.png" alt="' .
                              Translation :: get(

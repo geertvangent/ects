@@ -46,7 +46,7 @@ class ViewerComponent extends Manager implements DelegateComponent
             BreadcrumbTrail :: get_instance()->add_extra(
                 new ToolbarItem(
                     Translation :: get('Modules'),
-                    Theme :: getInstance()->getCommonImagePath() . 'action_config.png',
+                    Theme :: getInstance()->getCommonImagesPath() . 'action_config.png',
                     $link));
         }
 
@@ -94,7 +94,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('Information'),
-                        Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'action_information.png',
+                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_information.png',
                         $link));
                 break;
             case Instance :: TYPE_INFORMATION :
@@ -105,7 +105,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('User'),
-                        Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'action_user.png',
+                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_user.png',
                         $link));
                 break;
             case Instance :: TYPE_DETAILS :
@@ -116,7 +116,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('User'),
-                        Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'action_user.png',
+                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_user.png',
                         $link));
                 $module_parameters = array();
                 $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
@@ -125,7 +125,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('Information'),
-                        Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'action_information.png',
+                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_information.png',
                         $link));
                 break;
         }
@@ -178,7 +178,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                                 new DynamicVisualTab(
                                     $module_instance->get_id(),
                                     Translation :: get('TypeName', null, $module_instance->get_type()),
-                                    Theme :: getInstance()->getImagePath($module_instance->get_type()) . 'Logo/22.png',
+                                    Theme :: getInstance()->getImagesPath($module_instance->get_type()) . 'Logo/22.png',
                                     $link,
                                     $selected));
                         }
@@ -194,7 +194,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                         new DynamicVisualTab(
                             $module_instance->get_id(),
                             Translation :: get('TypeName', null, $module_instance->get_type()),
-                            Theme :: getInstance()->getImagePath($module_instance->get_type()) . 'Logo/22.png',
+                            Theme :: getInstance()->getImagesPath($module_instance->get_type()) . 'Logo/22.png',
                             $link,
                             $selected));
                 }

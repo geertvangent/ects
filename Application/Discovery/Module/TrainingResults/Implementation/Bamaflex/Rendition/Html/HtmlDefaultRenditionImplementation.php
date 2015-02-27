@@ -402,7 +402,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 'Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex');
             if ($enrollment->is_special_result())
             {
-                $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath(
                     'Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex') . 'ResultType/' .
                      $enrollment->get_result() . '.png" alt="' .
                      Translation :: get(
@@ -430,7 +430,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             if ($enrollment->has_distinction())
             {
-                $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath(
                     'Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex') . 'DistinctionType/' .
                      $enrollment->get_distinction() . '.png" alt="' .
                      Translation :: get(

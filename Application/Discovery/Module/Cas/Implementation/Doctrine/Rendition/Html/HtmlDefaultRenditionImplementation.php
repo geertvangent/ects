@@ -47,7 +47,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     new DynamicContentTab(
                         $action->get_id(),
                         Translation :: get($action->get_name()),
-                        Theme :: getInstance()->getImagePath() . 'Action/' . $action->get_id() . '.png',
+                        Theme :: getInstance()->getImagesPath() . 'Action/' . $action->get_id() . '.png',
                         $this->get_statistics_table($action)));
             }
 
@@ -135,7 +135,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     new DynamicContentTab(
                         1,
                         Translation :: get('Chart'),
-                        Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'SubTabs/1.png',
+                        Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'SubTabs/1.png',
                         $graph->chart()));
 
                 $table = new SortableTable($data);
@@ -145,14 +145,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     new DynamicContentTab(
                         3,
                         Translation :: get('DatesTable'),
-                        Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'SubTabs/3.png',
+                        Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'SubTabs/3.png',
                         $table->toHTML()));
 
                 $tabs->add_tab(
                     new DynamicContentTab(
                         $application_id,
                         $applications[$application_id]->get_title(),
-                        Theme :: getInstance()->getImagePath() . 'Application/' . $application_id . '.png',
+                        Theme :: getInstance()->getImagesPath() . 'Application/' . $application_id . '.png',
                         $sub_tabs->render()));
             }
             return $tabs->render();

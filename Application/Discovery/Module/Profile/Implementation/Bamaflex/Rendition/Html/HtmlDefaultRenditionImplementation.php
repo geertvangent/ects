@@ -56,7 +56,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     }
 
                     $html[] = '<div class="content_object" style="background-image: url(' .
-                         Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Types/address.png);">';
+                         Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Types/address.png);">';
                     $html[] = '<div class="title">';
                     $html[] = Translation :: get('Addresses');
                     $html[] = '</div>';
@@ -94,7 +94,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 }
 
                 $html[] = '<div class="content_object" style="background-image: url(' .
-                     Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Types/learning_credit.png);">';
+                     Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Types/learning_credit.png);">';
                 $html[] = '<div class="title">';
                 $html[] = Translation :: get('LearningCredits');
                 $html[] = '</div>';
@@ -205,7 +205,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             $table = new PropertiesTable($properties);
             $html[] = '<div class="content_object" style="background-image: url(' .
-                 Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Types/previous_college.png);">';
+                 Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Types/previous_college.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('PreviousCollege');
             $html[] = '</div>';
@@ -249,7 +249,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             $table = new PropertiesTable($properties);
             $html[] = '<div class="content_object" style="background-image: url('.
-                 Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Types/previous_university.png);">';
+                 Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Types/previous_university.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('PreviousUniversity');
             $html[] = '</div>';

@@ -49,7 +49,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                     if ($enrollment->is_special_result())
                     {
-                        $tab_image_path = Theme :: getInstance()->getImagePath($enrollment_namespace) . 'ResultType/' .
+                        $tab_image_path = Theme :: getInstance()->getImagesPath($enrollment_namespace) . 'ResultType/' .
                              $enrollment->get_result() . '.png';
                         $tab_image = '<img src="' . $tab_image_path . '" alt="' .
                              Translation :: get($enrollment->get_result_string(), null, $enrollment_namespace) .
@@ -65,7 +65,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     }
 
                     $html[] = '</th><th class="action">';
-                    $tab_image_path = Theme :: getInstance()->getImagePath($enrollment_namespace) . 'ContractType/' .
+                    $tab_image_path = Theme :: getInstance()->getImagesPath($enrollment_namespace) . 'ContractType/' .
                          $enrollment->get_contract_type() . '.png';
                     $tab_image = '<img src="' . $tab_image_path . '" alt="' .
                          Translation :: get($enrollment->get_contract_type_string(), null, $enrollment_namespace) .
@@ -125,7 +125,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
 
-                $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Type/' . Advice :: TYPE_MOTIVATION .
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Type/' . Advice :: TYPE_MOTIVATION .
                      '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '" title="' .
                      Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '"/>';
                 $row[] = $image;
@@ -149,7 +149,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
 
-                $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Type/' . Advice :: TYPE_OMBUDSMAN .
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Type/' . Advice :: TYPE_OMBUDSMAN .
                      '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)) . '" title="' .
                      Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)) . '"/>';
                 $row[] = $image;
@@ -172,7 +172,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
 
-                $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Type/' . Advice :: TYPE_VOTE .
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Type/' . Advice :: TYPE_VOTE .
                      '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)) . '" title="' .
                      Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)) . '"/>';
                 $row[] = $image;
@@ -196,7 +196,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row = array();
                 if ($advice->get_measures_valid())
                 {
-                    $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Type/' .
+                    $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Type/' .
                          Advice :: TYPE_MEASURES_VALID . '.png" alt="' .
                          Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)) . '" title="' .
                          Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)) . '"/>';
@@ -208,7 +208,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 }
                 else
                 {
-                    $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Type/' .
+                    $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Type/' .
                          Advice :: TYPE_MEASURES_INVALID . '.png" alt="' .
                          Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)) . '" title="' .
                          Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)) . '"/>';
@@ -232,7 +232,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
 
-                $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Type/' . Advice :: TYPE_ADVICE .
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Type/' . Advice :: TYPE_ADVICE .
                      '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)) . '" title="' .
                      Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)) . '"/>';
                 $row[] = $image;

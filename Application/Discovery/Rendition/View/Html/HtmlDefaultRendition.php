@@ -28,7 +28,7 @@ class HtmlDefaultRendition extends HtmlRendition
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get(StringUtilities :: getInstance()->createString($type)->upperCamelize()),
-                Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'Export/' . $type . '.png',
+                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Export/' . $type . '.png',
                 $url));
     }
 }

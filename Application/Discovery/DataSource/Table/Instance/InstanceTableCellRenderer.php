@@ -21,7 +21,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
 
             case Instance :: PROPERTY_TYPE :
                 $name = htmlentities(Translation :: get('TypeName', null, $module_instance->get_type()));
-                return '<img src="' . Theme :: getInstance()->getImagePath($module_instance->get_type()) .
+                return '<img src="' . Theme :: getInstance()->getImagesPath($module_instance->get_type()) .
                      'Logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
             case Instance :: PROPERTY_NAME :
                 return Translation :: get('TypeName', null, $module_instance->get_type());
@@ -40,7 +40,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath() . 'action_edit.png',
+                Theme :: getInstance()->getCommonImagesPath() . 'action_edit.png',
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_UPDATE_INSTANCE,
@@ -49,7 +49,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath() . 'action_delete.png',
+                Theme :: getInstance()->getCommonImagesPath() . 'action_delete.png',
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_DELETE_INSTANCE,

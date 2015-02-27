@@ -106,7 +106,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             if ($employment->get_fund_id())
             {
-                $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath(
                     'Ehb/Application/Discovery/Module/Employment/Implementation/Bamaflex') . 'Fund/' .
                      $employment->get_fund_id() . '.png" alt="' . Translation :: get($employment->get_fund_string()) .
                      '" title="' . Translation :: get($employment->get_fund_string()) . '" />';
@@ -118,7 +118,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             else
             {
-                $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Fund/0.png" alt="' .
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Fund/0.png" alt="' .
                      Translation :: get('UnknownFund') . '" title="' . Translation :: get('UnknownFund') . '" />';
                 $row[] = $image;
                 LegendTable :: get_instance()->add_symbol(
@@ -128,7 +128,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             $row[] = $employment->get_pay_scale();
 
-            $image = '<img src="' . Theme :: getInstance()->getImagePath(
+            $image = '<img src="' . Theme :: getInstance()->getImagesPath(
                 'Ehb/Application/Discovery/Module/Employment/Implementation/Bamaflex') . 'Active/' .
                  $employment->get_active() . '.png" alt="' . Translation :: get($employment->get_active_string()) .
                  '" title="' . Translation :: get($employment->get_active_string()) . '" />';

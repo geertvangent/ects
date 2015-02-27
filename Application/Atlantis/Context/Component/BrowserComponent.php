@@ -102,7 +102,7 @@ class BrowserComponent extends Manager implements TableSupport
             $this->action_bar->add_common_action(
                 new ToolbarItem(
                     Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role\Entity'),
-                    Theme :: getInstance()->getImagePath('\Ehb\Application\Atlantis\Role\Entity') . 'Logo/16.png',
+                    Theme :: getInstance()->getImagesPath('\Ehb\Application\Atlantis\Role\Entity') . 'Logo/16.png',
                     $this->get_url(
                         array(
                             \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,

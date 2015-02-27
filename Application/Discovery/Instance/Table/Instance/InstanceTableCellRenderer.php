@@ -27,7 +27,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
 
             case Instance :: PROPERTY_TYPE :
                 $name = htmlentities(Translation :: get('TypeName', null, $module_instance->get_type()));
-                return '<img src="' . Theme :: getInstance()->getImagePath($module_instance->get_type()) .
+                return '<img src="' . Theme :: getInstance()->getImagesPath($module_instance->get_type()) .
                      '/Logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
             case Instance :: PROPERTY_TITLE :
                 return Translation :: get('TypeName', null, $module_instance->get_type());
@@ -52,7 +52,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                 $toolbar->add_item(
                     new ToolbarItem(
                         Translation :: get('MoveUp', null, Utilities :: COMMON_LIBRARIES),
-                        Theme :: getInstance()->getCommonImagePath() . 'action_up.png',
+                        Theme :: getInstance()->getCommonImagesPath() . 'action_up.png',
                         $this->get_component()->get_url(
                             array(
                                 Manager :: PARAM_ACTION => Manager :: ACTION_MOVE_INSTANCE,
@@ -65,7 +65,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                 $toolbar->add_item(
                     new ToolbarItem(
                         Translation :: get('MoveUpNotAvailable', null, Utilities :: COMMON_LIBRARIES),
-                        Theme :: getInstance()->getCommonImagePath() . 'action_up_na.png',
+                        Theme :: getInstance()->getCommonImagesPath() . 'action_up_na.png',
                         null,
                         ToolbarItem :: DISPLAY_ICON));
             }
@@ -75,7 +75,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                 $toolbar->add_item(
                     new ToolbarItem(
                         Translation :: get('MoveDown', null, Utilities :: COMMON_LIBRARIES),
-                        Theme :: getInstance()->getCommonImagePath() . 'action_down.png',
+                        Theme :: getInstance()->getCommonImagesPath() . 'action_down.png',
                         $this->get_component()->get_url(
                             array(
                                 Manager :: PARAM_ACTION => Manager :: ACTION_MOVE_INSTANCE,
@@ -88,7 +88,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
                 $toolbar->add_item(
                     new ToolbarItem(
                         Translation :: get('MoveDownNotAvailable', null, Utilities :: COMMON_LIBRARIES),
-                        Theme :: getInstance()->getCommonImagePath() . 'action_down_na.png',
+                        Theme :: getInstance()->getCommonImagesPath() . 'action_down_na.png',
                         null,
                         ToolbarItem :: DISPLAY_ICON));
             }
@@ -99,7 +99,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
             $toolbar->add_item(
                 new ToolbarItem(
                     Translation :: get('Deactivate', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getCommonImagePath() . 'action_deactivate.png',
+                    Theme :: getInstance()->getCommonImagesPath() . 'action_deactivate.png',
                     $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_DEACTIVATE_INSTANCE,
@@ -112,7 +112,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
             $toolbar->add_item(
                 new ToolbarItem(
                     Translation :: get('Activate', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getCommonImagePath() . 'action_activate.png',
+                    Theme :: getInstance()->getCommonImagesPath() . 'action_activate.png',
                     $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_ACTIVATE_INSTANCE,
@@ -124,7 +124,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath() . 'action_edit.png',
+                Theme :: getInstance()->getCommonImagesPath() . 'action_edit.png',
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_UPDATE_INSTANCE,
@@ -133,7 +133,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath() . 'action_delete.png',
+                Theme :: getInstance()->getCommonImagesPath() . 'action_delete.png',
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_DELETE_INSTANCE,

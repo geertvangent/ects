@@ -43,7 +43,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     new DynamicContentTab(
                         Group :: TYPE_CLASS,
                         Translation :: get(Group :: type_string(Group :: TYPE_CLASS)),
-                        Theme :: getInstance()->getImagePath(
+                        Theme :: getInstance()->getImagesPath(
                             'Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex') . 'Type/' .
                              Group :: TYPE_CLASS . '.png',
                             $this->get_groups_table(Group :: TYPE_CLASS)->as_html()));
@@ -55,7 +55,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     new DynamicContentTab(
                         Group :: TYPE_CUSTOM,
                         Translation :: get(Group :: type_string(Group :: TYPE_CUSTOM)),
-                        Theme :: getInstance()->getImagePath(
+                        Theme :: getInstance()->getImagesPath(
                             'Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex') . 'Type/' .
                              Group :: TYPE_CUSTOM . '.png',
                             $this->get_groups_table(Group :: TYPE_CUSTOM)->as_html()));
@@ -67,7 +67,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     new DynamicContentTab(
                         Group :: TYPE_TRAINING,
                         Translation :: get(Group :: type_string(Group :: TYPE_TRAINING)),
-                        Theme :: getInstance()->getImagePath(
+                        Theme :: getInstance()->getImagesPath(
                             'Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex') . 'Type/' .
                              Group :: TYPE_TRAINING . '.png',
                             $this->get_groups_table(Group :: TYPE_TRAINING)->as_html()));
@@ -118,7 +118,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $url = $this->get_instance_url($group_user_module_instance->get_id(), $parameters);
                     $toolbar_item = new ToolbarItem(
                         Translation :: get('Users'),
-                        Theme :: getInstance()->getImagePath(
+                        Theme :: getInstance()->getImagesPath(
                             'Ehb\Aapplication\Discovery\Module\GroupUser\Implementation\Bamaflex') . 'Logo/16.png',
                         $url,
                         ToolbarItem :: DISPLAY_ICON);
@@ -127,7 +127,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $toolbar_item = new ToolbarItem(
                         Translation :: get('UsersNotAvailable'),
-                        Theme :: getInstance()->getImagePath(
+                        Theme :: getInstance()->getImagesPath(
                             'Ehb\Aapplication\Discovery\Module\GroupUser\Implementation\Bamaflex') . 'Logo/16_na.png',
                         null,
                         ToolbarItem :: DISPLAY_ICON);

@@ -114,7 +114,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             if ($enrollment->is_special_result())
             {
-                $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath(
                     'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ResultType/' .
                      $enrollment->get_result() . '.png" alt="' . Translation :: get($enrollment->get_result_string()) .
                      '" title="' . Translation :: get($enrollment->get_result_string()) . '" />';
@@ -131,7 +131,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             if ($enrollment->get_generation_student() == 1)
             {
-                $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                $image = '<img src="' . Theme :: getInstance()->getImagesPath(
                     'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'GenerationStudent/' .
                      $enrollment->get_generation_student() . '.png" alt="' . Translation :: get('GenerationStudent') .
                      '" title="' . Translation :: get('GenerationStudent') . '" />';
@@ -148,7 +148,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             // $class = 'enrollment" style="" id="enrollment_' . $key;
             // $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme ::
-            // getInstance()->getCommonImagePath() .
+            // getInstance()->getCommonImagesPath() .
             // 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
             // $row[] = $details_action->as_html();
             $data[] = $row;
@@ -198,7 +198,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 new DynamicContentTab(
                     Enrollment :: CONTRACT_TYPE_ALL,
                     Translation :: get('AllContracts'),
-                    Theme :: getInstance()->getImagePath(
+                    Theme :: getInstance()->getImagesPath(
                         'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ContractType/0.png',
                     $this->get_enrollments_table(Enrollment :: CONTRACT_TYPE_ALL)->toHTML()));
 
@@ -208,7 +208,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     new DynamicContentTab(
                         $contract_type,
                         Translation :: get(Enrollment :: contract_type_string($contract_type)),
-                        Theme :: getInstance()->getImagePath(
+                        Theme :: getInstance()->getImagesPath(
                             'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ContractType/' .
                              $contract_type . '.png',
                             $this->get_enrollments_table($contract_type)->toHTML()));

@@ -76,7 +76,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 if ($year_enrollment->is_special_result())
                 {
 
-                    $tab_image_path = Theme :: getInstance()->getImagePath(
+                    $tab_image_path = Theme :: getInstance()->getImagesPath(
                         'Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex') . 'ResultType/' .
                          $year_enrollment->get_result() . '.png';
                     $tab_image = '<img src="' . $tab_image_path . '" alt="' .
@@ -215,7 +215,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                 if ($material->get_for_sale())
                 {
-                    $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                    $image = '<img src="' . Theme :: getInstance()->getImagesPath(
                         'Ehb/Application/Discovery/Module/StudentMaterials/Implementation/Bamaflex') .
                          'Material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' .
                          Translation :: get('IsForSale') . '"/>';
@@ -227,7 +227,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 }
                 else
                 {
-                    $image = '<img src="' . Theme :: getInstance()->getImagePath(
+                    $image = '<img src="' . Theme :: getInstance()->getImagesPath(
                         Ehb / Application / Discovery / Module / StudentMaterials / Implementation / Bamaflex) .
                          'Material/not_for_sale.png" alt="' . Translation :: get('IsNotForSale') . '" title="' .
                          Translation :: get('IsNotForSale') . '"/>';
@@ -306,7 +306,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                         if ($material->get_for_sale())
                         {
-                            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' .
+                            $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' .
                                  Translation :: get('IsForSale') . '"/>';
                             LegendTable :: get_instance()->add_symbol(
                                 $image,
@@ -316,7 +316,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         }
                         else
                         {
-                            $image = '<img src="' . Theme :: getInstance()->getImagePath() .
+                            $image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                                  'Material/not_for_sale.png" alt="' . Translation :: get('IsNotForSale') . '" title="' .
                                  Translation :: get('IsNotForSale') . '"/>';
                             LegendTable :: get_instance()->add_symbol(

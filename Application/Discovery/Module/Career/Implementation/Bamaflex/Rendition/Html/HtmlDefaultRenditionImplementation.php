@@ -85,7 +85,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $tab_name = array();
                 if ($last_enrollment->is_special_result())
                 {
-                    $tab_image_path = Theme :: getInstance()->getImagePath(
+                    $tab_image_path = Theme :: getInstance()->getImagesPath(
                         Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ResultType/' .
                          $last_enrollment->get_result() . '.png';
 
@@ -112,7 +112,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             else
             {
-                $tab_image_path = Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'various.png';
+                $tab_image_path = Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'various.png';
                 $tab_name = Translation :: get('Various');
             }
 
@@ -148,7 +148,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             if ($enrollment->is_special_result())
             {
-                $tab_image_path = Theme :: getInstance()->getImagePath(
+                $tab_image_path = Theme :: getInstance()->getImagesPath(
                     Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ResultType/' .
                      $enrollment->get_result() . '.png';
                 $tab_image = '<img src="' . $tab_image_path . '" alt="' .
@@ -162,7 +162,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
 
             $contract_html[] = '</th><th class="action">';
-            $tab_image_path = Theme :: getInstance()->getImagePath(
+            $tab_image_path = Theme :: getInstance()->getImagesPath(
                 Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ContractType/' .
                  $enrollment->get_contract_type() . '.png';
             $tab_image = '<img src="' . $tab_image_path . '" alt="' .
@@ -223,7 +223,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
                 $row[] = $year;
-                $row[] = '<img src="' . Theme :: getInstance()->getImagePath() . 'CourseType/' . $type . '.png" alt="' .
+                $row[] = '<img src="' . Theme :: getInstance()->getImagesPath() . 'CourseType/' . $type . '.png" alt="' .
                      Translation :: get(Course :: type_string($type)) . '" title="' .
                      Translation :: get(Course :: type_string($type)) . '" />';
                 $row[] = Translation :: get(Course :: type_string($type));
@@ -232,20 +232,20 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($training->is_current() && $year == $training->get_year() && $type == Course :: TYPE_NORMAL)
                     {
-                        $row[] = '<img src="' . Theme :: getInstance()->getImagePath() . 'TotalType/3.png" alt="' .
+                        $row[] = '<img src="' . Theme :: getInstance()->getImagesPath() . 'TotalType/3.png" alt="' .
                              Translation :: get('CreditPending') . '" title="' . Translation :: get('CreditPending') .
                              '" />';
                     }
                     else
                     {
-                        $row[] = '<img src="' . Theme :: getInstance()->getImagePath() . 'TotalType/1.png" alt="' .
+                        $row[] = '<img src="' . Theme :: getInstance()->getImagesPath() . 'TotalType/1.png" alt="' .
                              Translation :: get('CreditTrue') . '" title="' . Translation :: get('CreditTrue') . '" />';
                         $total += $credits;
                     }
                 }
                 else
                 {
-                    $row[] = '<img src="' . Theme :: getInstance()->getImagePath() . 'TotalType/2.png" alt="' .
+                    $row[] = '<img src="' . Theme :: getInstance()->getImagesPath() . 'TotalType/2.png" alt="' .
                          Translation :: get('CreditFalse') . '" title="' . Translation :: get('CreditFalse') . '" />';
                 }
 
@@ -337,7 +337,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $this->credits[$enrollment->get_contract_id()][$course->get_year()][$course->get_type()] += $course->get_credits();
                 }
-                $course_type_image = '<img src="' . Theme :: getInstance()->getImagePath() . 'CourseType/' .
+                $course_type_image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'CourseType/' .
                      $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' .
                      Translation :: get($course->get_type_string()) . '" />';
                 $row[] = $course_type_image;
@@ -405,7 +405,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         if ($mark->is_abandoned())
                         {
-                            $mark_status_image = '<img src="' . Theme :: getInstance()->getImagePath() . 'StatusType/' .
+                            $mark_status_image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'StatusType/' .
                                  $mark->get_status() . '_na.png" alt="' .
                                  Translation :: get($mark->get_status_string() . 'Abandoned') . '" title="' .
                                  Translation :: get($mark->get_status_string() . 'Abandoned') . '" />';
@@ -416,7 +416,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         }
                         else
                         {
-                            $mark_status_image = '<img src="' . Theme :: getInstance()->getImagePath() . 'StatusType/' .
+                            $mark_status_image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'StatusType/' .
                                  $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) .
                                  '" title="' . Translation :: get($mark->get_status_string()) . '" />';
                             LegendTable :: get_instance()->add_symbol(
@@ -435,7 +435,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($mark->get_result())
                     {
-                        $result_na_image = '<img src="' . Theme :: getInstance()->getImagePath() .
+                        $result_na_image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                              'mark_result_na.png" alt="' . Translation :: get('ResultNotYetAvailable') . '" title="' .
                              Translation :: get('ResultNotYetAvailable') . '" />';
                         $row[] = $result_na_image;
@@ -466,7 +466,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $this->credits[$enrollment->get_contract_id()][$child->get_year()][$child->get_type()] += $child->get_credits();
 
-                        $child_type_image = '<img src="' . Theme :: getInstance()->getImagePath() . 'CourseType/' .
+                        $child_type_image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'CourseType/' .
                              $child->get_type() . '.png" alt="' . Translation :: get($child->get_type_string()) .
                              '" title="' . Translation :: get($child->get_type_string()) . '" />';
                         $row[] = $child_type_image;
@@ -535,7 +535,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         {
                             if ($mark->get_result())
                             {
-                                $result_na_image = '<img src="' . Theme :: getInstance()->getImagePath() .
+                                $result_na_image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                                      'mark_result_na.png" alt="' . Translation :: get('ResultNotYetAvailable') .
                                      '" title="' . Translation :: get('ResultNotYetAvailable') . '" />';
                                 $row[] = $result_na_image;

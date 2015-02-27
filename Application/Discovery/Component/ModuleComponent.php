@@ -23,7 +23,7 @@ class ModuleComponent extends Manager
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get('User'),
-                Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'action_user.png',
+                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_user.png',
                 $link));
 
         $module_parameters = array();
@@ -36,7 +36,7 @@ class ModuleComponent extends Manager
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get('Information'),
-                Theme :: getInstance()->getImagePath('Ehb\Application\Discovery') . 'action_information.png',
+                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_information.png',
                 $link));
 
         $factory = new ApplicationFactory(

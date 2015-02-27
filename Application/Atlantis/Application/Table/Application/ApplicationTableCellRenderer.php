@@ -22,7 +22,7 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
             $toolbar->add_item(
                 new ToolbarItem(
                     Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getCommonImagePath() . 'action_edit.png',
+                    Theme :: getInstance()->getCommonImagesPath() . 'action_edit.png',
                     $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_EDIT,
@@ -31,7 +31,7 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
             $toolbar->add_item(
                 new ToolbarItem(
                     Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getCommonImagePath() . 'action_delete.png',
+                    Theme :: getInstance()->getCommonImagesPath() . 'action_delete.png',
                     $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
@@ -41,7 +41,7 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('ManageRight'),
-                Theme :: getInstance()->getCommonImagePath() . 'action_rights.png',
+                Theme :: getInstance()->getCommonImagesPath() . 'action_rights.png',
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_MANAGE_RIGHT,
@@ -50,7 +50,7 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role\Entitlement'),
-                Theme :: getInstance()->getImagePath('\Ehb\Application\Atlantis\Role\Entitlement') . 'Logo/16.png',
+                Theme :: getInstance()->getImagesPath('\Ehb\Application\Atlantis\Role\Entitlement') . 'Logo/16.png',
                 $this->get_component()->get_url(
                     array(
                         \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE,

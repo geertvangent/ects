@@ -49,12 +49,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                 }
                 else
                 {
-                    Filesystem :: copy_file(Theme :: getInstance()->getCommonImagePath(false) . 'unknown.jpg', $path);
+                    Filesystem :: copy_file(Theme :: getInstance()->getCommonImagesPath(false) . 'unknown.jpg', $path);
                 }
             }
             else
             {
-                Filesystem :: copy_file(Theme :: getInstance()->getCommonImagePath(false) . 'unknown.jpg', $path);
+                Filesystem :: copy_file(Theme :: getInstance()->getCommonImagesPath(false) . 'unknown.jpg', $path);
             }
         }
 

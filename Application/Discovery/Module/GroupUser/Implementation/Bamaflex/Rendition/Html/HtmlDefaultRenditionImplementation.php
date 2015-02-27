@@ -124,7 +124,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 new DynamicContentTab(
                     0,
                     Translation :: get('Enrolled'),
-                    Theme :: getInstance()->getImagePath() . 'Type/0.png',
+                    Theme :: getInstance()->getImagesPath() . 'Type/0.png',
                     implode(PHP_EOL, $html)));
         }
 
@@ -142,7 +142,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 new DynamicContentTab(
                     1,
                     Translation :: get('Struck'),
-                    Theme :: getInstance()->getImagePath() . 'Type/1.png',
+                    Theme :: getInstance()->getImagesPath() . 'Type/1.png',
                     implode(PHP_EOL, $html)));
         }
 

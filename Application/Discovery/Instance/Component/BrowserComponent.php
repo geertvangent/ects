@@ -132,14 +132,14 @@ class BrowserComponent extends Manager implements TableSupport
         $action_bar->add_common_action(
             new ToolbarItem(
                 Translation :: get('AddInstance'), 
-                Theme :: getInstance()->getCommonImagePath() . 'action_create.png', 
+                Theme :: getInstance()->getCommonImagesPath() . 'action_create.png', 
                 $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE_INSTANCE)), 
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         
         $action_bar->add_common_action(
             new ToolbarItem(
                 Translation :: get('ManageDataSources'), 
-                Theme :: getInstance()->getCommonImagePath() . 'action_config.png', 
+                Theme :: getInstance()->getCommonImagesPath() . 'action_config.png', 
                 $this->get_url(
                     array(
                         \Ehb\Application\Discovery\Manager :: PARAM_ACTION => \Ehb\Application\Discovery\Manager :: ACTION_DATA_SOURCE, 

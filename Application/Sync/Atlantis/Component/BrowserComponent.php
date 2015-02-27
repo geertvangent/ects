@@ -24,7 +24,7 @@ class BrowserComponent extends Manager implements DelegateComponent
         {
 
             $html[] = '<a href="' . $this->get_url(array(self :: PARAM_ACTION => $type)) . '">';
-            $html[] = '<div class="create_block" style="background-image: url(' . Theme :: getInstance()->getImagePath('Ehb\Application\Sync\Atlantis', true) .
+            $html[] = '<div class="create_block" style="background-image: url(' . Theme :: getInstance()->getImagesPath('Ehb\Application\Sync\Atlantis', true) .
                  'Component/' . $type . '.png);">';
 
             $html[] = Translation :: get(

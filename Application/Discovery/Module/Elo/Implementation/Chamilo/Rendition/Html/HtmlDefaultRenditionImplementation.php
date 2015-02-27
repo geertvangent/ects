@@ -83,7 +83,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $html[] = '<a href="' . $this->get_application()->get_url(array(Module :: PARAM_MODULE_TYPE => $type)) .
                      '">';
                 $html[] = '<div class="create_block" style="background-image: url(' .
-                     Theme :: getInstance()->getImagePath() . 'Type/' . $type . '.png);">';
+                     Theme :: getInstance()->getImagesPath() . 'Type/' . $type . '.png);">';
                 $html[] = Translation :: get(
                     StringUtilities :: getInstance()->createString($type)->upperCamelize() . 'Component');
                 $html[] = '</div>';

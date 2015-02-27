@@ -61,7 +61,7 @@ class CreatorComponent extends Manager
             {
                 $name = htmlentities(Translation :: get('TypeName', null, $available_type));
                 $row = array();
-                $row[] = '<img src="' . Theme :: getInstance()->getImagePath($available_type) . 'Logo/22.png" alt="' .
+                $row[] = '<img src="' . Theme :: getInstance()->getImagesPath($available_type) . 'Logo/22.png" alt="' .
                      $name . '" title="' . $name . '"/>';
                 $row[] = $name;
                 $row[] = htmlentities(Translation :: get('TypeDescription', null, $available_type));

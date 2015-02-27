@@ -67,7 +67,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $action_bar->add_common_action(
             new ToolbarItem(
                 Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath() . 'action_browser.png',
+                Theme :: getInstance()->getCommonImagesPath() . 'action_browser.png',
                 $this->get_application()->get_url(),
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
@@ -176,7 +176,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                     new DynamicContentTab(
                         self :: TAB_USERS,
                         Translation :: get('Users', null, 'user'),
-                        Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Tab/users.png',
+                        Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/users.png',
                         $table->as_html()));
             }
 
@@ -190,7 +190,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                     new DynamicContentTab(
                         self :: TAB_SUBGROUPS,
                         Translation :: get('Subgroups'),
-                        Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Tab/groups.png',
+                        Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/groups.png',
                         $table->as_html()));
             }
 
@@ -213,7 +213,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                     new DynamicContentTab(
                         self :: TAB_USERS,
                         Translation :: get('Users', null, 'user'),
-                        Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Tab/users.png',
+                        Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/users.png',
                         $table->as_html()));
             }
 
@@ -232,7 +232,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                         new DynamicContentTab(
                             self :: TAB_SUBGROUPS,
                             Translation :: get('Subgroups'),
-                            Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Tab/groups.png',
+                            Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/groups.png',
                             $table->as_html()));
                 }
             }
@@ -241,7 +241,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 new DynamicContentTab(
                     self :: TAB_DETAILS,
                     Translation :: get('Details'),
-                    Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Tab/details.png',
+                    Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/details.png',
                     $this->get_group_info()));
         }
 

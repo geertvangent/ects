@@ -20,7 +20,7 @@ class HtmlDefaultRendition extends HtmlRendition
         if ($this->get_profile() instanceof Profile)
         {
             $html[] = '<div class="content_object" style="background-image: url(' .
-                 Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Types/general.png);">';
+                 Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Types/general.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('General');
             $html[] = '</div>';
@@ -66,7 +66,7 @@ class HtmlDefaultRendition extends HtmlRendition
                     }
 
                     $html[] = '<div class="content_object" style="background-image: url(' .
-                         Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Types/communication_number.png);">';
+                         Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Types/communication_number.png);">';
                     $html[] = '<div class="title">';
                     $html[] = Translation :: get('CommunicationNumbers');
                     $html[] = '</div>';
@@ -112,7 +112,7 @@ class HtmlDefaultRendition extends HtmlRendition
                 }
 
                 $html[] = '<div class="content_object" style="background-image: url(' .
-                     Theme :: getInstance()->getImagePath(__NAMESPACE__) . 'Types/email_address.png);">';
+                     Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Types/email_address.png);">';
                 $html[] = '<div class="title">';
                 $html[] = Translation :: get('EmailAddresses');
                 $html[] = '</div>';

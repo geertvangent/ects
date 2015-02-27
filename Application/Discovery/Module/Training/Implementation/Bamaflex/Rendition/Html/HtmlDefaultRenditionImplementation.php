@@ -72,7 +72,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $row[] = $training->get_credits();
 
             $bama_type_image = '<img src="' .
-                 Theme :: getInstance()->getImagePath(
+                 Theme :: getInstance()->getImagesPath(
                     'Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex') . 'BamaType/' .
                  $training->get_bama_type() . '.png" alt="' . Translation :: get($training->get_bama_type_string()) .
                  '" title="' . Translation :: get($training->get_bama_type_string()) . '" />';
@@ -102,7 +102,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         $url = $this->get_instance_url($group_module_instance->get_id(), $parameters);
                         $toolbar_item = new ToolbarItem(
                             Translation :: get('Groups'),
-                            Theme :: getInstance()->getImagePath(
+                            Theme :: getInstance()->getImagesPath(
                                 'Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex') . 'Logo/16.png',
                             $url,
                             ToolbarItem :: DISPLAY_ICON);
@@ -111,7 +111,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $toolbar_item = new ToolbarItem(
                             Translation :: get('GroupsNotAvailable'),
-                            Theme :: getInstance()->getImagePath(
+                            Theme :: getInstance()->getImagesPath(
                                 'Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex') . 'Logo/16_na.png',
                             null,
                             ToolbarItem :: DISPLAY_ICON);

@@ -151,7 +151,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row[] = $teaching_assignment->get_training();
             }
 
-            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Type/' .
+            $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Type/' .
                  $teaching_assignment->get_manager() . '.png" alt="' .
                  Translation :: get($teaching_assignment->get_manager_type()) . '" title="' .
                  Translation :: get($teaching_assignment->get_manager_type()) . '"/>';
@@ -161,7 +161,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 Translation :: get($teaching_assignment->get_manager_type()),
                 Translation :: get('Manager'));
 
-            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Type/' .
+            $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Type/' .
                  $teaching_assignment->get_teacher() . '.png" alt="' .
                  Translation :: get($teaching_assignment->get_teacher_type()) . '" title="' .
                  Translation :: get($teaching_assignment->get_teacher_type()) . '"/>';
@@ -197,7 +197,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row[] = $teaching_assignment->get_name();
             }
             $row[] = $teaching_assignment->get_credits();
-            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Timeframe/' .
+            $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Timeframe/' .
                  $teaching_assignment->get_timeframe_id() . '.png" alt="' .
                  Translation :: get($teaching_assignment->get_timeframe()) . '" title="' .
                  Translation :: get($teaching_assignment->get_timeframe()) . '"/>';
@@ -246,11 +246,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         $table->set_header(0, Translation :: get('Faculty'), false);
         $table->set_header(1, Translation :: get('Training'), false);
-        $table->set_header(2, '<img src="' . Theme :: getInstance()->getImagePath() . 'manager.png"/>', false);
-        $table->set_header(3, '<img src="' . Theme :: getInstance()->getImagePath() . 'teacher.png"/>', false);
+        $table->set_header(2, '<img src="' . Theme :: getInstance()->getImagesPath() . 'manager.png"/>', false);
+        $table->set_header(3, '<img src="' . Theme :: getInstance()->getImagesPath() . 'teacher.png"/>', false);
         $table->set_header(4, Translation :: get('Name'), false);
         $table->set_header(5, Translation :: get('Credits'), false, 'class="action"');
-        $table->set_header(6, '<img src="' . Theme :: getInstance()->getImagePath() . 'timeframe.png"/>', false);
+        $table->set_header(6, '<img src="' . Theme :: getInstance()->getImagesPath() . 'timeframe.png"/>', false);
         $table->set_header(7, '', false);
 
         return $table;
