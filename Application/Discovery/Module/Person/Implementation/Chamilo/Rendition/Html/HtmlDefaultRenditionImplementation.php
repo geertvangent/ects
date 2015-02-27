@@ -53,7 +53,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $html[] = $this->get_menu_html();
         $html[] = $this->get_user_html();
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_action_bar()
@@ -273,7 +273,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         $html[] = '<br />';
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_group_viewing_url($group)

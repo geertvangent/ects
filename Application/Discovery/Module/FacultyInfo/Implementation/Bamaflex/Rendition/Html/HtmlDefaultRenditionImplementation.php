@@ -32,7 +32,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = $this->get_context();
         $html[] = $this->get_trainings_table()->toHTML();
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_context()
@@ -45,7 +45,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = $this->get_faculty_properties_table()->toHtml();
         $html[] = '<br/>';
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_faculty_properties_table()
@@ -417,7 +417,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     Translation :: get('TypeName', null, 'Ehb\Application\Discovery\Module\Photo'));
             }
 
-            $properties[Translation :: get('Photos')] = implode("\n", $buttons);
+            $properties[Translation :: get('Photos')] = implode(PHP_EOL, $buttons);
         }
         return new PropertiesTable($properties);
     }
@@ -620,7 +620,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             'Ehb\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex');
                     }
                 }
-                $row[] = implode("\n", $buttons);
+                $row[] = implode(PHP_EOL, $buttons);
             }
 
             $data[] = $row;

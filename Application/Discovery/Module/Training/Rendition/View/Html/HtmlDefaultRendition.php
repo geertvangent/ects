@@ -49,6 +49,6 @@ class HtmlDefaultRendition extends HtmlRendition
         }
         $html[] = $tabs->render();
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 }

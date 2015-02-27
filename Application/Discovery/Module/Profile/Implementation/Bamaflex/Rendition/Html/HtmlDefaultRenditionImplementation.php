@@ -112,7 +112,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             $html[] = $this->get_previous();
 
-            return implode("\n", $html);
+            return implode(PHP_EOL, $html);
         }
         else
         {
@@ -261,7 +261,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = '</div>';
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()

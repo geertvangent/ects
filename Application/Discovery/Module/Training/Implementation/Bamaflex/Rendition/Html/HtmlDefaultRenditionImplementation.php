@@ -203,7 +203,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     }
                 }
 
-                $row[] = implode("\n", $buttons);
+                $row[] = implode(PHP_EOL, $buttons);
             }
 
             $data[] = $row;

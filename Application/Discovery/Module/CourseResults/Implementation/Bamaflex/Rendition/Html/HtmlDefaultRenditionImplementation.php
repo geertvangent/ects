@@ -37,7 +37,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         \Ehb\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_course_properties_table()
@@ -152,7 +152,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $table = new PropertiesTable($properties);
 
         $html[] = $table->toHtml();
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_course_results_table()
@@ -177,7 +177,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $table->toHTML();
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     /**

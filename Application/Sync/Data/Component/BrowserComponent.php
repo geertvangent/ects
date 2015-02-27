@@ -42,7 +42,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</a>';
         }
 
-        echo implode("\n", $html);
+        echo implode(PHP_EOL, $html);
 
         $this->display_footer();
     }

@@ -109,7 +109,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_advices_table($enrollment)

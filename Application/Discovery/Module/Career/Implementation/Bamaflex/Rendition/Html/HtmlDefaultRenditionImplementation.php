@@ -65,7 +65,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         \Ehb\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_enrollment_courses($selected_contract)
@@ -280,11 +280,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $contract_html[] = $table->toHTML();
         $contract_html[] = '<br />';
 
-        $tabs->set_content(implode("\n", $contract_html));
+        $tabs->set_content(implode(PHP_EOL, $contract_html));
 
         $html[] = $tabs->render();
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     /**

@@ -133,7 +133,7 @@ class HtmlDefaultRendition extends HtmlRendition
             $html[] = Display :: normal_message('NoData', true);
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     /**

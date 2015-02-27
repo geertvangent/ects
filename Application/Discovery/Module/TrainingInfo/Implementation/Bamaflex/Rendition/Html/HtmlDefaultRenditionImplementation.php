@@ -125,7 +125,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $current_tab == Module :: TAB_COURSES));
 
         $html[] = $tabs->render();
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_general()
@@ -475,7 +475,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     Translation :: get('TypeName', null, 'Ehb\Application\Discovery\Module\Photo'));
             }
 
-            $properties[Translation :: get('Photos')] = implode("\n", $buttons);
+            $properties[Translation :: get('Photos')] = implode(PHP_EOL, $buttons);
         }
 
         $training_results_module_instance = \Ehb\Application\Discovery\Module :: exists(
@@ -609,7 +609,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_majors()
@@ -648,7 +648,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             $html[] = '<br/>' . $tabs->render();
         }
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_packages()
@@ -707,7 +707,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html[] = '<div class="clear"></div>';
         $html[] = '</div>';
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_package_courses($package)
@@ -842,7 +842,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     }
                 }
 
-                $row[] = implode("\n", $buttons);
+                $row[] = implode(PHP_EOL, $buttons);
             }
 
             $data[] = $row;
@@ -968,7 +968,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             }
                         }
 
-                        $row[] = implode("\n", $buttons);
+                        $row[] = implode(PHP_EOL, $buttons);
                     }
 
                     $data[] = $row;
@@ -1152,7 +1152,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     }
                 }
 
-                $row[] = implode("\n", $buttons);
+                $row[] = implode(PHP_EOL, $buttons);
             }
 
             $data[] = $row;
@@ -1278,7 +1278,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             }
                         }
 
-                        $row[] = implode("\n", $buttons);
+                        $row[] = implode(PHP_EOL, $buttons);
                     }
 
                     $data[] = $row;
@@ -1429,7 +1429,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     }
                 }
 
-                $row[] = implode("\n", $buttons);
+                $row[] = implode(PHP_EOL, $buttons);
             }
 
             $data[] = $row;
@@ -1554,7 +1554,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                     'Ehb\Application\Discovery\Module\CourseResults\Implementation\Bamaflex');
                             }
                         }
-                        $row[] = implode("\n", $buttons);
+                        $row[] = implode(PHP_EOL, $buttons);
                     }
 
                     $data[] = $row;

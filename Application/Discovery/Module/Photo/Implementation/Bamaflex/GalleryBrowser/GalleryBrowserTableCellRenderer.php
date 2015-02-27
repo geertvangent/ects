@@ -30,6 +30,6 @@ class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
         $html[] = '<img src="' . $photo . '" style="width: 150px; border: 1px solid grey;"/>';
         $html[] = '</a>';
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 }

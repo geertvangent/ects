@@ -110,7 +110,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $this->get_evaluations()));
 
         $html[] = $tabs->render();
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_general()
@@ -580,7 +580,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     Translation :: get('TypeName', null, 'Ehb\Application\Discovery\Module\Photo'));
             }
 
-            $properties[Translation :: get('Photos')] = implode("\n", $buttons);
+            $properties[Translation :: get('Photos')] = implode(PHP_EOL, $buttons);
         }
 
         $course_result_module_instance = \Ehb\Application\Discovery\Module :: exists(
@@ -637,7 +637,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $table = new PropertiesTable($properties);
 
         $html[] = $table->toHtml();
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_materials()
@@ -702,7 +702,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $html[] = $this->get_course_materials_by_type($course, $type);
         }
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_course_materials_by_type($course, $type)
@@ -790,7 +790,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $table->as_html($cost->get_price_string(), 8);
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_activities()
@@ -830,7 +830,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $this->get_course_activities($course);
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_course_activities($course)
@@ -883,7 +883,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_competences()
@@ -947,7 +947,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $this->get_course_competences_by_type($course, $type);
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_course_competences_by_type($course, $type)
@@ -999,7 +999,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $table->as_html();
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_content()
@@ -1038,7 +1038,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $this->get_course_contents($course);
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_course_contents($course)
@@ -1094,7 +1094,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = '</div>';
             $html[] = '</div>';
         }
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_evaluations()
@@ -1129,7 +1129,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $this->get_course_evaluations($course);
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_course_evaluations($course)
@@ -1323,7 +1323,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $table->as_html();
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     /*

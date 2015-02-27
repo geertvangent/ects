@@ -223,7 +223,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         \Ehb\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action($this);
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     /*

@@ -91,7 +91,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     /*

@@ -14,7 +14,7 @@ abstract class DefaultGalleryTableCellRenderer extends GalleryTableCellRenderer
     {
         $html = array();
         $html[] = $this->get_cell_content($user);
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function render_id_cell($user)

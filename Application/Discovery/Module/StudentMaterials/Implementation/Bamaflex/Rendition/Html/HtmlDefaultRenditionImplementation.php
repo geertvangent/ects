@@ -357,7 +357,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = $table->as_html($total_price, 9);
         }
 
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     /*

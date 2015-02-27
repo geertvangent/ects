@@ -45,7 +45,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             $html[] = Display :: normal_message(Translation :: get('NoData'), true);
         }
-        return implode("\n", $html);
+        return implode(PHP_EOL, $html);
     }
 
     public function get_group_properties_table()
@@ -125,7 +125,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     0,
                     Translation :: get('Enrolled'),
                     Theme :: getInstance()->getImagePath() . 'Type/0.png',
-                    implode("\n", $html)));
+                    implode(PHP_EOL, $html)));
         }
 
         if (count($data_struck) > 0 || count($course_data_struck) > 0)
@@ -143,7 +143,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     1,
                     Translation :: get('Struck'),
                     Theme :: getInstance()->getImagePath() . 'Type/1.png',
-                    implode("\n", $html)));
+                    implode(PHP_EOL, $html)));
         }
 
         return $tabs->render();
