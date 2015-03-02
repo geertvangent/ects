@@ -25,12 +25,12 @@ class BrowserComponent extends Manager implements TableSupport
         {
             $this->not_allowed();
         }
-        
+
         $this->action_bar = $this->get_action_bar();
         $parameters = $this->get_parameters();
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
         $table = new InstanceTable($this);
-        
+
         $this->display_header();
         echo $this->action_bar->as_html();
         echo $table->as_html();
@@ -40,17 +40,17 @@ class BrowserComponent extends Manager implements TableSupport
     public function get_table_condition($table_class_name)
     {
         $query = $this->action_bar->get_query();
-        
+
         if (isset($query) && $query != '')
         {
             $conditions = array();
             $conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_NAME), 
+                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_NAME),
                 '*' . $query . '*');
             $conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_DESCRIPTION), 
+                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_DESCRIPTION),
                 '*' . $query . '*');
-            
+
             $condition = new AndCondition($conditions);
             return $condition;
         }
@@ -65,9 +65,9 @@ class BrowserComponent extends Manager implements TableSupport
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->add_common_action(
             new ToolbarItem(
-                Translation :: get('AddInstance'), 
-                Theme :: getInstance()->getCommonImagesPath() . 'action_create.png', 
-                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE_INSTANCE)), 
+                Translation :: get('AddInstance'),
+                Theme :: getInstance()->getCommonImagePath('action_create'),
+                $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE_INSTANCE)),
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;
     }

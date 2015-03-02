@@ -22,7 +22,7 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
             $toolbar->add_item(
                 new ToolbarItem(
                     Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getCommonImagesPath() . 'action_edit.png',
+                    Theme :: getInstance()->getCommonImagePath('action_edit'),
                     $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_EDIT,
@@ -31,7 +31,7 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
             $toolbar->add_item(
                 new ToolbarItem(
                     Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getCommonImagesPath() . 'action_delete.png',
+                    Theme :: getInstance()->getCommonImagePath('action_delete'),
                     $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
@@ -41,7 +41,7 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('ManageRight'),
-                Theme :: getInstance()->getCommonImagesPath() . 'action_rights.png',
+                Theme :: getInstance()->getCommonImagePath('action_rights'),
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_MANAGE_RIGHT,

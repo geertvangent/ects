@@ -146,11 +146,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row[] = ' ';
             }
 
-            // $class = 'enrollment" style="" id="enrollment_' . $key;
-            // $details_action = new ToolbarItem(Translation :: get('ShowCourses'), Theme ::
-            // getInstance()->getCommonImagesPath() .
-            // 'action_details.png', '#', ToolbarItem :: DISPLAY_ICON, false, $class);
-            // $row[] = $details_action->as_html();
             $data[] = $row;
         }
 

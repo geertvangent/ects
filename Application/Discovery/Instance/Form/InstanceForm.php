@@ -61,7 +61,7 @@ class InstanceForm extends FormValidator
             new DynamicFormTab(
                 'general',
                 'General',
-                Theme :: getInstance()->getCommonImagesPath() . 'place_tab_view.png',
+                Theme :: getInstance()->getCommonImagePath('place_tab_view'),
                 'build_general_form'));
 
         if (count($configuration['settings']) > 0)
@@ -70,7 +70,7 @@ class InstanceForm extends FormValidator
                 new DynamicFormTab(
                     'settings',
                     'Settings',
-                    Theme :: getInstance()->getCommonImagesPath() . 'place_tab_settings.png',
+                    Theme :: getInstance()->getCommonImagePath('place_tab_settings'),
                     'build_settings_form'));
         }
 
@@ -367,7 +367,8 @@ class InstanceForm extends FormValidator
     }
 
     /**
-     * Sets default values. Traditionally, you will want to extend this method so it sets default for your learning
+     * Sets default values.
+     * Traditionally, you will want to extend this method so it sets default for your learning
      * object type's additional properties.
      *
      * @param $defaults array Default values for this form's parameters.

@@ -23,24 +23,24 @@ class BrowserComponent extends Manager implements TableSupport
     public function get_object_table_condition($object_table_class_name)
     {
         $query = $this->action_bar->get_query();
-        
+
         if (isset($query) && $query != '')
         {
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
-                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME), 
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME),
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
-                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION), 
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION),
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
-                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL), 
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
+                    \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL),
                 '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
@@ -53,9 +53,9 @@ class BrowserComponent extends Manager implements TableSupport
     public function run()
     {
         SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
-        
+
         $this->display_header();
-        
+
         $this->action_bar = $this->get_action_bar();
         echo ($this->action_bar->as_html());
         $table = new ApplicationTable($this);
@@ -70,10 +70,10 @@ class BrowserComponent extends Manager implements TableSupport
             $this->action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
             $this->action_bar->add_common_action(
                 new ToolbarItem(
-                    Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                    Theme :: getInstance()->getCommonImagesPath() . 'action_create.png', 
+                    Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
+                    Theme :: getInstance()->getCommonImagePath('action_create'),
                     $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
-            
+
             $this->action_bar->set_search_url($this->get_url());
         }
         return $this->action_bar;

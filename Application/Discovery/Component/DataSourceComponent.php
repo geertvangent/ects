@@ -21,7 +21,7 @@ class DataSourceComponent extends Manager
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get('Modules'),
-                Theme :: getInstance()->getCommonImagesPath() . 'action_config.png',
+                Theme :: getInstance()->getCommonImagePath('action_config'),
                 $link));
 
         $module_parameters = array();
