@@ -228,7 +228,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 else
                 {
                     $image = '<img src="' . Theme :: getInstance()->getImagePath(
-                        Ehb / Application / Discovery / Module / StudentMaterials / Implementation / Bamaflex) .
+                        'Ehb/Application/Discovery/Module/StudentMaterials/Implementation/Bamaflex') .
                          'Material/not_for_sale.png" alt="' . Translation :: get('IsNotForSale') . '" title="' .
                          Translation :: get('IsNotForSale') . '"/>';
                     LegendTable :: get_instance()->add_symbol(
@@ -306,7 +306,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                         if ($material->get_for_sale())
                         {
-                            $image = '<img src="' . Theme :: getInstance()->getImagePath() . 'Material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' .
+                            $image = '<img src="' . Theme :: getInstance()->getImagePath() .
+                                 'Material/for_sale.png" alt="' . Translation :: get('IsForSale') . '" title="' .
                                  Translation :: get('IsForSale') . '"/>';
                             LegendTable :: get_instance()->add_symbol(
                                 $image,

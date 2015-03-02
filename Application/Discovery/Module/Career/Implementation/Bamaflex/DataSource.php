@@ -195,7 +195,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
-            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(User :: class_name(), (int)$id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(User :: class_name(), (int) $id);
             $official_code = $user->get_official_code();
 
             $condition = new EqualityCondition(
@@ -438,9 +438,6 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
 
             $query = 'SELECT * FROM v_discovery_mark_advanced WHERE ' .
                  ConditionTranslator :: render($condition, null, $this->get_connection());
-
-            var_dump($query);
-
             $statement = $this->get_connection()->query($query);
 
             if ($statement instanceof PDOStatement)

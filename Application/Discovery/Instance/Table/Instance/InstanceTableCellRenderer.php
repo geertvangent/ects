@@ -28,7 +28,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
             case Instance :: PROPERTY_TYPE :
                 $name = htmlentities(Translation :: get('TypeName', null, $module_instance->get_type()));
                 return '<img src="' . Theme :: getInstance()->getImagePath($module_instance->get_type()) .
-                     '/Logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
+                     'Logo/22.png" alt="' . $name . '" title="' . $name . '"/>';
             case Instance :: PROPERTY_TITLE :
                 return Translation :: get('TypeName', null, $module_instance->get_type());
             case Instance :: PROPERTY_DESCRIPTION :
