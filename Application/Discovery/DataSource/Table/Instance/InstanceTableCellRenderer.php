@@ -18,7 +18,6 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
     {
         switch ($column->get_name())
         {
-
             case Instance :: PROPERTY_TYPE :
                 $name = htmlentities(Translation :: get('TypeName', null, $module_instance->get_type()));
                 return '<img src="' . Theme :: getInstance()->getImagesPath($module_instance->get_type()) .
