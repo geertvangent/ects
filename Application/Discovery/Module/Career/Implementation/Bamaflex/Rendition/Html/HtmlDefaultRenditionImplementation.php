@@ -161,7 +161,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
 
             $contract_html[] = '</th><th class="action">';
-
+            $tab_image_path = Theme :: getInstance()->getImagesPath(
                 'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'ContractType/' .
                  $enrollment->get_contract_type() . '.png';
 
