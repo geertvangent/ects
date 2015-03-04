@@ -1,0 +1,22 @@
+{
+    "name": "ehb/application-discovery",
+        "version": "6.0.0", "description": "Ehb Discovery Application",
+    "keywords": [],
+    "homepage": "http://www.chamilo.org",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Magali Gillard",
+            "email": "magali.gillard@ehb.be"
+        },
+        {
+            "name": "Hans De Bisschop",
+            "email": "hans.de.bisschop@ehb.be"
+        }
+    ],
+    "type": "chamilo-package",
+    "require": {
+        "php": ">=5.4.0",
+        "phpoffice/phpexcel" : "=1.8.0"
+    }
+}
