@@ -14,7 +14,7 @@
             "email": "hans.de.bisschop@ehb.be"
         }
     ],
-    "type": "chamilo-package",
+    
     "autoload": {
         "psr-4": {
           "Ehb\\": "src/Ehb/"
