@@ -1,0 +1,18 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\training_results\implementation\bamaflex
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Resultaten"
+TypeDescription = "Opleidingsresultaten"
+Name = "Naam"
+Option = "Keuzeoptie"
+Trajectory = "Traject"
+Contract = "Contract"
+Year = "Jaar"
+History = "Historiek"
+Faculty = "Departement"
+LastName = "Familienaam"
+FirstName = "Voornaam"
+ResultType = "Resultaat"
+DistinctionType = "Graad"

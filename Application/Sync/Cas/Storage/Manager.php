@@ -1,0 +1,12 @@
+<?php
+namespace Ehb\Application\Sync\Cas\Storage;
+
+use Chamilo\Libraries\Architecture\Application\Application;
+
+abstract class Manager extends Application
+{
+    const PARAM_ACTION = 'account_action';
+    const ACTION_BROWSE = 'browser';
+    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+
+}
