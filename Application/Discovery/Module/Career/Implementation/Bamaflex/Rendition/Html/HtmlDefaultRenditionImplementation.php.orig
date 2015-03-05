@@ -84,13 +84,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $tab_name = array();
                 if ($last_enrollment->is_special_result())
                 {
-<<<<<<< local
-                    $tab_image_path = Theme :: getInstance()->getImagePath(
-                        'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ResultType/' .
-=======
                     $tab_image_path = Theme :: getInstance()->getImagesPath(
-                        Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ResultType/' .
->>>>>>> other
+                        'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ResultType/' .
                          $last_enrollment->get_result() . '.png';
 
                     $tab_image = '<img src="' . $tab_image_path . '" alt="' .
@@ -152,13 +147,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             if ($enrollment->is_special_result())
             {
-<<<<<<< local
-                $tab_image_path = Theme :: getInstance()->getImagePath(
-                    'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ResultType/' .
-=======
                 $tab_image_path = Theme :: getInstance()->getImagesPath(
-                    Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ResultType/' .
->>>>>>> other
+                    'Ehb/Application/Discovery/Module/Enrollment/Implementation/Bamaflex') . 'ResultType/' .
                      $enrollment->get_result() . '.png';
                 $tab_image = '<img src="' . $tab_image_path . '" alt="' .
                      Translation :: get($enrollment->get_result_string()) . '" title="' .
@@ -172,13 +162,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             $contract_html[] = '</th><th class="action">';
 <<<<<<< local
-
             $tab_image_path = Theme :: getInstance()->getImagePath(
-                'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'ContractType/' .
 =======
             $tab_image_path = Theme :: getInstance()->getImagesPath(
-                Utilities :: get_namespace_classname(Enrollment :: CLASS_NAME)) . 'ContractType/' .
 >>>>>>> other
+                'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'ContractType/' .
                  $enrollment->get_contract_type() . '.png';
 
             $tab_image = '<img src="' . $tab_image_path . '" alt="' .
@@ -239,14 +227,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 $row = array();
                 $row[] = $year;
-<<<<<<< local
                 $row[] = '<img src="' . Theme :: getInstance()->getImagePath(
                     'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'CourseType/' . $type .
                      '.png" alt="' . Translation :: get(Course :: type_string($type)) . '" title="' .
-=======
-                $row[] = '<img src="' . Theme :: getInstance()->getImagesPath() . 'CourseType/' . $type . '.png" alt="' .
-                     Translation :: get(Course :: type_string($type)) . '" title="' .
->>>>>>> other
                      Translation :: get(Course :: type_string($type)) . '" />';
                 $row[] = Translation :: get(Course :: type_string($type));
                 $row[] = $credits;
@@ -254,42 +237,27 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($training->is_current() && $year == $training->get_year() && $type == Course :: TYPE_NORMAL)
                     {
-<<<<<<< local
                         $row[] = '<img src="' .
                              Theme :: getInstance()->getImagePath(
                                 'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') .
                              'TotalType/3.png" alt="' . Translation :: get('CreditPending') . '" title="' .
                              Translation :: get('CreditPending') . '" />';
-=======
-                        $row[] = '<img src="' . Theme :: getInstance()->getImagesPath() . 'TotalType/3.png" alt="' .
-                             Translation :: get('CreditPending') . '" title="' . Translation :: get('CreditPending') .
-                             '" />';
->>>>>>> other
                     }
                     else
                     {
-<<<<<<< local
                         $row[] = '<img src="' .
                              Theme :: getInstance()->getImagePath(
                                 'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') .
                              'TotalType/1.png" alt="' . Translation :: get('CreditTrue') . '" title="' .
                              Translation :: get('CreditTrue') . '" />';
-=======
-                        $row[] = '<img src="' . Theme :: getInstance()->getImagesPath() . 'TotalType/1.png" alt="' .
-                             Translation :: get('CreditTrue') . '" title="' . Translation :: get('CreditTrue') . '" />';
->>>>>>> other
                         $total += $credits;
                     }
                 }
                 else
                 {
-<<<<<<< local
                     $row[] = '<img src="' .
                          Theme :: getInstance()->getImagePath(
                             'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'TotalType/2.png" alt="' .
-=======
-                    $row[] = '<img src="' . Theme :: getInstance()->getImagesPath() . 'TotalType/2.png" alt="' .
->>>>>>> other
                          Translation :: get('CreditFalse') . '" title="' . Translation :: get('CreditFalse') . '" />';
                 }
 
@@ -381,12 +349,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $this->credits[$enrollment->get_contract_id()][$course->get_year()][$course->get_type()] += $course->get_credits();
                 }
-<<<<<<< local
                 $course_type_image = '<img src="' . Theme :: getInstance()->getImagePath(
                     'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'CourseType/' .
-=======
-                $course_type_image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'CourseType/' .
->>>>>>> other
                      $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' .
                      Translation :: get($course->get_type_string()) . '" />';
                 $row[] = $course_type_image;
@@ -454,14 +418,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         if ($mark->is_abandoned())
                         {
-<<<<<<< local
                             $mark_status_image = '<img src="' .
                                  Theme :: getInstance()->getImagePath(
                                     'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'StatusType/' .
-=======
-                            $mark_status_image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'StatusType/' .
->>>>>>> other
-                                 $mark->get_status() . '_na.png" alt="' .
+                                 $mark->get_status() . 'Na.png" alt="' .
                                  Translation :: get($mark->get_status_string() . 'Abandoned') . '" title="' .
                                  Translation :: get($mark->get_status_string() . 'Abandoned') . '" />';
                             LegendTable :: get_instance()->add_symbol(
@@ -471,13 +431,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         }
                         else
                         {
-<<<<<<< local
                             $mark_status_image = '<img src="' .
                                  Theme :: getInstance()->getImagePath(
                                     'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'StatusType/' .
-=======
-                            $mark_status_image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'StatusType/' .
->>>>>>> other
                                  $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) .
                                  '" title="' . Translation :: get($mark->get_status_string()) . '" />';
                             LegendTable :: get_instance()->add_symbol(
@@ -527,12 +483,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $this->credits[$enrollment->get_contract_id()][$child->get_year()][$child->get_type()] += $child->get_credits();
 
-<<<<<<< local
                         $child_type_image = '<img src="' . Theme :: getInstance()->getImagePath(
                             'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'CourseType/' .
-=======
-                        $child_type_image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'CourseType/' .
->>>>>>> other
                              $child->get_type() . '.png" alt="' . Translation :: get($child->get_type_string()) .
                              '" title="' . Translation :: get($child->get_type_string()) . '" />';
                         $row[] = $child_type_image;

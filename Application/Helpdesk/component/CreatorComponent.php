@@ -31,7 +31,6 @@ class CreatorComponent extends Manager
 
             $request_tracker = new RestClient($url . '/REST/1.0/');
             $request_tracker->set_connexion_mode(RestClient :: MODE_CURL);
-            // $request_tracker = new RequestTracker($url, $username, $password);
 
             $ticket_values = array();
 
