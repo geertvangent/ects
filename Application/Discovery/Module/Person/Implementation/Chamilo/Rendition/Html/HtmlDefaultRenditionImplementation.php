@@ -67,7 +67,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $action_bar->add_common_action(
             new ToolbarItem(
                 Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath('action_browser'),
+                Theme :: getInstance()->getCommonImagePath('Action/Browser'),
                 $this->get_application()->get_url(),
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         return $action_bar;

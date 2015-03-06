@@ -46,7 +46,7 @@ class ViewerComponent extends Manager implements DelegateComponent
             BreadcrumbTrail :: get_instance()->add_extra(
                 new ToolbarItem(
                     Translation :: get('Modules'),
-                    Theme :: getInstance()->getCommonImagePath('action_config'),
+                    Theme :: getInstance()->getCommonImagePath('Action/Config'),
                     $link));
         }
 

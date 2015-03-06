@@ -73,7 +73,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 $this->action_bar->add_common_action(
                     new ToolbarItem(
                         Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES),
-                        Theme :: getInstance()->getCommonImagePath('action_create'),
+                        Theme :: getInstance()->getCommonImagePath('Action/Create'),
                         $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
             }
             $this->action_bar->set_search_url($this->get_url());
@@ -94,6 +94,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 $this->get_url(),
                 Translation :: get('AvailableRights', array('TYPE' => $application->get_name()))));
     }
+
     /*
      * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */
