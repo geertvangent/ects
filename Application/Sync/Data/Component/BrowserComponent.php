@@ -15,8 +15,6 @@ class BrowserComponent extends Manager implements DelegateComponent
      */
     public function run()
     {
-        $this->display_header();
-
         $types = array(
             self :: ACTION_WEBLCMS,
             self :: ACTION_PERSONAL_CALENDAR,
@@ -30,6 +28,8 @@ class BrowserComponent extends Manager implements DelegateComponent
 
         $html = array();
 
+        $html[] = $this->render_header();
+
         foreach ($types as $type)
         {
             $html[] = '<a href="' . $this->get_url(array(self :: PARAM_ACTION => $type)) . '">';
@@ -42,8 +42,8 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</a>';
         }
 
-        echo implode(PHP_EOL, $html);
+        $html[] = $this->render_footer();
 
-        $this->display_footer();
+        return implode(PHP_EOL, $html);
     }
 }

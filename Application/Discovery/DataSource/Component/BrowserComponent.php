@@ -31,10 +31,14 @@ class BrowserComponent extends Manager implements TableSupport
         $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->action_bar->get_query();
         $table = new InstanceTable($this);
 
-        $this->display_header();
-        echo $this->action_bar->as_html();
-        echo $table->as_html();
-        $this->display_footer();
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $this->action_bar->as_html();
+        $html[] = $table->as_html();
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 
     public function get_table_condition($table_class_name)

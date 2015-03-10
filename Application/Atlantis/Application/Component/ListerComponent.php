@@ -39,9 +39,13 @@ class ListerComponent extends Manager implements TableSupport
                     $this->get_rights($application->get_id())));
         }
 
-        $this->display_header();
-        echo $tabs->render();
-        $this->display_footer();
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $tabs->render();
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 
     public function get_rights($application_id)

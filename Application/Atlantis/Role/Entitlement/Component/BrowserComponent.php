@@ -88,10 +88,15 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
         $this->add_breadcrumb();
 
-        $this->display_header();
         $table = new EntitlementTable($this);
-        echo ($table->as_html());
-        $this->display_footer();
+
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $table->as_html();
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 
     public function add_breadcrumb()

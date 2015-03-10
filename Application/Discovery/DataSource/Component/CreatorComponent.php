@@ -47,9 +47,13 @@ class CreatorComponent extends Manager
             }
             else
             {
-                $this->display_header();
-                $form->display();
-                $this->display_footer();
+                $html = array();
+
+                $html[] = $this->render_header();
+                $html[] = $form->toHtml();
+                $html[] = $this->render_footer();
+
+                return implode(PHP_EOL, $html);
             }
         }
         else
@@ -83,9 +87,13 @@ class CreatorComponent extends Manager
             $table->set_header(2, 'Description');
             $table->set_header(3, '');
 
-            $this->display_header();
-            echo $table->as_html();
-            $this->display_footer();
+            $html = array();
+
+            $html[] = $this->render_header();
+            $html[] = $table->as_html();
+            $html[] = $this->render_footer();
+
+            return implode(PHP_EOL, $html);
         }
     }
 }

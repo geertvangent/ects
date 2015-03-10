@@ -42,9 +42,9 @@ abstract class Manager extends Application
         return self :: APPLICATION_NAME;
     }
 
-    function display_header()
+    function render_header()
     {
         BreadcrumbTrail :: get_instance()->set(array_values(SessionBreadcrumbs :: get()));
-        parent :: display_header();
+        return parent :: render_header();
     }
 }

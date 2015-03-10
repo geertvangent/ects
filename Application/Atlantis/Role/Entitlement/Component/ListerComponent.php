@@ -29,7 +29,7 @@ class ListerComponent extends Manager implements DelegateComponent
 
     public function run()
     {
-        $renderer_name = ClassnameUtilities::getInstance()->getClassnameFromObject($this, true);
+        $renderer_name = ClassnameUtilities :: getInstance()->getClassnameFromObject($this, true);
         $this->role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
         $this->application_id = Request :: get(\Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID);
         $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
@@ -165,9 +165,14 @@ class ListerComponent extends Manager implements DelegateComponent
                     new DynamicVisualTab($application->get_id, $application->get_name(), '', $link, $selected));
             }
             $this->add_breadcrumb();
-            $this->display_header();
-            echo $tabs->render();
-            $this->display_footer();
+
+            $html = array();
+
+            $html[] = $this->render_header();
+            $html[] = $tabs->render();
+            $html[] = $this->render_footer();
+
+            return implode(PHP_EOL, $html);
         }
     }
 

@@ -9,7 +9,6 @@ use Ehb\Application\Helpdesk\Manager;
 use Ehb\Application\Helpdesk\Rest\RestClient;
 
 // require_once Path :: getInstance()->getPluginPath() . 'pear/HTTP/Request2.php';
-
 class CreatorComponent extends Manager
 {
 
@@ -92,10 +91,14 @@ class CreatorComponent extends Manager
                     }
                     else
                     {
-                        $this->display_header();
-                        $form->display();
-                        $this->detect_browser_data();
-                        $this->display_footer();
+                        $html = array();
+
+                        $html[] = $this->render_header();
+                        $html[] = $form->toHtml();
+                        $html[] = $this->detect_browser_data();
+                        $html[] = $this->render_footer();
+
+                        return implode(PHP_EOL, $html);
                     }
                 }
                 else
@@ -105,18 +108,26 @@ class CreatorComponent extends Manager
             }
             else
             {
-                $this->display_header();
-                $form->display();
-                $this->detect_browser_data();
-                $this->display_footer();
+                $html = array();
+
+                $html[] = $this->render_header();
+                $html[] = $form->toHtml();
+                $html[] = $this->detect_browser_data();
+                $html[] = $this->render_footer();
+
+                return implode(PHP_EOL, $html);
             }
         }
         else
         {
-            $this->display_header();
-            $form->display();
-            $this->detect_browser_data();
-            $this->display_footer();
+            $html = array();
+
+            $html[] = $this->render_header();
+            $html[] = $form->toHtml();
+            $html[] = $this->detect_browser_data();
+            $html[] = $this->render_footer();
+
+            return implode(PHP_EOL, $html);
         }
     }
 

@@ -85,10 +85,14 @@ class BrowserComponent extends Manager implements TableSupport
                 $this->get_url($param),
                 $selected));
 
-        $this->display_header();
-        echo $this->action_bar->as_html();
-        echo $tabs->render();
-        $this->display_footer();
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $this->action_bar->as_html();
+        $html[] = $tabs->render();
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 
     public function get_table_condition($table_class_name)

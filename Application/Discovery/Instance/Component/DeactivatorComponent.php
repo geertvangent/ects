@@ -75,7 +75,7 @@ class DeactivatorComponent extends Manager
         }
         else
         {
-            $this->display_error_page(htmlentities(Translation :: get('NoInstanceSelected')));
+            return $this->display_error_page(htmlentities(Translation :: get('NoInstanceSelected')));
         }
     }
 }
