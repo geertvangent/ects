@@ -7,12 +7,12 @@ use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowse
 use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Module;
 use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights;
-use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements TableSupport
 {
@@ -28,7 +28,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
-            Display :: not_allowed();
+            throw new NotAllowedException(false);
         }
         \Ehb\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action(
             $this,

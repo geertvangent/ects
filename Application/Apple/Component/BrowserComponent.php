@@ -2,8 +2,8 @@
 namespace Ehb\Application\Apple\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Format\Display;
 use Ehb\Application\Apple\Manager;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {
@@ -20,7 +20,7 @@ class BrowserComponent extends Manager implements DelegateComponent
         }
         else
         {
-            Display :: not_allowed(null, false);
+            throw new NotAllowedException(false);
         }
     }
 }

@@ -6,9 +6,9 @@ use Ehb\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Module;
 use Ehb\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Ehb\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rights;
 use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
-use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\File\Export\Excel\ExcelExport;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
@@ -27,7 +27,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
-            Display :: not_allowed();
+            throw new NotAllowedException(false);
         }
 
         $this->php_excel = new \PHPExcel();

@@ -12,6 +12,7 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -25,7 +26,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
-            Display :: not_allowed();
+            throw new NotAllowedException(false);
         }
 
         $html = array();

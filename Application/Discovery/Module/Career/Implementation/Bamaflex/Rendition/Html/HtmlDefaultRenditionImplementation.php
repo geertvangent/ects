@@ -15,6 +15,7 @@ use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -32,7 +33,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
-            Display :: not_allowed();
+            throw new NotAllowedException(false);
         }
 
         $this->result_right = Rights :: is_allowed(
@@ -233,19 +234,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($training->is_current() && $year == $training->get_year() && $type == Course :: TYPE_NORMAL)
                     {
-                        $row[] = '<img src="' .
-                             Theme :: getInstance()->getImagePath(
-                                'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') .
-                             'TotalType/3.png" alt="' . Translation :: get('CreditPending') . '" title="' .
-                             Translation :: get('CreditPending') . '" />';
+                        $row[] = '<img src="' . Theme :: getInstance()->getImagePath(
+                            'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'TotalType/3.png" alt="' .
+                             Translation :: get('CreditPending') . '" title="' . Translation :: get('CreditPending') .
+                             '" />';
                     }
                     else
                     {
-                        $row[] = '<img src="' .
-                             Theme :: getInstance()->getImagePath(
-                                'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') .
-                             'TotalType/1.png" alt="' . Translation :: get('CreditTrue') . '" title="' .
-                             Translation :: get('CreditTrue') . '" />';
+                        $row[] = '<img src="' . Theme :: getInstance()->getImagePath(
+                            'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'TotalType/1.png" alt="' .
+                             Translation :: get('CreditTrue') . '" title="' . Translation :: get('CreditTrue') . '" />';
                         $total += $credits;
                     }
                 }
