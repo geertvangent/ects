@@ -31,52 +31,52 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     private $start_date;
 
     private $end_date;
-    
+
     /*
      * (non-PHPdoc) @see common\libraries.NewObjectTableSupport::get_object_table_condition()
      */
     public function get_object_table_condition($object_table_class_name)
     {
         $conditions = array();
-        
+
         if ($this->entity_type && $this->entity_id)
         {
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ENTITY_ID), 
+                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ENTITY_ID),
                 new StaticConditionVariable($this->entity_id));
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ENTITY_TYPE), 
+                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ENTITY_TYPE),
                 new StaticConditionVariable($this->entity_type));
         }
-        
+
         if ($this->context_id)
         {
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_CONTEXT_ID), 
+                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_CONTEXT_ID),
                 new StaticConditionVariable($this->context_id));
         }
-        
+
         if ($this->role_id)
         {
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ROLE_ID), 
+                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ROLE_ID),
                 new StaticConditionVariable($this->role_id));
         }
-        
+
         if ($this->start_date)
         {
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_START_DATE), 
+                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_START_DATE),
                 new StaticConditionVariable($this->start_date));
         }
-        
+
         if ($this->end_date)
         {
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_END_DATE), 
+                new PropertyConditionVariable(RoleEntity :: class_name(), RoleEntity :: PROPERTY_END_DATE),
                 new StaticConditionVariable($this->end_date));
         }
-        
+
         if (count($conditions) > 0)
         {
             return new AndCondition($conditions);
@@ -127,12 +127,12 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         if ($this->has_context_id() && ! $this->has_entity() && ! $this->has_role_id())
         {
             $context = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
-                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
                 (int) $this->context_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $context->get_name()));
             SessionBreadcrumbs :: add(
                 new Breadcrumb(
-                    $this->get_url(), 
+                    $this->get_url(),
                     Translation :: get('GrantedContexts', array('TYPE' => $context->get_name()))));
         }
         elseif (! $this->has_context_id() && $this->has_entity() && ! $this->has_role_id())
@@ -143,7 +143,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         elseif (! $this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
         {
             $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(), 
+                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
                 (int) $this->role_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
             SessionBreadcrumbs :: add(
@@ -156,25 +156,25 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         elseif ($this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
         {
             $context = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
-                Group :: class_name(), 
+                Group :: class_name(),
                 (int) $this->context_id);
-            
+
             $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(), 
+                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
                 (int) $this->role_id);
-            
+
             SessionBreadcrumbs :: add(
                 new Breadcrumb(
-                    $this->get_url(), 
+                    $this->get_url(),
                     Translation :: get(
-                        'GrantedContextsRoles', 
+                        'GrantedContextsRoles',
                         array('CONTEXT' => $context->get_name(), 'ROLE' => $role->get_name()))));
         }
         elseif (! $this->has_context_id() && $this->has_entity() && $this->has_role_id())
         {
             // no entity
         }
-        
+
         elseif ($this->has_context_id() && $this->has_entity() && $this->has_role_id())
         {
             // no entity
@@ -196,14 +196,18 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         $this->role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
         $this->start_date = Request :: get(self :: PARAM_START_DATE);
         $this->end_date = Request :: get(self :: PARAM_END_DATE);
-        
+
         $this->add_breadcrumb();
-        
-        $this->display_header();
+
         $table = new RoleEntityTable($this);
-        echo ($table->as_html());
-        
-        $this->display_footer();
+
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $table->as_html();
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
     /*
      * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()

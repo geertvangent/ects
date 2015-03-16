@@ -72,7 +72,7 @@ class DeleterComponent extends Manager
         }
         else
         {
-            $this->display_error_page(
+            return $this->display_error_page(
                 htmlentities(
                     Translation :: get(
                         'NoObjectSelected',

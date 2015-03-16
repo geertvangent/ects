@@ -163,8 +163,12 @@ class HomeComponent extends Manager implements DelegateComponent
                     $actions));
         }
 
-        $this->display_header();
-        echo $tabs->render();
-        $this->display_footer();
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $tabs->render();
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 }

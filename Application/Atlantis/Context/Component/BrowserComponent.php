@@ -80,18 +80,23 @@ class BrowserComponent extends Manager implements TableSupport
         SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
 
         $this->set_parameter(Manager :: PARAM_CONTEXT_ID, $this->get_context());
-        $table = new ContextTable($this);
-        $this->display_header();
 
-        echo '<div style="float: left; width: 30%; overflow:auto;">';
+        $table = new ContextTable($this);
         $menu = new Menu($this->get_context());
-        echo $menu->render_as_tree();
-        echo '</div>';
-        echo '<div style="float: right; width: 69%;">';
-        echo $this->get_action_bar()->as_html();
-        echo $table->as_html();
-        echo '</div>';
-        $this->display_footer();
+
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = '<div style="float: left; width: 30%; overflow:auto;">';
+        $html[] = $menu->render_as_tree();
+        $html[] = '</div>';
+        $html[] = '<div style="float: right; width: 69%;">';
+        $html[] = $this->get_action_bar()->as_html();
+        $html[] = $table->as_html();
+        $html[] = '</div>';
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 
     public function get_action_bar()

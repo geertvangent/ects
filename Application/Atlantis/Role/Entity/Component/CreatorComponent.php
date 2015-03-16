@@ -30,7 +30,7 @@ class CreatorComponent extends Manager
         SessionBreadcrumbs :: add(
             new Breadcrumb(
                 $this->get_url(),
-                Translation :: get(ClassnameUtilities::getInstance()->getClassnameFromNamespace(self :: class_name()))));
+                Translation :: get(ClassnameUtilities :: getInstance()->getClassnameFromNamespace(self :: class_name()))));
 
         if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
         {
@@ -158,9 +158,13 @@ class CreatorComponent extends Manager
         }
         else
         {
-            $this->display_header();
-            echo $form->toHtml();
-            $this->display_footer();
+            $html = array();
+
+            $html[] = $this->render_header();
+            $html[] = $form->toHtml();
+            $html[] = $this->render_footer();
+
+            return implode(PHP_EOL, $html);
         }
     }
 

@@ -55,12 +55,17 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     public function run()
     {
         $this->add_breadcrumb();
-        $this->display_header();
         $this->action_bar = $this->get_action_bar();
-        echo ($this->action_bar->as_html());
         $table = new RightTable($this);
-        echo ($table->as_html());
-        $this->display_footer();
+
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $this->action_bar->as_html();
+        $html[] = $table->as_html();
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 
     public function get_action_bar()

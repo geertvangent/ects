@@ -8,7 +8,6 @@ use Ehb\Application\Discovery\Module;
 use Ehb\Application\Discovery\Rendition\Rendition;
 use Ehb\Application\Discovery\Rendition\RenditionImplementation;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
@@ -66,10 +65,7 @@ class ViewerComponent extends Manager implements DelegateComponent
 
             if (! $current_module_instance)
             {
-                $this->display_header();
-                echo Display :: warning_message(Translation :: get('NoInstance'), true);
-                $this->display_footer();
-                exit();
+                throw new \Exception(Translation :: get('NoInstance'));
             }
 
             $module_id = $current_module_instance->get_id();
@@ -224,12 +220,16 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $view ? $view : Rendition :: VIEW_DEFAULT,
                 $this);
         }
-        $this->display_header();
-        echo $content;
-        echo '<div id="legend">';
-        echo LegendTable :: get_instance()->as_html();
-        echo '</div>';
 
-        $this->display_footer();
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $content;
+        $html[] = '<div id="legend">';
+        $html[] = LegendTable :: get_instance()->as_html();
+        $html[] = '</div>';
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 }

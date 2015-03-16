@@ -5,9 +5,9 @@ use Ehb\Application\Discovery\Module\Enrollment\DataManager;
 use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
 use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Rights;
-use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\File\Export\Excel\ExcelExport;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -25,7 +25,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
-            Display :: not_allowed();
+            throw new NotAllowedException(false);
         }
 
         $this->php_excel = new \PHPExcel();

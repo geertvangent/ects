@@ -11,6 +11,7 @@ use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {
@@ -23,7 +24,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $this->get_module_instance()->get_id(),
             $this->get_module_parameters()))
         {
-            Display :: not_allowed();
+            throw new NotAllowedException(false);
         }
 
         if ($this->get_profile())
@@ -248,7 +249,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
 
             $table = new PropertiesTable($properties);
-            $html[] = '<div class="content_object" style="background-image: url('.
+            $html[] = '<div class="content_object" style="background-image: url(' .
                  Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Types/previous_university.png);">';
             $html[] = '<div class="title">';
             $html[] = Translation :: get('PreviousUniversity');
