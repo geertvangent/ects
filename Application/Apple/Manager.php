@@ -6,7 +6,7 @@ use Chamilo\Libraries\Architecture\Application\Application;
 abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'rt';
-    const ACTION_BROWSE = 'browser';
+    const ACTION_BROWSE = 'Browser';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
 
     /**

@@ -6,7 +6,7 @@ use Chamilo\Libraries\Architecture\Application\Application;
 abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'rt';
-    const ACTION_CREATE = 'creator';
+    const ACTION_CREATE = 'Creator';
     const DEFAULT_ACTION = self :: ACTION_CREATE;
 
     /**

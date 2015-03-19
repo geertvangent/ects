@@ -5,16 +5,16 @@ use Chamilo\Libraries\Architecture\Application\Application;
 
 abstract class Manager extends Application
 {
-    const ACTION_BROWSE = 'browser';
-    const ACTION_WEBLCMS = 'weblcms';
-    const ACTION_PORTFOLIO = 'portfolio';
-    const ACTION_PORTFOLIO_INTRODUCTION = 'portfolio_introduction';
-    const ACTION_PORTFOLIO_LOCATION = 'portfolio_location';
-    const ACTION_PERSONAL_CALENDAR = 'personal_calendar';
-    const ACTION_DOCUMENT_WEBLCMS = 'weblcms_document';
-    const ACTION_DOCUMENT_ZIP_WEBLCMS = 'weblcms_document_zip';
-    const ACTION_DOCUMENT_REPOSITORY = 'repository_document';
-    const ACTION_EXPORT_REPOSITORY = 'repository_exporter';
+    const ACTION_BROWSE = 'Browser';
+    const ACTION_WEBLCMS = 'Weblcms';
+    const ACTION_PORTFOLIO = 'Portfolio';
+    const ACTION_PORTFOLIO_INTRODUCTION = 'PortfolioIntroduction';
+    const ACTION_PORTFOLIO_LOCATION = 'PortfolioLocation';
+    const ACTION_PERSONAL_CALENDAR = 'PersonalCalendar';
+    const ACTION_DOCUMENT_WEBLCMS = 'WeblcmsDocument';
+    const ACTION_DOCUMENT_ZIP_WEBLCMS = 'WeblcmsDocumentZip';
+    const ACTION_DOCUMENT_REPOSITORY = 'RepositoryDocument';
+    const ACTION_EXPORT_REPOSITORY = 'RepositoryExporter';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     const PARAM_ACTION = 'data_action';
 

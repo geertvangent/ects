@@ -14,10 +14,10 @@ abstract class Manager extends Application
 {
     const PARAM_ACTION = 'access_rights_action';
     const PARAM_LOCATION_ENTITY_RIGHT_GROUP_ID = 'location_entity_right_group_id';
-    const ACTION_CREATE = 'creator';
-    const ACTION_ACCESS = 'accessor';
-    const ACTION_BROWSE = 'browser';
-    const ACTION_DELETE = 'deleter';
+    const ACTION_CREATE = 'Creator';
+    const ACTION_ACCESS = 'Accessor';
+    const ACTION_BROWSE = 'Browser';
+    const ACTION_DELETE = 'Deleter';
     const DEFAULT_ACTION = self :: ACTION_CREATE;
 
     public function __construct(\Symfony\Component\HttpFoundation\Request $request, $user = null, $application = null)

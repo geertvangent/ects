@@ -5,8 +5,8 @@ use Chamilo\Libraries\Architecture\Application\Application;
 
 abstract class Manager extends Application
 {
-    const ACTION_BROWSE = 'browser';
-    const ACTION_DISCOVERY = 'discovery';
+    const ACTION_BROWSE = 'Browser';
+    const ACTION_DISCOVERY = 'Discovery';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     const PARAM_ACTION = 'discovery_action';
 

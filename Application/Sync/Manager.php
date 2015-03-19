@@ -6,11 +6,11 @@ use Chamilo\Libraries\Architecture\Application\Application;
 abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'sync';
-    const ACTION_BROWSE = 'browser';
-    const ACTION_BAMAFLEX = 'bamaflex';
-    const ACTION_ATLANTIS = 'atlantis';
-    const ACTION_CAS = 'cas';
-    const ACTION_DATA = 'data';
+    const ACTION_BROWSE = 'Browser';
+    const ACTION_BAMAFLEX = 'Bamaflex';
+    const ACTION_ATLANTIS = 'Atlantis';
+    const ACTION_CAS = 'Cas';
+    const ACTION_DATA = 'Data';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
 
     /**

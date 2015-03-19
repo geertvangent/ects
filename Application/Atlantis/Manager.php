@@ -10,13 +10,13 @@ use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'atlantis';
-    const ACTION_CONTEXT = 'context';
-    const ACTION_ROLE = 'role';
-    const ACTION_ENTITLEMENT = 'entitlement';
-    const ACTION_ENTITY = 'entity';
-    const ACTION_APPLICATION = 'application';
-    const ACTION_HOME = 'home';
-    const ACTION_RIGHTS = 'rights';
+    const ACTION_CONTEXT = 'Context';
+    const ACTION_ROLE = 'Role';
+    const ACTION_ENTITLEMENT = 'Entitlement';
+    const ACTION_ENTITY = 'Entity';
+    const ACTION_APPLICATION = 'Application';
+    const ACTION_HOME = 'Home';
+    const ACTION_RIGHTS = 'Rights';
     const DEFAULT_ACTION = self :: ACTION_HOME;
 
     public function __construct(\Symfony\Component\HttpFoundation\Request $request, $user = null, $application = null)

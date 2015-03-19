@@ -5,12 +5,12 @@ use Chamilo\Libraries\Architecture\Application\Application;
 
 abstract class Manager extends Application
 {
-    const ACTION_BROWSE = 'browser';
-    const ACTION_ALL_USERS = 'all_users';
-    const ACTION_COURSE_CATEGORIES = 'course_categories';
-    const ACTION_GROUPS = 'groups';
-    const ACTION_ARCHIVE_GROUPS = 'archive_groups';
-    const ACTION_COURSES = 'courses';
+    const ACTION_BROWSE = 'Browser';
+    const ACTION_ALL_USERS = 'AllUsers';
+    const ACTION_COURSE_CATEGORIES = 'CourseCategories';
+    const ACTION_GROUPS = 'Groups';
+    const ACTION_ARCHIVE_GROUPS = 'ArchiveGroups';
+    const ACTION_COURSES = 'Courses';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     const PARAM_ACTION = 'bamaflex_action';
 
