@@ -70,7 +70,7 @@ class CreatorComponent extends Manager
                 $row[] = $name;
                 $row[] = htmlentities(Translation :: get('TypeDescription', null, $available_type));
                 $row[] = Theme :: getInstance()->getCommonImage(
-                    'action_add',
+                    'Action/Add',
                     'png',
                     Translation :: get('AddInstance'),
                     $this->get_url(array(self :: PARAM_TYPE => $available_type)),

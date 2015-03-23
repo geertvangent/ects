@@ -90,7 +90,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('Information'),
-                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_information.png',
+                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/Information.png',
                         $link));
                 break;
             case Instance :: TYPE_INFORMATION :
@@ -101,7 +101,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('User'),
-                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_user.png',
+                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/User.png',
                         $link));
                 break;
             case Instance :: TYPE_DETAILS :
@@ -112,7 +112,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('User'),
-                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_user.png',
+                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/User.png',
                         $link));
                 $module_parameters = array();
                 $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
@@ -121,7 +121,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 BreadcrumbTrail :: get_instance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('Information'),
-                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_information.png',
+                        Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/Information.png',
                         $link));
                 break;
         }
