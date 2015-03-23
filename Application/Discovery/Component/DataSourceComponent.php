@@ -33,7 +33,7 @@ class DataSourceComponent extends Manager
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get('User'),
-                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_user.png',
+                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/User.png',
                 $link));
 
         $module_parameters = array();
@@ -46,7 +46,7 @@ class DataSourceComponent extends Manager
         BreadcrumbTrail :: get_instance()->add_extra(
             new ToolbarItem(
                 Translation :: get('Information'),
-                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'action_information.png',
+                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/Information.png',
                 $link));
 
         $factory = new ApplicationFactory(

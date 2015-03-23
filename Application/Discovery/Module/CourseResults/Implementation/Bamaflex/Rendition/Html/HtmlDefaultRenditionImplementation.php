@@ -254,7 +254,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     {
                         $mark_status_image = '<img src="' . Theme :: getInstance()->getImagesPath(
                             'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . 'StatusType/' .
-                             $mark->get_status() . '_na.png" alt="' .
+                             $mark->get_status() . 'Na.png" alt="' .
                              Translation :: get(
                                 $mark->get_status_string() . 'Abandoned',
                                 null,

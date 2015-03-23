@@ -223,7 +223,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $url = $this->get_instance_url($course_result_module_instance->get_id(), $parameters);
                     $row[] = Theme :: getInstance()->getCommonImage(
-                        'action_details',
+                        'Action/Details',
                         'png',
                         Translation :: get('CourseResults'),
                         $url,
@@ -232,7 +232,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 else
                 {
                     $row[] = Theme :: getInstance()->getCommonImage(
-                        'action_details_na',
+                        'Action/DetailsNa',
                         'png',
                         Translation :: get('CourseResultsNotAvailable'),
                         null,
