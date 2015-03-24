@@ -32,6 +32,16 @@ class SchemaTableCellRenderer extends DataClassTableCellRenderer implements Tabl
     {
         $toolbar = new Toolbar(Toolbar :: TYPE_HORIZONTAL);
 
+        $toolbar->add_item(
+            new ToolbarItem(
+                Translation :: get('Elements'),
+                Theme :: getInstance()->getCommonImagePath('Action/Element'),
+                $this->get_component()->get_url(
+                    array(
+                        Manager :: PARAM_ACTION => Manager :: ACTION_ELEMENT,
+                        Manager :: PARAM_SCHEMA_ID => $schema->get_id())),
+                ToolbarItem :: DISPLAY_ICON));
+
         if ($schema->is_fixed())
         {
             $toolbar->add_item(

@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Core\Metadata\Component;
+namespace Ehb\Core\Metadata\Schema\Component;
 
 use Ehb\Core\Metadata\Manager;
 use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
@@ -13,7 +13,7 @@ use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class SchemaComponent extends Manager implements DelegateComponent
+class ElementComponent extends Manager implements DelegateComponent
 {
 
     /**
@@ -24,7 +24,7 @@ class SchemaComponent extends Manager implements DelegateComponent
     {
         $factory = new ApplicationFactory(
             $this->getRequest(),
-            \Chamilo\Core\Metadata\Schema\Manager :: context(),
+            \Ehb\Core\Metadata\Element\Manager :: context(),
             $this->get_user(),
             $this);
         return $factory->run();
