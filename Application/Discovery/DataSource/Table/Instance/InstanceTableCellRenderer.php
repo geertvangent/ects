@@ -10,6 +10,7 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupp
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -25,7 +26,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
             case Instance :: PROPERTY_NAME :
                 return Translation :: get('TypeName', null, $module_instance->get_type());
             case Instance :: PROPERTY_DESCRIPTION :
-                return Utilities :: truncate_string(
+                return StringUtilities :: getInstance()->truncate(
                     Translation :: get('TypeDescription', null, $module_instance->get_type()),
                     50);
         }

@@ -4,7 +4,7 @@ namespace Ehb\Application\Discovery\Module\Person\Implementation\Chamilo\GroupBr
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Group\Table\Group\GroupTableCellRenderer;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
 {
@@ -16,7 +16,7 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
 
     /**
      * Constructor
-     * 
+     *
      * @param RepositoryManagerBrowserComponent $browser
      */
     public function __construct($browser)
@@ -24,7 +24,7 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
         parent :: __construct();
         $this->browser = $browser;
     }
-    
+
     // Inherited
     public function render_cell($column, $group)
     {
@@ -39,9 +39,9 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
                 {
                     $title_short = mb_substr($title_short, 0, 50) . '&hellip;';
                 }
-                
+
                 $show_url = false;
-                
+
                 if (! $this->browser->get_context()->get_user()->is_platform_admin())
                 {
                     foreach ($this->browser->get_allowed_groups() as $allowed_group_id)
@@ -58,10 +58,10 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
                 {
                     $show_url = true;
                 }
-                
+
                 if ($show_url)
                 {
-                    
+
                     return '<a href="' . htmlentities($this->browser->get_group_viewing_url($group)) . '" title="' .
                          $title . '">' . $title_short . '</a>';
                 }
@@ -75,13 +75,13 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
                 // {
                 // $description = mb_substr($description,0,170).'&hellip;';
                 // }
-                return Utilities :: truncate_string($description);
+                return StringUtilities :: getInstance()->truncate($description);
             case Translation :: get('Users', null, 'user') :
                 return $group->count_users(true, true);
             case Translation :: get('Subgroups') :
                 return $group->count_subgroups(true, true);
         }
-        
+
         return parent :: render_cell($column, $group);
     }
 }

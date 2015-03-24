@@ -12,6 +12,7 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
 use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
@@ -52,9 +53,9 @@ class CreatorComponent extends Manager
                     {
                         foreach ($values['context'][PlatformGroupEntity :: ENTITY_TYPE] as $context)
                         {
-                            $new_start_date = Utilities :: time_from_datepicker_without_timepicker(
+                            $new_start_date = DatetimeUtilities :: time_from_datepicker_without_timepicker(
                                 $values['start_date']);
-                            $new_end_date = Utilities :: time_from_datepicker_without_timepicker($values['end_date']);
+                            $new_end_date = DatetimeUtilities :: time_from_datepicker_without_timepicker($values['end_date']);
 
                             $conditions = array();
                             $conditions[] = new EqualityCondition(

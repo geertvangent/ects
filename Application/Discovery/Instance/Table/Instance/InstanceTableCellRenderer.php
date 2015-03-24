@@ -16,6 +16,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
@@ -32,7 +33,7 @@ class InstanceTableCellRenderer extends DataClassTableCellRenderer implements Ta
             case Instance :: PROPERTY_TITLE :
                 return Translation :: get('TypeName', null, $module_instance->get_type());
             case Instance :: PROPERTY_DESCRIPTION :
-                return Utilities :: truncate_string(
+                return StringUtilities :: getInstance()->truncate(
                     Translation :: get('TypeDescription', null, $module_instance->get_type()),
                     50);
         }
