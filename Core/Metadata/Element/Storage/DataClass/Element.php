@@ -25,7 +25,7 @@ class Element extends DataClass implements DisplayOrderDataClassListenerSupport
 
     // Value types
     const VALUE_TYPE_PREDEFINED = 1;
-    const VALUE_TYPE_ENTITY = 2;
+    const VALUE_TYPE_USER = 2;
     const VALUE_TYPE_BOTH = 3;
 
     /**
@@ -195,6 +195,16 @@ class Element extends DataClass implements DisplayOrderDataClassListenerSupport
     public function set_value_type($value_type)
     {
         $this->set_default_property(self :: PROPERTY_VALUE_TYPE, $value_type);
+    }
+
+    public function is_value_predefined()
+    {
+        return $this->get_value_type() != self :: VALUE_TYPE_USER;
+    }
+
+    public function is_value_user_defined()
+    {
+        return $this->get_value_type() != self :: VALUE_TYPE_PREDEFINED;
     }
 
     /**

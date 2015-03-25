@@ -78,8 +78,8 @@ class ElementForm extends FormValidator
             'radio',
             Element :: PROPERTY_VALUE_TYPE,
             null,
-            Translation :: get('ValueTypeEntity'),
-            Element :: VALUE_TYPE_ENTITY);
+            Translation :: get('ValueTypeUser'),
+            Element :: VALUE_TYPE_USER);
 
         $this->addElement(
             'radio',

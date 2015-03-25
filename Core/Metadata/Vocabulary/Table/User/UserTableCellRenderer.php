@@ -1,42 +1,24 @@
 <?php
-namespace Ehb\Core\Metadata\Vocabulary\Table\Vocabulary;
+namespace Ehb\Core\Metadata\Vocabulary\Table\User;
 
-// use Ehb\Core\Metadata\Vocabulary\Manager;
+use Ehb\Core\Metadata\Vocabulary\Manager;
 // use Ehb\Core\Metadata\Vocabulary\Storage\DataManager;
 use Chamilo\Libraries\Format\Structure\Toolbar;
-// use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
-// use Chamilo\Libraries\Format\Theme;
-// use Chamilo\Libraries\Platform\Translation;
-// use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableCellRenderer;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Core\User\Storage\DataClass\User;
 
 /**
  * Table cell renderer for the schema
  *
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  */
-class VocabularyTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
+class UserTableCellRenderer extends RecordTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
-
-    /**
-     * Renders a single cell
-     *
-     * @param TableColumn $column
-     * @param mixed $result
-     *
-     * @return string
-     */
-    public function render_cell($column, $result)
-    {
-        // switch ($column->get_name())
-        // {
-        // case VocabularyTableColumnModel :: COLUMN_PREFIX :
-        // return $result->get_namespace();
-        // break;
-        // }
-        return parent :: render_cell($column, $result);
-    }
 
     /**
      * Returns the actions toolbar
@@ -49,15 +31,16 @@ class VocabularyTableCellRenderer extends DataClassTableCellRenderer implements 
     {
         $toolbar = new Toolbar(Toolbar :: TYPE_HORIZONTAL);
 
-        // $toolbar->add_item(
-        // new ToolbarItem(
-        // Translation :: get('Vocabulary', null, Utilities :: COMMON_LIBRARIES),
-        // Theme :: getInstance()->getCommonImagePath('Action/Vocabulary'),
-        // $this->get_component()->get_url(
-        // array(
-        // Manager :: PARAM_ACTION => Manager :: ACTION_VOCABULARY,
-        // Manager :: PARAM_ELEMENT_ID => $result->get_id())),
-        // ToolbarItem :: DISPLAY_ICON));
+        $toolbar->add_item(
+            new ToolbarItem(
+                Translation :: get('Vocabulary', null, Utilities :: COMMON_LIBRARIES),
+                Theme :: getInstance()->getCommonImagePath('Action/Vocabulary'),
+                $this->get_component()->get_url(
+                    array(
+                        Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE,
+                        \Ehb\Core\Metadata\Element\Manager :: PARAM_ELEMENT_ID => $this->get_component()->getSelectedElementId(),
+                        Manager :: PARAM_USER_ID => $result[User :: PROPERTY_ID])),
+                ToolbarItem :: DISPLAY_ICON));
 
         // if ($result->is_fixed())
         // {

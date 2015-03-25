@@ -16,11 +16,11 @@ abstract class Manager extends Application
     // Parameters
     const PARAM_ACTION = 'vocabulary_action';
     const PARAM_VOCABULARY_ID = 'vocabulary_id';
-    const PARAM_ENTITY_TYPE = 'entity_type';
-    const PARAM_ENTITY_ID = 'entity_id';
+    const PARAM_USER_ID = 'user_id';
 
     // Actions
     const ACTION_BROWSE = 'Browser';
+    const ACTION_USER = 'User';
     const ACTION_DELETE = 'Deleter';
     const ACTION_UPDATE = 'Updater';
     const ACTION_CREATE = 'Creator';
@@ -32,8 +32,13 @@ abstract class Manager extends Application
      *
      * @return integer
      */
-    public function getElementId()
+    public function getSelectedElementId()
     {
         return $this->getRequest()->query->get(\Ehb\Core\Metadata\Element\Manager :: PARAM_ELEMENT_ID);
+    }
+
+    public function getSelectedUserId()
+    {
+        return $this->getRequest()->query->get(self :: PARAM_USER_ID, 0);
     }
 }

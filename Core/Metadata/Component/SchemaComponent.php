@@ -24,7 +24,7 @@ class SchemaComponent extends Manager implements DelegateComponent
     {
         $factory = new ApplicationFactory(
             $this->getRequest(),
-            \Chamilo\Core\Metadata\Schema\Manager :: context(),
+            \Ehb\Core\Metadata\Schema\Manager :: context(),
             $this->get_user(),
             $this);
         return $factory->run();

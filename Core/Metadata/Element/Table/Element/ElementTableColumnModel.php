@@ -8,6 +8,8 @@ use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumn
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
 
 /**
  * Table column model for the schema
@@ -17,6 +19,8 @@ use Chamilo\Libraries\Utilities\StringUtilities;
 class ElementTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
     const COLUMN_PREFIX = 'prefix';
+    const COLUMN_VALUE_PREDEFINED = 'value_predefined';
+    const COLUMN_VALUE_USER = 'value_user';
 
     /**
      * Initializes the columns for the table
@@ -49,5 +53,29 @@ class ElementTableColumnModel extends DataClassTableColumnModel implements Table
                     null,
                     'core\metadata'),
                 false));
+
+        $this->add_column(
+            new StaticTableColumn(
+                self :: COLUMN_VALUE_PREDEFINED,
+                Theme :: getInstance()->getImage(
+                    'Action/Value/Predefined',
+                    'png',
+                    Translation :: get('PredefinedValues', null, $this->get_component()->package()),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    $this->get_component()->package())));
+
+        $this->add_column(
+            new StaticTableColumn(
+                self :: COLUMN_VALUE_USER,
+                Theme :: getInstance()->getImage(
+                    'Action/Value/User',
+                    'png',
+                    Translation :: get('UserValues', null, $this->get_component()->package()),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    $this->get_component()->package())));
     }
 }
