@@ -53,29 +53,36 @@ class BrowserComponent extends Manager implements TableSupport
             throw new NoObjectSelectedException(Translation :: get('Element', null, 'Ehb\Core\Metadata\Element'));
         }
 
+        $content = $this->getContent();
+
         $html = array();
 
         $html[] = $this->render_header();
-        $html[] = $this->as_html();
+        $html[] = $content;
         $html[] = $this->render_footer();
 
         return implode(PHP_EOL, $html);
     }
 
-    public function as_html()
+    public function getContent()
     {
         $table = new VocabularyTable($this);
-
-        $html = array();
-
         $userId = $this->getSelectedUserId();
 
         if ($userId != 0)
         {
             $user = DataManager :: retrieve_by_id(User :: class_name(), $userId);
-            BreadcrumbTrail :: get_instance()->add(
-                new Breadcrumb($this->get_url(array(Manager :: PARAM_USER_ID => $userId)), $user->get_fullname()));
+            $breadcrumbTitle = $user->get_fullname();
         }
+        else
+        {
+            $breadcrumbTitle = Translation :: get('ValueTypePredefined', null, 'Ehb\Core\Metadata\Element');
+        }
+
+        BreadcrumbTrail :: get_instance()->add(
+            new Breadcrumb($this->get_url(array(Manager :: PARAM_USER_ID => $userId)), $breadcrumbTitle));
+
+        $html = array();
 
         $html[] = $this->get_action_bar()->as_html();
         $html[] = $table->as_html();
@@ -100,7 +107,8 @@ class BrowserComponent extends Manager implements TableSupport
                 $this->get_url(
                     array(
                         self :: PARAM_ACTION => self :: ACTION_CREATE,
-                        \Ehb\Core\Metadata\Element\Manager :: PARAM_ELEMENT_ID => $this->getSelectedElementId()))));
+                        \Ehb\Core\Metadata\Element\Manager :: PARAM_ELEMENT_ID => $this->getSelectedElementId(),
+                        self :: PARAM_USER_ID => $this->getSelectedUserId()))));
 
         return $action_bar;
     }
@@ -131,13 +139,10 @@ class BrowserComponent extends Manager implements TableSupport
 
         $userId = $this->getSelectedUserId();
 
-        if ($userId)
-        {
-            $conditions[] = new ComparisonCondition(
-                new PropertyConditionVariable(Vocabulary :: class_name(), Vocabulary :: PROPERTY_USER_ID),
-                ComparisonCondition :: EQUAL,
-                new StaticConditionVariable($userId));
-        }
+        $conditions[] = new ComparisonCondition(
+            new PropertyConditionVariable(Vocabulary :: class_name(), Vocabulary :: PROPERTY_USER_ID),
+            ComparisonCondition :: EQUAL,
+            new StaticConditionVariable($userId));
 
         return new AndCondition($conditions);
     }

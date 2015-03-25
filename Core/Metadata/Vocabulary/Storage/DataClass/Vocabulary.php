@@ -2,6 +2,12 @@
 namespace Ehb\Core\Metadata\Vocabulary\Storage\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Ehb\Core\Metadata\Vocabulary\Storage\DataManager;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\ComparisonCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 /**
  * This class describes a metadata vocabulary
@@ -15,6 +21,12 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
  */
 class Vocabulary extends DataClass
 {
+
+    /**
+     *
+     * @var VocabularyTranslation[]
+     */
+    private $translations;
     /**
      * **************************************************************************************************************
      * Properties *
@@ -88,6 +100,21 @@ class Vocabulary extends DataClass
         $this->set_default_property(self :: PROPERTY_USER_ID, $user_id);
     }
 
+    public function isForEveryone()
+    {
+        return $this->get_user_id() == 0;
+    }
+
+    public function getUser()
+    {
+        if ($this->isForEveryone())
+        {
+            return null;
+        }
+
+        return DataManager :: retrieve_by_id(User :: class_name(), $this->get_user_id());
+    }
+
     /**
      *
      * @return string
@@ -104,5 +131,28 @@ class Vocabulary extends DataClass
     public function set_value($value)
     {
         $this->set_default_property(self :: PROPERTY_VALUE, $value);
+    }
+
+    public function getTranslations()
+    {
+        if (! isset($this->translations))
+        {
+            $translations = DataManager :: retrieves(
+                VocabularyTranslation :: class_name(),
+                new DataClassRetrievesParameters(
+                    new ComparisonCondition(
+                        new PropertyConditionVariable(
+                            VocabularyTranslation :: class_name(),
+                            VocabularyTranslation :: PROPERTY_VOCABULARY_ID),
+                        ComparisonCondition :: EQUAL,
+                        new StaticConditionVariable($this->get_id()))));
+
+            while ($translation = $translations->next_result())
+            {
+                $this->translations[$translation->get_isocode()] = $translation;
+            }
+        }
+
+        return $this->translations;
     }
 }
