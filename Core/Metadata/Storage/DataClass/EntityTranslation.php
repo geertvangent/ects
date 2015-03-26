@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Core\Metadata\Vocabulary\Storage\DataClass;
+namespace Ehb\Core\Metadata\Storage\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 
@@ -10,14 +10,15 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class VocabularyTranslation extends DataClass
+class EntityTranslation extends DataClass
 {
     /**
      * **************************************************************************************************************
      * Properties *
      * **************************************************************************************************************
      */
-    const PROPERTY_VOCABULARY_ID = 'vocabulary_id';
+    const PROPERTY_ENTITY_TYPE = 'entity_type';
+    const PROPERTY_ENTITY_ID = 'entity_id';
     const PROPERTY_ISOCODE = 'isocode';
     const PROPERTY_VALUE = 'value';
 
@@ -36,7 +37,8 @@ class VocabularyTranslation extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_VOCABULARY_ID;
+        $extended_property_names[] = self :: PROPERTY_ENTITY_TYPE;
+        $extended_property_names[] = self :: PROPERTY_ENTITY_ID;
         $extended_property_names[] = self :: PROPERTY_ISOCODE;
         $extended_property_names[] = self :: PROPERTY_VALUE;
 
@@ -53,18 +55,36 @@ class VocabularyTranslation extends DataClass
      *
      * @return integer
      */
-    public function get_vocabulary_id()
+    public function get_entity_type()
     {
-        return $this->get_default_property(self :: PROPERTY_VOCABULARY_ID);
+        return $this->get_default_property(self :: PROPERTY_ENTITY_TYPE);
     }
 
     /**
      *
      * @param integer
      */
-    public function set_vocabulary_id($vocabulary_id)
+    public function set_entity_type($entityType)
     {
-        $this->set_default_property(self :: PROPERTY_VOCABULARY_ID, $vocabulary_id);
+        $this->set_default_property(self :: PROPERTY_ENTITY_TYPE, $entityType);
+    }
+
+    /**
+     *
+     * @return integer
+     */
+    public function get_entity_id()
+    {
+        return $this->get_default_property(self :: PROPERTY_ENTITY_ID);
+    }
+
+    /**
+     *
+     * @param integer
+     */
+    public function set_entity_id($entity_id)
+    {
+        $this->set_default_property(self :: PROPERTY_ENTITY_ID, $entity_id);
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
-namespace Ehb\Core\Metadata\Relation\Table\RelationType;
+namespace Ehb\Core\Metadata\Relation\Table\Relation;
 
-use Ehb\Core\Metadata\Relation\Storage\DataClass\RelationType;
+use Ehb\Core\Metadata\Relation\Storage\DataClass\Relation;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
@@ -15,7 +15,7 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSuppo
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class RelationTypeTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
+class RelationTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
 
     /**
@@ -23,6 +23,6 @@ class RelationTypeTableColumnModel extends DataClassTableColumnModel implements 
      */
     public function initialize_columns()
     {
-        $this->add_column(new DataClassPropertyTableColumn(RelationType :: class_name(), RelationType :: PROPERTY_NAME));
+        $this->add_column(new DataClassPropertyTableColumn(Relation :: class_name(), Relation :: PROPERTY_NAME));
     }
 }

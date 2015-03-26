@@ -16,7 +16,6 @@ abstract class Manager extends Application
     // Parameters
     const PARAM_ACTION = 'relation_action';
     const PARAM_RELATION_ID = 'relation_id';
-    const PARAM_RELATION_TYPE_ID = 'relation_type_id';
 
     // Actions
     const ACTION_BROWSE = 'Browser';

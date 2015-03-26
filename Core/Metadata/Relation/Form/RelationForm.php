@@ -5,36 +5,36 @@ use Ehb\Core\Metadata\Relation\Manager;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Core\Metadata\Relation\Storage\DataClass\RelationType;
+use Ehb\Core\Metadata\Relation\Storage\DataClass\Relation;
 use Chamilo\Configuration\Storage\DataClass\Language;
 use Chamilo\Configuration\Configuration;
 
 /**
  * Form for the element
  */
-class RelationTypeForm extends FormValidator
+class RelationForm extends FormValidator
 {
 
     /**
      *
-     * @var RelationType
+     * @var Relation
      */
-    private $relation_type;
+    private $relation;
 
     /**
      * Constructor
      *
      * @param string $form_url
-     * @param RelationType $relation_type
+     * @param Relation $relation
      */
-    public function __construct(RelationType $relation_type, $form_url)
+    public function __construct(Relation $relation, $form_url)
     {
-        parent :: __construct('relation_type', 'post', $form_url);
+        parent :: __construct('relation', 'post', $form_url);
 
-        $this->relation_type = $relation_type;
+        $this->relation = $relation;
         $this->build_form();
 
-        if ($this->relation_type->is_identified())
+        if ($this->relation->is_identified())
         {
             $this->set_defaults();
         }
@@ -49,10 +49,10 @@ class RelationTypeForm extends FormValidator
 
         $this->addElement(
             'text',
-            RelationType :: PROPERTY_NAME,
+            Relation :: PROPERTY_NAME,
             Translation :: get('Name', null, Utilities :: COMMON_LIBRARIES));
         $this->addRule(
-            RelationType :: PROPERTY_NAME,
+            Relation :: PROPERTY_NAME,
             Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
             'required');
 
@@ -104,9 +104,9 @@ class RelationTypeForm extends FormValidator
     {
         $defaults = array();
 
-        $defaults[RelationType :: PROPERTY_NAME] = $this->relation_type->get_name();
+        $defaults[Relation :: PROPERTY_NAME] = $this->relation->get_name();
 
-        foreach ($this->relation_type->getTranslations() as $isocode => $translation)
+        foreach ($this->relation->getTranslations() as $isocode => $translation)
         {
             $defaults[Manager :: PROPERTY_TRANSLATION][$isocode] = $translation->get_value();
         }

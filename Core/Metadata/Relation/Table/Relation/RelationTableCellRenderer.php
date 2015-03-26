@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Core\Metadata\Relation\Table\RelationType;
+namespace Ehb\Core\Metadata\Relation\Table\Relation;
 
 use Ehb\Core\Metadata\Relation\Manager;
 use Chamilo\Libraries\Format\Structure\Toolbar;
@@ -19,13 +19,13 @@ use Chamilo\Libraries\Utilities\Utilities;
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class RelationTypeTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
+class RelationTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
 
     /**
      * Returns the actions toolbar
      *
-     * @param \Ehb\Core\Metadata\Relation\Storage\DataClass\RelationType $relationType
+     * @param \Ehb\Core\Metadata\Relation\Storage\DataClass\Relation $relationType
      * @return string
      */
     public function get_actions($relationType)
@@ -39,7 +39,7 @@ class RelationTypeTableCellRenderer extends DataClassTableCellRenderer implement
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_UPDATE,
-                        Manager :: PARAM_RELATION_TYPE_ID => $relationType->get_id())),
+                        Manager :: PARAM_RELATION_ID => $relationType->get_id())),
                 ToolbarItem :: DISPLAY_ICON));
 
         $toolbar->add_item(
@@ -49,7 +49,7 @@ class RelationTypeTableCellRenderer extends DataClassTableCellRenderer implement
                 $this->get_component()->get_url(
                     array(
                         Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
-                        Manager :: PARAM_RELATION_TYPE_ID => $relationType->get_id())),
+                        Manager :: PARAM_RELATION_ID => $relationType->get_id())),
                 ToolbarItem :: DISPLAY_ICON,
                 true));
 

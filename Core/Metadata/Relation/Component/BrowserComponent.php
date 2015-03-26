@@ -2,8 +2,8 @@
 namespace Ehb\Core\Metadata\Relation\Component;
 
 use Ehb\Core\Metadata\Relation\Manager;
-use Ehb\Core\Metadata\Relation\Storage\DataClass\RelationType;
-use Ehb\Core\Metadata\Relation\Table\RelationType\RelationTypeTable;
+use Ehb\Core\Metadata\Relation\Storage\DataClass\Relation;
+use Ehb\Core\Metadata\Relation\Table\Relation\RelationTable;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
@@ -60,7 +60,7 @@ class BrowserComponent extends Manager implements TableSupport
         $this->action_bar = $this->get_action_bar();
         $html[] = $this->action_bar->as_html();
 
-        $table = new RelationTypeTable($this);
+        $table = new RelationTable($this);
         $html[] = $table->as_html();
 
         return implode(PHP_EOL, $html);
@@ -95,6 +95,6 @@ class BrowserComponent extends Manager implements TableSupport
     public function get_table_condition($table_class_name)
     {
         return $this->action_bar->get_conditions(
-            array(new PropertyConditionVariable(RelationType :: class_name(), RelationType :: PROPERTY_NAME)));
+            array(new PropertyConditionVariable(Relation :: class_name(), Relation :: PROPERTY_NAME)));
     }
 }

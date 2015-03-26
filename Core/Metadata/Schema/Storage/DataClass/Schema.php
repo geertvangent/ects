@@ -15,6 +15,8 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
  */
 class Schema extends DataClass
 {
+    use \Ehb\Core\Metadata\Traits\EntityTranslationTrait;
+
     /**
      * **************************************************************************************************************
      * Properties *

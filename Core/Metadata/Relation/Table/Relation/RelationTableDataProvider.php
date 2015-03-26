@@ -1,7 +1,7 @@
 <?php
-namespace Ehb\Core\Metadata\Relation\Table\RelationType;
+namespace Ehb\Core\Metadata\Relation\Table\Relation;
 
-use Ehb\Core\Metadata\Relation\Storage\DataClass\RelationType;
+use Ehb\Core\Metadata\Relation\Storage\DataClass\Relation;
 use Ehb\Core\Metadata\Relation\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -15,7 +15,7 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class RelationTypeTableDataProvider extends DataClassTableDataProvider
+class RelationTableDataProvider extends DataClassTableDataProvider
 {
 
     /**
@@ -31,7 +31,7 @@ class RelationTypeTableDataProvider extends DataClassTableDataProvider
     {
         $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
 
-        return DataManager :: retrieves(RelationType :: class_name(), $parameters);
+        return DataManager :: retrieves(Relation :: class_name(), $parameters);
     }
 
     /**
@@ -42,6 +42,6 @@ class RelationTypeTableDataProvider extends DataClassTableDataProvider
      */
     public function count_data($condition)
     {
-        return DataManager :: count(RelationType :: class_name(), $condition);
+        return DataManager :: count(Relation :: class_name(), $condition);
     }
 }

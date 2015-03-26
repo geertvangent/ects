@@ -9,7 +9,7 @@ use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Core\Metadata\Vocabulary\Storage\DataClass\VocabularyTranslation;
+use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
 
 /**
  * Controller to update the controlled vocabulary
@@ -52,7 +52,7 @@ class UpdaterComponent extends Manager
 
                     foreach ($values[self :: PROPERTY_TRANSLATION] as $isocode => $value)
                     {
-                        if ($translations[$isocode] instanceof VocabularyTranslation)
+                        if ($translations[$isocode] instanceof EntityTranslation)
                         {
                             $translation = $translations[$isocode];
                             $translation->set_value($value);
@@ -60,8 +60,9 @@ class UpdaterComponent extends Manager
                         }
                         else
                         {
-                            $translation = new VocabularyTranslation();
-                            $translation->set_vocabulary_id($vocabulary->get_id());
+                            $translation = new EntityTranslation();
+                            $translation->set_entity_type(Vocabulary :: class_name());
+                            $translation->set_entity_id($vocabulary->get_id());
                             $translation->set_isocode($isocode);
                             $translation->set_value($value);
                             $translation->create();

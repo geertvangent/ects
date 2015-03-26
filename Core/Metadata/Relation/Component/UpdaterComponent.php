@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Core\Metadata\Relation\Component;
 
-use Ehb\Core\Metadata\Relation\Form\RelationTypeForm;
+use Ehb\Core\Metadata\Relation\Form\RelationForm;
 use Ehb\Core\Metadata\Relation\Manager;
-use Ehb\Core\Metadata\Relation\Storage\DataClass\RelationType;
+use Ehb\Core\Metadata\Relation\Storage\DataClass\Relation;
 use Ehb\Core\Metadata\Relation\Storage\DataManager;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Core\Metadata\Relation\Storage\DataClass\RelationTypeTranslation;
+use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
 
 /**
  * Controller to update the schema
@@ -33,10 +33,10 @@ class UpdaterComponent extends Manager
             throw new NotAllowedException();
         }
 
-        $relation_type_id = Request :: get(self :: PARAM_RELATION_TYPE_ID);
-        $relationType = DataManager :: retrieve_by_id(RelationType :: class_name(), $relation_type_id);
+        $relation_id = Request :: get(self :: PARAM_RELATION_ID);
+        $relationType = DataManager :: retrieve_by_id(Relation :: class_name(), $relation_id);
 
-        $form = new RelationTypeForm($relationType, $this->get_url());
+        $form = new RelationForm($relationType, $this->get_url());
 
         if ($form->validate())
         {
@@ -44,7 +44,7 @@ class UpdaterComponent extends Manager
             {
                 $values = $form->exportValues();
 
-                $relationType->set_name($values[RelationType :: PROPERTY_NAME]);
+                $relationType->set_name($values[Relation :: PROPERTY_NAME]);
                 $success = $relationType->update();
 
                 if ($success)
@@ -53,7 +53,7 @@ class UpdaterComponent extends Manager
 
                     foreach ($values[self :: PROPERTY_TRANSLATION] as $isocode => $value)
                     {
-                        if ($translations[$isocode] instanceof RelationTypeTranslation)
+                        if ($translations[$isocode] instanceof EntityTranslation)
                         {
                             $translation = $translations[$isocode];
                             $translation->set_value($value);
@@ -61,8 +61,9 @@ class UpdaterComponent extends Manager
                         }
                         else
                         {
-                            $translation = new RelationTypeTranslation();
-                            $translation->set_relation_type_id($relationType->get_id());
+                            $translation = new EntityTranslation();
+                            $translation->set_entity_type(Relation :: class_name());
+                            $translation->set_entity_id($relationType->get_id());
                             $translation->set_isocode($isocode);
                             $translation->set_value($value);
                             $translation->create();
@@ -74,7 +75,7 @@ class UpdaterComponent extends Manager
 
                 $message = Translation :: get(
                     $translation,
-                    array('OBJECT' => Translation :: get('RelationType')),
+                    array('OBJECT' => Translation :: get('Relation')),
                     Utilities :: COMMON_LIBRARIES);
             }
             catch (\Exception $ex)
@@ -104,6 +105,6 @@ class UpdaterComponent extends Manager
      */
     public function get_additional_parameters()
     {
-        return array(self :: PARAM_RELATION_TYPE_ID);
+        return array(self :: PARAM_RELATION_ID);
     }
 }

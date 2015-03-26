@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Core\Metadata\Relation\Component;
 
-use Ehb\Core\Metadata\Relation\Form\RelationTypeForm;
+use Ehb\Core\Metadata\Relation\Form\RelationForm;
 use Ehb\Core\Metadata\Relation\Manager;
-use Ehb\Core\Metadata\Relation\Storage\DataClass\RelationType;
+use Ehb\Core\Metadata\Relation\Storage\DataClass\Relation;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Core\Metadata\Relation\Storage\DataClass\RelationTypeTranslation;
+use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
 
 /**
  * Controller to create the schema
@@ -31,8 +31,8 @@ class CreatorComponent extends Manager
             throw new NotAllowedException();
         }
 
-        $relationType = new RelationType();
-        $form = new RelationTypeForm($relationType, $this->get_url());
+        $relation = new Relation();
+        $form = new RelationForm($relation, $this->get_url());
 
         if ($form->validate())
         {
@@ -40,15 +40,16 @@ class CreatorComponent extends Manager
             {
                 $values = $form->exportValues();
 
-                $relationType->set_name($values[RelationType :: PROPERTY_NAME]);
-                $success = $relationType->create();
+                $relation->set_name($values[Relation :: PROPERTY_NAME]);
+                $success = $relation->create();
 
                 if ($success)
                 {
                     foreach ($values[self :: PROPERTY_TRANSLATION] as $isocode => $value)
                     {
-                        $translation = new RelationTypeTranslation();
-                        $translation->set_relation_type_id($relationType->get_id());
+                        $translation = new EntityTranslation();
+                        $translation->set_entity_type(Relation :: class_name());
+                        $translation->set_entity_id($relation->get_id());
                         $translation->set_isocode($isocode);
                         $translation->set_value($value);
                         $translation->create();
@@ -59,7 +60,7 @@ class CreatorComponent extends Manager
 
                 $message = Translation :: get(
                     $translation,
-                    array('OBJECT' => Translation :: get('RelationType')),
+                    array('OBJECT' => Translation :: get('Relation')),
                     Utilities :: COMMON_LIBRARIES);
             }
             catch (\Exception $ex)

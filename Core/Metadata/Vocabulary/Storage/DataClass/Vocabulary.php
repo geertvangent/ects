@@ -4,15 +4,11 @@ namespace Ehb\Core\Metadata\Vocabulary\Storage\DataClass;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Ehb\Core\Metadata\Vocabulary\Storage\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\Query\Condition\ComparisonCondition;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 /**
  * This class describes a metadata vocabulary
  *
- * @package Ehb\Core\Metadata\Schema\Storage\DataClass
+ * @package Ehb\Core\Metadata\Vocabulary\Storage\DataClass
  * @author Jens Vanderheyden
  * @author Sven Vanpoucke - Hogeschool Gent
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
@@ -21,12 +17,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
  */
 class Vocabulary extends DataClass
 {
-
-    /**
-     *
-     * @var VocabularyTranslation[]
-     */
-    private $translations;
+    use \Ehb\Core\Metadata\Traits\EntityTranslationTrait;
 
     /**
      *
@@ -162,28 +153,5 @@ class Vocabulary extends DataClass
     public function set_value($value)
     {
         $this->set_default_property(self :: PROPERTY_VALUE, $value);
-    }
-
-    public function getTranslations()
-    {
-        if (! isset($this->translations))
-        {
-            $translations = DataManager :: retrieves(
-                VocabularyTranslation :: class_name(),
-                new DataClassRetrievesParameters(
-                    new ComparisonCondition(
-                        new PropertyConditionVariable(
-                            VocabularyTranslation :: class_name(),
-                            VocabularyTranslation :: PROPERTY_VOCABULARY_ID),
-                        ComparisonCondition :: EQUAL,
-                        new StaticConditionVariable($this->get_id()))));
-
-            while ($translation = $translations->next_result())
-            {
-                $this->translations[$translation->get_isocode()] = $translation;
-            }
-        }
-
-        return $this->translations;
     }
 }

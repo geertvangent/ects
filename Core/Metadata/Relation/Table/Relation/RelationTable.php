@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Core\Metadata\Relation\Table\RelationType;
+namespace Ehb\Core\Metadata\Relation\Table\Relation;
 
 use Ehb\Core\Metadata\Relation\Manager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
@@ -12,15 +12,15 @@ use Chamilo\Libraries\Utilities\Utilities;
 /**
  * Table for the schema
  *
- * @package Ehb\Core\Metadata\Relation\Table\RelationType
+ * @package Ehb\Core\Metadata\Relation\Table\Relation
  * @author Sven Vanpoucke - Hogeschool Gent
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class RelationTypeTable extends DataClassTable implements TableFormActionsSupport
+class RelationTable extends DataClassTable implements TableFormActionsSupport
 {
-    const TABLE_IDENTIFIER = Manager :: PARAM_RELATION_TYPE_ID;
+    const TABLE_IDENTIFIER = Manager :: PARAM_RELATION_ID;
 
     /**
      * Returns the implemented form actions
