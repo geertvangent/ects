@@ -24,6 +24,7 @@ abstract class Manager extends Application
     const ACTION_DELETE = 'Deleter';
     const ACTION_UPDATE = 'Updater';
     const ACTION_CREATE = 'Creator';
+    const ACTION_DEFAULT = 'Default';
 
     // Properties
     const PROPERTY_TRANSLATION = 'translation';

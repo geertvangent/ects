@@ -27,6 +27,12 @@ class Vocabulary extends DataClass
      * @var VocabularyTranslation[]
      */
     private $translations;
+
+    /**
+     *
+     * @var boolean
+     */
+    private $isDefault;
     /**
      * **************************************************************************************************************
      * Properties *
@@ -34,6 +40,7 @@ class Vocabulary extends DataClass
      */
     const PROPERTY_ELEMENT_ID = 'element_id';
     const PROPERTY_USER_ID = 'user_id';
+    const PROPERTY_DEFAULT_VALUE = 'default_value';
     const PROPERTY_VALUE = 'value';
 
     /**
@@ -53,6 +60,7 @@ class Vocabulary extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_ELEMENT_ID;
         $extended_property_names[] = self :: PROPERTY_USER_ID;
+        $extended_property_names[] = self :: PROPERTY_DEFAULT_VALUE;
         $extended_property_names[] = self :: PROPERTY_VALUE;
 
         return parent :: get_default_property_names($extended_property_names);
@@ -113,6 +121,29 @@ class Vocabulary extends DataClass
         }
 
         return DataManager :: retrieve_by_id(User :: class_name(), $this->get_user_id());
+    }
+
+    /**
+     *
+     * @return integer
+     */
+    public function get_default_value()
+    {
+        return $this->get_default_property(self :: PROPERTY_DEFAULT_VALUE);
+    }
+
+    /**
+     *
+     * @param integer
+     */
+    public function set_default_value($default_value)
+    {
+        $this->set_default_property(self :: PROPERTY_DEFAULT_VALUE, $default_value);
+    }
+
+    public function isDefault()
+    {
+        return (bool) $this->get_default_value();
     }
 
     /**

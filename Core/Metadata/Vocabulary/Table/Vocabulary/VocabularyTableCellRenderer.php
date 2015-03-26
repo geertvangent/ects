@@ -19,6 +19,42 @@ class VocabularyTableCellRenderer extends DataClassTableCellRenderer implements 
 {
 
     /**
+     * Renders a single cell
+     *
+     * @param TableColumn $column
+     * @param mixed $result
+     *
+     * @return string
+     */
+    public function render_cell($column, $result)
+    {
+        switch ($column->get_name())
+        {
+            case VocabularyTableColumnModel :: COLUMN_DEFAULT :
+                $image = 'Action/Default';
+                $image .= $result->isDefault() ? '' : 'Na';
+
+                $translationVariable = 'Default';
+                $translationVariable .= $result->isDefault() ? '' : 'Na';
+
+                return Theme :: getInstance()->getImage(
+                    $image,
+                    'png',
+                    Translation :: get($translationVariable, null, $this->get_component()->package()),
+                    $this->get_component()->get_url(
+                        array(
+                            \Ehb\Core\Metadata\Vocabulary\Manager :: PARAM_ACTION => \Ehb\Core\Metadata\Vocabulary\Manager :: ACTION_DEFAULT,
+                            Manager :: PARAM_VOCABULARY_ID => $result->get_id())),
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    $this->get_component()->package());
+                break;
+        }
+
+        return parent :: render_cell($column, $result);
+    }
+
+    /**
      * Returns the actions toolbar
      *
      * @param mixed $result

@@ -42,6 +42,7 @@ class UpdaterComponent extends Manager
                 $values = $form->exportValues();
 
                 $vocabulary->set_value($values[Vocabulary :: PROPERTY_VALUE]);
+                $vocabulary->set_default_value(isset($values[Vocabulary :: PROPERTY_DEFAULT_VALUE]) ? 1 : 0);
 
                 $success = $vocabulary->update();
 

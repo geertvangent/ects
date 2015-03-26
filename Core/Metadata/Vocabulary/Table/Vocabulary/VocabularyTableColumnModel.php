@@ -7,6 +7,9 @@ use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumn
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
 
 /**
  * Table column model for the schema
@@ -15,7 +18,7 @@ use Chamilo\Libraries\Utilities\StringUtilities;
  */
 class VocabularyTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
-    const COLUMN_PREFIX = 'prefix';
+    const COLUMN_DEFAULT = 'default';
 
     /**
      * Initializes the columns for the table
@@ -30,5 +33,17 @@ class VocabularyTableColumnModel extends DataClassTableColumnModel implements Ta
                     (string) StringUtilities :: getInstance()->createString(Vocabulary :: PROPERTY_VALUE)->upperCamelize(),
                     null,
                     'core\metadata')));
+
+        $this->add_column(
+            new StaticTableColumn(
+                self :: COLUMN_DEFAULT,
+                Theme :: getInstance()->getImage(
+                    'Action/Default',
+                    'png',
+                    Translation :: get('Default', null, $this->get_component()->package()),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    $this->get_component()->package())));
     }
 }

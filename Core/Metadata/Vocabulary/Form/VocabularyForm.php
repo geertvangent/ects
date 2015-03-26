@@ -87,6 +87,8 @@ class VocabularyForm extends FormValidator
             Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
             'required');
 
+        $this->addElement('checkbox', Vocabulary :: PROPERTY_DEFAULT_VALUE, Translation :: get('DefaultValue'));
+
         $this->addElement('category');
 
         $this->addElement('category', Translation :: get('Translations'));
@@ -136,6 +138,7 @@ class VocabularyForm extends FormValidator
         $defaults = array();
 
         $defaults[Vocabulary :: PROPERTY_VALUE] = $this->vocabulary->get_value();
+        $defaults[Vocabulary :: PROPERTY_DEFAULT_VALUE] = $this->vocabulary->get_default_value();
 
         foreach ($this->vocabulary->getTranslations() as $isocode => $translation)
         {
