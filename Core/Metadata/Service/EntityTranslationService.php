@@ -2,12 +2,12 @@
 namespace Ehb\Core\Metadata\Service;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Libraries\Storage\Query\Condition\ComparisonCondition;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\ComparisonCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
 
 /**
  *
@@ -19,6 +19,7 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
  */
 class EntityTranslationService
 {
+    const PROPERTY_TRANSLATION = 'translation';
 
     /**
      *
@@ -53,6 +54,10 @@ class EntityTranslationService
         $this->entity = $entity;
     }
 
+    /**
+     *
+     * @return \Ehb\Core\Metadata\Storage\DataClass\EntityTranslation[]
+     */
     public function getEntityTranslationsIndexedByIsocode()
     {
         $conditions = array();
@@ -77,5 +82,68 @@ class EntityTranslationService
         }
 
         return $translationsIndexedByIsocode;
+    }
+
+    /**
+     *
+     * @param string[] $entityTranslations
+     * @return boolean
+     */
+    public function createEntityTranslations($entityTranslations)
+    {
+        foreach ($entityTranslations[self :: PROPERTY_TRANSLATION] as $isocode => $value)
+        {
+            $translation = new EntityTranslation();
+            $translation->set_entity_type($this->getEntity()->class_name());
+            $translation->set_entity_id($this->getEntity()->get_id());
+            $translation->set_isocode($isocode);
+            $translation->set_value($value);
+
+            if (! $translation->create())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     *
+     * @param string[] $entityTranslations
+     * @return boolean
+     */
+    public function updateEntityTranslations($entityTranslations)
+    {
+        $translations = $this->getEntity()->getTranslations();
+
+        foreach ($entityTranslations as $isocode => $value)
+        {
+            if ($translations[$isocode] instanceof EntityTranslation)
+            {
+                $translation = $translations[$isocode];
+                $translation->set_value($value);
+
+                if (! $translation->update())
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                $translation = new EntityTranslation();
+                $translation->set_entity_type($this->getEntity()->class_name());
+                $translation->set_entity_id($this->getEntity()->get_id());
+                $translation->set_isocode($isocode);
+                $translation->set_value($value);
+
+                if (! $translation->create())
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

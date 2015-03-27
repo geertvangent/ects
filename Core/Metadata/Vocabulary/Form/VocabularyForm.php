@@ -2,14 +2,12 @@
 namespace Ehb\Core\Metadata\Vocabulary\Form;
 
 use Ehb\Core\Metadata\Element\Storage\DataClass\Element;
-use Ehb\Core\Metadata\Vocabulary\Manager;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Core\Metadata\Vocabulary\Storage\DataClass\Vocabulary;
 use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Configuration\Storage\DataClass\Language;
-use Chamilo\Configuration\Configuration;
+use Ehb\Core\Metadata\Service\EntityTranslationFormService;
 
 /**
  * Form for the element
@@ -19,33 +17,39 @@ class VocabularyForm extends FormValidator
 
     /**
      *
-     * @var Vocabulary
+     * @var \Ehb\Core\Metadata\Vocabulary\Storage\DataClass\Vocabulary
      */
     private $vocabulary;
 
     /**
-     * Constructor
      *
-     * @param string $form_url
-     * @param Vocabulary $vocabulary
+     * @var \Ehb\Core\Metadata\Service\EntityTranslationFormService
      */
-    public function __construct(Vocabulary $vocabulary, $form_url)
+    private $entityTranslationFormService;
+
+    /**
+     *
+     * @param \Ehb\Core\Metadata\Vocabulary\Storage\DataClass\Vocabulary $vocabulary
+     * @param \Ehb\Core\Metadata\Service\EntityTranslationFormService $entityTranslationFormService
+     * @param string $form_url
+     */
+    public function __construct(Vocabulary $vocabulary, EntityTranslationFormService $entityTranslationFormService,
+        $formUrl)
     {
-        parent :: __construct('vocabulary', 'post', $form_url);
+        parent :: __construct('vocabulary', 'post', $formUrl);
 
         $this->vocabulary = $vocabulary;
-        $this->build_form();
+        $this->entityTranslationFormService = $entityTranslationFormService;
+        $this->entityTranslationFormService->setFormValidator($this);
 
-        if ($this->vocabulary->is_identified())
-        {
-            $this->set_defaults();
-        }
+        $this->buildForm();
+        $this->setFormDefaults();
     }
 
     /**
      * Builds this form
      */
-    protected function build_form()
+    protected function buildForm()
     {
         $element = \Ehb\Core\Metadata\Storage\DataManager :: retrieve_by_id(
             Element :: class_name(),
@@ -91,41 +95,8 @@ class VocabularyForm extends FormValidator
 
         $this->addElement('category');
 
-        $this->addElement('category', Translation :: get('Translations'));
-
-        $languages = \Chamilo\Libraries\Storage\DataManager\DataManager :: retrieves(Language :: class_name());
-        $platformLanguage = Configuration :: get('Chamilo\Core\Admin', 'platform_language');
-
-        while ($language = $languages->next_result())
-        {
-            $fieldName = \Ehb\Core\Metadata\Vocabulary\Manager :: PROPERTY_TRANSLATION . '[' . $language->get_isocode() .
-                 ']';
-            $this->addElement('text', $fieldName, $language->get_original_name());
-
-            if ($language->get_isocode() == $platformLanguage)
-            {
-                $this->addRule(
-                    $fieldName,
-                    Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
-                    'required');
-            }
-        }
-
-        $this->addElement('category');
-
-        $buttons[] = $this->createElement(
-            'style_submit_button',
-            'submit',
-            Translation :: get('Save', null, Utilities :: COMMON_LIBRARIES),
-            array('class' => 'positive'));
-
-        $buttons[] = $this->createElement(
-            'style_reset_button',
-            'reset',
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
-            array('class' => 'normal empty'));
-
-        $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
+        $this->entityTranslationFormService->addFieldsToForm();
+        $this->addSaveResetButtons();
     }
 
     /**
@@ -133,18 +104,15 @@ class VocabularyForm extends FormValidator
      *
      * @param Element $element
      */
-    protected function set_defaults()
+    protected function setFormDefaults()
     {
         $defaults = array();
 
         $defaults[Vocabulary :: PROPERTY_VALUE] = $this->vocabulary->get_value();
         $defaults[Vocabulary :: PROPERTY_DEFAULT_VALUE] = $this->vocabulary->get_default_value();
 
-        foreach ($this->vocabulary->getTranslations() as $isocode => $translation)
-        {
-            $defaults[Manager :: PROPERTY_TRANSLATION][$isocode] = $translation->get_value();
-        }
-
         $this->setDefaults($defaults);
+
+        $this->entityTranslationFormService->setFormDefaults();
     }
 }

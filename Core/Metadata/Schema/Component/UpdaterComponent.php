@@ -11,6 +11,8 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Core\Metadata\Service\EntityTranslationFormService;
+use Ehb\Core\Metadata\Service\EntityTranslationService;
 
 /**
  * Controller to update the schema
@@ -42,7 +44,7 @@ class UpdaterComponent extends Manager
             throw new NotAllowedException();
         }
 
-        $form = new SchemaForm($this->get_url(), $schema);
+        $form = new SchemaForm($schema, new EntityTranslationFormService($schema), $this->get_url());
 
         if ($form->validate())
         {
@@ -53,7 +55,15 @@ class UpdaterComponent extends Manager
                 $schema->set_namespace($values[Schema :: PROPERTY_NAMESPACE]);
                 $schema->set_name($values[Schema :: PROPERTY_NAME]);
                 $schema->set_url($values[Schema :: PROPERTY_URL]);
+
                 $success = $schema->update();
+
+                if ($success)
+                {
+                    $entityTranslationService = new EntityTranslationService($schema);
+                    $success = $entityTranslationService->updateEntityTranslations(
+                        $values[EntityTranslationService :: PROPERTY_TRANSLATION]);
+                }
 
                 $translation = $success ? 'ObjectUpdated' : 'ObjectNotUpdated';
 

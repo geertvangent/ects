@@ -5,6 +5,7 @@ use Ehb\Core\Metadata\Schema\Storage\DataClass\Schema;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Core\Metadata\Service\EntityTranslationFormService;
 
 /**
  * Form for the schema
@@ -19,28 +20,41 @@ class SchemaForm extends FormValidator
 {
 
     /**
+     *
+     * @var \Ehb\Core\Metadata\Schema\Storage\DataClass\Schema
+     */
+    private $schema;
+
+    /**
+     *
+     * @var \Ehb\Core\Metadata\Service\EntityTranslationFormService
+     */
+    private $entityTranslationFormService;
+
+    /**
      * Constructor
      *
      * @param string $form_url
      * @param \Ehb\Core\Metadata\Schema\Storage\DataClass\Schema $schema
      */
-    public function __construct($form_url, $schema = null)
+    public function __construct(Schema $schema, EntityTranslationFormService $entityTranslationFormService, $formUrl)
     {
-        parent :: __construct('schema', 'post', $form_url);
+        parent :: __construct('schema', 'post', $formUrl);
 
-        $this->build_form();
+        $this->schema = $schema;
+        $this->entityTranslationFormService = $entityTranslationFormService;
+        $this->entityTranslationFormService->setFormValidator($this);
 
-        if ($schema && $schema->is_identified())
-        {
-            $this->set_defaults($schema);
-        }
+        $this->buildForm();
+        $this->setFormDefaults();
     }
 
     /**
      * Builds this form
      */
-    protected function build_form()
+    protected function buildForm()
     {
+        $this->addElement('category', Translation :: get('General'));
         $this->addElement('text', Schema :: PROPERTY_NAMESPACE, Translation :: get('Namespace'), array("size" => "50"));
 
         $this->addRule(
@@ -62,19 +76,10 @@ class SchemaForm extends FormValidator
             Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
             'required');
 
-        $buttons[] = $this->createElement(
-            'style_submit_button',
-            'submit',
-            Translation :: get('Save', null, Utilities :: COMMON_LIBRARIES),
-            array('class' => 'positive'));
+        $this->addElement('category');
 
-        $buttons[] = $this->createElement(
-            'style_reset_button',
-            'reset',
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
-            array('class' => 'normal empty'));
-
-        $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
+        $this->entityTranslationFormService->addFieldsToForm();
+        $this->addSaveResetButtons();
     }
 
     /**
@@ -82,14 +87,16 @@ class SchemaForm extends FormValidator
      *
      * @param \Ehb\Core\Metadata\Schema\Storage\DataClass\Schema $schema
      */
-    protected function set_defaults($schema)
+    protected function setFormDefaults()
     {
         $defaults = array();
 
-        $defaults[Schema :: PROPERTY_NAMESPACE] = $schema->get_namespace();
-        $defaults[Schema :: PROPERTY_NAME] = $schema->get_name();
-        $defaults[Schema :: PROPERTY_URL] = $schema->get_url();
+        $defaults[Schema :: PROPERTY_NAMESPACE] = $this->schema->get_namespace();
+        $defaults[Schema :: PROPERTY_NAME] = $this->schema->get_name();
+        $defaults[Schema :: PROPERTY_URL] = $this->schema->get_url();
 
         $this->setDefaults($defaults);
+
+        $this->entityTranslationFormService->setFormDefaults();
     }
 }

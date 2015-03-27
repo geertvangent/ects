@@ -8,7 +8,8 @@ use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Architecture\Exceptions\NoObjectSelectedException;
-use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
+use Ehb\Core\Metadata\Service\EntityTranslationService;
+use Ehb\Core\Metadata\Service\EntityTranslationFormService;
 
 /**
  * Controller to create the schema
@@ -42,6 +43,7 @@ class CreatorComponent extends Manager
 
         $form = new VocabularyForm(
             $vocabulary,
+            new EntityTranslationFormService($vocabulary),
             $this->get_url(
                 array(
                     \Ehb\Core\Metadata\Element\Manager :: PARAM_ELEMENT_ID => $this->getSelectedElementId(),
@@ -60,15 +62,9 @@ class CreatorComponent extends Manager
 
                 if ($success)
                 {
-                    foreach ($values[self :: PROPERTY_TRANSLATION] as $isocode => $value)
-                    {
-                        $translation = new EntityTranslation();
-                        $translation->set_entity_type(Vocabulary :: class_name());
-                        $translation->set_entity_id($vocabulary->get_id());
-                        $translation->set_isocode($isocode);
-                        $translation->set_value($value);
-                        $translation->create();
-                    }
+                    $entityTranslationService = new EntityTranslationService($vocabulary);
+                    $success = $entityTranslationService->createEntityTranslations(
+                        $values[EntityTranslationService :: PROPERTY_TRANSLATION]);
                 }
 
                 $translation = $success ? 'ObjectCreated' : 'ObjectNotCreated';

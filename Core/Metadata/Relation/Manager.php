@@ -24,9 +24,6 @@ abstract class Manager extends Application
     const ACTION_CREATE = 'Creator';
     const ACTION_ELEMENT = 'Element';
 
-    // Properties
-    const PROPERTY_TRANSLATION = 'translation';
-
     // Default action
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
 }

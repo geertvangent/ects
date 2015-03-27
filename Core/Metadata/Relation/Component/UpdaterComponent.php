@@ -9,7 +9,8 @@ use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
+use Ehb\Core\Metadata\Service\EntityTranslationService;
+use Ehb\Core\Metadata\Service\EntityTranslationFormService;
 
 /**
  * Controller to update the schema
@@ -34,9 +35,9 @@ class UpdaterComponent extends Manager
         }
 
         $relation_id = Request :: get(self :: PARAM_RELATION_ID);
-        $relationType = DataManager :: retrieve_by_id(Relation :: class_name(), $relation_id);
+        $relation = DataManager :: retrieve_by_id(Relation :: class_name(), $relation_id);
 
-        $form = new RelationForm($relationType, $this->get_url());
+        $form = new RelationForm($relation, new EntityTranslationFormService($relation), $this->get_url());
 
         if ($form->validate())
         {
@@ -44,31 +45,14 @@ class UpdaterComponent extends Manager
             {
                 $values = $form->exportValues();
 
-                $relationType->set_name($values[Relation :: PROPERTY_NAME]);
-                $success = $relationType->update();
+                $relation->set_name($values[Relation :: PROPERTY_NAME]);
+                $success = $relation->update();
 
                 if ($success)
                 {
-                    $translations = $relationType->getTranslations();
-
-                    foreach ($values[self :: PROPERTY_TRANSLATION] as $isocode => $value)
-                    {
-                        if ($translations[$isocode] instanceof EntityTranslation)
-                        {
-                            $translation = $translations[$isocode];
-                            $translation->set_value($value);
-                            $translation->update();
-                        }
-                        else
-                        {
-                            $translation = new EntityTranslation();
-                            $translation->set_entity_type(Relation :: class_name());
-                            $translation->set_entity_id($relationType->get_id());
-                            $translation->set_isocode($isocode);
-                            $translation->set_value($value);
-                            $translation->create();
-                        }
-                    }
+                    $entityTranslationService = new EntityTranslationService($relation);
+                    $success = $entityTranslationService->updateEntityTranslations(
+                        $values[EntityTranslationService :: PROPERTY_TRANSLATION]);
                 }
 
                 $translation = $success ? 'ObjectUpdated' : 'ObjectNotUpdated';

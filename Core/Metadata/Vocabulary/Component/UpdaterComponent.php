@@ -9,12 +9,12 @@ use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
+use Ehb\Core\Metadata\Service\EntityTranslationService;
+use Ehb\Core\Metadata\Service\EntityTranslationFormService;
 
 /**
  * Controller to update the controlled vocabulary
  *
- * @package core\metadata
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class UpdaterComponent extends Manager
@@ -33,7 +33,10 @@ class UpdaterComponent extends Manager
         $vocabulary_id = Request :: get(self :: PARAM_VOCABULARY_ID);
         $vocabulary = DataManager :: retrieve_by_id(Vocabulary :: class_name(), $vocabulary_id);
 
-        $form = new VocabularyForm($vocabulary, $this->get_url(array(self :: PARAM_VOCABULARY_ID => $vocabulary_id)));
+        $form = new VocabularyForm(
+            $vocabulary,
+            new EntityTranslationFormService($vocabulary),
+            $this->get_url(array(self :: PARAM_VOCABULARY_ID => $vocabulary_id)));
 
         if ($form->validate())
         {
@@ -48,29 +51,12 @@ class UpdaterComponent extends Manager
 
                 if ($success)
                 {
-                    $translations = $vocabulary->getTranslations();
-
-                    foreach ($values[self :: PROPERTY_TRANSLATION] as $isocode => $value)
-                    {
-                        if ($translations[$isocode] instanceof EntityTranslation)
-                        {
-                            $translation = $translations[$isocode];
-                            $translation->set_value($value);
-                            $translation->update();
-                        }
-                        else
-                        {
-                            $translation = new EntityTranslation();
-                            $translation->set_entity_type(Vocabulary :: class_name());
-                            $translation->set_entity_id($vocabulary->get_id());
-                            $translation->set_isocode($isocode);
-                            $translation->set_value($value);
-                            $translation->create();
-                        }
-                    }
+                    $entityTranslationService = new EntityTranslationService($vocabulary);
+                    $success = $entityTranslationService->updateEntityTranslations(
+                        $values[EntityTranslationService :: PROPERTY_TRANSLATION]);
                 }
 
-                $translation = $success ? 'ObjectCreated' : 'ObjectNotCreated';
+                $translation = $success ? 'ObjectUpdated' : 'ObjectNotUpdated';
 
                 $message = Translation :: get(
                     $translation,

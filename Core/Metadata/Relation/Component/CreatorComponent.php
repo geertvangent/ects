@@ -7,7 +7,8 @@ use Ehb\Core\Metadata\Relation\Storage\DataClass\Relation;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Core\Metadata\Storage\DataClass\EntityTranslation;
+use Ehb\Core\Metadata\Service\EntityTranslationService;
+use Ehb\Core\Metadata\Service\EntityTranslationFormService;
 
 /**
  * Controller to create the schema
@@ -32,7 +33,8 @@ class CreatorComponent extends Manager
         }
 
         $relation = new Relation();
-        $form = new RelationForm($relation, $this->get_url());
+
+        $form = new RelationForm($relation, new EntityTranslationFormService($relation), $this->get_url());
 
         if ($form->validate())
         {
@@ -45,15 +47,9 @@ class CreatorComponent extends Manager
 
                 if ($success)
                 {
-                    foreach ($values[self :: PROPERTY_TRANSLATION] as $isocode => $value)
-                    {
-                        $translation = new EntityTranslation();
-                        $translation->set_entity_type(Relation :: class_name());
-                        $translation->set_entity_id($relation->get_id());
-                        $translation->set_isocode($isocode);
-                        $translation->set_value($value);
-                        $translation->create();
-                    }
+                    $entityTranslationService = new EntityTranslationService($relation);
+                    $success = $entityTranslationService->createEntityTranslations(
+                        $values[EntityTranslationService :: PROPERTY_TRANSLATION]);
                 }
 
                 $translation = $success ? 'ObjectCreated' : 'ObjectNotCreated';
