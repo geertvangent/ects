@@ -10,5 +10,5 @@ namespace Ehb\Core\Metadata\Relation\Instance\Storage;
  */
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
-    const PREFIX = 'metadata_relation_';
+    const PREFIX = 'metadata_';
 }

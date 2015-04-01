@@ -1,29 +1,28 @@
 <?php
-namespace Ehb\Core\Metadata\Relation\Instance\Storage\DataClass;
+namespace Ehb\Core\Metadata\Schema\Instance\Storage\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\DataManager\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
+use Ehb\Core\Metadata\Schema\Storage\DataClass\Schema;
 
 /**
  *
- * @package Ehb\Core\Metadata\Relation\Instance\Storage\DataClass
+ * @package Ehb\Core\Metadata\Schema\Instance\Storage\DataClass
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class Instance extends DataClass
+class SchemaInstance extends DataClass
 {
     /**
      * **************************************************************************************************************
      * Properties *
      * **************************************************************************************************************
      */
-    const PROPERTY_SOURCE_TYPE = 'source_type';
-    const PROPERTY_SOURCE_ID = 'source_id';
-    const PROPERTY_TARGET_TYPE = 'target_type';
-    const PROPERTY_TARGET_ID = 'target_id';
-    const PROPERTY_RELATION_ID = 'relation_id';
+    const PROPERTY_ENTITY_TYPE = 'entity_type';
+    const PROPERTY_ENTITY_ID = 'entity_id';
+    const PROPERTY_SCHEMA_ID = 'schema_id';
     const PROPERTY_USER_ID = 'user_id';
     const PROPERTY_CREATION_DATE = 'creation_date';
 
@@ -109,6 +108,16 @@ class Instance extends DataClass
     public function set_schema_id($schemaId)
     {
         $this->set_default_property(self :: PROPERTY_SCHEMA_ID, $schemaId);
+    }
+
+    public function getSchema()
+    {
+        if (! isset($this->schema))
+        {
+            $this->schema = DataManager :: retrieve_by_id(Schema :: class_name(), $this->get_schema_id());
+        }
+
+        return $this->schema;
     }
 
     /**

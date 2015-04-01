@@ -24,7 +24,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
      * @param string $namespace
      * @return \Ehb\Core\Metadata\Schema\Storage\DataClass\Schema
      */
-    public static function retrieve_schema_by_namespace($namespace)
+    public static function retrieveSchemaByNamespace($namespace)
     {
         $condition = new ComparisonCondition(
             new PropertyConditionVariable(Schema :: class_name(), Schema :: PROPERTY_NAMESPACE),
