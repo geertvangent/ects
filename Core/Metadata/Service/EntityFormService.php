@@ -166,7 +166,7 @@ class EntityFormService
 
                 $vocabularyAction = new ToolbarItem(
                     Translation :: get('ShowVocabulary'),
-                    Theme :: getInstance()->getImagePath('Ehb\Core\Metadata', 'Action/ControlledVocabulary'),
+                    Theme :: getInstance()->getImagePath('Ehb\Core\Metadata\Element', 'ValueType/' . $element->get_value_type()),
                     $vocabularyUrl,
                     ToolbarItem :: DISPLAY_ICON,
                     false,
