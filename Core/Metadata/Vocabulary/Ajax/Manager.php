@@ -13,4 +13,7 @@ use Chamilo\Libraries\Architecture\AjaxManager;
 abstract class Manager extends AjaxManager
 {
     const ACTION_VOCABULARY = 'Vocabulary';
+    const ACTION_SELECT = 'Select';
+
+    const PARAM_ELEMENT_IDENTIFIER = 'elementIdentifier';
 }

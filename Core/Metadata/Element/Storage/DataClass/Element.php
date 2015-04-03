@@ -22,11 +22,13 @@ class Element extends DataClass implements DisplayOrderDataClassListenerSupport
     const PROPERTY_FIXED = 'fixed';
     const PROPERTY_DISPLAY_ORDER = 'display_order';
     const PROPERTY_VALUE_TYPE = 'value_type';
+    const PROPERTY_VALUE_LIMIT = 'value_limit';
 
     // Value types
-    const VALUE_TYPE_PREDEFINED = 1;
-    const VALUE_TYPE_USER = 2;
-    const VALUE_TYPE_BOTH = 3;
+    const VALUE_TYPE_FREE = 1;
+    const VALUE_TYPE_VOCABULARY_PREDEFINED = 2;
+    const VALUE_TYPE_VOCABULARY_USER = 3;
+    const VALUE_TYPE_VOCABULARY_BOTH = 4;
 
     /**
      *
@@ -67,6 +69,7 @@ class Element extends DataClass implements DisplayOrderDataClassListenerSupport
         $extended_property_names[] = self :: PROPERTY_FIXED;
         $extended_property_names[] = self :: PROPERTY_DISPLAY_ORDER;
         $extended_property_names[] = self :: PROPERTY_VALUE_TYPE;
+        $extended_property_names[] = self :: PROPERTY_VALUE_LIMIT;
 
         return parent :: get_default_property_names($extended_property_names);
     }
@@ -197,14 +200,46 @@ class Element extends DataClass implements DisplayOrderDataClassListenerSupport
         $this->set_default_property(self :: PROPERTY_VALUE_TYPE, $value_type);
     }
 
-    public function is_value_predefined()
+    public function usesVocabulary()
     {
-        return $this->get_value_type() != self :: VALUE_TYPE_USER;
+        return $this->get_value_type() != self :: VALUE_TYPE_FREE;
     }
 
-    public function is_value_user_defined()
+    public function isVocabularyPredefined()
     {
-        return $this->get_value_type() != self :: VALUE_TYPE_PREDEFINED;
+        return $this->get_value_type() == self :: VALUE_TYPE_VOCABULARY_PREDEFINED ||
+             $this->get_value_type() == self :: VALUE_TYPE_VOCABULARY_BOTH;
+    }
+
+    public function isVocabularyUserDefined()
+    {
+        return $this->get_value_type() == self :: VALUE_TYPE_VOCABULARY_USER ||
+             $this->get_value_type() == self :: VALUE_TYPE_VOCABULARY_BOTH;
+    }
+
+    /**
+     * Returns the value_limit
+     *
+     * @return int
+     */
+    public function get_value_limit()
+    {
+        return $this->get_default_property(self :: PROPERTY_VALUE_LIMIT);
+    }
+
+    /**
+     * Sets the value_limit
+     *
+     * @param int $value_limit
+     */
+    public function set_value_limit($value_limit)
+    {
+        $this->set_default_property(self :: PROPERTY_VALUE_LIMIT, $value_limit);
+    }
+
+    public function isNumberOfValuesLimited()
+    {
+        return $this->get_value_limit() > 0;
     }
 
     /**

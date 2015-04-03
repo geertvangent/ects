@@ -14,6 +14,9 @@ use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
 use Ehb\Core\Metadata\Schema\Storage\DataClass\Schema;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Ehb\Core\Metadata\Vocabulary\Storage\DataClass\Vocabulary;
+use Ehb\Core\Metadata\Element\Storage\DataClass\Element;
 
 /**
  *
@@ -26,6 +29,8 @@ use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 class EntityService
 {
     const PROPERTY_METADATA_SCHEMA = 'schema';
+    const PROPERTY_METADATA_SCHEMA_NEW = 'new';
+    const PROPERTY_METADATA_SCHEMA_EXISTING = 'existing';
 
     /**
      *
@@ -78,5 +83,18 @@ class EntityService
         return DataManager :: distinct(
             RelationInstance :: class_name(),
             new DataClassDistinctParameters($condition, RelationInstance :: PROPERTY_SOURCE_ID));
+    }
+
+    public function getVocabularyByElementIdAndUserId(Element $element, User $user)
+    {
+        $conditions = array();
+        $conditions[] = new ComparisonCondition(
+            new PropertyConditionVariable(Vocabulary :: class_name(), Vocabulary :: PROPERTY_ELEMENT_ID),
+            ComparisonCondition :: EQUAL,
+            new StaticConditionVariable($element->get_id()));
+
+        return DataManager :: retrieves(
+            Vocabulary :: class_name(),
+            new DataClassRetrievesParameters(new AndCondition($conditions)));
     }
 }

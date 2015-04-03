@@ -1,15 +1,18 @@
 <?php
 namespace Ehb\Core\Metadata\Service;
 
-use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Ehb\Core\Metadata\Element\Service\ElementService;
 use Ehb\Core\Metadata\Schema\Instance\Storage\DataClass\SchemaInstance;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
 use Chamilo\Libraries\File\Path;
-use Ehb\Core\Metadata\Element\Storage\DataClass\Element;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Utilities\UUID;
 
 /**
  *
@@ -30,9 +33,9 @@ class EntityFormService
 
     /**
      *
-     * @var \Chamilo\Core\Repository\Storage\DataClass\ContentObject
+     * @var \Chamilo\Libraries\Storage\DataClass\DataClass
      */
-    private $contentObject;
+    private $entity;
 
     /**
      *
@@ -43,14 +46,13 @@ class EntityFormService
     /**
      *
      * @param \Ehb\Core\Metadata\Schema\Instance\Storage\DataClass\SchemaInstance $schemaInstance
-     * @param \Chamilo\Core\Repository\Storage\DataClass\ContentObject $contentObject
+     * @param \Chamilo\Libraries\Storage\DataClass\DataClass $entity
      * @param \Chamilo\Libraries\Format\Form\FormValidator $formValidator
      */
-    public function __construct(SchemaInstance $schemaInstance, ContentObject $contentObject,
-        FormValidator $formValidator)
+    public function __construct(SchemaInstance $schemaInstance, DataClass $entity, FormValidator $formValidator)
     {
         $this->schemaInstance = $schemaInstance;
-        $this->contentObject = $contentObject;
+        $this->entity = $entity;
         $this->formValidator = $formValidator;
     }
 
@@ -74,20 +76,20 @@ class EntityFormService
 
     /**
      *
-     * @return \Chamilo\Core\Repository\Storage\DataClass\ContentObject
+     * @return \Chamilo\Libraries\Storage\DataClass\DataClass
      */
-    public function getContentObject()
+    public function getEntity()
     {
-        return $this->contentObject;
+        return $this->entity;
     }
 
     /**
      *
-     * @param \Chamilo\Core\Repository\Storage\DataClass\ContentObject $contentObject
+     * @param \Chamilo\Libraries\Storage\DataClass\DataClass $entity
      */
-    public function setContentObject($contentObject)
+    public function setEntity($entity)
     {
-        $this->contentObject = $contentObject;
+        $this->entity = $entity;
     }
 
     /**
@@ -119,17 +121,75 @@ class EntityFormService
         {
             $elementName = EntityService :: PROPERTY_METADATA_SCHEMA . '[' . $this->schemaInstance->get_schema_id() .
                  '][' . $this->schemaInstance->get_id() . '][' . $element->get_id() . ']';
-            $this->formValidator->addElement(
-                'text',
-                $elementName,
-                $element->get_display_name(),
-                array(
-                    'class' => 'metadata-input',
-                    'data-schema-id' => $this->schemaInstance->get_schema_id(),
-                    'data-schema-instance-id' => $this->schemaInstance->get_id(),
-                    'data-element-id' => $element->get_id(),
-                    'size' => 50));
-//             $this->addJavascript($element);
+
+            if ($element->usesVocabulary())
+            {
+                $uniqueIdentifier = UUID :: v4();
+
+                $class = 'metadata-input';
+                if ($element->isVocabularyUserDefined())
+                {
+                    $class .= ' metadata-input-new';
+                }
+
+                $tagElementGroup = array();
+                $tagElementGroup[] = $this->formValidator->createElement(
+                    'text',
+                    $elementName . '[' . EntityService :: PROPERTY_METADATA_SCHEMA_EXISTING . ']',
+                    null,
+                    array(
+                        'id' => $uniqueIdentifier,
+                        'class' => $class,
+                        'data-schema-id' => $this->schemaInstance->get_schema_id(),
+                        'data-schema-instance-id' => $this->schemaInstance->get_id(),
+                        'data-element-id' => $element->get_id(),
+                        'data-element-value-limit' => $element->get_value_limit()));
+
+                if ($element->isVocabularyUserDefined())
+                {
+                    $tagElementGroup[] = $this->formValidator->createElement(
+                        'hidden',
+                        $elementName . '[' . EntityService :: PROPERTY_METADATA_SCHEMA_NEW . ']',
+                        null,
+                        array('id' => 'new-' . $uniqueIdentifier));
+                }
+
+                $urlRenderer = new Redirect(
+                    array(
+                        Application :: PARAM_CONTEXT => \Ehb\Core\Metadata\Vocabulary\Ajax\Manager :: context(),
+                        Application :: PARAM_ACTION => \Ehb\Core\Metadata\Vocabulary\Ajax\Manager :: ACTION_SELECT,
+                        \Ehb\Core\Metadata\Vocabulary\Ajax\Manager :: PARAM_ELEMENT_IDENTIFIER => $uniqueIdentifier,
+                        \Ehb\Core\Metadata\Element\Manager :: PARAM_ELEMENT_ID => $element->get_id()));
+                $vocabularyUrl = $urlRenderer->getUrl();
+                $onclick = 'vocabulary-selector" onclick="javascript:openPopup(\'' . $vocabularyUrl .
+                     '\'); return false;';
+
+                $vocabularyAction = new ToolbarItem(
+                    Translation :: get('ShowVocabulary'),
+                    Theme :: getInstance()->getImagePath('Ehb\Core\Metadata', 'Action/ControlledVocabulary'),
+                    $vocabularyUrl,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    $onclick,
+                    '_blank');
+
+                $tagElementGroup[] = $this->formValidator->createElement(
+                    'static',
+                    null,
+                    null,
+                    $vocabularyAction->as_html());
+
+                $this->formValidator->addGroup($tagElementGroup, null, $element->get_display_name(), null, false);
+            }
+            else
+            {
+                $this->formValidator->addElement(
+                    'textarea',
+                    $elementName,
+                    $element->get_display_name(),
+                    array('cols' => 60, 'rows' => 6));
+                // $this->formValidator->add_html_editor($elementName, $element->get_display_name());
+            }
         }
     }
 
@@ -139,64 +199,18 @@ class EntityFormService
     private function addDependencies()
     {
         $resource_manager = ResourceManager :: get_instance();
-        $plugin_path = Path :: getInstance()->getJavascriptPath('Chamilo\Core\Repository', true) .
+        $plugin_path = Path :: getInstance()->getJavascriptPath('Ehb\Core\Metadata', true) .
              'Plugin/Bootstrap/Tagsinput/';
 
         $dependencies = array();
 
         $dependencies[] = $resource_manager->get_resource_html($plugin_path . 'bootstrap-typeahead.js');
-        $dependencies[] = $resource_manager->get_resource_html($plugin_path . 'bootstrap-tagsinput.min.js');
+        $dependencies[] = $resource_manager->get_resource_html($plugin_path . 'bootstrap-tagsinput.js');
         $dependencies[] = $resource_manager->get_resource_html($plugin_path . 'bootstrap-tagsinput.css');
         $dependencies[] = $resource_manager->get_resource_html(
-            Path :: getInstance()->getJavascriptPath('Ehb\Core\Metadata', true) . 'metadataInput.js');
+            Path :: getInstance()->getJavascriptPath('Ehb\Core\Metadata', true) . 'Input.js');
 
         $this->formValidator->addElement('html', implode(PHP_EOL, $dependencies));
-    }
-
-    /**
-     * Adds the javascript to the form
-     *
-     * @param array $available_tags
-     */
-    protected function addJavascript(Element $element, $available_tags = array())
-    {
-        $json = json_encode($available_tags);
-
-        $urlRenderer = new Redirect(
-            array(
-                Application :: PARAM_CONTEXT => \Ehb\Core\Metadata\Vocabulary\Ajax\Manager :: context(),
-                Application :: PARAM_ACTION => \Ehb\Core\Metadata\Vocabulary\Ajax\Manager :: ACTION_VOCABULARY));
-
-        $html = array();
-
-        $html[] = '<script type="text/javascript">';
-        $html[] = '$(\'#' . $this->getElementId($element) . '\').tagsinput({';
-        $html[] = 'typeahead: {';
-        $html[] = 'name: \'tags\',';
-        $html[] = 'source: function(query) {
-                var options = [];
-		var response = $.ajax({
-			type : "POST",
-			url : \'' . $urlRenderer->getUrl() . '\',
-			async : false,
-			dataType : "json"
-		}).done(
-				function(data, textStatus, jqXHR) {
-					options = data;
-				});
-			    return options;
-    }';
-        $html[] = '}';
-        $html[] = '});';
-        $html[] = '</script>';
-
-        $this->formValidator->addElement('html', implode(PHP_EOL, $html));
-    }
-
-    public function getElementId(Element $element)
-    {
-        return EntityService :: PROPERTY_METADATA_SCHEMA . '-' . $this->schemaInstance->get_schema_id() . '-' .
-             $this->schemaInstance->get_id() . '-' . $element->get_id();
     }
 
     public function setDefaults()

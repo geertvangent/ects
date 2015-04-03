@@ -19,8 +19,9 @@ use Chamilo\Libraries\Format\Structure\ToolbarItem;
 class ElementTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {
     const COLUMN_PREFIX = 'prefix';
-    const COLUMN_VALUE_PREDEFINED = 'value_predefined';
-    const COLUMN_VALUE_USER = 'value_user';
+    const COLUMN_VALUE_FREE = 'value_free';
+    const COLUMN_VALUE_VOCABULARY_PREDEFINED = 'value_vocabulary_predefined';
+    const COLUMN_VALUE_VOCABULARY_USER = 'value_vocabulary_user';
 
     /**
      * Initializes the columns for the table
@@ -33,7 +34,7 @@ class ElementTableColumnModel extends DataClassTableColumnModel implements Table
                 Translation :: get(
                     (string) StringUtilities :: getInstance()->createString(self :: COLUMN_PREFIX)->upperCamelize(),
                     null,
-                    'core\metadata')));
+                    $this->get_component()->package())));
 
         $this->add_column(
             new DataClassPropertyTableColumn(
@@ -42,7 +43,7 @@ class ElementTableColumnModel extends DataClassTableColumnModel implements Table
                 Translation :: get(
                     (string) StringUtilities :: getInstance()->createString(Element :: PROPERTY_NAME)->upperCamelize(),
                     null,
-                    'core\metadata')));
+                    $this->get_component()->package())));
 
         $this->add_column(
             new DataClassPropertyTableColumn(
@@ -51,14 +52,14 @@ class ElementTableColumnModel extends DataClassTableColumnModel implements Table
                 Translation :: get(
                     (string) StringUtilities :: getInstance()->createString(Element :: PROPERTY_DISPLAY_NAME)->upperCamelize(),
                     null,
-                    'core\metadata'),
+                    $this->get_component()->package()),
                 false));
 
         $this->add_column(
             new StaticTableColumn(
-                self :: COLUMN_VALUE_PREDEFINED,
+                self :: COLUMN_VALUE_FREE,
                 Theme :: getInstance()->getImage(
-                    'Action/Value/Predefined',
+                    'Action/Value/Free',
                     'png',
                     Translation :: get('PredefinedValues', null, $this->get_component()->package()),
                     null,
@@ -68,11 +69,23 @@ class ElementTableColumnModel extends DataClassTableColumnModel implements Table
 
         $this->add_column(
             new StaticTableColumn(
-                self :: COLUMN_VALUE_USER,
+                self :: COLUMN_VALUE_VOCABULARY_PREDEFINED,
                 Theme :: getInstance()->getImage(
-                    'Action/Value/User',
+                    'Action/Value/VocabularyPredefined',
                     'png',
-                    Translation :: get('UserValues', null, $this->get_component()->package()),
+                    Translation :: get('VocabularyPredefinedValues', null, $this->get_component()->package()),
+                    null,
+                    ToolbarItem :: DISPLAY_ICON,
+                    false,
+                    $this->get_component()->package())));
+
+        $this->add_column(
+            new StaticTableColumn(
+                self :: COLUMN_VALUE_VOCABULARY_USER,
+                Theme :: getInstance()->getImage(
+                    'Action/Value/VocabularyUser',
+                    'png',
+                    Translation :: get('VocabularyUserValues', null, $this->get_component()->package()),
                     null,
                     ToolbarItem :: DISPLAY_ICON,
                     false,
