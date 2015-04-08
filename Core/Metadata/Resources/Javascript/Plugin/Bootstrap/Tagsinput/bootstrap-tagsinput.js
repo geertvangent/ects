@@ -394,6 +394,7 @@
                 // HACK: only process on focusout when no typeahead opened, to
                 // avoid adding the typeahead text as tag
                 if ($('.typeahead, .twitter-typeahead', self.$container).length === 0) {
+                // TODO: Add support for objects here
                 self.add(self.$input.val());
                 self.$input.val('');
                 }
@@ -511,6 +512,22 @@
             });
             }
             }
+            // OBJECT DEFAULTS CHANGE START
+            else {
+            if (self.$element[0].tagName === 'INPUT') {            
+            var existingObjects = $.parseJSON(self.$element.val());
+            self.$element.val('');
+
+            $.each(existingObjects, function(index, object) {
+                var obj = {};
+                obj[options.itemText] = object.value;
+                obj[options.itemValue] = object.id;
+                self.add(obj);
+
+            });
+            }
+            }
+            // OBJECT DEFAULTS CHANGE END
         },
 
         /**

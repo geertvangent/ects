@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Core\Metadata\Relation\Instance\Storage;
+namespace Ehb\Core\Metadata\Element\Instance\Storage;
 
 /**
  *

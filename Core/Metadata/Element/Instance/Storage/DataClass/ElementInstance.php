@@ -4,6 +4,7 @@ namespace Ehb\Core\Metadata\Element\Instance\Storage\DataClass;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\DataManager\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
+use Ehb\Core\Metadata\Vocabulary\Storage\DataClass\Vocabulary;
 
 /**
  *
@@ -107,6 +108,11 @@ class ElementInstance extends DataClass
     public function set_vocabulary_id($vocabularyId)
     {
         $this->set_default_property(self :: PROPERTY_VOCABULARY_ID, $vocabularyId);
+    }
+
+    public function getVocabulary()
+    {
+        return DataManager :: retrieve_by_id(Vocabulary :: class_name(), $this->get_vocabulary_id());
     }
 
     /**

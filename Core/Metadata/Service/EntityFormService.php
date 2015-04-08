@@ -13,6 +13,7 @@ use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Utilities\UUID;
+use Ehb\Core\Metadata\Vocabulary\Storage\DataClass\Vocabulary;
 
 /**
  *
@@ -166,7 +167,9 @@ class EntityFormService
 
                 $vocabularyAction = new ToolbarItem(
                     Translation :: get('ShowVocabulary'),
-                    Theme :: getInstance()->getImagePath('Ehb\Core\Metadata\Element', 'ValueType/' . $element->get_value_type()),
+                    Theme :: getInstance()->getImagePath(
+                        'Ehb\Core\Metadata\Element',
+                        'ValueType/' . $element->get_value_type()),
                     $vocabularyUrl,
                     ToolbarItem :: DISPLAY_ICON,
                     false,
@@ -187,8 +190,7 @@ class EntityFormService
                     'textarea',
                     $elementName,
                     $element->get_display_name(),
-                    array('cols' => 60, 'rows' => 6));
-                // $this->formValidator->add_html_editor($elementName, $element->get_display_name());
+                    array('cols' => 60, 'rows' => 6, 'maxlength' => 1000));
             }
         }
     }
@@ -215,5 +217,60 @@ class EntityFormService
 
     public function setDefaults()
     {
+        $defaults = array();
+
+        $elementService = new ElementService();
+        $elements = $elementService->getElementsForSchemaInstance($this->schemaInstance);
+
+        while ($element = $elements->next_result())
+        {
+            if ($element->usesVocabulary())
+            {
+                $elementName = EntityService :: PROPERTY_METADATA_SCHEMA . '[' . $this->schemaInstance->get_schema_id() .
+                     '][' . $this->schemaInstance->get_id() . '][' . $element->get_id() . '][' .
+                     EntityService :: PROPERTY_METADATA_SCHEMA_EXISTING . ']';
+
+                $options = array();
+
+                $elementInstanceVocabularies = $elementService->getElementInstanceVocabulariesForSchemaInstanceAndElement(
+                    $this->schemaInstance,
+                    $element)->as_array();
+
+                if (count($elementInstanceVocabularies) > 0)
+                {
+                    foreach ($elementInstanceVocabularies as $elementInstanceVocabulary)
+                    {
+                        $item = new \stdClass();
+                        $item->id = $elementInstanceVocabulary->get_id();
+                        $item->value = $elementInstanceVocabulary->get_value();
+
+                        $options[] = $item;
+                    }
+                }
+
+                $elementValue = json_encode($options);
+            }
+            else
+            {
+                $elementName = EntityService :: PROPERTY_METADATA_SCHEMA . '[' . $this->schemaInstance->get_schema_id() .
+                     '][' . $this->schemaInstance->get_id() . '][' . $element->get_id() . ']';
+                $elementInstanceVocabulary = $elementService->getElementInstanceVocabularyForSchemaInstanceAndElement(
+                    $this->schemaInstance,
+                    $element);
+
+                if ($elementInstanceVocabulary instanceof Vocabulary)
+                {
+                    $elementValue = $elementInstanceVocabulary->get_value();
+                }
+                else
+                {
+                    $elementValue = '';
+                }
+            }
+
+            $defaults[$elementName] = $elementValue;
+        }
+
+        $this->formValidator->setDefaults($defaults);
     }
 }
