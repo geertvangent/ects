@@ -395,8 +395,27 @@
                 // avoid adding the typeahead text as tag
                 if ($('.typeahead, .twitter-typeahead', self.$container).length === 0) {
                 // TODO: Add support for objects here
+
+                // OBJECT SUPPORT CHANGE START
+                // self.add(self.$input.val());
+                // self.$input.val('');
+
+                if (self.objectItems) {
+                if (self.$input.val().length > 0) {
+                var obj = {
+                    _freeText : true
+                }
+                obj[options.itemText] = self.$input.val();
+                obj[options.itemValue] = "free_input_" + self.$input.val();
+                self.add(obj);
+                }
+                } else {
                 self.add(self.$input.val());
+                }
+
                 self.$input.val('');
+                // OBJECT SUPPORT CHANGE END
+
                 }
             }, self));
             }
@@ -514,7 +533,7 @@
             }
             // OBJECT DEFAULTS CHANGE START
             else {
-            if (self.$element[0].tagName === 'INPUT') {            
+            if (self.$element[0].tagName === 'INPUT') {
             var existingObjects = $.parseJSON(self.$element.val());
             self.$element.val('');
 

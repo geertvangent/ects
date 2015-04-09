@@ -24,6 +24,7 @@ class Schema extends DataClass
      */
     const PROPERTY_NAMESPACE = 'namespace';
     const PROPERTY_NAME = 'name';
+    const PROPERTY_DESCRIPTION = 'description';
     const PROPERTY_URL = 'url';
     const PROPERTY_FIXED = 'fixed';
 
@@ -44,6 +45,7 @@ class Schema extends DataClass
     {
         $extended_property_names[] = self :: PROPERTY_NAMESPACE;
         $extended_property_names[] = self :: PROPERTY_NAME;
+        $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
         $extended_property_names[] = self :: PROPERTY_URL;
         $extended_property_names[] = self :: PROPERTY_FIXED;
 
@@ -94,6 +96,26 @@ class Schema extends DataClass
     public function set_name($name)
     {
         $this->set_default_property(self :: PROPERTY_NAME, $name);
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function get_description()
+    {
+        return $this->get_default_property(self :: PROPERTY_DESCRIPTION);
+    }
+
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     */
+    public function set_description($description)
+    {
+        $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
     }
 
     /**
