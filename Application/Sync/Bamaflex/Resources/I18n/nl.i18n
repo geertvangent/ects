@@ -1,0 +1,8 @@
+TypeName = "Bamaflex"
+AllUsersComponent = "Alle gebruikers"
+GroupsComponent = "Groepen"
+NewUsersComponent = "Nieuwe gebruikers"
+UpdateUsersComponent = "Update gebruikers"
+CourseCategoriesComponent = "Cursuscategorieën"
+CoursesComponent = "Cursussen"
+ArchiveGroupsComponent = "Archiefgroepen"

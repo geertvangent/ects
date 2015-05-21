@@ -1,0 +1,5 @@
+TypeName = "Ehb Synchronisatie"
+BamaflexComponent = "Bamaflex"
+AtlantisComponent = "Atlantis"
+CasComponent = "Cas"
+DataComponent = "Data"
