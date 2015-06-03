@@ -3,7 +3,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\Home;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager implements DelegateComponent
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager implements DelegateComponent
 {
     const PARAM_TOOL = 'target_tool';
 

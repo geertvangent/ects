@@ -739,22 +739,22 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         $attributes->set_date($record[ContentObjectPublication :: PROPERTY_PUBLICATION_DATE]);
         $attributes->set_application(__NAMESPACE__);
 
-        $course = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_by_id(
-            \Chamilo\Application\Weblcms\Course\Storage\DataClass\Course :: class_name(),
+        $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_by_id(
+            \Ehb\Application\Avilarts\Course\Storage\DataClass\Course :: class_name(),
             $record[ContentObjectPublication :: PROPERTY_COURSE_ID]);
 
         $location = $course->get_title() . ' (' . $course->get_visual_code() . ') > ' . Translation :: get(
             'TypeName',
             null,
-            'Chamilo\Application\Weblcms\Tool\Implementation\\' . $record[ContentObjectPublication :: PROPERTY_TOOL]);
+            'Ehb\Application\Avilarts\Tool\Implementation\\' . $record[ContentObjectPublication :: PROPERTY_TOOL]);
 
         $attributes->set_location($location);
 
-        $url = 'index.php?application=Chamilo\Application\Weblcms&amp;go=' . Manager :: ACTION_VIEW_COURSE . '&course=' .
+        $url = 'index.php?application=Ehb\Application\Avilarts&amp;go=' . Manager :: ACTION_VIEW_COURSE . '&course=' .
              $record[ContentObjectPublication :: PROPERTY_COURSE_ID] . '&amp;tool=' .
              $record[ContentObjectPublication :: PROPERTY_TOOL] . '&amp;tool_action=' .
-             \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW . '&amp;' .
-             \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID . '=' . $attributes->get_id();
+             \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW . '&amp;' .
+             \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID . '=' . $attributes->get_id();
 
         $attributes->set_url($url);
         $attributes->set_title($record[ContentObject :: PROPERTY_TITLE]);
@@ -1829,7 +1829,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
                 case 0 :
 
-                    $course_users = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_all_course_users(
+                    $course_users = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_all_course_users(
                         $course_id,
                         $condition,
                         $offset,
@@ -2078,7 +2078,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
                     CourseGroupRelation :: PROPERTY_COURSE_ID),
                 new StaticConditionVariable($course_id));
 
-            $cgr_resultset = $course_group_relations = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+            $cgr_resultset = $course_group_relations = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
                 CourseGroupRelation :: class_name(),
                 $cgr_condition);
 
@@ -2139,7 +2139,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         if (array_key_exists(0, $target_entities[0]))
         {
             // get all course users
-            $target_users = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_all_course_users(
+            $target_users = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_all_course_users(
                 $course_id)->as_array();
         }
         else

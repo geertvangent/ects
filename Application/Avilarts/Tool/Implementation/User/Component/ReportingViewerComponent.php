@@ -27,16 +27,16 @@ class ReportingViewerComponent extends Manager implements DelegateComponent
            new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         $component = $factory->getComponent();
         $component->set_template_by_name(
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Reporting\Template\CourseStudentTrackerDetailTemplate :: class_name());
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\CourseStudentTrackerDetailTemplate :: class_name());
         return $component->run();
     }
 
     public function get_additional_parameters()
     {
         return array(
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID,
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_COMPLEX_ID,
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_TEMPLATE_NAME);
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID,
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_COMPLEX_ID,
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_TEMPLATE_NAME);
     }
 
     public function render_header($visible_tools)

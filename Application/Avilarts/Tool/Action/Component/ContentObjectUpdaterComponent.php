@@ -22,10 +22,10 @@ class ContentObjectUpdaterComponent extends Manager implements DelegateComponent
 
     public function run()
     {
-        $pid = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID) ? Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID) : $_POST[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID];
+        $pid = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID) ? Request :: get(
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID) : $_POST[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID];
 
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $pid);
 
@@ -57,7 +57,7 @@ class ContentObjectUpdaterComponent extends Manager implements DelegateComponent
                 $content_object,
                 'edit',
                 'post',
-                $this->get_url(array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $pid)));
+                $this->get_url(array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $pid)));
 
             if ($form->validate())
             {
@@ -72,17 +72,17 @@ class ContentObjectUpdaterComponent extends Manager implements DelegateComponent
 
                 if ($tool == 'learning_path')
                 {
-                    $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = null;
+                    $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = null;
                     $params['display_action'] = 'view';
-                    $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = Request :: get(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+                    $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = Request :: get(
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
                 }
 
                 if ($tool != 'learning_path')
                 {
                     $filter = array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
                 }
                 else
                 {
@@ -107,7 +107,7 @@ class ContentObjectUpdaterComponent extends Manager implements DelegateComponent
             $this->redirect(
                 Translation :: get("NotAllowed"),
                 true,
-                array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
+                array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
         }
     }
 }

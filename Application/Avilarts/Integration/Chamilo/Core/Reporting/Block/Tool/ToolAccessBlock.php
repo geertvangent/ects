@@ -47,14 +47,14 @@ abstract class ToolAccessBlock extends ToolBlock
             $tool_translation = Translation :: get(
                 'TypeName',
                 null,
-                \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool_name));
+                \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool_name));
 
             $params = array();
 
-            $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-            $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $this->get_course_id();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = $tool_name;
+            $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+            $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $this->get_course_id();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = $tool_name;
 
             $redirect = new Redirect($params);
             $url = $redirect->getUrl();
@@ -104,7 +104,7 @@ abstract class ToolAccessBlock extends ToolBlock
      */
     public function count_tool_publications($tool_name)
     {
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications(
             $this->get_tool_publications_condition($tool_name));
     }
 

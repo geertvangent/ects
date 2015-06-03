@@ -65,7 +65,7 @@ class SearcherComponent extends Manager
                 $course_group_ids[] = $course_group->get_id();
             }
 
-            $publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+            $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
                 ContentObjectPublication :: class_name(),
                 $this->get_retrieve_publications_condition());
 
@@ -112,7 +112,7 @@ class SearcherComponent extends Manager
                          Translation :: get(
                             'TypeName',
                             null,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool)) . ' (' . Translation :: get(
+                            \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool)) . ' (' . Translation :: get(
                             $count == 1 ? 'SearchResult' : 'SearchResults',
                             array('COUNT' => $count)) . ') </h4>';
                     $results += $count;
@@ -125,9 +125,9 @@ class SearcherComponent extends Manager
                         {
                             $url = $this->get_url(
                                 array(
-                                    \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL => $tool,
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $pub->get_id(),
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW));
+                                    \Ehb\Application\Avilarts\Manager :: PARAM_TOOL => $tool,
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $pub->get_id(),
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW));
                         }
                         else
                         {
@@ -160,7 +160,7 @@ class SearcherComponent extends Manager
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
 
         $action_bar->set_search_url(
-            $this->get_url(array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_SEARCH)));
+            $this->get_url(array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_SEARCH)));
 
         return $action_bar;
     }

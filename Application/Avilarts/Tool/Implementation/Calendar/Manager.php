@@ -4,7 +4,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\Calendar;
 use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
 use Chamilo\Core\Repository\ContentObject\CalendarEvent\Storage\DataClass\CalendarEvent;
 
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {
 
     public static function get_allowed_types()

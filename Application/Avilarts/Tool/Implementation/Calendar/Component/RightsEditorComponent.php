@@ -15,6 +15,6 @@ class RightsEditorComponent extends Manager implements DelegateComponent
 
     public function get_additional_parameters()
     {
-        array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+        array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
     }
 }

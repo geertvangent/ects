@@ -43,13 +43,13 @@ class EndingAssignments extends Block
         $conditions = array();
         $conditions[] = new InCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: class_name(),
-                \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: PROPERTY_COURSE_ID),
+                \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: class_name(),
+                \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: PROPERTY_COURSE_ID),
             $course_ids);
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: class_name(),
-                \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: PROPERTY_TOOL),
+                \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: class_name(),
+                \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: PROPERTY_TOOL),
             new StaticConditionVariable('assignment'));
 
         $subselect_condition = new EqualityCondition(
@@ -65,7 +65,7 @@ class EndingAssignments extends Block
             $subselect_condition);
         $condition = new AndCondition($conditions);
 
-        $publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
@@ -74,8 +74,8 @@ class EndingAssignments extends Block
                 array(
                     new OrderBy(
                         new PropertyConditionVariable(
-                            \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: class_name(),
-                            \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: PROPERTY_DISPLAY_ORDER_INDEX)))))->as_array();
+                            \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: class_name(),
+                            \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: PROPERTY_DISPLAY_ORDER_INDEX)))))->as_array();
 
         $ending_assignments = array();
         foreach ($publications as $publication)
@@ -84,13 +84,13 @@ class EndingAssignments extends Block
             if ($assignment->get_end_time() > time() && $assignment->get_end_time() < $deadline)
             {
                 $parameters = array(
-                    \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE => $publication->get_course_id(),
-                    Application :: PARAM_CONTEXT => \Chamilo\Application\Weblcms\Manager :: context(),
-                    Application :: PARAM_ACTION => \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE,
-                    \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL => NewBlock :: TOOL_ASSIGNMENT,
-                    \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION => \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMITTERS,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE => ContentObjectRenderer :: TYPE_TABLE,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id());
+                    \Ehb\Application\Avilarts\Manager :: PARAM_COURSE => $publication->get_course_id(),
+                    Application :: PARAM_CONTEXT => \Ehb\Application\Avilarts\Manager :: context(),
+                    Application :: PARAM_ACTION => \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE,
+                    \Ehb\Application\Avilarts\Manager :: PARAM_TOOL => NewBlock :: TOOL_ASSIGNMENT,
+                    \Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMITTERS,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE => ContentObjectRenderer :: TYPE_TABLE,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id());
 
                 $redirect = new Redirect($parameters);
                 $link = $redirect->getUrl();

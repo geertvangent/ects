@@ -45,7 +45,7 @@ use Chamilo\Libraries\Storage\ResultSet\EmptyResultSet;
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring from MDB2
  * @package application.weblcms.course
  */
-class DataManager extends \Chamilo\Application\Weblcms\Storage\DataManager
+class DataManager extends \Ehb\Application\Avilarts\Storage\DataManager
 {
     const PREFIX = 'weblcms_';
 
@@ -366,7 +366,7 @@ class DataManager extends \Chamilo\Application\Weblcms\Storage\DataManager
                 ContentObjectPublication :: class_name(),
                 ContentObjectPublication :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($course_id));
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications($condition);
+        return \Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications($condition);
     }
 
     /**
@@ -384,7 +384,7 @@ class DataManager extends \Chamilo\Application\Weblcms\Storage\DataManager
                 ContentObjectPublication :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($course_id));
 
-        return \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_content_object_publications(
+        return \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_content_object_publications(
             $condition,
             $order_by);
     }
@@ -1543,7 +1543,7 @@ class DataManager extends \Chamilo\Application\Weblcms\Storage\DataManager
                 new PropertyConditionVariable(CourseTool :: class_name(), CourseTool :: PROPERTY_SECTION_TYPE),
                 new StaticConditionVariable(CourseSection :: TYPE_CUSTOM)));
 
-        $tools = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $tools = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseTool :: class_name(),
             $tools_condition);
 

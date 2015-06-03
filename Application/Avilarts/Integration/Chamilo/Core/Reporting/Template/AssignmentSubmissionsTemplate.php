@@ -21,9 +21,9 @@ class AssignmentSubmissionsTemplate extends ReportingTemplate
     {
         parent :: __construct($parent);
         
-        $this->publication_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+        $this->publication_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
         
-        $assignment = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $assignment = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $this->publication_id)->get_content_object();
         
@@ -34,9 +34,9 @@ class AssignmentSubmissionsTemplate extends ReportingTemplate
         $custom_breadcrumbs = array();
         
         $parameters = array();
-        $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = \Chamilo\Application\Weblcms\Manager :: ACTION_REPORTING;
-        $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $this->publication_id;
-        $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: ACTION_VIEW;
+        $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = \Ehb\Application\Avilarts\Manager :: ACTION_REPORTING;
+        $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $this->publication_id;
+        $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: ACTION_VIEW;
         $custom_breadcrumbs[] = new Breadcrumb($this->get_url($parameters), $assignment->get_title());
         $custom_breadcrumbs[] = new Breadcrumb($this->get_url(), Translation :: get('SubmissionsOverview'));
         $this->set_custom_breadcrumb_trail($custom_breadcrumbs);
@@ -45,16 +45,16 @@ class AssignmentSubmissionsTemplate extends ReportingTemplate
     public function get_additional_parameters()
     {
         return array(
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID, 
-            \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID, 
-            \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE);
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID, 
+            \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID, 
+            \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE);
     }
 
     private function init_parameters()
     {
         if ($this->publication_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION, $this->publication_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION, $this->publication_id);
         }
     }
 }

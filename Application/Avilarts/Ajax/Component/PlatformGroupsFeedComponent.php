@@ -75,7 +75,7 @@ class PlatformGroupsFeedComponent extends GroupsFeedComponent
                     CourseGroupRelation :: PROPERTY_COURSE_ID), 
                 new StaticConditionVariable($course_id));
             
-            $subscribed_groups = $course_group_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+            $subscribed_groups = $course_group_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
                 CourseGroupRelation :: class_name(), 
                 $group_condition);
             

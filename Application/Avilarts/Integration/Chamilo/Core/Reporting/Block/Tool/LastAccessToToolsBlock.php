@@ -46,9 +46,9 @@ class LastAccessToToolsBlock extends ToolAccessBlock
             if ($publications > 0)
             {
                 $params = $this->get_parent()->get_parameters();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = ToolPublicationsDetailTemplate :: class_name();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user_id;
-                $params[\Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL] = $tool_name;
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = ToolPublicationsDetailTemplate :: class_name();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user_id;
+                $params[\Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL] = $tool_name;
                 $url = $this->get_parent()->get_url($params);
 
                 $toolbar = new Toolbar();
@@ -65,8 +65,8 @@ class LastAccessToToolsBlock extends ToolAccessBlock
                         Assignment :: class_name(),
                         true) :
                         $params = $this->get_parent()->get_parameters();
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = AssignmentScoresTemplate :: class_name();
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = AssignmentScoresTemplate :: class_name();
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
 
                         $url_detail = $this->get_parent()->get_url($params);
 
@@ -82,8 +82,8 @@ class LastAccessToToolsBlock extends ToolAccessBlock
                         Assessment :: class_name(),
                         true) :
                         $params = $this->get_parent()->get_parameters();
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = AssessmentScoresTemplate :: class_name();
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = AssessmentScoresTemplate :: class_name();
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
 
                         $url_detail = $this->get_parent()->get_url($params);
 
@@ -99,8 +99,8 @@ class LastAccessToToolsBlock extends ToolAccessBlock
                         LearningPath :: class_name(),
                         true) :
                         $params = $this->get_parent()->get_parameters();
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = LearningPathProgressTemplate :: class_name();
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = LearningPathProgressTemplate :: class_name();
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
 
                         $url_detail = $this->get_parent()->get_url($params);
 

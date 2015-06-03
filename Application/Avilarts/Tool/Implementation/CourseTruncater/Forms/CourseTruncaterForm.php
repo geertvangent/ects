@@ -47,7 +47,7 @@ class CourseTruncaterForm extends FormValidator
                 ContentObjectPublication :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable($this->parent->get_course_id()));
         
-        $publications_set = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $publications_set = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(), 
             new DataClassRetrievesParameters(
                 $condition, 
@@ -73,7 +73,7 @@ class CourseTruncaterForm extends FormValidator
                 $label = $index == 0 ? Translation :: get(
                     'TypeName', 
                     null, 
-                    \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool)) : '';
+                    \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool)) : '';
                 $content_object = $publication->get_content_object();
                 $id = 'publications[' . $publication->get_id() . ']';
                 $this->addElement('checkbox', $id, $label, $content_object->get_title());
@@ -89,7 +89,7 @@ class CourseTruncaterForm extends FormValidator
             new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable($this->parent->get_course_id()));
         
-        $course_sections = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(), 
             $condition);
         

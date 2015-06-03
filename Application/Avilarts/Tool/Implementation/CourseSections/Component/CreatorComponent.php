@@ -27,7 +27,7 @@ class CreatorComponent extends Manager
             new Breadcrumb(
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_CREATE_COURSE_SECTION)),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_CREATE_COURSE_SECTION)),
                 Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES)));
 
         if (! $this->get_course()->is_course_admin($this->get_parent()->get_user()))

@@ -45,7 +45,7 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
     public function run()
     {
         // check if the content object has indeed been published for the user
-        $this->publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $this->publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $this->get_publication_id());
 
@@ -61,8 +61,8 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
                 true,
                 array(),
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID));
         }
 
         $object = $this->publication->get_content_object();
@@ -137,7 +137,7 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
 
     public function get_publication_id()
     {
-        return Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+        return Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
     }
 
     public function get_publication_count()
@@ -199,11 +199,11 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
             array(
                 new OrderBy(
                     new PropertyConditionVariable(
-                        \Chamilo\Application\Weblcms\Storage\DataClass\Feedback :: class_name(),
-                        \Chamilo\Application\Weblcms\Storage\DataClass\Feedback :: PROPERTY_MODIFICATION_DATE))));
+                        \Ehb\Application\Avilarts\Storage\DataClass\Feedback :: class_name(),
+                        \Ehb\Application\Avilarts\Storage\DataClass\Feedback :: PROPERTY_MODIFICATION_DATE))));
 
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
-            \Chamilo\Application\Weblcms\Storage\DataClass\Feedback :: class_name(),
+        return \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
+            \Ehb\Application\Avilarts\Storage\DataClass\Feedback :: class_name(),
             $parameters);
     }
 
@@ -213,8 +213,8 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
     public function count_feedbacks()
     {
         $parameters = new DataClassCountParameters($this->get_feedback_conditions());
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: count(
-            \Chamilo\Application\Weblcms\Storage\DataClass\Feedback :: class_name(),
+        return \Ehb\Application\Avilarts\Storage\DataManager :: count(
+            \Ehb\Application\Avilarts\Storage\DataClass\Feedback :: class_name(),
             $parameters);
     }
 
@@ -223,8 +223,8 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
      */
     public function retrieve_feedback($feedback_id)
     {
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
-            \Chamilo\Application\Weblcms\Storage\DataClass\Feedback :: class_name(),
+        return \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
+            \Ehb\Application\Avilarts\Storage\DataClass\Feedback :: class_name(),
             $feedback_id);
     }
 
@@ -233,7 +233,7 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
      */
     public function get_feedback()
     {
-        $feedback = new \Chamilo\Application\Weblcms\Storage\DataClass\Feedback();
+        $feedback = new \Ehb\Application\Avilarts\Storage\DataClass\Feedback();
         $feedback->set_publication_id($this->publication->get_id());
         return $feedback;
     }
@@ -276,8 +276,8 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
 
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Storage\DataClass\Feedback :: class_name(),
-                \Chamilo\Application\Weblcms\Storage\DataClass\Feedback :: PROPERTY_PUBLICATION_ID),
+                \Ehb\Application\Avilarts\Storage\DataClass\Feedback :: class_name(),
+                \Ehb\Application\Avilarts\Storage\DataClass\Feedback :: PROPERTY_PUBLICATION_ID),
             new StaticConditionVariable($this->publication->get_id()));
 
         return new AndCondition($conditions);

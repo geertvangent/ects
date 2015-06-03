@@ -37,7 +37,7 @@ class AverageLearningPathScoreBlock extends CourseBlock
             new StaticConditionVariable('learning_path'));
         
         $condition = new AndCondition($conditions);
-        $lops = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications($condition);
+        $lops = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications($condition);
         
         while ($lop = $lops->next_result())
         {

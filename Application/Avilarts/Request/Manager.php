@@ -24,7 +24,7 @@ abstract class Manager extends Application
             return true;
         }
 
-        $course_types = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_active_course_types();
+        $course_types = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_active_course_types();
         while ($course_type = $course_types->next_result())
         {
             if (CourseManagementRights :: get_instance()->is_allowed(

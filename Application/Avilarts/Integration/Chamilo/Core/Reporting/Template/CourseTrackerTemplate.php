@@ -32,15 +32,15 @@ class CourseTrackerTemplate extends ReportingTemplate
     public function get_last_access_to_tool()
     {
         $course_weblcms_block = new LastAccessToToolsBlock($this);
-        $course_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
-        $user_id = request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS);
+        $course_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
+        $user_id = request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS);
         if ($course_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE, $course_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE, $course_id);
         }
         if ($user_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS, $user_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_USERS, $user_id);
         }
         return $course_weblcms_block;
     }
@@ -48,10 +48,10 @@ class CourseTrackerTemplate extends ReportingTemplate
     public function get_average_learning_path_score()
     {
         $course_weblcms_block = new AverageLearningPathScoreBlock($this);
-        $course_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
+        $course_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
         if ($course_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE, $course_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE, $course_id);
         }
         return $course_weblcms_block;
     }
@@ -59,10 +59,10 @@ class CourseTrackerTemplate extends ReportingTemplate
     public function get_average_exercise_score()
     {
         $course_weblcms_block = new AverageExerciseScoreBlock($this);
-        $course_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
+        $course_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
         if ($course_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE, $course_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE, $course_id);
         }
         return $course_weblcms_block;
     }

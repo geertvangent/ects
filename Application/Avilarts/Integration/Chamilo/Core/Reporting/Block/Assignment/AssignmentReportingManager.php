@@ -88,7 +88,7 @@ abstract class AssignmentReportingManager extends ToolBlock
      */
     public function get_course_id()
     {
-        return Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
+        return Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
     }
 
     /**
@@ -98,7 +98,7 @@ abstract class AssignmentReportingManager extends ToolBlock
      */
     public function get_publication_id()
     {
-        return Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+        return Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
     }
 
     /**
@@ -109,7 +109,7 @@ abstract class AssignmentReportingManager extends ToolBlock
     public function get_submitter_type()
     {
         return Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE);
+            \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE);
     }
 
     /**
@@ -119,7 +119,7 @@ abstract class AssignmentReportingManager extends ToolBlock
      */
     public function get_target_id()
     {
-        return Request :: get(\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID);
+        return Request :: get(\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID);
     }
 
     /**
@@ -298,18 +298,18 @@ abstract class AssignmentReportingManager extends ToolBlock
      */
     protected function generate_assignment_name_link($publication_id)
     {
-        $assignment = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $assignment = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $publication_id)->get_content_object();
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $this->get_course_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $this->get_course_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
             Assignment :: class_name(),
             true);
-        $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMITTERS;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication_id;
+        $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMITTERS;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication_id;
 
         $redirect = new Redirect($params);
         $url_title = $redirect->getUrl();
@@ -330,18 +330,18 @@ abstract class AssignmentReportingManager extends ToolBlock
         $submitter_name = $this->get_submitter_name_by_id($submitter_type, $submitter_id);
 
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $this->get_course_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $this->get_course_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
             Assignment :: class_name(),
             true);
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $this->get_publication_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMISSIONS;
-        $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE] = ContentObjectRenderer :: TYPE_TABLE;
-        $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $this->get_publication_id();
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $submitter_id;
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = $submitter_type;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $this->get_publication_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMISSIONS;
+        $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE] = ContentObjectRenderer :: TYPE_TABLE;
+        $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $this->get_publication_id();
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $submitter_id;
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = $submitter_type;
 
         $redirect = new Redirect($params);
         $link = $redirect->getUrl();
@@ -365,17 +365,17 @@ abstract class AssignmentReportingManager extends ToolBlock
             $submission_tracker->get_content_object_id())->get_title();
 
         $params = array();
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $this->get_course_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $this->get_course_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
             Assignment :: class_name(),
             true);
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_VIEW_SUBMISSION;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $this->get_publication_id();
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $submission_tracker->get_submitter_id();
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = $submission_tracker->get_submitter_type();
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMISSION] = $submission_tracker->get_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: ACTION_VIEW_SUBMISSION;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $this->get_publication_id();
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $submission_tracker->get_submitter_id();
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = $submission_tracker->get_submitter_type();
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMISSION] = $submission_tracker->get_id();
 
         $redirect = new Redirect($params);
         $link = $redirect->getUrl();
@@ -392,17 +392,17 @@ abstract class AssignmentReportingManager extends ToolBlock
     protected function generate_user_name_link($user_id)
     {
         $user_name = $this->get_submitter_name_by_id(
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER,
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER,
             $user_id);
 
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $this->get_course_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = \Chamilo\Core\User\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\User\Manager :: ACTION_USER_DETAILS;
-        $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE] = ContentObjectPublicationListRenderer :: TYPE_LIST;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user_id;
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $this->get_course_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = \Chamilo\Core\User\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\User\Manager :: ACTION_USER_DETAILS;
+        $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE] = ContentObjectPublicationListRenderer :: TYPE_LIST;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user_id;
 
         $redirect = new Redirect($params);
         $url_user_name = $redirect->getUrl();
@@ -422,11 +422,11 @@ abstract class AssignmentReportingManager extends ToolBlock
     {
         switch ($submitter_type)
         {
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP :
+            case \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP :
                 return CourseGroupDataManager :: retrieve_by_id(CourseGroup :: class_name(), $submitter_id)->get_name();
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP :
+            case \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP :
                 return \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(Group :: class_name(), $submitter_id)->get_name();
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER :
+            case \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER :
                 return \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
                     \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
                     (int) $submitter_id)->get_fullname();

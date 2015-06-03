@@ -36,7 +36,7 @@ class VisibilityChangerComponent extends Manager
 
             foreach ($ids as $id)
             {
-                $course_section = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                $course_section = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                     CourseSection :: class_name(),
                     (int) $id);
 

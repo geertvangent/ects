@@ -35,14 +35,14 @@ class RequestTableCellRenderer extends DataClassTableCellRenderer implements Tab
     {
         $toolbar = new Toolbar();
 
-        if (\Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->request_is_allowed())
+        if (\Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->request_is_allowed())
         {
             if (! $object->was_granted())
             {
                 $toolbar->add_item(
                     new ToolbarItem(
                         Translation :: get('Grant'),
-                        Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms\Request', 'Action/Grant'),
+                        Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts\Request', 'Action/Grant'),
                         $this->get_component()->get_url(
                             array(
                                 Manager :: PARAM_ACTION => Manager :: ACTION_GRANT,
@@ -55,7 +55,7 @@ class RequestTableCellRenderer extends DataClassTableCellRenderer implements Tab
                 $toolbar->add_item(
                     new ToolbarItem(
                         Translation :: get('Deny'),
-                        Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms\Request', 'Action/Deny'),
+                        Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts\Request', 'Action/Deny'),
                         $this->get_component()->get_url(
                             array(
                                 Manager :: PARAM_ACTION => Manager :: ACTION_DENY,

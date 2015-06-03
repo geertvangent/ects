@@ -75,7 +75,7 @@ class UnsubscribedGroupTableCellRenderer extends DataClassTableCellRenderer impl
             if ($subscribe_group_users)
             {
                 // subscribe users of group
-                $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_SUBSCRIBE_USERS_FROM_GROUP;
+                $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_SUBSCRIBE_USERS_FROM_GROUP;
                 $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
                 $parameters[Manager :: PARAM_OBJECTS] = $group_with_subscription_status->get_id();
 
@@ -88,7 +88,7 @@ class UnsubscribedGroupTableCellRenderer extends DataClassTableCellRenderer impl
             }
 
             // subscribe group
-            $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_SUBSCRIBE_GROUPS;
+            $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_SUBSCRIBE_GROUPS;
             $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
             $parameters[Manager :: PARAM_OBJECTS] = $group_with_subscription_status->get_id();
 

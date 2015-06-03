@@ -31,18 +31,18 @@ class CourseSubmitterSubmissionsTemplate extends ReportingTemplate
         $this->add_reporting_block($this->get_submitter_submissions_information());
         $this->add_reporting_block(new AssignmentSubmitterSubmissionsBlock($this));
         
-        $assignment = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $assignment = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $this->publication_id)->get_content_object();
         
         $custom_breadcrumbs = array();
         $params = array();
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = null;
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = null;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = CourseAssignmentSubmittersTemplate :: class_name();
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = null;
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = null;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = CourseAssignmentSubmittersTemplate :: class_name();
         $custom_breadcrumbs[] = new Breadcrumb($this->get_url($params), $assignment->get_title());
         if ($this->submitter_type ==
-             \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER)
+             \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER)
         {
             $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
                 \Chamilo\Core\User\Storage\DataClass\User :: class_name(), 
@@ -50,13 +50,13 @@ class CourseSubmitterSubmissionsTemplate extends ReportingTemplate
             $custom_breadcrumbs[] = new Breadcrumb($this->get_url(), $user->get_fullname());
         }
         if ($this->submitter_type ==
-             \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP)
+             \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP)
         {
             $course_group = CourseGroupDataManager :: retrieve_by_id(CourseGroup :: class_name(), $this->target_id);
             $custom_breadcrumbs[] = new Breadcrumb($this->get_url(), $course_group->get_name());
         }
         if ($this->submitter_type ==
-             \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP)
+             \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP)
         {
             $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(Group :: class_name(), $this->target_id);
             $custom_breadcrumbs[] = new Breadcrumb($this->get_url(), $group->get_name());
@@ -66,27 +66,27 @@ class CourseSubmitterSubmissionsTemplate extends ReportingTemplate
 
     private function init_parameters()
     {
-        $this->publication_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+        $this->publication_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
         if ($this->publication_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION, $this->publication_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION, $this->publication_id);
         }
         
         $this->target_id = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID);
+            \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID);
         if ($this->target_id)
         {
             $this->set_parameter(
-                \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID, 
+                \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID, 
                 $this->target_id);
         }
         
         $this->submitter_type = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE);
+            \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE);
         if (isset($this->submitter_type))
         {
             $this->set_parameter(
-                \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE, 
+                \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE, 
                 $this->submitter_type);
         }
     }
@@ -95,11 +95,11 @@ class CourseSubmitterSubmissionsTemplate extends ReportingTemplate
     {
         switch ($this->submitter_type)
         {
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP :
+            case \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP :
                 return new AssignmentCourseGroupInformationBlock($this);
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP :
+            case \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP :
                 return new AssignmentPlatformGroupInformationBlock($this);
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER :
+            case \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER :
                 return new AssignmentUserInformationBlock($this);
         }
     }

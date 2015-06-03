@@ -20,7 +20,7 @@ class BrowserComponent extends Manager
 
         $intro_text_allowed = CourseSettingsController :: get_instance()->get_course_setting(
             $this->get_course_id(),
-            \Chamilo\Application\Weblcms\CourseSettingsConnector :: ALLOW_INTRODUCTION_TEXT);
+            \Ehb\Application\Avilarts\CourseSettingsConnector :: ALLOW_INTRODUCTION_TEXT);
 
         $html = array();
 
@@ -61,6 +61,6 @@ class BrowserComponent extends Manager
 
     public function get_additional_parameters()
     {
-        return array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+        return array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
     }
 }

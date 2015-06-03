@@ -26,7 +26,7 @@ abstract class CourseBlock extends ReportingBlock
     public function get_course_id()
     {
         return $this->get_parent()->get_parent()->get_parameter(
-            \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
+            \Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
     }
 
     public function get_score_bar($score)
@@ -126,7 +126,7 @@ abstract class CourseBlock extends ReportingBlock
 
         $publication_condition = new AndCondition($publication_conditions);
 
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications(
             $publication_condition);
     }
 

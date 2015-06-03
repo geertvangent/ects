@@ -24,7 +24,7 @@ class StatusChangerPlatformgroupTeacherComponent extends StatusChangerComponent
         
         $condition = new AndCondition($conditions);
         
-        return $course_group_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        return $course_group_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseGroupRelation :: class_name(), 
             $condition)->next_result();
     }

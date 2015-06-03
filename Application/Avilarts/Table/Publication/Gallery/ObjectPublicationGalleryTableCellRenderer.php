@@ -37,8 +37,8 @@ class ObjectPublicationGalleryTableCellRenderer extends RecordGalleryTableCellRe
 
         $details_url = $this->get_component()->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW));
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW));
 
         $thumbnail = ContentObjectRenditionImplementation :: launch(
             $object,

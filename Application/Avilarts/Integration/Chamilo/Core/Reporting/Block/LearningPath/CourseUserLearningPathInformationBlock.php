@@ -59,14 +59,14 @@ class CourseUserLearningPathInformationBlock extends ToolBlock
         }
 
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = LearningPath :: get_type_name();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = LearningPath :: get_type_name();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
 
         $params_detail = $this->get_parent()->get_parameters();
-        $params_detail[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = LearningPathAttemptProgressTemplate :: class_name();
+        $params_detail[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = LearningPathAttemptProgressTemplate :: class_name();
         $img = '<img src="' . Theme :: getInstance()->getCommonImagePath('Action/Reporting') . '" title="' .
              Translation :: get('Details') . '" />';
 
@@ -83,7 +83,7 @@ class CourseUserLearningPathInformationBlock extends ToolBlock
                 ContentObjectPublication :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($course_id));
         $condition = new AndCondition($conditions);
-        $publications_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+        $publications_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
             $condition);
         /*
          * $publications_arr = $publications_resultset->as_array();
@@ -92,7 +92,7 @@ class CourseUserLearningPathInformationBlock extends ToolBlock
         while ($publication = $publications_resultset->next_result())
         {
             $progress = $url = $link = null;
-            if (! \Chamilo\Application\Weblcms\Storage\DataManager :: is_publication_target_user(
+            if (! \Ehb\Application\Avilarts\Storage\DataManager :: is_publication_target_user(
                 $user_id,
                 $publication[ContentObjectPublication :: PROPERTY_ID]))
             {
@@ -102,14 +102,14 @@ class CourseUserLearningPathInformationBlock extends ToolBlock
 
             if ($learning_paths[$publication[ContentObjectPublication :: PROPERTY_ID]])
             {
-                $params_detail[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
-                $params_detail[\Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID] = $learning_paths[$publication[ContentObjectPublication :: PROPERTY_ID]];
+                $params_detail[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
+                $params_detail[\Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID] = $learning_paths[$publication[ContentObjectPublication :: PROPERTY_ID]];
                 $link = '<a href="' . $this->get_parent()->get_url($params_detail) . '">' . $img . '</a>';
                 $progress = $this->get_progress_bar(
                     $learning_paths[$publication[ContentObjectPublication :: PROPERTY_ID]]->get_progress());
             }
 
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
             $learning_path = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
                 ContentObject :: class_name(),
                 $publication[ContentObjectPublication :: PROPERTY_CONTENT_OBJECT_ID]);

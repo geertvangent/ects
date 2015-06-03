@@ -24,7 +24,7 @@ class WikiTemplate extends ReportingTemplate
 
     public function set_template_parameters()
     {
-        $publication_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION, $publication_id);
+        $publication_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
+        $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION, $publication_id);
     }
 }

@@ -5,7 +5,7 @@ use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 
-class LpHotpotatoesSaveScoreComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
+class LpHotpotatoesSaveScoreComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {
 
     public function run()

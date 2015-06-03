@@ -29,7 +29,7 @@ class CourseChangeCourseTypeForm extends FormValidator
         parent :: __construct('course_change_course_type', 'post', $action);
         $this->course = $course;
         $this->allow_no_course_type = $user->is_platform_admin() ||
-             PlatformSetting :: get('allow_course_creation_without_coursetype', 'Chamilo\Application\Weblcms');
+             PlatformSetting :: get('allow_course_creation_without_coursetype', 'Ehb\Application\Avilarts');
 
         $this->build_form();
     }
@@ -64,7 +64,7 @@ class CourseChangeCourseTypeForm extends FormValidator
 
     public function get_course_types()
     {
-        $course_type_objects = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieves(
+        $course_type_objects = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieves(
             CourseType :: class_name());
         $course_types = array();
         if (empty($this->course_type_id) || $this->allow_no_course_type)

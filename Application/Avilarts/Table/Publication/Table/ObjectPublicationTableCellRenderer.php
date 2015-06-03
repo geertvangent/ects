@@ -97,16 +97,16 @@ class ObjectPublicationTableCellRenderer extends RecordTableCellRenderer impleme
                 {
                     $details_url = $this->get_component()->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT));
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT));
 
                     return '<a href="' . $details_url . '">' . parent :: render_cell($column, $publication) . '</a>';
                 }
 
                 $details_url = $this->get_component()->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW));
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW));
 
                 return '<a href="' . $details_url . '">' . parent :: render_cell($column, $publication) . '</a>';
 

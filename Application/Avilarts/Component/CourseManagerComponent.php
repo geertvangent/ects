@@ -22,7 +22,7 @@ class CourseManagerComponent extends Manager implements DelegateComponent, Cours
     public function run()
     {
         $factory = new ApplicationFactory(
-            \Chamilo\Application\Weblcms\Course\Manager :: context(),
+            \Ehb\Application\Avilarts\Course\Manager :: context(),
            new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         return $factory->run();
     }
@@ -39,7 +39,7 @@ class CourseManagerComponent extends Manager implements DelegateComponent, Cours
             $message,
             ! $succes,
             array(),
-            array(self :: PARAM_ACTION, \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION));
+            array(self :: PARAM_ACTION, \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION));
     }
 
     /**

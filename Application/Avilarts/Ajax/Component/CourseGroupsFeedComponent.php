@@ -69,7 +69,7 @@ class CourseGroupsFeedComponent extends GroupsFeedComponent
         }
         else
         {
-            $root_course_group = \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager :: retrieve_course_group_root(
+            $root_course_group = \Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager :: retrieve_course_group_root(
                 $course_id);
             
             $conditions[] = new EqualityCondition(

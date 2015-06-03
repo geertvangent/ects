@@ -21,9 +21,9 @@ class LocationSelector extends \Chamilo\Core\Repository\Publication\Location\Loc
     public function get_header()
     {
         $table_header = array();
-        $table_header[] = '<th>' . Translation :: get('Course', null, \Chamilo\Application\Weblcms\Manager :: context()) .
+        $table_header[] = '<th>' . Translation :: get('Course', null, \Ehb\Application\Avilarts\Manager :: context()) .
              '</th>';
-        $table_header[] = '<th>' . Translation :: get('Tool', null, \Chamilo\Application\Weblcms\Manager :: context()) .
+        $table_header[] = '<th>' . Translation :: get('Tool', null, \Ehb\Application\Avilarts\Manager :: context()) .
              '</th>';
         return implode(PHP_EOL, $table_header);
     }

@@ -73,7 +73,7 @@ abstract class AssessmentQuestionOptionsBlock extends AssessmentBlock
     public static function factory($parent)
     {
         $question_complex_content_object_item_id = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
+            \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
         $question_complex_content_object_item = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
             ComplexContentObjectItem :: class_name(),
             $question_complex_content_object_item_id);

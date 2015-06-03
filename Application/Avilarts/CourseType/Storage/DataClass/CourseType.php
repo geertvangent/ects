@@ -376,7 +376,7 @@ class CourseType extends DataClass implements DisplayOrderDataClassListenerSuppo
             CourseSettingsController :: SETTING_TYPE_COURSE_TYPE, 
             $this->get_id());
         
-        if (! \Chamilo\Application\Weblcms\Course\Storage\DataManager :: copy_course_settings_from_course_type(
+        if (! \Ehb\Application\Avilarts\Course\Storage\DataManager :: copy_course_settings_from_course_type(
             $this->get_id()))
         {
             return false;
@@ -393,7 +393,7 @@ class CourseType extends DataClass implements DisplayOrderDataClassListenerSuppo
                     new StaticConditionVariable($this->get_course_setting($setting_name))));
         }
         
-        return \Chamilo\Application\Weblcms\Course\Storage\DataManager :: update_courses_from_course_type_with_properties(
+        return \Ehb\Application\Avilarts\Course\Storage\DataManager :: update_courses_from_course_type_with_properties(
             $this->get_id(), 
             $properties);
     }

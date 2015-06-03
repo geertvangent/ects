@@ -22,7 +22,7 @@ class AssignmentPlatformGroupScoresBlock extends AssignmentGroupScoresBlock
      */
     public function get_current_submitter_type()
     {
-        return \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP;
+        return \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP;
     }
 
     /**
@@ -36,7 +36,7 @@ class AssignmentPlatformGroupScoresBlock extends AssignmentGroupScoresBlock
             new PropertyConditionVariable(CourseGroupRelation :: class_name(), CourseGroupRelation :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable($this->course_id));
         
-        $course_groups_rels_resultset = $course_group_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $course_groups_rels_resultset = $course_group_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseGroupRelation :: class_name(), 
             $condition);
         

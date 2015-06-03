@@ -59,13 +59,13 @@ class AssignmentSubmitterSubmissionsBlock extends AssignmentReportingManager
             self :: $COLUMN_NUMBER_OF_FEEDBACKS, 
             self :: $COLUMN_IP_ADDRESS);
         if ($this->get_submitter_type() !=
-             \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER)
+             \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER)
         {
             array_splice($reporting_data_headers, 1, 0, array(self :: $COLUMN_INDIVIDUAL_SUBMITTER));
         }
         $reporting_data->set_rows($reporting_data_headers);
         
-        $assignment = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $assignment = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $this->get_publication_id())->get_content_object();
         
@@ -73,27 +73,27 @@ class AssignmentSubmitterSubmissionsBlock extends AssignmentReportingManager
         
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(), 
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID), 
             new StaticConditionVariable($this->get_target_id()));
         
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(), 
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE), 
             new StaticConditionVariable($this->get_submitter_type()));
         
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(), 
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_PUBLICATION_ID), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_PUBLICATION_ID), 
             new StaticConditionVariable($this->get_publication_id()));
         
         $condition = new AndCondition($conditions);
         
-        $submission_trackers = \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: get_data(
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME, 
-            \Chamilo\Application\Weblcms\Manager :: APPLICATION_NAME, 
+        $submission_trackers = \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: get_data(
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME, 
+            \Ehb\Application\Avilarts\Manager :: APPLICATION_NAME, 
             $condition)->as_array();
         
         foreach ($submission_trackers as $key => $submission_tracker)
@@ -106,13 +106,13 @@ class AssignmentSubmitterSubmissionsBlock extends AssignmentReportingManager
             
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: class_name(), 
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: PROPERTY_SUBMISSION_ID), 
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: class_name(), 
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: PROPERTY_SUBMISSION_ID), 
                 new StaticConditionVariable($submission_tracker->get_id()));
             
-            $score_trackers = \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: get_data(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: CLASS_NAME, 
-                \Chamilo\Application\Weblcms\Manager :: APPLICATION_NAME, 
+            $score_trackers = \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: get_data(
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: CLASS_NAME, 
+                \Ehb\Application\Avilarts\Manager :: APPLICATION_NAME, 
                 $condition)->as_array();
             
             if ($score_trackers[0])
@@ -122,17 +122,17 @@ class AssignmentSubmitterSubmissionsBlock extends AssignmentReportingManager
             
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: class_name(), 
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: PROPERTY_SUBMISSION_ID), 
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: class_name(), 
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: PROPERTY_SUBMISSION_ID), 
                 new StaticConditionVariable($submission_tracker->get_id()));
             
-            $number_feedbacks = \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: count_data(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: CLASS_NAME, 
-                \Chamilo\Application\Weblcms\Manager :: APPLICATION_NAME, 
+            $number_feedbacks = \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: count_data(
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: CLASS_NAME, 
+                \Ehb\Application\Avilarts\Manager :: APPLICATION_NAME, 
                 $condition);
             
             if ($this->get_submitter_type() !=
-                 \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER)
+                 \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER)
             {
                 // Link to the User
                 $individual_submitter = $this->generate_user_name_link($submission_tracker->get_user_id());
@@ -151,7 +151,7 @@ class AssignmentSubmitterSubmissionsBlock extends AssignmentReportingManager
                 $submission_tracker->get_ip_address());
             
             if ($this->get_submitter_type() !=
-                 \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER)
+                 \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER)
             {
                 $reporting_data->add_data_category_row(
                     $key, 

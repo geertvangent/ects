@@ -29,7 +29,7 @@ class ViewerComponent extends Manager implements DelegateComponent
             throw new Exception('not-allowed');
         }
 
-        $template_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID);
+        $template_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID);
 
         if (! isset($template_id))
         {
@@ -38,7 +38,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
             $component = $factory->getComponent();
             $component->set_template_by_name(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Reporting\Template\CourseStudentTrackerTemplate :: class_name());
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\CourseStudentTrackerTemplate :: class_name());
             return $component->run();
         }
         else
@@ -48,7 +48,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $this->set_parameter(\Chamilo\Core\Reporting\Viewer\Manager :: PARAM_VIEW, $view);
             }
 
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID, $template_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID, $template_id);
 
             $factory = new ApplicationFactory(
                 \Chamilo\Core\Reporting\Viewer\Manager :: context(),

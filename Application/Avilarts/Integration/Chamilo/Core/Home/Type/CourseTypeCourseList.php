@@ -64,7 +64,7 @@ class CourseTypeCourseList extends Block
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(CourseType :: class_name(), CourseType :: PROPERTY_ID), 
                 new StaticConditionVariable($configuration['course_type']));
-            $this->course_type = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve(
+            $this->course_type = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve(
                 CourseType :: class_name(), 
                 new DataClassRetrieveParameters($condition));
         }

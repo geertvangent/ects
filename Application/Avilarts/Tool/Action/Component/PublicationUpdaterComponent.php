@@ -22,10 +22,10 @@ class PublicationUpdaterComponent extends Manager
 
     public function run()
     {
-        $pid = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID) ? Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID) : $_POST[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID];
+        $pid = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID) ? Request :: get(
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID) : $_POST[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID];
 
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $pid);
 
@@ -64,29 +64,29 @@ class PublicationUpdaterComponent extends Manager
                     'UTF-8');
 
                 $show_details = Request :: get('details');
-                $tool = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL);
+                $tool = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_TOOL);
 
                 $params = array();
                 if ($show_details == 1)
                 {
-                    $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $pid;
-                    $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
+                    $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $pid;
+                    $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
                 }
 
                 // TODO: What does this code do? Is this still valid?
                 if ($tool == 'learning_path')
                 {
-                    $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = null;
+                    $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = null;
                     $params['display_action'] = 'view';
-                    $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = Request :: get(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+                    $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = Request :: get(
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
                 }
 
                 if (! isset($show_details) && $tool != 'learning_path')
                 {
                     $filter = array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
                 }
 
                 $this->redirect($message, ! $succes, $params, $filter);
@@ -109,8 +109,8 @@ class PublicationUpdaterComponent extends Manager
                 true,
                 array(),
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID));
         }
     }
 

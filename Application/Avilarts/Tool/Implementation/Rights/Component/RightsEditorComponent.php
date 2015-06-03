@@ -19,7 +19,7 @@ class RightsEditorComponent extends Manager implements DelegateComponent
         }
 
         $factory = new ApplicationFactory(
-            \Chamilo\Application\Weblcms\Tool\Action\Manager :: context(),
+            \Ehb\Application\Avilarts\Tool\Action\Manager :: context(),
            new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         return $factory->run();
     }
@@ -31,6 +31,6 @@ class RightsEditorComponent extends Manager implements DelegateComponent
 
     public function get_additional_parameters()
     {
-        array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+        array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
     }
 }

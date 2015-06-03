@@ -172,7 +172,7 @@ class PublicationCategoriesTree extends GenericTree
         {
             $url_format .= '&tool_action=' . $tool_action;
         }
-        $browser_type = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE);
+        $browser_type = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE);
         if (! is_null($browser_type))
         {
             $url_format .= '&browser=' . $browser_type;

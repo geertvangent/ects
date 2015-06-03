@@ -84,13 +84,13 @@ class BrowserComponent extends Manager
         $actions->add_form_action(
             new TableFormAction(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_DELETE),
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_DELETE),
                 Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
 
         $actions->add_form_action(
             new TableFormAction(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_TOGGLE_VISIBILITY),
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_TOGGLE_VISIBILITY),
                 Translation :: get('ToggleVisibility'),
                 false));
 
@@ -99,7 +99,7 @@ class BrowserComponent extends Manager
             $actions->add_form_action(
                 new TableFormAction(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MOVE_TO_CATEGORY),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MOVE_TO_CATEGORY),
                     Translation :: get('MoveSelected', null, Utilities :: COMMON_LIBRARIES),
                     false));
         }
@@ -125,7 +125,7 @@ class BrowserComponent extends Manager
 
         if ($course_settings_controller->get_course_setting(
             $this->get_course_id(),
-            \Chamilo\Application\Weblcms\CourseSettingsConnector :: ALLOW_INTRODUCTION_TEXT))
+            \Ehb\Application\Avilarts\CourseSettingsConnector :: ALLOW_INTRODUCTION_TEXT))
         {
             $content[] = $this->get_parent()->display_introduction_text($this->introduction_text);
         }
@@ -145,10 +145,10 @@ class BrowserComponent extends Manager
             $content[] = $this->publication_category_tree->render_as_tree();
             $content[] = '</div>';
             $content[] = ResourceManager :: get_instance()->get_resource_html(
-                Path :: getInstance()->getJavascriptPath('Chamilo\Application\Weblcms', true) . 'TreeMenu.js');
+                Path :: getInstance()->getJavascriptPath('Ehb\Application\Avilarts', true) . 'TreeMenu.js');
             $content[] = '</div>';
 
-            $cat_id = intval(Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY));
+            $cat_id = intval(Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY));
 
             if (! $cat_id || $cat_id == 0)
             {
@@ -178,34 +178,34 @@ class BrowserComponent extends Manager
         {
             $tabs->add_tab(
                 new DynamicVisualTab(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_ALL,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_ALL,
                     Translation :: get('AllPublications'),
                     Theme :: getInstance()->getCommonImagePath('Treemenu/SharedObjects'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_ALL)),
-                    $type == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_ALL));
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_ALL)),
+                    $type == \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_ALL));
         }
 
         $tabs->add_tab(
             new DynamicVisualTab(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FROM_ME,
+                \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FROM_ME,
                 Translation :: get('PublishedForMe'),
                 Theme :: getInstance()->getCommonImagePath('Treemenu/SharedObjects'),
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FOR_ME)),
-                $type == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FOR_ME));
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FOR_ME)),
+                $type == \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FOR_ME));
 
         $tabs->add_tab(
             new DynamicVisualTab(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FROM_ME,
+                \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FROM_ME,
                 Translation :: get('MyPublications'),
                 Theme :: getInstance()->getCommonImagePath('Treemenu/Publication'),
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FROM_ME)),
-                $type == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FROM_ME));
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FROM_ME)),
+                $type == \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FROM_ME));
         $content[] = $publication_renderer->as_html();
         $content[] = '<div class="clear"></div>';
 
@@ -240,10 +240,10 @@ class BrowserComponent extends Manager
         if (empty($this->publications))
         {
 
-            if ($this->get_publication_type() == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FROM_ME)
+            if ($this->get_publication_type() == \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FROM_ME)
             {
 
-                $publications_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_my_publications(
+                $publications_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_my_publications(
                     $this->get_location(),
                     $this->get_entities(),
                     $this->get_publication_conditions(),
@@ -252,9 +252,9 @@ class BrowserComponent extends Manager
                     $max_objects,
                     $this->get_user_id());
             }
-            elseif ($this->get_publication_type() == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_ALL)
+            elseif ($this->get_publication_type() == \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_ALL)
             {
-                $publications_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+                $publications_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
                     $this->get_publication_conditions(),
                     $object_table_order,
                     $offset,
@@ -262,7 +262,7 @@ class BrowserComponent extends Manager
             }
             else
             {
-                $publications_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications_with_view_right_granted_in_category_location(
+                $publications_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications_with_view_right_granted_in_category_location(
                     $this->get_location(),
                     $this->get_entities(),
                     $this->get_publication_conditions(),
@@ -290,22 +290,22 @@ class BrowserComponent extends Manager
      */
     public function get_publication_count()
     {
-        if ($this->get_publication_type() == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FROM_ME)
+        if ($this->get_publication_type() == \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FROM_ME)
         {
-            $count = \Chamilo\Application\Weblcms\Storage\DataManager :: count_my_publications(
+            $count = \Ehb\Application\Avilarts\Storage\DataManager :: count_my_publications(
                 $this->get_location(),
                 $this->get_entities(),
                 $this->get_publication_conditions(),
                 $this->get_user_id());
         }
-        elseif ($this->get_publication_type() == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_ALL)
+        elseif ($this->get_publication_type() == \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_ALL)
         {
-            $count = \Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications(
+            $count = \Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications(
                 $this->get_publication_conditions());
         }
         else
         {
-            $count = \Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications_with_view_right_granted_in_category_location(
+            $count = \Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications_with_view_right_granted_in_category_location(
                 $this->get_location(),
                 $this->get_entities(),
                 $this->get_publication_conditions(),
@@ -322,7 +322,7 @@ class BrowserComponent extends Manager
         if ($this->is_allowed(WeblcmsRights :: ADD_RIGHT))
         {
             $publish_type = PlatformSetting :: get('display_publication_screen', __NAMESPACE__);
-            if ($publish_type == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLISH_TYPE_BOTH)
+            if ($publish_type == \Ehb\Application\Avilarts\Tool\Manager :: PUBLISH_TYPE_BOTH)
             {
                 $action_bar->add_common_action(
                     new ToolbarItem(
@@ -330,15 +330,15 @@ class BrowserComponent extends Manager
                         Theme :: getInstance()->getCommonImagePath('Action/Publish'),
                         $this->get_url(
                             array(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_PUBLISH,
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLISH_MODE => \Chamilo\Application\Weblcms\Tool\Manager :: PUBLISH_MODE_QUICK)),
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_PUBLISH,
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLISH_MODE => \Ehb\Application\Avilarts\Tool\Manager :: PUBLISH_MODE_QUICK)),
                         ToolbarItem :: DISPLAY_ICON_AND_LABEL));
             }
 
             // added tool dependent publish button
             $tool_dependent_publish = PlatformSetting :: get('tool_dependent_publish_button', __NAMESPACE__);
 
-            if ($tool_dependent_publish == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLISH_INDEPENDENT)
+            if ($tool_dependent_publish == \Ehb\Application\Avilarts\Tool\Manager :: PUBLISH_INDEPENDENT)
             {
                 $action_bar->add_common_action(
                     new ToolbarItem(
@@ -346,7 +346,7 @@ class BrowserComponent extends Manager
                         Theme :: getInstance()->getCommonImagePath('Action/Publish'),
                         $this->get_url(
                             array(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_PUBLISH)),
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_PUBLISH)),
                         ToolbarItem :: DISPLAY_ICON_AND_LABEL));
             }
             else
@@ -360,12 +360,12 @@ class BrowserComponent extends Manager
                                 'TYPE' => Translation :: get(
                                     'TypeNameSingle',
                                     null,
-                                    'Chamilo\Application\Weblcms\Tool\Implementation\\' . $tool)),
+                                    'Ehb\Application\Avilarts\Tool\Implementation\\' . $tool)),
                             Utilities :: COMMON_LIBRARIES),
                         Theme :: getInstance()->getCommonImagePath('Action/Publish'),
                         $this->get_url(
                             array(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_PUBLISH)),
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_PUBLISH)),
                         ToolbarItem :: DISPLAY_ICON_AND_LABEL));
             }
         }
@@ -378,9 +378,9 @@ class BrowserComponent extends Manager
                     Theme :: getInstance()->getCommonImagePath('Action/Rights'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_EDIT_RIGHTS,
-                            \Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY => Request :: get(
-                                \Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY))),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_EDIT_RIGHTS,
+                            \Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY => Request :: get(
+                                \Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY))),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }
 
@@ -388,7 +388,7 @@ class BrowserComponent extends Manager
             new ToolbarItem(
                 Translation :: get('ShowAll', null, Utilities :: COMMON_LIBRARIES),
                 Theme :: getInstance()->getCommonImagePath('Action/Browser'),
-                $this->get_url(array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => null)),
+                $this->get_url(array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => null)),
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
 
         if ($this->is_course_admin && $this->get_parent() instanceof Categorizable)
@@ -399,7 +399,7 @@ class BrowserComponent extends Manager
                     Theme :: getInstance()->getCommonImagePath('Action/Category'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MANAGE_CATEGORIES)),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MANAGE_CATEGORIES)),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }
 
@@ -415,7 +415,7 @@ class BrowserComponent extends Manager
                     Theme :: getInstance()->getCommonImagePath('Action/Introduce'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_PUBLISH_INTRODUCTION)),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_PUBLISH_INTRODUCTION)),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }
 
@@ -439,7 +439,7 @@ class BrowserComponent extends Manager
                                 Utilities :: COMMON_LIBRARIES),
                         Theme :: getInstance()->getCommonImagePath('View/' . $browser_type),
                         $this->get_url(
-                            array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE => $browser_type)),
+                            array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE => $browser_type)),
                         ToolbarItem :: DISPLAY_ICON_AND_LABEL));
             }
         }
@@ -457,9 +457,9 @@ class BrowserComponent extends Manager
             // Begin with the publisher condition when FROM_ME and add the
             // remaining conditions. Skip the publisher
             // condition when ALL.
-            case \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FROM_ME :
-                $va_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_ID);
-                $course_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
+            case \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FROM_ME :
+                $va_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_ID);
+                $course_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
                 $user_id = Session :: get_user_id();
 
                 $publisher_id = (isset($va_id) && isset($course_id) && $course_id == $this->get_course_id()) ? $va_id : $user_id;
@@ -470,7 +470,7 @@ class BrowserComponent extends Manager
                         ContentObjectPublication :: PROPERTY_PUBLISHER_ID),
                     new StaticConditionVariable($publisher_id));
 
-            case \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_ALL :
+            case \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_ALL :
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(
                         ContentObjectPublication :: class_name(),
@@ -486,7 +486,7 @@ class BrowserComponent extends Manager
                         new StaticConditionVariable($this->get_tool_id()));
                 }
 
-                $category_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY);
+                $category_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY);
                 if (! $category_id)
                 {
                     $category_id = 0;
@@ -609,7 +609,7 @@ class BrowserComponent extends Manager
 
         $condition = new AndCondition($conditions);
 
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: count(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: count(
             ContentObjectPublicationCategory :: class_name(),
             $condition);
     }
@@ -636,7 +636,7 @@ class BrowserComponent extends Manager
 
         $condition = new AndCondition($conditions);
 
-        $objects = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $objects = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
             $condition);
 
@@ -645,16 +645,16 @@ class BrowserComponent extends Manager
 
     public function get_publication_type()
     {
-        $type = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE);
+        $type = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE);
         if (! $type)
         {
             if ($this->is_course_admin)
             {
-                $type = \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_ALL;
+                $type = \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_ALL;
             }
             else
             {
-                $type = \Chamilo\Application\Weblcms\Tool\Manager :: PUBLICATION_TYPE_FOR_ME;
+                $type = \Ehb\Application\Avilarts\Tool\Manager :: PUBLICATION_TYPE_FOR_ME;
             }
         }
 
@@ -683,7 +683,7 @@ class BrowserComponent extends Manager
 
     public function tool_category_has_new_publications($category_id)
     {
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: tool_category_has_new_publications(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: tool_category_has_new_publications(
             $this->get_tool_id(),
             $this->get_user(),
             $this->get_course(),

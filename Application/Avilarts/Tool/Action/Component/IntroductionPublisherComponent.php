@@ -36,8 +36,8 @@ class IntroductionPublisherComponent extends Manager implements \Chamilo\Core\Re
             $component = $factory->getComponent();
             $component->set_maximum_select(\Chamilo\Core\Repository\Viewer\Manager :: SELECT_SINGLE);
             $component->set_parameter(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION,
-                \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_PUBLISH_INTRODUCTION);
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
+                \Ehb\Application\Avilarts\Tool\Manager :: ACTION_PUBLISH_INTRODUCTION);
 
             return $component->run();
         }

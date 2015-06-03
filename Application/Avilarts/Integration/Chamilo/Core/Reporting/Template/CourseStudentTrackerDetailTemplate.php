@@ -27,8 +27,8 @@ class CourseStudentTrackerDetailTemplate extends ReportingTemplate
     {
         parent :: __construct($parent);
         
-        $user_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS, $user_id);
+        $user_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS);
+        $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_USERS, $user_id);
         
         $this->add_reporting_block(new UserInformationBlock($this));
         $this->add_reporting_block(new CourseUserAssignmentInformationBlock($this));

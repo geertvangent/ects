@@ -19,7 +19,7 @@ class EmailerComponent extends Manager
 
     public function run()
     {
-        $ids = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS);
+        $ids = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS);
 
         if (! is_array($ids))
         {
@@ -40,7 +40,7 @@ class EmailerComponent extends Manager
                 new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
             $component = $factory->getComponent();
             $component->set_target_users($users);
-            $component->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS, $ids);
+            $component->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_USERS, $ids);
             return $component->run();
         }
         else
@@ -51,15 +51,15 @@ class EmailerComponent extends Manager
 
     public function render_header($trail)
     {
-        $ids = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS);
+        $ids = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS);
 
-        $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS, null);
+        $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_USERS, null);
 
         $trail = BreadcrumbTrail :: get_instance();
 
         $trail->add(
             new Breadcrumb(
-                $this->get_url(array(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS => $ids)),
+                $this->get_url(array(\Ehb\Application\Avilarts\Manager :: PARAM_USERS => $ids)),
                 Translation :: get('EmailUsers')));
 
         return parent :: render_header();

@@ -5,7 +5,7 @@ use Chamilo\Libraries\Architecture\AjaxManager;
 
 /**
  *
- * @package Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Ajax
+ * @package Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Ajax
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>

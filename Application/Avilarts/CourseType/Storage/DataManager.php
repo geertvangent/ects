@@ -23,7 +23,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring from MDB2
  * @package application.weblcms.course_type
  */
-class DataManager extends \Chamilo\Application\Weblcms\Storage\DataManager
+class DataManager extends \Ehb\Application\Avilarts\Storage\DataManager
 {
     const PREFIX = 'weblcms_';
 
@@ -154,7 +154,7 @@ class DataManager extends \Chamilo\Application\Weblcms\Storage\DataManager
      */
     public static function has_course_type_courses($course_type_id = 0)
     {
-        return \Chamilo\Application\Weblcms\Course\Storage\DataManager :: count_courses_from_course_type(
+        return \Ehb\Application\Avilarts\Course\Storage\DataManager :: count_courses_from_course_type(
             $course_type_id) > 0;
     }
 

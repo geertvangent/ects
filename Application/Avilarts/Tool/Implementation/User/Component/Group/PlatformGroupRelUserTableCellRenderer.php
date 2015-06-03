@@ -41,7 +41,7 @@ class PlatformGroupRelUserTableCellRenderer extends DataClassTableCellRenderer i
 
         // always show details
         $parameters = array();
-        $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_USER_DETAILS;
+        $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_USER_DETAILS;
         $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
         $parameters[Manager :: PARAM_OBJECTS] = $groupreluser->get_user_id();
         $details_url = $this->get_component()->get_url($parameters);
@@ -66,7 +66,7 @@ class PlatformGroupRelUserTableCellRenderer extends DataClassTableCellRenderer i
 
             $params = array();
             $params[Manager :: PARAM_OBJECTS] = $groupreluser->get_user_id();
-            $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_REPORTING;
+            $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_REPORTING;
             $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
             $reporting_url = $this->get_component()->get_url($params);
 

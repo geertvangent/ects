@@ -80,14 +80,14 @@ class CourseUserExerciseInformationBlock extends ToolBlock
         }
 
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = Assessment :: get_type_name();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = Assessment :: get_type_name();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
 
         $params_detail = $this->get_parent()->get_parameters();
-        $params_detail[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = AssessmentAttemptsUserTemplate :: class_name();
+        $params_detail[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = AssessmentAttemptsUserTemplate :: class_name();
 
         $conditions = array();
         $conditions[] = new EqualityCondition(
@@ -102,13 +102,13 @@ class CourseUserExerciseInformationBlock extends ToolBlock
                 ContentObjectPublication :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($course_id));
         $condition = new AndCondition($conditions);
-        $publications_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+        $publications_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
             $condition);
 
         $key = 0;
         while ($publication = $publications_resultset->next_result())
         {
-            if (! \Chamilo\Application\Weblcms\Storage\DataManager :: is_publication_target_user(
+            if (! \Ehb\Application\Avilarts\Storage\DataManager :: is_publication_target_user(
                 $user_id,
                 $publication[ContentObjectPublication :: PROPERTY_ID]))
             {
@@ -128,12 +128,12 @@ class CourseUserExerciseInformationBlock extends ToolBlock
                     Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES) . ', ' .
                          Translation :: get('TimeNoSecFormat', null, Utilities :: COMMON_LIBRARIES),
                         $value['last']);
-                $params_detail[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
+                $params_detail[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
                 $link = '<a href="' . $this->get_parent()->get_url($params_detail) . '">' . $img . '</a>';
                 $count = $value['count'];
             }
 
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
 
             $content_object = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
                 ContentObject :: class_name(),

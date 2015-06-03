@@ -47,8 +47,8 @@ class UsersTrackingBlock extends CourseBlock
                 $course_summary_data[CourseVisit :: PROPERTY_TOTAL_TIME]);
 
             $params = $this->get_parent()->get_parameters();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = CourseStudentTrackerDetailTemplate :: class_name();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user[\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_ID];
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = CourseStudentTrackerDetailTemplate :: class_name();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user[\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_ID];
 
             $link = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
 

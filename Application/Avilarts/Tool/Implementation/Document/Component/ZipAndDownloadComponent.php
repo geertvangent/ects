@@ -48,14 +48,14 @@ class ZipAndDownloadComponent extends Manager
         $course_name = $this->get_course()->get_title();
         $this->zip_name = $course_name . ' - ' . Translation :: get("Document");
 
-        $category_id = $parent->get_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY);
+        $category_id = $parent->get_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY);
         if (! isset($category_id) || $category_id == 0 || strlen($category_id) == 0)
         {
             $category_id = 0;
         }
         else
         {
-            $category = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $category = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublicationCategory :: class_name(),
                 $category_id);
 
@@ -111,7 +111,7 @@ class ZipAndDownloadComponent extends Manager
 
                 $condition = new AndCondition($conditions);
 
-                $publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+                $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
                     $condition);
             }
             else
@@ -229,7 +229,7 @@ class ZipAndDownloadComponent extends Manager
 
         $condition = new AndCondition($conditions);
 
-        $categories = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $categories = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
             $condition);
 

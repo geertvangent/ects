@@ -66,8 +66,8 @@ class ContentObjectPublicationDescriptionRenderer extends ContentObjectDescripti
     {
         return $this->parent->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW_ATTACHMENT, 
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_OBJECT_ID => $attachment->get_id(), 
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication[ContentObjectPublication :: PROPERTY_ID]));
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW_ATTACHMENT, 
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_OBJECT_ID => $attachment->get_id(), 
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication[ContentObjectPublication :: PROPERTY_ID]));
     }
 }

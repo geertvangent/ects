@@ -121,7 +121,7 @@ class CourseSectionToolSelectorForm extends FormValidator
         $condition = new EqualityCondition(
             new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable(Request :: get('course')));
-        $course_sections = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(), 
             $condition);
         

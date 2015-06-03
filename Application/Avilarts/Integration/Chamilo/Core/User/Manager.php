@@ -23,7 +23,7 @@ class Manager implements UserInterface
         $table->setHeaderContents(1, 0, Translation :: get('CourseCode'));
         $table->setHeaderContents(1, 1, Translation :: get('CourseName'));
 
-        $courses = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_all_courses_from_user($user);
+        $courses = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_all_courses_from_user($user);
 
         if ($courses->size() == 0)
         {

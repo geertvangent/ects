@@ -34,7 +34,7 @@ class AssessmentUserInformationBlock extends AssessmentUsersBlock
         $user_id = Request :: get('users');
         $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(User :: class_name(), $user_id);
         
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $this->get_publication_id());
         

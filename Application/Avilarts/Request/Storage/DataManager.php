@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Storage;
 
-class DataManager extends \Chamilo\Application\Weblcms\Storage\DataManager
+class DataManager extends \Ehb\Application\Avilarts\Storage\DataManager
 {
 }
 ?>

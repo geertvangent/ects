@@ -5,7 +5,7 @@ use Chamilo\Core\Menu\Storage\DataClass\Item;
 
 /**
  *
- * @package Chamilo\Application\Weblcms\Integration\Chamilo\Core\Menu\Package
+ * @package Ehb\Application\Avilarts\Integration\Chamilo\Core\Menu\Package
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>

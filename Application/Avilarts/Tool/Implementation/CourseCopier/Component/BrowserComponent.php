@@ -50,7 +50,7 @@ class BrowserComponent extends Manager implements DelegateComponent
         $condition = new EqualityCondition(
             new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($this->get_course_id()));
-        $course_sections = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(),
             $condition);
 
@@ -72,7 +72,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                 ContentObjectPublication :: class_name(),
                 ContentObjectPublication :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($this->get_course_id()));
-        if (\Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications($condition) == 0 &&
+        if (\Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications($condition) == 0 &&
              ! $sections_founded)
         {
             throw new \Exception(Translation :: get('NoPublications'));
@@ -81,7 +81,7 @@ class BrowserComponent extends Manager implements DelegateComponent
         $condition = new EqualityCondition(
             new PropertyConditionVariable(CourseUserRelation :: class_name(), CourseUserRelation :: PROPERTY_STATUS),
             new StaticConditionVariable(1));
-        if (\Chamilo\Application\Weblcms\Storage\DataManager :: count(CourseUserRelation :: class_name(), $condition) <=
+        if (\Ehb\Application\Avilarts\Storage\DataManager :: count(CourseUserRelation :: class_name(), $condition) <=
              1)
         {
             throw new \Exception(Translation :: get('NoCoursesToCopy'));
@@ -97,7 +97,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             $course_ids = $values['course'];
             foreach ($course_ids as $course_id)
             {
-                $course = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_by_id(
+                $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_by_id(
                     Course :: class_name(),
                     $course_id);
                 if (! $course->is_course_admin($this->get_user()))
@@ -126,7 +126,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                         Translation :: get('CopySucceeded'),
                         false,
                         array(
-                            \Chamilo\Application\Weblcms\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_WEBLCMS_HOME));
+                            \Ehb\Application\Avilarts\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_WEBLCMS_HOME));
                 }
                 else
                 {
@@ -172,7 +172,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_ID),
             $course_section_ids);
 
-        $course_sections = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(),
             $condition);
 
@@ -200,16 +200,16 @@ class BrowserComponent extends Manager implements DelegateComponent
         $publication_ids = array_keys($values['publications']);
         foreach ($publication_ids as $id)
         {
-            $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(),
                 $id);
 
-            $possible_publication_class = 'Chamilo\Application\Weblcms\Tool\Implementation\\' . $publication->get_tool() .
+            $possible_publication_class = 'Ehb\Application\Avilarts\Tool\Implementation\\' . $publication->get_tool() .
                  '\Storage\DataClass\Publication';
 
             if (class_exists($possible_publication_class))
             {
-                $datamanager_class = 'Chamilo\Application\Weblcms\Tool\Implementation\\' . $publication->get_tool() .
+                $datamanager_class = 'Ehb\Application\Avilarts\Tool\Implementation\\' . $publication->get_tool() .
                      '\Storage\DataManager';
 
                 $publication_extension = $datamanager_class :: retrieve(
@@ -287,7 +287,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                 ContentObjectPublicationCategory :: class_name(),
                 ContentObjectPublicationCategory :: PROPERTY_DISPLAY_ORDER));
 
-        $categories = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $categories = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
             new DataClassRetrievesParameters($condition, null, null, $order_by));
 

@@ -93,7 +93,7 @@ class WeblcmsBookmarkDisplay extends NewBlock
         $conditions = array();
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Bookmark :: class_name(), Bookmark :: PROPERTY_APPLICATION), 
-            new StaticConditionVariable(\Chamilo\Application\Weblcms\Manager :: APPLICATION_NAME));
+            new StaticConditionVariable(\Ehb\Application\Avilarts\Manager :: APPLICATION_NAME));
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_OWNER_ID), 
             new StaticConditionVariable(Session :: get_user_id()));

@@ -97,7 +97,7 @@ class CourseTypeCourseListRenderer extends CourseListRenderer
      */
     protected function retrieve_course_types()
     {
-        return \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_active_course_types_with_user_order(
+        return \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_active_course_types_with_user_order(
             $this->get_parent()->get_user_id());
     }
 
@@ -505,7 +505,7 @@ class CourseTypeCourseListRenderer extends CourseListRenderer
 
             if ($selected_course_type_id > 0)
             {
-                $course_type = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_by_id(
+                $course_type = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_by_id(
                     CourseType :: class_name(),
                     $selected_course_type_id);
 

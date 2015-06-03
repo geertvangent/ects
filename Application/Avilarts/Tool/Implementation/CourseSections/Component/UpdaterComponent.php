@@ -33,7 +33,7 @@ class UpdaterComponent extends Manager
         $id = Request :: get(self :: PARAM_COURSE_SECTION_ID);
         if (! empty($id))
         {
-            $course_section = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $course_section = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 CourseSection :: class_name(),
                 (int) $id);
 
@@ -59,13 +59,13 @@ class UpdaterComponent extends Manager
                     new Breadcrumb(
                         $this->get_url(
                             array(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_VIEW_COURSE_SECTIONS)),
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_VIEW_COURSE_SECTIONS)),
                         $course_section->get_name()));
                 $trail->add(
                     new Breadcrumb(
                         $this->get_url(
                             array(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_UPDATE_COURSE_SECTION,
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_UPDATE_COURSE_SECTION,
                                 self :: PARAM_COURSE_SECTION_ID => $id)),
                         Translation :: get('Update', null, Utilities :: COMMON_LIBRARIES)));
 

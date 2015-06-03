@@ -23,9 +23,9 @@ class ComplexBuilderComponent extends Manager
 
     public function run()
     {
-        $pid = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+        $pid = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
 
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $pid);
 
@@ -45,16 +45,18 @@ class ComplexBuilderComponent extends Manager
             $this->redirect(
                 Translation :: get("NotAllowed"),
                 '',
-                array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
+                array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
         }
         else
         {
             $this->content_object = $publication->get_content_object();
-            $this->set_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID, $pid);
+            $this->set_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID, $pid);
 
             $context = $this->content_object->package() . '\Builder';
 
-            $application_factory = new ApplicationFactory($context, new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
+            $application_factory = new ApplicationFactory(
+                $context,
+                new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
             return $application_factory->run();
         }
     }

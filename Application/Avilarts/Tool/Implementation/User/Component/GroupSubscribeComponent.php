@@ -111,8 +111,8 @@ class GroupSubscribeComponent extends Manager
                     Translation :: get($message),
                     ($success ? false : true),
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_GROUP_BROWSER,
-                        \Chamilo\Application\Weblcms\Manager :: PARAM_GROUP => $parent_group_id));
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_GROUP_BROWSER,
+                        \Ehb\Application\Avilarts\Manager :: PARAM_GROUP => $parent_group_id));
             }
             else
             {

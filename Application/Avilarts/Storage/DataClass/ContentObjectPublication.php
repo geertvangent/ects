@@ -622,7 +622,7 @@ class ContentObjectPublication extends DataClass implements DisplayOrderDataClas
         $body .= $content_object->get_description();
         $body .= '--<br />';
         $body .= $user->get_fullname() . ' - ' . $course->get_visual_code() . ' - ' . $course->get_title() . ' - ' .
-             Translation :: get('TypeName', null, 'Chamilo\Application\Weblcms\Tool\Implementation\\' . $tool);
+             Translation :: get('TypeName', null, 'Ehb\Application\Avilarts\Tool\Implementation\\' . $tool);
 
         // get targets
         $target_email = array();
@@ -781,8 +781,8 @@ class ContentObjectPublication extends DataClass implements DisplayOrderDataClas
         $params[Manager :: PARAM_ACTION] = Manager :: ACTION_VIEW_COURSE;
         $params[Manager :: PARAM_COURSE] = $this->get_course_id();
         $params[Manager :: PARAM_TOOL] = $this->get_tool();
-        $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
-        $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $this->get_id();
+        $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
+        $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $this->get_id();
 
         $redirect = new Redirect($params);
         return $redirect->getUrl();

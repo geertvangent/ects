@@ -32,13 +32,13 @@ class AttachmentViewerComponent extends Manager
         $error_message = '';
 
         // retrieve the publication
-        $publication_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+        $publication_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
 
         if (is_null($publication_id))
         {
-            throw new ParameterNotDefinedException(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+            throw new ParameterNotDefinedException(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
         }
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $publication_id);
 
@@ -123,7 +123,7 @@ class AttachmentViewerComponent extends Manager
     public function get_additional_parameters()
     {
         $params = array();
-        $params[] = \Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION;
+        $params[] = \Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION;
         return $params;
     }
 }

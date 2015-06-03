@@ -109,7 +109,7 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
         // all tab
         $link = $this->get_url(
             array(self :: PARAM_TAB => self :: TAB_ALL),
-            array(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP));
+            array(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP));
         $tab_name = Translation :: get('AllSubscriptions');
 
         $this->tabs->add_tab(
@@ -123,7 +123,7 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
         // users tab
         $link = $this->get_url(
             array(self :: PARAM_TAB => self :: TAB_USERS),
-            array(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP));
+            array(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP));
         $tab_name = Translation :: get('DirectSubscriptions');
 
         $this->tabs->add_tab(
@@ -371,7 +371,7 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
 
     public function get_group()
     {
-        $group = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+        $group = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
         if (! $group)
         {
             return self :: PLATFORM_GROUP_ROOT_ID;
@@ -385,10 +385,10 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
 
         $parameters = array();
 
-        $group_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+        $group_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
         if (isset($group_id))
         {
-            $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP] = $group_id;
+            $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_GROUP] = $group_id;
         }
 
         if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
@@ -397,7 +397,7 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
                 new ToolbarItem(
                     Translation :: get('SubscribeUsers'),
                     Theme :: getInstance()->getImagePath(
-                        'Chamilo\Application\Weblcms\Tool\Implementation\User',
+                        'Ehb\Application\Avilarts\Tool\Implementation\User',
                         'Action/SubscribeUser'),
                     $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_USER_BROWSER)),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
@@ -406,13 +406,13 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
                 new ToolbarItem(
                     Translation :: get('SubscribeGroups'),
                     Theme :: getInstance()->getImagePath(
-                        'Chamilo\Application\Weblcms\Tool\Implementation\User',
+                        'Ehb\Application\Avilarts\Tool\Implementation\User',
                         'Action/SubscribeGroup'),
                     $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_GROUP_BROWSER)),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
 
             $param_export_subscriptions_overview = array();
-            $param_export_subscriptions_overview[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = self :: ACTION_EXPORT;
+            $param_export_subscriptions_overview[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = self :: ACTION_EXPORT;
 
             $action_bar->add_tool_action(
                 new ToolbarItem(
@@ -468,14 +468,14 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
             {
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
-                    new StaticConditionVariable(Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP)));
+                    new StaticConditionVariable(Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP)));
             }
         }
         elseif ($this->current_tab == self :: TAB_PLATFORM_GROUPS_USERS)
         {
             $conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
-                new StaticConditionVariable(Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP)));
+                new StaticConditionVariable(Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP)));
         }
         if ($conditions)
         {
@@ -541,7 +541,7 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
 
         if ($current_tab != self :: TAB_ALL && $current_tab != self :: TAB_USERS)
         {
-            $parameters[] = \Chamilo\Application\Weblcms\Manager :: PARAM_GROUP;
+            $parameters[] = \Ehb\Application\Avilarts\Manager :: PARAM_GROUP;
         }
 
         return $parameters;

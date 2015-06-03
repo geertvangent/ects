@@ -20,7 +20,7 @@ class AssessmentQuestionInformationBlock extends AssessmentQuestionsBlock
     public function count_data()
     {
         $question_cid = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
+            \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
         $complex_question = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
             ComplexContentObjectItem :: class_name(),
             $question_cid);
@@ -33,7 +33,7 @@ class AssessmentQuestionInformationBlock extends AssessmentQuestionsBlock
 
         $reporting_data->set_categories($categories);
 
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $this->get_publication_id());
 

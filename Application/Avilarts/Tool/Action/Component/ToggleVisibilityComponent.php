@@ -17,13 +17,13 @@ class ToggleVisibilityComponent extends Manager
 
     public function run()
     {
-        if (Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID))
+        if (Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID))
         {
-            $publication_ids = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+            $publication_ids = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
         }
         else
         {
-            $publication_ids = $_POST[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID];
+            $publication_ids = $_POST[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID];
         }
 
         if (isset($publication_ids))
@@ -37,7 +37,7 @@ class ToggleVisibilityComponent extends Manager
 
             foreach ($publication_ids as $pid)
             {
-                $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                     ContentObjectPublication :: class_name(),
                     $pid);
 
@@ -77,7 +77,7 @@ class ToggleVisibilityComponent extends Manager
             $params['tool_action'] = null;
             if (Request :: get('details') == 1)
             {
-                $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $pid;
+                $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $pid;
                 $params['tool_action'] = 'view';
             }
 

@@ -9,7 +9,7 @@ use Chamilo\Libraries\Platform\Translation;
 /**
  * Ajax backing to retrieve details of a course group.
  */
-class GetCourseGroupComponent extends \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Ajax\Manager
+class GetCourseGroupComponent extends \Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Ajax\Manager
 {
     const PARAM_COURSE_GROUP_ID = 'course_group_id';
     const PROPERTY_COURSE_GROUP = 'course_group';

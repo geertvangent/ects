@@ -129,7 +129,7 @@ class CourseUserRelationForm extends FormValidator
         
         $condition = new AndCondition($conditions);
         
-        $course_user_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $course_user_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(), 
             new DataClassRetrievesParameters(
                 $condition, 

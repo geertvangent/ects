@@ -10,7 +10,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSections;
 /**
  * This tool allows a user to publish course_sectionss in his or her course.
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {
     const ACTION_VIEW_COURSE_SECTIONS = 'Viewer';
     const ACTION_CREATE_COURSE_SECTION = 'Creator';

@@ -13,7 +13,7 @@ use Chamilo\Libraries\Architecture\Interfaces\Categorizable;
 /**
  * This tool allows a user to publish announcements in his or her course.
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager implements Categorizable
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager implements Categorizable
 {
 
     public function get_available_browser_types()

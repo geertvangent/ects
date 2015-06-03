@@ -8,12 +8,12 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  *
- * @package Chamilo\Application\Weblcms\Ajax\Component
+ * @package Ehb\Application\Avilarts\Ajax\Component
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class BlockSortComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
+class BlockSortComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {
 
     function unserialize_jquery($jquery)

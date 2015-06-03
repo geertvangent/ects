@@ -13,7 +13,7 @@ use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface
 /**
  * This tool allows a course_group to publish course_groups in his or her course.
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {
     const TOOL_NAME = 'course_group';
     const PARAM_COURSE_GROUP_ACTION = 'tool_action';
@@ -49,7 +49,7 @@ abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
     {
         $course_group_id = Request :: get(self :: PARAM_COURSE_GROUP);
 
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             CourseGroup :: class_name(),
             $course_group_id);
     }

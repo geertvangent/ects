@@ -20,7 +20,7 @@ class WikiMostEditedPageBlock extends ToolBlock
         $reporting_data = new ReportingData();
         $reporting_data->set_rows(array(Translation :: get('MostEditedPage'), Translation :: get('NumberOfEdits')));
 
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $this->get_publication_id());
 
@@ -56,10 +56,10 @@ class WikiMostEditedPageBlock extends ToolBlock
                 }
             }
 
-            $url = 'index.php?go=' . \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE . '&course=' .
+            $url = 'index.php?go=' . \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE . '&course=' .
                  $this->get_course_id() . '&tool=' . $this->get_tool() . '&application=weblcms&' .
-                 \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID . '=' . $this->get_publication_id() .
-                 '&tool_action=' . \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW .
+                 \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID . '=' . $this->get_publication_id() .
+                 '&tool_action=' . \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW .
                  '&display_action=view_item&selected_cloi=' . $most_edited_page->get_id();
 
             $reporting_data->add_category(0);

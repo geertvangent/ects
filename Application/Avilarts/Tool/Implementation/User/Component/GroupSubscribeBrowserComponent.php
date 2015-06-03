@@ -103,7 +103,7 @@ class GroupSubscribeBrowserComponent extends Manager implements TableSupport
     {
         if (! $this->group)
         {
-            $this->group = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+            $this->group = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
 
             if (! $this->group)
             {
@@ -161,7 +161,7 @@ class GroupSubscribeBrowserComponent extends Manager implements TableSupport
 
     public function get_additional_parameters()
     {
-        return array(self :: PARAM_TAB, \Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+        return array(self :: PARAM_TAB, \Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
     }
 
     public function get_table_condition($table_class_name)

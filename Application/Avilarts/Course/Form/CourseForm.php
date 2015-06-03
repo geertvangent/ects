@@ -59,7 +59,7 @@ class CourseForm extends CommonCourseForm
         $this->addElement(
             'html',
             ResourceManager :: get_instance()->get_resource_html(
-                Path :: getInstance()->getJavascriptPath('Chamilo\Application\Weblcms\Course', true) . 'CourseForm.js'));
+                Path :: getInstance()->getJavascriptPath('Ehb\Application\Avilarts\Course', true) . 'CourseForm.js'));
     }
 
     /**
@@ -71,14 +71,14 @@ class CourseForm extends CommonCourseForm
 
         $course_type_options[- 1] = '-- ' . Translation :: get('SelectCourseType') . ' --';
 
-        if (PlatformSetting :: get('allow_course_creation_without_coursetype', 'Chamilo\Application\Weblcms'))
+        if (PlatformSetting :: get('allow_course_creation_without_coursetype', 'Ehb\Application\Avilarts'))
         {
             $course_type_options[0] = Translation :: get('NoCourseType');
         }
 
         $course_management_rights = CourseManagementRights :: get_instance();
 
-        $course_types = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_active_course_types();
+        $course_types = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_active_course_types();
         while ($course_type = $course_types->next_result())
         {
             if ($this->get_base_object()->get_course_type_id() == $course_type->get_id() || $course_management_rights->is_allowed(

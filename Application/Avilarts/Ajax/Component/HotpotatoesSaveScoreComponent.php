@@ -8,7 +8,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 
-class HotpotatoesSaveScoreComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
+class HotpotatoesSaveScoreComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {
 
     public function run()
@@ -16,11 +16,11 @@ class HotpotatoesSaveScoreComponent extends \Chamilo\Application\Weblcms\Ajax\Ma
         $id = Request :: post('id');
         $score = Request :: post('score');
 
-        $dummy = new \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt();
+        $dummy = new \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt();
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: class_name(),
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: PROPERTY_ID),
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: class_name(),
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: PROPERTY_ID),
             new StaticConditionVariable($id));
 
         $trackers = $dummy->retrieve_tracker_items($condition);

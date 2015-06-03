@@ -14,7 +14,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
 
-class XmlCourseUserFeedComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
+class XmlCourseUserFeedComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {
 
     public function run()
@@ -76,7 +76,7 @@ class XmlCourseUserFeedComponent extends \Chamilo\Application\Weblcms\Ajax\Manag
             new PropertyConditionVariable(CourseUserRelation :: class_name(), CourseUserRelation :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($course_id));
 
-        $course_user_relation_result_set = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $course_user_relation_result_set = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(),
             $relation_condition);
 
@@ -91,7 +91,7 @@ class XmlCourseUserFeedComponent extends \Chamilo\Application\Weblcms\Ajax\Manag
             new PropertyConditionVariable(CourseGroupRelation :: class_name(), CourseGroupRelation :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($course_id));
 
-        $course_group_relations = $course_group_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $course_group_relations = $course_group_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseGroupRelation :: class_name(),
             $relation_condition);
 

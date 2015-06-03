@@ -198,7 +198,7 @@ class CourseSetting extends DataClass
      * 
      * @param $course_tool \application\weblcms\CourseTool
      */
-    public function set_course_tool(\Chamilo\Application\Weblcms\CourseType\Storage\DataClass\CourseType $course_tool)
+    public function set_course_tool(\Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType $course_tool)
     {
         $this->set_foreign_property(self :: FOREIGN_PROPERTY_TOOL, $course_tool);
     }

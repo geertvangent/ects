@@ -28,7 +28,7 @@ class UnsubscribedGroupTable extends DataClassTable implements TableFormActionsS
             $actions->add_form_action(
                 new TableFormAction(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_SUBSCRIBE_GROUPS), 
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_SUBSCRIBE_GROUPS), 
                     Translation :: get('SubscribeSelectedGroups'), 
                     false));
             

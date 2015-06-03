@@ -23,8 +23,8 @@ class MoverComponent extends Manager
      */
     public function run()
     {
-        $publication_id = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication_id = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $publication_id);
         
@@ -44,10 +44,10 @@ class MoverComponent extends Manager
             $message, 
             false, 
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => null, 
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE => Request :: get(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE), 
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => Request :: get(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE)));
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => null, 
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE => Request :: get(
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE), 
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => Request :: get(
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE)));
     }
 }

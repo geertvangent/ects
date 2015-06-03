@@ -18,8 +18,8 @@ class DownloaderComponent extends Manager
 
     public function run()
     {
-        $publication_id = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication_id = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $publication_id);
         
@@ -30,8 +30,8 @@ class DownloaderComponent extends Manager
                 true, 
                 array(), 
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION, 
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION, 
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID));
         }
         
         $document = $publication->get_content_object();

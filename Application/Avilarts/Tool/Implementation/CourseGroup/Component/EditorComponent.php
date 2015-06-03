@@ -43,7 +43,7 @@ class EditorComponent extends Manager implements DelegateComponent
             $course_group,
             $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_EDIT_COURSE_GROUP,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_EDIT_COURSE_GROUP,
                     self :: PARAM_COURSE_GROUP => $course_group_id)));
         if ($form->validate())
         {
@@ -68,7 +68,7 @@ class EditorComponent extends Manager implements DelegateComponent
                 $message,
                 ! $succes,
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_VIEW_GROUPS,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_VIEW_GROUPS,
                     self :: PARAM_COURSE_GROUP => $course_group->get_parent_id()));
         }
         else

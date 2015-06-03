@@ -32,14 +32,14 @@ class LearningPathAttemptProgressTemplate extends ReportingTemplate
         
         if ($this->tool == 'reporting')
         {
-            $lp = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $lp = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(), 
                 $this->publication_id)->get_content_object();
             
             $params = array();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = LearningPathAttemptsTemplate :: class_name();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = null;
-            $params[\Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID] = null;
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = LearningPathAttemptsTemplate :: class_name();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = null;
+            $params[\Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID] = null;
             
             $custom_breadcrumbs = array();
             $custom_breadcrumbs[] = new Breadcrumb($this->get_url($params), $lp->get_title());
@@ -63,25 +63,25 @@ class LearningPathAttemptProgressTemplate extends ReportingTemplate
 
     private function initialize_parameters()
     {
-        $this->publication_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
-        $this->user_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS);
-        $this->tool = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL);
-        $course_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
+        $this->publication_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
+        $this->user_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS);
+        $this->tool = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_TOOL);
+        $course_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
         if ($course_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE, $course_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE, $course_id);
         }
         
-        $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL, $this->tool);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS, $this->user_id);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID, $this->publication_id);
+        $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_TOOL, $this->tool);
+        $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_USERS, $this->user_id);
+        $this->set_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID, $this->publication_id);
         
         $attempt_id = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID);
+            \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID);
         if ($attempt_id)
         {
             $this->set_parameter(
-                \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID, 
+                \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID, 
                 $attempt_id);
         }
         else

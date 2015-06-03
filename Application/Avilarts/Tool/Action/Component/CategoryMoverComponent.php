@@ -42,7 +42,7 @@ class CategoryMoverComponent extends Manager
                 return implode(PHP_EOL, $html);
             }
 
-            $publication_ids = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+            $publication_ids = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
 
             if (! is_array($publication_ids))
             {
@@ -59,7 +59,7 @@ class CategoryMoverComponent extends Manager
 
                 foreach ($publication_ids as $publication_id)
                 {
-                    $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                    $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                         ContentObjectPublication :: class_name(),
                         $publication_id);
                     $publication->set_category_id($form->exportValue('category'));
@@ -77,7 +77,7 @@ class CategoryMoverComponent extends Manager
                         $condition = new EqualityCondition(
                             new PropertyConditionVariable(CourseTool :: class_name(), CourseTool :: PROPERTY_NAME),
                             new StaticConditionVariable($publication->get_tool()));
-                        $course_modules = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+                        $course_modules = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
                             CourseTool :: class_name(),
                             $condition)->as_array();
 
@@ -117,7 +117,7 @@ class CategoryMoverComponent extends Manager
                     false,
                     array(
                         'tool_action' => null,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => null));
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null));
             }
             else
             {
@@ -130,7 +130,7 @@ class CategoryMoverComponent extends Manager
                 }
                 else
                 {
-                    $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                    $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                         ContentObjectPublication :: class_name(),
                         $publication_ids[0]);
 
@@ -157,7 +157,7 @@ class CategoryMoverComponent extends Manager
 
     public function build_move_to_category_form()
     {
-        $publication_ids = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+        $publication_ids = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
         if (! is_array($publication_ids))
         {
             $publication_ids = array($publication_ids);
@@ -165,7 +165,7 @@ class CategoryMoverComponent extends Manager
 
         if (count($publication_ids) > 0)
         {
-            $pub = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $pub = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(),
                 $publication_ids[0]);
             if ($pub)
@@ -176,7 +176,7 @@ class CategoryMoverComponent extends Manager
 
                 if ($cat != 0)
                 {
-                    $module = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_course_tool_by_name(
+                    $module = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_course_tool_by_name(
                         $this->get_tool_id());
 
                     if ($is_course_admin || WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
@@ -196,7 +196,7 @@ class CategoryMoverComponent extends Manager
                         Translation :: get('NoCategoriesAvailable'),
                         true,
                         null,
-                        array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION));
+                        array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION));
                 }
 
                 $form = new FormValidator(
@@ -204,12 +204,12 @@ class CategoryMoverComponent extends Manager
                     'post',
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MOVE_TO_CATEGORY,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => Request :: get(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID))));
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MOVE_TO_CATEGORY,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => Request :: get(
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID))));
                 foreach ($publication_ids as $publication_id)
                 {
-                    $publications[] = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                    $publications[] = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                         ContentObjectPublication :: class_name(),
                         $publication_id)->get_content_object()->get_title();
                 }
@@ -286,7 +286,7 @@ class CategoryMoverComponent extends Manager
 
         $condition = new AndCondition($conditions);
 
-        $categories = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $categories = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
             $condition);
 

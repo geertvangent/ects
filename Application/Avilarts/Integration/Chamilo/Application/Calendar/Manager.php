@@ -26,13 +26,13 @@ class Manager implements CalendarInterface
     public function get_events(\Chamilo\Libraries\Calendar\Renderer\Renderer $renderer, $from_date, $to_date)
     {
         $condition = $this->get_conditions($renderer->get_user());
-        $publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(),
             $condition);
         $result = array();
         while ($publication = $publications->next_result())
         {
-            $course = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $course = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 Course :: class_name(),
                 $publication->get_course_id());
             if (! WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
@@ -52,23 +52,23 @@ class Manager implements CalendarInterface
             foreach ($parsed_events as &$parsed_event)
             {
                 $parameters = array();
-                $parameters[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-                $parameters[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
-                $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE] = ContentObjectPublicationListRenderer :: TYPE_CALENDAR;
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $publication->get_course_id();
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = $publication->get_tool();
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication->get_id();
+                $parameters[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+                $parameters[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
+                $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE] = ContentObjectPublicationListRenderer :: TYPE_CALENDAR;
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $publication->get_course_id();
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = $publication->get_tool();
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication->get_id();
 
                 $redirect = new Redirect($parameters);
                 $link = $redirect->getUrl();
 
                 $parsed_event->set_url($link);
                 $parsed_event->set_source(
-                    Translation :: get('Course', null, \Chamilo\Application\Weblcms\Manager :: context()) . ' - ' .
+                    Translation :: get('Course', null, \Ehb\Application\Avilarts\Manager :: context()) . ' - ' .
                          $course->get_title());
                 $parsed_event->set_id($publication->get_id());
-                $parsed_event->set_context(\Chamilo\Application\Weblcms\Manager :: context());
+                $parsed_event->set_context(\Ehb\Application\Avilarts\Manager :: context());
                 $parsed_event->set_course_id($publication->get_course_id());
                 $result[] = $parsed_event;
             }
@@ -78,7 +78,7 @@ class Manager implements CalendarInterface
 
     public function get_conditions($user)
     {
-        $user_courses = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_all_courses_from_user($user);
+        $user_courses = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_all_courses_from_user($user);
         $course_ids = array();
         while ($course = $user_courses->next_result())
         {

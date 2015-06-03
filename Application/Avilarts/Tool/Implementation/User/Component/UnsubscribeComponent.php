@@ -75,7 +75,7 @@ class UnsubscribeComponent extends Manager
                         $parameters[UserStatusChange :: PROPERTY_DATE] = time();
                         Event :: trigger(
                             'user_status_change',
-                            \Chamilo\Application\Weblcms\Manager :: context(),
+                            \Ehb\Application\Avilarts\Manager :: context(),
                             $parameters);
                     }
 

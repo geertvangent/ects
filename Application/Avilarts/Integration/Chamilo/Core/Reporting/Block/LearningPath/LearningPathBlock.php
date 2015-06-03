@@ -57,7 +57,7 @@ class LearningPathBlock extends CourseBlock
                 ContentObjectPublication :: PROPERTY_TOOL),
             new StaticConditionVariable($tool));
         $condition = new AndCondition($conditions);
-        $pub_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+        $pub_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
             $condition);
 
         while ($pub = $pub_resultset->next_result())
@@ -84,17 +84,17 @@ class LearningPathBlock extends CourseBlock
             }
 
             $params = $this->get_parent()->get_parameters();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = LearningPathAttemptsTemplate :: class_name();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $pub[ContentObjectPublication :: PROPERTY_ID];
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = LearningPathAttemptsTemplate :: class_name();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $pub[ContentObjectPublication :: PROPERTY_ID];
             $link = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
 
             $params = array();
-            $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-            $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = $tool;
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $pub[ContentObjectPublication :: PROPERTY_ID];
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
+            $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+            $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = $tool;
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $pub[ContentObjectPublication :: PROPERTY_ID];
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
 
             $redirect = new Redirect($params);
             $url_title = $redirect->getUrl();

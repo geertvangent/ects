@@ -32,10 +32,10 @@ class AssessmentAttemptsTemplate extends ReportingTemplate
     {
         parent :: __construct($parent);
         
-        $this->publication_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+        $this->publication_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
         if ($this->publication_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION, $this->publication_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION, $this->publication_id);
         }
         
         $sel = (Request :: post('sel')) ? Request :: post('sel') : Request :: get('sel');
@@ -45,7 +45,7 @@ class AssessmentAttemptsTemplate extends ReportingTemplate
         }
         
         // Retrieve the questions of the assessment
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $this->publication_id);
         $condition = new EqualityCondition(
@@ -76,7 +76,7 @@ class AssessmentAttemptsTemplate extends ReportingTemplate
      */
     protected function add_breadcrumbs()
     {
-        $assessment = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $assessment = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $this->publication_id)->get_content_object();
         
@@ -86,7 +86,7 @@ class AssessmentAttemptsTemplate extends ReportingTemplate
             new Breadcrumb(
                 $this->get_url(
                     array(\Chamilo\Core\Reporting\Viewer\Manager :: PARAM_BLOCK_ID => 2), 
-                    array(\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID)), 
+                    array(\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID)), 
                 Translation :: get('Assessments')));
         
         $trail->add(new Breadcrumb($this->get_url(), $assessment->get_title()));

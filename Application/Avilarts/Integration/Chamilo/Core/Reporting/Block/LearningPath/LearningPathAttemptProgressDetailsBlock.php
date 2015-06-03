@@ -26,12 +26,12 @@ class LearningPathAttemptProgressDetailsBlock extends ToolBlock
     public function get_attempt_id()
     {
         return $this->get_parent()->get_parameter(
-            \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID);
+            \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID);
     }
 
     public function get_parent_id()
     {
-        return $this->get_parent()->get_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_COMPLEX_ID);
+        return $this->get_parent()->get_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_COMPLEX_ID);
     }
 
     public function count_data()
@@ -43,8 +43,8 @@ class LearningPathAttemptProgressDetailsBlock extends ToolBlock
                 Translation :: get('Status'),
                 Translation :: get('Score'),
                 Translation :: get('Time')));
-        if ($this->get_parent()->get_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION) ==
-             \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS)
+        if ($this->get_parent()->get_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION) ==
+             \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS)
         {
             $reporting_data->add_row(Translation :: get('Action'));
         }
@@ -91,13 +91,13 @@ class LearningPathAttemptProgressDetailsBlock extends ToolBlock
                 Translation :: get('Time'),
                 DatetimeUtilities :: format_seconds_to_hours($tracker->get_total_time()));
 
-            if ($this->get_parent()->get_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION) ==
-                 \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS)
+            if ($this->get_parent()->get_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION) ==
+                 \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS)
             {
                 $params = $this->get_parent()->get_parameters();
-                $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-                $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-                $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS;
+                $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+                $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+                $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS;
                 $params[StatisticsViewerComponent :: PARAM_STAT] = StatisticsViewerComponent :: ACTION_DELETE_LPI_ATTEMPT;
                 $params[StatisticsViewerComponent :: PARAM_DELETE_ID] = $tracker->get_id();
 
@@ -152,7 +152,7 @@ class LearningPathAttemptProgressDetailsBlock extends ToolBlock
         {
             $pid = $this->get_publication_id();
 
-            $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve(
+            $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve(
                 ContentObjectPublication :: class_name(),
                 $pid);
 

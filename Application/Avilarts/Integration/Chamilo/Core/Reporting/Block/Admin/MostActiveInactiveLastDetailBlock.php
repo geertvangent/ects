@@ -31,7 +31,7 @@ class MostActiveInactiveLastDetailBlock extends CourseBlock
                     ContentObjectPublication :: class_name(), 
                     ContentObjectPublication :: PROPERTY_COURSE_ID), 
                 new StaticConditionVariable($course->get_id()));
-            $publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+            $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
                 $condition);
             
             while ($publication = $publications->next_result())

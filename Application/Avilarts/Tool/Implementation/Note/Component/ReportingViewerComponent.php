@@ -17,24 +17,24 @@ class ReportingViewerComponent extends Manager implements DelegateComponent
             new Breadcrumb(
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_BROWSE)),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_BROWSE)),
                 Translation :: get('NoteToolBrowserComponent')));
 
         $breadcrumbtrail->add(
             new Breadcrumb(
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => Request :: get(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID))),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW,
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => Request :: get(
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID))),
                 Translation :: get('NoteToolViewerComponent')));
     }
 
     public function get_additional_parameters()
     {
         return array(
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID,
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_COMPLEX_ID,
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_TEMPLATE_NAME);
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID,
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_COMPLEX_ID,
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_TEMPLATE_NAME);
     }
 }

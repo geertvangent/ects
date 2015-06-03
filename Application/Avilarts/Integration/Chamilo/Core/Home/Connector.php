@@ -129,7 +129,7 @@ class Connector
             CourseTypeUserCategory :: get_table_name(), 
             $subcondition);
         
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseUserCategory :: class_name(), 
             $condition);
     }

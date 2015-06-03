@@ -16,7 +16,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 /**
  * This tool allows a user to publish users in his or her course.
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {
     const ACTION_SUBSCRIBE_USER_BROWSER = 'SubscribeBrowser';
     const ACTION_SUBSCRIBE_GROUP_BROWSER = 'GroupSubscribeBrowser';
@@ -101,7 +101,7 @@ abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
             new PropertyConditionVariable(CourseGroupRelation :: class_name(), CourseGroupRelation :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($course_id));
 
-        $relations = $course_group_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $relations = $course_group_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseGroupRelation :: class_name(),
             $condition);
 

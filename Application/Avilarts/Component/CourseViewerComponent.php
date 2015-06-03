@@ -98,7 +98,7 @@ class CourseViewerComponent extends Manager implements DelegateComponent
             $breadcrumbtrail->add(
                 new Breadcrumb(
                     $this->get_url(),
-                    Translation :: get('TypeName', null, 'Chamilo\Application\Weblcms\Tool\Implementation\\' . $tool)));
+                    Translation :: get('TypeName', null, 'Ehb\Application\Avilarts\Tool\Implementation\\' . $tool)));
         }
 
         Event :: trigger(
@@ -110,10 +110,10 @@ class CourseViewerComponent extends Manager implements DelegateComponent
                 CourseVisit :: PROPERTY_TOOL_ID => $this->course_tool_registration->get_id(),
                 CourseVisit :: PROPERTY_CATEGORY_ID => $category,
                 CourseVisit :: PROPERTY_PUBLICATION_ID => Request :: get(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID)));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID)));
 
-        $namespace = 'Chamilo\Application\Weblcms\Tool\Implementation\\' . $tool;
-        $result = \Chamilo\Application\Weblcms\Tool\Manager :: factory_and_launch($namespace, $this);
+        $namespace = 'Ehb\Application\Avilarts\Tool\Implementation\\' . $tool;
+        $result = \Ehb\Application\Avilarts\Tool\Manager :: factory_and_launch($namespace, $this);
 
         DataManager :: log_course_module_access($this->get_course_id(), $this->get_user_id(), $tool, $category);
 
@@ -148,8 +148,8 @@ class CourseViewerComponent extends Manager implements DelegateComponent
      */
     public function get_user_id()
     {
-        $va_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_ID);
-        $course_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
+        $va_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_ID);
+        $course_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
 
         if (isset($va_id) && isset($course_id))
         {
@@ -166,8 +166,8 @@ class CourseViewerComponent extends Manager implements DelegateComponent
      */
     public function get_user()
     {
-        $va_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_ID);
-        $course_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
+        $va_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_ID);
+        $course_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
 
         if (isset($va_id) && isset($course_id))
         {
@@ -187,8 +187,8 @@ class CourseViewerComponent extends Manager implements DelegateComponent
         $html = array();
 
         $html[] = parent :: render_header();
-        $va_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_ID);
-        $course_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
+        $va_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_ID);
+        $course_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
 
         if (isset($va_id) && isset($course_id))
         {
@@ -203,13 +203,13 @@ class CourseViewerComponent extends Manager implements DelegateComponent
                         array(
                             self :: PARAM_TOOL => 'user',  // replace,
                                                           // seriously
-                            self :: PARAM_TOOL_ACTION => \Chamilo\Application\Weblcms\Tool\Implementation\User\Manager :: ACTION_VIEW_AS)) .
+                            self :: PARAM_TOOL_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\User\Manager :: ACTION_VIEW_AS)) .
                      '">' . Translation :: get('Back') . '</a></div>';
             }
         }
 
         $html[] = ResourceManager :: get_instance()->get_resource_html(
-            Path :: getInstance()->getJavascriptPath('Chamilo\Application\Weblcms', true) . 'CourseVisit.js');
+            Path :: getInstance()->getJavascriptPath('Ehb\Application\Avilarts', true) . 'CourseVisit.js');
 
         return implode(PHP_EOL, $html);
     }
@@ -301,7 +301,7 @@ class CourseViewerComponent extends Manager implements DelegateComponent
         $tool_action = Request :: get(self :: PARAM_TOOL_ACTION);
 
         if ($this->is_teacher() || ($tool == 'user' &&
-             $tool_action == \Chamilo\Application\Weblcms\Tool\Implementation\User\Manager :: ACTION_VIEW_AS))
+             $tool_action == \Ehb\Application\Avilarts\Tool\Implementation\User\Manager :: ACTION_VIEW_AS))
         {
             $allowed = true;
         }

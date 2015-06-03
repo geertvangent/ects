@@ -71,7 +71,7 @@ class CategoryManagerComponent extends Manager implements DelegateComponent, Cat
 
     public function allowed_to_delete_category($category_id)
     {
-        $category = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $category = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublicationCategory :: class_name(),
             $category_id);
 
@@ -94,7 +94,7 @@ class CategoryManagerComponent extends Manager implements DelegateComponent, Cat
 
     public function allowed_to_edit_category($category_id)
     {
-        $category = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $category = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublicationCategory :: class_name(),
             $category_id);
 
@@ -130,7 +130,7 @@ class CategoryManagerComponent extends Manager implements DelegateComponent, Cat
 
         $condition = new AndCondition($conditions);
 
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: count(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: count(
             ContentObjectPublicationCategory :: class_name(),
             $condition);
     }
@@ -154,7 +154,7 @@ class CategoryManagerComponent extends Manager implements DelegateComponent, Cat
             new StaticConditionVariable($this->get_parent()->get_tool_id()));
         $condition = new AndCondition($conditions);
 
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
             new DataClassRetrievesParameters($condition, $count, $offset, $order_property));
     }
@@ -183,7 +183,7 @@ class CategoryManagerComponent extends Manager implements DelegateComponent, Cat
                 ContentObjectPublication :: PROPERTY_TOOL),
             new StaticConditionVariable($this->get_parent()->get_tool_id()));
         $condition = new AndCondition($conditions);
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications($condition);
+        return \Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications($condition);
     }
 
     private function have_subcategories_publications($category_id)
@@ -193,7 +193,7 @@ class CategoryManagerComponent extends Manager implements DelegateComponent, Cat
                 ContentObjectPublicationCategory :: class_name(),
                 ContentObjectPublicationCategory :: PROPERTY_PARENT),
             new StaticConditionVariable($category_id));
-        $subcategries = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $subcategries = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
             $condition);
 

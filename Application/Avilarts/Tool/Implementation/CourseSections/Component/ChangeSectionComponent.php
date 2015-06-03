@@ -62,7 +62,7 @@ class ChangeSectionComponent extends Manager
             }
         }
 
-        $section = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $section = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             CourseSection :: class_name(),
             (int) $target);
 
@@ -102,7 +102,7 @@ class ChangeSectionComponent extends Manager
                 $link_class = ' class="invisible"';
             }
             $title = htmlspecialchars(
-                Translation :: get(\Chamilo\Application\Weblcms\Tool\Manager :: type_to_class($tool->name) . 'Title'));
+                Translation :: get(\Ehb\Application\Avilarts\Tool\Manager :: type_to_class($tool->name) . 'Title'));
             $row = $count / $number_of_columns;
             $col = $count % $number_of_columns;
             $html = array();
@@ -120,8 +120,8 @@ class ChangeSectionComponent extends Manager
                 {
                     $html[] = '<a href="' . $parent->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Manager :: PARAM_COMPONENT_ACTION => $lcms_action,
-                            \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL => $tool->name)) . '"><img src="' .
+                            \Ehb\Application\Avilarts\Manager :: PARAM_COMPONENT_ACTION => $lcms_action,
+                            \Ehb\Application\Avilarts\Manager :: PARAM_TOOL => $tool->name)) . '"><img src="' .
                          Theme :: getInstance()->getCommonImagePath($visible_image) .
                          '" style="vertical-align: middle;" alt=""/></a>';
                     $html[] = '&nbsp;&nbsp;&nbsp;';
@@ -130,13 +130,13 @@ class ChangeSectionComponent extends Manager
                 // Show tool-icon + name
 
                 $html[] = '<img ' . $id . ' src="' . Theme :: getInstance()->getImagePath(
-                    'Chamilo\Application\Weblcms\Tool\Implementation\CourseSections',
+                    'Ehb\Application\Avilarts\Tool\Implementation\CourseSections',
                     $tool_image) . '" style="vertical-align: middle;" alt="' . $title . '"/>';
                 $html[] = '&nbsp;';
                 $html[] = '<a href="' . $parent->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Manager :: PARAM_COMPONENT_ACTION => null,
-                        \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL => $tool->name),
+                        \Ehb\Application\Avilarts\Manager :: PARAM_COMPONENT_ACTION => null,
+                        \Ehb\Application\Avilarts\Manager :: PARAM_TOOL => $tool->name),
                     true) . '" ' . $link_class . '>';
                 $html[] = $title;
                 $html[] = '</a>';

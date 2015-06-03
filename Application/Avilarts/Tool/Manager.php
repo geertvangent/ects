@@ -146,8 +146,8 @@ abstract class Manager extends Application
             throw new NotAllowedException();
         }
         $this->set_parameter(
-            \Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY, 
-            Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY));
+            \Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY, 
+            Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY));
         $this->set_parameter(self :: PARAM_BROWSER_TYPE, $this->get_browser_type());
     }
 
@@ -254,7 +254,7 @@ abstract class Manager extends Application
     {
         $tools = array();
         
-        $course_tools = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(CourseTool :: class_name());
+        $course_tools = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(CourseTool :: class_name());
         
         $edit_right = $this->is_allowed(WeblcmsRights :: EDIT_RIGHT);
         
@@ -324,7 +324,7 @@ abstract class Manager extends Application
         
         $toolbar = new Toolbar();
         
-        $is_subscribed = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: is_subscribed(
+        $is_subscribed = \Ehb\Application\Avilarts\Course\Storage\DataManager :: is_subscribed(
             $this->get_course(), 
             $this->get_user());
         if (! $is_subscribed)
@@ -476,7 +476,7 @@ abstract class Manager extends Application
             
             if ($category_id != 0)
             {
-                $category = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                $category = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                     ContentObjectPublicationCategory :: class_name(), 
                     $category_id);
                 
@@ -509,11 +509,11 @@ abstract class Manager extends Application
         }
         else
         {
-            $category_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY);
+            $category_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY);
             
             if ($category_id)
             {
-                $category = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                $category = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                     ContentObjectPublicationCategory :: class_name(), 
                     $category_id);
                 if (! isset($category))
@@ -723,7 +723,7 @@ abstract class Manager extends Application
             
             $condition = new AndCondition($conditions);
             
-            $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_introduction_publication(
+            $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_introduction_publication(
                 $condition);
             if ($publication)
             {
@@ -750,7 +750,7 @@ abstract class Manager extends Application
                 array(
                     self :: PARAM_ACTION => self :: ACTION_VIEW_REPORTING_TEMPLATE, 
                     self :: PARAM_PUBLICATION_ID => Request :: get(self :: PARAM_PUBLICATION_ID), 
-                    self :: PARAM_TEMPLATE_NAME => \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Reporting\Template\PublicationDetailTemplate :: class_name()));
+                    self :: PARAM_TEMPLATE_NAME => \Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\PublicationDetailTemplate :: class_name()));
             return new ToolbarItem(
                 Translation :: get('AccessDetails'), 
                 Theme :: getInstance()->getCommonImagePath('Action/Reporting'), 
@@ -780,7 +780,7 @@ abstract class Manager extends Application
 
     public static function get_pcattree_parents($pcattree)
     {
-        $parent = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $parent = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $pcattree);
         
@@ -788,7 +788,7 @@ abstract class Manager extends Application
         
         while ($parent && $parent->get_parent() != 0)
         {
-            $parent = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $parent = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(), 
                 $parent->get_parent());
             
@@ -806,7 +806,7 @@ abstract class Manager extends Application
 
     public static function get_tool_type_namespace($type)
     {
-        return 'Chamilo\Application\Weblcms\Tool\Implementation\\' . $type;
+        return 'Ehb\Application\Avilarts\Tool\Implementation\\' . $type;
     }
 
     public function get_entities()
@@ -843,10 +843,10 @@ abstract class Manager extends Application
         
         if (! isset($category_id))
         {
-            $category_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY);
+            $category_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY);
         }
         
-        $publications = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+        $publications = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
         
         $rights_util = WeblcmsRights :: get_instance();
         
@@ -929,7 +929,7 @@ abstract class Manager extends Application
     public function run()
     {
         $factory = new ApplicationFactory(
-            \Chamilo\Application\Weblcms\Tool\Action\Manager :: context(), 
+            \Ehb\Application\Avilarts\Tool\Action\Manager :: context(), 
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         return $factory->run();
     }

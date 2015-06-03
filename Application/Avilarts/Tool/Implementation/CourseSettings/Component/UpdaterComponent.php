@@ -25,19 +25,19 @@ class UpdaterComponent extends Manager implements DelegateComponent, CourseSubMa
         }
 
         Request :: set_get(
-            \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION,
-            \Chamilo\Application\Weblcms\Course\Manager :: ACTION_QUICK_UPDATE);
-        Request :: set_get(\Chamilo\Application\Weblcms\Course\Manager :: PARAM_COURSE_ID, $this->get_course_id());
+            \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION,
+            \Ehb\Application\Avilarts\Course\Manager :: ACTION_QUICK_UPDATE);
+        Request :: set_get(\Ehb\Application\Avilarts\Course\Manager :: PARAM_COURSE_ID, $this->get_course_id());
 
         $this->getRequest()->query->set(
-            \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION,
-            \Chamilo\Application\Weblcms\Course\Manager :: ACTION_QUICK_UPDATE);
+            \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION,
+            \Ehb\Application\Avilarts\Course\Manager :: ACTION_QUICK_UPDATE);
         $this->getRequest()->query->set(
-            \Chamilo\Application\Weblcms\Course\Manager :: PARAM_COURSE_ID,
+            \Ehb\Application\Avilarts\Course\Manager :: PARAM_COURSE_ID,
             $this->get_course_id());
 
         $factory = new ApplicationFactory(
-            \Chamilo\Application\Weblcms\Course\Manager :: context(),
+            \Ehb\Application\Avilarts\Course\Manager :: context(),
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         return $factory->run();
     }

@@ -21,17 +21,17 @@ class UpdaterComponent extends Manager
 
     public function run()
     {
-        $pid = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID) ? Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID) : $_POST[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID];
+        $pid = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID) ? Request :: get(
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID) : $_POST[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID];
         if (is_null($pid))
         {
             $this->redirect(
                 Translation :: get('NoObjectSelected', null, Utilities :: COMMON_LIBRARIES),
                 '',
-                array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
+                array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
         }
 
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $pid);
 
@@ -40,7 +40,7 @@ class UpdaterComponent extends Manager
             $this->redirect(
                 Translation :: get('NoObjectSelected', null, Utilities :: COMMON_LIBRARIES),
                 '',
-                array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
+                array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
         }
 
         if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT, $publication))
@@ -52,7 +52,7 @@ class UpdaterComponent extends Manager
                 $content_object,
                 'edit',
                 'post',
-                $this->get_url(array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $pid)));
+                $this->get_url(array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $pid)));
 
             if ($form->validate() || Request :: get('validated'))
             {
@@ -90,7 +90,7 @@ class UpdaterComponent extends Manager
             $this->redirect(
                 Translation :: get("NotAllowed"),
                 '',
-                array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
+                array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
         }
     }
 

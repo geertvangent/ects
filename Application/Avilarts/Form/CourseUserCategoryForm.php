@@ -62,7 +62,7 @@ class CourseUserCategoryForm extends FormValidator
 
         $attributes = array();
         $attributes['search_url'] = Path :: getInstance()->getBasePath(true) .
-             'index.php?go=XmlCourseTypeFeed&application=Chamilo%5CApplication%5CWeblcms%5CCourseType%5CAjax';
+             'index.php?go=XmlCourseTypeFeed&application=Ehb%5CApplication%5CAvilarts%5CCourseType%5CAjax';
         $locale = array();
         $locale['Display'] = Translation :: get('SelectRecipients');
         $locale['Searching'] = Translation :: get('Searching', null, Utilities :: COMMON_LIBRARIES);
@@ -158,7 +158,7 @@ class CourseUserCategoryForm extends FormValidator
         $selected_types = $this->get_selected_course_types();
 
         // uses the compare function of CourseTypeUserCategory
-        $compare_class = "Chamilo\Application\Weblcms\Storage\DataClass\CourseTypeUserCategory";
+        $compare_class = "Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategory";
         $compare_method = "compare";
 
         // create the types that are selected but don't exist, and delete the
@@ -283,7 +283,7 @@ class CourseUserCategoryForm extends FormValidator
         $selected_course_type['classes'] = 'type type_course_type';
         if ($course_type_id != 0)
         {
-            $course_type = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_by_id(
+            $course_type = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_by_id(
                 CourseType :: class_name(),
                 $course_type_id);
 

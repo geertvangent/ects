@@ -54,7 +54,7 @@ class CourseCopierForm extends FormValidator
                         ContentObjectPublication :: PROPERTY_DISPLAY_ORDER_INDEX), 
                     SORT_ASC)));
         
-        $publications_set = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $publications_set = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(), 
             $parameters);
         
@@ -72,7 +72,7 @@ class CourseCopierForm extends FormValidator
                 $label = $index == 0 ? Translation :: get(
                     'TypeName', 
                     null, 
-                    \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool)) : '';
+                    \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool)) : '';
                 
                 $id = 'publications[' . $publication->get_id() . ']';
                 $this->addElement('checkbox', $id, $label, $publication->get_content_object()->get_title());
@@ -85,7 +85,7 @@ class CourseCopierForm extends FormValidator
         $condition = new EqualityCondition(
             new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable($this->parent->get_course_id()));
-        $course_sections = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(), 
             $condition);
         
@@ -111,7 +111,7 @@ class CourseCopierForm extends FormValidator
         
         $this->setDefaults($defaults);
         
-        $courses = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_all_courses_from_user(
+        $courses = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_all_courses_from_user(
             $this->parent->get_user_id());
         
         $this->addElement('html', '<h3>' . Translation :: get('SelectCourse') . '</h3>');

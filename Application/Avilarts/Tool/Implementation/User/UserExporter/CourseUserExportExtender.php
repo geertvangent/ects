@@ -32,7 +32,7 @@ class CourseUserExportExtender implements UserExportExtender
      */
     public function __construct($course_id)
     {
-        $course_platform_groups = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_all_subscribed_platform_groups(
+        $course_platform_groups = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_all_subscribed_platform_groups(
             array($course_id));
         
         $this->course_platform_groups = array();

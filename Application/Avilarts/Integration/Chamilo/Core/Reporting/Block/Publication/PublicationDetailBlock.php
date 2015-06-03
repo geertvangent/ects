@@ -20,10 +20,10 @@ class PublicationDetailBlock extends ToolBlock
 
         $course_id = $this->get_course_id();
         $tool = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL);
-        $pid = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+            \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL);
+        $pid = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
 
-        $content_object_publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $content_object_publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $pid);
 
@@ -44,12 +44,12 @@ class PublicationDetailBlock extends ToolBlock
         }
 
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = $tool;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $id;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = $tool;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $id;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
 
         $redirect = new Redirect($params);
         $url = $redirect->getUrl();

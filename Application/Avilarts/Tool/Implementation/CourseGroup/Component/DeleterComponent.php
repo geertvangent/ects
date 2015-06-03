@@ -27,13 +27,13 @@ class DeleterComponent extends Manager
             throw new NotAllowedException();
         }
         
-        if (Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID))
+        if (Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID))
         {
-            $publication_ids = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+            $publication_ids = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
         }
         else
         {
-            $publication_ids = $_POST[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID];
+            $publication_ids = $_POST[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID];
         }
         
         if (! is_array($publication_ids))
@@ -43,7 +43,7 @@ class DeleterComponent extends Manager
         
         foreach ($publication_ids as $pid)
         {
-            if ($publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            if ($publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(), 
                 $pid))
             {
@@ -64,7 +64,7 @@ class DeleterComponent extends Manager
                 
                 if ($cg->get_document_category_id())
                 {
-                    $cat = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                    $cat = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                         ContentObjectPublicationCategory :: class_name(), 
                         $cg->get_document_category_id());
                     
@@ -77,7 +77,7 @@ class DeleterComponent extends Manager
                 if ($cg->get_forum_category_id())
                 {
                     
-                    $cat = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                    $cat = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                         ContentObjectPublicationCategory :: class_name(), 
                         $cg->get_forum_category_id());
                     

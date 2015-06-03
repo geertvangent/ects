@@ -27,7 +27,7 @@ class ToolPublicationsBlock extends ToolBlock
         $course_id = $this->get_course_id();
         $user_id = $this->get_user_id();
         $tool = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL);
+            \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL);
 
         $reporting_data->set_rows(array(Translation :: get('Title'), Translation :: get('Description')));
 
@@ -63,7 +63,7 @@ class ToolPublicationsBlock extends ToolBlock
 
         $condition = new AndCondition($conditions);
 
-        $content_object_publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $content_object_publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(),
             $condition);
 
@@ -75,12 +75,12 @@ class ToolPublicationsBlock extends ToolBlock
         {
             $params = array();
 
-            $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-            $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = $tool;
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $content_object_publication->get_id();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
+            $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+            $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = $tool;
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $content_object_publication->get_id();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
 
             $redirect = new Redirect($params);
             $url = $redirect->getUrl();
@@ -112,10 +112,10 @@ class ToolPublicationsBlock extends ToolBlock
             {
                 $params = $this->get_parent()->get_parameters();
 
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = PublicationDetailTemplate :: class_name();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user_id;
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $content_object_publication->get_id();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = PublicationDetailTemplate :: class_name();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user_id;
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $content_object_publication->get_id();
 
                 $link = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
 

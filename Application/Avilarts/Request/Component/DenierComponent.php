@@ -16,7 +16,7 @@ class DenierComponent extends Manager
 
     function run()
     {
-        if (! \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->request_is_allowed())
+        if (! \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->request_is_allowed())
         {
             throw new NotAllowedException();
         }
@@ -87,7 +87,7 @@ class DenierComponent extends Manager
     {
         $request = DataManager :: retrieve_by_id(Request :: class_name(), (int) $id);
 
-        if (! \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->is_target_user(
+        if (! \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->is_target_user(
             $this->get_user(),
             $request->get_user_id()) && ! $this->get_user()->is_platform_admin())
         {
@@ -147,7 +147,7 @@ class DenierComponent extends Manager
         {
             $request = DataManager :: retrieve_by_id(Request :: class_name(), (int) $id);
 
-            if (! \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->is_target_user(
+            if (! \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->is_target_user(
                 $this->get_user(),
                 $request->get_user_id()) && ! $this->get_user()->is_platform_admin())
             {

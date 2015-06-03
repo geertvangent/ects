@@ -240,8 +240,8 @@ abstract class ContentObjectPublicationListRenderer
             $up_img = 'Action/Up';
             $up_url = $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MOVE_UP,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MOVE_UP,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
                 array(),
                 true);
             $up_link = '<a href="' . $up_url . '"><img src="' . Theme :: getInstance()->getCommonImagePath($up_img) .
@@ -268,8 +268,8 @@ abstract class ContentObjectPublicationListRenderer
             $down_img = 'Action/Down';
             $down_url = $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MOVE_DOWN,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MOVE_DOWN,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
                 array(),
                 true);
             $down_link = '<a href="' . $down_url . '"><img src="' . Theme :: getInstance()->getCommonImagePath(
@@ -292,8 +292,8 @@ abstract class ContentObjectPublicationListRenderer
     {
         $visibility_url = $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_TOGGLE_VISIBILITY,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_TOGGLE_VISIBILITY,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
             array(),
             true);
         if ($publication[ContentObjectPublication :: PROPERTY_HIDDEN])
@@ -326,8 +326,8 @@ abstract class ContentObjectPublicationListRenderer
     {
         $edit_url = $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_UPDATE,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_UPDATE,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
             array(),
             true);
         $edit_link = '<a href="' . $edit_url . '"><img src="' . Theme :: getInstance()->getCommonImagePath(
@@ -351,8 +351,8 @@ abstract class ContentObjectPublicationListRenderer
     {
         $delete_url = $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_DELETE,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_DELETE,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
             array(),
             true);
         $delete_link = '<a href="' . $delete_url . '" onclick="return confirm(\'' .
@@ -370,8 +370,8 @@ abstract class ContentObjectPublicationListRenderer
     {
         $feedback_url = $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => 'view'),
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => 'view'),
             array(),
             true);
         $feedback_link = '<a href="' . $feedback_url . '"><img src="' . Theme :: getInstance()->getCommonImagePath(
@@ -410,8 +410,8 @@ abstract class ContentObjectPublicationListRenderer
             {
                 $url = $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MOVE_TO_CATEGORY,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MOVE_TO_CATEGORY,
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]),
                     array(),
                     true);
                 $link = '<a href="' . $url . '"><img src="' . Theme :: getInstance()->getCommonImagePath('Action/Move') .
@@ -451,8 +451,8 @@ abstract class ContentObjectPublicationListRenderer
                     $html[] = '<li><a href="' . $this->tool_browser->get_url(
                         array(
                             Manager :: PARAM_PUBLICATION => $publication[ContentObjectPublication :: PROPERTY_ID],
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW_ATTACHMENT,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_OBJECT_ID => $attachment->get_id())) .
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW_ATTACHMENT,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_OBJECT_ID => $attachment->get_id())) .
                          '"><img src="' . $attachment->get_icon_path(Theme :: ICON_MINI) . '" alt="' . htmlentities(
                             Translation :: get(ContentObject :: type_to_class($attachment->get_type()) . 'TypeName')) .
                          '"/> ' . $attachment->get_title() . '</a></li>';
@@ -665,8 +665,8 @@ abstract class ContentObjectPublicationListRenderer
 
     public function get_user()
     {
-        $va_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_ID);
-        $course_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
+        $va_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_ID);
+        $course_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
 
         if (isset($va_id) && isset($course_id))
         {
@@ -680,8 +680,8 @@ abstract class ContentObjectPublicationListRenderer
 
     public function get_user_id()
     {
-        $va_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_ID);
-        $course_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
+        $va_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_ID);
+        $course_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
 
         if (isset($va_id) && isset($course_id))
         {
@@ -705,7 +705,7 @@ abstract class ContentObjectPublicationListRenderer
 
     public function get_publication_type()
     {
-        if ($this->tool_browser instanceof \Chamilo\Application\Weblcms\Tool\Action\Component\BrowserComponent)
+        if ($this->tool_browser instanceof \Ehb\Application\Avilarts\Tool\Action\Component\BrowserComponent)
         {
             return $this->tool_browser->get_publication_type();
         }
@@ -753,8 +753,8 @@ abstract class ContentObjectPublicationListRenderer
 
         $details_url = $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW));
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW));
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('Details', null, Utilities :: COMMON_LIBRARIES),
@@ -788,8 +788,8 @@ abstract class ContentObjectPublicationListRenderer
                     Theme :: getInstance()->getCommonImagePath('Action/Edit'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_UPDATE_CONTENT_OBJECT,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_UPDATE_CONTENT_OBJECT,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
                     ToolbarItem :: DISPLAY_ICON));
         }
 
@@ -798,11 +798,11 @@ abstract class ContentObjectPublicationListRenderer
             $toolbar->add_item(
                 new ToolbarItem(
                     Translation :: get('EditPublicationDetails', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms', 'Action/EditPublication'),
+                    Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts', 'Action/EditPublication'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_UPDATE_PUBLICATION,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_UPDATE_PUBLICATION,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
                     ToolbarItem :: DISPLAY_ICON));
 
             if ($content_object instanceof ComplexContentObjectSupport && ($content_object->get_owner_id() ==
@@ -835,8 +835,8 @@ abstract class ContentObjectPublicationListRenderer
             $first_row = $this->row_counter == 1;
             $last_row = $this->row_counter == $this->get_publication_count();
             $direction = $ascending ? 1 : - 1;
-            $true_up = \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_MOVE_DIRECTION_UP * $direction;
-            $true_down = \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_MOVE_DIRECTION_DOWN * $direction;
+            $true_up = \Ehb\Application\Avilarts\Tool\Manager :: PARAM_MOVE_DIRECTION_UP * $direction;
+            $true_down = \Ehb\Application\Avilarts\Tool\Manager :: PARAM_MOVE_DIRECTION_DOWN * $direction;
 
             if ($show_move)
             {
@@ -848,10 +848,10 @@ abstract class ContentObjectPublicationListRenderer
                             Theme :: getInstance()->getCommonImagePath('Action/Up'),
                             $this->get_url(
                                 array(
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MOVE,
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id,
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_MOVE_DIRECTION => $true_up,
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => $publication_type)),
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MOVE,
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id,
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_MOVE_DIRECTION => $true_up,
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => $publication_type)),
                             ToolbarItem :: DISPLAY_ICON));
                 }
                 else
@@ -872,10 +872,10 @@ abstract class ContentObjectPublicationListRenderer
                             Theme :: getInstance()->getCommonImagePath('Action/Down'),
                             $this->get_url(
                                 array(
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MOVE,
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id,
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_MOVE_DIRECTION => $true_down,
-                                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => $publication_type)),
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MOVE,
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id,
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_MOVE_DIRECTION => $true_down,
+                                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => $publication_type)),
                             ToolbarItem :: DISPLAY_ICON));
                 }
                 else
@@ -891,9 +891,9 @@ abstract class ContentObjectPublicationListRenderer
 
             $visibility_url = $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_TOGGLE_VISIBILITY,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => $publication_type));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_TOGGLE_VISIBILITY,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSE_PUBLICATION_TYPE => $publication_type));
             if ($publication[ContentObjectPublication :: PROPERTY_HIDDEN])
             {
                 $visibility_image = 'Action/Invisible';
@@ -924,8 +924,8 @@ abstract class ContentObjectPublicationListRenderer
                         Theme :: getInstance()->getCommonImagePath('Action/Move'),
                         $this->get_url(
                             array(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_MOVE_TO_CATEGORY,
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_MOVE_TO_CATEGORY,
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
                         ToolbarItem :: DISPLAY_ICON));
             }
         }
@@ -938,8 +938,8 @@ abstract class ContentObjectPublicationListRenderer
                     Theme :: getInstance()->getCommonImagePath('Action/Rights'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_EDIT_RIGHTS,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_EDIT_RIGHTS,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
                     ToolbarItem :: DISPLAY_ICON));
         }
 
@@ -948,11 +948,11 @@ abstract class ContentObjectPublicationListRenderer
             $toolbar->add_item(
                 new ToolbarItem(
                     Translation :: get('ShareContentObject', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms', 'Action/ManageShareRights'),
+                    Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts', 'Action/ManageShareRights'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_SHARE_CONTENT_OBJECTS,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_SHARE_CONTENT_OBJECTS,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
                     ToolbarItem :: DISPLAY_ICON));
         }
 
@@ -964,8 +964,8 @@ abstract class ContentObjectPublicationListRenderer
                     Theme :: getInstance()->getCommonImagePath('Action/Delete'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_DELETE,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_DELETE,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication_id)),
                     ToolbarItem :: DISPLAY_ICON,
                     true));
         }

@@ -11,7 +11,7 @@ use Chamilo\Core\Tracking\Storage\DataClass\Event;
  * @author Sven Vanpoucke
  * @package application.weblcms
  */
-class LeaveCourseComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
+class LeaveCourseComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {
     const PARAM_COURSE_VISIT_TRACKER_ID = 'course_visit_tracker_id';
 

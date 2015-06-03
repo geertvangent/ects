@@ -26,35 +26,35 @@ class LearningPathAttemptProgressDetailsTemplate extends ReportingTemplate
 
     private function initialize_parameters()
     {
-        $course_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
+        $course_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
         if ($course_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE, $course_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE, $course_id);
         }
         
-        $tool = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL, $tool);
+        $tool = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_TOOL);
+        $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_TOOL, $tool);
         
         $attempt_id = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID);
+            \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID);
         if ($attempt_id)
         {
             $this->set_parameter(
-                \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID, 
+                \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID, 
                 $attempt_id);
         }
         
-        if ($this->get_parent()->get_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION) ==
-             \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW)
+        if ($this->get_parent()->get_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION) ==
+             \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW)
         {
             $this->set_parameter('lp_action', 'view_progress');
         }
         
-        $pid = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID, $pid);
+        $pid = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
+        $this->set_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID, $pid);
         
-        $parent_id = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_COMPLEX_ID);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_COMPLEX_ID, $parent_id);
+        $parent_id = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_COMPLEX_ID);
+        $this->set_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_COMPLEX_ID, $parent_id);
     }
 
     public function get_learning_path_progress_details()

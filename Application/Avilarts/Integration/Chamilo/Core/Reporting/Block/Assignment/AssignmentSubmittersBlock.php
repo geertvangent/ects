@@ -76,7 +76,7 @@ abstract class AssignmentSubmittersBlock extends AssignmentReportingManager
                 self :: $COLUMN_AVERAGE_SCORE,
                 self :: $COLUMN_ACTIONS));
 
-        $assignment = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $assignment = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $this->get_publication_id())->get_content_object();
 
@@ -105,10 +105,10 @@ abstract class AssignmentSubmittersBlock extends AssignmentReportingManager
                     $submitter->get_id());
 
                 $params = $this->get_parent()->get_parameters();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = CourseSubmitterSubmissionsTemplate :: class_name();
-                $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = $first_submission[AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE];
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $this->get_publication_id();
-                $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $submitter->get_id();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = CourseSubmitterSubmissionsTemplate :: class_name();
+                $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = $first_submission[AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE];
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $this->get_publication_id();
+                $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $submitter->get_id();
                 $link = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
                 $reporting_data->add_data_category_row($count, self :: $COLUMN_ACTIONS, $link);
             }
@@ -214,7 +214,7 @@ abstract class AssignmentSubmittersBlock extends AssignmentReportingManager
 
             $submission_trackers = AssignmentSubmission :: get_data(
                 AssignmentSubmission :: CLASS_NAME,
-                \Chamilo\Application\Weblcms\Manager :: APPLICATION_NAME,
+                \Ehb\Application\Avilarts\Manager :: APPLICATION_NAME,
                 $condition)->as_array();
 
             $submission_tracker_ids = array();
@@ -225,12 +225,12 @@ abstract class AssignmentSubmittersBlock extends AssignmentReportingManager
 
             $condition = new InCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: class_name(),
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: PROPERTY_SUBMISSION_ID),
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: class_name(),
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: PROPERTY_SUBMISSION_ID),
                 $submission_tracker_ids);
-            $score_trackers = \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: get_data(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: CLASS_NAME,
-                \Chamilo\Application\Weblcms\Manager :: APPLICATION_NAME,
+            $score_trackers = \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: get_data(
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: CLASS_NAME,
+                \Ehb\Application\Avilarts\Manager :: APPLICATION_NAME,
                 $condition)->as_array();
 
             $average_score = $this->format_score_html($this->get_avg_score($score_trackers));

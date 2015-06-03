@@ -161,7 +161,7 @@ class RequestForm extends FormValidator
                 Translation :: get('User', null, \Chamilo\Core\User\Manager :: context()), 
                 $name_user);
             
-            $request_name = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_by_id(
+            $request_name = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_by_id(
                 Course :: class_name(), 
                 $this->request->get_course_id())->get_name();
             

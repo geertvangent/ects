@@ -31,7 +31,7 @@ class ContentObjectPublicationDetailsRenderer extends ContentObjectPublicationLi
         $publication = DataManager :: retrieve_content_object_publication_with_content_object($publication_id);
 
         $this->get_tool_browser()->get_parent()->set_parameter(
-            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID,
+            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID,
             $publication_id);
 
         $html[] = $this->render_publication($publication);
@@ -66,8 +66,8 @@ class ContentObjectPublicationDetailsRenderer extends ContentObjectPublicationLi
         {
             $title_url = $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT));
         }
 
         $html[] = '<div class="announcements level_1" style="background-image: url(' .

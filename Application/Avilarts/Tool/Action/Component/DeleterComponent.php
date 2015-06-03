@@ -18,13 +18,13 @@ class DeleterComponent extends Manager
 
     public function run()
     {
-        if (Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID))
+        if (Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID))
         {
-            $publication_ids = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+            $publication_ids = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
         }
         else
         {
-            $publication_ids = $_POST[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID];
+            $publication_ids = $_POST[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID];
         }
         
         if (! is_array($publication_ids))
@@ -36,7 +36,7 @@ class DeleterComponent extends Manager
         
         foreach ($publication_ids as $pid)
         {
-            $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(), 
                 $pid);
             
@@ -75,6 +75,6 @@ class DeleterComponent extends Manager
         $this->redirect(
             $message, 
             $failures > 0, 
-            array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
+            array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null, 'tool_action' => null));
     }
 }

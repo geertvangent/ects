@@ -67,7 +67,7 @@ class SubscriptionsOverviewerComponent extends Manager implements TableSupport
 
         if ($course_settings_controller->get_course_setting(
             $this->get_course_id(),
-            \Chamilo\Application\Weblcms\CourseSettingsConnector :: ALLOW_INTRODUCTION_TEXT))
+            \Ehb\Application\Avilarts\CourseSettingsConnector :: ALLOW_INTRODUCTION_TEXT))
         {
             $html[] = $this->display_introduction_text($this->get_introduction_text());
         }
@@ -166,7 +166,7 @@ class SubscriptionsOverviewerComponent extends Manager implements TableSupport
 
     public function get_group()
     {
-        $group = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+        $group = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
         if (! $group)
         {
             return self :: PLATFORM_GROUP_ROOT_ID;
@@ -181,7 +181,7 @@ class SubscriptionsOverviewerComponent extends Manager implements TableSupport
 
         $action_bar->set_search_url($this->get_url($parameters));
 
-        $param_export_subscriptions_overview[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = self :: ACTION_EXPORT_SUBSCRIPTIONS_OVERVIEW;
+        $param_export_subscriptions_overview[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = self :: ACTION_EXPORT_SUBSCRIPTIONS_OVERVIEW;
         $param_export_subscriptions_overview[self :: PARAM_TAB] = $this->current_tab;
 
         // $show_all_url = $this->get_url();
@@ -270,7 +270,7 @@ class SubscriptionsOverviewerComponent extends Manager implements TableSupport
 
     public function get_additional_parameters()
     {
-        return array(self :: PARAM_TAB, \Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+        return array(self :: PARAM_TAB, \Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
     }
 
     public function add_additional_breadcrumbs(BreadcrumbTrail $breadcrumbtrail)

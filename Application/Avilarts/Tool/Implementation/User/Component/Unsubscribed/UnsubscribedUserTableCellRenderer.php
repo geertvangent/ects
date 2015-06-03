@@ -90,11 +90,11 @@ class UnsubscribedUserTableCellRenderer extends DataClassTableCellRenderer imple
             // subscribe regular student
             $parameters = array();
             $parameters[Manager :: PARAM_OBJECTS] = $user_with_subscription_status->get_id();
-            $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_SUBSCRIBE;
+            $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_SUBSCRIBE;
             $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
             $subscribe_url = $this->get_component()->get_url($parameters);
 
-            $weblcms_manager_namespace = \Chamilo\Application\Weblcms\Manager :: context();
+            $weblcms_manager_namespace = \Ehb\Application\Avilarts\Manager :: context();
 
             $toolbar->add_item(
                 new ToolbarItem(
@@ -106,7 +106,7 @@ class UnsubscribedUserTableCellRenderer extends DataClassTableCellRenderer imple
             // subscribe as course admin
             $parameters = array();
             $parameters[Manager :: PARAM_OBJECTS] = $user_with_subscription_status->get_id();
-            $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_SUBSCRIBE_AS_ADMIN;
+            $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_SUBSCRIBE_AS_ADMIN;
             $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
             $subscribe_url = $this->get_component()->get_url($parameters);
 
@@ -125,13 +125,13 @@ class UnsubscribedUserTableCellRenderer extends DataClassTableCellRenderer imple
             $user_with_subscription_status->get_id())))
 
         {
-            if (! \Chamilo\Application\Weblcms\Storage\DataManager :: is_user_requested_for_course(
+            if (! \Ehb\Application\Avilarts\Storage\DataManager :: is_user_requested_for_course(
                 $user_with_subscription_status->get_id(),
                 $this->get_component()->get_course_id()))
             {
                 $parameters = array();
                 $parameters[Manager :: PARAM_OBJECTS] = $user_with_subscription_status->get_id();
-                $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_REQUEST_SUBSCRIBE_USER;
+                $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_REQUEST_SUBSCRIBE_USER;
                 $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
                 $subscribe_request_url = $this->get_component()->get_url($parameters);
 
@@ -139,7 +139,7 @@ class UnsubscribedUserTableCellRenderer extends DataClassTableCellRenderer imple
                     new ToolbarItem(
                         Translation :: get('RequestUser'),
                         Theme :: getInstance()->getImagePath(
-                            'Chamilo\Application\Weblcms\Tool\Implementation\User',
+                            'Ehb\Application\Avilarts\Tool\Implementation\User',
                             'Action/RequestSubscribeUser'),
                         $subscribe_request_url,
                         ToolbarItem :: DISPLAY_ICON));

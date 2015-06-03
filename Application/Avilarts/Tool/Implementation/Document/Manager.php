@@ -22,7 +22,7 @@ use Chamilo\Libraries\Platform\Translation;
 /**
  * This tool allows a user to publish documents in his or her course.
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager implements Categorizable
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager implements Categorizable
 {
     const ACTION_VIEW_DOCUMENTS = 'Viewer';
     const ACTION_DOWNLOAD = 'Downloader';
@@ -71,7 +71,7 @@ abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager impleme
         $allow_download_page = \Chamilo\Libraries\Platform\Configuration\PlatformSetting :: get(
             'allow_download_page',
             \Chamilo\Libraries\Architecture\ClassnameUtilities :: getInstance()->getNamespaceFromClassname(
-                \Chamilo\Application\Weblcms\Manager :: class_name()));
+                \Ehb\Application\Avilarts\Manager :: class_name()));
 
         if (! $content_object instanceof Page || $allow_download_page)
         {
@@ -81,8 +81,8 @@ abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager impleme
                     Theme :: getInstance()->getCommonImagePath('Action/Download'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_DOWNLOAD,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObject :: PROPERTY_ID])),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_DOWNLOAD,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObject :: PROPERTY_ID])),
                     ToolbarItem :: DISPLAY_ICON));
         }
     }

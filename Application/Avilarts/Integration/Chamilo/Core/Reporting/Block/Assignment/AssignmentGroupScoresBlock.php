@@ -59,7 +59,7 @@ abstract class AssignmentGroupScoresBlock extends AssignmentReportingManager
                 new PropertyConditionVariable(
                     ContentObjectPublication :: class_name(),
                     ContentObjectPublication :: PROPERTY_MODIFIED_DATE));
-            $publication_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+            $publication_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
                 $condition,
                 $order_by);
 
@@ -125,25 +125,25 @@ abstract class AssignmentGroupScoresBlock extends AssignmentReportingManager
                              $content_object->get_title() . '</div>';
                     }
 
-                    $submission_tracker = new \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission();
+                    $submission_tracker = new \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission();
                     $conditions = array();
 
                     $conditions[] = new EqualityCondition(
                         new PropertyConditionVariable(
-                            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
-                            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_PUBLICATION_ID),
+                            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_PUBLICATION_ID),
                         new StaticConditionVariable($publication[ContentObjectPublication :: PROPERTY_ID]));
 
                     $conditions[] = new EqualityCondition(
                         new PropertyConditionVariable(
-                            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
-                            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE),
+                            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE),
                         new StaticConditionVariable($this->get_current_submitter_type()));
 
                     $conditions[] = new EqualityCondition(
                         new PropertyConditionVariable(
-                            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
-                            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID),
+                            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID),
                         new StaticConditionVariable($group->get_id()));
 
                     $condition = new AndCondition($conditions);
@@ -169,11 +169,11 @@ abstract class AssignmentGroupScoresBlock extends AssignmentReportingManager
                         continue;
                     }
 
-                    $score_tracker = new \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore();
+                    $score_tracker = new \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore();
                     $condition = new InCondition(
                         new PropertyConditionVariable(
-                            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: class_name(),
-                            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: PROPERTY_SUBMISSION_ID),
+                            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: class_name(),
+                            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: PROPERTY_SUBMISSION_ID),
                         $submission_ids);
                     $score_trackers = $score_tracker->retrieve_tracker_items($condition);
 
@@ -186,17 +186,17 @@ abstract class AssignmentGroupScoresBlock extends AssignmentReportingManager
                     else
                     {
                         $params = array();
-                        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $this->course_id;
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
+                        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $this->course_id;
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
                             Assignment :: class_name(),
                             true);
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMISSIONS;
-                        $params[\Chamilo\Application\Weblcms\Tool\Manager :: ACTION_BROWSE] = ContentObjectRenderer :: TYPE_TABLE;
-                        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
-                        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $group->get_id();
-                        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = $this->get_current_submitter_type();
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMISSIONS;
+                        $params[\Ehb\Application\Avilarts\Tool\Manager :: ACTION_BROWSE] = ContentObjectRenderer :: TYPE_TABLE;
+                        $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
+                        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $group->get_id();
+                        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = $this->get_current_submitter_type();
 
                         $redirect = new Redirect($params);
                         $link = $redirect->getUrl();
@@ -244,7 +244,7 @@ abstract class AssignmentGroupScoresBlock extends AssignmentReportingManager
     {
         $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
             WeblcmsRights :: VIEW_RIGHT,
-            \Chamilo\Application\Weblcms\Manager :: context(),
+            \Ehb\Application\Avilarts\Manager :: context(),
             $pub_id,
             WeblcmsRights :: TYPE_PUBLICATION,
             $this->course_id,

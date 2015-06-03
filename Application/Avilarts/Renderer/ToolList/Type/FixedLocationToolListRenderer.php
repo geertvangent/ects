@@ -117,7 +117,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
 
         foreach ($visible_tools as $tool)
         {
-            $tool_namespace = \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool->get_name());
+            $tool_namespace = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name());
 
             $sorted_tools[Translation :: get('TypeName', null, $tool_namespace)] = $tool;
         }
@@ -201,7 +201,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
         $html[] = '<script type="text/javascript" src="' .
              Path :: getInstance()->getJavascriptPath('Chamilo\Libraries', true) . 'HomeAjax.js' . '"></script>';
         $html[] = '<script type="text/javascript" src="' .
-             Path :: getInstance()->getJavascriptPath('Chamilo\Application\Weblcms', true) . 'CourseHome.js' .
+             Path :: getInstance()->getJavascriptPath('Ehb\Application\Avilarts', true) . 'CourseHome.js' .
              '"></script>';
 
         return implode(PHP_EOL, $html);
@@ -312,14 +312,14 @@ class FixedLocationToolListRenderer extends ToolListRenderer
         {
             if ($publication->is_hidden() == 0)
             {
-                $lcms_action = \Chamilo\Application\Weblcms\Tool\Implementation\Home\Manager :: ACTION_HIDE_PUBLICATION;
+                $lcms_action = \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_HIDE_PUBLICATION;
                 $visible_image = 'Action/Visible';
                 $tool_image = Theme :: ICON_MEDIUM;
                 $link_class = '';
             }
             else
             {
-                $lcms_action = \Chamilo\Application\Weblcms\Tool\Implementation\Home\Manager :: ACTION_SHOW_PUBLICATION;
+                $lcms_action = \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_SHOW_PUBLICATION;
                 $visible_image = 'Action/Invisible';
                 $tool_image = Theme :: ICON_MEDIUM . 'Na';
                 $link_class = ' class="invisible"';
@@ -337,8 +337,8 @@ class FixedLocationToolListRenderer extends ToolListRenderer
                     $cell_contents[] = '<a href="' .
                          $parent->get_url(
                             array(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => $lcms_action,
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id())) .
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => $lcms_action,
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id())) .
                          '"><img src="' . Theme :: getInstance()->getCommonImagePath($visible_image) .
                          '" style="vertical-align: middle;" alt=""/></a>';
                 }
@@ -349,8 +349,8 @@ class FixedLocationToolListRenderer extends ToolListRenderer
                     $cell_contents[] = '<a href="' .
                          $parent->get_url(
                             array(
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Implementation\Home\Manager :: ACTION_DELETE_LINKS,
-                                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id())) .
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_DELETE_LINKS,
+                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id())) .
                          '"><img src="' . Theme :: getInstance()->getCommonImagePath('Action/Delete') .
                          '" style="vertical-align: middle;" alt=""/></a>';
                 }
@@ -358,14 +358,14 @@ class FixedLocationToolListRenderer extends ToolListRenderer
                 // Show tool-icon + name
 
                 if ($publication->get_tool() ==
-                     \Chamilo\Application\Weblcms\Tool\Implementation\Link\Manager :: TOOL_NAME)
+                     \Ehb\Application\Avilarts\Tool\Implementation\Link\Manager :: TOOL_NAME)
                 {
                     $url = $publication->get_content_object()->get_url();
                     $target = ' target="_blank"';
                 }
                 else
                 {
-                    $class = 'Chamilo\Application\Weblcms\Tool\Implementation\\' .
+                    $class = 'Ehb\Application\Avilarts\Tool\Implementation\\' .
                          StringUtilities :: getInstance()->createString($publication->get_tool())->upperCamelize() .
                          '\Manager';
                     $url = $parent->get_url(
@@ -373,8 +373,8 @@ class FixedLocationToolListRenderer extends ToolListRenderer
                             'tool_action' => null,
                             Manager :: PARAM_COMPONENT_ACTION => null,
                             Manager :: PARAM_TOOL => $publication->get_tool(),
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => $class :: ACTION_VIEW,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id()),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => $class :: ACTION_VIEW,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id()),
                         array(),
                         true);
                     $target = '';
@@ -382,7 +382,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
 
                 $cell_contents[] = '<a href="' . $url . '"' . $target . $link_class . '>';
                 $cell_contents[] = '<img src="' . Theme :: getInstance()->getImagePath(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($publication->get_tool()),
+                    \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($publication->get_tool()),
                     'Logo/' . $tool_image) . '" style="vertical-align: middle;" alt="' . $title . '" width="' .
                      Theme :: ICON_MEDIUM . '" height="' . Theme :: ICON_MEDIUM . '"/>';
                 $cell_contents[] = '&nbsp;';
@@ -450,7 +450,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
 
         foreach ($tools as $tool)
         {
-            $tool_namespace = \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool->get_name());
+            $tool_namespace = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name());
 
             $tool_visible = $course_settings_controller->get_course_setting(
                 $this->course->get_id(),
@@ -459,7 +459,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
 
             if ($tool_visible || $section->get_type() == CourseSection :: TYPE_ADMIN)
             {
-                $lcms_action = \Chamilo\Application\Weblcms\Tool\Implementation\Home\Manager :: ACTION_MAKE_TOOL_INVISIBLE;
+                $lcms_action = \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_MAKE_TOOL_INVISIBLE;
                 $visible_image = 'Action/Visible';
                 $new = '';
                 if ($parent->tool_has_new_publications($tool->get_name(), $this->course))
@@ -471,7 +471,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
             }
             else
             {
-                $lcms_action = \Chamilo\Application\Weblcms\Tool\Implementation\Home\Manager :: ACTION_MAKE_TOOL_VISIBLE;
+                $lcms_action = \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_MAKE_TOOL_VISIBLE;
                 $visible_image = 'Action/Invisible';
                 $tool_image = Theme :: ICON_MEDIUM . 'Na';
                 $link_class = ' class="invisible"';
@@ -499,8 +499,8 @@ class FixedLocationToolListRenderer extends ToolListRenderer
                 $html[] = '<a href="' .
                      $parent->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Implementation\Home\Manager :: PARAM_ACTION => $lcms_action,
-                            \Chamilo\Application\Weblcms\Tool\Implementation\Home\Manager :: PARAM_TOOL => $tool->get_name())) .
+                            \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: PARAM_ACTION => $lcms_action,
+                            \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: PARAM_TOOL => $tool->get_name())) .
                      '"><img class="tool_visible" src="' . Theme :: getInstance()->getCommonImagePath($visible_image) .
                      '" style="vertical-align: middle;" alt="" /></a>';
                 $html[] = '&nbsp;&nbsp;&nbsp;';
@@ -516,8 +516,8 @@ class FixedLocationToolListRenderer extends ToolListRenderer
                 array(Manager :: PARAM_TOOL => $tool->get_name()),
                 array(
                     Manager :: PARAM_COMPONENT_ACTION,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE,
                     Manager :: PARAM_CATEGORY),
                 true) . '" ' . $link_class . '>';
             $html[] = $title;

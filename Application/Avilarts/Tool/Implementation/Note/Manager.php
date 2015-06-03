@@ -12,7 +12,7 @@ use Chamilo\Core\Repository\ContentObject\Note\Storage\DataClass\Note;
 /**
  * This tool allows a user to publish notes in his or her course.
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {
     const ACTION_VIEW_NOTES = 'Viewer';
 

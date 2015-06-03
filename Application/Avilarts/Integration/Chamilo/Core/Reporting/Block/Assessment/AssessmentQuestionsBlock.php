@@ -62,8 +62,8 @@ class AssessmentQuestionsBlock extends AssessmentBlock
             if ($attempt_count > 0)
             {
                 $params = $this->get_parent()->get_parameters();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = AssessmentQuestionUsersTemplate :: class_name();
-                $params[\Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION] = $question->get_id();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = AssessmentQuestionUsersTemplate :: class_name();
+                $params[\Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION] = $question->get_id();
                 $link = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
                 $reporting_data->add_data_category_row($count, Translation :: get('QuestionDetails'), $link);
             }
@@ -183,7 +183,7 @@ class AssessmentQuestionsBlock extends AssessmentBlock
     {
         $pid = $this->get_publication_id();
 
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $pid);
 

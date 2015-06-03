@@ -95,7 +95,7 @@ class CourseImportForm extends FormValidator
             $course_type_name = $csvcourse['course_type'];
             if ($course_type_name)
             {
-                $course_type = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_course_type_by_name(
+                $course_type = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_course_type_by_name(
                     $course_type_name);
                 if ($course_type)
                 {
@@ -132,7 +132,7 @@ class CourseImportForm extends FormValidator
                     $course->create_course_settings_from_values($setting_values);
                     CourseManagementRights :: get_instance()->create_rights_from_values($course, array());
                     
-                    if (! \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_user_to_course(
+                    if (! \Ehb\Application\Avilarts\Course\Storage\DataManager :: subscribe_user_to_course(
                         $course->get_id(), 
                         '1', 
                         $teacher_info->get_id()))
@@ -297,7 +297,7 @@ class CourseImportForm extends FormValidator
 
     private function is_course_type($type_name)
     {
-        return \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: is_course_type_valid($type_name);
+        return \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: is_course_type_valid($type_name);
     }
 
     private function is_course_category($category_name)

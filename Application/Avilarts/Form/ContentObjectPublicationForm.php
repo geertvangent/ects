@@ -322,7 +322,7 @@ class ContentObjectPublicationForm extends FormValidator
                 $type = ClassnameUtilities :: getInstance()->getClassnameFromObject(
                     $first_publication->get_content_object());
 
-                $class = '\Chamilo\Application\Weblcms\Tool\Implementation\\' .
+                $class = '\Ehb\Application\Avilarts\Tool\Implementation\\' .
                      (string) StringUtilities :: getInstance()->createString($type)->underscored() .
                      '\Component\ComplexDisplayComponent';
 
@@ -582,7 +582,7 @@ class ContentObjectPublicationForm extends FormValidator
         $this->addElement(
             'html',
             ResourceManager :: get_instance()->get_resource_html(
-                Path :: getInstance()->getJavascriptPath('Chamilo\Application\Weblcms', true) . 'RightsForm.js'));
+                Path :: getInstance()->getJavascriptPath('Ehb\Application\Avilarts', true) . 'RightsForm.js'));
     }
 
     /**
@@ -827,7 +827,7 @@ class ContentObjectPublicationForm extends FormValidator
         $body .= $content_object->get_description();
         $body .= '--<br />';
         $body .= $user->get_fullname() . ' - ' . $this->course->get_visual_code() . ' - ' . $this->course->get_title() .
-             ' - ' . Translation :: get('TypeName', null, 'Chamilo\Application\Weblcms\Tool\Implementation\\' . $tool);
+             ' - ' . Translation :: get('TypeName', null, 'Ehb\Application\Avilarts\Tool\Implementation\\' . $tool);
 
         // get targets
         $target_email = array();
@@ -1008,8 +1008,8 @@ class ContentObjectPublicationForm extends FormValidator
         $parameters[Manager :: PARAM_ACTION] = Manager :: ACTION_VIEW_COURSE;
         $parameters[Manager :: PARAM_COURSE] = $this->course->get_id();
         $parameters[Manager :: PARAM_TOOL] = $publication->get_tool();
-        $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
-        $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $publication->get_id();
+        $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
+        $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $publication->get_id();
 
         $redirect = new Redirect($parameters);
         return $redirect->getUrl();

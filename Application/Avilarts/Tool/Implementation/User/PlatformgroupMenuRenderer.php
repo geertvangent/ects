@@ -58,7 +58,7 @@ class PlatformgroupMenuRenderer extends GenericTree
     public function get_node_url($node_id)
     {
         $params = array();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP] = $node_id;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_GROUP] = $node_id;
         return $this->browser->get_url($params);
     }
 
@@ -69,7 +69,7 @@ class PlatformgroupMenuRenderer extends GenericTree
      */
     public function get_current_node_id()
     {
-        return Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+        return Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
     }
 
     /**
@@ -127,17 +127,17 @@ class PlatformgroupMenuRenderer extends GenericTree
     public function get_url_format()
     {
         $url_format = '?application=weblcms';
-        $url_format .= '&' . \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE . '=' .
-             Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
-        $url_format .= '&' . \Chamilo\Application\Weblcms\Manager :: PARAM_ACTION . '=' .
-             Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_ACTION);
-        $url_format .= '&' . \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL . '=' .
-             Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL);
-        $url_format .= '&' . \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION . '=' .
-             Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION);
+        $url_format .= '&' . \Ehb\Application\Avilarts\Manager :: PARAM_COURSE . '=' .
+             Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
+        $url_format .= '&' . \Ehb\Application\Avilarts\Manager :: PARAM_ACTION . '=' .
+             Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_ACTION);
+        $url_format .= '&' . \Ehb\Application\Avilarts\Manager :: PARAM_TOOL . '=' .
+             Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_TOOL);
+        $url_format .= '&' . \Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION . '=' .
+             Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION);
         $url_format .= '&' . Manager :: PARAM_BROWSER_TYPE . '=' . Request :: get(Manager :: PARAM_BROWSER_TYPE);
         $url_format .= '&' . Manager :: PARAM_TAB . '=' . Request :: get(Manager :: PARAM_TAB);
-        $url_format .= '&' . \Chamilo\Application\Weblcms\Manager :: PARAM_GROUP . '=%s';
+        $url_format .= '&' . \Ehb\Application\Avilarts\Manager :: PARAM_GROUP . '=%s';
         return $url_format;
     }
 

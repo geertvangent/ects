@@ -68,7 +68,7 @@ class RightsEditorComponent extends Manager
 
     public function get_additional_information()
     {
-        $publication_ids = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+        $publication_ids = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
         if (! is_array($publication_ids))
         {
             $publication_ids = array($publication_ids);
@@ -97,7 +97,7 @@ class RightsEditorComponent extends Manager
         switch ($type)
         {
             case self :: LOCATION_TYPE_OBJECT :
-                $publication_ids = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+                $publication_ids = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
                 if (! is_array($publication_ids))
                 {
                     $publication_ids = array($publication_ids);
@@ -105,7 +105,7 @@ class RightsEditorComponent extends Manager
 
                 foreach ($publication_ids as $publication_id)
                 {
-                    $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                    $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                         ContentObjectPublication :: class_name(),
                         $publication_id);
 
@@ -124,9 +124,9 @@ class RightsEditorComponent extends Manager
                 break;
             case self :: LOCATION_TYPE_LOCATIONS :
 
-                $course = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_by_id(
+                $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_by_id(
                     Course :: class_name(),
-                    Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE));
+                    Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE));
 
                 if ($course)
                 {
@@ -139,10 +139,10 @@ class RightsEditorComponent extends Manager
                 // tool link (only displayed if tool is not the Rights tool)
                 $tool = Translation :: get(
                     (string) StringUtilities :: getInstance()->createString(
-                        Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL))->upperCamelize());
+                        Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_TOOL))->upperCamelize());
 
                 if ($tool && strtolower($tool) !=
-                     strtolower(\Chamilo\Application\Weblcms\Tool\Manager :: class_to_type(RightsTool)))
+                     strtolower(\Ehb\Application\Avilarts\Tool\Manager :: class_to_type(RightsTool)))
                 {
                     $info[] = '<a href="' . $this->get_tool_rights_editor_url() . '">';
                     $info[] .= $tool;
@@ -150,11 +150,11 @@ class RightsEditorComponent extends Manager
                     $info[] .= ' > ';
 
                     // categories
-                    $category_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY);
+                    $category_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY);
                     if ($category_id)
                     {
                         // get the given category
-                        $category = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                        $category = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                             ContentObjectPublicationCategory :: class_name(),
                             $category_id);
 
@@ -178,7 +178,7 @@ class RightsEditorComponent extends Manager
                                 array_splice($info, $index, 0, $category_link);
 
                                 // parent
-                                $category = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                                $category = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                                     ContentObjectPublicationCategory :: class_name(),
                                     $category->get_parent());
                             }
@@ -208,8 +208,8 @@ class RightsEditorComponent extends Manager
     public function get_additional_parameters()
     {
         return array(
-            \Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION,
-            \Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY);
+            \Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION,
+            \Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY);
     }
 
     public function get_entities()
@@ -218,7 +218,7 @@ class RightsEditorComponent extends Manager
             new PropertyConditionVariable(CourseGroupRelation :: class_name(), CourseGroupRelation :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($this->get_course_id()));
 
-        $platform_group_relations = $course_group_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $platform_group_relations = $course_group_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseGroupRelation :: class_name(),
             $relation_condition);
 
@@ -295,7 +295,7 @@ class RightsEditorComponent extends Manager
 
         $condition = new AndCondition($conditions);
 
-        $relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(),
             $condition);
 
@@ -335,33 +335,33 @@ class RightsEditorComponent extends Manager
     {
         return $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL => \Chamilo\Application\Weblcms\Tool\Manager :: class_to_type(
+                \Ehb\Application\Avilarts\Manager :: PARAM_TOOL => \Ehb\Application\Avilarts\Tool\Manager :: class_to_type(
                     RightsTool),
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_EDIT_RIGHTS,
-                \Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY => null));
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_EDIT_RIGHTS,
+                \Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY => null));
     }
 
     public function get_tool_rights_editor_url()
     {
         return $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_EDIT_RIGHTS,
-                \Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY => null));
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_EDIT_RIGHTS,
+                \Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY => null));
     }
 
     public function get_category_rights_editor_url($category_id)
     {
         return $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_EDIT_RIGHTS,
-                \Chamilo\Application\Weblcms\Manager :: PARAM_CATEGORY => $category_id));
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_EDIT_RIGHTS,
+                \Ehb\Application\Avilarts\Manager :: PARAM_CATEGORY => $category_id));
     }
 
     public function get_publication_rights_editor_url($publication_id)
     {
         return $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_EDIT_RIGHTS,
-                \Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION => $publication_id));
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_EDIT_RIGHTS,
+                \Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION => $publication_id));
     }
 }

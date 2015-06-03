@@ -11,7 +11,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
-class XmlPublicationsTreeFeedComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
+class XmlPublicationsTreeFeedComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {
 
     public function run()

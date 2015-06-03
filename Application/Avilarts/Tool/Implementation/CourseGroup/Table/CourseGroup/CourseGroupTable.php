@@ -25,7 +25,7 @@ class CourseGroupTable extends DataClassTable implements TableFormActionsSupport
         {
             $actions->add_form_action(
                 new TableFormAction(
-                    array(\Chamilo\Application\Weblcms\Manager :: PARAM_ACTION => Manager :: ACTION_DELETE_COURSE_GROUP), 
+                    array(\Ehb\Application\Avilarts\Manager :: PARAM_ACTION => Manager :: ACTION_DELETE_COURSE_GROUP), 
                     Translation :: get('RemoveSelected')));
         }
         

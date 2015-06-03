@@ -34,7 +34,7 @@ class CourseSectionsTableDataProvider extends DataClassTableDataProvider
             new OrderBy(
                 new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_DISPLAY_ORDER)));
         
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(), 
             new DataClassRetrievesParameters($condition, $count, $offset, $order_property));
     }
@@ -46,6 +46,6 @@ class CourseSectionsTableDataProvider extends DataClassTableDataProvider
      */
     public function count_data($condition)
     {
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: count(CourseSection :: class_name(), $condition);
+        return \Ehb\Application\Avilarts\Storage\DataManager :: count(CourseSection :: class_name(), $condition);
     }
 }

@@ -35,10 +35,10 @@ class CourseStudentTrackerTemplate extends ReportingTemplate
 
     private function init_parameters()
     {
-        $course_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
+        $course_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
         if ($course_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE, $course_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE, $course_id);
         }
     }
 }

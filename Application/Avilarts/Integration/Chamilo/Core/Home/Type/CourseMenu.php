@@ -79,7 +79,7 @@ class CourseMenu extends Block
 
         $result = array();
 
-        $course_management_rights = \Chamilo\Application\Weblcms\Rights\CourseManagementRights :: get_instance();
+        $course_management_rights = \Ehb\Application\Avilarts\Rights\CourseManagementRights :: get_instance();
 
         $count_direct = $count_request = 0;
 
@@ -87,22 +87,22 @@ class CourseMenu extends Block
         while ($course_type = $course_types->next_result())
         {
             if ($course_management_rights->is_allowed(
-                \Chamilo\Application\Weblcms\Rights\CourseManagementRights :: CREATE_COURSE_RIGHT,
+                \Ehb\Application\Avilarts\Rights\CourseManagementRights :: CREATE_COURSE_RIGHT,
                 $course_type->get_id(),
-                \Chamilo\Application\Weblcms\Rights\CourseManagementRights :: TYPE_COURSE_TYPE))
+                \Ehb\Application\Avilarts\Rights\CourseManagementRights :: TYPE_COURSE_TYPE))
             {
                 $count_direct ++;
             }
             elseif ($course_management_rights->is_allowed(
-                \Chamilo\Application\Weblcms\Rights\CourseManagementRights :: REQUEST_COURSE_RIGHT,
+                \Ehb\Application\Avilarts\Rights\CourseManagementRights :: REQUEST_COURSE_RIGHT,
                 $course_type->get_id(),
-                \Chamilo\Application\Weblcms\Rights\CourseManagementRights :: TYPE_COURSE_TYPE))
+                \Ehb\Application\Avilarts\Rights\CourseManagementRights :: TYPE_COURSE_TYPE))
             {
                 $count_request ++;
             }
         }
 
-        if (PlatformSetting :: get('allow_course_creation_without_coursetype', 'Chamilo\Application\Weblcms'))
+        if (PlatformSetting :: get('allow_course_creation_without_coursetype', 'Ehb\Application\Avilarts'))
         {
             $count_direct ++;
         }
@@ -110,9 +110,9 @@ class CourseMenu extends Block
         if ($count_direct)
         {
             $HREF = $this->get_course_action_url(
-                \Chamilo\Application\Weblcms\Manager :: ACTION_COURSE_MANAGER,
+                \Ehb\Application\Avilarts\Manager :: ACTION_COURSE_MANAGER,
                 array(
-                    \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Course\Manager :: ACTION_QUICK_CREATE));
+                    \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Course\Manager :: ACTION_QUICK_CREATE));
             $TEXT = htmlspecialchars(Translation :: get('CourseCreate'));
             $IMG = Theme :: getInstance()->getCommonImagePath('Action/Create');
             $result[] = compact('HREF', 'TEXT', 'IMG');
@@ -122,9 +122,9 @@ class CourseMenu extends Block
         {
             $HREF = $this->get_url(
                 array(
-                    Application :: PARAM_CONTEXT => \Chamilo\Application\Weblcms\Manager :: context(),
+                    Application :: PARAM_CONTEXT => \Ehb\Application\Avilarts\Manager :: context(),
                     Application :: PARAM_ACTION => self :: ACTION_REQUEST,
-                    \Chamilo\Application\Weblcms\Request\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Request\Manager :: ACTION_CREATE));
+                    \Ehb\Application\Avilarts\Request\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Request\Manager :: ACTION_CREATE));
 
             $TEXT = htmlspecialchars(Translation :: get('CourseRequest'));
             $IMG = Theme :: getInstance()->getCommonImagePath('Action/Create');
@@ -139,18 +139,18 @@ class CourseMenu extends Block
         $result = array();
 
         $HREF = $this->get_course_action_url(
-            \Chamilo\Application\Weblcms\Manager :: ACTION_COURSE_MANAGER,
+            \Ehb\Application\Avilarts\Manager :: ACTION_COURSE_MANAGER,
             array(
-                \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Course\Manager :: ACTION_BROWSE_UNSUBSCRIBED_COURSES));
+                \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Course\Manager :: ACTION_BROWSE_UNSUBSCRIBED_COURSES));
 
         $TEXT = htmlspecialchars(Translation :: get('CourseSubscribe'));
         $IMG = Theme :: getInstance()->getCommonImagePath('Action/Subscribe');
         $result[] = compact('HREF', 'TEXT', 'IMG');
 
         $HREF = $this->get_course_action_url(
-            \Chamilo\Application\Weblcms\Manager :: ACTION_COURSE_MANAGER,
+            \Ehb\Application\Avilarts\Manager :: ACTION_COURSE_MANAGER,
             array(
-                \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Course\Manager :: ACTION_BROWSE_SUBSCRIBED_COURSES));
+                \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Course\Manager :: ACTION_BROWSE_SUBSCRIBED_COURSES));
 
         $TEXT = htmlspecialchars(Translation :: get('CourseUnsubscribe'));
         $IMG = Theme :: getInstance()->getCommonImagePath('Action/Unsubscribe');
@@ -164,27 +164,27 @@ class CourseMenu extends Block
         $result = array();
 
         $HREF = $this->get_course_action_url(
-            \Chamilo\Application\Weblcms\Manager :: ACTION_COURSE_MANAGER,
+            \Ehb\Application\Avilarts\Manager :: ACTION_COURSE_MANAGER,
             array(
-                \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Course\Manager :: ACTION_QUICK_CREATE));
+                \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Course\Manager :: ACTION_QUICK_CREATE));
         $TEXT = htmlspecialchars(Translation :: get('CourseCreate'));
         $IMG = Theme :: getInstance()->getCommonImagePath('Action/Create');
         $result[] = compact('HREF', 'TEXT', 'IMG');
 
-        $HREF = $this->get_course_action_url(\Chamilo\Application\Weblcms\Manager :: ACTION_COURSE_MANAGER);
+        $HREF = $this->get_course_action_url(\Ehb\Application\Avilarts\Manager :: ACTION_COURSE_MANAGER);
         $TEXT = htmlspecialchars(Translation :: get('CourseList'));
         $IMG = Theme :: getInstance()->getCommonImagePath('Action/Browser');
         $result[] = compact('HREF', 'TEXT', 'IMG');
 
-        $HREF = $this->get_course_action_url(\Chamilo\Application\Weblcms\Manager :: ACTION_ADMIN_REQUEST_BROWSER);
+        $HREF = $this->get_course_action_url(\Ehb\Application\Avilarts\Manager :: ACTION_ADMIN_REQUEST_BROWSER);
         $TEXT = htmlspecialchars(
-            Translation :: get('UserRequestList', null, \Chamilo\Application\Weblcms\Manager :: context()));
+            Translation :: get('UserRequestList', null, \Ehb\Application\Avilarts\Manager :: context()));
         $IMG = Theme :: getInstance()->getCommonImagePath('Action/Browser');
         $result[] = compact('HREF', 'TEXT', 'IMG');
 
-        $HREF = $this->get_course_action_url(\Chamilo\Application\Weblcms\Manager :: ACTION_REQUEST);
+        $HREF = $this->get_course_action_url(\Ehb\Application\Avilarts\Manager :: ACTION_REQUEST);
         $TEXT = htmlspecialchars(
-            Translation :: get('RequestList', null, \Chamilo\Application\Weblcms\Manager :: context()));
+            Translation :: get('RequestList', null, \Ehb\Application\Avilarts\Manager :: context()));
         $IMG = Theme :: getInstance()->getCommonImagePath('Action/Browser');
         $result[] = compact('HREF', 'TEXT', 'IMG');
 
@@ -193,8 +193,8 @@ class CourseMenu extends Block
 
     public function get_course_action_url($action, $params = array())
     {
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_ACTION] = $action;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_ACTION] = $action;
 
         $redirect = new Redirect($params);
         return htmlspecialchars($redirect->getUrl());

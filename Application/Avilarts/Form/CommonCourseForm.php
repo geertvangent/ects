@@ -286,10 +286,10 @@ abstract class CommonCourseForm extends FormValidator implements CourseSettingsX
     public function build_settings_tab_form_elements()
     {
         $this->add_settings_from_xml(
-            Path :: getInstance()->namespaceToFullPath('Chamilo\Application\Weblcms') .
+            Path :: getInstance()->namespaceToFullPath('Ehb\Application\Avilarts') .
             join(DIRECTORY_SEPARATOR, array('Resources', 'Settings', 'course_settings.xml')),
             Manager :: context(),
-            new \Chamilo\Application\Weblcms\CourseSettingsConnector(),
+            new \Ehb\Application\Avilarts\CourseSettingsConnector(),
             CourseSettingsController :: SETTING_PARAM_COURSE_SETTINGS);
     }
 
@@ -330,7 +330,7 @@ abstract class CommonCourseForm extends FormValidator implements CourseSettingsX
 
         while ($tool = $tools->next_result())
         {
-            $tool_namespace = \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool->get_name());
+            $tool_namespace = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name());
             $tool_title = Translation :: get('TypeName', null, $tool_namespace);
 
             $dynamic_content_menu->add_menu_item(
@@ -375,7 +375,7 @@ abstract class CommonCourseForm extends FormValidator implements CourseSettingsX
         $this->addElement(
             'html',
             ResourceManager :: get_instance()->get_resource_html(
-                Path :: getInstance()->getJavascriptPath('Chamilo\Application\Weblcms', true) . 'RightsForm.js'));
+                Path :: getInstance()->getJavascriptPath('Ehb\Application\Avilarts', true) . 'RightsForm.js'));
     }
 
     /**
@@ -436,7 +436,7 @@ abstract class CommonCourseForm extends FormValidator implements CourseSettingsX
                 continue;
             }
 
-            $tool_namespace = \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool_name);
+            $tool_namespace = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool_name);
             $tool_title = Translation :: get('TypeName', null, $tool_namespace);
             $tool_image_src = Theme :: getInstance()->getImagePath($tool_namespace, 'Logo/' . Theme :: ICON_MINI);
             $tool_image = $tool_name . "_image";
@@ -543,7 +543,7 @@ abstract class CommonCourseForm extends FormValidator implements CourseSettingsX
         $tool = $menu_item_id[0];
         $tool_id = $menu_item_id[1];
 
-        $tool_namespace = \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool);
+        $tool_namespace = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool);
         $tool_path = Path :: getInstance()->namespaceToFullPath($tool_namespace);
         $settings_xml_path = $tool_path . 'Resources/Settings/course_settings.xml';
 

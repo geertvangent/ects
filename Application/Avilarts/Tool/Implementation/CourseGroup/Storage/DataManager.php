@@ -598,7 +598,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
             new PropertyConditionVariable(CourseUserRelation :: class_name(), CourseUserRelation :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable($course_group->get_course_code()));
         
-        $course_users = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $course_users = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(), 
             $course_condition);
         

@@ -40,7 +40,7 @@ class MostActiveInactiveLastPublicationBlock extends CourseBlock
                 new PropertyConditionVariable(
                     ContentObjectPublication :: class_name(), 
                     ContentObjectPublication :: PROPERTY_MODIFIED_DATE));
-            $publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+            $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
                 $condition, 
                 $order_by, 
                 0, 

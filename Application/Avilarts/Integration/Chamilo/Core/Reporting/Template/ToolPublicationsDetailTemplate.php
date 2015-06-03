@@ -39,7 +39,7 @@ class ToolPublicationsDetailTemplate extends ReportingTemplate
             new Breadcrumb(
                 $this->get_url(
                     array(\Chamilo\Core\Reporting\Viewer\Manager :: PARAM_BLOCK_ID => 4), 
-                    array(\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID)), 
+                    array(\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID)), 
                 Translation :: get('LastAccessToToolsBlock')));
         
         $trail->add(
@@ -48,6 +48,6 @@ class ToolPublicationsDetailTemplate extends ReportingTemplate
                 Translation :: get(
                     'TypeName', 
                     null, 
-                    \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($this->tool))));
+                    \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($this->tool))));
     }
 }

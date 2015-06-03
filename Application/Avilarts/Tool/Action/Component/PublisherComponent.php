@@ -38,11 +38,11 @@ class PublisherComponent extends Manager implements \Chamilo\Core\Repository\Vie
         {
             $objects = \Chamilo\Core\Repository\Viewer\Manager :: get_selected_objects();
 
-            $mode = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLISH_MODE);
+            $mode = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLISH_MODE);
             $publish_type = PlatformSetting :: get('display_publication_screen', __NAMESPACE__);
-            $show_form = (($publish_type == \Chamilo\Application\Weblcms\Tool\Manager :: PUBLISH_TYPE_FORM) || ($publish_type ==
-                 \Chamilo\Application\Weblcms\Tool\Manager :: PUBLISH_TYPE_BOTH &&
-                 $mode != \Chamilo\Application\Weblcms\Tool\Manager :: PUBLISH_MODE_QUICK));
+            $show_form = (($publish_type == \Ehb\Application\Avilarts\Tool\Manager :: PUBLISH_TYPE_FORM) || ($publish_type ==
+                 \Ehb\Application\Avilarts\Tool\Manager :: PUBLISH_TYPE_BOTH &&
+                 $mode != \Ehb\Application\Avilarts\Tool\Manager :: PUBLISH_MODE_QUICK));
 
             $publisher = new ContentObjectPublisher($this, $objects, $show_form);
 
@@ -56,22 +56,22 @@ class PublisherComponent extends Manager implements \Chamilo\Core\Repository\Vie
                     Utilities :: COMMON_LIBRARIES);
 
                 $parameters = array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_BROWSE);
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_BROWSE);
 
                 if ($publisher->is_publish_and_build_submit())
                 {
-                    $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_BUILD_COMPLEX_CONTENT_OBJECT;
+                    $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_BUILD_COMPLEX_CONTENT_OBJECT;
 
                     $publications = $publisher->get_publications();
-                    $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $publications[0]->get_id();
+                    $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $publications[0]->get_id();
                 }
 
                 if ($publisher->is_publish_and_view_submit())
                 {
-                    $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT;
+                    $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT;
 
                     $publications = $publisher->get_publications();
-                    $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $publications[0]->get_id();
+                    $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $publications[0]->get_id();
                 }
 
                 $this->redirect($message, ! $success, $parameters);
@@ -91,6 +91,6 @@ class PublisherComponent extends Manager implements \Chamilo\Core\Repository\Vie
 
     public function get_additional_parameters()
     {
-        return array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLISH_MODE);
+        return array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLISH_MODE);
     }
 }

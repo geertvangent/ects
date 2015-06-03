@@ -51,13 +51,13 @@ class NewDocuments extends NewBlock
             }
 
             $parameters = array(
-                \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE => $course_id,
-                Application :: PARAM_ACTION => \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE,
-                Application :: PARAM_CONTEXT => \Chamilo\Application\Weblcms\Manager :: context(),
-                \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL => 'document',
-                \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION => \Chamilo\Application\Weblcms\Tool\Implementation\Document\Manager :: ACTION_VIEW_DOCUMENTS,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE => ContentObjectRenderer :: TYPE_TABLE,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $id);
+                \Ehb\Application\Avilarts\Manager :: PARAM_COURSE => $course_id,
+                Application :: PARAM_ACTION => \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE,
+                Application :: PARAM_CONTEXT => \Ehb\Application\Avilarts\Manager :: context(),
+                \Ehb\Application\Avilarts\Manager :: PARAM_TOOL => 'document',
+                \Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\Document\Manager :: ACTION_VIEW_DOCUMENTS,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE => ContentObjectRenderer :: TYPE_TABLE,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $id);
 
             $redirect = new Redirect($parameters);
             $link = $redirect->getUrl();
@@ -71,7 +71,7 @@ class NewDocuments extends NewBlock
     private function get_new_documents_icon()
     {
         return Theme :: getInstance()->getImagePath(
-            \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace(self :: TOOL_DOCUMENT),
+            \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace(self :: TOOL_DOCUMENT),
             'Logo/' . Theme :: ICON_MINI . 'New');
     }
 }

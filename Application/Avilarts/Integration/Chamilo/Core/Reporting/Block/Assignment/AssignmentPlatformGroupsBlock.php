@@ -26,7 +26,7 @@ class AssignmentPlatformGroupsBlock extends AssignmentSubmittersBlock
     {
         $order_by = array();
         $order_by[] = new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME));
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_publication_target_platform_groups(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_publication_target_platform_groups(
             $this->get_publication_id(), 
             $this->get_course_id(), 
             null, 
@@ -42,15 +42,15 @@ class AssignmentPlatformGroupsBlock extends AssignmentSubmittersBlock
     {
         $submissions_resultset = AssignmentDataManager :: retrieve_submissions_by_submitter_type(
             $this->get_publication_id(), 
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP, 
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME);
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP, 
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME);
         
         $this->get_array_from_resultset($submissions_resultset, $this->submissions);
         
         $feedbacks_resultset = AssignmentDataManager :: retrieve_submitter_feedbacks(
             $this->get_publication_id(), 
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP, 
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME);
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP, 
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME);
         
         $this->get_array_from_resultset($feedbacks_resultset, $this->feedbacks);
     }

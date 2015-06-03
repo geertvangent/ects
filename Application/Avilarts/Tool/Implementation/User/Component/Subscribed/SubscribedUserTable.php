@@ -31,12 +31,12 @@ class SubscribedUserTable extends RecordTable implements TableFormActionsSupport
         if ($this->get_component()->is_course_admin($this->get_component()->get_user()))
         {
             // if we are not editing groups
-            if (! Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP))
+            if (! Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP))
             {
                 $actions->add_form_action(
                     new TableFormAction(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_UNSUBSCRIBE), 
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_UNSUBSCRIBE), 
                         Translation :: get('UnsubscribeSelected'), 
                         false));
                 
@@ -44,7 +44,7 @@ class SubscribedUserTable extends RecordTable implements TableFormActionsSupport
                 $actions->add_form_action(
                     new TableFormAction(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_CHANGE_USER_STATUS_TEACHER), 
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_CHANGE_USER_STATUS_TEACHER), 
                         Translation :: get('MakeTeacher'), 
                         false));
                 
@@ -52,7 +52,7 @@ class SubscribedUserTable extends RecordTable implements TableFormActionsSupport
                 $actions->add_form_action(
                     new TableFormAction(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_CHANGE_USER_STATUS_STUDENT), 
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_CHANGE_USER_STATUS_STUDENT), 
                         Translation :: get('MakeStudent'), 
                         false));
             }

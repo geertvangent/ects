@@ -127,7 +127,7 @@ class HomeComponent extends Manager implements DelegateComponent
 
         $count_direct = $count_request = 0;
 
-        $course_types = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_active_course_types();
+        $course_types = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_active_course_types();
         while ($course_type = $course_types->next_result())
         {
             if ($course_management_rights->is_allowed(
@@ -146,7 +146,7 @@ class HomeComponent extends Manager implements DelegateComponent
             }
         }
 
-        if (PlatformSetting :: get('allow_course_creation_without_coursetype', 'Chamilo\Application\Weblcms'))
+        if (PlatformSetting :: get('allow_course_creation_without_coursetype', 'Ehb\Application\Avilarts'))
         {
             $count_direct ++;
         }
@@ -160,7 +160,7 @@ class HomeComponent extends Manager implements DelegateComponent
                     $this->get_url(
                         array(
                             Application :: PARAM_ACTION => self :: ACTION_COURSE_MANAGER,
-                            \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Course\Manager :: ACTION_QUICK_CREATE))) .
+                            \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Course\Manager :: ACTION_QUICK_CREATE))) .
                  '">' . htmlspecialchars(Translation :: get('CourseCreate')) . '</a></li>';
         }
 
@@ -173,11 +173,11 @@ class HomeComponent extends Manager implements DelegateComponent
                     $this->get_url(
                         array(
                             Application :: PARAM_ACTION => self :: ACTION_REQUEST,
-                            \Chamilo\Application\Weblcms\Request\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Request\Manager :: ACTION_CREATE))) .
+                            \Ehb\Application\Avilarts\Request\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Request\Manager :: ACTION_CREATE))) .
                  '">' . Utilities :: htmlentities(Translation :: get('CourseRequest')) . '</a></li>';
         }
 
-        if (\Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->request_is_allowed())
+        if (\Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->request_is_allowed())
         {
             $html[] = '<li class="tool_list_menu" style="background-image: url(' .
                  htmlspecialchars(Theme :: getInstance()->getCommonImagePath('Action/Browser')) .
@@ -207,7 +207,7 @@ class HomeComponent extends Manager implements DelegateComponent
                     $this->get_url(
                         array(
                             Application :: PARAM_ACTION => self :: ACTION_COURSE_MANAGER,
-                            \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Course\Manager :: ACTION_BROWSE_UNSUBSCRIBED_COURSES))) .
+                            \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Course\Manager :: ACTION_BROWSE_UNSUBSCRIBED_COURSES))) .
                  '">' . htmlspecialchars(Translation :: get('CourseSubscribe')) . '</a></li>';
             $html[] = '<li class="tool_list_menu" style="background-image: url(' .
                  htmlspecialchars(Theme :: getInstance()->getCommonImagePath('Action/Unsubscribe')) .
@@ -216,7 +216,7 @@ class HomeComponent extends Manager implements DelegateComponent
                     $this->get_url(
                         array(
                             Application :: PARAM_ACTION => self :: ACTION_COURSE_MANAGER,
-                            \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Course\Manager :: ACTION_BROWSE_SUBSCRIBED_COURSES))) .
+                            \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Course\Manager :: ACTION_BROWSE_SUBSCRIBED_COURSES))) .
                  '">' . htmlspecialchars(Translation :: get('CourseUnsubscribe')) . '</a></li>';
         }
 
@@ -233,7 +233,7 @@ class HomeComponent extends Manager implements DelegateComponent
                 $this->get_url(
                     array(
                         Application :: PARAM_ACTION => self :: ACTION_COURSE_MANAGER,
-                        \Chamilo\Application\Weblcms\Course\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Course\Manager :: ACTION_QUICK_CREATE))) .
+                        \Ehb\Application\Avilarts\Course\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Course\Manager :: ACTION_QUICK_CREATE))) .
              '">' . htmlspecialchars(Translation :: get('CourseCreate')) . '</a></li>';
         $html[] = '<li class="tool_list_menu" style="background-image: url(' .
              htmlspecialchars(Theme :: getInstance()->getCommonImagePath('Action/Browser')) .

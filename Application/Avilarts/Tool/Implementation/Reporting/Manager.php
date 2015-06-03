@@ -7,7 +7,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\Reporting;
  * @package application.lib.weblcms.tool.reporting
  * @author Michael Kyndt
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {
     const PARAM_REPORTING_TOOL = 'reporting_tool';
     const PARAM_QUESTION = 'question';

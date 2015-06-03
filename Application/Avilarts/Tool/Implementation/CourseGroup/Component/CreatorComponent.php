@@ -35,7 +35,7 @@ class CreatorComponent extends Manager
         $course_group->set_course_code($course->get_id());
         $course_group->set_parent_id($course_group_id);
 
-        $param_add_course_group[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = self :: ACTION_ADD_COURSE_GROUP;
+        $param_add_course_group[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = self :: ACTION_ADD_COURSE_GROUP;
         $param_add_course_group[self :: PARAM_COURSE_GROUP] = $course_group_id;
 
         if ($_REQUEST['submit'] == 'AddTitles')
@@ -93,7 +93,7 @@ class CreatorComponent extends Manager
                     $message,
                     ! $succes,
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_VIEW_GROUPS,
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_VIEW_GROUPS,
                         self :: PARAM_COURSE_GROUP => $course_group->get_parent_id()));
             }
             else

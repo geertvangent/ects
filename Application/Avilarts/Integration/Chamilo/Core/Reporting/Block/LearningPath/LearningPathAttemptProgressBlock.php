@@ -34,7 +34,7 @@ class LearningPathAttemptProgressBlock extends ToolBlock
     public function get_attempt_id()
     {
         return $this->get_parent()->get_parameter(
-            \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID);
+            \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID);
     }
 
     public function count_data()
@@ -53,7 +53,7 @@ class LearningPathAttemptProgressBlock extends ToolBlock
         $tracker = $this->retrieve_tracker();
         $attempt_data = $this->retrieve_tracker_items($tracker);
         $pid = $this->get_publication_id();
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $pid);
 
@@ -71,21 +71,21 @@ class LearningPathAttemptProgressBlock extends ToolBlock
             {
                 $params = $this->get_parent()->get_parameters();
                 $params[\Chamilo\Core\Repository\Display\Manager :: PARAM_SELECTED_COMPLEX_CONTENT_OBJECT_ITEM_ID] = $wrapper_id;
-                Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS) ? $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = Request :: get(
-                    \Chamilo\Application\Weblcms\Manager :: PARAM_USERS) : $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = Session :: get_user_id();
+                Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS) ? $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = Request :: get(
+                    \Ehb\Application\Avilarts\Manager :: PARAM_USERS) : $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = Session :: get_user_id();
                 Request :: get(
-                    \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID) ? $params[\Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID] = Request :: get(
-                    \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID) : $params[\Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID] = $tracker->get_id();
-                $params[\Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: PARAM_ASSESSMENT_ID] = $object->get_id();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
+                    \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID) ? $params[\Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID] = Request :: get(
+                    \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID) : $params[\Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ATTEMPT_ID] = $tracker->get_id();
+                $params[\Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: PARAM_ASSESSMENT_ID] = $object->get_id();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
                     LearningPath :: class_name(),
                     true);
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_ASSESSMENT_RESULTS;
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_ASSESSMENT_RESULTS;
 
                 $redirect = new Redirect(
                     $params,
                     array(
-                        \Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID,
+                        \Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID,
                         \Chamilo\Core\Reporting\Viewer\Manager :: PARAM_ACTION));
                 $assessment_url = $redirect->getUrl();
 
@@ -121,15 +121,15 @@ class LearningPathAttemptProgressBlock extends ToolBlock
 
             $actions = array();
 
-            if ($this->get_parent()->get_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION) ==
-                 \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS)
+            if ($this->get_parent()->get_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION) ==
+                 \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS)
             {
                 $params = array_merge(
                     $this->get_parent()->get_parameters(),
                     $this->get_parent()->get_parent()->get_parameters());
-                $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-                $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-                $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS;
+                $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+                $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+                $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\LearningPath\Manager :: ACTION_VIEW_STATISTICS;
                 $params[StatisticsViewerComponent :: PARAM_STAT] = StatisticsViewerComponent :: ACTION_DELETE_LPI_ATTEMPTS;
                 $params[StatisticsViewerComponent :: PARAM_ITEM_ID] = $wrapper_id;
 
@@ -195,14 +195,14 @@ class LearningPathAttemptProgressBlock extends ToolBlock
         $attempt_id = $this->get_attempt_id();
         if ($this->get_attempt_id())
         {
-            return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            return \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 LearningPathAttempt :: class_name(),
                 $attempt_id);
         }
         else
         {
             $pid = $this->get_publication_id();
-            $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(),
                 $pid);
 
@@ -224,7 +224,7 @@ class LearningPathAttemptProgressBlock extends ToolBlock
                 new StaticConditionVariable(Session :: get_user_id()));
             $condition = new AndCondition($conditions);
 
-            $attempt = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve(
+            $attempt = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve(
                 LearningPathAttempt :: class_name(),
                 new DataClassRetrieveParameters($condition));
 
@@ -251,7 +251,7 @@ class LearningPathAttemptProgressBlock extends ToolBlock
                 LearningPathItemAttempt :: PROPERTY_LEARNING_PATH_ATTEMPT_ID),
             new StaticConditionVariable($attempt->get_id()));
 
-        $item_attempts = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $item_attempts = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             LearningPathItemAttempt :: class_name(),
             new DataClassRetrievesParameters($condition));
 

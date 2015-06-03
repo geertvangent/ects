@@ -14,7 +14,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Utilities\Utilities;
 
-class XmlCourseTypeFeedComponent extends \Chamilo\Application\Weblcms\CourseType\Ajax\Manager
+class XmlCourseTypeFeedComponent extends \Ehb\Application\Avilarts\CourseType\Ajax\Manager
 {
 
     public function run()

@@ -24,7 +24,7 @@ class AssessmentQuestionAttemptsUserBlock extends AssessmentBlock
         $reporting_data->set_rows($this->get_reporting_data_rows());
 
         $question_id = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
+            \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
 
         $question = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
             ComplexContentObjectItem :: class_name(),

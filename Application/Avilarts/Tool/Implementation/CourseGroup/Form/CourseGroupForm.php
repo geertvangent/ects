@@ -899,7 +899,7 @@ class CourseGroupForm extends FormValidator
             'html',
             ResourceManager :: get_instance()->get_resource_html(
                 Path :: getInstance()->getJavascriptPath(
-                    'Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup',
+                    'Ehb\Application\Avilarts\Tool\Implementation\CourseGroup',
                     true) . 'CourseGroupEditForm.js'));
 
         $this->build_header($this->course_group->get_name());
@@ -962,7 +962,7 @@ class CourseGroupForm extends FormValidator
             'html',
             ResourceManager :: get_instance()->get_resource_html(
                 Path :: getInstance()->getJavascriptPath(
-                    'Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup',
+                    'Ehb\Application\Avilarts\Tool\Implementation\CourseGroup',
                     true) . 'CourseGroupForm.js'));
 
         for ($option_number = 0; $option_number < $number_of_options; $option_number ++)
@@ -1012,7 +1012,7 @@ class CourseGroupForm extends FormValidator
             'html',
             ResourceManager :: get_instance()->get_resource_html(
                 Path :: getInstance()->getJavascriptPath(
-                    'Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup',
+                    'Ehb\Application\Avilarts\Tool\Implementation\CourseGroup',
                     true) . 'CourseGroupForm.js'));
 
         $this->build_header(Translation :: get('CourseGroupParent'));
@@ -1537,7 +1537,7 @@ class CourseGroupForm extends FormValidator
      */
     public function set_rights_content_object_publication($content_object_publication, $course_group, $rights)
     {
-        $context = \Chamilo\Application\Weblcms\Manager :: context();
+        $context = \Ehb\Application\Avilarts\Manager :: context();
 
         $weblcms_rights = WeblcmsRights :: get_instance();
         $entity_id = $course_group->get_id();
@@ -1578,7 +1578,7 @@ class CourseGroupForm extends FormValidator
     public function set_rights_content_object_publication_category($content_object_publication_category, $course_group,
         $rights)
     {
-        $context = \Chamilo\Application\Weblcms\Manager :: context();
+        $context = \Ehb\Application\Avilarts\Manager :: context();
         $weblcms_rights = WeblcmsRights :: get_instance();
 
         $entity_id = $course_group->get_id();

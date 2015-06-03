@@ -106,7 +106,7 @@ class Manager implements PublicationInterface
         $locations = new Locations(ClassnameUtilities :: getInstance()->getNamespaceParent(__NAMESPACE__));
         $type = $content_object->get_type();
 
-        $courses = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_all_courses_from_user($user);
+        $courses = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_all_courses_from_user($user);
 
         $possible_courses = array();
 
@@ -129,7 +129,7 @@ class Manager implements PublicationInterface
         {
             $tool_name = $tool->get_name();
 
-            $class = \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool_name) . '\Manager';
+            $class = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool_name) . '\Manager';
             $allowed_types = $class :: get_allowed_types();
 
             if (count($allowed_types) > 0)
@@ -152,7 +152,7 @@ class Manager implements PublicationInterface
                         CourseManagementRights :: PUBLISH_FROM_REPOSITORY_RIGHT,
                         $course->get_id()))
                     {
-                        $tool_namespace = \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace(
+                        $tool_namespace = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace(
                             $tool_names[$tool_id]);
                         $tool_name = Translation :: get('TypeName', null, $tool_namespace);
 
@@ -203,7 +203,7 @@ class Manager implements PublicationInterface
             return false;
         }
 
-        $possible_publication_class = 'Chamilo\Application\Weblcms\Tool\Implementation\\' . $location->get_tool_id() .
+        $possible_publication_class = 'Ehb\Application\Avilarts\Tool\Implementation\\' . $location->get_tool_id() .
              '\Storage\DataClass\Publication';
         if (class_exists($possible_publication_class))
         {
@@ -228,12 +228,12 @@ class Manager implements PublicationInterface
 
         $form->addElement(
             'splitter',
-            Translation :: get('PublicationDetails', null, \Chamilo\Application\Weblcms\Manager :: context()));
+            Translation :: get('PublicationDetails', null, \Ehb\Application\Avilarts\Manager :: context()));
         $form->addElement(
             'checkbox',
             \Chamilo\Core\Repository\Publication\Manager :: WIZARD_OPTION . '[' . $registration->get_id() . '][' .
                  ContentObjectPublication :: PROPERTY_HIDDEN . ']',
-                Translation :: get('Hidden', null, \Chamilo\Application\Weblcms\Manager :: context()));
+                Translation :: get('Hidden', null, \Ehb\Application\Avilarts\Manager :: context()));
         $form->add_forever_or_timewindow(
             'PublicationPeriod',
             \Chamilo\Core\Repository\Publication\Manager :: WIZARD_OPTION . '[' . $registration->get_id() . ']',

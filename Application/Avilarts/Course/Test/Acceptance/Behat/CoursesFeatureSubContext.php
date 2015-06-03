@@ -140,7 +140,7 @@ class CoursesFeatureSubContext implements Context
             return false;
         }
         
-        return \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_user_to_course(
+        return \Ehb\Application\Avilarts\Course\Storage\DataManager :: subscribe_user_to_course(
             $course->get_id(), 
             $status, 
             $user->get_id());
@@ -208,7 +208,7 @@ class CoursesFeatureSubContext implements Context
             new PropertyConditionVariable(Course :: class_name(), Course :: PROPERTY_TITLE), 
             new StaticConditionVariable($course_title));
         
-        $course = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve(
+        $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve(
             Course :: class_name(), 
             $condition);
         

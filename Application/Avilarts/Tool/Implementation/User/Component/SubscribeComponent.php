@@ -47,7 +47,7 @@ class SubscribeComponent extends Manager
                 {
                     $status = Request :: get(self :: PARAM_STATUS) ? Request :: get(self :: PARAM_STATUS) : 5;
 
-                    if (\Chamilo\Application\Weblcms\Course\Storage\DataManager :: is_user_direct_subscribed_to_course(
+                    if (\Ehb\Application\Avilarts\Course\Storage\DataManager :: is_user_direct_subscribed_to_course(
                         $user_id,
                         $course_id) || (! $this->get_user()->is_platform_admin() && ! $course_management_rights->is_allowed(
                         CourseManagementRights :: TEACHER_DIRECT_SUBSCRIBE_RIGHT,
@@ -59,7 +59,7 @@ class SubscribeComponent extends Manager
                         continue;
                     }
 
-                    if (! \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_user_to_course(
+                    if (! \Ehb\Application\Avilarts\Course\Storage\DataManager :: subscribe_user_to_course(
                         $course_id,
                         $status,
                         $user_id))
@@ -104,7 +104,7 @@ class SubscribeComponent extends Manager
                     Translation :: get($message),
                     ($success ? false : true),
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_USER_BROWSER));
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_USER_BROWSER));
             }
         }
     }

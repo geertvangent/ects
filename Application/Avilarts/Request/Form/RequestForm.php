@@ -124,7 +124,7 @@ class RequestForm extends FormValidator
     {
         if (! isset($this->course_types))
         {
-            $course_type_objects = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_active_course_types();
+            $course_type_objects = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_active_course_types();
             $course_management_rights = CourseManagementRights :: get_instance();
             
             while ($course_type = $course_type_objects->next_result())

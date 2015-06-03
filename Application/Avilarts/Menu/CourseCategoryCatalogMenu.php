@@ -140,7 +140,7 @@ class CourseCategoryCatalogMenu extends HTML_Menu
             
             if ($this->get_display_child_count())
             {
-                $count = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: count(
+                $count = \Ehb\Application\Avilarts\Course\Storage\DataManager :: count(
                     Course :: class_name(), 
                     new EqualityCondition(
                         new PropertyConditionVariable(Course :: class_name(), Course :: PROPERTY_CATEGORY), 

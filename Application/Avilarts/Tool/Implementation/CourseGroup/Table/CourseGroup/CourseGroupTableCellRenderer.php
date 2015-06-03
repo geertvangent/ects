@@ -34,7 +34,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
                     $url = $this->get_component()->get_url(
                         array(
                             Manager :: PARAM_ACTION => Manager :: ACTION_UNSUBSCRIBE,
-                            \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP => $course_group->get_id()));
+                            \Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP => $course_group->get_id()));
                     return '<a href="' . $url . '">' . $course_group->get_name() . '</a>';
                 }
                 else
@@ -51,7 +51,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
     {
         $toolbar = new Toolbar();
         $parameters = array();
-        $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
+        $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
 
         if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
         {
@@ -67,7 +67,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
                     ToolbarItem :: DISPLAY_ICON));
 
             $parameters = array();
-            $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
+            $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
             $parameters[Manager :: PARAM_COURSE_GROUP_ACTION] = Manager :: ACTION_DELETE_COURSE_GROUP;
             $delete_url = $this->get_component()->get_url($parameters);
 
@@ -113,7 +113,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
                     $user->get_id()))
                 {
                     $parameters = array();
-                    $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
+                    $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
                     $parameters[Manager :: PARAM_COURSE_GROUP_ACTION] = Manager :: ACTION_USER_SELF_SUBSCRIBE;
                     $subscribe_url = $this->get_component()->get_url($parameters);
                     $toolbar->add_item(
@@ -128,7 +128,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
         else
         {
             $parameters = array();
-            $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
+            $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
             $parameters[Manager :: PARAM_COURSE_GROUP_ACTION] = Manager :: ACTION_MANAGE_SUBSCRIPTIONS;
             $subscribe_url = $this->get_component()->get_url($parameters);
             $toolbar->add_item(
@@ -143,7 +143,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
              $course_group->is_self_unregistration_allowed() && $course_group->is_member($user))
         {
             $parameters = array();
-            $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
+            $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
             $parameters[Manager :: PARAM_COURSE_GROUP_ACTION] = Manager :: ACTION_USER_SELF_UNSUBSCRIBE;
             $unsubscribe_url = $this->get_component()->get_url($parameters);
             $toolbar->add_item(

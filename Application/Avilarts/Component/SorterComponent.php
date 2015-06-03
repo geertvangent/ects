@@ -42,7 +42,7 @@ class SorterComponent extends Manager
      */
     public function run()
     {
-        \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: fix_course_tab_user_orders_for_user(
+        \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: fix_course_tab_user_orders_for_user(
             $this->get_user_id());
         DataManager :: fix_course_type_user_category_rel_course_for_user($this->get_user_id());
 
@@ -96,7 +96,7 @@ class SorterComponent extends Manager
 
         if (isset($selected_course_type_id) && $selected_course_type_id != 0)
         {
-            $selected_course_type = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_by_id(
+            $selected_course_type = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_by_id(
                 CourseType :: class_name(),
                 $selected_course_type_id);
 
@@ -105,16 +105,16 @@ class SorterComponent extends Manager
                 throw new ObjectNotExistException($course_type_translation, $selected_course_type_id);
             }
 
-            $selected_course_type_user_order = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_user_order_for_course_type(
+            $selected_course_type_user_order = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_user_order_for_course_type(
                 $selected_course_type_id,
                 $this->get_user_id());
 
             if (! $selected_course_type_user_order)
             {
-                \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: create_course_type_user_orders_for_user(
+                \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: create_course_type_user_orders_for_user(
                     $this->get_user_id());
 
-                $selected_course_type_user_order = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_user_order_for_course_type(
+                $selected_course_type_user_order = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_user_order_for_course_type(
                     $selected_course_type_id,
                     $this->get_user_id());
             }
@@ -437,14 +437,14 @@ class SorterComponent extends Manager
          */
         $course_type_id = $renderer->get_selected_course_type_id();
 
-        $course_type_user_order = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_user_order_for_course_type(
+        $course_type_user_order = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_user_order_for_course_type(
             $course_type_id,
             $this->get_user_id());
 
         if ($course_type_user_order)
         {
             $display_order = $course_type_user_order->get_display_order();
-            $max = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: get_max_display_order_for_course_type_user_orders(
+            $max = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: get_max_display_order_for_course_type_user_orders(
                 $this->get_user_id());
         }
         else
@@ -454,7 +454,7 @@ class SorterComponent extends Manager
             if ($selected_course_type)
             {
                 $display_order = $selected_course_type->get_display_order();
-                $max = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: get_max_display_order_for_course_types();
+                $max = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: get_max_display_order_for_course_types();
             }
             else
             {

@@ -15,9 +15,9 @@ class PublicationMailerComponent extends Manager
 
     public function run()
     {
-        if (Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID))
+        if (Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID))
         {
-            $publication_id = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+            $publication_id = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
         }
 
         if (isset($publication_id))
@@ -25,7 +25,7 @@ class PublicationMailerComponent extends Manager
 
             $failure = false;
 
-            $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(),
                 $publication_id);
 
@@ -45,7 +45,7 @@ class PublicationMailerComponent extends Manager
             $params['tool_action'] = null;
             if (Request :: get('details') == 1)
             {
-                $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $publication_id;
+                $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $publication_id;
                 $params['tool_action'] = 'view';
             }
 

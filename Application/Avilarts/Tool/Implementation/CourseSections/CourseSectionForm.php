@@ -127,7 +127,7 @@ class CourseSectionForm extends FormValidator
             new StaticConditionVariable($name));
         $condition = new AndCondition($conditions);
         
-        $course_sections = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(), 
             $condition);
         

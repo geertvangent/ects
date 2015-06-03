@@ -53,7 +53,7 @@ class Installer extends \Chamilo\Configuration\Package\Action\Installer
             return false;
         }
 
-        if (! \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->create_request_root())
+        if (! \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->create_request_root())
         {
             return false;
         }

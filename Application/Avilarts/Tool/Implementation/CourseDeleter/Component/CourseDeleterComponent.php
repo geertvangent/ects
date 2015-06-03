@@ -54,7 +54,7 @@ class CourseDeleterComponent extends Manager implements DelegateComponent
      */
     public function delete_course()
     {
-        $course = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_by_id(
+        $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_by_id(
             Course :: class_name(),
             $this->get_course_id());
 
@@ -68,7 +68,7 @@ class CourseDeleterComponent extends Manager implements DelegateComponent
                 Translation :: get('CourseDeleted'),
                 false,
                 array(
-                    \Chamilo\Application\Weblcms\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_WEBLCMS_HOME));
+                    \Ehb\Application\Avilarts\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_WEBLCMS_HOME));
         }
     }
 }

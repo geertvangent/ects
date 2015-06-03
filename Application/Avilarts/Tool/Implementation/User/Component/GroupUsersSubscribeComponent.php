@@ -57,7 +57,7 @@ class GroupUsersSubscribeComponent extends Manager
                     Translation :: get($message), 
                     ($success ? false : true), 
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_GROUP_BROWSER));
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_GROUP_BROWSER));
             }
         }
     }
@@ -75,9 +75,9 @@ class GroupUsersSubscribeComponent extends Manager
             $user_id = $user->get_user_id();
             if ($user_id != $this->get_user_id())
             {
-                $status = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_STATUS) ? Request :: get(
-                    \Chamilo\Application\Weblcms\Manager :: PARAM_STATUS) : 5;
-                \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_user_to_course(
+                $status = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_STATUS) ? Request :: get(
+                    \Ehb\Application\Avilarts\Manager :: PARAM_STATUS) : 5;
+                \Ehb\Application\Avilarts\Course\Storage\DataManager :: subscribe_user_to_course(
                     $course->get_id(), 
                     $status, 
                     $user_id);

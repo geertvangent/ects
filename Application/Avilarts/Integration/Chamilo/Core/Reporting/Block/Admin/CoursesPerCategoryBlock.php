@@ -18,7 +18,7 @@ class CoursesPerCategoryBlock extends CourseBlock
         $reporting_data = new ReportingData();
         $reporting_data->set_rows(array(Translation :: get('count')));
         
-        $categories = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_course_categories_ordered_by_name();
+        $categories = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_course_categories_ordered_by_name();
         
         while ($category = $categories->next_result())
         {

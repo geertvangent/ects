@@ -103,7 +103,7 @@ class SubscribeBrowserComponent extends Manager implements TableSupport
 
     public function get_additional_parameters()
     {
-        return array(self :: PARAM_TAB, \Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+        return array(self :: PARAM_TAB, \Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
     }
 
     public function get_table_condition($object_table_class_name)

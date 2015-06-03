@@ -227,8 +227,8 @@ abstract class Manager extends Application
     {
         return $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE,
-                \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE => $course_id),
+                \Ehb\Application\Avilarts\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE,
+                \Ehb\Application\Avilarts\Manager :: PARAM_COURSE => $course_id),
             array(self :: PARAM_ACTION));
     }
 

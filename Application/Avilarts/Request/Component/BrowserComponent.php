@@ -35,7 +35,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         $tabs = new DynamicTabsRenderer('request');
 
         if ($user_requests > 0 ||
-             \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->request_is_allowed())
+             \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->request_is_allowed())
         {
 
             if ($user_requests > 0)
@@ -47,14 +47,14 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                         'personal_request',
                         Translation :: get('YourRequests'),
                         Theme :: getInstance()->getImagePath(
-                            'Chamilo\Application\Weblcms\Request',
+                            'Ehb\Application\Avilarts\Request',
                             'Tab/PersonalRequest'),
                         $table->as_html()));
             }
 
-            if (\Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->request_is_allowed())
+            if (\Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->request_is_allowed())
             {
-                $target_users = \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->get_target_users(
+                $target_users = \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->get_target_users(
                     $this->get_user());
 
                 if (count($target_users) > 0)
@@ -89,7 +89,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                             RequestTable :: TYPE_PENDING,
                             Translation :: get('PendingRequests'),
                             Theme :: getInstance()->getImagePath(
-                                'Chamilo\Application\Weblcms\Request',
+                                'Ehb\Application\Avilarts\Request',
                                 'Decision/22/' . Request :: DECISION_PENDING),
                             $table->as_html()));
                 }
@@ -113,7 +113,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                             RequestTable :: TYPE_GRANTED,
                             Translation :: get('GrantedRequests'),
                             Theme :: getInstance()->getImagePath(
-                                'Chamilo\Application\Weblcms\Request',
+                                'Ehb\Application\Avilarts\Request',
                                 'Decision/22/' . Request :: DECISION_GRANTED),
                             $table->as_html()));
                 }
@@ -137,14 +137,14 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                             RequestTable :: TYPE_DENIED,
                             Translation :: get('DeniedRequests'),
                             Theme :: getInstance()->getImagePath(
-                                'Chamilo\Application\Weblcms\Request',
+                                'Ehb\Application\Avilarts\Request',
                                 'Decision/22/' . Request :: DECISION_DENIED),
                             $table->as_html()));
                 }
             }
         }
 
-        if ($user_requests > 0 || (\Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->request_is_allowed() &&
+        if ($user_requests > 0 || (\Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->request_is_allowed() &&
              $tabs->size() > 0) || $this->get_user()->is_platform_admin())
         {
             $html = array();
@@ -198,10 +198,10 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         }
 
         if (! $this->get_user()->is_platform_admin() &&
-             \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->request_is_allowed() &&
+             \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->request_is_allowed() &&
              $this->table_type != RequestTable :: TYPE_PERSONAL)
         {
-            $target_users = \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->get_target_users(
+            $target_users = \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->get_target_users(
                 $this->get_user());
 
             if (count($target_users) > 0)
@@ -230,7 +230,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
             $action_bar->add_common_action(
                 new ToolbarItem(
                     Translation :: get('RequestCourse'),
-                    Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms\Request', 'Action/Request'),
+                    Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts\Request', 'Action/Request'),
                     $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
         }
 
@@ -239,7 +239,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
             $action_bar->add_tool_action(
                 new ToolbarItem(
                     Translation :: get('ConfigureManagementRights'),
-                    Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms\Request', 'Action/Rights'),
+                    Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts\Request', 'Action/Rights'),
                     $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_RIGHTS))));
         }
 

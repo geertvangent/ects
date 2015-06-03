@@ -30,8 +30,8 @@ class LearningPathProgressTemplate extends ReportingTemplate
     {
         parent :: __construct($parent);
 
-        $this->course_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE, $this->course_id);
+        $this->course_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
+        $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE, $this->course_id);
 
         $custom_breadcrumbs = array();
         $custom_breadcrumbs[] = new Breadcrumb($this->get_url(), Translation :: get('LearningPathProgress'));
@@ -55,7 +55,7 @@ class LearningPathProgressTemplate extends ReportingTemplate
             new PropertyConditionVariable(
                 ContentObjectPublication :: class_name(),
                 ContentObjectPublication :: PROPERTY_MODIFIED_DATE));
-        $publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+        $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
             $condition,
             $order_by);
 

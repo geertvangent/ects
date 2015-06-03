@@ -55,7 +55,7 @@ class AssessmentUserScoresBlock extends ToolBlock
                     ContentObjectPublication :: class_name(), 
                     ContentObjectPublication :: PROPERTY_MODIFIED_DATE)));
         
-        $publication_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $publication_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(), 
             new DataClassRetrievesParameters($condition, null, null, $order_by));
         
@@ -114,13 +114,13 @@ class AssessmentUserScoresBlock extends ToolBlock
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(
                         AssessmentAttempt :: class_name(), 
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: PROPERTY_ASSESSMENT_ID), 
+                        \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: PROPERTY_ASSESSMENT_ID), 
                     new StaticConditionVariable($publication->get_id()));
                 
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: class_name(), 
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: PROPERTY_USER_ID), 
+                        \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: class_name(), 
+                        \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: PROPERTY_USER_ID), 
                     new StaticConditionVariable($user[\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_ID]));
                 $condition = new AndCondition($conditions);
                 
@@ -130,7 +130,7 @@ class AssessmentUserScoresBlock extends ToolBlock
                 
                 if ($attempts_by_user->size() == 0)
                 {
-                    if (\Chamilo\Application\Weblcms\Storage\DataManager :: is_publication_target_user(
+                    if (\Ehb\Application\Avilarts\Storage\DataManager :: is_publication_target_user(
                         $user[\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_ID], 
                         $publication->get_id(), 
                         $course_id))

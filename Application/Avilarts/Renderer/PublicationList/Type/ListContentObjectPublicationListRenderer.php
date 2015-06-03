@@ -165,7 +165,7 @@ class ListContentObjectPublicationListRenderer extends ContentObjectPublicationL
         {
             $selected_ids = array($selected_ids);
         }
-        Request :: set_get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID, $selected_ids);
+        Request :: set_get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID, $selected_ids);
     }
 
     /**
@@ -225,15 +225,15 @@ class ListContentObjectPublicationListRenderer extends ContentObjectPublicationL
         {
             $title_url = $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT));
         }
         else
         {
             $title_url = $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW),
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW),
                 array(),
                 true);
         }

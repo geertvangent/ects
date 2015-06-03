@@ -286,7 +286,7 @@ class CourseSettingsController
             return $value;
         }
 
-        $course = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_by_id(
+        $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_by_id(
             Course :: class_name(),
             $course_id);
         if (! $course)

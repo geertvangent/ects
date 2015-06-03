@@ -35,7 +35,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             Theme :: getInstance()->getCommonImagePath('Action/Browser'),
             $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => null,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => null,
                     self :: PARAM_FILTER => self :: FILTER_TODAY)),
             ToolbarItem :: DISPLAY_ICON_AND_LABEL);
 
@@ -44,7 +44,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             Theme :: getInstance()->getCommonImagePath('Action/Browser'),
             $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => null,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => null,
                     self :: PARAM_FILTER => self :: FILTER_THIS_WEEK)),
             ToolbarItem :: DISPLAY_ICON_AND_LABEL);
 
@@ -53,7 +53,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             Theme :: getInstance()->getCommonImagePath('Action/Browser'),
             $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => null,
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => null,
                     self :: PARAM_FILTER => self :: FILTER_THIS_MONTH)),
             ToolbarItem :: DISPLAY_ICON_AND_LABEL);
 

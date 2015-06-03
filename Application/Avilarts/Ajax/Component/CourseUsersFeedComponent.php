@@ -24,7 +24,7 @@ use Chamilo\Libraries\Utilities\Utilities;
  * @author Sven Vanpoucke
  * @package application.weblcms
  */
-class CourseUsersFeedComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
+class CourseUsersFeedComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {
     const PARAM_SEARCH_QUERY = 'query';
     const PARAM_COURSE_ID = 'course_id';
@@ -98,7 +98,7 @@ class CourseUsersFeedComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
         $relation_condition = new EqualityCondition(
             new PropertyConditionVariable(CourseUserRelation :: class_name(), CourseUserRelation :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable($course_id));
-        $course_user_relation_result_set = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $course_user_relation_result_set = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(), 
             $relation_condition);
         
@@ -113,7 +113,7 @@ class CourseUsersFeedComponent extends \Chamilo\Application\Weblcms\Ajax\Manager
             new PropertyConditionVariable(CourseGroupRelation :: class_name(), CourseGroupRelation :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable($course_id));
         
-        $course_group_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $course_group_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseGroupRelation :: class_name(), 
             $relation_condition);
         

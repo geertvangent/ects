@@ -26,12 +26,12 @@ class EventListRenderer extends \Chamilo\Core\Repository\Integration\Chamilo\Lib
         $redirect = new Redirect(
             array(
                 Application :: PARAM_CONTEXT => $event->get_context(),
-                Application :: PARAM_ACTION => \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE,
-                \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE => $event->get_course_id(),
-                \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL => ClassnameUtilities :: getInstance()->getPackageNameFromNamespace(
-                    \Chamilo\Application\Weblcms\Tool\Implementation\Calendar\Manager :: context()),
-                \Chamilo\Application\Weblcms\Tool\Implementation\Calendar\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Implementation\Calendar\Manager :: ACTION_VIEW_ATTACHMENT,
-                \Chamilo\Application\Weblcms\Tool\Implementation\Calendar\Manager :: PARAM_PUBLICATION_ID => $event->get_id(),
+                Application :: PARAM_ACTION => \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE,
+                \Ehb\Application\Avilarts\Manager :: PARAM_COURSE => $event->get_course_id(),
+                \Ehb\Application\Avilarts\Manager :: PARAM_TOOL => ClassnameUtilities :: getInstance()->getPackageNameFromNamespace(
+                    \Ehb\Application\Avilarts\Tool\Implementation\Calendar\Manager :: context()),
+                \Ehb\Application\Avilarts\Tool\Implementation\Calendar\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\Calendar\Manager :: ACTION_VIEW_ATTACHMENT,
+                \Ehb\Application\Avilarts\Tool\Implementation\Calendar\Manager :: PARAM_PUBLICATION_ID => $event->get_id(),
                 'object_id' => $attachment->get_id()));
         return $redirect->getUrl();
     }

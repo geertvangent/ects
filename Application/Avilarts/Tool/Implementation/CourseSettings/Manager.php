@@ -10,7 +10,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSettings;
 /**
  * This tool allows a user to publish course_settingss in his or her course.
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {
     const DEFAULT_ACTION = self :: ACTION_UPDATE;
 }

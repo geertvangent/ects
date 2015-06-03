@@ -46,7 +46,7 @@ class LearningPathAttemptProgressInformationBlock extends ToolBlock
             \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
             (int) $user_id);
 
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $publication_id);
 
@@ -72,14 +72,14 @@ class LearningPathAttemptProgressInformationBlock extends ToolBlock
         $progress = $this->get_progress_bar($attempt->get_progress());
 
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course_id;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course_id;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(
             LearningPath :: class_name(),
             true);
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication_id;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication_id;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
 
         $redirect = new Redirect($params);
         $url_title = $redirect->getUrl();

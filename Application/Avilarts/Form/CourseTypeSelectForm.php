@@ -35,7 +35,7 @@ class CourseTypeSelectForm extends FormValidator
     {
         $this->addElement('hidden', Course :: PROPERTY_ID);
         
-        $course_type_objects = \Chamilo\Application\Weblcms\CourseType\Storage\DataManager :: retrieve_active_course_types();
+        $course_type_objects = \Ehb\Application\Avilarts\CourseType\Storage\DataManager :: retrieve_active_course_types();
         $course_types = array();
         $this->size = $course_type_objects->size();
         if ($this->size == 1)

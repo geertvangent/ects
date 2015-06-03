@@ -62,7 +62,7 @@ class AssessmentQuestionsUsersBlock extends ToolBlock
         }
         $this->reporting_data = new ReportingData();
         
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(), 
             $this->get_publication_id());
         
@@ -97,7 +97,7 @@ class AssessmentQuestionsUsersBlock extends ToolBlock
         // Defines the row categories in the reporting block.
         $this->reporting_data->set_rows($question_headers);
         
-        $users = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_publication_target_users(
+        $users = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_publication_target_users(
             $this->get_publication_id(), 
             $this->get_course_id())->as_array();
         
@@ -192,18 +192,18 @@ class AssessmentQuestionsUsersBlock extends ToolBlock
         // Retrieve all the question attempts trackers of a single user ordered by the question id.
         $condition = new InCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: class_name(), 
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: PROPERTY_ASSESSMENT_ATTEMPT_ID), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: class_name(), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: PROPERTY_ASSESSMENT_ATTEMPT_ID), 
             $assessment_attempts_tracker_ids);
         
         $order_by = array();
         $order_by[] = new OrderBy(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: class_name(), 
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: PROPERTY_QUESTION_COMPLEX_ID));
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: class_name(), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: PROPERTY_QUESTION_COMPLEX_ID));
         
-        $question_attempts_trackers = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: class_name(), 
+        $question_attempts_trackers = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\QuestionAttempt :: class_name(), 
             new DataClassRetrievesParameters($condition, null, null, $order_by))->as_array();
         
         $user_question_statistics = array();

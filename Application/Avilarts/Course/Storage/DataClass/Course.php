@@ -184,7 +184,7 @@ class Course extends DataClass
      */
     public function update()
     {
-        $course_group = \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager :: retrieve_course_group_root(
+        $course_group = \Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager :: retrieve_course_group_root(
             $this->get_id());
         
         if ($course_group)
@@ -670,8 +670,8 @@ class Course extends DataClass
     public function is_course_admin($user)
     {
         // fix for view as
-        $va_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_ID);
-        $course_id = Session :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
+        $va_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_ID);
+        $course_id = Session :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_VIEW_AS_COURSE_ID);
         $id = $user->get_id();
         if (isset($va_id) && isset($course_id))
         {
@@ -1091,7 +1091,7 @@ class Course extends DataClass
      * 
      * @param \application\weblcms\course_type\CourseType $course_type
      */
-    public function set_course_type(\Chamilo\Application\Weblcms\CourseType\Storage\DataClass\CourseType $course_type)
+    public function set_course_type(\Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType $course_type)
     {
         if (! is_null($course_type))
         {

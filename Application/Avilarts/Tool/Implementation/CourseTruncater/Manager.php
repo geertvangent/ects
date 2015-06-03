@@ -7,7 +7,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\CourseTruncater;
  * @author Mattias De Pauw - Hogeschool Gent
  * @author Maarten Volckaert - Hogeschool Gent
  */
-abstract class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {
     const ACTION_BROWSE = 'Browser';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;

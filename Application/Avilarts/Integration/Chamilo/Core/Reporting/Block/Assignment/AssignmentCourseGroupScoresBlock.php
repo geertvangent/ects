@@ -23,7 +23,7 @@ class AssignmentCourseGroupScoresBlock extends AssignmentGroupScoresBlock
      */
     public function get_current_submitter_type()
     {
-        return \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP;
+        return \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP;
     }
 
     /**

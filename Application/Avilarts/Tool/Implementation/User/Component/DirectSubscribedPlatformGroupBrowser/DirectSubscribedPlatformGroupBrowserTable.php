@@ -40,7 +40,7 @@ class DirectSubscribedPlatformGroupBrowserTable extends RecordTable implements T
             $actions->add_form_action(
                 new TableFormAction(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_UNSUBSCRIBE_GROUPS), 
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_UNSUBSCRIBE_GROUPS), 
                     Translation :: get('UnsubscribeSelectedGroups'), 
                     false));
             
@@ -48,7 +48,7 @@ class DirectSubscribedPlatformGroupBrowserTable extends RecordTable implements T
             $actions->add_form_action(
                 new TableFormAction(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_CHANGE_PLATFORMGROUP_STATUS_TEACHER), 
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_CHANGE_PLATFORMGROUP_STATUS_TEACHER), 
                     Translation :: get('MakeTeacher'), 
                     false));
             
@@ -56,7 +56,7 @@ class DirectSubscribedPlatformGroupBrowserTable extends RecordTable implements T
             $actions->add_form_action(
                 new TableFormAction(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_CHANGE_PLATFORMGROUP_STATUS_STUDENT), 
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_CHANGE_PLATFORMGROUP_STATUS_STUDENT), 
                     Translation :: get('MakeStudent'), 
                     false));
             

@@ -120,7 +120,7 @@ class ContentObjectPublicationFeedback extends ContentObjectPublication
 
     public function create()
     {
-        if (Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID))
+        if (Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID))
         {
             $this->update_parent_modified_date();
         }

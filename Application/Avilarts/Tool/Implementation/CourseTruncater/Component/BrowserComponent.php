@@ -39,7 +39,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($this->get_course_id()));
 
-        $course_sections = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(),
             $condition);
 
@@ -61,7 +61,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                 ContentObjectPublication :: class_name(),
                 ContentObjectPublication :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($this->get_course_id()));
-        if (\Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications($condition) == 0 &&
+        if (\Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications($condition) == 0 &&
              ! $sections_founded)
         {
             throw new \Exception(Translation :: get('NoPublications'));
@@ -89,7 +89,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                         Translation :: get('AllSelectedObjectsRemoved'),
                         false,
                         array(
-                            \Chamilo\Application\Weblcms\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_WEBLCMS_HOME));
+                            \Ehb\Application\Avilarts\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_WEBLCMS_HOME));
                 }
                 else
                 {
@@ -134,7 +134,7 @@ class BrowserComponent extends Manager implements DelegateComponent
 
         foreach ($publication_ids as $id)
         {
-            $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(),
                 $id);
 
@@ -161,7 +161,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_ID),
             $course_section_ids);
 
-        $course_sections = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(),
             $condition);
 
@@ -193,7 +193,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                     ContentObjectPublicationCategory :: PROPERTY_COURSE),
                 new StaticConditionVariable($this->get_course_id()));
 
-            $categories = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+            $categories = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
                 ContentObjectPublicationCategory :: class_name(),
                 $condition);
 
@@ -234,7 +234,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                 ContentObjectPublication :: PROPERTY_CATEGORY_ID),
             new StaticConditionVariable($category_id));
         $condition = new AndCondition($conditions);
-        $count = \Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications($condition);
+        $count = \Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications($condition);
 
         if ($count > 0)
         {
@@ -259,7 +259,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                 ContentObjectPublicationCategory :: PROPERTY_PARENT),
             new StaticConditionVariable($category_id));
 
-        $subcategries = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $subcategries = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
             $condition);
 
@@ -277,7 +277,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                     ContentObjectPublication :: PROPERTY_CATEGORY_ID),
                 new StaticConditionVariable($cat->get_id()));
             $condition = new AndCondition($conditions);
-            $count = \Chamilo\Application\Weblcms\Storage\DataManager :: count_content_object_publications($condition);
+            $count = \Ehb\Application\Avilarts\Storage\DataManager :: count_content_object_publications($condition);
 
             if ($count > 0 || $this->have_subcategories_publications($cat->get_id()))
             {

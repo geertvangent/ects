@@ -21,11 +21,11 @@ class DetailsComponent extends Manager
 
         $html[] = $this->render_header();
 
-        if (Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS))
+        if (Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS))
         {
             $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
                 \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
-                Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS));
+                Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS));
             $details = new UserDetails($user);
             $groups = new UserGroups($user->get_id());
             $course_groups = new UserCourseGroups($user->get_id(), $this->get_course_id());
@@ -59,6 +59,6 @@ class DetailsComponent extends Manager
 
     public function get_additional_parameters()
     {
-        return array(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS, self :: PARAM_TAB);
+        return array(\Ehb\Application\Avilarts\Manager :: PARAM_USERS, self :: PARAM_TAB);
     }
 }

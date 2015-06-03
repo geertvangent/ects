@@ -114,7 +114,7 @@ class MenuToolListRenderer extends ToolListRenderer
                 $parent->get_url(
                     array(
                         Manager :: PARAM_TOOL => 'search',
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Implementation\Search\Manager :: ACTION_SEARCH)),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\Search\Manager :: ACTION_SEARCH)),
                 '',
                 array('style' => 'text-align: center;'),
                 false);
@@ -189,7 +189,7 @@ class MenuToolListRenderer extends ToolListRenderer
             Translation :: get(
                 'TypeName',
                 null,
-                \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool->get_name())));
+                \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name())));
 
         $html[] = '<li class="tool_list_menu" style="padding: 0px 0px 2px 0px;">';
 
@@ -198,16 +198,16 @@ class MenuToolListRenderer extends ToolListRenderer
                 Application :: PARAM_ACTION => Manager :: ACTION_VIEW_COURSE,
                 Manager :: PARAM_TOOL => $tool->get_name()),
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID,
                 Manager :: PARAM_CATEGORY,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE),
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE),
             true) . '" title="' . $title . '">';
 
         if ($this->display_menu_icons())
         {
             $html[] = '<img src="' . Theme :: getInstance()->getImagePath(
-                \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool->get_name()),
+                \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name()),
                 'Logo/' . $tool_image) . '" style="vertical-align: middle;" alt="' . $title . '"/> ';
         }
 

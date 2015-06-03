@@ -26,14 +26,14 @@ class ReportingComponent extends Manager implements DelegateComponent
         {
             $this->set_parameter(
                 self :: PARAM_TEMPLATE_ID,
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Reporting\Template\CourseDataTemplate :: class_name());
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\CourseDataTemplate :: class_name());
 
             $factory = new ApplicationFactory(
                 \Chamilo\Core\Reporting\Viewer\Manager :: context(),
                 new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
             $component = $factory->getComponent();
             $component->set_template_by_name(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Reporting\Template\CourseDataTemplate :: class_name());
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\CourseDataTemplate :: class_name());
             return $component->run();
         }
         else

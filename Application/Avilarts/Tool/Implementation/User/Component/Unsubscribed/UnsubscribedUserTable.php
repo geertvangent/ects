@@ -25,21 +25,21 @@ class UnsubscribedUserTable extends DataClassTable implements TableFormActionsSu
 
     public function get_implemented_form_actions()
     {
-        if (! Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP))
+        if (! Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP))
         {
             // add subscribe options
             $actions = new TableFormActions(__NAMESPACE__);
             
             $actions->add_form_action(
                 new TableFormAction(
-                    array(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_SUBSCRIBE), 
+                    array(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_SUBSCRIBE), 
                     Translation :: get('SubscribeSelectedAsStudent'), 
                     false));
             
             $actions->add_form_action(
                 new TableFormAction(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_SUBSCRIBE_AS_ADMIN), 
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_SUBSCRIBE_AS_ADMIN), 
                     Translation :: get('SubscribeSelectedAsAdmin'), 
                     false));
             

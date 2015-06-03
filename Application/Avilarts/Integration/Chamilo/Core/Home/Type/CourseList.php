@@ -10,7 +10,7 @@ class CourseList extends Block
     {
         $html = array();
         
-        $renderer = new \Chamilo\Application\Weblcms\Renderer\CourseList\CourseListRenderer(
+        $renderer = new \Ehb\Application\Avilarts\Renderer\CourseList\CourseListRenderer(
             $this, 
             $this->get_link_target());
         $renderer->show_new_publication_icons();

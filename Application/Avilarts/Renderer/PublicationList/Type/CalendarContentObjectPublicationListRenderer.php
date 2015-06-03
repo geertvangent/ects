@@ -101,13 +101,13 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
             foreach ($parsed_events as &$parsed_event)
             {
                 $parameters = array();
-                $parameters[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-                $parameters[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
-                $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE] = ContentObjectPublicationListRenderer :: TYPE_CALENDAR;
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $publication[ContentObjectPublication :: PROPERTY_COURSE_ID];
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = $publication[ContentObjectPublication :: PROPERTY_TOOL];
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
+                $parameters[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+                $parameters[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
+                $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE] = ContentObjectPublicationListRenderer :: TYPE_CALENDAR;
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $publication[ContentObjectPublication :: PROPERTY_COURSE_ID];
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = $publication[ContentObjectPublication :: PROPERTY_TOOL];
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
 
                 $redirect = new Redirect($parameters);
                 $link = $redirect->getUrl();
@@ -116,7 +116,7 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
                 $parsed_event->set_source(
                     Translation :: get('TypeName', null, $this->get_tool_browser()->get_parent()->context()));
                 $parsed_event->set_id($publication[ContentObjectPublication :: PROPERTY_ID]);
-                $parsed_event->set_context(\Chamilo\Application\Weblcms\Manager :: context());
+                $parsed_event->set_context(\Ehb\Application\Avilarts\Manager :: context());
                 $parsed_event->set_course_id($publication[ContentObjectPublication :: PROPERTY_COURSE_ID]);
                 $result[] = $parsed_event;
             }
@@ -229,7 +229,7 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
                 new StaticConditionVariable($this->get_user_id())));
         $user_condition = new AndCondition($user_conditions);
 
-        $user_relations = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
+        $user_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(),
             $user_condition);
 
@@ -277,7 +277,7 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('MonthView', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms', 'Tool/Calendar/Month'),
+                Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts', 'Tool/Calendar/Month'),
                 $this->get_url(
                     array(
                         Renderer :: PARAM_TYPE => \Chamilo\Libraries\Calendar\Renderer\Renderer :: TYPE_MONTH,
@@ -286,7 +286,7 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('WeekView', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms', 'Tool/Calendar/Week'),
+                Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts', 'Tool/Calendar/Week'),
                 $this->get_url(
                     array(
                         Renderer :: PARAM_TYPE => \Chamilo\Libraries\Calendar\Renderer\Renderer :: TYPE_WEEK,
@@ -295,7 +295,7 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('DayView', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms', 'Tool/Calendar/Day'),
+                Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts', 'Tool/Calendar/Day'),
                 $this->get_url(
                     array(
                         Renderer :: PARAM_TYPE => \Chamilo\Libraries\Calendar\Renderer\Renderer :: TYPE_DAY,
@@ -304,7 +304,7 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('YearView', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms', 'Tool/Calendar/Year'),
+                Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts', 'Tool/Calendar/Year'),
                 $this->get_url(
                     array(
                         Renderer :: PARAM_TYPE => \Chamilo\Libraries\Calendar\Renderer\Renderer :: TYPE_YEAR,
@@ -313,7 +313,7 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
         $toolbar->add_item(
             new ToolbarItem(
                 Translation :: get('Today', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getImagePath('Chamilo\Application\Weblcms', 'Tool/Calendar/Today'),
+                Theme :: getInstance()->getImagePath('Ehb\Application\Avilarts', 'Tool/Calendar/Today'),
                 $this->get_url(array(Renderer :: PARAM_TYPE => $this->get_view(), 'time' => time())),
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
 
@@ -361,9 +361,9 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
     {
         $feedback_url = $this->get_url(
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $event->get_optional_property(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID),
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW),
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $event->get_optional_property(
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID),
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW),
             array(),
             true);
 

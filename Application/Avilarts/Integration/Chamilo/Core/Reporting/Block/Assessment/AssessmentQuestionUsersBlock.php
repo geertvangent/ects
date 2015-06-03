@@ -30,7 +30,7 @@ class AssessmentQuestionUsersBlock extends AssessmentBlock
         $course_id = $this->get_course_id();
 
         $question_id = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
+            \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
         $question = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
             ComplexContentObjectItem :: class_name(),
             $question_id);
@@ -38,7 +38,7 @@ class AssessmentQuestionUsersBlock extends AssessmentBlock
         $img = '<img src="' . Theme :: getInstance()->getCommonImagePath('Action/Reporting') . '" title="' .
              Translation :: get('Details') . '" />';
 
-        $users_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_publication_target_users(
+        $users_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_publication_target_users(
             $publication_id,
             $course_id);
 
@@ -65,8 +65,8 @@ class AssessmentQuestionUsersBlock extends AssessmentBlock
             if (count($user_attempts) > 0)
             {
                 $params = $this->get_parent()->get_parameters();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = AssessmentQuestionAttemptsUserTemplate :: class_name();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user->get_id();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = AssessmentQuestionAttemptsUserTemplate :: class_name();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user->get_id();
                 $link = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
             }
             else

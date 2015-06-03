@@ -21,7 +21,7 @@ use Exception;
  */
 abstract class Manager extends Application
 {
-    const PARAM_ACTION = \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION;
+    const PARAM_ACTION = \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION;
     const ACTION_VIEW = 'Viewer';
     const ACTION_BROWSE = 'Browser';
     const ACTION_PUBLISH = 'Publisher';
@@ -39,7 +39,7 @@ abstract class Manager extends Application
     const BUILD_COMPLEX_CONTENT_OBJECT_COMPONENT = 'ComplexBuilder';
     const DISPLAY_COMPLEX_CONTENT_OBJECT_COMPONENT = 'ComplexDisplay';
     const RIGHTS_EDITOR_COMPONENT = 'RightsEditor';
-    const DEFAULT_ACTION = \Chamilo\Application\Weblcms\Tool\Manager :: DEFAULT_ACTION;
+    const DEFAULT_ACTION = \Ehb\Application\Avilarts\Tool\Manager :: DEFAULT_ACTION;
 
     public static function factory($type, $tool_component)
     {

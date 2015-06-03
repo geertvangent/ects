@@ -28,7 +28,7 @@ class SelfSubscriberComponent extends Manager
                 Translation :: get('UserSubscribed'), 
                 false, 
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_UNSUBSCRIBE, 
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_UNSUBSCRIBE, 
                     self :: PARAM_COURSE_GROUP => $course_group->get_id()));
         }
         else
@@ -37,7 +37,7 @@ class SelfSubscriberComponent extends Manager
                 Translation :: get('UserNotSubscribed'), 
                 true, 
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: DEFAULT_ACTION, 
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: DEFAULT_ACTION, 
                     self :: PARAM_COURSE_GROUP => $course_group->get_parent_id()));
         }
     }

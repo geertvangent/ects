@@ -39,8 +39,8 @@ class AssessmentOverviewBlock extends ToolBlock
         
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: class_name(), 
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: PROPERTY_COURSE_ID), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: class_name(), 
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt :: PROPERTY_COURSE_ID), 
             new StaticConditionVariable($course_id));
         
         $attempts_result_set = \Chamilo\Libraries\Storage\DataManager\DataManager :: retrieves(
@@ -61,7 +61,7 @@ class AssessmentOverviewBlock extends ToolBlock
                 (int) $key);
             foreach ($user_attempts as $key => $pub_attempts)
             {
-                $pub = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+                $pub = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                     ContentObjectPublication :: class_name(), 
                     $key);
                 

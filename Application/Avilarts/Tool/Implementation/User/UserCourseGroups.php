@@ -54,7 +54,7 @@ class UserCourseGroups
             $html[] = 'class="vertical_space"';
         }
         $html[] = 'style="clear: both;background-image: url(' . Theme :: getInstance()->getImagePath(
-            \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Manager :: context(),
+            \Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager :: context(),
             'Logo/22') . ');">';
         $html[] = '<div class="title">';
         $html[] = Translation :: get('Coursegroups');

@@ -68,7 +68,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
         $condition = new AndCondition($conditions);
 
-        $this->introduction_text = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve(
+        $this->introduction_text = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve(
             ContentObjectPublication :: class_name(),
             $condition);
 
@@ -112,7 +112,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     {
         $parameters = $this->get_parameters(true);
 
-        $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = self :: ACTION_BROWSE;
+        $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = self :: ACTION_BROWSE;
 
         $course_group_table = new CourseGroupTable($this, new CourseGroupTableDataProvider($this));
 
@@ -130,10 +130,10 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
         $action_bar->set_search_url($this->get_url());
 
-        $param_show_all[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = self :: ACTION_VIEW_GROUPS;
-        $param_show_all[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = Request :: get(
-            \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
-        $param_show_all[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = null;
+        $param_show_all[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = self :: ACTION_VIEW_GROUPS;
+        $param_show_all[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = Request :: get(
+            \Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
+        $param_show_all[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = null;
 
         $action_bar->add_common_action(
             new ToolbarItem(
@@ -142,11 +142,11 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 $this->get_url($param_show_all),
                 ToolbarItem :: DISPLAY_ICON_AND_LABEL));
 
-        $param_add_course_group[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = self :: ACTION_ADD_COURSE_GROUP;
-        $param_add_course_group[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = $this->get_group_id();
+        $param_add_course_group[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = self :: ACTION_ADD_COURSE_GROUP;
+        $param_add_course_group[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $this->get_group_id();
 
-        $param_subscriptions_overview[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = self :: ACTION_SUBSCRIPTIONS_OVERVIEW;
-        $param_subscriptions_overview[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = $this->get_group_id();
+        $param_subscriptions_overview[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = self :: ACTION_SUBSCRIPTIONS_OVERVIEW;
+        $param_subscriptions_overview[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $this->get_group_id();
 
         if ($this->is_allowed(WeblcmsRights :: ADD_RIGHT))
         {
@@ -166,7 +166,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                     Theme :: getInstance()->getCommonImagePath('Action/Introduce'),
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_PUBLISH_INTRODUCTION)),
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Manager :: ACTION_PUBLISH_INTRODUCTION)),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }
 
@@ -178,7 +178,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                     Theme :: getInstance()->getCommonImagePath('Action/Browser'),
                     $this->get_url(
                         $param_subscriptions_overview,
-                        array(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP)),
+                        array(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP)),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }
 
@@ -226,7 +226,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
     public function get_group_id()
     {
-        return Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP);
+        return Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP);
     }
 
     /*

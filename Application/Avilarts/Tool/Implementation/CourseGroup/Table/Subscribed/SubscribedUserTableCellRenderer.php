@@ -41,7 +41,7 @@ class SubscribedUserTableCellRenderer extends DataClassTableCellRenderer impleme
         {
             $parameters = array();
             $parameters[Manager :: PARAM_COURSE_GROUP_ACTION] = Manager :: ACTION_UNSUBSCRIBE;
-            $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user->get_id();
+            $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user->get_id();
             $parameters[Manager :: PARAM_COURSE_GROUP] = $browser->get_course_group()->get_id();
             $unsubscribe_url = $browser->get_url($parameters);
             $toolbar->add_item(
@@ -59,7 +59,7 @@ class SubscribedUserTableCellRenderer extends DataClassTableCellRenderer impleme
              $course_group->is_member($user) && $browser->get_user()->get_id() == $user->get_id())
         {
             $parameters = array();
-            $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
+            $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
             $parameters[Manager :: PARAM_COURSE_GROUP_ACTION] = Manager :: ACTION_USER_SELF_UNSUBSCRIBE;
             $unsubscribe_url = $browser->get_url($parameters);
             $toolbar->add_item(

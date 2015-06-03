@@ -30,9 +30,9 @@ class LastAccessToToolsUserBlock extends LastAccessToToolsBlock
             if ($publications > 0)
             {
                 $params = $this->get_parent()->get_parameters();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = ToolPublicationsDetailTemplate :: class_name();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $this->get_user_id();
-                $params[\Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL] = $tool_name;
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = ToolPublicationsDetailTemplate :: class_name();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $this->get_user_id();
+                $params[\Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL] = $tool_name;
                 $link_pub = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
 
                 $reporting_data->add_data_category_row($tool_name, Translation :: get('ViewPublications'), $link_pub);

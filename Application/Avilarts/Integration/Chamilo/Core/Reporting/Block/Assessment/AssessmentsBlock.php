@@ -57,15 +57,15 @@ class AssessmentsBlock extends AssessmentBlock
             new StaticConditionVariable($tool));
         $condition = new AndCondition($conditions);
 
-        $pub_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+        $pub_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(),
             $condition);
 
         while ($pub = $pub_resultset->next_result())
         {
             $params = $this->get_parent()->get_parameters();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = AssessmentAttemptsTemplate :: class_name();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $pub->get_id();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = AssessmentAttemptsTemplate :: class_name();
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $pub->get_id();
             $link = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
 
             $reporting_data->add_category($count);

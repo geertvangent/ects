@@ -17,7 +17,7 @@ class AssignmentUsersBlock extends AssignmentSubmittersBlock
     public function get_submitters()
     {
         $order_by = array();
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_publication_target_users(
+        return \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_publication_target_users(
             $this->get_publication_id(), 
             $this->get_course_id(), 
             null, 
@@ -34,13 +34,13 @@ class AssignmentUsersBlock extends AssignmentSubmittersBlock
         // Users
         $submissions_resultset = AssignmentDataManager :: retrieve_submissions_by_submitter_type(
             $this->get_publication_id(), 
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER, 
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME);
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER, 
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME);
         $this->get_array_from_resultset($submissions_resultset, $this->submissions);
         $feedbacks_resultset = AssignmentDataManager :: retrieve_submitter_feedbacks(
             $this->get_publication_id(), 
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER, 
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME);
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER, 
+            \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: CLASS_NAME);
         $this->get_array_from_resultset($feedbacks_resultset, $this->feedbacks);
     }
 

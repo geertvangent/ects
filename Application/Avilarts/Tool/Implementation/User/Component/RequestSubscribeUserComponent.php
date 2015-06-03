@@ -55,7 +55,7 @@ class RequestSubscribeUserComponent extends Manager
                 Translation :: get($success_request ? 'RequestSent' : 'RequestNotSent'),
                 ($success_request ? false : true),
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_USER_BROWSER));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_USER_BROWSER));
         }
         else
         {
@@ -85,7 +85,7 @@ class RequestSubscribeUserComponent extends Manager
             new Breadcrumb(
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_UNSUBSCRIBE_BROWSER,
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_UNSUBSCRIBE_BROWSER,
                         self :: PARAM_TAB => Request :: get(self :: PARAM_TAB))),
                 Translation :: get('UserToolUnsubscribeBrowserComponent')));
 
@@ -93,7 +93,7 @@ class RequestSubscribeUserComponent extends Manager
             new Breadcrumb(
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_USER_BROWSER)),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_SUBSCRIBE_USER_BROWSER)),
                 Translation :: get('UserToolSubscribeBrowserComponent')));
     }
 }

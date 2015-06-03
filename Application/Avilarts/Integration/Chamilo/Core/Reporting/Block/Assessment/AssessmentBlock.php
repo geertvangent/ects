@@ -146,7 +146,7 @@ abstract class AssessmentBlock extends ToolBlock
      */
     protected function get_question_id()
     {
-        return Request :: get(\Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
+        return Request :: get(\Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
     }
 
     /**
@@ -179,12 +179,12 @@ abstract class AssessmentBlock extends ToolBlock
         $assessment = $assessment_publication->get_content_object();
 
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $assessment_publication->get_course_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = $assessment_publication->get_tool();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $assessment_publication->get_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $assessment_publication->get_course_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = $assessment_publication->get_tool();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $assessment_publication->get_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
 
         $redirect = new Redirect($params);
         $url = $redirect->getUrl();
@@ -313,19 +313,19 @@ abstract class AssessmentBlock extends ToolBlock
 
         $params = array();
 
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $this->get_course_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = Assessment :: get_type_name();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\Assessment\Manager :: ACTION_ATTEMPT_RESULT_VIEWER;
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assessment\Manager :: PARAM_USER_ASSESSMENT] = $assessment_attempt_id;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $this->get_course_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = Assessment :: get_type_name();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\Assessment\Manager :: ACTION_ATTEMPT_RESULT_VIEWER;
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assessment\Manager :: PARAM_USER_ASSESSMENT] = $assessment_attempt_id;
 
         if ($question_id)
         {
-            $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assessment\Manager :: PARAM_QUESTION_ATTEMPT] = $question_id;
+            $params[\Ehb\Application\Avilarts\Tool\Implementation\Assessment\Manager :: PARAM_QUESTION_ATTEMPT] = $question_id;
         }
 
-        $params[\Chamilo\Application\Weblcms\Tool\Implementation\Assessment\Manager :: PARAM_ASSESSMENT] = $this->get_publication_id();
+        $params[\Ehb\Application\Avilarts\Tool\Implementation\Assessment\Manager :: PARAM_ASSESSMENT] = $this->get_publication_id();
 
         $redirect = new Redirect($params);
         $link = $redirect->getUrl();

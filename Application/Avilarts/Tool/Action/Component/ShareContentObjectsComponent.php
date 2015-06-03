@@ -24,7 +24,7 @@ class ShareContentObjectsComponent extends Manager
      */
     public function run()
     {
-        $publication_ids = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+        $publication_ids = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID);
 
         if (! empty($publication_ids))
         {
@@ -38,7 +38,7 @@ class ShareContentObjectsComponent extends Manager
                     ContentObjectPublication :: class_name(),
                     ContentObjectPublication :: PROPERTY_ID),
                 $publication_ids);
-            $publications = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieves(
+            $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
                 ContentObjectPublication :: class_name(),
                 $condition);
 

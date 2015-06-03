@@ -69,7 +69,7 @@ class FilteredCourseList extends Block
     {
         $html = array();
         
-        $renderer = new \Chamilo\Application\Weblcms\Renderer\CourseList\Type\FilteredCourseListRenderer(
+        $renderer = new \Ehb\Application\Avilarts\Renderer\CourseList\Type\FilteredCourseListRenderer(
             $this, 
             $this->get_link_target(), 
             $this->get_course_type_id(), 
@@ -124,8 +124,8 @@ class FilteredCourseList extends Block
         if ($user_course_category_id > 0)
         {
             
-            $course_user_category = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
-                \Chamilo\Application\Weblcms\Storage\DataClass\CourseUserCategory :: class_name(), 
+            $course_user_category = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
+                \Ehb\Application\Avilarts\Storage\DataClass\CourseUserCategory :: class_name(), 
                 $user_course_category_id);
             
             if ($course_user_category)

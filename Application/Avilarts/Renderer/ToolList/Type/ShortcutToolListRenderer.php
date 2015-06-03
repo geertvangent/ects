@@ -57,7 +57,7 @@ class ShortcutToolListRenderer extends ToolListRenderer
                 Translation :: get(
                     'TypeName',
                     null,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool->get_name())));
+                    \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name())));
 
             $params = array(
                 Application :: PARAM_CONTEXT => Manager :: context(),
@@ -70,7 +70,7 @@ class ShortcutToolListRenderer extends ToolListRenderer
 
             $html[] = '<a href="' . $url . '" title="' . $title . '">';
             $html[] = '<img src="' . Theme :: getInstance()->getImagePath(
-                \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace($tool->get_name()),
+                \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name()),
                 'Logo/' . $tool_image) . '" style="vertical-align: middle;" alt="' . $title . '"/> ';
             $html[] = '</a>';
         }

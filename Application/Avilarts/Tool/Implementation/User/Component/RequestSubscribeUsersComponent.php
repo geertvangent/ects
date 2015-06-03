@@ -50,12 +50,12 @@ class RequestSubscribeUsersComponent extends Manager implements DelegateComponen
             $values = $this->form->exportValues();
             $success_requests = $this->create_course_request_for_users($users, $request, $values);
             $array_type = array();
-            $array_type['go'] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_WEBLCMS_HOME;
+            $array_type['go'] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_WEBLCMS_HOME;
             $this->redirect(
                 Translation :: get($success_requests ? 'CourseCreateRequestSent' : 'CourseCreateRequestNotSent'),
                 ($success_requests ? false : true),
                 $array_type,
-                array(\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE));
+                array(\Ehb\Application\Avilarts\Manager :: PARAM_COURSE));
         }
         else
         {
@@ -184,12 +184,12 @@ class RequestSubscribeUsersComponent extends Manager implements DelegateComponen
     {
         $course_id = $this->get_course_id();
 
-        if ($request instanceof \Chamilo\Application\Weblcms\Request\Storage\DataClass\Request)
+        if ($request instanceof \Ehb\Application\Avilarts\Request\Storage\DataClass\Request)
         {
             $request->set_course_name(
-                $values[\Chamilo\Application\Weblcms\Request\Storage\DataClass\Request :: PROPERTY_NAME]);
+                $values[\Ehb\Application\Avilarts\Request\Storage\DataClass\Request :: PROPERTY_NAME]);
             $request->set_course_type_id(
-                $values[\Chamilo\Application\Weblcms\Request\Storage\DataClass\Request :: PROPERTY_COURSE_TYPE_ID]);
+                $values[\Ehb\Application\Avilarts\Request\Storage\DataClass\Request :: PROPERTY_COURSE_TYPE_ID]);
         }
         else
         {

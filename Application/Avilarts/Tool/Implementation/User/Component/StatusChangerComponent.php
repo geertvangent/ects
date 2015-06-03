@@ -60,9 +60,9 @@ abstract class StatusChangerComponent extends Manager
             $parameters[UserStatusChange :: PROPERTY_SUBJECT_ID] = $this->object;
             $parameters[UserStatusChange :: PROPERTY_NEW_STATUS] = $this->get_status();
             $parameters[UserStatusChange :: PROPERTY_COURSE_ID] = Request :: get(
-                \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE);
+                \Ehb\Application\Avilarts\Manager :: PARAM_COURSE);
             $parameters[UserStatusChange :: PROPERTY_DATE] = time();
-            Event :: trigger('user_status_change', \Chamilo\Application\Weblcms\Manager :: context(), $parameters);
+            Event :: trigger('user_status_change', \Ehb\Application\Avilarts\Manager :: context(), $parameters);
         }
 
         $message = $this->get_general_result(
@@ -76,7 +76,7 @@ abstract class StatusChangerComponent extends Manager
             $message,
             $failed > 0,
             array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_UNSUBSCRIBE_BROWSER,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_UNSUBSCRIBE_BROWSER,
                 self :: PARAM_TAB => Request :: get(self :: PARAM_TAB)));
     }
 
@@ -86,7 +86,7 @@ abstract class StatusChangerComponent extends Manager
             new Breadcrumb(
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_UNSUBSCRIBE_BROWSER,
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => self :: ACTION_UNSUBSCRIBE_BROWSER,
                         self :: PARAM_TAB => Request :: get(self :: PARAM_TAB))),
                 Translation :: get('UserToolUnsubscribeUserBrowserComponent')));
     }
@@ -95,9 +95,9 @@ abstract class StatusChangerComponent extends Manager
     {
         $params = array();
         $params[] = self :: PARAM_TAB;
-        if (Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP))
+        if (Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP))
         {
-            $params[] = \Chamilo\Application\Weblcms\Manager :: PARAM_GROUP;
+            $params[] = \Ehb\Application\Avilarts\Manager :: PARAM_GROUP;
         }
         return $params;
     }

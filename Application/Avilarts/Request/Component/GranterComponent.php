@@ -19,7 +19,7 @@ class GranterComponent extends Manager
 
     function run()
     {
-        if (! \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->request_is_allowed())
+        if (! \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->request_is_allowed())
         {
             throw new NotAllowedException();
         }
@@ -38,7 +38,7 @@ class GranterComponent extends Manager
             {
                 $request = DataManager :: retrieve_by_id(Request :: class_name(), (int) $id);
 
-                if (! \Chamilo\Application\Weblcms\Request\Rights\Rights :: get_instance()->is_target_user(
+                if (! \Ehb\Application\Avilarts\Request\Rights\Rights :: get_instance()->is_target_user(
                     $this->get_user(),
                     $request->get_user_id()) && ! $this->get_user()->is_platform_admin())
                 {
@@ -71,7 +71,7 @@ class GranterComponent extends Manager
                                     $course,
                                     array()))
                                 {
-                                    if (\Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_user_to_course(
+                                    if (\Ehb\Application\Avilarts\Course\Storage\DataManager :: subscribe_user_to_course(
                                         $course->get_id(),
                                         '1',
                                         $request->get_user_id()))

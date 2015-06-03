@@ -42,28 +42,28 @@ class CourseUserAssignmentInformationBlock extends ToolBlock
                 Translation :: get('Submissions')));
 
         $user_id = $this->get_user_id();
-        $subm_tracker = new \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission();
+        $subm_tracker = new \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission();
         $conditions = array();
 
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID),
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID),
             new StaticConditionVariable($user_id));
 
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE),
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE),
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER));
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER));
 
         $condition = new AndCondition($conditions);
         $submissions = $subm_tracker->retrieve_tracker_items($condition);
 
-        $feedback_tracker = new \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback();
-        $score_tracker = new \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore();
+        $feedback_tracker = new \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback();
+        $score_tracker = new \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore();
         $img = '<img src="' . Theme :: getInstance()->getCommonImagePath('Action/Reporting') . '" title="' .
              Translation :: get('Details') . '" />';
 
@@ -94,25 +94,25 @@ class CourseUserAssignmentInformationBlock extends ToolBlock
                 ContentObjectPublication :: PROPERTY_COURSE_ID),
             new StaticConditionVariable($this->get_course_id()));
         $condition = new AndCondition($conditions);
-        $publications_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+        $publications_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
             $condition);
 
         $params = array();
-        $params[Application :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $params[Application :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $this->get_course_id();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = Assignment :: get_type_name();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION] = \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMITTERS;
+        $params[Application :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $params[Application :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $this->get_course_id();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = Assignment :: get_type_name();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION] = \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMITTERS;
 
         $params_detail = $this->get_parent()->get_parameters();
-        $params_detail[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = CourseSubmitterSubmissionsTemplate :: class_name();
-        $params_detail[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $user_id;
-        $params_detail[\Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER;
+        $params_detail[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = CourseSubmitterSubmissionsTemplate :: class_name();
+        $params_detail[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID] = $user_id;
+        $params_detail[\Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: PARAM_SUBMITTER_TYPE] = \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER;
 
         $key = 0;
         while ($publication = $publications_resultset->next_result())
         {
-            if (! \Chamilo\Application\Weblcms\Storage\DataManager :: is_publication_target_user(
+            if (! \Ehb\Application\Avilarts\Storage\DataManager :: is_publication_target_user(
                 $user_id,
                 $publication[ContentObjectPublication :: PROPERTY_ID]))
             {
@@ -125,7 +125,7 @@ class CourseUserAssignmentInformationBlock extends ToolBlock
                 ContentObject :: class_name(),
                 $publication[ContentObjectPublication :: PROPERTY_CONTENT_OBJECT_ID]);
 
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
 
             $redirect = new Redirect($params);
             $url_title = $redirect->getUrl();
@@ -138,13 +138,13 @@ class CourseUserAssignmentInformationBlock extends ToolBlock
                          Translation :: get('TimeNoSecFormat', null, Utilities :: COMMON_LIBRARIES),
                         $pub_submissions[$publication[ContentObjectPublication :: PROPERTY_ID]]['last']);
 
-                $params_detail[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
+                $params_detail[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $publication[ContentObjectPublication :: PROPERTY_ID];
                 $link = '<a href="' . $this->get_parent()->get_url($params_detail) . '">' . $img . '</a>';
 
                 $condition = new InCondition(
                     new PropertyConditionVariable(
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: class_name(),
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: PROPERTY_SUBMISSION_ID),
+                        \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: class_name(),
+                        \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionFeedback :: PROPERTY_SUBMISSION_ID),
                     $pub_submissions[$publication[ContentObjectPublication :: PROPERTY_ID]]['subm_ids']);
 
                 $feedback_count = $feedback_tracker->count_tracker_items($condition);
@@ -153,8 +153,8 @@ class CourseUserAssignmentInformationBlock extends ToolBlock
 
                 $condition = new InCondition(
                     new PropertyConditionVariable(
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: class_name(),
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: PROPERTY_SUBMISSION_ID),
+                        \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: class_name(),
+                        \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\SubmissionScore :: PROPERTY_SUBMISSION_ID),
                     $pub_submissions[$publication[ContentObjectPublication :: PROPERTY_ID]]['subm_ids']);
 
                 $scores = $score_tracker->retrieve_tracker_items($condition);

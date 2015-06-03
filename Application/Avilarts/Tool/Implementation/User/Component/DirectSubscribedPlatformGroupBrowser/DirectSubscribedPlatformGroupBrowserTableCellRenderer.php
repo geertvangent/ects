@@ -84,7 +84,7 @@ class DirectSubscribedPlatformGroupBrowserTableCellRenderer extends RecordTableC
                 $this->get_component()->get_course_id())))
             {
                 // unsubscribe group
-                $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_UNSUBSCRIBE_GROUPS;
+                $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_UNSUBSCRIBE_GROUPS;
                 $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
                 $parameters[Manager :: PARAM_OBJECTS] = $group_id;
 
@@ -96,7 +96,7 @@ class DirectSubscribedPlatformGroupBrowserTableCellRenderer extends RecordTableC
                         ToolbarItem :: DISPLAY_ICON));
             }
 
-            $weblcms_manager_namespace = \Chamilo\Application\Weblcms\Manager :: context();
+            $weblcms_manager_namespace = \Ehb\Application\Avilarts\Manager :: context();
 
             // change status
             switch ($group_with_subscription_status[CourseGroupRelation :: PROPERTY_STATUS])

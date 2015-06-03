@@ -27,7 +27,7 @@ class DownloadSelectedPublicationsComponent extends Manager
         $content_object_ids = array();
         foreach ($publications_ids as $publication_id)
         {
-            $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publication_with_content_object(
+            $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publication_with_content_object(
                 $publication_id);
             
             if ($this->is_allowed(WeblcmsRights :: VIEW_RIGHT, $publication))
@@ -43,8 +43,8 @@ class DownloadSelectedPublicationsComponent extends Manager
                 true, 
                 array(), 
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION, 
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION, 
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID));
         }
         
         $parameters = new ExportParameters(

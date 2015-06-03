@@ -74,7 +74,7 @@ class NewAnnouncements extends NewBlock
     private function get_new_announcements_icon()
     {
         return Theme :: getInstance()->getImagePath(
-            \Chamilo\Application\Weblcms\Tool\Manager :: get_tool_type_namespace(self :: TOOL_ANNOUNCEMENT),
+            \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace(self :: TOOL_ANNOUNCEMENT),
             'Logo/' . Theme :: ICON_MINI . 'New');
     }
 
@@ -82,12 +82,12 @@ class NewAnnouncements extends NewBlock
     {
         $id = $publication[ContentObjectPublication :: PROPERTY_ID];
 
-        $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_CONTEXT] = \Chamilo\Application\Weblcms\Manager :: context();
-        $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE;
-        $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_COURSE] = $course->get_id();
-        $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_TOOL] = self :: TOOL_ANNOUNCEMENT;
-        $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_VIEW;
-        $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $id;
+        $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_CONTEXT] = \Ehb\Application\Avilarts\Manager :: context();
+        $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE;
+        $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE] = $course->get_id();
+        $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_TOOL] = self :: TOOL_ANNOUNCEMENT;
+        $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = \Ehb\Application\Avilarts\Tool\Manager :: ACTION_VIEW;
+        $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID] = $id;
 
         $redirect = new Redirect($parameters);
         return $redirect->getUrl();

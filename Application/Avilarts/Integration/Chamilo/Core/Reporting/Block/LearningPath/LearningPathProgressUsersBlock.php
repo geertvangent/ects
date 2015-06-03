@@ -52,7 +52,7 @@ class LearningPathProgressUsersBlock extends ToolBlock
                 ContentObjectPublication :: class_name(),
                 ContentObjectPublication :: PROPERTY_MODIFIED_DATE));
 
-        $publication_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_content_object_publications(
+        $publication_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications(
             $condition,
             $order_by);
 
@@ -122,7 +122,7 @@ class LearningPathProgressUsersBlock extends ToolBlock
 
                 if (! $attempt instanceof LearningPathAttempt)
                 {
-                    if (\Chamilo\Application\Weblcms\Storage\DataManager :: is_publication_target_user(
+                    if (\Ehb\Application\Avilarts\Storage\DataManager :: is_publication_target_user(
                         $user[\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_ID],
                         $publication[ContentObjectPublication :: PROPERTY_ID],
                         $course_id))

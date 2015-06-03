@@ -17,7 +17,7 @@ class NoOfUsersSubscribedCourseBlock extends CourseBlock
         $users = \Chamilo\Core\User\Storage\DataManager :: count(
             \Chamilo\Core\User\Storage\DataClass\User :: class_name());
         
-        $courses = \Chamilo\Application\Weblcms\Storage\DataManager :: count_distinct(
+        $courses = \Ehb\Application\Avilarts\Storage\DataManager :: count_distinct(
             CourseUserRelation :: class_name(), 
             new DataClassCountDistinctParameters(null, CourseUserRelation :: PROPERTY_USER_ID));
         

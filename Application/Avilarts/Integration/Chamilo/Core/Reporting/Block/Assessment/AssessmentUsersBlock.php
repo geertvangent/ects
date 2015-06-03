@@ -36,7 +36,7 @@ class AssessmentUsersBlock extends AssessmentBlock
 
         $count = 1;
 
-        $users_resultset = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_publication_target_users(
+        $users_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_publication_target_users(
             $pub_id,
             $course_id);
         $user_attempts = $this->calculate_user_attempt_summary_data();
@@ -54,8 +54,8 @@ class AssessmentUsersBlock extends AssessmentBlock
                      Translation :: get('Details') . '" />';
 
                 $params = $this->get_parent()->get_parameters();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = AssessmentAttemptsUserTemplate :: class_name();
-                $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user->get_id();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = AssessmentAttemptsUserTemplate :: class_name();
+                $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user->get_id();
                 $link = '<a href="' . $this->get_parent()->get_url($params) . '">' . $img . '</a>';
 
                 $reporting_data->add_data_category_row($count, Translation :: get('UserDetails'), $link);

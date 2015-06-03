@@ -31,13 +31,13 @@ class AssignmentSubmissions extends Block
         $conditions = array();
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: class_name(),
-                \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: PROPERTY_PUBLISHER_ID),
+                \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: class_name(),
+                \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: PROPERTY_PUBLISHER_ID),
             new StaticConditionVariable($user_id));
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: class_name(),
-                \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication :: PROPERTY_TOOL),
+                \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: class_name(),
+                \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: PROPERTY_TOOL),
             new StaticConditionVariable(Assignment :: get_table_name()));
 
         $condition = new AndCondition($conditions);
@@ -67,30 +67,30 @@ class AssignmentSubmissions extends Block
             $conditions = array();
             $conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_PUBLICATION_ID),
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_PUBLICATION_ID),
                 new StaticConditionVariable($publication->get_id()));
             $conditions[] = new InequalityCondition(
                 new PropertyConditionVariable(
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
-                    \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_DATE_SUBMITTED),
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                    \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_DATE_SUBMITTED),
                 InequalityCondition :: GREATER_THAN,
                 new StaticConditionVariable($last_access_time));
             $condition = new AndCondition($conditions);
             $submissions_resultset = \Chamilo\Core\Tracking\Storage\DataManager :: retrieves(
-                \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
+                \Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: class_name(),
                 new DataClassRetrievesParameters($condition));
 
             $object = $publication->get_content_object();
             $item[title] = $object->get_title();
             $parameters = array(
-                Application :: PARAM_CONTEXT => \Chamilo\Application\Weblcms\Manager :: context(),
-                \Chamilo\Application\Weblcms\Manager :: PARAM_COURSE => $publication->get_course_id(),
-                Application :: PARAM_ACTION => \Chamilo\Application\Weblcms\Manager :: ACTION_VIEW_COURSE,
-                \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL => Assignment :: get_table_name(),
-                \Chamilo\Application\Weblcms\Manager :: PARAM_TOOL_ACTION => \Chamilo\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMITTERS,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_BROWSER_TYPE => ContentObjectRenderer :: TYPE_TABLE,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id());
+                Application :: PARAM_CONTEXT => \Ehb\Application\Avilarts\Manager :: context(),
+                \Ehb\Application\Avilarts\Manager :: PARAM_COURSE => $publication->get_course_id(),
+                Application :: PARAM_ACTION => \Ehb\Application\Avilarts\Manager :: ACTION_VIEW_COURSE,
+                \Ehb\Application\Avilarts\Manager :: PARAM_TOOL => Assignment :: get_table_name(),
+                \Ehb\Application\Avilarts\Manager :: PARAM_TOOL_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\Assignment\Manager :: ACTION_BROWSE_SUBMITTERS,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE => ContentObjectRenderer :: TYPE_TABLE,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id());
 
             $redirect = new Redirect($parameters);
 

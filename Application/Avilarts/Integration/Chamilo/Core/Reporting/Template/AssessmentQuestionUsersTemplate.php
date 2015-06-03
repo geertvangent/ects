@@ -40,24 +40,24 @@ class AssessmentQuestionUsersTemplate extends ReportingTemplate
     private function initialize_parameters()
     {
         $this->question_id = Request :: get(
-            \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
+            \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION);
         if ($this->question_id)
         {
             $this->set_parameter(
-                \Chamilo\Application\Weblcms\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION,
+                \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_QUESTION,
                 $this->question_id);
         }
 
-        $this->publication_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION);
+        $this->publication_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
         if ($this->publication_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION, $this->publication_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION, $this->publication_id);
         }
 
-        $this->user_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS);
+        $this->user_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_USERS);
         if ($this->user_id)
         {
-            $this->set_parameter(\Chamilo\Application\Weblcms\Manager :: PARAM_USERS, $this->user_id);
+            $this->set_parameter(\Ehb\Application\Avilarts\Manager :: PARAM_USERS, $this->user_id);
         }
     }
 
@@ -66,7 +66,7 @@ class AssessmentQuestionUsersTemplate extends ReportingTemplate
      */
     protected function add_breadcrumbs()
     {
-        $assessment = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $assessment = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $this->publication_id)->get_content_object();
 
@@ -80,12 +80,12 @@ class AssessmentQuestionUsersTemplate extends ReportingTemplate
             new Breadcrumb(
                 $this->get_url(
                     array(\Chamilo\Core\Reporting\Viewer\Manager :: PARAM_BLOCK_ID => 2),
-                    array(\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID)),
+                    array(\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID)),
                 Translation :: get('Assessments')));
 
         $params = array();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_TEMPLATE_ID] = AssessmentAttemptsTemplate :: class_name();
-        $params[\Chamilo\Application\Weblcms\Manager :: PARAM_PUBLICATION] = $this->publication_id;
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_TEMPLATE_ID] = AssessmentAttemptsTemplate :: class_name();
+        $params[\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION] = $this->publication_id;
 
         $trail->add(new Breadcrumb($this->get_url($params), $assessment->get_title()));
 

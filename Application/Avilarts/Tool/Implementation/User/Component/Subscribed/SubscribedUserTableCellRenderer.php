@@ -69,7 +69,7 @@ class SubscribedUserTableCellRenderer extends RecordTableCellRenderer implements
                 if (PlatformSetting :: get('active_online_email_editor'))
                 {
                     $parameters = array();
-                    $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_EMAIL;
+                    $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_EMAIL;
                     $parameters[Manager :: PARAM_OBJECTS] = $user_with_subscription_status[User :: PROPERTY_ID];
                     $email_url = $this->get_component()->get_url($parameters);
                 }
@@ -98,9 +98,9 @@ class SubscribedUserTableCellRenderer extends RecordTableCellRenderer implements
 
         // always show details
         $parameters = array();
-        $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_USER_DETAILS;
+        $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_USER_DETAILS;
         $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
-        $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user_id;
+        $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user_id;
         $details_url = $this->get_component()->get_url($parameters);
 
         $toolbar->add_item(
@@ -119,7 +119,7 @@ class SubscribedUserTableCellRenderer extends RecordTableCellRenderer implements
         // (3) we are not editing groups
         if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
         {
-            $group_id = Request :: get(\Chamilo\Application\Weblcms\Manager :: PARAM_GROUP);
+            $group_id = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP);
             if ($user_id != $this->get_component()->get_user()->get_id() && ! isset($group_id))
             {
                 if ($this->get_component()->get_user()->is_platform_admin() || CourseManagementRights :: get_instance()->is_allowed(
@@ -130,7 +130,7 @@ class SubscribedUserTableCellRenderer extends RecordTableCellRenderer implements
 
                 {
                     $parameters = array();
-                    $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_UNSUBSCRIBE;
+                    $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_UNSUBSCRIBE;
                     $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
                     $parameters[Manager :: PARAM_OBJECTS] = $user_id;
                     $unsubscribe_url = $this->get_component()->get_url($parameters);
@@ -152,7 +152,7 @@ class SubscribedUserTableCellRenderer extends RecordTableCellRenderer implements
                             ToolbarItem :: DISPLAY_ICON));
                 }
 
-                $weblcms_manager_namespace = \Chamilo\Application\Weblcms\Manager :: context();
+                $weblcms_manager_namespace = \Ehb\Application\Avilarts\Manager :: context();
 
                 switch ($user_with_subscription_status[CourseUserRelation :: PROPERTY_STATUS])
                 {
@@ -198,8 +198,8 @@ class SubscribedUserTableCellRenderer extends RecordTableCellRenderer implements
 
             // if we have editing rights, display the reporting action
             $params = array();
-            $params[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user_id;
-            $params[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_REPORTING;
+            $params[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user_id;
+            $params[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_REPORTING;
             $parameters[Manager :: PARAM_TAB] = Request :: get(Manager :: PARAM_TAB);
             $reporting_url = $this->get_component()->get_url($params);
 
@@ -217,8 +217,8 @@ class SubscribedUserTableCellRenderer extends RecordTableCellRenderer implements
             if ($user_id != $this->get_component()->get_user()->get_id())
             {
                 $parameters = array();
-                $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_VIEW_AS;
-                $parameters[\Chamilo\Application\Weblcms\Manager :: PARAM_USERS] = $user_id;
+                $parameters[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = Manager :: ACTION_VIEW_AS;
+                $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_USERS] = $user_id;
                 $view_as_url = $this->get_component()->get_url($parameters);
 
                 $toolbar->add_item(

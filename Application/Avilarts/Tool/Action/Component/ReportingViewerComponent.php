@@ -31,8 +31,8 @@ class ReportingViewerComponent extends Manager
      */
     public function run()
     {
-        $classname = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_TEMPLATE_NAME);
-        $this->set_parameter(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_TEMPLATE_NAME, $classname);
+        $classname = Request :: get(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_TEMPLATE_NAME);
+        $this->set_parameter(\Ehb\Application\Avilarts\Tool\Manager :: PARAM_TEMPLATE_NAME, $classname);
 
         $trail = BreadcrumbTrail :: get_instance();
         $trail->add(new Breadcrumb($this->get_url(), Translation :: get('ReportingViewerComponent')));
@@ -47,14 +47,14 @@ class ReportingViewerComponent extends Manager
 
     private function add_pcattree_breadcrumbs($pcattree, &$trail)
     {
-        $cat = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+        $cat = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
             ContentObjectPublication :: class_name(),
             $pcattree);
 
         $categories[] = $cat;
         while ($cat->get_parent() != 0)
         {
-            $cat = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
+            $cat = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 ContentObjectPublication :: class_name(),
                 $cat->get_parent());
 
@@ -86,12 +86,12 @@ class ReportingViewerComponent extends Manager
 
             $url = $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Request :: get('tool') ==
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => Request :: get('tool') ==
                          'learning_path' ? 'view_clo' : 'view',
                         'display_action' => 'view_item',
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => Request :: get(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID),
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_COMPLEX_ID => Request :: get('cid')));
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => Request :: get(
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_COMPLEX_ID => Request :: get('cid')));
 
             $breadcrumbtrail->add(new Breadcrumb($url, $wp->get_title()));
         }

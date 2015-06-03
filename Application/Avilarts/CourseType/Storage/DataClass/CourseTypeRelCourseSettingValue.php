@@ -83,7 +83,7 @@ class CourseTypeRelCourseSettingValue extends CourseSettingValue
                 CourseSettingsController :: SETTING_TYPE_COURSE_TYPE, 
                 $course_type_rel_course_setting->get_course_type_id());
             
-            \Chamilo\Application\Weblcms\Course\Storage\DataManager :: copy_course_settings_from_course_type(
+            \Ehb\Application\Avilarts\Course\Storage\DataManager :: copy_course_settings_from_course_type(
                 $course_type_rel_course_setting->get_course_type_id(), 
                 $course_type_rel_course_setting->get_course_setting_id());
             
@@ -101,7 +101,7 @@ class CourseTypeRelCourseSettingValue extends CourseSettingValue
                         new PropertyConditionVariable(Course :: class_name(), $course_property), 
                         new StaticConditionVariable($this->get_value())));
                 
-                return \Chamilo\Application\Weblcms\Course\Storage\DataManager :: update_courses_from_course_type_with_properties(
+                return \Ehb\Application\Avilarts\Course\Storage\DataManager :: update_courses_from_course_type_with_properties(
                     $course_type->get_id(), 
                     $properties);
             }
