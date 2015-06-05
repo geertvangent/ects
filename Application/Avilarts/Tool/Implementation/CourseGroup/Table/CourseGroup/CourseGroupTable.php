@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\CourseGroup;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
@@ -21,7 +21,7 @@ class CourseGroupTable extends DataClassTable implements TableFormActionsSupport
     public function get_implemented_form_actions()
     {
         $actions = new TableFormActions(__NAMESPACE__);
-        if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_component()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $actions->add_form_action(
                 new TableFormAction(

@@ -3,7 +3,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\User\Component\AllSubscribed\AllSubscribedUserTable;
 use Ehb\Application\Avilarts\Tool\Implementation\User\Component\DirectSubscribedGroup\DirectSubscribedPlatformGroupTable;
 use Ehb\Application\Avilarts\Tool\Implementation\User\Component\Group\PlatformGroupRelUserTable;
@@ -391,7 +391,7 @@ class UnsubscribeBrowserComponent extends Manager implements TableSupport, Deleg
             $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_GROUP] = $group_id;
         }
 
-        if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $action_bar->add_common_action(
                 new ToolbarItem(

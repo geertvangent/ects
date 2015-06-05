@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\Subscribed;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
@@ -22,7 +22,7 @@ class SubscribedUserTable extends DataClassTable implements TableFormActionsSupp
     {
         $actions = new TableFormActions(__NAMESPACE__);
         $browser = $this->get_component();
-        if ($browser->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($browser->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $actions->add_form_action(
                 new TableFormAction(

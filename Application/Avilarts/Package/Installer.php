@@ -3,7 +3,7 @@ namespace Ehb\Application\Avilarts\Package;
 
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\CourseCategory;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
@@ -81,7 +81,7 @@ class Installer extends \Chamilo\Configuration\Package\Action\Installer
     {
         $rights_utilities = CourseManagementRights :: get_instance();
 
-        $location = $rights_utilities->create_subtree_root_location(0, WeblcmsRights :: TREE_TYPE_COURSE, true);
+        $location = $rights_utilities->create_subtree_root_location(0, \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE, true);
 
         if (! $location)
         {

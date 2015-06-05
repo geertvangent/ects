@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\Listeners\DisplayOrderDataClassListener;
@@ -44,8 +44,8 @@ class ContentObjectPublicationCategory extends \Chamilo\Configuration\Category\S
         
         if ($this->get_parent())
         {
-            $parent = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                WeblcmsRights :: TYPE_COURSE_CATEGORY, 
+            $parent = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY, 
                 $this->get_parent(), 
                 $this->get_course());
         }
@@ -54,14 +54,14 @@ class ContentObjectPublicationCategory extends \Chamilo\Configuration\Category\S
             $course_tool = DataManager :: retrieve_course_tool_by_name($this->get_tool());
             $course_tool_id = $course_tool->get_id();
             
-            $parent = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                WeblcmsRights :: TYPE_COURSE_MODULE, 
+            $parent = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE, 
                 $course_tool_id, 
                 $this->get_course());
         }
         
-        return WeblcmsRights :: get_instance()->create_location_in_courses_subtree(
-            WeblcmsRights :: TYPE_COURSE_CATEGORY, 
+        return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->create_location_in_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY, 
             $this->get_id(), 
             $parent, 
             $this->get_course(), 
@@ -91,22 +91,22 @@ class ContentObjectPublicationCategory extends \Chamilo\Configuration\Category\S
         {
             if ($this->get_parent())
             {
-                $new_parent_id = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                    WeblcmsRights :: TYPE_COURSE_CATEGORY, 
+                $new_parent_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY, 
                     $this->get_parent(), 
                     $this->get_course());
             }
             else
             {
                 $course_module_id = DataManager :: retrieve_course_tool_by_name($this->get_tool())->get_id();
-                $new_parent_id = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                    WeblcmsRights :: TYPE_COURSE_MODULE, 
+                $new_parent_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE, 
                     $course_module_id, 
                     $this->get_course());
             }
             
-            $location = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-                WeblcmsRights :: TYPE_COURSE_CATEGORY, 
+            $location = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY, 
                 $this->get_id(), 
                 $this->get_course());
             
@@ -121,8 +121,8 @@ class ContentObjectPublicationCategory extends \Chamilo\Configuration\Category\S
 
     public function delete()
     {
-        $location = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-            WeblcmsRights :: TYPE_COURSE_CATEGORY, 
+        $location = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY, 
             $this->get_id(), 
             $this->get_course());
         if ($location)

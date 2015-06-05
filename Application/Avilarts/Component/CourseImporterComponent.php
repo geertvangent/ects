@@ -12,14 +12,6 @@ use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Structure\Page;
 
-/**
- * $Id: course_importer.class.php 218 2009-11-13 14:21:26Z kariboe $
- *
- * @package application.lib.weblcms.weblcms_manager.component
- */
-/**
- * Weblcms component allows the use to import a course
- */
 class CourseImporterComponent extends Manager
 {
 

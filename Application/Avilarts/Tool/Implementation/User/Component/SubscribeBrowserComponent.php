@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\User\Component\Unsubscribed\UnsubscribedUserTable;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
@@ -30,7 +30,7 @@ class SubscribeBrowserComponent extends Manager implements TableSupport
 
     public function run()
     {
-        if (! $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             throw new NotAllowedException();
         }

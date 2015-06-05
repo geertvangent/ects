@@ -2,7 +2,7 @@
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
 use Ehb\Application\Avilarts\ContentObjectPublisher;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
@@ -22,7 +22,7 @@ class PublisherComponent extends Manager implements \Chamilo\Core\Repository\Vie
 
     public function run()
     {
-        if (! ($this->get_course()->is_course_admin($this->get_user()) || $this->is_allowed(WeblcmsRights :: ADD_RIGHT)))
+        if (! ($this->get_course()->is_course_admin($this->get_user()) || $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT)))
         {
             throw new NotAllowedException();
         }

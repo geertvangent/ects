@@ -2,7 +2,7 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\UserStatusChange;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Chamilo\Core\Tracking\Storage\DataClass\Event;
 use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Libraries\Architecture\Application\Application;
@@ -19,7 +19,7 @@ abstract class StatusChangerComponent extends Manager
 
     public function run()
     {
-        if (! $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             throw new NotAllowedException();
         }

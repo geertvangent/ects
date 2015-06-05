@@ -3,7 +3,6 @@ namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Home;
 
 use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataManager as WeblcmsDataManager;
 use Chamilo\Core\Repository\ContentObject\Announcement\Storage\DataClass\Announcement;
 use Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignment;
 use Chamilo\Core\Repository\ContentObject\File\Storage\DataClass\File;
@@ -62,9 +61,9 @@ class NewBlock extends Block
                 \Ehb\Application\Avilarts\CourseSettingsConnector :: VISIBILITY) == 1)
             {
                 $condition = $this->get_publication_conditions($course, $tool);
-                $course_module_id = WeblcmsDataManager :: retrieve_course_tool_by_name($tool)->get_id();
-                $location = \Ehb\Application\Avilarts\Rights\WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-                    \Ehb\Application\Avilarts\Rights\WeblcmsRights :: TYPE_COURSE_MODULE,
+                $course_module_id = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_course_tool_by_name($tool)->get_id();
+                $location = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE,
                     $course_module_id,
                     $course->get_id());
 
@@ -74,7 +73,7 @@ class NewBlock extends Block
                 $entities[\Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity :: ENTITY_TYPE] = \Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity :: get_instance();
                 $entities[\Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity :: ENTITY_TYPE] = \Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity :: get_instance();
 
-                $publications = WeblcmsDataManager :: retrieve_content_object_publications_with_view_right_granted_in_category_location(
+                $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications_with_view_right_granted_in_category_location(
                     $location,
                     $entities,
                     $condition,
@@ -118,7 +117,11 @@ class NewBlock extends Block
             0);
 
         $conditions = array();
-        $conditions[] = WeblcmsDataManager :: get_publications_condition($course, $this->get_user(), $tool, $type);
+        $conditions[] = \Ehb\Application\Avilarts\Storage\DataManager :: get_publications_condition(
+            $course,
+            $this->get_user(),
+            $tool,
+            $type);
         $conditions[] = new InequalityCondition(
             new PropertyConditionVariable(
                 \Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication :: class_name(),

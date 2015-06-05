@@ -2,7 +2,7 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
 use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
@@ -45,7 +45,7 @@ class ExporterComponent extends Manager
      */
     public function run()
     {
-        if (! $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             throw new NotAllowedException();
         }

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Core\Repository\ContentObject\Introduction\Storage\DataClass\Introduction;
@@ -47,7 +47,7 @@ class DeleterComponent extends Manager
                 $publication->ignore_display_order();
             }
             
-            if ($this->is_allowed(WeblcmsRights :: DELETE_RIGHT, $publication))
+            if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: DELETE_RIGHT, $publication))
             {
                 $publication->delete();
             }

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
@@ -27,7 +27,7 @@ class CategoryMoverComponent extends Manager
 
     public function run()
     {
-        if ($this->is_allowed(WeblcmsRights :: ADD_RIGHT))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT))
         {
             $form = $this->build_move_to_category_form();
 
@@ -67,8 +67,8 @@ class CategoryMoverComponent extends Manager
 
                     if ($publication->get_category_id())
                     {
-                        $new_parent_id = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                            WeblcmsRights :: TYPE_COURSE_CATEGORY,
+                        $new_parent_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY,
                             $publication->get_category_id(),
                             $publication->get_course_id());
                     }
@@ -82,14 +82,14 @@ class CategoryMoverComponent extends Manager
                             $condition)->as_array();
 
                         $course_module_id = $course_modules[0]->get_id();
-                        $new_parent_id = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                            WeblcmsRights :: TYPE_COURSE_MODULE,
+                        $new_parent_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE,
                             $course_module_id,
                             $publication->get_course_id());
                     }
 
-                    $location = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-                        WeblcmsRights :: TYPE_PUBLICATION,
+                    $location = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+                        \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                         $publication->get_id(),
                         $publication->get_course_id());
 
@@ -179,10 +179,10 @@ class CategoryMoverComponent extends Manager
                     $module = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_course_tool_by_name(
                         $this->get_tool_id());
 
-                    if ($is_course_admin || WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
-                        WeblcmsRights :: ADD_RIGHT,
+                    if ($is_course_admin || \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
+                        \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT,
                         $module->get_id(),
-                        WeblcmsRights :: TYPE_COURSE_MODULE,
+                        \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE,
                         $course->get_id()))
                     {
                         $this->tree[0] = Translation :: get('Root');
@@ -292,10 +292,10 @@ class CategoryMoverComponent extends Manager
 
         while ($cat = $categories->next_result())
         {
-            if ($is_course_admin || WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
-                WeblcmsRights :: ADD_RIGHT,
+            if ($is_course_admin || \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
+                \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT,
                 $cat->get_id(),
-                WeblcmsRights :: TYPE_COURSE_CATEGORY,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY,
                 $this->get_course_id()))
             {
                 // if ($cat->get_id() != $exclude)

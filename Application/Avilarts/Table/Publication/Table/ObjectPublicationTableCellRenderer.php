@@ -5,7 +5,7 @@ use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
@@ -192,13 +192,13 @@ class ObjectPublicationTableCellRenderer extends RecordTableCellRenderer impleme
     {
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication[ContentObjectPublication :: PROPERTY_ID],
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $this->get_component()->get_tool_browser()->get_course_id(),
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {

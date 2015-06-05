@@ -20,7 +20,7 @@ use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\File\FileLogger;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataManager;
 use Ehb\Application\Avilarts\Manager;
 
@@ -467,8 +467,8 @@ class ContentObjectPublication extends DataClass implements DisplayOrderDataClas
 
         if ($this->get_category_id())
         {
-            $parent = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                WeblcmsRights :: TYPE_COURSE_CATEGORY,
+            $parent = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY,
                 $this->get_category_id(),
                 $this->get_course_id());
         }
@@ -476,9 +476,9 @@ class ContentObjectPublication extends DataClass implements DisplayOrderDataClas
         {
             if ($this->get_tool() == 'home')
             {
-                $parent_id = WeblcmsRights :: get_instance()->get_courses_subtree_root_id($this->get_course_id());
-                return WeblcmsRights :: get_instance()->create_location_in_courses_subtree(
-                    WeblcmsRights :: TYPE_PUBLICATION,
+                $parent_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_courses_subtree_root_id($this->get_course_id());
+                return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->create_location_in_courses_subtree(
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                     $this->get_id(),
                     $parent_id,
                     $this->get_course_id(),
@@ -489,15 +489,15 @@ class ContentObjectPublication extends DataClass implements DisplayOrderDataClas
                 $course_tool = DataManager :: retrieve_course_tool_by_name($this->get_tool());
                 $course_tool_id = $course_tool->get_id();
 
-                $parent = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                    WeblcmsRights :: TYPE_COURSE_MODULE,
+                $parent = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE,
                     $course_tool_id,
                     $this->get_course_id());
             }
         }
 
-        return WeblcmsRights :: get_instance()->create_location_in_courses_subtree(
-            WeblcmsRights :: TYPE_PUBLICATION,
+        return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->create_location_in_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
             $this->get_id(),
             $parent,
             $this->get_course_id(),
@@ -519,8 +519,8 @@ class ContentObjectPublication extends DataClass implements DisplayOrderDataClas
 
     public function delete()
     {
-        $location = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-            WeblcmsRights :: TYPE_PUBLICATION,
+        $location = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
             $this->get_id(),
             $this->get_course_id());
         if ($location)
@@ -547,13 +547,13 @@ class ContentObjectPublication extends DataClass implements DisplayOrderDataClas
     {
         try
         {
-            return WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $this->get_id(),
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $this->get_course_id(),
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (ErrorException $exception)
         {
@@ -564,7 +564,7 @@ class ContentObjectPublication extends DataClass implements DisplayOrderDataClas
 
     public function render_target_entities_as_string()
     {
-        return WeblcmsRights :: get_instance()->render_target_entities_as_string($this->get_target_entities());
+        return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->render_target_entities_as_string($this->get_target_entities());
     }
 
     /**

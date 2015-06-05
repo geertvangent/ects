@@ -4,7 +4,6 @@ namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Home\Type;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Home\Block;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataManager as WeblcmsDataManager;
 use Chamilo\Core\Repository\Common\Renderer\ContentObjectRenderer;
 use Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignment;
 use Chamilo\Libraries\Architecture\Application\Application;
@@ -42,7 +41,7 @@ class AssignmentSubmissions extends Block
 
         $condition = new AndCondition($conditions);
 
-        $assignment_publications_resultset = WeblcmsDataManager :: retrieves(
+        $assignment_publications_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(),
             $condition);
 
@@ -55,7 +54,8 @@ class AssignmentSubmissions extends Block
         while ($publication = $assignment_publications_resultset->next_result())
         {
             // Retrieve last time the publication was accessed
-            $course_tool = WeblcmsDataManager :: retrieve_course_tool_by_name($publication->get_tool());
+            $course_tool = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_course_tool_by_name(
+                $publication->get_tool());
             $last_access_time = $this->get_last_visit(
                 $user_id,
                 $publication->get_course_id(),

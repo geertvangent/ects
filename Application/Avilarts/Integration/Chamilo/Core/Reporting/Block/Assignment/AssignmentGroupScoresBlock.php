@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Core\Repository\Common\Renderer\ContentObjectRenderer;
@@ -242,13 +242,13 @@ abstract class AssignmentGroupScoresBlock extends AssignmentReportingManager
 
     private function is_publication_target_group($group_id, $pub_id)
     {
-        $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-            WeblcmsRights :: VIEW_RIGHT,
+        $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+            \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
             \Ehb\Application\Avilarts\Manager :: context(),
             $pub_id,
-            WeblcmsRights :: TYPE_PUBLICATION,
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
             $this->course_id,
-            WeblcmsRights :: TREE_TYPE_COURSE);
+            \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
 
         if ($target_entities[0] || count($target_entities) == 0)
         {

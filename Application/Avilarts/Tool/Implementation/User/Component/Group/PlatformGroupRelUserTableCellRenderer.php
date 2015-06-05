@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\Group;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
 use Chamilo\Libraries\Format\Structure\Toolbar;
@@ -55,7 +55,7 @@ class PlatformGroupRelUserTableCellRenderer extends DataClassTableCellRenderer i
 
         // if we have editing rights, display the reporting action but never
         // allow unsubscribe
-        if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_component()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $toolbar->add_item(
                 new ToolbarItem(

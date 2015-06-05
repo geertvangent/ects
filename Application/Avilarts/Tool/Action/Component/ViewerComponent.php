@@ -4,7 +4,7 @@ namespace Ehb\Application\Avilarts\Tool\Action\Component;
 use Ehb\Application\Avilarts\CourseSettingsConnector;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Renderer\PublicationList\Type\ContentObjectPublicationDetailsRenderer;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Core\Repository\Feedback\FeedbackSupport;
@@ -54,7 +54,7 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
             throw new ObjectNotExistException(Translation :: get('Publication'), $this->get_publication_id());
         }
 
-        if (! $this->is_allowed(WeblcmsRights :: VIEW_RIGHT, $this->publication))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT, $this->publication))
         {
             $this->redirect(
                 Translation :: get("NotAllowed", null, Utilities :: COMMON_LIBRARIES),
@@ -149,7 +149,7 @@ class ViewerComponent extends Manager implements DelegateComponent, FeedbackSupp
     {
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
 
-        if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $action_bar->add_common_action($this->get_access_details_toolbar_item($this));
         }

@@ -2,7 +2,7 @@
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
 use Ehb\Application\Avilarts\Form\ContentObjectPublicationForm;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
@@ -29,7 +29,7 @@ class PublicationUpdaterComponent extends Manager
             ContentObjectPublication :: class_name(),
             $pid);
 
-        if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT, $publication))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT, $publication))
         {
 
             $content_object = $publication->get_content_object();

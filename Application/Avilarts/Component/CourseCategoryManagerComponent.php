@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
-use Ehb\Application\Avilarts\Form\WeblcmsCategoryForm;
+use Ehb\Application\Avilarts\Form\CategoryForm;
 use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseCategory;
 use Ehb\Application\Avilarts\Storage\DataManager;
@@ -73,7 +73,7 @@ class CourseCategoryManagerComponent extends Manager implements DelegateComponen
 
     public function get_category_form()
     {
-        return new WeblcmsCategoryForm();
+        return new CategoryForm();
     }
 
     public function count_categories($condition)

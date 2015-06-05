@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Rights\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\Rights\Manager;
 use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
@@ -26,7 +26,7 @@ class RightsEditorComponent extends Manager implements DelegateComponent
 
     public function get_available_rights($location)
     {
-        return WeblcmsRights :: get_available_rights($location);
+        return \Ehb\Application\Avilarts\Rights\Rights :: get_available_rights($location);
     }
 
     public function get_additional_parameters()

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
@@ -41,7 +41,7 @@ class ToggleVisibilityComponent extends Manager
                     ContentObjectPublication :: class_name(),
                     $pid);
 
-                if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT, $publication))
+                if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT, $publication))
                 {
 
                     if (! $this instanceof ToggleVisibilityComponent)

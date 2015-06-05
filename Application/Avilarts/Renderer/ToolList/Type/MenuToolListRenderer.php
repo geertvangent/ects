@@ -5,7 +5,7 @@ use Ehb\Application\Avilarts\CourseSettingsConnector;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Path;
@@ -37,7 +37,7 @@ class MenuToolListRenderer extends ToolListRenderer
     public function __construct($parent, $visible_tools)
     {
         parent :: __construct($parent, $visible_tools);
-        $this->is_course_admin = $this->get_parent()->is_allowed(WeblcmsRights :: EDIT_RIGHT);
+        $this->is_course_admin = $this->get_parent()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT);
         $this->menu_properties = $this->load_menu_properties();
     }
 

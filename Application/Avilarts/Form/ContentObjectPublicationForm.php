@@ -6,7 +6,6 @@ use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataManager;
@@ -40,8 +39,7 @@ use DOMDocument;
 use Chamilo\Libraries\Architecture\Exceptions\NoObjectSelectedException;
 
 /**
- * This class represents a form to allow a user to publish a learning object.
- * The form allows the user to set some
+ * This class represents a form to allow a user to publish a learning object. The form allows the user to set some
  * properties of the publication (publication dates, target users, visibility, ...)
  *
  * @author Sven Vanpoucke
@@ -156,8 +154,7 @@ class ContentObjectPublicationForm extends FormValidator
     }
 
     /**
-     * Sets the default values of the form.
-     * By default the publication is for everybody who has access to the tool and
+     * Sets the default values of the form. By default the publication is for everybody who has access to the tool and
      * the publication will be available forever.
      */
     public function setDefaults($defaults = array())
@@ -219,8 +216,8 @@ class ContentObjectPublicationForm extends FormValidator
     {
         $right_defaults = array();
 
-        $location = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-            WeblcmsRights :: TYPE_PUBLICATION,
+        $location = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
             $publication->get_id(),
             $publication->get_course_id());
 
@@ -240,7 +237,7 @@ class ContentObjectPublicationForm extends FormValidator
 
             $selected_entities = CourseManagementRights :: retrieve_rights_location_rights_for_location(
                 $location,
-                WeblcmsRights :: VIEW_RIGHT)->as_array();
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT)->as_array();
 
             if (count($selected_entities) == 1)
             {
@@ -418,10 +415,10 @@ class ContentObjectPublicationForm extends FormValidator
     {
         $tool = DataManager :: retrieve_course_tool_by_name($this->get_tool());
 
-        if ($this->is_course_admin || WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
-            WeblcmsRights :: ADD_RIGHT,
+        if ($this->is_course_admin || \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT,
             $tool->get_id(),
-            WeblcmsRights :: TYPE_COURSE_MODULE,
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE,
             $this->get_course_id()))
         {
             $this->categories[0] = Translation :: get('Root', null, Utilities :: COMMON_LIBRARIES);
@@ -490,10 +487,10 @@ class ContentObjectPublicationForm extends FormValidator
 
         while ($cat = $cats->next_result())
         {
-            if ($this->is_course_admin || WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
-                WeblcmsRights :: ADD_RIGHT,
+            if ($this->is_course_admin || \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
+                \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT,
                 $cat->get_id(),
-                WeblcmsRights :: TYPE_COURSE_CATEGORY,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY,
                 $this->get_course_id()))
             {
                 $this->categories[$cat->get_id()] = str_repeat('--', $this->level) . ' ' . $cat->get_name();
@@ -678,8 +675,8 @@ class ContentObjectPublicationForm extends FormValidator
     {
         $values = $this->exportValues();
 
-        $location = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-            WeblcmsRights :: TYPE_PUBLICATION,
+        $location = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
             $publication->get_id(),
             $publication->get_course_id());
 
@@ -690,14 +687,14 @@ class ContentObjectPublicationForm extends FormValidator
 
         if ($category_changed)
         {
-            $new_parent_id = WeblcmsRights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
-                WeblcmsRights :: TYPE_COURSE_CATEGORY,
+            $new_parent_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY,
                 $publication->get_category_id(),
                 $publication->get_course_id());
             $location->move($new_parent_id);
         }
 
-        if (! $location->clear_right(WeblcmsRights :: VIEW_RIGHT))
+        if (! $location->clear_right(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT))
         {
             return false;
         }
@@ -727,19 +724,23 @@ class ContentObjectPublicationForm extends FormValidator
             $option = $values[self :: PROPERTY_RIGHT_OPTION];
             $location_id = $location->get_id();
 
-            $weblcms_rights = WeblcmsRights :: get_instance();
+            $weblcms_rights = \Ehb\Application\Avilarts\Rights\Rights :: get_instance();
 
             switch ($option)
             {
                 case self :: RIGHT_OPTION_ALL :
-                    if (! $weblcms_rights->invert_location_entity_right(WeblcmsRights :: VIEW_RIGHT, 0, 0, $location_id))
+                    if (! $weblcms_rights->invert_location_entity_right(
+                        \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
+                        0,
+                        0,
+                        $location_id))
                     {
                         return false;
                     }
                     break;
                 case self :: RIGHT_OPTION_ME :
                     if (! $weblcms_rights->invert_location_entity_right(
-                        WeblcmsRights :: VIEW_RIGHT,
+                        \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                         Session :: get_user_id(),
                         CourseUserEntity :: ENTITY_TYPE,
                         $location_id))
@@ -753,7 +754,7 @@ class ContentObjectPublicationForm extends FormValidator
                         foreach ($target_ids as $target_id)
                         {
                             if (! $weblcms_rights->invert_location_entity_right(
-                                WeblcmsRights :: VIEW_RIGHT,
+                                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                                 $target_id,
                                 $entity_type,
                                 $location_id))

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Core\Repository\ContentObject\Introduction\Storage\DataClass\Introduction;
@@ -22,7 +22,7 @@ class IntroductionPublisherComponent extends Manager implements \Chamilo\Core\Re
 
     public function run()
     {
-        if (! $this->is_allowed(WeblcmsRights :: ADD_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT))
         {
             throw new NotAllowedException();
         }

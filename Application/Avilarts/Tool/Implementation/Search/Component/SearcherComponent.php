@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Search\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Implementation\Search\Manager;
 use Chamilo\Core\Repository\ContentObject\Introduction\Storage\DataClass\Introduction;
@@ -73,8 +73,8 @@ class SearcherComponent extends Manager
 
             while ($publication = $publications->next_result())
             {
-                if ($this->is_allowed(WeblcmsRights :: VIEW_RIGHT, $publication) &&
-                     (! $publication->is_hidden() || $this->is_allowed(WeblcmsRights :: EDIT_RIGHT)))
+                if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT, $publication) &&
+                     (! $publication->is_hidden() || $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT)))
                 {
                     $tools[$publication->get_tool()][] = $publication;
                 }

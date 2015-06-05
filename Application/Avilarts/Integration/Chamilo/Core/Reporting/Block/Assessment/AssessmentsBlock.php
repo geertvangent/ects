@@ -4,7 +4,6 @@ namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Asse
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\AssessmentAttemptsTemplate;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataManager as WeblcmsDataManager;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Core\Repository\ContentObject\Assessment\Storage\DataClass\Assessment;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
@@ -117,7 +116,8 @@ class AssessmentsBlock extends AssessmentBlock
     {
         $reporting_info = array();
 
-        $target_users = WeblcmsDataManager :: get_publication_target_users($assessment_publication);
+        $target_users = \Ehb\Application\Avilarts\Storage\DataManager :: get_publication_target_users(
+            $assessment_publication);
         $assessment_attempts = $this->get_assessment_attempts($assessment_publication->get_id());
 
         $score_count = 0;

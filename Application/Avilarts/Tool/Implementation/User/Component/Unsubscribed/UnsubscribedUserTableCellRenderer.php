@@ -3,7 +3,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\Unsubscrib
 
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Structure\Toolbar;
@@ -80,7 +80,7 @@ class UnsubscribedUserTableCellRenderer extends DataClassTableCellRenderer imple
         $toolbar = new Toolbar(Toolbar :: TYPE_HORIZONTAL);
 
         if ($this->get_component()->get_user()->is_platform_admin() || ($this->get_component()->is_allowed(
-            WeblcmsRights :: EDIT_RIGHT) && CourseManagementRights :: get_instance()->is_allowed(
+            \Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) && CourseManagementRights :: get_instance()->is_allowed(
             CourseManagementRights :: TEACHER_DIRECT_SUBSCRIBE_RIGHT,
             $this->get_component()->get_course_id(),
             CourseManagementRights :: TYPE_COURSE,
@@ -118,7 +118,7 @@ class UnsubscribedUserTableCellRenderer extends DataClassTableCellRenderer imple
                     ToolbarItem :: DISPLAY_ICON));
         }
         elseif ($this->get_component()->get_user()->is_platform_admin() || ($this->get_component()->is_allowed(
-            WeblcmsRights :: EDIT_RIGHT) && CourseManagementRights :: get_instance()->is_allowed(
+            \Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) && CourseManagementRights :: get_instance()->is_allowed(
             CourseManagementRights :: TEACHER_REQUEST_SUBSCRIBE_RIGHT,
             $this->get_component()->get_course_id(),
             CourseManagementRights :: TYPE_COURSE,

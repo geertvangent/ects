@@ -8,7 +8,7 @@ use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
 use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
@@ -256,7 +256,7 @@ abstract class Manager extends Application
         
         $course_tools = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(CourseTool :: class_name());
         
-        $edit_right = $this->is_allowed(WeblcmsRights :: EDIT_RIGHT);
+        $edit_right = $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT);
         
         $course_settings_controller = CourseSettingsController :: get_instance();
         
@@ -351,7 +351,7 @@ abstract class Manager extends Application
             $introduction_text = $this->get_introduction_text();
             if (! $introduction_text)
             {
-                if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+                if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
                 {
                     $toolbar->add_item(
                         new ToolbarItem(
@@ -491,19 +491,19 @@ abstract class Manager extends Application
                 return true; // the publisher has all the rights
             }
             
-            if ($hidden && $right == WeblcmsRights :: VIEW_RIGHT)
+            if ($hidden && $right == \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT)
             {
-                return WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
-                    WeblcmsRights :: EDIT_RIGHT, 
+                return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
+                    \Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT, 
                     $publication_id, 
-                    WeblcmsRights :: TYPE_PUBLICATION, 
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION, 
                     $this->get_course_id(), 
                     $id);
             }
-            return WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
+            return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
                 $right, 
                 $publication_id, 
-                WeblcmsRights :: TYPE_PUBLICATION, 
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION, 
                 $this->get_course_id(), 
                 $id);
         }
@@ -523,10 +523,10 @@ abstract class Manager extends Application
                 
                 if ($category->is_recursive_visible())
                 {
-                    return WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
+                    return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
                         $right, 
                         $category_id, 
-                        WeblcmsRights :: TYPE_COURSE_CATEGORY, 
+                        \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY, 
                         $this->get_course_id(), 
                         $id);
                 }
@@ -538,7 +538,7 @@ abstract class Manager extends Application
             
             if ($this->get_tool_id() == 'home')
             {
-                return WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
+                return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
                     $right, 
                     0, 
                     RightsUtil :: TYPE_ROOT, 
@@ -558,10 +558,10 @@ abstract class Manager extends Application
             {
                 return false;
             }
-            return WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
+            return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
                 $right, 
                 $tool_registration->get_id(), 
-                WeblcmsRights :: TYPE_COURSE_MODULE, 
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE, 
                 $this->get_course_id(), 
                 $id);
         }
@@ -631,7 +631,7 @@ abstract class Manager extends Application
         
         if ($introduction_text)
         {
-            if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+            if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
             {
                 $toolbar = new Toolbar();
                 
@@ -646,7 +646,7 @@ abstract class Manager extends Application
                         ToolbarItem :: DISPLAY_ICON));
             }
             
-            if ($this->is_allowed(WeblcmsRights :: DELETE_RIGHT))
+            if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: DELETE_RIGHT))
             {
                 if (! $toolbar)
                 {
@@ -848,7 +848,7 @@ abstract class Manager extends Application
         
         $publications = Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_PUBLICATION);
         
-        $rights_util = WeblcmsRights :: get_instance();
+        $rights_util = \Ehb\Application\Avilarts\Rights\Rights :: get_instance();
         
         if ($publications)
         {
@@ -860,7 +860,7 @@ abstract class Manager extends Application
             foreach ($publications as $publication)
             {
                 $locations[] = $rights_util->get_weblcms_location_by_identifier_from_courses_subtree(
-                    WeblcmsRights :: TYPE_PUBLICATION, 
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION, 
                     $publication, 
                     $course_id);
             }
@@ -870,7 +870,7 @@ abstract class Manager extends Application
             if ($category_id)
             {
                 $locations[] = $rights_util->get_weblcms_location_by_identifier_from_courses_subtree(
-                    WeblcmsRights :: TYPE_COURSE_CATEGORY, 
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY, 
                     $category_id, 
                     $course_id);
             }
@@ -882,7 +882,7 @@ abstract class Manager extends Application
                 if ($course_tool_name && $course_tool_name != 'rights')
                 {
                     $locations[] = $rights_util->get_weblcms_location_by_identifier_from_courses_subtree(
-                        WeblcmsRights :: TYPE_COURSE_MODULE, 
+                        \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE, 
                         $course_tool->get_id(), 
                         $course_id);
                 }

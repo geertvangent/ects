@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\CourseGroup;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
@@ -28,7 +28,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
         switch ($column->get_name())
         {
             case CourseGroup :: PROPERTY_NAME :
-                if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT) ||
+                if ($this->get_component()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) ||
                      $course_group->is_member($this->get_component()->get_user()))
                 {
                     $url = $this->get_component()->get_url(
@@ -53,7 +53,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
         $parameters = array();
         $parameters[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
 
-        if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_component()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $parameters = array();
             $parameters[Manager :: PARAM_COURSE_GROUP] = $course_group->get_id();
@@ -103,7 +103,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
 
         $user = $this->get_component()->get_user();
 
-        if (! $this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if (! $this->get_component()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             if ($course_group->is_self_registration_allowed() && ($course_group->count_members() <
                  $course_group->get_max_number_of_members() || $course_group->get_max_number_of_members() == 0))
@@ -139,7 +139,7 @@ class CourseGroupTableCellRenderer extends DataClassTableCellRenderer implements
                     ToolbarItem :: DISPLAY_ICON));
         }
 
-        if (! $this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT) &&
+        if (! $this->get_component()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) &&
              $course_group->is_self_unregistration_allowed() && $course_group->is_member($user))
         {
             $parameters = array();

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Form\CourseGroupForm;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
@@ -21,7 +21,7 @@ class CreatorComponent extends Manager
 
     public function run()
     {
-        if (! $this->is_allowed(WeblcmsRights :: ADD_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT))
         {
             throw new NotAllowedException();
         }

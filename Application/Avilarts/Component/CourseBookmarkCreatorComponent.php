@@ -1,9 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Storage\DataManager as WeblcmsDataManager;
 use Chamilo\Core\Repository\ContentObject\Bookmark\Form\BookmarkForm;
 use Chamilo\Core\Repository\ContentObject\Bookmark\Storage\DataClass\Bookmark;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
@@ -32,8 +30,8 @@ class CourseBookmarkCreatorComponent extends Manager
         $content_object = new Bookmark();
 
         // set title
-        $wdm = WeblcmsDataManager :: get_instance();
-        $course = CourseDataManager :: retrieve_course($course_id);
+        $wdm = \Ehb\Application\Avilarts\Storage\DataManager :: get_instance();
+        $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_course($course_id);
         $title = $course->get_title();
         $content_object->set_title($title);
 

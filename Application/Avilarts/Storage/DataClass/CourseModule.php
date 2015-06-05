@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
@@ -178,18 +178,18 @@ class CourseModule extends DataClass
             return false;
         }
         
-        return WeblcmsRights :: get_instance()->create_location_in_courses_subtree(
-            WeblcmsRights :: TYPE_COURSE_MODULE, 
+        return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->create_location_in_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE, 
             $this->get_id(), 
-            WeblcmsRights :: get_instance()->get_courses_subtree_root_id($this->get_course_code()), 
+            \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_courses_subtree_root_id($this->get_course_code()), 
             $this->get_course_code(), 
             $create_in_batch);
     }
 
     public function delete()
     {
-        $location = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-            WeblcmsRights :: TYPE_COURSE_MODULE, 
+        $location = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE, 
             $this->get_id(), 
             $this->get_course_code());
         if ($location)

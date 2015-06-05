@@ -3,7 +3,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
 use Ehb\Application\Avilarts\CourseSettingsConnector;
 use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\CourseGroupMenu;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
@@ -148,7 +148,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         $param_subscriptions_overview[\Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION] = self :: ACTION_SUBSCRIPTIONS_OVERVIEW;
         $param_subscriptions_overview[\Ehb\Application\Avilarts\Manager :: PARAM_COURSE_GROUP] = $this->get_group_id();
 
-        if ($this->is_allowed(WeblcmsRights :: ADD_RIGHT))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT))
         {
             $action_bar->add_common_action(
                 new ToolbarItem(
@@ -158,7 +158,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }
 
-        if (! $this->introduction_text && $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if (! $this->introduction_text && $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $action_bar->add_common_action(
                 new ToolbarItem(
@@ -170,7 +170,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
         }
 
-        if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $action_bar->add_common_action(
                 new ToolbarItem(

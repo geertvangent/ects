@@ -4,7 +4,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Form;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\CourseGroupMenu;
@@ -333,7 +333,7 @@ class CourseGroupForm extends FormValidator
                     // settings rights to publication_category
                     $rights = $this->rights;
                     /*
-                     * $rights[] = WeblcmsRights :: VIEW_RIGHT; $rights[] = WeblcmsRights :: ADD_RIGHT;
+                     * $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT; $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT;
                      */
 
                     if ($course_group_document_category)
@@ -393,8 +393,8 @@ class CourseGroupForm extends FormValidator
                     $course_group->set_forum_category_id($course_group_forum_category_id);
                     // rights
                     $rights = array();
-                    $rights[] = WeblcmsRights :: VIEW_RIGHT;
-                    $rights[] = WeblcmsRights :: ADD_RIGHT;
+                    $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT;
+                    $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT;
 
                     if ($course_group_forum_category)
                     {
@@ -420,8 +420,8 @@ class CourseGroupForm extends FormValidator
         $tool = 'forum';
         $content_object_publication = $this->publish_forum($tool, $forum_category->get_id(), $course_group);
         $rights = array();
-        $rights[] = WeblcmsRights :: VIEW_RIGHT;
-        $rights[] = WeblcmsRights :: ADD_RIGHT;
+        $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT;
+        $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT;
         $this->set_rights_content_object_publication($content_object_publication, $course_group, $rights);
     }
 
@@ -1099,8 +1099,8 @@ class CourseGroupForm extends FormValidator
     public function create_course_group()
     {
         $this->rights = array();
-        $this->rights[] = WeblcmsRights :: VIEW_RIGHT;
-        $this->rights[] = WeblcmsRights :: ADD_RIGHT;
+        $this->rights[] = \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT;
+        $this->rights[] = \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT;
 
         $course_group = $this->course_group;
         $course_code = $course_group->get_course_code();
@@ -1539,14 +1539,14 @@ class CourseGroupForm extends FormValidator
     {
         $context = \Ehb\Application\Avilarts\Manager :: context();
 
-        $weblcms_rights = WeblcmsRights :: get_instance();
+        $weblcms_rights = \Ehb\Application\Avilarts\Rights\Rights :: get_instance();
         $entity_id = $course_group->get_id();
         $entity_type = CourseGroupEntity :: ENTITY_TYPE;
         $course_id = $course_group->get_course_code();
         $category_id = $content_object_publication->get_id();
 
         $location = $weblcms_rights->get_weblcms_location_by_identifier_from_courses_subtree(
-            WeblcmsRights :: TYPE_PUBLICATION,
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
             $category_id,
             $course_id);
 
@@ -1566,7 +1566,7 @@ class CourseGroupForm extends FormValidator
 
         $weblcms_rights->set_location_entity_right(
             $context,
-            WeblcmsRights :: VIEW_RIGHT,
+            \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
             $entity_id,
             $entity_type,
             $location_id);
@@ -1579,7 +1579,7 @@ class CourseGroupForm extends FormValidator
         $rights)
     {
         $context = \Ehb\Application\Avilarts\Manager :: context();
-        $weblcms_rights = WeblcmsRights :: get_instance();
+        $weblcms_rights = \Ehb\Application\Avilarts\Rights\Rights :: get_instance();
 
         $entity_id = $course_group->get_id();
         $entity_type = CourseGroupEntity :: ENTITY_TYPE;
@@ -1588,7 +1588,7 @@ class CourseGroupForm extends FormValidator
 
         // get location object
         $location = $weblcms_rights->get_weblcms_location_by_identifier_from_courses_subtree(
-            WeblcmsRights :: TYPE_COURSE_CATEGORY,
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY,
             $category_id,
             $course_id);
 

@@ -1,10 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Document\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataManager as WeblcmsDataManager;
 use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 use Chamilo\Core\Repository\ContentObject\File\Storage\DataClass\File;
 use Chamilo\Core\Repository\ContentObject\Webpage\Storage\DataClass\Webpage;
@@ -119,20 +117,20 @@ class ZipAndDownloadComponent extends Manager
                 if ($category_id == 0)
                 {
                     $course_module_id = $this->get_tool_registration()->get_id();
-                    $location_id = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-                        WeblcmsRights :: TYPE_COURSE_MODULE,
+                    $location_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+                        \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_MODULE,
                         $course_module_id,
                         $this->get_course_id());
                 }
                 else
                 {
-                    $location_id = WeblcmsRights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
-                        WeblcmsRights :: TYPE_COURSE_CATEGORY,
+                    $location_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_by_identifier_from_courses_subtree(
+                        \Ehb\Application\Avilarts\Rights\Rights :: TYPE_COURSE_CATEGORY,
                         $category_id,
                         $this->get_course_id());
                 }
 
-                $publications = WeblcmsDataManager :: retrieve_content_object_publications_with_view_right_granted_in_category_location(
+                $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publications_with_view_right_granted_in_category_location(
                     $location_id,
                     $this->get_entities(),
                     null,
@@ -148,7 +146,7 @@ class ZipAndDownloadComponent extends Manager
                 {
                     if (! $is_course_admin && $publication[ContentObjectPublication :: PROPERTY_HIDDEN])
                     {
-                        if (! $this->is_allowed(WeblcmsRights :: EDIT_RIGHT, $publication))
+                        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT, $publication))
                         {
                             continue;
                         }

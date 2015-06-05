@@ -12,7 +12,7 @@ use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseCategory;
@@ -777,7 +777,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
     protected static function get_my_publications_condition($parent_location, $entities, $user_id = null, $condition = null)
     {
         $conditions = self :: get_publication_conditions_with_right(
-            WeblcmsRights :: EDIT_RIGHT,
+            \Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT,
             $parent_location,
             $entities,
             $user_id,
@@ -804,7 +804,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         $parent_location, $entities, $condition, $user_id = null)
     {
         $conditions = self :: get_publication_conditions_with_right(
-            WeblcmsRights :: VIEW_RIGHT,
+            \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
             $parent_location,
             $entities,
             $user_id,
@@ -833,11 +833,11 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
     {
         $conditions = array();
 
-        $granted_location_ids = WeblcmsRights :: get_instance()->get_identifiers_with_right_granted(
+        $granted_location_ids = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_identifiers_with_right_granted(
             $right,
             Manager :: context(),
             $parent_location,
-            WeblcmsRights :: TYPE_PUBLICATION,
+            \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
             $user_id,
             $entities);
 
@@ -961,7 +961,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
                 return false;
             }
 
-            $weblcms_rights = WeblcmsRights :: get_instance();
+            $weblcms_rights = \Ehb\Application\Avilarts\Rights\Rights :: get_instance();
 
             if ($course->is_course_admin($user))
             {
@@ -983,9 +983,9 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
                 {
                     if (! isset(
                         self :: $new_publications_cache[$key][$publication[ContentObjectPublication :: PROPERTY_TOOL]]) && $weblcms_rights->is_allowed_in_courses_subtree(
-                        WeblcmsRights :: VIEW_RIGHT,
+                        \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                         $publication[ContentObjectPublication :: PROPERTY_ID],
-                        WeblcmsRights :: TYPE_PUBLICATION,
+                        \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                         $course->get_id()))
                     {
                         // check if the publication is visible
@@ -1042,7 +1042,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         }
         else
         {
-            $weblcms_rights = WeblcmsRights :: get_instance();
+            $weblcms_rights = \Ehb\Application\Avilarts\Rights\Rights :: get_instance();
 
             $publications = DataManager :: retrieve_new_publication_icon_ids(
                 $course->get_id(),
@@ -1054,9 +1054,9 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
             while ($publication = $publications->next_result(false))
             {
                 if ($weblcms_rights->is_allowed_in_courses_subtree(
-                    WeblcmsRights :: VIEW_RIGHT,
+                    \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                     $publication[ContentObjectPublication :: PROPERTY_ID],
-                    WeblcmsRights :: TYPE_PUBLICATION,
+                    \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                     $course->get_id()))
                 {
                     return true;
@@ -1668,13 +1668,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication_id,
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $course_id,
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {
@@ -1698,13 +1698,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication_id,
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $course_id,
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {
@@ -1728,13 +1728,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication_id,
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $course_id,
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {
@@ -1767,13 +1767,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication_id,
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $course_id,
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {
@@ -1884,13 +1884,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication_id,
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $course_id,
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {
@@ -1987,13 +1987,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         }
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication_id,
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $course_id,
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {
@@ -2056,13 +2056,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         }
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication_id,
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $course_id,
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {
@@ -2121,13 +2121,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         try
         {
             // get the entities
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication_id,
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $course_id,
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {

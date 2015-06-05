@@ -3,7 +3,7 @@ namespace Ehb\Application\Avilarts\Renderer\PublicationList\Type;
 
 use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Architecture\Interfaces\ComplexContentObjectSupport;
@@ -81,7 +81,7 @@ class ListContentObjectPublicationListRenderer extends ContentObjectPublicationL
         $html[] = ResourceManager :: get_instance()->get_resource_html(
             Path :: getInstance()->getJavascriptPath('Chamilo\Libraries', true) . 'PublicationsList.js');
 
-        if ($this->get_actions() && $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_actions() && $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $html[] = '<div style="clear: both;">';
             $html[] = '<form class="publication_list" name="publication_list" action="' . $this->get_url() .
@@ -98,7 +98,7 @@ class ListContentObjectPublicationListRenderer extends ContentObjectPublicationL
             $html[] = $this->render_publication($publication, $first, $last, $index);
         }
 
-        if ($this->get_actions() && count($publications) > 0 && $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_actions() && count($publications) > 0 && $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $table_name = ClassnameUtilities :: getInstance()->getClassNameFromNamespace(__CLASS__, true);
             foreach ($_GET as $parameter => $value)
@@ -255,7 +255,7 @@ class ListContentObjectPublicationListRenderer extends ContentObjectPublicationL
         $html[] = $this->render_publication_information($publication);
         $html[] = '</div>';
         $html[] = '<div class="publication_actions">';
-        if ($this->get_actions() && $this->is_allowed(WeblcmsRights :: EDIT_RIGHT, $publication))
+        if ($this->get_actions() && $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT, $publication))
         {
             $html[] = '<input style="display: inline; float: right;" class="pid" type="checkbox" name="' .
                  Manager :: PARAM_PUBLICATION . '[]" value="' . $publication[ContentObjectPublication :: PROPERTY_ID] .

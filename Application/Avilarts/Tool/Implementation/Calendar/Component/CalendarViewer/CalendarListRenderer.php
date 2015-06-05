@@ -2,7 +2,7 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\Calendar\Component\CalendarViewer;
 
 use Ehb\Application\Avilarts\Renderer\PublicationList\Type\ListContentObjectPublicationListRenderer;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
@@ -29,7 +29,7 @@ class CalendarListRenderer extends ListContentObjectPublicationListRenderer
                 true);
         }
         
-        if ($this->get_actions() && $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_actions() && $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $html[] = '<form name="publication_list" action="' . $this->get_url(array('view' => Request :: get('view'))) .
                  '" method="get" >';
@@ -80,7 +80,7 @@ class CalendarListRenderer extends ListContentObjectPublicationListRenderer
             $html[] = implode(PHP_EOL, $rendered_publication_start_time);
         }
         
-        if ($this->get_actions() && count($publications) > 0 && $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_actions() && count($publications) > 0 && $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             foreach ($_GET as $parameter => $value)
             {

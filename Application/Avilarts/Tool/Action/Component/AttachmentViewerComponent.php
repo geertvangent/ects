@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Core\Repository\Common\Rendition\ContentObjectRendition;
@@ -77,7 +77,7 @@ class AttachmentViewerComponent extends Manager
         }
 
         // Is the view right granted on the publication?
-        if (! $this->is_allowed(WeblcmsRights :: VIEW_RIGHT, $publication))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT, $publication))
         {
             $failed = true;
             $error_message = Translation :: get('NotAllowed');

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
@@ -28,7 +28,7 @@ class MoverComponent extends Manager
             ContentObjectPublication :: class_name(), 
             $publication_id);
         
-        if (! $this->is_allowed(WeblcmsRights :: EDIT_RIGHT, $publication))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT, $publication))
         {
             throw new NotAllowedException();
         }

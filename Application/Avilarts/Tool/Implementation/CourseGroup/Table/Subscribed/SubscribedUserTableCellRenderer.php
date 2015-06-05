@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\Subscribed;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Structure\Toolbar;
@@ -37,7 +37,7 @@ class SubscribedUserTableCellRenderer extends DataClassTableCellRenderer impleme
     {
         $toolbar = new Toolbar();
         $browser = $this->get_component();
-        if ($browser->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($browser->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             $parameters = array();
             $parameters[Manager :: PARAM_COURSE_GROUP_ACTION] = Manager :: ACTION_UNSUBSCRIBE;
@@ -55,7 +55,7 @@ class SubscribedUserTableCellRenderer extends DataClassTableCellRenderer impleme
 
         $course_group = $browser->get_course_group();
 
-        if (! $browser->is_allowed(WeblcmsRights :: EDIT_RIGHT) && $course_group->is_self_unregistration_allowed() &&
+        if (! $browser->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) && $course_group->is_self_unregistration_allowed() &&
              $course_group->is_member($user) && $browser->get_user()->get_id() == $user->get_id())
         {
             $parameters = array();

@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\User\Component\UnsubscribedGroup\UnsubscribedGroupTable;
 use Ehb\Application\Avilarts\Tool\Implementation\User\PlatformgroupMenuRenderer;
 use Chamilo\Core\Group\Storage\DataClass\Group;
@@ -40,7 +40,7 @@ class GroupSubscribeBrowserComponent extends Manager implements TableSupport
 
     public function run()
     {
-        if (! $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             throw new NotAllowedException();
         }

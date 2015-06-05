@@ -3,7 +3,7 @@ namespace Ehb\Application\Avilarts\Renderer\PublicationList;
 
 use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Renderer\ContentObjectPublicationDescriptionRenderer;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataManager;
@@ -158,20 +158,20 @@ abstract class ContentObjectPublicationListRenderer
     {
         try
         {
-            $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-                WeblcmsRights :: VIEW_RIGHT,
+            $target_entities = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_target_entities(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 Manager :: context(),
                 $publication[ContentObjectPublication :: PROPERTY_ID],
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $this->get_course_id(),
-                WeblcmsRights :: TREE_TYPE_COURSE);
+                \Ehb\Application\Avilarts\Rights\Rights :: TREE_TYPE_COURSE);
         }
         catch (Exception $exception)
         {
             error_log($exception->getMessage());
             $target_entities = array();
         }
-        return WeblcmsRights :: get_instance()->render_target_entities_as_string($target_entities);
+        return \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->render_target_entities_as_string($target_entities);
     }
 
     /**
@@ -771,7 +771,7 @@ abstract class ContentObjectPublicationListRenderer
                     $this->get_complex_display_url($publication_id),
                     ToolbarItem :: DISPLAY_ICON));
         }
-        $has_edit_right = $this->is_allowed(WeblcmsRights :: EDIT_RIGHT, $publication);
+        $has_edit_right = $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT, $publication);
 
         // TODO: check repository rights subcondition to try and hide the icon
         // when viewing as another user
@@ -956,7 +956,7 @@ abstract class ContentObjectPublicationListRenderer
                     ToolbarItem :: DISPLAY_ICON));
         }
 
-        if ($this->is_allowed(WeblcmsRights :: DELETE_RIGHT, $publication))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: DELETE_RIGHT, $publication))
         {
             $toolbar->add_item(
                 new ToolbarItem(

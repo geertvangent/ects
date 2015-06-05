@@ -3,7 +3,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\AllSubscri
 
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Ehb\Application\Avilarts\Tool\Implementation\User\Storage\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
@@ -148,7 +148,7 @@ class AllSubscribedUserTableCellRenderer extends RecordTableCellRenderer impleme
         // (2) the row is not the current user
         // AND
         // (3) the row is not a group-only subscription
-        if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_component()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             if ($user_id != $this->get_component()->get_user()->get_id() && $user_with_subscription_status_and_type[AllSubscribedUserTableColumnModel :: SUBSCRIPTION_TYPE] %
                  2)
@@ -243,7 +243,7 @@ class AllSubscribedUserTableCellRenderer extends RecordTableCellRenderer impleme
         }
 
         // add action for view as user
-        if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT)) // ->get_parent()->is_teacher())
+        if ($this->get_component()->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT)) // ->get_parent()->is_teacher())
         {
             if ($user_id != $this->get_component()->get_user()->get_id())
             {

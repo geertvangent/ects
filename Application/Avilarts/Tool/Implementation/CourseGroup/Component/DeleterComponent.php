@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
@@ -22,7 +22,7 @@ class DeleterComponent extends Manager
 
     public function run()
     {
-        if (! $this->is_allowed(WeblcmsRights :: DELETE_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: DELETE_RIGHT))
         {
             throw new NotAllowedException();
         }

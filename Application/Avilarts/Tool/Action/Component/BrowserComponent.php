@@ -5,7 +5,7 @@ use Ehb\Application\Avilarts\CourseSettingsConnector;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Menu\PublicationCategoriesTree;
 use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
@@ -65,7 +65,7 @@ class BrowserComponent extends Manager
         // additional tabs and actions
         $this->is_course_admin = $this->get_course()->is_course_admin($this->get_user());
 
-        if (! $this->is_allowed(WeblcmsRights :: VIEW_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT))
         {
             throw new NotAllowedException();
         }
@@ -94,7 +94,7 @@ class BrowserComponent extends Manager
                 Translation :: get('ToggleVisibility'),
                 false));
 
-        if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT) && $this->get_parent() instanceof Categorizable)
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) && $this->get_parent() instanceof Categorizable)
         {
             $actions->add_form_action(
                 new TableFormAction(
@@ -319,7 +319,7 @@ class BrowserComponent extends Manager
         $action_bar = new ActionBarRenderer(ActionBarRenderer :: TYPE_HORIZONTAL);
 
         $action_bar->set_search_url($this->get_url());
-        if ($this->is_allowed(WeblcmsRights :: ADD_RIGHT))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT))
         {
             $publish_type = PlatformSetting :: get('display_publication_screen', __NAMESPACE__);
             if ($publish_type == \Ehb\Application\Avilarts\Tool\Manager :: PUBLISH_TYPE_BOTH)

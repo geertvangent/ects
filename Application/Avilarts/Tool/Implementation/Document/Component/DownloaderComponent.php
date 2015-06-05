@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Document\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
@@ -23,7 +23,7 @@ class DownloaderComponent extends Manager
             ContentObjectPublication :: class_name(), 
             $publication_id);
         
-        if (! $this->is_allowed(WeblcmsRights :: VIEW_RIGHT, $publication))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT, $publication))
         {
             $this->redirect(
                 Translation :: get("NotAllowed", null, Utilities :: COMMON_LIBRARIES), 

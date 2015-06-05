@@ -2,8 +2,6 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
 use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
-use Ehb\Application\Avilarts\Storage\DataManager as WeblcmsDataManager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
@@ -48,7 +46,7 @@ class SubscriptionsOverviewerComponent extends Manager implements TableSupport
 
     public function run()
     {
-        if (! $this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if (! $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
         {
             throw new NotAllowedException();
         }
@@ -186,7 +184,7 @@ class SubscriptionsOverviewerComponent extends Manager implements TableSupport
 
         // $show_all_url = $this->get_url();
 
-        if ($this->is_allowed(WeblcmsRights :: VIEW_RIGHT))
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT))
         {
             $action_bar->add_common_action(
                 new ToolbarItem(
@@ -254,12 +252,14 @@ class SubscriptionsOverviewerComponent extends Manager implements TableSupport
                     $conditions[] = new PatternMatchCondition(
                         new PropertyConditionVariable(CourseGroup :: class_name(), CourseGroup :: PROPERTY_NAME),
                         '*' . $query . '*',
-                        WeblcmsDataManager :: get_instance()->get_alias(CourseGroup :: get_table_name()),
+                        \Ehb\Application\Avilarts\Storage\DataManager :: get_instance()->get_alias(
+                            CourseGroup :: get_table_name()),
                         true);
                     $conditions[] = new PatternMatchCondition(
                         new PropertyConditionVariable(CourseGroup :: class_name(), CourseGroup :: PROPERTY_DESCRIPTION),
                         '*' . $query . '*',
-                        WeblcmsDataManager :: get_instance()->get_alias(CourseGroup :: get_table_name()),
+                        \Ehb\Application\Avilarts\Storage\DataManager :: get_instance()->get_alias(
+                            CourseGroup :: get_table_name()),
                         true);
                     break;
             }

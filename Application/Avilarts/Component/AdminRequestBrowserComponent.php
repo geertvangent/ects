@@ -28,14 +28,6 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Structure\Page;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
 
-/**
- * $Id: admin_course_type_browser.class.php 218 2010-03-11 14:21:26Z Yannick & Tristan $
- *
- * @package application.lib.weblcms.weblcms_manager.component
- */
-/**
- * Weblcms component which allows the the platform admin to browse the request
- */
 class AdminRequestBrowserComponent extends Manager implements TableSupport
 {
     const PENDING_REQUEST_VIEW = 'pending_request_view';

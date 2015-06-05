@@ -5,7 +5,7 @@ use Ehb\Application\Avilarts\CourseSettingsConnector;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
@@ -329,10 +329,10 @@ class FixedLocationToolListRenderer extends ToolListRenderer
             $row = $count / $this->number_of_columns;
             $col = $count % $this->number_of_columns;
             $cell_contents = array();
-            if ($parent->is_allowed(WeblcmsRights :: EDIT_RIGHT) || $publication->is_visible_for_target_users())
+            if ($parent->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) || $publication->is_visible_for_target_users())
             {
                 // Show visibility-icon
-                if ($parent->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+                if ($parent->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
                 {
                     $cell_contents[] = '<a href="' .
                          $parent->get_url(
@@ -344,7 +344,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
                 }
 
                 // Show delete-icon
-                if ($parent->is_allowed(WeblcmsRights :: DELETE_RIGHT))
+                if ($parent->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: DELETE_RIGHT))
                 {
                     $cell_contents[] = '<a href="' .
                          $parent->get_url(

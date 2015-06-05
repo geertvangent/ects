@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Document\Component;
 
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 use Chamilo\Core\Repository\Common\Export\ContentObjectExport;
@@ -30,7 +30,7 @@ class DownloadSelectedPublicationsComponent extends Manager
             $publication = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_content_object_publication_with_content_object(
                 $publication_id);
             
-            if ($this->is_allowed(WeblcmsRights :: VIEW_RIGHT, $publication))
+            if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT, $publication))
             {
                 $content_object_ids[] = $publication[ContentObjectPublication :: PROPERTY_CONTENT_OBJECT_ID];
             }

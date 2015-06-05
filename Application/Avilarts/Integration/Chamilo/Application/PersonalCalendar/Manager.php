@@ -6,7 +6,7 @@ use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\Event;
 use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
 use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
-use Ehb\Application\Avilarts\Rights\WeblcmsRights;
+
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Repository\ContentObject\CalendarEvent\Storage\DataClass\CalendarEvent;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
@@ -35,10 +35,10 @@ class Manager implements CalendarInterface
             $course = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 Course :: class_name(),
                 $publication->get_course_id());
-            if (! WeblcmsRights :: get_instance()->is_allowed_in_courses_subtree(
-                WeblcmsRights :: VIEW_RIGHT,
+            if (! \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->is_allowed_in_courses_subtree(
+                \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT,
                 $publication->get_id(),
-                WeblcmsRights :: TYPE_PUBLICATION,
+                \Ehb\Application\Avilarts\Rights\Rights :: TYPE_PUBLICATION,
                 $publication->get_course_id()))
             {
                 continue;
