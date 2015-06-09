@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package context="Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking">
+<package context="Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking">
 	<!-- Publication trackers -->
 	<event name="create_publication">
 		<tracker name="publication_change" />

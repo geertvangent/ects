@@ -3,8 +3,8 @@
 	<package>
 		<name>Home</name>
 		<code>Home</code>
-		<context>Chamilo\Application\Weblcms\Integration\Chamilo\Core\Home</context>
-		<type>Chamilo\Application\Weblcms\Integration</type>
+		<context>Ehb\Application\Avilarts\Integration\Chamilo\Core\Home</context>
+		<type>Ehb\Application\Avilarts\Integration</type>
 		<category />
 		<authors />
 		<version>5.0.0</version>
@@ -12,7 +12,7 @@
 		<pre-depends>
 			<dependencies operator="1">
 				<dependency type="registration">
-					<id>Chamilo\Application\Weblcms</id>
+					<id>Ehb\Application\Avilarts</id>
 					<version operator="4">5.0.0</version>
 				</dependency>
 				<dependency type="registration">

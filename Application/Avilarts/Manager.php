@@ -19,14 +19,6 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
-/**
- * ============================================================================== This is an application that creates a
- * fully fledged web-based learning content management system.
- * The Web-LCMS is based on so-called "tools", which each
- * represent a segment in the application.
- *
- * @author Tim De Pauw ==============================================================================
- */
 abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'weblcms';
@@ -165,7 +157,7 @@ abstract class Manager extends Application
      *
      * @param $tree array The category tree
      * @param $categories array In this array the new category titles (with prefix) will be stored. The keys in this
-     *        array are the category ids, the values are the new titles
+     *            array are the category ids, the values are the new titles
      * @param $level int The current level in the tree structure
      */
     private static function translate_category_tree($tree, $categories, $level = 0)
@@ -300,9 +292,9 @@ abstract class Manager extends Application
      * Gets the date of the last visit of current user to the current location
      *
      * @param $tool string If $tool equals null, current active tool will be taken into account. If no tool is given or
-     *        no tool is active the date of last visit to the course homepage will be returned.
+     *            no tool is active the date of last visit to the course homepage will be returned.
      * @param $category_id int The category in the given tool of which the last visit date is requested. If $category_id
-     *        equals null, the current active category will be used.
+     *            equals null, the current active category will be used.
      * @return int
      */
     public function get_last_visit_date($tool = null, $category_id = null)
@@ -536,8 +528,7 @@ abstract class Manager extends Application
      *
      * @return String
      */
-    public function get_course_user_move_url($course_type_user_category, Course $course,
-        $direction)
+    public function get_course_user_move_url($course_type_user_category, Course $course, $direction)
     {
         return $this->get_url(
             array(

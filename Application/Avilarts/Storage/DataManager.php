@@ -70,7 +70,7 @@ use Exception;
  */
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
-    const PREFIX = 'weblcms_';
+    const PREFIX = 'avilarts_';
 
     /**
      * **************************************************************************************************************

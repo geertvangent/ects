@@ -3,15 +3,15 @@
 	<package>
 		<name>Course Copier</name>
 		<code>CourseCopier</code>
-		<context>Chamilo\Application\Weblcms\Tool\Implementation\CourseCopier</context>
-		<type>Chamilo\Application\Weblcms\Tool</type>
+		<context>Ehb\Application\Avilarts\Tool\Implementation\CourseCopier</context>
+		<type>Ehb\Application\Avilarts\Tool</type>
 		<category>education</category>
 		<authors />
 		<version>5.0.0</version>
 		<description>A tool for the weblcms application for copying a course.</description>
 		<pre-depends>
 			<dependency type="registration">
-				<id>Chamilo\Application\Weblcms</id>
+				<id>Ehb\Application\Avilarts</id>
 				<version operator="4">5.0.0</version>
 			</dependency>
 		</pre-depends>

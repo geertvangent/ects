@@ -3,8 +3,8 @@
 	<package>
 		<name>Renderer</name>
 		<code>Renderer</code>
-		<context>Chamilo\Application\Weblcms\Integration\Chamilo\Libraries\Calendar</context>
-		<type>Chamilo\Application\Weblcms\Integration</type>
+		<context>Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar</context>
+		<type>Ehb\Application\Avilarts\Integration</type>
 		<category>core</category>
 		<authors />
 		<version>5.0.0</version>
@@ -16,7 +16,7 @@
 					<version operator="4">5.0.0</version>
 				</dependency>
 				<dependency type="registration">
-					<id>Chamilo\Application\Weblcms</id>
+					<id>Ehb\Application\Avilarts</id>
 					<version operator="4">5.0.0</version>
 				</dependency>
 			</dependencies>

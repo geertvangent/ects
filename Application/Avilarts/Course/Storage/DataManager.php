@@ -47,7 +47,7 @@ use Chamilo\Libraries\Storage\ResultSet\EmptyResultSet;
  */
 class DataManager extends \Ehb\Application\Avilarts\Storage\DataManager
 {
-    const PREFIX = 'weblcms_';
+    const PREFIX = 'avilarts_';
 
     /**
      * Caching variable to check if a user is subscribed

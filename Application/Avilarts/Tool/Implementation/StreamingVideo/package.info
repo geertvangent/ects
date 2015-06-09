@@ -3,8 +3,8 @@
 	<package>
 		<name>Streaming Video</name>
 		<code>StreamingVideo</code>
-		<context>Chamilo\Application\Weblcms\Tool\Implementation\StreamingVideo</context>
-		<type>Chamilo\Application\Weblcms\Tool</type>
+		<context>Ehb\Application\Avilarts\Tool\Implementation\StreamingVideo</context>
+		<type>Ehb\Application\Avilarts\Tool</type>
 		<category>education</category>
 		<authors />
 		<version>5.0.0</version>
@@ -14,7 +14,7 @@
 		</description>
 		<pre-depends>
 			<dependency type="registration">
-				<id>Chamilo\Application\Weblcms</id>
+				<id>Ehb\Application\Avilarts</id>
 				<version operator="4">5.0.0</version>
 			</dependency>
 		</pre-depends>
