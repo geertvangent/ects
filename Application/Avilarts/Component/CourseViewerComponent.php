@@ -110,7 +110,8 @@ class CourseViewerComponent extends Manager implements DelegateComponent
                 CourseVisit :: PROPERTY_TOOL_ID => $this->course_tool_registration->get_id(),
                 CourseVisit :: PROPERTY_CATEGORY_ID => $category,
                 CourseVisit :: PROPERTY_PUBLICATION_ID => Request :: get(
-                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID)));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID)
+        ));
 
         $namespace = 'Ehb\Application\Avilarts\Tool\Implementation\\' . $tool;
         $result = \Ehb\Application\Avilarts\Tool\Manager :: factory_and_launch($namespace, $this);
