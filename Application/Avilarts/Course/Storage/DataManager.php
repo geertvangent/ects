@@ -1595,7 +1595,7 @@ class DataManager extends \Ehb\Application\Avilarts\Storage\DataManager
      * @param int $offset
      * @param int $count
      * @param \libraries\storage\OrderBy[] $order_property
-     * @return \application\weblcms\course\RecordResultSet
+     * @return \application\Avilarts\course\RecordResultSet
      */
     public static function retrieve_all_course_users($course_id, $condition = null, $offset = null, $count = null,
         $order_property = null)

@@ -7,7 +7,7 @@ use Chamilo\Core\Group\Storage\DataManager;
 /**
  * This class represents a course group relation in the weblcms.
  * 
- * @package application\weblcms\course;
+ * @package application\Avilarts\course;
  * @author Previously Author Unknown
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

@@ -6,7 +6,7 @@ use Ehb\Application\Avilarts\Tool\ToolInstaller;
 /**
  * Installs the tool data tables, settings, tracking, reporting
  * 
- * @package application\weblcms\tool\rights
+ * @package application\Avilarts\tool\rights
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class Installer extends ToolInstaller

@@ -7,7 +7,7 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
  * This class represents a relation between a weblcms course and an entity (a
  * user, a group...)
  * 
- * @package application\weblcms\course;
+ * @package application\Avilarts\course;
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 abstract class CourseEntityRelation extends DataClass
@@ -109,7 +109,7 @@ abstract class CourseEntityRelation extends DataClass
     /**
      * Returns the course of this course user relation object
      * 
-     * @return \application\weblcms\course\Course
+     * @return \application\Avilarts\course\Course
      */
     public function get_course()
     {
@@ -119,7 +119,7 @@ abstract class CourseEntityRelation extends DataClass
     /**
      * Sets the course of this course user relation object
      * 
-     * @param $course \application\weblcms\course\Course
+     * @param $course \application\Avilarts\course\Course
      */
     public function set_course(\Ehb\Application\Avilarts\Course\Storage\DataClass\Course $course)
     {

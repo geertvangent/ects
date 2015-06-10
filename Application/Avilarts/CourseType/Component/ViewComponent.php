@@ -15,7 +15,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 /**
  * This class describes a viewer for a given course type
  *
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

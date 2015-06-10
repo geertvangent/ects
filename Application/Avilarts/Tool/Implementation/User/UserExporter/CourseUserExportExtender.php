@@ -9,7 +9,7 @@ use Chamilo\Libraries\Platform\Translation;
 /**
  * Extends the user exporter with additional data for the user list (subscription type, status)
  * 
- * @package application\weblcms\tool\user
+ * @package application\Avilarts\tool\user
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class CourseUserExportExtender implements UserExportExtender

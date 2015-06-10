@@ -11,7 +11,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
  * The relation between a course (type) and a
  * course tool is defined through the course tool setting "active".
  * 
- * @package application\weblcms\course;
+ * @package application\Avilarts\course;
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class CourseTool extends DataClass

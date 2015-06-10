@@ -16,7 +16,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 /**
  * This class describes a browser for the courses where a user is not subscribed to
  * 
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

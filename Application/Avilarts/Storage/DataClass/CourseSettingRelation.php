@@ -7,7 +7,7 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
 /**
  * Abstract class that describes a relation with a course setting
  * 
- * @package application\weblcms\course_type;
+ * @package application\Avilarts\course_type;
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 abstract class CourseSettingRelation extends DataClass

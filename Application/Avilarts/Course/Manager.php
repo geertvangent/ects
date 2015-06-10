@@ -16,7 +16,7 @@ use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface
 /**
  * This class describes the submanager for course management
  *
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 abstract class Manager extends Application

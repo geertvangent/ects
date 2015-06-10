@@ -18,7 +18,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
  * Base class to display the access to the tools ToolAccessBlock
  *
  * @author Sven Vanpoucke - Hogeschool Gent
- * @package application\weblcms\integration\core\reporting
+ * @package application\Avilarts\integration\core\reporting
  */
 abstract class ToolAccessBlock extends ToolBlock
 {

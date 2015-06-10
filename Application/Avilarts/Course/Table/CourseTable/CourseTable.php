@@ -12,7 +12,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 /**
  * This class describes a table for the course object
  * 
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

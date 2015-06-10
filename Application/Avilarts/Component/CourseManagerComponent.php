@@ -10,7 +10,7 @@ use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 /**
  * This class represents a component that runs the course type submanager
  *
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */
 class CourseManagerComponent extends Manager implements DelegateComponent, CourseSubManagerSupport

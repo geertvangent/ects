@@ -9,7 +9,7 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSuppo
 /**
  * This class describes the column model for the course type table
  * 
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

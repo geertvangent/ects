@@ -29,7 +29,7 @@ class Rights extends RightsUtil
 
     /**
      *
-     * @return \application\weblcms\request\rights\Rights
+     * @return \application\Avilarts\request\rights\Rights
      */
     static function get_instance()
     {

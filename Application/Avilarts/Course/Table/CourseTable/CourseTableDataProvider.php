@@ -7,7 +7,7 @@ use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableDataProvider
 /**
  * This class describes a data provider for the course table
  * 
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

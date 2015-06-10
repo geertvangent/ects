@@ -14,7 +14,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 /**
  * This class describes the submanager for course type management
  *
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 abstract class Manager extends Application

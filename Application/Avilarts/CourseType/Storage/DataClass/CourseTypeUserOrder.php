@@ -9,7 +9,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 /**
  * Describes a course type user order (personal ordering of the course types per user)
  * 
- * @package application\weblcms\course_type;
+ * @package application\Avilarts\course_type;
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class CourseTypeUserOrder extends DataClass implements DisplayOrderDataClassListenerSupport

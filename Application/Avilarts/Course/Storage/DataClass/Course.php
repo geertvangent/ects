@@ -28,7 +28,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 /**
  * This class represents a course in the weblcms.
  * 
- * @package application\weblcms\course;
+ * @package application\Avilarts\course;
  * @author Previously Author Unknown
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
@@ -85,14 +85,14 @@ class Course extends DataClass
     /**
      * Caches the users that are course admins in this course
      * 
-     * @var \application\weblcms\course\CourseUserRelation[]
+     * @var \application\Avilarts\course\CourseUserRelation[]
      */
     private $course_admin_users_cache;
 
     /**
      * Caches the groups that are course admins in this course
      * 
-     * @var \application\weblcms\course\CourseGroupRelation[]
+     * @var \application\Avilarts\course\CourseGroupRelation[]
      */
     private $course_admin_groups_cache;
 
@@ -768,7 +768,7 @@ class Course extends DataClass
     /**
      * Gets the subscribed users of this course
      * 
-     * @return \application\weblcms\course\CourseUserRelation[]
+     * @return \application\Avilarts\course\CourseUserRelation[]
      */
     public function get_subscribed_users()
     {
@@ -794,7 +794,7 @@ class Course extends DataClass
     /**
      * Gets the subscribed groups of this course
      * 
-     * @return \application\weblcms\course\CourseGroupRelation[]
+     * @return \application\Avilarts\course\CourseGroupRelation[]
      */
     public function get_subscribed_groups()
     {
@@ -807,7 +807,7 @@ class Course extends DataClass
     /**
      * Gets the course groups of this course
      * 
-     * @return \application\weblcms\CourseGroup[]
+     * @return \application\Avilarts\CourseGroup[]
      */
     public function get_course_groups($as_array = true)
     {
@@ -1074,7 +1074,7 @@ class Course extends DataClass
     /**
      * Returns the course type of this course object (lazy loading)
      * 
-     * @return \application\weblcms\course_type\CourseType
+     * @return \application\Avilarts\course_type\CourseType
      */
     public function get_course_type()
     {
@@ -1089,7 +1089,7 @@ class Course extends DataClass
     /**
      * Sets the course type of this course object
      * 
-     * @param \application\weblcms\course_type\CourseType $course_type
+     * @param \application\Avilarts\course_type\CourseType $course_type
      */
     public function set_course_type(\Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType $course_type)
     {

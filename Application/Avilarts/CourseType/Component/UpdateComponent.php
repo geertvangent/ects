@@ -10,7 +10,7 @@ use Chamilo\Libraries\Platform\Translation;
 /**
  * This class describes an action to update a course type
  * 
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

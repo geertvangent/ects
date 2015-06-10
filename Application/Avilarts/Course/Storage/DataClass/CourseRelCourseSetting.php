@@ -11,7 +11,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 /**
  * This class describes the relation between a course and a course setting
  * 
- * @package application\weblcms\course;
+ * @package application\Avilarts\course;
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class CourseRelCourseSetting extends CourseSettingRelation
@@ -143,7 +143,7 @@ class CourseRelCourseSetting extends CourseSettingRelation
     /**
      * Returns the course of this course user relation object
      * 
-     * @return \application\weblcms\course\Course
+     * @return \application\Avilarts\course\Course
      */
     public function get_course()
     {
@@ -153,7 +153,7 @@ class CourseRelCourseSetting extends CourseSettingRelation
     /**
      * Sets the course of this course user relation object
      * 
-     * @param $course \application\weblcms\course\Course
+     * @param $course \application\Avilarts\course\Course
      */
     public function set_course(\Ehb\Application\Avilarts\Course\Storage\DataClass\Course $course)
     {

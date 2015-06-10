@@ -9,7 +9,7 @@ use Chamilo\Libraries\File\Redirect;
 
 /**
  *
- * @package application\weblcms\integration\libraries\calendar\event
+ * @package application\Avilarts\integration\libraries\calendar\event
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>

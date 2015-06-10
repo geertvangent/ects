@@ -21,7 +21,7 @@ use Chamilo\Libraries\Platform\Translation;
  * Component that will allow the user to do course requests for multiple users.
  *
  * @author Minas Zilyas - Hogeschool Gent
- * @package application\weblcms\tool\user
+ * @package application\Avilarts\tool\user
  */
 class RequestSubscribeUsersComponent extends Manager implements DelegateComponent
 {

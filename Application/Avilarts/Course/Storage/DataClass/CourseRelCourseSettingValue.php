@@ -7,7 +7,7 @@ use Ehb\Application\Avilarts\Storage\DataClass\CourseSettingValue;
  * This class describes a value for the relation between a course and a course
  * setting
  * 
- * @package application\weblcms\course;
+ * @package application\Avilarts\course;
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class CourseRelCourseSettingValue extends CourseSettingValue

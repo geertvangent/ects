@@ -6,7 +6,7 @@ use Ehb\Application\Avilarts\Tool\ToolInstaller;
 /**
  * Installs the tool data tables, settings, tracking, reporting
  * 
- * @package application\weblcms\tool\calendar
+ * @package application\Avilarts\tool\calendar
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class Installer extends ToolInstaller

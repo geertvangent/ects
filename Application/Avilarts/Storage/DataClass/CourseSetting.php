@@ -186,7 +186,7 @@ class CourseSetting extends DataClass
     /**
      * Returns the course tool of this course setting object (lazy loading)
      * 
-     * @return \application\weblcms\CourseTool
+     * @return \application\Avilarts\CourseTool
      */
     public function get_course_tool()
     {
@@ -196,7 +196,7 @@ class CourseSetting extends DataClass
     /**
      * Sets the course tool of this course setting object
      * 
-     * @param $course_tool \application\weblcms\CourseTool
+     * @param $course_tool \application\Avilarts\CourseTool
      */
     public function set_course_tool(\Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType $course_tool)
     {

@@ -4,7 +4,7 @@ namespace Ehb\Application\Avilarts\CourseType\Component;
 /**
  * This class describes an action to activate a course type
  * 
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

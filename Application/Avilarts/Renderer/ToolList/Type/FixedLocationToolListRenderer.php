@@ -58,7 +58,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
     /**
      * The Course
      *
-     * @var \application\weblcms\course\Course;
+     * @var \application\Avilarts\course\Course;
      */
     private $course;
 

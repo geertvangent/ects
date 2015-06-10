@@ -9,7 +9,7 @@ use Chamilo\Libraries\Platform\Translation;
 /**
  * Extends the user exporter with additional data for the course groups
  * 
- * @package application\weblcms\tool\course_group
+ * @package application\Avilarts\tool\course_group
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class CourseGroupUserExportExtender implements UserExportExtender

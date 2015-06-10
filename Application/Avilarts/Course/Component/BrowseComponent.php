@@ -22,7 +22,7 @@ use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 /**
  * This class describes a browser for the courses
  *
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

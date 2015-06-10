@@ -4,7 +4,7 @@ namespace Ehb\Application\Avilarts\Course\Storage\DataClass;
 /**
  * This class represents a course user relation in the weblcms.
  * 
- * @package application\weblcms\course;
+ * @package application\Avilarts\course;
  * @author Previously Author Unknown
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

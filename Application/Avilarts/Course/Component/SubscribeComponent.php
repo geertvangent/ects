@@ -11,7 +11,7 @@ use Chamilo\Libraries\Platform\Translation;
 /**
  * This class describes an action to subscribe to a course
  * 
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  * @author Anthony Hurst (Hogeschool Gent)

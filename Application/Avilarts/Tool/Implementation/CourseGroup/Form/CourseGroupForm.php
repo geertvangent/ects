@@ -1238,7 +1238,7 @@ class CourseGroupForm extends FormValidator
 
     /**
      *
-     * @param \application\weblcms\tool\implementation\course_group\CourseGroup $parent_course_group
+     * @param \application\Avilarts\tool\implementation\course_group\CourseGroup $parent_course_group
      * @param int $child_max_size
      * @return bool
      */

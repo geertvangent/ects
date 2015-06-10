@@ -63,7 +63,7 @@ class CoursesFeatureSubContext implements Context
     /**
      * Creates a new course
      * 
-     * @return \application\weblcms\course\Course
+     * @return \application\Avilarts\course\Course
      */
     protected function create_course()
     {
@@ -127,7 +127,7 @@ class CoursesFeatureSubContext implements Context
      * Subscribes a user by a given username
      * 
      * @param string $username
-     * @param \application\weblcms\course\Course $course
+     * @param \application\Avilarts\course\Course $course
      * @param int $status
      *
      * @return bool

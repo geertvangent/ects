@@ -15,7 +15,7 @@ use Chamilo\Libraries\Platform\Translation;
  * Will retrieve the selected publications and return a downloadable zip
  * 
  * @author Minas Zilyas - Hogeschool Gent
- * @package application\weblcms\tool\document
+ * @package application\Avilarts\tool\document
  */
 class DownloadSelectedPublicationsComponent extends Manager
 {

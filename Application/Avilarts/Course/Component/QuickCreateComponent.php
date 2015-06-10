@@ -10,7 +10,7 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
  * This class redirects you
  * out of the submanager
  *
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */
 class QuickCreateComponent extends CreateComponent

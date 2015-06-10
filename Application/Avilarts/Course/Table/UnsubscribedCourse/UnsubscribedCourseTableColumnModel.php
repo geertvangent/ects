@@ -6,7 +6,7 @@ use Ehb\Application\Avilarts\Course\Table\CourseTable\CourseTableColumnModel;
 /**
  * This class describes the column model for the unsubscribed course table
  * 
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

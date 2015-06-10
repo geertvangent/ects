@@ -8,7 +8,7 @@ use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTable;
  * subscribed to
  * with the possibility for the user to subscribe himself to these courses
  * 
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

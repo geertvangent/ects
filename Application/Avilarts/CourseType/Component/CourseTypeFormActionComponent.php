@@ -11,7 +11,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 /**
  * This class describes an form action for the course type
  *
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 abstract class CourseTypeFormActionComponent extends Manager

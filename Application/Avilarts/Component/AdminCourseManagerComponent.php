@@ -9,7 +9,7 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
  * It's an extension from the normal launcher
  * component to support components runnable as administrator
  * 
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */
 class AdminCourseManagerComponent extends CourseManagerComponent implements DelegateComponent

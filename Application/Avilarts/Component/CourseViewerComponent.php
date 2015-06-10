@@ -36,14 +36,14 @@ class CourseViewerComponent extends Manager implements DelegateComponent
     /**
      * The selected course object
      *
-     * @var \application\weblcms\course\Course
+     * @var \application\Avilarts\course\Course
      */
     private $course;
 
     /**
      * The selected tool registration
      *
-     * @var \application\weblcms\CourseTool
+     * @var \application\Avilarts\CourseTool
      */
     private $course_tool_registration;
 
@@ -110,8 +110,7 @@ class CourseViewerComponent extends Manager implements DelegateComponent
                 CourseVisit :: PROPERTY_TOOL_ID => $this->course_tool_registration->get_id(),
                 CourseVisit :: PROPERTY_CATEGORY_ID => $category,
                 CourseVisit :: PROPERTY_PUBLICATION_ID => Request :: get(
-                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID)
-        ));
+                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID)));
 
         $namespace = 'Ehb\Application\Avilarts\Tool\Implementation\\' . $tool;
         $result = \Ehb\Application\Avilarts\Tool\Manager :: factory_and_launch($namespace, $this);
@@ -124,7 +123,7 @@ class CourseViewerComponent extends Manager implements DelegateComponent
     /**
      * Returns the course
      *
-     * @return \application\weblcms\course\Course
+     * @return \application\Avilarts\course\Course
      */
     public function get_course()
     {
@@ -144,8 +143,7 @@ class CourseViewerComponent extends Manager implements DelegateComponent
     }
 
     /**
-     * Fake user id as necessary for "view as" functionality.
-     * If no "view as" id is set, use normal user id.
+     * Fake user id as necessary for "view as" functionality. If no "view as" id is set, use normal user id.
      */
     public function get_user_id()
     {

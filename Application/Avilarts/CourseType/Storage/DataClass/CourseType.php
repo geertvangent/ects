@@ -22,7 +22,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 /**
  * Describes a course type (templating and rights system for courses)
  * 
- * @package application\weblcms\course_type;
+ * @package application\Avilarts\course_type;
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

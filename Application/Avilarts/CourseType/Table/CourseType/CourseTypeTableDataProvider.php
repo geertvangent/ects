@@ -11,7 +11,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 /**
  * This class describes a data provider for the course type table
  * 
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */

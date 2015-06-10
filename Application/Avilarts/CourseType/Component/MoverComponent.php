@@ -12,7 +12,7 @@ use Chamilo\Libraries\Platform\Translation;
  * This class should be implemented to
  * provide the direction
  * 
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class MoverComponent extends Manager

@@ -61,7 +61,7 @@ class UserExporter
     /**
      * Sets the user export renderer
      * 
-     * @param \application\weblcms\UserExportRenderer $user_export_renderer
+     * @param \application\Avilarts\UserExportRenderer $user_export_renderer
      *
      * @throws \InvalidArgumentException
      */

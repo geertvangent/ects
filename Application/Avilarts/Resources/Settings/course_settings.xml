@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package context="application\weblcms">
+<package context="Ehb\Application\Avilarts">
 	<settings>
 		<category name="general">
 			<setting name="category" field="select" default="1">

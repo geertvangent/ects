@@ -11,7 +11,7 @@ use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 /**
  * This class represents a component that runs the course type submanager
  *
- * @package \application\weblcms\course_type
+ * @package \application\Avilarts\course_type
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */
 class CourseTypeManagerComponent extends Manager implements DelegateComponent

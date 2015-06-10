@@ -14,7 +14,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
  * This class describes a value for the relation between a course type and a
  * course setting
  * 
- * @package application\weblcms\course_type;
+ * @package application\Avilarts\course_type;
  * @author Sven Vanpoucke - Hogeschool Gent
  */
 class CourseTypeRelCourseSettingValue extends CourseSettingValue

@@ -8,7 +8,7 @@ use Chamilo\Libraries\Format\Structure\Page;
 /**
  * Tracks the visits of a user to a course
  *
- * @package application\weblcms\integration\core\tracking
+ * @package application\Avilarts\integration\core\tracking
  */
 class CourseVisit extends Tracker
 {
@@ -60,7 +60,7 @@ class CourseVisit extends Tracker
      *
      * @param array $parameters
      *
-     * @return \application\weblcms\integration\core\tracking\CourseVisit
+     * @return \application\Avilarts\integration\core\tracking\CourseVisit
      */
     public function validate_parameters(array $parameters = array())
     {

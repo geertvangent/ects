@@ -17,7 +17,7 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
 /**
  * This class describes a form for the course object
  *
- * @package \application\weblcms\course
+ * @package \application\Avilarts\course
  * @author Yannick & Tristan
  * @author Sven Vanpoucke - Hogeschool Gent - Refactoring
  */
