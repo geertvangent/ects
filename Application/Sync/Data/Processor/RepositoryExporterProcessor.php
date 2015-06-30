@@ -10,7 +10,8 @@ use Ehb\Application\Sync\Data\Storage\DataClass\RepositoryExporter;
 use Ehb\Application\Sync\Data\Storage\DataManager\DataManager;
 
 /**
- * Upgrades the visit tracker table into the course visit tracker table. This script has been separated from the normal
+ * Upgrades the visit tracker table into the course visit tracker table.
+ * This script has been separated from the normal
  * upgrade procedure because of the amount of data and time it takes to finish this upgrade.
  *
  * @author Sven Vanpoucke - Hogeschool Gent
@@ -27,7 +28,8 @@ class RepositoryExporterProcessor
     private $logger;
 
     /**
-     * A chamilo DM to execute the queries. We use this DM because the credentials are stored in Chamilo and we can
+     * A chamilo DM to execute the queries.
+     * We use this DM because the credentials are stored in Chamilo and we can
      * reuse them
      *
      * @var mixed

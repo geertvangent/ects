@@ -16,6 +16,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Ehb\Application\Atlantis\Context\Storage\DataManager;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -55,7 +56,7 @@ class Menu extends \HTML_Menu
      * @param int $owner The ID of the owner of the categories to provide in this menu.
      * @param int $current_category The ID of the current category in the menu.
      * @param string $url_format The format to use for the URL of a category. Passed to sprintf(). Defaults to the
-     *            string "?category=%s".
+     *        string "?category=%s".
      * @param array $extra_items An array of extra tree items, added to the root.
      */
     public function __construct($current_category, $url_format = '?application=atlantis&go=context&context_id=%s', $include_root = true, $show_complete_tree = false,
@@ -83,9 +84,10 @@ class Menu extends \HTML_Menu
         {
             $this->current_category = \Chamilo\Core\Group\storage\DataManager :: retrieve(
                 Group :: class_name(),
-                new EqualityCondition(
-                    new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
-                    new StaticConditionVariable($current_category)));
+                new DataClassRetrieveParameters(
+                    new EqualityCondition(
+                        new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
+                        new StaticConditionVariable($current_category))));
         }
 
         $this->urlFmt = $url_format;

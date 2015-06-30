@@ -111,7 +111,7 @@ class ContextsFeedComponent extends \Ehb\Application\Atlantis\UserGroup\Ajax\Man
 
         if ($filter_id)
         {
-            $context = DataManager :: retrieve(Context :: class_name(), (int) $filter_id);
+            $context = DataManager :: retrieve_by_id(Context :: class_name(), (int) $filter_id);
             $conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(Context :: class_name(), Context :: PROPERTY_PARENT_TYPE),
                 new StaticConditionVariable($context->get_context_type()));

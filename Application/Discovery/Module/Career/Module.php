@@ -96,7 +96,7 @@ class Module extends \Ehb\Application\Discovery\Module
             false);
         foreach ($modules as $module)
         {
-            $namespace = __NAMESPACE__ . '\implementation\\' . $module;
+            $namespace = __NAMESPACE__ . '\Implementation\\' . $module;
             $types[] = $namespace;
         }
         return $types;
