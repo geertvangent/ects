@@ -376,12 +376,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         if ($previous_history)
         {
-            $properties[Translation :: get('HistoryWas', array('YEAR' => $previous_history[0]), 'application\discovery')] = $previous_history[1];
+            $properties[Translation :: get(
+                'HistoryWas',
+                array('YEAR' => $previous_history[0]),
+                'Ehb\Application\Discovery')] = $previous_history[1];
         }
 
         if ($next_history)
         {
-            $properties[Translation :: get('HistoryBecomes', array('YEAR' => $next_history[0]), 'application\discovery')] = $next_history[1];
+            $properties[Translation :: get(
+                'HistoryBecomes',
+                array('YEAR' => $next_history[0]),
+                'Ehb\Application\Discovery')] = $next_history[1];
         }
 
         if ($faculty_info_module_instance)
