@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Course description"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 DescriptionToolBrowserComponent = "Browse descriptions"
 DescriptionToolViewerComponent = "View description"
 DescriptionToolEvaluateComponent = "Evaluate description"

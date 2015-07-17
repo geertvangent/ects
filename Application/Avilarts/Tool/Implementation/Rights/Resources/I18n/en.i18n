@@ -3,7 +3,7 @@
 ; Language = en
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 ApplicationRoot = "Application root"
 DoesNotInherit = "Does not inherit"
 GroupPermissions = "Group permissions"

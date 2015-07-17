@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Document"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 Download = "Download"
 Slideshow = "Slideshow"
 DocumentToolBrowserComponent = "Browse documents"

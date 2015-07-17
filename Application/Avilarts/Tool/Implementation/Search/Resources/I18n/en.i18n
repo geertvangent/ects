@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Search"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 ResultsFoundFor = "Results found for:"
 SearchToolSearcherComponent = "Search"
 SearchResult = "{COUNT} result"

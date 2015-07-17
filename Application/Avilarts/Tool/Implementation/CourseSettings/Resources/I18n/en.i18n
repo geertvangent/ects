@@ -4,6 +4,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Course settings"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 CourseSettingsToolUpdaterComponent = "Edit course settings"
 Unlimited = "Unlimited"

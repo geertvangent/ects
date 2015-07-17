@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Copy this course"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 CopyConfirmationQuestion = "Are you sure you want to copy this course?"
 CopyThisCourse = "Copy this course"
 CopyThisCourseInformation = "Copy the course information"

@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Calendar"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 UpcomingEvents = "Upcoming events"
 CalendarToolBrowserComponent = "Browse calendar events"
 CalendarToolViewerComponent = "View calendar event"

@@ -12,7 +12,7 @@ use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Calendar\Event\Interfaces\ActionSupport;
 use Chamilo\Libraries\Calendar\Renderer\Form\JumpForm;
-use Chamilo\Libraries\Calendar\Renderer\Interfaces\CalendarRenderer;
+use Chamilo\Libraries\Calendar\Renderer\Interfaces\CalendarRendererProviderInterface;
 use Chamilo\Libraries\Calendar\Renderer\Renderer;
 use Chamilo\Libraries\Calendar\Renderer\Type\MiniMonthRenderer;
 use Chamilo\Libraries\File\Redirect;
@@ -40,7 +40,7 @@ use Chamilo\Libraries\Utilities\Utilities;
  * Renderer to display events in a week calendar
  */
 class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicationListRenderer implements
-    DelegateComponent, CalendarRenderer, ActionSupport
+    DelegateComponent, CalendarRendererProviderInterface, ActionSupport
 {
 
     /**

@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Truncate this course"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 EmptyConfirmationQuestion = "Are you sure you want to empty this course?"
 AllSelectedObjectsRemoved = "All selected opbjects are removed"
 NotAllSelectedObjectsRemoved = "Not all selected objects are removed"

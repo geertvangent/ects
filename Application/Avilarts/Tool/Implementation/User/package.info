@@ -4,7 +4,7 @@
 		<name>User</name>
 		<code>User</code>
 		<context>Ehb\Application\Avilarts\Tool\Implementation\User</context>
-		<type>Ehb\Application\Avilarts\Tool</type>
+		<type>Chamilo\Application\Avilarts\Tool</type>
 		<category>education</category>
 		<authors />
 		<version>5.0.0</version>
