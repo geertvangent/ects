@@ -19,10 +19,10 @@ class DataComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-        
+
         $factory = new ApplicationFactory(
-            \Ehb\Application\Sync\Data\Manager :: context(), 
+            \Ehb\Application\Sync\Data\Manager :: context(),
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
-        $factory->run();
+        return $factory->run();
     }
 }

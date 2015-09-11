@@ -67,7 +67,8 @@ class ArchiveGroupSynchronization extends Synchronization
     }
 
     /**
-     * Enter description here . ..
+     * Enter description here .
+     * ..
      *
      * @param $type string
      * @param $synchronization GroupSynchronization
@@ -76,15 +77,10 @@ class ArchiveGroupSynchronization extends Synchronization
      */
     public static function factory($type, ArchiveGroupSynchronization $synchronization, $parameters = array())
     {
-        $file = dirname(__FILE__) . '/archive_group/' . $type . '.class.php';
+        $class = __NAMESPACE__ . '\ArchiveGroup\\' .
+             StringUtilities :: getInstance()->createString($type)->upperCamelize() . 'GroupSynchronization';
 
-        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
-             'GroupSynchronization';
-        if (file_exists($file))
-        {
-            require_once $file;
-            return new $class($synchronization, $parameters);
-        }
+        return new $class($synchronization, $parameters);
     }
 
     public function determine_current_group()
@@ -273,7 +269,7 @@ class ArchiveGroupSynchronization extends Synchronization
 
     public function get_academic_year()
     {
-        return PlatformSetting :: get('archive_academic_year', __NAMESPACE__);
+        return PlatformSetting :: get('archive_academic_year', 'Ehb\Application\Sync');
     }
 
     public function is_old()

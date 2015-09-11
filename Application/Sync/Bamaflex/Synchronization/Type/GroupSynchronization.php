@@ -66,7 +66,8 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
-     * Enter description here . ..
+     * Enter description here .
+     * ..
      *
      * @param $type string
      * @param $synchronization GroupSynchronization
@@ -75,15 +76,10 @@ class GroupSynchronization extends Synchronization
      */
     public static function factory($type, GroupSynchronization $synchronization, $parameters = array())
     {
-        $file = dirname(__FILE__) . '/group/' . $type . '.class.php';
-        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+        $class = __NAMESPACE__ . '\Group\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
              'GroupSynchronization';
 
-        if (file_exists($file))
-        {
-            require_once $file;
-            return new $class($synchronization, $parameters);
-        }
+        return new $class($synchronization, $parameters);
     }
 
     public function determine_current_group()

@@ -65,8 +65,8 @@ class AllUserSynchronization extends UserSynchronization
         $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code(
             $person[self :: RESULT_PROPERTY_PERSON_ID]);
 
-        $utf_last_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_LAST_NAME]);
-        $utf_first_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_FIRST_NAME]);
+        $utf_last_name = trim($person[self :: RESULT_PROPERTY_LAST_NAME]);
+        $utf_first_name = trim($person[self :: RESULT_PROPERTY_FIRST_NAME]);
         if (! $user instanceof User)
         {
             $user = new User();

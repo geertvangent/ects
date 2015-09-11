@@ -19,9 +19,10 @@ class CasComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
+
         $factory = new ApplicationFactory(
             \Ehb\Application\Sync\Cas\Manager :: context(),
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
-        $factory->run();
+        return $factory->run();
     }
 }

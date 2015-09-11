@@ -19,7 +19,7 @@ try
     Synchronization :: log('Group sync started', date('c', time()));
     flush();
 
-    $years = PlatformSetting :: get('academic_year', __NAMESPACE__);
+    $years = PlatformSetting :: get('academic_year', 'Ehb\Application\Sync');
     $years = explode(',', $years);
 
     $root_group = \Chamilo\Core\Group\Storage\DataManager :: get_root_group();

@@ -37,7 +37,7 @@ abstract class Synchronization
      */
     public function get_academic_year()
     {
-        return PlatformSetting :: get('academic_year', __NAMESPACE__);
+        return PlatformSetting :: get('academic_year', 'Ehb\Application\Sync');
     }
 
     public function get_academic_year_end()
