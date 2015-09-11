@@ -106,6 +106,7 @@ class RepositoryDocumentDownloadProcessor
             $row_counter = 0;
 
             $result = $this->dm->get_connection()->query($query);
+            $resultSize = $result->rowCount();
             while ($visit_tracker_row = $result->fetch(\PDO :: FETCH_ASSOC))
             {
                 $this->handle_visit_tracker($visit_tracker_row);
@@ -113,7 +114,7 @@ class RepositoryDocumentDownloadProcessor
             }
 
             $offset += $count;
-            $this->log('Upgraded ' . ($offset + $row_counter) . ' records');
+            $this->log('Upgraded ' . $resultSize . ' records');
             flush();
         }
         while ($row_counter == $count);

@@ -114,12 +114,12 @@ class WeblcmsDocumentZipProcessor
 
         $end_time = time() - 86400;
 
+        $pattern = '%tool_action=zip_and_download%';
         $offset = 0;
         $count = 100000;
 
         $base_query = 'SELECT * FROM tracking_user_visit WHERE enter_date > ' . $start_time . ' AND enter_date <= ' .
-             $end_time .
-             ' AND location LIKE "%application=weblcms%" AND location LIKE "%tool_action=zip_and_download%" LIMIT ';
+             $end_time . ' AND location LIKE "' . $pattern . '" LIMIT ';
 
         do
         {
@@ -128,6 +128,7 @@ class WeblcmsDocumentZipProcessor
             $row_counter = 0;
 
             $result = $this->dm->get_connection()->query($query);
+            $resultSize = $result->rowCount();
             while ($visit_tracker_row = $result->fetch(\PDO :: FETCH_ASSOC))
             {
                 $this->handle_visit_tracker($visit_tracker_row);
@@ -135,7 +136,7 @@ class WeblcmsDocumentZipProcessor
             }
 
             $offset += $count;
-            $this->log('Upgraded ' . ($offset + $row_counter) . ' records');
+            $this->log('Upgraded ' . $resultSize . ' records');
             flush();
         }
         while ($row_counter == $count);

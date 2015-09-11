@@ -7,17 +7,26 @@ namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\User;
  */
 use Chamilo\Core\User\Storage\DataClass\User;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\UserSynchronization;
+use Chamilo\Core\User\Storage\DataClass\UserSetting;
+use Chamilo\Configuration\Storage\DataClass\Setting;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 
 class AllUserSynchronization extends UserSynchronization
 {
+
+    private $languageSetting;
 
     public function get_data()
     {
         $academic_year = $this->get_academic_year();
         $academic_year = explode(',', $academic_year);
-        
+
         $query = 'EXEC [dbo].[sp_sync_user] @academiejaar = N\'' . $academic_year[0] . '\'';
-        
+
         return $this->get_result($query);
     }
 
@@ -26,19 +35,44 @@ class AllUserSynchronization extends UserSynchronization
         return 'create';
     }
 
+    /**
+     *
+     * @return \Chamilo\Libraries\Storage\DataClass\DataClass
+     */
+    public function getLanguageSetting()
+    {
+        if (! isset($this->languageSetting))
+        {
+            $conditions = array();
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable(Setting :: class_name(), Setting :: PROPERTY_CONTEXT),
+                new StaticConditionVariable('Chamilo\Core\Admin'));
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable(Setting :: class_name(), Setting :: PROPERTY_VARIABLE),
+                new StaticConditionVariable('platform_language'));
+            $condition = new AndCondition($conditions);
+
+            $this->languageSetting = \Chamilo\Libraries\Storage\DataManager\DataManager :: retrieve(
+                Setting :: class_name(),
+                new DataClassRetrieveParameters($condition));
+        }
+
+        return $this->languageSetting;
+    }
+
     public function process_data($person)
     {
         $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code(
             $person[self :: RESULT_PROPERTY_PERSON_ID]);
-        
+
         $utf_last_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_LAST_NAME]);
         $utf_first_name = $this->convert_to_utf8($person[self :: RESULT_PROPERTY_FIRST_NAME]);
         if (! $user instanceof User)
         {
             $user = new User();
-            
+
             $user->set_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
-            
+
             $user->set_auth_source('cas');
             $user->set_password('PLACEHOLDER');
             $user->set_expiration_date(0);
@@ -50,15 +84,15 @@ class AllUserSynchronization extends UserSynchronization
         {
             $user_copy = clone $user;
         }
-        
+
         $user->set_lastname($utf_last_name);
         $user->set_firstname($utf_first_name);
-        
+
         if (($person[self :: RESULT_PROPERTY_QUOTA] * 1024 * 1024) > $user->get_disk_quota())
         {
             $user->set_disk_quota($person[self :: RESULT_PROPERTY_QUOTA] * 1024 * 1024);
         }
-        
+
         switch ($person[self :: RESULT_PROPERTY_STATUS])
         {
             case 0 :
@@ -70,7 +104,7 @@ class AllUserSynchronization extends UserSynchronization
                 break;
             case 1 :
                 $user->set_active(1);
-                
+
                 if ($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE]));
@@ -92,7 +126,7 @@ class AllUserSynchronization extends UserSynchronization
                 break;
             case 2 :
                 $user->set_active(1);
-                
+
                 if ($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_EMPLOYEE]));
@@ -109,7 +143,7 @@ class AllUserSynchronization extends UserSynchronization
             case 3 :
                 $user->set_active(1);
                 $user->set_status(5);
-                
+
                 if ($person[self :: RESULT_PROPERTY_EMAIL_STUDENT])
                 {
                     $user->set_username($this->convert_to_utf8($person[self :: RESULT_PROPERTY_EMAIL_STUDENT]));
@@ -122,7 +156,7 @@ class AllUserSynchronization extends UserSynchronization
                 }
                 break;
         }
-        
+
         if ($user_copy instanceof User)
         {
             if ($user != $user_copy)
@@ -146,7 +180,7 @@ class AllUserSynchronization extends UserSynchronization
                          $utf_last_name . "\n";
                 }
             }
-            
+
             unset($user);
             unset($user_copy);
         }
@@ -156,6 +190,16 @@ class AllUserSynchronization extends UserSynchronization
             {
                 if ($user->create())
                 {
+                    // Language 5 = Dutch
+                    if ($person[self :: RESULT_PROPERTY_LANGUAGE] != 5)
+                    {
+                        $user_setting = new UserSetting();
+                        $user_setting->set_user_id($user->get_id());
+                        $user_setting->set_setting_id($this->getLanguageSetting()->getId());
+                        $user_setting->set_value('en');
+                        $user_setting->create();
+                    }
+
                     echo 'Added: [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
                          $utf_last_name . "\n";
                 }
@@ -170,7 +214,7 @@ class AllUserSynchronization extends UserSynchronization
                 echo '++ FAIL:  [' . $person[self :: RESULT_PROPERTY_PERSON_ID] . ']' . $utf_first_name . ' ' .
                      $utf_last_name . "\n";
             }
-            
+
             unset($user);
         }
         flush();
@@ -179,7 +223,7 @@ class AllUserSynchronization extends UserSynchronization
     public function run()
     {
         $user_result_set = $this->get_data();
-        
+
         while ($user = $user_result_set->next_result(false))
         {
             $this->process_data($user);

@@ -1,7 +1,8 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Cron;
 
-use Ehb\Application\Sync\Bamaflex\Synchronization\Type\UserSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\AdminSynchronization;
 
 /**
  * This script will load the requested application and launch it.
@@ -13,13 +14,13 @@ try
     ini_set("memory_limit", "-1");
     ini_set("max_execution_time", "18000");
 
-    echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
+    Synchronization :: log('Admins sync started', date('c', time()));
     flush();
 
-    $synchronization = UserSynchronization :: factory('all');
+    $synchronization = new AdminSynchronization();
     $synchronization->run();
 
-    echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
+    Synchronization :: log('Admins sync ended', date('c', time()));
 }
 catch (\Exception $exception)
 {

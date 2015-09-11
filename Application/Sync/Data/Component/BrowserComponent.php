@@ -22,9 +22,9 @@ class BrowserComponent extends Manager implements DelegateComponent
             self :: ACTION_DOCUMENT_WEBLCMS,
             self :: ACTION_DOCUMENT_REPOSITORY,
             self :: ACTION_EXPORT_REPOSITORY,
-            self :: ACTION_DOCUMENT_ZIP_WEBLCMS,
+            self :: ACTION_DOCUMENT_ZIP_WEBLCMS/*,
             self :: ACTION_PORTFOLIO_INTRODUCTION,
-            self :: ACTION_PORTFOLIO_LOCATION);
+            self :: ACTION_PORTFOLIO_LOCATION*/);
 
         $html = array();
 

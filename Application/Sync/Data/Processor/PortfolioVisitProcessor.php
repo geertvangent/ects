@@ -90,7 +90,7 @@ class PortfolioVisitProcessor
 
         $end_time = time() - 86400;
 
-        $pattern = '%application=portfolio%';
+        $pattern = '%application=%portfolio%';
         $offset = 0;
         $count = 100000;
 
@@ -104,6 +104,7 @@ class PortfolioVisitProcessor
             $row_counter = 0;
 
             $result = $this->dm->get_connection()->query($query);
+            $resultSize = $result->rowCount();
             while ($visit_tracker_row = $result->fetch(\PDO :: FETCH_ASSOC))
             {
                 $this->handle_visit_tracker($visit_tracker_row);
@@ -111,7 +112,7 @@ class PortfolioVisitProcessor
             }
 
             $offset += $count;
-            $this->log('Upgraded ' . ($offset + $row_counter) . ' records');
+            $this->log('Upgraded ' . $resultSize . ' records');
             flush();
         }
         while ($row_counter == $count);
@@ -135,8 +136,18 @@ class PortfolioVisitProcessor
         parse_str($url_parts['query'], $query);
 
         $portfolio_id = $query['poid'];
+        if (! $portfolio_id)
+        {
+            $portfolio_id = $query['user_id'];
+        }
+
         $publication_id = $query['pid'];
+
         $item_id = $query['cid'];
+        if (! $item_id)
+        {
+            $item_id = $query['step'];
+        }
 
         /**
          * When multiple publications are used, it's mostly due to table actions and the publication is not really
