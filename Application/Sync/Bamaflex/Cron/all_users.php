@@ -6,7 +6,11 @@ use Ehb\Application\Sync\Bamaflex\Synchronization\Type\UserSynchronization;
 /**
  * This script will load the requested application and launch it.
  */
-require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
+require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
+     DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
+     'Chamilo/Libraries/Architecture/Bootstrap.php';
+
+$bootstrap = \Chamilo\Libraries\Architecture\Bootstrap :: setup();
 
 try
 {
