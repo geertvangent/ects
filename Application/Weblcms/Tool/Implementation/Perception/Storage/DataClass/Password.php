@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Weblcms\Tool\Implementation\Perception;
+namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Core\User\Storage\DataClass\User;
@@ -43,10 +43,10 @@ class Password extends DataClass
         if (! isset($this->user))
         {
             $this->user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-                User :: class_name(),
+                User :: class_name(), 
                 (int) $this->get_user_id());
         }
-
+        
         return $this->user;
     }
 

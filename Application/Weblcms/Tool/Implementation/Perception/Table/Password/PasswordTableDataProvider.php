@@ -1,9 +1,11 @@
 <?php
-namespace Ehb\Application\Weblcms\Tool\Implementation\Perception;
+namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Table\Password;
 
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass\Password;
 
 class PasswordTableDataProvider extends DataClassTableDataProvider
 {
@@ -18,9 +20,9 @@ class PasswordTableDataProvider extends DataClassTableDataProvider
      * @param $order_property string
      * @return ResultSet A set of matching learning objects.
      */
-    public function retrieve_data($offset, $count, $order_property = null)
+    public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
-        $parameters = new DataClassRetrievesParameters($this->get_condition(), $count, $offset, $order_property);
+        $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
         return DataManager :: retrieves(Password :: class_name(), $parameters);
     }
 
@@ -29,9 +31,9 @@ class PasswordTableDataProvider extends DataClassTableDataProvider
      *
      * @return int
      */
-    public function count_data()
+    public function count_data($condition)
     {
-        $parameters = new DataClassCountParameters($this->get_condition());
+        $parameters = new DataClassCountParameters($condition);
         return DataManager :: count(Password :: class_name(), $parameters);
     }
 }

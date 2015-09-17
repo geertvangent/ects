@@ -2,14 +2,12 @@
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Component;
 
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Manager;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\DataManager;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\Password;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\PasswordTable;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
@@ -17,6 +15,8 @@ use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Mail\Mail;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Table\Password\PasswordTable;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass\Password;
 
 /**
  *

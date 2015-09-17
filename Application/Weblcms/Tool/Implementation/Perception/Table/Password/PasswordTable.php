@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Weblcms\Tool\Implementation\Perception;
+namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Table\Password;
 
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
 

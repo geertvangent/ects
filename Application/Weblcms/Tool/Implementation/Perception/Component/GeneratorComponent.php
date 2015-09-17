@@ -2,7 +2,7 @@
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Component;
 
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Manager;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\DataManager;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
 use Chamilo\Libraries\Platform\Translation;
 
 /**

@@ -2,8 +2,8 @@
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Component;
 
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Manager;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\DataManager;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\Password;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass\Password;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\File\Path;
