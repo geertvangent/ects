@@ -10,6 +10,8 @@ use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  *
@@ -34,10 +36,12 @@ class ExporterComponent extends Manager
                     new PropertyConditionVariable(Password :: class_name(), Password :: PROPERTY_USER_ID),
                     $users_ids)));
 
-        $csv_file = Path :: get(SYS_ARCHIVE_PATH) . $this->get_course()->get_visual_code() . '_perception_accounts.csv';
-        Filesystem :: create_dir(dirname($csv_file));
+        $fileName = $this->get_course()->get_visual_code() . '_perception_accounts.csv';
+        $filePath = Path :: getInstance()->getTemporaryPath(__NAMESPACE__) . $fileName;
 
-        $csv_handle = fopen($csv_file, 'w+');
+        Filesystem :: create_dir(dirname($filePath));
+
+        $csv_handle = fopen($filePath, 'w+');
 
         while ($password = $passwords->next_result())
         {
@@ -56,7 +60,12 @@ class ExporterComponent extends Manager
 
         fclose($csv_handle);
 
-        Filesystem :: file_send_for_download($csv_file, true);
+        $response = new BinaryFileResponse($filePath, 200, array('Content-Type' => 'text/csv'));
+
+        $response->setContentDisposition(ResponseHeaderBag :: DISPOSITION_ATTACHMENT, $fileName);
+        $response->prepare($this->getRequest());
+        $response->send();
+        exit();
     }
 
     public function generate_passwords()
