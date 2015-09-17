@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Discovery\Instance\DataClass;
+namespace Ehb\Application\Discovery\Instance\Storage\DataClass;
 
 use Ehb\Application\Discovery\Instance\Storage\DataManager;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
@@ -106,7 +106,8 @@ class InstanceSetting extends DataClass
      */
     public static function initialize(Instance $instance)
     {
-        $settings_file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) . 'Resources/Settings/settings.xml';
+        $settings_file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) .
+             'Resources/Settings/settings.xml';
         $doc = new \DOMDocument();
 
         $doc->load($settings_file);

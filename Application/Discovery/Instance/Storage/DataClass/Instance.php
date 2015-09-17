@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Discovery\Instance\DataClass;
+namespace Ehb\Application\Discovery\Instance\Storage\DataClass;
 
 use Ehb\Application\Discovery\Instance\Storage\DataManager;
 use Chamilo\Libraries\Storage\DataClass\DataClass;

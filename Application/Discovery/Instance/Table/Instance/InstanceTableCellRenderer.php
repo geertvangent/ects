@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Instance\Table\Instance;
 
-use Ehb\Application\Discovery\Instance\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 use Ehb\Application\Discovery\Instance\Storage\DataManager;
 use Ehb\Application\Discovery\Instance\Manager;
 use Chamilo\Libraries\Format\Structure\Toolbar;

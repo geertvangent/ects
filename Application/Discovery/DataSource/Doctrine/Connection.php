@@ -31,7 +31,7 @@ class Connection extends Connection
         $classLoader->register();
 
         $this->data_source_instance = \Ehb\Application\Discovery\DataSource\Storage\DataManager :: retrieve_by_id(
-            \Ehb\Application\Discovery\Instance\DataClass\Instance ::class_name(),
+            \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance ::class_name(),
             (int) $data_source_instance_id);
 
         $driver = $this->data_source_instance->get_setting('driver');

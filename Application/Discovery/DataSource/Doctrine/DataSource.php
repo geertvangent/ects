@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\DataSource\Doctrine;
 
-use Ehb\Application\Discovery\Instance\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource
 {

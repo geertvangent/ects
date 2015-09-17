@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Instance\Storage;
 
-use Ehb\Application\Discovery\Instance\DataClass\InstanceSetting;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\InstanceSetting;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;

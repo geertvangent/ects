@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery;
 
-use Ehb\Application\Discovery\Instance\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
@@ -90,19 +90,19 @@ class Module
     {
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
-                \Ehb\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_TYPE),
+                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
+                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_TYPE),
             new StaticConditionVariable($type));
         $conditions[] = new NotCondition(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
-                    \Ehb\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_CONTENT_TYPE),
-                new StaticConditionVariable(\Ehb\Application\Discovery\Instance\DataClass\Instance :: TYPE_DISABLED)));
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_CONTENT_TYPE),
+                new StaticConditionVariable(\Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_DISABLED)));
         $condition = new AndCondition($conditions);
 
         $module_instances = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieves(
-            \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+            \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
             new DataClassRetrievesParameters($condition));
         while ($module_instance = $module_instances->next_result())
         {
@@ -168,7 +168,7 @@ class Module
 
     public function get_type()
     {
-        return \Ehb\Application\Discovery\Instance\DataClass\Instance :: TYPE_DISABLED;
+        return \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_DISABLED;
     }
 
     /**

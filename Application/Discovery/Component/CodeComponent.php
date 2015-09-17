@@ -21,12 +21,12 @@ class CodeComponent extends Manager implements DelegateComponent
 
         $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code($official_code);
         $module_instance = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieve_by_id(
-            \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+            \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
             (int) $module_id);
 
         if ($user instanceof \Chamilo\Core\User\Storage\DataClass\User &&
-             $module_instance instanceof \Ehb\Application\Discovery\Instance\DataClass\Instance && $module_instance->get_content_type() ==
-             \Ehb\Application\Discovery\Instance\DataClass\Instance :: TYPE_USER)
+             $module_instance instanceof \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance && $module_instance->get_content_type() ==
+             \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_USER)
         {
             $parameters = array();
             $parameters[self :: PARAM_APPLICATION] = self :: APPLICATION_NAME;
