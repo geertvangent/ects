@@ -10,7 +10,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {
-    const PREFIX = 'discovery_module';
+    const PREFIX = 'discovery_module_';
 
     /**
      * Gets the type of DataManager to be instantiated

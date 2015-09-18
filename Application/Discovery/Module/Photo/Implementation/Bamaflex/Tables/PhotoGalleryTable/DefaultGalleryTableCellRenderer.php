@@ -6,10 +6,6 @@ use Chamilo\Libraries\Format\Table\Extension\GalleryTable\GalleryTableCellRender
 abstract class DefaultGalleryTableCellRenderer extends GalleryTableCellRenderer
 {
 
-    public function __construct()
-    {
-    }
-
     public function render_cell($user)
     {
         $html = array();

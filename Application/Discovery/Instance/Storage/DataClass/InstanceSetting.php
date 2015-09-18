@@ -17,7 +17,7 @@ use Chamilo\Libraries\File\Path;
 class InstanceSetting extends DataClass
 {
     const CLASS_NAME = __CLASS__;
-    const PROPERTY_INSTANCE_ID = 'module_instance_id';
+    const PROPERTY_INSTANCE_ID = 'instance_id';
     const PROPERTY_VARIABLE = 'variable';
     const PROPERTY_VALUE = 'value';
 

@@ -73,9 +73,13 @@ class BrowserComponent extends Manager implements DelegateComponent, AccessAllow
                 "<img style=\"width: 150px; border: 1px solid grey;\" src=\"$1\">",
                 $rendered_module);
 
-            $this->display_header();
-            echo $rendered_module;
-            $this->display_footer();
+            $html = array();
+
+            $html[] = $this->render_header();
+            $html[] = $rendered_module;
+            $html[] = $this->render_footer();
+
+            return implode(PHP_EOL, $html);
         }
     }
 }

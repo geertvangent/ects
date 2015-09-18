@@ -36,7 +36,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                 new PropertyConditionVariable(
                     \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
                     \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_TYPE),
-                new StaticConditionVariable('\Ehb\Application\Discovery\Module\Course'));
+                new StaticConditionVariable('Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex'));
 
             $moduleInstance = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieve(
                 \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),

@@ -131,7 +131,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $following_impossible->set_exam_degree($object->impossible_exam_degree);
         $course->set_following_impossible($following_impossible);
 
-        if (! StringUtilities :: is_null_or_empty($object->total_material_price, true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->total_material_price, true))
         {
             $cost = new Cost();
             $cost->set_type(Cost :: TYPE_MATERIAL);
@@ -139,7 +139,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             $course->add_cost($cost);
         }
 
-        if (! StringUtilities :: is_null_or_empty($object->additional_costs, true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->additional_costs, true))
         {
             $cost = new Cost();
             $cost->set_type(Cost :: TYPE_ADDITIONAL);
@@ -147,7 +147,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             $course->add_cost($cost);
         }
 
-        if (! StringUtilities :: is_null_or_empty($object->evaluation, true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->evaluation, true))
         {
             $evaluation_description = new EvaluationDescription();
             $evaluation_description->set_description($this->convert_to_utf8($object->evaluation));
@@ -159,7 +159,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             $course->add_evaluation($evaluation);
         }
 
-        if (! StringUtilities :: is_null_or_empty($object->activities, true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->activities, true))
         {
             $activity_description = new ActivityDescription();
             $activity_description->set_description($this->convert_to_utf8($object->activities));
@@ -175,7 +175,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $activity_total->set_time($object->total_study_time);
         $course->add_activity($activity_total);
 
-        if (! StringUtilities :: is_null_or_empty($object->material_required, true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->material_required, true))
         {
             $material_description = new MaterialDescription();
             $material_description->set_type(Material :: TYPE_REQUIRED);
@@ -183,7 +183,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             $course->add_material($material_description);
         }
 
-        if (! StringUtilities :: is_null_or_empty($object->material_optional, true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->material_optional, true))
         {
             $material_description = new MaterialDescription();
             $material_description->set_type(Material :: TYPE_OPTIONAL);
@@ -196,7 +196,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             $course->add_material($material);
         }
 
-        if (! StringUtilities :: is_null_or_empty($object->competences_start, true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->competences_start, true))
         {
             $competence_description = new CompetenceDescription();
             $competence_description->set_type(Competence :: TYPE_BEGIN);
@@ -204,7 +204,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             $course->add_competence($competence_description);
         }
 
-        if (! StringUtilities :: is_null_or_empty($object->competences_end, true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->competences_end, true))
         {
             $competence_description = new CompetenceDescription();
             $competence_description->set_type(Competence :: TYPE_END);

@@ -1046,7 +1046,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $html = array();
 
-        if (! StringUtilities :: is_null_or_empty($course->get_goals(), true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($course->get_goals(), true))
         {
             $html[] = '<div class="content_object" style="background-image: url(' .
                  Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Content/goals.png);">';
@@ -1059,7 +1059,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = '</div>';
         }
 
-        if (! StringUtilities :: is_null_or_empty($course->get_contents(), true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($course->get_contents(), true))
         {
             $html[] = '<div class="content_object" style="background-image: url(' .
                  Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Content/contents.png);">';
@@ -1071,7 +1071,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = '</div>';
             $html[] = '</div>';
         }
-        if (! StringUtilities :: is_null_or_empty($course->get_coaching(), true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($course->get_coaching(), true))
         {
             $html[] = '<div class="content_object" style="background-image: url(' .
                  Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Content/coaching.png);">';
@@ -1083,7 +1083,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $html[] = '</div>';
             $html[] = '</div>';
         }
-        if (! StringUtilities :: is_null_or_empty($course->get_succession(), true))
+        if (! StringUtilities :: getInstance()->isNullOrEmpty($course->get_succession(), true))
         {
             $html[] = '<div class="content_object" style="background-image: url(' .
                  Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Content/succession.png);">';

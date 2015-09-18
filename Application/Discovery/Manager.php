@@ -8,16 +8,23 @@ use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface
 
 /**
  *
- * @package application.discovery
- * @author Hans De Bisschop
+ * @package Ehb\Application\Discovery
+ * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
+ * @author Magali Gillard <magali.gillard@ehb.be>
+ * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
 abstract class Manager extends Application
 {
     const APPLICATION_NAME = 'discovery';
+
+    // Actions
     const ACTION_VIEW = 'Viewer';
     const ACTION_CODE = 'Code';
     const ACTION_MODULE = 'Module';
     const ACTION_DATA_SOURCE = 'DataSource';
+    const ACTION_PHOTO = 'Photo';
+
+    // Parameters
     const PARAM_USER_ID = 'user_id';
     const PARAM_MODULE_ID = 'module_id';
     const PARAM_OFFICIAL_CODE = 'official_code';
@@ -27,6 +34,8 @@ abstract class Manager extends Application
     const PARAM_DIRECTION_DOWN = 'down';
     const PARAM_FORMAT = 'format';
     const PARAM_VIEW = 'view';
+
+    // Default action
     const DEFAULT_ACTION = self :: ACTION_VIEW;
 
     /**
