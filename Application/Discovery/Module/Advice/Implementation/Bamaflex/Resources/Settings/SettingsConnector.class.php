@@ -15,11 +15,11 @@ class SettingsConnector
     {
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
-                \Ehb\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_TYPE),
+                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
+                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_TYPE),
             new StaticConditionVariable('Ehb\Application\Discovery\DataSource\Bamaflex'));
         $instances = \Ehb\Application\Discovery\DataSource\Storage\DataManager :: retrieves(
-            \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+            \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 null,
@@ -27,8 +27,8 @@ class SettingsConnector
                 array(
                     new OrderBy(
                         new PropertyConditionVariable(
-                            \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
-                            \Ehb\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_NAME)))));
+                            \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
+                            \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_NAME)))));
 
         $data_sources = array();
 

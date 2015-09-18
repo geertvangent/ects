@@ -4,7 +4,7 @@
 		<name>Avilarts</name>
 		<code>Avilarts</code>
 		<context>Ehb\Application\Avilarts</context>
-		<type>Ehb\Application</type>
+		<type>Chamilo\Application</type>
 		<category>education</category>
 		<authors />
 		<version>5.0.0</version>

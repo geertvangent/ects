@@ -44,7 +44,7 @@ class Rights
             elseif ($parameters->get_training_id())
             {
                 $module_instance = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieve_by_id(
-                    \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
                     (int) $module_instance_id);
                 $training = \Ehb\Application\Discovery\Module\Photo\DataManager :: get_instance($module_instance)->retrieve_training(
                     $parameters->get_training_id());
@@ -56,7 +56,7 @@ class Rights
             elseif ($parameters->get_programme_id())
             {
                 $module_instance = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieve_by_id(
-                    \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
                     (int) $module_instance_id);
                 $course = \Ehb\Application\Discovery\Module\Photo\DataManager :: get_instance($module_instance)->retrieve_programme(
                     $parameters->get_programme_id());

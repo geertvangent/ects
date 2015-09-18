@@ -12,6 +12,7 @@ abstract class Manager extends Application
     const ACTION_GROUPS = 'Groups';
     const ACTION_ARCHIVE_GROUPS = 'ArchiveGroups';
     const ACTION_COURSES = 'Courses';
+    const ACTION_ADMINS = 'Admins';
     const DEFAULT_ACTION = self :: ACTION_BROWSE;
     const PARAM_ACTION = 'bamaflex_action';
 

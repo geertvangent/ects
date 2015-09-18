@@ -112,7 +112,7 @@ class WeblcmsVisitProcessor
 
         $end_time = time() - 86400;
 
-        $pattern = '%application=weblcms%go=course_viewer%';
+        $pattern = '%go=course_viewer%';
         $offset = 0;
         $count = 100000;
 
@@ -126,6 +126,7 @@ class WeblcmsVisitProcessor
             $row_counter = 0;
 
             $result = $this->dm->get_connection()->query($query);
+            $resultSize = $result->rowCount();
             while ($visit_tracker_row = $result->fetch(\PDO :: FETCH_ASSOC))
             {
                 $this->handle_visit_tracker($visit_tracker_row);
@@ -133,7 +134,7 @@ class WeblcmsVisitProcessor
             }
 
             $offset += $count;
-            $this->log('Upgraded ' . ($offset + $row_counter) . ' records');
+            $this->log('Upgraded ' . $resultSize . ' records');
             flush();
         }
         while ($row_counter == $count);

@@ -23,6 +23,6 @@ class BamaflexComponent extends Manager implements DelegateComponent
         $factory = new ApplicationFactory(
             \Ehb\Application\Sync\Bamaflex\Manager :: context(),
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
-        $factory->run();
+        return $factory->run();
     }
 }

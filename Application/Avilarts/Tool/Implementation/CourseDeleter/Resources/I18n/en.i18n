@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Delete Course"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 DeleteWarningMessage = "Are you sure you want to delete this course?"
 DeleteReDoMessage = "!!!!! Attention the course can't be restored !!!!!!"
 CourseDeleteFailed = "Course was not deleted"

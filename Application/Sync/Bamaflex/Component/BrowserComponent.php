@@ -20,6 +20,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             self :: ACTION_GROUPS,
             self :: ACTION_COURSE_CATEGORIES,
             self :: ACTION_COURSES,
+            self :: ACTION_ADMINS,
             self :: ACTION_ARCHIVE_GROUPS);
 
         $html = array();

@@ -4,7 +4,7 @@ namespace Ehb\Application\Discovery\DataSource\Bamaflex;
 class DataSource extends \Ehb\Application\Discovery\DataSource
 {
 
-    public function __construct(\Ehb\Application\Discovery\Instance\DataClass\Instance $module_instance)
+    public function __construct(\Ehb\Application\Discovery\Instance\Storage\DataClass\Instance $module_instance)
     {
         $data_source_connection = Connection :: get_instance($module_instance->get_setting('data_source'));
 
@@ -21,7 +21,6 @@ class DataSource extends \Ehb\Application\Discovery\DataSource
             $connection->setCharset('utf8');
         }
         parent :: __construct($module_instance, $connection);
-
     }
 
     /**
@@ -32,14 +31,15 @@ class DataSource extends \Ehb\Application\Discovery\DataSource
     public function convert_to_utf8($string)
     {
         return $string;
-//         if (Connection :: get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
-//             'driver') == 'mssql')
-//         {
-//             return iconv('Windows-1252', 'UTF-8', $string);
-//         }
-//         else
-//         {
-//             return iconv(mb_detect_encoding($string), 'UTF-8', $string);
-//         }
+        // if (Connection ::
+    // get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
+        // 'driver') == 'mssql')
+        // {
+        // return iconv('Windows-1252', 'UTF-8', $string);
+        // }
+        // else
+        // {
+        // return iconv(mb_detect_encoding($string), 'UTF-8', $string);
+        // }
     }
 }

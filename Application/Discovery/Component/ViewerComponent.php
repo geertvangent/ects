@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Component;
 
-use Ehb\Application\Discovery\Instance\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 use Ehb\Application\Discovery\LegendTable;
 use Ehb\Application\Discovery\Manager;
 use Ehb\Application\Discovery\Module;

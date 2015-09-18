@@ -13,8 +13,8 @@ class AllUserSynchronization extends UserSynchronization
 
     public function get_data()
     {
-        return \Chamilo\Application\CasUser\Account\Storage\DataManager :: retrieves(
-            \Chamilo\Application\CasUser\Account\Storage\DataClass\Account :: class_name());
+        return \Chamilo\Application\CasStorage\Account\Storage\DataManager :: retrieves(
+            \Chamilo\Application\CasStorage\Account\Storage\DataClass\Account :: class_name());
     }
 
     public function get_type()

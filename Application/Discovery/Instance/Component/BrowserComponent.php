@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Instance\Component;
 
-use Ehb\Application\Discovery\Instance\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 use Ehb\Application\Discovery\Instance\Manager;
 use Ehb\Application\Discovery\Instance\Table\Instance\InstanceTable;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;

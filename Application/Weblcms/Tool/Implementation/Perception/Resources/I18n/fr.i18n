@@ -1,0 +1,32 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\weblcms\tool\perception
+; Language = fr
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Mot de passe Perception"
+PasswordMailTitle = "[{PLATFORM}] QuestionMark Perception login credentials"
+PasswordMailBody = "Dear {USER},<br />
+<br />
+Please find your login credentials for QuestionMark Perception below:<br /><br />
+<b>URL:</b> http://perception.ehb.be<br />
+<b>Username:</b> {EMAIL}<br />
+<b>Password:</b> {PASSWORD}<br />
+<br />
+If you have any more questions about Perception, please contact the helpdesk via perception@ehb.be.<br />
+<br />
+Best regards,<br />
+{SENDER}"
+PasswordNotMailed = "The password was not mailed"
+SomePasswordsNotMailed = "Some passwords were not mailed"
+PasswordsNotMailed = "The passwords were not mailed"
+PasswordMailed = "The password was mailed successfully"
+PasswordsMailed = "The passwords were mailed successfully"
+NoPerceptionPassword = "You don't seem to have a Perception password, please contact your course administrator"
+GeneratePasswords = "Generate passwords"
+MailPasswords = "Mail passwords"
+ExportPasswords = "Export accounts"
+PasswordNotGenerated = "The password was not generated"
+SomePasswordsNotGenerated = "Some passwords weren't generated"
+PasswordsNotGenerated = "The passwords weren't generated"
+PasswordGenerated = "The password was successfully generated"
+PasswordsGenerated = "The passwords were successfully generated"

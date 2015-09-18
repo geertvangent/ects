@@ -9,7 +9,7 @@ use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
  */
 class StudentTrainingGroupSynchronization extends TrainingGroupSynchronization
 {
-    
+
     /*
      * (non-PHPdoc) @see application\ehb_sync\bamaflex.TrainingGroupSynchronization::get_group_type()
      */
@@ -24,6 +24,7 @@ class StudentTrainingGroupSynchronization extends TrainingGroupSynchronization
         $children[] = GroupSynchronization :: factory('student_training_trajectories', $this);
         $children[] = GroupSynchronization :: factory('student_training_choices', $this);
         $children[] = GroupSynchronization :: factory('student_training_courses', $this);
+        $children[] = GroupSynchronization :: factory('student_training_groups', $this);
         return $children;
     }
 }

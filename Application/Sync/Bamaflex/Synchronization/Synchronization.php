@@ -15,6 +15,8 @@ abstract class Synchronization
      */
     private $data_manager;
 
+    public $course_types = array('2012-13' => 1, '2013-14' => 5, '2014-15' => 6, '2015-16' => 7);
+
     public function __construct()
     {
         $this->data_manager = BamaflexDataConnector :: get_instance();
@@ -35,7 +37,7 @@ abstract class Synchronization
      */
     public function get_academic_year()
     {
-        return PlatformSetting :: get('academic_year', __NAMESPACE__);
+        return PlatformSetting :: get('academic_year', 'Ehb\Application\Sync');
     }
 
     public function get_academic_year_end()

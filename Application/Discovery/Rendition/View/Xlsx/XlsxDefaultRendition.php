@@ -62,7 +62,7 @@ class XlsxDefaultRendition extends XlsxRendition
         else
         {
             if ($module->get_module_instance()->get_content_type() ==
-                 \Ehb\Application\Discovery\Instance\DataClass\Instance :: TYPE_USER)
+                 \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_USER)
             {
                 $user_id = $module->get_module_parameters()->get_user_id();
                 $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(

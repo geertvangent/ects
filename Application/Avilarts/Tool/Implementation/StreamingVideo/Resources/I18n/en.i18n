@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Streaming video"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 StreamingVideoToolBrowserComponent = "Browse streaming videos"
 StreamingVideoToolViewerComponent = "View streaming video"
 StreamingVideoToolIntroductionPublisherComponent = "Browse an introduction"

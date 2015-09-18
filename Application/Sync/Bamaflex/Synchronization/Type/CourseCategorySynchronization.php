@@ -66,8 +66,8 @@ class CourseCategorySynchronization extends Synchronization
      */
     public static function factory($type, CourseCategorySynchronization $synchronization, $parameters = array())
     {
-        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
-             'CourseCategorySynchronization';
+        $class = __NAMESPACE__ . '\CourseCategory\\' .
+             StringUtilities :: getInstance()->createString($type)->upperCamelize() . 'CourseCategorySynchronization';
         if (class_exists($class))
         {
             return new $class($synchronization, $parameters);

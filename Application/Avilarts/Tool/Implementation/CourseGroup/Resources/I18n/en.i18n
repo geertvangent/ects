@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Course group"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 Subscribe = "Subscribe"
 UnsubscribeUsers = "Unsubscribe users"
 NumberOfMembers = "Number of members"

@@ -20,24 +20,24 @@ class PlatformgroupMenuRenderer extends GenericTree
     const PATH_TO_XML_FEED = 'group/php/xml_feeds/xml_group_menu_feed.php';
     const ROOT_NODE_CLASS = 'home';
     const NODE_CLASS = 'category';
-    
+
     // **************************************************************************
     // VARIABLES
     // **************************************************************************
     /**
      * The browser holding additional data.
-     * 
+     *
      * @var PersonalMessengerManager
      */
     private $browser;
-    
+
     // **************************************************************************
     // CONSTRUCTOR
     // **************************************************************************
     /**
      * Constructor.
      * Creates a new group navigation menu for subscribed groups.
-     * 
+     *
      * @param $browser PersonalMessengerManager The browser
      */
     public function __construct($browser, $root_ids, $fake_root = false)
@@ -45,13 +45,13 @@ class PlatformgroupMenuRenderer extends GenericTree
         $this->browser = $browser;
         parent :: __construct($fake_root, $root_ids);
     }
-    
+
     // **************************************************************************
     // INHERITED FUNCTIONS
     // **************************************************************************
     /**
      * Returns the url of a node
-     * 
+     *
      * @param $node_id int
      * @return string
      */
@@ -64,7 +64,7 @@ class PlatformgroupMenuRenderer extends GenericTree
 
     /**
      * Returns the current node id.
-     * 
+     *
      * @return int
      */
     public function get_current_node_id()
@@ -74,7 +74,7 @@ class PlatformgroupMenuRenderer extends GenericTree
 
     /**
      * Returns the node based on the given node_id.
-     * 
+     *
      * @param $node_id int The id of the node
      * @return Node
      */
@@ -85,38 +85,38 @@ class PlatformgroupMenuRenderer extends GenericTree
 
     /**
      * Returns the nodes below the given parent(_id).
-     * 
+     *
      * @param $parent_node_id int The parent id
      * @return GroupResultSet
      */
     public function get_node_children($parent_node_id)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($parent_node_id));
-        
+
         // fetch groups
         return \Chamilo\Core\Group\Storage\DataManager :: retrieves(Group :: class_name(), $condition);
     }
 
     /**
      * Returns if the node has children.
-     * 
+     *
      * @param $node_id int The node id
      * @return boolean
      */
     public function node_has_children($node_id)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($node_id));
-        
+
         return (\Chamilo\Core\Group\Storage\DataManager :: count(Group :: class_name(), $condition) > 0);
     }
 
     /**
      * Returns the url to the xml feed.
-     * 
+     *
      * @return string
      */
     public function get_search_url()
@@ -159,6 +159,11 @@ class PlatformgroupMenuRenderer extends GenericTree
     public function get_node_title($node)
     {
         return $node->get_name();
+    }
+
+    public function get_node_safe_title($node)
+    {
+        return $this->get_node_title($node);
     }
 
     public function get_node_id($node)

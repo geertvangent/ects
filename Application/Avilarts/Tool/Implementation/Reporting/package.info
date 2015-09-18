@@ -4,7 +4,7 @@
 		<name>Reporting</name>
 		<code>Reporting</code>
 		<context>Ehb\Application\Avilarts\Tool\Implementation\Reporting</context>
-		<type>Ehb\Application\Avilarts\Tool</type>
+		<type>Chamilo\Application\Avilarts\Tool</type>
 		<category>education</category>
 		<authors />
 		<version>5.0.0</version>

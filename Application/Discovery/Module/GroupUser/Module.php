@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Module\GroupUser;
 
-use Ehb\Application\Discovery\Instance\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 use Ehb\Application\Discovery\Module\GroupUser\DataManager;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Filesystem;

@@ -243,7 +243,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $properties[Translation :: get('TrainingName')] = $previous_university->get_training_name();
             }
 
-            if (! StringUtilities :: is_null_or_empty($previous_university->get_info(), true))
+            if (! StringUtilities :: getInstance()->isNullOrEmpty($previous_university->get_info(), true))
             {
                 $properties[Translation :: get('Info')] = $previous_university->get_info();
             }
@@ -264,6 +264,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         return implode(PHP_EOL, $html);
     }
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */

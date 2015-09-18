@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Discovery\Instance\Form;
 
-use Ehb\Application\Discovery\Instance\DataClass\Instance;
-use Ehb\Application\Discovery\Instance\DataClass\InstanceSetting;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\InstanceSetting;
 use Ehb\Application\Discovery\Instance\Storage\DataManager;
 use Ehb\Application\Discovery\Instance\Manager;
 use Chamilo\Libraries\File\Filesystem;
@@ -367,7 +367,8 @@ class InstanceForm extends FormValidator
     }
 
     /**
-     * Sets default values. Traditionally, you will want to extend this method so it sets default for your learning
+     * Sets default values.
+     * Traditionally, you will want to extend this method so it sets default for your learning
      * object type's additional properties.
      *
      * @param $defaults array Default values for this form's parameters.

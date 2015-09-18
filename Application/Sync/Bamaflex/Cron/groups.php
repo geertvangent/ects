@@ -4,11 +4,16 @@ namespace Ehb\Application\Sync\Bamaflex\Cron;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\DummyGroupSynchronization;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 
 /**
  * This script will load the requested application and launch it.
  */
-require_once dirname(__FILE__) . '/../../../../../common/common.inc.php';
+require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
+     DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
+     'Chamilo/Libraries/Architecture/Bootstrap.php';
+
+$bootstrap = \Chamilo\Libraries\Architecture\Bootstrap :: setup();
 
 try
 {
@@ -17,17 +22,25 @@ try
     echo '<pre>';
     Synchronization :: log('Group sync started', date('c', time()));
     flush();
-    
+
+    $years = PlatformSetting :: get('academic_year', 'Ehb\Application\Sync');
+    $years = explode(',', $years);
+
     $root_group = \Chamilo\Core\Group\Storage\DataManager :: get_root_group();
-    
-    $synchronization = GroupSynchronization :: factory('academic_year', new DummyGroupSynchronization($root_group));
-    $synchronization->run();
-    
+
+    foreach ($years as $year)
+    {
+        $synchronization = GroupSynchronization :: factory(
+            'academic_year',
+            new DummyGroupSynchronization($root_group, $year));
+        $synchronization->run();
+    }
+
     $synchronization = GroupSynchronization :: factory(
-        'central_administration', 
+        'central_administration',
         new DummyGroupSynchronization($root_group));
     $synchronization->run();
-    
+
     Synchronization :: log('Group sync ended', date('c', time()));
     echo '</pre>';
 }

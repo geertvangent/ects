@@ -54,15 +54,15 @@ class DiscoverySynchronization
         {
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
-                    \Ehb\Application\Discovery\Instance\DataClass\Instance :: PROPERTY_TYPE),
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_TYPE),
                 new StaticConditionVariable($right->get_code()));
 
             $module_instance = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieve(
-                \Ehb\Application\Discovery\Instance\DataClass\Instance :: class_name(),
+                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
                 new DataClassRetrieveParameters($condition));
 
-            if ($module_instance instanceof \Ehb\Application\Discovery\Instance\DataClass\Instance)
+            if ($module_instance instanceof \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance)
             {
                 $condition = new EqualityCondition(
                     new PropertyConditionVariable(

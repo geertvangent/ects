@@ -4,7 +4,6 @@ namespace Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
 use Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
 use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\ImageManipulation\ImageManipulation;
 use Chamilo\Libraries\File\Path;
@@ -20,13 +19,21 @@ use Doctrine\DBAL\Driver\PDOStatement;
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {
 
+    /**
+     *
+     * @param integer $id
+     * @param string $web
+     * @return string
+     */
     public function retrieve_photo($id, $web = true)
     {
-        $relative_path = 'photo/' . Text :: char_at($id, 0) . '/' . $id . '.jpg';
-        $path = Path :: getInstance()->getStoragePath() .
-             ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . '/' . $relative_path;
+        $basePath = Path :: getInstance()->getCachePath(__NAMESPACE__ . '\Photo');
+        $identifierPath = Text :: char_at($id, 0);
+        $fileName = $id . '.jpg';
 
-        if (! file_exists($path))
+        $storagePath = $basePath . $identifierPath . DIRECTORY_SEPARATOR . $fileName;
+
+        if (! file_exists($storagePath))
         {
             $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
 
@@ -41,24 +48,41 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
 
                 if (! empty($object->photo))
                 {
-                    Filesystem :: write_to_file($path, $object->photo);
+                    Filesystem :: write_to_file($storagePath, hex2bin($object->photo));
 
-                    $image_manipulation = ImageManipulation :: factory($path);
+                    $image_manipulation = ImageManipulation :: factory($storagePath);
                     $image_manipulation->scale(600, 600, ImageManipulation :: SCALE_INSIDE);
-                    $image_manipulation->write_to_file($path);
+                    $image_manipulation->write_to_file($storagePath);
                 }
                 else
                 {
-                    Filesystem :: copy_file(Theme :: getInstance()->getCommonImagePath('Unknown', 'png', false), $path);
+                    $this->saveUnknownImage($storagePath);
                 }
             }
             else
             {
-                Filesystem :: copy_file(Theme :: getInstance()->getCommonImagePath('Unknown', 'png', false), $path);
+                $this->saveUnknownImage($storagePath);
             }
         }
 
-        return Path :: getInstance()->getStoragePath(__NAMESPACE__, $web) . $relative_path;
+        return $storagePath;
+    }
+
+    /**
+     *
+     * @param string $path
+     */
+    private function saveUnknownImage($path)
+    {
+        $randomPath = Theme :: getInstance()->getImagePath(
+            'Chamilo\Core\User',
+            'Unknown' . DIRECTORY_SEPARATOR . rand(0, 75),
+            'png',
+            false);
+
+        $image = imagecreatefrompng($randomPath);
+        imagejpeg($image, $path, 100);
+        imagedestroy($image);
     }
 
     public function retrieve_faculty($faculty_id)

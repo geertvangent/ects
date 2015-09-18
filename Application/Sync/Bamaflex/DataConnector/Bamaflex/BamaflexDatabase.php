@@ -9,10 +9,8 @@ class BamaflexDatabase extends Database
     /**
      * Initialiser, creates the connection and sets the database to UTF8
      */
-    public function initialize()
+    public function __construct()
     {
-        $this->set_connection(BamaflexConnection :: get_instance()->get_connection());
-        $this->get_connection()->query('SET TEXTSIZE 2000000');
-        $this->set_prefix('');
+        parent :: __construct(BamaflexConnection :: get_instance()->get_connection());
     }
 }

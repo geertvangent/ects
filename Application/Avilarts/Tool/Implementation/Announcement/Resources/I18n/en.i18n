@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Announcement"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 InstallTypeName = "Announcement Tool"
 AnnouncementToolBrowserComponent = "Browse announcements"
 AnnouncementToolViewerComponent = "View announcement"

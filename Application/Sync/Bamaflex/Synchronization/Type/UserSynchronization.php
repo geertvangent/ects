@@ -18,6 +18,7 @@ class UserSynchronization extends Synchronization
     const RESULT_PROPERTY_LAST_NAME = 'last_name';
     const RESULT_PROPERTY_STATUS = 'status';
     const RESULT_PROPERTY_QUOTA = 'quota';
+    const RESULT_PROPERTY_LANGUAGE = 'language';
 
     public function run()
     {
@@ -39,7 +40,7 @@ class UserSynchronization extends Synchronization
 
     public static function factory($type)
     {
-        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+        $class = __NAMESPACE__ . '\User\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
              'UserSynchronization';
         if (class_exists($class))
         {

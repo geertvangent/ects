@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TypeName = "Note"
-TypeCategory = "Course Tools"
+TypeCategory = "Project tools"
 NoteToolBrowserComponent = "Browse notes"
 DeleteSelected = "Delete selected note"
 NoteToolViewerComponent = "View note"
