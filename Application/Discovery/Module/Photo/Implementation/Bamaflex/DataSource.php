@@ -48,7 +48,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
 
                 if (! empty($object->photo))
                 {
-                    Filesystem :: write_to_file($storagePath, hex2bin($object->photo));
+                    Filesystem :: write_to_file($storagePath, $object->photo);
 
                     $image_manipulation = ImageManipulation :: factory($storagePath);
                     $image_manipulation->scale(600, 600, ImageManipulation :: SCALE_INSIDE);
