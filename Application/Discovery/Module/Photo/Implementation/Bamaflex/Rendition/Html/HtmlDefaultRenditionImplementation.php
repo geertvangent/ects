@@ -23,13 +23,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         $application_is_allowed = $this->get_application() instanceof AccessAllowedInterface;
 
-        if (! $application_is_allowed && ! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT,
-            $this->get_module_instance()->get_id(),
-            $this->get_module_parameters()))
-        {
-            throw new NotAllowedException(false);
-        }
+//         if (! $application_is_allowed && ! Rights :: is_allowed(
+//             Rights :: VIEW_RIGHT,
+//             $this->get_module_instance()->get_id(),
+//             $this->get_module_parameters()))
+//         {
+//             throw new NotAllowedException(false);
+//         }
         \Ehb\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action(
             $this,
             \Ehb\Application\Discovery\Rendition\Format\HtmlRendition :: VIEW_ZIP);

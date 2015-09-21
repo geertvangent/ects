@@ -93,7 +93,8 @@ class TicketForm extends FormValidator
         $this->addElement('static', null, null, Translation :: get('FacultyTrainingAutomatic'));
 
         // Academic year
-        $code = 'AY_' . PlatformSetting :: get('academic_year', 'Application\Ehb\Sync\Bamaflex');
+        $years = explode(',', PlatformSetting :: get('academic_year', 'Ehb\Application\Sync'));
+        $code = 'AY_' . array_pop($years);
         $academic_year = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($code);
 
         // Faculty

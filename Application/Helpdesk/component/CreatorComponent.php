@@ -1,12 +1,11 @@
 <?php
 namespace Ehb\Application\Helpdesk\Component;
 
-use Chamilo\Libraries\File\Properties\FileProperties;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Helpdesk\Form\TicketForm;
 use Ehb\Application\Helpdesk\Manager;
-use Ehb\Application\Helpdesk\Rest\RestClient;
+use GuzzleHttp\Post\PostFile;
 
 // require_once Path :: getInstance()->getPluginPath() . 'pear/HTTP/Request2.php';
 class CreatorComponent extends Manager
@@ -21,15 +20,15 @@ class CreatorComponent extends Manager
 
         if ($form->validate())
         {
-            $url = PlatformSetting :: get('url', __NAMESPACE__);
-            $username = PlatformSetting :: get('username', __NAMESPACE__);
-            $password = PlatformSetting :: get('password', __NAMESPACE__);
-            $queue = PlatformSetting :: get('queue', __NAMESPACE__);
+            $url = PlatformSetting :: get('url', self :: package());
+            $username = PlatformSetting :: get('username', self :: package());
+            $password = PlatformSetting :: get('password', self :: package());
+            $queue = PlatformSetting :: get('queue', self :: package());
 
             $values = $form->exportValues();
 
-            $request_tracker = new RestClient($url . '/REST/1.0/');
-            $request_tracker->set_connexion_mode(RestClient :: MODE_CURL);
+            $request_tracker = new \GuzzleHttp\Client(['base_url' => $url . '/REST/1.0/']);
+            $request_tracker->setDefaultOption('verify', false);
 
             $ticket_values = array();
 
@@ -47,18 +46,24 @@ class CreatorComponent extends Manager
             $content = array();
             $content['user'] = $username;
             $content['pass'] = $password;
-            $content['content'] = $request_tracker->array_to_url($ticket_values);
+            $content['content'] = $ticket_values;
             $content['Attachment'] = file_get_contents($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name']);
             $content['attachment-1'] = file_get_contents($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name']);
 
-            // $response = $request_tracker->createTicket($content);
-            $response = $request_tracker->request(RestClient :: METHOD_POST, 'ticket/new', array('content' => $content));
+            $request = $request_tracker->createRequest('POST', 'ticket/new');
 
-            if ($response->get_response_http_code() == 200)
+            $postBody = $request->getBody();
+            $postBody->setField('user', $username);
+            $postBody->setField('pass', $password);
+            $postBody->setField('content', $this->array_to_url($ticket_values));
+
+            $response = $request_tracker->send($request);
+
+            if ($response->getStatusCode() == 200)
             {
                 if ($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['error'] == UPLOAD_ERR_OK)
                 {
-                    preg_match_all('/# Ticket (.*) created\./', $response->get_response_content(), $matches);
+                    preg_match_all('/# Ticket (.*) created\./', $response->getBody()->getContents(), $matches);
                     $ticket_id = $matches[1][0];
 
                     $ticket_values = array();
@@ -68,24 +73,19 @@ class CreatorComponent extends Manager
                     $ticket_values['Text'] = 'Attachment bij ticket verzonden via het helpdeskformulier';
                     $ticket_values['Attachment'] = $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['name'];
 
-                    $endpoint = '/REST/1.0/ticket/' . $ticket_id . '/comment';
+                    $endpoint = 'ticket/' . $ticket_id . '/comment';
 
-                    $file_properties = FileProperties :: from_path(
-                        $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name']);
+                    $request = $request_tracker->createRequest('POST', $endpoint);
+                    $postBody = $request->getBody();
+                    $postBody->setField('user', $username);
+                    $postBody->setField('pass', $password);
+                    $postBody->setField('content', $this->array_to_url($ticket_values));
+                    $postBody->addFile(
+                        new PostFile('attachment_1', fopen($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name'], 'r')));
 
-                    $request = new \HTTP_Request2($url . $endpoint);
-                    $request->setMethod(\HTTP_Request2 :: METHOD_POST);
-                    $request->addPostParameter('user', $username);
-                    $request->addPostParameter('pass', $password);
-                    $request->addPostParameter('content', $request_tracker->array_to_url($ticket_values));
-                    $request->addUpload(
-                        'attachment_1',
-                        $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name'],
-                        $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name'],
-                        $file_properties->get_type());
-                    $response = $request->send();
+                    $response = $request_tracker->send($request);
 
-                    if ($response->getStatus() == '200')
+                    if ($response->getStatusCode() == '200')
                     {
                         $this->redirect(Translation :: get('TicketSubmitted'), false, $this->get_parameters());
                     }
@@ -155,5 +155,31 @@ document.forms["ticket"].elements["Object-RT::Ticket--CustomField-7-Values"].val
 
 -->
 </script>';
+    }
+
+    public function array_to_url($data)
+    {
+        if (is_array($data))
+        {
+            $tmp = array();
+
+            foreach ($data as $key => $value)
+            {
+                if (is_array($value))
+                {
+                    $subtmp = array();
+
+                    foreach ($value as $subkey => $subvalue)
+                    {
+                        $tmp[] = $key . '[]' . ': ' . str_replace("\n", "\n  ", str_replace("\r", '', $subvalue));
+                    }
+                }
+                else
+                {
+                    $tmp[] = $key . ': ' . str_replace("\n", "\n  ", str_replace("\r", '', $value));
+                }
+            }
+            return implode(chr(10), $tmp);
+        }
     }
 }
