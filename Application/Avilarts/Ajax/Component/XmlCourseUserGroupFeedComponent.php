@@ -29,7 +29,7 @@ class XmlCourseUserGroupFeedComponent extends \Ehb\Application\Avilarts\Ajax\Man
 
         if ($course)
         {
-            $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve(
+            $course = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieve_by_id(
                 Course :: class_name(),
                 $course);
 

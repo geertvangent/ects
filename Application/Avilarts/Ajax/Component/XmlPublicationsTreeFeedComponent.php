@@ -90,7 +90,7 @@ class XmlPublicationsTreeFeedComponent extends \Ehb\Application\Avilarts\Ajax\Ma
 
         if (! $course)
         {
-            $course = CourseDataManager :: retrieve(Course :: class_name(), $category->get_course());
+            $course = CourseDataManager :: retrieve_by_id(Course :: class_name(), $category->get_course());
         }
 
         if (! $user)

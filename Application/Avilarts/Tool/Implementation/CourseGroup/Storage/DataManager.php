@@ -16,6 +16,7 @@ use Chamilo\Libraries\Storage\Query\Join;
 use Chamilo\Libraries\Storage\Query\Joins;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 
 /**
  * This class represents the data manager for this package
@@ -46,7 +47,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
             new PropertyConditionVariable(CourseGroup :: class_name(), CourseGroup :: PROPERTY_NAME),
             new StaticConditionVariable($name));
 
-        return self :: retrieve(CourseGroup :: class_name(), $condition);
+        return self :: retrieve(CourseGroup :: class_name(), new DataClassRetrieveParameters($condition));
     }
 
     /**
@@ -70,7 +71,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         $condition = new AndCondition($conditions);
 
-        return self :: retrieve(CourseGroup :: class_name(), $condition);
+        return self :: retrieve(CourseGroup :: class_name(), new DataClassRetrieveParameters($condition));
     }
 
     /**

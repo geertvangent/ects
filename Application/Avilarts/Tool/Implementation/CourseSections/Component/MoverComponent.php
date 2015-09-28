@@ -29,7 +29,7 @@ class MoverComponent extends Manager
 
         if (! empty($id))
         {
-            $course_section = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve(
+            $course_section = \Ehb\Application\Avilarts\Storage\DataManager :: retrieve_by_id(
                 CourseSection :: class_name(),
                 $id);
             $course_section->set_display_order($course_section->get_display_order() + $direction);

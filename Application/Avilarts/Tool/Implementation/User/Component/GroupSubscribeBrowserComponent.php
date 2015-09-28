@@ -120,9 +120,9 @@ class GroupSubscribeBrowserComponent extends Manager implements TableSupport
         {
             $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve(
                 Group :: class_name(),
-                new EqualityCondition(
+                new DataClassRetrieveParameters(new EqualityCondition(
                     new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
-                    new StaticConditionVariable(0)));
+                    new StaticConditionVariable(0))));
             $this->root_group = $group;
         }
 
