@@ -81,7 +81,10 @@ class CreatorComponent extends Manager
                     $postBody->setField('pass', $password);
                     $postBody->setField('content', $this->array_to_url($ticket_values));
                     $postBody->addFile(
-                        new PostFile('attachment_1', fopen($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name'], 'r')));
+                        new PostFile(
+                            'attachment_1',
+                            file_get_contents($_FILES[TicketForm :: PROPERTY_ATTACHMENT]['tmp_name']),
+                            $_FILES[TicketForm :: PROPERTY_ATTACHMENT]['name']));
 
                     $response = $request_tracker->send($request);
 
