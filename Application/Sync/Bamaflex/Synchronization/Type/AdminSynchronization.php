@@ -24,81 +24,65 @@ class AdminSynchronization extends Synchronization
 
     public function run()
     {
-        $academic_years = explode(',', $this->get_academic_year());
+        // Get the list of people who are defined as an administrator in BaMaFlex for the given academic year
+        $query = 'SELECT DISTINCT person_id FROM [INFORDATSYNC].[dbo].[v_desiderius_sub_manager] WHERE person_id IS NOT NULL AND year >= \'2012-13\'';
+        $results = $this->get_result($query);
 
-        foreach ($academic_years as $academic_year)
+        $person_ids = array();
+
+        while ($record = $results->next_result())
         {
-            // Get the list of people who are defined as an administrator in BaMaFlex for the given academic year
-            $query = 'SELECT DISTINCT person_id FROM [INFORDATSYNC].[dbo].[v_desiderius_sub_manager] WHERE person_id IS NOT NULL AND year >= \'2012-13\'';
-            $results = $this->get_result($query);
+            $person_ids[] = $record[self :: PROPERTY_PERSON_ID];
+        }
 
-            $person_ids = array();
+        // Get the Desiderius user id's for these person ids
+        $condition = new InCondition(
+            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE),
+            $person_ids);
+        $bamaflex_user_ids = \Chamilo\Core\User\Storage\DataManager :: distinct(
+            User :: class_name(),
+            new DataClassDistinctParameters($condition, User :: PROPERTY_ID));
 
-            while ($record = $results->next_result())
-            {
-                $person_ids[] = $record[self :: PROPERTY_PERSON_ID];
-            }
+        // Get the people currently linked to those courses
+        $conditions = array();
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ORIGIN),
+            new StaticConditionVariable(Admin :: ORIGIN_EXTERNAL));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_TYPE),
+            new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\UserEntity :: ENTITY_TYPE));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_TARGET_TYPE),
+            new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\CourseEntity :: ENTITY_TYPE));
+        $condition = new AndCondition($conditions);
 
-            // Get the Desiderius user id's for these person ids
-            $condition = new InCondition(
-                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE),
-                $person_ids);
-            $bamaflex_user_ids = \Chamilo\Core\User\Storage\DataManager :: distinct(
-                User :: class_name(),
-                new DataClassDistinctParameters($condition, User :: PROPERTY_ID));
+        $platform_user_ids = \Chamilo\Application\Weblcms\Admin\Storage\DataManager :: distinct(
+            Admin :: class_name(),
+            new DataClassDistinctParameters($condition, Admin :: PROPERTY_ENTITY_ID));
 
-            // Get the courses linked to the given academic year (based on the course type)
-            $condition = new EqualityCondition(
-                new PropertyConditionVariable(Course :: class_name(), Course :: PROPERTY_COURSE_TYPE_ID),
-                new StaticConditionVariable($this->course_types[$academic_year]));
-            $year_course_ids = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: distinct(
-                Course :: class_name(),
-                new DataClassDistinctParameters($condition, Course :: PROPERTY_ID));
+        $new_users = array_diff($bamaflex_user_ids, $platform_user_ids);
 
-            // Get the people currently linked to those courses
-            $conditions = array();
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ORIGIN),
-                new StaticConditionVariable(Admin :: ORIGIN_EXTERNAL));
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_TYPE),
-                new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\UserEntity :: ENTITY_TYPE));
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_TARGET_TYPE),
-                new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\CourseEntity :: ENTITY_TYPE));
-            $conditions[] = new InCondition(
-                new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_TARGET_ID),
-                $year_course_ids);
-            $condition = new AndCondition($conditions);
+        if (count($new_users) > 0)
+        {
+            $this->process_new_users($new_users);
+        }
 
-            $platform_user_ids = \Chamilo\Application\Weblcms\Admin\Storage\DataManager :: distinct(
-                Admin :: class_name(),
-                new DataClassDistinctParameters($condition, Admin :: PROPERTY_ENTITY_ID));
+        $old_users = array_diff($platform_user_ids, $bamaflex_user_ids);
 
-            $new_users = array_diff($bamaflex_user_ids, $platform_user_ids);
+        if (count($old_users) > 0)
+        {
+            $this->process_old_users($old_users);
+        }
 
-            if (count($new_users) > 0)
-            {
-                $this->process_new_users($academic_year, $new_users);
-            }
+        $existing_users = array_intersect($platform_user_ids, $bamaflex_user_ids);
 
-            $old_users = array_diff($platform_user_ids, $bamaflex_user_ids);
-
-            if (count($old_users) > 0)
-            {
-                $this->process_old_users($academic_year, $old_users);
-            }
-
-            $existing_users = array_intersect($platform_user_ids, $bamaflex_user_ids);
-
-            if (count($existing_users) > 0)
-            {
-                $this->process_existing_users($academic_year, $existing_users);
-            }
+        if (count($existing_users) > 0)
+        {
+            $this->process_existing_users($existing_users);
         }
     }
 
-    private function process_new_users($academic_year, $new_user_ids)
+    private function process_new_users($new_user_ids)
     {
         foreach ($new_user_ids as $new_user_id)
         {
@@ -148,7 +132,7 @@ class AdminSynchronization extends Synchronization
         }
     }
 
-    private function process_old_users($academic_year, $old_user_ids)
+    private function process_old_users($old_user_ids)
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
@@ -177,7 +161,7 @@ class AdminSynchronization extends Synchronization
         }
     }
 
-    private function process_existing_users($academic_year, $existing_user_ids)
+    private function process_existing_users($existing_user_ids)
     {
         foreach ($existing_user_ids as $existing_user_id)
         {
