@@ -3,6 +3,8 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Li
 
 use Chamilo\Libraries\Calendar\Event\RecurrenceRules\RecurrenceRules;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\File\Redirect;
+use Chamilo\Libraries\Architecture\Application\Application;
 
 /**
  *
@@ -192,20 +194,22 @@ class EventParser
      */
     private function getEvent($calendarEvent, $startDate, $endDate)
     {
-        $url = null;
+        $parameters = array();
+        $parameters[Application :: PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context();
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: ACTION_VIEW;
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_ID] = $calendarEvent['id'];
+
+        $redirect = new Redirect($parameters);
 
         $event = new Event(
             $calendarEvent['id'],
             $startDate,
             $endDate,
             new RecurrenceRules(),
-            $url,
+            $redirect->getUrl(),
             $this->getEventLabel($calendarEvent),
             $this->getEventLabel($calendarEvent),
-            Translation :: get(
-                'TypeName',
-                null,
-                \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context()),
+            Translation :: get('TypeName', null, \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context()),
             \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context());
 
         $event->setCalendarEvent($calendarEvent);

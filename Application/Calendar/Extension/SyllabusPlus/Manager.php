@@ -12,10 +12,11 @@ abstract class Manager extends Application
 {
     // Parameters
     const PARAM_ACTION = 'syllabus_action';
+    const PARAM_ACTIVITY_ID = 'activity_id';
 
     // Actions
-    const ACTION_BROWSE = 'Browser';
+    const ACTION_VIEW = 'Viewer';
 
     // Default action
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self :: ACTION_VIEW;
 }

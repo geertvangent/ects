@@ -61,6 +61,17 @@ class CalendarService
 
     /**
      *
+     * @param User $user
+     * @param string $identifier
+     * @return string[]
+     */
+    public function getEventForUserByIdentifier(User $user, $identifier)
+    {
+        return $this->getCalendarRepository()->findEventForUserByIdentifier($user, $identifier);
+    }
+
+    /**
+     *
      * @return string[]
      */
     public function getWeekLabels()
@@ -77,6 +88,7 @@ class CalendarService
     }
 
     /**
+     *
      * @param \Chamilo\Configuration\Configuration $configuration
      * @return boolean
      */

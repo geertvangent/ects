@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package context="Chamilo\Application\Calendar\Extension\SyllabusPlus">
+<package context="Ehb\Application\Calendar\Extension\SyllabusPlus">
 	<settings>
 		<category name="general">
 			<setting name="dbms" field="text" default="mssql" />
@@ -7,6 +7,9 @@
 			<setting name="database" field="text" default="syllabus_plus" />
 			<setting name="user" field="text" default="" />
 			<setting name="password" field="text" default="" />
+		</category>
+		<category name="caching">
+			<setting name="refresh_external" field="text" default="60" user_setting="1" />
 		</category>
 	</settings>
 </package>

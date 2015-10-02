@@ -5,3 +5,11 @@
 
 TypeName = "Timetable"
 SourceName = "Timetable - {CALENDAR}"
+ActivityType = "Course type"
+ActivityTeacher = "Teacher"
+ActivityLocation = "Location"
+ActivityDate = "Time"
+OnDate = "On"
+FromTime = "from"
+ToTime = "until"
+ActivityDateValue = "{DAY} from {FROM} until {UNTIL}"

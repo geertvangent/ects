@@ -5,3 +5,11 @@
 
 TypeName = "Lessenrooster"
 SourceName = "Lessenrooster - {CALENDAR}"
+ActivityType = "Lestype"
+ActivityTeacher = "Docent"
+ActivityLocation = "Lokaal"
+ActivityDate = "Tijdstip"
+OnDate = "Op"
+FromTime = "van"
+ToTime = "tot"
+ActivityDateValue = "{DAY} van {FROM} tot {UNTIL}"
