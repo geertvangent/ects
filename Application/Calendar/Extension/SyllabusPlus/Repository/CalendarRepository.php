@@ -44,7 +44,7 @@ class CalendarRepository
      * @param \Chamilo\Core\User\Storage\DataClass\User $user
      * @param integer $fromDate
      * @param integer $toDate
-     * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
      */
     public function findEventsForUserAndBetweenDates(User $user, $fromDate, $toDate)
     {
@@ -60,6 +60,40 @@ class CalendarRepository
             {
                 $query = 'SELECT * FROM [dbo].[v_syllabus_courses] WHERE person_id = N\'' . $user->get_official_code() .
                      '\'';
+                $statement = DataManager :: get_instance()->get_connection()->query($query);
+                $resultSet = new ResultSet($statement);
+            }
+            else
+            {
+                $resultSet = new ArrayResultSet(array());
+            }
+
+            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
+     * @param \Chamilo\Core\User\Storage\DataClass\User $user
+     * @param string $moduleIdentifier
+     * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
+     */
+    public function findEventsForUserByModuleIdentifier(User $user, $moduleIdentifier)
+    {
+        $cache = new FilesystemCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $moduleIdentifier)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
+                array(\Chamilo\Application\Calendar\Manager :: package(), 'refresh_external'));
+
+            if ($user->get_official_code())
+            {
+                $query = 'SELECT * FROM [dbo].[v_syllabus_courses] WHERE person_id = N\'' . $user->get_official_code() .
+                     '\' AND module_id= N\'' . $moduleIdentifier . '\'';
                 $statement = DataManager :: get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
             }

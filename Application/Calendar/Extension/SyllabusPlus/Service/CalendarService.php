@@ -52,7 +52,7 @@ class CalendarService
      * @param \Chamilo\Core\User\Storage\DataClass\User $user
      * @param integer $fromDate
      * @param integer $toDate
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\EventResultSet
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
      */
     public function getEventsForUserAndBetweenDates(User $user, $fromDate, $toDate)
     {
@@ -68,6 +68,17 @@ class CalendarService
     public function getEventForUserByIdentifier(User $user, $identifier)
     {
         return $this->getCalendarRepository()->findEventForUserByIdentifier($user, $identifier);
+    }
+
+    /**
+     *
+     * @param User $user
+     * @param string $moduleIdentifier
+     * @return string[]
+     */
+    public function getEventsForUserByModuleIdentifier(User $user, $moduleIdentifier)
+    {
+        return $this->getCalendarRepository()->findEventsForUserByModuleIdentifier($user, $moduleIdentifier);
     }
 
     /**

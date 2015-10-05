@@ -39,11 +39,12 @@ class ViewerComponent extends Manager implements DelegateComponent
             \Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer :: PARAM_TYPE) : \Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer :: TYPE_MONTH;
 
         $activityId = Request :: get(Manager :: PARAM_ACTIVITY_ID);
+        $activityTime = Request :: get(Manager :: PARAM_ACTIVITY_TIME);
 
         if ($activityId)
         {
             $activityRecord = $this->getCalendarService()->getEventForUserByIdentifier($this->getUser(), $activityId);
-            $activityHtml = $this->getActivityAsHtml($activityRecord);
+            $activityHtml = $this->getActivityAsHtml($activityRecord, $activityTime);
 
             $html = array();
 
@@ -76,44 +77,61 @@ class ViewerComponent extends Manager implements DelegateComponent
     /**
      *
      * @param string[] $activityRecord
+     * @param integer $activityTime
      * @return string
      */
-    public function getActivityAsHtml($activityRecord)
+    public function getActivityAsHtml($activityRecord, $activityTime)
     {
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $activityRecord['name']));
 
         $html = array();
 
-        return $this->renderInformation($activityRecord);
+        return $this->renderInformation($activityRecord, $activityTime);
+    }
+
+    public function getHighlightedEvent($activityEvents, $activityTime)
+    {
+        if (count($activityEvents) == 1)
+        {
+            $highlightedEvent = array_pop($activityEvents);
+        }
+        elseif ($activityTime)
+        {
+            $highlightedEvent = $activityEvents[$activityTime];
+        }
+        else
+        {
+            $highlightedEvent = $activityEvents[key($activityEvents)];
+        }
+
+        return $highlightedEvent;
     }
 
     /**
      *
      * @param string[] $activityRecord
+     * @param integer $activityTime
      * @return string
      */
-    public function renderInformation($activityRecord)
+    public function renderInformation($activityRecord, $activityTime = null)
     {
         $properties = array();
 
         $properties[Translation :: get('ActivityType')] = $activityRecord['type'];
-        $properties[Translation :: get('ActivityTeacher')] = $activityRecord['teacher'];
-        $properties[Translation :: get('ActivityLocation')] = $activityRecord['location'];
 
-        $events = $this->getEvents($activityRecord);
+        $activityEvents = $this->getEvents($activityRecord);
+        $highlightedEvent = $this->getHighlightedEvent($activityEvents, $activityTime);
 
-        if (count($events) == 1)
-        {
-            $singleEvent = array_pop($events);
+        $dateDay = DatetimeUtilities :: format_locale_date('%A %d %B %Y', $highlightedEvent->getStartDate());
+        $dateStart = DatetimeUtilities :: format_locale_date('%H:%M', $highlightedEvent->getStartDate());
+        $dateEnd = DatetimeUtilities :: format_locale_date('%H:%M', $highlightedEvent->getEndDate());
 
-            $dateDay = DatetimeUtilities :: format_locale_date('%A %d %B %Y', $singleEvent->getStartDate());
-            $dateStart = DatetimeUtilities :: format_locale_date('%H:%M', $singleEvent->getStartDate());
-            $dateEnd = DatetimeUtilities :: format_locale_date('%H:%M', $singleEvent->getEndDate());
+        $properties[Translation :: get('OnDate')] = Translation :: get(
+            'ActivityDateValue',
+            array('DAY' => $dateDay, 'FROM' => $dateStart, 'UNTIL' => $dateEnd));
 
-            $properties[Translation :: get('ActivityDate')] = Translation :: get(
-                'ActivityDateValue',
-                array('DAY' => $dateDay, 'FROM' => $dateStart, 'UNTIL' => $dateEnd));
-        }
+        $properties[Translation :: get('AtLocation')] = $activityRecord['location'];
+        $properties[Translation :: get('ByTeacher')] = $activityRecord['teacher'];
 
         $propertiesTable = new PropertiesTable($properties);
 
@@ -121,10 +139,11 @@ class ViewerComponent extends Manager implements DelegateComponent
 
         $html[] = $propertiesTable->toHtml();
 
-        if (count($events) > 1)
+        if (count($activityEvents) > 1)
         {
             $html[] = '<br />';
-            $html[] = $this->renderOccurrences($events);
+            $html[] = '<h4>' . Translation :: get('OtherCourseMoments') . '</h4>';
+            $html[] = $this->renderOccurrences($activityEvents);
         }
 
         return implode(PHP_EOL, $html);
@@ -139,13 +158,29 @@ class ViewerComponent extends Manager implements DelegateComponent
     {
         $weekLabels = $this->getCalendarService()->getWeekLabels();
 
-        $eventParser = new EventParser(
-            $weekLabels,
-            $activityRecord,
-            strtotime($weekLabels[0]),
-            strtotime($weekLabels[51]));
+        $moduleEvents = $this->getCalendarService()->getEventsForUserByModuleIdentifier(
+            $this->get_user(),
+            $activityRecord['module_id']);
 
-        return $eventParser->getEvents();
+        $sortedEvents = array();
+
+        while ($moduleEvent = $moduleEvents->next_result())
+        {
+            $eventParser = new EventParser(
+                $weekLabels,
+                $moduleEvent,
+                strtotime($weekLabels[0]),
+                strtotime($weekLabels[51]));
+
+            foreach ($eventParser->getEvents() as $event)
+            {
+                $sortedEvents[$event->getStartDate()] = $event;
+            }
+        }
+
+        ksort($sortedEvents);
+
+        return $sortedEvents;
     }
 
     /**
@@ -161,9 +196,35 @@ class ViewerComponent extends Manager implements DelegateComponent
         {
             $tableRow = array();
 
-            $tableRow[] = DatetimeUtilities :: format_locale_date('%A %d %B %Y', $event->getStartDate());
-            $tableRow[] = DatetimeUtilities :: format_locale_date('%H:%M', $event->getStartDate());
-            $tableRow[] = DatetimeUtilities :: format_locale_date('%H:%M', $event->getEndDate());
+            $startDate = DatetimeUtilities :: format_locale_date('%A %d %B %Y', $event->getStartDate());
+
+            $startTime = DatetimeUtilities :: format_locale_date('%H:%M', $event->getStartDate());
+            $endTime = DatetimeUtilities :: format_locale_date('%H:%M', $event->getEndDate());
+
+            $isPastEvent = ($event->getEndDate() < time());
+            $isCurrentEvent = ($event->getStartDate() <= time() && $event->getEndDate() >= time());
+
+            if ($isPastEvent)
+            {
+                $class = ' class="event-expired"';
+            }
+            elseif ($isCurrentEvent)
+            {
+                $class = ' class="event-current"';
+            }
+            else
+            {
+                $class = '';
+            }
+
+            $tableRow[] = '<span' . $class . '>' . $startDate . '</span>';
+            $tableRow[] = '<span' . $class . '>' . $startTime . '</span>';
+            $tableRow[] = '<span' . $class . '>' . $endTime . '</span>';
+
+            $activityRecord = $event->getCalendarEvent();
+
+            $tableRow[] = $activityRecord['location'];
+            $tableRow[] = $activityRecord['teacher'];
 
             $tableData[] = $tableRow;
         }
@@ -173,6 +234,8 @@ class ViewerComponent extends Manager implements DelegateComponent
         $table->set_header(0, Translation :: get('OnDate'), false);
         $table->set_header(1, Translation :: get('FromTime'), false);
         $table->set_header(2, Translation :: get('ToTime'), false);
+        $table->set_header(3, Translation :: get('AtLocation'), false);
+        $table->set_header(4, Translation :: get('ByTeacher'), false);
 
         return $table->as_html();
     }
