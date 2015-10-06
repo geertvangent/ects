@@ -19,7 +19,7 @@ class Event extends \Chamilo\Libraries\Calendar\Event\Event
 
     /**
      *
-     * @return \stdClass
+     * @return string[]
      */
     public function getCalendarEvent()
     {

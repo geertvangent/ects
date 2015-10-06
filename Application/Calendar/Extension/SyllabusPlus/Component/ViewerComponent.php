@@ -156,8 +156,6 @@ class ViewerComponent extends Manager implements DelegateComponent
      */
     private function getEvents($activityRecord)
     {
-        $weekLabels = $this->getCalendarService()->getWeekLabels();
-
         $moduleEvents = $this->getCalendarService()->getEventsForUserByModuleIdentifier(
             $this->get_user(),
             $activityRecord['module_id']);
@@ -166,11 +164,7 @@ class ViewerComponent extends Manager implements DelegateComponent
 
         while ($moduleEvent = $moduleEvents->next_result())
         {
-            $eventParser = new EventParser(
-                $weekLabels,
-                $moduleEvent,
-                strtotime($weekLabels[0]),
-                strtotime($weekLabels[51]));
+            $eventParser = new EventParser($moduleEvent, 0, 0);
 
             foreach ($eventParser->getEvents() as $event)
             {
@@ -194,12 +188,6 @@ class ViewerComponent extends Manager implements DelegateComponent
 
         foreach ($events as $event)
         {
-            $tableRow = array();
-
-            $startDate = DatetimeUtilities :: format_locale_date('%A %d %B %Y', $event->getStartDate());
-
-            $startTime = DatetimeUtilities :: format_locale_date('%H:%M', $event->getStartDate());
-            $endTime = DatetimeUtilities :: format_locale_date('%H:%M', $event->getEndDate());
 
             $isPastEvent = ($event->getEndDate() < time());
             $isCurrentEvent = ($event->getStartDate() <= time() && $event->getEndDate() >= time());
@@ -217,25 +205,35 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $class = '';
             }
 
+            $activityRecord = $event->getCalendarEvent();
+
+            $tableRow = array();
+
+            $tableRow[] = '<span' . $class . '>' . $activityRecord['type'] . '</span>';
+
+            $startDate = DatetimeUtilities :: format_locale_date('%A %d %B %Y', $event->getStartDate());
+
+            $startTime = DatetimeUtilities :: format_locale_date('%H:%M', $event->getStartDate());
+            $endTime = DatetimeUtilities :: format_locale_date('%H:%M', $event->getEndDate());
+
             $tableRow[] = '<span' . $class . '>' . $startDate . '</span>';
             $tableRow[] = '<span' . $class . '>' . $startTime . '</span>';
             $tableRow[] = '<span' . $class . '>' . $endTime . '</span>';
 
-            $activityRecord = $event->getCalendarEvent();
-
-            $tableRow[] = $activityRecord['location'];
-            $tableRow[] = $activityRecord['teacher'];
+            $tableRow[] = '<span' . $class . '>' . $activityRecord['location'] . '</span>';
+            $tableRow[] = '<span' . $class . '>' . $activityRecord['teacher'] . '</span>';
 
             $tableData[] = $tableRow;
         }
 
         $table = new SortableTableFromArray($tableData, 1, 10, 'activity', SORT_DESC, false, false, false);
 
-        $table->set_header(0, Translation :: get('OnDate'), false);
-        $table->set_header(1, Translation :: get('FromTime'), false);
-        $table->set_header(2, Translation :: get('ToTime'), false);
-        $table->set_header(3, Translation :: get('AtLocation'), false);
-        $table->set_header(4, Translation :: get('ByTeacher'), false);
+        $table->set_header(0, Translation :: get('ActivityType'), false);
+        $table->set_header(1, Translation :: get('OnDate'), false);
+        $table->set_header(2, Translation :: get('FromTime'), false);
+        $table->set_header(3, Translation :: get('ToTime'), false);
+        $table->set_header(4, Translation :: get('AtLocation'), false);
+        $table->set_header(5, Translation :: get('ByTeacher'), false);
 
         return $table->as_html();
     }

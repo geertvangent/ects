@@ -45,8 +45,6 @@ class Manager extends InternalCalendar
                 $packageContext,
                 $packageName);
 
-            $weekLabels = $calendarService->getWeekLabels();
-
             if ($activeAvailability instanceof Availability && $activeAvailability->getAvailability() == 1)
             {
                 $eventResultSet = $calendarService->getEventsForUserAndBetweenDates(
@@ -56,7 +54,7 @@ class Manager extends InternalCalendar
 
                 while ($calenderEvent = $eventResultSet->next_result())
                 {
-                    $eventParser = new EventParser($weekLabels, $calenderEvent, $fromDate, $toDate);
+                    $eventParser = new EventParser($calenderEvent, $fromDate, $toDate);
                     $events = array_merge($events, $eventParser->getEvents());
                 }
             }

@@ -83,23 +83,6 @@ class CalendarService
 
     /**
      *
-     * @return string[]
-     */
-    public function getWeekLabels()
-    {
-        $weekLabels = $this->getCalendarRepository()->findWeekLabels();
-        $weeks = array();
-
-        while ($weekLabel = $weekLabels->next_result())
-        {
-            $weeks[$weekLabel['week_number']] = $weekLabel['week_startdate'];
-        }
-
-        return $weeks;
-    }
-
-    /**
-     *
      * @param \Chamilo\Configuration\Configuration $configuration
      * @return boolean
      */

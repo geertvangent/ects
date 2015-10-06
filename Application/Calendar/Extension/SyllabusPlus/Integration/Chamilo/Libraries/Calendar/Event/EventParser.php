@@ -18,12 +18,6 @@ class EventParser
 
     /**
      *
-     * @var string[]
-     */
-    private $weekLabels;
-
-    /**
-     *
      * @var \stdClass
      */
     private $calendarEvent;
@@ -47,30 +41,11 @@ class EventParser
      * @param integer $fromDate
      * @param integer $toDate
      */
-    public function __construct($weekLabels, $calendarEvent, $fromDate, $toDate)
+    public function __construct($calendarEvent, $fromDate, $toDate)
     {
-        $this->weekLabels = $weekLabels;
         $this->calendarEvent = $calendarEvent;
         $this->fromDate = $fromDate;
         $this->toDate = $toDate;
-    }
-
-    /**
-     *
-     * @return string[]
-     */
-    public function getWeekLabels()
-    {
-        return $this->weekLabels;
-    }
-
-    /**
-     *
-     * @param string[] $weekLabels
-     */
-    public function setWeekLabels($weekLabels)
-    {
-        $this->weekLabels = $weekLabels;
     }
 
     /**
@@ -156,56 +131,21 @@ class EventParser
 
         $events = array();
 
-        $pattern = str_split($calendarEvent['pattern']);
-        $weekLabels = $this->getWeekLabels();
-        $enabledWeeks = array();
+        $startTime = strtotime($calendarEvent['start_time']);
+        $endTime = strtotime($calendarEvent['end_time']);
 
-        foreach ($pattern as $weekNumber => $isEnabled)
-        {
-            if ($isEnabled)
-            {
-                $startTime = strtotime($calendarEvent['start_time']);
-                $baseDate = strtotime($weekLabels[$weekNumber]);
-                $baseDate += ($calendarEvent['day'] * 24 * 60 * 60);
-
-                $startDate = mktime(
-                    date('G', $startTime),
-                    date('i', $startTime),
-                    date('s', $startTime),
-                    date('n', $baseDate),
-                    date('j', $baseDate),
-                    date('Y', $baseDate));
-
-                $endDate = $startDate + ($calendarEvent['duration'] * 60);
-
-                $events[] = $this->getEvent($calendarEvent, $startDate, $endDate);
-            }
-        }
-
-        return $events;
-    }
-
-    /**
-     *
-     * @param string[] $calendarEvent
-     * @param integer $startDate
-     * @param integer $endDate
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\Event
-     */
-    private function getEvent($calendarEvent, $startDate, $endDate)
-    {
         $parameters = array();
         $parameters[Application :: PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context();
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: ACTION_VIEW;
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_ID] = $calendarEvent['id'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_TIME] = $startDate;
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_TIME] = $startTime;
 
         $redirect = new Redirect($parameters);
 
         $event = new Event(
             $calendarEvent['id'],
-            $startDate,
-            $endDate,
+            $startTime,
+            $endTime,
             new RecurrenceRules(),
             $redirect->getUrl(),
             $this->getEventLabel($calendarEvent),
@@ -215,7 +155,7 @@ class EventParser
 
         $event->setCalendarEvent($calendarEvent);
 
-        return $event;
+        return array($event);
     }
 
     private function getEventLabel($calendarEvent)
@@ -223,17 +163,17 @@ class EventParser
         $html = array();
 
         $html[] = $calendarEvent['name'];
-        $html[] = '[' . $calendarEvent['type_code'] . ']';
+//         $html[] = '[' . $calendarEvent['type_code'] . ']';
 
-        if ($calendarEvent['teacher'])
-        {
-            $html[] = '[' . $calendarEvent['teacher'] . ']';
-        }
+//         if ($calendarEvent['teacher'])
+//         {
+//             $html[] = '[' . $calendarEvent['teacher'] . ']';
+//         }
 
-        if ($calendarEvent['location'])
-        {
-            $html[] = '[' . $calendarEvent['location'] . ']';
-        }
+//         if ($calendarEvent['location'])
+//         {
+//             $html[] = '[' . $calendarEvent['location'] . ']';
+//         }
 
         return implode(PHP_EOL, $html);
     }
