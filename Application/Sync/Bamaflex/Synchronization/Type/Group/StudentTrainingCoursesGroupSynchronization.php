@@ -32,12 +32,14 @@ class StudentTrainingCoursesGroupSynchronization extends GroupSynchronization
              $this->get_training()->get_parameter(TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID) .
              ' AND parent_id IS NULL AND exchange = 0';
         $courses = $this->get_result($query);
-        
+
         $children = array();
+
         while ($course = $courses->next_result(false))
         {
             $children[] = GroupSynchronization :: factory('student_course', $this, $course);
         }
+
         return $children;
     }
 }

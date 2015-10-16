@@ -6,13 +6,13 @@ use Ehb\Application\Discovery\Module\Photo\DataManager;
 use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser\GalleryBrowserTable;
 use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Module;
 use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rendition\RenditionImplementation;
-use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights;
+// use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Rights;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+// use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation implements TableSupport
 {
@@ -23,13 +23,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         $application_is_allowed = $this->get_application() instanceof AccessAllowedInterface;
 
-        if (! $application_is_allowed && ! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT,
-            $this->get_module_instance()->get_id(),
-            $this->get_module_parameters()))
-        {
-            throw new NotAllowedException(false);
-        }
+//         if (! $application_is_allowed && ! Rights :: is_allowed(
+//             Rights :: VIEW_RIGHT,
+//             $this->get_module_instance()->get_id(),
+//             $this->get_module_parameters()))
+//         {
+//             throw new NotAllowedException(false);
+//         }
         \Ehb\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action(
             $this,
             \Ehb\Application\Discovery\Rendition\Format\HtmlRendition :: VIEW_ZIP);

@@ -193,18 +193,18 @@ class Module
 
             $class_rights = $type . '\Rights';
 
-            if (! $class_rights :: is_allowed($class_rights :: VIEW_RIGHT, $module_instance->get_id(), $parameters))
-            {
-                return new ToolbarItem(
-                    Translation :: get(
-                        'ModuleNotAvailable',
-                        array('MODULE' => Translation :: get('TypeName', null, $type))),
-                    Theme :: getInstance()->getImagesPath($type) . 'Logo/16_na.png',
-                    null,
-                    ToolbarItem :: DISPLAY_ICON);
-            }
-            else
-            {
+//             if (! $class_rights :: is_allowed($class_rights :: VIEW_RIGHT, $module_instance->get_id(), $parameters))
+//             {
+//                 return new ToolbarItem(
+//                     Translation :: get(
+//                         'ModuleNotAvailable',
+//                         array('MODULE' => Translation :: get('TypeName', null, $type))),
+//                     Theme :: getInstance()->getImagesPath($type) . 'Logo/16_na.png',
+//                     null,
+//                     ToolbarItem :: DISPLAY_ICON);
+//             }
+//             else
+//             {
                 if (($check_data && $module->has_data($parameters)) || ! $check_data)
                 {
                     $url = $this->get_instance_url($module_instance->get_id(), $parameters);
@@ -227,7 +227,7 @@ class Module
                         $url,
                         ToolbarItem :: DISPLAY_ICON);
                 }
-            }
+//             }
         }
 
         return null;

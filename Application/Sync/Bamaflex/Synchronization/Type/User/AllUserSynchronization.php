@@ -20,6 +20,8 @@ class AllUserSynchronization extends UserSynchronization
 
     private $languageSetting;
 
+    private $storedUsers;
+
     public function get_data()
     {
         $academic_year = $this->get_academic_year();
@@ -33,6 +35,23 @@ class AllUserSynchronization extends UserSynchronization
     public function get_type()
     {
         return 'create';
+    }
+
+    private function getStoredUser($officialCode)
+    {
+        if (! isset($this->storedUsers))
+        {
+            $this->storedUsers = array();
+
+            $users = \Chamilo\Core\User\Storage\DataManager :: retrieves(User :: class_name());
+
+            while ($user = $users->next_result())
+            {
+                $this->storedUsers[$user->get_official_code()] = $user;
+            }
+        }
+
+        return $this->storedUsers[$officialCode];
     }
 
     /**
@@ -62,18 +81,18 @@ class AllUserSynchronization extends UserSynchronization
 
     public function process_data($person)
     {
-        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code(
-            $person[self :: RESULT_PROPERTY_PERSON_ID]);
+        $user = $this->getStoredUser($person[self :: RESULT_PROPERTY_PERSON_ID]);
 
-        $utf_last_name = trim($person[self :: RESULT_PROPERTY_LAST_NAME]);
-        $utf_first_name = trim($person[self :: RESULT_PROPERTY_FIRST_NAME]);
+        $utf_last_name = trim($this->convert_to_utf8($person[self :: RESULT_PROPERTY_LAST_NAME]));
+        $utf_first_name = trim($this->convert_to_utf8($person[self :: RESULT_PROPERTY_FIRST_NAME]));
+
         if (! $user instanceof User)
         {
             $user = new User();
 
             $user->set_official_code($person[self :: RESULT_PROPERTY_PERSON_ID]);
 
-            $user->set_auth_source('cas');
+            $user->set_auth_source('Cas');
             $user->set_password('PLACEHOLDER');
             $user->set_expiration_date(0);
             $user->set_activation_date(0);
@@ -88,11 +107,6 @@ class AllUserSynchronization extends UserSynchronization
         $user->set_lastname($utf_last_name);
         $user->set_firstname($utf_first_name);
 
-        if (($person[self :: RESULT_PROPERTY_QUOTA] * 1024 * 1024) > $user->get_disk_quota())
-        {
-            $user->set_disk_quota($person[self :: RESULT_PROPERTY_QUOTA] * 1024 * 1024);
-        }
-
         switch ($person[self :: RESULT_PROPERTY_STATUS])
         {
             case 0 :
@@ -100,7 +114,6 @@ class AllUserSynchronization extends UserSynchronization
                 $user->set_status(5);
                 $user->set_email($person[self :: RESULT_PROPERTY_PERSON_ID] . '@archive.ehb.be');
                 $user->set_username($person[self :: RESULT_PROPERTY_PERSON_ID]);
-                $user->set_disk_quota(0);
                 break;
             case 1 :
                 $user->set_active(1);

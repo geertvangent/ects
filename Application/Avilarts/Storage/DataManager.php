@@ -12,7 +12,6 @@ use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
 use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
-
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseCategory;
@@ -360,7 +359,11 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
                 ContentObjectPublication :: class_name(),
                 ContentObjectPublication :: PROPERTY_ID),
             new StaticConditionVariable($publication_id));
-        $record = self :: record(ContentObjectPublication :: class_name(), $condition);
+        $record = self :: record(
+            ContentObjectPublication :: class_name(),
+            new RecordRetrieveParameters(
+                new DataClassProperties(new PropertiesConditionVariable(ContentObjectPublication :: class_name())),
+                $condition));
 
         return self :: create_publication_attributes_from_record($record);
     }
@@ -2187,7 +2190,9 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         {
             $users = \Chamilo\Core\User\Storage\DataManager :: records(
                 User :: class_name(),
-                new InCondition(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), $user_ids))->as_array();
+                new RecordRetrievesParameters(
+                    new DataClassProperties(array(new PropertiesConditionVariable(User :: class_name()))),
+                    new InCondition(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), $user_ids)))->as_array();
 
             foreach ($users as $user)
             {
