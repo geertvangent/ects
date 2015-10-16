@@ -43,7 +43,7 @@ class AssignmentSubmissions extends Block
 
         $assignment_publications_resultset = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         if ($assignment_publications_resultset->size() == 0)
         {

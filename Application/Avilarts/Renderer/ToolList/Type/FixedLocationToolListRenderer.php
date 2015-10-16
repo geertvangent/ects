@@ -5,7 +5,6 @@ use Ehb\Application\Avilarts\CourseSettingsConnector;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
-
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
@@ -34,8 +33,7 @@ use HTML_Table;
  */
 
 /**
- * Tool list renderer which displays all course tools on a fixed location.
- * Disabled tools will be shown in a disabled
+ * Tool list renderer which displays all course tools on a fixed location. Disabled tools will be shown in a disabled
  * looking way.
  */
 class FixedLocationToolListRenderer extends ToolListRenderer
@@ -201,8 +199,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
         $html[] = '<script type="text/javascript" src="' .
              Path :: getInstance()->getJavascriptPath('Chamilo\Libraries', true) . 'HomeAjax.js' . '"></script>';
         $html[] = '<script type="text/javascript" src="' .
-             Path :: getInstance()->getJavascriptPath('Ehb\Application\Avilarts', true) . 'CourseHome.js' .
-             '"></script>';
+             Path :: getInstance()->getJavascriptPath('Ehb\Application\Avilarts', true) . 'CourseHome.js' . '"></script>';
 
         return implode(PHP_EOL, $html);
     }
@@ -226,7 +223,9 @@ class FixedLocationToolListRenderer extends ToolListRenderer
                 new StaticConditionVariable(1));
             $condition = new AndCondition($conditions);
 
-            $this->publication_links = DataManager :: retrieves(ContentObjectPublication :: class_name(), $condition);
+            $this->publication_links = DataManager :: retrieves(
+                ContentObjectPublication :: class_name(),
+                new DataClassRetrievesParameters($condition));
         }
 
         return $this->publication_links;
@@ -281,7 +280,7 @@ class FixedLocationToolListRenderer extends ToolListRenderer
 
         $course_tool_rel_course_section = DataManager :: retrieves(
             CourseToolRelCourseSection :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         if ($course_tool_rel_course_section->size() > 0)
         {
@@ -329,209 +328,208 @@ class FixedLocationToolListRenderer extends ToolListRenderer
             $row = $count / $this->number_of_columns;
             $col = $count % $this->number_of_columns;
             $cell_contents = array();
-            if ($parent->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) || $publication->is_visible_for_target_users())
+            if ($parent->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) ||
+                 $publication->is_visible_for_target_users())
             {
                 // Show visibility-icon
                 if ($parent->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT))
                 {
                     $cell_contents[] = '<a href="' .
-                         $parent->get_url(
-                            array(
-                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => $lcms_action,
-                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id())) .
-                         '"><img src="' . Theme :: getInstance()->getCommonImagePath($visible_image) .
-                         '" style="vertical-align: middle;" alt=""/></a>';
-                }
-
-                // Show delete-icon
-                if ($parent->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: DELETE_RIGHT))
-                {
-                    $cell_contents[] = '<a href="' .
-                         $parent->get_url(
-                            array(
-                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_DELETE_LINKS,
-                                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id())) .
-                         '"><img src="' . Theme :: getInstance()->getCommonImagePath('Action/Delete') .
-                         '" style="vertical-align: middle;" alt=""/></a>';
-                }
-                $cell_contents[] = '&nbsp;&nbsp;&nbsp;';
-                // Show tool-icon + name
-
-                if ($publication->get_tool() ==
-                     \Ehb\Application\Avilarts\Tool\Implementation\Link\Manager :: TOOL_NAME)
-                {
-                    $url = $publication->get_content_object()->get_url();
-                    $target = ' target="_blank"';
-                }
-                else
-                {
-                    $class = 'Ehb\Application\Avilarts\Tool\Implementation\\' .
-                         StringUtilities :: getInstance()->createString($publication->get_tool())->upperCamelize() .
-                         '\Manager';
-                    $url = $parent->get_url(
+                     $parent->get_url(
                         array(
-                            'tool_action' => null,
-                            Manager :: PARAM_COMPONENT_ACTION => null,
-                            Manager :: PARAM_TOOL => $publication->get_tool(),
-                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => $class :: ACTION_VIEW,
-                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id()),
-                        array(),
-                        true);
-                    $target = '';
-                }
-
-                $cell_contents[] = '<a href="' . $url . '"' . $target . $link_class . '>';
-                $cell_contents[] = '<img src="' . Theme :: getInstance()->getImagePath(
-                    \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($publication->get_tool()),
-                    'Logo/' . $tool_image) . '" style="vertical-align: middle;" alt="' . $title . '" width="' .
-                     Theme :: ICON_MEDIUM . '" height="' . Theme :: ICON_MEDIUM . '"/>';
-                $cell_contents[] = '&nbsp;';
-                $cell_contents[] = $title;
-                $cell_contents[] = '</a>';
-
-                $table->setCellContents($row, $col, implode(PHP_EOL, $cell_contents));
-                $table->updateColAttributes($col, 'style="width: ' . floor(100 / $this->number_of_columns) . '%;"');
-                $count ++;
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => $lcms_action,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id())) .
+                     '"><img src="' . Theme :: getInstance()->getCommonImagePath($visible_image) .
+                     '" style="vertical-align: middle;" alt=""/></a>';
             }
+
+            // Show delete-icon
+            if ($parent->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: DELETE_RIGHT))
+            {
+                $cell_contents[] = '<a href="' .
+                     $parent->get_url(
+                        array(
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_DELETE_LINKS,
+                            \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id())) .
+                     '"><img src="' . Theme :: getInstance()->getCommonImagePath('Action/Delete') .
+                     '" style="vertical-align: middle;" alt=""/></a>';
+            }
+            $cell_contents[] = '&nbsp;&nbsp;&nbsp;';
+            // Show tool-icon + name
+
+            if ($publication->get_tool() == \Ehb\Application\Avilarts\Tool\Implementation\Link\Manager :: TOOL_NAME)
+            {
+                $url = $publication->get_content_object()->get_url();
+                $target = ' target="_blank"';
+            }
+            else
+            {
+                $class = 'Ehb\Application\Avilarts\Tool\Implementation\\' .
+                     StringUtilities :: getInstance()->createString($publication->get_tool())->upperCamelize() .
+                     '\Manager';
+                $url = $parent->get_url(
+                    array(
+                        'tool_action' => null,
+                        Manager :: PARAM_COMPONENT_ACTION => null,
+                        Manager :: PARAM_TOOL => $publication->get_tool(),
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION => $class :: ACTION_VIEW,
+                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => $publication->get_id()),
+                    array(),
+                    true);
+                $target = '';
+            }
+
+            $cell_contents[] = '<a href="' . $url . '"' . $target . $link_class . '>';
+            $cell_contents[] = '<img src="' . Theme :: getInstance()->getImagePath(
+                \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($publication->get_tool()),
+                'Logo/' . $tool_image) . '" style="vertical-align: middle;" alt="' . $title . '" width="' .
+                 Theme :: ICON_MEDIUM . '" height="' . Theme :: ICON_MEDIUM . '"/>';
+            $cell_contents[] = '&nbsp;';
+            $cell_contents[] = $title;
+            $cell_contents[] = '</a>';
+
+            $table->setCellContents($row, $col, implode(PHP_EOL, $cell_contents));
+            $table->updateColAttributes($col, 'style="width: ' . floor(100 / $this->number_of_columns) . '%;"');
+            $count ++;
         }
-
-        $html[] = $table->toHtml();
-
-        return implode(PHP_EOL, $html);
     }
 
-    public function display_block_header($section, $block_name)
+    $html[] = $table->toHtml();
+
+    return implode(PHP_EOL, $html);
+}
+
+public function display_block_header($section, $block_name)
+{
+    $html = array();
+
+    if ($section->get_type() == CourseSection :: TYPE_TOOL)
     {
-        $html = array();
-
-        if ($section->get_type() == CourseSection :: TYPE_TOOL)
-        {
-            $html[] = '<div class="toolblock" id="block_' . $section->get_id() . '" style="width:100%;">';
-        }
-
-        if ($section->get_type() == CourseSection :: TYPE_DISABLED)
-        {
-            $html[] = '<div class="disabledblock" id="block_' . $section->get_id() . '" style="width:100%;">';
-        }
-
-        return implode(PHP_EOL, $html);
+        $html[] = '<div class="toolblock" id="block_' . $section->get_id() . '" style="width:100%;">';
     }
 
-    public function display_block_footer($section)
+    if ($section->get_type() == CourseSection :: TYPE_DISABLED)
     {
-        $html = array();
+        $html[] = '<div class="disabledblock" id="block_' . $section->get_id() . '" style="width:100%;">';
+    }
 
-        $html[] = '<div class="clear"></div>';
+    return implode(PHP_EOL, $html);
+}
+
+public function display_block_footer($section)
+{
+    $html = array();
+
+    $html[] = '<div class="clear"></div>';
+
+    if ($section->get_type() == CourseSection :: TYPE_TOOL || $section->get_type() == CourseSection :: TYPE_DISABLED)
+    {
+        $html[] = '</div>';
+    }
+
+    return implode(PHP_EOL, $html);
+}
+
+private function show_section_tools($section, $tools)
+{
+    $parent = $this->get_parent();
+
+    $column_width = 99.9 / $this->number_of_columns;
+
+    $count = 0;
+
+    $html = array();
+
+    if (count($tools) == 0)
+    {
+        $html[] = '<div class="normal-message">' . Translation :: get('NoToolsAvailable') . '</div>';
+    }
+
+    $course_settings_controller = CourseSettingsController :: get_instance();
+
+    foreach ($tools as $tool)
+    {
+        $tool_namespace = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name());
+
+        $tool_visible = $course_settings_controller->get_course_setting(
+            $this->course->get_id(),
+            CourseSetting :: COURSE_SETTING_TOOL_VISIBLE,
+            $tool->get_id());
+
+        if ($tool_visible || $section->get_type() == CourseSection :: TYPE_ADMIN)
+        {
+            $lcms_action = \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_MAKE_TOOL_INVISIBLE;
+            $visible_image = 'Action/Visible';
+            $new = '';
+            if ($parent->tool_has_new_publications($tool->get_name(), $this->course))
+            {
+                $new = 'New';
+            }
+            $tool_image = Theme :: ICON_MEDIUM . $new;
+            $link_class = '';
+        }
+        else
+        {
+            $lcms_action = \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_MAKE_TOOL_VISIBLE;
+            $visible_image = 'Action/Invisible';
+            $tool_image = Theme :: ICON_MEDIUM . 'Na';
+            $link_class = ' class="invisible"';
+        }
+
+        $title = Translation :: get('TypeName', null, $tool_namespace);
+
+        // $row = $count / $this->number_of_columns;
+        // $col = $count % $this->number_of_columns;
 
         if ($section->get_type() == CourseSection :: TYPE_TOOL || $section->get_type() == CourseSection :: TYPE_DISABLED)
         {
-            $html[] = '</div>';
+            $html[] = '<div id="tool_' . $tool->get_id() . '" class="tool" style="width: ' . $column_width . '%;">';
+            $id = ' id="drag_' . $tool->get_id() . '"';
+        }
+        else
+        {
+            $html[] = '<div class="tool" style="width: ' . $column_width . '%;">';
         }
 
-        return implode(PHP_EOL, $html);
+        // Show visibility-icon
+        if ($this->is_course_admin && $section->get_type() != CourseSection :: TYPE_ADMIN)
+        {
+            $html[] = '<a href="' .
+                 $parent->get_url(
+                    array(
+                        \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: PARAM_ACTION => $lcms_action,
+                        \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: PARAM_TOOL => $tool->get_name())) .
+                 '"><img class="tool_visible" src="' . Theme :: getInstance()->getCommonImagePath($visible_image) .
+                 '" style="vertical-align: middle;" alt="" /></a>';
+            $html[] = '&nbsp;&nbsp;&nbsp;';
+        }
+
+        // Show tool-icon + name
+        $html[] = '<img class="tool_image"' . $id . ' src="' . Theme :: getInstance()->getImagePath(
+            $tool_namespace,
+            'Logo/' . $tool_image) . '" style="vertical-align: middle;" alt="' . $title . '" width="' .
+             Theme :: ICON_MEDIUM . '" height="' . Theme :: ICON_MEDIUM . '"/>';
+        $html[] = '&nbsp;';
+        $html[] = '<a id="tool_text" href="' . $parent->get_url(
+            array(Manager :: PARAM_TOOL => $tool->get_name()),
+            array(
+                Manager :: PARAM_COMPONENT_ACTION,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
+                \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE,
+                Manager :: PARAM_CATEGORY),
+            true) . '" ' . $link_class . '>';
+        $html[] = $title;
+        $html[] = '</a>';
+
+        $html[] = '<div class="clear"></div>';
+
+        $html[] = '</div>';
+
+        $count ++;
     }
 
-    private function show_section_tools($section, $tools)
-    {
-        $parent = $this->get_parent();
+    $html[] = ' ';
 
-        $column_width = 99.9 / $this->number_of_columns;
-
-        $count = 0;
-
-        $html = array();
-
-        if (count($tools) == 0)
-        {
-            $html[] = '<div class="normal-message">' . Translation :: get('NoToolsAvailable') . '</div>';
-        }
-
-        $course_settings_controller = CourseSettingsController :: get_instance();
-
-        foreach ($tools as $tool)
-        {
-            $tool_namespace = \Ehb\Application\Avilarts\Tool\Manager :: get_tool_type_namespace($tool->get_name());
-
-            $tool_visible = $course_settings_controller->get_course_setting(
-                $this->course->get_id(),
-                CourseSetting :: COURSE_SETTING_TOOL_VISIBLE,
-                $tool->get_id());
-
-            if ($tool_visible || $section->get_type() == CourseSection :: TYPE_ADMIN)
-            {
-                $lcms_action = \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_MAKE_TOOL_INVISIBLE;
-                $visible_image = 'Action/Visible';
-                $new = '';
-                if ($parent->tool_has_new_publications($tool->get_name(), $this->course))
-                {
-                    $new = 'New';
-                }
-                $tool_image = Theme :: ICON_MEDIUM . $new;
-                $link_class = '';
-            }
-            else
-            {
-                $lcms_action = \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: ACTION_MAKE_TOOL_VISIBLE;
-                $visible_image = 'Action/Invisible';
-                $tool_image = Theme :: ICON_MEDIUM . 'Na';
-                $link_class = ' class="invisible"';
-            }
-
-            $title = Translation :: get('TypeName', null, $tool_namespace);
-
-            // $row = $count / $this->number_of_columns;
-            // $col = $count % $this->number_of_columns;
-
-            if ($section->get_type() == CourseSection :: TYPE_TOOL ||
-                 $section->get_type() == CourseSection :: TYPE_DISABLED)
-            {
-                $html[] = '<div id="tool_' . $tool->get_id() . '" class="tool" style="width: ' . $column_width . '%;">';
-                $id = ' id="drag_' . $tool->get_id() . '"';
-            }
-            else
-            {
-                $html[] = '<div class="tool" style="width: ' . $column_width . '%;">';
-            }
-
-            // Show visibility-icon
-            if ($this->is_course_admin && $section->get_type() != CourseSection :: TYPE_ADMIN)
-            {
-                $html[] = '<a href="' .
-                     $parent->get_url(
-                        array(
-                            \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: PARAM_ACTION => $lcms_action,
-                            \Ehb\Application\Avilarts\Tool\Implementation\Home\Manager :: PARAM_TOOL => $tool->get_name())) .
-                     '"><img class="tool_visible" src="' . Theme :: getInstance()->getCommonImagePath($visible_image) .
-                     '" style="vertical-align: middle;" alt="" /></a>';
-                $html[] = '&nbsp;&nbsp;&nbsp;';
-            }
-
-            // Show tool-icon + name
-            $html[] = '<img class="tool_image"' . $id . ' src="' . Theme :: getInstance()->getImagePath(
-                $tool_namespace,
-                'Logo/' . $tool_image) . '" style="vertical-align: middle;" alt="' . $title . '" width="' .
-                 Theme :: ICON_MEDIUM . '" height="' . Theme :: ICON_MEDIUM . '"/>';
-            $html[] = '&nbsp;';
-            $html[] = '<a id="tool_text" href="' . $parent->get_url(
-                array(Manager :: PARAM_TOOL => $tool->get_name()),
-                array(
-                    Manager :: PARAM_COMPONENT_ACTION,
-                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_ACTION,
-                    \Ehb\Application\Avilarts\Tool\Manager :: PARAM_BROWSER_TYPE,
-                    Manager :: PARAM_CATEGORY),
-                true) . '" ' . $link_class . '>';
-            $html[] = $title;
-            $html[] = '</a>';
-
-            $html[] = '<div class="clear"></div>';
-
-            $html[] = '</div>';
-
-            $count ++;
-        }
-
-        $html[] = ' ';
-
-        return implode(PHP_EOL, $html);
-    }
+    return implode(PHP_EOL, $html);
+}
 }

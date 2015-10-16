@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
@@ -79,7 +78,7 @@ class CategoryMoverComponent extends Manager
                             new StaticConditionVariable($publication->get_tool()));
                         $course_modules = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
                             CourseTool :: class_name(),
-                            $condition)->as_array();
+                            new DataClassRetrievesParameters($condition))->as_array();
 
                         $course_module_id = $course_modules[0]->get_id();
                         $new_parent_id = \Ehb\Application\Avilarts\Rights\Rights :: get_instance()->get_weblcms_location_id_by_identifier_from_courses_subtree(
@@ -115,9 +114,7 @@ class CategoryMoverComponent extends Manager
                 $this->redirect(
                     $message,
                     false,
-                    array(
-                        'tool_action' => null,
-                        \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null));
+                    array('tool_action' => null, \Ehb\Application\Avilarts\Tool\Manager :: PARAM_PUBLICATION_ID => null));
             }
             else
             {
@@ -288,7 +285,7 @@ class CategoryMoverComponent extends Manager
 
         $categories = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         while ($cat = $categories->next_result())
         {

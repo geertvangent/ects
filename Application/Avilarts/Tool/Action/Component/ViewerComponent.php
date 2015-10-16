@@ -4,7 +4,6 @@ namespace Ehb\Application\Avilarts\Tool\Action\Component;
 use Ehb\Application\Avilarts\CourseSettingsConnector;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Renderer\PublicationList\Type\ContentObjectPublicationDetailsRenderer;
-
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Core\Repository\Feedback\FeedbackSupport;

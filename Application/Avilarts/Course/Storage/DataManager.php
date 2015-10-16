@@ -1171,7 +1171,9 @@ class DataManager extends \Ehb\Application\Avilarts\Storage\DataManager
 
         $condition = new OrCondition($sub_conditions);
 
-        return \Chamilo\Core\Group\Storage\DataManager :: retrieves(Group :: class_name(), $condition);
+        return \Chamilo\Core\Group\Storage\DataManager :: retrieves(
+            Group :: class_name(),
+            new DataClassRetrievesParameters($condition));
     }
 
     /**
@@ -1545,7 +1547,7 @@ class DataManager extends \Ehb\Application\Avilarts\Storage\DataManager
 
         $tools = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseTool :: class_name(),
-            $tools_condition);
+            new DataClassRetrievesParameters($tools_condition));
 
         while ($tool = $tools->next_result())
         {

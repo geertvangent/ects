@@ -4,7 +4,6 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Form;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
-
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\CourseGroupMenu;
@@ -101,7 +100,7 @@ class CourseGroupForm extends FormValidator
         $this->addElement('html', '<div class="configuration_form">');
         $this->addElement(
             'html',
-            '<span class="category">' . $header_title .             // Translation :: get($header_title, null, Utilities ::
+            '<span class="category">' . $header_title . // Translation :: get($header_title, null, Utilities ::
                                                         // COMMON_LIBRARIES) .
             '</span>');
     }
@@ -333,7 +332,8 @@ class CourseGroupForm extends FormValidator
                     // settings rights to publication_category
                     $rights = $this->rights;
                     /*
-                     * $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT; $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT;
+                     * $rights[] = \Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT; $rights[] =
+                     * \Ehb\Application\Avilarts\Rights\Rights :: ADD_RIGHT;
                      */
 
                     if ($course_group_document_category)
@@ -465,7 +465,9 @@ class CourseGroupForm extends FormValidator
                     new EqualityCondition(CourseGroup :: class_name(), CourseGroup :: PROPERTY_PARENT_ID),
                     new StaticConditionVariable($parent_course_group->get_id()));
 
-                $c_course_groups = DataManager :: retrieves(CourseGroup :: class_name(), $condition);
+                $c_course_groups = DataManager :: retrieves(
+                    CourseGroup :: class_name(),
+                    new DataClassRetrievesParameters($condition));
 
                 while ($course_group = $c_course_groups->next_result())
                 {
@@ -1251,7 +1253,9 @@ class CourseGroupForm extends FormValidator
         $condition = new EqualityCondition(
             new EqualityCondition(CourseGroup :: class_name(), CourseGroup :: PROPERTY_PARENT_ID),
             new StaticConditionVariable($parent_course_group->get_id()));
-        $course_groups = DataManager :: retrieves(CourseGroup :: class_name(), $condition);
+        $course_groups = DataManager :: retrieves(
+            CourseGroup :: class_name(),
+            new DataClassRetrievesParameters($condition));
 
         $size_children = 0;
         while ($existing_course_group = $course_groups->next_result())
@@ -1631,7 +1635,9 @@ class CourseGroupForm extends FormValidator
             new StaticConditionVariable($parent));
         $condition = new AndCondition($conditions);
 
-        $data_set = DataManager :: retrieves(ContentObjectPublicationCategory :: class_name(), $condition);
+        $data_set = DataManager :: retrieves(
+            ContentObjectPublicationCategory :: class_name(),
+            new DataClassRetrievesParameters($condition));
 
         $category = $data_set->next_result();
         if ($category)
@@ -1653,8 +1659,7 @@ class CourseGroupForm extends FormValidator
     }
 
     /**
-     * Sets default values.
-     * Traditionally, you will want to extend this method so it sets default for your learning
+     * Sets default values. Traditionally, you will want to extend this method so it sets default for your learning
      * object type's additional properties.
      *
      * @param $defaults array Default values for this form's parameters.
@@ -1695,8 +1700,7 @@ class CourseGroupForm extends FormValidator
     }
 
     /**
-     * Sets default values.
-     * Traditionally, you will want to extend this method so it sets default for your learning
+     * Sets default values. Traditionally, you will want to extend this method so it sets default for your learning
      * object type's additional properties.
      *
      * @param $counternteger.

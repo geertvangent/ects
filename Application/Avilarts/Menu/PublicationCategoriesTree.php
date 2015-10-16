@@ -101,7 +101,7 @@ class PublicationCategoriesTree extends GenericTree
         }
         $condition = new AndCondition($conditions);
 
-        $children = DataManager :: retrieves(
+        $children = DataManager:: retrieves(
             ContentObjectPublicationCategory :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,

@@ -25,6 +25,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * $Id: sorter.class.php 218 2009-11-13 14:21:26Z kariboe $
@@ -203,7 +204,7 @@ class SorterComponent extends Manager
 
             $course_type_user_category_rel_course = DataManager :: retrieves(
                 CourseTypeUserCategoryRelCourse :: class_name(),
-                $condition)->next_result();
+                new DataClassRetrievesParameters($condition))->next_result();
         }
 
         $form = new CourseTypeUserCategoryRelCourseForm(

@@ -27,6 +27,7 @@ use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * $Id: week_calendar_content_object_publication_list_renderer.class.php 216 2009-11-13 14:08:06Z kariboe $
@@ -231,7 +232,7 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
 
         $user_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(),
-            $user_condition);
+            new DataClassRetrievesParameters($user_condition));
 
         if ($user_relations->size() > 0)
         {
@@ -248,9 +249,10 @@ class CalendarContentObjectPublicationListRenderer extends ContentObjectPublicat
 
         $groups = DataManager :: retrieves(
             CourseGroup :: class_name(),
-            new EqualityCondition(
-                new PropertyConditionVariable(CourseGroup :: class_name(), CourseGroup :: PROPERTY_COURSE_CODE),
-                new StaticConditionVariable($course)));
+            new DataClassRetrievesParameters(
+                new EqualityCondition(
+                    new PropertyConditionVariable(CourseGroup :: class_name(), CourseGroup :: PROPERTY_COURSE_CODE),
+                    new StaticConditionVariable($course))));
 
         if ($groups->size() > 0)
         {

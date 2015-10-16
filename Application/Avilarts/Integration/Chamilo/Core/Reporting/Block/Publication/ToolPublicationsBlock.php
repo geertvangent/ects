@@ -16,6 +16,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\StringUtilities;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class ToolPublicationsBlock extends ToolBlock
 {
@@ -26,8 +27,7 @@ class ToolPublicationsBlock extends ToolBlock
 
         $course_id = $this->get_course_id();
         $user_id = $this->get_user_id();
-        $tool = Request :: get(
-            \Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL);
+        $tool = Request :: get(\Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager :: PARAM_REPORTING_TOOL);
 
         $reporting_data->set_rows(array(Translation :: get('Title'), Translation :: get('Description')));
 
@@ -65,7 +65,7 @@ class ToolPublicationsBlock extends ToolBlock
 
         $content_object_publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         $img = '<img src="' . Theme :: getInstance()->getCommonImagePath('Action/Reporting') . '" title="' .
              Translation :: get('Details') . '" />';

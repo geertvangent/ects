@@ -574,20 +574,6 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
     /**
      * Returns the condition for the possible course group users
      *
-     * @static
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
      * @param CourseGroup $course_group
      * @param Condition $condition
      *
@@ -601,7 +587,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         $course_users = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(),
-            $course_condition);
+            new DataClassRetrievesParameters($course_condition));
 
         $group_user_ids = DataManager :: retrieve_course_group_user_ids($course_group->get_id());
 

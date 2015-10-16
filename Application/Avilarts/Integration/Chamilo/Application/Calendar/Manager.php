@@ -18,6 +18,7 @@ use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Condition\SubselectCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class Manager implements CalendarInterface
 {
@@ -27,7 +28,7 @@ class Manager implements CalendarInterface
         $condition = $this->get_conditions($renderer->get_user());
         $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublication :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
         $result = array();
         while ($publication = $publications->next_result())
         {

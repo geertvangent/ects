@@ -35,8 +35,7 @@ class BrowserComponent extends Manager implements DelegateComponent
 
     /**
      * Check wether there can be anything coppied to a course and if there is even another course where the user can
-     * copy to.
-     * Build the form check validate and copy the selected information
+     * copy to. Build the form check validate and copy the selected information
      */
     public function run()
     {
@@ -52,7 +51,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             new StaticConditionVariable($this->get_course_id()));
         $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         $common_sections = array(
             CourseSection :: TYPE_TOOL,
@@ -81,8 +80,7 @@ class BrowserComponent extends Manager implements DelegateComponent
         $condition = new EqualityCondition(
             new PropertyConditionVariable(CourseUserRelation :: class_name(), CourseUserRelation :: PROPERTY_STATUS),
             new StaticConditionVariable(1));
-        if (\Ehb\Application\Avilarts\Storage\DataManager :: count(CourseUserRelation :: class_name(), $condition) <=
-             1)
+        if (\Ehb\Application\Avilarts\Storage\DataManager :: count(CourseUserRelation :: class_name(), $condition) <= 1)
         {
             throw new \Exception(Translation :: get('NoCoursesToCopy'));
         }
@@ -174,7 +172,7 @@ class BrowserComponent extends Manager implements DelegateComponent
 
         $course_sections = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             CourseSection :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         while ($course_section = $course_sections->next_result())
         {
