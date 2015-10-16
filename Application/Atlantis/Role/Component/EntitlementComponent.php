@@ -18,6 +18,6 @@ class EntitlementComponent extends Manager
         $factory = new ApplicationFactory(
             \Ehb\Application\Atlantis\Role\Entitlement\Manager :: context(),
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
-        $factory->run();
+        return $factory->run();
     }
 }

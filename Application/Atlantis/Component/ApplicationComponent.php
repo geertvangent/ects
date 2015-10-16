@@ -13,6 +13,6 @@ class ApplicationComponent extends Manager
         $factory = new ApplicationFactory(
             \Ehb\Application\Atlantis\Application\Manager :: context(),
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
-        $factory->run();
+        return $factory->run();
     }
 }

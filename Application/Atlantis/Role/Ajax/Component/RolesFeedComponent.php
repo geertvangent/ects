@@ -11,8 +11,8 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Application\Atlantis\Role\DataClass\Role;
-use Ehb\Application\Atlantis\Role\DataManager;
+use Ehb\Application\Atlantis\Role\Storage\DataClass\Role;
+use Ehb\Application\Atlantis\Role\Storage\DataManager;
 
 class RolesFeedComponent extends \Ehb\Application\Atlantis\Role\Ajax\Manager
 {

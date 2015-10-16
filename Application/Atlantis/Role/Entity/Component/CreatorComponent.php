@@ -33,13 +33,15 @@ class CreatorComponent extends Manager
                 $this->get_url(),
                 Translation :: get(ClassnameUtilities :: getInstance()->getClassnameFromNamespace(self :: class_name()))));
 
-        if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        if (! \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }
-
+        
+        
+        
         $form = new EntityForm($this, $this->get_url());
-
+               
         if ($form->validate())
         {
             $values = $form->exportValues();
@@ -160,11 +162,10 @@ class CreatorComponent extends Manager
         else
         {
             $html = array();
-
+           
             $html[] = $this->render_header();
             $html[] = $form->toHtml();
             $html[] = $this->render_footer();
-
             return implode(PHP_EOL, $html);
         }
     }

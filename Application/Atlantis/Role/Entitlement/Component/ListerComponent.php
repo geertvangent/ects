@@ -32,8 +32,8 @@ class ListerComponent extends Manager implements DelegateComponent
         $renderer_name = ClassnameUtilities :: getInstance()->getClassnameFromObject($this, true);
         $this->role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
         $this->application_id = Request :: get(\Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID);
-        $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-            \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+        $role = \Ehb\Application\Atlantis\Role\Storage\DataManager :: retrieve_by_id(
+            \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
             (int) $this->role_id);
 
         SessionBreadcrumbs :: add(
@@ -188,8 +188,8 @@ class ListerComponent extends Manager implements DelegateComponent
 
     public function add_breadcrumb()
     {
-        $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-            \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+        $role = \Ehb\Application\Atlantis\Role\Storage\DataManager :: retrieve_by_id(
+            \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
             (int) $this->role_id);
 
         BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));

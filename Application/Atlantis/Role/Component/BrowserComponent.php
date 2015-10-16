@@ -12,7 +12,7 @@ use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Application\Atlantis\Role\DataClass\Role;
+use Ehb\Application\Atlantis\Role\Storage\DataClass\Role;
 use Ehb\Application\Atlantis\Role\Manager;
 use Ehb\Application\Atlantis\Role\Table\Role\RoleTable;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;

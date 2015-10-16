@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Atlantis\Role\Entity\Ajax;
+namespace Ehb\Application\Atlantis\Role\Entity\Ajax\Component;
 
 use Chamilo\Core\Group\Ajax\Component\PlatformGroupsFeedComponent;
 use Chamilo\Core\Group\Storage\DataClass\Group;
@@ -91,9 +91,9 @@ class ContextsFeedComponent extends PlatformGroupsFeedComponent
                 $element_class = 'type type_context_simple';
             }
         }
-        elseif (\Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups(
                 $this->get_user());
             
             if (in_array($group->get_id(), $target_groups))
@@ -246,9 +246,9 @@ class ContextsFeedComponent extends PlatformGroupsFeedComponent
         {
             return $groups;
         }
-        elseif (\Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_groups(
+            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups(
                 $this->get_user());
             
             $allowed_groups = array();

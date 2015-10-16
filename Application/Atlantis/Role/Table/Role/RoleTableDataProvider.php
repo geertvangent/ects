@@ -4,8 +4,8 @@ namespace Ehb\Application\Atlantis\Role\Table\Role;
 use Chamilo\Libraries\Format\Table\TableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Ehb\Application\Atlantis\Role\DataClass\Role;
-use Ehb\Application\Atlantis\Role\DataManager;
+use Ehb\Application\Atlantis\Role\Storage\DataClass\Role;
+use Ehb\Application\Atlantis\Role\Storage\DataManager;
 
 class RoleTableDataProvider extends TableDataProvider
 {

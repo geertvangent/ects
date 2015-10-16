@@ -11,7 +11,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Application\Atlantis\Rights\Rights;
+use Ehb\Application\Atlantis\Rights;
 use Ehb\Application\Atlantis\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
 use Ehb\Application\Atlantis\Rights\Storage\DataManager;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
