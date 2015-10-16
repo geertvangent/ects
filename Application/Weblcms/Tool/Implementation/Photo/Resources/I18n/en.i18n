@@ -1,0 +1,3 @@
+TypeName = "Photolist"
+PhotosOnlyForOfficialCourses = "Photo lists are only available for courses which are an official part of a curriculum."
+UserPhotos = "User photos"
