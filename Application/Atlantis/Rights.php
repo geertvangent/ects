@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Atlantis\Rights;
+namespace Ehb\Application\Atlantis;
 
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\User\Storage\DataClass\User;
