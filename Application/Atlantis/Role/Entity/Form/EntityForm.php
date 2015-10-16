@@ -114,8 +114,8 @@ class EntityForm extends FormValidator
         $this->addElement(
             'html',
             ResourceManager :: get_instance()->get_resource_html(
-                Path :: getInstance()->namespaceToFullPath('Chamilo\Libraries\\', true) .
-                     'Resources/Javascript/Dates.js'));
+                Path :: getInstance()->getJavascriptPath('Ehb\Application\Atlantis', true) .
+                     'Dates.js'));
     }
 
     /**
