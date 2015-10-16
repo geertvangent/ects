@@ -10,6 +10,7 @@ use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\Entity\Entities\PlatformGroupEntity;
 use Ehb\Application\Atlantis\Role\Entity\Entities\UserEntity;
+use Ehb\Application\Atlantis\Role\Manager;
 
 class EntityForm extends FormValidator
 {
@@ -55,7 +56,7 @@ class EntityForm extends FormValidator
             new AdvancedElementFinderElementType(
                 'roles',
                 Translation :: get('Roles'),
-                'Ehb\Application\Atlantis\Role',
+                Manager :: context() . '\Ajax',
                 'roles_feed',
                 array()));
 
@@ -68,7 +69,7 @@ class EntityForm extends FormValidator
             new AdvancedElementFinderElementType(
                 'contexts',
                 Translation :: get('Contexts'),
-                'Ehb\Application\Atlantis\Role\Entity',
+                Manager :: context() . '\Entity\Ajax',
                 'contexts_feed',
                 array()));
 
@@ -113,7 +114,7 @@ class EntityForm extends FormValidator
         $this->addElement(
             'html',
             ResourceManager :: get_instance()->get_resource_html(
-                Path :: getInstance()->namespaceToFullPath('Chamilo\Configuration\\', true) .
+                Path :: getInstance()->namespaceToFullPath('Chamilo\Libraries\\', true) .
                      'Resources/Javascript/Dates.js'));
     }
 

@@ -1,12 +1,12 @@
 <?php
-namespace Ehb\Application\Atlantis\Role\DataClass;
+namespace Ehb\Application\Atlantis\Role\Storage\DataClass;
 
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Ehb\Application\Atlantis\Role\DataManager;
+use Ehb\Application\Atlantis\Role\Storage\DataManager;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity;
 

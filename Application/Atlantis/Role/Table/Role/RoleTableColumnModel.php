@@ -4,7 +4,7 @@ namespace Ehb\Application\Atlantis\Role\Table\Role;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
-use Ehb\Application\Atlantis\Role\DataClass\Role;
+use Ehb\Application\Atlantis\Role\Storage\DataClass\Role;
 
 class RoleTableColumnModel extends DataClassTableColumnModel implements TableColumnModelActionsColumnSupport
 {

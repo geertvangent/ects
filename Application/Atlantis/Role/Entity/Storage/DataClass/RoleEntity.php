@@ -225,8 +225,8 @@ class RoleEntity extends DataClass
     {
         if (! isset($this->role))
         {
-            $this->role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $this->role = \Ehb\Application\Atlantis\Role\Storage\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
                 (int) $this->get_role_id());
         }
         return $this->role;

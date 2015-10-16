@@ -67,12 +67,12 @@ class RoleEntityTableCellRenderer extends DataClassTableCellRenderer implements 
             switch ($role_entity->get_entity_type())
             {
                 case UserEntity :: ENTITY_TYPE :
-                    $is_target = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->is_target_user(
+                    $is_target = \Ehb\Application\Atlantis\Rights :: get_instance()->is_target_user(
                         $this->get_component()->get_user(),
                         $role_entity->get_entity_id());
                     break;
                 case PlatformGroupEntity :: ENTITY_TYPE :
-                    $is_target = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->is_target_group(
+                    $is_target = \Ehb\Application\Atlantis\Rights :: get_instance()->is_target_group(
                         $this->get_component()->get_user(),
                         $role_entity->get_entity_id());
                     break;
