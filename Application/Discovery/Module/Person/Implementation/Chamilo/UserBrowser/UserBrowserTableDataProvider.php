@@ -10,7 +10,8 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
  * @package user.lib.user_manager.component.user_browser
  */
 /**
- * Data provider for a user browser table. This class implements some functions to allow user browser tables to retrieve
+ * Data provider for a user browser table.
+ * This class implements some functions to allow user browser tables to retrieve
  * information about the users to display.
  */
 class UserBrowserTableDataProvider extends TableDataProvider

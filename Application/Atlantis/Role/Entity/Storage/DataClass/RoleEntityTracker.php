@@ -226,10 +226,10 @@ class RoleEntityTracker extends DataClass
         switch ($entity_type)
         {
             case 1 :
-                return \Chamilo\Core\User\storage\DataManager :: retrieve_by_id(User :: class_name(), (int) $entity_id);
+                return \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(User :: class_name(), (int) $entity_id);
                 break;
             case 2 :
-                return \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(Group :: class_name(), $entity_id);
+                return \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(Group :: class_name(), $entity_id);
                 break;
         }
     }
@@ -275,7 +275,7 @@ class RoleEntityTracker extends DataClass
     {
         if (! isset($this->context))
         {
-            $this->context = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
+            $this->context = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
                 Group :: class_name(),
                 (int) $this->get_context_id());
         }

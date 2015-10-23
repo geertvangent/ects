@@ -11,7 +11,8 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
  * @package groups.lib.group_manager.component.group_browser
  */
 /**
- * Data provider for a repository browser table. This class implements some functions to allow repository browser tables
+ * Data provider for a repository browser table.
+ * This class implements some functions to allow repository browser tables
  * to retrieve information about the learning objects to display.
  */
 class GroupBrowserTableDataProvider extends TableDataProvider

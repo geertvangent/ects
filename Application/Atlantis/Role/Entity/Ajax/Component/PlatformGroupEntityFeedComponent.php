@@ -44,8 +44,7 @@ class PlatformGroupEntityFeedComponent extends PlatformGroupsFeedComponent
         }
         elseif (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups(
-                $this->get_user());
+            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups($this->get_user());
 
             if (in_array($group->get_id(), $target_groups))
             {
@@ -157,8 +156,7 @@ class PlatformGroupEntityFeedComponent extends PlatformGroupsFeedComponent
         }
         elseif (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
-            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups(
-                $this->get_user());
+            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups($this->get_user());
 
             $allowed_groups = array();
 
@@ -203,8 +201,7 @@ class PlatformGroupEntityFeedComponent extends PlatformGroupsFeedComponent
              \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
             $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(Group :: class_name(), (int) $filter_id);
-            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups(
-                $this->get_user());
+            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups($this->get_user());
 
             foreach ($target_groups as $target_group)
             {

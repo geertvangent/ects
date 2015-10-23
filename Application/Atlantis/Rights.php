@@ -106,7 +106,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
 
     public function get_access_location_entity_right($entity_id, $entity_type)
     {
-        return \Chamilo\Core\Rights\storage\DataManager :: retrieve_rights_location_entity_right(
+        return \Chamilo\Core\Rights\Storage\DataManager :: retrieve_rights_location_entity_right(
             __NAMESPACE__,
             self :: VIEW_RIGHT,
             $entity_id,
@@ -189,7 +189,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                 $condition = new InCondition(
                     new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
                     $allowed_groups);
-                $groups = \Chamilo\Core\Group\storage\DataManager :: retrieves(
+                $groups = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
                     Group :: class_name(),
                     new DataClassRetrievesParameters($condition));
 
@@ -226,7 +226,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
             }
             else
             {
-                $group = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
+                $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
                     Group :: class_name(),
                     (int) $group_id);
                 if ($group->is_parent_of($target_group_id))
@@ -275,7 +275,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                         RightsLocationEntityRight :: class_name(),
                         RightsLocationEntityRight :: PROPERTY_ID),
                     $location_entity_right_ids);
-                $location_entity_rights = \Chamilo\Core\Rights\storage\DataManager :: get_instance()->retrieve_rights_location_rights(
+                $location_entity_rights = \Chamilo\Core\Rights\Storage\DataManager :: get_instance()->retrieve_rights_location_rights(
                     __NAMESPACE__,
                     $condition);
 
@@ -290,7 +290,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                             }
                             break;
                         case PlatformGroupEntity :: ENTITY_TYPE :
-                            $group = \Chamilo\Core\Group\storage\DataManager :: get_instance()->retrieve_group(
+                            $group = \Chamilo\Core\Group\Storage\DataManager :: get_instance()->retrieve_group(
                                 $location_entity_right->get_entity_id());
 
                             if ($group instanceof Group)
@@ -315,7 +315,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                 $condition = new InCondition(
                     new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID),
                     $user_ids);
-                $authorized_user_count = \Chamilo\Core\User\storage\DataManager :: count(
+                $authorized_user_count = \Chamilo\Core\User\Storage\DataManager :: count(
                     User :: class_name(),
                     new DataClassCountParameters($condition));
 
@@ -332,7 +332,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                     new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_PLATFORMADMIN),
                     1);
             }
-            $authorized_users = \Chamilo\Core\User\storage\DataManager :: retrieves(
+            $authorized_users = \Chamilo\Core\User\Storage\DataManager :: retrieves(
                 User :: class_name(),
                 new DataClassRetrievesParameters($condition));
 
