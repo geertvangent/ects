@@ -1,0 +1,32 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\weblcms\tool\perception
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Perception wachtwoord"
+PasswordMailTitle = "[{PLATFORM}] QuestionMark Perception logingegevens"
+PasswordMailBody = "Beste {USER},<br />
+<br />
+Hieronder de gegevens die je nodig hebt om in te loggen op QuestionMark Perception:<br /><br />
+<b>URL:</b> http://perception.ehb.be<br />
+<b>Gebruikersnaam:</b> {EMAIL}<br />
+<b>Wachtwoord:</b> {PASSWORD}<br />
+<br />
+Indien je nog vragen hebt omtrent Perception, kan je contact opnemen met de helpdesk via perception@ehb.be.<br />
+<br />
+Met vriendelijke groeten,<br />
+{SENDER}"
+PasswordNotMailed = "Het wachtwoord werd niet verstuurd"
+SomePasswordsNotMailed = "Sommige wachtwoorden werden niet verstuurd"
+PasswordsNotMailed = "De wachtwoorden werden niet verstuurd"
+PasswordMailed = "Het wachtwoord werd succesvol verstuurd"
+PasswordsMailed = "De wachtwoorden werden succesvol verstuurd"
+NoPerceptionPassword = "Je lijkt niet over een Perception wachtwoord te beschikken, gelieve de cursusbeheerder te contacteren"
+GeneratePasswords = "Genereer wachtwoorden"
+MailPasswords = "Mail wachtwoorden"
+ExportPasswords = "Exporteer accounts"
+PasswordNotGenerated = "Het wachtwoord werd niet gegenereerd"
+SomePasswordsNotGenerated = "Sommige wachtwoorden werden niet gegenereerd"
+PasswordsNotGenerated = "De wachtwoorden werden niet gegenereerd"
+PasswordGenerated = "Het wachtwoord werd succesvol gegenereerd"
+PasswordsGenerated = "De wachtwoorden werden succesvol gegenereerd"

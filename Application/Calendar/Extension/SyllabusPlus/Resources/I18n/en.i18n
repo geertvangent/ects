@@ -1,0 +1,15 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = Chamilo\Application\Calendar\Extension\Office365
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Timetable"
+SourceName = "Timetable - {CALENDAR}"
+ActivityType = "Course type"
+OnDate = "On"
+FromTime = "from"
+ToTime = "until"
+AtLocation = "at"
+ByTeacher = "by"
+ActivityDateValue = "{DAY} from {FROM} until {UNTIL}"
+OtherCourseMoments = "Other scheduled course times"

@@ -1,0 +1,13 @@
+#header1 div.banner {
+	width: 209px !important;
+}
+
+#header1 div.banner span.logo {
+	background-image: url('../../Images/Ruby/LogoHeader.png') !important;
+	width: 209px !important;
+}
+
+#header1 {
+	background-image: url('../../Images/Ruby/BackgroundHeader.jpg')
+		!important;
+}
