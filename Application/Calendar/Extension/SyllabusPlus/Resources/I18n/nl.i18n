@@ -1,0 +1,15 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = Chamilo\Application\Calendar\Extension\Office365
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Lessenrooster"
+SourceName = "Lessenrooster - {CALENDAR}"
+ActivityType = "Lestype"
+OnDate = "Op"
+FromTime = "van"
+ToTime = "tot"
+AtLocation = "in"
+ByTeacher = "door"
+ActivityDateValue = "{DAY} van {FROM} tot {UNTIL}"
+OtherCourseMoments = "Andere lesmomenten"

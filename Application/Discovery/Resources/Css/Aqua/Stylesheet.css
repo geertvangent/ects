@@ -1,0 +1,50 @@
+@CHARSET "ISO-8859-1";
+
+span.course_child_link {
+	font-style: italic;
+	padding-left: 20px;
+}
+
+span.course_child_link a {
+	color: #c77071 !important;
+}
+
+span.course_child_text {
+	color: #99948d;
+}
+
+span.employment_part {
+	font-style: italic;
+	color: #99948d;
+}
+
+div #legend {
+	margin-top: 10px;
+	width: 400px;
+}
+
+.grey_data_table {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border-left: 1px solid #cecece;
+	border-top: 1px solid #cecece;
+	border-bottom: 1px solid #cecece;
+	border-spacing: 0px;
+}
+
+.grey_data_table th {
+	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #7b7b7b;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	border-right: 1px solid #cecece;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 6px 10px 6px 10px;
+	background: #e3e3e3
+		url(../../Images/Aqua/Background/GreyTableHeader.png) repeat-x;
+	overflow: hidden;
+	vertical-align: middle;
+}

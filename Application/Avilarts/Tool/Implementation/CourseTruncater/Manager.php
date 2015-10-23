@@ -1,0 +1,14 @@
+<?php
+namespace Ehb\Application\Avilarts\Tool\Implementation\CourseTruncater;
+
+/**
+ * This tool implements the course truncate tool for a course.
+ *
+ * @author Mattias De Pauw - Hogeschool Gent
+ * @author Maarten Volckaert - Hogeschool Gent
+ */
+abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
+{
+    const ACTION_BROWSE = 'Browser';
+    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+}

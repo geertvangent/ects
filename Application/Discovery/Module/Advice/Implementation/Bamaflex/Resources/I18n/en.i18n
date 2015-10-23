@@ -1,0 +1,19 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\advice\implementation\bamaflex
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Advice"
+ResultType = "Result type"
+Degree = "Degree"
+ContractType = "Contract type"
+TypeMeasuresValid = "Valid measures"
+Type = "Type"
+Try = "Try"
+Date = "Date"
+DecisionType = "Decision type"
+Advice = "Advice"
+TypeAdvice = "Advice"
+NoData = "There is currently no data available"
+TypeMotivation = "Motivation"
+TypeDescription = "Description"
