@@ -94,7 +94,7 @@ class HomeComponent extends Manager implements DelegateComponent
                     \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
                     \Ehb\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE)));
 
-        if (\Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        if (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
             $actions[] = new DynamicAction(
                 Translation :: get('CreateRoleEntity', null, $namespace),

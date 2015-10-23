@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Atlantis\UserGroup\Component;
 
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\UserGroup\Manager;
@@ -12,7 +11,7 @@ class DeleterComponent extends Manager
 
     public function run()
     {
-        $ids = Request :: get(self :: PARAM_APPLICATION_ID);
+        $ids = $this->getRequest()->get(self :: PARAM_APPLICATION_ID);
         $failures = 0;
 
         if (! empty($ids))

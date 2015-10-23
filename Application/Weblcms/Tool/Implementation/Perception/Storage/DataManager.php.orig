@@ -38,12 +38,19 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
     public static function get_course_user_ids($course_id)
     {
         // Retrieve the users directly subscribed to the course
+<<<<<<< local
         $userConditions = array();
         $userConditions[] = new EqualityCondition(
             new PropertyConditionVariable(
                 CourseEntityRelation :: class_name(),
                 CourseEntityRelation :: PROPERTY_COURSE_ID),
+=======
+        $relation_conditions = array();
+        $relation_conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(CourseUserRelation :: class_name(), CourseUserRelation :: PROPERTY_COURSE_ID),
+>>>>>>> other
             new StaticConditionVariable($course_id));
+<<<<<<< local
         $userConditions[] = new EqualityCondition(
             new PropertyConditionVariable(CourseEntityRelation :: class_name(), CourseEntityRelation :: PROPERTY_STATUS),
             new StaticConditionVariable(CourseEntityRelation :: STATUS_STUDENT));
@@ -104,7 +111,42 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         $group_users = array();
 
         while ($group = $groups->next_result())
+=======
+        $relation_conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(CourseUserRelation :: class_name(), CourseUserRelation :: PROPERTY_STATUS),
+            new StaticConditionVariable(CourseUserRelation :: STATUS_STUDENT));
+        $course_user_relation_result_set = \Chamilo\Application\Weblcms\Course\Storage\Datamanager :: retrieves(
+            CourseUserRelation :: class_name(),
+            new DataClassRetrievesParameters(new AndCondition($relation_conditions)));
+
+        $user_ids = array();
+        while ($course_user = $course_user_relation_result_set->next_result())
+>>>>>>> other
         {
+<<<<<<< local
+=======
+            $user_ids[] = $course_user->get_user_id();
+        }
+
+        // Retrieve the users subscribed through platform groups
+
+        $relation_conditions = array();
+        $relation_conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(CourseGroupRelation :: class_name(), CourseGroupRelation :: PROPERTY_COURSE_ID),
+            new StaticConditionVariable($course_id));
+        $relation_conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(CourseGroupRelation :: class_name(), CourseGroupRelation :: PROPERTY_STATUS),
+            new StaticConditionVariable(CourseGroupRelation :: STATUS_STUDENT));
+        $course_group_relations = \Chamilo\Application\Weblcms\Course\Storage\Datamanager :: retrieves(
+            CourseGroupRelation :: class_name(),
+            new DataClassRetrievesParameters(new AndCondition($relation_conditions)));
+
+        $group_users = array();
+
+        while ($group_relation = $course_group_relations->next_result())
+        {
+            $group = $group_relation->get_group();
+>>>>>>> other
             $group_user_ids = $group->get_users(true, true);
 
             $group_users = array_merge($group_users, $group_user_ids);
@@ -130,11 +172,17 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         $conditions[] = new NotCondition(
             new InCondition(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), $password_user_ids));
         $condition = new AndCondition($conditions);
+<<<<<<< local
+
+        $users = \Chamilo\Core\User\Storage\DataManager :: retrieves(User :: class_name(), $condition);
+
+=======
 
         $users = \Chamilo\Core\User\Storage\DataManager :: retrieves(
             User :: class_name(),
             new DataClassRetrievesParameters($condition));
 
+>>>>>>> other
         $failures = 0;
 
         while ($user = $users->next_result())

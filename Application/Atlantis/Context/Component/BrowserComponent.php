@@ -42,7 +42,7 @@ class BrowserComponent extends Manager implements TableSupport
         }
         if ($this->get_context() != 0)
         {
-            $context = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
+            $context = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
                 Group :: class_name(),
                 (int) $this->get_context());
         }
@@ -118,6 +118,7 @@ class BrowserComponent extends Manager implements TableSupport
         }
         return $this->action_bar;
     }
+
     /*
      * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */

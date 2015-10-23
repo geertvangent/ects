@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Entitlement\Component;
 
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Atlantis\Role\Entitlement\Manager;
@@ -13,7 +12,7 @@ class DeleterComponent extends Manager
 
     public function run()
     {
-        $ids = Request :: get(self :: PARAM_ENTITLEMENT_ID);
+        $ids = $this->getRequest()->get(self :: PARAM_ENTITLEMENT_ID);
         $failures = 0;
 
         if (! empty($ids))

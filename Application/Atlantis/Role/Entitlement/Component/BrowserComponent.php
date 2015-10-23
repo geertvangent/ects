@@ -138,8 +138,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
         if ($this->has_role_id())
         {
-            $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $role = \Ehb\Application\Atlantis\Role\Storage\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
                 (int) $this->role_id);
 
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));

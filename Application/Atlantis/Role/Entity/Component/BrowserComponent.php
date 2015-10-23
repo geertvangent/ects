@@ -126,7 +126,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     {
         if ($this->has_context_id() && ! $this->has_entity() && ! $this->has_role_id())
         {
-            $context = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
+            $context = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
                 \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
                 (int) $this->context_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $context->get_name()));
@@ -142,8 +142,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         }
         elseif (! $this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
         {
-            $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $role = \Ehb\Application\Atlantis\Role\Storage\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
                 (int) $this->role_id);
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
             SessionBreadcrumbs :: add(
@@ -155,12 +155,12 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         }
         elseif ($this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
         {
-            $context = \Chamilo\Core\Group\storage\DataManager :: retrieve_by_id(
+            $context = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
                 Group :: class_name(),
                 (int) $this->context_id);
 
-            $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $role = \Ehb\Application\Atlantis\Role\Storage\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
                 (int) $this->role_id);
 
             SessionBreadcrumbs :: add(
@@ -209,6 +209,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
         return implode(PHP_EOL, $html);
     }
+
     /*
      * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */

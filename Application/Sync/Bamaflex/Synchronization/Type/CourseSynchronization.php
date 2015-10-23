@@ -4,10 +4,10 @@ namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type;
 use Chamilo\Application\Weblcms\CourseSettingsConnector;
 use Chamilo\Application\Weblcms\CourseSettingsController;
 use Chamilo\Application\Weblcms\Course\Storage\DataClass\Course;
-use Chamilo\Application\Weblcms\Course\Storage\DataClass\CourseGroupRelation;
 use Chamilo\Application\Weblcms\Rights\CourseManagementRights;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
+use Chamilo\Application\Weblcms\Storage\DataClass\CourseEntityRelation;
 
 /**
  *
@@ -89,7 +89,7 @@ class CourseSynchronization extends Synchronization
                     \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_group_to_course(
                         $new_course->get_id(),
                         $group->get_id(),
-                        CourseGroupRelation :: STATUS_TEACHER);
+                        CourseEntityRelation :: STATUS_TEACHER);
                     self :: log('added teacher group', $new_course->get_title());
                 }
 
@@ -99,7 +99,7 @@ class CourseSynchronization extends Synchronization
                     \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_group_to_course(
                         $new_course->get_id(),
                         $group->get_id(),
-                        CourseGroupRelation :: STATUS_STUDENT);
+                        CourseEntityRelation :: STATUS_STUDENT);
                     self :: log('added student group', $new_course->get_title());
                 }
             }
@@ -124,7 +124,7 @@ class CourseSynchronization extends Synchronization
                     \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_group_to_course(
                         $current_course->get_id(),
                         $group->get_id(),
-                        CourseGroupRelation :: STATUS_TEACHER);
+                        CourseEntityRelation :: STATUS_TEACHER);
                     self :: log('added teacher group', $current_course->get_title());
                 }
             }
@@ -139,7 +139,7 @@ class CourseSynchronization extends Synchronization
                     \Chamilo\Application\Weblcms\Course\Storage\DataManager :: subscribe_group_to_course(
                         $current_course->get_id(),
                         $group->get_id(),
-                        CourseGroupRelation :: STATUS_STUDENT);
+                        CourseEntityRelation :: STATUS_STUDENT);
                     self :: log('added student group', $current_course->get_title());
                 }
             }

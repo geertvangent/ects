@@ -1,11 +1,10 @@
 <?php
 namespace Ehb\Application\Atlantis\Role\Component;
 
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Application\Atlantis\Role\DataClass\Role;
-use Ehb\Application\Atlantis\Role\DataManager;
+use Ehb\Application\Atlantis\Role\Storage\DataClass\Role;
+use Ehb\Application\Atlantis\Role\Storage\DataManager;
 use Ehb\Application\Atlantis\Role\Manager;
 
 class DeleterComponent extends Manager
@@ -13,7 +12,7 @@ class DeleterComponent extends Manager
 
     public function run()
     {
-        $ids = Request :: get(self :: PARAM_ROLE_ID);
+        $ids = $this->getRequest()->get(self :: PARAM_ROLE_ID);
         $failures = 0;
 
         if (! empty($ids))

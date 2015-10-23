@@ -14,7 +14,7 @@ class DeleterComponent extends Manager
 
     public function run()
     {
-        $ids = Request :: get(self :: PARAM_ROLE_ENTITY_ID);
+        $ids = $this->getRequest()->get(self :: PARAM_ROLE_ENTITY_ID);
         $context_id = Request :: get(\Ehb\Application\Atlantis\Context\Manager :: PARAM_CONTEXT_ID);
         $role_id = Request :: get(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID);
 
@@ -31,7 +31,7 @@ class DeleterComponent extends Manager
             {
                 $role_entity = DataManager :: retrieve_by_id(RoleEntity :: class_name(), (int) $id);
 
-                if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+                if (! \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
                 {
                     $failures ++;
                 }

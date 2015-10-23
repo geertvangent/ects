@@ -21,7 +21,7 @@ class RoleTable extends Table implements TableFormActionsSupport
         {
             $actions->add_form_action(
                 new TableFormAction(
-                    array(Manager :: PARAM_ACTION => Manager :: ACTION_DELETE), 
+                    array(Manager :: PARAM_ACTION => Manager :: ACTION_DELETE),
                     Translation :: get('RemoveSelected', null, Utilities :: COMMON_LIBRARIES)));
         }
         return $actions;
