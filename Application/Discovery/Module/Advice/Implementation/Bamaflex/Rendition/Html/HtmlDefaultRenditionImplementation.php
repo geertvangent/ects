@@ -57,7 +57,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                              '" title="' .
                              Translation :: get($enrollment->get_result_string(), null, $enrollment_namespace) . '" />';
                         $html[] = $tab_image;
-                        LegendTable :: get_instance()->add_symbol(
+                        LegendTable :: getInstance()->addSymbol(
                             $tab_image,
                             Translation :: get($enrollment->get_result_string(), null, $enrollment_namespace),
                             Translation :: get('ResultType'),
@@ -74,7 +74,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                          Translation :: get($enrollment->get_contract_type_string(), null, $enrollment_namespace) .
                          '" />';
                     $html[] = $tab_image;
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $tab_image,
                         Translation :: get($enrollment->get_contract_type_string(), null, $enrollment_namespace),
                         Translation :: get('ContractType'),
@@ -130,7 +130,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '" title="' .
                      Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)) . '"/>';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(Advice :: type_string(Advice :: TYPE_MOTIVATION)),
                     Translation :: get('Type'));
@@ -154,7 +154,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)) . '" title="' .
                      Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)) . '"/>';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(Advice :: type_string(Advice :: TYPE_OMBUDSMAN)),
                     Translation :: get('Type'));
@@ -177,7 +177,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)) . '" title="' .
                      Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)) . '"/>';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(Advice :: type_string(Advice :: TYPE_VOTE)),
                     Translation :: get('Type'));
@@ -202,7 +202,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                          Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)) . '" title="' .
                          Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)) . '"/>';
                     $row[] = $image;
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $image,
                         Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_VALID)),
                         Translation :: get('Type'));
@@ -214,7 +214,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                          Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)) . '" title="' .
                          Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)) . '"/>';
                     $row[] = $image;
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $image,
                         Translation :: get(Advice :: type_string(Advice :: TYPE_MEASURES_INVALID)),
                         Translation :: get('Type'));
@@ -237,7 +237,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      '.png" alt="' . Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)) . '" title="' .
                      Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)) . '"/>';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(Advice :: type_string(Advice :: TYPE_ADVICE)),
                     Translation :: get('Type'));

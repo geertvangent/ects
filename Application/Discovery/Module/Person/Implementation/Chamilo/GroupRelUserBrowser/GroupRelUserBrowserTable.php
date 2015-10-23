@@ -22,7 +22,7 @@ class GroupRelUserBrowserTable extends Table
 //             Utilities :: get_classname_from_namespace(__CLASS__, true),
 //             $model,
 //             $renderer);
-//         $this->set_additional_parameters($parameters);
+//         $this->setAdditionalParameters($parameters);
 //     }
 
 //     /**

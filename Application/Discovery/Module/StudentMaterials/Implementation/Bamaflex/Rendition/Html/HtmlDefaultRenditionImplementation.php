@@ -88,7 +88,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             $year_enrollment->get_result_string(),
                             null,
                             'Application\Discovery\Module\Enrollment\Implementation\Bamaflex') . '" />';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $tab_image,
                         Translation :: get(
                             $year_enrollment->get_result_string(),
@@ -220,7 +220,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         'Ehb/Application/Discovery/Module/StudentMaterials/Implementation/Bamaflex') .
                          'Material/ForSale.png" alt="' . Translation :: get('IsForSale') . '" title="' .
                          Translation :: get('IsForSale') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $image,
                         Translation :: get('IsForSale'),
                         Translation :: get('ForSale'));
@@ -232,7 +232,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         'Ehb/Application/Discovery/Module/StudentMaterials/Implementation/Bamaflex') .
                          'Material/NotForSale.png" alt="' . Translation :: get('IsNotForSale') . '" title="' .
                          Translation :: get('IsNotForSale') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $image,
                         Translation :: get('IsNotForSale'),
                         Translation :: get('ForSale'));
@@ -310,7 +310,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             $image = '<img src="' . Theme :: getInstance()->getImagePath() .
                                  'Material/ForSale.png" alt="' . Translation :: get('IsForSale') . '" title="' .
                                  Translation :: get('IsForSale') . '"/>';
-                            LegendTable :: get_instance()->add_symbol(
+                            LegendTable :: getInstance()->addSymbol(
                                 $image,
                                 Translation :: get('IsForSale'),
                                 Translation :: get('ForSale'));
@@ -321,7 +321,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                             $image = '<img src="' . Theme :: getInstance()->getImagePath() .
                                  'Material/NotForSale.png" alt="' . Translation :: get('IsNotForSale') . '" title="' .
                                  Translation :: get('IsNotForSale') . '"/>';
-                            LegendTable :: get_instance()->add_symbol(
+                            LegendTable :: getInstance()->addSymbol(
                                 $image,
                                 Translation :: get('IsNotForSale'),
                                 Translation :: get('ForSale'));

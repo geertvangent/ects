@@ -80,7 +80,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                  '.png" alt="' . Translation :: get($exemption->get_state_string()) . '" title="' .
                  Translation :: get($exemption->get_state_string()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol(
+            LegendTable :: getInstance()->addSymbol(
                 $image,
                 Translation :: get($exemption->get_state_string()),
                 Translation :: get('State'));

@@ -92,7 +92,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $tab_image = '<img src="' . $tab_image_path . '" alt="' .
                          Translation :: get($last_enrollment->get_result_string()) . '" title="' .
                          Translation :: get($last_enrollment->get_result_string()) . '" />';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $tab_image,
                         Translation :: get($last_enrollment->get_result_string()),
                         Translation :: get('ResultType'));
@@ -155,7 +155,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      Translation :: get($enrollment->get_result_string()) . '" title="' .
                      Translation :: get($enrollment->get_result_string()) . '" />';
                 $contract_html[] = $tab_image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $tab_image,
                     Translation :: get($enrollment->get_result_string()),
                     Translation :: get('ResultType'));
@@ -170,7 +170,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                  Translation :: get($enrollment->get_contract_type_string()) . '" title="' .
                  Translation :: get($enrollment->get_contract_type_string()) . '" />';
             $contract_html[] = $tab_image;
-            LegendTable :: get_instance()->add_symbol(
+            LegendTable :: getInstance()->addSymbol(
                 $tab_image,
                 Translation :: get($enrollment->get_contract_type_string()),
                 Translation :: get('ContractType'));
@@ -348,7 +348,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      $course->get_type() . '.png" alt="' . Translation :: get($course->get_type_string()) . '" title="' .
                      Translation :: get($course->get_type_string()) . '" />';
                 $row[] = $course_type_image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $course_type_image,
                     Translation :: get($course->get_type_string()),
                     Translation :: get('CourseType'));
@@ -418,7 +418,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                  $mark->get_status() . 'Na.png" alt="' .
                                  Translation :: get($mark->get_status_string() . 'Abandoned') . '" title="' .
                                  Translation :: get($mark->get_status_string() . 'Abandoned') . '" />';
-                            LegendTable :: get_instance()->add_symbol(
+                            LegendTable :: getInstance()->addSymbol(
                                 $mark_status_image,
                                 Translation :: get($mark->get_status_string() . 'Abandoned'),
                                 Translation :: get('MarkStatus'));
@@ -430,7 +430,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                     'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'StatusType/' .
                                  $mark->get_status() . '.png" alt="' . Translation :: get($mark->get_status_string()) .
                                  '" title="' . Translation :: get($mark->get_status_string()) . '" />';
-                            LegendTable :: get_instance()->add_symbol(
+                            LegendTable :: getInstance()->addSymbol(
                                 $mark_status_image,
                                 Translation :: get($mark->get_status_string()),
                                 Translation :: get('MarkStatus'));
@@ -450,7 +450,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                              'mark_result_na.png" alt="' . Translation :: get('ResultNotYetAvailable') . '" title="' .
                              Translation :: get('ResultNotYetAvailable') . '" />';
                         $row[] = $result_na_image;
-                        LegendTable :: get_instance()->add_symbol(
+                        LegendTable :: getInstance()->addSymbol(
                             $result_na_image,
                             Translation :: get('ResultNotYetAvailable'),
                             Translation :: get('MarkResult'));
@@ -482,7 +482,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                              $child->get_type() . '.png" alt="' . Translation :: get($child->get_type_string()) .
                              '" title="' . Translation :: get($child->get_type_string()) . '" />';
                         $row[] = $child_type_image;
-                        LegendTable :: get_instance()->add_symbol(
+                        LegendTable :: getInstance()->addSymbol(
                             $child_type_image,
                             Translation :: get($child->get_type_string()),
                             Translation :: get('CourseType'));
@@ -551,7 +551,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                      'mark_result_na.png" alt="' . Translation :: get('ResultNotYetAvailable') .
                                      '" title="' . Translation :: get('ResultNotYetAvailable') . '" />';
                                 $row[] = $result_na_image;
-                                LegendTable :: get_instance()->add_symbol(
+                                LegendTable :: getInstance()->addSymbol(
                                     $result_na_image,
                                     Translation :: get('ResultNotYetAvailable'),
                                     Translation :: get('MarkResult'));

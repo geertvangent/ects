@@ -120,7 +120,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      $enrollment->get_result() . '.png" alt="' . Translation :: get($enrollment->get_result_string()) .
                      '" title="' . Translation :: get($enrollment->get_result_string()) . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get($enrollment->get_result_string()),
                     Translation :: get('ResultType'));
@@ -137,7 +137,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      $enrollment->get_generation_student() . '.png" alt="' . Translation :: get('GenerationStudent') .
                      '" title="' . Translation :: get('GenerationStudent') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('GenerationStudent'),
                     Translation :: get('Enrollment'));

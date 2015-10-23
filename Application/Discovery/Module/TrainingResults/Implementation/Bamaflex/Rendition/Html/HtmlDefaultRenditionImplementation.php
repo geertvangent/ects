@@ -419,7 +419,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         null,
                         'Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         $enrollment->get_result_string(),
@@ -447,7 +447,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         null,
                         'Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         $enrollment->get_distinction_string(),

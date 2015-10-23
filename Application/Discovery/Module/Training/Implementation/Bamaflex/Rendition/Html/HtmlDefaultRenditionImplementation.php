@@ -77,7 +77,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                  $training->get_bama_type() . '.png" alt="' . Translation :: get($training->get_bama_type_string()) .
                  '" title="' . Translation :: get($training->get_bama_type_string()) . '" />';
             $row[] = $bama_type_image;
-            LegendTable :: get_instance()->add_symbol(
+            LegendTable :: getInstance()->addSymbol(
                 $bama_type_image,
                 Translation :: get($training->get_bama_type_string()),
                 Translation :: get('BamaType'));

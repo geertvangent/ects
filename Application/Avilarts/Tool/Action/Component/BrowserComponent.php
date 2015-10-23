@@ -79,7 +79,7 @@ class BrowserComponent extends Manager
             $this->get_parent()->get_browser_type(),
             $this);
 
-        $actions = new TableFormActions(__NAMESPACE__);
+        $actions = new TableFormActions(__NAMESPACE__, self :: TABLE_IDENTIFIER);
 
         $actions->add_form_action(
             new TableFormAction(

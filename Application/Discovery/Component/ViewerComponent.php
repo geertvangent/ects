@@ -226,7 +226,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         $html[] = $this->render_header();
         $html[] = $content;
         $html[] = '<div id="legend">';
-        $html[] = LegendTable :: get_instance()->as_html();
+        $html[] = LegendTable :: getInstance()->toHtml();
         $html[] = '</div>';
         $html[] = $this->render_footer();
 

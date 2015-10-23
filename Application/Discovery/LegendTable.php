@@ -3,6 +3,13 @@ namespace Ehb\Application\Discovery;
 
 use Chamilo\Libraries\Platform\Translation;
 
+/**
+ *
+ * @package Ehb\Application\Discovery
+ * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
+ * @author Magali Gillard <magali.gillard@ehb.be>
+ * @author Eduard Vossen <eduard.vossen@ehb.be>
+ */
 class LegendTable extends SortableTable
 {
 
@@ -11,48 +18,44 @@ class LegendTable extends SortableTable
      */
     private static $instance;
 
-    public function __construct($table_data, $default_column = 1, $default_items_per_page = 20, $tablename = 'tablename', 
-        $default_direction = SORT_ASC)
+    public function __construct($tableData, $defaultOrderColumn = 1, $defaultPerPage = 20, $tableName = 'tablename',
+        $defaultOrderDirection = SORT_ASC)
     {
-        parent :: __construct($table_data, $default_column, $default_items_per_page, $tablename, $default_direction);
-        
+        parent :: __construct($tableData, $defaultOrderColumn, $defaultPerPage, $tableName, $defaultOrderDirection);
+
         $this->set_header(0, '', false);
         $this->set_header(1, Translation :: get('Type'), false);
         $this->set_header(2, Translation :: get('Legend'), false);
         $this->getHeader()->setColAttributes(0, 'class="action"');
     }
 
-    /**
-     * Get table data to show on current page
-     * 
-     * @see SortableTable#get_table_data
-     */
-    public function get_table_data()
+    public function getData()
     {
         $table_data = array();
-        
-        foreach ($this->get_data() as $category)
+
+        foreach ($this->getData() as $category)
         {
             foreach ($category as $key => $row)
             {
                 $table_data[$key] = $row;
             }
         }
-        
+
         return $table_data;
     }
 
     /**
      * Returns the instance of this class.
-     * 
+     *
      * @return LegendTable
      */
-    public static function get_instance()
+    public static function getInstance()
     {
         if (! isset(self :: $instance))
         {
             self :: $instance = new self();
         }
+
         return self :: $instance;
     }
 
@@ -61,15 +64,15 @@ class LegendTable extends SortableTable
      * @param string $symbol
      * @param string $description
      */
-    public function add_symbol($symbol, $description = null, $category = null)
+    public function addSymbol($symbol, $description = null, $category = null)
     {
         $key = md5($symbol);
-        
-        $data = $this->get_data();
+
+        $data = $this->getData();
         if (! key_exists($category, $data) || ! key_exists($key, $data[$category]))
         {
             $data[$category][$key] = array($symbol, $category, $description);
-            $this->set_data($data);
+            $this->setTableData($data);
         }
     }
 }

@@ -28,7 +28,7 @@ class UnsubscribedUserTable extends DataClassTable implements TableFormActionsSu
         if (! Request :: get(\Ehb\Application\Avilarts\Manager :: PARAM_GROUP))
         {
             // add subscribe options
-            $actions = new TableFormActions(__NAMESPACE__);
+            $actions = new TableFormActions(__NAMESPACE__, self :: TABLE_IDENTIFIER);
             
             $actions->add_form_action(
                 new TableFormAction(

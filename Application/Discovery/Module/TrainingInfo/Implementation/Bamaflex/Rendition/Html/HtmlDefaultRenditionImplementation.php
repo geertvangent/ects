@@ -404,7 +404,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     false,
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('Students', null, 'Ehb\Application\Discovery\Module\Photo'),
                     Translation :: get('TypeName', null, 'Ehb\Application\Discovery\Module\Photo'));
@@ -425,7 +425,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     false,
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('Teachers', null, 'Ehb\Application\Discovery\Module\Photo
                     '),
@@ -443,7 +443,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     false,
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         'StudentsNotAvailable',
@@ -466,7 +466,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     false,
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         'TeachersNotAvailable',

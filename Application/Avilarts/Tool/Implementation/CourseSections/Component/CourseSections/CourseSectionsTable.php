@@ -22,7 +22,7 @@ class CourseSectionsTable extends DataClassTable implements TableFormActionsSupp
 
     public function get_implemented_form_actions()
     {
-        $actions = new TableFormActions(__NAMESPACE__);
+        $actions = new TableFormActions(__NAMESPACE__, self :: TABLE_IDENTIFIER);
         $actions->add_form_action(
             new TableFormAction(
                 array(Manager :: PARAM_ACTION => Manager :: PARAM_REMOVE_SELECTED), 

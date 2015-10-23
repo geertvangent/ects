@@ -262,7 +262,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                 $mark->get_status_string() . 'Abandoned',
                                 null,
                                 'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . '" />';
-                        LegendTable :: get_instance()->add_symbol(
+                        LegendTable :: getInstance()->addSymbol(
                             $mark_status_image,
                             Translation :: get(
                                 $mark->get_status_string() . 'Abandoned',
@@ -285,7 +285,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                                 $mark->get_status_string(),
                                 null,
                                 'Ehb\Application\Discovery\Module\career\Implementation\Bamaflex') . '" />';
-                        LegendTable :: get_instance()->add_symbol(
+                        LegendTable :: getInstance()->addSymbol(
                             $mark_status_image,
                             Translation :: get(
                                 $mark->get_status_string(),

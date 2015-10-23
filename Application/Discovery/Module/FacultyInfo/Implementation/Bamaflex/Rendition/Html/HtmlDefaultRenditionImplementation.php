@@ -295,7 +295,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     false,
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('Students', null, 'Ehb\Application\Discovery\Module\Photo
                     '),
@@ -318,7 +318,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
 
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('Teachers', null, 'Ehb\Application\Discovery\Module\Photo
                     '),
@@ -341,7 +341,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
 
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('Employees', null, 'Ehb\Application\Discovery\Module\Photo
                     '),
@@ -359,7 +359,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     false,
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         'StudentsNotAvailable',
@@ -383,7 +383,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
 
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         'TeachersNotAvailable',
@@ -407,7 +407,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
 
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         'EmployeesNotAvailable',
@@ -484,7 +484,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     null,
                     'Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex') . '" />';
             $row[] = $bama_type_image;
-            LegendTable :: get_instance()->add_symbol(
+            LegendTable :: getInstance()->addSymbol(
                 $bama_type_image,
                 Translation :: get(
                     $training->get_bama_type_string(),

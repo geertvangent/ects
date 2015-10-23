@@ -259,7 +259,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      $course->get_timeframe_visual_id() . '.png" alt="' . Translation :: get($course->get_timeframe()) .
                      '" title="' . Translation :: get($course->get_timeframe()) . '"/>';
                 $properties[Translation :: get('Timeframe')] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get($course->get_timeframe()),
                     Translation :: get('Timeframe'));
@@ -386,7 +386,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $images = array();
         $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'General/FollowingImpossible/degree.png" alt="' .
              Translation :: get('DegreePossible') . '" title="' . Translation :: get('DegreePossible') . '"/>';
-        LegendTable :: get_instance()->add_symbol(
+        LegendTable :: getInstance()->addSymbol(
             $image,
             Translation :: get('DegreePossible'),
             Translation :: get('FollowingPossible'));
@@ -398,7 +398,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                      'General/FollowingImpossible/credit_impossible.png" alt="' . Translation :: get('CreditImpossible') .
                      '" title="' . Translation :: get('CreditImpossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('CreditImpossible'),
                     Translation :: get('FollowingPossible'));
@@ -409,7 +409,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                      'General/FollowingImpossible/credit.png" alt="' . Translation :: get('CreditPossible') . '" title="' .
                      Translation :: get('CreditPossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('CreditPossible'),
                     Translation :: get('FollowingPossible'));
@@ -425,7 +425,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      'General/FollowingImpossible/exam_degree_impossible.png" alt="' .
                      Translation :: get('ExamDegreeImpossible') . '" title="' .
                      Translation :: get('ExamDegreeImpossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('ExamDegreeImpossible'),
                     Translation :: get('FollowingPossible'));
@@ -436,7 +436,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                      'General/FollowingImpossible/exam_degree.png" alt="' . Translation :: get('ExamDegreePossible') .
                      '" title="' . Translation :: get('ExamDegreePossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('ExamDegreePossible'),
                     Translation :: get('FollowingPossible'));
@@ -452,7 +452,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      'General/FollowingImpossible/exam_credit_impossible.png" alt="' .
                      Translation :: get('ExamCreditImpossible') . '" title="' .
                      Translation :: get('ExamCreditImpossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('ExamCreditImpossible'),
                     Translation :: get('FollowingPossible'));
@@ -463,7 +463,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                      'General/FollowingImpossible/exam_credit.png" alt="' . Translation :: get('ExamCreditPossible') .
                      '" title="' . Translation :: get('ExamCreditPossible') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('ExamCreditPossible'),
                     Translation :: get('FollowingPossible'));
@@ -504,7 +504,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     false,
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('Students', null, 'Ehb\Application\Discovery\Module\Photo
                     '),
@@ -527,7 +527,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     false,
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         'TeachersNotAvailable',
@@ -548,7 +548,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
 
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         'StudentsNotAvailable',
@@ -571,7 +571,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     'Ehb\Application\Discovery\Module\Photo');
                 $buttons[] = $image;
 
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get(
                         'TeachersNotAvailable',
@@ -751,7 +751,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Material/for_sale.png" alt="' .
                          Translation :: get('IsForSale') . '" title="' . Translation :: get('IsForSale') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $image,
                         Translation :: get('IsForSale'),
                         Translation :: get('ForSale'));
@@ -761,7 +761,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Material/not_for_sale.png" alt="' .
                          Translation :: get('IsNotForSale') . '" title="' . Translation :: get('IsNotForSale') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $image,
                         Translation :: get('IsNotForSale'),
                         Translation :: get('ForSale'));
@@ -1159,7 +1159,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $exam_image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                      'Evaluation/SecondChance/exam_allowed.png" alt="' . Translation :: get('SecondChanceExamAllowed') .
                      '" title="' . Translation :: get('SecondChanceExamAllowed') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $exam_image,
                     Translation :: get('SecondChanceExamAllowed'),
                     Translation :: get('SecondChanceExam'));
@@ -1170,7 +1170,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      'Evaluation/SecondChance/exam_not_allowed.png" alt="' .
                      Translation :: get('SecondChanceExamNotAllowed') . '" title="' .
                      Translation :: get('SecondChanceExamNotAllowed') . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $exam_image,
                     Translation :: get('SecondChanceExamNotAllowed'),
                     Translation :: get('SecondChanceExam'));
@@ -1185,7 +1185,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                          'Evaluation/SecondChance/enrollment_allowed.png" alt="' .
                          Translation :: get('SecondChanceEnrollmentAllowed') . '" title="' .
                          Translation :: get('SecondChanceEnrollmentAllowed') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $enrollment_image,
                         Translation :: get('SecondChanceEnrollmentAllowed'),
                         Translation :: get('SecondChanceEnrollment'));
@@ -1196,7 +1196,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                          'Evaluation/SecondChance/enrollment_not_allowed.png" alt="' .
                          Translation :: get('SecondChanceEnrollmentNotAllowed') . '" title="' .
                          Translation :: get('SecondChanceEnrollmentNotAllowed') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $enrollment_image,
                         Translation :: get('SecondChanceEnrollmentNotAllowed'),
                         Translation :: get('SecondChanceEnrollment'));
@@ -1251,7 +1251,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      'Evaluation/SecondChance/exam_parts/' . $course->get_second_chance()->get_exam_parts() .
                      '.png" alt="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) .
                      '" title="' . Translation :: get($course->get_second_chance()->get_exam_parts_string()) . '"/>';
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $exam_parts_image,
                     Translation :: get($course->get_second_chance()->get_exam_parts_string()),
                     Translation :: get('SecondChance'));
@@ -1290,7 +1290,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Evaluation/permanent.png" alt="' .
                          Translation :: get('IsPermanent') . '" title="' . Translation :: get('IsPermanent') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $image,
                         Translation :: get('IsPermanent'),
                         Translation :: get('Permanent'));
@@ -1301,7 +1301,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $image = '<img src="' . Theme :: getInstance()->getImagesPath() .
                          'Evaluation/not_permanent.png" alt="' . Translation :: get('IsNotPermanent') . '" title="' .
                          Translation :: get('IsNotPermanent') . '"/>';
-                    LegendTable :: get_instance()->add_symbol(
+                    LegendTable :: getInstance()->addSymbol(
                         $image,
                         Translation :: get('IsNotPermanent'),
                         Translation :: get('Permanent'));

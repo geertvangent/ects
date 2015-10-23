@@ -157,7 +157,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                  Translation :: get($teaching_assignment->get_manager_type()) . '" title="' .
                  Translation :: get($teaching_assignment->get_manager_type()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol(
+            LegendTable :: getInstance()->addSymbol(
                 $image,
                 Translation :: get($teaching_assignment->get_manager_type()),
                 Translation :: get('Manager'));
@@ -167,7 +167,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                  Translation :: get($teaching_assignment->get_teacher_type()) . '" title="' .
                  Translation :: get($teaching_assignment->get_teacher_type()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol(
+            LegendTable :: getInstance()->addSymbol(
                 $image,
                 Translation :: get($teaching_assignment->get_teacher_type()),
                 Translation :: get('Teacher'));
@@ -203,7 +203,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                  Translation :: get($teaching_assignment->get_timeframe()) . '" title="' .
                  Translation :: get($teaching_assignment->get_timeframe()) . '"/>';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol(
+            LegendTable :: getInstance()->addSymbol(
                 $image,
                 Translation :: get($teaching_assignment->get_timeframe()),
                 Translation :: get('Timeframe'));

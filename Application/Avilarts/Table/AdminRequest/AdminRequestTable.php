@@ -23,7 +23,7 @@ class AdminRequestTable extends DataClassTable implements TableFormActionsSuppor
 
     public function get_implemented_form_actions()
     {
-        $actions = new TableFormActions(__NAMESPACE__);
+        $actions = new TableFormActions(__NAMESPACE__, self :: TABLE_IDENTIFIER);
         
         $actions->add_form_action(
             new TableFormAction(

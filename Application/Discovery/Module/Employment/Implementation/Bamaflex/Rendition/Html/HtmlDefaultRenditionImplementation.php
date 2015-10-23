@@ -112,7 +112,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                      $employment->get_fund_id() . '.png" alt="' . Translation :: get($employment->get_fund_string()) .
                      '" title="' . Translation :: get($employment->get_fund_string()) . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get($employment->get_fund_string()),
                     Translation :: get('Fund'));
@@ -122,7 +122,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'Fund/0.png" alt="' .
                      Translation :: get('UnknownFund') . '" title="' . Translation :: get('UnknownFund') . '" />';
                 $row[] = $image;
-                LegendTable :: get_instance()->add_symbol(
+                LegendTable :: getInstance()->addSymbol(
                     $image,
                     Translation :: get('UnknownFund'),
                     Translation :: get('Fund'));
@@ -134,7 +134,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                  $employment->get_active() . '.png" alt="' . Translation :: get($employment->get_active_string()) .
                  '" title="' . Translation :: get($employment->get_active_string()) . '" />';
             $row[] = $image;
-            LegendTable :: get_instance()->add_symbol(
+            LegendTable :: getInstance()->addSymbol(
                 $image,
                 Translation :: get($employment->get_active_string()),
                 Translation :: get('Active'));
