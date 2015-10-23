@@ -17,7 +17,10 @@ class DiscoverySynchronization
 
     function run()
     {
-        $old_entity_rights = DataManager :: retrieves(RightsGroupEntityRight :: class_name());
+        $old_entity_rights = DataManager :: retrieves(
+            RightsGroupEntityRight :: class_name(),
+            new DataClassRetrievesParameters());
+
         $new_entity_right_cache = array();
         $old_entity_right_cache = array();
 
@@ -44,7 +47,7 @@ class DiscoverySynchronization
                 \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: PROPERTY_APPLICATION_ID),
             new StaticConditionVariable($application->get_id()));
 
-        $parameters = DataClassRetrievesParameters :: generate($condition);
+        $parameters = new DataClassRetrievesParameters($condition);
 
         $rights = \Ehb\Application\Atlantis\Application\Right\Storage\DataManager :: retrieves(
             \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
@@ -70,7 +73,7 @@ class DiscoverySynchronization
                         \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement :: PROPERTY_RIGHT_ID),
                     new StaticConditionVariable($right->get_id()));
 
-                $parameters = DataClassRetrievesParameters :: generate($condition);
+                $parameters = new DataClassRetrievesParameters($condition);
 
                 $entitlements = \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataManager :: retrieves(
                     \Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement :: class_name(),
@@ -100,7 +103,7 @@ class DiscoverySynchronization
                         new StaticConditionVariable(time()));
 
                     $condition = new AndCondition($conditions);
-                    $parameters = DataClassRetrievesParameters :: generate($condition);
+                    $parameters = new DataClassRetrievesParameters($condition);
 
                     $entities = \Ehb\Application\Atlantis\Role\Entity\Storage\DataManager :: retrieves(
                         \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),

@@ -52,7 +52,7 @@ class RightsEditorComponent extends Manager
 
         $factory = new ApplicationFactory(
             \Chamilo\Core\Rights\Editor\Manager :: context(),
-           new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
+            new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
 
         $component = $factory->getComponent();
         $component->set_locations($this->get_locations());
@@ -220,7 +220,7 @@ class RightsEditorComponent extends Manager
 
         $platform_group_relations = $course_group_relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseGroupRelation :: class_name(),
-            $relation_condition);
+            new DataClassRetrievesParameters($relation_condition));
 
         $limited_users = array();
 
@@ -236,7 +236,7 @@ class RightsEditorComponent extends Manager
                 new StaticConditionVariable($platform_group_id));
             $group_rel_users_dataset = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
                 GroupRelUser :: class_name(),
-                $eq_condition);
+                new DataClassRetrievesParameters($eq_condition));
             while ($group_rel_user = $group_rel_users_dataset->next_result())
             {
                 $limited_users[] = $group_rel_user->get_user_id();
@@ -267,7 +267,7 @@ class RightsEditorComponent extends Manager
             // retrieve the subgroups subscribed implicitly
             $child_groups = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
                 Group :: class_name(),
-                $children_condition);
+                new DataClassRetrievesParameters($children_condition));
             while ($cgroup = $child_groups->next_result())
             {
                 $limited_platform_groups[] = $cgroup->get_id();
@@ -276,7 +276,7 @@ class RightsEditorComponent extends Manager
                     new StaticConditionVariable($cgroup->get_id()));
                 $group_rel_users_dataset = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
                     GroupRelUser :: class_name(),
-                    $eq_condition);
+                    new DataClassRetrievesParameters($eq_condition));
 
                 while ($group_rel_user = $group_rel_users_dataset->next_result())
                 {
@@ -297,7 +297,7 @@ class RightsEditorComponent extends Manager
 
         $relations = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         while ($relation = $relations->next_result())
         {

@@ -13,6 +13,6 @@ class EntityComponent extends Manager
         $factory = new ApplicationFactory(
             \Ehb\Application\Atlantis\Role\Entity\Manager :: context(),
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
-        $factory->run();
+        return $factory->run();
     }
 }

@@ -131,7 +131,9 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
             new InCondition(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), $password_user_ids));
         $condition = new AndCondition($conditions);
 
-        $users = \Chamilo\Core\User\Storage\DataManager :: retrieves(User :: class_name(), $condition);
+        $users = \Chamilo\Core\User\Storage\DataManager :: retrieves(
+            User :: class_name(),
+            new DataClassRetrievesParameters($condition));
 
         $failures = 0;
 

@@ -5,7 +5,6 @@ use Ehb\Application\Avilarts\CourseSettingsConnector;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Menu\PublicationCategoriesTree;
 use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
-
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
@@ -40,6 +39,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\StringUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * $Id: viewer.class.php 200 2009-11-13 12:30:04Z kariboe $
@@ -94,7 +94,8 @@ class BrowserComponent extends Manager
                 Translation :: get('ToggleVisibility'),
                 false));
 
-        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) && $this->get_parent() instanceof Categorizable)
+        if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT) &&
+             $this->get_parent() instanceof Categorizable)
         {
             $actions->add_form_action(
                 new TableFormAction(
@@ -638,7 +639,7 @@ class BrowserComponent extends Manager
 
         $objects = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         return $objects->next_result();
     }
@@ -662,8 +663,7 @@ class BrowserComponent extends Manager
     }
 
     /**
-     * Returns the default object table order for the browser.
-     * Can be "overridden" by the individual component to force
+     * Returns the default object table order for the browser. Can be "overridden" by the individual component to force
      * a different order if needed. Because the individual component is not an actual implementation but merely this
      * parent, there is a check if the method exists.
      *

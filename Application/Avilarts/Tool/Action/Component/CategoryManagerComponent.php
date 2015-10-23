@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
@@ -195,7 +194,7 @@ class CategoryManagerComponent extends Manager implements DelegateComponent, Cat
             new StaticConditionVariable($category_id));
         $subcategries = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
             ContentObjectPublicationCategory :: class_name(),
-            $condition);
+            new DataClassRetrievesParameters($condition));
 
         while ($cat = $subcategries->next_result())
         {

@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Search\Component;
 
-
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Implementation\Search\Manager;
 use Chamilo\Core\Repository\ContentObject\Introduction\Storage\DataClass\Introduction;
@@ -18,6 +17,7 @@ use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\String\Text;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * $Id: search_searcher.class.php 216 2009-11-13 14:08:06Z kariboe $
@@ -67,14 +67,14 @@ class SearcherComponent extends Manager
 
             $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
                 ContentObjectPublication :: class_name(),
-                $this->get_retrieve_publications_condition());
+                new DataClassRetrievesParameters($this->get_retrieve_publications_condition()));
 
             $tools = array();
 
             while ($publication = $publications->next_result())
             {
-                if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT, $publication) &&
-                     (! $publication->is_hidden() || $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT)))
+                if ($this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: VIEW_RIGHT, $publication) && (! $publication->is_hidden() ||
+                     $this->is_allowed(\Ehb\Application\Avilarts\Rights\Rights :: EDIT_RIGHT)))
                 {
                     $tools[$publication->get_tool()][] = $publication;
                 }

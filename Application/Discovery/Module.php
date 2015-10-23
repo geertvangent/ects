@@ -98,7 +98,8 @@ class Module
                 new PropertyConditionVariable(
                     \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
                     \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_CONTENT_TYPE),
-                new StaticConditionVariable(\Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_DISABLED)));
+                new StaticConditionVariable(
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_DISABLED)));
         $condition = new AndCondition($conditions);
 
         $module_instances = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieves(

@@ -211,7 +211,10 @@ abstract class Manager extends Application
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(CourseSection :: class_name(), CourseSection :: PROPERTY_COURSE_ID),
                 new StaticConditionVariable(Request :: get(self :: PARAM_COURSE)));
-            $sections = DataManager :: retrieves(CourseSection :: class_name(), $condition);
+
+            $sections = DataManager :: retrieves(
+                CourseSection :: class_name(),
+                new DataClassRetrievesParameters($condition));
 
             while ($section = $sections->next_result())
             {

@@ -16,6 +16,7 @@ use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class Manager implements PublicationInterface
 {
@@ -121,7 +122,7 @@ class Manager implements PublicationInterface
         $course_settings_controller = CourseSettingsController :: get_instance();
         $course_management_rights = CourseManagementRights :: get_instance();
 
-        $tools = DataManager :: retrieves(CourseTool :: class_name());
+        $tools = DataManager :: retrieves(CourseTool :: class_name(), new DataClassRetrievesParameters());
 
         $tool_names = array();
 

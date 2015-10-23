@@ -10,6 +10,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class PlatformgroupMenuRenderer extends GenericTree
 {
@@ -35,8 +36,7 @@ class PlatformgroupMenuRenderer extends GenericTree
     // CONSTRUCTOR
     // **************************************************************************
     /**
-     * Constructor.
-     * Creates a new group navigation menu for subscribed groups.
+     * Constructor. Creates a new group navigation menu for subscribed groups.
      *
      * @param $browser PersonalMessengerManager The browser
      */
@@ -96,7 +96,9 @@ class PlatformgroupMenuRenderer extends GenericTree
             new StaticConditionVariable($parent_node_id));
 
         // fetch groups
-        return \Chamilo\Core\Group\Storage\DataManager :: retrieves(Group :: class_name(), $condition);
+        return \Chamilo\Core\Group\Storage\DataManager :: retrieves(
+            Group :: class_name(),
+            new DataClassRetrievesParameters($condition));
     }
 
     /**

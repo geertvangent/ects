@@ -14,6 +14,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Doctrine\DBAL\Driver\PDOStatement;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {
@@ -136,7 +137,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                             ClassnameUtilities :: getInstance()->getNamespaceFromObject($training)));
                     $condition = new AndCondition($conditions);
 
-                    $histories = DataManager :: retrieves(History :: class_name(), $condition);
+                    $histories = DataManager :: retrieves(
+                        History :: class_name(),
+                        new DataClassRetrievesParameters($condition));
 
                     if ($histories->size() > 0)
                     {
@@ -172,7 +175,9 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                             ClassnameUtilities :: getInstance()->getNamespaceFromObject($training)));
                     $condition = new AndCondition($conditions);
 
-                    $histories = DataManager :: retrieves(History :: class_name(), $condition);
+                    $histories = DataManager :: retrieves(
+                        History :: class_name(),
+                        new DataClassRetrievesParameters($condition));
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())

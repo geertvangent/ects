@@ -3,6 +3,7 @@ namespace Ehb\Application\Atlantis\Role\Entity\Entities;
 
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementType;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Atlantis\Role\Entity\Manager;
 
 class UserEntity extends \Chamilo\Core\Rights\Entity\UserEntity
 {
@@ -15,7 +16,7 @@ class UserEntity extends \Chamilo\Core\Rights\Entity\UserEntity
         return new AdvancedElementFinderElementType(
             'users', 
             Translation :: get('Users'), 
-            __NAMESPACE__, 
+            Manager :: context() . '\Ajax', 
             'user_entity_feed', 
             array());
     }

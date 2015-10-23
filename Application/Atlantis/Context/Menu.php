@@ -56,7 +56,7 @@ class Menu extends \HTML_Menu
      * @param int $owner The ID of the owner of the categories to provide in this menu.
      * @param int $current_category The ID of the current category in the menu.
      * @param string $url_format The format to use for the URL of a category. Passed to sprintf(). Defaults to the
-     *        string "?category=%s".
+     *            string "?category=%s".
      * @param array $extra_items An array of extra tree items, added to the root.
      */
     public function __construct($current_category, $url_format = '?application=atlantis&go=context&context_id=%s', $include_root = true, $show_complete_tree = false,
@@ -71,7 +71,7 @@ class Menu extends \HTML_Menu
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
                 new StaticConditionVariable(0));
-            $group = \Chamilo\Core\Group\storage\DataManager :: retrieves(
+            $group = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
                 Group :: class_name(),
                 new DataClassRetrievesParameters(
                     $condition,
@@ -80,9 +80,10 @@ class Menu extends \HTML_Menu
                     new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME))))->next_result();
             $this->current_category = $group;
         }
+
         else
         {
-            $this->current_category = \Chamilo\Core\Group\storage\DataManager :: retrieve(
+            $this->current_category = \Chamilo\Core\Group\Storage\DataManager :: retrieve(
                 Group :: class_name(),
                 new DataClassRetrieveParameters(
                     new EqualityCondition(
@@ -104,7 +105,7 @@ class Menu extends \HTML_Menu
         $condition = new EqualityCondition(
             new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID),
             new StaticConditionVariable(0));
-        $group = \Chamilo\Core\Group\storage\DataManager :: retrieves(
+        $group = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
             Group :: class_name(),
             new DataClassRetrievesParameters(
                 $condition,

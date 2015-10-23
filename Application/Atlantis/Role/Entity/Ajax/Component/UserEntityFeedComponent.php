@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Atlantis\Role\Entity\Ajax;
+namespace Ehb\Application\Atlantis\Role\Entity\Ajax\Component;
 
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
@@ -58,9 +58,9 @@ class UserEntityFeedComponent extends \Chamilo\Core\User\Ajax\Component\UsersFee
         }
 
         if (! $this->get_user()->is_platform_admin() &&
-             \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+             \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
-            $target_users = \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->get_target_users(
+            $target_users = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_users(
                 $this->get_user());
 
             if (count($target_users) > 0)

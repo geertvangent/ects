@@ -12,6 +12,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class CourseUserCategoryForm extends FormValidator
 {
@@ -143,7 +144,9 @@ class CourseUserCategoryForm extends FormValidator
                 CourseTypeUserCategory :: PROPERTY_COURSE_USER_CATEGORY_ID),
             new StaticConditionVariable($course_user_category->get_id()));
 
-        $existing_types = DataManager :: retrieves(CourseTypeUserCategory :: class_name(), $condition);
+        $existing_types = DataManager :: retrieves(
+            CourseTypeUserCategory :: class_name(),
+            new DataClassRetrievesParameters($condition));
 
         if ($existing_types)
         {
@@ -240,8 +243,7 @@ class CourseUserCategoryForm extends FormValidator
     }
 
     /**
-     * Sets default values.
-     * Traditionally, you will want to extend this method so it sets default for your learning
+     * Sets default values. Traditionally, you will want to extend this method so it sets default for your learning
      * object type's additional properties.
      *
      * @param $defaults array Default values for this form's parameters.
@@ -259,7 +261,9 @@ class CourseUserCategoryForm extends FormValidator
                     CourseTypeUserCategory :: PROPERTY_COURSE_USER_CATEGORY_ID),
                 new StaticConditionVariable($course_user_category->get_id()));
 
-            $course_types = DataManager :: retrieves(CourseTypeUserCategory :: class_name(), $condition);
+            $course_types = DataManager :: retrieves(
+                CourseTypeUserCategory :: class_name(),
+                new DataClassRetrievesParameters($condition));
 
             while ($type = $course_types->next_result())
             {

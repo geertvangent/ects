@@ -2,7 +2,7 @@
 namespace Ehb\Application\Atlantis\Rights\Package;
 
 use Chamilo\Libraries\Platform\Translation;
-use Ehb\Application\Atlantis\Rights\Rights;
+use Ehb\Application\Atlantis\Rights;
 
 class Installer extends \Chamilo\Configuration\Package\Action\Installer
 {

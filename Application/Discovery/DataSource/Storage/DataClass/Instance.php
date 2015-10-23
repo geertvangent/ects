@@ -83,7 +83,7 @@ class Instance extends DataClass
             $condition = new EqualityCondition(
                 new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID),
                 new StaticConditionVariable($this->get_id()));
-            $settings = DataManager :: retrieves(
+            $settings = DataManager:: retrieves(
                 InstanceSetting :: class_name(),
                 new DataClassRetrievesParameters($condition));
 

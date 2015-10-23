@@ -13,14 +13,14 @@ class ApplicationTableDataProvider extends TableDataProvider
     {
         $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
         return DataManager :: retrieves(
-            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
+            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
             $parameters);
     }
 
     public function count_data($condition)
     {
         return DataManager :: count(
-            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
+            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
             new DataClassCountParameters($condition));
     }
 }

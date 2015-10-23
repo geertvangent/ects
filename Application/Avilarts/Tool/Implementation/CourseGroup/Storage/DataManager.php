@@ -97,7 +97,9 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
             new PropertyConditionVariable(CourseGroup :: class_name(), CourseGroup :: PROPERTY_ID),
             $group_ids);
 
-        $direct_groups = self :: retrieves(CourseGroup :: class_name(), $dg_condition);
+        $direct_groups = self :: retrieves(
+            CourseGroup :: class_name(),
+            new DataClassRetrievesParameters($dg_condition));
 
         $direct_group_conditions = array();
         while ($group = $direct_groups->next_result())
@@ -172,7 +174,9 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
                 CourseGroupUserRelation :: PROPERTY_COURSE_GROUP),
             new StaticConditionVariable($course_group_id));
 
-        $relations = self :: retrieves(CourseGroupUserRelation :: class_name(), $condition);
+        $relations = self :: retrieves(
+            CourseGroupUserRelation :: class_name(),
+            new DataClassRetrievesParameters($condition));
         $user_ids = array();
 
         while ($relation = $relations->next_result())
@@ -408,7 +412,9 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
             $condition = new AndCondition($conditions);
 
-            $users = self :: retrieves(CourseGroupUserRelation :: class_name(), $condition);
+            $users = self :: retrieves(
+                CourseGroupUserRelation :: class_name(),
+                new DataClassRetrievesParameters($condition));
 
             if ($users->next_result() != null)
             {
@@ -574,20 +580,6 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
     /**
      * Returns the condition for the possible course group users
      *
-     * @static
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
      * @param CourseGroup $course_group
      * @param Condition $condition
      *
@@ -601,7 +593,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         $course_users = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(),
-            $course_condition);
+            new DataClassRetrievesParameters($course_condition));
 
         $group_user_ids = DataManager :: retrieve_course_group_user_ids($course_group->get_id());
 

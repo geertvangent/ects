@@ -9,7 +9,7 @@ use Ehb\Application\Atlantis\Application\Storage\DataManager;
 
 class ApplicationTableDataProvider extends TableDataProvider
 {
-    
+
     /*
      * (non-PHPdoc) @see \libraries\format\TableDataProvider::retrieve_data()
      */
@@ -18,7 +18,7 @@ class ApplicationTableDataProvider extends TableDataProvider
         $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
         return DataManager :: retrieves(Application :: class_name(), $parameters);
     }
-    
+
     /*
      * (non-PHPdoc) @see \libraries\format\TableDataProvider::count_data()
      */

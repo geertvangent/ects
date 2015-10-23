@@ -36,7 +36,7 @@ class ChangeSectionComponent extends Manager
         $sources = explode('_', $source);
         $source = $sources[1];
 
-        $tools = DataManager :: retrieves(CourseTool :: class_name());
+        $tools = DataManager :: retrieves(CourseTool :: class_name(), new DataClassRetrievesParameters());
 
         foreach ($tools as $tool)
         {

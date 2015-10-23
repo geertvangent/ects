@@ -26,6 +26,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class SubscriptionsOverviewerComponent extends Manager implements TableSupport
 {
@@ -144,7 +145,9 @@ class SubscriptionsOverviewerComponent extends Manager implements TableSupport
 
     private function get_course_groups_tab()
     {
-        $course_groups = DataManager :: retrieves(CourseGroup :: class_name(), $this->get_condition());
+        $course_groups = DataManager :: retrieves(
+            CourseGroup :: class_name(),
+            new DataClassRetrievesParameters($this->get_condition()));
 
         $html_tables = '';
         while ($course_group = $course_groups->next_result())

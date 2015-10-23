@@ -29,7 +29,7 @@ class ExporterComponent extends Manager
         $this->generate_passwords();
 
         $users_ids = DataManager :: get_course_user_ids($this->get_course_id());
-        $passwords = DataManager :: retrieves(
+        $passwords = DataManager:: retrieves(
             Password :: class_name(),
             new DataClassRetrievesParameters(
                 new InCondition(

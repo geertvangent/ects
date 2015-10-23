@@ -31,7 +31,7 @@ class DeleterComponent extends Manager
             {
                 $role_entity = DataManager :: retrieve_by_id(RoleEntity :: class_name(), (int) $id);
 
-                if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+                if (! \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
                 {
                     $failures ++;
                 }

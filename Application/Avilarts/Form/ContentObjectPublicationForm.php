@@ -37,6 +37,7 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use DOMDocument;
 use Chamilo\Libraries\Architecture\Exceptions\NoObjectSelectedException;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * This class represents a form to allow a user to publish a learning object. The form allows the user to set some
@@ -483,7 +484,9 @@ class ContentObjectPublicationForm extends FormValidator
             new StaticConditionVariable($parent_id));
         $condition = new AndCondition($conditions);
 
-        $cats = DataManager :: retrieves(ContentObjectPublicationCategory :: class_name(), $condition);
+        $cats = DataManager :: retrieves(
+            ContentObjectPublicationCategory :: class_name(),
+            new DataClassRetrievesParameters($condition));
 
         while ($cat = $cats->next_result())
         {

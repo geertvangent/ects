@@ -12,6 +12,7 @@ use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * Tool component which can be used to share content objects
@@ -40,7 +41,7 @@ class ShareContentObjectsComponent extends Manager
                 $publication_ids);
             $publications = \Ehb\Application\Avilarts\Storage\DataManager :: retrieves(
                 ContentObjectPublication :: class_name(),
-                $condition);
+                new DataClassRetrievesParameters($condition));
 
             $content_objects = array();
 

@@ -37,6 +37,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\StringUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * This class describes a form for the course object
@@ -287,10 +288,10 @@ abstract class CommonCourseForm extends FormValidator implements CourseSettingsX
     {
         $this->add_settings_from_xml(
             Path :: getInstance()->namespaceToFullPath('Ehb\Application\Avilarts') .
-            join(DIRECTORY_SEPARATOR, array('Resources', 'Settings', 'course_settings.xml')),
-            Manager :: context(),
-            new \Ehb\Application\Avilarts\CourseSettingsConnector(),
-            CourseSettingsController :: SETTING_PARAM_COURSE_SETTINGS);
+                 join(DIRECTORY_SEPARATOR, array('Resources', 'Settings', 'course_settings.xml')),
+                Manager :: context(),
+                new \Ehb\Application\Avilarts\CourseSettingsConnector(),
+                CourseSettingsController :: SETTING_PARAM_COURSE_SETTINGS);
     }
 
     /**
@@ -326,7 +327,9 @@ abstract class CommonCourseForm extends FormValidator implements CourseSettingsX
             CourseSetting :: get_table_name(),
             $settings_condition);
 
-        $tools = DataManager :: retrieves(CourseTool :: class_name(), $tools_condition);
+        $tools = DataManager :: retrieves(
+            CourseTool :: class_name(),
+            new DataClassRetrievesParameters($tools_condition));
 
         while ($tool = $tools->next_result())
         {
@@ -424,7 +427,9 @@ abstract class CommonCourseForm extends FormValidator implements CourseSettingsX
                 new PropertyConditionVariable(CourseTool :: class_name(), CourseTool :: PROPERTY_SECTION_TYPE),
                 new StaticConditionVariable(CourseSection :: TYPE_CUSTOM)));
 
-        $tools = DataManager :: retrieves(CourseTool :: class_name(), $tools_condition);
+        $tools = DataManager :: retrieves(
+            CourseTool :: class_name(),
+            new DataClassRetrievesParameters($tools_condition));
 
         while ($tool = $tools->next_result())
         {

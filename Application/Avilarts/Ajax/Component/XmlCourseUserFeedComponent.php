@@ -78,7 +78,7 @@ class XmlCourseUserFeedComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 
         $course_user_relation_result_set = \Ehb\Application\Avilarts\Course\Storage\DataManager :: retrieves(
             CourseUserRelation :: class_name(),
-            $relation_condition);
+            new DataClassRetrievesParameters($relation_condition));
 
         $user_ids = array();
         while ($course_user = $course_user_relation_result_set->next_result())

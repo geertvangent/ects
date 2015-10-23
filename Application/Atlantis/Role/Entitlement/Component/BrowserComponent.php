@@ -16,6 +16,7 @@ use Ehb\Application\Atlantis\Role\Entitlement\Manager;
 use Ehb\Application\Atlantis\Role\Entitlement\Storage\DataClass\Entitlement;
 use Ehb\Application\Atlantis\Role\Entitlement\Table\Entitlement\EntitlementTable;
 use Ehb\Application\Atlantis\SessionBreadcrumbs;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class BrowserComponent extends Manager implements TableSupport, DelegateComponent
 {
@@ -52,7 +53,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 new StaticConditionVariable($this->application_id));
             $rights = \Ehb\Application\Atlantis\Application\Right\Storage\DataManager :: retrieves(
                 \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
-                $condition);
+                new DataClassRetrievesParameters($condition));
             $right_ids = array();
             while ($right = $rights->next_result())
             {
@@ -137,8 +138,8 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
         if ($this->has_role_id())
         {
-            $role = \Ehb\Application\Atlantis\Role\DataManager :: retrieve_by_id(
-                \Ehb\Application\Atlantis\Role\DataClass\Role :: class_name(),
+            $role = \Ehb\Application\Atlantis\Role\Storage\DataManager :: retrieve_by_id(
+                \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
                 (int) $this->role_id);
 
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
@@ -148,6 +149,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                     Translation :: get('GrantRights', array('TYPE' => $role->get_name()))));
         }
     }
+
     /*
      * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */

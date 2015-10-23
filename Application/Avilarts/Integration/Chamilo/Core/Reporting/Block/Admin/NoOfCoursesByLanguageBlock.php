@@ -9,6 +9,7 @@ use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBloc
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class NoOfCoursesByLanguageBlock extends CourseBlock
 {
@@ -17,36 +18,36 @@ class NoOfCoursesByLanguageBlock extends CourseBlock
     {
         $reporting_data = new ReportingData();
         $arr = array();
-        $courses = CourseDataManager :: retrieves(Course :: class_name());
-        
+        $courses = CourseDataManager :: retrieves(Course :: class_name(), new DataClassRetrievesParameters());
+
         $categories = array();
-        
+
         while ($course = $courses->next_result())
         {
             $lang = CourseSettingsController :: get_instance()->get_course_setting(
-                $course->get_id(), 
+                $course->get_id(),
                 CourseSettingsConnector :: LANGUAGE);
-            
+
             $categories[$lang] = Translation :: get($lang, null, Utilities :: COMMON_LIBRARIES);
-            
+
             if ($arr[$lang])
             {
                 $arr[$lang] = $arr[$lang] + 1;
             }
             else
             {
-                
+
                 $arr[$lang] = 1;
             }
         }
         $reporting_data->set_categories($categories);
         $reporting_data->set_rows(array(Translation :: get('count')));
-        
+
         foreach ($categories as $key => $name)
         {
             $reporting_data->add_data_category_row($key, Translation :: get('count'), ($arr[$key]));
         }
-        
+
         return $reporting_data;
     }
 
@@ -58,7 +59,7 @@ class NoOfCoursesByLanguageBlock extends CourseBlock
     public function get_views()
     {
         return array(
-            \Chamilo\Core\Reporting\Viewer\Rendition\Block\Type\Html :: VIEW_TABLE, 
+            \Chamilo\Core\Reporting\Viewer\Rendition\Block\Type\Html :: VIEW_TABLE,
             \Chamilo\Core\Reporting\Viewer\Rendition\Block\Type\Html :: VIEW_PIE);
     }
 }

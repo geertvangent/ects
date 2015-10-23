@@ -7,14 +7,15 @@ namespace Ehb\Application\Sync\Cas\Synchronization\Type\User;
  */
 use Chamilo\Core\User\Storage\DataClass\User;
 use Ehb\Application\Sync\Cas\Synchronization\Type\UserSynchronization;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class AllUserSynchronization extends UserSynchronization
 {
 
     public function get_data()
     {
-        return \Chamilo\Application\CasStorage\Account\Storage\DataManager :: retrieves(
-            \Chamilo\Application\CasStorage\Account\Storage\DataClass\Account :: class_name());
+        return \Chamilo\Application\CasStorage\Account\Storage\DataManager :: retrieves(\Chamilo\Application\CasStorage\Account\Storage\DataClass\Account :: class_name(),
+            new DataClassRetrievesParameters();
     }
 
     public function get_type()

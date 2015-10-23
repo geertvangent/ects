@@ -24,7 +24,7 @@ abstract class Manager extends Application
     {
         parent :: __construct($applicationConfiguration);
 
-        if (! \Ehb\Application\Atlantis\Rights\Rights :: get_instance()->access_is_allowed())
+        if (! \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }

@@ -8,7 +8,7 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 /**
  * * *************************************************************************** Data provider for an unsubscribed
  * course group browser table.
- * 
+ *
  * @author Stijn Van Hoecke ****************************************************************************
  */
 class UnsubscribedGroupTableDataProvider extends DataClassTableDataProvider
@@ -17,7 +17,7 @@ class UnsubscribedGroupTableDataProvider extends DataClassTableDataProvider
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
         return \Chamilo\Core\Group\Storage\DataManager :: retrieves(
-            Group :: class_name(), 
+            Group :: class_name(),
             new DataClassRetrievesParameters($condition, $count, $offset, $order_property));
     }
 

@@ -13,6 +13,6 @@ class RoleComponent extends Manager
         $factory = new ApplicationFactory(
             \Ehb\Application\Atlantis\Role\Manager :: context(),
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
-        $factory->run();
+        return $factory->run();
     }
 }

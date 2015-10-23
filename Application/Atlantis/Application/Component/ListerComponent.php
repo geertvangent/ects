@@ -27,7 +27,7 @@ class ListerComponent extends Manager implements TableSupport
             $this->get_rights(Request :: get(self :: PARAM_APPLICATION_ID)));
 
         // for each application, a list of rights
-        $applications = DataManager :: retrieves(Application :: class_name());
+        $applications = DataManager :: retrieves(Application :: class_name(), new DataClassRetrievesParameters());
 
         while ($application = $applications->next_result())
         {
