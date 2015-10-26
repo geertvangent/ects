@@ -245,14 +245,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         $table = new SortableTable($data);
 
-        $table->set_header(0, Translation :: get('Faculty'), false);
-        $table->set_header(1, Translation :: get('Training'), false);
-        $table->set_header(2, '<img src="' . Theme :: getInstance()->getImagesPath() . 'manager.png"/>', false);
-        $table->set_header(3, '<img src="' . Theme :: getInstance()->getImagesPath() . 'teacher.png"/>', false);
-        $table->set_header(4, Translation :: get('Name'), false);
-        $table->set_header(5, Translation :: get('Credits'), false, 'class="action"');
-        $table->set_header(6, '<img src="' . Theme :: getInstance()->getImagesPath() . 'timeframe.png"/>', false);
-        $table->set_header(7, '', false);
+        $table->setColumnHeader(0, Translation :: get('Faculty'), false);
+        $table->setColumnHeader(1, Translation :: get('Training'), false);
+        $table->setColumnHeader(2, '<img src="' . Theme :: getInstance()->getImagesPath() . 'manager.png"/>', false);
+        $table->setColumnHeader(3, '<img src="' . Theme :: getInstance()->getImagesPath() . 'teacher.png"/>', false);
+        $table->setColumnHeader(4, Translation :: get('Name'), false);
+        $table->setColumnHeader(5, Translation :: get('Credits'), false, 'class="action"');
+        $table->setColumnHeader(6, '<img src="' . Theme :: getInstance()->getImagesPath() . 'timeframe.png"/>', false);
+        $table->setColumnHeader(7, '', false);
 
         return $table;
     }

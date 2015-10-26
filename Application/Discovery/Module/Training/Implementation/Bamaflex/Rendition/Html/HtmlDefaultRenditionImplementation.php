@@ -210,11 +210,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
 
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Name'), false);
-        $table->set_header(1, Translation :: get('Domain'), false);
-        $table->set_header(2, Translation :: get('Credits'), false);
-        $table->set_header(3, '', false);
-        $table->set_header(4, '', false);
+        $table->setColumnHeader(0, Translation :: get('Name'), false);
+        $table->setColumnHeader(1, Translation :: get('Domain'), false);
+        $table->setColumnHeader(2, Translation :: get('Credits'), false);
+        $table->setColumnHeader(3, '', false);
+        $table->setColumnHeader(4, '', false);
 
         return $table;
     }

@@ -108,11 +108,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
         
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Name'), false);
-        $table->set_header(1, Translation :: get('Deans'), false);
+        $table->setColumnHeader(0, Translation :: get('Name'), false);
+        $table->setColumnHeader(1, Translation :: get('Deans'), false);
         if ($photo_module_instance)
         {
-            $table->set_header(2, '', false);
+            $table->setColumnHeader(2, '', false);
         }
         
         return $table;

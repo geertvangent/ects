@@ -255,14 +255,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         $table = new SortableTable($data);
 
-        $table->set_header(0, Translation :: get('Type'), false);
+        $table->setColumnHeader(0, Translation :: get('Type'), false);
         $table->getHeader()->setColAttributes(0, 'class="action"');
 
-        $table->set_header(1, Translation :: get('Try'), false);
-        $table->set_header(2, Translation :: get('Date'), false);
+        $table->setColumnHeader(1, Translation :: get('Try'), false);
+        $table->setColumnHeader(2, Translation :: get('Date'), false);
 
-        $table->set_header(3, Translation :: get('DecisionType'), false);
-        $table->set_header(4, Translation :: get('Advice'), false);
+        $table->setColumnHeader(3, Translation :: get('DecisionType'), false);
+        $table->setColumnHeader(4, Translation :: get('Advice'), false);
 
         return $table;
     }

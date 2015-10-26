@@ -200,7 +200,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             foreach ($this->get_table_headers() as $header_id => $header)
             {
-                $table->set_header($header_id, $header[0], false);
+                $table->setColumnHeader($header_id, $header[0], false);
 
                 if ($header[1])
                 {
@@ -277,11 +277,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         $table = new SortableTable($table_data);
 
-        $table->set_header(0, Translation :: get('Year'), false);
-        $table->set_header(1, '', false);
-        $table->set_header(2, Translation :: get('Type'), false);
-        $table->set_header(3, Translation :: get('Credits'), false);
-        $table->set_header(4, '', false);
+        $table->setColumnHeader(0, Translation :: get('Year'), false);
+        $table->setColumnHeader(1, '', false);
+        $table->setColumnHeader(2, Translation :: get('Type'), false);
+        $table->setColumnHeader(3, Translation :: get('Credits'), false);
+        $table->setColumnHeader(4, '', false);
 
         $contract_html[] = $table->toHTML();
         $contract_html[] = '<br />';

@@ -228,12 +228,12 @@ class ViewerComponent extends Manager implements DelegateComponent
 
         $table = new SortableTableFromArray($tableData, 1, 10, 'activity', SORT_DESC, false, false, false);
 
-        $table->set_header(0, Translation :: get('ActivityType'), false);
-        $table->set_header(1, Translation :: get('OnDate'), false);
-        $table->set_header(2, Translation :: get('FromTime'), false);
-        $table->set_header(3, Translation :: get('ToTime'), false);
-        $table->set_header(4, Translation :: get('AtLocation'), false);
-        $table->set_header(5, Translation :: get('ByTeacher'), false);
+        $table->setColumnHeader(0, Translation :: get('ActivityType'), false);
+        $table->setColumnHeader(1, Translation :: get('OnDate'), false);
+        $table->setColumnHeader(2, Translation :: get('FromTime'), false);
+        $table->setColumnHeader(3, Translation :: get('ToTime'), false);
+        $table->setColumnHeader(4, Translation :: get('AtLocation'), false);
+        $table->setColumnHeader(5, Translation :: get('ByTeacher'), false);
 
         return $table->as_html();
     }

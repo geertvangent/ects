@@ -146,12 +146,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         $table = new SortableTable($data);
 
-        $table->set_header(0, Translation :: get('Code'), false);
+        $table->setColumnHeader(0, Translation :: get('Code'), false);
         $table->getHeader()->setColAttributes(0, 'class="code"');
 
-        $table->set_header(1, Translation :: get('Description'), false);
+        $table->setColumnHeader(1, Translation :: get('Description'), false);
 
-        $table->set_header(2, ' ', false);
+        $table->setColumnHeader(2, ' ', false);
 
         return $table;
     }

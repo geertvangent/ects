@@ -23,25 +23,10 @@ class LegendTable extends SortableTable
     {
         parent :: __construct($tableData, $defaultOrderColumn, $defaultPerPage, $tableName, $defaultOrderDirection);
 
-        $this->set_header(0, '', false);
-        $this->set_header(1, Translation :: get('Type'), false);
-        $this->set_header(2, Translation :: get('Legend'), false);
+        $this->setColumnHeader(0, '', false);
+        $this->setColumnHeader(1, Translation :: get('Type'), false);
+        $this->setColumnHeader(2, Translation :: get('Legend'), false);
         $this->getHeader()->setColAttributes(0, 'class="action"');
-    }
-
-    public function getData()
-    {
-        $table_data = array();
-
-        foreach ($this->getData() as $category)
-        {
-            foreach ($category as $key => $row)
-            {
-                $table_data[$key] = $row;
-            }
-        }
-
-        return $table_data;
     }
 
     /**
@@ -57,6 +42,21 @@ class LegendTable extends SortableTable
         }
 
         return self :: $instance;
+    }
+
+    public function getData()
+    {
+        $table_data = array();
+
+        foreach ($this->getData() as $category)
+        {
+            foreach ($category as $key => $row)
+            {
+                $table_data[$key] = $row;
+            }
+        }
+
+        return $table_data;
     }
 
     /**

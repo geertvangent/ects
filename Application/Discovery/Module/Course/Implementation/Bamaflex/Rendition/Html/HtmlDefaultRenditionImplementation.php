@@ -777,16 +777,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($table_data) > 0 || ($cost && $type == Material :: TYPE_REQUIRED && $cost->get_price()))
         {
             $table = new SortableTable($table_data);
-            $table->set_header(0, Translation :: get('Group'), false);
-            $table->set_header(1, Translation :: get('Title'), false);
-            $table->set_header(2, Translation :: get('Edition'), false);
-            $table->set_header(3, Translation :: get('Author'), false);
-            $table->set_header(4, Translation :: get('Editor'), false);
-            $table->set_header(5, Translation :: get('Isbn'), false);
-            $table->set_header(6, Translation :: get('Medium'), false);
-            $table->set_header(7, Translation :: get('Remarks'), false);
-            $table->set_header(8, Translation :: get('Price'), false);
-            $table->set_header(9, '', false);
+            $table->setColumnHeader(0, Translation :: get('Group'), false);
+            $table->setColumnHeader(1, Translation :: get('Title'), false);
+            $table->setColumnHeader(2, Translation :: get('Edition'), false);
+            $table->setColumnHeader(3, Translation :: get('Author'), false);
+            $table->setColumnHeader(4, Translation :: get('Editor'), false);
+            $table->setColumnHeader(5, Translation :: get('Isbn'), false);
+            $table->setColumnHeader(6, Translation :: get('Medium'), false);
+            $table->setColumnHeader(7, Translation :: get('Remarks'), false);
+            $table->setColumnHeader(8, Translation :: get('Price'), false);
+            $table->setColumnHeader(9, '', false);
 
             $html[] = $table->as_html($cost->get_price_string(), 8);
         }
@@ -867,11 +867,11 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($table_data) > 0 || $total)
         {
             $table = new SortableTable($table_data);
-            $table->set_header(0, Translation :: get('Group'), false);
-            $table->set_header(1, Translation :: get('Name'), false);
-            $table->set_header(2, Translation :: get('Time'), false);
-            // $table->set_header(3, Translation :: get('Remarks'), false);
-            // $table->set_header(4, Translation :: get('Description'), false);
+            $table->setColumnHeader(0, Translation :: get('Group'), false);
+            $table->setColumnHeader(1, Translation :: get('Name'), false);
+            $table->setColumnHeader(2, Translation :: get('Time'), false);
+            // $table->setColumnHeader(3, Translation :: get('Remarks'), false);
+            // $table->setColumnHeader(4, Translation :: get('Description'), false);
 
             $total = $course->get_activities_by_type(ActivityTotal :: class_name());
             if ($total)
@@ -993,10 +993,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($table_data) > 0)
         {
             $table = new SortableTable($table_data);
-            $table->set_header(0, Translation :: get('Code'), false);
-            // $table->set_header(1, Translation :: get('Summary'), false);
-            $table->set_header(1, Translation :: get('Description'), false);
-            $table->set_header(2, Translation :: get('Level'), false);
+            $table->setColumnHeader(0, Translation :: get('Code'), false);
+            // $table->setColumnHeader(1, Translation :: get('Summary'), false);
+            $table->setColumnHeader(1, Translation :: get('Description'), false);
+            $table->setColumnHeader(2, Translation :: get('Level'), false);
             $html[] = $table->as_html();
         }
 
@@ -1315,12 +1315,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($table_data) > 0)
         {
             $table = new SortableTable($table_data);
-            $table->set_header(0, Translation :: get('Try'), false);
-            $table->set_header(1, Translation :: get('Moment'), false);
-            $table->set_header(2, Translation :: get('Type'), false);
-            $table->set_header(3, Translation :: get('Percentage'), false);
-            $table->set_header(4, Translation :: get('Remarks'), false);
-            $table->set_header(5, Translation :: get('Permanent'), false);
+            $table->setColumnHeader(0, Translation :: get('Try'), false);
+            $table->setColumnHeader(1, Translation :: get('Moment'), false);
+            $table->setColumnHeader(2, Translation :: get('Type'), false);
+            $table->setColumnHeader(3, Translation :: get('Percentage'), false);
+            $table->setColumnHeader(4, Translation :: get('Remarks'), false);
+            $table->setColumnHeader(5, Translation :: get('Permanent'), false);
             $html[] = $table->as_html();
         }
 

@@ -89,8 +89,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
 
             $table = new SortableTable($data);
-            $table->set_header(0, Translation :: get('Date'), false);
-            $table->set_header(1, Translation :: get('CountShort'), false);
+            $table->setColumnHeader(0, Translation :: get('Date'), false);
+            $table->setColumnHeader(1, Translation :: get('CountShort'), false);
 
             return $table->toHTML();
         }
@@ -140,8 +140,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                         $graph->chart()));
 
                 $table = new SortableTable($data);
-                $table->set_header(0, Translation :: get('Date'), false);
-                $table->set_header(1, Translation :: get('CountShort'), false);
+                $table->setColumnHeader(0, Translation :: get('Date'), false);
+                $table->setColumnHeader(1, Translation :: get('CountShort'), false);
                 $sub_tabs->add_tab(
                     new DynamicContentTab(
                         3,

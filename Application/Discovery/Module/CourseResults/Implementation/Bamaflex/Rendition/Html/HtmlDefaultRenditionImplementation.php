@@ -166,7 +166,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
             foreach ($this->get_table_headers() as $header_id => $header)
             {
-                $table->set_header($header_id, $header[0], false);
+                $table->setColumnHeader($header_id, $header[0], false);
 
                 if ($header[1])
                 {

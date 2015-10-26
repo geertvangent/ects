@@ -74,9 +74,9 @@ class HtmlDefaultRendition extends HtmlRendition
                     $html[] = '<div class="description">';
 
                     $table = new SortableTable($data);
-                    $table->set_header(0, Translation :: get('Type'), false);
-                    $table->set_header(1, Translation :: get('Device'), false);
-                    $table->set_header(2, Translation :: get('Number'), false);
+                    $table->setColumnHeader(0, Translation :: get('Type'), false);
+                    $table->setColumnHeader(1, Translation :: get('Device'), false);
+                    $table->setColumnHeader(2, Translation :: get('Number'), false);
                     $html[] = $table->toHTML();
 
                     $html[] = '</div>';
@@ -120,8 +120,8 @@ class HtmlDefaultRendition extends HtmlRendition
                 $html[] = '<div class="description">';
 
                 $table = new SortableTable($data);
-                $table->set_header(0, Translation :: get('Type'), false);
-                $table->set_header(1, Translation :: get('Address'), false);
+                $table->setColumnHeader(0, Translation :: get('Type'), false);
+                $table->setColumnHeader(1, Translation :: get('Address'), false);
                 $html[] = $table->toHTML();
 
                 $html[] = '</div>';

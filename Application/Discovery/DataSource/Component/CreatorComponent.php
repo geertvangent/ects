@@ -82,10 +82,10 @@ class CreatorComponent extends Manager
             $table = new SortableTableFromArray($table_data);
             $parameters = $this->get_parameters();
             $table->setAdditionalParameters($parameters);
-            $table->set_header(0, '');
-            $table->set_header(1, 'Type');
-            $table->set_header(2, 'Description');
-            $table->set_header(3, '');
+            $table->setColumnHeader(0, '');
+            $table->setColumnHeader(1, 'Type');
+            $table->setColumnHeader(2, 'Description');
+            $table->setColumnHeader(3, '');
 
             $html = array();
 

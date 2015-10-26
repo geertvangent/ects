@@ -65,15 +65,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                     $html[] = '<div class="description">';
 
                     $table = new SortableTable($data);
-                    $table->set_header(0, Translation :: get('Type'), false);
-                    $table->set_header(1, Translation :: get('Street'), false);
-                    $table->set_header(2, Translation :: get('Number'), false);
-                    $table->set_header(3, Translation :: get('Box'), false);
-                    $table->set_header(4, Translation :: get('Room'), false);
-                    $table->set_header(5, Translation :: get('City'), false);
-                    $table->set_header(6, Translation :: get('ZipCode'), false);
-                    $table->set_header(7, Translation :: get('Region'), false);
-                    $table->set_header(8, Translation :: get('Country'), false);
+                    $table->setColumnHeader(0, Translation :: get('Type'), false);
+                    $table->setColumnHeader(1, Translation :: get('Street'), false);
+                    $table->setColumnHeader(2, Translation :: get('Number'), false);
+                    $table->setColumnHeader(3, Translation :: get('Box'), false);
+                    $table->setColumnHeader(4, Translation :: get('Room'), false);
+                    $table->setColumnHeader(5, Translation :: get('City'), false);
+                    $table->setColumnHeader(6, Translation :: get('ZipCode'), false);
+                    $table->setColumnHeader(7, Translation :: get('Region'), false);
+                    $table->setColumnHeader(8, Translation :: get('Country'), false);
                     $html[] = $table->toHTML();
 
                     $html[] = '</div>';
@@ -103,8 +103,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $html[] = '<div class="description">';
 
                 $table = new SortableTable($data);
-                $table->set_header(0, Translation :: get('Date'), false);
-                $table->set_header(1, Translation :: get('Credits'), false);
+                $table->setColumnHeader(0, Translation :: get('Date'), false);
+                $table->setColumnHeader(1, Translation :: get('Credits'), false);
                 $html[] = $table->toHTML();
 
                 $html[] = '</div>';

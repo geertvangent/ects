@@ -66,8 +66,8 @@ class GraphRenderer
         }
         $table = new SortableTable($table_data);
 
-        $table->set_header(0, Translation :: get('Month'), false);
-        $table->set_header(1, Translation :: get('Count'), false);
+        $table->setColumnHeader(0, Translation :: get('Month'), false);
+        $table->setColumnHeader(1, Translation :: get('Count'), false);
 
         return $table->as_html();
     }

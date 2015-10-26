@@ -178,9 +178,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $table = new SortableTable($data);
 
-        $table->set_header(0, Translation :: get('FirstName'), false);
-        $table->set_header(1, Translation :: get('LastName'), false);
-        $table->set_header(2, '', false);
+        $table->setColumnHeader(0, Translation :: get('FirstName'), false);
+        $table->setColumnHeader(1, Translation :: get('LastName'), false);
+        $table->setColumnHeader(2, '', false);
 
         return $table->as_html();
     }

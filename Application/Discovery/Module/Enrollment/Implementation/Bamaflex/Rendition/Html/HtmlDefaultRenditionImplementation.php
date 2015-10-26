@@ -151,21 +151,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
 
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Year'), false);
-        $table->set_header(1, Translation :: get('Faculty'), false);
-        $table->set_header(2, Translation :: get('Training'), false);
-        $table->set_header(3, Translation :: get('Option'), false);
-        $table->set_header(4, Translation :: get('Trajectory'), false);
+        $table->setColumnHeader(0, Translation :: get('Year'), false);
+        $table->setColumnHeader(1, Translation :: get('Faculty'), false);
+        $table->setColumnHeader(2, Translation :: get('Training'), false);
+        $table->setColumnHeader(3, Translation :: get('Option'), false);
+        $table->setColumnHeader(4, Translation :: get('Trajectory'), false);
         if ($contract_type == Enrollment :: CONTRACT_TYPE_ALL)
         {
-            $table->set_header(5, Translation :: get('Contract'), false);
-            $table->set_header(6, '', false);
-            $table->set_header(7, '', false);
+            $table->setColumnHeader(5, Translation :: get('Contract'), false);
+            $table->setColumnHeader(6, '', false);
+            $table->setColumnHeader(7, '', false);
         }
         else
         {
-            $table->set_header(5, '', false);
-            $table->set_header(6, '', false);
+            $table->setColumnHeader(5, '', false);
+            $table->setColumnHeader(6, '', false);
         }
 
         return $table;

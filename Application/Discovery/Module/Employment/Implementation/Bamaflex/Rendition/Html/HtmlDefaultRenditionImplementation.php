@@ -192,21 +192,21 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
 
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Year'), false);
-        $table->set_header(1, Translation :: get('Faculty'), false);
-        $table->set_header(2, Translation :: get('Department'), false);
-        $table->set_header(3, Translation :: get('Assignment'), false);
-        $table->set_header(4, Translation :: get('StartDate'), false);
-        $table->set_header(5, Translation :: get('EndDate'), false);
-        $table->set_header(6, Translation :: get('Category'), false);
-        $table->set_header(7, Translation :: get('State'), false);
-        $table->set_header(8, Translation :: get('Fund'), false);
-        $table->set_header(9, Translation :: get('PayScale'), false);
-        $table->set_header(10, '', false);
+        $table->setColumnHeader(0, Translation :: get('Year'), false);
+        $table->setColumnHeader(1, Translation :: get('Faculty'), false);
+        $table->setColumnHeader(2, Translation :: get('Department'), false);
+        $table->setColumnHeader(3, Translation :: get('Assignment'), false);
+        $table->setColumnHeader(4, Translation :: get('StartDate'), false);
+        $table->setColumnHeader(5, Translation :: get('EndDate'), false);
+        $table->setColumnHeader(6, Translation :: get('Category'), false);
+        $table->setColumnHeader(7, Translation :: get('State'), false);
+        $table->setColumnHeader(8, Translation :: get('Fund'), false);
+        $table->setColumnHeader(9, Translation :: get('PayScale'), false);
+        $table->setColumnHeader(10, '', false);
 
         if ($has_interruption)
         {
-            $table->set_header(11, Translation :: get('Interruption'), false);
+            $table->setColumnHeader(11, Translation :: get('Interruption'), false);
         }
 
         return $table;

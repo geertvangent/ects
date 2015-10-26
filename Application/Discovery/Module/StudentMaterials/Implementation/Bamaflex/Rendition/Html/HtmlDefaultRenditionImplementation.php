@@ -339,17 +339,17 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if (count($table_data) > 0)
         {
             $table = new SortableTable($table_data);
-            $table->set_header(0, Translation :: get('Course'), false);
-            $table->set_header(1, Translation :: get('Group'), false);
-            $table->set_header(2, Translation :: get('Title'), false);
-            $table->set_header(3, Translation :: get('Edition'), false);
-            $table->set_header(4, Translation :: get('Author'), false);
-            $table->set_header(5, Translation :: get('Editor'), false);
-            $table->set_header(6, Translation :: get('Isbn'), false);
-            $table->set_header(7, Translation :: get('Medium'), false);
-            // $table->set_header(8, Translation :: get('Remarks'), false);
-            $table->set_header(8, Translation :: get('Price'), false);
-            $table->set_header(9, '', false);
+            $table->setColumnHeader(0, Translation :: get('Course'), false);
+            $table->setColumnHeader(1, Translation :: get('Group'), false);
+            $table->setColumnHeader(2, Translation :: get('Title'), false);
+            $table->setColumnHeader(3, Translation :: get('Edition'), false);
+            $table->setColumnHeader(4, Translation :: get('Author'), false);
+            $table->setColumnHeader(5, Translation :: get('Editor'), false);
+            $table->setColumnHeader(6, Translation :: get('Isbn'), false);
+            $table->setColumnHeader(7, Translation :: get('Medium'), false);
+            // $table->setColumnHeader(8, Translation :: get('Remarks'), false);
+            $table->setColumnHeader(8, Translation :: get('Price'), false);
+            $table->setColumnHeader(9, '', false);
 
             if ($total_price)
             {

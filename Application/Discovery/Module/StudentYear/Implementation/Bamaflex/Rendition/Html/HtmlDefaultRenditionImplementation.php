@@ -31,9 +31,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
 
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Year'), false);
-        $table->set_header(1, Translation :: get('Scholarship'), false);
-        $table->set_header(2, Translation :: get('ReducedRegistrationFee'), false);
+        $table->setColumnHeader(0, Translation :: get('Year'), false);
+        $table->setColumnHeader(1, Translation :: get('Scholarship'), false);
+        $table->setColumnHeader(2, Translation :: get('ReducedRegistrationFee'), false);
         return $table;
     }
 

@@ -586,7 +586,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $data[] = $row;
         }
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Choice'), false);
+        $table->setColumnHeader(0, Translation :: get('Choice'), false);
         $html[] = '<div style="float:left;width:48%">';
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
@@ -601,7 +601,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $data[] = $row;
         }
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('ChoiceOption'), false);
+        $table->setColumnHeader(0, Translation :: get('ChoiceOption'), false);
         $html[] = '<div style="float:right;width:48%">';
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
@@ -627,7 +627,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $data[] = $row;
         }
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Major'), false);
+        $table->setColumnHeader(0, Translation :: get('Major'), false);
         $html[] = $table->as_html();
 
         if ($training->has_major_choices())
@@ -684,7 +684,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $data[] = $row;
         }
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Choice'), false);
+        $table->setColumnHeader(0, Translation :: get('Choice'), false);
         $html[] = '<div style="float:left;width:48%">';
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
@@ -699,7 +699,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             $data[] = $row;
         }
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('ChoiceOption'), false);
+        $table->setColumnHeader(0, Translation :: get('ChoiceOption'), false);
         $html[] = '<div style="float:right;width:48%">';
         $html[] = $table->as_html();
         $html[] = '<div class="clear"></div>';
@@ -977,10 +977,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
         }
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Credits'), false);
+        $table->setColumnHeader(0, Translation :: get('Credits'), false);
         $table->getHeader()->setColAttributes(0, 'class="action"');
-        $table->set_header(1, Translation :: get('Course'), false);
-        $table->set_header(2, null, false);
+        $table->setColumnHeader(1, Translation :: get('Course'), false);
+        $table->setColumnHeader(2, null, false);
         return $table->as_html();
     }
 
@@ -1287,10 +1287,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
         }
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Credits'), false);
+        $table->setColumnHeader(0, Translation :: get('Credits'), false);
         $table->getHeader()->setColAttributes(0, 'class="action"');
-        $table->set_header(1, Translation :: get('Course'), false);
-        $table->set_header(2, null, false);
+        $table->setColumnHeader(1, Translation :: get('Course'), false);
+        $table->setColumnHeader(2, null, false);
         return $table->as_html();
     }
 
@@ -1563,10 +1563,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
         }
         $table = new SortableTable($data);
-        $table->set_header(0, Translation :: get('Credits'), false);
+        $table->setColumnHeader(0, Translation :: get('Credits'), false);
         $table->getHeader()->setColAttributes(0, 'class="action"');
-        $table->set_header(1, Translation :: get('Course'), false);
-        $table->set_header(2, '', false);
+        $table->setColumnHeader(1, Translation :: get('Course'), false);
+        $table->setColumnHeader(2, '', false);
         return $table->as_html();
     }
 

@@ -65,13 +65,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
                 foreach ($filters as $key => $filter)
                 {
-                    $table->set_header(
+                    $table->setColumnHeader(
                         $key,
                         Translation :: get(
                             'Filter' . StringUtilities :: getInstance()->createString($filter)->upperCamelize()),
                         false);
                 }
-                $table->set_header(count($filters), Translation :: get('Count'));
+                $table->setColumnHeader(count($filters), Translation :: get('Count'));
 
                 $html[] = $table->as_html();
             }
