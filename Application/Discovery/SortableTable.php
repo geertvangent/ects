@@ -33,10 +33,11 @@ class SortableTable extends SortableTableFromArray
 
         if ($totalValue && $totalColumn)
         {
-            $data_row = array();
-            $data_row[$totalColumn] = $totalValue;
-            $data_row[0] = Translation :: get('Total');
-            $this->addRow($data_row);
+            $dataRow = array();
+            $dataRow[$totalColumn] = $totalValue;
+            $dataRow[0] = Translation :: get('Total');
+
+            $this->addRow($dataRow);
 
             $this->setCellAttributes(
                 ($this->countData()),

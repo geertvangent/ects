@@ -13,6 +13,7 @@ use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
 use Chamilo\Libraries\Format\Table\SortableTableFromArray;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 
 /**
  *
@@ -226,15 +227,16 @@ class ViewerComponent extends Manager implements DelegateComponent
             $tableData[] = $tableRow;
         }
 
-        $table = new SortableTableFromArray($tableData, 1, 10, 'activity', SORT_DESC, false, false, false);
+        $headers = array();
+        $headers[] = new StaticTableColumn('ActivityType');
+        $headers[] = new StaticTableColumn('OnDate');
+        $headers[] = new StaticTableColumn('FromTime');
+        $headers[] = new StaticTableColumn('ToTime');
+        $headers[] = new StaticTableColumn('AtLocation');
+        $headers[] = new StaticTableColumn('ByTeacher');
 
-        $table->setColumnHeader(0, Translation :: get('ActivityType'), false);
-        $table->setColumnHeader(1, Translation :: get('OnDate'), false);
-        $table->setColumnHeader(2, Translation :: get('FromTime'), false);
-        $table->setColumnHeader(3, Translation :: get('ToTime'), false);
-        $table->setColumnHeader(4, Translation :: get('AtLocation'), false);
-        $table->setColumnHeader(5, Translation :: get('ByTeacher'), false);
+        $table = new SortableTableFromArray($tableData, $headers, array(), 1, 10, SORT_DESC, 'activity', false, false, false);
 
-        return $table->as_html();
+        return $table->toHtml();
     }
 }

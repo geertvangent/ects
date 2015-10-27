@@ -46,17 +46,17 @@ class LegendTable extends SortableTable
 
     public function getData()
     {
-        $table_data = array();
+        $tableData = array();
 
         foreach ($this->getData() as $category)
         {
             foreach ($category as $key => $row)
             {
-                $table_data[$key] = $row;
+                $tableData[$key] = $row;
             }
         }
 
-        return $table_data;
+        return $tableData;
     }
 
     /**

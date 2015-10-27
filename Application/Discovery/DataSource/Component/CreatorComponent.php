@@ -11,6 +11,7 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 
 class CreatorComponent extends Manager
 {
@@ -79,18 +80,18 @@ class CreatorComponent extends Manager
                 $table_data[] = $row;
             }
 
-            $table = new SortableTableFromArray($table_data);
-            $parameters = $this->get_parameters();
-            $table->setAdditionalParameters($parameters);
-            $table->setColumnHeader(0, '');
-            $table->setColumnHeader(1, 'Type');
-            $table->setColumnHeader(2, 'Description');
-            $table->setColumnHeader(3, '');
+            $headers = array();
+            $headers[] = new StaticTableColumn('');
+            $headers[] = new StaticTableColumn('Type');
+            $headers[] = new StaticTableColumn('Description');
+            $headers[] = new StaticTableColumn('');
+
+            $table = new SortableTableFromArray($table_data, $headers);
 
             $html = array();
 
             $html[] = $this->render_header();
-            $html[] = $table->as_html();
+            $html[] = $table->toHtml();
             $html[] = $this->render_footer();
 
             return implode(PHP_EOL, $html);
