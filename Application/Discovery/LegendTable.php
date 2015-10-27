@@ -2,6 +2,7 @@
 namespace Ehb\Application\Discovery;
 
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 
 /**
  *
@@ -18,15 +19,18 @@ class LegendTable extends SortableTable
      */
     private static $instance;
 
-    public function __construct($tableData, $defaultOrderColumn = 1, $defaultPerPage = 20, $tableName = 'tablename',
-        $defaultOrderDirection = SORT_ASC)
+    /**
+     *
+     * @param string[] $tableData
+     */
+    public function __construct($tableData)
     {
-        parent :: __construct($tableData, $defaultOrderColumn, $defaultPerPage, $tableName, $defaultOrderDirection);
+        $tableColumns = array();
+        $tableColumns[] = new StaticTableColumn('');
+        $tableColumns[] = new StaticTableColumn(Translation :: get('Type'));
+        $tableColumns[] = new StaticTableColumn(Translation :: get('Legend'));
 
-        $this->setColumnHeader(0, '', false);
-        $this->setColumnHeader(1, Translation :: get('Type'), false);
-        $this->setColumnHeader(2, Translation :: get('Legend'), false);
-        $this->getHeader()->setColAttributes(0, 'class="action"');
+        parent :: __construct($tableData, $tableColumns, array(), null, null, null, 'legend-table', false, false, false);
     }
 
     /**
@@ -44,21 +48,6 @@ class LegendTable extends SortableTable
         return self :: $instance;
     }
 
-    public function getData()
-    {
-        $tableData = array();
-
-        foreach ($this->getData() as $category)
-        {
-            foreach ($category as $key => $row)
-            {
-                $tableData[$key] = $row;
-            }
-        }
-
-        return $tableData;
-    }
-
     /**
      *
      * @param string $symbol
@@ -68,7 +57,7 @@ class LegendTable extends SortableTable
     {
         $key = md5($symbol);
 
-        $data = $this->getData();
+        $data = $this->getTableData();
         if (! key_exists($category, $data) || ! key_exists($key, $data[$category]))
         {
             $data[$category][$key] = array($symbol, $category, $description);
