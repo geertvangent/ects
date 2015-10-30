@@ -20,8 +20,6 @@ class CourseImporterComponent extends Manager
      */
     public function run()
     {
-        Page :: getInstance()->setSection('Chamilo\Core\Admin');
-
         if (! $this->get_user()->is_platform_admin())
         {
             throw new \Chamilo\Libraries\Architecture\Exceptions\NotAllowedException();
