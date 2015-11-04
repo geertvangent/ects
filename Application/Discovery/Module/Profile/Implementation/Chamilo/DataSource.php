@@ -97,7 +97,7 @@ class DataSource
             $language_code = PlatformSetting :: get('platform_language');
         }
 
-        return \Chamilo\Configuration\Storage\DataManager :: retrieve_language_from_isocode($language_code)->get_english_name();
+        return \Chamilo\Configuration\Configuration :: get_instance()->getLanguageNameFromIsocode($language_code);
     }
 
     /**

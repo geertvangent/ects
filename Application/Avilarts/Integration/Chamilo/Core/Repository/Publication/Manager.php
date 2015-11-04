@@ -232,15 +232,16 @@ class Manager implements PublicationInterface
             Translation :: get('PublicationDetails', null, \Ehb\Application\Avilarts\Manager :: context()));
         $form->addElement(
             'checkbox',
-            \Chamilo\Core\Repository\Publication\Manager :: WIZARD_OPTION . '[' . $registration->get_id() . '][' .
-                 ContentObjectPublication :: PROPERTY_HIDDEN . ']',
+            \Chamilo\Core\Repository\Publication\Manager :: WIZARD_OPTION . '[' .
+                 $registration[Registration :: PROPERTY_ID] . '][' . ContentObjectPublication :: PROPERTY_HIDDEN . ']',
                 Translation :: get('Hidden', null, \Ehb\Application\Avilarts\Manager :: context()));
         $form->add_forever_or_timewindow(
             'PublicationPeriod',
-            \Chamilo\Core\Repository\Publication\Manager :: WIZARD_OPTION . '[' . $registration->get_id() . ']',
-            true);
+            \Chamilo\Core\Repository\Publication\Manager :: WIZARD_OPTION . '[' .
+                 $registration[Registration :: PROPERTY_ID] . ']',
+                true);
 
-        $defaults[\Chamilo\Core\Repository\Publication\Manager :: WIZARD_OPTION][$registration->get_id()]['forever'] = 1;
+        $defaults[\Chamilo\Core\Repository\Publication\Manager :: WIZARD_OPTION][$registration[Registration :: PROPERTY_ID]]['forever'] = 1;
         $form->setDefaults($defaults);
     }
 

@@ -435,10 +435,10 @@ class CourseTypeCourseListRenderer extends CourseListRenderer
 
                         if ($language != 'platform_language')
                         {
-                            $language_registration = \Chamilo\Configuration\Storage\DataManager :: retrieve_language_from_isocode(
+                            $languageName = \Chamilo\Configuration\Configuration :: get_instance()->getLanguageNameFromIsocode(
                                 $language);
 
-                            $text[] = isset($language_registration) ? $language_registration->get_original_name() : '';
+                            $text[] = $languageName;
                         }
                         else
                         {

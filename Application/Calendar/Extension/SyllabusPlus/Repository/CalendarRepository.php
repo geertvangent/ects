@@ -5,7 +5,7 @@ use Chamilo\Core\User\Storage\DataClass\User;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataManager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet;
 use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
-use Chamilo\Libraries\File\Cache\FilesystemCache;
+use Chamilo\Libraries\Cache\Doctrine\Provider\FilesystemCache;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Configuration\Configuration;
 
