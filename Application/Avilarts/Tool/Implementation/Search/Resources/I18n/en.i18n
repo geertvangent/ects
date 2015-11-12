@@ -1,0 +1,11 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\Avilarts\tool\search
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Search"
+TypeCategory = "Project tools"
+ResultsFoundFor = "Results found for:"
+SearchToolSearcherComponent = "Search"
+SearchResult = "{COUNT} result"
+SearchResults = "{COUNT} results"

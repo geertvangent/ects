@@ -1,0 +1,4 @@
+TypeName = "Chamilo"
+Username = "Username"
+Timezone = "Timezone"
+TypeDescription = "A basic user profile"

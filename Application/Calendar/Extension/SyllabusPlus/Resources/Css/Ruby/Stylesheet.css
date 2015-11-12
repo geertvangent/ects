@@ -1,0 +1,8 @@
+span.event-expired {
+	color: red;
+}
+
+span.event-current {
+	font-weight: bold;
+	color: green;
+}
