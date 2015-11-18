@@ -1,0 +1,16 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = repository\quota\rights
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Toegangsbeheer"
+AccessorComponent = "Beheer rechten"
+RightsGroupAccess = "Wie mag functies toekennen?"
+RightsGroupTargets = "Voor welke context(en) mogen ze dit doen?"
+CreatorComponent = "Ken rechten toe"
+GeneralAccess = "Toegang"
+Targets = "Doelgebruikers en/of -groepen"
+Add = "Ken toe"
+BrowserComponent = "Beheer doelen"
+ConfigureRights = "Beheer rechten"
+ConfigureRightsDescription = "Welke gebruikers mogen functies toekennen en/of beheren"
