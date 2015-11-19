@@ -19,6 +19,7 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Format\Table\SortableTableFromArray;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
+use Chamilo\Libraries\Format\Display;
 
 class StateComponent extends Manager implements DelegateComponent
 {
@@ -35,6 +36,7 @@ class StateComponent extends Manager implements DelegateComponent
             $bamaFlexGroupIdentifiers = array_keys($bamaFlexGroups);
 
             $oldGroups = array();
+            $groupIdentifiers = array();
 
             while ($platformGroup = $platformGroups->next_result())
             {
@@ -47,9 +49,12 @@ class StateComponent extends Manager implements DelegateComponent
                         $platformGroup[Group :: PROPERTY_ID],
                         $platformGroup[Group :: PROPERTY_NAME],
                         $platformGroup[Group :: PROPERTY_CODE]);
+                    $groupIdentifiers[] = $platformGroup[Group :: PROPERTY_ID];
                 }
             }
         }
+
+        $query = 'SELECT * FROM group_group_rel_user WHERE group_id IN (' . implode(', ', $groupIdentifiers) . ')';
 
         $tableColumns = array();
         $tableColumns[] = new StaticTableColumn('id');
@@ -69,8 +74,10 @@ class StateComponent extends Manager implements DelegateComponent
             false);
 
         $html = array();
+
         $html[] = $this->render_header();
         $html[] = $sortableTable->toHtml();
+        $html[] = Display :: normal_message($query);
         $html[] = $this->render_footer();
 
         return implode(PHP_EOL, $html);
