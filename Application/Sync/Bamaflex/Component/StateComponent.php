@@ -1,25 +1,28 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Component;
 
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Ehb\Application\Sync\Bamaflex\Manager;
-use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexDataConnector;
-use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexResultSet;
-use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
+use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
+use Chamilo\Libraries\Format\Table\SortableTableFromArray;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
+use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
 use Chamilo\Libraries\Storage\DataManager\DataManager;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
-use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
-use Chamilo\Libraries\Format\Table\SortableTableFromArray;
-use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
-use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexDataConnector;
+use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexResultSet;
+use Ehb\Application\Sync\Bamaflex\Manager;
 
 class StateComponent extends Manager implements DelegateComponent
 {
@@ -54,34 +57,51 @@ class StateComponent extends Manager implements DelegateComponent
             }
         }
 
-        $query = 'SELECT * FROM group_group_rel_user WHERE group_id IN (' . implode(', ', $groupIdentifiers) . ')';
-
-        $tableColumns = array();
-        $tableColumns[] = new StaticTableColumn('id');
-        $tableColumns[] = new StaticTableColumn('name');
-        $tableColumns[] = new StaticTableColumn('code');
-
-        $sortableTable = new SortableTableFromArray(
-            $oldGroups,
-            $tableColumns,
-            array(),
-            1,
-            20,
-            SORT_ASC,
-            'state_table',
-            false,
-            false,
-            false);
-
         $html = array();
-
         $html[] = $this->render_header();
-        $html[] = $sortableTable->toHtml();
-        $html[] = Display :: normal_message('<b>Total number of dead groups: ' . count($groupIdentifiers) . '</b>');
-        $html[] = Display :: normal_message($query);
+
+        if ($this->oldGroupsHaveUsers($groupIdentifiers))
+        {
+            $query = 'SELECT * FROM group_group_rel_user WHERE group_id IN (' . implode(', ', $groupIdentifiers) . ')';
+
+            $tableColumns = array();
+            $tableColumns[] = new StaticTableColumn('id');
+            $tableColumns[] = new StaticTableColumn('name');
+            $tableColumns[] = new StaticTableColumn('code');
+
+            $sortableTable = new SortableTableFromArray(
+                $oldGroups,
+                $tableColumns,
+                array(),
+                1,
+                20,
+                SORT_ASC,
+                'state_table',
+                false,
+                false,
+                false);
+
+            $html[] = $sortableTable->toHtml();
+            $html[] = Display :: normal_message('<b>Total number of dead groups: ' . count($groupIdentifiers) . '</b>');
+            $html[] = Display :: normal_message($query);
+        }
+        else
+        {
+            $html[] = Display :: message(Display :: MESSAGE_TYPE_CONFIRM, 'Everything is OK');
+        }
+
         $html[] = $this->render_footer();
 
         return implode(PHP_EOL, $html);
+    }
+
+    private function oldGroupsHaveUsers($groupIdentifiers)
+    {
+        $condition = new InCondition(
+            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            $groupIdentifiers);
+
+        return DataManager :: count(GroupRelUser :: class_name(), new DataClassCountParameters($condition));
     }
 
     private function getBamaFlexGroups($year)
