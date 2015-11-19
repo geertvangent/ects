@@ -77,6 +77,7 @@ class StateComponent extends Manager implements DelegateComponent
 
         $html[] = $this->render_header();
         $html[] = $sortableTable->toHtml();
+        $html[] = Display :: normal_message('<b>Total number of dead groups: ' . count($groupIdentifiers) . '</b>');
         $html[] = Display :: normal_message($query);
         $html[] = $this->render_footer();
 
