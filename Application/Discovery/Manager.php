@@ -15,8 +15,6 @@ use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface
  */
 abstract class Manager extends Application
 {
-    const APPLICATION_NAME = 'discovery';
-
     // Actions
     const ACTION_VIEW = 'Viewer';
     const ACTION_CODE = 'Code';
@@ -47,10 +45,5 @@ abstract class Manager extends Application
     {
         parent :: __construct($applicationConfiguration);
         Theme :: getInstance()->setTheme(PlatformSetting :: get('theme', __NAMESPACE__));
-    }
-
-    public function get_application_name()
-    {
-        return self :: APPLICATION_NAME;
     }
 }

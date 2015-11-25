@@ -21,7 +21,6 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 abstract class Manager extends Application
 {
-    const APPLICATION_NAME = 'weblcms';
     const PARAM_REQUEST_TYPE = 'request_type';
     const PARAM_REQUEST_VIEW = 'request_view';
     const PARAM_REQUEST = 'request';

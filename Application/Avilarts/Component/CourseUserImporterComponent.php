@@ -10,6 +10,7 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 
 class CourseUserImporterComponent extends Manager
 {
@@ -87,7 +88,8 @@ class CourseUserImporterComponent extends Manager
                 array(
                     Application :: PARAM_CONTEXT => \Chamilo\Core\Admin\Manager :: context(),
                     \Chamilo\Core\Admin\Manager :: PARAM_ACTION => \Chamilo\Core\Admin\Manager :: ACTION_ADMIN_BROWSER,
-                    DynamicTabsRenderer :: PARAM_SELECTED_TAB => self :: APPLICATION_NAME));
+                    DynamicTabsRenderer :: PARAM_SELECTED_TAB => ClassnameUtilities :: getInstance()->getNamespaceId(
+                        self :: package())));
             $breadcrumbtrail->add(new Breadcrumb($redirect->getUrl(), Translation :: get('Courses')));
         }
 

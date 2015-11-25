@@ -29,7 +29,7 @@ class CodeComponent extends Manager implements DelegateComponent
              \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_USER)
         {
             $parameters = array();
-            $parameters[self :: PARAM_APPLICATION] = self :: APPLICATION_NAME;
+            $parameters[self :: PARAM_APPLICATION] = self :: package();
             $parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
             $parameters[self :: PARAM_MODULE_ID] = $module_instance->get_id();
             $parameters[self :: PARAM_USER_ID] = $user->get_id();

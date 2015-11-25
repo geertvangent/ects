@@ -10,7 +10,6 @@ use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface
 
 abstract class Manager extends Application
 {
-    const APPLICATION_NAME = 'atlantis';
     const ACTION_CONTEXT = 'Context';
     const ACTION_ROLE = 'Role';
     const ACTION_ENTITLEMENT = 'Entitlement';
@@ -30,17 +29,6 @@ abstract class Manager extends Application
         }
 
         Theme :: getInstance()->setTheme(PlatformSetting :: get('theme', __NAMESPACE__));
-    }
-
-    /**
-     * Helper function for the Application class, pending access to class constants via variables in PHP 5.3 e.g.
-     * $name
-     * = $class :: APPLICATION_NAME DO NOT USE IN THIS APPLICATION'S CONTEXT Instead use: - self :: APPLICATION_NAME in
-     * the context of this class - YourApplicationManager :: APPLICATION_NAME in all other application classes
-     */
-    public function get_application_name()
-    {
-        return self :: APPLICATION_NAME;
     }
 
     function render_header()

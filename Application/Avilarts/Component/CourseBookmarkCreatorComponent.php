@@ -36,7 +36,7 @@ class CourseBookmarkCreatorComponent extends Manager
         $content_object->set_title($title);
 
         // set application
-        $content_object->set_application(self :: APPLICATION_NAME);
+        $content_object->set_application(self :: package());
 
         // set url
         $params_bookmark = array();
@@ -108,7 +108,7 @@ class CourseBookmarkCreatorComponent extends Manager
             $content_object->set_title($title);
 
             // set application
-            $content_object->set_application(self :: APPLICATION_NAME);
+            $content_object->set_application(self :: package());
 
             // set url
             $params_bookmark = array();
