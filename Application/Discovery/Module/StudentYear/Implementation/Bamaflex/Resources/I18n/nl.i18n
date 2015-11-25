@@ -1,0 +1,18 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\student_year\implementation\bamaflex
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Studiebeurzen"
+TypeDescription = "Overzicht van studiebeurzen per jaar voor één persoon"
+Title = "Titel"
+Description = "Omschrijving"
+DataSource = "Databron"
+Year = "Jaar"
+Scholarship = "Studiebeurs"
+ReducedRegistrationFee = "Verminderd inschrijvingsgeld"
+Enrollment = "Inschrijving"
+ScholarshipYes = "Ja"
+ReducedRegistrationFeeNo = "Nee"
+ScholarshipNo = "Nee"
+ReducedRegistrationFeeYes = "Ja"
