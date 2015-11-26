@@ -55,7 +55,7 @@ class Manager extends InternalCalendar
 
                 while ($calenderEvent = $eventResultSet->next_result())
                 {
-                    $eventParser = new EventParser($calenderEvent, $fromDate, $toDate);
+                    $eventParser = new EventParser( $calendarRendererProvider->getDataUser(), $calenderEvent, $fromDate, $toDate);
                     $events = array_merge($events, $eventParser->getEvents());
                 }
             }

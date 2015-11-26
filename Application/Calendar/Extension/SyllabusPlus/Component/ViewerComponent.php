@@ -44,7 +44,9 @@ class ViewerComponent extends Manager implements DelegateComponent
 
         if ($activityId)
         {
-            $activityRecord = $this->getCalendarService()->getEventForUserByIdentifier($this->getUser(), $activityId);
+            $activityRecord = $this->getCalendarService()->getEventForUserByIdentifier(
+                $this->getUserCalendar(),
+                $activityId);
             $activityHtml = $this->getActivityAsHtml($activityRecord, $activityTime);
 
             $html = array();
@@ -158,14 +160,14 @@ class ViewerComponent extends Manager implements DelegateComponent
     private function getEvents($activityRecord)
     {
         $moduleEvents = $this->getCalendarService()->getEventsForUserByModuleIdentifier(
-            $this->get_user(),
+            $this->getUserCalendar(),
             $activityRecord['module_id']);
 
         $sortedEvents = array();
 
         while ($moduleEvent = $moduleEvents->next_result())
         {
-            $eventParser = new EventParser($moduleEvent, 0, 0);
+            $eventParser = new EventParser($this->getUserCalendar(), $moduleEvent, 0, 0);
 
             foreach ($eventParser->getEvents() as $event)
             {
