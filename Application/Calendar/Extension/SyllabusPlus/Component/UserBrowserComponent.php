@@ -16,6 +16,13 @@ use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Table\User\UserTable;
+use Chamilo\Libraries\Storage\Query\Condition\Condition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
+use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 
 class UserBrowserComponent extends Manager implements DelegateComponent, TableSupport
 {
@@ -31,7 +38,7 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
      */
     public function run()
     {
-        if (! $this->get_user()->is_platform_admin() &&  $this->get_user()->get_status() != User :: STATUS_TEACHER )
+        if (! $this->get_user()->is_platform_admin() && $this->get_user()->get_status() != User :: STATUS_TEACHER)
         {
             throw new NotAllowedException();
         }
@@ -83,7 +90,43 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
         $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL);
 
         // get conditions
-        return $this->get_action_bar()->get_conditions($search_properties);
+        $searchCondition = $this->get_action_bar()->get_conditions($search_properties);
+
+        // Conditions for active user with officialcode and email
+        $activeConditions = array();
+        $activeConditions[] = new EqualityCondition(
+            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ACTIVE),
+            new StaticConditionVariable(1));
+        $activeConditions[] = new NotCondition(
+            new EqualityCondition(
+                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE),
+                new StaticConditionVariable(NULL)));
+        $activeConditions[] = new NotCondition(
+            new PatternMatchCondition(
+                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE),
+                'EXT*'));
+        $emailConditions = array();
+        $emailConditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL),
+            '*@ehb.be');
+        $emailConditions[] = new PatternMatchCondition(
+            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL),
+            '*@student.ehb.be');
+        $activeConditions[] = new OrCondition($emailConditions);
+
+        $activeCondition = new AndCondition($activeConditions);
+
+        if ($searchCondition instanceof Condition)
+        {
+            $conditions = array();
+            $conditions[] = $searchCondition;
+            $conditions[] = $activeCondition;
+            return new AndCondition($conditions);
+        }
+        else
+        {
+            return $activeCondition;
+        }
     }
 
     public function get_action_bar()
