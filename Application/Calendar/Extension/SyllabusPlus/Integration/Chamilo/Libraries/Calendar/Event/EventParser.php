@@ -34,18 +34,36 @@ class EventParser
      */
     private $toDate;
 
+    private $dataUser;
     /**
      *
-     * @param string[] $weekLabels
+     * @param User $dataUser
      * @param string[] $calendarEvent
      * @param integer $fromDate
      * @param integer $toDate
      */
-    public function __construct($calendarEvent, $fromDate, $toDate)
+    public function __construct($dataUser, $calendarEvent, $fromDate, $toDate)
     {
+        $this->dataUser = $dataUser;
         $this->calendarEvent = $calendarEvent;
         $this->fromDate = $fromDate;
         $this->toDate = $toDate;
+    }
+
+    /**
+     * @return the $dataUser
+     */
+    public function getDataUser()
+    {
+        return $this->dataUser;
+    }
+
+    /**
+     * @param field_type $dataUser
+     */
+    public function setDataUser($dataUser)
+    {
+        $this->dataUser = $dataUser;
     }
 
     /**
@@ -139,6 +157,7 @@ class EventParser
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: ACTION_VIEW;
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_ID] = $calendarEvent['id'];
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_TIME] = $startTime;
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_USER_USER_ID] = $this->getDataUser()->get_id();
 
         $redirect = new Redirect($parameters);
 

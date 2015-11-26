@@ -15,6 +15,8 @@ use Chamilo\Libraries\Platform\Configuration\LocalSetting;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Core\User\Storage\DataClass\User;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {
@@ -37,7 +39,7 @@ class BrowserComponent extends Manager implements DelegateComponent
     public function run()
     {
         $html = array();
-        if ($this->get_user()->get_status() == 1 || $this->get_user()->is_platform_admin())
+        if ($this->get_user()->get_status() == User :: STATUS_TEACHER || $this->get_user()->is_platform_admin())
         {
             $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
             $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
@@ -48,9 +50,10 @@ class BrowserComponent extends Manager implements DelegateComponent
             {
                 $this->currentTime = $this->form->getTime();
             }
+            $tabs = $this->getTabs()->render();
 
             $html[] = $this->render_header();
-            $html[] = $this->getTabs()->render();
+            $html[] = $tabs;
             $html[] = $this->render_footer();
         }
         return implode(PHP_EOL, $html);
@@ -73,23 +76,26 @@ class BrowserComponent extends Manager implements DelegateComponent
      */
     public function getCalendarHtml()
     {
-        $userId = Request :: get(self :: PARAM_USER_USER_ID);
-        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_user_by_official_code($userId);
+        BreadcrumbTrail :: get_instance()->add(
+            new Breadcrumb(
+                null,
+                $this->getUserCalendar()->fullname(
+                    $this->getUserCalendar()->get_lastname(),
+                    $this->getUserCalendar()->get_firstname())));
 
         $displayParameters = array(
             self :: PARAM_CONTEXT => self :: package(),
             self :: PARAM_ACTION => self :: ACTION_VIEW,
             ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
             ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
-            self :: PARAM_USER_USER_ID => $userId);
+            self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
 
         $dataProvider = new CalendarRendererProvider(
             new CalendarRendererProviderRepository(),
-            $user,
-            $user,
+            $this->getUserCalendar(),
+            $this->get_user(),
             $displayParameters,
             \Chamilo\Application\Calendar\Ajax\Manager :: context());
-
         $calendarLegend = new Legend($dataProvider);
 
         $mini_month_renderer = new MiniMonthRenderer(
@@ -173,37 +179,4 @@ class BrowserComponent extends Manager implements DelegateComponent
                 return MiniMonthCalendar :: PERIOD_DAY;
         }
     }
-
-    // /**
-    // *
-    // * @param \Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer $tabs
-    // */
-    // private function addTypeTabs(DynamicVisualTabsRenderer $tabs)
-    // {
-    // $typeUrl = $this->get_url(
-    // array(
-    // Application :: PARAM_ACTION => Manager :: ACTION_BROWSE,
-    // ViewRenderer :: PARAM_TYPE => ViewRenderer :: MARKER_TYPE));
-    // $todayUrl = $this->get_url(
-    // array(
-    // Application :: PARAM_ACTION => Manager :: ACTION_BROWSE,
-    // ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
-    // ViewRenderer :: PARAM_TIME => time()));
-
-    // $rendererTypes = array(
-    // ViewRenderer :: TYPE_MONTH,
-    // ViewRenderer :: TYPE_WEEK,
-    // ViewRenderer :: TYPE_DAY,
-    // ViewRenderer :: TYPE_YEAR,
-    // ViewRenderer :: TYPE_LIST);
-
-    // $rendererTypeTabs = ViewRenderer :: getTabs($rendererTypes, $typeUrl, $todayUrl);
-
-    // foreach ($rendererTypeTabs as $rendererTypeTab)
-    // {
-    // $rendererTypeTab->set_selected($this->getCurrentRendererType() == $rendererTypeTab->get_id());
-
-    // $tabs->add_tab($rendererTypeTab);
-    // }
-    // }
 }

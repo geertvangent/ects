@@ -187,6 +187,7 @@ class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Serv
         $events = array();
 
         $implementor = new Manager();
+
         foreach ($this->getSources($requestedSourceType) as $context => $implementor)
         {
             $events = array_merge($events, $implementor->getEvents($this, $requestedSourceType, $startTime, $endTime));
@@ -232,28 +233,13 @@ class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Serv
      */
     public function getSources($requestedSourceType)
     {
-        $registrations = \Chamilo\Configuration\Storage\DataManager :: get_integrating_contexts(
-            \Chamilo\Application\Calendar\Manager :: context());
-
         $sources = array();
 
-        foreach ($registrations as $registration)
+        $implementor = new Manager();
+
+        if ($this->matchesRequestedSource($requestedSourceType, $implementor->getSourceType()))
         {
-            if ($registration->is_active())
-            {
-                $context = $registration->get_context();
-                $class_name = $context . '\Manager';
-
-                if (class_exists($class_name))
-                {
-                    $implementor = new $class_name();
-
-                    if ($this->matchesRequestedSource($requestedSourceType, $implementor->getSourceType()))
-                    {
-                        $sources[$context] = $implementor;
-                    }
-                }
-            }
+            $sources['Ehb\Application\Calendar\Extension\SyllabusPlus'] = $implementor;
         }
 
         return $sources;
@@ -269,7 +255,6 @@ class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Serv
         }
 
         sort($sourceNames);
-
         return $sourceNames;
     }
 

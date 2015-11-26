@@ -9,6 +9,7 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupp
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 
 /**
  * Cell renderer for the user object browser table
@@ -24,7 +25,7 @@ class UserTableCellRenderer extends DataClassTableCellRenderer implements TableC
         {
             // Exceptions that need post-processing go here ...
             case User :: PROPERTY_STATUS :
-                if ($user->get_status() == '1')
+                if ($user->get_status() == User :: STATUS_TEACHER)
                 {
                     return Translation :: get('CourseAdmin');
                 }
@@ -51,15 +52,13 @@ class UserTableCellRenderer extends DataClassTableCellRenderer implements TableC
     {
         $toolbar = new Toolbar();
 
-        if ($this->get_component()->get_user()->is_platform_admin())
-        {
-            $toolbar->add_item(
-                new ToolbarItem(
-                    Translation :: get('CalendarBrowser'),
-                    Theme :: getInstance()->getCommonImagePath('CalendarBrowser'),
-                    $this->get_component()->get_browser_url($user),
-                    ToolbarItem :: DISPLAY_ICON));
-        }
+        $toolbar->add_item(
+            new ToolbarItem(
+                Translation :: get('CalendarBrowser'),
+                Theme :: getInstance()->getImagePath(Manager :: package(), 'Logo/16'),
+                $this->get_component()->get_browser_url($user),
+                ToolbarItem :: DISPLAY_ICON));
+
         return $toolbar->as_html();
     }
 }

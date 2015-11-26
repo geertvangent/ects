@@ -31,7 +31,7 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
      */
     public function run()
     {
-        if (! $this->get_user()->is_platform_admin())
+        if (! $this->get_user()->is_platform_admin() &&  $this->get_user()->get_status() != User :: STATUS_TEACHER )
         {
             throw new NotAllowedException();
         }
