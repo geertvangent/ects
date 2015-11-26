@@ -58,7 +58,7 @@ class CalendarRepository
 
             if ($user->get_official_code())
             {
-                $query = 'SELECT * FROM [dbo].[v_syllabus_events] WHERE person_id = N\'' . $user->get_official_code() .
+                $query = 'SELECT * FROM [dbo].[v_syllabus_events] WHERE person_id = \'' . $user->get_official_code() .
                      '\'';
                 $statement = DataManager :: get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
