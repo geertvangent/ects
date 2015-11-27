@@ -41,7 +41,7 @@ class GroupsComponent extends Manager implements DelegateComponent
 
             $synchronization = GroupSynchronization :: factory(
                 'central_administration',
-                new DummyGroupSynchronization($root_group));
+                new DummyGroupSynchronization($root_group, $years));
             $synchronization->run();
 
             Synchronization :: log('Group sync ended', date('c', time()));
