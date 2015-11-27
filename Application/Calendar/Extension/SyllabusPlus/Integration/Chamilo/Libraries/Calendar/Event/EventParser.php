@@ -35,6 +35,7 @@ class EventParser
     private $toDate;
 
     private $dataUser;
+
     /**
      *
      * @param User $dataUser
@@ -51,6 +52,7 @@ class EventParser
     }
 
     /**
+     *
      * @return the $dataUser
      */
     public function getDataUser()
@@ -59,6 +61,7 @@ class EventParser
     }
 
     /**
+     *
      * @param field_type $dataUser
      */
     public function setDataUser($dataUser)
@@ -146,54 +149,59 @@ class EventParser
     public function getEvents()
     {
         $calendarEvent = $this->getCalendarEvent();
-
+        
         $events = array();
-
+        
         $startTime = strtotime($calendarEvent['start_time']);
         $endTime = strtotime($calendarEvent['end_time']);
-
+        
         $parameters = array();
         $parameters[Application :: PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context();
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: ACTION_VIEW;
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_ID] = $calendarEvent['id'];
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_TIME] = $startTime;
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_USER_USER_ID] = $this->getDataUser()->get_id();
-
+        
         $redirect = new Redirect($parameters);
-
+        
         $event = new Event(
-            $calendarEvent['id'],
-            $startTime,
-            $endTime,
-            new RecurrenceRules(),
-            $redirect->getUrl(),
-            $this->getEventLabel($calendarEvent),
-            $this->getEventLabel($calendarEvent),
-            Translation :: get('TypeName', null, \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context()),
+            $calendarEvent['id'], 
+            $startTime, 
+            $endTime, 
+            new RecurrenceRules(), 
+            $redirect->getUrl(), 
+            $this->getEventLabel($calendarEvent), 
+            $this->getEventLabel($calendarEvent), 
+            $calendarEvent['location'], 
+            Translation :: get('TypeName', null, \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context()), 
             \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context());
-
+        
         $event->setCalendarEvent($calendarEvent);
-
+        
         return array($event);
     }
 
     private function getEventLabel($calendarEvent)
     {
+        return $calendarEvent['name'];
+    }
+
+    private function getEventDescription($calendarEvent)
+    {
         $html = array();
-
-        $html[] = $calendarEvent['name'];
-//         $html[] = '[' . $calendarEvent['type_code'] . ']';
-
-//         if ($calendarEvent['teacher'])
-//         {
-//             $html[] = '[' . $calendarEvent['teacher'] . ']';
-//         }
-
-//         if ($calendarEvent['location'])
-//         {
-//             $html[] = '[' . $calendarEvent['location'] . ']';
-//         }
-
+        
+        $html[] = '[' . $calendarEvent['type_code'] . ']';
+        
+        if ($calendarEvent['teacher'])
+        {
+            $html[] = '[' . $calendarEvent['teacher'] . ']';
+        }
+        
+        if ($calendarEvent['location'])
+        {
+            $html[] = '[' . $calendarEvent['location'] . ']';
+        }
+        
         return implode(PHP_EOL, $html);
     }
 }
