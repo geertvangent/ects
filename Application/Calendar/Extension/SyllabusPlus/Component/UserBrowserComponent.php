@@ -13,7 +13,6 @@ use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Table\User\UserTable;
 use Chamilo\Libraries\Storage\Query\Condition\Condition;
@@ -38,18 +37,21 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
      */
     public function run()
     {
-        if (! $this->get_user()->is_platform_admin() && $this->get_user()->get_status() != User :: STATUS_TEACHER)
-        {
-            throw new NotAllowedException();
-        }
+        $this->checkAuthorization();
 
         $this->firstletter = Request :: get(self :: PARAM_FIRSTLETTER);
+
+        $content = array();
+        $content[] = $this->get_action_bar()->as_html() . '<br />';
+        $content[] = $this->get_user_html();
+
+        $tabs = $this->getTabs();
+        $tabs->set_content(implode(PHP_EOL, $content));
 
         $html = array();
 
         $html[] = $this->render_header();
-        $html[] = $this->get_action_bar()->as_html() . '<br />';
-        $html[] = $this->get_user_html();
+        $html[] = $tabs->render();
         $html[] = $this->render_footer();
 
         return implode(PHP_EOL, $html);

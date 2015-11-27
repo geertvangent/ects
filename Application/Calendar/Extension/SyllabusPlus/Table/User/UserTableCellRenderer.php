@@ -2,13 +2,12 @@
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Table\User;
 
 use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 
 /**
@@ -33,10 +32,6 @@ class UserTableCellRenderer extends DataClassTableCellRenderer implements TableC
                 {
                     return Translation :: get('Student');
                 }
-            case User :: PROPERTY_PLATFORMADMIN :
-                return Utilities :: display_true_false_icon($user->get_platformadmin());
-            case User :: PROPERTY_ACTIVE :
-                return Utilities :: display_true_false_icon($user->get_active());
         }
 
         return parent :: render_cell($column, $user);

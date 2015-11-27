@@ -1,22 +1,18 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer;
-use Chamilo\Libraries\Calendar\Renderer\Form\JumpForm;
-use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Application\Calendar\Repository\CalendarRendererProviderRepository;
-use Chamilo\Libraries\Calendar\Renderer\Type\View\MiniMonthRenderer;
-use Chamilo\Libraries\Calendar\Renderer\Type\ViewRendererFactory;
-use Chamilo\Libraries\Calendar\Table\Type\MiniMonthCalendar;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Chamilo\Libraries\Calendar\Renderer\Form\JumpForm;
 use Chamilo\Libraries\Calendar\Renderer\Legend;
-use Chamilo\Libraries\Platform\Configuration\LocalSetting;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Platform\Session\Request;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
+use Chamilo\Libraries\Calendar\Renderer\Type\View\MiniMonthRenderer;
+use Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer;
+use Chamilo\Libraries\Calendar\Renderer\Type\ViewRendererFactory;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Configuration\LocalSetting;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {
@@ -28,46 +24,31 @@ class BrowserComponent extends Manager implements DelegateComponent
     private $form;
 
     /**
-     *
-     * @var int
-     */
-    private $currentTime;
-
-    /**
      * Runs this component and displays its output.
      */
     public function run()
     {
+        $this->checkAuthorization();
+
         $html = array();
-        if ($this->get_user()->get_status() == User :: STATUS_TEACHER || $this->get_user()->is_platform_admin())
+
+        $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
+        $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
+
+        $this->form = new JumpForm($this->get_url(), $this->getCurrentRendererTime());
+
+        if ($this->form->validate())
         {
-            $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
-            $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
-
-            $this->form = new JumpForm($this->get_url(), $this->getCurrentRendererTime());
-
-            if ($this->form->validate())
-            {
-                $this->currentTime = $this->form->getTime();
-            }
-            $tabs = $this->getTabs()->render();
-
-            $html[] = $this->render_header();
-            $html[] = $tabs;
-            $html[] = $this->render_footer();
+            $this->currentTime = $this->form->getTime();
         }
-        return implode(PHP_EOL, $html);
-    }
-
-    public function getTabs()
-    {
-        $tabs = new DynamicVisualTabsRenderer('calendar');
-
-        // $this->addTypeTabs($tabs);
-
+        $tabs = $this->getTabs();
         $tabs->set_content($this->getCalendarHtml());
 
-        return $tabs;
+        $html[] = $this->render_header();
+        $html[] = $tabs->render();
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 
     /**
@@ -94,8 +75,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             new CalendarRendererProviderRepository(),
             $this->getUserCalendar(),
             $this->get_user(),
-            $displayParameters,
-            \Chamilo\Application\Calendar\Ajax\Manager :: context());
+            $displayParameters);
         $calendarLegend = new Legend($dataProvider);
 
         $mini_month_renderer = new MiniMonthRenderer(
@@ -131,52 +111,5 @@ class BrowserComponent extends Manager implements DelegateComponent
         $html[] = '</div>';
 
         return implode(PHP_EOL, $html);
-    }
-
-    /**
-     *
-     * @see \Chamilo\Libraries\Architecture\Application\Application::add_additional_breadcrumbs()
-     */
-    public function add_additional_breadcrumbs(BreadcrumbTrail $breadcrumbtrail)
-    {
-        $breadcrumbtrail->add_help('calendar_browser');
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getCurrentRendererType()
-    {
-        return Request :: get(ViewRenderer :: PARAM_TYPE, ViewRenderer :: TYPE_MONTH);
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public function getCurrentRendererTime()
-    {
-        if (! isset($this->currentTime))
-        {
-            $this->currentTime = Request :: get(ViewRenderer :: PARAM_TIME, time());
-        }
-
-        return $this->currentTime;
-    }
-
-    public function getMiniMonthMarkPeriod()
-    {
-        switch ($this->getCurrentRendererType())
-        {
-            case ViewRenderer :: TYPE_DAY :
-                return MiniMonthCalendar :: PERIOD_DAY;
-            case ViewRenderer :: TYPE_MONTH :
-                return MiniMonthCalendar :: PERIOD_MONTH;
-            case ViewRenderer :: TYPE_WEEK :
-                return MiniMonthCalendar :: PERIOD_WEEK;
-            default :
-                return MiniMonthCalendar :: PERIOD_DAY;
-        }
     }
 }

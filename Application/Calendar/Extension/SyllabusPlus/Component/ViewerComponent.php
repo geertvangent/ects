@@ -1,19 +1,21 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
+use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Table\SortableTableFromArray;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
-use Chamilo\Libraries\Format\Table\PropertiesTable;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
-use Chamilo\Libraries\Format\Table\SortableTableFromArray;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
-use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 
 /**
  *
@@ -39,8 +41,8 @@ class ViewerComponent extends Manager implements DelegateComponent
         $view = Request :: get(\Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer :: PARAM_TYPE) ? Request :: get(
             \Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer :: PARAM_TYPE) : \Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer :: TYPE_MONTH;
 
-        $activityId = Request :: get(Manager :: PARAM_ACTIVITY_ID);
-        $activityTime = Request :: get(Manager :: PARAM_ACTIVITY_TIME);
+        $activityId = $this->getActivityId();
+        $activityTime = $this->getActivityTime();
 
         if ($activityId)
         {
@@ -61,6 +63,24 @@ class ViewerComponent extends Manager implements DelegateComponent
         {
             return $this->display_error_page(htmlentities(Translation :: get('NoActivitySelected')));
         }
+    }
+
+    /**
+     *
+     * @return string
+     */
+    private function getActivityId()
+    {
+        return Request :: get(Manager :: PARAM_ACTIVITY_ID);
+    }
+
+    /**
+     *
+     * @return integer
+     */
+    private function getActivityTime()
+    {
+        return Request :: get(Manager :: PARAM_ACTIVITY_TIME);
     }
 
     /**
@@ -134,7 +154,12 @@ class ViewerComponent extends Manager implements DelegateComponent
             array('DAY' => $dateDay, 'FROM' => $dateStart, 'UNTIL' => $dateEnd));
 
         $properties[Translation :: get('AtLocation')] = $activityRecord['location'];
-        $properties[Translation :: get('ByTeacher')] = $activityRecord['teacher'];
+        $properties[Translation :: get('ForGroups')] = $activityRecord['groups'];
+
+        if (! StringUtilities :: getInstance()->createString($activityRecord['teacher'])->isBlank())
+        {
+            $properties[Translation :: get('ByTeacher')] = $activityRecord['teacher'];
+        }
 
         $propertiesTable = new PropertiesTable($properties);
 
@@ -144,9 +169,36 @@ class ViewerComponent extends Manager implements DelegateComponent
 
         if (count($activityEvents) > 1)
         {
-            $html[] = '<br />';
-            $html[] = '<h4>' . Translation :: get('OtherCourseMoments') . '</h4>';
-            $html[] = $this->renderOccurrences($activityEvents);
+            $pastEvents = array();
+            $currentEvents = array();
+
+            foreach ($activityEvents as $event)
+            {
+                $isPastEvent = ($event->getEndDate() < time());
+
+                if ($isPastEvent)
+                {
+                    $pastEvents[] = $event;
+                }
+                else
+                {
+                    $currentEvents[] = $event;
+                }
+            }
+
+            if (count($currentEvents) > 0)
+            {
+                $html[] = '<br />';
+                $html[] = '<h4>' . Translation :: get('CurrentUpcomingCourseMoments') . '</h4>';
+                $html[] = $this->renderOccurrences($currentEvents);
+            }
+
+            if (count($pastEvents) > 0)
+            {
+                $html[] = '<br />';
+                $html[] = '<h4>' . Translation :: get('PreviousCourseMoments') . '</h4>';
+                $html[] = $this->renderOccurrences($pastEvents);
+            }
         }
 
         return implode(PHP_EOL, $html);
@@ -189,6 +241,19 @@ class ViewerComponent extends Manager implements DelegateComponent
     {
         $tableData = array();
 
+        $hasTeachers = false;
+
+        foreach ($events as $event)
+        {
+            $activityRecord = $event->getCalendarEvent();
+
+            if (! StringUtilities :: getInstance()->createString($activityRecord['teacher'])->isBlank())
+            {
+                $hasTeachers = true;
+                break;
+            }
+        }
+
         foreach ($events as $event)
         {
 
@@ -224,20 +289,47 @@ class ViewerComponent extends Manager implements DelegateComponent
             $tableRow[] = '<span' . $class . '>' . $endTime . '</span>';
 
             $tableRow[] = '<span' . $class . '>' . $activityRecord['location'] . '</span>';
-            $tableRow[] = '<span' . $class . '>' . $activityRecord['teacher'] . '</span>';
+            $tableRow[] = '<span' . $class . '>' . $activityRecord['groups'] . '</span>';
+
+            if ($hasTeachers)
+            {
+                $tableRow[] = '<span' . $class . '>' . $activityRecord['teacher'] . '</span>';
+            }
 
             $tableData[] = $tableRow;
         }
 
         $headers = array();
-        $headers[] = new StaticTableColumn('ActivityType');
-        $headers[] = new StaticTableColumn('OnDate');
-        $headers[] = new StaticTableColumn('FromTime');
-        $headers[] = new StaticTableColumn('ToTime');
-        $headers[] = new StaticTableColumn('AtLocation');
-        $headers[] = new StaticTableColumn('ByTeacher');
+        $headers[] = new StaticTableColumn(Translation :: get('ActivityType'));
+        $headers[] = new StaticTableColumn(Translation :: get('OnDate'));
+        $headers[] = new StaticTableColumn(Translation :: get('FromTime'));
+        $headers[] = new StaticTableColumn(Translation :: get('ToTime'));
+        $headers[] = new StaticTableColumn(Translation :: get('AtLocation'));
+        $headers[] = new StaticTableColumn(Translation :: get('ForGroups'));
 
-        $table = new SortableTableFromArray($tableData, $headers, array(), 1, 10, SORT_DESC, 'activity', false, false, false);
+        if ($hasTeachers)
+        {
+            $headers[] = new StaticTableColumn(Translation :: get('ByTeacher'));
+        }
+
+        $parameters = array();
+        $parameters[Application :: PARAM_CONTEXT] = self :: package();
+        $parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
+        $parameters[self :: PARAM_USER_USER_ID] = $this->getUserCalendar()->getId();
+        $parameters[self :: PARAM_ACTIVITY_ID] = $this->getActivityId();
+        $parameters[self :: PARAM_ACTIVITY_TIME] = $this->getActivityTime();
+
+        $table = new SortableTableFromArray(
+            $tableData,
+            $headers,
+            $parameters,
+            1,
+            10,
+            SORT_DESC,
+            'activity',
+            false,
+            false,
+            false);
 
         return $table->toHtml();
     }
