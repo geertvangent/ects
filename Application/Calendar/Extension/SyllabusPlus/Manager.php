@@ -18,10 +18,12 @@ abstract class Manager extends Application
     const PARAM_ACTIVITY_ID = 'activity_id';
     const PARAM_ACTIVITY_TIME = 'activity_time';
     const PARAM_FIRSTLETTER = 'firstletter';
+
     // Actions
     const ACTION_VIEW = 'Viewer';
     const ACTION_BROWSER = 'Browser';
     const ACTION_USER_BROWSER = 'UserBrowser';
+    const ACTION_CODE = 'Code';
 
     // Default action
     const DEFAULT_ACTION = self :: ACTION_VIEW;
