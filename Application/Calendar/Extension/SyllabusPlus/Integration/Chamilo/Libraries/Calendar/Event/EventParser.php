@@ -149,59 +149,64 @@ class EventParser
     public function getEvents()
     {
         $calendarEvent = $this->getCalendarEvent();
-        
+
         $events = array();
-        
+
         $startTime = strtotime($calendarEvent['start_time']);
         $endTime = strtotime($calendarEvent['end_time']);
-        
+
         $parameters = array();
         $parameters[Application :: PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context();
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: ACTION_VIEW;
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_ID] = $calendarEvent['id'];
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_TIME] = $startTime;
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_USER_USER_ID] = $this->getDataUser()->get_id();
-        
+
         $redirect = new Redirect($parameters);
-        
+
         $event = new Event(
-            $calendarEvent['id'], 
-            $startTime, 
-            $endTime, 
-            new RecurrenceRules(), 
-            $redirect->getUrl(), 
-            $this->getEventLabel($calendarEvent), 
-            $this->getEventLabel($calendarEvent), 
-            $calendarEvent['location'], 
-            Translation :: get('TypeName', null, \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context()), 
+            $calendarEvent['id'],
+            $startTime,
+            $endTime,
+            new RecurrenceRules(),
+            $redirect->getUrl(),
+            $this->getEventLabel($calendarEvent),
+            $this->getEventDescription($calendarEvent),
+            $calendarEvent['location'],
+            Translation :: get('TypeName', null, \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context()),
             \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context());
-        
+
         $event->setCalendarEvent($calendarEvent);
-        
+
         return array($event);
     }
 
     private function getEventLabel($calendarEvent)
     {
-        return $calendarEvent['name'];
+        return '[' . $calendarEvent['type_code'] . '] ' . $calendarEvent['name'];
     }
 
     private function getEventDescription($calendarEvent)
     {
         $html = array();
-        
-        $html[] = '[' . $calendarEvent['type_code'] . ']';
-        
+
+        $html[] = $calendarEvent['type'];
+
         if ($calendarEvent['teacher'])
         {
-            $html[] = '[' . $calendarEvent['teacher'] . ']';
+            $html[] = Translation :: get('ByTeacher') . ' ' . $calendarEvent['teacher'];
         }
-        
+
         if ($calendarEvent['location'])
         {
-            $html[] = '[' . $calendarEvent['location'] . ']';
+            $html[] = Translation :: get('AtLocation') . ' ' . $calendarEvent['location'];
         }
-        
+
+        if ($calendarEvent['groups'])
+        {
+            $html[] = Translation :: get('ForGroups') . ' ' . $calendarEvent['groups'];
+        }
+
         return implode(PHP_EOL, $html);
     }
 }
