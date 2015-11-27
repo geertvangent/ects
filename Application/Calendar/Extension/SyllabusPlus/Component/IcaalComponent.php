@@ -22,7 +22,7 @@ use Chamilo\Configuration\Configuration;
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class ICalComponent extends Manager implements NoAuthenticationSupport
+class IcaalComponent extends Manager implements NoAuthenticationSupport
 {
 
     /**
