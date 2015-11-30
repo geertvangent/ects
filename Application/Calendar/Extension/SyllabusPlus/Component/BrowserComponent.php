@@ -66,7 +66,7 @@ class BrowserComponent extends Manager implements DelegateComponent
 
         $displayParameters = array(
             self :: PARAM_CONTEXT => self :: package(),
-            self :: PARAM_ACTION => self :: ACTION_VIEW,
+            self :: PARAM_ACTION => self :: ACTION_BROWSER,
             ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
             ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
             self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
