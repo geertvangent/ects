@@ -8,10 +8,11 @@ use Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer;
 use Chamilo\Libraries\Calendar\Renderer\Type\ViewRendererFactory;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\Page;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Configuration\LocalSetting;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
-use Chamilo\Libraries\Format\Structure\Page;
 
 /**
  *
@@ -28,14 +29,27 @@ class PrinterComponent extends Manager implements DelegateComponent
      */
     public function run()
     {
-        Page::getInstance()->setViewMode(Page :: VIEW_MODE_HEADERLESS);
+        Page :: getInstance()->setViewMode(Page :: VIEW_MODE_HEADERLESS);
+
+        $header = Page :: getInstance()->getHeader();
+        $header->addCssFile(Theme :: getInstance()->getCssPath(self :: package(), true) . 'Print.css', 'print');
 
         $this->checkAuthorization();
 
         $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
         $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
 
-        return $this->render_header() . $this->getCalendarHtml() . $this->render_footer();
+        $html = array();
+
+        $html[] = $this->render_header();
+        $html[] = $this->getCalendarHtml();
+        $html[] = '<script type="text/javascript">';
+        $html[] = 'window.print();';
+        $html[] = 'window.close();';
+        $html[] = '</script>';
+        $html[] = $this->render_footer();
+
+        return implode(PHP_EOL, $html);
     }
 
     private function getDisplayParameters()

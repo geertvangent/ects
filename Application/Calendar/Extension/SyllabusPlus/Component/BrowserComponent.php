@@ -13,6 +13,8 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Configuration\LocalSetting;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
+use Chamilo\Libraries\Format\Structure\Page;
+use Chamilo\Libraries\Format\Theme;
 
 /**
  *
@@ -36,6 +38,9 @@ class BrowserComponent extends Manager implements DelegateComponent
     public function run()
     {
         $this->checkAuthorization();
+
+        $header = Page :: getInstance()->getHeader();
+        $header->addCssFile(Theme :: getInstance()->getCssPath(self :: package(), true) . 'Print.css', 'print');
 
         $this->form = new JumpForm($this->get_url($this->getDisplayParameters()), $this->getCurrentRendererTime());
 
