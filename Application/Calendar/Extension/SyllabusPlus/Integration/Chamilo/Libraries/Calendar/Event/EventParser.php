@@ -183,7 +183,13 @@ class EventParser
 
     private function getEventLabel($calendarEvent)
     {
-        return '[' . $calendarEvent['type_code'] . '] ' . $calendarEvent['name'];
+        $html = array();
+
+        $html[] = '[' . $calendarEvent['type_code'] . ']';
+        $html[] = $calendarEvent['name'];
+        $html[] = '(' . trim($calendarEvent['location']) . ')';
+
+        return implode(' ', $html);
     }
 
     private function getEventDescription($calendarEvent)
@@ -194,17 +200,17 @@ class EventParser
 
         if ($calendarEvent['teacher'])
         {
-            $html[] = Translation :: get('ByTeacher') . ' ' . $calendarEvent['teacher'];
+            $html[] = Translation :: get('ByTeacher') . ' ' . trim($calendarEvent['teacher']);
         }
 
         if ($calendarEvent['location'])
         {
-            $html[] = Translation :: get('AtLocation') . ' ' . $calendarEvent['location'];
+            $html[] = Translation :: get('AtLocation') . ' ' . trim($calendarEvent['location']);
         }
 
         if ($calendarEvent['groups'])
         {
-            $html[] = Translation :: get('ForGroups') . ' ' . $calendarEvent['groups'];
+            $html[] = Translation :: get('ForGroups') . ' ' . trim($calendarEvent['groups']);
         }
 
         return implode(PHP_EOL, $html);
