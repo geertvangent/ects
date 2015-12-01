@@ -1,34 +1,36 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
 use Chamilo\Libraries\Format\Structure\ActionBarSearchForm;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Table\User\UserTable;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\Condition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Table\User\UserTable;
 
+/**
+ *
+ * @package Ehb\Application\Calendar\Extension\SyllabusPlus\Component
+ * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
+ * @author Magali Gillard <magali.gillard@ehb.be>
+ * @author Eduard Vossen <eduard.vossen@ehb.be>
+ */
 class UserBrowserComponent extends Manager implements DelegateComponent, TableSupport
 {
-
-    private $firstletter;
-
-    private $menu_breadcrumbs;
 
     private $action_bar;
 
@@ -38,8 +40,6 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
     public function run()
     {
         $this->checkAuthorization();
-
-        $this->firstletter = Request :: get(self :: PARAM_FIRSTLETTER);
 
         $content = array();
         $content[] = $this->get_action_bar()->as_html() . '<br />';

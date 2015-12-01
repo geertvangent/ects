@@ -14,6 +14,13 @@ use Chamilo\Libraries\Platform\Configuration\LocalSetting;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
 
+/**
+ *
+ * @package Ehb\Application\Calendar\Extension\SyllabusPlus\Component
+ * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
+ * @author Magali Gillard <magali.gillard@ehb.be>
+ * @author Eduard Vossen <eduard.vossen@ehb.be>
+ */
 class BrowserComponent extends Manager implements DelegateComponent
 {
 
@@ -30,25 +37,36 @@ class BrowserComponent extends Manager implements DelegateComponent
     {
         $this->checkAuthorization();
 
-        $html = array();
+        $this->form = new JumpForm($this->get_url($this->getDisplayParameters()), $this->getCurrentRendererTime());
+
+        if ($this->form->validate())
+        {
+            $this->setCurrentRendererTime($this->form->getTime());
+        }
 
         $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
         $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
 
-        $this->form = new JumpForm($this->get_url(), $this->getCurrentRendererTime());
-
-        if ($this->form->validate())
-        {
-            $this->currentTime = $this->form->getTime();
-        }
         $tabs = $this->getTabs();
         $tabs->set_content($this->getCalendarHtml());
+
+        $html = array();
 
         $html[] = $this->render_header();
         $html[] = $tabs->render();
         $html[] = $this->render_footer();
 
         return implode(PHP_EOL, $html);
+    }
+
+    private function getDisplayParameters()
+    {
+        return array(
+            self :: PARAM_CONTEXT => self :: package(),
+            self :: PARAM_ACTION => self :: ACTION_BROWSER,
+            ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
+            ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
+            self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
     }
 
     /**
@@ -64,12 +82,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                     $this->getUserCalendar()->get_lastname(),
                     $this->getUserCalendar()->get_firstname())));
 
-        $displayParameters = array(
-            self :: PARAM_CONTEXT => self :: package(),
-            self :: PARAM_ACTION => self :: ACTION_BROWSER,
-            ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
-            ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
-            self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
+        $displayParameters = $this->getDisplayParameters();
 
         $dataProvider = new CalendarRendererProvider(
             new CalendarRendererProviderRepository(),

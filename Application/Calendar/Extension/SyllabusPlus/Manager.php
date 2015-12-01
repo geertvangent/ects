@@ -263,6 +263,11 @@ abstract class Manager extends Application
         return $this->currentTime;
     }
 
+    public function setCurrentRendererTime($currentTime)
+    {
+        $this->currentTime = $currentTime;
+    }
+
     public function getMiniMonthMarkPeriod()
     {
         switch ($this->getCurrentRendererType())
