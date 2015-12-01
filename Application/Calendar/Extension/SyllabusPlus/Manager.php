@@ -34,6 +34,7 @@ abstract class Manager extends Application
     const ACTION_USER_BROWSER = 'UserBrowser';
     const ACTION_CODE = 'Code';
     const ACTION_ICAL = 'Ical';
+    const ACTION_PRINT = 'Printer';
 
     // Default action
     const DEFAULT_ACTION = self :: ACTION_VIEW;
@@ -202,6 +203,26 @@ abstract class Manager extends Application
                 false,
                 DynamicVisualTab :: POSITION_RIGHT,
                 DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
+
+        $printUrl = new Redirect(
+            array(
+                self :: PARAM_CONTEXT => self :: package(),
+                self :: PARAM_ACTION => self :: ACTION_PRINT,
+                ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
+                ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
+                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id()));
+
+        $tabs->add_tab(
+            new DynamicVisualTab(
+                self :: ACTION_PRINT,
+                Translation :: get(self :: ACTION_PRINT . 'Component'),
+                Theme :: getInstance()->getImagePath(self :: package(), 'Tab/' . self :: ACTION_PRINT),
+                $printUrl->getUrl(),
+                $currentAction == self :: ACTION_PRINT,
+                false,
+                DynamicVisualTab :: POSITION_RIGHT,
+                DynamicVisualTab :: DISPLAY_BOTH_SELECTED,
+                DynamicVisualTab :: TARGET_POPUP));
     }
 
     /**
