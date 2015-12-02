@@ -40,7 +40,9 @@ class BrowserComponent extends Manager implements DelegateComponent
         $this->checkAuthorization();
 
         $header = Page :: getInstance()->getHeader();
-        $header->addCssFile(Theme :: getInstance()->getCssPath(self :: package(), true) . 'Print.css', 'print');
+        $header->addCssFile(
+            Theme :: getInstance()->getCssPath(\Chamilo\Application\Calendar\Manager :: package(), true) . 'Print.css',
+            'print');
 
         $this->form = new JumpForm($this->get_url($this->getDisplayParameters()), $this->getCurrentRendererTime());
 

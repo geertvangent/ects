@@ -48,6 +48,11 @@ abstract class Manager extends Application
     private $currentTime;
 
     /**
+     * @var \Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer
+     */
+    private $tabs;
+
+    /**
      *
      * @param User $user
      * @return string
