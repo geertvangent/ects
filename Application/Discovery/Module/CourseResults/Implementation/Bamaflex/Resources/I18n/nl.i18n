@@ -1,0 +1,12 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\course_results\implementation\bamaflex
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Resultaten"
+TypeDescription = "Resultaten voor een specifiek opleidingsonderdeel"
+PersonName = "Persoon"
+TrajectoryType = "Traject"
+LastName = "Familienaam"
+FirstName = "Voornaam"
+MarkStatus = "Deliberatiestatus {TRY}"

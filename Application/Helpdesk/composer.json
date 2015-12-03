@@ -1,0 +1,27 @@
+{
+    "name": "ehb/application-helpdesk",
+        "version": "6.0.0", "description": "Ehb Helpdesk Application",
+    "keywords": [],
+    "homepage": "http://www.chamilo.org",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Magali Gillard",
+            "email": "magali.gillard@ehb.be"
+        },
+        {
+            "name": "Hans De Bisschop",
+            "email": "hans.de.bisschop@ehb.be"
+        }
+    ],
+    
+    "autoload": {
+        "psr-4": {
+          "Ehb\\": "src/Ehb/"
+        }
+      },
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle": "5.*"
+    }
+}
