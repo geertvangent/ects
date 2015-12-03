@@ -109,13 +109,13 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
      */
     private function generate_teacher_title_link($publication)
     {
-        // $url = $this->get_component()->get_url(
-        // array(
-        // \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication ::
-        // PROPERTY_ID],
-        // \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE_SUBMITTERS));
-        // return '<a href="' . $url . '">' .
-        // StringUtilities :: getInstance()->truncate($publication[ContentObject :: PROPERTY_TITLE], 50) . '</a>';
+        $url = $this->get_component()->get_url(
+            array(
+                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_ENTRY,
+                \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: ACTION_ENTITIES,
+                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]));
+        return '<a href="' . $url . '">' .
+             StringUtilities :: getInstance()->truncate($publication[ContentObject :: PROPERTY_TITLE], 50) . '</a>';
     }
 
     /**
@@ -126,12 +126,12 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
      */
     private function generate_student_title_link($publication)
     {
-        // $url = $this->get_component()->get_url(
-        // array(
-        // \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_STUDENT_BROWSE_SUBMISSIONS,
-        // \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication ::
-        // PROPERTY_ID]));
-        // return '<a href="' . $url . '">' .
-        // StringUtilities :: getInstance()->truncate($publication[ContentObject :: PROPERTY_TITLE], 50) . '</a>';
+        $url = $this->get_component()->get_url(
+            array(
+                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_ENTRY,
+                \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: ACTION_STUDENT,
+                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]));
+        return '<a href="' . $url . '">' .
+             StringUtilities :: getInstance()->truncate($publication[ContentObject :: PROPERTY_TITLE], 50) . '</a>';
     }
 }

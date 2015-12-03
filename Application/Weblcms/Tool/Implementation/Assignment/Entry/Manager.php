@@ -15,6 +15,7 @@ abstract class Manager extends Application
     // Actions
     const ACTION_CREATE = 'Creator';
     const ACTION_ENTITIES = 'Entities';
+    const ACTION_STUDENT = 'Student';
 
     // Parameters
     const PARAM_ACTION = 'entry_action';
