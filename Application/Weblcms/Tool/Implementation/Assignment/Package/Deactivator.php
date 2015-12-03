@@ -1,9 +1,9 @@
 <?php
-namespace Ehb\Application\Weblcms\Tool\Implementation\AssignmentDeluxe\Package;
+namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Package;
 
 /**
  *
- * @package Ehb\Application\Weblcms\Tool\Implementation\AssignmentDeluxe\Package
+ * @package Ehb\Application\Weblcms\Tool\Implementation\Assignment\Package
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
