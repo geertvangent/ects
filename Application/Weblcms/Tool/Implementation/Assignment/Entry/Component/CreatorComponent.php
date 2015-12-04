@@ -1,36 +1,38 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Component;
 
-use Chamilo\Application\Weblcms\Rights\Entities\CourseGroupEntity;
-use Chamilo\Application\Weblcms\Rights\Entities\CoursePlatformGroupEntity;
 use Chamilo\Application\Weblcms\Rights\WeblcmsRights;
 use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
-use Chamilo\Application\Weblcms\Storage\DataClass\CourseEntityRelation;
 use Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Repository\Common\Action\ContentObjectCopier;
-use Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignment;
+use Chamilo\Core\Repository\ContentObject\File\Storage\DataClass\File;
+use Chamilo\Core\Repository\ContentObject\Webpage\Storage\DataClass\Webpage;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Core\Repository\Workspace\PersonalWorkspace;
-use Chamilo\Core\Tracking\Storage\DataClass\Event;
-use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
+use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Cache\DataClassCache;
-use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\DataManager\DataManager;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Storage\DataClass\Entry;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Application\Weblcms\Storage\DataClass\CourseEntityRelation;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Utilities\DatetimeUtilities;
-use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Cache\DataClassCache;
+use Chamilo\Application\Weblcms\Rights\Entities\CourseGroupEntity;
+use Chamilo\Application\Weblcms\Rights\Entities\CoursePlatformGroupEntity;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Form\EntryForm;
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Utilities\DatetimeUtilities;
+use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 
 /**
  *
@@ -43,352 +45,226 @@ class CreatorComponent extends Manager implements DelegateComponent
 {
 
     /**
-     * The id of the assignment publication
      *
-     * @var int
+     * @var \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication
      */
-    private $publication_id;
+    private $publication;
 
     /**
-     * The assignment content object
      *
-     * @var Assignment
+     * @return \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication
      */
-    private $assignment;
-
-    public function run()
+    protected function getPublication()
     {
-        $choices = $this->compile_choices();
-        // display submission form when content object created in RepoViewer
-        if ($this->assignment->get_allow_group_submissions() && count($choices) == 0 ||
-             ! $this->is_allowed(WeblcmsRights :: VIEW_RIGHT))
+        if (! isset($this->publication))
         {
-            if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
-            {
-                $this->redirect(
-                    Translation :: get('NoOwnGroups'),
-                    true,
-                    array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_BROWSE_SUBMITTERS,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication_id));
-            }
-            $this->redirect(
-                Translation :: get("NoOwnGroups", null, Utilities :: COMMON_LIBRARIES),
-                true,
+            $publicationIdentifier = $this->getRequest()->query->get(
+                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
+            $this->publication = DataManager :: retrieve_by_id(
+                ContentObjectPublication :: class_name(),
+                $publicationIdentifier);
+        }
+
+        return $this->publication;
+    }
+
+    /**
+     *
+     * @return \Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignment
+     */
+    protected function getAssignment()
+    {
+        return $this->getPublication()->get_content_object();
+    }
+
+    /**
+     *
+     * @return integer
+     */
+    protected function getTargetIdentifier()
+    {
+        return $this->getRequest()->query->get(
+            \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID);
+    }
+
+    protected function getEntityType()
+    {
+        return $this->getRequest()->query->get(
+            \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_ENTITY_TYPE);
+    }
+
+    /**
+     *
+     * @param unknown $choices
+     * @return string
+     */
+    protected function renderEntryForm($choices)
+    {
+        $form = new EntryForm(
+            $choices,
+            $this->getAssignment(),
+            $this->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_STUDENT_BROWSE_SUBMISSIONS,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication_id));
-        }
+                    \Chamilo\Core\Repository\Viewer\Manager :: PARAM_ACTION => \Chamilo\Core\Repository\Viewer\Manager :: ACTION_PUBLISHER,
+                    \Chamilo\Core\Repository\Viewer\Manager :: PARAM_CONTENT_OBJECT_TYPE => Request :: get(
+                        \Chamilo\Core\Repository\Viewer\Manager :: PARAM_CONTENT_OBJECT_TYPE),
+                    \Chamilo\Core\Repository\Viewer\Manager :: PARAM_ID => $this->getSelectedContentObject())));
 
-        if (\Chamilo\Core\Repository\Viewer\Manager :: is_ready_to_be_published())
+        // create submission feedback tracker when form is valid
+        if ($form->validate())
         {
-            if ($this->assignment->get_allow_group_submissions() &&
-                 (! $this->get_target_id() ||
-                 $this->get_submitter_type() ==
-                 \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER))
-            {
-                $form = new EntryForm(
-                    $choices,
-                    $this->get_url(
-                        array(
-                            \Chamilo\Core\Repository\Viewer\Manager :: PARAM_ACTION => \Chamilo\Core\Repository\Viewer\Manager :: ACTION_PUBLISHER,
-                            \Chamilo\Core\Repository\Viewer\Manager :: PARAM_CONTENT_OBJECT_TYPE => Request :: get(
-                                \Chamilo\Core\Repository\Viewer\Manager :: PARAM_CONTENT_OBJECT_TYPE),
-                            \Chamilo\Core\Repository\Viewer\Manager :: PARAM_ID => $this->get_repo_objects())));
+            $values = $form->exportValues();
 
-                // create submission feedback tracker when form is valid
-                if ($form->validate())
-                {
-                    $values = $form->exportValues();
-                    $submitter_type = substr(
-                        $values[\Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID],
+            $entityType = substr($values[Entry :: PROPERTY_ENTITY_ID], 0, 1);
+            $entityIdentifier = substr($values[Entry :: PROPERTY_ENTITY_ID], 1);
+            $entity = $this->createEntry($entityIdentifier, $this->getSelectedContentObject(), $entityType);
+
+            $this->redirect(
+                Translation :: get('SubmissionCreated'),
+                false,
+                array(
+                    self :: PARAM_ACTION => self :: ACTION_BROWSE,
+                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->getPublication()->getId(),
+                    \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_ENTITY_TYPE => substr(
+                        $entity,
                         0,
-                        1);
-                    $submitter_id = substr(
-                        $values[\Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID],
-                        1);
-                    $submitter = $this->create_tracker($submitter_id, $this->get_repo_objects(), $submitter_type);
-                    $this->redirect(
-                        Translation :: get('SubmissionCreated'),
-                        false,
-                        array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_BROWSE_SUBMISSIONS,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication_id,
-                            self :: PARAM_SUBMITTER_TYPE => substr($submitter, 0, 1),
-                            self :: PARAM_TARGET_ID => substr($submitter, 1)));
-                }
-                else // display submission form
-                {
-                    $html = array();
-
-                    $html[] = $this->render_header();
-                    $html[] = $form->toHtml();
-                    $html[] = $this->render_footer();
-
-                    return implode(PHP_EOL, $html);
-                }
-            }
-            else
-            {
-                $submitter = $this->create_tracker($this->get_target_id(), $this->get_repo_objects());
-                $this->redirect(
-                    Translation :: get('SubmissionCreated'),
-                    false,
-                    array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_BROWSE_SUBMISSIONS,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication_id,
-                        self :: PARAM_SUBMITTER_TYPE => substr($submitter, 0, 1),
-                        self :: PARAM_TARGET_ID => substr($submitter, 1)));
-            }
+                        1),
+                    \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID => substr(
+                        $entity,
+                        1)));
         }
-        else // construct RepoViewer when no content object created yet
-        {
-            $result = $this->check_start_end_time();
-
-            if ($result === true)
-            {
-                $factory = new ApplicationFactory(
-                    \Chamilo\Core\Repository\Viewer\Manager :: context(),
-                    new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
-                $component = $factory->getComponent();
-                $component->set_maximum_select(\Chamilo\Core\Repository\Viewer\Manager :: SELECT_SINGLE);
-                return $component->run();
-            }
-            else
-            {
-                return $result;
-            }
-        }
-    }
-
-    /**
-     * Returns an array of the course and platform groups the currently logged in user is a member of.
-     *
-     * @return array The course groups and platform groups
-     */
-    private function compile_choices()
-    {
-        $choices = array();
-
-        $target_entities = WeblcmsRights :: get_instance()->get_target_entities(
-            WeblcmsRights :: VIEW_RIGHT,
-            \Chamilo\Application\Weblcms\Manager :: context(),
-            $this->publication_id,
-            WeblcmsRights :: TYPE_PUBLICATION,
-            $this->get_course()->get_id(),
-            WeblcmsRights :: TREE_TYPE_COURSE);
-
-        if ($this->get_target_id())
-        {
-            switch ($this->get_submitter_type())
-            {
-                case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP :
-                    return array(
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP .
-                             $this->get_target_id() => CourseGroupDataManager :: retrieve_by_id(
-                                CourseGroup :: class_name(),
-                                $this->get_target_id())->get_name());
-                case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP :
-                    return array(
-                        \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP .
-                             $this->get_target_id() => \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
-                                Group :: class_name(),
-                                $this->get_target_id())->get_name());
-            }
-        }
-
-        $groups_resultset = CourseGroupDataManager :: retrieve_course_groups_from_user(
-            $this->get_user()->get_id(),
-            $this->get_course()->get_id());
-        if ($target_entities[0])
-        {
-            // add all course groups the user is member of
-            while ($course_group = $groups_resultset->next_result())
-            {
-                $choices[\Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP .
-                     $course_group->get_id()] = $course_group->get_name();
-            }
-
-            // retrieve platform groups subscribed to course
-            $cgrConditions = array();
-            $cgrConditions[] = new EqualityCondition(
-                new PropertyConditionVariable(
-                    CourseEntityRelation :: class_name(),
-                    CourseEntityRelation :: PROPERTY_COURSE_ID),
-                new StaticConditionVariable($this->get_course()->get_id()));
-            $cgrConditions[] = new EqualityCondition(
-                new PropertyConditionVariable(
-                    CourseEntityRelation :: class_name(),
-                    CourseEntityRelation :: PROPERTY_ENTITY_TYPE),
-                new StaticConditionVariable(CourseEntityRelation :: ENTITY_TYPE_GROUP));
-
-            $group_ids = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: distinct(
-                CourseEntityRelation :: class_name(),
-                new DataClassDistinctParameters(
-                    new AndCondition($cgrConditions),
-                    CourseEntityRelation :: PROPERTY_ENTITY_ID));
-
-            // ***********************************************************************************************//
-            // DMTODO Problem with caching. Once caching problems fixed, remove the following line of code. //
-            // ***********************************************************************************************//
-            DataClassCache :: truncate(Group :: class_name());
-            // ***********************************************************************************************//
-            // DMTODO End remove code. //
-            // ***********************************************************************************************//
-            $groups_resultset = \Chamilo\Core\Group\Storage\DataManager :: retrieve_groups_and_subgroups($group_ids);
-        }
-        else
-        {
-            // add the target course groups the user is member of
-            $targets = CourseGroupDataManager :: retrieve_course_groups_and_subgroups(
-                $target_entities[CourseGroupEntity :: ENTITY_TYPE]);
-
-            $target_course_groups = array();
-            while ($target = $targets->next_result())
-            {
-                $target_course_groups[$target->get_id()] = $target->get_id();
-            }
-            while ($course_group = $groups_resultset->next_result())
-            {
-                if ($target_course_groups[$course_group->get_id()])
-                {
-                    $choices[\Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP .
-                         $course_group->get_id()] = $course_group->get_name();
-                }
-            }
-
-            // retrieve target platform groups
-            $groups_resultset = \Chamilo\Core\Group\Storage\DataManager :: retrieve_groups_and_subgroups(
-                $target_entities[CoursePlatformGroupEntity :: ENTITY_TYPE]);
-        }
-
-        // add platform groups the user is member of
-        while ($group = $groups_resultset->next_result())
-        {
-            if (\Chamilo\Core\Group\Storage\DataManager :: is_group_member(
-                $group->get_id(),
-                $this->get_user()->get_id()))
-            {
-                $choices[\Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP .
-                     $group->get_id()] = $group->get_name();
-            }
-        }
-
-        return $choices;
-    }
-
-    /**
-     * Checks if the Assignment has started or stopped yet
-     */
-    private function check_start_end_time()
-    {
-        if ($this->assignment->get_start_time() > time())
+        else // display submission form
         {
             $html = array();
 
             $html[] = $this->render_header();
-            $date = DatetimeUtilities :: format_locale_date(
-                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES) . ', ' .
-                     Translation :: get('TimeNoSecFormat', null, Utilities :: COMMON_LIBRARIES),
-                    $this->assignment->get_start_time());
-            $html[] = Translation :: get('AssignmentNotStarted') . Translation :: get('StartTime') . ': ' . $date;
+            $html[] = $form->toHtml();
             $html[] = $this->render_footer();
 
             return implode(PHP_EOL, $html);
         }
-
-        if ($this->assignment->get_end_time() < time() && $this->assignment->get_allow_late_submissions() == 0)
-        {
-            $html = array();
-
-            $html[] = $this->render_header();
-            $date = DatetimeUtilities :: format_locale_date(
-                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES) . ', ' .
-                     Translation :: get('TimeNoSecFormat', null, Utilities :: COMMON_LIBRARIES),
-                    $this->assignment->get_end_time());
-            $html[] = Translation :: get('AssignmentEnded') . Translation :: get('EndTime') . ': ' . $date;
-            $html[] = $this->render_footer();
-
-            return implode(PHP_EOL, $html);
-        }
-
-        return true;
-    }
-
-    public function get_allowed_content_object_types()
-    {
-        return explode(',', $this->assignment->get_allowed_types());
     }
 
     /**
-     * Gets the selected object id of the RepoViewer
      *
-     * @return int
+     * @return integer[]
      */
-    public function get_repo_objects()
+    protected function getSelectedContentObject()
     {
         return \Chamilo\Core\Repository\Viewer\Manager :: get_selected_objects();
     }
 
     /**
-     * Creates an assignment submission tracker
      *
-     * @param $authors string
-     * @param $submitter_type int
-     * @param int $submitter id
+     * @param ContentObject $contentObject
+     * @return boolean
      */
-    public function create_tracker($submitter_id, $repo_object, $submitter_type = null)
+    protected function isDownloadable(ContentObject $contentObject)
+    {
+        if ($this->isDocument($contentObject))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     *
+     * @param ContentObject $contentObject
+     * @return boolean
+     */
+    protected function isDocument(ContentObject $contentObject)
+    {
+        if ($contentObject instanceof File || $contentObject instanceof Webpage)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     *
+     * @param integer $entityType
+     * @param integer $entityIdentifier
+     * @return string
+     */
+    protected function getEntityName($entityType, $entityIdentifier)
+    {
+        switch ($entityType)
+        {
+            case Entry :: ENTITY_TYPE_USER :
+                return DataManager :: retrieve_by_id(User :: class_name(), $entityIdentifier)->get_fullname();
+            case Entry :: ENTITY_TYPE_COURSE_GROUP :
+                return DataManager :: retrieve_by_id(CourseGroup :: class_name(), $entityIdentifier)->get_name();
+            case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
+                return DataManager :: retrieve_by_id(Group :: class_name(), $entityIdentifier)->get_name();
+        }
+    }
+
+    /**
+     *
+     * @param integer $entityIdentifier
+     * @param integer $selectedContentObject
+     * @param integer $entityType
+     * @return string
+     */
+    protected function createEntry($entityIdentifier, $selectedContentObject, $entityType = null)
     {
         $object = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
             ContentObject :: class_name(),
-            $repo_object);
+            $selectedContentObject);
 
         // Create a folder assignment in the root folder
         $assignement_category_id = \Chamilo\Core\Repository\Storage\DataManager :: get_repository_category_by_name_or_create_new(
-            $this->assignment->get_owner_id(),
+            $this->getAssignment()->get_owner_id(),
             Translation :: get("Assignments"));
 
         // Create a folder course in the assignment folder
         $course_category_id = \Chamilo\Core\Repository\Storage\DataManager :: get_repository_category_by_name_or_create_new(
-            $this->assignment->get_owner_id(),
-            $this->get_course()->get_visual_code() . ' - ' . $this->get_course()->get_title(),
+            $this->getAssignment()->get_owner_id(),
+            $this->getCourse()->get_visual_code() . ' - ' . $this->getCourse()->get_title(),
             $assignement_category_id);
 
         // Create a folder with the name of the assignment in the course folder
         $category_id = \Chamilo\Core\Repository\Storage\DataManager :: get_repository_category_by_name_or_create_new(
-            $this->assignment->get_owner_id(),
-            $this->assignment->get_title(),
+            $this->getAssignment()->get_owner_id(),
+            $this->getAssignment()->get_title(),
             $course_category_id);
 
-        if (is_null($submitter_type))
+        if (is_null($entityType))
         {
-            $submitter_type = $this->get_submitter_type();
+            $entityType = $this->getEntityType();
         }
 
         $copier = new ContentObjectCopier(
-            $this->get_user(),
+            $this->getUser(),
             array($object->get_id()),
-            new PersonalWorkspace($this->get_user()),
-            $this->get_user_id(),
-            new PersonalWorkspace($this->assignment->get_owner()),
-            $this->assignment->get_owner_id(),
+            new PersonalWorkspace($this->getUser()),
+            $this->getApplicationConfiguration()->getApplication()->get_user_id(),
+            new PersonalWorkspace($this->getAssignment()->get_owner()),
+            $this->getAssignment()->get_owner_id(),
             $category_id);
-        $content_object_ids = $copier->run();
+        $copiedContentObjectIdentifiers = $copier->run();
 
-        if (count($content_object_ids) > 0)
+        if (count($copiedContentObjectIdentifiers) > 0)
         {
-            foreach ($content_object_ids as $content_object_id)
+            foreach ($copiedContentObjectIdentifiers as $copiedContentObjectIdentifier)
             {
-                $submitter_name = $this->get_submitter_name($submitter_type, $submitter_id);
-                $new_object = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
+                $entityName = $this->getEntityName($entityType, $entityIdentifier);
+
+                $copiedContentObject = \Chamilo\Core\Repository\Storage\DataManager :: retrieve_by_id(
                     ContentObject :: class_name(),
-                    $content_object_id);
-                $new_object->set_title($submitter_name . ' - ' . $new_object->get_title());
-                if (self :: is_downloadable($new_object))
+                    $copiedContentObjectIdentifier);
+                $copiedContentObject->set_title($entityName . ' - ' . $copiedContentObject->get_title());
+
+                if ($this->isDownloadable($copiedContentObject))
                 {
-                    $new_object->set_filename($submitter_name . ' - ' . $new_object->get_filename());
+                    $copiedContentObject->set_filename($entityName . ' - ' . $copiedContentObject->get_filename());
                 }
-                $new_object->update();
+
+                $copiedContentObject->update();
             }
         }
         else
@@ -402,56 +278,257 @@ class CreatorComponent extends Manager implements DelegateComponent
                 $messages,
                 true,
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_BROWSE_SUBMISSIONS,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication_id,
-                    self :: PARAM_SUBMITTER_TYPE => $submitter_type,
-                    self :: PARAM_TARGET_ID => $submitter_id));
+                    self :: PARAM_ACTION => self :: ACTION_BROWSE,
+                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->getPublication()->getId(),
+                    \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_ENTITY_TYPE => $entityType,
+                    \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID => $entityIdentifier));
         }
-        $arguments = array(
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_PUBLICATION_ID => $this->publication_id,
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_CONTENT_OBJECT_ID => $content_object_id,
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_ID => $submitter_id,
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_DATE_SUBMITTED => time(),
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_SUBMITTER_TYPE => $submitter_type,
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_USER_ID => $this->get_user_id(),
-            \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: PROPERTY_IP_ADDRESS => $_SERVER['REMOTE_ADDR']);
-        Event :: trigger('SubmissionAssignment', \Chamilo\Application\Weblcms\Manager :: context(), $arguments);
-        return $submitter_type . $submitter_id;
+
+        $entry = new Entry();
+        $entry->setPublicationId($this->getPublication()->getId());
+        $entry->setContentObjectId($copiedContentObjectIdentifier);
+        $entry->setEntityId($entityIdentifier);
+        $entry->setEntityType($entityType);
+        $entry->setSubmitted(time());
+        $entry->setUserId($this->getApplicationConfiguration()->getApplication()->get_user_id());
+        $entry->setIpAddress($_SERVER['REMOTE_ADDR']);
+        $entry->create();
+
+        return $entityType . $entityIdentifier;
     }
 
     /**
-     * Returns the name of the submitter as a string.
      *
-     * @param $submitter_type int
-     * @param $submitter_id int
-     * @return string The name of the submitter
+     * @return \Chamilo\Application\Weblcms\Course\Storage\DataClass\Course
      */
-    private function get_submitter_name($submitter_type, $submitter_id)
+    protected function getCourse()
     {
-        switch ($submitter_type)
+        return $this->getApplicationConfiguration()->getApplication()->get_course();
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    protected function compileChoices()
+    {
+        $choices = array();
+
+        $targetEntities = WeblcmsRights :: get_instance()->get_target_entities(
+            WeblcmsRights :: VIEW_RIGHT,
+            \Chamilo\Application\Weblcms\Manager :: context(),
+            $this->getPublication()->getId(),
+            WeblcmsRights :: TYPE_PUBLICATION,
+            $this->getCourse()->getId(),
+            WeblcmsRights :: TREE_TYPE_COURSE);
+
+        if ($this->getTargetIdentifier())
         {
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_USER :
-                return \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-                    \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
-                    $submitter_id)->get_fullname();
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_COURSE_GROUP :
-                return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
-                    CourseGroup :: class_name(),
-                    $submitter_id)->get_name();
-            case \Chamilo\Application\Weblcms\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssignmentSubmission :: SUBMITTER_TYPE_PLATFORM_GROUP :
-                return \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(Group :: class_name(), $submitter_id)->get_name();
+            switch ($this->getEntityType())
+            {
+                case Entry :: ENTITY_TYPE_COURSE_GROUP :
+                    return array(
+                        Entry :: ENTITY_TYPE_COURSE_GROUP . $this->getTargetIdentifier() => DataManager :: retrieve_by_id(
+                            CourseGroup :: class_name(),
+                            $this->getTargetIdentifier())->get_name());
+                case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
+                    return array(
+                        Entry :: ENTITY_TYPE_PLATFORM_GROUP . $this->getTargetIdentifier() => DataManager :: retrieve_by_id(
+                            Group :: class_name(),
+                            $this->getTargetIdentifier())->get_name());
+            }
         }
+
+        $courseGroupResultset = \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager :: retrieve_course_groups_from_user(
+            $this->getUser()->getId(),
+            $this->getCourse()->getId());
+
+        if ($targetEntities[0])
+        {
+            // add all course groups the user is member of
+            while ($courseGroup = $courseGroupResultset->next_result())
+            {
+                $choices[Entry :: ENTITY_TYPE_COURSE_GROUP . $courseGroup->get_id()] = $courseGroup->get_name();
+            }
+
+            // retrieve platform groups subscribed to course
+            $courseGroupConditions = array();
+            $courseGroupConditions[] = new EqualityCondition(
+                new PropertyConditionVariable(
+                    CourseEntityRelation :: class_name(),
+                    CourseEntityRelation :: PROPERTY_COURSE_ID),
+                new StaticConditionVariable($this->getCourse()->get_id()));
+            $courseGroupConditions[] = new EqualityCondition(
+                new PropertyConditionVariable(
+                    CourseEntityRelation :: class_name(),
+                    CourseEntityRelation :: PROPERTY_ENTITY_TYPE),
+                new StaticConditionVariable(CourseEntityRelation :: ENTITY_TYPE_GROUP));
+
+            $groupIdentifiers = DataManager :: distinct(
+                CourseEntityRelation :: class_name(),
+                new DataClassDistinctParameters(
+                    new AndCondition($courseGroupConditions),
+                    CourseEntityRelation :: PROPERTY_ENTITY_ID));
+
+            // TODO: Problem with caching. Once caching problems fixed, remove the following line of code.
+            DataClassCache :: truncate(Group :: class_name());
+            // TODO: Problem with caching. Once caching problems fixed, remove the following line of code. END.
+
+            $groupsResultset = \Chamilo\Core\Group\Storage\DataManager :: retrieve_groups_and_subgroups(
+                $groupIdentifiers);
+        }
+        else
+        {
+            // add the target course groups the user is member of
+            $targets = \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager :: retrieve_course_groups_and_subgroups(
+                $targetEntities[CourseGroupEntity :: ENTITY_TYPE]);
+
+            $targetCourseGroups = array();
+
+            while ($target = $targets->next_result())
+            {
+                $targetCourseGroups[$target->get_id()] = $target->get_id();
+            }
+
+            while ($courseGroup = $courseGroupResultset->next_result())
+            {
+                if ($targetCourseGroups[$courseGroup->get_id()])
+                {
+                    $choices[Entry :: ENTITY_TYPE_COURSE_GROUP . $courseGroup->get_id()] = $courseGroup->get_name();
+                }
+            }
+
+            // retrieve target platform groups
+            $groupsResultset = \Chamilo\Core\Group\Storage\DataManager :: retrieve_groups_and_subgroups(
+                $targetEntities[CoursePlatformGroupEntity :: ENTITY_TYPE]);
+        }
+
+        // add platform groups the user is member of
+        while ($group = $groupsResultset->next_result())
+        {
+            if (\Chamilo\Core\Group\Storage\DataManager :: is_group_member($group->get_id(), $this->getUser()->get_id()))
+            {
+                $choices[Entry :: ENTITY_TYPE_PLATFORM_GROUP . $group->getId()] = $group->get_name();
+            }
+        }
+
+        return $choices;
+    }
+
+    public function run()
+    {
+        if ($this->getAssignment()->get_allow_group_submissions())
+        {
+            $choices = $this->compileChoices();
+
+            if (count($choices) == 0 || ! $this->is_allowed(WeblcmsRights :: VIEW_RIGHT))
+            {
+                $message = Translation :: get('NoOwnGroups');
+                $parameters = array();
+                $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID] = $this->getPublication()->getId();
+                $parameters[\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION] = $this->is_allowed(
+                    WeblcmsRights :: EDIT_RIGHT) ? self :: ACTION_ENTITIES : self :: ACTION_STUDENT;
+
+                $this->redirect($message, true, $parameters);
+            }
+        }
+
+        if (\Chamilo\Core\Repository\Viewer\Manager :: is_ready_to_be_published())
+        {
+            if ($this->getAssignment()->get_allow_group_submissions() &&
+                 (! $this->getTargetIdentifier() || $this->getEntityType() == Entry :: ENTITY_TYPE_USER))
+            {
+                return $this->renderEntryForm($choices);
+            }
+            else
+            {
+                $entry = $this->createEntry($this->getTargetIdentifier(), $this->getSelectedContentObject());
+                $this->redirect(
+                    Translation :: get('SubmissionCreated'),
+                    false,
+                    array(
+                        self :: PARAM_ACTION => self :: ACTION_BROWSE,
+                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->getPublication()->getId(),
+                        \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_ENTITY_TYPE => substr(
+                            $entry,
+                            0,
+                            1),
+                        \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID => substr(
+                            $entry,
+                            1)));
+            }
+        }
+        else // construct RepoViewer when no content object created yet
+        {
+            $result = $this->checkStartEndTime();
+
+            if ($result === true)
+            {
+                $factory = new ApplicationFactory(
+                    \Chamilo\Core\Repository\Viewer\Manager :: context(),
+                    new ApplicationConfiguration($this->getRequest(), $this->getUser(), $this));
+                $component = $factory->getComponent();
+                $component->set_maximum_select(\Chamilo\Core\Repository\Viewer\Manager :: SELECT_SINGLE);
+                return $component->run();
+            }
+            else
+            {
+                return $result;
+            }
+        }
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function get_allowed_content_object_types()
+    {
+        return explode(',', $this->getAssignment()->get_allowed_types());
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    protected function checkStartEndTime()
+    {
+        if ($this->getAssignment()->get_start_time() > time())
+        {
+            $html = array();
+
+            $html[] = $this->render_header();
+            $date = DatetimeUtilities :: format_locale_date(
+                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES) . ', ' .
+                     Translation :: get('TimeNoSecFormat', null, Utilities :: COMMON_LIBRARIES),
+                    $this->getAssignment()->get_start_time());
+            $html[] = Translation :: get('AssignmentNotStarted') . Translation :: get('StartTime') . ': ' . $date;
+            $html[] = $this->render_footer();
+
+            return implode(PHP_EOL, $html);
+        }
+
+        if ($this->getAssignment()->get_end_time() < time() && $this->getAssignment()->get_allow_late_submissions() == 0)
+        {
+            $html = array();
+
+            $html[] = $this->render_header();
+            $date = DatetimeUtilities :: format_locale_date(
+                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES) . ', ' .
+                     Translation :: get('TimeNoSecFormat', null, Utilities :: COMMON_LIBRARIES),
+                    $this->getAssignment()->get_end_time());
+            $html[] = Translation :: get('AssignmentEnded') . Translation :: get('EndTime') . ': ' . $date;
+            $html[] = $this->render_footer();
+
+            return implode(PHP_EOL, $html);
+        }
+
+        return true;
     }
 
     public function add_additional_breadcrumbs(BreadcrumbTrail $breadcrumbtrail)
     {
-        $this->publication_id = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
-
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
-            ContentObjectPublication :: class_name(),
-            $this->get_publication_id());
-
-        if (! $this->is_allowed(WeblcmsRights :: VIEW_RIGHT, $publication))
+        if (! $this->is_allowed(WeblcmsRights :: VIEW_RIGHT, $this->getPublication()))
         {
             $this->redirect(
                 Translation :: get("NotAllowed", null, Utilities :: COMMON_LIBRARIES),
@@ -460,11 +537,9 @@ class CreatorComponent extends Manager implements DelegateComponent
                 array(
                     \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION,
                     \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID,
-                    self :: PARAM_TARGET_ID,
-                    self :: PARAM_SUBMITTER_TYPE));
+                    \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID,
+                    \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_ENTITY_TYPE));
         }
-
-        $this->assignment = $publication->get_content_object();
 
         $breadcrumbtrail->add(
             new Breadcrumb(
@@ -472,15 +547,16 @@ class CreatorComponent extends Manager implements DelegateComponent
                     array(
                         \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Chamilo\Application\Weblcms\Tool\Manager :: ACTION_BROWSE)),
                 Translation :: get('AssignmentToolBrowserComponent')));
+
         if ($this->is_allowed(WeblcmsRights :: EDIT_RIGHT))
         {
             $breadcrumbtrail->add(
                 new Breadcrumb(
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_BROWSE_SUBMITTERS,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication_id)),
-                    $this->assignment->get_title()));
+                            self :: PARAM_ACTION => self :: ACTION_ENTITIES,
+                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->getPublication()->getId())),
+                    $this->getAssignment()->get_title()));
         }
         else
         {
@@ -488,9 +564,9 @@ class CreatorComponent extends Manager implements DelegateComponent
                 new Breadcrumb(
                     $this->get_url(
                         array(
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_STUDENT_BROWSE_SUBMISSIONS,
-                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->publication_id)),
-                    $this->assignment->get_title()));
+                            self :: PARAM_ACTION => self :: ACTION_STUDENT,
+                            \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $this->getPublication()->getId())),
+                    $this->getAssignment()->get_title()));
         }
     }
 
@@ -498,7 +574,7 @@ class CreatorComponent extends Manager implements DelegateComponent
     {
         return array(
             \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID,
-            self :: PARAM_TARGET_ID,
-            self :: PARAM_SUBMITTER_TYPE);
+            \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_TARGET_ID,
+            \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: PARAM_ENTITY_TYPE);
     }
 }

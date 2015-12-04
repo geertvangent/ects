@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Form;
 
-use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
+use Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignment;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
@@ -18,18 +18,9 @@ use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 class EntryForm extends FormValidator
 {
 
-    public function __construct($choices, $url = '')
+    public function __construct($choices, Assignment $assignment, $url = '')
     {
         parent :: __construct('assignment', 'post', $url);
-
-        $publication_id = Request :: get(\Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID);
-
-        // Retrieving assignment
-        $publication = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_by_id(
-            ContentObjectPublication :: class_name(),
-            $publication_id);
-
-        $assignment = $publication->get_content_object();
 
         $this->addElement('category', Translation :: get('Properties', null, Utilities :: COMMON_LIBRARIES));
         // Submit as

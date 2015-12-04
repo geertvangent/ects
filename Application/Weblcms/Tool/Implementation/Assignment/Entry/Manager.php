@@ -2,6 +2,7 @@
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry;
 
 use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
 
 /**
  *
@@ -16,7 +17,20 @@ abstract class Manager extends Application
     const ACTION_CREATE = 'Creator';
     const ACTION_ENTITIES = 'Entities';
     const ACTION_STUDENT = 'Student';
+    const ACTION_BROWSE = 'Browser';
+    const ACTION_DOWNLOAD = 'Download';
 
     // Parameters
     const PARAM_ACTION = 'entry_action';
+
+    /**
+     *
+     * @param integer $right
+     * @param ContentObjectPublication $publication
+     * @return boolean
+     */
+    public function is_allowed($right, $publication = null)
+    {
+        return $this->getApplicationConfiguration()->getApplication()->is_allowed($right, $publication);
+    }
 }

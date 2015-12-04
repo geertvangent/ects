@@ -108,7 +108,7 @@ class Entry extends DataClass
      */
     public function getSubmitted()
     {
-        return $this->get_default_property(self :: PROPERTY_DATE_SUBMITTED);
+        return $this->get_default_property(self :: PROPERTY_SUBMITTED);
     }
 
     /**
@@ -117,7 +117,7 @@ class Entry extends DataClass
      */
     public function setSubmitted($submitted)
     {
-        $this->set_default_property(self :: PROPERTY_DATE_SUBMITTED, $submitted);
+        $this->set_default_property(self :: PROPERTY_SUBMITTED, $submitted);
     }
 
     /**
@@ -135,7 +135,7 @@ class Entry extends DataClass
      */
     public function setEntityType($entityType)
     {
-        $this->set_default_property(self :: PROPERTY_ENTITY_TYPE, entityType);
+        $this->set_default_property(self :: PROPERTY_ENTITY_TYPE, $entityType);
     }
 
     /**
