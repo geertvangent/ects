@@ -8,16 +8,12 @@ use Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignmen
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\DataManager\DataManager;
-use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Utilities\StringUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Storage\DataClass\Entry;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Repository\AssignmentRepository;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Service\AssignmentService;
 
 /**
  *
@@ -51,7 +47,7 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
         switch ($column->get_name())
         {
             case ContentObject :: PROPERTY_TITLE :
-                return $this->generate_title_link($publication);
+                return $this->renderTitleLink($publication);
             case Assignment :: PROPERTY_END_TIME :
                 $time = $content_object->get_end_time();
                 $date_format = Translation :: get('DateTimeFormatLong', null, Utilities :: COMMON_LIBRARIES);
@@ -62,12 +58,9 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
                 }
                 return $time;
             case Manager :: PROPERTY_NUMBER_OF_ENTRIES :
-                $condition = new EqualityCondition(
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
-                    new StaticConditionVariable($publication[ContentObjectPublication :: PROPERTY_ID]));
-
-                return DataManager :: count(Entry :: class_name(), new DataClassCountParameters($condition));
-
+                $assignmentService = new AssignmentService(new AssignmentRepository());
+                return $assignmentService->countEntriesForPublicationIdentifier(
+                    $publication[ContentObjectPublication :: PROPERTY_ID]);
             case Assignment :: PROPERTY_ALLOW_GROUP_SUBMISSIONS :
 
                 if ($content_object->get_allow_group_submissions())
@@ -91,46 +84,26 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
      * @param $publication type The publication for which the title link is to be generated.
      * @return string The HTML for the link in the title column.
      */
-    private function generate_title_link($publication)
+    private function renderTitleLink($publication)
     {
         if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
         {
-            return $this->generate_teacher_title_link($publication);
+            $url = $this->get_component()->get_url(
+                array(
+                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT,
+                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]));
+        }
+        else
+        {
+            // $url = $this->get_component()->get_url(
+            // array(
+            // \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_ENTRY,
+            // \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: PARAM_ACTION =>
+            // \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: ACTION_STUDENT,
+            // \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID =>
+            // $publication[ContentObjectPublication :: PROPERTY_ID]));
         }
 
-        return $this->generate_student_title_link($publication);
-    }
-
-    /**
-     * Generates the link applicable for the current browsing user being a teacher or admin.
-     *
-     * @param $publication type The publication for which the link is being generated.
-     * @return string The HTML anchor elemnt that represents the link.
-     */
-    private function generate_teacher_title_link($publication)
-    {
-        $url = $this->get_component()->get_url(
-            array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_ENTRY,
-                \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: ACTION_ENTITIES,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]));
-        return '<a href="' . $url . '">' .
-             StringUtilities :: getInstance()->truncate($publication[ContentObject :: PROPERTY_TITLE], 50) . '</a>';
-    }
-
-    /**
-     * Generates the link applicable for the current browsing user being a student.
-     *
-     * @param $publication type The publication for which the link is being generated.
-     * @return string The HTML anchor element that represents the link.
-     */
-    private function generate_student_title_link($publication)
-    {
-        $url = $this->get_component()->get_url(
-            array(
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => Manager :: ACTION_ENTRY,
-                \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: ACTION_STUDENT,
-                \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]));
         return '<a href="' . $url . '">' .
              StringUtilities :: getInstance()->truncate($publication[ContentObject :: PROPERTY_TITLE], 50) . '</a>';
     }

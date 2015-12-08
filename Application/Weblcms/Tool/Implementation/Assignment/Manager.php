@@ -7,7 +7,6 @@ use Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignmen
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Storage\DataClass\Entry;
 
 /**
  *
@@ -24,6 +23,8 @@ class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
     // Parameters
     const PARAM_TARGET_ID = 'target_id';
     const PARAM_ENTITY_TYPE = 'entity_type';
+    const PARAM_ENTRY = 'entry';
+    const PARAM_ATTACHMENT_TYPE = 'attachement_type';
 
     // Properties
     const PROPERTY_NUMBER_OF_ENTRIES = 'NumberOfEntries';
@@ -67,8 +68,7 @@ class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
                 Theme :: getInstance()->getCommonImagePath('Action/Browser'),
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_ENTRY,
-                        \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: ACTION_ENTITIES,
+                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT,
                         \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID])),
                 ToolbarItem :: DISPLAY_ICON));
 
@@ -78,11 +78,9 @@ class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
                 Theme :: getInstance()->getCommonImagePath('Action/Add'),
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_ENTRY,
-                        \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: ACTION_CREATE,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID],
-                        self :: PARAM_TARGET_ID => $this->get_user_id(),
-                        self :: PARAM_ENTITY_TYPE => Entry :: ENTITY_TYPE_USER)),
+                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT,
+                        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: PARAM_ACTION => \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: ACTION_SUBMIT,
+                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID])),
                 ToolbarItem :: DISPLAY_ICON));
 
         return $toolbar;
