@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Service;
 
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Core\Repository\ContentObject\Assignment\Display\Preview\Table\Entity\EntityTable;
-use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 
 /**
@@ -146,9 +146,28 @@ class AssignmentDataProvider implements
      */
     public function getEntityTableForType(Application $application, $entityType)
     {
-        return new EntityTable($application, $this);
+        switch ($entityType)
+        {
+            case Entry :: ENTITY_TYPE_USER :
+                $typeName = 'User';
+                break;
+            case Entry :: ENTITY_TYPE_COURSE_GROUP :
+                $typeName = 'CourseGroup';
+                break;
+            case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
+                $typeName = 'Group';
+                break;
+        }
+
+        $className = Manager :: package() . '\Table\Entity\\' . $typeName . '\\' . $typeName . 'Table';
+
+        return new $className($application, $this);
     }
 
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::getCurrentEntityType()
+     */
     public function getCurrentEntityType()
     {
         $contentObject = $this->getPublication()->get_content_object();
@@ -161,5 +180,23 @@ class AssignmentDataProvider implements
         {
             return Entry :: ENTITY_TYPE_USER;
         }
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::isDateAfterAssignmentEndTime()
+     */
+    public function isDateAfterAssignmentEndTime($date)
+    {
+        $assignment = $this->getPublication()->get_content_object();
+        return $date > $assignment->get_end_time();
+    }
+
+    public function countFeedbackByEntityTypeAndEntityId($entityType, $entityId)
+    {
+        return $this->getAssignmentService()->countFeedbackForPublicationByEntityTypeAndEntityId(
+            $this->getPublication(),
+            $entityType,
+            $entityId);
     }
 }
