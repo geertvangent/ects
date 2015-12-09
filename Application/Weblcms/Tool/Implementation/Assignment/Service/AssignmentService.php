@@ -3,6 +3,7 @@ namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Service;
 
 use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Repository\AssignmentRepository;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 
 /**
  *
@@ -75,7 +76,19 @@ class AssignmentService
 
     public function countEntitiesByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
-        return 10;
+        switch ($entityType)
+        {
+            case Entry :: ENTITY_TYPE_USER :
+                return $this->countTargetUsersForPublication($publication);
+                break;
+
+            case Entry :: ENTITY_TYPE_COURSE_GROUP :
+                return $this->countTargetCourseGroupsForPublication($publication);
+                break;
+            case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
+                return $this->countTargetGroupsForPublication($publication);
+                break;
+        }
     }
 
     /**
@@ -85,7 +98,7 @@ class AssignmentService
      * @param integer $offset
      * @param integer $count
      * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
-     * @return boolean
+     * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
     public function findTargetUsersForPublication(ContentObjectPublication $publication, $condition, $offset, $count,
         $orderProperty)
@@ -96,6 +109,17 @@ class AssignmentService
             $offset,
             $count,
             $orderProperty);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param Condition $condition
+     * @return integer
+     */
+    public function countTargetUsersForPublication(ContentObjectPublication $publication, $condition = null)
+    {
+        return $this->getAssignmentRepository()->countTargetUsersForPublication($publication, $condition);
     }
 
     /**
@@ -117,10 +141,61 @@ class AssignmentService
      *
      * @param ContentObjectPublication $publication
      * @param Condition $condition
-     * @return boolean
+     * @param integer $offset
+     * @param integer $count
+     * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
+     * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    public function countTargetUsersForPublication(ContentObjectPublication $publication, $condition)
+    public function findTargetCourseGroupsForPublication(ContentObjectPublication $publication, $condition, $offset,
+        $count, $orderProperty)
     {
-        return $this->getAssignmentRepository()->countTargetUsersForPublication($publication, $condition);
+        return $this->getAssignmentRepository()->findTargetCourseGroupsForPublication(
+            $publication,
+            $condition,
+            $offset,
+            $count,
+            $orderProperty);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param Condition $condition
+     * @return integer
+     */
+    public function countTargetCourseGroupsForPublication(ContentObjectPublication $publication, $condition = null)
+    {
+        return $this->getAssignmentRepository()->countTargetCourseGroupsForPublication($publication, $condition);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param Condition $condition
+     * @param integer $offset
+     * @param integer $count
+     * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
+     * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
+     */
+    public function findTargetGroupsForPublication(ContentObjectPublication $publication, $condition, $offset, $count,
+        $orderProperty)
+    {
+        return $this->getAssignmentRepository()->findTargetGroupsForPublication(
+            $publication,
+            $condition,
+            $offset,
+            $count,
+            $orderProperty);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param Condition $condition
+     * @return integer
+     */
+    public function countTargetGroupsForPublication(ContentObjectPublication $publication, $condition = null)
+    {
+        return $this->getAssignmentRepository()->countTargetGroupsForPublication($publication, $condition);
     }
 }

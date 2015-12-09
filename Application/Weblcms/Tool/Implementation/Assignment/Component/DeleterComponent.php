@@ -10,7 +10,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Storage\DataClass\Entry;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 
 /**
  *

@@ -1,16 +1,16 @@
 <?php
-namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\CourseGroup;
+namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\PlatformGroup;
 
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\Group\GroupTableDataProvider;
 
 /**
  *
- * @package Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\CourseGroup
+ * @package Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\PlatformGroup
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class CourseGroupTableDataProvider extends GroupTableDataProvider
+class PlatformGroupTableDataProvider extends GroupTableDataProvider
 {
 
     /**
@@ -22,7 +22,7 @@ class CourseGroupTableDataProvider extends GroupTableDataProvider
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
 
-        return $assignmentService->findTargetCourseGroupsForPublication(
+        return $assignmentService->findTargetGroupsForPublication(
             $assignmentDataProvider->getPublication(),
             $condition,
             $offset,
@@ -39,7 +39,7 @@ class CourseGroupTableDataProvider extends GroupTableDataProvider
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
 
-        return $assignmentService->countTargetCourseGroupsForPublication(
+        return $assignmentService->countTargetGroupsForPublication(
             $assignmentDataProvider->getPublication(),
             $condition);
     }

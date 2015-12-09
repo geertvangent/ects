@@ -17,17 +17,6 @@ use Chamilo\Libraries\Platform\Translation;
  */
 class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
 {
-    // Actions
-    const ACTION_ENTRY = 'entry';
-
-    // Parameters
-    const PARAM_TARGET_ID = 'target_id';
-    const PARAM_ENTITY_TYPE = 'entity_type';
-    const PARAM_ENTRY = 'entry';
-    const PARAM_ATTACHMENT_TYPE = 'attachement_type';
-
-    // Properties
-    const PROPERTY_NUMBER_OF_ENTRIES = 'NumberOfEntries';
 
     /**
      *

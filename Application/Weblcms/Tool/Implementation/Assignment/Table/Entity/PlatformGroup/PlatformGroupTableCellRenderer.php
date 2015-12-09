@@ -1,30 +1,28 @@
 <?php
-namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\CourseGroup;
+namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\PlatformGroup;
 
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\Group\GroupTableCellRenderer;
+use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Storage\DataManager\DataManager;
-use Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  *
- * @package Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\CourseGroup
+ * @package Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\PlatformGroup
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class CourseGroupTableCellRenderer extends GroupTableCellRenderer
+class PlatformGroupTableCellRenderer extends GroupTableCellRenderer
 {
 
     /**
      *
-     * @param integer $groupId
-     * @return integer[]
+     * @see \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\Group\GroupTableCellRenderer::retrieveGroupUserIds()
      */
     protected function retrieveGroupUserIds($groupId)
     {
-        return \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager :: retrieve_course_group_user_ids(
-            $groupId);
+        return DataManager :: retrieve_by_id(Group :: class_name(), $groupId)->get_users(true, true);
     }
 
     /**
@@ -33,16 +31,16 @@ class CourseGroupTableCellRenderer extends GroupTableCellRenderer
      */
     protected function getEntity($entityId)
     {
-        return DataManager :: retrieve_by_id(CourseGroup :: class_name(), $entityId);
+        return DataManager :: retrieve_by_id(Group :: class_name(), $entityId);
     }
 
     /**
      *
      * @see \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entity\Group\GroupTableCellRenderer::isSubgroupMember()
      */
-    protected function isSubgroupMember(DataClass $group, $userId)
+    protected function isSubgroupMember(DataClass $entity, $userId)
     {
-        foreach ($group->get_children() as $subgroup)
+        foreach ($entity->get_subgroups() as $subgroup)
         {
             if ($this->isGroupMember($subgroup, $userId))
             {
@@ -59,8 +57,6 @@ class CourseGroupTableCellRenderer extends GroupTableCellRenderer
      */
     protected function isSubscribedInGroup($groupId, $userId)
     {
-        return \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager :: is_course_group_member(
-            $groupId,
-            $userId);
+        return \Chamilo\Core\Group\Storage\DataManager :: is_group_member($groupId, $userId);
     }
 }

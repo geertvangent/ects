@@ -6,7 +6,7 @@ use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Storage\DataClass\Entry;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 
 /**
  *
@@ -41,10 +41,10 @@ class ViewerComponent extends Manager implements DelegateComponent
             $this->get_url(
                 array(
                     \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_ENTRY,
-                    \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Entry\Manager :: ACTION_CREATE,
+                    \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: PARAM_ACTION => \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: ACTION_SUBMIT,
                     \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publicationIdentifier,
-                    self :: PARAM_TARGET_ID => $this->getUser()->getId(),
-                    self :: PARAM_ENTITY_TYPE => Entry :: ENTITY_TYPE_USER)),
+                    \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: PARAM_ENTITY_ID => $this->getUser()->getId(),
+                    \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: PARAM_ENTITY_TYPE => Entry :: ENTITY_TYPE_USER)),
             ToolbarItem :: DISPLAY_ICON_AND_LABEL);
 
         return $actions;

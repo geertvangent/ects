@@ -6,6 +6,7 @@ use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
+use Chamilo\Application\Weblcms\Rights\WeblcmsRights;
 
 /**
  *
@@ -32,12 +33,22 @@ class AssignmentDataProvider implements
 
     /**
      *
-     * @param AssignmentService $assignmentService
+     * @var \Chamilo\Libraries\Architecture\Application\Application
      */
-    public function __construct(AssignmentService $assignmentService, ContentObjectPublication $publication)
+    private $application;
+
+    /**
+     *
+     * @param AssignmentService $assignmentService
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @param \Chamilo\Libraries\Architecture\Application\Application $application
+     */
+    public function __construct(AssignmentService $assignmentService, ContentObjectPublication $publication,
+        Application $application)
     {
         $this->assignmentService = $assignmentService;
         $this->publication = $publication;
+        $this->application = $application;
     }
 
     /**
@@ -74,6 +85,24 @@ class AssignmentDataProvider implements
     public function setPublication(ContentObjectPublication $publication)
     {
         $this->publication = $publication;
+    }
+
+    /**
+     *
+     * @return \Chamilo\Libraries\Architecture\Application\Application
+     */
+    public function getApplication()
+    {
+        return $this->application;
+    }
+
+    /**
+     *
+     * @param \Chamilo\Libraries\Architecture\Application\Application $application
+     */
+    public function setApplication(Application $application)
+    {
+        $this->application = $application;
     }
 
     /**
@@ -155,7 +184,7 @@ class AssignmentDataProvider implements
                 $typeName = 'CourseGroup';
                 break;
             case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
-                $typeName = 'Group';
+                $typeName = 'PlatformGroup';
                 break;
         }
 
@@ -198,5 +227,14 @@ class AssignmentDataProvider implements
             $this->getPublication(),
             $entityType,
             $entityId);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::canEditAssignment()
+     */
+    public function canEditAssignment()
+    {
+        return $this->getApplication()->is_allowed(WeblcmsRights :: EDIT_RIGHT);
     }
 }

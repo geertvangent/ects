@@ -34,12 +34,9 @@ class UserTableDataProvider extends \Chamilo\Core\Repository\ContentObject\Assig
      */
     public function count_data($condition)
     {
-        return $this->retrieve_data($condition)->size();
+        $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
+        $assignmentService = $assignmentDataProvider->getAssignmentService();
 
-        // $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
-        // $assignmentService = $assignmentDataProvider->getAssignmentService();
-
-        // return $assignmentService->countTargetUsersForPublication($assignmentDataProvider->getPublication(),
-        // $condition);
+        return $assignmentService->countTargetUsersForPublication($assignmentDataProvider->getPublication(), $condition);
     }
 }

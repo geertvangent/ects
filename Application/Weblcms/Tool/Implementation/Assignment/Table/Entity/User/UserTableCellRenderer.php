@@ -24,4 +24,13 @@ class UserTableCellRenderer extends \Chamilo\Core\Repository\ContentObject\Assig
 
         return parent :: render_cell($column, $entity);
     }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Table\Entity\EntityTableCellRenderer::isEntity()
+     */
+    protected function isEntity($entityId, $userId)
+    {
+        return $entityId == $userId;
+    }
 }

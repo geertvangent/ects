@@ -46,7 +46,7 @@ class ComplexDisplayComponent extends Manager implements DelegateComponent
         $configuration = new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this);
         $configuration->set(
             \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: CONFIGURATION_DATA_PROVIDER,
-            new AssignmentDataProvider(new AssignmentService(new AssignmentRepository()), $this->publication));
+            new AssignmentDataProvider(new AssignmentService(new AssignmentRepository()), $this->publication, $this));
 
         $factory = new ApplicationFactory(
             \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: context(),
