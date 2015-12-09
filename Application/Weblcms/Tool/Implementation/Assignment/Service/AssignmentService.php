@@ -60,18 +60,24 @@ class AssignmentService
 
     public function countDistinctEntriesByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
-        return 1;
+        return $this->getAssignmentRepository()->countDistinctEntriesByPublicationAndEntityType(
+            $publication,
+            $entityType);
     }
 
     public function countDistinctFeedbackByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
-        return 0;
+        return $this->getAssignmentRepository()->countDistinctFeedbackByPublicationAndEntityType(
+            $publication,
+            $entityType);
     }
 
     public function countDistinctLateEntriesByPublicationAndEntityType(ContentObjectPublication $publication,
         $entityType)
     {
-        return 0;
+        return $this->getAssignmentRepository()->countDistinctLateEntriesByPublicationAndEntityType(
+            $publication,
+            $entityType);
     }
 
     public function countEntitiesByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
@@ -197,5 +203,63 @@ class AssignmentService
     public function countTargetGroupsForPublication(ContentObjectPublication $publication, $condition = null)
     {
         return $this->getAssignmentRepository()->countTargetGroupsForPublication($publication, $condition);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @return integer
+     */
+    public function countEntriesForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
+    {
+        return $this->getAssignmentRepository()->countEntriesForEntityTypeAndId($publication, $entityType, $entityId);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @return integer
+     */
+    public function countDistinctFeedbackForEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+        $entityId)
+    {
+        return $this->getAssignmentRepository()->countDistinctFeedbackForEntityTypeAndId(
+            $publication,
+            $entityType,
+            $entityId);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @return integer
+     */
+    public function countDistinctScoreForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
+    {
+        return $this->getAssignmentRepository()->countDistinctScoreForEntityTypeAndId(
+            $publication,
+            $entityType,
+            $entityId);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @return integer
+     */
+    public function getAverageScoreForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
+    {
+        return $this->getAssignmentRepository()->retrieveAverageScoreForEntityTypeAndId(
+            $publication,
+            $entityType,
+            $entityId);
     }
 }

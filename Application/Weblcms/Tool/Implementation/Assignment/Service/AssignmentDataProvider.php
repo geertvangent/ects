@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Service;
 
+use Chamilo\Application\Weblcms\Rights\WeblcmsRights;
 use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
-use Chamilo\Application\Weblcms\Rights\WeblcmsRights;
 
 /**
  *
@@ -236,5 +236,76 @@ class AssignmentDataProvider implements
     public function canEditAssignment()
     {
         return $this->getApplication()->is_allowed(WeblcmsRights :: EDIT_RIGHT);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::createEntry()
+     */
+    public function createEntry($entityType, $entityId, $userId, $contentObjectId, $ipAddress)
+    {
+        $entry = new Entry();
+        $entry->setPublicationId($this->getPublication()->getId());
+        $entry->setContentObjectId($contentObjectId);
+        $entry->setSubmitted(time());
+        $entry->setEntityId($entityId);
+        $entry->setEntityType($entityType);
+        $entry->setUserId($userId);
+        $entry->setIpAddress($ipAddress);
+
+        if (! $entry->create())
+        {
+            return false;
+        }
+
+        return $entry;
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::countEntriesForEntityTypeAndId()
+     */
+    public function countEntriesForEntityTypeAndId($entityType, $entityId)
+    {
+        return $this->getAssignmentService()->countEntriesForEntityTypeAndId(
+            $this->getPublication(),
+            $entityType,
+            $entityId);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::countDistinctFeedbackForEntityTypeAndId()
+     */
+    public function countDistinctFeedbackForEntityTypeAndId($entityType, $entityId)
+    {
+        return $this->getAssignmentService()->countDistinctFeedbackForEntityTypeAndId(
+            $this->getPublication(),
+            $entityType,
+            $entityId);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::countDistinctScoreForEntityTypeAndId()
+     */
+    public function countDistinctScoreForEntityTypeAndId($entityType, $entityId)
+    {
+        return $this->getAssignmentService()->countDistinctScoreForEntityTypeAndId(
+            $this->getPublication(),
+            $entityType,
+            $entityId);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::getAverageScoreForEntityTypeAndId()
+     */
+    public function getAverageScoreForEntityTypeAndId($entityType, $entityId)
+    {
+        return $this->getAssignmentService()->getAverageScoreForEntityTypeAndId(
+            $this->getPublication(),
+            $entityType,
+            $entityId);
     }
 }

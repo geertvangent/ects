@@ -15,6 +15,7 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\Condition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
 use Chamilo\Libraries\Storage\Query\GroupBy;
 use Chamilo\Libraries\Storage\Query\Join;
 use Chamilo\Libraries\Storage\Query\Joins;
@@ -24,6 +25,8 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Feedback;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score;
+use Chamilo\Libraries\Storage\Parameters\RecordRetrieveParameters;
 
 /**
  *
@@ -381,5 +384,230 @@ class AssignmentRepository
         $parameters = new DataClassCountParameters($condition, $joins);
 
         return DataManager :: count(Entry :: class_name(), $parameters);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return AndCondition
+     */
+    private function getPublicationAndEntityTypeCondition(ContentObjectPublication $publication, $entityType)
+    {
+        $conditions = array();
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new StaticConditionVariable($publication->get_id()));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
+            new StaticConditionVariable($entityType));
+        return new AndCondition($conditions);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return integer
+     */
+    public function countDistinctEntriesByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
+    {
+        $property = new FunctionConditionVariable(
+            FunctionConditionVariable :: DISTINCT,
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID));
+
+        $parameters = new DataClassCountParameters(
+            $this->getPublicationAndEntityTypeCondition($publication, $entityType),
+            null,
+            $property);
+
+        return DataManager :: count(Entry :: class_name(), $parameters);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return integer
+     */
+    public function countDistinctFeedbackByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
+    {
+        $joins = new Joins();
+
+        $joins->add(
+            new Join(
+                Feedback :: class_name(),
+                new EqualityCondition(
+                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
+                    new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID))));
+
+        $property = new FunctionConditionVariable(
+            FunctionConditionVariable :: DISTINCT,
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID));
+
+        $parameters = new DataClassCountParameters(
+            $this->getPublicationAndEntityTypeCondition($publication, $entityType),
+            $joins,
+            $property);
+
+        return DataManager :: count(Entry :: class_name(), $parameters);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return integer
+     */
+    public function countDistinctLateEntriesByPublicationAndEntityType(ContentObjectPublication $publication,
+        $entityType)
+    {
+        $joins = new Joins();
+
+        $joins->add(
+            new Join(
+                ContentObjectPublication :: class_name(),
+                new EqualityCondition(
+                    new PropertyConditionVariable(
+                        ContentObjectPublication :: class_name(),
+                        ContentObjectPublication :: PROPERTY_ID),
+                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID))));
+
+        $property = new FunctionConditionVariable(
+            FunctionConditionVariable :: DISTINCT,
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID));
+
+        $conditions = array();
+        $conditions[] = $this->getPublicationAndEntityTypeCondition($publication, $entityType);
+        $conditions[] = new InequalityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_SUBMITTED),
+            InequalityCondition :: GREATER_THAN,
+            new StaticConditionVariable($publication->get_content_object()->get_end_time()));
+        $condition = new AndCondition($conditions);
+
+        $parameters = new DataClassCountParameters($condition, $joins, $property);
+
+        return DataManager :: count(Entry :: class_name(), $parameters);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return AndCondition
+     */
+    protected function getPublicationEntityTypeAndIdCondition(ContentObjectPublication $publication, $entityType,
+        $entityId)
+    {
+        $conditions = array();
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new StaticConditionVariable($publication->get_id()));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
+            new StaticConditionVariable($entityType));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID),
+            new StaticConditionVariable($entityId));
+
+        return new AndCondition($conditions);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @return integer
+     */
+    public function countEntriesForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
+    {
+        $condition = $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId);
+        return DataManager :: count(Entry :: class_name(), new DataClassCountParameters($condition));
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @return integer
+     */
+    public function countDistinctFeedbackForEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+        $entityId)
+    {
+        $joins = new Joins();
+
+        $joins->add(
+            new Join(
+                Feedback :: class_name(),
+                new EqualityCondition(
+                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
+                    new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID))));
+
+        $parameters = new DataClassCountParameters(
+            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId),
+            $joins);
+
+        return DataManager :: count(Entry :: class_name(), $parameters);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @return integer
+     */
+    public function countDistinctScoreForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
+    {
+        $joins = new Joins();
+
+        $joins->add(
+            new Join(
+                Score :: class_name(),
+                new EqualityCondition(
+                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
+                    new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID))));
+
+        $parameters = new DataClassCountParameters(
+            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId),
+            $joins);
+
+        return DataManager :: count(Entry :: class_name(), $parameters);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @return integer
+     */
+    public function retrieveAverageScoreForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
+    {
+        $joins = new Joins();
+
+        $joins->add(
+            new Join(
+                Score :: class_name(),
+                new EqualityCondition(
+                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
+                    new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID))));
+
+        $properties = new DataClassProperties();
+        $properties->add(
+            new FunctionConditionVariable(
+                FunctionConditionVariable :: AVERAGE,
+                new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_SCORE)));
+
+        $parameters = new RecordRetrieveParameters(
+            $properties,
+            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId),
+            array(),
+            $joins);
+
+        return DataManager :: record(Entry :: class_name(), $parameters);
     }
 }
