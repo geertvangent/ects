@@ -5,6 +5,7 @@ use Chamilo\Libraries\Calendar\Event\RecurrenceRules\RecurrenceRules;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Core\User\Storage\DataClass\User;
 
 /**
  *
@@ -187,7 +188,19 @@ class EventParser
 
         $html[] = '[' . $calendarEvent['type_code'] . ']';
         $html[] = $calendarEvent['name'];
-        $html[] = '(' . trim($calendarEvent['location']) . ')';
+
+        if ($calendarEvent['location'])
+        {
+            $html[] = '(' . trim($calendarEvent['location']) . ')';
+        }
+
+        if ($this->getDataUser()->get_status() == User :: STATUS_TEACHER)
+        {
+            if ($calendarEvent['groups'])
+            {
+                $html[] = '(' . trim($calendarEvent['groups']) . ')';
+            }
+        }
 
         return implode(' ', $html);
     }

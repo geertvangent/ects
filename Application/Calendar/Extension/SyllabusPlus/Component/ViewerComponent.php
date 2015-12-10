@@ -153,8 +153,15 @@ class ViewerComponent extends Manager implements DelegateComponent
             'ActivityDateValue',
             array('DAY' => $dateDay, 'FROM' => $dateStart, 'UNTIL' => $dateEnd));
 
-        $properties[Translation :: get('AtLocation')] = $activityRecord['location'];
-        $properties[Translation :: get('ForGroups')] = $activityRecord['groups'];
+        if ($activityRecord['location'])
+        {
+            $properties[Translation :: get('AtLocation')] = $activityRecord['location'];
+        }
+
+        if ($activityRecord['groups'])
+        {
+            $properties[Translation :: get('ForGroups')] = $activityRecord['groups'];
+        }
 
         if (! StringUtilities :: getInstance()->createString($activityRecord['teacher'])->isBlank())
         {
