@@ -45,7 +45,6 @@ class PrinterComponent extends Manager implements DelegateComponent
         $html[] = $this->getCalendarHtml();
         $html[] = '<script type="text/javascript">';
         $html[] = 'window.print();';
-        $html[] = 'window.close();';
         $html[] = '</script>';
         $html[] = $this->render_footer();
 
