@@ -49,17 +49,17 @@ class CalendarRepository
     public function findEventsForUserAndBetweenDates(User $user, $fromDate, $toDate)
     {
         $cache = new FilesystemCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $fromDate, $toDate)));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id())));
 
         if (! $cache->contains($cacheIdentifier))
         {
             $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
-                array(\Chamilo\Application\Calendar\Manager :: package(), 'refresh_external'));
+                array(\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: package(), 'refresh_external'));
 
             if ($user->get_official_code())
             {
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' . $user->get_official_code() .
-                     '\'';
+                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' .
+                     $user->get_official_code() . '\'';
                 $statement = DataManager :: get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
             }
@@ -88,12 +88,12 @@ class CalendarRepository
         if (! $cache->contains($cacheIdentifier))
         {
             $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
-                array(\Chamilo\Application\Calendar\Manager :: package(), 'refresh_external'));
+                array(\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: package(), 'refresh_external'));
 
             if ($user->get_official_code())
             {
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' . $user->get_official_code() .
-                     '\' AND module_id = \'' . $moduleIdentifier . '\'';
+                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' .
+                     $user->get_official_code() . '\' AND module_id = \'' . $moduleIdentifier . '\'';
                 $statement = DataManager :: get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
             }
@@ -118,8 +118,8 @@ class CalendarRepository
     {
         if ($user->get_official_code())
         {
-            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' . $user->get_official_code() .
-                 '\' AND id = \'' . $identifier . '\'';
+            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' .
+                 $user->get_official_code() . '\' AND id = \'' . $identifier . '\'';
             $statement = DataManager :: get_instance()->get_connection()->query($query);
             return $statement->fetch(\PDO :: FETCH_ASSOC);
         }
