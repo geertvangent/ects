@@ -17,9 +17,9 @@ class UserTableCellRenderer extends \Chamilo\Core\Repository\ContentObject\Assig
     {
         switch ($column->get_name())
         {
-            case UserTableColumnModel :: PROPERTY_NAME :
-                return $entity[User :: PROPERTY_LASTNAME] . ', ' . $entity[User :: PROPERTY_FIRSTNAME];
-                break;
+//             case UserTableColumnModel :: PROPERTY_NAME :
+//                 return $entity[User :: PROPERTY_LASTNAME] . ', ' . $entity[User :: PROPERTY_FIRSTNAME];
+//                 break;
         }
 
         return parent :: render_cell($column, $entity);

@@ -22,10 +22,7 @@ class UserTableDataProvider extends \Chamilo\Core\Repository\ContentObject\Assig
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
 
-        var_dump($this->get_table()->getEntityId());
-        exit;
-
-        return $assignmentService->findPublicationEntriesForEntityTypeAndId(
+        return $assignmentService->findEntriesForPublicationEntityTypeAndId(
             $assignmentDataProvider->getPublication(),
             Entry :: ENTITY_TYPE_USER,
             $this->get_table()->getEntityId(),
@@ -41,11 +38,13 @@ class UserTableDataProvider extends \Chamilo\Core\Repository\ContentObject\Assig
      */
     public function count_data($condition)
     {
-        return 1;
-        // $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
-        // $assignmentService = $assignmentDataProvider->getAssignmentService();
+        $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
+        $assignmentService = $assignmentDataProvider->getAssignmentService();
 
-        // return $assignmentService->countTargetUsersForPublication($assignmentDataProvider->getPublication(),
-    // $condition);
+        return $assignmentService->countEntriesForPublicationEntityTypeAndId(
+            $assignmentDataProvider->getPublication(),
+            Entry :: ENTITY_TYPE_USER,
+            $this->get_table()->getEntityId(),
+            $condition);
     }
 }

@@ -4,6 +4,7 @@ namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Service;
 use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Repository\AssignmentRepository;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
+use Chamilo\Libraries\Storage\Query\Condition\Condition;
 
 /**
  *
@@ -212,9 +213,13 @@ class AssignmentService
      * @param integer $entityId
      * @return integer
      */
-    public function countEntriesForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
+    public function countEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+        $entityId)
     {
-        return $this->getAssignmentRepository()->countEntriesForEntityTypeAndId($publication, $entityType, $entityId);
+        return $this->getAssignmentRepository()->countEntriesForPublicationEntityTypeAndId(
+            $publication,
+            $entityType,
+            $entityId);
     }
 
     /**
@@ -261,5 +266,48 @@ class AssignmentService
             $publication,
             $entityType,
             $entityId);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @param \Chamilo\Libraries\Storage\Query\Condition\Condition $condition
+     * @param integer $offset
+     * @param integer $count
+     * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
+     * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
+     */
+    public function findEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+        $entityId, $condition, $offset, $count, $orderProperty)
+    {
+        return $this->getAssignmentRepository()->retrieveEntriesForPublicationEntityTypeAndId(
+            $publication,
+            $entityType,
+            $entityId,
+            $condition,
+            $offset,
+            $count,
+            $orderProperty);
+    }
+
+    /**
+     *
+     * @param integer $entryIdentifier
+     * @return integer
+     */
+    public function countFeedbackByEntryIdentifier($entryIdentifier)
+    {
+        return $this->getAssignmentRepository()->countFeedbackByEntryIdentifier($entryIdentifier);
+    }
+
+    /**
+     *
+     * @param integer $entryIdentifier
+     */
+    public function findEntryByIdentifier($entryIdentifier)
+    {
+        return $this->getAssignmentRepository()->retrieveEntryByIdentifier($entryIdentifier);
     }
 }

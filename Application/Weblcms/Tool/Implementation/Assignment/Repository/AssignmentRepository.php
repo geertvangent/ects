@@ -5,11 +5,13 @@ use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Repository\ContentObject\Assignment\Display\Table\Entity\EntityTableColumnModel;
+use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
 use Chamilo\Libraries\Storage\DataManager\DataManager;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Parameters\RecordRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\Condition;
@@ -26,7 +28,6 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Feedback;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score;
-use Chamilo\Libraries\Storage\Parameters\RecordRetrieveParameters;
 
 /**
  *
@@ -519,11 +520,23 @@ class AssignmentRepository
      * @param ContentObjectPublication $publication
      * @param integer $entityType
      * @param integer $entityId
+     * @param \Chamilo\Libraries\Storage\Query\Condition\Condition $condition
      * @return integer
      */
-    public function countEntriesForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
+    public function countEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+        $entityId, $condition)
     {
-        $condition = $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId);
+        $conditions = array();
+
+        if ($condition instanceof Condition)
+        {
+            $conditions[] = $condition;
+        }
+
+        $conditions[] = $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId);
+
+        $condition = new AndCondition($conditions);
+
         return DataManager :: count(Entry :: class_name(), new DataClassCountParameters($condition));
     }
 
@@ -609,5 +622,97 @@ class AssignmentRepository
             $joins);
 
         return DataManager :: record(Entry :: class_name(), $parameters);
+    }
+
+    /**
+     *
+     * @param ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityId
+     * @param \Chamilo\Libraries\Storage\Query\Condition\Condition $condition
+     * @param integer $offset
+     * @param integer $count
+     * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
+     * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
+     */
+    public function retrieveEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+        $entityId, $condition, $offset, $count, $orderProperty)
+    {
+        $conditions = array();
+
+        if ($condition instanceof Condition)
+        {
+            $conditions[] = $condition;
+        }
+
+        $conditions[] = $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId);
+
+        $condition = new AndCondition($conditions);
+
+        $joins = new Joins();
+
+        $joins->add(
+            new Join(
+                User :: class_name(),
+                new EqualityCondition(
+                    new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID),
+                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_USER_ID))));
+
+        $joins->add(
+            new Join(
+                ContentObject :: class_name(),
+                new EqualityCondition(
+                    new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_ID),
+                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_CONTENT_OBJECT_ID))));
+
+        $joins->add(
+            new Join(
+                Score :: class_name(),
+                new EqualityCondition(
+                    new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID),
+                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID)),
+                Join :: TYPE_LEFT));
+
+        $properties = new DataClassProperties();
+
+        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID));
+        $properties->add(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_LASTNAME));
+        $properties->add(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_FIRSTNAME));
+
+        $properties->add(new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_TITLE));
+        $properties->add(
+            new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_DESCRIPTION));
+        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_SUBMITTED));
+        $properties->add(new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_SCORE));
+        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_CONTENT_OBJECT_ID));
+        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_USER_ID));
+        $properties->add(new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_TYPE));
+
+        $parameters = new RecordRetrievesParameters($properties, $condition, $count, $offset, $orderProperty, $joins);
+
+        return DataManager :: records(Entry :: class_name(), $parameters);
+    }
+
+    /**
+     *
+     * @param integer $entryIdentifier
+     * @return integer
+     */
+    public function countFeedbackByEntryIdentifier($entryIdentifier)
+    {
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID),
+            new StaticConditionVariable($entryIdentifier));
+
+        return DataManager :: count(Feedback :: class_name(), new DataClassCountParameters($condition));
+    }
+
+    /**
+     *
+     * @param integer $entryIdentifier
+     */
+    public function retrieveEntryByIdentifier($entryIdentifier)
+    {
+        return DataManager :: retrieve_by_id(Entry :: class_name(), $entryIdentifier);
     }
 }

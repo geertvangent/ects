@@ -288,7 +288,7 @@ class AssignmentDataProvider implements
      */
     public function countEntriesForEntityTypeAndId($entityType, $entityId)
     {
-        return $this->getAssignmentService()->countEntriesForEntityTypeAndId(
+        return $this->getAssignmentService()->countEntriesForPublicationEntityTypeAndId(
             $this->getPublication(),
             $entityType,
             $entityId);
@@ -328,5 +328,23 @@ class AssignmentDataProvider implements
             $this->getPublication(),
             $entityType,
             $entityId);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::countFeedbackByEntryIdentifier()
+     */
+    public function countFeedbackByEntryIdentifier($entryIdentifier)
+    {
+        return $this->getAssignmentService()->countFeedbackByEntryIdentifier($entryIdentifier);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::findEntryByIdentifier()
+     */
+    public function findEntryByIdentifier($entryIdentifier)
+    {
+        return $this->getAssignmentService()->findEntryByIdentifier($entryIdentifier);
     }
 }
