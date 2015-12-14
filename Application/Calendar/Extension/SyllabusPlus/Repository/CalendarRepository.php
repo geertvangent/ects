@@ -54,7 +54,7 @@ class CalendarRepository
         if (! $cache->contains($cacheIdentifier))
         {
             $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
-                array(\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: package(), 'refresh_external'));
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
             if ($user->get_official_code())
             {
@@ -88,7 +88,7 @@ class CalendarRepository
         if (! $cache->contains($cacheIdentifier))
         {
             $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
-                array(\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: package(), 'refresh_external'));
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
             if ($user->get_official_code())
             {

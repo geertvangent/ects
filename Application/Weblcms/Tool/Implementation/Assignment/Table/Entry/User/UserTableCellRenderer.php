@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entry\User;
 
-use Chamilo\Core\User\Storage\DataClass\User;
-
 /**
  *
  * @package Chamilo\Core\Repository\ContentObject\Assignment\Display\Preview\Table\Entry
