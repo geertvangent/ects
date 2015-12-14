@@ -175,6 +175,29 @@ class AssignmentDataProvider implements
      */
     public function getEntityTableForType(Application $application, $entityType)
     {
+        $tableName = $this->getTableNameForEntityType('Entity', $application, $entityType);
+        return new $tableName($application, $this);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::getEntryTableForEntityTypeAndId()
+     */
+    public function getEntryTableForEntityTypeAndId(Application $application, $entityType, $entityId)
+    {
+        $tableName = $this->getTableNameForEntityType('Entry', $application, $entityType);
+        return new $tableName($application, $this, $entityId);
+    }
+
+    /**
+     *
+     * @param string $tableType
+     * @param \Chamilo\Libraries\Architecture\Application\Application $application
+     * @param integer $entityType
+     * @return \Chamilo\Libraries\Format\Table\Table
+     */
+    protected function getTableNameForEntityType($tableType, Application $application, $entityType)
+    {
         switch ($entityType)
         {
             case Entry :: ENTITY_TYPE_USER :
@@ -188,9 +211,7 @@ class AssignmentDataProvider implements
                 break;
         }
 
-        $className = Manager :: package() . '\Table\Entity\\' . $typeName . '\\' . $typeName . 'Table';
-
-        return new $className($application, $this);
+        return Manager :: package() . '\Table\\' . $tableType . '\\' . $typeName . '\\' . $typeName . 'Table';
     }
 
     /**

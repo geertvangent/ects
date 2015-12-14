@@ -57,7 +57,7 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
                     return '<span style="color: gray">' . $time . '</span>';
                 }
                 return $time;
-            case Manager :: PROPERTY_NUMBER_OF_ENTRIES :
+            case PublicationTableColumnModel :: PROPERTY_ENTRY_COUNT :
                 $assignmentService = new AssignmentService(new AssignmentRepository());
                 return $assignmentService->countEntriesForPublicationIdentifier(
                     $publication[ContentObjectPublication :: PROPERTY_ID]);

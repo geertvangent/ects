@@ -5,7 +5,6 @@ use Chamilo\Application\Weblcms\Table\Publication\Table\ObjectPublicationTableCo
 use Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignment;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 
 /**
  *
@@ -16,6 +15,7 @@ use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
  */
 class PublicationTableColumnModel extends ObjectPublicationTableColumnModel
 {
+    const PROPERTY_ENTRY_COUNT = 'entry_count';
 
     /**
      * **************************************************************************************************************
@@ -33,7 +33,7 @@ class PublicationTableColumnModel extends ObjectPublicationTableColumnModel
         $this->add_column(
             new DataClassPropertyTableColumn(Assignment :: class_name(), Assignment :: PROPERTY_END_TIME, null, false));
 
-        $this->add_column(new StaticTableColumn(Manager :: PROPERTY_NUMBER_OF_ENTRIES));
+        $this->add_column(new StaticTableColumn(self :: PROPERTY_ENTRY_COUNT));
 
         $this->add_column(
             new DataClassPropertyTableColumn(
