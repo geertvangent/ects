@@ -23,3 +23,6 @@ ICalWarningMessage = "Please take into account that both the iCal download and/o
 ICalComponent = "iCal calendar"
 ICalDownload = "Download iCal"
 ICalExternal = "Get iCal link for application"
+ActivityTypeName = "Code"
+ActivityTypeDescription = "Description"
+ActivityTypes = "Activity types"

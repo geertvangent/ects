@@ -165,6 +165,8 @@ class EventParser
 
         $redirect = new Redirect($parameters);
 
+        $source = '[' . $calendarEvent['type_code'] . '] ' . $calendarEvent['type'];
+
         $event = new Event(
             $calendarEvent['id'],
             $startTime,
@@ -174,7 +176,7 @@ class EventParser
             $this->getEventLabel($calendarEvent),
             $this->getEventDescription($calendarEvent),
             $calendarEvent['location'],
-            Translation :: get('TypeName', null, \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context()),
+            $source,
             \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context());
 
         $event->setCalendarEvent($calendarEvent);

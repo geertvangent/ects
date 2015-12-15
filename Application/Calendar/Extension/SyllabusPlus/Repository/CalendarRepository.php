@@ -128,4 +128,25 @@ class CalendarRepository
             return array();
         }
     }
+
+    /**
+     *
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function findActivityTypes()
+    {
+        $cache = new FilesystemCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_activity_type]';
+            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $resultSet = new ResultSet($statement);
+
+            $cache->save($cacheIdentifier, $resultSet);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
 }

@@ -98,4 +98,13 @@ class CalendarService
 
         return $hasDriver && $hasUser && $hasPassword && $hasHost && $hasDatabase;
     }
+
+    /**
+     *
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function getActivityTypes()
+    {
+        return $this->getCalendarRepository()->findActivityTypes();
+    }
 }

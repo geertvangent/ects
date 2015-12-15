@@ -6,3 +6,7 @@ span.event-current {
 	font-weight: bold;
 	color: green;
 }
+
+fieldset.syllabus-activity-types legend {
+	color: #9E021B;
+}
