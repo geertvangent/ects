@@ -98,4 +98,43 @@ class CalendarService
 
         return $hasDriver && $hasUser && $hasPassword && $hasHost && $hasDatabase;
     }
+
+    /**
+     *
+     * @param User $user
+     * @return string[]
+     */
+    public function getFacultiesForUser(User $user)
+    {
+        return $this->getCalendarRepository()->findFacultiesForUser($user);
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function getFaculties()
+    {
+        return $this->getCalendarRepository()->findFaculties();
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function getFacultyGroups()
+    {
+        return $this->getCalendarRepository()->findFacultyGroups();
+    }
+
+    /**
+     *
+     * @param string $facultyCode
+     * @return string[]
+     */
+    public function getFacultyGroupsByCode($facultyCode)
+    {
+        $groups = $this->getFacultyGroups();
+        return $groups[$facultyCode];
+    }
 }

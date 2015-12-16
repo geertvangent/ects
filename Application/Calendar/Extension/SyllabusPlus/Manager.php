@@ -37,6 +37,7 @@ abstract class Manager extends Application
     const ACTION_CODE = 'Code';
     const ACTION_ICAL = 'Ical';
     const ACTION_PRINT = 'Printer';
+    const ACTION_GROUP = 'Group';
 
     // Default action
     const DEFAULT_ACTION = self :: ACTION_VIEW;
@@ -228,6 +229,23 @@ abstract class Manager extends Application
                 false,
                 DynamicVisualTab :: POSITION_RIGHT,
                 DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
+
+        $groupUrl = new Redirect(
+            array(
+                self :: PARAM_CONTEXT => self :: package(),
+                self :: PARAM_ACTION => self :: ACTION_GROUP));
+
+        $tabs->add_tab(
+            new DynamicVisualTab(
+                self :: ACTION_GROUP,
+                Translation :: get(self :: ACTION_GROUP . 'Component'),
+                Theme :: getInstance()->getImagePath(self :: package(), 'Tab/' . self :: ACTION_GROUP),
+                $groupUrl->getUrl(),
+                $currentAction == self :: ACTION_GROUP,
+                false,
+                DynamicVisualTab :: POSITION_RIGHT,
+                DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
+
 
         $printUrl = new Redirect(
             array(

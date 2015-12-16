@@ -8,6 +8,7 @@ use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Chamilo\Libraries\Cache\Doctrine\Provider\FilesystemCache;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Configuration\Configuration;
+use Chamilo\Libraries\Cache\Doctrine\Provider\PhpFileCache;
 
 /**
  *
@@ -127,5 +128,87 @@ class CalendarRepository
         {
             return array();
         }
+    }
+
+    /**
+     *
+     * @param User $user
+     * @return string[]
+     */
+    public function findFacultiesForUser(User $user)
+    {
+        if ($user->get_official_code())
+        {
+            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_student_group] WHERE person_id = \'' .
+                 $user->get_official_code() . '\'';
+            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $faculties = array();
+
+            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            {
+                $faculties[$record['department_id']] = $record;
+            }
+
+            return $faculties;
+        }
+        else
+        {
+            return array();
+        }
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function findFaculties()
+    {
+        $cache = new PhpFileCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_groups] ORDER BY department_name';
+            $statement = DataManager :: get_instance()->get_connection()->query($query);
+
+            $departments = array();
+
+            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            {
+                $departments[$record['department_id']] = $record;
+            }
+
+            $cache->save($cacheIdentifier, $departments);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function findFacultyGroups()
+    {
+        $cache = new PhpFileCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_groups] WHERE person_count > 0 ORDER BY department_id, name';
+            $statement = DataManager :: get_instance()->get_connection()->query($query);
+
+            $groups = array();
+
+            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            {
+                $groups[$record['department_id']][] = $record;
+            }
+
+            $cache->save($cacheIdentifier, $groups);
+        }
+
+        return $cache->fetch($cacheIdentifier);
     }
 }
