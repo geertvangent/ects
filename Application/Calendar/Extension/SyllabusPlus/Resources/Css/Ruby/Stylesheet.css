@@ -11,20 +11,10 @@ fieldset.syllabus-activity-types legend {
 	color: #9E021B;
 }
 
-ul.syllabus-group-list {
-	-moz-column-fill: balance;
-	-moz-column-gap: normal;
-	-moz-column-rule: 0px;
-	-moz-column-width: 150px;
-	-moz-column-count: auto;
-	-webkit-column-fill: balance;
-	-webkit-column-gap: normal;
-	-webkit-column-rule: 0px;
-	-webkit-column-width: 150px;
-	-webkit-column-count: auto;
-	column-fill: balance;
-	column-gap: normal;
-	column-rule: 0px;
-	column-width: 150px;
-	column-count: auto;
+ul.syllabus-group-list>li {
+	cursor: pointer;
+}
+
+ul.syllabus-group-sublist {
+	display: none;
 }

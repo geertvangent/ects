@@ -45,24 +45,26 @@ class BrowserComponent extends Manager implements DelegateComponent
     public function run()
     {
         $this->checkAuthorization();
+        $this->initialize();
 
-        $header = Page :: getInstance()->getHeader();
-        $header->addCssFile(
-            Theme :: getInstance()->getCssPath(\Chamilo\Application\Calendar\Manager :: package(), true) . 'Print.css',
-            'print');
+        BreadcrumbTrail :: get_instance()->add(
+            new Breadcrumb(
+                null,
+                $this->getUserCalendar()->fullname(
+                    $this->getUserCalendar()->get_lastname(),
+                    $this->getUserCalendar()->get_firstname())));
 
-        $this->form = new JumpForm($this->get_url($this->getDisplayParameters()), $this->getCurrentRendererTime());
+        return $this->renderCalendar();
+    }
 
-        if ($this->form->validate())
-        {
-            $this->setCurrentRendererTime($this->form->getTime());
-        }
-
-        $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
-        $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
-
+    /**
+     *
+     * @return string
+     */
+    protected function renderCalendar()
+    {
         $tabs = $this->getTabs();
-        $tabs->set_content($this->getCalendarHtml());
+        $tabs->set_content($this->renderContent());
 
         $html = array();
 
@@ -73,11 +75,41 @@ class BrowserComponent extends Manager implements DelegateComponent
         return implode(PHP_EOL, $html);
     }
 
+    protected function initialize()
+    {
+        $header = Page :: getInstance()->getHeader();
+        $header->addCssFile(
+            Theme :: getInstance()->getCssPath(\Chamilo\Application\Calendar\Manager :: package(), true) . 'Print.css',
+            'print');
+
+        if ($this->getJumpForm()->validate())
+        {
+            $this->setCurrentRendererTime($this->getJumpForm()->getTime());
+        }
+
+        $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
+        $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
+    }
+
+    /**
+     *
+     * @return \Chamilo\Libraries\Calendar\Renderer\Form\JumpForm
+     */
+    protected function getJumpForm()
+    {
+        if (! isset($this->form))
+        {
+            $this->form = new JumpForm($this->get_url($this->getDisplayParameters()), $this->getCurrentRendererTime());
+        }
+
+        return $this->form;
+    }
+
     /**
      *
      * @return string[]
      */
-    private function getDisplayParameters()
+    protected function getDisplayParameters()
     {
         return array(
             self :: PARAM_CONTEXT => self :: package(),
@@ -91,15 +123,8 @@ class BrowserComponent extends Manager implements DelegateComponent
      *
      * @return string
      */
-    public function getCalendarHtml()
+    protected function renderContent()
     {
-        BreadcrumbTrail :: get_instance()->add(
-            new Breadcrumb(
-                null,
-                $this->getUserCalendar()->fullname(
-                    $this->getUserCalendar()->get_lastname(),
-                    $this->getUserCalendar()->get_firstname())));
-
         $html = array();
 
         $html[] = '<div class="mini_calendar">';
@@ -178,7 +203,7 @@ class BrowserComponent extends Manager implements DelegateComponent
         $html = array();
 
         $html[] = $this->getMiniMonthRenderer()->render();
-        $html[] = $this->form->toHtml();
+        $html[] = $this->getJumpForm()->toHtml();
 
         return implode(PHP_EOL, $html);
     }

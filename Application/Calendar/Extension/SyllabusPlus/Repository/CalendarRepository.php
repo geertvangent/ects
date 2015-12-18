@@ -77,6 +77,35 @@ class CalendarRepository
 
     /**
      *
+     * @param string $groupIdentifier
+     * @param integer $fromDate
+     * @param integer $toDate
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function findEventsForGroupAndBetweenDates($groupIdentifier, $fromDate, $toDate)
+    {
+        $cache = new FilesystemCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $groupIdentifier)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_group_events] WHERE group_id = \'' .
+                 $groupIdentifier . '\'';
+
+            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $resultSet = new ResultSet($statement);
+
+            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
      * @param \Chamilo\Core\User\Storage\DataClass\User $user
      * @param string $moduleIdentifier
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
@@ -159,6 +188,33 @@ class CalendarRepository
 
     /**
      *
+     * @param User $user
+     * @return string[]
+     */
+    public function findFacultiesGroupsForUser(User $user)
+    {
+        if ($user->get_official_code())
+        {
+            $query = 'SELECT DISTINCT group_id, group_name, department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_student_group] WHERE person_id = \'' .
+                 $user->get_official_code() . '\'';
+            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $faculties = array();
+
+            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            {
+                $faculties[$record['department_id']][$record['group_id']] = $record;
+            }
+
+            return $faculties;
+        }
+        else
+        {
+            return array();
+        }
+    }
+
+    /**
+     *
      * @return string[]
      */
     public function findFaculties()
@@ -196,7 +252,7 @@ class CalendarRepository
         if (! $cache->contains($cacheIdentifier))
         {
 
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_groups] WHERE person_count > 0 ORDER BY department_id, name';
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_groups] ORDER BY department_id, name';
             $statement = DataManager :: get_instance()->get_connection()->query($query);
 
             $groups = array();
@@ -204,6 +260,34 @@ class CalendarRepository
             while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
             {
                 $groups[$record['department_id']][] = $record;
+            }
+
+            $cache->save($cacheIdentifier, $groups);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function findGroups()
+    {
+        $cache = new PhpFileCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_groups] ORDER BY name';
+            $statement = DataManager :: get_instance()->get_connection()->query($query);
+
+            $groups = array();
+
+            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            {
+                $groups[$record['id']] = $record;
             }
 
             $cache->save($cacheIdentifier, $groups);

@@ -29,6 +29,7 @@ abstract class Manager extends Application
     const PARAM_ACTIVITY_TIME = 'activity_time';
     const PARAM_FIRSTLETTER = 'firstletter';
     const PARAM_DOWNLOAD = 'download';
+    const PARAM_GROUP_ID = 'group_id';
 
     // Actions
     const ACTION_VIEW = 'Viewer';
@@ -193,26 +194,6 @@ abstract class Manager extends Application
                 DynamicVisualTab :: POSITION_RIGHT,
                 DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
 
-        $icalDownloadUrl = new Redirect(
-            array(
-                self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => Manager :: ACTION_ICAL,
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
-                self :: PARAM_DOWNLOAD => 1));
-
-        $downloadParameter = $this->getRequest()->query->get(self :: PARAM_DOWNLOAD);
-
-        $tabs->add_tab(
-            new DynamicVisualTab(
-                'ICalDownload',
-                Translation :: get('ICalDownload'),
-                Theme :: getInstance()->getImagePath(self :: package(), 'Tab/ICalDownload'),
-                $icalDownloadUrl->getUrl(),
-                $currentAction == self :: ACTION_ICAL && $downloadParameter == 1,
-                false,
-                DynamicVisualTab :: POSITION_RIGHT,
-                DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
-
         $iCalUrl = new Redirect(
             array(
                 self :: PARAM_CONTEXT => self :: package(),
@@ -233,7 +214,8 @@ abstract class Manager extends Application
         $groupUrl = new Redirect(
             array(
                 self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => self :: ACTION_GROUP));
+                self :: PARAM_ACTION => self :: ACTION_GROUP,
+                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
 
         $tabs->add_tab(
             new DynamicVisualTab(
@@ -245,7 +227,6 @@ abstract class Manager extends Application
                 false,
                 DynamicVisualTab :: POSITION_RIGHT,
                 DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
-
 
         $printUrl = new Redirect(
             array(

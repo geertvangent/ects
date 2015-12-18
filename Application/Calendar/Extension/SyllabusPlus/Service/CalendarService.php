@@ -61,6 +61,18 @@ class CalendarService
 
     /**
      *
+     * @param string $groupIdentifier
+     * @param integer $fromDate
+     * @param integer $toDate
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function getEventsForGroupAndBetweenDates($groupIdentifier, $fromDate, $toDate)
+    {
+        return $this->getCalendarRepository()->findEventsForGroupAndBetweenDates($groupIdentifier, $fromDate, $toDate);
+    }
+
+    /**
+     *
      * @param User $user
      * @param string $identifier
      * @return string[]
@@ -111,6 +123,16 @@ class CalendarService
 
     /**
      *
+     * @param User $user
+     * @return string[]
+     */
+    public function getFacultiesGroupsForUser(User $user)
+    {
+        return $this->getCalendarRepository()->findFacultiesGroupsForUser($user);
+    }
+
+    /**
+     *
      * @return string[]
      */
     public function getFaculties()
@@ -136,5 +158,24 @@ class CalendarService
     {
         $groups = $this->getFacultyGroups();
         return $groups[$facultyCode];
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function getGroups()
+    {
+        return $this->getCalendarRepository()->findGroups();
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function getGroupByIdentifier($identifier)
+    {
+        $groups = $this->getGroups();
+        return $groups[$identifier];
     }
 }

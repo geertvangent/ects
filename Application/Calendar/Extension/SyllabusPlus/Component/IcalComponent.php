@@ -80,7 +80,7 @@ class IcalComponent extends Manager implements NoAuthenticationSupport
 
                 $content[] = Display :: normal_message(
                     Translation :: get('ICalExternalMessage', array('URL' => $icalExternalUrl->getUrl())));
-                $content[] = Display :: normal_message(
+                $content[] = Display :: warning_message(
                     Translation :: get('ICalDownloadMessage', array('URL' => $icalDownloadUrl->getUrl())));
 
                 $tabs = $this->getTabs();
