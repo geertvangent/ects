@@ -3,7 +3,7 @@
 	<package>
 		<name>Photo</name>
 		<code>Photo</code>
-		<context>EhB\Application\Weblcms\Tool\Implementation\Photo</context>
+		<context>Ehb\Application\Weblcms\Tool\Implementation\Photo</context>
 		<type>Chamilo\Application\Weblcms\Tool</type>
 		<category>education</category>
 		<authors />

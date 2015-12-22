@@ -3,7 +3,7 @@
 	<package>
 		<name>Perception</name>
 		<code>Perception</code>
-		<context>EhB\Application\Weblcms\Tool\Implementation\Perception</context>
+		<context>Ehb\Application\Weblcms\Tool\Implementation\Perception</context>
 		<type>Chamilo\Application\Weblcms\Tool</type>
 		<category>education</category>
 		<authors />

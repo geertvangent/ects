@@ -17,7 +17,7 @@
 		</pre-depends>
 		<course_section>admin</course_section>
 		<extra>
-			<default-install>1</default-install>
+			<default-install>0</default-install>
 		</extra>
 	</package>
 </packages>

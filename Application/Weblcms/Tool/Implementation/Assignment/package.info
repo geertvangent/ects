@@ -3,7 +3,7 @@
 	<package>
 		<name>AssignmentDeluxe</name>
 		<code>AssignmentDeluxe</code>
-		<context>EhB\Application\Weblcms\Tool\Implementation\AssignmentDeluxe</context>
+		<context>Ehb\Application\Weblcms\Tool\Implementation\AssignmentDeluxe</context>
 		<type>Chamilo\Application\Weblcms\Tool</type>
 		<category>education</category>
 		<authors />

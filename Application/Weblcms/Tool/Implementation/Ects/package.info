@@ -3,7 +3,7 @@
 	<package>
 		<name>Ects</name>
 		<code>Ects</code>
-		<context>EhB\Application\Weblcms\Tool\Implementation\Ects</context>
+		<context>Ehb\Application\Weblcms\Tool\Implementation\Ects</context>
 		<type>Chamilo\Application\Weblcms\Tool</type>
 		<category>education</category>
 		<authors />
