@@ -1,11 +1,17 @@
 <?php
 namespace Ehb\Application\Helpdesk\Component;
 
+// use Chamilo\Libraries\File\Path;
+// use Chamilo\Libraries\Format\Form\SymfonyFormFactoryBuilder;
+// use Chamilo\Libraries\Format\Twig\TwigEnvironmentFactory;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Translation;
+// use Chamilo\Libraries\Translation\TranslatorFactory;
 use Ehb\Application\Helpdesk\Form\TicketForm;
+// use Ehb\Application\Helpdesk\Form\TicketFormType;
 use Ehb\Application\Helpdesk\Manager;
 use GuzzleHttp\Post\PostFile;
+// use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 // require_once Path :: getInstance()->getPluginPath() . 'pear/HTTP/Request2.php';
 class CreatorComponent extends Manager
@@ -16,6 +22,33 @@ class CreatorComponent extends Manager
      */
     public function run()
     {
+        // $translatorFactory = new TranslatorFactory();
+        // $translator = $translatorFactory->createTranslator();
+
+        // $twigFactory = new TwigEnvironmentFactory();
+        // $twig = $twigFactory->createEnvironment($translator);
+
+        // $formFactoryBuilder = new SymfonyFormFactoryBuilder();
+        // $formFactory = $formFactoryBuilder->buildFormFactory($twig);
+
+        // $form = $formFactory->create(new TicketFormType());
+        // $form->add('search', SubmitType :: class);
+
+        // $form->handleRequest($this->getRequest());
+
+        // if ($form->isValid())
+        // {
+        // }
+        // else
+        // {
+        // $html = array();
+
+        // $html[] = $this->render_header();
+        // $html[] = $twig->render(self :: package() . ':form.twig', array('form' => $form->createView()));
+        // $html[] = $this->render_footer();
+
+        // return implode(PHP_EOL, $html);
+        // }
         $form = new TicketForm($this);
 
         if ($form->validate())
