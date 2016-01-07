@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <packages>
 	<package>
-		<name>AssignmentDeluxe</name>
-		<code>AssignmentDeluxe</code>
-		<context>Ehb\Application\Weblcms\Tool\Implementation\AssignmentDeluxe</context>
+		<name>Assignment</name>
+		<code>Assignment</code>
+		<context>Ehb\Application\Weblcms\Tool\Implementation\Assignment</context>
 		<type>Chamilo\Application\Weblcms\Tool</type>
 		<category>education</category>
 		<authors />

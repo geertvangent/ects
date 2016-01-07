@@ -198,19 +198,7 @@ class AssignmentDataProvider implements
      */
     protected function getTableNameForEntityType($tableType, Application $application, $entityType)
     {
-        switch ($entityType)
-        {
-            case Entry :: ENTITY_TYPE_USER :
-                $typeName = 'User';
-                break;
-            case Entry :: ENTITY_TYPE_COURSE_GROUP :
-                $typeName = 'CourseGroup';
-                break;
-            case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
-                $typeName = 'PlatformGroup';
-                break;
-        }
-
+        $typeName = $this->getTypeNameForEntityType($entityType);
         return Manager :: package() . '\Table\\' . $tableType . '\\' . $typeName . '\\' . $typeName . 'Table';
     }
 
@@ -346,5 +334,48 @@ class AssignmentDataProvider implements
     public function findEntryByIdentifier($entryIdentifier)
     {
         return $this->getAssignmentService()->findEntryByIdentifier($entryIdentifier);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::getEntityRendererForEntityTypeAndId()
+     */
+    public function getEntityRendererForEntityTypeAndId(Application $application, $entityType, $entityId)
+    {
+        $rendererName = $this->getEntityRendererNameForEntityType($application, $entityType);
+        return new $rendererName($application, $this, $entityId);
+    }
+
+    /**
+     *
+     * @param \Chamilo\Libraries\Architecture\Application\Application $application
+     * @param integer $entityType
+     * @return \Chamilo\Libraries\Format\Table\Table
+     */
+    protected function getEntityRendererNameForEntityType(Application $application, $entityType)
+    {
+        $typeName = $this->getTypeNameForEntityType($entityType);
+        return Manager :: package() . '\Renderer\Entity\\' . $typeName . 'EntityRenderer';
+    }
+
+    /**
+     *
+     * @param integer $entityType
+     * @return string
+     */
+    protected function getTypeNameForEntityType($entityType)
+    {
+        switch ($entityType)
+        {
+            case Entry :: ENTITY_TYPE_USER :
+                return 'User';
+                break;
+            case Entry :: ENTITY_TYPE_COURSE_GROUP :
+                return 'CourseGroup';
+                break;
+            case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
+                return 'PlatformGroup';
+                break;
+        }
     }
 }

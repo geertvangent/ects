@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package context="application\weblcms\tool\assignment">
+<package context="Ehb\Application\Weblcms\Tool\Implementation\Assignment">
 	<settings>
 	</settings>
 </package>

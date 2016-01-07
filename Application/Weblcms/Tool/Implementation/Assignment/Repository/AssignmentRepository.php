@@ -28,6 +28,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Feedback;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score;
+use Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider;
 
 /**
  *
@@ -613,7 +614,8 @@ class AssignmentRepository
         $properties->add(
             new FunctionConditionVariable(
                 FunctionConditionVariable :: AVERAGE,
-                new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_SCORE)));
+                new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_SCORE),
+                AssignmentDataProvider :: AVERAGE_SCORE));
 
         $parameters = new RecordRetrieveParameters(
             $properties,
