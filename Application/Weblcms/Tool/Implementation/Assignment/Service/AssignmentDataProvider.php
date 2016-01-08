@@ -7,6 +7,8 @@ use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Note;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score;
 
 /**
  *
@@ -377,5 +379,79 @@ class AssignmentDataProvider implements
                 return 'PlatformGroup';
                 break;
         }
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::createScore()
+     */
+    public function createScore(\Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry,
+        \Chamilo\Core\User\Storage\DataClass\User $user, $submittedScore)
+    {
+        $score = new Score();
+
+        $score->setScore($submittedScore);
+        $score->setEntryId($entry->getId());
+        $score->setCreated(time());
+        $score->setModified(time());
+        $score->setUserId($user->getId());
+
+        return $score->create();
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::updateScore()
+     */
+    public function updateScore(\Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Score $score)
+    {
+        return $score->update();
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::createNote()
+     */
+    public function createNote(\Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry,
+        \Chamilo\Core\User\Storage\DataClass\User $user, $submittedNote)
+    {
+        $note = new Note();
+
+        $note->setNote($submittedNote);
+        $note->setEntryId($entry->getId());
+        $note->setCreated(time());
+        $note->setModified(time());
+        $note->setUserId($user->getId());
+
+        return $note->create();
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::updateNote()
+     */
+    public function updateNote(\Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Note $note)
+    {
+        return $note->update();
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::findScoreByEntry()
+     */
+    public function findScoreByEntry(
+        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
+    {
+        return $this->getAssignmentService()->findScoreByEntry($entry);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::findNoteByEntry()
+     */
+    public function findNoteByEntry(
+        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
+    {
+        return $this->getAssignmentService()->findNoteByEntry($entry);
     }
 }

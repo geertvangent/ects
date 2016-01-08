@@ -310,4 +310,24 @@ class AssignmentService
     {
         return $this->getAssignmentRepository()->retrieveEntryByIdentifier($entryIdentifier);
     }
+
+    /**
+     *
+     * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
+     * @return Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score
+     */
+    public function findScoreByEntry(Entry $entry)
+    {
+        return $this->getAssignmentRepository()->retrieveScoreByEntry($entry);
+    }
+
+    /**
+     *
+     * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
+     * @return Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Note
+     */
+    public function findNoteByEntry(Entry $entry)
+    {
+        return $this->getAssignmentRepository()->retrieveNoteByEntry($entry);
+    }
 }

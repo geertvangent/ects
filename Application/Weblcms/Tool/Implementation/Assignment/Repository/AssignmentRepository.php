@@ -4,6 +4,7 @@ namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Repository;
 use Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider;
 use Chamilo\Core\Repository\ContentObject\Assignment\Display\Table\Entity\EntityTableColumnModel;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Core\User\Storage\DataClass\User;
@@ -11,6 +12,7 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
 use Chamilo\Libraries\Storage\DataManager\DataManager;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
@@ -27,8 +29,8 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Feedback;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Note;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score;
-use Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider;
 
 /**
  *
@@ -716,5 +718,51 @@ class AssignmentRepository
     public function retrieveEntryByIdentifier($entryIdentifier)
     {
         return DataManager :: retrieve_by_id(Entry :: class_name(), $entryIdentifier);
+    }
+
+    /**
+     *
+     * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
+     * @return Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score
+     */
+    public function retrieveScoreByEntry(Entry $entry)
+    {
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID),
+            new StaticConditionVariable($entry->getId()));
+
+        $score = DataManager :: retrieve(Score :: class_name(), new DataClassRetrieveParameters($condition));
+
+        if ($score instanceof Score)
+        {
+            return $score;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /**
+     *
+     * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
+     * @return Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Note
+     */
+    public function retrieveNoteByEntry(Entry $entry)
+    {
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(Note :: class_name(), Note :: PROPERTY_ENTRY_ID),
+            new StaticConditionVariable($entry->getId()));
+
+        $note = DataManager :: retrieve(Note :: class_name(), new DataClassRetrieveParameters($condition));
+
+        if ($note instanceof Note)
+        {
+            return $note;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
