@@ -9,6 +9,7 @@ use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Note;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Feedback;
 
 /**
  *
@@ -453,5 +454,43 @@ class AssignmentDataProvider implements
         \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
     {
         return $this->getAssignmentService()->findNoteByEntry($entry);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::initializeFeedback()
+     */
+    public function initializeFeedback()
+    {
+        return new Feedback();
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::getFeedbackByIdentifier()
+     */
+    public function findFeedbackByIdentifier($feedbackIdentifier)
+    {
+        return $this->getAssignmentService()->findFeedbackByIdentifier($feedbackIdentifier);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::countFeedbackByEntry()
+     */
+    public function countFeedbackByEntry(
+        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
+    {
+        return $this->getAssignmentService()->countFeedbackByEntry($entry);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::getFeedbackByEntry()
+     */
+    public function findFeedbackByEntry(
+        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
+    {
+        return $this->getAssignmentService()->findFeedbackByEntry($entry);
     }
 }

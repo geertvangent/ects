@@ -314,7 +314,7 @@ class AssignmentService
     /**
      *
      * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
-     * @return Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score
+     * @return \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score
      */
     public function findScoreByEntry(Entry $entry)
     {
@@ -329,5 +329,37 @@ class AssignmentService
     public function findNoteByEntry(Entry $entry)
     {
         return $this->getAssignmentRepository()->retrieveNoteByEntry($entry);
+    }
+
+    /**
+     *
+     * @param integer $feedbackIdentifier
+     * @return \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Feedback
+     */
+    public function findFeedbackByIdentifier($feedbackIdentifier)
+    {
+        return $this->getAssignmentRepository()->retrieveFeedbackByIdentifier($feedbackIdentifier);
+    }
+
+    /**
+     *
+     * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
+     * @return integer
+     */
+    public function countFeedbackByEntry(
+        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
+    {
+        return $this->getAssignmentRepository()->countFeedbackByEntry($entry);
+    }
+
+    /**
+     *
+     * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
+     * @return DataClassResultSet
+     */
+    public function findFeedbackByEntry(
+        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
+    {
+        return $this->getAssignmentRepository()->findFeedbackByEntry($entry);
     }
 }

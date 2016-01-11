@@ -13,6 +13,7 @@ use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
 use Chamilo\Libraries\Storage\DataManager\DataManager;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
@@ -764,5 +765,45 @@ class AssignmentRepository
         {
             return null;
         }
+    }
+
+    /**
+     *
+     * @param integer $feedbackIdentifier
+     * @return \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Feedback
+     */
+    public function retrieveFeedbackByIdentifier($feedbackIdentifier)
+    {
+        return DataManager :: retrieve_by_id(Feedback :: class_name(), $feedbackIdentifier);
+    }
+
+    /**
+     *
+     * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
+     * @return integer
+     */
+    public function countFeedbackByEntry(
+        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
+    {
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID),
+            new StaticConditionVariable($entry->getId()));
+
+        return DataManager :: count(Feedback :: class_name(), new DataClassCountParameters($condition));
+    }
+
+    /**
+     *
+     * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
+     * @return DataClassResultSet
+     */
+    public function findFeedbackByEntry(
+        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
+    {
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID),
+            new StaticConditionVariable($entry->getId()));
+
+        return DataManager :: retrieves(Feedback :: class_name(), new DataClassRetrievesParameters($condition));
     }
 }
