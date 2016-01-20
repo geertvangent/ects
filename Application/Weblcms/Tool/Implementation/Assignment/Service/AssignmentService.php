@@ -59,6 +59,12 @@ class AssignmentService
         return $this->getAssignmentRepository()->countEntriesForPublicationIdentifier($publicationIdentifier);
     }
 
+    /**
+     *
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return integer
+     */
     public function countDistinctEntriesByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
         return $this->getAssignmentRepository()->countDistinctEntriesByPublicationAndEntityType(
@@ -66,6 +72,12 @@ class AssignmentService
             $entityType);
     }
 
+    /**
+     *
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return integer
+     */
     public function countDistinctFeedbackByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
         return $this->getAssignmentRepository()->countDistinctFeedbackByPublicationAndEntityType(
@@ -73,6 +85,12 @@ class AssignmentService
             $entityType);
     }
 
+    /**
+     *
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return integer
+     */
     public function countDistinctLateEntriesByPublicationAndEntityType(ContentObjectPublication $publication,
         $entityType)
     {
@@ -81,6 +99,12 @@ class AssignmentService
             $entityType);
     }
 
+    /**
+     *
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @param integer $entityType
+     * @return integer
+     */
     public function countEntitiesByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
         switch ($entityType)
@@ -134,6 +158,7 @@ class AssignmentService
      * @param ContentObjectPublication $publication
      * @param integer $entityType
      * @param integer $entityId
+     * @return integer
      */
     public function countFeedbackForPublicationByEntityTypeAndEntityId(ContentObjectPublication $publication,
         $entityType, $entityId)
@@ -305,6 +330,7 @@ class AssignmentService
     /**
      *
      * @param integer $entryIdentifier
+     * @return \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry
      */
     public function findEntryByIdentifier($entryIdentifier)
     {
@@ -355,11 +381,37 @@ class AssignmentService
     /**
      *
      * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
-     * @return DataClassResultSet
+     * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
     public function findFeedbackByEntry(
         \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
     {
         return $this->getAssignmentRepository()->findFeedbackByEntry($entry);
+    }
+
+    /**
+     *
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityIdentifier
+     * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
+     */
+    public function findEntriesByPublicationEntityTypeAndIdentifier(ContentObjectPublication $publication, $entityType,
+        $entityIdentifier)
+    {
+        return $this->getAssignmentRepository()->findEntriesByPublicationEntityTypeAndIdentifier(
+            $this->getPublication(),
+            $entityType,
+            $entityIdentifier);
+    }
+
+    /**
+     *
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
+     */
+    public function findEntriesByPublication(ContentObjectPublication $publication)
+    {
+        return $this->getAssignmentRepository()->findEntriesByPublication($publication);
     }
 }

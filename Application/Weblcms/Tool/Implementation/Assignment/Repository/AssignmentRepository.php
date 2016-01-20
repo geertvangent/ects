@@ -806,4 +806,45 @@ class AssignmentRepository
 
         return DataManager :: retrieves(Feedback :: class_name(), new DataClassRetrievesParameters($condition));
     }
+
+    /**
+     *
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @param integer $entityType
+     * @param integer $entityIdentifier
+     * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
+     */
+    public function findEntriesByPublicationEntityTypeAndIdentifier(ContentObjectPublication $publication, $entityType,
+        $entityIdentifier)
+    {
+        $conditions = array();
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new StaticConditionVariable($publication->getId()));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
+            new StaticConditionVariable($entityType));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID),
+            new StaticConditionVariable($entityIdentifier));
+
+        $condition = new AndCondition($conditions);
+
+        return DataManager :: retrieves(Entry :: class_name(), new DataClassRetrievesParameters($condition));
+    }
+
+    /**
+     *
+     * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
+     * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
+     */
+    public function findEntriesByPublication(ContentObjectPublication $publication)
+    {
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new StaticConditionVariable($publication->getId()));
+
+        return DataManager :: retrieves(Entry :: class_name(), new DataClassRetrievesParameters($condition));
+    }
 }

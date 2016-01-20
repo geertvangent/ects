@@ -32,7 +32,17 @@ class UserEntityRenderer extends EntityRenderer
     public function renderProperties(\Chamilo\Libraries\Storage\DataClass\DataClass $user)
     {
         $properties = array();
-        $properties[Translation :: get('SubmittedBy')] = $user->get_fullname();
+        $properties[Translation :: get('SubmittedBy')] = $this->getEntityName();
         return $properties;
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Renderer\EntityRenderer::getEntityName()
+     */
+    public function getEntityName()
+    {
+        $entity = $this->getEntity();
+        return $entity->get_fullname();
     }
 }

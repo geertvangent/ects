@@ -343,10 +343,10 @@ class AssignmentDataProvider implements
      *
      * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::getEntityRendererForEntityTypeAndId()
      */
-    public function getEntityRendererForEntityTypeAndId(Application $application, $entityType, $entityId)
+    public function getEntityRendererForEntityTypeAndId($entityType, $entityId)
     {
-        $rendererName = $this->getEntityRendererNameForEntityType($application, $entityType);
-        return new $rendererName($application, $this, $entityId);
+        $rendererName = $this->getEntityRendererNameForEntityType($entityType);
+        return new $rendererName($this, $entityId);
     }
 
     /**
@@ -355,7 +355,7 @@ class AssignmentDataProvider implements
      * @param integer $entityType
      * @return \Chamilo\Libraries\Format\Table\Table
      */
-    protected function getEntityRendererNameForEntityType(Application $application, $entityType)
+    protected function getEntityRendererNameForEntityType($entityType)
     {
         $typeName = $this->getTypeNameForEntityType($entityType);
         return Manager :: package() . '\Renderer\Entity\\' . $typeName . 'EntityRenderer';
@@ -492,5 +492,26 @@ class AssignmentDataProvider implements
         \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
     {
         return $this->getAssignmentService()->findFeedbackByEntry($entry);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::findEntriesByEntityTypeAndIdentifier()
+     */
+    public function findEntriesByEntityTypeAndIdentifier($entityType, $entityIdentifier)
+    {
+        return $this->getAssignmentService()->findEntriesByPublicationEntityTypeAndIdentifier(
+            $this->getPublication(),
+            $entityType,
+            $entityIdentifier)->as_array();
+    }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::findEntries()
+     */
+    public function findEntries()
+    {
+        return $this->getAssignmentService()->findEntriesByPublication($this->getPublication())->as_array();
     }
 }
