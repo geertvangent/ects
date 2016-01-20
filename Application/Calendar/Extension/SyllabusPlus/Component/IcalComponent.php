@@ -11,7 +11,6 @@ use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
-use Chamilo\Application\Calendar\Repository\CalendarRendererProviderRepository;
 use Chamilo\Libraries\Calendar\Renderer\Type\ICalRenderer;
 use Chamilo\Configuration\Configuration;
 
