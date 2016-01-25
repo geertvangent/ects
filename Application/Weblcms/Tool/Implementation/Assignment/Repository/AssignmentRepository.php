@@ -296,6 +296,7 @@ class AssignmentRepository
     {
         $properties->add(
             new FixedPropertyConditionVariable($baseClass, $baseClass :: PROPERTY_ID, Entry :: PROPERTY_ENTITY_ID));
+        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE));
 
         $submittedVariable = new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_SUBMITTED);
 
@@ -715,10 +716,25 @@ class AssignmentRepository
     /**
      *
      * @param integer $entryIdentifier
+     * @return \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry
      */
     public function retrieveEntryByIdentifier($entryIdentifier)
     {
         return DataManager :: retrieve_by_id(Entry :: class_name(), $entryIdentifier);
+    }
+
+    /**
+     *
+     * @param integer[] $entryIdentifiers[]
+     * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
+     */
+    public function retrieveEntriesByIdentifiers($entryIdentifiers)
+    {
+        $condition = new InCondition(
+            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
+            $entryIdentifiers);
+
+        return DataManager :: retrieves(Entry :: class_name(), new DataClassRetrievesParameters($condition));
     }
 
     /**
@@ -811,11 +827,11 @@ class AssignmentRepository
      *
      * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
      * @param integer $entityType
-     * @param integer $entityIdentifier
+     * @param integer[] $entityIdentifiers
      * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
-    public function findEntriesByPublicationEntityTypeAndIdentifier(ContentObjectPublication $publication, $entityType,
-        $entityIdentifier)
+    public function findEntriesByPublicationEntityTypeAndIdentifiers(ContentObjectPublication $publication, $entityType,
+        $entityIdentifiers)
     {
         $conditions = array();
 
@@ -825,9 +841,9 @@ class AssignmentRepository
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
             new StaticConditionVariable($entityType));
-        $conditions[] = new EqualityCondition(
+        $conditions[] = new InCondition(
             new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID),
-            new StaticConditionVariable($entityIdentifier));
+            $entityIdentifiers);
 
         $condition = new AndCondition($conditions);
 

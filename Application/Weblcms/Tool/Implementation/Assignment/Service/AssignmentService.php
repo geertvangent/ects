@@ -339,6 +339,16 @@ class AssignmentService
 
     /**
      *
+     * @param integer[] $entryIdentifiers
+     * @return \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry[]
+     */
+    public function findEntriesByIdentifiers($entryIdentifiers)
+    {
+        return $this->getAssignmentRepository()->retrieveEntriesByIdentifiers($entryIdentifiers);
+    }
+
+    /**
+     *
      * @param \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Entry $entry
      * @return \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Score
      */
@@ -393,16 +403,16 @@ class AssignmentService
      *
      * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
      * @param integer $entityType
-     * @param integer $entityIdentifier
+     * @param integer[] $entityIdentifiers
      * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
-    public function findEntriesByPublicationEntityTypeAndIdentifier(ContentObjectPublication $publication, $entityType,
-        $entityIdentifier)
+    public function findEntriesByPublicationEntityTypeAndIdentifiers(ContentObjectPublication $publication, $entityType,
+        $entityIdentifiers)
     {
-        return $this->getAssignmentRepository()->findEntriesByPublicationEntityTypeAndIdentifier(
-            $this->getPublication(),
+        return $this->getAssignmentRepository()->findEntriesByPublicationEntityTypeAndIdentifiers(
+            $publication,
             $entityType,
-            $entityIdentifier);
+            $entityIdentifiers);
     }
 
     /**

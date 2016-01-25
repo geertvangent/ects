@@ -341,6 +341,15 @@ class AssignmentDataProvider implements
 
     /**
      *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::findEntriesByIdentifiers()
+     */
+    public function findEntriesByIdentifiers($entryIdentifiers)
+    {
+        return $this->getAssignmentService()->findEntriesByIdentifiers($entryIdentifiers)->as_array();
+    }
+
+    /**
+     *
      * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::getEntityRendererForEntityTypeAndId()
      */
     public function getEntityRendererForEntityTypeAndId($entityType, $entityId)
@@ -496,14 +505,14 @@ class AssignmentDataProvider implements
 
     /**
      *
-     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::findEntriesByEntityTypeAndIdentifier()
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::findEntriesByEntityTypeAndIdentifiers()
      */
-    public function findEntriesByEntityTypeAndIdentifier($entityType, $entityIdentifier)
+    public function findEntriesByEntityTypeAndIdentifiers($entityType, $entityIdentifiers)
     {
-        return $this->getAssignmentService()->findEntriesByPublicationEntityTypeAndIdentifier(
+        return $this->getAssignmentService()->findEntriesByPublicationEntityTypeAndIdentifiers(
             $this->getPublication(),
             $entityType,
-            $entityIdentifier)->as_array();
+            $entityIdentifiers)->as_array();
     }
 
     /**
