@@ -5,7 +5,7 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 use Ehb\Application\Avilarts\Tool\Implementation\User\Component\UnsubscribedGroup\UnsubscribedGroupTable;
 use Ehb\Application\Avilarts\Tool\Implementation\User\PlatformgroupMenuRenderer;
 use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
+use Chamilo\Libraries\Format\Structure\ActionBar\ActionBarRenderer;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;

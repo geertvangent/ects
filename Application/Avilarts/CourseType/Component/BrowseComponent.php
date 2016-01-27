@@ -4,7 +4,7 @@ namespace Ehb\Application\Avilarts\CourseType\Component;
 use Ehb\Application\Avilarts\CourseType\Manager;
 use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
 use Ehb\Application\Avilarts\CourseType\Table\CourseType\CourseTypeTable;
-use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
+use Chamilo\Libraries\Format\Structure\ActionBar\ActionBarRenderer;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;

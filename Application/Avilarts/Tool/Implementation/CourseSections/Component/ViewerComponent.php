@@ -5,7 +5,7 @@ use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Component\CourseSections\CourseSectionsTable;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Format\Structure\ActionBarRenderer;
+use Chamilo\Libraries\Format\Structure\ActionBar\ActionBarRenderer;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Format\Theme;
