@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Atlantis\Role\Entity\Ajax;
+namespace Ehb\Application\Atlantis\Role\Entity\Ajax\Component;
 
 use Chamilo\Core\Group\Ajax\Component\PlatformGroupsFeedComponent;
 use Chamilo\Core\Group\Storage\DataClass\Group;
