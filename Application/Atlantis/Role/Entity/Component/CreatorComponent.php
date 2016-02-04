@@ -9,7 +9,6 @@ use Chamilo\Libraries\Storage\Query\Condition\Condition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
-use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
@@ -45,6 +44,7 @@ class CreatorComponent extends Manager
         if ($form->validate())
         {
             $values = $form->exportValues();
+                      
             $failures = 0;
 
             foreach ($values['entity'] as $entity_type => $entity_ids)
@@ -59,7 +59,7 @@ class CreatorComponent extends Manager
                                 $values['start_date']);
                             $new_end_date = DatetimeUtilities :: time_from_datepicker_without_timepicker(
                                 $values['end_date']);
-
+                            
                             $conditions = array();
                             $conditions[] = new EqualityCondition(
                                 new PropertyConditionVariable(
@@ -89,7 +89,7 @@ class CreatorComponent extends Manager
                                 null,
                                 array(
                                     new OrderBy(
-                                        new PropertiesConditionVariable(
+                                        new PropertyConditionVariable(
                                             \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: class_name(),
                                             \Ehb\Application\Atlantis\Role\Entity\Storage\DataClass\RoleEntity :: PROPERTY_START_DATE))));
 
