@@ -1,0 +1,22 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\group_user\implementation\bamaflex
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Groepsleden"
+TypeDescription = "Overzicht van alle leden van een specifieke groep"
+Title = "Titel"
+Description = "Omschrijving"
+DataSource = "Databron"
+NoData = "Er zijn op dit moment geen gegevens beschikbaar"
+FirstName = "Voornaam"
+LastName = "Familienaam"
+Enrolled = "Ingeschreven"
+ClassCourse = "Lid van de groep via een opleidingsonderdeel"
+Struck = "Uitgescheven"
+Year = "Jaar"
+Code = "Code"
+PersonId = "Id"
+Type = "Type"
+Enrollment = "Inschrijving"
+Course = "Opleidingsonderdeel"

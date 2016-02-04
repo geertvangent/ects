@@ -1,0 +1,19 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\student_materials\implementation\bamaflex
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Student materials"
+TypeDescription = "An overview of all required materials per year, training and type"
+Required = ""
+IsForSale = ""
+ForSale = ""
+Course = ""
+Group = ""
+Title = ""
+Edition = ""
+Author = ""
+Editor = ""
+Isbn = ""
+Medium = ""
+Price = ""

@@ -1,0 +1,3 @@
+TypeName = "ECTS"
+EctsNotAvailableYet = "The ECTS information is not yet available for this course."
+EctsOnlyForOfficialCourses = "ECTS information is only available for courses which are an official part of a curriculum."
