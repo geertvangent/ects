@@ -46,7 +46,7 @@ class EntityForm extends FormValidator
         {
             $types->add_element_type($entity->get_element_finder_type());
         }
-
+               
         $this->addElement('advanced_element_finder', self :: PROPERTY_ENTITY, Translation :: get('UserGroup'), $types);
 
         // roles
@@ -114,8 +114,8 @@ class EntityForm extends FormValidator
         $this->addElement(
             'html',
             ResourceManager :: get_instance()->get_resource_html(
-                Path :: getInstance()->getJavascriptPath('Ehb\Application\Atlantis', true) .
-                     'Dates.js'));
+                Path :: getInstance()->getJavascriptPath('Ehb\Application\Atlantis\Role\Entity', true) .
+                     'dates.js'));
     }
 
     /**

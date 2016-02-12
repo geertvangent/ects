@@ -30,4 +30,13 @@ class PlatformGroupEntityRenderer extends EntityRenderer
     {
         // TODO Auto-generated method stub
     }
+
+    /**
+     *
+     * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Renderer\EntityRenderer::getEntityName()
+     */
+    public function getEntityName()
+    {
+        // TODO Auto-generated method stub
+    }
 }
