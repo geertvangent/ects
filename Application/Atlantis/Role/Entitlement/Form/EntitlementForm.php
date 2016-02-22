@@ -45,17 +45,12 @@ class EntitlementForm extends FormValidator
                 $right->get_description());
         }
 
-        $buttons[] = $this->createElement(
-            'style_submit_button',
-            'submit',
-            Translation :: get('Grant'),
-            array('class' => 'positive grant'));
+        $buttons[] = $this->createElement('style_submit_button', 'submit', Translation :: get('Grant'));
 
         $buttons[] = $this->createElement(
             'style_reset_button',
             'reset',
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
-            array('class' => 'normal empty'));
+            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES));
 
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }

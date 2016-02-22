@@ -54,10 +54,12 @@ class FilterForm extends FormValidator
         }
 
         $this->addElement(
-            'style_submit_button',
+            'style_button',
             'submit',
             Translation :: get('Filter', null, Utilities :: COMMON_LIBRARIES),
-            array('class' => 'normal filter'));
+            null,
+            null,
+            'filter');
 
         $this->addElement(
             'html',

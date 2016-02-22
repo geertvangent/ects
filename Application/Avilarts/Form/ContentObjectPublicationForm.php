@@ -348,8 +348,7 @@ class ContentObjectPublicationForm extends FormValidator
         $buttons[] = $this->createElement(
             'style_reset_button',
             self :: PARAM_RESET,
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
-            array('class' => 'normal empty'));
+            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES));
 
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
@@ -395,8 +394,7 @@ class ContentObjectPublicationForm extends FormValidator
         $buttons[] = $this->createElement(
             'style_reset_button',
             self :: PARAM_RESET,
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES),
-            array('class' => 'normal empty'));
+            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES));
 
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
