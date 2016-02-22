@@ -47,20 +47,20 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
     public function run()
     {
         $this->checkAuthorization();
-        
+
         $content = array();
         $content[] = $this->buttonToolbarRenderer->render() . '<br />';
         $content[] = $this->get_user_html();
-        
+
         $tabs = $this->getTabs();
         $tabs->set_content(implode(PHP_EOL, $content));
-        
+
         $html = array();
-        
+
         $html[] = $this->render_header();
         $html[] = $tabs->render();
         $html[] = $this->render_footer();
-        
+
         return implode(PHP_EOL, $html);
     }
 
@@ -71,7 +71,7 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
         $html[] = '<div style="float: right; width: 100%;">';
         $html[] = $table->as_html();
         $html[] = '</div>';
-        
+
         return implode($html, "\n");
     }
 
@@ -97,34 +97,34 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
         $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_LASTNAME);
         $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_USERNAME);
         $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL);
-        
+
         // get conditions
         $searchCondition = $this->buttonToolbarRenderer->getConditions($search_properties);
-        
+
         // Conditions for active user with officialcode and email
         $activeConditions = array();
         $activeConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ACTIVE), 
+            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ACTIVE),
             new StaticConditionVariable(1));
         $activeConditions[] = new NotCondition(
             new EqualityCondition(
-                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE), 
+                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE),
                 new StaticConditionVariable(NULL)));
         $activeConditions[] = new NotCondition(
             new PatternMatchCondition(
-                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE), 
+                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE),
                 'EXT*'));
         $emailConditions = array();
         $emailConditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL), 
+            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL),
             '*@ehb.be');
         $emailConditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL), 
+            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL),
             '*@student.ehb.be');
         $activeConditions[] = new OrCondition($emailConditions);
-        
+
         $activeCondition = new AndCondition($activeConditions);
-        
+
         if ($searchCondition instanceof Condition)
         {
             $conditions = array();
@@ -141,21 +141,21 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
     public function getButtonToolbarRenderer()
     {
         if (! isset($this->buttonToolbarRenderer))
-        { 
-  $buttonToolbar = new ButtonToolBar($this->get_url(parent :: get_parameters());
+        {
+            $buttonToolbar = new ButtonToolBar($this->get_url($this->get_parameters()));
             $commonActions = new ButtonGroup();
             $commonActions->addButton(
                 new Button(
-                    Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), 
-                    Theme :: getInstance()->getCommonImagePath('Action/Browser'), 
-                    $this->get_url(), 
+                    Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES),
+                    Theme :: getInstance()->getCommonImagePath('Action/Browser'),
+                    $this->get_url(),
                     ToolbarItem :: DISPLAY_ICON_AND_LABEL));
-            
+
             $buttonToolbar->addButtonGroup($commonActions);
-            
+
             $this->buttonToolbarRenderer = new ButtonToolBarRenderer($buttonToolbar);
         }
-        
+
         return $this->buttonToolbarRenderer;
     }
 
