@@ -153,8 +153,6 @@ class MenuToolListRenderer extends ToolListRenderer
         }
 
         $html[] = '</div>';
-        $html[] = '<script type="text/javascript" src="' .
-             Path :: getInstance()->getJavascriptPath('Chamilo\Libraries', true) . 'ToolBar.js' . '"></script>';
 
         if ($_SESSION['toolbar_state'] == 'hide')
         {

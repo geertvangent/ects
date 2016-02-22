@@ -136,7 +136,7 @@ class BrowserComponent extends Manager
 
         if ($this->get_parent() instanceof Categorizable)
         {
-            $content[] = '<div class="tree_menu_on_top" style="max-height:150px; overflow: auto;">';
+            $content[] = '<div style="max-height:150px; overflow: auto;">';
             $content[] = '<div id="tree_menu_hide_container" class="tree_menu_hide_container" style="float: right;' .
                  'overflow: auto; ">';
             $content[] = '<a id="tree_menu_action_hide" class="tree_menu_hide" href="#">' . Translation :: get(
