@@ -151,7 +151,7 @@ class CalendarRepository
             $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' .
                  $user->get_official_code() . '\' AND id = \'' . $identifier . '\'';
             $statement = DataManager :: get_instance()->get_connection()->query($query);
-            return $statement->fetch(\PDO :: FETCH_ASSOC);
+            return $this->processRecord($statement->fetch(\PDO :: FETCH_ASSOC));
         }
         else
         {
@@ -175,6 +175,7 @@ class CalendarRepository
 
             while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
             {
+                $record = $this->processRecord($record);
                 $faculties[$record['department_id']] = $record;
             }
 
@@ -202,6 +203,7 @@ class CalendarRepository
 
             while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
             {
+                $record = $this->processRecord($record);
                 $faculties[$record['department_id']][$record['group_id']] = $record;
             }
 
@@ -231,6 +233,7 @@ class CalendarRepository
 
             while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
             {
+                $record = $this->processRecord($record);
                 $departments[$record['department_id']] = $record;
             }
 
@@ -259,6 +262,7 @@ class CalendarRepository
 
             while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
             {
+                $record = $this->processRecord($record);
                 $groups[$record['department_id']][] = $record;
             }
 
@@ -287,6 +291,7 @@ class CalendarRepository
 
             while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
             {
+                $record = $this->processRecord($record);
                 $groups[$record['id']] = $record;
             }
 
@@ -294,5 +299,30 @@ class CalendarRepository
         }
 
         return $cache->fetch($cacheIdentifier);
+    }
+
+    protected function processRecord($record)
+    {
+        foreach ($record as &$field)
+        {
+            if (is_resource($field))
+            {
+                $data = '';
+
+                while (! feof($field))
+                {
+                    $data .= fread($field, 1024);
+                }
+
+                $field = $data;
+            }
+
+            if (is_string($field) && ! is_numeric($field))
+            {
+                $field = iconv('Windows-1252', 'UTF-8', $field);
+            }
+        }
+
+        return $record;
     }
 }

@@ -28,11 +28,18 @@ class ResultSet extends ArrayResultSet
             if (is_resource($field))
             {
                 $data = '';
+
                 while (! feof($field))
                 {
                     $data .= fread($field, 1024);
                 }
+
                 $field = $data;
+            }
+
+            if (is_string($field) && ! is_numeric($field))
+            {
+                $field = iconv('Windows-1252', 'UTF-8', $field);
             }
         }
 
