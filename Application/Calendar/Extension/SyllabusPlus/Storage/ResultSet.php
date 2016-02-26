@@ -37,9 +37,12 @@ class ResultSet extends ArrayResultSet
                 $field = $data;
             }
 
-            if (is_string($field) && ! is_numeric($field))
+            if (! mb_check_encoding($field, 'UTF-8'))
             {
-                $field = iconv('Windows-1252', 'UTF-8', $field);
+                if (is_string($field) && ! is_numeric($field))
+                {
+                    $field = iconv('Windows-1252', 'UTF-8', $field);
+                }
             }
         }
 
