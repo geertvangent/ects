@@ -5,44 +5,64 @@ use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Format\Structure\ActionBar\Button;
-use Chamilo\Libraries\Format\Structure\ActionBar\ButtonGroup;
-use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Format\Structure\ActionBar\BootstrapGlyph;
+use Chamilo\Libraries\Format\Structure\ActionBar\SplitDropdownButton;
+use Chamilo\Libraries\Format\Structure\ActionBar\SubButton;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 
-class Actions extends \Chamilo\Application\Calendar\Actions
+/**
+ *
+ * @package Ehb\Application\Calendar\Extension\SyllabusPlus
+ * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
+ * @author Magali Gillard <magali.gillard@ehb.be>
+ * @author Eduard Vossen <eduard.vossen@ehb.be>
+ */
+class Actions implements \Chamilo\Application\Calendar\ActionsInterface
 {
 
+    /**
+     *
+     * @see \Chamilo\Application\Calendar\ActionsInterface::get()
+     */
     public function get(Application $application)
     {
-        $buttonGroup = new ButtonGroup();
+        $buttons = array();
+
+        $browserUrl = new Redirect(
+            array(Application :: PARAM_CONTEXT => __NAMESPACE__, Manager :: PARAM_ACTION => Manager :: ACTION_BROWSER));
 
         if ($application->getUser()->get_platformadmin() ||
              $application->getUser()->get_status() == User :: STATUS_TEACHER)
         {
+            $splitDropdownButton = new SplitDropdownButton(
+                Translation :: get('TypeName', null, __NAMESPACE__),
+                new BootstrapGlyph('time'),
+                $browserUrl->getUrl());
+            $splitDropdownButton->setDropdownClasses('dropdown-menu-right');
+
             $userBrowserUrl = new Redirect(
                 array(
                     Application :: PARAM_CONTEXT => __NAMESPACE__,
                     Manager :: PARAM_ACTION => Manager :: ACTION_USER_BROWSER));
 
-            $buttonGroup->addButton(
-                new Button(
+            $splitDropdownButton->addSubButton(
+                new SubButton(
                     Translation :: get('UserBrowserComponent'),
-                    Theme :: getInstance()->getImagePath(__NAMESPACE__, 'Tab/UserBrowser'),
+                    null,
                     $userBrowserUrl->getUrl(),
-                    Button :: DISPLAY_ICON));
+                    Button :: DISPLAY_LABEL));
+
+            $buttons[] = $splitDropdownButton;
+        }
+        else
+        {
+            $buttons[] = new Button(
+                Translation :: get('TypeName', null, __NAMESPACE__),
+                new BootstrapGlyph('time'),
+                $browserUrl->getUrl());
         }
 
-        $browserUrl = new Redirect(
-            array(Application :: PARAM_CONTEXT => __NAMESPACE__, Manager :: PARAM_ACTION => Manager :: ACTION_BROWSER));
-
-        $buttonGroup->addButton(
-            new Button(
-                Translation :: get('TypeName'),
-                Theme :: getInstance()->getImagePath(__NAMESPACE__, 'Logo/22'),
-                $browserUrl->getUrl(),
-                Button :: DISPLAY_ICON));
-
-        return array($buttonGroup);
+        return $buttons;
     }
 }
