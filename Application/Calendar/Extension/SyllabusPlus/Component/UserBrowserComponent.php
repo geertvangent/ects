@@ -3,15 +3,11 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Format\Structure\ActionBar\Button;
-use Chamilo\Libraries\Format\Structure\ActionBar\Renderer\ButtonToolBarRenderer;
+use Chamilo\Libraries\Format\Structure\ActionBar\ActionBarSearchForm;
 use Chamilo\Libraries\Format\Structure\ActionBar\ButtonToolBar;
-use Chamilo\Libraries\Format\Structure\ActionBar\ButtonGroup;
+use Chamilo\Libraries\Format\Structure\ActionBar\Renderer\ButtonToolBarRenderer;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\Condition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
@@ -20,10 +16,8 @@ use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Table\User\UserTable;
-use Chamilo\Libraries\Format\Structure\ActionBar\ActionBarSearchForm;
 
 /**
  *
@@ -48,17 +42,11 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
     {
         $this->checkAuthorization();
 
-        $content = array();
-        $content[] = $this->buttonToolbarRenderer->render() . '<br />';
-        $content[] = $this->get_user_html();
-
-        $tabs = $this->getTabs();
-        $tabs->set_content(implode(PHP_EOL, $content));
-
         $html = array();
 
         $html[] = $this->render_header();
-        $html[] = $tabs->render();
+        $html[] = $this->getButtonToolbarRenderer()->render();
+        $html[] = $this->get_user_html();
         $html[] = $this->render_footer();
 
         return implode(PHP_EOL, $html);
@@ -143,16 +131,6 @@ class UserBrowserComponent extends Manager implements DelegateComponent, TableSu
         if (! isset($this->buttonToolbarRenderer))
         {
             $buttonToolbar = new ButtonToolBar($this->get_url($this->get_parameters()));
-            $commonActions = new ButtonGroup();
-            $commonActions->addButton(
-                new Button(
-                    Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getCommonImagePath('Action/Browser'),
-                    $this->get_url(),
-                    ToolbarItem :: DISPLAY_ICON_AND_LABEL));
-
-            $buttonToolbar->addButtonGroup($commonActions);
-
             $this->buttonToolbarRenderer = new ButtonToolBarRenderer($buttonToolbar);
         }
 
