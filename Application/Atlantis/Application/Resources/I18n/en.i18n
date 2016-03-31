@@ -1,0 +1,18 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\atlantis\application
+; Language = en
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Application"
+BrowseApplications = "Browse applications"
+BrowseApplicationsDescription = "Browse and search the list of available applications"
+CreateApplication = "Create a new application"
+CreateApplicationDescription = "Add a new application to the list of available applications"
+EditorComponent = "Editor"
+ApplicationName = "Name"
+ApplicationDescription = "Description"
+ApplicationUrl = "Url"
+RightsManagerComponent = "Rights manager"
+CreatorComponent = "Create"
+
+PackageTypeNameApplication = ""

@@ -1,0 +1,20 @@
+span.event-expired {
+	color: red;
+}
+
+span.event-current {
+	font-weight: bold;
+	color: green;
+}
+
+fieldset.syllabus-activity-types legend {
+	color: #9E021B;
+}
+
+ul.syllabus-group-list>li {
+	cursor: pointer;
+}
+
+ul.syllabus-group-sublist {
+	display: none;
+}

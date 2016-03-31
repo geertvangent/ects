@@ -1,0 +1,15 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Package = application\discovery\module\person\implementation\chamilo
+; Language = nl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+TypeName = "Gebruikers"
+Username = "Gebruikersnaam"
+Details = "Informatie"
+Code = "Code"
+Email = "Email"
+Subgroups = "Subgroepen"
+TypeDescription = "Zoeken naar gebruikers"
+OfficialCode = "Code"
+Lastname = "Naam"
+Firstname = "Voornaam"

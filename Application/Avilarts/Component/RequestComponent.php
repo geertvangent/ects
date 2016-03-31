@@ -1,0 +1,18 @@
+<?php
+namespace Ehb\Application\Avilarts\Component;
+
+use Ehb\Application\Avilarts\Manager;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
+use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+
+class RequestComponent extends Manager /* implements DelegateComponent */
+{
+
+    public function run()
+    {
+        $factory = new ApplicationFactory(
+            \Ehb\Application\Avilarts\Request\Manager :: context(),
+            new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
+        return $factory->run();
+    }
+}
