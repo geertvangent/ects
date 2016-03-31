@@ -6,8 +6,8 @@ namespace Ehb\Application\Sync\Cas\Synchronization\Type\User;
  * @package ehb.sync;
  */
 use Chamilo\Core\User\Storage\DataClass\User;
-use Ehb\Application\Sync\Cas\Synchronization\Type\UserSynchronization;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Sync\Cas\Synchronization\Type\UserSynchronization;
 
 class AllUserSynchronization extends UserSynchronization
 {

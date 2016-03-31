@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
-use Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
-use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\ImageManipulation\ImageManipulation;
 use Chamilo\Libraries\File\Path;
@@ -15,6 +12,9 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\String\Text;
 use Doctrine\DBAL\Driver\PDOStatement;
+use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
+use Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Faculty;
+use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {

@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Component;
 
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\Manager;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass\Password;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
-use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Manager;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass\Password;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 

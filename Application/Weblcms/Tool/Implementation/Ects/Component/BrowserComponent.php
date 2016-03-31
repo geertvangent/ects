@@ -1,16 +1,16 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Ects\Component;
 
-use Ehb\Application\Weblcms\Tool\Implementation\Ects\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
-use Ehb\Application\Discovery\Module;
 use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Discovery\Module;
+use Ehb\Application\Weblcms\Tool\Implementation\Ects\Manager;
 
 /**
  *

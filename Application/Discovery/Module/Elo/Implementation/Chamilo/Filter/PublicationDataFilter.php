@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
-use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
-use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\PublicationData;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\PublicationData;
+use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 
 class PublicationDataFilter extends TypeDataFilter
 {

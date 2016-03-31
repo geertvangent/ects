@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\DiscoveryItem;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
+use Ehb\Application\Discovery\DiscoveryItem;
 
 class TimeframePart extends DiscoveryItem
 {

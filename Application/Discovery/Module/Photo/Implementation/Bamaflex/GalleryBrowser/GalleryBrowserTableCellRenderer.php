@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\GalleryBrowser;
 
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\File\Redirect;
 use Ehb\Application\Discovery\Module\Photo\DataManager;
 use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Tables\PhotoGalleryTable\DefaultGalleryTableCellRenderer;
-use Chamilo\Libraries\File\Redirect;
-use Chamilo\Libraries\Architecture\Application\Application;
 
 class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
 {

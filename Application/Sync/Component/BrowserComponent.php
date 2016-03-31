@@ -5,8 +5,8 @@ use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Ehb\Application\Sync\Manager;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Sync\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

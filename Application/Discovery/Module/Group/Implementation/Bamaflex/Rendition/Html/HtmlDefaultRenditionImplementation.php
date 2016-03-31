@@ -1,13 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Rendition\Html;
 
-use Ehb\Application\Discovery\Module\Group\DataManager;
-use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
-use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Module;
-use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Parameters;
-use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Rendition\RenditionImplementation;
-use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Rights;
-use Ehb\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
@@ -17,7 +11,13 @@ use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Ehb\Application\Discovery\Module\Group\DataManager;
+use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
+use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Module;
+use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Parameters;
+use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Rights;
+use Ehb\Application\Discovery\SortableTable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

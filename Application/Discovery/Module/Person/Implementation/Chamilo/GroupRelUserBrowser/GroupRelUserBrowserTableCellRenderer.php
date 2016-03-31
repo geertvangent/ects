@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Person\Implementation\Chamilo\GroupRelUserBrowser;
 
-use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Core\Group\Table\GroupRelUser\GroupRelUserTableCellRenderer;
+use Chamilo\Libraries\Format\Structure\Toolbar;
 
 class GroupRelUserBrowserTableCellRenderer extends GroupRelUserTableCellRenderer
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
-use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\ContentObjectData;
+use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 
 class LoginDataFilter extends TypeDataFilter
 {

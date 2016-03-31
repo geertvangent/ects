@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Training\Rendition\View\Html;
 
-use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

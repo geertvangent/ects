@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Sync\Atlantis\Synchronization;
 
-use Ehb\Application\Discovery\Storage\DataManager;
-use Ehb\Application\Discovery\RightsGroupEntityRight;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -11,6 +9,8 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Discovery\RightsGroupEntityRight;
+use Ehb\Application\Discovery\Storage\DataManager;
 
 class DiscoverySynchronization
 {

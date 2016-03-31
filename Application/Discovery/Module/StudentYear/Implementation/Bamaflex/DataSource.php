@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Discovery\Module\StudentYear\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\Module\StudentYear\Implementation\Bamaflex\StudentYear;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Doctrine\DBAL\Driver\PDOStatement;
+use Ehb\Application\Discovery\Module\StudentYear\Implementation\Bamaflex\StudentYear;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {

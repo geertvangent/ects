@@ -1,6 +1,11 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Profile\Implementation\Bamaflex;
 
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Ehb\Application\Discovery\Module\Profile\Communication;
 use Ehb\Application\Discovery\Module\Profile\Email;
 use Ehb\Application\Discovery\Module\Profile\IdentificationCode;
@@ -13,11 +18,6 @@ use Ehb\Application\Discovery\Module\Profile\Implementation\Bamaflex\PreviousUni
 use Ehb\Application\Discovery\Module\Profile\Implementation\Bamaflex\Profile;
 use Ehb\Application\Discovery\Module\Profile\Name;
 use Ehb\Application\Discovery\Module\Profile\Photo;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {

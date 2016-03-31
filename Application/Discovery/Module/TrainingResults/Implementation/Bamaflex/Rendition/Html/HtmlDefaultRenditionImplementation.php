@@ -1,6 +1,12 @@
 <?php
 namespace Ehb\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\Html;
 
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Discovery\LegendTable;
 use Ehb\Application\Discovery\Module\TrainingResults\DataManager;
 use Ehb\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Module;
@@ -8,12 +14,6 @@ use Ehb\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Par
 use Ehb\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Ehb\Application\Discovery\Module\TrainingResults\Implementation\Bamaflex\Rights;
 use Ehb\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Table\PropertiesTable;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

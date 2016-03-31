@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\DiscoveryItem;
-use Ehb\Application\Discovery\Module\Course\DataManager;
 use Chamilo\Libraries\Utilities\StringUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Discovery\DiscoveryItem;
+use Ehb\Application\Discovery\Module\Course\DataManager;
 
 /**
  * application.discovery.module.courses.discovery

@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Discovery\Rendition;
 
-use Ehb\Application\Discovery\Module;
-use Chamilo\Libraries\Utilities\StringUtilities;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Discovery\Module;
 
 abstract class RenditionImplementation extends AbstractRenditionImplementation
 {

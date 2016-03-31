@@ -1,10 +1,20 @@
 <?php
 namespace Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataManager;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\History;
 use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\HistoryReference;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataManager;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
+use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 use Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Choice;
 use Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\ChoiceOption;
 use Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Group;
@@ -18,16 +28,6 @@ use Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Packag
 use Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\SubTrajectory;
 use Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\SubTrajectoryCourse;
 use Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Trajectory;
-use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
-use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {

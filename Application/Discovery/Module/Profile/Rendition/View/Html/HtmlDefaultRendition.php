@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Profile\Rendition\View\Html;
 
-use Ehb\Application\Discovery\Module\Profile\Email;
-use Ehb\Application\Discovery\Module\Profile\Profile;
-use Ehb\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Discovery\Module\Profile\Email;
+use Ehb\Application\Discovery\Module\Profile\Profile;
 use Ehb\Application\Discovery\Module\Profile\Rendition\Format\HtmlRendition;
+use Ehb\Application\Discovery\SortableTable;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

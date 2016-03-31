@@ -1,16 +1,16 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Profile\Implementation\Chamilo;
 
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Core\User\Storage\DataClass\UserSetting;
+use Chamilo\Libraries\File\FileType;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Ehb\Application\Discovery\Module\Profile\Communication;
 use Ehb\Application\Discovery\Module\Profile\Email;
 use Ehb\Application\Discovery\Module\Profile\IdentificationCode;
 use Ehb\Application\Discovery\Module\Profile\Implementation\Chamilo\Profile;
 use Ehb\Application\Discovery\Module\Profile\Name;
 use Ehb\Application\Discovery\Module\Profile\Photo;
-use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Core\User\Storage\DataClass\UserSetting;
-use Chamilo\Libraries\File\FileType;
-use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 
 class DataSource
 {

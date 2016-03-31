@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Person\Implementation\Chamilo;
 
-use Ehb\Application\Discovery\Parameters;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
@@ -11,6 +10,7 @@ use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Discovery\Parameters;
 
 class Module extends \Ehb\Application\Discovery\Module\Person\Module
 {

@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Sync\Component;
 
+use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Ehb\Application\Sync\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
-use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
 
 class BamaflexComponent extends Manager implements DelegateComponent
 {

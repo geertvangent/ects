@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rendition\Xlsx;
 
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\File\Export\Excel\ExcelExport;
+use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
 use Ehb\Application\Discovery\Module\GroupUser\DataManager;
 use Ehb\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Module;
 use Ehb\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Ehb\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Rights;
-use Ehb\Application\Discovery\Module\Group\Implementation\Bamaflex\Group;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\File\Export\Excel\ExcelExport;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class XlsxDefaultRenditionImplementation extends RenditionImplementation
 

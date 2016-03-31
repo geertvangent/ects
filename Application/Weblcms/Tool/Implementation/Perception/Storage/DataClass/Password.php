@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass;
 
-use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  *

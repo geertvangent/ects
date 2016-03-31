@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Discovery\Module\StudentMaterials;
 
-use Ehb\Application\Discovery\Module\Career\Mark;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Discovery\Module\Career\Mark;
 
 /**
  * application.discovery.module.career.discovery

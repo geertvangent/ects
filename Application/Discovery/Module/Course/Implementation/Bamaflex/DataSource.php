@@ -1,6 +1,13 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex;
 
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\StringUtilities;
+use Doctrine\DBAL\Driver\PDOStatement;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityDescription;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityStructured;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityTotal;
@@ -19,13 +26,6 @@ use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\MaterialStru
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\SecondChance;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Teacher;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\TimeframePart;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Utilities\StringUtilities;
-use Doctrine\DBAL\Driver\PDOStatement;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {

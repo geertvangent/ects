@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Discovery\Module\CourseResults;
 
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Platform\Session\Request;
 use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 use Ehb\Application\Discovery\Module\CourseResults\DataManager;
-use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Platform\Session\Request;
 
 abstract class Module extends \Ehb\Application\Discovery\Module
 {

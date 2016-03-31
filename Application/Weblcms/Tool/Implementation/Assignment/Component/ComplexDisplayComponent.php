@@ -12,9 +12,9 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Repository\AssignmentRepository;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Service\AssignmentDataProvider;
 use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Service\AssignmentService;
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Repository\AssignmentRepository;
 
 class ComplexDisplayComponent extends Manager implements DelegateComponent
 {

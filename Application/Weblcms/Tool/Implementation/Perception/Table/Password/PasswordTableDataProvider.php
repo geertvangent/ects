@@ -2,10 +2,10 @@
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Table\Password;
 
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
-use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass\Password;
+use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
 
 class PasswordTableDataProvider extends DataClassTableDataProvider
 {

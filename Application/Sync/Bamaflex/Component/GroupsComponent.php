@@ -5,8 +5,8 @@ use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Ehb\Application\Sync\Bamaflex\Manager;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
-use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\DummyGroupSynchronization;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
 
 class GroupsComponent extends Manager implements DelegateComponent
 {

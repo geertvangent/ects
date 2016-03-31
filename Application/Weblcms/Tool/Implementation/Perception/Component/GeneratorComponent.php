@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Component;
 
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
-use Chamilo\Libraries\Platform\Translation;
 
 /**
  *

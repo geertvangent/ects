@@ -1,16 +1,16 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\Html;
 
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\DataManager\DataManager;
 use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Form\FilterForm;
 use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Module;
 use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Rendition\RenditionImplementation;
 use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 use Ehb\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\StringUtilities;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Component;
 
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 
 /**
  *

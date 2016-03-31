@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Rendition\Html;
 
-use Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Rendition\RenditionImplementation;
-use Ehb\Application\Discovery\SortableTable;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Discovery\Module\Faculty\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Ehb\Application\Discovery\SortableTable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

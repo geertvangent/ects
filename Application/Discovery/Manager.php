@@ -2,9 +2,9 @@
 namespace Ehb\Application\Discovery;
 
 use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface;
 
 /**
  *

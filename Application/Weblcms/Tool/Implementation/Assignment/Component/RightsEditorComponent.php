@@ -2,8 +2,8 @@
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Component;
 
 use Chamilo\Application\Weblcms\Rights\WeblcmsRights;
-use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager;
 
 /**
  *

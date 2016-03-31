@@ -1,16 +1,16 @@
 <?php
 namespace Ehb\Application\Discovery\Module\CourseResults\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
-use Ehb\Application\Discovery\Module\Career\MarkMoment;
-use Ehb\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\CourseResult;
-use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Doctrine\DBAL\Driver\PDOStatement;
+use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
+use Ehb\Application\Discovery\Module\Career\MarkMoment;
+use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Course;
+use Ehb\Application\Discovery\Module\CourseResults\Implementation\Bamaflex\CourseResult;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\Module\Career\DataManager;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Discovery\Module\Career\DataManager;
 
 class Enrollment extends \Ehb\Application\Discovery\Module\Enrollment\Enrollment
 {

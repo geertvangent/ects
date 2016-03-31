@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Discovery\Module\StudentYear;
 
-use Ehb\Application\Discovery\DiscoveryItem;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Discovery\DiscoveryItem;
 
 /**
  * application.discovery.module.student_year.implementation.bamaflex

@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Filter;
 
-use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
-use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\DocumentListData;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\Type\DocumentListData;
+use Ehb\Application\Discovery\Module\Elo\Implementation\Chamilo\TypeDataFilter;
 
 class DocumentListDataFilter extends TypeDataFilter
 {

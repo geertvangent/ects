@@ -2,10 +2,10 @@
 namespace Ehb\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex;
 
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 class SettingsConnector

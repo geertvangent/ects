@@ -2,9 +2,9 @@
 namespace Ehb\Application\Weblcms\Tool\Implementation\Assignment\Renderer\Entity;
 
 use Chamilo\Core\Repository\ContentObject\Assignment\Display\Renderer\EntityRenderer;
-use Chamilo\Libraries\Storage\DataManager\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\DataManager\DataManager;
 
 /**
  *

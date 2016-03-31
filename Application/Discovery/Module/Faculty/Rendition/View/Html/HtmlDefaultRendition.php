@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Faculty\Rendition\View\Html;
 
-use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
+use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Table\Password;
 
-use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
+use Chamilo\Libraries\Platform\Translation;
 
 class PasswordTableCellRenderer extends DataClassTableCellRenderer
 {

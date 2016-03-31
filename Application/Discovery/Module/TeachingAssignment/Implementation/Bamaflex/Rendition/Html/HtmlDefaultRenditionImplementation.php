@@ -1,10 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rendition\Html;
 
-use Ehb\Application\Discovery\LegendTable;
-use Ehb\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rendition\RenditionImplementation;
-use Ehb\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights;
-use Ehb\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
@@ -13,7 +10,10 @@ use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Ehb\Application\Discovery\LegendTable;
+use Ehb\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Ehb\Application\Discovery\Module\TeachingAssignment\Implementation\Bamaflex\Rights;
+use Ehb\Application\Discovery\SortableTable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

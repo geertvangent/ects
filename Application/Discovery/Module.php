@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Discovery;
 
-use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
@@ -14,7 +14,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\File\Path;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 
 /**
  *

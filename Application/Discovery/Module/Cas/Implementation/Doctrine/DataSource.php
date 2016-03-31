@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Ehb\Application\Discovery\Module\Cas\Implementation\Doctrine\Action;
 use Ehb\Application\Discovery\Module\Cas\Implementation\Doctrine\Application;
 use Ehb\Application\Discovery\Module\Cas\Implementation\Doctrine\CasCount;
 use Ehb\Application\Discovery\Module\Cas\Parameters;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Doctrine\DataSource
 {

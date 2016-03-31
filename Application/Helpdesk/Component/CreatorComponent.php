@@ -1,17 +1,12 @@
 <?php
 namespace Ehb\Application\Helpdesk\Component;
 
-// use Chamilo\Libraries\File\Path;
-// use Chamilo\Libraries\Format\Form\SymfonyFormFactoryBuilder;
-// use Chamilo\Libraries\Format\Twig\TwigEnvironmentFactory;
+
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Translation;
-// use Chamilo\Libraries\Translation\TranslatorFactory;
 use Ehb\Application\Helpdesk\Form\TicketForm;
-// use Ehb\Application\Helpdesk\Form\TicketFormType;
 use Ehb\Application\Helpdesk\Manager;
 use GuzzleHttp\Post\PostFile;
-// use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 // require_once Path :: getInstance()->getPluginPath() . 'pear/HTTP/Request2.php';
 class CreatorComponent extends Manager

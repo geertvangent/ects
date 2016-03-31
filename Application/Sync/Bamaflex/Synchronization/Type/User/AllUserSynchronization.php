@@ -5,15 +5,15 @@ namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\User;
  *
  * @package ehb.sync;
  */
-use Chamilo\Core\User\Storage\DataClass\User;
-use Ehb\Application\Sync\Bamaflex\Synchronization\Type\UserSynchronization;
-use Chamilo\Core\User\Storage\DataClass\UserSetting;
 use Chamilo\Configuration\Storage\DataClass\Setting;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Core\User\Storage\DataClass\UserSetting;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\UserSynchronization;
 
 class AllUserSynchronization extends UserSynchronization
 {

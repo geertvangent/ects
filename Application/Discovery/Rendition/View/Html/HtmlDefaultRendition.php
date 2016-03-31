@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Discovery\Rendition\View\Html;
 
-use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
 
 class HtmlDefaultRendition extends HtmlRendition
 {

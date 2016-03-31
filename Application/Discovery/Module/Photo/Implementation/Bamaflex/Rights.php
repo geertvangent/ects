@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\RightsGroupEntityRight;
 use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
 use Chamilo\Core\Rights\Entity\UserEntity;
 use Chamilo\Libraries\Platform\Session\Session;
@@ -12,6 +11,7 @@ use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Discovery\RightsGroupEntityRight;
 
 class Rights
 {

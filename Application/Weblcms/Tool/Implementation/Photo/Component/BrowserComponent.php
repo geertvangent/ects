@@ -1,17 +1,17 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Photo\Component;
 
-use Ehb\Application\Weblcms\Tool\Implementation\Photo\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
-use Ehb\Application\Discovery\AccessAllowedInterface;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Ehb\Application\Discovery\AccessAllowedInterface;
+use Ehb\Application\Weblcms\Tool\Implementation\Photo\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Photo\Module;
-use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Platform\Translation;
 
 /**
  *

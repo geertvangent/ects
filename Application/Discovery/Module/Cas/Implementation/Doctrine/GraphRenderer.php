@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Cas\Implementation\Doctrine;
 
-use Ehb\Application\Discovery\Module\Cas\DataManager;
-use Ehb\Application\Discovery\SortableTable;
+use Chamilo\Core\Reporting\Viewer\Chart\pChamiloImage;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Core\Reporting\Viewer\Chart\pChamiloImage;
+use Ehb\Application\Discovery\Module\Cas\DataManager;
+use Ehb\Application\Discovery\SortableTable;
 
 class GraphRenderer
 {

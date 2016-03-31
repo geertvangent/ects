@@ -1,6 +1,17 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\Html;
 
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\Format\Display;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\PropertiesTable;
+use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
+use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Discovery\AccessAllowedInterface;
 use Ehb\Application\Discovery\LegendTable;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\ActivityDescription;
@@ -19,17 +30,6 @@ use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Parameters;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Rendition\RenditionImplementation;
 use Ehb\Application\Discovery\Module\Course\Implementation\Bamaflex\Rights;
 use Ehb\Application\Discovery\SortableTable;
-use Chamilo\Libraries\Format\Display;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Structure\ToolbarItem;
-use Chamilo\Libraries\Format\Table\PropertiesTable;
-use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
-use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

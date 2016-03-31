@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Discovery\Rendition\View\Html;
 
-use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
-use Ehb\Application\Discovery\Rendition\RenditionImplementation;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\Properties\FileProperties;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
+use Ehb\Application\Discovery\Rendition\RenditionImplementation;
 
 class HtmlXlsxRendition extends HtmlRendition
 {

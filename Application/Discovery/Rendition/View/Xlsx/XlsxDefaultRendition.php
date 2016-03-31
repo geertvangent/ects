@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Discovery\Rendition\View\Xlsx;
 
-use Ehb\Application\Discovery\Rendition\Format\XlsxRendition;
+use Chamilo\Libraries\File\Export\Excel\ExcelExport;
 use Chamilo\Libraries\File\Filesystem;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\File\Export\Excel\ExcelExport;
+use Ehb\Application\Discovery\Rendition\Format\XlsxRendition;
 
 class XlsxDefaultRendition extends XlsxRendition
 {

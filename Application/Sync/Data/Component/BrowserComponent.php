@@ -4,8 +4,8 @@ namespace Ehb\Application\Sync\Data\Component;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Ehb\Application\Sync\Data\Manager;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Sync\Data\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

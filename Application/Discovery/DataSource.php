@@ -2,8 +2,8 @@
 namespace Ehb\Application\Discovery;
 
 use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Storage\DataManager\Doctrine\Database;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Storage\DataManager\Doctrine\Database;
 
 class DataSource extends Database
 {
