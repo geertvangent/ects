@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\PublicationList\Type;
 
-use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
 use Chamilo\Core\Repository\Common\Rendition\ContentObjectRendition;
 use Chamilo\Core\Repository\Common\Rendition\ContentObjectRenditionImplementation;
 use Chamilo\Libraries\Format\Display;
@@ -11,6 +10,7 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
 
 class SlideshowContentObjectPublicationListRenderer extends ContentObjectPublicationListRenderer
 {

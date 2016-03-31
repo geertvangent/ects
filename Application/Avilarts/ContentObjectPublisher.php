@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts;
 
-use Ehb\Application\Avilarts\Form\ContentObjectPublicationForm;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Repository\RepositoryRights;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
@@ -12,6 +10,8 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Form\ContentObjectPublicationForm;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 /**
  * This class represents a publisher which shows the selected content objects and the publication form

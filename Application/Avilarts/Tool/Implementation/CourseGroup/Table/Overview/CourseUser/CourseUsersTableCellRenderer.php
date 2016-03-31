@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\Overview\CourseUser;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableCellRenderer;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 
 /**
  * Cell renderer for the course users table

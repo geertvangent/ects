@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Ajax\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -13,6 +11,8 @@ use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 
 class XmlCourseUserFeedComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {

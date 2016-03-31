@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Form;
 
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Manager;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
+use Ehb\Application\Avilarts\Manager;
 
 /**
  * $Id: group_move_form.class.php 224 2010-04-06 14:40:30Z yannick $

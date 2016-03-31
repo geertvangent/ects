@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Reporting\ReportingBlock;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
@@ -14,6 +11,9 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 abstract class CourseBlock extends ReportingBlock
 {

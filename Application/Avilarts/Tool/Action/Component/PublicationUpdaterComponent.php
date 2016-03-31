@@ -1,15 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Form\ContentObjectPublicationForm;
-
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Form\ContentObjectPublicationForm;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Tool\Action\Manager;
 
 /**
  * Shows the publication update form

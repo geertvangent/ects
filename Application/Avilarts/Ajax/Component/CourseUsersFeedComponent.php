@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Ajax\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
@@ -17,6 +14,9 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
 
 /**
  * Feed to return users of this course

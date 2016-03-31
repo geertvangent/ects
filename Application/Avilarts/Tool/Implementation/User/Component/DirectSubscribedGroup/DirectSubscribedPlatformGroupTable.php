@@ -2,12 +2,12 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\DirectSubscribedGroup;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTable;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormActions;
 use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * Table to display a list of groups directly subscribed to a course.

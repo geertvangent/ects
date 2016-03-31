@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Table\CourseTable;
 
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
 
 /**
  * This class describes the column model for the course table

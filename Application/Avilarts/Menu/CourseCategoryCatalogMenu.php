@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Menu;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Format\Menu\CollapsedTreeMenuRenderer;
@@ -11,6 +8,9 @@ use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Storage\DataManager;
 use HTML_Menu;
 use HTML_Menu_ArrayRenderer;
 

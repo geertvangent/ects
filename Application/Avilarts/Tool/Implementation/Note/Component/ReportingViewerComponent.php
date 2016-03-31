@@ -3,10 +3,10 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\Note\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Ehb\Application\Avilarts\Tool\Implementation\Note\Manager;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\Note\Manager;
 
 class ReportingViewerComponent extends Manager implements DelegateComponent
 {

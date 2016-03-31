@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Table\Publication\Gallery;
 
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Repository\Common\Rendition\ContentObjectRendition;
 use Chamilo\Core\Repository\Common\Rendition\ContentObjectRenditionImplementation;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Table\Extension\GalleryTable\Extension\RecordGalleryTable\RecordGalleryTableCellRenderer;
 use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 /**
  * Cell renderer for the content object publications gallery table

@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Calendar;
 
-use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
 use Chamilo\Core\Repository\ContentObject\CalendarEvent\Storage\DataClass\CalendarEvent;
+use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
 
 abstract class Manager extends \Ehb\Application\Avilarts\Tool\Manager
 {

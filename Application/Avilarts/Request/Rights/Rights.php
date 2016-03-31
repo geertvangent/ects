@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Rights;
 
-use Ehb\Application\Avilarts\Request\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Group\Storage\DataManager;
 use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
@@ -16,6 +15,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Request\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
 
 class Rights extends RightsUtil
 {

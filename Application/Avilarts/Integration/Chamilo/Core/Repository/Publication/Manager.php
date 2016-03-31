@@ -1,22 +1,22 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Repository\Publication;
 
+use Chamilo\Configuration\Configuration;
+use Chamilo\Core\Repository\Publication\Location\Locations;
+use Chamilo\Core\Repository\Publication\LocationSupport;
+use Chamilo\Core\Repository\Publication\PublicationInterface;
+use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Platform\Session\Session;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
 use Ehb\Application\Avilarts\Storage\DataManager;
-use Chamilo\Configuration\Configuration;
-use Chamilo\Core\Repository\Publication\LocationSupport;
-use Chamilo\Core\Repository\Publication\Location\Locations;
-use Chamilo\Core\Repository\Publication\PublicationInterface;
-use Chamilo\Libraries\Platform\Session\Session;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
-use Chamilo\Libraries\Utilities\DatetimeUtilities;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 class Manager implements PublicationInterface
 {

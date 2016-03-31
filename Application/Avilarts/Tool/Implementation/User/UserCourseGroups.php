@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
 
 class UserCourseGroups
 {

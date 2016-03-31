@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\ToolList\Type;
 
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 
 /**
  * $Id: shortcut_tool_list_renderer.class.php 216 2009-11-13 14:08:06Z kariboe $

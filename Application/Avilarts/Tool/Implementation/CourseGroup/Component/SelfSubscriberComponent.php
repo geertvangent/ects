@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
-use Chamilo\Libraries\Platform\Translation;
 
 /**
  * $Id: course_group_self_subscriber.class.php 216 2009-11-13 14:08:06Z kariboe $

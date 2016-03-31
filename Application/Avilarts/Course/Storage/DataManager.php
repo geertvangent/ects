@@ -1,19 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Storage;
 
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseRelCourseSetting;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseRelCourseSettingValue;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Course\Storage\DataManager\Implementation\DoctrineExtension;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
@@ -38,6 +25,19 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\ResultSet\EmptyResultSet;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseRelCourseSetting;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseRelCourseSettingValue;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Ehb\Application\Avilarts\Course\Storage\DataManager\Implementation\DoctrineExtension;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
 
 /**
  * This class represents the data manager for this package

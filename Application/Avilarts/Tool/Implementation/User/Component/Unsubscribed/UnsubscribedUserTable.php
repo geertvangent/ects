@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\Unsubscribed;
 
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormActions;
 use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * * *************************************************************************** Table to display a list of users not in

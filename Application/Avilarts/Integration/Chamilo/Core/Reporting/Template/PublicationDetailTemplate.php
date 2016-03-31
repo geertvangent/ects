@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Publication\PublicationAccessBlock;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Reporting\ReportingTemplate;
 use Chamilo\Libraries\Architecture\Exceptions\ObjectNotExistException;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Publication\PublicationAccessBlock;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 /**
  * $Id: publication_detail_reporting_template.class.php 216 2009-11-13 14:08:06Z kariboe $

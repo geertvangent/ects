@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Table\Publication\Table;
 
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableDataProvider;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * DataProvider for the object publication table

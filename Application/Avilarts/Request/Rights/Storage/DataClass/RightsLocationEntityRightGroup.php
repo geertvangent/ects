@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Rights\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Request\Rights\Storage\DataManager;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Ehb\Application\Avilarts\Request\Rights\Storage\DataManager;
 
 /**
  *

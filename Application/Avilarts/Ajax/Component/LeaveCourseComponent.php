@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Ajax\Component;
 
+use Chamilo\Core\Tracking\Storage\DataClass\Event;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
 use Ehb\Application\Avilarts\Manager;
-use Chamilo\Core\Tracking\Storage\DataClass\Event;
 
 /**
  * Tracks the time when a course is left

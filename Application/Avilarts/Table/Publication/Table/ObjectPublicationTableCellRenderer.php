@@ -1,13 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Table\Publication\Table;
 
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
-use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
-use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Architecture\Interfaces\ComplexContentObjectSupport;
@@ -16,8 +9,15 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupp
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
+use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
+use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
 use Exception;
 
 /**

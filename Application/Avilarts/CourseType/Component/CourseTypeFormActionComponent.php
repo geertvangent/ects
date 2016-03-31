@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Component;
 
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Avilarts\CourseType\Form\CourseTypeForm;
 use Ehb\Application\Avilarts\CourseType\Manager;
 use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
 use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * This class describes an form action for the course type

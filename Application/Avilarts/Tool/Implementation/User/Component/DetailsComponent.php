@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
-use Ehb\Application\Avilarts\Tool\Implementation\User\UserCourseGroups;
 use Chamilo\Core\User\UserDetails;
 use Chamilo\Core\User\UserGroups;
 use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
+use Ehb\Application\Avilarts\Tool\Implementation\User\UserCourseGroups;
 
 /**
  * $Id: user_details.class.php 216 2009-11-13 14:08:06Z kariboe $

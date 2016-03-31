@@ -1,6 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template;
 
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Core\Reporting\ReportingTemplate;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Platform\Session\Request;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentCourseGroupInformationBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentPlatformGroupInformationBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentSubmitterSubmissionsBlock;
@@ -8,10 +12,6 @@ use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
-use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Core\Reporting\ReportingTemplate;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Platform\Session\Request;
 
 /**
  *

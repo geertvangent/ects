@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Component;
 
-use Ehb\Application\Avilarts\CourseType\Manager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\CourseType\Manager;
 
 /**
  * This class describes an action to move a course type (change the display order). This class should be implemented to

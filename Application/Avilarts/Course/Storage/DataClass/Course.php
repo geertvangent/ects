@@ -1,19 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Storage\DataClass;
 
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
-use Ehb\Application\Avilarts\Course\Storage\DataManager;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseModuleLastAccess;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategoryRelCourse;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
@@ -24,6 +11,19 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataManager;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseModuleLastAccess;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategoryRelCourse;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 
 /**
  * This class represents a course in the weblcms.

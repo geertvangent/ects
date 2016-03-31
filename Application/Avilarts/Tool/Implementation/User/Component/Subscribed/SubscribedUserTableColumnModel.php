@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\Subscribed;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 
 /**
  * Table column model for a direct subscribed course user browser table, or

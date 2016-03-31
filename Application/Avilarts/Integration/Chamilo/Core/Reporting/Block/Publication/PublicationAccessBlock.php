@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Publication;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\ToolBlock;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\ToolBlock;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 class PublicationAccessBlock extends ToolBlock
 {

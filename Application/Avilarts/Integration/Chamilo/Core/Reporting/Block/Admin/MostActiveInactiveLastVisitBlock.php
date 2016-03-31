@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin;
 
+use Chamilo\Core\Reporting\ReportingData;
+use Chamilo\Core\Reporting\Viewer\Rendition\Block\Type\Html;
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
-use Chamilo\Core\Reporting\ReportingData;
-use Chamilo\Core\Reporting\Viewer\Rendition\Block\Type\Html;
-use Chamilo\Libraries\Platform\Translation;
 
 class MostActiveInactiveLastVisitBlock extends CourseBlock
 {

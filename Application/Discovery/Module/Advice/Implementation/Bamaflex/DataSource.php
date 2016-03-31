@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Advice\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\Module\Advice\Implementation\Bamaflex\Advice;
-use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
@@ -11,6 +9,8 @@ use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Doctrine\DBAL\Driver\PDOStatement;
+use Ehb\Application\Discovery\Module\Advice\Implementation\Bamaflex\Advice;
+use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {

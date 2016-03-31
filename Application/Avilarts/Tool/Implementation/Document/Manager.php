@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Document;
 
-use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Repository\ContentObject\File\Storage\DataClass\File;
 use Chamilo\Core\Repository\ContentObject\Matterhorn\Storage\DataClass\Matterhorn;
 use Chamilo\Core\Repository\ContentObject\Page\Storage\DataClass\Page;
@@ -12,6 +10,8 @@ use Chamilo\Libraries\Architecture\Interfaces\Categorizable;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 /**
  * $Id: document_tool.class.php 216 2009-11-13 14:08:06Z kariboe $

@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Form;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 
 /**
  * $Id: course_type_select_form.class.php 2 2010-02-25 11:43:06Z Yannick &

@@ -2,11 +2,11 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\Reporting\Component;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager;
 use Exception;
 
 /**

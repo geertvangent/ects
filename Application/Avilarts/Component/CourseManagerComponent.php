@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
+use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
+use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Ehb\Application\Avilarts\Course\Interfaces\CourseSubManagerSupport;
 use Ehb\Application\Avilarts\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
-use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 
 /**
  * This class represents a component that runs the course type submanager

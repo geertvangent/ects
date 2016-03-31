@@ -1,13 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseCopier\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseCopier\Forms\CourseCopierForm;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseCopier\Manager;
 use Chamilo\Core\Rights\RightsLocation;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
@@ -22,6 +15,13 @@ use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseCopier\Forms\CourseCopierForm;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseCopier\Manager;
 
 /*
  * This tool is for copying information from othe current course to another @author Mattias De Pauw - Hogeschool Gent

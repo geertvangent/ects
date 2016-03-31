@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
-use Ehb\Application\Avilarts\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
+use Ehb\Application\Avilarts\Manager;
 
 class RequestComponent extends Manager /* implements DelegateComponent */
 {

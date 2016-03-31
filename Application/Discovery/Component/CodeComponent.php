@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Discovery\Component;
 
-use Ehb\Application\Discovery\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Discovery\Manager;
 
 /**
  *

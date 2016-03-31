@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Table\CourseTable;
 
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
@@ -11,6 +9,8 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupp
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
 
 /**
  * This class describes the default cell renderer for the course table

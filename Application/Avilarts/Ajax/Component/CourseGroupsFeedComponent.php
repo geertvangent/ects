@@ -1,11 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Ajax\Component;
 
-use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
-use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
-use Ehb\Application\Avilarts\Storage\DataManager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroupUserRelation;
 use Chamilo\Libraries\Ajax\Component\GroupsFeedComponent;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
 use Chamilo\Libraries\Platform\Session\Request;
@@ -16,6 +11,11 @@ use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Rights\Entities\CourseGroupEntity;
+use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
+use Ehb\Application\Avilarts\Storage\DataManager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroupUserRelation;
 
 /**
  * Feed to return the course groups of this course

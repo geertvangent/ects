@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\SubSubscribedGroup;
 
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * * ***************************************************************************

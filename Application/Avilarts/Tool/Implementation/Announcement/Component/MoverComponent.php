@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Announcement\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\Announcement\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Tool\Implementation\Announcement\Manager;
 
 class MoverComponent extends Manager
 {

@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\Listeners\DisplayOrderDataClassListener;
 use Chamilo\Libraries\Storage\DataClass\Listeners\DisplayOrderDataClassListenerSupport;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * $Id: content_object_publication_category.class.php 216 2009-11-13 14:08:06Z kariboe $

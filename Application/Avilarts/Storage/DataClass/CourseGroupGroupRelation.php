@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Storage\DataManager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Storage\DataManager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 
 /*
  * To change this template, choose Tools | Templates and open the template in the editor.

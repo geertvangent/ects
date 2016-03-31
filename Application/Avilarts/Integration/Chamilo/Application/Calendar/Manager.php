@@ -2,23 +2,23 @@
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Application\Calendar;
 
 use Chamilo\Application\Calendar\Architecture\CalendarInterface;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\Event;
-use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
-use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Repository\ContentObject\CalendarEvent\Storage\DataClass\CalendarEvent;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Condition\SubselectCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\Event;
+use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
+use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 class Manager implements CalendarInterface
 {

@@ -1,18 +1,18 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\CourseList\Type;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Renderer\CourseList\CourseListRenderer;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategory;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategoryRelCourse;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Renderer\CourseList\CourseListRenderer;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategory;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategoryRelCourse;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * Course list renderer to render the course list filtered by a given course type and user course category

@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Request;
 
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Chamilo\Libraries\Architecture\Application\Application;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 
 abstract class Manager extends Application
 {

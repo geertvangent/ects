@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Table\Request;
 
-use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
-use Ehb\Application\Avilarts\Request\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
+use Ehb\Application\Avilarts\Request\Storage\DataManager;
 
 class RequestTableDataProvider extends DataClassTableDataProvider
 {

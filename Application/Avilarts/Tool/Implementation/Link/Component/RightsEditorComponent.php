@@ -2,8 +2,8 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\Link\Component;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\Link\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Avilarts\Tool\Implementation\Link\Manager;
 
 class RightsEditorComponent extends Manager implements DelegateComponent
 {

@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Ajax\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 class XmlPublicationsTreeFeedComponent extends \Ehb\Application\Avilarts\Ajax\Manager
 {

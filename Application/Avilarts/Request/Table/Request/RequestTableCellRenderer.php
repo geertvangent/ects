@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Table\Request;
 
-use Ehb\Application\Avilarts\Request\Manager;
-use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
@@ -11,6 +9,8 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Request\Manager;
+use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
 
 class RequestTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

@@ -1,12 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Calendar\Component\CalendarViewer;
 
-use Ehb\Application\Avilarts\Renderer\PublicationList\Type\ListContentObjectPublicationListRenderer;
-
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Renderer\PublicationList\Type\ListContentObjectPublicationListRenderer;
 
 /**
  * $Id: calendar_list_renderer.class.php 216 2009-11-13 14:08:06Z kariboe $

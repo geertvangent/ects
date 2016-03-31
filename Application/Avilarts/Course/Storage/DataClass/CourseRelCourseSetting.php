@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Course\Storage\DataManager;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSettingRelation;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataManager;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSettingRelation;
 
 /**
  * This class describes the relation between a course and a course setting

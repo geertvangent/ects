@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Publication;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\ToolBlock;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Reporting\ReportingData;
+use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\ToolBlock;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 class PublicationDetailBlock extends ToolBlock
 {

@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Discovery\Component;
 
-use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
-use Ehb\Application\Discovery\Manager;
+use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
-use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
+use Ehb\Application\Discovery\Manager;
 
 class ModuleComponent extends Manager
 {

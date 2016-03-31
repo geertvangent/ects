@@ -1,13 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Rights;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Storage\DataClass\RightsLocation;
-use Ehb\Application\Avilarts\Storage\DataClass\RightsLocationEntityRight;
-use Ehb\Application\Avilarts\Storage\DataClass\RightsLocationLockedRight;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
 use Chamilo\Core\Rights\Entity\UserEntity;
@@ -21,6 +14,13 @@ use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Condition\OrCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Storage\DataClass\RightsLocation;
+use Ehb\Application\Avilarts\Storage\DataClass\RightsLocationEntityRight;
+use Ehb\Application\Avilarts\Storage\DataClass\RightsLocationLockedRight;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * Extension on the weblcms rights to define rights utilities for course management (courses / course types)

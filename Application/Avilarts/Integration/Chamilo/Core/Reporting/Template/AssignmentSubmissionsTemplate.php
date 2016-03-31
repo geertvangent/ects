@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentInformationBlock;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentSubmissionsBlock;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Reporting\ReportingTemplate;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentInformationBlock;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentSubmissionsBlock;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 /**
  * Description of assignment_submissions_reporting_template

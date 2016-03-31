@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSections;
 
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 
 /**
  * $Id: course_section_form.class.php 216 2009-11-13 14:08:06Z kariboe $

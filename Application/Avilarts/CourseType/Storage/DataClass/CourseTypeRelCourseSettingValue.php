@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Storage\DataClass;
 
-use Ehb\Application\Avilarts\CourseSettingsConnector;
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSettingValue;
 use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
 use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperty;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\CourseSettingsConnector;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSettingValue;
 
 /**
  * This class describes a value for the relation between a course type and a

@@ -1,13 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\UserExporter\CourseGroupUserExportExtender;
-use Ehb\Application\Avilarts\UserExporter\Renderer\ExcelUserExportRenderer;
-use Ehb\Application\Avilarts\UserExporter\UserExporter;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\File\Filesystem;
@@ -15,17 +8,24 @@ use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\UserExporter\CourseGroupUserExportExtender;
+use Ehb\Application\Avilarts\UserExporter\Renderer\ExcelUserExportRenderer;
+use Ehb\Application\Avilarts\UserExporter\UserExporter;
 use PHPExcel;
 use PHPExcel_IOFactory;
 use PHPExcel_Style_Alignment;
 use PHPExcel_Style_Color;
 use PHPExcel_Style_Font;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * Class To export users and course groups from a course

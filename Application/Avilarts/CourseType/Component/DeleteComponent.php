@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Component;
 
-use Ehb\Application\Avilarts\CourseType\Manager;
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
-use Ehb\Application\Avilarts\CourseType\Storage\DataManager;
 use Chamilo\Libraries\Architecture\Exceptions\ObjectNotExistException;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\CourseType\Manager;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
+use Ehb\Application\Avilarts\CourseType\Storage\DataManager;
 
 /**
  * This class describes an action to delete a course type

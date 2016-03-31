@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Form\CourseSettingsXmlFormParser;
 
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Interfaces\FormLockedSettingsSupport;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Format\Form\XmlFormParser;
 use Chamilo\Libraries\Format\Form\XmlFormParserResult;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Interfaces\FormLockedSettingsSupport;
 
 /**
  * This class extends the common settings xml form parser result to parse course settings with locked and frozen

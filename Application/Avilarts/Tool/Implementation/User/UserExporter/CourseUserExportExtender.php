@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\UserExporter;
 
-use Ehb\Application\Avilarts\Course\Storage\DataManager\Implementation\DoctrineExtension;
-use Ehb\Application\Avilarts\UserExporter\UserExportExtender;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Course\Storage\DataManager\Implementation\DoctrineExtension;
+use Ehb\Application\Avilarts\UserExporter\UserExportExtender;
 
 /**
  * Extends the user exporter with additional data for the user list (subscription type, status)

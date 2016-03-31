@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Discovery\DataSource\Component;
 
-use Ehb\Application\Discovery\DataSource\Storage\DataClass\Instance;
-use Ehb\Application\Discovery\DataSource\Storage\DataManager;
-use Ehb\Application\Discovery\DataSource\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Discovery\DataSource\Manager;
+use Ehb\Application\Discovery\DataSource\Storage\DataClass\Instance;
+use Ehb\Application\Discovery\DataSource\Storage\DataManager;
 
 class ActivatorComponent extends Manager
 {

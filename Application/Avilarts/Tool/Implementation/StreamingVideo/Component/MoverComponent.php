@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\StreamingVideo\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\StreamingVideo\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Tool\Implementation\StreamingVideo\Manager;
 
 class MoverComponent extends Manager
 {

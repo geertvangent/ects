@@ -1,10 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Connector;
 
-// use libraries\format\theme\Theme;
-// use libraries\format\structure\ToolbarItem;
-// use libraries\platform\translation\Translation;
-// use core\repository\storage\data_class\ContentObject;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Ehb\Application\Avilarts\Tool\Implementation\User\WeblcmsUserToolConnector;
 

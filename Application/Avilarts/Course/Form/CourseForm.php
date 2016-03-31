@@ -1,11 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Form;
 
-use Ehb\Application\Avilarts\CourseSettingsConnector;
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Form\CommonCourseForm;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
@@ -13,6 +8,11 @@ use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\CourseSettingsConnector;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Form\CommonCourseForm;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 
 /**
  * This class describes a form for the course object

@@ -1,12 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Tool;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\AssessmentScoresTemplate;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\AssignmentScoresTemplate;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\LearningPathProgressTemplate;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\ToolPublicationsDetailTemplate;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Repository\ContentObject\Assessment\Storage\DataClass\Assessment;
 use Chamilo\Core\Repository\ContentObject\Assignment\Storage\DataClass\Assignment;
 use Chamilo\Core\Repository\ContentObject\LearningPath\Storage\DataClass\LearningPath;
@@ -19,6 +13,12 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\AssessmentScoresTemplate;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\AssignmentScoresTemplate;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\LearningPathProgressTemplate;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\ToolPublicationsDetailTemplate;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 /**
  *

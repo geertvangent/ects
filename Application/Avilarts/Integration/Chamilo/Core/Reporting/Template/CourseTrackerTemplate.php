@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template;
 
+use Chamilo\Core\Reporting\ReportingTemplate;
+use Chamilo\Libraries\Platform\Session\Request;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assessment\AverageExerciseScoreBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\LearningPath\AverageLearningPathScoreBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Tool\LastAccessToToolsBlock;
-use Chamilo\Core\Reporting\ReportingTemplate;
-use Chamilo\Libraries\Platform\Session\Request;
 
 /**
  * $Id: course_tracker_reporting_template.class.php 216 2009-11-13 14:08:06Z kariboe $

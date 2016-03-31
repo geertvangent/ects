@@ -1,20 +1,20 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\CourseList;
 
-use Ehb\Application\Avilarts\CourseSettingsConnector;
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
+use Ehb\Application\Avilarts\CourseSettingsConnector;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * Course list renderer to render the course list (used in courses home, courses sorter, courses block...)

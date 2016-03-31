@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\Overview\GroupUser;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 
 /**
  * * ***************************************************************************

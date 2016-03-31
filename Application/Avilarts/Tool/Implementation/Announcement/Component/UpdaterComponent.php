@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Announcement\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\Announcement\Manager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\Announcement\Manager;
 
 class UpdaterComponent extends Manager
 {

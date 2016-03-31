@@ -1,17 +1,17 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Application\Calendar;
 
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
-use Chamilo\Application\Calendar\Service\AvailabilityService;
-use Chamilo\Application\Calendar\Repository\AvailabilityRepository;
-use Chamilo\Application\Calendar\Storage\DataClass\AvailableCalendar;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Application\Calendar\Storage\DataClass\Availability;
-use Chamilo\Configuration\Configuration;
 use Chamilo\Application\Calendar\Architecture\InternalCalendar;
+use Chamilo\Application\Calendar\Repository\AvailabilityRepository;
+use Chamilo\Application\Calendar\Service\AvailabilityService;
+use Chamilo\Application\Calendar\Storage\DataClass\Availability;
+use Chamilo\Application\Calendar\Storage\DataClass\AvailableCalendar;
+use Chamilo\Configuration\Configuration;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 
 /**
  *

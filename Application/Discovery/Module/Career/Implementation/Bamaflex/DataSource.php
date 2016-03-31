@@ -1,12 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex;
 
-use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\HistoryReference;
-use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
-use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
-use Ehb\Application\Discovery\Module\Career\MarkMoment;
-use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
-use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
+use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Storage\DataManager\Doctrine\Condition\ConditionTranslator;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
@@ -15,7 +10,12 @@ use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\StaticColumnConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Doctrine\DBAL\Driver\PDOStatement;
-use Chamilo\Core\User\Storage\DataClass\User;
+use Ehb\Application\Discovery\DataSource\Bamaflex\Storage\DataClass\HistoryReference;
+use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
+use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Mark;
+use Ehb\Application\Discovery\Module\Career\MarkMoment;
+use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
+use Ehb\Application\Discovery\Module\Training\Implementation\Bamaflex\Training;
 
 class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSource
 {

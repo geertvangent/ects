@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Ajax\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
-use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
-use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
 use Chamilo\Libraries\Ajax\Component\GroupsFeedComponent;
@@ -17,6 +14,9 @@ use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
+use Ehb\Application\Avilarts\Rights\Entities\CoursePlatformGroupEntity;
+use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
 
 /**
  * Feed to return the platform groups of this course

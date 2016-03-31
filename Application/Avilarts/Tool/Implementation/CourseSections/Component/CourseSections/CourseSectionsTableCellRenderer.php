@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Component\CourseSections;
 
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Manager;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
@@ -10,6 +8,8 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupp
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Manager;
 
 /**
  * $Id: course_sections_browser_table_cell_renderer.class.php 216 2009-11-13 14:08:06Z kariboe $

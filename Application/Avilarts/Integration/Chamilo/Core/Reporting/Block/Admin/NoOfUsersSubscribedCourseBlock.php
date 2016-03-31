@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBlock;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountDistinctParameters;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBlock;
 
 class NoOfUsersSubscribedCourseBlock extends CourseBlock
 {

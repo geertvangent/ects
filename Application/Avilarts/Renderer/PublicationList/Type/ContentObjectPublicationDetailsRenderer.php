@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\PublicationList\Type;
 
+use Chamilo\Libraries\Architecture\Interfaces\ComplexContentObjectSupport;
+use Chamilo\Libraries\Format\Theme;
 use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataManager;
-use Chamilo\Libraries\Architecture\Interfaces\ComplexContentObjectSupport;
-use Chamilo\Libraries\Format\Theme;
 
 /**
  * $Id: content_object_publication_details_renderer.class.php 216 2009-11-13

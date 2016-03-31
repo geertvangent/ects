@@ -1,10 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Tool;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\ToolBlock;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Redirect;
@@ -13,6 +9,10 @@ use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\ToolBlock;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
 
 /**
  * Base class to display the access to the tools ToolAccessBlock

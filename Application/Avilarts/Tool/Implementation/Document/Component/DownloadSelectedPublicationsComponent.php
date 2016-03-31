@@ -2,14 +2,14 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\Document\Component;
 
 
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 use Chamilo\Core\Repository\Common\Export\ContentObjectExport;
 use Chamilo\Core\Repository\Common\Export\ContentObjectExportController;
 use Chamilo\Core\Repository\Common\Export\ExportParameters;
 use Chamilo\Core\Repository\Common\Export\Zip\ZipContentObjectExport;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 
 /**
  * Will retrieve the selected publications and return a downloadable zip

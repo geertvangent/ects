@@ -1,16 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Menu;
 
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Format\Menu\OptionsMenuRenderer;
 use Chamilo\Libraries\Format\Menu\TreeMenuRenderer;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
@@ -18,9 +15,12 @@ use Chamilo\Libraries\Storage\Query\Condition\SubselectCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
+use Ehb\Application\Avilarts\Storage\DataManager;
 use HTML_Menu;
 use HTML_Menu_ArrayRenderer;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * $Id: content_object_publication_category_tree.class.php 216 2009-11-13 14:08:06Z kariboe $

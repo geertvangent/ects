@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Rights\Entities\Group;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Core\Rights\Editor\Table\LocationEntity\LocationEntityTableCellRenderer;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 
 /**
  * Cell renderer for the course group entity browser

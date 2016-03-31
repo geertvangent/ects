@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
 use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
 
 /**
  * $Id: user_tool.class.php 216 2009-11-13 14:08:06Z kariboe $

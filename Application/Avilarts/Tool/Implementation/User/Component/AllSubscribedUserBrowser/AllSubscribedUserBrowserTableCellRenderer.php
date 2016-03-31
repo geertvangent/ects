@@ -4,8 +4,6 @@ namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\AllSubscri
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
-use Ehb\Application\Avilarts\Tool\Implementation\User\Storage\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
@@ -15,6 +13,8 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Storage\DataManager;
 
 /**
  * Cell renderer for an all subscribed course user browser table.

@@ -2,7 +2,6 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\Subscribed;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
@@ -10,6 +9,7 @@ use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRe
 use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 
 /**
  * $Id: course_group_subscribed_user_browser_table_cell_renderer.class.php 216 2009-11-13 14:08:06Z kariboe $

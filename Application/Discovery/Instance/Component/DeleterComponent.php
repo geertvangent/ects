@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Discovery\Instance\Component;
 
-use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
-use Ehb\Application\Discovery\Instance\Storage\DataManager;
-use Ehb\Application\Discovery\Instance\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Discovery\Instance\Manager;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataManager;
 
 class DeleterComponent extends Manager
 {

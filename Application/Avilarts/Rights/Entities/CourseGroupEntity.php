@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Rights\Entities;
 
-use Ehb\Application\Avilarts\Storage\DataManager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
 use Chamilo\Core\Rights\Entity\NestedRightsEntity;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElement;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementType;
@@ -13,6 +10,9 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Avilarts\Storage\DataManager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
 
 /**
  * Class that describes the course groups for the rights editor

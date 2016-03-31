@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Ajax\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 
 /**
  * Ajax backing to retrieve details of a course group.

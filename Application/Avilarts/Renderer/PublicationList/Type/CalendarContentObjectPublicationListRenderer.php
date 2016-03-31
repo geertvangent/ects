@@ -1,13 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\PublicationList\Type;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\Event;
-use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
-use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataManager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Calendar\Event\Interfaces\ActionSupport;
@@ -21,13 +14,20 @@ use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\Event;
+use Ehb\Application\Avilarts\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
+use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataManager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 
 /**
  * $Id: week_calendar_content_object_publication_list_renderer.class.php 216 2009-11-13 14:08:06Z kariboe $

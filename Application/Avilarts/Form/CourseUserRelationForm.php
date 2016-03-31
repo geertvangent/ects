@@ -1,10 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Form;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -16,6 +12,10 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * $Id: course_user_relation_form.class.php 216 2009-11-13 14:08:06Z kariboe $

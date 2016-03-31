@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
-use Ehb\Application\Avilarts\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Ehb\Application\Avilarts\Manager;
 
 /**
  * This class represents a component that runs the course type submanager

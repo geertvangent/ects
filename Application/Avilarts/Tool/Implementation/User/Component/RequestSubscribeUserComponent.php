@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Form\CourseRequestForm;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Form\CourseRequestForm;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * $Id: request.class.php 224 2010-04-06 14:40:30Z Yannick $

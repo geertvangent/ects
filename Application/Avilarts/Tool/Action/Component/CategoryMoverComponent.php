@@ -1,10 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
-use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
@@ -15,6 +11,10 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
+use Ehb\Application\Avilarts\Tool\Action\Manager;
 
 /**
  * $Id: move_selected_to_category.class.php 216 2009-11-13 14:08:06Z kariboe $

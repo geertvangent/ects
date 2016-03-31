@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Home\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\Home\Manager;
-use Ehb\Application\Avilarts\Tool\Implementation\Home\Storage\DataManager;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\Home\Manager;
+use Ehb\Application\Avilarts\Tool\Implementation\Home\Storage\DataManager;
 
 class ToolVisibilityChangerComponent extends Manager
 {

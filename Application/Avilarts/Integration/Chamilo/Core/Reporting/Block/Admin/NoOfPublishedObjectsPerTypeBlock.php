@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBlock;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Core\Reporting\Viewer\Rendition\Block\Type\Html;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBlock;
 
 class NoOfPublishedObjectsPerTypeBlock extends CourseBlock
 {

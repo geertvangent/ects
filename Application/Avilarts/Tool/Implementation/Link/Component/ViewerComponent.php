@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Link\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\Link\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Avilarts\Tool\Implementation\Link\Manager;
 
 /**
  * $Id: Link_viewer.class.php 216 2009-11-13 14:08:06Z kariboe $

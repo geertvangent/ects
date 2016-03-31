@@ -1,6 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template;
 
+use Chamilo\Core\Reporting\ReportingTemplate;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin\CoursesPerCategoryBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin\MostActiveInactiveLastDetailBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin\MostActiveInactiveLastPublicationBlock;
@@ -9,7 +10,6 @@ use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin\NoOf
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin\NoOfCoursesByLanguageBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin\NoOfUsersSubscribedCourseBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Tool\LastAccessToToolsPlatformBlock;
-use Chamilo\Core\Reporting\ReportingTemplate;
 
 /**
  * $Id: course_data_reporting_template.class.php 216 2009-11-13 14:08:06Z kariboe $

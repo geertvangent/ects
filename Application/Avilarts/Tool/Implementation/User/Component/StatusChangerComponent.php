@@ -1,16 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\UserStatusChange;
-
 use Chamilo\Core\Tracking\Storage\DataClass\Event;
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\UserStatusChange;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 abstract class StatusChangerComponent extends Manager
 {

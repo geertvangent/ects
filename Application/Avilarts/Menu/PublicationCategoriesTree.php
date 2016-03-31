@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Menu;
 
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Menu\TreeMenu\GenericTree;
@@ -15,6 +12,9 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $

@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Table\CourseTable;
 
-use Ehb\Application\Avilarts\Course\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableDataProvider;
+use Ehb\Application\Avilarts\Course\Storage\DataManager;
 
 /**
  * This class describes a data provider for the course table

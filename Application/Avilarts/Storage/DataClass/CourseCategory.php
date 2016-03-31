@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Configuration\Category\Storage\DataClass\PlatformCategory;
 use Chamilo\Libraries\Storage\DataClass\Listeners\DisplayOrderDataClassListener;
 use Chamilo\Libraries\Storage\DataClass\Listeners\DisplayOrderDataClassListenerSupport;
@@ -11,6 +9,8 @@ use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperty;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * $Id: course_category.class.php 216 2009-11-13 14:08:06Z kariboe $

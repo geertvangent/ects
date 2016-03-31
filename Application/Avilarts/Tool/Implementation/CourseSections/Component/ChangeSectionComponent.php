@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Component;
 
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Manager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Storage\DataManager;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Translation;
 use HTML_Table;
 
 /**

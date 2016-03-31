@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Component;
 
-use Ehb\Application\Avilarts\Course\Table\SubscribedCourse\SubscribedCourseTable;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
+use Ehb\Application\Avilarts\Course\Table\SubscribedCourse\SubscribedCourseTable;
 
 /**
  * This class describes a browser for the subscribed courses

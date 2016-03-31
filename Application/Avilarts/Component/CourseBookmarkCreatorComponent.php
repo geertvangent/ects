@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
-use Ehb\Application\Avilarts\Manager;
 use Chamilo\Core\Repository\ContentObject\Bookmark\Form\BookmarkForm;
 use Chamilo\Core\Repository\ContentObject\Bookmark\Storage\DataClass\Bookmark;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Format\Structure\Page;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Format\Structure\Page;
+use Ehb\Application\Avilarts\Manager;
 
 /**
  * Component to create a bookmark for a course

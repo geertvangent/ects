@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSettings\Component;
 
-use Ehb\Application\Avilarts\Course\Interfaces\CourseSubManagerSupport;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseSettings\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Course\Interfaces\CourseSubManagerSupport;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseSettings\Manager;
 
 /**
  * $Id: course_settings_updater.class.php 216 2009-11-13 14:08:06Z kariboe $

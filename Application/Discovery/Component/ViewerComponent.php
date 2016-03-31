@@ -1,12 +1,6 @@
 <?php
 namespace Ehb\Application\Discovery\Component;
 
-use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
-use Ehb\Application\Discovery\LegendTable;
-use Ehb\Application\Discovery\Manager;
-use Ehb\Application\Discovery\Module;
-use Ehb\Application\Discovery\Rendition\Rendition;
-use Ehb\Application\Discovery\Rendition\RenditionImplementation;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
@@ -22,6 +16,12 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
+use Ehb\Application\Discovery\LegendTable;
+use Ehb\Application\Discovery\Manager;
+use Ehb\Application\Discovery\Module;
+use Ehb\Application\Discovery\Rendition\Rendition;
+use Ehb\Application\Discovery\Rendition\RenditionImplementation;
 
 /**
  *

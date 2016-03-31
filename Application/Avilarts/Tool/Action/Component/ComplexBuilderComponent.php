@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Tool\Action\Manager;
 use Chamilo\Core\Repository\RepositoryRights;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Tool\Action\Manager;
 
 /**
  * $Id: complex_builder.class.php 216 2009-11-13 14:08:06Z kariboe $

@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\CourseGroup;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 
 /**
  * $Id: course_group_subscribed_user_browser_table_column_model.class.php 216

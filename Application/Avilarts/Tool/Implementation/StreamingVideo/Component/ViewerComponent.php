@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\StreamingVideo\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\StreamingVideo\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Avilarts\Tool\Implementation\StreamingVideo\Manager;
 
 class ViewerComponent extends Manager implements DelegateComponent
 {

@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
@@ -12,6 +9,9 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * Simple connector class to facilitate rendering course settings

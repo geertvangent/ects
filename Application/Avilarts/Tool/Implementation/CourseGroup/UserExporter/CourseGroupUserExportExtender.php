@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\UserExporter;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
-use Ehb\Application\Avilarts\UserExporter\UserExportExtender;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
+use Ehb\Application\Avilarts\UserExporter\UserExportExtender;
 
 /**
  * Extends the user exporter with additional data for the course groups

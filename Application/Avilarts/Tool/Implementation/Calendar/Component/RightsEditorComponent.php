@@ -2,8 +2,8 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\Calendar\Component;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\Calendar\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Avilarts\Tool\Implementation\Calendar\Manager;
 
 class RightsEditorComponent extends Manager implements DelegateComponent
 {

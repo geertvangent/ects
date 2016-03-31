@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Table\AdminRequest;
 
-use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * $Id: admin_course_type_browser_table_data_provider.class.php 218 2010-03-10 14:21:26Z yannick $

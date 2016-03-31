@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseDeleter\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseDeleter\Forms\CourseDeleterForm;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseDeleter\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseDeleter\Forms\CourseDeleterForm;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseDeleter\Manager;
 
 /**
  * this component is used to delete a course

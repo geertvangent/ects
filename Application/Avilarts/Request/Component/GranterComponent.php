@@ -1,18 +1,18 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Component;
 
-use Ehb\Application\Avilarts\CourseSettingsConnector;
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Request\Manager;
-use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
-use Ehb\Application\Avilarts\Request\Storage\DataManager;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Mail\Mail;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\CourseSettingsConnector;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Request\Manager;
+use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
+use Ehb\Application\Avilarts\Request\Storage\DataManager;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 
 class GranterComponent extends Manager
 {

@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Table\AdminRequest;
 
-use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
 
 /**
  * $Id: admin_course_type_browser_table_column_model.class.php 218 2010-03-10 14:21:26Z yannick $

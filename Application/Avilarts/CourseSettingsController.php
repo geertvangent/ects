@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts;
 
+use Chamilo\Libraries\Architecture\Exceptions\ObjectNotExistException;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Cache\RecordResultSetCache;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSettingDefaultValue;
 use Ehb\Application\Avilarts\Storage\DataManager;
-use Chamilo\Libraries\Architecture\Exceptions\ObjectNotExistException;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Cache\RecordResultSetCache;
-use Chamilo\Libraries\Storage\DataClass\DataClass;
-use Chamilo\Libraries\File\Path;
 
 /**
  * Controller for the course settings With this class you can - Install course settings for a given installer by parsing

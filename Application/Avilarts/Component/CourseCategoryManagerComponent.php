@@ -1,14 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
-use Ehb\Application\Avilarts\Form\CategoryForm;
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseCategory;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Configuration\Category\Interfaces\CategorySupport;
 use Chamilo\Libraries\Architecture\Application\Application;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\File\Redirect;
@@ -18,6 +14,10 @@ use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Form\CategoryForm;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseCategory;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * Weblcms component allows the user to manage course categories

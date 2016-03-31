@@ -1,22 +1,22 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSections;
 
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseToolRelCourseSection;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Storage\DataManager;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseToolRelCourseSection;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Storage\DataManager;
 
 /**
  * $Id: course_section_tool_selector_form.class.php 216 2009-11-13 14:08:06Z kariboe $

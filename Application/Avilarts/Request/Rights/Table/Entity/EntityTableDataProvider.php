@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Rights\Table\Entity;
 
-use Ehb\Application\Avilarts\Request\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
-use Ehb\Application\Avilarts\Request\Rights\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Request\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
+use Ehb\Application\Avilarts\Request\Rights\Storage\DataManager;
 
 class EntityTableDataProvider extends DataClassTableDataProvider
 {

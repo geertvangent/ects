@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 
 /**
  * This class describes an action to create a course

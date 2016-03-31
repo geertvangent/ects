@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\UserExporter\Renderer;
 
-use Ehb\Application\Avilarts\UserExporter\UserExportRenderer;
 use Chamilo\Libraries\File\Path;
+use Ehb\Application\Avilarts\UserExporter\UserExportRenderer;
 
 /**
  * Renders the exported user array as an excel file

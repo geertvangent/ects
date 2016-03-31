@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer;
 
+use Chamilo\Core\Repository\Common\ContentObjectDescriptionRenderer;
 use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Chamilo\Core\Repository\Common\ContentObjectDescriptionRenderer;
 
 /**
  * This class renders the description of a given content object publication.

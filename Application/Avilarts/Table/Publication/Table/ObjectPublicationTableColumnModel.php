@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Table\Publication\Table;
 
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 /**
  * The TableColumnModel for the object publication table

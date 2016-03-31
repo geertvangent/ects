@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Storage;
 
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseTypeUserOrder;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
@@ -16,6 +14,8 @@ use Chamilo\Libraries\Storage\Query\Joins;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseTypeUserOrder;
 
 /**
  * This class represents the data manager for this package

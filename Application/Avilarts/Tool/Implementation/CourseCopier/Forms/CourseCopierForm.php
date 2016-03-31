@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseCopier\Forms;
 
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -11,6 +9,8 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 
 /**
  * This form can let the user select the sections and publications of a course for copying them to another course them.

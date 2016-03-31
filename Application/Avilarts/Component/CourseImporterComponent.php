@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
-use Ehb\Application\Avilarts\Form\CourseImportForm;
-use Ehb\Application\Avilarts\Manager;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
@@ -10,7 +8,8 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Structure\Page;
+use Ehb\Application\Avilarts\Form\CourseImportForm;
+use Ehb\Application\Avilarts\Manager;
 
 class CourseImporterComponent extends Manager
 {

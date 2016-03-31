@@ -1,18 +1,18 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
+use Chamilo\Configuration\Configuration;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 use Chamilo\Libraries\Authentication\AuthenticationValidator;
 use Chamilo\Libraries\Authentication\QueryAuthentication;
-use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Calendar\Renderer\Type\ICalRenderer;
 use Chamilo\Libraries\File\Redirect;
-use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
-use Chamilo\Libraries\Calendar\Renderer\Type\ICalRenderer;
-use Chamilo\Configuration\Configuration;
 
 /**
  *

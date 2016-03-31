@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Discovery\Instance\Table\Instance;
 
-use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
-use Ehb\Application\Discovery\Instance\Storage\DataManager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataManager;
 
 class InstanceTableDataProvider extends DataClassTableDataProvider
 {

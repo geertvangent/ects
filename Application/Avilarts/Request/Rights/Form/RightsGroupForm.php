@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Rights\Form;
 
-use Ehb\Application\Avilarts\Request\Rights\Rights;
-use Ehb\Application\Avilarts\Request\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
-use Ehb\Application\Avilarts\Request\Rights\Storage\DataManager;
 use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
 use Chamilo\Core\Rights\Entity\UserEntity;
 use Chamilo\Libraries\Format\Form\Element\AdvancedElementFinder\AdvancedElementFinderElementTypes;
@@ -15,6 +12,9 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Request\Rights\Rights;
+use Ehb\Application\Avilarts\Request\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
+use Ehb\Application\Avilarts\Request\Rights\Storage\DataManager;
 
 class RightsGroupForm extends FormValidator
 {

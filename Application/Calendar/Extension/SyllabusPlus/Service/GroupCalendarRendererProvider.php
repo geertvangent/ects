@@ -2,9 +2,9 @@
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Service;
 
 use Chamilo\Configuration\Configuration;
+use Chamilo\Core\User\Storage\DataClass\User;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
-use Chamilo\Core\User\Storage\DataClass\User;
 
 /**
  *

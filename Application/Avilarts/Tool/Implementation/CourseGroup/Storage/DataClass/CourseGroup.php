@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\NestedTreeNode;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 
 /**
  * $Id: course_group.class.php 216 2009-11-13 14:08:06Z kariboe $

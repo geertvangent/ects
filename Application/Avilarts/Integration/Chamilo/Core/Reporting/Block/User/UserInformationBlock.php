@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\User;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\ToolBlock;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\ToolBlock;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
 
 class UserInformationBlock extends ToolBlock
 {

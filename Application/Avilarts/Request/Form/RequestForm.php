@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Form;
 
-use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Chamilo\Libraries\Format\Form\FormValidator;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 
 class RequestForm extends FormValidator
 {

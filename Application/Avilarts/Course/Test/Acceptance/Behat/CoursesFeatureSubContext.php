@@ -1,17 +1,16 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Test\Acceptance\Behat;
 
-use Ehb\Application\Avilarts\CourseSettingsConnector;
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Chamilo\Behat\Behat\Context\Context;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\StringUtilities;
-use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Ehb\Application\Avilarts\CourseSettingsConnector;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 
 /**
  * Weblcms application courses submanager subcontext

@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Component;
 
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Utilities\Utilities;
 use Ehb\Application\Avilarts\Request\Manager;
 use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
 use Ehb\Application\Avilarts\Request\Storage\DataManager;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
 
 class DeleterComponent extends Manager
 {

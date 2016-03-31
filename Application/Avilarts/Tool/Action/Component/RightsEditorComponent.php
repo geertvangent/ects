@@ -1,6 +1,18 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Action\Component;
 
+use Chamilo\Core\Group\Storage\DataClass\Group;
+use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
+use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
@@ -10,18 +22,6 @@ use Ehb\Application\Avilarts\Rights\Entities\CourseUserEntity;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
 use Ehb\Application\Avilarts\Tool\Action\Manager;
-use Chamilo\Core\Group\Storage\DataClass\Group;
-use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
-use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
-use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Utilities\StringUtilities;
 
 /**
  * $Id: reporting_viewer.class.php 216 2009-11-13 14:08:06Z kariboe $

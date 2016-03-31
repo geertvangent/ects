@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Calendar\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\Calendar\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Tool\Implementation\Calendar\Manager;
 
 class MoverComponent extends Manager
 {

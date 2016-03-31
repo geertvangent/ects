@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Rights\Table\Entity;
 
-use Ehb\Application\Avilarts\Request\Manager;
 use Chamilo\Core\Rights\Entity\PlatformGroupEntity;
 use Chamilo\Core\Rights\Entity\UserEntity;
 use Chamilo\Libraries\Format\Structure\Toolbar;
@@ -11,6 +10,7 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupp
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Request\Manager;
 
 class EntityTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

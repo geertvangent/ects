@@ -1,18 +1,18 @@
 <?php
 namespace Ehb\Application\Avilarts\Course;
 
-use Ehb\Application\Avilarts\Course\Interfaces\CourseSubManagerSupport;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataManager;
 use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface;
 use Chamilo\Libraries\Architecture\Exceptions\NoObjectSelectedException;
 use Chamilo\Libraries\Architecture\Exceptions\ObjectNotExistException;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Course\Interfaces\CourseSubManagerSupport;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataManager;
 
 /**
  * This class describes the submanager for course management

@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template;
 
+use Chamilo\Core\Reporting\ReportingTemplate;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Platform\Session\Request;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assessment\CourseUserExerciseInformationBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\CourseUserAssignmentInformationBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\LearningPath\CourseUserLearningPathInformationBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Tool\LastAccessToToolsUserBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\User\UserInformationBlock;
-use Chamilo\Core\Reporting\ReportingTemplate;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Platform\Session\Request;
 
 /**
  * $Id: course_student_tracker_detail_reporting_template.class.php 216 2009-11-13 14:08:06Z kariboe $

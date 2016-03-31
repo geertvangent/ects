@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
 use Chamilo\Libraries\Storage\Parameters\DataClassCountGroupedParameters;
@@ -23,6 +20,9 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Storage\ResultSet\RecordResultSet;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\AssessmentAttempt;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
 
 class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 {

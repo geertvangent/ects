@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\File\Filesystem;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\UserExporter\CourseGroupUserExportExtender;
 use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Ehb\Application\Avilarts\Tool\Implementation\User\UserExporter\CourseUserExportExtender;
 use Ehb\Application\Avilarts\UserExporter\Renderer\ExcelUserExportRenderer;
 use Ehb\Application\Avilarts\UserExporter\UserExporter;
-use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Libraries\File\Filesystem;
-use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  * Exports the user list

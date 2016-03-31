@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Component;
 
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\CourseSectionForm;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Manager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\CourseSectionForm;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Manager;
 
 /**
  * $Id: course_sections_updater.class.php 216 2009-11-13 14:08:06Z kariboe $

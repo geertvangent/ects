@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\User;
 
+use Chamilo\Core\Reporting\ReportingData;
+use Chamilo\Libraries\Format\Theme;
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\CourseStudentTrackerDetailTemplate;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass\CourseVisit;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
-use Chamilo\Core\Reporting\ReportingData;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Translation;
 
 class UsersTrackingBlock extends CourseBlock
 {

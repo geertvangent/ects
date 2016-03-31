@@ -4,6 +4,8 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 use Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Redirect;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
@@ -11,8 +13,6 @@ use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\GroupCalendarRendererProvider;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
 
 /**
  *

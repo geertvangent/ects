@@ -1,10 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\DirectSubscribedGroup;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
@@ -14,6 +10,9 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * Cell renderer for a direct subscribed course group browser table.

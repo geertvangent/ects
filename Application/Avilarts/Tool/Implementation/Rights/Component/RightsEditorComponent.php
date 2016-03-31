@@ -2,11 +2,11 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\Rights\Component;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\Rights\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Avilarts\Tool\Implementation\Rights\Manager;
 
 class RightsEditorComponent extends Manager implements DelegateComponent
 {

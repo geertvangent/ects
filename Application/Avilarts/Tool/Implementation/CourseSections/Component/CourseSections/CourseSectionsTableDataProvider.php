@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Component\CourseSections;
 
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableDataProvider;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 
 /**
  * $Id: course_sections_browser_table_data_provider.class.php 216 2009-11-13 14:08:06Z kariboe $

@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Rights\Component;
 
-use Ehb\Application\Avilarts\Request\Rights\Manager;
-use Ehb\Application\Avilarts\Request\Rights\Table\Entity\EntityTable;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
+use Ehb\Application\Avilarts\Request\Rights\Manager;
+use Ehb\Application\Avilarts\Request\Rights\Table\Entity\EntityTable;
 
 class BrowserComponent extends Manager implements TableSupport
 {

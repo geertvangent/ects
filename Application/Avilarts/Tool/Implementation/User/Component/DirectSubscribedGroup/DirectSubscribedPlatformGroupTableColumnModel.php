@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component\DirectSubscribedGroup;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\RecordTable\RecordTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
 
 /**
  * Table column model for a direct subscribed course group browser table.

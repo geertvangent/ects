@@ -1,19 +1,19 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool;
 
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\CourseSettingsController;
 use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
 use Ehb\Application\Avilarts\CourseType\Storage\DataManager as CourseTypeDataManager;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseSettingDefaultValue;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
-use Chamilo\Libraries\Architecture\ClassnameUtilities;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 
 /**
  * Abstract class to define the installation of a tool

@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Discovery\Instance\Storage\DataClass;
 
-use Ehb\Application\Discovery\Instance\Storage\DataManager;
+use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\File\Path;
+use Ehb\Application\Discovery\Instance\Storage\DataManager;
 
 /**
  *

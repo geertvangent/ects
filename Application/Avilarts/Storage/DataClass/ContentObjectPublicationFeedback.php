@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * $Id: content_object_publication_feedback.class.php 218 2009-11-13 14:21:26Z

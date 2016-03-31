@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface;
+use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 
 /**
  * $Id: course_group_tool.class.php 216 2009-11-13 14:08:06Z kariboe $

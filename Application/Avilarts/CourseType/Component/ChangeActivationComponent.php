@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Component;
 
-use Ehb\Application\Avilarts\CourseType\Manager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\CourseType\Manager;
 
 /**
  * This class describes an action to change the activation status of a course type

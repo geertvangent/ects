@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Tool;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\ToolPublicationsDetailTemplate;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template\ToolPublicationsDetailTemplate;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager as WeblcmsTrackingDataManager;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
 
 class LastAccessToToolsUserBlock extends LastAccessToToolsBlock
 {

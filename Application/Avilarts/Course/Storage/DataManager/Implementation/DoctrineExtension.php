@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Storage\DataManager\Implementation;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Core\Group\Storage\DataClass\GroupRelUser;
 use Chamilo\Core\User\Storage\DataClass\User;
@@ -24,6 +22,8 @@ use Chamilo\Libraries\Storage\Query\Variable\FixedPropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\FunctionConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 
 /**
  * Doctrine implementation of the datamanager

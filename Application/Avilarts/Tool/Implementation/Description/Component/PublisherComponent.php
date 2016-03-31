@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Description\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\Description\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Avilarts\Tool\Implementation\Description\Manager;
 
 /**
  * $Id: description_publisher.class.php 216 2009-11-13 14:08:06Z kariboe $

@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Rights\Component;
 
-use Ehb\Application\Avilarts\Request\Rights\Form\RightsForm;
-use Ehb\Application\Avilarts\Request\Rights\Manager;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Request\Rights\Form\RightsForm;
+use Ehb\Application\Avilarts\Request\Rights\Manager;
 
 class AccessorComponent extends Manager
 {

@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Component;
 
-use Ehb\Application\Avilarts\Request\Form\RequestForm;
-use Ehb\Application\Avilarts\Request\Manager;
-use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Mail\Mail;
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Request\Form\RequestForm;
+use Ehb\Application\Avilarts\Request\Manager;
+use Ehb\Application\Avilarts\Request\Storage\DataClass\Request;
 
 class CreatorComponent extends Manager
 {

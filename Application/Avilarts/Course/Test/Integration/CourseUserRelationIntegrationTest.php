@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Test\Integration;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 use Chamilo\Libraries\Storage\DataClassIntegrationTestCase;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 
 /**
  *

@@ -4,9 +4,6 @@ namespace Ehb\Application\Avilarts\Renderer\PublicationList;
 use Ehb\Application\Avilarts\Manager;
 use Ehb\Application\Avilarts\Renderer\ContentObjectPublicationDescriptionRenderer;
 
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Core\Repository\RepositoryRights;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
 use Chamilo\Libraries\Architecture\Interfaces\AttachmentSupport;
@@ -25,6 +22,9 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Utilities\StringUtilities;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublicationCategory;
+use Ehb\Application\Avilarts\Storage\DataManager;
 use Exception;
 
 /**

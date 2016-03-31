@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Home\Component;
 
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
-use Ehb\Application\Avilarts\Tool\Implementation\Home\Manager;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
+use Ehb\Application\Avilarts\Tool\Implementation\Home\Manager;
 
 class BrowserComponent extends Manager
 {

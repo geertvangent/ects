@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Form;
 
+use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
 use Ehb\Application\Avilarts\Form\CommonCourseForm;
 use Ehb\Application\Avilarts\Interfaces\FormLockedSettingsSupport;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Storage\DataClass\DataClass;
 
 /**
  * This class describes a form for the course type object

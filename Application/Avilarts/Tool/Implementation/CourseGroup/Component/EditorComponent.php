@@ -1,10 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Form\CourseGroupForm;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
@@ -12,6 +8,10 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Form\CourseGroupForm;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 
 /**
  * $Id: course_group_editor.class.php 216 2009-11-13 14:08:06Z kariboe $

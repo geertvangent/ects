@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Form;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Form\FormValidator;
@@ -13,6 +12,7 @@ use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 
 /**
  * $Id: course_group_subscriptions_form.class.php 216 2009-11-13 14:08:06Z kariboe $

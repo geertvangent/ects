@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Component;
 
+use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
-use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 
 /**
  * This class describes an action to create a course quickly without going through the browser.

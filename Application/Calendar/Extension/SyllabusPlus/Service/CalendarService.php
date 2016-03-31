@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Service;
 
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Chamilo\Core\User\Storage\DataClass\User;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 
 /**
  *

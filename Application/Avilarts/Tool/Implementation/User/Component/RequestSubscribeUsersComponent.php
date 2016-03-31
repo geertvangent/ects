@@ -1,12 +1,7 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Form\CourseRequestForm;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-use Ehb\Application\Avilarts\Storage\DataClass\CommonRequest;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
 use Chamilo\Core\User\Storage\DataClass\User;
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Architecture\Exceptions\NoObjectSelectedException;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
@@ -16,6 +11,11 @@ use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Form\CourseRequestForm;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
+use Ehb\Application\Avilarts\Storage\DataClass\CommonRequest;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * Component that will allow the user to do course requests for multiple users.

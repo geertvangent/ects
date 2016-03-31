@@ -1,16 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\ToolList\Type;
 
-use Ehb\Application\Avilarts\CourseSettingsConnector;
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseToolRelCourseSection;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
@@ -24,6 +14,16 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Ehb\Application\Avilarts\CourseSettingsConnector;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Renderer\ToolList\ToolListRenderer;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseSetting;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTool;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseToolRelCourseSection;
+use Ehb\Application\Avilarts\Storage\DataManager;
 use HTML_Table;
 
 /**

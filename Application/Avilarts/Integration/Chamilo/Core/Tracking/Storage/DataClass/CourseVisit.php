@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager;
 use Chamilo\Core\Tracking\Storage\DataClass\Tracker;
 use Chamilo\Libraries\Format\Structure\Page;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Tracking\Storage\DataManager;
 
 /**
  * Tracks the visits of a user to a course

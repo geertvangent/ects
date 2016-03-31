@@ -1,13 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Table\CourseType;
 
-use Ehb\Application\Avilarts\CourseType\Manager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormActions;
 use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\CourseType\Manager;
 
 /**
  * This class describes a table for the course type object

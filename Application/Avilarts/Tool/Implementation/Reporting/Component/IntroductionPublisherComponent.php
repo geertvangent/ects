@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Reporting\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\Reporting\Manager;
 
 class IntroductionPublisherComponent extends Manager
 {

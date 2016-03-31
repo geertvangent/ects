@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Rights\Entities\Group;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Core\Rights\Editor\Table\LocationEntity\LocationEntityTableColumnModel;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 
 /**
  * Cell renderer for the course group entity browser

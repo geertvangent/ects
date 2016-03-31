@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Component;
 
-use Ehb\Application\Avilarts\Request\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
+use Ehb\Application\Avilarts\Request\Manager;
 
 class RightsComponent extends Manager
 {

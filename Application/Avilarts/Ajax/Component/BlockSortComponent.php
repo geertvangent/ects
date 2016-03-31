@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\Ajax\Component;
 
-use Ehb\Application\Avilarts\Storage\DataClass\CourseModule;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseModule;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  *

@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Course\Component;
 
-use Ehb\Application\Avilarts\Course\Manager;
-use Ehb\Application\Avilarts\Course\Storage\DataManager;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Course\Manager;
+use Ehb\Application\Avilarts\Course\Storage\DataManager;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
 
 /**
  * This class describes an action to unsubscribe from a course

@@ -1,12 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
-
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * $Id: subscribe.class.php 218 2009-11-13 14:21:26Z kariboe $

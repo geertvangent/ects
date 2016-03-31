@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\Overview\GroupUser;
 
+use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
-use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
 
 class CourseGroupUserTableCellRenderer extends DataClassTableCellRenderer
 {

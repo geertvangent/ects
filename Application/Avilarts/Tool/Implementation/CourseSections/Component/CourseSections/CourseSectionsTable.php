@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Component\CourseSections;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Manager;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTable;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormAction;
 use Chamilo\Libraries\Format\Table\FormAction\TableFormActions;
 use Chamilo\Libraries\Format\Table\Interfaces\TableFormActionsSupport;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseSections\Manager;
 
 /**
  * $Id: course_sections_browser_table.class.php 216 2009-11-13 14:08:06Z kariboe $

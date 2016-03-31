@@ -2,9 +2,6 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Table\CourseGroup;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableCellRenderer;
@@ -12,6 +9,9 @@ use Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupp
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager;
 
 /**
  * $Id: course_group_subscribed_user_browser_table_cell_renderer.class.php 216 2009-11-13 14:08:06Z kariboe $

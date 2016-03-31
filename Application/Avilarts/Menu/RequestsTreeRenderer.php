@@ -1,17 +1,17 @@
 <?php
 namespace Ehb\Application\Avilarts\Menu;
 
-use Ehb\Application\Avilarts\Component\AdminRequestBrowserComponent;
-use Ehb\Application\Avilarts\Manager;
-use Ehb\Application\Avilarts\Storage\DataClass\CommonRequest;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Format\Menu\TreeMenuRenderer;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use HTML_Menu;
+use Ehb\Application\Avilarts\Component\AdminRequestBrowserComponent;
+use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Storage\DataClass\CommonRequest;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseRequest;
+use HTML_Menu;
 
 /**
  * $Id: request_tree_renderer.class.php 204 2009-11-13 12:51:30Z tristan $

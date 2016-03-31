@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Calendar\Component\CalendarViewer;
 
-use Ehb\Application\Avilarts\Renderer\PublicationList\Type\ContentObjectPublicationDetailsRenderer;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Renderer\PublicationList\Type\ContentObjectPublicationDetailsRenderer;
 
 /**
  * $Id: calendar_details_renderer.class.php 216 2009-11-13 14:08:06Z kariboe $

@@ -1,12 +1,12 @@
 <?php
 namespace Ehb\Application\Avilarts\Request\Rights\Component;
 
-use Ehb\Application\Avilarts\Request\Rights\Manager;
-use Ehb\Application\Avilarts\Request\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
-use Ehb\Application\Avilarts\Request\Rights\Storage\DataManager;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Request\Rights\Manager;
+use Ehb\Application\Avilarts\Request\Rights\Storage\DataClass\RightsLocationEntityRightGroup;
+use Ehb\Application\Avilarts\Request\Rights\Storage\DataManager;
 
 class DeleterComponent extends Manager
 {

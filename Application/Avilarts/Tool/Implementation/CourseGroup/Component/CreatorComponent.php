@@ -2,14 +2,14 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Form\CourseGroupForm;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Form\CourseGroupForm;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataClass\CourseGroup;
 
 /**
  * $Id: course_group_creator.class.php 216 2009-11-13 14:08:06Z kariboe $

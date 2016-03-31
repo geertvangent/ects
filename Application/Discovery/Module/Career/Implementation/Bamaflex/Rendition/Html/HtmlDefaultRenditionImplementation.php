@@ -1,13 +1,7 @@
 <?php
 namespace Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Rendition\Html;
 
-use Ehb\Application\Discovery\LegendTable;
-use Ehb\Application\Discovery\Module\Career\DataManager;
-use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
-use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Rendition\RenditionImplementation;
-use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Rights;
-use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
-use Ehb\Application\Discovery\SortableTable;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Display;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
@@ -15,7 +9,13 @@ use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Ehb\Application\Discovery\LegendTable;
+use Ehb\Application\Discovery\Module\Career\DataManager;
+use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Course;
+use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Rendition\RenditionImplementation;
+use Ehb\Application\Discovery\Module\Career\Implementation\Bamaflex\Rights;
+use Ehb\Application\Discovery\Module\Enrollment\Implementation\Bamaflex\Enrollment;
+use Ehb\Application\Discovery\SortableTable;
 
 class HtmlDefaultRenditionImplementation extends RenditionImplementation
 {

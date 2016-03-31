@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 
 class IntroductionPublisherComponent extends Manager implements DelegateComponent
 {

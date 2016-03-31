@@ -2,8 +2,8 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Component;
 
 
-use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Manager;
 
 /**
  * $Id: course_group_self_unsubscriber.class.php 216 2009-11-13 14:08:06Z kariboe $

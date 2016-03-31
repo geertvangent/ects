@@ -1,12 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
-use Ehb\Application\Avilarts\Rights\CourseManagementRights;
-
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseGroupRelation;
+use Ehb\Application\Avilarts\Rights\CourseManagementRights;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * $Id: subscribe.class.php 218 2009-11-13 14:21:26Z kariboe $

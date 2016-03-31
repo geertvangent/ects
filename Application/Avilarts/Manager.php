@@ -1,6 +1,13 @@
 <?php
 namespace Ehb\Application\Avilarts;
 
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
+use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
 use Ehb\Application\Avilarts\Course\Storage\DataClass\CourseUserRelation;
 use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
@@ -11,13 +18,6 @@ use Ehb\Application\Avilarts\Storage\DataClass\CourseSection;
 use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategory;
 use Ehb\Application\Avilarts\Storage\DataManager;
 use Ehb\Application\Avilarts\Tool\Implementation\CourseGroup\Storage\DataManager as CourseGroupDataManager;
-use Chamilo\Libraries\Architecture\Application\Application;
-use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
-use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
-use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 
 abstract class Manager extends Application
 {

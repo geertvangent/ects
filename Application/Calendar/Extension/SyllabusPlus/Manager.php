@@ -1,19 +1,19 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus;
 
-use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Core\User\Component\UserSettingsComponent;
 use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
-use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
+use Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer;
+use Chamilo\Libraries\Calendar\Table\Type\MiniMonthCalendar;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
-use Chamilo\Libraries\Platform\Translation;
+use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
 use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer;
-use Chamilo\Libraries\Platform\Session\Request;
-use Chamilo\Libraries\Calendar\Table\Type\MiniMonthCalendar;
 use Chamilo\Libraries\Platform\Configuration\LocalSetting;
-use Chamilo\Core\User\Component\UserSettingsComponent;
+use Chamilo\Libraries\Platform\Session\Request;
+use Chamilo\Libraries\Platform\Translation;
 
 /**
  *

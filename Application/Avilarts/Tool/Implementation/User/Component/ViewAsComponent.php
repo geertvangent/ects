@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\User\Component;
 
-use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Ehb\Application\Avilarts\Tool\Implementation\User\Manager;
 
 /**
  * Logs a teacher in/out of the student view.

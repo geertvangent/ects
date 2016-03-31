@@ -2,26 +2,25 @@
 namespace Ehb\Application\Avilarts\Storage\DataClass;
 
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\File\FileLogger;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\File\Redirect;
+use Chamilo\Libraries\Mail\Mail;
+use Chamilo\Libraries\Mail\MailEmbeddedObject;
+use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
+use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Storage\DataClass\Listeners\DisplayOrderDataClassListener;
 use Chamilo\Libraries\Storage\DataClass\Listeners\DisplayOrderDataClassListenerSupport;
-use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
-use ErrorException;
-// to support mailing CO publications:
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
-use Chamilo\Libraries\Mail\MailEmbeddedObject;
-use Chamilo\Libraries\File\Path;
-use Chamilo\Libraries\Mail\Mail;
-use DOMDocument;
-use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\Libraries\File\Redirect;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Libraries\File\FileLogger;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Ehb\Application\Avilarts\Storage\DataManager;
+use DOMDocument;
+use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
 use Ehb\Application\Avilarts\Manager;
+use Ehb\Application\Avilarts\Storage\DataManager;
+use ErrorException;
 
 /**
  * $Id: content_object_publication.class.php 218 2009-11-13 14:21:26Z kariboe $

@@ -2,11 +2,11 @@
 namespace Ehb\Application\Avilarts\Tool\Implementation\Document\Component;
 
 
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 
 /**
  * $Id: document_downloader.class.php 216 2009-11-13 14:08:06Z kariboe $

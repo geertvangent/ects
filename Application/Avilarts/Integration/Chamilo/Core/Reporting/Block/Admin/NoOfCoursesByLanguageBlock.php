@@ -1,15 +1,15 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Admin;
 
-use Ehb\Application\Avilarts\CourseSettingsConnector;
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
-use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBlock;
 use Chamilo\Core\Reporting\ReportingData;
 use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\Course\Storage\DataManager as CourseDataManager;
+use Ehb\Application\Avilarts\CourseSettingsConnector;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\CourseBlock;
 
 class NoOfCoursesByLanguageBlock extends CourseBlock
 {

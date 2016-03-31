@@ -1,17 +1,17 @@
 <?php
 namespace Ehb\Application\Discovery\DataSource\Component;
 
-use Ehb\Application\Discovery\DataSource;
-use Ehb\Application\Discovery\DataSource\Storage\DataClass\Instance;
-use Ehb\Application\Discovery\DataSource\Form\InstanceForm;
-use Ehb\Application\Discovery\DataSource\Manager;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
+use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 use Chamilo\Libraries\Format\Table\SortableTableFromArray;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Utilities\Utilities;
-use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
+use Ehb\Application\Discovery\DataSource;
+use Ehb\Application\Discovery\DataSource\Form\InstanceForm;
+use Ehb\Application\Discovery\DataSource\Manager;
+use Ehb\Application\Discovery\DataSource\Storage\DataClass\Instance;
 
 class CreatorComponent extends Manager
 {

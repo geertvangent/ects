@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Discovery\Instance\Table\Instance;
 
-use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
-use Ehb\Application\Discovery\Instance\Storage\DataManager;
-use Ehb\Application\Discovery\Instance\Manager;
 use Chamilo\Libraries\Format\Structure\Toolbar;
 use Chamilo\Libraries\Format\Structure\ToolbarItem;
 use Chamilo\Libraries\Format\Table\Column\DisplayOrderPropertyTableColumn;
@@ -15,8 +12,11 @@ use Chamilo\Libraries\Storage\Parameters\DataClassCountParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Utilities\Utilities;
 use Chamilo\Libraries\Utilities\StringUtilities;
+use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Discovery\Instance\Manager;
+use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
+use Ehb\Application\Discovery\Instance\Storage\DataManager;
 
 class InstanceTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {

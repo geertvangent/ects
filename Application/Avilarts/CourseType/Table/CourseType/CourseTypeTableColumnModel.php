@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Avilarts\CourseType\Table\CourseType;
 
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
 use Chamilo\Libraries\Format\Table\Column\DataClassPropertyTableColumn;
 use Chamilo\Libraries\Format\Table\Extension\DataClassTable\DataClassTableColumnModel;
 use Chamilo\Libraries\Format\Table\Interfaces\TableColumnModelActionsColumnSupport;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
 
 /**
  * This class describes the column model for the course type table

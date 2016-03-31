@@ -1,9 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Tool\Implementation\Document\Component;
 
-use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
-use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 use Chamilo\Core\Repository\ContentObject\CalendarEvent\Storage\DataClass\CalendarEvent;
 use Chamilo\Core\Repository\ContentObject\File\Storage\DataClass\File;
 use Chamilo\Core\Repository\Storage\DataClass\ContentObject;
@@ -19,6 +16,9 @@ use Chamilo\Libraries\Storage\Query\Condition\SubselectCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
+use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
+use Ehb\Application\Avilarts\Tool\Implementation\Document\Manager;
 
 class BrowserComponent extends Manager implements DelegateComponent
 {

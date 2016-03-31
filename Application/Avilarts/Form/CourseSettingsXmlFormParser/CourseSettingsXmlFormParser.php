@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Form\CourseSettingsXmlFormParser;
 
-use Ehb\Application\Avilarts\Interfaces\CourseSettingsXmlFormParserSupport;
 use Chamilo\Libraries\Format\Form\SettingsXmlFormParser;
+use Ehb\Application\Avilarts\Interfaces\CourseSettingsXmlFormParserSupport;
 
 /**
  * This class extends the common settings xml form parser to parse course settings with locked and frozen elements

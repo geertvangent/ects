@@ -1,8 +1,8 @@
 <?php
 namespace Ehb\Application\Avilarts\Storage\DataClass;
 
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * Abstract class that describes a relation with a course setting

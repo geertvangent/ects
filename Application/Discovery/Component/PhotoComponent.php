@@ -1,10 +1,10 @@
 <?php
 namespace Ehb\Application\Discovery\Component;
 
-use Ehb\Application\Discovery\Manager;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Utilities\String\Text;
+use Ehb\Application\Discovery\Manager;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**

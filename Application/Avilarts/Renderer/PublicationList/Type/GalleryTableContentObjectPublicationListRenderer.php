@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\PublicationList\Type;
 
+use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Ehb\Application\Avilarts\Renderer\PublicationList\ContentObjectPublicationListRenderer;
 use Ehb\Application\Avilarts\Table\Publication\Gallery\ObjectPublicationGalleryTable;
-use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 
 /**
  * Renderer to display a sortable table with learning object publications.

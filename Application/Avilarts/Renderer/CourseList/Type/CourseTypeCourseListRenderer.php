@@ -1,15 +1,6 @@
 <?php
 namespace Ehb\Application\Avilarts\Renderer\CourseList\Type;
 
-use Ehb\Application\Avilarts\CourseSettingsConnector;
-use Ehb\Application\Avilarts\CourseSettingsController;
-use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
-use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
-use Ehb\Application\Avilarts\Renderer\CourseList\CourseListRenderer;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategory;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategoryRelCourse;
-use Ehb\Application\Avilarts\Storage\DataClass\CourseUserCategory;
-use Ehb\Application\Avilarts\Storage\DataManager;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTab;
 use Chamilo\Libraries\Format\Tabs\DynamicVisualTabsRenderer;
@@ -19,6 +10,15 @@ use Chamilo\Libraries\Platform\Session\Session;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\DataClass\DataClass;
 use Chamilo\Libraries\Utilities\Utilities;
+use Ehb\Application\Avilarts\Course\Storage\DataClass\Course;
+use Ehb\Application\Avilarts\CourseSettingsConnector;
+use Ehb\Application\Avilarts\CourseSettingsController;
+use Ehb\Application\Avilarts\CourseType\Storage\DataClass\CourseType;
+use Ehb\Application\Avilarts\Renderer\CourseList\CourseListRenderer;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategory;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseTypeUserCategoryRelCourse;
+use Ehb\Application\Avilarts\Storage\DataClass\CourseUserCategory;
+use Ehb\Application\Avilarts\Storage\DataManager;
 
 /**
  * Course list renderer to render the course list with tabs for the course types (used in courses home, courses sorter)

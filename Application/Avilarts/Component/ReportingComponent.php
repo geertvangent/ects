@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Avilarts\Component;
 
-use Ehb\Application\Avilarts\Manager;
-use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfiguration;
+use Chamilo\Libraries\Architecture\Application\ApplicationFactory;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Platform\Session\Request;
+use Ehb\Application\Avilarts\Manager;
 
 /**
  * $Id: reporting.class.php 218 2009-11-13 14:21:26Z kariboe $

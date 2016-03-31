@@ -1,11 +1,11 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event;
 
-use Chamilo\Libraries\Calendar\Event\RecurrenceRules\RecurrenceRules;
-use Chamilo\Libraries\Platform\Translation;
-use Chamilo\Libraries\File\Redirect;
-use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\Calendar\Event\RecurrenceRules\RecurrenceRules;
+use Chamilo\Libraries\File\Redirect;
+use Chamilo\Libraries\Platform\Translation;
 
 /**
  *

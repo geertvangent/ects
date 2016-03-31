@@ -1,14 +1,14 @@
 <?php
 namespace Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Template;
 
+use Chamilo\Core\Reporting\ReportingTemplate;
+use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Chamilo\Libraries\Platform\Session\Request;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentCourseGroupsBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentInformationBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentPlatformGroupsBlock;
 use Ehb\Application\Avilarts\Integration\Chamilo\Core\Reporting\Block\Assignment\AssignmentUsersBlock;
 use Ehb\Application\Avilarts\Storage\DataClass\ContentObjectPublication;
-use Chamilo\Core\Reporting\ReportingTemplate;
-use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Chamilo\Libraries\Platform\Session\Request;
 
 /**
  *
