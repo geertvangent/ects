@@ -1,8 +1,1 @@
-span.event-expired {
-	color: red;
-}
-
-span.event-current {
-	font-weight: bold;
-	color: green;
-}
+@import url('../Ruby/Stylesheet.css');
