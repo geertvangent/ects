@@ -9,12 +9,14 @@ use Ehb\Application\Discovery\Module\Photo\Implementation\Bamaflex\Tables\PhotoG
 class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
 {
 
-    public function get_cell_content(\Chamilo\Core\User\Storage\DataClass\User $user)
+    /**
+     *
+     * @see \Chamilo\Libraries\Format\Table\Extension\GalleryTable\GalleryTableCellRenderer::renderContent()
+     */
+    public function renderContent($user)
     {
         $photo = DataManager :: get_instance($this->get_component()->get_module_instance())->retrieve_photo(
             $user->get_official_code());
-
-        $html[] = '<h4>' . $user->get_fullname() . '</h4>';
 
         $profile_link = $this->get_component()->get_module_link(
             'Ehb\Application\Discovery\Module\Profile\Implementation\Bamaflex',
@@ -31,5 +33,14 @@ class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
         $html[] = '</a>';
 
         return implode(PHP_EOL, $html);
+    }
+
+    /**
+     *
+     * @see \Chamilo\Libraries\Format\Table\Extension\GalleryTable\GalleryTableCellRenderer::renderTitle()
+     */
+    public function renderTitle($user)
+    {
+        return $user->get_fullname();
     }
 }

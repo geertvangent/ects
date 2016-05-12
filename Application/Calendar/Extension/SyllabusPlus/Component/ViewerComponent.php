@@ -281,11 +281,11 @@ class ViewerComponent extends Manager implements DelegateComponent
 
             if ($isPastEvent)
             {
-                $class = ' class="event-expired"';
+                $class = ' class="text-danger"';
             }
             elseif ($isCurrentEvent)
             {
-                $class = ' class="event-current"';
+                $class = ' class="text-primary"';
             }
             else
             {

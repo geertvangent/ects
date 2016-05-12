@@ -4,6 +4,8 @@ namespace Ehb\Application\Discovery\Module\Person\Implementation\Chamilo\Menu;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Menu\Library\HtmlMenu;
+use Chamilo\Libraries\Format\Menu\Library\Renderer\HtmlMenuArrayRenderer;
 use Chamilo\Libraries\Format\Menu\OptionsMenuRenderer;
 use Chamilo\Libraries\Format\Menu\TreeMenuRenderer;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
@@ -22,7 +24,7 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
  *
  * @author Bart Mollet
  */
-class GroupMenu extends \HTML_Menu
+class GroupMenu extends HtmlMenu
 {
     const TREE_NAME = __CLASS__;
 
@@ -52,7 +54,7 @@ class GroupMenu extends \HTML_Menu
      * @param int $owner The ID of the owner of the categories to provide in this menu.
      * @param int $current_category The ID of the current category in the menu.
      * @param string $url_format The format to use for the URL of a category. Passed to sprintf(). Defaults to the
-     *            string "?category=%s".
+     *        string "?category=%s".
      * @param array $extra_items An array of extra tree items, added to the root.
      */
     public function __construct($rendition, $url_format = '?application=group&go=browser&group_id=%s', $include_root = true, $show_complete_tree = false,
@@ -67,7 +69,7 @@ class GroupMenu extends \HTML_Menu
         $this->urlFmt = $url_format;
         $menu = $this->get_menu();
         parent :: __construct($menu);
-        $this->array_renderer = new \HTML_Menu_ArrayRenderer();
+        $this->array_renderer = new HtmlMenuArrayRenderer();
         $this->forceCurrentUrl($this->get_url($this->current_category->get_id()));
     }
 

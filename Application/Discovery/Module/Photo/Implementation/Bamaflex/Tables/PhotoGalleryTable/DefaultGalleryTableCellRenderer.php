@@ -17,6 +17,4 @@ abstract class DefaultGalleryTableCellRenderer extends GalleryTableCellRenderer
     {
         return $user->get_id();
     }
-
-    abstract public function get_cell_content(\Chamilo\Core\User\Storage\DataClass\User $user);
 }

@@ -41,7 +41,7 @@ class FilterForm extends FormValidator
     {
         $this->renderer->setFormTemplate(
             '<form {attributes}><div class="filter_form">{content}</div><div class="clear">&nbsp;</div></form>');
-        $this->renderer->setElementTemplate('<div class="row"><div class="formw">{label}&nbsp;{element}</div></div>');
+        $this->renderer->setElementTemplate('<div class="form-row"><div class="formw">{label}&nbsp;{element}</div></div>');
 
         foreach ($this->filters as $filter)
         {

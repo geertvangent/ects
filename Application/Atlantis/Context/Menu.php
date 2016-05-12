@@ -4,6 +4,7 @@ namespace Ehb\Application\Atlantis\Context;
 use Chamilo\Core\Group\Storage\DataClass\Group;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Menu\Library\HtmlMenu;
 use Chamilo\Libraries\Format\Menu\OptionsMenuRenderer;
 use Chamilo\Libraries\Format\Menu\TreeMenuRenderer;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
@@ -17,6 +18,7 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Atlantis\Context\Storage\DataManager;
+use Chamilo\Libraries\Format\Menu\Library\Renderer\HtmlMenuArrayRenderer;
 
 /**
  * $Id: group_menu.class.php 224 2009-11-13 14:40:30Z kariboe $
@@ -28,7 +30,7 @@ use Ehb\Application\Atlantis\Context\Storage\DataManager;
  *
  * @author Bart Mollet
  */
-class Menu extends \HTML_Menu
+class Menu extends HtmlMenu
 {
     const TREE_NAME = __CLASS__;
 
@@ -94,7 +96,7 @@ class Menu extends \HTML_Menu
         $this->urlFmt = $url_format;
         $menu = $this->get_menu();
         parent :: __construct($menu);
-        $this->array_renderer = new \HTML_Menu_ArrayRenderer();
+        $this->array_renderer = new HtmlMenuArrayRenderer();
         $this->forceCurrentUrl($this->get_url($this->current_category->get_id()));
     }
 

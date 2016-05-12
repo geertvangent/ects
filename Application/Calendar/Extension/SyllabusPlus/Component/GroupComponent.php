@@ -281,7 +281,7 @@ class GroupComponent extends BrowserComponent
         return $this->calendarDataProvider;
     }
 
-    protected function renderContent()
+    protected function renderCalendar()
     {
         $groupUrl = new Redirect($this->getDisplayParameters(), array(self :: PARAM_GROUP_ID));
 
@@ -296,11 +296,18 @@ class GroupComponent extends BrowserComponent
 
             BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $group['name']));
 
-            return parent :: renderContent();
+            return parent :: renderCalendar();
         }
         else
         {
-            return $this->renderGroups();
+
+            $html = array();
+
+            $html[] = $this->render_header();
+            $html[] = $this->renderGroups();
+            $html[] = $this->render_footer();
+
+            return implode(PHP_EOL, $html);
         }
     }
 
