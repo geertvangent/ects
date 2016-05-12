@@ -9,9 +9,11 @@ use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Application\Weblcms\Course\Storage\DataClass\Course;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Weblcms\Admin\Storage\DataClass\Admin;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
+use Chamilo\Application\Weblcms\Admin\Extension\Platform\Storage\DataClass\Admin;
+use Chamilo\Application\Weblcms\Admin\Extension\Platform\Entity\UserEntity;
+use Chamilo\Application\Weblcms\Admin\Extension\Platform\Entity\CourseEntity;
 
 /**
  *
@@ -50,13 +52,13 @@ class AdminSynchronization extends Synchronization
             new StaticConditionVariable(Admin :: ORIGIN_EXTERNAL));
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_TYPE),
-            new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\UserEntity :: ENTITY_TYPE));
+            new StaticConditionVariable(UserEntity :: ENTITY_TYPE));
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_TARGET_TYPE),
-            new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\CourseEntity :: ENTITY_TYPE));
+            new StaticConditionVariable(CourseEntity :: ENTITY_TYPE));
         $condition = new AndCondition($conditions);
 
-        $platform_user_ids = \Chamilo\Application\Weblcms\Admin\Storage\DataManager :: distinct(
+        $platform_user_ids = \Chamilo\Application\Weblcms\Admin\Extension\Platform\Storage\DataManager :: distinct(
             Admin :: class_name(),
             new DataClassDistinctParameters($condition, Admin :: PROPERTY_ENTITY_ID));
 
@@ -104,9 +106,9 @@ class AdminSynchronization extends Synchronization
                 {
                     $admin = new Admin();
                     $admin->set_origin(Admin :: ORIGIN_EXTERNAL);
-                    $admin->set_entity_type(\Chamilo\Application\Weblcms\Admin\Entity\UserEntity :: ENTITY_TYPE);
+                    $admin->set_entity_type(UserEntity :: ENTITY_TYPE);
                     $admin->set_entity_id($new_user_id);
-                    $admin->set_target_type(\Chamilo\Application\Weblcms\Admin\Entity\CourseEntity :: ENTITY_TYPE);
+                    $admin->set_target_type(CourseEntity :: ENTITY_TYPE);
                     $admin->set_target_id($course->get_id());
 
                     if (! $admin->create())
@@ -140,16 +142,18 @@ class AdminSynchronization extends Synchronization
             new StaticConditionVariable(Admin :: ORIGIN_EXTERNAL));
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_TYPE),
-            new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\UserEntity :: ENTITY_TYPE));
+            new StaticConditionVariable(UserEntity :: ENTITY_TYPE));
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_TARGET_TYPE),
-            new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\CourseEntity :: ENTITY_TYPE));
+            new StaticConditionVariable(CourseEntity :: ENTITY_TYPE));
         $conditions[] = new InCondition(
             new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_ID),
             $old_user_ids);
         $condition = new AndCondition($conditions);
 
-        if (! \Chamilo\Application\Weblcms\Admin\Storage\DataManager :: deletes(Admin :: class_name(), $condition))
+        if (! \Chamilo\Application\Weblcms\Admin\Extension\Platform\Storage\DataManager :: deletes(
+            Admin :: class_name(),
+            $condition))
         {
             self :: log('Removing failed', 'Users: ' . implode(', ', $old_user_ids));
             flush();
@@ -193,16 +197,16 @@ class AdminSynchronization extends Synchronization
                 new StaticConditionVariable(Admin :: ORIGIN_EXTERNAL));
             $conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_TYPE),
-                new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\UserEntity :: ENTITY_TYPE));
+                new StaticConditionVariable(UserEntity :: ENTITY_TYPE));
             $conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_TARGET_TYPE),
-                new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\CourseEntity :: ENTITY_TYPE));
+                new StaticConditionVariable(CourseEntity :: ENTITY_TYPE));
             $conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_ID),
                 new StaticConditionVariable($existing_user_id));
             $condition = new AndCondition($conditions);
 
-            $platform_course_ids = \Chamilo\Application\Weblcms\Admin\Storage\DataManager :: distinct(
+            $platform_course_ids = \Chamilo\Application\Weblcms\Admin\Extension\Platform\Storage\DataManager :: distinct(
                 Admin :: class_name(),
                 new DataClassDistinctParameters($condition, Admin :: PROPERTY_TARGET_ID));
 
@@ -212,9 +216,9 @@ class AdminSynchronization extends Synchronization
             {
                 $admin = new Admin();
                 $admin->set_origin(Admin :: ORIGIN_EXTERNAL);
-                $admin->set_entity_type(\Chamilo\Application\Weblcms\Admin\Entity\UserEntity :: ENTITY_TYPE);
+                $admin->set_entity_type(UserEntity :: ENTITY_TYPE);
                 $admin->set_entity_id($existing_user_id);
-                $admin->set_target_type(\Chamilo\Application\Weblcms\Admin\Entity\CourseEntity :: ENTITY_TYPE);
+                $admin->set_target_type(CourseEntity :: ENTITY_TYPE);
                 $admin->set_target_id($new_course_id);
 
                 if (! $admin->create())
@@ -239,10 +243,10 @@ class AdminSynchronization extends Synchronization
                     new StaticConditionVariable(Admin :: ORIGIN_EXTERNAL));
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_TYPE),
-                    new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\UserEntity :: ENTITY_TYPE));
+                    new StaticConditionVariable(UserEntity :: ENTITY_TYPE));
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_TARGET_TYPE),
-                    new StaticConditionVariable(\Chamilo\Application\Weblcms\Admin\Entity\CourseEntity :: ENTITY_TYPE));
+                    new StaticConditionVariable(CourseEntity :: ENTITY_TYPE));
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(Admin :: class_name(), Admin :: PROPERTY_ENTITY_ID),
                     new StaticConditionVariable($existing_user_id));
@@ -251,7 +255,7 @@ class AdminSynchronization extends Synchronization
                     $old_course_ids);
                 $condition = new AndCondition($conditions);
 
-                if (! \Chamilo\Application\Weblcms\Admin\Storage\DataManager :: deletes(
+                if (! \Chamilo\Application\Weblcms\Admin\Extension\Platform\Storage\DataManager :: deletes(
                     Admin :: class_name(),
                     $condition))
                 {
