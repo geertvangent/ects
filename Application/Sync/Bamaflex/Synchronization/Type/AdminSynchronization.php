@@ -1,7 +1,9 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type;
 
-use Chamilo\Application\Weblcms\Admin\Storage\DataClass\Admin;
+use Chamilo\Application\Weblcms\Admin\Extension\Platform\Entity\CourseEntity;
+use Chamilo\Application\Weblcms\Admin\Extension\Platform\Entity\UserEntity;
+use Chamilo\Application\Weblcms\Admin\Extension\Platform\Storage\DataClass\Admin;
 use Chamilo\Application\Weblcms\Course\Storage\DataClass\Course;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
@@ -11,9 +13,7 @@ use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Application\Weblcms\Admin\Extension\Platform\Storage\DataClass\Admin;
-use Chamilo\Application\Weblcms\Admin\Extension\Platform\Entity\UserEntity;
-use Chamilo\Application\Weblcms\Admin\Extension\Platform\Entity\CourseEntity;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
 
 /**
  *
