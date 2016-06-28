@@ -153,13 +153,14 @@ class EventParser
 
         $events = array();
 
-        $startTime = strtotime($calendarEvent['start_time']);
-        $endTime = strtotime($calendarEvent['end_time']);
+        $startTime = $calendarEvent['start_time'];
+        $endTime = $calendarEvent['end_time'];
 
         $parameters = array();
         $parameters[Application :: PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context();
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: ACTION_VIEW;
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_ID] = $calendarEvent['id'];
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_YEAR] = $calendarEvent['year'];
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_TIME] = $startTime;
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_USER_USER_ID] = $this->getDataUser()->get_id();
 

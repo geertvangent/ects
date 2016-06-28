@@ -7,6 +7,7 @@
 			<setting name="database" field="text" default="syllabus_plus" />
 			<setting name="user" field="text" default="" />
 			<setting name="password" field="text" default="" />
+			<setting name="years" field="text" default="" />
 		</category>
 	</settings>
 </package>

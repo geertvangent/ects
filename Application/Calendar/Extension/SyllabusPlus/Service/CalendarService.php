@@ -77,9 +77,9 @@ class CalendarService
      * @param string $identifier
      * @return string[]
      */
-    public function getEventForUserByIdentifier(User $user, $identifier)
+    public function getEventForUserByIdentifier(User $user, $identifier, $year)
     {
-        return $this->getCalendarRepository()->findEventForUserByIdentifier($user, $identifier);
+        return $this->getCalendarRepository()->findEventForUserByIdentifier($user, $identifier, $year);
     }
 
     /**
@@ -88,9 +88,9 @@ class CalendarService
      * @param string $moduleIdentifier
      * @return string[]
      */
-    public function getEventsForUserByModuleIdentifier(User $user, $moduleIdentifier)
+    public function getEventsForUserByModuleIdentifier(User $user, $moduleIdentifier, $year)
     {
-        return $this->getCalendarRepository()->findEventsForUserByModuleIdentifier($user, $moduleIdentifier);
+        return $this->getCalendarRepository()->findEventsForUserByModuleIdentifier($user, $moduleIdentifier, $year);
     }
 
     /**

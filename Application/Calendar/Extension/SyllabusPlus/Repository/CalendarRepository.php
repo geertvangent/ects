@@ -32,12 +32,12 @@ class CalendarRepository
      */
     static public function getInstance()
     {
-        if (is_null(static :: $instance))
+        if (is_null(static::$instance))
         {
-            self :: $instance = new static();
+            self::$instance = new static();
         }
 
-        return static :: $instance;
+        return static::$instance;
     }
 
     /**
@@ -49,19 +49,32 @@ class CalendarRepository
      */
     public function findEventsForUserAndBetweenDates(User $user, $fromDate, $toDate)
     {
-        $cache = new FilesystemCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id())));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $fromDate, $toDate)));
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
             if ($user->get_official_code())
             {
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' .
-                     $user->get_official_code() . '\'';
-                $statement = DataManager :: get_instance()->get_connection()->query($query);
+                $queryParts = array();
+
+                foreach ($this->getYears() as $year)
+                {
+                    $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $year . '_events] WHERE person_id = \'' .
+                         $user->get_official_code() . '\'';
+
+                    if (! is_null($fromDate) && ! is_null($toDate))
+                    {
+                        $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
+                    }
+
+                    $queryParts[] = $query;
+                }
+
+                $statement = DataManager::get_instance()->get_connection()->query(implode(' UNION ', $queryParts));
                 $resultSet = new ResultSet($statement);
             }
             else
@@ -84,18 +97,30 @@ class CalendarRepository
      */
     public function findEventsForGroupAndBetweenDates($groupIdentifier, $fromDate, $toDate)
     {
-        $cache = new FilesystemCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $groupIdentifier)));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $groupIdentifier, $fromDate, $toDate)));
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_group_events] WHERE group_id = \'' .
-                 $groupIdentifier . '\'';
+            $queryParts = array();
 
-            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            foreach ($this->getYears() as $year)
+            {
+                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $year . '_group_events] WHERE group_id = \'' .
+                     $groupIdentifier . '\'';
+
+                if (! is_null($fromDate) && ! is_null($toDate))
+                {
+                    $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
+                }
+
+                $queryParts[] = $query;
+            }
+
+            $statement = DataManager::get_instance()->get_connection()->query(implode(' UNION ', $queryParts));
             $resultSet = new ResultSet($statement);
 
             $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
@@ -106,25 +131,37 @@ class CalendarRepository
 
     /**
      *
+     * @return string[]
+     */
+    public function getYears()
+    {
+        return explode(
+            ',',
+            Configuration::get_instance()->get_setting(
+                array('Ehb\Application\Calendar\Extension\SyllabusPlus', 'years')));
+    }
+
+    /**
+     *
      * @param \Chamilo\Core\User\Storage\DataClass\User $user
      * @param string $moduleIdentifier
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    public function findEventsForUserByModuleIdentifier(User $user, $moduleIdentifier)
+    public function findEventsForUserByModuleIdentifier(User $user, $moduleIdentifier, $year)
     {
-        $cache = new FilesystemCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $moduleIdentifier)));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $moduleIdentifier, $year)));
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration :: get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
             if ($user->get_official_code())
             {
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' .
+                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $year . '_events] WHERE person_id = \'' .
                      $user->get_official_code() . '\' AND module_id = \'' . $moduleIdentifier . '\'';
-                $statement = DataManager :: get_instance()->get_connection()->query($query);
+                $statement = DataManager::get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
             }
             else
@@ -144,14 +181,14 @@ class CalendarRepository
      * @param string $identifier
      * @return string[]
      */
-    public function findEventForUserByIdentifier(User $user, $identifier)
+    public function findEventForUserByIdentifier(User $user, $identifier, $year)
     {
         if ($user->get_official_code())
         {
-            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_events] WHERE person_id = \'' .
+            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $year . '_events] WHERE person_id = \'' .
                  $user->get_official_code() . '\' AND id = \'' . $identifier . '\'';
-            $statement = DataManager :: get_instance()->get_connection()->query($query);
-            return $this->processRecord($statement->fetch(\PDO :: FETCH_ASSOC));
+            $statement = DataManager::get_instance()->get_connection()->query($query);
+            return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
         }
         else
         {
@@ -168,12 +205,12 @@ class CalendarRepository
     {
         if ($user->get_official_code())
         {
-            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_student_group] WHERE person_id = \'' .
+            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_student_group] WHERE person_id = \'' .
                  $user->get_official_code() . '\'';
-            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $statement = DataManager::get_instance()->get_connection()->query($query);
             $faculties = array();
 
-            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
             {
                 $record = $this->processRecord($record);
                 $faculties[$record['department_id']] = $record;
@@ -196,12 +233,12 @@ class CalendarRepository
     {
         if ($user->get_official_code())
         {
-            $query = 'SELECT DISTINCT group_id, group_name, department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_student_group] WHERE person_id = \'' .
+            $query = 'SELECT DISTINCT group_id, group_name, department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_student_group] WHERE person_id = \'' .
                  $user->get_official_code() . '\'';
-            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $statement = DataManager::get_instance()->get_connection()->query($query);
             $faculties = array();
 
-            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
             {
                 $record = $this->processRecord($record);
                 $faculties[$record['department_id']][$record['group_id']] = $record;
@@ -221,17 +258,17 @@ class CalendarRepository
      */
     public function findFaculties()
     {
-        $cache = new PhpFileCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__)));
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_groups] ORDER BY department_name';
-            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_groups] ORDER BY department_name';
+            $statement = DataManager::get_instance()->get_connection()->query($query);
 
             $departments = array();
 
-            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
             {
                 $record = $this->processRecord($record);
                 $departments[$record['department_id']] = $record;
@@ -249,18 +286,18 @@ class CalendarRepository
      */
     public function findFacultyGroups()
     {
-        $cache = new PhpFileCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__)));
 
         if (! $cache->contains($cacheIdentifier))
         {
 
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_groups] ORDER BY department_id, name';
-            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_groups] ORDER BY department_id, name';
+            $statement = DataManager::get_instance()->get_connection()->query($query);
 
             $groups = array();
 
-            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
             {
                 $record = $this->processRecord($record);
                 $groups[$record['department_id']][] = $record;
@@ -278,18 +315,18 @@ class CalendarRepository
      */
     public function findGroups()
     {
-        $cache = new PhpFileCache(Path :: getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__)));
 
         if (! $cache->contains($cacheIdentifier))
         {
 
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_groups] ORDER BY name';
-            $statement = DataManager :: get_instance()->get_connection()->query($query);
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_groups] ORDER BY name';
+            $statement = DataManager::get_instance()->get_connection()->query($query);
 
             $groups = array();
 
-            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
             {
                 $record = $this->processRecord($record);
                 $groups[$record['id']] = $record;

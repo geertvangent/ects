@@ -26,6 +26,7 @@ abstract class Manager extends Application
     const PARAM_USER_USER_ID = 'user_id';
     const PARAM_ACTION = 'syllabus_action';
     const PARAM_ACTIVITY_ID = 'activity_id';
+    const PARAM_YEAR = 'year';
     const PARAM_ACTIVITY_TIME = 'activity_time';
     const PARAM_FIRSTLETTER = 'firstletter';
     const PARAM_DOWNLOAD = 'download';

@@ -156,7 +156,6 @@ class GroupComponent extends BrowserComponent
 
             foreach ($facultyTypeGroups as $facultyTypeGroup)
             {
-
                 if (! key_exists($facultyTypeGroup['id'], $userGroups))
                 {
                     $html[] = '<li>';
