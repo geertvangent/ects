@@ -39,35 +39,54 @@ class Actions implements \Chamilo\Application\Calendar\ActionsInterface
         $buttons = array();
 
         $browserUrl = new Redirect(
-            array(Application :: PARAM_CONTEXT => __NAMESPACE__, Manager :: PARAM_ACTION => Manager :: ACTION_BROWSER));
+            array(Application::PARAM_CONTEXT => __NAMESPACE__, Manager::PARAM_ACTION => Manager::ACTION_BROWSER));
 
-        if ($application->getUser()->get_platformadmin() ||
-             $application->getUser()->get_status() == User :: STATUS_TEACHER)
+        if ($application->getUser()->get_platformadmin() || $application->getUser()->get_status() == User::STATUS_TEACHER)
         {
             $splitDropdownButton = new SplitDropdownButton(
-                Translation :: get('TypeName', null, __NAMESPACE__),
+                Translation::get('TypeName', null, __NAMESPACE__),
                 new BootstrapGlyph('time'),
                 $browserUrl->getUrl());
             $splitDropdownButton->setDropdownClasses('dropdown-menu-right');
 
             $userBrowserUrl = new Redirect(
                 array(
-                    Application :: PARAM_CONTEXT => __NAMESPACE__,
-                    Manager :: PARAM_ACTION => Manager :: ACTION_USER_BROWSER));
+                    Application::PARAM_CONTEXT => __NAMESPACE__,
+                    Manager::PARAM_ACTION => Manager::ACTION_USER_BROWSER));
 
             $splitDropdownButton->addSubButton(
                 new SubButton(
-                    Translation :: get('UserBrowserComponent'),
+                    Translation::get('UserBrowserComponent'),
                     null,
                     $userBrowserUrl->getUrl(),
-                    Button :: DISPLAY_LABEL));
+                    Button::DISPLAY_LABEL));
+
+            $groupUrl = new Redirect(
+                array(Application::PARAM_CONTEXT => __NAMESPACE__, Manager::PARAM_ACTION => Manager::ACTION_GROUP));
+
+            $splitDropdownButton->addSubButton(
+                new SubButton(
+                    Translation::get(Manager::ACTION_GROUP . 'Component'),
+                    null,
+                    $groupUrl->getUrl(),
+                    Button::DISPLAY_LABEL));
+
+            $locationUrl = new Redirect(
+                array(Application::PARAM_CONTEXT => __NAMESPACE__, Manager::PARAM_ACTION => Manager::ACTION_LOCATION));
+
+            $splitDropdownButton->addSubButton(
+                new SubButton(
+                    Translation::get(Manager::ACTION_LOCATION . 'Component'),
+                    null,
+                    $locationUrl->getUrl(),
+                    Button::DISPLAY_LABEL));
 
             $buttons[] = $splitDropdownButton;
         }
         else
         {
             $buttons[] = new Button(
-                Translation :: get('TypeName', null, __NAMESPACE__),
+                Translation::get('TypeName', null, __NAMESPACE__),
                 new BootstrapGlyph('time'),
                 $browserUrl->getUrl());
         }

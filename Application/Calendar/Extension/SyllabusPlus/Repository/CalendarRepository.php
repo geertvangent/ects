@@ -63,8 +63,8 @@ class CalendarRepository
 
                 foreach ($this->getYears() as $year)
                 {
-                    $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $year . '_events] WHERE person_id = \'' .
-                         $user->get_official_code() . '\'';
+                    $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                         '_events] WHERE person_id = \'' . $user->get_official_code() . '\'';
 
                     if (! is_null($fromDate) && ! is_null($toDate))
                     {
@@ -109,8 +109,8 @@ class CalendarRepository
 
             foreach ($this->getYears() as $year)
             {
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $year . '_group_events] WHERE group_id = \'' .
-                     $groupIdentifier . '\'';
+                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                     '_group_events] WHERE group_id = \'' . $groupIdentifier . '\'';
 
                 if (! is_null($fromDate) && ! is_null($toDate))
                 {
@@ -159,8 +159,9 @@ class CalendarRepository
 
             if ($user->get_official_code())
             {
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $year . '_events] WHERE person_id = \'' .
-                     $user->get_official_code() . '\' AND module_id = \'' . $moduleIdentifier . '\'';
+                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                     '_events] WHERE person_id = \'' . $user->get_official_code() . '\' AND module_id = \'' .
+                     $moduleIdentifier . '\'';
                 $statement = DataManager::get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
             }
@@ -185,8 +186,8 @@ class CalendarRepository
     {
         if ($user->get_official_code())
         {
-            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $year . '_events] WHERE person_id = \'' .
-                 $user->get_official_code() . '\' AND id = \'' . $identifier . '\'';
+            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                 '_events] WHERE person_id = \'' . $user->get_official_code() . '\' AND id = \'' . $identifier . '\'';
             $statement = DataManager::get_instance()->get_connection()->query($query);
             return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
         }
@@ -361,5 +362,74 @@ class CalendarRepository
         }
 
         return $record;
+    }
+
+    /**
+     *
+     * @param integer $year
+     * @return string[]
+     */
+    public function findZonesByYear($year)
+    {
+        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $query = 'SELECT DISTINCT year, zone_id, zone_code, zone_name FROM [INFORDATSYNC].[dbo].[v_syllabus_' .
+                 $this->convertYear($year) . '_locations] ORDER BY year, zone_code, zone_name';
+
+            $statement = DataManager::get_instance()->get_connection()->query($query);
+
+            $zones = array();
+
+            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
+            {
+                $record = $this->processRecord($record);
+                $zones[] = $record;
+            }
+
+            $cache->save($cacheIdentifier, $zones);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
+     * @param integer $year
+     * @param string $zoneIdentifier
+     * @return string[]
+     */
+    public function findLocationsByYearAndZoneIdentifier($year, $zoneIdentifier)
+    {
+        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $zoneIdentifier)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                 '_locations] WHERE zone_id = \'' . $zoneIdentifier . '\' ORDER BY location_code, location_name';
+            $statement = DataManager::get_instance()->get_connection()->query($query);
+
+            $locations = array();
+
+            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
+            {
+                $record = $this->processRecord($record);
+                $locations[] = $record;
+            }
+
+            $cache->save($cacheIdentifier, $locations);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    private function convertYear($year)
+    {
+        $yearParts = explode('-', $year);
+        return substr($yearParts[0], 2, 2) . $yearParts[1];
     }
 }

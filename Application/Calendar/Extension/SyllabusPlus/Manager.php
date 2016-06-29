@@ -31,6 +31,7 @@ abstract class Manager extends Application
     const PARAM_FIRSTLETTER = 'firstletter';
     const PARAM_DOWNLOAD = 'download';
     const PARAM_GROUP_ID = 'group_id';
+    const PARAM_LOCATION_ID = 'location_id';
 
     // Actions
     const ACTION_VIEW = 'Viewer';
@@ -40,6 +41,7 @@ abstract class Manager extends Application
     const ACTION_ICAL = 'Ical';
     const ACTION_PRINT = 'Printer';
     const ACTION_GROUP = 'Group';
+    const ACTION_LOCATION = 'Location';
 
     // Default action
     const DEFAULT_ACTION = self :: ACTION_VIEW;

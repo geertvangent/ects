@@ -1,8 +1,11 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Service;
 
+use Chamilo\Configuration\Configuration;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Zone;
 
 /**
  *
@@ -100,7 +103,7 @@ class CalendarService
      */
     public function isConfigured(\Chamilo\Configuration\Configuration $configuration)
     {
-        $namespace = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: package();
+        $namespace = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::package();
 
         $hasDriver = $configuration->get_setting(array($namespace, 'dbms'));
         $hasUser = $configuration->get_setting(array($namespace, 'user'));
@@ -177,5 +180,62 @@ class CalendarService
     {
         $groups = $this->getGroups();
         return $groups[$identifier];
+    }
+
+    /**
+     *
+     * @param integer $year
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Zone[]
+     */
+    public function getZonesByYear($year)
+    {
+        $zoneRecords = $this->getCalendarRepository()->findZonesByYear($year);
+        $zones = array();
+
+        foreach ($zoneRecords as $zoneRecord)
+        {
+            $zones[] = new Zone(
+                $zoneRecord['year'],
+                $zoneRecord['zone_id'],
+                $zoneRecord['zone_code'],
+                $zoneRecord['zone_name']);
+        }
+
+        return $zones;
+    }
+
+    /**
+     *
+     * @param integer year
+     * @param string $zoneIdentifier
+     * @return string[]
+     */
+    public function getLocationsByYearAndZoneIdentifier($year, $zoneIdentifier)
+    {
+        $locationRecords = $this->getCalendarRepository()->findLocationsByYearAndZoneIdentifier($year, $zoneIdentifier);
+        $locations = array();
+
+        foreach ($locationRecords as $locationRecord)
+        {
+            $locations[] = new Location(
+                $locationRecord['year'],
+                $locationRecord['location_id'],
+                $locationRecord['location_code'],
+                $locationRecord['location_name']);
+        }
+
+        return $locations;
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    public function getYears()
+    {
+        return explode(
+            ',',
+            Configuration::get_instance()->get_setting(
+                array('Ehb\Application\Calendar\Extension\SyllabusPlus', 'years')));
     }
 }

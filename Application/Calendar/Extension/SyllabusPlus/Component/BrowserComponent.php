@@ -55,7 +55,7 @@ class BrowserComponent extends Manager implements DelegateComponent
         $this->checkAuthorization();
         $this->initialize();
 
-        BreadcrumbTrail :: get_instance()->add(
+        BreadcrumbTrail::get_instance()->add(
             new Breadcrumb(
                 null,
                 $this->getUserCalendar()->fullname(
@@ -86,9 +86,9 @@ class BrowserComponent extends Manager implements DelegateComponent
 
     protected function initialize()
     {
-        $header = Page :: getInstance()->getHeader();
+        $header = Page::getInstance()->getHeader();
         $header->addCssFile(
-            Theme :: getInstance()->getCssPath(\Chamilo\Application\Calendar\Manager :: package(), true) . 'Print.css',
+            Theme::getInstance()->getCssPath(\Chamilo\Application\Calendar\Manager::package(), true) . 'Print.css',
             'print');
 
         if ($this->getJumpForm()->validate())
@@ -96,8 +96,8 @@ class BrowserComponent extends Manager implements DelegateComponent
             $this->setCurrentRendererTime($this->getJumpForm()->getTime());
         }
 
-        $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
-        $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
+        $this->set_parameter(ViewRenderer::PARAM_TYPE, $this->getCurrentRendererType());
+        $this->set_parameter(ViewRenderer::PARAM_TIME, $this->getCurrentRendererTime());
     }
 
     /**
@@ -121,11 +121,11 @@ class BrowserComponent extends Manager implements DelegateComponent
     protected function getDisplayParameters()
     {
         return array(
-            self :: PARAM_CONTEXT => self :: package(),
-            self :: PARAM_ACTION => self :: ACTION_BROWSER,
-            ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
-            ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
-            self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
+            self::PARAM_CONTEXT => self::package(),
+            self::PARAM_ACTION => self::ACTION_BROWSER,
+            ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
+            ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
+            self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
     }
 
     /**
@@ -167,15 +167,15 @@ class BrowserComponent extends Manager implements DelegateComponent
                 $this->getViewActions());
             $renderer = $rendererFactory->getRenderer();
 
-            if ($this->getCurrentRendererType() == ViewRenderer :: TYPE_DAY ||
-                 $this->getCurrentRendererType() == ViewRenderer :: TYPE_WEEK)
+            if ($this->getCurrentRendererType() == ViewRenderer::TYPE_DAY ||
+                 $this->getCurrentRendererType() == ViewRenderer::TYPE_WEEK)
             {
                 $renderer->setStartHour(
-                    LocalSetting :: getInstance()->get('working_hours_start', 'Chamilo\Libraries\Calendar'));
+                    LocalSetting::getInstance()->get('working_hours_start', 'Chamilo\Libraries\Calendar'));
                 $renderer->setEndHour(
-                    LocalSetting :: getInstance()->get('working_hours_end', 'Chamilo\Libraries\Calendar'));
+                    LocalSetting::getInstance()->get('working_hours_end', 'Chamilo\Libraries\Calendar'));
                 $renderer->setHideOtherHours(
-                    LocalSetting :: getInstance()->get('hide_non_working_hours', 'Chamilo\Libraries\Calendar'));
+                    LocalSetting::getInstance()->get('hide_non_working_hours', 'Chamilo\Libraries\Calendar'));
             }
 
             $this->viewRenderer = $renderer;
@@ -192,60 +192,72 @@ class BrowserComponent extends Manager implements DelegateComponent
 
         $printUrl = new Redirect(
             array(
-                self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => self :: ACTION_PRINT,
-                ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
-                ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id()));
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => self::ACTION_PRINT,
+                ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
+                ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id()));
 
         $generalButtonGroup->addButton(
             new Button(
-                Translation :: get(self :: ACTION_PRINT . 'Component'),
+                Translation::get(self::ACTION_PRINT . 'Component'),
                 new BootstrapGlyph('print'),
                 $printUrl->getUrl()));
 
         $iCalUrl = new Redirect(
             array(
-                self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => Manager :: ACTION_ICAL,
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => Manager::ACTION_ICAL,
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
 
         $generalButtonGroup->addButton(
-            new Button(Translation :: get('ICalExternal'), new BootstrapGlyph('globe'), $iCalUrl->getUrl()));
+            new Button(Translation::get('ICalExternal'), new BootstrapGlyph('globe'), $iCalUrl->getUrl()));
 
         $settingsUrl = new Redirect(
             array(
-                Application :: PARAM_CONTEXT => \Chamilo\Core\User\Manager :: context(),
-                Application :: PARAM_ACTION => \Chamilo\Core\User\Manager :: ACTION_USER_SETTINGS,
-                UserSettingsComponent :: PARAM_CONTEXT => 'Chamilo\Libraries\Calendar'));
+                Application::PARAM_CONTEXT => \Chamilo\Core\User\Manager::context(),
+                Application::PARAM_ACTION => \Chamilo\Core\User\Manager::ACTION_USER_SETTINGS,
+                UserSettingsComponent::PARAM_CONTEXT => 'Chamilo\Libraries\Calendar'));
 
         $generalButtonGroup->addButton(
-            new Button(Translation :: get('ConfigComponent'), new BootstrapGlyph('cog'), $settingsUrl->getUrl()));
+            new Button(Translation::get('ConfigComponent'), new BootstrapGlyph('cog'), $settingsUrl->getUrl()));
 
         $actions[] = $generalButtonGroup;
 
         $browserButtonGroup = new ButtonGroup();
 
         $userBrowserUrl = new Redirect(
-            array(self :: PARAM_CONTEXT => self :: package(), self :: PARAM_ACTION => self :: ACTION_USER_BROWSER));
+            array(self::PARAM_CONTEXT => self::package(), self::PARAM_ACTION => self::ACTION_USER_BROWSER));
 
         $browserButtonGroup->addButton(
             new Button(
-                Translation :: get(self :: ACTION_USER_BROWSER . 'Component'),
+                Translation::get(self::ACTION_USER_BROWSER . 'Component'),
                 new FontAwesomeGlyph('user'),
                 $userBrowserUrl->getUrl()));
 
         $groupUrl = new Redirect(
             array(
-                self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => self :: ACTION_GROUP,
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => self::ACTION_GROUP,
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
 
         $browserButtonGroup->addButton(
             new Button(
-                Translation :: get(self :: ACTION_GROUP . 'Component'),
+                Translation::get(self::ACTION_GROUP . 'Component'),
                 new FontAwesomeGlyph('users'),
                 $groupUrl->getUrl()));
+
+        $locationUrl = new Redirect(
+            array(
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => self::ACTION_LOCATION,
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
+
+        $browserButtonGroup->addButton(
+            new Button(
+                Translation::get(self::ACTION_LOCATION . 'Component'),
+                new FontAwesomeGlyph('map-marker'),
+                $locationUrl->getUrl()));
 
         $actions[] = $browserButtonGroup;
 
