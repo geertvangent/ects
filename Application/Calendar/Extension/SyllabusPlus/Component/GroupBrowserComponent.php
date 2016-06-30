@@ -21,7 +21,7 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\GroupCalendarRendere
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class GroupComponent extends BrowserComponent
+class GroupBrowserComponent extends UserBrowserComponent
 {
     const UNORDERED_GROUPS = 'Andere';
 
@@ -30,6 +30,12 @@ class GroupComponent extends BrowserComponent
      * @var string
      */
     private $groupIdentifier;
+
+    /**
+     *
+     * @var string
+     */
+    private $year;
 
     /**
      * Runs this component and displays its output.
@@ -47,52 +53,78 @@ class GroupComponent extends BrowserComponent
     protected function getDisplayParameters()
     {
         return array(
-            self :: PARAM_CONTEXT => self :: package(),
-            self :: PARAM_ACTION => self :: ACTION_GROUP,
-            ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
-            ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
-            self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id(),
-            self :: PARAM_GROUP_ID => $this->getGroupIdentifier());
+            self::PARAM_CONTEXT => self::package(),
+            self::PARAM_ACTION => self::ACTION_GROUP_BROWSER,
+            ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
+            ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
+            self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id(),
+            self::PARAM_GROUP_ID => $this->getGroupIdentifier(),
+            self::PARAM_YEAR => $this->getYear());
     }
 
-    protected function renderGroups()
+    /**
+     *
+     * @return string
+     */
+    protected function renderYears()
     {
         $calendarService = $this->getCalendarService();
-        $userFaculties = $calendarService->getFacultiesForUser($this->getUserCalendar());
-        $userGroups = $calendarService->getFacultiesGroupsForUser($this->getUserCalendar());
+
+        foreach ($calendarService->getYears() as $year)
+        {
+            $html[] = '<h4>' . Translation::get('AcademicYear', array('YEAR' => $year)) . '</h4>';
+            $html[] = $this->renderGroups($year);
+        }
+
+        return implode(PHP_EOL, $html);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    protected function renderGroups($year)
+    {
+        $calendarService = $this->getCalendarService();
+        $userFaculties = $calendarService->getFacultiesByYearAndUser($year, $this->getUserCalendar());
+        $userGroups = $calendarService->getFacultiesGroupsByYearAndUser($year, $this->getUserCalendar());
 
         $html = array();
 
         if (count($userFaculties) > 0)
         {
-            $html[] = '<h3>' . Translation :: get('MyFaculties') . '</h3>';
+            $html[] = '<h5>' . Translation::get('MyFaculties') . '</h3>';
 
-            $tabs = new DynamicTabsRenderer('my_faculties');
+            $tabs = new DynamicTabsRenderer('my-faculties-' . $year);
 
             foreach ($userFaculties as $userFaculty)
             {
                 $content = $this->renderFacultyGroups(
                     $userFaculty,
-                    $calendarService->getFacultyGroupsByCode($userFaculty['department_id']),
+                    $calendarService->getFacultyGroupsByYearAndCode($userFaculty['department_id']),
                     $userGroups[$userFaculty['department_id']]);
                 $tabs->add_tab(
-                    new DynamicContentTab($userFaculty['department_id'], $userFaculty['department_name'], null, $content));
+                    new DynamicContentTab(
+                        $year . '-' . $userFaculty['department_id'],
+                        $userFaculty['department_name'],
+                        null,
+                        $content));
             }
 
             $html[] = $tabs->render();
 
-            $html[] = '<h3>' . Translation :: get('OtherFaculties') . '</h3>';
+            $html[] = '<h5>' . Translation::get('OtherFaculties') . '</h3>';
         }
 
-        $faculties = $calendarService->getFaculties();
+        $faculties = $calendarService->getFacultiesByYear($year);
 
         if (count($faculties) > count($userFaculties))
         {
-            $tabs = new DynamicTabsRenderer('other_faculties');
+            $tabs = new DynamicTabsRenderer('other-faculties-' . $year);
 
             foreach ($faculties as $faculty)
             {
-                $facultyGroups = $calendarService->getFacultyGroupsByCode($faculty['department_id']);
+                $facultyGroups = $calendarService->getFacultyGroupsByYearAndCode($year, $faculty['department_id']);
 
                 if (! isset($userFaculties[$faculty['department_id']]) && count($facultyGroups) > 0)
                 {
@@ -101,7 +133,11 @@ class GroupComponent extends BrowserComponent
                         $facultyGroups,
                         $userGroups[$faculty['department_id']]);
                     $tabs->add_tab(
-                        new DynamicContentTab($faculty['department_id'], $faculty['department_name'], null, $content));
+                        new DynamicContentTab(
+                            $year . '-' . $faculty['department_id'],
+                            $faculty['department_name'],
+                            null,
+                            $content));
                 }
             }
 
@@ -126,20 +162,20 @@ class GroupComponent extends BrowserComponent
 
         if (count($userGroups) > 0)
         {
-            $html[] = '<h4>' . Translation :: get('MyGroups') . '</h4>';
+            $html[] = '<h4>' . Translation::get('MyGroups') . '</h4>';
 
             $html[] = '<ul class="syllabus-group-list">';
 
             foreach ($userGroups as $userGroup)
             {
                 $html[] = '<li>';
-                $html[] = $this->renderGroupLink($userGroup['group_name'], $userGroup['group_id']);
+                $html[] = $this->renderGroupLink($userGroup['year'], $userGroup['group_name'], $userGroup['group_id']);
                 $html[] = '</li>';
             }
 
             $html[] = '</ul>';
 
-            $html[] = '<h4>' . Translation :: get('OtherGroups') . '</h4>';
+            $html[] = '<h4>' . Translation::get('OtherGroups') . '</h4>';
         }
 
         $facultyGroups = $this->orderFacultyGroups($facultyGroups);
@@ -159,7 +195,10 @@ class GroupComponent extends BrowserComponent
                 if (! key_exists($facultyTypeGroup['id'], $userGroups))
                 {
                     $html[] = '<li>';
-                    $html[] = $this->renderGroupLink($facultyTypeGroup['name'], $facultyTypeGroup['id']);
+                    $html[] = $this->renderGroupLink(
+                        $facultyTypeGroup['year'],
+                        $facultyTypeGroup['name'],
+                        $facultyTypeGroup['id']);
                     $html[] = '</li>';
                 }
             }
@@ -173,8 +212,8 @@ class GroupComponent extends BrowserComponent
 
         $html[] = '</ul>';
 
-        $html[] = ResourceManager :: get_instance()->get_resource_html(
-            Path :: getInstance()->getJavascriptPath(self :: package(), true) . 'Group.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(self::package(), true) . 'Group.js');
 
         return implode(PHP_EOL, $html);
     }
@@ -200,11 +239,11 @@ class GroupComponent extends BrowserComponent
             else
             {
                 $facultyGroup['name'] = $groupNameParts[1];
-                $orderedFacultyGroups[self :: UNORDERED_GROUPS][] = $facultyGroup;
+                $orderedFacultyGroups[self::UNORDERED_GROUPS][] = $facultyGroup;
             }
         }
 
-        if (count($orderedFacultyGroups) == 1 && key_exists(self :: UNORDERED_GROUPS, $orderedFacultyGroups))
+        if (count($orderedFacultyGroups) == 1 && key_exists(self::UNORDERED_GROUPS, $orderedFacultyGroups))
         {
             $orderedFacultyGroups = array();
 
@@ -223,7 +262,7 @@ class GroupComponent extends BrowserComponent
                 else
                 {
                     $facultyGroup['name'] = $groupName;
-                    $orderedFacultyGroups[self :: UNORDERED_GROUPS][] = $facultyGroup;
+                    $orderedFacultyGroups[self::UNORDERED_GROUPS][] = $facultyGroup;
                 }
             }
         }
@@ -233,17 +272,20 @@ class GroupComponent extends BrowserComponent
 
     /**
      *
-     * @param string $originalGroupName
+     * @param string $year
+     * @param string $groupName
+     * @param string $groupId
      * @return string
      */
-    protected function renderGroupLink($groupName, $groupId)
+    protected function renderGroupLink($year, $groupName, $groupId)
     {
         $groupLink = new Redirect(
             array(
-                self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => self :: ACTION_GROUP,
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
-                self :: PARAM_GROUP_ID => $groupId));
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => self::ACTION_GROUP_BROWSER,
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
+                self::PARAM_YEAR => $year,
+                self::PARAM_GROUP_ID => $groupId));
 
         return '<a href="' . $groupLink->getUrl() . '">' . $groupName . '</a>';
     }
@@ -271,6 +313,7 @@ class GroupComponent extends BrowserComponent
         if (! isset($this->calendarDataProvider))
         {
             $this->calendarDataProvider = new GroupCalendarRendererProvider(
+                $this->getYear(),
                 $this->getGroupIdentifier(),
                 $this->getUserCalendar(),
                 $this->get_user(),
@@ -282,20 +325,24 @@ class GroupComponent extends BrowserComponent
 
     protected function renderCalendar()
     {
-        $groupUrl = new Redirect($this->getDisplayParameters(), array(self :: PARAM_GROUP_ID));
+        $groupUrl = new Redirect($this->getDisplayParameters(), array(self::PARAM_GROUP_ID));
 
-        BreadcrumbTrail :: get_instance()->add(
-            new Breadcrumb($groupUrl->getUrl(), Translation :: get('GroupComponent')));
+        BreadcrumbTrail::get_instance()->add(
+            new Breadcrumb($groupUrl->getUrl(), Translation::get('GroupBrowserComponent')));
 
         $groupIdentifier = $this->getGroupIdentifier();
+        $year = $this->getYear();
 
         if ($groupIdentifier)
         {
-            $group = $this->getCalendarService()->getGroupByIdentifier($groupIdentifier);
+            BreadcrumbTrail::get_instance()->add(
+                new Breadcrumb(null, Translation::get('AcademicYear', array('YEAR' => $year))));
 
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $group['name']));
+            $group = $this->getCalendarService()->getGroupByYearAndIdentifier($year, $groupIdentifier);
 
-            return parent :: renderCalendar();
+            BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $group['name']));
+
+            return parent::renderCalendar();
         }
         else
         {
@@ -303,7 +350,7 @@ class GroupComponent extends BrowserComponent
             $html = array();
 
             $html[] = $this->render_header();
-            $html[] = $this->renderGroups();
+            $html[] = $this->renderYears();
             $html[] = $this->render_footer();
 
             return implode(PHP_EOL, $html);
@@ -318,9 +365,23 @@ class GroupComponent extends BrowserComponent
     {
         if (! isset($this->groupIdentifier))
         {
-            $this->groupIdentifier = $this->getRequest()->query->get(self :: PARAM_GROUP_ID);
+            $this->groupIdentifier = $this->getRequest()->query->get(self::PARAM_GROUP_ID);
         }
 
         return $this->groupIdentifier;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    protected function getYear()
+    {
+        if (! isset($this->year))
+        {
+            $this->year = $this->getRequest()->query->get(self::PARAM_YEAR);
+        }
+
+        return $this->year;
     }
 }

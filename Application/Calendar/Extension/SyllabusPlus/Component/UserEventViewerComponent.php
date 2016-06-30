@@ -22,7 +22,7 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
  * @package application\calendar
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  */
-class ViewerComponent extends Manager implements DelegateComponent
+class UserEventViewerComponent extends Manager implements DelegateComponent
 {
 
     /**
@@ -345,7 +345,7 @@ class ViewerComponent extends Manager implements DelegateComponent
 
         $parameters = array();
         $parameters[Application::PARAM_CONTEXT] = self::package();
-        $parameters[self::PARAM_ACTION] = self::ACTION_VIEW;
+        $parameters[self::PARAM_ACTION] = self::ACTION_VIEW_USER_EVENT;
         $parameters[self::PARAM_USER_USER_ID] = $this->getUserCalendar()->getId();
         $parameters[self::PARAM_ACTIVITY_ID] = $this->getActivityId();
         $parameters[self::PARAM_ACTIVITY_TIME] = $this->getActivityTime();

@@ -12,7 +12,7 @@ use Chamilo\Libraries\Format\Structure\Page;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Platform\Configuration\LocalSetting;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\UserCalendarRendererProvider;
 
 /**
  *
@@ -29,15 +29,15 @@ class PrinterComponent extends Manager implements DelegateComponent
      */
     public function run()
     {
-        Page :: getInstance()->setViewMode(Page :: VIEW_MODE_HEADERLESS);
+        Page::getInstance()->setViewMode(Page::VIEW_MODE_HEADERLESS);
 
-        $header = Page :: getInstance()->getHeader();
-        $header->addCssFile(Theme :: getInstance()->getCssPath(self :: package(), true) . 'Print.css', 'print');
+        $header = Page::getInstance()->getHeader();
+        $header->addCssFile(Theme::getInstance()->getCssPath(self::package(), true) . 'Print.css', 'print');
 
         $this->checkAuthorization();
 
-        $this->set_parameter(ViewRenderer :: PARAM_TYPE, $this->getCurrentRendererType());
-        $this->set_parameter(ViewRenderer :: PARAM_TIME, $this->getCurrentRendererTime());
+        $this->set_parameter(ViewRenderer::PARAM_TYPE, $this->getCurrentRendererType());
+        $this->set_parameter(ViewRenderer::PARAM_TIME, $this->getCurrentRendererTime());
 
         $html = array();
 
@@ -54,11 +54,11 @@ class PrinterComponent extends Manager implements DelegateComponent
     private function getDisplayParameters()
     {
         return array(
-            self :: PARAM_CONTEXT => self :: package(),
-            self :: PARAM_ACTION => self :: ACTION_BROWSER,
-            ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
-            ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
-            self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
+            self::PARAM_CONTEXT => self::package(),
+            self::PARAM_ACTION => self::ACTION_USER_BROWSER,
+            ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
+            ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
+            self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
     }
 
     /**
@@ -67,7 +67,7 @@ class PrinterComponent extends Manager implements DelegateComponent
      */
     public function getCalendarHtml()
     {
-        BreadcrumbTrail :: get_instance()->add(
+        BreadcrumbTrail::get_instance()->add(
             new Breadcrumb(
                 null,
                 $this->getUserCalendar()->fullname(
@@ -76,7 +76,7 @@ class PrinterComponent extends Manager implements DelegateComponent
 
         $displayParameters = $this->getDisplayParameters();
 
-        $dataProvider = new CalendarRendererProvider(
+        $dataProvider = new UserCalendarRendererProvider(
             new CalendarRendererProviderRepository(),
             $this->getUserCalendar(),
             $this->get_user(),
@@ -90,14 +90,14 @@ class PrinterComponent extends Manager implements DelegateComponent
             $this->getCurrentRendererTime());
         $renderer = $rendererFactory->getRenderer();
 
-        if ($this->getCurrentRendererType() == ViewRenderer :: TYPE_DAY ||
-             $this->getCurrentRendererType() == ViewRenderer :: TYPE_WEEK)
+        if ($this->getCurrentRendererType() == ViewRenderer::TYPE_DAY ||
+             $this->getCurrentRendererType() == ViewRenderer::TYPE_WEEK)
         {
             $renderer->setStartHour(
-                LocalSetting :: getInstance()->get('working_hours_start', 'Chamilo\Libraries\Calendar'));
-            $renderer->setEndHour(LocalSetting :: getInstance()->get('working_hours_end', 'Chamilo\Libraries\Calendar'));
+                LocalSetting::getInstance()->get('working_hours_start', 'Chamilo\Libraries\Calendar'));
+            $renderer->setEndHour(LocalSetting::getInstance()->get('working_hours_end', 'Chamilo\Libraries\Calendar'));
             $renderer->setHideOtherHours(
-                LocalSetting :: getInstance()->get('hide_non_working_hours', 'Chamilo\Libraries\Calendar'));
+                LocalSetting::getInstance()->get('hide_non_working_hours', 'Chamilo\Libraries\Calendar'));
         }
 
         return $renderer->render();

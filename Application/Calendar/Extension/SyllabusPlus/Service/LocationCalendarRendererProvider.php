@@ -3,7 +3,7 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Service;
 
 use Chamilo\Configuration\Configuration;
 use Chamilo\Core\User\Storage\DataClass\User;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\GroupEventParser;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\LocationEventParser;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 
 /**
@@ -13,7 +13,7 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepositor
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class GroupCalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Service\CalendarRendererProvider
+class LocationCalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Service\CalendarRendererProvider
 {
 
     /**
@@ -26,40 +26,40 @@ class GroupCalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer
      *
      * @var string
      */
-    private $groupIdentifier;
+    private $locationIdentifier;
 
     /**
      *
      * @param string $year
-     * @param string $groupIdentifier
+     * @param string $locationIdentifier
      * @param \Chamilo\Core\User\Storage\DataClass\User $dataUser
      * @param \Chamilo\Core\User\Storage\DataClass\User $viewingUser
      * @param string[] $displayParameters;
      */
-    public function __construct($year, $groupIdentifier, User $dataUser, User $viewingUser, $displayParameters)
+    public function __construct($year, $locationIdentifier, User $dataUser, User $viewingUser, $displayParameters)
     {
         parent::__construct($dataUser, $viewingUser, $displayParameters);
 
         $this->year = $year;
-        $this->groupIdentifier = $groupIdentifier;
+        $this->locationIdentifier = $locationIdentifier;
     }
 
     /**
      *
      * @return string
      */
-    public function getGroupIdentifier()
+    public function getLocationIdentifier()
     {
-        return $this->groupIdentifier;
+        return $this->locationIdentifier;
     }
 
     /**
      *
-     * @param string $groupIdentifier
+     * @param string $locationIdentifier
      */
-    public function setGroupIdentifier($groupIdentifier)
+    public function setLocationIdentifier($locationIdentifier)
     {
-        $this->groupIdentifier = $groupIdentifier;
+        $this->locationIdentifier = $locationIdentifier;
     }
 
     /**
@@ -99,15 +99,15 @@ class GroupCalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer
 
             if ($calendarService->isConfigured(Configuration::get_instance()))
             {
-                $eventResultSet = $calendarService->getEventsForGroupAndBetweenDates(
+                $eventResultSet = $calendarService->getEventsByYearAndLocationAndBetweenDates(
                     $this->getYear(),
-                    $this->getGroupIdentifier(),
+                    $this->getLocationIdentifier(),
                     $startTime,
                     $endTime);
 
                 while ($calenderEvent = $eventResultSet->next_result())
                 {
-                    $eventParser = new GroupEventParser($this->getDataUser(), $calenderEvent, $startTime, $endTime);
+                    $eventParser = new LocationEventParser($this->getDataUser(), $calenderEvent, $startTime, $endTime);
                     $events = array_merge($events, $eventParser->getEvents());
                 }
             }

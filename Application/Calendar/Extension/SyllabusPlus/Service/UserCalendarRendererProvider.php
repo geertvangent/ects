@@ -2,7 +2,7 @@
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Service;
 
 use Chamilo\Configuration\Configuration;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\UserEventParser;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 
 /**
@@ -12,7 +12,7 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepositor
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Service\CalendarRendererProvider
+class UserCalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Service\CalendarRendererProvider
 {
 
     /**
@@ -25,14 +25,14 @@ class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Serv
     {
         $events = array();
 
-        if ($requestedSourceType != self :: SOURCE_TYPE_EXTERNAL)
+        if ($requestedSourceType != self::SOURCE_TYPE_EXTERNAL)
         {
             // TODO: This is basically almost the same as the logic in the integration with the Calendar application,
             // the logic should therefore be split off into it's own service
-            $calendarService = new CalendarService(CalendarRepository :: getInstance());
+            $calendarService = new CalendarService(CalendarRepository::getInstance());
             $events = array();
 
-            if ($calendarService->isConfigured(Configuration :: get_instance()))
+            if ($calendarService->isConfigured(Configuration::get_instance()))
             {
                 $eventResultSet = $calendarService->getEventsForUserAndBetweenDates(
                     $this->getDataUser(),
@@ -41,7 +41,7 @@ class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Serv
 
                 while ($calenderEvent = $eventResultSet->next_result())
                 {
-                    $eventParser = new EventParser($this->getDataUser(), $calenderEvent, $startTime, $endTime);
+                    $eventParser = new UserEventParser($this->getDataUser(), $calenderEvent, $startTime, $endTime);
                     $events = array_merge($events, $eventParser->getEvents());
                 }
             }

@@ -69,9 +69,30 @@ class CalendarService
      * @param integer $toDate
      * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
      */
-    public function getEventsForGroupAndBetweenDates($groupIdentifier, $fromDate, $toDate)
+    public function getEventsForGroupAndBetweenDates($year, $groupIdentifier, $fromDate, $toDate)
     {
-        return $this->getCalendarRepository()->findEventsForGroupAndBetweenDates($groupIdentifier, $fromDate, $toDate);
+        return $this->getCalendarRepository()->findEventsForGroupAndBetweenDates(
+            $year,
+            $groupIdentifier,
+            $fromDate,
+            $toDate);
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $locationIdentifier
+     * @param integer $fromDate
+     * @param integer $toDate
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function getEventsByYearAndLocationAndBetweenDates($year, $locationIdentifier, $fromDate, $toDate)
+    {
+        return $this->getCalendarRepository()->findEventsByYearAndLocationAndBetweenDates(
+            $year,
+            $locationIdentifier,
+            $fromDate,
+            $toDate);
     }
 
     /**
@@ -116,70 +137,95 @@ class CalendarService
 
     /**
      *
+     * @param string $year
      * @param User $user
      * @return string[]
      */
-    public function getFacultiesForUser(User $user)
+    public function getFacultiesByYearAndUser($year, User $user)
     {
-        return $this->getCalendarRepository()->findFacultiesForUser($user);
+        return $this->getCalendarRepository()->findFacultiesByYearAndUser($year, $user);
     }
 
     /**
      *
+     * @param string $year
      * @param User $user
      * @return string[]
      */
-    public function getFacultiesGroupsForUser(User $user)
+    public function getFacultiesGroupsByYearAndUser($year, User $user)
     {
-        return $this->getCalendarRepository()->findFacultiesGroupsForUser($user);
+        return $this->getCalendarRepository()->findFacultiesGroupsByYearAndUser($year, $user);
     }
 
     /**
      *
+     * @param string $year
      * @return string[]
      */
-    public function getFaculties()
+    public function getFacultiesByYear($year)
     {
-        return $this->getCalendarRepository()->findFaculties();
+        return $this->getCalendarRepository()->findFacultiesByYear($year);
     }
 
     /**
      *
+     * @param string $year
      * @return string[]
      */
-    public function getFacultyGroups()
+    public function getFacultyGroupsByYear($year)
     {
-        return $this->getCalendarRepository()->findFacultyGroups();
+        return $this->getCalendarRepository()->findFacultyGroupsByYear($year);
     }
 
     /**
      *
+     * @param string $year
      * @param string $facultyCode
      * @return string[]
      */
-    public function getFacultyGroupsByCode($facultyCode)
+    public function getFacultyGroupsByYearAndCode($year, $facultyCode)
     {
-        $groups = $this->getFacultyGroups();
+        $groups = $this->getFacultyGroupsByYear($year);
         return $groups[$facultyCode];
     }
 
     /**
      *
+     * @param string $year
      * @return string[]
      */
-    public function getGroups()
+    public function getGroupsByYear($year)
     {
-        return $this->getCalendarRepository()->findGroups();
+        return $this->getCalendarRepository()->findGroupsByYear($year);
     }
 
     /**
      *
+     * @param string $year
+     * @param string $identifier
      * @return string[]
      */
-    public function getGroupByIdentifier($identifier)
+    public function getGroupByYearAndIdentifier($year, $identifier)
     {
-        $groups = $this->getGroups();
+        $groups = $this->getGroupsByYear($year);
         return $groups[$identifier];
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $identifier
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location
+     */
+    public function getLocationByYearAndIdentifier($year, $identifier)
+    {
+        $locationRecord = $this->getCalendarRepository()->findLocationByYearAndIdentifier($year, $identifier);
+
+        return new Location(
+            $locationRecord['year'],
+            $locationRecord['location_id'],
+            $locationRecord['location_code'],
+            $locationRecord['location_name']);
     }
 
     /**

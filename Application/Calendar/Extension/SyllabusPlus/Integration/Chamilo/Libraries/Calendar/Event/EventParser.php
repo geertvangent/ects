@@ -14,7 +14,7 @@ use Chamilo\Libraries\Platform\Translation;
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class EventParser
+abstract class EventParser
 {
 
     /**
@@ -157,12 +157,12 @@ class EventParser
         $endTime = $calendarEvent['end_time'];
 
         $parameters = array();
-        $parameters[Application :: PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context();
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: ACTION_VIEW;
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_ID] = $calendarEvent['id'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_YEAR] = $calendarEvent['year'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_ACTIVITY_TIME] = $startTime;
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: PARAM_USER_USER_ID] = $this->getDataUser()->get_id();
+        $parameters[Application::PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::context();
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::ACTION_VIEW_USER_EVENT;
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_ID] = $calendarEvent['id'];
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_YEAR] = $calendarEvent['year'];
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = $startTime;
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_USER_USER_ID] = $this->getDataUser()->get_id();
 
         $redirect = new Redirect($parameters);
 
@@ -173,18 +173,23 @@ class EventParser
             $startTime,
             $endTime,
             new RecurrenceRules(),
-            $redirect->getUrl(),
+            $this->getUrl($calendarEvent),
             $this->getEventLabel($calendarEvent),
             $this->getEventDescription($calendarEvent),
             $calendarEvent['location'],
             $source,
-            \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: context());
+            \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::context());
 
         $event->setCalendarEvent($calendarEvent);
 
         return array($event);
     }
 
+    /**
+     *
+     * @param string[] $calendarEvent
+     * @return string
+     */
     private function getEventLabel($calendarEvent)
     {
         $html = array();
@@ -197,7 +202,7 @@ class EventParser
             $html[] = '(' . trim($calendarEvent['location']) . ')';
         }
 
-        if ($this->getDataUser()->get_status() == User :: STATUS_TEACHER)
+        if ($this->getDataUser()->get_status() == User::STATUS_TEACHER)
         {
             if ($calendarEvent['groups'])
             {
@@ -208,6 +213,11 @@ class EventParser
         return implode(' ', $html);
     }
 
+    /**
+     *
+     * @param string[] $calendarEvent
+     * @return string
+     */
     private function getEventDescription($calendarEvent)
     {
         $html = array();
@@ -216,19 +226,26 @@ class EventParser
 
         if ($calendarEvent['teacher'])
         {
-            $html[] = Translation :: get('ByTeacher') . ' ' . trim($calendarEvent['teacher']);
+            $html[] = Translation::get('ByTeacher') . ' ' . trim($calendarEvent['teacher']);
         }
 
         if ($calendarEvent['location'])
         {
-            $html[] = Translation :: get('AtLocation') . ' ' . trim($calendarEvent['location']);
+            $html[] = Translation::get('AtLocation') . ' ' . trim($calendarEvent['location']);
         }
 
         if ($calendarEvent['groups'])
         {
-            $html[] = Translation :: get('ForGroups') . ' ' . trim($calendarEvent['groups']);
+            $html[] = Translation::get('ForGroups') . ' ' . trim($calendarEvent['groups']);
         }
 
         return implode(PHP_EOL, $html);
     }
+
+    /**
+     *
+     * @param string[] $calendarEvent
+     * @return string
+     */
+    abstract function getUrl($calendarEvent);
 }

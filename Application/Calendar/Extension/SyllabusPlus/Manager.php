@@ -34,17 +34,19 @@ abstract class Manager extends Application
     const PARAM_LOCATION_ID = 'location_id';
 
     // Actions
-    const ACTION_VIEW = 'Viewer';
-    const ACTION_BROWSER = 'Browser';
-    const ACTION_USER_BROWSER = 'UserBrowser';
+    const ACTION_VIEW_USER_EVENT = 'UserEventViewer';
+    const ACTION_VIEW_GROUP_EVENT = 'GroupEventViewer';
+    const ACTION_VIEW_LOCATION_EVENT = 'LocationEventViewer';
+    const ACTION_USER = 'User';
     const ACTION_CODE = 'Code';
     const ACTION_ICAL = 'Ical';
     const ACTION_PRINT = 'Printer';
-    const ACTION_GROUP = 'Group';
-    const ACTION_LOCATION = 'Location';
+    const ACTION_USER_BROWSER = 'UserBrowser';
+    const ACTION_GROUP_BROWSER = 'GroupBrowser';
+    const ACTION_LOCATION_BROWSER = 'LocationBrowser';
 
     // Default action
-    const DEFAULT_ACTION = self :: ACTION_VIEW;
+    const DEFAULT_ACTION = self::ACTION_USER_BROWSER;
 
     private $userCalendar;
 
@@ -68,7 +70,7 @@ abstract class Manager extends Application
     public function get_browser_url(User $user)
     {
         return $this->get_url(
-            array(self :: PARAM_ACTION => self :: ACTION_BROWSER, self :: PARAM_USER_USER_ID => $user->get_id()));
+            array(self::PARAM_ACTION => self::ACTION_USER_BROWSER, self::PARAM_USER_USER_ID => $user->get_id()));
     }
 
     /**
@@ -92,7 +94,7 @@ abstract class Manager extends Application
         $userId = $this->getUserIdForCalendar();
 
         if ($userId != $this->get_user_id() && ! $this->getUser()->get_platformadmin() &&
-             $this->getUser()->get_status() != User :: STATUS_TEACHER)
+             $this->getUser()->get_status() != User::STATUS_TEACHER)
         {
             return false;
         }
@@ -106,7 +108,7 @@ abstract class Manager extends Application
      */
     public function getUserIdForCalendar()
     {
-        $userId = $this->getRequest()->query->get(self :: PARAM_USER_USER_ID);
+        $userId = $this->getRequest()->query->get(self::PARAM_USER_USER_ID);
 
         if (! $userId)
         {
@@ -125,8 +127,8 @@ abstract class Manager extends Application
         if (! isset($this->userCalendar))
         {
             $this->setUserCalendar(
-                \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-                    User :: class_name(),
+                \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
+                    User::class_name(),
                     $this->getUserIdForCalendar()));
         }
 
@@ -164,92 +166,92 @@ abstract class Manager extends Application
      */
     private function addGeneralTabs(DynamicVisualTabsRenderer $tabs)
     {
-        $currentAction = $this->getRequest()->query->get(self :: PARAM_ACTION);
+        $currentAction = $this->getRequest()->query->get(self::PARAM_ACTION);
 
         $settingsUrl = new Redirect(
             array(
-                Application :: PARAM_CONTEXT => \Chamilo\Core\User\Manager :: context(),
-                Application :: PARAM_ACTION => \Chamilo\Core\User\Manager :: ACTION_USER_SETTINGS,
-                UserSettingsComponent :: PARAM_CONTEXT => 'Chamilo\Libraries\Calendar'));
+                Application::PARAM_CONTEXT => \Chamilo\Core\User\Manager::context(),
+                Application::PARAM_ACTION => \Chamilo\Core\User\Manager::ACTION_USER_SETTINGS,
+                UserSettingsComponent::PARAM_CONTEXT => 'Chamilo\Libraries\Calendar'));
 
         $tabs->add_tab(
             new DynamicVisualTab(
                 'configuration',
-                Translation :: get('ConfigComponent'),
-                Theme :: getInstance()->getImagePath(self :: package(), 'Tab/Configuration'),
+                Translation::get('ConfigComponent'),
+                Theme::getInstance()->getImagePath(self::package(), 'Tab/Configuration'),
                 $settingsUrl->getUrl(),
                 false,
                 false,
-                DynamicVisualTab :: POSITION_RIGHT,
-                DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
+                DynamicVisualTab::POSITION_RIGHT,
+                DynamicVisualTab::DISPLAY_BOTH_SELECTED));
 
         $userBrowserUrl = new Redirect(
-            array(self :: PARAM_CONTEXT => self :: package(), self :: PARAM_ACTION => self :: ACTION_USER_BROWSER));
+            array(self::PARAM_CONTEXT => self::package(), self::PARAM_ACTION => self::ACTION_USER));
 
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_USER_BROWSER,
-                Translation :: get(self :: ACTION_USER_BROWSER . 'Component'),
-                Theme :: getInstance()->getImagePath(self :: package(), 'Tab/' . self :: ACTION_USER_BROWSER),
+                self::ACTION_USER,
+                Translation::get(self::ACTION_USER . 'Component'),
+                Theme::getInstance()->getImagePath(self::package(), 'Tab/' . self::ACTION_USER),
                 $userBrowserUrl->getUrl(),
-                $currentAction == self :: ACTION_USER_BROWSER,
+                $currentAction == self::ACTION_USER,
                 false,
-                DynamicVisualTab :: POSITION_RIGHT,
-                DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
+                DynamicVisualTab::POSITION_RIGHT,
+                DynamicVisualTab::DISPLAY_BOTH_SELECTED));
 
         $iCalUrl = new Redirect(
             array(
-                self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => Manager :: ACTION_ICAL,
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => Manager::ACTION_ICAL,
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
 
         $tabs->add_tab(
             new DynamicVisualTab(
                 'ICalExternal',
-                Translation :: get('ICalExternal'),
-                Theme :: getInstance()->getImagePath(self :: package(), 'Tab/ICalExternal'),
+                Translation::get('ICalExternal'),
+                Theme::getInstance()->getImagePath(self::package(), 'Tab/ICalExternal'),
                 $iCalUrl->getUrl(),
-                $currentAction == self :: ACTION_ICAL,
+                $currentAction == self::ACTION_ICAL,
                 false,
-                DynamicVisualTab :: POSITION_RIGHT,
-                DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
+                DynamicVisualTab::POSITION_RIGHT,
+                DynamicVisualTab::DISPLAY_BOTH_SELECTED));
 
         $groupUrl = new Redirect(
             array(
-                self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => self :: ACTION_GROUP,
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => self::ACTION_GROUP_BROWSER,
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
 
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_GROUP,
-                Translation :: get(self :: ACTION_GROUP . 'Component'),
-                Theme :: getInstance()->getImagePath(self :: package(), 'Tab/' . self :: ACTION_GROUP),
+                self::ACTION_GROUP_BROWSER,
+                Translation::get(self::ACTION_GROUP_BROWSER . 'Component'),
+                Theme::getInstance()->getImagePath(self::package(), 'Tab/' . self::ACTION_GROUP_BROWSER),
                 $groupUrl->getUrl(),
-                $currentAction == self :: ACTION_GROUP,
+                $currentAction == self::ACTION_GROUP_BROWSER,
                 false,
-                DynamicVisualTab :: POSITION_RIGHT,
-                DynamicVisualTab :: DISPLAY_BOTH_SELECTED));
+                DynamicVisualTab::POSITION_RIGHT,
+                DynamicVisualTab::DISPLAY_BOTH_SELECTED));
 
         $printUrl = new Redirect(
             array(
-                self :: PARAM_CONTEXT => self :: package(),
-                self :: PARAM_ACTION => self :: ACTION_PRINT,
-                ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
-                ViewRenderer :: PARAM_TIME => $this->getCurrentRendererTime(),
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->get_id()));
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => self::ACTION_PRINT,
+                ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
+                ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id()));
 
         $tabs->add_tab(
             new DynamicVisualTab(
-                self :: ACTION_PRINT,
-                Translation :: get(self :: ACTION_PRINT . 'Component'),
-                Theme :: getInstance()->getImagePath(self :: package(), 'Tab/' . self :: ACTION_PRINT),
+                self::ACTION_PRINT,
+                Translation::get(self::ACTION_PRINT . 'Component'),
+                Theme::getInstance()->getImagePath(self::package(), 'Tab/' . self::ACTION_PRINT),
                 $printUrl->getUrl(),
-                $currentAction == self :: ACTION_PRINT,
+                $currentAction == self::ACTION_PRINT,
                 false,
-                DynamicVisualTab :: POSITION_RIGHT,
-                DynamicVisualTab :: DISPLAY_BOTH_SELECTED,
-                DynamicVisualTab :: TARGET_POPUP));
+                DynamicVisualTab::POSITION_RIGHT,
+                DynamicVisualTab::DISPLAY_BOTH_SELECTED,
+                DynamicVisualTab::TARGET_POPUP));
     }
 
     /**
@@ -260,25 +262,25 @@ abstract class Manager extends Application
     {
         $typeUrl = $this->get_url(
             array(
-                self :: PARAM_ACTION => self :: ACTION_BROWSER,
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
-                ViewRenderer :: PARAM_TYPE => ViewRenderer :: MARKER_TYPE));
+                self::PARAM_ACTION => self::ACTION_USER_BROWSER,
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
+                ViewRenderer::PARAM_TYPE => ViewRenderer::MARKER_TYPE));
 
         $todayUrl = $this->get_url(
             array(
-                self :: PARAM_ACTION => self :: ACTION_BROWSER,
-                self :: PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
-                ViewRenderer :: PARAM_TYPE => $this->getCurrentRendererType(),
-                ViewRenderer :: PARAM_TIME => time()));
+                self::PARAM_ACTION => self::ACTION_USER_BROWSER,
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
+                ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
+                ViewRenderer::PARAM_TIME => time()));
 
         $rendererTypes = array(
-            ViewRenderer :: TYPE_MONTH,
-            ViewRenderer :: TYPE_WEEK,
-            ViewRenderer :: TYPE_DAY,
-            ViewRenderer :: TYPE_YEAR,
-            ViewRenderer :: TYPE_LIST);
+            ViewRenderer::TYPE_MONTH,
+            ViewRenderer::TYPE_WEEK,
+            ViewRenderer::TYPE_DAY,
+            ViewRenderer::TYPE_YEAR,
+            ViewRenderer::TYPE_LIST);
 
-        $rendererTypeTabs = ViewRenderer :: getTabs($rendererTypes, $typeUrl, $todayUrl);
+        $rendererTypeTabs = ViewRenderer::getTabs($rendererTypes, $typeUrl, $todayUrl);
 
         foreach ($rendererTypeTabs as $rendererTypeTab)
         {
@@ -294,11 +296,11 @@ abstract class Manager extends Application
      */
     public function getCurrentRendererType()
     {
-        $requestRendererType = $this->getRequest()->query->get(ViewRenderer :: PARAM_TYPE);
+        $requestRendererType = $this->getRequest()->query->get(ViewRenderer::PARAM_TYPE);
 
         if (! $requestRendererType)
         {
-            return LocalSetting :: getInstance()->get('default_view', 'Chamilo\Libraries\Calendar');
+            return LocalSetting::getInstance()->get('default_view', 'Chamilo\Libraries\Calendar');
         }
 
         return $requestRendererType;
@@ -312,7 +314,7 @@ abstract class Manager extends Application
     {
         if (! isset($this->currentTime))
         {
-            $this->currentTime = Request :: get(ViewRenderer :: PARAM_TIME, time());
+            $this->currentTime = Request::get(ViewRenderer::PARAM_TIME, time());
         }
 
         return $this->currentTime;
@@ -327,14 +329,14 @@ abstract class Manager extends Application
     {
         switch ($this->getCurrentRendererType())
         {
-            case ViewRenderer :: TYPE_DAY :
-                return MiniMonthCalendar :: PERIOD_DAY;
-            case ViewRenderer :: TYPE_MONTH :
-                return MiniMonthCalendar :: PERIOD_MONTH;
-            case ViewRenderer :: TYPE_WEEK :
-                return MiniMonthCalendar :: PERIOD_WEEK;
+            case ViewRenderer::TYPE_DAY :
+                return MiniMonthCalendar::PERIOD_DAY;
+            case ViewRenderer::TYPE_MONTH :
+                return MiniMonthCalendar::PERIOD_MONTH;
+            case ViewRenderer::TYPE_WEEK :
+                return MiniMonthCalendar::PERIOD_WEEK;
             default :
-                return MiniMonthCalendar :: PERIOD_DAY;
+                return MiniMonthCalendar::PERIOD_DAY;
         }
     }
 }

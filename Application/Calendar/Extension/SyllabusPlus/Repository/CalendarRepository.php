@@ -95,32 +95,25 @@ class CalendarRepository
      * @param integer $toDate
      * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
      */
-    public function findEventsForGroupAndBetweenDates($groupIdentifier, $fromDate, $toDate)
+    public function findEventsForGroupAndBetweenDates($year, $groupIdentifier, $fromDate, $toDate)
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $groupIdentifier, $fromDate, $toDate)));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier, $fromDate, $toDate)));
 
         if (! $cache->contains($cacheIdentifier))
         {
             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
-            $queryParts = array();
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                 '_group_events] WHERE group_id = \'' . $groupIdentifier . '\'';
 
-            foreach ($this->getYears() as $year)
+            if (! is_null($fromDate) && ! is_null($toDate))
             {
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-                     '_group_events] WHERE group_id = \'' . $groupIdentifier . '\'';
-
-                if (! is_null($fromDate) && ! is_null($toDate))
-                {
-                    $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
-                }
-
-                $queryParts[] = $query;
+                $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
             }
 
-            $statement = DataManager::get_instance()->get_connection()->query(implode(' UNION ', $queryParts));
+            $statement = DataManager::get_instance()->get_connection()->query($query);
             $resultSet = new ResultSet($statement);
 
             $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
@@ -199,15 +192,16 @@ class CalendarRepository
 
     /**
      *
+     * @param string $year
      * @param User $user
      * @return string[]
      */
-    public function findFacultiesForUser(User $user)
+    public function findFacultiesByYearAndUser($year, User $user)
     {
         if ($user->get_official_code())
         {
-            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_student_group] WHERE person_id = \'' .
-                 $user->get_official_code() . '\'';
+            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_' .
+                 $this->convertYear($year) . '_student_group] WHERE person_id = \'' . $user->get_official_code() . '\'';
             $statement = DataManager::get_instance()->get_connection()->query($query);
             $faculties = array();
 
@@ -230,12 +224,12 @@ class CalendarRepository
      * @param User $user
      * @return string[]
      */
-    public function findFacultiesGroupsForUser(User $user)
+    public function findFacultiesGroupsByYearAndUser($year, User $user)
     {
         if ($user->get_official_code())
         {
-            $query = 'SELECT DISTINCT group_id, group_name, department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_student_group] WHERE person_id = \'' .
-                 $user->get_official_code() . '\'';
+            $query = 'SELECT DISTINCT group_id, group_name, department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_' .
+                 $this->convertYear($year) . '_student_group] WHERE person_id = \'' . $user->get_official_code() . '\'';
             $statement = DataManager::get_instance()->get_connection()->query($query);
             $faculties = array();
 
@@ -255,16 +249,18 @@ class CalendarRepository
 
     /**
      *
+     * @param $year
      * @return string[]
      */
-    public function findFaculties()
+    public function findFacultiesByYear($year)
     {
         $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__)));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_groups] ORDER BY department_name';
+            $query = 'SELECT DISTINCT department_id, department_code, department_name FROM [INFORDATSYNC].[dbo].[v_syllabus_' .
+                 $this->convertYear($year) . '_groups] ORDER BY department_name';
             $statement = DataManager::get_instance()->get_connection()->query($query);
 
             $departments = array();
@@ -283,17 +279,18 @@ class CalendarRepository
 
     /**
      *
+     * @param $year
      * @return string[]
      */
-    public function findFacultyGroups()
+    public function findFacultyGroupsByYear($year)
     {
         $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__)));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
 
         if (! $cache->contains($cacheIdentifier))
         {
-
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_groups] ORDER BY department_id, name';
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                 '_groups] ORDER BY department_id, name';
             $statement = DataManager::get_instance()->get_connection()->query($query);
 
             $groups = array();
@@ -312,17 +309,18 @@ class CalendarRepository
 
     /**
      *
+     * @param string $year
      * @return string[]
      */
-    public function findGroups()
+    public function findGroupsByYear($year)
     {
         $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__)));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
 
         if (! $cache->contains($cacheIdentifier))
         {
-
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_1516_groups] ORDER BY name';
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                 '_groups] ORDER BY name';
             $statement = DataManager::get_instance()->get_connection()->query($query);
 
             $groups = array();
@@ -431,5 +429,54 @@ class CalendarRepository
     {
         $yearParts = explode('-', $year);
         return substr($yearParts[0], 2, 2) . $yearParts[1];
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $identifier
+     */
+    public function findLocationByYearAndIdentifier($year, $identifier)
+    {
+        $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+             '_locations] WHERE year = \'' . $year . '\' AND location_id = \'' . $identifier . '\'';
+
+        $statement = DataManager::get_instance()->get_connection()->query($query);
+        return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
+    }
+
+    /**
+     *
+     * @param string year
+     * @param string $locationIdentifier
+     * @param integer $fromDate
+     * @param integer $toDate
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function findEventsByYearAndLocationAndBetweenDates($year, $locationIdentifier, $fromDate, $toDate)
+    {
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier, $fromDate, $toDate)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                 '_location_events] WHERE location_id = \'' . $locationIdentifier . '\'';
+
+            if (! is_null($fromDate) && ! is_null($toDate))
+            {
+                $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
+            }
+
+            $statement = DataManager::get_instance()->get_connection()->query($query);
+            $resultSet = new ResultSet($statement);
+
+            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
     }
 }
