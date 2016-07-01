@@ -193,6 +193,97 @@ class CalendarRepository
     /**
      *
      * @param string $year
+     * @param string $groupIdentifier
+     * @param string $identifier
+     * @return string[]
+     */
+    public function findEventForGroupByYearAndIdentifier($year, $groupIdentifier, $eventIdentifier)
+    {
+        $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+             '_group_events] WHERE group_id = \'' . $groupIdentifier . '\' AND id = \'' . $eventIdentifier . '\'';
+        $statement = DataManager::get_instance()->get_connection()->query($query);
+        return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $groupIdentifier
+     * @param string $moduleIdentifier
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function findEventsForGroupByYearAndModuleIdentifier($year, $groupIdentifier, $moduleIdentifier)
+    {
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier, $moduleIdentifier)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                 '_group_events] WHERE group_id = \'' . $groupIdentifier . '\' AND module_id = \'' . $moduleIdentifier .
+                 '\'';
+            $statement = DataManager::get_instance()->get_connection()->query($query);
+            $resultSet = new ResultSet($statement);
+
+            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $locationIdentifier
+     * @param string $identifier
+     * @return string[]
+     */
+    public function findEventForLocationByYearAndIdentifier($year, $locationIdentifier, $eventIdentifier)
+    {
+        $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+             '_location_events] WHERE location_id = \'' . $locationIdentifier . '\' AND id = \'' . $eventIdentifier .
+             '\'';
+
+        $statement = DataManager::get_instance()->get_connection()->query($query);
+        return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $locationIdentifier
+     * @param string $moduleIdentifier
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function findEventsForLocationByYearAndModuleIdentifier($year, $locationIdentifier, $moduleIdentifier)
+    {
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier, $moduleIdentifier)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
+                 '_location_events] WHERE location_id = \'' . $locationIdentifier . '\' AND module_id = \'' .
+                 $moduleIdentifier . '\'';
+
+            $statement = DataManager::get_instance()->get_connection()->query($query);
+            $resultSet = new ResultSet($statement);
+
+            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
+     * @param string $year
      * @param User $user
      * @return string[]
      */

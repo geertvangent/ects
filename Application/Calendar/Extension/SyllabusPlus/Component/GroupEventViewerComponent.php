@@ -1,9 +1,8 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\GroupEventParser;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\UserEventParser;
 
 /**
  *
@@ -11,8 +10,28 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Librarie
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class UserEventViewerComponent extends EventViewerComponent implements DelegateComponent
+class GroupEventViewerComponent extends EventViewerComponent
 {
+
+    /**
+     *
+     * @var string
+     */
+    private $groupIdentifier;
+
+    /**
+     *
+     * @return string
+     */
+    protected function getGroupIdentifier()
+    {
+        if (! isset($this->groupIdentifier))
+        {
+            $this->groupIdentifier = $this->getRequest()->query->get(self::PARAM_GROUP_ID);
+        }
+
+        return $this->groupIdentifier;
+    }
 
     /**
      *
@@ -20,10 +39,10 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
      */
     protected function getActivityRecord()
     {
-        return $this->getCalendarService()->getEventForUserByIdentifier(
-            $this->getUserCalendar(),
-            $this->getActivityId(),
-            $this->getYear());
+        return $this->getCalendarService()->getEventForGroupByYearAndIdentifier(
+            $this->getYear(),
+            $this->getGroupIdentifier(),
+            $this->getActivityId());
     }
 
     /**
@@ -32,10 +51,10 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
      */
     protected function getModuleEvents($moduleIdentifier)
     {
-        return $this->getCalendarService()->getEventsForUserByModuleIdentifier(
-            $this->getUserCalendar(),
-            $moduleIdentifier,
-            $this->getYear());
+        return $this->getCalendarService()->getEventsForGroupByYearAndModuleIdentifier(
+            $this->getYear(),
+            $this->getGroupIdentifier(),
+            $moduleIdentifier);
     }
 
     /**
@@ -44,7 +63,7 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
      */
     protected function getEventParser($moduleEvent)
     {
-        return new UserEventParser($this->getUserCalendar(), $moduleEvent, 0, 0);
+        return new GroupEventParser($this->getUserCalendar(), $moduleEvent, 0, 0);
     }
 
     /**
@@ -53,6 +72,6 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
      */
     protected function getActivityTypeBreadcrumb($activityRecord)
     {
-        return new Breadcrumb(null, $this->getUserCalendar()->get_fullname());
+        return new Breadcrumb(null, $activityRecord['group_name']);
     }
 }

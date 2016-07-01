@@ -1,9 +1,8 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
-use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\UserEventParser;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\LocationEventParser;
 
 /**
  *
@@ -11,8 +10,28 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Librarie
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class UserEventViewerComponent extends EventViewerComponent implements DelegateComponent
+class LocationEventViewerComponent extends EventViewerComponent
 {
+
+    /**
+     *
+     * @var string
+     */
+    private $locationIdentifier;
+
+    /**
+     *
+     * @return string
+     */
+    protected function getLocationIdentifier()
+    {
+        if (! isset($this->locationIdentifier))
+        {
+            $this->locationIdentifier = $this->getRequest()->query->get(self::PARAM_LOCATION_ID);
+        }
+
+        return $this->locationIdentifier;
+    }
 
     /**
      *
@@ -20,10 +39,10 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
      */
     protected function getActivityRecord()
     {
-        return $this->getCalendarService()->getEventForUserByIdentifier(
-            $this->getUserCalendar(),
-            $this->getActivityId(),
-            $this->getYear());
+        return $this->getCalendarService()->getEventForLocationByYearAndIdentifier(
+            $this->getYear(),
+            $this->getLocationIdentifier(),
+            $this->getActivityId());
     }
 
     /**
@@ -32,10 +51,10 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
      */
     protected function getModuleEvents($moduleIdentifier)
     {
-        return $this->getCalendarService()->getEventsForUserByModuleIdentifier(
-            $this->getUserCalendar(),
-            $moduleIdentifier,
-            $this->getYear());
+        return $this->getCalendarService()->getEventsForLocationByYearAndModuleIdentifier(
+            $this->getYear(),
+            $this->getLocationIdentifier(),
+            $moduleIdentifier);
     }
 
     /**
@@ -44,7 +63,7 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
      */
     protected function getEventParser($moduleEvent)
     {
-        return new UserEventParser($this->getUserCalendar(), $moduleEvent, 0, 0);
+        return new LocationEventParser($this->getUserCalendar(), $moduleEvent, 0, 0);
     }
 
     /**
@@ -53,6 +72,6 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
      */
     protected function getActivityTypeBreadcrumb($activityRecord)
     {
-        return new Breadcrumb(null, $this->getUserCalendar()->get_fullname());
+        return new Breadcrumb(null, $activityRecord['location_code']);
     }
 }

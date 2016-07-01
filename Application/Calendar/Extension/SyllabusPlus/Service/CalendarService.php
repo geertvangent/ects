@@ -119,6 +119,66 @@ class CalendarService
 
     /**
      *
+     * @param string $year
+     * @param string $groupIdentifier
+     * @param string $identifier
+     * @return string[]
+     */
+    public function getEventForGroupByYearAndIdentifier($year, $groupIdentifier, $eventIdentifier)
+    {
+        return $this->getCalendarRepository()->findEventForGroupByYearAndIdentifier(
+            $year,
+            $groupIdentifier,
+            $eventIdentifier);
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $groupIdentifier
+     * @param string $moduleIdentifier
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function getEventsForGroupByYearAndModuleIdentifier($year, $groupIdentifier, $moduleIdentifier)
+    {
+        return $this->getCalendarRepository()->findEventsForGroupByYearAndModuleIdentifier(
+            $year,
+            $groupIdentifier,
+            $moduleIdentifier);
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $locationIdentifier
+     * @param string $identifier
+     * @return string[]
+     */
+    public function getEventForLocationByYearAndIdentifier($year, $locationIdentifier, $eventIdentifier)
+    {
+        return $this->getCalendarRepository()->findEventForLocationByYearAndIdentifier(
+            $year,
+            $locationIdentifier,
+            $eventIdentifier);
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $locationIdentifier
+     * @param string $moduleIdentifier
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
+     */
+    public function getEventsForLocationByYearAndModuleIdentifier($year, $locationIdentifier, $moduleIdentifier)
+    {
+        return $this->getCalendarRepository()->findEventsForLocationByYearAndModuleIdentifier(
+            $year,
+            $locationIdentifier,
+            $moduleIdentifier);
+    }
+
+    /**
+     *
      * @param \Chamilo\Configuration\Configuration $configuration
      * @return boolean
      */
