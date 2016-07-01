@@ -71,6 +71,14 @@ class UserBrowserComponent extends Manager implements DelegateComponent
      */
     protected function renderCalendar()
     {
+        if ($this->isPrintRequested())
+        {
+            Page::getInstance()->setViewMode(Page::VIEW_MODE_HEADERLESS);
+
+            $header = Page::getInstance()->getHeader();
+            $header->addCssFile(Theme::getInstance()->getCssPath(self::package(), true) . 'Print.css', 'print');
+        }
+
         $html = array();
 
         $html[] = $this->render_header();
@@ -78,6 +86,13 @@ class UserBrowserComponent extends Manager implements DelegateComponent
         $html[] = '<div class="row">';
         $html[] = $this->getViewRenderer()->render();
         $html[] = '</div>';
+
+        if ($this->isPrintRequested())
+        {
+            $html[] = '<script type="text/javascript">';
+            $html[] = 'window.print();';
+            $html[] = '</script>';
+        }
 
         $html[] = $this->render_footer();
 
@@ -122,7 +137,7 @@ class UserBrowserComponent extends Manager implements DelegateComponent
     {
         return array(
             self::PARAM_CONTEXT => self::package(),
-            self::PARAM_ACTION => self::ACTION_USER_BROWSER,
+            self::PARAM_ACTION => self::ACTION_BROWSE_USER,
             ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
             ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
             self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
@@ -193,21 +208,19 @@ class UserBrowserComponent extends Manager implements DelegateComponent
         $printUrl = new Redirect(
             array(
                 self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => self::ACTION_PRINT,
+                self::PARAM_ACTION => self::ACTION_BROWSE_USER,
                 ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
                 ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
-                self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id()));
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id(),
+                self::PARAM_PRINT => 1));
 
         $generalButtonGroup->addButton(
-            new Button(
-                Translation::get(self::ACTION_PRINT . 'Component'),
-                new BootstrapGlyph('print'),
-                $printUrl->getUrl()));
+            new Button(Translation::get('PrinterComponent'), new BootstrapGlyph('print'), $printUrl->getUrl()));
 
         $iCalUrl = new Redirect(
             array(
                 self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => Manager::ACTION_ICAL,
+                self::PARAM_ACTION => Manager::ACTION_ICAL_USER,
                 self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
 
         $generalButtonGroup->addButton(
@@ -237,24 +250,24 @@ class UserBrowserComponent extends Manager implements DelegateComponent
         $groupUrl = new Redirect(
             array(
                 self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => self::ACTION_GROUP_BROWSER,
+                self::PARAM_ACTION => self::ACTION_BROWSE_GROUP,
                 self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
 
         $browserButtonGroup->addButton(
             new Button(
-                Translation::get(self::ACTION_GROUP_BROWSER . 'Component'),
+                Translation::get(self::ACTION_BROWSE_GROUP . 'Component'),
                 new FontAwesomeGlyph('users'),
                 $groupUrl->getUrl()));
 
         $locationUrl = new Redirect(
             array(
                 self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => self::ACTION_LOCATION_BROWSER,
+                self::PARAM_ACTION => self::ACTION_BROWSE_LOCATION,
                 self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
 
         $browserButtonGroup->addButton(
             new Button(
-                Translation::get(self::ACTION_LOCATION_BROWSER . 'Component'),
+                Translation::get(self::ACTION_BROWSE_LOCATION . 'Component'),
                 new FontAwesomeGlyph('map-marker'),
                 $locationUrl->getUrl()));
 

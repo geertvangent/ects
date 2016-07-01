@@ -74,7 +74,9 @@ class CalendarRepository
                     $queryParts[] = $query;
                 }
 
-                $statement = DataManager::get_instance()->get_connection()->query(implode(' UNION ', $queryParts));
+                $query = implode(' UNION ', $queryParts) . ' ORDER BY start_time';
+
+                $statement = DataManager::get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
             }
             else
@@ -112,6 +114,8 @@ class CalendarRepository
             {
                 $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
             }
+
+            $query .= ' ORDER BY start_time';
 
             $statement = DataManager::get_instance()->get_connection()->query($query);
             $resultSet = new ResultSet($statement);
@@ -154,7 +158,7 @@ class CalendarRepository
             {
                 $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
                      '_events] WHERE person_id = \'' . $user->get_official_code() . '\' AND module_id = \'' .
-                     $moduleIdentifier . '\'';
+                     $moduleIdentifier . '\' ORDER BY start_time';
                 $statement = DataManager::get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
             }
@@ -180,7 +184,8 @@ class CalendarRepository
         if ($user->get_official_code())
         {
             $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-                 '_events] WHERE person_id = \'' . $user->get_official_code() . '\' AND id = \'' . $identifier . '\'';
+                 '_events] WHERE person_id = \'' . $user->get_official_code() . '\' AND id = \'' . $identifier .
+                 '\' ORDER BY start_time';
             $statement = DataManager::get_instance()->get_connection()->query($query);
             return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
         }
@@ -200,7 +205,8 @@ class CalendarRepository
     public function findEventForGroupByYearAndIdentifier($year, $groupIdentifier, $eventIdentifier)
     {
         $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-             '_group_events] WHERE group_id = \'' . $groupIdentifier . '\' AND id = \'' . $eventIdentifier . '\'';
+             '_group_events] WHERE group_id = \'' . $groupIdentifier . '\' AND id = \'' . $eventIdentifier .
+             '\' ORDER BY start_time';
         $statement = DataManager::get_instance()->get_connection()->query($query);
         return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
     }
@@ -224,7 +230,7 @@ class CalendarRepository
 
             $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
                  '_group_events] WHERE group_id = \'' . $groupIdentifier . '\' AND module_id = \'' . $moduleIdentifier .
-                 '\'';
+                 '\' ORDER BY start_time';
             $statement = DataManager::get_instance()->get_connection()->query($query);
             $resultSet = new ResultSet($statement);
 
@@ -270,7 +276,7 @@ class CalendarRepository
 
             $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
                  '_location_events] WHERE location_id = \'' . $locationIdentifier . '\' AND module_id = \'' .
-                 $moduleIdentifier . '\'';
+                 $moduleIdentifier . '\' ORDER BY start_time';
 
             $statement = DataManager::get_instance()->get_connection()->query($query);
             $resultSet = new ResultSet($statement);

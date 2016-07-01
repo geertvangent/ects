@@ -7,7 +7,6 @@ use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Table\Column\StaticTableColumn;
 use Chamilo\Libraries\Format\Table\PropertiesTable;
 use Chamilo\Libraries\Format\Table\SortableTableFromArray;
-use Chamilo\Libraries\Platform\Session\Request;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
@@ -42,18 +41,11 @@ abstract class EventViewerComponent extends Manager
      */
     public function run()
     {
-        $time = Request::get(\Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer::PARAM_TIME) ? intval(
-            Request::get(\Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer::PARAM_TIME)) : time();
-        $view = Request::get(\Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer::PARAM_TYPE) ? Request::get(
-            \Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer::PARAM_TYPE) : \Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer::TYPE_MONTH;
-
         $activityId = $this->getActivityId();
-        $activityTime = $this->getActivityTime();
-        $year = $this->getYear();
 
         if ($activityId)
         {
-            $activityHtml = $this->getActivityAsHtml($this->getActivityRecord(), $activityTime);
+            $activityHtml = $this->getActivityAsHtml($this->getActivityRecord(), $this->getActivityTime());
 
             $html = array();
 
@@ -77,7 +69,7 @@ abstract class EventViewerComponent extends Manager
      */
     protected function getActivityId()
     {
-        return Request::get(Manager::PARAM_ACTIVITY_ID);
+        return $this->getRequest()->query->get(Manager::PARAM_ACTIVITY_ID);
     }
 
     /**
@@ -86,7 +78,7 @@ abstract class EventViewerComponent extends Manager
      */
     protected function getActivityTime()
     {
-        return Request::get(Manager::PARAM_ACTIVITY_TIME);
+        return $this->getRequest()->query->get(Manager::PARAM_ACTIVITY_TIME);
     }
 
     /**
@@ -129,8 +121,6 @@ abstract class EventViewerComponent extends Manager
             new Breadcrumb(null, Translation::get('AcademicYear', array('YEAR' => $this->getYear()))));
         BreadcrumbTrail::get_instance()->add($this->getActivityTypeBreadcrumb($activityRecord));
         BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $activityRecord['name']));
-
-        $html = array();
 
         return $this->renderInformation($activityRecord, $activityTime);
     }

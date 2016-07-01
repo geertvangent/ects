@@ -4,12 +4,16 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 use Chamilo\Libraries\Calendar\Renderer\Type\ViewRenderer;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\File\Redirect;
+use Chamilo\Libraries\Format\Structure\ActionBar\Button;
+use Chamilo\Libraries\Format\Structure\ActionBar\ButtonGroup;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
+use Chamilo\Libraries\Format\Structure\Glyph\BootstrapGlyph;
 use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\GroupCalendarRendererProvider;
@@ -54,7 +58,7 @@ class GroupBrowserComponent extends UserBrowserComponent
     {
         return array(
             self::PARAM_CONTEXT => self::package(),
-            self::PARAM_ACTION => self::ACTION_GROUP_BROWSER,
+            self::PARAM_ACTION => self::ACTION_BROWSE_GROUP,
             ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
             ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
             self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id(),
@@ -282,7 +286,7 @@ class GroupBrowserComponent extends UserBrowserComponent
         $groupLink = new Redirect(
             array(
                 self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => self::ACTION_GROUP_BROWSER,
+                self::PARAM_ACTION => self::ACTION_BROWSE_GROUP,
                 self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
                 self::PARAM_YEAR => $year,
                 self::PARAM_GROUP_ID => $groupId));
@@ -383,5 +387,43 @@ class GroupBrowserComponent extends UserBrowserComponent
         }
 
         return $this->year;
+    }
+
+    /**
+     *
+     * @see \Ehb\Application\Calendar\Extension\SyllabusPlus\Component\UserBrowserComponent::getViewActions()
+     */
+    protected function getViewActions()
+    {
+        $actions = array();
+
+        $generalButtonGroup = new ButtonGroup();
+
+        $printUrl = new Redirect(
+            array(
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => Manager::ACTION_BROWSE_GROUP,
+                ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
+                ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
+                self::PARAM_YEAR => $this->getYear(),
+                self::PARAM_GROUP_ID => $this->getGroupIdentifier(),
+                self::PARAM_PRINT => 1));
+
+        $generalButtonGroup->addButton(
+            new Button(Translation::get('PrinterComponent'), new BootstrapGlyph('print'), $printUrl->getUrl()));
+
+        $iCalUrl = new Redirect(
+            array(
+                self::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => Manager::ACTION_ICAL_GROUP,
+                self::PARAM_YEAR => $this->getYear(),
+                self::PARAM_GROUP_ID => $this->getGroupIdentifier()));
+
+        $generalButtonGroup->addButton(
+            new Button(Translation::get('ICalExternal'), new BootstrapGlyph('globe'), $iCalUrl->getUrl()));
+
+        $actions[] = $generalButtonGroup;
+
+        return $actions;
     }
 }

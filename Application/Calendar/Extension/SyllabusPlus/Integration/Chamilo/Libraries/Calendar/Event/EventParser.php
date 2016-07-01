@@ -2,9 +2,7 @@
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event;
 
 use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Calendar\Event\RecurrenceRules\RecurrenceRules;
-use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Platform\Translation;
 
 /**
@@ -156,16 +154,6 @@ abstract class EventParser
         $startTime = $calendarEvent['start_time'];
         $endTime = $calendarEvent['end_time'];
 
-        $parameters = array();
-        $parameters[Application::PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::context();
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::ACTION_VIEW_USER_EVENT;
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_ID] = $calendarEvent['id'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_YEAR] = $calendarEvent['year'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = $startTime;
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_USER_USER_ID] = $this->getDataUser()->get_id();
-
-        $redirect = new Redirect($parameters);
-
         $source = '[' . $calendarEvent['type_code'] . '] ' . $calendarEvent['type'];
 
         $event = new Event(
@@ -176,13 +164,18 @@ abstract class EventParser
             $this->getUrl($calendarEvent),
             $this->getEventLabel($calendarEvent),
             $this->getEventDescription($calendarEvent),
-            $calendarEvent['location'],
+            $this->getLocationFromCalendarEvent($calendarEvent),
             $source,
             \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::context());
 
         $event->setCalendarEvent($calendarEvent);
 
         return array($event);
+    }
+
+    protected function getLocationFromCalendarEvent($calendarEvent)
+    {
+        return $calendarEvent['location'];
     }
 
     /**

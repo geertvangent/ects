@@ -32,4 +32,9 @@ class LocationEventParser extends EventParser
         $redirect = new Redirect($parameters);
         return $redirect->getUrl();
     }
+
+    protected function getLocationFromCalendarEvent($calendarEvent)
+    {
+        return $calendarEvent['location_code'];
+    }
 }

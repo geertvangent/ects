@@ -39,7 +39,7 @@ class Actions implements \Chamilo\Application\Calendar\ActionsInterface
         $buttons = array();
 
         $browserUrl = new Redirect(
-            array(Application::PARAM_CONTEXT => __NAMESPACE__, Manager::PARAM_ACTION => Manager::ACTION_USER_BROWSER));
+            array(Application::PARAM_CONTEXT => __NAMESPACE__, Manager::PARAM_ACTION => Manager::ACTION_BROWSE_USER));
 
         if ($application->getUser()->get_platformadmin() || $application->getUser()->get_status() == User::STATUS_TEACHER)
         {
@@ -58,11 +58,11 @@ class Actions implements \Chamilo\Application\Calendar\ActionsInterface
             $groupUrl = new Redirect(
                 array(
                     Application::PARAM_CONTEXT => __NAMESPACE__,
-                    Manager::PARAM_ACTION => Manager::ACTION_GROUP_BROWSER));
+                    Manager::PARAM_ACTION => Manager::ACTION_BROWSE_GROUP));
 
             $splitDropdownButton->addSubButton(
                 new SubButton(
-                    Translation::get(Manager::ACTION_GROUP_BROWSER . 'Component'),
+                    Translation::get(Manager::ACTION_BROWSE_GROUP . 'Component'),
                     null,
                     $groupUrl->getUrl(),
                     Button::DISPLAY_LABEL));
@@ -70,11 +70,11 @@ class Actions implements \Chamilo\Application\Calendar\ActionsInterface
             $locationUrl = new Redirect(
                 array(
                     Application::PARAM_CONTEXT => __NAMESPACE__,
-                    Manager::PARAM_ACTION => Manager::ACTION_LOCATION_BROWSER));
+                    Manager::PARAM_ACTION => Manager::ACTION_BROWSE_LOCATION));
 
             $splitDropdownButton->addSubButton(
                 new SubButton(
-                    Translation::get(Manager::ACTION_LOCATION_BROWSER . 'Component'),
+                    Translation::get(Manager::ACTION_BROWSE_LOCATION . 'Component'),
                     null,
                     $locationUrl->getUrl(),
                     Button::DISPLAY_LABEL));

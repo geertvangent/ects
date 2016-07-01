@@ -36,7 +36,7 @@ class CodeComponent extends Manager implements DelegateComponent
                     $redirect = new Redirect(
                         array(
                             self::PARAM_CONTEXT => self::package(),
-                            self::PARAM_ACTION => self::ACTION_USER_BROWSER,
+                            self::PARAM_ACTION => self::ACTION_BROWSE_USER,
                             self::PARAM_USER_USER_ID => $user->get_id()));
                     $redirect->toUrl();
                 }
