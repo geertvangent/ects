@@ -9,7 +9,7 @@ abstract class DefaultGalleryTableCellRenderer extends GalleryTableCellRenderer
     public function render_cell($user)
     {
         $html = array();
-        $html[] = $this->get_cell_content($user);
+        $html[] = $this->renderContent($user);
         return implode(PHP_EOL, $html);
     }
 
