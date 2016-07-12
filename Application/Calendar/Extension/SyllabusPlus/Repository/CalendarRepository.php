@@ -19,6 +19,7 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet;
  */
 class CalendarRepository
 {
+    const SQL_DATE_FORMAT = 'Y-m-d H:i:s';
 
     /**
      *
@@ -68,7 +69,8 @@ class CalendarRepository
 
                     if (! is_null($fromDate) && ! is_null($toDate))
                     {
-                        $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
+                        $query .= 'AND start_time >= \'' . date(self::SQL_DATE_FORMAT, $fromDate) .
+                             '\' AND end_time <= \'' . date(self::SQL_DATE_FORMAT, $toDate) . '\'';
                     }
 
                     $queryParts[] = $query;
@@ -112,7 +114,8 @@ class CalendarRepository
 
             if (! is_null($fromDate) && ! is_null($toDate))
             {
-                $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
+                $query .= 'AND start_time >= \'' . date(self::SQL_DATE_FORMAT, $fromDate) . '\' AND end_time <= \'' .
+                     date(self::SQL_DATE_FORMAT, $toDate) . '\'';
             }
 
             $query .= ' ORDER BY start_time';
@@ -565,7 +568,8 @@ class CalendarRepository
 
             if (! is_null($fromDate) && ! is_null($toDate))
             {
-                $query .= 'AND start_time >= ' . $fromDate . ' AND end_time <= ' . $toDate;
+                $query .= 'AND start_time >= \'' . date(self::SQL_DATE_FORMAT, $fromDate) . '\' AND end_time <= \'' .
+                     date(self::SQL_DATE_FORMAT, $toDate) . '\'';
             }
 
             $statement = DataManager::get_instance()->get_connection()->query($query);

@@ -151,8 +151,8 @@ abstract class EventParser
 
         $events = array();
 
-        $startTime = $calendarEvent['start_time'];
-        $endTime = $calendarEvent['end_time'];
+        $startTime = strtotime($calendarEvent['start_time']);
+        $endTime = strtotime($calendarEvent['end_time']);
 
         $source = '[' . $calendarEvent['type_code'] . '] ' . $calendarEvent['type'];
 
