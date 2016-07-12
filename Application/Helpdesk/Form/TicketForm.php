@@ -14,6 +14,7 @@ use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Chamilo\Libraries\Utilities\Utilities;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 
 class TicketForm extends FormValidator
 {
@@ -45,7 +46,7 @@ class TicketForm extends FormValidator
 
     public function __construct($component)
     {
-        parent :: __construct('ticket', 'post', $component->get_url());
+        parent::__construct('ticket', 'post', $component->get_url());
 
         $this->component = $component;
         $this->build();
@@ -54,31 +55,31 @@ class TicketForm extends FormValidator
 
     public function build()
     {
-        $this->addElement('hidden', self :: PROPERTY_QUEUE, self :: HELPDESK_QUEUE_ID);
-        $this->addElement('hidden', self :: PROPERTY_ID, self :: HELPDESK_NEW);
+        $this->addElement('hidden', self::PROPERTY_QUEUE, self::HELPDESK_QUEUE_ID);
+        $this->addElement('hidden', self::PROPERTY_ID, self::HELPDESK_NEW);
         // $this->addElement('hidden', self :: PROPERTY_FCKEDITORENCODED, self :: HELPDESK_FCKEDITOR);
-        $this->addElement('hidden', self :: PROPERTY_SYSTEM);
-        $this->addElement('hidden', self :: PROPERTY_REQUESTOR);
-        $this->addElement('hidden', self :: PROPERTY_CONTENT_TYPE, self :: HELPDESK_CONTENT_TYPE);
+        $this->addElement('hidden', self::PROPERTY_SYSTEM);
+        $this->addElement('hidden', self::PROPERTY_REQUESTOR);
+        $this->addElement('hidden', self::PROPERTY_CONTENT_TYPE, self::HELPDESK_CONTENT_TYPE);
 
         // Magic fields
-        $this->addElement('hidden', self :: PROPERTY_MAGIC_FACULTY, 1);
-        $this->addElement('hidden', self :: PROPERTY_MAGIC_TRAINING, 1);
-        $this->addElement('hidden', self :: PROPERTY_MAGIC_TYPE, 1);
-        $this->addElement('hidden', self :: PROPERTY_MAGIC_URL, 1);
-        $this->addElement('hidden', self :: PROPERTY_MAGIC_SYSTEM, 1);
+        $this->addElement('hidden', self::PROPERTY_MAGIC_FACULTY, 1);
+        $this->addElement('hidden', self::PROPERTY_MAGIC_TRAINING, 1);
+        $this->addElement('hidden', self::PROPERTY_MAGIC_TYPE, 1);
+        $this->addElement('hidden', self::PROPERTY_MAGIC_URL, 1);
+        $this->addElement('hidden', self::PROPERTY_MAGIC_SYSTEM, 1);
 
         // General
-        $this->addElement('category', Translation :: get('General'));
-        $this->addElement('static', null, Translation :: get('Requestor'), $this->component->get_user()->get_email());
-        $this->addElement('text', self :: PROPERTY_SUBJECT, Translation :: get('Subject'), array("size" => "70"));
+        $this->addElement('category', Translation::get('General'));
+        $this->addElement('static', null, Translation::get('Requestor'), $this->component->get_user()->get_email());
+        $this->addElement('text', self::PROPERTY_SUBJECT, Translation::get('Subject'), array("size" => "70"));
         $this->addRule(
-            self :: PROPERTY_SUBJECT,
-            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
+            self::PROPERTY_SUBJECT,
+            Translation::get('ThisFieldIsRequired', null, Utilities::COMMON_LIBRARIES),
             'required');
         $this->addElement('category');
 
-        $this->addElement('category', Translation :: get('AdditionalInformation'));
+        $this->addElement('category', Translation::get('AdditionalInformation'));
 
         // Ticket type
         $type_options = array();
@@ -88,40 +89,31 @@ class TicketForm extends FormValidator
         $type_options['usability'] = 'Usability';
         $type_options['andere'] = 'Andere';
 
-        $this->addElement('select', self :: PROPERTY_TYPE, Translation :: get('Type'), $type_options);
+        $this->addElement('select', self::PROPERTY_TYPE, Translation::get('Type'), $type_options);
 
-        $this->addElement('static', null, null, Translation :: get('FacultyTrainingAutomatic'));
+        $this->addElement('static', null, null, Translation::get('FacultyTrainingAutomatic'));
 
         // Academic year
-        $years = explode(',', PlatformSetting :: get('academic_year', 'Ehb\Application\Sync'));
+        $years = explode(',', PlatformSetting::get('academic_year', 'Ehb\Application\Sync'));
         $code = 'AY_' . array_pop($years);
-        $academic_year = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code($code);
+        $academic_year = \Chamilo\Core\Group\Storage\DataManager::retrieve_group_by_code($code);
 
         // Faculty
         $conditions = array();
         $conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+            new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_CODE),
             'DEP_*');
-        $conditions[] = new NotCondition(
-            new PatternMatchCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
-                'DEP_*_*'));
-        $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_LEFT_VALUE),
-            InequalityCondition :: GREATER_THAN,
-            new StaticConditionVariable($academic_year->get_left_value()));
-        $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_RIGHT_VALUE),
-            InequalityCondition :: LESS_THAN,
-            new StaticConditionVariable($academic_year->get_right_value()));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_PARENT_ID),
+            new StaticConditionVariable($academic_year->get_id()));
         $condition = new AndCondition($conditions);
-        $groups = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
-            Group :: class_name(),
+        $groups = \Chamilo\Core\Group\Storage\DataManager::retrieves(
+            Group::class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 null,
                 null,
-                array(new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME)))));
+                array(new OrderBy(new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_NAME)))));
 
         $faculty_options = array();
         $faculty_options['Centrale Administratie'] = 'Centrale Administratie';
@@ -131,30 +123,30 @@ class TicketForm extends FormValidator
             $faculty_options[$group->get_name()] = $group->get_name();
         }
 
-        $this->addElement('select', self :: PROPERTY_FACULTY, Translation :: get('Faculty'), $faculty_options);
+        $this->addElement('select', self::PROPERTY_FACULTY, Translation::get('Faculty'), $faculty_options);
 
         // Training
         $conditions = array();
         $conditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_CODE),
+            new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_CODE),
             'TRA_OP_*');
         $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_LEFT_VALUE),
-            InequalityCondition :: GREATER_THAN,
+            new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_LEFT_VALUE),
+            InequalityCondition::GREATER_THAN,
             new StaticConditionVariable($academic_year->get_left_value()));
         $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_RIGHT_VALUE),
-            InequalityCondition :: LESS_THAN,
+            new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_RIGHT_VALUE),
+            InequalityCondition::LESS_THAN,
             new StaticConditionVariable($academic_year->get_right_value()));
         $condition = new AndCondition($conditions);
 
-        $groups = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
-            Group :: class_name(),
+        $groups = \Chamilo\Core\Group\Storage\DataManager::retrieves(
+            Group::class_name(),
             new DataClassRetrievesParameters(
                 $condition,
                 null,
                 null,
-                array(new OrderBy(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME)))));
+                array(new OrderBy(new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_NAME)))));
 
         $training_options = array();
         $training_options['Andere'] = 'Andere';
@@ -164,38 +156,38 @@ class TicketForm extends FormValidator
             $training_options[$group->get_name()] = $group->get_name();
         }
 
-        $this->addElement('select', self :: PROPERTY_TRAINING, Translation :: get('Training'), $training_options);
-        $this->addElement('text', self :: PROPERTY_URL, Translation :: get('Url'), array("size" => "100"));
+        $this->addElement('select', self::PROPERTY_TRAINING, Translation::get('Training'), $training_options);
+        $this->addElement('text', self::PROPERTY_URL, Translation::get('Url'), array("size" => "100"));
         $this->addRule(
-            self :: PROPERTY_URL,
-            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
+            self::PROPERTY_URL,
+            Translation::get('ThisFieldIsRequired', null, Utilities::COMMON_LIBRARIES),
             'required');
         $this->addElement('category');
 
         // Issue
-        $this->addElement('category', Translation :: get('Issue'));
+        $this->addElement('category', Translation::get('Issue'));
         $this->addElement(
             'textarea',
-            self :: PROPERTY_ISSUE,
-            Translation :: get('IssueDescription'),
+            self::PROPERTY_ISSUE,
+            Translation::get('IssueDescription'),
             array("cols" => "100", "rows" => "20"));
         $this->addRule(
-            self :: PROPERTY_ISSUE,
-            Translation :: get('ThisFieldIsRequired', null, Utilities :: COMMON_LIBRARIES),
+            self::PROPERTY_ISSUE,
+            Translation::get('ThisFieldIsRequired', null, Utilities::COMMON_LIBRARIES),
             'required');
         // $this->add_html_editor(self :: PROPERTY_ISSUE, Translation :: get('IssueDescription'), true);
 
-        $this->addElement('file', self :: PROPERTY_ATTACHMENT, Translation :: get('Attachment'));
+        $this->addElement('file', self::PROPERTY_ATTACHMENT, Translation::get('Attachment'));
         $this->addElement('category');
 
         $buttons[] = $this->createElement(
             'style_submit_button',
             'submit',
-            Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES));
+            Translation::get('Create', null, Utilities::COMMON_LIBRARIES));
         $buttons[] = $this->createElement(
             'style_reset_button',
             'reset',
-            Translation :: get('Reset', null, Utilities :: COMMON_LIBRARIES));
+            Translation::get('Reset', null, Utilities::COMMON_LIBRARIES));
 
         $this->addGroup($buttons, 'buttons', null, '&nbsp;', false);
     }
@@ -207,9 +199,9 @@ class TicketForm extends FormValidator
      */
     public function setDefaults($defaults = array ())
     {
-        $defaults[self :: PROPERTY_REQUESTOR] = $this->component->get_user()->get_email();
-        $defaults[self :: PROPERTY_SYSTEM] = $_SERVER['HTTP_USER_AGENT'];
-        $defaults[self :: PROPERTY_URL] = $_SERVER['HTTP_REFERER'];
+        $defaults[self::PROPERTY_REQUESTOR] = $this->component->get_user()->get_email();
+        $defaults[self::PROPERTY_SYSTEM] = $_SERVER['HTTP_USER_AGENT'];
+        $defaults[self::PROPERTY_URL] = $_SERVER['HTTP_REFERER'];
 
         $groups = $this->component->get_user()->get_groups();
 
@@ -239,10 +231,10 @@ class TicketForm extends FormValidator
                 }
             }
 
-            $defaults[self :: PROPERTY_FACULTY] = $faculties[0];
-            $defaults[self :: PROPERTY_TRAINING] = $trainings[0];
+            $defaults[self::PROPERTY_FACULTY] = $faculties[0];
+            $defaults[self::PROPERTY_TRAINING] = $trainings[0];
         }
 
-        parent :: setDefaults($defaults);
+        parent::setDefaults($defaults);
     }
 }
