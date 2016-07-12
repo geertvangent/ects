@@ -27,7 +27,7 @@ class GroupEventParser extends EventParser
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_YEAR] = $calendarEvent['year'];
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_GROUP_ID] = $calendarEvent['group_id'];
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_ID] = $calendarEvent['id'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = $calendarEvent['start_time'];
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = strtotime($calendarEvent['start_time']);
 
         $redirect = new Redirect($parameters);
         return $redirect->getUrl();
