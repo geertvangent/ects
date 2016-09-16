@@ -50,7 +50,7 @@ class CourseSynchronization extends Synchronization
         {
             $new_course = new Course();
             $new_course->set_visual_code($course['id']);
-            $new_course->set_title($this->convert_to_utf8($course['name']));
+            $new_course->set_title($this->convert_to_utf8($course['name']) . ' ' . $this->convert_to_utf8($course['name_code']));
             $category_code = 'TRA_' . $course['training_id'];
 
             if (! array_key_exists($category_code, $this->course_categories_cache))

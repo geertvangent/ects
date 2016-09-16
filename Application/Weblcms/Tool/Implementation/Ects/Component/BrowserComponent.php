@@ -74,7 +74,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                 // $this->display_footer();
 
                 $bamaflex_uri = array();
-                $bamaflex_uri[] = 'http://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?';
+                $bamaflex_uri[] = 'https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?';
                 // Programme ID
                 $bamaflex_uri[] = 'a=' . $visual_code;
                 $bamaflex_uri[] = '&';

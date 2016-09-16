@@ -45,9 +45,15 @@ class GroupSynchronization extends Synchronization
 
     public static $official_code_cache;
 
+    /**
+     *
+     * @var integer
+     */
+    private $userCount;
+
     public function __construct(GroupSynchronization $synchronization, $parameters)
     {
-        parent :: __construct();
+        parent::__construct();
         $this->synchronization = $synchronization;
         $this->parameters = $parameters;
         $this->determine_current_group();
@@ -59,9 +65,27 @@ class GroupSynchronization extends Synchronization
         $this->synchronize_users();
         $children = $this->get_children();
 
+        $anyChildActive = false;
+
         foreach ($children as $child)
         {
             $child->run();
+
+            if ($child->get_current_group()->get_state() == 1)
+            {
+                $anyChildActive = true;
+            }
+        }
+
+        if ((count($children) == 0 && $this->userCount == 0) || (! $anyChildActive && $this->userCount == 0))
+        {
+            $this->get_current_group()->set_state(0);
+            $this->get_current_group()->update();
+        }
+        elseif ($this->get_current_group()->get_state() == 0)
+        {
+            $this->get_current_group()->set_state(1);
+            $this->get_current_group()->update();
         }
     }
 
@@ -76,7 +100,7 @@ class GroupSynchronization extends Synchronization
      */
     public static function factory($type, GroupSynchronization $synchronization, $parameters = array())
     {
-        $class = __NAMESPACE__ . '\Group\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+        $class = __NAMESPACE__ . '\Group\\' . StringUtilities::getInstance()->createString($type)->upperCamelize() .
              'GroupSynchronization';
 
         return new $class($synchronization, $parameters);
@@ -84,7 +108,7 @@ class GroupSynchronization extends Synchronization
 
     public function determine_current_group()
     {
-        $this->current_group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_group_by_code_and_parent_id(
+        $this->current_group = \Chamilo\Core\Group\Storage\DataManager::retrieve_group_by_code_and_parent_id(
             $this->get_code(),
             $this->get_parent_group()->get_id());
     }
@@ -170,7 +194,7 @@ class GroupSynchronization extends Synchronization
             $this->current_group->set_parent($this->get_parent_group()->get_id());
             $this->current_group->create();
 
-            self :: log('added', $this->current_group->get_name());
+            self::log('added', $this->current_group->get_name());
             flush();
         }
         else
@@ -190,11 +214,11 @@ class GroupSynchronization extends Synchronization
     public function synchronize_users()
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_GROUP_ID),
             new StaticConditionVariable($this->current_group->get_id()));
-        $current_users = \Chamilo\Core\Group\Storage\DataManager :: distinct(
-            GroupRelUser :: class_name(),
-            new DataClassDistinctParameters($condition, GroupRelUser :: PROPERTY_USER_ID));
+        $current_users = \Chamilo\Core\Group\Storage\DataManager::distinct(
+            GroupRelUser::class_name(),
+            new DataClassDistinctParameters($condition, GroupRelUser::PROPERTY_USER_ID));
         $source_users = $this->get_users();
         // $source_users = array();
         $to_add = array_diff($source_users, $current_users);
@@ -210,15 +234,15 @@ class GroupSynchronization extends Synchronization
 
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_GROUP_ID),
+            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_GROUP_ID),
             new StaticConditionVariable($this->current_group->get_id()));
         $conditions[] = new InCondition(
-            new PropertyConditionVariable(GroupRelUser :: class_name(), GroupRelUser :: PROPERTY_USER_ID),
+            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_USER_ID),
             $to_delete);
 
         $condition = new AndCondition($conditions);
 
-        return \Chamilo\Core\Group\Storage\DataManager :: deletes(GroupRelUser :: class_name(), $condition);
+        \Chamilo\Core\Group\Storage\DataManager::deletes(GroupRelUser::class_name(), $condition);
     }
 
     /**
@@ -238,32 +262,36 @@ class GroupSynchronization extends Synchronization
     public function get_users()
     {
         $official_codes = $this->get_user_official_codes();
-        $user_ids = array();
+
+        $userIds = array();
+
         if (count($official_codes) > 0)
         {
             foreach ($official_codes as $code)
             {
-                if (! isset(self :: $official_code_cache[$code]))
+                if (! isset(self::$official_code_cache[$code]))
                 {
                     $result_codes[] = $code;
                 }
                 else
                 {
-                    $user_ids[] = self :: $official_code_cache[$code];
+                    $userIds[] = self::$official_code_cache[$code];
                 }
             }
 
             if (count($result_codes) > 0)
             {
-                $results = \Chamilo\Core\User\Storage\DataManager :: retrieve_users_by_official_codes($result_codes);
+                $results = \Chamilo\Core\User\Storage\DataManager::retrieve_users_by_official_codes($result_codes);
                 while ($result = $results->next_result())
                 {
-                    $user_ids[] = $result->get_id();
-                    self :: $official_code_cache[$result->get_official_code()] = $result->get_id();
+                    $userIds[] = $result->get_id();
+                    self::$official_code_cache[$result->get_official_code()] = $result->get_id();
                 }
             }
         }
 
-        return $user_ids;
+        $this->userCount = count($userIds);
+
+        return $userIds;
     }
 }

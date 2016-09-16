@@ -1,0 +1,22 @@
+{
+    "name": "ehb/application-ects",
+        "version": "6.0.0", "description": "Ehb ECTS Application",
+    "keywords": [],
+    "homepage": "http://www.chamilo.org",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Hans De Bisschop",
+            "email": "hans.de.bisschop@ehb.be"
+        }
+    ],
+    
+    "autoload": {
+        "psr-4": {
+          "Ehb\\": "src/Ehb/"
+        }
+      },
+    "require": {
+        "php": ">=7.0.0"
+    }
+}

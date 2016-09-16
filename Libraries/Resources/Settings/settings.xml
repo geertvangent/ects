@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package context="Ehb/Libraries">
+	<settings>
+		<category name="AdministrationDatabase">
+			<setting name="administration_driver" field="text" default="">
+				<validations>
+					<validation rule="required" message="ThisFieldIsRequired" />
+				</validations>
+			</setting>
+			<setting name="administration_host" field="text" default="">
+				<validations>
+					<validation rule="required" message="ThisFieldIsRequired" />
+				</validations>
+			</setting>
+			<setting name="administration_database" field="text" default="">
+				<validations>
+					<validation rule="required" message="ThisFieldIsRequired" />
+				</validations>
+			</setting>
+			<setting name="administration_username" field="text" user_setting="1">
+				<validations>
+					<validation rule="required" message="ThisFieldIsRequired" />
+				</validations>
+			</setting>
+			<setting name="administration_password" field="password" default="">
+				<validations>
+					<validation rule="required" message="ThisFieldIsRequired" />
+				</validations>
+			</setting>
+		</category>
+	</settings>
+</package>
