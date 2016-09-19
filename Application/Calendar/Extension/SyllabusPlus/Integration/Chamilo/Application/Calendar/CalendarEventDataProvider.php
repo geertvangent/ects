@@ -20,7 +20,7 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class Manager extends InternalCalendar
+class CalendarEventDataProvider extends InternalCalendar
 {
 
     /**
