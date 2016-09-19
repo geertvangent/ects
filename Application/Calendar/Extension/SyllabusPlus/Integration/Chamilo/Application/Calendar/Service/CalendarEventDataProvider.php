@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Application\Calendar;
+namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Application\Calendar\Service;
 
 use Chamilo\Application\Calendar\Architecture\InternalCalendar;
 use Chamilo\Application\Calendar\Repository\AvailabilityRepository;
@@ -9,7 +9,7 @@ use Chamilo\Application\Calendar\Storage\DataClass\AvailableCalendar;
 use Chamilo\Configuration\Configuration;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
 use Chamilo\Libraries\Platform\Translation;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\EventParser;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\UserEventParser;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 
@@ -55,7 +55,7 @@ class CalendarEventDataProvider extends InternalCalendar
 
                 while ($calenderEvent = $eventResultSet->next_result())
                 {
-                    $eventParser = new EventParser( $calendarRendererProvider->getDataUser(), $calenderEvent, $fromDate, $toDate);
+                    $eventParser = new UserEventParser( $calendarRendererProvider->getDataUser(), $calenderEvent, $fromDate, $toDate);
                     $events = array_merge($events, $eventParser->getEvents());
                 }
             }

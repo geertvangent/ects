@@ -60,12 +60,14 @@ class CalendarRepository
 
             if ($user->get_official_code())
             {
+                $baseTable = $user->is_teacher() ? 'teachers' : 'courses';
+
                 $queryParts = array();
 
                 foreach ($this->getYears() as $year)
                 {
-                    $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-                         '_events] WHERE person_id = \'' . $user->get_official_code() . '\'';
+                    $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) . '_' .
+                         $baseTable . '] WHERE person_id = \'' . $user->get_official_code() . '\'';
 
                     if (! is_null($fromDate) && ! is_null($toDate))
                     {
@@ -159,9 +161,11 @@ class CalendarRepository
 
             if ($user->get_official_code())
             {
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-                     '_events] WHERE person_id = \'' . $user->get_official_code() . '\' AND module_id = \'' .
-                     $moduleIdentifier . '\' ORDER BY start_time';
+                $baseTable = $user->is_teacher() ? 'teachers' : 'courses';
+
+                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) . '_' . $baseTable .
+                     '] WHERE person_id = \'' . $user->get_official_code() . '\' AND module_id = \'' . $moduleIdentifier .
+                     '\' ORDER BY start_time';
                 $statement = DataManager::get_instance()->get_connection()->query($query);
                 $resultSet = new ResultSet($statement);
             }
@@ -186,8 +190,10 @@ class CalendarRepository
     {
         if ($user->get_official_code())
         {
-            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-                 '_events] WHERE person_id = \'' . $user->get_official_code() . '\' AND id = \'' . $identifier .
+            $baseTable = $user->is_teacher() ? 'teachers' : 'courses';
+
+            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) . '_' .
+                 $baseTable . '] WHERE person_id = \'' . $user->get_official_code() . '\' AND id = \'' . $identifier .
                  '\' ORDER BY start_time';
             $statement = DataManager::get_instance()->get_connection()->query($query);
             return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
