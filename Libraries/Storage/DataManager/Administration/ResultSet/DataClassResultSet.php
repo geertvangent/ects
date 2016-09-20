@@ -1,15 +1,15 @@
 <?php
-namespace Ehb\Libraries\Storage\DataManager\Administration\ResultSet;
+namespace Chamilo\Libraries\Storage\DataManager\Doctrine\ResultSet;
 
 use Ehb\Libraries\Storage\DataManager\Administration\DataManager;
 
 /**
  *
- * @package Ehb\Libraries\Storage\DataManager\Administration\ResultSet
+ * @package Chamilo\Libraries\Storage\DataManager\Doctrine\ResultSet$DataClassResultSet
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class ArrayResultSet extends \Chamilo\Libraries\Storage\DataManager\Doctrine\ResultSet\ArrayResultSet
+class DataClassResultSet extends \Chamilo\Libraries\Storage\DataManager\Doctrine\ResultSet\DataClassResultSet
 {
 
     /**

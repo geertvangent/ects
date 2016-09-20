@@ -4,9 +4,9 @@ namespace Ehb\Application\Ects\Ajax\Component;
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectory;
-use Ehb\Application\Ects\Storage\DataClass\Trajectory;
-use Ehb\Application\Ects\Storage\DataClass\Training;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectoryCourse;
+use Ehb\Application\Ects\Storage\DataClass\Training;
+use Ehb\Application\Ects\Storage\DataClass\Trajectory;
 
 /**
  *

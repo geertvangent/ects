@@ -2,6 +2,8 @@
 namespace Ehb\Libraries\Storage\DataManager\Administration;
 
 use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
+use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
+use Ehb\Libraries\Storage\DataManager\Administration\ResultSet\RecordResultSet;
 
 /**
  *
@@ -31,5 +33,17 @@ class Database extends \Chamilo\Libraries\Storage\DataManager\Doctrine\Database
             });
 
         return $distinctElements;
+    }
+
+    /**
+     *
+     * @param string $class
+     * @param \Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters $parameters
+     * @return \Chamilo\Libraries\Storage\DataManager\Doctrine\ResultSet\RecordResultSet
+     */
+    public function records($class, RecordRetrievesParameters $parameters)
+    {
+        return new RecordResultSet(
+            $this->get_records_result($this->build_records_sql($class, $parameters), $class, $parameters));
     }
 }

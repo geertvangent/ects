@@ -4,20 +4,20 @@ namespace Ehb\Application\Ects\Repository;
 use Chamilo\Libraries\Cache\Doctrine\Provider\PhpFileCache;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
+use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\ComparisonCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
+use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Ehb\Application\Ects\Storage\DataClass\Training;
-use Chamilo\Libraries\Storage\Query\Condition\NotCondition;
-use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
-use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
-use Ehb\Application\Ects\Storage\DataClass\Trajectory;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectory;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectoryCourse;
-use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
-use Chamilo\Libraries\Storage\Query\Condition\InCondition;
+use Ehb\Application\Ects\Storage\DataClass\Training;
+use Ehb\Application\Ects\Storage\DataClass\Trajectory;
 
 /**
  *

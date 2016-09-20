@@ -9,7 +9,7 @@ use Ehb\Libraries\Storage\DataManager\Administration\DataManager;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class ArrayResultSet extends \Chamilo\Libraries\Storage\DataManager\Doctrine\ResultSet\ArrayResultSet
+class RecordResultSet extends \Chamilo\Libraries\Storage\DataManager\Doctrine\ResultSet\RecordResultSet
 {
 
     /**

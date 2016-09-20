@@ -1,9 +1,9 @@
 <?php
 namespace Ehb\Libraries\Storage\DataManager\Administration;
 
+use Chamilo\Configuration\Configuration;
 use Chamilo\Libraries\Storage\DataManager\DataSourceName;
 use Doctrine\DBAL\DriverManager;
-use Chamilo\Configuration\Configuration;
 
 /**
  *
