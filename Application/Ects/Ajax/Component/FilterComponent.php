@@ -5,6 +5,7 @@ use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Ehb\Application\Ects\Repository\EctsRepository;
 use Ehb\Application\Ects\Service\EctsService;
 use Ehb\Application\Ects\Storage\DataClass\Training;
+use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 
 /**
  *
@@ -12,7 +13,7 @@ use Ehb\Application\Ects\Storage\DataClass\Training;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager
+class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAuthenticationSupport
 {
     // Parameters
     const PARAM_YEAR = 'year';
@@ -26,10 +27,37 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager
     const PROPERTY_FACULTY = 'faculty';
     const PROPERTY_TYPE = 'type';
     const PROPERTY_TEXT = 'text';
+    const PROPERTY_TRAINING = 'training';
 
+    /**
+     *
+     * @var \Ehb\Application\Ects\Service\EctsService
+     */
     private $ectsService;
 
+    /**
+     *
+     * @var string
+     */
     private $currentYear;
+
+    /**
+     *
+     * @var string
+     */
+    private $currentFacultyIdentifier;
+
+    /**
+     *
+     * @var string
+     */
+    private $currentTypeIdentifier;
+
+    /**
+     *
+     * @var string
+     */
+    private $currentText;
 
     /**
      *
@@ -52,11 +80,13 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager
             array(
                 self::PROPERTY_FILTER => array(
                     self::PROPERTY_YEAR => $this->getCurrentYear(),
-                    self::PROPERTY_FACULTY => $this->getCurrentFaculty(),
-                    self::PROPERTY_TYPE => $this->getCurrentType()),
+                    self::PROPERTY_FACULTY => $this->getCurrentFacultyIdentifier(),
+                    self::PROPERTY_TYPE => $this->getCurrentTypeIdentifier(),
+                    self::PROPERTY_TEXT => $this->getCurrentText()),
                 self::PROPERTY_YEAR => $this->getYears(),
                 self::PROPERTY_FACULTY => $this->getFaculties(),
-                self::PROPERTY_TYPE => $this->getTypes()));
+                self::PROPERTY_TYPE => $this->getTypes(),
+                self::PROPERTY_TRAINING => $this->getTrainings()));
 
         $jsonAjaxResult->display();
     }
@@ -75,29 +105,15 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager
         return $this->ectsService;
     }
 
-    public function getPostedYear()
-    {
-        return $this->getRequest()->query->get(self::PARAM_YEAR);
-        return $this->getRequest()->request->get(self::PARAM_YEAR);
-    }
-
-    public function getPostedFaculty()
-    {
-        return $this->getRequest()->query->get(self::PARAM_FACULTY);
-        return $this->getRequest()->request->get(self::PARAM_FACULTY);
-    }
-
-    public function getPostedType()
-    {
-        return $this->getRequest()->query->get(self::PARAM_TYPE);
-        return $this->getRequest()->request->get(self::PARAM_TYPE);
-    }
-
-    public function getCurrentYear()
+    /**
+     *
+     * @return string
+     */
+    private function getCurrentYear()
     {
         if (! isset($this->currentYear))
         {
-            $this->currentYear = $this->getPostedYear();
+            $this->currentYear = $this->getRequestedPostDataValue(self::PARAM_YEAR);
 
             if (is_null($this->currentYear))
             {
@@ -108,43 +124,62 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager
         return $this->currentYear;
     }
 
-    public function getCurrentFaculty()
+    /**
+     *
+     * @return string
+     */
+    private function getCurrentFacultyIdentifier()
     {
-        if (! isset($this->currentFaculty))
+        if (! isset($this->currentFacultyIdentifier))
         {
-            $this->currentFaculty = $this->getPostedFaculty();
-
-            if (is_null($this->currentFaculty))
-            {
-                $this->currentFaculty = array_shift(
-                    $this->getEctsService()->getFacultiesForYear($this->getCurrentYear()));
-            }
+            $this->currentFacultyIdentifier = $this->getRequestedPostDataValue(self::PARAM_FACULTY);
         }
 
-        return $this->currentFaculty;
+        return $this->currentFacultyIdentifier;
     }
 
-    public function getCurrentType()
+    /**
+     *
+     * @return string
+     */
+    private function getCurrentTypeIdentifier()
     {
-        if (! isset($this->currentType))
+        if (! isset($this->currentTypeIdentifier))
         {
-            $this->currentType = $this->getPostedType();
-
-            if (is_null($this->currentType))
-            {
-                $this->currentType = array_shift($this->getEctsService()->getTypesForYear($this->getCurrentYear()));
-            }
+            $this->currentTypeIdentifier = $this->getRequestedPostDataValue(self::PARAM_TYPE);
         }
 
-        return $this->currentType;
+        return $this->currentTypeIdentifier;
     }
 
-    public function getYears()
+    /**
+     *
+     * @return string
+     */
+    private function getCurrentText()
+    {
+        if (! isset($this->currentText))
+        {
+            $this->currentText = $this->getRequestedPostDataValue(self::PARAM_TEXT);
+        }
+
+        return $this->currentText;
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    private function getYears()
     {
         return $this->getEctsService()->getYears();
     }
 
-    public function getFaculties()
+    /**
+     *
+     * @return string[]
+     */
+    private function getFaculties()
     {
         $faculties = $this->getEctsService()->getFacultiesForYear($this->getCurrentYear());
         $formattedFaculties = array();
@@ -157,9 +192,15 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager
         return $formattedFaculties;
     }
 
-    public function getTypes()
+    /**
+     *
+     * @return string[]
+     */
+    private function getTypes()
     {
-        $types = $this->getEctsService()->getTypesForYear($this->getCurrentYear());
+        $types = $this->getEctsService()->getTypesForYearAndFacultyIdentifier(
+            $this->getCurrentYear(),
+            $this->getCurrentFacultyIdentifier());
         $formattedTypes = array();
 
         foreach ($types as $type)
@@ -168,5 +209,20 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager
         }
 
         return $formattedTypes;
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    private function getTrainings()
+    {
+        $trainings = $this->getEctsService()->getTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
+            $this->getCurrentYear(),
+            $this->getCurrentFacultyIdentifier(),
+            $this->getCurrentTypeIdentifier(),
+            $this->getCurrentText());
+
+        return $trainings;
     }
 }

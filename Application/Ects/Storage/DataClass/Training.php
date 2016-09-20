@@ -30,6 +30,7 @@ class Training extends DataClass
     const PROPERTY_CREDITS = 'credits';
     const PROPERTY_FACULTY_ID = 'faculty_id';
     const PROPERTY_FACULTY = 'faculty';
+    const PROPERTY_INVISIBLE = 'invisible';
 
     /**
      *
@@ -58,7 +59,8 @@ class Training extends DataClass
                 self::PROPERTY_GOALS,
                 self::PROPERTY_CREDITS,
                 self::PROPERTY_FACULTY_ID,
-                self::PROPERTY_FACULTY));
+                self::PROPERTY_FACULTY,
+                self::PROPERTY_INVISIBLE));
     }
 
     public static function get_table_name()

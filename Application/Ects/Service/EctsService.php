@@ -66,10 +66,85 @@ class EctsService
 
     /**
      *
-     * @return string[]
+     * @param string $year
+     * @param string $facultyIdentifier
+     * @return string[][]
      */
-    public function getTypesForYear($year)
+    public function getTypesForYearAndFacultyIdentifier($year, $facultyIdentifier = null)
     {
-        return $this->getEctsRepository()->findTypesForYear($year);
+        return $this->getEctsRepository()->findTypesForYearAndFacultyIdentifier($year, $facultyIdentifier);
+    }
+
+    /**
+     *
+     * @param string $year
+     * @param string $facultyIdentifier
+     * @param string $typeIdentifier
+     * @param string $text
+     * @return string[][]
+     */
+    public function getTrainingsForYearFacultyIdentifierTypeIdentifierAndText($year, $facultyIdentifier = null,
+        $typeIdentifier = null, $text = null)
+    {
+        return $this->getEctsRepository()->findTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
+            $year,
+            $facultyIdentifier,
+            $typeIdentifier,
+            $text);
+    }
+
+    /**
+     *
+     * @param integer $trainingIdentifier
+     * @return \Ehb\Application\Ects\Storage\DataClass\Training
+     */
+    public function getTrainingByIdentifier($trainingIdentifier)
+    {
+        return $this->getEctsRepository()->findTrainingByIdentifier($trainingIdentifier);
+    }
+
+    /**
+     *
+     * @param integer $trainingIdentifier
+     * @return string[][]
+     */
+    public function getTrajectoriesForTrainingIdentifier($trainingIdentifier)
+    {
+        return $this->getEctsRepository()->findTrajectoriesForTrainingIdentifier($trainingIdentifier);
+    }
+
+    /**
+     *
+     * @param integer $trajectoryIdentifier
+     * @return string[][]
+     */
+    public function getSubTrajectoriesForTrajectoryIdentifier($trajectoryIdentifier)
+    {
+        return $this->getEctsRepository()->findSubTrajectoriesForTrajectoryIdentifier($trajectoryIdentifier);
+    }
+
+    /**
+     *
+     * @param integer $subTrajectoryIdentifier
+     * @return \Ehb\Application\Ects\Storage\DataClass\SubTrajectory
+     */
+    public function getSubTrajectoryByIdentifier($subTrajectoryIdentifier)
+    {
+        return $this->getEctsRepository()->findSubTrajectoryByIdentifier($subTrajectoryIdentifier);
+    }
+
+    /**
+     *
+     * @param integer $trajectoryIdentifier
+     * @return \Ehb\Application\Ects\Storage\DataClass\Trajectory
+     */
+    public function getTrajectoryByIdentifier($trajectoryIdentifier)
+    {
+        return $this->getEctsRepository()->findtrajectoryByIdentifier($trajectoryIdentifier);
+    }
+
+    public function getSubTrajectoryCoursesForSubTrajectoryIdentifier($subTrajectoryIdentifier)
+    {
+        return $this->getEctsRepository()->findSubTrajectoryCoursesForSubTrajectoryIdentifier($subTrajectoryIdentifier);
     }
 }
