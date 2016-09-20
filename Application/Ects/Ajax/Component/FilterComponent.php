@@ -31,12 +31,6 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
 
     /**
      *
-     * @var \Ehb\Application\Ects\Service\EctsService
-     */
-    private $ectsService;
-
-    /**
-     *
      * @var string
      */
     private $currentYear;
@@ -89,20 +83,6 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
                 self::PROPERTY_TRAINING => $this->getTrainings()));
 
         $jsonAjaxResult->display();
-    }
-
-    /**
-     *
-     * @return \Ehb\Application\Ects\Service\EctsService
-     */
-    private function getEctsService()
-    {
-        if (! isset($this->ectsService))
-        {
-            $this->ectsService = new EctsService(new EctsRepository());
-        }
-
-        return $this->ectsService;
     }
 
     /**
