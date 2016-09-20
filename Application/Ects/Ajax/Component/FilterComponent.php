@@ -1,11 +1,9 @@
 <?php
 namespace Ehb\Application\Ects\Ajax\Component;
 
-use Chamilo\Libraries\Architecture\JsonAjaxResult;
-use Ehb\Application\Ects\Repository\EctsRepository;
-use Ehb\Application\Ects\Service\EctsService;
-use Ehb\Application\Ects\Storage\DataClass\Training;
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
+use Chamilo\Libraries\Architecture\JsonAjaxResult;
+use Ehb\Application\Ects\Storage\DataClass\Training;
 
 /**
  *

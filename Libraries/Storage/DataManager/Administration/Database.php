@@ -1,6 +1,8 @@
 <?php
 namespace Ehb\Libraries\Storage\DataManager\Administration;
 
+use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
+
 /**
  *
  * @package Ehb\Libraries\Storage\DataManager\Administration
@@ -16,5 +18,18 @@ class Database extends \Chamilo\Libraries\Storage\DataManager\Doctrine\Database
     public function __construct()
     {
         parent::__construct(Connection::getInstance()->getConnection());
+    }
+
+    public function distinct($class, DataClassDistinctParameters $parameters)
+    {
+        $distinctElements = parent::distinct($class, $parameters);
+        array_walk_recursive(
+            $distinctElements,
+            function (&$distinctElement, $key)
+            {
+                $distinctElement = trim(iconv('cp1252', 'UTF-8', $distinctElement));
+            });
+
+        return $distinctElements;
     }
 }

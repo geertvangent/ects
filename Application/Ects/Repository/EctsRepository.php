@@ -17,6 +17,7 @@ use Ehb\Application\Ects\Storage\DataClass\Trajectory;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectory;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectoryCourse;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\InCondition;
 
 /**
  *
@@ -164,6 +165,11 @@ class EctsRepository
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     null));
 
+            $conditions[] = new NotCondition(
+                new InCondition(
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
+                    array(14, 16, 18)));
+
             $types = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
                 Training::class_name(),
                 new DataClassDistinctParameters(
@@ -224,6 +230,11 @@ class EctsRepository
                 new EqualityCondition(
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     null));
+
+            $conditions[] = new NotCondition(
+                new InCondition(
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
+                    array(14, 16, 18)));
 
             $types = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
                 Training::class_name(),
