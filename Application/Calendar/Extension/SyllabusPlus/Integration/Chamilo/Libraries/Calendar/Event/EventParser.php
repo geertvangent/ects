@@ -197,9 +197,9 @@ abstract class EventParser
 
         if ($this->getDataUser()->get_status() == User::STATUS_TEACHER)
         {
-            if ($calendarEvent['groups'])
+            if ($calendarEvent['student_group'])
             {
-                $html[] = '(' . trim($calendarEvent['groups']) . ')';
+                $html[] = '(' . trim($calendarEvent['student_group']) . ')';
             }
         }
 
@@ -227,9 +227,9 @@ abstract class EventParser
             $html[] = Translation::get('AtLocation') . ' ' . trim($calendarEvent['location']);
         }
 
-        if ($calendarEvent['groups'])
+        if ($calendarEvent['student_group'])
         {
-            $html[] = Translation::get('ForGroups') . ' ' . trim($calendarEvent['groups']);
+            $html[] = Translation::get('ForGroups') . ' ' . trim($calendarEvent['student_group']);
         }
 
         return implode(PHP_EOL, $html);

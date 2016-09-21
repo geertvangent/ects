@@ -6,6 +6,7 @@ use Chamilo\Core\User\Storage\DataClass\User;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Zone;
+use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 
 /**
  *
@@ -59,7 +60,7 @@ class CalendarService
      */
     public function getEventsForUserAndBetweenDates(User $user, $fromDate, $toDate)
     {
-        return $this->getCalendarRepository()->findEventsForUserAndBetweenDates($user, $fromDate, $toDate);
+        return new ArrayResultSet($this->getCalendarRepository()->findEventsForUser($user));
     }
 
     /**

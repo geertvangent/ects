@@ -20,6 +20,7 @@ class Database extends \Chamilo\Libraries\Storage\DataManager\Doctrine\Database
     public function __construct()
     {
         parent::__construct(Connection::getInstance()->getConnection());
+        $this->get_connection()->query('SET TEXTSIZE 2000000');
     }
 
     public function distinct($class, DataClassDistinctParameters $parameters)
@@ -29,7 +30,13 @@ class Database extends \Chamilo\Libraries\Storage\DataManager\Doctrine\Database
             $distinctElements,
             function (&$distinctElement, $key)
             {
-                $distinctElement = trim(iconv('cp1252', 'UTF-8', $distinctElement));
+                if (! mb_check_encoding($distinctElement, 'UTF-8'))
+                {
+                    if (is_string($distinctElement) && ! is_numeric($distinctElement))
+                    {
+                        $distinctElement = trim(iconv('Windows-1252', 'UTF-8', $distinctElement));
+                    }
+                }
             });
 
         return $distinctElements;

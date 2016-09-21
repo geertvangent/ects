@@ -9,6 +9,17 @@ use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataManager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\TeacherEvent;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentEvent;
+use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\UserEvent;
+use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Chamilo\Libraries\Storage\Query\Condition\InequalityCondition;
+use Chamilo\Libraries\Storage\Query\Condition\ComparisonCondition;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
+use Chamilo\Libraries\Storage\Query\OrderBy;
 
 /**
  *
@@ -44,14 +55,12 @@ class CalendarRepository
     /**
      *
      * @param \Chamilo\Core\User\Storage\DataClass\User $user
-     * @param integer $fromDate
-     * @param integer $toDate
      * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet
      */
-    public function findEventsForUserAndBetweenDates(User $user, $fromDate, $toDate)
+    public function findEventsForUser(User $user)
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $fromDate, $toDate)));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
 
         if (! $cache->contains($cacheIdentifier))
         {
@@ -60,38 +69,101 @@ class CalendarRepository
 
             if ($user->get_official_code())
             {
-                $baseTable = $user->is_teacher() ? 'teachers' : 'courses';
+                $baseClass = $user->is_teacher() ? TeacherEvent::class_name() : StudentEvent::class_name();
 
                 $queryParts = array();
 
-                foreach ($this->getYears() as $year)
-                {
-                    $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) . '_' .
-                         $baseTable . '] WHERE person_id = \'' . $user->get_official_code() . '\'';
+                $conditions = array();
 
-                    if (! is_null($fromDate) && ! is_null($toDate))
-                    {
-                        $query .= 'AND start_time >= \'' . date(self::SQL_DATE_FORMAT, $fromDate) .
-                             '\' AND end_time <= \'' . date(self::SQL_DATE_FORMAT, $toDate) . '\'';
-                    }
+                $conditions[] = new EqualityCondition(
+                    new PropertyConditionVariable($baseClass, UserEvent::PROPERTY_PERSON_ID),
+                    new StaticConditionVariable((string) $user->get_official_code()));
 
-                    $queryParts[] = $query;
-                }
+                $records = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                    $baseClass,
+                    new RecordRetrievesParameters(
+                        null,
+                        new AndCondition($conditions),
+                        null,
+                        null,
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, UserEvent::PROPERTY_START_TIME)))))->as_array();
 
-                $query = implode(' UNION ', $queryParts) . ' ORDER BY start_time';
-
-                $statement = DataManager::get_instance()->get_connection()->query($query);
-                $resultSet = new ResultSet($statement);
+                $records = $this->aggregateRecords(
+                    $baseClass,
+                    $records,
+                    array(UserEvent::PROPERTY_LOCATION, UserEvent::PROPERTY_STUDENT_GROUP, UserEvent::PROPERTY_TEACHER));
             }
             else
             {
-                $resultSet = new ArrayResultSet(array());
+                $records = array();
             }
 
-            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
         }
 
         return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
+     * @param string $dataClass
+     * @param string[][] $records
+     * @param unknown $fieldsToAggregate
+     * @return string
+     */
+    private function aggregateRecords($dataClass, $records, $fieldsToAggregate)
+    {
+        $dataClassPropertes = $dataClass::get_default_property_names();
+        $importantValueKeys = array_diff($dataClassPropertes, $fieldsToAggregate);
+
+        $aggregatedRecords = array();
+
+        foreach ($records as $record)
+        {
+            $importantValues = $this->filterProperties($record, $importantValueKeys);
+            $hash = md5(json_encode($importantValues));
+
+            if (! isset($aggregatedRecords[$hash]))
+            {
+                $aggregatedRecords[$hash] = $importantValues;
+
+                foreach ($fieldsToAggregate as $fieldToAggregate)
+                {
+                    $aggregatedRecords[$hash][$fieldToAggregate] = array();
+                }
+            }
+
+            foreach ($fieldsToAggregate as $fieldToAggregate)
+            {
+                if (isset($record[$fieldToAggregate]) &&
+                     ! in_array($record[$fieldToAggregate], $aggregatedRecords[$hash][$fieldToAggregate]))
+                {
+                    $aggregatedRecords[$hash][$fieldToAggregate][] = $record[$fieldToAggregate];
+                }
+            }
+        }
+
+        foreach ($aggregatedRecords as &$aggregatedRecord)
+        {
+            foreach ($fieldsToAggregate as $fieldToAggregate)
+            {
+                sort($aggregatedRecord[$fieldToAggregate]);
+                $aggregatedRecord[$fieldToAggregate] = implode(', ', $aggregatedRecord[$fieldToAggregate]);
+            }
+        }
+
+        return array_values($aggregatedRecords);
+    }
+
+    protected function filterProperties($properties, $propertyKeysToMaintain)
+    {
+        return array_filter(
+            $properties,
+            function ($key) use ($propertyKeysToMaintain)
+            {
+                return in_array($key, $propertyKeysToMaintain);
+            },
+            ARRAY_FILTER_USE_KEY);
     }
 
     /**

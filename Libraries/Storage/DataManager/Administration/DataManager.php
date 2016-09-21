@@ -44,9 +44,12 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
 
         foreach ($record as &$field)
         {
-            if (is_string($field))
+            if (! mb_check_encoding($field, 'UTF-8'))
             {
-                $field = trim(iconv('cp1252', 'UTF-8', $field));
+                if (is_string($field) && ! is_numeric($field))
+                {
+                    $field = trim(iconv('Windows-1252', 'UTF-8', $field));
+                }
             }
         }
 
