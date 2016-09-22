@@ -53,57 +53,6 @@ class CalendarRepository
 
     /**
      *
-     * @param \Chamilo\Core\User\Storage\DataClass\User $user
-     * @return string[][]
-     */
-    public function findEventsForUser(User $user)
-    {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
-
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-
-            if ($user->get_official_code())
-            {
-                $baseClass = $user->is_teacher() ? TeacherActivity::class_name() : StudentActivity::class_name();
-
-                $condition = new EqualityCondition(
-                    new PropertyConditionVariable($baseClass, UserActivity::PROPERTY_PERSON_ID),
-                    new StaticConditionVariable((string) $user->get_official_code()));
-
-                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
-                    $baseClass,
-                    new RecordRetrievesParameters(
-                        null,
-                        $condition,
-                        null,
-                        null,
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, UserActivity::PROPERTY_START_TIME)))))->as_array();
-
-                $records = $this->aggregateRecords(
-                    $baseClass,
-                    $activities,
-                    array(
-                        UserActivity::PROPERTY_LOCATION,
-                        UserActivity::PROPERTY_STUDENT_GROUP,
-                        UserActivity::PROPERTY_TEACHER));
-            }
-            else
-            {
-                $records = array();
-            }
-
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
-        }
-
-        return $cache->fetch($cacheIdentifier);
-    }
-
-    /**
-     *
      * @param string $dataClass
      * @param string[][] $records
      * @param unknown $fieldsToAggregate
@@ -166,6 +115,57 @@ class CalendarRepository
 
     /**
      *
+     * @param \Chamilo\Core\User\Storage\DataClass\User $user
+     * @return string[][]
+     */
+    public function findEventsForUser(User $user)
+    {
+        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            if ($user->get_official_code())
+            {
+                $baseClass = $user->is_teacher() ? TeacherActivity::class_name() : StudentActivity::class_name();
+
+                $condition = new EqualityCondition(
+                    new PropertyConditionVariable($baseClass, UserActivity::PROPERTY_PERSON_ID),
+                    new StaticConditionVariable((string) $user->get_official_code()));
+
+                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                    $baseClass,
+                    new RecordRetrievesParameters(
+                        null,
+                        $condition,
+                        null,
+                        null,
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, UserActivity::PROPERTY_START_TIME)))))->as_array();
+
+                $records = $this->aggregateRecords(
+                    $baseClass,
+                    $activities,
+                    array(
+                        UserActivity::PROPERTY_LOCATION,
+                        UserActivity::PROPERTY_STUDENT_GROUP,
+                        UserActivity::PROPERTY_TEACHER));
+            }
+            else
+            {
+                $records = array();
+            }
+
+            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
      * @param string $groupIdentifier
      * @return string[][]
      */
@@ -203,6 +203,49 @@ class CalendarRepository
                     GroupActivity::PROPERTY_LOCATION,
                     GroupActivity::PROPERTY_STUDENT_GROUP,
                     GroupActivity::PROPERTY_TEACHER));
+
+            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
+
+    /**
+     *
+     * @param string $groupIdentifier
+     * @return string[][]
+     */
+    public function findEventsForLocation($year, $locationIdentifier)
+    {
+        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            $condition = new EqualityCondition(
+                new PropertyConditionVariable(LocationActivity::class_name(), LocationActivity::PROPERTY_LOCATION_ID),
+                new StaticConditionVariable((string) $locationIdentifier));
+
+            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                LocationActivity::class_name(),
+                new RecordRetrievesParameters(
+                    null,
+                    $condition,
+                    null,
+                    null,
+                    array(
+                        new OrderBy(
+                            new PropertyConditionVariable(
+                                LocationActivity::class_name(),
+                                LocationActivity::PROPERTY_START_TIME)))))->as_array();
+
+            $records = $this->aggregateRecords(
+                LocationActivity::class_name(),
+                $activities,
+                array(LocationActivity::PROPERTY_STUDENT_GROUP, LocationActivity::PROPERTY_TEACHER));
 
             $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
         }
@@ -628,48 +671,5 @@ class CalendarRepository
 
         $statement = DataManager::get_instance()->get_connection()->query($query);
         return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
-    }
-
-    /**
-     *
-     * @param string $groupIdentifier
-     * @return string[][]
-     */
-    public function findEventsForLocation($year, $locationIdentifier)
-    {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier)));
-
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-
-            $condition = new EqualityCondition(
-                new PropertyConditionVariable(LocationActivity::class_name(), LocationActivity::PROPERTY_LOCATION_ID),
-                new StaticConditionVariable((string) $locationIdentifier));
-
-            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
-                LocationActivity::class_name(),
-                new RecordRetrievesParameters(
-                    null,
-                    $condition,
-                    null,
-                    null,
-                    array(
-                        new OrderBy(
-                            new PropertyConditionVariable(
-                                LocationActivity::class_name(),
-                                LocationActivity::PROPERTY_START_TIME)))))->as_array();
-
-            $records = $this->aggregateRecords(
-                LocationActivity::class_name(),
-                $activities,
-                array(LocationActivity::PROPERTY_STUDENT_GROUP, LocationActivity::PROPERTY_TEACHER));
-
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
-        }
-
-        return $cache->fetch($cacheIdentifier);
     }
 }
