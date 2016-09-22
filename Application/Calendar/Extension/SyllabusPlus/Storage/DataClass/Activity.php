@@ -9,17 +9,18 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-abstract class UserEvent extends DataClass
+abstract class Activity extends DataClass
 {
     const PROPERTY_YEAR = 'year';
     const PROPERTY_MODULE_ID = 'module_id';
     const PROPERTY_NAME = 'name';
+    const PROPERTY_START_TIME = 'start_time';
+    const PROPERTY_END_TIME = 'end_time';
     const PROPERTY_LOCATION = 'location';
     const PROPERTY_TYPE_CODE = 'type_code';
     const PROPERTY_TYPE = 'type';
     const PROPERTY_STUDENT_GROUP = 'student_group';
     const PROPERTY_TEACHER = 'teacher';
-    const PROPERTY_PERSON_ID = 'person_id';
 
     /**
      *
@@ -28,16 +29,17 @@ abstract class UserEvent extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        return parent::get_default_property_names(
-            array(
-                self::PROPERTY_YEAR,
-                self::PROPERTY_MODULE_ID,
-                self::PROPERTY_NAME,
-                self::PROPERTY_LOCATION,
-                self::PROPERTY_TYPE_CODE,
-                self::PROPERTY_TYPE,
-                self::PROPERTY_STUDENT_GROUP,
-                self::PROPERTY_TEACHER,
-                self::PROPERTY_PERSON_ID));
+        $extended_property_names[] = self::PROPERTY_YEAR;
+        $extended_property_names[] = self::PROPERTY_MODULE_ID;
+        $extended_property_names[] = self::PROPERTY_NAME;
+        $extended_property_names[] = self::PROPERTY_START_TIME;
+        $extended_property_names[] = self::PROPERTY_END_TIME;
+        $extended_property_names[] = self::PROPERTY_LOCATION;
+        $extended_property_names[] = self::PROPERTY_TYPE_CODE;
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        $extended_property_names[] = self::PROPERTY_STUDENT_GROUP;
+        $extended_property_names[] = self::PROPERTY_TEACHER;
+
+        return parent::get_default_property_names($extended_property_names);
     }
 }

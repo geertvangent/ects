@@ -7,7 +7,7 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class StudentEvent extends UserEvent
+class TeacherActivity extends UserActivity
 {
 
     /**
@@ -16,6 +16,6 @@ class StudentEvent extends UserEvent
      */
     public static function get_table_name()
     {
-        return 'v_syllabus_1617_event_student';
+        return 'v_syllabus_1617_event_teacher';
     }
 }

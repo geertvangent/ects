@@ -3,6 +3,7 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Li
 
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Redirect;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\LocationActivity;
 
 /**
  *
@@ -24,10 +25,11 @@ class LocationEventParser extends EventParser
         $parameters = array();
         $parameters[Application::PARAM_CONTEXT] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::context();
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTION] = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::ACTION_VIEW_LOCATION_EVENT;
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_YEAR] = $calendarEvent['year'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_LOCATION_ID] = $calendarEvent['location_id'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_ID] = $calendarEvent['id'];
-        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = strtotime($calendarEvent['start_time']);
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_YEAR] = $calendarEvent[LocationActivity::PROPERTY_YEAR];
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_LOCATION_ID] = $calendarEvent[LocationActivity::PROPERTY_LOCATION_ID];
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_ID] = $calendarEvent[LocationActivity::PROPERTY_ID];
+        $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = strtotime(
+            $calendarEvent[LocationActivity::PROPERTY_START_TIME]);
 
         $redirect = new Redirect($parameters);
         return $redirect->getUrl();
@@ -35,6 +37,6 @@ class LocationEventParser extends EventParser
 
     protected function getLocationFromCalendarEvent($calendarEvent)
     {
-        return $calendarEvent['location_code'];
+        return $calendarEvent[LocationActivity::PROPERTY_LOCATION_CODE];
     }
 }

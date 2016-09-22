@@ -4,6 +4,7 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Li
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Calendar\Event\RecurrenceRules\RecurrenceRules;
 use Chamilo\Libraries\Platform\Translation;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Activity;
 
 /**
  *
@@ -151,13 +152,13 @@ abstract class EventParser
 
         $events = array();
 
-        $startTime = strtotime($calendarEvent['start_time']);
-        $endTime = strtotime($calendarEvent['end_time']);
+        $startTime = strtotime($calendarEvent[Activity::PROPERTY_START_TIME]);
+        $endTime = strtotime($calendarEvent[Activity::PROPERTY_END_TIME]);
 
-        $source = '[' . $calendarEvent['type_code'] . '] ' . $calendarEvent['type'];
+        $source = '[' . $calendarEvent[Activity::PROPERTY_TYPE_CODE] . '] ' . $calendarEvent[Activity::PROPERTY_TYPE];
 
         $event = new Event(
-            $calendarEvent['id'],
+            $calendarEvent[Activity::PROPERTY_ID],
             $startTime,
             $endTime,
             new RecurrenceRules(),
@@ -173,10 +174,7 @@ abstract class EventParser
         return array($event);
     }
 
-    protected function getLocationFromCalendarEvent($calendarEvent)
-    {
-        return $calendarEvent['location'];
-    }
+    abstract protected function getLocationFromCalendarEvent($calendarEvent);
 
     /**
      *
@@ -187,7 +185,7 @@ abstract class EventParser
     {
         $html = array();
 
-        $html[] = '[' . $calendarEvent['type_code'] . ']';
+        $html[] = '[' . $calendarEvent[Activity::PROPERTY_TYPE_CODE] . ']';
         $html[] = $calendarEvent['name'];
 
         if ($calendarEvent['location'])
@@ -197,9 +195,9 @@ abstract class EventParser
 
         if ($this->getDataUser()->get_status() == User::STATUS_TEACHER)
         {
-            if ($calendarEvent['student_group'])
+            if ($calendarEvent[Activity::PROPERTY_STUDENT_GROUP])
             {
-                $html[] = '(' . trim($calendarEvent['student_group']) . ')';
+                $html[] = '(' . trim($calendarEvent[Activity::PROPERTY_STUDENT_GROUP]) . ')';
             }
         }
 
@@ -215,11 +213,11 @@ abstract class EventParser
     {
         $html = array();
 
-        $html[] = $calendarEvent['type'];
+        $html[] = $calendarEvent[Activity::PROPERTY_TYPE];
 
         if ($calendarEvent['teacher'])
         {
-            $html[] = Translation::get('ByTeacher') . ' ' . trim($calendarEvent['teacher']);
+            $html[] = Translation::get('ByTeacher') . ' ' . trim($calendarEvent[Activity::PROPERTY_TEACHER]);
         }
 
         if ($calendarEvent['location'])
@@ -229,7 +227,7 @@ abstract class EventParser
 
         if ($calendarEvent['student_group'])
         {
-            $html[] = Translation::get('ForGroups') . ' ' . trim($calendarEvent['student_group']);
+            $html[] = Translation::get('ForGroups') . ' ' . trim($calendarEvent[Activity::PROPERTY_STUDENT_GROUP]);
         }
 
         return implode(PHP_EOL, $html);
