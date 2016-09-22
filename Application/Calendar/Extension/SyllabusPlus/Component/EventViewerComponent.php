@@ -14,6 +14,7 @@ use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Activity;
 
 /**
  *
@@ -120,7 +121,7 @@ abstract class EventViewerComponent extends Manager
         BreadcrumbTrail::get_instance()->add(
             new Breadcrumb(null, Translation::get('AcademicYear', array('YEAR' => $this->getYear()))));
         BreadcrumbTrail::get_instance()->add($this->getActivityTypeBreadcrumb($activityRecord));
-        BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $activityRecord['name']));
+        BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $activityRecord[Activity::PROPERTY_NAME]));
 
         return $this->renderInformation($activityRecord, $activityTime);
     }
@@ -153,7 +154,7 @@ abstract class EventViewerComponent extends Manager
     {
         $properties = array();
 
-        $properties[Translation::get('ActivityType')] = $activityRecord['type'];
+        $properties[Translation::get('ActivityType')] = $activityRecord[Activity::PROPERTY_TYPE];
 
         $activityEvents = $this->getEvents($activityRecord);
         $highlightedEvent = $this->getHighlightedEvent($activityEvents, $activityTime);
@@ -166,19 +167,19 @@ abstract class EventViewerComponent extends Manager
             'ActivityDateValue',
             array('DAY' => $dateDay, 'FROM' => $dateStart, 'UNTIL' => $dateEnd));
 
-        if ($activityRecord['location'])
+        if ($activityRecord[Activity::PROPERTY_LOCATION])
         {
-            $properties[Translation::get('AtLocation')] = $activityRecord['location'];
+            $properties[Translation::get('AtLocation')] = $activityRecord[Activity::PROPERTY_LOCATION];
         }
 
-        if ($activityRecord['groups'])
+        if ($activityRecord[Activity::PROPERTY_STUDENT_GROUP])
         {
-            $properties[Translation::get('ForGroups')] = $activityRecord['groups'];
+            $properties[Translation::get('ForGroups')] = $activityRecord[Activity::PROPERTY_STUDENT_GROUP];
         }
 
-        if (! StringUtilities::getInstance()->createString($activityRecord['teacher'])->isBlank())
+        if (! StringUtilities::getInstance()->createString($activityRecord[Activity::PROPERTY_TEACHER])->isBlank())
         {
-            $properties[Translation::get('ByTeacher')] = $activityRecord['teacher'];
+            $properties[Translation::get('ByTeacher')] = $activityRecord[Activity::PROPERTY_TEACHER];
         }
 
         $propertiesTable = new PropertiesTable($properties);
@@ -233,9 +234,9 @@ abstract class EventViewerComponent extends Manager
     {
         $sortedEvents = array();
 
-        if (! is_null($activityRecord['module_id']))
+        if (! is_null($activityRecord[Activity::PROPERTY_MODULE_ID]))
         {
-            $moduleEvents = $this->getModuleEvents($activityRecord['module_id']);
+            $moduleEvents = $this->getModuleEvents($activityRecord[Activity::PROPERTY_MODULE_ID]);
 
             while ($moduleEvent = $moduleEvents->next_result())
             {
@@ -291,7 +292,7 @@ abstract class EventViewerComponent extends Manager
         {
             $activityRecord = $event->getCalendarEvent();
 
-            if (! StringUtilities::getInstance()->createString($activityRecord['teacher'])->isBlank())
+            if (! StringUtilities::getInstance()->createString($activityRecord[Activity::PROPERTY_TEACHER])->isBlank())
             {
                 $hasTeachers = true;
                 break;
@@ -321,7 +322,7 @@ abstract class EventViewerComponent extends Manager
 
             $tableRow = array();
 
-            $tableRow[] = '<span' . $class . '>' . $activityRecord['type'] . '</span>';
+            $tableRow[] = '<span' . $class . '>' . $activityRecord[Activity::PROPERTY_TYPE] . '</span>';
 
             $startDate = DatetimeUtilities::format_locale_date('%A %d %B %Y', $event->getStartDate());
 
@@ -332,12 +333,12 @@ abstract class EventViewerComponent extends Manager
             $tableRow[] = '<span' . $class . '>' . $startTime . '</span>';
             $tableRow[] = '<span' . $class . '>' . $endTime . '</span>';
 
-            $tableRow[] = '<span' . $class . '>' . $activityRecord['location'] . '</span>';
-            $tableRow[] = '<span' . $class . '>' . $activityRecord['groups'] . '</span>';
+            $tableRow[] = '<span' . $class . '>' . $activityRecord[Activity::PROPERTY_LOCATION] . '</span>';
+            $tableRow[] = '<span' . $class . '>' . $activityRecord[Activity::PROPERTY_STUDENT_GROUP] . '</span>';
 
             if ($hasTeachers)
             {
-                $tableRow[] = '<span' . $class . '>' . $activityRecord['teacher'] . '</span>';
+                $tableRow[] = '<span' . $class . '>' . $activityRecord[Activity::PROPERTY_TEACHER] . '</span>';
             }
 
             $tableData[] = $tableRow;

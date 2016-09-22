@@ -3,6 +3,7 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\LocationEventParser;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\LocationActivity;
 
 /**
  *
@@ -72,6 +73,6 @@ class LocationEventViewerComponent extends EventViewerComponent
      */
     protected function getActivityTypeBreadcrumb($activityRecord)
     {
-        return new Breadcrumb(null, $activityRecord['location_code']);
+        return new Breadcrumb(null, $activityRecord[LocationActivity::PROPERTY_LOCATION_CODE]);
     }
 }

@@ -7,18 +7,12 @@ use Chamilo\Libraries\Cache\Doctrine\Provider\FilesystemCache;
 use Chamilo\Libraries\Cache\Doctrine\Provider\PhpFileCache;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
+use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentActivity;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\TeacherActivity;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\UserActivity;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataManager;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\ResultSet;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\GroupActivity;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\LocationActivity;
 
 /**
  *
@@ -56,7 +50,7 @@ class CalendarRepository
      * @param string $dataClass
      * @param string[][] $records
      * @param unknown $fieldsToAggregate
-     * @return string
+     * @return string[][]
      */
     private function aggregateRecords($dataClass, $records, $fieldsToAggregate)
     {
@@ -102,6 +96,12 @@ class CalendarRepository
         return array_values($aggregatedRecords);
     }
 
+    /**
+     *
+     * @param string[] $properties
+     * @param string[] $propertyKeysToMaintain
+     * @return string[]
+     */
     private function filterProperties($properties, $propertyKeysToMaintain)
     {
         return array_filter(
@@ -111,6 +111,32 @@ class CalendarRepository
                 return in_array($key, $propertyKeysToMaintain);
             },
             ARRAY_FILTER_USE_KEY);
+    }
+
+    /**
+     *
+     * @param string $className
+     * @param string $year
+     * @return string
+     */
+    private function getYearSpecificActivityClassName($className, $year)
+    {
+        return '\Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Year' . $this->convertYear($year) .
+             '\\' . $className;
+    }
+
+    /**
+     *
+     * @param string $className
+     * @param string[][] $activities
+     * @return string[][]
+     */
+    private function aggregateActivities($className, $activities)
+    {
+        return $this->aggregateRecords(
+            $className,
+            $activities,
+            array($className::PROPERTY_LOCATION, $className::PROPERTY_STUDENT_GROUP, $className::PROPERTY_TEACHER));
     }
 
     /**
@@ -128,12 +154,16 @@ class CalendarRepository
             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
+            $records = array();
+
             if ($user->get_official_code())
             {
-                $baseClass = $user->is_teacher() ? TeacherActivity::class_name() : StudentActivity::class_name();
+                $baseClass = $user->is_teacher() ? $this->getYearSpecificActivityClassName('TeacherActivity', '2016-17') : $this->getYearSpecificActivityClassName(
+                    'StudentActivity',
+                    '1617');
 
                 $condition = new EqualityCondition(
-                    new PropertyConditionVariable($baseClass, UserActivity::PROPERTY_PERSON_ID),
+                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
                     new StaticConditionVariable((string) $user->get_official_code()));
 
                 $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
@@ -143,19 +173,9 @@ class CalendarRepository
                         $condition,
                         null,
                         null,
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, UserActivity::PROPERTY_START_TIME)))))->as_array();
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
 
-                $records = $this->aggregateRecords(
-                    $baseClass,
-                    $activities,
-                    array(
-                        UserActivity::PROPERTY_LOCATION,
-                        UserActivity::PROPERTY_STUDENT_GROUP,
-                        UserActivity::PROPERTY_TEACHER));
-            }
-            else
-            {
-                $records = array();
+                $records = $this->aggregateActivities($baseClass, $activities);
             }
 
             $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
@@ -179,12 +199,14 @@ class CalendarRepository
             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
+            $className = $this->getYearSpecificActivityClassName('GroupActivity', $year);
+
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(GroupActivity::class_name(), GroupActivity::PROPERTY_GROUP_ID),
+                new PropertyConditionVariable($className::class_name(), $className::PROPERTY_GROUP_ID),
                 new StaticConditionVariable((string) $groupIdentifier));
 
             $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
-                GroupActivity::class_name(),
+                $className::class_name(),
                 new RecordRetrievesParameters(
                     null,
                     $condition,
@@ -192,17 +214,9 @@ class CalendarRepository
                     null,
                     array(
                         new OrderBy(
-                            new PropertyConditionVariable(
-                                GroupActivity::class_name(),
-                                GroupActivity::PROPERTY_START_TIME)))))->as_array();
+                            new PropertyConditionVariable($className::class_name(), $className::PROPERTY_START_TIME)))))->as_array();
 
-            $records = $this->aggregateRecords(
-                GroupActivity::class_name(),
-                $activities,
-                array(
-                    GroupActivity::PROPERTY_LOCATION,
-                    GroupActivity::PROPERTY_STUDENT_GROUP,
-                    GroupActivity::PROPERTY_TEACHER));
+            $records = $this->aggregateActivities($className, $activities);
 
             $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
         }
@@ -225,12 +239,14 @@ class CalendarRepository
             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
+            $className = $this->getYearSpecificActivityClassName('LocationActivity', $year);
+
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(LocationActivity::class_name(), LocationActivity::PROPERTY_LOCATION_ID),
+                new PropertyConditionVariable($className::class_name(), $className::PROPERTY_LOCATION_ID),
                 new StaticConditionVariable((string) $locationIdentifier));
 
             $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
-                LocationActivity::class_name(),
+                $className::class_name(),
                 new RecordRetrievesParameters(
                     null,
                     $condition,
@@ -238,14 +254,9 @@ class CalendarRepository
                     null,
                     array(
                         new OrderBy(
-                            new PropertyConditionVariable(
-                                LocationActivity::class_name(),
-                                LocationActivity::PROPERTY_START_TIME)))))->as_array();
+                            new PropertyConditionVariable($className::class_name(), $className::PROPERTY_START_TIME)))))->as_array();
 
-            $records = $this->aggregateRecords(
-                LocationActivity::class_name(),
-                $activities,
-                array(LocationActivity::PROPERTY_STUDENT_GROUP, LocationActivity::PROPERTY_TEACHER));
+            $records = $this->aggregateActivities($className, $activities);
 
             $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
         }
@@ -281,22 +292,37 @@ class CalendarRepository
             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
+            $records = array();
+
             if ($user->get_official_code())
             {
-                $baseTable = $user->is_teacher() ? 'teachers' : 'courses';
+                $baseClass = $this->getYearSpecificActivityClassName(
+                    $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
+                    $year);
 
-                $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) . '_' . $baseTable .
-                     '] WHERE person_id = \'' . $user->get_official_code() . '\' AND module_id = \'' . $moduleIdentifier .
-                     '\' ORDER BY start_time';
-                $statement = DataManager::get_instance()->get_connection()->query($query);
-                $resultSet = new ResultSet($statement);
-            }
-            else
-            {
-                $resultSet = new ArrayResultSet(array());
+                $conditions = array();
+
+                $conditions[] = new EqualityCondition(
+                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
+                    new StaticConditionVariable((string) $user->get_official_code()));
+
+                $conditions[] = new EqualityCondition(
+                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_MODULE_ID),
+                    new StaticConditionVariable((string) $moduleIdentifier));
+
+                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                    $baseClass,
+                    new RecordRetrievesParameters(
+                        null,
+                        new AndCondition($conditions),
+                        null,
+                        null,
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+
+                $records = $this->aggregateActivities($baseClass, $activities);
             }
 
-            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
         }
 
         return $cache->fetch($cacheIdentifier);
@@ -310,20 +336,53 @@ class CalendarRepository
      */
     public function findEventForUserByIdentifier(User $user, $identifier, $year)
     {
-        if ($user->get_official_code())
-        {
-            $baseTable = $user->is_teacher() ? 'teachers' : 'courses';
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $identifier, $year)));
 
-            $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) . '_' .
-                 $baseTable . '] WHERE person_id = \'' . $user->get_official_code() . '\' AND id = \'' . $identifier .
-                 '\' ORDER BY start_time';
-            $statement = DataManager::get_instance()->get_connection()->query($query);
-            return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
-        }
-        else
+        if (! $cache->contains($cacheIdentifier))
         {
-            return array();
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            $record = array();
+
+            if ($user->get_official_code())
+            {
+                $baseClass = $this->getYearSpecificActivityClassName(
+                    $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
+                    $year);
+
+                $conditions = array();
+
+                $conditions[] = new EqualityCondition(
+                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
+                    new StaticConditionVariable((string) $user->get_official_code()));
+
+                $conditions[] = new EqualityCondition(
+                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
+                    new StaticConditionVariable((string) $identifier));
+
+                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                    $baseClass,
+                    new RecordRetrievesParameters(
+                        null,
+                        new AndCondition($conditions),
+                        null,
+                        null,
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+
+                $records = $this->aggregateActivities($baseClass, $activities);
+
+                if (count($records) > 0)
+                {
+                    $record = array_shift($records);
+                }
+            }
+
+            $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
         }
+
+        return $cache->fetch($cacheIdentifier);
     }
 
     /**
@@ -335,11 +394,48 @@ class CalendarRepository
      */
     public function findEventForGroupByYearAndIdentifier($year, $groupIdentifier, $eventIdentifier)
     {
-        $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-             '_group_events] WHERE group_id = \'' . $groupIdentifier . '\' AND id = \'' . $eventIdentifier .
-             '\' ORDER BY start_time';
-        $statement = DataManager::get_instance()->get_connection()->query($query);
-        return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $groupIdentifier, $eventIdentifier, $year)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            $record = array();
+
+            $baseClass = $this->getYearSpecificActivityClassName('GroupActivity', $year);
+
+            $conditions = array();
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_GROUP_ID),
+                new StaticConditionVariable((string) $groupIdentifier));
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
+                new StaticConditionVariable((string) $eventIdentifier));
+
+            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $baseClass,
+                new RecordRetrievesParameters(
+                    null,
+                    new AndCondition($conditions),
+                    null,
+                    null,
+                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+
+            $records = $this->aggregateActivities($baseClass, $activities);
+
+            if (count($records) > 0)
+            {
+                $record = array_shift($records);
+            }
+
+            $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
     }
 
     /**
@@ -359,13 +455,32 @@ class CalendarRepository
             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-                 '_group_events] WHERE group_id = \'' . $groupIdentifier . '\' AND module_id = \'' . $moduleIdentifier .
-                 '\' ORDER BY start_time';
-            $statement = DataManager::get_instance()->get_connection()->query($query);
-            $resultSet = new ResultSet($statement);
+            $className = $this->getYearSpecificActivityClassName('GroupActivity', $year);
 
-            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+            $conditions = array();
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($className::class_name(), $className::PROPERTY_GROUP_ID),
+                new StaticConditionVariable((string) $groupIdentifier));
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($className::class_name(), $className::PROPERTY_MODULE_ID),
+                new StaticConditionVariable((string) $moduleIdentifier));
+
+            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $className::class_name(),
+                new RecordRetrievesParameters(
+                    null,
+                    new AndCondition($conditions),
+                    null,
+                    null,
+                    array(
+                        new OrderBy(
+                            new PropertyConditionVariable($className::class_name(), $className::PROPERTY_START_TIME)))))->as_array();
+
+            $records = $this->aggregateActivities($className, $activities);
+
+            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
         }
 
         return $cache->fetch($cacheIdentifier);
@@ -380,12 +495,48 @@ class CalendarRepository
      */
     public function findEventForLocationByYearAndIdentifier($year, $locationIdentifier, $eventIdentifier)
     {
-        $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-             '_location_events] WHERE location_id = \'' . $locationIdentifier . '\' AND id = \'' . $eventIdentifier .
-             '\'';
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $locationIdentifier, $eventIdentifier, $year)));
 
-        $statement = DataManager::get_instance()->get_connection()->query($query);
-        return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+
+            $record = array();
+
+            $baseClass = $this->getYearSpecificActivityClassName('LocationActivity', $year);
+
+            $conditions = array();
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_LOCATION_ID),
+                new StaticConditionVariable((string) $locationIdentifier));
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
+                new StaticConditionVariable((string) $eventIdentifier));
+
+            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $baseClass,
+                new RecordRetrievesParameters(
+                    null,
+                    new AndCondition($conditions),
+                    null,
+                    null,
+                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+
+            $records = $this->aggregateActivities($baseClass, $activities);
+
+            if (count($records) > 0)
+            {
+                $record = array_shift($records);
+            }
+
+            $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
+        }
+
+        return $cache->fetch($cacheIdentifier);
     }
 
     /**
@@ -405,14 +556,32 @@ class CalendarRepository
             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-                 '_location_events] WHERE location_id = \'' . $locationIdentifier . '\' AND module_id = \'' .
-                 $moduleIdentifier . '\' ORDER BY start_time';
+            $className = $this->getYearSpecificActivityClassName('LocationActivity', $year);
 
-            $statement = DataManager::get_instance()->get_connection()->query($query);
-            $resultSet = new ResultSet($statement);
+            $conditions = array();
 
-            $cache->save($cacheIdentifier, $resultSet, $lifetimeInMinutes * 60);
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($className::class_name(), $className::PROPERTY_LOCATION_ID),
+                new StaticConditionVariable((string) $locationIdentifier));
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($className::class_name(), $className::PROPERTY_MODULE_ID),
+                new StaticConditionVariable((string) $moduleIdentifier));
+
+            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $className::class_name(),
+                new RecordRetrievesParameters(
+                    null,
+                    new AndCondition($conditions),
+                    null,
+                    null,
+                    array(
+                        new OrderBy(
+                            new PropertyConditionVariable($className::class_name(), $className::PROPERTY_START_TIME)))))->as_array();
+
+            $records = $this->aggregateActivities($className, $activities);
+
+            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
         }
 
         return $cache->fetch($cacheIdentifier);

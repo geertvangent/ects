@@ -199,7 +199,8 @@ class CalendarService
      */
     public function getEventsForUserByModuleIdentifier(User $user, $moduleIdentifier, $year)
     {
-        return $this->getCalendarRepository()->findEventsForUserByModuleIdentifier($user, $moduleIdentifier, $year);
+        return new ArrayResultSet(
+            $this->getCalendarRepository()->findEventsForUserByModuleIdentifier($user, $moduleIdentifier, $year));
     }
 
     /**
@@ -226,10 +227,11 @@ class CalendarService
      */
     public function getEventsForGroupByYearAndModuleIdentifier($year, $groupIdentifier, $moduleIdentifier)
     {
-        return $this->getCalendarRepository()->findEventsForGroupByYearAndModuleIdentifier(
-            $year,
-            $groupIdentifier,
-            $moduleIdentifier);
+        return new ArrayResultSet(
+            $this->getCalendarRepository()->findEventsForGroupByYearAndModuleIdentifier(
+                $year,
+                $groupIdentifier,
+                $moduleIdentifier));
     }
 
     /**
@@ -256,10 +258,11 @@ class CalendarService
      */
     public function getEventsForLocationByYearAndModuleIdentifier($year, $locationIdentifier, $moduleIdentifier)
     {
-        return $this->getCalendarRepository()->findEventsForLocationByYearAndModuleIdentifier(
-            $year,
-            $locationIdentifier,
-            $moduleIdentifier);
+        return new ArrayResultSet(
+            $this->getCalendarRepository()->findEventsForLocationByYearAndModuleIdentifier(
+                $year,
+                $locationIdentifier,
+                $moduleIdentifier));
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Year1516;
+namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Year1617;
 
 /**
  *

@@ -3,6 +3,7 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\GroupEventParser;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\GroupActivity;
 
 /**
  *
@@ -72,6 +73,6 @@ class GroupEventViewerComponent extends EventViewerComponent
      */
     protected function getActivityTypeBreadcrumb($activityRecord)
     {
-        return new Breadcrumb(null, $activityRecord['group_name']);
+        return new Breadcrumb(null, $activityRecord[GroupActivity::PROPERTY_GROUP_NAME]);
     }
 }
