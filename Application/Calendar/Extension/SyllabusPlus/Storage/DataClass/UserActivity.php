@@ -22,4 +22,22 @@ abstract class UserActivity extends Activity
 
         return parent::get_default_property_names($extended_property_names);
     }
+
+    /**
+     *
+     * @return integer
+     */
+    public function getPersonId()
+    {
+        return $this->get_default_property(self::PROPERTY_PERSON_ID);
+    }
+
+    /**
+     *
+     * @param integer $personId
+     */
+    public function setPersonId($personId)
+    {
+        $this->set_default_property(self::PROPERTY_PERSON_ID, $personId);
+    }
 }

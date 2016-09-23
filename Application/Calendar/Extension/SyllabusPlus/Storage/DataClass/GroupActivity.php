@@ -19,7 +19,46 @@ class GroupActivity extends Activity
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        return parent::get_default_property_names(array(self::PROPERTY_GROUP_ID, self::PROPERTY_GROUP_NAME));
+        $extended_property_names[] = self::PROPERTY_GROUP_ID;
+        $extended_property_names[] = self::PROPERTY_GROUP_NAME;
+
+        return parent::get_default_property_names($extended_property_names);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getGroupId()
+    {
+        return $this->get_default_property(self::PROPERTY_GROUP_ID);
+    }
+
+    /**
+     *
+     * @param string $group_id
+     */
+    public function setGroupId($group_id)
+    {
+        $this->set_default_property(self::PROPERTY_GROUP_ID, $group_id);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getGroupName()
+    {
+        return $this->get_default_property(self::PROPERTY_GROUP_NAME);
+    }
+
+    /**
+     *
+     * @param string $group_name
+     */
+    public function setGroupName($group_name)
+    {
+        $this->set_default_property(self::PROPERTY_GROUP_NAME, $group_name);
     }
 
     /**
