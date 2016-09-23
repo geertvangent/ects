@@ -84,7 +84,12 @@ class LocationBrowserComponent extends UserBrowserComponent
             foreach ($zones as $zone)
             {
                 $content = $this->renderZones($year, $zone);
-                $tabs->add_tab(new DynamicContentTab($year . '-' . $zone->getId(), $zone->getCode(), null, $content));
+                $tabs->add_tab(
+                    new DynamicContentTab(
+                        $year . '-' . $zone[Location::PROPERTY_ZONE_ID],
+                        $zone[Location::PROPERTY_ZONE_CODE],
+                        null,
+                        $content));
             }
 
             $html[] = $tabs->render();
@@ -96,13 +101,13 @@ class LocationBrowserComponent extends UserBrowserComponent
     /**
      *
      * @param integer $year
-     * @param \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Zone $zone
+     * @param string[] $zone
      * @return string
      */
-    protected function renderZones($year, Zone $zone)
+    protected function renderZones($year, $zone)
     {
         $calendarService = $this->getCalendarService();
-        $locations = $calendarService->getLocationsByYearAndZoneIdentifier($year, $zone->getId());
+        $locations = $calendarService->getLocationsByYearAndZoneIdentifier($year, $zone[Location::PROPERTY_ZONE_ID]);
 
         $html = array();
 
@@ -125,21 +130,22 @@ class LocationBrowserComponent extends UserBrowserComponent
      * @param string $originalGroupName
      * @return string
      */
-    protected function renderLocationLink(Location $location)
+    protected function renderLocationLink($location)
     {
         $locationLink = new Redirect(
             array(
                 self::PARAM_CONTEXT => self::package(),
                 self::PARAM_ACTION => self::ACTION_BROWSE_LOCATION,
                 self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
-                self::PARAM_YEAR => $location->getYear(),
-                self::PARAM_LOCATION_ID => $location->getId()));
+                self::PARAM_YEAR => $location[Location::PROPERTY_YEAR],
+                self::PARAM_LOCATION_ID => $location[Location::PROPERTY_ID]));
 
-        $name = $location->getCode();
+        $name = $location[Location::PROPERTY_CODE];
 
-        if (! empty($location->getName()) && $location->getName() != $location->getCode())
+        if (! empty($location[Location::PROPERTY_NAME]) &&
+             $location[Location::PROPERTY_NAME] != $location[Location::PROPERTY_CODE])
         {
-            $name .= ' <small class="text-muted">(' . $location->getName() . ')</small>';
+            $name .= ' <small class="text-muted">(' . $location[Location::PROPERTY_NAME] . ')</small>';
         }
 
         return '<a href="' . $locationLink->getUrl() . '">' . $name . '</a>';

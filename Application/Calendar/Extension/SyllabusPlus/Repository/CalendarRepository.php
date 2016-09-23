@@ -786,7 +786,7 @@ class CalendarRepository
 
             $condition = new EqualityCondition(
                 new PropertyConditionVariable($className, Location::PROPERTY_ZONE_ID),
-                $zoneIdentifier);
+                new StaticConditionVariable($zoneIdentifier));
 
             $locations = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
                 $className,
