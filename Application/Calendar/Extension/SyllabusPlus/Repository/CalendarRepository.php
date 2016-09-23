@@ -17,6 +17,8 @@ use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
+use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
+use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
 
 /**
  *
@@ -820,10 +822,14 @@ class CalendarRepository
     {
         $className = $this->getYearSpecificClassName('Location', $year);
 
-        $condition = new EqualityCondition(new PropertyConditionVariable($className, Location::PROPERTY_ID), $identifier);
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable($className, Location::PROPERTY_ID),
+            new StaticConditionVariable($identifier));
 
         return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::record(
             $className,
-            new RecordRetrieveParameters(null, $condition));
+            new RecordRetrieveParameters(
+                new DataClassProperties(new PropertiesConditionVariable($className::class_name())),
+                $condition));
     }
 }

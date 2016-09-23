@@ -201,7 +201,7 @@ class LocationBrowserComponent extends UserBrowserComponent
 
             $location = $this->getCalendarService()->getLocationByYearAndIdentifier($year, $locationIdentifier);
 
-            BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $location->getCode()));
+            BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $location[Location::PROPERTY_CODE]));
             return parent::renderCalendar();
         }
         else
