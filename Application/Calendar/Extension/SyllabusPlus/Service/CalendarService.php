@@ -10,6 +10,8 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepositor
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Activity;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Zone;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
 
 /**
  *
@@ -291,7 +293,15 @@ class CalendarService
      */
     public function getFacultiesByYearAndUser($year, User $user)
     {
-        return $this->getCalendarRepository()->findFacultiesByYearAndUser($year, $user);
+        $facultyRecords = $this->getCalendarRepository()->findFacultiesByYearAndUser($year, $user);
+        $faculties = array();
+
+        foreach ($facultyRecords as $facultyRecord)
+        {
+            $faculties[$facultyRecord[StudentGroup::PROPERTY_FACULTY_ID]] = $facultyRecord;
+        }
+
+        return $faculties;
     }
 
     /**
@@ -302,7 +312,16 @@ class CalendarService
      */
     public function getFacultiesGroupsByYearAndUser($year, User $user)
     {
-        return $this->getCalendarRepository()->findFacultiesGroupsByYearAndUser($year, $user);
+        $facultiesGroupsRecords = $this->getCalendarRepository()->findFacultiesGroupsByYearAndUser($year, $user);
+
+        $facultiesGroups = array();
+
+        foreach ($facultiesGroupsRecords as $facultiesGroupsRecord)
+        {
+            $faculties[$facultiesGroupsRecord[StudentGroup::PROPERTY_FACULTY_ID]][$facultiesGroupsRecord[StudentGroup::PROPERTY_GROUP_ID]] = $facultiesGroupsRecord;
+        }
+
+        return $facultiesGroups;
     }
 
     /**
@@ -312,7 +331,15 @@ class CalendarService
      */
     public function getFacultiesByYear($year)
     {
-        return $this->getCalendarRepository()->findFacultiesByYear($year);
+        $facultyRecords = $this->getCalendarRepository()->findFacultiesByYear($year);
+        $faculties = array();
+
+        foreach ($facultyRecords as $facultyRecord)
+        {
+            $faculties[$facultyRecord[Group::PROPERTY_FACULTY_ID]] = $facultyRecord;
+        }
+
+        return $faculties;
     }
 
     /**
@@ -322,7 +349,16 @@ class CalendarService
      */
     public function getFacultyGroupsByYear($year)
     {
-        return $this->getCalendarRepository()->findFacultyGroupsByYear($year);
+        $facultiesGroupsRecords = $this->getCalendarRepository()->findFacultyGroupsByYear($year);
+
+        $facultiesGroups = array();
+
+        foreach ($facultiesGroupsRecords as $facultiesGroupsRecord)
+        {
+            $faculties[$facultiesGroupsRecord[Group::PROPERTY_FACULTY_ID]][] = $facultiesGroupsRecord;
+        }
+
+        return $facultiesGroups;
     }
 
     /**
@@ -344,7 +380,16 @@ class CalendarService
      */
     public function getGroupsByYear($year)
     {
-        return $this->getCalendarRepository()->findGroupsByYear($year);
+        $groupsRecords = $this->getCalendarRepository()->findGroupsByYear($year);
+
+        $groups = array();
+
+        foreach ($groupsRecords as $groupsRecord)
+        {
+            $groups[$groupsRecord[Group::PROPERTY_ID]] = $groupsRecord;
+        }
+
+        return $groups;
     }
 
     /**

@@ -7,7 +7,7 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Year
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class GroupActivity extends \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\GroupActivity
+class Group extends \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup
 {
 
     /**
@@ -16,6 +16,6 @@ class GroupActivity extends \Ehb\Application\Calendar\Extension\SyllabusPlus\Sto
      */
     public static function get_table_name()
     {
-        return 'v_syllabus_1516_event_group';
+        return 'v_syllabus_1516_list_group';
     }
 }
