@@ -8,10 +8,8 @@ use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Activity;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Zone;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
 
 /**
  *
@@ -355,7 +353,7 @@ class CalendarService
 
         foreach ($facultiesGroupsRecords as $facultiesGroupsRecord)
         {
-            $faculties[$facultiesGroupsRecord[Group::PROPERTY_FACULTY_ID]][] = $facultiesGroupsRecord;
+            $facultiesGroups[$facultiesGroupsRecord[Group::PROPERTY_FACULTY_ID]][] = $facultiesGroupsRecord;
         }
 
         return $facultiesGroups;
@@ -412,35 +410,17 @@ class CalendarService
      */
     public function getLocationByYearAndIdentifier($year, $identifier)
     {
-        $locationRecord = $this->getCalendarRepository()->findLocationByYearAndIdentifier($year, $identifier);
-
-        return new Location(
-            $locationRecord['year'],
-            $locationRecord['location_id'],
-            $locationRecord['location_code'],
-            $locationRecord['location_name']);
+        return $this->getCalendarRepository()->findLocationByYearAndIdentifier($year, $identifier);
     }
 
     /**
      *
      * @param integer $year
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Zone[]
+     * @return string[]
      */
     public function getZonesByYear($year)
     {
-        $zoneRecords = $this->getCalendarRepository()->findZonesByYear($year);
-        $zones = array();
-
-        foreach ($zoneRecords as $zoneRecord)
-        {
-            $zones[] = new Zone(
-                $zoneRecord['year'],
-                $zoneRecord['zone_id'],
-                $zoneRecord['zone_code'],
-                $zoneRecord['zone_name']);
-        }
-
-        return $zones;
+        return $this->getCalendarRepository()->findZonesByYear($year);
     }
 
     /**
@@ -451,19 +431,7 @@ class CalendarService
      */
     public function getLocationsByYearAndZoneIdentifier($year, $zoneIdentifier)
     {
-        $locationRecords = $this->getCalendarRepository()->findLocationsByYearAndZoneIdentifier($year, $zoneIdentifier);
-        $locations = array();
-
-        foreach ($locationRecords as $locationRecord)
-        {
-            $locations[] = new Location(
-                $locationRecord['year'],
-                $locationRecord['location_id'],
-                $locationRecord['location_code'],
-                $locationRecord['location_name']);
-        }
-
-        return $locations;
+        return $this->getCalendarRepository()->findLocationsByYearAndZoneIdentifier($year, $zoneIdentifier);
     }
 
     /**

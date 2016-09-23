@@ -6,16 +6,17 @@ use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Cache\Doctrine\Provider\FilesystemCache;
 use Chamilo\Libraries\Cache\Doctrine\Provider\PhpFileCache;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
+use Chamilo\Libraries\Storage\Parameters\RecordRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataManager;
-use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
 
 /**
  *
@@ -26,7 +27,6 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
  */
 class CalendarRepository
 {
-    const SQL_DATE_FORMAT = 'Y-m-d H:i:s';
 
     /**
      *
@@ -664,12 +664,9 @@ class CalendarRepository
                 $className,
                 new DataClassDistinctParameters(
                     null,
-                    array(
-                        StudentGroup::PROPERTY_FACULTY_ID,
-                        StudentGroup::PROPERTY_FACULTY_CODE,
-                        StudentGroup::PROPERTY_FACULTY_NAME),
+                    array(Group::PROPERTY_FACULTY_ID, Group::PROPERTY_FACULTY_CODE, Group::PROPERTY_FACULTY_NAME),
                     null,
-                    array(new OrderBy(new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_FACULTY_NAME)))));
+                    array(new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_FACULTY_NAME)))));
 
             $cache->save($cacheIdentifier, $faculties);
         }
@@ -699,8 +696,8 @@ class CalendarRepository
                     null,
                     null,
                     array(
-                        new OrderBy(new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_FACULTY_ID)),
-                        new OrderBy(new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_NAME)))));
+                        new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_FACULTY_ID)),
+                        new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_NAME)))))->as_array();
 
             $cache->save($cacheIdentifier, $facultiesGroups);
         }
@@ -729,37 +726,12 @@ class CalendarRepository
                     null,
                     null,
                     null,
-                    array(new OrderBy(new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_NAME)))));
+                    array(new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_NAME)))))->as_array();
 
             $cache->save($cacheIdentifier, $groups);
         }
 
         return $cache->fetch($cacheIdentifier);
-    }
-
-    protected function processRecord($record)
-    {
-        foreach ($record as &$field)
-        {
-            if (is_resource($field))
-            {
-                $data = '';
-
-                while (! feof($field))
-                {
-                    $data .= fread($field, 1024);
-                }
-
-                $field = $data;
-            }
-
-            if (is_string($field) && ! is_numeric($field))
-            {
-                $field = iconv('Windows-1252', 'UTF-8', $field);
-            }
-        }
-
-        return $record;
     }
 
     /**
@@ -774,18 +746,22 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $query = 'SELECT DISTINCT year, zone_id, zone_code, zone_name FROM [INFORDATSYNC].[dbo].[v_syllabus_' .
-                 $this->convertYear($year) . '_locations] ORDER BY year, zone_code, zone_name';
+            $className = $this->getYearSpecificClassName('Location', $year);
 
-            $statement = DataManager::get_instance()->get_connection()->query($query);
-
-            $zones = array();
-
-            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
-            {
-                $record = $this->processRecord($record);
-                $zones[] = $record;
-            }
+            $zones = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+                $className,
+                new DataClassDistinctParameters(
+                    null,
+                    array(
+                        Location::PROPERTY_YEAR,
+                        Location::PROPERTY_ZONE_ID,
+                        Location::PROPERTY_ZONE_CODE,
+                        Location::PROPERTY_ZONE_NAME),
+                    null,
+                    array(
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_YEAR)),
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_ZONE_CODE)),
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_ZONE_NAME)))));
 
             $cache->save($cacheIdentifier, $zones);
         }
@@ -806,18 +782,22 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
+            $className = $this->getYearSpecificClassName('Location', $year);
 
-            $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-                 '_locations] WHERE zone_id = \'' . $zoneIdentifier . '\' ORDER BY location_code, location_name';
-            $statement = DataManager::get_instance()->get_connection()->query($query);
+            $condition = new EqualityCondition(
+                new PropertyConditionVariable($className, Location::PROPERTY_ZONE_ID),
+                $zoneIdentifier);
 
-            $locations = array();
-
-            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
-            {
-                $record = $this->processRecord($record);
-                $locations[] = $record;
-            }
+            $locations = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $className,
+                new RecordRetrievesParameters(
+                    null,
+                    $condition,
+                    null,
+                    null,
+                    array(
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_CODE)),
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_NAME)))))->as_array();
 
             $cache->save($cacheIdentifier, $locations);
         }
@@ -838,10 +818,12 @@ class CalendarRepository
      */
     public function findLocationByYearAndIdentifier($year, $identifier)
     {
-        $query = 'SELECT TOP 1 * FROM [INFORDATSYNC].[dbo].[v_syllabus_' . $this->convertYear($year) .
-             '_locations] WHERE year = \'' . $year . '\' AND location_id = \'' . $identifier . '\'';
+        $className = $this->getYearSpecificClassName('Location', $year);
 
-        $statement = DataManager::get_instance()->get_connection()->query($query);
-        return $this->processRecord($statement->fetch(\PDO::FETCH_ASSOC));
+        $condition = new EqualityCondition(new PropertyConditionVariable($className, Location::PROPERTY_ID), $identifier);
+
+        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::record(
+            $className,
+            new RecordRetrieveParameters(null, $condition));
     }
 }

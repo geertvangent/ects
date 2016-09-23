@@ -17,6 +17,8 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\GroupCalendarRendererProvider;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
 
 /**
  *
@@ -105,12 +107,12 @@ class GroupBrowserComponent extends UserBrowserComponent
             {
                 $content = $this->renderFacultyGroups(
                     $userFaculty,
-                    $calendarService->getFacultyGroupsByYearAndCode($userFaculty['department_id']),
-                    $userGroups[$userFaculty['department_id']]);
+                    $calendarService->getFacultyGroupsByYearAndCode($userFaculty[StudentGroup::PROPERTY_FACULTY_ID]),
+                    $userGroups[$userFaculty[StudentGroup::PROPERTY_FACULTY_ID]]);
                 $tabs->add_tab(
                     new DynamicContentTab(
-                        $year . '-' . $userFaculty['department_id'],
-                        $userFaculty['department_name'],
+                        $year . '-' . $userFaculty[StudentGroup::PROPERTY_FACULTY_ID],
+                        $userFaculty[StudentGroup::PROPERTY_FACULTY_NAME],
                         null,
                         $content));
             }
@@ -128,18 +130,18 @@ class GroupBrowserComponent extends UserBrowserComponent
 
             foreach ($faculties as $faculty)
             {
-                $facultyGroups = $calendarService->getFacultyGroupsByYearAndCode($year, $faculty['department_id']);
+                $facultyGroups = $calendarService->getFacultyGroupsByYearAndCode($year, $faculty[Group :: PROPERTY_FACULTY_ID]);
 
-                if (! isset($userFaculties[$faculty['department_id']]) && count($facultyGroups) > 0)
+                if (! isset($userFaculties[$faculty[Group :: PROPERTY_FACULTY_ID]]) && count($facultyGroups) > 0)
                 {
                     $content = $this->renderFacultyGroups(
                         $faculty,
                         $facultyGroups,
-                        $userGroups[$faculty['department_id']]);
+                        $userGroups[$faculty[Group :: PROPERTY_FACULTY_ID]]);
                     $tabs->add_tab(
                         new DynamicContentTab(
-                            $year . '-' . $faculty['department_id'],
-                            $faculty['department_name'],
+                            $year . '-' . $faculty[Group :: PROPERTY_FACULTY_ID],
+                            $faculty[Group :: PROPERTY_FACULTY_NAME],
                             null,
                             $content));
                 }
@@ -173,7 +175,7 @@ class GroupBrowserComponent extends UserBrowserComponent
             foreach ($userGroups as $userGroup)
             {
                 $html[] = '<li>';
-                $html[] = $this->renderGroupLink($userGroup['year'], $userGroup['group_name'], $userGroup['group_id']);
+                $html[] = $this->renderGroupLink($userGroup[StudentGroup :: PROPERTY_YEAR], $userGroup[StudentGroup :: PROPERTY_GROUP_NAME], $userGroup['group_id']);
                 $html[] = '</li>';
             }
 
@@ -196,13 +198,13 @@ class GroupBrowserComponent extends UserBrowserComponent
 
             foreach ($facultyTypeGroups as $facultyTypeGroup)
             {
-                if (! key_exists($facultyTypeGroup['id'], $userGroups))
+                if (! key_exists($facultyTypeGroup[Group :: PROPERTY_ID], $userGroups))
                 {
                     $html[] = '<li>';
                     $html[] = $this->renderGroupLink(
-                        $facultyTypeGroup['year'],
-                        $facultyTypeGroup['name'],
-                        $facultyTypeGroup['id']);
+                        $facultyTypeGroup[Group :: PROPERTY_YEAR],
+                        $facultyTypeGroup[Group :: PROPERTY_NAME],
+                        $facultyTypeGroup[Group :: PROPERTY_ID]);
                     $html[] = '</li>';
                 }
             }
