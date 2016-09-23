@@ -1,1 +1,9 @@
 @import url('EhbWebfont/ehb-webfont.css');
+
+.navbar-chamilo {
+	height: 78px !important;
+}
+
+.navbar-chamilo ul.navbar-nav li a img.chamilo-menu-item-icon-account {
+	height: 78px !important;
+}
