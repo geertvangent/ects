@@ -19,6 +19,9 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
 use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
 use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
+use Chamilo\Libraries\Storage\Query\GroupBy;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\ScheduledGroup;
+use Chamilo\Libraries\Storage\Query\Variable\FunctionConditionVariable;
 
 /**
  *
@@ -831,5 +834,69 @@ class CalendarRepository
             new RecordRetrieveParameters(
                 new DataClassProperties(new PropertiesConditionVariable($className::class_name())),
                 $condition));
+    }
+
+    /**
+     *
+     * @param string $year
+     * @return string[][]
+     */
+    public function findScheduledGroupsByYear($year)
+    {
+        $properties = array();
+
+        $properties[] = new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_FACULTY_ID);
+        $properties[] = new PropertyConditionVariable(
+            ScheduledGroup::class_name(),
+            ScheduledGroup::PROPERTY_FACULTY_NAME);
+        $properties[] = new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_TRAINING_ID);
+        $properties[] = new PropertyConditionVariable(
+            ScheduledGroup::class_name(),
+            ScheduledGroup::PROPERTY_TRAINING_NAME);
+
+        $properties[] = new FunctionConditionVariable(
+            FunctionConditionVariable::SUM,
+            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_SCHEDULED),
+            ScheduledGroup::PROPERTY_COUNT_SCHEDULED);
+
+        $properties[] = new FunctionConditionVariable(
+            FunctionConditionVariable::COUNT,
+            new StaticConditionVariable(1),
+            ScheduledGroup::PROPERTY_COUNT_TO_BE_SCHEDULED);
+
+        $groupBy = new GroupBy(
+            array(
+                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_FACULTY_ID),
+                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_FACULTY_NAME),
+                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_TRAINING_ID),
+                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_TRAINING_NAME)));
+
+        $conditions = array();
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_YEAR),
+            new StaticConditionVariable($year));
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_STRUCK),
+            new StaticConditionVariable(0));
+
+        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            ScheduledGroup::class_name(),
+            new RecordRetrievesParameters(
+                new DataClassProperties($properties),
+                new AndCondition($conditions),
+                null,
+                null,
+                array(
+                    new OrderBy(
+                        new PropertyConditionVariable(
+                            ScheduledGroup::class_name(),
+                            ScheduledGroup::PROPERTY_FACULTY_NAME)),
+                    new OrderBy(
+                        new PropertyConditionVariable(
+                            ScheduledGroup::class_name(),
+                            ScheduledGroup::PROPERTY_TRAINING_NAME))),
+                null,
+                $groupBy));
     }
 }

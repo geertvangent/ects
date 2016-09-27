@@ -16,7 +16,6 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepositor
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\LocationCalendarRendererProvider;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Zone;
 
 /**
  *

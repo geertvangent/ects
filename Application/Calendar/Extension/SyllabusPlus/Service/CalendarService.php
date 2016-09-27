@@ -445,4 +445,14 @@ class CalendarService
             Configuration::get_instance()->get_setting(
                 array('Ehb\Application\Calendar\Extension\SyllabusPlus', 'years')));
     }
+
+    /**
+     *
+     * @param string $year
+     * @return string[][]
+     */
+    public function getScheduledGroupsByYear($year)
+    {
+        return $this->getCalendarRepository()->findScheduledGroupsByYear($year);
+    }
 }
