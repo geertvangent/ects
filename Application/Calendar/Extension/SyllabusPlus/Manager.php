@@ -41,6 +41,7 @@ abstract class Manager extends Application
     const ACTION_BROWSE_USER = 'UserBrowser';
     const ACTION_BROWSE_GROUP = 'GroupBrowser';
     const ACTION_BROWSE_LOCATION = 'LocationBrowser';
+    const ACTION_PROGRESS = 'Progress';
 
     // Default action
     const DEFAULT_ACTION = self::ACTION_BROWSE_USER;
