@@ -31,6 +31,7 @@ class HtmlComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAuth
         $html[] = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">';
         $html[] = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>';
         $html[] = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>';
+        $html[] = '<script src="https://use.fontawesome.com/9f5c1b77a9.js"></script>';
         $html[] = '</head>';
 
         $html[] = '<body dir="ltr">';
@@ -45,53 +46,43 @@ class HtmlComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAuth
         $html[] = '<div class="row">';
         $html[] = '<div class="col-sm-12">';
 
-        // Toolbar
-        $html[] = '<div class="btn-toolbar form form-inline" role="toolbar" aria-label="Toolbar with button groups">';
-        $html[] = '  <div class="btn-group" role="group">';
-
-        // Academiejaar
-        $html[] = '  <div class="btn-group" role="group">';
-        $html[] = '    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-        $html[] = '      2016-17';
-        $html[] = '    </button>';
-        $html[] = '    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">';
-        $html[] = '      <a class="dropdown-item" href="#">2016-17</a>';
-        $html[] = '      <a class="dropdown-item" href="#">2015-16</a>';
+        // Form
+        $html[] = '<div class="card card-inverse card-primary card-block">';
+        $html[] = '    <div class="card-text form">';
+        $html[] = '        <div class="col-sm-1">';
+        $html[] = '            <div class="form-group">';
+        $html[] = '                <label for="exampleSelect1">Academiejaar</label>';
+        $html[] = '                <select class="form-control" id="exampleSelect1">';
+        $html[] = '                    <option>2016-17</option>';
+        $html[] = '                    <option>2015-16</option>';
+        $html[] = '                </select>';
+        $html[] = '            </div>';
+        $html[] = '        </div>';
+        $html[] = '        <div class="col-sm-4">';
+        $html[] = '            <div class="form-group">';
+        $html[] = '                <label for="exampleSelect1">Departement</label>';
+        $html[] = '                <select class="form-control" id="exampleSelect1">';
+        $html[] = '                    <option>Design &amp; Technologie</option>';
+        $html[] = '                    <option>Management, Media en Maatschappij</option>';
+        $html[] = '                </select>';
+        $html[] = '            </div>';
+        $html[] = '        </div>';
+        $html[] = '        <div class="col-sm-3">';
+        $html[] = '            <div class="form-group">';
+        $html[] = '                <label for="exampleSelect1">Opleidingstype</label>';
+        $html[] = '                <select class="form-control" id="exampleSelect1">';
+        $html[] = '                    <option>Professioneel gerichte bacheloropleiding</option>';
+        $html[] = '                    <option>Academisch gerichte bacheloropleiding</option>';
+        $html[] = '                </select>';
+        $html[] = '            </div>';
+        $html[] = '        </div>';
+        $html[] = '        <div class="col-sm-4">';
+        $html[] = '            <div class="form-group">';
+        $html[] = '                <label for="exampleInputEmail1">Filter</label>';
+        $html[] = '                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Vrije zoekfilter">';
+        $html[] = '            </div>';
+        $html[] = '        </div>';
         $html[] = '    </div>';
-        $html[] = '  </div>';
-
-        // Departement
-        $html[] = '  <div class="btn-group" role="group">';
-        $html[] = '    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-        $html[] = '      Alle departementen';
-        $html[] = '    </button>';
-        $html[] = '    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">';
-        $html[] = '      <a class="dropdown-item" href="#">Design &amp; Technologie</a>';
-        $html[] = '      <a class="dropdown-item" href="#">Management, Media en Maatschappij</a>';
-        $html[] = '    </div>';
-        $html[] = '  </div>';
-
-        // Types opleidingen
-        $html[] = '  <div class="btn-group" role="group">';
-        $html[] = '    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-        $html[] = '      Alle opleidingstypes';
-        $html[] = '    </button>';
-        $html[] = '    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">';
-        $html[] = '      <a class="dropdown-item" href="#">Professioneel gerichte bacheloropleiding</a>';
-        $html[] = '      <a class="dropdown-item" href="#">Academisch gerichte bacheloropleiding</a>';
-        $html[] = '    </div>';
-        $html[] = '  </div>';
-
-        $html[] = '  </div>';
-
-        // Zoekveld
-        $html[] = '  <div class="btn-group" role="group">';
-        $html[] = '  <div class="form-group">';
-        $html[] = '     <label class="sr-only" for="freeText">Vrije zoekfilter</label>';
-        $html[] = '     <input type="text" class="form-control" id="freeText" placeholder="Vrije zoekfilter">';
-        $html[] = '  </div>';
-        $html[] = '  </div>';
-
         $html[] = '</div>';
 
         $html[] = '</div>';
@@ -102,11 +93,52 @@ class HtmlComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAuth
         $html[] = '<div class="row">';
         $html[] = '<div class="col-sm-12">';
 
-        $html[] = '<div class="list-group">';
-        $html[] = '<a href="#" class="list-group-item">Dapibus ac facilisis in</a>';
-        $html[] = '<a href="#" class="list-group-item">Morbi leo risus</a>';
-        $html[] = '<a href="#" class="list-group-item">Porta ac consectetur ac</a>';
-        $html[] = '<a href="#" class="list-group-item">Vestibulum at eros</a>';
+        $html[] = '<div class="card card-block">';
+        $html[] = '    <h5 class="card-title">Professioneel gerichte bacheloropleiding</h5>';
+        $html[] = '    <p class="card-text">';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Audiovisuele Kunsten</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Audiovisuele Kunsten</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Biomedische Laboratoriumtechnologie</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Journalistiek</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Landschaps- en Tuinarchitectuur</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Landschaps- en Tuinarchitectuur - Werktraject</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Multimedia en de Communicatietechnologie</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Pedagogie van het Jonge Kind</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Toegepaste Informatica</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Verpleegkunde 180sp</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Verpleegkunde 240sp</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Voedings- en Dieetkunde</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Vroedkunde</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Communicatiemanagement</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Hotelmanagement</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Office Management</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Onderwijs - Kleuteronderwijs</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Onderwijs - Lager Onderwijs</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Onderwijs: Secundair Onderwijs 2 OV</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Sociaal Werk</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Sociaal Werk - gezamenlijke opleiding</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Toerisme- en het Recreatiemanagement</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in Idea & Innovation Management</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in Musical</a><br />';
+        $html[] = '    </p>';
+        $html[] = '</div>';
+
+        $html[] = '<div class="card card-block">';
+        $html[] = '    <h5 class="card-title">Academisch gerichte bacheloropleiding</h5>';
+        $html[] = '    <p class="card-text">';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Audiovisuele Kunsten</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Muziek</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Drama</a><br />';
+        $html[] = '    </p>';
+        $html[] = '</div>';
+
+        $html[] = '<div class="card card-block">';
+        $html[] = '    <h5 class="card-title">Masteropleiding die aansluit bij een bacheloropleiding</h5>';
+        $html[] = '    <p class="card-text">';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Master in de Audiovisuele Kunsten</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Master in de Muziek</a><br />';
+        $html[] = '        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Master in het Drama</a><br />';
+        $html[] = '    </p>';
         $html[] = '</div>';
 
         $html[] = '</div>';

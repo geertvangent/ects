@@ -212,7 +212,7 @@ class EctsRepository
                     new StaticConditionVariable($facultyIdentifier));
             }
 
-            if (! is_null($facultyIdentifier))
+            if (! is_null($typeIdentifier))
             {
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
