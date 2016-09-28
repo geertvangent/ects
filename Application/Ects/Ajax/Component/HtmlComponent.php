@@ -37,7 +37,7 @@ class HtmlComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAuth
         $html[] = '<body dir="ltr">';
 
         $html[] = '<style>';
-        $html[] = '.row{margin-bottom: 15px;}';
+        $html[] = 'body{margin-top: 15px;}';
         $html[] = '</style>';
 
         $html[] = '<div class="container-fluid">';
