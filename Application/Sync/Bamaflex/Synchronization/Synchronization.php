@@ -47,21 +47,6 @@ abstract class Synchronization
         return '20' . $year_parts[1] . '-09-30 23:59:59.999';
     }
 
-    /**
-     *
-     * @param $type string
-     * @return Synchronization
-     */
-    public static function factory($type)
-    {
-        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
-             'Synchronization';
-        if (class_exists($class))
-        {
-            return new $class();
-        }
-    }
-
     abstract public function run();
 
     /**
