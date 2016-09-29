@@ -64,27 +64,28 @@ class CalendarService
      */
     public function getEventsForUserAndBetweenDates(User $user, $fromDate = null, $toDate = null)
     {
-//         $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-//         $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId(), (int) $fromDate, (int) $toDate)));
+        // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId(), (int) $fromDate, (int) $toDate)));
 
-//         if (! $cache->contains($cacheIdentifier))
-//         {
-//             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
-//                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        // $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+        // array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
-//             $events = $this->getCalendarRepository()->findEventsForUser($user);
+        // $events = $this->getCalendarRepository()->findEventsForUser($user);
 
-//             $cache->save(
-//                 $cacheIdentifier,
-//                 $this->filterEventsBetweenDates($events, $fromDate, $toDate),
-//                 $lifetimeInMinutes * 60);
-//         }
+        // $cache->save(
+        // $cacheIdentifier,
+        // $this->filterEventsBetweenDates($events, $fromDate, $toDate),
+        // $lifetimeInMinutes * 60);
+        // }
 
-//         return new ArrayResultSet($cache->fetch($cacheIdentifier));
-
-        $events = $this->getCalendarRepository()->findEventsForUser($user);
-
-        return new ArrayResultSet($this->filterEventsBetweenDates($events, $fromDate, $toDate));
+        // return new ArrayResultSet($cache->fetch($cacheIdentifier));
+        return new ArrayResultSet(
+            $this->filterEventsBetweenDates(
+                $this->getCalendarRepository()->findEventsForUser($user),
+                $fromDate,
+                $toDate));
     }
 
     /**
@@ -136,23 +137,29 @@ class CalendarService
      */
     public function getEventsForGroupAndBetweenDates($year, $groupIdentifier, $fromDate, $toDate)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier, $fromDate, $toDate)));
+        return new ArrayResultSet(
+            $this->filterEventsBetweenDates(
+                $this->getCalendarRepository()->findEventsForGroup($year, $groupIdentifier),
+                $fromDate,
+                $toDate));
 
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier, $fromDate, $toDate)));
 
-            $events = $this->getCalendarRepository()->findEventsForGroup($year, $groupIdentifier);
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        // $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+        // array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
-            $cache->save(
-                $cacheIdentifier,
-                $this->filterEventsBetweenDates($events, $fromDate, $toDate),
-                $lifetimeInMinutes * 60);
-        }
+        // $events = $this->getCalendarRepository()->findEventsForGroup($year, $groupIdentifier);
 
-        return new ArrayResultSet($cache->fetch($cacheIdentifier));
+        // $cache->save(
+        // $cacheIdentifier,
+        // $this->filterEventsBetweenDates($events, $fromDate, $toDate),
+        // $lifetimeInMinutes * 60);
+        // }
+
+        // return new ArrayResultSet($cache->fetch($cacheIdentifier));
     }
 
     /**
@@ -165,23 +172,29 @@ class CalendarService
      */
     public function getEventsByYearAndLocationAndBetweenDates($year, $locationIdentifier, $fromDate, $toDate)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier, $fromDate, $toDate)));
+        return new ArrayResultSet(
+            $this->filterEventsBetweenDates(
+                $this->getCalendarRepository()->findEventsForLocation($year, $locationIdentifier),
+                $fromDate,
+                $toDate));
 
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier, $fromDate, $toDate)));
 
-            $events = $this->getCalendarRepository()->findEventsForLocation($year, $locationIdentifier);
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        // $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+        // array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
-            $cache->save(
-                $cacheIdentifier,
-                $this->filterEventsBetweenDates($events, $fromDate, $toDate),
-                $lifetimeInMinutes * 60);
-        }
+        // $events = $this->getCalendarRepository()->findEventsForLocation($year, $locationIdentifier);
 
-        return new ArrayResultSet($cache->fetch($cacheIdentifier));
+        // $cache->save(
+        // $cacheIdentifier,
+        // $this->filterEventsBetweenDates($events, $fromDate, $toDate),
+        // $lifetimeInMinutes * 60);
+        // }
+
+        // return new ArrayResultSet($cache->fetch($cacheIdentifier));
     }
 
     /**
