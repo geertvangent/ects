@@ -154,13 +154,13 @@ class CalendarRepository
      */
     public function findEventsForUser(User $user)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
+//         $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+//         $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
 
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+//         if (! $cache->contains($cacheIdentifier))
+//         {
+//             $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+//                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
 
             $records = array();
 
@@ -186,10 +186,11 @@ class CalendarRepository
                 $records = $this->aggregateActivities($baseClass, $activities);
             }
 
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
-        }
+//             $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+//         }
 
-        return $cache->fetch($cacheIdentifier);
+//         return $cache->fetch($cacheIdentifier);
+        return $records;
     }
 
     /**
