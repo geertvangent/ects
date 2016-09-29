@@ -2,6 +2,7 @@
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
 use Chamilo\Core\User\Component\UserSettingsComponent;
+use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\Interfaces\DelegateComponent;
 use Chamilo\Libraries\Calendar\Renderer\Form\JumpForm;
@@ -11,6 +12,10 @@ use Chamilo\Libraries\Calendar\Renderer\Type\ViewRendererFactory;
 use Chamilo\Libraries\File\Redirect;
 use Chamilo\Libraries\Format\Structure\ActionBar\Button;
 use Chamilo\Libraries\Format\Structure\ActionBar\ButtonGroup;
+use Chamilo\Libraries\Format\Structure\ActionBar\DropdownButton;
+use Chamilo\Libraries\Format\Structure\ActionBar\SubButton;
+use Chamilo\Libraries\Format\Structure\ActionBar\SubButtonDivider;
+use Chamilo\Libraries\Format\Structure\ActionBar\SubButtonHeader;
 use Chamilo\Libraries\Format\Structure\Breadcrumb;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
 use Chamilo\Libraries\Format\Structure\Glyph\BootstrapGlyph;
@@ -21,10 +26,6 @@ use Chamilo\Libraries\Platform\Configuration\LocalSetting;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\UserCalendarRendererProvider;
-use Chamilo\Libraries\Format\Structure\ActionBar\DropdownButton;
-use Chamilo\Libraries\Format\Structure\ActionBar\SubButton;
-use Chamilo\Libraries\Format\Structure\ActionBar\SubButtonDivider;
-use Chamilo\Libraries\Format\Structure\ActionBar\SubButtonHeader;
 
 /**
  *
@@ -206,15 +207,19 @@ class UserBrowserComponent extends Manager implements DelegateComponent
             new FontAwesomeGlyph('calendar-o'));
         $dropdownButton->setDropdownClasses('dropdown-menu-right');
 
-        $dropdownButton->addSubButton(new SubButtonHeader(Translation::get('OtherSchedules')));
+        if ($this->getUser()->get_platformadmin() || $this->getUser()->get_status() == User::STATUS_TEACHER)
+        {
+            $dropdownButton->addSubButton(new SubButtonHeader(Translation::get('OtherSchedules')));
 
-        $userUrl = new Redirect(array(self::PARAM_CONTEXT => self::package(), self::PARAM_ACTION => self::ACTION_USER));
+            $userUrl = new Redirect(
+                array(self::PARAM_CONTEXT => self::package(), self::PARAM_ACTION => self::ACTION_USER));
 
-        $dropdownButton->addSubButton(
-            new SubButton(
-                Translation::get(self::ACTION_USER . 'Component'),
-                new FontAwesomeGlyph('user'),
-                $userUrl->getUrl()));
+            $dropdownButton->addSubButton(
+                new SubButton(
+                    Translation::get(self::ACTION_USER . 'Component'),
+                    new FontAwesomeGlyph('user'),
+                    $userUrl->getUrl()));
+        }
 
         $groupUrl = new Redirect(
             array(
@@ -240,17 +245,20 @@ class UserBrowserComponent extends Manager implements DelegateComponent
                 new FontAwesomeGlyph('map-marker'),
                 $locationUrl->getUrl()));
 
-        $dropdownButton->addSubButton(new SubButtonDivider());
-        $dropdownButton->addSubButton(new SubButtonHeader(Translation::get('Tracking')));
+        if ($this->getUser()->get_platformadmin() || $this->getUser()->get_status() == User::STATUS_TEACHER)
+        {
+            $dropdownButton->addSubButton(new SubButtonDivider());
+            $dropdownButton->addSubButton(new SubButtonHeader(Translation::get('Tracking')));
 
-        $progressUrl = new Redirect(
-            array(self::PARAM_CONTEXT => self::package(), self::PARAM_ACTION => self::ACTION_PROGRESS));
+            $progressUrl = new Redirect(
+                array(self::PARAM_CONTEXT => self::package(), self::PARAM_ACTION => self::ACTION_PROGRESS));
 
-        $dropdownButton->addSubButton(
-            new SubButton(
-                Translation::get(self::ACTION_PROGRESS . 'Component'),
-                new FontAwesomeGlyph('tasks'),
-                $progressUrl->getUrl()));
+            $dropdownButton->addSubButton(
+                new SubButton(
+                    Translation::get(self::ACTION_PROGRESS . 'Component'),
+                    new FontAwesomeGlyph('tasks'),
+                    $progressUrl->getUrl()));
+        }
 
         $actions[] = $dropdownButton;
 

@@ -1,13 +1,15 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
+use Chamilo\Libraries\Format\Table\Column\SortableStaticTableColumn;
+use Chamilo\Libraries\Format\Table\SortableTableFromArray;
+use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\ScheduledGroup;
-use Chamilo\Libraries\Format\Table\SortableTableFromArray;
-use Chamilo\Libraries\Format\Table\Column\SortableStaticTableColumn;
-use Chamilo\Libraries\Platform\Translation;
 
 /**
  *
@@ -30,6 +32,8 @@ class ProgressComponent extends Manager
      */
     public function run()
     {
+        $this->checkAuthorization();
+
         $calendarService = $this->getCalendarService();
         $html = array();
 
@@ -154,5 +158,31 @@ class ProgressComponent extends Manager
         $html[] = '</div>';
 
         return implode(PHP_EOL, $html);
+    }
+
+    /**
+     *
+     * @throws NotAllowedException
+     */
+    public function checkAuthorization()
+    {
+        if (! $this->hasAuthorization())
+        {
+            throw new NotAllowedException();
+        }
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function hasAuthorization()
+    {
+        if (! $this->getUser()->get_platformadmin() && $this->getUser()->get_status() != User::STATUS_TEACHER)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

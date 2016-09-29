@@ -2,7 +2,6 @@
 namespace Ehb\Application\Sync\Bamaflex\Synchronization;
 
 use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
-use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexDataConnector;
 use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexResultSet;
 
@@ -19,7 +18,7 @@ abstract class Synchronization
 
     public function __construct()
     {
-        $this->data_manager = BamaflexDataConnector :: get_instance();
+        $this->data_manager = BamaflexDataConnector::get_instance();
     }
 
     /**
@@ -37,7 +36,7 @@ abstract class Synchronization
      */
     public function get_academic_year()
     {
-        return PlatformSetting :: get('academic_year', 'Ehb\Application\Sync');
+        return PlatformSetting::get('academic_year', 'Ehb\Application\Sync');
     }
 
     public function get_academic_year_end()
