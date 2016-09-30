@@ -6,22 +6,22 @@ use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Cache\Doctrine\Provider\FilesystemCache;
 use Chamilo\Libraries\Cache\Doctrine\Provider\PhpFileCache;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
 use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\AndCondition;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
+use Chamilo\Libraries\Storage\Query\GroupBy;
 use Chamilo\Libraries\Storage\Query\OrderBy;
+use Chamilo\Libraries\Storage\Query\Variable\FunctionConditionVariable;
+use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
-use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
-use Chamilo\Libraries\Storage\Query\Variable\PropertiesConditionVariable;
-use Chamilo\Libraries\Storage\Query\GroupBy;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\ScheduledGroup;
-use Chamilo\Libraries\Storage\Query\Variable\FunctionConditionVariable;
+use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
 
 /**
  *
@@ -154,42 +154,43 @@ class CalendarRepository
      */
     public function findEventsForUser(User $user)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
+        // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
 
-        if (! $cache->contains($cacheIdentifier))
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        // $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+        // array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $records = array();
+
+        if ($user->get_official_code())
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+            $baseClass = $this->getYearSpecificClassName(
+                $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
+                '2016-17');
 
-            $records = array();
+            $condition = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
+                new StaticConditionVariable((string) $user->get_official_code()));
 
-            if ($user->get_official_code())
-            {
-                $baseClass = $this->getYearSpecificClassName(
-                    $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
-                    '2016-17');
+            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $baseClass,
+                new RecordRetrievesParameters(
+                    null,
+                    $condition,
+                    null,
+                    null,
+                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
 
-                $condition = new EqualityCondition(
-                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
-                    new StaticConditionVariable((string) $user->get_official_code()));
-
-                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
-                    $baseClass,
-                    new RecordRetrievesParameters(
-                        null,
-                        $condition,
-                        null,
-                        null,
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
-
-                $records = $this->aggregateActivities($baseClass, $activities);
-            }
-
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+            $records = $this->aggregateActivities($baseClass, $activities);
         }
 
-        return $cache->fetch($cacheIdentifier);
+        // $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $records;
     }
 
     /**

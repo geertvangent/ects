@@ -3,8 +3,6 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Service;
 
 use Chamilo\Configuration\Configuration;
 use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Libraries\Cache\Doctrine\Provider\PhpFileCache;
-use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Activity;
