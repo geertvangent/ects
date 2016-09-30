@@ -2,7 +2,7 @@
 namespace Ehb\Application\Ects\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
-use Ehb\Application\Discovery\Manager;
+use Ehb\Application\Ects\Manager;
 
 /**
  *
@@ -13,39 +13,13 @@ use Ehb\Application\Discovery\Manager;
 class TrainingsComponent extends Manager implements NoAuthenticationSupport
 {
 
-    /**
-     *
-     * @see \Chamilo\Libraries\Architecture\Application\Application::run()
-     */
-    public function run()
+    public function renderBody()
     {
         $html = array();
 
-        // Header
-        $html[] = '<!DOCTYPE html>';
-        $html[] = '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">';
-        $html[] = '<head>';
-        $html[] = '<meta charset="utf-8">';
-        $html[] = '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
-        $html[] = '<meta name="viewport" content="width=device-width, initial-scale=1">';
-        $html[] = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
-        $html[] = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">';
-        $html[] = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>';
-        $html[] = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>';
-        $html[] = '<script src="https://use.fontawesome.com/9f5c1b77a9.js"></script>';
-        $html[] = '</head>';
-
-        $html[] = '<body dir="ltr">';
-
-        $html[] = '<style>';
-        $html[] = 'body{margin-top: 15px;}';
-        $html[] = '</style>';
-
-        $html[] = '<div class="container-fluid">';
-
         // Filters
         $html[] = '<div class="row">';
-        $html[] = '<div class="col-sm-12">';
+        $html[] = '<div class="col-xs-12">';
 
         // Form
         $html[] = '<div class="card card-inverse card-primary card-block m-b-2">';
@@ -92,7 +66,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         // Opleidingslijst
 
         $html[] = '<div class="row">';
-        $html[] = '<div class="col-sm-12">';
+        $html[] = '<div class="col-xs-12">';
 
         $html[] = '<div class="card card-block">';
         $html[] = '    <h5 class="card-title">Professioneel gerichte bacheloropleiding</h5>';
@@ -145,11 +119,6 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '</div>';
         $html[] = '</div>';
 
-        // Results
-
-        $html[] = '</div>';
-        $html[] = '</body>';
-
-        echo implode(PHP_EOL, $html);
+        return implode(PHP_EOL, $html);
     }
 }
