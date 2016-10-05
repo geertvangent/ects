@@ -154,43 +154,41 @@ class CalendarRepository
      */
     public function findEventsForUser(User $user)
     {
-        // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        // $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
 
-        // if (! $cache->contains($cacheIdentifier))
-        // {
-        // $lifetimeInMinutes = Configuration::get_instance()->get_setting(
-        // array('Chamilo\Libraries\Calendar', 'refresh_external'));
-        $records = array();
-
-        if ($user->get_official_code())
+        if (! $cache->contains($cacheIdentifier))
         {
-            $baseClass = $this->getYearSpecificClassName(
-                $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
-                '2016-17');
+            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+                array('Chamilo\Libraries\Calendar', 'refresh_external'));
+            $records = array();
 
-            $condition = new EqualityCondition(
-                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
-                new StaticConditionVariable((string) $user->get_official_code()));
+            if ($user->get_official_code())
+            {
+                $baseClass = $this->getYearSpecificClassName(
+                    $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
+                    '2016-17');
 
-            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
-                $baseClass,
-                new RecordRetrievesParameters(
-                    null,
-                    $condition,
-                    null,
-                    null,
-                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+                $condition = new EqualityCondition(
+                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
+                    new StaticConditionVariable((string) $user->get_official_code()));
 
-            $records = $this->aggregateActivities($baseClass, $activities);
+                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                    $baseClass,
+                    new RecordRetrievesParameters(
+                        null,
+                        $condition,
+                        null,
+                        null,
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+
+                $records = $this->aggregateActivities($baseClass, $activities);
+            }
+
+            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
         }
 
-        // $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
-        // }
-
-        // return $cache->fetch($cacheIdentifier);
-
-        return $records;
+        return $cache->fetch($cacheIdentifier);
     }
 
     /**
