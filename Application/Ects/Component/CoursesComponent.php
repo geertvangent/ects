@@ -2,6 +2,8 @@
 namespace Ehb\Application\Ects\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Utilities\ResourceManager;
 use Ehb\Application\Ects\Manager;
 
 /**
@@ -17,20 +19,25 @@ class CoursesComponent extends Manager implements NoAuthenticationSupport
     {
         $html = array();
 
-        // Opleidingsinformatie
-        $html[] = '<div class="row">';
-        $html[] = '<div class="col-sm-12">';
+        $trajectoryIdentifier = $this->getRequest()->query->get('trajectory_id', 7063);
 
-        $html[] = '<h3 class="text-primary m-b-2">Programma Bachelor in Multimedia en Communicatietechnologie<br /><small class="text-muted">(1 Ba Multimedia en Communicatietechnologie)</small></h3>';
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'TrajectoryRenderer/trajectoryRenderer.js');
 
         $html[] = '
-            <style>
-            .ects-course-credits
-            {
-                text-align: center;
-                width: 100px;
-            }
-            </style>
+<style>
+.ects-course-credits
+{
+    text-align: center;
+    width: 100px;
+}
+</style>
+
+<div class="row">
+    <div class="col-sm-12" ng-app="trajectoryRendererApp">
+        <trajectory-renderer trajectory-id="' . $trajectoryIdentifier . '">
+            <h3 class="text-primary m-b-2">Programma {{ mainController.trajectoryProperties.training.name }}<br /><small class="text-muted">({{ mainController.trajectoryProperties.sub_trajectory.name }})</small></h3>
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -39,48 +46,21 @@ class CoursesComponent extends Manager implements NoAuthenticationSupport
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="ects-course-name">Semester 1 Artistieke vorming</td><td class="ects-course-credits">9</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Esthetica, kleurenleer</small></td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Tuin- en bouwkunstgeschiedenis</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Vormleer</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Waarnemings- en voorstellingstechnieken</td><td class="ects-course-credits"><small class="text-muted">3</td></tr>
-                    <tr><td class="ects-course-name">Semester 1 Atelier: ontwerpintroductie - tuin</td><td class="ects-course-credits">3</td></tr>
-                    <tr><td class="ects-course-name">Semester 1 Atelier: ontwerpleer + vormgeving LTA1</td><td class="ects-course-credits">4</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Ontwerpintroductie - vormgeving</td><td class="ects-course-credits"><small class="text-muted">3</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Ontwerpleer</td><td class="ects-course-credits"><small class="text-muted">1</td></tr>
-                    <tr><td class="ects-course-name">Semester 1 Plantenleer</td><td class="ects-course-credits">3</td></tr>
-                    <tr><td class="ects-course-name">Semester 1 Technieken</td><td class="ects-course-credits">5</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Constructietechnieken</td><td class="ects-course-credits"><small class="text-muted">3</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Materialenkennis</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name">Semester 1 Wetenschappen</td><td class="ects-course-credits">6</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Aard- en bodemkunde</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Algemene plantkunde</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Ecologie</td><td class="ects-course-credits"><small class="text-muted">1</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S1 Plantenaardrijkskunde</td><td class="ects-course-credits"><small class="text-muted">1</td></tr>
-                    <tr><td class="ects-course-name">Semester 2 Artistieke vorming</td><td class="ects-course-credits">5</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Tuin- en bouwkunstgeschiedenis</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Vormleer</td><td class="ects-course-credits"><small class="text-muted">1</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Waarnemings- en voorstellingstechnieken</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name">Semester 2 Atelier</td><td class="ects-course-credits">4</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Beplantingsleer</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Communicatie & participatie</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name">Semester 2 Atelier: ontwerpintroductie - landschap</td><td class="ects-course-credits">4</td></tr>
-                    <tr><td class="ects-course-name">Semester 2 Atelier: ontwerpintroductie - publieke ruimte</td><td class="ects-course-credits">4</td></tr>
-                    <tr><td class="ects-course-name">Semester 2 Plantenleer</td><td class="ects-course-credits">3</td></tr>
-                    <tr><td class="ects-course-name">Semester 2 Technieken</td><td class="ects-course-credits">6</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 CAD</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Constructietechnieken</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Topografie</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name">Semester 2 Wetenschappen</td><td class="ects-course-credits">4</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Landschappen en geografie</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
-                    <tr><td class="ects-course-name"><small class="text-muted">&nbsp;&nbsp;&#8226;&nbsp;S2 Publieke ruimte en sociologie</td><td class="ects-course-credits"><small class="text-muted">2</td></tr>
+                    <tr ng-repeat="course in mainController.trajectoryProperties.course">
+                        <td class="ects-course-name">
+                            <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;{{ course.name }}</small>
+                            <span ng-if="course.parent_programme_id == null">{{ course.name }}</span>
+                        </td>
+                        <td class="ects-course-credits">
+                            <small class="text-muted" ng-if="course.parent_programme_id != null">{{ course.credits }}</small>
+                            <span ng-if="course.parent_programme_id == null">{{ course.credits }}</span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-
-            ';
-
-        $html[] = '</div>';
-        $html[] = '</div>';
+        </trajectory-renderer>
+    </div>
+</div>';
 
         return implode(PHP_EOL, $html);
     }

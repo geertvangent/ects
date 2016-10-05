@@ -148,8 +148,11 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
                 $subTrajectoryCourse,
                 array(
                     SubTrajectoryCourse::PROPERTY_ID,
+                    SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID,
                     SubTrajectoryCourse::PROPERTY_NAME,
                     SubTrajectoryCourse::PROPERTY_CREDITS));
+
+            $formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_COURSE_PARTS] = array();
 
             if (! is_null($subTrajectoryCourse[SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID]))
             {
@@ -161,6 +164,36 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
             }
         }
 
-        return $formattedSubTrajectoryCourses;
+        usort(
+            $formattedSubTrajectoryCourses,
+            function ($courseOne, $courseTwo)
+            {
+                return strcmp(
+                    $courseOne[SubTrajectoryCourse::PROPERTY_NAME],
+                    $courseTwo[SubTrajectoryCourse::PROPERTY_NAME]);
+            });
+
+        $normalizedSubTrajectoryCourses = array();
+
+        foreach ($formattedSubTrajectoryCourses as $formattedSubTrajectoryCourse)
+        {
+            $formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_CREDITS] = floatval(
+                $formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_CREDITS]);
+
+            $normalizedSubTrajectoryCourses[] = $formattedSubTrajectoryCourse;
+
+            if (count($formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_COURSE_PARTS]) > 0)
+            {
+                foreach ($formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_COURSE_PARTS] as $formattedSubTrajectoryCoursePart)
+                {
+                    $formattedSubTrajectoryCoursePart[SubTrajectoryCourse::PROPERTY_CREDITS] = floatval(
+                        $formattedSubTrajectoryCoursePart[SubTrajectoryCourse::PROPERTY_CREDITS]);
+
+                    $normalizedSubTrajectoryCourses[] = $formattedSubTrajectoryCoursePart;
+                }
+            }
+        }
+
+        return $normalizedSubTrajectoryCourses;
     }
 }

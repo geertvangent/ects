@@ -2,6 +2,8 @@
 namespace Ehb\Application\Ects;
 
 use Chamilo\Libraries\Architecture\Application\Application;
+use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Structure\Page;
 
 /**
  *
@@ -19,6 +21,8 @@ class Manager extends Application
 
     public function render_header($pageTitle = '')
     {
+        $pluginPath = Path::getInstance()->getJavascriptPath('Chamilo\Libraries', true) . 'Plugin/';
+
         $html = array();
 
         // Header
@@ -33,6 +37,8 @@ class Manager extends Application
         $html[] = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>';
         $html[] = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>';
         $html[] = '<script src="https://use.fontawesome.com/9f5c1b77a9.js"></script>';
+        $html[] = '<script src="' . $pluginPath . 'AngularJS/angular.min.js"></script>';
+        $html[] = '<script src="' . $pluginPath . 'AngularJS/angular-sanitize.min.js"></script>';
         $html[] = '</head>';
 
         $html[] = '<body dir="ltr">';
@@ -62,6 +68,8 @@ class Manager extends Application
      */
     public function run()
     {
+        Page::getInstance()->setViewMode(Page::VIEW_MODE_HEADERLESS);
+
         $html = array();
 
         $html[] = $this->render_header();
