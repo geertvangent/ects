@@ -3,6 +3,8 @@ namespace Ehb\Application\Ects\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 use Ehb\Application\Ects\Manager;
+use Chamilo\Libraries\Format\Utilities\ResourceManager;
+use Chamilo\Libraries\File\Path;
 
 /**
  *
@@ -17,20 +19,38 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
     {
         $html = array();
 
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'TrainingBrowser/app.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) .
+                 'TrainingBrowser/Controller/MainController.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) .
+                 'TrainingBrowser/Controller/TrainingSelectorController.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) .
+                 'TrainingBrowser/Directive/trainingSelectorPanel.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) .
+                 'TrainingBrowser/Service/TrainingsService.js');
+
         // Filters
-        $html[] = '<div class="row">';
+        $html[] = '<div class="row" ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
         $html[] = '<div class="col-xs-12">';
 
         // Form
-        $html[] = '<div class="card card-inverse card-primary card-block m-b-2">';
+        $html[] = '<div class="card card-inverse card-primary card-block m-b-2" training-selector-panel>';
         $html[] = '    <div class="card-text form">';
         $html[] = '        <div class="col-xs-12 col-lg-2">';
         $html[] = '            <div class="form-group">';
-        $html[] = '                <label for="exampleSelect1">Academiejaar</label>';
-        $html[] = '                <select class="form-control" id="exampleSelect1">';
-        $html[] = '                    <option>2016-17</option>';
-        $html[] = '                    <option>2015-16</option>';
+        $html[] = '                <label for="academicYear">Academiejaar</label>';
+
+        $html[] = '                <select  class="form-select form-control" id="academicYear"';
+        $html[] = '                         ng-model="trainingSelector.academicYearVal"';
+        $html[] = '                         ng-options="label as label for label in trainingSelector.academicYears"';
+        $html[] = '                         ng-change="trainingSelector.selectAcademicYear()">';
         $html[] = '                </select>';
+
         $html[] = '            </div>';
         $html[] = '        </div>';
         $html[] = '        <div class="col-xs-12 col-lg-5">';

@@ -93,7 +93,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
         {
             $this->currentYear = $this->getRequestedPostDataValue(self::PARAM_YEAR);
 
-            if (is_null($this->currentYear))
+            if (empty($this->currentYear))
             {
                 $this->currentYear = array_shift($this->getEctsService()->getYears());
             }
