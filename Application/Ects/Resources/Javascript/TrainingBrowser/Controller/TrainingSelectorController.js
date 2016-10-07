@@ -34,7 +34,7 @@
                 this.faculties = trainingsService.faculties;
                 this.faculty = trainingsService.faculty;
                 
-                $scope.$watch(function()
+                $scope.$watchCollection(function()
                 {
                     return trainingsService.faculties;
                 }, angular.bind(this, function(newValue)
@@ -42,7 +42,7 @@
                     this.faculties = newValue;
                 }));
                 
-                $scope.$watch(function()
+                $scope.$watchCollection(function()
                 {
                     return trainingsService.faculty;
                 }, angular.bind(this, function(newValue)
@@ -52,7 +52,6 @@
                 
                 this.selectFaculty = function(faculty)
                 {
-                    console.log(faculty);
                     trainingsService.changeFaculty(faculty);
                 };
                 
@@ -78,7 +77,6 @@
                 
                 this.selectTrainingType = function(trainingType)
                 {
-                    console.log(trainingType);
                     trainingsService.changeTrainingType(trainingType);
                 };
                 

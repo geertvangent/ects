@@ -32,13 +32,6 @@
                     this.trainingTypes = result.properties.type;
                     this.faculties = result.properties.faculty;
                     this.trainings = result.properties.training;
-                    
-                    this.academicYear = result.properties.filter.year;
-                    this.trainingType = result.properties.filter.type;
-                    this.faculty = result.properties.filter.faculty;
-                    this.filterText = result.properties.filter.text;
-                    
-                    console.log(this.faculty);
                 }
             }));
         };
