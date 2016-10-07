@@ -61,7 +61,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                         ng-model="trainingSelector.faculty"';
         $html[] = '                         ng-options="faculty.faculty for faculty in trainingSelector.faculties"';
         $html[] = '                         ng-change="trainingSelector.selectFaculty()">';
-        $html[] = '                     <option value="">-- Selecteer een departement --</option>';
+        $html[] = '                     <option value="">-- Alle departementen --</option>';
         $html[] = '                </select>';
 
         $html[] = '            </div>';
@@ -74,7 +74,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                         ng-model="trainingSelector.trainingType"';
         $html[] = '                         ng-options="trainingType.type for trainingType in trainingSelector.trainingTypes"';
         $html[] = '                         ng-change="trainingSelector.selectTrainingType()">';
-        $html[] = '                     <option value="">-- Selecteer een opleidingstype --</option>';
+        $html[] = '                     <option value="">-- Alle opleidingstypes --</option>';
         $html[] = '                </select>';
 
         $html[] = '            </div>';
