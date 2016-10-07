@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Ects\Repository;
 
-use Chamilo\Libraries\Cache\Doctrine\Provider\PhpFileCache;
+use Chamilo\Libraries\Cache\Doctrine\Provider\FilesystemCache;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
@@ -55,7 +55,7 @@ class EctsRepository
      */
     public function findYears()
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__)));
 
         if (! $cache->contains($cacheIdentifier))
@@ -95,7 +95,7 @@ class EctsRepository
      */
     public function findFacultiesForYear($year)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
 
         if (! $cache->contains($cacheIdentifier))
@@ -138,7 +138,7 @@ class EctsRepository
      */
     public function findTypesForYearAndFacultyIdentifier($year, $facultyIdentifier = null)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $facultyIdentifier)));
 
         if (! $cache->contains($cacheIdentifier))
@@ -190,7 +190,7 @@ class EctsRepository
     public function findTrainingsForYearFacultyIdentifierTypeIdentifierAndText($year, $facultyIdentifier = null,
         $typeIdentifier = null, $text = null)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $facultyIdentifier, $typeIdentifier, $text)));
 
         if (! $cache->contains($cacheIdentifier))
@@ -278,7 +278,7 @@ class EctsRepository
      */
     public function findTrajectoriesForTrainingIdentifier($trainingIdentifier)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $trainingIdentifier)));
 
         if (! $cache->contains($cacheIdentifier))
@@ -316,7 +316,7 @@ class EctsRepository
      */
     public function findSubTrajectoriesForTrajectoryIdentifier($trajectoryIdentifier)
     {
-        $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $trajectoryIdentifier)));
 
         if (! $cache->contains($cacheIdentifier))
