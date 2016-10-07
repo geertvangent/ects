@@ -14,7 +14,7 @@
                 this.academicYears = [];
                 this.faculties = [];
                 this.trainingTypes = [];
-                this.trainings = [];
+                this.trainingsByType = [];
                 
                 this.retrieveAcademicYears = function()
                 {
@@ -52,10 +52,10 @@
                     chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterTrainings', {
                         'year' : this.academicYear == null ? null : this.academicYear,
                         'faculty' : this.faculty == null ? null : this.faculty.faculty_id,
-                        'trainingType' : this.trainingType == null ? null : this.trainingType.type_id,
+                        'type' : this.trainingType == null ? null : this.trainingType.type_id,
                     }, angular.bind(this, function(result, status, headers, config)
                     {
-                        this.trainings = result.properties.training;
+                        this.trainingsByType = result.properties.type;
                     }));
                 };
                 

@@ -28,7 +28,13 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
                  'TrainingBrowser/Controller/MainController.js');
         $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) .
+                 'TrainingBrowser/Controller/TrainingCardsController.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) .
                  'TrainingBrowser/Controller/TrainingSelectorController.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) .
+                 'TrainingBrowser/Directive/trainingCardsPanel.js');
         $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) .
                  'TrainingBrowser/Directive/trainingSelectorPanel.js');
@@ -37,7 +43,9 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
                  'TrainingBrowser/Service/TrainingsService.js');
 
         // Filters
-        $html[] = '<div class="row" ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
+        $html[] = '<div ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
+
+        $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
 
         // Form
@@ -96,57 +104,19 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         // Opleidingslijst
 
         $html[] = '<div class="row">';
-        $html[] = '<div class="col-xs-12">';
+        $html[] = '<div class="col-xs-12" training-cards-panel>
+        {{ trainingSelector.test }}';
 
-        $html[] = '<div class="card card-block">';
-        $html[] = '    <h5 class="card-title">Professioneel gerichte bacheloropleiding</h5>';
+        $html[] = '<div class="card card-block" ng-repeat="type in trainingCards.trainingsByType">';
+        $html[] = '    <h5 class="card-title">{{ type.type }}</h5>';
         $html[] = '    <p class="card-text">';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Audiovisuele Kunsten</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Audiovisuele Kunsten</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Biomedische Laboratoriumtechnologie</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Journalistiek</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Landschaps- en Tuinarchitectuur</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Landschaps- en Tuinarchitectuur - Werktraject</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Multimedia en de Communicatietechnologie</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Pedagogie van het Jonge Kind</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Toegepaste Informatica</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Verpleegkunde 180sp</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Verpleegkunde 240sp</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Voedings- en Dieetkunde</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Vroedkunde</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Communicatiemanagement</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Hotelmanagement</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Office Management</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Onderwijs - Kleuteronderwijs</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Onderwijs - Lager Onderwijs</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Onderwijs: Secundair Onderwijs 2 OV</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Sociaal Werk</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Sociaal Werk - gezamenlijke opleiding</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Toerisme- en het Recreatiemanagement</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in Idea & Innovation Management</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in Musical</a><br />';
-        $html[] = '    </p>';
-        $html[] = '</div>';
-
-        $html[] = '<div class="card card-block">';
-        $html[] = '    <h5 class="card-title">Academisch gerichte bacheloropleiding</h5>';
-        $html[] = '    <p class="card-text">';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Audiovisuele Kunsten</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in de Muziek</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Bachelor in het Drama</a><br />';
-        $html[] = '    </p>';
-        $html[] = '</div>';
-
-        $html[] = '<div class="card card-block">';
-        $html[] = '    <h5 class="card-title">Masteropleiding die aansluit bij een bacheloropleiding</h5>';
-        $html[] = '    <p class="card-text">';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Master in de Audiovisuele Kunsten</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Master in de Muziek</a><br />';
-        $html[] = '        <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">Master in het Drama</a><br />';
+        $html[] = '        <span ng-repeat="training in type.training"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a href="#">{{ training.name }}</a><br /></span>';
         $html[] = '    </p>';
         $html[] = '</div>';
 
         $html[] = '</div>';
+        $html[] = '</div>';
+
         $html[] = '</div>';
 
         return implode(PHP_EOL, $html);

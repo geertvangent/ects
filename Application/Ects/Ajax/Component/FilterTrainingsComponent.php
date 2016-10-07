@@ -21,6 +21,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
 
     // Properties
     const PROPERTY_TRAINING = 'training';
+    const PROPERTY_TYPE = 'type';
 
     /**
      *
@@ -62,7 +63,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
     public function run()
     {
         $jsonAjaxResult = new JsonAjaxResult();
-        $jsonAjaxResult->set_properties(array(self::PROPERTY_TRAINING => $this->getTrainings()));
+        $jsonAjaxResult->set_properties(array(self::PROPERTY_TYPE => $this->getTrainings()));
         $jsonAjaxResult->display();
     }
 
@@ -134,7 +135,22 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
             $this->getCurrentTypeIdentifier(),
             $this->getCurrentText());
 
-        return $trainings;
+        $categorizedTrainings = array();
+
+        foreach ($trainings as $training)
+        {
+            if (! isset($categorizedTrainings[$training[Training::PROPERTY_TYPE_ID]]))
+            {
+                $categorizedTrainings[$training[Training::PROPERTY_TYPE_ID]] = array(
+                    Training::PROPERTY_TYPE_ID => $training[Training::PROPERTY_TYPE_ID],
+                    Training::PROPERTY_TYPE => $training[Training::PROPERTY_TYPE],
+                    self::PROPERTY_TRAINING => array());
+            }
+
+            $categorizedTrainings[$training[Training::PROPERTY_TYPE_ID]][self::PROPERTY_TRAINING][] = $training;
+        }
+
+        return $categorizedTrainings;
     }
 
     /**
