@@ -8,7 +8,7 @@
                 this.academicYears = trainingsService.academicYears;
                 this.academicYear = trainingsService.academicYear;
                 
-                $scope.$watch(function()
+                $scope.$watchCollection(function()
                 {
                     return trainingsService.academicYear;
                 }, angular.bind(this, function(newValue)
