@@ -42,17 +42,9 @@
                     this.faculties = newValue;
                 }));
                 
-                $scope.$watchCollection(function()
+                this.selectFaculty = function()
                 {
-                    return trainingsService.faculty;
-                }, angular.bind(this, function(newValue)
-                {
-                    this.faculty = newValue;
-                }));
-                
-                this.selectFaculty = function(faculty)
-                {
-                    trainingsService.changeFaculty(faculty);
+                    trainingsService.changeFaculty(this.faculty);
                 };
                 
                 // Training type
@@ -67,17 +59,9 @@
                     this.trainingTypes = newValue;
                 }));
                 
-                $scope.$watchCollection(function()
+                this.selectTrainingType = function()
                 {
-                    return trainingsService.trainingType;
-                }, angular.bind(this, function(newValue)
-                {
-                    this.trainingType = newValue;
-                }));
-                
-                this.selectTrainingType = function(trainingType)
-                {
-                    trainingsService.changeTrainingType(trainingType);
+                    trainingsService.changeTrainingType(this.trainingType);
                 };
                 
             } ]);
