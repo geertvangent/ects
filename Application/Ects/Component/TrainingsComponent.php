@@ -20,6 +20,8 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html = array();
 
         $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'Utilities/chamiloUtilities.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'TrainingBrowser/app.js');
         $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) .

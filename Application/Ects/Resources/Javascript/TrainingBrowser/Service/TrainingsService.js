@@ -2,111 +2,87 @@
 {
     var trainingBrowserApp = angular.module('trainingBrowserApp');
     
-    trainingBrowserApp.service('trainingsService', [ '$http', function($http)
-    {
-        this.academicYear = null;
-        this.faculty = null;
-        this.trainingType = null;
-        this.textFilter = null;
-        
-        this.academicYears = [];
-        this.faculties = [];
-        this.trainingTypes = [];
-        this.trainings = [];
-        
-        this.retrieveAcademicYears = function()
-        {
-            $http.post('index.php?application=Ehb\\Application\\Ects\\Ajax&go=FilterYears', $.param({}), {
-                headers : {
-                    'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-                }
-            }).success(angular.bind(this, function(result, status, headers, config)
+    trainingBrowserApp.service('trainingsService', [
+            'chamiloUtilities',
+            function(chamiloUtilities)
             {
-                if (result && result.result_code == 200)
+                this.academicYear = null;
+                this.faculty = null;
+                this.trainingType = null;
+                this.textFilter = null;
+                
+                this.academicYears = [];
+                this.faculties = [];
+                this.trainingTypes = [];
+                this.trainings = [];
+                
+                this.retrieveAcademicYears = function()
                 {
-                    this.academicYears = result.properties.year;
-                    this.changeAcademicYear(this.academicYears[0]);
-                }
-            }));
-        };
-        
-        this.retrieveFaculties = function()
-        {
-            $http.post('index.php?application=Ehb\\Application\\Ects\\Ajax&go=FilterFaculties', $.param({
-                'year' : this.academicYear == null ? null : this.academicYear
-            }), {
-                headers : {
-                    'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-                }
-            }).success(angular.bind(this, function(result, status, headers, config)
-            {
-                if (result && result.result_code == 200)
+                    chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterYears', {}, angular.bind(
+                            this, function(result, status, headers, config)
+                            {
+                                this.academicYears = result.properties.year;
+                                this.changeAcademicYear(this.academicYears[0]);
+                            }));
+                };
+                
+                this.retrieveFaculties = function()
                 {
-                    this.faculties = result.properties.faculty;
-                }
-            }));
-        };
-        
-        this.retrieveTrainingTypes = function()
-        {
-            $http.post('index.php?application=Ehb\\Application\\Ects\\Ajax&go=FilterTrainingTypes', $.param({
-                'year' : this.academicYear == null ? null : this.academicYear,
-                'faculty' : this.faculty == null ? null : this.faculty.faculty_id
-            }), {
-                headers : {
-                    'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-                }
-            }).success(angular.bind(this, function(result, status, headers, config)
-            {
-                if (result && result.result_code == 200)
+                    chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterFaculties', {
+                        'year' : this.academicYear == null ? null : this.academicYear
+                    }, angular.bind(this, function(result, status, headers, config)
+                    {
+                        this.faculties = result.properties.faculty;
+                    }));
+                };
+                
+                this.retrieveTrainingTypes = function()
                 {
-                    this.trainingTypes = result.properties.type;
-                }
-            }));
-        };
-        
-        // this.retrieveTrainings = function()
-        // {
-        // $http.post('index.php?application=Ehb\\Application\\Ects\\Ajax&go=Filter',
-        // $.param({
-        // 'year' : this.academicYear == null ? null : this.academicYear,
-        // 'faculty' : this.faculty == null ? null : this.faculty.faculty_id,
-        // 'type' : this.trainingType == null ? null : this.trainingType.type_id
-        // }), {
-        // headers : {
-        // 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-        // }
-        // }).success(angular.bind(this, function(result, status, headers,
-        // config)
-        // {
-        // if (result && result.result_code == 200)
-        // {
-        // this.trainings = result.properties.training;
-        // }
-        // }));
-        // };
-        
-        this.changeAcademicYear = function(academicYear)
-        {
-            this.academicYear = academicYear;
-            this.faculty = null;
-            this.trainingType = null;
-            this.retrieveFaculties();
-            this.retrieveTrainingTypes();
-        };
-        
-        this.changeFaculty = function(faculty)
-        {
-            this.faculty = faculty;
-            this.trainingType = null;
-            this.retrieveTrainingTypes();
-        };
-        
-        this.changeTrainingType = function(trainingType)
-        {
-            this.trainingType = trainingType;
-        };
-        
-        this.retrieveAcademicYears();
-    } ]);
+                    chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterTrainingTypes', {
+                        'year' : this.academicYear == null ? null : this.academicYear,
+                        'faculty' : this.faculty == null ? null : this.faculty.faculty_id
+                    }, angular.bind(this, function(result, status, headers, config)
+                    {
+                        this.trainingTypes = result.properties.type;
+                    }));
+                };
+                
+                this.retrieveTrainings = function()
+                {
+                    chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterTrainings', {
+                        'year' : this.academicYear == null ? null : this.academicYear,
+                        'faculty' : this.faculty == null ? null : this.faculty.faculty_id,
+                        'trainingType' : this.trainingType == null ? null : this.trainingType.type_id,
+                    }, angular.bind(this, function(result, status, headers, config)
+                    {
+                        this.trainings = result.properties.training;
+                    }));
+                };
+                
+                this.changeAcademicYear = function(academicYear)
+                {
+                    this.academicYear = academicYear;
+                    this.faculty = null;
+                    this.trainingType = null;
+                    this.retrieveFaculties();
+                    this.retrieveTrainingTypes();
+                    this.retrieveTrainings();
+                };
+                
+                this.changeFaculty = function(faculty)
+                {
+                    this.faculty = faculty;
+                    this.trainingType = null;
+                    this.retrieveTrainingTypes();
+                    this.retrieveTrainings();
+                };
+                
+                this.changeTrainingType = function(trainingType)
+                {
+                    this.trainingType = trainingType;
+                    this.retrieveTrainings();
+                };
+                
+                this.retrieveAcademicYears();
+            } ]);
 })();
