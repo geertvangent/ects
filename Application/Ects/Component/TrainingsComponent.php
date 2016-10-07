@@ -46,29 +46,37 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                <label for="academicYear">Academiejaar</label>';
 
         $html[] = '                <select  class="form-select form-control" id="academicYear"';
-        $html[] = '                         ng-model="trainingSelector.academicYearVal"';
-        $html[] = '                         ng-options="academicYear as label for academicYear in trainingSelector.academicYears"';
-        $html[] = '                         ng-change="trainingSelector.selectAcademicYear()">';
+        $html[] = '                         ng-model="trainingSelector.academicYear"';
+        $html[] = '                         ng-options="item for item in trainingSelector.academicYears"';
+        $html[] = '                         ng-change="trainingSelector.selectAcademicYear(trainingSelector.academicYear)">';
         $html[] = '                </select>';
 
         $html[] = '            </div>';
         $html[] = '        </div>';
         $html[] = '        <div class="col-xs-12 col-lg-5">';
         $html[] = '            <div class="form-group">';
-        $html[] = '                <label for="exampleSelect1">Departement</label>';
-        $html[] = '                <select class="form-control" id="exampleSelect1">';
-        $html[] = '                    <option>Design &amp; Technologie</option>';
-        $html[] = '                    <option>Management, Media en Maatschappij</option>';
+        $html[] = '                <label for="faculty">Departement</label>';
+
+        $html[] = '                <select  class="form-select form-control" id="faculty"';
+        $html[] = '                         ng-model="trainingSelector.faculty"';
+        $html[] = '                         ng-options="faculty.faculty for faculty in trainingSelector.faculties"';
+        $html[] = '                         ng-change="trainingSelector.selectFaculty(trainingSelector.faculty)">';
+        $html[] = '                     <option value="">-- Selecteer een departement --</option>';
         $html[] = '                </select>';
+
         $html[] = '            </div>';
         $html[] = '        </div>';
         $html[] = '        <div class="col-xs-12 col-lg-5">';
         $html[] = '            <div class="form-group">';
-        $html[] = '                <label for="exampleSelect1">Opleidingstype</label>';
-        $html[] = '                <select class="form-control" id="exampleSelect1">';
-        $html[] = '                    <option>Professioneel gerichte bacheloropleiding</option>';
-        $html[] = '                    <option>Academisch gerichte bacheloropleiding</option>';
+        $html[] = '                <label for="trainingType">Opleidingstype</label>';
+
+        $html[] = '                <select  class="form-select form-control" id="trainingType"';
+        $html[] = '                         ng-model="trainingSelector.trainingType"';
+        $html[] = '                         ng-options="trainingType.type for trainingType in trainingSelector.trainingTypes"';
+        $html[] = '                         ng-change="trainingSelector.selectTrainingType(trainingSelector.trainingType)">';
+        $html[] = '                     <option value="">-- Selecteer een opleidingstype --</option>';
         $html[] = '                </select>';
+
         $html[] = '            </div>';
         $html[] = '        </div>';
         $html[] = '        <div class="col-xs-12">';

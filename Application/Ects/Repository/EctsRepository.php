@@ -153,7 +153,7 @@ class EctsRepository
                 new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
 
-            if (! is_null($facultyIdentifier))
+            if (! empty($facultyIdentifier))
             {
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
@@ -205,21 +205,21 @@ class EctsRepository
                 new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
 
-            if (! is_null($facultyIdentifier))
+            if (! empty($facultyIdentifier))
             {
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     new StaticConditionVariable($facultyIdentifier));
             }
 
-            if (! is_null($typeIdentifier))
+            if (! empty($typeIdentifier))
             {
                 $conditions[] = new EqualityCondition(
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
                     new StaticConditionVariable($typeIdentifier));
             }
 
-            if (! is_null($text))
+            if (! empty($text))
             {
                 $conditions[] = new PatternMatchCondition(
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_NAME),

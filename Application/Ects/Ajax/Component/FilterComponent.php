@@ -72,8 +72,8 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
             array(
                 self::PROPERTY_FILTER => array(
                     self::PROPERTY_YEAR => $this->getCurrentYear(),
-                    self::PROPERTY_FACULTY => $this->getCurrentFacultyIdentifier(),
-                    self::PROPERTY_TYPE => $this->getCurrentTypeIdentifier(),
+                    self::PROPERTY_FACULTY => $this->getCurrentFaculty(),
+                    self::PROPERTY_TYPE => $this->getCurrentType(),
                     self::PROPERTY_TEXT => $this->getCurrentText()),
                 self::PROPERTY_YEAR => $this->getYears(),
                 self::PROPERTY_FACULTY => $this->getFaculties(),
@@ -159,15 +159,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
      */
     private function getFaculties()
     {
-        $faculties = $this->getEctsService()->getFacultiesForYear($this->getCurrentYear());
-        $formattedFaculties = array();
-
-        foreach ($faculties as $faculty)
-        {
-            $formattedFaculties[$faculty[Training::PROPERTY_FACULTY_ID]] = $faculty[Training::PROPERTY_FACULTY];
-        }
-
-        return $formattedFaculties;
+        return $this->getEctsService()->getFacultiesForYear($this->getCurrentYear());
     }
 
     /**
@@ -176,17 +168,9 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
      */
     private function getTypes()
     {
-        $types = $this->getEctsService()->getTypesForYearAndFacultyIdentifier(
+        return $this->getEctsService()->getTypesForYearAndFacultyIdentifier(
             $this->getCurrentYear(),
             $this->getCurrentFacultyIdentifier());
-        $formattedTypes = array();
-
-        foreach ($types as $type)
-        {
-            $formattedTypes[$type[Training::PROPERTY_TYPE_ID]] = $type[Training::PROPERTY_TYPE];
-        }
-
-        return $formattedTypes;
     }
 
     /**
@@ -202,5 +186,39 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
             $this->getCurrentText());
 
         return $trainings;
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    private function getCurrentFaculty()
+    {
+        foreach ($this->getFaculties() as $faculty)
+        {
+            if ($faculty[Training::PROPERTY_FACULTY_ID] == $this->getCurrentFacultyIdentifier())
+            {
+                return $faculty;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     *
+     * @return string[]
+     */
+    private function getCurrentType()
+    {
+        foreach ($this->getTypes() as $type)
+        {
+            if ($type[Training::PROPERTY_TYPE_ID] == $this->getCurrentTypeIdentifier())
+            {
+                return $type;
+            }
+        }
+
+        return null;
     }
 }

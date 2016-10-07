@@ -17,7 +17,9 @@
         this.retrieveTrainings = function()
         {
             $http.post('index.php?application=Ehb\\Application\\Ects\\Ajax&go=Filter', $.param({
-                'year' : this.academicYear == null ? null : this.academicYear.value
+                'year' : this.academicYear == null ? null : this.academicYear,
+                'faculty' : this.faculty == null ? null : this.faculty.faculty_id,
+                'type' : this.trainingType == null ? null : this.trainingType.type_id
             }), {
                 headers : {
                     'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -34,7 +36,9 @@
                     this.academicYear = result.properties.filter.year;
                     this.trainingType = result.properties.filter.type;
                     this.faculty = result.properties.filter.faculty;
-                    this.filterText = result.properties.filter.text;                    
+                    this.filterText = result.properties.filter.text;
+                    
+                    console.log(this.faculty);
                 }
             }));
         };
@@ -42,6 +46,21 @@
         this.changeAcademicYear = function(academicYear)
         {
             this.academicYear = academicYear;
+            this.faculty = null;
+            this.trainingType = null;
+            this.retrieveTrainings();
+        };
+        
+        this.changeFaculty = function(faculty)
+        {
+            this.faculty = faculty;
+            this.trainingType = null;
+            this.retrieveTrainings();
+        };
+        
+        this.changeTrainingType = function(trainingType)
+        {
+            this.trainingType = trainingType;
             this.retrieveTrainings();
         };
         

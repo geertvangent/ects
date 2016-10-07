@@ -4,6 +4,7 @@ namespace Ehb\Application\Ects;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Structure\Page;
+use Chamilo\Libraries\Format\Theme;
 
 /**
  *
@@ -22,6 +23,7 @@ class Manager extends Application
     public function render_header($pageTitle = '')
     {
         $pluginPath = Path::getInstance()->getJavascriptPath('Chamilo\Libraries', true) . 'Plugin/';
+        $cssPath = Theme::getInstance()->getCssPath('Chamilo\Configuration', true, false) . 'Aqua/';
 
         $html = array();
 
@@ -34,9 +36,9 @@ class Manager extends Application
         $html[] = '<meta name="viewport" content="width=device-width, initial-scale=1">';
         $html[] = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
         $html[] = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">';
+        $html[] = '<link rel="stylesheet" href="' . $cssPath . 'FontAwesome/css/font-awesome.css">';
         $html[] = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>';
         $html[] = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>';
-        $html[] = '<script src="https://use.fontawesome.com/9f5c1b77a9.js"></script>';
         $html[] = '<script src="' . $pluginPath . 'AngularJS/angular.min.js"></script>';
         $html[] = '<script src="' . $pluginPath . 'AngularJS/angular-sanitize.min.js"></script>';
         $html[] = '</head>';
