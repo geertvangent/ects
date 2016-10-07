@@ -34,14 +34,13 @@
                     this.academicYear = result.properties.filter.year;
                     this.trainingType = result.properties.filter.type;
                     this.faculty = result.properties.filter.faculty;
-                    this.filterText = result.properties.filter.text;
+                    this.filterText = result.properties.filter.text;                    
                 }
             }));
         };
         
         this.changeAcademicYear = function(academicYear)
         {
-            console.log('changing');
             this.academicYear = academicYear;
             this.retrieveTrainings();
         };

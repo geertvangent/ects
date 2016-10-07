@@ -47,7 +47,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '                <select  class="form-select form-control" id="academicYear"';
         $html[] = '                         ng-model="trainingSelector.academicYearVal"';
-        $html[] = '                         ng-options="label as label for label in trainingSelector.academicYears"';
+        $html[] = '                         ng-options="academicYear as label for academicYear in trainingSelector.academicYears"';
         $html[] = '                         ng-change="trainingSelector.selectAcademicYear()">';
         $html[] = '                </select>';
 

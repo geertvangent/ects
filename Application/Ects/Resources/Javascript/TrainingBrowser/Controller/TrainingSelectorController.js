@@ -21,7 +21,5 @@
                     trainingsService.changeAcademicYear(this.academicYear);
                 };
                 
-                this.selectAcademicYear();
-                
             } ]);
 })();
