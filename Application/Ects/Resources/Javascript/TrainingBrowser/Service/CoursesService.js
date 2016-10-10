@@ -6,7 +6,7 @@
     {
         this.selectedSubTrajectory = null;
         
-        this.changeSubTrajectory = function(subTrajectory)
+        this.changeSelectedSubTrajectory = function(subTrajectory)
         {
             this.selectedSubTrajectory = subTrajectory;
         };
@@ -17,7 +17,7 @@
                 'sub_trajectory' : subTrajectory.id
             }, angular.bind(this, function(result, status, headers, config)
             {
-                this.changeSubTrajectory(result.properties);
+                this.changeSelectedSubTrajectory(result.properties);
             }));
         };
     } ]);

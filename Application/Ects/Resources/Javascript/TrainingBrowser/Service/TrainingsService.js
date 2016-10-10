@@ -61,7 +61,7 @@
                     }));
                 };
                 
-                this.changeTraining = function(training)
+                this.changeSelectedTraining = function(training)
                 {
                     this.selectedTraining = training;
                 };
@@ -72,7 +72,7 @@
                         'training' : training.id
                     }, angular.bind(this, function(result, status, headers, config)
                     {
-                        this.changeTraining(result.properties);
+                        this.changeSelectedTraining(result.properties);
                     }));
                 };
                 

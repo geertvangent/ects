@@ -226,6 +226,8 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '</div>';
 
+        $html[] = '        <button type="button" class="btn btn-primary" ng-click="mainController.resetSelectedTraining()">Ga terug</button>';
+
         $html[] = '</div>';
         $html[] = '</div>';
 
@@ -276,6 +278,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                </tr>';
         $html[] = '            </tbody>';
         $html[] = '        </table>';
+        $html[] = '        <button type="button" class="btn btn-primary" ng-click="mainController.resetSelectedSubTrajectory()">Ga terug</button>';
         $html[] = '    </div>';
         $html[] = '</div>';
 
