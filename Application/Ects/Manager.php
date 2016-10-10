@@ -15,10 +15,10 @@ use Chamilo\Libraries\Format\Theme;
 class Manager extends Application
 {
     // Actions
-    const ACTION_VIEW = 'Viewer';
+    const ACTION_TRAININGS = 'Trainings';
 
     // Default action
-    const DEFAULT_ACTION = self::ACTION_VIEW;
+    const DEFAULT_ACTION = self::ACTION_TRAININGS;
 
     public function render_header($pageTitle = '')
     {
