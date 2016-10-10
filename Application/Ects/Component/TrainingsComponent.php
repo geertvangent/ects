@@ -289,8 +289,16 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '            <tbody>';
         $html[] = '                <tr ng-repeat="course in subTrajectoryDetails.selectedSubTrajectory.courses">';
         $html[] = '                    <td class="ects-course-name">';
-        $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;{{ course.name }}</small>';
-        $html[] = '                        <span ng-if="course.parent_programme_id == null">{{ course.name }}</span>';
+        $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;
+                                               <a ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
+                                               {{ course.name }}
+                                               </a>
+                                           </small>';
+        $html[] = '                        <span ng-if="course.parent_programme_id == null">
+                                               <a ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
+                                               {{ course.name }}
+                                               </a>
+                                           </span>';
         $html[] = '                    </td>';
         $html[] = '                    <td class="ects-course-credits">';
         $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">{{ course.credits }}</small>';

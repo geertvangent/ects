@@ -147,7 +147,7 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
             $formattedSubTrajectoryCourse = $this->filterProperties(
                 $subTrajectoryCourse,
                 array(
-                    SubTrajectoryCourse::PROPERTY_ID,
+                    SubTrajectoryCourse::PROPERTY_PROGRAMME_ID,
                     SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID,
                     SubTrajectoryCourse::PROPERTY_NAME,
                     SubTrajectoryCourse::PROPERTY_CREDITS));
