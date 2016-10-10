@@ -5,9 +5,13 @@
     trainingBrowserApp.controller('TrainingSelectorController', [ 'trainingsService', '$scope',
             function(trainingsService, $scope)
             {
-                // Academic year
                 this.academicYears = trainingsService.academicYears;
                 this.academicYear = trainingsService.academicYear;
+                this.faculties = trainingsService.faculties;
+                this.faculty = trainingsService.faculty;
+                this.trainingTypes = trainingsService.trainingTypes;
+                this.trainingType = trainingsService.trainingType;
+                this.filterText = trainingsService.filterText;
                 
                 $scope.$watch(function()
                 {
@@ -25,15 +29,6 @@
                     this.academicYear = newValue;
                 }));
                 
-                this.selectAcademicYear = function(academicYear)
-                {
-                    trainingsService.changeAcademicYear(academicYear);
-                };
-                
-                // Faculty
-                this.faculties = trainingsService.faculties;
-                this.faculty = trainingsService.faculty;
-                
                 $scope.$watchCollection(function()
                 {
                     return trainingsService.faculties;
@@ -42,14 +37,13 @@
                     this.faculties = newValue;
                 }));
                 
-                this.selectFaculty = function()
+                $scope.$watchCollection(function()
                 {
-                    trainingsService.changeFaculty(this.faculty);
-                };
-                
-                // Training type
-                this.trainingTypes = trainingsService.trainingTypes;
-                this.trainingType = trainingsService.trainingType;
+                    return trainingsService.faculty;
+                }, angular.bind(this, function(newValue)
+                {
+                    this.faculty = newValue;
+                }));
                 
                 $scope.$watchCollection(function()
                 {
@@ -59,10 +53,47 @@
                     this.trainingTypes = newValue;
                 }));
                 
+                $scope.$watchCollection(function()
+                {
+                    return trainingsService.trainingType;
+                }, angular.bind(this, function(newValue)
+                {
+                    this.trainingType = newValue;
+                }));
+                
+                $scope.$watchCollection(function()
+                {
+                    return trainingsService.filterText;
+                }, angular.bind(this, function(newValue)
+                {
+                    this.filterText = newValue;
+                }));
+                
+                this.selectAcademicYear = function(academicYear)
+                {
+                    trainingsService.changeAcademicYear(academicYear);
+                };
+                
+                this.selectFaculty = function()
+                {
+                    trainingsService.changeFaculty(this.faculty);
+                };
+                
                 this.selectTrainingType = function()
                 {
                     trainingsService.changeTrainingType(this.trainingType);
                 };
                 
+                this.setFilterText = function()
+                {
+                    trainingsService.changeFilterText(this.filterText);
+                };
+                
+                this.resetFilters = function()
+                {
+                    trainingsService.setFaculty('');
+                    trainingsService.setFilterText('');
+                    trainingsService.retrieveTrainings();
+                };
             } ]);
 })();

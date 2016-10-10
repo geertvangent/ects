@@ -87,50 +87,65 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '<div class="col-xs-12">';
 
         // Form
-        $html[] = '<div class="card card-inverse card-primary card-block m-b-2">';
-        $html[] = '    <div class="card-text form">';
-        $html[] = '        <div class="col-xs-12 col-lg-2">';
-        $html[] = '            <div class="form-group">';
-        $html[] = '                <label for="academicYear">Academiejaar</label>';
+        $html[] = '<div class="card m-b-2">';
+        $html[] = '    <div class="card-header">Zoekcriteria</div>';
+        $html[] = '    <div class="card-block">';
+        $html[] = '        <div class="card-text form">';
+        $html[] = '            <div class="col-xs-12 col-lg-2">';
+        $html[] = '                <div class="form-group">';
+        $html[] = '                    <label for="academicYear">Academiejaar</label>';
 
-        $html[] = '                <select  class="form-select form-control" id="academicYear"';
-        $html[] = '                         ng-model="trainingSelector.academicYear"';
-        $html[] = '                         ng-options="item for item in trainingSelector.academicYears"';
-        $html[] = '                         ng-change="trainingSelector.selectAcademicYear(trainingSelector.academicYear)">';
-        $html[] = '                </select>';
+        $html[] = '                    <select  class="form-select form-control" id="academicYear"';
+        $html[] = '                             ng-model="trainingSelector.academicYear"';
+        $html[] = '                             ng-options="item for item in trainingSelector.academicYears"';
+        $html[] = '                             ng-change="trainingSelector.selectAcademicYear(trainingSelector.academicYear)">';
+        $html[] = '                    </select>';
 
+        $html[] = '                </div>';
         $html[] = '            </div>';
-        $html[] = '        </div>';
-        $html[] = '        <div class="col-xs-12 col-lg-5">';
-        $html[] = '            <div class="form-group">';
-        $html[] = '                <label for="faculty">Departement</label>';
+        $html[] = '            <div class="col-xs-12 col-lg-5">';
+        $html[] = '                <div class="form-group">';
+        $html[] = '                    <label for="faculty">Departement</label>';
 
-        $html[] = '                <select  class="form-select form-control" id="faculty"';
-        $html[] = '                         ng-model="trainingSelector.faculty"';
-        $html[] = '                         ng-options="faculty.faculty for faculty in trainingSelector.faculties"';
-        $html[] = '                         ng-change="trainingSelector.selectFaculty()">';
-        $html[] = '                     <option value="">-- Alle departementen --</option>';
-        $html[] = '                </select>';
+        $html[] = '                    <select  class="form-select form-control" id="faculty"';
+        $html[] = '                             ng-model="trainingSelector.faculty"';
+        $html[] = '                             ng-options="faculty.faculty for faculty in trainingSelector.faculties"';
+        $html[] = '                             ng-change="trainingSelector.selectFaculty()">';
+        $html[] = '                         <option value="">-- Alle departementen --</option>';
+        $html[] = '                    </select>';
 
+        $html[] = '                </div>';
         $html[] = '            </div>';
-        $html[] = '        </div>';
-        $html[] = '        <div class="col-xs-12 col-lg-5">';
-        $html[] = '            <div class="form-group">';
-        $html[] = '                <label for="trainingType">Opleidingstype</label>';
+        $html[] = '            <div class="col-xs-12 col-lg-5">';
+        $html[] = '                <div class="form-group">';
+        $html[] = '                    <label for="trainingType">Opleidingstype</label>';
 
-        $html[] = '                <select  class="form-select form-control" id="trainingType"';
-        $html[] = '                         ng-model="trainingSelector.trainingType"';
-        $html[] = '                         ng-options="trainingType.type for trainingType in trainingSelector.trainingTypes"';
-        $html[] = '                         ng-change="trainingSelector.selectTrainingType()">';
-        $html[] = '                     <option value="">-- Alle opleidingstypes --</option>';
-        $html[] = '                </select>';
+        $html[] = '                    <select  class="form-select form-control" id="trainingType"';
+        $html[] = '                             ng-model="trainingSelector.trainingType"';
+        $html[] = '                             ng-options="trainingType.type for trainingType in trainingSelector.trainingTypes"';
+        $html[] = '                             ng-change="trainingSelector.selectTrainingType()">';
+        $html[] = '                         <option value="">-- Alle opleidingstypes --</option>';
+        $html[] = '                    </select>';
 
+        $html[] = '                </div>';
         $html[] = '            </div>';
-        $html[] = '        </div>';
-        $html[] = '        <div class="col-xs-12">';
-        $html[] = '            <div class="form-group">';
-        $html[] = '                <label for="exampleInputEmail1">Filter</label>';
-        $html[] = '                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Vrije zoekfilter">';
+        $html[] = '            <div class="col-xs-12 col-lg-9">';
+        $html[] = '                <div class="form-group">';
+        $html[] = '                    <label for="filterText">Filter</label>';
+        $html[] = '                    <input   type="text"
+                                                class="form-control"
+                                                id="filterText"
+                                                placeholder="Vrije zoekfilter"
+                                                ng-model="trainingSelector.filterText"
+                                                ng-change="trainingSelector.setFilterText()"
+                                                ng-model-options="{ debounce: 500 }">';
+        $html[] = '                </div>';
+        $html[] = '            </div>';
+        $html[] = '            <div class="col-xs-12 col-lg-3">';
+        $html[] = '                <div class="form-group">';
+        $html[] = '                    <label class="hidden-md-down">&nbsp;&nbsp;</label>';
+        $html[] = '                    <button class="btn btn-primary form-control" ng-click="trainingSelector.resetFilters()">Wis zoekcriteria</button>';
+        $html[] = '                </div>';
         $html[] = '            </div>';
         $html[] = '        </div>';
         $html[] = '    </div>';
@@ -142,13 +157,19 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         // Opleidingslijst
 
         $html[] = '<div class="row" training-cards-panel>';
-        $html[] = '<div class="col-xs-12">
-        {{ trainingSelector.test }}';
+        $html[] = '<div class="col-xs-12">';
 
         $html[] = '<div class="card card-block" ng-repeat="type in trainingCards.trainingsByType">';
         $html[] = '    <h5 class="card-title">{{ type.type }}</h5>';
         $html[] = '    <p class="card-text">';
         $html[] = '        <span ng-repeat="training in type.training"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" ng-click="mainController.selectTraining(training)">{{ training.name }}</a><br /></span>';
+        $html[] = '    </p>';
+        $html[] = '</div>';
+
+        $html[] = '<div class="card card-block" ng-show="trainingCards.trainingsByType.length == 0">';
+        $html[] = '    <h5 class="card-title">Geen resultaten</h5>';
+        $html[] = '    <p class="card-text">';
+        $html[] = '        <span>Er werden helaas geen opleidingen gevonden die aan je zoekcritera voldoen.</span>';
         $html[] = '    </p>';
         $html[] = '</div>';
 

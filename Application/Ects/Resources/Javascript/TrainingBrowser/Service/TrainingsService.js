@@ -9,7 +9,7 @@
                 this.academicYear = null;
                 this.faculty = null;
                 this.trainingType = null;
-                this.textFilter = null;
+                this.filterText = null;
                 
                 this.academicYears = [];
                 this.faculties = [];
@@ -55,6 +55,7 @@
                         'year' : this.academicYear == null ? null : this.academicYear,
                         'faculty' : this.faculty == null ? null : this.faculty.faculty_id,
                         'type' : this.trainingType == null ? null : this.trainingType.type_id,
+                        'text' : this.filterText
                     }, angular.bind(this, function(result, status, headers, config)
                     {
                         this.trainingsByType = result.properties.type;
@@ -86,17 +87,38 @@
                     this.retrieveTrainings();
                 };
                 
-                this.changeFaculty = function(faculty)
+                this.setFaculty = function(faculty)
                 {
                     this.faculty = faculty;
                     this.trainingType = null;
+                };
+                
+                this.changeFaculty = function(faculty)
+                {
+                    this.setFaculty(faculty);
                     this.retrieveTrainingTypes();
                     this.retrieveTrainings();
                 };
                 
-                this.changeTrainingType = function(trainingType)
+                this.setTrainingType = function(trainingType)
                 {
                     this.trainingType = trainingType;
+                };
+                
+                this.changeTrainingType = function(trainingType)
+                {
+                    this.setTrainingType(trainingType);
+                    this.retrieveTrainings();
+                };
+                
+                this.setFilterText = function(filterText)
+                {
+                    this.filterText = filterText;
+                };
+                
+                this.changeFilterText = function(filterText)
+                {
+                    this.setFilterText(filterText);
                     this.retrieveTrainings();
                 };
                 
