@@ -2,17 +2,17 @@
 {
     var trainingBrowserApp = angular.module('trainingBrowserApp');
     
-    trainingBrowserApp.controller('TrainingCardsController', [ 'trainingsService', '$scope',
+    trainingBrowserApp.controller('TrainingDetailsController', [ 'trainingsService', '$scope',
             function(trainingsService, $scope)
             {
-                this.trainingsByType = trainingsService.trainingsByType;
+                this.selectedTraining = trainingsService.selectedTraining;
                 
                 $scope.$watchCollection(function()
                 {
-                    return trainingsService.trainingsByType;
+                    return trainingsService.selectedTraining;
                 }, angular.bind(this, function(newValue)
                 {
-                    this.trainingsByType = newValue;
+                    this.selectedTraining = newValue;
                 }));
                 
             } ]);

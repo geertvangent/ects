@@ -23,7 +23,7 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
     const PROPERTY_TRAJECTORY = 'trajectory';
     const PROPERTY_SUB_TRAJECTORY = 'sub_trajectory';
     const PROPERTY_TRAINING = 'training';
-    const PROPERTY_COURSE = 'course';
+    const PROPERTY_COURSE = 'courses';
 
     /**
      *

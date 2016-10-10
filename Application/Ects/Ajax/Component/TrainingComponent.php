@@ -18,8 +18,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
     const PARAM_TRAINING = 'training';
 
     // Properties
-    const PROPERTY_TRAINING = 'training';
-    const PROPERTY_TRAJECTORY = 'trajectory';
+    const PROPERTY_TRAJECTORIES = 'trajectories';
 
     /**
      *
@@ -44,11 +43,10 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
     {
         $jsonAjaxResult = new JsonAjaxResult();
 
-        $jsonAjaxResult->set_properties(
-            array(
-                self::PROPERTY_TRAINING => $this->getTrainingProperties(),
-                self::PROPERTY_TRAJECTORY => $this->getTrajectories()));
+        $properties = $this->getTrainingProperties();
+        $properties[self::PROPERTY_TRAJECTORIES] = $this->getTrajectories();
 
+        $jsonAjaxResult->set_properties($properties);
         $jsonAjaxResult->display();
     }
 
@@ -81,6 +79,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
             $this->getTraining()->get_default_properties(),
             array(
                 Training::PROPERTY_ID,
+                Training::PROPERTY_YEAR,
                 Training::PROPERTY_NAME,
                 Training::PROPERTY_FACULTY_ID,
                 Training::PROPERTY_FACULTY,
@@ -102,7 +101,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
             $structuredTrajectory[Trajectory::PROPERTY_ID] = $trajectory[Trajectory::PROPERTY_ID];
             $structuredTrajectory[Trajectory::PROPERTY_NAME] = $trajectory[Trajectory::PROPERTY_NAME];
 
-            $structuredTrajectory[Trajectory::PROPERTY_SUB_TRAJECTORIES] = $this->getEctsService()->getSubTrajectoriesForTrajectoryIdentifier(
+            $structuredTrajectory[self::PROPERTY_TRAJECTORIES] = $this->getEctsService()->getSubTrajectoriesForTrajectoryIdentifier(
                 $trajectory[Trajectory::PROPERTY_ID]);
 
             $structuredTrajectories[] = $structuredTrajectory;
