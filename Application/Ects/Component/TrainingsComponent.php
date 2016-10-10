@@ -23,9 +23,11 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '<div ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
 
-        $html[] = $this->getTrainingSelectorPanel();
-        $html[] = $this->getTrainingDetailsPanel();
-        $html[] = $this->getTrajectoryDetailsPanel();
+        $html[] = '<div ng-view></div>';
+
+//         $html[] = $this->getTrainingSelectorPanel();
+//         $html[] = $this->getTrainingDetailsPanel();
+//         $html[] = $this->getTrajectoryDetailsPanel();
 
         $html[] = '</div>';
 
@@ -162,7 +164,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '<div class="card card-block" ng-repeat="type in trainingCards.trainingsByType">';
         $html[] = '    <h5 class="card-title">{{ type.type }}</h5>';
         $html[] = '    <p class="card-text">';
-        $html[] = '        <span ng-repeat="training in type.training"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" ng-click="mainController.selectTraining(training)">{{ training.name }}</a><br /></span>';
+        $html[] = '        <span ng-repeat="training in type.training"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a ng-href="#training" class="text-primary" ng-click="mainController.selectTraining(training)">{{ training.name }}</a><br /></span>';
         $html[] = '    </p>';
         $html[] = '</div>';
 

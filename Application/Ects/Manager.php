@@ -41,6 +41,7 @@ class Manager extends Application
         $html[] = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>';
         $html[] = '<script src="' . $pluginPath . 'AngularJS/angular.min.js"></script>';
         $html[] = '<script src="' . $pluginPath . 'AngularJS/angular-sanitize.min.js"></script>';
+        $html[] = '<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>';
         $html[] = '</head>';
 
         $html[] = '<body dir="ltr">';
