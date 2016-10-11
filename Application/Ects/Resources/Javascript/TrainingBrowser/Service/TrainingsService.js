@@ -18,6 +18,9 @@
                 
                 this.training = null;
                 
+                this.isLoadingTrainingList = false;
+                this.isLoadingTraining = false;
+                
                 this.retrieveAcademicYears = function()
                 {
                     chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterYears', {}, angular.bind(
@@ -51,6 +54,8 @@
                 
                 this.retrieveTrainings = function()
                 {
+                    this.isLoadingTrainingList = true;
+                    
                     chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterTrainings', {
                         'year' : this.filterAcademicYear == null ? null : this.filterAcademicYear,
                         'faculty' : this.filterFaculty == null ? null : this.filterFaculty.faculty_id,
@@ -59,6 +64,7 @@
                     }, angular.bind(this, function(result, status, headers, config)
                     {
                         this.trainingsByType = result.properties.type;
+                        this.isLoadingTrainingList = false;
                     }));
                 };
                 
@@ -74,11 +80,14 @@
                 
                 this.retrieveTrainingById = function(trainingId)
                 {
+                    this.isLoadingTraining = true;
+                    
                     chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'Training', {
                         'training' : trainingId
                     }, angular.bind(this, function(result, status, headers, config)
                     {
                         this.changeTraining(result.properties);
+                        this.isLoadingTraining = false;
                     }));
                 };
                 
