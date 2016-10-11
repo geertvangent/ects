@@ -126,7 +126,5 @@
                     this.setFilterText(filterText);
                     this.retrieveTrainings();
                 };
-                
-                this.retrieveAcademicYears();
             } ]);
 })();

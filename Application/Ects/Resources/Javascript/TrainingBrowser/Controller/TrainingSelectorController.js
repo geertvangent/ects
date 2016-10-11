@@ -96,5 +96,6 @@
                     trainingsService.retrieveTrainings();
                 };
                 
+                trainingsService.retrieveAcademicYears();
             } ]);
 })();

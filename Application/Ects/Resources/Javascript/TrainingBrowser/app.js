@@ -5,14 +5,11 @@
     trainingBrowserApp.config(function($routeProvider)
     {
         $routeProvider.when('/', {
-            templateUrl : 'trainingSelectorPanel.html',
-            controller : 'TrainingSelectorController'
+            templateUrl : 'trainingSelectorPanel.html'
         }).when('/training/:trainingId', {
-            templateUrl : 'trainingDetailsPanel.html',
-            controller : 'TrainingDetailsController'
+            templateUrl : 'trainingDetailsPanel.html'
         }).when('/trajectory/:subTrajectoryId', {
-            templateUrl : 'subTrajectoryDetailsPanel.html',
-            controller : 'SubTrajectoryDetailsController'
+            templateUrl : 'subTrajectoryDetailsPanel.html'
         });
     });
     
