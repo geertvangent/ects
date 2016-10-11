@@ -55,7 +55,14 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html = array();
 
         $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'Angular/angular.min.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'Angular/angular-route.min.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'Angular/angular-sanitize.min.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'Utilities/chamiloUtilities.js');
+
         $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'TrainingBrowser/app.js');
         $html[] = ResourceManager::get_instance()->get_resource_html(
@@ -296,11 +303,6 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '</div>';
         $html[] = '</script>';
 
-        $html[] = '<script>$(\'#myTab a\').click(function (e) {';
-        $html[] = '     e.preventDefault()';
-        $html[] = '     $(this).tab(\'show\')';
-        $html[] = '})</script>';
-
         return implode(PHP_EOL, $html);
     }
 
@@ -341,7 +343,8 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '            <tbody>';
         $html[] = '                <tr ng-repeat="course in subTrajectoryDetails.subTrajectory.courses">';
         $html[] = '                    <td class="ects-course-name" ng-if="course.approved == 1">';
-        $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;';
+        $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">';
+        $html[] = '                            &nbsp;&nbsp;&#8226;&nbsp;';
         $html[] = '                            <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">';
         $html[] = '                            {{ course.name }}';
         $html[] = '                            </a>';
