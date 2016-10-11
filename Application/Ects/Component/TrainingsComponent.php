@@ -31,6 +31,10 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '{';
         $html[] = '    cursor: pointer;';
         $html[] = '}';
+        $html[] = '.ects-link-disabled';
+        $html[] = '{';
+        $html[] = '    cursor: not-allowed;';
+        $html[] = '}';
         $html[] = '</style>';
 
         $html[] = '<div ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
@@ -97,6 +101,10 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '<script type="text/ng-template" id="trainingSelectorPanel.html">';
         $html[] = '<div training-selector-panel>';
+
+        $html[] = '<nav class="breadcrumb">';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
+        $html[] = '</nav>';
 
         $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
@@ -229,6 +237,11 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '<div ng-hide="trainingDetails.isLoadingTraining">';
 
+        $html[] = '<nav class="breadcrumb">';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + trainingDetails.training.id)">{{ trainingDetails.training.name }}</a>';
+        $html[] = '</nav>';
+
         $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
 
@@ -309,6 +322,12 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '<div ng-hide="subTrajectoryDetails.isLoadingSubTrajectory">';
 
+        $html[] = '<nav class="breadcrumb">';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.training.id)">{{ subTrajectoryDetails.subTrajectory.training.name }}</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.sub_trajectory.id)">{{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }}</a>';
+        $html[] = '</nav>';
+
         $html[] = '<div class="row">';
         $html[] = '    <div class="col-sm-12">';
         $html[] = '        <h3 class="text-primary m-b-2">Programma {{ subTrajectoryDetails.subTrajectory.training.name }}<br /><small class="text-muted">({{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }})</small></h3>';
@@ -321,17 +340,25 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '            </thead>';
         $html[] = '            <tbody>';
         $html[] = '                <tr ng-repeat="course in subTrajectoryDetails.subTrajectory.courses">';
-        $html[] = '                    <td class="ects-course-name">';
-        $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;
-                                               <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
-                                               {{ course.name }}
-                                               </a>
-                                           </small>';
-        $html[] = '                        <span ng-if="course.parent_programme_id == null">
-                                               <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
-                                               {{ course.name }}
-                                               </a>
-                                           </span>';
+        $html[] = '                    <td class="ects-course-name" ng-if="course.approved == 1">';
+        $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;';
+        $html[] = '                            <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">';
+        $html[] = '                            {{ course.name }}';
+        $html[] = '                            </a>';
+        $html[] = '                        </small>';
+        $html[] = '                        <span ng-if="course.parent_programme_id == null">';
+        $html[] = '                            <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">';
+        $html[] = '                            {{ course.name }}';
+        $html[] = '                            </a>';
+        $html[] = '                        </span>';
+        $html[] = '                    </td>';
+        $html[] = '                    <td class="ects-course-name" ng-if="course.approved == 0">';
+        $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;';
+        $html[] = '                            <span class="ects-link-disabled">{{ course.name }}</span>';
+        $html[] = '                        </small>';
+        $html[] = '                        <span ng-if="course.parent_programme_id == null" class="ects-link-disabled">';
+        $html[] = '                            {{ course.name }}';
+        $html[] = '                        </span>';
         $html[] = '                    </td>';
         $html[] = '                    <td class="ects-course-credits">';
         $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">{{ course.credits }}</small>';

@@ -18,6 +18,7 @@ class SubTrajectoryCourse extends DataClass
     const PROPERTY_SUB_TRAJECTORY_ID = 'sub_trajectory_id';
     const PROPERTY_PROGRAMME_ID = 'programme_id';
     const PROPERTY_PARENT_PROGRAMME_ID = 'parent_programme_id';
+    const PROPERTY_APPROVED = 'approved';
     const PROPERTY_COURSE_PARTS = 'course_parts';
 
     /**
@@ -35,7 +36,8 @@ class SubTrajectoryCourse extends DataClass
                 self::PROPERTY_CREDITS,
                 self::PROPERTY_SUB_TRAJECTORY_ID,
                 self::PROPERTY_PROGRAMME_ID,
-                self::PROPERTY_PARENT_PROGRAMME_ID));
+                self::PROPERTY_PARENT_PROGRAMME_ID,
+                self::PROPERTY_APPROVED));
     }
 
     /**
