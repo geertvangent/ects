@@ -35,6 +35,11 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '{';
         $html[] = '    cursor: not-allowed;';
         $html[] = '}';
+        $html[] = '.ects-course-details';
+        $html[] = '{';
+        $html[] = '    width: 100%;';
+        $html[] = '    min-height: 800px;';
+        $html[] = '}';
         $html[] = '</style>';
 
         $html[] = '<div ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
@@ -44,6 +49,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = $this->getTrainingSelectorPanel();
         $html[] = $this->getTrainingDetailsPanel();
         $html[] = $this->getTrajectoryDetailsPanel();
+        $html[] = $this->getCourseDetailsPanel();
 
         $html[] = '</div>';
 
@@ -82,6 +88,9 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
                  'TrainingBrowser/Controller/SubTrajectoryDetailsController.js');
         $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) .
+                 'TrainingBrowser/Controller/CourseDetailsController.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) .
                  'TrainingBrowser/Directive/trainingCardsPanel.js');
         $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) .
@@ -92,6 +101,9 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) .
                  'TrainingBrowser/Directive/subTrajectoryDetailsPanel.js');
+        $html[] = ResourceManager::get_instance()->get_resource_html(
+            Path::getInstance()->getJavascriptPath(Manager::context(), true) .
+                 'TrainingBrowser/Directive/courseDetailsPanel.js');
         $html[] = ResourceManager::get_instance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) .
                  'TrainingBrowser/Service/TrainingsService.js');
@@ -345,12 +357,12 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                    <td class="ects-course-name" ng-if="course.approved == 1">';
         $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">';
         $html[] = '                            &nbsp;&nbsp;&#8226;&nbsp;';
-        $html[] = '                            <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">';
+        $html[] = '                            <a class="ects-link text-primary" ng-click="mainController.goToPath(\'course/\' + course.programme_id)">';
         $html[] = '                            {{ course.name }}';
         $html[] = '                            </a>';
         $html[] = '                        </small>';
         $html[] = '                        <span ng-if="course.parent_programme_id == null">';
-        $html[] = '                            <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">';
+        $html[] = '                            <a class="ects-link text-primary" ng-click="mainController.goToPath(\'course/\' + course.programme_id)">';
         $html[] = '                            {{ course.name }}';
         $html[] = '                            </a>';
         $html[] = '                        </span>';
@@ -376,6 +388,35 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '    </div>';
         $html[] = '</div>';
 
+        $html[] = '</div>';
+
+        $html[] = '</div>';
+        $html[] = '</script>';
+
+        return implode(PHP_EOL, $html);
+    }
+
+    private function getCourseDetailsPanel()
+    {
+        $html = array();
+
+        $html[] = '<script type="text/ng-template" id="courseDetailsPanel.html">';
+        $html[] = '<div course-details-panel>';
+
+        $html[] = '<nav class="breadcrumb">';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.training.id)">Opleiding{{ subTrajectoryDetails.subTrajectory.training.name }}</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.sub_trajectory.id)">Traject{{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }}</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.sub_trajectory.id)">Opleidingsonderdeel{{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }}</a>';
+        $html[] = '</nav>';
+
+        $html[] = '<div class="row">';
+        $html[] = '    <div class="col-sm-12">';
+        // $html[] = ' <h3 class="text-primary m-b-2">Programma {{ subTrajectoryDetails.subTrajectory.training.name
+        // }}<br /><small class="text-muted">({{ subTrajectoryDetails.subTrajectory.sub_trajectory.name
+        // }})</small></h3>';
+        $html[] = '        <iframe class="card card-block ects-course-details" ng-src="{{ courseDetails.getCourseUrl() }}"></iframe>';
+        $html[] = '    </div>';
         $html[] = '</div>';
 
         $html[] = '</div>';

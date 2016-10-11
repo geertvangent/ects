@@ -10,6 +10,8 @@
             templateUrl : 'trainingDetailsPanel.html'
         }).when('/trajectory/:subTrajectoryId', {
             templateUrl : 'subTrajectoryDetailsPanel.html'
+        }).when('/course/:courseId', {
+            templateUrl : 'courseDetailsPanel.html'
         });
     });
     
