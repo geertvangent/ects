@@ -4,23 +4,14 @@
     
     trainingBrowserApp.config(function($routeProvider)
     {
-        $routeProvider
-
-        // route for the home page
-        .when('/', {
-            template : '<div class="alert alert-success" role="alert">Training Selector</div>',
+        $routeProvider.when('/', {
+            templateUrl : 'trainingSelectorPanel.html',
             controller : 'TrainingSelectorController'
-        })
-
-        // route for the about page
-        .when('/training', {
-            template : '<div class="alert alert-danger" role="alert">Training details</div>',
+        }).when('/training/:trainingId', {
+            templateUrl : 'trainingDetailsPanel.html',
             controller : 'TrainingDetailsController'
-        })
-
-        // route for the contact page
-        .when('/trajectory', {
-            template : '<div class="alert alert-warning" role="alert">Sub Trajectory</div>',
+        }).when('/trajectory/:subTrajectoryId', {
+            templateUrl : 'subTrajectoryDetailsPanel.html',
             controller : 'SubTrajectoryDetailsController'
         });
     });

@@ -69,8 +69,13 @@
                 
                 this.retrieveTraining = function(training)
                 {
+                    this.retrieveTrainingById(training.id);
+                };
+                
+                this.retrieveTrainingById = function(trainingId)
+                {
                     chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'Training', {
-                        'training' : training.id
+                        'training' : trainingId
                     }, angular.bind(this, function(result, status, headers, config)
                     {
                         this.changeSelectedTraining(result.properties);

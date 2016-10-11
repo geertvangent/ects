@@ -95,5 +95,6 @@
                     trainingsService.setFilterText('');
                     trainingsService.retrieveTrainings();
                 };
+                
             } ]);
 })();

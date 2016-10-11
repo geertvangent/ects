@@ -21,13 +21,24 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = $this->getJavascript();
 
+        $html[] = '<style>';
+        $html[] = '.ects-course-credits';
+        $html[] = '{';
+        $html[] = '    text-align: center;';
+        $html[] = '    width: 100px;';
+        $html[] = '}
+
+                   .
+            ';
+        $html[] = '</style>';
+
         $html[] = '<div ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
 
         $html[] = '<div ng-view></div>';
 
-//         $html[] = $this->getTrainingSelectorPanel();
-//         $html[] = $this->getTrainingDetailsPanel();
-//         $html[] = $this->getTrajectoryDetailsPanel();
+        $html[] = $this->getTrainingSelectorPanel();
+        $html[] = $this->getTrainingDetailsPanel();
+        $html[] = $this->getTrajectoryDetailsPanel();
 
         $html[] = '</div>';
 
@@ -83,7 +94,8 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
     {
         $html = array();
 
-        $html[] = '<div training-selector-panel ng-show="mainController.selectedTraining == null && mainController.selectedSubTrajectory == null">';
+        $html[] = '<script type="text/ng-template" id="trainingSelectorPanel.html">';
+        $html[] = '<div training-selector-panel>';
 
         $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
@@ -164,7 +176,12 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '<div class="card card-block" ng-repeat="type in trainingCards.trainingsByType">';
         $html[] = '    <h5 class="card-title">{{ type.type }}</h5>';
         $html[] = '    <p class="card-text">';
-        $html[] = '        <span ng-repeat="training in type.training"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a ng-href="#training" class="text-primary" ng-click="mainController.selectTraining(training)">{{ training.name }}</a><br /></span>';
+        $html[] = '        <span ng-repeat="training in type.training">';
+        $html[] = '            <i class="fa fa-angle-double-right" aria-hidden="true"></i>';
+        $html[] = '            &nbsp;&nbsp;';
+        $html[] = '            <a class="text-primary" ng-click="mainController.goToPath(\'training/\' + training.id)">{{ training.name }}</a>';
+        $html[] = '            <br />';
+        $html[] = '        </span>';
         $html[] = '    </p>';
         $html[] = '</div>';
 
@@ -179,6 +196,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '</div>';
 
         $html[] = '</div>';
+        $html[] = '</script>';
 
         return implode(PHP_EOL, $html);
     }
@@ -187,7 +205,8 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
     {
         $html = array();
 
-        $html[] = '<div training-details-panel ng-show="mainController.selectedTraining && !mainController.selectedSubTrajectory">';
+        $html[] = '<script type="text/ng-template" id="trainingDetailsPanel.html">';
+        $html[] = '<div training-details-panel>';
 
         $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
@@ -242,24 +261,27 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '    <h5 class="card-title">{{ trajectory.name }}</h5>';
         $html[] = '    <p class="card-text">';
         $html[] = '        <span ng-repeat="subTrajectory in trajectory.trajectories">';
-        $html[] = '            <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" ng-click="mainController.selectSubTrajectory(subTrajectory)">{{ subTrajectory.name }}</a><br />';
+        $html[] = '            <i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" ng-click="mainController.goToPath(\'trajectory/\' + subTrajectory.id)">{{ subTrajectory.name }}</a><br />';
         $html[] = '        </span>';
         $html[] = '    </p>';
         $html[] = '</div>';
 
         $html[] = '</div>';
 
-        $html[] = '        <button type="button" class="btn btn-primary" ng-click="mainController.resetSelectedTraining()">Ga terug</button>';
+        $html[] = '        <button type="button" class="btn btn-primary" ng-click="mainController.goToPath(\'\')">';
+        $html[] = '             <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Terug';
+        $html[] = '        </button>';
 
         $html[] = '</div>';
         $html[] = '</div>';
+
+        $html[] = '</div>';
+        $html[] = '</script>';
 
         $html[] = '<script>$(\'#myTab a\').click(function (e) {';
         $html[] = '     e.preventDefault()';
         $html[] = '     $(this).tab(\'show\')';
         $html[] = '})</script>';
-
-        $html[] = '</div>';
 
         return implode(PHP_EOL, $html);
     }
@@ -268,15 +290,8 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
     {
         $html = array();
 
-        $html[] = '<div sub-trajectory-details-panel ng-show="mainController.selectedSubTrajectory">';
-
-        $html[] = '<style>';
-        $html[] = '.ects-course-credits';
-        $html[] = '{';
-        $html[] = '    text-align: center;';
-        $html[] = '    width: 100px;';
-        $html[] = '}';
-        $html[] = '</style>';
+        $html[] = '<script type="text/ng-template" id="subTrajectoryDetailsPanel.html">';
+        $html[] = '<div sub-trajectory-details-panel>';
 
         $html[] = '<div class="row" sub-trajectory-details-panel>';
         $html[] = '    <div class="col-sm-12">';
@@ -292,12 +307,12 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                <tr ng-repeat="course in subTrajectoryDetails.selectedSubTrajectory.courses">';
         $html[] = '                    <td class="ects-course-name">';
         $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;
-                                               <a ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
+                                               <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
                                                {{ course.name }}
                                                </a>
                                            </small>';
         $html[] = '                        <span ng-if="course.parent_programme_id == null">
-                                               <a ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
+                                               <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
                                                {{ course.name }}
                                                </a>
                                            </span>';
@@ -309,9 +324,12 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                </tr>';
         $html[] = '            </tbody>';
         $html[] = '        </table>';
-        $html[] = '        <button type="button" class="btn btn-primary" ng-click="mainController.resetSelectedSubTrajectory()">Ga terug</button>';
+        $html[] = '        <button type="button" class="btn btn-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.selectedSubTrajectory.training.id)">';
+        $html[] = '             <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Terug';
+        $html[] = '        </button>';
         $html[] = '    </div>';
         $html[] = '</div>';
+        $html[] = '</script>';
 
         $html[] = '</div>';
 

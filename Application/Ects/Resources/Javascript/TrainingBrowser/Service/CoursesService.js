@@ -13,8 +13,13 @@
         
         this.retrieveSubTrajectory = function(subTrajectory)
         {
+            this.retrieveSubTrajectoryById(subTrajectory.id);
+        };
+        
+        this.retrieveSubTrajectoryById = function(subTrajectoryId)
+        {
             chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'Trajectory', {
-                'sub_trajectory' : subTrajectory.id
+                'sub_trajectory' : subTrajectoryId
             }, angular.bind(this, function(result, status, headers, config)
             {
                 this.changeSelectedSubTrajectory(result.properties);
