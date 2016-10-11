@@ -10,14 +10,14 @@
                     trainingsService.retrieveTrainingById($routeParams.trainingId);
                 }
                 
-                this.selectedTraining = trainingsService.selectedTraining;
+                this.training = trainingsService.training;
                 
                 $scope.$watchCollection(function()
                 {
-                    return trainingsService.selectedTraining;
+                    return trainingsService.training;
                 }, angular.bind(this, function(newValue)
                 {
-                    this.selectedTraining = newValue;
+                    this.training = newValue;
                 }));
                 
             } ]);

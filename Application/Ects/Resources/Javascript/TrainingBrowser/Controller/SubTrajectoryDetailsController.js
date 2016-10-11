@@ -10,14 +10,14 @@
                     coursesService.retrieveSubTrajectoryById($routeParams.subTrajectoryId);
                 }
                 
-                this.selectedSubTrajectory = coursesService.selectedSubTrajectory;
+                this.subTrajectory = coursesService.subTrajectory;
                 
                 $scope.$watchCollection(function()
                 {
-                    return coursesService.selectedSubTrajectory;
+                    return coursesService.subTrajectory;
                 }, angular.bind(this, function(newValue)
                 {
-                    this.selectedSubTrajectory = newValue;
+                    this.subTrajectory = newValue;
                 }));
                 
             } ]);

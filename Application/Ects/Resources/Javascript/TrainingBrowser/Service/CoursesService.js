@@ -4,11 +4,11 @@
     
     trainingBrowserApp.service('coursesService', [ 'chamiloUtilities', function(chamiloUtilities)
     {
-        this.selectedSubTrajectory = null;
+        this.subTrajectory = null;
         
-        this.changeSelectedSubTrajectory = function(subTrajectory)
+        this.changeSubTrajectory = function(subTrajectory)
         {
-            this.selectedSubTrajectory = subTrajectory;
+            this.subTrajectory = subTrajectory;
         };
         
         this.retrieveSubTrajectory = function(subTrajectory)
@@ -22,7 +22,7 @@
                 'sub_trajectory' : subTrajectoryId
             }, angular.bind(this, function(result, status, headers, config)
             {
-                this.changeSelectedSubTrajectory(result.properties);
+                this.changeSubTrajectory(result.properties);
             }));
         };
     } ]);

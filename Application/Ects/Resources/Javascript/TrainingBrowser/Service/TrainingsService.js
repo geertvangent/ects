@@ -6,9 +6,9 @@
             'chamiloUtilities',
             function(chamiloUtilities)
             {
-                this.academicYear = null;
-                this.faculty = null;
-                this.trainingType = null;
+                this.filterAcademicYear = null;
+                this.filterFaculty = null;
+                this.filterTrainingType = null;
                 this.filterText = null;
                 
                 this.academicYears = [];
@@ -16,7 +16,7 @@
                 this.trainingTypes = [];
                 this.trainingsByType = [];
                 
-                this.selectedTraining = null;
+                this.training = null;
                 
                 this.retrieveAcademicYears = function()
                 {
@@ -31,7 +31,7 @@
                 this.retrieveFaculties = function()
                 {
                     chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterFaculties', {
-                        'year' : this.academicYear == null ? null : this.academicYear
+                        'year' : this.filterAcademicYear == null ? null : this.filterAcademicYear
                     }, angular.bind(this, function(result, status, headers, config)
                     {
                         this.faculties = result.properties.faculty;
@@ -41,8 +41,8 @@
                 this.retrieveTrainingTypes = function()
                 {
                     chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterTrainingTypes', {
-                        'year' : this.academicYear == null ? null : this.academicYear,
-                        'faculty' : this.faculty == null ? null : this.faculty.faculty_id
+                        'year' : this.filterAcademicYear == null ? null : this.filterAcademicYear,
+                        'faculty' : this.filterFaculty == null ? null : this.filterFaculty.faculty_id
                     }, angular.bind(this, function(result, status, headers, config)
                     {
                         this.trainingTypes = result.properties.type;
@@ -52,9 +52,9 @@
                 this.retrieveTrainings = function()
                 {
                     chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'FilterTrainings', {
-                        'year' : this.academicYear == null ? null : this.academicYear,
-                        'faculty' : this.faculty == null ? null : this.faculty.faculty_id,
-                        'type' : this.trainingType == null ? null : this.trainingType.type_id,
+                        'year' : this.filterAcademicYear == null ? null : this.filterAcademicYear,
+                        'faculty' : this.filterFaculty == null ? null : this.filterFaculty.faculty_id,
+                        'type' : this.filterTrainingType == null ? null : this.filterTrainingType.type_id,
                         'text' : this.filterText
                     }, angular.bind(this, function(result, status, headers, config)
                     {
@@ -62,9 +62,9 @@
                     }));
                 };
                 
-                this.changeSelectedTraining = function(training)
+                this.changeTraining = function(training)
                 {
-                    this.selectedTraining = training;
+                    this.training = training;
                 };
                 
                 this.retrieveTraining = function(training)
@@ -78,15 +78,15 @@
                         'training' : trainingId
                     }, angular.bind(this, function(result, status, headers, config)
                     {
-                        this.changeSelectedTraining(result.properties);
+                        this.changeTraining(result.properties);
                     }));
                 };
                 
                 this.changeAcademicYear = function(academicYear)
                 {
-                    this.academicYear = academicYear;
-                    this.faculty = null;
-                    this.trainingType = null;
+                    this.filterAcademicYear = academicYear;
+                    this.filterFaculty = null;
+                    this.filterTrainingType = null;
                     this.retrieveFaculties();
                     this.retrieveTrainingTypes();
                     this.retrieveTrainings();
@@ -94,8 +94,8 @@
                 
                 this.setFaculty = function(faculty)
                 {
-                    this.faculty = faculty;
-                    this.trainingType = null;
+                    this.filterFaculty = faculty;
+                    this.filterTrainingType = null;
                 };
                 
                 this.changeFaculty = function(faculty)
@@ -107,7 +107,7 @@
                 
                 this.setTrainingType = function(trainingType)
                 {
-                    this.trainingType = trainingType;
+                    this.filterTrainingType = trainingType;
                 };
                 
                 this.changeTrainingType = function(trainingType)

@@ -110,9 +110,9 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                    <label for="academicYear">Academiejaar</label>';
 
         $html[] = '                    <select  class="form-select form-control" id="academicYear"';
-        $html[] = '                             ng-model="trainingSelector.academicYear"';
+        $html[] = '                             ng-model="trainingSelector.filterAcademicYear"';
         $html[] = '                             ng-options="item for item in trainingSelector.academicYears"';
-        $html[] = '                             ng-change="trainingSelector.selectAcademicYear(trainingSelector.academicYear)">';
+        $html[] = '                             ng-change="trainingSelector.selectAcademicYear()">';
         $html[] = '                    </select>';
 
         $html[] = '                </div>';
@@ -122,7 +122,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                    <label for="faculty">Departement</label>';
 
         $html[] = '                    <select  class="form-select form-control" id="faculty"';
-        $html[] = '                             ng-model="trainingSelector.faculty"';
+        $html[] = '                             ng-model="trainingSelector.filterFaculty"';
         $html[] = '                             ng-options="faculty.faculty for faculty in trainingSelector.faculties"';
         $html[] = '                             ng-change="trainingSelector.selectFaculty()">';
         $html[] = '                         <option value="">-- Alle departementen --</option>';
@@ -135,7 +135,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                    <label for="trainingType">Opleidingstype</label>';
 
         $html[] = '                    <select  class="form-select form-control" id="trainingType"';
-        $html[] = '                             ng-model="trainingSelector.trainingType"';
+        $html[] = '                             ng-model="trainingSelector.filterTrainingType"';
         $html[] = '                             ng-options="trainingType.type for trainingType in trainingSelector.trainingTypes"';
         $html[] = '                             ng-change="trainingSelector.selectTrainingType()">';
         $html[] = '                         <option value="">-- Alle opleidingstypes --</option>';
@@ -211,7 +211,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
 
-        $html[] = '<h3 class="text-primary m-b-2">{{ trainingDetails.selectedTraining.name }}</h3>';
+        $html[] = '<h3 class="text-primary m-b-2">{{ trainingDetails.training.name }}</h3>';
 
         $html[] = '<div class="card m-b-2">';
 
@@ -229,12 +229,12 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '    <div class="card-block">';
         $html[] = '        <div class="tab-content">';
         $html[] = '            <div class="tab-pane active" id="general" role="tabpanel">';
-        $html[] = '                <span class="text-muted">Academiejaar:</span> {{ trainingDetails.selectedTraining.year }}<br />';
-        $html[] = '                <span class="text-muted">Departement:</span> {{ trainingDetails.selectedTraining.faculty }}<br />';
-        $html[] = '                <span class="text-muted">Domein:</span> {{ trainingDetails.selectedTraining.domain }}<br />';
-        $html[] = '                <span class="text-muted">Studieomvang in studiepunten:</span> {{ trainingDetails.selectedTraining.credits }}<br />';
+        $html[] = '                <span class="text-muted">Academiejaar:</span> {{ trainingDetails.training.year }}<br />';
+        $html[] = '                <span class="text-muted">Departement:</span> {{ trainingDetails.training.faculty }}<br />';
+        $html[] = '                <span class="text-muted">Domein:</span> {{ trainingDetails.training.domain }}<br />';
+        $html[] = '                <span class="text-muted">Studieomvang in studiepunten:</span> {{ trainingDetails.training.credits }}<br />';
         $html[] = '            </div>';
-        $html[] = '            <div class="tab-pane" id="goals" role="tabpanel">{{ trainingDetails.selectedTraining.goals }}</div>';
+        $html[] = '            <div class="tab-pane" id="goals" role="tabpanel">{{ trainingDetails.training.goals }}</div>';
         $html[] = '        </div>';
         $html[] = '    </div>';
 
@@ -257,7 +257,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '    </ul>';
         $html[] = '</div>';
 
-        $html[] = '<div class="card-block" ng-repeat="trajectory in trainingDetails.selectedTraining.trajectories">';
+        $html[] = '<div class="card-block" ng-repeat="trajectory in trainingDetails.training.trajectories">';
         $html[] = '    <h5 class="card-title">{{ trajectory.name }}</h5>';
         $html[] = '    <p class="card-text">';
         $html[] = '        <span ng-repeat="subTrajectory in trajectory.trajectories">';
@@ -295,7 +295,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '<div class="row" sub-trajectory-details-panel>';
         $html[] = '    <div class="col-sm-12">';
-        $html[] = '        <h3 class="text-primary m-b-2">Programma {{ subTrajectoryDetails.selectedSubTrajectory.training.name }}<br /><small class="text-muted">({{ subTrajectoryDetails.selectedSubTrajectory.sub_trajectory.name }})</small></h3>';
+        $html[] = '        <h3 class="text-primary m-b-2">Programma {{ subTrajectoryDetails.subTrajectory.training.name }}<br /><small class="text-muted">({{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }})</small></h3>';
         $html[] = '        <table class="table table-bordered">';
         $html[] = '            <thead>';
         $html[] = '                <tr>';
@@ -304,7 +304,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                </tr>';
         $html[] = '            </thead>';
         $html[] = '            <tbody>';
-        $html[] = '                <tr ng-repeat="course in subTrajectoryDetails.selectedSubTrajectory.courses">';
+        $html[] = '                <tr ng-repeat="course in subTrajectoryDetails.subTrajectory.courses">';
         $html[] = '                    <td class="ects-course-name">';
         $html[] = '                        <small class="text-muted" ng-if="course.parent_programme_id != null">&nbsp;&nbsp;&#8226;&nbsp;
                                                <a target="_blank" ng-href="https://bamaflexweb.ehb.be/BMFUIDetailxOLOD.aspx?a={{ course.programme_id }}&amp;b=5&amp;c=1">
@@ -324,7 +324,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '                </tr>';
         $html[] = '            </tbody>';
         $html[] = '        </table>';
-        $html[] = '        <button type="button" class="btn btn-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.selectedSubTrajectory.training.id)">';
+        $html[] = '        <button type="button" class="btn btn-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.training.id)">';
         $html[] = '             <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Terug';
         $html[] = '        </button>';
         $html[] = '    </div>';

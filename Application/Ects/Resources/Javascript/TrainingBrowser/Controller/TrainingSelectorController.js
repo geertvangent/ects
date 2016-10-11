@@ -6,27 +6,21 @@
             function(trainingsService, $scope)
             {
                 this.academicYears = trainingsService.academicYears;
-                this.academicYear = trainingsService.academicYear;
                 this.faculties = trainingsService.faculties;
-                this.faculty = trainingsService.faculty;
                 this.trainingTypes = trainingsService.trainingTypes;
-                this.trainingType = trainingsService.trainingType;
+                
+                this.filterAcademicYear = trainingsService.filterAcademicYear;
+                this.filterFaculty = trainingsService.filterFaculty;
+                this.filterTrainingType = trainingsService.filterTrainingType;
                 this.filterText = trainingsService.filterText;
                 
+                // Watch results
                 $scope.$watch(function()
                 {
                     return trainingsService.academicYears;
                 }, angular.bind(this, function(newValue)
                 {
                     this.academicYears = newValue;
-                }));
-                
-                $scope.$watch(function()
-                {
-                    return trainingsService.academicYear;
-                }, angular.bind(this, function(newValue)
-                {
-                    this.academicYear = newValue;
                 }));
                 
                 $scope.$watchCollection(function()
@@ -39,26 +33,35 @@
                 
                 $scope.$watchCollection(function()
                 {
-                    return trainingsService.faculty;
-                }, angular.bind(this, function(newValue)
-                {
-                    this.faculty = newValue;
-                }));
-                
-                $scope.$watchCollection(function()
-                {
                     return trainingsService.trainingTypes;
                 }, angular.bind(this, function(newValue)
                 {
                     this.trainingTypes = newValue;
                 }));
                 
-                $scope.$watchCollection(function()
+                // Watch filters
+                $scope.$watch(function()
                 {
-                    return trainingsService.trainingType;
+                    return trainingsService.filterAcademicYear;
                 }, angular.bind(this, function(newValue)
                 {
-                    this.trainingType = newValue;
+                    this.filterAcademicYear = newValue;
+                }));
+                
+                $scope.$watchCollection(function()
+                {
+                    return trainingsService.filterFaculty;
+                }, angular.bind(this, function(newValue)
+                {
+                    this.filterFaculty = newValue;
+                }));
+                
+                $scope.$watchCollection(function()
+                {
+                    return trainingsService.filterTrainingType;
+                }, angular.bind(this, function(newValue)
+                {
+                    this.filterTrainingType = newValue;
                 }));
                 
                 $scope.$watchCollection(function()
@@ -69,19 +72,20 @@
                     this.filterText = newValue;
                 }));
                 
-                this.selectAcademicYear = function(academicYear)
+                // Filter selections
+                this.selectAcademicYear = function()
                 {
-                    trainingsService.changeAcademicYear(academicYear);
+                    trainingsService.changeAcademicYear(this.filterAcademicYear);
                 };
                 
                 this.selectFaculty = function()
                 {
-                    trainingsService.changeFaculty(this.faculty);
+                    trainingsService.changeFaculty(this.filterFaculty);
                 };
                 
                 this.selectTrainingType = function()
                 {
-                    trainingsService.changeTrainingType(this.trainingType);
+                    trainingsService.changeTrainingType(this.filterTrainingType);
                 };
                 
                 this.setFilterText = function()
