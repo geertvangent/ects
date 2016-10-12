@@ -3,9 +3,9 @@ namespace Ehb\Application\Ects\Component;
 
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
 use Ehb\Application\Ects\Manager;
-use Chamilo\Libraries\Format\Theme;
 
 /**
  *
@@ -23,52 +23,81 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = $this->getJavascript();
 
         $html[] = '<style>';
-        $html[] = '.ects-course-credits';
-        $html[] = '{';
-        $html[] = '    text-align: center;';
-        $html[] = '    width: 100px;';
-        $html[] = '}';
-        $html[] = '.ects-link';
-        $html[] = '{';
-        $html[] = '    cursor: pointer;';
-        $html[] = '}';
-        $html[] = '.ects-link-disabled';
-        $html[] = '{';
-        $html[] = '    cursor: not-allowed;';
-        $html[] = '}';
-        $html[] = '.ects-course-details';
-        $html[] = '{';
-        $html[] = '    width: 100%;';
-        $html[] = '    min-height: 800px;';
-        $html[] = '}';
-        $html[] = '#ctl00_ctl00_cphGeneral_cphMain_divGegevensOpleiding';
-        $html[] = '{';
-        $html[] = '    display: none !important;';
-        $html[] = '}';
-        $html[] = '.ects-course-summary';
-        $html[] = '{';
-        $html[] = ' font-size: 12px !important;';
-        $html[] = '}';
+        $html[] = '.ects-course-credits {
+	text-align: center;
+	width: 100px;
+}
 
-        $html[] = '.DetailxOLODBovenLijn {
-            position: relative !important;
-            display: block !important;
-            margin-bottom: .75rem !important;
-            background-color: #fff !important;
-            border-radius: .25rem !important;
-            border: 1px solid rgba(0,0,0,.125) !important;
-            padding: 1.25rem !important;
-        }';
+.ects-link {
+	cursor: pointer;
+}
 
-        $html[] = '.DetailxOLODTitelTekst {
-            padding: .75rem 1.25rem !important;
-            background-color: #f5f5f5 !important;
-            border-bottom: 1px solid rgba(0,0,0,.125) !important;
-            margin: -1.25rem -1.25rem 0 -1.25rem !important;
-            color: #373a3c !important;
-            font-weight: normal !important;
-            border-radius: .25rem .25rem 0 0 !important;
-        }';
+.ects-link-disabled {
+	cursor: not-allowed;
+}
+
+.ects-course-details {
+	width: 100%;
+	min-height: 800px;
+}
+
+#ctl00_ctl00_cphGeneral_cphMain_divGegevensOpleiding {
+	display: none !important;
+}
+
+.ects-course-summary {
+	font-size: 12px !important;
+}
+
+.DetailxOLODBovenLijn {
+	position: relative !important;
+	display: block !important;
+	margin-bottom: .75rem !important;
+	background-color: #fff !important;
+	border-radius: .25rem !important;
+	border: 1px solid rgba(0, 0, 0, .125) !important;
+	padding: 1.25rem !important;
+}
+
+.DetailxOLODTitelTekst {
+	padding: .75rem 1.25rem !important;
+	background-color: #f5f5f5 !important;
+	border-bottom: 1px solid rgba(0, 0, 0, .125) !important;
+	margin: -1.25rem -1.25rem 0 -1.25rem !important;
+	color: #373a3c !important;
+	font-weight: normal !important;
+	border-radius: .25rem .25rem 0 0 !important;
+}
+
+table.DetailxOLODtable {
+	border-collapse: collapse !important;
+	border-spacing: 0px !important;
+	max-width: 100% !important;
+	margin-bottom: 1rem !important;
+}
+
+.DetailxOLODtable td, .DetailxOLODtable th {
+	padding: .75rem !important;
+	vertical-align: top !important;
+	border-top: 1px solid #eceeef !important
+}
+
+.DetailxOLODtable .DetailxOLODtable {
+	background-color: #fff !important
+}
+
+.DetailxOLODtable {
+	border: 1px solid #eceeef !important
+}
+
+.DetailxOLODtable td, .DetailxOLODtable th {
+	border: 1px solid #eceeef !important
+}
+
+.DetailxOLODtable tbody th {
+	color: #55595c !important;
+	background-color: #eceeef !important
+}';
 
         $html[] = '</style>';
 
