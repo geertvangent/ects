@@ -14,6 +14,7 @@ use Chamilo\Libraries\Storage\Query\Condition\PatternMatchCondition;
 use Chamilo\Libraries\Storage\Query\OrderBy;
 use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Chamilo\Libraries\Storage\Query\Variable\StaticConditionVariable;
+use Ehb\Application\Ects\Storage\DataClass\Course;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectory;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectoryCourse;
 use Ehb\Application\Ects\Storage\DataClass\Training;
@@ -394,5 +395,17 @@ class EctsRepository
                         new PropertyConditionVariable(
                             SubTrajectoryCourse::class_name(),
                             SubTrajectoryCourse::PROPERTY_NAME)))));
+    }
+
+    /**
+     *
+     * @param integer $courseIdentifier
+     * @return \Ehb\Application\Ects\Storage\DataClass\Course
+     */
+    public function findCourseByIdentifier($courseIdentifier)
+    {
+        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::retrieve_by_id(
+            Course::class_name(),
+            $courseIdentifier);
     }
 }

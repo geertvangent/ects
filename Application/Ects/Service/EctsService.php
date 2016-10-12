@@ -143,8 +143,23 @@ class EctsService
         return $this->getEctsRepository()->findtrajectoryByIdentifier($trajectoryIdentifier);
     }
 
+    /**
+     *
+     * @param integer $subTrajectoryIdentifier
+     * @return \Chamilo\Libraries\Storage\DataManager\Doctrine\ResultSet\RecordResultSet
+     */
     public function getSubTrajectoryCoursesForSubTrajectoryIdentifier($subTrajectoryIdentifier)
     {
         return $this->getEctsRepository()->findSubTrajectoryCoursesForSubTrajectoryIdentifier($subTrajectoryIdentifier);
+    }
+
+    /**
+     *
+     * @param integer $courseIdentifier
+     * @return \Ehb\Application\Ects\Storage\DataClass\Course
+     */
+    public function getCourseByIdentifier($courseIdentifier)
+    {
+        return $this->getEctsRepository()->findCourseByIdentifier($courseIdentifier);
     }
 }

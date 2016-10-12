@@ -5,6 +5,7 @@ use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
 use Ehb\Application\Ects\Manager;
+use Chamilo\Libraries\Format\Theme;
 
 /**
  *
@@ -40,7 +41,14 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '    width: 100%;';
         $html[] = '    min-height: 800px;';
         $html[] = '}';
+        $html[] = '#ctl00_ctl00_cphGeneral_cphMain_divGegevensOpleiding';
+        $html[] = '{';
+        $html[] = '    display: none !important;';
+        $html[] = '}';
         $html[] = '</style>';
+
+        $html[] = '<link rel="stylesheet" href="' . Theme::getInstance()->getCssPath(Manager::context(), true) .
+             'BaMaFlexWeb.css">';
 
         $html[] = '<div ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
 
@@ -405,9 +413,8 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '<nav class="breadcrumb">';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
-        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.training.id)">Opleiding{{ subTrajectoryDetails.subTrajectory.training.name }}</a>';
-        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.sub_trajectory.id)">Traject{{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }}</a>';
-        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.sub_trajectory.id)">Opleidingsonderdeel{{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }}</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + courseDetails.course.training.id)">{{ courseDetails.course.training }}</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'course/\' + courseDetails.course.id)">{{ courseDetails.course.name }}</a>';
         $html[] = '</nav>';
 
         $html[] = '<div class="row">';
@@ -415,7 +422,11 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         // $html[] = ' <h3 class="text-primary m-b-2">Programma {{ subTrajectoryDetails.subTrajectory.training.name
         // }}<br /><small class="text-muted">({{ subTrajectoryDetails.subTrajectory.sub_trajectory.name
         // }})</small></h3>';
-        $html[] = '        <iframe class="card card-block ects-course-details" ng-src="{{ courseDetails.getCourseUrl() }}"></iframe>';
+
+        $html[] = '        <div ng-bind-html="courseDetails.getCourseDetails()"></div>';
+
+        // $html[] = ' <iframe class="card card-block ects-course-details" ng-src="{{ courseDetails.getCourseUrl()
+        // }}"></iframe>';
         $html[] = '    </div>';
         $html[] = '</div>';
 
