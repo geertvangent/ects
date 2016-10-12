@@ -441,12 +441,33 @@ class EctsRepository
                     $domXpath = new \DOMXPath($domDocument);
                     $contentNode = $domXpath->query('//div[@id=\'content\']')->item(0);
 
+                    // Replace sources for e.g. images
                     $sourceNodes = $domXpath->query('//*[@src]', $contentNode);
 
                     foreach ($sourceNodes as $sourceNode)
                     {
                         $newSourceValue = 'https://bamaflexweb.ehb.be/' . $sourceNode->getAttribute('src');
                         $sourceNode->setAttribute('src', $newSourceValue);
+                    }
+
+                    // Fix the links to subcourses
+                    $subCourseSpanNodes = $domXpath->query('//span[@class="xOLODDetailLink"]', $contentNode);
+
+                    foreach ($subCourseSpanNodes as $subCourseSpanNode)
+                    {
+                        $onclickValue = $subCourseSpanNode->getAttribute('onclick');
+                        preg_match('/a=([0-9]*)&b=5&c=1/', $onclickValue, $matches);
+
+                        $subCourseLinkNode = $domDocument->createElement('a');
+                        $subCourseLinkNode->setAttribute('class', 'xOLODDetailLink');
+                        $subCourseLinkNode->nodeValue = $subCourseSpanNode->nodeValue;
+
+                        if (isset($matches[1]))
+                        {
+                            $subCourseLinkNode->setAttribute('href', '#/course/' . $matches[1]);
+                        }
+
+                        $subCourseSpanNode->parentNode->replaceChild($subCourseLinkNode, $subCourseSpanNode);
                     }
 
                     $courseDetails = $domDocument->saveHTML($contentNode);
