@@ -428,6 +428,33 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'course/\' + courseDetails.course.id)">{{ courseDetails.course.name }}</a>';
         $html[] = '</nav>';
 
+        $html[] = '<h3 class="text-primary m-b-2">{{ courseDetails.course.name }}</h3>';
+
+        $html[] = '<div class="row">';
+        $html[] = '    <div class="col-sm-12">';
+        $html[] = '        <div class="card">';
+        $html[] = '            <div class="card-block">';
+        $html[] = '                <span class="text-muted">Academiejaar:</span> {{ courseDetails.course.year }}<br />';
+        $html[] = '                <span class="text-muted">Departement:</span> {{ courseDetails.course.faculty }}<br />';
+        $html[] = '                <span class="text-muted">Opleiding:</span> {{ courseDetails.course.training }}<br />';
+        $html[] = '            </div>';
+        $html[] = '        </div>';
+        $html[] = '    </div>';
+        $html[] = '</div>';
+
+        $html[] = '</div>';
+
+        $html[] = '<div class="card card-block" ng-show="courseDetails.isLoadingCourseDetails">';
+        $html[] = '    <p class="card-text text-xs-center text-muted">';
+        $html[] = '        <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
+        $html[] = '        <span class="sr-only">Loading...</span>';
+        $html[] = '        <br />';
+        $html[] = '        <h6 class="text-xs-center text-muted">ECTS fiche wordt geladen</h6>';
+        $html[] = '    </p>';
+        $html[] = '</div>';
+
+        $html[] = '<div ng-hide="courseDetails.isLoadingCourseDetails">';
+
         $html[] = '<div class="row">';
         $html[] = '    <div class="col-sm-12">';
         $html[] = '        <div ng-bind-html="courseDetails.getCourseDetails()"></div>';

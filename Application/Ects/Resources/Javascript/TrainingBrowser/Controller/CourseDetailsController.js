@@ -14,7 +14,9 @@
             {
                 this.courseId = $routeParams.courseId;
                 this.course = coursesService.course;
+                this.courseDetails = coursesService.courseDetails;
                 this.isLoadingCourse = coursesService.isLoadingCourse;
+                this.isLoadingCourseDetails = coursesService.isLoadingCourseDetails;
                 
                 if (this.courseId)
                 {
@@ -29,12 +31,28 @@
                     this.course = newValue;
                 }));
                 
+                $scope.$watchCollection(function()
+                {
+                    return coursesService.courseDetails;
+                }, angular.bind(this, function(newValue)
+                {
+                    this.courseDetails = newValue;
+                }));
+                
                 $scope.$watch(function()
                 {
                     return coursesService.isLoadingCourse;
                 }, angular.bind(this, function(newValue)
                 {
                     this.isLoadingCourse = newValue;
+                }));
+                
+                $scope.$watch(function()
+                {
+                    return coursesService.isLoadingCourseDetails;
+                }, angular.bind(this, function(newValue)
+                {
+                    this.isLoadingCourseDetails = newValue;
                 }));
                 
                 this.getCourseUrl = function()
@@ -45,9 +63,9 @@
                 
                 this.getCourseDetails = function()
                 {
-                    if (this.course)
+                    if (this.courseDetails)
                     {
-                        return $sce.trustAsHtml(this.course.content);
+                        return $sce.trustAsHtml(this.courseDetails.content);
                     }
                     
                     return '';

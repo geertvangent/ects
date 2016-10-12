@@ -9,6 +9,7 @@
         
         this.isLoadingSubTrajectory = false;
         this.isLoadingCourse = false;
+        this.isLoadingCourseDetails = false;
         
         this.changeSubTrajectory = function(subTrajectory)
         {
@@ -43,6 +44,21 @@
             {
                 this.course = result.properties;
                 this.isLoadingCourse = false;
+                
+                this.retrieveCourseDetailsById(courseId);
+            }));
+        }
+
+        this.retrieveCourseDetailsById = function(courseId)
+        {
+            this.isLoadingCourseDetails = true;
+            
+            chamiloUtilities.callChamiloAjax('Ehb\\Application\\Ects\\Ajax', 'CourseDetails', {
+                'course' : courseId
+            }, angular.bind(this, function(result, status, headers, config)
+            {
+                this.courseDetails = result.properties;
+                this.isLoadingCourseDetails = false;
             }));
         }
     } ]);
