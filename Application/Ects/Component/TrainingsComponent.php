@@ -478,7 +478,7 @@ table.DetailxOLODtable {
 
         $html[] = '<nav class="breadcrumb">';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
-        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + courseDetails.course.training.id)">{{ courseDetails.course.training }}</a>';
+        $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + courseDetails.course.training_id)">{{ courseDetails.course.training }}</a>';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'course/\' + courseDetails.course.id)">{{ courseDetails.course.name }}</a>';
         $html[] = '</nav>';
 
