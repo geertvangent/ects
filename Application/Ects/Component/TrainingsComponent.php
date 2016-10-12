@@ -45,6 +45,31 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '{';
         $html[] = '    display: none !important;';
         $html[] = '}';
+        $html[] = '.ects-course-summary';
+        $html[] = '{';
+        $html[] = ' font-size: 12px !important;';
+        $html[] = '}';
+
+        $html[] = '.DetailxOLODBovenLijn {
+            position: relative !important;
+            display: block !important;
+            margin-bottom: .75rem !important;
+            background-color: #fff !important;
+            border-radius: .25rem !important;
+            border: 1px solid rgba(0,0,0,.125) !important;
+            padding: 1.25rem !important;
+        }';
+
+        $html[] = '.DetailxOLODTitelTekst {
+            padding: .75rem 1.25rem !important;
+            background-color: #f5f5f5 !important;
+            border-bottom: 1px solid rgba(0,0,0,.125) !important;
+            margin: -1.25rem -1.25rem 0 -1.25rem !important;
+            color: #373a3c !important;
+            font-weight: normal !important;
+            border-radius: .25rem .25rem 0 0 !important;
+        }';
+
         $html[] = '</style>';
 
         $html[] = '<link rel="stylesheet" href="' . Theme::getInstance()->getCssPath(Manager::context(), true) .
@@ -432,7 +457,7 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '<div class="row">';
         $html[] = '    <div class="col-sm-12">';
-        $html[] = '        <div class="card">';
+        $html[] = '        <div class="card ects-course-summary">';
         $html[] = '            <div class="card-block">';
         $html[] = '                <span class="text-muted">Academiejaar:</span> {{ courseDetails.course.year }}<br />';
         $html[] = '                <span class="text-muted">Departement:</span> {{ courseDetails.course.faculty }}<br />';
