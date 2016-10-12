@@ -64,42 +64,6 @@ class CourseDetailsComponent extends \Ehb\Application\Ects\Ajax\Manager implemen
      */
     private function getContent()
     {
-        $httpClient = new \GuzzleHttp\Client(['base_url' => 'https://bamaflexweb.ehb.be/']);
-
-        $request = $httpClient->createRequest(
-            'GET',
-            'BMFUIDetailxOLOD.aspx',
-            ['query' => ['a' => $this->getCurrentCourseIdentifier(), 'b' => 5, 'c' => 1]]);
-
-        try
-        {
-            $courseDetailsBody = $httpClient->send($request)->getBody()->getContents();
-            $courseDetailsBody = mb_convert_encoding($courseDetailsBody, 'html-entities', 'UTF-8');
-
-            $domDocument = new \DOMDocument();
-            $domDocument->loadHTML($courseDetailsBody);
-
-            if ($domDocument->firstChild instanceof \DOMNode)
-            {
-                $domXpath = new \DOMXPath($domDocument);
-                $contentNode = $domXpath->query('//div[@id=\'content\']')->item(0);
-
-                $sourceNodes = $domXpath->query('//*[@src]', $contentNode);
-
-                foreach ($sourceNodes as $sourceNode)
-                {
-                    $newSourceValue = 'https://bamaflexweb.ehb.be/' . $sourceNode->getAttribute('src');
-                    $sourceNode->setAttribute('src', $newSourceValue);
-                }
-
-                return $domDocument->saveHTML($contentNode);
-            }
-
-            return '';
-        }
-        catch (\Exception $exception)
-        {
-            return '';
-        }
+        return $this->getEctsService()->getCourseDetailsByIdentifier($this->getCurrentCourseIdentifier());
     }
 }

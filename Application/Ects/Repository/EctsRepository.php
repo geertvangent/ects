@@ -408,4 +408,62 @@ class EctsRepository
             Course::class_name(),
             $courseIdentifier);
     }
+
+    /**
+     *
+     * @param integer $courseIdentifier
+     * @return string
+     */
+    public function findCourseDetailsByIdentifier($courseIdentifier)
+    {
+        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        $cacheIdentifier = md5(serialize(array(__METHOD__, $courseIdentifier)));
+
+        if (! $cache->contains($cacheIdentifier))
+        {
+            $httpClient = new \GuzzleHttp\Client(['base_url' => 'https://bamaflexweb.ehb.be/']);
+
+            $request = $httpClient->createRequest(
+                'GET',
+                'BMFUIDetailxOLOD.aspx',
+                ['query' => ['a' => $courseIdentifier, 'b' => 5, 'c' => 1]]);
+
+            try
+            {
+                $courseDetailsBody = $httpClient->send($request)->getBody()->getContents();
+                $courseDetailsBody = mb_convert_encoding($courseDetailsBody, 'html-entities', 'UTF-8');
+
+                $domDocument = new \DOMDocument();
+                $domDocument->loadHTML($courseDetailsBody);
+
+                if ($domDocument->firstChild instanceof \DOMNode)
+                {
+                    $domXpath = new \DOMXPath($domDocument);
+                    $contentNode = $domXpath->query('//div[@id=\'content\']')->item(0);
+
+                    $sourceNodes = $domXpath->query('//*[@src]', $contentNode);
+
+                    foreach ($sourceNodes as $sourceNode)
+                    {
+                        $newSourceValue = 'https://bamaflexweb.ehb.be/' . $sourceNode->getAttribute('src');
+                        $sourceNode->setAttribute('src', $newSourceValue);
+                    }
+
+                    $courseDetails = $domDocument->saveHTML($contentNode);
+                }
+                else
+                {
+                    $courseDetails = '';
+                }
+            }
+            catch (\Exception $exception)
+            {
+                $courseDetails = '';
+            }
+
+            $cache->save($cacheIdentifier, $courseDetails, 86400);
+        }
+
+        return $cache->fetch($cacheIdentifier);
+    }
 }

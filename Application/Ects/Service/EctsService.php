@@ -162,4 +162,14 @@ class EctsService
     {
         return $this->getEctsRepository()->findCourseByIdentifier($courseIdentifier);
     }
+
+    /**
+     *
+     * @param integer $courseIdentifier
+     * @return string
+     */
+    public function getCourseDetailsByIdentifier($courseIdentifier)
+    {
+        return $this->getEctsRepository()->findCourseDetailsByIdentifier($courseIdentifier);
+    }
 }
