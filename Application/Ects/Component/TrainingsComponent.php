@@ -411,6 +411,17 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
         $html[] = '<script type="text/ng-template" id="courseDetailsPanel.html">';
         $html[] = '<div course-details-panel>';
 
+        $html[] = '<div class="card card-block" ng-show="courseDetails.isLoadingCourse">';
+        $html[] = '    <p class="card-text text-xs-center text-muted">';
+        $html[] = '        <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
+        $html[] = '        <span class="sr-only">Loading...</span>';
+        $html[] = '        <br />';
+        $html[] = '        <h6 class="text-xs-center text-muted">Opleidingsonderdeel wordt geladen</h6>';
+        $html[] = '    </p>';
+        $html[] = '</div>';
+
+        $html[] = '<div ng-hide="courseDetails.isLoadingCourse">';
+
         $html[] = '<nav class="breadcrumb">';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + courseDetails.course.training.id)">{{ courseDetails.course.training }}</a>';
@@ -419,15 +430,10 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
         $html[] = '<div class="row">';
         $html[] = '    <div class="col-sm-12">';
-        // $html[] = ' <h3 class="text-primary m-b-2">Programma {{ subTrajectoryDetails.subTrajectory.training.name
-        // }}<br /><small class="text-muted">({{ subTrajectoryDetails.subTrajectory.sub_trajectory.name
-        // }})</small></h3>';
-
         $html[] = '        <div ng-bind-html="courseDetails.getCourseDetails()"></div>';
-
-        // $html[] = ' <iframe class="card card-block ects-course-details" ng-src="{{ courseDetails.getCourseUrl()
-        // }}"></iframe>';
         $html[] = '    </div>';
+        $html[] = '</div>';
+
         $html[] = '</div>';
 
         $html[] = '</div>';
