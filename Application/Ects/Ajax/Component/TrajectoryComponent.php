@@ -7,6 +7,8 @@ use Ehb\Application\Ects\Storage\DataClass\SubTrajectory;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectoryCourse;
 use Ehb\Application\Ects\Storage\DataClass\Training;
 use Ehb\Application\Ects\Storage\DataClass\Trajectory;
+use Chamilo\Core\Tracking\Storage\DataClass\Event;
+use Ehb\Application\Ects\Integration\Chamilo\Core\Tracking\Storage\DataClass\View;
 
 /**
  *
@@ -60,6 +62,15 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
                 self::PROPERTY_TRAJECTORY => $this->getTrajectoryProperties(),
                 self::PROPERTY_TRAINING => $this->getTrainingProperties(),
                 self::PROPERTY_COURSE => $this->getSubTrajectoryCourses()));
+
+        Event::trigger(
+            'View',
+            \Ehb\Application\Ects\Manager::context(),
+            array(
+                View::PROPERTY_SESSION_ID => session_id(),
+                View::PROPERTY_DATE => time(),
+                View::PROPERTY_ENTITY_TYPE => View::TYPE_TRAJECTORY,
+                View::PROPERTY_ENTITY_ID => $this->getCurrentSubTrajectoryIdentifier()));
 
         $jsonAjaxResult->display();
     }

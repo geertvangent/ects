@@ -4,6 +4,8 @@ namespace Ehb\Application\Ects\Ajax\Component;
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
 use Ehb\Application\Ects\Storage\DataClass\Course;
+use Chamilo\Core\Tracking\Storage\DataClass\Event;
+use Ehb\Application\Ects\Integration\Chamilo\Core\Tracking\Storage\DataClass\View;
 
 /**
  *
@@ -39,6 +41,16 @@ class CourseComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
     {
         $jsonAjaxResult = new JsonAjaxResult();
         $jsonAjaxResult->set_properties($this->getCourseProperties());
+
+        Event::trigger(
+            'View',
+            \Ehb\Application\Ects\Manager::context(),
+            array(
+                View::PROPERTY_SESSION_ID => session_id(),
+                View::PROPERTY_DATE => time(),
+                View::PROPERTY_ENTITY_TYPE => View::TYPE_COURSE,
+                View::PROPERTY_ENTITY_ID => $this->getCurrentCourseIdentifier()));
+
         $jsonAjaxResult->display();
     }
 

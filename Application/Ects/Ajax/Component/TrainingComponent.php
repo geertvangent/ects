@@ -1,8 +1,10 @@
 <?php
 namespace Ehb\Application\Ects\Ajax\Component;
 
+use Chamilo\Core\Tracking\Storage\DataClass\Event;
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
+use Ehb\Application\Ects\Integration\Chamilo\Core\Tracking\Storage\DataClass\View;
 use Ehb\Application\Ects\Storage\DataClass\Training;
 use Ehb\Application\Ects\Storage\DataClass\Trajectory;
 
@@ -47,6 +49,16 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
         $properties[self::PROPERTY_TRAJECTORIES] = $this->getTrajectories();
 
         $jsonAjaxResult->set_properties($properties);
+
+        Event::trigger(
+            'View',
+            \Ehb\Application\Ects\Manager::context(),
+            array(
+                View::PROPERTY_SESSION_ID => session_id(),
+                View::PROPERTY_DATE => time(),
+                View::PROPERTY_ENTITY_TYPE => View::TYPE_TRAINING,
+                View::PROPERTY_ENTITY_ID => $this->getCurrentTrainingIdentifier()));
+
         $jsonAjaxResult->display();
     }
 

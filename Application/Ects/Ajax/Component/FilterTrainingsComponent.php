@@ -1,8 +1,10 @@
 <?php
 namespace Ehb\Application\Ects\Ajax\Component;
 
+use Chamilo\Core\Tracking\Storage\DataClass\Event;
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
 use Chamilo\Libraries\Architecture\JsonAjaxResult;
+use Ehb\Application\Ects\Integration\Chamilo\Core\Tracking\Storage\DataClass\Search;
 use Ehb\Application\Ects\Storage\DataClass\Training;
 
 /**
@@ -64,6 +66,18 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
     {
         $jsonAjaxResult = new JsonAjaxResult();
         $jsonAjaxResult->set_properties(array(self::PROPERTY_TYPE => $this->getTrainings()));
+
+        Event::trigger(
+            'Search',
+            \Ehb\Application\Ects\Manager::context(),
+            array(
+                Search::PROPERTY_SESSION_ID => session_id(),
+                Search::PROPERTY_DATE => time(),
+                Search::PROPERTY_YEAR => $this->getCurrentYear(),
+                Search::PROPERTY_FACULTY => $this->getCurrentFacultyIdentifier(),
+                Search::PROPERTY_TYPE => $this->getCurrentTypeIdentifier(),
+                Search::PROPERTY_TEXT => $this->getCurrentText()));
+
         $jsonAjaxResult->display();
     }
 
