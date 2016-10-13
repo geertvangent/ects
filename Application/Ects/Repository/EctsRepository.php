@@ -470,6 +470,22 @@ class EctsRepository
                         $subCourseSpanNode->parentNode->replaceChild($subCourseLinkNode, $subCourseSpanNode);
                     }
 
+                    // Fix onclick links
+                    $onclickNodes = $domXpath->query('//a[@onclick]', $contentNode);
+
+                    foreach ($onclickNodes as $onclickNode)
+                    {
+                        $onclickNode->removeAttribute('onclick');
+                    }
+
+                    // Fix javascript links
+                    $onclickNodes = $domXpath->query('//a[contains(@href, "javascript:")]', $contentNode);
+
+                    foreach ($onclickNodes as $onclickNode)
+                    {
+                        $onclickNode->removeAttribute('href');
+                    }
+
                     $courseDetails = $domDocument->saveHTML($contentNode);
                 }
                 else
