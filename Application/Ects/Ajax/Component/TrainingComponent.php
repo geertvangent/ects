@@ -45,20 +45,9 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
     {
         $jsonAjaxResult = new JsonAjaxResult();
 
-        $properties = $this->getTrainingProperties();
-        $properties[self::PROPERTY_TRAJECTORIES] = $this->getTrajectories();
+        $jsonAjaxResult->set_properties($this->getTrainingProperties());
 
-        $jsonAjaxResult->set_properties($properties);
-
-        Event::trigger(
-            'View',
-            \Ehb\Application\Ects\Manager::context(),
-            array(
-                View::PROPERTY_SESSION_ID => session_id(),
-                View::PROPERTY_DATE => time(),
-                View::PROPERTY_ENTITY_TYPE => View::TYPE_TRAINING,
-                View::PROPERTY_ENTITY_ID => $this->getCurrentTrainingIdentifier()));
-
+        $this->trackView();
         $jsonAjaxResult->display();
     }
 
@@ -87,7 +76,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
 
     private function getTrainingProperties()
     {
-        return $this->filterProperties(
+        $properties = $this->filterProperties(
             $this->getTraining()->get_default_properties(),
             array(
                 Training::PROPERTY_ID,
@@ -99,6 +88,10 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
                 Training::PROPERTY_DOMAIN,
                 Training::PROPERTY_CREDITS,
                 Training::PROPERTY_GOALS));
+
+        $properties[self::PROPERTY_TRAJECTORIES] = $this->getTrajectories();
+
+        return $properties;
     }
 
     private function getTrajectories()
@@ -120,5 +113,23 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
         }
 
         return $structuredTrajectories;
+    }
+
+    private function trackView()
+    {
+        try
+        {
+            Event::trigger(
+                'View',
+                \Ehb\Application\Ects\Manager::context(),
+                array(
+                    View::PROPERTY_SESSION_ID => session_id(),
+                    View::PROPERTY_DATE => time(),
+                    View::PROPERTY_ENTITY_TYPE => View::TYPE_TRAINING,
+                    View::PROPERTY_ENTITY_ID => $this->getCurrentTrainingIdentifier()));
+        }
+        catch (\Exception $exception)
+        {
+        }
     }
 }

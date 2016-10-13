@@ -42,15 +42,7 @@ class CourseComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
         $jsonAjaxResult = new JsonAjaxResult();
         $jsonAjaxResult->set_properties($this->getCourseProperties());
 
-        Event::trigger(
-            'View',
-            \Ehb\Application\Ects\Manager::context(),
-            array(
-                View::PROPERTY_SESSION_ID => session_id(),
-                View::PROPERTY_DATE => time(),
-                View::PROPERTY_ENTITY_TYPE => View::TYPE_COURSE,
-                View::PROPERTY_ENTITY_ID => $this->getCurrentCourseIdentifier()));
-
+        $this->trackView();
         $jsonAjaxResult->display();
     }
 
@@ -95,5 +87,23 @@ class CourseComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
                 Course::PROPERTY_PARENT_ID,
                 Course::PROPERTY_CREDITS,
                 Course::PROPERTY_APPROVED));
+    }
+
+    private function trackView()
+    {
+        try
+        {
+            Event::trigger(
+                'View',
+                \Ehb\Application\Ects\Manager::context(),
+                array(
+                    View::PROPERTY_SESSION_ID => session_id(),
+                    View::PROPERTY_DATE => time(),
+                    View::PROPERTY_ENTITY_TYPE => View::TYPE_COURSE,
+                    View::PROPERTY_ENTITY_ID => $this->getCurrentCourseIdentifier()));
+        }
+        catch (\Exception $exception)
+        {
+        }
     }
 }
