@@ -1,6 +1,8 @@
 <?php
-namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee;
 
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Faculty;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\CurrentGroupSynchronization;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
 
 /**
@@ -9,9 +11,9 @@ use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class CurrentFacultyEmployeeGuestTeacherGroupSynchronization extends GroupSynchronization
+class Teacher extends GroupSynchronization
 {
-    CONST IDENTIFIER = 'GAST';
+    CONST IDENTIFIER = 'OP';
 
     public function get_code()
     {
@@ -20,7 +22,7 @@ class CurrentFacultyEmployeeGuestTeacherGroupSynchronization extends GroupSynchr
 
     public function get_name()
     {
-        return 'Gastprofessoren';
+        return 'Docenten';
     }
 
     public function get_user_official_codes()
@@ -29,13 +31,13 @@ class CurrentFacultyEmployeeGuestTeacherGroupSynchronization extends GroupSynchr
 
         $facultySynchronization = $this->get_synchronization()->get_synchronization();
         $facultyCode = CurrentGroupSynchronization::getEmployeeFacultyCode(
-            $facultySynchronization->get_parameter(CurrentFacultyGroupSynchronization::RESULT_PROPERTY_CODE));
+            $facultySynchronization->get_parameter(Faculty::RESULT_PROPERTY_CODE));
 
         if ($facultyCode)
         {
             $facultyCodeString = implode('\', \'', $facultyCode);
 
-            $query = 'SELECT DISTINCT person_id FROM [dbo].[v_sync_current_employee] WHERE employee_type = 3 AND faculty_code IN (\'' .
+            $query = 'SELECT DISTINCT person_id FROM [dbo].[v_sync_current_employee] WHERE employee_type != 1 AND faculty_code IN (\'' .
                  $facultyCodeString . '\') AND (date_end >= \'' . date('Y-m-d', strtotime('-2 months')) .
                  '\' OR date_end IS NULL)';
 

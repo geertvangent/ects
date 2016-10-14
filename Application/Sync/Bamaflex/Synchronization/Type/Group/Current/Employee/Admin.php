@@ -1,6 +1,8 @@
 <?php
-namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee;
 
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Faculty;
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\CurrentGroupSynchronization;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
 
 /**
@@ -9,7 +11,7 @@ use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class CurrentFacultyEmployeeAdminGroupSynchronization extends GroupSynchronization
+class Admin extends GroupSynchronization
 {
     CONST IDENTIFIER = 'ATP';
 
@@ -20,7 +22,7 @@ class CurrentFacultyEmployeeAdminGroupSynchronization extends GroupSynchronizati
 
     public function get_name()
     {
-        return 'ATP';
+        return 'Administratief en technisch personeel';
     }
 
     public function get_user_official_codes()
@@ -29,7 +31,7 @@ class CurrentFacultyEmployeeAdminGroupSynchronization extends GroupSynchronizati
 
         $facultySynchronization = $this->get_synchronization()->get_synchronization();
         $facultyCode = CurrentGroupSynchronization::getEmployeeFacultyCode(
-            $facultySynchronization->get_parameter(CurrentFacultyGroupSynchronization::RESULT_PROPERTY_CODE));
+            $facultySynchronization->get_parameter(Faculty::RESULT_PROPERTY_CODE));
 
         if ($facultyCode)
         {

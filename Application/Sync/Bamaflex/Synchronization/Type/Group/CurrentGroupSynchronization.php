@@ -33,10 +33,15 @@ class CurrentGroupSynchronization extends GroupSynchronization
 
         while ($faculty = $faculties->next_result())
         {
-            $children[] = GroupSynchronization::factory('current_faculty', $this, $faculty);
+            $children[] = GroupSynchronization::factory(
+                '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Faculty',
+                $this,
+                $faculty);
         }
 
-        $children[] = GroupSynchronization::factory('current_central_administration', $this);
+        $children[] = GroupSynchronization::factory(
+            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\CentralAdministration',
+            $this);
 
         return $children;
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current;
 
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
 
@@ -7,7 +7,7 @@ use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
  *
  * @package ehb.sync;
  */
-class CurrentCentralAdministrationGroupSynchronization extends GroupSynchronization
+class CentralAdministration extends GroupSynchronization
 {
     CONST IDENTIFIER = 'CUR_FAC_CA';
 

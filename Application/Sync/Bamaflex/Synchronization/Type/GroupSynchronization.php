@@ -90,8 +90,6 @@ class GroupSynchronization extends Synchronization
     }
 
     /**
-     * Enter description here .
-     * ..
      *
      * @param $type string
      * @param $synchronization GroupSynchronization
@@ -100,8 +98,15 @@ class GroupSynchronization extends Synchronization
      */
     public static function factory($type, GroupSynchronization $synchronization, $parameters = array())
     {
-        $class = __NAMESPACE__ . '\Group\\' . StringUtilities::getInstance()->createString($type)->upperCamelize() .
-             'GroupSynchronization';
+        if (class_exists($type))
+        {
+            $class = $type;
+        }
+        else
+        {
+            $class = __NAMESPACE__ . '\Group\\' . StringUtilities::getInstance()->createString($type)->upperCamelize() .
+                 'GroupSynchronization';
+        }
 
         return new $class($synchronization, $parameters);
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current;
 
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
 
@@ -7,7 +7,7 @@ use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
  *
  * @package ehb.sync;
  */
-class CurrentFacultyGroupSynchronization extends GroupSynchronization
+class Faculty extends GroupSynchronization
 {
     CONST IDENTIFIER = 'CUR_FAC';
     const RESULT_PROPERTY_CODE = 'code';
@@ -27,8 +27,12 @@ class CurrentFacultyGroupSynchronization extends GroupSynchronization
     {
         $children = array();
 
-        $children[] = GroupSynchronization::factory('current_faculty_employee', $this);
-        $children[] = GroupSynchronization::factory('current_faculty_student', $this);
+        $children[] = GroupSynchronization::factory(
+            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee',
+            $this);
+        $children[] = GroupSynchronization::factory(
+            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Student',
+            $this);
 
         return $children;
     }
