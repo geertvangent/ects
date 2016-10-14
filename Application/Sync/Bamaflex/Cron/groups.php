@@ -37,7 +37,7 @@ try
     }
 
     $synchronization = GroupSynchronization :: factory(
-        'central_administration',
+        'current',
         new DummyGroupSynchronization($root_group, $years));
     $synchronization->run();
 

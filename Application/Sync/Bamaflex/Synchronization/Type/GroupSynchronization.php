@@ -65,28 +65,28 @@ class GroupSynchronization extends Synchronization
         $this->synchronize_users();
         $children = $this->get_children();
 
-//         $anyChildActive = false;
+        // $anyChildActive = false;
 
         foreach ($children as $child)
         {
             $child->run();
 
-//             if ($child->get_current_group()->get_state() == 1)
-//             {
-//                 $anyChildActive = true;
-//             }
+            // if ($child->get_current_group()->get_state() == 1)
+            // {
+            // $anyChildActive = true;
+            // }
         }
 
-//         if ((count($children) == 0 && $this->userCount == 0) || (! $anyChildActive && $this->userCount == 0))
-//         {
-//             $this->get_current_group()->set_state(0);
-//             $this->get_current_group()->update();
-//         }
-//         elseif ($this->get_current_group()->get_state() == 0)
-//         {
-//             $this->get_current_group()->set_state(1);
-//             $this->get_current_group()->update();
-//         }
+        // if ((count($children) == 0 && $this->userCount == 0) || (! $anyChildActive && $this->userCount == 0))
+        // {
+        // $this->get_current_group()->set_state(0);
+        // $this->get_current_group()->update();
+        // }
+        // elseif ($this->get_current_group()->get_state() == 0)
+        // {
+        // $this->get_current_group()->set_state(1);
+        // $this->get_current_group()->update();
+        // }
     }
 
     /**
@@ -192,6 +192,7 @@ class GroupSynchronization extends Synchronization
             $this->current_group->set_description($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
+            $this->current_group->set_sort(0);
             $this->current_group->create();
 
             self::log('added', $this->current_group->get_name());
