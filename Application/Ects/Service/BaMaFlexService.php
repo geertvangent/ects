@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Ects\Service;
 
-use Ehb\Application\Ects\Repository\EctsRepository;
+use Ehb\Application\Ects\Repository\BaMaFlexRepository;
 
 /**
  *
@@ -9,40 +9,40 @@ use Ehb\Application\Ects\Repository\EctsRepository;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class EctsService
+class BaMaFlexService
 {
 
     /**
      *
-     * @var \Ehb\Application\Ects\Repository\EctsRepository
+     * @var \Ehb\Application\Ects\Repository\BaMaFlexRepository
      */
-    private $ectsRepository;
+    private $baMaFlexRepository;
 
     /**
      *
-     * @param \Ehb\Application\Ects\Repository\EctsRepository $ectsRepository
+     * @param \Ehb\Application\Ects\Repository\BaMaFlexRepository $baMaFlexRepository
      */
-    public function __construct(EctsRepository $ectsRepository)
+    public function __construct(BaMaFlexRepository $baMaFlexRepository)
     {
-        $this->ectsRepository = $ectsRepository;
+        $this->baMaFlexRepository = $baMaFlexRepository;
     }
 
     /**
      *
-     * @return \Ehb\Application\Ects\Repository\EctsRepository
+     * @return \Ehb\Application\Ects\Repository\BaMaFlexRepository
      */
-    public function getEctsRepository()
+    public function getBaMaFlexRepository()
     {
-        return $this->ectsRepository;
+        return $this->baMaFlexRepository;
     }
 
     /**
      *
-     * @param \Ehb\Application\Ects\Repository\EctsRepository $ectsRepository
+     * @param \Ehb\Application\Ects\Repository\BaMaFlexRepository $baMaFlexRepository
      */
-    public function setEctsRepository(EctsRepository $ectsRepository)
+    public function setBaMaFlexRepository(BaMaFlexRepository $baMaFlexRepository)
     {
-        $this->ectsRepository = $ectsRepository;
+        $this->baMaFlexRepository = $baMaFlexRepository;
     }
 
     /**
@@ -51,7 +51,7 @@ class EctsService
      */
     public function getYears()
     {
-        return $this->getEctsRepository()->findYears();
+        return $this->getBaMaFlexRepository()->findYears();
     }
 
     /**
@@ -61,7 +61,7 @@ class EctsService
      */
     public function getFacultiesForYear($year)
     {
-        return $this->getEctsRepository()->findFacultiesForYear($year);
+        return $this->getBaMaFlexRepository()->findFacultiesForYear($year);
     }
 
     /**
@@ -72,7 +72,7 @@ class EctsService
      */
     public function getTypesForYearAndFacultyIdentifier($year, $facultyIdentifier = null)
     {
-        return $this->getEctsRepository()->findTypesForYearAndFacultyIdentifier($year, $facultyIdentifier);
+        return $this->getBaMaFlexRepository()->findTypesForYearAndFacultyIdentifier($year, $facultyIdentifier);
     }
 
     /**
@@ -86,7 +86,7 @@ class EctsService
     public function getTrainingsForYearFacultyIdentifierTypeIdentifierAndText($year, $facultyIdentifier = null,
         $typeIdentifier = null, $text = null)
     {
-        return $this->getEctsRepository()->findTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
+        return $this->getBaMaFlexRepository()->findTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
             $year,
             $facultyIdentifier,
             $typeIdentifier,
@@ -100,7 +100,7 @@ class EctsService
      */
     public function getTrainingByIdentifier($trainingIdentifier)
     {
-        return $this->getEctsRepository()->findTrainingByIdentifier($trainingIdentifier);
+        return $this->getBaMaFlexRepository()->findTrainingByIdentifier($trainingIdentifier);
     }
 
     /**
@@ -110,7 +110,7 @@ class EctsService
      */
     public function getTrajectoriesForTrainingIdentifier($trainingIdentifier)
     {
-        return $this->getEctsRepository()->findTrajectoriesForTrainingIdentifier($trainingIdentifier);
+        return $this->getBaMaFlexRepository()->findTrajectoriesForTrainingIdentifier($trainingIdentifier);
     }
 
     /**
@@ -120,7 +120,7 @@ class EctsService
      */
     public function getSubTrajectoriesForTrajectoryIdentifier($trajectoryIdentifier)
     {
-        return $this->getEctsRepository()->findSubTrajectoriesForTrajectoryIdentifier($trajectoryIdentifier);
+        return $this->getBaMaFlexRepository()->findSubTrajectoriesForTrajectoryIdentifier($trajectoryIdentifier);
     }
 
     /**
@@ -130,7 +130,7 @@ class EctsService
      */
     public function getSubTrajectoryByIdentifier($subTrajectoryIdentifier)
     {
-        return $this->getEctsRepository()->findSubTrajectoryByIdentifier($subTrajectoryIdentifier);
+        return $this->getBaMaFlexRepository()->findSubTrajectoryByIdentifier($subTrajectoryIdentifier);
     }
 
     /**
@@ -140,7 +140,7 @@ class EctsService
      */
     public function getTrajectoryByIdentifier($trajectoryIdentifier)
     {
-        return $this->getEctsRepository()->findtrajectoryByIdentifier($trajectoryIdentifier);
+        return $this->getBaMaFlexRepository()->findtrajectoryByIdentifier($trajectoryIdentifier);
     }
 
     /**
@@ -150,7 +150,8 @@ class EctsService
      */
     public function getSubTrajectoryCoursesForSubTrajectoryIdentifier($subTrajectoryIdentifier)
     {
-        return $this->getEctsRepository()->findSubTrajectoryCoursesForSubTrajectoryIdentifier($subTrajectoryIdentifier);
+        return $this->getBaMaFlexRepository()->findSubTrajectoryCoursesForSubTrajectoryIdentifier(
+            $subTrajectoryIdentifier);
     }
 
     /**
@@ -160,7 +161,7 @@ class EctsService
      */
     public function getCourseByIdentifier($courseIdentifier)
     {
-        return $this->getEctsRepository()->findCourseByIdentifier($courseIdentifier);
+        return $this->getBaMaFlexRepository()->findCourseByIdentifier($courseIdentifier);
     }
 
     /**
@@ -170,6 +171,6 @@ class EctsService
      */
     public function getCourseDetailsByIdentifier($courseIdentifier)
     {
-        return $this->getEctsRepository()->findCourseDetailsByIdentifier($courseIdentifier);
+        return $this->getBaMaFlexRepository()->findCourseDetailsByIdentifier($courseIdentifier);
     }
 }

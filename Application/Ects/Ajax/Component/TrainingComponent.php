@@ -71,7 +71,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
      */
     private function getTraining()
     {
-        return $this->getEctsService()->getTrainingByIdentifier($this->getCurrentTrainingIdentifier());
+        return $this->getBaMaFlexService()->getTrainingByIdentifier($this->getCurrentTrainingIdentifier());
     }
 
     private function getTrainingProperties()
@@ -96,7 +96,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
 
     private function getTrajectories()
     {
-        $trajectories = $this->getEctsService()->getTrajectoriesForTrainingIdentifier(
+        $trajectories = $this->getBaMaFlexService()->getTrajectoriesForTrainingIdentifier(
             $this->getCurrentTrainingIdentifier());
         $structuredTrajectories = array();
 
@@ -106,7 +106,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
             $structuredTrajectory[Trajectory::PROPERTY_ID] = $trajectory[Trajectory::PROPERTY_ID];
             $structuredTrajectory[Trajectory::PROPERTY_NAME] = $trajectory[Trajectory::PROPERTY_NAME];
 
-            $structuredTrajectory[self::PROPERTY_TRAJECTORIES] = $this->getEctsService()->getSubTrajectoriesForTrajectoryIdentifier(
+            $structuredTrajectory[self::PROPERTY_TRAJECTORIES] = $this->getBaMaFlexService()->getSubTrajectoriesForTrajectoryIdentifier(
                 $trajectory[Trajectory::PROPERTY_ID]);
 
             $structuredTrajectories[] = $structuredTrajectory;

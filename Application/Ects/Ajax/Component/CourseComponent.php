@@ -66,7 +66,7 @@ class CourseComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
      */
     private function getCourse()
     {
-        return $this->getEctsService()->getCourseByIdentifier($this->getCurrentCourseIdentifier());
+        return $this->getBaMaFlexService()->getCourseByIdentifier($this->getCurrentCourseIdentifier());
     }
 
     /**

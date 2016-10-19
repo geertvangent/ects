@@ -133,7 +133,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
      */
     private function getTrainings()
     {
-        $trainings = $this->getEctsService()->getTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
+        $trainings = $this->getBaMaFlexService()->getTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
             $this->getCurrentYear(),
             $this->getCurrentFacultyIdentifier(),
             $this->getCurrentTypeIdentifier(),

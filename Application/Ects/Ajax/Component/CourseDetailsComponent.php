@@ -64,6 +64,6 @@ class CourseDetailsComponent extends \Ehb\Application\Ects\Ajax\Manager implemen
      */
     private function getContent()
     {
-        return $this->getEctsService()->getCourseDetailsByIdentifier($this->getCurrentCourseIdentifier());
+        return $this->getBaMaFlexService()->getCourseDetailsByIdentifier($this->getCurrentCourseIdentifier());
     }
 }

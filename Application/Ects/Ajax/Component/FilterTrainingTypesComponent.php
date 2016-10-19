@@ -85,7 +85,7 @@ class FilterTrainingTypesComponent extends \Ehb\Application\Ects\Ajax\Manager im
      */
     private function getTypes()
     {
-        return $this->getEctsService()->getTypesForYearAndFacultyIdentifier(
+        return $this->getBaMaFlexService()->getTypesForYearAndFacultyIdentifier(
             $this->getCurrentYear(),
             $this->getCurrentFacultyIdentifier());
     }

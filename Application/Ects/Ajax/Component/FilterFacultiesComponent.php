@@ -64,6 +64,6 @@ class FilterFacultiesComponent extends \Ehb\Application\Ects\Ajax\Manager implem
      */
     private function getFaculties()
     {
-        return $this->getEctsService()->getFacultiesForYear($this->getCurrentYear());
+        return $this->getBaMaFlexService()->getFacultiesForYear($this->getCurrentYear());
     }
 }

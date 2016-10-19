@@ -42,6 +42,6 @@ class FilterYearsComponent extends \Ehb\Application\Ects\Ajax\Manager implements
      */
     private function getYears()
     {
-        return $this->getEctsService()->getYears();
+        return $this->getBaMaFlexService()->getYears();
     }
 }

@@ -85,7 +85,7 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
     {
         if (! isset($this->subTrajectory))
         {
-            $this->subTrajectory = $this->getEctsService()->getSubTrajectoryByIdentifier(
+            $this->subTrajectory = $this->getBaMaFlexService()->getSubTrajectoryByIdentifier(
                 $this->getCurrentSubTrajectoryIdentifier());
         }
 
@@ -103,7 +103,7 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
     {
         if (! isset($this->trajectory))
         {
-            $this->trajectory = $this->getEctsService()->getTrajectoryByIdentifier(
+            $this->trajectory = $this->getBaMaFlexService()->getTrajectoryByIdentifier(
                 $this->getSubTrajectory()->getTrajectoryId());
         }
 
@@ -121,7 +121,7 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
     {
         if (! isset($this->training))
         {
-            $this->training = $this->getEctsService()->getTrainingByIdentifier($this->getTrajectory()->getTrainingId());
+            $this->training = $this->getBaMaFlexService()->getTrainingByIdentifier($this->getTrajectory()->getTrainingId());
         }
 
         return $this->training;
@@ -140,7 +140,7 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
 
     private function getSubTrajectoryCourses()
     {
-        $subTrajectoryCourses = $this->getEctsService()->getSubTrajectoryCoursesForSubTrajectoryIdentifier(
+        $subTrajectoryCourses = $this->getBaMaFlexService()->getSubTrajectoryCoursesForSubTrajectoryIdentifier(
             $this->getCurrentSubTrajectoryIdentifier());
 
         $formattedSubTrajectoryCourses = array();

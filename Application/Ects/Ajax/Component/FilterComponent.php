@@ -95,7 +95,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
 
             if (empty($this->currentYear))
             {
-                $this->currentYear = array_shift($this->getEctsService()->getYears());
+                $this->currentYear = array_shift($this->getBaMaFlexService()->getYears());
             }
         }
 
@@ -150,7 +150,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
      */
     private function getYears()
     {
-        return $this->getEctsService()->getYears();
+        return $this->getBaMaFlexService()->getYears();
     }
 
     /**
@@ -159,7 +159,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
      */
     private function getFaculties()
     {
-        return $this->getEctsService()->getFacultiesForYear($this->getCurrentYear());
+        return $this->getBaMaFlexService()->getFacultiesForYear($this->getCurrentYear());
     }
 
     /**
@@ -168,7 +168,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
      */
     private function getTypes()
     {
-        return $this->getEctsService()->getTypesForYearAndFacultyIdentifier(
+        return $this->getBaMaFlexService()->getTypesForYearAndFacultyIdentifier(
             $this->getCurrentYear(),
             $this->getCurrentFacultyIdentifier());
     }
@@ -179,7 +179,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
      */
     private function getTrainings()
     {
-        $trainings = $this->getEctsService()->getTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
+        $trainings = $this->getBaMaFlexService()->getTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
             $this->getCurrentYear(),
             $this->getCurrentFacultyIdentifier(),
             $this->getCurrentTypeIdentifier(),

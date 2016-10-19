@@ -26,29 +26,9 @@ use Ehb\Application\Ects\Storage\DataClass\Trajectory;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class EctsRepository
+class BaMaFlexRepository
 {
     const LIFETIME_IN_MINUTES = 60;
-
-    /**
-     *
-     * @var \Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository
-     */
-    private static $instance;
-
-    /**
-     *
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository
-     */
-    static public function getInstance()
-    {
-        if (is_null(static::$instance))
-        {
-            self::$instance = new static();
-        }
-
-        return static::$instance;
-    }
 
     /**
      *
