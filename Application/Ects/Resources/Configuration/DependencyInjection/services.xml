@@ -6,6 +6,6 @@
 			<argument type="service" id="ehb.application.ects.repository.bamaflex_repository" />
 		</service>
 
-		<service id="ehb.application.ects.repository.bamaflex_repository" class="Ehb\Application\Ects\Repository\BaMaflexRepository" />
+		<service id="ehb.application.ects.repository.bamaflex_repository" class="Ehb\Application\Ects\Repository\BaMaFlexRepository" />
 	</services>
 </container>
