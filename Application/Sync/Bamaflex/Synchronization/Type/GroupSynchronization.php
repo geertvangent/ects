@@ -16,7 +16,7 @@ use Ehb\Application\Sync\Bamaflex\Synchronization\Synchronization;
  *
  * @package ehb.sync;
  */
-class GroupSynchronization extends Synchronization
+abstract class GroupSynchronization extends Synchronization
 {
 
     /**
@@ -191,10 +191,11 @@ class GroupSynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
+            $description = $this->convert_to_utf8($this->get_description());
 
             $this->current_group = new Group();
             $this->current_group->set_name($name);
-            $this->current_group->set_description($name);
+            $this->current_group->set_description($description);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
             $this->current_group->set_sort(0);
@@ -206,15 +207,27 @@ class GroupSynchronization extends Synchronization
         else
         {
             $name = $this->convert_to_utf8($this->get_name());
-            if ($this->current_group->get_name() != $name)
+            $description = $this->convert_to_utf8($this->get_description());
+
+            if ($this->current_group->get_name() != $name || $this->current_group->get_description() != $description)
             {
                 $this->current_group->set_name($name);
-                $this->current_group->set_description($name);
+                $this->current_group->set_description($description);
                 $this->current_group->update();
             }
         }
 
         return $this->current_group;
+    }
+
+    public function get_name()
+    {
+        return '';
+    }
+
+    public function get_description()
+    {
+        return $this->get_name();
     }
 
     public function synchronize_users()

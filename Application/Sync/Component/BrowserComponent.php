@@ -21,7 +21,7 @@ class BrowserComponent extends Manager implements DelegateComponent
             throw new NotAllowedException();
         }
 
-        $types = array(self :: ACTION_BAMAFLEX, self :: ACTION_ATLANTIS, self :: ACTION_CAS, self :: ACTION_DATA);
+        $types = array(self::ACTION_BAMAFLEX, self::ACTION_ATLANTIS, self::ACTION_CAS, self::ACTION_DATA);
 
         $html = array();
 
@@ -29,11 +29,11 @@ class BrowserComponent extends Manager implements DelegateComponent
 
         foreach ($types as $type)
         {
-            $html[] = '<a href="' . $this->get_url(array(self :: PARAM_ACTION => $type)) . '">';
+            $html[] = '<a href="' . $this->get_url(array(self::PARAM_ACTION => $type)) . '">';
             $html[] = '<div class="create_block" style="background-image: url(' .
-                 Theme :: getInstance()->getImagesPath('\Ehb\Application\Sync', true) . 'Component/' . $type . '.png);">';
-            $html[] = Translation :: get(
-                StringUtilities :: getInstance()->createString($type)->upperCamelize() . 'Component');
+                 Theme::getInstance()->getImagesPath('\Ehb\Application\Sync', true) . 'Component/' . $type . '.png);">';
+            $html[] = Translation::get(
+                StringUtilities::getInstance()->createString($type)->upperCamelize() . 'Component');
             $html[] = '</div>';
             $html[] = '</a>';
         }

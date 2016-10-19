@@ -31,13 +31,13 @@ class GroupsComponent extends Manager implements DelegateComponent
 
             $root_group = \Chamilo\Core\Group\Storage\DataManager::get_root_group();
 
-            // foreach ($years as $year)
-            // {
-            // $synchronization = GroupSynchronization::factory(
-            // 'academic_year',
-            // new DummyGroupSynchronization($root_group, $year));
-            // $synchronization->run();
-            // }
+//             foreach ($years as $year)
+//             {
+//                 $synchronization = GroupSynchronization::factory(
+//                     'academic_year',
+//                     new DummyGroupSynchronization($root_group, $year));
+//                 $synchronization->run();
+//             }
 
             $synchronization = GroupSynchronization::factory(
                 'current',

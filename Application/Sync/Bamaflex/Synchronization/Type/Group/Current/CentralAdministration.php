@@ -21,6 +21,11 @@ class CentralAdministration extends GroupSynchronization
         return 'Centrale administratie';
     }
 
+    public function get_description()
+    {
+        return 'Opgelet! De gebruikers in deze groep worden over alle academiejaren heen geactualiseerd!';
+    }
+
     public function get_user_official_codes()
     {
         $user_mails = array();

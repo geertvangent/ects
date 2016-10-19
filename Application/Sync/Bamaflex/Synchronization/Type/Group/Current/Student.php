@@ -1,6 +1,7 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current;
 
+use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\CurrentGroupSynchronization;
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\GroupSynchronization;
 
 /**
@@ -23,17 +24,20 @@ class Student extends GroupSynchronization
         return 'Studenten';
     }
 
+    public function get_description()
+    {
+        return 'Opgelet! De gebruikers in deze groep worden over alle academiejaren heen geactualiseerd!';
+    }
+
     public function get_children()
     {
-        $yearsQueryString = implode(
-            '\', \'',
-            $this->get_synchronization()->get_synchronization()->get_synchronization()->get_year());
+        $facultyGroupSynchronization = $this->get_synchronization();
 
-        var_dump($yearsQueryString);
-        exit();
+        $yearsQueryString = implode('\', \'', CurrentGroupSynchronization::getCurrentYears());
+        $facultyCode = $facultyGroupSynchronization->get_parameter(Faculty::RESULT_PROPERTY_CODE);
 
-        $query = 'SELECT DISTINCT code, name FROM [INFORDATSYNC].[dbo].[v_sync_current_faculty] WHERE year IN (\'' .
-             $yearsQueryString . '\')';
+        $query = 'SELECT DISTINCT code, name FROM [INFORDATSYNC].[dbo].[v_sync_current_training] WHERE year IN (\'' .
+             $yearsQueryString . '\') AND faculty_code = \'' . $facultyCode . '\' AND type != 16';
         $trainings = $this->get_result($query);
 
         $children = array();

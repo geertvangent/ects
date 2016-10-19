@@ -1,5 +1,5 @@
 <?php
-namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Student;
+namespace Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee;
 
 use Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\CurrentGroupSynchronization;
 
@@ -18,7 +18,7 @@ class Training extends \Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group
         $trainingCode = $this->get_parameter(self::RESULT_PROPERTY_CODE);
         $userIdentifiers = array();
 
-        $query = 'SELECT DISTINCT person_id FROM [INFORDATSYNC].[dbo].[v_sync_current_student] WHERE year IN (\'' .
+        $query = 'SELECT DISTINCT person_id FROM [INFORDATSYNC].[dbo].[v_sync_current_teacher] WHERE year IN (\'' .
              $yearsQueryString . '\') AND training_code = \'' . $trainingCode . '\'';
 
         $users = $this->get_result($query);

@@ -11,7 +11,7 @@ class Faculty extends GroupSynchronization
 {
     CONST IDENTIFIER = 'CUR_FAC';
     const RESULT_PROPERTY_CODE = 'code';
-    const RESULT_PROPERTY_DEPARTMENT = 'name';
+    const RESULT_PROPERTY_NAME = 'name';
 
     public function get_code()
     {
@@ -20,7 +20,12 @@ class Faculty extends GroupSynchronization
 
     public function get_name()
     {
-        return $this->get_parameter(self::RESULT_PROPERTY_DEPARTMENT);
+        return $this->get_parameter(self::RESULT_PROPERTY_NAME);
+    }
+
+    public function get_description()
+    {
+        return 'Opgelet! De gebruikers in deze groep worden over alle academiejaren heen geactualiseerd!';
     }
 
     public function get_children()
