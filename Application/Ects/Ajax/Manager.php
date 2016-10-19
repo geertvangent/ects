@@ -30,6 +30,6 @@ abstract class Manager extends AjaxManager
      */
     protected function getBaMaFlexService()
     {
-        return $this->getService('ehb.application.ects.bamaflex');
+        return $this->getService('ehb.application.ects.service.bamaflex_service');
     }
 }

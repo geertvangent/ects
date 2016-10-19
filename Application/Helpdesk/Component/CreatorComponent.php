@@ -17,33 +17,6 @@ class CreatorComponent extends Manager
      */
     public function run()
     {
-        // $translatorFactory = new TranslatorFactory();
-        // $translator = $translatorFactory->createTranslator();
-
-        // $twigFactory = new TwigEnvironmentFactory();
-        // $twig = $twigFactory->createEnvironment($translator);
-
-        // $formFactoryBuilder = new SymfonyFormFactoryBuilder();
-        // $formFactory = $formFactoryBuilder->buildFormFactory($twig);
-
-        // $form = $formFactory->create(new TicketFormType());
-        // $form->add('search', SubmitType :: class);
-
-        // $form->handleRequest($this->getRequest());
-
-        // if ($form->isValid())
-        // {
-        // }
-        // else
-        // {
-        // $html = array();
-
-        // $html[] = $this->render_header();
-        // $html[] = $twig->render(self :: package() . ':form.twig', array('form' => $form->createView()));
-        // $html[] = $this->render_footer();
-
-        // return implode(PHP_EOL, $html);
-        // }
         $form = new TicketForm($this);
 
         if ($form->validate())
