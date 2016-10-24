@@ -14,8 +14,6 @@ use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\GroupCalendarRendererProvider;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\StudentGroup;
@@ -130,18 +128,20 @@ class GroupBrowserComponent extends UserBrowserComponent
 
             foreach ($faculties as $faculty)
             {
-                $facultyGroups = $calendarService->getFacultyGroupsByYearAndCode($year, $faculty[Group :: PROPERTY_FACULTY_ID]);
+                $facultyGroups = $calendarService->getFacultyGroupsByYearAndCode(
+                    $year,
+                    $faculty[Group::PROPERTY_FACULTY_ID]);
 
-                if (! isset($userFaculties[$faculty[Group :: PROPERTY_FACULTY_ID]]) && count($facultyGroups) > 0)
+                if (! isset($userFaculties[$faculty[Group::PROPERTY_FACULTY_ID]]) && count($facultyGroups) > 0)
                 {
                     $content = $this->renderFacultyGroups(
                         $faculty,
                         $facultyGroups,
-                        $userGroups[$faculty[Group :: PROPERTY_FACULTY_ID]]);
+                        $userGroups[$faculty[Group::PROPERTY_FACULTY_ID]]);
                     $tabs->add_tab(
                         new DynamicContentTab(
-                            $year . '-' . $faculty[Group :: PROPERTY_FACULTY_ID],
-                            $faculty[Group :: PROPERTY_FACULTY_NAME],
+                            $year . '-' . $faculty[Group::PROPERTY_FACULTY_ID],
+                            $faculty[Group::PROPERTY_FACULTY_NAME],
                             null,
                             $content));
                 }
@@ -175,7 +175,10 @@ class GroupBrowserComponent extends UserBrowserComponent
             foreach ($userGroups as $userGroup)
             {
                 $html[] = '<li>';
-                $html[] = $this->renderGroupLink($userGroup[StudentGroup :: PROPERTY_YEAR], $userGroup[StudentGroup :: PROPERTY_GROUP_NAME], $userGroup['group_id']);
+                $html[] = $this->renderGroupLink(
+                    $userGroup[StudentGroup::PROPERTY_YEAR],
+                    $userGroup[StudentGroup::PROPERTY_GROUP_NAME],
+                    $userGroup['group_id']);
                 $html[] = '</li>';
             }
 
@@ -198,13 +201,13 @@ class GroupBrowserComponent extends UserBrowserComponent
 
             foreach ($facultyTypeGroups as $facultyTypeGroup)
             {
-                if (! key_exists($facultyTypeGroup[Group :: PROPERTY_ID], $userGroups))
+                if (! key_exists($facultyTypeGroup[Group::PROPERTY_ID], $userGroups))
                 {
                     $html[] = '<li>';
                     $html[] = $this->renderGroupLink(
-                        $facultyTypeGroup[Group :: PROPERTY_YEAR],
-                        $facultyTypeGroup[Group :: PROPERTY_NAME],
-                        $facultyTypeGroup[Group :: PROPERTY_ID]);
+                        $facultyTypeGroup[Group::PROPERTY_YEAR],
+                        $facultyTypeGroup[Group::PROPERTY_NAME],
+                        $facultyTypeGroup[Group::PROPERTY_ID]);
                     $html[] = '</li>';
                 }
             }
@@ -294,20 +297,6 @@ class GroupBrowserComponent extends UserBrowserComponent
                 self::PARAM_GROUP_ID => $groupId));
 
         return '<a href="' . $groupLink->getUrl() . '">' . $groupName . '</a>';
-    }
-
-    /**
-     *
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
-     */
-    protected function getCalendarService()
-    {
-        if (! isset($this->calendarService))
-        {
-            $this->calendarService = new CalendarService(new CalendarRepository());
-        }
-
-        return $this->calendarService;
     }
 
     /**

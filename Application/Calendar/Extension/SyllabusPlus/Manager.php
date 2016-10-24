@@ -200,4 +200,13 @@ abstract class Manager extends Application
     {
         return $this->getRequest()->query->get(self::PARAM_PRINT) == 1;
     }
+
+    /**
+     *
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
+     */
+    protected function getCalendarService()
+    {
+        return $this->getService('ehb.application.calendar.extension.syllabus_plus.service.calendar_service');
+    }
 }

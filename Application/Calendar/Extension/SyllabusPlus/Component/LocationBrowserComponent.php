@@ -12,8 +12,6 @@ use Chamilo\Libraries\Format\Tabs\DynamicContentTab;
 use Chamilo\Libraries\Format\Tabs\DynamicTabsRenderer;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\LocationCalendarRendererProvider;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Location;
 
@@ -148,20 +146,6 @@ class LocationBrowserComponent extends UserBrowserComponent
         }
 
         return '<a href="' . $locationLink->getUrl() . '">' . $name . '</a>';
-    }
-
-    /**
-     *
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
-     */
-    protected function getCalendarService()
-    {
-        if (! isset($this->calendarService))
-        {
-            $this->calendarService = new CalendarService(new CalendarRepository());
-        }
-
-        return $this->calendarService;
     }
 
     /**

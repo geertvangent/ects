@@ -231,7 +231,7 @@ class CalendarRepository
                     $condition,
                     null,
                     null,
-                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))))->as_array();
+                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
 
             $records = $this->aggregateActivities($className, $activities);
 
@@ -270,7 +270,7 @@ class CalendarRepository
                     $condition,
                     null,
                     null,
-                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))))->as_array();
+                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
 
             $records = $this->aggregateActivities($className, $activities);
 
@@ -334,7 +334,7 @@ class CalendarRepository
                         new AndCondition($conditions),
                         null,
                         null,
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
 
                 $records = $this->aggregateActivities($baseClass, $activities);
             }
@@ -387,7 +387,7 @@ class CalendarRepository
                         new AndCondition($conditions),
                         null,
                         null,
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
 
                 $records = $this->aggregateActivities($baseClass, $activities);
 
@@ -442,7 +442,7 @@ class CalendarRepository
                     new AndCondition($conditions),
                     null,
                     null,
-                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
 
             $records = $this->aggregateActivities($baseClass, $activities);
 
@@ -494,7 +494,7 @@ class CalendarRepository
                     new AndCondition($conditions),
                     null,
                     null,
-                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))))->as_array();
+                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
 
             $records = $this->aggregateActivities($className, $activities);
 
@@ -543,7 +543,7 @@ class CalendarRepository
                     new AndCondition($conditions),
                     null,
                     null,
-                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
 
             $records = $this->aggregateActivities($baseClass, $activities);
 
@@ -595,7 +595,7 @@ class CalendarRepository
                     new AndCondition($conditions),
                     null,
                     null,
-                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))))->as_array();
+                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
 
             $records = $this->aggregateActivities($className, $activities);
 
@@ -722,7 +722,7 @@ class CalendarRepository
                     null,
                     array(
                         new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_FACULTY_ID)),
-                        new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_NAME)))))->as_array();
+                        new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_NAME)))));
 
             $cache->save($cacheIdentifier, $facultiesGroups);
         }
@@ -751,7 +751,7 @@ class CalendarRepository
                     null,
                     null,
                     null,
-                    array(new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_NAME)))))->as_array();
+                    array(new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_NAME)))));
 
             $cache->save($cacheIdentifier, $groups);
         }
@@ -822,7 +822,7 @@ class CalendarRepository
                     null,
                     array(
                         new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_CODE)),
-                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_NAME)))))->as_array();
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_NAME)))));
 
             $cache->save($cacheIdentifier, $locations);
         }

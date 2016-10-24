@@ -12,8 +12,6 @@ use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Chamilo\Libraries\Utilities\DatetimeUtilities;
 use Chamilo\Libraries\Utilities\StringUtilities;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Activity;
 
 /**
@@ -94,20 +92,6 @@ abstract class EventViewerComponent extends Manager
         }
 
         return $this->year;
-    }
-
-    /**
-     *
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
-     */
-    protected function getCalendarService()
-    {
-        if (! isset($this->calendarService))
-        {
-            $this->calendarService = new CalendarService(CalendarRepository::getInstance());
-        }
-
-        return $this->calendarService;
     }
 
     /**

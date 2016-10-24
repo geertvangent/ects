@@ -7,8 +7,6 @@ use Chamilo\Libraries\Format\Table\Column\SortableStaticTableColumn;
 use Chamilo\Libraries\Format\Table\SortableTableFromArray;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\ScheduledGroup;
 
 /**
@@ -75,20 +73,6 @@ class ProgressComponent extends Manager
             false);
 
         return $sortableTable->toHtml();
-    }
-
-    /**
-     *
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
-     */
-    protected function getCalendarService()
-    {
-        if (! isset($this->calendarService))
-        {
-            $this->calendarService = new CalendarService(new CalendarRepository());
-        }
-
-        return $this->calendarService;
     }
 
     private function getProgressData($year)
