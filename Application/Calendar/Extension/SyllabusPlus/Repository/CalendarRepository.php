@@ -6,6 +6,7 @@ use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Cache\Doctrine\Provider\FilesystemCache;
 use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Storage\DataClass\Property\DataClassProperties;
+use Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository;
 use Chamilo\Libraries\Storage\Parameters\DataClassDistinctParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrieveParameters;
 use Chamilo\Libraries\Storage\Parameters\RecordRetrievesParameters;
@@ -34,22 +35,35 @@ class CalendarRepository
 
     /**
      *
-     * @var \Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository
+     * @var \Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository
      */
-    private static $instance;
+    private $dataClassRepository;
 
     /**
      *
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository
+     * @param \Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository $dataClassRepository
      */
-    static public function getInstance()
+    public function __construct(DataClassRepository $dataClassRepository)
     {
-        if (is_null(static::$instance))
-        {
-            self::$instance = new static();
-        }
+        $this->dataClassRepository = $dataClassRepository;
+    }
 
-        return static::$instance;
+    /**
+     *
+     * @return \Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository
+     */
+    protected function getDataClassRepository()
+    {
+        return $this->dataClassRepository;
+    }
+
+    /**
+     *
+     * @param \Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository $dataClassRepository
+     */
+    protected function setDataClassRepository($dataClassRepository)
+    {
+        $this->dataClassRepository = $dataClassRepository;
     }
 
     /**
@@ -172,14 +186,14 @@ class CalendarRepository
                     new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
                     new StaticConditionVariable((string) $user->get_official_code()));
 
-                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $activities = $this->getDataClassRepository()->records(
                     $baseClass,
                     new RecordRetrievesParameters(
                         null,
                         $condition,
                         null,
                         null,
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))))->as_array();
+                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
 
                 $records = $this->aggregateActivities($baseClass, $activities);
             }
@@ -210,7 +224,7 @@ class CalendarRepository
                 new PropertyConditionVariable($className, $className::PROPERTY_GROUP_ID),
                 new StaticConditionVariable((string) $groupIdentifier));
 
-            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $activities = $this->getDataClassRepository()->records(
                 $className,
                 new RecordRetrievesParameters(
                     null,
@@ -249,7 +263,7 @@ class CalendarRepository
                 new PropertyConditionVariable($className, $className::PROPERTY_LOCATION_ID),
                 new StaticConditionVariable((string) $locationIdentifier));
 
-            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $activities = $this->getDataClassRepository()->records(
                 $className,
                 new RecordRetrievesParameters(
                     null,
@@ -313,7 +327,7 @@ class CalendarRepository
                     new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_MODULE_ID),
                     new StaticConditionVariable((string) $moduleIdentifier));
 
-                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $activities = $this->getDataClassRepository()->records(
                     $baseClass,
                     new RecordRetrievesParameters(
                         null,
@@ -366,7 +380,7 @@ class CalendarRepository
                     new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
                     new StaticConditionVariable((string) $identifier));
 
-                $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+                $activities = $this->getDataClassRepository()->records(
                     $baseClass,
                     new RecordRetrievesParameters(
                         null,
@@ -421,7 +435,7 @@ class CalendarRepository
                 new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
                 new StaticConditionVariable((string) $eventIdentifier));
 
-            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $activities = $this->getDataClassRepository()->records(
                 $baseClass,
                 new RecordRetrievesParameters(
                     null,
@@ -473,7 +487,7 @@ class CalendarRepository
                 new PropertyConditionVariable($className, $className::PROPERTY_MODULE_ID),
                 new StaticConditionVariable((string) $moduleIdentifier));
 
-            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $activities = $this->getDataClassRepository()->records(
                 $className,
                 new RecordRetrievesParameters(
                     null,
@@ -522,7 +536,7 @@ class CalendarRepository
                 new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
                 new StaticConditionVariable((string) $eventIdentifier));
 
-            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $activities = $this->getDataClassRepository()->records(
                 $baseClass,
                 new RecordRetrievesParameters(
                     null,
@@ -574,7 +588,7 @@ class CalendarRepository
                 new PropertyConditionVariable($className, $className::PROPERTY_MODULE_ID),
                 new StaticConditionVariable((string) $moduleIdentifier));
 
-            $activities = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $activities = $this->getDataClassRepository()->records(
                 $className,
                 new RecordRetrievesParameters(
                     null,
@@ -609,7 +623,7 @@ class CalendarRepository
                 new PropertyConditionVariable($className, StudentGroup::PROPERTY_PERSON_ID),
                 new StaticConditionVariable($user->get_official_code()));
 
-            return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            return $this->getDataClassRepository()->distinct(
                 $className,
                 new DataClassDistinctParameters(
                     $condition,
@@ -639,7 +653,7 @@ class CalendarRepository
                 new PropertyConditionVariable($className, StudentGroup::PROPERTY_PERSON_ID),
                 new StaticConditionVariable($user->get_official_code()));
 
-            return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            return $this->getDataClassRepository()->distinct(
                 $className,
                 new DataClassDistinctParameters(
                     $condition,
@@ -671,7 +685,7 @@ class CalendarRepository
         {
             $className = $this->getYearSpecificClassName('Group', $year);
 
-            $faculties = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            $faculties = $this->getDataClassRepository()->distinct(
                 $className,
                 new DataClassDistinctParameters(
                     null,
@@ -699,7 +713,7 @@ class CalendarRepository
         {
             $className = $this->getYearSpecificClassName('Group', $year);
 
-            $facultiesGroups = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $facultiesGroups = $this->getDataClassRepository()->records(
                 $className,
                 new RecordRetrievesParameters(
                     null,
@@ -730,7 +744,7 @@ class CalendarRepository
         {
             $className = $this->getYearSpecificClassName('Group', $year);
 
-            $groups = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $groups = $this->getDataClassRepository()->records(
                 $className,
                 new RecordRetrievesParameters(
                     null,
@@ -759,7 +773,7 @@ class CalendarRepository
         {
             $className = $this->getYearSpecificClassName('Location', $year);
 
-            $zones = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            $zones = $this->getDataClassRepository()->distinct(
                 $className,
                 new DataClassDistinctParameters(
                     null,
@@ -799,7 +813,7 @@ class CalendarRepository
                 new PropertyConditionVariable($className, Location::PROPERTY_ZONE_ID),
                 new StaticConditionVariable($zoneIdentifier));
 
-            $locations = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+            $locations = $this->getDataClassRepository()->records(
                 $className,
                 new RecordRetrievesParameters(
                     null,
@@ -835,7 +849,7 @@ class CalendarRepository
             new PropertyConditionVariable($className, Location::PROPERTY_ID),
             new StaticConditionVariable($identifier));
 
-        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::record(
+        return $this->getDataClassRepository()->record(
             $className,
             new RecordRetrieveParameters(
                 new DataClassProperties(new PropertiesConditionVariable($className::class_name())),
@@ -886,7 +900,7 @@ class CalendarRepository
             new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_STRUCK),
             new StaticConditionVariable(0));
 
-        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+        return $this->getDataClassRepository()->records(
             ScheduledGroup::class_name(),
             new RecordRetrievesParameters(
                 new DataClassProperties($properties),

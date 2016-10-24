@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="ehb.application.calendar.extension.syllabus_plus.service.calendar_service"
+            class="Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService">
+            <argument
+                type="service"
+                id="ehb.application.calendar.extension.syllabus_plus.repository.calendar_repository" />
+        </service>
+
+        <service
+            id="ehb.application.calendar.extension.syllabus_plus.repository.calendar_repository"
+            class="Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository">
+            <argument
+                type="service"
+                id="ehb.libraries.storage.data_manager.administration.data_class_repository" />
+        </service>
+
+    </services>
+</container>

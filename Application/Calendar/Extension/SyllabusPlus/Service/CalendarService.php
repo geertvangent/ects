@@ -32,7 +32,7 @@ class CalendarService
      */
     public function __construct(CalendarRepository $calendarRepository)
     {
-        $this->CalendarRepository = $calendarRepository;
+        $this->calendarRepository = $calendarRepository;
     }
 
     /**
@@ -41,7 +41,7 @@ class CalendarService
      */
     public function getCalendarRepository()
     {
-        return $this->CalendarRepository;
+        return $this->calendarRepository;
     }
 
     /**
@@ -50,7 +50,7 @@ class CalendarService
      */
     public function setCalendarRepository(CalendarRepository $calendarRepository)
     {
-        $this->CalendarRepository = $calendarRepository;
+        $this->calendarRepository = $calendarRepository;
     }
 
     /**
@@ -79,11 +79,11 @@ class CalendarService
         // }
 
         // return new ArrayResultSet($cache->fetch($cacheIdentifier));
-        return new ArrayResultSet(
+        return
             $this->filterEventsBetweenDates(
                 $this->getCalendarRepository()->findEventsForUser($user),
                 $fromDate,
-                $toDate));
+                $toDate);
     }
 
     /**

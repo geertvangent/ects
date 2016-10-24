@@ -6,6 +6,8 @@ use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Format\Theme;
 use Chamilo\Libraries\Format\Utilities\ResourceManager;
 use Ehb\Application\Ects\Manager;
+use Chamilo\Core\User\Storage\DataClass\User;
+use Chamilo\Libraries\Storage\Iterator\DataClassIterator;
 
 /**
  *
@@ -18,6 +20,31 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
 
     public function renderBody()
     {
+        $objects = array();
+        $objects[] = new User(array(User::PROPERTY_USERNAME => 'Donald'));
+        $objects[] = new User(array(User::PROPERTY_USERNAME => 'Scrooge'));
+        $objects[] = new User(array(User::PROPERTY_USERNAME => 'Flintheart'));
+        $objects[] = new User(array(User::PROPERTY_USERNAME => 'Goldie'));
+
+        $result = new DataClassIterator($objects);
+
+//         $object = new \ArrayObject( $objects );
+//         $result = $object->getIterator();
+
+        echo '<strong>PART I</strong><br /><br />';
+
+        echo $result->getCurrentEntryPositionType() . '<br /><br />';
+
+        foreach ($result as $user)
+        {
+
+            var_dump($user);
+            echo '<br />';
+            echo $result->getCurrentEntryPositionType() . '<br /><br />';
+        }
+
+        exit();
+
         $html = array();
 
         $html[] = $this->getJavascript();

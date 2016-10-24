@@ -274,6 +274,7 @@ class UserBrowserComponent extends Manager implements DelegateComponent
         if (! isset($this->calendarDataProvider))
         {
             $this->calendarDataProvider = new UserCalendarRendererProvider(
+                $this->getService('ehb.application.calendar.extension.syllabus_plus.service.calendar_service'),
                 $this->getUserCalendar(),
                 $this->get_user(),
                 $this->getDisplayParameters());

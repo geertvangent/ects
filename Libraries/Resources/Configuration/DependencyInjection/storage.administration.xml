@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="ehb.libraries.storage.data_manager.administration.data_source_name"
+            class="Chamilo\Libraries\Storage\DataManager\Doctrine\DataSourceName">
+            <factory
+                service="ehb.libraries.storage.data_manager.administration.factory.data_source_name_factory"
+                method="getDataSourceName" />
+        </service>
+
+        <service
+            id="ehb.libraries.storage.data_manager.administration.factory.data_source_name_factory"
+            class="Ehb\Libraries\Storage\DataManager\Administration\Factory\DataSourceNameFactory">
+            <argument
+                type="service"
+                id="chamilo.configuration.service.configuration_service" />
+        </service>
+
+        <service
+            id="ehb.libraries.storage.data_manager.administration.factory.connection_factory"
+            class="Chamilo\Libraries\Storage\DataManager\Doctrine\Factory\ConnectionFactory">
+            <argument
+                type="service"
+                id="ehb.libraries.storage.data_manager.administration.data_source_name" />
+        </service>
+
+        <service
+            id="ehb.libraries.storage.data_manager.administration.database.data_class_database"
+            class="Chamilo\Libraries\Storage\DataManager\Doctrine\Database\DataClassDatabase">
+            <argument
+                type="service"
+                id="doctrine.dbal.connection.administration" />
+            <argument
+                type="service"
+                id="chamilo.libraries.storage.data_manager.storage_alias_generator" />
+            <argument
+                type="service"
+                id="chamilo.libraries.architecture.error_handler.exception_logger" />
+            <argument
+                type="service"
+                id="chamilo.libraries.storage.data_manager.doctrine.service.condition_part_translator_service" />
+            <argument
+                type="service"
+                id="chamilo.libraries.storage.data_manager.doctrine.processor.record_processor" />
+        </service>
+
+        <service
+            id="ehb.libraries.storage.data_manager.administration.data_class_repository"
+            class="Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository">
+            <argument
+                type="service"
+                id="chamilo.configuration.service.configuration_service" />
+            <argument
+                type="service"
+                id="chamilo.libraries.storage.cache.data_manager_cache" />
+            <argument
+                type="service"
+                id="ehb.libraries.storage.data_manager.administration.database.data_class_database" />
+            <argument
+                type="service"
+                id="chamilo.libraries.storage.data_class.data_class_factory" />
+        </service>
+    </services>
+</container>

@@ -2,8 +2,8 @@
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Service;
 
 use Chamilo\Configuration\Configuration;
+use Chamilo\Core\User\Storage\DataClass\User;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\UserEventParser;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 
 /**
  *
@@ -14,6 +14,44 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepositor
  */
 class UserCalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\Service\CalendarRendererProvider
 {
+
+    /**
+     *
+     * @var CalendarService
+     */
+    private $calendarService;
+
+    /**
+     *
+     * @param CalendarService $calendarService
+     * @param \Chamilo\Core\User\Storage\DataClass\User $dataUser
+     * @param \Chamilo\Core\User\Storage\DataClass\User $viewingUser
+     * @param string[] $displayParameters;
+     */
+    public function __construct(CalendarService $calendarService, User $dataUser, User $viewingUser, $displayParameters)
+    {
+        parent::__construct($dataUser, $viewingUser, $displayParameters);
+
+        $this->calendarService = $calendarService;
+    }
+
+    /**
+     *
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
+     */
+    protected function getCalendarService()
+    {
+        return $this->calendarService;
+    }
+
+    /**
+     *
+     * @param \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService $calendarService
+     */
+    protected function setCalendarService(CalendarService $calendarService)
+    {
+        $this->calendarService = $calendarService;
+    }
 
     /**
      *
@@ -29,17 +67,17 @@ class UserCalendarRendererProvider extends \Chamilo\Libraries\Calendar\Renderer\
         {
             // TODO: This is basically almost the same as the logic in the integration with the Calendar application,
             // the logic should therefore be split off into it's own service
-            $calendarService = new CalendarService(CalendarRepository::getInstance());
+            $calendarService = $this->getCalendarService();
             $events = array();
 
             if ($calendarService->isConfigured(Configuration::get_instance()))
             {
-                $eventResultSet = $calendarService->getEventsForUserAndBetweenDates(
+                $calenderEvents = $calendarService->getEventsForUserAndBetweenDates(
                     $this->getDataUser(),
                     $startTime,
                     $endTime);
 
-                while ($calenderEvent = $eventResultSet->next_result())
+                foreach ($calenderEvents as $calenderEvent)
                 {
                     $eventParser = new UserEventParser($this->getDataUser(), $calenderEvent, $startTime, $endTime);
                     $events = array_merge($events, $eventParser->getEvents());
