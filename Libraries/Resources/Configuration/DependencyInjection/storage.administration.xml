@@ -45,7 +45,7 @@
                 id="chamilo.libraries.storage.data_manager.doctrine.service.condition_part_translator_service" />
             <argument
                 type="service"
-                id="chamilo.libraries.storage.data_manager.doctrine.processor.record_processor" />
+                id="ehb.libraries.storage.data_manager.administration.processor.record_processor" />
         </service>
 
         <service
@@ -63,6 +63,11 @@
             <argument
                 type="service"
                 id="chamilo.libraries.storage.data_class.data_class_factory" />
+        </service>
+
+        <service
+            id="ehb.libraries.storage.data_manager.administration.processor.record_processor"
+            class="Ehb\Libraries\Storage\DataManager\Administration\Processor\RecordProcessor">
         </service>
     </services>
 </container>
