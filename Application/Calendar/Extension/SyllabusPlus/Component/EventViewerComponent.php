@@ -30,12 +30,6 @@ abstract class EventViewerComponent extends Manager
     private $year;
 
     /**
-     *
-     * @var \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
-     */
-    private $calendarService;
-
-    /**
      * Runs this component and displays its output.
      */
     public function run()
@@ -222,7 +216,7 @@ abstract class EventViewerComponent extends Manager
         {
             $moduleEvents = $this->getModuleEvents($activityRecord[Activity::PROPERTY_MODULE_ID]);
 
-            while ($moduleEvent = $moduleEvents->next_result())
+            foreach ($moduleEvents as $moduleEvent)
             {
                 $eventParser = $this->getEventParser($moduleEvent);
 

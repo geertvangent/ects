@@ -20,12 +20,6 @@ class ProgressComponent extends Manager
 {
 
     /**
-     *
-     * @var \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
-     */
-    private $calendarService;
-
-    /**
      * Runs this component and displays its output.
      */
     public function run()
@@ -82,7 +76,7 @@ class ProgressComponent extends Manager
 
         $previousFacultyIdentifier = false;
 
-        while ($scheduledGroup = $scheduledGroups->next_result())
+        foreach ($scheduledGroups as $scheduledGroup)
         {
             $row = array();
 

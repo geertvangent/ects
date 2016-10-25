@@ -8,10 +8,9 @@ use Chamilo\Application\Calendar\Storage\DataClass\Availability;
 use Chamilo\Application\Calendar\Storage\DataClass\AvailableCalendar;
 use Chamilo\Configuration\Configuration;
 use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\DependencyInjection\DependencyInjectionContainerBuilder;
 use Chamilo\Libraries\Platform\Translation;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Integration\Chamilo\Libraries\Calendar\Event\UserEventParser;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
-use Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService;
 
 /**
  *
@@ -31,14 +30,14 @@ class CalendarEventDataProvider extends InternalCalendar
         \Chamilo\Libraries\Calendar\Renderer\Service\CalendarRendererProvider $calendarRendererProvider,
         $requestedSourceType, $fromDate, $toDate)
     {
-        $calendarService = new CalendarService(CalendarRepository :: getInstance());
+        $calendarService = $this->getCalendarService();
         $events = array();
 
-        if ($calendarService->isConfigured(Configuration :: get_instance()))
+        if ($calendarService->isConfigured(Configuration::get_instance()))
         {
             $availabilityService = new AvailabilityService(new AvailabilityRepository());
-            $packageContext = ClassnameUtilities :: getInstance()->getNamespaceParent(__NAMESPACE__, 4);
-            $packageName = ClassnameUtilities :: getInstance()->getPackageNameFromNamespace($packageContext);
+            $packageContext = ClassnameUtilities::getInstance()->getNamespaceParent(__NAMESPACE__, 4);
+            $packageName = ClassnameUtilities::getInstance()->getPackageNameFromNamespace($packageContext);
 
             $activeAvailability = $availabilityService->getAvailabilityByUserAndCalendarTypeAndCalendarIdentifier(
                 $calendarRendererProvider->getDataUser(),
@@ -48,14 +47,18 @@ class CalendarEventDataProvider extends InternalCalendar
             if (($activeAvailability instanceof Availability && $activeAvailability->getAvailability() == 1) ||
                  ! $activeAvailability instanceof Availability)
             {
-                $eventResultSet = $calendarService->getEventsForUserAndBetweenDates(
+                $calendarEvents = $calendarService->getEventsForUserAndBetweenDates(
                     $calendarRendererProvider->getDataUser(),
                     $fromDate,
                     $toDate);
 
-                while ($calenderEvent = $eventResultSet->next_result())
+                foreach ($calendarEvents as $calendarEvent)
                 {
-                    $eventParser = new UserEventParser( $calendarRendererProvider->getDataUser(), $calenderEvent, $fromDate, $toDate);
+                    $eventParser = new UserEventParser(
+                        $calendarRendererProvider->getDataUser(),
+                        $calendarEvent,
+                        $fromDate,
+                        $toDate);
                     $events = array_merge($events, $eventParser->getEvents());
                 }
             }
@@ -70,21 +73,31 @@ class CalendarEventDataProvider extends InternalCalendar
      */
     public function getCalendars()
     {
-        $calendarService = new CalendarService(CalendarRepository :: getInstance());
         $calendars = array();
 
-        if ($calendarService->isConfigured(Configuration :: get_instance()))
+        if ($this->getCalendarService()->isConfigured(Configuration::get_instance()))
         {
-            $package = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager :: package();
+            $package = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::package();
 
             $calendar = new AvailableCalendar();
-            $calendar->setIdentifier(ClassnameUtilities :: getInstance()->getPackageNameFromNamespace($package));
+            $calendar->setIdentifier(ClassnameUtilities::getInstance()->getPackageNameFromNamespace($package));
             $calendar->setType($package);
-            $calendar->setName(Translation :: get('TypeName', null, $package));
+            $calendar->setName(Translation::get('TypeName', null, $package));
 
             $calendars[] = $calendar;
         }
 
         return $calendars;
+    }
+
+    /**
+     *
+     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
+     */
+    public function getCalendarService()
+    {
+        $containerBuilder = new DependencyInjectionContainerBuilder();
+        $container = $containerBuilder->createContainer();
+        return $container->get('ehb.application.calendar.extension.syllabus_plus.service.calendar_service');
     }
 }
