@@ -17,7 +17,7 @@
             class="Ehb\Libraries\Storage\DataManager\Administration\Factory\DataSourceNameFactory">
             <argument
                 type="service"
-                id="chamilo.configuration.service.configuration_service" />
+                id="chamilo.configuration.service.configuration_consulter" />
         </service>
 
         <service
@@ -53,10 +53,10 @@
             class="Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository">
             <argument
                 type="service"
-                id="chamilo.configuration.service.configuration_service" />
+                id="chamilo.configuration.service.file_configuration_consulter" />
             <argument
                 type="service"
-                id="chamilo.libraries.storage.cache.data_manager_cache" />
+                id="chamilo.libraries.storage.cache.data_class_repository_cache" />
             <argument
                 type="service"
                 id="ehb.libraries.storage.data_manager.administration.database.data_class_database" />

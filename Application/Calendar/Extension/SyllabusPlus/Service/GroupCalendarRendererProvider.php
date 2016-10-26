@@ -16,12 +16,6 @@ class GroupCalendarRendererProvider extends CalendarRendererProvider
 
     /**
      *
-     * @var CalendarService
-     */
-    private $calendarService;
-
-    /**
-     *
      * @var string
      */
     private $year;
@@ -44,29 +38,10 @@ class GroupCalendarRendererProvider extends CalendarRendererProvider
     public function __construct(CalendarService $calendarService, $year, $groupIdentifier, User $dataUser,
         User $viewingUser, $displayParameters)
     {
-        parent::__construct($dataUser, $viewingUser, $displayParameters);
+        parent::__construct($calendarService, $dataUser, $viewingUser, $displayParameters);
 
-        $this->calendarService = $calendarService;
         $this->year = $year;
         $this->groupIdentifier = $groupIdentifier;
-    }
-
-    /**
-     *
-     * @return \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService
-     */
-    protected function getCalendarService()
-    {
-        return $this->calendarService;
-    }
-
-    /**
-     *
-     * @param \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarService $calendarService
-     */
-    protected function setCalendarService(CalendarService $calendarService)
-    {
-        $this->calendarService = $calendarService;
     }
 
     /**

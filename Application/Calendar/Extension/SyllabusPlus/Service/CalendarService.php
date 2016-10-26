@@ -3,7 +3,6 @@ namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Service;
 
 use Chamilo\Configuration\Configuration;
 use Chamilo\Core\User\Storage\DataClass\User;
-use Chamilo\Libraries\Storage\ResultSet\ArrayResultSet;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Repository\CalendarRepository;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Activity;
 use Ehb\Application\Calendar\Extension\SyllabusPlus\Storage\DataClass\Group;
@@ -79,11 +78,10 @@ class CalendarService
         // }
 
         // return new ArrayResultSet($cache->fetch($cacheIdentifier));
-        return
-            $this->filterEventsBetweenDates(
-                $this->getCalendarRepository()->findEventsForUser($user),
-                $fromDate,
-                $toDate);
+        return $this->filterEventsBetweenDates(
+            $this->getCalendarRepository()->findEventsForUser($user),
+            $fromDate,
+            $toDate);
     }
 
     /**
@@ -135,11 +133,10 @@ class CalendarService
      */
     public function getEventsForGroupAndBetweenDates($year, $groupIdentifier, $fromDate, $toDate)
     {
-        return new ArrayResultSet(
-            $this->filterEventsBetweenDates(
-                $this->getCalendarRepository()->findEventsForGroup($year, $groupIdentifier),
-                $fromDate,
-                $toDate));
+        return $this->filterEventsBetweenDates(
+            $this->getCalendarRepository()->findEventsForGroup($year, $groupIdentifier),
+            $fromDate,
+            $toDate);
 
         // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier, $fromDate, $toDate)));
@@ -170,11 +167,10 @@ class CalendarService
      */
     public function getEventsByYearAndLocationAndBetweenDates($year, $locationIdentifier, $fromDate, $toDate)
     {
-        return new ArrayResultSet(
-            $this->filterEventsBetweenDates(
-                $this->getCalendarRepository()->findEventsForLocation($year, $locationIdentifier),
-                $fromDate,
-                $toDate));
+        return $this->filterEventsBetweenDates(
+            $this->getCalendarRepository()->findEventsForLocation($year, $locationIdentifier),
+            $fromDate,
+            $toDate);
 
         // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier, $fromDate, $toDate)));
@@ -214,8 +210,7 @@ class CalendarService
      */
     public function getEventsForUserByModuleIdentifier(User $user, $moduleIdentifier, $year)
     {
-        return new ArrayResultSet(
-            $this->getCalendarRepository()->findEventsForUserByModuleIdentifier($user, $moduleIdentifier, $year));
+        return $this->getCalendarRepository()->findEventsForUserByModuleIdentifier($user, $moduleIdentifier, $year);
     }
 
     /**
@@ -242,11 +237,10 @@ class CalendarService
      */
     public function getEventsForGroupByYearAndModuleIdentifier($year, $groupIdentifier, $moduleIdentifier)
     {
-        return new ArrayResultSet(
-            $this->getCalendarRepository()->findEventsForGroupByYearAndModuleIdentifier(
-                $year,
-                $groupIdentifier,
-                $moduleIdentifier));
+        return $this->getCalendarRepository()->findEventsForGroupByYearAndModuleIdentifier(
+            $year,
+            $groupIdentifier,
+            $moduleIdentifier);
     }
 
     /**
@@ -273,11 +267,10 @@ class CalendarService
      */
     public function getEventsForLocationByYearAndModuleIdentifier($year, $locationIdentifier, $moduleIdentifier)
     {
-        return new ArrayResultSet(
-            $this->getCalendarRepository()->findEventsForLocationByYearAndModuleIdentifier(
-                $year,
-                $locationIdentifier,
-                $moduleIdentifier));
+        return $this->getCalendarRepository()->findEventsForLocationByYearAndModuleIdentifier(
+            $year,
+            $locationIdentifier,
+            $moduleIdentifier);
     }
 
     /**

@@ -218,6 +218,7 @@ abstract class EventViewerComponent extends Manager
 
             foreach ($moduleEvents as $moduleEvent)
             {
+
                 $eventParser = $this->getEventParser($moduleEvent);
 
                 foreach ($eventParser->getEvents() as $event)
