@@ -14,7 +14,7 @@ class FilterFacultiesComponent extends \Ehb\Application\Ects\Ajax\Manager implem
 {
     // Parameters
     const PARAM_YEAR = 'year';
-
+    
     // Properties
     const PROPERTY_FACULTY = 'faculty';
 
@@ -54,7 +54,7 @@ class FilterFacultiesComponent extends \Ehb\Application\Ects\Ajax\Manager implem
         {
             $this->currentYear = $this->getRequestedPostDataValue(self::PARAM_YEAR);
         }
-
+        
         return $this->currentYear;
     }
 

@@ -18,13 +18,13 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function get_module_parameters()
     {
-        return self :: module_parameters();
+        return self::module_parameters();
     }
 
     public static function module_parameters()
     {
-        $training = Request :: get(self :: PARAM_TRAINING_ID);
-
+        $training = Request::get(self::PARAM_TRAINING_ID);
+        
         $parameter = new Parameters();
         if ($training)
         {
@@ -41,7 +41,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->training))
         {
-            $this->training = DataManager :: getInstance($this->get_module_instance())->retrieve_training(
+            $this->training = DataManager::getInstance($this->get_module_instance())->retrieve_training(
                 $this->get_module_parameters());
         }
         return $this->training;
@@ -49,16 +49,16 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function get_type()
     {
-        return Instance :: TYPE_DETAILS;
+        return Instance::TYPE_DETAILS;
     }
 
     public static function get_available_implementations()
     {
         $types = array();
-
-        $modules = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
-            Filesystem :: LIST_DIRECTORIES,
+        
+        $modules = Filesystem::get_directory_content(
+            Path::getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {

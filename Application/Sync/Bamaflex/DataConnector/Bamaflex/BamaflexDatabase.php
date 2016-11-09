@@ -11,6 +11,6 @@ class BamaflexDatabase extends Database
      */
     public function __construct()
     {
-        parent :: __construct(BamaflexConnection :: getInstance()->get_connection());
+        parent::__construct(BamaflexConnection::getInstance()->get_connection());
     }
 }

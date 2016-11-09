@@ -18,7 +18,7 @@ class StudentTrainingChoicesGroupSynchronization extends GroupSynchronization
 
     public function get_code()
     {
-        return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
+        return $this->get_parent_group()->get_code() . '_' . self::IDENTIFIER;
     }
 
     public function get_name()
@@ -29,9 +29,9 @@ class StudentTrainingChoicesGroupSynchronization extends GroupSynchronization
     public function get_children()
     {
         $children = array();
-        $children[] = GroupSynchronization :: factory('student_training_choices_graduations', $this);
-        $children[] = GroupSynchronization :: factory('student_training_choices_options', $this);
-        $children[] = GroupSynchronization :: factory('student_training_choices_combinations', $this);
+        $children[] = GroupSynchronization::factory('student_training_choices_graduations', $this);
+        $children[] = GroupSynchronization::factory('student_training_choices_options', $this);
+        $children[] = GroupSynchronization::factory('student_training_choices_combinations', $this);
         return $children;
     }
 }

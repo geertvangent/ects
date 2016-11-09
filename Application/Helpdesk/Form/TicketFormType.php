@@ -23,12 +23,12 @@ class TicketFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(self :: FIELD_SUBJECT, TextType :: class);
+        $builder->add(self::FIELD_SUBJECT, TextType::class);
     }
 
     /**
      * Returns the name of this type.
-     *
+     * 
      * @return string The name of this type
      */
     public function getName()

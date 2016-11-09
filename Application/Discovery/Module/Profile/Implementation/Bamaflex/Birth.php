@@ -18,17 +18,17 @@ class Birth extends DataClass
      */
     public function get_date()
     {
-        return $this->get_default_property(self :: PROPERTY_DATE);
+        return $this->get_default_property(self::PROPERTY_DATE);
     }
 
     public function get_formatted_date($format = null)
     {
         if (! $format)
         {
-            $format = Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES);
+            $format = Translation::get('DateFormatShort', null, Utilities::COMMON_LIBRARIES);
         }
-
-        return DatetimeUtilities :: format_locale_date($format, $this->get_date());
+        
+        return DatetimeUtilities::format_locale_date($format, $this->get_date());
     }
 
     /**
@@ -37,7 +37,7 @@ class Birth extends DataClass
      */
     public function get_place()
     {
-        return $this->get_default_property(self :: PROPERTY_PLACE);
+        return $this->get_default_property(self::PROPERTY_PLACE);
     }
 
     /**
@@ -46,7 +46,7 @@ class Birth extends DataClass
      */
     public function get_country()
     {
-        return $this->get_default_property(self :: PROPERTY_COUNTRY);
+        return $this->get_default_property(self::PROPERTY_COUNTRY);
     }
 
     /**
@@ -55,7 +55,7 @@ class Birth extends DataClass
      */
     public function set_date($date)
     {
-        $this->set_default_property(self :: PROPERTY_DATE, $date);
+        $this->set_default_property(self::PROPERTY_DATE, $date);
     }
 
     /**
@@ -64,7 +64,7 @@ class Birth extends DataClass
      */
     public function set_place($place)
     {
-        $this->set_default_property(self :: PROPERTY_PLACE, $place);
+        $this->set_default_property(self::PROPERTY_PLACE, $place);
     }
 
     /**
@@ -73,7 +73,7 @@ class Birth extends DataClass
      */
     public function set_country($country)
     {
-        $this->set_default_property(self :: PROPERTY_COUNTRY, $country);
+        $this->set_default_property(self::PROPERTY_COUNTRY, $country);
     }
 
     /**
@@ -104,12 +104,12 @@ class Birth extends DataClass
         {
             $location[] = $this->get_place();
         }
-
+        
         if ($this->get_country())
         {
             $location[] = '(' . $this->get_country() . ')';
         }
-
+        
         return implode(' ', $location);
     }
 
@@ -119,11 +119,11 @@ class Birth extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_DATE;
-        $extended_property_names[] = self :: PROPERTY_PLACE;
-        $extended_property_names[] = self :: PROPERTY_COUNTRY;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_DATE;
+        $extended_property_names[] = self::PROPERTY_PLACE;
+        $extended_property_names[] = self::PROPERTY_COUNTRY;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**
@@ -142,10 +142,10 @@ class Birth extends DataClass
     public function __toString()
     {
         $birth_date = $this->get_formatted_date();
-
+        
         if ($this->has_location())
         {
-            return Translation :: get('BornIn', array('DATE' => $birth_date, 'PLACE' => $this->get_location()));
+            return Translation::get('BornIn', array('DATE' => $birth_date, 'PLACE' => $this->get_location()));
         }
         else
         {

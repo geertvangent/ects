@@ -15,7 +15,7 @@ class FilterTrainingTypesComponent extends \Ehb\Application\Ects\Ajax\Manager im
     // Parameters
     const PARAM_YEAR = 'year';
     const PARAM_FACULTY = 'faculty';
-
+    
     // Properties
     const PROPERTY_TYPE = 'type';
 
@@ -61,7 +61,7 @@ class FilterTrainingTypesComponent extends \Ehb\Application\Ects\Ajax\Manager im
         {
             $this->currentYear = $this->getRequestedPostDataValue(self::PARAM_YEAR);
         }
-
+        
         return $this->currentYear;
     }
 
@@ -75,7 +75,7 @@ class FilterTrainingTypesComponent extends \Ehb\Application\Ects\Ajax\Manager im
         {
             $this->currentFacultyIdentifier = $this->getRequestedPostDataValue(self::PARAM_FACULTY);
         }
-
+        
         return $this->currentFacultyIdentifier;
     }
 
@@ -86,7 +86,7 @@ class FilterTrainingTypesComponent extends \Ehb\Application\Ects\Ajax\Manager im
     private function getTypes()
     {
         return $this->getBaMaFlexService()->getTypesForYearAndFacultyIdentifier(
-            $this->getCurrentYear(),
+            $this->getCurrentYear(), 
             $this->getCurrentFacultyIdentifier());
     }
 }

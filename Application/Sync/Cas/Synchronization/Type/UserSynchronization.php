@@ -21,9 +21,9 @@ class UserSynchronization extends Synchronization
 
     public function run()
     {
-        foreach (self :: get_user_types() as $type)
+        foreach (self::get_user_types() as $type)
         {
-            $synchronization = self :: factory($type);
+            $synchronization = self::factory($type);
             $synchronization->run();
         }
     }
@@ -33,13 +33,13 @@ class UserSynchronization extends Synchronization
         $types = array();
         $types[] = 'create';
         $types[] = 'update';
-
+        
         return $types;
     }
 
     public static function factory($type)
     {
-        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+        $class = __NAMESPACE__ . '\\' . StringUtilities::getInstance()->createString($type)->upperCamelize() .
              'UserSynchronization';
         if (class_exists($class))
         {

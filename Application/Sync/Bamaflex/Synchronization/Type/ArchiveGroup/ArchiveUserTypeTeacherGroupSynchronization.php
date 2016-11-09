@@ -18,7 +18,7 @@ class ArchiveUserTypeTeacherGroupSynchronization extends ArchiveGroupSynchroniza
 
     public function get_code()
     {
-        return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
+        return $this->get_parent_group()->get_code() . '_' . self::IDENTIFIER;
     }
 
     public function get_name()
@@ -29,9 +29,9 @@ class ArchiveUserTypeTeacherGroupSynchronization extends ArchiveGroupSynchroniza
     public function get_children()
     {
         $faculty_id = $this->get_synchronization()->get_parameter(
-            ArchiveDepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);
+            ArchiveDepartmentGroupSynchronization::RESULT_PROPERTY_DEPARTMENT_ID);
         $faculty_source = $this->get_synchronization()->get_parameter(
-            ArchiveDepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_SOURCE);
+            ArchiveDepartmentGroupSynchronization::RESULT_PROPERTY_DEPARTMENT_SOURCE);
         
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_advanced] WHERE faculty_id = ' . $faculty_id .
              ' AND source = ' . $faculty_source;
@@ -41,7 +41,7 @@ class ArchiveUserTypeTeacherGroupSynchronization extends ArchiveGroupSynchroniza
         $children = array();
         while ($training = $trainings->next_result(false))
         {
-            $children[] = ArchiveGroupSynchronization :: factory('archive_teacher_training', $this, $training);
+            $children[] = ArchiveGroupSynchronization::factory('archive_teacher_training', $this, $training);
         }
         return $children;
     }

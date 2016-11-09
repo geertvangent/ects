@@ -10,5 +10,5 @@ abstract class Manager extends Application
     const ACTION_ATLANTIS = 'Atlantis';
     const ACTION_CAS = 'Cas';
     const ACTION_DATA = 'Data';
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self::ACTION_BROWSE;
 }

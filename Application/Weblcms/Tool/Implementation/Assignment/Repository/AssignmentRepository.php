@@ -51,10 +51,10 @@ class AssignmentRepository
     public function countEntriesForPublicationIdentifier($publicationIdentifier)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_PUBLICATION_ID), 
             new StaticConditionVariable($publicationIdentifier));
-
-        return DataManager :: count(Entry :: class_name(), new DataClassCountParameters($condition));
+        
+        return DataManager::count(Entry::class_name(), new DataClassCountParameters($condition));
     }
 
     /**
@@ -66,26 +66,26 @@ class AssignmentRepository
      * @param OrderBy[] $orderBy
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    public function findTargetUsersForPublication(ContentObjectPublication $publication, $condition, $offset, $count,
+    public function findTargetUsersForPublication(ContentObjectPublication $publication, $condition, $offset, $count, 
         $orderBy)
     {
         $users = $this->retrievePublicationTargetUsers($publication, $condition)->as_array();
-
+        
         $properties = new DataClassProperties();
-        $properties->add(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_FIRSTNAME));
-        $properties->add(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_LASTNAME));
-
-        $baseClass = User :: class_name();
-
+        $properties->add(new PropertyConditionVariable(User::class_name(), User::PROPERTY_FIRSTNAME));
+        $properties->add(new PropertyConditionVariable(User::class_name(), User::PROPERTY_LASTNAME));
+        
+        $baseClass = User::class_name();
+        
         return $this->findTargetsForEntityTypeAndPublication(
-            Entry :: ENTITY_TYPE_USER,
-            $publication,
-            $this->getTargetEntitiesCondition(User :: class_name(), $users, $condition),
-            $offset,
-            $count,
-            $orderBy,
-            $properties,
-            $baseClass,
+            Entry::ENTITY_TYPE_USER, 
+            $publication, 
+            $this->getTargetEntitiesCondition(User::class_name(), $users, $condition), 
+            $offset, 
+            $count, 
+            $orderBy, 
+            $properties, 
+            $baseClass, 
             $this->getTargetBaseVariable($baseClass));
     }
 
@@ -108,12 +108,12 @@ class AssignmentRepository
      */
     private function retrievePublicationTargetUsers(ContentObjectPublication $publication, Condition $condition = null)
     {
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_publication_target_users(
-            $publication->getId(),
-            $publication->get_course_id(),
-            null,
-            null,
-            null,
+        return \Chamilo\Application\Weblcms\Storage\DataManager::retrieve_publication_target_users(
+            $publication->getId(), 
+            $publication->get_course_id(), 
+            null, 
+            null, 
+            null, 
             $condition);
     }
 
@@ -126,25 +126,25 @@ class AssignmentRepository
      * @param OrderBy[] $orderBy
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    public function findTargetCourseGroupsForPublication(ContentObjectPublication $publication, $condition, $offset,
+    public function findTargetCourseGroupsForPublication(ContentObjectPublication $publication, $condition, $offset, 
         $count, $orderBy)
     {
         $courseGroups = $this->retrievePublicationTargetCourseGroups($publication, $condition)->as_array();
-
+        
         $properties = new DataClassProperties();
-        $properties->add(new PropertyConditionVariable(CourseGroup :: class_name(), CourseGroup :: PROPERTY_NAME));
-
-        $baseClass = CourseGroup :: class_name();
-
+        $properties->add(new PropertyConditionVariable(CourseGroup::class_name(), CourseGroup::PROPERTY_NAME));
+        
+        $baseClass = CourseGroup::class_name();
+        
         return $this->findTargetsForEntityTypeAndPublication(
-            Entry :: ENTITY_TYPE_COURSE_GROUP,
-            $publication,
-            $this->getTargetEntitiesCondition(CourseGroup :: class_name(), $courseGroups, $condition),
-            $offset,
-            $count,
-            $orderBy,
-            $properties,
-            $baseClass,
+            Entry::ENTITY_TYPE_COURSE_GROUP, 
+            $publication, 
+            $this->getTargetEntitiesCondition(CourseGroup::class_name(), $courseGroups, $condition), 
+            $offset, 
+            $count, 
+            $orderBy, 
+            $properties, 
+            $baseClass, 
             $this->getTargetBaseVariable($baseClass));
     }
 
@@ -165,15 +165,15 @@ class AssignmentRepository
      * @param Condition $condition
      * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
-    private function retrievePublicationTargetCourseGroups(ContentObjectPublication $publication,
+    private function retrievePublicationTargetCourseGroups(ContentObjectPublication $publication, 
         Condition $condition = null)
     {
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_publication_target_course_groups(
-            $publication->getId(),
-            $publication->get_course_id(),
-            null,
-            null,
-            null,
+        return \Chamilo\Application\Weblcms\Storage\DataManager::retrieve_publication_target_course_groups(
+            $publication->getId(), 
+            $publication->get_course_id(), 
+            null, 
+            null, 
+            null, 
             $condition);
     }
 
@@ -186,25 +186,25 @@ class AssignmentRepository
      * @param OrderBy[] $orderBy
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    public function findTargetGroupsForPublication(ContentObjectPublication $publication, $condition, $offset, $count,
+    public function findTargetGroupsForPublication(ContentObjectPublication $publication, $condition, $offset, $count, 
         $orderBy)
     {
         $platformGroups = $this->retrievePublicationTargetPlatformGroups($publication, $condition)->as_array();
-
+        
         $properties = new DataClassProperties();
-        $properties->add(new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME));
-
-        $baseClass = Group :: class_name();
-
+        $properties->add(new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_NAME));
+        
+        $baseClass = Group::class_name();
+        
         return $this->findTargetsForEntityTypeAndPublication(
-            Entry :: ENTITY_TYPE_GROUP,
-            $publication,
-            $this->getTargetEntitiesCondition(Group :: class_name(), $platformGroups, $condition),
-            $offset,
-            $count,
-            $orderBy,
-            $properties,
-            $baseClass,
+            Entry::ENTITY_TYPE_GROUP, 
+            $publication, 
+            $this->getTargetEntitiesCondition(Group::class_name(), $platformGroups, $condition), 
+            $offset, 
+            $count, 
+            $orderBy, 
+            $properties, 
+            $baseClass, 
             $this->getTargetBaseVariable($baseClass));
     }
 
@@ -225,15 +225,15 @@ class AssignmentRepository
      * @param Condition $condition
      * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
-    private function retrievePublicationTargetPlatformGroups(ContentObjectPublication $publication,
+    private function retrievePublicationTargetPlatformGroups(ContentObjectPublication $publication, 
         Condition $condition = null)
     {
-        return \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_publication_target_platform_groups(
-            $publication->getId(),
-            $publication->get_course_id(),
-            null,
-            null,
-            null,
+        return \Chamilo\Application\Weblcms\Storage\DataManager::retrieve_publication_target_platform_groups(
+            $publication->getId(), 
+            $publication->get_course_id(), 
+            null, 
+            null, 
+            null, 
             $condition);
     }
 
@@ -246,25 +246,23 @@ class AssignmentRepository
     private function getTargetEntitiesCondition($entityClass, $entities, Condition $condition = null)
     {
         $entityIds = array();
-
+        
         foreach ($entities as $entity)
         {
             $entityIds[$entity->get_id()] = $entity->get_id();
         }
-
+        
         if (count($entityIds) < 1)
         {
             $entityIds[] = - 1;
         }
-
+        
         $conditions = array();
-
+        
         ! is_null($condition) ? $conditions[] = $condition : $condition;
-
-        $conditions[] = new InCondition(
-            new PropertyConditionVariable($entityClass, DataClass :: PROPERTY_ID),
-            $entityIds);
-
+        
+        $conditions[] = new InCondition(new PropertyConditionVariable($entityClass, DataClass::PROPERTY_ID), $entityIds);
+        
         return new AndCondition($conditions);
     }
 
@@ -275,7 +273,7 @@ class AssignmentRepository
      */
     private function getTargetBaseVariable($baseClass)
     {
-        return new PropertyConditionVariable($baseClass, $baseClass :: PROPERTY_ID);
+        return new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID);
     }
 
     /**
@@ -291,66 +289,66 @@ class AssignmentRepository
      * @param PropertyConditionVariable $baseVariable
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    private function findTargetsForEntityTypeAndPublication($entityType, ContentObjectPublication $publication,
+    private function findTargetsForEntityTypeAndPublication($entityType, ContentObjectPublication $publication, 
         $condition, $offset, $count, $orderBy, DataClassProperties $properties, $baseClass, $baseVariable)
     {
         $properties->add(
-            new FixedPropertyConditionVariable($baseClass, $baseClass :: PROPERTY_ID, Entry :: PROPERTY_ENTITY_ID));
-        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE));
-
-        $submittedVariable = new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_SUBMITTED);
-
+            new FixedPropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID, Entry::PROPERTY_ENTITY_ID));
+        $properties->add(new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_TYPE));
+        
+        $submittedVariable = new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_SUBMITTED);
+        
         $properties->add(
             new FunctionConditionVariable(
-                FunctionConditionVariable :: MIN,
-                $submittedVariable,
-                EntityTableColumnModel :: PROPERTY_FIRST_ENTRY_DATE));
-
+                FunctionConditionVariable::MIN, 
+                $submittedVariable, 
+                EntityTableColumnModel::PROPERTY_FIRST_ENTRY_DATE));
+        
         $properties->add(
             new FunctionConditionVariable(
-                FunctionConditionVariable :: MAX,
-                $submittedVariable,
-                EntityTableColumnModel :: PROPERTY_LAST_ENTRY_DATE));
-
+                FunctionConditionVariable::MAX, 
+                $submittedVariable, 
+                EntityTableColumnModel::PROPERTY_LAST_ENTRY_DATE));
+        
         $properties->add(
             new FunctionConditionVariable(
-                FunctionConditionVariable :: COUNT,
-                $submittedVariable,
-                EntityTableColumnModel :: PROPERTY_ENTRY_COUNT));
-
+                FunctionConditionVariable::COUNT, 
+                $submittedVariable, 
+                EntityTableColumnModel::PROPERTY_ENTRY_COUNT));
+        
         $joins = new Joins();
-
+        
         $joinConditions = array();
-
+        
         $joinConditions[] = new EqualityCondition(
-            $baseVariable,
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID));
-
+            $baseVariable, 
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_ID));
+        
         $joinConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_PUBLICATION_ID), 
             new StaticConditionVariable($publication->getId()));
-
+        
         $joinConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_TYPE), 
             new StaticConditionVariable($entityType));
-
+        
         $joinCondition = new AndCondition($joinConditions);
-
-        $joins->add(new Join(Entry :: class_name(), $joinCondition, Join :: TYPE_LEFT));
-
+        
+        $joins->add(new Join(Entry::class_name(), $joinCondition, Join::TYPE_LEFT));
+        
         $group_by = new GroupBy();
         $group_by->add($baseVariable);
-
+        
         $parameters = new RecordRetrievesParameters(
-            $properties,
-            $condition,
-            $count,
-            $offset,
-            $orderBy,
-            $joins,
+            $properties, 
+            $condition, 
+            $count, 
+            $offset, 
+            $orderBy, 
+            $joins, 
             $group_by);
-
-        return DataManager :: records($baseClass, $parameters);
+        
+        return DataManager::records($baseClass, $parameters);
     }
 
     /**
@@ -360,36 +358,36 @@ class AssignmentRepository
      * @param integer $entityId
      * @return integer
      */
-    public function countFeedbackForPublicationByEntityTypeAndEntityId(ContentObjectPublication $publication,
+    public function countFeedbackForPublicationByEntityTypeAndEntityId(ContentObjectPublication $publication, 
         $entityType, $entityId)
     {
         $conditions = array();
-
+        
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_PUBLICATION_ID), 
             new StaticConditionVariable($publication->getId()));
-
+        
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_TYPE), 
             new StaticConditionVariable($entityType));
-
+        
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_ID), 
             new StaticConditionVariable($entityId));
-
+        
         $condition = new AndCondition($conditions);
-
+        
         $joins = new Joins();
         $joins->add(
             new Join(
-                Feedback :: class_name(),
+                Feedback::class_name(), 
                 new EqualityCondition(
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
-                    new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID))));
-
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ID), 
+                    new PropertyConditionVariable(Feedback::class_name(), Feedback::PROPERTY_ENTRY_ID))));
+        
         $parameters = new DataClassCountParameters($condition, $joins);
-
-        return DataManager :: count(Entry :: class_name(), $parameters);
+        
+        return DataManager::count(Entry::class_name(), $parameters);
     }
 
     /**
@@ -402,10 +400,10 @@ class AssignmentRepository
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_PUBLICATION_ID), 
             new StaticConditionVariable($publication->get_id()));
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_TYPE), 
             new StaticConditionVariable($entityType));
         return new AndCondition($conditions);
     }
@@ -419,15 +417,15 @@ class AssignmentRepository
     public function countDistinctEntriesByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
         $property = new FunctionConditionVariable(
-            FunctionConditionVariable :: DISTINCT,
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID));
-
+            FunctionConditionVariable::DISTINCT, 
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_ID));
+        
         $parameters = new DataClassCountParameters(
-            $this->getPublicationAndEntityTypeCondition($publication, $entityType),
-            null,
+            $this->getPublicationAndEntityTypeCondition($publication, $entityType), 
+            null, 
             $property);
-
-        return DataManager :: count(Entry :: class_name(), $parameters);
+        
+        return DataManager::count(Entry::class_name(), $parameters);
     }
 
     /**
@@ -439,24 +437,24 @@ class AssignmentRepository
     public function countDistinctFeedbackByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
         $joins = new Joins();
-
+        
         $joins->add(
             new Join(
-                Feedback :: class_name(),
+                Feedback::class_name(), 
                 new EqualityCondition(
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
-                    new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID))));
-
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ID), 
+                    new PropertyConditionVariable(Feedback::class_name(), Feedback::PROPERTY_ENTRY_ID))));
+        
         $property = new FunctionConditionVariable(
-            FunctionConditionVariable :: DISTINCT,
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID));
-
+            FunctionConditionVariable::DISTINCT, 
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_ID));
+        
         $parameters = new DataClassCountParameters(
-            $this->getPublicationAndEntityTypeCondition($publication, $entityType),
-            $joins,
+            $this->getPublicationAndEntityTypeCondition($publication, $entityType), 
+            $joins, 
             $property);
-
-        return DataManager :: count(Entry :: class_name(), $parameters);
+        
+        return DataManager::count(Entry::class_name(), $parameters);
     }
 
     /**
@@ -465,35 +463,35 @@ class AssignmentRepository
      * @param integer $entityType
      * @return integer
      */
-    public function countDistinctLateEntriesByPublicationAndEntityType(ContentObjectPublication $publication,
+    public function countDistinctLateEntriesByPublicationAndEntityType(ContentObjectPublication $publication, 
         $entityType)
     {
         $joins = new Joins();
-
+        
         $joins->add(
             new Join(
-                ContentObjectPublication :: class_name(),
+                ContentObjectPublication::class_name(), 
                 new EqualityCondition(
                     new PropertyConditionVariable(
-                        ContentObjectPublication :: class_name(),
-                        ContentObjectPublication :: PROPERTY_ID),
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID))));
-
+                        ContentObjectPublication::class_name(), 
+                        ContentObjectPublication::PROPERTY_ID), 
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_PUBLICATION_ID))));
+        
         $property = new FunctionConditionVariable(
-            FunctionConditionVariable :: DISTINCT,
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID));
-
+            FunctionConditionVariable::DISTINCT, 
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_ID));
+        
         $conditions = array();
         $conditions[] = $this->getPublicationAndEntityTypeCondition($publication, $entityType);
         $conditions[] = new InequalityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_SUBMITTED),
-            InequalityCondition :: GREATER_THAN,
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_SUBMITTED), 
+            InequalityCondition::GREATER_THAN, 
             new StaticConditionVariable($publication->get_content_object()->get_end_time()));
         $condition = new AndCondition($conditions);
-
+        
         $parameters = new DataClassCountParameters($condition, $joins, $property);
-
-        return DataManager :: count(Entry :: class_name(), $parameters);
+        
+        return DataManager::count(Entry::class_name(), $parameters);
     }
 
     /**
@@ -502,21 +500,21 @@ class AssignmentRepository
      * @param integer $entityType
      * @return AndCondition
      */
-    protected function getPublicationEntityTypeAndIdCondition(ContentObjectPublication $publication, $entityType,
+    protected function getPublicationEntityTypeAndIdCondition(ContentObjectPublication $publication, $entityType, 
         $entityId)
     {
         $conditions = array();
-
+        
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_PUBLICATION_ID), 
             new StaticConditionVariable($publication->get_id()));
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_TYPE), 
             new StaticConditionVariable($entityType));
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_ID), 
             new StaticConditionVariable($entityId));
-
+        
         return new AndCondition($conditions);
     }
 
@@ -528,21 +526,21 @@ class AssignmentRepository
      * @param \Chamilo\Libraries\Storage\Query\Condition\Condition $condition
      * @return integer
      */
-    public function countEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+    public function countEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType, 
         $entityId, $condition)
     {
         $conditions = array();
-
+        
         if ($condition instanceof Condition)
         {
             $conditions[] = $condition;
         }
-
+        
         $conditions[] = $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId);
-
+        
         $condition = new AndCondition($conditions);
-
-        return DataManager :: count(Entry :: class_name(), new DataClassCountParameters($condition));
+        
+        return DataManager::count(Entry::class_name(), new DataClassCountParameters($condition));
     }
 
     /**
@@ -552,23 +550,23 @@ class AssignmentRepository
      * @param integer $entityId
      * @return integer
      */
-    public function countDistinctFeedbackForEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+    public function countDistinctFeedbackForEntityTypeAndId(ContentObjectPublication $publication, $entityType, 
         $entityId)
     {
         $joins = new Joins();
-
+        
         $joins->add(
             new Join(
-                Feedback :: class_name(),
+                Feedback::class_name(), 
                 new EqualityCondition(
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
-                    new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID))));
-
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ID), 
+                    new PropertyConditionVariable(Feedback::class_name(), Feedback::PROPERTY_ENTRY_ID))));
+        
         $parameters = new DataClassCountParameters(
-            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId),
+            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId), 
             $joins);
-
-        return DataManager :: count(Entry :: class_name(), $parameters);
+        
+        return DataManager::count(Entry::class_name(), $parameters);
     }
 
     /**
@@ -581,19 +579,19 @@ class AssignmentRepository
     public function countDistinctScoreForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
     {
         $joins = new Joins();
-
+        
         $joins->add(
             new Join(
-                Score :: class_name(),
+                Score::class_name(), 
                 new EqualityCondition(
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
-                    new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID))));
-
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ID), 
+                    new PropertyConditionVariable(Score::class_name(), Score::PROPERTY_ENTRY_ID))));
+        
         $parameters = new DataClassCountParameters(
-            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId),
+            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId), 
             $joins);
-
-        return DataManager :: count(Entry :: class_name(), $parameters);
+        
+        return DataManager::count(Entry::class_name(), $parameters);
     }
 
     /**
@@ -606,28 +604,28 @@ class AssignmentRepository
     public function retrieveAverageScoreForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
     {
         $joins = new Joins();
-
+        
         $joins->add(
             new Join(
-                Score :: class_name(),
+                Score::class_name(), 
                 new EqualityCondition(
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
-                    new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID))));
-
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ID), 
+                    new PropertyConditionVariable(Score::class_name(), Score::PROPERTY_ENTRY_ID))));
+        
         $properties = new DataClassProperties();
         $properties->add(
             new FunctionConditionVariable(
-                FunctionConditionVariable :: AVERAGE,
-                new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_SCORE),
-                AssignmentDataProvider :: AVERAGE_SCORE));
-
+                FunctionConditionVariable::AVERAGE, 
+                new PropertyConditionVariable(Score::class_name(), Score::PROPERTY_SCORE), 
+                AssignmentDataProvider::AVERAGE_SCORE));
+        
         $parameters = new RecordRetrieveParameters(
-            $properties,
-            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId),
-            array(),
+            $properties, 
+            $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId), 
+            array(), 
             $joins);
-
-        return DataManager :: record(Entry :: class_name(), $parameters);
+        
+        return DataManager::record(Entry::class_name(), $parameters);
     }
 
     /**
@@ -641,62 +639,62 @@ class AssignmentRepository
      * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
      * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
-    public function retrieveEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+    public function retrieveEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType, 
         $entityId, $condition, $offset, $count, $orderProperty)
     {
         $conditions = array();
-
+        
         if ($condition instanceof Condition)
         {
             $conditions[] = $condition;
         }
-
+        
         $conditions[] = $this->getPublicationEntityTypeAndIdCondition($publication, $entityType, $entityId);
-
+        
         $condition = new AndCondition($conditions);
-
+        
         $joins = new Joins();
-
+        
         $joins->add(
             new Join(
-                User :: class_name(),
+                User::class_name(), 
                 new EqualityCondition(
-                    new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID),
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_USER_ID))));
-
+                    new PropertyConditionVariable(User::class_name(), User::PROPERTY_ID), 
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_USER_ID))));
+        
         $joins->add(
             new Join(
-                ContentObject :: class_name(),
+                ContentObject::class_name(), 
                 new EqualityCondition(
-                    new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_ID),
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_CONTENT_OBJECT_ID))));
-
+                    new PropertyConditionVariable(ContentObject::class_name(), ContentObject::PROPERTY_ID), 
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_CONTENT_OBJECT_ID))));
+        
         $joins->add(
             new Join(
-                Score :: class_name(),
+                Score::class_name(), 
                 new EqualityCondition(
-                    new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID),
-                    new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID)),
-                Join :: TYPE_LEFT));
-
+                    new PropertyConditionVariable(Score::class_name(), Score::PROPERTY_ENTRY_ID), 
+                    new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ID)), 
+                Join::TYPE_LEFT));
+        
         $properties = new DataClassProperties();
-
-        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID));
-        $properties->add(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_LASTNAME));
-        $properties->add(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_FIRSTNAME));
-
-        $properties->add(new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_TITLE));
+        
+        $properties->add(new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ID));
+        $properties->add(new PropertyConditionVariable(User::class_name(), User::PROPERTY_LASTNAME));
+        $properties->add(new PropertyConditionVariable(User::class_name(), User::PROPERTY_FIRSTNAME));
+        
+        $properties->add(new PropertyConditionVariable(ContentObject::class_name(), ContentObject::PROPERTY_TITLE));
         $properties->add(
-            new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_DESCRIPTION));
-        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_SUBMITTED));
-        $properties->add(new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_SCORE));
-        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_CONTENT_OBJECT_ID));
-        $properties->add(new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_USER_ID));
-        $properties->add(new PropertyConditionVariable(ContentObject :: class_name(), ContentObject :: PROPERTY_TYPE));
-
+            new PropertyConditionVariable(ContentObject::class_name(), ContentObject::PROPERTY_DESCRIPTION));
+        $properties->add(new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_SUBMITTED));
+        $properties->add(new PropertyConditionVariable(Score::class_name(), Score::PROPERTY_SCORE));
+        $properties->add(new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_CONTENT_OBJECT_ID));
+        $properties->add(new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_USER_ID));
+        $properties->add(new PropertyConditionVariable(ContentObject::class_name(), ContentObject::PROPERTY_TYPE));
+        
         $parameters = new RecordRetrievesParameters($properties, $condition, $count, $offset, $orderProperty, $joins);
-
-        return DataManager :: records(Entry :: class_name(), $parameters);
+        
+        return DataManager::records(Entry::class_name(), $parameters);
     }
 
     /**
@@ -707,10 +705,10 @@ class AssignmentRepository
     public function countFeedbackByEntryIdentifier($entryIdentifier)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID),
+            new PropertyConditionVariable(Feedback::class_name(), Feedback::PROPERTY_ENTRY_ID), 
             new StaticConditionVariable($entryIdentifier));
-
-        return DataManager :: count(Feedback :: class_name(), new DataClassCountParameters($condition));
+        
+        return DataManager::count(Feedback::class_name(), new DataClassCountParameters($condition));
     }
 
     /**
@@ -720,7 +718,7 @@ class AssignmentRepository
      */
     public function retrieveEntryByIdentifier($entryIdentifier)
     {
-        return DataManager :: retrieve_by_id(Entry :: class_name(), $entryIdentifier);
+        return DataManager::retrieve_by_id(Entry::class_name(), $entryIdentifier);
     }
 
     /**
@@ -731,10 +729,10 @@ class AssignmentRepository
     public function retrieveEntriesByIdentifiers($entryIdentifiers)
     {
         $condition = new InCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ID), 
             $entryIdentifiers);
-
-        return DataManager :: retrieves(Entry :: class_name(), new DataClassRetrievesParameters($condition));
+        
+        return DataManager::retrieves(Entry::class_name(), new DataClassRetrievesParameters($condition));
     }
 
     /**
@@ -745,11 +743,11 @@ class AssignmentRepository
     public function retrieveScoreByEntry(Entry $entry)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID),
+            new PropertyConditionVariable(Score::class_name(), Score::PROPERTY_ENTRY_ID), 
             new StaticConditionVariable($entry->getId()));
-
-        $score = DataManager :: retrieve(Score :: class_name(), new DataClassRetrieveParameters($condition));
-
+        
+        $score = DataManager::retrieve(Score::class_name(), new DataClassRetrieveParameters($condition));
+        
         if ($score instanceof Score)
         {
             return $score;
@@ -768,11 +766,11 @@ class AssignmentRepository
     public function retrieveNoteByEntry(Entry $entry)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Note :: class_name(), Note :: PROPERTY_ENTRY_ID),
+            new PropertyConditionVariable(Note::class_name(), Note::PROPERTY_ENTRY_ID), 
             new StaticConditionVariable($entry->getId()));
-
-        $note = DataManager :: retrieve(Note :: class_name(), new DataClassRetrieveParameters($condition));
-
+        
+        $note = DataManager::retrieve(Note::class_name(), new DataClassRetrieveParameters($condition));
+        
         if ($note instanceof Note)
         {
             return $note;
@@ -790,7 +788,7 @@ class AssignmentRepository
      */
     public function retrieveFeedbackByIdentifier($feedbackIdentifier)
     {
-        return DataManager :: retrieve_by_id(Feedback :: class_name(), $feedbackIdentifier);
+        return DataManager::retrieve_by_id(Feedback::class_name(), $feedbackIdentifier);
     }
 
     /**
@@ -802,10 +800,10 @@ class AssignmentRepository
         \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID),
+            new PropertyConditionVariable(Feedback::class_name(), Feedback::PROPERTY_ENTRY_ID), 
             new StaticConditionVariable($entry->getId()));
-
-        return DataManager :: count(Feedback :: class_name(), new DataClassCountParameters($condition));
+        
+        return DataManager::count(Feedback::class_name(), new DataClassCountParameters($condition));
     }
 
     /**
@@ -817,10 +815,10 @@ class AssignmentRepository
         \Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID),
+            new PropertyConditionVariable(Feedback::class_name(), Feedback::PROPERTY_ENTRY_ID), 
             new StaticConditionVariable($entry->getId()));
-
-        return DataManager :: retrieves(Feedback :: class_name(), new DataClassRetrievesParameters($condition));
+        
+        return DataManager::retrieves(Feedback::class_name(), new DataClassRetrievesParameters($condition));
     }
 
     /**
@@ -830,24 +828,24 @@ class AssignmentRepository
      * @param integer[] $entityIdentifiers
      * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
-    public function findEntriesByPublicationEntityTypeAndIdentifiers(ContentObjectPublication $publication, $entityType,
+    public function findEntriesByPublicationEntityTypeAndIdentifiers(ContentObjectPublication $publication, $entityType, 
         $entityIdentifiers)
     {
         $conditions = array();
-
+        
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_PUBLICATION_ID), 
             new StaticConditionVariable($publication->getId()));
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_TYPE),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_TYPE), 
             new StaticConditionVariable($entityType));
         $conditions[] = new InCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_ENTITY_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_ENTITY_ID), 
             $entityIdentifiers);
-
+        
         $condition = new AndCondition($conditions);
-
-        return DataManager :: retrieves(Entry :: class_name(), new DataClassRetrievesParameters($condition));
+        
+        return DataManager::retrieves(Entry::class_name(), new DataClassRetrievesParameters($condition));
     }
 
     /**
@@ -858,9 +856,9 @@ class AssignmentRepository
     public function findEntriesByPublication(ContentObjectPublication $publication)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(Entry :: class_name(), Entry :: PROPERTY_PUBLICATION_ID),
+            new PropertyConditionVariable(Entry::class_name(), Entry::PROPERTY_PUBLICATION_ID), 
             new StaticConditionVariable($publication->getId()));
-
-        return DataManager :: retrieves(Entry :: class_name(), new DataClassRetrievesParameters($condition));
+        
+        return DataManager::retrieves(Entry::class_name(), new DataClassRetrievesParameters($condition));
     }
 }

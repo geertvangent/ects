@@ -18,22 +18,22 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function render()
     {
         $this->set_breadcrumbs();
-
+        
         $application_is_allowed = $this->get_application() instanceof AccessAllowedInterface;
-
-//         if (! $application_is_allowed && ! Rights :: is_allowed(
-//             Rights :: VIEW_RIGHT,
-//             $this->get_module_instance()->get_id(),
-//             $this->get_module_parameters()))
-//         {
-//             throw new NotAllowedException(false);
-//         }
-        \Ehb\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition :: add_export_action(
-            $this,
-            \Ehb\Application\Discovery\Rendition\Format\HtmlRendition :: VIEW_ZIP);
-
+        
+        // if (! $application_is_allowed && ! Rights :: is_allowed(
+        // Rights :: VIEW_RIGHT,
+        // $this->get_module_instance()->get_id(),
+        // $this->get_module_parameters()))
+        // {
+        // throw new NotAllowedException(false);
+        // }
+        \Ehb\Application\Discovery\Rendition\View\Html\HtmlDefaultRendition::add_export_action(
+            $this, 
+            \Ehb\Application\Discovery\Rendition\Format\HtmlRendition::VIEW_ZIP);
+        
         $table = new GalleryBrowserTable($this);
-
+        
         return $table->as_html();
     }
 
@@ -46,8 +46,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $parameters = $this->get_application()->get_parameters();
         $parameters = array_merge($parameters, $this->get_module_parameters()->get_parameters());
-        $parameters[\Ehb\Application\Discovery\Manager :: PARAM_MODULE_ID] = Request :: get(
-            \Ehb\Application\Discovery\Manager :: PARAM_MODULE_ID);
+        $parameters[\Ehb\Application\Discovery\Manager::PARAM_MODULE_ID] = Request::get(
+            \Ehb\Application\Discovery\Manager::PARAM_MODULE_ID);
         return $parameters;
     }
 
@@ -55,69 +55,69 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $parameters = $this->get_module_parameters();
         $codes = array();
-
+        
         if ($parameters->get_faculty_id())
         {
-            $faculty = DataManager :: getInstance($this->get_module_instance())->retrieve_faculty(
+            $faculty = DataManager::getInstance($this->get_module_instance())->retrieve_faculty(
                 $parameters->get_faculty_id());
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $faculty->get_year()));
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $faculty->get_name()));
-
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $faculty->get_year()));
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $faculty->get_name()));
+            
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
                 {
-                    case Module :: TYPE_TEACHER :
-                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
+                    case Module::TYPE_TEACHER :
+                        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get('Teachers')));
                         break;
-                    case Module :: TYPE_STUDENT :
-                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Students')));
+                    case Module::TYPE_STUDENT :
+                        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get('Students')));
                         break;
-                    case Module :: TYPE_EMPLOYEE :
-                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Employees')));
+                    case Module::TYPE_EMPLOYEE :
+                        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get('Employees')));
                         break;
                 }
             }
         }
         elseif ($parameters->get_training_id())
         {
-            $training = DataManager :: getInstance($this->get_module_instance())->retrieve_training(
+            $training = DataManager::getInstance($this->get_module_instance())->retrieve_training(
                 $parameters->get_training_id());
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_year()));
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_faculty()));
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_name()));
-
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $training->get_year()));
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $training->get_faculty()));
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $training->get_name()));
+            
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
                 {
-                    case Module :: TYPE_TEACHER :
-                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
+                    case Module::TYPE_TEACHER :
+                        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get('Teachers')));
                         break;
-                    case Module :: TYPE_STUDENT :
-                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Students')));
+                    case Module::TYPE_STUDENT :
+                        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get('Students')));
                         break;
                 }
             }
         }
         elseif ($parameters->get_programme_id())
         {
-            $programme = DataManager :: getInstance($this->get_module_instance())->retrieve_programme(
+            $programme = DataManager::getInstance($this->get_module_instance())->retrieve_programme(
                 $parameters->get_programme_id());
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $programme->get_year()));
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $programme->get_faculty()));
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $programme->get_training()));
-            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $programme->get_name()));
-
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $programme->get_year()));
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $programme->get_faculty()));
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $programme->get_training()));
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $programme->get_name()));
+            
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
                 {
-                    case Module :: TYPE_TEACHER :
-                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
+                    case Module::TYPE_TEACHER :
+                        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get('Teachers')));
                         break;
-                    case Module :: TYPE_STUDENT :
-                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Students')));
+                    case Module::TYPE_STUDENT :
+                        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get('Students')));
                         break;
                 }
             }
@@ -129,7 +129,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
      */
     public function get_format()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
+        return \Ehb\Application\Discovery\Rendition\Rendition::FORMAT_HTML;
     }
 
     /*
@@ -137,6 +137,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
      */
     public function get_view()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
+        return \Ehb\Application\Discovery\Rendition\Rendition::VIEW_DEFAULT;
     }
 }

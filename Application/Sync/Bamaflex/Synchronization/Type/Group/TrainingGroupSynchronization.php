@@ -20,8 +20,8 @@ abstract class TrainingGroupSynchronization extends GroupSynchronization
     public function get_code()
     {
         $parent = $this->get_synchronization();
-        return self :: IDENTIFIER . '_' . $this->get_group_type() . '_' .
-             $this->get_parameter(self :: RESULT_PROPERTY_TRAINING_ID);
+        return self::IDENTIFIER . '_' . $this->get_group_type() . '_' .
+             $this->get_parameter(self::RESULT_PROPERTY_TRAINING_ID);
     }
 
     /**
@@ -30,7 +30,7 @@ abstract class TrainingGroupSynchronization extends GroupSynchronization
      */
     public function get_name()
     {
-        return $this->get_parameter(self :: RESULT_PROPERTY_TRAINING);
+        return $this->get_parameter(self::RESULT_PROPERTY_TRAINING);
     }
 
     /**
@@ -40,7 +40,7 @@ abstract class TrainingGroupSynchronization extends GroupSynchronization
     public function get_department_id()
     {
         return $this->get_user_type()->get_department()->get_parameter(
-            DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID);
+            DepartmentGroupSynchronization::RESULT_PROPERTY_DEPARTMENT_ID);
     }
 
     /**

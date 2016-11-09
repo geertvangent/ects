@@ -13,7 +13,7 @@ class ArchiveAcademicYearGroupSynchronization extends ArchiveGroupSynchronizatio
 
     public function get_code()
     {
-        return self :: IDENTIFIER . '_' . $this->get_academic_year();
+        return self::IDENTIFIER . '_' . $this->get_academic_year();
     }
 
     public function get_name()
@@ -30,7 +30,7 @@ class ArchiveAcademicYearGroupSynchronization extends ArchiveGroupSynchronizatio
         $children = array();
         while ($department = $departments->next_result())
         {
-            $children[] = ArchiveGroupSynchronization :: factory('archive_department', $this, $department);
+            $children[] = ArchiveGroupSynchronization::factory('archive_department', $this, $department);
         }
         return $children;
     }

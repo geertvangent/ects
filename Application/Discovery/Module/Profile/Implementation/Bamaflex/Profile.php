@@ -59,7 +59,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function get_gender()
     {
-        return $this->get_default_property(self :: PROPERTY_GENDER);
+        return $this->get_default_property(self::PROPERTY_GENDER);
     }
 
     /**
@@ -70,10 +70,10 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
     {
         switch ($this->get_gender())
         {
-            case self :: GENDER_MALE :
+            case self::GENDER_MALE :
                 return 'Male';
                 break;
-            case self :: GENDER_FEMALE :
+            case self::GENDER_FEMALE :
                 return 'Female';
                 break;
             default :
@@ -87,7 +87,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function get_birth()
     {
-        return $this->get_default_property(self :: PROPERTY_BIRTH);
+        return $this->get_default_property(self::PROPERTY_BIRTH);
     }
 
     /**
@@ -96,7 +96,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function get_nationality()
     {
-        return $this->get_default_property(self :: PROPERTY_NATIONALITY);
+        return $this->get_default_property(self::PROPERTY_NATIONALITY);
     }
 
     /**
@@ -106,12 +106,12 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
     public function get_nationality_string()
     {
         $nationalities = array();
-
+        
         foreach ($this->get_nationality() as $nationality)
         {
             $nationalities[] = $nationality->get_nationality();
         }
-
+        
         return implode(', ', $nationalities);
     }
 
@@ -121,7 +121,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function get_address()
     {
-        return $this->get_default_property(self :: PROPERTY_ADDRESS);
+        return $this->get_default_property(self::PROPERTY_ADDRESS);
     }
 
     /**
@@ -130,7 +130,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function set_gender($gender)
     {
-        $this->set_default_property(self :: PROPERTY_GENDER, $gender);
+        $this->set_default_property(self::PROPERTY_GENDER, $gender);
     }
 
     /**
@@ -139,7 +139,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function set_birth(Birth $birth)
     {
-        $this->set_default_property(self :: PROPERTY_BIRTH, $birth);
+        $this->set_default_property(self::PROPERTY_BIRTH, $birth);
     }
 
     /**
@@ -148,7 +148,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function set_nationality($nationality)
     {
-        $this->set_default_property(self :: PROPERTY_NATIONALITY, $nationality);
+        $this->set_default_property(self::PROPERTY_NATIONALITY, $nationality);
     }
 
     /**
@@ -157,7 +157,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function set_address($address)
     {
-        $this->set_default_property(self :: PROPERTY_ADDRESS, $address);
+        $this->set_default_property(self::PROPERTY_ADDRESS, $address);
     }
 
     /**
@@ -184,32 +184,32 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
 
     public function set_first_university_college($first_university_college)
     {
-        $this->set_default_property(self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE, $first_university_college);
+        $this->set_default_property(self::PROPERTY_FIRST_UNIVERSITY_COLLEGE, $first_university_college);
     }
 
     public function get_first_university_college()
     {
-        return $this->get_default_property(self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE);
+        return $this->get_default_property(self::PROPERTY_FIRST_UNIVERSITY_COLLEGE);
     }
 
     public function set_first_university($first_university)
     {
-        $this->set_default_property(self :: PROPERTY_FIRST_UNIVERSITY, $first_university);
+        $this->set_default_property(self::PROPERTY_FIRST_UNIVERSITY, $first_university);
     }
 
     public function get_first_university()
     {
-        return $this->get_default_property(self :: PROPERTY_FIRST_UNIVERSITY);
+        return $this->get_default_property(self::PROPERTY_FIRST_UNIVERSITY);
     }
 
     public function get_learning_credit()
     {
-        return $this->get_default_property(self :: PROPERTY_LEARNING_CREDIT);
+        return $this->get_default_property(self::PROPERTY_LEARNING_CREDIT);
     }
 
     public function set_learning_credit($learning_credit)
     {
-        $this->set_default_property(self :: PROPERTY_LEARNING_CREDIT, $learning_credit);
+        $this->set_default_property(self::PROPERTY_LEARNING_CREDIT, $learning_credit);
     }
 
     /**
@@ -218,14 +218,14 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_GENDER;
-        $extended_property_names[] = self :: PROPERTY_BIRTH;
-        $extended_property_names[] = self :: PROPERTY_NATIONALITY;
-        $extended_property_names[] = self :: PROPERTY_ADDRESS;
-        $extended_property_names[] = self :: PROPERTY_FIRST_UNIVERSITY_COLLEGE;
-        $extended_property_names[] = self :: PROPERTY_FIRST_UNIVERSITY;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_GENDER;
+        $extended_property_names[] = self::PROPERTY_BIRTH;
+        $extended_property_names[] = self::PROPERTY_NATIONALITY;
+        $extended_property_names[] = self::PROPERTY_ADDRESS;
+        $extended_property_names[] = self::PROPERTY_FIRST_UNIVERSITY_COLLEGE;
+        $extended_property_names[] = self::PROPERTY_FIRST_UNIVERSITY;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

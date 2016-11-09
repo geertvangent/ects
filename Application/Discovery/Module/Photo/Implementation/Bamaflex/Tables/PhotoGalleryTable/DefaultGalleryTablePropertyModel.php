@@ -9,7 +9,7 @@ class DefaultGalleryTablePropertyModel extends GalleryTablePropertyModel
 
     public function initialize_properties()
     {
-        $this->add_property(new GalleryTableProperty(\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_LASTNAME));
-        $this->add_property(new GalleryTableProperty(\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_FIRSTNAME));
+        $this->add_property(new GalleryTableProperty(\Chamilo\Core\User\Storage\DataClass\User::PROPERTY_LASTNAME));
+        $this->add_property(new GalleryTableProperty(\Chamilo\Core\User\Storage\DataClass\User::PROPERTY_FIRSTNAME));
     }
 }

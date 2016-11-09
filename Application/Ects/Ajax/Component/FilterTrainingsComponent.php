@@ -20,7 +20,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
     const PARAM_FACULTY = 'faculty';
     const PARAM_TYPE = 'type';
     const PARAM_TEXT = 'text';
-
+    
     // Properties
     const PROPERTY_TRAINING = 'training';
     const PROPERTY_TYPE = 'type';
@@ -66,7 +66,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
     {
         $jsonAjaxResult = new JsonAjaxResult();
         $jsonAjaxResult->set_properties(array(self::PROPERTY_TYPE => $this->getTrainings()));
-
+        
         $this->trackSearch();
         $jsonAjaxResult->display();
     }
@@ -81,7 +81,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
         {
             $this->currentYear = $this->getRequestedPostDataValue(self::PARAM_YEAR);
         }
-
+        
         return $this->currentYear;
     }
 
@@ -95,7 +95,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
         {
             $this->currentFacultyIdentifier = $this->getRequestedPostDataValue(self::PARAM_FACULTY);
         }
-
+        
         return $this->currentFacultyIdentifier;
     }
 
@@ -109,7 +109,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
         {
             $this->currentTypeIdentifier = $this->getRequestedPostDataValue(self::PARAM_TYPE);
         }
-
+        
         return $this->currentTypeIdentifier;
     }
 
@@ -123,7 +123,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
         {
             $this->currentText = $this->getRequestedPostDataValue(self::PARAM_TEXT);
         }
-
+        
         return $this->currentText;
     }
 
@@ -134,26 +134,26 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
     private function getTrainings()
     {
         $trainings = $this->getBaMaFlexService()->getTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
-            $this->getCurrentYear(),
-            $this->getCurrentFacultyIdentifier(),
-            $this->getCurrentTypeIdentifier(),
+            $this->getCurrentYear(), 
+            $this->getCurrentFacultyIdentifier(), 
+            $this->getCurrentTypeIdentifier(), 
             $this->getCurrentText());
-
+        
         $categorizedTrainings = array();
-
+        
         foreach ($trainings as $training)
         {
             if (! isset($categorizedTrainings[$training[Training::PROPERTY_TYPE_ID]]))
             {
                 $categorizedTrainings[$training[Training::PROPERTY_TYPE_ID]] = array(
-                    Training::PROPERTY_TYPE_ID => $training[Training::PROPERTY_TYPE_ID],
-                    Training::PROPERTY_TYPE => $training[Training::PROPERTY_TYPE],
+                    Training::PROPERTY_TYPE_ID => $training[Training::PROPERTY_TYPE_ID], 
+                    Training::PROPERTY_TYPE => $training[Training::PROPERTY_TYPE], 
                     self::PROPERTY_TRAINING => array());
             }
-
+            
             $categorizedTrainings[$training[Training::PROPERTY_TYPE_ID]][self::PROPERTY_TRAINING][] = $training;
         }
-
+        
         return $categorizedTrainings;
     }
 
@@ -170,7 +170,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
                 return $faculty;
             }
         }
-
+        
         return null;
     }
 
@@ -187,7 +187,7 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
                 return $type;
             }
         }
-
+        
         return null;
     }
 
@@ -196,14 +196,14 @@ class FilterTrainingsComponent extends \Ehb\Application\Ects\Ajax\Manager implem
         try
         {
             Event::trigger(
-                'Search',
-                \Ehb\Application\Ects\Manager::context(),
+                'Search', 
+                \Ehb\Application\Ects\Manager::context(), 
                 array(
-                    Search::PROPERTY_SESSION_ID => session_id(),
-                    Search::PROPERTY_DATE => time(),
-                    Search::PROPERTY_YEAR => $this->getCurrentYear(),
-                    Search::PROPERTY_FACULTY => $this->getCurrentFacultyIdentifier(),
-                    Search::PROPERTY_TYPE => $this->getCurrentTypeIdentifier(),
+                    Search::PROPERTY_SESSION_ID => session_id(), 
+                    Search::PROPERTY_DATE => time(), 
+                    Search::PROPERTY_YEAR => $this->getCurrentYear(), 
+                    Search::PROPERTY_FACULTY => $this->getCurrentFacultyIdentifier(), 
+                    Search::PROPERTY_TYPE => $this->getCurrentTypeIdentifier(), 
                     Search::PROPERTY_TEXT => $this->getCurrentText()));
         }
         catch (\Exception $exception)

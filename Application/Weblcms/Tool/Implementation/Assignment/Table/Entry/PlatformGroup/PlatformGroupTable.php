@@ -13,5 +13,5 @@ use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entry\Group\Gro
  */
 class PlatformGroupTable extends GroupTable
 {
-    const TABLE_IDENTIFIER = Group :: PROPERTY_ID;
+    const TABLE_IDENTIFIER = Group::PROPERTY_ID;
 }

@@ -27,26 +27,26 @@ class ExporterComponent extends Manager
     {
         // Just in case new users were added ...
         $this->generate_passwords();
-
-        $users_ids = DataManager :: get_course_user_ids($this->get_course_id());
-        $passwords = DataManager:: retrieves(
-            Password :: class_name(),
+        
+        $users_ids = DataManager::get_course_user_ids($this->get_course_id());
+        $passwords = DataManager::retrieves(
+            Password::class_name(), 
             new DataClassRetrievesParameters(
                 new InCondition(
-                    new PropertyConditionVariable(Password :: class_name(), Password :: PROPERTY_USER_ID),
+                    new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID), 
                     $users_ids)));
-
+        
         $fileName = $this->get_course()->get_visual_code() . '_perception_accounts.csv';
-        $filePath = Path :: getInstance()->getTemporaryPath(__NAMESPACE__) . $fileName;
-
-        Filesystem :: create_dir(dirname($filePath));
-
+        $filePath = Path::getInstance()->getTemporaryPath(__NAMESPACE__) . $fileName;
+        
+        Filesystem::create_dir(dirname($filePath));
+        
         $csv_handle = fopen($filePath, 'w+');
-
+        
         while ($password = $passwords->next_result())
         {
             $row = array();
-
+            
             $row[] = $password->get_user()->get_email();
             $row[] = $password->get_user()->get_official_code();
             $row[] = $password->get_password();
@@ -54,15 +54,15 @@ class ExporterComponent extends Manager
             $row[] = $password->get_user()->get_lastname();
             $row[] = $password->get_user()->get_email();
             $row[] = $this->get_course()->get_visual_code();
-
+            
             fputcsv($csv_handle, $row, ',', '"');
         }
-
+        
         fclose($csv_handle);
-
+        
         $response = new BinaryFileResponse($filePath, 200, array('Content-Type' => 'text/csv'));
-
-        $response->setContentDisposition(ResponseHeaderBag :: DISPOSITION_ATTACHMENT, $fileName);
+        
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
         $response->prepare($this->getRequest());
         $response->send();
         exit();
@@ -70,15 +70,15 @@ class ExporterComponent extends Manager
 
     public function generate_passwords()
     {
-        $result = DataManager :: generate_passwords($this->get_course_id());
-
-        if ($result[DataManager :: GENERATION_FAILURES] > 0)
+        $result = DataManager::generate_passwords($this->get_course_id());
+        
+        if ($result[DataManager::GENERATION_FAILURES] > 0)
         {
-            if ($result[DataManager :: GENERATION_ATTEMPTS] == 1)
+            if ($result[DataManager::GENERATION_ATTEMPTS] == 1)
             {
                 $message = 'PasswordNotGenerated';
             }
-            elseif ($result[DataManager :: GENERATION_ATTEMPTS] > $result[DataManager :: GENERATION_FAILURES])
+            elseif ($result[DataManager::GENERATION_ATTEMPTS] > $result[DataManager::GENERATION_FAILURES])
             {
                 $message = 'SomePasswordsNotGenerated';
             }
@@ -86,11 +86,11 @@ class ExporterComponent extends Manager
             {
                 $message = 'PasswordsNotGenerated';
             }
-
+            
             $this->redirect(
-                Translation :: get($message),
-                (($result[DataManager :: GENERATION_FAILURES] > 0) ? true : false),
-                array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
+                Translation::get($message), 
+                (($result[DataManager::GENERATION_FAILURES] > 0) ? true : false), 
+                array(self::PARAM_ACTION => self::ACTION_BROWSE));
             exit();
         }
     }

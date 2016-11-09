@@ -18,7 +18,7 @@ class Email extends DataClass
      */
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     /**
@@ -29,16 +29,16 @@ class Email extends DataClass
     {
         switch ($this->get_type())
         {
-            case self :: TYPE_PRIVATE :
+            case self::TYPE_PRIVATE :
                 return 'Private';
                 break;
-            case self :: TYPE_OFFICIAL :
+            case self::TYPE_OFFICIAL :
                 return 'Official';
                 break;
-            case self :: TYPE_OFFICIAL_DISCONTINUED :
+            case self::TYPE_OFFICIAL_DISCONTINUED :
                 return 'OfficialDiscontinued';
                 break;
-            case self :: TYPE_DISCONTINUED :
+            case self::TYPE_DISCONTINUED :
                 return 'Discontinued';
                 break;
         }
@@ -50,7 +50,7 @@ class Email extends DataClass
      */
     public function get_address()
     {
-        return $this->get_default_property(self :: PROPERTY_ADDRESS);
+        return $this->get_default_property(self::PROPERTY_ADDRESS);
     }
 
     /**
@@ -59,7 +59,7 @@ class Email extends DataClass
      */
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     /**
@@ -68,7 +68,7 @@ class Email extends DataClass
      */
     public function set_address($address)
     {
-        $this->set_default_property(self :: PROPERTY_ADDRESS, $address);
+        $this->set_default_property(self::PROPERTY_ADDRESS, $address);
     }
 
     /**
@@ -77,10 +77,10 @@ class Email extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_TYPE;
-        $extended_property_names[] = self :: PROPERTY_ADDRESS;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        $extended_property_names[] = self::PROPERTY_ADDRESS;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

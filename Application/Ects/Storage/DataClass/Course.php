@@ -114,7 +114,7 @@ class Course extends AdministrationDataClass
         $extended_property_names[] = self::PROPERTY_SECOND_EXAM_PARTS;
         $extended_property_names[] = self::PROPERTY_APPROVED;
         $extended_property_names[] = self::PROPERTY_EXCHANGE;
-
+        
         return parent::get_default_property_names($extended_property_names);
     }
 

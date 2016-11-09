@@ -14,7 +14,7 @@ class Photo extends DataClass
      */
     public function get_mime_type()
     {
-        return $this->get_default_property(self :: PROPERTY_MIME_TYPE);
+        return $this->get_default_property(self::PROPERTY_MIME_TYPE);
     }
 
     /**
@@ -23,7 +23,7 @@ class Photo extends DataClass
      */
     public function get_data()
     {
-        return $this->get_default_property(self :: PROPERTY_DATA);
+        return $this->get_default_property(self::PROPERTY_DATA);
     }
 
     /**
@@ -32,7 +32,7 @@ class Photo extends DataClass
      */
     public function set_mime_type($mime_type)
     {
-        $this->set_default_property(self :: PROPERTY_MIME_TYPE, $mime_type);
+        $this->set_default_property(self::PROPERTY_MIME_TYPE, $mime_type);
     }
 
     /**
@@ -41,7 +41,7 @@ class Photo extends DataClass
      */
     public function set_data($data)
     {
-        $this->set_default_property(self :: PROPERTY_DATA, $data);
+        $this->set_default_property(self::PROPERTY_DATA, $data);
     }
 
     /**
@@ -50,10 +50,10 @@ class Photo extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_MIME_TYPE;
-        $extended_property_names[] = self :: PROPERTY_DATA;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_MIME_TYPE;
+        $extended_property_names[] = self::PROPERTY_DATA;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**
@@ -75,7 +75,7 @@ class Photo extends DataClass
         $source[] = 'base64';
         $source[] = ',';
         $source[] = $this->get_data();
-
+        
         return implode('', $source);
     }
 

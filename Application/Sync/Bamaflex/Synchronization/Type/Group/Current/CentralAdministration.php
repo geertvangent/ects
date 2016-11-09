@@ -29,16 +29,16 @@ class CentralAdministration extends GroupSynchronization
     public function get_user_official_codes()
     {
         $user_mails = array();
-
+        
         $query = 'SELECT DISTINCT person_id FROM [dbo].[v_sync_current_employee] WHERE faculty_code = \'ADM\' AND (date_end >= \'' .
              date('Y-m-d', strtotime('-2 months')) . '\' OR date_end IS NULL)';
         $users = $this->get_result($query);
-
+        
         while ($user = $users->next_result(false))
         {
             $user_mails[] = $user['person_id'];
         }
-
+        
         return $user_mails;
     }
 }

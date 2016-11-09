@@ -20,18 +20,18 @@ class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupS
 
     public function get_code()
     {
-        return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER . '_' .
-             $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
+        return $this->get_parent_group()->get_code() . '_' . self::IDENTIFIER . '_' .
+             $this->get_parameter(self::RESULT_PROPERTY_TRAJECTORY_ID);
     }
 
     public function get_name()
     {
-        return $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY);
+        return $this->get_parameter(self::RESULT_PROPERTY_TRAJECTORY);
     }
 
     public function get_children()
     {
-        $trajectory = $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
+        $trajectory = $this->get_parameter(self::RESULT_PROPERTY_TRAJECTORY_ID);
         
         $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_training_sub_trajectory_basic] WHERE trajectory_id = ' .
              $trajectory;
@@ -41,7 +41,7 @@ class StudentTrainingTrajectoriesTemplateMainGroupSynchronization extends GroupS
         $children = array();
         while ($trajectory = $trajectories->next_result(false))
         {
-            $children[] = GroupSynchronization :: factory(
+            $children[] = GroupSynchronization::factory(
                 'student_training_trajectories_template_sub', 
                 $this, 
                 $trajectory);

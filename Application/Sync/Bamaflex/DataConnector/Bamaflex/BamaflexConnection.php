@@ -7,7 +7,7 @@ use Doctrine\DBAL\DriverManager;
 
 /**
  * This class represents the current CAS Account database connection.
- *
+ * 
  * @author Hans De Bisschop
  */
 class BamaflexConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine\Connection
@@ -28,40 +28,40 @@ class BamaflexConnection extends \Chamilo\Libraries\Storage\DataManager\Doctrine
      */
     private function __construct()
     {
-        $dbms = PlatformSetting :: get('dbms', 'Ehb\Application\Sync');
-        $user = PlatformSetting :: get('user', 'Ehb\Application\Sync');
-        $password = PlatformSetting :: get('password', 'Ehb\Application\Sync');
-        $host = PlatformSetting :: get('host', 'Ehb\Application\Sync');
-        $database = PlatformSetting :: get('database', 'Ehb\Application\Sync');
-
-        $data_source_name = DataSourceName :: factory('doctrine', $dbms, $user, $host, $database, $password);
+        $dbms = PlatformSetting::get('dbms', 'Ehb\Application\Sync');
+        $user = PlatformSetting::get('user', 'Ehb\Application\Sync');
+        $password = PlatformSetting::get('password', 'Ehb\Application\Sync');
+        $host = PlatformSetting::get('host', 'Ehb\Application\Sync');
+        $database = PlatformSetting::get('database', 'Ehb\Application\Sync');
+        
+        $data_source_name = DataSourceName::factory('doctrine', $dbms, $user, $host, $database, $password);
         $configuration = new \Doctrine\DBAL\Configuration();
         $connection_parameters = array(
-            'dbname' => $data_source_name->get_database(),
-            'user' => $data_source_name->get_username(),
-            'password' => $data_source_name->get_password(),
-            'host' => $data_source_name->get_host(),
+            'dbname' => $data_source_name->get_database(), 
+            'user' => $data_source_name->get_username(), 
+            'password' => $data_source_name->get_password(), 
+            'host' => $data_source_name->get_host(), 
             'driverClass' => $data_source_name->get_driver(true));
-        $this->connection = DriverManager :: getConnection($connection_parameters, $configuration);
+        $this->connection = DriverManager::getConnection($connection_parameters, $configuration);
     }
 
     /**
      * Returns the instance of this class.
-     *
+     * 
      * @return Connection The instance.
      */
     public static function getInstance()
     {
-        if (! isset(self :: $instance))
+        if (! isset(self::$instance))
         {
-            self :: $instance = new self();
+            self::$instance = new self();
         }
-        return self :: $instance;
+        return self::$instance;
     }
 
     /**
      * Gets the database connection.
-     *
+     * 
      * @return mixed MDB2 DB Conenction.
      */
     public function get_connection()

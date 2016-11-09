@@ -15,20 +15,20 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
     public function render()
     {
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_format()
      */
     public function get_format()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: FORMAT_XLSX;
+        return \Ehb\Application\Discovery\Rendition\Rendition::FORMAT_XLSX;
     }
-    
+
     /*
      * (non-PHPdoc) @see \application\discovery\AbstractRenditionImplementation::get_view()
      */
     public function get_view()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
+        return \Ehb\Application\Discovery\Rendition\Rendition::VIEW_DEFAULT;
     }
 }

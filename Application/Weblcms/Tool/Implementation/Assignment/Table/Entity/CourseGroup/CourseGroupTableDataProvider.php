@@ -21,12 +21,12 @@ class CourseGroupTableDataProvider extends GroupTableDataProvider
     {
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
-
+        
         return $assignmentService->findTargetCourseGroupsForPublication(
-            $assignmentDataProvider->getPublication(),
-            $condition,
-            $offset,
-            $count,
+            $assignmentDataProvider->getPublication(), 
+            $condition, 
+            $offset, 
+            $count, 
             $orderProperty);
     }
 
@@ -38,9 +38,9 @@ class CourseGroupTableDataProvider extends GroupTableDataProvider
     {
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
-
+        
         return $assignmentService->countTargetCourseGroupsForPublication(
-            $assignmentDataProvider->getPublication(),
+            $assignmentDataProvider->getPublication(), 
             $condition);
     }
 }

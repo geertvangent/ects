@@ -30,10 +30,10 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
      * Inherited Functionality *
      * **************************************************************************************************************
      */
-
+    
     /**
      * Renders a cell for a given object
-     *
+     * 
      * @param $column \libraries\ObjectTableColumn
      *
      * @param mixed $publication
@@ -43,55 +43,55 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
     public function render_cell($column, $publication)
     {
         $content_object = $this->get_component()->get_content_object_from_publication($publication);
-
+        
         switch ($column->get_name())
         {
-            case ContentObject :: PROPERTY_TITLE :
+            case ContentObject::PROPERTY_TITLE :
                 return $this->renderTitleLink($publication);
-            case Assignment :: PROPERTY_END_TIME :
+            case Assignment::PROPERTY_END_TIME :
                 $time = $content_object->get_end_time();
-                $date_format = Translation :: get('DateTimeFormatLong', null, Utilities :: COMMON_LIBRARIES);
-                $time = DatetimeUtilities :: format_locale_date($date_format, $time);
-                if ($publication[ContentObjectPublication :: PROPERTY_HIDDEN])
+                $date_format = Translation::get('DateTimeFormatLong', null, Utilities::COMMON_LIBRARIES);
+                $time = DatetimeUtilities::format_locale_date($date_format, $time);
+                if ($publication[ContentObjectPublication::PROPERTY_HIDDEN])
                 {
                     return '<span style="color: gray">' . $time . '</span>';
                 }
                 return $time;
-            case PublicationTableColumnModel :: PROPERTY_ENTRY_COUNT :
+            case PublicationTableColumnModel::PROPERTY_ENTRY_COUNT :
                 $assignmentService = new AssignmentService(new AssignmentRepository());
                 return $assignmentService->countEntriesForPublicationIdentifier(
-                    $publication[ContentObjectPublication :: PROPERTY_ID]);
-            case Assignment :: PROPERTY_ALLOW_GROUP_SUBMISSIONS :
-
+                    $publication[ContentObjectPublication::PROPERTY_ID]);
+            case Assignment::PROPERTY_ALLOW_GROUP_SUBMISSIONS :
+                
                 if ($content_object->get_allow_group_submissions())
                 {
-                    return '<img src="' . Theme :: getInstance()->getImagePath(Manager :: package(), 'Type/Group') .
-                         '" alt="' . Translation :: get('GroupAssignment') . '" title="' .
-                         Translation :: get('GroupAssignment') . '"/>';
+                    return '<img src="' . Theme::getInstance()->getImagePath(Manager::package(), 'Type/Group') .
+                         '" alt="' . Translation::get('GroupAssignment') . '" title="' .
+                         Translation::get('GroupAssignment') . '"/>';
                 }
-
-                return '<img src="' . Theme :: getInstance()->getImagePath(Manager :: package(), 'Type/Individual') .
-                     '" alt="' . Translation :: get('IndividualAssignment') . '" title="' .
-                     Translation :: get('IndividualAssignment') . '"/>';
+                
+                return '<img src="' . Theme::getInstance()->getImagePath(Manager::package(), 'Type/Individual') .
+                     '" alt="' . Translation::get('IndividualAssignment') . '" title="' .
+                     Translation::get('IndividualAssignment') . '"/>';
         }
-
-        return parent :: render_cell($column, $publication);
+        
+        return parent::render_cell($column, $publication);
     }
 
     /**
      * Generated the HTML for the title column, including link, depending on the status of the current browsing user.
-     *
+     * 
      * @param $publication type The publication for which the title link is to be generated.
      * @return string The HTML for the link in the title column.
      */
     private function renderTitleLink($publication)
     {
-        if ($this->get_component()->is_allowed(WeblcmsRights :: EDIT_RIGHT))
+        if ($this->get_component()->is_allowed(WeblcmsRights::EDIT_RIGHT))
         {
             $url = $this->get_component()->get_url(
                 array(
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT,
-                    \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID]));
+                    \Chamilo\Application\Weblcms\Tool\Manager::PARAM_ACTION => \Ehb\Application\Weblcms\Tool\Implementation\Assignment\Manager::ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT, 
+                    \Chamilo\Application\Weblcms\Tool\Manager::PARAM_PUBLICATION_ID => $publication[ContentObjectPublication::PROPERTY_ID]));
         }
         else
         {
@@ -103,8 +103,8 @@ class PublicationTableCellRenderer extends ObjectPublicationTableCellRenderer
             // \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID =>
             // $publication[ContentObjectPublication :: PROPERTY_ID]));
         }
-
+        
         return '<a href="' . $url . '">' .
-             StringUtilities :: getInstance()->truncate($publication[ContentObject :: PROPERTY_TITLE], 50) . '</a>';
+             StringUtilities::getInstance()->truncate($publication[ContentObject::PROPERTY_TITLE], 50) . '</a>';
     }
 }

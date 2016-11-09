@@ -17,17 +17,17 @@ class Training extends \Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group
         $yearsQueryString = implode('\', \'', CurrentGroupSynchronization::getCurrentYears());
         $trainingCode = $this->get_parameter(self::RESULT_PROPERTY_CODE);
         $userIdentifiers = array();
-
+        
         $query = 'SELECT DISTINCT person_id FROM [INFORDATSYNC].[dbo].[v_sync_current_student] WHERE year IN (\'' .
              $yearsQueryString . '\') AND training_code = \'' . $trainingCode . '\'';
-
+        
         $users = $this->get_result($query);
-
+        
         while ($user = $users->next_result(false))
         {
             $userIdentifiers[] = $user['person_id'];
         }
-
+        
         return $userIdentifiers;
     }
 }

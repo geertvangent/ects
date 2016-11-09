@@ -16,7 +16,7 @@ abstract class Manager extends Application
     const ACTION_DOCUMENT_ZIP_WEBLCMS = 'WeblcmsDocumentZip';
     const ACTION_DOCUMENT_REPOSITORY = 'RepositoryDocument';
     const ACTION_EXPORT_REPOSITORY = 'RepositoryExporter';
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self::ACTION_BROWSE;
     const PARAM_ACTION = 'data_action';
 
     /**
@@ -30,7 +30,7 @@ abstract class Manager extends Application
         // Make sure we don't get any timeouts
         ini_set("memory_limit", "-1");
         set_time_limit(0);
-
-        parent :: __construct($applicationConfiguration);
+        
+        parent::__construct($applicationConfiguration);
     }
 }

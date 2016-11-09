@@ -22,21 +22,21 @@ class ZipDefaultRendition extends ZipRendition
      */
     public static function save($temporary_directory, $file_name)
     {
-        $zip = Filecompression :: factory();
+        $zip = Filecompression::factory();
         $zip_path = $zip->create_archive($temporary_directory);
-        Filesystem :: remove($temporary_directory);
+        Filesystem::remove($temporary_directory);
         
-        $user_id = Session :: get_user_id();
-        $path = Path :: getInstance()->getTemporaryPath(__NAMESPACE__) . $user_id . '/export_photos/' .
-             Filesystem :: create_safe_name($file_name) . '.zip';
+        $user_id = Session::get_user_id();
+        $path = Path::getInstance()->getTemporaryPath(__NAMESPACE__) . $user_id . '/export_photos/' .
+             Filesystem::create_safe_name($file_name) . '.zip';
         
-        if (Filesystem :: move_file($zip_path, $path))
+        if (Filesystem::move_file($zip_path, $path))
         {
             return $path;
         }
         else
         {
-            throw new \Exception(Translation :: get('FileMoveFailed'));
+            throw new \Exception(Translation::get('FileMoveFailed'));
         }
     }
 }

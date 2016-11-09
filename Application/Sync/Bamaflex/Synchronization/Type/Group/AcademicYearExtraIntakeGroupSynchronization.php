@@ -13,7 +13,7 @@ class AcademicYearExtraIntakeGroupSynchronization extends GroupSynchronization
 
     public function get_code()
     {
-        return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
+        return $this->get_parent_group()->get_code() . '_' . self::IDENTIFIER;
     }
 
     public function get_name()

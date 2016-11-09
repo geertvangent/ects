@@ -9,13 +9,13 @@ class Module extends \Ehb\Application\Discovery\Module\TrainingResults\Module
 
     public function get_module_parameters()
     {
-        return self :: module_parameters();
+        return self::module_parameters();
     }
 
     public static function module_parameters()
     {
-        $training_id = Request :: get(self :: PARAM_TRAINING_ID);
-        $source = Request :: get(self :: PARAM_SOURCE);
+        $training_id = Request::get(self::PARAM_TRAINING_ID);
+        $source = Request::get(self::PARAM_SOURCE);
         $parameter = new Parameters();
         
         if ($training_id)
@@ -31,8 +31,8 @@ class Module extends \Ehb\Application\Discovery\Module\TrainingResults\Module
 
     public static function get_training_info_parameters()
     {
-        $training_id = Request :: get(self :: PARAM_TRAINING_ID);
-        $source = Request :: get(self :: PARAM_SOURCE);
+        $training_id = Request::get(self::PARAM_TRAINING_ID);
+        $source = Request::get(self::PARAM_SOURCE);
         
         $parameter = new \Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters();
         $parameter->set_training_id($training_id);

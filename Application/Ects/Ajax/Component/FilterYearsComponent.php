@@ -12,7 +12,7 @@ use Chamilo\Libraries\Architecture\JsonAjaxResult;
  */
 class FilterYearsComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAuthenticationSupport
 {
-
+    
     // Properties
     const PROPERTY_YEAR = 'year';
 

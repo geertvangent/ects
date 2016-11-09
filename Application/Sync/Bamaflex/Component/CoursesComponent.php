@@ -21,20 +21,20 @@ class CoursesComponent extends Manager implements DelegateComponent
         try
         {
             echo '<pre>';
-            Synchronization :: log('Courses sync started', date('c', time()));
+            Synchronization::log('Courses sync started', date('c', time()));
             flush();
             
             $synchronization = new CourseSynchronization();
             $synchronization->run();
             
-            Synchronization :: log('Courses sync ended', date('c', time()));
+            Synchronization::log('Courses sync ended', date('c', time()));
             echo '</pre>';
         }
         catch (\Exception $exception)
         {
             echo 'Synchronization failed';
-            Synchronization :: log('Synchronization failed', date('c', time()));
-            Synchronization :: log('Courses sync ended', date('c', time()));
+            Synchronization::log('Synchronization failed', date('c', time()));
+            Synchronization::log('Courses sync ended', date('c', time()));
         }
     }
 }

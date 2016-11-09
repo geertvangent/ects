@@ -10,14 +10,14 @@ class Module extends \Ehb\Application\Discovery\Module\GroupUser\Module
 
     public function get_module_parameters()
     {
-        return self :: module_parameters();
+        return self::module_parameters();
     }
 
     public static function module_parameters()
     {
-        $group_class_id = Request :: get(self :: PARAM_GROUP_CLASS_ID);
-        $source = Request :: get(self :: PARAM_SOURCE);
-        $type = Request :: get(self :: PARAM_TYPE);
+        $group_class_id = Request::get(self::PARAM_GROUP_CLASS_ID);
+        $source = Request::get(self::PARAM_SOURCE);
+        $type = Request::get(self::PARAM_TYPE);
         $parameter = new Parameters();
         
         if ($group_class_id)
@@ -37,9 +37,9 @@ class Module extends \Ehb\Application\Discovery\Module\GroupUser\Module
 
     public static function get_group_parameters()
     {
-        $group_class_id = Request :: get(self :: PARAM_GROUP_CLASS_ID);
-        $source = Request :: get(self :: PARAM_SOURCE);
-        $type = Request :: get(self :: PARAM_TYPE);
+        $group_class_id = Request::get(self::PARAM_GROUP_CLASS_ID);
+        $source = Request::get(self::PARAM_SOURCE);
+        $type = Request::get(self::PARAM_TYPE);
         
         $parameter = new \Ehb\Application\Discovery\Module\GroupUser\Implementation\Bamaflex\Parameters();
         $parameter->set_group_class_id($group_class_id);

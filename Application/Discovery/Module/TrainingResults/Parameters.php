@@ -11,11 +11,11 @@ class Parameters extends \Ehb\Application\Discovery\Parameters
 
     public function get_training_id()
     {
-        return $this->get_parameter(Module :: PARAM_TRAINING_ID);
+        return $this->get_parameter(Module::PARAM_TRAINING_ID);
     }
 
     public function set_training_id($training_id)
     {
-        $this->set_parameter(Module :: PARAM_TRAINING_ID, $training_id);
+        $this->set_parameter(Module::PARAM_TRAINING_ID, $training_id);
     }
 }

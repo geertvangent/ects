@@ -14,24 +14,24 @@ class XmlGroupMenuFeedComponent extends \Chamilo\Application\Discovery\Module\Pe
     public function run()
     {
         $groups_tree = array();
-
-        $parent_id = Request :: get('parent_id');
+        
+        $parent_id = Request::get('parent_id');
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
-                \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID),
+                \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
+                \Chamilo\Core\Group\Storage\DataClass\Group::PROPERTY_PARENT_ID), 
             new StaticConditionVariable($parent_id));
-        $groups_tree = \Chamilo\Core\Group\Storage\DataManager :: retrieves(
-            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
+        $groups_tree = \Chamilo\Core\Group\Storage\DataManager::retrieves(
+            \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
             new DataClassRetrievesParameters(
-                $condition,
-                null,
-                null,
+                $condition, 
+                null, 
+                null, 
                 new OrderBy(
                     new PropertyConditionVariable(
-                        \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
-                        \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_NAME))))->as_array();
-
+                        \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
+                        \Chamilo\Core\Group\Storage\DataClass\Group::PROPERTY_NAME))))->as_array();
+        
         header('Content-Type: text/xml');
         echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n", '<tree>' . "\n";
         echo $this->dump_tree($groups_tree);
@@ -41,7 +41,7 @@ class XmlGroupMenuFeedComponent extends \Chamilo\Application\Discovery\Module\Pe
     function dump_tree($groups)
     {
         $html = array();
-
+        
         if ($this->contains_results($groups))
         {
             $this->dump_groups_tree($groups);

@@ -12,13 +12,13 @@ class BamaflexResultSet extends ArrayResultSet
         
         if (! $statement instanceof \PDOException)
         {
-            while ($record = $statement->fetch(\PDO :: FETCH_ASSOC))
+            while ($record = $statement->fetch(\PDO::FETCH_ASSOC))
             {
                 $records[] = $this->process_record($record);
             }
         }
         
-        parent :: __construct($records);
+        parent::__construct($records);
     }
 
     public function process_record($record)

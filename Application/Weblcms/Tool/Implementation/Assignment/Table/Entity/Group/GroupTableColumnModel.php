@@ -16,8 +16,8 @@ abstract class GroupTableColumnModel extends \Chamilo\Core\Repository\ContentObj
 
     public function initialize_columns()
     {
-        parent :: initialize_columns();
-
-        $this->add_column(new StaticTableColumn(self :: PROPERTY_GROUP_MEMBERS), 1);
+        parent::initialize_columns();
+        
+        $this->add_column(new StaticTableColumn(self::PROPERTY_GROUP_MEMBERS), 1);
     }
 }

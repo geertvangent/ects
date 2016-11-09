@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object name="course" namespace="application\discovery\module\career">
-	<properties>
-		<property name="year" type="string" />
-		<property name="name" type="string" />
-		<property name="marks" type="multitype:Mark" />
-	</properties>
+<object
+    name="course"
+    namespace="application\discovery\module\career">
+    <properties>
+        <property
+            name="year"
+            type="string" />
+        <property
+            name="name"
+            type="string" />
+        <property
+            name="marks"
+            type="multitype:Mark" />
+    </properties>
 </object>

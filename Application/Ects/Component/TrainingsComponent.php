@@ -19,9 +19,9 @@ class TrainingsComponent extends Manager implements NoAuthenticationSupport
     public function renderBody()
     {
         $html = array();
-
+        
         $html[] = $this->getJavascript();
-
+        
         $html[] = '<style>';
         $html[] = '.ects-course-credits {
 	text-align: center;
@@ -98,30 +98,30 @@ table.DetailxOLODtable {
 	color: #55595c !important;
 	background-color: #eceeef !important
 }';
-
+        
         $html[] = '</style>';
-
+        
         $html[] = '<link rel="stylesheet" href="' . Theme::getInstance()->getCssPath(Manager::context(), true) .
              'BaMaFlexWeb.css">';
-
+        
         $html[] = '<div ng-app="trainingBrowserApp" ng-controller="MainController as mainController">';
-
+        
         $html[] = '<div ng-view></div>';
-
+        
         $html[] = $this->getTrainingSelectorPanel();
         $html[] = $this->getTrainingDetailsPanel();
         $html[] = $this->getTrajectoryDetailsPanel();
         $html[] = $this->getCourseDetailsPanel();
-
+        
         $html[] = '</div>';
-
+        
         return implode(PHP_EOL, $html);
     }
 
     private function getJavascript()
     {
         $html = array();
-
+        
         $html[] = ResourceManager::getInstance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'Angular/angular.min.js');
         $html[] = ResourceManager::getInstance()->get_resource_html(
@@ -130,7 +130,7 @@ table.DetailxOLODtable {
             Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'Angular/angular-sanitize.min.js');
         $html[] = ResourceManager::getInstance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'Utilities/chamiloUtilities.js');
-
+        
         $html[] = ResourceManager::getInstance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) . 'TrainingBrowser/app.js');
         $html[] = ResourceManager::getInstance()->get_resource_html(
@@ -172,24 +172,24 @@ table.DetailxOLODtable {
         $html[] = ResourceManager::getInstance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(Manager::context(), true) .
                  'TrainingBrowser/Service/CoursesService.js');
-
+        
         return implode(PHP_EOL, $html);
     }
 
     private function getTrainingSelectorPanel()
     {
         $html = array();
-
+        
         $html[] = '<script type="text/ng-template" id="trainingSelectorPanel.html">';
         $html[] = '<div training-selector-panel>';
-
+        
         $html[] = '<nav class="breadcrumb">';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
         $html[] = '</nav>';
-
+        
         $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
-
+        
         // Form
         $html[] = '<div class="card m-b-2">';
         $html[] = '    <div class="card-header">Zoekcriteria</div>';
@@ -198,39 +198,39 @@ table.DetailxOLODtable {
         $html[] = '            <div class="col-xs-12 col-lg-2">';
         $html[] = '                <div class="form-group">';
         $html[] = '                    <label for="academicYear">Academiejaar</label>';
-
+        
         $html[] = '                    <select  class="form-select form-control" id="academicYear"';
         $html[] = '                             ng-model="trainingSelector.filterAcademicYear"';
         $html[] = '                             ng-options="item for item in trainingSelector.academicYears"';
         $html[] = '                             ng-change="trainingSelector.selectAcademicYear()">';
         $html[] = '                    </select>';
-
+        
         $html[] = '                </div>';
         $html[] = '            </div>';
         $html[] = '            <div class="col-xs-12 col-lg-5">';
         $html[] = '                <div class="form-group">';
         $html[] = '                    <label for="faculty">Departement</label>';
-
+        
         $html[] = '                    <select  class="form-select form-control" id="faculty"';
         $html[] = '                             ng-model="trainingSelector.filterFaculty"';
         $html[] = '                             ng-options="faculty.faculty for faculty in trainingSelector.faculties"';
         $html[] = '                             ng-change="trainingSelector.selectFaculty()">';
         $html[] = '                         <option value="">-- Alle departementen --</option>';
         $html[] = '                    </select>';
-
+        
         $html[] = '                </div>';
         $html[] = '            </div>';
         $html[] = '            <div class="col-xs-12 col-lg-5">';
         $html[] = '                <div class="form-group">';
         $html[] = '                    <label for="trainingType">Opleidingstype</label>';
-
+        
         $html[] = '                    <select  class="form-select form-control" id="trainingType"';
         $html[] = '                             ng-model="trainingSelector.filterTrainingType"';
         $html[] = '                             ng-options="trainingType.type for trainingType in trainingSelector.trainingTypes"';
         $html[] = '                             ng-change="trainingSelector.selectTrainingType()">';
         $html[] = '                         <option value="">-- Alle opleidingstypes --</option>';
         $html[] = '                    </select>';
-
+        
         $html[] = '                </div>';
         $html[] = '            </div>';
         $html[] = '            <div class="col-xs-12 col-lg-9">';
@@ -254,15 +254,15 @@ table.DetailxOLODtable {
         $html[] = '        </div>';
         $html[] = '    </div>';
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
         $html[] = '</div>';
-
+        
         // Opleidingslijst
-
+        
         $html[] = '<div class="row" training-cards-panel>';
         $html[] = '<div class="col-xs-12">';
-
+        
         $html[] = '<div class="card card-block" ng-repeat="type in trainingCards.trainingsByType" ng-hide="trainingCards.isLoadingTrainingList">';
         $html[] = '    <h5 class="card-title">{{ type.type }}</h5>';
         $html[] = '    <p class="card-text">';
@@ -274,14 +274,14 @@ table.DetailxOLODtable {
         $html[] = '        </span>';
         $html[] = '    </p>';
         $html[] = '</div>';
-
+        
         $html[] = '<div class="card card-block" ng-show="trainingCards.trainingsByType.length == 0 && trainingCards.isLoadingTrainingList == false">';
         $html[] = '    <h5 class="card-title">Geen resultaten</h5>';
         $html[] = '    <p class="card-text">';
         $html[] = '        <span>Er werden helaas geen opleidingen gevonden die aan je zoekcritera voldoen.</span>';
         $html[] = '    </p>';
         $html[] = '</div>';
-
+        
         $html[] = '<div class="card card-block" ng-show="trainingCards.isLoadingTrainingList">';
         $html[] = '    <p class="card-text text-xs-center text-muted">';
         $html[] = '        <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
@@ -290,23 +290,23 @@ table.DetailxOLODtable {
         $html[] = '        <h6 class="text-xs-center text-muted">Opleidingen worden geladen</h6>';
         $html[] = '    </p>';
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
         $html[] = '</script>';
-
+        
         return implode(PHP_EOL, $html);
     }
 
     private function getTrainingDetailsPanel()
     {
         $html = array();
-
+        
         $html[] = '<script type="text/ng-template" id="trainingDetailsPanel.html">';
         $html[] = '<div training-details-panel>';
-
+        
         $html[] = '<div class="card card-block" ng-show="trainingDetails.isLoadingTraining">';
         $html[] = '    <p class="card-text text-xs-center text-muted">';
         $html[] = '        <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
@@ -315,21 +315,21 @@ table.DetailxOLODtable {
         $html[] = '        <h6 class="text-xs-center text-muted">Opleiding wordt geladen</h6>';
         $html[] = '    </p>';
         $html[] = '</div>';
-
+        
         $html[] = '<div ng-hide="trainingDetails.isLoadingTraining">';
-
+        
         $html[] = '<nav class="breadcrumb">';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + trainingDetails.training.id)">{{ trainingDetails.training.name }}</a>';
         $html[] = '</nav>';
-
+        
         $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
-
+        
         $html[] = '<h3 class="text-primary m-b-2">{{ trainingDetails.training.name }}</h3>';
-
+        
         $html[] = '<div class="card m-b-2">';
-
+        
         $html[] = '    <div class="card-header">Algemeen</div>';
         $html[] = '    <div class="card-block">';
         $html[] = '        <span class="text-muted">Academiejaar:</span> {{ trainingDetails.training.year }}<br />';
@@ -337,20 +337,20 @@ table.DetailxOLODtable {
         $html[] = '        <span class="text-muted">Domein:</span> {{ trainingDetails.training.domain }}<br />';
         $html[] = '        <span class="text-muted">Studieomvang in studiepunten:</span> {{ trainingDetails.training.credits }}<br />';
         $html[] = '    </div>';
-
+        
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
         $html[] = '</div>';
-
+        
         // Trajectlijst
         $html[] = '<div class="row">';
         $html[] = '<div class="col-xs-12">';
-
+        
         $html[] = '<div class="card">';
-
+        
         $html[] = '    <div class="card-header">Opleidingstrajecten</div>';
-
+        
         $html[] = '    <div class="card-block" ng-repeat="trajectory in trainingDetails.training.trajectories">';
         $html[] = '        <h5 class="card-title">{{ trajectory.name }}</h5>';
         $html[] = '        <p class="card-text">';
@@ -362,31 +362,31 @@ table.DetailxOLODtable {
         $html[] = '            </span>';
         $html[] = '        </p>';
         $html[] = '    </div>';
-
+        
         $html[] = '</div>';
-
+        
         $html[] = '<button type="button" class="btn btn-primary" ng-click="mainController.goToPath(\'\')">';
         $html[] = '    <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Terug';
         $html[] = '</button>';
-
+        
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
         $html[] = '</script>';
-
+        
         return implode(PHP_EOL, $html);
     }
 
     private function getTrajectoryDetailsPanel()
     {
         $html = array();
-
+        
         $html[] = '<script type="text/ng-template" id="subTrajectoryDetailsPanel.html">';
         $html[] = '<div sub-trajectory-details-panel>';
-
+        
         $html[] = '<div class="card card-block" ng-show="subTrajectoryDetails.isLoadingSubTrajectory">';
         $html[] = '    <p class="card-text text-xs-center text-muted">';
         $html[] = '        <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
@@ -395,15 +395,15 @@ table.DetailxOLODtable {
         $html[] = '        <h6 class="text-xs-center text-muted">Traject wordt geladen</h6>';
         $html[] = '    </p>';
         $html[] = '</div>';
-
+        
         $html[] = '<div ng-hide="subTrajectoryDetails.isLoadingSubTrajectory">';
-
+        
         $html[] = '<nav class="breadcrumb">';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.training.id)">{{ subTrajectoryDetails.subTrajectory.training.name }}</a>';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + subTrajectoryDetails.subTrajectory.sub_trajectory.id)">{{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }}</a>';
         $html[] = '</nav>';
-
+        
         $html[] = '<div class="row">';
         $html[] = '    <div class="col-sm-12">';
         $html[] = '        <h3 class="text-primary m-b-2">Programma {{ subTrajectoryDetails.subTrajectory.training.name }}<br /><small class="text-muted">({{ subTrajectoryDetails.subTrajectory.sub_trajectory.name }})</small></h3>';
@@ -449,22 +449,22 @@ table.DetailxOLODtable {
         $html[] = '        </button>';
         $html[] = '    </div>';
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
         $html[] = '</script>';
-
+        
         return implode(PHP_EOL, $html);
     }
 
     private function getCourseDetailsPanel()
     {
         $html = array();
-
+        
         $html[] = '<script type="text/ng-template" id="courseDetailsPanel.html">';
         $html[] = '<div course-details-panel>';
-
+        
         $html[] = '<div class="card card-block" ng-show="courseDetails.isLoadingCourse">';
         $html[] = '    <p class="card-text text-xs-center text-muted">';
         $html[] = '        <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
@@ -473,17 +473,17 @@ table.DetailxOLODtable {
         $html[] = '        <h6 class="text-xs-center text-muted">Opleidingsonderdeel wordt geladen</h6>';
         $html[] = '    </p>';
         $html[] = '</div>';
-
+        
         $html[] = '<div ng-hide="courseDetails.isLoadingCourse">';
-
+        
         $html[] = '<nav class="breadcrumb">';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'\')">Studiegids</a>';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'training/\' + courseDetails.course.training_id)">{{ courseDetails.course.training }}</a>';
         $html[] = '<a class="breadcrumb-item ects-link text-primary" ng-click="mainController.goToPath(\'course/\' + courseDetails.course.id)">{{ courseDetails.course.name }}</a>';
         $html[] = '</nav>';
-
+        
         $html[] = '<h3 class="text-primary m-b-2">{{ courseDetails.course.name }}</h3>';
-
+        
         $html[] = '<div class="row">';
         $html[] = '    <div class="col-sm-12">';
         $html[] = '        <div class="card ects-course-summary">';
@@ -495,9 +495,9 @@ table.DetailxOLODtable {
         $html[] = '        </div>';
         $html[] = '    </div>';
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
-
+        
         $html[] = '<div class="card card-block" ng-show="courseDetails.isLoadingCourseDetails">';
         $html[] = '    <p class="card-text text-xs-center text-muted">';
         $html[] = '        <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>';
@@ -506,20 +506,20 @@ table.DetailxOLODtable {
         $html[] = '        <h6 class="text-xs-center text-muted">ECTS fiche wordt geladen</h6>';
         $html[] = '    </p>';
         $html[] = '</div>';
-
+        
         $html[] = '<div ng-hide="courseDetails.isLoadingCourseDetails">';
-
+        
         $html[] = '<div class="row">';
         $html[] = '    <div class="col-sm-12">';
         $html[] = '        <div ng-bind-html="courseDetails.getCourseDetails()"></div>';
         $html[] = '    </div>';
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
-
+        
         $html[] = '</div>';
         $html[] = '</script>';
-
+        
         return implode(PHP_EOL, $html);
     }
 }

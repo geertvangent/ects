@@ -13,6 +13,6 @@ class Installer extends \Chamilo\Configuration\Package\Action\Installer
      */
     public function __construct($values)
     {
-        parent :: __construct($values);
+        parent::__construct($values);
     }
 }

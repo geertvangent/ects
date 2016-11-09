@@ -27,11 +27,11 @@ class Trajectory extends AdministrationDataClass
     {
         return parent::get_default_property_names(
             array(
-                self::PROPERTY_SOURCE,
-                self::PROPERTY_NAME,
-                self::PROPERTY_TRAINING_ID,
-                self::PROPERTY_SORT,
-                self::PROPERTY_SORT,
+                self::PROPERTY_SOURCE, 
+                self::PROPERTY_NAME, 
+                self::PROPERTY_TRAINING_ID, 
+                self::PROPERTY_SORT, 
+                self::PROPERTY_SORT, 
                 self::PROPERTY_INVISIBLE));
     }
 

@@ -19,12 +19,12 @@ class UserTableDataProvider extends \Chamilo\Core\Repository\ContentObject\Assig
     {
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
-
+        
         return $assignmentService->findTargetUsersForPublication(
-            $assignmentDataProvider->getPublication(),
-            $condition,
-            $offset,
-            $count,
+            $assignmentDataProvider->getPublication(), 
+            $condition, 
+            $offset, 
+            $count, 
             $orderProperty);
     }
 
@@ -36,7 +36,7 @@ class UserTableDataProvider extends \Chamilo\Core\Repository\ContentObject\Assig
     {
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
-
+        
         return $assignmentService->countTargetUsersForPublication($assignmentDataProvider->getPublication(), $condition);
     }
 }

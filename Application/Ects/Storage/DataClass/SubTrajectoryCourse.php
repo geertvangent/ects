@@ -30,13 +30,13 @@ class SubTrajectoryCourse extends AdministrationDataClass
     {
         return parent::get_default_property_names(
             array(
-                self::PROPERTY_SOURCE,
-                self::PROPERTY_NAME,
-                self::PROPERTY_TRAJECTORY_PART,
-                self::PROPERTY_CREDITS,
-                self::PROPERTY_SUB_TRAJECTORY_ID,
-                self::PROPERTY_PROGRAMME_ID,
-                self::PROPERTY_PARENT_PROGRAMME_ID,
+                self::PROPERTY_SOURCE, 
+                self::PROPERTY_NAME, 
+                self::PROPERTY_TRAJECTORY_PART, 
+                self::PROPERTY_CREDITS, 
+                self::PROPERTY_SUB_TRAJECTORY_ID, 
+                self::PROPERTY_PROGRAMME_ID, 
+                self::PROPERTY_PARENT_PROGRAMME_ID, 
                 self::PROPERTY_APPROVED));
     }
 

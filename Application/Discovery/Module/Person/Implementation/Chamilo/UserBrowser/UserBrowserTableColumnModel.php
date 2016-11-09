@@ -11,14 +11,14 @@ class UserBrowserTableColumnModel extends TableColumnModel implements TableColum
 
     public function initialize_columns()
     {
-        $user_alias = \Chamilo\Core\User\Storage\DataManager :: getInstance()->get_alias(
-            \Chamilo\Core\User\Storage\DataClass\User :: get_table_name());
+        $user_alias = \Chamilo\Core\User\Storage\DataManager::getInstance()->get_alias(
+            \Chamilo\Core\User\Storage\DataClass\User::get_table_name());
         $this->add_column(
-            new TableColumn(\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_OFFICIAL_CODE, true, $user_alias, true));
+            new TableColumn(\Chamilo\Core\User\Storage\DataClass\User::PROPERTY_OFFICIAL_CODE, true, $user_alias, true));
         $this->add_column(
-            new TableColumn(\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_LASTNAME, true, $user_alias, true));
+            new TableColumn(\Chamilo\Core\User\Storage\DataClass\User::PROPERTY_LASTNAME, true, $user_alias, true));
         $this->add_column(
-            new TableColumn(\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_FIRSTNAME, true, $user_alias, true));
-        $this->add_column(new TableColumn(Person :: PROPERTY_EMAIL));
+            new TableColumn(\Chamilo\Core\User\Storage\DataClass\User::PROPERTY_FIRSTNAME, true, $user_alias, true));
+        $this->add_column(new TableColumn(Person::PROPERTY_EMAIL));
     }
 }

@@ -22,7 +22,7 @@ class PlatformGroupTableCellRenderer extends GroupTableCellRenderer
      */
     protected function retrieveGroupUserIds($groupId)
     {
-        return DataManager :: retrieve_by_id(Group :: class_name(), $groupId)->get_users(true, true);
+        return DataManager::retrieve_by_id(Group::class_name(), $groupId)->get_users(true, true);
     }
 
     /**
@@ -31,7 +31,7 @@ class PlatformGroupTableCellRenderer extends GroupTableCellRenderer
      */
     protected function getEntity($entityId)
     {
-        return DataManager :: retrieve_by_id(Group :: class_name(), $entityId);
+        return DataManager::retrieve_by_id(Group::class_name(), $entityId);
     }
 
     /**
@@ -47,7 +47,7 @@ class PlatformGroupTableCellRenderer extends GroupTableCellRenderer
                 return true;
             }
         }
-
+        
         return false;
     }
 
@@ -57,6 +57,6 @@ class PlatformGroupTableCellRenderer extends GroupTableCellRenderer
      */
     protected function isSubscribedInGroup($groupId, $userId)
     {
-        return \Chamilo\Core\Group\Storage\DataManager :: is_group_member($groupId, $userId);
+        return \Chamilo\Core\Group\Storage\DataManager::is_group_member($groupId, $userId);
     }
 }

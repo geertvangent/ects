@@ -21,12 +21,12 @@ class PlatformGroupTableDataProvider extends GroupTableDataProvider
     {
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
-
+        
         return $assignmentService->findTargetGroupsForPublication(
-            $assignmentDataProvider->getPublication(),
-            $condition,
-            $offset,
-            $count,
+            $assignmentDataProvider->getPublication(), 
+            $condition, 
+            $offset, 
+            $count, 
             $orderProperty);
     }
 
@@ -38,9 +38,9 @@ class PlatformGroupTableDataProvider extends GroupTableDataProvider
     {
         $assignmentDataProvider = $this->get_table()->getAssignmentDataProvider();
         $assignmentService = $assignmentDataProvider->getAssignmentService();
-
+        
         return $assignmentService->countTargetGroupsForPublication(
-            $assignmentDataProvider->getPublication(),
+            $assignmentDataProvider->getPublication(), 
             $condition);
     }
 }

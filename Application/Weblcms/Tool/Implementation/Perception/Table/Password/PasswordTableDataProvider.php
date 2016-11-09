@@ -12,7 +12,7 @@ class PasswordTableDataProvider extends DataClassTableDataProvider
 
     /**
      * Gets the users
-     *
+     * 
      * @param $user String
      * @param $category String
      * @param $offset int
@@ -23,17 +23,17 @@ class PasswordTableDataProvider extends DataClassTableDataProvider
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
         $parameters = new DataClassRetrievesParameters($condition, $count, $offset, $order_property);
-        return DataManager :: retrieves(Password :: class_name(), $parameters);
+        return DataManager::retrieves(Password::class_name(), $parameters);
     }
 
     /**
      * Gets the number of users in the table
-     *
+     * 
      * @return int
      */
     public function count_data($condition)
     {
         $parameters = new DataClassCountParameters($condition);
-        return DataManager :: count(Password :: class_name(), $parameters);
+        return DataManager::count(Password::class_name(), $parameters);
     }
 }

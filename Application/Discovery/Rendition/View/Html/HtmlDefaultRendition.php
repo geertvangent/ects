@@ -17,18 +17,18 @@ class HtmlDefaultRendition extends HtmlRendition
     }
 
     public static function add_export_action(
-       \Ehb\Application\Discovery\Rendition\RenditionImplementation $rendition_implementation,
+        \Ehb\Application\Discovery\Rendition\RenditionImplementation $rendition_implementation, 
         $type = \Ehb\Application\Discovery\Rendition\Format\HtmlRendition :: VIEW_XLSX)
     {
         $export_parameters = array_merge(
-            $rendition_implementation->get_module_parameters()->get_parameters(),
-            array(\Ehb\Application\Discovery\Manager :: PARAM_VIEW => $type));
+            $rendition_implementation->get_module_parameters()->get_parameters(), 
+            array(\Ehb\Application\Discovery\Manager::PARAM_VIEW => $type));
         $url = $rendition_implementation->get_context()->get_url($export_parameters);
-
-        BreadcrumbTrail :: getInstance()->add_extra(
+        
+        BreadcrumbTrail::getInstance()->add_extra(
             new ToolbarItem(
-                Translation :: get(StringUtilities :: getInstance()->createString($type)->upperCamelize()),
-                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Export/' . $type . '.png',
+                Translation::get(StringUtilities::getInstance()->createString($type)->upperCamelize()), 
+                Theme::getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Export/' . $type . '.png', 
                 $url));
     }
 }

@@ -68,7 +68,7 @@ class AssignmentService
     public function countDistinctEntriesByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
         return $this->getAssignmentRepository()->countDistinctEntriesByPublicationAndEntityType(
-            $publication,
+            $publication, 
             $entityType);
     }
 
@@ -81,7 +81,7 @@ class AssignmentService
     public function countDistinctFeedbackByPublicationAndEntityType(ContentObjectPublication $publication, $entityType)
     {
         return $this->getAssignmentRepository()->countDistinctFeedbackByPublicationAndEntityType(
-            $publication,
+            $publication, 
             $entityType);
     }
 
@@ -91,11 +91,11 @@ class AssignmentService
      * @param integer $entityType
      * @return integer
      */
-    public function countDistinctLateEntriesByPublicationAndEntityType(ContentObjectPublication $publication,
+    public function countDistinctLateEntriesByPublicationAndEntityType(ContentObjectPublication $publication, 
         $entityType)
     {
         return $this->getAssignmentRepository()->countDistinctLateEntriesByPublicationAndEntityType(
-            $publication,
+            $publication, 
             $entityType);
     }
 
@@ -109,14 +109,14 @@ class AssignmentService
     {
         switch ($entityType)
         {
-            case Entry :: ENTITY_TYPE_USER :
+            case Entry::ENTITY_TYPE_USER :
                 return $this->countTargetUsersForPublication($publication);
                 break;
-
-            case Entry :: ENTITY_TYPE_COURSE_GROUP :
+            
+            case Entry::ENTITY_TYPE_COURSE_GROUP :
                 return $this->countTargetCourseGroupsForPublication($publication);
                 break;
-            case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
+            case Entry::ENTITY_TYPE_PLATFORM_GROUP :
                 return $this->countTargetGroupsForPublication($publication);
                 break;
         }
@@ -131,14 +131,14 @@ class AssignmentService
      * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    public function findTargetUsersForPublication(ContentObjectPublication $publication, $condition, $offset, $count,
+    public function findTargetUsersForPublication(ContentObjectPublication $publication, $condition, $offset, $count, 
         $orderProperty)
     {
         return $this->getAssignmentRepository()->findTargetUsersForPublication(
-            $publication,
-            $condition,
-            $offset,
-            $count,
+            $publication, 
+            $condition, 
+            $offset, 
+            $count, 
             $orderProperty);
     }
 
@@ -160,12 +160,12 @@ class AssignmentService
      * @param integer $entityId
      * @return integer
      */
-    public function countFeedbackForPublicationByEntityTypeAndEntityId(ContentObjectPublication $publication,
+    public function countFeedbackForPublicationByEntityTypeAndEntityId(ContentObjectPublication $publication, 
         $entityType, $entityId)
     {
         return $this->getAssignmentRepository()->countFeedbackForPublicationByEntityTypeAndEntityId(
-            $publication,
-            $entityType,
+            $publication, 
+            $entityType, 
             $entityId);
     }
 
@@ -178,14 +178,14 @@ class AssignmentService
      * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    public function findTargetCourseGroupsForPublication(ContentObjectPublication $publication, $condition, $offset,
+    public function findTargetCourseGroupsForPublication(ContentObjectPublication $publication, $condition, $offset, 
         $count, $orderProperty)
     {
         return $this->getAssignmentRepository()->findTargetCourseGroupsForPublication(
-            $publication,
-            $condition,
-            $offset,
-            $count,
+            $publication, 
+            $condition, 
+            $offset, 
+            $count, 
             $orderProperty);
     }
 
@@ -209,14 +209,14 @@ class AssignmentService
      * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
      * @return \Chamilo\Libraries\Storage\ResultSet\ArrayResultSet
      */
-    public function findTargetGroupsForPublication(ContentObjectPublication $publication, $condition, $offset, $count,
+    public function findTargetGroupsForPublication(ContentObjectPublication $publication, $condition, $offset, $count, 
         $orderProperty)
     {
         return $this->getAssignmentRepository()->findTargetGroupsForPublication(
-            $publication,
-            $condition,
-            $offset,
-            $count,
+            $publication, 
+            $condition, 
+            $offset, 
+            $count, 
             $orderProperty);
     }
 
@@ -238,12 +238,12 @@ class AssignmentService
      * @param integer $entityId
      * @return integer
      */
-    public function countEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+    public function countEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType, 
         $entityId)
     {
         return $this->getAssignmentRepository()->countEntriesForPublicationEntityTypeAndId(
-            $publication,
-            $entityType,
+            $publication, 
+            $entityType, 
             $entityId);
     }
 
@@ -254,12 +254,12 @@ class AssignmentService
      * @param integer $entityId
      * @return integer
      */
-    public function countDistinctFeedbackForEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+    public function countDistinctFeedbackForEntityTypeAndId(ContentObjectPublication $publication, $entityType, 
         $entityId)
     {
         return $this->getAssignmentRepository()->countDistinctFeedbackForEntityTypeAndId(
-            $publication,
-            $entityType,
+            $publication, 
+            $entityType, 
             $entityId);
     }
 
@@ -273,8 +273,8 @@ class AssignmentService
     public function countDistinctScoreForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
     {
         return $this->getAssignmentRepository()->countDistinctScoreForEntityTypeAndId(
-            $publication,
-            $entityType,
+            $publication, 
+            $entityType, 
             $entityId);
     }
 
@@ -288,8 +288,8 @@ class AssignmentService
     public function getAverageScoreForEntityTypeAndId(ContentObjectPublication $publication, $entityType, $entityId)
     {
         return $this->getAssignmentRepository()->retrieveAverageScoreForEntityTypeAndId(
-            $publication,
-            $entityType,
+            $publication, 
+            $entityType, 
             $entityId);
     }
 
@@ -304,16 +304,16 @@ class AssignmentService
      * @param \Chamilo\Libraries\Storage\Query\OrderBy[] $orderProperty
      * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
-    public function findEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType,
+    public function findEntriesForPublicationEntityTypeAndId(ContentObjectPublication $publication, $entityType, 
         $entityId, $condition, $offset, $count, $orderProperty)
     {
         return $this->getAssignmentRepository()->retrieveEntriesForPublicationEntityTypeAndId(
-            $publication,
-            $entityType,
-            $entityId,
-            $condition,
-            $offset,
-            $count,
+            $publication, 
+            $entityType, 
+            $entityId, 
+            $condition, 
+            $offset, 
+            $count, 
             $orderProperty);
     }
 
@@ -406,12 +406,12 @@ class AssignmentService
      * @param integer[] $entityIdentifiers
      * @return \Chamilo\Libraries\Storage\ResultSet\DataClassResultSet
      */
-    public function findEntriesByPublicationEntityTypeAndIdentifiers(ContentObjectPublication $publication, $entityType,
+    public function findEntriesByPublicationEntityTypeAndIdentifiers(ContentObjectPublication $publication, $entityType, 
         $entityIdentifiers)
     {
         return $this->getAssignmentRepository()->findEntriesByPublicationEntityTypeAndIdentifiers(
-            $publication,
-            $entityType,
+            $publication, 
+            $entityType, 
             $entityIdentifiers);
     }
 

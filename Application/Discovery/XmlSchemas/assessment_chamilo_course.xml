@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object name="assessment" namespace="application\discovery\module\assessment\implementation\chamilo\source\course">
-	<properties>
-		<property name="course" type="string" />
-	</properties>
+<object
+    name="assessment"
+    namespace="application\discovery\module\assessment\implementation\chamilo\source\course">
+    <properties>
+        <property
+            name="course"
+            type="string" />
+    </properties>
 </object>

@@ -18,7 +18,7 @@ use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Storage\DataClass\Sco
  * @author Magali Gillard <magali.gillard@ehb.be>
  * @author Eduard Vossen <eduard.vossen@ehb.be>
  */
-class AssignmentDataProvider implements
+class AssignmentDataProvider implements 
     \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider
 {
 
@@ -46,7 +46,7 @@ class AssignmentDataProvider implements
      * @param \Chamilo\Application\Weblcms\Storage\DataClass\ContentObjectPublication $publication
      * @param \Chamilo\Libraries\Architecture\Application\Application $application
      */
-    public function __construct(AssignmentService $assignmentService, ContentObjectPublication $publication,
+    public function __construct(AssignmentService $assignmentService, ContentObjectPublication $publication, 
         Application $application)
     {
         $this->assignmentService = $assignmentService;
@@ -115,7 +115,7 @@ class AssignmentDataProvider implements
     public function countDistinctEntriesByEntityType($entityType)
     {
         return $this->getAssignmentService()->countDistinctEntriesByPublicationAndEntityType(
-            $this->getPublication(),
+            $this->getPublication(), 
             $entityType);
     }
 
@@ -126,7 +126,7 @@ class AssignmentDataProvider implements
     public function countDistinctFeedbackByEntityType($entityType)
     {
         return $this->getAssignmentService()->countDistinctFeedbackByPublicationAndEntityType(
-            $this->getPublication(),
+            $this->getPublication(), 
             $entityType);
     }
 
@@ -137,7 +137,7 @@ class AssignmentDataProvider implements
     public function countDistinctLateEntriesByEntityType($entityType)
     {
         return $this->getAssignmentService()->countDistinctLateEntriesByPublicationAndEntityType(
-            $this->getPublication(),
+            $this->getPublication(), 
             $entityType);
     }
 
@@ -148,7 +148,7 @@ class AssignmentDataProvider implements
     public function countEntitiesByEntityType($entityType)
     {
         return $this->getAssignmentService()->countEntitiesByPublicationAndEntityType(
-            $this->getPublication(),
+            $this->getPublication(), 
             $entityType);
     }
 
@@ -160,14 +160,14 @@ class AssignmentDataProvider implements
     {
         switch ($entityType)
         {
-            case Entry :: ENTITY_TYPE_USER :
-                return Translation :: get('Users');
+            case Entry::ENTITY_TYPE_USER :
+                return Translation::get('Users');
                 break;
-            case Entry :: ENTITY_TYPE_COURSE_GROUP :
-                return Translation :: get('CourseGroups');
+            case Entry::ENTITY_TYPE_COURSE_GROUP :
+                return Translation::get('CourseGroups');
                 break;
-            case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
-                return Translation :: get('PlatformGroups');
+            case Entry::ENTITY_TYPE_PLATFORM_GROUP :
+                return Translation::get('PlatformGroups');
                 break;
         }
     }
@@ -202,7 +202,7 @@ class AssignmentDataProvider implements
     protected function getTableNameForEntityType($tableType, Application $application, $entityType)
     {
         $typeName = $this->getTypeNameForEntityType($entityType);
-        return Manager :: package() . '\Table\\' . $tableType . '\\' . $typeName . '\\' . $typeName . 'Table';
+        return Manager::package() . '\Table\\' . $tableType . '\\' . $typeName . '\\' . $typeName . 'Table';
     }
 
     /**
@@ -212,14 +212,14 @@ class AssignmentDataProvider implements
     public function getCurrentEntityType()
     {
         $contentObject = $this->getPublication()->get_content_object();
-
+        
         if ($contentObject->get_allow_group_submissions())
         {
-            return Entry :: ENTITY_TYPE_COURSE_GROUP;
+            return Entry::ENTITY_TYPE_COURSE_GROUP;
         }
         else
         {
-            return Entry :: ENTITY_TYPE_USER;
+            return Entry::ENTITY_TYPE_USER;
         }
     }
 
@@ -236,8 +236,8 @@ class AssignmentDataProvider implements
     public function countFeedbackByEntityTypeAndEntityId($entityType, $entityId)
     {
         return $this->getAssignmentService()->countFeedbackForPublicationByEntityTypeAndEntityId(
-            $this->getPublication(),
-            $entityType,
+            $this->getPublication(), 
+            $entityType, 
             $entityId);
     }
 
@@ -247,7 +247,7 @@ class AssignmentDataProvider implements
      */
     public function canEditAssignment()
     {
-        return $this->getApplication()->is_allowed(WeblcmsRights :: EDIT_RIGHT);
+        return $this->getApplication()->is_allowed(WeblcmsRights::EDIT_RIGHT);
     }
 
     /**
@@ -264,12 +264,12 @@ class AssignmentDataProvider implements
         $entry->setEntityType($entityType);
         $entry->setUserId($userId);
         $entry->setIpAddress($ipAddress);
-
+        
         if (! $entry->create())
         {
             return false;
         }
-
+        
         return $entry;
     }
 
@@ -280,8 +280,8 @@ class AssignmentDataProvider implements
     public function countEntriesForEntityTypeAndId($entityType, $entityId)
     {
         return $this->getAssignmentService()->countEntriesForPublicationEntityTypeAndId(
-            $this->getPublication(),
-            $entityType,
+            $this->getPublication(), 
+            $entityType, 
             $entityId);
     }
 
@@ -292,8 +292,8 @@ class AssignmentDataProvider implements
     public function countDistinctFeedbackForEntityTypeAndId($entityType, $entityId)
     {
         return $this->getAssignmentService()->countDistinctFeedbackForEntityTypeAndId(
-            $this->getPublication(),
-            $entityType,
+            $this->getPublication(), 
+            $entityType, 
             $entityId);
     }
 
@@ -304,8 +304,8 @@ class AssignmentDataProvider implements
     public function countDistinctScoreForEntityTypeAndId($entityType, $entityId)
     {
         return $this->getAssignmentService()->countDistinctScoreForEntityTypeAndId(
-            $this->getPublication(),
-            $entityType,
+            $this->getPublication(), 
+            $entityType, 
             $entityId);
     }
 
@@ -316,8 +316,8 @@ class AssignmentDataProvider implements
     public function getAverageScoreForEntityTypeAndId($entityType, $entityId)
     {
         return $this->getAssignmentService()->getAverageScoreForEntityTypeAndId(
-            $this->getPublication(),
-            $entityType,
+            $this->getPublication(), 
+            $entityType, 
             $entityId);
     }
 
@@ -367,7 +367,7 @@ class AssignmentDataProvider implements
     protected function getEntityRendererNameForEntityType($entityType)
     {
         $typeName = $this->getTypeNameForEntityType($entityType);
-        return Manager :: package() . '\Renderer\Entity\\' . $typeName . 'EntityRenderer';
+        return Manager::package() . '\Renderer\Entity\\' . $typeName . 'EntityRenderer';
     }
 
     /**
@@ -379,13 +379,13 @@ class AssignmentDataProvider implements
     {
         switch ($entityType)
         {
-            case Entry :: ENTITY_TYPE_USER :
+            case Entry::ENTITY_TYPE_USER :
                 return 'User';
                 break;
-            case Entry :: ENTITY_TYPE_COURSE_GROUP :
+            case Entry::ENTITY_TYPE_COURSE_GROUP :
                 return 'CourseGroup';
                 break;
-            case Entry :: ENTITY_TYPE_PLATFORM_GROUP :
+            case Entry::ENTITY_TYPE_PLATFORM_GROUP :
                 return 'PlatformGroup';
                 break;
         }
@@ -395,17 +395,17 @@ class AssignmentDataProvider implements
      *
      * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::createScore()
      */
-    public function createScore(\Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry,
+    public function createScore(\Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry, 
         \Chamilo\Core\User\Storage\DataClass\User $user, $submittedScore)
     {
         $score = new Score();
-
+        
         $score->setScore($submittedScore);
         $score->setEntryId($entry->getId());
         $score->setCreated(time());
         $score->setModified(time());
         $score->setUserId($user->getId());
-
+        
         return $score->create();
     }
 
@@ -422,17 +422,17 @@ class AssignmentDataProvider implements
      *
      * @see \Chamilo\Core\Repository\ContentObject\Assignment\Display\Interfaces\AssignmentDataProvider::createNote()
      */
-    public function createNote(\Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry,
+    public function createNote(\Chamilo\Core\Repository\ContentObject\Assignment\Display\Storage\DataClass\Entry $entry, 
         \Chamilo\Core\User\Storage\DataClass\User $user, $submittedNote)
     {
         $note = new Note();
-
+        
         $note->setNote($submittedNote);
         $note->setEntryId($entry->getId());
         $note->setCreated(time());
         $note->setModified(time());
         $note->setUserId($user->getId());
-
+        
         return $note->create();
     }
 
@@ -510,8 +510,8 @@ class AssignmentDataProvider implements
     public function findEntriesByEntityTypeAndIdentifiers($entityType, $entityIdentifiers)
     {
         return $this->getAssignmentService()->findEntriesByPublicationEntityTypeAndIdentifiers(
-            $this->getPublication(),
-            $entityType,
+            $this->getPublication(), 
+            $entityType, 
             $entityIdentifiers)->as_array();
     }
 

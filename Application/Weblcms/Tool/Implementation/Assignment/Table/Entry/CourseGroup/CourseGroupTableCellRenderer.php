@@ -23,7 +23,7 @@ class CourseGroupTableCellRenderer extends GroupTableCellRenderer
      */
     protected function retrieveGroupUserIds($groupId)
     {
-        return \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager :: retrieve_course_group_user_ids(
+        return \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager::retrieve_course_group_user_ids(
             $groupId);
     }
 
@@ -33,7 +33,7 @@ class CourseGroupTableCellRenderer extends GroupTableCellRenderer
      */
     protected function getEntity($entityId)
     {
-        return DataManager :: retrieve_by_id(CourseGroup :: class_name(), $entityId);
+        return DataManager::retrieve_by_id(CourseGroup::class_name(), $entityId);
     }
 
     /**
@@ -49,7 +49,7 @@ class CourseGroupTableCellRenderer extends GroupTableCellRenderer
                 return true;
             }
         }
-
+        
         return false;
     }
 
@@ -59,8 +59,8 @@ class CourseGroupTableCellRenderer extends GroupTableCellRenderer
      */
     protected function isSubscribedInGroup($groupId, $userId)
     {
-        return \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager :: is_course_group_member(
-            $groupId,
+        return \Chamilo\Application\Weblcms\Tool\Implementation\CourseGroup\Storage\DataManager::is_course_group_member(
+            $groupId, 
             $userId);
     }
 }

@@ -16,7 +16,7 @@ class View extends Tracker
     const PROPERTY_DATE = 'date';
     const PROPERTY_ENTITY_TYPE = 'entity_type';
     const PROPERTY_ENTITY_ID = 'entity_id';
-
+    
     // Types
     const TYPE_TRAINING = 1;
     const TYPE_TRAJECTORY = 2;
@@ -33,7 +33,7 @@ class View extends Tracker
         $extended_property_names[] = self::PROPERTY_DATE;
         $extended_property_names[] = self::PROPERTY_ENTITY_TYPE;
         $extended_property_names[] = self::PROPERTY_ENTITY_ID;
-
+        
         return parent::get_default_property_names($extended_property_names);
     }
 

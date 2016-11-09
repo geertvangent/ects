@@ -14,7 +14,7 @@ abstract class Manager extends Application
     const ACTION_COURSES = 'Courses';
     const ACTION_ADMINS = 'Admins';
     const ACTION_STATE = 'State';
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self::ACTION_BROWSE;
     const PARAM_ACTION = 'bamaflex_action';
 
     /**
@@ -27,6 +27,6 @@ abstract class Manager extends Application
     {
         ini_set("memory_limit", "-1");
         ini_set("max_execution_time", "18000");
-        parent :: __construct($applicationConfiguration);
+        parent::__construct($applicationConfiguration);
     }
 }

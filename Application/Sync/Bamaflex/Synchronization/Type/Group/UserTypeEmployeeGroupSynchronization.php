@@ -18,7 +18,7 @@ class UserTypeEmployeeGroupSynchronization extends GroupSynchronization
 
     public function get_code()
     {
-        return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
+        return $this->get_parent_group()->get_code() . '_' . self::IDENTIFIER;
     }
 
     public function get_name()
@@ -31,11 +31,9 @@ class UserTypeEmployeeGroupSynchronization extends GroupSynchronization
         $user_mails = array();
         
         $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_employee]  WHERE faculty_id  = ' .
-             $this->get_department()->get_parameter(DepartmentGroupSynchronization :: RESULT_PROPERTY_DEPARTMENT_ID) .
-             '
-                AND type = 3 AND date_start <= \'' .
-             date('Y-m-d', strtotime('+2 months')) . '\' AND (date_end >= \'' . date('Y-m-d', strtotime('-2 months')) .
-             '\' OR date_end IS NULL)';
+             $this->get_department()->get_parameter(DepartmentGroupSynchronization::RESULT_PROPERTY_DEPARTMENT_ID) . '
+                AND type = 3 AND date_start <= \'' . date('Y-m-d', strtotime('+2 months')) . '\' AND (date_end >= \'' .
+             date('Y-m-d', strtotime('-2 months')) . '\' OR date_end IS NULL)';
         $users = $this->get_result($query);
         
         while ($user = $users->next_result(false))

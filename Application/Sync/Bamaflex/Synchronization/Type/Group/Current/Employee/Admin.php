@@ -33,27 +33,27 @@ class Admin extends GroupSynchronization
     public function get_user_official_codes()
     {
         $user_mails = array();
-
+        
         $facultySynchronization = $this->get_synchronization()->get_synchronization();
         $facultyCode = CurrentGroupSynchronization::getEmployeeFacultyCode(
             $facultySynchronization->get_parameter(Faculty::RESULT_PROPERTY_CODE));
-
+        
         if ($facultyCode)
         {
             $facultyCodeString = implode('\', \'', $facultyCode);
-
+            
             $query = 'SELECT DISTINCT person_id FROM [dbo].[v_sync_current_employee] WHERE employee_type = 1 AND faculty_code IN (\'' .
                  $facultyCodeString . '\') AND (date_end >= \'' . date('Y-m-d', strtotime('-2 months')) .
                  '\' OR date_end IS NULL)';
-
+            
             $users = $this->get_result($query);
-
+            
             while ($user = $users->next_result(false))
             {
                 $user_mails[] = $user['person_id'];
             }
         }
-
+        
         return $user_mails;
     }
 }

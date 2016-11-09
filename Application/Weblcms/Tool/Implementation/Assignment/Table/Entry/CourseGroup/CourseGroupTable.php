@@ -13,5 +13,5 @@ use Ehb\Application\Weblcms\Tool\Implementation\Assignment\Table\Entry\Group\Gro
  */
 class CourseGroupTable extends GroupTable
 {
-    const TABLE_IDENTIFIER = CourseGroup :: PROPERTY_ID;
+    const TABLE_IDENTIFIER = CourseGroup::PROPERTY_ID;
 }

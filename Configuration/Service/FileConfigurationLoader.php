@@ -44,7 +44,7 @@ class FileConfigurationLoader extends \Chamilo\Configuration\Service\FileConfigu
         {
             throw new UserException('Ehb configuration file not found');
         }
-
+        
         return $settings;
     }
 

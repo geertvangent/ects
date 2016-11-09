@@ -16,15 +16,15 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
 
     /**
      * Constructor
-     *
+     * 
      * @param RepositoryManagerBrowserComponent $browser
      */
     public function __construct($browser)
     {
-        parent :: __construct();
+        parent::__construct();
         $this->browser = $browser;
     }
-
+    
     // Inherited
     public function render_cell($column, $group)
     {
@@ -32,16 +32,16 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
         switch ($column->get_name())
         {
             // Exceptions that need post-processing go here ...
-            case Group :: PROPERTY_NAME :
-                $title = parent :: render_cell($column, $group);
+            case Group::PROPERTY_NAME :
+                $title = parent::render_cell($column, $group);
                 $title_short = $title;
                 if (strlen($title_short) > 53)
                 {
                     $title_short = mb_substr($title_short, 0, 50) . '&hellip;';
                 }
-
+                
                 $show_url = false;
-
+                
                 if (! $this->browser->get_context()->get_user()->is_platform_admin())
                 {
                     foreach ($this->browser->get_allowed_groups() as $allowed_group_id)
@@ -58,10 +58,10 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
                 {
                     $show_url = true;
                 }
-
+                
                 if ($show_url)
                 {
-
+                    
                     return '<a href="' . htmlentities($this->browser->get_group_viewing_url($group)) . '" title="' .
                          $title . '">' . $title_short . '</a>';
                 }
@@ -69,19 +69,19 @@ class GroupBrowserTableCellRenderer extends GroupTableCellRenderer
                 {
                     return $title_short;
                 }
-            case Group :: PROPERTY_DESCRIPTION :
-                $description = strip_tags(parent :: render_cell($column, $group));
+            case Group::PROPERTY_DESCRIPTION :
+                $description = strip_tags(parent::render_cell($column, $group));
                 // if(strlen($description) > 175)
                 // {
                 // $description = mb_substr($description,0,170).'&hellip;';
                 // }
-                return StringUtilities :: getInstance()->truncate($description);
-            case Translation :: get('Users', null, 'user') :
+                return StringUtilities::getInstance()->truncate($description);
+            case Translation::get('Users', null, 'user') :
                 return $group->count_users(true, true);
-            case Translation :: get('Subgroups') :
+            case Translation::get('Subgroups') :
                 return $group->count_subgroups(true, true);
         }
-
-        return parent :: render_cell($column, $group);
+        
+        return parent::render_cell($column, $group);
     }
 }

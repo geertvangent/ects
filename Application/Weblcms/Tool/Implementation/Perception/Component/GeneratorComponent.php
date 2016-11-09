@@ -17,15 +17,15 @@ class GeneratorComponent extends Manager
 
     public function run()
     {
-        $result = DataManager :: generate_passwords($this->get_course_id());
-
-        if ($result[DataManager :: GENERATION_FAILURES] > 0)
+        $result = DataManager::generate_passwords($this->get_course_id());
+        
+        if ($result[DataManager::GENERATION_FAILURES] > 0)
         {
-            if ($result[DataManager :: GENERATION_ATTEMPTS] == 1)
+            if ($result[DataManager::GENERATION_ATTEMPTS] == 1)
             {
                 $message = 'PasswordNotGenerated';
             }
-            elseif ($result[DataManager :: GENERATION_ATTEMPTS] > $result[DataManager :: GENERATION_FAILURES])
+            elseif ($result[DataManager::GENERATION_ATTEMPTS] > $result[DataManager::GENERATION_FAILURES])
             {
                 $message = 'SomePasswordsNotGenerated';
             }
@@ -36,7 +36,7 @@ class GeneratorComponent extends Manager
         }
         else
         {
-            if ($result[DataManager :: GENERATION_ATTEMPTS] == 1)
+            if ($result[DataManager::GENERATION_ATTEMPTS] == 1)
             {
                 $message = 'PasswordGenerated';
             }
@@ -45,10 +45,10 @@ class GeneratorComponent extends Manager
                 $message = 'PasswordsGenerated';
             }
         }
-
+        
         $this->redirect(
-            Translation :: get($message),
-            (($result[DataManager :: GENERATION_FAILURES] > 0) ? true : false),
-            array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
+            Translation::get($message), 
+            (($result[DataManager::GENERATION_FAILURES] > 0) ? true : false), 
+            array(self::PARAM_ACTION => self::ACTION_BROWSE));
     }
 }

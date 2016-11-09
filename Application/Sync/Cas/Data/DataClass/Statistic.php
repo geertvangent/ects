@@ -54,23 +54,23 @@ class Statistic extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @return array The property names.
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        return parent :: get_default_property_names(
+        return parent::get_default_property_names(
             array(
-                self :: PROPERTY_USER,
-                self :: PROPERTY_PERSON_ID,
-                self :: PROPERTY_APPLICATION_ID,
-                self :: PROPERTY_ACTION_ID,
-                self :: PROPERTY_DATE));
+                self::PROPERTY_USER, 
+                self::PROPERTY_PERSON_ID, 
+                self::PROPERTY_APPLICATION_ID, 
+                self::PROPERTY_ACTION_ID, 
+                self::PROPERTY_DATE));
     }
 
     public function get_data_manager()
     {
-        return DataManager :: getInstance();
+        return DataManager::getInstance();
     }
 
     /**
@@ -79,7 +79,7 @@ class Statistic extends DataClass
      */
     public function get_user()
     {
-        return $this->get_default_property(self :: PROPERTY_USER);
+        return $this->get_default_property(self::PROPERTY_USER);
     }
 
     /**
@@ -88,7 +88,7 @@ class Statistic extends DataClass
      */
     public function get_person_id()
     {
-        return $this->get_default_property(self :: PROPERTY_PERSON_ID);
+        return $this->get_default_property(self::PROPERTY_PERSON_ID);
     }
 
     /**
@@ -97,7 +97,7 @@ class Statistic extends DataClass
      */
     public function get_application_id()
     {
-        return $this->get_default_property(self :: PROPERTY_APPLICATION_ID);
+        return $this->get_default_property(self::PROPERTY_APPLICATION_ID);
     }
 
     /**
@@ -106,7 +106,7 @@ class Statistic extends DataClass
      */
     public function get_action_id()
     {
-        return $this->get_default_property(self :: PROPERTY_ACTION_ID);
+        return $this->get_default_property(self::PROPERTY_ACTION_ID);
     }
 
     /**
@@ -115,7 +115,7 @@ class Statistic extends DataClass
      */
     public function get_date()
     {
-        return $this->get_default_property(self :: PROPERTY_DATE);
+        return $this->get_default_property(self::PROPERTY_DATE);
     }
 
     /**
@@ -124,7 +124,7 @@ class Statistic extends DataClass
      */
     public function set_user($user)
     {
-        $this->set_default_property(self :: PROPERTY_USER, $user);
+        $this->set_default_property(self::PROPERTY_USER, $user);
     }
 
     /**
@@ -133,7 +133,7 @@ class Statistic extends DataClass
      */
     public function set_person_id($person_id)
     {
-        $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
+        $this->set_default_property(self::PROPERTY_PERSON_ID, $person_id);
     }
 
     /**
@@ -142,7 +142,7 @@ class Statistic extends DataClass
      */
     public function set_application_id($application_id)
     {
-        $this->set_default_property(self :: PROPERTY_APPLICATION_ID, $application_id);
+        $this->set_default_property(self::PROPERTY_APPLICATION_ID, $application_id);
     }
 
     /**
@@ -151,7 +151,7 @@ class Statistic extends DataClass
      */
     public function set_action_id($action_id)
     {
-        $this->set_default_property(self :: PROPERTY_ACTION_ID, $action_id);
+        $this->set_default_property(self::PROPERTY_ACTION_ID, $action_id);
     }
 
     /**
@@ -160,7 +160,7 @@ class Statistic extends DataClass
      */
     public function set_date($date)
     {
-        $this->set_default_property(self :: PROPERTY_DATE, $date);
+        $this->set_default_property(self::PROPERTY_DATE, $date);
     }
 
     public static function application_string_to_id($application)
@@ -168,85 +168,85 @@ class Statistic extends DataClass
         switch ($application)
         {
             case strpos($application, 'www.google.com') !== false :
-                return self :: APPLICATION_STUDENTENMAIL;
+                return self::APPLICATION_STUDENTENMAIL;
                 break;
             case strpos($application, 'dokeos.ehb.be') !== false :
-                return self :: APPLICATION_DOKEOS;
+                return self::APPLICATION_DOKEOS;
                 break;
             case strpos($application, 'portaal.ehb.be') !== false :
-                return self :: APPLICATION_PORTAAL;
+                return self::APPLICATION_PORTAAL;
                 break;
             case strpos($application, 'personeel.ehb.be') !== false :
-                return self :: APPLICATION_PERSONEEL;
+                return self::APPLICATION_PERSONEEL;
                 break;
             case strpos($application, 'bibliotheek.ehb.be') !== false :
-                return self :: APPLICATION_BIBLIOTHEEK;
+                return self::APPLICATION_BIBLIOTHEEK;
                 break;
             case strpos($application, 'enquete.ehb.be') !== false :
-                return self :: APPLICATION_ENQUETE;
+                return self::APPLICATION_ENQUETE;
                 break;
             case strpos($application, 'cursusdienst.ehb.be') !== false :
-                return self :: APPLICATION_CURSUSDIENST;
+                return self::APPLICATION_CURSUSDIENST;
                 break;
             case strpos($application, 'helpdesk.ehb.be') !== false :
-                return self :: APPLICATION_HELPDESK;
+                return self::APPLICATION_HELPDESK;
                 break;
             case strpos($application, 'ibamaflex.ehb.be') !== false :
-                return self :: APPLICATION_IBAMAFLEX;
+                return self::APPLICATION_IBAMAFLEX;
                 break;
             case strpos($application, 'desiderius.ehb.be') !== false :
-                return self :: APPLICATION_DESIDERIUS;
+                return self::APPLICATION_DESIDERIUS;
                 break;
             case strpos($application, 'discovery.ehb.be') !== false :
-                return self :: APPLICATION_DISCOVERY;
+                return self::APPLICATION_DISCOVERY;
                 break;
             case strpos($application, 'data.ehb.be') !== false :
-                return self :: APPLICATION_DATA;
+                return self::APPLICATION_DATA;
                 break;
             case strpos($application, 'ehbrief.ehb.be') !== false :
-                return self :: APPLICATION_EHBRIEF;
+                return self::APPLICATION_EHBRIEF;
                 break;
             case strpos($application, 'idiomteacher.ehb.be') !== false :
-                return self :: APPLICATION_IDIOM_TEACHER;
+                return self::APPLICATION_IDIOM_TEACHER;
                 break;
             case strpos($application, 'iwt3.ehb.be/intranet') !== false :
-                return self :: APPLICATION_IWT_INTRANET;
+                return self::APPLICATION_IWT_INTRANET;
                 break;
             case strpos($application, 'iwtcisco.ehb.be') !== false :
-                return self :: APPLICATION_IWT_CISCO;
+                return self::APPLICATION_IWT_CISCO;
                 break;
             case strpos($application, 'kies.ehb.be') !== false :
-                return self :: APPLICATION_KIES;
+                return self::APPLICATION_KIES;
                 break;
             case strpos($application, 'kwaliteit.ehb.be') !== false :
-                return self :: APPLICATION_KWALITEIT;
+                return self::APPLICATION_KWALITEIT;
                 break;
             case strpos($application, 'wien.sop.co.at/europe') !== false :
-                return self :: APPLICATION_MOBILITY_ONLINE;
+                return self::APPLICATION_MOBILITY_ONLINE;
                 break;
             case strpos($application, 'fablabxl.be') !== false :
-                return self :: APPLICATION_IWT_FABLAB_XL;
+                return self::APPLICATION_IWT_FABLAB_XL;
                 break;
             case strpos($application, 'bottelarij.rits.be/intranet') !== false :
-                return self :: APPLICATION_RITS_BOTTELARIJ_INTRANET;
+                return self::APPLICATION_RITS_BOTTELARIJ_INTRANET;
                 break;
             case strpos($application, 'cas.ehb.be/services') !== false :
-                return self :: APPLICATION_CAS;
+                return self::APPLICATION_CAS;
                 break;
             case strpos($application, 'iwt3.ehb.be/mobapp') !== false :
-                return self :: APPLICATION_IWT_MOBILE_APPS;
+                return self::APPLICATION_IWT_MOBILE_APPS;
                 break;
             case strpos($application, 'stage.ehb.be') !== false :
-                return self :: APPLICATION_STAGEPLANNER;
+                return self::APPLICATION_STAGEPLANNER;
                 break;
             case strpos($application, 'svennas.be') !== false :
-                return self :: APPLICATION_OEFENING_SVEN_VANHOECKE;
+                return self::APPLICATION_OEFENING_SVEN_VANHOECKE;
                 break;
             case strpos($application, 'webmail.ehb.be') !== false :
-                return self :: APPLICATION_WEBMAIL;
+                return self::APPLICATION_WEBMAIL;
                 break;
             case strpos($application, 'localhost') !== false :
-                return self :: APPLICATION_TEST;
+                return self::APPLICATION_TEST;
                 break;
             default :
                 return null;

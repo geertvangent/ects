@@ -16,11 +16,11 @@ abstract class Manager extends AjaxManager
     protected function filterProperties($properties, $propertyKeysToMaintain)
     {
         return array_filter(
-            $properties,
+            $properties, 
             function ($key) use ($propertyKeysToMaintain)
             {
                 return in_array($key, $propertyKeysToMaintain);
-            },
+            }, 
             ARRAY_FILTER_USE_KEY);
     }
 

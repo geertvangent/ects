@@ -18,7 +18,7 @@ class Profile extends DiscoveryItem
      */
     public function get_name()
     {
-        return $this->get_default_property(self :: PROPERTY_NAME);
+        return $this->get_default_property(self::PROPERTY_NAME);
     }
 
     /**
@@ -27,7 +27,7 @@ class Profile extends DiscoveryItem
      */
     public function get_identification_code()
     {
-        return $this->get_default_property(self :: PROPERTY_IDENTIFICATION_CODE);
+        return $this->get_default_property(self::PROPERTY_IDENTIFICATION_CODE);
     }
 
     /**
@@ -36,7 +36,7 @@ class Profile extends DiscoveryItem
      */
     public function get_email()
     {
-        return $this->get_default_property(self :: PROPERTY_EMAIL);
+        return $this->get_default_property(self::PROPERTY_EMAIL);
     }
 
     /**
@@ -45,7 +45,7 @@ class Profile extends DiscoveryItem
      */
     public function get_communication()
     {
-        return $this->get_default_property(self :: PROPERTY_COMMUNICATION);
+        return $this->get_default_property(self::PROPERTY_COMMUNICATION);
     }
 
     /**
@@ -54,7 +54,7 @@ class Profile extends DiscoveryItem
      */
     public function get_language()
     {
-        return $this->get_default_property(self :: PROPERTY_LANGUAGE);
+        return $this->get_default_property(self::PROPERTY_LANGUAGE);
     }
 
     /**
@@ -63,7 +63,7 @@ class Profile extends DiscoveryItem
      */
     public function get_photo()
     {
-        return $this->get_default_property(self :: PROPERTY_PHOTO);
+        return $this->get_default_property(self::PROPERTY_PHOTO);
     }
 
     /**
@@ -72,7 +72,7 @@ class Profile extends DiscoveryItem
      */
     public function set_name(Name $name)
     {
-        $this->set_default_property(self :: PROPERTY_NAME, $name);
+        $this->set_default_property(self::PROPERTY_NAME, $name);
     }
 
     /**
@@ -81,7 +81,7 @@ class Profile extends DiscoveryItem
      */
     public function set_identification_code($identification_code)
     {
-        $this->set_default_property(self :: PROPERTY_IDENTIFICATION_CODE, $identification_code);
+        $this->set_default_property(self::PROPERTY_IDENTIFICATION_CODE, $identification_code);
     }
 
     /**
@@ -90,7 +90,7 @@ class Profile extends DiscoveryItem
      */
     public function set_email($email)
     {
-        $this->set_default_property(self :: PROPERTY_EMAIL, $email);
+        $this->set_default_property(self::PROPERTY_EMAIL, $email);
     }
 
     /**
@@ -99,7 +99,7 @@ class Profile extends DiscoveryItem
      */
     public function set_communication($communication)
     {
-        $this->set_default_property(self :: PROPERTY_COMMUNICATION, $communication);
+        $this->set_default_property(self::PROPERTY_COMMUNICATION, $communication);
     }
 
     /**
@@ -108,7 +108,7 @@ class Profile extends DiscoveryItem
      */
     public function set_language($language)
     {
-        $this->set_default_property(self :: PROPERTY_LANGUAGE, $language);
+        $this->set_default_property(self::PROPERTY_LANGUAGE, $language);
     }
 
     /**
@@ -117,7 +117,7 @@ class Profile extends DiscoveryItem
      */
     public function set_photo(Photo $photo)
     {
-        $this->set_default_property(self :: PROPERTY_PHOTO, $photo);
+        $this->set_default_property(self::PROPERTY_PHOTO, $photo);
     }
 
     /**
@@ -159,14 +159,14 @@ class Profile extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_NAME;
-        $extended_property_names[] = self :: PROPERTY_IDENTIFICATION_CODE;
-        $extended_property_names[] = self :: PROPERTY_EMAIL;
-        $extended_property_names[] = self :: PROPERTY_COMMUNICATION;
-        $extended_property_names[] = self :: PROPERTY_LANGUAGE;
-        $extended_property_names[] = self :: PROPERTY_PHOTO;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_NAME;
+        $extended_property_names[] = self::PROPERTY_IDENTIFICATION_CODE;
+        $extended_property_names[] = self::PROPERTY_EMAIL;
+        $extended_property_names[] = self::PROPERTY_COMMUNICATION;
+        $extended_property_names[] = self::PROPERTY_LANGUAGE;
+        $extended_property_names[] = self::PROPERTY_PHOTO;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

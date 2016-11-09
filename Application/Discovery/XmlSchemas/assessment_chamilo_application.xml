@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object name="assessment" namespace="application\discovery\module\assessment\implementation\chamilo\source\application">
-	<properties>
-	</properties>
+<object
+    name="assessment"
+    namespace="application\discovery\module\assessment\implementation\chamilo\source\application">
+    <properties>
+    </properties>
 </object>

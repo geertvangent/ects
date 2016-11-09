@@ -12,7 +12,7 @@ class PasswordTableColumnModel extends DataClassTableColumnModel
 
     public function initialize_columns()
     {
-        $this->add_column(new StaticTableColumn(Translation :: get('User')));
-        $this->add_column(new DataClassPropertyTableColumn(Password :: class_name(), Password :: PROPERTY_PASSWORD));
+        $this->add_column(new StaticTableColumn(Translation::get('User')));
+        $this->add_column(new DataClassPropertyTableColumn(Password::class_name(), Password::PROPERTY_PASSWORD));
     }
 }

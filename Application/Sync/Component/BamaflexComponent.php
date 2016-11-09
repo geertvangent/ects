@@ -19,9 +19,9 @@ class BamaflexComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-
+        
         $factory = new ApplicationFactory(
-            \Ehb\Application\Sync\Bamaflex\Manager :: context(),
+            \Ehb\Application\Sync\Bamaflex\Manager::context(), 
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         return $factory->run();
     }

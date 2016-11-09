@@ -31,14 +31,14 @@ class Faculty extends GroupSynchronization
     public function get_children()
     {
         $children = array();
-
+        
         $children[] = GroupSynchronization::factory(
-            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee',
+            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee', 
             $this);
         $children[] = GroupSynchronization::factory(
-            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Student',
+            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Student', 
             $this);
-
+        
         return $children;
     }
 }

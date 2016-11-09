@@ -50,7 +50,7 @@ class PortfolioIntroductionProcessor
      */
     public function run()
     {
-        $this->dm = \Chamilo\Application\Portfolio\Storage\DataManager :: getInstance();
+        $this->dm = \Chamilo\Application\Portfolio\Storage\DataManager::getInstance();
         
         try
         {
@@ -73,7 +73,7 @@ class PortfolioIntroductionProcessor
         
         $result = $this->dm->get_connection()->query($query);
         
-        while ($portfolio_introduction_row = $result->fetch(\PDO :: FETCH_ASSOC))
+        while ($portfolio_introduction_row = $result->fetch(\PDO::FETCH_ASSOC))
         {
             $this->handle_portfolio_introduction($portfolio_introduction_row);
         }
@@ -119,7 +119,7 @@ class PortfolioIntroductionProcessor
         }
         
         unset($introduction);
-        DataClassCache :: reset();
+        DataClassCache::reset();
         
         return true;
     }

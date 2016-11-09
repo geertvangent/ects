@@ -20,13 +20,13 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function get_module_parameters()
     {
-        return self :: module_parameters();
+        return self::module_parameters();
     }
 
     public static function module_parameters()
     {
-        $faculty = Request :: get(self :: PARAM_FACULTY_ID);
-
+        $faculty = Request::get(self::PARAM_FACULTY_ID);
+        
         $parameter = new Parameters();
         if ($faculty)
         {
@@ -43,7 +43,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->faculty))
         {
-            $this->faculty = DataManager :: getInstance($this->get_module_instance())->retrieve_faculty(
+            $this->faculty = DataManager::getInstance($this->get_module_instance())->retrieve_faculty(
                 $this->get_module_parameters());
         }
         return $this->faculty;
@@ -51,24 +51,24 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function get_type()
     {
-        return Instance :: TYPE_DETAILS;
+        return Instance::TYPE_DETAILS;
     }
 
     public static function get_available_implementations()
     {
         $types = array();
-
-        $modules = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
-            Filesystem :: LIST_DIRECTORIES,
+        
+        $modules = Filesystem::get_directory_content(
+            Path::getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
-
+        
         foreach ($modules as $module)
         {
             $namespace = __NAMESPACE__ . '\Implementation\\' . $module;
             $types[] = $namespace;
         }
-
+        
         return $types;
     }
 
@@ -76,10 +76,10 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         $faculty_id = $parameters->get_faculty_id();
         $source = $parameters->get_source();
-
+        
         if (! isset($this->cache_trainings[$source][$faculty_id]))
         {
-            $this->cache_trainings[$source][$faculty_id] = DataManager :: getInstance($this->get_module_instance())->retrieve_trainings(
+            $this->cache_trainings[$source][$faculty_id] = DataManager::getInstance($this->get_module_instance())->retrieve_trainings(
                 $parameters);
         }
         return $this->cache_trainings[$source][$faculty_id];

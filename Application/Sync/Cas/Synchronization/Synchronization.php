@@ -13,7 +13,7 @@ abstract class Synchronization
      */
     public static function factory($type)
     {
-        $class = __NAMESPACE__ . '\\' . StringUtilities :: getInstance()->createString($type)->upperCamelize() .
+        $class = __NAMESPACE__ . '\\' . StringUtilities::getInstance()->createString($type)->upperCamelize() .
              'Synchronization';
         if (class_exists($class))
         {

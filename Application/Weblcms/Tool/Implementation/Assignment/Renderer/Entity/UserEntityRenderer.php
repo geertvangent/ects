@@ -22,7 +22,7 @@ class UserEntityRenderer extends EntityRenderer
      */
     public function findEntity()
     {
-        return DataManager :: retrieve_by_id(User :: class_name(), $this->getEntityId());
+        return DataManager::retrieve_by_id(User::class_name(), $this->getEntityId());
     }
 
     /**
@@ -32,7 +32,7 @@ class UserEntityRenderer extends EntityRenderer
     public function renderProperties(\Chamilo\Libraries\Storage\DataClass\DataClass $user)
     {
         $properties = array();
-        $properties[Translation :: get('SubmittedBy')] = $this->getEntityName();
+        $properties[Translation::get('SubmittedBy')] = $this->getEntityName();
         return $properties;
     }
 

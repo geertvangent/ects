@@ -20,7 +20,7 @@ class TrainingCourseCategorySynchronization extends CourseCategorySynchronizatio
     public function get_code()
     {
         $parent = $this->get_synchronization();
-        return self :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_TRAINING_ID);
+        return self::IDENTIFIER . '_' . $this->get_parameter(self::RESULT_PROPERTY_TRAINING_ID);
     }
 
     /**
@@ -29,6 +29,6 @@ class TrainingCourseCategorySynchronization extends CourseCategorySynchronizatio
      */
     public function get_name()
     {
-        return $this->get_parameter(self :: RESULT_PROPERTY_TRAINING);
+        return $this->get_parameter(self::RESULT_PROPERTY_TRAINING);
     }
 }

@@ -12,21 +12,21 @@ class Parameters extends \Ehb\Application\Discovery\Parameters
 
     public function get_user_id()
     {
-        return $this->get_parameter(Module :: PARAM_USER_ID);
+        return $this->get_parameter(Module::PARAM_USER_ID);
     }
 
     public function set_user_id($user_id)
     {
-        $this->set_parameter(Module :: PARAM_USER_ID, $user_id);
+        $this->set_parameter(Module::PARAM_USER_ID, $user_id);
     }
 
     public function set_year($year)
     {
-        $this->set_parameter(Module :: PARAM_YEAR, $year);
+        $this->set_parameter(Module::PARAM_YEAR, $year);
     }
 
     public function get_year()
     {
-        return $this->get_parameter(Module :: PARAM_YEAR);
+        return $this->get_parameter(Module::PARAM_YEAR);
     }
 }

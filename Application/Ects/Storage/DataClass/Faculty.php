@@ -26,10 +26,10 @@ class Faculty extends AdministrationDataClass
     {
         return parent::get_default_property_names(
             array(
-                self::PROPERTY_SOURCE,
-                self::PROPERTY_PREVIOUS_ID,
-                self::PROPERTY_PREVIOUS_SOURCE,
-                self::PROPERTY_YEAR,
+                self::PROPERTY_SOURCE, 
+                self::PROPERTY_PREVIOUS_ID, 
+                self::PROPERTY_PREVIOUS_SOURCE, 
+                self::PROPERTY_YEAR, 
                 self::PROPERTY_NAME));
     }
 

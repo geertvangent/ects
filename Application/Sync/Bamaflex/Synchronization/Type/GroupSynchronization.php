@@ -64,19 +64,19 @@ abstract class GroupSynchronization extends Synchronization
         $this->synchronize();
         $this->synchronize_users();
         $children = $this->get_children();
-
+        
         // $anyChildActive = false;
-
+        
         foreach ($children as $child)
         {
             $child->run();
-
+            
             // if ($child->get_current_group()->get_state() == 1)
             // {
             // $anyChildActive = true;
             // }
         }
-
+        
         // if ((count($children) == 0 && $this->userCount == 0) || (! $anyChildActive && $this->userCount == 0))
         // {
         // $this->get_current_group()->set_state(0);
@@ -107,14 +107,14 @@ abstract class GroupSynchronization extends Synchronization
             $class = __NAMESPACE__ . '\Group\\' . StringUtilities::getInstance()->createString($type)->upperCamelize() .
                  'GroupSynchronization';
         }
-
+        
         return new $class($synchronization, $parameters);
     }
 
     public function determine_current_group()
     {
         $this->current_group = \Chamilo\Core\Group\Storage\DataManager::retrieve_group_by_code_and_parent_id(
-            $this->get_code(),
+            $this->get_code(), 
             $this->get_parent_group()->get_id());
     }
 
@@ -192,7 +192,7 @@ abstract class GroupSynchronization extends Synchronization
         {
             $name = $this->convert_to_utf8($this->get_name());
             $description = $this->convert_to_utf8($this->get_description());
-
+            
             $this->current_group = new Group();
             $this->current_group->set_name($name);
             $this->current_group->set_description($description);
@@ -200,7 +200,7 @@ abstract class GroupSynchronization extends Synchronization
             $this->current_group->set_parent($this->get_parent_group()->get_id());
             $this->current_group->set_sort(0);
             $this->current_group->create();
-
+            
             self::log('added', $this->current_group->get_name());
             flush();
         }
@@ -208,7 +208,7 @@ abstract class GroupSynchronization extends Synchronization
         {
             $name = $this->convert_to_utf8($this->get_name());
             $description = $this->convert_to_utf8($this->get_description());
-
+            
             if ($this->current_group->get_name() != $name || $this->current_group->get_description() != $description)
             {
                 $this->current_group->set_name($name);
@@ -216,7 +216,7 @@ abstract class GroupSynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-
+        
         return $this->current_group;
     }
 
@@ -233,16 +233,16 @@ abstract class GroupSynchronization extends Synchronization
     public function synchronize_users()
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_GROUP_ID),
+            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_GROUP_ID), 
             new StaticConditionVariable($this->current_group->get_id()));
         $current_users = \Chamilo\Core\Group\Storage\DataManager::distinct(
-            GroupRelUser::class_name(),
+            GroupRelUser::class_name(), 
             new DataClassDistinctParameters($condition, GroupRelUser::PROPERTY_USER_ID));
         $source_users = $this->get_users();
         // $source_users = array();
         $to_add = array_diff($source_users, $current_users);
         $to_delete = array_diff($current_users, $source_users);
-
+        
         foreach ($to_add as $user_id)
         {
             $relation = new GroupRelUser();
@@ -250,17 +250,17 @@ abstract class GroupSynchronization extends Synchronization
             $relation->set_user_id($user_id);
             $relation->create();
         }
-
+        
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_GROUP_ID),
+            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_GROUP_ID), 
             new StaticConditionVariable($this->current_group->get_id()));
         $conditions[] = new InCondition(
-            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_USER_ID),
+            new PropertyConditionVariable(GroupRelUser::class_name(), GroupRelUser::PROPERTY_USER_ID), 
             $to_delete);
-
+        
         $condition = new AndCondition($conditions);
-
+        
         \Chamilo\Core\Group\Storage\DataManager::deletes(GroupRelUser::class_name(), $condition);
     }
 
@@ -281,9 +281,9 @@ abstract class GroupSynchronization extends Synchronization
     public function get_users()
     {
         $official_codes = $this->get_user_official_codes();
-
+        
         $userIds = array();
-
+        
         if (count($official_codes) > 0)
         {
             foreach ($official_codes as $code)
@@ -297,7 +297,7 @@ abstract class GroupSynchronization extends Synchronization
                     $userIds[] = self::$official_code_cache[$code];
                 }
             }
-
+            
             if (count($result_codes) > 0)
             {
                 $results = \Chamilo\Core\User\Storage\DataManager::retrieve_users_by_official_codes($result_codes);
@@ -308,9 +308,9 @@ abstract class GroupSynchronization extends Synchronization
                 }
             }
         }
-
+        
         $this->userCount = count($userIds);
-
+        
         return $userIds;
     }
 }

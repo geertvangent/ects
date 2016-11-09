@@ -17,12 +17,12 @@ abstract class CourseGroupSynchronization extends GroupSynchronization
 
     public function get_code()
     {
-        return $this :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_COURSE_ID);
+        return $this::IDENTIFIER . '_' . $this->get_parameter(self::RESULT_PROPERTY_COURSE_ID);
     }
 
     public function get_name()
     {
-        return $this->get_parameter(self :: RESULT_PROPERTY_COURSE);
+        return $this->get_parameter(self::RESULT_PROPERTY_COURSE);
     }
 
     abstract public function get_department_id();
@@ -35,17 +35,17 @@ abstract class CourseGroupSynchronization extends GroupSynchronization
     {
         $children = array();
         
-        if (is_null($this->get_parameter(self :: RESULT_PROPERTY_PARENT_ID)) &&
-             $this->get_parameter(self :: RESULT_PROPERTY_TYPE) == 2)
+        if (is_null($this->get_parameter(self::RESULT_PROPERTY_PARENT_ID)) &&
+             $this->get_parameter(self::RESULT_PROPERTY_TYPE) == 2)
         {
             $query = 'SELECT * FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE parent_id = ' .
-             $this->get_parameter(self :: RESULT_PROPERTY_COURSE_ID) . ' AND exchange = 0';
+             $this->get_parameter(self::RESULT_PROPERTY_COURSE_ID) . ' AND exchange = 0';
         
         $courses = $this->get_result($query);
         
         while ($course = $courses->next_result(false))
         {
-            $children[] = GroupSynchronization :: factory($this->get_group_type(), $this, $course);
+            $children[] = GroupSynchronization::factory($this->get_group_type(), $this, $course);
         }
     }
     

@@ -19,7 +19,7 @@ class Module extends \Ehb\Application\Discovery\Module
 
     public function get_module_parameters()
     {
-        $parameter = self :: module_parameters();
+        $parameter = self::module_parameters();
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
@@ -29,7 +29,7 @@ class Module extends \Ehb\Application\Discovery\Module
 
     public static function module_parameters()
     {
-        $param_user = Request :: get(self :: PARAM_USER_ID);
+        $param_user = Request::get(self::PARAM_USER_ID);
         $parameter = new Parameters();
         if ($param_user)
         {
@@ -46,20 +46,20 @@ class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->profile))
         {
-            $this->profile = DataManager :: getInstance($this->get_module_instance())->retrieve_profile(
+            $this->profile = DataManager::getInstance($this->get_module_instance())->retrieve_profile(
                 $this->get_module_parameters());
         }
-
+        
         return $this->profile;
     }
 
     public static function get_available_implementations()
     {
         $types = array();
-
-        $modules = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
-            Filesystem :: LIST_DIRECTORIES,
+        
+        $modules = Filesystem::get_directory_content(
+            Path::getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {
@@ -71,6 +71,6 @@ class Module extends \Ehb\Application\Discovery\Module
 
     public function get_type()
     {
-        return Instance :: TYPE_USER;
+        return Instance::TYPE_USER;
     }
 }

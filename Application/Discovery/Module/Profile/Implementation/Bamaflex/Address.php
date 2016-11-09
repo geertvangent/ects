@@ -30,7 +30,7 @@ class Address extends DataClass
      */
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     /**
@@ -41,22 +41,22 @@ class Address extends DataClass
     {
         switch ($this->get_type())
         {
-            case self :: TYPE_DOMICILE :
+            case self::TYPE_DOMICILE :
                 return 'Domicile';
                 break;
-            case self :: TYPE_OFFICE :
+            case self::TYPE_OFFICE :
                 return 'Office';
                 break;
-            case self :: TYPE_ALTERNATIVE :
+            case self::TYPE_ALTERNATIVE :
                 return 'Alternative';
                 break;
-            case self :: TYPE_CORRESPONDENCE :
+            case self::TYPE_CORRESPONDENCE :
                 return 'Correspondence';
                 break;
-            case self :: TYPE_EXPENSES :
+            case self::TYPE_EXPENSES :
                 return 'Expenses';
                 break;
-            case self :: TYPE_RESIDENCE :
+            case self::TYPE_RESIDENCE :
                 return 'Residence';
                 break;
         }
@@ -68,7 +68,7 @@ class Address extends DataClass
      */
     public function get_country()
     {
-        return $this->get_default_property(self :: PROPERTY_COUNTRY);
+        return $this->get_default_property(self::PROPERTY_COUNTRY);
     }
 
     /**
@@ -77,7 +77,7 @@ class Address extends DataClass
      */
     public function get_street()
     {
-        return $this->get_default_property(self :: PROPERTY_STREET);
+        return $this->get_default_property(self::PROPERTY_STREET);
     }
 
     /**
@@ -86,7 +86,7 @@ class Address extends DataClass
      */
     public function get_number()
     {
-        return $this->get_default_property(self :: PROPERTY_NUMBER);
+        return $this->get_default_property(self::PROPERTY_NUMBER);
     }
 
     /**
@@ -95,7 +95,7 @@ class Address extends DataClass
      */
     public function get_box()
     {
-        return $this->get_default_property(self :: PROPERTY_BOX);
+        return $this->get_default_property(self::PROPERTY_BOX);
     }
 
     /**
@@ -104,7 +104,7 @@ class Address extends DataClass
      */
     public function get_room()
     {
-        return $this->get_default_property(self :: PROPERTY_ROOM);
+        return $this->get_default_property(self::PROPERTY_ROOM);
     }
 
     /**
@@ -113,7 +113,7 @@ class Address extends DataClass
      */
     public function get_city()
     {
-        return $this->get_default_property(self :: PROPERTY_CITY);
+        return $this->get_default_property(self::PROPERTY_CITY);
     }
 
     /**
@@ -122,7 +122,7 @@ class Address extends DataClass
      */
     public function get_city_zip_code()
     {
-        return $this->get_default_property(self :: PROPERTY_CITY_ZIP_CODE);
+        return $this->get_default_property(self::PROPERTY_CITY_ZIP_CODE);
     }
 
     /**
@@ -131,7 +131,7 @@ class Address extends DataClass
      */
     public function get_subcity()
     {
-        return $this->get_default_property(self :: PROPERTY_SUBCITY);
+        return $this->get_default_property(self::PROPERTY_SUBCITY);
     }
 
     /**
@@ -140,7 +140,7 @@ class Address extends DataClass
      */
     public function get_subcity_zip_code()
     {
-        return $this->get_default_property(self :: PROPERTY_SUBCITY_ZIP_CODE);
+        return $this->get_default_property(self::PROPERTY_SUBCITY_ZIP_CODE);
     }
 
     public function get_unified_city()
@@ -196,7 +196,7 @@ class Address extends DataClass
      */
     public function get_region()
     {
-        return $this->get_default_property(self :: PROPERTY_REGION);
+        return $this->get_default_property(self::PROPERTY_REGION);
     }
 
     /**
@@ -205,7 +205,7 @@ class Address extends DataClass
      */
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     /**
@@ -214,7 +214,7 @@ class Address extends DataClass
      */
     public function set_country($country)
     {
-        $this->set_default_property(self :: PROPERTY_COUNTRY, $country);
+        $this->set_default_property(self::PROPERTY_COUNTRY, $country);
     }
 
     /**
@@ -223,7 +223,7 @@ class Address extends DataClass
      */
     public function set_street($street)
     {
-        $this->set_default_property(self :: PROPERTY_STREET, $street);
+        $this->set_default_property(self::PROPERTY_STREET, $street);
     }
 
     /**
@@ -232,7 +232,7 @@ class Address extends DataClass
      */
     public function set_number($number)
     {
-        $this->set_default_property(self :: PROPERTY_NUMBER, $number);
+        $this->set_default_property(self::PROPERTY_NUMBER, $number);
     }
 
     /**
@@ -241,7 +241,7 @@ class Address extends DataClass
      */
     public function set_box($box)
     {
-        $this->set_default_property(self :: PROPERTY_BOX, $box);
+        $this->set_default_property(self::PROPERTY_BOX, $box);
     }
 
     /**
@@ -250,7 +250,7 @@ class Address extends DataClass
      */
     public function set_room($room)
     {
-        $this->set_default_property(self :: PROPERTY_ROOM, $room);
+        $this->set_default_property(self::PROPERTY_ROOM, $room);
     }
 
     /**
@@ -259,7 +259,7 @@ class Address extends DataClass
      */
     public function set_city($city)
     {
-        $this->set_default_property(self :: PROPERTY_CITY, $city);
+        $this->set_default_property(self::PROPERTY_CITY, $city);
     }
 
     /**
@@ -268,7 +268,7 @@ class Address extends DataClass
      */
     public function set_city_zip_code($city_zip_code)
     {
-        $this->set_default_property(self :: PROPERTY_CITY_ZIP_CODE, $city_zip_code);
+        $this->set_default_property(self::PROPERTY_CITY_ZIP_CODE, $city_zip_code);
     }
 
     /**
@@ -277,7 +277,7 @@ class Address extends DataClass
      */
     public function set_subcity($subcity)
     {
-        $this->set_default_property(self :: PROPERTY_SUBCITY, $subcity);
+        $this->set_default_property(self::PROPERTY_SUBCITY, $subcity);
     }
 
     /**
@@ -286,7 +286,7 @@ class Address extends DataClass
      */
     public function set_subcity_zip_code($subcity_zip_code)
     {
-        $this->set_default_property(self :: PROPERTY_SUBCITY_ZIP_CODE, $subcity_zip_code);
+        $this->set_default_property(self::PROPERTY_SUBCITY_ZIP_CODE, $subcity_zip_code);
     }
 
     /**
@@ -295,7 +295,7 @@ class Address extends DataClass
      */
     public function set_region($region)
     {
-        $this->set_default_property(self :: PROPERTY_REGION, $region);
+        $this->set_default_property(self::PROPERTY_REGION, $region);
     }
 
     /**
@@ -304,19 +304,19 @@ class Address extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_TYPE;
-        $extended_property_names[] = self :: PROPERTY_COUNTRY;
-        $extended_property_names[] = self :: PROPERTY_STREET;
-        $extended_property_names[] = self :: PROPERTY_NUMBER;
-        $extended_property_names[] = self :: PROPERTY_BOX;
-        $extended_property_names[] = self :: PROPERTY_ROOM;
-        $extended_property_names[] = self :: PROPERTY_CITY;
-        $extended_property_names[] = self :: PROPERTY_CITY_ZIP_CODE;
-        $extended_property_names[] = self :: PROPERTY_SUBCITY;
-        $extended_property_names[] = self :: PROPERTY_SUBCITY_ZIP_CODE;
-        $extended_property_names[] = self :: PROPERTY_REGION;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        $extended_property_names[] = self::PROPERTY_COUNTRY;
+        $extended_property_names[] = self::PROPERTY_STREET;
+        $extended_property_names[] = self::PROPERTY_NUMBER;
+        $extended_property_names[] = self::PROPERTY_BOX;
+        $extended_property_names[] = self::PROPERTY_ROOM;
+        $extended_property_names[] = self::PROPERTY_CITY;
+        $extended_property_names[] = self::PROPERTY_CITY_ZIP_CODE;
+        $extended_property_names[] = self::PROPERTY_SUBCITY;
+        $extended_property_names[] = self::PROPERTY_SUBCITY_ZIP_CODE;
+        $extended_property_names[] = self::PROPERTY_REGION;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**
@@ -331,44 +331,44 @@ class Address extends DataClass
     public function __toString()
     {
         $address = array();
-
+        
         // Street, street number, box and room
         if ($this->get_street())
         {
             $street = array();
             $street[] = $this->get_street();
-
+            
             if ($this->get_number())
             {
                 $street[] = $this->get_number();
             }
-
+            
             if ($this->get_box())
             {
-                $street[] = Translation :: get('Box') . ' ' . $this->get_box();
+                $street[] = Translation::get('Box') . ' ' . $this->get_box();
             }
-
+            
             if ($this->get_room())
             {
-                $street[] = Translation :: get('Room') . ' ' . $this->get_room();
+                $street[] = Translation::get('Room') . ' ' . $this->get_room();
             }
-
+            
             $address[] = implode(' ', $street);
         }
-
+        
         // City and zip code
         $address[] = $this->get_unified_city_zip_code() . ' ' . $this->get_unified_city();
-
+        
         if ($this->get_region())
         {
             $address[] = $this->get_region();
         }
-
+        
         if ($this->get_country())
         {
             $address[] = $this->get_country();
         }
-
+        
         return implode('<br />', $address);
     }
 }

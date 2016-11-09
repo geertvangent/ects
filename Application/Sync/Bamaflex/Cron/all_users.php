@@ -10,19 +10,19 @@ require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRE
      DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
      'Chamilo/Libraries/Architecture/Bootstrap.php';
 
-$bootstrap = \Chamilo\Libraries\Architecture\Bootstrap :: setup();
+$bootstrap = \Chamilo\Libraries\Architecture\Bootstrap::setup();
 
 try
 {
     ini_set("memory_limit", "-1");
     ini_set("max_execution_time", "18000");
-
+    
     echo '[USER SYNC STARTED] ' . date('c', time()) . "\n";
     flush();
-
-    $synchronization = UserSynchronization :: factory('all');
+    
+    $synchronization = UserSynchronization::factory('all');
     $synchronization->run();
-
+    
     echo '[  USER SYNC ENDED] ' . date('c', time()) . "\n";
 }
 catch (\Exception $exception)

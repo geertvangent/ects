@@ -16,7 +16,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function get_year()
     {
-        return $this->get_default_property(self :: PROPERTY_YEAR);
+        return $this->get_default_property(self::PROPERTY_YEAR);
     }
 
     /**
@@ -25,7 +25,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function get_training()
     {
-        return $this->get_default_property(self :: PROPERTY_TRAINING);
+        return $this->get_default_property(self::PROPERTY_TRAINING);
     }
 
     /**
@@ -34,7 +34,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function get_training_id()
     {
-        return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
+        return $this->get_default_property(self::PROPERTY_TRAINING_ID);
     }
 
     /**
@@ -43,7 +43,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function get_name()
     {
-        return $this->get_default_property(self :: PROPERTY_NAME);
+        return $this->get_default_property(self::PROPERTY_NAME);
     }
 
     /**
@@ -52,7 +52,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function set_year($year)
     {
-        $this->set_default_property(self :: PROPERTY_YEAR, $year);
+        $this->set_default_property(self::PROPERTY_YEAR, $year);
     }
 
     /**
@@ -61,7 +61,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function set_training($training)
     {
-        $this->set_default_property(self :: PROPERTY_TRAINING, $training);
+        $this->set_default_property(self::PROPERTY_TRAINING, $training);
     }
 
     /**
@@ -70,7 +70,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function set_training_id($training_id)
     {
-        $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
+        $this->set_default_property(self::PROPERTY_TRAINING_ID, $training_id);
     }
 
     /**
@@ -79,7 +79,7 @@ class TeachingAssignment extends DiscoveryItem
      */
     public function set_name($name)
     {
-        $this->set_default_property(self :: PROPERTY_NAME, $name);
+        $this->set_default_property(self::PROPERTY_NAME, $name);
     }
 
     /**
@@ -88,12 +88,12 @@ class TeachingAssignment extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_YEAR;
-        $extended_property_names[] = self :: PROPERTY_TRAINING;
-        $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
-        $extended_property_names[] = self :: PROPERTY_NAME;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_YEAR;
+        $extended_property_names[] = self::PROPERTY_TRAINING;
+        $extended_property_names[] = self::PROPERTY_TRAINING_ID;
+        $extended_property_names[] = self::PROPERTY_NAME;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

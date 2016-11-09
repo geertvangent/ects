@@ -31,14 +31,14 @@ class Employee extends GroupSynchronization
     public function get_children()
     {
         $children = array();
-
+        
         $children[] = GroupSynchronization::factory(
-            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee\Admin',
+            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee\Admin', 
             $this);
         $children[] = GroupSynchronization::factory(
-            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee\Teacher',
+            '\Ehb\Application\Sync\Bamaflex\Synchronization\Type\Group\Current\Employee\Teacher', 
             $this);
-
+        
         return $children;
     }
 }

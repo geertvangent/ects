@@ -27,7 +27,7 @@ class Module extends \Ehb\Application\Discovery\Module\TeachingAssignment\Module
     {
         if (! isset($this->years))
         {
-            $this->years = DataManager :: getInstance($this->get_module_instance())->retrieve_years(
+            $this->years = DataManager::getInstance($this->get_module_instance())->retrieve_years(
                 $this->get_module_parameters());
         }
         return $this->years;

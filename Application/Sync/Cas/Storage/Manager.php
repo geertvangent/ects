@@ -7,5 +7,5 @@ abstract class Manager extends Application
 {
     const PARAM_ACTION = 'account_action';
     const ACTION_BROWSE = 'Browser';
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self::ACTION_BROWSE;
 }

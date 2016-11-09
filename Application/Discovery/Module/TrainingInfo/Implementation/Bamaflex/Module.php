@@ -18,19 +18,16 @@ class Module extends \Ehb\Application\Discovery\Module\TrainingInfo\Module
 
     public function get_module_parameters()
     {
-        return self :: module_parameters();
+        return self::module_parameters();
     }
 
     public static function module_parameters()
     {
-        $current_tab = Request :: get(Module :: PARAM_TAB);
+        $current_tab = Request::get(Module::PARAM_TAB);
         if (is_null($current_tab))
         {
-            $current_tab = self :: TAB_GOALS;
+            $current_tab = self::TAB_GOALS;
         }
-        return new Parameters(
-            Request :: get(self :: PARAM_TRAINING_ID), 
-            Request :: get(self :: PARAM_SOURCE), 
-            $current_tab);
+        return new Parameters(Request::get(self::PARAM_TRAINING_ID), Request::get(self::PARAM_SOURCE), $current_tab);
     }
 }

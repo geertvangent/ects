@@ -18,7 +18,7 @@ class StudentTrainingTrajectoriesUnknownGroupSynchronization extends GroupSynchr
 
     public function get_code()
     {
-        return $this->get_parent_group()->get_code() . '_' . self :: IDENTIFIER;
+        return $this->get_parent_group()->get_code() . '_' . self::IDENTIFIER;
     }
 
     public function get_name()
@@ -30,7 +30,7 @@ class StudentTrainingTrajectoriesUnknownGroupSynchronization extends GroupSynchr
     {
         $user_mails = array();
         $training = $this->get_trajectory()->get_training()->get_parameter(
-            TrainingGroupSynchronization :: RESULT_PROPERTY_TRAINING_ID);
+            TrainingGroupSynchronization::RESULT_PROPERTY_TRAINING_ID);
         
         $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE training_id = ' .
              $training . ' AND trajectory_type = 4 AND type = 1 AND result != 8';

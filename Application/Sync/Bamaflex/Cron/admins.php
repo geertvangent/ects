@@ -11,20 +11,20 @@ require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRE
      DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
      'Chamilo/Libraries/Architecture/Bootstrap.php';
 
-$bootstrap = \Chamilo\Libraries\Architecture\Bootstrap :: setup();
+$bootstrap = \Chamilo\Libraries\Architecture\Bootstrap::setup();
 
 try
 {
     ini_set("memory_limit", "-1");
     ini_set("max_execution_time", "18000");
-
-    Synchronization :: log('Admins sync started', date('c', time()));
+    
+    Synchronization::log('Admins sync started', date('c', time()));
     flush();
-
+    
     $synchronization = new AdminSynchronization();
     $synchronization->run();
-
-    Synchronization :: log('Admins sync ended', date('c', time()));
+    
+    Synchronization::log('Admins sync ended', date('c', time()));
 }
 catch (\Exception $exception)
 {

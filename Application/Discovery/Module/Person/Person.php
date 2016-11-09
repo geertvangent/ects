@@ -16,7 +16,7 @@ class Person extends DiscoveryItem
      */
     public function get_email()
     {
-        return $this->get_default_property(self :: PROPERTY_EMAIL);
+        return $this->get_default_property(self::PROPERTY_EMAIL);
     }
 
     /**
@@ -25,7 +25,7 @@ class Person extends DiscoveryItem
      */
     public function get_first_name()
     {
-        return $this->get_default_property(self :: PROPERTY_FIRST_NAME);
+        return $this->get_default_property(self::PROPERTY_FIRST_NAME);
     }
 
     /**
@@ -34,7 +34,7 @@ class Person extends DiscoveryItem
      */
     public function set_first_name($first_name)
     {
-        $this->set_default_property(self :: PROPERTY_FIRST_NAME, $first_name);
+        $this->set_default_property(self::PROPERTY_FIRST_NAME, $first_name);
     }
 
     /**
@@ -43,7 +43,7 @@ class Person extends DiscoveryItem
      */
     public function set_email($email)
     {
-        $this->set_default_property(self :: PROPERTY_EMAIL, $email);
+        $this->set_default_property(self::PROPERTY_EMAIL, $email);
     }
 
     /**
@@ -52,7 +52,7 @@ class Person extends DiscoveryItem
      */
     public function get_last_name()
     {
-        return $this->get_default_property(self :: PROPERTY_LAST_NAME);
+        return $this->get_default_property(self::PROPERTY_LAST_NAME);
     }
 
     /**
@@ -61,7 +61,7 @@ class Person extends DiscoveryItem
      */
     public function set_last_name($last_name)
     {
-        $this->set_default_property(self :: PROPERTY_LAST_NAME, $last_name);
+        $this->set_default_property(self::PROPERTY_LAST_NAME, $last_name);
     }
 
     /**
@@ -70,7 +70,7 @@ class Person extends DiscoveryItem
      */
     public function get_official_code()
     {
-        return $this->get_default_property(self :: PROPERTY_OFFICIAL_CODE);
+        return $this->get_default_property(self::PROPERTY_OFFICIAL_CODE);
     }
 
     /**
@@ -79,7 +79,7 @@ class Person extends DiscoveryItem
      */
     public function set_official_code($official_code)
     {
-        $this->set_default_property(self :: PROPERTY_OFFICIAL_CODE, $official_code);
+        $this->set_default_property(self::PROPERTY_OFFICIAL_CODE, $official_code);
     }
 
     /**
@@ -88,12 +88,12 @@ class Person extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_EMAIL;
-        $extended_property_names[] = self :: PROPERTY_FIRST_NAME;
-        $extended_property_names[] = self :: PROPERTY_LAST_NAME;
-        $extended_property_names[] = self :: PROPERTY_OFFICIAL_CODE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_EMAIL;
+        $extended_property_names[] = self::PROPERTY_FIRST_NAME;
+        $extended_property_names[] = self::PROPERTY_LAST_NAME;
+        $extended_property_names[] = self::PROPERTY_OFFICIAL_CODE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

@@ -40,76 +40,72 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         // Retrieve the users directly subscribed to the course
         $userConditions = array();
         $userConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(
-                CourseEntityRelation :: class_name(),
-                CourseEntityRelation :: PROPERTY_COURSE_ID),
+            new PropertyConditionVariable(CourseEntityRelation::class_name(), CourseEntityRelation::PROPERTY_COURSE_ID), 
             new StaticConditionVariable($course_id));
         $userConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(CourseEntityRelation :: class_name(), CourseEntityRelation :: PROPERTY_STATUS),
-            new StaticConditionVariable(CourseEntityRelation :: STATUS_STUDENT));
+            new PropertyConditionVariable(CourseEntityRelation::class_name(), CourseEntityRelation::PROPERTY_STATUS), 
+            new StaticConditionVariable(CourseEntityRelation::STATUS_STUDENT));
         $userConditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                CourseEntityRelation :: class_name(),
-                CourseEntityRelation :: PROPERTY_ENTITY_TYPE),
-            new StaticConditionVariable(CourseEntityRelation :: ENTITY_TYPE_USER));
-
+                CourseEntityRelation::class_name(), 
+                CourseEntityRelation::PROPERTY_ENTITY_TYPE), 
+            new StaticConditionVariable(CourseEntityRelation::ENTITY_TYPE_USER));
+        
         $parameters = new DataClassDistinctParameters(
-            new AndCondition($userConditions),
-            CourseEntityRelation :: PROPERTY_ENTITY_ID);
-
-        $user_ids = self :: distinct(
-            \Chamilo\Application\Weblcms\Storage\DataClass\CourseEntityRelation :: class_name(),
+            new AndCondition($userConditions), 
+            CourseEntityRelation::PROPERTY_ENTITY_ID);
+        
+        $user_ids = self::distinct(
+            \Chamilo\Application\Weblcms\Storage\DataClass\CourseEntityRelation::class_name(), 
             $parameters);
-
+        
         // Retrieve the users subscribed through platform groups
         $groupConditions = array();
         $groupConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(
-                CourseEntityRelation :: class_name(),
-                CourseEntityRelation :: PROPERTY_COURSE_ID),
+            new PropertyConditionVariable(CourseEntityRelation::class_name(), CourseEntityRelation::PROPERTY_COURSE_ID), 
             new StaticConditionVariable($course_id));
         $groupConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(CourseEntityRelation :: class_name(), CourseEntityRelation :: PROPERTY_STATUS),
-            new StaticConditionVariable(CourseEntityRelation :: STATUS_STUDENT));
+            new PropertyConditionVariable(CourseEntityRelation::class_name(), CourseEntityRelation::PROPERTY_STATUS), 
+            new StaticConditionVariable(CourseEntityRelation::STATUS_STUDENT));
         $groupConditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                CourseEntityRelation :: class_name(),
-                CourseEntityRelation :: PROPERTY_ENTITY_TYPE),
-            new StaticConditionVariable(CourseEntityRelation :: ENTITY_TYPE_GROUP));
-
-        $groups = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieves(
-            Group :: class_name(),
+                CourseEntityRelation::class_name(), 
+                CourseEntityRelation::PROPERTY_ENTITY_TYPE), 
+            new StaticConditionVariable(CourseEntityRelation::ENTITY_TYPE_GROUP));
+        
+        $groups = \Chamilo\Application\Weblcms\Course\Storage\DataManager::retrieves(
+            Group::class_name(), 
             new DataClassRetrievesParameters(
-                new AndCondition($groupConditions),
-                null,
-                null,
-                array(),
+                new AndCondition($groupConditions), 
+                null, 
+                null, 
+                array(), 
                 new Joins(
                     new Join(
-                        CourseEntityRelation :: class_name(),
+                        CourseEntityRelation::class_name(), 
                         new EqualityCondition(
-                            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_ID),
+                            new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_ID), 
                             new PropertyConditionVariable(
-                                CourseEntityRelation :: class_name(),
-                                CourseEntityRelation :: PROPERTY_ENTITY_ID))))));
-
+                                CourseEntityRelation::class_name(), 
+                                CourseEntityRelation::PROPERTY_ENTITY_ID))))));
+        
         $parameters = new DataClassDistinctParameters(
-            new AndCondition($userConditions),
-            CourseEntityRelation :: PROPERTY_ENTITY_ID);
-
-        $groupIdentifiers = self :: distinct(
-            \Chamilo\Application\Weblcms\Storage\DataClass\CourseEntityRelation :: class_name(),
+            new AndCondition($userConditions), 
+            CourseEntityRelation::PROPERTY_ENTITY_ID);
+        
+        $groupIdentifiers = self::distinct(
+            \Chamilo\Application\Weblcms\Storage\DataClass\CourseEntityRelation::class_name(), 
             $parameters);
-
+        
         $group_users = array();
-
+        
         while ($group = $groups->next_result())
         {
             $group_user_ids = $group->get_users(true, true);
-
+            
             $group_users = array_merge($group_users, $group_user_ids);
         }
-
+        
         return array_unique(array_merge($user_ids, $group_users));
     }
 
@@ -120,34 +116,32 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
      */
     public static function generate_passwords($course_id)
     {
-        $users_ids = self :: get_course_user_ids($course_id);
-        $password_user_ids = DataManager :: distinct(Password :: class_name(), PassWord :: PROPERTY_USER_ID);
-
+        $users_ids = self::get_course_user_ids($course_id);
+        $password_user_ids = DataManager::distinct(Password::class_name(), PassWord::PROPERTY_USER_ID);
+        
         $conditions = array();
-        $conditions[] = new InCondition(
-            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID),
-            $users_ids);
+        $conditions[] = new InCondition(new PropertyConditionVariable(User::class_name(), User::PROPERTY_ID), $users_ids);
         $conditions[] = new NotCondition(
-            new InCondition(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), $password_user_ids));
+            new InCondition(new PropertyConditionVariable(User::class_name(), User::PROPERTY_ID), $password_user_ids));
         $condition = new AndCondition($conditions);
-
-        $users = \Chamilo\Core\User\Storage\DataManager :: retrieves(
-            User :: class_name(),
+        
+        $users = \Chamilo\Core\User\Storage\DataManager::retrieves(
+            User::class_name(), 
             new DataClassRetrievesParameters($condition));
-
+        
         $failures = 0;
-
+        
         while ($user = $users->next_result())
         {
             $password = new Password();
             $password->set_user_id($user->get_id());
-            $password->set_password(Text :: generate_password());
+            $password->set_password(Text::generate_password());
             if (! $password->create())
             {
                 $failures ++;
             }
         }
-
-        return array(self :: GENERATION_ATTEMPTS => $users->size(), self :: GENERATION_FAILURES => $failures);
+        
+        return array(self::GENERATION_ATTEMPTS => $users->size(), self::GENERATION_FAILURES => $failures);
     }
 }

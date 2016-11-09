@@ -11,7 +11,7 @@ class Module extends \Ehb\Application\Discovery\Module\Group\Module
 
     public function get_module_parameters()
     {
-        return new Parameters(Request :: get(self :: PARAM_TRAINING_ID), Request :: get(self :: PARAM_SOURCE));
+        return new Parameters(Request::get(self::PARAM_TRAINING_ID), Request::get(self::PARAM_SOURCE));
     }
 
     public function get_groups_data($type)
@@ -46,8 +46,8 @@ class Module extends \Ehb\Application\Discovery\Module\Group\Module
 
     public static function get_training_info_parameters()
     {
-        $training_id = Request :: get(self :: PARAM_TRAINING_ID);
-        $source = Request :: get(self :: PARAM_SOURCE);
+        $training_id = Request::get(self::PARAM_TRAINING_ID);
+        $source = Request::get(self::PARAM_SOURCE);
         
         $parameter = new \Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex\Parameters();
         $parameter->set_training_id($training_id);

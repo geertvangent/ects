@@ -12,11 +12,11 @@ class BamaflexDataConnector extends \Chamilo\Libraries\Storage\DataManager\DataM
 
     public static function getInstance()
     {
-        if (! isset(self :: $instance[static :: context()]))
+        if (! isset(self::$instance[static::context()]))
         {
-            $class = static :: context() . '\BamaflexDatabase';
-            self :: $instance[static :: context()] = new $class();
+            $class = static::context() . '\BamaflexDatabase';
+            self::$instance[static::context()] = new $class();
         }
-        return self :: $instance[static :: context()];
+        return self::$instance[static::context()];
     }
 }

@@ -55,7 +55,7 @@ class Module
     public static function factory(Application $application, Instance $module_instance)
     {
         $class = $module_instance->get_type() . '\\Module';
-
+        
         return new $class($application, $module_instance);
     }
 
@@ -90,20 +90,20 @@ class Module
     {
         $conditions[] = new EqualityCondition(
             new PropertyConditionVariable(
-                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
-                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_TYPE),
+                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance::class_name(), 
+                \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance::PROPERTY_TYPE), 
             new StaticConditionVariable($type));
         $conditions[] = new NotCondition(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
-                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: PROPERTY_CONTENT_TYPE),
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance::class_name(), 
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance::PROPERTY_CONTENT_TYPE), 
                 new StaticConditionVariable(
-                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_DISABLED)));
+                    \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance::TYPE_DISABLED)));
         $condition = new AndCondition($conditions);
-
-        $module_instances = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieves(
-            \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
+        
+        $module_instances = \Ehb\Application\Discovery\Instance\Storage\DataManager::retrieves(
+            \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance::class_name(), 
             new DataClassRetrievesParameters($condition));
         while ($module_instance = $module_instances->next_result())
         {
@@ -118,7 +118,7 @@ class Module
     public function get_instance_url($instance_id, $instance_parameters)
     {
         $parameters = array();
-        $parameters[Manager :: PARAM_MODULE_ID] = $instance_id;
+        $parameters[Manager::PARAM_MODULE_ID] = $instance_id;
         foreach ($instance_parameters->get_parameters() as $key => $value)
         {
             $parameters[$key] = $value;
@@ -134,17 +134,17 @@ class Module
     public static function get_available_types()
     {
         $types = array();
-
-        $modules = Filesystem :: get_directory_content(
-            ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . 'Module/',
-            Filesystem :: LIST_DIRECTORIES,
+        
+        $modules = Filesystem::get_directory_content(
+            ClassnameUtilities::getInstance()->namespaceToPath(__NAMESPACE__) . 'Module/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {
             $namespace = '\\' . __NAMESPACE__ . '\Module\\' . $module . '\Module';
             if (class_exists($namespace, true))
             {
-                $types = array_merge($types, $namespace :: get_available_implementations());
+                $types = array_merge($types, $namespace::get_available_implementations());
             }
         }
         return $types;
@@ -153,83 +153,82 @@ class Module
     public function get_packages_from_filesystem()
     {
         $types = array();
-
-        $directories = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'Module/',
-            Filesystem :: LIST_DIRECTORIES,
+        
+        $directories = Filesystem::get_directory_content(
+            Path::getInstance()->namespaceToFullPath(__NAMESPACE__) . 'Module/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
-
+        
         foreach ($directories as $directory)
         {
             $types[] = __NAMESPACE__ . '\Module\\' . $directory;
         }
-
+        
         return $types;
     }
 
     public function get_type()
     {
-        return \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: TYPE_DISABLED;
+        return \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance::TYPE_DISABLED;
     }
 
     /**
-     * Far from ideal and not really generic (because of the user) . .. but it'll have to do for now
-     *
+     * Far from ideal and not really generic (because of the user) .
+     * .. but it'll have to do for now
+     * 
      * @param $type string
      * @param $user user\User
      * @return \libraries\format\ToolbarItem NULL
      */
     public function get_module_link($type, $user_id, $check_data = true)
     {
-        $module_instance = \Ehb\Application\Discovery\Module :: exists($type);
-
+        $module_instance = \Ehb\Application\Discovery\Module::exists($type);
+        
         if ($module_instance)
         {
             $class_parameters = $type . '\Parameters';
             $parameters = new $class_parameters();
             $parameters->set_user_id($user_id);
-
-            $module = Module :: factory($this->get_application(), $module_instance);
-
+            
+            $module = Module::factory($this->get_application(), $module_instance);
+            
             $class_rights = $type . '\Rights';
-
-//             if (! $class_rights :: is_allowed($class_rights :: VIEW_RIGHT, $module_instance->get_id(), $parameters))
-//             {
-//                 return new ToolbarItem(
-//                     Translation :: get(
-//                         'ModuleNotAvailable',
-//                         array('MODULE' => Translation :: get('TypeName', null, $type))),
-//                     Theme :: getInstance()->getImagesPath($type) . 'Logo/16_na.png',
-//                     null,
-//                     ToolbarItem :: DISPLAY_ICON);
-//             }
-//             else
-//             {
-                if (($check_data && $module->has_data($parameters)) || ! $check_data)
-                {
-                    $url = $this->get_instance_url($module_instance->get_id(), $parameters);
-                    return new ToolbarItem(
-                        Translation :: get('TypeName', null, $type),
-
-                        Theme :: getInstance()->getImagesPath($type) . 'Logo/16.png',
-                        $url,
-                        ToolbarItem :: DISPLAY_ICON);
-                }
-                else
-
-                {
-                    $url = $this->get_instance_url($module_instance->get_id(), $parameters);
-                    return new ToolbarItem(
-                        Translation :: get(
-                            'ModuleHasNoData',
-                            array('MODULE' => Translation :: get('TypeName', null, $type))),
-                        Theme :: getInstance()->getImagesPath($type) . 'Logo/16_empty.png',
-                        $url,
-                        ToolbarItem :: DISPLAY_ICON);
-                }
-//             }
+            
+            // if (! $class_rights :: is_allowed($class_rights :: VIEW_RIGHT, $module_instance->get_id(), $parameters))
+            // {
+            // return new ToolbarItem(
+            // Translation :: get(
+            // 'ModuleNotAvailable',
+            // array('MODULE' => Translation :: get('TypeName', null, $type))),
+            // Theme :: getInstance()->getImagesPath($type) . 'Logo/16_na.png',
+            // null,
+            // ToolbarItem :: DISPLAY_ICON);
+            // }
+            // else
+            // {
+            if (($check_data && $module->has_data($parameters)) || ! $check_data)
+            {
+                $url = $this->get_instance_url($module_instance->get_id(), $parameters);
+                return new ToolbarItem(
+                    Translation::get('TypeName', null, $type), 
+                    
+                    Theme::getInstance()->getImagesPath($type) . 'Logo/16.png', 
+                    $url, 
+                    ToolbarItem::DISPLAY_ICON);
+            }
+            else
+            
+            {
+                $url = $this->get_instance_url($module_instance->get_id(), $parameters);
+                return new ToolbarItem(
+                    Translation::get('ModuleHasNoData', array('MODULE' => Translation::get('TypeName', null, $type))), 
+                    Theme::getInstance()->getImagesPath($type) . 'Logo/16_empty.png', 
+                    $url, 
+                    ToolbarItem::DISPLAY_ICON);
+            }
+            // }
         }
-
+        
         return null;
     }
 
@@ -240,6 +239,6 @@ class Module
 
     public function get_data_manager()
     {
-        return DataConnector :: getInstance($this->get_module_instance());
+        return DataConnector::getInstance($this->get_module_instance());
     }
 }

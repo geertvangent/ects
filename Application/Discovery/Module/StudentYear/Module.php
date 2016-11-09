@@ -20,12 +20,12 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function __construct(Application $application, Instance $module_instance)
     {
-        parent :: __construct($application, $module_instance);
+        parent::__construct($application, $module_instance);
     }
 
     public function get_module_parameters()
     {
-        $parameter = self :: module_parameters();
+        $parameter = self::module_parameters();
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
@@ -41,7 +41,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->student_years))
         {
-            $this->student_years = DataManager :: getInstance($this->get_module_instance())->retrieve_student_years(
+            $this->student_years = DataManager::getInstance($this->get_module_instance())->retrieve_student_years(
                 $this->get_module_parameters());
         }
         return $this->student_years;
@@ -55,7 +55,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public static function module_parameters()
     {
-        $param_user = Request :: get(self :: PARAM_USER_ID);
+        $param_user = Request::get(self::PARAM_USER_ID);
         $parameter = new Parameters();
         if ($param_user)
         {
@@ -67,10 +67,10 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     public static function get_available_implementations()
     {
         $types = array();
-
-        $modules = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
-            Filesystem :: LIST_DIRECTORIES,
+        
+        $modules = Filesystem::get_directory_content(
+            Path::getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {
@@ -82,6 +82,6 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function get_type()
     {
-        return Instance :: TYPE_USER;
+        return Instance::TYPE_USER;
     }
 }

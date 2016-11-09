@@ -16,7 +16,7 @@ class Nationality extends DataClass
      */
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     /**
@@ -27,10 +27,10 @@ class Nationality extends DataClass
     {
         switch ($this->get_type())
         {
-            case self :: TYPE_PRIMARY :
+            case self::TYPE_PRIMARY :
                 return 'Primary';
                 break;
-            case self :: TYPE_SECONDARY :
+            case self::TYPE_SECONDARY :
                 return 'Secondary';
                 break;
         }
@@ -42,7 +42,7 @@ class Nationality extends DataClass
      */
     public function get_nationality()
     {
-        return $this->get_default_property(self :: PROPERTY_NATIONALITY);
+        return $this->get_default_property(self::PROPERTY_NATIONALITY);
     }
 
     /**
@@ -51,7 +51,7 @@ class Nationality extends DataClass
      */
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     /**
@@ -60,7 +60,7 @@ class Nationality extends DataClass
      */
     public function set_nationality($nationality)
     {
-        $this->set_default_property(self :: PROPERTY_NATIONALITY, $nationality);
+        $this->set_default_property(self::PROPERTY_NATIONALITY, $nationality);
     }
 
     /**
@@ -69,10 +69,10 @@ class Nationality extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_TYPE;
-        $extended_property_names[] = self :: PROPERTY_NATIONALITY;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        $extended_property_names[] = self::PROPERTY_NATIONALITY;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

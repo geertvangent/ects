@@ -12,7 +12,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function get_username()
     {
-        return $this->get_default_property(self :: PROPERTY_USERNAME);
+        return $this->get_default_property(self::PROPERTY_USERNAME);
     }
 
     /**
@@ -21,7 +21,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function get_timezone()
     {
-        return $this->get_default_property(self :: PROPERTY_TIMEZONE);
+        return $this->get_default_property(self::PROPERTY_TIMEZONE);
     }
 
     /**
@@ -30,7 +30,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function set_username($username)
     {
-        $this->set_default_property(self :: PROPERTY_USERNAME, $username);
+        $this->set_default_property(self::PROPERTY_USERNAME, $username);
     }
 
     /**
@@ -39,7 +39,7 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function set_timezone($timezone)
     {
-        $this->set_default_property(self :: PROPERTY_TIMEZONE, $timezone);
+        $this->set_default_property(self::PROPERTY_TIMEZONE, $timezone);
     }
 
     /**
@@ -48,10 +48,10 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_USERNAME;
-        $extended_property_names[] = self :: PROPERTY_TIMEZONE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_USERNAME;
+        $extended_property_names[] = self::PROPERTY_TIMEZONE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

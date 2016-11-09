@@ -41,7 +41,7 @@ class CourseComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
     {
         $jsonAjaxResult = new JsonAjaxResult();
         $jsonAjaxResult->set_properties($this->getCourseProperties());
-
+        
         $this->trackView();
         $jsonAjaxResult->display();
     }
@@ -56,7 +56,7 @@ class CourseComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
         {
             $this->currentCourseIdentifier = $this->getRequestedPostDataValue(self::PARAM_COURSE);
         }
-
+        
         return $this->currentCourseIdentifier;
     }
 
@@ -75,17 +75,17 @@ class CourseComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
     private function getCourseProperties()
     {
         return $this->filterProperties(
-            $this->getCourse()->get_default_properties(),
+            $this->getCourse()->get_default_properties(), 
             array(
-                Course::PROPERTY_ID,
-                Course::PROPERTY_YEAR,
-                Course::PROPERTY_NAME,
-                Course::PROPERTY_FACULTY_ID,
-                Course::PROPERTY_FACULTY,
-                Course::PROPERTY_TRAINING_ID,
-                Course::PROPERTY_TRAINING,
-                Course::PROPERTY_PARENT_ID,
-                Course::PROPERTY_CREDITS,
+                Course::PROPERTY_ID, 
+                Course::PROPERTY_YEAR, 
+                Course::PROPERTY_NAME, 
+                Course::PROPERTY_FACULTY_ID, 
+                Course::PROPERTY_FACULTY, 
+                Course::PROPERTY_TRAINING_ID, 
+                Course::PROPERTY_TRAINING, 
+                Course::PROPERTY_PARENT_ID, 
+                Course::PROPERTY_CREDITS, 
                 Course::PROPERTY_APPROVED));
     }
 
@@ -94,12 +94,12 @@ class CourseComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
         try
         {
             Event::trigger(
-                'View',
-                \Ehb\Application\Ects\Manager::context(),
+                'View', 
+                \Ehb\Application\Ects\Manager::context(), 
                 array(
-                    View::PROPERTY_SESSION_ID => session_id(),
-                    View::PROPERTY_DATE => time(),
-                    View::PROPERTY_ENTITY_TYPE => View::TYPE_COURSE,
+                    View::PROPERTY_SESSION_ID => session_id(), 
+                    View::PROPERTY_DATE => time(), 
+                    View::PROPERTY_ENTITY_TYPE => View::TYPE_COURSE, 
                     View::PROPERTY_ENTITY_ID => $this->getCurrentCourseIdentifier()));
         }
         catch (\Exception $exception)

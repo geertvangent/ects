@@ -16,7 +16,7 @@ class IdentificationCode extends DataClass
      */
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     /**
@@ -27,10 +27,10 @@ class IdentificationCode extends DataClass
     {
         switch ($this->get_type())
         {
-            case self :: TYPE_NATIONAL :
+            case self::TYPE_NATIONAL :
                 return 'NationalId';
                 break;
-            case self :: TYPE_COMPANY :
+            case self::TYPE_COMPANY :
                 return 'CompanyId';
                 break;
         }
@@ -42,7 +42,7 @@ class IdentificationCode extends DataClass
      */
     public function get_code()
     {
-        return $this->get_default_property(self :: PROPERTY_CODE);
+        return $this->get_default_property(self::PROPERTY_CODE);
     }
 
     /**
@@ -51,7 +51,7 @@ class IdentificationCode extends DataClass
      */
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     /**
@@ -60,7 +60,7 @@ class IdentificationCode extends DataClass
      */
     public function set_code($code)
     {
-        $this->set_default_property(self :: PROPERTY_CODE, $code);
+        $this->set_default_property(self::PROPERTY_CODE, $code);
     }
 
     /**
@@ -69,10 +69,10 @@ class IdentificationCode extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_TYPE;
-        $extended_property_names[] = self :: PROPERTY_CODE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        $extended_property_names[] = self::PROPERTY_CODE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

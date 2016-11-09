@@ -16,7 +16,7 @@ class Training extends DiscoveryItem
      */
     public function get_year()
     {
-        return $this->get_default_property(self :: PROPERTY_YEAR);
+        return $this->get_default_property(self::PROPERTY_YEAR);
     }
 
     /**
@@ -25,17 +25,17 @@ class Training extends DiscoveryItem
      */
     public function get_name()
     {
-        return $this->get_default_property(self :: PROPERTY_NAME);
+        return $this->get_default_property(self::PROPERTY_NAME);
     }
 
     public function get_start_date()
     {
-        return $this->get_default_property(self :: PROPERTY_START_DATE);
+        return $this->get_default_property(self::PROPERTY_START_DATE);
     }
 
     public function get_end_date()
     {
-        return $this->get_default_property(self :: PROPERTY_END_DATE);
+        return $this->get_default_property(self::PROPERTY_END_DATE);
     }
 
     /**
@@ -44,7 +44,7 @@ class Training extends DiscoveryItem
      */
     public function set_year($year)
     {
-        $this->set_default_property(self :: PROPERTY_YEAR, $year);
+        $this->set_default_property(self::PROPERTY_YEAR, $year);
     }
 
     /**
@@ -53,17 +53,17 @@ class Training extends DiscoveryItem
      */
     public function set_name($name)
     {
-        $this->set_default_property(self :: PROPERTY_NAME, $name);
+        $this->set_default_property(self::PROPERTY_NAME, $name);
     }
 
     public function set_start_date($start_date)
     {
-        $this->set_default_property(self :: PROPERTY_START_DATE, $start_date);
+        $this->set_default_property(self::PROPERTY_START_DATE, $start_date);
     }
 
     public function set_end_date($end_date)
     {
-        $this->set_default_property(self :: PROPERTY_END_DATE, $end_date);
+        $this->set_default_property(self::PROPERTY_END_DATE, $end_date);
     }
 
     /**
@@ -72,12 +72,12 @@ class Training extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_YEAR;
-        $extended_property_names[] = self :: PROPERTY_NAME;
-        $extended_property_names[] = self :: PROPERTY_START_DATE;
-        $extended_property_names[] = self :: PROPERTY_END_DATE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_YEAR;
+        $extended_property_names[] = self::PROPERTY_NAME;
+        $extended_property_names[] = self::PROPERTY_START_DATE;
+        $extended_property_names[] = self::PROPERTY_END_DATE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

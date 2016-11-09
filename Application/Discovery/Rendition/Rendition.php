@@ -75,18 +75,18 @@ abstract class Rendition
 
     public static function launch($rendition_implementation)
     {
-        return static :: factory($rendition_implementation)->render();
+        return static::factory($rendition_implementation)->render();
     }
 
     public static function factory($rendition_implementation)
     {
-        $class = static :: context() . '\View\\' .
-             StringUtilities :: getInstance()->createString($rendition_implementation->get_format())->upperCamelize() .
+        $class = static::context() . '\View\\' .
+             StringUtilities::getInstance()->createString($rendition_implementation->get_format())->upperCamelize() .
              '\\' .
-             StringUtilities :: getInstance()->createString($rendition_implementation->get_format())->upperCamelize() .
-             StringUtilities :: getInstance()->createString($rendition_implementation->get_view())->upperCamelize() .
+             StringUtilities::getInstance()->createString($rendition_implementation->get_format())->upperCamelize() .
+             StringUtilities::getInstance()->createString($rendition_implementation->get_view())->upperCamelize() .
              'Rendition';
-
+        
         return new $class($rendition_implementation);
     }
 
@@ -96,6 +96,6 @@ abstract class Rendition
      */
     public static function package()
     {
-        return static :: context();
+        return static::context();
     }
 }

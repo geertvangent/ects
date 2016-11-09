@@ -16,24 +16,24 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_student_years_table()
     {
         $student_years = $this->get_student_years();
-
+        
         $data = array();
-
+        
         $data_source = $this->get_module_instance()->get_setting('data_source');
         foreach ($student_years as $key => $student_year)
         {
             $row = array();
             $row[] = $student_year->get_year();
-            $row[] = Translation :: get($student_year->get_scholarship_string());
-            $row[] = Translation :: get($student_year->get_reduced_registration_fee_string());
-
+            $row[] = Translation::get($student_year->get_scholarship_string());
+            $row[] = Translation::get($student_year->get_reduced_registration_fee_string());
+            
             $data[] = $row;
         }
-
+        
         $table = new SortableTable($data);
-        $table->setColumnHeader(0, Translation :: get('Year'), false);
-        $table->setColumnHeader(1, Translation :: get('Scholarship'), false);
-        $table->setColumnHeader(2, Translation :: get('ReducedRegistrationFee'), false);
+        $table->setColumnHeader(0, Translation::get('Year'), false);
+        $table->setColumnHeader(1, Translation::get('Scholarship'), false);
+        $table->setColumnHeader(2, Translation::get('ReducedRegistrationFee'), false);
         return $table;
     }
 
@@ -42,25 +42,25 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function render()
     {
-        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
-
-        if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT,
-            $this->get_module_instance()->get_id(),
+        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get(TypeName)));
+        
+        if (! Rights::is_allowed(
+            Rights::VIEW_RIGHT, 
+            $this->get_module_instance()->get_id(), 
             $this->get_module_parameters()))
         {
             throw new NotAllowedException(false);
         }
-
+        
         $html = array();
         if (count($this->get_student_years()) > 0)
         {
             $html[] = $this->get_student_years_table()->toHTML();
         }
         else
-
+        
         {
-            $html[] = Display :: normal_message(Translation :: get('NoData'), true);
+            $html[] = Display::normal_message(Translation::get('NoData'), true);
         }
         return implode(PHP_EOL, $html);
     }
@@ -70,7 +70,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
+        return \Ehb\Application\Discovery\Rendition\Rendition::FORMAT_HTML;
     }
 
     /*
@@ -78,6 +78,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
+        return \Ehb\Application\Discovery\Rendition\Rendition::VIEW_DEFAULT;
     }
 }

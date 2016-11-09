@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object name="search">
-	<properties>
-		<property name="id" type="integer" unsigned="1" notnull="1" autoincrement="true" />
-		<property name="session_id" type="text" />
-		<property name="date" type="integer" unsigned="1" notnull="1" />
-		<property name="year" type="text" lenght="7" />
-		<property name="faculty" type="integer" unsigned="1" />
-		<property name="type" type="integer" unsigned="1" />
-		<property name="text" type="text" />
-	</properties>
+    <properties>
+        <property
+            name="id"
+            type="integer"
+            unsigned="1"
+            notnull="1"
+            autoincrement="true" />
+        <property
+            name="session_id"
+            type="text" />
+        <property
+            name="date"
+            type="integer"
+            unsigned="1"
+            notnull="1" />
+        <property
+            name="year"
+            type="text"
+            lenght="7" />
+        <property
+            name="faculty"
+            type="integer"
+            unsigned="1" />
+        <property
+            name="type"
+            type="integer"
+            unsigned="1" />
+        <property
+            name="text"
+            type="text" />
+    </properties>
 </object>

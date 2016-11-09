@@ -20,13 +20,13 @@ class StudentTrainingTrajectoriesTemplateSubGroupSynchronization extends GroupSy
 
     public function get_code()
     {
-        return $this->get_main_template()->get_current_group()->get_code() . '_' . self :: IDENTIFIER . '_' .
-             $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
+        return $this->get_main_template()->get_current_group()->get_code() . '_' . self::IDENTIFIER . '_' .
+             $this->get_parameter(self::RESULT_PROPERTY_TRAJECTORY_ID);
     }
 
     public function get_name()
     {
-        return $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY);
+        return $this->get_parameter(self::RESULT_PROPERTY_TRAJECTORY);
     }
 
     public function get_user_official_codes()
@@ -34,7 +34,7 @@ class StudentTrainingTrajectoriesTemplateSubGroupSynchronization extends GroupSy
         $user_mails = array();
         
         $query = 'SELECT DISTINCT person_id FROM [dbo].[v_discovery_list_user_student_basic]  WHERE trajectory_type = 1 AND type = 1 AND result != 8 AND trajectory_id = ' .
-             $this->get_parameter(self :: RESULT_PROPERTY_TRAJECTORY_ID);
+             $this->get_parameter(self::RESULT_PROPERTY_TRAJECTORY_ID);
         $users = $this->get_result($query);
         
         while ($user = $users->next_result(false))

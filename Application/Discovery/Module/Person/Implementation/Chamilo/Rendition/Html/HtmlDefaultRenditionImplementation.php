@@ -53,7 +53,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
     public function render()
     {
-        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get(TypeName)));
         
         $this->buttonToolbarRenderer = $this->getButtonToolbarRenderer();
         $html[] = $this->buttonToolbarRenderer->render() . '<br />';
@@ -66,7 +66,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function getButtonToolbarRenderer()
     {
         $parameters = $this->get_application()->get_parameters(true);
-        $parameters[\Ehb\Application\Discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[\Ehb\Application\Discovery\Manager::PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         
         if (! isset($this->buttonToolbarRenderer))
         {
@@ -75,10 +75,10 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
             
             $commonActions->addButton(
                 new Button(
-                    Translation :: get('Show', null, Utilities :: COMMON_LIBRARIES), 
-                    Theme :: getInstance()->getCommonImagePath('Action/Browser'), 
+                    Translation::get('Show', null, Utilities::COMMON_LIBRARIES), 
+                    Theme::getInstance()->getCommonImagePath('Action/Browser'), 
                     $this->get_application()->get_url(), 
-                    ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+                    ToolbarItem::DISPLAY_ICON_AND_LABEL));
             $buttonToolbar->addButtonGroup($commonActions);
             
             $this->buttonToolbarRenderer = new ButtonToolBarRenderer($buttonToolbar);
@@ -91,8 +91,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         $url = $this->get_application()->get_url(
             array(
-                \Ehb\Application\Discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
-                \Chamilo\Core\Group\Manager :: PARAM_GROUP_ID => '%s'));
+                \Ehb\Application\Discovery\Manager::PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                \Chamilo\Core\Group\Manager::PARAM_GROUP_ID => '%s'));
         $group_menu = new GroupMenu($this, urldecode($url));
         
         $html = array();
@@ -111,18 +111,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
             {
                 $condition = new EqualityCondition(
                     new PropertyConditionVariable(
-                        \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
-                        \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_PARENT_ID), 
+                        \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
+                        \Chamilo\Core\Group\Storage\DataClass\Group::PROPERTY_PARENT_ID), 
                     new StaticConditionVariable(0));
-                $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve(
-                    \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+                $group = \Chamilo\Core\Group\Storage\DataManager::retrieve(
+                    \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
                     new DataClassRetrieveParameters($condition));
                 $this->current_group = $group;
             }
             else
             {
-                $this->current_group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
-                    \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+                $this->current_group = \Chamilo\Core\Group\Storage\DataManager::retrieve_by_id(
+                    \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
                     (int) $this->get_group());
             }
         }
@@ -165,23 +165,23 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
         $html = array();
         $html[] = '<div style="float: right; width: 73%;">';
         
-        $renderer_name = ClassnameUtilities :: getInstance()->getClassnameFromObject($this, true);
+        $renderer_name = ClassnameUtilities::getInstance()->getClassnameFromObject($this, true);
         $tabs = new DynamicTabsRenderer($renderer_name);
         
         $parameters = $this->get_application()->get_parameters();
-        $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
-        $parameters[\Chamilo\Core\Group\Manager :: PARAM_GROUP_ID] = $this->get_group();
-        $parameters[\Ehb\Application\Discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[ActionBarSearchForm::PARAM_SIMPLE_SEARCH_QUERY] = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
+        $parameters[\Chamilo\Core\Group\Manager::PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\Ehb\Application\Discovery\Manager::PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         
         $query = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
         if (isset($query) && $query != '')
         {
-            $count_users = \Chamilo\Core\User\Storage\DataManager :: count(
-                \Chamilo\Core\User\Storage\DataClass\User :: class_name(), 
+            $count_users = \Chamilo\Core\User\Storage\DataManager::count(
+                \Chamilo\Core\User\Storage\DataClass\User::class_name(), 
                 new DataClassCountParameters(
                     $this->get_users_condition($this->buttonToolbarRenderer->getSearchForm()->getQuery())));
-            $count_groups = \Chamilo\Core\Group\Storage\DataManager :: count(
-                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+            $count_groups = \Chamilo\Core\Group\Storage\DataManager::count(
+                \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
                 new DataClassCountParameters(
                     $this->get_subgroups_condition($this->buttonToolbarRenderer->getSearchForm()->getQuery())));
             
@@ -190,9 +190,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                 $table = new UserBrowserTable($this);
                 $tabs->add_tab(
                     new DynamicContentTab(
-                        self :: TAB_USERS, 
-                        Translation :: get('Users', null, 'user'), 
-                        Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/users.png', 
+                        self::TAB_USERS, 
+                        Translation::get('Users', null, 'user'), 
+                        Theme::getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/users.png', 
                         $table->as_html()));
             }
             
@@ -204,16 +204,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                     $this->get_subgroups_condition($this->buttonToolbarRenderer->getSearchForm()->getQuery()));
                 $tabs->add_tab(
                     new DynamicContentTab(
-                        self :: TAB_SUBGROUPS, 
-                        Translation :: get('Subgroups'), 
-                        Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/groups.png', 
+                        self::TAB_SUBGROUPS, 
+                        Translation::get('Subgroups'), 
+                        Theme::getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/groups.png', 
                         $table->as_html()));
             }
             
             if ($count_users == 0 && $count_groups == 0)
             {
-                $html[] = Display :: warning_message(
-                    Translation :: get('NoSearchResults', null, Utilities :: COMMON_LIBRARIES), 
+                $html[] = Display::warning_message(
+                    Translation::get('NoSearchResults', null, Utilities::COMMON_LIBRARIES), 
                     true);
             }
         }
@@ -227,16 +227,16 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                     $this->get_users_condition($this->buttonToolbarRenderer->getSearchForm()->getQuery()));
                 $tabs->add_tab(
                     new DynamicContentTab(
-                        self :: TAB_USERS, 
-                        Translation :: get('Users', null, 'user'), 
-                        Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/users.png', 
+                        self::TAB_USERS, 
+                        Translation::get('Users', null, 'user'), 
+                        Theme::getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/users.png', 
                         $table->as_html()));
             }
             
             if ($show_subgroups)
             {
-                $count_groups = \Chamilo\Core\Group\Storage\DataManager :: count(
-                    \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+                $count_groups = \Chamilo\Core\Group\Storage\DataManager::count(
+                    \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
                     new DataClassCountParameters(
                         $this->get_subgroups_condition($this->buttonToolbarRenderer->getSearchForm()->getQuery())));
                 if ($count_groups > 0)
@@ -247,18 +247,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
                         $this->get_subgroups_condition($this->buttonToolbarRenderer->getSearchForm()->getQuery()));
                     $tabs->add_tab(
                         new DynamicContentTab(
-                            self :: TAB_SUBGROUPS, 
-                            Translation :: get('Subgroups'), 
-                            Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/groups.png', 
+                            self::TAB_SUBGROUPS, 
+                            Translation::get('Subgroups'), 
+                            Theme::getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/groups.png', 
                             $table->as_html()));
                 }
             }
             
             $tabs->add_tab(
                 new DynamicContentTab(
-                    self :: TAB_DETAILS, 
-                    Translation :: get('Details'), 
-                    Theme :: getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/details.png', 
+                    self::TAB_DETAILS, 
+                    Translation::get('Details'), 
+                    Theme::getInstance()->getImagesPath(__NAMESPACE__) . 'Tab/details.png', 
                     $this->get_group_info()));
         }
         
@@ -273,18 +273,18 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_group_info()
     {
         $group_id = $this->get_group();
-        $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
-            \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
+        $group = \Chamilo\Core\Group\Storage\DataManager::retrieve_by_id(
+            \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
             (int) $group_id);
         
         $html = array();
         
-        $html[] = '<b>' . Translation :: get('Code') . '</b>: ' . $group->get_code() . '<br />';
+        $html[] = '<b>' . Translation::get('Code') . '</b>: ' . $group->get_code() . '<br />';
         
         $description = $group->get_description();
         if ($description)
         {
-            $html[] = '<b>' . Translation :: get('Description', null, Utilities :: COMMON_LIBRARIES) . '</b>: ' .
+            $html[] = '<b>' . Translation::get('Description', null, Utilities::COMMON_LIBRARIES) . '</b>: ' .
                  $description . '<br />';
         }
         
@@ -297,8 +297,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     {
         return $this->get_application()->get_url(
             array(
-                \Ehb\Application\Discovery\Manager :: PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
-                \Chamilo\Core\Group\Manager :: PARAM_GROUP_ID => $group->get_id()));
+                \Ehb\Application\Discovery\Manager::PARAM_MODULE_ID => $this->get_module_instance()->get_id(), 
+                \Chamilo\Core\Group\Manager::PARAM_GROUP_ID => $group->get_id()));
     }
 
     /*
@@ -312,9 +312,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
     public function get_parameters()
     {
         $parameters = $this->get_application()->get_parameters();
-        $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
-        $parameters[\Chamilo\Core\Group\Manager :: PARAM_GROUP_ID] = $this->get_group();
-        $parameters[\Ehb\Application\Discovery\Manager :: PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
+        $parameters[ActionBarSearchForm::PARAM_SIMPLE_SEARCH_QUERY] = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
+        $parameters[\Chamilo\Core\Group\Manager::PARAM_GROUP_ID] = $this->get_group();
+        $parameters[\Ehb\Application\Discovery\Manager::PARAM_MODULE_ID] = $this->get_module_instance()->get_id();
         return $parameters;
     }
 
@@ -323,7 +323,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
      */
     public function get_format()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
+        return \Ehb\Application\Discovery\Rendition\Rendition::FORMAT_HTML;
     }
 
     /*
@@ -331,7 +331,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
      */
     public function get_view()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
+        return \Ehb\Application\Discovery\Rendition\Rendition::VIEW_DEFAULT;
     }
 
     public function get_allowed_groups()
@@ -343,45 +343,45 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
             $conditions = array();
             $conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(
-                    RightsGroupEntityRight :: class_name(), 
-                    RightsGroupEntityRight :: PROPERTY_MODULE_ID), 
+                    RightsGroupEntityRight::class_name(), 
+                    RightsGroupEntityRight::PROPERTY_MODULE_ID), 
                 new StaticConditionVariable($this->get_module_instance()->get_id()));
-            $conditions[] = new EqualityCondition(RightsGroupEntityRight :: PROPERTY_RIGHT_ID, Rights :: VIEW_RIGHT);
+            $conditions[] = new EqualityCondition(RightsGroupEntityRight::PROPERTY_RIGHT_ID, Rights::VIEW_RIGHT);
             
             $entities_conditions = array();
             
             $user_entity_conditions = array();
             $user_entity_conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(
-                    RightsGroupEntityRight :: class_name(), 
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID), 
-                new StaticConditionVariable(Session :: get_user_id()));
+                    RightsGroupEntityRight::class_name(), 
+                    RightsGroupEntityRight::PROPERTY_ENTITY_ID), 
+                new StaticConditionVariable(Session::get_user_id()));
             $user_entity_conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(
-                    RightsGroupEntityRight :: class_name(), 
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE), 
-                new StaticConditionVariable(\Chamilo\Core\Rights\Entity\UserEntity :: ENTITY_TYPE));
+                    RightsGroupEntityRight::class_name(), 
+                    RightsGroupEntityRight::PROPERTY_ENTITY_TYPE), 
+                new StaticConditionVariable(\Chamilo\Core\Rights\Entity\UserEntity::ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($user_entity_conditions);
             
             $group_entity_conditions = array();
             $group_entity_conditions[] = new InCondition(
                 new PropertyConditionVariable(
-                    RightsGroupEntityRight :: class_name(), 
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_ID), 
+                    RightsGroupEntityRight::class_name(), 
+                    RightsGroupEntityRight::PROPERTY_ENTITY_ID), 
                 $current_user_group_ids);
             $group_entity_conditions[] = new EqualityCondition(
                 new PropertyConditionVariable(
-                    RightsGroupEntityRight :: class_name(), 
-                    RightsGroupEntityRight :: PROPERTY_ENTITY_TYPE), 
-                new StaticConditionVariable(\Chamilo\Core\Rights\Entity\PlatformGroupEntity :: ENTITY_TYPE));
+                    RightsGroupEntityRight::class_name(), 
+                    RightsGroupEntityRight::PROPERTY_ENTITY_TYPE), 
+                new StaticConditionVariable(\Chamilo\Core\Rights\Entity\PlatformGroupEntity::ENTITY_TYPE));
             $entities_conditions[] = new AndCondition($group_entity_conditions);
             
             $conditions[] = new OrCondition($entities_conditions);
             $condition = new AndCondition($conditions);
             
-            $this->allowed_groups = \Ehb\Application\Discovery\Storage\DataManager :: distinct(
-                RightsGroupEntityRight :: class_name(), 
-                new DataClassDistinctParameters($condition, RightsGroupEntityRight :: PROPERTY_GROUP_ID));
+            $this->allowed_groups = \Ehb\Application\Discovery\Storage\DataManager::distinct(
+                RightsGroupEntityRight::class_name(), 
+                new DataClassDistinctParameters($condition, RightsGroupEntityRight::PROPERTY_GROUP_ID));
         }
         
         return $this->allowed_groups;

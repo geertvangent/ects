@@ -20,13 +20,13 @@ class BrowserComponent extends Manager implements DelegateComponent
         {
             throw new NotAllowedException();
         }
-
+        
         $types = array(self::ACTION_BAMAFLEX, self::ACTION_ATLANTIS, self::ACTION_CAS, self::ACTION_DATA);
-
+        
         $html = array();
-
+        
         $html[] = $this->render_header();
-
+        
         foreach ($types as $type)
         {
             $html[] = '<a href="' . $this->get_url(array(self::PARAM_ACTION => $type)) . '">';
@@ -37,9 +37,9 @@ class BrowserComponent extends Manager implements DelegateComponent
             $html[] = '</div>';
             $html[] = '</a>';
         }
-
+        
         $html[] = $this->render_footer();
-
+        
         return implode(PHP_EOL, $html);
     }
 }

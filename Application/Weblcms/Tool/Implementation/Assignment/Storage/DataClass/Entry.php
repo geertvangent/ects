@@ -16,7 +16,7 @@ class Entry extends \Chamilo\Core\Repository\ContentObject\Assignment\Display\St
 {
     // Properties
     const PROPERTY_PUBLICATION_ID = 'publication_id';
-
+    
     // Entity types
     const ENTITY_TYPE_USER = 0;
     const ENTITY_TYPE_COURSE_GROUP = 1;
@@ -29,7 +29,7 @@ class Entry extends \Chamilo\Core\Repository\ContentObject\Assignment\Display\St
      */
     public static function get_default_property_names($extendedPropertyNames = array())
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_PUBLICATION_ID));
+        return parent::get_default_property_names(array(self::PROPERTY_PUBLICATION_ID));
     }
 
     /**
@@ -38,7 +38,7 @@ class Entry extends \Chamilo\Core\Repository\ContentObject\Assignment\Display\St
      */
     public function getPublicationId()
     {
-        return $this->get_default_property(self :: PROPERTY_PUBLICATION_ID);
+        return $this->get_default_property(self::PROPERTY_PUBLICATION_ID);
     }
 
     /**
@@ -47,25 +47,25 @@ class Entry extends \Chamilo\Core\Repository\ContentObject\Assignment\Display\St
      */
     public function setPublicationId($publicationId)
     {
-        $this->set_default_property(self :: PROPERTY_PUBLICATION_ID, $publicationId);
+        $this->set_default_property(self::PROPERTY_PUBLICATION_ID, $publicationId);
     }
 
     /**
      * Returns the dependencies for this dataclass
-     *
+     * 
      * @return \libraries\storage\Condition[string]
      */
     protected function get_dependencies()
     {
         return array(
-            Feedback :: class_name() => new EqualityCondition(
-                new PropertyConditionVariable(Feedback :: class_name(), Feedback :: PROPERTY_ENTRY_ID),
-                new StaticConditionVariable($this->getId())),
-            Note :: class_name() => new EqualityCondition(
-                new PropertyConditionVariable(Note :: class_name(), Note :: PROPERTY_ENTRY_ID),
-                new StaticConditionVariable($this->getId())),
-            Score :: class_name() => new EqualityCondition(
-                new PropertyConditionVariable(Score :: class_name(), Score :: PROPERTY_ENTRY_ID),
+            Feedback::class_name() => new EqualityCondition(
+                new PropertyConditionVariable(Feedback::class_name(), Feedback::PROPERTY_ENTRY_ID), 
+                new StaticConditionVariable($this->getId())), 
+            Note::class_name() => new EqualityCondition(
+                new PropertyConditionVariable(Note::class_name(), Note::PROPERTY_ENTRY_ID), 
+                new StaticConditionVariable($this->getId())), 
+            Score::class_name() => new EqualityCondition(
+                new PropertyConditionVariable(Score::class_name(), Score::PROPERTY_ENTRY_ID), 
                 new StaticConditionVariable($this->getId())));
     }
 }

@@ -2,9 +2,8 @@
 	font-family: "ehb-webfont";
 	src: url("ehb-webfont.eot");
 	src: url("ehb-webfont.eot?#iefix") format("embedded-opentype"),
-		url("ehb-webfont.woff") format("woff"),
-		url("ehb-webfont.ttf") format("truetype"),
-		url("ehb-webfont.svg#ehb-webfont") format("svg");
+		url("ehb-webfont.woff") format("woff"), url("ehb-webfont.ttf")
+		format("truetype"), url("ehb-webfont.svg#ehb-webfont") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package context="discovery">
-	<settings>
-		<category name="visual">
-			<setting name="theme" field="select" default="Eagle">
-				<options type="dynamic" source="get_themes" />
-			</setting>
-		</category>
-	</settings>
+    <settings>
+        <category name="visual">
+            <setting
+                name="theme"
+                field="select"
+                default="Eagle">
+                <options
+                    type="dynamic"
+                    source="get_themes" />
+            </setting>
+        </category>
+    </settings>
 </package>

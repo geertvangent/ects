@@ -14,7 +14,7 @@ class CourseDetailsComponent extends \Ehb\Application\Ects\Ajax\Manager implemen
 {
     // Parameters
     const PARAM_COURSE = 'course';
-
+    
     // Properties
     const PROPERTY_CONTENT = 'content';
 
@@ -54,7 +54,7 @@ class CourseDetailsComponent extends \Ehb\Application\Ects\Ajax\Manager implemen
         {
             $this->currentCourseIdentifier = $this->getRequestedPostDataValue(self::PARAM_COURSE);
         }
-
+        
         return $this->currentCourseIdentifier;
     }
 

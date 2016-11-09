@@ -10,15 +10,15 @@ class DataSource
      */
     public function retrieve_persons($condition, $offset, $count, $order_by)
     {
-        return \Chamilo\Core\User\Storage\DataManager :: getInstance()->retrieve_users(
-            $condition,
-            $offset,
-            $count,
+        return \Chamilo\Core\User\Storage\DataManager::getInstance()->retrieve_users(
+            $condition, 
+            $offset, 
+            $count, 
             $order_by);
     }
 
     public function count_persons($condition)
     {
-        return \Chamilo\Core\User\Storage\DataManager :: getInstance()->count_users($condition);
+        return \Chamilo\Core\User\Storage\DataManager::getInstance()->count_users($condition);
     }
 }

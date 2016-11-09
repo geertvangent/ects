@@ -17,16 +17,16 @@ class Module extends \Ehb\Application\Discovery\Module\Photo\Implementation\Bama
 
     public function get_condition()
     {
-        $users = \Chamilo\Application\Weblcms\Course\Storage\DataManager :: retrieve_all_course_users(
+        $users = \Chamilo\Application\Weblcms\Course\Storage\DataManager::retrieve_all_course_users(
             $this->get_application()->get_course_id());
-
+        
         $user_ids = array();
-
+        
         while ($user = $users->next_result())
         {
-            $user_ids[] = $user[User :: PROPERTY_ID];
+            $user_ids[] = $user[User::PROPERTY_ID];
         }
-
-        return new InCondition(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), $user_ids);
+        
+        return new InCondition(new PropertyConditionVariable(User::class_name(), User::PROPERTY_ID), $user_ids);
     }
 }

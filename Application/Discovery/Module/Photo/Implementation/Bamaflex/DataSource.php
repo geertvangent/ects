@@ -27,31 +27,31 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
      */
     public function retrieve_photo($id, $web = true)
     {
-        $basePath = Path :: getInstance()->getCachePath(__NAMESPACE__ . '\Photo');
-        $identifierPath = Text :: char_at($id, 0);
+        $basePath = Path::getInstance()->getCachePath(__NAMESPACE__ . '\Photo');
+        $identifierPath = Text::char_at($id, 0);
         $fileName = $id . '.jpg';
-
+        
         $storagePath = $basePath . $identifierPath . DIRECTORY_SEPARATOR . $fileName;
-
+        
         if (! file_exists($storagePath))
         {
             $condition = new EqualityCondition(new StaticColumnConditionVariable('id'), new StaticConditionVariable($id));
-
+            
             $query = 'SELECT * FROM v_discovery_profile_photo WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                $object = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                $object = $statement->fetch(\PDO::FETCH_OBJ);
+                
                 if (! empty($object->photo))
                 {
-                    Filesystem :: write_to_file($storagePath, $object->photo);
-
-                    $image_manipulation = ImageManipulation :: factory($storagePath);
-                    $image_manipulation->scale(600, 600, ImageManipulation :: SCALE_INSIDE);
+                    Filesystem::write_to_file($storagePath, $object->photo);
+                    
+                    $image_manipulation = ImageManipulation::factory($storagePath);
+                    $image_manipulation->scale(600, 600, ImageManipulation::SCALE_INSIDE);
                     $image_manipulation->write_to_file($storagePath);
                 }
                 else
@@ -64,7 +64,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                 $this->saveUnknownImage($storagePath);
             }
         }
-
+        
         return $storagePath;
     }
 
@@ -74,12 +74,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
      */
     private function saveUnknownImage($path)
     {
-        $randomPath = Theme :: getInstance()->getImagePath(
-            'Chamilo\Core\User',
-            'Unknown' . DIRECTORY_SEPARATOR . rand(0, 75),
-            'png',
+        $randomPath = Theme::getInstance()->getImagePath(
+            'Chamilo\Core\User', 
+            'Unknown' . DIRECTORY_SEPARATOR . rand(0, 75), 
+            'png', 
             false);
-
+        
         $image = imagecreatefrompng($randomPath);
         imagejpeg($image, $path, 100);
         imagedestroy($image);
@@ -94,28 +94,28 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
             {
                 $conditions = array();
                 $conditions[] = new EqualityCondition(
-                    new StaticColumnConditionVariable('id'),
+                    new StaticColumnConditionVariable('id'), 
                     new StaticConditionVariable($faculty_id));
                 $conditions[] = new EqualityCondition(
-                    new StaticColumnConditionVariable('source'),
+                    new StaticColumnConditionVariable('source'), 
                     new StaticConditionVariable($source));
                 $condition = new AndCondition($conditions);
-
+                
                 $query = 'SELECT * FROM v_discovery_faculty_advanced WHERE ' .
-                     ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                     ConditionTranslator::render($condition, null, $this->get_connection());
+                
                 $statement = $this->get_connection()->query($query);
-
+                
                 if ($statement instanceof PDOStatement)
                 {
-                    $result = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                    $result = $statement->fetch(\PDO::FETCH_OBJ);
+                    
                     $faculty = new Faculty();
                     $faculty->set_source($result->source);
                     $faculty->set_id($result->id);
                     $faculty->set_name($this->convert_to_utf8($result->name));
                     $faculty->set_year($this->convert_to_utf8($result->year));
-
+                    
                     $this->faculties[$faculty_id][$source] = $faculty;
                 }
             }
@@ -130,26 +130,26 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     public function retrieve_training($training_id)
     {
         $source = 1;
-
+        
         if (! isset($this->trainings[$training_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'),
+                new StaticColumnConditionVariable('id'), 
                 new StaticConditionVariable($training_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_training_advanced WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $training = new Training();
                     $training->set_source($result->source);
@@ -167,39 +167,39 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $training->set_faculty($this->convert_to_utf8($result->faculty));
                     $training->set_start_date($result->start_date);
                     $training->set_end_date($result->end_date);
-
+                    
                     $this->trainings[$training_id][$source] = $training;
                 }
             }
         }
-
+        
         return $this->trainings[$training_id][$source];
     }
 
     public function retrieve_programme($programme_id)
     {
         $source = 1;
-
+        
         if (! isset($this->course[$programme_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'),
+                new StaticColumnConditionVariable('id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                $object = $result = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                $object = $result = $statement->fetch(\PDO::FETCH_OBJ);
+                
                 if ($object instanceof \StdClass)
                 {
                     $course = new Course();
@@ -229,7 +229,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $course->set_jury($object->jury);
                     $course->set_repleacable($object->repleacable);
                     $course->set_training_unit($this->convert_to_utf8($object->training_unit));
-
+                    
                     $this->course[$programme_id][$source] = $course;
                 }
             }

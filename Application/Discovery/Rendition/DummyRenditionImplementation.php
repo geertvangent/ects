@@ -12,14 +12,14 @@ class DummyRenditionImplementation extends AbstractRenditionImplementation
 
     public function __construct($context, Module $module, $format, $view)
     {
-        parent :: __construct($context, $module);
+        parent::__construct($context, $module);
         $this->format = $format;
         $this->view = $view;
     }
 
     public function render()
     {
-        return Rendition :: launch($this);
+        return Rendition::launch($this);
     }
 
     public function get_view()

@@ -25,7 +25,7 @@ class Communication extends DataClass
      */
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     /**
@@ -36,19 +36,19 @@ class Communication extends DataClass
     {
         switch ($this->get_type())
         {
-            case self :: TYPE_DOMICILE :
+            case self::TYPE_DOMICILE :
                 return 'Domicile';
                 break;
-            case self :: TYPE_MOBILE :
+            case self::TYPE_MOBILE :
                 return 'Mobile';
                 break;
-            case self :: TYPE_ALTERNATIVE :
+            case self::TYPE_ALTERNATIVE :
                 return 'Alternative';
                 break;
-            case self :: TYPE_OFFICE :
+            case self::TYPE_OFFICE :
                 return 'Office';
                 break;
-            case self :: TYPE_EMERGENCY :
+            case self::TYPE_EMERGENCY :
                 return 'Emergency';
                 break;
         }
@@ -60,7 +60,7 @@ class Communication extends DataClass
      */
     public function get_device()
     {
-        return $this->get_default_property(self :: PROPERTY_DEVICE);
+        return $this->get_default_property(self::PROPERTY_DEVICE);
     }
 
     /**
@@ -71,19 +71,19 @@ class Communication extends DataClass
     {
         switch ($this->get_device())
         {
-            case self :: DEVICE_TELEPHONE :
+            case self::DEVICE_TELEPHONE :
                 return 'Telephone';
                 break;
-            case self :: DEVICE_FAX :
+            case self::DEVICE_FAX :
                 return 'Fax';
                 break;
-            case self :: DEVICE_MOBILE :
+            case self::DEVICE_MOBILE :
                 return 'Mobile';
                 break;
-            case self :: DEVICE_PAGER :
+            case self::DEVICE_PAGER :
                 return 'Pager';
                 break;
-            case self :: DEVICE_RADIO_TELEPHONE :
+            case self::DEVICE_RADIO_TELEPHONE :
                 return 'RadioTelephone';
                 break;
         }
@@ -95,7 +95,7 @@ class Communication extends DataClass
      */
     public function get_number()
     {
-        return $this->get_default_property(self :: PROPERTY_NUMBER);
+        return $this->get_default_property(self::PROPERTY_NUMBER);
     }
 
     /**
@@ -104,7 +104,7 @@ class Communication extends DataClass
      */
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     /**
@@ -113,7 +113,7 @@ class Communication extends DataClass
      */
     public function set_device($device)
     {
-        $this->set_default_property(self :: PROPERTY_DEVICE, $device);
+        $this->set_default_property(self::PROPERTY_DEVICE, $device);
     }
 
     /**
@@ -122,7 +122,7 @@ class Communication extends DataClass
      */
     public function set_number($number)
     {
-        $this->set_default_property(self :: PROPERTY_NUMBER, $number);
+        $this->set_default_property(self::PROPERTY_NUMBER, $number);
     }
 
     /**
@@ -131,11 +131,11 @@ class Communication extends DataClass
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_TYPE;
-        $extended_property_names[] = self :: PROPERTY_DEVICE;
-        $extended_property_names[] = self :: PROPERTY_NUMBER;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        $extended_property_names[] = self::PROPERTY_DEVICE;
+        $extended_property_names[] = self::PROPERTY_NUMBER;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

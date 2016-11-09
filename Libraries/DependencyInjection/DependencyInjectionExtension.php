@@ -21,7 +21,7 @@ class DependencyInjectionExtension extends Extension implements ExtensionInterfa
 
     /**
      * Loads a specific configuration.
-     *
+     * 
      * @param array $config An array of configuration values
      * @param ContainerBuilder $container A ContainerBuilder instance
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
@@ -30,14 +30,14 @@ class DependencyInjectionExtension extends Extension implements ExtensionInterfa
     public function load(array $config, ContainerBuilder $container)
     {
         $pathBuilder = new PathBuilder(new ClassnameUtilities(new StringUtilities()));
-
+        
         $loader = new XmlFileLoader(
-            $container,
+            $container, 
             new FileLocator($pathBuilder->getConfigurationPath('Ehb\Libraries') . 'DependencyInjection'));
-
+        
         $loader->load('storage.administration.xml');
         $loader->load('vendor.xml');
-
+        
         $xmlFileLoader = new XmlFileLoader($container, new FileLocator($pathBuilder->getStoragePath() . 'configuration'));
         $xmlFileLoader->load('configuration.ehb.xml');
     }
@@ -45,7 +45,7 @@ class DependencyInjectionExtension extends Extension implements ExtensionInterfa
     /**
      * Returns the recommended alias to use in XML.
      * This alias is also the mandatory prefix to use when using YAML.
-     *
+     * 
      * @return
      *
      */

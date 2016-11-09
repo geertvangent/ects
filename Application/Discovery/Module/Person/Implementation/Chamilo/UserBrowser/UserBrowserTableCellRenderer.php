@@ -32,6 +32,7 @@ class UserBrowserTableCellRenderer extends TableCellRenderer implements TableCol
         
         return $toolbar->as_html();
     }
+
     /*
      * (non-PHPdoc) @see \libraries\format\TableCellRenderer::render_id_cell()
      */

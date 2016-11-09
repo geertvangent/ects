@@ -17,23 +17,23 @@ class AdminsComponent extends Manager implements DelegateComponent
         ini_set("memory_limit", "-1");
         ini_set("max_execution_time", "18000");
         header('Content-Type: text/html; charset=utf-8');
-
+        
         try
         {
             echo '<pre>';
-            Synchronization :: log('Admins sync started', date('c', time()));
+            Synchronization::log('Admins sync started', date('c', time()));
             flush();
-
+            
             $synchronization = new AdminSynchronization();
             $synchronization->run();
-
-            Synchronization :: log('Admins sync ended', date('c', time()));
+            
+            Synchronization::log('Admins sync ended', date('c', time()));
             echo '</pre>';
         }
         catch (\Exception $exception)
         {
             echo 'Synchronization failed';
-            Synchronization :: log('Admins synchronization failed', date('c', time()));
+            Synchronization::log('Admins synchronization failed', date('c', time()));
         }
     }
 }

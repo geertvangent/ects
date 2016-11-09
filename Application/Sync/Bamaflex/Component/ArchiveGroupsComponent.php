@@ -22,17 +22,17 @@ class ArchiveGroupsComponent extends Manager implements DelegateComponent
         try
         {
             echo '<pre>';
-            Synchronization :: log('Group sync started', date('c', time()));
+            Synchronization::log('Group sync started', date('c', time()));
             flush();
             
-            $root_group = \Chamilo\Core\Group\Storage\DataManager :: get_root_group();
+            $root_group = \Chamilo\Core\Group\Storage\DataManager::get_root_group();
             
-            $synchronization = ArchiveGroupSynchronization :: factory(
+            $synchronization = ArchiveGroupSynchronization::factory(
                 'archive_academic_year', 
                 new ArchiveDummyGroupSynchronization($root_group));
             $synchronization->run();
             
-            Synchronization :: log('Group sync ended', date('c', time()));
+            Synchronization::log('Group sync ended', date('c', time()));
             echo '</pre>';
         }
         catch (\Exception $exception)

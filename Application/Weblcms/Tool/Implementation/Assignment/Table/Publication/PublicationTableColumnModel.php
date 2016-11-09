@@ -22,25 +22,25 @@ class PublicationTableColumnModel extends ObjectPublicationTableColumnModel
      * Inherited Functionality *
      * **************************************************************************************************************
      */
-
+    
     /**
      * Initializes the columns for the table
      */
     public function initialize_columns()
     {
-        parent :: initialize_columns();
-
+        parent::initialize_columns();
+        
         $this->add_column(
-            new DataClassPropertyTableColumn(Assignment :: class_name(), Assignment :: PROPERTY_END_TIME, null, false));
-
-        $this->add_column(new StaticTableColumn(self :: PROPERTY_ENTRY_COUNT));
-
+            new DataClassPropertyTableColumn(Assignment::class_name(), Assignment::PROPERTY_END_TIME, null, false));
+        
+        $this->add_column(new StaticTableColumn(self::PROPERTY_ENTRY_COUNT));
+        
         $this->add_column(
             new DataClassPropertyTableColumn(
-                Assignment :: class_name(),
-                Assignment :: PROPERTY_ALLOW_GROUP_SUBMISSIONS,
-                null,
-                false),
+                Assignment::class_name(), 
+                Assignment::PROPERTY_ALLOW_GROUP_SUBMISSIONS, 
+                null, 
+                false), 
             1);
     }
 }

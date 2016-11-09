@@ -16,21 +16,21 @@ class DepartmentGroupSynchronization extends GroupSynchronization
 
     public function get_code()
     {
-        return self :: IDENTIFIER . '_' . $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT_ID);
+        return self::IDENTIFIER . '_' . $this->get_parameter(self::RESULT_PROPERTY_DEPARTMENT_ID);
     }
 
     public function get_name()
     {
-        return $this->get_parameter(self :: RESULT_PROPERTY_DEPARTMENT);
+        return $this->get_parameter(self::RESULT_PROPERTY_DEPARTMENT);
     }
 
     public function get_children()
     {
         $children = array();
-        $children[] = GroupSynchronization :: factory('user_type_employee', $this);
-        $children[] = GroupSynchronization :: factory('user_type_teacher', $this);
-        $children[] = GroupSynchronization :: factory('user_type_guest_teacher', $this);
-        $children[] = GroupSynchronization :: factory('user_type_student', $this);
+        $children[] = GroupSynchronization::factory('user_type_employee', $this);
+        $children[] = GroupSynchronization::factory('user_type_teacher', $this);
+        $children[] = GroupSynchronization::factory('user_type_guest_teacher', $this);
+        $children[] = GroupSynchronization::factory('user_type_student', $this);
         return $children;
     }
 }

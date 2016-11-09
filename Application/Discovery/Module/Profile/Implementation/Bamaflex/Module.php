@@ -9,6 +9,6 @@ class Module extends \Ehb\Application\Discovery\Module\Profile\Module
     public function has_data($parameters = null)
     {
         $parameters = $parameters ? $parameters : $this->get_module_parameters();
-        return DataManager :: getInstance($this->get_module_instance())->has_profile($parameters);
+        return DataManager::getInstance($this->get_module_instance())->has_profile($parameters);
     }
 }

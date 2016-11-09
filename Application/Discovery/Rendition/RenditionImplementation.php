@@ -10,15 +10,16 @@ abstract class RenditionImplementation extends AbstractRenditionImplementation
 
     public static function launch(Module $module, $format, $view, $context)
     {
-        return self :: factory($module, $format, $view, $context)->render();
+        return self::factory($module, $format, $view, $context)->render();
     }
 
     public static function factory(Module $module, $format, $view, $context)
     {
-        $namespace = ClassnameUtilities :: getInstance()->getNamespaceFromObject($module);
-        $class = $namespace . '\Rendition\\' . StringUtilities :: getInstance()->createString($format)->upperCamelize() . '\\' . StringUtilities :: getInstance()->createString($format)->upperCamelize() .
-             StringUtilities :: getInstance()->createString($view)->upperCamelize() . 'RenditionImplementation';
-
+        $namespace = ClassnameUtilities::getInstance()->getNamespaceFromObject($module);
+        $class = $namespace . '\Rendition\\' . StringUtilities::getInstance()->createString($format)->upperCamelize() .
+             '\\' . StringUtilities::getInstance()->createString($format)->upperCamelize() .
+             StringUtilities::getInstance()->createString($view)->upperCamelize() . 'RenditionImplementation';
+        
         if (! class_exists($class, true))
         {
             return new DummyRenditionImplementation($context, $module, $format, $view);

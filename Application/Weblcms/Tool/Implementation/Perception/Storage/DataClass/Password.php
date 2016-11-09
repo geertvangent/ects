@@ -20,7 +20,7 @@ class Password extends DataClass
 
     public static function get_default_property_names($extended_property_names = array())
     {
-        return parent :: get_default_property_names(array(self :: PROPERTY_USER_ID, self :: PROPERTY_PASSWORD));
+        return parent::get_default_property_names(array(self::PROPERTY_USER_ID, self::PROPERTY_PASSWORD));
     }
 
     public function get_data_manager()
@@ -29,23 +29,23 @@ class Password extends DataClass
 
     public function get_user_id()
     {
-        return $this->get_default_property(self :: PROPERTY_USER_ID);
+        return $this->get_default_property(self::PROPERTY_USER_ID);
     }
 
     public function set_user_id($user)
     {
-        $this->set_default_property(self :: PROPERTY_USER_ID, $user);
+        $this->set_default_property(self::PROPERTY_USER_ID, $user);
     }
 
     public function get_user()
     {
         if (! isset($this->user))
         {
-            $this->user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-                User :: class_name(),
+            $this->user = \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
+                User::class_name(), 
                 (int) $this->get_user_id());
         }
-
+        
         return $this->user;
     }
 
@@ -56,11 +56,11 @@ class Password extends DataClass
 
     public function get_password()
     {
-        return $this->get_default_property(self :: PROPERTY_PASSWORD);
+        return $this->get_default_property(self::PROPERTY_PASSWORD);
     }
 
     public function set_password($user)
     {
-        $this->set_default_property(self :: PROPERTY_PASSWORD, $user);
+        $this->set_default_property(self::PROPERTY_PASSWORD, $user);
     }
 }

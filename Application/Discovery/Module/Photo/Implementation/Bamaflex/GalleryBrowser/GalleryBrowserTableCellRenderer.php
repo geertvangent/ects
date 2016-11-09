@@ -15,23 +15,23 @@ class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
      */
     public function renderContent($user)
     {
-        $photo = DataManager :: getInstance($this->get_component()->get_module_instance())->retrieve_photo(
+        $photo = DataManager::getInstance($this->get_component()->get_module_instance())->retrieve_photo(
             $user->get_official_code());
-
+        
         $profile_link = $this->get_component()->get_module_link(
-            'Ehb\Application\Discovery\Module\Profile\Implementation\Bamaflex',
+            'Ehb\Application\Discovery\Module\Profile\Implementation\Bamaflex', 
             $user->get_id());
-
+        
         $photoUrl = new Redirect(
             array(
-                Application :: PARAM_CONTEXT => \Ehb\Application\Discovery\Manager :: package(),
-                \Ehb\Application\Discovery\Manager :: PARAM_ACTION => \Ehb\Application\Discovery\Manager :: ACTION_PHOTO,
-                \Ehb\Application\Discovery\Component\PhotoComponent :: PARAM_PHOTO => $user->get_official_code()));
-
+                Application::PARAM_CONTEXT => \Ehb\Application\Discovery\Manager::package(), 
+                \Ehb\Application\Discovery\Manager::PARAM_ACTION => \Ehb\Application\Discovery\Manager::ACTION_PHOTO, 
+                \Ehb\Application\Discovery\Component\PhotoComponent::PARAM_PHOTO => $user->get_official_code()));
+        
         $html[] = '<a href="' . $profile_link->get_href() . '">';
         $html[] = '<img src="' . $photoUrl->getUrl() . '" style="width: 150px; border: 1px solid grey;"/>';
         $html[] = '</a>';
-
+        
         return implode(PHP_EOL, $html);
     }
 

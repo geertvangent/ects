@@ -20,25 +20,25 @@ class ComAuditTrail extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @return array The property names.
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        return parent :: get_default_property_names(
+        return parent::get_default_property_names(
             array(
-                self :: PROPERTY_USER,
-                self :: PROPERTY_CLIENT_IP,
-                self :: PROPERTY_SERVER_IP,
-                self :: PROPERTY_RESOURCE,
-                self :: PROPERTY_ACTION,
-                self :: PROPERTY_APPLICATION,
-                self :: PROPERTY_DATE));
+                self::PROPERTY_USER, 
+                self::PROPERTY_CLIENT_IP, 
+                self::PROPERTY_SERVER_IP, 
+                self::PROPERTY_RESOURCE, 
+                self::PROPERTY_ACTION, 
+                self::PROPERTY_APPLICATION, 
+                self::PROPERTY_DATE));
     }
 
     public function get_data_manager()
     {
-        return DataManager :: getInstance();
+        return DataManager::getInstance();
     }
 
     /**
@@ -47,7 +47,7 @@ class ComAuditTrail extends DataClass
      */
     public function get_user()
     {
-        return $this->get_default_property(self :: PROPERTY_USER);
+        return $this->get_default_property(self::PROPERTY_USER);
     }
 
     /**
@@ -56,7 +56,7 @@ class ComAuditTrail extends DataClass
      */
     public function get_client_ip()
     {
-        return $this->get_default_property(self :: PROPERTY_CLIENT_IP);
+        return $this->get_default_property(self::PROPERTY_CLIENT_IP);
     }
 
     /**
@@ -65,7 +65,7 @@ class ComAuditTrail extends DataClass
      */
     public function get_server_ip()
     {
-        return $this->get_default_property(self :: PROPERTY_SERVER_IP);
+        return $this->get_default_property(self::PROPERTY_SERVER_IP);
     }
 
     /**
@@ -74,7 +74,7 @@ class ComAuditTrail extends DataClass
      */
     public function get_resource()
     {
-        return $this->get_default_property(self :: PROPERTY_RESOURCE);
+        return $this->get_default_property(self::PROPERTY_RESOURCE);
     }
 
     /**
@@ -83,7 +83,7 @@ class ComAuditTrail extends DataClass
      */
     public function get_action()
     {
-        return $this->get_default_property(self :: PROPERTY_ACTION);
+        return $this->get_default_property(self::PROPERTY_ACTION);
     }
 
     /**
@@ -92,7 +92,7 @@ class ComAuditTrail extends DataClass
      */
     public function get_application()
     {
-        return $this->get_default_property(self :: PROPERTY_APPLICATION);
+        return $this->get_default_property(self::PROPERTY_APPLICATION);
     }
 
     /**
@@ -101,7 +101,7 @@ class ComAuditTrail extends DataClass
      */
     public function get_date()
     {
-        return $this->get_default_property(self :: PROPERTY_DATE);
+        return $this->get_default_property(self::PROPERTY_DATE);
     }
 
     /**
@@ -110,7 +110,7 @@ class ComAuditTrail extends DataClass
      */
     public function set_user($user)
     {
-        $this->set_default_property(self :: PROPERTY_USER, $user);
+        $this->set_default_property(self::PROPERTY_USER, $user);
     }
 
     /**
@@ -119,7 +119,7 @@ class ComAuditTrail extends DataClass
      */
     public function set_client_ip($client_ip)
     {
-        $this->set_default_property(self :: PROPERTY_CLIENT_IP, $client_ip);
+        $this->set_default_property(self::PROPERTY_CLIENT_IP, $client_ip);
     }
 
     /**
@@ -128,7 +128,7 @@ class ComAuditTrail extends DataClass
      */
     public function set_server_ip($server_ip)
     {
-        $this->set_default_property(self :: PROPERTY_SERVER_IP, $server_ip);
+        $this->set_default_property(self::PROPERTY_SERVER_IP, $server_ip);
     }
 
     /**
@@ -137,7 +137,7 @@ class ComAuditTrail extends DataClass
      */
     public function set_resource($resource)
     {
-        $this->set_default_property(self :: PROPERTY_RESOURCE, $resource);
+        $this->set_default_property(self::PROPERTY_RESOURCE, $resource);
     }
 
     /**
@@ -146,7 +146,7 @@ class ComAuditTrail extends DataClass
      */
     public function set_action($action)
     {
-        $this->set_default_property(self :: PROPERTY_ACTION, $action);
+        $this->set_default_property(self::PROPERTY_ACTION, $action);
     }
 
     /**
@@ -155,7 +155,7 @@ class ComAuditTrail extends DataClass
      */
     public function set_application($application)
     {
-        $this->set_default_property(self :: PROPERTY_APPLICATION, $application);
+        $this->set_default_property(self::PROPERTY_APPLICATION, $application);
     }
 
     /**
@@ -164,7 +164,7 @@ class ComAuditTrail extends DataClass
      */
     public function set_date($date)
     {
-        $this->set_default_property(self :: PROPERTY_date, $date);
+        $this->set_default_property(self::PROPERTY_date, $date);
     }
 
     /**
@@ -173,6 +173,6 @@ class ComAuditTrail extends DataClass
      */
     public static function get_table_name()
     {
-        return strtoupper(parent :: get_table_name());
+        return strtoupper(parent::get_table_name());
     }
 }

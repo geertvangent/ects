@@ -11,10 +11,10 @@ class PasswordTableCellRenderer extends DataClassTableCellRenderer
     {
         switch ($column->get_name())
         {
-            case Translation :: get('User') :
+            case Translation::get('User') :
                 return $object->get_user()->get_fullname();
         }
         
-        return parent :: render_cell($column, $object);
+        return parent::render_cell($column, $object);
     }
 }

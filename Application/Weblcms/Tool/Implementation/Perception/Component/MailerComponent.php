@@ -25,17 +25,17 @@ class MailerComponent extends Manager
     {
         // Just in case new users were added ...
         $this->generate_passwords();
-
+        
         $users_ids = DataManager::get_course_user_ids($this->get_course_id());
         $passwords = DataManager::retrieves(
-            Password::class_name(),
+            Password::class_name(), 
             new DataClassRetrievesParameters(
                 new InCondition(
-                    new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID),
+                    new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID), 
                     $users_ids)));
-
+        
         $failures = 0;
-
+        
         while ($password = $passwords->next_result())
         {
             if (! $this->send_mail($password))
@@ -43,7 +43,7 @@ class MailerComponent extends Manager
                 $failures ++;
             }
         }
-
+        
         if ($failures)
         {
             if ($passwords->size() == 1)
@@ -70,45 +70,45 @@ class MailerComponent extends Manager
                 $message = 'PasswordsMailed';
             }
         }
-
+        
         $this->redirect(
-            Translation::get($message),
-            ($failures ? true : false),
+            Translation::get($message), 
+            ($failures ? true : false), 
             array(self::PARAM_ACTION => self::ACTION_BROWSE));
     }
 
     public function send_mail($password)
     {
         set_time_limit(3600);
-
+        
         $recipient = $password->get_user();
-
+        
         $title = Translation::get('PasswordMailTitle', array('PLATFORM' => PlatformSetting::get('site_name')));
-
+        
         $body = Translation::get(
-            'PasswordMailBody',
+            'PasswordMailBody', 
             array(
-                'USER' => $recipient->get_fullname(),
-                'EMAIL' => $recipient->get_email(),
-                'PLATFORM' => PlatformSetting::get('site_name'),
-                'SENDER' => $this->get_user()->get_fullname(),
+                'USER' => $recipient->get_fullname(), 
+                'EMAIL' => $recipient->get_email(), 
+                'PLATFORM' => PlatformSetting::get('site_name'), 
+                'SENDER' => $this->get_user()->get_fullname(), 
                 'PASSWORD' => $password->get_password()));
-
+        
         $mail = Mail::factory(
-            $title,
-            $body,
-            array($recipient->get_email()),
+            $title, 
+            $body, 
+            array($recipient->get_email()), 
             array(Mail::NAME => $this->get_user()->get_fullname(), Mail::EMAIL => $this->get_user()->get_email()));
-
+        
         $mail->send();
-
+        
         return true;
     }
 
     public function generate_passwords()
     {
         $result = DataManager::generate_passwords($this->get_course_id());
-
+        
         if ($result[DataManager::GENERATION_FAILURES] > 0)
         {
             if ($result[DataManager::GENERATION_ATTEMPTS] == 1)
@@ -123,10 +123,10 @@ class MailerComponent extends Manager
             {
                 $message = 'PasswordsNotGenerated';
             }
-
+            
             $this->redirect(
-                Translation::get($message),
-                (($result[DataManager::GENERATION_FAILURES] > 0) ? true : false),
+                Translation::get($message), 
+                (($result[DataManager::GENERATION_FAILURES] > 0) ? true : false), 
                 array(self::PARAM_ACTION => self::ACTION_BROWSE));
             exit();
         }

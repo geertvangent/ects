@@ -40,7 +40,7 @@ class CourseCategorySynchronization extends Synchronization
 
     public function __construct(CourseCategorySynchronization $synchronization, $parameters)
     {
-        parent :: __construct();
+        parent::__construct();
         $this->synchronization = $synchronization;
         $this->parameters = $parameters;
         $this->determine_current_group();
@@ -50,7 +50,7 @@ class CourseCategorySynchronization extends Synchronization
     {
         $this->synchronize();
         $children = $this->get_children();
-
+        
         foreach ($children as $child)
         {
             $child->run();
@@ -67,7 +67,7 @@ class CourseCategorySynchronization extends Synchronization
     public static function factory($type, CourseCategorySynchronization $synchronization, $parameters = array())
     {
         $class = __NAMESPACE__ . '\CourseCategory\\' .
-             StringUtilities :: getInstance()->createString($type)->upperCamelize() . 'CourseCategorySynchronization';
+             StringUtilities::getInstance()->createString($type)->upperCamelize() . 'CourseCategorySynchronization';
         if (class_exists($class))
         {
             return new $class($synchronization, $parameters);
@@ -76,7 +76,7 @@ class CourseCategorySynchronization extends Synchronization
 
     public function determine_current_group()
     {
-        $this->current_group = \Chamilo\Application\Weblcms\Storage\DataManager :: retrieve_course_category_by_code(
+        $this->current_group = \Chamilo\Application\Weblcms\Storage\DataManager::retrieve_course_category_by_code(
             $this->get_code());
     }
 
@@ -153,15 +153,15 @@ class CourseCategorySynchronization extends Synchronization
         if (! $this->exists())
         {
             $name = $this->convert_to_utf8($this->get_name());
-
+            
             $this->current_group = new CourseCategory();
             $this->current_group->set_name($name);
             $this->current_group->set_code($this->get_code());
             $this->current_group->set_parent($this->get_parent_group()->get_id());
-
+            
             $this->current_group->create();
-
-            self :: log('added', $this->current_group->get_name());
+            
+            self::log('added', $this->current_group->get_name());
             flush();
         }
         else
@@ -173,7 +173,7 @@ class CourseCategorySynchronization extends Synchronization
                 $this->current_group->update();
             }
         }
-
+        
         return $this->current_group;
     }
 

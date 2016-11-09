@@ -25,10 +25,10 @@ class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
     public function get_available_browser_types()
     {
         $browserTypes = array();
-
-        $browserTypes[] = ContentObjectPublicationListRenderer :: TYPE_TABLE;
-        $browserTypes[] = ContentObjectPublicationListRenderer :: TYPE_LIST;
-
+        
+        $browserTypes[] = ContentObjectPublicationListRenderer::TYPE_TABLE;
+        $browserTypes[] = ContentObjectPublicationListRenderer::TYPE_LIST;
+        
         return $browserTypes;
     }
 
@@ -38,12 +38,12 @@ class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
      */
     public static function get_allowed_types()
     {
-        return array(Assignment :: class_name());
+        return array(Assignment::class_name());
     }
 
     /**
      * Adds extra actions to the toolbar in different components
-     *
+     * 
      * @param \Chamilo\Libraries\Format\Structure\Toolbar $toolbar
      * @param string[] $publication
      * @return \Chamilo\Libraries\Format\Structure\Toolbar
@@ -52,25 +52,25 @@ class Manager extends \Chamilo\Application\Weblcms\Tool\Manager
     {
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('BrowseSubmitters'),
-                Theme :: getInstance()->getCommonImagePath('Action/Browser'),
+                Translation::get('BrowseSubmitters'), 
+                Theme::getInstance()->getCommonImagePath('Action/Browser'), 
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID])),
-                ToolbarItem :: DISPLAY_ICON));
-
+                        \Chamilo\Application\Weblcms\Tool\Manager::PARAM_ACTION => self::ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT, 
+                        \Chamilo\Application\Weblcms\Tool\Manager::PARAM_PUBLICATION_ID => $publication[ContentObjectPublication::PROPERTY_ID])), 
+                ToolbarItem::DISPLAY_ICON));
+        
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('SubmissionSubmit'),
-                Theme :: getInstance()->getCommonImagePath('Action/Add'),
+                Translation::get('SubmissionSubmit'), 
+                Theme::getInstance()->getCommonImagePath('Action/Add'), 
                 $this->get_url(
                     array(
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_ACTION => self :: ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT,
-                        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: PARAM_ACTION => \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager :: ACTION_SUBMIT,
-                        \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID => $publication[ContentObjectPublication :: PROPERTY_ID])),
-                ToolbarItem :: DISPLAY_ICON));
-
+                        \Chamilo\Application\Weblcms\Tool\Manager::PARAM_ACTION => self::ACTION_DISPLAY_COMPLEX_CONTENT_OBJECT, 
+                        \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager::PARAM_ACTION => \Chamilo\Core\Repository\ContentObject\Assignment\Display\Manager::ACTION_SUBMIT, 
+                        \Chamilo\Application\Weblcms\Tool\Manager::PARAM_PUBLICATION_ID => $publication[ContentObjectPublication::PROPERTY_ID])), 
+                ToolbarItem::DISPLAY_ICON));
+        
         return $toolbar;
     }
 }

@@ -18,7 +18,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
     const PARAM_FACULTY = 'faculty';
     const PARAM_TYPE = 'type';
     const PARAM_TEXT = 'text';
-
+    
     // Properties
     const PROPERTY_FILTER = 'filter';
     const PROPERTY_YEAR = 'year';
@@ -67,19 +67,19 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
     public function run()
     {
         $jsonAjaxResult = new JsonAjaxResult();
-
+        
         $jsonAjaxResult->set_properties(
             array(
                 self::PROPERTY_FILTER => array(
-                    self::PROPERTY_YEAR => $this->getCurrentYear(),
-                    self::PROPERTY_FACULTY => $this->getCurrentFaculty(),
-                    self::PROPERTY_TYPE => $this->getCurrentType(),
-                    self::PROPERTY_TEXT => $this->getCurrentText()),
-                self::PROPERTY_YEAR => $this->getYears(),
-                self::PROPERTY_FACULTY => $this->getFaculties(),
-                self::PROPERTY_TYPE => $this->getTypes(),
+                    self::PROPERTY_YEAR => $this->getCurrentYear(), 
+                    self::PROPERTY_FACULTY => $this->getCurrentFaculty(), 
+                    self::PROPERTY_TYPE => $this->getCurrentType(), 
+                    self::PROPERTY_TEXT => $this->getCurrentText()), 
+                self::PROPERTY_YEAR => $this->getYears(), 
+                self::PROPERTY_FACULTY => $this->getFaculties(), 
+                self::PROPERTY_TYPE => $this->getTypes(), 
                 self::PROPERTY_TRAINING => $this->getTrainings()));
-
+        
         $jsonAjaxResult->display();
     }
 
@@ -92,13 +92,13 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
         if (! isset($this->currentYear))
         {
             $this->currentYear = $this->getRequestedPostDataValue(self::PARAM_YEAR);
-
+            
             if (empty($this->currentYear))
             {
                 $this->currentYear = array_shift($this->getBaMaFlexService()->getYears());
             }
         }
-
+        
         return $this->currentYear;
     }
 
@@ -112,7 +112,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
         {
             $this->currentFacultyIdentifier = $this->getRequestedPostDataValue(self::PARAM_FACULTY);
         }
-
+        
         return $this->currentFacultyIdentifier;
     }
 
@@ -126,7 +126,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
         {
             $this->currentTypeIdentifier = $this->getRequestedPostDataValue(self::PARAM_TYPE);
         }
-
+        
         return $this->currentTypeIdentifier;
     }
 
@@ -140,7 +140,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
         {
             $this->currentText = $this->getRequestedPostDataValue(self::PARAM_TEXT);
         }
-
+        
         return $this->currentText;
     }
 
@@ -169,7 +169,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
     private function getTypes()
     {
         return $this->getBaMaFlexService()->getTypesForYearAndFacultyIdentifier(
-            $this->getCurrentYear(),
+            $this->getCurrentYear(), 
             $this->getCurrentFacultyIdentifier());
     }
 
@@ -180,11 +180,11 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
     private function getTrainings()
     {
         $trainings = $this->getBaMaFlexService()->getTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
-            $this->getCurrentYear(),
-            $this->getCurrentFacultyIdentifier(),
-            $this->getCurrentTypeIdentifier(),
+            $this->getCurrentYear(), 
+            $this->getCurrentFacultyIdentifier(), 
+            $this->getCurrentTypeIdentifier(), 
             $this->getCurrentText());
-
+        
         return $trainings;
     }
 
@@ -201,7 +201,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
                 return $faculty;
             }
         }
-
+        
         return null;
     }
 
@@ -218,7 +218,7 @@ class FilterComponent extends \Ehb\Application\Ects\Ajax\Manager implements NoAu
                 return $type;
             }
         }
-
+        
         return null;
     }
 }

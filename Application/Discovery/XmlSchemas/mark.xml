@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object name="mark" namespace="application\discovery\module\career">
-	<properties>
-		<property name="moment" type="string" />
-		<property name="result" type="string" />
-		<property name="status" type="string" />
-	</properties>
+<object
+    name="mark"
+    namespace="application\discovery\module\career">
+    <properties>
+        <property
+            name="moment"
+            type="string" />
+        <property
+            name="result"
+            type="string" />
+        <property
+            name="status"
+            type="string" />
+    </properties>
 </object>

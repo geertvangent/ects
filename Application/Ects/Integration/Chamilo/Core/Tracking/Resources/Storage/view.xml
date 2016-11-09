@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object name="view">
-	<properties>
-		<property name="id" type="integer" unsigned="1" notnull="1" autoincrement="true" />
-		<property name="session_id" type="text" />
-		<property name="date" type="integer" unsigned="1" notnull="1" />
-		<property name="entity_type" type="integer" unsigned="1" notnull="1" />
-		<property name="entity_id" type="integer" unsigned="1" notnull="1" />
-	</properties>
+    <properties>
+        <property
+            name="id"
+            type="integer"
+            unsigned="1"
+            notnull="1"
+            autoincrement="true" />
+        <property
+            name="session_id"
+            type="text" />
+        <property
+            name="date"
+            type="integer"
+            unsigned="1"
+            notnull="1" />
+        <property
+            name="entity_type"
+            type="integer"
+            unsigned="1"
+            notnull="1" />
+        <property
+            name="entity_id"
+            type="integer"
+            unsigned="1"
+            notnull="1" />
+    </properties>
 </object>

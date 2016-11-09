@@ -5,5 +5,4 @@ use Chamilo\Libraries\Format\Table\Extension\GalleryTable\Extension\DataClassGal
 
 class GalleryBrowserTable extends DataClassGalleryTable
 {
-
 }

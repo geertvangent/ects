@@ -18,7 +18,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
 {
     // Parameters
     const PARAM_TRAINING = 'training';
-
+    
     // Properties
     const PROPERTY_TRAJECTORIES = 'trajectories';
 
@@ -44,9 +44,9 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
     public function run()
     {
         $jsonAjaxResult = new JsonAjaxResult();
-
+        
         $jsonAjaxResult->set_properties($this->getTrainingProperties());
-
+        
         $this->trackView();
         $jsonAjaxResult->display();
     }
@@ -61,7 +61,7 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
         {
             $this->currentTrainingIdentifier = $this->getRequestedPostDataValue(self::PARAM_TRAINING);
         }
-
+        
         return $this->currentTrainingIdentifier;
     }
 
@@ -77,20 +77,20 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
     private function getTrainingProperties()
     {
         $properties = $this->filterProperties(
-            $this->getTraining()->get_default_properties(),
+            $this->getTraining()->get_default_properties(), 
             array(
-                Training::PROPERTY_ID,
-                Training::PROPERTY_YEAR,
-                Training::PROPERTY_NAME,
-                Training::PROPERTY_FACULTY_ID,
-                Training::PROPERTY_FACULTY,
-                Training::PROPERTY_DOMAIN_ID,
-                Training::PROPERTY_DOMAIN,
-                Training::PROPERTY_CREDITS,
+                Training::PROPERTY_ID, 
+                Training::PROPERTY_YEAR, 
+                Training::PROPERTY_NAME, 
+                Training::PROPERTY_FACULTY_ID, 
+                Training::PROPERTY_FACULTY, 
+                Training::PROPERTY_DOMAIN_ID, 
+                Training::PROPERTY_DOMAIN, 
+                Training::PROPERTY_CREDITS, 
                 Training::PROPERTY_GOALS));
-
+        
         $properties[self::PROPERTY_TRAJECTORIES] = $this->getTrajectories();
-
+        
         return $properties;
     }
 
@@ -99,19 +99,19 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
         $trajectories = $this->getBaMaFlexService()->getTrajectoriesForTrainingIdentifier(
             $this->getCurrentTrainingIdentifier());
         $structuredTrajectories = array();
-
+        
         foreach ($trajectories as $trajectory)
         {
             $structuredTrajectory = array();
             $structuredTrajectory[Trajectory::PROPERTY_ID] = $trajectory[Trajectory::PROPERTY_ID];
             $structuredTrajectory[Trajectory::PROPERTY_NAME] = $trajectory[Trajectory::PROPERTY_NAME];
-
+            
             $structuredTrajectory[self::PROPERTY_TRAJECTORIES] = $this->getBaMaFlexService()->getSubTrajectoriesForTrajectoryIdentifier(
                 $trajectory[Trajectory::PROPERTY_ID]);
-
+            
             $structuredTrajectories[] = $structuredTrajectory;
         }
-
+        
         return $structuredTrajectories;
     }
 
@@ -120,12 +120,12 @@ class TrainingComponent extends \Ehb\Application\Ects\Ajax\Manager implements No
         try
         {
             Event::trigger(
-                'View',
-                \Ehb\Application\Ects\Manager::context(),
+                'View', 
+                \Ehb\Application\Ects\Manager::context(), 
                 array(
-                    View::PROPERTY_SESSION_ID => session_id(),
-                    View::PROPERTY_DATE => time(),
-                    View::PROPERTY_ENTITY_TYPE => View::TYPE_TRAINING,
+                    View::PROPERTY_SESSION_ID => session_id(), 
+                    View::PROPERTY_DATE => time(), 
+                    View::PROPERTY_ENTITY_TYPE => View::TYPE_TRAINING, 
                     View::PROPERTY_ENTITY_ID => $this->getCurrentTrainingIdentifier()));
         }
         catch (\Exception $exception)

@@ -32,7 +32,7 @@ class Search extends Tracker
         $extended_property_names[] = self::PROPERTY_FACULTY;
         $extended_property_names[] = self::PROPERTY_TYPE;
         $extended_property_names[] = self::PROPERTY_TEXT;
-
+        
         return parent::get_default_property_names($extended_property_names);
     }
 
@@ -153,13 +153,13 @@ class Search extends Tracker
         $this->setSessionId($parameters[self::PROPERTY_SESSION_ID]);
         $this->setDate($parameters[self::PROPERTY_DATE]);
         $this->setYear($parameters[self::PROPERTY_YEAR]);
-
+        
         $facultyValue = $parameters[self::PROPERTY_FACULTY] ? (int) $parameters[self::PROPERTY_FACULTY] : null;
         $this->setFaculty($facultyValue);
-
+        
         $typeValue = $parameters[self::PROPERTY_TYPE] ? (int) $parameters[self::PROPERTY_TYPE] : null;
         $this->setType($typeValue);
-
+        
         $this->setText($parameters[self::PROPERTY_TEXT]);
     }
 }

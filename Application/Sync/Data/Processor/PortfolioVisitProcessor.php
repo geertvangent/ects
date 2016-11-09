@@ -13,7 +13,7 @@ use Ehb\Application\Sync\Data\Storage\DataManager\DataManager;
  * Upgrades the visit tracker table into the course visit tracker table.
  * This script has been separated from the normal
  * upgrade procedure because of the amount of data and time it takes to finish this upgrade.
- *
+ * 
  * @author Sven Vanpoucke - Hogeschool Gent
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  */
@@ -22,7 +22,7 @@ class PortfolioVisitProcessor
 
     /**
      * The logger object
-     *
+     * 
      * @var FileLogger
      */
     private $logger;
@@ -31,7 +31,7 @@ class PortfolioVisitProcessor
      * A chamilo DM to execute the queries.
      * We use this DM because the credentials are stored in Chamilo and we can
      * reuse them
-     *
+     * 
      * @var mixed
      */
     private $dm;
@@ -53,8 +53,8 @@ class PortfolioVisitProcessor
      */
     public function run()
     {
-        $this->dm = \Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataManager :: getInstance();
-
+        $this->dm = \Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataManager::getInstance();
+        
         try
         {
             $this->process_visit_tracker();
@@ -67,18 +67,18 @@ class PortfolioVisitProcessor
 
     /**
      * Upgrades the course visit tracker
-     *
+     * 
      * @return bool
      */
     protected function process_visit_tracker()
     {
         $parameters = new DataClassRetrieveParameters(
-            null,
+            null, 
             array(
                 new OrderBy(
-                    new PropertyConditionVariable(PortfolioVisit :: class_name(), PortfolioVisit :: PROPERTY_ACCESS_DATE))));
-        $last_visit = DataManager :: retrieve(PortfolioVisit :: class_name(), $parameters);
-
+                    new PropertyConditionVariable(PortfolioVisit::class_name(), PortfolioVisit::PROPERTY_ACCESS_DATE))));
+        $last_visit = DataManager::retrieve(PortfolioVisit::class_name(), $parameters);
+        
         if (! $last_visit instanceof PortfolioVisit)
         {
             $start_time = 0;
@@ -87,30 +87,30 @@ class PortfolioVisitProcessor
         {
             $start_time = $last_visit->get_access_date();
         }
-
+        
         $end_time = time() - 86400;
-
+        
         $pattern = '%application=%portfolio%';
         $offset = 0;
         $count = 100000;
-
+        
         $base_query = 'SELECT * FROM tracking_user_visit WHERE enter_date > ' . $start_time . ' AND enter_date <= ' .
              $end_time . ' AND location LIKE "' . $pattern . '" LIMIT ';
-
+        
         do
         {
             $query = $base_query . $offset . ', ' . $count;
-
+            
             $row_counter = 0;
-
+            
             $result = $this->dm->get_connection()->query($query);
             $resultSize = $result->rowCount();
-            while ($visit_tracker_row = $result->fetch(\PDO :: FETCH_ASSOC))
+            while ($visit_tracker_row = $result->fetch(\PDO::FETCH_ASSOC))
             {
                 $this->handle_visit_tracker($visit_tracker_row);
                 $row_counter ++;
             }
-
+            
             $offset += $count;
             $this->log('Upgraded ' . $resultSize . ' records');
             flush();
@@ -120,35 +120,35 @@ class PortfolioVisitProcessor
 
     /**
      * Handles a single visit tracker
-     *
+     * 
      * @param Visit $visit_tracker
      *
      * @return bool
      */
     protected function handle_visit_tracker($visit_tracker)
     {
-        $location = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LOCATION];
-        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_USER_ID];
-
+        $location = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit::PROPERTY_LOCATION];
+        $user_id = $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit::PROPERTY_USER_ID];
+        
         $query = array();
-
+        
         $url_parts = parse_url($location);
         parse_str($url_parts['query'], $query);
-
+        
         $portfolio_id = $query['poid'];
         if (! $portfolio_id)
         {
             $portfolio_id = $query['user_id'];
         }
-
+        
         $publication_id = $query['pid'];
-
+        
         $item_id = $query['cid'];
         if (! $item_id)
         {
             $item_id = $query['step'];
         }
-
+        
         /**
          * When multiple publications are used, it's mostly due to table actions and the publication is not really
          * visited
@@ -157,26 +157,26 @@ class PortfolioVisitProcessor
         {
             return false;
         }
-
+        
         $visit = new PortfolioVisit();
         $visit->set_user_id($user_id);
         $visit->set_portfolio_id($portfolio_id);
         $visit->set_publication_id($publication_id);
         $visit->set_item_id($item_id);
         $visit->set_access_date(
-            $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
+            $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit::PROPERTY_ENTER_DATE]);
         $visit->set_time(
-            $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_LEAVE_DATE] -
-                 $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit :: PROPERTY_ENTER_DATE]);
-
+            $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit::PROPERTY_LEAVE_DATE] -
+                 $visit_tracker[\Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataClass\Visit::PROPERTY_ENTER_DATE]);
+        
         if (! $visit->save())
         {
             return false;
         }
-
+        
         unset($visit);
-        DataClassCache :: reset();
-
+        DataClassCache::reset();
+        
         return true;
     }
 }

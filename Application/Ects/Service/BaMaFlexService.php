@@ -83,13 +83,13 @@ class BaMaFlexService
      * @param string $text
      * @return string[][]
      */
-    public function getTrainingsForYearFacultyIdentifierTypeIdentifierAndText($year, $facultyIdentifier = null,
+    public function getTrainingsForYearFacultyIdentifierTypeIdentifierAndText($year, $facultyIdentifier = null, 
         $typeIdentifier = null, $text = null)
     {
         return $this->getBaMaFlexRepository()->findTrainingsForYearFacultyIdentifierTypeIdentifierAndText(
-            $year,
-            $facultyIdentifier,
-            $typeIdentifier,
+            $year, 
+            $facultyIdentifier, 
+            $typeIdentifier, 
             $text);
     }
 

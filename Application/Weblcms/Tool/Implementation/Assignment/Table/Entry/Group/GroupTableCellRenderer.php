@@ -21,12 +21,12 @@ abstract class GroupTableCellRenderer extends \Chamilo\Core\Repository\ContentOb
 
     public function render_cell($column, $entity)
     {
-        if ($column->get_name() == GroupTableColumnModel :: PROPERTY_GROUP_MEMBERS)
+        if ($column->get_name() == GroupTableColumnModel::PROPERTY_GROUP_MEMBERS)
         {
             return $this->getGroupMembers($entity);
         }
-
-        return parent :: render_cell($column, $entity);
+        
+        return parent::render_cell($column, $entity);
     }
 
     /**
@@ -36,50 +36,50 @@ abstract class GroupTableCellRenderer extends \Chamilo\Core\Repository\ContentOb
      */
     protected function getGroupMembers($group)
     {
-        $entityId = $group[Entry :: PROPERTY_ENTITY_ID];
-
+        $entityId = $group[Entry::PROPERTY_ENTITY_ID];
+        
         $limit = 21;
-
+        
         $orderProperties = array();
-        $orderProperties[] = new OrderBy(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_LASTNAME));
-        $orderProperties[] = new OrderBy(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_FIRSTNAME));
-
+        $orderProperties[] = new OrderBy(new PropertyConditionVariable(User::class_name(), User::PROPERTY_LASTNAME));
+        $orderProperties[] = new OrderBy(new PropertyConditionVariable(User::class_name(), User::PROPERTY_FIRSTNAME));
+        
         $userIds = $this->retrieveGroupUserIds($entityId);
-
-        $condition = new InCondition(new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ID), $userIds);
-
-        $users = \Chamilo\Core\User\Storage\DataManager :: retrieves(
-            User :: class_name(),
+        
+        $condition = new InCondition(new PropertyConditionVariable(User::class_name(), User::PROPERTY_ID), $userIds);
+        
+        $users = \Chamilo\Core\User\Storage\DataManager::retrieves(
+            User::class_name(), 
             new DataClassRetrievesParameters($condition, $limit, null, $orderProperties))->as_array();
-
+        
         if (count($users) == 0)
         {
             return null;
         }
-
+        
         $exceedsLimit = false;
-
+        
         if (count($users) == $limit)
         {
             $exceedsLimit = true;
             array_pop($users);
         }
-
+        
         $html = array();
         $html[] = '<select style="width:180px">';
-
+        
         foreach ($users as $user)
         {
             $html[] = '<option>' . $user->get_fullname() . '</option>';
         }
-
+        
         if ($exceedsLimit)
         {
             $html[] = '<option>...</option>';
         }
-
+        
         $html[] = '</select>';
-
+        
         return implode(PHP_EOL, $html);
     }
 
@@ -118,12 +118,12 @@ abstract class GroupTableCellRenderer extends \Chamilo\Core\Repository\ContentOb
         {
             return true;
         }
-
+        
         if ($entity->has_children())
         {
             return $this->isSubgroupMember($entity, $userId);
         }
-
+        
         return false;
     }
 

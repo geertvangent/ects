@@ -14,10 +14,10 @@ class HtmlDefaultRendition extends HtmlRendition
 
     public function render()
     {
-        BreadcrumbTrail :: getInstance()->add(
+        BreadcrumbTrail::getInstance()->add(
             new Breadcrumb(
-                null,
-                Translation :: get('TypeName', null, ClassnameUtilities :: getInstance()->getNamespaceFromObject($this))));
+                null, 
+                Translation::get('TypeName', null, ClassnameUtilities::getInstance()->getNamespaceFromObject($this))));
         $html = array();
         if (is_null($this->get_rendition_implementation()->module_parameters()->get_year()))
         {
@@ -29,26 +29,26 @@ class HtmlDefaultRendition extends HtmlRendition
             $current_year = $this->get_rendition_implementation()->module_parameters()->get_year();
         }
         $tabs = new DynamicVisualTabsRenderer(
-            'training_list',
+            'training_list', 
             $this->get_rendition_implementation()->get_trainings_table($current_year)->as_html());
-
+        
         foreach ($this->get_rendition_implementation()->get_years() as $year)
         {
-
+            
             $parameters = $this->get_rendition_implementation()->module_parameters();
             $parameters->set_year($year);
             $tabs->add_tab(
                 new DynamicVisualTab(
-                    $year,
-                    $year,
-                    null,
+                    $year, 
+                    $year, 
+                    null, 
                     $this->get_rendition_implementation()->get_instance_url(
-                        $this->get_rendition_implementation()->get_module_instance()->get_id(),
-                        $parameters),
+                        $this->get_rendition_implementation()->get_module_instance()->get_id(), 
+                        $parameters), 
                     $current_year == $year));
         }
         $html[] = $tabs->render();
-
+        
         return implode(PHP_EOL, $html);
     }
 }
