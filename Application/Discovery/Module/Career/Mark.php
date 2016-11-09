@@ -6,12 +6,12 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.career.discovery
- *
+ * 
  * @author Hans De Bisschop
  */
 class Mark extends DataClass
 {
-
+    
     /**
      * Mark properties
      */
@@ -21,22 +21,22 @@ class Mark extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_MOMENT;
-        $extended_property_names[] = self :: PROPERTY_RESULT;
-        $extended_property_names[] = self :: PROPERTY_STATUS;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_MOMENT;
+        $extended_property_names[] = self::PROPERTY_RESULT;
+        $extended_property_names[] = self::PROPERTY_STATUS;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -46,42 +46,42 @@ class Mark extends DataClass
 
     /**
      * Returns the moment of this Mark.
-     *
+     * 
      * @return string The moment.
      */
     public function get_moment()
     {
-        return $this->get_default_property(self :: PROPERTY_MOMENT);
+        return $this->get_default_property(self::PROPERTY_MOMENT);
     }
 
     /**
      * Sets the moment of this Mark.
-     *
+     * 
      * @param string $moment
      */
     public function set_moment($moment)
     {
-        $this->set_default_property(self :: PROPERTY_MOMENT, $moment);
+        $this->set_default_property(self::PROPERTY_MOMENT, $moment);
     }
 
     /**
      * Returns the result of this Mark.
-     *
+     * 
      * @return string The result.
      */
     public function get_result()
     {
-        return $this->get_default_property(self :: PROPERTY_RESULT);
+        return $this->get_default_property(self::PROPERTY_RESULT);
     }
 
     /**
      * Sets the result of this Mark.
-     *
+     * 
      * @param string $result
      */
     public function set_result($result)
     {
-        $this->set_default_property(self :: PROPERTY_RESULT, $result);
+        $this->set_default_property(self::PROPERTY_RESULT, $result);
     }
 
     public function get_visual_result()
@@ -91,22 +91,22 @@ class Mark extends DataClass
 
     /**
      * Returns the status of this Mark.
-     *
+     * 
      * @return string The status.
      */
     public function get_status()
     {
-        return $this->get_default_property(self :: PROPERTY_STATUS);
+        return $this->get_default_property(self::PROPERTY_STATUS);
     }
 
     /**
      * Sets the status of this Mark.
-     *
+     * 
      * @param string $status
      */
     public function set_status($status)
     {
-        $this->set_default_property(self :: PROPERTY_STATUS, $status);
+        $this->set_default_property(self::PROPERTY_STATUS, $status);
     }
 
     /**
@@ -115,7 +115,7 @@ class Mark extends DataClass
      */
     public function get_status_string()
     {
-        return self :: status_string($this->get_status());
+        return self::status_string($this->get_status());
     }
 
     /**
@@ -138,7 +138,7 @@ class Mark extends DataClass
      */
     public static function get_table_name()
     {
-        return Utilities :: get_classname_from_namespace(self :: class_name(), true);
+        return Utilities::get_classname_from_namespace(self::class_name(), true);
     }
 
     public static function factory($moment_id = 0, $result = null, $status = null)

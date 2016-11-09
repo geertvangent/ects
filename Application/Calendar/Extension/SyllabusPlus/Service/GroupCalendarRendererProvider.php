@@ -35,11 +35,11 @@ class GroupCalendarRendererProvider extends CalendarRendererProvider
      * @param \Chamilo\Core\User\Storage\DataClass\User $viewingUser
      * @param string[] $displayParameters;
      */
-    public function __construct(CalendarService $calendarService, $year, $groupIdentifier, User $dataUser,
+    public function __construct(CalendarService $calendarService, $year, $groupIdentifier, User $dataUser, 
         User $viewingUser, $displayParameters)
     {
         parent::__construct($calendarService, $dataUser, $viewingUser, $displayParameters);
-
+        
         $this->year = $year;
         $this->groupIdentifier = $groupIdentifier;
     }
@@ -87,9 +87,9 @@ class GroupCalendarRendererProvider extends CalendarRendererProvider
     public function getCalendarEvents($startTime, $endTime)
     {
         return $this->getCalendarService()->getEventsForGroupAndBetweenDates(
-            $this->getYear(),
-            $this->getGroupIdentifier(),
-            $startTime,
+            $this->getYear(), 
+            $this->getGroupIdentifier(), 
+            $startTime, 
             $endTime);
     }
 
@@ -97,7 +97,7 @@ class GroupCalendarRendererProvider extends CalendarRendererProvider
      *
      * @see \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider::getEventParser()
      */
-    public function getEventParser(\Chamilo\Core\User\Storage\DataClass\User $dataUser, $calendarEvent, $startTime,
+    public function getEventParser(\Chamilo\Core\User\Storage\DataClass\User $dataUser, $calendarEvent, $startTime, 
         $endTime)
     {
         return new GroupEventParser($this->getDataUser(), $calendarEvent, $startTime, $endTime);

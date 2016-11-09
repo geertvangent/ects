@@ -38,7 +38,7 @@ abstract class Location extends DataClass
         $extended_property_names[] = self::PROPERTY_ZONE_ID;
         $extended_property_names[] = self::PROPERTY_ZONE_CODE;
         $extended_property_names[] = self::PROPERTY_ZONE_NAME;
-
+        
         return parent::get_default_property_names($extended_property_names);
     }
 

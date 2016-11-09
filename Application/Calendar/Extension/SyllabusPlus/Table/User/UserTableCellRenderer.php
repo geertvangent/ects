@@ -15,7 +15,7 @@ use Ehb\Application\Calendar\Extension\SyllabusPlus\Manager;
  */
 class UserTableCellRenderer extends DataClassTableCellRenderer implements TableCellRendererActionsColumnSupport
 {
-
+    
     // Inherited
     public function render_cell($column, $user)
     {
@@ -23,37 +23,37 @@ class UserTableCellRenderer extends DataClassTableCellRenderer implements TableC
         switch ($column->get_name())
         {
             // Exceptions that need post-processing go here ...
-            case User :: PROPERTY_STATUS :
-                if ($user->get_status() == User :: STATUS_TEACHER)
+            case User::PROPERTY_STATUS :
+                if ($user->get_status() == User::STATUS_TEACHER)
                 {
-                    return Translation :: get('CourseAdmin');
+                    return Translation::get('CourseAdmin');
                 }
                 else
                 {
-                    return Translation :: get('Student');
+                    return Translation::get('Student');
                 }
         }
-
-        return parent :: render_cell($column, $user);
+        
+        return parent::render_cell($column, $user);
     }
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Chamilo\Libraries\Format\Table\Interfaces\TableCellRendererActionsColumnSupport::get_actions()
      */
     public function get_actions($user)
     {
         $toolbar = new Toolbar();
-
+        
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('CalendarBrowser'),
-                Theme :: getInstance()->getImagePath(Manager :: package(), 'Logo/16'),
-                $this->get_component()->get_browser_url($user),
-                ToolbarItem :: DISPLAY_ICON));
-
+                Translation::get('CalendarBrowser'), 
+                Theme::getInstance()->getImagePath(Manager::package(), 'Logo/16'), 
+                $this->get_component()->get_browser_url($user), 
+                ToolbarItem::DISPLAY_ICON));
+        
         return $toolbar->as_html();
     }
 }

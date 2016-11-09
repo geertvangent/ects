@@ -41,14 +41,14 @@ class UserComponent extends Manager implements DelegateComponent, TableSupport
     public function run()
     {
         $this->checkAuthorization();
-
+        
         $html = array();
-
+        
         $html[] = $this->render_header();
         $html[] = $this->getButtonToolbarRenderer()->render();
         $html[] = $this->get_user_html();
         $html[] = $this->render_footer();
-
+        
         return implode(PHP_EOL, $html);
     }
 
@@ -59,16 +59,16 @@ class UserComponent extends Manager implements DelegateComponent, TableSupport
         $html[] = '<div style="float: right; width: 100%;">';
         $html[] = $table->as_html();
         $html[] = '</div>';
-
+        
         return implode($html, "\n");
     }
 
     public function get_parameters()
     {
-        $parameters = parent :: get_parameters();
+        $parameters = parent::get_parameters();
         if (isset($this->buttonToolbarRenderer))
         {
-            $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
+            $parameters[ActionBarSearchForm::PARAM_SIMPLE_SEARCH_QUERY] = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
         }
         return $parameters;
     }
@@ -80,39 +80,39 @@ class UserComponent extends Manager implements DelegateComponent, TableSupport
     {
         // construct search properties
         $search_properties = array();
-        $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE);
-        $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_FIRSTNAME);
-        $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_LASTNAME);
-        $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_USERNAME);
-        $search_properties[] = new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL);
-
+        $search_properties[] = new PropertyConditionVariable(User::class_name(), User::PROPERTY_OFFICIAL_CODE);
+        $search_properties[] = new PropertyConditionVariable(User::class_name(), User::PROPERTY_FIRSTNAME);
+        $search_properties[] = new PropertyConditionVariable(User::class_name(), User::PROPERTY_LASTNAME);
+        $search_properties[] = new PropertyConditionVariable(User::class_name(), User::PROPERTY_USERNAME);
+        $search_properties[] = new PropertyConditionVariable(User::class_name(), User::PROPERTY_EMAIL);
+        
         // get conditions
         $searchCondition = $this->buttonToolbarRenderer->getConditions($search_properties);
-
+        
         // Conditions for active user with officialcode and email
         $activeConditions = array();
         $activeConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_ACTIVE),
+            new PropertyConditionVariable(User::class_name(), User::PROPERTY_ACTIVE), 
             new StaticConditionVariable(1));
         $activeConditions[] = new NotCondition(
             new EqualityCondition(
-                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE),
+                new PropertyConditionVariable(User::class_name(), User::PROPERTY_OFFICIAL_CODE), 
                 new StaticConditionVariable(NULL)));
         $activeConditions[] = new NotCondition(
             new PatternMatchCondition(
-                new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_OFFICIAL_CODE),
+                new PropertyConditionVariable(User::class_name(), User::PROPERTY_OFFICIAL_CODE), 
                 'EXT*'));
         $emailConditions = array();
         $emailConditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL),
+            new PropertyConditionVariable(User::class_name(), User::PROPERTY_EMAIL), 
             '*@ehb.be');
         $emailConditions[] = new PatternMatchCondition(
-            new PropertyConditionVariable(User :: class_name(), User :: PROPERTY_EMAIL),
+            new PropertyConditionVariable(User::class_name(), User::PROPERTY_EMAIL), 
             '*@student.ehb.be');
         $activeConditions[] = new OrCondition($emailConditions);
-
+        
         $activeCondition = new AndCondition($activeConditions);
-
+        
         if ($searchCondition instanceof Condition)
         {
             $conditions = array();
@@ -133,7 +133,7 @@ class UserComponent extends Manager implements DelegateComponent, TableSupport
             $buttonToolbar = new ButtonToolBar($this->get_url($this->get_parameters()));
             $this->buttonToolbarRenderer = new ButtonToolBarRenderer($buttonToolbar);
         }
-
+        
         return $this->buttonToolbarRenderer;
     }
 

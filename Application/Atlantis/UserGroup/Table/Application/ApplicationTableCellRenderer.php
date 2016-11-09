@@ -16,35 +16,35 @@ class ApplicationTableCellRenderer extends DataClassTableCellRenderer implements
     public function get_actions($application)
     {
         $toolbar = new Toolbar();
-
+        
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('Edit', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath('Action/Edit'),
+                Translation::get('Edit', null, Utilities::COMMON_LIBRARIES), 
+                Theme::getInstance()->getCommonImagePath('Action/Edit'), 
                 $this->get_component()->get_url(
                     array(
-                        Manager :: PARAM_ACTION => Manager :: ACTION_EDIT,
-                        Manager :: PARAM_APPLICATION_ID => $application->get_id())),
-                ToolbarItem :: DISPLAY_ICON));
+                        Manager::PARAM_ACTION => Manager::ACTION_EDIT, 
+                        Manager::PARAM_APPLICATION_ID => $application->get_id())), 
+                ToolbarItem::DISPLAY_ICON));
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath('Action/Delete'),
+                Translation::get('Delete', null, Utilities::COMMON_LIBRARIES), 
+                Theme::getInstance()->getCommonImagePath('Action/Delete'), 
                 $this->get_component()->get_url(
                     array(
-                        Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
-                        Manager :: PARAM_APPLICATION_ID => $application->get_id())),
-                ToolbarItem :: DISPLAY_ICON));
+                        Manager::PARAM_ACTION => Manager::ACTION_DELETE, 
+                        Manager::PARAM_APPLICATION_ID => $application->get_id())), 
+                ToolbarItem::DISPLAY_ICON));
         $toolbar->add_item(
             new ToolbarItem(
-                Translation :: get('ManageRight', null, Utilities :: COMMON_LIBRARIES),
-                Theme :: getInstance()->getCommonImagePath('Action/Rights'),
+                Translation::get('ManageRight', null, Utilities::COMMON_LIBRARIES), 
+                Theme::getInstance()->getCommonImagePath('Action/Rights'), 
                 $this->get_component()->get_url(
                     array(
-                        Manager :: PARAM_ACTION => Manager :: ACTION_MANAGE_RIGHT,
-                        Manager :: PARAM_APPLICATION_ID => $application->get_id())),
-                ToolbarItem :: DISPLAY_ICON));
-
+                        Manager::PARAM_ACTION => Manager::ACTION_MANAGE_RIGHT, 
+                        Manager::PARAM_APPLICATION_ID => $application->get_id())), 
+                ToolbarItem::DISPLAY_ICON));
+        
         return $toolbar->as_html();
     }
 }

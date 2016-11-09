@@ -13,14 +13,14 @@ class PublicationDataFilter extends TypeDataFilter
     {
         switch ($filter)
         {
-            case PublicationData :: PROPERTY_PLATFORM :
+            case PublicationData::PROPERTY_PLATFORM :
                 return $value == 1 ? 'dokeos' : 'chamilo';
                 break;
-            case PublicationData :: PROPERTY_OBJECT_TYPE :
-                return Translation :: get('TypeName', null, Utilities :: get_namespace_classname($value));
+            case PublicationData::PROPERTY_OBJECT_TYPE :
+                return Translation::get('TypeName', null, Utilities::get_namespace_classname($value));
                 break;
         }
-
-        return parent :: format_filter_option($filter, $value);
+        
+        return parent::format_filter_option($filter, $value);
     }
 }

@@ -35,11 +35,11 @@ class LocationCalendarRendererProvider extends CalendarRendererProvider
      * @param \Chamilo\Core\User\Storage\DataClass\User $viewingUser
      * @param string[] $displayParameters;
      */
-    public function __construct(CalendarService $calendarService, $year, $locationIdentifier, User $dataUser,
+    public function __construct(CalendarService $calendarService, $year, $locationIdentifier, User $dataUser, 
         User $viewingUser, $displayParameters)
     {
         parent::__construct($calendarService, $dataUser, $viewingUser, $displayParameters);
-
+        
         $this->year = $year;
         $this->locationIdentifier = $locationIdentifier;
     }
@@ -87,9 +87,9 @@ class LocationCalendarRendererProvider extends CalendarRendererProvider
     public function getCalendarEvents($startTime, $endTime)
     {
         return $this->getCalendarService()->getEventsByYearAndLocationAndBetweenDates(
-            $this->getYear(),
-            $this->getLocationIdentifier(),
-            $startTime,
+            $this->getYear(), 
+            $this->getLocationIdentifier(), 
+            $startTime, 
             $endTime);
     }
 
@@ -97,7 +97,7 @@ class LocationCalendarRendererProvider extends CalendarRendererProvider
      *
      * @see \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider::getEventParser()
      */
-    public function getEventParser(\Chamilo\Core\User\Storage\DataClass\User $dataUser, $calendarEvent, $startTime,
+    public function getEventParser(\Chamilo\Core\User\Storage\DataClass\User $dataUser, $calendarEvent, $startTime, 
         $endTime)
     {
         return new LocationEventParser($this->getDataUser(), $calendarEvent, $startTime, $endTime);

@@ -37,12 +37,12 @@ class GroupIcalComponent extends IcalComponent
     {
         $icalDownloadUrl = new Redirect(
             array(
-                Application::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => Manager::ACTION_ICAL_GROUP,
-                self::PARAM_YEAR => $this->getYear(),
-                self::PARAM_GROUP_ID => $this->getGroupIdentifier(),
+                Application::PARAM_CONTEXT => self::package(), 
+                self::PARAM_ACTION => Manager::ACTION_ICAL_GROUP, 
+                self::PARAM_YEAR => $this->getYear(), 
+                self::PARAM_GROUP_ID => $this->getGroupIdentifier(), 
                 self::PARAM_DOWNLOAD => 1));
-
+        
         return $icalDownloadUrl->getUrl();
     }
 
@@ -54,12 +54,12 @@ class GroupIcalComponent extends IcalComponent
     {
         $icalExternalUrl = new Redirect(
             array(
-                Application::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => Manager::ACTION_ICAL_GROUP,
-                self::PARAM_YEAR => $this->getYear(),
-                self::PARAM_GROUP_ID => $this->getGroupIdentifier(),
+                Application::PARAM_CONTEXT => self::package(), 
+                self::PARAM_ACTION => Manager::ACTION_ICAL_GROUP, 
+                self::PARAM_YEAR => $this->getYear(), 
+                self::PARAM_GROUP_ID => $this->getGroupIdentifier(), 
                 User::PROPERTY_SECURITY_TOKEN => $this->getUserCalendar()->get_security_token()));
-
+        
         return $icalExternalUrl->getUrl();
     }
 
@@ -72,13 +72,13 @@ class GroupIcalComponent extends IcalComponent
         if (! isset($this->calendarRendererProvider))
         {
             $this->calendarRendererProvider = new GroupCalendarRendererProvider(
-                $this->getYear(),
-                $this->getGroupIdentifier(),
-                $this->getUserCalendar(),
-                $this->get_user(),
+                $this->getYear(), 
+                $this->getGroupIdentifier(), 
+                $this->getUserCalendar(), 
+                $this->get_user(), 
                 array());
         }
-
+        
         return $this->calendarRendererProvider;
     }
 
@@ -92,7 +92,7 @@ class GroupIcalComponent extends IcalComponent
         {
             $this->groupIdentifier = $this->getRequest()->query->get(self::PARAM_GROUP_ID);
         }
-
+        
         return $this->groupIdentifier;
     }
 
@@ -106,7 +106,7 @@ class GroupIcalComponent extends IcalComponent
         {
             $this->year = $this->getRequest()->query->get(self::PARAM_YEAR);
         }
-
+        
         return $this->year;
     }
 }

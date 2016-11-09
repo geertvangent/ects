@@ -8,6 +8,6 @@ class SettingsConnector
 
     public function get_themes()
     {
-        return Theme :: getInstance()->getAvailableThemes();
+        return Theme::getInstance()->getAvailableThemes();
     }
 }

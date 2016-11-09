@@ -22,22 +22,22 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             throw new NotAllowedException();
         }
         $html = array();
-
+        
         $module_type = $this->get_module()->get_module_type();
         if ($module_type)
         {
             $module_class_name = __NAMESPACE__ . '\\' .
-                 StringUtilities :: getInstance()->createString($module_type)->upperCamelize() . 'Data';
-
-            $filters = $module_class_name :: get_filters();
-
+                 StringUtilities::getInstance()->createString($module_type)->upperCamelize() . 'Data';
+            
+            $filters = $module_class_name::get_filters();
+            
             $form = new FilterForm(
-                $this,
-                $module_class_name,
-                $filters,
-                $this->get_application()->get_url(array(Module :: PARAM_MODULE_TYPE => $module_type)));
+                $this, 
+                $module_class_name, 
+                $filters, 
+                $this->get_application()->get_url(array(Module::PARAM_MODULE_TYPE => $module_type)));
             $html[] = $form->display();
-
+            
             if ($form->validate())
             {
                 $values = $form->exportValues();
@@ -45,52 +45,52 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     $filter_values[$filter] = $values[$filter];
                 }
-                $data = DataManager :: retrieve_data($module_class_name, $filter_values);
-
+                $data = DataManager::retrieve_data($module_class_name, $filter_values);
+                
                 $table_data = array();
                 foreach ($data as $row)
                 {
                     $table_data_row = array();
                     foreach ($row as $property => $value)
                     {
-                        $table_data_row[] = TypeDataFilter :: factory($module_class_name)->format_filter_option(
-                            $property,
+                        $table_data_row[] = TypeDataFilter::factory($module_class_name)->format_filter_option(
+                            $property, 
                             $value);
                     }
-
+                    
                     $table_data[] = $table_data_row;
                 }
-
+                
                 $table = new SortableTable($table_data);
-
+                
                 foreach ($filters as $key => $filter)
                 {
                     $table->setColumnHeader(
-                        $key,
-                        Translation :: get(
-                            'Filter' . StringUtilities :: getInstance()->createString($filter)->upperCamelize()),
+                        $key, 
+                        Translation::get(
+                            'Filter' . StringUtilities::getInstance()->createString($filter)->upperCamelize()), 
                         false);
                 }
-                $table->setColumnHeader(count($filters), Translation :: get('Count'));
-
+                $table->setColumnHeader(count($filters), Translation::get('Count'));
+                
                 $html[] = $table->as_html();
             }
         }
         else
         {
-            foreach (Module :: get_module_types() as $type)
+            foreach (Module::get_module_types() as $type)
             {
-                $html[] = '<a href="' . $this->get_application()->get_url(array(Module :: PARAM_MODULE_TYPE => $type)) .
+                $html[] = '<a href="' . $this->get_application()->get_url(array(Module::PARAM_MODULE_TYPE => $type)) .
                      '">';
                 $html[] = '<div class="create_block" style="background-image: url(' .
-                     Theme :: getInstance()->getImagesPath() . 'Type/' . $type . '.png);">';
-                $html[] = Translation :: get(
-                    StringUtilities :: getInstance()->createString($type)->upperCamelize() . 'Component');
+                     Theme::getInstance()->getImagesPath() . 'Type/' . $type . '.png);">';
+                $html[] = Translation::get(
+                    StringUtilities::getInstance()->createString($type)->upperCamelize() . 'Component');
                 $html[] = '</div>';
                 $html[] = '</a>';
             }
         }
-
+        
         return implode(PHP_EOL, $html);
     }
 
@@ -99,7 +99,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
+        return \Ehb\Application\Discovery\Rendition\Rendition::FORMAT_HTML;
     }
 
     /*
@@ -107,6 +107,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
+        return \Ehb\Application\Discovery\Rendition\Rendition::VIEW_DEFAULT;
     }
 }

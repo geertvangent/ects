@@ -13,5 +13,5 @@ abstract class Manager extends Application
     const ACTION_RIGHTS = 'Rights';
     const ACTION_LIST = 'Lister';
     const PARAM_ENTITLEMENT_ID = 'entitlement_id';
-    const DEFAULT_ACTION = self :: ACTION_LIST;
+    const DEFAULT_ACTION = self::ACTION_LIST;
 }

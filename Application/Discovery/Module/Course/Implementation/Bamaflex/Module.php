@@ -15,13 +15,13 @@ class Module extends \Ehb\Application\Discovery\Module\Course\Module
 
     public function get_module_parameters()
     {
-        return self :: module_parameters();
+        return self::module_parameters();
     }
 
     public static function module_parameters()
     {
-        $programme = Request :: get(self :: PARAM_PROGRAMME_ID);
-        $source = Request :: get(self :: PARAM_SOURCE);
+        $programme = Request::get(self::PARAM_PROGRAMME_ID);
+        $source = Request::get(self::PARAM_SOURCE);
         $parameter = new Parameters();
         
         if ($programme)

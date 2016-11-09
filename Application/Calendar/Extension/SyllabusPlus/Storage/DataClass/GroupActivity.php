@@ -21,7 +21,7 @@ class GroupActivity extends Activity
     {
         $extended_property_names[] = self::PROPERTY_GROUP_ID;
         $extended_property_names[] = self::PROPERTY_GROUP_NAME;
-
+        
         return parent::get_default_property_names($extended_property_names);
     }
 

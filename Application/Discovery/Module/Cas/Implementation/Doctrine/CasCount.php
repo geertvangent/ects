@@ -17,7 +17,7 @@ class CasCount extends DiscoveryItem
      */
     public function get_count()
     {
-        return $this->get_default_property(self :: PROPERTY_COUNT);
+        return $this->get_default_property(self::PROPERTY_COUNT);
     }
 
     /**
@@ -26,7 +26,7 @@ class CasCount extends DiscoveryItem
      */
     public function set_count($count)
     {
-        $this->set_default_property(self :: PROPERTY_COUNT, $count);
+        $this->set_default_property(self::PROPERTY_COUNT, $count);
     }
 
     /**
@@ -35,7 +35,7 @@ class CasCount extends DiscoveryItem
      */
     public function get_person_id()
     {
-        return $this->get_default_property(self :: PROPERTY_PERSON_ID);
+        return $this->get_default_property(self::PROPERTY_PERSON_ID);
     }
 
     /**
@@ -44,7 +44,7 @@ class CasCount extends DiscoveryItem
      */
     public function set_person_id($person_id)
     {
-        $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
+        $this->set_default_property(self::PROPERTY_PERSON_ID, $person_id);
     }
 
     /**
@@ -53,7 +53,7 @@ class CasCount extends DiscoveryItem
      */
     public function get_application_id()
     {
-        return $this->get_default_property(self :: PROPERTY_APPLICATION_ID);
+        return $this->get_default_property(self::PROPERTY_APPLICATION_ID);
     }
 
     /**
@@ -62,7 +62,7 @@ class CasCount extends DiscoveryItem
      */
     public function set_application_id($application_id)
     {
-        $this->set_default_property(self :: PROPERTY_APPLICATION_ID, $application_id);
+        $this->set_default_property(self::PROPERTY_APPLICATION_ID, $application_id);
     }
 
     /**
@@ -71,7 +71,7 @@ class CasCount extends DiscoveryItem
      */
     public function get_action_id()
     {
-        return $this->get_default_property(self :: PROPERTY_ACTION_ID);
+        return $this->get_default_property(self::PROPERTY_ACTION_ID);
     }
 
     /**
@@ -80,7 +80,7 @@ class CasCount extends DiscoveryItem
      */
     public function set_action_id($action_id)
     {
-        $this->set_default_property(self :: PROPERTY_ACTION_ID, $action_id);
+        $this->set_default_property(self::PROPERTY_ACTION_ID, $action_id);
     }
 
     /**
@@ -89,7 +89,7 @@ class CasCount extends DiscoveryItem
      */
     public function get_date()
     {
-        return $this->get_default_property(self :: PROPERTY_DATE);
+        return $this->get_default_property(self::PROPERTY_DATE);
     }
 
     /**
@@ -98,7 +98,7 @@ class CasCount extends DiscoveryItem
      */
     public function set_date($date)
     {
-        $this->set_default_property(self :: PROPERTY_DATE, $date);
+        $this->set_default_property(self::PROPERTY_DATE, $date);
     }
 
     /**
@@ -107,13 +107,13 @@ class CasCount extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_COUNT;
-        $extended_property_names[] = self :: PROPERTY_PERSON_ID;
-        $extended_property_names[] = self :: PROPERTY_APPLICATION_ID;
-        $extended_property_names[] = self :: PROPERTY_ACTION_ID;
-        $extended_property_names[] = self :: PROPERTY_DATE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_COUNT;
+        $extended_property_names[] = self::PROPERTY_PERSON_ID;
+        $extended_property_names[] = self::PROPERTY_APPLICATION_ID;
+        $extended_property_names[] = self::PROPERTY_ACTION_ID;
+        $extended_property_names[] = self::PROPERTY_DATE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

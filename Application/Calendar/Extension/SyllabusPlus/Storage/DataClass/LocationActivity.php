@@ -23,7 +23,7 @@ class LocationActivity extends Activity
         $extended_property_names[] = self::PROPERTY_LOCATION_ID;
         $extended_property_names[] = self::PROPERTY_LOCATION_CODE;
         $extended_property_names[] = self::PROPERTY_LOCATION_NAME;
-
+        
         return parent::get_default_property_names($extended_property_names);
     }
 

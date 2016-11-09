@@ -9,15 +9,15 @@ class Installer extends \Chamilo\Configuration\Package\Action\Installer
 
     public function extra()
     {
-        if (! Rights :: getInstance()->create_access_root())
+        if (! Rights::getInstance()->create_access_root())
         {
             return false;
         }
         else
         {
-            $this->add_message(self :: TYPE_NORMAL, Translation :: get('AccessLocationCreated'));
+            $this->add_message(self::TYPE_NORMAL, Translation::get('AccessLocationCreated'));
         }
-
+        
         return true;
     }
 }

@@ -20,12 +20,12 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function __construct(Application $application, Instance $module_instance)
     {
-        parent :: __construct($application, $module_instance);
+        parent::__construct($application, $module_instance);
     }
 
     public function get_module_parameters()
     {
-        $parameter = self :: module_parameters();
+        $parameter = self::module_parameters();
         
         if (! $parameter->get_user_id())
         {
@@ -34,9 +34,9 @@ abstract class Module extends \Ehb\Application\Discovery\Module
         
         if (! $parameter->get_mode())
         {
-            $parameter->set_mode(Parameters :: MODE_USER);
+            $parameter->set_mode(Parameters::MODE_USER);
         }
-        elseif ($parameter->get_mode() == Parameters :: MODE_GENERAL)
+        elseif ($parameter->get_mode() == Parameters::MODE_GENERAL)
         {
             $parameter->set_user_id(0);
         }
@@ -46,8 +46,8 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public static function module_parameters()
     {
-        $param_user = Request :: get(self :: PARAM_USER_ID);
-        $param_mode = Request :: get(self :: PARAM_MODE);
+        $param_user = Request::get(self::PARAM_USER_ID);
+        $param_mode = Request::get(self::PARAM_MODE);
         
         $parameter = new Parameters();
         
@@ -60,7 +60,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
         {
             $parameter->set_mode($param_mode);
             
-            if ($param_mode == Parameters :: MODE_GENERAL)
+            if ($param_mode == Parameters::MODE_GENERAL)
             {
                 $parameter->set_user_id(0);
             }
@@ -73,15 +73,15 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->cas_statistics))
         {
-            $path = Path :: getInstance()->getStoragePath() .
-                 ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . '/cas_statistics/' .
+            $path = Path::getInstance()->getStoragePath() .
+                 ClassnameUtilities::getInstance()->namespaceToPath(__NAMESPACE__) . '/cas_statistics/' .
                  md5(serialize($this->get_module_parameters()));
             
             if (! file_exists($path))
             {
-                $this->cas_statistics = DataManager :: getInstance($this->get_module_instance())->retrieve_cas_statistics(
+                $this->cas_statistics = DataManager::getInstance($this->get_module_instance())->retrieve_cas_statistics(
                     $this->get_module_parameters());
-                Filesystem :: write_to_file($path, serialize($this->cas_statistics));
+                Filesystem::write_to_file($path, serialize($this->cas_statistics));
             }
             else
             {
@@ -96,7 +96,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->applications))
         {
-            $this->applications = DataManager :: getInstance($this->get_module_instance())->retrieve_applications();
+            $this->applications = DataManager::getInstance($this->get_module_instance())->retrieve_applications();
         }
         return $this->applications;
     }
@@ -109,16 +109,16 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function get_type()
     {
-        return Instance :: TYPE_USER;
+        return Instance::TYPE_USER;
     }
 
     public static function get_available_implementations()
     {
         $types = array();
         
-        $modules = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
-            Filesystem :: LIST_DIRECTORIES, 
+        $modules = Filesystem::get_directory_content(
+            Path::getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {

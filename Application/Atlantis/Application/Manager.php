@@ -12,7 +12,7 @@ abstract class Manager extends \Chamilo\Libraries\Architecture\Application\Appli
     const ACTION_MANAGE_RIGHT = 'RightsManager';
     const ACTION_LIST = 'Lister';
     const ACTION_VIEW = 'Viewer';
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self::ACTION_BROWSE;
     const PARAM_APPLICATION_ID = 'application_id';
     const PARAM_RIGHT_ID = 'right_id';
 }

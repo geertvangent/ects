@@ -36,10 +36,10 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         {
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Role :: class_name(), Role :: PROPERTY_NAME), 
+                new PropertyConditionVariable(Role::class_name(), Role::PROPERTY_NAME), 
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Role :: class_name(), Role :: PROPERTY_DESCRIPTION), 
+                new PropertyConditionVariable(Role::class_name(), Role::PROPERTY_DESCRIPTION), 
                 '*' . $query . '*');
             return new OrCondition($search_conditions);
         }
@@ -51,7 +51,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
     public function run()
     {
-        SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
+        SessionBreadcrumbs::add(new Breadcrumb($this->get_url(), Translation::get('TypeName')));
         
         $this->buttonToolbarRenderer = $this->getButtonToolbarRenderer();
         $table = new RoleTable($this);
@@ -76,9 +76,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
             {
                 $commonActions->addButton(
                     new Button(
-                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                        Theme :: getInstance()->getCommonImagePath('Action/Create'), 
-                        $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
+                        Translation::get('Create', null, Utilities::COMMON_LIBRARIES), 
+                        Theme::getInstance()->getCommonImagePath('Action/Create'), 
+                        $this->get_url(array(self::PARAM_ACTION => self::ACTION_CREATE))));
             }
             
             $buttonToolbar->addButtonGroup($commonActions);

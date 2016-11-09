@@ -28,7 +28,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function get_source()
     {
-        return $this->get_default_property(self :: PROPERTY_SOURCE);
+        return $this->get_default_property(self::PROPERTY_SOURCE);
     }
 
     /**
@@ -37,7 +37,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function set_source($source)
     {
-        $this->set_default_property(self :: PROPERTY_SOURCE, $source);
+        $this->set_default_property(self::PROPERTY_SOURCE, $source);
     }
 
     /**
@@ -56,13 +56,13 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
                 $parameters = new \Ehb\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Parameters();
                 $parameters->set_faculty_id($previous_reference->get_id());
                 $parameters->set_source($previous_reference->get_source());
-
-                $faculty = DataManager :: getInstance($module_instance)->retrieve_faculty($parameters);
+                
+                $faculty = DataManager::getInstance($module_instance)->retrieve_faculty($parameters);
                 if ($faculty instanceof Faculty)
                 {
                     $faculties[$faculty->get_year()][] = $faculty;
                 }
-
+                
                 if ($faculty->has_next_references(true) && $this->has_previous_references(true) && $recursive)
                 {
                     $faculties = array_merge_recursive($faculties, $faculty->get_previous($module_instance));
@@ -88,13 +88,13 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
                 $parameters = new \Ehb\Application\Discovery\Module\FacultyInfo\Implementation\Bamaflex\Parameters();
                 $parameters->set_faculty_id($next_reference->get_id());
                 $parameters->set_source($next_reference->get_source());
-
-                $faculty = DataManager :: getInstance($module_instance)->retrieve_faculty($parameters);
+                
+                $faculty = DataManager::getInstance($module_instance)->retrieve_faculty($parameters);
                 if ($faculty instanceof Faculty)
                 {
                     $faculties[$faculty->get_year()][] = $faculty;
                 }
-
+                
                 if ($faculty->has_previous_references(true) && $this->has_next_references(true) && $recursive)
                 {
                     $faculties = array_merge_recursive($faculties, $faculty->get_next($module_instance));
@@ -114,9 +114,9 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
         $faculties = $this->get_next($module_instance);
         $faculties[$this->get_year()][] = $this;
         $faculties = array_merge_recursive($faculties, $this->get_previous($module_instance));
-
+        
         ksort($faculties);
-
+        
         return $faculties;
     }
 
@@ -176,7 +176,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function get_previous_references()
     {
-        return $this->get_references(self :: REFERENCE_PREVIOUS);
+        return $this->get_references(self::REFERENCE_PREVIOUS);
     }
 
     /**
@@ -185,7 +185,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function set_previous_references($previous_references)
     {
-        $this->set_references($previous_references, self :: REFERENCE_PREVIOUS);
+        $this->set_references($previous_references, self::REFERENCE_PREVIOUS);
     }
 
     /**
@@ -195,7 +195,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function has_previous_references($single = false)
     {
-        return $this->has_references(self :: REFERENCE_PREVIOUS, $single);
+        return $this->has_references(self::REFERENCE_PREVIOUS, $single);
     }
 
     /**
@@ -204,7 +204,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function add_previous_reference(HistoryReference $previous_reference)
     {
-        $this->add_reference($previous_reference, self :: REFERENCE_PREVIOUS);
+        $this->add_reference($previous_reference, self::REFERENCE_PREVIOUS);
     }
 
     /**
@@ -213,7 +213,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function get_next_references()
     {
-        return $this->get_references(self :: REFERENCE_NEXT);
+        return $this->get_references(self::REFERENCE_NEXT);
     }
 
     /**
@@ -222,7 +222,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function set_next_references($next_references)
     {
-        $this->set_references($next_references, self :: REFERENCE_NEXT);
+        $this->set_references($next_references, self::REFERENCE_NEXT);
     }
 
     /**
@@ -232,7 +232,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function has_next_references($single = false)
     {
-        return $this->has_references(self :: REFERENCE_NEXT, $single);
+        return $this->has_references(self::REFERENCE_NEXT, $single);
     }
 
     /**
@@ -241,7 +241,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function add_next_reference(HistoryReference $next_reference)
     {
-        $this->add_reference($next_reference, self :: REFERENCE_NEXT);
+        $this->add_reference($next_reference, self::REFERENCE_NEXT);
     }
 
     /**
@@ -292,9 +292,9 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_SOURCE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_SOURCE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**
@@ -303,6 +303,6 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function get_data_manager()
     {
-        return DataManager :: getInstance();
+        return DataManager::getInstance();
     }
 }

@@ -27,7 +27,7 @@ class ScheduledGroup extends DataClass
     const PROPERTY_SCHEDULED = 'scheduled';
     const PROPERTY_YEAR = 'year';
     const PROPERTY_STRUCK = 'struck';
-
+    
     // Pseudo-properties used by the Repository
     const PROPERTY_COUNT_SCHEDULED = 'count_scheduled';
     const PROPERTY_COUNT_TO_BE_SCHEDULED = 'count_to_be_scheduled';
@@ -54,7 +54,7 @@ class ScheduledGroup extends DataClass
         $extended_property_names[] = self::PROPERTY_SCHEDULED;
         $extended_property_names[] = self::PROPERTY_YEAR;
         $extended_property_names[] = self::PROPERTY_STRUCK;
-
+        
         return $extended_property_names;
     }
 

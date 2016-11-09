@@ -43,19 +43,19 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         {
             $search_conditions = array();
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_NAME), 
+                new PropertyConditionVariable(Right::class_name(), Right::PROPERTY_NAME), 
                 '*' . $query . '*');
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_DESCRIPTION), 
+                new PropertyConditionVariable(Right::class_name(), Right::PROPERTY_DESCRIPTION), 
                 '*' . $query . '*');
             
             $conditions[] = new OrCondition($search_conditions);
         }
         
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Right :: class_name(), Right :: PROPERTY_APPLICATION_ID), 
+            new PropertyConditionVariable(Right::class_name(), Right::PROPERTY_APPLICATION_ID), 
             new StaticConditionVariable(
-                $this->get_parameter(\Ehb\Application\Atlantis\Application\Manager :: PARAM_APPLICATION_ID)));
+                $this->get_parameter(\Ehb\Application\Atlantis\Application\Manager::PARAM_APPLICATION_ID)));
         return new AndCondition($conditions);
     }
 
@@ -85,9 +85,9 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
             {
                 $commonActions->addButton(
                     new Button(
-                        Translation :: get('Create', null, Utilities :: COMMON_LIBRARIES), 
-                        Theme :: getInstance()->getCommonImagePath('Action/Create'), 
-                        $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE))));
+                        Translation::get('Create', null, Utilities::COMMON_LIBRARIES), 
+                        Theme::getInstance()->getCommonImagePath('Action/Create'), 
+                        $this->get_url(array(self::PARAM_ACTION => self::ACTION_CREATE))));
             }
             
             $buttonToolbar->addButtonGroup($commonActions);
@@ -100,16 +100,16 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
 
     public function add_breadcrumb()
     {
-        $application_id = Request :: get(
-            \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: PROPERTY_APPLICATION_ID);
-        $application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve_by_id(
-            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
+        $application_id = Request::get(
+            \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right::PROPERTY_APPLICATION_ID);
+        $application = \Ehb\Application\Atlantis\Application\Storage\DataManager::retrieve_by_id(
+            \Ehb\Application\Atlantis\Application\Storage\DataClass\Application::class_name(), 
             (int) $application_id);
-        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $application->get_name()));
-        SessionBreadcrumbs :: add(
+        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $application->get_name()));
+        SessionBreadcrumbs::add(
             new Breadcrumb(
                 $this->get_url(), 
-                Translation :: get('AvailableRights', array('TYPE' => $application->get_name()))));
+                Translation::get('AvailableRights', array('TYPE' => $application->get_name()))));
     }
 
     /*

@@ -14,21 +14,21 @@ class Parameters extends \Ehb\Application\Discovery\Parameters
 
     public function get_user_id()
     {
-        return $this->get_parameter(Module :: PARAM_USER_ID);
+        return $this->get_parameter(Module::PARAM_USER_ID);
     }
 
     public function set_user_id($user_id)
     {
-        $this->set_parameter(Module :: PARAM_USER_ID, $user_id);
+        $this->set_parameter(Module::PARAM_USER_ID, $user_id);
     }
 
     public function get_mode()
     {
-        return $this->get_parameter(Module :: PARAM_MODE);
+        return $this->get_parameter(Module::PARAM_MODE);
     }
 
     public function set_mode($mode)
     {
-        $this->set_parameter(Module :: PARAM_MODE, $mode);
+        $this->set_parameter(Module::PARAM_MODE, $mode);
     }
 }

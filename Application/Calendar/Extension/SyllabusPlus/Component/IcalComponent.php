@@ -32,14 +32,14 @@ class IcalComponent extends Manager implements NoAuthenticationSupport
     public function run()
     {
         $authenticationValidator = new AuthenticationValidator(
-            $this->getRequest(),
+            $this->getRequest(), 
             $this->getService('chamilo.configuration.service.configuration_consulter'));
-
+        
         if (! $authenticationValidator->isAuthenticated())
         {
             $authentication = QueryAuthentication::factory('SecurityToken', $this->getRequest());
             $user = $authentication->login();
-
+            
             if ($user instanceof User)
             {
                 $this->getApplicationConfiguration()->setUser($user);
@@ -61,16 +61,16 @@ class IcalComponent extends Manager implements NoAuthenticationSupport
             }
             else
             {
-
+                
                 $html = array();
-
+                
                 $html[] = $this->render_header();
                 $html[] = Display::normal_message(
                     Translation::get('ICalExternalMessage', array('URL' => $this->getIcalExternalUrl())));
                 $html[] = Display::warning_message(
                     Translation::get('ICalDownloadMessage', array('URL' => $this->getIcalDownloadUrl())));
                 $html[] = $this->render_footer();
-
+                
                 return implode(PHP_EOL, $html);
             }
         }
@@ -84,11 +84,11 @@ class IcalComponent extends Manager implements NoAuthenticationSupport
     {
         $icalDownloadUrl = new Redirect(
             array(
-                Application::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => Manager::ACTION_ICAL_USER,
-                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId(),
+                Application::PARAM_CONTEXT => self::package(), 
+                self::PARAM_ACTION => Manager::ACTION_ICAL_USER, 
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId(), 
                 self::PARAM_DOWNLOAD => 1));
-
+        
         return $icalDownloadUrl->getUrl();
     }
 
@@ -100,10 +100,10 @@ class IcalComponent extends Manager implements NoAuthenticationSupport
     {
         $icalExternalUrl = new Redirect(
             array(
-                Application::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => Manager::ACTION_ICAL_USER,
+                Application::PARAM_CONTEXT => self::package(), 
+                self::PARAM_ACTION => Manager::ACTION_ICAL_USER, 
                 User::PROPERTY_SECURITY_TOKEN => $this->getUserCalendar()->get_security_token()));
-
+        
         return $icalExternalUrl->getUrl();
     }
 
@@ -116,11 +116,11 @@ class IcalComponent extends Manager implements NoAuthenticationSupport
         if (! isset($this->calendarRendererProvider))
         {
             $this->calendarRendererProvider = new UserCalendarRendererProvider(
-                $this->getUserCalendar(),
-                $this->get_user(),
+                $this->getUserCalendar(), 
+                $this->get_user(), 
                 array());
         }
-
+        
         return $this->calendarRendererProvider;
     }
 

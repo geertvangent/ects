@@ -7,6 +7,7 @@ use Ehb\Application\Discovery\Rendition\Format\HtmlRendition;
 
 class HtmlDefaultRendition extends HtmlRendition
 {
+
     /*
      * (non-PHPdoc) @see application\discovery\module\faculty\Module::render()
      */

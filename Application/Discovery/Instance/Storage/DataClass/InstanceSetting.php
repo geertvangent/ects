@@ -22,20 +22,20 @@ class InstanceSetting extends DataClass
 
     /**
      * A static array containing all settings of discovery module instances
-     *
+     * 
      * @var array
      */
     private static $settings;
 
     /**
      * Get the default properties of all settings.
-     *
+     * 
      * @return array The property names.
      */
     public static function get_default_property_names()
     {
-        return parent :: get_default_property_names(
-            array(self :: PROPERTY_INSTANCE_ID, self :: PROPERTY_VARIABLE, self :: PROPERTY_VALUE));
+        return parent::get_default_property_names(
+            array(self::PROPERTY_INSTANCE_ID, self::PROPERTY_VARIABLE, self::PROPERTY_VALUE));
     }
 
     /**
@@ -44,7 +44,7 @@ class InstanceSetting extends DataClass
      */
     public function get_data_manager()
     {
-        return DataManager :: getInstance();
+        return DataManager::getInstance();
     }
 
     /**
@@ -53,7 +53,7 @@ class InstanceSetting extends DataClass
      */
     public function get_instance_id()
     {
-        return $this->get_default_property(self :: PROPERTY_INSTANCE_ID);
+        return $this->get_default_property(self::PROPERTY_INSTANCE_ID);
     }
 
     /**
@@ -62,7 +62,7 @@ class InstanceSetting extends DataClass
      */
     public function get_variable()
     {
-        return $this->get_default_property(self :: PROPERTY_VARIABLE);
+        return $this->get_default_property(self::PROPERTY_VARIABLE);
     }
 
     /**
@@ -71,22 +71,22 @@ class InstanceSetting extends DataClass
      */
     public function get_value()
     {
-        return $this->get_default_property(self :: PROPERTY_VALUE);
+        return $this->get_default_property(self::PROPERTY_VALUE);
     }
 
     public function set_instance_id($instance_id)
     {
-        $this->set_default_property(self :: PROPERTY_INSTANCE_ID, $instance_id);
+        $this->set_default_property(self::PROPERTY_INSTANCE_ID, $instance_id);
     }
 
     public function set_variable($variable)
     {
-        $this->set_default_property(self :: PROPERTY_VARIABLE, $variable);
+        $this->set_default_property(self::PROPERTY_VARIABLE, $variable);
     }
 
     public function set_value($value)
     {
-        $this->set_default_property(self :: PROPERTY_VALUE, $value);
+        $this->set_default_property(self::PROPERTY_VALUE, $value);
     }
 
     /**
@@ -95,7 +95,7 @@ class InstanceSetting extends DataClass
      */
     public static function get_class_name()
     {
-        return self :: class_name();
+        return self::class_name();
     }
 
     /**
@@ -105,33 +105,33 @@ class InstanceSetting extends DataClass
      */
     public static function initialize(Instance $instance)
     {
-        $settings_file = Path :: getInstance()->namespaceToFullPath($instance->get_type()) .
+        $settings_file = Path::getInstance()->namespaceToFullPath($instance->get_type()) .
              'Resources/Settings/settings.xml';
         $doc = new \DOMDocument();
-
+        
         $doc->load($settings_file);
         $object = $doc->getElementsByTagname('application')->item(0);
         $settings = $doc->getElementsByTagname('setting');
-
+        
         foreach ($settings as $index => $setting)
         {
             $external_setting = new InstanceSetting();
             $external_setting->set_instance_id($instance->get_id());
             $external_setting->set_variable($setting->getAttribute('name'));
             $external_setting->set_value($setting->getAttribute('default'));
-
+            
             if (! $external_setting->create())
             {
                 return false;
             }
         }
-
+        
         return true;
     }
 
     public function delete()
     {
-        if (! parent :: delete())
+        if (! parent::delete())
         {
             return false;
         }
@@ -149,12 +149,12 @@ class InstanceSetting extends DataClass
      */
     public static function get($variable, $instance_id)
     {
-        if (! isset(self :: $settings[$instance_id]))
+        if (! isset(self::$settings[$instance_id]))
         {
-            self :: load($instance_id);
+            self::load($instance_id);
         }
-
-        return (isset(self :: $settings[$instance_id][$variable]) ? self :: $settings[$instance_id][$variable] : null);
+        
+        return (isset(self::$settings[$instance_id][$variable]) ? self::$settings[$instance_id][$variable] : null);
     }
 
     /**
@@ -164,12 +164,12 @@ class InstanceSetting extends DataClass
      */
     public static function get_all($instance_id)
     {
-        if (! isset(self :: $settings[$instance_id]))
+        if (! isset(self::$settings[$instance_id]))
         {
-            self :: load($instance_id);
+            self::load($instance_id);
         }
-
-        return self :: $settings[$instance_id];
+        
+        return self::$settings[$instance_id];
     }
 
     /**
@@ -179,13 +179,13 @@ class InstanceSetting extends DataClass
     public static function load($instance_id)
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(self :: class_name(), self :: PROPERTY_INSTANCE_ID),
+            new PropertyConditionVariable(self::class_name(), self::PROPERTY_INSTANCE_ID), 
             new StaticConditionVariable($instance_id));
-        $settings = DataManager :: retrieves(self :: class_name(), new DataClassRetrievesParameters($condition));
-
+        $settings = DataManager::retrieves(self::class_name(), new DataClassRetrievesParameters($condition));
+        
         while ($setting = $settings->next_result())
         {
-            self :: $settings[$instance_id][$setting->get_variable()] = $setting->get_value();
+            self::$settings[$instance_id][$setting->get_variable()] = $setting->get_value();
         }
     }
 }

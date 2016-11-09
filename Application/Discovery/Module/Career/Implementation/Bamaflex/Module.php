@@ -9,7 +9,7 @@ class Module extends \Ehb\Application\Discovery\Module\Career\Module
 
     public function get_module_parameters()
     {
-        $parameter = self :: module_parameters();
+        $parameter = self::module_parameters();
         if (! $parameter->get_user_id())
         {
             $parameter->set_user_id($this->get_application()->get_user_id());
@@ -20,8 +20,8 @@ class Module extends \Ehb\Application\Discovery\Module\Career\Module
 
     public static function module_parameters()
     {
-        $param_user = Request :: get(self :: PARAM_USER_ID);
-        $param_contract_id = Request :: get(self :: PARAM_CONTRACT_ID);
+        $param_user = Request::get(self::PARAM_USER_ID);
+        $param_contract_id = Request::get(self::PARAM_CONTRACT_ID);
         $parameter = new Parameters();
         
         if ($param_user)

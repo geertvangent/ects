@@ -11,10 +11,10 @@ class LoginDataFilter extends TypeDataFilter
     {
         switch ($filter)
         {
-            case ContentObjectData :: PROPERTY_PLATFORM :
+            case ContentObjectData::PROPERTY_PLATFORM :
                 return $value == 1 ? 'dokeos' : 'chamilo';
                 break;
         }
-        return parent :: format_filter_option($filter, $value);
+        return parent::format_filter_option($filter, $value);
     }
 }

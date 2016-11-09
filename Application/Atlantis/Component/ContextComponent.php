@@ -11,7 +11,7 @@ class ContextComponent extends Manager
     public function run()
     {
         $factory = new ApplicationFactory(
-            \Ehb\Application\Atlantis\Context\Manager :: context(),
+            \Ehb\Application\Atlantis\Context\Manager::context(), 
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         return $factory->run();
     }

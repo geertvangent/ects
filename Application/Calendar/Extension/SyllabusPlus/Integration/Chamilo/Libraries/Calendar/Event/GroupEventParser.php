@@ -30,7 +30,7 @@ class GroupEventParser extends EventParser
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_ID] = $calendarEvent[GroupActivity::PROPERTY_ID];
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = strtotime(
             $calendarEvent[GroupActivity::PROPERTY_START_TIME]);
-
+        
         $redirect = new Redirect($parameters);
         return $redirect->getUrl();
     }

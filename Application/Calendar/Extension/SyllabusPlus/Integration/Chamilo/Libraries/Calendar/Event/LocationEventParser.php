@@ -30,7 +30,7 @@ class LocationEventParser extends EventParser
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_ID] = $calendarEvent[LocationActivity::PROPERTY_ID];
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = strtotime(
             $calendarEvent[LocationActivity::PROPERTY_START_TIME]);
-
+        
         $redirect = new Redirect($parameters);
         return $redirect->getUrl();
     }

@@ -27,43 +27,43 @@ class CalendarEventDataProvider extends InternalCalendar
      * @see \Chamilo\Application\Calendar\CalendarInterface::getEvents()
      */
     public function getEvents(
-        \Chamilo\Libraries\Calendar\Renderer\Service\CalendarRendererProvider $calendarRendererProvider,
+        \Chamilo\Libraries\Calendar\Renderer\Service\CalendarRendererProvider $calendarRendererProvider, 
         $requestedSourceType, $fromDate, $toDate)
     {
         $calendarService = $this->getCalendarService();
         $events = array();
-
+        
         if ($calendarService->isConfigured(Configuration::getInstance()))
         {
             $availabilityService = new AvailabilityService(new AvailabilityRepository());
             $packageContext = ClassnameUtilities::getInstance()->getNamespaceParent(__NAMESPACE__, 4);
             $packageName = ClassnameUtilities::getInstance()->getPackageNameFromNamespace($packageContext);
-
+            
             $activeAvailability = $availabilityService->getAvailabilityByUserAndCalendarTypeAndCalendarIdentifier(
-                $calendarRendererProvider->getDataUser(),
-                $packageContext,
+                $calendarRendererProvider->getDataUser(), 
+                $packageContext, 
                 $packageName);
-
+            
             if (($activeAvailability instanceof Availability && $activeAvailability->getAvailability() == 1) ||
                  ! $activeAvailability instanceof Availability)
             {
                 $calendarEvents = $calendarService->getEventsForUserAndBetweenDates(
-                    $calendarRendererProvider->getDataUser(),
-                    $fromDate,
+                    $calendarRendererProvider->getDataUser(), 
+                    $fromDate, 
                     $toDate);
-
+                
                 foreach ($calendarEvents as $calendarEvent)
                 {
                     $eventParser = new UserEventParser(
-                        $calendarRendererProvider->getDataUser(),
-                        $calendarEvent,
-                        $fromDate,
+                        $calendarRendererProvider->getDataUser(), 
+                        $calendarEvent, 
+                        $fromDate, 
                         $toDate);
                     $events = array_merge($events, $eventParser->getEvents());
                 }
             }
         }
-
+        
         return $events;
     }
 
@@ -74,19 +74,19 @@ class CalendarEventDataProvider extends InternalCalendar
     public function getCalendars()
     {
         $calendars = array();
-
+        
         if ($this->getCalendarService()->isConfigured(Configuration::getInstance()))
         {
             $package = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::package();
-
+            
             $calendar = new AvailableCalendar();
             $calendar->setIdentifier(ClassnameUtilities::getInstance()->getPackageNameFromNamespace($package));
             $calendar->setType($package);
             $calendar->setName(Translation::get('TypeName', null, $package));
-
+            
             $calendars[] = $calendar;
         }
-
+        
         return $calendars;
     }
 

@@ -11,6 +11,6 @@ abstract class Manager extends Application
     const ACTION_DELETE = 'Deleter';
     const ACTION_EDIT = 'Editor';
     const ACTION_CREATE = 'Creator';
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self::ACTION_BROWSE;
     const PARAM_CONTEXT_ID = 'context_id';
 }

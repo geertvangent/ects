@@ -28,7 +28,7 @@ abstract class Manager extends Application
     const PARAM_GROUP_ID = 'group_id';
     const PARAM_LOCATION_ID = 'location_id';
     const PARAM_PRINT = 'print';
-
+    
     // Actions
     const ACTION_USER = 'User';
     const ACTION_CODE = 'Code';
@@ -42,7 +42,7 @@ abstract class Manager extends Application
     const ACTION_BROWSE_GROUP = 'GroupBrowser';
     const ACTION_BROWSE_LOCATION = 'LocationBrowser';
     const ACTION_PROGRESS = 'Progress';
-
+    
     // Default action
     const DEFAULT_ACTION = self::ACTION_BROWSE_USER;
 
@@ -90,13 +90,13 @@ abstract class Manager extends Application
     public function hasAuthorization()
     {
         $userId = $this->getUserIdForCalendar();
-
+        
         if ($userId != $this->get_user_id() && ! $this->getUser()->get_platformadmin() &&
              $this->getUser()->get_status() != User::STATUS_TEACHER)
         {
             return false;
         }
-
+        
         return true;
     }
 
@@ -107,12 +107,12 @@ abstract class Manager extends Application
     public function getUserIdForCalendar()
     {
         $userId = $this->getRequest()->query->get(self::PARAM_USER_USER_ID);
-
+        
         if (! $userId)
         {
             $userId = $this->get_user_id();
         }
-
+        
         return $userId;
     }
 
@@ -126,10 +126,10 @@ abstract class Manager extends Application
         {
             $this->setUserCalendar(
                 \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
-                    User::class_name(),
+                    User::class_name(), 
                     $this->getUserIdForCalendar()));
         }
-
+        
         return $this->userCalendar;
     }
 
@@ -149,12 +149,12 @@ abstract class Manager extends Application
     public function getCurrentRendererType()
     {
         $requestRendererType = $this->getRequest()->query->get(ViewRenderer::PARAM_TYPE);
-
+        
         if (! $requestRendererType)
         {
             return LocalSetting::getInstance()->get('default_view', 'Chamilo\Libraries\Calendar');
         }
-
+        
         return $requestRendererType;
     }
 
@@ -168,7 +168,7 @@ abstract class Manager extends Application
         {
             $this->currentTime = Request::get(ViewRenderer::PARAM_TIME, time());
         }
-
+        
         return $this->currentTime;
     }
 

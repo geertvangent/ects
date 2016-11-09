@@ -30,9 +30,9 @@ class UserEventParser extends EventParser
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_ACTIVITY_TIME] = strtotime(
             $calendarEvent[UserActivity::PROPERTY_START_TIME]);
         $parameters[\Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::PARAM_USER_USER_ID] = $this->getDataUser()->get_id();
-
+        
         $redirect = new Redirect($parameters);
-
+        
         return $redirect->getUrl();
     }
 

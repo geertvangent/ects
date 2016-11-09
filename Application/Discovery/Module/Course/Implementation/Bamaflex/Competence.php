@@ -12,22 +12,22 @@ class Competence extends DiscoveryItem
 
     public function get_description()
     {
-        return $this->get_default_property(self :: PROPERTY_DESCRIPTION);
+        return $this->get_default_property(self::PROPERTY_DESCRIPTION);
     }
 
     public function set_description($description)
     {
-        $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
+        $this->set_default_property(self::PROPERTY_DESCRIPTION, $description);
     }
 
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     /**
@@ -36,10 +36,10 @@ class Competence extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_DESCRIPTION;
-        $extended_property_names[] = self :: PROPERTY_TYPE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_DESCRIPTION;
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

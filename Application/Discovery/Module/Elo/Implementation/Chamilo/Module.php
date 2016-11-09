@@ -19,19 +19,19 @@ class Module extends \Ehb\Application\Discovery\Module\Elo\Module
 
     public function get_module_type()
     {
-        return Request :: get(self :: PARAM_MODULE_TYPE);
+        return Request::get(self::PARAM_MODULE_TYPE);
     }
 
     public static function get_module_types()
     {
         return array(
-            self :: TYPE_CONTENT_OBJECT, 
-            self :: TYPE_COURSE_ACCESS, 
-            self :: TYPE_COURSE_LIST, 
-            self :: TYPE_COURSE_TIME, 
-            self :: TYPE_DOCUMENT_LIST, 
-            self :: TYPE_LOGIN, 
-            self :: TYPE_PUBLICATION);
+            self::TYPE_CONTENT_OBJECT, 
+            self::TYPE_COURSE_ACCESS, 
+            self::TYPE_COURSE_LIST, 
+            self::TYPE_COURSE_TIME, 
+            self::TYPE_DOCUMENT_LIST, 
+            self::TYPE_LOGIN, 
+            self::TYPE_PUBLICATION);
     }
 
     public static function module_parameters()

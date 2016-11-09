@@ -25,25 +25,25 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function render()
     {
-        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
-
-        if (! Rights :: is_allowed(
-            Rights :: VIEW_RIGHT,
-            $this->get_module_instance()->get_id(),
+        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, Translation::get(TypeName)));
+        
+        if (! Rights::is_allowed(
+            Rights::VIEW_RIGHT, 
+            $this->get_module_instance()->get_id(), 
             $this->get_module_parameters()))
         {
             throw new NotAllowedException(false);
         }
-
+        
         $html = array();
-
+        
         if (count($this->get_exemptions()) > 0)
         {
-            $years = DataManager :: getInstance($this->get_module_instance())->retrieve_years(
+            $years = DataManager::getInstance($this->get_module_instance())->retrieve_years(
                 $this->get_module_parameters());
-
+            
             $tabs = new DynamicTabsRenderer('exemption_list');
-
+            
             foreach ($years as $year)
             {
                 $tabs->add_tab(new DynamicContentTab($year, $year, null, $this->get_exemptions_table($year)->toHTML()));
@@ -52,7 +52,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
         else
         {
-            $html[] = Display :: normal_message(Translation :: get('NoData'), true);
+            $html[] = Display::normal_message(Translation::get('NoData'), true);
         }
         return implode(PHP_EOL, $html);
     }
@@ -60,45 +60,45 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_exemptions_table($year)
     {
         $exemptions = $this->get_exemptions_data($year);
-
+        
         $data = array();
-
+        
         foreach ($exemptions as $key => $exemption)
         {
             $row = array();
             $row[] = $exemption->get_credits();
             $row[] = $exemption->get_name();
             $row[] = $exemption->get_type();
-            $row[] = DatetimeUtilities :: format_locale_date(
-                Translation :: get('DateFormatShort', null, Utilities :: COMMON_LIBRARIES),
+            $row[] = DatetimeUtilities::format_locale_date(
+                Translation::get('DateFormatShort', null, Utilities::COMMON_LIBRARIES), 
                 $exemption->get_date_requested());
             $row[] = $exemption->get_motivation();
             $row[] = $exemption->get_proof();
             $row[] = $exemption->get_remarks();
-
-            $image = '<img src="' . Theme :: getInstance()->getImagesPath() . 'State/' . $exemption->get_state() .
-                 '.png" alt="' . Translation :: get($exemption->get_state_string()) . '" title="' .
-                 Translation :: get($exemption->get_state_string()) . '"/>';
+            
+            $image = '<img src="' . Theme::getInstance()->getImagesPath() . 'State/' . $exemption->get_state() .
+                 '.png" alt="' . Translation::get($exemption->get_state_string()) . '" title="' .
+                 Translation::get($exemption->get_state_string()) . '"/>';
             $row[] = $image;
-            LegendTable :: getInstance()->addSymbol(
-                $image,
-                Translation :: get($exemption->get_state_string()),
-                Translation :: get('State'));
-
+            LegendTable::getInstance()->addSymbol(
+                $image, 
+                Translation::get($exemption->get_state_string()), 
+                Translation::get('State'));
+            
             $data[] = $row;
         }
-
+        
         $table = new SortableTable($data);
-
-        $table->setColumnHeader(0, Translation :: get('Credits'), false);
-        $table->setColumnHeader(1, Translation :: get('Name'), false);
-        $table->setColumnHeader(2, Translation :: get('Type'), false);
-        $table->setColumnHeader(3, Translation :: get('DateRequested'), false);
-        $table->setColumnHeader(4, Translation :: get('Motivation'), false);
-        $table->setColumnHeader(5, Translation :: get('Proof'), false);
-        $table->setColumnHeader(6, Translation :: get('Remarks'), false);
+        
+        $table->setColumnHeader(0, Translation::get('Credits'), false);
+        $table->setColumnHeader(1, Translation::get('Name'), false);
+        $table->setColumnHeader(2, Translation::get('Type'), false);
+        $table->setColumnHeader(3, Translation::get('DateRequested'), false);
+        $table->setColumnHeader(4, Translation::get('Motivation'), false);
+        $table->setColumnHeader(5, Translation::get('Proof'), false);
+        $table->setColumnHeader(6, Translation::get('Remarks'), false);
         $table->setColumnHeader(7, ' ', false);
-
+        
         return $table;
     }
 
@@ -107,7 +107,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_format()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: FORMAT_HTML;
+        return \Ehb\Application\Discovery\Rendition\Rendition::FORMAT_HTML;
     }
 
     /*
@@ -115,6 +115,6 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function get_view()
     {
-        return \Ehb\Application\Discovery\Rendition\Rendition :: VIEW_DEFAULT;
+        return \Ehb\Application\Discovery\Rendition\Rendition::VIEW_DEFAULT;
     }
 }

@@ -14,7 +14,7 @@ class RoleTableColumnModel extends DataClassTableColumnModel implements TableCol
      */
     public function initialize_columns()
     {
-        $this->add_column(new DataClassPropertyTableColumn(Role :: class_name(), Role :: PROPERTY_NAME));
-        $this->add_column(new DataClassPropertyTableColumn(Role :: class_name(), Role :: PROPERTY_DESCRIPTION));
+        $this->add_column(new DataClassPropertyTableColumn(Role::class_name(), Role::PROPERTY_NAME));
+        $this->add_column(new DataClassPropertyTableColumn(Role::class_name(), Role::PROPERTY_DESCRIPTION));
     }
 }

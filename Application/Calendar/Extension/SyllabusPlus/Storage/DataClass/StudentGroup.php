@@ -36,7 +36,7 @@ abstract class StudentGroup extends DataClass
         $extended_property_names[] = self::PROPERTY_FACULTY_ID;
         $extended_property_names[] = self::PROPERTY_FACULTY_CODE;
         $extended_property_names[] = self::PROPERTY_FACULTY_NAME;
-
+        
         return $extended_property_names;
     }
 

@@ -15,8 +15,8 @@ class UserEntity extends \Chamilo\Core\Rights\Entity\UserEntity
     {
         return new AdvancedElementFinderElementType(
             'users', 
-            Translation :: get('Users'), 
-            Manager :: context() . '\Ajax', 
+            Translation::get('Users'), 
+            Manager::context() . '\Ajax', 
             'user_entity_feed', 
             array());
     }

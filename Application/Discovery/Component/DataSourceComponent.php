@@ -16,42 +16,42 @@ class DataSourceComponent extends Manager
     public function run()
     {
         $module_parameters = array();
-        $module_parameters[self :: PARAM_ACTION] = self :: ACTION_MODULE;
-
+        $module_parameters[self::PARAM_ACTION] = self::ACTION_MODULE;
+        
         $link = $this->get_url($module_parameters);
-        BreadcrumbTrail :: getInstance()->add_extra(
+        BreadcrumbTrail::getInstance()->add_extra(
             new ToolbarItem(
-                Translation :: get('Modules'),
-                Theme :: getInstance()->getCommonImagePath('Action/Config'),
+                Translation::get('Modules'), 
+                Theme::getInstance()->getCommonImagePath('Action/Config'), 
                 $link));
-
+        
         $module_parameters = array();
-        $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_USER;
-        $module_parameters[self :: PARAM_MODULE_ID] = null;
-        $module_parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
-
+        $module_parameters[self::PARAM_CONTENT_TYPE] = Instance::TYPE_USER;
+        $module_parameters[self::PARAM_MODULE_ID] = null;
+        $module_parameters[self::PARAM_ACTION] = self::ACTION_VIEW;
+        
         $link = $this->get_url($module_parameters);
-        BreadcrumbTrail :: getInstance()->add_extra(
+        BreadcrumbTrail::getInstance()->add_extra(
             new ToolbarItem(
-                Translation :: get('User'),
-                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/User.png',
+                Translation::get('User'), 
+                Theme::getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/User.png', 
                 $link));
-
+        
         $module_parameters = array();
-        $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
-        $module_parameters[self :: PARAM_MODULE_ID] = null;
-        $module_parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
-
+        $module_parameters[self::PARAM_CONTENT_TYPE] = Instance::TYPE_INFORMATION;
+        $module_parameters[self::PARAM_MODULE_ID] = null;
+        $module_parameters[self::PARAM_ACTION] = self::ACTION_VIEW;
+        
         $link = $this->get_url($module_parameters);
-
-        BreadcrumbTrail :: getInstance()->add_extra(
+        
+        BreadcrumbTrail::getInstance()->add_extra(
             new ToolbarItem(
-                Translation :: get('Information'),
-                Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/Information.png',
+                Translation::get('Information'), 
+                Theme::getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/Information.png', 
                 $link));
-
+        
         $factory = new ApplicationFactory(
-            \Ehb\Application\Discovery\DataSource\Manager :: context(),
+            \Ehb\Application\Discovery\DataSource\Manager::context(), 
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         $factory->run();
     }

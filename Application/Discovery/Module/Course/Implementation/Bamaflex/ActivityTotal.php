@@ -7,12 +7,12 @@ class ActivityTotal extends Activity
 
     public function get_time()
     {
-        return $this->get_default_property(self :: PROPERTY_TIME);
+        return $this->get_default_property(self::PROPERTY_TIME);
     }
 
     public function set_time($time)
     {
-        $this->set_default_property(self :: PROPERTY_TIME, $time);
+        $this->set_default_property(self::PROPERTY_TIME, $time);
     }
 
     /**
@@ -21,9 +21,9 @@ class ActivityTotal extends Activity
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_TIME;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_TIME;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

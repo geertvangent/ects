@@ -21,7 +21,7 @@ abstract class Manager extends Application
     const ACTION_MODULE = 'Module';
     const ACTION_DATA_SOURCE = 'DataSource';
     const ACTION_PHOTO = 'Photo';
-
+    
     // Parameters
     const PARAM_USER_ID = 'user_id';
     const PARAM_MODULE_ID = 'module_id';
@@ -32,18 +32,18 @@ abstract class Manager extends Application
     const PARAM_DIRECTION_DOWN = 'down';
     const PARAM_FORMAT = 'format';
     const PARAM_VIEW = 'view';
-
+    
     // Default action
-    const DEFAULT_ACTION = self :: ACTION_VIEW;
+    const DEFAULT_ACTION = self::ACTION_VIEW;
 
     /**
      * Constructor
-     *
+     * 
      * @param $user User The current user
      */
     public function __construct(ApplicationConfigurationInterface $applicationConfiguration)
     {
-        parent :: __construct($applicationConfiguration);
-        Theme :: getInstance()->setTheme(PlatformSetting :: get('theme', __NAMESPACE__));
+        parent::__construct($applicationConfiguration);
+        Theme::getInstance()->setTheme(PlatformSetting::get('theme', __NAMESPACE__));
     }
 }

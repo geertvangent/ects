@@ -27,25 +27,25 @@ class LegendTable extends SortableTable
     {
         $tableColumns = array();
         $tableColumns[] = new StaticTableColumn('');
-        $tableColumns[] = new StaticTableColumn(Translation :: get('Type'));
-        $tableColumns[] = new StaticTableColumn(Translation :: get('Legend'));
-
-        parent :: __construct($tableData, $tableColumns, array(), null, null, null, 'legend-table', false, false, false);
+        $tableColumns[] = new StaticTableColumn(Translation::get('Type'));
+        $tableColumns[] = new StaticTableColumn(Translation::get('Legend'));
+        
+        parent::__construct($tableData, $tableColumns, array(), null, null, null, 'legend-table', false, false, false);
     }
 
     /**
      * Returns the instance of this class.
-     *
+     * 
      * @return LegendTable
      */
     public static function getInstance()
     {
-        if (! isset(self :: $instance))
+        if (! isset(self::$instance))
         {
-            self :: $instance = new self();
+            self::$instance = new self();
         }
-
-        return self :: $instance;
+        
+        return self::$instance;
     }
 
     /**
@@ -56,7 +56,7 @@ class LegendTable extends SortableTable
     public function addSymbol($symbol, $description = null, $category = null)
     {
         $key = md5($symbol);
-
+        
         $data = $this->getTableData();
         if (! key_exists($category, $data) || ! key_exists($key, $data[$category]))
         {

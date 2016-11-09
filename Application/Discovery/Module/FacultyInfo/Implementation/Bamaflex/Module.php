@@ -9,13 +9,13 @@ class Module extends \Ehb\Application\Discovery\Module\FacultyInfo\Module
 
     public function get_module_parameters()
     {
-        return self :: module_parameters();
+        return self::module_parameters();
     }
 
     public static function module_parameters()
     {
-        $faculty = Request :: get(self :: PARAM_FACULTY_ID);
-        $source = Request :: get(self :: PARAM_SOURCE);
+        $faculty = Request::get(self::PARAM_FACULTY_ID);
+        $source = Request::get(self::PARAM_SOURCE);
         
         $parameter = new Parameters();
         if ($faculty)

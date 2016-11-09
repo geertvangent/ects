@@ -63,24 +63,24 @@ class CalendarService
     {
         // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         // $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId(), (int) $fromDate, (int) $toDate)));
-
+        
         // if (! $cache->contains($cacheIdentifier))
         // {
         // $lifetimeInMinutes = Configuration::getInstance()->get_setting(
         // array('Chamilo\Libraries\Calendar', 'refresh_external'));
-
+        
         // $events = $this->getCalendarRepository()->findEventsForUser($user);
-
+        
         // $cache->save(
         // $cacheIdentifier,
         // $this->filterEventsBetweenDates($events, $fromDate, $toDate),
         // $lifetimeInMinutes * 60);
         // }
-
+        
         // return new ArrayResultSet($cache->fetch($cacheIdentifier));
         return $this->filterEventsBetweenDates(
-            $this->getCalendarRepository()->findEventsForUser($user),
-            $fromDate,
+            $this->getCalendarRepository()->findEventsForUser($user), 
+            $fromDate, 
             $toDate);
     }
 
@@ -100,12 +100,12 @@ class CalendarService
         else
         {
             $filteredEvents = array_filter(
-                $events,
+                $events, 
                 function ($event) use ($fromDate, $toDate)
                 {
                     $startTime = strtotime($event[Activity::PROPERTY_START_TIME]);
                     $endTime = strtotime($event[Activity::PROPERTY_END_TIME]);
-
+                    
                     if (is_null($fromDate))
                     {
                         return $endTime <= $toDate;
@@ -119,7 +119,7 @@ class CalendarService
                         return $startTime >= $fromDate && $endTime <= $toDate;
                     }
                 });
-
+            
             return array_values($filteredEvents);
         }
     }
@@ -134,26 +134,26 @@ class CalendarService
     public function getEventsForGroupAndBetweenDates($year, $groupIdentifier, $fromDate, $toDate)
     {
         return $this->filterEventsBetweenDates(
-            $this->getCalendarRepository()->findEventsForGroup($year, $groupIdentifier),
-            $fromDate,
+            $this->getCalendarRepository()->findEventsForGroup($year, $groupIdentifier), 
+            $fromDate, 
             $toDate);
-
+        
         // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier, $fromDate, $toDate)));
-
+        
         // if (! $cache->contains($cacheIdentifier))
         // {
         // $lifetimeInMinutes = Configuration::getInstance()->get_setting(
         // array('Chamilo\Libraries\Calendar', 'refresh_external'));
-
+        
         // $events = $this->getCalendarRepository()->findEventsForGroup($year, $groupIdentifier);
-
+        
         // $cache->save(
         // $cacheIdentifier,
         // $this->filterEventsBetweenDates($events, $fromDate, $toDate),
         // $lifetimeInMinutes * 60);
         // }
-
+        
         // return new ArrayResultSet($cache->fetch($cacheIdentifier));
     }
 
@@ -168,26 +168,26 @@ class CalendarService
     public function getEventsByYearAndLocationAndBetweenDates($year, $locationIdentifier, $fromDate, $toDate)
     {
         return $this->filterEventsBetweenDates(
-            $this->getCalendarRepository()->findEventsForLocation($year, $locationIdentifier),
-            $fromDate,
+            $this->getCalendarRepository()->findEventsForLocation($year, $locationIdentifier), 
+            $fromDate, 
             $toDate);
-
+        
         // $cache = new PhpFileCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier, $fromDate, $toDate)));
-
+        
         // if (! $cache->contains($cacheIdentifier))
         // {
         // $lifetimeInMinutes = Configuration::getInstance()->get_setting(
         // array('Chamilo\Libraries\Calendar', 'refresh_external'));
-
+        
         // $events = $this->getCalendarRepository()->findEventsForLocation($year, $locationIdentifier);
-
+        
         // $cache->save(
         // $cacheIdentifier,
         // $this->filterEventsBetweenDates($events, $fromDate, $toDate),
         // $lifetimeInMinutes * 60);
         // }
-
+        
         // return new ArrayResultSet($cache->fetch($cacheIdentifier));
     }
 
@@ -223,8 +223,8 @@ class CalendarService
     public function getEventForGroupByYearAndIdentifier($year, $groupIdentifier, $eventIdentifier)
     {
         return $this->getCalendarRepository()->findEventForGroupByYearAndIdentifier(
-            $year,
-            $groupIdentifier,
+            $year, 
+            $groupIdentifier, 
             $eventIdentifier);
     }
 
@@ -238,8 +238,8 @@ class CalendarService
     public function getEventsForGroupByYearAndModuleIdentifier($year, $groupIdentifier, $moduleIdentifier)
     {
         return $this->getCalendarRepository()->findEventsForGroupByYearAndModuleIdentifier(
-            $year,
-            $groupIdentifier,
+            $year, 
+            $groupIdentifier, 
             $moduleIdentifier);
     }
 
@@ -253,8 +253,8 @@ class CalendarService
     public function getEventForLocationByYearAndIdentifier($year, $locationIdentifier, $eventIdentifier)
     {
         return $this->getCalendarRepository()->findEventForLocationByYearAndIdentifier(
-            $year,
-            $locationIdentifier,
+            $year, 
+            $locationIdentifier, 
             $eventIdentifier);
     }
 
@@ -268,8 +268,8 @@ class CalendarService
     public function getEventsForLocationByYearAndModuleIdentifier($year, $locationIdentifier, $moduleIdentifier)
     {
         return $this->getCalendarRepository()->findEventsForLocationByYearAndModuleIdentifier(
-            $year,
-            $locationIdentifier,
+            $year, 
+            $locationIdentifier, 
             $moduleIdentifier);
     }
 
@@ -281,13 +281,13 @@ class CalendarService
     public function isConfigured(\Chamilo\Configuration\Configuration $configuration)
     {
         $namespace = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::package();
-
+        
         $hasDriver = $configuration->get_setting(array($namespace, 'dbms'));
         $hasUser = $configuration->get_setting(array($namespace, 'user'));
         $hasPassword = $configuration->get_setting(array($namespace, 'password'));
         $hasHost = $configuration->get_setting(array($namespace, 'host'));
         $hasDatabase = $configuration->get_setting(array($namespace, 'database'));
-
+        
         return $hasDriver && $hasUser && $hasPassword && $hasHost && $hasDatabase;
     }
 
@@ -301,12 +301,12 @@ class CalendarService
     {
         $facultyRecords = $this->getCalendarRepository()->findFacultiesByYearAndUser($year, $user);
         $faculties = array();
-
+        
         foreach ($facultyRecords as $facultyRecord)
         {
             $faculties[$facultyRecord[StudentGroup::PROPERTY_FACULTY_ID]] = $facultyRecord;
         }
-
+        
         return $faculties;
     }
 
@@ -319,14 +319,14 @@ class CalendarService
     public function getFacultiesGroupsByYearAndUser($year, User $user)
     {
         $facultiesGroupsRecords = $this->getCalendarRepository()->findFacultiesGroupsByYearAndUser($year, $user);
-
+        
         $facultiesGroups = array();
-
+        
         foreach ($facultiesGroupsRecords as $facultiesGroupsRecord)
         {
             $faculties[$facultiesGroupsRecord[StudentGroup::PROPERTY_FACULTY_ID]][$facultiesGroupsRecord[StudentGroup::PROPERTY_GROUP_ID]] = $facultiesGroupsRecord;
         }
-
+        
         return $facultiesGroups;
     }
 
@@ -339,12 +339,12 @@ class CalendarService
     {
         $facultyRecords = $this->getCalendarRepository()->findFacultiesByYear($year);
         $faculties = array();
-
+        
         foreach ($facultyRecords as $facultyRecord)
         {
             $faculties[$facultyRecord[Group::PROPERTY_FACULTY_ID]] = $facultyRecord;
         }
-
+        
         return $faculties;
     }
 
@@ -356,14 +356,14 @@ class CalendarService
     public function getFacultyGroupsByYear($year)
     {
         $facultiesGroupsRecords = $this->getCalendarRepository()->findFacultyGroupsByYear($year);
-
+        
         $facultiesGroups = array();
-
+        
         foreach ($facultiesGroupsRecords as $facultiesGroupsRecord)
         {
             $facultiesGroups[$facultiesGroupsRecord[Group::PROPERTY_FACULTY_ID]][] = $facultiesGroupsRecord;
         }
-
+        
         return $facultiesGroups;
     }
 
@@ -387,14 +387,14 @@ class CalendarService
     public function getGroupsByYear($year)
     {
         $groupsRecords = $this->getCalendarRepository()->findGroupsByYear($year);
-
+        
         $groups = array();
-
+        
         foreach ($groupsRecords as $groupsRecord)
         {
             $groups[$groupsRecord[Group::PROPERTY_ID]] = $groupsRecord;
         }
-
+        
         return $groups;
     }
 
@@ -449,9 +449,8 @@ class CalendarService
     public function getYears()
     {
         return explode(
-            ',',
-            Configuration::getInstance()->get_setting(
-                array('Ehb\Application\Calendar\Extension\SyllabusPlus', 'years')));
+            ',', 
+            Configuration::getInstance()->get_setting(array('Ehb\Application\Calendar\Extension\SyllabusPlus', 'years')));
     }
 
     /**

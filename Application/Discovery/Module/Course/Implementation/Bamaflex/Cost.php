@@ -12,27 +12,27 @@ class Cost extends DiscoveryItem
 
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     public function get_type_string()
     {
-        return self :: type_string($this->get_type());
+        return self::type_string($this->get_type());
     }
 
     public function type_string($type)
     {
         switch ($type)
         {
-            case self :: TYPE_ADDITIONAL :
+            case self::TYPE_ADDITIONAL :
                 return 'Additional';
                 break;
-            case self :: TYPE_MATERIAL :
+            case self::TYPE_MATERIAL :
                 return 'Material';
                 break;
         }
@@ -40,12 +40,12 @@ class Cost extends DiscoveryItem
 
     public function get_price()
     {
-        return $this->get_default_property(self :: PROPERTY_PRICE);
+        return $this->get_default_property(self::PROPERTY_PRICE);
     }
 
     public function set_price($price)
     {
-        $this->set_default_property(self :: PROPERTY_PRICE, $price);
+        $this->set_default_property(self::PROPERTY_PRICE, $price);
     }
 
     public function get_price_string()
@@ -59,10 +59,10 @@ class Cost extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_TYPE;
-        $extended_property_names[] = self :: PROPERTY_PRICE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        $extended_property_names[] = self::PROPERTY_PRICE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

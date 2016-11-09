@@ -12,20 +12,20 @@ class DeleterComponent extends Manager
 
     public function run()
     {
-        $ids = $this->getRequest()->get(self :: PARAM_ROLE_ID);
+        $ids = $this->getRequest()->get(self::PARAM_ROLE_ID);
         $failures = 0;
-
+        
         if (! empty($ids))
         {
             if (! is_array($ids))
             {
                 $ids = array($ids);
             }
-
+            
             foreach ($ids as $id)
             {
-                $role = DataManager :: retrieve_by_id(Role :: class_name(), (int) $id);
-
+                $role = DataManager::retrieve_by_id(Role::class_name(), (int) $id);
+                
                 if (! $this->get_user()->is_platform_admin())
                 {
                     $failures ++;
@@ -38,23 +38,23 @@ class DeleterComponent extends Manager
                     }
                 }
             }
-
+            
             if ($failures)
             {
                 if (count($ids) == 1)
                 {
                     $message = 'ObjectNotDeleted';
-                    $parameter = array('OBJECT' => Translation :: get('Role'));
+                    $parameter = array('OBJECT' => Translation::get('Role'));
                 }
                 elseif (count($ids) > $failures)
                 {
                     $message = 'SomeObjectsNotDeleted';
-                    $parameter = array('OBJECTS' => Translation :: get('Roles'));
+                    $parameter = array('OBJECTS' => Translation::get('Roles'));
                 }
                 else
                 {
                     $message = 'ObjectsNotDeleted';
-                    $parameter = array('OBJECTS' => Translation :: get('Roles'));
+                    $parameter = array('OBJECTS' => Translation::get('Roles'));
                 }
             }
             else
@@ -62,28 +62,28 @@ class DeleterComponent extends Manager
                 if (count($ids) == 1)
                 {
                     $message = 'ObjectDeleted';
-                    $parameter = array('OBJECT' => Translation :: get('Role'));
+                    $parameter = array('OBJECT' => Translation::get('Role'));
                 }
                 else
                 {
                     $message = 'ObjectsDeleted';
-                    $parameter = array('OBJECTS' => Translation :: get('Roles'));
+                    $parameter = array('OBJECTS' => Translation::get('Roles'));
                 }
             }
-
+            
             $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
-                ($failures ? true : false),
-                array(Manager :: PARAM_ACTION => Manager :: ACTION_BROWSE));
+                Translation::get($message, $parameter, Utilities::COMMON_LIBRARIES), 
+                ($failures ? true : false), 
+                array(Manager::PARAM_ACTION => Manager::ACTION_BROWSE));
         }
         else
         {
             return $this->display_error_page(
                 htmlentities(
-                    Translation :: get(
-                        'NoObjectSelected',
-                        array('OBJECT' => Translation :: get('Role')),
-                        Utilities :: COMMON_LIBRARIES)));
+                    Translation::get(
+                        'NoObjectSelected', 
+                        array('OBJECT' => Translation::get('Role')), 
+                        Utilities::COMMON_LIBRARIES)));
         }
     }
 }

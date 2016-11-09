@@ -11,32 +11,32 @@ class FollowingImpossible extends DiscoveryItem
 
     public function get_credit()
     {
-        return $this->get_default_property(self :: PROPERTY_CREDIT);
+        return $this->get_default_property(self::PROPERTY_CREDIT);
     }
 
     public function set_credit($credit)
     {
-        $this->set_default_property(self :: PROPERTY_CREDIT, $credit);
+        $this->set_default_property(self::PROPERTY_CREDIT, $credit);
     }
 
     public function get_exam_degree()
     {
-        return $this->get_default_property(self :: PROPERTY_EXAM_DEGREE);
+        return $this->get_default_property(self::PROPERTY_EXAM_DEGREE);
     }
 
     public function set_exam_degree($exam_degree)
     {
-        $this->set_default_property(self :: PROPERTY_EXAM_DEGREE, $exam_degree);
+        $this->set_default_property(self::PROPERTY_EXAM_DEGREE, $exam_degree);
     }
 
     public function get_exam_credit()
     {
-        return $this->get_default_property(self :: PROPERTY_EXAM_CREDIT);
+        return $this->get_default_property(self::PROPERTY_EXAM_CREDIT);
     }
 
     public function set_exam_credit($exam_credit)
     {
-        $this->set_default_property(self :: PROPERTY_EXAM_CREDIT, $exam_credit);
+        $this->set_default_property(self::PROPERTY_EXAM_CREDIT, $exam_credit);
     }
 
     /**
@@ -45,11 +45,11 @@ class FollowingImpossible extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_CREDIT;
-        $extended_property_names[] = self :: PROPERTY_EXAM_DEGREE;
-        $extended_property_names[] = self :: PROPERTY_EXAM_CREDIT;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_CREDIT;
+        $extended_property_names[] = self::PROPERTY_EXAM_DEGREE;
+        $extended_property_names[] = self::PROPERTY_EXAM_CREDIT;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

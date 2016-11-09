@@ -10,7 +10,7 @@ abstract class Manager extends Application
     const ACTION_DELETE = 'Deleter';
     const ACTION_CREATE = 'Creator';
     const ACTION_ENTITY_TYPE = 'EntityType';
-    const DEFAULT_ACTION = self :: ACTION_CREATE;
+    const DEFAULT_ACTION = self::ACTION_CREATE;
     const PARAM_ROLE_ENTITY_ID = 'role_entity_id';
     const PARAM_ENTITY_TYPE = 'entity_type';
     const PARAM_ENTITY_ID = 'entity_id';

@@ -21,49 +21,49 @@ class Instance extends DataClass
 
     public function set_name($name)
     {
-        $this->set_default_property(self :: PROPERTY_NAME, $name);
+        $this->set_default_property(self::PROPERTY_NAME, $name);
     }
 
     public function get_name()
     {
-        return $this->get_default_property(self :: PROPERTY_NAME);
+        return $this->get_default_property(self::PROPERTY_NAME);
     }
 
     public function set_description($description)
     {
-        $this->set_default_property(self :: PROPERTY_DESCRIPTION, $description);
+        $this->set_default_property(self::PROPERTY_DESCRIPTION, $description);
     }
 
     public function get_description()
     {
-        return $this->get_default_property(self :: PROPERTY_DESCRIPTION);
+        return $this->get_default_property(self::PROPERTY_DESCRIPTION);
     }
 
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     public static function get_default_property_names()
     {
-        return parent :: get_default_property_names(
-            array(self :: PROPERTY_NAME, self :: PROPERTY_DESCRIPTION, self :: PROPERTY_TYPE));
+        return parent::get_default_property_names(
+            array(self::PROPERTY_NAME, self::PROPERTY_DESCRIPTION, self::PROPERTY_TYPE));
     }
 
     public function create()
     {
-        if (! parent :: create())
+        if (! parent::create())
         {
             return false;
         }
         else
         {
-            if (! InstanceSetting :: initialize($this))
+            if (! InstanceSetting::initialize($this))
             {
                 return false;
             }
@@ -73,19 +73,19 @@ class Instance extends DataClass
 
     public function delete()
     {
-        if (! parent :: delete())
+        if (! parent::delete())
         {
             return false;
         }
         else
         {
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID),
+                new PropertyConditionVariable(InstanceSetting::class_name(), InstanceSetting::PROPERTY_INSTANCE_ID), 
                 new StaticConditionVariable($this->get_id()));
-            $settings = DataManager :: retrieves(
-                InstanceSetting :: class_name(),
+            $settings = DataManager::retrieves(
+                InstanceSetting::class_name(), 
                 new DataClassRetrievesParameters($condition));
-
+            
             while ($setting = $settings->next_result())
             {
                 if (! $setting->delete())
@@ -94,7 +94,7 @@ class Instance extends DataClass
                 }
             }
         }
-
+        
         return true;
     }
 
@@ -105,16 +105,16 @@ class Instance extends DataClass
 
     public function deactivate()
     {
-        $this->set_content_type(self :: TYPE_DISABLED);
+        $this->set_content_type(self::TYPE_DISABLED);
     }
 
     public function has_settings()
     {
         $condition = new EqualityCondition(
-            new PropertyConditionVariable(InstanceSetting :: class_name(), InstanceSetting :: PROPERTY_INSTANCE_ID),
+            new PropertyConditionVariable(InstanceSetting::class_name(), InstanceSetting::PROPERTY_INSTANCE_ID), 
             new StaticConditionVariable($this->get_id()));
-        $settings = DataManager :: count(InstanceSetting :: class_name(), new DataClassCountParameters($condition));
-
+        $settings = DataManager::count(InstanceSetting::class_name(), new DataClassCountParameters($condition));
+        
         return $settings > 0;
     }
 
@@ -124,7 +124,7 @@ class Instance extends DataClass
      */
     public function get_settings()
     {
-        return InstanceSetting :: get_all($this->get_id());
+        return InstanceSetting::get_all($this->get_id());
     }
 
     /**
@@ -134,7 +134,7 @@ class Instance extends DataClass
      */
     public function get_setting($variable)
     {
-        return InstanceSetting :: get($variable, $this->get_id());
+        return InstanceSetting::get($variable, $this->get_id());
     }
 
     /**
@@ -143,7 +143,7 @@ class Instance extends DataClass
      */
     public function get_data_manager()
     {
-        return DataManager :: getInstance();
+        return DataManager::getInstance();
     }
 
     public function has_matching_settings($settings)

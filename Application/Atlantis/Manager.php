@@ -17,23 +17,23 @@ abstract class Manager extends Application
     const ACTION_APPLICATION = 'Application';
     const ACTION_HOME = 'Home';
     const ACTION_RIGHTS = 'Rights';
-    const DEFAULT_ACTION = self :: ACTION_HOME;
+    const DEFAULT_ACTION = self::ACTION_HOME;
 
     public function __construct(ApplicationConfigurationInterface $applicationConfiguration)
     {
-        parent :: __construct($applicationConfiguration);
-
-        if (! \Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
+        parent::__construct($applicationConfiguration);
+        
+        if (! \Ehb\Application\Atlantis\Rights::getInstance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }
-
-        Theme :: getInstance()->setTheme(PlatformSetting :: get('theme', __NAMESPACE__));
+        
+        Theme::getInstance()->setTheme(PlatformSetting::get('theme', __NAMESPACE__));
     }
 
     function render_header()
     {
-        BreadcrumbTrail :: getInstance()->set(array_values(SessionBreadcrumbs :: get()));
-        return parent :: render_header();
+        BreadcrumbTrail::getInstance()->set(array_values(SessionBreadcrumbs::get()));
+        return parent::render_header();
     }
 }

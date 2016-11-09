@@ -14,7 +14,7 @@ class RightTableColumnModel extends DataClassTableColumnModel implements TableCo
      */
     public function initialize_columns()
     {
-        $this->add_column(new DataClassPropertyTableColumn(Right :: class_name(), Right :: PROPERTY_NAME));
-        $this->add_column(new DataClassPropertyTableColumn(Right :: class_name(), Right :: PROPERTY_DESCRIPTION));
+        $this->add_column(new DataClassPropertyTableColumn(Right::class_name(), Right::PROPERTY_NAME));
+        $this->add_column(new DataClassPropertyTableColumn(Right::class_name(), Right::PROPERTY_DESCRIPTION));
     }
 }

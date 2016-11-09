@@ -24,13 +24,13 @@ class FilterForm extends FormValidator
     public function __construct(RenditionImplementation $rendition_implementation, $module_class_name, $filters, $url)
     {
         parent::__construct('repository_filter_form', 'post', $url);
-
+        
         $this->renderer = clone $this->defaultRenderer();
         $this->rendition_implementation = $rendition_implementation;
         $this->module_class_name = $module_class_name;
         $this->filters = $filters;
         $this->build_form();
-
+        
         $this->accept($this->renderer);
     }
 
@@ -43,27 +43,27 @@ class FilterForm extends FormValidator
             '<form {attributes}><div class="filter_form">{content}</div><div class="clear">&nbsp;</div></form>');
         $this->renderer->setElementTemplate(
             '<div class="form-row"><div class="formw">{label}&nbsp;{element}</div></div>');
-
+        
         foreach ($this->filters as $filter)
         {
             $select = $this->addElement(
-                'select',
-                $filter,
-                Translation::get('Filter' . StringUtilities::getInstance()->createString($filter)->upperCamelize()),
-                TypeDataFilter::factory($this->module_class_name)->get_options($filter),
+                'select', 
+                $filter, 
+                Translation::get('Filter' . StringUtilities::getInstance()->createString($filter)->upperCamelize()), 
+                TypeDataFilter::factory($this->module_class_name)->get_options($filter), 
                 array('class' => 'postback'));
         }
-
+        
         $this->addElement(
-            'style_button',
-            'submit',
-            Translation::get('Filter', null, Utilities::COMMON_LIBRARIES),
-            null,
-            null,
+            'style_button', 
+            'submit', 
+            Translation::get('Filter', null, Utilities::COMMON_LIBRARIES), 
+            null, 
+            null, 
             'filter');
-
+        
         $this->addElement(
-            'html',
+            'html', 
             \Chamilo\Libraries\Format\Utilities\ResourceManager::getInstance()->get_resource_html(
                 Path::getInstance()->namespaceToFullPath('Chamilo\Configuration', true) .
                      'Resources/Javascript/Postback.js'));

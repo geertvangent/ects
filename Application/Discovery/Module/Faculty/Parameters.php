@@ -11,11 +11,11 @@ class Parameters extends \Ehb\Application\Discovery\Parameters
 
     public function set_year($year)
     {
-        $this->set_parameter(Faculty :: PROPERTY_YEAR, $year);
+        $this->set_parameter(Faculty::PROPERTY_YEAR, $year);
     }
 
     public function get_year()
     {
-        return $this->get_parameter(Faculty :: PROPERTY_YEAR);
+        return $this->get_parameter(Faculty::PROPERTY_YEAR);
     }
 }

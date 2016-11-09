@@ -11,7 +11,7 @@ class RightComponent extends Manager
     public function run()
     {
         $factory = new ApplicationFactory(
-            \Ehb\Application\Atlantis\Application\Right\Manager :: context(),
+            \Ehb\Application\Atlantis\Application\Right\Manager::context(), 
             new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this));
         return $factory->run();
     }

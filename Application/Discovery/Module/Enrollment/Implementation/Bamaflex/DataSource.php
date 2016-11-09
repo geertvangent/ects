@@ -25,29 +25,29 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $user_id = $parameters->get_user_id();
         if (! isset($this->contract_types[$user_id]))
         {
-            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $user = \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
+                \Chamilo\Core\User\Storage\DataClass\User::class_name(), 
                 $user_id);
             $official_code = $user->get_official_code();
-
+            
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'),
+                new StaticColumnConditionVariable('person_id'), 
                 new StaticConditionVariable($official_code));
-
+            
             $query = 'SELECT DISTINCT contract_type FROM v_discovery_enrollment_advanced WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $this->contract_types[$user_id][] = $result->contract_type;
                 }
             }
         }
-
+        
         return $this->contract_types[$user_id];
     }
 
@@ -61,23 +61,23 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $id = $parameters->get_user_id();
         if (! isset($this->enrollments[$id]))
         {
-            $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-                \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+            $user = \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
+                \Chamilo\Core\User\Storage\DataClass\User::class_name(), 
                 $id);
             $official_code = $user->get_official_code();
-
+            
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'),
+                new StaticColumnConditionVariable('person_id'), 
                 new StaticConditionVariable($official_code));
-
+            
             $query = 'SELECT * FROM v_discovery_enrollment_advanced WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection()) . ' ORDER BY year DESC, id';
-
+                 ConditionTranslator::render($condition, null, $this->get_connection()) . ' ORDER BY year DESC, id';
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $enrollment = new Enrollment();
                     $enrollment->set_source($result->source);
@@ -101,33 +101,33 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                 }
             }
         }
-
+        
         return $this->enrollments[$id];
     }
 
     public function count_enrollments($parameters)
     {
         $id = $parameters->get_user_id();
-        $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+        $user = \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User::class_name(), 
             $id);
         $official_code = $user->get_official_code();
-
+        
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'),
+            new StaticColumnConditionVariable('person_id'), 
             new StaticConditionVariable($official_code));
-
+        
         $query = 'SELECT count(id) AS enrollments_count FROM v_discovery_enrollment_advanced WHERE ' .
-             ConditionTranslator :: render($condition, null, $this->get_connection());
-
+             ConditionTranslator::render($condition, null, $this->get_connection());
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
-            $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            $result = $statement->fetch(\PDO::FETCH_OBJ);
             return $result->enrollments_count;
         }
-
+        
         return 0;
     }
 }

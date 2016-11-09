@@ -6,7 +6,7 @@ use Chamilo\Libraries\Platform\Session\Session;
 
 /**
  * application.atlantis.
- *
+ * 
  * @author GillardMagali
  */
 class SessionBreadcrumbs
@@ -15,7 +15,7 @@ class SessionBreadcrumbs
 
     public static function get()
     {
-        return unserialize(Session :: get(self :: SESSION_BREADCRUMBS));
+        return unserialize(Session::get(self::SESSION_BREADCRUMBS));
     }
 
     /**
@@ -29,12 +29,12 @@ class SessionBreadcrumbs
         {
             $hashed_breadcrumbs[md5(serialize($breadcrumb))] = $breadcrumb;
         }
-        Session :: register(self :: SESSION_BREADCRUMBS, serialize($hashed_breadcrumbs));
+        Session::register(self::SESSION_BREADCRUMBS, serialize($hashed_breadcrumbs));
     }
 
     public static function add(Breadcrumb $breadcrumb)
     {
-        $breadcrumbs = self :: get();
+        $breadcrumbs = self::get();
         $hash = md5(serialize($breadcrumb));
         if (array_key_exists($hash, $breadcrumbs))
         {
@@ -46,6 +46,6 @@ class SessionBreadcrumbs
         {
             $breadcrumbs[$hash] = $breadcrumb;
         }
-        self :: set($breadcrumbs);
+        self::set($breadcrumbs);
     }
 }

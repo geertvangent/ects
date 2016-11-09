@@ -15,15 +15,15 @@ class ApplicationTableColumnModel extends DataClassTableColumnModel implements T
     {
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
-                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_NAME));
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application::class_name(), 
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application::PROPERTY_NAME));
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
-                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_DESCRIPTION));
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application::class_name(), 
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application::PROPERTY_DESCRIPTION));
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
-                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: PROPERTY_URL));
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application::class_name(), 
+                \Ehb\Application\Atlantis\Application\Storage\DataClass\Application::PROPERTY_URL));
     }
 }

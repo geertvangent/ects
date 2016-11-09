@@ -23,25 +23,25 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     public function retrieve_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+        $person_id = \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User::class_name(), 
             $user_id)->get_official_code();
-
+        
         if (! isset($this->exemptions[$person_id]))
         {
             $condition = new EqualityCondition(
-                new StaticColumnConditionVariable('person_id'),
+                new StaticColumnConditionVariable('person_id'), 
                 new StaticConditionVariable($person_id));
-
+            
             $query = 'SELECT * FROM v_discovery_exemption_basic WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection()) .
+                 ConditionTranslator::render($condition, null, $this->get_connection()) .
                  ' ORDER BY year DESC, programme_name';
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $exemption = new Exemption();
                     $exemption->set_id($result->id);
@@ -66,57 +66,57 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                 }
             }
         }
-
+        
         return $this->exemptions[$person_id];
     }
 
     public function count_exemptions($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+        $person_id = \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User::class_name(), 
             $user_id)->get_official_code();
-
+        
         $condition = new EqualityCondition(
-            new StaticColumnConditionVariable('person_id'),
+            new StaticColumnConditionVariable('person_id'), 
             new StaticConditionVariable($person_id));
-
+        
         $query = 'SELECT count(id) AS exemptions_count FROM v_discovery_exemption_basic WHERE ' .
-             ConditionTranslator :: render($condition, null, $this->get_connection());
-
+             ConditionTranslator::render($condition, null, $this->get_connection());
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
-            $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            $result = $statement->fetch(\PDO::FETCH_OBJ);
             return $result->exemptions_count;
         }
-
+        
         return 0;
     }
 
     public function retrieve_years($parameters)
     {
         $user_id = $parameters->get_user_id();
-        $person_id = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
-            \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
+        $person_id = \Chamilo\Core\User\Storage\DataManager::retrieve_by_id(
+            \Chamilo\Core\User\Storage\DataClass\User::class_name(), 
             $user_id)->get_official_code();
         if (! isset($this->years[$person_id]))
         {
             $query = 'SELECT DISTINCT year FROM v_discovery_exemption_basic WHERE person_id = "' . $person_id .
                  '" ORDER BY year DESC';
-
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $this->years[$person_id][] = $result->year;
                 }
             }
         }
-
+        
         return $this->years[$person_id];
     }
 }

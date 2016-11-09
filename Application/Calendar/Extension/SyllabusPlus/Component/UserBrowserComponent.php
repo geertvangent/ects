@@ -58,14 +58,14 @@ class UserBrowserComponent extends Manager implements DelegateComponent
     {
         $this->checkAuthorization();
         $this->initialize();
-
+        
         BreadcrumbTrail::getInstance()->add(
             new Breadcrumb(
-                null,
+                null, 
                 $this->getUserCalendar()->fullname(
-                    $this->getUserCalendar()->get_lastname(),
+                    $this->getUserCalendar()->get_lastname(), 
                     $this->getUserCalendar()->get_firstname())));
-
+        
         return $this->renderCalendar();
     }
 
@@ -78,28 +78,28 @@ class UserBrowserComponent extends Manager implements DelegateComponent
         if ($this->isPrintRequested())
         {
             Page::getInstance()->setViewMode(Page::VIEW_MODE_HEADERLESS);
-
+            
             $header = Page::getInstance()->getHeader();
             $header->addCssFile(Theme::getInstance()->getCssPath(self::package(), true) . 'Print.css', 'print');
         }
-
+        
         $html = array();
-
+        
         $html[] = $this->render_header();
-
+        
         $html[] = '<div class="row">';
         $html[] = $this->getViewRenderer()->render();
         $html[] = '</div>';
-
+        
         if ($this->isPrintRequested())
         {
             $html[] = '<script type="text/javascript">';
             $html[] = 'window.print();';
             $html[] = '</script>';
         }
-
+        
         $html[] = $this->render_footer();
-
+        
         return implode(PHP_EOL, $html);
     }
 
@@ -107,9 +107,9 @@ class UserBrowserComponent extends Manager implements DelegateComponent
     {
         $header = Page::getInstance()->getHeader();
         $header->addCssFile(
-            Theme::getInstance()->getCssPath(\Chamilo\Application\Calendar\Manager::package(), true) . 'Print.css',
+            Theme::getInstance()->getCssPath(\Chamilo\Application\Calendar\Manager::package(), true) . 'Print.css', 
             'print');
-
+        
         $this->set_parameter(ViewRenderer::PARAM_TYPE, $this->getCurrentRendererType());
         $this->set_parameter(ViewRenderer::PARAM_TIME, $this->getCurrentRendererTime());
     }
@@ -121,10 +121,10 @@ class UserBrowserComponent extends Manager implements DelegateComponent
     protected function getDisplayParameters()
     {
         return array(
-            self::PARAM_CONTEXT => self::package(),
-            self::PARAM_ACTION => self::ACTION_BROWSE_USER,
-            ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
-            ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
+            self::PARAM_CONTEXT => self::package(), 
+            self::PARAM_ACTION => self::ACTION_BROWSE_USER, 
+            ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(), 
+            ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(), 
             self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id());
     }
 
@@ -138,15 +138,15 @@ class UserBrowserComponent extends Manager implements DelegateComponent
         {
             $dataProvider = $this->getCalendarDataProvider();
             $calendarLegend = new Legend($dataProvider);
-
+            
             $rendererFactory = new ViewRendererFactory(
-                $this->getCurrentRendererType(),
-                $dataProvider,
-                $calendarLegend,
-                $this->getCurrentRendererTime(),
+                $this->getCurrentRendererType(), 
+                $dataProvider, 
+                $calendarLegend, 
+                $this->getCurrentRendererTime(), 
                 $this->getViewActions());
             $renderer = $rendererFactory->getRenderer();
-
+            
             if ($this->getCurrentRendererType() == ViewRenderer::TYPE_DAY ||
                  $this->getCurrentRendererType() == ViewRenderer::TYPE_WEEK)
             {
@@ -157,111 +157,111 @@ class UserBrowserComponent extends Manager implements DelegateComponent
                 $renderer->setHideOtherHours(
                     LocalSetting::getInstance()->get('hide_non_working_hours', 'Chamilo\Libraries\Calendar'));
             }
-
+            
             $this->viewRenderer = $renderer;
         }
-
+        
         return $this->viewRenderer;
     }
 
     protected function getViewActions()
     {
         $actions = array();
-
+        
         $generalButtonGroup = new ButtonGroup();
-
+        
         $printUrl = new Redirect(
             array(
-                self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => self::ACTION_BROWSE_USER,
-                ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(),
-                ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(),
-                self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id(),
+                self::PARAM_CONTEXT => self::package(), 
+                self::PARAM_ACTION => self::ACTION_BROWSE_USER, 
+                ViewRenderer::PARAM_TYPE => $this->getCurrentRendererType(), 
+                ViewRenderer::PARAM_TIME => $this->getCurrentRendererTime(), 
+                self::PARAM_USER_USER_ID => $this->getUserCalendar()->get_id(), 
                 self::PARAM_PRINT => 1));
-
+        
         $generalButtonGroup->addButton(
             new Button(Translation::get('PrinterComponent'), new BootstrapGlyph('print'), $printUrl->getUrl()));
-
+        
         $iCalUrl = new Redirect(
             array(
-                self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => Manager::ACTION_ICAL_USER,
+                self::PARAM_CONTEXT => self::package(), 
+                self::PARAM_ACTION => Manager::ACTION_ICAL_USER, 
                 self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
-
+        
         $generalButtonGroup->addButton(
             new Button(Translation::get('ICalExternal'), new BootstrapGlyph('globe'), $iCalUrl->getUrl()));
-
+        
         $settingsUrl = new Redirect(
             array(
-                Application::PARAM_CONTEXT => \Chamilo\Core\User\Manager::context(),
-                Application::PARAM_ACTION => \Chamilo\Core\User\Manager::ACTION_USER_SETTINGS,
+                Application::PARAM_CONTEXT => \Chamilo\Core\User\Manager::context(), 
+                Application::PARAM_ACTION => \Chamilo\Core\User\Manager::ACTION_USER_SETTINGS, 
                 UserSettingsComponent::PARAM_CONTEXT => 'Chamilo\Libraries\Calendar'));
-
+        
         $generalButtonGroup->addButton(
             new Button(Translation::get('ConfigComponent'), new BootstrapGlyph('cog'), $settingsUrl->getUrl()));
-
+        
         $actions[] = $generalButtonGroup;
-
+        
         $dropdownButton = new DropdownButton(
-            Translation::get('OtherSchedules', null, __NAMESPACE__),
+            Translation::get('OtherSchedules', null, __NAMESPACE__), 
             new FontAwesomeGlyph('calendar-o'));
         $dropdownButton->setDropdownClasses('dropdown-menu-right');
-
+        
         if ($this->getUser()->get_platformadmin() || $this->getUser()->get_status() == User::STATUS_TEACHER)
         {
             $dropdownButton->addSubButton(new SubButtonHeader(Translation::get('OtherSchedules')));
-
+            
             $userUrl = new Redirect(
                 array(self::PARAM_CONTEXT => self::package(), self::PARAM_ACTION => self::ACTION_USER));
-
+            
             $dropdownButton->addSubButton(
                 new SubButton(
-                    Translation::get(self::ACTION_USER . 'Component'),
-                    new FontAwesomeGlyph('user'),
+                    Translation::get(self::ACTION_USER . 'Component'), 
+                    new FontAwesomeGlyph('user'), 
                     $userUrl->getUrl()));
         }
-
+        
         $groupUrl = new Redirect(
             array(
-                self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => self::ACTION_BROWSE_GROUP,
+                self::PARAM_CONTEXT => self::package(), 
+                self::PARAM_ACTION => self::ACTION_BROWSE_GROUP, 
                 self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
-
+        
         $dropdownButton->addSubButton(
             new SubButton(
-                Translation::get(self::ACTION_BROWSE_GROUP . 'Component'),
-                new FontAwesomeGlyph('users'),
+                Translation::get(self::ACTION_BROWSE_GROUP . 'Component'), 
+                new FontAwesomeGlyph('users'), 
                 $groupUrl->getUrl()));
-
+        
         $locationUrl = new Redirect(
             array(
-                self::PARAM_CONTEXT => self::package(),
-                self::PARAM_ACTION => self::ACTION_BROWSE_LOCATION,
+                self::PARAM_CONTEXT => self::package(), 
+                self::PARAM_ACTION => self::ACTION_BROWSE_LOCATION, 
                 self::PARAM_USER_USER_ID => $this->getUserCalendar()->getId()));
-
+        
         $dropdownButton->addSubButton(
             new SubButton(
-                Translation::get(self::ACTION_BROWSE_LOCATION . 'Component'),
-                new FontAwesomeGlyph('map-marker'),
+                Translation::get(self::ACTION_BROWSE_LOCATION . 'Component'), 
+                new FontAwesomeGlyph('map-marker'), 
                 $locationUrl->getUrl()));
-
+        
         if ($this->getUser()->get_platformadmin() || $this->getUser()->get_status() == User::STATUS_TEACHER)
         {
             $dropdownButton->addSubButton(new SubButtonDivider());
             $dropdownButton->addSubButton(new SubButtonHeader(Translation::get('Tracking')));
-
+            
             $progressUrl = new Redirect(
                 array(self::PARAM_CONTEXT => self::package(), self::PARAM_ACTION => self::ACTION_PROGRESS));
-
+            
             $dropdownButton->addSubButton(
                 new SubButton(
-                    Translation::get(self::ACTION_PROGRESS . 'Component'),
-                    new FontAwesomeGlyph('tasks'),
+                    Translation::get(self::ACTION_PROGRESS . 'Component'), 
+                    new FontAwesomeGlyph('tasks'), 
                     $progressUrl->getUrl()));
         }
-
+        
         $actions[] = $dropdownButton;
-
+        
         return $actions;
     }
 
@@ -274,12 +274,12 @@ class UserBrowserComponent extends Manager implements DelegateComponent
         if (! isset($this->calendarDataProvider))
         {
             $this->calendarDataProvider = new UserCalendarRendererProvider(
-                $this->getService('ehb.application.calendar.extension.syllabus_plus.service.calendar_service'),
-                $this->getUserCalendar(),
-                $this->get_user(),
+                $this->getService('ehb.application.calendar.extension.syllabus_plus.service.calendar_service'), 
+                $this->getUserCalendar(), 
+                $this->get_user(), 
                 $this->getDisplayParameters());
         }
-
+        
         return $this->calendarDataProvider;
     }
 }

@@ -22,7 +22,7 @@ class Enrollment extends DiscoveryItem
      */
     public function get_year()
     {
-        return $this->get_default_property(self :: PROPERTY_YEAR);
+        return $this->get_default_property(self::PROPERTY_YEAR);
     }
 
     /**
@@ -31,17 +31,17 @@ class Enrollment extends DiscoveryItem
      */
     public function get_training()
     {
-        return $this->get_default_property(self :: PROPERTY_TRAINING);
+        return $this->get_default_property(self::PROPERTY_TRAINING);
     }
 
     public function get_training_id()
     {
-        return $this->get_default_property(self :: PROPERTY_TRAINING_ID);
+        return $this->get_default_property(self::PROPERTY_TRAINING_ID);
     }
 
     public function get_person_id()
     {
-        return $this->get_default_property(self :: PROPERTY_PERSON_ID);
+        return $this->get_default_property(self::PROPERTY_PERSON_ID);
     }
 
     /**
@@ -50,7 +50,7 @@ class Enrollment extends DiscoveryItem
      */
     public function get_result()
     {
-        return $this->get_default_property(self :: PROPERTY_RESULT);
+        return $this->get_default_property(self::PROPERTY_RESULT);
     }
 
     /**
@@ -59,7 +59,7 @@ class Enrollment extends DiscoveryItem
      */
     public function get_result_string()
     {
-        return self :: result_string($this->get_result());
+        return self::result_string($this->get_result());
     }
 
     /**
@@ -70,19 +70,19 @@ class Enrollment extends DiscoveryItem
     {
         switch ($result)
         {
-            case self :: RESULT_GRADUATED :
+            case self::RESULT_GRADUATED :
                 return 'Graduated';
                 break;
-            case self :: RESULT_PASSED :
+            case self::RESULT_PASSED :
                 return 'Passed';
                 break;
-            case self :: RESULT_FAILED :
+            case self::RESULT_FAILED :
                 return 'Failed';
                 break;
-            case self :: RESULT_NOT_RELEVANT :
+            case self::RESULT_NOT_RELEVANT :
                 return 'NotRelevant';
                 break;
-            case self :: RESULT_NO_DATA :
+            case self::RESULT_NO_DATA :
                 return 'NoDataAvailable';
                 break;
         }
@@ -94,7 +94,7 @@ class Enrollment extends DiscoveryItem
      */
     public static function get_results()
     {
-        return array(self :: RESULT_PASSED, self :: RESULT_FAILED, self :: RESULT_NOT_RELEVANT, self :: RESULT_NO_DATA);
+        return array(self::RESULT_PASSED, self::RESULT_FAILED, self::RESULT_NOT_RELEVANT, self::RESULT_NO_DATA);
     }
 
     /**
@@ -103,7 +103,7 @@ class Enrollment extends DiscoveryItem
      */
     public function is_special_result()
     {
-        return ($this->get_result() != self :: RESULT_NOT_RELEVANT);
+        return ($this->get_result() != self::RESULT_NOT_RELEVANT);
     }
 
     /**
@@ -112,7 +112,7 @@ class Enrollment extends DiscoveryItem
      */
     public function set_year($year)
     {
-        $this->set_default_property(self :: PROPERTY_YEAR, $year);
+        $this->set_default_property(self::PROPERTY_YEAR, $year);
     }
 
     /**
@@ -121,17 +121,17 @@ class Enrollment extends DiscoveryItem
      */
     public function set_training($training)
     {
-        $this->set_default_property(self :: PROPERTY_TRAINING, $training);
+        $this->set_default_property(self::PROPERTY_TRAINING, $training);
     }
 
     public function set_person_id($person_id)
     {
-        $this->set_default_property(self :: PROPERTY_PERSON_ID, $person_id);
+        $this->set_default_property(self::PROPERTY_PERSON_ID, $person_id);
     }
 
     public function set_training_id($training_id)
     {
-        $this->set_default_property(self :: PROPERTY_TRAINING_ID, $training_id);
+        $this->set_default_property(self::PROPERTY_TRAINING_ID, $training_id);
     }
 
     /**
@@ -140,7 +140,7 @@ class Enrollment extends DiscoveryItem
      */
     public function set_result($result)
     {
-        $this->set_default_property(self :: PROPERTY_RESULT, $result);
+        $this->set_default_property(self::PROPERTY_RESULT, $result);
     }
 
     /**
@@ -149,13 +149,13 @@ class Enrollment extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_YEAR;
-        $extended_property_names[] = self :: PROPERTY_TRAINING;
-        $extended_property_names[] = self :: PROPERTY_TRAINING_ID;
-        $extended_property_names[] = self :: PROPERTY_RESULT;
-        $extended_property_names[] = self :: PROPERTY_PERSON_ID;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_YEAR;
+        $extended_property_names[] = self::PROPERTY_TRAINING;
+        $extended_property_names[] = self::PROPERTY_TRAINING_ID;
+        $extended_property_names[] = self::PROPERTY_RESULT;
+        $extended_property_names[] = self::PROPERTY_PERSON_ID;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**

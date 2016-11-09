@@ -27,21 +27,19 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         $properties = new DataClassProperties();
         $properties->add(
             new FunctionConditionVariable(
-                FunctionConditionVariable :: DISTINCT, 
+                FunctionConditionVariable::DISTINCT, 
                 new PropertyConditionVariable($type, $filter), 
                 $filter));
         $order_by = array(new OrderBy(new PropertyConditionVariable($type, $filter)));
         $parameters = new RecordRetrievesParameters($properties, null, null, null, $order_by);
-        $records = self :: records($type, $parameters)->as_array();
+        $records = self::records($type, $parameters)->as_array();
         $results = array();
         
         $results[- 1] = '----';
         
         foreach ($records as $record)
         {
-            $results[$record[$filter]] = TypeDataFilter :: factory($type)->format_filter_option(
-                $filter, 
-                $record[$filter]);
+            $results[$record[$filter]] = TypeDataFilter::factory($type)->format_filter_option($filter, $record[$filter]);
         }
         return $results;
     }
@@ -54,13 +52,13 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         $conditions = array();
         foreach ($filter_values as $filter => $value)
         {
-            $property = TypeDataFilter :: factory($module_type)->get_filter_property($module_type, $filter, $value);
+            $property = TypeDataFilter::factory($module_type)->get_filter_property($module_type, $filter, $value);
             
             $properties->add($property);
             
             $group_by->add($property);
             
-            $filter_condition = TypeDataFilter :: factory($module_type)->get_filter_condition(
+            $filter_condition = TypeDataFilter::factory($module_type)->get_filter_condition(
                 $module_type, 
                 $filter, 
                 $value);
@@ -80,12 +78,12 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
         }
         $properties->add(
             new FunctionConditionVariable(
-                FunctionConditionVariable :: COUNT, 
+                FunctionConditionVariable::COUNT, 
                 new StaticConditionVariable(1), 
-                self :: COUNT));
+                self::COUNT));
         
         $parameters = new RecordRetrievesParameters($properties, $condition, null, null, null, null, $group_by);
         
-        return self :: records($module_type, $parameters)->as_array();
+        return self::records($module_type, $parameters)->as_array();
     }
 }

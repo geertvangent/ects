@@ -55,27 +55,27 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-
+        
         if (! isset($this->course[$programme_id][$source]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('id'),
+                new StaticColumnConditionVariable('id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                $result = $statement->fetch(\PDO :: FETCH_OBJ);
-
+                $result = $statement->fetch(\PDO::FETCH_OBJ);
+                
                 if ($result instanceof \stdClass)
                 {
                     $this->course[$programme_id][$source] = $this->result_to_course($course_parameters, $result);
@@ -118,121 +118,121 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $course->set_previous_id($object->previous_id);
         $course->set_previous_parent_id($object->previous_parent_id);
         $course->set_next_id($this->retrieve_course_next_id($course));
-
+        
         $second_chance = new SecondChance();
         $second_chance->set_exam($object->second_exam_chance);
         $second_chance->set_enrollment($object->second_enrollment);
         $second_chance->set_exam_parts($object->second_exam_parts);
         $course->set_second_chance($second_chance);
-
+        
         $following_impossible = new FollowingImpossible();
         $following_impossible->set_credit($object->impossible_credit);
         $following_impossible->set_exam_credit($object->impossible_exam_credit);
         $following_impossible->set_exam_degree($object->impossible_exam_degree);
         $course->set_following_impossible($following_impossible);
-
-        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->total_material_price, true))
+        
+        if (! StringUtilities::getInstance()->isNullOrEmpty($object->total_material_price, true))
         {
             $cost = new Cost();
-            $cost->set_type(Cost :: TYPE_MATERIAL);
+            $cost->set_type(Cost::TYPE_MATERIAL);
             $cost->set_price($object->total_material_price);
             $course->add_cost($cost);
         }
-
-        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->additional_costs, true))
+        
+        if (! StringUtilities::getInstance()->isNullOrEmpty($object->additional_costs, true))
         {
             $cost = new Cost();
-            $cost->set_type(Cost :: TYPE_ADDITIONAL);
+            $cost->set_type(Cost::TYPE_ADDITIONAL);
             $cost->set_price($this->convert_to_utf8($object->additional_costs));
             $course->add_cost($cost);
         }
-
-        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->evaluation, true))
+        
+        if (! StringUtilities::getInstance()->isNullOrEmpty($object->evaluation, true))
         {
             $evaluation_description = new EvaluationDescription();
             $evaluation_description->set_description($this->convert_to_utf8($object->evaluation));
             $course->add_evaluation($evaluation_description);
         }
-
+        
         foreach ($this->retrieve_evaluations($course_parameters) as $evaluation)
         {
             $course->add_evaluation($evaluation);
         }
-
-        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->activities, true))
+        
+        if (! StringUtilities::getInstance()->isNullOrEmpty($object->activities, true))
         {
             $activity_description = new ActivityDescription();
             $activity_description->set_description($this->convert_to_utf8($object->activities));
             $course->add_activity($activity_description);
         }
-
+        
         foreach ($this->retrieve_activities($course_parameters) as $activity)
         {
             $course->add_activity($activity);
         }
-
+        
         $activity_total = new ActivityTotal();
         $activity_total->set_time($object->total_study_time);
         $course->add_activity($activity_total);
-
-        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->material_required, true))
+        
+        if (! StringUtilities::getInstance()->isNullOrEmpty($object->material_required, true))
         {
             $material_description = new MaterialDescription();
-            $material_description->set_type(Material :: TYPE_REQUIRED);
+            $material_description->set_type(Material::TYPE_REQUIRED);
             $material_description->set_description($this->convert_to_utf8($object->material_required));
             $course->add_material($material_description);
         }
-
-        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->material_optional, true))
+        
+        if (! StringUtilities::getInstance()->isNullOrEmpty($object->material_optional, true))
         {
             $material_description = new MaterialDescription();
-            $material_description->set_type(Material :: TYPE_OPTIONAL);
+            $material_description->set_type(Material::TYPE_OPTIONAL);
             $material_description->set_description(strip_tags($this->convert_to_utf8($object->material_optional)));
             $course->add_material($material_description);
         }
-
+        
         foreach ($this->retrieve_materials($course_parameters) as $material)
         {
             $course->add_material($material);
         }
-
-        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->competences_start, true))
+        
+        if (! StringUtilities::getInstance()->isNullOrEmpty($object->competences_start, true))
         {
             $competence_description = new CompetenceDescription();
-            $competence_description->set_type(Competence :: TYPE_BEGIN);
+            $competence_description->set_type(Competence::TYPE_BEGIN);
             $competence_description->set_description($this->convert_to_utf8($object->competences_start));
             $course->add_competence($competence_description);
         }
-
-        if (! StringUtilities :: getInstance()->isNullOrEmpty($object->competences_end, true))
+        
+        if (! StringUtilities::getInstance()->isNullOrEmpty($object->competences_end, true))
         {
             $competence_description = new CompetenceDescription();
-            $competence_description->set_type(Competence :: TYPE_END);
+            $competence_description->set_type(Competence::TYPE_END);
             $competence_description->set_description($this->convert_to_utf8($object->competences_end));
             $course->add_competence($competence_description);
         }
-
+        
         foreach ($this->retrieve_competences($course_parameters) as $competence)
         {
             $course->add_competence($competence);
         }
-
+        
         foreach ($this->retrieve_languages($course_parameters) as $language)
         {
             $course->add_language($language);
         }
-
+        
         foreach ($this->retrieve_timeframe_parts($course) as $timeframe_part)
         {
             $course->add_timeframe_part($timeframe_part);
         }
-
+        
         foreach ($this->retrieve_teachers($course_parameters) as $teacher)
         {
             $course->add_teacher($teacher);
         }
-
-        if ($course->get_programme_type() == Course :: PROGRAMME_TYPE_COMPLEX)
+        
+        if ($course->get_programme_type() == Course::PROGRAMME_TYPE_COMPLEX)
         {
             $course->set_children($this->retrieve_children($course_parameters));
         }
@@ -243,21 +243,21 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('previous_id'),
+            new StaticColumnConditionVariable('previous_id'), 
             new StaticConditionVariable($course->get_id()));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('source'),
+            new StaticColumnConditionVariable('source'), 
             new StaticConditionVariable($course->get_source()));
         $condition = new AndCondition($conditions);
-
+        
         $query = 'SELECT id FROM v_discovery_course_advanced WHERE ' .
-             ConditionTranslator :: render($condition, null, $this->get_connection());
-
+             ConditionTranslator::render($condition, null, $this->get_connection());
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
-            $result = $statement->fetch(\PDO :: FETCH_OBJ);
+            $result = $statement->fetch(\PDO::FETCH_OBJ);
             return $result->id;
         }
         else
@@ -271,24 +271,24 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
         $children = array();
-
+        
         $conditions = array();
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('parent_id'),
+            new StaticColumnConditionVariable('parent_id'), 
             new StaticConditionVariable($programme_id));
         $conditions[] = new EqualityCondition(
-            new StaticColumnConditionVariable('source'),
+            new StaticColumnConditionVariable('source'), 
             new StaticConditionVariable($source));
         $condition = new AndCondition($conditions);
-
+        
         $query = 'SELECT * FROM v_discovery_course_advanced WHERE ' .
-             ConditionTranslator :: render($condition, null, $this->get_connection());
-
+             ConditionTranslator::render($condition, null, $this->get_connection());
+        
         $statement = $this->get_connection()->query($query);
-
+        
         if ($statement instanceof PDOStatement)
         {
-            while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+            while ($result = $statement->fetch(\PDO::FETCH_OBJ))
             {
                 if (! isset($this->course[$result->id][$source]))
                 {
@@ -298,7 +298,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                 $children[] = $this->course[$result->id][$source];
             }
         }
-
+        
         return $children;
     }
 
@@ -311,26 +311,26 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-
+        
         if (! isset($this->evaluations[$programme_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('programme_id'),
+                new StaticColumnConditionVariable('programme_id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_evaluation WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $evaluation = new EvaluationStructured();
                     $evaluation->set_programme_id($result->programme_id);
@@ -343,12 +343,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $evaluation->set_permanent($result->permanent);
                     $evaluation->set_percentage($result->percentage);
                     $evaluation->set_description($this->convert_to_utf8($result->remarks));
-
+                    
                     $this->evaluations[$programme_id][] = $evaluation;
                 }
             }
         }
-
+        
         return $this->evaluations[$programme_id];
     }
 
@@ -361,26 +361,26 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-
+        
         if (! isset($this->activities[$programme_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('programme_id'),
+                new StaticColumnConditionVariable('programme_id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_activity WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $activity = new ActivityStructured();
                     $activity->set_programme_id($result->programme_id);
@@ -391,12 +391,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $activity->set_time($result->time);
                     $activity->set_remarks($this->convert_to_utf8($result->remarks));
                     $activity->set_description($this->convert_to_utf8($result->description));
-
+                    
                     $this->activities[$programme_id][] = $activity;
                 }
             }
         }
-
+        
         return $this->activities[$programme_id];
     }
 
@@ -409,26 +409,26 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-
+        
         if (! isset($this->materials[$programme_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('programme_id'),
+                new StaticColumnConditionVariable('programme_id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_material WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $material = new MaterialStructured();
                     $material->set_programme_id($result->programme_id);
@@ -446,12 +446,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $material->set_for_sale($result->for_sale);
                     $material->set_type($result->required);
                     $material->set_description($this->convert_to_utf8($result->remarks));
-
+                    
                     $this->materials[$programme_id][] = $material;
                 }
             }
         }
-
+        
         return $this->materials[$programme_id];
     }
 
@@ -464,26 +464,26 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-
+        
         if (! isset($this->competences[$programme_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('programme_id'),
+                new StaticColumnConditionVariable('programme_id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_competence WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $competence = new CompetenceStructured();
                     $competence->set_programme_id($result->programme_id);
@@ -493,12 +493,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $competence->set_type($result->type);
                     $competence->set_summary($this->convert_to_utf8($result->short_description));
                     $competence->set_description($this->convert_to_utf8($result->long_description));
-
+                    
                     $this->competences[$programme_id][] = $competence;
                 }
             }
         }
-
+        
         return $this->competences[$programme_id];
     }
 
@@ -511,38 +511,38 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-
+        
         if (! isset($this->languages[$programme_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('programme_id'),
+                new StaticColumnConditionVariable('programme_id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_language WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $language = new Language();
                     $language->set_programme_id($result->programme_id);
                     $language->set_id($result->id);
                     $language->set_language_id($result->language_id);
                     $language->set_language($this->convert_to_utf8($result->language));
-
+                    
                     $this->languages[$programme_id][] = $language;
                 }
             }
         }
-
+        
         return $this->languages[$programme_id];
     }
 
@@ -555,38 +555,38 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $timeframe_id = $course->get_timeframe_id();
         $source = $course->get_source();
-
+        
         if (! isset($this->timeframe_parts[$timeframe_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('timeframe_id'),
+                new StaticColumnConditionVariable('timeframe_id'), 
                 new StaticConditionVariable($timeframe_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_course_timeframe_part WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $timeframe_part = new TimeframePart();
                     $timeframe_part->set_timeframe_id($result->timeframe_id);
                     $timeframe_part->set_id($result->id);
                     $timeframe_part->set_name($this->convert_to_utf8($result->timeframe_part));
                     $timeframe_part->set_date($result->timeframe_part_date);
-
+                    
                     $this->timeframe_parts[$timeframe_id][] = $timeframe_part;
                 }
             }
         }
-
+        
         return $this->timeframe_parts[$timeframe_id];
     }
 
@@ -599,26 +599,26 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
     {
         $programme_id = $course_parameters->get_programme_id();
         $source = $course_parameters->get_source();
-
+        
         if (! isset($this->course[$programme_id]))
         {
             $conditions = array();
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('programme_id'),
+                new StaticColumnConditionVariable('programme_id'), 
                 new StaticConditionVariable($programme_id));
             $conditions[] = new EqualityCondition(
-                new StaticColumnConditionVariable('source'),
+                new StaticColumnConditionVariable('source'), 
                 new StaticConditionVariable($source));
             $condition = new AndCondition($conditions);
-
+            
             $query = 'SELECT * FROM v_discovery_teaching_assignment_teacher_advanced WHERE ' .
-                 ConditionTranslator :: render($condition, null, $this->get_connection());
-
+                 ConditionTranslator::render($condition, null, $this->get_connection());
+            
             $statement = $this->get_connection()->query($query);
-
+            
             if ($statement instanceof PDOStatement)
             {
-                while ($result = $statement->fetch(\PDO :: FETCH_OBJ))
+                while ($result = $statement->fetch(\PDO::FETCH_OBJ))
                 {
                     $teacher = new Teacher();
                     $teacher->set_programme_id($result->programme_id);
@@ -626,12 +626,12 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                     $teacher->set_source($result->source);
                     $teacher->set_person_id($result->person_id);
                     $teacher->set_coordinator($result->coordinator);
-
+                    
                     $this->teachers[$programme_id][] = $teacher;
                 }
             }
         }
-
+        
         return $this->teachers[$programme_id];
     }
 }

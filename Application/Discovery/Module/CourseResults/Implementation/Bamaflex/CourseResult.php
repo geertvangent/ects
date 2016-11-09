@@ -5,12 +5,12 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.course_results.implementation.bamaflex.discovery
- *
+ * 
  * @author Hans De Bisschop
  */
 class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\CourseResult
 {
-
+    
     /**
      * CourseResults properties
      */
@@ -26,21 +26,21 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_TRAJECTORY_TYPE;
-        $extended_property_names[] = self :: PROPERTY_TYPE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_TRAJECTORY_TYPE;
+        $extended_property_names[] = self::PROPERTY_TYPE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -50,22 +50,22 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
 
     /**
      * Returns the trajectory_part of this Course.
-     *
+     * 
      * @return string The trajectory_part.
      */
     public function get_trajectory_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TRAJECTORY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TRAJECTORY_TYPE);
     }
 
     /**
      * Sets the trajectory_part of this Course.
-     *
+     * 
      * @param string $trajectory_part
      */
     public function set_trajectory_type($trajectory_type)
     {
-        $this->set_default_property(self :: PROPERTY_TRAJECTORY_TYPE, $trajectory_type);
+        $this->set_default_property(self::PROPERTY_TRAJECTORY_TYPE, $trajectory_type);
     }
 
     /**
@@ -76,17 +76,17 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
     {
         switch ($this->get_trajectory_type())
         {
-            case self :: TRAJECTORY_TYPE_TEMPLATE :
+            case self::TRAJECTORY_TYPE_TEMPLATE :
                 return 'Template';
                 break;
-            case self :: TRAJECTORY_TYPE_PERSONAL :
+            case self::TRAJECTORY_TYPE_PERSONAL :
                 return 'Personal';
                 break;
-            case self :: TRAJECTORY_TYPE_INDIVIDUAL :
+            case self::TRAJECTORY_TYPE_INDIVIDUAL :
                 return 'Individual';
                 break;
-            case self :: TRAJECTORY_TYPE_UNKNOWN :
-
+            case self::TRAJECTORY_TYPE_UNKNOWN :
+                
                 return 'Unknown';
                 break;
         }
@@ -94,22 +94,22 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
 
     /**
      * Returns the type of this Course.
-     *
+     * 
      * @return int The type.
      */
     public function get_type()
     {
-        return $this->get_default_property(self :: PROPERTY_TYPE);
+        return $this->get_default_property(self::PROPERTY_TYPE);
     }
 
     /**
      * Sets the type of this Course.
-     *
+     * 
      * @param int $type
      */
     public function set_type($type)
     {
-        $this->set_default_property(self :: PROPERTY_TYPE, $type);
+        $this->set_default_property(self::PROPERTY_TYPE, $type);
     }
 
     /**
@@ -118,7 +118,7 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
      */
     public function get_type_string()
     {
-        return self :: type_string($this->get_type());
+        return self::type_string($this->get_type());
     }
 
     /**
@@ -129,10 +129,10 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
     {
         switch ($type)
         {
-            case self :: TYPE_NORMAL :
+            case self::TYPE_NORMAL :
                 return 'Normal';
                 break;
-            case self :: TYPE_PREVIOUS :
+            case self::TYPE_PREVIOUS :
                 return 'Previous';
                 break;
         }
@@ -144,7 +144,7 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
      */
     public static function get_types()
     {
-        return array(self :: TYPE_NORMAL, self :: TYPE_PREVIOUS);
+        return array(self::TYPE_NORMAL, self::TYPE_PREVIOUS);
     }
 
     /**
@@ -153,7 +153,7 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
      */
     public function is_special_type()
     {
-        return ($this->get_type() != self :: TYPE_NORMAL);
+        return ($this->get_type() != self::TYPE_NORMAL);
     }
 
     /**
@@ -161,8 +161,8 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
      * @return string The table name of the data class
      */
     public static function get_table_name()
-
+    
     {
-        return Utilities :: get_classname_from_namespace(self :: class_name(), true);
+        return Utilities::get_classname_from_namespace(self::class_name(), true);
     }
 }

@@ -42,26 +42,26 @@ class BrowserComponent extends Manager implements TableSupport
             $search_conditions = array();
             
             $search_conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_NAME), 
+                new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_NAME), 
                 '*' . $query . '*');
             
             $conditions[] = new OrCondition($search_conditions);
         }
         if ($this->get_context() != 0)
         {
-            $context = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
-                Group :: class_name(), 
+            $context = \Chamilo\Core\Group\Storage\DataManager::retrieve_by_id(
+                Group::class_name(), 
                 (int) $this->get_context());
         }
         else
         {
             $context = new Group();
             $context->set_id(0);
-            $context->set_name(Translation :: get('Root'));
+            $context->set_name(Translation::get('Root'));
         }
         
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(Group :: class_name(), Group :: PROPERTY_PARENT_ID), 
+            new PropertyConditionVariable(Group::class_name(), Group::PROPERTY_PARENT_ID), 
             new StaticConditionVariable($context->get_id()));
         
         return new AndCondition($conditions);
@@ -71,7 +71,7 @@ class BrowserComponent extends Manager implements TableSupport
     {
         if (! $this->context)
         {
-            $this->context = Request :: get(self :: PARAM_CONTEXT_ID);
+            $this->context = Request::get(self::PARAM_CONTEXT_ID);
             
             if (! $this->context)
             {
@@ -84,9 +84,9 @@ class BrowserComponent extends Manager implements TableSupport
 
     public function run()
     {
-        SessionBreadcrumbs :: add(new Breadcrumb($this->get_url(), Translation :: get('TypeName')));
+        SessionBreadcrumbs::add(new Breadcrumb($this->get_url(), Translation::get('TypeName')));
         $this->buttonToolbarRenderer = $this->getButtonToolbarRenderer();
-        $this->set_parameter(Manager :: PARAM_CONTEXT_ID, $this->get_context());
+        $this->set_parameter(Manager::PARAM_CONTEXT_ID, $this->get_context());
         
         $table = new ContextTable($this);
         $menu = new Menu($this->get_context());
@@ -115,15 +115,15 @@ class BrowserComponent extends Manager implements TableSupport
             
             $commonActions->addButton(
                 new Button(
-                    Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role\Entity'), 
-                    Theme :: getInstance()->getImagesPath('\Ehb\Application\Atlantis\Role\Entity') . 'Logo/16.png', 
+                    Translation::get('TypeName', null, '\Ehb\Application\Atlantis\Role\Entity'), 
+                    Theme::getInstance()->getImagesPath('\Ehb\Application\Atlantis\Role\Entity') . 'Logo/16.png', 
                     $this->get_url(
                         array(
-                            \Ehb\Application\Atlantis\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Manager :: ACTION_ROLE, 
-                            \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITY, 
-                            \Ehb\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE, 
-                            Manager :: PARAM_CONTEXT_ID => $this->get_context())), 
-                    ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+                            \Ehb\Application\Atlantis\Manager::PARAM_ACTION => \Ehb\Application\Atlantis\Manager::ACTION_ROLE, 
+                            \Ehb\Application\Atlantis\Role\Manager::PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager::ACTION_ENTITY, 
+                            \Ehb\Application\Atlantis\Role\Entity\Manager::PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager::ACTION_BROWSE, 
+                            Manager::PARAM_CONTEXT_ID => $this->get_context())), 
+                    ToolbarItem::DISPLAY_ICON_AND_LABEL));
             
             $buttonToolbar->addButtonGroup($commonActions);
             

@@ -12,14 +12,14 @@ class DataSource extends Database
 
     /**
      * Constructor
-     *
+     * 
      * @param Instance $module_instance
      */
-    public function __construct(\Ehb\Application\Discovery\Instance\Storage\DataClass\Instance $module_instance,
+    public function __construct(\Ehb\Application\Discovery\Instance\Storage\DataClass\Instance $module_instance, 
         $connection = null)
     {
         $this->module_instance = $module_instance;
-        parent :: __construct($connection);
+        parent::__construct($connection);
     }
 
     public function get_module_instance()
@@ -35,14 +35,14 @@ class DataSource extends Database
     public static function get_available_types()
     {
         $types = array();
-
-        $data_sources = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'DataSource/',
-            Filesystem :: LIST_DIRECTORIES,
+        
+        $data_sources = Filesystem::get_directory_content(
+            Path::getInstance()->namespaceToFullPath(__NAMESPACE__) . 'DataSource/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
-
+        
         $exceptions = array('resources');
-
+        
         foreach ($data_sources as $data_source)
         {
             if (! in_array($data_source, $exceptions))

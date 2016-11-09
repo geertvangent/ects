@@ -15,8 +15,8 @@ class InstanceTableDataProvider extends DataClassTableDataProvider
      */
     public function retrieve_data($condition, $offset, $count, $order_property = null)
     {
-        return DataManager :: retrieves(
-            Instance :: class_name(),
+        return DataManager::retrieves(
+            Instance::class_name(), 
             new DataClassRetrievesParameters($condition, $count, $offset, $order_property));
     }
 
@@ -25,6 +25,6 @@ class InstanceTableDataProvider extends DataClassTableDataProvider
      */
     public function count_data($condition)
     {
-        return DataManager :: count(Instance :: class_name(), new DataClassCountParameters($condition));
+        return DataManager::count(Instance::class_name(), new DataClassCountParameters($condition));
     }
 }

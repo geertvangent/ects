@@ -26,7 +26,7 @@ class UserCalendarRendererProvider extends CalendarRendererProvider
      *
      * @see \Ehb\Application\Calendar\Extension\SyllabusPlus\Service\CalendarRendererProvider::getEventParser()
      */
-    public function getEventParser(\Chamilo\Core\User\Storage\DataClass\User $dataUser, $calendarEvent, $startTime,
+    public function getEventParser(\Chamilo\Core\User\Storage\DataClass\User $dataUser, $calendarEvent, $startTime, 
         $endTime)
     {
         return new UserEventParser($this->getDataUser(), $calendarEvent, $startTime, $endTime);

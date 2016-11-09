@@ -19,22 +19,22 @@ class RoleEntityTableColumnModel extends DataClassTableColumnModel implements Ta
         if (! $this->get_component()->has_entity())
         {
             $this->add_column(
-                new DataClassPropertyTableColumn(RoleEntity :: class_name(), RoleEntity :: PROPERTY_ENTITY_TYPE, false));
-            $this->add_column(new StaticTableColumn(Translation :: get('EntityName')));
-            $this->add_column(new StaticTableColumn(Translation :: get('Path')));
+                new DataClassPropertyTableColumn(RoleEntity::class_name(), RoleEntity::PROPERTY_ENTITY_TYPE, false));
+            $this->add_column(new StaticTableColumn(Translation::get('EntityName')));
+            $this->add_column(new StaticTableColumn(Translation::get('Path')));
         }
         if (! $this->get_component()->has_role_id())
         {
-            $this->add_column(new StaticTableColumn(Translation :: get('Role')));
+            $this->add_column(new StaticTableColumn(Translation::get('Role')));
         }
         if (! $this->get_component()->has_context_id())
         {
-            $this->add_column(new StaticTableColumn(Translation :: get('Context')));
+            $this->add_column(new StaticTableColumn(Translation::get('Context')));
         }
         
         $this->add_column(
-            new DataClassPropertyTableColumn(RoleEntity :: class_name(), RoleEntity :: PROPERTY_START_DATE, false));
+            new DataClassPropertyTableColumn(RoleEntity::class_name(), RoleEntity::PROPERTY_START_DATE, false));
         $this->add_column(
-            new DataClassPropertyTableColumn(RoleEntity :: class_name(), RoleEntity :: PROPERTY_END_DATE, false));
+            new DataClassPropertyTableColumn(RoleEntity::class_name(), RoleEntity::PROPERTY_END_DATE, false));
     }
 }

@@ -17,39 +17,39 @@ class DeactivatorComponent extends Manager
         {
             $this->not_allowed();
         }
-
-        $ids = Request :: get(Manager :: PARAM_DATA_SOURCE_ID);
+        
+        $ids = Request::get(Manager::PARAM_DATA_SOURCE_ID);
         $failures = 0;
-
+        
         if (! empty($ids))
         {
             if (! is_array($ids))
             {
                 $ids = array($ids);
             }
-
+            
             foreach ($ids as $id)
             {
-                $instance = DataManager :: retrieve_by_id(Instance :: class_name(), (int) $id);
+                $instance = DataManager::retrieve_by_id(Instance::class_name(), (int) $id);
                 $instance->deactivate();
-
+                
                 if (! $instance->update())
                 {
                     $failures ++;
                 }
             }
-
+            
             if ($failures)
             {
                 if (count($ids) == 1)
                 {
                     $message = 'ObjectNotDeactivated';
-                    $parameter = array('OBJECT' => Translation :: get('Instance'));
+                    $parameter = array('OBJECT' => Translation::get('Instance'));
                 }
                 else
                 {
                     $message = 'ObjectsNotDeactivated';
-                    $parameter = array('OBJECTS' => Translation :: get('VideosConferencing'));
+                    $parameter = array('OBJECTS' => Translation::get('VideosConferencing'));
                 }
             }
             else
@@ -57,25 +57,25 @@ class DeactivatorComponent extends Manager
                 if (count($ids) == 1)
                 {
                     $message = 'ObjectDeactivated';
-                    $parameter = array('OBJECT' => Translation :: get('Instance'));
+                    $parameter = array('OBJECT' => Translation::get('Instance'));
                 }
                 else
                 {
                     $message = 'ObjectsDeactivated';
-                    $parameter = array('OBJECTS' => Translation :: get('VideosConferencing'));
+                    $parameter = array('OBJECTS' => Translation::get('VideosConferencing'));
                 }
             }
-
+            
             $this->redirect(
-                Translation :: get($message, $parameter, Utilities :: COMMON_LIBRARIES),
-                ($failures ? true : false),
+                Translation::get($message, $parameter, Utilities::COMMON_LIBRARIES), 
+                ($failures ? true : false), 
                 array(
-                    self :: PARAM_ACTION => self :: ACTION_BROWSE_INSTANCES,
-                    self :: PARAM_CONTENT_TYPE => Instance :: TYPE_DISABLED));
+                    self::PARAM_ACTION => self::ACTION_BROWSE_INSTANCES, 
+                    self::PARAM_CONTENT_TYPE => Instance::TYPE_DISABLED));
         }
         else
         {
-            return $this->display_error_page(htmlentities(Translation :: get('NoInstanceSelected')));
+            return $this->display_error_page(htmlentities(Translation::get('NoInstanceSelected')));
         }
     }
 }

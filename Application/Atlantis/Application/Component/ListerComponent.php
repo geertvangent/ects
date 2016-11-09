@@ -21,30 +21,30 @@ class ListerComponent extends Manager implements TableSupport
 
     public function run()
     {
-        $renderer_name = Utilities :: get_classname_from_object($this, true);
+        $renderer_name = Utilities::get_classname_from_object($this, true);
         $tabs = new DynamicVisualTabsRenderer(
-            $renderer_name,
-            $this->get_rights(Request :: get(self :: PARAM_APPLICATION_ID)));
-
+            $renderer_name, 
+            $this->get_rights(Request::get(self::PARAM_APPLICATION_ID)));
+        
         // for each application, a list of rights
-        $applications = DataManager :: retrieves(Application :: class_name(), new DataClassRetrievesParameters());
-
+        $applications = DataManager::retrieves(Application::class_name(), new DataClassRetrievesParameters());
+        
         while ($application = $applications->next_result())
         {
             $tabs->add_tab(
                 new DynamicContentTab(
-                    $application->get_id,
-                    Translation :: get($application->get_name()),
-                    '',
+                    $application->get_id, 
+                    Translation::get($application->get_name()), 
+                    '', 
                     $this->get_rights($application->get_id())));
         }
-
+        
         $html = array();
-
+        
         $html[] = $this->render_header();
         $html[] = $tabs->render();
         $html[] = $this->render_footer();
-
+        
         return implode(PHP_EOL, $html);
     }
 
@@ -53,24 +53,24 @@ class ListerComponent extends Manager implements TableSupport
         $parameters = new DataClassRetrievesParameters(
             new EqualityCondition(
                 new PropertyConditionVariable(
-                    \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
-                    \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: PROPERTY_APPLICATION_ID),
+                    \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right::class_name(), 
+                    \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right::PROPERTY_APPLICATION_ID), 
                 new StaticConditionVariable($application_id)));
-        $rights = DataManager :: retrieves(
-            \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
+        $rights = DataManager::retrieves(
+            \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right::class_name(), 
             $parameters);
         $properties = $this->get_display_rights($rights);
         $table = new PropertiesTable($properties);
-
+        
         $table->setAttribute('style', 'margin-top: 1em; margin-bottom: 0;');
-
+        
         return $table->toHtml();
     }
 
     public function get_display_rights($rights)
     {
         $properties = array();
-
+        
         while ($right = $rights->next_result())
         {
             $link = $this->get_url();

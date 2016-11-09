@@ -25,47 +25,47 @@ class ProgressComponent extends Manager
     public function run()
     {
         $this->checkAuthorization();
-
+        
         $calendarService = $this->getCalendarService();
         $html = array();
-
+        
         $html[] = $this->render_header();
-
+        
         $html[] = '<div class="alert alert-info">';
         $html[] = Translation::getInstance()->get('ProgressInformation');
         $html[] = '</div>';
-
+        
         foreach ($calendarService->getYears() as $year)
         {
             $html[] = '<h4>' . Translation::get('AcademicYear', array('YEAR' => $year)) . '</h4>';
             $html[] = $this->renderProgressTable($year);
         }
-
+        
         $html[] = $this->render_footer();
-
+        
         return implode(PHP_EOL, $html);
     }
 
     private function renderProgressTable($year)
     {
         $progressData = $this->getProgressData($year);
-
+        
         $tableColumns = array();
         $tableColumns[] = new SortableStaticTableColumn(Translation::get('Faculty'));
         $tableColumns[] = new SortableStaticTableColumn(Translation::get('Training'));
         $tableColumns[] = new SortableStaticTableColumn(Translation::get('Progress'));
-
+        
         $sortableTable = new SortableTableFromArray(
-            $progressData,
-            $tableColumns,
-            array(),
-            0,
-            200,
-            SORT_ASC,
-            'progress',
-            false,
+            $progressData, 
+            $tableColumns, 
+            array(), 
+            0, 
+            200, 
+            SORT_ASC, 
+            'progress', 
+            false, 
             false);
-
+        
         return $sortableTable->toHtml();
     }
 
@@ -73,13 +73,13 @@ class ProgressComponent extends Manager
     {
         $scheduledGroups = $this->getCalendarService()->getScheduledGroupsByYear($year);
         $progressData = array();
-
+        
         $previousFacultyIdentifier = false;
-
+        
         foreach ($scheduledGroups as $scheduledGroup)
         {
             $row = array();
-
+            
             if ($previousFacultyIdentifier !== $scheduledGroup[ScheduledGroup::PROPERTY_FACULTY_ID])
             {
                 $previousFacultyIdentifier = $scheduledGroup[ScheduledGroup::PROPERTY_FACULTY_ID];
@@ -89,29 +89,29 @@ class ProgressComponent extends Manager
             {
                 $row[] = '&nbsp;';
             }
-
+            
             $row[] = $scheduledGroup[ScheduledGroup::PROPERTY_TRAINING_NAME];
             $row[] = $this->getBar(
-                $scheduledGroup[ScheduledGroup::PROPERTY_COUNT_SCHEDULED],
+                $scheduledGroup[ScheduledGroup::PROPERTY_COUNT_SCHEDULED], 
                 $scheduledGroup[ScheduledGroup::PROPERTY_COUNT_TO_BE_SCHEDULED]);
-
+            
             $progressData[] = $row;
         }
-
+        
         return $progressData;
     }
 
     private function getBar($status, $total)
     {
         $percent = $status / $total * 100;
-
+        
         $html = array();
-
+        
         if ($percent >= 100)
         {
             $percent = 100;
         }
-
+        
         if ($percent == 100)
         {
             $class = 'progress-bar-success';
@@ -124,9 +124,9 @@ class ProgressComponent extends Manager
         {
             $class = 'progress-bar-danger';
         }
-
+        
         $displayPercent = floor($percent);
-
+        
         $html[] = '<div class="progress" style="margin-bottom: 0px;">';
         $html[] = '<div class="progress-bar progress-bar-striped ' . $class . '" role="progressbar" aria-valuenow="' .
              $displayPercent . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $displayPercent .
@@ -134,7 +134,7 @@ class ProgressComponent extends Manager
         $html[] = $displayPercent . '%';
         $html[] = '</div>';
         $html[] = '</div>';
-
+        
         return implode(PHP_EOL, $html);
     }
 
@@ -160,7 +160,7 @@ class ProgressComponent extends Manager
         {
             return false;
         }
-
+        
         return true;
     }
 }

@@ -15,8 +15,8 @@ class Module extends \Ehb\Application\Discovery\Module\Cas\Module
     {
         if (! isset($this->action_statistics))
         {
-            $path = Path :: getInstance()->getStoragePath() .
-                 ClassnameUtilities :: getInstance()->namespaceToPath(__NAMESPACE__) . '/cas_action_statistics/' .
+            $path = Path::getInstance()->getStoragePath() .
+                 ClassnameUtilities::getInstance()->namespaceToPath(__NAMESPACE__) . '/cas_action_statistics/' .
                  md5(serialize($this->get_module_parameters()));
             
             if (! file_exists($path))
@@ -34,7 +34,7 @@ class Module extends \Ehb\Application\Discovery\Module\Cas\Module
                         $this->action_statistics[$cas_statistic->get_action_id()][0][] = $cas_statistic;
                     }
                 }
-                Filesystem :: write_to_file($path, serialize($this->action_statistics));
+                Filesystem::write_to_file($path, serialize($this->action_statistics));
             }
             else
             {

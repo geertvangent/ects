@@ -1,34 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package context="bamaflex">
-	<settings>
-		<category name="basic">
-			<setting name="driver" field="text" default="">
-				<validations>
-					<validation rule="required" message="ThisFieldIsRequired" />
-				</validations>
-			</setting>
-			<setting name="host" field="text" default="">
-				<validations>
-					<validation rule="required" message="ThisFieldIsRequired" />
-				</validations>
-			</setting>
-			<setting name="database" field="text" default="">
-				<validations>
-					<validation rule="required" message="ThisFieldIsRequired" />
-				</validations>
-			</setting>
-		</category>
-		<category name="authentication">
-			<setting name="username" field="text" user_setting="1">
-				<validations>
-					<validation rule="required" message="ThisFieldIsRequired" />
-				</validations>
-			</setting>
-			<setting name="password" field="password" default="">
-				<validations>
-					<validation rule="required" message="ThisFieldIsRequired" />
-				</validations>
-			</setting>
-		</category>
-	</settings>
+    <settings>
+        <category name="basic">
+            <setting
+                name="driver"
+                field="text"
+                default="">
+                <validations>
+                    <validation
+                        rule="required"
+                        message="ThisFieldIsRequired" />
+                </validations>
+            </setting>
+            <setting
+                name="host"
+                field="text"
+                default="">
+                <validations>
+                    <validation
+                        rule="required"
+                        message="ThisFieldIsRequired" />
+                </validations>
+            </setting>
+            <setting
+                name="database"
+                field="text"
+                default="">
+                <validations>
+                    <validation
+                        rule="required"
+                        message="ThisFieldIsRequired" />
+                </validations>
+            </setting>
+        </category>
+        <category name="authentication">
+            <setting
+                name="username"
+                field="text"
+                user_setting="1">
+                <validations>
+                    <validation
+                        rule="required"
+                        message="ThisFieldIsRequired" />
+                </validations>
+            </setting>
+            <setting
+                name="password"
+                field="password"
+                default="">
+                <validations>
+                    <validation
+                        rule="required"
+                        message="ThisFieldIsRequired" />
+                </validations>
+            </setting>
+        </category>
+    </settings>
 </package>

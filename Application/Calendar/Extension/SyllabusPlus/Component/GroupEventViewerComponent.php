@@ -30,7 +30,7 @@ class GroupEventViewerComponent extends EventViewerComponent
         {
             $this->groupIdentifier = $this->getRequest()->query->get(self::PARAM_GROUP_ID);
         }
-
+        
         return $this->groupIdentifier;
     }
 
@@ -41,8 +41,8 @@ class GroupEventViewerComponent extends EventViewerComponent
     protected function getActivityRecord()
     {
         return $this->getCalendarService()->getEventForGroupByYearAndIdentifier(
-            $this->getYear(),
-            $this->getGroupIdentifier(),
+            $this->getYear(), 
+            $this->getGroupIdentifier(), 
             $this->getActivityId());
     }
 
@@ -53,8 +53,8 @@ class GroupEventViewerComponent extends EventViewerComponent
     protected function getModuleEvents($moduleIdentifier)
     {
         return $this->getCalendarService()->getEventsForGroupByYearAndModuleIdentifier(
-            $this->getYear(),
-            $this->getGroupIdentifier(),
+            $this->getYear(), 
+            $this->getGroupIdentifier(), 
             $moduleIdentifier);
     }
 

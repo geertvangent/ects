@@ -15,7 +15,7 @@ class ContextTableColumnModel extends DataClassTableColumnModel implements Table
     {
         $this->add_column(
             new DataClassPropertyTableColumn(
-                \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(), 
-                \Chamilo\Core\Group\Storage\DataClass\Group :: PROPERTY_NAME));
+                \Chamilo\Core\Group\Storage\DataClass\Group::class_name(), 
+                \Chamilo\Core\Group\Storage\DataClass\Group::PROPERTY_NAME));
     }
 }

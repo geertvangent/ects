@@ -12,32 +12,32 @@ class TimeframePart extends DiscoveryItem
 
     public function get_timeframe_id()
     {
-        return $this->get_default_property(self :: PROPERTY_TIMEFRAME_ID);
+        return $this->get_default_property(self::PROPERTY_TIMEFRAME_ID);
     }
 
     public function set_timeframe_id($timeframe_id)
     {
-        $this->set_default_property(self :: PROPERTY_TIMEFRAME_ID, $timeframe_id);
+        $this->set_default_property(self::PROPERTY_TIMEFRAME_ID, $timeframe_id);
     }
 
     public function get_name()
     {
-        return $this->get_default_property(self :: PROPERTY_NAME);
+        return $this->get_default_property(self::PROPERTY_NAME);
     }
 
     public function set_name($name)
     {
-        $this->set_default_property(self :: PROPERTY_NAME, $name);
+        $this->set_default_property(self::PROPERTY_NAME, $name);
     }
 
     public function get_date()
     {
-        return $this->get_default_property(self :: PROPERTY_DATE);
+        return $this->get_default_property(self::PROPERTY_DATE);
     }
 
     public function set_date($date)
     {
-        $this->set_default_property(self :: PROPERTY_DATE, $date);
+        $this->set_default_property(self::PROPERTY_DATE, $date);
     }
 
     /**
@@ -46,12 +46,12 @@ class TimeframePart extends DiscoveryItem
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_ID;
-        $extended_property_names[] = self :: PROPERTY_TIMEFRAME_ID;
-        $extended_property_names[] = self :: PROPERTY_NAME;
-        $extended_property_names[] = self :: PROPERTY_DATE;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_ID;
+        $extended_property_names[] = self::PROPERTY_TIMEFRAME_ID;
+        $extended_property_names[] = self::PROPERTY_NAME;
+        $extended_property_names[] = self::PROPERTY_DATE;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**
@@ -69,6 +69,6 @@ class TimeframePart extends DiscoveryItem
      */
     public function __toString()
     {
-        return DatetimeUtilities :: format_locale_date('%b %d, %Y', strtotime($this->get_date()));
+        return DatetimeUtilities::format_locale_date('%b %d, %Y', strtotime($this->get_date()));
     }
 }

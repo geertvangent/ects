@@ -19,20 +19,20 @@ class BrowserComponent extends Manager implements TableSupport
         {
             throw new NotAllowedException();
         }
-
-        SessionBreadcrumbs :: add(
+        
+        SessionBreadcrumbs::add(
             new Breadcrumb(
-                $this->get_url(),
-                Translation :: get(ClassnameUtilities :: getInstance()->getClassnameFromNamespace(self :: class_name()))));
-
+                $this->get_url(), 
+                Translation::get(ClassnameUtilities::getInstance()->getClassnameFromNamespace(self::class_name()))));
+        
         $table = new EntityTable($this);
-
+        
         $html = array();
-
+        
         $html[] = $this->render_header();
-        $html[] = $this->get_tabs(self :: ACTION_BROWSE, $table->as_html())->render();
+        $html[] = $this->get_tabs(self::ACTION_BROWSE, $table->as_html())->render();
         $html[] = $this->render_footer();
-
+        
         return implode(PHP_EOL, $html);
     }
 
@@ -43,6 +43,7 @@ class BrowserComponent extends Manager implements TableSupport
     {
         // TODO Auto-generated method stub
     }
+
     /*
      * (non-PHPdoc) @see \libraries\format\TableSupport::get_table_condition()
      */

@@ -15,8 +15,8 @@ class PlatformGroupEntity extends \Chamilo\Core\Rights\Entity\PlatformGroupEntit
     {
         return new AdvancedElementFinderElementType(
             'platform_groups', 
-            Translation :: get('PlatformGroups'), 
-            Manager :: context() . '\Ajax', 
+            Translation::get('PlatformGroups'), 
+            Manager::context() . '\Ajax', 
             'platform_group_entity_feed', 
             array());
     }

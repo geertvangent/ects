@@ -35,7 +35,7 @@ class BrowserComponent extends Manager implements TableSupport
         
         $this->buttonToolbarRenderer = $this->getButtonToolbarRenderer();
         $parameters = $this->get_parameters();
-        $parameters[ActionBarSearchForm :: PARAM_SIMPLE_SEARCH_QUERY] = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
+        $parameters[ActionBarSearchForm::PARAM_SIMPLE_SEARCH_QUERY] = $this->buttonToolbarRenderer->getSearchForm()->getQuery();
         $table = new InstanceTable($this);
         
         $html = array();
@@ -56,10 +56,10 @@ class BrowserComponent extends Manager implements TableSupport
         {
             $conditions = array();
             $conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_NAME), 
+                new PropertyConditionVariable(Instance::class_name(), Instance::PROPERTY_NAME), 
                 '*' . $query . '*');
             $conditions[] = new PatternMatchCondition(
-                new PropertyConditionVariable(Instance :: class_name(), Instance :: PROPERTY_DESCRIPTION), 
+                new PropertyConditionVariable(Instance::class_name(), Instance::PROPERTY_DESCRIPTION), 
                 '*' . $query . '*');
             
             $condition = new AndCondition($conditions);
@@ -79,10 +79,10 @@ class BrowserComponent extends Manager implements TableSupport
             $commonActions = new ButtonGroup();
             $commonActions->addButton(
                 new Button(
-                    Translation :: get('AddInstance'), 
-                    Theme :: getInstance()->getCommonImagePath('Action/Create'), 
-                    $this->get_url(array(self :: PARAM_ACTION => self :: ACTION_CREATE_INSTANCE)), 
-                    ToolbarItem :: DISPLAY_ICON_AND_LABEL));
+                    Translation::get('AddInstance'), 
+                    Theme::getInstance()->getCommonImagePath('Action/Create'), 
+                    $this->get_url(array(self::PARAM_ACTION => self::ACTION_CREATE_INSTANCE)), 
+                    ToolbarItem::DISPLAY_ICON_AND_LABEL));
             $buttonToolbar->addButtonGroup($commonActions);
             
             $this->buttonToolbarRenderer = new ButtonToolBarRenderer($buttonToolbar);

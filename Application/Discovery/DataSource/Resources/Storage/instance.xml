@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object name="instance">
-	<properties>
-		<property name="id" type="integer" unsigned="1" notnull="1"
-			autoincrement="true" />
-		<property name="title" notnull="1" type="text" length="50"
-			fixed="true" />
-		<property name="description" type="text" />
-		<property name="type" notnull="1" type="text" length="255"
-			fixed="true" />
-		<property name="content_type" notnull="1" type="integer"
-			length="1" unsigned="1" />
-		<property name="display_order" notnull="1" type="integer"
-			unsigned="1" />
-	</properties>
+    <properties>
+        <property
+            name="id"
+            type="integer"
+            unsigned="1"
+            notnull="1"
+            autoincrement="true" />
+        <property
+            name="title"
+            notnull="1"
+            type="text"
+            length="50"
+            fixed="true" />
+        <property
+            name="description"
+            type="text" />
+        <property
+            name="type"
+            notnull="1"
+            type="text"
+            length="255"
+            fixed="true" />
+        <property
+            name="content_type"
+            notnull="1"
+            type="integer"
+            length="1"
+            unsigned="1" />
+        <property
+            name="display_order"
+            notnull="1"
+            type="integer"
+            unsigned="1" />
+    </properties>
 </object>

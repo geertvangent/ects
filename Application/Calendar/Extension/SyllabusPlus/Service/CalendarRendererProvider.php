@@ -42,7 +42,7 @@ abstract class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Rend
     public function __construct(CalendarService $calendarService, User $dataUser, User $viewingUser, $displayParameters)
     {
         parent::__construct($dataUser, $viewingUser, $displayParameters);
-
+        
         $this->calendarService = $calendarService;
     }
 
@@ -73,18 +73,18 @@ abstract class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Rend
     public function aggregateEvents($requestedSourceType, $startTime, $endTime)
     {
         $events = array();
-
+        
         if ($requestedSourceType != self::SOURCE_TYPE_EXTERNAL)
         {
             // TODO: This is basically almost the same as the logic in the integration with the Calendar application,
             // the logic should therefore be split off into it's own service
             $calendarService = $this->getCalendarService();
             $events = array();
-
+            
             if ($calendarService->isConfigured(Configuration::getInstance()))
             {
                 $calendarEvents = $this->getCalendarEvents($startTime, $endTime);
-
+                
                 foreach ($calendarEvents as $calendarEvent)
                 {
                     $eventParser = $this->getEventParser($this->getDataUser(), $calendarEvent, $startTime, $endTime);
@@ -92,7 +92,7 @@ abstract class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Rend
                 }
             }
         }
-
+        
         return $events;
     }
 

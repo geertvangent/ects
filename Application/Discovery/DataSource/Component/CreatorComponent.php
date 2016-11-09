@@ -22,78 +22,78 @@ class CreatorComponent extends Manager
         {
             $this->not_allowed();
         }
-
-        $type = Request :: get(self :: PARAM_TYPE);
+        
+        $type = Request::get(self::PARAM_TYPE);
         if ($type)
         {
             $instance = new Instance();
             $instance->set_type($type);
-
+            
             $form = new InstanceForm(
-                InstanceForm :: TYPE_CREATE,
-                $instance,
-                $this->get_url(array(self :: PARAM_TYPE => $type)));
-
+                InstanceForm::TYPE_CREATE, 
+                $instance, 
+                $this->get_url(array(self::PARAM_TYPE => $type)));
+            
             if ($form->validate())
             {
                 $success = $form->create_instance();
-
+                
                 $this->redirect(
-                    Translation :: get(
-                        $success ? 'ObjectAdded' : 'ObjectNotAdded',
-                        array('OBJECT' => Translation :: get('Instance')),
-                        Utilities :: COMMON_LIBRARIES),
-                    ($success ? false : true),
-                    array(self :: PARAM_ACTION => self :: ACTION_BROWSE_INSTANCES));
+                    Translation::get(
+                        $success ? 'ObjectAdded' : 'ObjectNotAdded', 
+                        array('OBJECT' => Translation::get('Instance')), 
+                        Utilities::COMMON_LIBRARIES), 
+                    ($success ? false : true), 
+                    array(self::PARAM_ACTION => self::ACTION_BROWSE_INSTANCES));
             }
             else
             {
                 $html = array();
-
+                
                 $html[] = $this->render_header();
                 $html[] = $form->toHtml();
                 $html[] = $this->render_footer();
-
+                
                 return implode(PHP_EOL, $html);
             }
         }
         else
         {
-            $available_types = DataSource :: get_available_types();
+            $available_types = DataSource::get_available_types();
             $table_data = array();
-
+            
             foreach ($available_types as $available_type)
             {
-                $name = htmlentities(Translation :: get('TypeName', null, $available_type));
+                $name = htmlentities(Translation::get('TypeName', null, $available_type));
                 $row = array();
-                $row[] = '<img src="' . Theme :: getInstance()->getImagesPath($available_type) . 'Logo/22.png" alt="' .
+                $row[] = '<img src="' . Theme::getInstance()->getImagesPath($available_type) . 'Logo/22.png" alt="' .
                      $name . '" title="' . $name . '"/>';
                 $row[] = $name;
-                $row[] = htmlentities(Translation :: get('TypeDescription', null, $available_type));
-                $row[] = Theme :: getInstance()->getCommonImage(
-                    'Action/Add',
-                    'png',
-                    Translation :: get('AddInstance'),
-                    $this->get_url(array(self :: PARAM_TYPE => $available_type)),
-                    ToolbarItem :: DISPLAY_ICON);
-
+                $row[] = htmlentities(Translation::get('TypeDescription', null, $available_type));
+                $row[] = Theme::getInstance()->getCommonImage(
+                    'Action/Add', 
+                    'png', 
+                    Translation::get('AddInstance'), 
+                    $this->get_url(array(self::PARAM_TYPE => $available_type)), 
+                    ToolbarItem::DISPLAY_ICON);
+                
                 $table_data[] = $row;
             }
-
+            
             $headers = array();
             $headers[] = new StaticTableColumn('');
             $headers[] = new StaticTableColumn('Type');
             $headers[] = new StaticTableColumn('Description');
             $headers[] = new StaticTableColumn('');
-
+            
             $table = new SortableTableFromArray($table_data, $headers);
-
+            
             $html = array();
-
+            
             $html[] = $this->render_header();
             $html[] = $table->toHtml();
             $html[] = $this->render_footer();
-
+            
             return implode(PHP_EOL, $html);
         }
     }

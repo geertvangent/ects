@@ -45,12 +45,12 @@ abstract class TypeDataFilter
     {
         switch ($filter)
         {
-            case TypeData :: PROPERTY_DATE :
+            case TypeData::PROPERTY_DATE :
                 return $this->get_date_options();
                 break;
             
             default :
-                return DataManager :: retrieve_filter_options($this->get_type(), $filter);
+                return DataManager::retrieve_filter_options($this->get_type(), $filter);
                 break;
         }
     }
@@ -58,13 +58,13 @@ abstract class TypeDataFilter
     public function get_date_options()
     {
         return array(
-            self :: DATE_DAY => Translation :: get('Day'), 
-            self :: DATE_WEEK => Translation :: get('Week'), 
-            self :: DATE_MONTH_YEAR => Translation :: get('MonthYear'), 
-            self :: DATE_YEAR => Translation :: get('Year'), 
-            self :: DATE_HOUR => Translation :: get('Hour'), 
-            self :: DATE_WEEKDAY => Translation :: get('WeekDay'), 
-            self :: DATE_MONTH => Translation :: get('Month'));
+            self::DATE_DAY => Translation::get('Day'), 
+            self::DATE_WEEK => Translation::get('Week'), 
+            self::DATE_MONTH_YEAR => Translation::get('MonthYear'), 
+            self::DATE_YEAR => Translation::get('Year'), 
+            self::DATE_HOUR => Translation::get('Hour'), 
+            self::DATE_WEEKDAY => Translation::get('WeekDay'), 
+            self::DATE_MONTH => Translation::get('Month'));
     }
 
     public function format_filter_option($filter, $value)
@@ -80,7 +80,7 @@ abstract class TypeDataFilter
     {
         switch ($filter)
         {
-            case TypeData :: PROPERTY_DATE :
+            case TypeData::PROPERTY_DATE :
                 return $this->get_date_filter_property($module_type, $filter, $value);
                 break;
             default :
@@ -93,25 +93,25 @@ abstract class TypeDataFilter
         $property = new PropertyConditionVariable($module_type, $filter);
         switch ($value)
         {
-            case self :: DATE_DAY :
+            case self::DATE_DAY :
                 $format = '%Y-%m-%d';
                 break;
-            case self :: DATE_WEEK :
+            case self::DATE_WEEK :
                 $format = '%Y-%u';
                 break;
-            case self :: DATE_MONTH_YEAR :
+            case self::DATE_MONTH_YEAR :
                 $format = '%Y-%m';
                 break;
-            case self :: DATE_YEAR :
+            case self::DATE_YEAR :
                 $format = '%Y';
                 break;
-            case self :: DATE_HOUR :
+            case self::DATE_HOUR :
                 $format = '%H';
                 break;
-            case self :: DATE_WEEKDAY :
+            case self::DATE_WEEKDAY :
                 $format = '%W';
                 break;
-            case self :: DATE_MONTH :
+            case self::DATE_MONTH :
                 $format = '%M';
                 break;
         }
@@ -122,7 +122,7 @@ abstract class TypeDataFilter
     {
         switch ($filter)
         {
-            case TypeData :: PROPERTY_DATE :
+            case TypeData::PROPERTY_DATE :
                 return null;
                 break;
             default :

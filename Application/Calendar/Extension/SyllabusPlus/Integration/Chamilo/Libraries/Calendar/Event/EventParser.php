@@ -149,28 +149,28 @@ abstract class EventParser
     public function getEvents()
     {
         $calendarEvent = $this->getCalendarEvent();
-
+        
         $events = array();
-
+        
         $startTime = strtotime($calendarEvent[Activity::PROPERTY_START_TIME]);
         $endTime = strtotime($calendarEvent[Activity::PROPERTY_END_TIME]);
-
+        
         $source = '[' . $calendarEvent[Activity::PROPERTY_TYPE_CODE] . '] ' . $calendarEvent[Activity::PROPERTY_TYPE];
-
+        
         $event = new Event(
-            $calendarEvent[Activity::PROPERTY_ID],
-            $startTime,
-            $endTime,
-            new RecurrenceRules(),
-            $this->getUrl($calendarEvent),
-            $this->getEventLabel($calendarEvent),
-            $this->getEventDescription($calendarEvent),
-            $this->getLocationFromCalendarEvent($calendarEvent),
-            $source,
+            $calendarEvent[Activity::PROPERTY_ID], 
+            $startTime, 
+            $endTime, 
+            new RecurrenceRules(), 
+            $this->getUrl($calendarEvent), 
+            $this->getEventLabel($calendarEvent), 
+            $this->getEventDescription($calendarEvent), 
+            $this->getLocationFromCalendarEvent($calendarEvent), 
+            $source, 
             \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::context());
-
+        
         $event->setCalendarEvent($calendarEvent);
-
+        
         return array($event);
     }
 
@@ -184,15 +184,15 @@ abstract class EventParser
     private function getEventLabel($calendarEvent)
     {
         $html = array();
-
+        
         $html[] = '[' . $calendarEvent[Activity::PROPERTY_TYPE_CODE] . ']';
         $html[] = $calendarEvent['name'];
-
+        
         if ($calendarEvent['location'])
         {
             $html[] = '(' . trim($calendarEvent['location']) . ')';
         }
-
+        
         if ($this->getDataUser()->get_status() == User::STATUS_TEACHER)
         {
             if ($calendarEvent[Activity::PROPERTY_STUDENT_GROUP])
@@ -200,7 +200,7 @@ abstract class EventParser
                 $html[] = '(' . trim($calendarEvent[Activity::PROPERTY_STUDENT_GROUP]) . ')';
             }
         }
-
+        
         return implode(' ', $html);
     }
 
@@ -212,24 +212,24 @@ abstract class EventParser
     private function getEventDescription($calendarEvent)
     {
         $html = array();
-
+        
         $html[] = $calendarEvent[Activity::PROPERTY_TYPE];
-
+        
         if ($calendarEvent['teacher'])
         {
             $html[] = Translation::get('ByTeacher') . ' ' . trim($calendarEvent[Activity::PROPERTY_TEACHER]);
         }
-
+        
         if ($calendarEvent['location'])
         {
             $html[] = Translation::get('AtLocation') . ' ' . trim($calendarEvent['location']);
         }
-
+        
         if ($calendarEvent['student_group'])
         {
             $html[] = Translation::get('ForGroups') . ' ' . trim($calendarEvent[Activity::PROPERTY_STUDENT_GROUP]);
         }
-
+        
         return implode(PHP_EOL, $html);
     }
 

@@ -16,5 +16,5 @@ abstract class Manager extends Application
     const ACTION_DELETE_INSTANCE = 'Deleter';
     const ACTION_CREATE_INSTANCE = 'Creator';
     const ACTION_MOVE_INSTANCE = 'Mover';
-    const DEFAULT_ACTION = self :: ACTION_BROWSE_INSTANCES;
+    const DEFAULT_ACTION = self::ACTION_BROWSE_INSTANCES;
 }

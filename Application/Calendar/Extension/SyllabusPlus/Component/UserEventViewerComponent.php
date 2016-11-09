@@ -21,8 +21,8 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
     protected function getActivityRecord()
     {
         return $this->getCalendarService()->getEventForUserByIdentifier(
-            $this->getUserCalendar(),
-            $this->getActivityId(),
+            $this->getUserCalendar(), 
+            $this->getActivityId(), 
             $this->getYear());
     }
 
@@ -33,8 +33,8 @@ class UserEventViewerComponent extends EventViewerComponent implements DelegateC
     protected function getModuleEvents($moduleIdentifier)
     {
         return $this->getCalendarService()->getEventsForUserByModuleIdentifier(
-            $this->getUserCalendar(),
-            $moduleIdentifier,
+            $this->getUserCalendar(), 
+            $moduleIdentifier, 
             $this->getYear());
     }
 

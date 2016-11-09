@@ -17,18 +17,18 @@ class EntitlementTableCellRenderer extends DataClassTableCellRenderer implements
     {
         switch ($column->get_name())
         {
-            case Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Role') :
+            case Translation::get('TypeName', null, '\Ehb\Application\Atlantis\Role') :
                 return $object->get_role()->get_name();
                 break;
-            case Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Application') :
+            case Translation::get('TypeName', null, '\Ehb\Application\Atlantis\Application') :
                 return $object->get_right()->get_application()->get_name();
                 break;
-            case Translation :: get('TypeName', null, '\Ehb\Application\Atlantis\Application\Right') :
+            case Translation::get('TypeName', null, '\Ehb\Application\Atlantis\Application\Right') :
                 return $object->get_right()->get_name();
                 break;
         }
-
-        return parent :: render_cell($column, $object);
+        
+        return parent::render_cell($column, $object);
     }
 
     public function get_actions($entitlement)
@@ -38,13 +38,13 @@ class EntitlementTableCellRenderer extends DataClassTableCellRenderer implements
         {
             $toolbar->add_item(
                 new ToolbarItem(
-                    Translation :: get('Delete', null, Utilities :: COMMON_LIBRARIES),
-                    Theme :: getInstance()->getCommonImagePath('Action/Delete'),
+                    Translation::get('Delete', null, Utilities::COMMON_LIBRARIES), 
+                    Theme::getInstance()->getCommonImagePath('Action/Delete'), 
                     $this->get_component()->get_url(
                         array(
-                            Manager :: PARAM_ACTION => Manager :: ACTION_DELETE,
-                            Manager :: PARAM_ENTITLEMENT_ID => $entitlement->get_id())),
-                    ToolbarItem :: DISPLAY_ICON));
+                            Manager::PARAM_ACTION => Manager::ACTION_DELETE, 
+                            Manager::PARAM_ENTITLEMENT_ID => $entitlement->get_id())), 
+                    ToolbarItem::DISPLAY_ICON));
         }
         return $toolbar->as_html();
     }

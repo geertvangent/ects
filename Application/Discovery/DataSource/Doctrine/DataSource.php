@@ -15,7 +15,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource
      */
     public function __construct(Instance $module_instance)
     {
-        parent :: __construct($module_instance);
+        parent::__construct($module_instance);
         $this->initialize();
     }
 
@@ -25,7 +25,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource
     public function initialize()
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $this->connection = Connection :: getInstance($data_source)->get_connection();
+        $this->connection = Connection::getInstance($data_source)->get_connection();
         $this->connection->setCharset('utf8');
     }
 

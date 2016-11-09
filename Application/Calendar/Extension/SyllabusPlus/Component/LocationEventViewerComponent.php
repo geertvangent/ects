@@ -30,7 +30,7 @@ class LocationEventViewerComponent extends EventViewerComponent
         {
             $this->locationIdentifier = $this->getRequest()->query->get(self::PARAM_LOCATION_ID);
         }
-
+        
         return $this->locationIdentifier;
     }
 
@@ -41,8 +41,8 @@ class LocationEventViewerComponent extends EventViewerComponent
     protected function getActivityRecord()
     {
         return $this->getCalendarService()->getEventForLocationByYearAndIdentifier(
-            $this->getYear(),
-            $this->getLocationIdentifier(),
+            $this->getYear(), 
+            $this->getLocationIdentifier(), 
             $this->getActivityId());
     }
 
@@ -53,8 +53,8 @@ class LocationEventViewerComponent extends EventViewerComponent
     protected function getModuleEvents($moduleIdentifier)
     {
         return $this->getCalendarService()->getEventsForLocationByYearAndModuleIdentifier(
-            $this->getYear(),
-            $this->getLocationIdentifier(),
+            $this->getYear(), 
+            $this->getLocationIdentifier(), 
             $moduleIdentifier);
     }
 

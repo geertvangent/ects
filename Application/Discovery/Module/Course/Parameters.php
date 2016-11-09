@@ -11,11 +11,11 @@ class Parameters extends \Ehb\Application\Discovery\Parameters
 
     public function get_programme_id()
     {
-        return $this->get_parameter(Module :: PARAM_PROGRAMME_ID);
+        return $this->get_parameter(Module::PARAM_PROGRAMME_ID);
     }
 
     public function set_programme_id($programme_id)
     {
-        $this->set_parameter(Module :: PARAM_PROGRAMME_ID, $programme_id);
+        $this->set_parameter(Module::PARAM_PROGRAMME_ID, $programme_id);
     }
 }

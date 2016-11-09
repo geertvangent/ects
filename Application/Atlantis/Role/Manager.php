@@ -14,6 +14,6 @@ abstract class Manager extends Application
     const ACTION_CREATE = 'Creator';
     const ACTION_ENTITLEMENT = 'Entitlement';
     const ACTION_ENTITY = 'Entity';
-    const DEFAULT_ACTION = self :: ACTION_BROWSE;
+    const DEFAULT_ACTION = self::ACTION_BROWSE;
     const PARAM_ROLE_ID = 'role_id';
 }

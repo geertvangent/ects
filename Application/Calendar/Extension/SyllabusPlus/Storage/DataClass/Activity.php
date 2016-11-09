@@ -40,7 +40,7 @@ abstract class Activity extends DataClass
         $extended_property_names[] = self::PROPERTY_TYPE;
         $extended_property_names[] = self::PROPERTY_STUDENT_GROUP;
         $extended_property_names[] = self::PROPERTY_TEACHER;
-
+        
         return parent::get_default_property_names($extended_property_names);
     }
 

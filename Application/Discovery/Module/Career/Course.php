@@ -6,12 +6,12 @@ use Chamilo\Libraries\Utilities\Utilities;
 
 /**
  * application.discovery.module.career.discovery
- *
+ * 
  * @author Hans De Bisschop
  */
 class Course extends DataClass
 {
-
+    
     /**
      * Course properties
      */
@@ -22,23 +22,23 @@ class Course extends DataClass
 
     /**
      * Get the default properties
-     *
+     * 
      * @param multitype:string $extended_property_names
      * @return multitype:string The property names.
      */
     public static function get_default_property_names($extended_property_names = array())
     {
-        $extended_property_names[] = self :: PROPERTY_YEAR;
-        $extended_property_names[] = self :: PROPERTY_NAME;
-        $extended_property_names[] = self :: PROPERTY_MARKS;
-        $extended_property_names[] = self :: PROPERTY_CHILDREN;
-
-        return parent :: get_default_property_names($extended_property_names);
+        $extended_property_names[] = self::PROPERTY_YEAR;
+        $extended_property_names[] = self::PROPERTY_NAME;
+        $extended_property_names[] = self::PROPERTY_MARKS;
+        $extended_property_names[] = self::PROPERTY_CHILDREN;
+        
+        return parent::get_default_property_names($extended_property_names);
     }
 
     /**
      * Get the data class data manager
-     *
+     * 
      * @return DataManagerInterface
      */
     public function get_data_manager()
@@ -48,52 +48,52 @@ class Course extends DataClass
 
     /**
      * Returns the year of this Course.
-     *
+     * 
      * @return string The year.
      */
     public function get_year()
     {
-        return $this->get_default_property(self :: PROPERTY_YEAR);
+        return $this->get_default_property(self::PROPERTY_YEAR);
     }
 
     /**
      * Sets the year of this Course.
-     *
+     * 
      * @param string $year
      */
     public function set_year($year)
     {
-        $this->set_default_property(self :: PROPERTY_YEAR, $year);
+        $this->set_default_property(self::PROPERTY_YEAR, $year);
     }
 
     /**
      * Returns the name of this Course.
-     *
+     * 
      * @return string The name.
      */
     public function get_name()
     {
-        return $this->get_default_property(self :: PROPERTY_NAME);
+        return $this->get_default_property(self::PROPERTY_NAME);
     }
 
     /**
      * Sets the name of this Course.
-     *
+     * 
      * @param string $name
      */
     public function set_name($name)
     {
-        $this->set_default_property(self :: PROPERTY_NAME, $name);
+        $this->set_default_property(self::PROPERTY_NAME, $name);
     }
 
     /**
      * Returns the marks of this Course.
-     *
+     * 
      * @return multitype:Mark The marks.
      */
     public function get_marks()
     {
-        return $this->get_default_property(self :: PROPERTY_MARKS);
+        return $this->get_default_property(self::PROPERTY_MARKS);
     }
 
     public function get_mark_by_moment_id($moment_id)
@@ -125,38 +125,38 @@ class Course extends DataClass
                 return $mark;
             }
         }
-
-        return Mark :: factory($moment_id, '', '');
+        
+        return Mark::factory($moment_id, '', '');
     }
 
     /**
      * Sets the marks of this Course.
-     *
+     * 
      * @param multitype:Mark $marks
      */
     public function set_marks($marks)
     {
-        $this->set_default_property(self :: PROPERTY_MARKS, $marks);
+        $this->set_default_property(self::PROPERTY_MARKS, $marks);
     }
 
     /**
      * Returns the children of this Course.
-     *
+     * 
      * @return multitype:Course The children.
      */
     public function get_children()
     {
-        return $this->get_default_property(self :: PROPERTY_CHILDREN);
+        return $this->get_default_property(self::PROPERTY_CHILDREN);
     }
 
     /**
      * Sets the children of this Course.
-     *
+     * 
      * @param multitype:Course $children
      */
     public function set_children($children)
     {
-        $this->set_default_property(self :: PROPERTY_CHILDREN, $children);
+        $this->set_default_property(self::PROPERTY_CHILDREN, $children);
     }
 
     /**
@@ -196,6 +196,6 @@ class Course extends DataClass
      */
     public static function get_table_name()
     {
-        return Utilities :: get_classname_from_namespace(self :: class_name(), true);
+        return Utilities::get_classname_from_namespace(self::class_name(), true);
     }
 }

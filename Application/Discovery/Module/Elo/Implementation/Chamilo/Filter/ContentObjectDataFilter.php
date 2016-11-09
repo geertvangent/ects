@@ -16,18 +16,18 @@ class ContentObjectDataFilter extends TypeDataFilter
     {
         switch ($filter)
         {
-            case ContentObjectData :: PROPERTY_PLATFORM :
+            case ContentObjectData::PROPERTY_PLATFORM :
                 return $value == 1 ? 'dokeos' : 'chamilo';
                 break;
-            case ContentObjectData :: PROPERTY_OBJECT_TYPE :
-                return Translation :: get('TypeName', null, Utilities :: get_namespace_classname($value));
+            case ContentObjectData::PROPERTY_OBJECT_TYPE :
+                return Translation::get('TypeName', null, Utilities::get_namespace_classname($value));
                 break;
         }
-        return parent :: format_filter_option($filter, $value);
+        return parent::format_filter_option($filter, $value);
     }
 
     public function get_filter_condition($module_type, $filter, $value)
     {
-        return parent :: get_filter_condition($module_type, $filter, $value);
+        return parent::get_filter_condition($module_type, $filter, $value);
     }
 }

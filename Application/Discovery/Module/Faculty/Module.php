@@ -7,7 +7,6 @@ use Chamilo\Libraries\File\Path;
 use Chamilo\Libraries\Platform\Session\Request;
 use Ehb\Application\Discovery\Instance\Storage\DataClass\Instance;
 
-
 class Module extends \Ehb\Application\Discovery\Module
 {
     const PARAM_YEAR = 'year';
@@ -24,19 +23,19 @@ class Module extends \Ehb\Application\Discovery\Module
 
     public function __construct(Application $application, Instance $module_instance)
     {
-        parent :: __construct($application, $module_instance);
+        parent::__construct($application, $module_instance);
     }
 
     public static function module_parameters()
     {
-        $year = Request :: get(self :: PARAM_YEAR);
-
+        $year = Request::get(self::PARAM_YEAR);
+        
         $parameter = new Parameters();
         if ($year)
         {
             $parameter->set_year($year);
         }
-
+        
         return $parameter;
     }
 
@@ -48,8 +47,7 @@ class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->faculties[$year]))
         {
-            $this->faculties[$year] = DataManager :: getInstance($this->get_module_instance())->retrieve_faculties(
-                $year);
+            $this->faculties[$year] = DataManager::getInstance($this->get_module_instance())->retrieve_faculties($year);
         }
         return $this->faculties[$year];
     }
@@ -70,23 +68,23 @@ class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->years))
         {
-            $this->years = DataManager :: getInstance($this->get_module_instance())->retrieve_years();
+            $this->years = DataManager::getInstance($this->get_module_instance())->retrieve_years();
         }
         return $this->years;
     }
 
     public function get_type()
     {
-        return Instance :: TYPE_INFORMATION;
+        return Instance::TYPE_INFORMATION;
     }
 
     public static function get_available_implementations()
     {
         $types = array();
-
-        $modules = Filesystem :: get_directory_content(
-            Path :: getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/',
-            Filesystem :: LIST_DIRECTORIES,
+        
+        $modules = Filesystem::get_directory_content(
+            Path::getInstance()->namespaceToFullPath(__NAMESPACE__) . 'implementation/', 
+            Filesystem::LIST_DIRECTORIES, 
             false);
         foreach ($modules as $module)
         {
