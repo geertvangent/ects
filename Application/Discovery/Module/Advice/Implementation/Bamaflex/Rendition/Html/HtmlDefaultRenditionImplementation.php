@@ -22,7 +22,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
 
         if (! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,
@@ -37,7 +37,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         if ($this->has_advices())
         {
 
-            $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
+            $enrollments = DataManager :: getInstance($this->get_module_instance())->retrieve_enrollments(
                 $this->get_module_parameters());
 
             foreach ($enrollments as $enrollment)

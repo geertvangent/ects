@@ -25,7 +25,7 @@ class HtmlDefaultRendition extends HtmlRendition
             array(\Ehb\Application\Discovery\Manager :: PARAM_VIEW => $type));
         $url = $rendition_implementation->get_context()->get_url($export_parameters);
 
-        BreadcrumbTrail :: get_instance()->add_extra(
+        BreadcrumbTrail :: getInstance()->add_extra(
             new ToolbarItem(
                 Translation :: get(StringUtilities :: getInstance()->createString($type)->upperCamelize()),
                 Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Export/' . $type . '.png',

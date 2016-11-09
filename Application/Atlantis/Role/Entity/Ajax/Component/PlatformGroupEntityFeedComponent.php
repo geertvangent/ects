@@ -42,9 +42,9 @@ class PlatformGroupEntityFeedComponent extends PlatformGroupsFeedComponent
         {
             $type = AdvancedElementFinderElement :: TYPE_SELECTABLE_AND_FILTER;
         }
-        elseif (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
         {
-            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Ehb\Application\Atlantis\Rights :: getInstance()->get_target_groups($this->get_user());
 
             if (in_array($group->get_id(), $target_groups))
             {
@@ -154,9 +154,9 @@ class PlatformGroupEntityFeedComponent extends PlatformGroupsFeedComponent
         {
             return $groups;
         }
-        elseif (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
         {
-            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Ehb\Application\Atlantis\Rights :: getInstance()->get_target_groups($this->get_user());
 
             $allowed_groups = array();
 
@@ -198,10 +198,10 @@ class PlatformGroupEntityFeedComponent extends PlatformGroupsFeedComponent
             $add_users = true;
         }
         elseif (! $this->get_user()->is_platform_admin() &&
-             \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
+             \Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
         {
             $group = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(Group :: class_name(), (int) $filter_id);
-            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Ehb\Application\Atlantis\Rights :: getInstance()->get_target_groups($this->get_user());
 
             foreach ($target_groups as $target_group)
             {

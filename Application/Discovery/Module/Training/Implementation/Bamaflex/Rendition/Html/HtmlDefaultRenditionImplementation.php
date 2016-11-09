@@ -21,7 +21,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     public function get_trainings_table($year)
     {
         $trainings = $this->get_trainings_data($year);
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $year));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $year));
         $data = array();
         $data_source = $this->get_module_instance()->get_setting('data_source');
 

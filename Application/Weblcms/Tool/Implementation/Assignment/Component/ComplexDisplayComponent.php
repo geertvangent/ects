@@ -41,7 +41,7 @@ class ComplexDisplayComponent extends Manager implements DelegateComponent
                     \Chamilo\Application\Weblcms\Tool\Manager :: PARAM_PUBLICATION_ID));
         }
 
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $this->get_root_content_object()->get_title()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $this->get_root_content_object()->get_title()));
 
         $configuration = new ApplicationConfiguration($this->getRequest(), $this->get_user(), $this);
         $configuration->set(

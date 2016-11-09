@@ -18,7 +18,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
         if (! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,
             $this->get_module_instance()->get_id(),
@@ -123,7 +123,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_general_properties()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $this->get_profile()->get_name()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $this->get_profile()->get_name()));
 
         $properties = array();
 

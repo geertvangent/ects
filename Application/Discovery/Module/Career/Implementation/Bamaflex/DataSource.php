@@ -77,7 +77,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         $id = $parameters->get_user_id();
         if (! isset($this->contract_ids[$id]))
         {
-            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: getInstance()->retrieve_user($id);
             $official_code = $user->get_official_code();
 
             $condition = new EqualityCondition(
@@ -397,7 +397,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
         // $user_id = $parameters->get_user_id();
         // if (! isset($this->mark_moments[$user_id]))
         // {
-        // $user = \core\user\DataManager :: get_instance()->retrieve_user($user_id);
+        // $user = \core\user\DataManager :: getInstance()->retrieve_user($user_id);
         // $official_code = $user->get_official_code();
 
         // $condition = new EqualityCondition(new StaticColumnConditionVariable('person_id'), new

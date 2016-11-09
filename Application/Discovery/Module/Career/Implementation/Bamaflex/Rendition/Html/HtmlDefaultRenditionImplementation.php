@@ -26,7 +26,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
 
         if (! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,
@@ -574,7 +574,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_enrollments()
     {
-        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
+        $enrollments = DataManager :: getInstance($this->get_module_instance())->retrieve_enrollments(
             $this->get_module_parameters());
 
         $contract_type_enrollments = array();
@@ -593,7 +593,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_contracts($enrollment)
     {
-        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
+        $enrollments = DataManager :: getInstance($this->get_module_instance())->retrieve_enrollments(
             $this->get_module_parameters());
         $contract_enrollments = array();
 

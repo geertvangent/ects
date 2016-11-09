@@ -174,7 +174,7 @@ class GraphRenderer
 
             if (! file_exists($path))
             {
-                $first_date = DataManager :: get_instance($this->module->get_module_instance())->retrieve_first_date(
+                $first_date = DataManager :: getInstance($this->module->get_module_instance())->retrieve_first_date(
                     $this->user_id,
                     $this->action,
                     $this->application);

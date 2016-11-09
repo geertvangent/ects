@@ -19,7 +19,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
 
         if (! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,

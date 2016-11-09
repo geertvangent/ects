@@ -33,7 +33,7 @@ class CalendarEventDataProvider extends InternalCalendar
         $calendarService = $this->getCalendarService();
         $events = array();
 
-        if ($calendarService->isConfigured(Configuration::get_instance()))
+        if ($calendarService->isConfigured(Configuration::getInstance()))
         {
             $availabilityService = new AvailabilityService(new AvailabilityRepository());
             $packageContext = ClassnameUtilities::getInstance()->getNamespaceParent(__NAMESPACE__, 4);
@@ -75,7 +75,7 @@ class CalendarEventDataProvider extends InternalCalendar
     {
         $calendars = array();
 
-        if ($this->getCalendarService()->isConfigured(Configuration::get_instance()))
+        if ($this->getCalendarService()->isConfigured(Configuration::getInstance()))
         {
             $package = \Ehb\Application\Calendar\Extension\SyllabusPlus\Manager::package();
 
@@ -96,8 +96,7 @@ class CalendarEventDataProvider extends InternalCalendar
      */
     public function getCalendarService()
     {
-        $containerBuilder = new DependencyInjectionContainerBuilder();
-        $container = $containerBuilder->createContainer();
+        $container = DependencyInjectionContainerBuilder::getInstance()->createContainer();
         return $container->get('ehb.application.calendar.extension.syllabus_plus.service.calendar_service');
     }
 }

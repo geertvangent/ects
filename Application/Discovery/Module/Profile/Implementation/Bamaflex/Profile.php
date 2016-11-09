@@ -234,6 +234,6 @@ class Profile extends \Ehb\Application\Discovery\Module\Profile\Profile
      */
     public function get_data_manager()
     {
-        // return DataManager :: get_instance();
+        // return DataManager :: getInstance();
     }
 }

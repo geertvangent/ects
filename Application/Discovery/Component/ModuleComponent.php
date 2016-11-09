@@ -21,7 +21,7 @@ class ModuleComponent extends Manager
         $module_parameters[self :: PARAM_ACTION] = self :: ACTION_VIEW;
 
         $link = $this->get_url($module_parameters);
-        BreadcrumbTrail :: get_instance()->add_extra(
+        BreadcrumbTrail :: getInstance()->add_extra(
             new ToolbarItem(
                 Translation :: get('User'),
                 Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/User.png',
@@ -34,7 +34,7 @@ class ModuleComponent extends Manager
 
         $link = $this->get_url($module_parameters);
 
-        BreadcrumbTrail :: get_instance()->add_extra(
+        BreadcrumbTrail :: getInstance()->add_extra(
             new ToolbarItem(
                 Translation :: get('Information'),
                 Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/Information.png',

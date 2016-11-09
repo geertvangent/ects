@@ -19,6 +19,7 @@ use Ehb\Application\Ects\Storage\DataClass\SubTrajectory;
 use Ehb\Application\Ects\Storage\DataClass\SubTrajectoryCourse;
 use Ehb\Application\Ects\Storage\DataClass\Training;
 use Ehb\Application\Ects\Storage\DataClass\Trajectory;
+use Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository;
 
 /**
  *
@@ -29,6 +30,39 @@ use Ehb\Application\Ects\Storage\DataClass\Trajectory;
 class BaMaFlexRepository
 {
     const LIFETIME_IN_MINUTES = 60;
+
+    /**
+     *
+     * @var \Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository
+     */
+    private $dataClassRepository;
+
+    /**
+     *
+     * @param \Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository $dataClassRepository
+     */
+    public function __construct(DataClassRepository $dataClassRepository)
+    {
+        $this->dataClassRepository = $dataClassRepository;
+    }
+
+    /**
+     *
+     * @return \Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository
+     */
+    public function getDataClassRepository()
+    {
+        return $this->dataClassRepository;
+    }
+
+    /**
+     *
+     * @param \Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository $dataClassRepository
+     */
+    public function setDataClassRepository(DataClassRepository $dataClassRepository)
+    {
+        $this->dataClassRepository = $dataClassRepository;
+    }
 
     /**
      *
@@ -52,7 +86,7 @@ class BaMaFlexRepository
                 new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
 
-            $years = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            $years = $this->getDataClassRepository()->distinct(
                 Training::class_name(),
                 new DataClassDistinctParameters(
                     new AndCondition($conditions),
@@ -94,7 +128,7 @@ class BaMaFlexRepository
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     null));
 
-            $faculties = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            $faculties = $this->getDataClassRepository()->distinct(
                 Training::class_name(),
                 new DataClassDistinctParameters(
                     new AndCondition($conditions),
@@ -151,7 +185,7 @@ class BaMaFlexRepository
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
                     array(14, 16, 18)));
 
-            $types = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            $types = $this->getDataClassRepository()->distinct(
                 Training::class_name(),
                 new DataClassDistinctParameters(
                     new AndCondition($conditions),
@@ -217,7 +251,7 @@ class BaMaFlexRepository
                     new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
                     array(14, 16, 18)));
 
-            $types = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            $types = $this->getDataClassRepository()->distinct(
                 Training::class_name(),
                 new DataClassDistinctParameters(
                     new AndCondition($conditions),
@@ -247,9 +281,7 @@ class BaMaFlexRepository
      */
     public function findTrainingByIdentifier($trainingIdentifier)
     {
-        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::retrieve_by_id(
-            Training::class_name(),
-            $trainingIdentifier);
+        return $this->getDataClassRepository()->retrieve_by_id(Training::class_name(), $trainingIdentifier);
     }
 
     /**
@@ -273,7 +305,7 @@ class BaMaFlexRepository
                 new PropertyConditionVariable(Trajectory::class_name(), Trajectory::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
 
-            $trajectories = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            $trajectories = $this->getDataClassRepository()->distinct(
                 Trajectory::class_name(),
                 new DataClassDistinctParameters(
                     new AndCondition($conditions),
@@ -311,7 +343,7 @@ class BaMaFlexRepository
                 new PropertyConditionVariable(SubTrajectory::class_name(), SubTrajectory::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
 
-            $trajectories = \Ehb\Libraries\Storage\DataManager\Administration\DataManager::distinct(
+            $trajectories = $this->getDataClassRepository()->distinct(
                 SubTrajectory::class_name(),
                 new DataClassDistinctParameters(
                     new AndCondition($conditions),
@@ -335,9 +367,7 @@ class BaMaFlexRepository
      */
     public function findSubTrajectoryByIdentifier($subTrajectoryIdentifier)
     {
-        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::retrieve_by_id(
-            SubTrajectory::class_name(),
-            $subTrajectoryIdentifier);
+        return $this->getDataClassRepository()->retrieve_by_id(SubTrajectory::class_name(), $subTrajectoryIdentifier);
     }
 
     /**
@@ -347,9 +377,7 @@ class BaMaFlexRepository
      */
     public function findTrajectoryByIdentifier($trajectoryIdentifier)
     {
-        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::retrieve_by_id(
-            Trajectory::class_name(),
-            $trajectoryIdentifier);
+        return $this->getDataClassRepository()->retrieve_by_id(Trajectory::class_name(), $trajectoryIdentifier);
     }
 
     public function findSubTrajectoryCoursesForSubTrajectoryIdentifier($subTrajectoryIdentifier)
@@ -360,7 +388,7 @@ class BaMaFlexRepository
                 SubTrajectoryCourse::PROPERTY_SUB_TRAJECTORY_ID),
             new StaticConditionVariable($subTrajectoryIdentifier));
 
-        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::records(
+        return $this->getDataClassRepository()->records(
             SubTrajectoryCourse::class_name(),
             new RecordRetrievesParameters(
                 null,
@@ -384,9 +412,7 @@ class BaMaFlexRepository
      */
     public function findCourseByIdentifier($courseIdentifier)
     {
-        return \Ehb\Libraries\Storage\DataManager\Administration\DataManager::retrieve_by_id(
-            Course::class_name(),
-            $courseIdentifier);
+        return $this->getDataClassRepository()->retrieve_by_id(Course::class_name(), $courseIdentifier);
     }
 
     /**

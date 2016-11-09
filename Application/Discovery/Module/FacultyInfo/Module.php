@@ -43,7 +43,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->faculty))
         {
-            $this->faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty(
+            $this->faculty = DataManager :: getInstance($this->get_module_instance())->retrieve_faculty(
                 $this->get_module_parameters());
         }
         return $this->faculty;
@@ -79,7 +79,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
         if (! isset($this->cache_trainings[$source][$faculty_id]))
         {
-            $this->cache_trainings[$source][$faculty_id] = DataManager :: get_instance($this->get_module_instance())->retrieve_trainings(
+            $this->cache_trainings[$source][$faculty_id] = DataManager :: getInstance($this->get_module_instance())->retrieve_trainings(
                 $parameters);
         }
         return $this->cache_trainings[$source][$faculty_id];

@@ -11,7 +11,7 @@ class UserBrowserTableColumnModel extends TableColumnModel implements TableColum
 
     public function initialize_columns()
     {
-        $user_alias = \Chamilo\Core\User\Storage\DataManager :: get_instance()->get_alias(
+        $user_alias = \Chamilo\Core\User\Storage\DataManager :: getInstance()->get_alias(
             \Chamilo\Core\User\Storage\DataClass\User :: get_table_name());
         $this->add_column(
             new TableColumn(\Chamilo\Core\User\Storage\DataClass\User :: PROPERTY_OFFICIAL_CODE, true, $user_alias, true));

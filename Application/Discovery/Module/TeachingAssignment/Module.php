@@ -56,7 +56,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
         if (! isset($this->teaching_assignments[$user_id][$year]))
         {
-            $this->teaching_assignments[$user_id][$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_teaching_assignments(
+            $this->teaching_assignments[$user_id][$year] = DataManager :: getInstance($this->get_module_instance())->retrieve_teaching_assignments(
                 $parameters);
         }
         return $this->teaching_assignments[$user_id][$year];

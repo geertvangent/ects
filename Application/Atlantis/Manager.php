@@ -23,7 +23,7 @@ abstract class Manager extends Application
     {
         parent :: __construct($applicationConfiguration);
 
-        if (! \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
+        if (! \Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }
@@ -33,7 +33,7 @@ abstract class Manager extends Application
 
     function render_header()
     {
-        BreadcrumbTrail :: get_instance()->set(array_values(SessionBreadcrumbs :: get()));
+        BreadcrumbTrail :: getInstance()->set(array_values(SessionBreadcrumbs :: get()));
         return parent :: render_header();
     }
 }

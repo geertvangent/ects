@@ -76,10 +76,10 @@ class RightsGroupForm extends FormValidator
     {
         $values = $this->exportValues();
 
-        $rights_util = Rights :: get_instance();
+        $rights_util = Rights :: getInstance();
         $location = $rights_util->get_access_root();
 
-        $targets_entities = Rights :: get_instance()->get_access_targets_entities();
+        $targets_entities = Rights :: getInstance()->get_access_targets_entities();
         $location_id = $location->get_id();
 
         foreach ($values[self :: PROPERTY_ACCESS] as $entity_type => $target_ids)
@@ -100,7 +100,7 @@ class RightsGroupForm extends FormValidator
 
             foreach ($target_ids as $target_id)
             {
-                $location_entity_right = Rights :: get_instance()->get_access_location_entity_right(
+                $location_entity_right = Rights :: getInstance()->get_access_location_entity_right(
                     $target_id,
                     $entity_type);
 

@@ -19,7 +19,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
 
     public function get_data_manager()
     {
-        return DataManager :: get_instance($this->get_module_instance());
+        return DataManager :: getInstance($this->get_module_instance());
     }
 
     public function get_module_parameters()

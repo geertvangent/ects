@@ -52,7 +52,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->advices))
         {
-            $this->advices = DataManager :: get_instance($this->get_module_instance())->retrieve_advices(
+            $this->advices = DataManager :: getInstance($this->get_module_instance())->retrieve_advices(
                 $this->get_module_parameters());
         }
         return $this->advices;

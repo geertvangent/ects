@@ -171,7 +171,7 @@ class LocationBrowserComponent extends UserBrowserComponent
     {
         $locationUrl = new Redirect($this->getDisplayParameters(), array(self::PARAM_LOCATION_ID));
 
-        BreadcrumbTrail::get_instance()->add(
+        BreadcrumbTrail::getInstance()->add(
             new Breadcrumb($locationUrl->getUrl(), Translation::get('LocationBrowserComponent')));
 
         $locationIdentifier = $this->getLocationIdentifier();
@@ -179,12 +179,12 @@ class LocationBrowserComponent extends UserBrowserComponent
 
         if ($locationIdentifier && $year)
         {
-            BreadcrumbTrail::get_instance()->add(
+            BreadcrumbTrail::getInstance()->add(
                 new Breadcrumb(null, Translation::get('AcademicYear', array('YEAR' => $year))));
 
             $location = $this->getCalendarService()->getLocationByYearAndIdentifier($year, $locationIdentifier);
 
-            BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $location[Location::PROPERTY_CODE]));
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $location[Location::PROPERTY_CODE]));
             return parent::renderCalendar();
         }
         else

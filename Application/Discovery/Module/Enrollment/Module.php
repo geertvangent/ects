@@ -51,7 +51,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->enrollments))
         {
-            $this->enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
+            $this->enrollments = DataManager :: getInstance($this->get_module_instance())->retrieve_enrollments(
                 $this->get_module_parameters());
         }
         return $this->enrollments;

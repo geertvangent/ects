@@ -46,7 +46,7 @@ class PortfolioLocationProcessor
      */
     public function run()
     {
-        $this->dm = \Chamilo\Application\Portfolio\Storage\DataManager :: get_instance();
+        $this->dm = \Chamilo\Application\Portfolio\Storage\DataManager :: getInstance();
 
         try
         {
@@ -72,11 +72,11 @@ class PortfolioLocationProcessor
         while ($publication = $publications->next_result())
         {
             // Initialize the root location
-            $root = \Chamilo\Application\Portfolio\Rights :: get_instance()->initialize_user_tree(
+            $root = \Chamilo\Application\Portfolio\Rights :: getInstance()->initialize_user_tree(
                 $publication->get_publisher_id());
 
             // Create a location for all publications
-            $location = \Chamilo\Application\Portfolio\Rights :: get_instance()->create_location_in_users_subtree(
+            $location = \Chamilo\Application\Portfolio\Rights :: getInstance()->create_location_in_users_subtree(
                 \Chamilo\Application\Portfolio\Rights :: TYPE_PUBLICATION,
                 $publication->get_id(),
                 $root->get_id(),

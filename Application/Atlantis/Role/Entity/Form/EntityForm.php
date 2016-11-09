@@ -111,7 +111,7 @@ class EntityForm extends FormValidator
 
         $this->addElement(
             'html',
-            ResourceManager :: get_instance()->get_resource_html(
+            ResourceManager :: getInstance()->get_resource_html(
                 Path :: getInstance()->getJavascriptPath('Ehb\Application\Atlantis\Role\Entity', true) . 'dates.js'));
     }
 

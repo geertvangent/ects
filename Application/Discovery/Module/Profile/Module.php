@@ -46,7 +46,7 @@ class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->profile))
         {
-            $this->profile = DataManager :: get_instance($this->get_module_instance())->retrieve_profile(
+            $this->profile = DataManager :: getInstance($this->get_module_instance())->retrieve_profile(
                 $this->get_module_parameters());
         }
 

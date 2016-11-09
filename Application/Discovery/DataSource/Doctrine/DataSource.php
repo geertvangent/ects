@@ -25,7 +25,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource
     public function initialize()
     {
         $data_source = $this->get_module_instance()->get_setting('data_source');
-        $this->connection = Connection :: get_instance($data_source)->get_connection();
+        $this->connection = Connection :: getInstance($data_source)->get_connection();
         $this->connection->setCharset('utf8');
     }
 

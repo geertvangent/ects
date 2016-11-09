@@ -49,7 +49,7 @@ class StudentYear extends \Ehb\Application\Discovery\Module\StudentYear\StudentY
      */
     public function get_data_manager()
     {
-        // return DataManager :: get_instance();
+        // return DataManager :: getInstance();
     }
 
     /**

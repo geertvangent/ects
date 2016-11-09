@@ -41,7 +41,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->training))
         {
-            $this->training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
+            $this->training = DataManager :: getInstance($this->get_module_instance())->retrieve_training(
                 $this->get_module_parameters());
         }
         return $this->training;

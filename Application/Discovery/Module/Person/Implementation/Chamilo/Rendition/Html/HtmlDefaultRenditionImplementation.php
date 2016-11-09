@@ -53,7 +53,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
         
         $this->buttonToolbarRenderer = $this->getButtonToolbarRenderer();
         $html[] = $this->buttonToolbarRenderer->render() . '<br />';

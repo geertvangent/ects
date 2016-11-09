@@ -14,7 +14,7 @@ class HtmlDefaultRendition extends HtmlRendition
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(
+        BreadcrumbTrail :: getInstance()->add(
             new Breadcrumb(
                 null,
                 Translation :: get('TypeName', null, ClassnameUtilities :: getInstance()->getNamespaceFromObject($this))));

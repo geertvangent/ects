@@ -9,7 +9,7 @@ class Installer extends \Chamilo\Configuration\Package\Action\Installer
 
     public function extra()
     {
-        if (! Rights :: get_instance()->create_access_root())
+        if (! Rights :: getInstance()->create_access_root())
         {
             return false;
         }

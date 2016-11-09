@@ -179,7 +179,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                             ClassnameUtilities :: getInstance()->getNamespaceFromObject($faculty)));
                     $condition = new AndCondition($conditions);
 
-                    $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    $histories = DataManager :: getInstance()->retrieve_history_by_conditions($condition);
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())
@@ -214,7 +214,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                             ClassnameUtilities :: getInstance()->getNamespaceFromObject($faculty)));
                     $condition = new AndCondition($conditions);
 
-                    $histories = DataManager :: get_instance()->retrieve_history_by_conditions($condition);
+                    $histories = DataManager :: getInstance()->retrieve_history_by_conditions($condition);
                     if ($histories->size() > 0)
                     {
                         while ($history = $histories->next_result())

@@ -96,10 +96,10 @@ abstract class EventViewerComponent extends Manager
      */
     protected function getActivityAsHtml($activityRecord, $activityTime)
     {
-        BreadcrumbTrail::get_instance()->add(
+        BreadcrumbTrail::getInstance()->add(
             new Breadcrumb(null, Translation::get('AcademicYear', array('YEAR' => $this->getYear()))));
-        BreadcrumbTrail::get_instance()->add($this->getActivityTypeBreadcrumb($activityRecord));
-        BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $activityRecord[Activity::PROPERTY_NAME]));
+        BreadcrumbTrail::getInstance()->add($this->getActivityTypeBreadcrumb($activityRecord));
+        BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $activityRecord[Activity::PROPERTY_NAME]));
 
         return $this->renderInformation($activityRecord, $activityTime);
     }

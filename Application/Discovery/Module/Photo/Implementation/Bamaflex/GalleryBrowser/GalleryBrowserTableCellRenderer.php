@@ -15,7 +15,7 @@ class GalleryBrowserTableCellRenderer extends DefaultGalleryTableCellRenderer
      */
     public function renderContent($user)
     {
-        $photo = DataManager :: get_instance($this->get_component()->get_module_instance())->retrieve_photo(
+        $photo = DataManager :: getInstance($this->get_component()->get_module_instance())->retrieve_photo(
             $user->get_official_code());
 
         $profile_link = $this->get_component()->get_module_link(

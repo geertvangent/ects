@@ -51,7 +51,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->exemptions))
         {
-            $this->exemptions = DataManager :: get_instance($this->get_module_instance())->retrieve_exemptions(
+            $this->exemptions = DataManager :: getInstance($this->get_module_instance())->retrieve_exemptions(
                 $this->get_module_parameters());
         }
         return $this->exemptions;

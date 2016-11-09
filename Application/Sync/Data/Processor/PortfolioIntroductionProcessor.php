@@ -50,7 +50,7 @@ class PortfolioIntroductionProcessor
      */
     public function run()
     {
-        $this->dm = \Chamilo\Application\Portfolio\Storage\DataManager :: get_instance();
+        $this->dm = \Chamilo\Application\Portfolio\Storage\DataManager :: getInstance();
         
         try
         {

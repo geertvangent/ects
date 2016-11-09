@@ -64,7 +64,7 @@ class FilterForm extends FormValidator
 
         $this->addElement(
             'html',
-            \Chamilo\Libraries\Format\Utilities\ResourceManager::get_instance()->get_resource_html(
+            \Chamilo\Libraries\Format\Utilities\ResourceManager::getInstance()->get_resource_html(
                 Path::getInstance()->namespaceToFullPath('Chamilo\Configuration', true) .
                      'Resources/Javascript/Postback.js'));
     }

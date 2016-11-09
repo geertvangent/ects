@@ -41,7 +41,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_file_name()
     {
-        $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
+        $training = DataManager :: getInstance($this->get_module_instance())->retrieve_training(
             Module :: get_training_info_parameters());
 
         return $training->get_name() . ' ' .

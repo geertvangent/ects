@@ -146,7 +146,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Doctrine\DataSour
         }
         else
         {
-            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: getInstance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
             $query = 'SELECT count(id) AS statistics_count FROM statistics WHERE person_id = "' . $official_code .
@@ -186,7 +186,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Doctrine\DataSour
         if ($user_id != 0)
         {
 
-            $user = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user($user_id);
+            $user = \Chamilo\Core\User\Storage\DataManager :: getInstance()->retrieve_user($user_id);
             $official_code = $user->get_official_code();
 
             if ($application instanceof Application)

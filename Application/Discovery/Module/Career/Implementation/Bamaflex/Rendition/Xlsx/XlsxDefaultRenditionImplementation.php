@@ -399,7 +399,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_contracts()
     {
-        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
+        $enrollments = DataManager :: getInstance($this->get_module_instance())->retrieve_enrollments(
             $this->get_module_parameters());
 
         $contract_enrollments = array();

@@ -48,6 +48,6 @@ class Module extends \Ehb\Application\Discovery\Module\Employment\Module
 
     public function get_employment_parts($employment_id)
     {
-        return DataManager :: get_instance($this->get_module_instance())->retrieve_employment_parts($employment_id);
+        return DataManager :: getInstance($this->get_module_instance())->retrieve_employment_parts($employment_id);
     }
 }

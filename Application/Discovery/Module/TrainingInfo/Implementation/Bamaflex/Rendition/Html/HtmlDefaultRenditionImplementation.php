@@ -36,9 +36,9 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html = array();
         $training = $this->get_training();
 
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_year()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_faculty()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_name()));
 
         $html[] = $this->get_general();
         $html[] = '</br>';

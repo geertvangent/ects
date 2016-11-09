@@ -58,66 +58,66 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation impleme
 
         if ($parameters->get_faculty_id())
         {
-            $faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty(
+            $faculty = DataManager :: getInstance($this->get_module_instance())->retrieve_faculty(
                 $parameters->get_faculty_id());
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $faculty->get_year()));
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $faculty->get_name()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $faculty->get_year()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $faculty->get_name()));
 
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
                 {
                     case Module :: TYPE_TEACHER :
-                        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
+                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
                         break;
                     case Module :: TYPE_STUDENT :
-                        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('Students')));
+                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Students')));
                         break;
                     case Module :: TYPE_EMPLOYEE :
-                        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('Employees')));
+                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Employees')));
                         break;
                 }
             }
         }
         elseif ($parameters->get_training_id())
         {
-            $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
+            $training = DataManager :: getInstance($this->get_module_instance())->retrieve_training(
                 $parameters->get_training_id());
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_year()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_faculty()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_name()));
 
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
                 {
                     case Module :: TYPE_TEACHER :
-                        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
+                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
                         break;
                     case Module :: TYPE_STUDENT :
-                        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('Students')));
+                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Students')));
                         break;
                 }
             }
         }
         elseif ($parameters->get_programme_id())
         {
-            $programme = DataManager :: get_instance($this->get_module_instance())->retrieve_programme(
+            $programme = DataManager :: getInstance($this->get_module_instance())->retrieve_programme(
                 $parameters->get_programme_id());
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_year()));
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_faculty()));
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_training()));
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $programme->get_name()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $programme->get_year()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $programme->get_faculty()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $programme->get_training()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $programme->get_name()));
 
             if ($parameters->get_type())
             {
                 switch ($parameters->get_type())
                 {
                     case Module :: TYPE_TEACHER :
-                        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
+                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Teachers')));
                         break;
                     case Module :: TYPE_STUDENT :
-                        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('Students')));
+                        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('Students')));
                         break;
                 }
             }

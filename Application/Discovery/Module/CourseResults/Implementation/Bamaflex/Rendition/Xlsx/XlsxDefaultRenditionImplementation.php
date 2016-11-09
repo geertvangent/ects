@@ -41,7 +41,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_file_name()
     {
-        $course = DataManager :: get_instance($this->get_module_instance())->retrieve_course(
+        $course = DataManager :: getInstance($this->get_module_instance())->retrieve_course(
             Module :: get_course_parameters());
 
         return $course->get_name() . ' ' . Translation :: get(

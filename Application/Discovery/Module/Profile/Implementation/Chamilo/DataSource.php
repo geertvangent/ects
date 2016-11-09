@@ -79,7 +79,7 @@ class DataSource
         {
             $setting = \Chamilo\Configuration\Storage\DataManager :: retrieve_setting_from_variable_name(
                 'platform_language');
-            $user_setting = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user_setting(
+            $user_setting = \Chamilo\Core\User\Storage\DataManager :: getInstance()->retrieve_user_setting(
                 $id,
                 $setting->get_id());
 
@@ -97,7 +97,7 @@ class DataSource
             $language_code = PlatformSetting :: get('platform_language');
         }
 
-        return \Chamilo\Configuration\Configuration :: get_instance()->getLanguageNameFromIsocode($language_code);
+        return \Chamilo\Configuration\Configuration :: getInstance()->getLanguageNameFromIsocode($language_code);
     }
 
     /**
@@ -115,7 +115,7 @@ class DataSource
         {
             $setting = \Chamilo\Configuration\Storage\DataManager :: retrieve_setting_from_variable_name(
                 'platform_timezone');
-            $user_setting = \Chamilo\Core\User\Storage\DataManager :: get_instance()->retrieve_user_setting(
+            $user_setting = \Chamilo\Core\User\Storage\DataManager :: getInstance()->retrieve_user_setting(
                 $id,
                 $setting->get_id());
 

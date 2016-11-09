@@ -79,7 +79,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
             
             if (! file_exists($path))
             {
-                $this->cas_statistics = DataManager :: get_instance($this->get_module_instance())->retrieve_cas_statistics(
+                $this->cas_statistics = DataManager :: getInstance($this->get_module_instance())->retrieve_cas_statistics(
                     $this->get_module_parameters());
                 Filesystem :: write_to_file($path, serialize($this->cas_statistics));
             }
@@ -96,7 +96,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->applications))
         {
-            $this->applications = DataManager :: get_instance($this->get_module_instance())->retrieve_applications();
+            $this->applications = DataManager :: getInstance($this->get_module_instance())->retrieve_applications();
         }
         return $this->applications;
     }

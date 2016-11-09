@@ -10,7 +10,7 @@ class BamaflexDataConnector extends \Chamilo\Libraries\Storage\DataManager\DataM
 
     public static $instance;
 
-    public static function get_instance()
+    public static function getInstance()
     {
         if (! isset(self :: $instance[static :: context()]))
         {

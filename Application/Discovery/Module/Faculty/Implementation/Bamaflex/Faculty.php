@@ -57,7 +57,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
                 $parameters->set_faculty_id($previous_reference->get_id());
                 $parameters->set_source($previous_reference->get_source());
 
-                $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
+                $faculty = DataManager :: getInstance($module_instance)->retrieve_faculty($parameters);
                 if ($faculty instanceof Faculty)
                 {
                     $faculties[$faculty->get_year()][] = $faculty;
@@ -89,7 +89,7 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
                 $parameters->set_faculty_id($next_reference->get_id());
                 $parameters->set_source($next_reference->get_source());
 
-                $faculty = DataManager :: get_instance($module_instance)->retrieve_faculty($parameters);
+                $faculty = DataManager :: getInstance($module_instance)->retrieve_faculty($parameters);
                 if ($faculty instanceof Faculty)
                 {
                     $faculties[$faculty->get_year()][] = $faculty;
@@ -303,6 +303,6 @@ class Faculty extends \Ehb\Application\Discovery\Module\Faculty\Faculty
      */
     public function get_data_manager()
     {
-        return DataManager :: get_instance();
+        return DataManager :: getInstance();
     }
 }

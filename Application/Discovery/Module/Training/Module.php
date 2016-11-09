@@ -41,7 +41,7 @@ class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->trainings[$year]))
         {
-            $this->trainings[$year] = DataManager :: get_instance($this->get_module_instance())->retrieve_trainings(
+            $this->trainings[$year] = DataManager :: getInstance($this->get_module_instance())->retrieve_trainings(
                 $year);
         }
         return $this->trainings[$year];
@@ -63,7 +63,7 @@ class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->years))
         {
-            $this->years = DataManager :: get_instance($this->get_module_instance())->retrieve_years();
+            $this->years = DataManager :: getInstance($this->get_module_instance())->retrieve_years();
         }
         return $this->years;
     }

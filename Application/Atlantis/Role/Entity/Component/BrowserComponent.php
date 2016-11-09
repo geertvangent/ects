@@ -129,7 +129,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
             $context = \Chamilo\Core\Group\Storage\DataManager :: retrieve_by_id(
                 \Chamilo\Core\Group\Storage\DataClass\Group :: class_name(),
                 (int) $this->context_id);
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $context->get_name()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $context->get_name()));
             SessionBreadcrumbs :: add(
                 new Breadcrumb(
                     $this->get_url(),
@@ -137,7 +137,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         }
         elseif (! $this->has_context_id() && $this->has_entity() && ! $this->has_role_id())
         {
-            // BreadcrumbTrail :: get_instance()->add(
+            // BreadcrumbTrail :: getInstance()->add(
             // new Breadcrumb(null, RoleEntity :: entity_name($this->entity_type, $this->entity_id)));
         }
         elseif (! $this->has_context_id() && ! $this->has_entity() && $this->has_role_id())
@@ -145,7 +145,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
             $role = \Ehb\Application\Atlantis\Role\Storage\DataManager :: retrieve_by_id(
                 \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
                 (int) $this->role_id);
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $role->get_name()));
             SessionBreadcrumbs :: add(
                 new Breadcrumb($this->get_url(), Translation :: get('GrantedRoles', array('TYPE' => $role->get_name()))));
         }

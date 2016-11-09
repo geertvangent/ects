@@ -51,14 +51,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_group_properties_table()
     {
-        $group = DataManager :: get_instance($this->get_module_instance())->retrieve_group(
+        $group = DataManager :: getInstance($this->get_module_instance())->retrieve_group(
             Module :: get_group_parameters());
 
         $properties = array();
         $properties[Translation :: get('Year')] = $group->get_year();
         $properties[Translation :: get('Code')] = $group->get_code();
 
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $group->get_description()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $group->get_description()));
         $table = new PropertiesTable($properties);
 
         return $table->toHtml();

@@ -468,7 +468,7 @@ class Enrollment extends \Ehb\Application\Discovery\Module\Enrollment\Enrollment
      */
     public function get_data_manager()
     {
-        // return DataManager :: get_instance();
+        // return DataManager :: getInstance();
     }
 
     /**
@@ -491,7 +491,7 @@ class Enrollment extends \Ehb\Application\Discovery\Module\Enrollment\Enrollment
 
     public function get_training_object()
     {
-        return DataManager :: get_instance($this->get_instance())->retrieve_training(
+        return DataManager :: getInstance($this->get_instance())->retrieve_training(
             $this->get_source(),
             $this->get_training_id());
     }

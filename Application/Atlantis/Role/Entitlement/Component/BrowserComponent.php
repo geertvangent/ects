@@ -108,7 +108,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(),
                 (int) $this->application_id);
 
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $application->get_name()));
             if (! $this->has_right_id())
             {
                 SessionBreadcrumbs :: add(
@@ -126,7 +126,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 \Ehb\Application\Atlantis\Application\Right\Storage\DataClass\Right :: class_name(),
                 (int) $this->right_id);
 
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $right->get_name()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $right->get_name()));
             SessionBreadcrumbs :: add(
                 new Breadcrumb(
                     $this->get_url(
@@ -142,7 +142,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
                 \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
                 (int) $this->role_id);
 
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $role->get_name()));
             SessionBreadcrumbs :: add(
                 new Breadcrumb(
                     $this->get_url(array(\Ehb\Application\Atlantis\Role\Manager :: PARAM_ROLE_ID => $this->role_id)),

@@ -193,6 +193,6 @@ class ListerComponent extends Manager implements DelegateComponent
             \Ehb\Application\Atlantis\Role\Storage\DataClass\Role :: class_name(),
             (int) $this->role_id);
 
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $role->get_name()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $role->get_name()));
     }
 }

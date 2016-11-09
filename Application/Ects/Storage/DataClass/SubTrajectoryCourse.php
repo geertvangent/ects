@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Ects\Storage\DataClass;
 
-use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Ehb\Libraries\Storage\DataClass\AdministrationDataClass;
 
 /**
  *
@@ -9,7 +9,7 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class SubTrajectoryCourse extends DataClass
+class SubTrajectoryCourse extends AdministrationDataClass
 {
     const PROPERTY_SOURCE = 'source';
     const PROPERTY_NAME = 'name';

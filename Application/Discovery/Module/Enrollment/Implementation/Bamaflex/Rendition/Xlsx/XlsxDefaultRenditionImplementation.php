@@ -33,7 +33,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
         if (count($this->get_enrollments()) > 0)
         {
-            $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types(
+            $contract_types = DataManager :: getInstance($this->get_module_instance())->retrieve_contract_types(
                 $this->get_module_parameters());
 
             $this->php_excel->createSheet(0);

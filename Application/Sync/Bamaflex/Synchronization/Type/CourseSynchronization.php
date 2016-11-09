@@ -76,7 +76,7 @@ class CourseSynchronization extends Synchronization
 
                 $new_course->create_course_settings_from_values($setting_values);
 
-                CourseManagementRights :: get_instance()->create_rights_from_values($new_course, array());
+                CourseManagementRights :: getInstance()->create_rights_from_values($new_course, array());
 
                 $teacher_code = 'COU_OP_' . $course['id'];
                 $student_code = 'COU_STU_' . $course['id'];

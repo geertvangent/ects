@@ -62,7 +62,7 @@ class Photo extends DataClass
      */
     public function get_data_manager()
     {
-        // return DataManager :: get_instance();
+        // return DataManager :: getInstance();
     }
 
     public function get_source()

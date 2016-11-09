@@ -109,7 +109,7 @@ class StateComponent extends Manager implements DelegateComponent
         $query = 'SELECT id, name, name_code, training, faculty FROM [INFORDATSYNC].[dbo].[v_discovery_course_basic] WHERE year = \'' .
              $year . '\'';
 
-        $dataManager = BamaflexDataConnector :: get_instance();
+        $dataManager = BamaflexDataConnector :: getInstance();
         $statement = $dataManager->get_connection()->query($query);
         $resultSet = new BamaflexResultSet($statement);
 

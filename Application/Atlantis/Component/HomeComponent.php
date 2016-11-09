@@ -18,7 +18,7 @@ class HomeComponent extends Manager implements DelegateComponent
 
     public function run()
     {
-        SessionBreadcrumbs :: set(BreadcrumbTrail :: get_instance()->get_breadcrumbs());
+        SessionBreadcrumbs :: set(BreadcrumbTrail :: getInstance()->get_breadcrumbs());
 
         $renderer_name = ClassnameUtilities :: getInstance()->getClassnameFromObject($this, true);
         $tabs = new DynamicTabsRenderer($renderer_name);
@@ -94,7 +94,7 @@ class HomeComponent extends Manager implements DelegateComponent
                     \Ehb\Application\Atlantis\Role\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Manager :: ACTION_ENTITY,
                     \Ehb\Application\Atlantis\Role\Entity\Manager :: PARAM_ACTION => \Ehb\Application\Atlantis\Role\Entity\Manager :: ACTION_BROWSE)));
 
-        if (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
+        if (\Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
         {
             $actions[] = new DynamicAction(
                 Translation :: get('CreateRoleEntity', null, $namespace),

@@ -59,7 +59,7 @@ class BrowserComponent extends Manager implements DelegateComponent
                 // $rendered_module = preg_replace($link_pattern, "$1", $rendered_module);
 
                 // // Cleanup of the breadcrumbtrail
-                // $trail = BreadcrumbTrail :: get_instance();
+                // $trail = BreadcrumbTrail :: getInstance();
                 // // Remove course name
                 // $trail->remove(- 1);
                 // // Remove training name

@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-	<services>
-		<service id="ehb.application.ects.service.bamaflex_service" class="Ehb\Application\Ects\Service\BaMaFlexService">
-			<argument type="service" id="ehb.application.ects.repository.bamaflex_repository" />
-		</service>
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="ehb.application.ects.service.bamaflex_service"
+            class="Ehb\Application\Ects\Service\BaMaFlexService">
+            <argument
+                type="service"
+                id="ehb.application.ects.repository.bamaflex_repository" />
+        </service>
 
-		<service id="ehb.application.ects.repository.bamaflex_repository" class="Ehb\Application\Ects\Repository\BaMaFlexRepository" />
-	</services>
+        <service
+            id="ehb.application.ects.repository.bamaflex_repository"
+            class="Ehb\Application\Ects\Repository\BaMaFlexRepository">
+            <argument
+                type="service"
+                id="ehb.libraries.storage.data_manager.administration.data_class_repository" />
+        </service>
+    </services>
 </container>

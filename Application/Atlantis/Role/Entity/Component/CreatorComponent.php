@@ -32,7 +32,7 @@ class CreatorComponent extends Manager
                 $this->get_url(),
                 Translation :: get(ClassnameUtilities :: getInstance()->getClassnameFromNamespace(self :: class_name()))));
 
-        if (! \Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
+        if (! \Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
         {
             $this->redirect('', true, array(self :: PARAM_ACTION => self :: ACTION_BROWSE));
         }

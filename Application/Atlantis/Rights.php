@@ -33,7 +33,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
      *
      * @return \repository\access\rights\Rights
      */
-    public static function get_instance()
+    public static function getInstance()
     {
         if (! isset(self :: $instance))
         {
@@ -275,7 +275,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                         RightsLocationEntityRight :: class_name(),
                         RightsLocationEntityRight :: PROPERTY_ID),
                     $location_entity_right_ids);
-                $location_entity_rights = \Chamilo\Core\Rights\Storage\DataManager :: get_instance()->retrieve_rights_location_rights(
+                $location_entity_rights = \Chamilo\Core\Rights\Storage\DataManager :: getInstance()->retrieve_rights_location_rights(
                     __NAMESPACE__,
                     $condition);
 
@@ -290,7 +290,7 @@ class Rights extends \Chamilo\Core\Rights\RightsUtil
                             }
                             break;
                         case PlatformGroupEntity :: ENTITY_TYPE :
-                            $group = \Chamilo\Core\Group\Storage\DataManager :: get_instance()->retrieve_group(
+                            $group = \Chamilo\Core\Group\Storage\DataManager :: getInstance()->retrieve_group(
                                 $location_entity_right->get_entity_id());
 
                             if ($group instanceof Group)

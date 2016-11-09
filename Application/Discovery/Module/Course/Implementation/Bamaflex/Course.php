@@ -141,7 +141,7 @@ class Course extends DiscoveryItem
      */
     public function get_data_manager()
     {
-        // return DataManager :: get_instance();
+        // return DataManager :: getInstance();
     }
 
     public function get_parent_id()
@@ -418,7 +418,7 @@ class Course extends DiscoveryItem
             {
                 $parameters = new Parameters($course->get_previous_id(), $course->get_source());
 
-                $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
+                $course = DataManager :: getInstance($module_instance)->retrieve_course($parameters);
                 $courses[] = $course;
             }
             while ($course instanceof Course && $course->get_previous_id() && $recursive);
@@ -436,7 +436,7 @@ class Course extends DiscoveryItem
             {
                 $parameters = new Parameters($course->get_next_id(), $course->get_source());
 
-                $course = DataManager :: get_instance($module_instance)->retrieve_course($parameters);
+                $course = DataManager :: getInstance($module_instance)->retrieve_course($parameters);
                 $courses[] = $course;
             }
             while ($course instanceof Course && $course->get_next_id() && $recursive);

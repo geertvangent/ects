@@ -7,17 +7,7 @@
         <service
             id="ehb.libraries.storage.data_manager.administration.data_source_name"
             class="Chamilo\Libraries\Storage\DataManager\Doctrine\DataSourceName">
-            <factory
-                service="ehb.libraries.storage.data_manager.administration.factory.data_source_name_factory"
-                method="getDataSourceName" />
-        </service>
-
-        <service
-            id="ehb.libraries.storage.data_manager.administration.factory.data_source_name_factory"
-            class="Ehb\Libraries\Storage\DataManager\Administration\Factory\DataSourceNameFactory">
-            <argument
-                type="service"
-                id="chamilo.configuration.service.configuration_consulter" />
+            <argument>%ehb.configuration.database%</argument>
         </service>
 
         <service
@@ -53,9 +43,6 @@
             class="Chamilo\Libraries\Storage\DataManager\Repository\DataClassRepository">
             <argument
                 type="service"
-                id="chamilo.configuration.service.file_configuration_consulter" />
-            <argument
-                type="service"
                 id="chamilo.libraries.storage.cache.data_class_repository_cache" />
             <argument
                 type="service"
@@ -63,6 +50,7 @@
             <argument
                 type="service"
                 id="chamilo.libraries.storage.data_class.data_class_factory" />
+            <argument>%chamilo.configuration.debug.enable_query_cache%</argument>
         </service>
     </services>
 </container>

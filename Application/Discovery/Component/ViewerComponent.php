@@ -42,7 +42,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         {
             $link = $this->get_url(
                 array(self :: PARAM_ACTION => self :: ACTION_MODULE, self :: PARAM_MODULE_ID => null));
-            BreadcrumbTrail :: get_instance()->add_extra(
+            BreadcrumbTrail :: getInstance()->add_extra(
                 new ToolbarItem(
                     Translation :: get('Modules'),
                     Theme :: getInstance()->getCommonImagePath('Action/Config'),
@@ -87,7 +87,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
                 $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
-                BreadcrumbTrail :: get_instance()->add_extra(
+                BreadcrumbTrail :: getInstance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('Information'),
                         Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/Information.png',
@@ -98,7 +98,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_USER;
                 $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
-                BreadcrumbTrail :: get_instance()->add_extra(
+                BreadcrumbTrail :: getInstance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('User'),
                         Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/User.png',
@@ -109,7 +109,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_USER;
                 $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
-                BreadcrumbTrail :: get_instance()->add_extra(
+                BreadcrumbTrail :: getInstance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('User'),
                         Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/User.png',
@@ -118,7 +118,7 @@ class ViewerComponent extends Manager implements DelegateComponent
                 $module_parameters[self :: PARAM_CONTENT_TYPE] = Instance :: TYPE_INFORMATION;
                 $module_parameters[self :: PARAM_MODULE_ID] = null;
                 $link = $this->get_url($module_parameters);
-                BreadcrumbTrail :: get_instance()->add_extra(
+                BreadcrumbTrail :: getInstance()->add_extra(
                     new ToolbarItem(
                         Translation :: get('Information'),
                         Theme :: getInstance()->getImagesPath('Ehb\Application\Discovery') . 'Action/Information.png',
@@ -203,7 +203,7 @@ class ViewerComponent extends Manager implements DelegateComponent
             $user = \Chamilo\Core\User\Storage\DataManager :: retrieve_by_id(
                 \Chamilo\Core\User\Storage\DataClass\User :: class_name(),
                 (int) $user_id);
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $user->get_fullname()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $user->get_fullname()));
         }
 
         if ($current_module_instance->get_content_type() != Instance :: TYPE_DETAILS)
@@ -212,7 +212,7 @@ class ViewerComponent extends Manager implements DelegateComponent
         }
         else
         {
-            BreadcrumbTrail :: get_instance()->add(
+            BreadcrumbTrail :: getInstance()->add(
                 new Breadcrumb(null, Translation :: get('TypeName', null, $current_module_instance->get_type())));
             $content = RenditionImplementation :: launch(
                 $current_module,

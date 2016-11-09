@@ -81,7 +81,7 @@ abstract class CalendarRendererProvider extends \Chamilo\Libraries\Calendar\Rend
             $calendarService = $this->getCalendarService();
             $events = array();
 
-            if ($calendarService->isConfigured(Configuration::get_instance()))
+            if ($calendarService->isConfigured(Configuration::getInstance()))
             {
                 $calendarEvents = $this->getCalendarEvents($startTime, $endTime);
 

@@ -41,7 +41,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->student_years))
         {
-            $this->student_years = DataManager :: get_instance($this->get_module_instance())->retrieve_student_years(
+            $this->student_years = DataManager :: getInstance($this->get_module_instance())->retrieve_student_years(
                 $this->get_module_parameters());
         }
         return $this->student_years;

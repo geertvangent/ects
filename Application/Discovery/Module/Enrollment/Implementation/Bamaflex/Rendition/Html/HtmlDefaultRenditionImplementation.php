@@ -173,7 +173,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
 
         if (! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,
@@ -186,7 +186,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $html = array();
         if (count($this->get_enrollments()) > 0)
         {
-            $contract_types = DataManager :: get_instance($this->get_module_instance())->retrieve_contract_types(
+            $contract_types = DataManager :: getInstance($this->get_module_instance())->retrieve_contract_types(
                 $this->get_module_parameters());
 
             $tabs = new DynamicTabsRenderer('enrollment_list');

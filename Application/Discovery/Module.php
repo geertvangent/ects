@@ -240,6 +240,6 @@ class Module
 
     public function get_data_manager()
     {
-        return DataConnector :: get_instance($this->get_module_instance());
+        return DataConnector :: getInstance($this->get_module_instance());
     }
 }

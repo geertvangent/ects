@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Ects\Storage\DataClass;
 
-use Chamilo\Libraries\Storage\DataClass\DataClass;
+use Ehb\Libraries\Storage\DataClass\AdministrationDataClass;
 
 /**
  *
@@ -9,7 +9,7 @@ use Chamilo\Libraries\Storage\DataClass\DataClass;
  * @author Hans De Bisschop <hans.de.bisschop@ehb.be>
  * @author Magali Gillard <magali.gillard@ehb.be>
  */
-class Course extends DataClass
+class Course extends AdministrationDataClass
 {
     // Properties
     const PROPERTY_SOURCE = 'source';

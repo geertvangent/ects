@@ -91,9 +91,9 @@ class ContextsFeedComponent extends PlatformGroupsFeedComponent
                 $element_class = 'type type_context_simple';
             }
         }
-        elseif (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
         {
-            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Ehb\Application\Atlantis\Rights :: getInstance()->get_target_groups($this->get_user());
 
             if (in_array($group->get_id(), $target_groups))
             {
@@ -245,9 +245,9 @@ class ContextsFeedComponent extends PlatformGroupsFeedComponent
         {
             return $groups;
         }
-        elseif (\Ehb\Application\Atlantis\Rights :: get_instance()->access_is_allowed())
+        elseif (\Ehb\Application\Atlantis\Rights :: getInstance()->access_is_allowed())
         {
-            $target_groups = \Ehb\Application\Atlantis\Rights :: get_instance()->get_target_groups($this->get_user());
+            $target_groups = \Ehb\Application\Atlantis\Rights :: getInstance()->get_target_groups($this->get_user());
 
             $allowed_groups = array();
 

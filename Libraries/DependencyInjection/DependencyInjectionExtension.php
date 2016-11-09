@@ -1,7 +1,9 @@
 <?php
 namespace Ehb\Libraries\DependencyInjection;
 
-use Chamilo\Libraries\File\Path;
+use Chamilo\Libraries\Architecture\ClassnameUtilities;
+use Chamilo\Libraries\File\PathBuilder;
+use Chamilo\Libraries\Utilities\StringUtilities;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -27,12 +29,17 @@ class DependencyInjectionExtension extends Extension implements ExtensionInterfa
      */
     public function load(array $config, ContainerBuilder $container)
     {
+        $pathBuilder = new PathBuilder(new ClassnameUtilities(new StringUtilities()));
+
         $loader = new XmlFileLoader(
             $container,
-            new FileLocator(Path::getInstance()->getConfigurationPath('Ehb\Libraries') . 'DependencyInjection'));
+            new FileLocator($pathBuilder->getConfigurationPath('Ehb\Libraries') . 'DependencyInjection'));
 
         $loader->load('storage.administration.xml');
         $loader->load('vendor.xml');
+
+        $xmlFileLoader = new XmlFileLoader($container, new FileLocator($pathBuilder->getStoragePath() . 'configuration'));
+        $xmlFileLoader->load('configuration.ehb.xml');
     }
 
     /**

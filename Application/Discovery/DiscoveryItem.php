@@ -15,7 +15,7 @@ class DiscoveryItem extends DataClass
 
     private $instance;
 
-    public function get_instance()
+    public function getInstance()
     {
         return $this->instance;
     }
@@ -60,6 +60,6 @@ class DiscoveryItem extends DataClass
      */
     public function get_data_manager()
     {
-        return DataManager :: get_instance();
+        return DataManager :: getInstance();
     }
 }

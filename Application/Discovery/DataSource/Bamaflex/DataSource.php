@@ -6,7 +6,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource
 
     public function __construct(\Ehb\Application\Discovery\Instance\Storage\DataClass\Instance $module_instance)
     {
-        $data_source_connection = Connection :: get_instance($module_instance->get_setting('data_source'));
+        $data_source_connection = Connection :: getInstance($module_instance->get_setting('data_source'));
 
         $connection = $data_source_connection->get_connection();
 
@@ -31,7 +31,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource
     public function convert_to_utf8($string)
     {
         // return $string;
-//         if (Connection :: get_instance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
+//         if (Connection :: getInstance($this->get_module_instance()->get_setting('data_source'))->get_data_source_instance()->get_setting(
 //             'driver') == 'mssql')
 //         {
             return iconv('Windows-1252', 'UTF-8', $string);

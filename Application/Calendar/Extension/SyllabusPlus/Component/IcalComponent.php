@@ -1,7 +1,6 @@
 <?php
 namespace Ehb\Application\Calendar\Extension\SyllabusPlus\Component;
 
-use Chamilo\Configuration\Configuration;
 use Chamilo\Core\User\Storage\DataClass\User;
 use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\Interfaces\NoAuthenticationSupport;
@@ -32,7 +31,9 @@ class IcalComponent extends Manager implements NoAuthenticationSupport
 
     public function run()
     {
-        $authenticationValidator = new AuthenticationValidator($this->getRequest(), Configuration::get_instance());
+        $authenticationValidator = new AuthenticationValidator(
+            $this->getRequest(),
+            $this->getService('chamilo.configuration.service.configuration_consulter'));
 
         if (! $authenticationValidator->isAuthenticated())
         {

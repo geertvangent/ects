@@ -14,13 +14,13 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get('TypeName')));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get('TypeName')));
         return \Ehb\Application\Discovery\Module\Faculty\Rendition\Rendition :: launch($this);
     }
 
     public function get_faculties_table($year)
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $year));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $year));
         $faculties = $this->get_faculties_data($year);
         
         $data = array();

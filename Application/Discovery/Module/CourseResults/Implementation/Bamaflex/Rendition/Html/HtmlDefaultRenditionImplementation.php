@@ -42,7 +42,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_course_properties_table()
     {
-        $course = DataManager :: get_instance($this->get_module_instance())->retrieve_course(
+        $course = DataManager :: getInstance($this->get_module_instance())->retrieve_course(
             Module :: get_course_parameters());
 
         $data_source = $this->get_module_instance()->get_setting('data_source');
@@ -87,7 +87,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         }
         $properties[Translation :: get('History')] = implode('  |  ', $history);
 
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_year()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $course->get_year()));
 
         if ($faculty_info_module_instance)
         {
@@ -110,12 +110,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $properties[Translation :: get('Faculty')] = $course->get_faculty();
             }
 
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $course->get_faculty()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb($url, $course->get_faculty()));
         }
         else
         {
             $properties[Translation :: get('Faculty')] = $course->get_faculty();
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_faculty()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $course->get_faculty()));
         }
 
         if ($training_info_module_instance)
@@ -140,14 +140,14 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $properties[Translation :: get('Training')] = $course->get_training();
             }
 
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $course->get_training()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb($url, $course->get_training()));
         }
         else
         {
             $properties[Translation :: get('Training')] = $course->get_training();
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_training()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $course->get_training()));
         }
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $course->get_name()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $course->get_name()));
 
         $table = new PropertiesTable($properties);
 

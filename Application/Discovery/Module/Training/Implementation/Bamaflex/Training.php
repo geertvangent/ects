@@ -430,7 +430,7 @@ class Training extends \Ehb\Application\Discovery\Module\Training\Training
      */
     public function get_data_manager()
     {
-        // return DataManager :: get_instance();
+        // return DataManager :: getInstance();
     }
 
     public function is_current()
@@ -466,7 +466,7 @@ class Training extends \Ehb\Application\Discovery\Module\Training\Training
                 $parameters->set_training_id($previous_reference->get_id());
                 $parameters->set_source($previous_reference->get_source());
 
-                $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
+                $training = DataManager :: getInstance($module_instance)->retrieve_training($parameters);
                 if ($training instanceof Training)
                 {
                     $trainings[$training->get_year()][] = $training;
@@ -499,7 +499,7 @@ class Training extends \Ehb\Application\Discovery\Module\Training\Training
                 $parameters->set_training_id($next_reference->get_id());
                 $parameters->set_source($next_reference->get_source());
 
-                $training = DataManager :: get_instance($module_instance)->retrieve_training($parameters);
+                $training = DataManager :: getInstance($module_instance)->retrieve_training($parameters);
 
                 if ($training instanceof Training)
                 {

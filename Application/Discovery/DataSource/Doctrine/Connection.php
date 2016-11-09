@@ -57,7 +57,7 @@ class Connection extends Connection
      *
      * @return Connection The instance.
      */
-    public static function get_instance($data_source_instance_id)
+    public static function getInstance($data_source_instance_id)
     {
         if (! isset(self :: $instance) || ! isset(self :: $instance[$data_source_instance_id]))
         {

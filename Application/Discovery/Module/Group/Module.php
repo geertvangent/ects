@@ -42,7 +42,7 @@ abstract class Module extends \Ehb\Application\Discovery\Module
     {
         if (! isset($this->groups))
         {
-            $this->groups = DataManager :: get_instance($this->get_module_instance())->retrieve_groups(
+            $this->groups = DataManager :: getInstance($this->get_module_instance())->retrieve_groups(
                 $this->get_module_parameters());
         }
         return $this->groups;

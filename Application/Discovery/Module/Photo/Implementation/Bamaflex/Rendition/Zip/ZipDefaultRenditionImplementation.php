@@ -40,7 +40,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
 
         while ($user = $users->next_result())
         {
-            $photo = DataManager :: get_instance($this->get_module_instance())->retrieve_photo(
+            $photo = DataManager :: getInstance($this->get_module_instance())->retrieve_photo(
                 $user->get_official_code(),
                 false);
 
@@ -63,7 +63,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
 
         if ($parameters->get_faculty_id())
         {
-            $faculty = DataManager :: get_instance($this->get_module_instance())->retrieve_faculty(
+            $faculty = DataManager :: getInstance($this->get_module_instance())->retrieve_faculty(
                 $parameters->get_faculty_id());
             $file_name_parts[] = $faculty->get_year();
             $file_name_parts[] = $faculty->get_name();
@@ -86,7 +86,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
         }
         elseif ($parameters->get_training_id())
         {
-            $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
+            $training = DataManager :: getInstance($this->get_module_instance())->retrieve_training(
                 $parameters->get_training_id());
             $file_name_parts[] = $training->get_year();
             $file_name_parts[] = $training->get_faculty();
@@ -107,7 +107,7 @@ class ZipDefaultRenditionImplementation extends RenditionImplementation
         }
         elseif ($parameters->get_programme_id())
         {
-            $programme = DataManager :: get_instance($this->get_module_instance())->retrieve_programme(
+            $programme = DataManager :: getInstance($this->get_module_instance())->retrieve_programme(
                 $parameters->get_programme_id());
             $file_name_parts[] = $programme->get_year();
             $file_name_parts[] = $programme->get_faculty();

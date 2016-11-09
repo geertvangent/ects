@@ -45,7 +45,7 @@ class CourseResult extends \Ehb\Application\Discovery\Module\CourseResults\Cours
      */
     public function get_data_manager()
     {
-        // return DataManager :: get_instance();
+        // return DataManager :: getInstance();
     }
 
     /**

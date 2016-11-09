@@ -20,7 +20,7 @@ class Rights extends TrainingBasedRights
             \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
             (int) $module_instance_id);
 
-        $course = DataManager :: get_instance($module_instance)->retrieve_course($parameter);
+        $course = DataManager :: getInstance($module_instance)->retrieve_course($parameter);
 
         return new TrainingBasedContext($course->get_faculty_id(), $course->get_training_id());
     }

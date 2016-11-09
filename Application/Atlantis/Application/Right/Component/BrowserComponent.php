@@ -105,7 +105,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
         $application = \Ehb\Application\Atlantis\Application\Storage\DataManager :: retrieve_by_id(
             \Ehb\Application\Atlantis\Application\Storage\DataClass\Application :: class_name(), 
             (int) $application_id);
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $application->get_name()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $application->get_name()));
         SessionBreadcrumbs :: add(
             new Breadcrumb(
                 $this->get_url(), 

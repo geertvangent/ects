@@ -21,7 +21,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
 
         if (! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,
@@ -30,7 +30,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         {
             throw new NotAllowedException(false);
         }
-        $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years(
+        $years = DataManager :: getInstance($this->get_module_instance())->retrieve_years(
             $this->get_module_parameters());
         if (count($years) > 0)
         {
@@ -55,7 +55,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
     {
         $year_enrollments = array();
 
-        $enrollments = DataManager :: get_instance($this->get_module_instance())->retrieve_enrollments(
+        $enrollments = DataManager :: getInstance($this->get_module_instance())->retrieve_enrollments(
             $this->get_module_parameters());
 
         foreach ($enrollments as $enrollment)
@@ -153,12 +153,12 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
         $table_data = array();
         $total_price = 0;
 
-        $courses = DataManager :: get_instance($this->get_module_instance())->retrieve_courses($enrollment_id);
+        $courses = DataManager :: getInstance($this->get_module_instance())->retrieve_courses($enrollment_id);
 
         foreach ($courses as $course)
         {
 
-            $materials = DataManager :: get_instance($this->get_module_instance())->retrieve_materials(
+            $materials = DataManager :: getInstance($this->get_module_instance())->retrieve_materials(
                 $course->get_programme_id(),
                 $type);
 
@@ -248,7 +248,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             {
                 foreach ($course->get_children() as $child)
                 {
-                    $materials = DataManager :: get_instance($this->get_module_instance())->retrieve_materials(
+                    $materials = DataManager :: getInstance($this->get_module_instance())->retrieve_materials(
                         $child->get_programme_id(),
                         $type);
 

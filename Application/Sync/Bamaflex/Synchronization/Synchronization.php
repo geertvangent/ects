@@ -18,7 +18,7 @@ abstract class Synchronization
 
     public function __construct()
     {
-        $this->data_manager = BamaflexDataConnector::get_instance();
+        $this->data_manager = BamaflexDataConnector::getInstance();
     }
 
     /**

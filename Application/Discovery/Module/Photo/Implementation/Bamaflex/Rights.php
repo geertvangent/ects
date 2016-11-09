@@ -46,7 +46,7 @@ class Rights
                 $module_instance = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieve_by_id(
                     \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
                     (int) $module_instance_id);
-                $training = \Ehb\Application\Discovery\Module\Photo\DataManager :: get_instance($module_instance)->retrieve_training(
+                $training = \Ehb\Application\Discovery\Module\Photo\DataManager :: getInstance($module_instance)->retrieve_training(
                     $parameters->get_training_id());
 
                 $codes[] = 'DEP_' . $training->get_faculty_id();
@@ -58,7 +58,7 @@ class Rights
                 $module_instance = \Ehb\Application\Discovery\Instance\Storage\DataManager :: retrieve_by_id(
                     \Ehb\Application\Discovery\Instance\Storage\DataClass\Instance :: class_name(),
                     (int) $module_instance_id);
-                $course = \Ehb\Application\Discovery\Module\Photo\DataManager :: get_instance($module_instance)->retrieve_programme(
+                $course = \Ehb\Application\Discovery\Module\Photo\DataManager :: getInstance($module_instance)->retrieve_programme(
                     $parameters->get_programme_id());
 
                 $codes[] = 'DEP_' . $course->get_faculty_id();
@@ -132,7 +132,7 @@ class Rights
                 $conditions[] = new OrCondition($entities_conditions);
                 $condition = new AndCondition($conditions);
 
-                $count = \Ehb\Application\Discovery\Storage\DataManager :: get_instance()->count_rights_group_entity_rights(
+                $count = \Ehb\Application\Discovery\Storage\DataManager :: getInstance()->count_rights_group_entity_rights(
                     $condition);
 
                 if ($count > 0)

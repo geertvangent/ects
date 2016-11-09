@@ -53,7 +53,7 @@ class PortfolioVisitProcessor
      */
     public function run()
     {
-        $this->dm = \Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataManager :: get_instance();
+        $this->dm = \Chamilo\Core\User\Integration\Chamilo\Core\Tracking\Storage\DataManager :: getInstance();
 
         try
         {

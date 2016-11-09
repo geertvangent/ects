@@ -221,7 +221,7 @@ class GroupBrowserComponent extends UserBrowserComponent
 
         $html[] = '</ul>';
 
-        $html[] = ResourceManager::get_instance()->get_resource_html(
+        $html[] = ResourceManager::getInstance()->get_resource_html(
             Path::getInstance()->getJavascriptPath(self::package(), true) . 'Group.js');
 
         return implode(PHP_EOL, $html);
@@ -322,7 +322,7 @@ class GroupBrowserComponent extends UserBrowserComponent
     {
         $groupUrl = new Redirect($this->getDisplayParameters(), array(self::PARAM_GROUP_ID));
 
-        BreadcrumbTrail::get_instance()->add(
+        BreadcrumbTrail::getInstance()->add(
             new Breadcrumb($groupUrl->getUrl(), Translation::get('GroupBrowserComponent')));
 
         $groupIdentifier = $this->getGroupIdentifier();
@@ -330,12 +330,12 @@ class GroupBrowserComponent extends UserBrowserComponent
 
         if ($groupIdentifier)
         {
-            BreadcrumbTrail::get_instance()->add(
+            BreadcrumbTrail::getInstance()->add(
                 new Breadcrumb(null, Translation::get('AcademicYear', array('YEAR' => $year))));
 
             $group = $this->getCalendarService()->getGroupByYearAndIdentifier($year, $groupIdentifier);
 
-            BreadcrumbTrail::get_instance()->add(new Breadcrumb(null, $group['name']));
+            BreadcrumbTrail::getInstance()->add(new Breadcrumb(null, $group['name']));
 
             return parent::renderCalendar();
         }

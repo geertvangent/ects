@@ -78,7 +78,7 @@ class Rights
             $conditions[] = new OrCondition($entities_conditions);
             $condition = new AndCondition($conditions);
 
-            $count = \Ehb\Application\Discovery\Storage\DataManager :: get_instance()->count_rights_group_entity_rights(
+            $count = \Ehb\Application\Discovery\Storage\DataManager :: getInstance()->count_rights_group_entity_rights(
                 $condition);
 
             if ($count > 0)

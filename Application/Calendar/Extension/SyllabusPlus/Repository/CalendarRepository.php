@@ -172,7 +172,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $records = array();
 
@@ -216,7 +216,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $className = $this->getYearSpecificClassName('GroupActivity', $year);
 
@@ -255,7 +255,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $className = $this->getYearSpecificClassName('LocationActivity', $year);
 
@@ -290,7 +290,7 @@ class CalendarRepository
     {
         return explode(
             ',',
-            Configuration::get_instance()->get_setting(
+            Configuration::getInstance()->get_setting(
                 array('Ehb\Application\Calendar\Extension\SyllabusPlus', 'years')));
     }
 
@@ -307,7 +307,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $records = array();
 
@@ -360,7 +360,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $record = array();
 
@@ -419,7 +419,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $record = array();
 
@@ -473,7 +473,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $className = $this->getYearSpecificClassName('GroupActivity', $year);
 
@@ -520,7 +520,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $record = array();
 
@@ -574,7 +574,7 @@ class CalendarRepository
 
         if (! $cache->contains($cacheIdentifier))
         {
-            $lifetimeInMinutes = Configuration::get_instance()->get_setting(
+            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
                 array('Chamilo\Libraries\Calendar', 'refresh_external'));
             $className = $this->getYearSpecificClassName('LocationActivity', $year);
 

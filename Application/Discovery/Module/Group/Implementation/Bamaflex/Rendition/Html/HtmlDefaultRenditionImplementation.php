@@ -158,7 +158,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_training_properties_table()
     {
-        $training = DataManager :: get_instance($this->get_module_instance())->retrieve_training(
+        $training = DataManager :: getInstance($this->get_module_instance())->retrieve_training(
             Module :: get_training_info_parameters());
 
         $data_source = $this->get_module_instance()->get_setting('data_source');
@@ -370,7 +370,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
             }
             $i ++;
         }
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_year()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_year()));
 
         $properties[Translation :: get('History')] = implode('  |  ', $history);
 
@@ -412,15 +412,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $properties[Translation :: get('Faculty')] = $training->get_faculty();
             }
 
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb($url, $training->get_faculty()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb($url, $training->get_faculty()));
         }
         else
         {
             $properties[Translation :: get('Faculty')] = $training->get_faculty();
-            BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_faculty()));
+            BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_faculty()));
         }
 
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, $training->get_name()));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, $training->get_name()));
 
         $table = new PropertiesTable($properties);
 

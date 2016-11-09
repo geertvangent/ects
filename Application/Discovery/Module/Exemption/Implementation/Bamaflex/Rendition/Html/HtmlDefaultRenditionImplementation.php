@@ -25,7 +25,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
      */
     public function render()
     {
-        BreadcrumbTrail :: get_instance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
+        BreadcrumbTrail :: getInstance()->add(new Breadcrumb(null, Translation :: get(TypeName)));
 
         if (! Rights :: is_allowed(
             Rights :: VIEW_RIGHT,
@@ -39,7 +39,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
         if (count($this->get_exemptions()) > 0)
         {
-            $years = DataManager :: get_instance($this->get_module_instance())->retrieve_years(
+            $years = DataManager :: getInstance($this->get_module_instance())->retrieve_years(
                 $this->get_module_parameters());
 
             $tabs = new DynamicTabsRenderer('exemption_list');

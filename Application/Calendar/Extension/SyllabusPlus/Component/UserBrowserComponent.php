@@ -59,7 +59,7 @@ class UserBrowserComponent extends Manager implements DelegateComponent
         $this->checkAuthorization();
         $this->initialize();
 
-        BreadcrumbTrail::get_instance()->add(
+        BreadcrumbTrail::getInstance()->add(
             new Breadcrumb(
                 null,
                 $this->getUserCalendar()->fullname(
