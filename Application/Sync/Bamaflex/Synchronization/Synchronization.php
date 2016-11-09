@@ -1,7 +1,7 @@
 <?php
 namespace Ehb\Application\Sync\Bamaflex\Synchronization;
 
-use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
+use Chamilo\Configuration\Configuration;
 use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexDataConnector;
 use Ehb\Application\Sync\Bamaflex\DataConnector\Bamaflex\BamaflexResultSet;
 
@@ -36,13 +36,13 @@ abstract class Synchronization
      */
     public function get_academic_year()
     {
-        return PlatformSetting::get('academic_year', 'Ehb\Application\Sync');
+        return Configuration::getInstance()->get_setting(array('Ehb\Application\Sync', 'academic_year'));
     }
 
     public function get_academic_year_end()
     {
         $year_parts = explode('-', $this->get_academic_year());
-        
+
         return '20' . $year_parts[1] . '-09-30 23:59:59.999';
     }
 

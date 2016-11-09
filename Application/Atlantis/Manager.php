@@ -5,8 +5,6 @@ use Chamilo\Libraries\Architecture\Application\Application;
 use Chamilo\Libraries\Architecture\Application\ApplicationConfigurationInterface;
 use Chamilo\Libraries\Architecture\Exceptions\NotAllowedException;
 use Chamilo\Libraries\Format\Structure\BreadcrumbTrail;
-use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 
 abstract class Manager extends Application
 {
@@ -22,13 +20,11 @@ abstract class Manager extends Application
     public function __construct(ApplicationConfigurationInterface $applicationConfiguration)
     {
         parent::__construct($applicationConfiguration);
-        
+
         if (! \Ehb\Application\Atlantis\Rights::getInstance()->access_is_allowed())
         {
             throw new NotAllowedException();
         }
-        
-        Theme::getInstance()->setTheme(PlatformSetting::get('theme', __NAMESPACE__));
     }
 
     function render_header()
