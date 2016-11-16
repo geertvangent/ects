@@ -84,7 +84,7 @@ class MailerComponent extends Manager
 
         $recipient = $password->get_user();
 
-        $siteName = Configuration::get_instance()->get_setting(array('Chamilo\Core\Admin', 'site_name'));
+        $siteName = Configuration::getInstance()->get_setting(array('Chamilo\Core\Admin', 'site_name'));
 
         $subject = Translation::get('PasswordMailTitle', array('PLATFORM' => $siteName));
 
@@ -107,7 +107,7 @@ class MailerComponent extends Manager
             $this->get_user()->get_fullname(),
             $this->get_user()->get_email());
 
-        $mailerFactory = new MailerFactory(Configuration::get_instance());
+        $mailerFactory = new MailerFactory(Configuration::getInstance());
         $mailer = $mailerFactory->getActiveMailer();
 
         $mailer->sendMail($mail);
