@@ -175,8 +175,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                         new StaticConditionVariable($faculty->get_source()));
                     $conditions[] = new EqualityCondition(
                         new PropertyConditionVariable(History::class_name(), History::PROPERTY_TYPE), 
-                        new StaticConditionVariable(
-                            ClassnameUtilities::getInstance()->getNamespaceFromObject($faculty)));
+                        new StaticConditionVariable(ClassnameUtilities::getInstance()->getNamespaceFromObject($faculty)));
                     $condition = new AndCondition($conditions);
                     
                     $histories = DataManager::getInstance()->retrieve_history_by_conditions($condition);
@@ -210,8 +209,7 @@ class DataSource extends \Ehb\Application\Discovery\DataSource\Bamaflex\DataSour
                         new StaticConditionVariable($faculty->get_source()));
                     $conditions[] = new EqualityCondition(
                         new PropertyConditionVariable(History::class_name(), History::PROPERTY_TYPE), 
-                        new StaticConditionVariable(
-                            ClassnameUtilities::getInstance()->getNamespaceFromObject($faculty)));
+                        new StaticConditionVariable(ClassnameUtilities::getInstance()->getNamespaceFromObject($faculty)));
                     $condition = new AndCondition($conditions);
                     
                     $histories = DataManager::getInstance()->retrieve_history_by_conditions($condition);

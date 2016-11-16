@@ -377,8 +377,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
                             $this->php_excel->getActiveSheet()->setCellValueByColumnAndRow(
                                 $column ++, 
                                 $row, 
-                                ExcelExport::transcode_string(
-                                    Translation::get($enrollment->get_contract_type_string())));
+                                ExcelExport::transcode_string(Translation::get($enrollment->get_contract_type_string())));
                             
                             $range = 'A' . $row . ':' . \PHPExcel_Cell::stringFromColumnIndex(count($headers) - 1) . $row;
                             $this->php_excel->getActiveSheet()->getStyle($range)->getFont()->setItalic(true);

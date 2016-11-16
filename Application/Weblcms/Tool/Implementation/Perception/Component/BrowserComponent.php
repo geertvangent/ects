@@ -40,45 +40,45 @@ class BrowserComponent extends Manager implements TableSupport
     public function run()
     {
         $this->buttonToolbarRenderer = $this->getButtonToolbarRenderer();
-
+        
         if (! $this->get_course()->is_course_admin($this->get_user()))
         {
             $password = DataManager::retrieve(
-                Password::class_name(),
+                Password::class_name(), 
                 new DataClassRetrieveParameters(
                     new EqualityCondition(
-                        new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID),
+                        new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID), 
                         new StaticConditionVariable($this->get_user_id()))));
-
+            
             if ($password instanceof Password)
             {
                 $this->send_mail($password);
-
+                
                 $this->redirect(
-                    Translation::get('PasswordMailed'),
-                    false,
+                    Translation::get('PasswordMailed'), 
+                    false, 
                     array(\Chamilo\Application\Weblcms\Manager::PARAM_TOOL => null, self::PARAM_ACTION => null));
             }
             else
             {
                 $this->redirect(
-                    Translation::get('NoPerceptionPassword'),
-                    true,
+                    Translation::get('NoPerceptionPassword'), 
+                    true, 
                     array(\Chamilo\Application\Weblcms\Manager::PARAM_TOOL => null, self::PARAM_ACTION => null));
             }
         }
         else
         {
-
+            
             $table = new PasswordTable($this);
-
+            
             $html = array();
-
+            
             $html[] = $this->render_header();
             $html[] = $this->buttonToolbarRenderer->render();
             $html[] = $table->as_html();
             $html[] = $this->render_footer();
-
+            
             return implode(PHP_EOL, $html);
         }
     }
@@ -89,16 +89,16 @@ class BrowserComponent extends Manager implements TableSupport
     public function get_table_condition($object_table_class_name)
     {
         $user_ids = DataManager::get_course_user_ids($this->get_course_id());
-
+        
         if (count($user_ids) == 0)
         {
             return new EqualityCondition(
-                new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID),
+                new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID), 
                 new StaticConditionVariable(- 1));
         }
-
+        
         return new InCondition(
-            new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID),
+            new PropertyConditionVariable(Password::class_name(), Password::PROPERTY_USER_ID), 
             $user_ids);
     }
 
@@ -108,67 +108,67 @@ class BrowserComponent extends Manager implements TableSupport
         {
             $buttonToolbar = new ButtonToolBar();
             $commonActions = new ButtonGroup();
-
+            
             $commonActions->addButton(
                 new Button(
-                    Translation::get('GeneratePasswords'),
-                    Theme::getInstance()->getImagePath(self::package(), 'Action/' . self::ACTION_GENERATE),
+                    Translation::get('GeneratePasswords'), 
+                    Theme::getInstance()->getImagePath(self::package(), 'Action/' . self::ACTION_GENERATE), 
                     $this->get_url(array(self::PARAM_ACTION => self::ACTION_GENERATE))));
-
+            
             $commonActions->addButton(
                 new Button(
-                    Translation::get('MailPasswords'),
-                    Theme::getInstance()->getImagePath(self::package(), 'Action/' . self::ACTION_MAIL),
+                    Translation::get('MailPasswords'), 
+                    Theme::getInstance()->getImagePath(self::package(), 'Action/' . self::ACTION_MAIL), 
                     $this->get_url(array(self::PARAM_ACTION => self::ACTION_MAIL))));
-
+            
             $commonActions->addButton(
                 new Button(
-                    Translation::get('ExportPasswords'),
-                    Theme::getInstance()->getImagePath(self::package(), 'Action/' . self::ACTION_EXPORT),
+                    Translation::get('ExportPasswords'), 
+                    Theme::getInstance()->getImagePath(self::package(), 'Action/' . self::ACTION_EXPORT), 
                     $this->get_url(array(self::PARAM_ACTION => self::ACTION_EXPORT))));
-
+            
             $buttonToolbar->addButtonGroup($commonActions);
-
+            
             $this->buttonToolbarRenderer = new ButtonToolBarRenderer($buttonToolbar);
         }
-
+        
         return $this->buttonToolbarRenderer;
     }
 
     public function send_mail($password)
     {
         set_time_limit(3600);
-
+        
         $recipient = $password->get_user();
-
+        
         $siteName = Configuration::getInstance()->get_setting(array('Chamilo\Core\Admin', 'site_name'));
-
+        
         $subject = Translation::get('PasswordMailTitle', array('PLATFORM' => $siteName));
-
+        
         $body = Translation::get(
-            'PasswordMailBody',
+            'PasswordMailBody', 
             array(
-                'USER' => $recipient->get_fullname(),
-                'EMAIL' => $recipient->get_email(),
-                'PLATFORM' => $siteName,
-                'SENDER' => $this->get_user()->get_fullname(),
+                'USER' => $recipient->get_fullname(), 
+                'EMAIL' => $recipient->get_email(), 
+                'PLATFORM' => $siteName, 
+                'SENDER' => $this->get_user()->get_fullname(), 
                 'PASSWORD' => $password->get_password()));
-
+        
         $mail = new Mail(
-            $subject,
-            $body,
-            array($recipient->get_email()),
-            true,
-            array(),
-            array(),
-            $this->get_user()->get_fullname(),
+            $subject, 
+            $body, 
+            array($recipient->get_email()), 
+            true, 
+            array(), 
+            array(), 
+            $this->get_user()->get_fullname(), 
             $this->get_user()->get_email());
-
+        
         $mailerFactory = new MailerFactory(Configuration::getInstance());
         $mailer = $mailerFactory->getActiveMailer();
-
+        
         $mailer->sendMail($mail);
-
+        
         return true;
     }
 }

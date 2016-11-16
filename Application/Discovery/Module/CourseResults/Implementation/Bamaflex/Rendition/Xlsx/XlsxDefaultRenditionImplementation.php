@@ -65,8 +65,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
             $headers[] = Translation::get('MarkStatus', array('TRY' => $mark_moment->get_name()));
         }
         
-        $this->php_excel->getActiveSheet()->getStyle(
-            'A:' . \PHPExcel_Cell::stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
+        $this->php_excel->getActiveSheet()->getStyle('A:' . \PHPExcel_Cell::stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
             \PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
         
         \Ehb\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition::set_headers($this->php_excel, $headers);

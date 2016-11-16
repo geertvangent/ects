@@ -46,8 +46,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_file_name()
     {
-        $group = DataManager::getInstance($this->get_module_instance())->retrieve_group(
-            Module::get_group_parameters());
+        $group = DataManager::getInstance($this->get_module_instance())->retrieve_group(Module::get_group_parameters());
         
         return $group->get_description() . ' ' .
              Translation::get('TypeName', null, $this->get_module_instance()->get_type()) . ' ' . $group->get_year();

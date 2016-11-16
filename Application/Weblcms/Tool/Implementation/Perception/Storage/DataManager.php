@@ -46,9 +46,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
             new PropertyConditionVariable(CourseEntityRelation::class_name(), CourseEntityRelation::PROPERTY_STATUS), 
             new StaticConditionVariable(CourseEntityRelation::STATUS_STUDENT));
         $userConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(
-                CourseEntityRelation::class_name(), 
-                CourseEntityRelation::PROPERTY_ENTITY_TYPE), 
+            new PropertyConditionVariable(CourseEntityRelation::class_name(), CourseEntityRelation::PROPERTY_ENTITY_TYPE), 
             new StaticConditionVariable(CourseEntityRelation::ENTITY_TYPE_USER));
         
         $parameters = new DataClassDistinctParameters(
@@ -68,9 +66,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
             new PropertyConditionVariable(CourseEntityRelation::class_name(), CourseEntityRelation::PROPERTY_STATUS), 
             new StaticConditionVariable(CourseEntityRelation::STATUS_STUDENT));
         $groupConditions[] = new EqualityCondition(
-            new PropertyConditionVariable(
-                CourseEntityRelation::class_name(), 
-                CourseEntityRelation::PROPERTY_ENTITY_TYPE), 
+            new PropertyConditionVariable(CourseEntityRelation::class_name(), CourseEntityRelation::PROPERTY_ENTITY_TYPE), 
             new StaticConditionVariable(CourseEntityRelation::ENTITY_TYPE_GROUP));
         
         $groups = \Chamilo\Application\Weblcms\Course\Storage\DataManager::retrieves(

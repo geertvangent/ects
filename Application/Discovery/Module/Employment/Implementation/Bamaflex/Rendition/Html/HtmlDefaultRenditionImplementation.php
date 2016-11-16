@@ -122,10 +122,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $image = '<img src="' . Theme::getInstance()->getImagesPath() . 'Fund/0.png" alt="' .
                      Translation::get('UnknownFund') . '" title="' . Translation::get('UnknownFund') . '" />';
                 $row[] = $image;
-                LegendTable::getInstance()->addSymbol(
-                    $image, 
-                    Translation::get('UnknownFund'), 
-                    Translation::get('Fund'));
+                LegendTable::getInstance()->addSymbol($image, Translation::get('UnknownFund'), Translation::get('Fund'));
             }
             $row[] = $employment->get_pay_scale();
             

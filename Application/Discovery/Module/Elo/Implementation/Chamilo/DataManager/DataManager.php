@@ -77,10 +77,7 @@ class DataManager extends \Chamilo\Libraries\Storage\DataManager\DataManager
             $condition = null;
         }
         $properties->add(
-            new FunctionConditionVariable(
-                FunctionConditionVariable::COUNT, 
-                new StaticConditionVariable(1), 
-                self::COUNT));
+            new FunctionConditionVariable(FunctionConditionVariable::COUNT, new StaticConditionVariable(1), self::COUNT));
         
         $parameters = new RecordRetrievesParameters($properties, $condition, null, null, null, null, $group_by);
         

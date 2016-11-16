@@ -90,8 +90,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 Module::TAB_GOALS, 
                 Translation::get('Goals'), 
                 Theme::getInstance()->getImagesPath(
-                    'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' .
-                     Module::TAB_GOALS . '.png', 
+                    'Ehb\Application\Discovery\Module\TrainingInfo\Implementation\Bamaflex') . 'Tabs/' . Module::TAB_GOALS .
+                     '.png', 
                     $this->get_instance_url($this->get_module_instance()->get_id(), $parameters), 
                     $current_tab == Module::TAB_GOALS));
         $parameters->set_tab(Module::TAB_OPTIONS);

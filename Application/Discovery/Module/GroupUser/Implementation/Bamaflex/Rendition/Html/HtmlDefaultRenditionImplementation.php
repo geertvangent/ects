@@ -51,8 +51,7 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
 
     public function get_group_properties_table()
     {
-        $group = DataManager::getInstance($this->get_module_instance())->retrieve_group(
-            Module::get_group_parameters());
+        $group = DataManager::getInstance($this->get_module_instance())->retrieve_group(Module::get_group_parameters());
         
         $properties = array();
         $properties[Translation::get('Year')] = $group->get_year();

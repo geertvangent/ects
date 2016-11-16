@@ -34,9 +34,8 @@ class GraphRenderer
         $this->statistics = $statistics;
         $this->module = $module;
         
-        $path = Path::getInstance()->getStoragePath() .
-             ClassnameUtilities::getInstance()->namespaceToPath(__NAMESPACE__) . '/graph_data/' .
-             md5(serialize(array($user_id, $application, $action)));
+        $path = Path::getInstance()->getStoragePath() . ClassnameUtilities::getInstance()->namespaceToPath(
+            __NAMESPACE__) . '/graph_data/' . md5(serialize(array($user_id, $application, $action)));
         
         if (! file_exists($path))
         {

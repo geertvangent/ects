@@ -20,8 +20,8 @@ class StudentTrainingChoicesOptionGroupSynchronization extends GroupSynchronizat
 
     public function get_code()
     {
-        return $this->get_parent_group()->get_code() . '_' .
-             $this->get_parameter(self::RESULT_PROPERTY_CHOICE_OPTION_ID);
+        return $this->get_parent_group()->get_code() . '_' . $this->get_parameter(
+            self::RESULT_PROPERTY_CHOICE_OPTION_ID);
     }
 
     public function get_name()

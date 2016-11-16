@@ -44,8 +44,10 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $training = DataManager::getInstance($this->get_module_instance())->retrieve_training(
             Module::get_training_info_parameters());
         
-        return $training->get_name() . ' ' .
-             Translation::get('TypeName', null, $this->get_module_instance()->get_type()) . ' ' . $training->get_year();
+        return $training->get_name() . ' ' . Translation::get(
+            'TypeName', 
+            null, 
+            $this->get_module_instance()->get_type()) . ' ' . $training->get_year();
     }
 
     public function process_training_results()
@@ -63,8 +65,7 @@ class XlsxDefaultRenditionImplementation extends RenditionImplementation
         $headers[] = Translation::get('ResultType');
         $headers[] = Translation::get('DistinctionType');
         
-        $this->php_excel->getActiveSheet()->getStyle(
-            'A:' . \PHPExcel_Cell::stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
+        $this->php_excel->getActiveSheet()->getStyle('A:' . \PHPExcel_Cell::stringFromColumnIndex(count($headers) - 1))->getAlignment()->setHorizontal(
             \PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
         
         \Ehb\Application\Discovery\Rendition\View\Xlsx\XlsxDefaultRendition::set_headers($this->php_excel, $headers);

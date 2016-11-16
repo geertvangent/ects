@@ -128,9 +128,7 @@ class DiscoverySynchronization
         foreach ($to_delete as $entity_right_id => $entity)
         {
             $condition = new EqualityCondition(
-                new PropertyConditionVariable(
-                    RightsGroupEntityRight::class_name(), 
-                    RightsGroupEntityRight::PROPERTY_ID), 
+                new PropertyConditionVariable(RightsGroupEntityRight::class_name(), RightsGroupEntityRight::PROPERTY_ID), 
                 new StaticConditionVariable($entity_right_id));
             
             DataManager::deletes(RightsGroupEntityRight::class_name(), $condition);
