@@ -196,9 +196,8 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 $row = array();
                 if ($advice->get_measures_valid())
                 {
-                    $image = '<img src="' . Theme::getInstance()->getImagesPath() . 'Type/' .
-                         Advice::TYPE_MEASURES_VALID . '.png" alt="' .
-                         Translation::get(Advice::type_string(Advice::TYPE_MEASURES_VALID)) . '" title="' .
+                    $image = '<img src="' . Theme::getInstance()->getImagesPath() . 'Type/' . Advice::TYPE_MEASURES_VALID .
+                         '.png" alt="' . Translation::get(Advice::type_string(Advice::TYPE_MEASURES_VALID)) . '" title="' .
                          Translation::get(Advice::type_string(Advice::TYPE_MEASURES_VALID)) . '"/>';
                     $row[] = $image;
                     LegendTable::getInstance()->addSymbol(

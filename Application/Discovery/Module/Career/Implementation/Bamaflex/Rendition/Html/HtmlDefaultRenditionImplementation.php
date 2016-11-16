@@ -234,19 +234,15 @@ class HtmlDefaultRenditionImplementation extends RenditionImplementation
                 {
                     if ($training->is_current() && $year == $training->get_year() && $type == Course::TYPE_NORMAL)
                     {
-                        $row[] = '<img src="' .
-                             Theme::getInstance()->getImagePath(
-                                'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') .
-                             'TotalType/3.png" alt="' . Translation::get('CreditPending') . '" title="' .
-                             Translation::get('CreditPending') . '" />';
+                        $row[] = '<img src="' . Theme::getInstance()->getImagePath(
+                            'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'TotalType/3.png" alt="' .
+                             Translation::get('CreditPending') . '" title="' . Translation::get('CreditPending') . '" />';
                     }
                     else
                     {
-                        $row[] = '<img src="' .
-                             Theme::getInstance()->getImagePath(
-                                'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') .
-                             'TotalType/1.png" alt="' . Translation::get('CreditTrue') . '" title="' .
-                             Translation::get('CreditTrue') . '" />';
+                        $row[] = '<img src="' . Theme::getInstance()->getImagePath(
+                            'Ehb/Application/Discovery/Module/Career/Implementation/Bamaflex') . 'TotalType/1.png" alt="' .
+                             Translation::get('CreditTrue') . '" title="' . Translation::get('CreditTrue') . '" />';
                         $total += $credits;
                     }
                 }

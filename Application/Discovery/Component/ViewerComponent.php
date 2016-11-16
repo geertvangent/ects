@@ -40,8 +40,7 @@ class ViewerComponent extends Manager implements DelegateComponent
             new OrderBy(new PropertyConditionVariable(Instance::class_name(), Instance::PROPERTY_DISPLAY_ORDER)));
         if ($this->get_user()->is_platform_admin())
         {
-            $link = $this->get_url(
-                array(self::PARAM_ACTION => self::ACTION_MODULE, self::PARAM_MODULE_ID => null));
+            $link = $this->get_url(array(self::PARAM_ACTION => self::ACTION_MODULE, self::PARAM_MODULE_ID => null));
             BreadcrumbTrail::getInstance()->add_extra(
                 new ToolbarItem(
                     Translation::get('Modules'), 

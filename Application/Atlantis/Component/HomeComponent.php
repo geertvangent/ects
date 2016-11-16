@@ -26,9 +26,7 @@ class HomeComponent extends Manager implements DelegateComponent
         // Role tab
         $namespace = \Ehb\Application\Atlantis\Role\Manager::context();
         $actions = array();
-        $actions[] = new DynamicSearchAction(
-            $namespace, 
-            $this->get_url(array(self::PARAM_ACTION => self::ACTION_ROLE)));
+        $actions[] = new DynamicSearchAction($namespace, $this->get_url(array(self::PARAM_ACTION => self::ACTION_ROLE)));
         $actions[] = new DynamicAction(
             Translation::get('BrowseRoles', null, $namespace), 
             Translation::get('BrowseRolesDescription', null, $namespace), 

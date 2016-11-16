@@ -36,8 +36,7 @@ class MenuComponent extends \Ehb\Application\Atlantis\Context\Ajax\Manager
                 $condition, 
                 null, 
                 null, 
-                array(
-                    new OrderBy(new PropertyConditionVariable(Context::class_name(), Context::PROPERTY_CONTEXT_NAME)))))->as_array();
+                array(new OrderBy(new PropertyConditionVariable(Context::class_name(), Context::PROPERTY_CONTEXT_NAME)))))->as_array();
         
         header('Content-Type: text/xml');
         echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n", '<tree>' . "\n";

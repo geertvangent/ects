@@ -24,9 +24,7 @@ class RoleTableCellRenderer extends DataClassTableCellRenderer implements TableC
                     Translation::get('Edit', null, Utilities::COMMON_LIBRARIES), 
                     Theme::getInstance()->getCommonImagePath('Action/Edit'), 
                     $this->get_component()->get_url(
-                        array(
-                            Manager::PARAM_ACTION => Manager::ACTION_EDIT, 
-                            Manager::PARAM_ROLE_ID => $role->get_id())), 
+                        array(Manager::PARAM_ACTION => Manager::ACTION_EDIT, Manager::PARAM_ROLE_ID => $role->get_id())), 
                     ToolbarItem::DISPLAY_ICON));
             $toolbar->add_item(
                 new ToolbarItem(

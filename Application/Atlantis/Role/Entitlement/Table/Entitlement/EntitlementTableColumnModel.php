@@ -27,8 +27,7 @@ class EntitlementTableColumnModel extends DataClassTableColumnModel implements T
         if (! $this->get_component()->has_right_id())
         {
             $this->add_column(
-                new StaticTableColumn(
-                    Translation::get('TypeName', null, '\Ehb\Application\Atlantis\Application\Right')));
+                new StaticTableColumn(Translation::get('TypeName', null, '\Ehb\Application\Atlantis\Application\Right')));
         }
     }
 }

@@ -84,8 +84,7 @@ class BrowserComponent extends Manager implements TableSupport, DelegateComponen
     {
         $this->right_id = Request::get(\Ehb\Application\Atlantis\Application\Right\Manager::PARAM_RIGHT_ID);
         $this->role_id = Request::get(\Ehb\Application\Atlantis\Role\Manager::PARAM_ROLE_ID);
-        $this->application_id = Request::get(
-            \Ehb\Application\Atlantis\Application\Right\Manager::PARAM_APPLICATION_ID);
+        $this->application_id = Request::get(\Ehb\Application\Atlantis\Application\Right\Manager::PARAM_APPLICATION_ID);
         
         $this->add_breadcrumb();
         
