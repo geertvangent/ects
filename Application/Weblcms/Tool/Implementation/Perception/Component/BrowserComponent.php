@@ -7,7 +7,6 @@ use Chamilo\Libraries\Format\Structure\ActionBar\ButtonToolBar;
 use Chamilo\Libraries\Format\Structure\ActionBar\Renderer\ButtonToolBarRenderer;
 use Chamilo\Libraries\Format\Table\Interfaces\TableSupport;
 use Chamilo\Libraries\Format\Theme;
-use Chamilo\Libraries\Mail\Mail;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrieveParameters;
 use Chamilo\Libraries\Storage\Query\Condition\EqualityCondition;
@@ -18,6 +17,9 @@ use Ehb\Application\Weblcms\Tool\Implementation\Perception\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass\Password;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Table\Password\PasswordTable;
+use Chamilo\Configuration\Configuration;
+use Chamilo\Libraries\Mail\ValueObject\Mail;
+use Chamilo\Libraries\Mail\Mailer\MailerFactory;
 
 /**
  *
@@ -139,15 +141,9 @@ class BrowserComponent extends Manager implements TableSupport
 
         $recipient = $password->get_user();
 
-        $siteName = Configuration::getInstance()->get_setting(array('Chamilo\Core\Admin', 'site_name'));
-        $administratorFirstname = Configuration::getInstance()->get_setting(
-            array('Chamilo\Core\Admin', 'administrator_firstname'));
-        $administratorSurname = Configuration::getInstance()->get_setting(
-            array('Chamilo\Core\Admin', 'administrator_surname'));
-        $administratorEmail = Configuration::getInstance()->get_setting(
-            array('Chamilo\Core\Admin', 'administrator_email'));
+        $siteName = Configuration::get_instance()->get_setting(array('Chamilo\Core\Admin', 'site_name'));
 
-        $title = Translation::get('PasswordMailTitle', array('PLATFORM' => $siteName));
+        $subject = Translation::get('PasswordMailTitle', array('PLATFORM' => $siteName));
 
         $body = Translation::get(
             'PasswordMailBody',
@@ -155,18 +151,23 @@ class BrowserComponent extends Manager implements TableSupport
                 'USER' => $recipient->get_fullname(),
                 'EMAIL' => $recipient->get_email(),
                 'PLATFORM' => $siteName,
-                'SENDER' => $administratorFirstname . ' ' . $administratorSurname,
+                'SENDER' => $this->get_user()->get_fullname(),
                 'PASSWORD' => $password->get_password()));
 
-        $mail = Mail::factory(
-            $title,
+        $mail = new Mail(
+            $subject,
             $body,
             array($recipient->get_email()),
-            array(
-                Mail::NAME => $administratorFirstname . ' ' . $administratorSurname,
-                Mail::EMAIL => $administratorEmail));
+            true,
+            array(),
+            array(),
+            $this->get_user()->get_fullname(),
+            $this->get_user()->get_email());
 
-        $mail->send();
+        $mailerFactory = new MailerFactory(Configuration::get_instance());
+        $mailer = $mailerFactory->getActiveMailer();
+
+        $mailer->sendMail($mail);
 
         return true;
     }

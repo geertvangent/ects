@@ -1,8 +1,6 @@
 <?php
 namespace Ehb\Application\Weblcms\Tool\Implementation\Perception\Component;
 
-use Chamilo\Libraries\Mail\Mail;
-use Chamilo\Libraries\Platform\Configuration\PlatformSetting;
 use Chamilo\Libraries\Platform\Translation;
 use Chamilo\Libraries\Storage\Parameters\DataClassRetrievesParameters;
 use Chamilo\Libraries\Storage\Query\Condition\InCondition;
@@ -10,6 +8,9 @@ use Chamilo\Libraries\Storage\Query\Variable\PropertyConditionVariable;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Manager;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataClass\Password;
 use Ehb\Application\Weblcms\Tool\Implementation\Perception\Storage\DataManager;
+use Chamilo\Configuration\Configuration;
+use Chamilo\Libraries\Mail\ValueObject\Mail;
+use Chamilo\Libraries\Mail\Mailer\MailerFactory;
 
 /**
  *
@@ -83,9 +84,9 @@ class MailerComponent extends Manager
 
         $recipient = $password->get_user();
 
-        $siteName = Configuration::getInstance()->get_setting(array('Chamilo\Core\Admin', 'site_name'));
+        $siteName = Configuration::get_instance()->get_setting(array('Chamilo\Core\Admin', 'site_name'));
 
-        $title = Translation::get('PasswordMailTitle', array('PLATFORM' => $siteName));
+        $subject = Translation::get('PasswordMailTitle', array('PLATFORM' => $siteName));
 
         $body = Translation::get(
             'PasswordMailBody',
@@ -96,13 +97,20 @@ class MailerComponent extends Manager
                 'SENDER' => $this->get_user()->get_fullname(),
                 'PASSWORD' => $password->get_password()));
 
-        $mail = Mail::factory(
-            $title,
+        $mail = new Mail(
+            $subject,
             $body,
             array($recipient->get_email()),
-            array(Mail::NAME => $this->get_user()->get_fullname(), Mail::EMAIL => $this->get_user()->get_email()));
+            true,
+            array(),
+            array(),
+            $this->get_user()->get_fullname(),
+            $this->get_user()->get_email());
 
-        $mail->send();
+        $mailerFactory = new MailerFactory(Configuration::get_instance());
+        $mailer = $mailerFactory->getActiveMailer();
+
+        $mailer->sendMail($mail);
 
         return true;
     }
