@@ -20,7 +20,7 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
 {
     // Parameters
     const PARAM_SUB_TRAJECTORY = 'sub_trajectory';
-    
+
     // Properties
     const PROPERTY_TRAJECTORY = 'trajectory';
     const PROPERTY_SUB_TRAJECTORY = 'sub_trajectory';
@@ -55,14 +55,14 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
     public function run()
     {
         $jsonAjaxResult = new JsonAjaxResult();
-        
+
         $jsonAjaxResult->set_properties(
             array(
-                self::PROPERTY_SUB_TRAJECTORY => $this->getSubTrajectoryProperties(), 
-                self::PROPERTY_TRAJECTORY => $this->getTrajectoryProperties(), 
-                self::PROPERTY_TRAINING => $this->getTrainingProperties(), 
+                self::PROPERTY_SUB_TRAJECTORY => $this->getSubTrajectoryProperties(),
+                self::PROPERTY_TRAJECTORY => $this->getTrajectoryProperties(),
+                self::PROPERTY_TRAINING => $this->getTrainingProperties(),
                 self::PROPERTY_COURSE => $this->getSubTrajectoryCourses()));
-        
+
         $this->trackView();
         $jsonAjaxResult->display();
     }
@@ -77,7 +77,7 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
         {
             $this->currentSubTrajectoryIdentifier = $this->getRequestedPostDataValue(self::PARAM_SUB_TRAJECTORY);
         }
-        
+
         return $this->currentSubTrajectoryIdentifier;
     }
 
@@ -88,14 +88,14 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
             $this->subTrajectory = $this->getBaMaFlexService()->getSubTrajectoryByIdentifier(
                 $this->getCurrentSubTrajectoryIdentifier());
         }
-        
+
         return $this->subTrajectory;
     }
 
     private function getSubTrajectoryProperties()
     {
         return $this->filterProperties(
-            $this->getSubTrajectory()->get_default_properties(), 
+            $this->getSubTrajectory()->get_default_properties(),
             array(SubTrajectory::PROPERTY_ID, SubTrajectory::PROPERTY_NAME));
     }
 
@@ -106,14 +106,14 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
             $this->trajectory = $this->getBaMaFlexService()->getTrajectoryByIdentifier(
                 $this->getSubTrajectory()->getTrajectoryId());
         }
-        
+
         return $this->trajectory;
     }
 
     private function getTrajectoryProperties()
     {
         return $this->filterProperties(
-            $this->getTrajectory()->get_default_properties(), 
+            $this->getTrajectory()->get_default_properties(),
             array(Trajectory::PROPERTY_ID, Trajectory::PROPERTY_NAME));
     }
 
@@ -124,18 +124,18 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
             $this->training = $this->getBaMaFlexService()->getTrainingByIdentifier(
                 $this->getTrajectory()->getTrainingId());
         }
-        
+
         return $this->training;
     }
 
     private function getTrainingProperties()
     {
         return $this->filterProperties(
-            $this->getTraining()->get_default_properties(), 
+            $this->getTraining()->get_default_properties(),
             array(
-                Training::PROPERTY_ID, 
-                Training::PROPERTY_NAME, 
-                Training::PROPERTY_FACULTY_ID, 
+                Training::PROPERTY_ID,
+                Training::PROPERTY_NAME,
+                Training::PROPERTY_FACULTY_ID,
                 Training::PROPERTY_FACULTY));
     }
 
@@ -143,22 +143,22 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
     {
         $subTrajectoryCourses = $this->getBaMaFlexService()->getSubTrajectoryCoursesForSubTrajectoryIdentifier(
             $this->getCurrentSubTrajectoryIdentifier());
-        
+
         $formattedSubTrajectoryCourses = array();
-        
-        while ($subTrajectoryCourse = $subTrajectoryCourses->next_result())
+
+        foreach ($subTrajectoryCourses as $subTrajectoryCourse)
         {
             $formattedSubTrajectoryCourse = $this->filterProperties(
-                $subTrajectoryCourse, 
+                $subTrajectoryCourse,
                 array(
-                    SubTrajectoryCourse::PROPERTY_PROGRAMME_ID, 
-                    SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID, 
-                    SubTrajectoryCourse::PROPERTY_NAME, 
-                    SubTrajectoryCourse::PROPERTY_CREDITS, 
+                    SubTrajectoryCourse::PROPERTY_PROGRAMME_ID,
+                    SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID,
+                    SubTrajectoryCourse::PROPERTY_NAME,
+                    SubTrajectoryCourse::PROPERTY_CREDITS,
                     SubTrajectoryCourse::PROPERTY_APPROVED));
-            
+
             $formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_COURSE_PARTS] = array();
-            
+
             if (! is_null($subTrajectoryCourse[SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID]))
             {
                 $formattedSubTrajectoryCourses[$subTrajectoryCourse[SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID]][SubTrajectoryCourse::PROPERTY_COURSE_PARTS][] = $formattedSubTrajectoryCourse;
@@ -168,37 +168,37 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
                 $formattedSubTrajectoryCourses[$subTrajectoryCourse[SubTrajectoryCourse::PROPERTY_PROGRAMME_ID]] = $formattedSubTrajectoryCourse;
             }
         }
-        
+
         usort(
-            $formattedSubTrajectoryCourses, 
+            $formattedSubTrajectoryCourses,
             function ($courseOne, $courseTwo)
             {
                 return strcmp(
-                    $courseOne[SubTrajectoryCourse::PROPERTY_NAME], 
+                    $courseOne[SubTrajectoryCourse::PROPERTY_NAME],
                     $courseTwo[SubTrajectoryCourse::PROPERTY_NAME]);
             });
-        
+
         $normalizedSubTrajectoryCourses = array();
-        
+
         foreach ($formattedSubTrajectoryCourses as $formattedSubTrajectoryCourse)
         {
             $formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_CREDITS] = floatval(
                 $formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_CREDITS]);
-            
+
             $normalizedSubTrajectoryCourses[] = $formattedSubTrajectoryCourse;
-            
+
             if (count($formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_COURSE_PARTS]) > 0)
             {
                 foreach ($formattedSubTrajectoryCourse[SubTrajectoryCourse::PROPERTY_COURSE_PARTS] as $formattedSubTrajectoryCoursePart)
                 {
                     $formattedSubTrajectoryCoursePart[SubTrajectoryCourse::PROPERTY_CREDITS] = floatval(
                         $formattedSubTrajectoryCoursePart[SubTrajectoryCourse::PROPERTY_CREDITS]);
-                    
+
                     $normalizedSubTrajectoryCourses[] = $formattedSubTrajectoryCoursePart;
                 }
             }
         }
-        
+
         return $normalizedSubTrajectoryCourses;
     }
 
@@ -207,12 +207,12 @@ class TrajectoryComponent extends \Ehb\Application\Ects\Ajax\Manager implements 
         try
         {
             Event::trigger(
-                'View', 
-                \Ehb\Application\Ects\Manager::context(), 
+                'View',
+                \Ehb\Application\Ects\Manager::context(),
                 array(
-                    View::PROPERTY_SESSION_ID => session_id(), 
-                    View::PROPERTY_DATE => time(), 
-                    View::PROPERTY_ENTITY_TYPE => View::TYPE_TRAJECTORY, 
+                    View::PROPERTY_SESSION_ID => session_id(),
+                    View::PROPERTY_DATE => time(),
+                    View::PROPERTY_ENTITY_TYPE => View::TYPE_TRAJECTORY,
                     View::PROPERTY_ENTITY_ID => $this->getCurrentSubTrajectoryIdentifier()));
         }
         catch (\Exception $exception)

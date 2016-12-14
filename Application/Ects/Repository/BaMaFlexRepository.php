@@ -72,34 +72,34 @@ class BaMaFlexRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $conditions = array();
-            
+
             $conditions[] = new ComparisonCondition(
-                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR), 
-                ComparisonCondition::GREATER_THAN_OR_EQUAL, 
+                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR),
+                ComparisonCondition::GREATER_THAN_OR_EQUAL,
                 new StaticConditionVariable('2007-08'));
-            
+
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE), 
+                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
-            
+
             $years = $this->getDataClassRepository()->distinct(
-                Training::class_name(), 
+                Training::class_name(),
                 new DataClassDistinctParameters(
-                    new AndCondition($conditions), 
-                    Training::PROPERTY_YEAR, 
-                    null, 
+                    new AndCondition($conditions),
+                    Training::PROPERTY_YEAR,
+                    null,
                     array(
                         new OrderBy(
-                            new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR), 
+                            new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR),
                             SORT_DESC))));
-            
+
             $cache->save($cacheIdentifier, $years, self::LIFETIME_IN_MINUTES * 60);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -112,36 +112,36 @@ class BaMaFlexRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $conditions = array();
-            
+
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR), 
+                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR),
                 new StaticConditionVariable($year));
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE), 
+                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
             $conditions[] = new NotCondition(
                 new EqualityCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     null));
-            
+
             $faculties = $this->getDataClassRepository()->distinct(
-                Training::class_name(), 
+                Training::class_name(),
                 new DataClassDistinctParameters(
-                    new AndCondition($conditions), 
-                    array(Training::PROPERTY_FACULTY_ID, Training::PROPERTY_FACULTY), 
-                    null, 
+                    new AndCondition($conditions),
+                    array(Training::PROPERTY_FACULTY_ID, Training::PROPERTY_FACULTY),
+                    null,
                     array(
                         new OrderBy(
-                            new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY), 
+                            new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY),
                             SORT_ASC))));
-            
+
             $cache->save($cacheIdentifier, $faculties, self::LIFETIME_IN_MINUTES * 60);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -155,122 +155,122 @@ class BaMaFlexRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $facultyIdentifier)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $conditions = array();
-            
+
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR), 
+                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR),
                 new StaticConditionVariable($year));
-            
+
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE), 
+                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
-            
+
             if (! empty($facultyIdentifier))
             {
                 $conditions[] = new EqualityCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     new StaticConditionVariable($facultyIdentifier));
             }
-            
+
             $conditions[] = new NotCondition(
                 new EqualityCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     null));
-            
+
             $conditions[] = new NotCondition(
                 new InCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
                     array(14, 16, 18)));
-            
+
             $types = $this->getDataClassRepository()->distinct(
-                Training::class_name(), 
+                Training::class_name(),
                 new DataClassDistinctParameters(
-                    new AndCondition($conditions), 
-                    array(Training::PROPERTY_TYPE_ID, Training::PROPERTY_TYPE), 
-                    null, 
+                    new AndCondition($conditions),
+                    array(Training::PROPERTY_TYPE_ID, Training::PROPERTY_TYPE),
+                    null,
                     array(
                         new OrderBy(
-                            new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE), 
+                            new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE),
                             SORT_ASC))));
-            
+
             $cache->save($cacheIdentifier, $types, self::LIFETIME_IN_MINUTES * 60);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
-    public function findTrainingsForYearFacultyIdentifierTypeIdentifierAndText($year, $facultyIdentifier = null, 
+    public function findTrainingsForYearFacultyIdentifierTypeIdentifierAndText($year, $facultyIdentifier = null,
         $typeIdentifier = null, $text = null)
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $facultyIdentifier, $typeIdentifier, $text)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $conditions = array();
-            
+
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR), 
+                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_YEAR),
                 new StaticConditionVariable($year));
-            
+
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE), 
+                new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
-            
+
             if (! empty($facultyIdentifier))
             {
                 $conditions[] = new EqualityCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     new StaticConditionVariable($facultyIdentifier));
             }
-            
+
             if (! empty($typeIdentifier))
             {
                 $conditions[] = new EqualityCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
                     new StaticConditionVariable($typeIdentifier));
             }
-            
+
             if (! empty($text))
             {
                 $conditions[] = new PatternMatchCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_NAME), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_NAME),
                     '*' . $text . '*');
             }
-            
+
             $conditions[] = new NotCondition(
                 new EqualityCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_FACULTY_ID),
                     null));
-            
+
             $conditions[] = new NotCondition(
                 new InCondition(
-                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID), 
+                    new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_TYPE_ID),
                     array(14, 16, 18)));
-            
+
             $types = $this->getDataClassRepository()->distinct(
-                Training::class_name(), 
+                Training::class_name(),
                 new DataClassDistinctParameters(
-                    new AndCondition($conditions), 
+                    new AndCondition($conditions),
                     array(
-                        Training::PROPERTY_ID, 
-                        Training::PROPERTY_NAME, 
-                        Training::PROPERTY_FACULTY_ID, 
-                        Training::PROPERTY_FACULTY, 
-                        Training::PROPERTY_TYPE_ID, 
-                        Training::PROPERTY_TYPE), 
-                    null, 
+                        Training::PROPERTY_ID,
+                        Training::PROPERTY_NAME,
+                        Training::PROPERTY_FACULTY_ID,
+                        Training::PROPERTY_FACULTY,
+                        Training::PROPERTY_TYPE_ID,
+                        Training::PROPERTY_TYPE),
+                    null,
                     array(
                         new OrderBy(
-                            new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_NAME), 
+                            new PropertyConditionVariable(Training::class_name(), Training::PROPERTY_NAME),
                             SORT_ASC))));
-            
+
             $cache->save($cacheIdentifier, $types, self::LIFETIME_IN_MINUTES * 60);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -281,7 +281,7 @@ class BaMaFlexRepository
      */
     public function findTrainingByIdentifier($trainingIdentifier)
     {
-        return $this->getDataClassRepository()->retrieve_by_id(Training::class_name(), $trainingIdentifier);
+        return $this->getDataClassRepository()->retrieveById(Training::class_name(), $trainingIdentifier);
     }
 
     /**
@@ -293,32 +293,32 @@ class BaMaFlexRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $trainingIdentifier)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $conditions = array();
-            
+
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Trajectory::class_name(), Trajectory::PROPERTY_TRAINING_ID), 
+                new PropertyConditionVariable(Trajectory::class_name(), Trajectory::PROPERTY_TRAINING_ID),
                 new StaticConditionVariable($trainingIdentifier));
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(Trajectory::class_name(), Trajectory::PROPERTY_INVISIBLE), 
+                new PropertyConditionVariable(Trajectory::class_name(), Trajectory::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
-            
+
             $trajectories = $this->getDataClassRepository()->distinct(
-                Trajectory::class_name(), 
+                Trajectory::class_name(),
                 new DataClassDistinctParameters(
-                    new AndCondition($conditions), 
-                    array(Trajectory::PROPERTY_ID, Trajectory::PROPERTY_NAME, Trajectory::PROPERTY_SORT), 
-                    null, 
+                    new AndCondition($conditions),
+                    array(Trajectory::PROPERTY_ID, Trajectory::PROPERTY_NAME, Trajectory::PROPERTY_SORT),
+                    null,
                     array(
                         new OrderBy(
-                            new PropertyConditionVariable(Trajectory::class_name(), Trajectory::PROPERTY_SORT), 
+                            new PropertyConditionVariable(Trajectory::class_name(), Trajectory::PROPERTY_SORT),
                             SORT_ASC))));
-            
+
             $cache->save($cacheIdentifier, $trajectories, self::LIFETIME_IN_MINUTES * 60);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -331,32 +331,32 @@ class BaMaFlexRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $trajectoryIdentifier)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $conditions = array();
-            
+
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(SubTrajectory::class_name(), SubTrajectory::PROPERTY_TRAJECTORY_ID), 
+                new PropertyConditionVariable(SubTrajectory::class_name(), SubTrajectory::PROPERTY_TRAJECTORY_ID),
                 new StaticConditionVariable($trajectoryIdentifier));
             $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable(SubTrajectory::class_name(), SubTrajectory::PROPERTY_INVISIBLE), 
+                new PropertyConditionVariable(SubTrajectory::class_name(), SubTrajectory::PROPERTY_INVISIBLE),
                 new StaticConditionVariable(0));
-            
+
             $trajectories = $this->getDataClassRepository()->distinct(
-                SubTrajectory::class_name(), 
+                SubTrajectory::class_name(),
                 new DataClassDistinctParameters(
-                    new AndCondition($conditions), 
-                    array(SubTrajectory::PROPERTY_ID, SubTrajectory::PROPERTY_NAME, SubTrajectory::PROPERTY_SORT), 
-                    null, 
+                    new AndCondition($conditions),
+                    array(SubTrajectory::PROPERTY_ID, SubTrajectory::PROPERTY_NAME, SubTrajectory::PROPERTY_SORT),
+                    null,
                     array(
                         new OrderBy(
-                            new PropertyConditionVariable(SubTrajectory::class_name(), SubTrajectory::PROPERTY_SORT), 
+                            new PropertyConditionVariable(SubTrajectory::class_name(), SubTrajectory::PROPERTY_SORT),
                             SORT_ASC))));
-            
+
             $cache->save($cacheIdentifier, $trajectories, self::LIFETIME_IN_MINUTES * 60);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -367,7 +367,7 @@ class BaMaFlexRepository
      */
     public function findSubTrajectoryByIdentifier($subTrajectoryIdentifier)
     {
-        return $this->getDataClassRepository()->retrieve_by_id(SubTrajectory::class_name(), $subTrajectoryIdentifier);
+        return $this->getDataClassRepository()->retrieveById(SubTrajectory::class_name(), $subTrajectoryIdentifier);
     }
 
     /**
@@ -377,31 +377,31 @@ class BaMaFlexRepository
      */
     public function findTrajectoryByIdentifier($trajectoryIdentifier)
     {
-        return $this->getDataClassRepository()->retrieve_by_id(Trajectory::class_name(), $trajectoryIdentifier);
+        return $this->getDataClassRepository()->retrieveById(Trajectory::class_name(), $trajectoryIdentifier);
     }
 
     public function findSubTrajectoryCoursesForSubTrajectoryIdentifier($subTrajectoryIdentifier)
     {
         $condition = new EqualityCondition(
             new PropertyConditionVariable(
-                SubTrajectoryCourse::class_name(), 
-                SubTrajectoryCourse::PROPERTY_SUB_TRAJECTORY_ID), 
+                SubTrajectoryCourse::class_name(),
+                SubTrajectoryCourse::PROPERTY_SUB_TRAJECTORY_ID),
             new StaticConditionVariable($subTrajectoryIdentifier));
-        
+
         return $this->getDataClassRepository()->records(
-            SubTrajectoryCourse::class_name(), 
+            SubTrajectoryCourse::class_name(),
             new RecordRetrievesParameters(
-                null, 
-                $condition, 
-                null, 
-                null, 
+                null,
+                $condition,
+                null,
+                null,
                 array(
                     new OrderBy(
                         new PropertyConditionVariable(
-                            SubTrajectoryCourse::class_name(), 
-                            SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID), 
+                            SubTrajectoryCourse::class_name(),
+                            SubTrajectoryCourse::PROPERTY_PARENT_PROGRAMME_ID),
                         new PropertyConditionVariable(
-                            SubTrajectoryCourse::class_name(), 
+                            SubTrajectoryCourse::class_name(),
                             SubTrajectoryCourse::PROPERTY_NAME)))));
     }
 
@@ -412,7 +412,7 @@ class BaMaFlexRepository
      */
     public function findCourseByIdentifier($courseIdentifier)
     {
-        return $this->getDataClassRepository()->retrieve_by_id(Course::class_name(), $courseIdentifier);
+        return $this->getDataClassRepository()->retrieveById(Course::class_name(), $courseIdentifier);
     }
 
     /**
@@ -424,74 +424,74 @@ class BaMaFlexRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $courseIdentifier)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $httpClient = new \GuzzleHttp\Client(['base_url' => 'https://bamaflexweb.ehb.be/']);
-            
+
             $request = $httpClient->createRequest(
-                'GET', 
-                'BMFUIDetailxOLOD.aspx', 
+                'GET',
+                'BMFUIDetailxOLOD.aspx',
                 ['query' => ['a' => $courseIdentifier, 'b' => 5, 'c' => 1]]);
-            
+
             try
             {
                 $courseDetailsBody = $httpClient->send($request)->getBody()->getContents();
                 $courseDetailsBody = mb_convert_encoding($courseDetailsBody, 'html-entities', 'UTF-8');
-                
+
                 $domDocument = new \DOMDocument();
                 $domDocument->loadHTML($courseDetailsBody);
-                
+
                 if ($domDocument->firstChild instanceof \DOMNode)
                 {
                     $domXpath = new \DOMXPath($domDocument);
                     $contentNode = $domXpath->query('//div[@id=\'content\']')->item(0);
-                    
+
                     // Replace sources for e.g. images
                     $sourceNodes = $domXpath->query('//*[@src]', $contentNode);
-                    
+
                     foreach ($sourceNodes as $sourceNode)
                     {
                         $newSourceValue = 'https://bamaflexweb.ehb.be/' . $sourceNode->getAttribute('src');
                         $sourceNode->setAttribute('src', $newSourceValue);
                     }
-                    
+
                     // Fix the links to subcourses
                     $subCourseSpanNodes = $domXpath->query('//span[@class="xOLODDetailLink"]', $contentNode);
-                    
+
                     foreach ($subCourseSpanNodes as $subCourseSpanNode)
                     {
                         $onclickValue = $subCourseSpanNode->getAttribute('onclick');
                         preg_match('/a=([0-9]*)&b=5&c=1/', $onclickValue, $matches);
-                        
+
                         $subCourseLinkNode = $domDocument->createElement('a');
                         $subCourseLinkNode->setAttribute('class', 'xOLODDetailLink');
                         $subCourseLinkNode->nodeValue = $subCourseSpanNode->nodeValue;
-                        
+
                         if (isset($matches[1]))
                         {
                             $subCourseLinkNode->setAttribute('href', '#/course/' . $matches[1]);
                         }
-                        
+
                         $subCourseSpanNode->parentNode->replaceChild($subCourseLinkNode, $subCourseSpanNode);
                     }
-                    
+
                     // Fix onclick links
                     $onclickNodes = $domXpath->query('//a[@onclick]', $contentNode);
-                    
+
                     foreach ($onclickNodes as $onclickNode)
                     {
                         $onclickNode->removeAttribute('onclick');
                     }
-                    
+
                     // Fix javascript links
                     $onclickNodes = $domXpath->query('//a[contains(@href, "javascript:")]', $contentNode);
-                    
+
                     foreach ($onclickNodes as $onclickNode)
                     {
                         $onclickNode->removeAttribute('href');
                     }
-                    
+
                     $courseDetails = $domDocument->saveHTML($contentNode);
                 }
                 else
@@ -503,10 +503,10 @@ class BaMaFlexRepository
             {
                 $courseDetails = '';
             }
-            
+
             $cache->save($cacheIdentifier, $courseDetails, 86400);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 }
