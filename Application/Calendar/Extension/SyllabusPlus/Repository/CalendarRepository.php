@@ -77,24 +77,24 @@ class CalendarRepository
     {
         $dataClassProperties = $dataClass::get_default_property_names();
         $importantValueKeys = array_diff($dataClassProperties, $fieldsToAggregate);
-        
+
         $aggregatedRecords = array();
-        
+
         foreach ($records as $record)
         {
             $importantValues = $this->filterProperties($record, $importantValueKeys);
             $hash = md5(json_encode($importantValues));
-            
+
             if (! isset($aggregatedRecords[$hash]))
             {
                 $aggregatedRecords[$hash] = $importantValues;
-                
+
                 foreach ($fieldsToAggregate as $fieldToAggregate)
                 {
                     $aggregatedRecords[$hash][$fieldToAggregate] = array();
                 }
             }
-            
+
             foreach ($fieldsToAggregate as $fieldToAggregate)
             {
                 if (isset($record[$fieldToAggregate]) &&
@@ -104,7 +104,7 @@ class CalendarRepository
                 }
             }
         }
-        
+
         foreach ($aggregatedRecords as &$aggregatedRecord)
         {
             foreach ($fieldsToAggregate as $fieldToAggregate)
@@ -113,7 +113,7 @@ class CalendarRepository
                 $aggregatedRecord[$fieldToAggregate] = implode(', ', $aggregatedRecord[$fieldToAggregate]);
             }
         }
-        
+
         return array_values($aggregatedRecords);
     }
 
@@ -126,11 +126,11 @@ class CalendarRepository
     private function filterProperties($properties, $propertyKeysToMaintain)
     {
         return array_filter(
-            $properties, 
+            $properties,
             function ($key) use ($propertyKeysToMaintain)
             {
                 return in_array($key, $propertyKeysToMaintain);
-            }, 
+            },
             ARRAY_FILTER_USE_KEY);
     }
 
@@ -155,8 +155,8 @@ class CalendarRepository
     private function aggregateActivities($className, $activities)
     {
         return $this->aggregateRecords(
-            $className, 
-            $activities, 
+            $className,
+            $activities,
             array($className::PROPERTY_LOCATION, $className::PROPERTY_STUDENT_GROUP, $className::PROPERTY_TEACHER));
     }
 
@@ -167,41 +167,43 @@ class CalendarRepository
      */
     public function findEventsForUser(User $user)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
-        
-        if (! $cache->contains($cacheIdentifier))
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $user->getId())));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $records = array();
+
+        if ($user->get_official_code())
         {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $records = array();
-            
-            if ($user->get_official_code())
-            {
-                $baseClass = $this->getYearSpecificClassName(
-                    $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity', 
-                    '2016-17');
-                
-                $condition = new EqualityCondition(
-                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID), 
-                    new StaticConditionVariable((string) $user->get_official_code()));
-                
-                $activities = $this->getDataClassRepository()->records(
-                    $baseClass, 
-                    new RecordRetrievesParameters(
-                        null, 
-                        $condition, 
-                        null, 
-                        null, 
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
-                
-                $records = $this->aggregateActivities($baseClass, $activities);
-            }
-            
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+            $baseClass = $this->getYearSpecificClassName(
+                $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
+                '2016-17');
+
+            $condition = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
+                new StaticConditionVariable((string) $user->get_official_code()));
+
+            $activities = $this->getDataClassRepository()->records(
+                $baseClass,
+                new RecordRetrievesParameters(
+                    null,
+                    $condition,
+                    null,
+                    null,
+                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
+
+            $records = $this->aggregateActivities($baseClass, $activities);
         }
-        
-        return $cache->fetch($cacheIdentifier);
+
+        // $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $records;
     }
 
     /**
@@ -211,36 +213,36 @@ class CalendarRepository
      */
     public function findEventsForGroup($year, $groupIdentifier)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier)));
-        
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $className = $this->getYearSpecificClassName('GroupActivity', $year);
-            
-            $condition = new EqualityCondition(
-                new PropertyConditionVariable($className, $className::PROPERTY_GROUP_ID), 
-                new StaticConditionVariable((string) $groupIdentifier));
-            
-            $activities = $this->getDataClassRepository()->records(
-                $className, 
-                new RecordRetrievesParameters(
-                    null, 
-                    $condition, 
-                    null, 
-                    null, 
-                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
-            
-            $records = $this->aggregateActivities($className, $activities);
-            
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
-        }
-        
-        return $cache->fetch($cacheIdentifier);
-        
-        // return $records;
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier)));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $className = $this->getYearSpecificClassName('GroupActivity', $year);
+
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable($className, $className::PROPERTY_GROUP_ID),
+            new StaticConditionVariable((string) $groupIdentifier));
+
+        $activities = $this->getDataClassRepository()->records(
+            $className,
+            new RecordRetrievesParameters(
+                null,
+                $condition,
+                null,
+                null,
+                array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
+
+        $records = $this->aggregateActivities($className, $activities);
+
+        // $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $records;
     }
 
     /**
@@ -250,36 +252,36 @@ class CalendarRepository
      */
     public function findEventsForLocation($year, $locationIdentifier)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier)));
-        
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $className = $this->getYearSpecificClassName('LocationActivity', $year);
-            
-            $condition = new EqualityCondition(
-                new PropertyConditionVariable($className, $className::PROPERTY_LOCATION_ID), 
-                new StaticConditionVariable((string) $locationIdentifier));
-            
-            $activities = $this->getDataClassRepository()->records(
-                $className, 
-                new RecordRetrievesParameters(
-                    null, 
-                    $condition, 
-                    null, 
-                    null, 
-                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
-            
-            $records = $this->aggregateActivities($className, $activities);
-            
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
-        }
-        
-        return $cache->fetch($cacheIdentifier);
-        
-        // return $records;
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier)));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $className = $this->getYearSpecificClassName('LocationActivity', $year);
+
+        $condition = new EqualityCondition(
+            new PropertyConditionVariable($className, $className::PROPERTY_LOCATION_ID),
+            new StaticConditionVariable((string) $locationIdentifier));
+
+        $activities = $this->getDataClassRepository()->records(
+            $className,
+            new RecordRetrievesParameters(
+                null,
+                $condition,
+                null,
+                null,
+                array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
+
+        $records = $this->aggregateActivities($className, $activities);
+
+        // $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $records;
     }
 
     /**
@@ -289,7 +291,7 @@ class CalendarRepository
     public function getYears()
     {
         return explode(
-            ',', 
+            ',',
             Configuration::getInstance()->get_setting(array('Ehb\Application\Calendar\Extension\SyllabusPlus', 'years')));
     }
 
@@ -301,49 +303,49 @@ class CalendarRepository
      */
     public function findEventsForUserByModuleIdentifier(User $user, $moduleIdentifier, $year)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $moduleIdentifier, $year)));
-        
-        if (! $cache->contains($cacheIdentifier))
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $moduleIdentifier, $year)));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $records = array();
+
+        if ($user->get_official_code())
         {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $records = array();
-            
-            if ($user->get_official_code())
-            {
-                $baseClass = $this->getYearSpecificClassName(
-                    $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity', 
-                    $year);
-                
-                $conditions = array();
-                
-                $conditions[] = new EqualityCondition(
-                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID), 
-                    new StaticConditionVariable((string) $user->get_official_code()));
-                
-                $conditions[] = new EqualityCondition(
-                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_MODULE_ID), 
-                    new StaticConditionVariable((string) $moduleIdentifier));
-                
-                $activities = $this->getDataClassRepository()->records(
-                    $baseClass, 
-                    new RecordRetrievesParameters(
-                        null, 
-                        new AndCondition($conditions), 
-                        null, 
-                        null, 
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
-                
-                $records = $this->aggregateActivities($baseClass, $activities);
-            }
-            
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+            $baseClass = $this->getYearSpecificClassName(
+                $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
+                $year);
+
+            $conditions = array();
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
+                new StaticConditionVariable((string) $user->get_official_code()));
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_MODULE_ID),
+                new StaticConditionVariable((string) $moduleIdentifier));
+
+            $activities = $this->getDataClassRepository()->records(
+                $baseClass,
+                new RecordRetrievesParameters(
+                    null,
+                    new AndCondition($conditions),
+                    null,
+                    null,
+                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
+
+            $records = $this->aggregateActivities($baseClass, $activities);
         }
-        
-        return $cache->fetch($cacheIdentifier);
-        
-        // return $records;
+
+        // $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $records;
     }
 
     /**
@@ -354,54 +356,54 @@ class CalendarRepository
      */
     public function findEventForUserByIdentifier(User $user, $identifier, $year)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $identifier, $year)));
-        
-        if (! $cache->contains($cacheIdentifier))
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $user->get_id(), $identifier, $year)));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $record = array();
+
+        if ($user->get_official_code())
         {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $record = array();
-            
-            if ($user->get_official_code())
+            $baseClass = $this->getYearSpecificClassName(
+                $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity',
+                $year);
+
+            $conditions = array();
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID),
+                new StaticConditionVariable((string) $user->get_official_code()));
+
+            $conditions[] = new EqualityCondition(
+                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
+                new StaticConditionVariable((string) $identifier));
+
+            $activities = $this->getDataClassRepository()->records(
+                $baseClass,
+                new RecordRetrievesParameters(
+                    null,
+                    new AndCondition($conditions),
+                    null,
+                    null,
+                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
+
+            $records = $this->aggregateActivities($baseClass, $activities);
+
+            if (count($records) > 0)
             {
-                $baseClass = $this->getYearSpecificClassName(
-                    $user->is_teacher() ? 'TeacherActivity' : 'StudentActivity', 
-                    $year);
-                
-                $conditions = array();
-                
-                $conditions[] = new EqualityCondition(
-                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_PERSON_ID), 
-                    new StaticConditionVariable((string) $user->get_official_code()));
-                
-                $conditions[] = new EqualityCondition(
-                    new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID), 
-                    new StaticConditionVariable((string) $identifier));
-                
-                $activities = $this->getDataClassRepository()->records(
-                    $baseClass, 
-                    new RecordRetrievesParameters(
-                        null, 
-                        new AndCondition($conditions), 
-                        null, 
-                        null, 
-                        array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
-                
-                $records = $this->aggregateActivities($baseClass, $activities);
-                
-                if (count($records) > 0)
-                {
-                    $record = array_shift($records);
-                }
+                $record = array_shift($records);
             }
-            
-            $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
         }
-        
-        return $cache->fetch($cacheIdentifier);
-        
-        // return $record;
+
+        // $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $record;
     }
 
     /**
@@ -413,49 +415,49 @@ class CalendarRepository
      */
     public function findEventForGroupByYearAndIdentifier($year, $groupIdentifier, $eventIdentifier)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $groupIdentifier, $eventIdentifier, $year)));
-        
-        if (! $cache->contains($cacheIdentifier))
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $groupIdentifier, $eventIdentifier, $year)));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $record = array();
+
+        $baseClass = $this->getYearSpecificClassName('GroupActivity', $year);
+
+        $conditions = array();
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_GROUP_ID),
+            new StaticConditionVariable((string) $groupIdentifier));
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
+            new StaticConditionVariable((string) $eventIdentifier));
+
+        $activities = $this->getDataClassRepository()->records(
+            $baseClass,
+            new RecordRetrievesParameters(
+                null,
+                new AndCondition($conditions),
+                null,
+                null,
+                array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
+
+        $records = $this->aggregateActivities($baseClass, $activities);
+
+        if (count($records) > 0)
         {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $record = array();
-            
-            $baseClass = $this->getYearSpecificClassName('GroupActivity', $year);
-            
-            $conditions = array();
-            
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_GROUP_ID), 
-                new StaticConditionVariable((string) $groupIdentifier));
-            
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID), 
-                new StaticConditionVariable((string) $eventIdentifier));
-            
-            $activities = $this->getDataClassRepository()->records(
-                $baseClass, 
-                new RecordRetrievesParameters(
-                    null, 
-                    new AndCondition($conditions), 
-                    null, 
-                    null, 
-                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
-            
-            $records = $this->aggregateActivities($baseClass, $activities);
-            
-            if (count($records) > 0)
-            {
-                $record = array_shift($records);
-            }
-            
-            $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
+            $record = array_shift($records);
         }
-        
-        return $cache->fetch($cacheIdentifier);
-        
-        // return $record;
+
+        // $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $record;
     }
 
     /**
@@ -467,42 +469,42 @@ class CalendarRepository
      */
     public function findEventsForGroupByYearAndModuleIdentifier($year, $groupIdentifier, $moduleIdentifier)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier, $moduleIdentifier)));
-        
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $className = $this->getYearSpecificClassName('GroupActivity', $year);
-            
-            $conditions = array();
-            
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable($className, $className::PROPERTY_GROUP_ID), 
-                new StaticConditionVariable((string) $groupIdentifier));
-            
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable($className, $className::PROPERTY_MODULE_ID), 
-                new StaticConditionVariable((string) $moduleIdentifier));
-            
-            $activities = $this->getDataClassRepository()->records(
-                $className, 
-                new RecordRetrievesParameters(
-                    null, 
-                    new AndCondition($conditions), 
-                    null, 
-                    null, 
-                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
-            
-            $records = $this->aggregateActivities($className, $activities);
-            
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
-        }
-        
-        return $cache->fetch($cacheIdentifier);
-        
-        // return $records;
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $groupIdentifier, $moduleIdentifier)));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $className = $this->getYearSpecificClassName('GroupActivity', $year);
+
+        $conditions = array();
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable($className, $className::PROPERTY_GROUP_ID),
+            new StaticConditionVariable((string) $groupIdentifier));
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable($className, $className::PROPERTY_MODULE_ID),
+            new StaticConditionVariable((string) $moduleIdentifier));
+
+        $activities = $this->getDataClassRepository()->records(
+            $className,
+            new RecordRetrievesParameters(
+                null,
+                new AndCondition($conditions),
+                null,
+                null,
+                array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
+
+        $records = $this->aggregateActivities($className, $activities);
+
+        // $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $records;
     }
 
     /**
@@ -514,49 +516,49 @@ class CalendarRepository
      */
     public function findEventForLocationByYearAndIdentifier($year, $locationIdentifier, $eventIdentifier)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $locationIdentifier, $eventIdentifier, $year)));
-        
-        if (! $cache->contains($cacheIdentifier))
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $locationIdentifier, $eventIdentifier, $year)));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $record = array();
+
+        $baseClass = $this->getYearSpecificClassName('LocationActivity', $year);
+
+        $conditions = array();
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_LOCATION_ID),
+            new StaticConditionVariable((string) $locationIdentifier));
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID),
+            new StaticConditionVariable((string) $eventIdentifier));
+
+        $activities = $this->getDataClassRepository()->records(
+            $baseClass,
+            new RecordRetrievesParameters(
+                null,
+                new AndCondition($conditions),
+                null,
+                null,
+                array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
+
+        $records = $this->aggregateActivities($baseClass, $activities);
+
+        if (count($records) > 0)
         {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $record = array();
-            
-            $baseClass = $this->getYearSpecificClassName('LocationActivity', $year);
-            
-            $conditions = array();
-            
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_LOCATION_ID), 
-                new StaticConditionVariable((string) $locationIdentifier));
-            
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_ID), 
-                new StaticConditionVariable((string) $eventIdentifier));
-            
-            $activities = $this->getDataClassRepository()->records(
-                $baseClass, 
-                new RecordRetrievesParameters(
-                    null, 
-                    new AndCondition($conditions), 
-                    null, 
-                    null, 
-                    array(new OrderBy(new PropertyConditionVariable($baseClass, $baseClass::PROPERTY_START_TIME)))));
-            
-            $records = $this->aggregateActivities($baseClass, $activities);
-            
-            if (count($records) > 0)
-            {
-                $record = array_shift($records);
-            }
-            
-            $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
+            $record = array_shift($records);
         }
-        
-        return $cache->fetch($cacheIdentifier);
-        
-        // return $record;
+
+        // $cache->save($cacheIdentifier, $record, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $record;
     }
 
     /**
@@ -568,42 +570,42 @@ class CalendarRepository
      */
     public function findEventsForLocationByYearAndModuleIdentifier($year, $locationIdentifier, $moduleIdentifier)
     {
-        $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
-        $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier, $moduleIdentifier)));
-        
-        if (! $cache->contains($cacheIdentifier))
-        {
-            $lifetimeInMinutes = Configuration::getInstance()->get_setting(
-                array('Chamilo\Libraries\Calendar', 'refresh_external'));
-            $className = $this->getYearSpecificClassName('LocationActivity', $year);
-            
-            $conditions = array();
-            
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable($className, $className::PROPERTY_LOCATION_ID), 
-                new StaticConditionVariable((string) $locationIdentifier));
-            
-            $conditions[] = new EqualityCondition(
-                new PropertyConditionVariable($className, $className::PROPERTY_MODULE_ID), 
-                new StaticConditionVariable((string) $moduleIdentifier));
-            
-            $activities = $this->getDataClassRepository()->records(
-                $className, 
-                new RecordRetrievesParameters(
-                    null, 
-                    new AndCondition($conditions), 
-                    null, 
-                    null, 
-                    array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
-            
-            $records = $this->aggregateActivities($className, $activities);
-            
-            $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
-        }
-        
-        return $cache->fetch($cacheIdentifier);
-        
-        // return $records;
+        // $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
+        // $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $locationIdentifier, $moduleIdentifier)));
+
+        // if (! $cache->contains($cacheIdentifier))
+        // {
+        $lifetimeInMinutes = Configuration::getInstance()->get_setting(
+            array('Chamilo\Libraries\Calendar', 'refresh_external'));
+        $className = $this->getYearSpecificClassName('LocationActivity', $year);
+
+        $conditions = array();
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable($className, $className::PROPERTY_LOCATION_ID),
+            new StaticConditionVariable((string) $locationIdentifier));
+
+        $conditions[] = new EqualityCondition(
+            new PropertyConditionVariable($className, $className::PROPERTY_MODULE_ID),
+            new StaticConditionVariable((string) $moduleIdentifier));
+
+        $activities = $this->getDataClassRepository()->records(
+            $className,
+            new RecordRetrievesParameters(
+                null,
+                new AndCondition($conditions),
+                null,
+                null,
+                array(new OrderBy(new PropertyConditionVariable($className, $className::PROPERTY_START_TIME)))));
+
+        $records = $this->aggregateActivities($className, $activities);
+
+        // $cache->save($cacheIdentifier, $records, $lifetimeInMinutes * 60);
+        // }
+
+        // return $cache->fetch($cacheIdentifier);
+
+        return $records;
     }
 
     /**
@@ -617,18 +619,18 @@ class CalendarRepository
         if ($user->get_official_code())
         {
             $className = $this->getYearSpecificClassName('StudentGroup', $year);
-            
+
             $condition = new EqualityCondition(
-                new PropertyConditionVariable($className, StudentGroup::PROPERTY_PERSON_ID), 
+                new PropertyConditionVariable($className, StudentGroup::PROPERTY_PERSON_ID),
                 new StaticConditionVariable($user->get_official_code()));
-            
+
             return $this->getDataClassRepository()->distinct(
-                $className, 
+                $className,
                 new DataClassDistinctParameters(
-                    $condition, 
+                    $condition,
                     array(
-                        StudentGroup::PROPERTY_FACULTY_ID, 
-                        StudentGroup::PROPERTY_FACULTY_CODE, 
+                        StudentGroup::PROPERTY_FACULTY_ID,
+                        StudentGroup::PROPERTY_FACULTY_CODE,
                         StudentGroup::PROPERTY_FACULTY_NAME)));
         }
         else
@@ -647,21 +649,21 @@ class CalendarRepository
         if ($user->get_official_code())
         {
             $className = $this->getYearSpecificClassName('StudentGroup', $year);
-            
+
             $condition = new EqualityCondition(
-                new PropertyConditionVariable($className, StudentGroup::PROPERTY_PERSON_ID), 
+                new PropertyConditionVariable($className, StudentGroup::PROPERTY_PERSON_ID),
                 new StaticConditionVariable($user->get_official_code()));
-            
+
             return $this->getDataClassRepository()->distinct(
-                $className, 
+                $className,
                 new DataClassDistinctParameters(
-                    $condition, 
+                    $condition,
                     array(
-                        StudentGroup::PROPERTY_GROUP_ID, 
-                        StudentGroup::PROPERTY_GROUP_CODE, 
-                        StudentGroup::PROPERTY_GROUP_NAME, 
-                        StudentGroup::PROPERTY_FACULTY_ID, 
-                        StudentGroup::PROPERTY_FACULTY_CODE, 
+                        StudentGroup::PROPERTY_GROUP_ID,
+                        StudentGroup::PROPERTY_GROUP_CODE,
+                        StudentGroup::PROPERTY_GROUP_NAME,
+                        StudentGroup::PROPERTY_FACULTY_ID,
+                        StudentGroup::PROPERTY_FACULTY_CODE,
                         StudentGroup::PROPERTY_FACULTY_NAME)));
         }
         else
@@ -679,22 +681,22 @@ class CalendarRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $className = $this->getYearSpecificClassName('Group', $year);
-            
+
             $faculties = $this->getDataClassRepository()->distinct(
-                $className, 
+                $className,
                 new DataClassDistinctParameters(
-                    null, 
-                    array(Group::PROPERTY_FACULTY_ID, Group::PROPERTY_FACULTY_CODE, Group::PROPERTY_FACULTY_NAME), 
-                    null, 
+                    null,
+                    array(Group::PROPERTY_FACULTY_ID, Group::PROPERTY_FACULTY_CODE, Group::PROPERTY_FACULTY_NAME),
+                    null,
                     array(new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_FACULTY_NAME)))));
-            
+
             $cache->save($cacheIdentifier, $faculties);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -707,25 +709,25 @@ class CalendarRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $className = $this->getYearSpecificClassName('Group', $year);
-            
+
             $facultiesGroups = $this->getDataClassRepository()->records(
-                $className, 
+                $className,
                 new RecordRetrievesParameters(
-                    null, 
-                    null, 
-                    null, 
-                    null, 
+                    null,
+                    null,
+                    null,
+                    null,
                     array(
-                        new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_FACULTY_ID)), 
+                        new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_FACULTY_ID)),
                         new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_NAME)))));
-            
+
             $cache->save($cacheIdentifier, $facultiesGroups);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -738,23 +740,23 @@ class CalendarRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $className = $this->getYearSpecificClassName('Group', $year);
-            
+
             $groups = $this->getDataClassRepository()->records(
-                $className, 
+                $className,
                 new RecordRetrievesParameters(
-                    null, 
-                    null, 
-                    null, 
-                    null, 
+                    null,
+                    null,
+                    null,
+                    null,
                     array(new OrderBy(new PropertyConditionVariable($className, Group::PROPERTY_NAME)))));
-            
+
             $cache->save($cacheIdentifier, $groups);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -767,29 +769,29 @@ class CalendarRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $className = $this->getYearSpecificClassName('Location', $year);
-            
+
             $zones = $this->getDataClassRepository()->distinct(
-                $className, 
+                $className,
                 new DataClassDistinctParameters(
-                    null, 
+                    null,
                     array(
-                        Location::PROPERTY_YEAR, 
-                        Location::PROPERTY_ZONE_ID, 
-                        Location::PROPERTY_ZONE_CODE, 
-                        Location::PROPERTY_ZONE_NAME), 
-                    null, 
+                        Location::PROPERTY_YEAR,
+                        Location::PROPERTY_ZONE_ID,
+                        Location::PROPERTY_ZONE_CODE,
+                        Location::PROPERTY_ZONE_NAME),
+                    null,
                     array(
-                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_YEAR)), 
-                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_ZONE_CODE)), 
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_YEAR)),
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_ZONE_CODE)),
                         new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_ZONE_NAME)))));
-            
+
             $cache->save($cacheIdentifier, $zones);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -803,29 +805,29 @@ class CalendarRepository
     {
         $cache = new FilesystemCache(Path::getInstance()->getCachePath(__NAMESPACE__));
         $cacheIdentifier = md5(serialize(array(__METHOD__, $year, $zoneIdentifier)));
-        
+
         if (! $cache->contains($cacheIdentifier))
         {
             $className = $this->getYearSpecificClassName('Location', $year);
-            
+
             $condition = new EqualityCondition(
-                new PropertyConditionVariable($className, Location::PROPERTY_ZONE_ID), 
+                new PropertyConditionVariable($className, Location::PROPERTY_ZONE_ID),
                 new StaticConditionVariable($zoneIdentifier));
-            
+
             $locations = $this->getDataClassRepository()->records(
-                $className, 
+                $className,
                 new RecordRetrievesParameters(
-                    null, 
-                    $condition, 
-                    null, 
-                    null, 
+                    null,
+                    $condition,
+                    null,
+                    null,
                     array(
-                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_CODE)), 
+                        new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_CODE)),
                         new OrderBy(new PropertyConditionVariable($className, Location::PROPERTY_NAME)))));
-            
+
             $cache->save($cacheIdentifier, $locations);
         }
-        
+
         return $cache->fetch($cacheIdentifier);
     }
 
@@ -843,15 +845,15 @@ class CalendarRepository
     public function findLocationByYearAndIdentifier($year, $identifier)
     {
         $className = $this->getYearSpecificClassName('Location', $year);
-        
+
         $condition = new EqualityCondition(
-            new PropertyConditionVariable($className, Location::PROPERTY_ID), 
+            new PropertyConditionVariable($className, Location::PROPERTY_ID),
             new StaticConditionVariable($identifier));
-        
+
         return $this->getDataClassRepository()->record(
-            $className, 
+            $className,
             new RecordRetrieveParameters(
-                new DataClassProperties(new PropertiesConditionVariable($className::class_name())), 
+                new DataClassProperties(new PropertiesConditionVariable($className::class_name())),
                 $condition));
     }
 
@@ -863,59 +865,59 @@ class CalendarRepository
     public function findScheduledGroupsByYear($year)
     {
         $properties = array();
-        
+
         $properties[] = new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_FACULTY_ID);
         $properties[] = new PropertyConditionVariable(
-            ScheduledGroup::class_name(), 
+            ScheduledGroup::class_name(),
             ScheduledGroup::PROPERTY_FACULTY_NAME);
         $properties[] = new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_TRAINING_ID);
         $properties[] = new PropertyConditionVariable(
-            ScheduledGroup::class_name(), 
+            ScheduledGroup::class_name(),
             ScheduledGroup::PROPERTY_TRAINING_NAME);
-        
+
         $properties[] = new FunctionConditionVariable(
-            FunctionConditionVariable::SUM, 
-            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_SCHEDULED), 
+            FunctionConditionVariable::SUM,
+            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_SCHEDULED),
             ScheduledGroup::PROPERTY_COUNT_SCHEDULED);
-        
+
         $properties[] = new FunctionConditionVariable(
-            FunctionConditionVariable::COUNT, 
-            new StaticConditionVariable(1), 
+            FunctionConditionVariable::COUNT,
+            new StaticConditionVariable(1),
             ScheduledGroup::PROPERTY_COUNT_TO_BE_SCHEDULED);
-        
+
         $groupBy = new GroupBy(
             array(
-                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_FACULTY_ID), 
-                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_FACULTY_NAME), 
-                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_TRAINING_ID), 
+                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_FACULTY_ID),
+                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_FACULTY_NAME),
+                new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_TRAINING_ID),
                 new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_TRAINING_NAME)));
-        
+
         $conditions = array();
-        
+
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_YEAR), 
+            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_YEAR),
             new StaticConditionVariable($year));
         $conditions[] = new EqualityCondition(
-            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_STRUCK), 
+            new PropertyConditionVariable(ScheduledGroup::class_name(), ScheduledGroup::PROPERTY_STRUCK),
             new StaticConditionVariable(0));
-        
+
         return $this->getDataClassRepository()->records(
-            ScheduledGroup::class_name(), 
+            ScheduledGroup::class_name(),
             new RecordRetrievesParameters(
-                new DataClassProperties($properties), 
-                new AndCondition($conditions), 
-                null, 
-                null, 
+                new DataClassProperties($properties),
+                new AndCondition($conditions),
+                null,
+                null,
                 array(
                     new OrderBy(
                         new PropertyConditionVariable(
-                            ScheduledGroup::class_name(), 
-                            ScheduledGroup::PROPERTY_FACULTY_NAME)), 
+                            ScheduledGroup::class_name(),
+                            ScheduledGroup::PROPERTY_FACULTY_NAME)),
                     new OrderBy(
                         new PropertyConditionVariable(
-                            ScheduledGroup::class_name(), 
-                            ScheduledGroup::PROPERTY_TRAINING_NAME))), 
-                null, 
+                            ScheduledGroup::class_name(),
+                            ScheduledGroup::PROPERTY_TRAINING_NAME))),
+                null,
                 $groupBy));
     }
 }
