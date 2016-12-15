@@ -37,12 +37,12 @@ class LocationIcalComponent extends IcalComponent
     {
         $icalDownloadUrl = new Redirect(
             array(
-                Application::PARAM_CONTEXT => self::package(), 
-                self::PARAM_ACTION => Manager::ACTION_ICAL_LOCATION, 
-                self::PARAM_YEAR => $this->getYear(), 
-                self::PARAM_LOCATION_ID => $this->getLocationIdentifier(), 
+                Application::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => Manager::ACTION_ICAL_LOCATION,
+                self::PARAM_YEAR => $this->getYear(),
+                self::PARAM_LOCATION_ID => $this->getLocationIdentifier(),
                 self::PARAM_DOWNLOAD => 1));
-        
+
         return $icalDownloadUrl->getUrl();
     }
 
@@ -54,12 +54,12 @@ class LocationIcalComponent extends IcalComponent
     {
         $icalExternalUrl = new Redirect(
             array(
-                Application::PARAM_CONTEXT => self::package(), 
-                self::PARAM_ACTION => Manager::ACTION_ICAL_LOCATION, 
-                self::PARAM_YEAR => $this->getYear(), 
-                self::PARAM_LOCATION_ID => $this->getLocationIdentifier(), 
+                Application::PARAM_CONTEXT => self::package(),
+                self::PARAM_ACTION => Manager::ACTION_ICAL_LOCATION,
+                self::PARAM_YEAR => $this->getYear(),
+                self::PARAM_LOCATION_ID => $this->getLocationIdentifier(),
                 User::PROPERTY_SECURITY_TOKEN => $this->getUserCalendar()->get_security_token()));
-        
+
         return $icalExternalUrl->getUrl();
     }
 
@@ -72,13 +72,14 @@ class LocationIcalComponent extends IcalComponent
         if (! isset($this->calendarRendererProvider))
         {
             $this->calendarRendererProvider = new LocationCalendarRendererProvider(
-                $this->getYear(), 
-                $this->getLocationIdentifier(), 
-                $this->getUserCalendar(), 
-                $this->get_user(), 
+                $this->getService('ehb.application.calendar.extension.syllabus_plus.service.calendar_service'),
+                $this->getYear(),
+                $this->getLocationIdentifier(),
+                $this->getUserCalendar(),
+                $this->get_user(),
                 array());
         }
-        
+
         return $this->calendarRendererProvider;
     }
 
@@ -92,7 +93,7 @@ class LocationIcalComponent extends IcalComponent
         {
             $this->locationIdentifier = $this->getRequest()->query->get(self::PARAM_LOCATION_ID);
         }
-        
+
         return $this->locationIdentifier;
     }
 
@@ -106,7 +107,7 @@ class LocationIcalComponent extends IcalComponent
         {
             $this->year = $this->getRequest()->query->get(self::PARAM_YEAR);
         }
-        
+
         return $this->year;
     }
 }
