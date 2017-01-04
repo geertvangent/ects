@@ -55,7 +55,6 @@ abstract class Synchronization
      */
     public function convert_to_utf8($string)
     {
-        return $string;
         return trim(iconv('cp1252', 'UTF-8', $string));
     }
 
